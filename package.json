@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "license": "MIT",
   "scripts": {
-    "start": "lerna run start --stream",
+    "start": "yarn --cwd packages/web start:prod",
+    "dev": "yarn --cwd packages/web start:dev",
     "build": "lerna run build --include-dependencies",
     "lint": "eslint --fix -c ./.eslintrc.json './packages/**/*.{ts,tsx}'",
     "test": "lerna run test",
