@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button } from '@material-ui/core'
+import { Button } from 'antd'
 import { useListUsersQuery } from '@dev/graphql'
 import Router from 'next/router'
 
