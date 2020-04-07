@@ -1,0 +1,37 @@
+{
+  "env": {
+    "browser": true,
+    "es6": true,
+    "node": true,
+    "jest": true
+  },
+  "extends": ["eslint:recommended", "plugin:react/recommended", "plugin:prettier/recommended"],
+  "globals": {
+    "Atomics": "readonly",
+    "SharedArrayBuffer": "readonly"
+  },
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "sourceType": "module",
+    "project": "./tsconfig.json",
+    "tsconfigRootDir": ".",
+    "ecmaFeatures": {
+      "tsx": true
+    }
+  },
+  "plugins": ["@typescript-eslint", "react", "react-hooks"],
+  "rules": {
+    "no-unused-vars": "off",
+    "@typescript-eslint/no-unused-vars": ["error", { "argsIgnorePattern": "^_" }],
+    "react/prop-types": "off",
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn",
+    "require-atomic-updates": "off",
+    "no-console": "off"
+  },
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  }
+}

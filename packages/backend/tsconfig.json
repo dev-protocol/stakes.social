@@ -1,0 +1,23 @@
+{
+  "compilerOptions": {
+    "declaration": true,
+    "allowSyntheticDefaultImports": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "module": "commonjs",
+    "outDir": "./dist",
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitAny": true,
+    "noImplicitReturns": true,
+    "noImplicitThis": true,
+    "noUnusedLocals": true,
+    "strictPropertyInitialization": false,
+    "noUnusedParameters": true,
+    "removeComments": true,
+    "sourceMap": true,
+    "strict": true,
+    "strictNullChecks": true,
+    "target": "es2017",
+    "types": ["jest", "node"]
+  }
+}

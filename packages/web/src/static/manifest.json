@@ -1,0 +1,20 @@
+{
+  "name": "KSR-SPA",
+  "short_name": "KSR-SPA",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#fff",
+  "description": "Next.js SPA Bolier Plate.",
+  "icons": [
+    {
+      "src": "img/icon192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "img/icon512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "allowSyntheticDefaultImports": true,
+    "target": "es5",
+    "lib": ["dom", "es2018"],
+    "strict": true,
+    "strictNullChecks": true,
+    "noImplicitAny": true,
+    "noImplicitReturns": true,
+    "skipLibCheck": true,
+    "declaration": true,
+    "declarationMap": true,
+    "pretty": true,
+    "newLine": "lf",
+    "esModuleInterop": true,
+    "moduleResolution": "node",
+    "jsx": "react"
+  }
+}

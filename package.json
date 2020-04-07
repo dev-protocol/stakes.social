@@ -1,0 +1,54 @@
+{
+  "name": "minimum-valuable-dev-protocol-app",
+  "version": "1.0.0",
+  "license": "MIT",
+  "scripts": {
+    "start": "yarn --cwd packages/web start:prod",
+    "dev": "yarn --cwd packages/web start:dev",
+    "build": "lerna run build --include-dependencies",
+    "lint": "eslint --fix -c ./.eslintrc.json './packages/**/*.{ts,tsx}'",
+    "test": "lerna run test",
+    "clean": "lerna run clean && lerna clean --y"
+  },
+  "devDependencies": {
+    "@types/jest": "24.9.1",
+    "@types/supertest": "2.0.8",
+    "@typescript-eslint/eslint-plugin": "2.27.0",
+    "@typescript-eslint/parser": "2.27.0",
+    "concurrently": "5.1.0",
+    "eslint": "6.8.0",
+    "eslint-config-prettier": "6.10.1",
+    "eslint-plugin-prettier": "3.1.2",
+    "eslint-plugin-react": "7.19.0",
+    "eslint-plugin-react-hooks": "3.0.0",
+    "husky": "4.2.3",
+    "jest": "24.9.0",
+    "lerna": "3.20.2",
+    "lint-staged": "10.1.2",
+    "nodemon": "2.0.2",
+    "npm-run-all": "4.1.5",
+    "prettier": "2.0.4",
+    "rimraf": "3.0.2",
+    "serve": "11.3.0",
+    "ts-jest": "25.2.1",
+    "ts-node": "8.8.2",
+    "tsconfig-paths": "3.9.0",
+    "typescript": "3.8.3",
+    "wait-on": "4.0.1"
+  },
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{.ts,tsx}": [
+      "yarn lint",
+      "git add"
+    ]
+  }
+}
