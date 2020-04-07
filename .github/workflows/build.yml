@@ -17,14 +17,6 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
-      - name: prepare file
-        run: |
-          cp packages/web/.env.tmpl packages/web/.env
-          cp dummy.firebase.client.key.json packages/web/firebase.client.key.json 
-          cp dummy.firebase.admin.key.json packages/web/firebase.admin.key.json
-          cp dummy.firebase.client.key.json packages/app/src/firebase/firebase.client.key.json
-          cp dummy.firebase.client.key.json packages/web-graphql/firebase.client.key.json
-
       - name: install deps
         run: yarn
 
