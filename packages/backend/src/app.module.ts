@@ -6,9 +6,9 @@ import { UserModule } from './user/user.module'
   imports: [
     GraphQLModule.forRoot({
       playground: true,
-      autoSchemaFile: './src/schema.graphql',
+      autoSchemaFile: './src/schema.graphql'
     }),
-    UserModule,
-  ],
+    UserModule
+  ]
 })
 export class AppModule {}

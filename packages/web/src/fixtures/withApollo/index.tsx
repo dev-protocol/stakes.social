@@ -25,14 +25,14 @@ export default withApollo<NormalizedCacheObject>(
       uri: `${process.env.API_ORIGIN}/graphql`, // Server URL (must be absolute),
       ...(!isBrowser && { fetch }),
       headers,
-      credentials: 'same-origin',
+      credentials: 'same-origin'
     })
 
     return new ApolloClient({
       connectToDevTools: isBrowser,
       ssrMode: false,
       link: ApolloLink.from([onError(errorHandler(ctx)), withHttp]),
-      cache: new InMemoryCache(),
+      cache: new InMemoryCache()
     })
   },
   {
@@ -42,6 +42,6 @@ export default withApollo<NormalizedCacheObject>(
           <Page {...props} />
         </ApolloProvider>
       )
-    },
+    }
   }
 )

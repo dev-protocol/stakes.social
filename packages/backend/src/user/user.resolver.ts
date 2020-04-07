@@ -5,12 +5,12 @@ import { UserCreateInput } from './dto/user.input'
 const list = [
   {
     id: '1',
-    name: 'Aさん',
+    name: 'Aさん'
   },
   {
     id: '2',
-    name: 'Bさん',
-  },
+    name: 'Bさん'
+  }
 ]
 
 @Resolver('User')
