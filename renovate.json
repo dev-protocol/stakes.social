@@ -1,0 +1,11 @@
+{
+  "extends": ["config:base"],
+  "ignoreDeps": [
+    "electron",
+    "electron-builder",
+    "electron-updater",
+    "electron-load-devtool",
+    "electron-log",
+    "@types/electron-load-devtool"
+  ]
+}

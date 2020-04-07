@@ -1,0 +1,35 @@
+name: CI
+
+on: [pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [12.x]
+
+    steps:
+      - uses: actions/checkout@v1
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: prepare file
+        run: |
+          cp packages/web/.env.tmpl packages/web/.env
+          cp dummy.firebase.client.key.json packages/web/firebase.client.key.json 
+          cp dummy.firebase.admin.key.json packages/web/firebase.admin.key.json
+          cp dummy.firebase.client.key.json packages/app/src/firebase/firebase.client.key.json
+          cp dummy.firebase.client.key.json packages/web-graphql/firebase.client.key.json
+
+      - name: install deps
+        run: yarn
+
+      - name: lint
+        run: yarn lint
+
+      - name: build
+        run: yarn build

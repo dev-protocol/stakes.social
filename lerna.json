@@ -1,0 +1,20 @@
+{
+  "changelog": {
+    "cacheDir": ".changelog",
+    "labels": {
+      "Type: Breaking Change": ":boom: Type: Breaking Change",
+      "Type: Bug": ":bug: Type: Bug",
+      "Type: Documentation ": ":memo: Documentation",
+      "Type: Feature": ":rocket: Type: Feature"
+    }
+  },
+  "command": {
+    "version": {
+      "allowBranch": ["master", "release"]
+    }
+  },
+  "npmClient": "yarn",
+  "packages": ["packages/*"],
+  "useWorkspaces": true,
+  "version": "0.0.1"
+}
