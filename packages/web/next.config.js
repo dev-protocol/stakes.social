@@ -60,5 +60,6 @@ module.exports = withCss(
     env: {
       API_ORIGIN: process.env.API_ORIGIN || 'http://localhost:3003',
     },
+    distDir: 'dist',
   })
 )
