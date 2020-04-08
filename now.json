@@ -1,0 +1,9 @@
+{
+  "builds": [{ "src": "packages/web/package.json", "use": "@now/static-build" }],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "/packages/web/dist/$1"
+    }
+  ]
+}
