@@ -11,7 +11,4 @@ $ yarn build
 
 # web run
 $ yarn workspace @dev/web start:dev
-
-# backend run
-$ yarn workspace @dev/backend start:dev
 ```
