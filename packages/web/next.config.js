@@ -58,7 +58,7 @@ module.exports = withCss(
       modifyVars: themeVariables, // make your antd custom effective
     },
     env: {
-      API_ORIGIN: process.env.API_ORIGIN || 'http://localhost:3003',
+      END_POINT: process.env.END_POINT || 'http://localhost:3003/graphql',
     },
   })
 )

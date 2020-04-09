@@ -1,0 +1,4683 @@
+schema {
+  query: query_root
+  mutation: mutation_root
+  subscription: subscription_root
+}
+
+# columns and relationships of "allocator_allocation_result"
+type allocator_allocation_result {
+  arg_value: numeric!
+  block_number: Int!
+  event_id: String!
+  lockup_value: numeric!
+  log_index: Int!
+  market: String!
+  metrics: String!
+  property: String!
+  raw_data: String!
+  result: numeric!
+  transaction_index: Int!
+}
+
+# aggregated selection of "allocator_allocation_result"
+type allocator_allocation_result_aggregate {
+  aggregate: allocator_allocation_result_aggregate_fields
+  nodes: [allocator_allocation_result!]!
+}
+
+# aggregate fields of "allocator_allocation_result"
+type allocator_allocation_result_aggregate_fields {
+  avg: allocator_allocation_result_avg_fields
+  count(columns: [allocator_allocation_result_select_column!], distinct: Boolean): Int
+  max: allocator_allocation_result_max_fields
+  min: allocator_allocation_result_min_fields
+  stddev: allocator_allocation_result_stddev_fields
+  stddev_pop: allocator_allocation_result_stddev_pop_fields
+  stddev_samp: allocator_allocation_result_stddev_samp_fields
+  sum: allocator_allocation_result_sum_fields
+  var_pop: allocator_allocation_result_var_pop_fields
+  var_samp: allocator_allocation_result_var_samp_fields
+  variance: allocator_allocation_result_variance_fields
+}
+
+# order by aggregate values of table "allocator_allocation_result"
+input allocator_allocation_result_aggregate_order_by {
+  avg: allocator_allocation_result_avg_order_by
+  count: order_by
+  max: allocator_allocation_result_max_order_by
+  min: allocator_allocation_result_min_order_by
+  stddev: allocator_allocation_result_stddev_order_by
+  stddev_pop: allocator_allocation_result_stddev_pop_order_by
+  stddev_samp: allocator_allocation_result_stddev_samp_order_by
+  sum: allocator_allocation_result_sum_order_by
+  var_pop: allocator_allocation_result_var_pop_order_by
+  var_samp: allocator_allocation_result_var_samp_order_by
+  variance: allocator_allocation_result_variance_order_by
+}
+
+# input type for inserting array relation for remote table "allocator_allocation_result"
+input allocator_allocation_result_arr_rel_insert_input {
+  data: [allocator_allocation_result_insert_input!]!
+  on_conflict: allocator_allocation_result_on_conflict
+}
+
+# aggregate avg on columns
+type allocator_allocation_result_avg_fields {
+  arg_value: Float
+  block_number: Float
+  lockup_value: Float
+  log_index: Float
+  result: Float
+  transaction_index: Float
+}
+
+# order by avg() on columns of table "allocator_allocation_result"
+input allocator_allocation_result_avg_order_by {
+  arg_value: order_by
+  block_number: order_by
+  lockup_value: order_by
+  log_index: order_by
+  result: order_by
+  transaction_index: order_by
+}
+
+# Boolean expression to filter rows from the table "allocator_allocation_result".
+# All fields are combined with a logical 'AND'.
+input allocator_allocation_result_bool_exp {
+  _and: [allocator_allocation_result_bool_exp]
+  _not: allocator_allocation_result_bool_exp
+  _or: [allocator_allocation_result_bool_exp]
+  arg_value: numeric_comparison_exp
+  block_number: Int_comparison_exp
+  event_id: String_comparison_exp
+  lockup_value: numeric_comparison_exp
+  log_index: Int_comparison_exp
+  market: String_comparison_exp
+  metrics: String_comparison_exp
+  property: String_comparison_exp
+  raw_data: String_comparison_exp
+  result: numeric_comparison_exp
+  transaction_index: Int_comparison_exp
+}
+
+# unique or primary key constraints on table "allocator_allocation_result"
+enum allocator_allocation_result_constraint {
+  # unique or primary key constraint
+  allocator_allocation_result_pkey
+}
+
+# input type for incrementing integer columne in table "allocator_allocation_result"
+input allocator_allocation_result_inc_input {
+  block_number: Int
+  log_index: Int
+  transaction_index: Int
+}
+
+# input type for inserting data into table "allocator_allocation_result"
+input allocator_allocation_result_insert_input {
+  arg_value: numeric
+  block_number: Int
+  event_id: String
+  lockup_value: numeric
+  log_index: Int
+  market: String
+  metrics: String
+  property: String
+  raw_data: String
+  result: numeric
+  transaction_index: Int
+}
+
+# aggregate max on columns
+type allocator_allocation_result_max_fields {
+  arg_value: numeric
+  block_number: Int
+  event_id: String
+  lockup_value: numeric
+  log_index: Int
+  market: String
+  metrics: String
+  property: String
+  raw_data: String
+  result: numeric
+  transaction_index: Int
+}
+
+# order by max() on columns of table "allocator_allocation_result"
+input allocator_allocation_result_max_order_by {
+  arg_value: order_by
+  block_number: order_by
+  event_id: order_by
+  lockup_value: order_by
+  log_index: order_by
+  market: order_by
+  metrics: order_by
+  property: order_by
+  raw_data: order_by
+  result: order_by
+  transaction_index: order_by
+}
+
+# aggregate min on columns
+type allocator_allocation_result_min_fields {
+  arg_value: numeric
+  block_number: Int
+  event_id: String
+  lockup_value: numeric
+  log_index: Int
+  market: String
+  metrics: String
+  property: String
+  raw_data: String
+  result: numeric
+  transaction_index: Int
+}
+
+# order by min() on columns of table "allocator_allocation_result"
+input allocator_allocation_result_min_order_by {
+  arg_value: order_by
+  block_number: order_by
+  event_id: order_by
+  lockup_value: order_by
+  log_index: order_by
+  market: order_by
+  metrics: order_by
+  property: order_by
+  raw_data: order_by
+  result: order_by
+  transaction_index: order_by
+}
+
+# response of any mutation on the table "allocator_allocation_result"
+type allocator_allocation_result_mutation_response {
+  # number of affected rows by the mutation
+  affected_rows: Int!
+
+  # data of the affected rows by the mutation
+  returning: [allocator_allocation_result!]!
+}
+
+# input type for inserting object relation for remote table "allocator_allocation_result"
+input allocator_allocation_result_obj_rel_insert_input {
+  data: allocator_allocation_result_insert_input!
+  on_conflict: allocator_allocation_result_on_conflict
+}
+
+# on conflict condition type for table "allocator_allocation_result"
+input allocator_allocation_result_on_conflict {
+  constraint: allocator_allocation_result_constraint!
+  update_columns: [allocator_allocation_result_update_column!]!
+  where: allocator_allocation_result_bool_exp
+}
+
+# ordering options when selecting data from "allocator_allocation_result"
+input allocator_allocation_result_order_by {
+  arg_value: order_by
+  block_number: order_by
+  event_id: order_by
+  lockup_value: order_by
+  log_index: order_by
+  market: order_by
+  metrics: order_by
+  property: order_by
+  raw_data: order_by
+  result: order_by
+  transaction_index: order_by
+}
+
+# select columns of table "allocator_allocation_result"
+enum allocator_allocation_result_select_column {
+  # column name
+  arg_value
+
+  # column name
+  block_number
+
+  # column name
+  event_id
+
+  # column name
+  lockup_value
+
+  # column name
+  log_index
+
+  # column name
+  market
+
+  # column name
+  metrics
+
+  # column name
+  property
+
+  # column name
+  raw_data
+
+  # column name
+  result
+
+  # column name
+  transaction_index
+}
+
+# input type for updating data in table "allocator_allocation_result"
+input allocator_allocation_result_set_input {
+  arg_value: numeric
+  block_number: Int
+  event_id: String
+  lockup_value: numeric
+  log_index: Int
+  market: String
+  metrics: String
+  property: String
+  raw_data: String
+  result: numeric
+  transaction_index: Int
+}
+
+# aggregate stddev on columns
+type allocator_allocation_result_stddev_fields {
+  arg_value: Float
+  block_number: Float
+  lockup_value: Float
+  log_index: Float
+  result: Float
+  transaction_index: Float
+}
+
+# order by stddev() on columns of table "allocator_allocation_result"
+input allocator_allocation_result_stddev_order_by {
+  arg_value: order_by
+  block_number: order_by
+  lockup_value: order_by
+  log_index: order_by
+  result: order_by
+  transaction_index: order_by
+}
+
+# aggregate stddev_pop on columns
+type allocator_allocation_result_stddev_pop_fields {
+  arg_value: Float
+  block_number: Float
+  lockup_value: Float
+  log_index: Float
+  result: Float
+  transaction_index: Float
+}
+
+# order by stddev_pop() on columns of table "allocator_allocation_result"
+input allocator_allocation_result_stddev_pop_order_by {
+  arg_value: order_by
+  block_number: order_by
+  lockup_value: order_by
+  log_index: order_by
+  result: order_by
+  transaction_index: order_by
+}
+
+# aggregate stddev_samp on columns
+type allocator_allocation_result_stddev_samp_fields {
+  arg_value: Float
+  block_number: Float
+  lockup_value: Float
+  log_index: Float
+  result: Float
+  transaction_index: Float
+}
+
+# order by stddev_samp() on columns of table "allocator_allocation_result"
+input allocator_allocation_result_stddev_samp_order_by {
+  arg_value: order_by
+  block_number: order_by
+  lockup_value: order_by
+  log_index: order_by
+  result: order_by
+  transaction_index: order_by
+}
+
+# aggregate sum on columns
+type allocator_allocation_result_sum_fields {
+  arg_value: numeric
+  block_number: Int
+  lockup_value: numeric
+  log_index: Int
+  result: numeric
+  transaction_index: Int
+}
+
+# order by sum() on columns of table "allocator_allocation_result"
+input allocator_allocation_result_sum_order_by {
+  arg_value: order_by
+  block_number: order_by
+  lockup_value: order_by
+  log_index: order_by
+  result: order_by
+  transaction_index: order_by
+}
+
+# update columns of table "allocator_allocation_result"
+enum allocator_allocation_result_update_column {
+  # column name
+  arg_value
+
+  # column name
+  block_number
+
+  # column name
+  event_id
+
+  # column name
+  lockup_value
+
+  # column name
+  log_index
+
+  # column name
+  market
+
+  # column name
+  metrics
+
+  # column name
+  property
+
+  # column name
+  raw_data
+
+  # column name
+  result
+
+  # column name
+  transaction_index
+}
+
+# aggregate var_pop on columns
+type allocator_allocation_result_var_pop_fields {
+  arg_value: Float
+  block_number: Float
+  lockup_value: Float
+  log_index: Float
+  result: Float
+  transaction_index: Float
+}
+
+# order by var_pop() on columns of table "allocator_allocation_result"
+input allocator_allocation_result_var_pop_order_by {
+  arg_value: order_by
+  block_number: order_by
+  lockup_value: order_by
+  log_index: order_by
+  result: order_by
+  transaction_index: order_by
+}
+
+# aggregate var_samp on columns
+type allocator_allocation_result_var_samp_fields {
+  arg_value: Float
+  block_number: Float
+  lockup_value: Float
+  log_index: Float
+  result: Float
+  transaction_index: Float
+}
+
+# order by var_samp() on columns of table "allocator_allocation_result"
+input allocator_allocation_result_var_samp_order_by {
+  arg_value: order_by
+  block_number: order_by
+  lockup_value: order_by
+  log_index: order_by
+  result: order_by
+  transaction_index: order_by
+}
+
+# aggregate variance on columns
+type allocator_allocation_result_variance_fields {
+  arg_value: Float
+  block_number: Float
+  lockup_value: Float
+  log_index: Float
+  result: Float
+  transaction_index: Float
+}
+
+# order by variance() on columns of table "allocator_allocation_result"
+input allocator_allocation_result_variance_order_by {
+  arg_value: order_by
+  block_number: order_by
+  lockup_value: order_by
+  log_index: order_by
+  result: order_by
+  transaction_index: order_by
+}
+
+# columns and relationships of "allocator_before_allocation"
+type allocator_before_allocation {
+  assets: numeric!
+  block_number: Int!
+  blocks: numeric!
+  event_id: String!
+  log_index: Int!
+  market_value: numeric!
+  mint: numeric!
+  raw_data: String!
+  token_value: numeric!
+  total_assets: numeric!
+  transaction_index: Int!
+}
+
+# aggregated selection of "allocator_before_allocation"
+type allocator_before_allocation_aggregate {
+  aggregate: allocator_before_allocation_aggregate_fields
+  nodes: [allocator_before_allocation!]!
+}
+
+# aggregate fields of "allocator_before_allocation"
+type allocator_before_allocation_aggregate_fields {
+  avg: allocator_before_allocation_avg_fields
+  count(columns: [allocator_before_allocation_select_column!], distinct: Boolean): Int
+  max: allocator_before_allocation_max_fields
+  min: allocator_before_allocation_min_fields
+  stddev: allocator_before_allocation_stddev_fields
+  stddev_pop: allocator_before_allocation_stddev_pop_fields
+  stddev_samp: allocator_before_allocation_stddev_samp_fields
+  sum: allocator_before_allocation_sum_fields
+  var_pop: allocator_before_allocation_var_pop_fields
+  var_samp: allocator_before_allocation_var_samp_fields
+  variance: allocator_before_allocation_variance_fields
+}
+
+# order by aggregate values of table "allocator_before_allocation"
+input allocator_before_allocation_aggregate_order_by {
+  avg: allocator_before_allocation_avg_order_by
+  count: order_by
+  max: allocator_before_allocation_max_order_by
+  min: allocator_before_allocation_min_order_by
+  stddev: allocator_before_allocation_stddev_order_by
+  stddev_pop: allocator_before_allocation_stddev_pop_order_by
+  stddev_samp: allocator_before_allocation_stddev_samp_order_by
+  sum: allocator_before_allocation_sum_order_by
+  var_pop: allocator_before_allocation_var_pop_order_by
+  var_samp: allocator_before_allocation_var_samp_order_by
+  variance: allocator_before_allocation_variance_order_by
+}
+
+# input type for inserting array relation for remote table "allocator_before_allocation"
+input allocator_before_allocation_arr_rel_insert_input {
+  data: [allocator_before_allocation_insert_input!]!
+  on_conflict: allocator_before_allocation_on_conflict
+}
+
+# aggregate avg on columns
+type allocator_before_allocation_avg_fields {
+  assets: Float
+  block_number: Float
+  blocks: Float
+  log_index: Float
+  market_value: Float
+  mint: Float
+  token_value: Float
+  total_assets: Float
+  transaction_index: Float
+}
+
+# order by avg() on columns of table "allocator_before_allocation"
+input allocator_before_allocation_avg_order_by {
+  assets: order_by
+  block_number: order_by
+  blocks: order_by
+  log_index: order_by
+  market_value: order_by
+  mint: order_by
+  token_value: order_by
+  total_assets: order_by
+  transaction_index: order_by
+}
+
+# Boolean expression to filter rows from the table "allocator_before_allocation".
+# All fields are combined with a logical 'AND'.
+input allocator_before_allocation_bool_exp {
+  _and: [allocator_before_allocation_bool_exp]
+  _not: allocator_before_allocation_bool_exp
+  _or: [allocator_before_allocation_bool_exp]
+  assets: numeric_comparison_exp
+  block_number: Int_comparison_exp
+  blocks: numeric_comparison_exp
+  event_id: String_comparison_exp
+  log_index: Int_comparison_exp
+  market_value: numeric_comparison_exp
+  mint: numeric_comparison_exp
+  raw_data: String_comparison_exp
+  token_value: numeric_comparison_exp
+  total_assets: numeric_comparison_exp
+  transaction_index: Int_comparison_exp
+}
+
+# unique or primary key constraints on table "allocator_before_allocation"
+enum allocator_before_allocation_constraint {
+  # unique or primary key constraint
+  allocator_before_allocation_pkey
+}
+
+# input type for incrementing integer columne in table "allocator_before_allocation"
+input allocator_before_allocation_inc_input {
+  block_number: Int
+  log_index: Int
+  transaction_index: Int
+}
+
+# input type for inserting data into table "allocator_before_allocation"
+input allocator_before_allocation_insert_input {
+  assets: numeric
+  block_number: Int
+  blocks: numeric
+  event_id: String
+  log_index: Int
+  market_value: numeric
+  mint: numeric
+  raw_data: String
+  token_value: numeric
+  total_assets: numeric
+  transaction_index: Int
+}
+
+# aggregate max on columns
+type allocator_before_allocation_max_fields {
+  assets: numeric
+  block_number: Int
+  blocks: numeric
+  event_id: String
+  log_index: Int
+  market_value: numeric
+  mint: numeric
+  raw_data: String
+  token_value: numeric
+  total_assets: numeric
+  transaction_index: Int
+}
+
+# order by max() on columns of table "allocator_before_allocation"
+input allocator_before_allocation_max_order_by {
+  assets: order_by
+  block_number: order_by
+  blocks: order_by
+  event_id: order_by
+  log_index: order_by
+  market_value: order_by
+  mint: order_by
+  raw_data: order_by
+  token_value: order_by
+  total_assets: order_by
+  transaction_index: order_by
+}
+
+# aggregate min on columns
+type allocator_before_allocation_min_fields {
+  assets: numeric
+  block_number: Int
+  blocks: numeric
+  event_id: String
+  log_index: Int
+  market_value: numeric
+  mint: numeric
+  raw_data: String
+  token_value: numeric
+  total_assets: numeric
+  transaction_index: Int
+}
+
+# order by min() on columns of table "allocator_before_allocation"
+input allocator_before_allocation_min_order_by {
+  assets: order_by
+  block_number: order_by
+  blocks: order_by
+  event_id: order_by
+  log_index: order_by
+  market_value: order_by
+  mint: order_by
+  raw_data: order_by
+  token_value: order_by
+  total_assets: order_by
+  transaction_index: order_by
+}
+
+# response of any mutation on the table "allocator_before_allocation"
+type allocator_before_allocation_mutation_response {
+  # number of affected rows by the mutation
+  affected_rows: Int!
+
+  # data of the affected rows by the mutation
+  returning: [allocator_before_allocation!]!
+}
+
+# input type for inserting object relation for remote table "allocator_before_allocation"
+input allocator_before_allocation_obj_rel_insert_input {
+  data: allocator_before_allocation_insert_input!
+  on_conflict: allocator_before_allocation_on_conflict
+}
+
+# on conflict condition type for table "allocator_before_allocation"
+input allocator_before_allocation_on_conflict {
+  constraint: allocator_before_allocation_constraint!
+  update_columns: [allocator_before_allocation_update_column!]!
+  where: allocator_before_allocation_bool_exp
+}
+
+# ordering options when selecting data from "allocator_before_allocation"
+input allocator_before_allocation_order_by {
+  assets: order_by
+  block_number: order_by
+  blocks: order_by
+  event_id: order_by
+  log_index: order_by
+  market_value: order_by
+  mint: order_by
+  raw_data: order_by
+  token_value: order_by
+  total_assets: order_by
+  transaction_index: order_by
+}
+
+# select columns of table "allocator_before_allocation"
+enum allocator_before_allocation_select_column {
+  # column name
+  assets
+
+  # column name
+  block_number
+
+  # column name
+  blocks
+
+  # column name
+  event_id
+
+  # column name
+  log_index
+
+  # column name
+  market_value
+
+  # column name
+  mint
+
+  # column name
+  raw_data
+
+  # column name
+  token_value
+
+  # column name
+  total_assets
+
+  # column name
+  transaction_index
+}
+
+# input type for updating data in table "allocator_before_allocation"
+input allocator_before_allocation_set_input {
+  assets: numeric
+  block_number: Int
+  blocks: numeric
+  event_id: String
+  log_index: Int
+  market_value: numeric
+  mint: numeric
+  raw_data: String
+  token_value: numeric
+  total_assets: numeric
+  transaction_index: Int
+}
+
+# aggregate stddev on columns
+type allocator_before_allocation_stddev_fields {
+  assets: Float
+  block_number: Float
+  blocks: Float
+  log_index: Float
+  market_value: Float
+  mint: Float
+  token_value: Float
+  total_assets: Float
+  transaction_index: Float
+}
+
+# order by stddev() on columns of table "allocator_before_allocation"
+input allocator_before_allocation_stddev_order_by {
+  assets: order_by
+  block_number: order_by
+  blocks: order_by
+  log_index: order_by
+  market_value: order_by
+  mint: order_by
+  token_value: order_by
+  total_assets: order_by
+  transaction_index: order_by
+}
+
+# aggregate stddev_pop on columns
+type allocator_before_allocation_stddev_pop_fields {
+  assets: Float
+  block_number: Float
+  blocks: Float
+  log_index: Float
+  market_value: Float
+  mint: Float
+  token_value: Float
+  total_assets: Float
+  transaction_index: Float
+}
+
+# order by stddev_pop() on columns of table "allocator_before_allocation"
+input allocator_before_allocation_stddev_pop_order_by {
+  assets: order_by
+  block_number: order_by
+  blocks: order_by
+  log_index: order_by
+  market_value: order_by
+  mint: order_by
+  token_value: order_by
+  total_assets: order_by
+  transaction_index: order_by
+}
+
+# aggregate stddev_samp on columns
+type allocator_before_allocation_stddev_samp_fields {
+  assets: Float
+  block_number: Float
+  blocks: Float
+  log_index: Float
+  market_value: Float
+  mint: Float
+  token_value: Float
+  total_assets: Float
+  transaction_index: Float
+}
+
+# order by stddev_samp() on columns of table "allocator_before_allocation"
+input allocator_before_allocation_stddev_samp_order_by {
+  assets: order_by
+  block_number: order_by
+  blocks: order_by
+  log_index: order_by
+  market_value: order_by
+  mint: order_by
+  token_value: order_by
+  total_assets: order_by
+  transaction_index: order_by
+}
+
+# aggregate sum on columns
+type allocator_before_allocation_sum_fields {
+  assets: numeric
+  block_number: Int
+  blocks: numeric
+  log_index: Int
+  market_value: numeric
+  mint: numeric
+  token_value: numeric
+  total_assets: numeric
+  transaction_index: Int
+}
+
+# order by sum() on columns of table "allocator_before_allocation"
+input allocator_before_allocation_sum_order_by {
+  assets: order_by
+  block_number: order_by
+  blocks: order_by
+  log_index: order_by
+  market_value: order_by
+  mint: order_by
+  token_value: order_by
+  total_assets: order_by
+  transaction_index: order_by
+}
+
+# update columns of table "allocator_before_allocation"
+enum allocator_before_allocation_update_column {
+  # column name
+  assets
+
+  # column name
+  block_number
+
+  # column name
+  blocks
+
+  # column name
+  event_id
+
+  # column name
+  log_index
+
+  # column name
+  market_value
+
+  # column name
+  mint
+
+  # column name
+  raw_data
+
+  # column name
+  token_value
+
+  # column name
+  total_assets
+
+  # column name
+  transaction_index
+}
+
+# aggregate var_pop on columns
+type allocator_before_allocation_var_pop_fields {
+  assets: Float
+  block_number: Float
+  blocks: Float
+  log_index: Float
+  market_value: Float
+  mint: Float
+  token_value: Float
+  total_assets: Float
+  transaction_index: Float
+}
+
+# order by var_pop() on columns of table "allocator_before_allocation"
+input allocator_before_allocation_var_pop_order_by {
+  assets: order_by
+  block_number: order_by
+  blocks: order_by
+  log_index: order_by
+  market_value: order_by
+  mint: order_by
+  token_value: order_by
+  total_assets: order_by
+  transaction_index: order_by
+}
+
+# aggregate var_samp on columns
+type allocator_before_allocation_var_samp_fields {
+  assets: Float
+  block_number: Float
+  blocks: Float
+  log_index: Float
+  market_value: Float
+  mint: Float
+  token_value: Float
+  total_assets: Float
+  transaction_index: Float
+}
+
+# order by var_samp() on columns of table "allocator_before_allocation"
+input allocator_before_allocation_var_samp_order_by {
+  assets: order_by
+  block_number: order_by
+  blocks: order_by
+  log_index: order_by
+  market_value: order_by
+  mint: order_by
+  token_value: order_by
+  total_assets: order_by
+  transaction_index: order_by
+}
+
+# aggregate variance on columns
+type allocator_before_allocation_variance_fields {
+  assets: Float
+  block_number: Float
+  blocks: Float
+  log_index: Float
+  market_value: Float
+  mint: Float
+  token_value: Float
+  total_assets: Float
+  transaction_index: Float
+}
+
+# order by variance() on columns of table "allocator_before_allocation"
+input allocator_before_allocation_variance_order_by {
+  assets: order_by
+  block_number: order_by
+  blocks: order_by
+  log_index: order_by
+  market_value: order_by
+  mint: order_by
+  token_value: order_by
+  total_assets: order_by
+  transaction_index: order_by
+}
+
+scalar bigint
+
+# expression to compare columns of type bigint. All fields are combined with logical 'AND'.
+input bigint_comparison_exp {
+  _eq: bigint
+  _gt: bigint
+  _gte: bigint
+  _in: [bigint!]
+  _is_null: Boolean
+  _lt: bigint
+  _lte: bigint
+  _neq: bigint
+  _nin: [bigint!]
+}
+
+# expression to compare columns of type Boolean. All fields are combined with logical 'AND'.
+input Boolean_comparison_exp {
+  _eq: Boolean
+  _gt: Boolean
+  _gte: Boolean
+  _in: [Boolean!]
+  _is_null: Boolean
+  _lt: Boolean
+  _lte: Boolean
+  _neq: Boolean
+  _nin: [Boolean!]
+}
+
+scalar float8
+
+# expression to compare columns of type float8. All fields are combined with logical 'AND'.
+input float8_comparison_exp {
+  _eq: float8
+  _gt: float8
+  _gte: float8
+  _in: [float8!]
+  _is_null: Boolean
+  _lt: float8
+  _lte: float8
+  _neq: float8
+  _nin: [float8!]
+}
+
+# expression to compare columns of type Int. All fields are combined with logical 'AND'.
+input Int_comparison_exp {
+  _eq: Int
+  _gt: Int
+  _gte: Int
+  _in: [Int!]
+  _is_null: Boolean
+  _lt: Int
+  _lte: Int
+  _neq: Int
+  _nin: [Int!]
+}
+
+# columns and relationships of "lockup_lockedup"
+type lockup_lockedup {
+  block_number: Int!
+  event_id: String!
+  from_address: String!
+  log_index: Int!
+  property: String!
+  raw_data: String!
+  token_value: numeric!
+  transaction_index: Int!
+}
+
+# aggregated selection of "lockup_lockedup"
+type lockup_lockedup_aggregate {
+  aggregate: lockup_lockedup_aggregate_fields
+  nodes: [lockup_lockedup!]!
+}
+
+# aggregate fields of "lockup_lockedup"
+type lockup_lockedup_aggregate_fields {
+  avg: lockup_lockedup_avg_fields
+  count(columns: [lockup_lockedup_select_column!], distinct: Boolean): Int
+  max: lockup_lockedup_max_fields
+  min: lockup_lockedup_min_fields
+  stddev: lockup_lockedup_stddev_fields
+  stddev_pop: lockup_lockedup_stddev_pop_fields
+  stddev_samp: lockup_lockedup_stddev_samp_fields
+  sum: lockup_lockedup_sum_fields
+  var_pop: lockup_lockedup_var_pop_fields
+  var_samp: lockup_lockedup_var_samp_fields
+  variance: lockup_lockedup_variance_fields
+}
+
+# order by aggregate values of table "lockup_lockedup"
+input lockup_lockedup_aggregate_order_by {
+  avg: lockup_lockedup_avg_order_by
+  count: order_by
+  max: lockup_lockedup_max_order_by
+  min: lockup_lockedup_min_order_by
+  stddev: lockup_lockedup_stddev_order_by
+  stddev_pop: lockup_lockedup_stddev_pop_order_by
+  stddev_samp: lockup_lockedup_stddev_samp_order_by
+  sum: lockup_lockedup_sum_order_by
+  var_pop: lockup_lockedup_var_pop_order_by
+  var_samp: lockup_lockedup_var_samp_order_by
+  variance: lockup_lockedup_variance_order_by
+}
+
+# input type for inserting array relation for remote table "lockup_lockedup"
+input lockup_lockedup_arr_rel_insert_input {
+  data: [lockup_lockedup_insert_input!]!
+  on_conflict: lockup_lockedup_on_conflict
+}
+
+# aggregate avg on columns
+type lockup_lockedup_avg_fields {
+  block_number: Float
+  log_index: Float
+  token_value: Float
+  transaction_index: Float
+}
+
+# order by avg() on columns of table "lockup_lockedup"
+input lockup_lockedup_avg_order_by {
+  block_number: order_by
+  log_index: order_by
+  token_value: order_by
+  transaction_index: order_by
+}
+
+# Boolean expression to filter rows from the table "lockup_lockedup". All fields are combined with a logical 'AND'.
+input lockup_lockedup_bool_exp {
+  _and: [lockup_lockedup_bool_exp]
+  _not: lockup_lockedup_bool_exp
+  _or: [lockup_lockedup_bool_exp]
+  block_number: Int_comparison_exp
+  event_id: String_comparison_exp
+  from_address: String_comparison_exp
+  log_index: Int_comparison_exp
+  property: String_comparison_exp
+  raw_data: String_comparison_exp
+  token_value: numeric_comparison_exp
+  transaction_index: Int_comparison_exp
+}
+
+# unique or primary key constraints on table "lockup_lockedup"
+enum lockup_lockedup_constraint {
+  # unique or primary key constraint
+  lockup_lockedup_pkey
+}
+
+# input type for incrementing integer columne in table "lockup_lockedup"
+input lockup_lockedup_inc_input {
+  block_number: Int
+  log_index: Int
+  transaction_index: Int
+}
+
+# input type for inserting data into table "lockup_lockedup"
+input lockup_lockedup_insert_input {
+  block_number: Int
+  event_id: String
+  from_address: String
+  log_index: Int
+  property: String
+  raw_data: String
+  token_value: numeric
+  transaction_index: Int
+}
+
+# aggregate max on columns
+type lockup_lockedup_max_fields {
+  block_number: Int
+  event_id: String
+  from_address: String
+  log_index: Int
+  property: String
+  raw_data: String
+  token_value: numeric
+  transaction_index: Int
+}
+
+# order by max() on columns of table "lockup_lockedup"
+input lockup_lockedup_max_order_by {
+  block_number: order_by
+  event_id: order_by
+  from_address: order_by
+  log_index: order_by
+  property: order_by
+  raw_data: order_by
+  token_value: order_by
+  transaction_index: order_by
+}
+
+# aggregate min on columns
+type lockup_lockedup_min_fields {
+  block_number: Int
+  event_id: String
+  from_address: String
+  log_index: Int
+  property: String
+  raw_data: String
+  token_value: numeric
+  transaction_index: Int
+}
+
+# order by min() on columns of table "lockup_lockedup"
+input lockup_lockedup_min_order_by {
+  block_number: order_by
+  event_id: order_by
+  from_address: order_by
+  log_index: order_by
+  property: order_by
+  raw_data: order_by
+  token_value: order_by
+  transaction_index: order_by
+}
+
+# response of any mutation on the table "lockup_lockedup"
+type lockup_lockedup_mutation_response {
+  # number of affected rows by the mutation
+  affected_rows: Int!
+
+  # data of the affected rows by the mutation
+  returning: [lockup_lockedup!]!
+}
+
+# input type for inserting object relation for remote table "lockup_lockedup"
+input lockup_lockedup_obj_rel_insert_input {
+  data: lockup_lockedup_insert_input!
+  on_conflict: lockup_lockedup_on_conflict
+}
+
+# on conflict condition type for table "lockup_lockedup"
+input lockup_lockedup_on_conflict {
+  constraint: lockup_lockedup_constraint!
+  update_columns: [lockup_lockedup_update_column!]!
+  where: lockup_lockedup_bool_exp
+}
+
+# ordering options when selecting data from "lockup_lockedup"
+input lockup_lockedup_order_by {
+  block_number: order_by
+  event_id: order_by
+  from_address: order_by
+  log_index: order_by
+  property: order_by
+  raw_data: order_by
+  token_value: order_by
+  transaction_index: order_by
+}
+
+# select columns of table "lockup_lockedup"
+enum lockup_lockedup_select_column {
+  # column name
+  block_number
+
+  # column name
+  event_id
+
+  # column name
+  from_address
+
+  # column name
+  log_index
+
+  # column name
+  property
+
+  # column name
+  raw_data
+
+  # column name
+  token_value
+
+  # column name
+  transaction_index
+}
+
+# input type for updating data in table "lockup_lockedup"
+input lockup_lockedup_set_input {
+  block_number: Int
+  event_id: String
+  from_address: String
+  log_index: Int
+  property: String
+  raw_data: String
+  token_value: numeric
+  transaction_index: Int
+}
+
+# aggregate stddev on columns
+type lockup_lockedup_stddev_fields {
+  block_number: Float
+  log_index: Float
+  token_value: Float
+  transaction_index: Float
+}
+
+# order by stddev() on columns of table "lockup_lockedup"
+input lockup_lockedup_stddev_order_by {
+  block_number: order_by
+  log_index: order_by
+  token_value: order_by
+  transaction_index: order_by
+}
+
+# aggregate stddev_pop on columns
+type lockup_lockedup_stddev_pop_fields {
+  block_number: Float
+  log_index: Float
+  token_value: Float
+  transaction_index: Float
+}
+
+# order by stddev_pop() on columns of table "lockup_lockedup"
+input lockup_lockedup_stddev_pop_order_by {
+  block_number: order_by
+  log_index: order_by
+  token_value: order_by
+  transaction_index: order_by
+}
+
+# aggregate stddev_samp on columns
+type lockup_lockedup_stddev_samp_fields {
+  block_number: Float
+  log_index: Float
+  token_value: Float
+  transaction_index: Float
+}
+
+# order by stddev_samp() on columns of table "lockup_lockedup"
+input lockup_lockedup_stddev_samp_order_by {
+  block_number: order_by
+  log_index: order_by
+  token_value: order_by
+  transaction_index: order_by
+}
+
+# aggregate sum on columns
+type lockup_lockedup_sum_fields {
+  block_number: Int
+  log_index: Int
+  token_value: numeric
+  transaction_index: Int
+}
+
+# order by sum() on columns of table "lockup_lockedup"
+input lockup_lockedup_sum_order_by {
+  block_number: order_by
+  log_index: order_by
+  token_value: order_by
+  transaction_index: order_by
+}
+
+# update columns of table "lockup_lockedup"
+enum lockup_lockedup_update_column {
+  # column name
+  block_number
+
+  # column name
+  event_id
+
+  # column name
+  from_address
+
+  # column name
+  log_index
+
+  # column name
+  property
+
+  # column name
+  raw_data
+
+  # column name
+  token_value
+
+  # column name
+  transaction_index
+}
+
+# aggregate var_pop on columns
+type lockup_lockedup_var_pop_fields {
+  block_number: Float
+  log_index: Float
+  token_value: Float
+  transaction_index: Float
+}
+
+# order by var_pop() on columns of table "lockup_lockedup"
+input lockup_lockedup_var_pop_order_by {
+  block_number: order_by
+  log_index: order_by
+  token_value: order_by
+  transaction_index: order_by
+}
+
+# aggregate var_samp on columns
+type lockup_lockedup_var_samp_fields {
+  block_number: Float
+  log_index: Float
+  token_value: Float
+  transaction_index: Float
+}
+
+# order by var_samp() on columns of table "lockup_lockedup"
+input lockup_lockedup_var_samp_order_by {
+  block_number: order_by
+  log_index: order_by
+  token_value: order_by
+  transaction_index: order_by
+}
+
+# aggregate variance on columns
+type lockup_lockedup_variance_fields {
+  block_number: Float
+  log_index: Float
+  token_value: Float
+  transaction_index: Float
+}
+
+# order by variance() on columns of table "lockup_lockedup"
+input lockup_lockedup_variance_order_by {
+  block_number: order_by
+  log_index: order_by
+  token_value: order_by
+  transaction_index: order_by
+}
+
+# columns and relationships of "market_factory_create"
+type market_factory_create {
+  block_number: Int!
+  event_id: String!
+  from_address: String!
+  log_index: Int!
+  market: String!
+  raw_data: String!
+  transaction_index: Int!
+}
+
+# aggregated selection of "market_factory_create"
+type market_factory_create_aggregate {
+  aggregate: market_factory_create_aggregate_fields
+  nodes: [market_factory_create!]!
+}
+
+# aggregate fields of "market_factory_create"
+type market_factory_create_aggregate_fields {
+  avg: market_factory_create_avg_fields
+  count(columns: [market_factory_create_select_column!], distinct: Boolean): Int
+  max: market_factory_create_max_fields
+  min: market_factory_create_min_fields
+  stddev: market_factory_create_stddev_fields
+  stddev_pop: market_factory_create_stddev_pop_fields
+  stddev_samp: market_factory_create_stddev_samp_fields
+  sum: market_factory_create_sum_fields
+  var_pop: market_factory_create_var_pop_fields
+  var_samp: market_factory_create_var_samp_fields
+  variance: market_factory_create_variance_fields
+}
+
+# order by aggregate values of table "market_factory_create"
+input market_factory_create_aggregate_order_by {
+  avg: market_factory_create_avg_order_by
+  count: order_by
+  max: market_factory_create_max_order_by
+  min: market_factory_create_min_order_by
+  stddev: market_factory_create_stddev_order_by
+  stddev_pop: market_factory_create_stddev_pop_order_by
+  stddev_samp: market_factory_create_stddev_samp_order_by
+  sum: market_factory_create_sum_order_by
+  var_pop: market_factory_create_var_pop_order_by
+  var_samp: market_factory_create_var_samp_order_by
+  variance: market_factory_create_variance_order_by
+}
+
+# input type for inserting array relation for remote table "market_factory_create"
+input market_factory_create_arr_rel_insert_input {
+  data: [market_factory_create_insert_input!]!
+  on_conflict: market_factory_create_on_conflict
+}
+
+# aggregate avg on columns
+type market_factory_create_avg_fields {
+  block_number: Float
+  log_index: Float
+  transaction_index: Float
+}
+
+# order by avg() on columns of table "market_factory_create"
+input market_factory_create_avg_order_by {
+  block_number: order_by
+  log_index: order_by
+  transaction_index: order_by
+}
+
+# Boolean expression to filter rows from the table "market_factory_create". All fields are combined with a logical 'AND'.
+input market_factory_create_bool_exp {
+  _and: [market_factory_create_bool_exp]
+  _not: market_factory_create_bool_exp
+  _or: [market_factory_create_bool_exp]
+  block_number: Int_comparison_exp
+  event_id: String_comparison_exp
+  from_address: String_comparison_exp
+  log_index: Int_comparison_exp
+  market: String_comparison_exp
+  raw_data: String_comparison_exp
+  transaction_index: Int_comparison_exp
+}
+
+# unique or primary key constraints on table "market_factory_create"
+enum market_factory_create_constraint {
+  # unique or primary key constraint
+  market_factory_create_pkey
+}
+
+# input type for incrementing integer columne in table "market_factory_create"
+input market_factory_create_inc_input {
+  block_number: Int
+  log_index: Int
+  transaction_index: Int
+}
+
+# input type for inserting data into table "market_factory_create"
+input market_factory_create_insert_input {
+  block_number: Int
+  event_id: String
+  from_address: String
+  log_index: Int
+  market: String
+  raw_data: String
+  transaction_index: Int
+}
+
+# aggregate max on columns
+type market_factory_create_max_fields {
+  block_number: Int
+  event_id: String
+  from_address: String
+  log_index: Int
+  market: String
+  raw_data: String
+  transaction_index: Int
+}
+
+# order by max() on columns of table "market_factory_create"
+input market_factory_create_max_order_by {
+  block_number: order_by
+  event_id: order_by
+  from_address: order_by
+  log_index: order_by
+  market: order_by
+  raw_data: order_by
+  transaction_index: order_by
+}
+
+# aggregate min on columns
+type market_factory_create_min_fields {
+  block_number: Int
+  event_id: String
+  from_address: String
+  log_index: Int
+  market: String
+  raw_data: String
+  transaction_index: Int
+}
+
+# order by min() on columns of table "market_factory_create"
+input market_factory_create_min_order_by {
+  block_number: order_by
+  event_id: order_by
+  from_address: order_by
+  log_index: order_by
+  market: order_by
+  raw_data: order_by
+  transaction_index: order_by
+}
+
+# response of any mutation on the table "market_factory_create"
+type market_factory_create_mutation_response {
+  # number of affected rows by the mutation
+  affected_rows: Int!
+
+  # data of the affected rows by the mutation
+  returning: [market_factory_create!]!
+}
+
+# input type for inserting object relation for remote table "market_factory_create"
+input market_factory_create_obj_rel_insert_input {
+  data: market_factory_create_insert_input!
+  on_conflict: market_factory_create_on_conflict
+}
+
+# on conflict condition type for table "market_factory_create"
+input market_factory_create_on_conflict {
+  constraint: market_factory_create_constraint!
+  update_columns: [market_factory_create_update_column!]!
+  where: market_factory_create_bool_exp
+}
+
+# ordering options when selecting data from "market_factory_create"
+input market_factory_create_order_by {
+  block_number: order_by
+  event_id: order_by
+  from_address: order_by
+  log_index: order_by
+  market: order_by
+  raw_data: order_by
+  transaction_index: order_by
+}
+
+# select columns of table "market_factory_create"
+enum market_factory_create_select_column {
+  # column name
+  block_number
+
+  # column name
+  event_id
+
+  # column name
+  from_address
+
+  # column name
+  log_index
+
+  # column name
+  market
+
+  # column name
+  raw_data
+
+  # column name
+  transaction_index
+}
+
+# input type for updating data in table "market_factory_create"
+input market_factory_create_set_input {
+  block_number: Int
+  event_id: String
+  from_address: String
+  log_index: Int
+  market: String
+  raw_data: String
+  transaction_index: Int
+}
+
+# aggregate stddev on columns
+type market_factory_create_stddev_fields {
+  block_number: Float
+  log_index: Float
+  transaction_index: Float
+}
+
+# order by stddev() on columns of table "market_factory_create"
+input market_factory_create_stddev_order_by {
+  block_number: order_by
+  log_index: order_by
+  transaction_index: order_by
+}
+
+# aggregate stddev_pop on columns
+type market_factory_create_stddev_pop_fields {
+  block_number: Float
+  log_index: Float
+  transaction_index: Float
+}
+
+# order by stddev_pop() on columns of table "market_factory_create"
+input market_factory_create_stddev_pop_order_by {
+  block_number: order_by
+  log_index: order_by
+  transaction_index: order_by
+}
+
+# aggregate stddev_samp on columns
+type market_factory_create_stddev_samp_fields {
+  block_number: Float
+  log_index: Float
+  transaction_index: Float
+}
+
+# order by stddev_samp() on columns of table "market_factory_create"
+input market_factory_create_stddev_samp_order_by {
+  block_number: order_by
+  log_index: order_by
+  transaction_index: order_by
+}
+
+# aggregate sum on columns
+type market_factory_create_sum_fields {
+  block_number: Int
+  log_index: Int
+  transaction_index: Int
+}
+
+# order by sum() on columns of table "market_factory_create"
+input market_factory_create_sum_order_by {
+  block_number: order_by
+  log_index: order_by
+  transaction_index: order_by
+}
+
+# update columns of table "market_factory_create"
+enum market_factory_create_update_column {
+  # column name
+  block_number
+
+  # column name
+  event_id
+
+  # column name
+  from_address
+
+  # column name
+  log_index
+
+  # column name
+  market
+
+  # column name
+  raw_data
+
+  # column name
+  transaction_index
+}
+
+# aggregate var_pop on columns
+type market_factory_create_var_pop_fields {
+  block_number: Float
+  log_index: Float
+  transaction_index: Float
+}
+
+# order by var_pop() on columns of table "market_factory_create"
+input market_factory_create_var_pop_order_by {
+  block_number: order_by
+  log_index: order_by
+  transaction_index: order_by
+}
+
+# aggregate var_samp on columns
+type market_factory_create_var_samp_fields {
+  block_number: Float
+  log_index: Float
+  transaction_index: Float
+}
+
+# order by var_samp() on columns of table "market_factory_create"
+input market_factory_create_var_samp_order_by {
+  block_number: order_by
+  log_index: order_by
+  transaction_index: order_by
+}
+
+# aggregate variance on columns
+type market_factory_create_variance_fields {
+  block_number: Float
+  log_index: Float
+  transaction_index: Float
+}
+
+# order by variance() on columns of table "market_factory_create"
+input market_factory_create_variance_order_by {
+  block_number: order_by
+  log_index: order_by
+  transaction_index: order_by
+}
+
+# columns and relationships of "metrics_factory_create"
+type metrics_factory_create {
+  block_number: Int!
+  event_id: String!
+  from_address: String!
+  log_index: Int!
+  metrics: String!
+  raw_data: String!
+  transaction_index: Int!
+}
+
+# aggregated selection of "metrics_factory_create"
+type metrics_factory_create_aggregate {
+  aggregate: metrics_factory_create_aggregate_fields
+  nodes: [metrics_factory_create!]!
+}
+
+# aggregate fields of "metrics_factory_create"
+type metrics_factory_create_aggregate_fields {
+  avg: metrics_factory_create_avg_fields
+  count(columns: [metrics_factory_create_select_column!], distinct: Boolean): Int
+  max: metrics_factory_create_max_fields
+  min: metrics_factory_create_min_fields
+  stddev: metrics_factory_create_stddev_fields
+  stddev_pop: metrics_factory_create_stddev_pop_fields
+  stddev_samp: metrics_factory_create_stddev_samp_fields
+  sum: metrics_factory_create_sum_fields
+  var_pop: metrics_factory_create_var_pop_fields
+  var_samp: metrics_factory_create_var_samp_fields
+  variance: metrics_factory_create_variance_fields
+}
+
+# order by aggregate values of table "metrics_factory_create"
+input metrics_factory_create_aggregate_order_by {
+  avg: metrics_factory_create_avg_order_by
+  count: order_by
+  max: metrics_factory_create_max_order_by
+  min: metrics_factory_create_min_order_by
+  stddev: metrics_factory_create_stddev_order_by
+  stddev_pop: metrics_factory_create_stddev_pop_order_by
+  stddev_samp: metrics_factory_create_stddev_samp_order_by
+  sum: metrics_factory_create_sum_order_by
+  var_pop: metrics_factory_create_var_pop_order_by
+  var_samp: metrics_factory_create_var_samp_order_by
+  variance: metrics_factory_create_variance_order_by
+}
+
+# input type for inserting array relation for remote table "metrics_factory_create"
+input metrics_factory_create_arr_rel_insert_input {
+  data: [metrics_factory_create_insert_input!]!
+  on_conflict: metrics_factory_create_on_conflict
+}
+
+# aggregate avg on columns
+type metrics_factory_create_avg_fields {
+  block_number: Float
+  log_index: Float
+  transaction_index: Float
+}
+
+# order by avg() on columns of table "metrics_factory_create"
+input metrics_factory_create_avg_order_by {
+  block_number: order_by
+  log_index: order_by
+  transaction_index: order_by
+}
+
+# Boolean expression to filter rows from the table "metrics_factory_create". All fields are combined with a logical 'AND'.
+input metrics_factory_create_bool_exp {
+  _and: [metrics_factory_create_bool_exp]
+  _not: metrics_factory_create_bool_exp
+  _or: [metrics_factory_create_bool_exp]
+  block_number: Int_comparison_exp
+  event_id: String_comparison_exp
+  from_address: String_comparison_exp
+  log_index: Int_comparison_exp
+  metrics: String_comparison_exp
+  raw_data: String_comparison_exp
+  transaction_index: Int_comparison_exp
+}
+
+# unique or primary key constraints on table "metrics_factory_create"
+enum metrics_factory_create_constraint {
+  # unique or primary key constraint
+  metrics_factory_create_pkey
+}
+
+# input type for incrementing integer columne in table "metrics_factory_create"
+input metrics_factory_create_inc_input {
+  block_number: Int
+  log_index: Int
+  transaction_index: Int
+}
+
+# input type for inserting data into table "metrics_factory_create"
+input metrics_factory_create_insert_input {
+  block_number: Int
+  event_id: String
+  from_address: String
+  log_index: Int
+  metrics: String
+  raw_data: String
+  transaction_index: Int
+}
+
+# aggregate max on columns
+type metrics_factory_create_max_fields {
+  block_number: Int
+  event_id: String
+  from_address: String
+  log_index: Int
+  metrics: String
+  raw_data: String
+  transaction_index: Int
+}
+
+# order by max() on columns of table "metrics_factory_create"
+input metrics_factory_create_max_order_by {
+  block_number: order_by
+  event_id: order_by
+  from_address: order_by
+  log_index: order_by
+  metrics: order_by
+  raw_data: order_by
+  transaction_index: order_by
+}
+
+# aggregate min on columns
+type metrics_factory_create_min_fields {
+  block_number: Int
+  event_id: String
+  from_address: String
+  log_index: Int
+  metrics: String
+  raw_data: String
+  transaction_index: Int
+}
+
+# order by min() on columns of table "metrics_factory_create"
+input metrics_factory_create_min_order_by {
+  block_number: order_by
+  event_id: order_by
+  from_address: order_by
+  log_index: order_by
+  metrics: order_by
+  raw_data: order_by
+  transaction_index: order_by
+}
+
+# response of any mutation on the table "metrics_factory_create"
+type metrics_factory_create_mutation_response {
+  # number of affected rows by the mutation
+  affected_rows: Int!
+
+  # data of the affected rows by the mutation
+  returning: [metrics_factory_create!]!
+}
+
+# input type for inserting object relation for remote table "metrics_factory_create"
+input metrics_factory_create_obj_rel_insert_input {
+  data: metrics_factory_create_insert_input!
+  on_conflict: metrics_factory_create_on_conflict
+}
+
+# on conflict condition type for table "metrics_factory_create"
+input metrics_factory_create_on_conflict {
+  constraint: metrics_factory_create_constraint!
+  update_columns: [metrics_factory_create_update_column!]!
+  where: metrics_factory_create_bool_exp
+}
+
+# ordering options when selecting data from "metrics_factory_create"
+input metrics_factory_create_order_by {
+  block_number: order_by
+  event_id: order_by
+  from_address: order_by
+  log_index: order_by
+  metrics: order_by
+  raw_data: order_by
+  transaction_index: order_by
+}
+
+# select columns of table "metrics_factory_create"
+enum metrics_factory_create_select_column {
+  # column name
+  block_number
+
+  # column name
+  event_id
+
+  # column name
+  from_address
+
+  # column name
+  log_index
+
+  # column name
+  metrics
+
+  # column name
+  raw_data
+
+  # column name
+  transaction_index
+}
+
+# input type for updating data in table "metrics_factory_create"
+input metrics_factory_create_set_input {
+  block_number: Int
+  event_id: String
+  from_address: String
+  log_index: Int
+  metrics: String
+  raw_data: String
+  transaction_index: Int
+}
+
+# aggregate stddev on columns
+type metrics_factory_create_stddev_fields {
+  block_number: Float
+  log_index: Float
+  transaction_index: Float
+}
+
+# order by stddev() on columns of table "metrics_factory_create"
+input metrics_factory_create_stddev_order_by {
+  block_number: order_by
+  log_index: order_by
+  transaction_index: order_by
+}
+
+# aggregate stddev_pop on columns
+type metrics_factory_create_stddev_pop_fields {
+  block_number: Float
+  log_index: Float
+  transaction_index: Float
+}
+
+# order by stddev_pop() on columns of table "metrics_factory_create"
+input metrics_factory_create_stddev_pop_order_by {
+  block_number: order_by
+  log_index: order_by
+  transaction_index: order_by
+}
+
+# aggregate stddev_samp on columns
+type metrics_factory_create_stddev_samp_fields {
+  block_number: Float
+  log_index: Float
+  transaction_index: Float
+}
+
+# order by stddev_samp() on columns of table "metrics_factory_create"
+input metrics_factory_create_stddev_samp_order_by {
+  block_number: order_by
+  log_index: order_by
+  transaction_index: order_by
+}
+
+# aggregate sum on columns
+type metrics_factory_create_sum_fields {
+  block_number: Int
+  log_index: Int
+  transaction_index: Int
+}
+
+# order by sum() on columns of table "metrics_factory_create"
+input metrics_factory_create_sum_order_by {
+  block_number: order_by
+  log_index: order_by
+  transaction_index: order_by
+}
+
+# update columns of table "metrics_factory_create"
+enum metrics_factory_create_update_column {
+  # column name
+  block_number
+
+  # column name
+  event_id
+
+  # column name
+  from_address
+
+  # column name
+  log_index
+
+  # column name
+  metrics
+
+  # column name
+  raw_data
+
+  # column name
+  transaction_index
+}
+
+# aggregate var_pop on columns
+type metrics_factory_create_var_pop_fields {
+  block_number: Float
+  log_index: Float
+  transaction_index: Float
+}
+
+# order by var_pop() on columns of table "metrics_factory_create"
+input metrics_factory_create_var_pop_order_by {
+  block_number: order_by
+  log_index: order_by
+  transaction_index: order_by
+}
+
+# aggregate var_samp on columns
+type metrics_factory_create_var_samp_fields {
+  block_number: Float
+  log_index: Float
+  transaction_index: Float
+}
+
+# order by var_samp() on columns of table "metrics_factory_create"
+input metrics_factory_create_var_samp_order_by {
+  block_number: order_by
+  log_index: order_by
+  transaction_index: order_by
+}
+
+# aggregate variance on columns
+type metrics_factory_create_variance_fields {
+  block_number: Float
+  log_index: Float
+  transaction_index: Float
+}
+
+# order by variance() on columns of table "metrics_factory_create"
+input metrics_factory_create_variance_order_by {
+  block_number: order_by
+  log_index: order_by
+  transaction_index: order_by
+}
+
+# mutation root
+type mutation_root {
+  # delete data from the table: "allocator_allocation_result"
+  delete_allocator_allocation_result(
+    # filter the rows which have to be deleted
+    where: allocator_allocation_result_bool_exp!
+  ): allocator_allocation_result_mutation_response
+
+  # delete data from the table: "allocator_before_allocation"
+  delete_allocator_before_allocation(
+    # filter the rows which have to be deleted
+    where: allocator_before_allocation_bool_exp!
+  ): allocator_before_allocation_mutation_response
+
+  # delete data from the table: "lockup_lockedup"
+  delete_lockup_lockedup(
+    # filter the rows which have to be deleted
+    where: lockup_lockedup_bool_exp!
+  ): lockup_lockedup_mutation_response
+
+  # delete data from the table: "market_factory_create"
+  delete_market_factory_create(
+    # filter the rows which have to be deleted
+    where: market_factory_create_bool_exp!
+  ): market_factory_create_mutation_response
+
+  # delete data from the table: "metrics_factory_create"
+  delete_metrics_factory_create(
+    # filter the rows which have to be deleted
+    where: metrics_factory_create_bool_exp!
+  ): metrics_factory_create_mutation_response
+
+  # delete data from the table: "policy_factory_create"
+  delete_policy_factory_create(
+    # filter the rows which have to be deleted
+    where: policy_factory_create_bool_exp!
+  ): policy_factory_create_mutation_response
+
+  # delete data from the table: "property_factory_create"
+  delete_property_factory_create(
+    # filter the rows which have to be deleted
+    where: property_factory_create_bool_exp!
+  ): property_factory_create_mutation_response
+
+  # insert data into the table: "allocator_allocation_result"
+  insert_allocator_allocation_result(
+    # the rows to be inserted
+    objects: [allocator_allocation_result_insert_input!]!
+
+    # on conflict condition
+    on_conflict: allocator_allocation_result_on_conflict
+  ): allocator_allocation_result_mutation_response
+
+  # insert data into the table: "allocator_before_allocation"
+  insert_allocator_before_allocation(
+    # the rows to be inserted
+    objects: [allocator_before_allocation_insert_input!]!
+
+    # on conflict condition
+    on_conflict: allocator_before_allocation_on_conflict
+  ): allocator_before_allocation_mutation_response
+
+  # insert data into the table: "lockup_lockedup"
+  insert_lockup_lockedup(
+    # the rows to be inserted
+    objects: [lockup_lockedup_insert_input!]!
+
+    # on conflict condition
+    on_conflict: lockup_lockedup_on_conflict
+  ): lockup_lockedup_mutation_response
+
+  # insert data into the table: "market_factory_create"
+  insert_market_factory_create(
+    # the rows to be inserted
+    objects: [market_factory_create_insert_input!]!
+
+    # on conflict condition
+    on_conflict: market_factory_create_on_conflict
+  ): market_factory_create_mutation_response
+
+  # insert data into the table: "metrics_factory_create"
+  insert_metrics_factory_create(
+    # the rows to be inserted
+    objects: [metrics_factory_create_insert_input!]!
+
+    # on conflict condition
+    on_conflict: metrics_factory_create_on_conflict
+  ): metrics_factory_create_mutation_response
+
+  # insert data into the table: "policy_factory_create"
+  insert_policy_factory_create(
+    # the rows to be inserted
+    objects: [policy_factory_create_insert_input!]!
+
+    # on conflict condition
+    on_conflict: policy_factory_create_on_conflict
+  ): policy_factory_create_mutation_response
+
+  # insert data into the table: "property_factory_create"
+  insert_property_factory_create(
+    # the rows to be inserted
+    objects: [property_factory_create_insert_input!]!
+
+    # on conflict condition
+    on_conflict: property_factory_create_on_conflict
+  ): property_factory_create_mutation_response
+
+  # update data of the table: "allocator_allocation_result"
+  update_allocator_allocation_result(
+    # increments the integer columns with given value of the filtered values
+    _inc: allocator_allocation_result_inc_input
+
+    # sets the columns of the filtered rows to the given values
+    _set: allocator_allocation_result_set_input
+
+    # filter the rows which have to be updated
+    where: allocator_allocation_result_bool_exp!
+  ): allocator_allocation_result_mutation_response
+
+  # update data of the table: "allocator_before_allocation"
+  update_allocator_before_allocation(
+    # increments the integer columns with given value of the filtered values
+    _inc: allocator_before_allocation_inc_input
+
+    # sets the columns of the filtered rows to the given values
+    _set: allocator_before_allocation_set_input
+
+    # filter the rows which have to be updated
+    where: allocator_before_allocation_bool_exp!
+  ): allocator_before_allocation_mutation_response
+
+  # update data of the table: "lockup_lockedup"
+  update_lockup_lockedup(
+    # increments the integer columns with given value of the filtered values
+    _inc: lockup_lockedup_inc_input
+
+    # sets the columns of the filtered rows to the given values
+    _set: lockup_lockedup_set_input
+
+    # filter the rows which have to be updated
+    where: lockup_lockedup_bool_exp!
+  ): lockup_lockedup_mutation_response
+
+  # update data of the table: "market_factory_create"
+  update_market_factory_create(
+    # increments the integer columns with given value of the filtered values
+    _inc: market_factory_create_inc_input
+
+    # sets the columns of the filtered rows to the given values
+    _set: market_factory_create_set_input
+
+    # filter the rows which have to be updated
+    where: market_factory_create_bool_exp!
+  ): market_factory_create_mutation_response
+
+  # update data of the table: "metrics_factory_create"
+  update_metrics_factory_create(
+    # increments the integer columns with given value of the filtered values
+    _inc: metrics_factory_create_inc_input
+
+    # sets the columns of the filtered rows to the given values
+    _set: metrics_factory_create_set_input
+
+    # filter the rows which have to be updated
+    where: metrics_factory_create_bool_exp!
+  ): metrics_factory_create_mutation_response
+
+  # update data of the table: "policy_factory_create"
+  update_policy_factory_create(
+    # increments the integer columns with given value of the filtered values
+    _inc: policy_factory_create_inc_input
+
+    # sets the columns of the filtered rows to the given values
+    _set: policy_factory_create_set_input
+
+    # filter the rows which have to be updated
+    where: policy_factory_create_bool_exp!
+  ): policy_factory_create_mutation_response
+
+  # update data of the table: "property_factory_create"
+  update_property_factory_create(
+    # increments the integer columns with given value of the filtered values
+    _inc: property_factory_create_inc_input
+
+    # sets the columns of the filtered rows to the given values
+    _set: property_factory_create_set_input
+
+    # filter the rows which have to be updated
+    where: property_factory_create_bool_exp!
+  ): property_factory_create_mutation_response
+}
+
+scalar numeric
+
+# expression to compare columns of type numeric. All fields are combined with logical 'AND'.
+input numeric_comparison_exp {
+  _eq: numeric
+  _gt: numeric
+  _gte: numeric
+  _in: [numeric!]
+  _is_null: Boolean
+  _lt: numeric
+  _lte: numeric
+  _neq: numeric
+  _nin: [numeric!]
+}
+
+scalar oid
+
+# expression to compare columns of type oid. All fields are combined with logical 'AND'.
+input oid_comparison_exp {
+  _eq: oid
+  _gt: oid
+  _gte: oid
+  _in: [oid!]
+  _is_null: Boolean
+  _lt: oid
+  _lte: oid
+  _neq: oid
+  _nin: [oid!]
+}
+
+# column ordering options
+enum order_by {
+  # in the ascending order, nulls last
+  asc
+
+  # in the ascending order, nulls first
+  asc_nulls_first
+
+  # in the ascending order, nulls last
+  asc_nulls_last
+
+  # in the descending order, nulls first
+  desc
+
+  # in the descending order, nulls first
+  desc_nulls_first
+
+  # in the descending order, nulls last
+  desc_nulls_last
+}
+
+# columns and relationships of "pg_buffercache"
+type pg_buffercache {
+  bufferid: Int
+  isdirty: Boolean
+  pinning_backends: Int
+  relblocknumber: bigint
+  reldatabase: oid
+  relfilenode: oid
+  relforknumber: smallint
+  reltablespace: oid
+  usagecount: smallint
+}
+
+# aggregated selection of "pg_buffercache"
+type pg_buffercache_aggregate {
+  aggregate: pg_buffercache_aggregate_fields
+  nodes: [pg_buffercache!]!
+}
+
+# aggregate fields of "pg_buffercache"
+type pg_buffercache_aggregate_fields {
+  avg: pg_buffercache_avg_fields
+  count(columns: [pg_buffercache_select_column!], distinct: Boolean): Int
+  max: pg_buffercache_max_fields
+  min: pg_buffercache_min_fields
+  stddev: pg_buffercache_stddev_fields
+  stddev_pop: pg_buffercache_stddev_pop_fields
+  stddev_samp: pg_buffercache_stddev_samp_fields
+  sum: pg_buffercache_sum_fields
+  var_pop: pg_buffercache_var_pop_fields
+  var_samp: pg_buffercache_var_samp_fields
+  variance: pg_buffercache_variance_fields
+}
+
+# order by aggregate values of table "pg_buffercache"
+input pg_buffercache_aggregate_order_by {
+  avg: pg_buffercache_avg_order_by
+  count: order_by
+  max: pg_buffercache_max_order_by
+  min: pg_buffercache_min_order_by
+  stddev: pg_buffercache_stddev_order_by
+  stddev_pop: pg_buffercache_stddev_pop_order_by
+  stddev_samp: pg_buffercache_stddev_samp_order_by
+  sum: pg_buffercache_sum_order_by
+  var_pop: pg_buffercache_var_pop_order_by
+  var_samp: pg_buffercache_var_samp_order_by
+  variance: pg_buffercache_variance_order_by
+}
+
+# aggregate avg on columns
+type pg_buffercache_avg_fields {
+  bufferid: Float
+  pinning_backends: Float
+  relblocknumber: Float
+  relforknumber: Float
+  usagecount: Float
+}
+
+# order by avg() on columns of table "pg_buffercache"
+input pg_buffercache_avg_order_by {
+  bufferid: order_by
+  pinning_backends: order_by
+  relblocknumber: order_by
+  relforknumber: order_by
+  usagecount: order_by
+}
+
+# Boolean expression to filter rows from the table "pg_buffercache". All fields are combined with a logical 'AND'.
+input pg_buffercache_bool_exp {
+  _and: [pg_buffercache_bool_exp]
+  _not: pg_buffercache_bool_exp
+  _or: [pg_buffercache_bool_exp]
+  bufferid: Int_comparison_exp
+  isdirty: Boolean_comparison_exp
+  pinning_backends: Int_comparison_exp
+  relblocknumber: bigint_comparison_exp
+  reldatabase: oid_comparison_exp
+  relfilenode: oid_comparison_exp
+  relforknumber: smallint_comparison_exp
+  reltablespace: oid_comparison_exp
+  usagecount: smallint_comparison_exp
+}
+
+# aggregate max on columns
+type pg_buffercache_max_fields {
+  bufferid: Int
+  pinning_backends: Int
+  relblocknumber: bigint
+  relforknumber: smallint
+  usagecount: smallint
+}
+
+# order by max() on columns of table "pg_buffercache"
+input pg_buffercache_max_order_by {
+  bufferid: order_by
+  pinning_backends: order_by
+  relblocknumber: order_by
+  relforknumber: order_by
+  usagecount: order_by
+}
+
+# aggregate min on columns
+type pg_buffercache_min_fields {
+  bufferid: Int
+  pinning_backends: Int
+  relblocknumber: bigint
+  relforknumber: smallint
+  usagecount: smallint
+}
+
+# order by min() on columns of table "pg_buffercache"
+input pg_buffercache_min_order_by {
+  bufferid: order_by
+  pinning_backends: order_by
+  relblocknumber: order_by
+  relforknumber: order_by
+  usagecount: order_by
+}
+
+# ordering options when selecting data from "pg_buffercache"
+input pg_buffercache_order_by {
+  bufferid: order_by
+  isdirty: order_by
+  pinning_backends: order_by
+  relblocknumber: order_by
+  reldatabase: order_by
+  relfilenode: order_by
+  relforknumber: order_by
+  reltablespace: order_by
+  usagecount: order_by
+}
+
+# select columns of table "pg_buffercache"
+enum pg_buffercache_select_column {
+  # column name
+  bufferid
+
+  # column name
+  isdirty
+
+  # column name
+  pinning_backends
+
+  # column name
+  relblocknumber
+
+  # column name
+  reldatabase
+
+  # column name
+  relfilenode
+
+  # column name
+  relforknumber
+
+  # column name
+  reltablespace
+
+  # column name
+  usagecount
+}
+
+# aggregate stddev on columns
+type pg_buffercache_stddev_fields {
+  bufferid: Float
+  pinning_backends: Float
+  relblocknumber: Float
+  relforknumber: Float
+  usagecount: Float
+}
+
+# order by stddev() on columns of table "pg_buffercache"
+input pg_buffercache_stddev_order_by {
+  bufferid: order_by
+  pinning_backends: order_by
+  relblocknumber: order_by
+  relforknumber: order_by
+  usagecount: order_by
+}
+
+# aggregate stddev_pop on columns
+type pg_buffercache_stddev_pop_fields {
+  bufferid: Float
+  pinning_backends: Float
+  relblocknumber: Float
+  relforknumber: Float
+  usagecount: Float
+}
+
+# order by stddev_pop() on columns of table "pg_buffercache"
+input pg_buffercache_stddev_pop_order_by {
+  bufferid: order_by
+  pinning_backends: order_by
+  relblocknumber: order_by
+  relforknumber: order_by
+  usagecount: order_by
+}
+
+# aggregate stddev_samp on columns
+type pg_buffercache_stddev_samp_fields {
+  bufferid: Float
+  pinning_backends: Float
+  relblocknumber: Float
+  relforknumber: Float
+  usagecount: Float
+}
+
+# order by stddev_samp() on columns of table "pg_buffercache"
+input pg_buffercache_stddev_samp_order_by {
+  bufferid: order_by
+  pinning_backends: order_by
+  relblocknumber: order_by
+  relforknumber: order_by
+  usagecount: order_by
+}
+
+# aggregate sum on columns
+type pg_buffercache_sum_fields {
+  bufferid: Int
+  pinning_backends: Int
+  relblocknumber: bigint
+  relforknumber: smallint
+  usagecount: smallint
+}
+
+# order by sum() on columns of table "pg_buffercache"
+input pg_buffercache_sum_order_by {
+  bufferid: order_by
+  pinning_backends: order_by
+  relblocknumber: order_by
+  relforknumber: order_by
+  usagecount: order_by
+}
+
+# aggregate var_pop on columns
+type pg_buffercache_var_pop_fields {
+  bufferid: Float
+  pinning_backends: Float
+  relblocknumber: Float
+  relforknumber: Float
+  usagecount: Float
+}
+
+# order by var_pop() on columns of table "pg_buffercache"
+input pg_buffercache_var_pop_order_by {
+  bufferid: order_by
+  pinning_backends: order_by
+  relblocknumber: order_by
+  relforknumber: order_by
+  usagecount: order_by
+}
+
+# aggregate var_samp on columns
+type pg_buffercache_var_samp_fields {
+  bufferid: Float
+  pinning_backends: Float
+  relblocknumber: Float
+  relforknumber: Float
+  usagecount: Float
+}
+
+# order by var_samp() on columns of table "pg_buffercache"
+input pg_buffercache_var_samp_order_by {
+  bufferid: order_by
+  pinning_backends: order_by
+  relblocknumber: order_by
+  relforknumber: order_by
+  usagecount: order_by
+}
+
+# aggregate variance on columns
+type pg_buffercache_variance_fields {
+  bufferid: Float
+  pinning_backends: Float
+  relblocknumber: Float
+  relforknumber: Float
+  usagecount: Float
+}
+
+# order by variance() on columns of table "pg_buffercache"
+input pg_buffercache_variance_order_by {
+  bufferid: order_by
+  pinning_backends: order_by
+  relblocknumber: order_by
+  relforknumber: order_by
+  usagecount: order_by
+}
+
+# columns and relationships of "pg_stat_statements"
+type pg_stat_statements {
+  blk_read_time: float8
+  blk_write_time: float8
+  calls: bigint
+  dbid: oid
+  local_blks_dirtied: bigint
+  local_blks_hit: bigint
+  local_blks_read: bigint
+  local_blks_written: bigint
+  max_time: float8
+  mean_time: float8
+  min_time: float8
+  query: String
+  queryid: bigint
+  rows: bigint
+  shared_blks_dirtied: bigint
+  shared_blks_hit: bigint
+  shared_blks_read: bigint
+  shared_blks_written: bigint
+  stddev_time: float8
+  temp_blks_read: bigint
+  temp_blks_written: bigint
+  total_time: float8
+  userid: oid
+}
+
+# aggregated selection of "pg_stat_statements"
+type pg_stat_statements_aggregate {
+  aggregate: pg_stat_statements_aggregate_fields
+  nodes: [pg_stat_statements!]!
+}
+
+# aggregate fields of "pg_stat_statements"
+type pg_stat_statements_aggregate_fields {
+  avg: pg_stat_statements_avg_fields
+  count(columns: [pg_stat_statements_select_column!], distinct: Boolean): Int
+  max: pg_stat_statements_max_fields
+  min: pg_stat_statements_min_fields
+  stddev: pg_stat_statements_stddev_fields
+  stddev_pop: pg_stat_statements_stddev_pop_fields
+  stddev_samp: pg_stat_statements_stddev_samp_fields
+  sum: pg_stat_statements_sum_fields
+  var_pop: pg_stat_statements_var_pop_fields
+  var_samp: pg_stat_statements_var_samp_fields
+  variance: pg_stat_statements_variance_fields
+}
+
+# order by aggregate values of table "pg_stat_statements"
+input pg_stat_statements_aggregate_order_by {
+  avg: pg_stat_statements_avg_order_by
+  count: order_by
+  max: pg_stat_statements_max_order_by
+  min: pg_stat_statements_min_order_by
+  stddev: pg_stat_statements_stddev_order_by
+  stddev_pop: pg_stat_statements_stddev_pop_order_by
+  stddev_samp: pg_stat_statements_stddev_samp_order_by
+  sum: pg_stat_statements_sum_order_by
+  var_pop: pg_stat_statements_var_pop_order_by
+  var_samp: pg_stat_statements_var_samp_order_by
+  variance: pg_stat_statements_variance_order_by
+}
+
+# aggregate avg on columns
+type pg_stat_statements_avg_fields {
+  blk_read_time: Float
+  blk_write_time: Float
+  calls: Float
+  local_blks_dirtied: Float
+  local_blks_hit: Float
+  local_blks_read: Float
+  local_blks_written: Float
+  max_time: Float
+  mean_time: Float
+  min_time: Float
+  queryid: Float
+  rows: Float
+  shared_blks_dirtied: Float
+  shared_blks_hit: Float
+  shared_blks_read: Float
+  shared_blks_written: Float
+  stddev_time: Float
+  temp_blks_read: Float
+  temp_blks_written: Float
+  total_time: Float
+}
+
+# order by avg() on columns of table "pg_stat_statements"
+input pg_stat_statements_avg_order_by {
+  blk_read_time: order_by
+  blk_write_time: order_by
+  calls: order_by
+  local_blks_dirtied: order_by
+  local_blks_hit: order_by
+  local_blks_read: order_by
+  local_blks_written: order_by
+  max_time: order_by
+  mean_time: order_by
+  min_time: order_by
+  queryid: order_by
+  rows: order_by
+  shared_blks_dirtied: order_by
+  shared_blks_hit: order_by
+  shared_blks_read: order_by
+  shared_blks_written: order_by
+  stddev_time: order_by
+  temp_blks_read: order_by
+  temp_blks_written: order_by
+  total_time: order_by
+}
+
+# Boolean expression to filter rows from the table "pg_stat_statements". All fields are combined with a logical 'AND'.
+input pg_stat_statements_bool_exp {
+  _and: [pg_stat_statements_bool_exp]
+  _not: pg_stat_statements_bool_exp
+  _or: [pg_stat_statements_bool_exp]
+  blk_read_time: float8_comparison_exp
+  blk_write_time: float8_comparison_exp
+  calls: bigint_comparison_exp
+  dbid: oid_comparison_exp
+  local_blks_dirtied: bigint_comparison_exp
+  local_blks_hit: bigint_comparison_exp
+  local_blks_read: bigint_comparison_exp
+  local_blks_written: bigint_comparison_exp
+  max_time: float8_comparison_exp
+  mean_time: float8_comparison_exp
+  min_time: float8_comparison_exp
+  query: String_comparison_exp
+  queryid: bigint_comparison_exp
+  rows: bigint_comparison_exp
+  shared_blks_dirtied: bigint_comparison_exp
+  shared_blks_hit: bigint_comparison_exp
+  shared_blks_read: bigint_comparison_exp
+  shared_blks_written: bigint_comparison_exp
+  stddev_time: float8_comparison_exp
+  temp_blks_read: bigint_comparison_exp
+  temp_blks_written: bigint_comparison_exp
+  total_time: float8_comparison_exp
+  userid: oid_comparison_exp
+}
+
+# aggregate max on columns
+type pg_stat_statements_max_fields {
+  blk_read_time: float8
+  blk_write_time: float8
+  calls: bigint
+  local_blks_dirtied: bigint
+  local_blks_hit: bigint
+  local_blks_read: bigint
+  local_blks_written: bigint
+  max_time: float8
+  mean_time: float8
+  min_time: float8
+  query: String
+  queryid: bigint
+  rows: bigint
+  shared_blks_dirtied: bigint
+  shared_blks_hit: bigint
+  shared_blks_read: bigint
+  shared_blks_written: bigint
+  stddev_time: float8
+  temp_blks_read: bigint
+  temp_blks_written: bigint
+  total_time: float8
+}
+
+# order by max() on columns of table "pg_stat_statements"
+input pg_stat_statements_max_order_by {
+  blk_read_time: order_by
+  blk_write_time: order_by
+  calls: order_by
+  local_blks_dirtied: order_by
+  local_blks_hit: order_by
+  local_blks_read: order_by
+  local_blks_written: order_by
+  max_time: order_by
+  mean_time: order_by
+  min_time: order_by
+  query: order_by
+  queryid: order_by
+  rows: order_by
+  shared_blks_dirtied: order_by
+  shared_blks_hit: order_by
+  shared_blks_read: order_by
+  shared_blks_written: order_by
+  stddev_time: order_by
+  temp_blks_read: order_by
+  temp_blks_written: order_by
+  total_time: order_by
+}
+
+# aggregate min on columns
+type pg_stat_statements_min_fields {
+  blk_read_time: float8
+  blk_write_time: float8
+  calls: bigint
+  local_blks_dirtied: bigint
+  local_blks_hit: bigint
+  local_blks_read: bigint
+  local_blks_written: bigint
+  max_time: float8
+  mean_time: float8
+  min_time: float8
+  query: String
+  queryid: bigint
+  rows: bigint
+  shared_blks_dirtied: bigint
+  shared_blks_hit: bigint
+  shared_blks_read: bigint
+  shared_blks_written: bigint
+  stddev_time: float8
+  temp_blks_read: bigint
+  temp_blks_written: bigint
+  total_time: float8
+}
+
+# order by min() on columns of table "pg_stat_statements"
+input pg_stat_statements_min_order_by {
+  blk_read_time: order_by
+  blk_write_time: order_by
+  calls: order_by
+  local_blks_dirtied: order_by
+  local_blks_hit: order_by
+  local_blks_read: order_by
+  local_blks_written: order_by
+  max_time: order_by
+  mean_time: order_by
+  min_time: order_by
+  query: order_by
+  queryid: order_by
+  rows: order_by
+  shared_blks_dirtied: order_by
+  shared_blks_hit: order_by
+  shared_blks_read: order_by
+  shared_blks_written: order_by
+  stddev_time: order_by
+  temp_blks_read: order_by
+  temp_blks_written: order_by
+  total_time: order_by
+}
+
+# ordering options when selecting data from "pg_stat_statements"
+input pg_stat_statements_order_by {
+  blk_read_time: order_by
+  blk_write_time: order_by
+  calls: order_by
+  dbid: order_by
+  local_blks_dirtied: order_by
+  local_blks_hit: order_by
+  local_blks_read: order_by
+  local_blks_written: order_by
+  max_time: order_by
+  mean_time: order_by
+  min_time: order_by
+  query: order_by
+  queryid: order_by
+  rows: order_by
+  shared_blks_dirtied: order_by
+  shared_blks_hit: order_by
+  shared_blks_read: order_by
+  shared_blks_written: order_by
+  stddev_time: order_by
+  temp_blks_read: order_by
+  temp_blks_written: order_by
+  total_time: order_by
+  userid: order_by
+}
+
+# select columns of table "pg_stat_statements"
+enum pg_stat_statements_select_column {
+  # column name
+  blk_read_time
+
+  # column name
+  blk_write_time
+
+  # column name
+  calls
+
+  # column name
+  dbid
+
+  # column name
+  local_blks_dirtied
+
+  # column name
+  local_blks_hit
+
+  # column name
+  local_blks_read
+
+  # column name
+  local_blks_written
+
+  # column name
+  max_time
+
+  # column name
+  mean_time
+
+  # column name
+  min_time
+
+  # column name
+  query
+
+  # column name
+  queryid
+
+  # column name
+  rows
+
+  # column name
+  shared_blks_dirtied
+
+  # column name
+  shared_blks_hit
+
+  # column name
+  shared_blks_read
+
+  # column name
+  shared_blks_written
+
+  # column name
+  stddev_time
+
+  # column name
+  temp_blks_read
+
+  # column name
+  temp_blks_written
+
+  # column name
+  total_time
+
+  # column name
+  userid
+}
+
+# aggregate stddev on columns
+type pg_stat_statements_stddev_fields {
+  blk_read_time: Float
+  blk_write_time: Float
+  calls: Float
+  local_blks_dirtied: Float
+  local_blks_hit: Float
+  local_blks_read: Float
+  local_blks_written: Float
+  max_time: Float
+  mean_time: Float
+  min_time: Float
+  queryid: Float
+  rows: Float
+  shared_blks_dirtied: Float
+  shared_blks_hit: Float
+  shared_blks_read: Float
+  shared_blks_written: Float
+  stddev_time: Float
+  temp_blks_read: Float
+  temp_blks_written: Float
+  total_time: Float
+}
+
+# order by stddev() on columns of table "pg_stat_statements"
+input pg_stat_statements_stddev_order_by {
+  blk_read_time: order_by
+  blk_write_time: order_by
+  calls: order_by
+  local_blks_dirtied: order_by
+  local_blks_hit: order_by
+  local_blks_read: order_by
+  local_blks_written: order_by
+  max_time: order_by
+  mean_time: order_by
+  min_time: order_by
+  queryid: order_by
+  rows: order_by
+  shared_blks_dirtied: order_by
+  shared_blks_hit: order_by
+  shared_blks_read: order_by
+  shared_blks_written: order_by
+  stddev_time: order_by
+  temp_blks_read: order_by
+  temp_blks_written: order_by
+  total_time: order_by
+}
+
+# aggregate stddev_pop on columns
+type pg_stat_statements_stddev_pop_fields {
+  blk_read_time: Float
+  blk_write_time: Float
+  calls: Float
+  local_blks_dirtied: Float
+  local_blks_hit: Float
+  local_blks_read: Float
+  local_blks_written: Float
+  max_time: Float
+  mean_time: Float
+  min_time: Float
+  queryid: Float
+  rows: Float
+  shared_blks_dirtied: Float
+  shared_blks_hit: Float
+  shared_blks_read: Float
+  shared_blks_written: Float
+  stddev_time: Float
+  temp_blks_read: Float
+  temp_blks_written: Float
+  total_time: Float
+}
+
+# order by stddev_pop() on columns of table "pg_stat_statements"
+input pg_stat_statements_stddev_pop_order_by {
+  blk_read_time: order_by
+  blk_write_time: order_by
+  calls: order_by
+  local_blks_dirtied: order_by
+  local_blks_hit: order_by
+  local_blks_read: order_by
+  local_blks_written: order_by
+  max_time: order_by
+  mean_time: order_by
+  min_time: order_by
+  queryid: order_by
+  rows: order_by
+  shared_blks_dirtied: order_by
+  shared_blks_hit: order_by
+  shared_blks_read: order_by
+  shared_blks_written: order_by
+  stddev_time: order_by
+  temp_blks_read: order_by
+  temp_blks_written: order_by
+  total_time: order_by
+}
+
+# aggregate stddev_samp on columns
+type pg_stat_statements_stddev_samp_fields {
+  blk_read_time: Float
+  blk_write_time: Float
+  calls: Float
+  local_blks_dirtied: Float
+  local_blks_hit: Float
+  local_blks_read: Float
+  local_blks_written: Float
+  max_time: Float
+  mean_time: Float
+  min_time: Float
+  queryid: Float
+  rows: Float
+  shared_blks_dirtied: Float
+  shared_blks_hit: Float
+  shared_blks_read: Float
+  shared_blks_written: Float
+  stddev_time: Float
+  temp_blks_read: Float
+  temp_blks_written: Float
+  total_time: Float
+}
+
+# order by stddev_samp() on columns of table "pg_stat_statements"
+input pg_stat_statements_stddev_samp_order_by {
+  blk_read_time: order_by
+  blk_write_time: order_by
+  calls: order_by
+  local_blks_dirtied: order_by
+  local_blks_hit: order_by
+  local_blks_read: order_by
+  local_blks_written: order_by
+  max_time: order_by
+  mean_time: order_by
+  min_time: order_by
+  queryid: order_by
+  rows: order_by
+  shared_blks_dirtied: order_by
+  shared_blks_hit: order_by
+  shared_blks_read: order_by
+  shared_blks_written: order_by
+  stddev_time: order_by
+  temp_blks_read: order_by
+  temp_blks_written: order_by
+  total_time: order_by
+}
+
+# aggregate sum on columns
+type pg_stat_statements_sum_fields {
+  blk_read_time: float8
+  blk_write_time: float8
+  calls: bigint
+  local_blks_dirtied: bigint
+  local_blks_hit: bigint
+  local_blks_read: bigint
+  local_blks_written: bigint
+  max_time: float8
+  mean_time: float8
+  min_time: float8
+  queryid: bigint
+  rows: bigint
+  shared_blks_dirtied: bigint
+  shared_blks_hit: bigint
+  shared_blks_read: bigint
+  shared_blks_written: bigint
+  stddev_time: float8
+  temp_blks_read: bigint
+  temp_blks_written: bigint
+  total_time: float8
+}
+
+# order by sum() on columns of table "pg_stat_statements"
+input pg_stat_statements_sum_order_by {
+  blk_read_time: order_by
+  blk_write_time: order_by
+  calls: order_by
+  local_blks_dirtied: order_by
+  local_blks_hit: order_by
+  local_blks_read: order_by
+  local_blks_written: order_by
+  max_time: order_by
+  mean_time: order_by
+  min_time: order_by
+  queryid: order_by
+  rows: order_by
+  shared_blks_dirtied: order_by
+  shared_blks_hit: order_by
+  shared_blks_read: order_by
+  shared_blks_written: order_by
+  stddev_time: order_by
+  temp_blks_read: order_by
+  temp_blks_written: order_by
+  total_time: order_by
+}
+
+# aggregate var_pop on columns
+type pg_stat_statements_var_pop_fields {
+  blk_read_time: Float
+  blk_write_time: Float
+  calls: Float
+  local_blks_dirtied: Float
+  local_blks_hit: Float
+  local_blks_read: Float
+  local_blks_written: Float
+  max_time: Float
+  mean_time: Float
+  min_time: Float
+  queryid: Float
+  rows: Float
+  shared_blks_dirtied: Float
+  shared_blks_hit: Float
+  shared_blks_read: Float
+  shared_blks_written: Float
+  stddev_time: Float
+  temp_blks_read: Float
+  temp_blks_written: Float
+  total_time: Float
+}
+
+# order by var_pop() on columns of table "pg_stat_statements"
+input pg_stat_statements_var_pop_order_by {
+  blk_read_time: order_by
+  blk_write_time: order_by
+  calls: order_by
+  local_blks_dirtied: order_by
+  local_blks_hit: order_by
+  local_blks_read: order_by
+  local_blks_written: order_by
+  max_time: order_by
+  mean_time: order_by
+  min_time: order_by
+  queryid: order_by
+  rows: order_by
+  shared_blks_dirtied: order_by
+  shared_blks_hit: order_by
+  shared_blks_read: order_by
+  shared_blks_written: order_by
+  stddev_time: order_by
+  temp_blks_read: order_by
+  temp_blks_written: order_by
+  total_time: order_by
+}
+
+# aggregate var_samp on columns
+type pg_stat_statements_var_samp_fields {
+  blk_read_time: Float
+  blk_write_time: Float
+  calls: Float
+  local_blks_dirtied: Float
+  local_blks_hit: Float
+  local_blks_read: Float
+  local_blks_written: Float
+  max_time: Float
+  mean_time: Float
+  min_time: Float
+  queryid: Float
+  rows: Float
+  shared_blks_dirtied: Float
+  shared_blks_hit: Float
+  shared_blks_read: Float
+  shared_blks_written: Float
+  stddev_time: Float
+  temp_blks_read: Float
+  temp_blks_written: Float
+  total_time: Float
+}
+
+# order by var_samp() on columns of table "pg_stat_statements"
+input pg_stat_statements_var_samp_order_by {
+  blk_read_time: order_by
+  blk_write_time: order_by
+  calls: order_by
+  local_blks_dirtied: order_by
+  local_blks_hit: order_by
+  local_blks_read: order_by
+  local_blks_written: order_by
+  max_time: order_by
+  mean_time: order_by
+  min_time: order_by
+  queryid: order_by
+  rows: order_by
+  shared_blks_dirtied: order_by
+  shared_blks_hit: order_by
+  shared_blks_read: order_by
+  shared_blks_written: order_by
+  stddev_time: order_by
+  temp_blks_read: order_by
+  temp_blks_written: order_by
+  total_time: order_by
+}
+
+# aggregate variance on columns
+type pg_stat_statements_variance_fields {
+  blk_read_time: Float
+  blk_write_time: Float
+  calls: Float
+  local_blks_dirtied: Float
+  local_blks_hit: Float
+  local_blks_read: Float
+  local_blks_written: Float
+  max_time: Float
+  mean_time: Float
+  min_time: Float
+  queryid: Float
+  rows: Float
+  shared_blks_dirtied: Float
+  shared_blks_hit: Float
+  shared_blks_read: Float
+  shared_blks_written: Float
+  stddev_time: Float
+  temp_blks_read: Float
+  temp_blks_written: Float
+  total_time: Float
+}
+
+# order by variance() on columns of table "pg_stat_statements"
+input pg_stat_statements_variance_order_by {
+  blk_read_time: order_by
+  blk_write_time: order_by
+  calls: order_by
+  local_blks_dirtied: order_by
+  local_blks_hit: order_by
+  local_blks_read: order_by
+  local_blks_written: order_by
+  max_time: order_by
+  mean_time: order_by
+  min_time: order_by
+  queryid: order_by
+  rows: order_by
+  shared_blks_dirtied: order_by
+  shared_blks_hit: order_by
+  shared_blks_read: order_by
+  shared_blks_written: order_by
+  stddev_time: order_by
+  temp_blks_read: order_by
+  temp_blks_written: order_by
+  total_time: order_by
+}
+
+# columns and relationships of "policy_factory_create"
+type policy_factory_create {
+  block_number: Int!
+  event_id: String!
+  from_address: String!
+  inner_policy: String!
+  log_index: Int!
+  policy_address: String!
+  raw_data: String!
+  transaction_index: Int!
+}
+
+# aggregated selection of "policy_factory_create"
+type policy_factory_create_aggregate {
+  aggregate: policy_factory_create_aggregate_fields
+  nodes: [policy_factory_create!]!
+}
+
+# aggregate fields of "policy_factory_create"
+type policy_factory_create_aggregate_fields {
+  avg: policy_factory_create_avg_fields
+  count(columns: [policy_factory_create_select_column!], distinct: Boolean): Int
+  max: policy_factory_create_max_fields
+  min: policy_factory_create_min_fields
+  stddev: policy_factory_create_stddev_fields
+  stddev_pop: policy_factory_create_stddev_pop_fields
+  stddev_samp: policy_factory_create_stddev_samp_fields
+  sum: policy_factory_create_sum_fields
+  var_pop: policy_factory_create_var_pop_fields
+  var_samp: policy_factory_create_var_samp_fields
+  variance: policy_factory_create_variance_fields
+}
+
+# order by aggregate values of table "policy_factory_create"
+input policy_factory_create_aggregate_order_by {
+  avg: policy_factory_create_avg_order_by
+  count: order_by
+  max: policy_factory_create_max_order_by
+  min: policy_factory_create_min_order_by
+  stddev: policy_factory_create_stddev_order_by
+  stddev_pop: policy_factory_create_stddev_pop_order_by
+  stddev_samp: policy_factory_create_stddev_samp_order_by
+  sum: policy_factory_create_sum_order_by
+  var_pop: policy_factory_create_var_pop_order_by
+  var_samp: policy_factory_create_var_samp_order_by
+  variance: policy_factory_create_variance_order_by
+}
+
+# input type for inserting array relation for remote table "policy_factory_create"
+input policy_factory_create_arr_rel_insert_input {
+  data: [policy_factory_create_insert_input!]!
+  on_conflict: policy_factory_create_on_conflict
+}
+
+# aggregate avg on columns
+type policy_factory_create_avg_fields {
+  block_number: Float
+  log_index: Float
+  transaction_index: Float
+}
+
+# order by avg() on columns of table "policy_factory_create"
+input policy_factory_create_avg_order_by {
+  block_number: order_by
+  log_index: order_by
+  transaction_index: order_by
+}
+
+# Boolean expression to filter rows from the table "policy_factory_create". All fields are combined with a logical 'AND'.
+input policy_factory_create_bool_exp {
+  _and: [policy_factory_create_bool_exp]
+  _not: policy_factory_create_bool_exp
+  _or: [policy_factory_create_bool_exp]
+  block_number: Int_comparison_exp
+  event_id: String_comparison_exp
+  from_address: String_comparison_exp
+  inner_policy: String_comparison_exp
+  log_index: Int_comparison_exp
+  policy_address: String_comparison_exp
+  raw_data: String_comparison_exp
+  transaction_index: Int_comparison_exp
+}
+
+# unique or primary key constraints on table "policy_factory_create"
+enum policy_factory_create_constraint {
+  # unique or primary key constraint
+  policy_factory_create_pkey
+}
+
+# input type for incrementing integer columne in table "policy_factory_create"
+input policy_factory_create_inc_input {
+  block_number: Int
+  log_index: Int
+  transaction_index: Int
+}
+
+# input type for inserting data into table "policy_factory_create"
+input policy_factory_create_insert_input {
+  block_number: Int
+  event_id: String
+  from_address: String
+  inner_policy: String
+  log_index: Int
+  policy_address: String
+  raw_data: String
+  transaction_index: Int
+}
+
+# aggregate max on columns
+type policy_factory_create_max_fields {
+  block_number: Int
+  event_id: String
+  from_address: String
+  inner_policy: String
+  log_index: Int
+  policy_address: String
+  raw_data: String
+  transaction_index: Int
+}
+
+# order by max() on columns of table "policy_factory_create"
+input policy_factory_create_max_order_by {
+  block_number: order_by
+  event_id: order_by
+  from_address: order_by
+  inner_policy: order_by
+  log_index: order_by
+  policy_address: order_by
+  raw_data: order_by
+  transaction_index: order_by
+}
+
+# aggregate min on columns
+type policy_factory_create_min_fields {
+  block_number: Int
+  event_id: String
+  from_address: String
+  inner_policy: String
+  log_index: Int
+  policy_address: String
+  raw_data: String
+  transaction_index: Int
+}
+
+# order by min() on columns of table "policy_factory_create"
+input policy_factory_create_min_order_by {
+  block_number: order_by
+  event_id: order_by
+  from_address: order_by
+  inner_policy: order_by
+  log_index: order_by
+  policy_address: order_by
+  raw_data: order_by
+  transaction_index: order_by
+}
+
+# response of any mutation on the table "policy_factory_create"
+type policy_factory_create_mutation_response {
+  # number of affected rows by the mutation
+  affected_rows: Int!
+
+  # data of the affected rows by the mutation
+  returning: [policy_factory_create!]!
+}
+
+# input type for inserting object relation for remote table "policy_factory_create"
+input policy_factory_create_obj_rel_insert_input {
+  data: policy_factory_create_insert_input!
+  on_conflict: policy_factory_create_on_conflict
+}
+
+# on conflict condition type for table "policy_factory_create"
+input policy_factory_create_on_conflict {
+  constraint: policy_factory_create_constraint!
+  update_columns: [policy_factory_create_update_column!]!
+  where: policy_factory_create_bool_exp
+}
+
+# ordering options when selecting data from "policy_factory_create"
+input policy_factory_create_order_by {
+  block_number: order_by
+  event_id: order_by
+  from_address: order_by
+  inner_policy: order_by
+  log_index: order_by
+  policy_address: order_by
+  raw_data: order_by
+  transaction_index: order_by
+}
+
+# select columns of table "policy_factory_create"
+enum policy_factory_create_select_column {
+  # column name
+  block_number
+
+  # column name
+  event_id
+
+  # column name
+  from_address
+
+  # column name
+  inner_policy
+
+  # column name
+  log_index
+
+  # column name
+  policy_address
+
+  # column name
+  raw_data
+
+  # column name
+  transaction_index
+}
+
+# input type for updating data in table "policy_factory_create"
+input policy_factory_create_set_input {
+  block_number: Int
+  event_id: String
+  from_address: String
+  inner_policy: String
+  log_index: Int
+  policy_address: String
+  raw_data: String
+  transaction_index: Int
+}
+
+# aggregate stddev on columns
+type policy_factory_create_stddev_fields {
+  block_number: Float
+  log_index: Float
+  transaction_index: Float
+}
+
+# order by stddev() on columns of table "policy_factory_create"
+input policy_factory_create_stddev_order_by {
+  block_number: order_by
+  log_index: order_by
+  transaction_index: order_by
+}
+
+# aggregate stddev_pop on columns
+type policy_factory_create_stddev_pop_fields {
+  block_number: Float
+  log_index: Float
+  transaction_index: Float
+}
+
+# order by stddev_pop() on columns of table "policy_factory_create"
+input policy_factory_create_stddev_pop_order_by {
+  block_number: order_by
+  log_index: order_by
+  transaction_index: order_by
+}
+
+# aggregate stddev_samp on columns
+type policy_factory_create_stddev_samp_fields {
+  block_number: Float
+  log_index: Float
+  transaction_index: Float
+}
+
+# order by stddev_samp() on columns of table "policy_factory_create"
+input policy_factory_create_stddev_samp_order_by {
+  block_number: order_by
+  log_index: order_by
+  transaction_index: order_by
+}
+
+# aggregate sum on columns
+type policy_factory_create_sum_fields {
+  block_number: Int
+  log_index: Int
+  transaction_index: Int
+}
+
+# order by sum() on columns of table "policy_factory_create"
+input policy_factory_create_sum_order_by {
+  block_number: order_by
+  log_index: order_by
+  transaction_index: order_by
+}
+
+# update columns of table "policy_factory_create"
+enum policy_factory_create_update_column {
+  # column name
+  block_number
+
+  # column name
+  event_id
+
+  # column name
+  from_address
+
+  # column name
+  inner_policy
+
+  # column name
+  log_index
+
+  # column name
+  policy_address
+
+  # column name
+  raw_data
+
+  # column name
+  transaction_index
+}
+
+# aggregate var_pop on columns
+type policy_factory_create_var_pop_fields {
+  block_number: Float
+  log_index: Float
+  transaction_index: Float
+}
+
+# order by var_pop() on columns of table "policy_factory_create"
+input policy_factory_create_var_pop_order_by {
+  block_number: order_by
+  log_index: order_by
+  transaction_index: order_by
+}
+
+# aggregate var_samp on columns
+type policy_factory_create_var_samp_fields {
+  block_number: Float
+  log_index: Float
+  transaction_index: Float
+}
+
+# order by var_samp() on columns of table "policy_factory_create"
+input policy_factory_create_var_samp_order_by {
+  block_number: order_by
+  log_index: order_by
+  transaction_index: order_by
+}
+
+# aggregate variance on columns
+type policy_factory_create_variance_fields {
+  block_number: Float
+  log_index: Float
+  transaction_index: Float
+}
+
+# order by variance() on columns of table "policy_factory_create"
+input policy_factory_create_variance_order_by {
+  block_number: order_by
+  log_index: order_by
+  transaction_index: order_by
+}
+
+# columns and relationships of "property_factory_create"
+type property_factory_create {
+  block_number: Int!
+  event_id: String!
+  from_address: String!
+  log_index: Int!
+  property: String!
+  raw_data: String!
+  transaction_index: Int!
+}
+
+# aggregated selection of "property_factory_create"
+type property_factory_create_aggregate {
+  aggregate: property_factory_create_aggregate_fields
+  nodes: [property_factory_create!]!
+}
+
+# aggregate fields of "property_factory_create"
+type property_factory_create_aggregate_fields {
+  avg: property_factory_create_avg_fields
+  count(columns: [property_factory_create_select_column!], distinct: Boolean): Int
+  max: property_factory_create_max_fields
+  min: property_factory_create_min_fields
+  stddev: property_factory_create_stddev_fields
+  stddev_pop: property_factory_create_stddev_pop_fields
+  stddev_samp: property_factory_create_stddev_samp_fields
+  sum: property_factory_create_sum_fields
+  var_pop: property_factory_create_var_pop_fields
+  var_samp: property_factory_create_var_samp_fields
+  variance: property_factory_create_variance_fields
+}
+
+# order by aggregate values of table "property_factory_create"
+input property_factory_create_aggregate_order_by {
+  avg: property_factory_create_avg_order_by
+  count: order_by
+  max: property_factory_create_max_order_by
+  min: property_factory_create_min_order_by
+  stddev: property_factory_create_stddev_order_by
+  stddev_pop: property_factory_create_stddev_pop_order_by
+  stddev_samp: property_factory_create_stddev_samp_order_by
+  sum: property_factory_create_sum_order_by
+  var_pop: property_factory_create_var_pop_order_by
+  var_samp: property_factory_create_var_samp_order_by
+  variance: property_factory_create_variance_order_by
+}
+
+# input type for inserting array relation for remote table "property_factory_create"
+input property_factory_create_arr_rel_insert_input {
+  data: [property_factory_create_insert_input!]!
+  on_conflict: property_factory_create_on_conflict
+}
+
+# aggregate avg on columns
+type property_factory_create_avg_fields {
+  block_number: Float
+  log_index: Float
+  transaction_index: Float
+}
+
+# order by avg() on columns of table "property_factory_create"
+input property_factory_create_avg_order_by {
+  block_number: order_by
+  log_index: order_by
+  transaction_index: order_by
+}
+
+# Boolean expression to filter rows from the table "property_factory_create". All fields are combined with a logical 'AND'.
+input property_factory_create_bool_exp {
+  _and: [property_factory_create_bool_exp]
+  _not: property_factory_create_bool_exp
+  _or: [property_factory_create_bool_exp]
+  block_number: Int_comparison_exp
+  event_id: String_comparison_exp
+  from_address: String_comparison_exp
+  log_index: Int_comparison_exp
+  property: String_comparison_exp
+  raw_data: String_comparison_exp
+  transaction_index: Int_comparison_exp
+}
+
+# unique or primary key constraints on table "property_factory_create"
+enum property_factory_create_constraint {
+  # unique or primary key constraint
+  property_factory_create_pkey
+}
+
+# input type for incrementing integer columne in table "property_factory_create"
+input property_factory_create_inc_input {
+  block_number: Int
+  log_index: Int
+  transaction_index: Int
+}
+
+# input type for inserting data into table "property_factory_create"
+input property_factory_create_insert_input {
+  block_number: Int
+  event_id: String
+  from_address: String
+  log_index: Int
+  property: String
+  raw_data: String
+  transaction_index: Int
+}
+
+# aggregate max on columns
+type property_factory_create_max_fields {
+  block_number: Int
+  event_id: String
+  from_address: String
+  log_index: Int
+  property: String
+  raw_data: String
+  transaction_index: Int
+}
+
+# order by max() on columns of table "property_factory_create"
+input property_factory_create_max_order_by {
+  block_number: order_by
+  event_id: order_by
+  from_address: order_by
+  log_index: order_by
+  property: order_by
+  raw_data: order_by
+  transaction_index: order_by
+}
+
+# aggregate min on columns
+type property_factory_create_min_fields {
+  block_number: Int
+  event_id: String
+  from_address: String
+  log_index: Int
+  property: String
+  raw_data: String
+  transaction_index: Int
+}
+
+# order by min() on columns of table "property_factory_create"
+input property_factory_create_min_order_by {
+  block_number: order_by
+  event_id: order_by
+  from_address: order_by
+  log_index: order_by
+  property: order_by
+  raw_data: order_by
+  transaction_index: order_by
+}
+
+# response of any mutation on the table "property_factory_create"
+type property_factory_create_mutation_response {
+  # number of affected rows by the mutation
+  affected_rows: Int!
+
+  # data of the affected rows by the mutation
+  returning: [property_factory_create!]!
+}
+
+# input type for inserting object relation for remote table "property_factory_create"
+input property_factory_create_obj_rel_insert_input {
+  data: property_factory_create_insert_input!
+  on_conflict: property_factory_create_on_conflict
+}
+
+# on conflict condition type for table "property_factory_create"
+input property_factory_create_on_conflict {
+  constraint: property_factory_create_constraint!
+  update_columns: [property_factory_create_update_column!]!
+  where: property_factory_create_bool_exp
+}
+
+# ordering options when selecting data from "property_factory_create"
+input property_factory_create_order_by {
+  block_number: order_by
+  event_id: order_by
+  from_address: order_by
+  log_index: order_by
+  property: order_by
+  raw_data: order_by
+  transaction_index: order_by
+}
+
+# select columns of table "property_factory_create"
+enum property_factory_create_select_column {
+  # column name
+  block_number
+
+  # column name
+  event_id
+
+  # column name
+  from_address
+
+  # column name
+  log_index
+
+  # column name
+  property
+
+  # column name
+  raw_data
+
+  # column name
+  transaction_index
+}
+
+# input type for updating data in table "property_factory_create"
+input property_factory_create_set_input {
+  block_number: Int
+  event_id: String
+  from_address: String
+  log_index: Int
+  property: String
+  raw_data: String
+  transaction_index: Int
+}
+
+# aggregate stddev on columns
+type property_factory_create_stddev_fields {
+  block_number: Float
+  log_index: Float
+  transaction_index: Float
+}
+
+# order by stddev() on columns of table "property_factory_create"
+input property_factory_create_stddev_order_by {
+  block_number: order_by
+  log_index: order_by
+  transaction_index: order_by
+}
+
+# aggregate stddev_pop on columns
+type property_factory_create_stddev_pop_fields {
+  block_number: Float
+  log_index: Float
+  transaction_index: Float
+}
+
+# order by stddev_pop() on columns of table "property_factory_create"
+input property_factory_create_stddev_pop_order_by {
+  block_number: order_by
+  log_index: order_by
+  transaction_index: order_by
+}
+
+# aggregate stddev_samp on columns
+type property_factory_create_stddev_samp_fields {
+  block_number: Float
+  log_index: Float
+  transaction_index: Float
+}
+
+# order by stddev_samp() on columns of table "property_factory_create"
+input property_factory_create_stddev_samp_order_by {
+  block_number: order_by
+  log_index: order_by
+  transaction_index: order_by
+}
+
+# aggregate sum on columns
+type property_factory_create_sum_fields {
+  block_number: Int
+  log_index: Int
+  transaction_index: Int
+}
+
+# order by sum() on columns of table "property_factory_create"
+input property_factory_create_sum_order_by {
+  block_number: order_by
+  log_index: order_by
+  transaction_index: order_by
+}
+
+# update columns of table "property_factory_create"
+enum property_factory_create_update_column {
+  # column name
+  block_number
+
+  # column name
+  event_id
+
+  # column name
+  from_address
+
+  # column name
+  log_index
+
+  # column name
+  property
+
+  # column name
+  raw_data
+
+  # column name
+  transaction_index
+}
+
+# aggregate var_pop on columns
+type property_factory_create_var_pop_fields {
+  block_number: Float
+  log_index: Float
+  transaction_index: Float
+}
+
+# order by var_pop() on columns of table "property_factory_create"
+input property_factory_create_var_pop_order_by {
+  block_number: order_by
+  log_index: order_by
+  transaction_index: order_by
+}
+
+# aggregate var_samp on columns
+type property_factory_create_var_samp_fields {
+  block_number: Float
+  log_index: Float
+  transaction_index: Float
+}
+
+# order by var_samp() on columns of table "property_factory_create"
+input property_factory_create_var_samp_order_by {
+  block_number: order_by
+  log_index: order_by
+  transaction_index: order_by
+}
+
+# aggregate variance on columns
+type property_factory_create_variance_fields {
+  block_number: Float
+  log_index: Float
+  transaction_index: Float
+}
+
+# order by variance() on columns of table "property_factory_create"
+input property_factory_create_variance_order_by {
+  block_number: order_by
+  log_index: order_by
+  transaction_index: order_by
+}
+
+# query root
+type query_root {
+  # fetch data from the table: "allocator_allocation_result"
+  allocator_allocation_result(
+    # distinct select on columns
+    distinct_on: [allocator_allocation_result_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [allocator_allocation_result_order_by!]
+
+    # filter the rows returned
+    where: allocator_allocation_result_bool_exp
+  ): [allocator_allocation_result!]!
+
+  # fetch aggregated fields from the table: "allocator_allocation_result"
+  allocator_allocation_result_aggregate(
+    # distinct select on columns
+    distinct_on: [allocator_allocation_result_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [allocator_allocation_result_order_by!]
+
+    # filter the rows returned
+    where: allocator_allocation_result_bool_exp
+  ): allocator_allocation_result_aggregate!
+
+  # fetch data from the table: "allocator_allocation_result" using primary key columns
+  allocator_allocation_result_by_pk(event_id: String!): allocator_allocation_result
+
+  # fetch data from the table: "allocator_before_allocation"
+  allocator_before_allocation(
+    # distinct select on columns
+    distinct_on: [allocator_before_allocation_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [allocator_before_allocation_order_by!]
+
+    # filter the rows returned
+    where: allocator_before_allocation_bool_exp
+  ): [allocator_before_allocation!]!
+
+  # fetch aggregated fields from the table: "allocator_before_allocation"
+  allocator_before_allocation_aggregate(
+    # distinct select on columns
+    distinct_on: [allocator_before_allocation_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [allocator_before_allocation_order_by!]
+
+    # filter the rows returned
+    where: allocator_before_allocation_bool_exp
+  ): allocator_before_allocation_aggregate!
+
+  # fetch data from the table: "allocator_before_allocation" using primary key columns
+  allocator_before_allocation_by_pk(event_id: String!): allocator_before_allocation
+
+  # fetch data from the table: "lockup_lockedup"
+  lockup_lockedup(
+    # distinct select on columns
+    distinct_on: [lockup_lockedup_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [lockup_lockedup_order_by!]
+
+    # filter the rows returned
+    where: lockup_lockedup_bool_exp
+  ): [lockup_lockedup!]!
+
+  # fetch aggregated fields from the table: "lockup_lockedup"
+  lockup_lockedup_aggregate(
+    # distinct select on columns
+    distinct_on: [lockup_lockedup_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [lockup_lockedup_order_by!]
+
+    # filter the rows returned
+    where: lockup_lockedup_bool_exp
+  ): lockup_lockedup_aggregate!
+
+  # fetch data from the table: "lockup_lockedup" using primary key columns
+  lockup_lockedup_by_pk(event_id: String!): lockup_lockedup
+
+  # fetch data from the table: "market_factory_create"
+  market_factory_create(
+    # distinct select on columns
+    distinct_on: [market_factory_create_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [market_factory_create_order_by!]
+
+    # filter the rows returned
+    where: market_factory_create_bool_exp
+  ): [market_factory_create!]!
+
+  # fetch aggregated fields from the table: "market_factory_create"
+  market_factory_create_aggregate(
+    # distinct select on columns
+    distinct_on: [market_factory_create_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [market_factory_create_order_by!]
+
+    # filter the rows returned
+    where: market_factory_create_bool_exp
+  ): market_factory_create_aggregate!
+
+  # fetch data from the table: "market_factory_create" using primary key columns
+  market_factory_create_by_pk(event_id: String!): market_factory_create
+
+  # fetch data from the table: "metrics_factory_create"
+  metrics_factory_create(
+    # distinct select on columns
+    distinct_on: [metrics_factory_create_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [metrics_factory_create_order_by!]
+
+    # filter the rows returned
+    where: metrics_factory_create_bool_exp
+  ): [metrics_factory_create!]!
+
+  # fetch aggregated fields from the table: "metrics_factory_create"
+  metrics_factory_create_aggregate(
+    # distinct select on columns
+    distinct_on: [metrics_factory_create_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [metrics_factory_create_order_by!]
+
+    # filter the rows returned
+    where: metrics_factory_create_bool_exp
+  ): metrics_factory_create_aggregate!
+
+  # fetch data from the table: "metrics_factory_create" using primary key columns
+  metrics_factory_create_by_pk(event_id: String!): metrics_factory_create
+
+  # fetch data from the table: "pg_buffercache"
+  pg_buffercache(
+    # distinct select on columns
+    distinct_on: [pg_buffercache_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [pg_buffercache_order_by!]
+
+    # filter the rows returned
+    where: pg_buffercache_bool_exp
+  ): [pg_buffercache!]!
+
+  # fetch aggregated fields from the table: "pg_buffercache"
+  pg_buffercache_aggregate(
+    # distinct select on columns
+    distinct_on: [pg_buffercache_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [pg_buffercache_order_by!]
+
+    # filter the rows returned
+    where: pg_buffercache_bool_exp
+  ): pg_buffercache_aggregate!
+
+  # fetch data from the table: "pg_stat_statements"
+  pg_stat_statements(
+    # distinct select on columns
+    distinct_on: [pg_stat_statements_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [pg_stat_statements_order_by!]
+
+    # filter the rows returned
+    where: pg_stat_statements_bool_exp
+  ): [pg_stat_statements!]!
+
+  # fetch aggregated fields from the table: "pg_stat_statements"
+  pg_stat_statements_aggregate(
+    # distinct select on columns
+    distinct_on: [pg_stat_statements_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [pg_stat_statements_order_by!]
+
+    # filter the rows returned
+    where: pg_stat_statements_bool_exp
+  ): pg_stat_statements_aggregate!
+
+  # fetch data from the table: "policy_factory_create"
+  policy_factory_create(
+    # distinct select on columns
+    distinct_on: [policy_factory_create_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [policy_factory_create_order_by!]
+
+    # filter the rows returned
+    where: policy_factory_create_bool_exp
+  ): [policy_factory_create!]!
+
+  # fetch aggregated fields from the table: "policy_factory_create"
+  policy_factory_create_aggregate(
+    # distinct select on columns
+    distinct_on: [policy_factory_create_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [policy_factory_create_order_by!]
+
+    # filter the rows returned
+    where: policy_factory_create_bool_exp
+  ): policy_factory_create_aggregate!
+
+  # fetch data from the table: "policy_factory_create" using primary key columns
+  policy_factory_create_by_pk(event_id: String!): policy_factory_create
+
+  # fetch data from the table: "property_factory_create"
+  property_factory_create(
+    # distinct select on columns
+    distinct_on: [property_factory_create_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [property_factory_create_order_by!]
+
+    # filter the rows returned
+    where: property_factory_create_bool_exp
+  ): [property_factory_create!]!
+
+  # fetch aggregated fields from the table: "property_factory_create"
+  property_factory_create_aggregate(
+    # distinct select on columns
+    distinct_on: [property_factory_create_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [property_factory_create_order_by!]
+
+    # filter the rows returned
+    where: property_factory_create_bool_exp
+  ): property_factory_create_aggregate!
+
+  # fetch data from the table: "property_factory_create" using primary key columns
+  property_factory_create_by_pk(event_id: String!): property_factory_create
+}
+
+scalar smallint
+
+# expression to compare columns of type smallint. All fields are combined with logical 'AND'.
+input smallint_comparison_exp {
+  _eq: smallint
+  _gt: smallint
+  _gte: smallint
+  _in: [smallint!]
+  _is_null: Boolean
+  _lt: smallint
+  _lte: smallint
+  _neq: smallint
+  _nin: [smallint!]
+}
+
+# expression to compare columns of type String. All fields are combined with logical 'AND'.
+input String_comparison_exp {
+  _eq: String
+  _gt: String
+  _gte: String
+  _ilike: String
+  _in: [String!]
+  _is_null: Boolean
+  _like: String
+  _lt: String
+  _lte: String
+  _neq: String
+  _nilike: String
+  _nin: [String!]
+  _nlike: String
+  _nsimilar: String
+  _similar: String
+}
+
+# subscription root
+type subscription_root {
+  # fetch data from the table: "allocator_allocation_result"
+  allocator_allocation_result(
+    # distinct select on columns
+    distinct_on: [allocator_allocation_result_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [allocator_allocation_result_order_by!]
+
+    # filter the rows returned
+    where: allocator_allocation_result_bool_exp
+  ): [allocator_allocation_result!]!
+
+  # fetch aggregated fields from the table: "allocator_allocation_result"
+  allocator_allocation_result_aggregate(
+    # distinct select on columns
+    distinct_on: [allocator_allocation_result_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [allocator_allocation_result_order_by!]
+
+    # filter the rows returned
+    where: allocator_allocation_result_bool_exp
+  ): allocator_allocation_result_aggregate!
+
+  # fetch data from the table: "allocator_allocation_result" using primary key columns
+  allocator_allocation_result_by_pk(event_id: String!): allocator_allocation_result
+
+  # fetch data from the table: "allocator_before_allocation"
+  allocator_before_allocation(
+    # distinct select on columns
+    distinct_on: [allocator_before_allocation_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [allocator_before_allocation_order_by!]
+
+    # filter the rows returned
+    where: allocator_before_allocation_bool_exp
+  ): [allocator_before_allocation!]!
+
+  # fetch aggregated fields from the table: "allocator_before_allocation"
+  allocator_before_allocation_aggregate(
+    # distinct select on columns
+    distinct_on: [allocator_before_allocation_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [allocator_before_allocation_order_by!]
+
+    # filter the rows returned
+    where: allocator_before_allocation_bool_exp
+  ): allocator_before_allocation_aggregate!
+
+  # fetch data from the table: "allocator_before_allocation" using primary key columns
+  allocator_before_allocation_by_pk(event_id: String!): allocator_before_allocation
+
+  # fetch data from the table: "lockup_lockedup"
+  lockup_lockedup(
+    # distinct select on columns
+    distinct_on: [lockup_lockedup_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [lockup_lockedup_order_by!]
+
+    # filter the rows returned
+    where: lockup_lockedup_bool_exp
+  ): [lockup_lockedup!]!
+
+  # fetch aggregated fields from the table: "lockup_lockedup"
+  lockup_lockedup_aggregate(
+    # distinct select on columns
+    distinct_on: [lockup_lockedup_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [lockup_lockedup_order_by!]
+
+    # filter the rows returned
+    where: lockup_lockedup_bool_exp
+  ): lockup_lockedup_aggregate!
+
+  # fetch data from the table: "lockup_lockedup" using primary key columns
+  lockup_lockedup_by_pk(event_id: String!): lockup_lockedup
+
+  # fetch data from the table: "market_factory_create"
+  market_factory_create(
+    # distinct select on columns
+    distinct_on: [market_factory_create_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [market_factory_create_order_by!]
+
+    # filter the rows returned
+    where: market_factory_create_bool_exp
+  ): [market_factory_create!]!
+
+  # fetch aggregated fields from the table: "market_factory_create"
+  market_factory_create_aggregate(
+    # distinct select on columns
+    distinct_on: [market_factory_create_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [market_factory_create_order_by!]
+
+    # filter the rows returned
+    where: market_factory_create_bool_exp
+  ): market_factory_create_aggregate!
+
+  # fetch data from the table: "market_factory_create" using primary key columns
+  market_factory_create_by_pk(event_id: String!): market_factory_create
+
+  # fetch data from the table: "metrics_factory_create"
+  metrics_factory_create(
+    # distinct select on columns
+    distinct_on: [metrics_factory_create_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [metrics_factory_create_order_by!]
+
+    # filter the rows returned
+    where: metrics_factory_create_bool_exp
+  ): [metrics_factory_create!]!
+
+  # fetch aggregated fields from the table: "metrics_factory_create"
+  metrics_factory_create_aggregate(
+    # distinct select on columns
+    distinct_on: [metrics_factory_create_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [metrics_factory_create_order_by!]
+
+    # filter the rows returned
+    where: metrics_factory_create_bool_exp
+  ): metrics_factory_create_aggregate!
+
+  # fetch data from the table: "metrics_factory_create" using primary key columns
+  metrics_factory_create_by_pk(event_id: String!): metrics_factory_create
+
+  # fetch data from the table: "pg_buffercache"
+  pg_buffercache(
+    # distinct select on columns
+    distinct_on: [pg_buffercache_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [pg_buffercache_order_by!]
+
+    # filter the rows returned
+    where: pg_buffercache_bool_exp
+  ): [pg_buffercache!]!
+
+  # fetch aggregated fields from the table: "pg_buffercache"
+  pg_buffercache_aggregate(
+    # distinct select on columns
+    distinct_on: [pg_buffercache_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [pg_buffercache_order_by!]
+
+    # filter the rows returned
+    where: pg_buffercache_bool_exp
+  ): pg_buffercache_aggregate!
+
+  # fetch data from the table: "pg_stat_statements"
+  pg_stat_statements(
+    # distinct select on columns
+    distinct_on: [pg_stat_statements_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [pg_stat_statements_order_by!]
+
+    # filter the rows returned
+    where: pg_stat_statements_bool_exp
+  ): [pg_stat_statements!]!
+
+  # fetch aggregated fields from the table: "pg_stat_statements"
+  pg_stat_statements_aggregate(
+    # distinct select on columns
+    distinct_on: [pg_stat_statements_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [pg_stat_statements_order_by!]
+
+    # filter the rows returned
+    where: pg_stat_statements_bool_exp
+  ): pg_stat_statements_aggregate!
+
+  # fetch data from the table: "policy_factory_create"
+  policy_factory_create(
+    # distinct select on columns
+    distinct_on: [policy_factory_create_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [policy_factory_create_order_by!]
+
+    # filter the rows returned
+    where: policy_factory_create_bool_exp
+  ): [policy_factory_create!]!
+
+  # fetch aggregated fields from the table: "policy_factory_create"
+  policy_factory_create_aggregate(
+    # distinct select on columns
+    distinct_on: [policy_factory_create_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [policy_factory_create_order_by!]
+
+    # filter the rows returned
+    where: policy_factory_create_bool_exp
+  ): policy_factory_create_aggregate!
+
+  # fetch data from the table: "policy_factory_create" using primary key columns
+  policy_factory_create_by_pk(event_id: String!): policy_factory_create
+
+  # fetch data from the table: "property_factory_create"
+  property_factory_create(
+    # distinct select on columns
+    distinct_on: [property_factory_create_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [property_factory_create_order_by!]
+
+    # filter the rows returned
+    where: property_factory_create_bool_exp
+  ): [property_factory_create!]!
+
+  # fetch aggregated fields from the table: "property_factory_create"
+  property_factory_create_aggregate(
+    # distinct select on columns
+    distinct_on: [property_factory_create_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [property_factory_create_order_by!]
+
+    # filter the rows returned
+    where: property_factory_create_bool_exp
+  ): property_factory_create_aggregate!
+
+  # fetch data from the table: "property_factory_create" using primary key columns
+  property_factory_create_by_pk(event_id: String!): property_factory_create
+}

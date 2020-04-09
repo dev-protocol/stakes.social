@@ -1,6 +1,6 @@
 import React from 'react'
 import { Button } from 'antd'
-import { useListUsersQuery } from '@dev/graphql'
+import { useListAllocatorAllocationResultsQuery } from '@dev/graphql'
 import Router from 'next/router'
 
 type InitialProps = {}
@@ -8,7 +8,7 @@ type InitialProps = {}
 type Props = {} & InitialProps
 
 const About = (_: Props) => {
-  const { data, loading } = useListUsersQuery({})
+  const { data, loading } = useListAllocatorAllocationResultsQuery({})
 
   return (
     <div>
@@ -16,8 +16,8 @@ const About = (_: Props) => {
       {loading && <div>loading.......</div>}
       {data && (
         <div>
-          {data.list.map(user => (
-            <li key={user.id}>{user.name}</li>
+          {data.allocator_allocation_result.map(d => (
+            <li key={d.event_id}>{d.result}</li>
           ))}
         </div>
       )}
