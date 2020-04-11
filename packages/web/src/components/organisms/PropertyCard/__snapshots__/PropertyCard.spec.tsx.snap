@@ -10,7 +10,7 @@ exports[`PropertyCard Snapshot 1`] = `
         class="ant-card-body"
       >
         <p>
-          property address:
+          property address: 
           propertyAddress
         </p>
         <p>
