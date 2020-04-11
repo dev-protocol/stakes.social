@@ -8,6 +8,7 @@ interface Props {
 
 export const PropertyCard = ({ propertyAddress }: Props) => {
   const { totalRewardsAmount } = useGetTotalRewardsAmount(propertyAddress)
+
   return (
     <Card>
       <p>property address: {propertyAddress}</p>
