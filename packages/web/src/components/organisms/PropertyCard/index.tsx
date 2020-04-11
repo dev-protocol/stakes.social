@@ -7,14 +7,12 @@ interface Props {
 }
 
 export const PropertyCard = ({ propertyAddress }: Props) => {
-  const { totalRewardsAmount, error } = useGetTotalRewardsAmount(propertyAddress)
-
-  console.error(error)
+  const { totalRewardsAmount } = useGetTotalRewardsAmount(propertyAddress)
 
   return (
     <Card>
       <p>property address: {propertyAddress}</p>
-      {totalRewardsAmount && <p>{totalRewardsAmount}</p>}
+      {totalRewardsAmount && <p>{totalRewardsAmount.dp(1).toNumber()}</p>}
     </Card>
   )
 }
