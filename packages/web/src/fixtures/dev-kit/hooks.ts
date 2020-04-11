@@ -1,6 +1,6 @@
 import { NewClient } from './client'
 import { catchPath } from './cache-path'
-import { addresses } from '@dev-protocol/dev-kit-js/esm/addresses'
+import { addresses } from '@dev-protocol/dev-kit-js'
 import { UnwrapFunc } from 'src/fixtures/utility'
 import useSWR from 'swr'
 
