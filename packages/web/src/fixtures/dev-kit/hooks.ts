@@ -14,11 +14,11 @@ const getRewardsAmount = async (propertyAddress: string) => {
   return undefined
 }
 
-export const useGetTotalRewards = (propertyAddress: string) => {
+export const useGetTotalRewardsAmount = (propertyAddress: string) => {
   const { data, error } = useSWR<UnwrapFunc<typeof getRewardsAmount>, Error>(
     catchPath.getTotalRewards(propertyAddress),
     () => getRewardsAmount(propertyAddress)
   )
 
-  return { propertyAddress: data, error }
+  return { totalRewardsAmount: data, error }
 }

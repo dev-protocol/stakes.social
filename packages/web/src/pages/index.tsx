@@ -1,14 +1,15 @@
 import React from 'react'
 import { Button } from 'antd'
-import { useListAllocatorAllocationResultsQuery } from '@dev/graphql'
+import { useListPropertyQuery } from '@dev/graphql'
 import { useDetectWallet } from 'src/fixtures/wallet/hooks'
+import { PropertyCard } from 'src/components/organisms/PropertyCard'
 import Router from 'next/router'
 
 type InitialProps = {}
 type Props = {} & InitialProps
 
 const Index = (_: Props) => {
-  const { data, loading } = useListAllocatorAllocationResultsQuery({})
+  const { data, loading } = useListPropertyQuery()
 
   const { isConnected } = useDetectWallet()
 
@@ -20,8 +21,8 @@ const Index = (_: Props) => {
       {loading && <div>loading.......</div>}
       {data && (
         <div>
-          {data.allocator_allocation_result.map(d => (
-            <li key={d.event_id}>{d.result}</li>
+          {data.property_factory_create.map(d => (
+            <PropertyCard key={d.event_id} propertyAddress={d.property} />
           ))}
         </div>
       )}
