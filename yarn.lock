@@ -1296,9 +1296,9 @@
     exec-sh "^0.3.2"
     minimist "^1.2.0"
 
-"@dev-protocol/dev-kit-js@https://github.com/dev-protocol/dev-kit-js#v0.4.0":
-  version "0.4.0"
-  resolved "https://github.com/dev-protocol/dev-kit-js#7448182fc351c3bc0ba02862830a60582531d3a1"
+"@dev-protocol/dev-kit-js@https://github.com/dev-protocol/dev-kit-js":
+  version "0.3.1"
+  resolved "https://github.com/dev-protocol/dev-kit-js#2106e04ff33f7c2660260ebfade70f9c749e0c45"
   dependencies:
     web3 "^1.2.5-rc.0"
 

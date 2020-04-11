@@ -8,8 +8,7 @@
     "start:prod": "NODE_ENV=production next",
     "build": "run-p -l build:*",
     "build:next": "next build",
-    "lint": "eslint --fix -c ./.eslintrc.json './src/**/*.{ts,tsx}'",
-    "postinstall": "yarn --cwd ../../node_modules/@dev-protocol/dev-kit-js build"
+    "lint": "eslint --fix -c ./.eslintrc.json './src/**/*.{ts,tsx}'"
   },
   "dependencies": {
     "@dev/graphql": "0.0.1",
@@ -47,7 +46,7 @@
     "swr": "0.2.0",
     "web3": "^1.2.6",
     "web3-core": "^1.2.6",
-    "@dev-protocol/dev-kit-js": "https://github.com/dev-protocol/dev-kit-js#v0.4.0"
+    "@dev-protocol/dev-kit-js": "https://github.com/dev-protocol/dev-kit-js"
   },
   "devDependencies": {
     "@babel/core": "7.8.4",
