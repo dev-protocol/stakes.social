@@ -1,7 +1,11 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 export const useConnectWallet = () => {
-  const [isConnected, setIsConnected] = useState<boolean>(false)
+  const [isConnected, setIsConnected] = useState<boolean>(!!window.ethereum?.connected || false)
+
+  useEffect(() => {
+    setIsConnected(window?.ethereum?.connected || false)
+  }, [])
 
   const connect = async () => {
     const { ethereum } = window
