@@ -1,6 +1,6 @@
 import { contractFactory } from '@dev-protocol/dev-kit-js'
 
-export const NewClient = () => {
+export const newClient = () => {
   const { ethereum } = window
   if (ethereum) {
     return contractFactory(ethereum)

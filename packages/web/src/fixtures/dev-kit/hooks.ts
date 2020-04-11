@@ -1,11 +1,11 @@
-import { NewClient } from './client'
+import { newClient } from './client'
 import { catchPath } from './cache-path'
 import { addresses } from '@dev-protocol/dev-kit-js'
 import { UnwrapFunc, toNaturalNumber } from 'src/fixtures/utility'
 import useSWR from 'swr'
 
 const getRewardsAmount = async (propertyAddress: string) => {
-  const client = NewClient()
+  const client = newClient()
   if (client) {
     return client
       .withdraw(await client.registry(addresses.eth.main.registry).withdraw())
