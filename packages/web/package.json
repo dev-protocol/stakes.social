@@ -8,7 +8,8 @@
     "start:prod": "NODE_ENV=production next",
     "build": "run-p -l build:*",
     "build:next": "next build",
-    "lint": "eslint --fix -c ./.eslintrc.json './src/**/*.{ts,tsx}'"
+    "lint": "eslint --fix -c ./.eslintrc.json './src/**/*.{ts,tsx}'",
+    "postinstall": "yarn --cwd ../../node_modules/@dev-protocol/dev-kit-js build"
   },
   "dependencies": {
     "@dev/graphql": "0.0.1",
