@@ -2,3 +2,4 @@ node_modules
 dist
 cjs
 esm
+__snapshots__

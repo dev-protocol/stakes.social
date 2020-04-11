@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PropertyCard Snapshot 1`] = `
+<body>
+  <div>
+    <div
+      class="ant-card ant-card-bordered"
+    >
+      <div
+        class="ant-card-body"
+      >
+        <p>
+          property address: 
+          propertyAddress
+        </p>
+        <p>
+          10000
+        </p>
+      </div>
+    </div>
+  </div>
+</body>
+`;

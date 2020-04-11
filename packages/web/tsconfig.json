@@ -15,7 +15,7 @@
     "strictPropertyInitialization": true,
     "noImplicitReturns": true,
     "noImplicitAny": true,
-    "types": ["node"],
+    "types": ["node", "jest"],
     "allowJs": false,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
