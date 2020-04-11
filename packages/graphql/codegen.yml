@@ -1,6 +1,6 @@
 overwrite: true
 schema: './src/scheme.graphql'
-documents: ['src/queries/**.graphql']
+documents: ['src/queries/**.graphql', 'src/fragments/**.graphql']
 generates:
   src/react-apollo/generated.tsx:
     plugins:

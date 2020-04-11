@@ -1,0 +1,9 @@
+fragment propertyFactoryCreate on property_factory_create {
+  block_number
+  event_id
+  from_address
+  log_index
+  property
+  raw_data
+  transaction_index
+}
