@@ -1,20 +1,24 @@
-import { useState } from 'react'
-import { useEffectAsync } from '../utility'
+import { cachePath } from './catch-path'
+import { UnwrapFunc } from 'src/fixtures/utility'
+import useSWR from 'swr'
 
-export const useDetectWallet = () => {
-  const [isConnected, setIsConnected] = useState<boolean>(false)
+const connectWallet = async () => {
+  const { ethereum } = window
+  if (ethereum) {
+    return ethereum
+      .enable()
+      .then(() => true)
+      .catch(() => false)
+  }
+  return false
+}
 
-  useEffectAsync(async () => {
-    const { ethereum } = window
-    if (ethereum) {
-      await ethereum
-        .enable()
-        .then(() => setIsConnected(true))
-        .catch(() => setIsConnected(false))
-    } else {
-      setIsConnected(false)
-    }
-  }, [])
+export const useConnectWallet = () => {
+  const { data, mutate } = useSWR<UnwrapFunc<typeof connectWallet>, Error>(cachePath.connectWallet())
 
-  return { isConnected }
+  const connect = () => {
+    connectWallet().then(result => mutate(result))
+  }
+
+  return { isConnected: data, connect }
 }
