@@ -17,7 +17,7 @@ export const useConnectWallet = () => {
   const { data, mutate } = useSWR<UnwrapFunc<typeof connectWallet>, Error>(cachePath.connectWallet())
 
   const connect = () => {
-    connectWallet().then(() => mutate(true))
+    connectWallet().then(result => mutate(result))
   }
 
   return { isConnected: data, connect }
