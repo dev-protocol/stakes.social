@@ -1,0 +1,1 @@
+export { PropertyCard } from './PropertyCard'
