@@ -1,23 +1,24 @@
-import { useState, useEffect } from 'react'
+import { cachePath } from './catch-path'
+import { UnwrapFunc } from 'src/fixtures/utility'
+import useSWR from 'swr'
+
+const connectWallet = async () => {
+  const { ethereum } = window
+  if (ethereum) {
+    return ethereum
+      .enable()
+      .then(() => true)
+      .catch(() => false)
+  }
+  return false
+}
 
 export const useConnectWallet = () => {
-  const [isConnected, setIsConnected] = useState<boolean>(!!window.ethereum?.connected || false)
+  const { data, mutate } = useSWR<UnwrapFunc<typeof connectWallet>, Error>(cachePath.connectWallet())
 
-  useEffect(() => {
-    setIsConnected(window?.ethereum?.connected || false)
-  }, [])
-
-  const connect = async () => {
-    const { ethereum } = window
-    if (ethereum) {
-      await ethereum
-        .enable()
-        .then(() => setIsConnected(true))
-        .catch(() => setIsConnected(false))
-    } else {
-      setIsConnected(false)
-    }
+  const connect = () => {
+    connectWallet().then(() => mutate(true))
   }
 
-  return { isConnected, connect }
+  return { isConnected: data, connect }
 }
