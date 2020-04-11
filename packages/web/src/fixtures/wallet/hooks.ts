@@ -1,10 +1,9 @@
 import { useState } from 'react'
-import { useEffectAsync } from '../utility'
 
-export const useDetectWallet = () => {
+export const useConnectWallet = () => {
   const [isConnected, setIsConnected] = useState<boolean>(false)
 
-  useEffectAsync(async () => {
+  const connect = async () => {
     const { ethereum } = window
     if (ethereum) {
       await ethereum
@@ -14,7 +13,7 @@ export const useDetectWallet = () => {
     } else {
       setIsConnected(false)
     }
-  }, [])
+  }
 
-  return { isConnected }
+  return { isConnected, connect }
 }
