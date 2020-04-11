@@ -1,1 +1,0 @@
-export { PropertyCard } from './PropertyCard'

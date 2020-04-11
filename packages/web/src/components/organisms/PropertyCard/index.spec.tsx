@@ -1,6 +1,6 @@
 import React from 'react'
 import { render } from '@testing-library/react'
-import { PropertyCard } from './PropertyCard'
+import { PropertyCard } from './'
 
 jest.mock('src/fixtures/dev-kit/hooks')
 
