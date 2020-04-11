@@ -4509,6 +4509,11 @@ export type Subscription_RootProperty_Factory_Create_By_PkArgs = {
   event_id: Scalars['String']
 }
 
+export type PropertyFactoryCreateFragment = { __typename?: 'property_factory_create' } & Pick<
+  Property_Factory_Create,
+  'block_number' | 'event_id' | 'from_address' | 'log_index' | 'property' | 'raw_data' | 'transaction_index'
+>
+
 export type ListAllocatorAllocationResultsQueryVariables = {
   distinct_on?: Maybe<Array<Allocator_Allocation_Result_Select_Column>>
   limit?: Maybe<Scalars['Int']>
@@ -4536,6 +4541,23 @@ export type ListAllocatorAllocationResultsQuery = { __typename?: 'query_root' } 
   >
 }
 
+export type ListPropertyQueryVariables = {}
+
+export type ListPropertyQuery = { __typename?: 'query_root' } & {
+  property_factory_create: Array<{ __typename?: 'property_factory_create' } & PropertyFactoryCreateFragment>
+}
+
+export const PropertyFactoryCreateFragmentDoc = gql`
+  fragment propertyFactoryCreate on property_factory_create {
+    block_number
+    event_id
+    from_address
+    log_index
+    property
+    raw_data
+    transaction_index
+  }
+`
 export const ListAllocatorAllocationResultsDocument = gql`
   query ListAllocatorAllocationResults(
     $distinct_on: [allocator_allocation_result_select_column!]
@@ -4610,3 +4632,40 @@ export type ListAllocatorAllocationResultsQueryResult = ApolloReactCommon.QueryR
   ListAllocatorAllocationResultsQuery,
   ListAllocatorAllocationResultsQueryVariables
 >
+export const ListPropertyDocument = gql`
+  query ListProperty {
+    property_factory_create {
+      ...propertyFactoryCreate
+    }
+  }
+  ${PropertyFactoryCreateFragmentDoc}
+`
+
+/**
+ * __useListPropertyQuery__
+ *
+ * To run a query within a React component, call `useListPropertyQuery` and pass it any options that fit your needs.
+ * When your component renders, `useListPropertyQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useListPropertyQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useListPropertyQuery(
+  baseOptions?: ApolloReactHooks.QueryHookOptions<ListPropertyQuery, ListPropertyQueryVariables>
+) {
+  return ApolloReactHooks.useQuery<ListPropertyQuery, ListPropertyQueryVariables>(ListPropertyDocument, baseOptions)
+}
+export function useListPropertyLazyQuery(
+  baseOptions?: ApolloReactHooks.LazyQueryHookOptions<ListPropertyQuery, ListPropertyQueryVariables>
+) {
+  return ApolloReactHooks.useLazyQuery<ListPropertyQuery, ListPropertyQueryVariables>(ListPropertyDocument, baseOptions)
+}
+export type ListPropertyQueryHookResult = ReturnType<typeof useListPropertyQuery>
+export type ListPropertyLazyQueryHookResult = ReturnType<typeof useListPropertyLazyQuery>
+export type ListPropertyQueryResult = ApolloReactCommon.QueryResult<ListPropertyQuery, ListPropertyQueryVariables>

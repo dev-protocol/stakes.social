@@ -1,0 +1,5 @@
+query ListProperty {
+  property_factory_create {
+    ...propertyFactoryCreate
+  }
+}
