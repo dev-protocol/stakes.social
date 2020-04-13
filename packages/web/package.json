@@ -12,8 +12,8 @@
     "test": "jest"
   },
   "dependencies": {
-    "@dev-protocol/dev-kit-js": "https://github.com/dev-protocol/dev-kit-js",
     "@dev/graphql": "0.0.1",
+    "@devprtcl/dev-kit-js": "^0.4.1",
     "@quentin-sommer/react-useragent": "3.1.0",
     "antd": "^3.26.6",
     "apollo-cache-inmemory": "1.6.5",
