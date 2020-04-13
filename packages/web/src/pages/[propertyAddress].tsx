@@ -1,8 +1,8 @@
 import React from 'react'
 import { Button } from 'antd'
-import { useListAllocatorAllocationResultsQuery } from '@dev/graphql'
-import Router from 'next/router'
+import Router, { useRouter } from 'next/router'
 import dynamic from 'next/dynamic'
+import { useGetTotalStakingAmount } from 'src/fixtures/dev-kit/hooks'
 
 const WalletConnectButton = dynamic(
   () => import('src/components/organisms/WalletConnectButton').then(mod => mod.WalletConnectButton) as any,
@@ -13,23 +13,18 @@ type InitialProps = {}
 
 type Props = {} & InitialProps
 
-const About = (_: Props) => {
-  const { data, loading } = useListAllocatorAllocationResultsQuery({})
+const PropertyAddressDetail = (_: Props) => {
+  const { propertyAddress } = useRouter().query as { propertyAddress: string }
+
+  const { totalStakingAmount } = useGetTotalStakingAmount(propertyAddress)
 
   return (
     <div>
       <Button onClick={() => Router.push('/')}>please click here!</Button>
       <WalletConnectButton />
-      {loading && <div>loading.......</div>}
-      {data && (
-        <div>
-          {data.allocator_allocation_result.map(d => (
-            <li key={d.event_id}>{d.result}</li>
-          ))}
-        </div>
-      )}
+      {totalStakingAmount && <div>total staking amount: {totalStakingAmount.dp(1).toNumber()}</div>}
     </div>
   )
 }
 
-export default About
+export default PropertyAddressDetail
