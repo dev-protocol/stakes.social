@@ -19,6 +19,21 @@ export const useGetTotalRewardsAmount = (propertyAddress: string) => {
     catchPath.getTotalRewards(propertyAddress),
     () => getRewardsAmount(propertyAddress)
   )
-
   return { totalRewardsAmount: data ? toNaturalNumber(data) : undefined, error }
+}
+
+const getTotalStakingAmount = async (proepertyAddress: string) => {
+  const client = newClient()
+  if (client) {
+    return client.lockup(await client.registry(addresses.eth.main.registry).lockup()).getPropertyValue(proepertyAddress)
+  }
+  return undefined
+}
+
+export const useGetTotalStakingAmount = (propertyAddress: string) => {
+  const { data, error } = useSWR<UnwrapFunc<typeof getTotalStakingAmount>, Error>(
+    catchPath.getTotalStaking(propertyAddress),
+    () => getTotalStakingAmount(propertyAddress)
+  )
+  return { totalStakingAmount: data ? toNaturalNumber(data) : undefined, error }
 }
