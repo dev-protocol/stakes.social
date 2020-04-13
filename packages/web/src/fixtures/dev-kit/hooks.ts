@@ -1,5 +1,5 @@
 import { newClient } from './client'
-import { catchPath } from './cache-path'
+import { SWRCachePath } from './cache-path'
 import { addresses } from '@devprtcl/dev-kit-js'
 import { UnwrapFunc, toNaturalNumber } from 'src/fixtures/utility'
 import useSWR from 'swr'
@@ -16,7 +16,7 @@ const getRewardsAmount = async (propertyAddress: string) => {
 
 export const useGetTotalRewardsAmount = (propertyAddress: string) => {
   const { data, error } = useSWR<UnwrapFunc<typeof getRewardsAmount>, Error>(
-    catchPath.getTotalRewards(propertyAddress),
+    SWRCachePath.getTotalRewards(propertyAddress),
     () => getRewardsAmount(propertyAddress)
   )
   return { totalRewardsAmount: data ? toNaturalNumber(data) : undefined, error }
@@ -32,7 +32,7 @@ const getTotalStakingAmount = async (proepertyAddress: string) => {
 
 export const useGetTotalStakingAmount = (propertyAddress: string) => {
   const { data, error } = useSWR<UnwrapFunc<typeof getTotalStakingAmount>, Error>(
-    catchPath.getTotalStaking(propertyAddress),
+    SWRCachePath.getTotalStaking(propertyAddress),
     () => getTotalStakingAmount(propertyAddress)
   )
   return { totalStakingAmount: data ? toNaturalNumber(data) : undefined, error }
