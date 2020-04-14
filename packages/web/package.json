@@ -58,7 +58,7 @@
     "@types/faker": "4.1.11",
     "@types/react": "16.9.34",
     "@types/react-dom": "16.9.6",
-    "@types/styled-components": "5.0.1",
+    "@types/styled-components": "5.1.0",
     "@types/ua-parser-js": "0.7.33",
     "@zeit/next-css": "1.0.1",
     "@zeit/next-less": "1.0.1",
