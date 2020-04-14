@@ -7,11 +7,3 @@ export const newClient = () => {
   }
   return undefined
 }
-
-export const getAccountAddress = () => {
-  const { ethereum } = window
-  if (ethereum) {
-    return ethereum.selectedAddress
-  }
-  return undefined
-}

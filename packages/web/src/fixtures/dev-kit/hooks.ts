@@ -1,7 +1,8 @@
-import { newClient, getAccountAddress } from './client'
+import { newClient } from './client'
 import { SWRCachePath } from './cache-path'
 import { addresses } from '@devprtcl/dev-kit-js'
 import { UnwrapFunc, toNaturalNumber } from 'src/fixtures/utility'
+import { getAccountAddress } from 'src/fixtures/wallet/utility'
 import useSWR from 'swr'
 import { message } from 'antd'
 
@@ -63,3 +64,11 @@ export const useGetMyStakingAmount = (propertyAddress: string) => {
 
   return { myStakingAmount: data ? toNaturalNumber(data) : undefined, error }
 }
+
+// const withdrawHolderReward = async (propertyAddress: string) => {
+//   const client = newClient()
+//   if (client) {
+//     return client.withdraw(await client.registry(addresses.eth.main.registry).withdraw()).withdraw(propertyAddress)
+//   }
+//   return undefined
+// }
