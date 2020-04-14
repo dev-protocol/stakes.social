@@ -12,6 +12,12 @@ exports[`PossessionOutline Snapshot 1`] = `
         <div>
           total staking amount: 
           10000
+           DEV
+        </div>
+        <div>
+          Your staking amount: 
+          5000
+           DEV
         </div>
       </div>
     </div>
