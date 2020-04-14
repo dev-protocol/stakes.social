@@ -1,12 +1,12 @@
 import React from 'react'
 import { render } from '@testing-library/react'
-import { TotalStakingAmount } from './'
+import { PossessionOutline } from '.'
 
 jest.mock('src/fixtures/dev-kit/hooks')
 
-describe(`${TotalStakingAmount.name}`, () => {
+describe(`${PossessionOutline.name}`, () => {
   test('Snapshot', () => {
-    const component = render(<TotalStakingAmount propertyAddress="propertyAddress" />)
+    const component = render(<PossessionOutline propertyAddress="propertyAddress" />)
     const tree = component.baseElement
     expect(tree).toMatchSnapshot()
   })

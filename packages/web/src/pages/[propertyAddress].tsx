@@ -2,7 +2,7 @@ import React from 'react'
 import { Button } from 'antd'
 import Router, { useRouter } from 'next/router'
 import dynamic from 'next/dynamic'
-import { TotalStakingAmount } from 'src/components/organisms/TotalStakingAmount'
+import { PossessionOutline } from 'src/components/organisms/PossessionOutline'
 
 const WalletConnectButton = dynamic(
   () => import('src/components/organisms/WalletConnectButton').then(mod => mod.WalletConnectButton) as any,
@@ -19,7 +19,7 @@ const PropertyAddressDetail = (_: Props) => {
       <Button onClick={() => Router.push('/')}>please click here!</Button>
       <WalletConnectButton />
       <p>property address: {propertyAddress}</p>
-      <TotalStakingAmount propertyAddress={propertyAddress} />
+      <PossessionOutline propertyAddress={propertyAddress} />
     </div>
   )
 }
