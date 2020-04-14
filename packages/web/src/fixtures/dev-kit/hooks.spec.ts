@@ -1,5 +1,5 @@
 import { renderHook } from '@testing-library/react-hooks'
-import { useGetTotalRewardsAmount } from './hooks'
+import { useGetTotalRewardsAmount, useGetTotalStakingAmount } from './hooks'
 import useSWR from 'swr'
 import { toNaturalNumber } from 'src/fixtures/utility'
 
@@ -32,6 +32,36 @@ describe('dev-kit hooks', () => {
       ;(useSWR as jest.Mock).mockImplementation(() => ({ data, error }))
       ;(toNaturalNumber as jest.Mock).mockImplementation(() => Number(data))
       const { result } = renderHook(() => useGetTotalRewardsAmount('property-address'))
+      expect(result.current.error).toBe(error)
+      expect(result.current.error?.message).toBe(errorMessage)
+    })
+  })
+
+  describe('useGetTotalStakingAmount', () => {
+    test('data is undefined', () => {
+      const data = undefined
+      const error = undefined
+      ;(useSWR as jest.Mock).mockImplementation(() => ({ data, error }))
+      const { result } = renderHook(() => useGetTotalStakingAmount('property-address'))
+      expect(result.current.totalStakingAmount).toBe(data)
+    })
+
+    test('success fetching data', () => {
+      const data = '10000'
+      const error = undefined
+      ;(useSWR as jest.Mock).mockImplementation(() => ({ data, error }))
+      ;(toNaturalNumber as jest.Mock).mockImplementation(() => Number(data))
+      const { result } = renderHook(() => useGetTotalStakingAmount('property-address'))
+      expect(result.current.totalStakingAmount).toBe(Number(data))
+    })
+
+    test('failure fetching data', () => {
+      const data = undefined
+      const errorMessage = 'error'
+      const error = new Error(errorMessage)
+      ;(useSWR as jest.Mock).mockImplementation(() => ({ data, error }))
+      ;(toNaturalNumber as jest.Mock).mockImplementation(() => Number(data))
+      const { result } = renderHook(() => useGetTotalStakingAmount('property-address'))
       expect(result.current.error).toBe(error)
       expect(result.current.error?.message).toBe(errorMessage)
     })

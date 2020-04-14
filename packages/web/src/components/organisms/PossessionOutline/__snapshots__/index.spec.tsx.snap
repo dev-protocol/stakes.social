@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PossessionOutline Snapshot 1`] = `
+<body>
+  <div>
+    <div
+      class="ant-card ant-card-bordered"
+    >
+      <div
+        class="ant-card-body"
+      >
+        <div>
+          total staking amount: 
+          10000
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+`;

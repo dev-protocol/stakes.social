@@ -1,8 +1,6 @@
 import React from 'react'
-import { Button } from 'antd'
 import { useListPropertyQuery } from '@dev/graphql'
 import { PropertyCard } from 'src/components/organisms/PropertyCard'
-import Router from 'next/router'
 import dynamic from 'next/dynamic'
 
 const WalletConnectButton = dynamic(
@@ -18,7 +16,6 @@ const Index = (_: Props) => {
 
   return (
     <div>
-      <Button onClick={() => Router.push('/about')}>please click here!</Button>
       <WalletConnectButton />
       {loading && <div>loading.......</div>}
       {data && (
