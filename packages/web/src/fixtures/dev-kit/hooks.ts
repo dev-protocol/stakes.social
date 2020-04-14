@@ -1,4 +1,4 @@
-import { newClient } from './client'
+import { newClient, getAccountAddress } from './client'
 import { SWRCachePath } from './cache-path'
 import { addresses } from '@devprtcl/dev-kit-js'
 import { UnwrapFunc, toNaturalNumber } from 'src/fixtures/utility'
@@ -17,7 +17,7 @@ const getRewardsAmount = async (propertyAddress: string) => {
 
 export const useGetTotalRewardsAmount = (propertyAddress: string) => {
   const { data, error } = useSWR<UnwrapFunc<typeof getRewardsAmount>, Error>(
-    SWRCachePath.getTotalRewards(propertyAddress),
+    SWRCachePath.getTotalRewardsAmount(propertyAddress),
     () => getRewardsAmount(propertyAddress),
     { onError: err => message.error(err.message) }
   )
@@ -34,9 +34,32 @@ const getTotalStakingAmount = async (proepertyAddress: string) => {
 
 export const useGetTotalStakingAmount = (propertyAddress: string) => {
   const { data, error } = useSWR<UnwrapFunc<typeof getTotalStakingAmount>, Error>(
-    SWRCachePath.getTotalStaking(propertyAddress),
+    SWRCachePath.getTotalStakingAmount(propertyAddress),
     () => getTotalStakingAmount(propertyAddress),
     { onError: err => message.error(err.message) }
   )
   return { totalStakingAmount: data ? toNaturalNumber(data) : undefined, error }
+}
+
+const getMyStakingAmount = async (propertyAddress: string) => {
+  const client = newClient()
+  const accountAddress = getAccountAddress()
+  if (client && accountAddress) {
+    return client
+      .lockup(await client.registry(addresses.eth.main.registry).lockup())
+      .getValue(propertyAddress, accountAddress)
+  }
+  return undefined
+}
+
+export const useGetMyStakingAmount = (propertyAddress: string) => {
+  const { data, error } = useSWR<UnwrapFunc<typeof getMyStakingAmount>, Error>(
+    SWRCachePath.getMyStakingAmount(propertyAddress),
+    () => getMyStakingAmount(propertyAddress),
+    {
+      onError: err => message.error(err.message)
+    }
+  )
+
+  return { myStakingAmount: data ? toNaturalNumber(data) : undefined, error }
 }
