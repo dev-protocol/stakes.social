@@ -15,7 +15,7 @@ export const WithdrawCard = ({ amount, label, onSubmitWithdraw, lastUpdate }: Pr
       title={`Withdraw ${label} Reward`}
       extra={
         <>
-          <p>Last Update: ${lastUpdate}</p>
+          <p>Last Update: {lastUpdate}</p>
           <a href="#" target="_blank" rel="noreferrer noopener">
             Mining now
           </a>
