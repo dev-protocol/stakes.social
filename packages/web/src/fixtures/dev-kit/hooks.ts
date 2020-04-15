@@ -1,6 +1,5 @@
-import { newClient, getMyStakingAmount, getRewardsAmount, getTotalStakingAmount } from './client'
+import { getMyStakingAmount, getRewardsAmount, getTotalStakingAmount, withdrawHolderAmount } from './client'
 import { SWRCachePath } from './cache-path'
-import { addresses } from '@devprtcl/dev-kit-js'
 import { UnwrapFunc, toNaturalNumber } from 'src/fixtures/utility'
 import useSWR from 'swr'
 import { message } from 'antd'
@@ -22,16 +21,13 @@ export const useWithdrawHolderReward = () => {
   const withdraw = async (propertyAddress: string) => {
     setIsLoading(true)
     setError(undefined)
-    try {
-      const client = newClient()
-      if (!client) throw new Error(`No wallet`)
-      await client.withdraw(await client.registry(addresses.eth.main.registry).withdraw()).withdraw(propertyAddress)
-      setIsLoading(false)
-    } catch (err) {
-      setError(err)
-      message.error(err.message)
-      setIsLoading(false)
-    }
+    return withdrawHolderAmount(propertyAddress)
+      .then(() => setIsLoading(false))
+      .catch(err => {
+        setError(err)
+        message.error(err.message)
+        setIsLoading(false)
+      })
   }
 
   return { withdraw, isLoading, error }
