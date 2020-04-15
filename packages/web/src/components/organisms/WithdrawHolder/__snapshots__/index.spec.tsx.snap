@@ -21,7 +21,7 @@ exports[`WithdrawHolderCard Snapshot 1`] = `
             class="ant-card-extra"
           >
             <p>
-              Last Update: $
+              Last Update: 
               24141241
             </p>
             <a
