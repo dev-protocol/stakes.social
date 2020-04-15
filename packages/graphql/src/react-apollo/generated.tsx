@@ -3857,10 +3857,33 @@ export type Subscription_RootProperty_Factory_Create_By_PkArgs = {
   event_id: Scalars['String']
 }
 
+export type AllocatorAllocationResultFragment = { __typename?: 'allocator_allocation_result' } & Pick<
+  Allocator_Allocation_Result,
+  | 'block_number'
+  | 'arg_value'
+  | 'event_id'
+  | 'lockup_value'
+  | 'log_index'
+  | 'market'
+  | 'metrics'
+  | 'property'
+  | 'raw_data'
+  | 'result'
+  | 'transaction_index'
+>
+
 export type PropertyFactoryCreateFragment = { __typename?: 'property_factory_create' } & Pick<
   Property_Factory_Create,
   'block_number' | 'event_id' | 'from_address' | 'log_index' | 'property' | 'raw_data' | 'transaction_index'
 >
+
+export type GetLastAllocatorAllocationResultQueryVariables = {
+  propertyAddress: Scalars['String']
+}
+
+export type GetLastAllocatorAllocationResultQuery = { __typename?: 'query_root' } & {
+  allocator_allocation_result: Array<{ __typename?: 'allocator_allocation_result' } & AllocatorAllocationResultFragment>
+}
 
 export type ListAllocatorAllocationResultsQueryVariables = {
   distinct_on?: Maybe<Array<Allocator_Allocation_Result_Select_Column>>
@@ -3895,6 +3918,21 @@ export type ListPropertyQuery = { __typename?: 'query_root' } & {
   property_factory_create: Array<{ __typename?: 'property_factory_create' } & PropertyFactoryCreateFragment>
 }
 
+export const AllocatorAllocationResultFragmentDoc = gql`
+  fragment allocatorAllocationResult on allocator_allocation_result {
+    block_number
+    arg_value
+    event_id
+    lockup_value
+    log_index
+    market
+    metrics
+    property
+    raw_data
+    result
+    transaction_index
+  }
+`
 export const PropertyFactoryCreateFragmentDoc = gql`
   fragment propertyFactoryCreate on property_factory_create {
     block_number
@@ -3906,6 +3944,67 @@ export const PropertyFactoryCreateFragmentDoc = gql`
     transaction_index
   }
 `
+export const GetLastAllocatorAllocationResultDocument = gql`
+  query getLastAllocatorAllocationResult($propertyAddress: String!) {
+    allocator_allocation_result(
+      limit: 1
+      where: { property: { _eq: $propertyAddress }, block_number: {} }
+      order_by: { metrics: desc }
+    ) {
+      ...allocatorAllocationResult
+    }
+  }
+  ${AllocatorAllocationResultFragmentDoc}
+`
+
+/**
+ * __useGetLastAllocatorAllocationResultQuery__
+ *
+ * To run a query within a React component, call `useGetLastAllocatorAllocationResultQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetLastAllocatorAllocationResultQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetLastAllocatorAllocationResultQuery({
+ *   variables: {
+ *      propertyAddress: // value for 'propertyAddress'
+ *   },
+ * });
+ */
+export function useGetLastAllocatorAllocationResultQuery(
+  baseOptions?: ApolloReactHooks.QueryHookOptions<
+    GetLastAllocatorAllocationResultQuery,
+    GetLastAllocatorAllocationResultQueryVariables
+  >
+) {
+  return ApolloReactHooks.useQuery<
+    GetLastAllocatorAllocationResultQuery,
+    GetLastAllocatorAllocationResultQueryVariables
+  >(GetLastAllocatorAllocationResultDocument, baseOptions)
+}
+export function useGetLastAllocatorAllocationResultLazyQuery(
+  baseOptions?: ApolloReactHooks.LazyQueryHookOptions<
+    GetLastAllocatorAllocationResultQuery,
+    GetLastAllocatorAllocationResultQueryVariables
+  >
+) {
+  return ApolloReactHooks.useLazyQuery<
+    GetLastAllocatorAllocationResultQuery,
+    GetLastAllocatorAllocationResultQueryVariables
+  >(GetLastAllocatorAllocationResultDocument, baseOptions)
+}
+export type GetLastAllocatorAllocationResultQueryHookResult = ReturnType<
+  typeof useGetLastAllocatorAllocationResultQuery
+>
+export type GetLastAllocatorAllocationResultLazyQueryHookResult = ReturnType<
+  typeof useGetLastAllocatorAllocationResultLazyQuery
+>
+export type GetLastAllocatorAllocationResultQueryResult = ApolloReactCommon.QueryResult<
+  GetLastAllocatorAllocationResultQuery,
+  GetLastAllocatorAllocationResultQueryVariables
+>
 export const ListAllocatorAllocationResultsDocument = gql`
   query ListAllocatorAllocationResults(
     $distinct_on: [allocator_allocation_result_select_column!]
