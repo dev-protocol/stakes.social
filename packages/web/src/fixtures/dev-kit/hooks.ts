@@ -40,6 +40,7 @@ export const useWithdrawHolderReward = () => {
       setIsLoading(false)
     } catch (err) {
       setError(err)
+      message.error(err.message)
       setIsLoading(false)
     }
   }
