@@ -1,4 +1,10 @@
-import { getMyStakingAmount, getRewardsAmount, getTotalStakingAmount, withdrawHolderAmount } from './client'
+import {
+  getMyStakingAmount,
+  getRewardsAmount,
+  getTotalStakingAmount,
+  withdrawHolderAmount,
+  getMyHolderAmount
+} from './client'
 import { SWRCachePath } from './cache-path'
 import { UnwrapFunc, toNaturalNumber } from 'src/fixtures/utility'
 import useSWR from 'swr'
@@ -31,6 +37,15 @@ export const useWithdrawHolderReward = () => {
   }
 
   return { withdraw, isLoading, error }
+}
+
+export const useGetMyHolderAmount = (propertyAddress: string) => {
+  const { data, error } = useSWR<UnwrapFunc<typeof getMyHolderAmount>, Error>(
+    SWRCachePath.getMyHolderAmount(propertyAddress),
+    () => getMyHolderAmount(propertyAddress),
+    { onError: err => message.error(err.message) }
+  )
+  return { myHolderAmount: data ? toNaturalNumber(data) : undefined, error }
 }
 
 export const useGetTotalStakingAmount = (propertyAddress: string) => {

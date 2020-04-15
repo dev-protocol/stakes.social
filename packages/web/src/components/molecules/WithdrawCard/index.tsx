@@ -4,7 +4,7 @@ import { Card, Button } from 'antd'
 
 interface Props {
   label: 'Staking' | 'Holder'
-  amount: BigNumber
+  amount?: BigNumber
   lastUpdate: string
   onSubmitWithdraw: () => void
 }
@@ -22,7 +22,7 @@ export const WithdrawCard = ({ amount, label, onSubmitWithdraw, lastUpdate }: Pr
         </>
       }
     >
-      <p>{amount.dp(1).toNumber()} DEV</p>
+      <p>{amount && amount.dp(1).toNumber()} DEV</p>
       <Button onClick={onSubmitWithdraw}>Withdraw</Button>
     </Card>
   )
