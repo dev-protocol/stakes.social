@@ -1,4 +1,4 @@
-import { renderHook } from '@testing-library/react-hooks'
+import { renderHook, act } from '@testing-library/react-hooks'
 import {
   useGetTotalRewardsAmount,
   useGetTotalStakingAmount,
@@ -107,13 +107,11 @@ describe('dev-kit hooks', () => {
   describe('useWithdrawHolderReward', () => {
     test('success withdraw', async () => {
       ;(withdrawHolderAmount as jest.Mock).mockImplementation(async () => true)
-      const {
-        result: {
-          current: { error, withdraw }
-        }
-      } = renderHook(() => useWithdrawHolderReward())
-      await withdraw('property-address')
-      expect(error).toBe(undefined)
+      const { result } = renderHook(() => useWithdrawHolderReward())
+      act(() => {
+        result.current.withdraw('property-address')
+      })
+      expect(result.current.error).toBe(undefined)
     })
   })
 })
