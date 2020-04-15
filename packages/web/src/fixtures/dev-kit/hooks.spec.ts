@@ -1,10 +1,17 @@
 import { renderHook } from '@testing-library/react-hooks'
-import { useGetTotalRewardsAmount, useGetTotalStakingAmount, useGetMyStakingAmount } from './hooks'
+import {
+  useGetTotalRewardsAmount,
+  useGetTotalStakingAmount,
+  useGetMyStakingAmount,
+  useWithdrawHolderReward
+} from './hooks'
 import useSWR from 'swr'
 import { toNaturalNumber } from 'src/fixtures/utility'
+import { withdrawHolderAmount } from './client'
 
 jest.mock('swr')
 jest.mock('src/fixtures/utility')
+jest.mock('src/fixtures/dev-kit/client.ts')
 
 describe('dev-kit hooks', () => {
   describe('useGetTotalRewardsAmount', () => {
@@ -94,6 +101,19 @@ describe('dev-kit hooks', () => {
       const { result } = renderHook(() => useGetMyStakingAmount('property-address'))
       expect(result.current.error).toBe(error)
       expect(result.current.error?.message).toBe(errorMessage)
+    })
+  })
+
+  describe('useWithdrawHolderReward', () => {
+    test('success withdraw', async () => {
+      ;(withdrawHolderAmount as jest.Mock).mockImplementation(async () => true)
+      const {
+        result: {
+          current: { error, withdraw }
+        }
+      } = renderHook(() => useWithdrawHolderReward())
+      await withdraw('property-address')
+      expect(error).toBe(undefined)
     })
   })
 })

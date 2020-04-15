@@ -1,0 +1,56 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`WithdrawHolderCard Snapshot 1`] = `
+<body>
+  <div>
+    <div
+      class="ant-card ant-card-bordered"
+    >
+      <div
+        class="ant-card-head"
+      >
+        <div
+          class="ant-card-head-wrapper"
+        >
+          <div
+            class="ant-card-head-title"
+          >
+            Withdraw Holder Reward
+          </div>
+          <div
+            class="ant-card-extra"
+          >
+            <p>
+              Last Update: 
+              24141241
+            </p>
+            <a
+              href="#"
+              rel="noreferrer noopener"
+              target="_blank"
+            >
+              Mining now
+            </a>
+          </div>
+        </div>
+      </div>
+      <div
+        class="ant-card-body"
+      >
+        <p>
+          1000000
+           DEV
+        </p>
+        <button
+          class="ant-btn"
+          type="button"
+        >
+          <span>
+            Withdraw
+          </span>
+        </button>
+      </div>
+    </div>
+  </div>
+</body>
+`;

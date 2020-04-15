@@ -1,19 +1,9 @@
-import { newClient, getAccountAddress } from './client'
+import { getMyStakingAmount, getRewardsAmount, getTotalStakingAmount, withdrawHolderAmount } from './client'
 import { SWRCachePath } from './cache-path'
-import { addresses } from '@devprtcl/dev-kit-js'
 import { UnwrapFunc, toNaturalNumber } from 'src/fixtures/utility'
 import useSWR from 'swr'
 import { message } from 'antd'
-
-const getRewardsAmount = async (propertyAddress: string) => {
-  const client = newClient()
-  if (client) {
-    return client
-      .withdraw(await client.registry(addresses.eth.main.registry).withdraw())
-      .getRewardsAmount(propertyAddress)
-  }
-  return undefined
-}
+import { useState } from 'react'
 
 export const useGetTotalRewardsAmount = (propertyAddress: string) => {
   const { data, error } = useSWR<UnwrapFunc<typeof getRewardsAmount>, Error>(
@@ -24,12 +14,23 @@ export const useGetTotalRewardsAmount = (propertyAddress: string) => {
   return { totalRewardsAmount: data ? toNaturalNumber(data) : undefined, error }
 }
 
-const getTotalStakingAmount = async (proepertyAddress: string) => {
-  const client = newClient()
-  if (client) {
-    return client.lockup(await client.registry(addresses.eth.main.registry).lockup()).getPropertyValue(proepertyAddress)
+export const useWithdrawHolderReward = () => {
+  const [isLoading, setIsLoading] = useState<boolean>(false)
+  const [error, setError] = useState<Error | undefined>(undefined)
+
+  const withdraw = async (propertyAddress: string) => {
+    setIsLoading(true)
+    setError(undefined)
+    return withdrawHolderAmount(propertyAddress)
+      .then(() => setIsLoading(false))
+      .catch(err => {
+        setError(err)
+        message.error(err.message)
+        setIsLoading(false)
+      })
   }
-  return undefined
+
+  return { withdraw, isLoading, error }
 }
 
 export const useGetTotalStakingAmount = (propertyAddress: string) => {
@@ -39,17 +40,6 @@ export const useGetTotalStakingAmount = (propertyAddress: string) => {
     { onError: err => message.error(err.message) }
   )
   return { totalStakingAmount: data ? toNaturalNumber(data) : undefined, error }
-}
-
-const getMyStakingAmount = async (propertyAddress: string) => {
-  const client = newClient()
-  const accountAddress = getAccountAddress()
-  if (client && accountAddress) {
-    return client
-      .lockup(await client.registry(addresses.eth.main.registry).lockup())
-      .getValue(propertyAddress, accountAddress)
-  }
-  return undefined
 }
 
 export const useGetMyStakingAmount = (propertyAddress: string) => {
