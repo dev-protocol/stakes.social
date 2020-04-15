@@ -5,6 +5,7 @@ import { UnwrapFunc, toNaturalNumber } from 'src/fixtures/utility'
 import { getAccountAddress } from 'src/fixtures/wallet/utility'
 import useSWR from 'swr'
 import { message } from 'antd'
+import { useState } from 'react'
 
 const getRewardsAmount = async (propertyAddress: string) => {
   const client = newClient()
@@ -23,6 +24,27 @@ export const useGetTotalRewardsAmount = (propertyAddress: string) => {
     { onError: err => message.error(err.message) }
   )
   return { totalRewardsAmount: data ? toNaturalNumber(data) : undefined, error }
+}
+
+export const useWithdrawHolderReward = () => {
+  const [isLoading, setIsLoading] = useState<boolean>(false)
+  const [error, setError] = useState<Error | undefined>(undefined)
+
+  const withdraw = async (propertyAddress: string) => {
+    setIsLoading(true)
+    setError(undefined)
+    try {
+      const client = newClient()
+      if (!client) throw new Error(`No wallet`)
+      await client.withdraw(await client.registry(addresses.eth.main.registry).withdraw()).withdraw(propertyAddress)
+      setIsLoading(false)
+    } catch (err) {
+      setError(err)
+      setIsLoading(false)
+    }
+  }
+
+  return { withdraw, isLoading, error }
 }
 
 const getTotalStakingAmount = async (proepertyAddress: string) => {
@@ -64,11 +86,3 @@ export const useGetMyStakingAmount = (propertyAddress: string) => {
 
   return { myStakingAmount: data ? toNaturalNumber(data) : undefined, error }
 }
-
-// const withdrawHolderReward = async (propertyAddress: string) => {
-//   const client = newClient()
-//   if (client) {
-//     return client.withdraw(await client.registry(addresses.eth.main.registry).withdraw()).withdraw(propertyAddress)
-//   }
-//   return undefined
-// }
