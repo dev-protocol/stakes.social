@@ -1,14 +1,16 @@
 import React from 'react'
 import { render } from '@testing-library/react'
-import { WithdrawHolderCard } from './'
+import { WithdrawCard } from './'
+import BigNumber from 'bignumber.js'
 import 'src/__mocks__/window/matchMedia.mock'
 
 jest.mock('src/fixtures/dev-kit/hooks')
-jest.mock('@dev/graphql')
 
-describe(`${WithdrawHolderCard.name}`, () => {
+describe(`${WithdrawCard.name}`, () => {
   test('Snapshot', () => {
-    const component = render(<WithdrawHolderCard propertyAddress="propertyAddress" />)
+    const component = render(
+      <WithdrawCard label="Holder" onSubmitWithdraw={() => {}} amount={new BigNumber(1000)} lastUpdate={0} />
+    )
     const tree = component.baseElement
     expect(tree).toMatchSnapshot()
   })
