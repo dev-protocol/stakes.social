@@ -9,15 +9,141 @@ exports[`PossessionOutline Snapshot 1`] = `
       <div
         class="ant-card-body"
       >
-        <div>
-          total staking amount: 
-          10000
-           DEV
-        </div>
-        <div>
-          Your staking amount: 
-          5000
-           DEV
+        <div
+          class="ant-row"
+        >
+          <div
+            class="ant-col ant-col-6"
+          >
+            <div
+              class="ant-statistic"
+            >
+              <div
+                class="ant-statistic-title"
+              >
+                Total Staking Amount
+              </div>
+              <div
+                class="ant-statistic-content"
+              >
+                <span
+                  class="ant-statistic-content-value"
+                >
+                  <span
+                    class="ant-statistic-content-value-int"
+                  >
+                    
+                    10,000
+                  </span>
+                  
+                </span>
+                <span
+                  class="ant-statistic-content-suffix"
+                >
+                  DEV
+                </span>
+              </div>
+            </div>
+          </div>
+          <div
+            class="ant-col ant-col-6"
+          >
+            <div
+              class="ant-statistic"
+            >
+              <div
+                class="ant-statistic-title"
+              >
+                Your Staking Amount
+              </div>
+              <div
+                class="ant-statistic-content"
+              >
+                <span
+                  class="ant-statistic-content-value"
+                >
+                  <span
+                    class="ant-statistic-content-value-int"
+                  >
+                    
+                    5,000
+                  </span>
+                  
+                </span>
+                <span
+                  class="ant-statistic-content-suffix"
+                >
+                  DEV
+                </span>
+              </div>
+            </div>
+          </div>
+          <div
+            class="ant-col ant-col-6"
+          >
+            <div
+              class="ant-statistic"
+            >
+              <div
+                class="ant-statistic-title"
+              >
+                Average Interest Rate
+              </div>
+              <div
+                class="ant-statistic-content"
+              >
+                <span
+                  class="ant-statistic-content-value"
+                >
+                  <span
+                    class="ant-statistic-content-value-int"
+                  >
+                    
+                    5,000
+                  </span>
+                  
+                </span>
+                <span
+                  class="ant-statistic-content-suffix"
+                >
+                  %
+                </span>
+              </div>
+            </div>
+          </div>
+          <div
+            class="ant-col ant-col-6"
+          >
+            <div
+              class="ant-statistic"
+            >
+              <div
+                class="ant-statistic-title"
+              >
+                Total Rewards
+              </div>
+              <div
+                class="ant-statistic-content"
+              >
+                <span
+                  class="ant-statistic-content-value"
+                >
+                  <span
+                    class="ant-statistic-content-value-int"
+                  >
+                    
+                    5,000
+                  </span>
+                  
+                </span>
+                <span
+                  class="ant-statistic-content-suffix"
+                >
+                  DEV
+                </span>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
