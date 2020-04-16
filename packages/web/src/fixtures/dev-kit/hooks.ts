@@ -3,7 +3,7 @@ import { SWRCachePath } from './cache-path'
 import { UnwrapFunc, toNaturalNumber } from 'src/fixtures/utility'
 import useSWR from 'swr'
 import { message } from 'antd'
-import { useState } from 'react'
+import { useState, useCallback } from 'react'
 
 export const useGetTotalRewardsAmount = (propertyAddress: string) => {
   const { data, error } = useSWR<UnwrapFunc<typeof getRewardsAmount>, Error>(
@@ -16,19 +16,19 @@ export const useGetTotalRewardsAmount = (propertyAddress: string) => {
 
 export const useWithdrawHolderReward = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false)
-  const [error, setError] = useState<Error | undefined>(undefined)
-
-  const withdraw = async (propertyAddress: string) => {
+  const [error, setError] = useState<Error>()
+  const withdraw = useCallback(async (propertyAddress: string) => {
     setIsLoading(true)
-    setError(undefined)
     return withdrawHolderAmount(propertyAddress)
-      .then(() => setIsLoading(false))
+      .then(() => {
+        setIsLoading(false)
+      })
       .catch(err => {
         setError(err)
         message.error(err.message)
         setIsLoading(false)
       })
-  }
+  }, [])
 
   return { withdraw, isLoading, error }
 }
