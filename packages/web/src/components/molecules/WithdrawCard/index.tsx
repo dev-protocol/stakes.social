@@ -5,7 +5,7 @@ import { Card, Button } from 'antd'
 interface Props {
   label: 'Staking' | 'Holder'
   amount?: BigNumber
-  lastUpdate: string
+  lastUpdate?: number
   onSubmitWithdraw: () => void
 }
 
@@ -15,7 +15,7 @@ export const WithdrawCard = ({ amount, label, onSubmitWithdraw, lastUpdate }: Pr
       title={`Withdraw ${label} Reward`}
       extra={
         <>
-          <p>Last Update: {lastUpdate}</p>
+          {lastUpdate && <p>Last Update: {lastUpdate}</p>}
           <a href="#" target="_blank" rel="noreferrer noopener">
             Mining now
           </a>

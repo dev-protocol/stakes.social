@@ -3882,7 +3882,9 @@ export type GetLastAllocatorAllocationResultQueryVariables = {
 }
 
 export type GetLastAllocatorAllocationResultQuery = { __typename?: 'query_root' } & {
-  allocator_allocation_result: Array<{ __typename?: 'allocator_allocation_result' } & AllocatorAllocationResultFragment>
+  allocator_allocation_result: Array<
+    { __typename?: 'allocator_allocation_result' } & Pick<Allocator_Allocation_Result, 'block_number'>
+  >
 }
 
 export type ListAllocatorAllocationResultsQueryVariables = {
@@ -3951,10 +3953,9 @@ export const GetLastAllocatorAllocationResultDocument = gql`
       where: { property: { _eq: $propertyAddress } }
       order_by: { block_number: desc }
     ) {
-      ...allocatorAllocationResult
+      block_number
     }
   }
-  ${AllocatorAllocationResultFragmentDoc}
 `
 
 /**

@@ -4,6 +4,6 @@ query getLastAllocatorAllocationResult($propertyAddress: String!) {
     where: { property: { _eq: $propertyAddress } }
     order_by: { block_number: desc }
   ) {
-    ...allocatorAllocationResult
+    block_number
   }
 }
