@@ -1,5 +1,5 @@
 import React from 'react'
-import { Card } from 'antd'
+import { Card, Statistic, Row, Col } from 'antd'
 import { useGetTotalStakingAmount, useGetMyStakingAmount } from 'src/fixtures/dev-kit/hooks'
 
 interface Props {
@@ -12,8 +12,32 @@ export const PossessionOutline = ({ propertyAddress }: Props) => {
 
   return (
     <Card>
-      {totalStakingAmount && <div>total staking amount: {totalStakingAmount.dp(1).toNumber()} DEV</div>}
-      {myStakingAmount && <div>Your staking amount: {myStakingAmount.dp(1).toNumber()} DEV</div>}
+      <Row>
+        <Col span={6}>
+          <Statistic
+            title="Total Staking Amount"
+            value={totalStakingAmount && totalStakingAmount.dp(1).toNumber()}
+            suffix="DEV"
+          />
+        </Col>
+        <Col span={6}>
+          <Statistic
+            title="Your Staking Amount"
+            value={myStakingAmount && myStakingAmount.dp(1).toNumber()}
+            suffix="DEV"
+          />
+        </Col>
+        <Col span={6}>
+          <Statistic
+            title="Average Interest Rate"
+            value={myStakingAmount && myStakingAmount.dp(1).toNumber()}
+            suffix="%"
+          />
+        </Col>
+        <Col span={6}>
+          <Statistic title="Total Rewards" value={myStakingAmount && myStakingAmount.dp(1).toNumber()} suffix="DEV" />
+        </Col>
+      </Row>
     </Card>
   )
 }
