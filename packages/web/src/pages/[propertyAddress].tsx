@@ -4,6 +4,7 @@ import Router, { useRouter } from 'next/router'
 import dynamic from 'next/dynamic'
 import { PossessionOutline } from 'src/components/organisms/PossessionOutline'
 import { WithdrawHolderCard } from 'src/components/organisms/WithdrawHolder'
+import { InputFormCard } from 'src/components/molecules/InputFormCard'
 
 const WalletConnectButton = dynamic(
   () => import('src/components/organisms/WalletConnectButton').then(mod => mod.WalletConnectButton) as any,
@@ -22,6 +23,7 @@ const PropertyAddressDetail = (_: Props) => {
       <p>property address: {propertyAddress}</p>
       <PossessionOutline propertyAddress={propertyAddress} />
       <WithdrawHolderCard propertyAddress={propertyAddress} />
+      <InputFormCard label="Stake Now" suffix="DEV" onSubmitStake={() => console.log('submit')} />
     </div>
   )
 }
