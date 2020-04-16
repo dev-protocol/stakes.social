@@ -28,6 +28,17 @@ export const getTotalStakingAmount = async (proepertyAddress: string) => {
   return undefined
 }
 
+export const getMyHolderAmount = async (propertyAddress: string) => {
+  const client = newClient()
+  const accountAddress = getAccountAddress()
+  if (client && accountAddress) {
+    return client
+      .withdraw(await client.registry(addresses.eth.main.registry).withdraw())
+      .calculateWithdrawableAmount(propertyAddress, accountAddress)
+  }
+  return undefined
+}
+
 export const getMyStakingAmount = async (propertyAddress: string) => {
   const client = newClient()
   const accountAddress = getAccountAddress()

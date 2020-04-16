@@ -1,0 +1,13 @@
+fragment allocatorAllocationResult on allocator_allocation_result {
+  block_number
+  arg_value
+  event_id
+  lockup_value
+  log_index
+  market
+  metrics
+  property
+  raw_data
+  result
+  transaction_index
+}

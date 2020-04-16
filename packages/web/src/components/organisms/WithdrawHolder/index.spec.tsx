@@ -3,6 +3,7 @@ import { render } from '@testing-library/react'
 import { WithdrawHolderCard } from './'
 
 jest.mock('src/fixtures/dev-kit/hooks')
+jest.mock('@dev/graphql')
 
 describe(`${WithdrawHolderCard.name}`, () => {
   test('Snapshot', () => {
