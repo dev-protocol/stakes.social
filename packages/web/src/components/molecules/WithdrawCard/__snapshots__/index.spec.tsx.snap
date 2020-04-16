@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`WithdrawHolderCard Snapshot 1`] = `
+exports[`WithdrawCard Snapshot 1`] = `
 <body>
   <div>
     <div
@@ -27,34 +27,7 @@ exports[`WithdrawHolderCard Snapshot 1`] = `
           <div
             class="ant-col ant-col-12"
           >
-            <div
-              class="ant-space ant-space-horizontal"
-              style="vertical-align: middle; font-size: 18px; line-height: 24px; padding: 0px 0px 32px 0px;"
-            >
-              <div
-                class="ant-space-item"
-                style="margin-right: 31px;"
-              >
-                <div
-                  style="color: rgb(0, 0, 0);"
-                >
-                  Last Update: 
-                  42141412412
-                </div>
-              </div>
-              <div
-                class="ant-space-item"
-              >
-                <a
-                  href="#"
-                  rel="noreferrer noopener"
-                  style="text-decoration: underline;"
-                  target="_blank"
-                >
-                  Mining now
-                </a>
-              </div>
-            </div>
+            0
           </div>
         </div>
         <div
@@ -66,7 +39,7 @@ exports[`WithdrawHolderCard Snapshot 1`] = `
             <div
               style="font-size: 24px; line-height: 32px; color: rgba(0, 0, 0, 0.85);"
             >
-              6000
+              1000
                DEV
             </div>
           </div>
