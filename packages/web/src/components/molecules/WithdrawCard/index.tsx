@@ -1,6 +1,6 @@
 import React from 'react'
 import BigNumber from 'bignumber.js'
-import { Card, Button, Space } from 'antd'
+import { Card, Button, Space, Row, Col } from 'antd'
 
 interface Props {
   label: 'Staking' | 'Holder'
@@ -12,21 +12,39 @@ interface Props {
 export const WithdrawCard = ({ amount, label, onSubmitWithdraw, lastUpdate }: Props) => {
   return (
     <Card style={{ maxWidth: 961 }}>
-      <Space direction="horizontal" size={200}>
-        <Space direction="vertical" size={32}>
-          <div style={{ fontSize: '24px', lineHeight: '32px', color: '#000' }}>Withdraw {label} Reward</div>
+      <Row>
+        <Col span={12}>
+          <div style={{ fontSize: '24px', lineHeight: '32px', color: '#000', padding: '0 0 32px 0' }}>
+            Withdraw {label} Reward
+          </div>
+        </Col>
+        <Col span={12}>
+          {lastUpdate && (
+            <Space
+              direction="horizontal"
+              size={31}
+              style={{ verticalAlign: 'middle', fontSize: '18px', lineHeight: '24px', padding: '0 0 32px 0' }}
+            >
+              <div style={{ color: '#000' }}>Last Update: {lastUpdate}</div>
+              <a href="#" target="_blank" rel="noreferrer noopener" style={{ textDecoration: 'underline' }}>
+                Mining now
+              </a>
+            </Space>
+          )}
+        </Col>
+      </Row>
+      <Row>
+        <Col span={12}>
           <div style={{ fontSize: '24px', lineHeight: '32px', color: 'rgba(0, 0, 0, 0.85)' }}>
             {amount && amount.dp(1).toNumber()} DEV
           </div>
-        </Space>
-        <Space direction="vertical" size={32}>
-          {lastUpdate && <p>Last Update: {lastUpdate}</p>}
-          <a href="#" target="_blank" rel="noreferrer noopener">
-            Mining now
-          </a>
-          <Button onClick={onSubmitWithdraw}>Withdraw</Button>
-        </Space>
-      </Space>
+        </Col>
+        <Col span={12}>
+          <Button type="primary" size="large" onClick={onSubmitWithdraw}>
+            Withdraw
+          </Button>
+        </Col>
+      </Row>
     </Card>
   )
 }
