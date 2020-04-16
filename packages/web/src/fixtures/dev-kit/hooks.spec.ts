@@ -8,6 +8,7 @@ import {
 import useSWR from 'swr'
 import { toNaturalNumber } from 'src/fixtures/utility'
 import { withdrawHolderAmount } from './client'
+import { message } from 'antd'
 
 jest.mock('swr')
 jest.mock('src/fixtures/utility')
@@ -106,12 +107,27 @@ describe('dev-kit hooks', () => {
 
   describe('useWithdrawHolderReward', () => {
     test('success withdraw', async () => {
-      ;(withdrawHolderAmount as jest.Mock).mockImplementation(async () => true)
-      const { result } = renderHook(() => useWithdrawHolderReward())
+      const { result, waitForNextUpdate } = renderHook(() => useWithdrawHolderReward())
+      ;(withdrawHolderAmount as jest.Mock).mockResolvedValue(true)
       act(() => {
         result.current.withdraw('property-address')
       })
+      await waitForNextUpdate()
       expect(result.current.error).toBe(undefined)
+      expect(result.current.isLoading).toBe(false)
+    })
+
+    test('failure withdraw', async () => {
+      const error = new Error('error')
+      const { result, waitForNextUpdate } = renderHook(() => useWithdrawHolderReward())
+      ;(withdrawHolderAmount as jest.Mock).mockRejectedValue(error)
+      message.error = jest.fn(() => {}) as any
+      act(() => {
+        result.current.withdraw('property-address')
+      })
+      await waitForNextUpdate()
+      expect(result.current.error).toBe(error)
+      expect(result.current.isLoading).toBe(false)
     })
   })
 })
