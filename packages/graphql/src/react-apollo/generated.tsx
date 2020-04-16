@@ -3948,8 +3948,8 @@ export const GetLastAllocatorAllocationResultDocument = gql`
   query getLastAllocatorAllocationResult($propertyAddress: String!) {
     allocator_allocation_result(
       limit: 1
-      where: { property: { _eq: $propertyAddress }, block_number: {} }
-      order_by: { metrics: desc }
+      where: { property: { _eq: $propertyAddress } }
+      order_by: { block_number: desc }
     ) {
       ...allocatorAllocationResult
     }
