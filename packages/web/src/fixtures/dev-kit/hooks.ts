@@ -19,6 +19,7 @@ export const useWithdrawHolderReward = () => {
   const [error, setError] = useState<Error>()
   const withdraw = useCallback(async (propertyAddress: string) => {
     setIsLoading(true)
+    setError(undefined)
     return withdrawHolderAmount(propertyAddress)
       .then(() => {
         setIsLoading(false)
