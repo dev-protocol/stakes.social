@@ -1,0 +1,65 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`InputFormCard Snapshot 1`] = `
+<body>
+  <div>
+    <div
+      class="ant-card ant-card-bordered"
+      style="max-width: 961px;"
+    >
+      <div
+        class="ant-card-body"
+      >
+        <div
+          class="ant-row"
+        >
+          <div
+            style="font-size: 24px; line-height: 32px; color: rgb(0, 0, 0); padding: 0px 0px 32px 0px;"
+          >
+            Holder
+          </div>
+        </div>
+        <div
+          class="ant-row"
+        >
+          <span
+            class="ant-input-search ant-input-search-enter-button ant-input-search-large ant-input-group-wrapper ant-input-group-wrapper-lg"
+            style="max-width: 578px;"
+          >
+            <span
+              class="ant-input-wrapper ant-input-group"
+            >
+              <span
+                class="ant-input-search ant-input-search-enter-button ant-input-search-large ant-input-affix-wrapper ant-input-affix-wrapper-lg"
+              >
+                <input
+                  class="ant-input ant-input-lg"
+                  type="text"
+                  value=""
+                />
+                <span
+                  class="ant-input-suffix"
+                >
+                  DEV
+                </span>
+              </span>
+              <span
+                class="ant-input-group-addon"
+              >
+                <button
+                  class="ant-btn ant-input-search-button ant-btn-primary ant-btn-lg"
+                  type="button"
+                >
+                  <span>
+                    Stake
+                  </span>
+                </button>
+              </span>
+            </span>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+`;
