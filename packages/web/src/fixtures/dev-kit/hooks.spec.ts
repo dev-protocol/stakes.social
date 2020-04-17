@@ -142,7 +142,7 @@ describe('dev-kit hooks', () => {
       const { result, waitForNextUpdate } = renderHook(() => useWithdrawHolderReward())
       ;(withdrawHolderAmount as jest.Mock).mockResolvedValue(true)
       act(() => {
-        result.current.withdraw('property-address')
+        result.current.withdrawHolder('property-address')
       })
       await waitForNextUpdate()
       expect(result.current.error).toBe(undefined)
@@ -155,7 +155,7 @@ describe('dev-kit hooks', () => {
       ;(withdrawHolderAmount as jest.Mock).mockRejectedValue(error)
       message.error = jest.fn(() => {}) as any
       act(() => {
-        result.current.withdraw('property-address')
+        result.current.withdrawHolder('property-address')
       })
       await waitForNextUpdate()
       expect(result.current.error).toBe(error)
@@ -168,7 +168,7 @@ describe('dev-kit hooks', () => {
       const { result, waitForNextUpdate } = renderHook(() => useWithdrawStakingReward())
       ;(withdrawStakingAmount as jest.Mock).mockResolvedValue(true)
       act(() => {
-        result.current.withdraw('property-address')
+        result.current.withdrawStaking('property-address')
       })
       await waitForNextUpdate()
       expect(result.current.error).toBe(undefined)
@@ -181,7 +181,7 @@ describe('dev-kit hooks', () => {
       ;(withdrawStakingAmount as jest.Mock).mockRejectedValue(error)
       message.error = jest.fn(() => {}) as any
       act(() => {
-        result.current.withdraw('property-address')
+        result.current.withdrawStaking('property-address')
       })
       await waitForNextUpdate()
       expect(result.current.error).toBe(error)

@@ -24,7 +24,7 @@ export const useGetTotalRewardsAmount = (propertyAddress: string) => {
 export const useWithdrawHolderReward = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [error, setError] = useState<Error>()
-  const withdraw = useCallback(async (propertyAddress: string) => {
+  const withdrawHolder = useCallback(async (propertyAddress: string) => {
     setIsLoading(true)
     setError(undefined)
     return withdrawHolderAmount(propertyAddress)
@@ -38,7 +38,7 @@ export const useWithdrawHolderReward = () => {
       })
   }, [])
 
-  return { withdraw, isLoading, error }
+  return { withdrawHolder, isLoading, error }
 }
 
 export const useGetMyHolderAmount = (propertyAddress: string) => {
@@ -74,7 +74,7 @@ export const useGetMyStakingAmount = (propertyAddress: string) => {
 export const useWithdrawStakingReward = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [error, setError] = useState<Error>()
-  const withdraw = useCallback(async (propertyAddress: string) => {
+  const withdrawStaking = useCallback(async (propertyAddress: string) => {
     setIsLoading(true)
     setError(undefined)
     return withdrawStakingAmount(propertyAddress)
@@ -88,5 +88,5 @@ export const useWithdrawStakingReward = () => {
       })
   }, [])
 
-  return { withdraw, isLoading, error }
+  return { withdrawStaking, isLoading, error }
 }
