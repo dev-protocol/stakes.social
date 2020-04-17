@@ -1,5 +1,5 @@
 import React from 'react'
-import { useGetMyStakingAmount, useWithdrawStakingAmount } from 'src/fixtures/dev-kit/hooks'
+import { useGetMyStakingAmount, useWithdrawStakingReward } from 'src/fixtures/dev-kit/hooks'
 import { WithdrawCard } from 'src/components/molecules/WithdrawCard'
 import { useCallback } from 'react'
 import { useGetLastAllocatorAllocationResultQuery } from '@dev/graphql'
@@ -9,7 +9,7 @@ interface Props {
 }
 
 export const WithdrawStakingCard = ({ propertyAddress }: Props) => {
-  const { withdraw } = useWithdrawStakingAmount()
+  const { withdraw } = useWithdrawStakingReward()
   const { myStakingAmount } = useGetMyStakingAmount(propertyAddress)
   const { data } = useGetLastAllocatorAllocationResultQuery({ variables: { propertyAddress } })
 

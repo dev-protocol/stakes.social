@@ -71,7 +71,7 @@ export const useGetMyStakingAmount = (propertyAddress: string) => {
   return { myStakingAmount: data ? toNaturalNumber(data) : undefined, error }
 }
 
-export const useWithdrawStakingAmount = () => {
+export const useWithdrawStakingReward = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [error, setError] = useState<Error>()
   const withdraw = useCallback(async (propertyAddress: string) => {

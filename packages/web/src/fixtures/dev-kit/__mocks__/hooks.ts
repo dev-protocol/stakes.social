@@ -18,3 +18,7 @@ export const useGetMyStakingAmount = () => {
 export const useWithdrawHolderReward = () => {
   return { withdraw: () => {} }
 }
+
+export const useWithdrawStakingReward = () => {
+  return { withdraw: () => {} }
+}
