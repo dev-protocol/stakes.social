@@ -3,7 +3,8 @@ import {
   getRewardsAmount,
   getTotalStakingAmount,
   withdrawHolderAmount,
-  getMyHolderAmount
+  getMyHolderAmount,
+  withdrawStakingAmount
 } from './client'
 import { SWRCachePath } from './cache-path'
 import { UnwrapFunc, toNaturalNumber } from 'src/fixtures/utility'
@@ -68,4 +69,24 @@ export const useGetMyStakingAmount = (propertyAddress: string) => {
   )
 
   return { myStakingAmount: data ? toNaturalNumber(data) : undefined, error }
+}
+
+export const useWithdrawStakingAmount = () => {
+  const [isLoading, setIsLoading] = useState<boolean>(false)
+  const [error, setError] = useState<Error>()
+  const withdraw = useCallback(async (propertyAddress: string) => {
+    setIsLoading(true)
+    setError(undefined)
+    return withdrawStakingAmount(propertyAddress)
+      .then(() => {
+        setIsLoading(false)
+      })
+      .catch(err => {
+        setError(err)
+        message.error(err.message)
+        setIsLoading(false)
+      })
+  }, [])
+
+  return { withdraw, isLoading, error }
 }
