@@ -1,4 +1,4 @@
-import React from 'react'
+import * as React from 'react'
 import { Card, Input, Row } from 'antd'
 
 const { Search } = Input
@@ -6,7 +6,14 @@ const { Search } = Input
 interface Props {
   label: string
   suffix?: string
-  onSubmitStake: () => void
+  onSubmitStake: (
+    value: string,
+    event?:
+      | React.ChangeEvent<HTMLInputElement>
+      | React.MouseEvent<HTMLElement, MouseEvent>
+      | React.KeyboardEvent<HTMLInputElement>
+      | undefined
+  ) => void
 }
 
 export const InputFormCard = ({ label, suffix, onSubmitStake }: Props) => {
@@ -22,6 +29,7 @@ export const InputFormCard = ({ label, suffix, onSubmitStake }: Props) => {
           onSearch={onSubmitStake}
           style={{ maxWidth: '578px' }}
           suffix={suffix}
+          type="number"
         />
       </Row>
     </Card>
