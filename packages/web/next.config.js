@@ -6,7 +6,7 @@ const withCss = require('@zeit/next-css')
 
 const themeVariables = lessToJS(fs.readFileSync(path.resolve(__dirname, './src/assets/antd-custom.less'), 'utf8'))
 if (typeof require !== 'undefined') {
-  require.extensions['.less'] = (file) => {}
+  require.extensions['.less'] = file => {}
 }
 
 module.exports = withCss(
@@ -24,12 +24,12 @@ module.exports = withCss(
               callback()
             }
           },
-          ...(typeof origExternals[0] === 'function' ? [] : origExternals),
+          ...(typeof origExternals[0] === 'function' ? [] : origExternals)
         ]
 
         config.module.rules.unshift({
           test: antStyles,
-          use: 'null-loader',
+          use: 'null-loader'
         })
       }
 
@@ -55,10 +55,10 @@ module.exports = withCss(
     },
     lessLoaderOptions: {
       javascriptEnabled: true,
-      modifyVars: themeVariables, // make your antd custom effective
+      modifyVars: themeVariables // make your antd custom effective
     },
     env: {
-      END_POINT: process.env.END_POINT || 'http://localhost:3003/graphql',
-    },
+      END_POINT: process.env.END_POINT || 'http://localhost:3003/graphql'
+    }
   })
 )
