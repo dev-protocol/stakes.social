@@ -7,6 +7,7 @@ import { WithdrawHolderCard } from 'src/components/organisms/WithdrawHolder'
 import { InputFormCard } from 'src/components/molecules/InputFormCard'
 import { PropertyHeader } from 'src/components/organisms/PropertyHeader'
 import { WithdrawStakingCard } from 'src/components/organisms/WithdrawStaking'
+import { MembersList } from 'src/components/organisms/MembersList'
 
 const WalletConnectButton = dynamic(
   () => import('src/components/organisms/WalletConnectButton').then(mod => mod.WalletConnectButton) as any,
@@ -28,6 +29,14 @@ const PropertyAddressDetail = (_: Props) => {
       <WithdrawHolderCard propertyAddress={propertyAddress} />
       <WithdrawStakingCard propertyAddress={propertyAddress} />
       <InputFormCard label="Stake Now" suffix="DEV" onSubmitStake={() => console.log('submit')} />
+      <MembersList
+        // TODO: replace dummy data
+        membersList={[
+          { propertyAddress: '0x6cf01928Fa5115C1283dD108746C2FEaa9Ef4B12', percentage: 28 },
+          { propertyAddress: '0x6cf01928Fa5115C1283dD108746C2FEaa9Ef4B12', percentage: 28 },
+          { propertyAddress: '0x6cf01928Fa5115C1283dD108746C2FEaa9Ef4B12', percentage: 28 }
+        ]}
+      />
     </div>
   )
 }
