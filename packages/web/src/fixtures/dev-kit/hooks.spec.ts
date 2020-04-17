@@ -195,7 +195,9 @@ describe('dev-kit hooks', () => {
       const data = '11111'
       const { result, waitForNextUpdate } = renderHook(() => useStake())
       ;(stakeDev as jest.Mock).mockResolvedValue(true)
-      ;(toAmountNumber as jest.Mock).mockImplementation(() => Number(data))
+      ;(toAmountNumber as jest.Mock).mockImplementation(() => ({
+        toFormat: () => data
+      }))
       act(() => {
         result.current.stake('property-address', data)
       })
@@ -209,7 +211,9 @@ describe('dev-kit hooks', () => {
       const error = new Error('error')
       const { result, waitForNextUpdate } = renderHook(() => useStake())
       ;(stakeDev as jest.Mock).mockRejectedValue(error)
-      ;(toAmountNumber as jest.Mock).mockImplementation(() => Number(data))
+      ;(toAmountNumber as jest.Mock).mockImplementation(() => ({
+        toFormat: () => data
+      }))
       act(() => {
         result.current.stake('property-address', '11111')
       })
