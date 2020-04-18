@@ -5,7 +5,8 @@ import {
   withdrawHolderAmount,
   getMyHolderAmount,
   withdrawStakingAmount,
-  stakeDev
+  stakeDev,
+  cancelStaking
 } from './client'
 import { SWRCachePath } from './cache-path'
 import { UnwrapFunc, toNaturalNumber, toAmountNumber } from 'src/fixtures/utility'
@@ -110,4 +111,24 @@ export const useStake = () => {
   }, [])
 
   return { stake, isLoading, error }
+}
+
+export const useCancelStaking = () => {
+  const [isLoading, setIsLoading] = useState<boolean>(false)
+  const [error, setError] = useState<Error>()
+  const cancel = useCallback(async (propertyAddress: string) => {
+    setIsLoading(true)
+    setError(undefined)
+    return cancelStaking(propertyAddress)
+      .then(() => {
+        setIsLoading(false)
+      })
+      .catch(err => {
+        setError(err)
+        message.error(err.message)
+        setIsLoading(false)
+      })
+  }, [])
+
+  return { cancel, isLoading, error }
 }

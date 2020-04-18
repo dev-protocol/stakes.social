@@ -67,3 +67,9 @@ export const stakeDev = async (propertyAddress: string, amount: string) => {
   if (!client) throw new Error(`No wallet`)
   return client.dev(await client.registry(addresses.eth.main.registry).token()).deposit(propertyAddress, amount)
 }
+
+export const cancelStaking = async (propertyAddress: string) => {
+  const client = newClient()
+  if (!client) throw new Error(`No wallet`)
+  return client.lockup(await client.registry(addresses.eth.main.registry).lockup()).cancel(propertyAddress)
+}
