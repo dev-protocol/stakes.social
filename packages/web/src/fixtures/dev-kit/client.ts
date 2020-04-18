@@ -73,3 +73,19 @@ export const cancelStaking = async (propertyAddress: string) => {
   if (!client) throw new Error(`No wallet`)
   return client.lockup(await client.registry(addresses.eth.main.registry).lockup()).cancel(propertyAddress)
 }
+
+export const getLastAssetValueEachMetrics = async (metricsAddress: string) => {
+  const client = newClient()
+  if (client) {
+    return client.allocatorStorage().getLastAssetValueEachMetrics(metricsAddress)
+  }
+  return undefined
+}
+
+export const getLastAssetValueEachMarketPerBlock = async (marketAddress: string) => {
+  const client = newClient()
+  if (client) {
+    return client.allocatorStorage().getLastAssetValueEachMarketPerBlock(marketAddress)
+  }
+  return undefined
+}

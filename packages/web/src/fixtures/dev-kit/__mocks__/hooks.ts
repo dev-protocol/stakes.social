@@ -30,3 +30,7 @@ export const useStake = () => {
 export const useCancelStaking = () => {
   return { cancel: () => {} }
 }
+
+export const useAssetStrength = () => {
+  return { assetStrength: 25.53481 }
+}
