@@ -4,10 +4,11 @@ import {
   getTotalStakingAmount,
   withdrawHolderAmount,
   getMyHolderAmount,
-  withdrawStakingAmount
+  withdrawStakingAmount,
+  stakeDev
 } from './client'
 import { SWRCachePath } from './cache-path'
-import { UnwrapFunc, toNaturalNumber } from 'src/fixtures/utility'
+import { UnwrapFunc, toNaturalNumber, toAmountNumber } from 'src/fixtures/utility'
 import useSWR from 'swr'
 import { message } from 'antd'
 import { useState, useCallback } from 'react'
@@ -89,4 +90,24 @@ export const useWithdrawStakingReward = () => {
   }, [])
 
   return { withdrawStaking, isLoading, error }
+}
+
+export const useStake = () => {
+  const [isLoading, setIsLoading] = useState<boolean>(false)
+  const [error, setError] = useState<Error>()
+  const stake = useCallback(async (propertyAddress: string, amount: string) => {
+    setIsLoading(true)
+    setError(undefined)
+    return stakeDev(propertyAddress, toAmountNumber(amount).toFormat({ decimalSeparator: '' }))
+      .then(() => {
+        setIsLoading(false)
+      })
+      .catch(err => {
+        setError(err)
+        message.error(err.message)
+        setIsLoading(false)
+      })
+  }, [])
+
+  return { stake, isLoading, error }
 }

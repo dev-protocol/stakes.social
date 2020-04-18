@@ -1,0 +1,43 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ButtonCard Snapshot 1`] = `
+<body>
+  <div>
+    <div
+      class="ant-card ant-card-bordered"
+      style="max-width: 961px;"
+    >
+      <div
+        class="ant-card-body"
+      >
+        <div
+          class="ant-row"
+        >
+          <div
+            class="ant-col ant-col-12"
+            style="display: flex; align-items: center;"
+          >
+            <div
+              style="font-size: 24px; line-height: 32px; color: rgb(0, 0, 0);"
+            >
+              Cancel Staking
+            </div>
+          </div>
+          <div
+            class="ant-col ant-col-12"
+          >
+            <button
+              class="ant-btn ant-btn-primary ant-btn-lg"
+              type="button"
+            >
+              <span>
+                Cancel
+              </span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+`;

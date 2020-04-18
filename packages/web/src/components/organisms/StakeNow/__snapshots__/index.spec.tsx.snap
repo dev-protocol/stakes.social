@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`InputFormCard Snapshot 1`] = `
+exports[`StakeNow Snapshot 1`] = `
 <body>
   <div>
     <div
@@ -16,7 +16,7 @@ exports[`InputFormCard Snapshot 1`] = `
           <div
             style="font-size: 24px; line-height: 32px; color: rgb(0, 0, 0); padding: 0px 0px 32px 0px;"
           >
-            Holder
+            Stake Now
           </div>
         </div>
         <div

@@ -1,0 +1,44 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MembersList Snapshot 1`] = `
+<body>
+  <div>
+    <div>
+      <div
+        style="font-size: 18px; line-height: 24px; margin: 0px 0px 32px 0px;"
+      >
+        Members
+      </div>
+      <div>
+        <div
+          style="max-width: 961px;"
+        >
+          <div
+            class="ant-row"
+          >
+            <div
+              class="ant-col ant-col-16"
+            >
+              <div
+                style="font-size: 24px; line-height: 32px;"
+              >
+                property-address
+              </div>
+            </div>
+            <div
+              class="ant-col ant-col-8"
+            >
+              <div
+                style="font-size: 24px; line-height: 32px;"
+              >
+                28
+                %
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+`;
