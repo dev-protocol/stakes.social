@@ -1,11 +1,17 @@
 import React from 'react'
 import { Button } from 'antd'
+import { useConnectWallet } from 'src/fixtures/wallet/hooks'
 
 interface Props {
   propertyAddress: string
 }
 
 export const PropertyHeader = ({ propertyAddress }: Props) => {
+  const { isConnected, connect } = useConnectWallet()
+  const handleClick = () => {
+    connect()
+  }
+
   return (
     <div
       style={{
@@ -16,8 +22,9 @@ export const PropertyHeader = ({ propertyAddress }: Props) => {
       }}
     >
       <h1 style={{ display: 'inline', color: 'white', fontSize: '48px', lineHeight: '64px' }}>App Name</h1>
-      <Button size="large" style={{ float: 'right' }}>
-        Connect to a wallet
+      <Button size="large" style={{ float: 'right' }} disabled={isConnected} onClick={handleClick}>
+        {isConnected && 'Wallet connected'}
+        {!isConnected && 'Connect to a wallet'}
       </Button>
       <div
         style={{

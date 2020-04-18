@@ -1,12 +1,6 @@
 import React from 'react'
 import { useListPropertyQuery } from '@dev/graphql'
 import { PropertyCard } from 'src/components/organisms/PropertyCard'
-import dynamic from 'next/dynamic'
-
-const WalletConnectButton = dynamic(
-  () => import('src/components/organisms/WalletConnectButton').then(mod => mod.WalletConnectButton) as any,
-  { ssr: false }
-)
 
 type InitialProps = {}
 type Props = {} & InitialProps
@@ -16,7 +10,6 @@ const Index = (_: Props) => {
 
   return (
     <div>
-      <WalletConnectButton />
       {loading && <div>loading.......</div>}
       {data && (
         <div>
