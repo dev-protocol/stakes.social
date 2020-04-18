@@ -26,3 +26,7 @@ export const useWithdrawStakingReward = () => {
 export const useStake = () => {
   return { stake: () => {} }
 }
+
+export const useCancelStaking = () => {
+  return { cancel: () => {} }
+}

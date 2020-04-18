@@ -6,11 +6,12 @@ import {
   useWithdrawHolderReward,
   useWithdrawStakingReward,
   useGetMyHolderAmount,
-  useStake
+  useStake,
+  useCancelStaking
 } from './hooks'
 import useSWR from 'swr'
 import { toNaturalNumber, toAmountNumber } from 'src/fixtures/utility'
-import { withdrawHolderAmount, withdrawStakingAmount, stakeDev } from './client'
+import { withdrawHolderAmount, withdrawStakingAmount, stakeDev, cancelStaking } from './client'
 import { message } from 'antd'
 
 jest.mock('swr')
@@ -216,6 +217,31 @@ describe('dev-kit hooks', () => {
       }))
       act(() => {
         result.current.stake('property-address', '11111')
+      })
+      await waitForNextUpdate()
+      expect(result.current.error).toBe(error)
+      expect(result.current.isLoading).toBe(false)
+    })
+  })
+
+  describe('useCancelStaking', () => {
+    test('success cancel', async () => {
+      const { result, waitForNextUpdate } = renderHook(() => useCancelStaking())
+      ;(cancelStaking as jest.Mock).mockResolvedValue(true)
+      act(() => {
+        result.current.cancel('property-address')
+      })
+      await waitForNextUpdate()
+      expect(result.current.error).toBe(undefined)
+      expect(result.current.isLoading).toBe(false)
+    })
+
+    test('failure cancel', async () => {
+      const error = new Error('error')
+      const { result, waitForNextUpdate } = renderHook(() => useCancelStaking())
+      ;(cancelStaking as jest.Mock).mockRejectedValue(error)
+      act(() => {
+        result.current.cancel('property-address')
       })
       await waitForNextUpdate()
       expect(result.current.error).toBe(error)
