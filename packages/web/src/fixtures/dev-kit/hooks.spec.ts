@@ -5,11 +5,12 @@ import {
   useGetMyStakingAmount,
   useWithdrawHolderReward,
   useWithdrawStakingReward,
-  useGetMyHolderAmount
+  useGetMyHolderAmount,
+  useStake
 } from './hooks'
 import useSWR from 'swr'
-import { toNaturalNumber } from 'src/fixtures/utility'
-import { withdrawHolderAmount, withdrawStakingAmount } from './client'
+import { toNaturalNumber, toAmountNumber } from 'src/fixtures/utility'
+import { withdrawHolderAmount, withdrawStakingAmount, stakeDev } from './client'
 import { message } from 'antd'
 
 jest.mock('swr')
@@ -182,6 +183,39 @@ describe('dev-kit hooks', () => {
       message.error = jest.fn(() => {}) as any
       act(() => {
         result.current.withdraw('property-address')
+      })
+      await waitForNextUpdate()
+      expect(result.current.error).toBe(error)
+      expect(result.current.isLoading).toBe(false)
+    })
+  })
+
+  describe('useStake', () => {
+    test('success withdraw', async () => {
+      const data = '11111'
+      const { result, waitForNextUpdate } = renderHook(() => useStake())
+      ;(stakeDev as jest.Mock).mockResolvedValue(true)
+      ;(toAmountNumber as jest.Mock).mockImplementation(() => ({
+        toFormat: () => data
+      }))
+      act(() => {
+        result.current.stake('property-address', data)
+      })
+      await waitForNextUpdate()
+      expect(result.current.error).toBe(undefined)
+      expect(result.current.isLoading).toBe(false)
+    })
+
+    test('failure withdraw', async () => {
+      const data = '11111'
+      const error = new Error('error')
+      const { result, waitForNextUpdate } = renderHook(() => useStake())
+      ;(stakeDev as jest.Mock).mockRejectedValue(error)
+      ;(toAmountNumber as jest.Mock).mockImplementation(() => ({
+        toFormat: () => data
+      }))
+      act(() => {
+        result.current.stake('property-address', '11111')
       })
       await waitForNextUpdate()
       expect(result.current.error).toBe(error)

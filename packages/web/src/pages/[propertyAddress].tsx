@@ -4,9 +4,9 @@ import Router, { useRouter } from 'next/router'
 import dynamic from 'next/dynamic'
 import { PossessionOutline } from 'src/components/organisms/PossessionOutline'
 import { WithdrawHolderCard } from 'src/components/organisms/WithdrawHolder'
-import { InputFormCard } from 'src/components/molecules/InputFormCard'
 import { PropertyHeader } from 'src/components/organisms/PropertyHeader'
 import { WithdrawStakingCard } from 'src/components/organisms/WithdrawStaking'
+import { StakeNow } from 'src/components/organisms/StakeNow'
 import { MembersList } from 'src/components/organisms/MembersList'
 
 const WalletConnectButton = dynamic(
@@ -28,7 +28,7 @@ const PropertyAddressDetail = (_: Props) => {
       <PossessionOutline propertyAddress={propertyAddress} />
       <WithdrawHolderCard propertyAddress={propertyAddress} />
       <WithdrawStakingCard propertyAddress={propertyAddress} />
-      <InputFormCard label="Stake Now" suffix="DEV" onSubmitStake={() => console.log('submit')} />
+      <StakeNow propertyAddress={propertyAddress} />
       <MembersList
         // TODO: replace dummy data
         membersList={[
