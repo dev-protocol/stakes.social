@@ -6,7 +6,9 @@ import {
   getMyHolderAmount,
   withdrawStakingAmount,
   stakeDev,
-  cancelStaking
+  cancelStaking,
+  getLastAssetValueEachMetrics,
+  getLastAssetValueEachMarketPerBlock
 } from './client'
 import { SWRCachePath } from './cache-path'
 import { UnwrapFunc, toNaturalNumber, toAmountNumber } from 'src/fixtures/utility'
@@ -131,4 +133,23 @@ export const useCancelStaking = () => {
   }, [])
 
   return { cancel, isLoading, error }
+}
+
+export const useAssetStrength = (metricsAddress: string, marketAddress: string) => {
+  const { data: metrics, error: metricsError } = useSWR<UnwrapFunc<typeof getLastAssetValueEachMetrics>, Error>(
+    SWRCachePath.getLastAssetValueEachMetrics(metricsAddress),
+    () => getLastAssetValueEachMetrics(metricsAddress),
+    {
+      onError: err => message.error(err.message)
+    }
+  )
+  const { data: market, error: marketError } = useSWR<UnwrapFunc<typeof getLastAssetValueEachMarketPerBlock>, Error>(
+    SWRCachePath.getLastAssetValueEachMarketPerBlock(marketAddress),
+    () => getLastAssetValueEachMarketPerBlock(marketAddress),
+    { onError: err => message.error(err.message) }
+  )
+  return {
+    assetStrength: metrics && market ? Number(metrics) / Number(market) : undefined,
+    error: metricsError || marketError
+  }
 }

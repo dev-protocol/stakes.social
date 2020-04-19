@@ -7,7 +7,8 @@ import {
   useWithdrawStakingReward,
   useGetMyHolderAmount,
   useStake,
-  useCancelStaking
+  useCancelStaking,
+  useAssetStrength
 } from './hooks'
 import useSWR from 'swr'
 import { toNaturalNumber, toAmountNumber } from 'src/fixtures/utility'
@@ -246,6 +247,47 @@ describe('dev-kit hooks', () => {
       await waitForNextUpdate()
       expect(result.current.error).toBe(error)
       expect(result.current.isLoading).toBe(false)
+    })
+
+    describe('useAssetStrength', () => {
+      test('data is undefined', () => {
+        const data = undefined
+        const error = undefined
+        ;(useSWR as jest.Mock).mockImplementation(() => ({ data, error }))
+        const { result } = renderHook(() => useAssetStrength('metrics-address', 'market-address'))
+        expect(result.current.assetStrength).toBe(data)
+      })
+
+      test('success fetching data', () => {
+        const data1 = '10000'
+        const data2 = '5000'
+        ;(useSWR as jest.Mock).mockImplementationOnce(() => ({ data: data1, error: undefined }))
+        ;(useSWR as jest.Mock).mockImplementationOnce(() => ({ data: data2, error: undefined }))
+        const { result } = renderHook(() => useAssetStrength('metrics-address', 'market-address'))
+        expect(result.current.assetStrength).toBe(Number(data1) / Number(data2))
+      })
+
+      test('failure fetching metrics data', () => {
+        const data = undefined
+        const errorMessage = 'error'
+        const error = new Error(errorMessage)
+        ;(useSWR as jest.Mock).mockImplementation(() => ({ data, error }))
+        const { result } = renderHook(() => useAssetStrength('metrics-address', 'market-address'))
+        expect(result.current.error).toBe(error)
+        expect(result.current.error?.message).toBe(errorMessage)
+      })
+
+      test('failure fetching market data', () => {
+        const data1 = '10000'
+        const data2 = undefined
+        const errorMessage = 'error'
+        const error = new Error(errorMessage)
+        ;(useSWR as jest.Mock).mockImplementationOnce(() => ({ data: data1, error: undefined }))
+        ;(useSWR as jest.Mock).mockImplementationOnce(() => ({ data: data2, error }))
+        const { result } = renderHook(() => useAssetStrength('metrics-address', 'market-address'))
+        expect(result.current.error).toBe(error)
+        expect(result.current.error?.message).toBe(errorMessage)
+      })
     })
   })
 })
