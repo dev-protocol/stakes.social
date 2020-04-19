@@ -1,0 +1,70 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Footer Snapshot 1`] = `
+<body>
+  <div>
+    <div
+      style="width: auto; max-width: 1048px; margin-right: auto; margin-left: auto; text-align: center; font-size: 18px; line-height: 24px; padding: 118px 0px 84px 0px;"
+    >
+      <div>
+        <div>
+          XXX is powered by the Dev Protocol, see the whitepaper on GitHub.
+        </div>
+        <div>
+          Enjoy following the Dev Protocol community on Discord, Medium, Spectrum, and Twitter!
+        </div>
+      </div>
+      <svg
+        fill="none"
+        height="50"
+        viewBox="0 0 84 30"
+        width="50"
+      >
+        <mask
+          height="30"
+          id="Logo_svg__a"
+          maskUnits="userSpaceOnUse"
+          width="84"
+          x="0"
+          y="0"
+        >
+          <path
+            d="M0 0h13.558c3.24 0 6.096.621 8.569 1.864 2.501 1.215 4.434 2.938 5.798 5.17 1.393 2.232 2.09 4.83 2.09 7.797 0 2.966-.697 5.564-2.09 7.796-1.364 2.232-3.297 3.969-5.798 5.212-2.473 1.215-5.33 1.822-8.57 1.822H0V0zm13.216 24.025c2.985 0 5.358-.819 7.12-2.457 1.791-1.667 2.686-3.913 2.686-6.738 0-2.824-.895-5.056-2.686-6.694-1.762-1.667-4.135-2.5-7.12-2.5h-6.31v18.39h6.31zM46.308 24.703c1.193 0 2.245-.17 3.155-.508.938-.367 1.804-.932 2.6-1.695l3.539 3.814C53.442 28.77 50.287 30 46.137 30c-2.586 0-4.874-.494-6.864-1.483-1.99-1.017-3.524-2.415-4.604-4.195-1.08-1.78-1.62-3.8-1.62-6.06 0-2.23.525-4.237 1.577-6.016a11.163 11.163 0 014.391-4.195c1.876-1.017 3.98-1.526 6.31-1.526 2.189 0 4.178.467 5.969 1.399 1.79.904 3.212 2.231 4.263 3.983 1.08 1.723 1.62 3.771 1.62 6.144l-16.968 3.263c.483 1.13 1.236 1.977 2.26 2.542 1.051.565 2.33.847 3.837.847zm-.98-13.178c-1.678 0-3.042.537-4.094 1.61-1.051 1.074-1.606 2.557-1.663 4.45l11.17-2.161c-.312-1.187-.952-2.133-1.918-2.84-.966-.705-2.132-1.059-3.496-1.059zM84 6.864l-9.678 22.797h-6.864L57.823 6.864h6.864l6.352 15.509 6.566-15.509H84z"
+            fill="#000"
+          />
+        </mask>
+        <g
+          mask="url(#Logo_svg__a)"
+        >
+          <path
+            d="M84.032.018H0v29.887h84.032V.017z"
+            fill="url(#Logo_svg__paint0_linear)"
+          />
+        </g>
+        <defs>
+          <lineargradient
+            gradientUnits="userSpaceOnUse"
+            id="Logo_svg__paint0_linear"
+            x1="0"
+            x2="83.617"
+            y1="16.053"
+            y2="16.053"
+          >
+            <stop
+              stop-color="#00EBFF"
+            />
+            <stop
+              offset="0.35"
+              stop-color="#F200DF"
+            />
+            <stop
+              offset="1"
+              stop-color="#FF4700"
+            />
+          </lineargradient>
+        </defs>
+      </svg>
+    </div>
+  </div>
+</body>
+`;
