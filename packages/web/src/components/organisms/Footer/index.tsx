@@ -13,7 +13,7 @@ export const Footer = () => {
         fontSize: '18px',
         fontWeight: 'bold',
         lineHeight: '24px',
-        padding: '118px 0 84px 0'
+        padding: '0 0 84px 0'
       }}
     >
       <div>

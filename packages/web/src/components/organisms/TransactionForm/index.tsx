@@ -31,7 +31,7 @@ export const TransactionForm = ({ propertyAddress }: Props) => {
 
   return (
     <div>
-      <div style={{ margin: '62px 0 46px 0' }}>
+      <div style={{ margin: '0 0 46px 0' }}>
         <InputFormCard label="Stake Now" suffix="DEV" onSubmitStake={handleSubmit} />
       </div>
       <div style={{ margin: '0 0 46px 0' }}>
