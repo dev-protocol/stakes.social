@@ -5,8 +5,100 @@ exports[`AssetOutline Snapshot 1`] = `
   <div>
     <div>
       <div
-        style="width: 224px; height: 224px; border-radius: 50%; background-color: rgb(47, 128, 237); background-clip: padding-box; border: -2747.89872px solid rgba(47, 128, 237, 0.2);"
-      />
+        class="ant-space ant-space-horizontal"
+      >
+        <div
+          class="ant-space-item"
+          style="margin-right: 112px;"
+        >
+          <div>
+            <p
+              style="font-size: 18px; line-height: 24px; color: rgb(0, 0, 0);"
+            >
+              Included Assets
+            </p>
+            <div
+              class="ant-list ant-list-split ant-list-bordered"
+              style="max-width: 272px;"
+            >
+              <div
+                class="ant-spin-nested-loading"
+              >
+                <div
+                  class="ant-spin-container"
+                >
+                  <ul
+                    class="ant-list-items"
+                  >
+                    <li
+                      class="ant-list-item"
+                      style="font-size: 24px; line-height: 32px; color: rgb(0, 0, 0);"
+                    >
+                      x-lib
+                    </li>
+                    <li
+                      class="ant-list-item"
+                      style="font-size: 24px; line-height: 32px; color: rgb(0, 0, 0);"
+                    >
+                      x-plugin-lib
+                    </li>
+                    <li
+                      class="ant-list-item"
+                      style="font-size: 24px; line-height: 32px; color: rgb(0, 0, 0);"
+                    >
+                      x-xxx
+                    </li>
+                    <li
+                      class="ant-list-item"
+                      style="font-size: 24px; line-height: 32px; color: rgb(0, 0, 0);"
+                    >
+                      x-xxxxxxxxxxxxx...
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          class="ant-space-item"
+        >
+          <div>
+            <p
+              style="font-size: 18px; line-height: 24px; color: rgb(0, 0, 0); padding: 0px 36px;"
+            >
+              Assets Strength
+            </p>
+            <div
+              class="ant-space ant-space-horizontal"
+            >
+              <div
+                class="ant-space-item"
+                style="margin-right: 40px;"
+              >
+                <div
+                  style="width: 224px; height: 224px; border-radius: 50%; background-color: rgb(47, 128, 237); background-clip: padding-box; border: -2747.89872px solid rgba(47, 128, 237, 0.2);"
+                />
+              </div>
+              <div
+                class="ant-space-item"
+              >
+                <div>
+                  <span
+                    style="font-size: 36px; line-height: 48px; color: rgb(0, 0, 0);"
+                  >
+                    2553.481
+                    %
+                  </span>
+                  <span>
+                     of total market
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </body>
