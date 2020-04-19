@@ -11,7 +11,7 @@ interface Props {
 
 export const WithdrawCard = ({ amount, label, onSubmitWithdraw, lastUpdate }: Props) => {
   return (
-    <Card style={{ maxWidth: 961 }}>
+    <Card>
       <Row>
         <Col span={12}>
           <div style={{ fontSize: '24px', lineHeight: '32px', color: '#000', padding: '0 0 32px 0' }}>
@@ -36,7 +36,7 @@ export const WithdrawCard = ({ amount, label, onSubmitWithdraw, lastUpdate }: Pr
       <Row>
         <Col span={12}>
           <div style={{ fontSize: '24px', lineHeight: '32px', color: 'rgba(0, 0, 0, 0.85)' }}>
-            {amount && amount.dp(1).toNumber()} DEV
+            {amount ? amount.dp(1).toNumber() : 0} DEV
           </div>
         </Col>
         <Col span={12}>
