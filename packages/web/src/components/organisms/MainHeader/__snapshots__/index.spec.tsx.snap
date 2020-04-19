@@ -1,0 +1,37 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MainHeader Snapshot 1`] = `
+<body>
+  <div>
+    <div
+      style="padding: 50px;"
+    >
+      <div>
+        <div
+          style="display: inline; color: rgb(0, 0, 0); font-size: 48px; line-height: 64px;"
+        >
+          App Name
+        </div>
+        <button
+          class="ant-btn ant-btn-lg"
+          style="float: right;"
+          type="button"
+        >
+          <span>
+            Connect to a wallet
+          </span>
+        </button>
+      </div>
+      <div
+        style="height: 500px; display: flex; justify-content: center; align-items: center; font-size: 48px; line-height: 64px;"
+      >
+        <p
+          style="color: rgb(47, 128, 237);"
+        >
+          Make a community sustainable together
+        </p>
+      </div>
+    </div>
+  </div>
+</body>
+`;
