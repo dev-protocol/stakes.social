@@ -1,5 +1,4 @@
 import React, { useCallback } from 'react'
-import { Space } from 'antd'
 import { useGetMyStakingAmount, useWithdrawStakingReward, useCancelStaking } from 'src/fixtures/dev-kit/hooks'
 import { useWithdrawHolderReward, useGetMyHolderAmount } from 'src/fixtures/dev-kit/hooks'
 import { useStake } from 'src/fixtures/dev-kit/hooks'
@@ -31,21 +30,29 @@ export const TransactionForm = ({ propertyAddress }: Props) => {
   const handleCancelStaking = useCallback(() => cancel(propertyAddress), [propertyAddress, cancel])
 
   return (
-    <Space size={46} direction="vertical">
-      <InputFormCard label="Stake Now" suffix="DEV" onSubmitStake={handleSubmit} />
-      <WithdrawCard
-        label="Staking"
-        onSubmitWithdraw={handleWithdrawStaking}
-        amount={myStakingAmount}
-        lastUpdate={data?.allocator_allocation_result[0].block_number}
-      />
-      <WithdrawCard
-        label="Holder"
-        onSubmitWithdraw={handleWithdrawHolder}
-        amount={myHolderAmount}
-        lastUpdate={data?.allocator_allocation_result[0].block_number}
-      />
-      <ButtonCard label="Cancel Staking" buttonLabel="Cancel" onClick={handleCancelStaking} />
-    </Space>
+    <div>
+      <div style={{ margin: '62px 0 46px 0' }}>
+        <InputFormCard label="Stake Now" suffix="DEV" onSubmitStake={handleSubmit} />
+      </div>
+      <div style={{ margin: '0 0 46px 0' }}>
+        <WithdrawCard
+          label="Staking"
+          onSubmitWithdraw={handleWithdrawStaking}
+          amount={myStakingAmount}
+          lastUpdate={data?.allocator_allocation_result[0].block_number}
+        />
+      </div>
+      <div style={{ margin: '0 0 46px 0' }}>
+        <WithdrawCard
+          label="Holder"
+          onSubmitWithdraw={handleWithdrawHolder}
+          amount={myHolderAmount}
+          lastUpdate={data?.allocator_allocation_result[0].block_number}
+        />
+      </div>
+      <div style={{ margin: '0 0 46px 0' }}>
+        <ButtonCard label="Cancel Staking" buttonLabel="Cancel" onClick={handleCancelStaking} />
+      </div>
+    </div>
   )
 }

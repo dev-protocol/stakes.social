@@ -15,6 +15,7 @@ export const PropertyHeader = ({ propertyAddress }: Props) => {
   return (
     <div
       style={{
+        width: 'auto',
         position: 'relative',
         height: '562px',
         padding: '50px',

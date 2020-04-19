@@ -18,7 +18,7 @@ interface Props {
 
 export const InputFormCard = ({ label, suffix, onSubmitStake }: Props) => {
   return (
-    <Card style={{ maxWidth: 961 }}>
+    <Card>
       <Row>
         <div style={{ fontSize: '24px', lineHeight: '32px', color: '#000', padding: '0 0 32px 0' }}>{label}</div>
       </Row>
