@@ -4,15 +4,89 @@ exports[`Footer Snapshot 1`] = `
 <body>
   <div>
     <div
-      style="width: auto; max-width: 1048px; margin-right: auto; margin-left: auto; text-align: center; font-size: 18px; line-height: 24px; padding: 118px 0px 84px 0px;"
+      style="width: auto; max-width: 1048px; margin-right: auto; margin-left: auto; text-align: center; font-size: 18px; font-weight: bold; line-height: 24px; padding: 118px 0px 84px 0px;"
     >
       <div>
-        <div>
-          XXX is powered by the Dev Protocol, see the whitepaper on GitHub.
-        </div>
-        <div>
-          Enjoy following the Dev Protocol community on Discord, Medium, Spectrum, and Twitter!
-        </div>
+        <span>
+          XXX is powered by the 
+        </span>
+        <a
+          href="#"
+          rel="noreferrer noopener"
+          style="text-decoration: underline;"
+          target="_blank"
+        >
+          Dev Protocol
+        </a>
+        <span>
+          , see the 
+        </span>
+        <a
+          href="#"
+          rel="noreferrer noopener"
+          style="text-decoration: underline;"
+          target="_blank"
+        >
+          whitepaper
+        </a>
+        <span>
+           on 
+        </span>
+        <a
+          href="#"
+          rel="noreferrer noopener"
+          style="text-decoration: underline;"
+          target="_blank"
+        >
+          GitHub
+        </a>
+        .
+        <br />
+        <span>
+          Enjoy following the Dev Protocol community on 
+        </span>
+        <a
+          href="#"
+          rel="noreferrer noopener"
+          style="text-decoration: underline;"
+          target="_blank"
+        >
+          Discord
+        </a>
+        <span>
+          , 
+        </span>
+        <a
+          href="#"
+          rel="noreferrer noopener"
+          style="text-decoration: underline;"
+          target="_blank"
+        >
+          Medium
+        </a>
+        <span>
+          , 
+        </span>
+        <a
+          href="#"
+          rel="noreferrer noopener"
+          style="text-decoration: underline;"
+          target="_blank"
+        >
+          Spectrum
+        </a>
+        <span>
+          , and 
+        </span>
+        <a
+          href="#"
+          rel="noreferrer noopener"
+          style="text-decoration: underline;"
+          target="_blank"
+        >
+          Twitter
+        </a>
+        !
       </div>
       <svg
         fill="none"
