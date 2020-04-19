@@ -14,8 +14,8 @@ export const CircleGraph = ({ size, percentage }: Props) => {
         borderRadius: `50%`,
         backgroundColor: `#2F80ED`,
         backgroundClip: 'padding-box',
-        border: `solid ${(size / 2) * percentage}px rgba(47, 128, 237, 0.2)`
+        border: `solid ${(size / 2) * (1 - percentage)}px rgba(47, 128, 237, 0.2)`
       }}
-    ></div>
+    />
   )
 }

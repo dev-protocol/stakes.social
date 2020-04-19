@@ -1,0 +1,122 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PropertyCardList Snapshot 1`] = `
+<body>
+  <div>
+    <div>
+      <div>
+        <div
+          class="ant-card ant-card-bordered"
+          style="margin: 0px 0px 54px 0px; max-width: 1048px; max-height: 174px;"
+        >
+          <div
+            class="ant-card-body"
+          >
+            <div
+              class="ant-row"
+            >
+              <div
+                class="ant-col ant-col-12"
+              >
+                <div>
+                  123
+                </div>
+                <div
+                  style="font-size: 36px; line-height: 48px; margin: 36px 0px 48px 0px;"
+                >
+                  x-lib, x-plugin-lib, x-xxxx, x...
+                </div>
+              </div>
+              <div
+                class="ant-col ant-col-4"
+              >
+                <div
+                  class="ant-statistic"
+                >
+                  <div
+                    class="ant-statistic-title"
+                  >
+                    Total Rewards
+                  </div>
+                  <div
+                    class="ant-statistic-content"
+                    style="font-size: 36px; line-height: 48px; margin: 36px 0px 0px 0px;"
+                  >
+                    <span
+                      class="ant-statistic-content-value"
+                    >
+                      <span
+                        class="ant-statistic-content-value-int"
+                      >
+                        
+                        10,000
+                      </span>
+                      
+                    </span>
+                    <span
+                      class="ant-statistic-content-suffix"
+                    >
+                      DEV
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="ant-col ant-col-4"
+              >
+                <div
+                  class="ant-statistic"
+                >
+                  <div
+                    class="ant-statistic-title"
+                  >
+                    Ararage Interest Rate
+                  </div>
+                  <div
+                    class="ant-statistic-content"
+                    style="font-size: 36px; line-height: 48px; margin: 36px 0px 48px 0px;"
+                  >
+                    <span
+                      class="ant-statistic-content-value"
+                    >
+                      <span
+                        class="ant-statistic-content-value-int"
+                      >
+                        
+                        15
+                      </span>
+                      
+                    </span>
+                    <span
+                      class="ant-statistic-content-suffix"
+                    >
+                      %
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="ant-col ant-col-4"
+              >
+                <div>
+                  <span>
+                    55
+                    % of total market
+                  </span>
+                  <div
+                    style="padding: 14px 0px 14px 32px;"
+                  >
+                    <div
+                      style="width: 81px; height: 81px; border-radius: 50%; background-color: rgb(47, 128, 237); background-clip: padding-box; border: 18.224999999999998px solid rgba(47, 128, 237, 0.2);"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+`;
