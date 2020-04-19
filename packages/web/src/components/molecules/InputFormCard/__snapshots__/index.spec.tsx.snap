@@ -5,7 +5,6 @@ exports[`InputFormCard Snapshot 1`] = `
   <div>
     <div
       class="ant-card ant-card-bordered"
-      style="max-width: 961px;"
     >
       <div
         class="ant-card-body"

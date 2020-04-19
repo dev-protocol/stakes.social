@@ -9,7 +9,7 @@ interface Props {
 
 export const ButtonCard = ({ label, onClick, buttonLabel }: Props) => {
   return (
-    <Card style={{ maxWidth: 961 }}>
+    <Card>
       <Row>
         <Col span={12} style={{ display: 'flex', alignItems: 'center' }}>
           <div style={{ fontSize: '24px', lineHeight: '32px', color: '#000' }}>{label}</div>
