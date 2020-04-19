@@ -5,7 +5,7 @@ exports[`TransactionForm Snapshot 1`] = `
   <div>
     <div>
       <div
-        style="margin: 62px 0px 46px 0px;"
+        style="margin: 0px 0px 46px 0px;"
       >
         <div
           class="ant-card ant-card-bordered"
