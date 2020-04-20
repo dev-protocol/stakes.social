@@ -22,7 +22,7 @@ export const PropertyHeader = ({ propertyAddress }: Props) => {
         background: 'linear-gradient(111.32deg, #2F80ED 0%, #D5E6FB 100%)'
       }}
     >
-      <h1 style={{ display: 'inline', color: 'white', fontSize: '48px', lineHeight: '64px' }}>App Name</h1>
+      <h1 style={{ display: 'inline', color: 'white', fontSize: '48px', lineHeight: '64px' }}>Stakes.social</h1>
       <Button size="large" style={{ float: 'right' }} disabled={isConnected} onClick={handleClick}>
         {isConnected && 'Wallet connected'}
         {!isConnected && 'Connect to a wallet'}
