@@ -1,8 +1,9 @@
-import React from 'react'
+import React, { useMemo } from 'react'
+import Link from 'next/link'
 import { Card, Row, Col, Statistic } from 'antd'
 import { useGetTotalRewardsAmount } from 'src/fixtures/dev-kit/hooks'
-
-import Link from 'next/link'
+import { truncate } from 'src/fixtures/utility/string'
+import { useGetPropertyAuthenticationQuery } from '@dev/graphql'
 import { CircleGraph } from 'src/components/atoms/CircleGraph'
 
 interface Props {
@@ -11,6 +12,11 @@ interface Props {
 
 export const PropertyCard = ({ propertyAddress }: Props) => {
   const { totalRewardsAmount } = useGetTotalRewardsAmount(propertyAddress)
+  const { data } = useGetPropertyAuthenticationQuery({ variables: { propertyAddress } })
+  const includeAssets = useMemo(
+    () => data && truncate(data.property_authentication.map(e => e.authentication_id).join(', '), 17),
+    [data]
+  )
   const averageInterestRate = 0.15
   const percentage = 0.55
 
@@ -20,9 +26,7 @@ export const PropertyCard = ({ propertyAddress }: Props) => {
         <Row>
           <Col span={12}>
             <div>{propertyAddress}</div>
-            <div style={{ fontSize: '36px', lineHeight: '48px', margin: '36px 0 48px 0' }}>
-              x-lib, x-plugin-lib, x-xxxx, x...
-            </div>
+            <div style={{ fontSize: '36px', lineHeight: '48px', margin: '36px 0 48px 0' }}>{includeAssets}</div>
           </Col>
           <Col span={4}>
             <Statistic
