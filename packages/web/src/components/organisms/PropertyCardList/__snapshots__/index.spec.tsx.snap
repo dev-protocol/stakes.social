@@ -24,7 +24,7 @@ exports[`PropertyCardList Snapshot 1`] = `
                 <div
                   style="font-size: 36px; line-height: 48px; margin: 36px 0px 48px 0px;"
                 >
-                  x-lib, x-plugin-lib, x-xxxx, x...
+                  authentication-id
                 </div>
               </div>
               <div

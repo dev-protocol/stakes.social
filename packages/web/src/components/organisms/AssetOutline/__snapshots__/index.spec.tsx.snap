@@ -11,7 +11,9 @@ exports[`AssetOutline Snapshot 1`] = `
           class="ant-space-item"
           style="margin-right: 112px;"
         >
-          <div>
+          <div
+            style="min-height: 270px;"
+          >
             <p
               style="font-size: 18px; line-height: 24px; color: rgb(0, 0, 0);"
             >
@@ -19,7 +21,7 @@ exports[`AssetOutline Snapshot 1`] = `
             </p>
             <div
               class="ant-list ant-list-split ant-list-bordered"
-              style="max-width: 272px;"
+              style="max-width: 272px; max-height: 224px;"
             >
               <div
                 class="ant-spin-nested-loading"
@@ -34,25 +36,7 @@ exports[`AssetOutline Snapshot 1`] = `
                       class="ant-list-item"
                       style="font-size: 24px; line-height: 32px; color: rgb(0, 0, 0);"
                     >
-                      x-lib
-                    </li>
-                    <li
-                      class="ant-list-item"
-                      style="font-size: 24px; line-height: 32px; color: rgb(0, 0, 0);"
-                    >
-                      x-plugin-lib
-                    </li>
-                    <li
-                      class="ant-list-item"
-                      style="font-size: 24px; line-height: 32px; color: rgb(0, 0, 0);"
-                    >
-                      x-xxx
-                    </li>
-                    <li
-                      class="ant-list-item"
-                      style="font-size: 24px; line-height: 32px; color: rgb(0, 0, 0);"
-                    >
-                      x-xxxxxxxxxxxxx...
+                      authentication-...
                     </li>
                   </ul>
                 </div>
