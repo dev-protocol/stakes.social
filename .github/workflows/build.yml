@@ -40,6 +40,8 @@ jobs:
   deploy:
     needs: build
 
+    if: contains(github.ref, 'master')
+
     runs-on: ubuntu-latest
 
     steps:
