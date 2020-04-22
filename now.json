@@ -26,8 +26,5 @@
         "cache-control": "public, s-maxage=31536000"
       }
     }
-  ],
-  "env": {
-    "END_POINT": "https://dev-protocol-event-viewer.azurewebsites.net/v1/graphql?code=gzcLW2ZbDLSt6MNQlvd731oAWXznPfeLWH5NU8d8BMYHFemwoIxDLw=="
-  }
+  ]
 }

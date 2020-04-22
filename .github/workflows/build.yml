@@ -59,6 +59,11 @@ jobs:
             */*/.next
           key: ${{ runner.os }}-${ GITHUB_SHA }
 
+      - name: export
+        run: yarn workspace @dev/web export
+        env:
+          END_POINT: https://dev-protocol-event-viewer.azurewebsites.net/v1/graphql?code=gzcLW2ZbDLSt6MNQlvd731oAWXznPfeLWH5NU8d8BMYHFemwoIxDLw==
+
       - uses: haya14busa/action-cond@v1
         id: args
         with:
