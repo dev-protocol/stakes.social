@@ -100,14 +100,14 @@ exports[`PropertyCardList Snapshot 1`] = `
               >
                 <div>
                   <span>
-                    55
+                    25
                     % of total market
                   </span>
                   <div
                     style="padding: 14px 0px 14px 32px;"
                   >
                     <div
-                      style="width: 81px; height: 81px; border-radius: 50%; background-color: rgb(47, 128, 237); background-clip: padding-box; border: 18.224999999999998px solid rgba(47, 128, 237, 0.2);"
+                      style="width: 81px; height: 81px; border-radius: 50%; background-color: rgb(47, 128, 237); background-clip: padding-box; border: 30.158401950000002px solid rgba(47, 128, 237, 0.2);"
                     />
                   </div>
                 </div>

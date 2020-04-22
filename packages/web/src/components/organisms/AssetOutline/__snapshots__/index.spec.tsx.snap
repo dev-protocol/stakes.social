@@ -61,7 +61,7 @@ exports[`AssetOutline Snapshot 1`] = `
                 style="margin-right: 40px;"
               >
                 <div
-                  style="width: 224px; height: 224px; border-radius: 50%; background-color: rgb(47, 128, 237); background-clip: padding-box; border: -2747.89872px solid rgba(47, 128, 237, 0.2);"
+                  style="width: 224px; height: 224px; border-radius: 50%; background-color: rgb(47, 128, 237); background-clip: padding-box; border: 83.4010128px solid rgba(47, 128, 237, 0.2);"
                 />
               </div>
               <div
@@ -71,7 +71,7 @@ exports[`AssetOutline Snapshot 1`] = `
                   <span
                     style="font-size: 36px; line-height: 48px; color: rgb(0, 0, 0);"
                   >
-                    2553.481
+                    25.534810000000004
                     %
                   </span>
                   <span>
