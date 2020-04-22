@@ -1,0 +1,25 @@
+{
+    "version": 2,
+    "name": "stakes-social",
+    "alias": "stakes.social",
+    "public": true,
+    "github": {
+        "enabled": false
+    },
+    "builds": [
+      {
+        "src": "/packages/web/package.json",
+        "use": "@now/next"
+      }
+    ],
+    "routes": [
+      {
+        "src": "/(.*)",
+        "dest": "/packages/web/$1",
+        "continue": true
+      }
+    ],
+    "env": {
+        "END_POINT": "https://dev-protocol-event-viewer.azurewebsites.net/v1/graphql?code=gzcLW2ZbDLSt6MNQlvd731oAWXznPfeLWH5NU8d8BMYHFemwoIxDLw=="
+    }
+  }
