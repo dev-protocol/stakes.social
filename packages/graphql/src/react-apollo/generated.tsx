@@ -3883,7 +3883,10 @@ export type GetLastAllocatorAllocationResultQueryVariables = {
 
 export type GetLastAllocatorAllocationResultQuery = { __typename?: 'query_root' } & {
   allocator_allocation_result: Array<
-    { __typename?: 'allocator_allocation_result' } & Pick<Allocator_Allocation_Result, 'block_number'>
+    { __typename?: 'allocator_allocation_result' } & Pick<
+      Allocator_Allocation_Result,
+      'market' | 'metrics' | 'block_number'
+    >
   >
 }
 
@@ -3953,6 +3956,8 @@ export const GetLastAllocatorAllocationResultDocument = gql`
       where: { property: { _eq: $propertyAddress } }
       order_by: { block_number: desc }
     ) {
+      market
+      metrics
       block_number
     }
   }
