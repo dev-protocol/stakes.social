@@ -74,4 +74,3 @@ jobs:
           now-args: ${{ steps.args.outputs.value }}
           now-org-id: ${{ secrets.X_VERCEL_ORG_ID}}
           now-project-id: ${{ secrets.X_VERCEL_PROJECT_ID}}
-          working-directory: ./packages/web
