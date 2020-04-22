@@ -17,6 +17,14 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
+      - name: cache modules
+        uses: actions/cache@master
+        with:
+          path: |
+            node_modules
+            */*/node_modules
+          key: ${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
+            
       - name: install deps
         run: yarn
 
@@ -25,35 +33,35 @@ jobs:
 
       - name: build
         run: yarn build
-        env:
-          END_POINT: ${{ secrets.END_POINT }}
 
       - name: test
         run: yarn test
 
-      - name: archive artifacts
-        uses: actions/upload-artifact@v1
-        with:
-          name: build
-          path: packages/web/out
-
   deploy:
     needs: build
 
-    if: contains(github.ref, 'master')
+    # if: contains(github.ref, 'master')
 
     runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@master
 
-      - name: download artifacts
-        uses: actions/download-artifact@v1
+      - name: restore cache modules
+        uses: actions/cache@master
         with:
-          name: build
+          path: |
+            node_modules
+            */*/node_modules
+          key: ${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
+
+      - name: export
+        run: yarn workspace @dev/web export
+        env:
+          END_POINT: ${{ secrets.END_POINT }}  
 
       - uses: bacongobbler/azure-blob-storage-upload@v1.0.0
         with:
-          source_dir: build
+          source_dir: packages/web/out
           container_name: $web
           connection_string: ${{ secrets.AZURE_BLOB_STORAGE_CONNECTION_STRING }}
