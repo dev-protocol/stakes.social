@@ -8,7 +8,7 @@ export const useGetLastAllocatorAllocationResultQuery = (): Partial<
   ReturnType<typeof IUseGetLastAllocatorAllocationResultQuery>
 > => ({
   data: {
-    allocator_allocation_result: [{ block_number: 42141412412, market: 'market-address', metrics: 'metrics-address' }]
+    allocator_allocation_result: [{ block_number: 42141412412 }]
   }
 })
 
@@ -34,7 +34,9 @@ export const useGetPropertyAuthenticationQuery = (): Partial<
   data: {
     property_authentication: [
       {
-        authentication_id: 'authentication-id'
+        authentication_id: 'authentication-id',
+        market: 'market-address',
+        metrics: 'metrics-address'
       }
     ]
   }

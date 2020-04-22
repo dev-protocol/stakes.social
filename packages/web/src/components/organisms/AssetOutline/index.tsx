@@ -3,24 +3,19 @@ import { List, Space } from 'antd'
 import { CircleGraph } from 'src/components/atoms/CircleGraph'
 import { useAssetStrength } from 'src/fixtures/dev-kit/hooks'
 import { truncate } from 'src/fixtures/utility/string'
-import { useGetLastAllocatorAllocationResultQuery, useGetPropertyAuthenticationQuery } from '@dev/graphql'
+import { useGetPropertyAuthenticationQuery } from '@dev/graphql'
 
 interface Props {
   propertyAddress: string
 }
 
 export const AssetOutline = ({ propertyAddress }: Props) => {
-  const { data } = useGetLastAllocatorAllocationResultQuery({ variables: { propertyAddress } })
-  const { data: propertyAuthenticationData } = useGetPropertyAuthenticationQuery({ variables: { propertyAddress } })
-  const includedAssetList = useMemo(
-    () => propertyAuthenticationData?.property_authentication.map(e => e.authentication_id),
-    [propertyAuthenticationData]
-  )
+  const { data } = useGetPropertyAuthenticationQuery({ variables: { propertyAddress } })
+  const includedAssetList = useMemo(() => data?.property_authentication.map(e => e.authentication_id), [data])
   const { assetStrength } = useAssetStrength(
-    data?.allocator_allocation_result[0].metrics,
-    data?.allocator_allocation_result[0].market
+    data?.property_authentication[0].metrics,
+    data?.property_authentication[0].market
   )
-
   return (
     <div>
       <Space direction="horizontal" size={112}>
