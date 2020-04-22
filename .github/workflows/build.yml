@@ -25,6 +25,8 @@ jobs:
 
       - name: build
         run: yarn build
+        env:
+          END_POINT: ${{ secrets.END_POINT }}
 
       - name: test
         run: yarn test
