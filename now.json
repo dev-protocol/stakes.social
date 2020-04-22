@@ -1,24 +1,33 @@
 {
-    "version": 2,
-    "alias": "stakes.social",
-    "public": true,
-    "github": {
-        "enabled": false
-    },
-    "builds": [
-      {
-        "src": "/packages/web/next.config.js",
-        "use": "@now/next@canary"
-      }
-    ],
-    "routes": [
-      {
-        "src": "/(.*)",
-        "dest": "/packages/web/$1",
-        "continue": true
-      }
-    ],
-    "env": {
-        "END_POINT": "https://dev-protocol-event-viewer.azurewebsites.net/v1/graphql?code=gzcLW2ZbDLSt6MNQlvd731oAWXznPfeLWH5NU8d8BMYHFemwoIxDLw=="
+  "version": 2,
+  "alias": "stakes.social",
+  "public": true,
+  "github": {
+    "enabled": false
+  },
+  "builds": [
+    {
+      "src": "/packages/web/out/**",
+      "use": "@now/static"
     }
+  ],
+  "routes": [
+    {
+      "src": "/(0x.*)",
+      "dest": "/packages/web/out/[propertyAddress].html",
+      "headers": {
+        "cache-control": "public, s-maxage=31536000"
+      }
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/packages/web/out/$1",
+      "headers": {
+        "cache-control": "public, s-maxage=31536000"
+      }
+    }
+  ],
+  "env": {
+    "END_POINT": "https://dev-protocol-event-viewer.azurewebsites.net/v1/graphql?code=gzcLW2ZbDLSt6MNQlvd731oAWXznPfeLWH5NU8d8BMYHFemwoIxDLw=="
   }
+}
