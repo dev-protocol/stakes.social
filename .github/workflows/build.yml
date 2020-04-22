@@ -29,6 +29,12 @@ jobs:
       - name: test
         run: yarn test
 
+      - name: archive artifacts
+        uses: actions/upload-artifact@v1
+        with:
+          name: out
+          path: packages/web/out
+
   deploy:
     needs: build
 
@@ -37,8 +43,13 @@ jobs:
     steps:
       - uses: actions/checkout@master
 
+      - name: download artifacts
+        uses: actions/download-artifact@v1
+        with:
+          name: out
+
       - uses: bacongobbler/azure-blob-storage-upload@v1.0.0
         with:
-          source_dir: packages/web/out/
+          source_dir: out
           container_name: $web
           connection_string: ${{ secrets.AZURE_BLOB_STORAGE_CONNECTION_STRING }}
