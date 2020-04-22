@@ -1,6 +1,7 @@
 import React from 'react'
 import { Card, Row, Col, Statistic } from 'antd'
 import { useGetTotalRewardsAmount } from 'src/fixtures/dev-kit/hooks'
+
 import Link from 'next/link'
 import { CircleGraph } from 'src/components/atoms/CircleGraph'
 

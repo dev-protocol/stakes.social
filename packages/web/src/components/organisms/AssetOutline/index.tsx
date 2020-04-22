@@ -3,14 +3,18 @@ import { List, Space } from 'antd'
 import { CircleGraph } from 'src/components/atoms/CircleGraph'
 import { useAssetStrength } from 'src/fixtures/dev-kit/hooks'
 import { truncate } from 'src/fixtures/utility/string'
+import { useGetLastAllocatorAllocationResultQuery } from '@dev/graphql'
 
 interface Props {
-  metricsAddress: string
-  marketAddress: string
+  propertyAddress: string
 }
 
-export const AssetOutline = ({ metricsAddress, marketAddress }: Props) => {
-  const { assetStrength } = useAssetStrength(metricsAddress, marketAddress)
+export const AssetOutline = ({ propertyAddress }: Props) => {
+  const { data } = useGetLastAllocatorAllocationResultQuery({ variables: { propertyAddress } })
+  const { assetStrength } = useAssetStrength(
+    data?.allocator_allocation_result[0].metrics,
+    data?.allocator_allocation_result[0].market
+  )
   const includedAssets = ['x-lib', 'x-plugin-lib', 'x-xxx', 'x-xxxxxxxxxxxxxxxxxxxx']
 
   return (

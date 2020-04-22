@@ -135,17 +135,17 @@ export const useCancelStaking = () => {
   return { cancel, isLoading, error }
 }
 
-export const useAssetStrength = (metricsAddress: string, marketAddress: string) => {
+export const useAssetStrength = (metricsAddress?: string, marketAddress?: string) => {
   const { data: metrics, error: metricsError } = useSWR<UnwrapFunc<typeof getLastAssetValueEachMetrics>, Error>(
-    SWRCachePath.getLastAssetValueEachMetrics(metricsAddress),
-    () => getLastAssetValueEachMetrics(metricsAddress),
+    SWRCachePath.getLastAssetValueEachMetrics(metricsAddress ? metricsAddress : ''),
+    () => getLastAssetValueEachMetrics(metricsAddress ? metricsAddress : ''),
     {
       onError: err => message.error(err.message)
     }
   )
   const { data: market, error: marketError } = useSWR<UnwrapFunc<typeof getLastAssetValueEachMarketPerBlock>, Error>(
-    SWRCachePath.getLastAssetValueEachMarketPerBlock(marketAddress),
-    () => getLastAssetValueEachMarketPerBlock(marketAddress),
+    SWRCachePath.getLastAssetValueEachMarketPerBlock(marketAddress ? marketAddress : ''),
+    () => getLastAssetValueEachMarketPerBlock(marketAddress ? marketAddress : ''),
     { onError: err => message.error(err.message) }
   )
   return {

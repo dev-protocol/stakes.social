@@ -17,7 +17,7 @@ const PropertyAddressDetail = (_: Props) => {
       <PropertyHeader propertyAddress={propertyAddress} />
       <div style={{ maxWidth: '1048px', padding: '82px', marginRight: 'auto', marginLeft: 'auto' }}>
         <Space size={80} direction="vertical">
-          <AssetOutline metricsAddress={propertyAddress} marketAddress={propertyAddress} />
+          <AssetOutline propertyAddress={propertyAddress} />
           <PossessionOutline propertyAddress={propertyAddress} />
           <TransactionForm propertyAddress={propertyAddress} />
         </Space>
