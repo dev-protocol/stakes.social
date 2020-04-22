@@ -12,7 +12,8 @@
     "clean": "rimraf esm cjs",
     "lint": "tsc -p . --noEmit",
     "format": "prettier --write \"src/**/*.{ts,tsx}\"",
-    "prebuild": "yarn clean"
+    "prebuild": "yarn clean",
+    "postinstall": "yarn build"
   },
   "dependencies": {
     "@graphql-codegen/cli": "1.13.2",
