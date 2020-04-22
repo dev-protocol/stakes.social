@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react'
 import Link from 'next/link'
 import { Card, Row, Col, Statistic } from 'antd'
-import { useGetTotalRewardsAmount } from 'src/fixtures/dev-kit/hooks'
+import { useGetTotalRewardsAmount, useAssetStrength } from 'src/fixtures/dev-kit/hooks'
 import { truncate } from 'src/fixtures/utility/string'
 import { useGetPropertyAuthenticationQuery } from '@dev/graphql'
 import { CircleGraph } from 'src/components/atoms/CircleGraph'
@@ -17,8 +17,12 @@ export const PropertyCard = ({ propertyAddress }: Props) => {
     () => data && truncate(data.property_authentication.map(e => e.authentication_id).join(', '), 17),
     [data]
   )
+  const { assetStrength: maybeAssetStrength } = useAssetStrength(
+    data?.property_authentication[0]?.metrics,
+    data?.property_authentication[0]?.market
+  )
+  const assetStrength = useMemo(() => maybeAssetStrength || 0, [maybeAssetStrength])
   const averageInterestRate = 0.15
-  const percentage = 0.55
 
   return (
     <Link href={'/[propertyAddress]'} as={`/${propertyAddress}`}>
@@ -46,9 +50,9 @@ export const PropertyCard = ({ propertyAddress }: Props) => {
           </Col>
           <Col span={4}>
             <div>
-              <span>{Math.floor(percentage * 100)}% of total market</span>
+              <span>{Math.floor(assetStrength * 100)}% of total market</span>
               <div style={{ padding: '14px 0 14px 32px' }}>
-                <CircleGraph size={81} percentage={percentage} />
+                <CircleGraph size={81} percentage={assetStrength} />
               </div>
             </div>
           </Col>
