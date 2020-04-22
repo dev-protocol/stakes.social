@@ -43,8 +43,6 @@ jobs:
   deploy:
     needs: build
 
-    if: contains(github.ref, 'master')
-
     runs-on: ubuntu-latest
 
     steps:
@@ -61,13 +59,18 @@ jobs:
             */*/.next
           key: ${{ runner.os }}-${ GITHUB_SHA }
 
-      - name: export
-        run: yarn workspace @dev/web export
-        env:
-          END_POINT: ${{ secrets.END_POINT }}
-
-      - uses: bacongobbler/azure-blob-storage-upload@v1.0.0
+      - uses: haya14busa/action-cond@v1
+        id: args
         with:
-          source_dir: packages/web/out
-          container_name: $web
-          connection_string: ${{ secrets.AZURE_BLOB_STORAGE_CONNECTION_STRING }}
+          cond: contains(github.ref, 'master')
+          if_true: "--prod"
+          if_false: ""
+
+      - name: deploy to vercel
+        uses: amondnet/now-deployment@v2
+        with:
+          zeit-token: ${{ secrets.X_VERCEL_TOKEN }}
+          github-token: ${{ secrets.X_GITHUB_TOKEN }} 
+          now-args: ${{ steps.args.outputs.value }}
+          now-org-id: ${{ secrets.X_VERCEL_ORG_ID}}
+          now-project-id: ${{ secrets.X_VERCEL_PROJECT_ID}}
