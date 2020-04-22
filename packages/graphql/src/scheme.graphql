@@ -2052,6 +2052,345 @@ input metrics_factory_create_variance_order_by {
   transaction_index: order_by
 }
 
+# columns and relationships of "metrics_factory_destroy"
+type metrics_factory_destroy {
+  block_number: Int!
+  event_id: String!
+  from_address: String!
+  log_index: Int!
+  metrics: String!
+  raw_data: String!
+  transaction_index: Int!
+}
+
+# aggregated selection of "metrics_factory_destroy"
+type metrics_factory_destroy_aggregate {
+  aggregate: metrics_factory_destroy_aggregate_fields
+  nodes: [metrics_factory_destroy!]!
+}
+
+# aggregate fields of "metrics_factory_destroy"
+type metrics_factory_destroy_aggregate_fields {
+  avg: metrics_factory_destroy_avg_fields
+  count(columns: [metrics_factory_destroy_select_column!], distinct: Boolean): Int
+  max: metrics_factory_destroy_max_fields
+  min: metrics_factory_destroy_min_fields
+  stddev: metrics_factory_destroy_stddev_fields
+  stddev_pop: metrics_factory_destroy_stddev_pop_fields
+  stddev_samp: metrics_factory_destroy_stddev_samp_fields
+  sum: metrics_factory_destroy_sum_fields
+  var_pop: metrics_factory_destroy_var_pop_fields
+  var_samp: metrics_factory_destroy_var_samp_fields
+  variance: metrics_factory_destroy_variance_fields
+}
+
+# order by aggregate values of table "metrics_factory_destroy"
+input metrics_factory_destroy_aggregate_order_by {
+  avg: metrics_factory_destroy_avg_order_by
+  count: order_by
+  max: metrics_factory_destroy_max_order_by
+  min: metrics_factory_destroy_min_order_by
+  stddev: metrics_factory_destroy_stddev_order_by
+  stddev_pop: metrics_factory_destroy_stddev_pop_order_by
+  stddev_samp: metrics_factory_destroy_stddev_samp_order_by
+  sum: metrics_factory_destroy_sum_order_by
+  var_pop: metrics_factory_destroy_var_pop_order_by
+  var_samp: metrics_factory_destroy_var_samp_order_by
+  variance: metrics_factory_destroy_variance_order_by
+}
+
+# input type for inserting array relation for remote table "metrics_factory_destroy"
+input metrics_factory_destroy_arr_rel_insert_input {
+  data: [metrics_factory_destroy_insert_input!]!
+  on_conflict: metrics_factory_destroy_on_conflict
+}
+
+# aggregate avg on columns
+type metrics_factory_destroy_avg_fields {
+  block_number: Float
+  log_index: Float
+  transaction_index: Float
+}
+
+# order by avg() on columns of table "metrics_factory_destroy"
+input metrics_factory_destroy_avg_order_by {
+  block_number: order_by
+  log_index: order_by
+  transaction_index: order_by
+}
+
+# Boolean expression to filter rows from the table "metrics_factory_destroy". All fields are combined with a logical 'AND'.
+input metrics_factory_destroy_bool_exp {
+  _and: [metrics_factory_destroy_bool_exp]
+  _not: metrics_factory_destroy_bool_exp
+  _or: [metrics_factory_destroy_bool_exp]
+  block_number: Int_comparison_exp
+  event_id: String_comparison_exp
+  from_address: String_comparison_exp
+  log_index: Int_comparison_exp
+  metrics: String_comparison_exp
+  raw_data: String_comparison_exp
+  transaction_index: Int_comparison_exp
+}
+
+# unique or primary key constraints on table "metrics_factory_destroy"
+enum metrics_factory_destroy_constraint {
+  # unique or primary key constraint
+  metrics_factory_destroy_pkey
+}
+
+# input type for incrementing integer columne in table "metrics_factory_destroy"
+input metrics_factory_destroy_inc_input {
+  block_number: Int
+  log_index: Int
+  transaction_index: Int
+}
+
+# input type for inserting data into table "metrics_factory_destroy"
+input metrics_factory_destroy_insert_input {
+  block_number: Int
+  event_id: String
+  from_address: String
+  log_index: Int
+  metrics: String
+  raw_data: String
+  transaction_index: Int
+}
+
+# aggregate max on columns
+type metrics_factory_destroy_max_fields {
+  block_number: Int
+  event_id: String
+  from_address: String
+  log_index: Int
+  metrics: String
+  raw_data: String
+  transaction_index: Int
+}
+
+# order by max() on columns of table "metrics_factory_destroy"
+input metrics_factory_destroy_max_order_by {
+  block_number: order_by
+  event_id: order_by
+  from_address: order_by
+  log_index: order_by
+  metrics: order_by
+  raw_data: order_by
+  transaction_index: order_by
+}
+
+# aggregate min on columns
+type metrics_factory_destroy_min_fields {
+  block_number: Int
+  event_id: String
+  from_address: String
+  log_index: Int
+  metrics: String
+  raw_data: String
+  transaction_index: Int
+}
+
+# order by min() on columns of table "metrics_factory_destroy"
+input metrics_factory_destroy_min_order_by {
+  block_number: order_by
+  event_id: order_by
+  from_address: order_by
+  log_index: order_by
+  metrics: order_by
+  raw_data: order_by
+  transaction_index: order_by
+}
+
+# response of any mutation on the table "metrics_factory_destroy"
+type metrics_factory_destroy_mutation_response {
+  # number of affected rows by the mutation
+  affected_rows: Int!
+
+  # data of the affected rows by the mutation
+  returning: [metrics_factory_destroy!]!
+}
+
+# input type for inserting object relation for remote table "metrics_factory_destroy"
+input metrics_factory_destroy_obj_rel_insert_input {
+  data: metrics_factory_destroy_insert_input!
+  on_conflict: metrics_factory_destroy_on_conflict
+}
+
+# on conflict condition type for table "metrics_factory_destroy"
+input metrics_factory_destroy_on_conflict {
+  constraint: metrics_factory_destroy_constraint!
+  update_columns: [metrics_factory_destroy_update_column!]!
+  where: metrics_factory_destroy_bool_exp
+}
+
+# ordering options when selecting data from "metrics_factory_destroy"
+input metrics_factory_destroy_order_by {
+  block_number: order_by
+  event_id: order_by
+  from_address: order_by
+  log_index: order_by
+  metrics: order_by
+  raw_data: order_by
+  transaction_index: order_by
+}
+
+# select columns of table "metrics_factory_destroy"
+enum metrics_factory_destroy_select_column {
+  # column name
+  block_number
+
+  # column name
+  event_id
+
+  # column name
+  from_address
+
+  # column name
+  log_index
+
+  # column name
+  metrics
+
+  # column name
+  raw_data
+
+  # column name
+  transaction_index
+}
+
+# input type for updating data in table "metrics_factory_destroy"
+input metrics_factory_destroy_set_input {
+  block_number: Int
+  event_id: String
+  from_address: String
+  log_index: Int
+  metrics: String
+  raw_data: String
+  transaction_index: Int
+}
+
+# aggregate stddev on columns
+type metrics_factory_destroy_stddev_fields {
+  block_number: Float
+  log_index: Float
+  transaction_index: Float
+}
+
+# order by stddev() on columns of table "metrics_factory_destroy"
+input metrics_factory_destroy_stddev_order_by {
+  block_number: order_by
+  log_index: order_by
+  transaction_index: order_by
+}
+
+# aggregate stddev_pop on columns
+type metrics_factory_destroy_stddev_pop_fields {
+  block_number: Float
+  log_index: Float
+  transaction_index: Float
+}
+
+# order by stddev_pop() on columns of table "metrics_factory_destroy"
+input metrics_factory_destroy_stddev_pop_order_by {
+  block_number: order_by
+  log_index: order_by
+  transaction_index: order_by
+}
+
+# aggregate stddev_samp on columns
+type metrics_factory_destroy_stddev_samp_fields {
+  block_number: Float
+  log_index: Float
+  transaction_index: Float
+}
+
+# order by stddev_samp() on columns of table "metrics_factory_destroy"
+input metrics_factory_destroy_stddev_samp_order_by {
+  block_number: order_by
+  log_index: order_by
+  transaction_index: order_by
+}
+
+# aggregate sum on columns
+type metrics_factory_destroy_sum_fields {
+  block_number: Int
+  log_index: Int
+  transaction_index: Int
+}
+
+# order by sum() on columns of table "metrics_factory_destroy"
+input metrics_factory_destroy_sum_order_by {
+  block_number: order_by
+  log_index: order_by
+  transaction_index: order_by
+}
+
+# update columns of table "metrics_factory_destroy"
+enum metrics_factory_destroy_update_column {
+  # column name
+  block_number
+
+  # column name
+  event_id
+
+  # column name
+  from_address
+
+  # column name
+  log_index
+
+  # column name
+  metrics
+
+  # column name
+  raw_data
+
+  # column name
+  transaction_index
+}
+
+# aggregate var_pop on columns
+type metrics_factory_destroy_var_pop_fields {
+  block_number: Float
+  log_index: Float
+  transaction_index: Float
+}
+
+# order by var_pop() on columns of table "metrics_factory_destroy"
+input metrics_factory_destroy_var_pop_order_by {
+  block_number: order_by
+  log_index: order_by
+  transaction_index: order_by
+}
+
+# aggregate var_samp on columns
+type metrics_factory_destroy_var_samp_fields {
+  block_number: Float
+  log_index: Float
+  transaction_index: Float
+}
+
+# order by var_samp() on columns of table "metrics_factory_destroy"
+input metrics_factory_destroy_var_samp_order_by {
+  block_number: order_by
+  log_index: order_by
+  transaction_index: order_by
+}
+
+# aggregate variance on columns
+type metrics_factory_destroy_variance_fields {
+  block_number: Float
+  log_index: Float
+  transaction_index: Float
+}
+
+# order by variance() on columns of table "metrics_factory_destroy"
+input metrics_factory_destroy_variance_order_by {
+  block_number: order_by
+  log_index: order_by
+  transaction_index: order_by
+}
+
 # mutation root
 type mutation_root {
   # delete data from the table: "allocator_allocation_result"
@@ -2084,17 +2423,41 @@ type mutation_root {
     where: metrics_factory_create_bool_exp!
   ): metrics_factory_create_mutation_response
 
+  # delete data from the table: "metrics_factory_destroy"
+  delete_metrics_factory_destroy(
+    # filter the rows which have to be deleted
+    where: metrics_factory_destroy_bool_exp!
+  ): metrics_factory_destroy_mutation_response
+
   # delete data from the table: "policy_factory_create"
   delete_policy_factory_create(
     # filter the rows which have to be deleted
     where: policy_factory_create_bool_exp!
   ): policy_factory_create_mutation_response
 
+  # delete data from the table: "property_authentication"
+  delete_property_authentication(
+    # filter the rows which have to be deleted
+    where: property_authentication_bool_exp!
+  ): property_authentication_mutation_response
+
+  # delete data from the table: "property_authentication_deleted"
+  delete_property_authentication_deleted(
+    # filter the rows which have to be deleted
+    where: property_authentication_deleted_bool_exp!
+  ): property_authentication_deleted_mutation_response
+
   # delete data from the table: "property_factory_create"
   delete_property_factory_create(
     # filter the rows which have to be deleted
     where: property_factory_create_bool_exp!
   ): property_factory_create_mutation_response
+
+  # delete data from the table: "reward_calculation_result"
+  delete_reward_calculation_result(
+    # filter the rows which have to be deleted
+    where: reward_calculation_result_bool_exp!
+  ): reward_calculation_result_mutation_response
 
   # insert data into the table: "allocator_allocation_result"
   insert_allocator_allocation_result(
@@ -2141,6 +2504,15 @@ type mutation_root {
     on_conflict: metrics_factory_create_on_conflict
   ): metrics_factory_create_mutation_response
 
+  # insert data into the table: "metrics_factory_destroy"
+  insert_metrics_factory_destroy(
+    # the rows to be inserted
+    objects: [metrics_factory_destroy_insert_input!]!
+
+    # on conflict condition
+    on_conflict: metrics_factory_destroy_on_conflict
+  ): metrics_factory_destroy_mutation_response
+
   # insert data into the table: "policy_factory_create"
   insert_policy_factory_create(
     # the rows to be inserted
@@ -2150,6 +2522,24 @@ type mutation_root {
     on_conflict: policy_factory_create_on_conflict
   ): policy_factory_create_mutation_response
 
+  # insert data into the table: "property_authentication"
+  insert_property_authentication(
+    # the rows to be inserted
+    objects: [property_authentication_insert_input!]!
+
+    # on conflict condition
+    on_conflict: property_authentication_on_conflict
+  ): property_authentication_mutation_response
+
+  # insert data into the table: "property_authentication_deleted"
+  insert_property_authentication_deleted(
+    # the rows to be inserted
+    objects: [property_authentication_deleted_insert_input!]!
+
+    # on conflict condition
+    on_conflict: property_authentication_deleted_on_conflict
+  ): property_authentication_deleted_mutation_response
+
   # insert data into the table: "property_factory_create"
   insert_property_factory_create(
     # the rows to be inserted
@@ -2158,6 +2548,15 @@ type mutation_root {
     # on conflict condition
     on_conflict: property_factory_create_on_conflict
   ): property_factory_create_mutation_response
+
+  # insert data into the table: "reward_calculation_result"
+  insert_reward_calculation_result(
+    # the rows to be inserted
+    objects: [reward_calculation_result_insert_input!]!
+
+    # on conflict condition
+    on_conflict: reward_calculation_result_on_conflict
+  ): reward_calculation_result_mutation_response
 
   # update data of the table: "allocator_allocation_result"
   update_allocator_allocation_result(
@@ -2219,6 +2618,18 @@ type mutation_root {
     where: metrics_factory_create_bool_exp!
   ): metrics_factory_create_mutation_response
 
+  # update data of the table: "metrics_factory_destroy"
+  update_metrics_factory_destroy(
+    # increments the integer columns with given value of the filtered values
+    _inc: metrics_factory_destroy_inc_input
+
+    # sets the columns of the filtered rows to the given values
+    _set: metrics_factory_destroy_set_input
+
+    # filter the rows which have to be updated
+    where: metrics_factory_destroy_bool_exp!
+  ): metrics_factory_destroy_mutation_response
+
   # update data of the table: "policy_factory_create"
   update_policy_factory_create(
     # increments the integer columns with given value of the filtered values
@@ -2231,6 +2642,30 @@ type mutation_root {
     where: policy_factory_create_bool_exp!
   ): policy_factory_create_mutation_response
 
+  # update data of the table: "property_authentication"
+  update_property_authentication(
+    # increments the integer columns with given value of the filtered values
+    _inc: property_authentication_inc_input
+
+    # sets the columns of the filtered rows to the given values
+    _set: property_authentication_set_input
+
+    # filter the rows which have to be updated
+    where: property_authentication_bool_exp!
+  ): property_authentication_mutation_response
+
+  # update data of the table: "property_authentication_deleted"
+  update_property_authentication_deleted(
+    # increments the integer columns with given value of the filtered values
+    _inc: property_authentication_deleted_inc_input
+
+    # sets the columns of the filtered rows to the given values
+    _set: property_authentication_deleted_set_input
+
+    # filter the rows which have to be updated
+    where: property_authentication_deleted_bool_exp!
+  ): property_authentication_deleted_mutation_response
+
   # update data of the table: "property_factory_create"
   update_property_factory_create(
     # increments the integer columns with given value of the filtered values
@@ -2242,6 +2677,18 @@ type mutation_root {
     # filter the rows which have to be updated
     where: property_factory_create_bool_exp!
   ): property_factory_create_mutation_response
+
+  # update data of the table: "reward_calculation_result"
+  update_reward_calculation_result(
+    # increments the integer columns with given value of the filtered values
+    _inc: reward_calculation_result_inc_input
+
+    # sets the columns of the filtered rows to the given values
+    _set: reward_calculation_result_set_input
+
+    # filter the rows which have to be updated
+    where: reward_calculation_result_bool_exp!
+  ): reward_calculation_result_mutation_response
 }
 
 scalar numeric
@@ -3613,6 +4060,557 @@ input policy_factory_create_variance_order_by {
   transaction_index: order_by
 }
 
+# columns and relationships of "property_authentication"
+type property_authentication {
+  authentication_id: String!
+  block_number: Int!
+  market: String!
+  metrics: String!
+  property: String!
+}
+
+# aggregated selection of "property_authentication"
+type property_authentication_aggregate {
+  aggregate: property_authentication_aggregate_fields
+  nodes: [property_authentication!]!
+}
+
+# aggregate fields of "property_authentication"
+type property_authentication_aggregate_fields {
+  avg: property_authentication_avg_fields
+  count(columns: [property_authentication_select_column!], distinct: Boolean): Int
+  max: property_authentication_max_fields
+  min: property_authentication_min_fields
+  stddev: property_authentication_stddev_fields
+  stddev_pop: property_authentication_stddev_pop_fields
+  stddev_samp: property_authentication_stddev_samp_fields
+  sum: property_authentication_sum_fields
+  var_pop: property_authentication_var_pop_fields
+  var_samp: property_authentication_var_samp_fields
+  variance: property_authentication_variance_fields
+}
+
+# order by aggregate values of table "property_authentication"
+input property_authentication_aggregate_order_by {
+  avg: property_authentication_avg_order_by
+  count: order_by
+  max: property_authentication_max_order_by
+  min: property_authentication_min_order_by
+  stddev: property_authentication_stddev_order_by
+  stddev_pop: property_authentication_stddev_pop_order_by
+  stddev_samp: property_authentication_stddev_samp_order_by
+  sum: property_authentication_sum_order_by
+  var_pop: property_authentication_var_pop_order_by
+  var_samp: property_authentication_var_samp_order_by
+  variance: property_authentication_variance_order_by
+}
+
+# input type for inserting array relation for remote table "property_authentication"
+input property_authentication_arr_rel_insert_input {
+  data: [property_authentication_insert_input!]!
+  on_conflict: property_authentication_on_conflict
+}
+
+# aggregate avg on columns
+type property_authentication_avg_fields {
+  block_number: Float
+}
+
+# order by avg() on columns of table "property_authentication"
+input property_authentication_avg_order_by {
+  block_number: order_by
+}
+
+# Boolean expression to filter rows from the table "property_authentication". All fields are combined with a logical 'AND'.
+input property_authentication_bool_exp {
+  _and: [property_authentication_bool_exp]
+  _not: property_authentication_bool_exp
+  _or: [property_authentication_bool_exp]
+  authentication_id: String_comparison_exp
+  block_number: Int_comparison_exp
+  market: String_comparison_exp
+  metrics: String_comparison_exp
+  property: String_comparison_exp
+}
+
+# unique or primary key constraints on table "property_authentication"
+enum property_authentication_constraint {
+  # unique or primary key constraint
+  property_authentication_pkey
+}
+
+# columns and relationships of "property_authentication_deleted"
+type property_authentication_deleted {
+  authentication_id: String!
+  block_number: Int!
+  market: String!
+  metrics: String!
+  property: String!
+}
+
+# aggregated selection of "property_authentication_deleted"
+type property_authentication_deleted_aggregate {
+  aggregate: property_authentication_deleted_aggregate_fields
+  nodes: [property_authentication_deleted!]!
+}
+
+# aggregate fields of "property_authentication_deleted"
+type property_authentication_deleted_aggregate_fields {
+  avg: property_authentication_deleted_avg_fields
+  count(columns: [property_authentication_deleted_select_column!], distinct: Boolean): Int
+  max: property_authentication_deleted_max_fields
+  min: property_authentication_deleted_min_fields
+  stddev: property_authentication_deleted_stddev_fields
+  stddev_pop: property_authentication_deleted_stddev_pop_fields
+  stddev_samp: property_authentication_deleted_stddev_samp_fields
+  sum: property_authentication_deleted_sum_fields
+  var_pop: property_authentication_deleted_var_pop_fields
+  var_samp: property_authentication_deleted_var_samp_fields
+  variance: property_authentication_deleted_variance_fields
+}
+
+# order by aggregate values of table "property_authentication_deleted"
+input property_authentication_deleted_aggregate_order_by {
+  avg: property_authentication_deleted_avg_order_by
+  count: order_by
+  max: property_authentication_deleted_max_order_by
+  min: property_authentication_deleted_min_order_by
+  stddev: property_authentication_deleted_stddev_order_by
+  stddev_pop: property_authentication_deleted_stddev_pop_order_by
+  stddev_samp: property_authentication_deleted_stddev_samp_order_by
+  sum: property_authentication_deleted_sum_order_by
+  var_pop: property_authentication_deleted_var_pop_order_by
+  var_samp: property_authentication_deleted_var_samp_order_by
+  variance: property_authentication_deleted_variance_order_by
+}
+
+# input type for inserting array relation for remote table "property_authentication_deleted"
+input property_authentication_deleted_arr_rel_insert_input {
+  data: [property_authentication_deleted_insert_input!]!
+  on_conflict: property_authentication_deleted_on_conflict
+}
+
+# aggregate avg on columns
+type property_authentication_deleted_avg_fields {
+  block_number: Float
+}
+
+# order by avg() on columns of table "property_authentication_deleted"
+input property_authentication_deleted_avg_order_by {
+  block_number: order_by
+}
+
+# Boolean expression to filter rows from the table
+# "property_authentication_deleted". All fields are combined with a logical 'AND'.
+input property_authentication_deleted_bool_exp {
+  _and: [property_authentication_deleted_bool_exp]
+  _not: property_authentication_deleted_bool_exp
+  _or: [property_authentication_deleted_bool_exp]
+  authentication_id: String_comparison_exp
+  block_number: Int_comparison_exp
+  market: String_comparison_exp
+  metrics: String_comparison_exp
+  property: String_comparison_exp
+}
+
+# unique or primary key constraints on table "property_authentication_deleted"
+enum property_authentication_deleted_constraint {
+  # unique or primary key constraint
+  property_authentication_deleted_pkey
+}
+
+# input type for incrementing integer columne in table "property_authentication_deleted"
+input property_authentication_deleted_inc_input {
+  block_number: Int
+}
+
+# input type for inserting data into table "property_authentication_deleted"
+input property_authentication_deleted_insert_input {
+  authentication_id: String
+  block_number: Int
+  market: String
+  metrics: String
+  property: String
+}
+
+# aggregate max on columns
+type property_authentication_deleted_max_fields {
+  authentication_id: String
+  block_number: Int
+  market: String
+  metrics: String
+  property: String
+}
+
+# order by max() on columns of table "property_authentication_deleted"
+input property_authentication_deleted_max_order_by {
+  authentication_id: order_by
+  block_number: order_by
+  market: order_by
+  metrics: order_by
+  property: order_by
+}
+
+# aggregate min on columns
+type property_authentication_deleted_min_fields {
+  authentication_id: String
+  block_number: Int
+  market: String
+  metrics: String
+  property: String
+}
+
+# order by min() on columns of table "property_authentication_deleted"
+input property_authentication_deleted_min_order_by {
+  authentication_id: order_by
+  block_number: order_by
+  market: order_by
+  metrics: order_by
+  property: order_by
+}
+
+# response of any mutation on the table "property_authentication_deleted"
+type property_authentication_deleted_mutation_response {
+  # number of affected rows by the mutation
+  affected_rows: Int!
+
+  # data of the affected rows by the mutation
+  returning: [property_authentication_deleted!]!
+}
+
+# input type for inserting object relation for remote table "property_authentication_deleted"
+input property_authentication_deleted_obj_rel_insert_input {
+  data: property_authentication_deleted_insert_input!
+  on_conflict: property_authentication_deleted_on_conflict
+}
+
+# on conflict condition type for table "property_authentication_deleted"
+input property_authentication_deleted_on_conflict {
+  constraint: property_authentication_deleted_constraint!
+  update_columns: [property_authentication_deleted_update_column!]!
+  where: property_authentication_deleted_bool_exp
+}
+
+# ordering options when selecting data from "property_authentication_deleted"
+input property_authentication_deleted_order_by {
+  authentication_id: order_by
+  block_number: order_by
+  market: order_by
+  metrics: order_by
+  property: order_by
+}
+
+# select columns of table "property_authentication_deleted"
+enum property_authentication_deleted_select_column {
+  # column name
+  authentication_id
+
+  # column name
+  block_number
+
+  # column name
+  market
+
+  # column name
+  metrics
+
+  # column name
+  property
+}
+
+# input type for updating data in table "property_authentication_deleted"
+input property_authentication_deleted_set_input {
+  authentication_id: String
+  block_number: Int
+  market: String
+  metrics: String
+  property: String
+}
+
+# aggregate stddev on columns
+type property_authentication_deleted_stddev_fields {
+  block_number: Float
+}
+
+# order by stddev() on columns of table "property_authentication_deleted"
+input property_authentication_deleted_stddev_order_by {
+  block_number: order_by
+}
+
+# aggregate stddev_pop on columns
+type property_authentication_deleted_stddev_pop_fields {
+  block_number: Float
+}
+
+# order by stddev_pop() on columns of table "property_authentication_deleted"
+input property_authentication_deleted_stddev_pop_order_by {
+  block_number: order_by
+}
+
+# aggregate stddev_samp on columns
+type property_authentication_deleted_stddev_samp_fields {
+  block_number: Float
+}
+
+# order by stddev_samp() on columns of table "property_authentication_deleted"
+input property_authentication_deleted_stddev_samp_order_by {
+  block_number: order_by
+}
+
+# aggregate sum on columns
+type property_authentication_deleted_sum_fields {
+  block_number: Int
+}
+
+# order by sum() on columns of table "property_authentication_deleted"
+input property_authentication_deleted_sum_order_by {
+  block_number: order_by
+}
+
+# update columns of table "property_authentication_deleted"
+enum property_authentication_deleted_update_column {
+  # column name
+  authentication_id
+
+  # column name
+  block_number
+
+  # column name
+  market
+
+  # column name
+  metrics
+
+  # column name
+  property
+}
+
+# aggregate var_pop on columns
+type property_authentication_deleted_var_pop_fields {
+  block_number: Float
+}
+
+# order by var_pop() on columns of table "property_authentication_deleted"
+input property_authentication_deleted_var_pop_order_by {
+  block_number: order_by
+}
+
+# aggregate var_samp on columns
+type property_authentication_deleted_var_samp_fields {
+  block_number: Float
+}
+
+# order by var_samp() on columns of table "property_authentication_deleted"
+input property_authentication_deleted_var_samp_order_by {
+  block_number: order_by
+}
+
+# aggregate variance on columns
+type property_authentication_deleted_variance_fields {
+  block_number: Float
+}
+
+# order by variance() on columns of table "property_authentication_deleted"
+input property_authentication_deleted_variance_order_by {
+  block_number: order_by
+}
+
+# input type for incrementing integer columne in table "property_authentication"
+input property_authentication_inc_input {
+  block_number: Int
+}
+
+# input type for inserting data into table "property_authentication"
+input property_authentication_insert_input {
+  authentication_id: String
+  block_number: Int
+  market: String
+  metrics: String
+  property: String
+}
+
+# aggregate max on columns
+type property_authentication_max_fields {
+  authentication_id: String
+  block_number: Int
+  market: String
+  metrics: String
+  property: String
+}
+
+# order by max() on columns of table "property_authentication"
+input property_authentication_max_order_by {
+  authentication_id: order_by
+  block_number: order_by
+  market: order_by
+  metrics: order_by
+  property: order_by
+}
+
+# aggregate min on columns
+type property_authentication_min_fields {
+  authentication_id: String
+  block_number: Int
+  market: String
+  metrics: String
+  property: String
+}
+
+# order by min() on columns of table "property_authentication"
+input property_authentication_min_order_by {
+  authentication_id: order_by
+  block_number: order_by
+  market: order_by
+  metrics: order_by
+  property: order_by
+}
+
+# response of any mutation on the table "property_authentication"
+type property_authentication_mutation_response {
+  # number of affected rows by the mutation
+  affected_rows: Int!
+
+  # data of the affected rows by the mutation
+  returning: [property_authentication!]!
+}
+
+# input type for inserting object relation for remote table "property_authentication"
+input property_authentication_obj_rel_insert_input {
+  data: property_authentication_insert_input!
+  on_conflict: property_authentication_on_conflict
+}
+
+# on conflict condition type for table "property_authentication"
+input property_authentication_on_conflict {
+  constraint: property_authentication_constraint!
+  update_columns: [property_authentication_update_column!]!
+  where: property_authentication_bool_exp
+}
+
+# ordering options when selecting data from "property_authentication"
+input property_authentication_order_by {
+  authentication_id: order_by
+  block_number: order_by
+  market: order_by
+  metrics: order_by
+  property: order_by
+}
+
+# select columns of table "property_authentication"
+enum property_authentication_select_column {
+  # column name
+  authentication_id
+
+  # column name
+  block_number
+
+  # column name
+  market
+
+  # column name
+  metrics
+
+  # column name
+  property
+}
+
+# input type for updating data in table "property_authentication"
+input property_authentication_set_input {
+  authentication_id: String
+  block_number: Int
+  market: String
+  metrics: String
+  property: String
+}
+
+# aggregate stddev on columns
+type property_authentication_stddev_fields {
+  block_number: Float
+}
+
+# order by stddev() on columns of table "property_authentication"
+input property_authentication_stddev_order_by {
+  block_number: order_by
+}
+
+# aggregate stddev_pop on columns
+type property_authentication_stddev_pop_fields {
+  block_number: Float
+}
+
+# order by stddev_pop() on columns of table "property_authentication"
+input property_authentication_stddev_pop_order_by {
+  block_number: order_by
+}
+
+# aggregate stddev_samp on columns
+type property_authentication_stddev_samp_fields {
+  block_number: Float
+}
+
+# order by stddev_samp() on columns of table "property_authentication"
+input property_authentication_stddev_samp_order_by {
+  block_number: order_by
+}
+
+# aggregate sum on columns
+type property_authentication_sum_fields {
+  block_number: Int
+}
+
+# order by sum() on columns of table "property_authentication"
+input property_authentication_sum_order_by {
+  block_number: order_by
+}
+
+# update columns of table "property_authentication"
+enum property_authentication_update_column {
+  # column name
+  authentication_id
+
+  # column name
+  block_number
+
+  # column name
+  market
+
+  # column name
+  metrics
+
+  # column name
+  property
+}
+
+# aggregate var_pop on columns
+type property_authentication_var_pop_fields {
+  block_number: Float
+}
+
+# order by var_pop() on columns of table "property_authentication"
+input property_authentication_var_pop_order_by {
+  block_number: order_by
+}
+
+# aggregate var_samp on columns
+type property_authentication_var_samp_fields {
+  block_number: Float
+}
+
+# order by var_samp() on columns of table "property_authentication"
+input property_authentication_var_samp_order_by {
+  block_number: order_by
+}
+
+# aggregate variance on columns
+type property_authentication_variance_fields {
+  block_number: Float
+}
+
+# order by variance() on columns of table "property_authentication"
+input property_authentication_variance_order_by {
+  block_number: order_by
+}
+
 # columns and relationships of "property_factory_create"
 type property_factory_create {
   block_number: Int!
@@ -4149,6 +5147,45 @@ type query_root {
   # fetch data from the table: "metrics_factory_create" using primary key columns
   metrics_factory_create_by_pk(event_id: String!): metrics_factory_create
 
+  # fetch data from the table: "metrics_factory_destroy"
+  metrics_factory_destroy(
+    # distinct select on columns
+    distinct_on: [metrics_factory_destroy_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [metrics_factory_destroy_order_by!]
+
+    # filter the rows returned
+    where: metrics_factory_destroy_bool_exp
+  ): [metrics_factory_destroy!]!
+
+  # fetch aggregated fields from the table: "metrics_factory_destroy"
+  metrics_factory_destroy_aggregate(
+    # distinct select on columns
+    distinct_on: [metrics_factory_destroy_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [metrics_factory_destroy_order_by!]
+
+    # filter the rows returned
+    where: metrics_factory_destroy_bool_exp
+  ): metrics_factory_destroy_aggregate!
+
+  # fetch data from the table: "metrics_factory_destroy" using primary key columns
+  metrics_factory_destroy_by_pk(event_id: String!): metrics_factory_destroy
+
   # fetch data from the table: "pg_buffercache"
   pg_buffercache(
     # distinct select on columns
@@ -4260,6 +5297,84 @@ type query_root {
   # fetch data from the table: "policy_factory_create" using primary key columns
   policy_factory_create_by_pk(event_id: String!): policy_factory_create
 
+  # fetch data from the table: "property_authentication"
+  property_authentication(
+    # distinct select on columns
+    distinct_on: [property_authentication_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [property_authentication_order_by!]
+
+    # filter the rows returned
+    where: property_authentication_bool_exp
+  ): [property_authentication!]!
+
+  # fetch aggregated fields from the table: "property_authentication"
+  property_authentication_aggregate(
+    # distinct select on columns
+    distinct_on: [property_authentication_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [property_authentication_order_by!]
+
+    # filter the rows returned
+    where: property_authentication_bool_exp
+  ): property_authentication_aggregate!
+
+  # fetch data from the table: "property_authentication" using primary key columns
+  property_authentication_by_pk(metrics: String!, property: String!): property_authentication
+
+  # fetch data from the table: "property_authentication_deleted"
+  property_authentication_deleted(
+    # distinct select on columns
+    distinct_on: [property_authentication_deleted_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [property_authentication_deleted_order_by!]
+
+    # filter the rows returned
+    where: property_authentication_deleted_bool_exp
+  ): [property_authentication_deleted!]!
+
+  # fetch aggregated fields from the table: "property_authentication_deleted"
+  property_authentication_deleted_aggregate(
+    # distinct select on columns
+    distinct_on: [property_authentication_deleted_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [property_authentication_deleted_order_by!]
+
+    # filter the rows returned
+    where: property_authentication_deleted_bool_exp
+  ): property_authentication_deleted_aggregate!
+
+  # fetch data from the table: "property_authentication_deleted" using primary key columns
+  property_authentication_deleted_by_pk(metrics: String!, property: String!): property_authentication_deleted
+
   # fetch data from the table: "property_factory_create"
   property_factory_create(
     # distinct select on columns
@@ -4298,6 +5413,429 @@ type query_root {
 
   # fetch data from the table: "property_factory_create" using primary key columns
   property_factory_create_by_pk(event_id: String!): property_factory_create
+
+  # fetch data from the table: "reward_calculation_result"
+  reward_calculation_result(
+    # distinct select on columns
+    distinct_on: [reward_calculation_result_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [reward_calculation_result_order_by!]
+
+    # filter the rows returned
+    where: reward_calculation_result_bool_exp
+  ): [reward_calculation_result!]!
+
+  # fetch aggregated fields from the table: "reward_calculation_result"
+  reward_calculation_result_aggregate(
+    # distinct select on columns
+    distinct_on: [reward_calculation_result_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [reward_calculation_result_order_by!]
+
+    # filter the rows returned
+    where: reward_calculation_result_bool_exp
+  ): reward_calculation_result_aggregate!
+
+  # fetch data from the table: "reward_calculation_result" using primary key columns
+  reward_calculation_result_by_pk(alocator_allocation_result_event_id: String!): reward_calculation_result
+}
+
+# columns and relationships of "reward_calculation_result"
+type reward_calculation_result {
+  allocate_result: numeric!
+  alocator_allocation_result_event_id: String!
+  block_number: Int!
+  holder_reward: numeric!
+  lockup: numeric!
+  metrics: String!
+  policy: String!
+  staking_reward: numeric!
+}
+
+# aggregated selection of "reward_calculation_result"
+type reward_calculation_result_aggregate {
+  aggregate: reward_calculation_result_aggregate_fields
+  nodes: [reward_calculation_result!]!
+}
+
+# aggregate fields of "reward_calculation_result"
+type reward_calculation_result_aggregate_fields {
+  avg: reward_calculation_result_avg_fields
+  count(columns: [reward_calculation_result_select_column!], distinct: Boolean): Int
+  max: reward_calculation_result_max_fields
+  min: reward_calculation_result_min_fields
+  stddev: reward_calculation_result_stddev_fields
+  stddev_pop: reward_calculation_result_stddev_pop_fields
+  stddev_samp: reward_calculation_result_stddev_samp_fields
+  sum: reward_calculation_result_sum_fields
+  var_pop: reward_calculation_result_var_pop_fields
+  var_samp: reward_calculation_result_var_samp_fields
+  variance: reward_calculation_result_variance_fields
+}
+
+# order by aggregate values of table "reward_calculation_result"
+input reward_calculation_result_aggregate_order_by {
+  avg: reward_calculation_result_avg_order_by
+  count: order_by
+  max: reward_calculation_result_max_order_by
+  min: reward_calculation_result_min_order_by
+  stddev: reward_calculation_result_stddev_order_by
+  stddev_pop: reward_calculation_result_stddev_pop_order_by
+  stddev_samp: reward_calculation_result_stddev_samp_order_by
+  sum: reward_calculation_result_sum_order_by
+  var_pop: reward_calculation_result_var_pop_order_by
+  var_samp: reward_calculation_result_var_samp_order_by
+  variance: reward_calculation_result_variance_order_by
+}
+
+# input type for inserting array relation for remote table "reward_calculation_result"
+input reward_calculation_result_arr_rel_insert_input {
+  data: [reward_calculation_result_insert_input!]!
+  on_conflict: reward_calculation_result_on_conflict
+}
+
+# aggregate avg on columns
+type reward_calculation_result_avg_fields {
+  allocate_result: Float
+  block_number: Float
+  holder_reward: Float
+  lockup: Float
+  staking_reward: Float
+}
+
+# order by avg() on columns of table "reward_calculation_result"
+input reward_calculation_result_avg_order_by {
+  allocate_result: order_by
+  block_number: order_by
+  holder_reward: order_by
+  lockup: order_by
+  staking_reward: order_by
+}
+
+# Boolean expression to filter rows from the table "reward_calculation_result". All fields are combined with a logical 'AND'.
+input reward_calculation_result_bool_exp {
+  _and: [reward_calculation_result_bool_exp]
+  _not: reward_calculation_result_bool_exp
+  _or: [reward_calculation_result_bool_exp]
+  allocate_result: numeric_comparison_exp
+  alocator_allocation_result_event_id: String_comparison_exp
+  block_number: Int_comparison_exp
+  holder_reward: numeric_comparison_exp
+  lockup: numeric_comparison_exp
+  metrics: String_comparison_exp
+  policy: String_comparison_exp
+  staking_reward: numeric_comparison_exp
+}
+
+# unique or primary key constraints on table "reward_calculation_result"
+enum reward_calculation_result_constraint {
+  # unique or primary key constraint
+  reward_calculation_result_pkey
+}
+
+# input type for incrementing integer columne in table "reward_calculation_result"
+input reward_calculation_result_inc_input {
+  block_number: Int
+}
+
+# input type for inserting data into table "reward_calculation_result"
+input reward_calculation_result_insert_input {
+  allocate_result: numeric
+  alocator_allocation_result_event_id: String
+  block_number: Int
+  holder_reward: numeric
+  lockup: numeric
+  metrics: String
+  policy: String
+  staking_reward: numeric
+}
+
+# aggregate max on columns
+type reward_calculation_result_max_fields {
+  allocate_result: numeric
+  alocator_allocation_result_event_id: String
+  block_number: Int
+  holder_reward: numeric
+  lockup: numeric
+  metrics: String
+  policy: String
+  staking_reward: numeric
+}
+
+# order by max() on columns of table "reward_calculation_result"
+input reward_calculation_result_max_order_by {
+  allocate_result: order_by
+  alocator_allocation_result_event_id: order_by
+  block_number: order_by
+  holder_reward: order_by
+  lockup: order_by
+  metrics: order_by
+  policy: order_by
+  staking_reward: order_by
+}
+
+# aggregate min on columns
+type reward_calculation_result_min_fields {
+  allocate_result: numeric
+  alocator_allocation_result_event_id: String
+  block_number: Int
+  holder_reward: numeric
+  lockup: numeric
+  metrics: String
+  policy: String
+  staking_reward: numeric
+}
+
+# order by min() on columns of table "reward_calculation_result"
+input reward_calculation_result_min_order_by {
+  allocate_result: order_by
+  alocator_allocation_result_event_id: order_by
+  block_number: order_by
+  holder_reward: order_by
+  lockup: order_by
+  metrics: order_by
+  policy: order_by
+  staking_reward: order_by
+}
+
+# response of any mutation on the table "reward_calculation_result"
+type reward_calculation_result_mutation_response {
+  # number of affected rows by the mutation
+  affected_rows: Int!
+
+  # data of the affected rows by the mutation
+  returning: [reward_calculation_result!]!
+}
+
+# input type for inserting object relation for remote table "reward_calculation_result"
+input reward_calculation_result_obj_rel_insert_input {
+  data: reward_calculation_result_insert_input!
+  on_conflict: reward_calculation_result_on_conflict
+}
+
+# on conflict condition type for table "reward_calculation_result"
+input reward_calculation_result_on_conflict {
+  constraint: reward_calculation_result_constraint!
+  update_columns: [reward_calculation_result_update_column!]!
+  where: reward_calculation_result_bool_exp
+}
+
+# ordering options when selecting data from "reward_calculation_result"
+input reward_calculation_result_order_by {
+  allocate_result: order_by
+  alocator_allocation_result_event_id: order_by
+  block_number: order_by
+  holder_reward: order_by
+  lockup: order_by
+  metrics: order_by
+  policy: order_by
+  staking_reward: order_by
+}
+
+# select columns of table "reward_calculation_result"
+enum reward_calculation_result_select_column {
+  # column name
+  allocate_result
+
+  # column name
+  alocator_allocation_result_event_id
+
+  # column name
+  block_number
+
+  # column name
+  holder_reward
+
+  # column name
+  lockup
+
+  # column name
+  metrics
+
+  # column name
+  policy
+
+  # column name
+  staking_reward
+}
+
+# input type for updating data in table "reward_calculation_result"
+input reward_calculation_result_set_input {
+  allocate_result: numeric
+  alocator_allocation_result_event_id: String
+  block_number: Int
+  holder_reward: numeric
+  lockup: numeric
+  metrics: String
+  policy: String
+  staking_reward: numeric
+}
+
+# aggregate stddev on columns
+type reward_calculation_result_stddev_fields {
+  allocate_result: Float
+  block_number: Float
+  holder_reward: Float
+  lockup: Float
+  staking_reward: Float
+}
+
+# order by stddev() on columns of table "reward_calculation_result"
+input reward_calculation_result_stddev_order_by {
+  allocate_result: order_by
+  block_number: order_by
+  holder_reward: order_by
+  lockup: order_by
+  staking_reward: order_by
+}
+
+# aggregate stddev_pop on columns
+type reward_calculation_result_stddev_pop_fields {
+  allocate_result: Float
+  block_number: Float
+  holder_reward: Float
+  lockup: Float
+  staking_reward: Float
+}
+
+# order by stddev_pop() on columns of table "reward_calculation_result"
+input reward_calculation_result_stddev_pop_order_by {
+  allocate_result: order_by
+  block_number: order_by
+  holder_reward: order_by
+  lockup: order_by
+  staking_reward: order_by
+}
+
+# aggregate stddev_samp on columns
+type reward_calculation_result_stddev_samp_fields {
+  allocate_result: Float
+  block_number: Float
+  holder_reward: Float
+  lockup: Float
+  staking_reward: Float
+}
+
+# order by stddev_samp() on columns of table "reward_calculation_result"
+input reward_calculation_result_stddev_samp_order_by {
+  allocate_result: order_by
+  block_number: order_by
+  holder_reward: order_by
+  lockup: order_by
+  staking_reward: order_by
+}
+
+# aggregate sum on columns
+type reward_calculation_result_sum_fields {
+  allocate_result: numeric
+  block_number: Int
+  holder_reward: numeric
+  lockup: numeric
+  staking_reward: numeric
+}
+
+# order by sum() on columns of table "reward_calculation_result"
+input reward_calculation_result_sum_order_by {
+  allocate_result: order_by
+  block_number: order_by
+  holder_reward: order_by
+  lockup: order_by
+  staking_reward: order_by
+}
+
+# update columns of table "reward_calculation_result"
+enum reward_calculation_result_update_column {
+  # column name
+  allocate_result
+
+  # column name
+  alocator_allocation_result_event_id
+
+  # column name
+  block_number
+
+  # column name
+  holder_reward
+
+  # column name
+  lockup
+
+  # column name
+  metrics
+
+  # column name
+  policy
+
+  # column name
+  staking_reward
+}
+
+# aggregate var_pop on columns
+type reward_calculation_result_var_pop_fields {
+  allocate_result: Float
+  block_number: Float
+  holder_reward: Float
+  lockup: Float
+  staking_reward: Float
+}
+
+# order by var_pop() on columns of table "reward_calculation_result"
+input reward_calculation_result_var_pop_order_by {
+  allocate_result: order_by
+  block_number: order_by
+  holder_reward: order_by
+  lockup: order_by
+  staking_reward: order_by
+}
+
+# aggregate var_samp on columns
+type reward_calculation_result_var_samp_fields {
+  allocate_result: Float
+  block_number: Float
+  holder_reward: Float
+  lockup: Float
+  staking_reward: Float
+}
+
+# order by var_samp() on columns of table "reward_calculation_result"
+input reward_calculation_result_var_samp_order_by {
+  allocate_result: order_by
+  block_number: order_by
+  holder_reward: order_by
+  lockup: order_by
+  staking_reward: order_by
+}
+
+# aggregate variance on columns
+type reward_calculation_result_variance_fields {
+  allocate_result: Float
+  block_number: Float
+  holder_reward: Float
+  lockup: Float
+  staking_reward: Float
+}
+
+# order by variance() on columns of table "reward_calculation_result"
+input reward_calculation_result_variance_order_by {
+  allocate_result: order_by
+  block_number: order_by
+  holder_reward: order_by
+  lockup: order_by
+  staking_reward: order_by
 }
 
 scalar smallint
@@ -4531,6 +6069,45 @@ type subscription_root {
   # fetch data from the table: "metrics_factory_create" using primary key columns
   metrics_factory_create_by_pk(event_id: String!): metrics_factory_create
 
+  # fetch data from the table: "metrics_factory_destroy"
+  metrics_factory_destroy(
+    # distinct select on columns
+    distinct_on: [metrics_factory_destroy_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [metrics_factory_destroy_order_by!]
+
+    # filter the rows returned
+    where: metrics_factory_destroy_bool_exp
+  ): [metrics_factory_destroy!]!
+
+  # fetch aggregated fields from the table: "metrics_factory_destroy"
+  metrics_factory_destroy_aggregate(
+    # distinct select on columns
+    distinct_on: [metrics_factory_destroy_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [metrics_factory_destroy_order_by!]
+
+    # filter the rows returned
+    where: metrics_factory_destroy_bool_exp
+  ): metrics_factory_destroy_aggregate!
+
+  # fetch data from the table: "metrics_factory_destroy" using primary key columns
+  metrics_factory_destroy_by_pk(event_id: String!): metrics_factory_destroy
+
   # fetch data from the table: "pg_buffercache"
   pg_buffercache(
     # distinct select on columns
@@ -4642,6 +6219,84 @@ type subscription_root {
   # fetch data from the table: "policy_factory_create" using primary key columns
   policy_factory_create_by_pk(event_id: String!): policy_factory_create
 
+  # fetch data from the table: "property_authentication"
+  property_authentication(
+    # distinct select on columns
+    distinct_on: [property_authentication_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [property_authentication_order_by!]
+
+    # filter the rows returned
+    where: property_authentication_bool_exp
+  ): [property_authentication!]!
+
+  # fetch aggregated fields from the table: "property_authentication"
+  property_authentication_aggregate(
+    # distinct select on columns
+    distinct_on: [property_authentication_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [property_authentication_order_by!]
+
+    # filter the rows returned
+    where: property_authentication_bool_exp
+  ): property_authentication_aggregate!
+
+  # fetch data from the table: "property_authentication" using primary key columns
+  property_authentication_by_pk(metrics: String!, property: String!): property_authentication
+
+  # fetch data from the table: "property_authentication_deleted"
+  property_authentication_deleted(
+    # distinct select on columns
+    distinct_on: [property_authentication_deleted_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [property_authentication_deleted_order_by!]
+
+    # filter the rows returned
+    where: property_authentication_deleted_bool_exp
+  ): [property_authentication_deleted!]!
+
+  # fetch aggregated fields from the table: "property_authentication_deleted"
+  property_authentication_deleted_aggregate(
+    # distinct select on columns
+    distinct_on: [property_authentication_deleted_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [property_authentication_deleted_order_by!]
+
+    # filter the rows returned
+    where: property_authentication_deleted_bool_exp
+  ): property_authentication_deleted_aggregate!
+
+  # fetch data from the table: "property_authentication_deleted" using primary key columns
+  property_authentication_deleted_by_pk(metrics: String!, property: String!): property_authentication_deleted
+
   # fetch data from the table: "property_factory_create"
   property_factory_create(
     # distinct select on columns
@@ -4680,4 +6335,43 @@ type subscription_root {
 
   # fetch data from the table: "property_factory_create" using primary key columns
   property_factory_create_by_pk(event_id: String!): property_factory_create
+
+  # fetch data from the table: "reward_calculation_result"
+  reward_calculation_result(
+    # distinct select on columns
+    distinct_on: [reward_calculation_result_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [reward_calculation_result_order_by!]
+
+    # filter the rows returned
+    where: reward_calculation_result_bool_exp
+  ): [reward_calculation_result!]!
+
+  # fetch aggregated fields from the table: "reward_calculation_result"
+  reward_calculation_result_aggregate(
+    # distinct select on columns
+    distinct_on: [reward_calculation_result_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [reward_calculation_result_order_by!]
+
+    # filter the rows returned
+    where: reward_calculation_result_bool_exp
+  ): reward_calculation_result_aggregate!
+
+  # fetch data from the table: "reward_calculation_result" using primary key columns
+  reward_calculation_result_by_pk(alocator_allocation_result_event_id: String!): reward_calculation_result
 }
