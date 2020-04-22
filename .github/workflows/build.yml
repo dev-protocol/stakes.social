@@ -26,7 +26,7 @@ jobs:
             */*/cjs
             */*/esm
             */*/.next
-          key: ${{ runner.os }}-${{ GITHUB_SHA }}
+          key: ${{ runner.os }}-${ GITHUB_SHA }
             
       - name: install deps
         run: yarn
@@ -59,7 +59,7 @@ jobs:
             */*/cjs
             */*/esm
             */*/.next
-          key: ${{ runner.os }}-${{ GITHUB_SHA }}
+          key: ${{ runner.os }}-${ GITHUB_SHA }
 
       - name: export
         run: yarn workspace @dev/web export
