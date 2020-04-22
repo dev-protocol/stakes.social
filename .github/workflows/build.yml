@@ -32,7 +32,7 @@ jobs:
       - name: archive artifacts
         uses: actions/upload-artifact@v1
         with:
-          name: out
+          name: build
           path: packages/web/out
 
   deploy:
@@ -46,10 +46,10 @@ jobs:
       - name: download artifacts
         uses: actions/download-artifact@v1
         with:
-          name: out
+          name: build
 
       - uses: bacongobbler/azure-blob-storage-upload@v1.0.0
         with:
-          source_dir: out
+          source_dir: build
           container_name: $web
           connection_string: ${{ secrets.AZURE_BLOB_STORAGE_CONNECTION_STRING }}
