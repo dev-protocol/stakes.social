@@ -28,3 +28,17 @@ jobs:
 
       - name: test
         run: yarn test
+
+  deploy:
+    needs: build
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@master
+
+      - uses: bacongobbler/azure-blob-storage-upload@v1.0.0
+        with:
+          source_dir: packages/web/out/
+          container_name: $web
+          connection_string: ${{ secrets.AZURE_BLOB_STORAGE_CONNECTION_STRING }}
