@@ -11,7 +11,7 @@ export const MainHeader = () => {
   return (
     <div style={{ padding: '50px' }}>
       <div>
-        <div style={{ display: 'inline', color: '#000', fontSize: '48px', lineHeight: '64px' }}>App Name</div>
+        <div style={{ display: 'inline', color: '#000', fontSize: '48px', lineHeight: '64px' }}>Stakes.social</div>
         <Button size="large" style={{ float: 'right' }} disabled={isConnected} onClick={handleClick}>
           {isConnected && 'Wallet connected'}
           {!isConnected && 'Connect to a wallet'}

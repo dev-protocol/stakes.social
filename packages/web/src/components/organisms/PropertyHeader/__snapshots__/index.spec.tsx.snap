@@ -9,7 +9,7 @@ exports[`PropertyHeader Snapshot 1`] = `
       <h1
         style="display: inline; color: white; font-size: 48px; line-height: 64px;"
       >
-        App Name
+        Stakes.social
       </h1>
       <button
         class="ant-btn ant-btn-lg"

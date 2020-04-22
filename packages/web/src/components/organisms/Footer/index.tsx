@@ -17,7 +17,7 @@ export const Footer = () => {
       }}
     >
       <div>
-        <span>XXX is powered by the </span>
+        <span>Stakes.social is powered by the </span>
         <a href="#" target="_blank" rel="noreferrer noopener" style={{ textDecoration: 'underline' }}>
           Dev Protocol
         </a>
