@@ -1,0 +1,5 @@
+query getPropertyAuthentication($propertyAddress: String!) {
+  property_authentication(where: { property: { _eq: $propertyAddress } }) {
+    authentication_id
+  }
+}
