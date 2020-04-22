@@ -1,6 +1,5 @@
 {
     "version": 2,
-    "name": "stakes-social",
     "alias": "stakes.social",
     "public": true,
     "github": {
