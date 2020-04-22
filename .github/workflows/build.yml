@@ -43,7 +43,7 @@ jobs:
   deploy:
     needs: build
 
-    # if: contains(github.ref, 'master')
+    if: contains(github.ref, 'master')
 
     runs-on: ubuntu-latest
 
