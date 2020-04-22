@@ -17,13 +17,16 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
-      - name: cache modules
+      - name: cache build outputs
         uses: actions/cache@master
         with:
           path: |
             node_modules
             */*/node_modules
-          key: ${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
+            */*/cjs
+            */*/esm
+            */*/.next
+          key: ${{ runner.os }}-${{ GITHUB_SHA }}
             
       - name: install deps
         run: yarn
@@ -47,18 +50,21 @@ jobs:
     steps:
       - uses: actions/checkout@master
 
-      - name: restore cache modules
+      - name: restore cache build outputs
         uses: actions/cache@master
         with:
           path: |
             node_modules
             */*/node_modules
-          key: ${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
+            */*/cjs
+            */*/esm
+            */*/.next
+          key: ${{ runner.os }}-${{ GITHUB_SHA }}
 
       - name: export
         run: yarn workspace @dev/web export
         env:
-          END_POINT: ${{ secrets.END_POINT }}  
+          END_POINT: ${{ secrets.END_POINT }}
 
       - uses: bacongobbler/azure-blob-storage-upload@v1.0.0
         with:
