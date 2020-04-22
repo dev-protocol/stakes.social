@@ -3,7 +3,6 @@ const lessToJS = require('less-vars-to-js')
 const fs = require('fs')
 const path = require('path')
 const withCss = require('@zeit/next-css')
-const withTM = require('next-transpile-modules')(['@dev/graphql']);
 
 const themeVariables = lessToJS(fs.readFileSync(path.resolve(__dirname, './src/assets/antd-custom.less'), 'utf8'))
 if (typeof require !== 'undefined') {
@@ -11,7 +10,7 @@ if (typeof require !== 'undefined') {
 }
 
 module.exports = withCss(
-  withLess(withTM({
+  withLess({
     webpack: (config, { isServer }) => {
       if (isServer) {
         const antStyles = /antd\/.*?\/style.*?/
@@ -42,7 +41,6 @@ module.exports = withCss(
       config.resolve.alias['modules'] = path.join(__dirname, '/src/modules')
       config.resolve.alias['pages'] = path.join(__dirname, '/src/pages')
       config.resolve.alias['components'] = path.join(__dirname, '/src/components')
-      config.resolve.alias['@dev/graphql'] = require.resolve('@dev/graphql')
 
       const originalEntry = config.entry
       config.entry = async () => {
@@ -61,7 +59,6 @@ module.exports = withCss(
     },
     env: {
       END_POINT: process.env.END_POINT || 'http://localhost:3003/graphql'
-    },
-    target: 'serverless'
-  }))
+    }
+  })
 )
