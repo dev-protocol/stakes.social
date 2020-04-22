@@ -7,8 +7,8 @@
     },
     "builds": [
       {
-        "src": "/packages/web/package.json",
-        "use": "@now/next"
+        "src": "/packages/web/next.config.js",
+        "use": "@now/next@canary"
       }
     ],
     "routes": [
