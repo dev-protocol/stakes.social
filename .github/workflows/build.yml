@@ -75,7 +75,7 @@ jobs:
         uses: amondnet/now-deployment@v2
         with:
           zeit-token: ${{ secrets.X_VERCEL_TOKEN }}
-          github-token: ${{ secrets.X_GITHUB_TOKEN }} 
+          github-token: ${{ secrets.GITHUB_TOKEN }} 
           now-args: ${{ steps.args.outputs.value }}
           now-org-id: ${{ secrets.X_VERCEL_ORG_ID}}
           now-project-id: ${{ secrets.X_VERCEL_PROJECT_ID}}
