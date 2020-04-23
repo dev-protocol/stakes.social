@@ -10,7 +10,7 @@ exports[`MainHeader Snapshot 1`] = `
         <div
           style="display: inline; color: rgb(0, 0, 0); font-size: 48px; line-height: 64px;"
         >
-          App Name
+          Stakes.social
         </div>
         <button
           class="ant-btn ant-btn-lg"

@@ -19,10 +19,13 @@ export const PropertyHeader = ({ propertyAddress }: Props) => {
         position: 'relative',
         height: '562px',
         padding: '50px',
-        background: 'linear-gradient(111.32deg, #2F80ED 0%, #D5E6FB 100%)'
+        background: `
+          url('//raw.githubusercontent.com/dev-protocol/assets/master/property/${propertyAddress}/header.jpg'),
+          linear-gradient(111.32deg, #2F80ED 0%, #D5E6FB 100%)`,
+        backgroundSize: 'cover'
       }}
     >
-      <h1 style={{ display: 'inline', color: 'white', fontSize: '48px', lineHeight: '64px' }}>App Name</h1>
+      <h1 style={{ display: 'inline', color: 'white', fontSize: '48px', lineHeight: '64px' }}>Stakes.social</h1>
       <Button size="large" style={{ float: 'right' }} disabled={isConnected} onClick={handleClick}>
         {isConnected && 'Wallet connected'}
         {!isConnected && 'Connect to a wallet'}

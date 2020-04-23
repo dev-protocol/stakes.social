@@ -1,4 +1,4 @@
-## minimum-valuable-dev-protocol-app
+## stakes.social
 
 ### how to run on local
 

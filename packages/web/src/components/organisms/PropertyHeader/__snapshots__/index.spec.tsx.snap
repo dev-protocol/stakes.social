@@ -4,12 +4,12 @@ exports[`PropertyHeader Snapshot 1`] = `
 <body>
   <div>
     <div
-      style="width: auto; position: relative; height: 562px; padding: 50px;"
+      style="width: auto; position: relative; height: 562px; padding: 50px; background-size: cover;"
     >
       <h1
         style="display: inline; color: white; font-size: 48px; line-height: 64px;"
       >
-        App Name
+        Stakes.social
       </h1>
       <button
         class="ant-btn ant-btn-lg"
