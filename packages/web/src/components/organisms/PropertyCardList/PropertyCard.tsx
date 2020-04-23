@@ -10,6 +10,25 @@ interface Props {
   propertyAddress: string
 }
 
+const AssetStrengthBase = ({ assetStrength }: { assetStrength: number }) => (
+  <div>
+    <span>{Math.floor(assetStrength * 100)}% of total market</span>
+    <div style={{ padding: '14px 0 14px 32px' }}>
+      <CircleGraph size={81} percentage={assetStrength} />
+    </div>
+  </div>
+)
+
+const AssetStrength = ({ metrics, market }: { metrics: string; market: string }) => {
+  const { assetStrength: maybeAssetStrength } = useAssetStrength(metrics, market)
+  const assetStrength = useMemo(() => maybeAssetStrength || 0, [maybeAssetStrength])
+  return <AssetStrengthBase assetStrength={assetStrength} />
+}
+
+const AssetStrengthWithoutData = () => {
+  return <AssetStrengthBase assetStrength={0} />
+}
+
 export const PropertyCard = ({ propertyAddress }: Props) => {
   const { totalRewardsAmount } = useGetTotalRewardsAmount(propertyAddress)
   const { data } = useGetPropertyAuthenticationQuery({ variables: { propertyAddress } })
@@ -17,11 +36,8 @@ export const PropertyCard = ({ propertyAddress }: Props) => {
     () => data && truncate(data.property_authentication.map(e => e.authentication_id).join(', '), 17),
     [data]
   )
-  const { assetStrength: maybeAssetStrength } = useAssetStrength(
-    data?.property_authentication[0]?.metrics,
-    data?.property_authentication[0]?.market
-  )
-  const assetStrength = useMemo(() => maybeAssetStrength || 0, [maybeAssetStrength])
+  const metrics = useMemo(() => data?.property_authentication[0]?.metrics, [data])
+  const market = useMemo(() => data?.property_authentication[0]?.market, [data])
   const averageInterestRate = 0.15
 
   return (
@@ -49,12 +65,7 @@ export const PropertyCard = ({ propertyAddress }: Props) => {
             />
           </Col>
           <Col span={4}>
-            <div>
-              <span>{Math.floor(assetStrength * 100)}% of total market</span>
-              <div style={{ padding: '14px 0 14px 32px' }}>
-                <CircleGraph size={81} percentage={assetStrength} />
-              </div>
-            </div>
+            {metrics && market ? <AssetStrength metrics={metrics} market={market} /> : <AssetStrengthWithoutData />}
           </Col>
         </Row>
       </Card>
