@@ -17,17 +17,6 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
-      - name: cache build outputs
-        uses: actions/cache@master
-        with:
-          path: |
-            node_modules
-            */*/node_modules
-            */*/cjs
-            */*/esm
-            */*/.next
-          key: ${{ runner.os }}-${ GITHUB_SHA }
-            
       - name: install deps
         run: yarn
 
@@ -39,43 +28,3 @@ jobs:
 
       - name: test
         run: yarn test
-
-  deploy:
-    needs: build
-
-    runs-on: ubuntu-latest
-
-    steps:
-      - uses: actions/checkout@master
-
-      - name: restore cache build outputs
-        uses: actions/cache@master
-        with:
-          path: |
-            node_modules
-            */*/node_modules
-            */*/cjs
-            */*/esm
-            */*/.next
-          key: ${{ runner.os }}-${ GITHUB_SHA }
-
-      - name: export
-        run: yarn workspace @dev/web export
-        env:
-          END_POINT: https://dev-protocol-event-viewer.azurewebsites.net/v1/graphql?code=gzcLW2ZbDLSt6MNQlvd731oAWXznPfeLWH5NU8d8BMYHFemwoIxDLw==
-
-      - uses: haya14busa/action-cond@v1
-        id: args
-        with:
-          cond: contains(github.ref, 'master')
-          if_true: "--prod"
-          if_false: ""
-
-      - name: deploy to vercel
-        uses: amondnet/now-deployment@v2
-        with:
-          zeit-token: ${{ secrets.X_VERCEL_TOKEN }}
-          github-token: ${{ secrets.GITHUB_TOKEN }} 
-          now-args: ${{ steps.args.outputs.value }}
-          now-org-id: ${{ secrets.X_VERCEL_ORG_ID}}
-          now-project-id: ${{ secrets.X_VERCEL_PROJECT_ID}}
