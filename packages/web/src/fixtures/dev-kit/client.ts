@@ -77,7 +77,9 @@ export const cancelStaking = async (propertyAddress: string) => {
 export const getLastAssetValueEachMetrics = async (metricsAddress: string) => {
   const client = newClient()
   if (client) {
-    return client.allocatorStorage().getLastAssetValueEachMetrics(metricsAddress)
+    return client
+      .allocatorStorage(await client.registry(addresses.eth.main.registry).allocatorStorage())
+      .getLastAssetValueEachMetrics(metricsAddress)
   }
   return undefined
 }
@@ -85,7 +87,9 @@ export const getLastAssetValueEachMetrics = async (metricsAddress: string) => {
 export const getLastAssetValueEachMarketPerBlock = async (marketAddress: string) => {
   const client = newClient()
   if (client) {
-    return client.allocatorStorage().getLastAssetValueEachMarketPerBlock(marketAddress)
+    return client
+      .allocatorStorage(await client.registry(addresses.eth.main.registry).allocatorStorage())
+      .getLastAssetValueEachMarketPerBlock(marketAddress)
   }
   return undefined
 }

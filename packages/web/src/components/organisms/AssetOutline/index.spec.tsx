@@ -7,7 +7,7 @@ jest.mock('src/fixtures/dev-kit/hooks')
 
 describe(`${AssetOutline.name}`, () => {
   test('Snapshot', () => {
-    const component = render(<AssetOutline metricsAddress="metrics-address" marketAddress="market-address" />)
+    const component = render(<AssetOutline propertyAddress="property-address" />)
     const tree = component.baseElement
     expect(tree).toMatchSnapshot()
   })
