@@ -149,3 +149,4 @@ firebase/admin.js.map
 
 ### direnv
 .envrc
+.now
