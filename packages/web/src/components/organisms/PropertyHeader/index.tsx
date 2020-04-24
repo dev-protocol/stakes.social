@@ -1,6 +1,7 @@
 import React from 'react'
 import { Button } from 'antd'
 import { useConnectWallet } from 'src/fixtures/wallet/hooks'
+import { StakesSocial } from 'src/components/atoms/Svgs/tsx'
 
 interface Props {
   propertyAddress: string
@@ -25,7 +26,7 @@ export const PropertyHeader = ({ propertyAddress }: Props) => {
         backgroundSize: 'cover'
       }}
     >
-      <h1 style={{ display: 'inline', color: 'white', fontSize: '48px', lineHeight: '64px' }}>Stakes.social</h1>
+      <StakesSocial themeColor={'#fff'} width={'14em'}></StakesSocial>
       <Button size="large" style={{ float: 'right' }} disabled={isConnected} onClick={handleClick}>
         {isConnected && 'Wallet connected'}
         {!isConnected && 'Connect to a wallet'}
