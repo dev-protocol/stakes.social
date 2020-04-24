@@ -9,11 +9,11 @@ export type Scalars = {
   Boolean: boolean
   Int: number
   Float: number
-  numeric: any
   bigint: any
+  float8: any
+  numeric: any
   oid: any
   smallint: any
-  float8: any
 }
 
 export type Allocator_Allocation_Result = {
