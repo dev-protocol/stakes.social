@@ -4,6 +4,7 @@ import { PropertyCardList } from '.'
 import 'src/__mocks__/window/matchMedia.mock'
 
 jest.mock('src/fixtures/dev-kit/hooks')
+jest.mock('src/fixtures/utility/gql-hooks-wrapper')
 jest.mock('@dev/graphql')
 
 describe(`${PropertyCardList.name}`, () => {
