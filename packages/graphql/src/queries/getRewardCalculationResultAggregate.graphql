@@ -1,0 +1,10 @@
+query getRewardCalculationResultAggregate($metricsList: [String!]!) {
+  reward_calculation_result_aggregate(where: { block_number: { _gt: 9600000 }, metrics: { _in: $metricsList } }) {
+    aggregate {
+      sum {
+        staking_reward
+        lockup
+      }
+    }
+  }
+}

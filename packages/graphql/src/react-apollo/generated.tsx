@@ -5257,6 +5257,25 @@ export type GetPropertyAuthenticationQuery = { __typename?: 'query_root' } & {
   >
 }
 
+export type GetRewardCalculationResultAggregateQueryVariables = {
+  metricsList: Array<Scalars['String']>
+}
+
+export type GetRewardCalculationResultAggregateQuery = { __typename?: 'query_root' } & {
+  reward_calculation_result_aggregate: { __typename?: 'reward_calculation_result_aggregate' } & {
+    aggregate?: Maybe<
+      { __typename?: 'reward_calculation_result_aggregate_fields' } & {
+        sum?: Maybe<
+          { __typename?: 'reward_calculation_result_sum_fields' } & Pick<
+            Reward_Calculation_Result_Sum_Fields,
+            'staking_reward' | 'lockup'
+          >
+        >
+      }
+    >
+  }
+}
+
 export type ListAllocatorAllocationResultsQueryVariables = {
   distinct_on?: Maybe<Array<Allocator_Allocation_Result_Select_Column>>
   limit?: Maybe<Scalars['Int']>
@@ -5429,6 +5448,67 @@ export type GetPropertyAuthenticationLazyQueryHookResult = ReturnType<typeof use
 export type GetPropertyAuthenticationQueryResult = ApolloReactCommon.QueryResult<
   GetPropertyAuthenticationQuery,
   GetPropertyAuthenticationQueryVariables
+>
+export const GetRewardCalculationResultAggregateDocument = gql`
+  query getRewardCalculationResultAggregate($metricsList: [String!]!) {
+    reward_calculation_result_aggregate(where: { block_number: { _gt: 9600000 }, metrics: { _in: $metricsList } }) {
+      aggregate {
+        sum {
+          staking_reward
+          lockup
+        }
+      }
+    }
+  }
+`
+
+/**
+ * __useGetRewardCalculationResultAggregateQuery__
+ *
+ * To run a query within a React component, call `useGetRewardCalculationResultAggregateQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetRewardCalculationResultAggregateQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetRewardCalculationResultAggregateQuery({
+ *   variables: {
+ *      metricsList: // value for 'metricsList'
+ *   },
+ * });
+ */
+export function useGetRewardCalculationResultAggregateQuery(
+  baseOptions?: ApolloReactHooks.QueryHookOptions<
+    GetRewardCalculationResultAggregateQuery,
+    GetRewardCalculationResultAggregateQueryVariables
+  >
+) {
+  return ApolloReactHooks.useQuery<
+    GetRewardCalculationResultAggregateQuery,
+    GetRewardCalculationResultAggregateQueryVariables
+  >(GetRewardCalculationResultAggregateDocument, baseOptions)
+}
+export function useGetRewardCalculationResultAggregateLazyQuery(
+  baseOptions?: ApolloReactHooks.LazyQueryHookOptions<
+    GetRewardCalculationResultAggregateQuery,
+    GetRewardCalculationResultAggregateQueryVariables
+  >
+) {
+  return ApolloReactHooks.useLazyQuery<
+    GetRewardCalculationResultAggregateQuery,
+    GetRewardCalculationResultAggregateQueryVariables
+  >(GetRewardCalculationResultAggregateDocument, baseOptions)
+}
+export type GetRewardCalculationResultAggregateQueryHookResult = ReturnType<
+  typeof useGetRewardCalculationResultAggregateQuery
+>
+export type GetRewardCalculationResultAggregateLazyQueryHookResult = ReturnType<
+  typeof useGetRewardCalculationResultAggregateLazyQuery
+>
+export type GetRewardCalculationResultAggregateQueryResult = ApolloReactCommon.QueryResult<
+  GetRewardCalculationResultAggregateQuery,
+  GetRewardCalculationResultAggregateQueryVariables
 >
 export const ListAllocatorAllocationResultsDocument = gql`
   query ListAllocatorAllocationResults(
