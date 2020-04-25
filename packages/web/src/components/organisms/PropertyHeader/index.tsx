@@ -39,7 +39,7 @@ export const PropertyHeader = ({ propertyAddress }: Props) => {
           display: 'block'
         }}
       >
-        <div style={{ background: 'white' }}>Property Address</div>
+        <span style={{ background: 'white', padding: '0.5em' }}>Property Address</span>
         <div style={{ background: 'white' }}>{propertyAddress}</div>
       </div>
     </div>
