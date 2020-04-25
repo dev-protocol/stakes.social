@@ -48,7 +48,7 @@
     "styled-components": "5.1.0",
     "swr": "0.2.0",
     "web3": "1.2.7",
-    "web3-core": "1.2.6"
+    "web3-core": "1.2.7"
   },
   "devDependencies": {
     "@babel/core": "7.9.0",
