@@ -5,6 +5,7 @@ import { useGetTotalRewardsAmount, useAssetStrength } from 'src/fixtures/dev-kit
 import { truncate } from 'src/fixtures/utility/string'
 import { useGetPropertyAuthenticationQuery } from '@dev/graphql'
 import { CircleGraph } from 'src/components/atoms/CircleGraph'
+import { useAverageInterestRate } from 'src/fixtures/utility/gql-hooks-wrapper'
 
 interface Props {
   propertyAddress: string
@@ -38,7 +39,7 @@ export const PropertyCard = ({ propertyAddress }: Props) => {
   )
   const metrics = useMemo(() => data?.property_authentication[0]?.metrics, [data])
   const market = useMemo(() => data?.property_authentication[0]?.market, [data])
-  const averageInterestRate = 0.15
+  const averageInterestRate = useAverageInterestRate(metrics ? metrics : '')
 
   return (
     <Link href={'/[propertyAddress]'} as={`/${propertyAddress}`}>
