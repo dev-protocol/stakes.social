@@ -14,7 +14,7 @@ exports[`PropertyCardList Snapshot 1`] = `
             class="ant-row"
           >
             <div
-              class="ant-col ant-col-12"
+              class="ant-col ant-col-10"
             >
               <div>
                 123
@@ -26,7 +26,7 @@ exports[`PropertyCardList Snapshot 1`] = `
               </div>
             </div>
             <div
-              class="ant-col ant-col-4"
+              class="ant-col ant-col-5"
             >
               <div
                 class="ant-statistic"
@@ -60,7 +60,7 @@ exports[`PropertyCardList Snapshot 1`] = `
               </div>
             </div>
             <div
-              class="ant-col ant-col-4"
+              class="ant-col ant-col-5"
             >
               <div
                 class="ant-statistic"
