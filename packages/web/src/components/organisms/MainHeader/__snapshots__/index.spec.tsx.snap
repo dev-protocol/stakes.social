@@ -9,7 +9,6 @@ exports[`MainHeader Snapshot 1`] = `
       <div>
         <svg
           fill="none"
-          themeColor="#000"
           viewBox="0 0 223 35"
           width="14em"
         >
