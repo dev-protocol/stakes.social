@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react'
 import Link from 'next/link'
-import { Card, Row, Col, Statistic } from 'antd'
+import { Row, Col, Statistic } from 'antd'
 import { useGetTotalRewardsAmount, useAssetStrength } from 'src/fixtures/dev-kit/hooks'
 import { truncate } from 'src/fixtures/utility/string'
 import { useGetPropertyAuthenticationQuery } from '@dev/graphql'
@@ -43,7 +43,7 @@ export const PropertyCard = ({ propertyAddress }: Props) => {
 
   return (
     <Link href={'/[propertyAddress]'} as={`/${propertyAddress}`}>
-      <Card style={{ margin: '0 0 54px 0', maxWidth: '1048px', maxHeight: '174px' }}>
+      <div style={{ maxHeight: '174px', border: 'solid 1px #f0f0f0', padding: '24px' }}>
         <Row>
           <Col span={12}>
             <div>{propertyAddress}</div>
@@ -69,7 +69,7 @@ export const PropertyCard = ({ propertyAddress }: Props) => {
             {metrics && market ? <AssetStrength metrics={metrics} market={market} /> : <AssetStrengthWithoutData />}
           </Col>
         </Row>
-      </Card>
+      </div>
     </Link>
   )
 }
