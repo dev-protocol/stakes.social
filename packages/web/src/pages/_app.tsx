@@ -13,6 +13,7 @@ class NextApp extends App<AppInitialProps & WithApolloProps<{}>> {
   componentDidMount = () => {
     const { ethereum } = window
     if (!ethereum) {
+      // TODO: fix design and messages.
       Modal.error({
         title: 'This is an error message',
         content: 'some messages...some messages...'
