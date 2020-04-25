@@ -34,11 +34,11 @@ exports[`PropertyHeader Snapshot 1`] = `
       <div
         style="position: absolute; bottom: 0px; padding: 0px 0px 122px 333px; display: block;"
       >
-        <div
-          style="background: white;"
+        <span
+          style="background: white; padding: 0.5em;"
         >
           Property Address
-        </div>
+        </span>
         <div
           style="background: white;"
         >
