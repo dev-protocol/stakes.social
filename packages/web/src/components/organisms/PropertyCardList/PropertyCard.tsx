@@ -45,11 +45,11 @@ export const PropertyCard = ({ propertyAddress }: Props) => {
     <Link href={'/[propertyAddress]'} as={`/${propertyAddress}`}>
       <div style={{ maxHeight: '174px', border: 'solid 1px #f0f0f0', padding: '24px' }}>
         <Row>
-          <Col span={12}>
+          <Col span={10}>
             <div>{propertyAddress}</div>
             <div style={{ fontSize: '36px', lineHeight: '48px', margin: '36px 0 48px 0' }}>{includeAssets}</div>
           </Col>
-          <Col span={4}>
+          <Col span={5}>
             <Statistic
               title="Total Rewards"
               value={totalRewardsAmount && totalRewardsAmount.dp(1).toNumber()}
@@ -57,10 +57,10 @@ export const PropertyCard = ({ propertyAddress }: Props) => {
               suffix="DEV"
             />
           </Col>
-          <Col span={4}>
+          <Col span={5}>
             <Statistic
               title="Ararage Interest Rate"
-              value={averageInterestRate * 100}
+              value={averageInterestRate}
               valueStyle={{ fontSize: '36px', lineHeight: '48px', margin: '36px 0 48px 0' }}
               suffix="%"
             />
