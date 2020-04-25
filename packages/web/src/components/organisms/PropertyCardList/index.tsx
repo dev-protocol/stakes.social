@@ -8,13 +8,12 @@ export const PropertyCardList = () => {
   return (
     <div>
       {loading && <div>loading.......</div>}
-      {data && (
-        <div>
-          {data.property_factory_create.map(d => (
-            <PropertyCard key={d.event_id} propertyAddress={d.property} />
-          ))}
-        </div>
-      )}
+      {data &&
+        data.property_factory_create.map(d => (
+          <div key={d.event_id} style={{ margin: '54px 0' }}>
+            <PropertyCard propertyAddress={d.property} />
+          </div>
+        ))}
     </div>
   )
 }
