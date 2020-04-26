@@ -1,7 +1,7 @@
 import React from 'react'
 import { Button } from 'antd'
 import { useConnectWallet } from 'src/fixtures/wallet/hooks'
-import { StakesSocialWhite } from 'src/components/atoms/Svgs/tsx'
+import { BrandLogo } from 'src/components/atoms/BrandLogo'
 
 interface Props {
   propertyAddress: string
@@ -26,7 +26,7 @@ export const PropertyHeader = ({ propertyAddress }: Props) => {
         backgroundSize: 'cover'
       }}
     >
-      <StakesSocialWhite width={'14em'} height={undefined}></StakesSocialWhite>
+      <BrandLogo colorSchema={'white'} props={{ width: '14em', height: undefined }}></BrandLogo>
       <Button size="large" style={{ float: 'right' }} disabled={isConnected} onClick={handleClick}>
         {isConnected && 'Wallet connected'}
         {!isConnected && 'Connect to a wallet'}

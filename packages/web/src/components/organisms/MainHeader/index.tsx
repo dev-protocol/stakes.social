@@ -1,7 +1,7 @@
 import React from 'react'
 import { Button } from 'antd'
 import { useConnectWallet } from 'src/fixtures/wallet/hooks'
-import { StakesSocialBlack } from 'src/components/atoms/Svgs/tsx'
+import { BrandLogo } from 'src/components/atoms/BrandLogo'
 
 export const MainHeader = () => {
   const { isConnected, connect } = useConnectWallet()
@@ -12,7 +12,7 @@ export const MainHeader = () => {
   return (
     <div style={{ padding: '50px' }}>
       <div>
-        <StakesSocialBlack width={'14em'} height={undefined}></StakesSocialBlack>
+        <BrandLogo colorSchema={'black'} props={{ width: '14em', height: undefined }}></BrandLogo>
         <Button size="large" style={{ float: 'right' }} disabled={isConnected} onClick={handleClick}>
           {isConnected && 'Wallet connected'}
           {!isConnected && 'Connect to a wallet'}
