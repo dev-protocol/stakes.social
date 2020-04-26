@@ -60,7 +60,7 @@ export const PropertyCard = ({ propertyAddress }: Props) => {
           <Col span={5}>
             <Statistic
               title="Ararage Interest Rate"
-              value={(averageInterestRate * 100).toLocaleString()}
+              value={averageInterestRate.dp(1).toNumber()}
               valueStyle={{ fontSize: '36px', lineHeight: '48px', margin: '36px 0 48px 0' }}
               suffix="%"
             />

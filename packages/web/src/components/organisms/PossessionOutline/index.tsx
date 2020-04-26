@@ -33,7 +33,7 @@ export const PossessionOutline = ({ propertyAddress }: Props) => {
           />
         </Col>
         <Col span={6}>
-          <Statistic title="Average Interest Rate" value={averageInterestRate} suffix="%" />
+          <Statistic title="Average Interest Rate" value={averageInterestRate.dp(1).toNumber()} suffix="%" />
         </Col>
         <Col span={6}>
           <Statistic title="Total Rewards" value={myStakingAmount && myStakingAmount.dp(1).toNumber()} suffix="DEV" />
