@@ -12,5 +12,5 @@ export const useAverageInterestRate = (metrics: string) => {
     ? new BigNumber(rewardCalculationResultData?.reward_calculation_result_aggregate.aggregate?.sum?.lockup)
     : undefined
 
-  return stakingReward && lockup ? lockup.div(stakingReward) : new BigNumber(0)
+  return stakingReward && lockup ? lockup.div(stakingReward).times(100) : new BigNumber(0)
 }
