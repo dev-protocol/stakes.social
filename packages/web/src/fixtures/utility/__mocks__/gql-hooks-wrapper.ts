@@ -1,1 +1,3 @@
-export const useAverageInterestRate = (): number => 0.5
+import BigNumber from 'bignumber.js'
+
+export const useAverageInterestRate = (): BigNumber => new BigNumber(50)
