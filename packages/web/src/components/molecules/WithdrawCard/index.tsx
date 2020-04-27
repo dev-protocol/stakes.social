@@ -7,9 +7,10 @@ interface Props {
   amount?: BigNumber
   lastUpdate?: number
   onSubmitWithdraw: () => void
+  onClickMining: (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => void
 }
 
-export const WithdrawCard = ({ amount, label, onSubmitWithdraw, lastUpdate }: Props) => {
+export const WithdrawCard = ({ amount, label, onSubmitWithdraw, lastUpdate, onClickMining }: Props) => {
   return (
     <Card>
       <Row>
@@ -26,7 +27,7 @@ export const WithdrawCard = ({ amount, label, onSubmitWithdraw, lastUpdate }: Pr
               style={{ verticalAlign: 'middle', fontSize: '18px', lineHeight: '24px', padding: '0 0 32px 0' }}
             >
               <div style={{ color: '#000' }}>Last Update: {lastUpdate}</div>
-              <a href="#" target="_blank" rel="noreferrer noopener" style={{ textDecoration: 'underline' }}>
+              <a href="#" target="_blank" style={{ textDecoration: 'underline' }} onClick={onClickMining}>
                 Mining now
               </a>
             </Space>
