@@ -1,4 +1,5 @@
 import * as React from 'react'
+import { Logo } from 'src/components/atoms/Svgs/tsx'
 
 export const Footer = () => {
   return (
@@ -49,7 +50,7 @@ export const Footer = () => {
         !
       </div>
       <div style={{ margin: '66px 0' }}>
-        <img src="/dev-logo.png" alt="logo image" />
+        <Logo width={120} height={undefined}></Logo>
       </div>
     </div>
   )
