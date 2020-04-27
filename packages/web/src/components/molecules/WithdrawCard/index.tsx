@@ -20,18 +20,16 @@ export const WithdrawCard = ({ amount, label, onSubmitWithdraw, lastUpdate, onCl
           </div>
         </Col>
         <Col span={12}>
-          {lastUpdate && (
-            <Space
-              direction="horizontal"
-              size={31}
-              style={{ verticalAlign: 'middle', fontSize: '18px', lineHeight: '24px', padding: '0 0 32px 0' }}
-            >
-              <div style={{ color: '#000' }}>Last Update: {lastUpdate}</div>
-              <a href="#" target="_blank" style={{ textDecoration: 'underline' }} onClick={onClickMining}>
-                Mining now
-              </a>
-            </Space>
-          )}
+          <Space
+            direction="horizontal"
+            size={31}
+            style={{ verticalAlign: 'middle', fontSize: '18px', lineHeight: '24px', padding: '0 0 32px 0' }}
+          >
+            <div style={{ color: '#000' }}>Last Update: {lastUpdate || ''}</div>
+            <a href="#" target="_blank" style={{ textDecoration: 'underline' }} onClick={onClickMining}>
+              Mining now
+            </a>
+          </Space>
         </Col>
       </Row>
       <Row>
