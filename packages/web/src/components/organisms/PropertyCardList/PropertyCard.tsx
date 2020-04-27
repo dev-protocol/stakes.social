@@ -6,17 +6,28 @@ import { truncate } from 'src/fixtures/utility/string'
 import { useGetPropertyAuthenticationQuery } from '@dev/graphql'
 import { CircleGraph } from 'src/components/atoms/CircleGraph'
 import { useAverageInterestRate } from 'src/fixtures/utility/gql-hooks-wrapper'
+import styled from 'styled-components'
 
 interface Props {
   propertyAddress: string
 }
 
+const ResponsiveRow = styled(Row)`
+  @media (max-width: 768px) {
+    margin-top: 1em;
+  }
+`
+
+const ResponsiveCol = styled(Col)`
+  @media (max-width: 768px) {
+    width: 100%;
+  }
+`
+
 const AssetStrengthBase = ({ assetStrength }: { assetStrength: number }) => (
   <div>
-    <span>{Math.floor(assetStrength * 100)}% of total market</span>
-    <div style={{ padding: '14px 0 14px 32px' }}>
-      <CircleGraph size={81} percentage={assetStrength} />
-    </div>
+    <span style={{ position: 'absolute' }}>{Math.floor(assetStrength * 100)}% of markets</span>
+    <CircleGraph size={81} percentage={assetStrength} />
   </div>
 )
 
@@ -34,7 +45,7 @@ export const PropertyCard = ({ propertyAddress }: Props) => {
   const { totalRewardsAmount } = useGetTotalRewardsAmount(propertyAddress)
   const { data } = useGetPropertyAuthenticationQuery({ variables: { propertyAddress } })
   const includeAssets = useMemo(
-    () => data && truncate(data.property_authentication.map(e => e.authentication_id).join(', '), 17),
+    () => data && truncate(data.property_authentication.map(e => e.authentication_id).join(', '), 24),
     [data]
   )
   const metrics = useMemo(() => data?.property_authentication[0]?.metrics, [data])
@@ -42,34 +53,31 @@ export const PropertyCard = ({ propertyAddress }: Props) => {
   const averageInterestRate = useAverageInterestRate(metrics ? metrics : '')
 
   return (
-    <Link href={'/[propertyAddress]'} as={`/${propertyAddress}`}>
-      <div style={{ maxHeight: '174px', border: 'solid 1px #f0f0f0', padding: '24px' }}>
-        <Row>
-          <Col span={10}>
-            <div>{propertyAddress}</div>
-            <div style={{ fontSize: '36px', lineHeight: '48px', margin: '36px 0 48px 0' }}>{includeAssets}</div>
+    <div style={{ border: 'solid 1px #f0f0f0', padding: '1.2em' }}>
+      <Row>
+        <Link href={'/[propertyAddress]'} as={`/${propertyAddress}`}>
+          <Col sm={24} md={10}>
+            <Statistic title={propertyAddress} value={includeAssets} />
           </Col>
-          <Col span={5}>
-            <Statistic
-              title="Total Rewards"
-              value={totalRewardsAmount && totalRewardsAmount.dp(1).toNumber()}
-              valueStyle={{ fontSize: '36px', lineHeight: '48px', margin: '36px 0 0 0' }}
-              suffix="DEV"
-            />
-          </Col>
-          <Col span={5}>
-            <Statistic
-              title="Ararage Interest Rate"
-              value={averageInterestRate.dp(1).toNumber()}
-              valueStyle={{ fontSize: '36px', lineHeight: '48px', margin: '36px 0 48px 0' }}
-              suffix="%"
-            />
-          </Col>
-          <Col span={4}>
-            {metrics && market ? <AssetStrength metrics={metrics} market={market} /> : <AssetStrengthWithoutData />}
-          </Col>
-        </Row>
-      </div>
-    </Link>
+        </Link>
+        <ResponsiveCol sm={24} md={14}>
+          <ResponsiveRow>
+            <Col span={10}>
+              <Statistic
+                title="Total Rewards"
+                value={totalRewardsAmount && totalRewardsAmount.dp(1).toNumber()}
+                suffix="DEV"
+              />
+            </Col>
+            <Col span={8}>
+              <Statistic title="Avg. Interest" value={averageInterestRate.dp(1).toNumber()} suffix="%" />
+            </Col>
+            <Col span={6}>
+              {metrics && market ? <AssetStrength metrics={metrics} market={market} /> : <AssetStrengthWithoutData />}
+            </Col>
+          </ResponsiveRow>
+        </ResponsiveCol>
+      </Row>
+    </div>
   )
 }
