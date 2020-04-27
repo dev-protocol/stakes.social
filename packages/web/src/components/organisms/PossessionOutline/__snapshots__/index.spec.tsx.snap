@@ -99,13 +99,9 @@ exports[`PossessionOutline Snapshot 1`] = `
                     class="ant-statistic-content-value-int"
                   >
                     
-                    0
+                    50
                   </span>
-                  <span
-                    class="ant-statistic-content-value-decimal"
-                  >
-                    .5
-                  </span>
+                  
                 </span>
                 <span
                   class="ant-statistic-content-suffix"
