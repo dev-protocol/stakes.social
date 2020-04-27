@@ -39,7 +39,7 @@ export const TransactionForm = ({ propertyAddress }: Props) => {
           label="Staking"
           onSubmitWithdraw={handleWithdrawStaking}
           amount={myStakingAmount}
-          lastUpdate={data?.allocator_allocation_result[0].block_number}
+          lastUpdate={data?.allocator_allocation_result[0]?.block_number}
         />
       </div>
       <div style={{ margin: '0 0 46px 0' }}>
@@ -47,7 +47,7 @@ export const TransactionForm = ({ propertyAddress }: Props) => {
           label="Holder"
           onSubmitWithdraw={handleWithdrawHolder}
           amount={myHolderAmount}
-          lastUpdate={data?.allocator_allocation_result[0].block_number}
+          lastUpdate={data?.allocator_allocation_result[0]?.block_number}
         />
       </div>
       <div style={{ margin: '0 0 46px 0' }}>
