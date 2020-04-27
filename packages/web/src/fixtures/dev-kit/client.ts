@@ -93,3 +93,11 @@ export const getLastAssetValueEachMarketPerBlock = async (marketAddress: string)
   }
   return undefined
 }
+
+export const allocate = async (metricsAddress: string) => {
+  const client = newClient()
+  if (client) {
+    return client.allocator(await client.registry(addresses.eth.main.registry).allocator()).allocate(metricsAddress)
+  }
+  return undefined
+}

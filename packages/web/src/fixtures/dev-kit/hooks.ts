@@ -8,7 +8,8 @@ import {
   stakeDev,
   cancelStaking,
   getLastAssetValueEachMetrics,
-  getLastAssetValueEachMarketPerBlock
+  getLastAssetValueEachMarketPerBlock,
+  allocate
 } from './client'
 import { SWRCachePath } from './cache-path'
 import { UnwrapFunc, toNaturalNumber, toAmountNumber } from 'src/fixtures/utility'
@@ -152,4 +153,24 @@ export const useAssetStrength = (metricsAddress: string, marketAddress: string) 
     assetStrength: metrics && market ? Number(metrics) / Number(market) : undefined,
     error: metricsError || marketError
   }
+}
+
+export const useAllocate = () => {
+  const [isLoading, setIsLoading] = useState<boolean>(false)
+  const [error, setError] = useState<Error>()
+  const allocateDev = useCallback(async (metricsAddress: string) => {
+    setIsLoading(true)
+    setError(undefined)
+    return allocate(metricsAddress)
+      .then(() => {
+        setIsLoading(false)
+      })
+      .catch(err => {
+        setError(err)
+        message.error(err.message)
+        setIsLoading(false)
+      })
+  }, [])
+
+  return { allocate: allocateDev, isLoading, error }
 }
