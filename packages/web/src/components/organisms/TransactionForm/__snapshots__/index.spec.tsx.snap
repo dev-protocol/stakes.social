@@ -110,7 +110,6 @@ exports[`TransactionForm Snapshot 1`] = `
                   >
                     <a
                       href="#"
-                      rel="noreferrer noopener"
                       style="text-decoration: underline;"
                       target="_blank"
                     >
@@ -195,7 +194,6 @@ exports[`TransactionForm Snapshot 1`] = `
                   >
                     <a
                       href="#"
-                      rel="noreferrer noopener"
                       style="text-decoration: underline;"
                       target="_blank"
                     >

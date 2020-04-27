@@ -8,25 +8,13 @@ exports[`PropertyCardList Snapshot 1`] = `
         style="margin: 54px 0px;"
       >
         <div
-          style="max-height: 174px; border: 1px solid #f0f0f0; padding: 24px;"
+          style="border: 1px solid #f0f0f0; padding: 1.2em;"
         >
           <div
             class="ant-row"
           >
             <div
-              class="ant-col ant-col-10"
-            >
-              <div>
-                123
-              </div>
-              <div
-                style="font-size: 36px; line-height: 48px; margin: 36px 0px 48px 0px;"
-              >
-                authentication-id
-              </div>
-            </div>
-            <div
-              class="ant-col ant-col-5"
+              class="ant-col ant-col-sm-24 ant-col-md-10"
             >
               <div
                 class="ant-statistic"
@@ -34,79 +22,105 @@ exports[`PropertyCardList Snapshot 1`] = `
                 <div
                   class="ant-statistic-title"
                 >
-                  Total Rewards
+                  123
                 </div>
                 <div
                   class="ant-statistic-content"
-                  style="font-size: 36px; line-height: 48px; margin: 36px 0px 0px 0px;"
                 >
                   <span
                     class="ant-statistic-content-value"
                   >
-                    <span
-                      class="ant-statistic-content-value-int"
-                    >
-                      
-                      10,000
-                    </span>
-                    
-                  </span>
-                  <span
-                    class="ant-statistic-content-suffix"
-                  >
-                    DEV
+                    authentication-id
                   </span>
                 </div>
               </div>
             </div>
             <div
-              class="ant-col ant-col-5"
+              class="ant-col sc-AxirZ hKEMnW ant-col-sm-24 ant-col-md-14"
             >
               <div
-                class="ant-statistic"
+                class="ant-row sc-AxjAm iqrQmW"
               >
                 <div
-                  class="ant-statistic-title"
-                >
-                  Ararage Interest Rate
-                </div>
-                <div
-                  class="ant-statistic-content"
-                  style="font-size: 36px; line-height: 48px; margin: 36px 0px 48px 0px;"
-                >
-                  <span
-                    class="ant-statistic-content-value"
-                  >
-                    <span
-                      class="ant-statistic-content-value-int"
-                    >
-                      
-                      50
-                    </span>
-                    
-                  </span>
-                  <span
-                    class="ant-statistic-content-suffix"
-                  >
-                    %
-                  </span>
-                </div>
-              </div>
-            </div>
-            <div
-              class="ant-col ant-col-4"
-            >
-              <div>
-                <span>
-                  25
-                  % of total market
-                </span>
-                <div
-                  style="padding: 14px 0px 14px 32px;"
+                  class="ant-col ant-col-10"
                 >
                   <div
-                    style="width: 81px; height: 81px; border-radius: 50%; background-color: rgb(47, 128, 237); background-clip: padding-box; border: 30.158401950000002px solid rgba(47, 128, 237, 0.2);"
-                  />
+                    class="ant-statistic"
+                  >
+                    <div
+                      class="ant-statistic-title"
+                    >
+                      Total Rewards
+                    </div>
+                    <div
+                      class="ant-statistic-content"
+                    >
+                      <span
+                        class="ant-statistic-content-value"
+                      >
+                        <span
+                          class="ant-statistic-content-value-int"
+                        >
+                          
+                          10,000
+                        </span>
+                        
+                      </span>
+                      <span
+                        class="ant-statistic-content-suffix"
+                      >
+                        DEV
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  class="ant-col ant-col-8"
+                >
+                  <div
+                    class="ant-statistic"
+                  >
+                    <div
+                      class="ant-statistic-title"
+                    >
+                      Avg. Interest
+                    </div>
+                    <div
+                      class="ant-statistic-content"
+                    >
+                      <span
+                        class="ant-statistic-content-value"
+                      >
+                        <span
+                          class="ant-statistic-content-value-int"
+                        >
+                          
+                          50
+                        </span>
+                        
+                      </span>
+                      <span
+                        class="ant-statistic-content-suffix"
+                      >
+                        %
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  class="ant-col ant-col-6"
+                >
+                  <div>
+                    <span
+                      style="position: absolute;"
+                    >
+                      25
+                      % of markets
+                    </span>
+                    <div
+                      style="width: 81px; height: 81px; border-radius: 50%; background-color: rgb(47, 128, 237); background-clip: padding-box; border: 30.158401950000002px solid rgba(47, 128, 237, 0.2);"
+                    />
+                  </div>
                 </div>
               </div>
             </div>
