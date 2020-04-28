@@ -53,7 +53,7 @@ export const PropertyCard = ({ propertyAddress }: Props) => {
   const averageInterestRate = useAverageInterestRate(metrics ? metrics : '')
 
   return (
-    <div style={{ border: 'solid 1px #f0f0f0', padding: '1.2em' }}>
+    <div style={{ border: 'solid 1px #f0f0f0', padding: '1.2em', cursor: 'pointer' }}>
       <Row>
         <Link href={'/[propertyAddress]'} as={`/${propertyAddress}`}>
           <Col sm={24} md={10}>
