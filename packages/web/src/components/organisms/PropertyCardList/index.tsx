@@ -31,7 +31,7 @@ export const PropertyCardList = ({ currentPage }: Props) => {
             pageSize={perPage}
             onChange={handlePagination}
             total={data.property_factory_create_aggregate.aggregate?.count}
-            style={{ marginLeft: '50%' }}
+            style={{ margin: '0 0 20px 50%' }}
           />
         </>
       )}
