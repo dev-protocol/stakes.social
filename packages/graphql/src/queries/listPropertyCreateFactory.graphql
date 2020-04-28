@@ -1,5 +1,10 @@
-query ListProperty {
-  property_factory_create {
+query ListProperty($limit: Int, $offset: Int) {
+  property_factory_create(limit: $limit, offset: $offset) {
     ...propertyFactoryCreate
+  }
+  property_factory_create_aggregate {
+    aggregate {
+      count
+    }
   }
 }

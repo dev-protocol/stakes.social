@@ -5303,10 +5303,21 @@ export type ListAllocatorAllocationResultsQuery = { __typename?: 'query_root' } 
   >
 }
 
-export type ListPropertyQueryVariables = {}
+export type ListPropertyQueryVariables = {
+  limit?: Maybe<Scalars['Int']>
+  offset?: Maybe<Scalars['Int']>
+}
 
 export type ListPropertyQuery = { __typename?: 'query_root' } & {
   property_factory_create: Array<{ __typename?: 'property_factory_create' } & PropertyFactoryCreateFragment>
+  property_factory_create_aggregate: { __typename?: 'property_factory_create_aggregate' } & {
+    aggregate?: Maybe<
+      { __typename?: 'property_factory_create_aggregate_fields' } & Pick<
+        Property_Factory_Create_Aggregate_Fields,
+        'count'
+      >
+    >
+  }
 }
 
 export const AllocatorAllocationResultFragmentDoc = gql`
@@ -5585,9 +5596,14 @@ export type ListAllocatorAllocationResultsQueryResult = ApolloReactCommon.QueryR
   ListAllocatorAllocationResultsQueryVariables
 >
 export const ListPropertyDocument = gql`
-  query ListProperty {
-    property_factory_create {
+  query ListProperty($limit: Int, $offset: Int) {
+    property_factory_create(limit: $limit, offset: $offset) {
       ...propertyFactoryCreate
+    }
+    property_factory_create_aggregate {
+      aggregate {
+        count
+      }
     }
   }
   ${PropertyFactoryCreateFragmentDoc}
@@ -5605,6 +5621,8 @@ export const ListPropertyDocument = gql`
  * @example
  * const { data, loading, error } = useListPropertyQuery({
  *   variables: {
+ *      limit: // value for 'limit'
+ *      offset: // value for 'offset'
  *   },
  * });
  */
