@@ -70,7 +70,7 @@ export const PropertyCard = ({ propertyAddress }: Props) => {
               />
             </Col>
             <Col span={8}>
-              <Statistic title="Avg. Interest" value={averageInterestRate.dp(1).toNumber()} suffix="%" />
+              <Statistic title="Avg. Interest" value={averageInterestRate.dp(2).toNumber()} suffix="%" />
             </Col>
             <Col span={6}>
               {metrics && market ? <AssetStrength metrics={metrics} market={market} /> : <AssetStrengthWithoutData />}
