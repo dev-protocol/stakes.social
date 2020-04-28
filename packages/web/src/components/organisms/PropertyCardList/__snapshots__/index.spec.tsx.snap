@@ -129,7 +129,7 @@ exports[`PropertyCardList Snapshot 1`] = `
       </div>
       <ul
         class="ant-pagination"
-        style="margin-left: 50%;"
+        style="margin: 0px 0px 20px 50%;"
         unselectable="unselectable"
       >
         <li
