@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react'
 import { Card, Statistic, Row, Col } from 'antd'
-import { useGetTotalStakingAmount, useGetMyStakingAmount } from 'src/fixtures/dev-kit/hooks'
+import { useGetTotalStakingAmount, useGetMyStakingAmount, useGetTotalRewardsAmount } from 'src/fixtures/dev-kit/hooks'
 import { useAverageInterestRate } from 'src/fixtures/utility/gql-hooks-wrapper'
 import { useGetPropertyAuthenticationQuery } from '@dev/graphql'
 
@@ -10,6 +10,7 @@ interface Props {
 
 export const PossessionOutline = ({ propertyAddress }: Props) => {
   const { totalStakingAmount } = useGetTotalStakingAmount(propertyAddress)
+  const { totalRewardsAmount } = useGetTotalRewardsAmount(propertyAddress)
   const { myStakingAmount } = useGetMyStakingAmount(propertyAddress)
   const { data } = useGetPropertyAuthenticationQuery({ variables: { propertyAddress } })
   const metrics = useMemo(() => data?.property_authentication[0]?.metrics, [data])
@@ -36,7 +37,11 @@ export const PossessionOutline = ({ propertyAddress }: Props) => {
           <Statistic title="Average Interest Rate" value={averageInterestRate.dp(2).toNumber()} suffix="%" />
         </Col>
         <Col span={6}>
-          <Statistic title="Total Rewards" value={myStakingAmount && myStakingAmount.dp(1).toNumber()} suffix="DEV" />
+          <Statistic
+            title="Total Rewards"
+            value={totalRewardsAmount && totalRewardsAmount.dp(1).toNumber()}
+            suffix="DEV"
+          />
         </Col>
       </Row>
     </Card>
