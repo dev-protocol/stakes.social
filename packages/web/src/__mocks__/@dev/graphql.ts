@@ -24,7 +24,12 @@ export const useListPropertyQuery = (): Partial<ReturnType<typeof IUseListProper
         transaction_index: 1,
         from_address: 'from-address'
       }
-    ]
+    ],
+    property_factory_create_aggregate: {
+      aggregate: {
+        count: 50
+      }
+    }
   }
 })
 
