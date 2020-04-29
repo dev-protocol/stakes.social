@@ -9600,11 +9600,6 @@ jsesc@~0.5.0:
   resolved "https://registry.yarnpkg.com/jsesc/-/jsesc-0.5.0.tgz#e7dee66e35d6fc16f710fe91d5cf69f70f08911d"
   integrity sha1-597mbjXW/Bb3EP6R1c9p9w8IkR0=
 
-jsmin@^1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/jsmin/-/jsmin-1.0.1.tgz#e7bd0dcd6496c3bf4863235bf461a3d98aa3b98c"
-  integrity sha1-570NzWSWw79IYyNb9GGj2YqjuYw=
-
 json-buffer@3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/json-buffer/-/json-buffer-3.0.0.tgz#5b1f397afc75d677bde8bcfc0e47e1f9a3d9a898"
@@ -11018,13 +11013,12 @@ nodemon@2.0.3:
     undefsafe "^2.0.2"
     update-notifier "^4.0.0"
 
-nookies@2.2.3:
-  version "2.2.3"
-  resolved "https://registry.yarnpkg.com/nookies/-/nookies-2.2.3.tgz#72b125fb7c5c7496e047a61d23b720bc4f06ceca"
-  integrity sha512-RreLycbVlkI2pkJ4Ntq2gKM10xKhDL0ukofXIiUvWyS8kQ1c2+fYC20J3bu94VUFfJbsS5gDlJw57Buh79+idg==
+nookies@2.2.4:
+  version "2.2.4"
+  resolved "https://registry.yarnpkg.com/nookies/-/nookies-2.2.4.tgz#e77f731cbe33c839e70744cba7605a5784da5783"
+  integrity sha512-2AzKgbirUaky+b9nCFbTB/EMfKWAzftLpnVOyLxN3n5UabbWKHE/zLZz6zQwPgckgZhKl9yM4eBZ+KJNSi3J8w==
   dependencies:
     cookie "^0.4.0"
-    jsmin "^1.0.1"
     set-cookie-parser "^2.4.3"
 
 nopt@^4.0.1:
