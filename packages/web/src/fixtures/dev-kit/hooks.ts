@@ -4,12 +4,14 @@ import {
   getTotalStakingAmount,
   withdrawHolderAmount,
   getMyHolderAmount,
-  withdrawStakingAmount,
   stakeDev,
   cancelStaking,
   getLastAssetValueEachMetrics,
   getLastAssetValueEachMarketPerBlock,
-  allocate
+  allocate,
+  withdrawStakingRewardAmount,
+  withdrawStakingAmount,
+  getMyStakingRewardAmount
 } from './client'
 import { SWRCachePath } from './cache-path'
 import { UnwrapFunc, toNaturalNumber, toAmountNumber } from 'src/fixtures/utility'
@@ -64,6 +66,18 @@ export const useGetTotalStakingAmount = (propertyAddress: string) => {
   return { totalStakingAmount: data ? toNaturalNumber(data) : undefined, error }
 }
 
+export const useGetMyStakingRewardAmount = (propertyAddress: string) => {
+  const { data, error } = useSWR<UnwrapFunc<typeof getMyStakingRewardAmount>, Error>(
+    SWRCachePath.getMyStakingRewardAmount(propertyAddress),
+    () => getMyStakingRewardAmount(propertyAddress),
+    {
+      onError: err => message.error(err.message)
+    }
+  )
+
+  return { myStakingRewardAmount: data ? toNaturalNumber(data) : undefined, error }
+}
+
 export const useGetMyStakingAmount = (propertyAddress: string) => {
   const { data, error } = useSWR<UnwrapFunc<typeof getMyStakingAmount>, Error>(
     SWRCachePath.getMyStakingAmount(propertyAddress),
@@ -77,6 +91,26 @@ export const useGetMyStakingAmount = (propertyAddress: string) => {
 }
 
 export const useWithdrawStakingReward = () => {
+  const [isLoading, setIsLoading] = useState<boolean>(false)
+  const [error, setError] = useState<Error>()
+  const withdrawStakingReward = useCallback(async (propertyAddress: string) => {
+    setIsLoading(true)
+    setError(undefined)
+    return withdrawStakingRewardAmount(propertyAddress)
+      .then(() => {
+        setIsLoading(false)
+      })
+      .catch(err => {
+        setError(err)
+        message.error(err.message)
+        setIsLoading(false)
+      })
+  }, [])
+
+  return { withdrawStakingReward, isLoading, error }
+}
+
+export const useWithdrawStaking = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [error, setError] = useState<Error>()
   const withdrawStaking = useCallback(async (propertyAddress: string) => {

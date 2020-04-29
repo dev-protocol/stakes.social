@@ -39,6 +39,17 @@ export const getMyHolderAmount = async (propertyAddress: string) => {
   return undefined
 }
 
+export const getMyStakingRewardAmount = async (propertyAddress: string) => {
+  const client = newClient()
+  const accountAddress = getAccountAddress()
+  if (client && accountAddress) {
+    return client
+      .lockup(await client.registry(addresses.eth.main.registry).lockup())
+      .calculateWithdrawableInterestAmount(propertyAddress, accountAddress)
+  }
+  return undefined
+}
+
 export const getMyStakingAmount = async (propertyAddress: string) => {
   const client = newClient()
   const accountAddress = getAccountAddress()
@@ -60,6 +71,12 @@ export const withdrawStakingAmount = async (propertyAddress: string) => {
   const client = newClient()
   if (!client) throw new Error(`No wallet`)
   return client.lockup(await client.registry(addresses.eth.main.registry).lockup()).withdraw(propertyAddress)
+}
+
+export const withdrawStakingRewardAmount = async (propertyAddress: string) => {
+  const client = newClient()
+  if (!client) throw new Error(`No wallet`)
+  return client.lockup(await client.registry(addresses.eth.main.registry).lockup()).withdrawInterest(propertyAddress)
 }
 
 export const stakeDev = async (propertyAddress: string, amount: string) => {
