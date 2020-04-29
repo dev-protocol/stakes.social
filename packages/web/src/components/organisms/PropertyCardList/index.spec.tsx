@@ -9,7 +9,7 @@ jest.mock('@dev/graphql')
 
 describe(`${PropertyCardList.name}`, () => {
   test('Snapshot', () => {
-    const component = render(<PropertyCardList />)
+    const component = render(<PropertyCardList currentPage={1} />)
     const tree = component.baseElement
     expect(tree).toMatchSnapshot()
   })
