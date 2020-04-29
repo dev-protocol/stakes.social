@@ -9,11 +9,19 @@ import {
   useStake,
   useCancelStaking,
   useAssetStrength,
-  useAllocate
+  useAllocate,
+  useWithdrawStaking
 } from './hooks'
 import useSWR from 'swr'
 import { toNaturalNumber, toAmountNumber } from 'src/fixtures/utility'
-import { withdrawHolderAmount, withdrawStakingAmount, stakeDev, cancelStaking, allocate } from './client'
+import {
+  withdrawHolderAmount,
+  withdrawStakingAmount,
+  stakeDev,
+  cancelStaking,
+  allocate,
+  withdrawStakingRewardAmount
+} from './client'
 import { message } from 'antd'
 
 jest.mock('swr')
@@ -170,6 +178,32 @@ describe('dev-kit hooks', () => {
   describe('useWithdrawStakingReward', () => {
     test('success withdraw', async () => {
       const { result, waitForNextUpdate } = renderHook(() => useWithdrawStakingReward())
+      ;(withdrawStakingRewardAmount as jest.Mock).mockResolvedValue(true)
+      act(() => {
+        result.current.withdrawStakingReward('property-address')
+      })
+      await waitForNextUpdate()
+      expect(result.current.error).toBe(undefined)
+      expect(result.current.isLoading).toBe(false)
+    })
+
+    test('failure withdraw', async () => {
+      const error = new Error('error')
+      const { result, waitForNextUpdate } = renderHook(() => useWithdrawStakingReward())
+      ;(withdrawStakingRewardAmount as jest.Mock).mockRejectedValue(error)
+      message.error = jest.fn(() => {}) as any
+      act(() => {
+        result.current.withdrawStakingReward('property-address')
+      })
+      await waitForNextUpdate()
+      expect(result.current.error).toBe(error)
+      expect(result.current.isLoading).toBe(false)
+    })
+  })
+
+  describe('useWithdrawStaking', () => {
+    test('success withdraw', async () => {
+      const { result, waitForNextUpdate } = renderHook(() => useWithdrawStaking())
       ;(withdrawStakingAmount as jest.Mock).mockResolvedValue(true)
       act(() => {
         result.current.withdrawStaking('property-address')
@@ -181,7 +215,7 @@ describe('dev-kit hooks', () => {
 
     test('failure withdraw', async () => {
       const error = new Error('error')
-      const { result, waitForNextUpdate } = renderHook(() => useWithdrawStakingReward())
+      const { result, waitForNextUpdate } = renderHook(() => useWithdrawStaking())
       ;(withdrawStakingAmount as jest.Mock).mockRejectedValue(error)
       message.error = jest.fn(() => {}) as any
       act(() => {
