@@ -1,9 +1,9 @@
 import React, { useCallback, useMemo } from 'react'
 import {
-  useGetMyStakingAmount,
   useWithdrawStakingReward,
   useCancelStaking,
-  useAllocate
+  useAllocate,
+  useGetMyStakingRewardAmount
 } from 'src/fixtures/dev-kit/hooks'
 import { useWithdrawHolderReward, useGetMyHolderAmount } from 'src/fixtures/dev-kit/hooks'
 import { useStake } from 'src/fixtures/dev-kit/hooks'
@@ -20,9 +20,9 @@ export const TransactionForm = ({ propertyAddress }: Props) => {
   const { stake } = useStake()
   const { cancel } = useCancelStaking()
   const { allocate } = useAllocate()
-  const { withdrawStaking } = useWithdrawStakingReward()
+  const { withdrawStakingReward } = useWithdrawStakingReward()
   const { withdrawHolder } = useWithdrawHolderReward()
-  const { myStakingAmount } = useGetMyStakingAmount(propertyAddress)
+  const { myStakingRewardAmount } = useGetMyStakingRewardAmount(propertyAddress)
   const { myHolderAmount } = useGetMyHolderAmount(propertyAddress)
   const { data } = useGetLastAllocatorAllocationResultQuery({ variables: { propertyAddress } })
   const { data: propertyAuthData } = useGetPropertyAuthenticationQuery({ variables: { propertyAddress } })
@@ -33,7 +33,10 @@ export const TransactionForm = ({ propertyAddress }: Props) => {
     },
     [stake, propertyAddress]
   )
-  const handleWithdrawStaking = useCallback(() => withdrawStaking(propertyAddress), [propertyAddress, withdrawStaking])
+  const handleWithdrawStakingReward = useCallback(() => withdrawStakingReward(propertyAddress), [
+    propertyAddress,
+    withdrawStakingReward
+  ])
   const handleWithdrawHolder = useCallback(() => withdrawHolder(propertyAddress), [propertyAddress, withdrawHolder])
   const handleCancelStaking = useCallback(() => cancel(propertyAddress), [propertyAddress, cancel])
   const handleMining = useCallback(
@@ -52,8 +55,8 @@ export const TransactionForm = ({ propertyAddress }: Props) => {
       <div style={{ margin: '0 0 46px 0' }}>
         <WithdrawCard
           label="Staking"
-          onSubmitWithdraw={handleWithdrawStaking}
-          amount={myStakingAmount}
+          onSubmitWithdraw={handleWithdrawStakingReward}
+          amount={myStakingRewardAmount}
           lastUpdate={data?.allocator_allocation_result[0]?.block_number}
           onClickMining={handleMining}
         />
