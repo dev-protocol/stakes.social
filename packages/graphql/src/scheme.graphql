@@ -6,15 +6,10 @@ schema {
 
 # columns and relationships of "allocator_allocation_result"
 type allocator_allocation_result {
-  # An object relationship
-  allocation_n_authentication: property_authentication
-
-  # An object relationship
-  allocation_n_property: property_factory_create
-
-  # An object relationship
-  allocation_n_reward: reward_calculation_result
   arg_value: numeric!
+
+  # An object relationship
+  authentication: property_authentication
   block_number: Int!
   event_id: String!
   lockup_value: numeric!
@@ -22,8 +17,14 @@ type allocator_allocation_result {
   market: String!
   metrics: String!
   property: String!
+
+  # An object relationship
+  property_creation: property_factory_create
   raw_data: String!
   result: numeric!
+
+  # An object relationship
+  reward: reward_calculation_result
   transaction_index: Int!
 }
 
@@ -95,10 +96,8 @@ input allocator_allocation_result_bool_exp {
   _and: [allocator_allocation_result_bool_exp]
   _not: allocator_allocation_result_bool_exp
   _or: [allocator_allocation_result_bool_exp]
-  allocation_n_authentication: property_authentication_bool_exp
-  allocation_n_property: property_factory_create_bool_exp
-  allocation_n_reward: reward_calculation_result_bool_exp
   arg_value: numeric_comparison_exp
+  authentication: property_authentication_bool_exp
   block_number: Int_comparison_exp
   event_id: String_comparison_exp
   lockup_value: numeric_comparison_exp
@@ -106,8 +105,10 @@ input allocator_allocation_result_bool_exp {
   market: String_comparison_exp
   metrics: String_comparison_exp
   property: String_comparison_exp
+  property_creation: property_factory_create_bool_exp
   raw_data: String_comparison_exp
   result: numeric_comparison_exp
+  reward: reward_calculation_result_bool_exp
   transaction_index: Int_comparison_exp
 }
 
@@ -129,10 +130,8 @@ input allocator_allocation_result_inc_input {
 
 # input type for inserting data into table "allocator_allocation_result"
 input allocator_allocation_result_insert_input {
-  allocation_n_authentication: property_authentication_obj_rel_insert_input
-  allocation_n_property: property_factory_create_obj_rel_insert_input
-  allocation_n_reward: reward_calculation_result_obj_rel_insert_input
   arg_value: numeric
+  authentication: property_authentication_obj_rel_insert_input
   block_number: Int
   event_id: String
   lockup_value: numeric
@@ -140,8 +139,10 @@ input allocator_allocation_result_insert_input {
   market: String
   metrics: String
   property: String
+  property_creation: property_factory_create_obj_rel_insert_input
   raw_data: String
   result: numeric
+  reward: reward_calculation_result_obj_rel_insert_input
   transaction_index: Int
 }
 
@@ -229,10 +230,8 @@ input allocator_allocation_result_on_conflict {
 
 # ordering options when selecting data from "allocator_allocation_result"
 input allocator_allocation_result_order_by {
-  allocation_n_authentication: property_authentication_order_by
-  allocation_n_property: property_factory_create_order_by
-  allocation_n_reward: reward_calculation_result_order_by
   arg_value: order_by
+  authentication: property_authentication_order_by
   block_number: order_by
   event_id: order_by
   lockup_value: order_by
@@ -240,8 +239,10 @@ input allocator_allocation_result_order_by {
   market: order_by
   metrics: order_by
   property: order_by
+  property_creation: property_factory_create_order_by
   raw_data: order_by
   result: order_by
+  reward: reward_calculation_result_order_by
   transaction_index: order_by
 }
 
@@ -1042,12 +1043,8 @@ input Int_comparison_exp {
 
 # columns and relationships of "lockup_lockedup"
 type lockup_lockedup {
-  block_number: Int!
-  event_id: String!
-  from_address: String!
-
   # An array relationship
-  lockup_n_allocation(
+  allocation(
     # distinct select on columns
     distinct_on: [allocator_allocation_result_select_column!]
 
@@ -1065,7 +1062,7 @@ type lockup_lockedup {
   ): [allocator_allocation_result!]!
 
   # An aggregated array relationship
-  lockup_n_allocation_aggregate(
+  allocation_aggregate(
     # distinct select on columns
     distinct_on: [allocator_allocation_result_select_column!]
 
@@ -1081,11 +1078,14 @@ type lockup_lockedup {
     # filter the rows returned
     where: allocator_allocation_result_bool_exp
   ): allocator_allocation_result_aggregate!
-
-  # An object relationship
-  lockup_n_property: property_factory_create
+  block_number: Int!
+  event_id: String!
+  from_address: String!
   log_index: Int!
   property: String!
+
+  # An object relationship
+  property_creation: property_factory_create
   raw_data: String!
   token_value: numeric!
   transaction_index: Int!
@@ -1154,13 +1154,13 @@ input lockup_lockedup_bool_exp {
   _and: [lockup_lockedup_bool_exp]
   _not: lockup_lockedup_bool_exp
   _or: [lockup_lockedup_bool_exp]
+  allocation: allocator_allocation_result_bool_exp
   block_number: Int_comparison_exp
   event_id: String_comparison_exp
   from_address: String_comparison_exp
-  lockup_n_allocation: allocator_allocation_result_bool_exp
-  lockup_n_property: property_factory_create_bool_exp
   log_index: Int_comparison_exp
   property: String_comparison_exp
+  property_creation: property_factory_create_bool_exp
   raw_data: String_comparison_exp
   token_value: numeric_comparison_exp
   transaction_index: Int_comparison_exp
@@ -1182,13 +1182,13 @@ input lockup_lockedup_inc_input {
 
 # input type for inserting data into table "lockup_lockedup"
 input lockup_lockedup_insert_input {
+  allocation: allocator_allocation_result_arr_rel_insert_input
   block_number: Int
   event_id: String
   from_address: String
-  lockup_n_allocation: allocator_allocation_result_arr_rel_insert_input
-  lockup_n_property: property_factory_create_obj_rel_insert_input
   log_index: Int
   property: String
+  property_creation: property_factory_create_obj_rel_insert_input
   raw_data: String
   token_value: numeric
   transaction_index: Int
@@ -1266,13 +1266,13 @@ input lockup_lockedup_on_conflict {
 
 # ordering options when selecting data from "lockup_lockedup"
 input lockup_lockedup_order_by {
+  allocation_aggregate: allocator_allocation_result_aggregate_order_by
   block_number: order_by
   event_id: order_by
   from_address: order_by
-  lockup_n_allocation_aggregate: allocator_allocation_result_aggregate_order_by
-  lockup_n_property: property_factory_create_order_by
   log_index: order_by
   property: order_by
+  property_creation: property_factory_create_order_by
   raw_data: order_by
   token_value: order_by
   transaction_index: order_by
@@ -1463,14 +1463,8 @@ input lockup_lockedup_variance_order_by {
 
 # columns and relationships of "market_factory_create"
 type market_factory_create {
-  block_number: Int!
-  event_id: String!
-  from_address: String!
-  log_index: Int!
-  market: String!
-
   # An array relationship
-  market_n_allocation(
+  allocation(
     # distinct select on columns
     distinct_on: [allocator_allocation_result_select_column!]
 
@@ -1488,7 +1482,7 @@ type market_factory_create {
   ): [allocator_allocation_result!]!
 
   # An aggregated array relationship
-  market_n_allocation_aggregate(
+  allocation_aggregate(
     # distinct select on columns
     distinct_on: [allocator_allocation_result_select_column!]
 
@@ -1504,45 +1498,10 @@ type market_factory_create {
     # filter the rows returned
     where: allocator_allocation_result_bool_exp
   ): allocator_allocation_result_aggregate!
+  block_number: Int!
 
   # An array relationship
-  market_n_metrics(
-    # distinct select on columns
-    distinct_on: [metrics_factory_create_select_column!]
-
-    # limit the number of rows returned
-    limit: Int
-
-    # skip the first n rows. Use only with order_by
-    offset: Int
-
-    # sort the rows by one or more columns
-    order_by: [metrics_factory_create_order_by!]
-
-    # filter the rows returned
-    where: metrics_factory_create_bool_exp
-  ): [metrics_factory_create!]!
-
-  # An aggregated array relationship
-  market_n_metrics_aggregate(
-    # distinct select on columns
-    distinct_on: [metrics_factory_create_select_column!]
-
-    # limit the number of rows returned
-    limit: Int
-
-    # skip the first n rows. Use only with order_by
-    offset: Int
-
-    # sort the rows by one or more columns
-    order_by: [metrics_factory_create_order_by!]
-
-    # filter the rows returned
-    where: metrics_factory_create_bool_exp
-  ): metrics_factory_create_aggregate!
-
-  # An array relationship
-  market_n_metrics_destroy(
+  destroyed_metrics(
     # distinct select on columns
     distinct_on: [metrics_factory_destroy_select_column!]
 
@@ -1560,7 +1519,7 @@ type market_factory_create {
   ): [metrics_factory_destroy!]!
 
   # An aggregated array relationship
-  market_n_metrics_destroy_aggregate(
+  destroyed_metrics_aggregate(
     # distinct select on columns
     distinct_on: [metrics_factory_destroy_select_column!]
 
@@ -1576,6 +1535,46 @@ type market_factory_create {
     # filter the rows returned
     where: metrics_factory_destroy_bool_exp
   ): metrics_factory_destroy_aggregate!
+  event_id: String!
+  from_address: String!
+  log_index: Int!
+  market: String!
+
+  # An array relationship
+  metrics(
+    # distinct select on columns
+    distinct_on: [metrics_factory_create_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [metrics_factory_create_order_by!]
+
+    # filter the rows returned
+    where: metrics_factory_create_bool_exp
+  ): [metrics_factory_create!]!
+
+  # An aggregated array relationship
+  metrics_aggregate(
+    # distinct select on columns
+    distinct_on: [metrics_factory_create_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [metrics_factory_create_order_by!]
+
+    # filter the rows returned
+    where: metrics_factory_create_bool_exp
+  ): metrics_factory_create_aggregate!
   raw_data: String!
   transaction_index: Int!
 }
@@ -1641,14 +1640,14 @@ input market_factory_create_bool_exp {
   _and: [market_factory_create_bool_exp]
   _not: market_factory_create_bool_exp
   _or: [market_factory_create_bool_exp]
+  allocation: allocator_allocation_result_bool_exp
   block_number: Int_comparison_exp
+  destroyed_metrics: metrics_factory_destroy_bool_exp
   event_id: String_comparison_exp
   from_address: String_comparison_exp
   log_index: Int_comparison_exp
   market: String_comparison_exp
-  market_n_allocation: allocator_allocation_result_bool_exp
-  market_n_metrics: metrics_factory_create_bool_exp
-  market_n_metrics_destroy: metrics_factory_destroy_bool_exp
+  metrics: metrics_factory_create_bool_exp
   raw_data: String_comparison_exp
   transaction_index: Int_comparison_exp
 }
@@ -1668,14 +1667,14 @@ input market_factory_create_inc_input {
 
 # input type for inserting data into table "market_factory_create"
 input market_factory_create_insert_input {
+  allocation: allocator_allocation_result_arr_rel_insert_input
   block_number: Int
+  destroyed_metrics: metrics_factory_destroy_arr_rel_insert_input
   event_id: String
   from_address: String
   log_index: Int
   market: String
-  market_n_allocation: allocator_allocation_result_arr_rel_insert_input
-  market_n_metrics: metrics_factory_create_arr_rel_insert_input
-  market_n_metrics_destroy: metrics_factory_destroy_arr_rel_insert_input
+  metrics: metrics_factory_create_arr_rel_insert_input
   raw_data: String
   transaction_index: Int
 }
@@ -1748,14 +1747,14 @@ input market_factory_create_on_conflict {
 
 # ordering options when selecting data from "market_factory_create"
 input market_factory_create_order_by {
+  allocation_aggregate: allocator_allocation_result_aggregate_order_by
   block_number: order_by
+  destroyed_metrics_aggregate: metrics_factory_destroy_aggregate_order_by
   event_id: order_by
   from_address: order_by
   log_index: order_by
   market: order_by
-  market_n_allocation_aggregate: allocator_allocation_result_aggregate_order_by
-  market_n_metrics_aggregate: metrics_factory_create_aggregate_order_by
-  market_n_metrics_destroy_aggregate: metrics_factory_destroy_aggregate_order_by
+  metrics_aggregate: metrics_factory_create_aggregate_order_by
   raw_data: order_by
   transaction_index: order_by
 }
@@ -1925,16 +1924,16 @@ input market_factory_create_variance_order_by {
 # columns and relationships of "metrics_factory_create"
 type metrics_factory_create {
   block_number: Int!
+
+  # An object relationship
+  destroyed_metrics: metrics_factory_destroy
   event_id: String!
   from_address: String!
   log_index: Int!
+
+  # An object relationship
+  market: market_factory_create
   metrics: String!
-
-  # An object relationship
-  metrics_n_market: market_factory_create
-
-  # An object relationship
-  metrics_n_metrics_destroy: metrics_factory_destroy
   raw_data: String!
   transaction_index: Int!
 }
@@ -2001,12 +2000,12 @@ input metrics_factory_create_bool_exp {
   _not: metrics_factory_create_bool_exp
   _or: [metrics_factory_create_bool_exp]
   block_number: Int_comparison_exp
+  destroyed_metrics: metrics_factory_destroy_bool_exp
   event_id: String_comparison_exp
   from_address: String_comparison_exp
   log_index: Int_comparison_exp
+  market: market_factory_create_bool_exp
   metrics: String_comparison_exp
-  metrics_n_market: market_factory_create_bool_exp
-  metrics_n_metrics_destroy: metrics_factory_destroy_bool_exp
   raw_data: String_comparison_exp
   transaction_index: Int_comparison_exp
 }
@@ -2027,12 +2026,12 @@ input metrics_factory_create_inc_input {
 # input type for inserting data into table "metrics_factory_create"
 input metrics_factory_create_insert_input {
   block_number: Int
+  destroyed_metrics: metrics_factory_destroy_obj_rel_insert_input
   event_id: String
   from_address: String
   log_index: Int
+  market: market_factory_create_obj_rel_insert_input
   metrics: String
-  metrics_n_market: market_factory_create_obj_rel_insert_input
-  metrics_n_metrics_destroy: metrics_factory_destroy_obj_rel_insert_input
   raw_data: String
   transaction_index: Int
 }
@@ -2106,12 +2105,12 @@ input metrics_factory_create_on_conflict {
 # ordering options when selecting data from "metrics_factory_create"
 input metrics_factory_create_order_by {
   block_number: order_by
+  destroyed_metrics: metrics_factory_destroy_order_by
   event_id: order_by
   from_address: order_by
   log_index: order_by
+  market: market_factory_create_order_by
   metrics: order_by
-  metrics_n_market: market_factory_create_order_by
-  metrics_n_metrics_destroy: metrics_factory_destroy_order_by
   raw_data: order_by
   transaction_index: order_by
 }
@@ -2284,13 +2283,13 @@ type metrics_factory_destroy {
   event_id: String!
   from_address: String!
   log_index: Int!
+
+  # An object relationship
+  market: market_factory_create
   metrics: String!
 
   # An object relationship
-  metrics_destroy_n_market: market_factory_create
-
-  # An object relationship
-  metrics_destroy_n_metrics: metrics_factory_create
+  metrics_creation: metrics_factory_create
   raw_data: String!
   transaction_index: Int!
 }
@@ -2360,9 +2359,9 @@ input metrics_factory_destroy_bool_exp {
   event_id: String_comparison_exp
   from_address: String_comparison_exp
   log_index: Int_comparison_exp
+  market: market_factory_create_bool_exp
   metrics: String_comparison_exp
-  metrics_destroy_n_market: market_factory_create_bool_exp
-  metrics_destroy_n_metrics: metrics_factory_create_bool_exp
+  metrics_creation: metrics_factory_create_bool_exp
   raw_data: String_comparison_exp
   transaction_index: Int_comparison_exp
 }
@@ -2386,9 +2385,9 @@ input metrics_factory_destroy_insert_input {
   event_id: String
   from_address: String
   log_index: Int
+  market: market_factory_create_obj_rel_insert_input
   metrics: String
-  metrics_destroy_n_market: market_factory_create_obj_rel_insert_input
-  metrics_destroy_n_metrics: metrics_factory_create_obj_rel_insert_input
+  metrics_creation: metrics_factory_create_obj_rel_insert_input
   raw_data: String
   transaction_index: Int
 }
@@ -2465,9 +2464,9 @@ input metrics_factory_destroy_order_by {
   event_id: order_by
   from_address: order_by
   log_index: order_by
+  market: market_factory_create_order_by
   metrics: order_by
-  metrics_destroy_n_market: market_factory_create_order_by
-  metrics_destroy_n_metrics: metrics_factory_create_order_by
+  metrics_creation: metrics_factory_create_order_by
   raw_data: order_by
   transaction_index: order_by
 }
@@ -4199,9 +4198,10 @@ type policy_factory_create {
   inner_policy: String!
   log_index: Int!
   policy_address: String!
+  raw_data: String!
 
   # An array relationship
-  policy_n_reward(
+  reward(
     # distinct select on columns
     distinct_on: [reward_calculation_result_select_column!]
 
@@ -4219,7 +4219,7 @@ type policy_factory_create {
   ): [reward_calculation_result!]!
 
   # An aggregated array relationship
-  policy_n_reward_aggregate(
+  reward_aggregate(
     # distinct select on columns
     distinct_on: [reward_calculation_result_select_column!]
 
@@ -4235,7 +4235,6 @@ type policy_factory_create {
     # filter the rows returned
     where: reward_calculation_result_bool_exp
   ): reward_calculation_result_aggregate!
-  raw_data: String!
   transaction_index: Int!
 }
 
@@ -4306,8 +4305,8 @@ input policy_factory_create_bool_exp {
   inner_policy: String_comparison_exp
   log_index: Int_comparison_exp
   policy_address: String_comparison_exp
-  policy_n_reward: reward_calculation_result_bool_exp
   raw_data: String_comparison_exp
+  reward: reward_calculation_result_bool_exp
   transaction_index: Int_comparison_exp
 }
 
@@ -4332,8 +4331,8 @@ input policy_factory_create_insert_input {
   inner_policy: String
   log_index: Int
   policy_address: String
-  policy_n_reward: reward_calculation_result_arr_rel_insert_input
   raw_data: String
+  reward: reward_calculation_result_arr_rel_insert_input
   transaction_index: Int
 }
 
@@ -4415,8 +4414,8 @@ input policy_factory_create_order_by {
   inner_policy: order_by
   log_index: order_by
   policy_address: order_by
-  policy_n_reward_aggregate: reward_calculation_result_aggregate_order_by
   raw_data: order_by
+  reward_aggregate: reward_calculation_result_aggregate_order_by
   transaction_index: order_by
 }
 
@@ -4591,10 +4590,8 @@ input policy_factory_create_variance_order_by {
 
 # columns and relationships of "property_authentication"
 type property_authentication {
-  authentication_id: String!
-
   # An array relationship
-  authentication_n_allocation(
+  allocation(
     # distinct select on columns
     distinct_on: [allocator_allocation_result_select_column!]
 
@@ -4612,7 +4609,7 @@ type property_authentication {
   ): [allocator_allocation_result!]!
 
   # An aggregated array relationship
-  authentication_n_allocation_aggregate(
+  allocation_aggregate(
     # distinct select on columns
     distinct_on: [allocator_allocation_result_select_column!]
 
@@ -4628,15 +4625,20 @@ type property_authentication {
     # filter the rows returned
     where: allocator_allocation_result_bool_exp
   ): allocator_allocation_result_aggregate!
+  authentication_id: String!
+  block_number: Int!
+  market: String!
 
   # An object relationship
-  authentication_n_market: market_factory_create
+  market_creation: market_factory_create
+  metrics: String!
+  property: String!
 
   # An object relationship
-  authentication_n_property: property_factory_create
+  property_creation: property_factory_create
 
   # An array relationship
-  authentication_n_reward(
+  reward(
     # distinct select on columns
     distinct_on: [reward_calculation_result_select_column!]
 
@@ -4654,7 +4656,7 @@ type property_authentication {
   ): [reward_calculation_result!]!
 
   # An aggregated array relationship
-  authentication_n_reward_aggregate(
+  reward_aggregate(
     # distinct select on columns
     distinct_on: [reward_calculation_result_select_column!]
 
@@ -4670,10 +4672,6 @@ type property_authentication {
     # filter the rows returned
     where: reward_calculation_result_bool_exp
   ): reward_calculation_result_aggregate!
-  block_number: Int!
-  market: String!
-  metrics: String!
-  property: String!
 }
 
 # aggregated selection of "property_authentication"
@@ -4733,15 +4731,15 @@ input property_authentication_bool_exp {
   _and: [property_authentication_bool_exp]
   _not: property_authentication_bool_exp
   _or: [property_authentication_bool_exp]
+  allocation: allocator_allocation_result_bool_exp
   authentication_id: String_comparison_exp
-  authentication_n_allocation: allocator_allocation_result_bool_exp
-  authentication_n_market: market_factory_create_bool_exp
-  authentication_n_property: property_factory_create_bool_exp
-  authentication_n_reward: reward_calculation_result_bool_exp
   block_number: Int_comparison_exp
   market: String_comparison_exp
+  market_creation: market_factory_create_bool_exp
   metrics: String_comparison_exp
   property: String_comparison_exp
+  property_creation: property_factory_create_bool_exp
+  reward: reward_calculation_result_bool_exp
 }
 
 # unique or primary key constraints on table "property_authentication"
@@ -4753,7 +4751,7 @@ enum property_authentication_constraint {
 # columns and relationships of "property_authentication_deleted"
 type property_authentication_deleted {
   # An array relationship
-  authentication_deleted_n_allocation(
+  allocation(
     # distinct select on columns
     distinct_on: [allocator_allocation_result_select_column!]
 
@@ -4771,7 +4769,7 @@ type property_authentication_deleted {
   ): [allocator_allocation_result!]!
 
   # An aggregated array relationship
-  authentication_deleted_n_allocation_aggregate(
+  allocation_aggregate(
     # distinct select on columns
     distinct_on: [allocator_allocation_result_select_column!]
 
@@ -4787,15 +4785,20 @@ type property_authentication_deleted {
     # filter the rows returned
     where: allocator_allocation_result_bool_exp
   ): allocator_allocation_result_aggregate!
+  authentication_id: String!
+  block_number: Int!
+  market: String!
 
   # An object relationship
-  authentication_deleted_n_market: market_factory_create
+  market_creation: market_factory_create
+  metrics: String!
+  property: String!
 
   # An object relationship
-  authentication_deleted_n_property: property_factory_create
+  property_creation: property_factory_create
 
   # An array relationship
-  authentication_deleted_n_reward(
+  reward(
     # distinct select on columns
     distinct_on: [reward_calculation_result_select_column!]
 
@@ -4813,7 +4816,7 @@ type property_authentication_deleted {
   ): [reward_calculation_result!]!
 
   # An aggregated array relationship
-  authentication_deleted_n_reward_aggregate(
+  reward_aggregate(
     # distinct select on columns
     distinct_on: [reward_calculation_result_select_column!]
 
@@ -4829,11 +4832,6 @@ type property_authentication_deleted {
     # filter the rows returned
     where: reward_calculation_result_bool_exp
   ): reward_calculation_result_aggregate!
-  authentication_id: String!
-  block_number: Int!
-  market: String!
-  metrics: String!
-  property: String!
 }
 
 # aggregated selection of "property_authentication_deleted"
@@ -4894,15 +4892,15 @@ input property_authentication_deleted_bool_exp {
   _and: [property_authentication_deleted_bool_exp]
   _not: property_authentication_deleted_bool_exp
   _or: [property_authentication_deleted_bool_exp]
-  authentication_deleted_n_allocation: allocator_allocation_result_bool_exp
-  authentication_deleted_n_market: market_factory_create_bool_exp
-  authentication_deleted_n_property: property_factory_create_bool_exp
-  authentication_deleted_n_reward: reward_calculation_result_bool_exp
+  allocation: allocator_allocation_result_bool_exp
   authentication_id: String_comparison_exp
   block_number: Int_comparison_exp
   market: String_comparison_exp
+  market_creation: market_factory_create_bool_exp
   metrics: String_comparison_exp
   property: String_comparison_exp
+  property_creation: property_factory_create_bool_exp
+  reward: reward_calculation_result_bool_exp
 }
 
 # unique or primary key constraints on table "property_authentication_deleted"
@@ -4918,15 +4916,15 @@ input property_authentication_deleted_inc_input {
 
 # input type for inserting data into table "property_authentication_deleted"
 input property_authentication_deleted_insert_input {
-  authentication_deleted_n_allocation: allocator_allocation_result_arr_rel_insert_input
-  authentication_deleted_n_market: market_factory_create_obj_rel_insert_input
-  authentication_deleted_n_property: property_factory_create_obj_rel_insert_input
-  authentication_deleted_n_reward: reward_calculation_result_arr_rel_insert_input
+  allocation: allocator_allocation_result_arr_rel_insert_input
   authentication_id: String
   block_number: Int
   market: String
+  market_creation: market_factory_create_obj_rel_insert_input
   metrics: String
   property: String
+  property_creation: property_factory_create_obj_rel_insert_input
+  reward: reward_calculation_result_arr_rel_insert_input
 }
 
 # aggregate max on columns
@@ -4989,15 +4987,15 @@ input property_authentication_deleted_on_conflict {
 
 # ordering options when selecting data from "property_authentication_deleted"
 input property_authentication_deleted_order_by {
-  authentication_deleted_n_allocation_aggregate: allocator_allocation_result_aggregate_order_by
-  authentication_deleted_n_market: market_factory_create_order_by
-  authentication_deleted_n_property: property_factory_create_order_by
-  authentication_deleted_n_reward_aggregate: reward_calculation_result_aggregate_order_by
+  allocation_aggregate: allocator_allocation_result_aggregate_order_by
   authentication_id: order_by
   block_number: order_by
   market: order_by
+  market_creation: market_factory_create_order_by
   metrics: order_by
   property: order_by
+  property_creation: property_factory_create_order_by
+  reward_aggregate: reward_calculation_result_aggregate_order_by
 }
 
 # primary key columns input for table: "property_authentication_deleted"
@@ -5128,15 +5126,15 @@ input property_authentication_inc_input {
 
 # input type for inserting data into table "property_authentication"
 input property_authentication_insert_input {
+  allocation: allocator_allocation_result_arr_rel_insert_input
   authentication_id: String
-  authentication_n_allocation: allocator_allocation_result_arr_rel_insert_input
-  authentication_n_market: market_factory_create_obj_rel_insert_input
-  authentication_n_property: property_factory_create_obj_rel_insert_input
-  authentication_n_reward: reward_calculation_result_arr_rel_insert_input
   block_number: Int
   market: String
+  market_creation: market_factory_create_obj_rel_insert_input
   metrics: String
   property: String
+  property_creation: property_factory_create_obj_rel_insert_input
+  reward: reward_calculation_result_arr_rel_insert_input
 }
 
 # aggregate max on columns
@@ -5199,15 +5197,15 @@ input property_authentication_on_conflict {
 
 # ordering options when selecting data from "property_authentication"
 input property_authentication_order_by {
+  allocation_aggregate: allocator_allocation_result_aggregate_order_by
   authentication_id: order_by
-  authentication_n_allocation_aggregate: allocator_allocation_result_aggregate_order_by
-  authentication_n_market: market_factory_create_order_by
-  authentication_n_property: property_factory_create_order_by
-  authentication_n_reward_aggregate: reward_calculation_result_aggregate_order_by
   block_number: order_by
   market: order_by
+  market_creation: market_factory_create_order_by
   metrics: order_by
   property: order_by
+  property_creation: property_factory_create_order_by
+  reward_aggregate: reward_calculation_result_aggregate_order_by
 }
 
 # primary key columns input for table: "property_authentication"
@@ -5333,14 +5331,8 @@ input property_authentication_variance_order_by {
 
 # columns and relationships of "property_factory_create"
 type property_factory_create {
-  block_number: Int!
-  event_id: String!
-  from_address: String!
-  log_index: Int!
-  property: String!
-
   # An array relationship
-  property_n_allocation(
+  allocation(
     # distinct select on columns
     distinct_on: [allocator_allocation_result_select_column!]
 
@@ -5358,7 +5350,7 @@ type property_factory_create {
   ): [allocator_allocation_result!]!
 
   # An aggregated array relationship
-  property_n_allocation_aggregate(
+  allocation_aggregate(
     # distinct select on columns
     distinct_on: [allocator_allocation_result_select_column!]
 
@@ -5376,7 +5368,7 @@ type property_factory_create {
   ): allocator_allocation_result_aggregate!
 
   # An array relationship
-  property_n_authentication(
+  authentication(
     # distinct select on columns
     distinct_on: [property_authentication_select_column!]
 
@@ -5394,7 +5386,7 @@ type property_factory_create {
   ): [property_authentication!]!
 
   # An aggregated array relationship
-  property_n_authentication_aggregate(
+  authentication_aggregate(
     # distinct select on columns
     distinct_on: [property_authentication_select_column!]
 
@@ -5410,9 +5402,10 @@ type property_factory_create {
     # filter the rows returned
     where: property_authentication_bool_exp
   ): property_authentication_aggregate!
+  block_number: Int!
 
   # An array relationship
-  property_n_authentication_deleted(
+  deleted_authentication(
     # distinct select on columns
     distinct_on: [property_authentication_deleted_select_column!]
 
@@ -5430,7 +5423,7 @@ type property_factory_create {
   ): [property_authentication_deleted!]!
 
   # An aggregated array relationship
-  property_n_authentication_deleted_aggregate(
+  deleted_authentication_aggregate(
     # distinct select on columns
     distinct_on: [property_authentication_deleted_select_column!]
 
@@ -5446,9 +5439,13 @@ type property_factory_create {
     # filter the rows returned
     where: property_authentication_deleted_bool_exp
   ): property_authentication_deleted_aggregate!
+  event_id: String!
+  from_address: String!
+  log_index: Int!
+  property: String!
 
   # An array relationship
-  property_n_lockup(
+  property_creation(
     # distinct select on columns
     distinct_on: [lockup_lockedup_select_column!]
 
@@ -5466,7 +5463,7 @@ type property_factory_create {
   ): [lockup_lockedup!]!
 
   # An aggregated array relationship
-  property_n_lockup_aggregate(
+  property_creation_aggregate(
     # distinct select on columns
     distinct_on: [lockup_lockedup_select_column!]
 
@@ -5547,15 +5544,15 @@ input property_factory_create_bool_exp {
   _and: [property_factory_create_bool_exp]
   _not: property_factory_create_bool_exp
   _or: [property_factory_create_bool_exp]
+  allocation: allocator_allocation_result_bool_exp
+  authentication: property_authentication_bool_exp
   block_number: Int_comparison_exp
+  deleted_authentication: property_authentication_deleted_bool_exp
   event_id: String_comparison_exp
   from_address: String_comparison_exp
   log_index: Int_comparison_exp
   property: String_comparison_exp
-  property_n_allocation: allocator_allocation_result_bool_exp
-  property_n_authentication: property_authentication_bool_exp
-  property_n_authentication_deleted: property_authentication_deleted_bool_exp
-  property_n_lockup: lockup_lockedup_bool_exp
+  property_creation: lockup_lockedup_bool_exp
   raw_data: String_comparison_exp
   transaction_index: Int_comparison_exp
 }
@@ -5575,15 +5572,15 @@ input property_factory_create_inc_input {
 
 # input type for inserting data into table "property_factory_create"
 input property_factory_create_insert_input {
+  allocation: allocator_allocation_result_arr_rel_insert_input
+  authentication: property_authentication_arr_rel_insert_input
   block_number: Int
+  deleted_authentication: property_authentication_deleted_arr_rel_insert_input
   event_id: String
   from_address: String
   log_index: Int
   property: String
-  property_n_allocation: allocator_allocation_result_arr_rel_insert_input
-  property_n_authentication: property_authentication_arr_rel_insert_input
-  property_n_authentication_deleted: property_authentication_deleted_arr_rel_insert_input
-  property_n_lockup: lockup_lockedup_arr_rel_insert_input
+  property_creation: lockup_lockedup_arr_rel_insert_input
   raw_data: String
   transaction_index: Int
 }
@@ -5656,15 +5653,15 @@ input property_factory_create_on_conflict {
 
 # ordering options when selecting data from "property_factory_create"
 input property_factory_create_order_by {
+  allocation_aggregate: allocator_allocation_result_aggregate_order_by
+  authentication_aggregate: property_authentication_aggregate_order_by
   block_number: order_by
+  deleted_authentication_aggregate: property_authentication_deleted_aggregate_order_by
   event_id: order_by
   from_address: order_by
   log_index: order_by
   property: order_by
-  property_n_allocation_aggregate: allocator_allocation_result_aggregate_order_by
-  property_n_authentication_aggregate: property_authentication_aggregate_order_by
-  property_n_authentication_deleted_aggregate: property_authentication_deleted_aggregate_order_by
-  property_n_lockup_aggregate: lockup_lockedup_aggregate_order_by
+  property_creation_aggregate: lockup_lockedup_aggregate_order_by
   raw_data: order_by
   transaction_index: order_by
 }
@@ -6338,24 +6335,24 @@ type query_root {
 # columns and relationships of "reward_calculation_result"
 type reward_calculation_result {
   allocate_result: numeric!
+
+  # An object relationship
+  allocation: allocator_allocation_result
   alocator_allocation_result_event_id: String!
+
+  # An object relationship
+  authentication: property_authentication
   block_number: Int!
   holder_reward: numeric!
   lockup: numeric!
   metrics: String!
+
+  # An object relationship
+  metrics_creation: metrics_factory_create
   policy: String!
 
   # An object relationship
-  reward_n_allocation: allocator_allocation_result
-
-  # An object relationship
-  reward_n_authentication: property_authentication
-
-  # An object relationship
-  reward_n_metrics: metrics_factory_create
-
-  # An object relationship
-  reward_n_policy: policy_factory_create
+  policy_creation: policy_factory_create
   staking_reward: numeric!
 }
 
@@ -6425,16 +6422,16 @@ input reward_calculation_result_bool_exp {
   _not: reward_calculation_result_bool_exp
   _or: [reward_calculation_result_bool_exp]
   allocate_result: numeric_comparison_exp
+  allocation: allocator_allocation_result_bool_exp
   alocator_allocation_result_event_id: String_comparison_exp
+  authentication: property_authentication_bool_exp
   block_number: Int_comparison_exp
   holder_reward: numeric_comparison_exp
   lockup: numeric_comparison_exp
   metrics: String_comparison_exp
+  metrics_creation: metrics_factory_create_bool_exp
   policy: String_comparison_exp
-  reward_n_allocation: allocator_allocation_result_bool_exp
-  reward_n_authentication: property_authentication_bool_exp
-  reward_n_metrics: metrics_factory_create_bool_exp
-  reward_n_policy: policy_factory_create_bool_exp
+  policy_creation: policy_factory_create_bool_exp
   staking_reward: numeric_comparison_exp
 }
 
@@ -6456,16 +6453,16 @@ input reward_calculation_result_inc_input {
 # input type for inserting data into table "reward_calculation_result"
 input reward_calculation_result_insert_input {
   allocate_result: numeric
+  allocation: allocator_allocation_result_obj_rel_insert_input
   alocator_allocation_result_event_id: String
+  authentication: property_authentication_obj_rel_insert_input
   block_number: Int
   holder_reward: numeric
   lockup: numeric
   metrics: String
+  metrics_creation: metrics_factory_create_obj_rel_insert_input
   policy: String
-  reward_n_allocation: allocator_allocation_result_obj_rel_insert_input
-  reward_n_authentication: property_authentication_obj_rel_insert_input
-  reward_n_metrics: metrics_factory_create_obj_rel_insert_input
-  reward_n_policy: policy_factory_create_obj_rel_insert_input
+  policy_creation: policy_factory_create_obj_rel_insert_input
   staking_reward: numeric
 }
 
@@ -6542,16 +6539,16 @@ input reward_calculation_result_on_conflict {
 # ordering options when selecting data from "reward_calculation_result"
 input reward_calculation_result_order_by {
   allocate_result: order_by
+  allocation: allocator_allocation_result_order_by
   alocator_allocation_result_event_id: order_by
+  authentication: property_authentication_order_by
   block_number: order_by
   holder_reward: order_by
   lockup: order_by
   metrics: order_by
+  metrics_creation: metrics_factory_create_order_by
   policy: order_by
-  reward_n_allocation: allocator_allocation_result_order_by
-  reward_n_authentication: property_authentication_order_by
-  reward_n_metrics: metrics_factory_create_order_by
-  reward_n_policy: policy_factory_create_order_by
+  policy_creation: policy_factory_create_order_by
   staking_reward: order_by
 }
 
