@@ -22,7 +22,7 @@
     "eslint-plugin-react": "7.19.0",
     "eslint-plugin-react-hooks": "3.0.0",
     "husky": "4.2.5",
-    "jest": "25.5.1",
+    "jest": "25.5.3",
     "lerna": "3.20.2",
     "lint-staged": "10.2.0",
     "next": "9.3.6",
