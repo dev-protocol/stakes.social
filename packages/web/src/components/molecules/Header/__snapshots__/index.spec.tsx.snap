@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`MainHeader Snapshot 1`] = `
+exports[`Header Snapshot 1`] = `
 <body>
   <div>
     <div
@@ -36,19 +36,6 @@ exports[`MainHeader Snapshot 1`] = `
           Connect to a wallet
         </span>
       </button>
-    </div>
-    <div
-      style="padding: 50px;"
-    >
-      <div
-        style="height: 500px; display: flex; justify-content: center; align-items: center; font-size: 48px; line-height: 64px;"
-      >
-        <p
-          style="color: rgb(47, 128, 237);"
-        >
-          Make a community sustainable together
-        </p>
-      </div>
     </div>
   </div>
 </body>
