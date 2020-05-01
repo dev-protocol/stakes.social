@@ -40,13 +40,26 @@ exports[`MainHeader Snapshot 1`] = `
       style="padding: 50px;"
     >
       <div
-        style="height: 500px; display: flex; justify-content: center; align-items: center; font-size: 48px; line-height: 64px;"
+        style="height: 500px; display: flex; justify-content: center; align-items: center; flex-flow: column; font-size: 48px; line-height: 64px;"
       >
         <p
           style="color: rgb(47, 128, 237);"
         >
           Make a community sustainable together
         </p>
+        <a
+          class="sc-AxjAm jIaAfJ"
+          href="/how-it-works"
+        >
+          <button
+            class="ant-btn ant-btn-primary"
+            type="button"
+          >
+            <span>
+              How it works
+            </span>
+          </button>
+        </a>
       </div>
     </div>
   </div>
