@@ -4,7 +4,7 @@ exports[`MainHeader Snapshot 1`] = `
 <body>
   <div>
     <div
-      style="padding: 50px;"
+      class="sc-AxirZ bZIsdI"
     >
       <a
         class="sc-AxjAm jIaAfJ"
@@ -29,7 +29,6 @@ exports[`MainHeader Snapshot 1`] = `
       </a>
       <button
         class="ant-btn ant-btn-lg"
-        style="float: right;"
         type="button"
       >
         <span>
