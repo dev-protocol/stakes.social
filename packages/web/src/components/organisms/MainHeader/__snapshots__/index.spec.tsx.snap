@@ -52,7 +52,7 @@ exports[`MainHeader Snapshot 1`] = `
           href="/how-it-works"
         >
           <button
-            class="ant-btn ant-btn-primary"
+            class="ant-btn ant-btn-primary ant-btn-lg"
             type="button"
           >
             <span>

@@ -20,7 +20,11 @@ export const MainHeader = () => {
           }}
         >
           <p style={{ color: '#2F80ED' }}>Make a community sustainable together</p>
-          {A({ href: '/how-it-works' })(<Button type="primary">How it works</Button>)}
+          {A({ href: '/how-it-works' })(
+            <Button type="primary" size="large">
+              How it works
+            </Button>
+          )}
         </div>
       </div>
     </>
