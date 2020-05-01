@@ -1,5 +1,5 @@
 import React from 'react'
-import { Header } from 'src/components/molecules/Header'
+import { Header } from '../Header'
 
 export const MainHeader = () => {
   return (
