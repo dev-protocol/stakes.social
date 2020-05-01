@@ -4,8 +4,6 @@ import { Header } from 'src/components/organisms/Header'
 import { Footer } from 'src/components/organisms/Footer'
 import styled from 'styled-components'
 
-type Props = {}
-
 const Article = styled.article`
   padding: 2em;
 `
@@ -13,7 +11,7 @@ const Title = styled.h1`
   text-align: center;
 `
 
-const HowItWorks = (_: Props) => {
+const HowItWorks = () => {
   return (
     <main>
       <Header />
