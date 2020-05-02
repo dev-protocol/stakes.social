@@ -19,6 +19,7 @@ export type Scalars = {
 export type Allocator_Allocation_Result = {
   __typename?: 'allocator_allocation_result'
   arg_value: Scalars['numeric']
+  authentication?: Maybe<Property_Authentication>
   block_number: Scalars['Int']
   event_id: Scalars['String']
   lockup_value: Scalars['numeric']
@@ -26,8 +27,10 @@ export type Allocator_Allocation_Result = {
   market: Scalars['String']
   metrics: Scalars['String']
   property: Scalars['String']
+  property_creation?: Maybe<Property_Factory_Create>
   raw_data: Scalars['String']
   result: Scalars['numeric']
+  reward?: Maybe<Reward_Calculation_Result>
   transaction_index: Scalars['Int']
 }
 
@@ -100,6 +103,7 @@ export type Allocator_Allocation_Result_Bool_Exp = {
   _not?: Maybe<Allocator_Allocation_Result_Bool_Exp>
   _or?: Maybe<Array<Maybe<Allocator_Allocation_Result_Bool_Exp>>>
   arg_value?: Maybe<Numeric_Comparison_Exp>
+  authentication?: Maybe<Property_Authentication_Bool_Exp>
   block_number?: Maybe<Int_Comparison_Exp>
   event_id?: Maybe<String_Comparison_Exp>
   lockup_value?: Maybe<Numeric_Comparison_Exp>
@@ -107,8 +111,10 @@ export type Allocator_Allocation_Result_Bool_Exp = {
   market?: Maybe<String_Comparison_Exp>
   metrics?: Maybe<String_Comparison_Exp>
   property?: Maybe<String_Comparison_Exp>
+  property_creation?: Maybe<Property_Factory_Create_Bool_Exp>
   raw_data?: Maybe<String_Comparison_Exp>
   result?: Maybe<Numeric_Comparison_Exp>
+  reward?: Maybe<Reward_Calculation_Result_Bool_Exp>
   transaction_index?: Maybe<Int_Comparison_Exp>
 }
 
@@ -117,13 +123,17 @@ export enum Allocator_Allocation_Result_Constraint {
 }
 
 export type Allocator_Allocation_Result_Inc_Input = {
+  arg_value?: Maybe<Scalars['numeric']>
   block_number?: Maybe<Scalars['Int']>
+  lockup_value?: Maybe<Scalars['numeric']>
   log_index?: Maybe<Scalars['Int']>
+  result?: Maybe<Scalars['numeric']>
   transaction_index?: Maybe<Scalars['Int']>
 }
 
 export type Allocator_Allocation_Result_Insert_Input = {
   arg_value?: Maybe<Scalars['numeric']>
+  authentication?: Maybe<Property_Authentication_Obj_Rel_Insert_Input>
   block_number?: Maybe<Scalars['Int']>
   event_id?: Maybe<Scalars['String']>
   lockup_value?: Maybe<Scalars['numeric']>
@@ -131,8 +141,10 @@ export type Allocator_Allocation_Result_Insert_Input = {
   market?: Maybe<Scalars['String']>
   metrics?: Maybe<Scalars['String']>
   property?: Maybe<Scalars['String']>
+  property_creation?: Maybe<Property_Factory_Create_Obj_Rel_Insert_Input>
   raw_data?: Maybe<Scalars['String']>
   result?: Maybe<Scalars['numeric']>
+  reward?: Maybe<Reward_Calculation_Result_Obj_Rel_Insert_Input>
   transaction_index?: Maybe<Scalars['Int']>
 }
 
@@ -213,6 +225,7 @@ export type Allocator_Allocation_Result_On_Conflict = {
 
 export type Allocator_Allocation_Result_Order_By = {
   arg_value?: Maybe<Order_By>
+  authentication?: Maybe<Property_Authentication_Order_By>
   block_number?: Maybe<Order_By>
   event_id?: Maybe<Order_By>
   lockup_value?: Maybe<Order_By>
@@ -220,9 +233,15 @@ export type Allocator_Allocation_Result_Order_By = {
   market?: Maybe<Order_By>
   metrics?: Maybe<Order_By>
   property?: Maybe<Order_By>
+  property_creation?: Maybe<Property_Factory_Create_Order_By>
   raw_data?: Maybe<Order_By>
   result?: Maybe<Order_By>
+  reward?: Maybe<Reward_Calculation_Result_Order_By>
   transaction_index?: Maybe<Order_By>
+}
+
+export type Allocator_Allocation_Result_Pk_Columns_Input = {
+  event_id: Scalars['String']
 }
 
 export enum Allocator_Allocation_Result_Select_Column {
@@ -507,8 +526,14 @@ export enum Allocator_Before_Allocation_Constraint {
 }
 
 export type Allocator_Before_Allocation_Inc_Input = {
+  assets?: Maybe<Scalars['numeric']>
   block_number?: Maybe<Scalars['Int']>
+  blocks?: Maybe<Scalars['numeric']>
   log_index?: Maybe<Scalars['Int']>
+  market_value?: Maybe<Scalars['numeric']>
+  mint?: Maybe<Scalars['numeric']>
+  token_value?: Maybe<Scalars['numeric']>
+  total_assets?: Maybe<Scalars['numeric']>
   transaction_index?: Maybe<Scalars['Int']>
 }
 
@@ -613,6 +638,10 @@ export type Allocator_Before_Allocation_Order_By = {
   token_value?: Maybe<Order_By>
   total_assets?: Maybe<Order_By>
   transaction_index?: Maybe<Order_By>
+}
+
+export type Allocator_Before_Allocation_Pk_Columns_Input = {
+  event_id: Scalars['String']
 }
 
 export enum Allocator_Before_Allocation_Select_Column {
@@ -882,14 +911,33 @@ export type Int_Comparison_Exp = {
 
 export type Lockup_Lockedup = {
   __typename?: 'lockup_lockedup'
+  allocation: Array<Allocator_Allocation_Result>
+  allocation_aggregate: Allocator_Allocation_Result_Aggregate
   block_number: Scalars['Int']
   event_id: Scalars['String']
   from_address: Scalars['String']
   log_index: Scalars['Int']
   property: Scalars['String']
+  property_creation?: Maybe<Property_Factory_Create>
   raw_data: Scalars['String']
   token_value: Scalars['numeric']
   transaction_index: Scalars['Int']
+}
+
+export type Lockup_LockedupAllocationArgs = {
+  distinct_on?: Maybe<Array<Allocator_Allocation_Result_Select_Column>>
+  limit?: Maybe<Scalars['Int']>
+  offset?: Maybe<Scalars['Int']>
+  order_by?: Maybe<Array<Allocator_Allocation_Result_Order_By>>
+  where?: Maybe<Allocator_Allocation_Result_Bool_Exp>
+}
+
+export type Lockup_LockedupAllocation_AggregateArgs = {
+  distinct_on?: Maybe<Array<Allocator_Allocation_Result_Select_Column>>
+  limit?: Maybe<Scalars['Int']>
+  offset?: Maybe<Scalars['Int']>
+  order_by?: Maybe<Array<Allocator_Allocation_Result_Order_By>>
+  where?: Maybe<Allocator_Allocation_Result_Bool_Exp>
 }
 
 export type Lockup_Lockedup_Aggregate = {
@@ -956,11 +1004,13 @@ export type Lockup_Lockedup_Bool_Exp = {
   _and?: Maybe<Array<Maybe<Lockup_Lockedup_Bool_Exp>>>
   _not?: Maybe<Lockup_Lockedup_Bool_Exp>
   _or?: Maybe<Array<Maybe<Lockup_Lockedup_Bool_Exp>>>
+  allocation?: Maybe<Allocator_Allocation_Result_Bool_Exp>
   block_number?: Maybe<Int_Comparison_Exp>
   event_id?: Maybe<String_Comparison_Exp>
   from_address?: Maybe<String_Comparison_Exp>
   log_index?: Maybe<Int_Comparison_Exp>
   property?: Maybe<String_Comparison_Exp>
+  property_creation?: Maybe<Property_Factory_Create_Bool_Exp>
   raw_data?: Maybe<String_Comparison_Exp>
   token_value?: Maybe<Numeric_Comparison_Exp>
   transaction_index?: Maybe<Int_Comparison_Exp>
@@ -973,15 +1023,18 @@ export enum Lockup_Lockedup_Constraint {
 export type Lockup_Lockedup_Inc_Input = {
   block_number?: Maybe<Scalars['Int']>
   log_index?: Maybe<Scalars['Int']>
+  token_value?: Maybe<Scalars['numeric']>
   transaction_index?: Maybe<Scalars['Int']>
 }
 
 export type Lockup_Lockedup_Insert_Input = {
+  allocation?: Maybe<Allocator_Allocation_Result_Arr_Rel_Insert_Input>
   block_number?: Maybe<Scalars['Int']>
   event_id?: Maybe<Scalars['String']>
   from_address?: Maybe<Scalars['String']>
   log_index?: Maybe<Scalars['Int']>
   property?: Maybe<Scalars['String']>
+  property_creation?: Maybe<Property_Factory_Create_Obj_Rel_Insert_Input>
   raw_data?: Maybe<Scalars['String']>
   token_value?: Maybe<Scalars['numeric']>
   transaction_index?: Maybe<Scalars['Int']>
@@ -1051,14 +1104,20 @@ export type Lockup_Lockedup_On_Conflict = {
 }
 
 export type Lockup_Lockedup_Order_By = {
+  allocation_aggregate?: Maybe<Allocator_Allocation_Result_Aggregate_Order_By>
   block_number?: Maybe<Order_By>
   event_id?: Maybe<Order_By>
   from_address?: Maybe<Order_By>
   log_index?: Maybe<Order_By>
   property?: Maybe<Order_By>
+  property_creation?: Maybe<Property_Factory_Create_Order_By>
   raw_data?: Maybe<Order_By>
   token_value?: Maybe<Order_By>
   transaction_index?: Maybe<Order_By>
+}
+
+export type Lockup_Lockedup_Pk_Columns_Input = {
+  event_id: Scalars['String']
 }
 
 export enum Lockup_Lockedup_Select_Column {
@@ -1201,13 +1260,67 @@ export type Lockup_Lockedup_Variance_Order_By = {
 
 export type Market_Factory_Create = {
   __typename?: 'market_factory_create'
+  allocation: Array<Allocator_Allocation_Result>
+  allocation_aggregate: Allocator_Allocation_Result_Aggregate
   block_number: Scalars['Int']
+  destroyed_metrics: Array<Metrics_Factory_Destroy>
+  destroyed_metrics_aggregate: Metrics_Factory_Destroy_Aggregate
   event_id: Scalars['String']
   from_address: Scalars['String']
   log_index: Scalars['Int']
   market: Scalars['String']
+  metrics: Array<Metrics_Factory_Create>
+  metrics_aggregate: Metrics_Factory_Create_Aggregate
   raw_data: Scalars['String']
   transaction_index: Scalars['Int']
+}
+
+export type Market_Factory_CreateAllocationArgs = {
+  distinct_on?: Maybe<Array<Allocator_Allocation_Result_Select_Column>>
+  limit?: Maybe<Scalars['Int']>
+  offset?: Maybe<Scalars['Int']>
+  order_by?: Maybe<Array<Allocator_Allocation_Result_Order_By>>
+  where?: Maybe<Allocator_Allocation_Result_Bool_Exp>
+}
+
+export type Market_Factory_CreateAllocation_AggregateArgs = {
+  distinct_on?: Maybe<Array<Allocator_Allocation_Result_Select_Column>>
+  limit?: Maybe<Scalars['Int']>
+  offset?: Maybe<Scalars['Int']>
+  order_by?: Maybe<Array<Allocator_Allocation_Result_Order_By>>
+  where?: Maybe<Allocator_Allocation_Result_Bool_Exp>
+}
+
+export type Market_Factory_CreateDestroyed_MetricsArgs = {
+  distinct_on?: Maybe<Array<Metrics_Factory_Destroy_Select_Column>>
+  limit?: Maybe<Scalars['Int']>
+  offset?: Maybe<Scalars['Int']>
+  order_by?: Maybe<Array<Metrics_Factory_Destroy_Order_By>>
+  where?: Maybe<Metrics_Factory_Destroy_Bool_Exp>
+}
+
+export type Market_Factory_CreateDestroyed_Metrics_AggregateArgs = {
+  distinct_on?: Maybe<Array<Metrics_Factory_Destroy_Select_Column>>
+  limit?: Maybe<Scalars['Int']>
+  offset?: Maybe<Scalars['Int']>
+  order_by?: Maybe<Array<Metrics_Factory_Destroy_Order_By>>
+  where?: Maybe<Metrics_Factory_Destroy_Bool_Exp>
+}
+
+export type Market_Factory_CreateMetricsArgs = {
+  distinct_on?: Maybe<Array<Metrics_Factory_Create_Select_Column>>
+  limit?: Maybe<Scalars['Int']>
+  offset?: Maybe<Scalars['Int']>
+  order_by?: Maybe<Array<Metrics_Factory_Create_Order_By>>
+  where?: Maybe<Metrics_Factory_Create_Bool_Exp>
+}
+
+export type Market_Factory_CreateMetrics_AggregateArgs = {
+  distinct_on?: Maybe<Array<Metrics_Factory_Create_Select_Column>>
+  limit?: Maybe<Scalars['Int']>
+  offset?: Maybe<Scalars['Int']>
+  order_by?: Maybe<Array<Metrics_Factory_Create_Order_By>>
+  where?: Maybe<Metrics_Factory_Create_Bool_Exp>
 }
 
 export type Market_Factory_Create_Aggregate = {
@@ -1272,11 +1385,14 @@ export type Market_Factory_Create_Bool_Exp = {
   _and?: Maybe<Array<Maybe<Market_Factory_Create_Bool_Exp>>>
   _not?: Maybe<Market_Factory_Create_Bool_Exp>
   _or?: Maybe<Array<Maybe<Market_Factory_Create_Bool_Exp>>>
+  allocation?: Maybe<Allocator_Allocation_Result_Bool_Exp>
   block_number?: Maybe<Int_Comparison_Exp>
+  destroyed_metrics?: Maybe<Metrics_Factory_Destroy_Bool_Exp>
   event_id?: Maybe<String_Comparison_Exp>
   from_address?: Maybe<String_Comparison_Exp>
   log_index?: Maybe<Int_Comparison_Exp>
   market?: Maybe<String_Comparison_Exp>
+  metrics?: Maybe<Metrics_Factory_Create_Bool_Exp>
   raw_data?: Maybe<String_Comparison_Exp>
   transaction_index?: Maybe<Int_Comparison_Exp>
 }
@@ -1292,11 +1408,14 @@ export type Market_Factory_Create_Inc_Input = {
 }
 
 export type Market_Factory_Create_Insert_Input = {
+  allocation?: Maybe<Allocator_Allocation_Result_Arr_Rel_Insert_Input>
   block_number?: Maybe<Scalars['Int']>
+  destroyed_metrics?: Maybe<Metrics_Factory_Destroy_Arr_Rel_Insert_Input>
   event_id?: Maybe<Scalars['String']>
   from_address?: Maybe<Scalars['String']>
   log_index?: Maybe<Scalars['Int']>
   market?: Maybe<Scalars['String']>
+  metrics?: Maybe<Metrics_Factory_Create_Arr_Rel_Insert_Input>
   raw_data?: Maybe<Scalars['String']>
   transaction_index?: Maybe<Scalars['Int']>
 }
@@ -1361,13 +1480,20 @@ export type Market_Factory_Create_On_Conflict = {
 }
 
 export type Market_Factory_Create_Order_By = {
+  allocation_aggregate?: Maybe<Allocator_Allocation_Result_Aggregate_Order_By>
   block_number?: Maybe<Order_By>
+  destroyed_metrics_aggregate?: Maybe<Metrics_Factory_Destroy_Aggregate_Order_By>
   event_id?: Maybe<Order_By>
   from_address?: Maybe<Order_By>
   log_index?: Maybe<Order_By>
   market?: Maybe<Order_By>
+  metrics_aggregate?: Maybe<Metrics_Factory_Create_Aggregate_Order_By>
   raw_data?: Maybe<Order_By>
   transaction_index?: Maybe<Order_By>
+}
+
+export type Market_Factory_Create_Pk_Columns_Input = {
+  event_id: Scalars['String']
 }
 
 export enum Market_Factory_Create_Select_Column {
@@ -1494,9 +1620,11 @@ export type Market_Factory_Create_Variance_Order_By = {
 export type Metrics_Factory_Create = {
   __typename?: 'metrics_factory_create'
   block_number: Scalars['Int']
+  destroyed_metrics?: Maybe<Metrics_Factory_Destroy>
   event_id: Scalars['String']
   from_address: Scalars['String']
   log_index: Scalars['Int']
+  market?: Maybe<Market_Factory_Create>
   metrics: Scalars['String']
   raw_data: Scalars['String']
   transaction_index: Scalars['Int']
@@ -1565,9 +1693,11 @@ export type Metrics_Factory_Create_Bool_Exp = {
   _not?: Maybe<Metrics_Factory_Create_Bool_Exp>
   _or?: Maybe<Array<Maybe<Metrics_Factory_Create_Bool_Exp>>>
   block_number?: Maybe<Int_Comparison_Exp>
+  destroyed_metrics?: Maybe<Metrics_Factory_Destroy_Bool_Exp>
   event_id?: Maybe<String_Comparison_Exp>
   from_address?: Maybe<String_Comparison_Exp>
   log_index?: Maybe<Int_Comparison_Exp>
+  market?: Maybe<Market_Factory_Create_Bool_Exp>
   metrics?: Maybe<String_Comparison_Exp>
   raw_data?: Maybe<String_Comparison_Exp>
   transaction_index?: Maybe<Int_Comparison_Exp>
@@ -1585,9 +1715,11 @@ export type Metrics_Factory_Create_Inc_Input = {
 
 export type Metrics_Factory_Create_Insert_Input = {
   block_number?: Maybe<Scalars['Int']>
+  destroyed_metrics?: Maybe<Metrics_Factory_Destroy_Obj_Rel_Insert_Input>
   event_id?: Maybe<Scalars['String']>
   from_address?: Maybe<Scalars['String']>
   log_index?: Maybe<Scalars['Int']>
+  market?: Maybe<Market_Factory_Create_Obj_Rel_Insert_Input>
   metrics?: Maybe<Scalars['String']>
   raw_data?: Maybe<Scalars['String']>
   transaction_index?: Maybe<Scalars['Int']>
@@ -1654,12 +1786,18 @@ export type Metrics_Factory_Create_On_Conflict = {
 
 export type Metrics_Factory_Create_Order_By = {
   block_number?: Maybe<Order_By>
+  destroyed_metrics?: Maybe<Metrics_Factory_Destroy_Order_By>
   event_id?: Maybe<Order_By>
   from_address?: Maybe<Order_By>
   log_index?: Maybe<Order_By>
+  market?: Maybe<Market_Factory_Create_Order_By>
   metrics?: Maybe<Order_By>
   raw_data?: Maybe<Order_By>
   transaction_index?: Maybe<Order_By>
+}
+
+export type Metrics_Factory_Create_Pk_Columns_Input = {
+  event_id: Scalars['String']
 }
 
 export enum Metrics_Factory_Create_Select_Column {
@@ -1789,7 +1927,9 @@ export type Metrics_Factory_Destroy = {
   event_id: Scalars['String']
   from_address: Scalars['String']
   log_index: Scalars['Int']
+  market?: Maybe<Market_Factory_Create>
   metrics: Scalars['String']
+  metrics_creation?: Maybe<Metrics_Factory_Create>
   raw_data: Scalars['String']
   transaction_index: Scalars['Int']
 }
@@ -1860,7 +2000,9 @@ export type Metrics_Factory_Destroy_Bool_Exp = {
   event_id?: Maybe<String_Comparison_Exp>
   from_address?: Maybe<String_Comparison_Exp>
   log_index?: Maybe<Int_Comparison_Exp>
+  market?: Maybe<Market_Factory_Create_Bool_Exp>
   metrics?: Maybe<String_Comparison_Exp>
+  metrics_creation?: Maybe<Metrics_Factory_Create_Bool_Exp>
   raw_data?: Maybe<String_Comparison_Exp>
   transaction_index?: Maybe<Int_Comparison_Exp>
 }
@@ -1880,7 +2022,9 @@ export type Metrics_Factory_Destroy_Insert_Input = {
   event_id?: Maybe<Scalars['String']>
   from_address?: Maybe<Scalars['String']>
   log_index?: Maybe<Scalars['Int']>
+  market?: Maybe<Market_Factory_Create_Obj_Rel_Insert_Input>
   metrics?: Maybe<Scalars['String']>
+  metrics_creation?: Maybe<Metrics_Factory_Create_Obj_Rel_Insert_Input>
   raw_data?: Maybe<Scalars['String']>
   transaction_index?: Maybe<Scalars['Int']>
 }
@@ -1949,9 +2093,15 @@ export type Metrics_Factory_Destroy_Order_By = {
   event_id?: Maybe<Order_By>
   from_address?: Maybe<Order_By>
   log_index?: Maybe<Order_By>
+  market?: Maybe<Market_Factory_Create_Order_By>
   metrics?: Maybe<Order_By>
+  metrics_creation?: Maybe<Metrics_Factory_Create_Order_By>
   raw_data?: Maybe<Order_By>
   transaction_index?: Maybe<Order_By>
+}
+
+export type Metrics_Factory_Destroy_Pk_Columns_Input = {
+  event_id: Scalars['String']
 }
 
 export enum Metrics_Factory_Destroy_Select_Column {
@@ -2078,86 +2228,170 @@ export type Metrics_Factory_Destroy_Variance_Order_By = {
 export type Mutation_Root = {
   __typename?: 'mutation_root'
   delete_allocator_allocation_result?: Maybe<Allocator_Allocation_Result_Mutation_Response>
+  delete_allocator_allocation_result_by_pk?: Maybe<Allocator_Allocation_Result>
   delete_allocator_before_allocation?: Maybe<Allocator_Before_Allocation_Mutation_Response>
+  delete_allocator_before_allocation_by_pk?: Maybe<Allocator_Before_Allocation>
   delete_lockup_lockedup?: Maybe<Lockup_Lockedup_Mutation_Response>
+  delete_lockup_lockedup_by_pk?: Maybe<Lockup_Lockedup>
   delete_market_factory_create?: Maybe<Market_Factory_Create_Mutation_Response>
+  delete_market_factory_create_by_pk?: Maybe<Market_Factory_Create>
   delete_metrics_factory_create?: Maybe<Metrics_Factory_Create_Mutation_Response>
+  delete_metrics_factory_create_by_pk?: Maybe<Metrics_Factory_Create>
   delete_metrics_factory_destroy?: Maybe<Metrics_Factory_Destroy_Mutation_Response>
+  delete_metrics_factory_destroy_by_pk?: Maybe<Metrics_Factory_Destroy>
   delete_policy_factory_create?: Maybe<Policy_Factory_Create_Mutation_Response>
+  delete_policy_factory_create_by_pk?: Maybe<Policy_Factory_Create>
   delete_property_authentication?: Maybe<Property_Authentication_Mutation_Response>
+  delete_property_authentication_by_pk?: Maybe<Property_Authentication>
   delete_property_authentication_deleted?: Maybe<Property_Authentication_Deleted_Mutation_Response>
+  delete_property_authentication_deleted_by_pk?: Maybe<Property_Authentication_Deleted>
   delete_property_factory_create?: Maybe<Property_Factory_Create_Mutation_Response>
+  delete_property_factory_create_by_pk?: Maybe<Property_Factory_Create>
   delete_reward_calculation_result?: Maybe<Reward_Calculation_Result_Mutation_Response>
+  delete_reward_calculation_result_by_pk?: Maybe<Reward_Calculation_Result>
   insert_allocator_allocation_result?: Maybe<Allocator_Allocation_Result_Mutation_Response>
+  insert_allocator_allocation_result_one?: Maybe<Allocator_Allocation_Result>
   insert_allocator_before_allocation?: Maybe<Allocator_Before_Allocation_Mutation_Response>
+  insert_allocator_before_allocation_one?: Maybe<Allocator_Before_Allocation>
   insert_lockup_lockedup?: Maybe<Lockup_Lockedup_Mutation_Response>
+  insert_lockup_lockedup_one?: Maybe<Lockup_Lockedup>
   insert_market_factory_create?: Maybe<Market_Factory_Create_Mutation_Response>
+  insert_market_factory_create_one?: Maybe<Market_Factory_Create>
   insert_metrics_factory_create?: Maybe<Metrics_Factory_Create_Mutation_Response>
+  insert_metrics_factory_create_one?: Maybe<Metrics_Factory_Create>
   insert_metrics_factory_destroy?: Maybe<Metrics_Factory_Destroy_Mutation_Response>
+  insert_metrics_factory_destroy_one?: Maybe<Metrics_Factory_Destroy>
   insert_policy_factory_create?: Maybe<Policy_Factory_Create_Mutation_Response>
+  insert_policy_factory_create_one?: Maybe<Policy_Factory_Create>
   insert_property_authentication?: Maybe<Property_Authentication_Mutation_Response>
   insert_property_authentication_deleted?: Maybe<Property_Authentication_Deleted_Mutation_Response>
+  insert_property_authentication_deleted_one?: Maybe<Property_Authentication_Deleted>
+  insert_property_authentication_one?: Maybe<Property_Authentication>
   insert_property_factory_create?: Maybe<Property_Factory_Create_Mutation_Response>
+  insert_property_factory_create_one?: Maybe<Property_Factory_Create>
   insert_reward_calculation_result?: Maybe<Reward_Calculation_Result_Mutation_Response>
+  insert_reward_calculation_result_one?: Maybe<Reward_Calculation_Result>
   update_allocator_allocation_result?: Maybe<Allocator_Allocation_Result_Mutation_Response>
+  update_allocator_allocation_result_by_pk?: Maybe<Allocator_Allocation_Result>
   update_allocator_before_allocation?: Maybe<Allocator_Before_Allocation_Mutation_Response>
+  update_allocator_before_allocation_by_pk?: Maybe<Allocator_Before_Allocation>
   update_lockup_lockedup?: Maybe<Lockup_Lockedup_Mutation_Response>
+  update_lockup_lockedup_by_pk?: Maybe<Lockup_Lockedup>
   update_market_factory_create?: Maybe<Market_Factory_Create_Mutation_Response>
+  update_market_factory_create_by_pk?: Maybe<Market_Factory_Create>
   update_metrics_factory_create?: Maybe<Metrics_Factory_Create_Mutation_Response>
+  update_metrics_factory_create_by_pk?: Maybe<Metrics_Factory_Create>
   update_metrics_factory_destroy?: Maybe<Metrics_Factory_Destroy_Mutation_Response>
+  update_metrics_factory_destroy_by_pk?: Maybe<Metrics_Factory_Destroy>
   update_policy_factory_create?: Maybe<Policy_Factory_Create_Mutation_Response>
+  update_policy_factory_create_by_pk?: Maybe<Policy_Factory_Create>
   update_property_authentication?: Maybe<Property_Authentication_Mutation_Response>
+  update_property_authentication_by_pk?: Maybe<Property_Authentication>
   update_property_authentication_deleted?: Maybe<Property_Authentication_Deleted_Mutation_Response>
+  update_property_authentication_deleted_by_pk?: Maybe<Property_Authentication_Deleted>
   update_property_factory_create?: Maybe<Property_Factory_Create_Mutation_Response>
+  update_property_factory_create_by_pk?: Maybe<Property_Factory_Create>
   update_reward_calculation_result?: Maybe<Reward_Calculation_Result_Mutation_Response>
+  update_reward_calculation_result_by_pk?: Maybe<Reward_Calculation_Result>
 }
 
 export type Mutation_RootDelete_Allocator_Allocation_ResultArgs = {
   where: Allocator_Allocation_Result_Bool_Exp
 }
 
+export type Mutation_RootDelete_Allocator_Allocation_Result_By_PkArgs = {
+  event_id: Scalars['String']
+}
+
 export type Mutation_RootDelete_Allocator_Before_AllocationArgs = {
   where: Allocator_Before_Allocation_Bool_Exp
+}
+
+export type Mutation_RootDelete_Allocator_Before_Allocation_By_PkArgs = {
+  event_id: Scalars['String']
 }
 
 export type Mutation_RootDelete_Lockup_LockedupArgs = {
   where: Lockup_Lockedup_Bool_Exp
 }
 
+export type Mutation_RootDelete_Lockup_Lockedup_By_PkArgs = {
+  event_id: Scalars['String']
+}
+
 export type Mutation_RootDelete_Market_Factory_CreateArgs = {
   where: Market_Factory_Create_Bool_Exp
+}
+
+export type Mutation_RootDelete_Market_Factory_Create_By_PkArgs = {
+  event_id: Scalars['String']
 }
 
 export type Mutation_RootDelete_Metrics_Factory_CreateArgs = {
   where: Metrics_Factory_Create_Bool_Exp
 }
 
+export type Mutation_RootDelete_Metrics_Factory_Create_By_PkArgs = {
+  event_id: Scalars['String']
+}
+
 export type Mutation_RootDelete_Metrics_Factory_DestroyArgs = {
   where: Metrics_Factory_Destroy_Bool_Exp
+}
+
+export type Mutation_RootDelete_Metrics_Factory_Destroy_By_PkArgs = {
+  event_id: Scalars['String']
 }
 
 export type Mutation_RootDelete_Policy_Factory_CreateArgs = {
   where: Policy_Factory_Create_Bool_Exp
 }
 
+export type Mutation_RootDelete_Policy_Factory_Create_By_PkArgs = {
+  event_id: Scalars['String']
+}
+
 export type Mutation_RootDelete_Property_AuthenticationArgs = {
   where: Property_Authentication_Bool_Exp
+}
+
+export type Mutation_RootDelete_Property_Authentication_By_PkArgs = {
+  metrics: Scalars['String']
+  property: Scalars['String']
 }
 
 export type Mutation_RootDelete_Property_Authentication_DeletedArgs = {
   where: Property_Authentication_Deleted_Bool_Exp
 }
 
+export type Mutation_RootDelete_Property_Authentication_Deleted_By_PkArgs = {
+  metrics: Scalars['String']
+  property: Scalars['String']
+}
+
 export type Mutation_RootDelete_Property_Factory_CreateArgs = {
   where: Property_Factory_Create_Bool_Exp
+}
+
+export type Mutation_RootDelete_Property_Factory_Create_By_PkArgs = {
+  event_id: Scalars['String']
 }
 
 export type Mutation_RootDelete_Reward_Calculation_ResultArgs = {
   where: Reward_Calculation_Result_Bool_Exp
 }
 
+export type Mutation_RootDelete_Reward_Calculation_Result_By_PkArgs = {
+  alocator_allocation_result_event_id: Scalars['String']
+}
+
 export type Mutation_RootInsert_Allocator_Allocation_ResultArgs = {
   objects: Array<Allocator_Allocation_Result_Insert_Input>
+  on_conflict?: Maybe<Allocator_Allocation_Result_On_Conflict>
+}
+
+export type Mutation_RootInsert_Allocator_Allocation_Result_OneArgs = {
+  object: Allocator_Allocation_Result_Insert_Input
   on_conflict?: Maybe<Allocator_Allocation_Result_On_Conflict>
 }
 
@@ -2166,8 +2400,18 @@ export type Mutation_RootInsert_Allocator_Before_AllocationArgs = {
   on_conflict?: Maybe<Allocator_Before_Allocation_On_Conflict>
 }
 
+export type Mutation_RootInsert_Allocator_Before_Allocation_OneArgs = {
+  object: Allocator_Before_Allocation_Insert_Input
+  on_conflict?: Maybe<Allocator_Before_Allocation_On_Conflict>
+}
+
 export type Mutation_RootInsert_Lockup_LockedupArgs = {
   objects: Array<Lockup_Lockedup_Insert_Input>
+  on_conflict?: Maybe<Lockup_Lockedup_On_Conflict>
+}
+
+export type Mutation_RootInsert_Lockup_Lockedup_OneArgs = {
+  object: Lockup_Lockedup_Insert_Input
   on_conflict?: Maybe<Lockup_Lockedup_On_Conflict>
 }
 
@@ -2176,8 +2420,18 @@ export type Mutation_RootInsert_Market_Factory_CreateArgs = {
   on_conflict?: Maybe<Market_Factory_Create_On_Conflict>
 }
 
+export type Mutation_RootInsert_Market_Factory_Create_OneArgs = {
+  object: Market_Factory_Create_Insert_Input
+  on_conflict?: Maybe<Market_Factory_Create_On_Conflict>
+}
+
 export type Mutation_RootInsert_Metrics_Factory_CreateArgs = {
   objects: Array<Metrics_Factory_Create_Insert_Input>
+  on_conflict?: Maybe<Metrics_Factory_Create_On_Conflict>
+}
+
+export type Mutation_RootInsert_Metrics_Factory_Create_OneArgs = {
+  object: Metrics_Factory_Create_Insert_Input
   on_conflict?: Maybe<Metrics_Factory_Create_On_Conflict>
 }
 
@@ -2186,8 +2440,18 @@ export type Mutation_RootInsert_Metrics_Factory_DestroyArgs = {
   on_conflict?: Maybe<Metrics_Factory_Destroy_On_Conflict>
 }
 
+export type Mutation_RootInsert_Metrics_Factory_Destroy_OneArgs = {
+  object: Metrics_Factory_Destroy_Insert_Input
+  on_conflict?: Maybe<Metrics_Factory_Destroy_On_Conflict>
+}
+
 export type Mutation_RootInsert_Policy_Factory_CreateArgs = {
   objects: Array<Policy_Factory_Create_Insert_Input>
+  on_conflict?: Maybe<Policy_Factory_Create_On_Conflict>
+}
+
+export type Mutation_RootInsert_Policy_Factory_Create_OneArgs = {
+  object: Policy_Factory_Create_Insert_Input
   on_conflict?: Maybe<Policy_Factory_Create_On_Conflict>
 }
 
@@ -2201,13 +2465,33 @@ export type Mutation_RootInsert_Property_Authentication_DeletedArgs = {
   on_conflict?: Maybe<Property_Authentication_Deleted_On_Conflict>
 }
 
+export type Mutation_RootInsert_Property_Authentication_Deleted_OneArgs = {
+  object: Property_Authentication_Deleted_Insert_Input
+  on_conflict?: Maybe<Property_Authentication_Deleted_On_Conflict>
+}
+
+export type Mutation_RootInsert_Property_Authentication_OneArgs = {
+  object: Property_Authentication_Insert_Input
+  on_conflict?: Maybe<Property_Authentication_On_Conflict>
+}
+
 export type Mutation_RootInsert_Property_Factory_CreateArgs = {
   objects: Array<Property_Factory_Create_Insert_Input>
   on_conflict?: Maybe<Property_Factory_Create_On_Conflict>
 }
 
+export type Mutation_RootInsert_Property_Factory_Create_OneArgs = {
+  object: Property_Factory_Create_Insert_Input
+  on_conflict?: Maybe<Property_Factory_Create_On_Conflict>
+}
+
 export type Mutation_RootInsert_Reward_Calculation_ResultArgs = {
   objects: Array<Reward_Calculation_Result_Insert_Input>
+  on_conflict?: Maybe<Reward_Calculation_Result_On_Conflict>
+}
+
+export type Mutation_RootInsert_Reward_Calculation_Result_OneArgs = {
+  object: Reward_Calculation_Result_Insert_Input
   on_conflict?: Maybe<Reward_Calculation_Result_On_Conflict>
 }
 
@@ -2217,10 +2501,22 @@ export type Mutation_RootUpdate_Allocator_Allocation_ResultArgs = {
   where: Allocator_Allocation_Result_Bool_Exp
 }
 
+export type Mutation_RootUpdate_Allocator_Allocation_Result_By_PkArgs = {
+  _inc?: Maybe<Allocator_Allocation_Result_Inc_Input>
+  _set?: Maybe<Allocator_Allocation_Result_Set_Input>
+  pk_columns: Allocator_Allocation_Result_Pk_Columns_Input
+}
+
 export type Mutation_RootUpdate_Allocator_Before_AllocationArgs = {
   _inc?: Maybe<Allocator_Before_Allocation_Inc_Input>
   _set?: Maybe<Allocator_Before_Allocation_Set_Input>
   where: Allocator_Before_Allocation_Bool_Exp
+}
+
+export type Mutation_RootUpdate_Allocator_Before_Allocation_By_PkArgs = {
+  _inc?: Maybe<Allocator_Before_Allocation_Inc_Input>
+  _set?: Maybe<Allocator_Before_Allocation_Set_Input>
+  pk_columns: Allocator_Before_Allocation_Pk_Columns_Input
 }
 
 export type Mutation_RootUpdate_Lockup_LockedupArgs = {
@@ -2229,10 +2525,22 @@ export type Mutation_RootUpdate_Lockup_LockedupArgs = {
   where: Lockup_Lockedup_Bool_Exp
 }
 
+export type Mutation_RootUpdate_Lockup_Lockedup_By_PkArgs = {
+  _inc?: Maybe<Lockup_Lockedup_Inc_Input>
+  _set?: Maybe<Lockup_Lockedup_Set_Input>
+  pk_columns: Lockup_Lockedup_Pk_Columns_Input
+}
+
 export type Mutation_RootUpdate_Market_Factory_CreateArgs = {
   _inc?: Maybe<Market_Factory_Create_Inc_Input>
   _set?: Maybe<Market_Factory_Create_Set_Input>
   where: Market_Factory_Create_Bool_Exp
+}
+
+export type Mutation_RootUpdate_Market_Factory_Create_By_PkArgs = {
+  _inc?: Maybe<Market_Factory_Create_Inc_Input>
+  _set?: Maybe<Market_Factory_Create_Set_Input>
+  pk_columns: Market_Factory_Create_Pk_Columns_Input
 }
 
 export type Mutation_RootUpdate_Metrics_Factory_CreateArgs = {
@@ -2241,10 +2549,22 @@ export type Mutation_RootUpdate_Metrics_Factory_CreateArgs = {
   where: Metrics_Factory_Create_Bool_Exp
 }
 
+export type Mutation_RootUpdate_Metrics_Factory_Create_By_PkArgs = {
+  _inc?: Maybe<Metrics_Factory_Create_Inc_Input>
+  _set?: Maybe<Metrics_Factory_Create_Set_Input>
+  pk_columns: Metrics_Factory_Create_Pk_Columns_Input
+}
+
 export type Mutation_RootUpdate_Metrics_Factory_DestroyArgs = {
   _inc?: Maybe<Metrics_Factory_Destroy_Inc_Input>
   _set?: Maybe<Metrics_Factory_Destroy_Set_Input>
   where: Metrics_Factory_Destroy_Bool_Exp
+}
+
+export type Mutation_RootUpdate_Metrics_Factory_Destroy_By_PkArgs = {
+  _inc?: Maybe<Metrics_Factory_Destroy_Inc_Input>
+  _set?: Maybe<Metrics_Factory_Destroy_Set_Input>
+  pk_columns: Metrics_Factory_Destroy_Pk_Columns_Input
 }
 
 export type Mutation_RootUpdate_Policy_Factory_CreateArgs = {
@@ -2253,10 +2573,22 @@ export type Mutation_RootUpdate_Policy_Factory_CreateArgs = {
   where: Policy_Factory_Create_Bool_Exp
 }
 
+export type Mutation_RootUpdate_Policy_Factory_Create_By_PkArgs = {
+  _inc?: Maybe<Policy_Factory_Create_Inc_Input>
+  _set?: Maybe<Policy_Factory_Create_Set_Input>
+  pk_columns: Policy_Factory_Create_Pk_Columns_Input
+}
+
 export type Mutation_RootUpdate_Property_AuthenticationArgs = {
   _inc?: Maybe<Property_Authentication_Inc_Input>
   _set?: Maybe<Property_Authentication_Set_Input>
   where: Property_Authentication_Bool_Exp
+}
+
+export type Mutation_RootUpdate_Property_Authentication_By_PkArgs = {
+  _inc?: Maybe<Property_Authentication_Inc_Input>
+  _set?: Maybe<Property_Authentication_Set_Input>
+  pk_columns: Property_Authentication_Pk_Columns_Input
 }
 
 export type Mutation_RootUpdate_Property_Authentication_DeletedArgs = {
@@ -2265,16 +2597,34 @@ export type Mutation_RootUpdate_Property_Authentication_DeletedArgs = {
   where: Property_Authentication_Deleted_Bool_Exp
 }
 
+export type Mutation_RootUpdate_Property_Authentication_Deleted_By_PkArgs = {
+  _inc?: Maybe<Property_Authentication_Deleted_Inc_Input>
+  _set?: Maybe<Property_Authentication_Deleted_Set_Input>
+  pk_columns: Property_Authentication_Deleted_Pk_Columns_Input
+}
+
 export type Mutation_RootUpdate_Property_Factory_CreateArgs = {
   _inc?: Maybe<Property_Factory_Create_Inc_Input>
   _set?: Maybe<Property_Factory_Create_Set_Input>
   where: Property_Factory_Create_Bool_Exp
 }
 
+export type Mutation_RootUpdate_Property_Factory_Create_By_PkArgs = {
+  _inc?: Maybe<Property_Factory_Create_Inc_Input>
+  _set?: Maybe<Property_Factory_Create_Set_Input>
+  pk_columns: Property_Factory_Create_Pk_Columns_Input
+}
+
 export type Mutation_RootUpdate_Reward_Calculation_ResultArgs = {
   _inc?: Maybe<Reward_Calculation_Result_Inc_Input>
   _set?: Maybe<Reward_Calculation_Result_Set_Input>
   where: Reward_Calculation_Result_Bool_Exp
+}
+
+export type Mutation_RootUpdate_Reward_Calculation_Result_By_PkArgs = {
+  _inc?: Maybe<Reward_Calculation_Result_Inc_Input>
+  _set?: Maybe<Reward_Calculation_Result_Set_Input>
+  pk_columns: Reward_Calculation_Result_Pk_Columns_Input
 }
 
 export type Numeric_Comparison_Exp = {
@@ -3203,7 +3553,25 @@ export type Policy_Factory_Create = {
   log_index: Scalars['Int']
   policy_address: Scalars['String']
   raw_data: Scalars['String']
+  reward: Array<Reward_Calculation_Result>
+  reward_aggregate: Reward_Calculation_Result_Aggregate
   transaction_index: Scalars['Int']
+}
+
+export type Policy_Factory_CreateRewardArgs = {
+  distinct_on?: Maybe<Array<Reward_Calculation_Result_Select_Column>>
+  limit?: Maybe<Scalars['Int']>
+  offset?: Maybe<Scalars['Int']>
+  order_by?: Maybe<Array<Reward_Calculation_Result_Order_By>>
+  where?: Maybe<Reward_Calculation_Result_Bool_Exp>
+}
+
+export type Policy_Factory_CreateReward_AggregateArgs = {
+  distinct_on?: Maybe<Array<Reward_Calculation_Result_Select_Column>>
+  limit?: Maybe<Scalars['Int']>
+  offset?: Maybe<Scalars['Int']>
+  order_by?: Maybe<Array<Reward_Calculation_Result_Order_By>>
+  where?: Maybe<Reward_Calculation_Result_Bool_Exp>
 }
 
 export type Policy_Factory_Create_Aggregate = {
@@ -3275,6 +3643,7 @@ export type Policy_Factory_Create_Bool_Exp = {
   log_index?: Maybe<Int_Comparison_Exp>
   policy_address?: Maybe<String_Comparison_Exp>
   raw_data?: Maybe<String_Comparison_Exp>
+  reward?: Maybe<Reward_Calculation_Result_Bool_Exp>
   transaction_index?: Maybe<Int_Comparison_Exp>
 }
 
@@ -3296,6 +3665,7 @@ export type Policy_Factory_Create_Insert_Input = {
   log_index?: Maybe<Scalars['Int']>
   policy_address?: Maybe<Scalars['String']>
   raw_data?: Maybe<Scalars['String']>
+  reward?: Maybe<Reward_Calculation_Result_Arr_Rel_Insert_Input>
   transaction_index?: Maybe<Scalars['Int']>
 }
 
@@ -3370,7 +3740,12 @@ export type Policy_Factory_Create_Order_By = {
   log_index?: Maybe<Order_By>
   policy_address?: Maybe<Order_By>
   raw_data?: Maybe<Order_By>
+  reward_aggregate?: Maybe<Reward_Calculation_Result_Aggregate_Order_By>
   transaction_index?: Maybe<Order_By>
+}
+
+export type Policy_Factory_Create_Pk_Columns_Input = {
+  event_id: Scalars['String']
 }
 
 export enum Policy_Factory_Create_Select_Column {
@@ -3499,11 +3874,49 @@ export type Policy_Factory_Create_Variance_Order_By = {
 
 export type Property_Authentication = {
   __typename?: 'property_authentication'
+  allocation: Array<Allocator_Allocation_Result>
+  allocation_aggregate: Allocator_Allocation_Result_Aggregate
   authentication_id: Scalars['String']
   block_number: Scalars['Int']
   market: Scalars['String']
+  market_creation?: Maybe<Market_Factory_Create>
   metrics: Scalars['String']
   property: Scalars['String']
+  property_creation?: Maybe<Property_Factory_Create>
+  reward: Array<Reward_Calculation_Result>
+  reward_aggregate: Reward_Calculation_Result_Aggregate
+}
+
+export type Property_AuthenticationAllocationArgs = {
+  distinct_on?: Maybe<Array<Allocator_Allocation_Result_Select_Column>>
+  limit?: Maybe<Scalars['Int']>
+  offset?: Maybe<Scalars['Int']>
+  order_by?: Maybe<Array<Allocator_Allocation_Result_Order_By>>
+  where?: Maybe<Allocator_Allocation_Result_Bool_Exp>
+}
+
+export type Property_AuthenticationAllocation_AggregateArgs = {
+  distinct_on?: Maybe<Array<Allocator_Allocation_Result_Select_Column>>
+  limit?: Maybe<Scalars['Int']>
+  offset?: Maybe<Scalars['Int']>
+  order_by?: Maybe<Array<Allocator_Allocation_Result_Order_By>>
+  where?: Maybe<Allocator_Allocation_Result_Bool_Exp>
+}
+
+export type Property_AuthenticationRewardArgs = {
+  distinct_on?: Maybe<Array<Reward_Calculation_Result_Select_Column>>
+  limit?: Maybe<Scalars['Int']>
+  offset?: Maybe<Scalars['Int']>
+  order_by?: Maybe<Array<Reward_Calculation_Result_Order_By>>
+  where?: Maybe<Reward_Calculation_Result_Bool_Exp>
+}
+
+export type Property_AuthenticationReward_AggregateArgs = {
+  distinct_on?: Maybe<Array<Reward_Calculation_Result_Select_Column>>
+  limit?: Maybe<Scalars['Int']>
+  offset?: Maybe<Scalars['Int']>
+  order_by?: Maybe<Array<Reward_Calculation_Result_Order_By>>
+  where?: Maybe<Reward_Calculation_Result_Bool_Exp>
 }
 
 export type Property_Authentication_Aggregate = {
@@ -3564,11 +3977,15 @@ export type Property_Authentication_Bool_Exp = {
   _and?: Maybe<Array<Maybe<Property_Authentication_Bool_Exp>>>
   _not?: Maybe<Property_Authentication_Bool_Exp>
   _or?: Maybe<Array<Maybe<Property_Authentication_Bool_Exp>>>
+  allocation?: Maybe<Allocator_Allocation_Result_Bool_Exp>
   authentication_id?: Maybe<String_Comparison_Exp>
   block_number?: Maybe<Int_Comparison_Exp>
   market?: Maybe<String_Comparison_Exp>
+  market_creation?: Maybe<Market_Factory_Create_Bool_Exp>
   metrics?: Maybe<String_Comparison_Exp>
   property?: Maybe<String_Comparison_Exp>
+  property_creation?: Maybe<Property_Factory_Create_Bool_Exp>
+  reward?: Maybe<Reward_Calculation_Result_Bool_Exp>
 }
 
 export enum Property_Authentication_Constraint {
@@ -3577,11 +3994,49 @@ export enum Property_Authentication_Constraint {
 
 export type Property_Authentication_Deleted = {
   __typename?: 'property_authentication_deleted'
+  allocation: Array<Allocator_Allocation_Result>
+  allocation_aggregate: Allocator_Allocation_Result_Aggregate
   authentication_id: Scalars['String']
   block_number: Scalars['Int']
   market: Scalars['String']
+  market_creation?: Maybe<Market_Factory_Create>
   metrics: Scalars['String']
   property: Scalars['String']
+  property_creation?: Maybe<Property_Factory_Create>
+  reward: Array<Reward_Calculation_Result>
+  reward_aggregate: Reward_Calculation_Result_Aggregate
+}
+
+export type Property_Authentication_DeletedAllocationArgs = {
+  distinct_on?: Maybe<Array<Allocator_Allocation_Result_Select_Column>>
+  limit?: Maybe<Scalars['Int']>
+  offset?: Maybe<Scalars['Int']>
+  order_by?: Maybe<Array<Allocator_Allocation_Result_Order_By>>
+  where?: Maybe<Allocator_Allocation_Result_Bool_Exp>
+}
+
+export type Property_Authentication_DeletedAllocation_AggregateArgs = {
+  distinct_on?: Maybe<Array<Allocator_Allocation_Result_Select_Column>>
+  limit?: Maybe<Scalars['Int']>
+  offset?: Maybe<Scalars['Int']>
+  order_by?: Maybe<Array<Allocator_Allocation_Result_Order_By>>
+  where?: Maybe<Allocator_Allocation_Result_Bool_Exp>
+}
+
+export type Property_Authentication_DeletedRewardArgs = {
+  distinct_on?: Maybe<Array<Reward_Calculation_Result_Select_Column>>
+  limit?: Maybe<Scalars['Int']>
+  offset?: Maybe<Scalars['Int']>
+  order_by?: Maybe<Array<Reward_Calculation_Result_Order_By>>
+  where?: Maybe<Reward_Calculation_Result_Bool_Exp>
+}
+
+export type Property_Authentication_DeletedReward_AggregateArgs = {
+  distinct_on?: Maybe<Array<Reward_Calculation_Result_Select_Column>>
+  limit?: Maybe<Scalars['Int']>
+  offset?: Maybe<Scalars['Int']>
+  order_by?: Maybe<Array<Reward_Calculation_Result_Order_By>>
+  where?: Maybe<Reward_Calculation_Result_Bool_Exp>
 }
 
 export type Property_Authentication_Deleted_Aggregate = {
@@ -3642,11 +4097,15 @@ export type Property_Authentication_Deleted_Bool_Exp = {
   _and?: Maybe<Array<Maybe<Property_Authentication_Deleted_Bool_Exp>>>
   _not?: Maybe<Property_Authentication_Deleted_Bool_Exp>
   _or?: Maybe<Array<Maybe<Property_Authentication_Deleted_Bool_Exp>>>
+  allocation?: Maybe<Allocator_Allocation_Result_Bool_Exp>
   authentication_id?: Maybe<String_Comparison_Exp>
   block_number?: Maybe<Int_Comparison_Exp>
   market?: Maybe<String_Comparison_Exp>
+  market_creation?: Maybe<Market_Factory_Create_Bool_Exp>
   metrics?: Maybe<String_Comparison_Exp>
   property?: Maybe<String_Comparison_Exp>
+  property_creation?: Maybe<Property_Factory_Create_Bool_Exp>
+  reward?: Maybe<Reward_Calculation_Result_Bool_Exp>
 }
 
 export enum Property_Authentication_Deleted_Constraint {
@@ -3658,11 +4117,15 @@ export type Property_Authentication_Deleted_Inc_Input = {
 }
 
 export type Property_Authentication_Deleted_Insert_Input = {
+  allocation?: Maybe<Allocator_Allocation_Result_Arr_Rel_Insert_Input>
   authentication_id?: Maybe<Scalars['String']>
   block_number?: Maybe<Scalars['Int']>
   market?: Maybe<Scalars['String']>
+  market_creation?: Maybe<Market_Factory_Create_Obj_Rel_Insert_Input>
   metrics?: Maybe<Scalars['String']>
   property?: Maybe<Scalars['String']>
+  property_creation?: Maybe<Property_Factory_Create_Obj_Rel_Insert_Input>
+  reward?: Maybe<Reward_Calculation_Result_Arr_Rel_Insert_Input>
 }
 
 export type Property_Authentication_Deleted_Max_Fields = {
@@ -3717,11 +4180,20 @@ export type Property_Authentication_Deleted_On_Conflict = {
 }
 
 export type Property_Authentication_Deleted_Order_By = {
+  allocation_aggregate?: Maybe<Allocator_Allocation_Result_Aggregate_Order_By>
   authentication_id?: Maybe<Order_By>
   block_number?: Maybe<Order_By>
   market?: Maybe<Order_By>
+  market_creation?: Maybe<Market_Factory_Create_Order_By>
   metrics?: Maybe<Order_By>
   property?: Maybe<Order_By>
+  property_creation?: Maybe<Property_Factory_Create_Order_By>
+  reward_aggregate?: Maybe<Reward_Calculation_Result_Aggregate_Order_By>
+}
+
+export type Property_Authentication_Deleted_Pk_Columns_Input = {
+  metrics: Scalars['String']
+  property: Scalars['String']
 }
 
 export enum Property_Authentication_Deleted_Select_Column {
@@ -3816,11 +4288,15 @@ export type Property_Authentication_Inc_Input = {
 }
 
 export type Property_Authentication_Insert_Input = {
+  allocation?: Maybe<Allocator_Allocation_Result_Arr_Rel_Insert_Input>
   authentication_id?: Maybe<Scalars['String']>
   block_number?: Maybe<Scalars['Int']>
   market?: Maybe<Scalars['String']>
+  market_creation?: Maybe<Market_Factory_Create_Obj_Rel_Insert_Input>
   metrics?: Maybe<Scalars['String']>
   property?: Maybe<Scalars['String']>
+  property_creation?: Maybe<Property_Factory_Create_Obj_Rel_Insert_Input>
+  reward?: Maybe<Reward_Calculation_Result_Arr_Rel_Insert_Input>
 }
 
 export type Property_Authentication_Max_Fields = {
@@ -3875,11 +4351,20 @@ export type Property_Authentication_On_Conflict = {
 }
 
 export type Property_Authentication_Order_By = {
+  allocation_aggregate?: Maybe<Allocator_Allocation_Result_Aggregate_Order_By>
   authentication_id?: Maybe<Order_By>
   block_number?: Maybe<Order_By>
   market?: Maybe<Order_By>
+  market_creation?: Maybe<Market_Factory_Create_Order_By>
   metrics?: Maybe<Order_By>
   property?: Maybe<Order_By>
+  property_creation?: Maybe<Property_Factory_Create_Order_By>
+  reward_aggregate?: Maybe<Reward_Calculation_Result_Aggregate_Order_By>
+}
+
+export type Property_Authentication_Pk_Columns_Input = {
+  metrics: Scalars['String']
+  property: Scalars['String']
 }
 
 export enum Property_Authentication_Select_Column {
@@ -3971,13 +4456,85 @@ export type Property_Authentication_Variance_Order_By = {
 
 export type Property_Factory_Create = {
   __typename?: 'property_factory_create'
+  allocation: Array<Allocator_Allocation_Result>
+  allocation_aggregate: Allocator_Allocation_Result_Aggregate
+  authentication: Array<Property_Authentication>
+  authentication_aggregate: Property_Authentication_Aggregate
   block_number: Scalars['Int']
+  deleted_authentication: Array<Property_Authentication_Deleted>
+  deleted_authentication_aggregate: Property_Authentication_Deleted_Aggregate
   event_id: Scalars['String']
   from_address: Scalars['String']
   log_index: Scalars['Int']
   property: Scalars['String']
+  property_creation: Array<Lockup_Lockedup>
+  property_creation_aggregate: Lockup_Lockedup_Aggregate
   raw_data: Scalars['String']
   transaction_index: Scalars['Int']
+}
+
+export type Property_Factory_CreateAllocationArgs = {
+  distinct_on?: Maybe<Array<Allocator_Allocation_Result_Select_Column>>
+  limit?: Maybe<Scalars['Int']>
+  offset?: Maybe<Scalars['Int']>
+  order_by?: Maybe<Array<Allocator_Allocation_Result_Order_By>>
+  where?: Maybe<Allocator_Allocation_Result_Bool_Exp>
+}
+
+export type Property_Factory_CreateAllocation_AggregateArgs = {
+  distinct_on?: Maybe<Array<Allocator_Allocation_Result_Select_Column>>
+  limit?: Maybe<Scalars['Int']>
+  offset?: Maybe<Scalars['Int']>
+  order_by?: Maybe<Array<Allocator_Allocation_Result_Order_By>>
+  where?: Maybe<Allocator_Allocation_Result_Bool_Exp>
+}
+
+export type Property_Factory_CreateAuthenticationArgs = {
+  distinct_on?: Maybe<Array<Property_Authentication_Select_Column>>
+  limit?: Maybe<Scalars['Int']>
+  offset?: Maybe<Scalars['Int']>
+  order_by?: Maybe<Array<Property_Authentication_Order_By>>
+  where?: Maybe<Property_Authentication_Bool_Exp>
+}
+
+export type Property_Factory_CreateAuthentication_AggregateArgs = {
+  distinct_on?: Maybe<Array<Property_Authentication_Select_Column>>
+  limit?: Maybe<Scalars['Int']>
+  offset?: Maybe<Scalars['Int']>
+  order_by?: Maybe<Array<Property_Authentication_Order_By>>
+  where?: Maybe<Property_Authentication_Bool_Exp>
+}
+
+export type Property_Factory_CreateDeleted_AuthenticationArgs = {
+  distinct_on?: Maybe<Array<Property_Authentication_Deleted_Select_Column>>
+  limit?: Maybe<Scalars['Int']>
+  offset?: Maybe<Scalars['Int']>
+  order_by?: Maybe<Array<Property_Authentication_Deleted_Order_By>>
+  where?: Maybe<Property_Authentication_Deleted_Bool_Exp>
+}
+
+export type Property_Factory_CreateDeleted_Authentication_AggregateArgs = {
+  distinct_on?: Maybe<Array<Property_Authentication_Deleted_Select_Column>>
+  limit?: Maybe<Scalars['Int']>
+  offset?: Maybe<Scalars['Int']>
+  order_by?: Maybe<Array<Property_Authentication_Deleted_Order_By>>
+  where?: Maybe<Property_Authentication_Deleted_Bool_Exp>
+}
+
+export type Property_Factory_CreateProperty_CreationArgs = {
+  distinct_on?: Maybe<Array<Lockup_Lockedup_Select_Column>>
+  limit?: Maybe<Scalars['Int']>
+  offset?: Maybe<Scalars['Int']>
+  order_by?: Maybe<Array<Lockup_Lockedup_Order_By>>
+  where?: Maybe<Lockup_Lockedup_Bool_Exp>
+}
+
+export type Property_Factory_CreateProperty_Creation_AggregateArgs = {
+  distinct_on?: Maybe<Array<Lockup_Lockedup_Select_Column>>
+  limit?: Maybe<Scalars['Int']>
+  offset?: Maybe<Scalars['Int']>
+  order_by?: Maybe<Array<Lockup_Lockedup_Order_By>>
+  where?: Maybe<Lockup_Lockedup_Bool_Exp>
 }
 
 export type Property_Factory_Create_Aggregate = {
@@ -4042,11 +4599,15 @@ export type Property_Factory_Create_Bool_Exp = {
   _and?: Maybe<Array<Maybe<Property_Factory_Create_Bool_Exp>>>
   _not?: Maybe<Property_Factory_Create_Bool_Exp>
   _or?: Maybe<Array<Maybe<Property_Factory_Create_Bool_Exp>>>
+  allocation?: Maybe<Allocator_Allocation_Result_Bool_Exp>
+  authentication?: Maybe<Property_Authentication_Bool_Exp>
   block_number?: Maybe<Int_Comparison_Exp>
+  deleted_authentication?: Maybe<Property_Authentication_Deleted_Bool_Exp>
   event_id?: Maybe<String_Comparison_Exp>
   from_address?: Maybe<String_Comparison_Exp>
   log_index?: Maybe<Int_Comparison_Exp>
   property?: Maybe<String_Comparison_Exp>
+  property_creation?: Maybe<Lockup_Lockedup_Bool_Exp>
   raw_data?: Maybe<String_Comparison_Exp>
   transaction_index?: Maybe<Int_Comparison_Exp>
 }
@@ -4062,11 +4623,15 @@ export type Property_Factory_Create_Inc_Input = {
 }
 
 export type Property_Factory_Create_Insert_Input = {
+  allocation?: Maybe<Allocator_Allocation_Result_Arr_Rel_Insert_Input>
+  authentication?: Maybe<Property_Authentication_Arr_Rel_Insert_Input>
   block_number?: Maybe<Scalars['Int']>
+  deleted_authentication?: Maybe<Property_Authentication_Deleted_Arr_Rel_Insert_Input>
   event_id?: Maybe<Scalars['String']>
   from_address?: Maybe<Scalars['String']>
   log_index?: Maybe<Scalars['Int']>
   property?: Maybe<Scalars['String']>
+  property_creation?: Maybe<Lockup_Lockedup_Arr_Rel_Insert_Input>
   raw_data?: Maybe<Scalars['String']>
   transaction_index?: Maybe<Scalars['Int']>
 }
@@ -4131,13 +4696,21 @@ export type Property_Factory_Create_On_Conflict = {
 }
 
 export type Property_Factory_Create_Order_By = {
+  allocation_aggregate?: Maybe<Allocator_Allocation_Result_Aggregate_Order_By>
+  authentication_aggregate?: Maybe<Property_Authentication_Aggregate_Order_By>
   block_number?: Maybe<Order_By>
+  deleted_authentication_aggregate?: Maybe<Property_Authentication_Deleted_Aggregate_Order_By>
   event_id?: Maybe<Order_By>
   from_address?: Maybe<Order_By>
   log_index?: Maybe<Order_By>
   property?: Maybe<Order_By>
+  property_creation_aggregate?: Maybe<Lockup_Lockedup_Aggregate_Order_By>
   raw_data?: Maybe<Order_By>
   transaction_index?: Maybe<Order_By>
+}
+
+export type Property_Factory_Create_Pk_Columns_Input = {
+  event_id: Scalars['String']
 }
 
 export enum Property_Factory_Create_Select_Column {
@@ -4559,12 +5132,16 @@ export type Query_RootReward_Calculation_Result_By_PkArgs = {
 export type Reward_Calculation_Result = {
   __typename?: 'reward_calculation_result'
   allocate_result: Scalars['numeric']
+  allocation?: Maybe<Allocator_Allocation_Result>
   alocator_allocation_result_event_id: Scalars['String']
+  authentication?: Maybe<Property_Authentication>
   block_number: Scalars['Int']
   holder_reward: Scalars['numeric']
   lockup: Scalars['numeric']
   metrics: Scalars['String']
+  metrics_creation?: Maybe<Metrics_Factory_Create>
   policy: Scalars['String']
+  policy_creation?: Maybe<Policy_Factory_Create>
   staking_reward: Scalars['numeric']
 }
 
@@ -4635,12 +5212,16 @@ export type Reward_Calculation_Result_Bool_Exp = {
   _not?: Maybe<Reward_Calculation_Result_Bool_Exp>
   _or?: Maybe<Array<Maybe<Reward_Calculation_Result_Bool_Exp>>>
   allocate_result?: Maybe<Numeric_Comparison_Exp>
+  allocation?: Maybe<Allocator_Allocation_Result_Bool_Exp>
   alocator_allocation_result_event_id?: Maybe<String_Comparison_Exp>
+  authentication?: Maybe<Property_Authentication_Bool_Exp>
   block_number?: Maybe<Int_Comparison_Exp>
   holder_reward?: Maybe<Numeric_Comparison_Exp>
   lockup?: Maybe<Numeric_Comparison_Exp>
   metrics?: Maybe<String_Comparison_Exp>
+  metrics_creation?: Maybe<Metrics_Factory_Create_Bool_Exp>
   policy?: Maybe<String_Comparison_Exp>
+  policy_creation?: Maybe<Policy_Factory_Create_Bool_Exp>
   staking_reward?: Maybe<Numeric_Comparison_Exp>
 }
 
@@ -4649,17 +5230,25 @@ export enum Reward_Calculation_Result_Constraint {
 }
 
 export type Reward_Calculation_Result_Inc_Input = {
+  allocate_result?: Maybe<Scalars['numeric']>
   block_number?: Maybe<Scalars['Int']>
+  holder_reward?: Maybe<Scalars['numeric']>
+  lockup?: Maybe<Scalars['numeric']>
+  staking_reward?: Maybe<Scalars['numeric']>
 }
 
 export type Reward_Calculation_Result_Insert_Input = {
   allocate_result?: Maybe<Scalars['numeric']>
+  allocation?: Maybe<Allocator_Allocation_Result_Obj_Rel_Insert_Input>
   alocator_allocation_result_event_id?: Maybe<Scalars['String']>
+  authentication?: Maybe<Property_Authentication_Obj_Rel_Insert_Input>
   block_number?: Maybe<Scalars['Int']>
   holder_reward?: Maybe<Scalars['numeric']>
   lockup?: Maybe<Scalars['numeric']>
   metrics?: Maybe<Scalars['String']>
+  metrics_creation?: Maybe<Metrics_Factory_Create_Obj_Rel_Insert_Input>
   policy?: Maybe<Scalars['String']>
+  policy_creation?: Maybe<Policy_Factory_Create_Obj_Rel_Insert_Input>
   staking_reward?: Maybe<Scalars['numeric']>
 }
 
@@ -4728,13 +5317,21 @@ export type Reward_Calculation_Result_On_Conflict = {
 
 export type Reward_Calculation_Result_Order_By = {
   allocate_result?: Maybe<Order_By>
+  allocation?: Maybe<Allocator_Allocation_Result_Order_By>
   alocator_allocation_result_event_id?: Maybe<Order_By>
+  authentication?: Maybe<Property_Authentication_Order_By>
   block_number?: Maybe<Order_By>
   holder_reward?: Maybe<Order_By>
   lockup?: Maybe<Order_By>
   metrics?: Maybe<Order_By>
+  metrics_creation?: Maybe<Metrics_Factory_Create_Order_By>
   policy?: Maybe<Order_By>
+  policy_creation?: Maybe<Policy_Factory_Create_Order_By>
   staking_reward?: Maybe<Order_By>
+}
+
+export type Reward_Calculation_Result_Pk_Columns_Input = {
+  alocator_allocation_result_event_id: Scalars['String']
 }
 
 export enum Reward_Calculation_Result_Select_Column {
@@ -5597,7 +6194,11 @@ export type ListAllocatorAllocationResultsQueryResult = ApolloReactCommon.QueryR
 >
 export const ListPropertyDocument = gql`
   query ListProperty($limit: Int, $offset: Int) {
-    property_factory_create(limit: $limit, offset: $offset) {
+    property_factory_create(
+      limit: $limit
+      offset: $offset
+      order_by: { allocation_aggregate: { sum: { result: desc_nulls_last } } }
+    ) {
       ...propertyFactoryCreate
     }
     property_factory_create_aggregate {
