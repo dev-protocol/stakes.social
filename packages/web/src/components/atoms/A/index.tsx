@@ -4,6 +4,7 @@ import styled from 'styled-components'
 
 const StyledLink = styled.a`
   cursor: pointer;
+  display: contents;
 `
 
 export const A = (props: LinkProps) => (component: JSX.Element) => {
