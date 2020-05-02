@@ -6,14 +6,13 @@ exports[`AssetOutline Snapshot 1`] = `
     <div>
       <div
         class="ant-row"
-        style="margin-left: -56px; margin-right: -56px;"
       >
         <div
-          class="ant-col ant-col-10"
-          style="padding-left: 56px; padding-right: 56px;"
+          class="ant-col"
+          style="flex: 1 1 268px;"
         >
           <div
-            style="min-height: 270px;"
+            class="sc-AxirZ duFeLC"
           >
             <p
               style="font-size: 18px; line-height: 24px; color: rgb(0, 0, 0);"
@@ -50,28 +49,33 @@ exports[`AssetOutline Snapshot 1`] = `
           </div>
         </div>
         <div
-          class="ant-col ant-col-14"
-          style="padding-left: 56px; padding-right: 56px;"
+          class="ant-col"
+          style="flex: 0 1 500px;"
         >
-          <div>
+          <div
+            class="sc-AxirZ duFeLC"
+          >
             <p
-              style="font-size: 18px; line-height: 24px; color: rgb(0, 0, 0); padding: 0px 36px;"
+              style="font-size: 18px; line-height: 24px; color: rgb(0, 0, 0);"
             >
               Assets Strength
             </p>
             <div
-              class="ant-space ant-space-horizontal"
+              class="ant-row ant-row-middle"
+              style="margin-left: -24px; margin-right: -24px;"
             >
               <div
-                class="ant-space-item"
-                style="margin-right: 40px;"
+                class="ant-col ant-col-12"
+                style="padding-left: 24px; padding-right: 24px;"
               >
                 <div
-                  style="width: 224px; height: 224px; border-radius: 50%; background-color: rgb(47, 128, 237); background-clip: padding-box; border: 83.4010128px solid rgba(47, 128, 237, 0.2);"
+                  class="sc-AxjAm fDa-dQL"
+                  size="224"
                 />
               </div>
               <div
-                class="ant-space-item"
+                class="ant-col ant-col-12"
+                style="padding-left: 24px; padding-right: 24px;"
               >
                 <div>
                   <span

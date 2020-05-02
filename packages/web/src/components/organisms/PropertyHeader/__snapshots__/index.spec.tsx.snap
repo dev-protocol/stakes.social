@@ -4,7 +4,8 @@ exports[`PropertyHeader Snapshot 1`] = `
 <body>
   <div>
     <div
-      style="width: auto; position: relative; height: 562px; padding: 50px; background-size: cover;"
+      class="sc-AxirZ huUxbD"
+      style="background-size: cover;"
     >
       <a
         class="sc-AxjAm jIaAfJ"
@@ -28,8 +29,7 @@ exports[`PropertyHeader Snapshot 1`] = `
         </svg>
       </a>
       <button
-        class="ant-btn ant-btn-lg"
-        style="float: right;"
+        class="ant-btn sc-AxhCb iMHqqP ant-btn-lg"
         type="button"
       >
         <span>
@@ -37,7 +37,7 @@ exports[`PropertyHeader Snapshot 1`] = `
         </span>
       </button>
       <div
-        style="position: absolute; bottom: 0px; padding: 0px 0px 122px 333px; display: block;"
+        class="sc-AxiKw iSARrN"
       >
         <span
           style="background: white; padding: 0.5em;"
@@ -45,7 +45,7 @@ exports[`PropertyHeader Snapshot 1`] = `
           Property Address
         </span>
         <div
-          style="background: white;"
+          style="background: white; overflow: auto;"
         >
           propertyAddress
         </div>
