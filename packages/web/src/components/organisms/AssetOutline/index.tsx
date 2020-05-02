@@ -50,7 +50,7 @@ export const AssetOutline = ({ propertyAddress }: Props) => {
   return (
     <div>
       <Row>
-        <Col flex="1 1 300px">
+        <Col flex="1 1 268px">
           <ResponsivePropertyFrame>
             <p style={{ fontSize: '18px', lineHeight: '24px', color: '#000' }}>Included Assets</p>
             <List
@@ -65,7 +65,7 @@ export const AssetOutline = ({ propertyAddress }: Props) => {
             />
           </ResponsivePropertyFrame>
         </Col>
-        <Col flex="0 1 468px">
+        <Col flex="0 1 500px">
           <ResponsivePropertyFrame>
             <p style={{ fontSize: '18px', lineHeight: '24px', color: '#000' }}>Assets Strength</p>
             {metrics && market ? <AssetStrength metrics={metrics} market={market} /> : <AssetStrengthWithoutData />}
