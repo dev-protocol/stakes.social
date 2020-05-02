@@ -6220,7 +6220,11 @@ export type ListAllocatorAllocationResultsQueryResult = ApolloReactCommon.QueryR
 >
 export const ListPropertyDocument = gql`
   query ListProperty($limit: Int, $offset: Int) {
-    property_factory_create(limit: $limit, offset: $offset) {
+    property_factory_create(
+      limit: $limit
+      offset: $offset
+      order_by: { allocation_aggregate: { sum: { result: desc_nulls_last } } }
+    ) {
       ...propertyFactoryCreate
     }
     property_factory_create_aggregate {
