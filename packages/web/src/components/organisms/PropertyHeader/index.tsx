@@ -11,11 +11,11 @@ const ResponsivePropertyFrame = styled.div`
   padding: 50px;
   @media (max-width: 768px) {
     height: 360px;
-    padding: 25px;
+    padding: 18px;
   }
 `
 
-const ResponsivePropertyAddress = styled.div`
+const ResponsivePropertyAddressFrame = styled.div`
   position: absolute;
   bottom: 0;
   padding: 0 0 122px 333px;
@@ -27,10 +27,6 @@ const ResponsivePropertyAddress = styled.div`
 
 const ResponsiveButton = styled(Button)`
   float: right;
-  @media (max-width: 768px) {
-    float: none;
-    margin: 20px 0;
-  }
 `
 
 interface Props {
@@ -57,10 +53,10 @@ export const PropertyHeader = ({ propertyAddress }: Props) => {
         {isConnected && 'Wallet connected'}
         {!isConnected && 'Connect to a wallet'}
       </ResponsiveButton>
-      <ResponsivePropertyAddress>
+      <ResponsivePropertyAddressFrame>
         <span style={{ background: 'white', padding: '0.5em' }}>Property Address</span>
         <div style={{ background: 'white' }}>{propertyAddress}</div>
-      </ResponsivePropertyAddress>
+      </ResponsivePropertyAddressFrame>
     </ResponsivePropertyFrame>
   )
 }
