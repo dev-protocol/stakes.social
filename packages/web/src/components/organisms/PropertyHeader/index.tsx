@@ -22,6 +22,7 @@ const ResponsivePropertyAddressFrame = styled.div`
   display: block;
   @media (max-width: 768px) {
     padding: 0 0 100px 0;
+    width: 270px;
   }
 `
 
@@ -55,7 +56,7 @@ export const PropertyHeader = ({ propertyAddress }: Props) => {
       </ResponsiveButton>
       <ResponsivePropertyAddressFrame>
         <span style={{ background: 'white', padding: '0.5em' }}>Property Address</span>
-        <div style={{ background: 'white' }}>{propertyAddress}</div>
+        <div style={{ background: 'white', overflow: 'auto' }}>{propertyAddress}</div>
       </ResponsivePropertyAddressFrame>
     </ResponsivePropertyFrame>
   )
