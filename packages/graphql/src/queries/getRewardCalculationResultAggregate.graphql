@@ -7,4 +7,11 @@ query getRewardCalculationResultAggregate($metricsList: [String!]!) {
       }
     }
   }
+  reward_calculation_result(where: { block_number: { _gt: 9600000 }, metrics: { _in: $metricsList } }) {
+    allocation {
+      condition {
+        blocks
+      }
+    }
+  }
 }
