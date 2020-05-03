@@ -27,7 +27,7 @@ class NextApp extends App<AppInitialProps & WithApolloProps<{}>> {
     return (
       <>
         <Head>
-          <title>boiler</title>
+          <title>Stakes.social</title>
           <meta name="viewport" content="initial-scale=1.0, width=device-width" />
         </Head>
         <Component {...pageProps} apollo={apollo} />
