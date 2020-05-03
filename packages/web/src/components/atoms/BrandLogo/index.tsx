@@ -12,9 +12,9 @@ const link = A({ href: '/' })
 export const BrandLogo = ({ colorSchema, props }: Props) => {
   return link(
     colorSchema === 'black' ? (
-      <StakesSocialBlack {...props}></StakesSocialBlack>
+      <StakesSocialBlack height={undefined} {...props}></StakesSocialBlack>
     ) : (
-      <StakesSocialWhite {...props}></StakesSocialWhite>
+      <StakesSocialWhite height={undefined} {...props}></StakesSocialWhite>
     )
   )
 }

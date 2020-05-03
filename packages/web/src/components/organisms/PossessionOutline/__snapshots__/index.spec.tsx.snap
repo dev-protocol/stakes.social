@@ -13,10 +13,12 @@ exports[`PossessionOutline Snapshot 1`] = `
           class="ant-row"
         >
           <div
-            class="ant-col ant-col-6"
+            class="ant-col"
+            style="flex: 1 1 148px;"
           >
             <div
               class="ant-statistic"
+              style="margin: 12px 0px;"
             >
               <div
                 class="ant-statistic-title"
@@ -46,10 +48,12 @@ exports[`PossessionOutline Snapshot 1`] = `
             </div>
           </div>
           <div
-            class="ant-col ant-col-6"
+            class="ant-col"
+            style="flex: 1 1 148px;"
           >
             <div
               class="ant-statistic"
+              style="margin: 12px 0px;"
             >
               <div
                 class="ant-statistic-title"
@@ -79,10 +83,12 @@ exports[`PossessionOutline Snapshot 1`] = `
             </div>
           </div>
           <div
-            class="ant-col ant-col-6"
+            class="ant-col"
+            style="flex: 1 1 148px;"
           >
             <div
               class="ant-statistic"
+              style="margin: 12px 0px;"
             >
               <div
                 class="ant-statistic-title"
@@ -112,10 +118,12 @@ exports[`PossessionOutline Snapshot 1`] = `
             </div>
           </div>
           <div
-            class="ant-col ant-col-6"
+            class="ant-col"
+            style="flex: 1 1 148px;"
           >
             <div
               class="ant-statistic"
+              style="margin: 12px 0px;"
             >
               <div
                 class="ant-statistic-title"

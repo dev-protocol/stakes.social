@@ -36,10 +36,10 @@ exports[`PropertyCardList Snapshot 1`] = `
               </div>
             </div>
             <div
-              class="ant-col sc-AxirZ hKEMnW ant-col-sm-24 ant-col-md-14"
+              class="ant-col sc-AxiKw dkDCXm ant-col-sm-24 ant-col-md-14"
             >
               <div
-                class="ant-row sc-AxjAm iqrQmW"
+                class="ant-row sc-AxirZ dTFMDJ"
               >
                 <div
                   class="ant-col ant-col-10"
@@ -118,7 +118,8 @@ exports[`PropertyCardList Snapshot 1`] = `
                       % of markets
                     </span>
                     <div
-                      style="width: 81px; height: 81px; border-radius: 50%; background-color: rgb(47, 128, 237); background-clip: padding-box; border: 30.158401950000002px solid rgba(47, 128, 237, 0.2);"
+                      class="sc-AxjAm cqOJXy"
+                      size="81"
                     />
                   </div>
                 </div>

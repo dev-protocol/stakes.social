@@ -1,21 +1,34 @@
 import React, { useMemo } from 'react'
-import { List, Space, Row, Col } from 'antd'
+import { List, Row, Col } from 'antd'
 import { CircleGraph } from 'src/components/atoms/CircleGraph'
 import { useAssetStrength } from 'src/fixtures/dev-kit/hooks'
 import { useGetPropertyAuthenticationQuery } from '@dev/graphql'
+import styled from 'styled-components'
 
 interface Props {
   propertyAddress: string
 }
 
+const ResponsivePropertyFrame = styled.div`
+  padding: 0 28px;
+  min-height: 270px;
+  @media (max-width: 768px) {
+    padding: 0 18px;
+  }
+`
+
 const AssetStrengthBase = ({ assetStrength }: { assetStrength: number }) => (
-  <Space direction="horizontal" size={40}>
-    <CircleGraph size={224} percentage={assetStrength} />
-    <div>
-      <span style={{ fontSize: '36px', lineHeight: '48px', color: '#000' }}>{Math.round(assetStrength * 100)}%</span>
-      <span> of total market</span>
-    </div>
-  </Space>
+  <Row align="middle" gutter={48}>
+    <Col span={12}>
+      <CircleGraph size={224} percentage={assetStrength} />
+    </Col>
+    <Col span={12}>
+      <div>
+        <span style={{ fontSize: '36px', lineHeight: '48px', color: '#000' }}>{Math.round(assetStrength * 100)}%</span>
+        <span> of total market</span>
+      </div>
+    </Col>
+  </Row>
 )
 
 const AssetStrength = ({ metrics, market }: { metrics: string; market: string }) => {
@@ -36,9 +49,9 @@ export const AssetOutline = ({ propertyAddress }: Props) => {
 
   return (
     <div>
-      <Row gutter={112}>
-        <Col span={10}>
-          <div style={{ minHeight: '270px' }}>
+      <Row>
+        <Col flex="1 1 268px">
+          <ResponsivePropertyFrame>
             <p style={{ fontSize: '18px', lineHeight: '24px', color: '#000' }}>Included Assets</p>
             <List
               bordered
@@ -50,14 +63,13 @@ export const AssetOutline = ({ propertyAddress }: Props) => {
               )}
               style={{ maxHeight: '224px' }}
             />
-          </div>
+          </ResponsivePropertyFrame>
         </Col>
-        <Col span={14}>
-          <div>
-            <p style={{ fontSize: '18px', lineHeight: '24px', color: '#000', padding: '0 36px' }}>Assets Strength</p>
-
+        <Col flex="0 1 500px">
+          <ResponsivePropertyFrame>
+            <p style={{ fontSize: '18px', lineHeight: '24px', color: '#000' }}>Assets Strength</p>
             {metrics && market ? <AssetStrength metrics={metrics} market={market} /> : <AssetStrengthWithoutData />}
-          </div>
+          </ResponsivePropertyFrame>
         </Col>
       </Row>
     </div>
