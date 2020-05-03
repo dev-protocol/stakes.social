@@ -21,6 +21,7 @@ export type Allocator_Allocation_Result = {
   arg_value: Scalars['numeric']
   authentication?: Maybe<Property_Authentication>
   block_number: Scalars['Int']
+  condition?: Maybe<Allocator_Before_Allocation>
   event_id: Scalars['String']
   lockup_value: Scalars['numeric']
   log_index: Scalars['Int']
@@ -105,6 +106,7 @@ export type Allocator_Allocation_Result_Bool_Exp = {
   arg_value?: Maybe<Numeric_Comparison_Exp>
   authentication?: Maybe<Property_Authentication_Bool_Exp>
   block_number?: Maybe<Int_Comparison_Exp>
+  condition?: Maybe<Allocator_Before_Allocation_Bool_Exp>
   event_id?: Maybe<String_Comparison_Exp>
   lockup_value?: Maybe<Numeric_Comparison_Exp>
   log_index?: Maybe<Int_Comparison_Exp>
@@ -135,6 +137,7 @@ export type Allocator_Allocation_Result_Insert_Input = {
   arg_value?: Maybe<Scalars['numeric']>
   authentication?: Maybe<Property_Authentication_Obj_Rel_Insert_Input>
   block_number?: Maybe<Scalars['Int']>
+  condition?: Maybe<Allocator_Before_Allocation_Obj_Rel_Insert_Input>
   event_id?: Maybe<Scalars['String']>
   lockup_value?: Maybe<Scalars['numeric']>
   log_index?: Maybe<Scalars['Int']>
@@ -227,6 +230,7 @@ export type Allocator_Allocation_Result_Order_By = {
   arg_value?: Maybe<Order_By>
   authentication?: Maybe<Property_Authentication_Order_By>
   block_number?: Maybe<Order_By>
+  condition?: Maybe<Allocator_Before_Allocation_Order_By>
   event_id?: Maybe<Order_By>
   lockup_value?: Maybe<Order_By>
   log_index?: Maybe<Order_By>
@@ -429,6 +433,7 @@ export type Allocator_Before_Allocation = {
   market_value: Scalars['numeric']
   mint: Scalars['numeric']
   raw_data: Scalars['String']
+  result?: Maybe<Allocator_Allocation_Result>
   token_value: Scalars['numeric']
   total_assets: Scalars['numeric']
   transaction_index: Scalars['Int']
@@ -516,6 +521,7 @@ export type Allocator_Before_Allocation_Bool_Exp = {
   market_value?: Maybe<Numeric_Comparison_Exp>
   mint?: Maybe<Numeric_Comparison_Exp>
   raw_data?: Maybe<String_Comparison_Exp>
+  result?: Maybe<Allocator_Allocation_Result_Bool_Exp>
   token_value?: Maybe<Numeric_Comparison_Exp>
   total_assets?: Maybe<Numeric_Comparison_Exp>
   transaction_index?: Maybe<Int_Comparison_Exp>
@@ -546,6 +552,7 @@ export type Allocator_Before_Allocation_Insert_Input = {
   market_value?: Maybe<Scalars['numeric']>
   mint?: Maybe<Scalars['numeric']>
   raw_data?: Maybe<Scalars['String']>
+  result?: Maybe<Allocator_Allocation_Result_Obj_Rel_Insert_Input>
   token_value?: Maybe<Scalars['numeric']>
   total_assets?: Maybe<Scalars['numeric']>
   transaction_index?: Maybe<Scalars['Int']>
@@ -635,6 +642,7 @@ export type Allocator_Before_Allocation_Order_By = {
   market_value?: Maybe<Order_By>
   mint?: Maybe<Order_By>
   raw_data?: Maybe<Order_By>
+  result?: Maybe<Allocator_Allocation_Result_Order_By>
   token_value?: Maybe<Order_By>
   total_assets?: Maybe<Order_By>
   transaction_index?: Maybe<Order_By>
@@ -5871,6 +5879,17 @@ export type GetRewardCalculationResultAggregateQuery = { __typename?: 'query_roo
       }
     >
   }
+  reward_calculation_result: Array<
+    { __typename?: 'reward_calculation_result' } & {
+      allocation?: Maybe<
+        { __typename?: 'allocator_allocation_result' } & {
+          condition?: Maybe<
+            { __typename?: 'allocator_before_allocation' } & Pick<Allocator_Before_Allocation, 'blocks'>
+          >
+        }
+      >
+    }
+  >
 }
 
 export type ListAllocatorAllocationResultsQueryVariables = {
@@ -6064,6 +6083,13 @@ export const GetRewardCalculationResultAggregateDocument = gql`
         sum {
           staking_reward
           lockup
+        }
+      }
+    }
+    reward_calculation_result(where: { block_number: { _gt: 9600000 }, metrics: { _in: $metricsList } }) {
+      allocation {
+        condition {
+          blocks
         }
       }
     }

@@ -11,6 +11,9 @@ type allocator_allocation_result {
   # An object relationship
   authentication: property_authentication
   block_number: Int!
+
+  # An object relationship
+  condition: allocator_before_allocation
   event_id: String!
   lockup_value: numeric!
   log_index: Int!
@@ -99,6 +102,7 @@ input allocator_allocation_result_bool_exp {
   arg_value: numeric_comparison_exp
   authentication: property_authentication_bool_exp
   block_number: Int_comparison_exp
+  condition: allocator_before_allocation_bool_exp
   event_id: String_comparison_exp
   lockup_value: numeric_comparison_exp
   log_index: Int_comparison_exp
@@ -133,6 +137,7 @@ input allocator_allocation_result_insert_input {
   arg_value: numeric
   authentication: property_authentication_obj_rel_insert_input
   block_number: Int
+  condition: allocator_before_allocation_obj_rel_insert_input
   event_id: String
   lockup_value: numeric
   log_index: Int
@@ -233,6 +238,7 @@ input allocator_allocation_result_order_by {
   arg_value: order_by
   authentication: property_authentication_order_by
   block_number: order_by
+  condition: allocator_before_allocation_order_by
   event_id: order_by
   lockup_value: order_by
   log_index: order_by
@@ -488,6 +494,9 @@ type allocator_before_allocation {
   market_value: numeric!
   mint: numeric!
   raw_data: String!
+
+  # An object relationship
+  result: allocator_allocation_result
   token_value: numeric!
   total_assets: numeric!
   transaction_index: Int!
@@ -575,6 +584,7 @@ input allocator_before_allocation_bool_exp {
   market_value: numeric_comparison_exp
   mint: numeric_comparison_exp
   raw_data: String_comparison_exp
+  result: allocator_allocation_result_bool_exp
   token_value: numeric_comparison_exp
   total_assets: numeric_comparison_exp
   transaction_index: Int_comparison_exp
@@ -609,6 +619,7 @@ input allocator_before_allocation_insert_input {
   market_value: numeric
   mint: numeric
   raw_data: String
+  result: allocator_allocation_result_obj_rel_insert_input
   token_value: numeric
   total_assets: numeric
   transaction_index: Int
@@ -706,6 +717,7 @@ input allocator_before_allocation_order_by {
   market_value: order_by
   mint: order_by
   raw_data: order_by
+  result: allocator_allocation_result_order_by
   token_value: order_by
   total_assets: order_by
   transaction_index: order_by
