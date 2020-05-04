@@ -30,7 +30,7 @@ export const getTotalStakingAmount = async (proepertyAddress: string) => {
 
 export const getMyHolderAmount = async (propertyAddress: string) => {
   const client = newClient()
-  const accountAddress = getAccountAddress()
+  const accountAddress = await getAccountAddress()
   if (client && accountAddress) {
     return client
       .withdraw(await client.registry(addresses.eth.main.registry).withdraw())
@@ -41,7 +41,7 @@ export const getMyHolderAmount = async (propertyAddress: string) => {
 
 export const getMyStakingRewardAmount = async (propertyAddress: string) => {
   const client = newClient()
-  const accountAddress = getAccountAddress()
+  const accountAddress = await getAccountAddress()
   if (client && accountAddress) {
     return client
       .lockup(await client.registry(addresses.eth.main.registry).lockup())
@@ -52,7 +52,7 @@ export const getMyStakingRewardAmount = async (propertyAddress: string) => {
 
 export const getMyStakingAmount = async (propertyAddress: string) => {
   const client = newClient()
-  const accountAddress = getAccountAddress()
+  const accountAddress = await getAccountAddress()
   if (client && accountAddress) {
     return client
       .lockup(await client.registry(addresses.eth.main.registry).lockup())
