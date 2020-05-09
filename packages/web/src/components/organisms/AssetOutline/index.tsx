@@ -18,7 +18,7 @@ const ResponsivePropertyFrame = styled.div`
 `
 
 const AssetStrengthBase = ({ assetStrength }: { assetStrength: number }) => (
-  <Row align="middle" gutter={48}>
+  <Row align="middle" gutter={24}>
     <Col span={12}>
       <CircleGraph size={224} percentage={assetStrength} />
     </Col>
@@ -65,7 +65,7 @@ export const AssetOutline = ({ propertyAddress }: Props) => {
             />
           </ResponsivePropertyFrame>
         </Col>
-        <Col flex="0 1 500px">
+        <Col flex="1 1 500px">
           <ResponsivePropertyFrame>
             <p style={{ fontSize: '18px', lineHeight: '24px', color: '#000' }}>Assets Strength</p>
             {metrics && market ? <AssetStrength metrics={metrics} market={market} /> : <AssetStrengthWithoutData />}
