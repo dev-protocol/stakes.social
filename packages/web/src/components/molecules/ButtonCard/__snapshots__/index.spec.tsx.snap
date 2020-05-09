@@ -13,8 +13,8 @@ exports[`ButtonCard Snapshot 1`] = `
           class="ant-row"
         >
           <div
-            class="ant-col ant-col-12"
-            style="display: flex; align-items: center;"
+            class="ant-col"
+            style="display: flex; align-items: center; padding: 16px 0px; flex: 1 1 252px;"
           >
             <div
               style="font-size: 24px; line-height: 32px; color: rgb(0, 0, 0);"
@@ -23,7 +23,8 @@ exports[`ButtonCard Snapshot 1`] = `
             </div>
           </div>
           <div
-            class="ant-col ant-col-12"
+            class="ant-col"
+            style="padding: 16px 0px; flex: 1 1 252px;"
           >
             <button
               class="ant-btn ant-btn-primary ant-btn-lg"

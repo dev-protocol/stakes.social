@@ -13,54 +13,16 @@ exports[`WithdrawCard Snapshot 1`] = `
           class="ant-row"
         >
           <div
-            class="ant-col ant-col-12"
+            class="ant-col"
+            style="flex: 1 1 252px;"
           >
             <div
-              style="font-size: 24px; line-height: 32px; color: rgb(0, 0, 0); padding: 0px 0px 32px 0px;"
+              style="font-size: 24px; line-height: 32px; color: rgb(0, 0, 0); padding: 16px 0px;"
             >
               Withdraw 
               Holder
                Reward
             </div>
-          </div>
-          <div
-            class="ant-col ant-col-12"
-          >
-            <div
-              class="ant-space ant-space-horizontal"
-              style="vertical-align: middle; font-size: 18px; line-height: 24px; padding: 0px 0px 32px 0px;"
-            >
-              <div
-                class="ant-space-item"
-                style="margin-right: 31px;"
-              >
-                <div
-                  style="color: rgb(0, 0, 0);"
-                >
-                  Last Update: 
-                  
-                </div>
-              </div>
-              <div
-                class="ant-space-item"
-              >
-                <a
-                  href="#"
-                  style="text-decoration: underline;"
-                  target="_blank"
-                >
-                  Mining now
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div
-          class="ant-row"
-        >
-          <div
-            class="ant-col ant-col-12"
-          >
             <div
               style="font-size: 24px; line-height: 32px; color: rgba(0, 0, 0, 0.85);"
             >
@@ -69,16 +31,46 @@ exports[`WithdrawCard Snapshot 1`] = `
             </div>
           </div>
           <div
-            class="ant-col ant-col-12"
+            class="ant-col"
+            style="flex: 1 1 252px;"
           >
-            <button
-              class="ant-btn ant-btn-primary ant-btn-lg"
-              type="button"
+            <div
+              class="ant-space ant-space-vertical"
+              style="vertical-align: middle; font-size: 18px; line-height: 24px; padding: 16px 0px;"
             >
-              <span>
-                Withdraw
-              </span>
-            </button>
+              <div
+                class="ant-space-item"
+                style="margin-bottom: 31px;"
+              >
+                <div>
+                  <div
+                    style="color: rgb(0, 0, 0);"
+                  >
+                    Last Update: 
+                    
+                    <a
+                      href="#"
+                      style="text-decoration: underline; margin: 0px 0px 0px 32px;"
+                      target="_blank"
+                    >
+                      Mining now
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="ant-space-item"
+              >
+                <button
+                  class="ant-btn ant-btn-primary ant-btn-lg"
+                  type="button"
+                >
+                  <span>
+                    Withdraw
+                  </span>
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       </div>
