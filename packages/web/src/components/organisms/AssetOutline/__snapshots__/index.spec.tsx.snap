@@ -50,7 +50,7 @@ exports[`AssetOutline Snapshot 1`] = `
         </div>
         <div
           class="ant-col"
-          style="flex: 0 1 500px;"
+          style="flex: 1 1 500px;"
         >
           <div
             class="sc-AxirZ duFeLC"
@@ -62,11 +62,11 @@ exports[`AssetOutline Snapshot 1`] = `
             </p>
             <div
               class="ant-row ant-row-middle"
-              style="margin-left: -24px; margin-right: -24px;"
+              style="margin-left: -12px; margin-right: -12px;"
             >
               <div
                 class="ant-col ant-col-12"
-                style="padding-left: 24px; padding-right: 24px;"
+                style="padding-left: 12px; padding-right: 12px;"
               >
                 <div
                   class="sc-AxjAm fDa-dQL"
@@ -75,7 +75,7 @@ exports[`AssetOutline Snapshot 1`] = `
               </div>
               <div
                 class="ant-col ant-col-12"
-                style="padding-left: 24px; padding-right: 24px;"
+                style="padding-left: 12px; padding-right: 12px;"
               >
                 <div>
                   <span
