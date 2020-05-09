@@ -14,34 +14,37 @@ export const WithdrawCard = ({ amount, label, onSubmitWithdraw, lastUpdate, onCl
   return (
     <Card>
       <Row>
-        <Col span={12}>
-          <div style={{ fontSize: '24px', lineHeight: '32px', color: '#000', padding: '0 0 32px 0' }}>
+        <Col flex="1 1 252px">
+          <div style={{ fontSize: '24px', lineHeight: '32px', color: '#000', padding: '16px 0' }}>
             Withdraw {label} Reward
           </div>
-        </Col>
-        <Col span={12}>
-          <Space
-            direction="horizontal"
-            size={31}
-            style={{ verticalAlign: 'middle', fontSize: '18px', lineHeight: '24px', padding: '0 0 32px 0' }}
-          >
-            <div style={{ color: '#000' }}>Last Update: {lastUpdate || ''}</div>
-            <a href="#" target="_blank" style={{ textDecoration: 'underline' }} onClick={onClickMining}>
-              Mining now
-            </a>
-          </Space>
-        </Col>
-      </Row>
-      <Row>
-        <Col span={12}>
           <div style={{ fontSize: '24px', lineHeight: '32px', color: 'rgba(0, 0, 0, 0.85)' }}>
             {amount ? amount.dp(1).toNumber() : 0} DEV
           </div>
         </Col>
-        <Col span={12}>
-          <Button type="primary" size="large" onClick={onSubmitWithdraw}>
-            Withdraw
-          </Button>
+        <Col flex="1 1 252px">
+          <Space
+            direction="vertical"
+            size={31}
+            style={{ verticalAlign: 'middle', fontSize: '18px', lineHeight: '24px', padding: '16px 0' }}
+          >
+            <div>
+              <div style={{ color: '#000' }}>
+                Last Update: {lastUpdate || ''}
+                <a
+                  href="#"
+                  target="_blank"
+                  style={{ textDecoration: 'underline', margin: '0 0 0 32px' }}
+                  onClick={onClickMining}
+                >
+                  Mining now
+                </a>
+              </div>
+            </div>
+            <Button type="primary" size="large" onClick={onSubmitWithdraw}>
+              Withdraw
+            </Button>
+          </Space>
         </Col>
       </Row>
     </Card>
