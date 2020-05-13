@@ -1,0 +1,30 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TextCard Snapshot 1`] = `
+<body>
+  <div>
+    <div>
+      <h2
+        style="font-size: 36px; line-height: 48px; color: rgb(47, 128, 237);"
+      >
+        npm
+      </h2>
+      <div
+        style="font-size: 18px; line-height: 24px; color: rgba(0, 0, 0, 0.85);"
+      >
+        The market for number of downloads of public npm packages.
+      </div>
+      <div
+        style="font-size: 18px; line-height: 24px; color: rgba(0, 0, 0, 0.85);"
+      >
+        Authentication: Your npm package
+      </div>
+      <div
+        style="font-size: 18px; line-height: 24px; color: rgba(0, 0, 0, 0.85);"
+      >
+        Calculation: Number of downloads
+      </div>
+    </div>
+  </div>
+</body>
+`;
