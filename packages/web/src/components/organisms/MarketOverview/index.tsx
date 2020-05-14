@@ -2,10 +2,6 @@ import React from 'react'
 import { Row, Col } from 'antd'
 import { TextCard } from 'src/components/molecules/TextCard'
 
-interface Props {
-  propertyAddress: string
-}
-
 export const MarketOverview = () => {
   return (
     <div style={{ maxWidth: '680px', marginRight: 'auto', marginLeft: 'auto' }}>
