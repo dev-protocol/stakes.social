@@ -1,5 +1,6 @@
 import React from 'react'
 import { Header } from '../Header'
+import { H2 } from 'src/components/atoms/Title'
 
 export const AuthHeader = () => {
   return (
@@ -12,14 +13,11 @@ export const AuthHeader = () => {
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',
-            flexFlow: 'column',
-            fontSize: '48px',
-            lineHeight: '64px',
-            color: 'rgba(0, 0, 0, 0.85)'
+            flexFlow: 'column'
           }}
         >
-          <div>Choose Market</div>
-          <div style={{ fontSize: '18px', lineHeight: '24px' }}>Select one asset market to authenticate.</div>
+          <H2>Choose Market</H2>
+          <div>Select one asset market to authenticate.</div>
         </div>
       </div>
     </>
