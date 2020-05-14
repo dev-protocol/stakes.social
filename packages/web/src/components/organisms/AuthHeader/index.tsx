@@ -1,7 +1,7 @@
 import React from 'react'
 import { Header } from '../Header'
 import { Headline } from 'src/components/atoms/Headline'
-import { H2 } from 'src/components/atoms/Title'
+import { H2 } from 'src/components/atoms/Typography'
 
 export const AuthHeader = () => {
   return (

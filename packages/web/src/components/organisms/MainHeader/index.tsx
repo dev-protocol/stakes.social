@@ -2,7 +2,7 @@ import React from 'react'
 import { Header } from '../Header'
 import { Button } from 'antd'
 import { Headline } from 'src/components/atoms/Headline'
-import { H1 } from 'src/components/atoms/Title'
+import { H1 } from 'src/components/atoms/Typography'
 import { A } from 'src/components/atoms/A'
 
 export const MainHeader = () => {
