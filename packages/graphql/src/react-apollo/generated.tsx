@@ -6186,6 +6186,12 @@ export type GetLastAllocatorAllocationResultQuery = { __typename?: 'query_root' 
   >
 }
 
+export type GetMarketFactoryCreateQueryVariables = {}
+
+export type GetMarketFactoryCreateQuery = { __typename?: 'query_root' } & {
+  market_factory_create: Array<{ __typename?: 'market_factory_create' } & Pick<Market_Factory_Create, 'market'>>
+}
+
 export type GetPropertyAuthenticationQueryVariables = {
   propertyAddress: Scalars['String']
 }
@@ -6358,6 +6364,51 @@ export type GetLastAllocatorAllocationResultLazyQueryHookResult = ReturnType<
 export type GetLastAllocatorAllocationResultQueryResult = ApolloReactCommon.QueryResult<
   GetLastAllocatorAllocationResultQuery,
   GetLastAllocatorAllocationResultQueryVariables
+>
+export const GetMarketFactoryCreateDocument = gql`
+  query getMarketFactoryCreate {
+    market_factory_create {
+      market
+    }
+  }
+`
+
+/**
+ * __useGetMarketFactoryCreateQuery__
+ *
+ * To run a query within a React component, call `useGetMarketFactoryCreateQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetMarketFactoryCreateQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetMarketFactoryCreateQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useGetMarketFactoryCreateQuery(
+  baseOptions?: ApolloReactHooks.QueryHookOptions<GetMarketFactoryCreateQuery, GetMarketFactoryCreateQueryVariables>
+) {
+  return ApolloReactHooks.useQuery<GetMarketFactoryCreateQuery, GetMarketFactoryCreateQueryVariables>(
+    GetMarketFactoryCreateDocument,
+    baseOptions
+  )
+}
+export function useGetMarketFactoryCreateLazyQuery(
+  baseOptions?: ApolloReactHooks.LazyQueryHookOptions<GetMarketFactoryCreateQuery, GetMarketFactoryCreateQueryVariables>
+) {
+  return ApolloReactHooks.useLazyQuery<GetMarketFactoryCreateQuery, GetMarketFactoryCreateQueryVariables>(
+    GetMarketFactoryCreateDocument,
+    baseOptions
+  )
+}
+export type GetMarketFactoryCreateQueryHookResult = ReturnType<typeof useGetMarketFactoryCreateQuery>
+export type GetMarketFactoryCreateLazyQueryHookResult = ReturnType<typeof useGetMarketFactoryCreateLazyQuery>
+export type GetMarketFactoryCreateQueryResult = ApolloReactCommon.QueryResult<
+  GetMarketFactoryCreateQuery,
+  GetMarketFactoryCreateQueryVariables
 >
 export const GetPropertyAuthenticationDocument = gql`
   query getPropertyAuthentication($propertyAddress: String!) {
