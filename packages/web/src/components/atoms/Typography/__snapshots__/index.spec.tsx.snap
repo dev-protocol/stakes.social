@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Title Snapshot H1 1`] = `
+<body>
+  <div>
+    <h1
+      class="ant-typography"
+      style="color: rgb(47, 128, 237);"
+    >
+      h1
+    </h1>
+  </div>
+</body>
+`;
+
+exports[`Title Snapshot H2 1`] = `
+<body>
+  <div>
+    <h2
+      class="ant-typography"
+    >
+      h2
+    </h2>
+  </div>
+</body>
+`;

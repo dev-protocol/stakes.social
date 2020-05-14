@@ -37,19 +37,16 @@ exports[`AuthHeader Snapshot 1`] = `
       </button>
     </div>
     <div
-      style="padding: 50px;"
+      class="sc-AxiKw gHixGn"
+      height="300"
     >
-      <div
-        style="height: 500px; display: flex; justify-content: center; align-items: center; flex-flow: column; font-size: 48px; line-height: 64px; color: rgba(0, 0, 0, 0.85);"
+      <h2
+        class="ant-typography"
       >
-        <div>
-          Choose Market
-        </div>
-        <div
-          style="font-size: 18px; line-height: 24px;"
-        >
-          Select one asset market to authenticate.
-        </div>
+        Choose Market
+      </h2>
+      <div>
+        Select one asset market to authenticate.
       </div>
     </div>
   </div>
