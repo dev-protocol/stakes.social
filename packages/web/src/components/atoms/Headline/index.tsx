@@ -5,7 +5,7 @@ interface Props {
 }
 
 export const Headline = styled.div<Props>`
-  height: ${props => props.height || 500}px;
+  height: ${props => props.height || 380}px;
   display: flex;
   justify-content: center;
   align-items: center;
