@@ -23,11 +23,23 @@ const Index = (_: Props) => {
 
   const onClick = () => {
     confirm({
-      title: 'Sample Confirm Modal',
+      title: 'Create a new Property',
       icon: <ExclamationCircleOutlined />,
-      content: 'message message....',
-      onOk: () => {},
-      onCancel: () => {}
+      content: (
+        <>
+          <p>
+            Stakes.social do not yet support the creation of a new Property, but you can create them manually by using
+            Etherscan.
+          </p>
+          <p>Do you want to read a guide blog?</p>
+        </>
+      ),
+      onOk: () => {
+        window.open(
+          'https://medium.com/devprtcl/how-to-register-your-npm-packages-to-dev-protocol-23571c377a12',
+          '_blank'
+        )
+      }
     })
   }
 
