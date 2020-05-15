@@ -6,23 +6,19 @@ exports[`TextCard Snapshot 1`] = `
     <div>
       <h2
         style="font-size: 36px; line-height: 48px; color: rgb(47, 128, 237);"
-      >
-        npm
-      </h2>
+      />
+      <div
+        style="font-size: 18px; line-height: 24px; color: rgba(0, 0, 0, 0.85);"
+      />
       <div
         style="font-size: 18px; line-height: 24px; color: rgba(0, 0, 0, 0.85);"
       >
-        The market for number of downloads of public npm packages.
+        Authentication: 
       </div>
       <div
         style="font-size: 18px; line-height: 24px; color: rgba(0, 0, 0, 0.85);"
       >
-        Authentication: Your npm package
-      </div>
-      <div
-        style="font-size: 18px; line-height: 24px; color: rgba(0, 0, 0, 0.85);"
-      >
-        Calculation: Number of downloads
+        Calculation: 
       </div>
     </div>
   </div>
