@@ -1,7 +1,10 @@
 import React from 'react'
 
 export interface Props {
-  title: string
+  name: string
+  description: string
+  authentication: string
+  calculation: number
 }
 
 const Text: React.FC = ({ children }) => (
@@ -16,7 +19,7 @@ const Text: React.FC = ({ children }) => (
   </div>
 )
 
-export const TextCard = ({ title }: Props) => {
+export const TextCard = ({ name, description, authentication, calculation }: Props) => {
   return (
     <div>
       <h2
@@ -26,11 +29,11 @@ export const TextCard = ({ title }: Props) => {
           color: '#2F80ED'
         }}
       >
-        {title}
+        {name}
       </h2>
-      <Text>The market for number of downloads of public npm packages.</Text>
-      <Text>Authentication: Your npm package</Text>
-      <Text>Calculation: Number of downloads</Text>
+      <Text>{description}</Text>
+      <Text>Authentication: {authentication}</Text>
+      <Text>Calculation: {calculation}</Text>
     </div>
   )
 }
