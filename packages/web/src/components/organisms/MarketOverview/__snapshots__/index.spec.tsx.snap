@@ -22,79 +22,19 @@ exports[`MarketOverview Snapshot 1`] = `
             <div
               style="font-size: 18px; line-height: 24px; color: rgba(0, 0, 0, 0.85);"
             >
-              The market for number of downloads of public npm packages.
+              Marketize the number of downloads of public npm packages.
             </div>
             <div
               style="font-size: 18px; line-height: 24px; color: rgba(0, 0, 0, 0.85);"
             >
-              Authentication: Your npm package
+              Authentication: 
+              Your npm package
             </div>
             <div
               style="font-size: 18px; line-height: 24px; color: rgba(0, 0, 0, 0.85);"
             >
-              Calculation: Number of downloads
-            </div>
-          </div>
-        </div>
-      </div>
-      <div
-        class="ant-row"
-        style="margin: 82px 0px;"
-      >
-        <div
-          class="ant-col ant-col-24"
-        >
-          <div>
-            <h2
-              style="font-size: 36px; line-height: 48px; color: rgb(47, 128, 237);"
-            >
-              GitHub
-            </h2>
-            <div
-              style="font-size: 18px; line-height: 24px; color: rgba(0, 0, 0, 0.85);"
-            >
-              The market for number of downloads of public npm packages.
-            </div>
-            <div
-              style="font-size: 18px; line-height: 24px; color: rgba(0, 0, 0, 0.85);"
-            >
-              Authentication: Your npm package
-            </div>
-            <div
-              style="font-size: 18px; line-height: 24px; color: rgba(0, 0, 0, 0.85);"
-            >
-              Calculation: Number of downloads
-            </div>
-          </div>
-        </div>
-      </div>
-      <div
-        class="ant-row"
-        style="margin: 82px 0px;"
-      >
-        <div
-          class="ant-col ant-col-24"
-        >
-          <div>
-            <h2
-              style="font-size: 36px; line-height: 48px; color: rgb(47, 128, 237);"
-            >
-              xxx
-            </h2>
-            <div
-              style="font-size: 18px; line-height: 24px; color: rgba(0, 0, 0, 0.85);"
-            >
-              The market for number of downloads of public npm packages.
-            </div>
-            <div
-              style="font-size: 18px; line-height: 24px; color: rgba(0, 0, 0, 0.85);"
-            >
-              Authentication: Your npm package
-            </div>
-            <div
-              style="font-size: 18px; line-height: 24px; color: rgba(0, 0, 0, 0.85);"
-            >
-              Calculation: Number of downloads
+              Calculation: 
+              Number of downloads
             </div>
           </div>
         </div>

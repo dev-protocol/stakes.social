@@ -8,11 +8,6 @@ import { H2 } from 'src/components/atoms/Typography'
 
 type Props = {}
 
-const layout = {
-  labelCol: { span: 6 },
-  wrapperCol: { span: 18 }
-}
-
 const AuthenticateNewAsset = (_: Props) => {
   const { propertyAddress } = useRouter().query as { propertyAddress: string }
   const onFinish = (values: any) => {
@@ -45,7 +40,8 @@ const AuthenticateNewAsset = (_: Props) => {
             </Col>
             <Col span={18}>
               <Form
-                {...layout}
+                labelCol={{ span: 6 }}
+                wrapperCol={{ span: 18 }}
                 name="basic"
                 initialValues={{ remember: true }}
                 onFinish={onFinish}
