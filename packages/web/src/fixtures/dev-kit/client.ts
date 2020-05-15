@@ -118,3 +118,16 @@ export const allocate = async (metricsAddress: string) => {
   }
   return undefined
 }
+
+export const createProperty = async (name: string, symbol: string, author: string) => {
+  const client = newClient()
+  if (process.env.NODE_ENV == 'production' && client) {
+    return client
+      .propertyFactory(await client.registry(addresses.eth.main.registry).allocator())
+      .createProperty(name, symbol, author)
+  } else if (process.env.NODE_ENV == 'development') {
+    console.log('env:', process.env.NODE_ENV, 'return mock value')
+    return '0xf6efbc6d4689dc0d90128b040d5c2cce49492bda'
+  }
+  return undefined
+}

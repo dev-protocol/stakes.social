@@ -1,9 +1,11 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import { Select } from 'antd'
 import { Form, Input, Button } from 'antd'
+import { useCreateProperty } from 'src/fixtures/dev-kit/hooks'
+import Link from 'next/link'
 
 interface Props {
-  marketAddress: string
+  walletAddress: string
 }
 
 const layout = {
@@ -13,37 +15,23 @@ const layout = {
 
 const { Option } = Select
 
-function onChange(value: string) {
-  console.log(`selected ${value}`)
-}
-
-function onBlur() {
-  console.log('blur')
-}
-
-function onFocus() {
-  console.log('focus')
-}
-
-function onSearch(val: string) {
-  console.log('search:', val)
-}
-
-const onFinish = (values: any) => {
-  console.log('Success:', values)
-}
-
-const onFinishFailed = (errorInfo: any) => {
-  console.log('Failed:', errorInfo)
-}
-
-const CreateForm = ({ marketAddress }: Props) => {
+const PropertyCreateForm = ({ walletAddress }: Props) => {
   const [form] = Form.useForm()
   useEffect(() => {
     form.setFieldsValue({
-      author: marketAddress
+      author: walletAddress
     })
-  }, [form, marketAddress])
+  }, [form, walletAddress])
+  const { createProperty } = useCreateProperty()
+  const handleCreateProperty = useCallback(
+    (name: string, symbol: string, author: string) => createProperty(name, symbol, author),
+    [createProperty]
+  )
+
+  const onFinishFailed = (errorInfo: any) => {
+    console.log('Failed:', errorInfo)
+  }
+
   return (
     <div style={{ marginTop: '18px' }}>
       <Form
@@ -51,7 +39,9 @@ const CreateForm = ({ marketAddress }: Props) => {
         form={form}
         name="basic"
         initialValues={{ remember: true }}
-        onFinish={onFinish}
+        onFinish={({ name, symbol, author }) => {
+          handleCreateProperty(name, symbol, author)
+        }}
         onFinishFailed={onFinishFailed}
       >
         <Form.Item label="Name" name="name" rules={[{ required: true, message: 'Please input name.' }]}>
@@ -73,19 +63,25 @@ const CreateForm = ({ marketAddress }: Props) => {
   )
 }
 
-export const AuthenticateForm = ({ marketAddress }: Props) => {
+export const AuthenticateForm = () => {
   const [isOpen, setIsOpen] = useState(false)
+  const walletAddress = 'wallet-address'
+
+  const [associatingProperty, setAssociatingProperty] = useState<string>()
+
+  const onChange = (value: string) => setAssociatingProperty(value)
+
+  const onSearch = (val: string) => console.log('search:', val)
+
   return (
     <div style={{ maxWidth: '680px', marginRight: 'auto', marginLeft: 'auto' }}>
       <span style={{ marginRight: '54px' }}>Associating Property:</span>
       <Select
         showSearch
-        style={{ width: 267 }}
+        style={{ width: '267px' }}
         placeholder="Please select"
         optionFilterProp="children"
         onChange={onChange}
-        onFocus={onFocus}
-        onBlur={onBlur}
         onSearch={onSearch}
         filterOption={(input, option: any) => option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}
       >
@@ -96,9 +92,11 @@ export const AuthenticateForm = ({ marketAddress }: Props) => {
         <Button type="link" onClick={() => setIsOpen(!isOpen)}>
           Or create one
         </Button>
-        {isOpen && <CreateForm marketAddress={marketAddress} />}
+        {isOpen && <PropertyCreateForm walletAddress={walletAddress} />}
       </div>
-      <Button type="primary">Next</Button>
+      <Link href={'/auth/[market]/[property]'} as={`/auth/npm/${associatingProperty}`}>
+        <Button type="primary">Next</Button>
+      </Link>
     </div>
   )
 }

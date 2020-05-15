@@ -11,7 +11,8 @@ import {
   allocate,
   withdrawStakingRewardAmount,
   withdrawStakingAmount,
-  getMyStakingRewardAmount
+  getMyStakingRewardAmount,
+  createProperty
 } from './client'
 import { SWRCachePath } from './cache-path'
 import { UnwrapFunc, toNaturalNumber, toAmountNumber } from 'src/fixtures/utility'
@@ -207,4 +208,23 @@ export const useAllocate = () => {
   }, [])
 
   return { allocate: allocateDev, isLoading, error }
+}
+
+export const useCreateProperty = () => {
+  const [isLoading, setIsLoading] = useState<boolean>(false)
+  const [error, setError] = useState<Error>()
+  const createPropertyHooks = useCallback(async (name: string, symbol: string, author: string) => {
+    setIsLoading(true)
+    setError(undefined)
+    return createProperty(name, symbol, author)
+      .then(() => {
+        setIsLoading(false)
+      })
+      .catch(err => {
+        setError(err)
+        message.error(err.message)
+        setIsLoading(false)
+      })
+  }, [])
+  return { createProperty: createPropertyHooks, isLoading, error }
 }

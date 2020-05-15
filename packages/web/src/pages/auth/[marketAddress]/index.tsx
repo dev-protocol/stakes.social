@@ -1,5 +1,4 @@
 import React from 'react'
-import { useRouter } from 'next/router'
 import { Footer } from 'src/components/organisms/Footer'
 import { Header } from 'src/components/organisms/Header'
 import { Headline } from 'src/components/atoms/Headline'
@@ -9,7 +8,6 @@ import { AuthenticateForm } from 'src/components/organisms/AuthenticateForm'
 type Props = {}
 
 const AuthenticateNewAsset = (_: Props) => {
-  const { marketAddress } = useRouter().query as { marketAddress: string }
   return (
     <>
       <Header />
@@ -17,7 +15,7 @@ const AuthenticateNewAsset = (_: Props) => {
         <H2>Authenticate a new asset</H2>
       </Headline>
       <div style={{ marginBottom: '78px' }}>
-        <AuthenticateForm marketAddress={marketAddress} />
+        <AuthenticateForm />
       </div>
       <Footer />
     </>
