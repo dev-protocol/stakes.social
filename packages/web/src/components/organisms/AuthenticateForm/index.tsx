@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useCallback } from 'react'
+import Link from 'next/link'
+import { useRouter } from 'next/router'
 import { Select } from 'antd'
 import { Form, Input, Button } from 'antd'
 import { useCreateProperty } from 'src/fixtures/dev-kit/hooks'
-import Link from 'next/link'
 
 interface Props {
   walletAddress: string
@@ -66,7 +67,7 @@ const PropertyCreateForm = ({ walletAddress }: Props) => {
 export const AuthenticateForm = () => {
   const [isOpen, setIsOpen] = useState(false)
   const walletAddress = 'wallet-address'
-
+  const { market } = useRouter().query as { market: string }
   const [associatingProperty, setAssociatingProperty] = useState<string>()
 
   const onChange = (value: string) => setAssociatingProperty(value)
@@ -94,7 +95,7 @@ export const AuthenticateForm = () => {
         </Button>
         {isOpen && <PropertyCreateForm walletAddress={walletAddress} />}
       </div>
-      <Link href={'/auth/[market]/[property]'} as={`/auth/npm/${associatingProperty}`}>
+      <Link href={'/auth/[market]/[property]'} as={`/auth/${market}/${associatingProperty}`}>
         <Button type="primary">Next</Button>
       </Link>
     </div>
