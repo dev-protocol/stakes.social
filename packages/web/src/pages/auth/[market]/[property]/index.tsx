@@ -9,8 +9,7 @@ import { H2 } from 'src/components/atoms/Typography'
 type Props = {}
 
 const AuthenticateNewAsset = (_: Props) => {
-  const hoge = useRouter().query as { property: string }
-  console.log(hoge)
+  const { property } = useRouter().query as { property: string }
   const onFinish = (values: any) => {
     console.log('Success:', values)
   }
@@ -32,7 +31,7 @@ const AuthenticateNewAsset = (_: Props) => {
               <span>Associating Property:</span>
             </Col>
             <Col span={18}>
-              <span>{hoge.property}</span>
+              <span>{property}</span>
             </Col>
           </Row>
           <Row>

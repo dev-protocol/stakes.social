@@ -42,7 +42,6 @@ const Contents = ({ marketAddress }: { marketAddress: string }) => {
 
 export const MarketOverview = () => {
   const { data } = useGetMarketFactoryCreateQuery()
-  console.log(data?.market_factory_create[0]?.market)
 
   return (
     <div style={{ maxWidth: '680px', marginRight: 'auto', marginLeft: 'auto' }}>
