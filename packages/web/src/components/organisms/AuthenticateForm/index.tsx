@@ -59,12 +59,12 @@ const PropertyCreateForm = ({ walletAddress }: Props) => {
   )
 }
 
-export const AuthenticateForm = (market: { market: string }) => {
+export const AuthenticateForm = ({ market }: { market: string }) => {
   const [isOpen, setIsOpen] = useState(false)
   const walletAddress = 'wallet-address'
-  const [associatingProperty, setAssociatingProperty] = useState<string>()
+  const [property, setProperty] = useState<string>()
 
-  const onChange = (value: string) => setAssociatingProperty(value)
+  const onChange = (value: string) => setProperty(value)
 
   const onSearch = (val: string) => console.log('search:', val)
 
@@ -89,7 +89,7 @@ export const AuthenticateForm = (market: { market: string }) => {
         </Button>
         {isOpen && <PropertyCreateForm walletAddress={walletAddress} />}
       </div>
-      <Link href={'/auth/[market]/[property]'} as={`/auth/${market}/${associatingProperty}`}>
+      <Link href={'/auth/[market]/[property]'} as={`/auth/${market}/${property}`}>
         <Button type="primary">Next</Button>
       </Link>
     </div>
