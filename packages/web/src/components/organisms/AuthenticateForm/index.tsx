@@ -9,11 +9,6 @@ interface Props {
   walletAddress: string
 }
 
-const layout = {
-  labelCol: { span: 6 },
-  wrapperCol: { span: 18 }
-}
-
 const { Option } = Select
 
 const PropertyCreateForm = ({ walletAddress }: Props) => {
@@ -36,7 +31,8 @@ const PropertyCreateForm = ({ walletAddress }: Props) => {
   return (
     <div style={{ marginTop: '18px' }}>
       <Form
-        {...layout}
+        labelCol={{ span: 6 }}
+        wrapperCol={{ span: 18 }}
         form={form}
         name="basic"
         initialValues={{ remember: true }}
