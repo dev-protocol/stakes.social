@@ -1,22 +1,20 @@
 import React, { useState, useEffect, useCallback } from 'react'
 import Link from 'next/link'
-import { Select } from 'antd'
 import { Form, Input, Button } from 'antd'
 import { useCreateProperty } from 'src/fixtures/dev-kit/hooks'
+import { AuthorSelector } from './AuthorSelector'
 
 interface Props {
-  walletAddress: string
+  author: string
 }
 
-const { Option } = Select
-
-const PropertyCreateForm = ({ walletAddress }: Props) => {
+const PropertyCreateForm = ({ author }: Props) => {
   const [form] = Form.useForm()
   useEffect(() => {
     form.setFieldsValue({
-      author: walletAddress
+      author: author
     })
-  }, [form, walletAddress])
+  }, [form, author])
   const { createProperty } = useCreateProperty()
   const handleCreateProperty = useCallback(
     (name: string, symbol: string, author: string) => createProperty(name, symbol, author),
@@ -61,33 +59,21 @@ const PropertyCreateForm = ({ walletAddress }: Props) => {
 
 export const AuthenticateForm = ({ market }: { market: string }) => {
   const [isOpen, setIsOpen] = useState(false)
-  const walletAddress = 'wallet-address'
+  // @k3nt0w FIXME: This is dummy hash. We must fetch author hash from hooks.
+  const author = '0x69Cc2C86aeB26f52F6645a2DFdec1051DD5584C0'
   const [property, setProperty] = useState<string>()
-
+  const [query, setQuery] = useState<string>('')
   const onChange = (value: string) => setProperty(value)
-
-  const onSearch = (val: string) => console.log('search:', val)
-
+  const onSearch = (query: string) => setQuery(query)
   return (
     <div style={{ maxWidth: '680px', marginRight: 'auto', marginLeft: 'auto' }}>
       <span style={{ marginRight: '54px' }}>Associating Property:</span>
-      <Select
-        showSearch
-        style={{ width: '267px' }}
-        placeholder="Please select"
-        optionFilterProp="children"
-        onChange={onChange}
-        onSearch={onSearch}
-        filterOption={(input, option: any) => option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}
-      >
-        <Option value="test1">test1</Option>
-        <Option value="test2">test2</Option>
-      </Select>
+      <AuthorSelector query={query} author={author} onChange={onChange} onSearch={onSearch} />
       <div style={{ paddingLeft: '212px', marginTop: '18px' }}>
         <Button type="link" onClick={() => setIsOpen(!isOpen)}>
           Or create one
         </Button>
-        {isOpen && <PropertyCreateForm walletAddress={walletAddress} />}
+        {isOpen && <PropertyCreateForm author={author} />}
       </div>
       <Link href={'/auth/[market]/[property]'} as={`/auth/${market}/${property}`}>
         <Button type="primary">Next</Button>
