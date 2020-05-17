@@ -42,3 +42,11 @@ export const useAssetStrength = () => {
 export const useAllocate = () => {
   return { allocate: () => {} }
 }
+
+export const useCreateProperty = () => {
+  return { createProperty: () => {} }
+}
+
+export const useMarketScheme = () => {
+  return { marketScheme: () => {} }
+}
