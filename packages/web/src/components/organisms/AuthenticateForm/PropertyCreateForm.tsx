@@ -19,10 +19,6 @@ export const PropertyCreateForm = ({ author }: Props) => {
     [createProperty]
   )
 
-  const onFinishFailed = (errorInfo: any) => {
-    console.log('Failed:', errorInfo)
-  }
-
   return (
     <div style={{ marginTop: '18px' }}>
       <Form
@@ -34,7 +30,6 @@ export const PropertyCreateForm = ({ author }: Props) => {
         onFinish={({ name, symbol, author }) => {
           handleCreateProperty(name, symbol, author)
         }}
-        onFinishFailed={onFinishFailed}
       >
         <Form.Item label="Name" name="name" rules={[{ required: true, message: 'Please input name.' }]}>
           <Input placeholder="Name" />
