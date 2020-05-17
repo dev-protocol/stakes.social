@@ -12,7 +12,8 @@ import {
   withdrawStakingRewardAmount,
   withdrawStakingAmount,
   getMyStakingRewardAmount,
-  createProperty
+  createProperty,
+  marketScheme
 } from './client'
 import { SWRCachePath } from './cache-path'
 import { UnwrapFunc, toNaturalNumber, toAmountNumber } from 'src/fixtures/utility'
@@ -213,7 +214,7 @@ export const useAllocate = () => {
 export const useCreateProperty = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [error, setError] = useState<Error>()
-  const createPropertyHooks = useCallback(async (name: string, symbol: string, author: string) => {
+  const callback = useCallback(async (name: string, symbol: string, author: string) => {
     setIsLoading(true)
     setError(undefined)
     return createProperty(name, symbol, author)
@@ -226,5 +227,24 @@ export const useCreateProperty = () => {
         setIsLoading(false)
       })
   }, [])
-  return { createProperty: createPropertyHooks, isLoading, error }
+  return { createProperty: callback, isLoading, error }
+}
+
+export const useMarketScheme = () => {
+  const [isLoading, setIsLoading] = useState<boolean>(false)
+  const [error, setError] = useState<Error>()
+  const callback = useCallback(async () => {
+    setIsLoading(true)
+    setError(undefined)
+    return marketScheme()
+      .then(() => {
+        setIsLoading(false)
+      })
+      .catch(err => {
+        setError(err)
+        message.error(err.message)
+        setIsLoading(false)
+      })
+  }, [])
+  return { marketScheme: callback, isLoading, error }
 }

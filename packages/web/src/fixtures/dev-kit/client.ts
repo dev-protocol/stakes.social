@@ -123,11 +123,18 @@ export const createProperty = async (name: string, symbol: string, author: strin
   const client = newClient()
   if (process.env.NODE_ENV == 'production' && client) {
     return client
-      .propertyFactory(await client.registry(addresses.eth.main.registry).allocator())
+      .propertyFactory(await client.registry(addresses.eth.main.registry).propertyFactory())
       .createProperty(name, symbol, author)
   } else if (process.env.NODE_ENV == 'development') {
     console.log('env:', process.env.NODE_ENV, 'return mock value')
-    return '0xf6efbc6d4689dc0d90128b040d5c2cce49492bda'
+  }
+  return undefined
+}
+
+export const marketScheme = async () => {
+  const client = newClient()
+  if (client) {
+    return client.market(await client.registry(addresses.eth.main.registry).marketFactory()).schema()
   }
   return undefined
 }

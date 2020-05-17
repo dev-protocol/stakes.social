@@ -10,7 +10,9 @@ import {
   useCancelStaking,
   useAssetStrength,
   useAllocate,
-  useWithdrawStaking
+  useWithdrawStaking,
+  useCreateProperty,
+  useMarketScheme
 } from './hooks'
 import useSWR from 'swr'
 import { toNaturalNumber, toAmountNumber } from 'src/fixtures/utility'
@@ -345,6 +347,59 @@ describe('dev-kit hooks', () => {
       ;(allocate as jest.Mock).mockRejectedValue(error)
       act(() => {
         result.current.allocate(metrics)
+      })
+      await waitForNextUpdate()
+      expect(result.current.error).toBe(error)
+      expect(result.current.isLoading).toBe(false)
+    })
+  })
+
+  describe(`${useCreateProperty.name}`, () => {
+    const name = 'name'
+    const symbol = 'symbol'
+    const author = 'author'
+    test('success', async () => {
+      const { result, waitForNextUpdate } = renderHook(() => useCreateProperty())
+      ;(allocate as jest.Mock).mockResolvedValue(true)
+      act(() => {
+        result.current.createProperty(name, symbol, author)
+      })
+      await waitForNextUpdate()
+      expect(result.current.error).toBe(undefined)
+      expect(result.current.isLoading).toBe(false)
+    })
+
+    test('failure', async () => {
+      const error = new Error('error')
+      const { result, waitForNextUpdate } = renderHook(() => useCreateProperty())
+      ;(allocate as jest.Mock).mockRejectedValue(error)
+      act(() => {
+        result.current.createProperty(name, symbol, author)
+      })
+      await waitForNextUpdate()
+      expect(result.current.error).toBe(error)
+      expect(result.current.isLoading).toBe(false)
+    })
+  })
+
+  describe(`${useMarketScheme.name}`, () => {
+    test('success', async () => {
+      const { result, waitForNextUpdate } = renderHook(() => useMarketScheme())
+      ;(allocate as jest.Mock).mockResolvedValue(true)
+      act(() => {
+        result.current.marketScheme()
+      })
+      await waitForNextUpdate()
+      expect(result.current.error).toBe(undefined)
+      expect(result.current.isLoading).toBe(false)
+    })
+
+    test('failure', async () => {
+      const error = new Error('error')
+      const { result, waitForNextUpdate } = renderHook(() => useMarketScheme())
+      ;(allocate as jest.Mock).mockRejectedValue(error)
+      act(() => {
+        result.current.marketScheme()
       })
       await waitForNextUpdate()
       expect(result.current.error).toBe(error)
