@@ -9,9 +9,7 @@ interface Props {
 export const PropertyCreateForm = ({ author }: Props) => {
   const [form] = Form.useForm()
   useEffect(() => {
-    form.setFieldsValue({
-      author: author
-    })
+    form.setFieldsValue({ author })
   }, [form, author])
   const { createProperty } = useCreateProperty()
   const handleCreateProperty = useCallback(
