@@ -6205,16 +6205,6 @@ export type GetPropertyAuthenticationQuery = { __typename?: 'query_root' } & {
   >
 }
 
-export type GetPropertyMetaQueryVariables = {
-  author: Scalars['String']
-  limit?: Maybe<Scalars['Int']>
-  ilike?: Maybe<Scalars['String']>
-}
-
-export type GetPropertyMetaQuery = { __typename?: 'query_root' } & {
-  property_meta: Array<{ __typename?: 'property_meta' } & Pick<Property_Meta, 'property'>>
-}
-
 export type GetRewardCalculationResultAggregateQueryVariables = {
   metricsList: Array<Scalars['String']>
 }
@@ -6287,6 +6277,16 @@ export type ListPropertyQuery = { __typename?: 'query_root' } & {
       >
     >
   }
+}
+
+export type ListPropertyMetaQueryVariables = {
+  author: Scalars['String']
+  limit?: Maybe<Scalars['Int']>
+  ilike?: Maybe<Scalars['String']>
+}
+
+export type ListPropertyMetaQuery = { __typename?: 'query_root' } & {
+  property_meta: Array<{ __typename?: 'property_meta' } & Pick<Property_Meta, 'property'>>
 }
 
 export const AllocatorAllocationResultFragmentDoc = gql`
@@ -6473,54 +6473,6 @@ export type GetPropertyAuthenticationLazyQueryHookResult = ReturnType<typeof use
 export type GetPropertyAuthenticationQueryResult = ApolloReactCommon.QueryResult<
   GetPropertyAuthenticationQuery,
   GetPropertyAuthenticationQueryVariables
->
-export const GetPropertyMetaDocument = gql`
-  query getPropertyMeta($author: String!, $limit: Int, $ilike: String) {
-    property_meta(where: { author: { _eq: $author }, property: { _ilike: $ilike } }, limit: $limit) {
-      property
-    }
-  }
-`
-
-/**
- * __useGetPropertyMetaQuery__
- *
- * To run a query within a React component, call `useGetPropertyMetaQuery` and pass it any options that fit your needs.
- * When your component renders, `useGetPropertyMetaQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useGetPropertyMetaQuery({
- *   variables: {
- *      author: // value for 'author'
- *      limit: // value for 'limit'
- *      ilike: // value for 'ilike'
- *   },
- * });
- */
-export function useGetPropertyMetaQuery(
-  baseOptions?: ApolloReactHooks.QueryHookOptions<GetPropertyMetaQuery, GetPropertyMetaQueryVariables>
-) {
-  return ApolloReactHooks.useQuery<GetPropertyMetaQuery, GetPropertyMetaQueryVariables>(
-    GetPropertyMetaDocument,
-    baseOptions
-  )
-}
-export function useGetPropertyMetaLazyQuery(
-  baseOptions?: ApolloReactHooks.LazyQueryHookOptions<GetPropertyMetaQuery, GetPropertyMetaQueryVariables>
-) {
-  return ApolloReactHooks.useLazyQuery<GetPropertyMetaQuery, GetPropertyMetaQueryVariables>(
-    GetPropertyMetaDocument,
-    baseOptions
-  )
-}
-export type GetPropertyMetaQueryHookResult = ReturnType<typeof useGetPropertyMetaQuery>
-export type GetPropertyMetaLazyQueryHookResult = ReturnType<typeof useGetPropertyMetaLazyQuery>
-export type GetPropertyMetaQueryResult = ApolloReactCommon.QueryResult<
-  GetPropertyMetaQuery,
-  GetPropertyMetaQueryVariables
 >
 export const GetRewardCalculationResultAggregateDocument = gql`
   query getRewardCalculationResultAggregate($metricsList: [String!]!) {
@@ -6712,3 +6664,51 @@ export function useListPropertyLazyQuery(
 export type ListPropertyQueryHookResult = ReturnType<typeof useListPropertyQuery>
 export type ListPropertyLazyQueryHookResult = ReturnType<typeof useListPropertyLazyQuery>
 export type ListPropertyQueryResult = ApolloReactCommon.QueryResult<ListPropertyQuery, ListPropertyQueryVariables>
+export const ListPropertyMetaDocument = gql`
+  query listPropertyMeta($author: String!, $limit: Int, $ilike: String) {
+    property_meta(where: { author: { _eq: $author }, property: { _ilike: $ilike } }, limit: $limit) {
+      property
+    }
+  }
+`
+
+/**
+ * __useListPropertyMetaQuery__
+ *
+ * To run a query within a React component, call `useListPropertyMetaQuery` and pass it any options that fit your needs.
+ * When your component renders, `useListPropertyMetaQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useListPropertyMetaQuery({
+ *   variables: {
+ *      author: // value for 'author'
+ *      limit: // value for 'limit'
+ *      ilike: // value for 'ilike'
+ *   },
+ * });
+ */
+export function useListPropertyMetaQuery(
+  baseOptions?: ApolloReactHooks.QueryHookOptions<ListPropertyMetaQuery, ListPropertyMetaQueryVariables>
+) {
+  return ApolloReactHooks.useQuery<ListPropertyMetaQuery, ListPropertyMetaQueryVariables>(
+    ListPropertyMetaDocument,
+    baseOptions
+  )
+}
+export function useListPropertyMetaLazyQuery(
+  baseOptions?: ApolloReactHooks.LazyQueryHookOptions<ListPropertyMetaQuery, ListPropertyMetaQueryVariables>
+) {
+  return ApolloReactHooks.useLazyQuery<ListPropertyMetaQuery, ListPropertyMetaQueryVariables>(
+    ListPropertyMetaDocument,
+    baseOptions
+  )
+}
+export type ListPropertyMetaQueryHookResult = ReturnType<typeof useListPropertyMetaQuery>
+export type ListPropertyMetaLazyQueryHookResult = ReturnType<typeof useListPropertyMetaLazyQuery>
+export type ListPropertyMetaQueryResult = ApolloReactCommon.QueryResult<
+  ListPropertyMetaQuery,
+  ListPropertyMetaQueryVariables
+>
