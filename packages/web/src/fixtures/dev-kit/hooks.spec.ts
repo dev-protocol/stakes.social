@@ -22,7 +22,9 @@ import {
   stakeDev,
   cancelStaking,
   allocate,
-  withdrawStakingRewardAmount
+  withdrawStakingRewardAmount,
+  createProperty,
+  marketScheme
 } from './client'
 import { message } from 'antd'
 
@@ -360,7 +362,7 @@ describe('dev-kit hooks', () => {
     const author = 'author'
     test('success', async () => {
       const { result, waitForNextUpdate } = renderHook(() => useCreateProperty())
-      ;(allocate as jest.Mock).mockResolvedValue(true)
+      ;(createProperty as jest.Mock).mockResolvedValue(true)
       act(() => {
         result.current.createProperty(name, symbol, author)
       })
@@ -372,7 +374,7 @@ describe('dev-kit hooks', () => {
     test('failure', async () => {
       const error = new Error('error')
       const { result, waitForNextUpdate } = renderHook(() => useCreateProperty())
-      ;(allocate as jest.Mock).mockRejectedValue(error)
+      ;(createProperty as jest.Mock).mockRejectedValue(error)
       act(() => {
         result.current.createProperty(name, symbol, author)
       })
@@ -385,7 +387,7 @@ describe('dev-kit hooks', () => {
   describe(`${useMarketScheme.name}`, () => {
     test('success', async () => {
       const { result, waitForNextUpdate } = renderHook(() => useMarketScheme())
-      ;(allocate as jest.Mock).mockResolvedValue(true)
+      ;(marketScheme as jest.Mock).mockResolvedValue(true)
       act(() => {
         result.current.marketScheme()
       })
@@ -397,7 +399,7 @@ describe('dev-kit hooks', () => {
     test('failure', async () => {
       const error = new Error('error')
       const { result, waitForNextUpdate } = renderHook(() => useMarketScheme())
-      ;(allocate as jest.Mock).mockRejectedValue(error)
+      ;(marketScheme as jest.Mock).mockRejectedValue(error)
       act(() => {
         result.current.marketScheme()
       })
