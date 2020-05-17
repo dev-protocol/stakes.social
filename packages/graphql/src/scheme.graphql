@@ -2753,7 +2753,7 @@ type mutation_root {
   ): reward_calculation_result_mutation_response
 
   # delete single row from the table: "reward_calculation_result"
-  delete_reward_calculation_result_by_pk(alocator_allocation_result_event_id: String!): reward_calculation_result
+  delete_reward_calculation_result_by_pk(event_id: String!): reward_calculation_result
 
   # insert data into the table: "allocator_allocation_result"
   insert_allocator_allocation_result(
@@ -6725,7 +6725,7 @@ type query_root {
   ): reward_calculation_result_aggregate!
 
   # fetch data from the table: "reward_calculation_result" using primary key columns
-  reward_calculation_result_by_pk(alocator_allocation_result_event_id: String!): reward_calculation_result
+  reward_calculation_result_by_pk(event_id: String!): reward_calculation_result
 }
 
 # columns and relationships of "reward_calculation_result"
@@ -6734,11 +6734,11 @@ type reward_calculation_result {
 
   # An object relationship
   allocation: allocator_allocation_result
-  alocator_allocation_result_event_id: String!
 
   # An object relationship
   authentication: property_authentication
   block_number: Int!
+  event_id: String!
   holder_reward: numeric!
   lockup: numeric!
   metrics: String!
@@ -6819,9 +6819,9 @@ input reward_calculation_result_bool_exp {
   _or: [reward_calculation_result_bool_exp]
   allocate_result: numeric_comparison_exp
   allocation: allocator_allocation_result_bool_exp
-  alocator_allocation_result_event_id: String_comparison_exp
   authentication: property_authentication_bool_exp
   block_number: Int_comparison_exp
+  event_id: String_comparison_exp
   holder_reward: numeric_comparison_exp
   lockup: numeric_comparison_exp
   metrics: String_comparison_exp
@@ -6850,9 +6850,9 @@ input reward_calculation_result_inc_input {
 input reward_calculation_result_insert_input {
   allocate_result: numeric
   allocation: allocator_allocation_result_obj_rel_insert_input
-  alocator_allocation_result_event_id: String
   authentication: property_authentication_obj_rel_insert_input
   block_number: Int
+  event_id: String
   holder_reward: numeric
   lockup: numeric
   metrics: String
@@ -6865,8 +6865,8 @@ input reward_calculation_result_insert_input {
 # aggregate max on columns
 type reward_calculation_result_max_fields {
   allocate_result: numeric
-  alocator_allocation_result_event_id: String
   block_number: Int
+  event_id: String
   holder_reward: numeric
   lockup: numeric
   metrics: String
@@ -6877,8 +6877,8 @@ type reward_calculation_result_max_fields {
 # order by max() on columns of table "reward_calculation_result"
 input reward_calculation_result_max_order_by {
   allocate_result: order_by
-  alocator_allocation_result_event_id: order_by
   block_number: order_by
+  event_id: order_by
   holder_reward: order_by
   lockup: order_by
   metrics: order_by
@@ -6889,8 +6889,8 @@ input reward_calculation_result_max_order_by {
 # aggregate min on columns
 type reward_calculation_result_min_fields {
   allocate_result: numeric
-  alocator_allocation_result_event_id: String
   block_number: Int
+  event_id: String
   holder_reward: numeric
   lockup: numeric
   metrics: String
@@ -6901,8 +6901,8 @@ type reward_calculation_result_min_fields {
 # order by min() on columns of table "reward_calculation_result"
 input reward_calculation_result_min_order_by {
   allocate_result: order_by
-  alocator_allocation_result_event_id: order_by
   block_number: order_by
+  event_id: order_by
   holder_reward: order_by
   lockup: order_by
   metrics: order_by
@@ -6936,9 +6936,9 @@ input reward_calculation_result_on_conflict {
 input reward_calculation_result_order_by {
   allocate_result: order_by
   allocation: allocator_allocation_result_order_by
-  alocator_allocation_result_event_id: order_by
   authentication: property_authentication_order_by
   block_number: order_by
+  event_id: order_by
   holder_reward: order_by
   lockup: order_by
   metrics: order_by
@@ -6950,7 +6950,7 @@ input reward_calculation_result_order_by {
 
 # primary key columns input for table: "reward_calculation_result"
 input reward_calculation_result_pk_columns_input {
-  alocator_allocation_result_event_id: String!
+  event_id: String!
 }
 
 # select columns of table "reward_calculation_result"
@@ -6959,10 +6959,10 @@ enum reward_calculation_result_select_column {
   allocate_result
 
   # column name
-  alocator_allocation_result_event_id
+  block_number
 
   # column name
-  block_number
+  event_id
 
   # column name
   holder_reward
@@ -6983,8 +6983,8 @@ enum reward_calculation_result_select_column {
 # input type for updating data in table "reward_calculation_result"
 input reward_calculation_result_set_input {
   allocate_result: numeric
-  alocator_allocation_result_event_id: String
   block_number: Int
+  event_id: String
   holder_reward: numeric
   lockup: numeric
   metrics: String
@@ -7070,10 +7070,10 @@ enum reward_calculation_result_update_column {
   allocate_result
 
   # column name
-  alocator_allocation_result_event_id
+  block_number
 
   # column name
-  block_number
+  event_id
 
   # column name
   holder_reward
@@ -7719,5 +7719,5 @@ type subscription_root {
   ): reward_calculation_result_aggregate!
 
   # fetch data from the table: "reward_calculation_result" using primary key columns
-  reward_calculation_result_by_pk(alocator_allocation_result_event_id: String!): reward_calculation_result
+  reward_calculation_result_by_pk(event_id: String!): reward_calculation_result
 }
