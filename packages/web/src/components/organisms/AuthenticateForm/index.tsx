@@ -47,7 +47,7 @@ const PropertyCreateForm = ({ walletAddress }: Props) => {
           <Input placeholder="Symbol" />
         </Form.Item>
         <Form.Item label="Author" name="author">
-          <Input type="text"></Input>
+          <Input type="text" />
         </Form.Item>
         <Form.Item>
           <Button type="primary" htmlType="submit">
