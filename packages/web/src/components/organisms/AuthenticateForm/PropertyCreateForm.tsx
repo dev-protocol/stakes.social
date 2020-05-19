@@ -6,20 +6,24 @@ import { Body1 } from 'src/components/atoms/Typography'
 
 interface Props {
   author: string
+  onSubmit: (createdPropertyAddress: string) => void
 }
 
-export const PropertyCreateForm = ({ author }: Props) => {
+export const PropertyCreateForm = ({ author, onSubmit }: Props) => {
   const [form] = Form.useForm()
-  const [createdPropertyAddress, setCreatedPropertyAddress] = useState<string>('aaaaaa')
+  const [createdPropertyAddress, setCreatedPropertyAddress] = useState<string>('')
   const { createProperty } = useCreateProperty()
   useEffect(() => {
     form.setFieldsValue({ author })
   }, [form, author])
 
   const handleCreateProperty = useCallback(
-    async (name: string, symbol: string, author: string) =>
-      setCreatedPropertyAddress(await createProperty(name, symbol, author)),
-    [createProperty]
+    async (name: string, symbol: string, author: string) => {
+      const property = await createProperty(name, symbol, author)
+      setCreatedPropertyAddress(property)
+      onSubmit(property)
+    },
+    [createProperty, onSubmit]
   )
 
   return (
@@ -30,9 +34,7 @@ export const PropertyCreateForm = ({ author }: Props) => {
         form={form}
         name="basic"
         initialValues={{ remember: true }}
-        onFinish={({ name, symbol, author }) => {
-          handleCreateProperty(name, symbol, author)
-        }}
+        onFinish={({ name, symbol, author }) => handleCreateProperty(name, symbol, author)}
       >
         <Form.Item label="Name" name="name" rules={[{ required: true, message: 'Please input name.' }]}>
           <Input placeholder="Name" />
