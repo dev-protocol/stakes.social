@@ -11,7 +11,7 @@ export const AuthForm = ({ property }: { property: string }) => {
 
   useEffectAsync(async () => {
     const schemeList = await marketScheme()
-    setSchemeList(schemeList || [])
+    setSchemeList(schemeList || ['test-placeholder']) // for development
   }, [])
 
   return (
