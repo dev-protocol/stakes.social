@@ -10,7 +10,7 @@ interface Props {
   market: string
 }
 
-export const AuthenticatePropertySelectForm = ({ market }: Props) => {
+export const PropertySelectForm = ({ market }: Props) => {
   const [isOpen, setIsOpen] = useState(false)
   const [author, setAuthor] = useState<string>('')
   const [property, setProperty] = useState<string>()
