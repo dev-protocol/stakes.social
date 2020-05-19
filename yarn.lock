@@ -1314,10 +1314,10 @@
     exec-sh "^0.3.2"
     minimist "^1.2.0"
 
-"@devprtcl/dev-kit-js@0.5.5":
-  version "0.5.5"
-  resolved "https://registry.yarnpkg.com/@devprtcl/dev-kit-js/-/dev-kit-js-0.5.5.tgz#3c2cfdb4720b5386cf4eeca9b8a6a02e6feda25f"
-  integrity sha512-O5oOfJCINf1vtxP79JuqrTIK5h/Phj+7V27Y7hBCOKOr5M3eslJhdO9NWiMIcrN/OebC4SYiYFnRA+himc06ow==
+"@devprtcl/dev-kit-js@0.5.6":
+  version "0.5.6"
+  resolved "https://registry.yarnpkg.com/@devprtcl/dev-kit-js/-/dev-kit-js-0.5.6.tgz#fcd41f7df1a6fe50a31189675b73c8ec56a1cc7a"
+  integrity sha512-oNnSsHwIrBWa743qk36dXy2bWvQHq88Dm3apraJ96D5fygTYomiYTjvBP2IfxcquIhwY/FvQEmVcc8+tUjv0Rg==
   dependencies:
     web3 "^1.2.5-rc.0"
 
