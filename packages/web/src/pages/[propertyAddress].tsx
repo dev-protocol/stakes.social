@@ -15,7 +15,7 @@ const PropertyAddressDetail = (_: Props) => {
   return (
     <>
       <PropertyHeader propertyAddress={propertyAddress} />
-      <div style={{ maxWidth: '1048px', marginRight: 'auto', marginLeft: 'auto' }}>
+      <div style={{ padding: '1rem', maxWidth: '1048px', marginRight: 'auto', marginLeft: 'auto' }}>
         <Row style={{ margin: '82px 0px' }}>
           <Col span={24}>
             <AssetOutline propertyAddress={propertyAddress} />

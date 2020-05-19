@@ -5,15 +5,14 @@ export const Footer = () => {
   return (
     <div
       style={{
+        padding: '1rem',
+        margin: '5rem auto',
         width: 'auto',
         maxWidth: '1048px',
-        marginRight: 'auto',
-        marginLeft: 'auto',
         textAlign: 'center',
         fontSize: '18px',
         fontWeight: 'bold',
-        lineHeight: '24px',
-        padding: '0 0 84px 0'
+        lineHeight: '24px'
       }}
     >
       <div>
