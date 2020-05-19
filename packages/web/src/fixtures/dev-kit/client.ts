@@ -137,5 +137,5 @@ export const marketScheme = async () => {
   if (client) {
     return client.market(await client.registry(addresses.eth.main.registry).marketFactory()).schema()
   }
-  return undefined
+  return []
 }

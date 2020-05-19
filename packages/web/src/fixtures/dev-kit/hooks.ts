@@ -239,8 +239,9 @@ export const useMarketScheme = () => {
     setIsLoading(true)
     setError(undefined)
     return marketScheme()
-      .then(() => {
+      .then(result => {
         setIsLoading(false)
+        return result || []
       })
       .catch(err => {
         setError(err)

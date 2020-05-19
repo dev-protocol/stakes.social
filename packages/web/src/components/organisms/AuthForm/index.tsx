@@ -1,14 +1,20 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Row, Col, Form, Input, Button } from 'antd'
+import { useMarketScheme } from 'src/fixtures/dev-kit/hooks'
+import { useEffectAsync } from 'src/fixtures/utility'
 
 export const AuthForm = ({ property }: { property: string }) => {
   const onFinish = (values: any) => {
     console.log('Success:', values)
   }
 
-  const onFinishFailed = (errorInfo: any) => {
-    console.log('Failed:', errorInfo)
-  }
+  const [schemeList, setSchemeList] = useState<string[]>([])
+  const { marketScheme } = useMarketScheme()
+
+  useEffectAsync(async () => {
+    const schemeList = (await marketScheme()) || ['test placeholder'] // for development
+    setSchemeList(schemeList)
+  }, [marketScheme])
 
   return (
     <div style={{ marginTop: '18px' }}>
@@ -32,14 +38,12 @@ export const AuthForm = ({ property }: { property: string }) => {
               name="basic"
               initialValues={{ remember: true }}
               onFinish={onFinish}
-              onFinishFailed={onFinishFailed}
             >
-              <Form.Item name="name" rules={[{ required: true, message: 'Please input name.' }]}>
-                <Input placeholder="Your npm package name" />
-              </Form.Item>
-              <Form.Item name="token" rules={[{ required: true, message: 'Please input symbol.' }]}>
-                <Input placeholder="Your npm read-only token" />
-              </Form.Item>
+              {schemeList.map(scheme => (
+                <Form.Item name={scheme} rules={[{ required: true, message: 'Please input name.' }]} key={scheme}>
+                  <Input placeholder={scheme} />
+                </Form.Item>
+              ))}
               <Form.Item>
                 <Button type="primary" htmlType="submit">
                   Authenticate
