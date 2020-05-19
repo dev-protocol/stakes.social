@@ -218,13 +218,15 @@ export const useCreateProperty = () => {
     setIsLoading(true)
     setError(undefined)
     return createProperty(name, symbol, author)
-      .then(() => {
+      .then(result => {
         setIsLoading(false)
+        return result || ''
       })
       .catch(err => {
         setError(err)
         message.error(err.message)
         setIsLoading(false)
+        return ''
       })
   }, [])
   return { createProperty: callback, isLoading, error }
