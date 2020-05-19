@@ -1,6 +1,8 @@
-import React, { useEffect, useCallback } from 'react'
+import React, { useCallback, useState, useEffect } from 'react'
 import { Form, Input, Button } from 'antd'
+import { CheckCircleTwoTone } from '@ant-design/icons'
 import { useCreateProperty } from 'src/fixtures/dev-kit/hooks'
+import { Body1 } from 'src/components/atoms/Typography'
 
 interface Props {
   author: string
@@ -8,12 +10,15 @@ interface Props {
 
 export const PropertyCreateForm = ({ author }: Props) => {
   const [form] = Form.useForm()
+  const [createdPropertyAddress, setCreatedPropertyAddress] = useState<string>('aaaaaa')
+  const { createProperty } = useCreateProperty()
   useEffect(() => {
     form.setFieldsValue({ author })
   }, [form, author])
-  const { createProperty } = useCreateProperty()
+
   const handleCreateProperty = useCallback(
-    (name: string, symbol: string, author: string) => createProperty(name, symbol, author),
+    async (name: string, symbol: string, author: string) =>
+      setCreatedPropertyAddress(await createProperty(name, symbol, author)),
     [createProperty]
   )
 
@@ -40,10 +45,16 @@ export const PropertyCreateForm = ({ author }: Props) => {
         </Form.Item>
         <Form.Item>
           <Button type="primary" htmlType="submit">
-            Submit
+            Create
           </Button>
         </Form.Item>
       </Form>
+      {createdPropertyAddress && (
+        <span>
+          <CheckCircleTwoTone twoToneColor="#52c41a" />
+          <Body1 style={{ marginLeft: '10px' }}>{createdPropertyAddress}</Body1>
+        </span>
+      )}
     </div>
   )
 }
