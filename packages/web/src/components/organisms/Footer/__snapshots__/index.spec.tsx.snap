@@ -4,14 +4,14 @@ exports[`Footer Snapshot 1`] = `
 <body>
   <div>
     <div
-      style="width: auto; max-width: 1048px; margin-right: auto; margin-left: auto; text-align: center; font-size: 18px; font-weight: bold; line-height: 24px; padding: 0px 0px 84px 0px;"
+      style="padding: 1rem; margin: 5rem auto; width: auto; max-width: 1048px; text-align: center; font-size: 18px; font-weight: bold; line-height: 24px;"
     >
       <div>
         <span>
           Stakes.social is powered by the 
         </span>
         <a
-          href="#"
+          href="//devprtcl.com"
           rel="noreferrer noopener"
           style="text-decoration: underline;"
           target="_blank"
@@ -22,7 +22,7 @@ exports[`Footer Snapshot 1`] = `
           , see the 
         </span>
         <a
-          href="#"
+          href="//github.com/dev-protocol/protocol/blob/master/docs/WHITEPAPER.md"
           rel="noreferrer noopener"
           style="text-decoration: underline;"
           target="_blank"
@@ -33,7 +33,7 @@ exports[`Footer Snapshot 1`] = `
            on 
         </span>
         <a
-          href="#"
+          href="//github.com/dev-protocol/protocol"
           rel="noreferrer noopener"
           style="text-decoration: underline;"
           target="_blank"
@@ -46,7 +46,7 @@ exports[`Footer Snapshot 1`] = `
           Enjoy following the Dev Protocol community on 
         </span>
         <a
-          href="#"
+          href="//discord.gg/VwJp4KM"
           rel="noreferrer noopener"
           style="text-decoration: underline;"
           target="_blank"
@@ -57,7 +57,7 @@ exports[`Footer Snapshot 1`] = `
           , 
         </span>
         <a
-          href="#"
+          href="//medium.com/devtoken"
           rel="noreferrer noopener"
           style="text-decoration: underline;"
           target="_blank"
@@ -68,7 +68,7 @@ exports[`Footer Snapshot 1`] = `
           , 
         </span>
         <a
-          href="#"
+          href="//spectrum.chat/devtoken"
           rel="noreferrer noopener"
           style="text-decoration: underline;"
           target="_blank"
@@ -79,7 +79,7 @@ exports[`Footer Snapshot 1`] = `
           , and 
         </span>
         <a
-          href="#"
+          href="//twitter.com/devprtcl"
           rel="noreferrer noopener"
           style="text-decoration: underline;"
           target="_blank"
