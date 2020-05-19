@@ -17,33 +17,63 @@ export const Footer = () => {
     >
       <div>
         <span>Stakes.social is powered by the </span>
-        <a href="#" target="_blank" rel="noreferrer noopener" style={{ textDecoration: 'underline' }}>
+        <a href="//devprtcl.com" target="_blank" rel="noreferrer noopener" style={{ textDecoration: 'underline' }}>
           Dev Protocol
         </a>
         <span>, see the </span>
-        <a href="#" target="_blank" rel="noreferrer noopener" style={{ textDecoration: 'underline' }}>
+        <a
+          href="//github.com/dev-protocol/protocol/blob/master/docs/WHITEPAPER.md"
+          target="_blank"
+          rel="noreferrer noopener"
+          style={{ textDecoration: 'underline' }}
+        >
           whitepaper
         </a>
         <span> on </span>
-        <a href="#" target="_blank" rel="noreferrer noopener" style={{ textDecoration: 'underline' }}>
+        <a
+          href="//github.com/dev-protocol/protocol"
+          target="_blank"
+          rel="noreferrer noopener"
+          style={{ textDecoration: 'underline' }}
+        >
           GitHub
         </a>
         .
         <br />
         <span>Enjoy following the Dev Protocol community on </span>
-        <a href="#" target="_blank" rel="noreferrer noopener" style={{ textDecoration: 'underline' }}>
+        <a
+          href="//discord.gg/VwJp4KM"
+          target="_blank"
+          rel="noreferrer noopener"
+          style={{ textDecoration: 'underline' }}
+        >
           Discord
         </a>
         <span>, </span>
-        <a href="#" target="_blank" rel="noreferrer noopener" style={{ textDecoration: 'underline' }}>
+        <a
+          href="//medium.com/devtoken"
+          target="_blank"
+          rel="noreferrer noopener"
+          style={{ textDecoration: 'underline' }}
+        >
           Medium
         </a>
         <span>, </span>
-        <a href="#" target="_blank" rel="noreferrer noopener" style={{ textDecoration: 'underline' }}>
+        <a
+          href="//spectrum.chat/devtoken"
+          target="_blank"
+          rel="noreferrer noopener"
+          style={{ textDecoration: 'underline' }}
+        >
           Spectrum
         </a>
         <span>, and </span>
-        <a href="#" target="_blank" rel="noreferrer noopener" style={{ textDecoration: 'underline' }}>
+        <a
+          href="//twitter.com/devprtcl"
+          target="_blank"
+          rel="noreferrer noopener"
+          style={{ textDecoration: 'underline' }}
+        >
           Twitter
         </a>
         !
