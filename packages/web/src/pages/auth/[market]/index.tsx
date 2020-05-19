@@ -3,7 +3,7 @@ import { Footer } from 'src/components/organisms/Footer'
 import { Header } from 'src/components/organisms/Header'
 import { Headline } from 'src/components/atoms/Headline'
 import { H2 } from 'src/components/atoms/Typography'
-import { AuthenticateForm } from 'src/components/organisms/AuthenticateForm'
+import { AuthenticatePropertySelectForm } from 'src/components/organisms/AuthenticatePropertySelectForm'
 import { useRouter } from 'next/router'
 
 type Props = {}
@@ -17,7 +17,7 @@ const AuthenticateNewAsset = (_: Props) => {
         <H2>Authenticate a new asset</H2>
       </Headline>
       <div style={{ marginBottom: '78px' }}>
-        <AuthenticateForm market={market} />
+        <AuthenticatePropertySelectForm market={market} />
       </div>
       <Footer />
     </>
