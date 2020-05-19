@@ -1,13 +1,16 @@
 import React from 'react'
 import { render } from '@testing-library/react'
-import { AuthHeader } from '.'
+import { AuthForm } from '.'
 import 'src/__mocks__/window/matchMedia.mock'
+import { useEffectAsync } from 'src/fixtures/utility'
 
+jest.mock('src/fixtures/utility')
 jest.mock('src/fixtures/dev-kit/hooks')
 
-describe(`${AuthHeader.name}`, () => {
+describe(`${AuthForm.name}`, () => {
   test('Snapshot', () => {
-    const component = render(<AuthHeader />)
+    ;(useEffectAsync as jest.Mock).mockImplementation(() => {})
+    const component = render(<AuthForm property="property" />)
     const tree = component.baseElement
     expect(tree).toMatchSnapshot()
   })

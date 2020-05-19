@@ -139,3 +139,11 @@ export const marketScheme = async () => {
   }
   return []
 }
+
+export const authenticate = async (address: string, args: string[]) => {
+  const client = newClient()
+  if (client) {
+    return client.market(await client.registry(addresses.eth.main.registry).marketFactory()).authenticate(address, args)
+  }
+  return undefined
+}

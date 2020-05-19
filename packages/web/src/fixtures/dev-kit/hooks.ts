@@ -13,7 +13,8 @@ import {
   withdrawStakingAmount,
   getMyStakingRewardAmount,
   createProperty,
-  marketScheme
+  marketScheme,
+  authenticate
 } from './client'
 import { SWRCachePath } from './cache-path'
 import { UnwrapFunc, toNaturalNumber, toAmountNumber } from 'src/fixtures/utility'
@@ -250,4 +251,23 @@ export const useMarketScheme = () => {
       })
   }, [])
   return { marketScheme: callback, isLoading, error }
+}
+
+export const useAuthenticate = () => {
+  const [isLoading, setIsLoading] = useState<boolean>(false)
+  const [error, setError] = useState<Error>()
+  const callback = useCallback(async (address: string, args: string[]) => {
+    setIsLoading(true)
+    setError(undefined)
+    return authenticate(address, args)
+      .then(() => {
+        setIsLoading(false)
+      })
+      .catch(err => {
+        setError(err)
+        message.error(err.message)
+        setIsLoading(false)
+      })
+  }, [])
+  return { authenticate: callback, isLoading, error }
 }

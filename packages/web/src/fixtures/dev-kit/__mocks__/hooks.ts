@@ -50,3 +50,7 @@ export const useCreateProperty = () => {
 export const useMarketScheme = () => {
   return { marketScheme: () => {} }
 }
+
+export const useAuthenticate = () => {
+  return { authenticate: () => {} }
+}

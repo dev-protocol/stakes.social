@@ -12,7 +12,8 @@ import {
   useAllocate,
   useWithdrawStaking,
   useCreateProperty,
-  useMarketScheme
+  useMarketScheme,
+  useAuthenticate
 } from './hooks'
 import useSWR from 'swr'
 import { toNaturalNumber, toAmountNumber } from 'src/fixtures/utility'
@@ -24,7 +25,8 @@ import {
   allocate,
   withdrawStakingRewardAmount,
   createProperty,
-  marketScheme
+  marketScheme,
+  authenticate
 } from './client'
 import { message } from 'antd'
 
@@ -402,6 +404,33 @@ describe('dev-kit hooks', () => {
       ;(marketScheme as jest.Mock).mockRejectedValue(error)
       act(() => {
         result.current.marketScheme()
+      })
+      await waitForNextUpdate()
+      expect(result.current.error).toBe(error)
+      expect(result.current.isLoading).toBe(false)
+    })
+  })
+
+  describe(`${useAuthenticate.name}`, () => {
+    const address = 'address'
+    const args = ['arg1', 'arg2']
+    test('success', async () => {
+      const { result, waitForNextUpdate } = renderHook(() => useAuthenticate())
+      ;(authenticate as jest.Mock).mockResolvedValue(true)
+      act(() => {
+        result.current.authenticate(address, args)
+      })
+      await waitForNextUpdate()
+      expect(result.current.error).toBe(undefined)
+      expect(result.current.isLoading).toBe(false)
+    })
+
+    test('failure', async () => {
+      const error = new Error('error')
+      const { result, waitForNextUpdate } = renderHook(() => useAuthenticate())
+      ;(authenticate as jest.Mock).mockRejectedValue(error)
+      act(() => {
+        result.current.authenticate(address, args)
       })
       await waitForNextUpdate()
       expect(result.current.error).toBe(error)
