@@ -143,7 +143,10 @@ export const marketScheme = async (marketAddress: string) => {
 export const authenticate = async (marketAddress: string, propertyAddress: string, args: string[]) => {
   const client = newClient()
   if (client) {
-    return client.market(marketAddress).authenticate(propertyAddress, args)
+    return client.market(marketAddress).authenticate(propertyAddress, args, {
+      // FIXME(@k3nt0w): After confirming the specification, define the value.
+      metricsFactory: ''
+    })
   }
   return undefined
 }
