@@ -9,7 +9,7 @@ import { H2 } from 'src/components/atoms/Typography'
 type Props = {}
 
 const AuthenticateNewAsset = (_: Props) => {
-  const { property } = useRouter().query as { property: string }
+  const { market, property } = useRouter().query as { market: string; property: string }
 
   return (
     <>
@@ -17,7 +17,7 @@ const AuthenticateNewAsset = (_: Props) => {
       <Headline height={300}>
         <H2>Authenticate a new asset</H2>
       </Headline>
-      <AuthForm property={property} />
+      <AuthForm market={market} property={property} />
       <Footer />
     </>
   )

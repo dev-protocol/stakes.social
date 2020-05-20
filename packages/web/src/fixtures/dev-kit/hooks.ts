@@ -236,10 +236,10 @@ export const useCreateProperty = () => {
 export const useMarketScheme = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [error, setError] = useState<Error>()
-  const callback = useCallback(async () => {
+  const callback = useCallback(async (marketAddress: string) => {
     setIsLoading(true)
     setError(undefined)
-    return marketScheme()
+    return marketScheme(marketAddress)
       .then(result => {
         setIsLoading(false)
         return result || []
@@ -256,10 +256,10 @@ export const useMarketScheme = () => {
 export const useAuthenticate = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [error, setError] = useState<Error>()
-  const callback = useCallback(async (address: string, args: string[]) => {
+  const callback = useCallback(async (marketAddress: string, propertyAddress: string, args: string[]) => {
     setIsLoading(true)
     setError(undefined)
-    return authenticate(address, args)
+    return authenticate(marketAddress, propertyAddress, args)
       .then(() => {
         setIsLoading(false)
       })

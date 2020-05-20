@@ -3,15 +3,20 @@ import { Row, Col, Form, Input, Button } from 'antd'
 import { useMarketScheme, useAuthenticate } from 'src/fixtures/dev-kit/hooks'
 import { useEffectAsync } from 'src/fixtures/utility'
 
-export const AuthForm = ({ property }: { property: string }) => {
+export interface Props {
+  market: string
+  property: string
+}
+
+export const AuthForm = ({ market, property }: Props) => {
   const [schemeList, setSchemeList] = useState<string[]>([])
   const { marketScheme } = useMarketScheme()
   const { authenticate } = useAuthenticate()
-  const onFinish = (values: any) => authenticate(property, Object.values(values))
+  const onFinish = (values: any) => authenticate(market, property, Object.values(values))
 
   useEffectAsync(async () => {
-    const schemeList = await marketScheme()
-    setSchemeList(schemeList || ['test-placeholder']) // for development
+    const schemeList = await marketScheme(market)
+    setSchemeList(schemeList || [])
   }, [])
 
   return (

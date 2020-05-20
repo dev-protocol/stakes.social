@@ -387,11 +387,12 @@ describe('dev-kit hooks', () => {
   })
 
   describe(`${useMarketScheme.name}`, () => {
+    const market = 'market-address'
     test('success', async () => {
       const { result, waitForNextUpdate } = renderHook(() => useMarketScheme())
       ;(marketScheme as jest.Mock).mockResolvedValue(true)
       act(() => {
-        result.current.marketScheme()
+        result.current.marketScheme(market)
       })
       await waitForNextUpdate()
       expect(result.current.error).toBe(undefined)
@@ -403,7 +404,7 @@ describe('dev-kit hooks', () => {
       const { result, waitForNextUpdate } = renderHook(() => useMarketScheme())
       ;(marketScheme as jest.Mock).mockRejectedValue(error)
       act(() => {
-        result.current.marketScheme()
+        result.current.marketScheme(market)
       })
       await waitForNextUpdate()
       expect(result.current.error).toBe(error)
@@ -412,13 +413,14 @@ describe('dev-kit hooks', () => {
   })
 
   describe(`${useAuthenticate.name}`, () => {
-    const address = 'address'
+    const market = 'market-address'
+    const property = 'property-address'
     const args = ['arg1', 'arg2']
     test('success', async () => {
       const { result, waitForNextUpdate } = renderHook(() => useAuthenticate())
       ;(authenticate as jest.Mock).mockResolvedValue(true)
       act(() => {
-        result.current.authenticate(address, args)
+        result.current.authenticate(market, property, args)
       })
       await waitForNextUpdate()
       expect(result.current.error).toBe(undefined)
@@ -430,7 +432,7 @@ describe('dev-kit hooks', () => {
       const { result, waitForNextUpdate } = renderHook(() => useAuthenticate())
       ;(authenticate as jest.Mock).mockRejectedValue(error)
       act(() => {
-        result.current.authenticate(address, args)
+        result.current.authenticate(market, property, args)
       })
       await waitForNextUpdate()
       expect(result.current.error).toBe(error)

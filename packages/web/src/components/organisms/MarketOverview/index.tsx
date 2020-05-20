@@ -25,7 +25,8 @@ const Contents = ({ marketAddress }: { marketAddress: string }) => {
           style={{
             fontSize: '36px',
             lineHeight: '48px',
-            color: '#2F80ED'
+            color: '#2F80ED',
+            cursor: 'pointer'
           }}
         >
           {data.name}

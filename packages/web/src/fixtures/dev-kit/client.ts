@@ -132,18 +132,18 @@ export const createProperty = async (name: string, symbol: string, author: strin
   return undefined
 }
 
-export const marketScheme = async () => {
+export const marketScheme = async (marketAddress: string) => {
   const client = newClient()
   if (client) {
-    return client.market(await client.registry(addresses.eth.main.registry).marketFactory()).schema()
+    return client.market(marketAddress).schema()
   }
   return []
 }
 
-export const authenticate = async (address: string, args: string[]) => {
+export const authenticate = async (marketAddress: string, propertyAddress: string, args: string[]) => {
   const client = newClient()
   if (client) {
-    return client.market(await client.registry(addresses.eth.main.registry).marketFactory()).authenticate(address, args)
+    return client.market(marketAddress).authenticate(propertyAddress, args)
   }
   return undefined
 }
