@@ -144,8 +144,7 @@ export const authenticate = async (marketAddress: string, propertyAddress: strin
   const client = newClient()
   if (client) {
     return client.market(marketAddress).authenticate(propertyAddress, args, {
-      // FIXME(@k3nt0w): After confirming the specification, define the value.
-      metricsFactory: ''
+      metricsFactory: await client.registry(addresses.eth.main.registry).metricsFactory()
     })
   }
   return undefined
