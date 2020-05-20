@@ -20,7 +20,7 @@ const Contents = ({ marketAddress }: { marketAddress: string }) => {
   const { data } = useGetMarketInformation(marketAddress)
   return data ? (
     <div>
-      <Link href={'/auth/[market]'} as={`/auth/${data.name}`}>
+      <Link href={'/auth/[market]'} as={`/auth/${marketAddress}`}>
         <h2
           style={{
             fontSize: '36px',
@@ -42,7 +42,6 @@ const Contents = ({ marketAddress }: { marketAddress: string }) => {
 
 export const MarketOverview = () => {
   const { data } = useGetMarketFactoryCreateQuery()
-
   return (
     <div style={{ maxWidth: '680px', marginRight: 'auto', marginLeft: 'auto' }}>
       <Row style={{ margin: '82px 0px' }}>
