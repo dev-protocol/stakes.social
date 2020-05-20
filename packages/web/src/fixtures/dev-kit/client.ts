@@ -124,7 +124,7 @@ export const createProperty = async (name: string, symbol: string, author: strin
   if (process.env.NODE_ENV == 'production' && client) {
     return client
       .propertyFactory(await client.registry(addresses.eth.main.registry).propertyFactory())
-      .createProperty(name, symbol, author)
+      .create(name, symbol, author)
   } else if (process.env.NODE_ENV == 'development') {
     console.log('env:', process.env.NODE_ENV, 'return mock value')
     return 'Dummy:0xd5f3c1bA399E000B1a76210d7dB12bb5eefA8e47'
