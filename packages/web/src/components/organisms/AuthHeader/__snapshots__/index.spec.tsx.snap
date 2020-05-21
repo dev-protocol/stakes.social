@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`MainHeader Snapshot 1`] = `
+exports[`AuthHeader Snapshot 1`] = `
 <body>
   <div>
     <div
@@ -37,27 +37,17 @@ exports[`MainHeader Snapshot 1`] = `
       </button>
     </div>
     <div
-      class="sc-AxiKw jeQPon"
+      class="sc-AxiKw gHixGn"
+      height="300"
     >
-      <h1
+      <h2
         class="ant-typography"
-        style="color: rgb(47, 128, 237);"
       >
-        Make a community sustainable together
-      </h1>
-      <a
-        class="sc-AxjAm bqVefi"
-        href="/how-it-works"
-      >
-        <button
-          class="ant-btn ant-btn-primary ant-btn-lg"
-          type="button"
-        >
-          <span>
-            How it works
-          </span>
-        </button>
-      </a>
+        Choose Market
+      </h2>
+      <div>
+        Select one asset market to authenticate.
+      </div>
     </div>
   </div>
 </body>

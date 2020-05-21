@@ -1,4 +1,5 @@
 import React, { useMemo } from 'react'
+import Link from 'next/link'
 import { List, Row, Col } from 'antd'
 import { CircleGraph } from 'src/components/atoms/CircleGraph'
 import { useAssetStrength } from 'src/fixtures/dev-kit/hooks'
@@ -59,6 +60,7 @@ export const AssetOutline = ({ propertyAddress }: Props) => {
               )}
               style={{ maxHeight: '224px' }}
             />
+            <Link href={'/auth'}>Add your asset</Link>
           </div>
         </Col>
         <Col flex="1 1 500px">

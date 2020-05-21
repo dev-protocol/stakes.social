@@ -2737,6 +2737,15 @@ type mutation_root {
   # delete single row from the table: "property_factory_create"
   delete_property_factory_create_by_pk(event_id: String!): property_factory_create
 
+  # delete data from the table: "property_meta"
+  delete_property_meta(
+    # filter the rows which have to be deleted
+    where: property_meta_bool_exp!
+  ): property_meta_mutation_response
+
+  # delete single row from the table: "property_meta"
+  delete_property_meta_by_pk(author: String!, property: String!): property_meta
+
   # delete data from the table: "reward_calculation_result"
   delete_reward_calculation_result(
     # filter the rows which have to be deleted
@@ -2744,7 +2753,7 @@ type mutation_root {
   ): reward_calculation_result_mutation_response
 
   # delete single row from the table: "reward_calculation_result"
-  delete_reward_calculation_result_by_pk(alocator_allocation_result_event_id: String!): reward_calculation_result
+  delete_reward_calculation_result_by_pk(event_id: String!): reward_calculation_result
 
   # insert data into the table: "allocator_allocation_result"
   insert_allocator_allocation_result(
@@ -2925,6 +2934,24 @@ type mutation_root {
     # on conflict condition
     on_conflict: property_factory_create_on_conflict
   ): property_factory_create
+
+  # insert data into the table: "property_meta"
+  insert_property_meta(
+    # the rows to be inserted
+    objects: [property_meta_insert_input!]!
+
+    # on conflict condition
+    on_conflict: property_meta_on_conflict
+  ): property_meta_mutation_response
+
+  # insert a single row into the table: "property_meta"
+  insert_property_meta_one(
+    # the row to be inserted
+    object: property_meta_insert_input!
+
+    # on conflict condition
+    on_conflict: property_meta_on_conflict
+  ): property_meta
 
   # insert data into the table: "reward_calculation_result"
   insert_reward_calculation_result(
@@ -3163,6 +3190,28 @@ type mutation_root {
     _set: property_factory_create_set_input
     pk_columns: property_factory_create_pk_columns_input!
   ): property_factory_create
+
+  # update data of the table: "property_meta"
+  update_property_meta(
+    # increments the integer columns with given value of the filtered values
+    _inc: property_meta_inc_input
+
+    # sets the columns of the filtered rows to the given values
+    _set: property_meta_set_input
+
+    # filter the rows which have to be updated
+    where: property_meta_bool_exp!
+  ): property_meta_mutation_response
+
+  # update single row of the table: "property_meta"
+  update_property_meta_by_pk(
+    # increments the integer columns with given value of the filtered values
+    _inc: property_meta_inc_input
+
+    # sets the columns of the filtered rows to the given values
+    _set: property_meta_set_input
+    pk_columns: property_meta_pk_columns_input!
+  ): property_meta
 
   # update data of the table: "reward_calculation_result"
   update_reward_calculation_result(
@@ -5840,6 +5889,302 @@ input property_factory_create_variance_order_by {
   transaction_index: order_by
 }
 
+# columns and relationships of "property_meta"
+type property_meta {
+  author: String!
+  block_number: Int!
+  name: String!
+  property: String!
+  sender: String!
+  symbol: String!
+}
+
+# aggregated selection of "property_meta"
+type property_meta_aggregate {
+  aggregate: property_meta_aggregate_fields
+  nodes: [property_meta!]!
+}
+
+# aggregate fields of "property_meta"
+type property_meta_aggregate_fields {
+  avg: property_meta_avg_fields
+  count(columns: [property_meta_select_column!], distinct: Boolean): Int
+  max: property_meta_max_fields
+  min: property_meta_min_fields
+  stddev: property_meta_stddev_fields
+  stddev_pop: property_meta_stddev_pop_fields
+  stddev_samp: property_meta_stddev_samp_fields
+  sum: property_meta_sum_fields
+  var_pop: property_meta_var_pop_fields
+  var_samp: property_meta_var_samp_fields
+  variance: property_meta_variance_fields
+}
+
+# order by aggregate values of table "property_meta"
+input property_meta_aggregate_order_by {
+  avg: property_meta_avg_order_by
+  count: order_by
+  max: property_meta_max_order_by
+  min: property_meta_min_order_by
+  stddev: property_meta_stddev_order_by
+  stddev_pop: property_meta_stddev_pop_order_by
+  stddev_samp: property_meta_stddev_samp_order_by
+  sum: property_meta_sum_order_by
+  var_pop: property_meta_var_pop_order_by
+  var_samp: property_meta_var_samp_order_by
+  variance: property_meta_variance_order_by
+}
+
+# input type for inserting array relation for remote table "property_meta"
+input property_meta_arr_rel_insert_input {
+  data: [property_meta_insert_input!]!
+  on_conflict: property_meta_on_conflict
+}
+
+# aggregate avg on columns
+type property_meta_avg_fields {
+  block_number: Float
+}
+
+# order by avg() on columns of table "property_meta"
+input property_meta_avg_order_by {
+  block_number: order_by
+}
+
+# Boolean expression to filter rows from the table "property_meta". All fields are combined with a logical 'AND'.
+input property_meta_bool_exp {
+  _and: [property_meta_bool_exp]
+  _not: property_meta_bool_exp
+  _or: [property_meta_bool_exp]
+  author: String_comparison_exp
+  block_number: Int_comparison_exp
+  name: String_comparison_exp
+  property: String_comparison_exp
+  sender: String_comparison_exp
+  symbol: String_comparison_exp
+}
+
+# unique or primary key constraints on table "property_meta"
+enum property_meta_constraint {
+  # unique or primary key constraint
+  property_meta_pkey
+}
+
+# input type for incrementing integer column in table "property_meta"
+input property_meta_inc_input {
+  block_number: Int
+}
+
+# input type for inserting data into table "property_meta"
+input property_meta_insert_input {
+  author: String
+  block_number: Int
+  name: String
+  property: String
+  sender: String
+  symbol: String
+}
+
+# aggregate max on columns
+type property_meta_max_fields {
+  author: String
+  block_number: Int
+  name: String
+  property: String
+  sender: String
+  symbol: String
+}
+
+# order by max() on columns of table "property_meta"
+input property_meta_max_order_by {
+  author: order_by
+  block_number: order_by
+  name: order_by
+  property: order_by
+  sender: order_by
+  symbol: order_by
+}
+
+# aggregate min on columns
+type property_meta_min_fields {
+  author: String
+  block_number: Int
+  name: String
+  property: String
+  sender: String
+  symbol: String
+}
+
+# order by min() on columns of table "property_meta"
+input property_meta_min_order_by {
+  author: order_by
+  block_number: order_by
+  name: order_by
+  property: order_by
+  sender: order_by
+  symbol: order_by
+}
+
+# response of any mutation on the table "property_meta"
+type property_meta_mutation_response {
+  # number of affected rows by the mutation
+  affected_rows: Int!
+
+  # data of the affected rows by the mutation
+  returning: [property_meta!]!
+}
+
+# input type for inserting object relation for remote table "property_meta"
+input property_meta_obj_rel_insert_input {
+  data: property_meta_insert_input!
+  on_conflict: property_meta_on_conflict
+}
+
+# on conflict condition type for table "property_meta"
+input property_meta_on_conflict {
+  constraint: property_meta_constraint!
+  update_columns: [property_meta_update_column!]!
+  where: property_meta_bool_exp
+}
+
+# ordering options when selecting data from "property_meta"
+input property_meta_order_by {
+  author: order_by
+  block_number: order_by
+  name: order_by
+  property: order_by
+  sender: order_by
+  symbol: order_by
+}
+
+# primary key columns input for table: "property_meta"
+input property_meta_pk_columns_input {
+  author: String!
+  property: String!
+}
+
+# select columns of table "property_meta"
+enum property_meta_select_column {
+  # column name
+  author
+
+  # column name
+  block_number
+
+  # column name
+  name
+
+  # column name
+  property
+
+  # column name
+  sender
+
+  # column name
+  symbol
+}
+
+# input type for updating data in table "property_meta"
+input property_meta_set_input {
+  author: String
+  block_number: Int
+  name: String
+  property: String
+  sender: String
+  symbol: String
+}
+
+# aggregate stddev on columns
+type property_meta_stddev_fields {
+  block_number: Float
+}
+
+# order by stddev() on columns of table "property_meta"
+input property_meta_stddev_order_by {
+  block_number: order_by
+}
+
+# aggregate stddev_pop on columns
+type property_meta_stddev_pop_fields {
+  block_number: Float
+}
+
+# order by stddev_pop() on columns of table "property_meta"
+input property_meta_stddev_pop_order_by {
+  block_number: order_by
+}
+
+# aggregate stddev_samp on columns
+type property_meta_stddev_samp_fields {
+  block_number: Float
+}
+
+# order by stddev_samp() on columns of table "property_meta"
+input property_meta_stddev_samp_order_by {
+  block_number: order_by
+}
+
+# aggregate sum on columns
+type property_meta_sum_fields {
+  block_number: Int
+}
+
+# order by sum() on columns of table "property_meta"
+input property_meta_sum_order_by {
+  block_number: order_by
+}
+
+# update columns of table "property_meta"
+enum property_meta_update_column {
+  # column name
+  author
+
+  # column name
+  block_number
+
+  # column name
+  name
+
+  # column name
+  property
+
+  # column name
+  sender
+
+  # column name
+  symbol
+}
+
+# aggregate var_pop on columns
+type property_meta_var_pop_fields {
+  block_number: Float
+}
+
+# order by var_pop() on columns of table "property_meta"
+input property_meta_var_pop_order_by {
+  block_number: order_by
+}
+
+# aggregate var_samp on columns
+type property_meta_var_samp_fields {
+  block_number: Float
+}
+
+# order by var_samp() on columns of table "property_meta"
+input property_meta_var_samp_order_by {
+  block_number: order_by
+}
+
+# aggregate variance on columns
+type property_meta_variance_fields {
+  block_number: Float
+}
+
+# order by variance() on columns of table "property_meta"
+input property_meta_variance_order_by {
+  block_number: order_by
+}
+
 # query root
 type query_root {
   # fetch data from the table: "allocator_allocation_result"
@@ -6304,6 +6649,45 @@ type query_root {
   # fetch data from the table: "property_factory_create" using primary key columns
   property_factory_create_by_pk(event_id: String!): property_factory_create
 
+  # fetch data from the table: "property_meta"
+  property_meta(
+    # distinct select on columns
+    distinct_on: [property_meta_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [property_meta_order_by!]
+
+    # filter the rows returned
+    where: property_meta_bool_exp
+  ): [property_meta!]!
+
+  # fetch aggregated fields from the table: "property_meta"
+  property_meta_aggregate(
+    # distinct select on columns
+    distinct_on: [property_meta_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [property_meta_order_by!]
+
+    # filter the rows returned
+    where: property_meta_bool_exp
+  ): property_meta_aggregate!
+
+  # fetch data from the table: "property_meta" using primary key columns
+  property_meta_by_pk(author: String!, property: String!): property_meta
+
   # fetch data from the table: "reward_calculation_result"
   reward_calculation_result(
     # distinct select on columns
@@ -6341,7 +6725,7 @@ type query_root {
   ): reward_calculation_result_aggregate!
 
   # fetch data from the table: "reward_calculation_result" using primary key columns
-  reward_calculation_result_by_pk(alocator_allocation_result_event_id: String!): reward_calculation_result
+  reward_calculation_result_by_pk(event_id: String!): reward_calculation_result
 }
 
 # columns and relationships of "reward_calculation_result"
@@ -6350,11 +6734,11 @@ type reward_calculation_result {
 
   # An object relationship
   allocation: allocator_allocation_result
-  alocator_allocation_result_event_id: String!
 
   # An object relationship
   authentication: property_authentication
   block_number: Int!
+  event_id: String!
   holder_reward: numeric!
   lockup: numeric!
   metrics: String!
@@ -6435,9 +6819,9 @@ input reward_calculation_result_bool_exp {
   _or: [reward_calculation_result_bool_exp]
   allocate_result: numeric_comparison_exp
   allocation: allocator_allocation_result_bool_exp
-  alocator_allocation_result_event_id: String_comparison_exp
   authentication: property_authentication_bool_exp
   block_number: Int_comparison_exp
+  event_id: String_comparison_exp
   holder_reward: numeric_comparison_exp
   lockup: numeric_comparison_exp
   metrics: String_comparison_exp
@@ -6466,9 +6850,9 @@ input reward_calculation_result_inc_input {
 input reward_calculation_result_insert_input {
   allocate_result: numeric
   allocation: allocator_allocation_result_obj_rel_insert_input
-  alocator_allocation_result_event_id: String
   authentication: property_authentication_obj_rel_insert_input
   block_number: Int
+  event_id: String
   holder_reward: numeric
   lockup: numeric
   metrics: String
@@ -6481,8 +6865,8 @@ input reward_calculation_result_insert_input {
 # aggregate max on columns
 type reward_calculation_result_max_fields {
   allocate_result: numeric
-  alocator_allocation_result_event_id: String
   block_number: Int
+  event_id: String
   holder_reward: numeric
   lockup: numeric
   metrics: String
@@ -6493,8 +6877,8 @@ type reward_calculation_result_max_fields {
 # order by max() on columns of table "reward_calculation_result"
 input reward_calculation_result_max_order_by {
   allocate_result: order_by
-  alocator_allocation_result_event_id: order_by
   block_number: order_by
+  event_id: order_by
   holder_reward: order_by
   lockup: order_by
   metrics: order_by
@@ -6505,8 +6889,8 @@ input reward_calculation_result_max_order_by {
 # aggregate min on columns
 type reward_calculation_result_min_fields {
   allocate_result: numeric
-  alocator_allocation_result_event_id: String
   block_number: Int
+  event_id: String
   holder_reward: numeric
   lockup: numeric
   metrics: String
@@ -6517,8 +6901,8 @@ type reward_calculation_result_min_fields {
 # order by min() on columns of table "reward_calculation_result"
 input reward_calculation_result_min_order_by {
   allocate_result: order_by
-  alocator_allocation_result_event_id: order_by
   block_number: order_by
+  event_id: order_by
   holder_reward: order_by
   lockup: order_by
   metrics: order_by
@@ -6552,9 +6936,9 @@ input reward_calculation_result_on_conflict {
 input reward_calculation_result_order_by {
   allocate_result: order_by
   allocation: allocator_allocation_result_order_by
-  alocator_allocation_result_event_id: order_by
   authentication: property_authentication_order_by
   block_number: order_by
+  event_id: order_by
   holder_reward: order_by
   lockup: order_by
   metrics: order_by
@@ -6566,7 +6950,7 @@ input reward_calculation_result_order_by {
 
 # primary key columns input for table: "reward_calculation_result"
 input reward_calculation_result_pk_columns_input {
-  alocator_allocation_result_event_id: String!
+  event_id: String!
 }
 
 # select columns of table "reward_calculation_result"
@@ -6575,10 +6959,10 @@ enum reward_calculation_result_select_column {
   allocate_result
 
   # column name
-  alocator_allocation_result_event_id
+  block_number
 
   # column name
-  block_number
+  event_id
 
   # column name
   holder_reward
@@ -6599,8 +6983,8 @@ enum reward_calculation_result_select_column {
 # input type for updating data in table "reward_calculation_result"
 input reward_calculation_result_set_input {
   allocate_result: numeric
-  alocator_allocation_result_event_id: String
   block_number: Int
+  event_id: String
   holder_reward: numeric
   lockup: numeric
   metrics: String
@@ -6686,10 +7070,10 @@ enum reward_calculation_result_update_column {
   allocate_result
 
   # column name
-  alocator_allocation_result_event_id
+  block_number
 
   # column name
-  block_number
+  event_id
 
   # column name
   holder_reward
@@ -7259,6 +7643,45 @@ type subscription_root {
   # fetch data from the table: "property_factory_create" using primary key columns
   property_factory_create_by_pk(event_id: String!): property_factory_create
 
+  # fetch data from the table: "property_meta"
+  property_meta(
+    # distinct select on columns
+    distinct_on: [property_meta_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [property_meta_order_by!]
+
+    # filter the rows returned
+    where: property_meta_bool_exp
+  ): [property_meta!]!
+
+  # fetch aggregated fields from the table: "property_meta"
+  property_meta_aggregate(
+    # distinct select on columns
+    distinct_on: [property_meta_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [property_meta_order_by!]
+
+    # filter the rows returned
+    where: property_meta_bool_exp
+  ): property_meta_aggregate!
+
+  # fetch data from the table: "property_meta" using primary key columns
+  property_meta_by_pk(author: String!, property: String!): property_meta
+
   # fetch data from the table: "reward_calculation_result"
   reward_calculation_result(
     # distinct select on columns
@@ -7296,6 +7719,5 @@ type subscription_root {
   ): reward_calculation_result_aggregate!
 
   # fetch data from the table: "reward_calculation_result" using primary key columns
-  reward_calculation_result_by_pk(alocator_allocation_result_event_id: String!): reward_calculation_result
+  reward_calculation_result_by_pk(event_id: String!): reward_calculation_result
 }
-

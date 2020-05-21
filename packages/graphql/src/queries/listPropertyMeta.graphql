@@ -1,0 +1,5 @@
+query listPropertyMeta($author: String!, $limit: Int, $ilike: String) {
+  property_meta(where: { author: { _eq: $author }, property: { _ilike: $ilike } }, limit: $limit) {
+    property
+  }
+}

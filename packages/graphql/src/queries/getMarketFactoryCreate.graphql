@@ -1,0 +1,5 @@
+query getMarketFactoryCreate {
+  market_factory_create {
+    market
+  }
+}

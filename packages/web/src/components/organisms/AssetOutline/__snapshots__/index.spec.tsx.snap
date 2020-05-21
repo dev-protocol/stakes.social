@@ -45,6 +45,11 @@ exports[`AssetOutline Snapshot 1`] = `
                 </div>
               </div>
             </div>
+            <a
+              href="/auth"
+            >
+              Add your asset
+            </a>
           </div>
         </div>
         <div

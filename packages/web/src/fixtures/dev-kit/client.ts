@@ -118,3 +118,38 @@ export const allocate = async (metricsAddress: string) => {
   }
   return undefined
 }
+
+export const createProperty = async (name: string, symbol: string, author: string) => {
+  const client = newClient()
+  if (process.env.NODE_ENV == 'production' && client) {
+    return client
+      .propertyFactory(await client.registry(addresses.eth.main.registry).propertyFactory())
+      .create(name, symbol, author)
+  } else if (process.env.NODE_ENV == 'development') {
+    console.log('env:', process.env.NODE_ENV, 'return mock value')
+    return 'Dummy:0xd5f3c1bA399E000B1a76210d7dB12bb5eefA8e47'
+  }
+  return undefined
+}
+
+export const marketScheme = async (marketAddress: string) => {
+  const client = newClient()
+  if (client) {
+    return client.market(marketAddress).schema()
+  }
+  return []
+}
+
+export const authenticate = async (marketAddress: string, propertyAddress: string, args: string[]) => {
+  const client = newClient()
+  if (process.env.NODE_ENV == 'production' && client) {
+    const _args = ['', '', '', '', ''].map((x, i) => (args[i] ? args[i] : x))
+    return client.market(marketAddress).authenticate(propertyAddress, _args, {
+      metricsFactory: await client.registry(addresses.eth.main.registry).metricsFactory()
+    })
+  } else if (process.env.NODE_ENV == 'development') {
+    console.log('env:', process.env.NODE_ENV, 'return mock value')
+    return 'Dummy:metrics-address'
+  }
+  return undefined
+}
