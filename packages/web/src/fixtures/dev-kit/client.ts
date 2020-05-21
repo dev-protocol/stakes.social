@@ -142,11 +142,14 @@ export const marketScheme = async (marketAddress: string) => {
 
 export const authenticate = async (marketAddress: string, propertyAddress: string, args: string[]) => {
   const client = newClient()
-  if (client) {
+  if (process.env.NODE_ENV == 'production' && client) {
     const _args = ['', '', '', '', ''].map((x, i) => (args[i] ? args[i] : x))
     return client.market(marketAddress).authenticate(propertyAddress, _args, {
       metricsFactory: await client.registry(addresses.eth.main.registry).metricsFactory()
     })
+  } else if (process.env.NODE_ENV == 'development') {
+    console.log('env:', process.env.NODE_ENV, 'return mock value')
+    return 'Dummy:metrics-address'
   }
   return undefined
 }

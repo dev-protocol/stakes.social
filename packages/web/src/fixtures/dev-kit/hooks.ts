@@ -260,13 +260,15 @@ export const useAuthenticate = () => {
     setIsLoading(true)
     setError(undefined)
     return authenticate(marketAddress, propertyAddress, args)
-      .then(() => {
+      .then(metricsAddress => {
         setIsLoading(false)
+        return metricsAddress
       })
       .catch(err => {
         setError(err)
         message.error(err.message)
         setIsLoading(false)
+        return ''
       })
   }, [])
   return { authenticate: callback, isLoading, error }
