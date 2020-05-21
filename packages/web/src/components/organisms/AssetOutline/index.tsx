@@ -10,11 +10,7 @@ interface Props {
 }
 
 const ResponsivePropertyFrame = styled.div`
-  padding: 0 28px;
   min-height: 270px;
-  @media (max-width: 768px) {
-    padding: 0 18px;
-  }
 `
 
 const AssetStrengthBase = ({ assetStrength }: { assetStrength: number }) => (
@@ -49,9 +45,9 @@ export const AssetOutline = ({ propertyAddress }: Props) => {
 
   return (
     <div>
-      <Row>
+      <Row gutter={[48, 48]}>
         <Col flex="1 1 268px">
-          <ResponsivePropertyFrame>
+          <div>
             <p style={{ fontSize: '18px', lineHeight: '24px', color: '#000' }}>Included Assets</p>
             <List
               bordered
@@ -63,7 +59,7 @@ export const AssetOutline = ({ propertyAddress }: Props) => {
               )}
               style={{ maxHeight: '224px' }}
             />
-          </ResponsivePropertyFrame>
+          </div>
         </Col>
         <Col flex="1 1 500px">
           <ResponsivePropertyFrame>

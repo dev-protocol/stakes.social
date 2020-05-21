@@ -10,14 +10,14 @@ const Article = styled.article`
 const Title = styled.h1`
   text-align: center;
 `
-const MainImage = styled.img`
-  width: 100%;
-  height: auto;
-  max-width: 760px;
-  margin: auto;
+const Deck = styled.iframe`
   display: block;
-  border: 10px solid whitesmoke;
-  border-radius: 17px;
+  width: 100%;
+  height: 466px;
+  margin: auto;
+  border: 0;
+  outline: 0;
+  border-radius: 3px;
 `
 const Section = styled.section`
   display: grid;
@@ -51,7 +51,7 @@ const HowItWorks = () => {
       <Header />
       <Article>
         <Title>How it works</Title>
-        <MainImage src="/dev-protocol__deck--how-it-works.png"></MainImage>
+        <Deck src="https://drive.google.com/file/d/1KspRC6ruqa1F15kvAxZFDjHGWJR-OeSt/preview"></Deck>
         <Section>
           <h2>What is Dev Protocol?</h2>
           <div>
