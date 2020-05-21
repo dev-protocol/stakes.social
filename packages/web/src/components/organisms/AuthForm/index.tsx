@@ -39,13 +39,15 @@ export const AuthForm = ({ market, property }: Props) => {
         {metrics ? (
           <Result
             status="success"
-            title="Successfully Purchased Cloud Server ECS!"
-            subTitle="Order number: 2017182818828182881 Cloud server configuration takes 1-5 minutes, please wait."
+            title="Successfully Authenticated Your Asset!"
+            subTitle="Viewing a new asset will take dozens of minutes, but you can also check it out right away on Etherscan."
             extra={[
-              <Button type="primary" key="console">
-                Go Console
+              <Button key="etherscan" href={`https://etherscan.io/address/${metrics}`}>
+                Etherscan
               </Button>,
-              <Button key="buy">Buy Again</Button>
+              <Button key="property" href={`/${property}`} type="primary">
+                Go the Property
+              </Button>
             ]}
           />
         ) : (
