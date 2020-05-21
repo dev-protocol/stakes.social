@@ -51,7 +51,7 @@ const HowItWorks = () => {
       <Header />
       <Article>
         <Title>How it works</Title>
-        <MainImage src="/dev-protocol__deck--how-it-works.png"></MainImage>
+        <MainImage src="//asset.stakes.social/dev-protocol__deck--how-it-works.png"></MainImage>
         <Section>
           <h2>What is Dev Protocol?</h2>
           <div>

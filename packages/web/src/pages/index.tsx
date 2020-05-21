@@ -46,7 +46,7 @@ const Index = (_: Props) => {
   return (
     <>
       <MainHeader />
-      <div style={{ maxWidth: '1048px', marginRight: 'auto', marginLeft: 'auto' }}>
+      <div style={{ padding: '1rem', maxWidth: '1048px', marginRight: 'auto', marginLeft: 'auto' }}>
         <Button onClick={onClick} style={{ display: 'block', margin: '32px 0 32px auto' }}>
           Create a new Property
         </Button>
