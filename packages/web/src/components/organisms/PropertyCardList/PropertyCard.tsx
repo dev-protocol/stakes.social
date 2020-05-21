@@ -24,9 +24,14 @@ const ResponsiveCol = styled(Col)`
   }
 `
 
+const StatisticTitle = styled.span`
+  color: rgba(0, 0, 0, 0.45);
+  font-size: 14px;
+`
+
 const AssetStrengthBase = ({ assetStrength }: { assetStrength: number }) => (
   <div>
-    <span style={{ position: 'absolute' }}>{Math.floor(assetStrength * 100)}% of markets</span>
+    <StatisticTitle style={{ position: 'absolute' }}>{Math.floor(assetStrength * 100)}% of markets</StatisticTitle>
     <CircleGraph size={81} percentage={assetStrength} />
   </div>
 )
