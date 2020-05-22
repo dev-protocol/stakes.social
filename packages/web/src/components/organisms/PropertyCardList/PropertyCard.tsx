@@ -58,31 +58,31 @@ export const PropertyCard = ({ propertyAddress }: Props) => {
   const averageInterestRate = useAverageInterestRate(metrics ? metrics : '')
 
   return (
-    <div style={{ border: 'solid 1px #f0f0f0', padding: '1.2em', cursor: 'pointer' }}>
-      <Row>
-        <Link href={'/[propertyAddress]'} as={`/${propertyAddress}`}>
+    <Link href={'/[propertyAddress]'} as={`/${propertyAddress}`}>
+      <div style={{ border: 'solid 1px #f0f0f0', padding: '1.2em', cursor: 'pointer' }}>
+        <Row>
           <Col sm={24} md={10}>
             <Statistic title={propertyAddress} value={includeAssets} />
           </Col>
-        </Link>
-        <ResponsiveCol sm={24} md={14}>
-          <ResponsiveRow>
-            <Col span={10}>
-              <Statistic
-                title="Total Rewards"
-                value={totalRewardsAmount && totalRewardsAmount.dp(1).toNumber()}
-                suffix="DEV"
-              />
-            </Col>
-            <Col span={8}>
-              <Statistic title="Avg. Interest" value={averageInterestRate.dp(2).toNumber()} suffix="%" />
-            </Col>
-            <Col span={6}>
-              {metrics && market ? <AssetStrength metrics={metrics} market={market} /> : <AssetStrengthWithoutData />}
-            </Col>
-          </ResponsiveRow>
-        </ResponsiveCol>
-      </Row>
-    </div>
+          <ResponsiveCol sm={24} md={14}>
+            <ResponsiveRow>
+              <Col span={10}>
+                <Statistic
+                  title="Total Rewards"
+                  value={totalRewardsAmount && totalRewardsAmount.dp(1).toNumber()}
+                  suffix="DEV"
+                />
+              </Col>
+              <Col span={8}>
+                <Statistic title="Avg. Interest" value={averageInterestRate.dp(2).toNumber()} suffix="%" />
+              </Col>
+              <Col span={6}>
+                {metrics && market ? <AssetStrength metrics={metrics} market={market} /> : <AssetStrengthWithoutData />}
+              </Col>
+            </ResponsiveRow>
+          </ResponsiveCol>
+        </Row>
+      </div>
+    </Link>
   )
 }
