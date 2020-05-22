@@ -2255,6 +2255,8 @@ export type Mutation_Root = {
   delete_property_authentication_deleted_by_pk?: Maybe<Property_Authentication_Deleted>
   delete_property_factory_create?: Maybe<Property_Factory_Create_Mutation_Response>
   delete_property_factory_create_by_pk?: Maybe<Property_Factory_Create>
+  delete_property_meta?: Maybe<Property_Meta_Mutation_Response>
+  delete_property_meta_by_pk?: Maybe<Property_Meta>
   delete_reward_calculation_result?: Maybe<Reward_Calculation_Result_Mutation_Response>
   delete_reward_calculation_result_by_pk?: Maybe<Reward_Calculation_Result>
   insert_allocator_allocation_result?: Maybe<Allocator_Allocation_Result_Mutation_Response>
@@ -2277,6 +2279,8 @@ export type Mutation_Root = {
   insert_property_authentication_one?: Maybe<Property_Authentication>
   insert_property_factory_create?: Maybe<Property_Factory_Create_Mutation_Response>
   insert_property_factory_create_one?: Maybe<Property_Factory_Create>
+  insert_property_meta?: Maybe<Property_Meta_Mutation_Response>
+  insert_property_meta_one?: Maybe<Property_Meta>
   insert_reward_calculation_result?: Maybe<Reward_Calculation_Result_Mutation_Response>
   insert_reward_calculation_result_one?: Maybe<Reward_Calculation_Result>
   update_allocator_allocation_result?: Maybe<Allocator_Allocation_Result_Mutation_Response>
@@ -2299,6 +2303,8 @@ export type Mutation_Root = {
   update_property_authentication_deleted_by_pk?: Maybe<Property_Authentication_Deleted>
   update_property_factory_create?: Maybe<Property_Factory_Create_Mutation_Response>
   update_property_factory_create_by_pk?: Maybe<Property_Factory_Create>
+  update_property_meta?: Maybe<Property_Meta_Mutation_Response>
+  update_property_meta_by_pk?: Maybe<Property_Meta>
   update_reward_calculation_result?: Maybe<Reward_Calculation_Result_Mutation_Response>
   update_reward_calculation_result_by_pk?: Maybe<Reward_Calculation_Result>
 }
@@ -2385,12 +2391,21 @@ export type Mutation_RootDelete_Property_Factory_Create_By_PkArgs = {
   event_id: Scalars['String']
 }
 
+export type Mutation_RootDelete_Property_MetaArgs = {
+  where: Property_Meta_Bool_Exp
+}
+
+export type Mutation_RootDelete_Property_Meta_By_PkArgs = {
+  author: Scalars['String']
+  property: Scalars['String']
+}
+
 export type Mutation_RootDelete_Reward_Calculation_ResultArgs = {
   where: Reward_Calculation_Result_Bool_Exp
 }
 
 export type Mutation_RootDelete_Reward_Calculation_Result_By_PkArgs = {
-  alocator_allocation_result_event_id: Scalars['String']
+  event_id: Scalars['String']
 }
 
 export type Mutation_RootInsert_Allocator_Allocation_ResultArgs = {
@@ -2491,6 +2506,16 @@ export type Mutation_RootInsert_Property_Factory_CreateArgs = {
 export type Mutation_RootInsert_Property_Factory_Create_OneArgs = {
   object: Property_Factory_Create_Insert_Input
   on_conflict?: Maybe<Property_Factory_Create_On_Conflict>
+}
+
+export type Mutation_RootInsert_Property_MetaArgs = {
+  objects: Array<Property_Meta_Insert_Input>
+  on_conflict?: Maybe<Property_Meta_On_Conflict>
+}
+
+export type Mutation_RootInsert_Property_Meta_OneArgs = {
+  object: Property_Meta_Insert_Input
+  on_conflict?: Maybe<Property_Meta_On_Conflict>
 }
 
 export type Mutation_RootInsert_Reward_Calculation_ResultArgs = {
@@ -2621,6 +2646,18 @@ export type Mutation_RootUpdate_Property_Factory_Create_By_PkArgs = {
   _inc?: Maybe<Property_Factory_Create_Inc_Input>
   _set?: Maybe<Property_Factory_Create_Set_Input>
   pk_columns: Property_Factory_Create_Pk_Columns_Input
+}
+
+export type Mutation_RootUpdate_Property_MetaArgs = {
+  _inc?: Maybe<Property_Meta_Inc_Input>
+  _set?: Maybe<Property_Meta_Set_Input>
+  where: Property_Meta_Bool_Exp
+}
+
+export type Mutation_RootUpdate_Property_Meta_By_PkArgs = {
+  _inc?: Maybe<Property_Meta_Inc_Input>
+  _set?: Maybe<Property_Meta_Set_Input>
+  pk_columns: Property_Meta_Pk_Columns_Input
 }
 
 export type Mutation_RootUpdate_Reward_Calculation_ResultArgs = {
@@ -4842,6 +4879,258 @@ export type Property_Factory_Create_Variance_Order_By = {
   transaction_index?: Maybe<Order_By>
 }
 
+export type Property_Meta = {
+  __typename?: 'property_meta'
+  author: Scalars['String']
+  block_number: Scalars['Int']
+  name: Scalars['String']
+  property: Scalars['String']
+  sender: Scalars['String']
+  symbol: Scalars['String']
+}
+
+export type Property_Meta_Aggregate = {
+  __typename?: 'property_meta_aggregate'
+  aggregate?: Maybe<Property_Meta_Aggregate_Fields>
+  nodes: Array<Property_Meta>
+}
+
+export type Property_Meta_Aggregate_Fields = {
+  __typename?: 'property_meta_aggregate_fields'
+  avg?: Maybe<Property_Meta_Avg_Fields>
+  count?: Maybe<Scalars['Int']>
+  max?: Maybe<Property_Meta_Max_Fields>
+  min?: Maybe<Property_Meta_Min_Fields>
+  stddev?: Maybe<Property_Meta_Stddev_Fields>
+  stddev_pop?: Maybe<Property_Meta_Stddev_Pop_Fields>
+  stddev_samp?: Maybe<Property_Meta_Stddev_Samp_Fields>
+  sum?: Maybe<Property_Meta_Sum_Fields>
+  var_pop?: Maybe<Property_Meta_Var_Pop_Fields>
+  var_samp?: Maybe<Property_Meta_Var_Samp_Fields>
+  variance?: Maybe<Property_Meta_Variance_Fields>
+}
+
+export type Property_Meta_Aggregate_FieldsCountArgs = {
+  columns?: Maybe<Array<Property_Meta_Select_Column>>
+  distinct?: Maybe<Scalars['Boolean']>
+}
+
+export type Property_Meta_Aggregate_Order_By = {
+  avg?: Maybe<Property_Meta_Avg_Order_By>
+  count?: Maybe<Order_By>
+  max?: Maybe<Property_Meta_Max_Order_By>
+  min?: Maybe<Property_Meta_Min_Order_By>
+  stddev?: Maybe<Property_Meta_Stddev_Order_By>
+  stddev_pop?: Maybe<Property_Meta_Stddev_Pop_Order_By>
+  stddev_samp?: Maybe<Property_Meta_Stddev_Samp_Order_By>
+  sum?: Maybe<Property_Meta_Sum_Order_By>
+  var_pop?: Maybe<Property_Meta_Var_Pop_Order_By>
+  var_samp?: Maybe<Property_Meta_Var_Samp_Order_By>
+  variance?: Maybe<Property_Meta_Variance_Order_By>
+}
+
+export type Property_Meta_Arr_Rel_Insert_Input = {
+  data: Array<Property_Meta_Insert_Input>
+  on_conflict?: Maybe<Property_Meta_On_Conflict>
+}
+
+export type Property_Meta_Avg_Fields = {
+  __typename?: 'property_meta_avg_fields'
+  block_number?: Maybe<Scalars['Float']>
+}
+
+export type Property_Meta_Avg_Order_By = {
+  block_number?: Maybe<Order_By>
+}
+
+export type Property_Meta_Bool_Exp = {
+  _and?: Maybe<Array<Maybe<Property_Meta_Bool_Exp>>>
+  _not?: Maybe<Property_Meta_Bool_Exp>
+  _or?: Maybe<Array<Maybe<Property_Meta_Bool_Exp>>>
+  author?: Maybe<String_Comparison_Exp>
+  block_number?: Maybe<Int_Comparison_Exp>
+  name?: Maybe<String_Comparison_Exp>
+  property?: Maybe<String_Comparison_Exp>
+  sender?: Maybe<String_Comparison_Exp>
+  symbol?: Maybe<String_Comparison_Exp>
+}
+
+export enum Property_Meta_Constraint {
+  PropertyMetaPkey = 'property_meta_pkey'
+}
+
+export type Property_Meta_Inc_Input = {
+  block_number?: Maybe<Scalars['Int']>
+}
+
+export type Property_Meta_Insert_Input = {
+  author?: Maybe<Scalars['String']>
+  block_number?: Maybe<Scalars['Int']>
+  name?: Maybe<Scalars['String']>
+  property?: Maybe<Scalars['String']>
+  sender?: Maybe<Scalars['String']>
+  symbol?: Maybe<Scalars['String']>
+}
+
+export type Property_Meta_Max_Fields = {
+  __typename?: 'property_meta_max_fields'
+  author?: Maybe<Scalars['String']>
+  block_number?: Maybe<Scalars['Int']>
+  name?: Maybe<Scalars['String']>
+  property?: Maybe<Scalars['String']>
+  sender?: Maybe<Scalars['String']>
+  symbol?: Maybe<Scalars['String']>
+}
+
+export type Property_Meta_Max_Order_By = {
+  author?: Maybe<Order_By>
+  block_number?: Maybe<Order_By>
+  name?: Maybe<Order_By>
+  property?: Maybe<Order_By>
+  sender?: Maybe<Order_By>
+  symbol?: Maybe<Order_By>
+}
+
+export type Property_Meta_Min_Fields = {
+  __typename?: 'property_meta_min_fields'
+  author?: Maybe<Scalars['String']>
+  block_number?: Maybe<Scalars['Int']>
+  name?: Maybe<Scalars['String']>
+  property?: Maybe<Scalars['String']>
+  sender?: Maybe<Scalars['String']>
+  symbol?: Maybe<Scalars['String']>
+}
+
+export type Property_Meta_Min_Order_By = {
+  author?: Maybe<Order_By>
+  block_number?: Maybe<Order_By>
+  name?: Maybe<Order_By>
+  property?: Maybe<Order_By>
+  sender?: Maybe<Order_By>
+  symbol?: Maybe<Order_By>
+}
+
+export type Property_Meta_Mutation_Response = {
+  __typename?: 'property_meta_mutation_response'
+  affected_rows: Scalars['Int']
+  returning: Array<Property_Meta>
+}
+
+export type Property_Meta_Obj_Rel_Insert_Input = {
+  data: Property_Meta_Insert_Input
+  on_conflict?: Maybe<Property_Meta_On_Conflict>
+}
+
+export type Property_Meta_On_Conflict = {
+  constraint: Property_Meta_Constraint
+  update_columns: Array<Property_Meta_Update_Column>
+  where?: Maybe<Property_Meta_Bool_Exp>
+}
+
+export type Property_Meta_Order_By = {
+  author?: Maybe<Order_By>
+  block_number?: Maybe<Order_By>
+  name?: Maybe<Order_By>
+  property?: Maybe<Order_By>
+  sender?: Maybe<Order_By>
+  symbol?: Maybe<Order_By>
+}
+
+export type Property_Meta_Pk_Columns_Input = {
+  author: Scalars['String']
+  property: Scalars['String']
+}
+
+export enum Property_Meta_Select_Column {
+  Author = 'author',
+  BlockNumber = 'block_number',
+  Name = 'name',
+  Property = 'property',
+  Sender = 'sender',
+  Symbol = 'symbol'
+}
+
+export type Property_Meta_Set_Input = {
+  author?: Maybe<Scalars['String']>
+  block_number?: Maybe<Scalars['Int']>
+  name?: Maybe<Scalars['String']>
+  property?: Maybe<Scalars['String']>
+  sender?: Maybe<Scalars['String']>
+  symbol?: Maybe<Scalars['String']>
+}
+
+export type Property_Meta_Stddev_Fields = {
+  __typename?: 'property_meta_stddev_fields'
+  block_number?: Maybe<Scalars['Float']>
+}
+
+export type Property_Meta_Stddev_Order_By = {
+  block_number?: Maybe<Order_By>
+}
+
+export type Property_Meta_Stddev_Pop_Fields = {
+  __typename?: 'property_meta_stddev_pop_fields'
+  block_number?: Maybe<Scalars['Float']>
+}
+
+export type Property_Meta_Stddev_Pop_Order_By = {
+  block_number?: Maybe<Order_By>
+}
+
+export type Property_Meta_Stddev_Samp_Fields = {
+  __typename?: 'property_meta_stddev_samp_fields'
+  block_number?: Maybe<Scalars['Float']>
+}
+
+export type Property_Meta_Stddev_Samp_Order_By = {
+  block_number?: Maybe<Order_By>
+}
+
+export type Property_Meta_Sum_Fields = {
+  __typename?: 'property_meta_sum_fields'
+  block_number?: Maybe<Scalars['Int']>
+}
+
+export type Property_Meta_Sum_Order_By = {
+  block_number?: Maybe<Order_By>
+}
+
+export enum Property_Meta_Update_Column {
+  Author = 'author',
+  BlockNumber = 'block_number',
+  Name = 'name',
+  Property = 'property',
+  Sender = 'sender',
+  Symbol = 'symbol'
+}
+
+export type Property_Meta_Var_Pop_Fields = {
+  __typename?: 'property_meta_var_pop_fields'
+  block_number?: Maybe<Scalars['Float']>
+}
+
+export type Property_Meta_Var_Pop_Order_By = {
+  block_number?: Maybe<Order_By>
+}
+
+export type Property_Meta_Var_Samp_Fields = {
+  __typename?: 'property_meta_var_samp_fields'
+  block_number?: Maybe<Scalars['Float']>
+}
+
+export type Property_Meta_Var_Samp_Order_By = {
+  block_number?: Maybe<Order_By>
+}
+
+export type Property_Meta_Variance_Fields = {
+  __typename?: 'property_meta_variance_fields'
+  block_number?: Maybe<Scalars['Float']>
+}
+
+export type Property_Meta_Variance_Order_By = {
+  block_number?: Maybe<Order_By>
+}
+
 export type Query_Root = {
   __typename?: 'query_root'
   allocator_allocation_result: Array<Allocator_Allocation_Result>
@@ -4878,6 +5167,9 @@ export type Query_Root = {
   property_factory_create: Array<Property_Factory_Create>
   property_factory_create_aggregate: Property_Factory_Create_Aggregate
   property_factory_create_by_pk?: Maybe<Property_Factory_Create>
+  property_meta: Array<Property_Meta>
+  property_meta_aggregate: Property_Meta_Aggregate
+  property_meta_by_pk?: Maybe<Property_Meta>
   reward_calculation_result: Array<Reward_Calculation_Result>
   reward_calculation_result_aggregate: Reward_Calculation_Result_Aggregate
   reward_calculation_result_by_pk?: Maybe<Reward_Calculation_Result>
@@ -5117,6 +5409,27 @@ export type Query_RootProperty_Factory_Create_By_PkArgs = {
   event_id: Scalars['String']
 }
 
+export type Query_RootProperty_MetaArgs = {
+  distinct_on?: Maybe<Array<Property_Meta_Select_Column>>
+  limit?: Maybe<Scalars['Int']>
+  offset?: Maybe<Scalars['Int']>
+  order_by?: Maybe<Array<Property_Meta_Order_By>>
+  where?: Maybe<Property_Meta_Bool_Exp>
+}
+
+export type Query_RootProperty_Meta_AggregateArgs = {
+  distinct_on?: Maybe<Array<Property_Meta_Select_Column>>
+  limit?: Maybe<Scalars['Int']>
+  offset?: Maybe<Scalars['Int']>
+  order_by?: Maybe<Array<Property_Meta_Order_By>>
+  where?: Maybe<Property_Meta_Bool_Exp>
+}
+
+export type Query_RootProperty_Meta_By_PkArgs = {
+  author: Scalars['String']
+  property: Scalars['String']
+}
+
 export type Query_RootReward_Calculation_ResultArgs = {
   distinct_on?: Maybe<Array<Reward_Calculation_Result_Select_Column>>
   limit?: Maybe<Scalars['Int']>
@@ -5134,16 +5447,16 @@ export type Query_RootReward_Calculation_Result_AggregateArgs = {
 }
 
 export type Query_RootReward_Calculation_Result_By_PkArgs = {
-  alocator_allocation_result_event_id: Scalars['String']
+  event_id: Scalars['String']
 }
 
 export type Reward_Calculation_Result = {
   __typename?: 'reward_calculation_result'
   allocate_result: Scalars['numeric']
   allocation?: Maybe<Allocator_Allocation_Result>
-  alocator_allocation_result_event_id: Scalars['String']
   authentication?: Maybe<Property_Authentication>
   block_number: Scalars['Int']
+  event_id: Scalars['String']
   holder_reward: Scalars['numeric']
   lockup: Scalars['numeric']
   metrics: Scalars['String']
@@ -5221,9 +5534,9 @@ export type Reward_Calculation_Result_Bool_Exp = {
   _or?: Maybe<Array<Maybe<Reward_Calculation_Result_Bool_Exp>>>
   allocate_result?: Maybe<Numeric_Comparison_Exp>
   allocation?: Maybe<Allocator_Allocation_Result_Bool_Exp>
-  alocator_allocation_result_event_id?: Maybe<String_Comparison_Exp>
   authentication?: Maybe<Property_Authentication_Bool_Exp>
   block_number?: Maybe<Int_Comparison_Exp>
+  event_id?: Maybe<String_Comparison_Exp>
   holder_reward?: Maybe<Numeric_Comparison_Exp>
   lockup?: Maybe<Numeric_Comparison_Exp>
   metrics?: Maybe<String_Comparison_Exp>
@@ -5248,9 +5561,9 @@ export type Reward_Calculation_Result_Inc_Input = {
 export type Reward_Calculation_Result_Insert_Input = {
   allocate_result?: Maybe<Scalars['numeric']>
   allocation?: Maybe<Allocator_Allocation_Result_Obj_Rel_Insert_Input>
-  alocator_allocation_result_event_id?: Maybe<Scalars['String']>
   authentication?: Maybe<Property_Authentication_Obj_Rel_Insert_Input>
   block_number?: Maybe<Scalars['Int']>
+  event_id?: Maybe<Scalars['String']>
   holder_reward?: Maybe<Scalars['numeric']>
   lockup?: Maybe<Scalars['numeric']>
   metrics?: Maybe<Scalars['String']>
@@ -5263,8 +5576,8 @@ export type Reward_Calculation_Result_Insert_Input = {
 export type Reward_Calculation_Result_Max_Fields = {
   __typename?: 'reward_calculation_result_max_fields'
   allocate_result?: Maybe<Scalars['numeric']>
-  alocator_allocation_result_event_id?: Maybe<Scalars['String']>
   block_number?: Maybe<Scalars['Int']>
+  event_id?: Maybe<Scalars['String']>
   holder_reward?: Maybe<Scalars['numeric']>
   lockup?: Maybe<Scalars['numeric']>
   metrics?: Maybe<Scalars['String']>
@@ -5274,8 +5587,8 @@ export type Reward_Calculation_Result_Max_Fields = {
 
 export type Reward_Calculation_Result_Max_Order_By = {
   allocate_result?: Maybe<Order_By>
-  alocator_allocation_result_event_id?: Maybe<Order_By>
   block_number?: Maybe<Order_By>
+  event_id?: Maybe<Order_By>
   holder_reward?: Maybe<Order_By>
   lockup?: Maybe<Order_By>
   metrics?: Maybe<Order_By>
@@ -5286,8 +5599,8 @@ export type Reward_Calculation_Result_Max_Order_By = {
 export type Reward_Calculation_Result_Min_Fields = {
   __typename?: 'reward_calculation_result_min_fields'
   allocate_result?: Maybe<Scalars['numeric']>
-  alocator_allocation_result_event_id?: Maybe<Scalars['String']>
   block_number?: Maybe<Scalars['Int']>
+  event_id?: Maybe<Scalars['String']>
   holder_reward?: Maybe<Scalars['numeric']>
   lockup?: Maybe<Scalars['numeric']>
   metrics?: Maybe<Scalars['String']>
@@ -5297,8 +5610,8 @@ export type Reward_Calculation_Result_Min_Fields = {
 
 export type Reward_Calculation_Result_Min_Order_By = {
   allocate_result?: Maybe<Order_By>
-  alocator_allocation_result_event_id?: Maybe<Order_By>
   block_number?: Maybe<Order_By>
+  event_id?: Maybe<Order_By>
   holder_reward?: Maybe<Order_By>
   lockup?: Maybe<Order_By>
   metrics?: Maybe<Order_By>
@@ -5326,9 +5639,9 @@ export type Reward_Calculation_Result_On_Conflict = {
 export type Reward_Calculation_Result_Order_By = {
   allocate_result?: Maybe<Order_By>
   allocation?: Maybe<Allocator_Allocation_Result_Order_By>
-  alocator_allocation_result_event_id?: Maybe<Order_By>
   authentication?: Maybe<Property_Authentication_Order_By>
   block_number?: Maybe<Order_By>
+  event_id?: Maybe<Order_By>
   holder_reward?: Maybe<Order_By>
   lockup?: Maybe<Order_By>
   metrics?: Maybe<Order_By>
@@ -5339,13 +5652,13 @@ export type Reward_Calculation_Result_Order_By = {
 }
 
 export type Reward_Calculation_Result_Pk_Columns_Input = {
-  alocator_allocation_result_event_id: Scalars['String']
+  event_id: Scalars['String']
 }
 
 export enum Reward_Calculation_Result_Select_Column {
   AllocateResult = 'allocate_result',
-  AlocatorAllocationResultEventId = 'alocator_allocation_result_event_id',
   BlockNumber = 'block_number',
+  EventId = 'event_id',
   HolderReward = 'holder_reward',
   Lockup = 'lockup',
   Metrics = 'metrics',
@@ -5355,8 +5668,8 @@ export enum Reward_Calculation_Result_Select_Column {
 
 export type Reward_Calculation_Result_Set_Input = {
   allocate_result?: Maybe<Scalars['numeric']>
-  alocator_allocation_result_event_id?: Maybe<Scalars['String']>
   block_number?: Maybe<Scalars['Int']>
+  event_id?: Maybe<Scalars['String']>
   holder_reward?: Maybe<Scalars['numeric']>
   lockup?: Maybe<Scalars['numeric']>
   metrics?: Maybe<Scalars['String']>
@@ -5434,8 +5747,8 @@ export type Reward_Calculation_Result_Sum_Order_By = {
 
 export enum Reward_Calculation_Result_Update_Column {
   AllocateResult = 'allocate_result',
-  AlocatorAllocationResultEventId = 'alocator_allocation_result_event_id',
   BlockNumber = 'block_number',
+  EventId = 'event_id',
   HolderReward = 'holder_reward',
   Lockup = 'lockup',
   Metrics = 'metrics',
@@ -5560,6 +5873,9 @@ export type Subscription_Root = {
   property_factory_create: Array<Property_Factory_Create>
   property_factory_create_aggregate: Property_Factory_Create_Aggregate
   property_factory_create_by_pk?: Maybe<Property_Factory_Create>
+  property_meta: Array<Property_Meta>
+  property_meta_aggregate: Property_Meta_Aggregate
+  property_meta_by_pk?: Maybe<Property_Meta>
   reward_calculation_result: Array<Reward_Calculation_Result>
   reward_calculation_result_aggregate: Reward_Calculation_Result_Aggregate
   reward_calculation_result_by_pk?: Maybe<Reward_Calculation_Result>
@@ -5799,6 +6115,27 @@ export type Subscription_RootProperty_Factory_Create_By_PkArgs = {
   event_id: Scalars['String']
 }
 
+export type Subscription_RootProperty_MetaArgs = {
+  distinct_on?: Maybe<Array<Property_Meta_Select_Column>>
+  limit?: Maybe<Scalars['Int']>
+  offset?: Maybe<Scalars['Int']>
+  order_by?: Maybe<Array<Property_Meta_Order_By>>
+  where?: Maybe<Property_Meta_Bool_Exp>
+}
+
+export type Subscription_RootProperty_Meta_AggregateArgs = {
+  distinct_on?: Maybe<Array<Property_Meta_Select_Column>>
+  limit?: Maybe<Scalars['Int']>
+  offset?: Maybe<Scalars['Int']>
+  order_by?: Maybe<Array<Property_Meta_Order_By>>
+  where?: Maybe<Property_Meta_Bool_Exp>
+}
+
+export type Subscription_RootProperty_Meta_By_PkArgs = {
+  author: Scalars['String']
+  property: Scalars['String']
+}
+
 export type Subscription_RootReward_Calculation_ResultArgs = {
   distinct_on?: Maybe<Array<Reward_Calculation_Result_Select_Column>>
   limit?: Maybe<Scalars['Int']>
@@ -5816,7 +6153,7 @@ export type Subscription_RootReward_Calculation_Result_AggregateArgs = {
 }
 
 export type Subscription_RootReward_Calculation_Result_By_PkArgs = {
-  alocator_allocation_result_event_id: Scalars['String']
+  event_id: Scalars['String']
 }
 
 export type AllocatorAllocationResultFragment = { __typename?: 'allocator_allocation_result' } & Pick<
@@ -5847,6 +6184,12 @@ export type GetLastAllocatorAllocationResultQuery = { __typename?: 'query_root' 
   allocator_allocation_result: Array<
     { __typename?: 'allocator_allocation_result' } & Pick<Allocator_Allocation_Result, 'block_number'>
   >
+}
+
+export type GetMarketFactoryCreateQueryVariables = {}
+
+export type GetMarketFactoryCreateQuery = { __typename?: 'query_root' } & {
+  market_factory_create: Array<{ __typename?: 'market_factory_create' } & Pick<Market_Factory_Create, 'market'>>
 }
 
 export type GetPropertyAuthenticationQueryVariables = {
@@ -5936,6 +6279,16 @@ export type ListPropertyQuery = { __typename?: 'query_root' } & {
   }
 }
 
+export type ListPropertyMetaQueryVariables = {
+  author: Scalars['String']
+  limit?: Maybe<Scalars['Int']>
+  ilike?: Maybe<Scalars['String']>
+}
+
+export type ListPropertyMetaQuery = { __typename?: 'query_root' } & {
+  property_meta: Array<{ __typename?: 'property_meta' } & Pick<Property_Meta, 'property'>>
+}
+
 export const AllocatorAllocationResultFragmentDoc = gql`
   fragment allocatorAllocationResult on allocator_allocation_result {
     block_number
@@ -6021,6 +6374,51 @@ export type GetLastAllocatorAllocationResultLazyQueryHookResult = ReturnType<
 export type GetLastAllocatorAllocationResultQueryResult = ApolloReactCommon.QueryResult<
   GetLastAllocatorAllocationResultQuery,
   GetLastAllocatorAllocationResultQueryVariables
+>
+export const GetMarketFactoryCreateDocument = gql`
+  query getMarketFactoryCreate {
+    market_factory_create {
+      market
+    }
+  }
+`
+
+/**
+ * __useGetMarketFactoryCreateQuery__
+ *
+ * To run a query within a React component, call `useGetMarketFactoryCreateQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetMarketFactoryCreateQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetMarketFactoryCreateQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useGetMarketFactoryCreateQuery(
+  baseOptions?: ApolloReactHooks.QueryHookOptions<GetMarketFactoryCreateQuery, GetMarketFactoryCreateQueryVariables>
+) {
+  return ApolloReactHooks.useQuery<GetMarketFactoryCreateQuery, GetMarketFactoryCreateQueryVariables>(
+    GetMarketFactoryCreateDocument,
+    baseOptions
+  )
+}
+export function useGetMarketFactoryCreateLazyQuery(
+  baseOptions?: ApolloReactHooks.LazyQueryHookOptions<GetMarketFactoryCreateQuery, GetMarketFactoryCreateQueryVariables>
+) {
+  return ApolloReactHooks.useLazyQuery<GetMarketFactoryCreateQuery, GetMarketFactoryCreateQueryVariables>(
+    GetMarketFactoryCreateDocument,
+    baseOptions
+  )
+}
+export type GetMarketFactoryCreateQueryHookResult = ReturnType<typeof useGetMarketFactoryCreateQuery>
+export type GetMarketFactoryCreateLazyQueryHookResult = ReturnType<typeof useGetMarketFactoryCreateLazyQuery>
+export type GetMarketFactoryCreateQueryResult = ApolloReactCommon.QueryResult<
+  GetMarketFactoryCreateQuery,
+  GetMarketFactoryCreateQueryVariables
 >
 export const GetPropertyAuthenticationDocument = gql`
   query getPropertyAuthentication($propertyAddress: String!) {
@@ -6266,3 +6664,51 @@ export function useListPropertyLazyQuery(
 export type ListPropertyQueryHookResult = ReturnType<typeof useListPropertyQuery>
 export type ListPropertyLazyQueryHookResult = ReturnType<typeof useListPropertyLazyQuery>
 export type ListPropertyQueryResult = ApolloReactCommon.QueryResult<ListPropertyQuery, ListPropertyQueryVariables>
+export const ListPropertyMetaDocument = gql`
+  query listPropertyMeta($author: String!, $limit: Int, $ilike: String) {
+    property_meta(where: { author: { _eq: $author }, property: { _ilike: $ilike } }, limit: $limit) {
+      property
+    }
+  }
+`
+
+/**
+ * __useListPropertyMetaQuery__
+ *
+ * To run a query within a React component, call `useListPropertyMetaQuery` and pass it any options that fit your needs.
+ * When your component renders, `useListPropertyMetaQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useListPropertyMetaQuery({
+ *   variables: {
+ *      author: // value for 'author'
+ *      limit: // value for 'limit'
+ *      ilike: // value for 'ilike'
+ *   },
+ * });
+ */
+export function useListPropertyMetaQuery(
+  baseOptions?: ApolloReactHooks.QueryHookOptions<ListPropertyMetaQuery, ListPropertyMetaQueryVariables>
+) {
+  return ApolloReactHooks.useQuery<ListPropertyMetaQuery, ListPropertyMetaQueryVariables>(
+    ListPropertyMetaDocument,
+    baseOptions
+  )
+}
+export function useListPropertyMetaLazyQuery(
+  baseOptions?: ApolloReactHooks.LazyQueryHookOptions<ListPropertyMetaQuery, ListPropertyMetaQueryVariables>
+) {
+  return ApolloReactHooks.useLazyQuery<ListPropertyMetaQuery, ListPropertyMetaQueryVariables>(
+    ListPropertyMetaDocument,
+    baseOptions
+  )
+}
+export type ListPropertyMetaQueryHookResult = ReturnType<typeof useListPropertyMetaQuery>
+export type ListPropertyMetaLazyQueryHookResult = ReturnType<typeof useListPropertyMetaLazyQuery>
+export type ListPropertyMetaQueryResult = ApolloReactCommon.QueryResult<
+  ListPropertyMetaQuery,
+  ListPropertyMetaQueryVariables
+>

@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TextCard Snapshot 1`] = `
+<body>
+  <div>
+    <div>
+      <h2
+        style="font-size: 36px; line-height: 48px; color: rgb(47, 128, 237);"
+      />
+      <div
+        style="font-size: 18px; line-height: 24px; color: rgba(0, 0, 0, 0.85);"
+      />
+      <div
+        style="font-size: 18px; line-height: 24px; color: rgba(0, 0, 0, 0.85);"
+      >
+        Authentication: 
+      </div>
+      <div
+        style="font-size: 18px; line-height: 24px; color: rgba(0, 0, 0, 0.85);"
+      >
+        Calculation: 
+      </div>
+    </div>
+  </div>
+</body>
+`;

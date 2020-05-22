@@ -1,7 +1,9 @@
 import {
   useGetLastAllocatorAllocationResultQuery as IUseGetLastAllocatorAllocationResultQuery,
   useListPropertyQuery as IUseListPropertyQuery,
-  useGetPropertyAuthenticationQuery as IUseGetPropertyAuthenticationQuery
+  useGetPropertyAuthenticationQuery as IUseGetPropertyAuthenticationQuery,
+  useGetMarketFactoryCreateQuery as IUseGetMarketFactoryCreateQuery,
+  useListPropertyMetaQuery as IUseListPropertyMetaQuery
 } from '@dev/graphql'
 
 export const useGetLastAllocatorAllocationResultQuery = (): Partial<
@@ -42,6 +44,26 @@ export const useGetPropertyAuthenticationQuery = (): Partial<
         authentication_id: 'authentication-id',
         market: 'market-address',
         metrics: 'metrics-address'
+      }
+    ]
+  }
+})
+
+export const useGetMarketFactoryCreateQuery = (): Partial<ReturnType<typeof IUseGetMarketFactoryCreateQuery>> => ({
+  data: {
+    market_factory_create: [
+      {
+        market: 'market-address'
+      }
+    ]
+  }
+})
+
+export const useListPropertyMetaQuery = (): Partial<ReturnType<typeof IUseListPropertyMetaQuery>> => ({
+  data: {
+    property_meta: [
+      {
+        property: 'property-address'
       }
     ]
   }

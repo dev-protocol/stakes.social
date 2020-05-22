@@ -11,7 +11,10 @@ import {
   allocate,
   withdrawStakingRewardAmount,
   withdrawStakingAmount,
-  getMyStakingRewardAmount
+  getMyStakingRewardAmount,
+  createProperty,
+  marketScheme,
+  authenticate
 } from './client'
 import { SWRCachePath } from './cache-path'
 import { UnwrapFunc, toNaturalNumber, toAmountNumber } from 'src/fixtures/utility'
@@ -207,4 +210,66 @@ export const useAllocate = () => {
   }, [])
 
   return { allocate: allocateDev, isLoading, error }
+}
+
+export const useCreateProperty = () => {
+  const [isLoading, setIsLoading] = useState<boolean>(false)
+  const [error, setError] = useState<Error>()
+  const callback = useCallback(async (name: string, symbol: string, author: string) => {
+    setIsLoading(true)
+    setError(undefined)
+    return createProperty(name, symbol, author)
+      .then(result => {
+        setIsLoading(false)
+        return result || ''
+      })
+      .catch(err => {
+        setError(err)
+        message.error(err.message)
+        setIsLoading(false)
+        return ''
+      })
+  }, [])
+  return { createProperty: callback, isLoading, error }
+}
+
+export const useMarketScheme = () => {
+  const [isLoading, setIsLoading] = useState<boolean>(false)
+  const [error, setError] = useState<Error>()
+  const callback = useCallback(async (marketAddress: string) => {
+    setIsLoading(true)
+    setError(undefined)
+    return marketScheme(marketAddress)
+      .then(result => {
+        setIsLoading(false)
+        return result || []
+      })
+      .catch(err => {
+        setError(err)
+        message.error(err.message)
+        setIsLoading(false)
+      })
+  }, [])
+  return { marketScheme: callback, isLoading, error }
+}
+
+export const useAuthenticate = () => {
+  const [isLoading, setIsLoading] = useState<boolean>(false)
+  const [error, setError] = useState<Error>()
+  const callback = useCallback(async (marketAddress: string, propertyAddress: string, args: string[]) => {
+    setIsLoading(true)
+    setError(undefined)
+    return authenticate(marketAddress, propertyAddress, args)
+      .then(metricsAddress => {
+        setIsLoading(false)
+        return metricsAddress
+      })
+      .catch(err => {
+        setError(err)
+        message.error(err.message)
+        setIsLoading(false)
+        return ''
+      })
+  }, [])
+  return { authenticate: callback, isLoading, error }
 }
