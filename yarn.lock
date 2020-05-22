@@ -1102,10 +1102,10 @@
     exec-sh "^0.3.2"
     minimist "^1.2.0"
 
-"@devprtcl/dev-kit-js@0.6.2":
-  version "0.6.2"
-  resolved "https://registry.yarnpkg.com/@devprtcl/dev-kit-js/-/dev-kit-js-0.6.2.tgz#afd6a2559ca6b6dd7c137a127fba3e079d6f4f77"
-  integrity sha512-rm2tqqmCyB/oGTItD16wYSait+MttngFaE+Ws30xXcHpZX48NE1qIR8NiFoqI++Yu/p21NkEtucxhgg6cdvisw==
+"@devprtcl/dev-kit-js@0.6.3":
+  version "0.6.3"
+  resolved "https://registry.yarnpkg.com/@devprtcl/dev-kit-js/-/dev-kit-js-0.6.3.tgz#4c16d9f77156fce7e155f51df31cb739deb58821"
+  integrity sha512-mSBfpyd3P5O4ZUbVdWeJQtXbzOxz1xZJu3SZvF420tpWSFB5EEYIqQMSq4WSy1ivk2UivsAxZ+JTI/t8l2A3Mg==
   dependencies:
     web3 "^1.2.5-rc.0"
 
