@@ -16,7 +16,7 @@
   "dependencies": {
     "@ant-design/icons": "4.0.0",
     "@dev/graphql": "0.0.1",
-    "@devprtcl/dev-kit-js": "0.6.3",
+    "@devprtcl/dev-kit-js": "0.6.5",
     "@quentin-sommer/react-useragent": "3.1.0",
     "antd": "4.2.4",
     "apollo-cache-inmemory": "1.6.6",
