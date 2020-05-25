@@ -22,7 +22,7 @@ export const AuthForm = ({ market, property }: Props) => {
 
   useEffectAsync(async () => {
     const schemeList = await marketScheme(market)
-    setSchemeList(schemeList || [])
+    setSchemeList([...(schemeList || [])])
   }, [])
 
   return (
