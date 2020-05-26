@@ -1091,11 +1091,12 @@
     exec-sh "^0.3.2"
     minimist "^1.2.0"
 
-"@devprtcl/dev-kit-js@0.6.3":
-  version "0.6.3"
-  resolved "https://registry.yarnpkg.com/@devprtcl/dev-kit-js/-/dev-kit-js-0.6.3.tgz#4c16d9f77156fce7e155f51df31cb739deb58821"
-  integrity sha512-mSBfpyd3P5O4ZUbVdWeJQtXbzOxz1xZJu3SZvF420tpWSFB5EEYIqQMSq4WSy1ivk2UivsAxZ+JTI/t8l2A3Mg==
+"@devprtcl/dev-kit-js@0.6.5":
+  version "0.6.5"
+  resolved "https://registry.yarnpkg.com/@devprtcl/dev-kit-js/-/dev-kit-js-0.6.5.tgz#31821d2a71fbebed375358f10a0d95c6acc26135"
+  integrity sha512-KOusOJEQWMCCDTFdoxavVBmICyZPx4PuaBfXq/gfIgvwdY7jV7IMDg4zc3H3InLUPTWPf6LXw2/mw4MOvupfuw==
   dependencies:
+    ramda "^0.27.0"
     web3 "^1.2.5-rc.0"
 
 "@electron/get@^1.0.1":
@@ -12582,6 +12583,11 @@ raf@^3.4.0, raf@^3.4.1:
   integrity sha512-Sq4CW4QhwOHE8ucn6J34MqtZCeWFP2aQSmrlroYgqAV1PjStIhJXxYuTgUIfkEk7zTLjmIjLmU5q+fbD1NnOJA==
   dependencies:
     performance-now "^2.1.0"
+
+ramda@^0.27.0:
+  version "0.27.0"
+  resolved "https://registry.yarnpkg.com/ramda/-/ramda-0.27.0.tgz#915dc29865c0800bf3f69b8fd6c279898b59de43"
+  integrity sha512-pVzZdDpWwWqEVVLshWUHjNwuVP7SfcmPraYuqocJp1yo2U1R7P+5QAfDhdItkuoGqIBnBYrtPp7rEPqDn9HlZA==
 
 randombytes@^2.0.0, randombytes@^2.0.1, randombytes@^2.0.5, randombytes@^2.1.0:
   version "2.1.0"
