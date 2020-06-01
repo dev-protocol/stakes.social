@@ -32,7 +32,7 @@
     "rimraf": "3.0.2",
     "serve": "11.3.1",
     "ts-jest": "26.0.0",
-    "ts-node": "8.10.1",
+    "ts-node": "8.10.2",
     "tsconfig-paths": "3.9.0",
     "typescript": "3.9.3",
     "wait-on": "5.0.0"
