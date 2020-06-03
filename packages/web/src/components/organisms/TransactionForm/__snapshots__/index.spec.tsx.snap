@@ -110,14 +110,16 @@ exports[`TransactionForm Snapshot 1`] = `
                       <div
                         style="color: rgb(0, 0, 0);"
                       >
-                        Last Update: 
-                        42141412412
+                        <span
+                          style="margin-right: 1rem;"
+                        >
+                          Last Update: 
+                          42141412412
+                        </span>
                         <a
                           href="#"
-                          style="text-decoration: underline; margin: 0px 0px 0px 32px;"
-                          target="_blank"
                         >
-                          Mining now
+                          Mining
                         </a>
                       </div>
                     </div>
@@ -186,14 +188,16 @@ exports[`TransactionForm Snapshot 1`] = `
                       <div
                         style="color: rgb(0, 0, 0);"
                       >
-                        Last Update: 
-                        42141412412
+                        <span
+                          style="margin-right: 1rem;"
+                        >
+                          Last Update: 
+                          42141412412
+                        </span>
                         <a
                           href="#"
-                          style="text-decoration: underline; margin: 0px 0px 0px 32px;"
-                          target="_blank"
                         >
-                          Mining now
+                          Mining
                         </a>
                       </div>
                     </div>

@@ -1,13 +1,13 @@
 import React from 'react'
 import BigNumber from 'bignumber.js'
-import { Card, Button, Space, Row, Col } from 'antd'
+import { Card, Button, Space, Row, Col, Popconfirm } from 'antd'
 
 interface Props {
   label: 'Staking' | 'Holder'
   amount?: BigNumber
   lastUpdate?: number
   onSubmitWithdraw: () => void
-  onClickMining: (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => void
+  onClickMining: (e?: React.MouseEvent<HTMLElement, MouseEvent>) => void
 }
 
 export const WithdrawCard = ({ amount, label, onSubmitWithdraw, lastUpdate, onClickMining }: Props) => {
@@ -30,15 +30,30 @@ export const WithdrawCard = ({ amount, label, onSubmitWithdraw, lastUpdate, onCl
           >
             <div>
               <div style={{ color: '#000' }}>
-                Last Update: {lastUpdate || ''}
-                <a
-                  href="#"
-                  target="_blank"
-                  style={{ textDecoration: 'underline', margin: '0 0 0 32px' }}
-                  onClick={onClickMining}
-                >
-                  Mining now
-                </a>
+                <span style={{ marginRight: '1rem' }}>Last Update: {lastUpdate || ''}</span>
+                {/* TODO: Refactoring */}
+                {lastUpdate ? (
+                  <Popconfirm
+                    title={
+                      <small style={{ maxWidth: 240, display: 'inline-block' }}>
+                        You can mine when Ethereum reaches{' '}
+                        <a href="//etherscan.io/blocks" target="_blank" rel="noreferrer">
+                          {new BigNumber(lastUpdate).plus(13292).toString()} blocks
+                        </a>
+                        . Otherwise, mining does not increase rewards. Did you check the block?
+                      </small>
+                    }
+                    onConfirm={onClickMining}
+                    okText="Yes"
+                    cancelText="No"
+                  >
+                    <a href="#">Mining</a>
+                  </Popconfirm>
+                ) : (
+                  <a href="#" target="_blank" onClick={onClickMining}>
+                    Mining now
+                  </a>
+                )}
               </div>
             </div>
             <Button type="primary" size="large" onClick={onSubmitWithdraw}>
