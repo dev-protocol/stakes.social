@@ -46,11 +46,14 @@ exports[`WithdrawCard Snapshot 1`] = `
                   <div
                     style="color: rgb(0, 0, 0);"
                   >
-                    Last Update: 
-                    
+                    <span
+                      style="margin-right: 1rem;"
+                    >
+                      Last Update: 
+                      
+                    </span>
                     <a
                       href="#"
-                      style="text-decoration: underline; margin: 0px 0px 0px 32px;"
                       target="_blank"
                     >
                       Mining now

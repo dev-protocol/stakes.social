@@ -40,8 +40,8 @@ export const TransactionForm = ({ propertyAddress }: Props) => {
   const handleWithdrawHolder = useCallback(() => withdrawHolder(propertyAddress), [propertyAddress, withdrawHolder])
   const handleCancelStaking = useCallback(() => cancel(propertyAddress), [propertyAddress, cancel])
   const handleMining = useCallback(
-    (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
-      e.preventDefault()
+    (e?: React.MouseEvent<HTMLElement, MouseEvent>) => {
+      e?.preventDefault()
       metricsAddress && allocate(metricsAddress)
     },
     [metricsAddress, allocate]
