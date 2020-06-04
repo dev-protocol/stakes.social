@@ -152,15 +152,58 @@ const HowItWorks = () => {
         <Faq>
           <h3>When can I get my staking reward?</h3>
           <p>Each time a property is mined, the staking reward increases. Mining can be done by anyone.</p>
+
           <h3>When can I do minig?</h3>
           <p>
-            npm market requires a minimum of two days to mine. You can find out when you can mine by pressing{' '}
+            npm market requires a minimum of one day to mine. You can find out when you can mine by pressing{' '}
             <strong>mining</strong>. It displays the block number on Ethereum.
           </p>
+
+          <h3>What is the minimum amount of staking?</h3>
+          <p>It is the same as the minimum unit of DEV, which is 0.000000000000000001.</p>
+
+          <h3>How much reward will I get?</h3>
+          <p>Reward rates are different for each project. </p>
+
+          <h3>The % shown in the site is the yearly ROI right?</h3>
+          <p>
+            It{`'`}s the value of the last 3-month avg. Dev Protocol was deployed in January and the staking went live
+            in March.
+          </p>
+
+          <h3>Why are the reward rates so high?</h3>
+          <p>
+            Staking rewards fluctuate depending on what you are staking in, but currently, they generally tend to be
+            high. It is dictated by the governance of the protocol, which goes down as the staking rate goes up. Now we
+            are in the initial phase.{' '}
+            <a
+              href="//github.com/dev-protocol/protocol/blob/master/docs/POLICY.md#rewards"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Please see the Policy to detail.
+            </a>
+          </p>
+
+          <h3>Is the supply of Dev tokens fixed or unlimited?</h3>
+          <p>
+            It{`'`}s not fixed, but the limit will come later. The total supply increases a little each time it is
+            mined. The higher the staking rate, the less new coins will come near zero.
+          </p>
+
+          <h3>The more the interest the more rewards you receive?</h3>
+          <p>The higher avg intrest rate is, the more rewards you will get.</p>
+
+          <h3>Which project shoud I stake?</h3>
+          <p>
+            Every projects need support, so please stake as want to stake. Any project would have a great pleasure with
+            you.
+          </p>
+
           <h3>Why do I have to do this?</h3>
           <p>
             Dev protcol is run by policy, and policy is suggested and voted on by the users. If you have an opinion, you
-            are always welcome to suggest a policy.{' '}
+            are always welcome to suggest a policy.
           </p>
         </Faq>
       </Article>
