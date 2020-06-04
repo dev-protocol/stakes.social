@@ -32,18 +32,21 @@ export const useGetTotalRewardsAmount = (propertyAddress: string) => {
 }
 
 export const useWithdrawHolderReward = () => {
+  const key = 'useWithdrawHolderReward'
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [error, setError] = useState<Error>()
   const withdrawHolder = useCallback(async (propertyAddress: string) => {
     setIsLoading(true)
+    message.loading({ content: 'now withdrawing holder reward...', key })
     setError(undefined)
     return withdrawHolderAmount(propertyAddress)
       .then(() => {
+        message.success({ content: 'success withdrawing!', key })
         setIsLoading(false)
       })
       .catch(err => {
         setError(err)
-        message.error(err.message)
+        message.error({ content: err.message, key })
         setIsLoading(false)
       })
   }, [])
@@ -94,18 +97,21 @@ export const useGetMyStakingAmount = (propertyAddress: string) => {
 }
 
 export const useWithdrawStakingReward = () => {
+  const key = 'useWithdrawStakingReward'
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [error, setError] = useState<Error>()
   const withdrawStakingReward = useCallback(async (propertyAddress: string) => {
     setIsLoading(true)
+    message.loading({ content: 'now withdrawing staking reward...', key })
     setError(undefined)
     return withdrawStakingRewardAmount(propertyAddress)
       .then(() => {
+        message.success({ content: 'success withdrawing!', key })
         setIsLoading(false)
       })
       .catch(err => {
         setError(err)
-        message.error(err.message)
+        message.error({ content: err.message, key })
         setIsLoading(false)
       })
   }, [])
@@ -114,18 +120,21 @@ export const useWithdrawStakingReward = () => {
 }
 
 export const useWithdrawStaking = () => {
+  const key = 'useWithdrawStaking'
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [error, setError] = useState<Error>()
   const withdrawStaking = useCallback(async (propertyAddress: string) => {
     setIsLoading(true)
+    message.loading({ content: 'now withdrawing staking...', key })
     setError(undefined)
     return withdrawStakingAmount(propertyAddress)
       .then(() => {
+        message.success({ content: 'success withdrawing!', key })
         setIsLoading(false)
       })
       .catch(err => {
         setError(err)
-        message.error(err.message)
+        message.error({ content: err.message, key })
         setIsLoading(false)
       })
   }, [])
@@ -134,18 +143,21 @@ export const useWithdrawStaking = () => {
 }
 
 export const useStake = () => {
+  const key = 'useStake'
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [error, setError] = useState<Error>()
   const stake = useCallback(async (propertyAddress: string, amount: string) => {
     setIsLoading(true)
+    message.loading({ content: 'now staking...', key })
     setError(undefined)
     return stakeDev(propertyAddress, toAmountNumber(amount).toFormat({ decimalSeparator: '' }))
       .then(() => {
+        message.success({ content: 'success staking!', key })
         setIsLoading(false)
       })
       .catch(err => {
         setError(err)
-        message.error(err.message)
+        message.error({ content: err.message, key })
         setIsLoading(false)
       })
   }, [])
@@ -154,18 +166,21 @@ export const useStake = () => {
 }
 
 export const useCancelStaking = () => {
+  const key = 'useCancelStaking'
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [error, setError] = useState<Error>()
   const cancel = useCallback(async (propertyAddress: string) => {
     setIsLoading(true)
+    message.loading({ content: 'now canceling staking...', key })
     setError(undefined)
     return cancelStaking(propertyAddress)
       .then(() => {
+        message.success({ content: 'canceled staking', key })
         setIsLoading(false)
       })
       .catch(err => {
         setError(err)
-        message.error(err.message)
+        message.error({ content: err.message, key })
         setIsLoading(false)
       })
   }, [])
@@ -193,18 +208,21 @@ export const useAssetStrength = (metricsAddress: string, marketAddress: string) 
 }
 
 export const useAllocate = () => {
+  const key = 'useAllocate'
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [error, setError] = useState<Error>()
   const allocateDev = useCallback(async (metricsAddress: string) => {
     setIsLoading(true)
+    message.loading({ content: 'now mining...', key })
     setError(undefined)
     return allocate(metricsAddress)
       .then(() => {
+        message.success({ content: 'success mining!', key })
         setIsLoading(false)
       })
       .catch(err => {
         setError(err)
-        message.error(err.message)
+        message.error({ content: err.message, key })
         setIsLoading(false)
       })
   }, [])
@@ -213,19 +231,22 @@ export const useAllocate = () => {
 }
 
 export const useCreateProperty = () => {
+  const key = 'useCreateProperty'
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [error, setError] = useState<Error>()
   const callback = useCallback(async (name: string, symbol: string, author: string) => {
     setIsLoading(true)
+    message.loading({ content: 'now creating property...', key })
     setError(undefined)
     return createProperty(name, symbol, author)
       .then(result => {
+        message.success({ content: 'success creating property!', key })
         setIsLoading(false)
         return result || ''
       })
       .catch(err => {
         setError(err)
-        message.error(err.message)
+        message.error({ content: err.message, key })
         setIsLoading(false)
         return ''
       })
@@ -234,19 +255,22 @@ export const useCreateProperty = () => {
 }
 
 export const useMarketScheme = () => {
+  const key = 'useMarketScheme'
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [error, setError] = useState<Error>()
   const callback = useCallback(async (marketAddress: string) => {
     setIsLoading(true)
+    message.loading({ content: 'now loading...', key })
     setError(undefined)
     return marketScheme(marketAddress)
       .then(result => {
+        message.success({ content: 'success!', key })
         setIsLoading(false)
         return result || []
       })
       .catch(err => {
         setError(err)
-        message.error(err.message)
+        message.error({ content: err.message, key })
         setIsLoading(false)
       })
   }, [])
@@ -254,19 +278,22 @@ export const useMarketScheme = () => {
 }
 
 export const useAuthenticate = () => {
+  const key = 'useAuthenticate'
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [error, setError] = useState<Error>()
   const callback = useCallback(async (marketAddress: string, propertyAddress: string, args: string[]) => {
     setIsLoading(true)
+    message.loading({ content: 'now authenticating...', key })
     setError(undefined)
     return authenticate(marketAddress, propertyAddress, args)
       .then(metricsAddress => {
         setIsLoading(false)
+        message.success({ content: 'success authenticate!', key })
         return metricsAddress
       })
       .catch(err => {
         setError(err)
-        message.error(err.message)
+        message.error({ content: err.message, key })
         setIsLoading(false)
         return ''
       })
