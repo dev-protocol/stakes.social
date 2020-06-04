@@ -3,12 +3,17 @@ import { Header } from 'src/components/organisms/Header'
 import { Footer } from 'src/components/organisms/Footer'
 import styled from 'styled-components'
 import Text from 'antd/lib/typography/Text'
+import { Button } from 'antd'
 
 const Article = styled.article`
   padding: 2em;
 `
 const Title = styled.h1`
   text-align: center;
+`
+const SectionHeader = styled.h2`
+  text-align: center;
+  font-size: 2.8rem;
 `
 const Deck = styled.iframe`
   display: block;
@@ -21,28 +26,38 @@ const Deck = styled.iframe`
 `
 const Section = styled.section`
   display: grid;
-  grid-gap: 1em;
+  grid-gap: 1rem;
   max-width: 1060px;
-  margin: 6em auto;
+  margin: 6rem auto;
   @media (min-width: 768px) {
     grid-auto-flow: column;
     grid-auto-columns: 0.5fr 0.5fr;
   }
 
-  h2,
+  h3,
   p {
     margin: 0;
   }
-  h2 {
-    font-size: 1.8em;
+  h3 {
+    font-size: 1.6rem;
   }
   p {
-    font-size: 1.2em;
+    font-size: 1.2rem;
   }
   div {
     display: grid;
-    grid-gap: 1em;
+    grid-gap: 1rem;
   }
+`
+const Faq = styled.section`
+  display: grid;
+  grid-gap: 1rem;
+  max-width: 1060px;
+  margin: 6rem auto;
+`
+const MavigationButtons = styled.div`
+  text-align: center;
+  margin: 3rem auto;
 `
 
 const HowItWorks = () => {
@@ -52,8 +67,14 @@ const HowItWorks = () => {
       <Article>
         <Title>How it works</Title>
         <Deck src="https://drive.google.com/file/d/1KspRC6ruqa1F15kvAxZFDjHGWJR-OeSt/preview"></Deck>
+        <MavigationButtons>
+          <Button type="link" href="#faq">
+            Jump to FAQ
+          </Button>
+        </MavigationButtons>
+        <SectionHeader id="overview">Overview</SectionHeader>
         <Section>
-          <h2>What is Dev Protocol?</h2>
+          <h3>What is Dev Protocol?</h3>
           <div>
             <p>Stakes.social is an application based on the Dev Protocol.</p>
             <p>
@@ -67,7 +88,7 @@ const HowItWorks = () => {
           </div>
         </Section>
         <Section>
-          <h2>What is tokenization?</h2>
+          <h3>What is tokenization?</h3>
           <div>
             <p>
               <Text mark>Tokenization</Text> in the Dev Protocol means authenticating an activity and issuing its own
@@ -80,7 +101,7 @@ const HowItWorks = () => {
           </div>
         </Section>
         <Section>
-          <h2>What is staking?</h2>
+          <h3>What is staking?</h3>
           <div>
             <p>
               <Text mark>Staking</Text> in the Dev Protocol means depositing and locking up on{' '}
@@ -94,7 +115,7 @@ const HowItWorks = () => {
           </div>
         </Section>
         <Section>
-          <h2>What are the rewards?</h2>
+          <h3>What are the rewards?</h3>
           <div>
             <p>
               <Text mark>Rewards</Text> in the Dev Protocol means for Property shareholders DEV earned on the outcome of
@@ -103,7 +124,7 @@ const HowItWorks = () => {
           </div>
         </Section>
         <Section>
-          <h2>What is mining?</h2>
+          <h3>What is mining?</h3>
           <div>
             <p>
               <Text mark>Mining</Text> in the Dev Protocol means measuring the outcome of the activity associated with a
@@ -120,13 +141,28 @@ const HowItWorks = () => {
           </div>
         </Section>
         <Section>
-          <h2>Learn more</h2>
+          <h3>Learn more</h3>
           <div>
             <p>
               Read the <a href="//github.com/dev-protocol/protocol/blob/master/docs/WHITEPAPER.md">whitepaper</a>.
             </p>
           </div>
         </Section>
+        <SectionHeader id="faq">FAQ</SectionHeader>
+        <Faq>
+          <h3>When can I get my staking reward?</h3>
+          <p>Each time a property is mined, the staking reward increases. Mining can be done by anyone.</p>
+          <h3>When can I do minig?</h3>
+          <p>
+            npm market requires a minimum of two days to mine. You can find out when you can mine by pressing{' '}
+            <strong>mining</strong>. It displays the block number on Ethereum.
+          </p>
+          <h3>Why do I have to do this?</h3>
+          <p>
+            Dev protcol is run by policy, and policy is suggested and voted on by the users. If you have an opinion, you
+            are always welcome to suggest a policy.{' '}
+          </p>
+        </Faq>
       </Article>
       <Footer />
     </main>
