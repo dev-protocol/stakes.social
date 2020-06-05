@@ -22,7 +22,7 @@ export const PossessionOutline = ({ propertyAddress }: Props) => {
         <Col flex="1 1 148px">
           <Statistic
             title="Total Staking Amount"
-            value={totalStakingAmount && totalStakingAmount.dp(1).toNumber()}
+            value={totalStakingAmount && totalStakingAmount.dp(5).toNumber()}
             suffix="DEV"
             style={{ margin: '12px 0' }}
           />
@@ -30,7 +30,7 @@ export const PossessionOutline = ({ propertyAddress }: Props) => {
         <Col flex="1 1 148px">
           <Statistic
             title="Your Staking Amount"
-            value={myStakingAmount && myStakingAmount.dp(1).toNumber()}
+            value={myStakingAmount && myStakingAmount.dp(5).toNumber()}
             suffix="DEV"
             style={{ margin: '12px 0' }}
           />
@@ -38,7 +38,7 @@ export const PossessionOutline = ({ propertyAddress }: Props) => {
         <Col flex="1 1 148px">
           <Statistic
             title="Average Interest Rate"
-            value={averageInterestRate.dp(2).toNumber()}
+            value={averageInterestRate.dp(5).toNumber()}
             suffix="%"
             style={{ margin: '12px 0' }}
           />
@@ -46,7 +46,7 @@ export const PossessionOutline = ({ propertyAddress }: Props) => {
         <Col flex="1 1 148px">
           <Statistic
             title="Total Rewards"
-            value={totalRewardsAmount && totalRewardsAmount.dp(1).toNumber()}
+            value={totalRewardsAmount && totalRewardsAmount.dp(5).toNumber()}
             suffix="DEV"
             style={{ margin: '12px 0' }}
           />
