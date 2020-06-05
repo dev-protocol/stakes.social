@@ -153,21 +153,22 @@ const HowItWorks = () => {
           <h3>When can I get my staking reward?</h3>
           <p>Each time a property is mined, the staking reward increases. Mining can be done by anyone.</p>
 
-          <h3>When can I do minig?</h3>
+          <h3>When can I mine?</h3>
           <p>
-            npm market requires a minimum of one day to mine. You can find out when you can mine by pressing{' '}
-            <strong>mining</strong>. It displays the block number on Ethereum.
+            The npm market requires a minimum of one day to mine. You can find out when you can mine by pressing mining.
+            If you are unable to mine a pop-up will display telling you the next block you can mine at. It displays the
+            block number on the Ethereum blockchain.
           </p>
 
           <h3>What is the minimum amount of staking?</h3>
           <p>It is the same as the minimum unit of DEV, which is 0.000000000000000001.</p>
 
           <h3>How much reward will I get?</h3>
-          <p>Reward rates are different for each project. </p>
+          <p>Reward rates are different for each project.</p>
 
           <h3>The % shown in the site is the yearly ROI right?</h3>
           <p>
-            It{`'`}s the value of the last 3-month avg. Dev Protocol was deployed in January and the staking went live
+            It&apos;s the value of the last 3-month avg. Dev Protocol was deployed in January and the staking went live
             in March.
           </p>
 
@@ -175,7 +176,7 @@ const HowItWorks = () => {
           <p>
             Staking rewards fluctuate depending on what you are staking in, but currently, they generally tend to be
             high. It is dictated by the governance of the protocol, which goes down as the staking rate goes up. Now we
-            are in the initial phase.{' '}
+            are in the initial phase.
             <a
               href="//github.com/dev-protocol/protocol/blob/master/docs/POLICY.md#rewards"
               target="_blank"
@@ -187,17 +188,18 @@ const HowItWorks = () => {
 
           <h3>Is the supply of Dev tokens fixed or unlimited?</h3>
           <p>
-            It{`'`}s not fixed, but the limit will come later. The total supply increases a little each time it is
-            mined. The higher the staking rate, the less new coins will come near zero.
+            It&apos;s not fixed, but the limit will come later. The total supply increases a little each time mining
+            occurs and rewards are created. The higher the staking rate, the less new coins, ultimately it will move
+            towards zero.
           </p>
 
           <h3>The more the interest the more rewards you receive?</h3>
-          <p>The higher avg intrest rate is, the more rewards you will get.</p>
+          <p>The higher the avg intrest rate is, the more rewards you will get.</p>
 
-          <h3>Which project shoud I stake?</h3>
+          <h3>Which project should I stake?</h3>
           <p>
-            Every projects need support, so please stake as want to stake. Any project would have a great pleasure with
-            you.
+            Every project needs support, so please stake where you want. Staking on a project is supporting the
+            developer of that project. Any project would be happy to have you staking with them.
           </p>
 
           <h3>Why do I have to do this?</h3>
