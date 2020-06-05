@@ -155,9 +155,9 @@ const HowItWorks = () => {
 
           <h3>When can I mine?</h3>
           <p>
-            The npm market requires a minimum of one day to mine <Text mark>(I thought it was two)</Text>. You can find
-            out when you can mine by pressing mining. If you are unable to mine a pop-up will display telling you the
-            next block you can mine at. It displays the block number on the Ethereum blockchain.
+            The npm market requires a minimum of one day to mine. You can find out when you can mine by pressing mining.
+            If you are unable to mine a pop-up will display telling you the next block you can mine at. It displays the
+            block number on the Ethereum blockchain.
           </p>
 
           <h3>What is the minimum amount of staking?</h3>
