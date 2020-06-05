@@ -38,7 +38,7 @@ export const WithdrawCard = ({ amount, label, onSubmitWithdraw, lastUpdate, onCl
                       <small style={{ maxWidth: 240, display: 'inline-block' }}>
                         You can mine when Ethereum reaches{' '}
                         <a href="//etherscan.io/blocks" target="_blank" rel="noreferrer">
-                          {new BigNumber(lastUpdate).plus(6647).toString()} blocks
+                          {new BigNumber(lastUpdate).plus(13293).toString()} blocks
                         </a>
                         . Otherwise, mining does not increase rewards. Did you check the block?
                       </small>
