@@ -57,6 +57,17 @@ exports[`Footer Snapshot 1`] = `
           , 
         </span>
         <a
+          href="//t.me/devprtcl"
+          rel="noreferrer noopener"
+          style="text-decoration: underline;"
+          target="_blank"
+        >
+          Telegram
+        </a>
+        <span>
+          , 
+        </span>
+        <a
           href="//medium.com/devtoken"
           rel="noreferrer noopener"
           style="text-decoration: underline;"
