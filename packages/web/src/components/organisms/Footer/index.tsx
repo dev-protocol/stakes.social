@@ -50,6 +50,10 @@ export const Footer = () => {
           Discord
         </a>
         <span>, </span>
+        <a href="//t.me/devprtcl" target="_blank" rel="noreferrer noopener" style={{ textDecoration: 'underline' }}>
+          Telegram
+        </a>
+        <span>, </span>
         <a
           href="//medium.com/devtoken"
           target="_blank"
