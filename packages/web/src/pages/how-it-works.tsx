@@ -150,6 +150,13 @@ const HowItWorks = () => {
         </Section>
         <SectionHeader id="faq">FAQ</SectionHeader>
         <Faq>
+          <h3>How to stake? </h3>
+          <p>
+            There are properties on <a href="//stakes.social">Stakes.social</a>. Open anyone, and you can stake.{' '}
+            <a href="//stakes.social">Stakes.social</a> is a first Dapp on Dev Protocol. Please keep in mind it is early
+            access ver, not complete development.
+          </p>
+
           <h3>When can I get my staking reward?</h3>
           <p>Each time a property is mined, the staking reward increases. Mining can be done by anyone.</p>
 
@@ -206,6 +213,16 @@ const HowItWorks = () => {
           <p>
             Dev protcol is run by policy, and policy is suggested and voted on by the users. If you have an opinion, you
             are always welcome to suggest a policy.
+          </p>
+
+          <h3>Is there benefit to being in a pool with less staked inside? More chance of rewards?</h3>
+          <p>
+            The amount of downloads of a project is taken into consideration so pools with less staked, if you have a
+            larger percentage than another pool with amount of downloads that is the same, you will get a higher reward.
+            To check downloads, search the project at{' '}
+            <a href="//www.npmjs.com/" target="_blank" rel="noreferrer">
+              npm
+            </a>
           </p>
         </Faq>
       </Article>
