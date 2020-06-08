@@ -6,6 +6,7 @@ import Head from 'next/head'
 import withApollo from 'src/fixtures/withApollo'
 import { List } from 'antd'
 import styled from 'styled-components'
+import { HelpUs } from 'src/components/atoms/HelpUs'
 
 const Wallet = styled.div`
   display: grid;
@@ -72,6 +73,7 @@ class NextApp extends App<AppInitialProps & WithApolloProps<{}>> {
           <meta name="viewport" content="initial-scale=1.0, width=device-width" />
         </Head>
         <Component {...pageProps} apollo={apollo} />
+        <HelpUs></HelpUs>
       </>
     )
   }
