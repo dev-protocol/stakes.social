@@ -37,7 +37,7 @@ export const useWithdrawHolderReward = () => {
   const [error, setError] = useState<Error>()
   const withdrawHolder = useCallback(async (propertyAddress: string) => {
     setIsLoading(true)
-    message.loading({ content: 'now withdrawing holder reward...', key }, 0)
+    message.loading({ content: 'now withdrawing holder reward...', duration: 0, key })
     setError(undefined)
     return withdrawHolderAmount(propertyAddress)
       .then(() => {
@@ -102,7 +102,7 @@ export const useWithdrawStakingReward = () => {
   const [error, setError] = useState<Error>()
   const withdrawStakingReward = useCallback(async (propertyAddress: string) => {
     setIsLoading(true)
-    message.loading({ content: 'now withdrawing staking reward...', key }, 0)
+    message.loading({ content: 'now withdrawing staking reward...', duration: 0, key })
     setError(undefined)
     return withdrawStakingRewardAmount(propertyAddress)
       .then(() => {
@@ -125,7 +125,7 @@ export const useWithdrawStaking = () => {
   const [error, setError] = useState<Error>()
   const withdrawStaking = useCallback(async (propertyAddress: string) => {
     setIsLoading(true)
-    message.loading({ content: 'now withdrawing staking...', key }, 0)
+    message.loading({ content: 'now withdrawing staking...', duration: 0, key })
     setError(undefined)
     return withdrawStakingAmount(propertyAddress)
       .then(() => {
@@ -148,7 +148,7 @@ export const useStake = () => {
   const [error, setError] = useState<Error>()
   const stake = useCallback(async (propertyAddress: string, amount: string) => {
     setIsLoading(true)
-    message.loading({ content: 'now staking...', key }, 0)
+    message.loading({ content: 'now staking...', duration: 0, key })
     setError(undefined)
     return stakeDev(propertyAddress, toAmountNumber(amount).toFormat({ decimalSeparator: '' }))
       .then(() => {
@@ -171,7 +171,7 @@ export const useCancelStaking = () => {
   const [error, setError] = useState<Error>()
   const cancel = useCallback(async (propertyAddress: string) => {
     setIsLoading(true)
-    message.loading({ content: 'now canceling staking...', key }, 0)
+    message.loading({ content: 'now canceling staking...', duration: 0, key })
     setError(undefined)
     return cancelStaking(propertyAddress)
       .then(() => {
@@ -213,7 +213,7 @@ export const useAllocate = () => {
   const [error, setError] = useState<Error>()
   const allocateDev = useCallback(async (metricsAddress: string) => {
     setIsLoading(true)
-    message.loading({ content: 'now mining...', key }, 0)
+    message.loading({ content: 'now mining...', duration: 0, key })
     setError(undefined)
     return allocate(metricsAddress)
       .then(() => {
@@ -236,7 +236,7 @@ export const useCreateProperty = () => {
   const [error, setError] = useState<Error>()
   const callback = useCallback(async (name: string, symbol: string, author: string) => {
     setIsLoading(true)
-    message.loading({ content: 'now creating property...', key }, 0)
+    message.loading({ content: 'now creating property...', duration: 0, key })
     setError(undefined)
     return createProperty(name, symbol, author)
       .then(result => {
@@ -260,7 +260,7 @@ export const useMarketScheme = () => {
   const [error, setError] = useState<Error>()
   const callback = useCallback(async (marketAddress: string) => {
     setIsLoading(true)
-    message.loading({ content: 'now loading...', key }, 0)
+    message.loading({ content: 'now loading...', duration: 0, key })
     setError(undefined)
     return marketScheme(marketAddress)
       .then(result => {
@@ -283,7 +283,7 @@ export const useAuthenticate = () => {
   const [error, setError] = useState<Error>()
   const callback = useCallback(async (marketAddress: string, propertyAddress: string, args: string[]) => {
     setIsLoading(true)
-    message.loading({ content: 'now authenticating...', key }, 0)
+    message.loading({ content: 'now authenticating...', duration: 0, key })
     setError(undefined)
     return authenticate(marketAddress, propertyAddress, args)
       .then(metricsAddress => {
