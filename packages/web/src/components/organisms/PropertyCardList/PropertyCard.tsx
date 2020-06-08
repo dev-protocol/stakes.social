@@ -32,7 +32,7 @@ const StatisticTitle = styled.span`
 const AssetStrengthBase = ({ assetStrength }: { assetStrength: number }) => (
   <div>
     <StatisticTitle style={{ position: 'absolute' }}>{Math.floor(assetStrength * 100)}% of markets</StatisticTitle>
-    <CircleGraph size={81} percentage={assetStrength} />
+    <CircleGraph percentage={assetStrength} />
   </div>
 )
 
