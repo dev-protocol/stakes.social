@@ -37,7 +37,11 @@ export const useWithdrawHolderReward = () => {
   const [error, setError] = useState<Error>()
   const withdrawHolder = useCallback(async (propertyAddress: string) => {
     setIsLoading(true)
+<<<<<<< HEAD
     message.loading({ content: 'now withdrawing holder reward...', duration: 0, key })
+=======
+    message.loading({ content: 'now withdrawing holder reward...', key }, 0)
+>>>>>>> 2e0d338da08ed5a646e11a7776df83ddeda1d8ba
     setError(undefined)
     return withdrawHolderAmount(propertyAddress)
       .then(() => {
