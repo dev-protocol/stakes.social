@@ -25,11 +25,16 @@ const Circle = styled(Button)`
   right: 2rem;
   background: #e91e63;
   border-color: #e91e63;
-  color: #f8bbd0;
   box-shadow: 0 3px 12px #e91e6333;
-  &:hover {
+  &,
+  &:hover,
+  &:focus,
+  &:active {
     background: #e91e63;
     border-color: #e91e63;
+    color: #f8bbd0;
+  }
+  &:hover {
     animation: ${color} 0.5s linear infinite alternate;
   }
   @media (min-width: 768px) {
