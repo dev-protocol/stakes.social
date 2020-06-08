@@ -1,62 +1,55 @@
 import React from 'react'
-import { Button } from 'antd'
-import { useConnectWallet } from 'src/fixtures/wallet/hooks'
-import { BrandLogo } from 'src/components/atoms/BrandLogo'
 import styled from 'styled-components'
+import { Header } from '../Header'
 
 const ResponsivePropertyFrame = styled.div`
-  width: auto;
-  position: relative;
-  height: 562px;
-  padding: 50px;
-  @media (max-width: 768px) {
-    height: 360px;
-    padding: 18px;
+  display: grid;
+  @media (min-width: 768px) {
   }
 `
 
 const ResponsivePropertyAddressFrame = styled.div`
-  position: absolute;
-  bottom: 0;
-  padding: 0 0 122px 333px;
-  display: block;
-  @media (max-width: 768px) {
-    padding: 0 0 100px 0;
-    width: 270px;
+  max-width: 1048px;
+  width: 100%;
+  margin: 3rem auto;
+  font-size: 0.9rem;
+  color: white;
+  padding: 0 1rem;
+  .heading {
+  }
+  .address {
+    font-size: 1rem;
+    font-family: monospace;
+    @media (min-width: 768px) {
+      font-size: 2rem;
+    }
+  }
+  @media (min-width: 768px) {
+    margin: 6rem auto;
   }
 `
 
-const ResponsiveButton = styled(Button)`
-  float: right;
-`
+const assetsAsBackground = (address: string): string =>
+  `url('//raw.githubusercontent.com/dev-protocol/assets/master/property/${address}/header.jpg')`
 
 interface Props {
   propertyAddress: string
 }
 
 export const PropertyHeader = ({ propertyAddress }: Props) => {
-  const { isConnected, connect } = useConnectWallet()
-  const handleClick = () => {
-    connect()
-  }
-
   return (
     <ResponsivePropertyFrame
       style={{
-        background: `
-    url('//raw.githubusercontent.com/dev-protocol/assets/master/property/${propertyAddress}/header.jpg'),
-    linear-gradient(111.32deg, #2F80ED 0%, #D5E6FB 100%)`,
+        background: `${assetsAsBackground(
+          propertyAddress
+        )}, linear-gradient(134deg, #2f43ed 0%, #2F80ED 23%, #2faced 46%, #bed0e6 100%)`,
         backgroundSize: 'cover'
       }}
     >
-      <BrandLogo colorSchema={'white'} props={{ width: '14em' }}></BrandLogo>
-      <ResponsiveButton size="large" style={{}} disabled={isConnected} onClick={handleClick}>
-        {isConnected && 'Wallet connected'}
-        {!isConnected && 'Connect to a wallet'}
-      </ResponsiveButton>
+      <Header colorSchema="white"></Header>
       <ResponsivePropertyAddressFrame>
-        <span style={{ background: 'white', padding: '0.5em' }}>Property Address</span>
-        <div style={{ background: 'white', overflow: 'auto' }}>{propertyAddress}</div>
+        <span className="heading">Property Address</span>
+        <div className="address">{propertyAddress}</div>
       </ResponsivePropertyAddressFrame>
     </ResponsivePropertyFrame>
   )

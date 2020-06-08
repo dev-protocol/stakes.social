@@ -66,17 +66,17 @@ export const PropertyCard = ({ propertyAddress }: Props) => {
           </Col>
           <ResponsiveCol sm={24} md={14}>
             <ResponsiveRow>
-              <Col span={10}>
+              <Col span={12}>
                 <Statistic
                   title="Total Rewards"
                   value={totalRewardsAmount && totalRewardsAmount.dp(5).toNumber()}
                   suffix="DEV"
                 />
               </Col>
-              <Col span={8}>
+              <Col span={9}>
                 <Statistic title="Avg. Interest" value={averageInterestRate.dp(5).toNumber()} suffix="%" />
               </Col>
-              <Col span={6}>
+              <Col span={3}>
                 {metrics && market ? <AssetStrength metrics={metrics} market={market} /> : <AssetStrengthWithoutData />}
               </Col>
             </ResponsiveRow>

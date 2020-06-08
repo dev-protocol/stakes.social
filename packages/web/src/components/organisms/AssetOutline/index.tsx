@@ -1,6 +1,5 @@
 import React, { useMemo } from 'react'
-import Link from 'next/link'
-import { List, Row, Col } from 'antd'
+import { List, Button } from 'antd'
 import { CircleGraph } from 'src/components/atoms/CircleGraph'
 import { useAssetStrength } from 'src/fixtures/dev-kit/hooks'
 import { useGetPropertyAuthenticationQuery } from '@dev/graphql'
@@ -10,22 +9,46 @@ interface Props {
   propertyAddress: string
 }
 
-const ResponsivePropertyFrame = styled.div`
-  min-height: 270px;
+const Wrap = styled.div`
+  display: grid;
+`
+const OutlinesWrap = styled(Wrap)`
+  grid-gap: 1.5rem;
+  @media (min-width: 768px) {
+    grid-auto-flow: column;
+    grid-gap: 3rem;
+    grid-auto-columns: 0.5fr 0.5fr;
+  }
+`
+const AssetStrengthWrap = styled(Wrap)`
+  grid-auto-flow: column;
+  align-items: center;
+  grid-gap: 1rem;
+  grid-auto-columns: 0.6fr auto;
+  @media (min-width: 768px) {
+    grid-gap: 1.5rem;
+  }
+`
+const AssetStrengthValue = styled.span`
+  font-size: 2rem;
+  color: black;
+`
+const AssetListItem = styled(List.Item)`
+  font-size: 1.3rem;
+  color: black;
+  @media (min-width: 768px) {
+    font-size: 1.8rem;
+  }
 `
 
 const AssetStrengthBase = ({ assetStrength }: { assetStrength: number }) => (
-  <Row align="middle" gutter={24}>
-    <Col span={12}>
-      <CircleGraph size={224} percentage={assetStrength} />
-    </Col>
-    <Col span={12}>
-      <div>
-        <span style={{ fontSize: '36px', lineHeight: '48px', color: '#000' }}>{Math.round(assetStrength * 100)}%</span>
-        <span> of total market</span>
-      </div>
-    </Col>
-  </Row>
+  <AssetStrengthWrap>
+    <CircleGraph percentage={assetStrength} />
+    <div>
+      <AssetStrengthValue>{Math.round(assetStrength * 100)}%</AssetStrengthValue>
+      <span> of total market</span>
+    </div>
+  </AssetStrengthWrap>
 )
 
 const AssetStrength = ({ metrics, market }: { metrics: string; market: string }) => {
@@ -45,31 +68,27 @@ export const AssetOutline = ({ propertyAddress }: Props) => {
   const market = useMemo(() => data?.property_authentication[0].market, [data])
 
   return (
-    <div>
-      <Row gutter={[48, 48]}>
-        <Col flex="1 1 268px">
-          <div>
-            <p style={{ fontSize: '18px', lineHeight: '24px', color: '#000' }}>Included Assets</p>
-            <List
-              bordered
-              dataSource={includedAssetList}
-              renderItem={item => (
-                <List.Item style={{ fontSize: '24px', lineHeight: '32px', color: '#000' }}>
-                  <span style={{ overflow: 'auto' }}>{item}</span>
-                </List.Item>
-              )}
-              style={{ maxHeight: '224px' }}
-            />
-            <Link href={'/auth'}>Add your asset</Link>
-          </div>
-        </Col>
-        <Col flex="1 1 500px">
-          <ResponsivePropertyFrame>
-            <p style={{ fontSize: '18px', lineHeight: '24px', color: '#000' }}>Assets Strength</p>
-            {metrics && market ? <AssetStrength metrics={metrics} market={market} /> : <AssetStrengthWithoutData />}
-          </ResponsivePropertyFrame>
-        </Col>
-      </Row>
-    </div>
+    <OutlinesWrap>
+      <div>
+        <p>Included Assets</p>
+        <List
+          bordered
+          dataSource={includedAssetList}
+          renderItem={item => (
+            <AssetListItem>
+              <span style={{ overflow: 'auto' }}>{item}</span>
+            </AssetListItem>
+          )}
+          style={{ maxHeight: '224px' }}
+        />
+        <Button type="dashed" size="small" style={{ marginTop: '0.5rem' }} href={'/auth'}>
+          Add your asset
+        </Button>
+      </div>
+      <div>
+        <p>Assets Strength</p>
+        {metrics && market ? <AssetStrength metrics={metrics} market={market} /> : <AssetStrengthWithoutData />}
+      </div>
+    </OutlinesWrap>
   )
 }

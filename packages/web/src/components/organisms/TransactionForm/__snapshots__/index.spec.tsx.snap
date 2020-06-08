@@ -3,280 +3,260 @@
 exports[`TransactionForm Snapshot 1`] = `
 <body>
   <div>
-    <div>
+    <div
+      class="sc-AxgMl gNNEjJ"
+    >
       <div
-        style="margin: 0px 0px 46px 0px;"
+        class="ant-card ant-card-bordered"
       >
         <div
-          class="ant-card ant-card-bordered"
+          class="ant-card-body"
         >
           <div
-            class="ant-card-body"
+            class="ant-row"
           >
-            <div
-              class="ant-row"
+            <span
+              class="sc-AxhCb kkBYFd"
             >
-              <div
-                style="font-size: 24px; line-height: 32px; color: rgb(0, 0, 0); padding: 0px 0px 32px 0px;"
-              >
-                Stake Now
-              </div>
-            </div>
-            <div
-              class="ant-row"
+              Stake Now
+            </span>
+          </div>
+          <div
+            class="ant-row"
+          >
+            <span
+              class="ant-input-search ant-input-search-enter-button ant-input-search-large ant-input-group-wrapper ant-input-group-wrapper-lg"
+              style="max-width: 578px;"
             >
               <span
-                class="ant-input-search ant-input-search-enter-button ant-input-search-large ant-input-group-wrapper ant-input-group-wrapper-lg"
-                style="max-width: 578px;"
+                class="ant-input-wrapper ant-input-group"
               >
                 <span
-                  class="ant-input-wrapper ant-input-group"
+                  class="ant-input-search ant-input-search-enter-button ant-input-search-large ant-input-affix-wrapper ant-input-affix-wrapper-lg"
                 >
+                  <input
+                    class="ant-input ant-input-lg"
+                    type="number"
+                    value=""
+                  />
                   <span
-                    class="ant-input-search ant-input-search-enter-button ant-input-search-large ant-input-affix-wrapper ant-input-affix-wrapper-lg"
+                    class="ant-input-suffix"
                   >
-                    <input
-                      class="ant-input ant-input-lg"
-                      type="number"
-                      value=""
-                    />
-                    <span
-                      class="ant-input-suffix"
-                    >
-                      DEV
-                    </span>
-                  </span>
-                  <span
-                    class="ant-input-group-addon"
-                  >
-                    <button
-                      class="ant-btn ant-input-search-button ant-btn-primary ant-btn-lg"
-                      type="button"
-                    >
-                      <span>
-                        Stake
-                      </span>
-                    </button>
+                    DEV
                   </span>
                 </span>
+                <span
+                  class="ant-input-group-addon"
+                >
+                  <button
+                    class="ant-btn ant-input-search-button ant-btn-primary ant-btn-lg"
+                    type="button"
+                  >
+                    <span>
+                      Stake
+                    </span>
+                  </button>
+                </span>
+              </span>
+            </span>
+          </div>
+        </div>
+      </div>
+      <div
+        class="ant-card ant-card-bordered"
+      >
+        <div
+          class="ant-card-body"
+        >
+          <div
+            class="ant-row"
+          >
+            <div
+              class="ant-col"
+              style="flex: 1 1 252px;"
+            >
+              <span
+                class="sc-AxjAm fxjwKc"
+              >
+                Withdraw 
+                Staking
+                 Reward
+              </span>
+              <div
+                class="sc-AxirZ dRlJLK"
+              >
+                5000
+                 DEV
+              </div>
+            </div>
+            <div
+              class="ant-col"
+              style="flex: 1 1 252px;"
+            >
+              <div
+                class="ant-space ant-space-vertical"
+              >
+                <div
+                  class="ant-space-item"
+                  style="margin-bottom: 8px;"
+                >
+                  <div>
+                    <div
+                      style="color: rgb(0, 0, 0);"
+                    >
+                      <span
+                        class="sc-AxiKw cwVYPs"
+                      >
+                        Last Update: 
+                        42141412412
+                      </span>
+                      <a
+                        href="#"
+                      >
+                        Mining
+                      </a>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  class="ant-space-item"
+                >
+                  <button
+                    class="ant-btn ant-btn-primary ant-btn-lg"
+                    type="button"
+                  >
+                    <span>
+                      Withdraw
+                    </span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="ant-card ant-card-bordered"
+      >
+        <div
+          class="ant-card-body"
+        >
+          <div
+            class="ant-row"
+          >
+            <div
+              class="ant-col"
+              style="flex: 1 1 252px;"
+            >
+              <span
+                class="sc-AxjAm fxjwKc"
+              >
+                Withdraw 
+                Holder
+                 Reward
+              </span>
+              <div
+                class="sc-AxirZ dRlJLK"
+              >
+                6000
+                 DEV
+              </div>
+            </div>
+            <div
+              class="ant-col"
+              style="flex: 1 1 252px;"
+            >
+              <div
+                class="ant-space ant-space-vertical"
+              >
+                <div
+                  class="ant-space-item"
+                  style="margin-bottom: 8px;"
+                >
+                  <div>
+                    <div
+                      style="color: rgb(0, 0, 0);"
+                    >
+                      <span
+                        class="sc-AxiKw cwVYPs"
+                      >
+                        Last Update: 
+                        42141412412
+                      </span>
+                      <a
+                        href="#"
+                      >
+                        Mining
+                      </a>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  class="ant-space-item"
+                >
+                  <button
+                    class="ant-btn ant-btn-primary ant-btn-lg"
+                    type="button"
+                  >
+                    <span>
+                      Withdraw
+                    </span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="ant-card ant-card-bordered"
+      >
+        <div
+          class="ant-card-body"
+        >
+          <div
+            class="ant-row"
+          >
+            <div
+              class="ant-col"
+              style="display: flex; align-items: center; flex: 1 1 252px;"
+            >
+              <span
+                class="sc-AxhUy fcJmNa"
+              >
+                Cancel Staking
               </span>
             </div>
-          </div>
-        </div>
-      </div>
-      <div
-        style="margin: 0px 0px 46px 0px;"
-      >
-        <div
-          class="ant-card ant-card-bordered"
-        >
-          <div
-            class="ant-card-body"
-          >
             <div
-              class="ant-row"
+              class="ant-col"
+              style="flex: 1 1 252px;"
             >
-              <div
-                class="ant-col"
-                style="flex: 1 1 252px;"
+              <button
+                class="ant-btn ant-btn-primary ant-btn-lg"
+                type="button"
               >
-                <div
-                  style="font-size: 24px; line-height: 32px; color: rgb(0, 0, 0); padding: 16px 0px;"
-                >
-                  Withdraw 
-                  Staking
-                   Reward
-                </div>
-                <div
-                  style="font-size: 24px; line-height: 32px; color: rgba(0, 0, 0, 0.85);"
-                >
-                  5000
-                   DEV
-                </div>
-              </div>
-              <div
-                class="ant-col"
-                style="flex: 1 1 252px;"
-              >
-                <div
-                  class="ant-space ant-space-vertical"
-                  style="vertical-align: middle; font-size: 18px; line-height: 24px; padding: 16px 0px;"
-                >
-                  <div
-                    class="ant-space-item"
-                    style="margin-bottom: 31px;"
-                  >
-                    <div>
-                      <div
-                        style="color: rgb(0, 0, 0);"
-                      >
-                        <span
-                          style="margin-right: 1rem;"
-                        >
-                          Last Update: 
-                          42141412412
-                        </span>
-                        <a
-                          href="#"
-                        >
-                          Mining
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-                  <div
-                    class="ant-space-item"
-                  >
-                    <button
-                      class="ant-btn ant-btn-primary ant-btn-lg"
-                      type="button"
-                    >
-                      <span>
-                        Withdraw
-                      </span>
-                    </button>
-                  </div>
-                </div>
-              </div>
+                <span>
+                  Cancel
+                </span>
+              </button>
             </div>
           </div>
         </div>
       </div>
-      <div
-        style="margin: 0px 0px 46px 0px;"
-      >
-        <div
-          class="ant-card ant-card-bordered"
+      <p>
+        Are you already canceled? To withdraw it, please use Etherscan because developing the UI.
+         
+        <a
+          href="https://spectrum.chat/devtoken/general/how-to-withdraw-your-stake~751c00bc-3dde-4d41-a28d-e0b81972f8a4"
+          rel="noreferrer"
+          target="_blank"
         >
-          <div
-            class="ant-card-body"
-          >
-            <div
-              class="ant-row"
-            >
-              <div
-                class="ant-col"
-                style="flex: 1 1 252px;"
-              >
-                <div
-                  style="font-size: 24px; line-height: 32px; color: rgb(0, 0, 0); padding: 16px 0px;"
-                >
-                  Withdraw 
-                  Holder
-                   Reward
-                </div>
-                <div
-                  style="font-size: 24px; line-height: 32px; color: rgba(0, 0, 0, 0.85);"
-                >
-                  6000
-                   DEV
-                </div>
-              </div>
-              <div
-                class="ant-col"
-                style="flex: 1 1 252px;"
-              >
-                <div
-                  class="ant-space ant-space-vertical"
-                  style="vertical-align: middle; font-size: 18px; line-height: 24px; padding: 16px 0px;"
-                >
-                  <div
-                    class="ant-space-item"
-                    style="margin-bottom: 31px;"
-                  >
-                    <div>
-                      <div
-                        style="color: rgb(0, 0, 0);"
-                      >
-                        <span
-                          style="margin-right: 1rem;"
-                        >
-                          Last Update: 
-                          42141412412
-                        </span>
-                        <a
-                          href="#"
-                        >
-                          Mining
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-                  <div
-                    class="ant-space-item"
-                  >
-                    <button
-                      class="ant-btn ant-btn-primary ant-btn-lg"
-                      type="button"
-                    >
-                      <span>
-                        Withdraw
-                      </span>
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div
-        style="margin: 0px 0px 46px 0px;"
-      >
-        <div
-          class="ant-card ant-card-bordered"
-        >
-          <div
-            class="ant-card-body"
-          >
-            <div
-              class="ant-row"
-            >
-              <div
-                class="ant-col"
-                style="display: flex; align-items: center; padding: 16px 0px; flex: 1 1 252px;"
-              >
-                <div
-                  style="font-size: 24px; line-height: 32px; color: rgb(0, 0, 0);"
-                >
-                  Cancel Staking
-                </div>
-              </div>
-              <div
-                class="ant-col"
-                style="padding: 16px 0px; flex: 1 1 252px;"
-              >
-                <button
-                  class="ant-btn ant-btn-primary ant-btn-lg"
-                  type="button"
-                >
-                  <span>
-                    Cancel
-                  </span>
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div
-        style="margin: 0px 0px 46px 0px;"
-      >
-        <p>
-          Are you already canceled? To withdraw it, please use Etherscan because developing the UI.
-           
-          <a
-            href="https://spectrum.chat/devtoken/general/how-to-withdraw-your-stake~751c00bc-3dde-4d41-a28d-e0b81972f8a4"
-            rel="noreferrer"
-            target="_blank"
-          >
-            And here
-            '
-            s how to use Etherscan
-          </a>
-          .
-        </p>
-      </div>
+          And here
+          '
+          s how to use Etherscan
+        </a>
+        .
+      </p>
     </div>
   </div>
 </body>

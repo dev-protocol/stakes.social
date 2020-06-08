@@ -1,5 +1,6 @@
 import * as React from 'react'
 import { Card, Input, Row } from 'antd'
+import styled from 'styled-components'
 
 const { Search } = Input
 
@@ -16,11 +17,16 @@ interface Props {
   ) => void
 }
 
+const Heading = styled.span`
+  font-size: 1.4rem;
+  margin-bottom: 1rem;
+`
+
 export const InputFormCard = ({ label, suffix, onSubmitStake }: Props) => {
   return (
     <Card>
       <Row>
-        <div style={{ fontSize: '24px', lineHeight: '32px', color: '#000', padding: '0 0 32px 0' }}>{label}</div>
+        <Heading>{label}</Heading>
       </Row>
       <Row>
         <Search
