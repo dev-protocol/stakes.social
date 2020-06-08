@@ -1,6 +1,7 @@
 import React from 'react'
 import BigNumber from 'bignumber.js'
 import { Card, Button, Space, Row, Col, Popconfirm } from 'antd'
+import styled from 'styled-components'
 
 interface Props {
   label: 'Staking' | 'Holder'
@@ -10,27 +11,38 @@ interface Props {
   onClickMining: (e?: React.MouseEvent<HTMLElement, MouseEvent>) => void
 }
 
+const Heading = styled.span`
+  font-size: 1.2rem;
+  @media (min-width: 768px) {
+    font-size: 1.4rem;
+  }
+`
+const Statistic = styled.div`
+  font-size: 1.4rem;
+  color: black;
+  margin-bottom: 1rem;
+  @media (min-width: 768px) {
+    margin-bottom: 0;
+  }
+`
+const Descrition = styled.span`
+  font-size: 1rem;
+  margin-right: 1rem;
+`
+
 export const WithdrawCard = ({ amount, label, onSubmitWithdraw, lastUpdate, onClickMining }: Props) => {
   return (
     <Card>
       <Row>
         <Col flex="1 1 252px">
-          <div style={{ fontSize: '24px', lineHeight: '32px', color: '#000', padding: '16px 0' }}>
-            Withdraw {label} Reward
-          </div>
-          <div style={{ fontSize: '24px', lineHeight: '32px', color: 'rgba(0, 0, 0, 0.85)' }}>
-            {amount ? amount.dp(1).toNumber() : 0} DEV
-          </div>
+          <Heading>Withdraw {label} Reward</Heading>
+          <Statistic>{amount ? amount.dp(1).toNumber() : 0} DEV</Statistic>
         </Col>
         <Col flex="1 1 252px">
-          <Space
-            direction="vertical"
-            size={31}
-            style={{ verticalAlign: 'middle', fontSize: '18px', lineHeight: '24px', padding: '16px 0' }}
-          >
+          <Space direction="vertical" size="small">
             <div>
               <div style={{ color: '#000' }}>
-                <span style={{ marginRight: '1rem' }}>Last Update: {lastUpdate || ''}</span>
+                <Descrition>Last Update: {lastUpdate || ''}</Descrition>
                 {/* TODO: Refactoring */}
                 {lastUpdate ? (
                   <Popconfirm

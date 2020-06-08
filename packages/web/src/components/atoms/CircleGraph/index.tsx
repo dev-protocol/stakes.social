@@ -1,15 +1,24 @@
 import styled from 'styled-components'
 
 interface Props {
-  size: number
   percentage: number
 }
 
 export const CircleGraph = styled.div<Props>`
-  width: ${props => props.size}px;
-  height: ${props => props.size}px;
+  position: relative;
+  padding-top: 100%;
   border-radius: 50%;
-  background-color: #2f80ed;
-  background-clip: padding-box;
-  border: solid ${props => (props.size / 2) * (1 - props.percentage)}px rgba(47, 128, 237, 0.2);
+  background: #2f80ed33;
+  &::after {
+    content: '';
+    position: absolute;
+    display: block;
+    background: #2f80ed;
+    width: ${props => props.percentage * 100}%;
+    height: ${props => props.percentage * 100}%;
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
 `

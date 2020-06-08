@@ -8,26 +8,23 @@ interface Props {
   colorSchema?: 'black' | 'white'
 }
 
-const Logo = styled.div`
-  i {
-    font-weight: bold;
-    margin-left: 0.5rem;
-  }
-`
 const HeaderContainer = styled.div`
   display: grid;
+  max-width: 1048px;
+  width: 100%;
+  margin: auto;
   grid-auto-flow: column;
   justify-content: space-between;
   align-items: center;
-  padding: 2em;
-  grid-gap: 1em;
+  padding: 1rem;
+  grid-gap: 1rem;
   svg {
-    width: 11em;
+    width: 9rem;
   }
   @media (min-width: 768px) {
-    padding: 3.8em;
+    margin-top: 3.4em;
     svg {
-      width: 14em;
+      width: 12rem;
     }
   }
 `
@@ -40,11 +37,8 @@ export const Header = ({ colorSchema = 'black' }: Props = {}) => {
 
   return (
     <HeaderContainer>
-      <Logo>
-        <BrandLogo colorSchema={colorSchema} props={{ height: undefined }}></BrandLogo>
-        <i>Early Access</i>
-      </Logo>
-      <Button size="middle" disabled={isConnected} onClick={handleClick}>
+      <BrandLogo colorSchema={colorSchema} props={{ height: undefined }}></BrandLogo>
+      <Button disabled={isConnected} onClick={handleClick}>
         {isConnected && 'Wallet connected'}
         {!isConnected && 'Connect to a wallet'}
       </Button>

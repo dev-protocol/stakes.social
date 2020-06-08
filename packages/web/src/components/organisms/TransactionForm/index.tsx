@@ -11,10 +11,16 @@ import { WithdrawCard } from 'src/components/molecules/WithdrawCard'
 import { InputFormCard } from 'src/components/molecules/InputFormCard'
 import { useGetLastAllocatorAllocationResultQuery, useGetPropertyAuthenticationQuery } from '@dev/graphql'
 import { ButtonCard } from 'src/components/molecules/ButtonCard'
+import styled from 'styled-components'
 
 interface Props {
   propertyAddress: string
 }
+
+const Wrap = styled.div`
+  display: grid;
+  grid-gap: 1rem;
+`
 
 export const TransactionForm = ({ propertyAddress }: Props) => {
   const { stake } = useStake()
@@ -48,44 +54,34 @@ export const TransactionForm = ({ propertyAddress }: Props) => {
   )
 
   return (
-    <div>
-      <div style={{ margin: '0 0 46px 0' }}>
-        <InputFormCard label="Stake Now" suffix="DEV" onSubmitStake={handleSubmit} />
-      </div>
-      <div style={{ margin: '0 0 46px 0' }}>
-        <WithdrawCard
-          label="Staking"
-          onSubmitWithdraw={handleWithdrawStakingReward}
-          amount={myStakingRewardAmount}
-          lastUpdate={data?.allocator_allocation_result[0]?.block_number}
-          onClickMining={handleMining}
-        />
-      </div>
-      <div style={{ margin: '0 0 46px 0' }}>
-        <WithdrawCard
-          label="Holder"
-          onSubmitWithdraw={handleWithdrawHolder}
-          amount={myHolderAmount}
-          lastUpdate={data?.allocator_allocation_result[0]?.block_number}
-          onClickMining={handleMining}
-        />
-      </div>
-      <div style={{ margin: '0 0 46px 0' }}>
-        <ButtonCard label="Cancel Staking" buttonLabel="Cancel" onClick={handleCancelStaking} />
-      </div>
-      <div style={{ margin: '0 0 46px 0' }}>
-        <p>
-          Are you already canceled? To withdraw it, please use Etherscan because developing the UI.{' '}
-          <a
-            href="https://spectrum.chat/devtoken/general/how-to-withdraw-your-stake~751c00bc-3dde-4d41-a28d-e0b81972f8a4"
-            target="_blank"
-            rel="noreferrer"
-          >
-            And here{`'`}s how to use Etherscan
-          </a>
-          .
-        </p>
-      </div>
-    </div>
+    <Wrap>
+      <InputFormCard label="Stake Now" suffix="DEV" onSubmitStake={handleSubmit} />
+      <WithdrawCard
+        label="Staking"
+        onSubmitWithdraw={handleWithdrawStakingReward}
+        amount={myStakingRewardAmount}
+        lastUpdate={data?.allocator_allocation_result[0]?.block_number}
+        onClickMining={handleMining}
+      />
+      <WithdrawCard
+        label="Holder"
+        onSubmitWithdraw={handleWithdrawHolder}
+        amount={myHolderAmount}
+        lastUpdate={data?.allocator_allocation_result[0]?.block_number}
+        onClickMining={handleMining}
+      />
+      <ButtonCard label="Cancel Staking" buttonLabel="Cancel" onClick={handleCancelStaking} />
+      <p>
+        Are you already canceled? To withdraw it, please use Etherscan because developing the UI.{' '}
+        <a
+          href="https://spectrum.chat/devtoken/general/how-to-withdraw-your-stake~751c00bc-3dde-4d41-a28d-e0b81972f8a4"
+          target="_blank"
+          rel="noreferrer"
+        >
+          And here{`'`}s how to use Etherscan
+        </a>
+        .
+      </p>
+    </Wrap>
   )
 }

@@ -3,97 +3,69 @@
 exports[`AssetOutline Snapshot 1`] = `
 <body>
   <div>
-    <div>
-      <div
-        class="ant-row"
-        style="margin: -24px -24px 24px -24px;"
-      >
+    <div
+      class="sc-AxirZ sc-AxiKw jnBnXj"
+    >
+      <div>
+        <p>
+          Included Assets
+        </p>
         <div
-          class="ant-col"
-          style="padding: 24px 24px 24px 24px; flex: 1 1 268px;"
-        >
-          <div>
-            <p
-              style="font-size: 18px; line-height: 24px; color: rgb(0, 0, 0);"
-            >
-              Included Assets
-            </p>
-            <div
-              class="ant-list ant-list-split ant-list-bordered"
-              style="max-height: 224px;"
-            >
-              <div
-                class="ant-spin-nested-loading"
-              >
-                <div
-                  class="ant-spin-container"
-                >
-                  <ul
-                    class="ant-list-items"
-                  >
-                    <li
-                      class="ant-list-item"
-                      style="font-size: 24px; line-height: 32px; color: rgb(0, 0, 0);"
-                    >
-                      <span
-                        style="overflow: auto;"
-                      >
-                        authentication-id
-                      </span>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-            <a
-              href="/auth"
-            >
-              Add your asset
-            </a>
-          </div>
-        </div>
-        <div
-          class="ant-col"
-          style="padding: 24px 24px 24px 24px; flex: 1 1 500px;"
+          class="ant-list ant-list-split ant-list-bordered"
+          style="max-height: 224px;"
         >
           <div
-            class="sc-AxirZ bZjJXW"
+            class="ant-spin-nested-loading"
           >
-            <p
-              style="font-size: 18px; line-height: 24px; color: rgb(0, 0, 0);"
-            >
-              Assets Strength
-            </p>
             <div
-              class="ant-row ant-row-middle"
-              style="margin-left: -12px; margin-right: -12px;"
+              class="ant-spin-container"
             >
-              <div
-                class="ant-col ant-col-12"
-                style="padding-left: 12px; padding-right: 12px;"
+              <ul
+                class="ant-list-items"
               >
-                <div
-                  class="sc-AxjAm fDa-dQL"
-                  size="224"
-                />
-              </div>
-              <div
-                class="ant-col ant-col-12"
-                style="padding-left: 12px; padding-right: 12px;"
-              >
-                <div>
+                <li
+                  class="ant-list-item sc-AxgMl jrRUnk"
+                >
                   <span
-                    style="font-size: 36px; line-height: 48px; color: rgb(0, 0, 0);"
+                    style="overflow: auto;"
                   >
-                    26
-                    %
+                    authentication-id
                   </span>
-                  <span>
-                     of total market
-                  </span>
-                </div>
-              </div>
+                </li>
+              </ul>
             </div>
+          </div>
+        </div>
+        <a
+          class="ant-btn ant-btn-dashed ant-btn-sm"
+          href="/auth"
+          style="margin-top: 0.5rem;"
+        >
+          <span>
+            Add your asset
+          </span>
+        </a>
+      </div>
+      <div>
+        <p>
+          Assets Strength
+        </p>
+        <div
+          class="sc-AxirZ sc-AxhCb gXFnzc"
+        >
+          <div
+            class="sc-AxjAm kkhYpD"
+          />
+          <div>
+            <span
+              class="sc-AxhUy dQrdLI"
+            >
+              26
+              %
+            </span>
+            <span>
+               of total market
+            </span>
           </div>
         </div>
       </div>

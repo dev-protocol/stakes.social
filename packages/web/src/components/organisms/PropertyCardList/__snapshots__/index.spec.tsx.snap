@@ -42,7 +42,7 @@ exports[`PropertyCardList Snapshot 1`] = `
                 class="ant-row sc-AxirZ dTFMDJ"
               >
                 <div
-                  class="ant-col ant-col-10"
+                  class="ant-col ant-col-12"
                 >
                   <div
                     class="ant-statistic"
@@ -75,7 +75,7 @@ exports[`PropertyCardList Snapshot 1`] = `
                   </div>
                 </div>
                 <div
-                  class="ant-col ant-col-8"
+                  class="ant-col ant-col-9"
                 >
                   <div
                     class="ant-statistic"
@@ -108,7 +108,7 @@ exports[`PropertyCardList Snapshot 1`] = `
                   </div>
                 </div>
                 <div
-                  class="ant-col ant-col-6"
+                  class="ant-col ant-col-3"
                 >
                   <div>
                     <span
@@ -119,7 +119,7 @@ exports[`PropertyCardList Snapshot 1`] = `
                       % of markets
                     </span>
                     <div
-                      class="sc-AxjAm cqOJXy"
+                      class="sc-AxjAm kkhYpD"
                       size="81"
                     />
                   </div>

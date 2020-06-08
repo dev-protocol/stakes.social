@@ -16,15 +16,15 @@ exports[`WithdrawCard Snapshot 1`] = `
             class="ant-col"
             style="flex: 1 1 252px;"
           >
-            <div
-              style="font-size: 24px; line-height: 32px; color: rgb(0, 0, 0); padding: 16px 0px;"
+            <span
+              class="sc-AxjAm fxjwKc"
             >
               Withdraw 
               Holder
                Reward
-            </div>
+            </span>
             <div
-              style="font-size: 24px; line-height: 32px; color: rgba(0, 0, 0, 0.85);"
+              class="sc-AxirZ dRlJLK"
             >
               1000
                DEV
@@ -36,18 +36,17 @@ exports[`WithdrawCard Snapshot 1`] = `
           >
             <div
               class="ant-space ant-space-vertical"
-              style="vertical-align: middle; font-size: 18px; line-height: 24px; padding: 16px 0px;"
             >
               <div
                 class="ant-space-item"
-                style="margin-bottom: 31px;"
+                style="margin-bottom: 8px;"
               >
                 <div>
                   <div
                     style="color: rgb(0, 0, 0);"
                   >
                     <span
-                      style="margin-right: 1rem;"
+                      class="sc-AxiKw cwVYPs"
                     >
                       Last Update: 
                       

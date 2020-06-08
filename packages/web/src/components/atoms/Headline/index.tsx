@@ -5,9 +5,12 @@ interface Props {
 }
 
 export const Headline = styled.div<Props>`
-  height: ${props => props.height || 380}px;
   display: flex;
+  padding: 1rem;
   justify-content: center;
   align-items: center;
   flex-flow: column;
+  @media (min-width: 768px) {
+    height: ${props => props.height || 380}px;
+  }
 `

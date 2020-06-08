@@ -4,6 +4,7 @@ import { Footer } from 'src/components/organisms/Footer'
 import styled from 'styled-components'
 import Text from 'antd/lib/typography/Text'
 import { Button } from 'antd'
+import { EarlyAccess } from 'src/components/atoms/EarlyAccess'
 
 const Article = styled.article`
   padding: 2em;
@@ -62,172 +63,175 @@ const MavigationButtons = styled.div`
 
 const HowItWorks = () => {
   return (
-    <main>
-      <Header />
-      <Article>
-        <Title>How it works</Title>
-        <Deck src="https://drive.google.com/file/d/1KspRC6ruqa1F15kvAxZFDjHGWJR-OeSt/preview"></Deck>
-        <MavigationButtons>
-          <Button type="link" href="#faq">
-            Jump to FAQ
-          </Button>
-        </MavigationButtons>
-        <SectionHeader id="overview">Overview</SectionHeader>
-        <Section>
-          <h3>What is Dev Protocol?</h3>
-          <div>
-            <p>Stakes.social is an application based on the Dev Protocol.</p>
+    <>
+      <EarlyAccess></EarlyAccess>
+      <main>
+        <Header />
+        <Article>
+          <Title>How it works</Title>
+          <Deck src="https://drive.google.com/file/d/1KspRC6ruqa1F15kvAxZFDjHGWJR-OeSt/preview"></Deck>
+          <MavigationButtons>
+            <Button type="link" href="#faq">
+              Jump to FAQ
+            </Button>
+          </MavigationButtons>
+          <SectionHeader id="overview">Overview</SectionHeader>
+          <Section>
+            <h3>What is Dev Protocol?</h3>
+            <div>
+              <p>Stakes.social is an application based on the Dev Protocol.</p>
+              <p>
+                The Dev Protocol is a middleware protocol built on Ethereum that allows you to{' '}
+                <Text mark>tokenize various activities</Text> by using the Dev Protocol.
+              </p>
+              <p>
+                <Text mark>Staking</Text> DEV on tokenized activity will enable activity owners to mine DEV, and those
+                who stake them earn staking reward as an interest.
+              </p>
+            </div>
+          </Section>
+          <Section>
+            <h3>What is tokenization?</h3>
+            <div>
+              <p>
+                <Text mark>Tokenization</Text> in the Dev Protocol means authenticating an activity and issuing its own
+                ERC20-token, called <Text mark>Property</Text>.
+              </p>
+              <p>
+                The Property is an ERC20-token that conforms to the Ethereum standard, so its ownership can be divided
+                into small pieces and shared by many people.
+              </p>
+            </div>
+          </Section>
+          <Section>
+            <h3>What is staking?</h3>
+            <div>
+              <p>
+                <Text mark>Staking</Text> in the Dev Protocol means depositing and locking up on{' '}
+                <Text mark>Properties</Text>.
+              </p>
+              <p>
+                Staking against a Property means that you support the ability of that Property to mine. (This works like
+                a DPoS.)
+              </p>
+              <p>The staker can earn a portion of the DEV that the Property has mined during the staking period.</p>
+            </div>
+          </Section>
+          <Section>
+            <h3>What are the rewards?</h3>
+            <div>
+              <p>
+                <Text mark>Rewards</Text> in the Dev Protocol means for Property shareholders DEV earned on the outcome
+                of the activity, and for stakers, the DEV received as interest.
+              </p>
+            </div>
+          </Section>
+          <Section>
+            <h3>What is mining?</h3>
+            <div>
+              <p>
+                <Text mark>Mining</Text> in the Dev Protocol means measuring the outcome of the activity associated with
+                a Property and issuing new DEV based on the results.
+              </p>
+              <p>
+                The total number of DEV is unlimited. But the higher the amount locked up by the Dev Protocol, the fewer
+                new issued DEV there will be, and eventually zero.
+              </p>
+              <p>
+                These algorithms are determined by the contract called Policy and can be updated by the will of the
+                people.
+              </p>
+            </div>
+          </Section>
+          <Section>
+            <h3>Learn more</h3>
+            <div>
+              <p>
+                Read the <a href="//github.com/dev-protocol/protocol/blob/master/docs/WHITEPAPER.md">whitepaper</a>.
+              </p>
+            </div>
+          </Section>
+          <SectionHeader id="faq">FAQ</SectionHeader>
+          <Faq>
+            <h3>How to stake? </h3>
             <p>
-              The Dev Protocol is a middleware protocol built on Ethereum that allows you to{' '}
-              <Text mark>tokenize various activities</Text> by using the Dev Protocol.
+              There are properties on <a href="//stakes.social">Stakes.social</a>. Open anyone, and you can stake.{' '}
+              <a href="//stakes.social">Stakes.social</a> is a first Dapp on Dev Protocol. Please keep in mind it is
+              early access ver, not complete development.
             </p>
+
+            <h3>When can I get my staking reward?</h3>
+            <p>Each time a property is mined, the staking reward increases. Mining can be done by anyone.</p>
+
+            <h3>When can I mine?</h3>
             <p>
-              <Text mark>Staking</Text> DEV on tokenized activity will enable activity owners to mine DEV, and those who
-              stake them earn staking reward as an interest.
+              The npm market requires a minimum of two days to mine. You can find out when you can mine by pressing
+              mining. If you are unable to mine a pop-up will display telling you the next block you can mine at. It
+              displays the block number on the Ethereum blockchain.
             </p>
-          </div>
-        </Section>
-        <Section>
-          <h3>What is tokenization?</h3>
-          <div>
+
+            <h3>What is the minimum amount of staking?</h3>
+            <p>It is the same as the minimum unit of DEV, which is 0.000000000000000001.</p>
+
+            <h3>How much reward will I get?</h3>
+            <p>Reward rates are different for each project.</p>
+
+            <h3>The % shown in the site is the yearly ROI right?</h3>
             <p>
-              <Text mark>Tokenization</Text> in the Dev Protocol means authenticating an activity and issuing its own
-              ERC20-token, called <Text mark>Property</Text>.
+              It&apos;s the value of the last 3-month avg. Dev Protocol was deployed in January and the staking went
+              live in March.
             </p>
+
+            <h3>Why are the reward rates so high?</h3>
             <p>
-              The Property is an ERC20-token that conforms to the Ethereum standard, so its ownership can be divided
-              into small pieces and shared by many people.
+              Staking rewards fluctuate depending on what you are staking in, but currently, they generally tend to be
+              high. It is dictated by the governance of the protocol, which goes down as the staking rate goes up. Now
+              we are in the initial phase.
+              <a
+                href="//github.com/dev-protocol/protocol/blob/master/docs/POLICY.md#rewards"
+                target="_blank"
+                rel="noreferrer"
+              >
+                Please see the Policy to detail.
+              </a>
             </p>
-          </div>
-        </Section>
-        <Section>
-          <h3>What is staking?</h3>
-          <div>
+
+            <h3>Is the supply of Dev tokens fixed or unlimited?</h3>
             <p>
-              <Text mark>Staking</Text> in the Dev Protocol means depositing and locking up on{' '}
-              <Text mark>Properties</Text>.
+              It&apos;s not fixed, but the limit will come later. The total supply increases a little each time mining
+              occurs and rewards are created. The higher the staking rate, the less new coins, ultimately it will move
+              towards zero.
             </p>
+
+            <h3>The more the interest the more rewards you receive?</h3>
+            <p>The higher the avg intrest rate is, the more rewards you will get.</p>
+
+            <h3>Which project should I stake?</h3>
             <p>
-              Staking against a Property means that you support the ability of that Property to mine. (This works like a
-              DPoS.)
+              Every project needs support, so please stake where you want. Staking on a project is supporting the
+              developer of that project. Any project would be happy to have you staking with them.
             </p>
-            <p>The staker can earn a portion of the DEV that the Property has mined during the staking period.</p>
-          </div>
-        </Section>
-        <Section>
-          <h3>What are the rewards?</h3>
-          <div>
+
+            <h3>Why do I have to do this?</h3>
             <p>
-              <Text mark>Rewards</Text> in the Dev Protocol means for Property shareholders DEV earned on the outcome of
-              the activity, and for stakers, the DEV received as interest.
+              Dev protcol is run by policy, and policy is suggested and voted on by the users. If you have an opinion,
+              you are always welcome to suggest a policy.
             </p>
-          </div>
-        </Section>
-        <Section>
-          <h3>What is mining?</h3>
-          <div>
+
+            <h3>Is there benefit to being in a pool with less staked inside? More chance of rewards?</h3>
             <p>
-              <Text mark>Mining</Text> in the Dev Protocol means measuring the outcome of the activity associated with a
-              Property and issuing new DEV based on the results.
+              The amount of downloads of a project is taken into consideration so pools with less staked, if you have a
+              larger percentage than another pool with amount of downloads that is the same, you will get a higher
+              reward. To check downloads, search the project at{' '}
+              <a href="//www.npmjs.com/" target="_blank" rel="noreferrer">
+                npm
+              </a>
             </p>
-            <p>
-              The total number of DEV is unlimited. But the higher the amount locked up by the Dev Protocol, the fewer
-              new issued DEV there will be, and eventually zero.
-            </p>
-            <p>
-              These algorithms are determined by the contract called Policy and can be updated by the will of the
-              people.
-            </p>
-          </div>
-        </Section>
-        <Section>
-          <h3>Learn more</h3>
-          <div>
-            <p>
-              Read the <a href="//github.com/dev-protocol/protocol/blob/master/docs/WHITEPAPER.md">whitepaper</a>.
-            </p>
-          </div>
-        </Section>
-        <SectionHeader id="faq">FAQ</SectionHeader>
-        <Faq>
-          <h3>How to stake? </h3>
-          <p>
-            There are properties on <a href="//stakes.social">Stakes.social</a>. Open anyone, and you can stake.{' '}
-            <a href="//stakes.social">Stakes.social</a> is a first Dapp on Dev Protocol. Please keep in mind it is early
-            access ver, not complete development.
-          </p>
-
-          <h3>When can I get my staking reward?</h3>
-          <p>Each time a property is mined, the staking reward increases. Mining can be done by anyone.</p>
-
-          <h3>When can I mine?</h3>
-          <p>
-            The npm market requires a minimum of two days to mine. You can find out when you can mine by pressing
-            mining. If you are unable to mine a pop-up will display telling you the next block you can mine at. It
-            displays the block number on the Ethereum blockchain.
-          </p>
-
-          <h3>What is the minimum amount of staking?</h3>
-          <p>It is the same as the minimum unit of DEV, which is 0.000000000000000001.</p>
-
-          <h3>How much reward will I get?</h3>
-          <p>Reward rates are different for each project.</p>
-
-          <h3>The % shown in the site is the yearly ROI right?</h3>
-          <p>
-            It&apos;s the value of the last 3-month avg. Dev Protocol was deployed in January and the staking went live
-            in March.
-          </p>
-
-          <h3>Why are the reward rates so high?</h3>
-          <p>
-            Staking rewards fluctuate depending on what you are staking in, but currently, they generally tend to be
-            high. It is dictated by the governance of the protocol, which goes down as the staking rate goes up. Now we
-            are in the initial phase.
-            <a
-              href="//github.com/dev-protocol/protocol/blob/master/docs/POLICY.md#rewards"
-              target="_blank"
-              rel="noreferrer"
-            >
-              Please see the Policy to detail.
-            </a>
-          </p>
-
-          <h3>Is the supply of Dev tokens fixed or unlimited?</h3>
-          <p>
-            It&apos;s not fixed, but the limit will come later. The total supply increases a little each time mining
-            occurs and rewards are created. The higher the staking rate, the less new coins, ultimately it will move
-            towards zero.
-          </p>
-
-          <h3>The more the interest the more rewards you receive?</h3>
-          <p>The higher the avg intrest rate is, the more rewards you will get.</p>
-
-          <h3>Which project should I stake?</h3>
-          <p>
-            Every project needs support, so please stake where you want. Staking on a project is supporting the
-            developer of that project. Any project would be happy to have you staking with them.
-          </p>
-
-          <h3>Why do I have to do this?</h3>
-          <p>
-            Dev protcol is run by policy, and policy is suggested and voted on by the users. If you have an opinion, you
-            are always welcome to suggest a policy.
-          </p>
-
-          <h3>Is there benefit to being in a pool with less staked inside? More chance of rewards?</h3>
-          <p>
-            The amount of downloads of a project is taken into consideration so pools with less staked, if you have a
-            larger percentage than another pool with amount of downloads that is the same, you will get a higher reward.
-            To check downloads, search the project at{' '}
-            <a href="//www.npmjs.com/" target="_blank" rel="noreferrer">
-              npm
-            </a>
-          </p>
-        </Faq>
-      </Article>
-      <Footer />
-    </main>
+          </Faq>
+        </Article>
+        <Footer />
+      </main>
+    </>
   )
 }
 
