@@ -24,9 +24,10 @@ const AssetStrengthWrap = styled(Wrap)`
   grid-auto-flow: column;
   align-items: center;
   grid-gap: 1rem;
-  grid-auto-columns: 0.6fr auto;
+  grid-auto-columns: 0.4fr auto;
   @media (min-width: 768px) {
     grid-gap: 1.5rem;
+    grid-auto-columns: 0.6fr auto;
   }
 `
 const AssetStrengthValue = styled.span`
