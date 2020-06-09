@@ -4,7 +4,7 @@ import { Card, Button, Space, Row, Col, Popconfirm } from 'antd'
 import styled from 'styled-components'
 
 interface Props {
-  label: 'Staking' | 'Holder'
+  label: 'Staker' | 'Owner'
   amount?: BigNumber
   lastUpdate?: number
   onSubmitWithdraw: () => void
@@ -35,7 +35,7 @@ export const WithdrawCard = ({ amount, label, onSubmitWithdraw, lastUpdate, onCl
     <Card>
       <Row>
         <Col flex="1 1 252px">
-          <Heading>Withdraw {label} Reward</Heading>
+          <Heading>{label} Reward</Heading>
           <Statistic>{amount ? amount.dp(1).toNumber() : 0} DEV</Statistic>
         </Col>
         <Col flex="1 1 252px">

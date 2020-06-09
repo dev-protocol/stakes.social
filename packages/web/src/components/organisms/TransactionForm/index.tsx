@@ -57,14 +57,14 @@ export const TransactionForm = ({ propertyAddress }: Props) => {
     <Wrap>
       <InputFormCard label="Stake Now" suffix="DEV" onSubmitStake={handleSubmit} />
       <WithdrawCard
-        label="Staking"
+        label="Staker"
         onSubmitWithdraw={handleWithdrawStakingReward}
         amount={myStakingRewardAmount}
         lastUpdate={data?.allocator_allocation_result[0]?.block_number}
         onClickMining={handleMining}
       />
       <WithdrawCard
-        label="Holder"
+        label="Owner"
         onSubmitWithdraw={handleWithdrawHolder}
         amount={myHolderAmount}
         lastUpdate={data?.allocator_allocation_result[0]?.block_number}
