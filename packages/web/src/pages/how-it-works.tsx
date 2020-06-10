@@ -182,20 +182,6 @@ const HowItWorks = () => {
               live in March.
             </p>
 
-            <h3>Why are the reward rates so high?</h3>
-            <p>
-              Staking rewards fluctuate depending on what you are staking in, but currently, they generally tend to be
-              high. It is dictated by the governance of the protocol, which goes down as the staking rate goes up. Now
-              we are in the initial phase.
-              <a
-                href="//github.com/dev-protocol/protocol/blob/master/docs/POLICY.md#rewards"
-                target="_blank"
-                rel="noreferrer"
-              >
-                Please see the Policy to detail.
-              </a>
-            </p>
-
             <h3>Is the supply of Dev tokens fixed or unlimited?</h3>
             <p>
               It&apos;s not fixed, but the limit will come later. The total supply increases a little each time mining
