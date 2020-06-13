@@ -13,6 +13,7 @@ export const PossessionOutline = ({ propertyAddress }: Props) => {
   const { totalRewardsAmount } = useGetTotalRewardsAmount(propertyAddress)
   const { myStakingAmount } = useGetMyStakingAmount(propertyAddress)
   const { data } = useGetPropertyAuthenticationQuery({ variables: { propertyAddress } })
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const metrics = useMemo(() => data?.property_authentication[0]?.metrics, [data])
   const averageInterestRate = useAverageInterestRate(metrics!)
 

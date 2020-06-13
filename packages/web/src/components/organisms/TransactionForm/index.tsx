@@ -32,6 +32,7 @@ export const TransactionForm = ({ propertyAddress }: Props) => {
   const { myHolderAmount } = useGetMyHolderAmount(propertyAddress)
   const { data } = useGetLastAllocatorAllocationResultQuery({ variables: { propertyAddress } })
   const { data: propertyAuthData } = useGetPropertyAuthenticationQuery({ variables: { propertyAddress } })
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const metricsAddress = useMemo(() => propertyAuthData?.property_authentication[0]?.metrics, [propertyAuthData])
   const handleSubmit = React.useCallback(
     (amount: string) => {

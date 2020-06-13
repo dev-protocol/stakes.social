@@ -64,9 +64,12 @@ const AssetStrengthWithoutData = () => {
 
 export const AssetOutline = ({ propertyAddress }: Props) => {
   const { data } = useGetPropertyAuthenticationQuery({ variables: { propertyAddress } })
+  /* eslint-disable react-hooks/exhaustive-deps */
+  // FYI: https://github.com/facebook/react/pull/19062
   const includedAssetList = useMemo(() => data?.property_authentication.map(e => e.authentication_id), [data])
   const metrics = useMemo(() => data?.property_authentication[0].metrics, [data])
   const market = useMemo(() => data?.property_authentication[0].market, [data])
+  /* eslint-enable react-hooks/exhaustive-deps */
 
   return (
     <OutlinesWrap>
