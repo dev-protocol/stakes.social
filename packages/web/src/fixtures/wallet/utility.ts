@@ -1,4 +1,5 @@
 import Web3 from 'web3'
+import { message } from 'antd'
 
 const cache: WeakMap<NonNullable<Window['ethereum']>, string> = new WeakMap()
 
@@ -15,6 +16,24 @@ export const getAccountAddress = async () => {
       cache.set(ethereum, account)
       return account
     })(cache.get(ethereum))
+  }
+  return undefined
+}
+
+export const getSubscription = () => {
+  const key = '@utility/getSubscription'
+  const { ethereum } = window
+  if (ethereum) {
+    return () => {
+      return new Web3(ethereum).eth
+        .subscribe('newBlockHeaders', (error, result) => {
+          if (error) throw error
+          return result
+        })
+        .on('connected', subscriptionId => console.log(subscriptionId))
+        .on('data', blockHeader => message.loading({ content: `blockHeader: ${blockHeader.number}`, key }))
+        .on('error', error => message.error({ content: error.message, key }))
+    }
   }
   return undefined
 }
