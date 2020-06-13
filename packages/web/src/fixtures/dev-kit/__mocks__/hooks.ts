@@ -24,7 +24,11 @@ export const useWithdrawHolderReward = () => {
 }
 
 export const useWithdrawStakingReward = () => {
-  return { withdraw: () => {} }
+  return { withdrawStakingReward: () => {} }
+}
+
+export const useWithdrawStaking = () => {
+  return { withdrawStaking: () => {} }
 }
 
 export const useStake = () => {

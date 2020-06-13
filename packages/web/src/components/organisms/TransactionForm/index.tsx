@@ -1,5 +1,6 @@
-import React, { useCallback, useMemo } from 'react'
+import React, { useState, useCallback, useMemo } from 'react'
 import {
+  useWithdrawStaking,
   useWithdrawStakingReward,
   useCancelStaking,
   useAllocate,
@@ -10,7 +11,7 @@ import { useStake } from 'src/fixtures/dev-kit/hooks'
 import { WithdrawCard } from 'src/components/molecules/WithdrawCard'
 import { InputFormCard } from 'src/components/molecules/InputFormCard'
 import { useGetLastAllocatorAllocationResultQuery, useGetPropertyAuthenticationQuery } from '@dev/graphql'
-import { ButtonCard } from 'src/components/molecules/ButtonCard'
+import { CancelStakingCard } from 'src/components/molecules/CancelStakingCard'
 import styled from 'styled-components'
 
 interface Props {
@@ -23,9 +24,11 @@ const Wrap = styled.div`
 `
 
 export const TransactionForm = ({ propertyAddress }: Props) => {
+  const [isCancelCompleted, setIsCancelCompleted] = useState(false)
   const { stake } = useStake()
   const { cancel } = useCancelStaking()
   const { allocate } = useAllocate()
+  const { withdrawStaking } = useWithdrawStaking()
   const { withdrawStakingReward } = useWithdrawStakingReward()
   const { withdrawHolder } = useWithdrawHolderReward()
   const { myStakingRewardAmount } = useGetMyStakingRewardAmount(propertyAddress)
@@ -44,7 +47,14 @@ export const TransactionForm = ({ propertyAddress }: Props) => {
     withdrawStakingReward
   ])
   const handleWithdrawHolder = useCallback(() => withdrawHolder(propertyAddress), [propertyAddress, withdrawHolder])
-  const handleCancelStaking = useCallback(() => cancel(propertyAddress), [propertyAddress, cancel])
+  const handleCancelStaking = useCallback(() => {
+    cancel(propertyAddress).then(() => {
+      setIsCancelCompleted(true)
+    })
+  }, [propertyAddress, cancel])
+  const handleWithdrawStaking = useCallback(() => {
+    withdrawStaking(propertyAddress)
+  }, [propertyAddress, withdrawStaking])
   const handleMining = useCallback(
     (e?: React.MouseEvent<HTMLElement, MouseEvent>) => {
       e?.preventDefault()
@@ -70,7 +80,11 @@ export const TransactionForm = ({ propertyAddress }: Props) => {
         lastUpdate={data?.allocator_allocation_result[0]?.block_number}
         onClickMining={handleMining}
       />
-      <ButtonCard label="Cancel Staking" buttonLabel="Cancel" onClick={handleCancelStaking} />
+      <CancelStakingCard
+        onClickCancel={handleCancelStaking}
+        onClickWithdraw={handleWithdrawStaking}
+        disabledWithdraw={!isCancelCompleted}
+      />
       <p>
         Are you already canceled? To withdraw it, please use Etherscan because developing the UI.{' '}
         <a
