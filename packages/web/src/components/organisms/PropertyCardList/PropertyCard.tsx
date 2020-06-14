@@ -53,8 +53,10 @@ export const PropertyCard = ({ propertyAddress }: Props) => {
     () => data && truncate(data.property_authentication.map(e => e.authentication_id).join(', '), 24),
     [data]
   )
+  /* eslint-disable react-hooks/exhaustive-deps */
   const metrics = useMemo(() => data?.property_authentication[0]?.metrics, [data])
   const market = useMemo(() => data?.property_authentication[0]?.market, [data])
+  /* eslint-enable react-hooks/exhaustive-deps */
   const averageInterestRate = useAverageInterestRate(metrics ? metrics : '')
 
   return (
