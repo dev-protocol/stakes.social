@@ -12,7 +12,7 @@ const Feature = styled(Wrap)`
   background: #333;
   a {
     color: white;
-    text-decoration: overline;
+    text-decoration: underline;
   }
 `
 
