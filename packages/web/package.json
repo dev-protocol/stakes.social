@@ -48,7 +48,7 @@
     "react-apollo": "3.1.5",
     "react-dom": "16.13.1",
     "styled-components": "5.1.1",
-    "swr": "0.2.2",
+    "swr": "0.2.3",
     "web3": "1.2.9",
     "web3-core": "1.2.9"
   },
