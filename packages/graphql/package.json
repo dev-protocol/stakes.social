@@ -23,7 +23,7 @@
   },
   "devDependencies": {
     "@graphql-codegen/cli": "1.15.4",
-    "@graphql-codegen/introspection": "1.15.3",
+    "@graphql-codegen/introspection": "1.15.4",
     "@graphql-codegen/typescript": "1.15.4",
     "@graphql-codegen/typescript-operations": "1.15.4",
     "@graphql-codegen/typescript-react-apollo": "1.15.4",
