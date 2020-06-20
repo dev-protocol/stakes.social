@@ -49,9 +49,9 @@ export const TransactionForm = ({ propertyAddress }: Props) => {
   ])
   const handleWithdrawHolder = useCallback(() => withdrawHolder(propertyAddress), [propertyAddress, withdrawHolder])
   const handleCancelStaking = useCallback(() => {
-    cancel(propertyAddress).then(() => {
-      setIsCancelCompleted(true)
-    })
+    cancel(propertyAddress)
+      .then(() => setIsCancelCompleted(true))
+      .catch(() => setIsCancelCompleted(false))
   }, [propertyAddress, cancel])
   const handleWithdrawStaking = useCallback(() => {
     withdrawStaking(propertyAddress)
