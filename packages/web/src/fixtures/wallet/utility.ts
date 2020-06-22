@@ -37,3 +37,11 @@ export const getSubscription = () => {
   }
   return undefined
 }
+
+export const getBlockNumber = () => {
+  const { ethereum } = window
+  if (ethereum) {
+    return new Web3(ethereum).eth.getBlockNumber()
+  }
+  return undefined
+}

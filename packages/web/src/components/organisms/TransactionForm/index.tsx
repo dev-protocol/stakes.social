@@ -12,7 +12,10 @@ import { WithdrawCard } from 'src/components/molecules/WithdrawCard'
 import { InputFormCard } from 'src/components/molecules/InputFormCard'
 import { useGetLastAllocatorAllocationResultQuery, useGetPropertyAuthenticationQuery } from '@dev/graphql'
 import { CancelStakingCard } from 'src/components/molecules/CancelStakingCard'
+import { getBlockNumber } from 'src/fixtures/wallet/utility'
 import styled from 'styled-components'
+import { useEffectAsync } from 'src/fixtures/utility'
+import { getWithdrawalStatus } from 'src/fixtures/dev-kit/client'
 
 interface Props {
   propertyAddress: string
@@ -37,6 +40,13 @@ export const TransactionForm = ({ propertyAddress }: Props) => {
   const { data: propertyAuthData } = useGetPropertyAuthenticationQuery({ variables: { propertyAddress } })
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const metricsAddress = useMemo(() => propertyAuthData?.property_authentication[0]?.metrics, [propertyAuthData])
+  const checkWithdrawable = useCallback(
+    () =>
+      Promise.all([getWithdrawalStatus(propertyAddress), getBlockNumber()]).then(([withdrawStatus, blockNumber]) =>
+        Boolean(withdrawStatus && blockNumber && withdrawStatus <= blockNumber)
+      ),
+    [propertyAddress]
+  )
   const handleSubmit = React.useCallback(
     (amount: string) => {
       stake(propertyAddress, amount)
@@ -50,9 +60,10 @@ export const TransactionForm = ({ propertyAddress }: Props) => {
   const handleWithdrawHolder = useCallback(() => withdrawHolder(propertyAddress), [propertyAddress, withdrawHolder])
   const handleCancelStaking = useCallback(() => {
     cancel(propertyAddress)
-      .then(() => setIsCancelCompleted(true))
+      .then(checkWithdrawable)
+      .then(withdrawable => setIsCancelCompleted(withdrawable))
       .catch(() => setIsCancelCompleted(false))
-  }, [propertyAddress, cancel])
+  }, [propertyAddress, cancel, checkWithdrawable])
   const handleWithdrawStaking = useCallback(() => {
     withdrawStaking(propertyAddress)
   }, [propertyAddress, withdrawStaking])
@@ -63,6 +74,12 @@ export const TransactionForm = ({ propertyAddress }: Props) => {
     },
     [metricsAddress, allocate]
   )
+
+  useEffectAsync(async () => {
+    checkWithdrawable().then(withdrawable => {
+      setIsCancelCompleted(withdrawable)
+    })
+  })
 
   return (
     <Wrap>
