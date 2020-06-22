@@ -86,17 +86,6 @@ export const TransactionForm = ({ propertyAddress }: Props) => {
         onClickWithdraw={handleWithdrawStaking}
         disabledWithdraw={!isCancelCompleted}
       />
-      <p>
-        Are you already canceled? To withdraw it, please use Etherscan because developing the UI.{' '}
-        <a
-          href="https://spectrum.chat/devtoken/general/how-to-withdraw-your-stake~751c00bc-3dde-4d41-a28d-e0b81972f8a4"
-          target="_blank"
-          rel="noreferrer"
-        >
-          And here{`'`}s how to use Etherscan
-        </a>
-        .
-      </p>
     </Wrap>
   )
 }
