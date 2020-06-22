@@ -1,11 +1,11 @@
 import React from 'react'
 import { render } from '@testing-library/react'
-import { ButtonCard } from '.'
+import { CancelStakingCard } from '.'
 import 'src/__mocks__/window/matchMedia.mock'
 
-describe(`${ButtonCard.name}`, () => {
+describe(`${CancelStakingCard.name}`, () => {
   test('Snapshot', () => {
-    const component = render(<ButtonCard label="Cancel Staking" onClick={() => {}} buttonLabel="Cancel" />)
+    const component = render(<CancelStakingCard onClickCancel={() => {}} onClickWithdraw={() => {}} />)
     const tree = component.baseElement
     expect(tree).toMatchSnapshot()
   })

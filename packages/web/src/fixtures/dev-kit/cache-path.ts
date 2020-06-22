@@ -8,5 +8,6 @@ export const SWRCachePath = {
   getLastAssetValueEachMetrics: (metricsAddress: string) =>
     `metricsAddress/${metricsAddress}/getLastAssetValueEachMetrics`,
   getLastAssetValueEachMarketPerBlock: (marketAddress: string) =>
-    `marketAddress/${marketAddress}/getLastAssetValueEachMarketPerBlock`
+    `marketAddress/${marketAddress}/getLastAssetValueEachMarketPerBlock`,
+  getWithdrawalStatus: (propertyAddress: string) => `propertyAddresses/${propertyAddress}/getWithdrawalStatus`
 } as const

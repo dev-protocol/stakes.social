@@ -87,6 +87,18 @@ export const cancelStaking = async (propertyAddress: string) => {
   return client.lockup(await getContractAddress(client, 'lockup')).cancel(propertyAddress)
 }
 
+export const getWithdrawalStatus = async (propertyAddress: string) => {
+  const client = newClient()
+  const accountAddress = await getAccountAddress()
+  if (client && accountAddress) {
+    return client
+      .lockupStorage(await getContractAddress(client, 'lockupStorage'))
+      .getWithdrawalStatus(propertyAddress, accountAddress)
+      .then(Number)
+  }
+  return undefined
+}
+
 export const getLastAssetValueEachMetrics = async (metricsAddress: string) => {
   const client = newClient()
   if (client) {

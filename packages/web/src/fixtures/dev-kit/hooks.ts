@@ -14,10 +14,12 @@ import {
   getMyStakingRewardAmount,
   createProperty,
   marketScheme,
-  authenticate
+  authenticate,
+  getWithdrawalStatus
 } from './client'
 import { SWRCachePath } from './cache-path'
 import { UnwrapFunc, toNaturalNumber, toAmountNumber } from 'src/fixtures/utility'
+import { getBlockNumber } from 'src/fixtures/wallet/utility'
 import useSWR from 'swr'
 import { message } from 'antd'
 import { useState, useCallback } from 'react'
@@ -182,10 +184,24 @@ export const useCancelStaking = () => {
         setError(err)
         message.error({ content: err.message, key })
         setIsLoading(false)
+        throw err
       })
   }, [])
 
   return { cancel, isLoading, error }
+}
+
+export const useGetWithdrawalStatus = (propertyAddress: string) => {
+  const { data, error } = useSWR<UnwrapFunc<typeof getWithdrawalStatus>, Error>(
+    SWRCachePath.getWithdrawalStatus(propertyAddress),
+    () => getWithdrawalStatus(propertyAddress),
+    {
+      onError: err => message.error(err.message)
+    }
+  )
+  const withdrawable = getBlockNumber()?.then(x => (x && data ? x >= data : false))
+
+  return { withdrawalStatus: data ? data : undefined, withdrawable, error }
 }
 
 export const useAssetStrength = (metricsAddress: string, marketAddress: string) => {
