@@ -1,5 +1,6 @@
-import React, { useCallback, useMemo } from 'react'
+import React, { useState, useCallback, useMemo } from 'react'
 import {
+  useWithdrawStaking,
   useWithdrawStakingReward,
   useCancelStaking,
   useAllocate,
@@ -10,8 +11,11 @@ import { useStake } from 'src/fixtures/dev-kit/hooks'
 import { WithdrawCard } from 'src/components/molecules/WithdrawCard'
 import { InputFormCard } from 'src/components/molecules/InputFormCard'
 import { useGetLastAllocatorAllocationResultQuery, useGetPropertyAuthenticationQuery } from '@dev/graphql'
-import { ButtonCard } from 'src/components/molecules/ButtonCard'
+import { CancelStakingCard } from 'src/components/molecules/CancelStakingCard'
+import { getBlockNumber } from 'src/fixtures/wallet/utility'
 import styled from 'styled-components'
+import { useEffectAsync } from 'src/fixtures/utility'
+import { getWithdrawalStatus } from 'src/fixtures/dev-kit/client'
 
 interface Props {
   propertyAddress: string
@@ -23,9 +27,11 @@ const Wrap = styled.div`
 `
 
 export const TransactionForm = ({ propertyAddress }: Props) => {
+  const [isCancelCompleted, setIsCancelCompleted] = useState(false)
   const { stake } = useStake()
   const { cancel } = useCancelStaking()
   const { allocate } = useAllocate()
+  const { withdrawStaking } = useWithdrawStaking()
   const { withdrawStakingReward } = useWithdrawStakingReward()
   const { withdrawHolder } = useWithdrawHolderReward()
   const { myStakingRewardAmount } = useGetMyStakingRewardAmount(propertyAddress)
@@ -34,6 +40,13 @@ export const TransactionForm = ({ propertyAddress }: Props) => {
   const { data: propertyAuthData } = useGetPropertyAuthenticationQuery({ variables: { propertyAddress } })
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const metricsAddress = useMemo(() => propertyAuthData?.property_authentication[0]?.metrics, [propertyAuthData])
+  const checkWithdrawable = useCallback(
+    () =>
+      Promise.all([getWithdrawalStatus(propertyAddress), getBlockNumber()]).then(([withdrawStatus, blockNumber]) =>
+        Boolean(withdrawStatus && blockNumber && withdrawStatus <= blockNumber)
+      ),
+    [propertyAddress]
+  )
   const handleSubmit = React.useCallback(
     (amount: string) => {
       stake(propertyAddress, amount)
@@ -45,7 +58,15 @@ export const TransactionForm = ({ propertyAddress }: Props) => {
     withdrawStakingReward
   ])
   const handleWithdrawHolder = useCallback(() => withdrawHolder(propertyAddress), [propertyAddress, withdrawHolder])
-  const handleCancelStaking = useCallback(() => cancel(propertyAddress), [propertyAddress, cancel])
+  const handleCancelStaking = useCallback(() => {
+    cancel(propertyAddress)
+      .then(checkWithdrawable)
+      .then(withdrawable => setIsCancelCompleted(withdrawable))
+      .catch(() => setIsCancelCompleted(false))
+  }, [propertyAddress, cancel, checkWithdrawable])
+  const handleWithdrawStaking = useCallback(() => {
+    withdrawStaking(propertyAddress)
+  }, [propertyAddress, withdrawStaking])
   const handleMining = useCallback(
     (e?: React.MouseEvent<HTMLElement, MouseEvent>) => {
       e?.preventDefault()
@@ -53,6 +74,12 @@ export const TransactionForm = ({ propertyAddress }: Props) => {
     },
     [metricsAddress, allocate]
   )
+
+  useEffectAsync(async () => {
+    checkWithdrawable().then(withdrawable => {
+      setIsCancelCompleted(withdrawable)
+    })
+  })
 
   return (
     <Wrap>
@@ -71,18 +98,11 @@ export const TransactionForm = ({ propertyAddress }: Props) => {
         lastUpdate={data?.allocator_allocation_result[0]?.block_number}
         onClickMining={handleMining}
       />
-      <ButtonCard label="Cancel Staking" buttonLabel="Cancel" onClick={handleCancelStaking} />
-      <p>
-        Are you already canceled? To withdraw it, please use Etherscan because developing the UI.{' '}
-        <a
-          href="https://spectrum.chat/devtoken/general/how-to-withdraw-your-stake~751c00bc-3dde-4d41-a28d-e0b81972f8a4"
-          target="_blank"
-          rel="noreferrer"
-        >
-          And here{`'`}s how to use Etherscan
-        </a>
-        .
-      </p>
+      <CancelStakingCard
+        onClickCancel={handleCancelStaking}
+        onClickWithdraw={handleWithdrawStaking}
+        disabledWithdraw={!isCancelCompleted}
+      />
     </Wrap>
   )
 }

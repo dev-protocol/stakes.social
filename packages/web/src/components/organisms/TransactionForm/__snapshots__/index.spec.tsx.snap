@@ -231,32 +231,40 @@ exports[`TransactionForm Snapshot 1`] = `
               class="ant-col"
               style="flex: 1 1 252px;"
             >
-              <button
-                class="ant-btn ant-btn-primary ant-btn-lg"
-                type="button"
+              <div
+                class="ant-space ant-space-horizontal ant-space-align-center"
               >
-                <span>
-                  Cancel
-                </span>
-              </button>
+                <div
+                  class="ant-space-item"
+                  style="margin-right: 16px;"
+                >
+                  <button
+                    class="ant-btn ant-btn-primary ant-btn-lg"
+                    type="button"
+                  >
+                    <span>
+                      Cancel
+                    </span>
+                  </button>
+                </div>
+                <div
+                  class="ant-space-item"
+                >
+                  <button
+                    class="ant-btn ant-btn-primary ant-btn-lg"
+                    disabled=""
+                    type="button"
+                  >
+                    <span>
+                      Withdraw
+                    </span>
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
-      <p>
-        Are you already canceled? To withdraw it, please use Etherscan because developing the UI.
-         
-        <a
-          href="https://spectrum.chat/devtoken/general/how-to-withdraw-your-stake~751c00bc-3dde-4d41-a28d-e0b81972f8a4"
-          rel="noreferrer"
-          target="_blank"
-        >
-          And here
-          '
-          s how to use Etherscan
-        </a>
-        .
-      </p>
     </div>
   </div>
 </body>
