@@ -1,5 +1,3 @@
-import { makeLocaleJson } from './utility'
-
 type PossessionOutlineTranslation = {
   totalRewards: string
 }
@@ -10,15 +8,10 @@ export const possessionOutlineTranslationKeys: {
   totalRewards: 'totalRewards'
 }
 
-const possessionOutlineTranslationEN: PossessionOutlineTranslation = {
+export const possessionOutlineTranslationEN: PossessionOutlineTranslation = {
   totalRewards: 'Total Reward'
 }
 
-const possessionOutlineTranslationJP: PossessionOutlineTranslation = {
+export const possessionOutlineTranslationJP: PossessionOutlineTranslation = {
   totalRewards: '総報酬'
-}
-
-export const makePossessionOutlineLocale = async () => {
-  await makeLocaleJson('en/PossessionOutline.json', possessionOutlineTranslationEN)
-  await makeLocaleJson('jp/PossessionOutline.json', possessionOutlineTranslationJP)
 }

@@ -14,5 +14,6 @@
     "newLine": "lf",
     "esModuleInterop": true,
     "moduleResolution": "node"
-  }
+  },
+  "exclude": ["./src/locales/run.ts"]
 }
