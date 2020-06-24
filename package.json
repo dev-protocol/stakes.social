@@ -11,7 +11,7 @@
     "clean": "lerna run clean && lerna clean --y"
   },
   "devDependencies": {
-    "@types/jest": "26.0.0",
+    "@types/jest": "26.0.2",
     "@types/supertest": "2.0.9",
     "@typescript-eslint/eslint-plugin": "3.4.0",
     "@typescript-eslint/parser": "3.4.0",
