@@ -1,5 +1,5 @@
 {
-  "name": "@osec/i18n",
+  "name": "@dev/i18n",
   "version": "0.0.1",
   "private": true,
   "main": "cjs/index.js",

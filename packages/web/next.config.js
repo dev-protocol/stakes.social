@@ -60,6 +60,7 @@ module.exports = withCss(
     env: {
       END_POINT: process.env.END_POINT || 'http://localhost:3003/graphql'
     },
+    distDir: 'dist/src/.next',
     target: 'serverless'
   })
 )

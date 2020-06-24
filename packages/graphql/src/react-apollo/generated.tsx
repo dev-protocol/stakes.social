@@ -2,6 +2,7 @@ import gql from 'graphql-tag'
 import * as ApolloReactCommon from '@apollo/react-common'
 import * as ApolloReactHooks from '@apollo/react-hooks'
 export type Maybe<T> = T
+export type Exact<T extends { [key: string]: any }> = { [K in keyof T]: T[K] }
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
   ID: string
@@ -6176,9 +6177,9 @@ export type PropertyFactoryCreateFragment = { __typename?: 'property_factory_cre
   'block_number' | 'event_id' | 'from_address' | 'log_index' | 'property' | 'raw_data' | 'transaction_index'
 >
 
-export type GetLastAllocatorAllocationResultQueryVariables = {
+export type GetLastAllocatorAllocationResultQueryVariables = Exact<{
   propertyAddress: Scalars['String']
-}
+}>
 
 export type GetLastAllocatorAllocationResultQuery = { __typename?: 'query_root' } & {
   allocator_allocation_result: Array<
@@ -6186,15 +6187,15 @@ export type GetLastAllocatorAllocationResultQuery = { __typename?: 'query_root' 
   >
 }
 
-export type GetMarketFactoryCreateQueryVariables = {}
+export type GetMarketFactoryCreateQueryVariables = Exact<{ [key: string]: never }>
 
 export type GetMarketFactoryCreateQuery = { __typename?: 'query_root' } & {
   market_factory_create: Array<{ __typename?: 'market_factory_create' } & Pick<Market_Factory_Create, 'market'>>
 }
 
-export type GetPropertyAuthenticationQueryVariables = {
+export type GetPropertyAuthenticationQueryVariables = Exact<{
   propertyAddress: Scalars['String']
-}
+}>
 
 export type GetPropertyAuthenticationQuery = { __typename?: 'query_root' } & {
   property_authentication: Array<
@@ -6205,9 +6206,9 @@ export type GetPropertyAuthenticationQuery = { __typename?: 'query_root' } & {
   >
 }
 
-export type GetRewardCalculationResultAggregateQueryVariables = {
+export type GetRewardCalculationResultAggregateQueryVariables = Exact<{
   metricsList: Array<Scalars['String']>
-}
+}>
 
 export type GetRewardCalculationResultAggregateQuery = { __typename?: 'query_root' } & {
   reward_calculation_result_aggregate: { __typename?: 'reward_calculation_result_aggregate' } & {
@@ -6235,13 +6236,13 @@ export type GetRewardCalculationResultAggregateQuery = { __typename?: 'query_roo
   >
 }
 
-export type ListAllocatorAllocationResultsQueryVariables = {
+export type ListAllocatorAllocationResultsQueryVariables = Exact<{
   distinct_on?: Maybe<Array<Allocator_Allocation_Result_Select_Column>>
   limit?: Maybe<Scalars['Int']>
   offset?: Maybe<Scalars['Int']>
   order_by?: Maybe<Order_By>
   where?: Maybe<Allocator_Allocation_Result_Bool_Exp>
-}
+}>
 
 export type ListAllocatorAllocationResultsQuery = { __typename?: 'query_root' } & {
   allocator_allocation_result: Array<
@@ -6262,10 +6263,10 @@ export type ListAllocatorAllocationResultsQuery = { __typename?: 'query_root' } 
   >
 }
 
-export type ListPropertyQueryVariables = {
+export type ListPropertyQueryVariables = Exact<{
   limit?: Maybe<Scalars['Int']>
   offset?: Maybe<Scalars['Int']>
-}
+}>
 
 export type ListPropertyQuery = { __typename?: 'query_root' } & {
   property_factory_create: Array<{ __typename?: 'property_factory_create' } & PropertyFactoryCreateFragment>
@@ -6279,11 +6280,11 @@ export type ListPropertyQuery = { __typename?: 'query_root' } & {
   }
 }
 
-export type ListPropertyMetaQueryVariables = {
+export type ListPropertyMetaQueryVariables = Exact<{
   author: Scalars['String']
   limit?: Maybe<Scalars['Int']>
   ilike?: Maybe<Scalars['String']>
-}
+}>
 
 export type ListPropertyMetaQuery = { __typename?: 'query_root' } & {
   property_meta: Array<{ __typename?: 'property_meta' } & Pick<Property_Meta, 'property'>>
