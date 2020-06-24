@@ -7,6 +7,7 @@
     "dev": "yarn --cwd packages/web start:dev",
     "build": "lerna run build --include-dependencies",
     "lint": "eslint --fix -c ./.eslintrc.json './packages/**/*.{ts,tsx}'",
+    "format": "prettier --write ./packages/web/public/locales/en/PossessionOutline.json",
     "test": "lerna run test",
     "clean": "lerna run clean && lerna clean --y"
   },
@@ -43,13 +44,15 @@
   ],
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged"
+      "pre-commit": "lint-staged  --allow-empty"
     }
   },
   "lint-staged": {
     "*.{.ts,tsx}": [
-      "eslint --fix -c ./.eslintrc.json",
-      "git add"
+      "eslint --fix -c ./.eslintrc.json"
+    ],
+    "*.json": [
+      "prettier --write"
     ]
   }
 }
