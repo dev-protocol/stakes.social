@@ -11,4 +11,6 @@ export type LanguageType = 'jp' | 'en'
 
 export const { Router, Link, useTranslation, appWithTranslation, initPromise, i18n } = nextI18Next
 
+export * from './locales'
+
 export default nextI18Next

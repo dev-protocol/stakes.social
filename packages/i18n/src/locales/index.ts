@@ -1,0 +1,1 @@
+export { possessionOutlineTranslationKeys } from './PossessionOutline'
