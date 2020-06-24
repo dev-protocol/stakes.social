@@ -7,6 +7,8 @@ const nextI18Next = new NextI18Next({
   strictMode: false
 })
 
+export type LanguageType = 'jp' | 'en'
+
 export const { Router, Link, useTranslation, appWithTranslation, initPromise, i18n } = nextI18Next
 
 export default nextI18Next
