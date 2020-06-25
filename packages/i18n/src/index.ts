@@ -1,8 +1,8 @@
 import NextI18Next from 'next-i18next'
 
 const nextI18Next = new NextI18Next({
-  defaultLanguage: 'jp',
-  otherLanguages: ['en'],
+  defaultLanguage: 'en',
+  otherLanguages: ['jp'],
   localePath: typeof window === 'undefined' ? 'public/locales' : 'locales',
   strictMode: false
 })
