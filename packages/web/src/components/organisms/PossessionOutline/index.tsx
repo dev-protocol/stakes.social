@@ -3,14 +3,14 @@ import { Card, Statistic, Row, Col } from 'antd'
 import { useGetTotalStakingAmount, useGetMyStakingAmount, useGetTotalRewardsAmount } from 'src/fixtures/dev-kit/hooks'
 import { useAverageInterestRate } from 'src/fixtures/utility/gql-hooks-wrapper'
 import { useGetPropertyAuthenticationQuery } from '@dev/graphql'
-import { useTranslation, possessionOutlineTranslationNamespace, possessionOutlineTranslationKeys } from '@dev/i18n'
+import { useTranslation, POSSESSION_OUTLINE_NAMESPACE, possessionOutlineTranslationKeys } from '@dev/i18n'
 
 interface Props {
   propertyAddress: string
 }
 
 export const PossessionOutline = ({ propertyAddress }: Props) => {
-  const { t } = useTranslation(possessionOutlineTranslationNamespace)
+  const { t } = useTranslation(POSSESSION_OUTLINE_NAMESPACE)
   const { totalStakingAmount } = useGetTotalStakingAmount(propertyAddress)
   const { totalRewardsAmount } = useGetTotalRewardsAmount(propertyAddress)
   const { myStakingAmount } = useGetMyStakingAmount(propertyAddress)

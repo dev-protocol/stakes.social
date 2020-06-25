@@ -1,1 +1,1 @@
-export { possessionOutlineTranslationNamespace, possessionOutlineTranslationKeys } from './PossessionOutline'
+export { POSSESSION_OUTLINE_NAMESPACE, possessionOutlineTranslationKeys } from './PossessionOutline'

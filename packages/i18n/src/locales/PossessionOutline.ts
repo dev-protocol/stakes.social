@@ -1,13 +1,15 @@
-type PossessionOutlineTranslation = {
-  totalRewards: string
-}
+export const POSSESSION_OUTLINE_NAMESPACE = 'PossessionOutline'
 
-export const possessionOutlineTranslationNamespace = 'PossessionOutline'
+const POSSESION_OUTLINE_TOTAL_REWARDS = 'totalRewards'
+
+type PossessionOutlineTranslation = {
+  [POSSESION_OUTLINE_TOTAL_REWARDS]: string
+}
 
 export const possessionOutlineTranslationKeys: {
   [K in keyof PossessionOutlineTranslation]: keyof PossessionOutlineTranslation
 } = {
-  totalRewards: 'totalRewards'
+  totalRewards: POSSESION_OUTLINE_TOTAL_REWARDS
 }
 
 export const possessionOutlineTranslationEN: PossessionOutlineTranslation = {
