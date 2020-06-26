@@ -9,7 +9,6 @@ RUN yarn install
 COPY . .
 RUN yarn install
 
-ENV END_POINT https://api.devprtcl.com/v1/graphql
 RUN yarn build
 
 EXPOSE 3000

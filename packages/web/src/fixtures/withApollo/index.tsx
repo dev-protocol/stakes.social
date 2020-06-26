@@ -22,7 +22,7 @@ const isBrowser = typeof window !== 'undefined'
 export default withApollo<NormalizedCacheObject>(
   ({ ctx, headers }) => {
     const withHttp = createHttpLink({
-      uri: `${process.env.END_POINT}`, // Server URL (must be absolute),
+      uri: 'https://api.devprtcl.com/v1/graphql', // Server URL (must be absolute),
       ...(!isBrowser && { fetch }),
       headers,
       credentials: 'same-origin'
