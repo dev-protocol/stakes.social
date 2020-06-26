@@ -80,7 +80,7 @@ jobs:
 
       - uses: azure/webapps-container-deploy@v1
         with:
-          app-name: 'node-rnc'
+          app-name: 'stakes-social'
           images: 'stakessocial.azurecr.io/stakessocial:${{ github.sha }}'
 
       - name: Azure logout
