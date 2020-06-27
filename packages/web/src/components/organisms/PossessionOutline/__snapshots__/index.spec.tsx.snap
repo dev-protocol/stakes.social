@@ -128,7 +128,7 @@ exports[`PossessionOutline Snapshot 1`] = `
               <div
                 class="ant-statistic-title"
               >
-                Total Rewards
+                totalRewards
               </div>
               <div
                 class="ant-statistic-content"

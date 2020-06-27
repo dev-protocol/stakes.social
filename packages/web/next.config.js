@@ -57,9 +57,8 @@ module.exports = withCss(
       javascriptEnabled: true,
       modifyVars: themeVariables // make your antd custom effective
     },
-    env: {
-      END_POINT: process.env.END_POINT || 'http://localhost:3003/graphql'
-    },
+    env: {},
+    distDir: 'dist/src/.next',
     target: 'serverless'
   })
 )
