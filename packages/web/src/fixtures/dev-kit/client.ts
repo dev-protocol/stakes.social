@@ -107,22 +107,10 @@ export const getWithdrawalStatus = async (propertyAddress: string) => {
   return undefined
 }
 
-export const getLastAssetValueEachMetrics = async (metricsAddress: string) => {
+export const calculateMaxRewardsPerBlock = async () => {
   const client = newClient()
   if (client) {
-    return client
-      .allocatorStorage(await getContractAddress(client, 'allocatorStorage'))
-      .getLastAssetValueEachMetrics(metricsAddress)
-  }
-  return undefined
-}
-
-export const getLastAssetValueEachMarketPerBlock = async (marketAddress: string) => {
-  const client = newClient()
-  if (client) {
-    return client
-      .allocatorStorage(await getContractAddress(client, 'allocatorStorage'))
-      .getLastAssetValueEachMarketPerBlock(marketAddress)
+    return client.allocator(await getContractAddress(client, 'allocator')).calculateMaxRewardsPerBlock()
   }
   return undefined
 }
