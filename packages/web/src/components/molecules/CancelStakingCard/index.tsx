@@ -6,7 +6,6 @@ import styled from 'styled-components'
 interface Props {
   onClickCancel: () => void
   onClickWithdraw: () => void
-  disabledWithdraw?: boolean
   remainBlocks: number
   isCompleted: boolean
 }
@@ -21,13 +20,7 @@ const Heading = styled.span`
 
 const spinner = <LoadingOutlined style={{ fontSize: 18 }} spin />
 
-export const CancelStakingCard = ({
-  onClickCancel,
-  onClickWithdraw,
-  disabledWithdraw,
-  remainBlocks,
-  isCompleted
-}: Props) => {
+export const CancelStakingCard = ({ onClickCancel, onClickWithdraw, remainBlocks, isCompleted }: Props) => {
   return (
     <Card>
       <Row>
@@ -36,10 +29,10 @@ export const CancelStakingCard = ({
         </Col>
         <Col flex="1 1 252px">
           <Space size="middle">
-            <Button type="primary" size="large" onClick={onClickCancel} disabled={!disabledWithdraw}>
+            <Button type="primary" size="large" onClick={onClickCancel} disabled={isCompleted}>
               Cancel
             </Button>
-            <Button type="primary" size="large" onClick={onClickWithdraw} disabled={disabledWithdraw}>
+            <Button type="primary" size="large" onClick={onClickWithdraw} disabled={!isCompleted}>
               Withdraw
             </Button>
             <div>
