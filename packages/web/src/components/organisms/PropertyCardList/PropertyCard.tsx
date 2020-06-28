@@ -30,7 +30,9 @@ const StatisticTitle = styled.span`
 
 const AssetStrengthBase = ({ assetStrength }: { assetStrength: number }) => (
   <div>
-    <StatisticTitle style={{ position: 'absolute' }}>{Math.floor(assetStrength * 100)}% of markets</StatisticTitle>
+    <StatisticTitle style={{ position: 'absolute' }}>
+      {Math.floor(assetStrength * 100)}% of the total stakes
+    </StatisticTitle>
     <CircleGraph percentage={assetStrength} />
   </div>
 )
@@ -68,7 +70,7 @@ export const PropertyCard = ({ propertyAddress }: Props) => {
               </Col>
               <Col span={9}>
                 <Statistic
-                  title="Staking Amount"
+                  title="Your Staking Amount"
                   value={myStakingAmount && myStakingAmount.dp(5).toNumber()}
                   suffix="DEV"
                 />

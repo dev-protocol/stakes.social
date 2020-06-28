@@ -57,10 +57,6 @@ const AssetStrength = ({ property }: { property: string }) => {
   return <AssetStrengthBase assetStrength={assetStrength} />
 }
 
-const AssetStrengthWithoutData = () => {
-  return <AssetStrengthBase assetStrength={0} />
-}
-
 export const AssetOutline = ({ propertyAddress }: Props) => {
   const { data } = useGetPropertyAuthenticationQuery({ variables: { propertyAddress } })
   /* eslint-disable react-hooks/exhaustive-deps */
@@ -86,8 +82,8 @@ export const AssetOutline = ({ propertyAddress }: Props) => {
         </Button>
       </div>
       <div>
-        <p>Assets Strength</p>
-        <AssetStrength property={propertyAddress} /> : <AssetStrengthWithoutData />
+        <p>Staking Ratio</p>
+        <AssetStrength property={propertyAddress} />
       </div>
     </OutlinesWrap>
   )
