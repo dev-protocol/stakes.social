@@ -216,7 +216,7 @@ export const useStakingShare = (propertyAddress: string) => {
   const { data: inProtocol, error: inProtocolError } = useSWR<
     UnwrapFunc<typeof getTotalStakingAmountOnProtocol>,
     Error
-  >(SWRCachePath.getTotalStakingAmountOnProtocol(), () => getTotalStakingAmountOnProtocol(), {
+  >(SWRCachePath.getTotalStakingAmountOnProtocol, () => getTotalStakingAmountOnProtocol(), {
     onError: err => message.error(err.message)
   })
   return {
@@ -298,7 +298,7 @@ export const useAuthenticate = () => {
 
 export const useAPY = () => {
   const { data: maxRewards, error: maxRewardsError } = useSWR<UnwrapFunc<typeof calculateMaxRewardsPerBlock>, Error>(
-    SWRCachePath.calculateMaxRewardsPerBlock(),
+    SWRCachePath.calculateMaxRewardsPerBlock,
     () => calculateMaxRewardsPerBlock().catch(() => '0'),
     {
       onError: err => message.error(err.message)
@@ -307,7 +307,7 @@ export const useAPY = () => {
   const { data: totalStaking, error: totalStakingError } = useSWR<
     UnwrapFunc<typeof getTotalStakingAmountOnProtocol>,
     Error
-  >(SWRCachePath.getTotalStakingAmountOnProtocol(), () => getTotalStakingAmountOnProtocol(), {
+  >(SWRCachePath.getTotalStakingAmountOnProtocol, () => getTotalStakingAmountOnProtocol(), {
     onError: err => message.error(err.message)
   })
   const year = new BigNumber(2102400)
@@ -319,14 +319,14 @@ export const useAPY = () => {
 
 export const useAnnualSupplyGrowthRatio = () => {
   const { data: maxRewards, error: maxRewardsError } = useSWR<UnwrapFunc<typeof calculateMaxRewardsPerBlock>, Error>(
-    SWRCachePath.calculateMaxRewardsPerBlock(),
+    SWRCachePath.calculateMaxRewardsPerBlock,
     () => calculateMaxRewardsPerBlock().catch(() => '0'),
     {
       onError: err => message.error(err.message)
     }
   )
   const { data: totalSupplyValue, error: totalSupplyError } = useSWR<UnwrapFunc<typeof totalSupply>, Error>(
-    SWRCachePath.totalSupply(),
+    SWRCachePath.totalSupply,
     () => totalSupply(),
     {
       onError: err => message.error(err.message)
