@@ -26,9 +26,7 @@ import {
   withdrawStakingRewardAmount,
   createProperty,
   marketScheme,
-  authenticate,
-  calculateMaxRewardsPerBlock,
-  getTotalStakingAmountOnProtocol
+  authenticate
 } from './client'
 import { message } from 'antd'
 import BigNumber from 'bignumber.js'
