@@ -12,7 +12,8 @@ import {
   useWithdrawStaking,
   useCreateProperty,
   useMarketScheme,
-  useAuthenticate
+  useAuthenticate,
+  useAPY
 } from './hooks'
 import useSWR from 'swr'
 import { toNaturalNumber, toAmountNumber } from 'src/fixtures/utility'
@@ -24,9 +25,12 @@ import {
   withdrawStakingRewardAmount,
   createProperty,
   marketScheme,
-  authenticate
+  authenticate,
+  calculateMaxRewardsPerBlock,
+  getTotalStakingAmountOnProtocol
 } from './client'
 import { message } from 'antd'
+import BigNumber from 'bignumber.js'
 
 jest.mock('swr')
 jest.mock('src/fixtures/utility')
@@ -405,6 +409,34 @@ describe('dev-kit hooks', () => {
       await waitForNextUpdate()
       expect(result.current.error).toBe(error)
       expect(result.current.isLoading).toBe(false)
+    })
+  })
+
+  describe('useAPY', () => {
+    test('data is undefined', () => {
+      const data = undefined
+      const error = undefined
+      ;(useSWR as jest.Mock).mockImplementation(() => ({ data, error }))
+      const { result } = renderHook(() => useAPY())
+      expect(result.current.apy).toBe(data)
+    })
+
+    test('success fetching data', () => {
+      const data = new BigNumber(10000).times(2102400).div(500000)
+      ;(useSWR as jest.Mock).mockImplementationOnce(() => ({ data: '10000', error: undefined }))
+      ;(useSWR as jest.Mock).mockImplementationOnce(() => ({ data: '500000', error: undefined }))
+      const { result } = renderHook(() => useAPY())
+      expect(result.current.apy?.toFixed()).toBe(data.toFixed())
+    })
+
+    test('failure fetching data', () => {
+      const data = undefined
+      const errorMessage = 'error'
+      const error = new Error(errorMessage)
+      ;(useSWR as jest.Mock).mockImplementation(() => ({ data, error }))
+      const { result } = renderHook(() => useAPY())
+      expect(result.current.error).toBe(error)
+      expect(result.current.error?.message).toBe(errorMessage)
     })
   })
 })

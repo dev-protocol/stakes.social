@@ -13,7 +13,8 @@ import {
   marketScheme,
   authenticate,
   getWithdrawalStatus,
-  getTotalStakingAmountOnProtocol
+  getTotalStakingAmountOnProtocol,
+  calculateMaxRewardsPerBlock
 } from './client'
 import { SWRCachePath } from './cache-path'
 import { UnwrapFunc, toNaturalNumber, toAmountNumber } from 'src/fixtures/utility'
@@ -21,6 +22,7 @@ import { getBlockNumber } from 'src/fixtures/wallet/utility'
 import useSWR from 'swr'
 import { message } from 'antd'
 import { useState, useCallback } from 'react'
+import BigNumber from 'bignumber.js'
 
 export const useGetTotalRewardsAmount = (propertyAddress: string) => {
   const { data, error } = useSWR<UnwrapFunc<typeof getRewardsAmount>, Error>(
@@ -291,4 +293,24 @@ export const useAuthenticate = () => {
       })
   }, [])
   return { authenticate: callback, isLoading, error }
+}
+
+export const useAPY = () => {
+  const { data: maxRewards, error: maxRewardsError } = useSWR<UnwrapFunc<typeof calculateMaxRewardsPerBlock>, Error>(
+    SWRCachePath.calculateMaxRewardsPerBlock(),
+    () => calculateMaxRewardsPerBlock().catch(() => '0'),
+    {
+      onError: err => message.error(err.message)
+    }
+  )
+  const { data: totalStaking, error: totalStakingError } = useSWR<
+    UnwrapFunc<typeof getTotalStakingAmountOnProtocol>,
+    Error
+  >(SWRCachePath.getTotalStakingAmountOnProtocol(), () => getTotalStakingAmountOnProtocol(), {
+    onError: err => message.error(err.message)
+  })
+  const year = new BigNumber(2102400)
+  const apy = maxRewards && totalStaking ? new BigNumber(maxRewards).times(year).div(totalStaking) : undefined
+
+  return { apy, error: maxRewardsError || totalStakingError }
 }

@@ -54,3 +54,7 @@ export const useMarketScheme = () => {
 export const useAuthenticate = () => {
   return { authenticate: () => {} }
 }
+
+export const useAPY = () => {
+  return { apy: new BigNumber(0.435) }
+}
