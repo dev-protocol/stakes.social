@@ -201,7 +201,7 @@ export const useGetWithdrawalStatus = (propertyAddress: string) => {
   )
   const withdrawable = getBlockNumber()?.then(x => (x && data ? x >= data : false))
 
-  return { withdrawalStatus: data ? data : undefined, withdrawable, error }
+  return { withdrawalStatus: data, withdrawable, error }
 }
 
 export const useAssetStrength = (metricsAddress: string, marketAddress: string) => {
