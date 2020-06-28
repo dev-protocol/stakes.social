@@ -83,7 +83,7 @@ exports[`PropertyCardList Snapshot 1`] = `
                     <div
                       class="ant-statistic-title"
                     >
-                      Avg. Interest
+                      Staking Amount
                     </div>
                     <div
                       class="ant-statistic-content"
@@ -95,14 +95,14 @@ exports[`PropertyCardList Snapshot 1`] = `
                           class="ant-statistic-content-value-int"
                         >
                           
-                          50
+                          5,000
                         </span>
                         
                       </span>
                       <span
                         class="ant-statistic-content-suffix"
                       >
-                        %
+                        DEV
                       </span>
                     </div>
                   </div>

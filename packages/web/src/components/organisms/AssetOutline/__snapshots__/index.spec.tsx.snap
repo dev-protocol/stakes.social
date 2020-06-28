@@ -63,8 +63,21 @@ exports[`AssetOutline Snapshot 1`] = `
               26
               %
             </span>
-            <span>
-               of total market
+          </div>
+        </div>
+         : 
+        <div
+          class="sc-AxirZ sc-AxhCb jTLTcw"
+        >
+          <div
+            class="sc-AxjAm hJMDKP"
+          />
+          <div>
+            <span
+              class="sc-AxhUy dQrdLI"
+            >
+              0
+              %
             </span>
           </div>
         </div>

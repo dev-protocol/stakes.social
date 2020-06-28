@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react'
 import { List, Button } from 'antd'
 import { CircleGraph } from 'src/components/atoms/CircleGraph'
-import { useAssetStrength } from 'src/fixtures/dev-kit/hooks'
+import { useStakingShare } from 'src/fixtures/dev-kit/hooks'
 import { useGetPropertyAuthenticationQuery } from '@dev/graphql'
 import styled from 'styled-components'
 
@@ -47,13 +47,12 @@ const AssetStrengthBase = ({ assetStrength }: { assetStrength: number }) => (
     <CircleGraph percentage={assetStrength} />
     <div>
       <AssetStrengthValue>{Math.round(assetStrength * 100)}%</AssetStrengthValue>
-      <span> of total market</span>
     </div>
   </AssetStrengthWrap>
 )
 
-const AssetStrength = ({ metrics, market }: { metrics: string; market: string }) => {
-  const { assetStrength: maybeAssetStrength } = useAssetStrength(metrics, market)
+const AssetStrength = ({ property }: { property: string }) => {
+  const { stakingShare: maybeAssetStrength } = useStakingShare(property)
   const assetStrength = useMemo(() => maybeAssetStrength || 0, [maybeAssetStrength])
   return <AssetStrengthBase assetStrength={assetStrength} />
 }
@@ -67,9 +66,6 @@ export const AssetOutline = ({ propertyAddress }: Props) => {
   /* eslint-disable react-hooks/exhaustive-deps */
   // FYI: https://github.com/facebook/react/pull/19062
   const includedAssetList = useMemo(() => data?.property_authentication.map(e => e.authentication_id), [data])
-  const metrics = useMemo(() => data?.property_authentication[0].metrics, [data])
-  const market = useMemo(() => data?.property_authentication[0].market, [data])
-  /* eslint-enable react-hooks/exhaustive-deps */
 
   return (
     <OutlinesWrap>
@@ -91,7 +87,7 @@ export const AssetOutline = ({ propertyAddress }: Props) => {
       </div>
       <div>
         <p>Assets Strength</p>
-        {metrics && market ? <AssetStrength metrics={metrics} market={market} /> : <AssetStrengthWithoutData />}
+        <AssetStrength property={propertyAddress} /> : <AssetStrengthWithoutData />
       </div>
     </OutlinesWrap>
   )

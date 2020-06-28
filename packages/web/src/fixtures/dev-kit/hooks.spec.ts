@@ -8,8 +8,7 @@ import {
   useGetMyHolderAmount,
   useStake,
   useCancelStaking,
-  useAssetStrength,
-  useAllocate,
+  useStakingShare,
   useWithdrawStaking,
   useCreateProperty,
   useMarketScheme,
@@ -22,7 +21,6 @@ import {
   withdrawStakingAmount,
   stakeDev,
   cancelStaking,
-  allocate,
   withdrawStakingRewardAmount,
   createProperty,
   marketScheme,
@@ -287,13 +285,13 @@ describe('dev-kit hooks', () => {
     })
   })
 
-  describe('useAssetStrength', () => {
+  describe('useStakingShare', () => {
     test('data is undefined', () => {
       const data = undefined
       const error = undefined
       ;(useSWR as jest.Mock).mockImplementation(() => ({ data, error }))
-      const { result } = renderHook(() => useAssetStrength('metrics-address', 'market-address'))
-      expect(result.current.assetStrength).toBe(data)
+      const { result } = renderHook(() => useStakingShare('property-address'))
+      expect(result.current.stakingShare).toBe(data)
     })
 
     test('success fetching data', () => {
@@ -301,8 +299,8 @@ describe('dev-kit hooks', () => {
       const data2 = '5000'
       ;(useSWR as jest.Mock).mockImplementationOnce(() => ({ data: data1, error: undefined }))
       ;(useSWR as jest.Mock).mockImplementationOnce(() => ({ data: data2, error: undefined }))
-      const { result } = renderHook(() => useAssetStrength('metrics-address', 'market-address'))
-      expect(result.current.assetStrength).toBe(Number(data1) / Number(data2))
+      const { result } = renderHook(() => useStakingShare('property-address'))
+      expect(result.current.stakingShare).toBe(Number(data1) / Number(data2))
     })
 
     test('failure fetching metrics data', () => {
@@ -310,7 +308,7 @@ describe('dev-kit hooks', () => {
       const errorMessage = 'error'
       const error = new Error(errorMessage)
       ;(useSWR as jest.Mock).mockImplementation(() => ({ data, error }))
-      const { result } = renderHook(() => useAssetStrength('metrics-address', 'market-address'))
+      const { result } = renderHook(() => useStakingShare('property-address'))
       expect(result.current.error).toBe(error)
       expect(result.current.error?.message).toBe(errorMessage)
     })
@@ -322,35 +320,9 @@ describe('dev-kit hooks', () => {
       const error = new Error(errorMessage)
       ;(useSWR as jest.Mock).mockImplementationOnce(() => ({ data: data1, error: undefined }))
       ;(useSWR as jest.Mock).mockImplementationOnce(() => ({ data: data2, error }))
-      const { result } = renderHook(() => useAssetStrength('metrics-address', 'market-address'))
+      const { result } = renderHook(() => useStakingShare('property-address'))
       expect(result.current.error).toBe(error)
       expect(result.current.error?.message).toBe(errorMessage)
-    })
-  })
-
-  describe('useAllocate', () => {
-    const metrics = 'metrics'
-    test('success allocate', async () => {
-      const { result, waitForNextUpdate } = renderHook(() => useAllocate())
-      ;(allocate as jest.Mock).mockResolvedValue(true)
-      act(() => {
-        result.current.allocate(metrics)
-      })
-      await waitForNextUpdate()
-      expect(result.current.error).toBe(undefined)
-      expect(result.current.isLoading).toBe(false)
-    })
-
-    test('failure allocate', async () => {
-      const error = new Error('error')
-      const { result, waitForNextUpdate } = renderHook(() => useAllocate())
-      ;(allocate as jest.Mock).mockRejectedValue(error)
-      act(() => {
-        result.current.allocate(metrics)
-      })
-      await waitForNextUpdate()
-      expect(result.current.error).toBe(error)
-      expect(result.current.isLoading).toBe(false)
     })
   })
 

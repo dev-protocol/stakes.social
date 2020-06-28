@@ -26,6 +26,14 @@ export const getTotalStakingAmount = async (proepertyAddress: string) => {
   return undefined
 }
 
+export const getTotalStakingAmountOnProtocol = async () => {
+  const client = newClient()
+  if (client) {
+    return client.lockup(await getContractAddress(client, 'lockup')).getAllValue()
+  }
+  return undefined
+}
+
 export const getMyHolderAmount = async (propertyAddress: string) => {
   const client = newClient()
   const accountAddress = await getAccountAddress()
@@ -115,14 +123,6 @@ export const getLastAssetValueEachMarketPerBlock = async (marketAddress: string)
     return client
       .allocatorStorage(await getContractAddress(client, 'allocatorStorage'))
       .getLastAssetValueEachMarketPerBlock(marketAddress)
-  }
-  return undefined
-}
-
-export const allocate = async (metricsAddress: string) => {
-  const client = newClient()
-  if (client) {
-    return client.allocator(await getContractAddress(client, 'allocator')).allocate(metricsAddress)
   }
   return undefined
 }

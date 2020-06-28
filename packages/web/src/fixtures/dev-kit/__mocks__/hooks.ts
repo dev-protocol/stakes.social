@@ -39,12 +39,8 @@ export const useCancelStaking = () => {
   return { cancel: () => {} }
 }
 
-export const useAssetStrength = () => {
-  return { assetStrength: 0.2553481 }
-}
-
-export const useAllocate = () => {
-  return { allocate: () => {} }
+export const useStakingShare = () => {
+  return { stakingShare: 0.2553481 }
 }
 
 export const useCreateProperty = () => {

@@ -39,29 +39,6 @@ exports[`WithdrawCard Snapshot 1`] = `
             >
               <div
                 class="ant-space-item"
-                style="margin-bottom: 8px;"
-              >
-                <div>
-                  <div
-                    style="color: rgb(0, 0, 0);"
-                  >
-                    <span
-                      class="sc-AxiKw cwVYPs"
-                    >
-                      Last Update: 
-                      
-                    </span>
-                    <a
-                      href="#"
-                      target="_blank"
-                    >
-                      Mining now
-                    </a>
-                  </div>
-                </div>
-              </div>
-              <div
-                class="ant-space-item"
               >
                 <button
                   class="ant-btn ant-btn-primary ant-btn-lg"
