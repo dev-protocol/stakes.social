@@ -299,7 +299,7 @@ export const useAuthenticate = () => {
 export const useAPY = () => {
   const { data: maxRewards, error: maxRewardsError } = useSWR<UnwrapFunc<typeof calculateMaxRewardsPerBlock>, Error>(
     SWRCachePath.calculateMaxRewardsPerBlock(),
-    () => calculateMaxRewardsPerBlock().catch(() => '161947292359481089'),
+    () => calculateMaxRewardsPerBlock().catch(() => '0'),
     {
       onError: err => message.error(err.message)
     }
@@ -320,7 +320,7 @@ export const useAPY = () => {
 export const useAnnualSupplyGrowthRatio = () => {
   const { data: maxRewards, error: maxRewardsError } = useSWR<UnwrapFunc<typeof calculateMaxRewardsPerBlock>, Error>(
     SWRCachePath.calculateMaxRewardsPerBlock(),
-    () => calculateMaxRewardsPerBlock().catch(() => '161947292359481089'),
+    () => calculateMaxRewardsPerBlock().catch(() => '0'),
     {
       onError: err => message.error(err.message)
     }
