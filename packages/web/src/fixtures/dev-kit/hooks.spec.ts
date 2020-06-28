@@ -13,7 +13,8 @@ import {
   useCreateProperty,
   useMarketScheme,
   useAuthenticate,
-  useAPY
+  useAPY,
+  useAnnualSupplyGrowthRatio
 } from './hooks'
 import useSWR from 'swr'
 import { toNaturalNumber, toAmountNumber } from 'src/fixtures/utility'
@@ -422,7 +423,7 @@ describe('dev-kit hooks', () => {
     })
 
     test('success fetching data', () => {
-      const data = new BigNumber(10000).times(2102400).div(500000)
+      const data = new BigNumber(10000).times(2102400).div(500000).times(100)
       ;(useSWR as jest.Mock).mockImplementationOnce(() => ({ data: '10000', error: undefined }))
       ;(useSWR as jest.Mock).mockImplementationOnce(() => ({ data: '500000', error: undefined }))
       const { result } = renderHook(() => useAPY())
@@ -435,6 +436,34 @@ describe('dev-kit hooks', () => {
       const error = new Error(errorMessage)
       ;(useSWR as jest.Mock).mockImplementation(() => ({ data, error }))
       const { result } = renderHook(() => useAPY())
+      expect(result.current.error).toBe(error)
+      expect(result.current.error?.message).toBe(errorMessage)
+    })
+  })
+
+  describe('useAnnualSupplyGrowthRatio', () => {
+    test('data is undefined', () => {
+      const data = undefined
+      const error = undefined
+      ;(useSWR as jest.Mock).mockImplementation(() => ({ data, error }))
+      const { result } = renderHook(() => useAnnualSupplyGrowthRatio())
+      expect(result.current.annualSupplyGrowthRatio).toBe(data)
+    })
+
+    test('success fetching data', () => {
+      const data = new BigNumber(10000).times(2102400).div(12000000).times(100)
+      ;(useSWR as jest.Mock).mockImplementationOnce(() => ({ data: '10000', error: undefined }))
+      ;(useSWR as jest.Mock).mockImplementationOnce(() => ({ data: '12000000', error: undefined }))
+      const { result } = renderHook(() => useAnnualSupplyGrowthRatio())
+      expect(result.current.annualSupplyGrowthRatio?.toFixed()).toBe(data.toFixed())
+    })
+
+    test('failure fetching data', () => {
+      const data = undefined
+      const errorMessage = 'error'
+      const error = new Error(errorMessage)
+      ;(useSWR as jest.Mock).mockImplementation(() => ({ data, error }))
+      const { result } = renderHook(() => useAnnualSupplyGrowthRatio())
       expect(result.current.error).toBe(error)
       expect(result.current.error?.message).toBe(errorMessage)
     })

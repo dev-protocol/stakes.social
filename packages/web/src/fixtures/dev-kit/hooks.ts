@@ -14,7 +14,8 @@ import {
   authenticate,
   getWithdrawalStatus,
   getTotalStakingAmountOnProtocol,
-  calculateMaxRewardsPerBlock
+  calculateMaxRewardsPerBlock,
+  totalSupply
 } from './client'
 import { SWRCachePath } from './cache-path'
 import { UnwrapFunc, toNaturalNumber, toAmountNumber } from 'src/fixtures/utility'
@@ -298,7 +299,7 @@ export const useAuthenticate = () => {
 export const useAPY = () => {
   const { data: maxRewards, error: maxRewardsError } = useSWR<UnwrapFunc<typeof calculateMaxRewardsPerBlock>, Error>(
     SWRCachePath.calculateMaxRewardsPerBlock(),
-    () => calculateMaxRewardsPerBlock().catch(() => '0'),
+    () => calculateMaxRewardsPerBlock().catch(() => '161947292359481089'),
     {
       onError: err => message.error(err.message)
     }
@@ -310,7 +311,30 @@ export const useAPY = () => {
     onError: err => message.error(err.message)
   })
   const year = new BigNumber(2102400)
-  const apy = maxRewards && totalStaking ? new BigNumber(maxRewards).times(year).div(totalStaking) : undefined
+  const apy =
+    maxRewards && totalStaking ? new BigNumber(maxRewards).times(year).div(totalStaking).times(100) : undefined
 
   return { apy, error: maxRewardsError || totalStakingError }
+}
+
+export const useAnnualSupplyGrowthRatio = () => {
+  const { data: maxRewards, error: maxRewardsError } = useSWR<UnwrapFunc<typeof calculateMaxRewardsPerBlock>, Error>(
+    SWRCachePath.calculateMaxRewardsPerBlock(),
+    () => calculateMaxRewardsPerBlock().catch(() => '161947292359481089'),
+    {
+      onError: err => message.error(err.message)
+    }
+  )
+  const { data: totalSupplyValue, error: totalSupplyError } = useSWR<UnwrapFunc<typeof totalSupply>, Error>(
+    SWRCachePath.totalSupply(),
+    () => totalSupply(),
+    {
+      onError: err => message.error(err.message)
+    }
+  )
+  const year = new BigNumber(2102400)
+  const annualSupplyGrowthRatio =
+    maxRewards && totalSupplyValue ? new BigNumber(maxRewards).times(year).div(totalSupplyValue).times(100) : undefined
+
+  return { annualSupplyGrowthRatio, error: maxRewardsError || totalSupplyError }
 }

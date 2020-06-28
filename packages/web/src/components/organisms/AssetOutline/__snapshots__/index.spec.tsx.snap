@@ -48,7 +48,7 @@ exports[`AssetOutline Snapshot 1`] = `
       </div>
       <div>
         <p>
-          Assets Strength
+          Staking Ratio
         </p>
         <div
           class="sc-AxirZ sc-AxhCb jTLTcw"
@@ -61,22 +61,6 @@ exports[`AssetOutline Snapshot 1`] = `
               class="sc-AxhUy dQrdLI"
             >
               26
-              %
-            </span>
-          </div>
-        </div>
-         : 
-        <div
-          class="sc-AxirZ sc-AxhCb jTLTcw"
-        >
-          <div
-            class="sc-AxjAm hJMDKP"
-          />
-          <div>
-            <span
-              class="sc-AxhUy dQrdLI"
-            >
-              0
               %
             </span>
           </div>

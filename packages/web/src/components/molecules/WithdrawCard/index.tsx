@@ -30,7 +30,7 @@ export const WithdrawCard = ({ amount, label, onSubmitWithdraw }: Props) => {
       <Row>
         <Col flex="1 1 252px">
           <Heading>Withdraw {label} Reward</Heading>
-          <Statistic>{amount ? amount.dp(1).toNumber() : 0} DEV</Statistic>
+          <Statistic>{amount ? amount.dp(5).toNumber() : 0} DEV</Statistic>
         </Col>
         <Col flex="1 1 252px">
           <Space direction="vertical" size="small">

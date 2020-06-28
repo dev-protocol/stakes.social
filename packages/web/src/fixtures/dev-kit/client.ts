@@ -147,3 +147,11 @@ export const authenticate = async (marketAddress: string, propertyAddress: strin
   }
   return undefined
 }
+
+export const totalSupply = async () => {
+  const client = newClient()
+  if (client) {
+    return client.dev(await getContractAddress(client, 'token')).totalSupply()
+  }
+  return undefined
+}

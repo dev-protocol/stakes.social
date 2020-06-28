@@ -58,3 +58,7 @@ export const useAuthenticate = () => {
 export const useAPY = () => {
   return { apy: new BigNumber(0.435) }
 }
+
+export const useAnnualSupplyGrowthRatio = () => {
+  return { apy: new BigNumber(0.676) }
+}
