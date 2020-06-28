@@ -28,6 +28,7 @@ const Wrap = styled.div`
 
 export const TransactionForm = ({ propertyAddress }: Props) => {
   const [isCancelCompleted, setIsCancelCompleted] = useState(false)
+  const [remainBlocks, setRemainBlocks] = useState(0)
   const { stake } = useStake()
   const { cancel } = useCancelStaking()
   const { allocate } = useAllocate()
@@ -42,9 +43,12 @@ export const TransactionForm = ({ propertyAddress }: Props) => {
   const metricsAddress = useMemo(() => propertyAuthData?.property_authentication[0]?.metrics, [propertyAuthData])
   const checkWithdrawable = useCallback(
     () =>
-      Promise.all([getWithdrawalStatus(propertyAddress), getBlockNumber()]).then(([withdrawStatus, blockNumber]) =>
-        Boolean(withdrawStatus && blockNumber && withdrawStatus <= blockNumber)
-      ),
+      Promise.all([getWithdrawalStatus(propertyAddress), getBlockNumber()]).then(([withdrawStatus, blockNumber]) => {
+        return {
+          withdrawable: Boolean(withdrawStatus && blockNumber && withdrawStatus <= blockNumber),
+          remainBlocks: withdrawStatus || 0
+        }
+      }),
     [propertyAddress]
   )
   const handleSubmit = React.useCallback(
@@ -61,8 +65,13 @@ export const TransactionForm = ({ propertyAddress }: Props) => {
   const handleCancelStaking = useCallback(() => {
     cancel(propertyAddress)
       .then(checkWithdrawable)
-      .then(withdrawable => setIsCancelCompleted(withdrawable))
-      .catch(() => setIsCancelCompleted(false))
+      .then(({ withdrawable, remainBlocks }) => {
+        setRemainBlocks(remainBlocks)
+        setIsCancelCompleted(withdrawable)
+      })
+      .catch(() => {
+        setIsCancelCompleted(false)
+      })
   }, [propertyAddress, cancel, checkWithdrawable])
   const handleWithdrawStaking = useCallback(() => {
     withdrawStaking(propertyAddress)
@@ -76,9 +85,8 @@ export const TransactionForm = ({ propertyAddress }: Props) => {
   )
 
   useEffectAsync(async () => {
-    checkWithdrawable().then(withdrawable => {
-      setIsCancelCompleted(withdrawable)
-    })
+    const { withdrawable } = await checkWithdrawable()
+    setIsCancelCompleted(withdrawable)
   })
 
   return (
@@ -102,6 +110,8 @@ export const TransactionForm = ({ propertyAddress }: Props) => {
         onClickCancel={handleCancelStaking}
         onClickWithdraw={handleWithdrawStaking}
         disabledWithdraw={!isCancelCompleted}
+        remainBlocks={remainBlocks}
+        isCompleted={isCancelCompleted}
       />
     </Wrap>
   )
