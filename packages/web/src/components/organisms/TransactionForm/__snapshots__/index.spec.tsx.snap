@@ -249,6 +249,7 @@ exports[`TransactionForm Snapshot 1`] = `
                 </div>
                 <div
                   class="ant-space-item"
+                  style="margin-right: 16px;"
                 >
                   <button
                     class="ant-btn ant-btn-primary ant-btn-lg"
@@ -259,6 +260,11 @@ exports[`TransactionForm Snapshot 1`] = `
                       Withdraw
                     </span>
                   </button>
+                </div>
+                <div
+                  class="ant-space-item"
+                >
+                  <div />
                 </div>
               </div>
             </div>
