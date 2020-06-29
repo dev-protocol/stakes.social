@@ -1,11 +1,10 @@
 import React, { useMemo } from 'react'
 import Link from 'next/link'
 import { Row, Col, Statistic } from 'antd'
-import { useGetTotalRewardsAmount, useAssetStrength } from 'src/fixtures/dev-kit/hooks'
+import { useGetTotalRewardsAmount, useStakingShare, useGetMyStakingAmount } from 'src/fixtures/dev-kit/hooks'
 import { truncate } from 'src/fixtures/utility/string'
 import { useGetPropertyAuthenticationQuery } from '@dev/graphql'
 import { CircleGraph } from 'src/components/atoms/CircleGraph'
-import { useAverageInterestRate } from 'src/fixtures/utility/gql-hooks-wrapper'
 import styled from 'styled-components'
 
 interface Props {
@@ -31,19 +30,17 @@ const StatisticTitle = styled.span`
 
 const AssetStrengthBase = ({ assetStrength }: { assetStrength: number }) => (
   <div>
-    <StatisticTitle style={{ position: 'absolute' }}>{Math.floor(assetStrength * 100)}% of markets</StatisticTitle>
+    <StatisticTitle style={{ position: 'absolute' }}>
+      {Math.floor(assetStrength * 100)}% of the total stakes
+    </StatisticTitle>
     <CircleGraph percentage={assetStrength} />
   </div>
 )
 
-const AssetStrength = ({ metrics, market }: { metrics: string; market: string }) => {
-  const { assetStrength: maybeAssetStrength } = useAssetStrength(metrics, market)
+const AssetStrength = ({ property }: { property: string }) => {
+  const { stakingShare: maybeAssetStrength } = useStakingShare(property)
   const assetStrength = useMemo(() => maybeAssetStrength || 0, [maybeAssetStrength])
   return <AssetStrengthBase assetStrength={assetStrength} />
-}
-
-const AssetStrengthWithoutData = () => {
-  return <AssetStrengthBase assetStrength={0} />
 }
 
 export const PropertyCard = ({ propertyAddress }: Props) => {
@@ -53,11 +50,7 @@ export const PropertyCard = ({ propertyAddress }: Props) => {
     () => data && truncate(data.property_authentication.map(e => e.authentication_id).join(', '), 24),
     [data]
   )
-  /* eslint-disable react-hooks/exhaustive-deps */
-  const metrics = useMemo(() => data?.property_authentication[0]?.metrics, [data])
-  const market = useMemo(() => data?.property_authentication[0]?.market, [data])
-  /* eslint-enable react-hooks/exhaustive-deps */
-  const averageInterestRate = useAverageInterestRate(metrics ? metrics : '')
+  const { myStakingAmount } = useGetMyStakingAmount(propertyAddress)
 
   return (
     <Link href={'/[propertyAddress]'} as={`/${propertyAddress}`}>
@@ -76,10 +69,14 @@ export const PropertyCard = ({ propertyAddress }: Props) => {
                 />
               </Col>
               <Col span={9}>
-                <Statistic title="Avg. Interest" value={averageInterestRate.dp(5).toNumber()} suffix="%" />
+                <Statistic
+                  title="Your Staking Amount"
+                  value={myStakingAmount && myStakingAmount.dp(5).toNumber()}
+                  suffix="DEV"
+                />
               </Col>
               <Col span={3}>
-                {metrics && market ? <AssetStrength metrics={metrics} market={market} /> : <AssetStrengthWithoutData />}
+                <AssetStrength property={propertyAddress} />
               </Col>
             </ResponsiveRow>
           </ResponsiveCol>

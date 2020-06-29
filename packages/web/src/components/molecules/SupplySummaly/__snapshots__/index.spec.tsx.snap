@@ -1,0 +1,56 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SupplySummaly Snapshot 1`] = `
+<body>
+  <div>
+    <div
+      class="sc-AxjAm dLBVGn"
+    >
+      <div
+        class="sc-AxirZ ekmHZP"
+      >
+        <span>
+          APY:
+        </span>
+        <span
+          class="sc-AxiKw wjrTM"
+        >
+          <span
+            class="sc-AxhCb eXfxQM"
+          >
+            1
+          </span>
+          <span
+            class="sc-AxhUy fSZkcE"
+          >
+            0
+            %
+          </span>
+        </span>
+      </div>
+      <div
+        class="sc-AxirZ ekmHZP"
+      >
+        <span>
+          Supply+/y:
+        </span>
+        <span
+          class="sc-AxiKw wjrTM"
+        >
+          <span
+            class="sc-AxhCb eXfxQM"
+          >
+            1
+          </span>
+          <span
+            class="sc-AxhUy fSZkcE"
+          >
+            0
+            %
+          </span>
+        </span>
+      </div>
+    </div>
+  </div>
+</body>
+`;
