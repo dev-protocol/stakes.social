@@ -6,16 +6,16 @@ import {
   getMyHolderAmount,
   stakeDev,
   cancelStaking,
-  getLastAssetValueEachMetrics,
-  getLastAssetValueEachMarketPerBlock,
-  allocate,
   withdrawStakingRewardAmount,
   withdrawStakingAmount,
   getMyStakingRewardAmount,
   createProperty,
   marketScheme,
   authenticate,
-  getWithdrawalStatus
+  getWithdrawalStatus,
+  getTotalStakingAmountOnProtocol,
+  calculateMaxRewardsPerBlock,
+  totalSupply
 } from './client'
 import { SWRCachePath } from './cache-path'
 import { UnwrapFunc, toNaturalNumber, toAmountNumber } from 'src/fixtures/utility'
@@ -23,6 +23,7 @@ import { getBlockNumber } from 'src/fixtures/wallet/utility'
 import useSWR from 'swr'
 import { message } from 'antd'
 import { useState, useCallback } from 'react'
+import BigNumber from 'bignumber.js'
 
 export const useGetTotalRewardsAmount = (propertyAddress: string) => {
   const { data, error } = useSWR<UnwrapFunc<typeof getRewardsAmount>, Error>(
@@ -204,46 +205,24 @@ export const useGetWithdrawalStatus = (propertyAddress: string) => {
   return { withdrawalStatus: data ? data : undefined, withdrawable, error }
 }
 
-export const useAssetStrength = (metricsAddress: string, marketAddress: string) => {
-  const { data: metrics, error: metricsError } = useSWR<UnwrapFunc<typeof getLastAssetValueEachMetrics>, Error>(
-    SWRCachePath.getLastAssetValueEachMetrics(metricsAddress),
-    () => getLastAssetValueEachMetrics(metricsAddress),
+export const useStakingShare = (propertyAddress: string) => {
+  const { data: inProperty, error: inPropertyError } = useSWR<UnwrapFunc<typeof getTotalStakingAmount>, Error>(
+    SWRCachePath.getTotalStakingAmount(propertyAddress),
+    () => getTotalStakingAmount(propertyAddress),
     {
       onError: err => message.error(err.message)
     }
   )
-  const { data: market, error: marketError } = useSWR<UnwrapFunc<typeof getLastAssetValueEachMarketPerBlock>, Error>(
-    SWRCachePath.getLastAssetValueEachMarketPerBlock(marketAddress),
-    () => getLastAssetValueEachMarketPerBlock(marketAddress),
-    { onError: err => message.error(err.message) }
-  )
+  const { data: inProtocol, error: inProtocolError } = useSWR<
+    UnwrapFunc<typeof getTotalStakingAmountOnProtocol>,
+    Error
+  >(SWRCachePath.getTotalStakingAmountOnProtocol, () => getTotalStakingAmountOnProtocol(), {
+    onError: err => message.error(err.message)
+  })
   return {
-    assetStrength: metrics && market ? Number(metrics) / Number(market) : undefined,
-    error: metricsError || marketError
+    stakingShare: inProperty && inProtocol ? Number(inProperty) / Number(inProtocol) : undefined,
+    error: inPropertyError || inProtocolError
   }
-}
-
-export const useAllocate = () => {
-  const key = 'useAllocate'
-  const [isLoading, setIsLoading] = useState<boolean>(false)
-  const [error, setError] = useState<Error>()
-  const allocateDev = useCallback(async (metricsAddress: string) => {
-    setIsLoading(true)
-    message.loading({ content: 'now mining...', duration: 0, key })
-    setError(undefined)
-    return allocate(metricsAddress)
-      .then(() => {
-        message.success({ content: 'success mining!', key })
-        setIsLoading(false)
-      })
-      .catch(err => {
-        setError(err)
-        message.error({ content: err.message, key })
-        setIsLoading(false)
-      })
-  }, [])
-
-  return { allocate: allocateDev, isLoading, error }
 }
 
 export const useCreateProperty = () => {
@@ -315,4 +294,47 @@ export const useAuthenticate = () => {
       })
   }, [])
   return { authenticate: callback, isLoading, error }
+}
+
+export const useAPY = () => {
+  const { data: maxRewards, error: maxRewardsError } = useSWR<UnwrapFunc<typeof calculateMaxRewardsPerBlock>, Error>(
+    SWRCachePath.calculateMaxRewardsPerBlock,
+    () => calculateMaxRewardsPerBlock().catch(() => '0'),
+    {
+      onError: err => message.error(err.message)
+    }
+  )
+  const { data: totalStaking, error: totalStakingError } = useSWR<
+    UnwrapFunc<typeof getTotalStakingAmountOnProtocol>,
+    Error
+  >(SWRCachePath.getTotalStakingAmountOnProtocol, () => getTotalStakingAmountOnProtocol(), {
+    onError: err => message.error(err.message)
+  })
+  const year = new BigNumber(2102400)
+  const apy =
+    maxRewards && totalStaking ? new BigNumber(maxRewards).times(year).div(totalStaking).times(100) : undefined
+
+  return { apy, error: maxRewardsError || totalStakingError }
+}
+
+export const useAnnualSupplyGrowthRatio = () => {
+  const { data: maxRewards, error: maxRewardsError } = useSWR<UnwrapFunc<typeof calculateMaxRewardsPerBlock>, Error>(
+    SWRCachePath.calculateMaxRewardsPerBlock,
+    () => calculateMaxRewardsPerBlock().catch(() => '0'),
+    {
+      onError: err => message.error(err.message)
+    }
+  )
+  const { data: totalSupplyValue, error: totalSupplyError } = useSWR<UnwrapFunc<typeof totalSupply>, Error>(
+    SWRCachePath.totalSupply,
+    () => totalSupply(),
+    {
+      onError: err => message.error(err.message)
+    }
+  )
+  const year = new BigNumber(2102400)
+  const annualSupplyGrowthRatio =
+    maxRewards && totalSupplyValue ? new BigNumber(maxRewards).times(year).div(totalSupplyValue).times(100) : undefined
+
+  return { annualSupplyGrowthRatio, error: maxRewardsError || totalSupplyError }
 }

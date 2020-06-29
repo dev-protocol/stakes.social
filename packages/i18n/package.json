@@ -1,0 +1,20 @@
+{
+  "name": "@dev/i18n",
+  "version": "0.0.1",
+  "private": true,
+  "main": "cjs/index.js",
+  "module": "esm/index.js",
+  "typings": "esm/index.d.ts",
+  "scripts": {
+    "build": "run-p -l build:*",
+    "build:cjs": "tsc --project . --module commonjs --outDir ./cjs",
+    "build:esm": "tsc --project . --module es2015 --outDir ./esm",
+    "build:locale-file": "ts-node ./src/locales/run.ts",
+    "clean": "rimraf esm cjs",
+    "lint": "tsc -p . --noEmit",
+    "prebuild": "yarn clean"
+  },
+  "dependencies": {
+    "next-i18next": "4.5.0"
+  }
+}

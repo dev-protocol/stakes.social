@@ -7,25 +7,25 @@
     "dev": "yarn --cwd packages/web start:dev",
     "build": "lerna run build --include-dependencies",
     "lint": "eslint --fix -c ./.eslintrc.json './packages/**/*.{ts,tsx}'",
+    "format": "prettier --write ./packages/web/public/locales/en/PossessionOutline.json",
     "test": "lerna run test",
     "clean": "lerna run clean && lerna clean --y"
   },
   "devDependencies": {
-    "@types/jest": "26.0.0",
+    "@types/jest": "26.0.3",
     "@types/supertest": "2.0.9",
-    "@typescript-eslint/eslint-plugin": "3.3.0",
-    "@typescript-eslint/parser": "3.3.0",
+    "@typescript-eslint/eslint-plugin": "3.4.0",
+    "@typescript-eslint/parser": "3.4.0",
     "concurrently": "5.2.0",
-    "eslint": "7.3.0",
+    "eslint": "7.3.1",
     "eslint-config-prettier": "6.11.0",
     "eslint-plugin-prettier": "3.1.4",
-    "eslint-plugin-react": "7.20.0",
+    "eslint-plugin-react": "7.20.1",
     "eslint-plugin-react-hooks": "4.0.4",
     "husky": "4.2.5",
-    "jest": "26.0.1",
+    "jest": "26.1.0",
     "lerna": "3.22.1",
     "lint-staged": "10.2.11",
-    "next": "9.4.4",
     "nodemon": "2.0.4",
     "npm-run-all": "4.1.5",
     "prettier": "2.0.5",
@@ -43,13 +43,15 @@
   ],
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged"
+      "pre-commit": "lint-staged  --allow-empty"
     }
   },
   "lint-staged": {
     "*.{.ts,tsx}": [
-      "yarn lint",
-      "git add"
+      "eslint --fix -c ./.eslintrc.json"
+    ],
+    "*.json": [
+      "prettier --write"
     ]
   }
 }

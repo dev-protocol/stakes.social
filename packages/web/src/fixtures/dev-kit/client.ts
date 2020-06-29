@@ -26,6 +26,14 @@ export const getTotalStakingAmount = async (proepertyAddress: string) => {
   return undefined
 }
 
+export const getTotalStakingAmountOnProtocol = async () => {
+  const client = newClient()
+  if (client) {
+    return client.lockup(await getContractAddress(client, 'lockup')).getAllValue()
+  }
+  return undefined
+}
+
 export const getMyHolderAmount = async (propertyAddress: string) => {
   const client = newClient()
   const accountAddress = await getAccountAddress()
@@ -99,30 +107,10 @@ export const getWithdrawalStatus = async (propertyAddress: string) => {
   return undefined
 }
 
-export const getLastAssetValueEachMetrics = async (metricsAddress: string) => {
+export const calculateMaxRewardsPerBlock = async () => {
   const client = newClient()
   if (client) {
-    return client
-      .allocatorStorage(await getContractAddress(client, 'allocatorStorage'))
-      .getLastAssetValueEachMetrics(metricsAddress)
-  }
-  return undefined
-}
-
-export const getLastAssetValueEachMarketPerBlock = async (marketAddress: string) => {
-  const client = newClient()
-  if (client) {
-    return client
-      .allocatorStorage(await getContractAddress(client, 'allocatorStorage'))
-      .getLastAssetValueEachMarketPerBlock(marketAddress)
-  }
-  return undefined
-}
-
-export const allocate = async (metricsAddress: string) => {
-  const client = newClient()
-  if (client) {
-    return client.allocator(await getContractAddress(client, 'allocator')).allocate(metricsAddress)
+    return client.allocator(await getContractAddress(client, 'allocator')).calculateMaxRewardsPerBlock()
   }
   return undefined
 }
@@ -156,6 +144,14 @@ export const authenticate = async (marketAddress: string, propertyAddress: strin
   } else if (process.env.NODE_ENV == 'development') {
     console.log('env:', process.env.NODE_ENV, 'return mock value')
     return 'Dummy:metrics-address'
+  }
+  return undefined
+}
+
+export const totalSupply = async () => {
+  const client = newClient()
+  if (client) {
+    return client.dev(await getContractAddress(client, 'token')).totalSupply()
   }
   return undefined
 }
