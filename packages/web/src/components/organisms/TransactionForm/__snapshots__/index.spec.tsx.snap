@@ -4,7 +4,7 @@ exports[`TransactionForm Snapshot 1`] = `
 <body>
   <div>
     <div
-      class="sc-AxgMl gNNEjJ"
+      class="sc-AxhUy TlMSf"
     >
       <div
         class="ant-card ant-card-bordered"
@@ -16,7 +16,7 @@ exports[`TransactionForm Snapshot 1`] = `
             class="ant-row"
           >
             <span
-              class="sc-AxhCb kkBYFd"
+              class="sc-AxiKw bKAVsB"
             >
               Stake Now
             </span>
@@ -98,28 +98,6 @@ exports[`TransactionForm Snapshot 1`] = `
               >
                 <div
                   class="ant-space-item"
-                  style="margin-bottom: 8px;"
-                >
-                  <div>
-                    <div
-                      style="color: rgb(0, 0, 0);"
-                    >
-                      <span
-                        class="sc-AxiKw cwVYPs"
-                      >
-                        Last Update: 
-                        42141412412
-                      </span>
-                      <a
-                        href="#"
-                      >
-                        Mining
-                      </a>
-                    </div>
-                  </div>
-                </div>
-                <div
-                  class="ant-space-item"
                 >
                   <button
                     class="ant-btn ant-btn-primary ant-btn-lg"
@@ -171,28 +149,6 @@ exports[`TransactionForm Snapshot 1`] = `
               >
                 <div
                   class="ant-space-item"
-                  style="margin-bottom: 8px;"
-                >
-                  <div>
-                    <div
-                      style="color: rgb(0, 0, 0);"
-                    >
-                      <span
-                        class="sc-AxiKw cwVYPs"
-                      >
-                        Last Update: 
-                        42141412412
-                      </span>
-                      <a
-                        href="#"
-                      >
-                        Mining
-                      </a>
-                    </div>
-                  </div>
-                </div>
-                <div
-                  class="ant-space-item"
                 >
                   <button
                     class="ant-btn ant-btn-primary ant-btn-lg"
@@ -222,7 +178,7 @@ exports[`TransactionForm Snapshot 1`] = `
               style="display: flex; align-items: center; flex: 1 1 252px;"
             >
               <span
-                class="sc-AxhUy fcJmNa"
+                class="sc-AxhCb hTQwMP"
               >
                 Cancel Staking
               </span>

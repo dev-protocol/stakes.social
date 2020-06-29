@@ -9,7 +9,7 @@ const Wrap = styled.div`
   text-align: center;
 `
 const Feature = styled(Wrap)`
-  background: #333;
+  background: linear-gradient(45deg, #00ebff, #f200df 35%, #ff4700);
   a {
     color: white;
     text-decoration: underline;
@@ -22,12 +22,7 @@ export const EarlyAccess = () => (
       <span>🧪Early Access Version🧬</span>
     </Wrap>
     <Feature>
-      <span>
-        Next:{' '}
-        <a href="//github.com/dev-protocol/DIPs/issues/4#issuecomment-641076014" target="_blank" rel="noreferrer">
-          DIP4 is rolling out soon
-        </a>
-      </span>
+      <span>DIP4 is fully activated!🎉</span>
     </Feature>
   </>
 )

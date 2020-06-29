@@ -8,12 +8,13 @@ import {
   useGetMyHolderAmount,
   useStake,
   useCancelStaking,
-  useAssetStrength,
-  useAllocate,
+  useStakingShare,
   useWithdrawStaking,
   useCreateProperty,
   useMarketScheme,
-  useAuthenticate
+  useAuthenticate,
+  useAPY,
+  useAnnualSupplyGrowthRatio
 } from './hooks'
 import useSWR from 'swr'
 import { toNaturalNumber, toAmountNumber } from 'src/fixtures/utility'
@@ -22,13 +23,13 @@ import {
   withdrawStakingAmount,
   stakeDev,
   cancelStaking,
-  allocate,
   withdrawStakingRewardAmount,
   createProperty,
   marketScheme,
   authenticate
 } from './client'
 import { message } from 'antd'
+import BigNumber from 'bignumber.js'
 
 jest.mock('swr')
 jest.mock('src/fixtures/utility')
@@ -287,13 +288,13 @@ describe('dev-kit hooks', () => {
     })
   })
 
-  describe('useAssetStrength', () => {
+  describe('useStakingShare', () => {
     test('data is undefined', () => {
       const data = undefined
       const error = undefined
       ;(useSWR as jest.Mock).mockImplementation(() => ({ data, error }))
-      const { result } = renderHook(() => useAssetStrength('metrics-address', 'market-address'))
-      expect(result.current.assetStrength).toBe(data)
+      const { result } = renderHook(() => useStakingShare('property-address'))
+      expect(result.current.stakingShare).toBe(data)
     })
 
     test('success fetching data', () => {
@@ -301,8 +302,8 @@ describe('dev-kit hooks', () => {
       const data2 = '5000'
       ;(useSWR as jest.Mock).mockImplementationOnce(() => ({ data: data1, error: undefined }))
       ;(useSWR as jest.Mock).mockImplementationOnce(() => ({ data: data2, error: undefined }))
-      const { result } = renderHook(() => useAssetStrength('metrics-address', 'market-address'))
-      expect(result.current.assetStrength).toBe(Number(data1) / Number(data2))
+      const { result } = renderHook(() => useStakingShare('property-address'))
+      expect(result.current.stakingShare).toBe(Number(data1) / Number(data2))
     })
 
     test('failure fetching metrics data', () => {
@@ -310,7 +311,7 @@ describe('dev-kit hooks', () => {
       const errorMessage = 'error'
       const error = new Error(errorMessage)
       ;(useSWR as jest.Mock).mockImplementation(() => ({ data, error }))
-      const { result } = renderHook(() => useAssetStrength('metrics-address', 'market-address'))
+      const { result } = renderHook(() => useStakingShare('property-address'))
       expect(result.current.error).toBe(error)
       expect(result.current.error?.message).toBe(errorMessage)
     })
@@ -322,35 +323,9 @@ describe('dev-kit hooks', () => {
       const error = new Error(errorMessage)
       ;(useSWR as jest.Mock).mockImplementationOnce(() => ({ data: data1, error: undefined }))
       ;(useSWR as jest.Mock).mockImplementationOnce(() => ({ data: data2, error }))
-      const { result } = renderHook(() => useAssetStrength('metrics-address', 'market-address'))
+      const { result } = renderHook(() => useStakingShare('property-address'))
       expect(result.current.error).toBe(error)
       expect(result.current.error?.message).toBe(errorMessage)
-    })
-  })
-
-  describe('useAllocate', () => {
-    const metrics = 'metrics'
-    test('success allocate', async () => {
-      const { result, waitForNextUpdate } = renderHook(() => useAllocate())
-      ;(allocate as jest.Mock).mockResolvedValue(true)
-      act(() => {
-        result.current.allocate(metrics)
-      })
-      await waitForNextUpdate()
-      expect(result.current.error).toBe(undefined)
-      expect(result.current.isLoading).toBe(false)
-    })
-
-    test('failure allocate', async () => {
-      const error = new Error('error')
-      const { result, waitForNextUpdate } = renderHook(() => useAllocate())
-      ;(allocate as jest.Mock).mockRejectedValue(error)
-      act(() => {
-        result.current.allocate(metrics)
-      })
-      await waitForNextUpdate()
-      expect(result.current.error).toBe(error)
-      expect(result.current.isLoading).toBe(false)
     })
   })
 
@@ -433,6 +408,62 @@ describe('dev-kit hooks', () => {
       await waitForNextUpdate()
       expect(result.current.error).toBe(error)
       expect(result.current.isLoading).toBe(false)
+    })
+  })
+
+  describe('useAPY', () => {
+    test('data is undefined', () => {
+      const data = undefined
+      const error = undefined
+      ;(useSWR as jest.Mock).mockImplementation(() => ({ data, error }))
+      const { result } = renderHook(() => useAPY())
+      expect(result.current.apy).toBe(data)
+    })
+
+    test('success fetching data', () => {
+      const data = new BigNumber(10000).times(2102400).div(500000).times(100)
+      ;(useSWR as jest.Mock).mockImplementationOnce(() => ({ data: '10000', error: undefined }))
+      ;(useSWR as jest.Mock).mockImplementationOnce(() => ({ data: '500000', error: undefined }))
+      const { result } = renderHook(() => useAPY())
+      expect(result.current.apy?.toFixed()).toBe(data.toFixed())
+    })
+
+    test('failure fetching data', () => {
+      const data = undefined
+      const errorMessage = 'error'
+      const error = new Error(errorMessage)
+      ;(useSWR as jest.Mock).mockImplementation(() => ({ data, error }))
+      const { result } = renderHook(() => useAPY())
+      expect(result.current.error).toBe(error)
+      expect(result.current.error?.message).toBe(errorMessage)
+    })
+  })
+
+  describe('useAnnualSupplyGrowthRatio', () => {
+    test('data is undefined', () => {
+      const data = undefined
+      const error = undefined
+      ;(useSWR as jest.Mock).mockImplementation(() => ({ data, error }))
+      const { result } = renderHook(() => useAnnualSupplyGrowthRatio())
+      expect(result.current.annualSupplyGrowthRatio).toBe(data)
+    })
+
+    test('success fetching data', () => {
+      const data = new BigNumber(10000).times(2102400).div(12000000).times(100)
+      ;(useSWR as jest.Mock).mockImplementationOnce(() => ({ data: '10000', error: undefined }))
+      ;(useSWR as jest.Mock).mockImplementationOnce(() => ({ data: '12000000', error: undefined }))
+      const { result } = renderHook(() => useAnnualSupplyGrowthRatio())
+      expect(result.current.annualSupplyGrowthRatio?.toFixed()).toBe(data.toFixed())
+    })
+
+    test('failure fetching data', () => {
+      const data = undefined
+      const errorMessage = 'error'
+      const error = new Error(errorMessage)
+      ;(useSWR as jest.Mock).mockImplementation(() => ({ data, error }))
+      const { result } = renderHook(() => useAnnualSupplyGrowthRatio())
+      expect(result.current.error).toBe(error)
+      expect(result.current.error?.message).toBe(errorMessage)
     })
   })
 })
