@@ -322,8 +322,9 @@ export const useAPY = () => {
   const stakers = maxRewards && holders ? new BigNumber(maxRewards).minus(new BigNumber(holders)) : undefined
   const year = new BigNumber(2102400)
   const apy = stakers && totalStaking ? stakers.times(year).div(totalStaking).times(100) : undefined
+  const creators = holders && totalStaking ? new BigNumber(holders).times(year).div(totalStaking).times(100) : undefined
 
-  return { apy, error: maxRewardsError || totalStakingError || holdersError }
+  return { apy, creators, error: maxRewardsError || totalStakingError || holdersError }
 }
 
 export const useAnnualSupplyGrowthRatio = () => {
