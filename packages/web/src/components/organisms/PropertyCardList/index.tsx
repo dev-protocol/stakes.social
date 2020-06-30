@@ -8,12 +8,15 @@ interface Props {
   currentPage: number
 }
 
-const perPage = 10
+let perPage = 10
 
 export const PropertyCardList = ({ currentPage }: Props) => {
   const { data, loading } = useListPropertyQuery({ variables: { limit: perPage, offset: (currentPage - 1) * perPage } })
   const router = useRouter()
   const handlePagination = useCallback((page: number) => router.push({ pathname: '/', query: { page } }), [router])
+  const onShowSizeChange = (current: number, pageSize: number) => {
+    perPage = pageSize
+  }
 
   return (
     <div>
@@ -28,8 +31,9 @@ export const PropertyCardList = ({ currentPage }: Props) => {
           <Pagination
             current={currentPage}
             responsive={true}
-            pageSize={perPage}
+            defaultPageSize={perPage}
             onChange={handlePagination}
+            onShowSizeChange={onShowSizeChange}
             total={data.property_factory_create_aggregate.aggregate?.count}
             style={{ margin: '0 0 20px 50%' }}
           />
