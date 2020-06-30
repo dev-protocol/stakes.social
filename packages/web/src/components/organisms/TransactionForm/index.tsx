@@ -68,6 +68,12 @@ export const TransactionForm = ({ propertyAddress }: Props) => {
     })
   })
 
+  useEffectAsync(async () => {
+    checkWithdrawable().then(withdrawable => {
+      setIsCancelCompleted(withdrawable)
+    })
+  })
+
   return (
     <Wrap>
       <InputFormCard label="Stake Now" suffix="DEV" onSubmitStake={handleSubmit} />
