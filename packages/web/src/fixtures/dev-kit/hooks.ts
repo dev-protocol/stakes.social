@@ -15,7 +15,8 @@ import {
   getWithdrawalStatus,
   getTotalStakingAmountOnProtocol,
   calculateMaxRewardsPerBlock,
-  totalSupply
+  totalSupply,
+  holdersShare
 } from './client'
 import { SWRCachePath } from './cache-path'
 import { UnwrapFunc, toNaturalNumber, toAmountNumber } from 'src/fixtures/utility'
@@ -310,11 +311,19 @@ export const useAPY = () => {
   >(SWRCachePath.getTotalStakingAmountOnProtocol, () => getTotalStakingAmountOnProtocol(), {
     onError: err => message.error(err.message)
   })
-  const year = new BigNumber(2102400)
-  const apy =
-    maxRewards && totalStaking ? new BigNumber(maxRewards).times(year).div(totalStaking).times(100) : undefined
+  const { data: holders, error: holdersError } = useSWR<UnwrapFunc<typeof holdersShare>, Error>(
+    SWRCachePath.holdersShare(maxRewards, totalStaking),
+    () => (maxRewards && totalStaking ? holdersShare(maxRewards, totalStaking) : undefined),
+    {
+      onError: err => message.error(err.message)
+    }
+  )
 
-  return { apy, error: maxRewardsError || totalStakingError }
+  const stakers = maxRewards && holders ? new BigNumber(maxRewards).minus(new BigNumber(holders)) : undefined
+  const year = new BigNumber(2102400)
+  const apy = stakers && totalStaking ? stakers.times(year).div(totalStaking).times(100) : undefined
+
+  return { apy, error: maxRewardsError || totalStakingError || holdersError }
 }
 
 export const useAnnualSupplyGrowthRatio = () => {
