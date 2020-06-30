@@ -421,11 +421,14 @@ describe('dev-kit hooks', () => {
     })
 
     test('success fetching data', () => {
-      const data = new BigNumber(10000).times(2102400).div(500000).times(100)
+      const apyForStakers = new BigNumber(1000).times(2102400).div(500000).times(100)
+      const apyForCreators = new BigNumber(9000).times(2102400).div(500000).times(100)
       ;(useSWR as jest.Mock).mockImplementationOnce(() => ({ data: '10000', error: undefined }))
       ;(useSWR as jest.Mock).mockImplementationOnce(() => ({ data: '500000', error: undefined }))
+      ;(useSWR as jest.Mock).mockImplementationOnce(() => ({ data: '9000', error: undefined }))
       const { result } = renderHook(() => useAPY())
-      expect(result.current.apy?.toFixed()).toBe(data.toFixed())
+      expect(result.current.apy?.toFixed()).toBe(apyForStakers.toFixed())
+      expect(result.current.creators?.toFixed()).toBe(apyForCreators.toFixed())
     })
 
     test('failure fetching data', () => {
