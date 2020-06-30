@@ -38,7 +38,7 @@ const Logo = styled.div`
 
 export const Header = ({ colorSchema = 'black' }: Props = {}) => {
   const { isConnected, connect } = useConnectWallet()
-  const { apy } = useAPY()
+  const { apy, creators } = useAPY()
   const { annualSupplyGrowthRatio } = useAnnualSupplyGrowthRatio()
   const handleClick = () => {
     connect()
@@ -48,7 +48,7 @@ export const Header = ({ colorSchema = 'black' }: Props = {}) => {
     <HeaderContainer>
       <Logo>
         <BrandLogo colorSchema={colorSchema} props={{ height: undefined }}></BrandLogo>
-        <SupplySummaly apy={apy} annualSupplyGrowthRatio={annualSupplyGrowthRatio}></SupplySummaly>
+        <SupplySummaly apy={apy} creators={creators} annualSupplyGrowthRatio={annualSupplyGrowthRatio}></SupplySummaly>
       </Logo>
       <Button disabled={isConnected} onClick={handleClick}>
         {isConnected && 'Wallet connected'}

@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react'
+import React, { useCallback, useState } from 'react'
 import { Spin, Pagination } from 'antd'
 import { useListPropertyQuery } from '@dev/graphql'
 import { PropertyCard } from './PropertyCard'
@@ -8,12 +8,14 @@ interface Props {
   currentPage: number
 }
 
-const perPage = 10
+const DEFAULT_PER_PAGE = 10
 
 export const PropertyCardList = ({ currentPage }: Props) => {
+  const [perPage, setPerPage] = useState(DEFAULT_PER_PAGE)
   const { data, loading } = useListPropertyQuery({ variables: { limit: perPage, offset: (currentPage - 1) * perPage } })
   const router = useRouter()
   const handlePagination = useCallback((page: number) => router.push({ pathname: '/', query: { page } }), [router])
+  const handleShowSizeChange = (_: number, pageSize: number) => setPerPage(pageSize)
 
   return (
     <div>
@@ -28,8 +30,9 @@ export const PropertyCardList = ({ currentPage }: Props) => {
           <Pagination
             current={currentPage}
             responsive={true}
-            pageSize={perPage}
+            defaultPageSize={perPage}
             onChange={handlePagination}
+            onShowSizeChange={handleShowSizeChange}
             total={data.property_factory_create_aggregate.aggregate?.count}
             style={{ margin: '0 0 20px 50%' }}
           />
