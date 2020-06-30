@@ -155,3 +155,11 @@ export const totalSupply = async () => {
   }
   return undefined
 }
+
+export const holdersShare = async (amount: string, lockedups: string) => {
+  const client = newClient()
+  if (client) {
+    return client.policy(await getContractAddress(client, 'policy')).holdersShare(amount, lockedups)
+  }
+  return undefined
+}
