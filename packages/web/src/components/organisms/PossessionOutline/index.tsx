@@ -34,7 +34,7 @@ export const PossessionOutline = ({ propertyAddress }: Props) => {
         </Col>
         <Col flex="1 1 148px">
           <Statistic
-            title="Average Interest Rate"
+            title="Your Staking Share"
             value={
               myStakingAmount &&
               totalStakingAmount &&
