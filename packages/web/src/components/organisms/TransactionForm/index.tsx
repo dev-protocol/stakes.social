@@ -25,7 +25,11 @@ const Wrap = styled.div`
 `
 
 export const TransactionForm = ({ propertyAddress }: Props) => {
-  const [isCancelCompleted, setIsCancelCompleted] = useState(false)
+  const [withdrawable, setWithdrawable] = useState(false)
+  const [isCountingBlocks, setIsCountingBlocks] = useState(false)
+  const [remainBlocks, setRemainBlocks] = useState(0)
+  const [timer, setTimer] = useState<NodeJS.Timeout>()
+
   const { stake } = useStake()
   const { cancel } = useCancelStaking()
   const { withdrawStaking } = useWithdrawStaking()
@@ -36,11 +40,38 @@ export const TransactionForm = ({ propertyAddress }: Props) => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const checkWithdrawable = useCallback(
     () =>
-      Promise.all([getWithdrawalStatus(propertyAddress), getBlockNumber()]).then(([withdrawStatus, blockNumber]) =>
-        Boolean(withdrawStatus && blockNumber && withdrawStatus <= blockNumber)
-      ),
-    [propertyAddress]
+      Promise.all([getWithdrawalStatus(propertyAddress), getBlockNumber()]).then(([withdrawStatus, blockNumber]) => {
+        setWithdrawable(Boolean(withdrawStatus && blockNumber && withdrawStatus <= blockNumber))
+        setRemainBlocks((withdrawStatus || 0) - (blockNumber || 0))
+        withdrawable && setIsCountingBlocks(false)
+      }),
+    [propertyAddress, withdrawable]
   )
+
+  const startTimer = useCallback(() => {
+    /*
+      The block number is incremented once every 13-15 seconds.
+      So this process should be executed every 15 seconds.
+    */
+    setTimer(
+      setInterval(async () => {
+        await checkWithdrawable()
+      }, 15000)
+    )
+  }, [checkWithdrawable])
+
+  useEffectAsync(async () => {
+    /*
+      The timer will start when the cancel button is pressed.
+      And when the process is completed, it is stopped.
+    */
+    if (isCountingBlocks && !withdrawable) {
+      startTimer()
+    } else {
+      timer && clearInterval(timer)
+    }
+  }, [isCountingBlocks, withdrawable])
+
   const handleSubmit = React.useCallback(
     (amount: string) => {
       stake(propertyAddress, amount)
@@ -53,26 +84,17 @@ export const TransactionForm = ({ propertyAddress }: Props) => {
   ])
   const handleWithdrawHolder = useCallback(() => withdrawHolder(propertyAddress), [propertyAddress, withdrawHolder])
   const handleCancelStaking = useCallback(() => {
+    setIsCountingBlocks(true)
     cancel(propertyAddress)
       .then(checkWithdrawable)
-      .then(withdrawable => setIsCancelCompleted(withdrawable))
-      .catch(() => setIsCancelCompleted(false))
+      .catch(() => {
+        setIsCountingBlocks(false)
+        setWithdrawable(false)
+      })
   }, [propertyAddress, cancel, checkWithdrawable])
   const handleWithdrawStaking = useCallback(() => {
     withdrawStaking(propertyAddress)
   }, [propertyAddress, withdrawStaking])
-
-  useEffectAsync(async () => {
-    checkWithdrawable().then(withdrawable => {
-      setIsCancelCompleted(withdrawable)
-    })
-  })
-
-  useEffectAsync(async () => {
-    checkWithdrawable().then(withdrawable => {
-      setIsCancelCompleted(withdrawable)
-    })
-  })
 
   return (
     <Wrap>
@@ -82,7 +104,8 @@ export const TransactionForm = ({ propertyAddress }: Props) => {
       <CancelStakingCard
         onClickCancel={handleCancelStaking}
         onClickWithdraw={handleWithdrawStaking}
-        disabledWithdraw={!isCancelCompleted}
+        remainBlocks={remainBlocks}
+        isCompleted={withdrawable}
       />
     </Wrap>
   )
