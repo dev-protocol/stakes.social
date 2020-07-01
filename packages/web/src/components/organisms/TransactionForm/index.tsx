@@ -13,6 +13,7 @@ import { CancelStakingCard } from 'src/components/molecules/CancelStakingCard'
 import { useBlockNumberStream } from 'src/fixtures/wallet/hooks'
 import styled from 'styled-components'
 import { getWithdrawalStatus } from 'src/fixtures/dev-kit/client'
+import { useEffect } from 'react'
 
 interface Props {
   propertyAddress: string
@@ -60,13 +61,14 @@ export const TransactionForm = ({ propertyAddress }: Props) => {
   const handleWithdrawHolder = useCallback(() => withdrawHolder(propertyAddress), [propertyAddress, withdrawHolder])
   const handleCancelStaking = useCallback(() => {
     setIsCountingBlocks(true)
-    cancel(propertyAddress)
-      .then(checkWithdrawable)
-      .catch(() => {
-        setIsCountingBlocks(false)
-        setWithdrawable(false)
-      })
-  }, [propertyAddress, cancel, checkWithdrawable])
+    cancel(propertyAddress).catch(() => {
+      setIsCountingBlocks(false)
+      setWithdrawable(false)
+    })
+  }, [propertyAddress, cancel])
+  useEffect(() => {
+    checkWithdrawable()
+  }, [blockNumber, checkWithdrawable])
   const handleWithdrawStaking = useCallback(() => {
     withdrawStaking(propertyAddress)
   }, [propertyAddress, withdrawStaking])
