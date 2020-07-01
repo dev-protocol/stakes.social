@@ -1,8 +1,6 @@
-import React, { useMemo } from 'react'
+import React from 'react'
 import { Card, Statistic, Row, Col } from 'antd'
 import { useGetTotalStakingAmount, useGetMyStakingAmount, useGetTotalRewardsAmount } from 'src/fixtures/dev-kit/hooks'
-import { useAverageInterestRate } from 'src/fixtures/utility/gql-hooks-wrapper'
-import { useGetPropertyAuthenticationQuery } from '@dev/graphql'
 import { useTranslation, POSSESSION_OUTLINE_NAMESPACE, possessionOutlineTranslationKeys } from '@dev/i18n'
 
 interface Props {
@@ -14,10 +12,6 @@ export const PossessionOutline = ({ propertyAddress }: Props) => {
   const { totalStakingAmount } = useGetTotalStakingAmount(propertyAddress)
   const { totalRewardsAmount } = useGetTotalRewardsAmount(propertyAddress)
   const { myStakingAmount } = useGetMyStakingAmount(propertyAddress)
-  const { data } = useGetPropertyAuthenticationQuery({ variables: { propertyAddress } })
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  const metrics = useMemo(() => data?.property_authentication[0]?.metrics, [data])
-  const averageInterestRate = useAverageInterestRate(metrics!)
 
   return (
     <Card>
@@ -41,7 +35,11 @@ export const PossessionOutline = ({ propertyAddress }: Props) => {
         <Col flex="1 1 148px">
           <Statistic
             title="Average Interest Rate"
-            value={averageInterestRate.dp(5).toNumber()}
+            value={
+              myStakingAmount &&
+              totalStakingAmount &&
+              myStakingAmount.dp(5).toNumber() / totalStakingAmount.dp(5).toNumber()
+            }
             suffix="%"
             style={{ margin: '12px 0' }}
           />
