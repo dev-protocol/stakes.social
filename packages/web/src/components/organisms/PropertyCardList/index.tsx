@@ -29,6 +29,7 @@ export const PropertyCardList = ({ currentPage }: Props) => {
           ))}
           <Pagination
             current={currentPage}
+            size="default"
             responsive={true}
             defaultPageSize={perPage}
             onChange={handlePagination}
