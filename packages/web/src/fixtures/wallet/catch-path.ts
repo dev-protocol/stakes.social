@@ -1,3 +1,4 @@
 export const cachePath = {
-  connectWallet: () => `connectWallet`
+  connectWallet: () => `connectWallet`,
+  getBlockNumber: () => `getBlockNumber`
 }
