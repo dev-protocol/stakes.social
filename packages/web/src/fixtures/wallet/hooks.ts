@@ -13,16 +13,13 @@ export const useConnectWallet = () => {
   return { isConnected: data, connect }
 }
 
-export const useBlockNumberStream = () => {
-  const { data, mutate } = useSWR<UnwrapFunc<typeof getBlockNumber>, Error>(cachePath.getBlockNumber(), {
-    refreshInterval: 15000
-  })
-
-  const connectBlockNumberStream = (shouldFetch: boolean) => {
-    if (shouldFetch) {
-      getBlockNumber()?.then(result => mutate(result))
+export const useBlockNumberStream = (shouldFetch: boolean) => {
+  const { data, error } = useSWR<UnwrapFunc<typeof getBlockNumber>, Error>(
+    shouldFetch ? cachePath.getBlockNumber() : null,
+    getBlockNumber,
+    {
+      refreshInterval: 15000
     }
-  }
-
-  return { blockNumber: data, connectBlockNumberStream }
+  )
+  return { blockNumber: data, error }
 }
