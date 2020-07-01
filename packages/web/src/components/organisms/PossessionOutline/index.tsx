@@ -38,7 +38,7 @@ export const PossessionOutline = ({ propertyAddress }: Props) => {
             value={
               myStakingAmount &&
               totalStakingAmount &&
-              myStakingAmount.dp(5).toNumber() / totalStakingAmount.dp(5).toNumber()
+              (myStakingAmount.dp(5).toNumber() / totalStakingAmount.dp(5).toNumber()) * 100
             }
             suffix="%"
             style={{ margin: '12px 0' }}
