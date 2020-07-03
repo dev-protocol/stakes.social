@@ -4,74 +4,37 @@ exports[`AuthForm Snapshot 1`] = `
 <body>
   <div>
     <div
-      style="margin-top: 18px;"
+      class="sc-AxjAm cRjsHd"
     >
       <div
-        style="max-width: 980px; margin-right: auto; margin-left: auto;"
+        class="sc-AxirZ iaKHBx"
       >
-        <div
-          class="ant-row"
-          style="margin-bottom: 32px;"
+        <span>
+          Associating Property:
+        </span>
+        <span>
+          property
+        </span>
+      </div>
+      <div
+        class="sc-AxirZ iaKHBx"
+      >
+        <span>
+          Arguments:
+        </span>
+        <form
+          class="ant-form ant-form-horizontal"
+          id="basic"
         >
-          <div
-            class="ant-col ant-col-6"
+          <button
+            class="ant-btn ant-btn-primary"
+            type="submit"
           >
             <span>
-              Associating Property:
+              Authenticate
             </span>
-          </div>
-          <div
-            class="ant-col ant-col-18"
-          >
-            <span>
-              property
-            </span>
-          </div>
-        </div>
-        <div
-          class="ant-row"
-        >
-          <div
-            class="ant-col ant-col-6"
-          >
-            <span>
-              Arguments:
-            </span>
-          </div>
-          <div
-            class="ant-col ant-col-18"
-          >
-            <form
-              class="ant-form ant-form-horizontal"
-              id="basic"
-            >
-              <div
-                class="ant-row ant-form-item"
-              >
-                <div
-                  class="ant-col ant-col-18 ant-form-item-control"
-                >
-                  <div
-                    class="ant-form-item-control-input"
-                  >
-                    <div
-                      class="ant-form-item-control-input-content"
-                    >
-                      <button
-                        class="ant-btn ant-btn-primary"
-                        type="submit"
-                      >
-                        <span>
-                          Authenticate
-                        </span>
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </form>
-          </div>
-        </div>
+          </button>
+        </form>
       </div>
     </div>
   </div>

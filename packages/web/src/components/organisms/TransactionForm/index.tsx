@@ -10,10 +10,10 @@ import { useStake } from 'src/fixtures/dev-kit/hooks'
 import { WithdrawCard } from 'src/components/molecules/WithdrawCard'
 import { InputFormCard } from 'src/components/molecules/InputFormCard'
 import { CancelStakingCard } from 'src/components/molecules/CancelStakingCard'
-import { getBlockNumber } from 'src/fixtures/wallet/utility'
+import { useBlockNumberStream } from 'src/fixtures/wallet/hooks'
 import styled from 'styled-components'
-import { useEffectAsync } from 'src/fixtures/utility'
 import { getWithdrawalStatus } from 'src/fixtures/dev-kit/client'
+import { useEffect } from 'react'
 
 interface Props {
   propertyAddress: string
@@ -25,7 +25,10 @@ const Wrap = styled.div`
 `
 
 export const TransactionForm = ({ propertyAddress }: Props) => {
-  const [isCancelCompleted, setIsCancelCompleted] = useState(false)
+  const [withdrawable, setWithdrawable] = useState(false)
+  const [isCountingBlocks, setIsCountingBlocks] = useState(false)
+  const [remainBlocks, setRemainBlocks] = useState(0)
+
   const { stake } = useStake()
   const { cancel } = useCancelStaking()
   const { withdrawStaking } = useWithdrawStaking()
@@ -33,13 +36,17 @@ export const TransactionForm = ({ propertyAddress }: Props) => {
   const { withdrawHolder } = useWithdrawHolderReward()
   const { myStakingRewardAmount } = useGetMyStakingRewardAmount(propertyAddress)
   const { myHolderAmount } = useGetMyHolderAmount(propertyAddress)
+  const { blockNumber } = useBlockNumberStream(isCountingBlocks)
+
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const checkWithdrawable = useCallback(
     () =>
-      Promise.all([getWithdrawalStatus(propertyAddress), getBlockNumber()]).then(([withdrawStatus, blockNumber]) =>
-        Boolean(withdrawStatus && blockNumber && withdrawStatus <= blockNumber)
-      ),
-    [propertyAddress]
+      getWithdrawalStatus(propertyAddress).then(withdrawStatus => {
+        setWithdrawable(Boolean(withdrawStatus && blockNumber && withdrawStatus <= blockNumber))
+        setRemainBlocks((withdrawStatus || 0) - (blockNumber || 0))
+        withdrawable && setIsCountingBlocks(false)
+      }),
+    [propertyAddress, withdrawable, blockNumber]
   )
   const handleSubmit = React.useCallback(
     (amount: string) => {
@@ -53,26 +60,18 @@ export const TransactionForm = ({ propertyAddress }: Props) => {
   ])
   const handleWithdrawHolder = useCallback(() => withdrawHolder(propertyAddress), [propertyAddress, withdrawHolder])
   const handleCancelStaking = useCallback(() => {
-    cancel(propertyAddress)
-      .then(checkWithdrawable)
-      .then(withdrawable => setIsCancelCompleted(withdrawable))
-      .catch(() => setIsCancelCompleted(false))
-  }, [propertyAddress, cancel, checkWithdrawable])
+    setIsCountingBlocks(true)
+    cancel(propertyAddress).catch(() => {
+      setIsCountingBlocks(false)
+      setWithdrawable(false)
+    })
+  }, [propertyAddress, cancel])
+  useEffect(() => {
+    checkWithdrawable()
+  }, [blockNumber, checkWithdrawable])
   const handleWithdrawStaking = useCallback(() => {
     withdrawStaking(propertyAddress)
   }, [propertyAddress, withdrawStaking])
-
-  useEffectAsync(async () => {
-    checkWithdrawable().then(withdrawable => {
-      setIsCancelCompleted(withdrawable)
-    })
-  })
-
-  useEffectAsync(async () => {
-    checkWithdrawable().then(withdrawable => {
-      setIsCancelCompleted(withdrawable)
-    })
-  })
 
   return (
     <Wrap>
@@ -82,7 +81,8 @@ export const TransactionForm = ({ propertyAddress }: Props) => {
       <CancelStakingCard
         onClickCancel={handleCancelStaking}
         onClickWithdraw={handleWithdrawStaking}
-        disabledWithdraw={!isCancelCompleted}
+        remainBlocks={remainBlocks}
+        isCompleted={withdrawable}
       />
     </Wrap>
   )

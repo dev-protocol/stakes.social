@@ -35,7 +35,6 @@ exports[`CancelStakingCard Snapshot 1`] = `
               >
                 <button
                   class="ant-btn ant-btn-primary ant-btn-lg"
-                  disabled=""
                   type="button"
                 >
                   <span>
@@ -45,15 +44,22 @@ exports[`CancelStakingCard Snapshot 1`] = `
               </div>
               <div
                 class="ant-space-item"
+                style="margin-right: 16px;"
               >
                 <button
                   class="ant-btn ant-btn-primary ant-btn-lg"
+                  disabled=""
                   type="button"
                 >
                   <span>
                     Withdraw
                   </span>
                 </button>
+              </div>
+              <div
+                class="ant-space-item"
+              >
+                <div />
               </div>
             </div>
           </div>

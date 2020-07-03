@@ -1,11 +1,13 @@
 import React from 'react'
-import { Card, Button, Row, Col, Space } from 'antd'
+import { Card, Button, Row, Col, Space, Spin } from 'antd'
+import { LoadingOutlined, CheckCircleTwoTone } from '@ant-design/icons'
 import styled from 'styled-components'
 
 interface Props {
   onClickCancel: () => void
   onClickWithdraw: () => void
-  disabledWithdraw?: boolean
+  remainBlocks: number
+  isCompleted: boolean
 }
 
 const Heading = styled.span`
@@ -16,7 +18,9 @@ const Heading = styled.span`
   }
 `
 
-export const CancelStakingCard = ({ onClickCancel, onClickWithdraw, disabledWithdraw }: Props) => {
+const spinner = <LoadingOutlined style={{ fontSize: 18 }} spin />
+
+export const CancelStakingCard = ({ onClickCancel, onClickWithdraw, remainBlocks, isCompleted }: Props) => {
   return (
     <Card>
       <Row>
@@ -25,12 +29,32 @@ export const CancelStakingCard = ({ onClickCancel, onClickWithdraw, disabledWith
         </Col>
         <Col flex="1 1 252px">
           <Space size="middle">
-            <Button type="primary" size="large" onClick={onClickCancel} disabled={!disabledWithdraw}>
+            <Button type="primary" size="large" onClick={onClickCancel} disabled={isCompleted}>
               Cancel
             </Button>
-            <Button type="primary" size="large" onClick={onClickWithdraw} disabled={disabledWithdraw}>
+            <Button type="primary" size="large" onClick={onClickWithdraw} disabled={!isCompleted}>
               Withdraw
             </Button>
+            <div>
+              {remainBlocks > 0 && (
+                <>
+                  <Spin indicator={spinner} style={{ marginRight: '8px' }} />
+                  {remainBlocks} block(s) left
+                </>
+              )}
+              {isCompleted && (
+                <>
+                  <CheckCircleTwoTone
+                    twoToneColor="#52c41a"
+                    style={{
+                      fontSize: 18,
+                      marginRight: '8px'
+                    }}
+                  />
+                  You can withdraw
+                </>
+              )}
+            </div>
           </Space>
         </Col>
       </Row>
