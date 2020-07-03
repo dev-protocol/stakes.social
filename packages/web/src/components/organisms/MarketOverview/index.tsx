@@ -16,11 +16,11 @@ const Text: React.FC = ({ children }) => (
   </div>
 )
 
-const Contents = ({ marketAddress }: { marketAddress: string }) => {
+const Contents = ({ marketAddress, propertyAddress }: { marketAddress: string; propertyAddress: string }) => {
   const { data } = useGetMarketInformation(marketAddress)
   return data ? (
     <div>
-      <Link href={'/auth/[market]'} as={`/auth/${marketAddress}`}>
+      <Link href={'/auth/[property]/[market]'} as={`/auth/${propertyAddress}/${marketAddress}`}>
         <h2
           style={{
             fontSize: '36px',
@@ -41,14 +41,14 @@ const Contents = ({ marketAddress }: { marketAddress: string }) => {
   )
 }
 
-export const MarketOverview = () => {
+export const MarketOverview = ({ propertyAddress }: { propertyAddress: string }) => {
   const { data } = useGetMarketFactoryCreateQuery()
   return (
     <div style={{ maxWidth: '680px', marginRight: 'auto', marginLeft: 'auto' }}>
       <Row style={{ margin: '82px 0px' }}>
         <Col span={24}>
           {data?.market_factory_create[0]?.market && (
-            <Contents marketAddress={data?.market_factory_create[0]?.market} />
+            <Contents propertyAddress={propertyAddress} marketAddress={data?.market_factory_create[0]?.market} />
           )}
         </Col>
       </Row>

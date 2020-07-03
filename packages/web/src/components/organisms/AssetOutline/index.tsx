@@ -4,6 +4,7 @@ import { CircleGraph } from 'src/components/atoms/CircleGraph'
 import { useStakingShare } from 'src/fixtures/dev-kit/hooks'
 import { useGetPropertyAuthenticationQuery } from '@dev/graphql'
 import styled from 'styled-components'
+import Link from 'next/link'
 
 interface Props {
   propertyAddress: string
@@ -77,9 +78,11 @@ export const AssetOutline = ({ propertyAddress }: Props) => {
           )}
           style={{ maxHeight: '224px' }}
         />
-        <Button type="dashed" size="small" style={{ marginTop: '0.5rem' }} href={'/auth'}>
-          Add your asset
-        </Button>
+        <Link href={'/auth/[property]'} as={`/auth/${propertyAddress}`}>
+          <Button type="dashed" size="small" style={{ marginTop: '0.5rem' }}>
+            Add your asset
+          </Button>
+        </Link>
       </div>
       <div>
         <p>Staking Ratio</p>

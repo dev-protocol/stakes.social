@@ -18,7 +18,6 @@ export const AuthorSelector = ({ query, onSearch, onChange, author, disabled }: 
   return (
     <Select
       showSearch
-      style={{ width: '267px' }}
       placeholder="Please select"
       optionFilterProp="children"
       onChange={onChange}

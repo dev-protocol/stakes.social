@@ -1,12 +1,28 @@
 import React, { useState } from 'react'
-import { Row, Col, Form, Input, Button, Result } from 'antd'
+import { Form, Input, Button, Result } from 'antd'
 import { useMarketScheme, useAuthenticate } from 'src/fixtures/dev-kit/hooks'
 import { useEffectAsync } from 'src/fixtures/utility'
+import styled from 'styled-components'
 
 export interface Props {
   market: string
   property: string
 }
+
+const Container = styled.div`
+  display: grid;
+  grid-gap: 1rem;
+`
+const Row = styled.div`
+  display: grid;
+  grid-gap: 1rem;
+  @media (min-width: 768px) {
+    grid-template-columns: 150px 1fr;
+    & > *:first-child {
+      text-align: right;
+    }
+  }
+`
 
 export const AuthForm = ({ market, property }: Props) => {
   const [schemeList, setSchemeList] = useState<string[]>([])
@@ -26,58 +42,40 @@ export const AuthForm = ({ market, property }: Props) => {
   }, [])
 
   return (
-    <div style={{ marginTop: '18px' }}>
-      <div style={{ maxWidth: '980px', marginRight: 'auto', marginLeft: 'auto' }}>
-        <Row style={{ marginBottom: '32px' }}>
-          <Col span={6}>
-            <span>Associating Property:</span>
-          </Col>
-          <Col span={18}>
-            <span>{property}</span>
-          </Col>
+    <Container>
+      <Row>
+        <span>Associating Property:</span>
+        <span>{property}</span>
+      </Row>
+      {metrics ? (
+        <Result
+          status="success"
+          title="Successfully Authenticated Your Asset!"
+          subTitle="Viewing a new asset will take dozens of minutes, but you can also check it out right away on Etherscan."
+          extra={[
+            <Button key="etherscan" href={`https://etherscan.io/address/${metrics}`}>
+              Etherscan
+            </Button>,
+            <Button key="property" href={`/${property}`} type="primary">
+              Go the Property
+            </Button>
+          ]}
+        />
+      ) : (
+        <Row>
+          <span>Arguments:</span>
+          <Form name="basic" initialValues={{ remember: true }} onFinish={onFinish}>
+            {schemeList.map(scheme => (
+              <Form.Item name={scheme} rules={[{ required: true, message: 'Please input name.' }]} key={scheme}>
+                <Input placeholder={scheme} />
+              </Form.Item>
+            ))}
+            <Button type="primary" htmlType="submit">
+              Authenticate
+            </Button>
+          </Form>
         </Row>
-        {metrics ? (
-          <Result
-            status="success"
-            title="Successfully Authenticated Your Asset!"
-            subTitle="Viewing a new asset will take dozens of minutes, but you can also check it out right away on Etherscan."
-            extra={[
-              <Button key="etherscan" href={`https://etherscan.io/address/${metrics}`}>
-                Etherscan
-              </Button>,
-              <Button key="property" href={`/${property}`} type="primary">
-                Go the Property
-              </Button>
-            ]}
-          />
-        ) : (
-          <Row>
-            <Col span={6}>
-              <span>Arguments:</span>
-            </Col>
-            <Col span={18}>
-              <Form
-                labelCol={{ span: 6 }}
-                wrapperCol={{ span: 18 }}
-                name="basic"
-                initialValues={{ remember: true }}
-                onFinish={onFinish}
-              >
-                {schemeList.map(scheme => (
-                  <Form.Item name={scheme} rules={[{ required: true, message: 'Please input name.' }]} key={scheme}>
-                    <Input placeholder={scheme} />
-                  </Form.Item>
-                ))}
-                <Form.Item>
-                  <Button type="primary" htmlType="submit">
-                    Authenticate
-                  </Button>
-                </Form.Item>
-              </Form>
-            </Col>
-          </Row>
-        )}
-      </div>
-    </div>
+      )}
+    </Container>
   )
 }
