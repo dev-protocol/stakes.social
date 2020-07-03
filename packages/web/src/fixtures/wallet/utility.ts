@@ -5,6 +5,17 @@ const cache: WeakMap<NonNullable<Window['ethereum']>, string> = new WeakMap()
 
 export const isAvailableWallet = () => (window?.ethereum ? true : false)
 
+export const connectWallet = async () => {
+  const { ethereum } = window
+  if (ethereum) {
+    return ethereum
+      .enable()
+      .then(() => true)
+      .catch(() => false)
+  }
+  return false
+}
+
 export const getAccountAddress = async () => {
   const { ethereum } = window
   if (ethereum) {
@@ -38,10 +49,10 @@ export const getSubscription = () => {
   return undefined
 }
 
-export const getBlockNumber = () => {
+export const getBlockNumber = async () => {
   const { ethereum } = window
   if (ethereum) {
-    return new Web3(ethereum).eth.getBlockNumber()
+    return await new Web3(ethereum).eth.getBlockNumber()
   }
   return undefined
 }
