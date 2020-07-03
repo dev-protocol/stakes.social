@@ -6,11 +6,9 @@ import { PropertyCreateForm } from './PropertyCreateForm'
 import { getAccountAddress } from 'src/fixtures/wallet/utility'
 import { useEffectAsync } from 'src/fixtures/utility'
 
-interface Props {
-  market: string
-}
+interface Props {}
 
-export const PropertySelectForm = ({ market }: Props) => {
+export const PropertySelectForm = (_: Props) => {
   const [isOpen, setIsOpen] = useState(false)
   const [author, setAuthor] = useState<string>('')
   const [property, setProperty] = useState<string>()
@@ -37,7 +35,7 @@ export const PropertySelectForm = ({ market }: Props) => {
         </Button>
         {isOpen && <PropertyCreateForm author={author} onSubmit={onSubmit} />}
       </div>
-      <Link href={'/auth/[market]/[property]'} as={`/auth/${market}/${property}`}>
+      <Link href={'/auth/[property]'} as={`/auth/${property}`}>
         <Button type="primary">Next</Button>
       </Link>
     </div>
