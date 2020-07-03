@@ -36,15 +36,15 @@ exports[`AssetOutline Snapshot 1`] = `
             </div>
           </div>
         </div>
-        <a
+        <button
           class="ant-btn ant-btn-dashed ant-btn-sm"
-          href="/auth"
           style="margin-top: 0.5rem;"
+          type="button"
         >
           <span>
             Add your asset
           </span>
-        </a>
+        </button>
       </div>
       <div>
         <p>
