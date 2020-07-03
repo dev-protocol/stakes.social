@@ -7,12 +7,12 @@ import { PropertySelectForm } from 'src/components/organisms/PropertySelectForm'
 
 type Props = {}
 
-const AuthenticateNewAsset = (_: Props) => {
+const CreateOrAssociateAProperty = (_: Props) => {
   return (
     <>
       <Header />
       <Headline height={300}>
-        <H2>Authenticate a new asset</H2>
+        <H2>Create or Associate a Property</H2>
       </Headline>
       <div style={{ marginBottom: '78px' }}>
         <PropertySelectForm />
@@ -22,4 +22,4 @@ const AuthenticateNewAsset = (_: Props) => {
   )
 }
 
-export default AuthenticateNewAsset
+export default CreateOrAssociateAProperty

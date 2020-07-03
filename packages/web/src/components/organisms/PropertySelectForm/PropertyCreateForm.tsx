@@ -3,6 +3,7 @@ import { Form, Input, Button } from 'antd'
 import { CheckCircleTwoTone } from '@ant-design/icons'
 import { useCreateProperty } from 'src/fixtures/dev-kit/hooks'
 import { Body1 } from 'src/components/atoms/Typography'
+import Link from 'next/link'
 
 interface Props {
   author: string
@@ -52,10 +53,18 @@ export const PropertyCreateForm = ({ author, onSubmit }: Props) => {
         </Form.Item>
       </Form>
       {createdPropertyAddress && (
-        <span>
-          <CheckCircleTwoTone twoToneColor="#52c41a" />
-          <Body1 style={{ marginLeft: '10px' }}>{createdPropertyAddress}</Body1>
-        </span>
+        <>
+          <p>
+            <CheckCircleTwoTone twoToneColor="#52c41a" />
+            <Body1 style={{ marginLeft: '10px' }}>{createdPropertyAddress}</Body1>
+          </p>
+          <p>Share the following address with your friends :)</p>
+          <p>
+            <Link href={'/[property]'} as={`/${createdPropertyAddress}`} passHref>
+              <a>https://stakes.social/{createdPropertyAddress}</a>
+            </Link>
+          </p>
+        </>
       )}
     </div>
   )

@@ -31,12 +31,12 @@ export const PropertySelectForm = (_: Props) => {
       <AuthorSelector query={query} author={author} onChange={onChange} onSearch={onSearch} disabled={isCreated} />
       <div style={{ paddingLeft: '212px', marginTop: '18px' }}>
         <Button type="link" onClick={() => setIsOpen(!isOpen)}>
-          Or create one
+          Or create a new Property
         </Button>
         {isOpen && <PropertyCreateForm author={author} onSubmit={onSubmit} />}
       </div>
       <Link href={'/auth/[property]'} as={`/auth/${property}`}>
-        <Button type="primary">Next</Button>
+        <Button>Authenticate an asset</Button>
       </Link>
     </div>
   )
