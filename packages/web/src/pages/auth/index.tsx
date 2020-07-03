@@ -14,7 +14,7 @@ const CreateOrAssociateAProperty = (_: Props) => {
       <Headline height={300}>
         <H2>Create or Associate a Property</H2>
       </Headline>
-      <div style={{ marginBottom: '78px' }}>
+      <div style={{ padding: '1rem' }}>
         <PropertySelectForm />
       </div>
       <Footer />

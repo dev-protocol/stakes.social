@@ -4,11 +4,34 @@ import { CheckCircleTwoTone } from '@ant-design/icons'
 import { useCreateProperty } from 'src/fixtures/dev-kit/hooks'
 import { Body1 } from 'src/components/atoms/Typography'
 import Link from 'next/link'
+import styled from 'styled-components'
 
 interface Props {
   author: string
   onSubmit: (createdPropertyAddress: string) => void
 }
+
+const Container = styled.div`
+  display: grid;
+`
+const FormRow = styled(Form.Item)`
+  display: grid;
+  @media (min-width: 768px) {
+    grid-gap: 1rem;
+    grid-template-columns: 150px 1fr;
+  }
+`
+const ButtonRow = styled(FormRow)`
+  @media (min-width: 768px) {
+    grid-template-areas: 'empty button';
+    & > * {
+      grid-area: button;
+    }
+  }
+`
+const Results = styled.div`
+  word-break: break-all;
+`
 
 export const PropertyCreateForm = ({ author, onSubmit }: Props) => {
   const [form] = Form.useForm()
@@ -28,35 +51,33 @@ export const PropertyCreateForm = ({ author, onSubmit }: Props) => {
   )
 
   return (
-    <div style={{ marginTop: '18px' }}>
+    <Container>
       <Form
-        labelCol={{ span: 6 }}
-        wrapperCol={{ span: 18 }}
         form={form}
         name="basic"
         initialValues={{ remember: true }}
         onFinish={({ name, symbol, author }) => handleCreateProperty(name, symbol, author)}
       >
-        <Form.Item label="Name" name="name" rules={[{ required: true, message: 'Please input name.' }]}>
+        <FormRow label="Name" name="name" rules={[{ required: true, message: 'Please input name.' }]}>
           <Input placeholder="Name" />
-        </Form.Item>
-        <Form.Item label="Symbol" name="symbol" rules={[{ required: true, message: 'Please input symbol.' }]}>
+        </FormRow>
+        <FormRow label="Symbol" name="symbol" rules={[{ required: true, message: 'Please input symbol.' }]}>
           <Input placeholder="Symbol" />
-        </Form.Item>
-        <Form.Item label="Author" name="author">
+        </FormRow>
+        <FormRow label="Author" name="author">
           <Input type="text" />
-        </Form.Item>
-        <Form.Item>
+        </FormRow>
+        <ButtonRow>
           <Button type="primary" htmlType="submit">
-            Create
+            Create a new Property
           </Button>
-        </Form.Item>
+        </ButtonRow>
       </Form>
       {createdPropertyAddress && (
-        <>
+        <Results>
           <p>
             <CheckCircleTwoTone twoToneColor="#52c41a" />
-            <Body1 style={{ marginLeft: '10px' }}>{createdPropertyAddress}</Body1>
+            <Body1>{createdPropertyAddress}</Body1>
           </p>
           <p>Share the following address with your friends :)</p>
           <p>
@@ -64,8 +85,8 @@ export const PropertyCreateForm = ({ author, onSubmit }: Props) => {
               <a>https://stakes.social/{createdPropertyAddress}</a>
             </Link>
           </p>
-        </>
+        </Results>
       )}
-    </div>
+    </Container>
   )
 }

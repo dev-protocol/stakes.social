@@ -5,8 +5,32 @@ import { AuthorSelector } from './AuthorSelector'
 import { PropertyCreateForm } from './PropertyCreateForm'
 import { getAccountAddress } from 'src/fixtures/wallet/utility'
 import { useEffectAsync } from 'src/fixtures/utility'
+import styled from 'styled-components'
 
 interface Props {}
+
+const Form = styled.div`
+  display: grid;
+  grid-gap: 1rem;
+  margin: auto;
+  max-width: 520px;
+`
+const OneColumn = styled.div`
+  display: grid;
+  grid-gap: 1rem;
+`
+const TwoColumns = styled(OneColumn)`
+  @media (min-width: 768px) {
+    text-align: right;
+    grid-template-columns: 150px 1fr;
+  }
+`
+const ButtonAsLink = styled(Button)`
+  padding: 0;
+`
+const StyledPropertyCreateForm = styled(PropertyCreateForm)`
+  width: 100%;
+`
 
 export const PropertySelectForm = (_: Props) => {
   const [isOpen, setIsOpen] = useState(false)
@@ -26,18 +50,22 @@ export const PropertySelectForm = (_: Props) => {
     setAuthor(accountAddress || dafaultValue)
   }, [])
   return (
-    <div style={{ maxWidth: '680px', marginRight: 'auto', marginLeft: 'auto' }}>
-      <span style={{ marginRight: '54px' }}>Associating Property:</span>
-      <AuthorSelector query={query} author={author} onChange={onChange} onSearch={onSearch} disabled={isCreated} />
-      <div style={{ paddingLeft: '212px', marginTop: '18px' }}>
-        <Button type="link" onClick={() => setIsOpen(!isOpen)}>
+    <Form>
+      <TwoColumns>
+        <span>Associating Property:</span>
+        <AuthorSelector query={query} author={author} onChange={onChange} onSearch={onSearch} disabled={isCreated} />
+      </TwoColumns>
+      <OneColumn>
+        <ButtonAsLink type="link" onClick={() => setIsOpen(!isOpen)}>
           Or create a new Property
-        </Button>
-        {isOpen && <PropertyCreateForm author={author} onSubmit={onSubmit} />}
-      </div>
-      <Link href={'/auth/[property]'} as={`/auth/${property}`}>
-        <Button>Authenticate an asset</Button>
-      </Link>
-    </div>
+        </ButtonAsLink>
+        {isOpen && <StyledPropertyCreateForm author={author} onSubmit={onSubmit} />}
+      </OneColumn>
+      {property && (
+        <Link href={'/auth/[property]'} as={`/auth/${property}`}>
+          <Button>Associate an asset</Button>
+        </Link>
+      )}
+    </Form>
   )
 }
