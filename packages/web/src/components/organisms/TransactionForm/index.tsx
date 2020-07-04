@@ -42,9 +42,11 @@ export const TransactionForm = ({ propertyAddress }: Props) => {
   const checkWithdrawable = useCallback(
     () =>
       getWithdrawalStatus(propertyAddress).then(withdrawStatus => {
-        setWithdrawable(Boolean(withdrawStatus && blockNumber && withdrawStatus <= blockNumber))
+        setWithdrawable(
+          withdrawable ? withdrawable : Boolean(withdrawStatus && blockNumber && withdrawStatus <= blockNumber)
+        )
         setRemainBlocks((withdrawStatus || 0) - (blockNumber || 0))
-        withdrawable && setIsCountingBlocks(false)
+        withdrawStatus && !withdrawable ? setIsCountingBlocks(true) : setIsCountingBlocks(false)
       }),
     [propertyAddress, withdrawable, blockNumber]
   )
@@ -60,11 +62,14 @@ export const TransactionForm = ({ propertyAddress }: Props) => {
   ])
   const handleWithdrawHolder = useCallback(() => withdrawHolder(propertyAddress), [propertyAddress, withdrawHolder])
   const handleCancelStaking = useCallback(() => {
-    setIsCountingBlocks(true)
-    cancel(propertyAddress).catch(() => {
-      setIsCountingBlocks(false)
-      setWithdrawable(false)
-    })
+    cancel(propertyAddress)
+      .then(() => {
+        setIsCountingBlocks(true)
+      })
+      .catch(() => {
+        setIsCountingBlocks(false)
+        setWithdrawable(false)
+      })
   }, [propertyAddress, cancel])
   useEffect(() => {
     checkWithdrawable()

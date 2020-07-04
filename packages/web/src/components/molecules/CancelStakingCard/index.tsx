@@ -36,7 +36,7 @@ export const CancelStakingCard = ({ onClickCancel, onClickWithdraw, remainBlocks
               Withdraw
             </Button>
             <div>
-              {remainBlocks > 0 && (
+              {remainBlocks > 0 && !isCompleted && (
                 <>
                   <Spin indicator={spinner} style={{ marginRight: '8px' }} />
                   {remainBlocks} block(s) left
