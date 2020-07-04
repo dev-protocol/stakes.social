@@ -167,8 +167,10 @@ const HowItWorks = () => {
             </p>
 
             <h4>When can I get my staking reward?</h4>
-            <p>You will see them in real-time. (Per block of ethereum=15 seconds)</p>
-            <p>No more mining fees are needed after DIP4.</p>
+            <p>
+              You will see them in real-time. (Per block of ethereum=15 seconds) <br />
+              No more mining fees are needed after DIP4.
+            </p>
 
             <h4>What is the minimum amount of staking?</h4>
             <p>It is the same as the minimum unit of DEV, which is 0.000000000000000001.</p>
@@ -186,20 +188,19 @@ const HowItWorks = () => {
               would be happy to have you staking with them.{' '}
             </p>
 
-            <h4>Why do I have to do this?</h4>
+            <h4>When can I cancel my staking?</h4>
+            <p>You can cancel staking at any time.</p>
+
+            <h4>When can I withdraw my staking?</h4>
             <p>
-              Dev protcol is run by policy, and policy is suggested and voted on by the users. If you have an opinion,
-              you are always welcome to suggest a policy.
+              You can also withdraw immediately after canceling. The period between cancellation and withdrawal is
+              governed by Policy, and now, you can withdraw in 1 block (=immediately).
             </p>
 
-            <h4>Is there benefit to being in a pool with less staked inside? More chance of rewards?</h4>
+            <h4>Why do I have to do this?</h4>
             <p>
-              The amount of downloads of a project is taken into consideration so pools with less staked, if you have a
-              larger percentage than another pool with amount of downloads that is the same, you will get a higher
-              reward. To check downloads, search the project at{' '}
-              <a href="//www.npmjs.com/" target="_blank" rel="noreferrer">
-                npm
-              </a>
+              Dev protocol is run by policy, and policy is suggested and voted on by the users. If you have an opinion,
+              you are always welcome to suggest a policy.
             </p>
           </Faq>
           <SubSectionHeader id="creators">For Creators</SubSectionHeader>
@@ -209,8 +210,16 @@ const HowItWorks = () => {
 
             <h4>How do I create a property? </h4>
             <p>
-              Read this guide to create a property. This feature is a beta, wonderful features will be added in the
-              future. *No DEV in fees now.
+              Read{' '}
+              <a
+                href="//spectrum.chat/devtoken/general/how-to-create-a-new-property~9c61c516-ffb2-48f5-8323-c88763abd422"
+                target="_blank"
+                rel="noreferrer"
+              >
+                this guide
+              </a>{' '}
+              to create a property. This feature is a beta, wonderful features will be added in the future. *No DEV in
+              fees now.
             </p>
 
             <h4>What should I do after creating a property?</h4>
@@ -239,7 +248,7 @@ const HowItWorks = () => {
             <h4>What features are planned to be added in the future?</h4>
             <p>
               There will be creator information, setting reward rates, sharing rewards with contributors, and providing
-              benefits to stakers. These are just a few. Please share your ideas with our
+              benefits to stakers. These are just a few. Please share your ideas with our{' '}
               <a href="https://discord.gg/VwJp4KM" target="_blank" rel="noreferrer">
                 Discord
               </a>{' '}
