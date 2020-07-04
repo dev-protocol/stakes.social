@@ -16,6 +16,10 @@ const SectionHeader = styled.h2`
   text-align: center;
   font-size: 2.8rem;
 `
+const SubSectionHeader = styled.h3`
+  text-align: center;
+  font-size: 2.2rem;
+`
 const Deck = styled.iframe`
   display: block;
   width: 100%;
@@ -36,6 +40,7 @@ const Section = styled.section`
   }
 
   h3,
+  h4,
   p {
     margin: 0;
   }
@@ -72,7 +77,13 @@ const HowItWorks = () => {
           <Deck src="https://drive.google.com/file/d/1KspRC6ruqa1F15kvAxZFDjHGWJR-OeSt/preview"></Deck>
           <MavigationButtons>
             <Button type="link" href="#faq">
-              Jump to FAQ
+              FAQ
+            </Button>
+            <Button type="link" href="#creators">
+              For Creators
+            </Button>
+            <Button type="link" href="#dev">
+              About DEV
             </Button>
           </MavigationButtons>
           <SectionHeader id="overview">Overview</SectionHeader>
@@ -127,23 +138,6 @@ const HowItWorks = () => {
             </div>
           </Section>
           <Section>
-            <h3>What is mining?</h3>
-            <div>
-              <p>
-                <Text mark>Mining</Text> in the Dev Protocol means measuring the outcome of the activity associated with
-                a Property and issuing new DEV based on the results.
-              </p>
-              <p>
-                The total number of DEV is unlimited. But the higher the amount locked up by the Dev Protocol, the fewer
-                new issued DEV there will be, and eventually zero.
-              </p>
-              <p>
-                These algorithms are determined by the contract called Policy and can be updated by the will of the
-                people.
-              </p>
-            </div>
-          </Section>
-          <Section>
             <h3>Learn more</h3>
             <div>
               <p>
@@ -152,59 +146,53 @@ const HowItWorks = () => {
             </div>
           </Section>
           <SectionHeader id="faq">FAQ</SectionHeader>
+          <SubSectionHeader>About Staking</SubSectionHeader>
           <Faq>
-            <h3>How to stake? </h3>
+            <h4>How to stake?</h4>
             <p>
-              There are properties on <a href="//stakes.social">Stakes.social</a>. Open anyone, and you can stake.{' '}
-              <a href="//stakes.social">Stakes.social</a> is a first Dapp on Dev Protocol. Please keep in mind it is
-              early access ver, not complete development.
+              There are a bunch of tokenized properties lined up on <a href="">Stakes.social</a>. Open anyone, and you
+              can stake. <a href="/">Stakes.social</a> is a first DApp on Dev Protocol. Please keep in mind it is early
+              access ver, not complete development.
             </p>
 
-            <h3>When can I get my staking reward?</h3>
-            <p>Each time a property is mined, the staking reward increases. Mining can be done by anyone.</p>
-
-            <h3>When can I mine?</h3>
+            <h4>What kind of creators are there?</h4>
             <p>
-              The npm market requires a minimum of two days to mine. You can find out when you can mine by pressing
-              mining. If you are unable to mine a pop-up will display telling you the next block you can mine at. It
-              displays the block number on the Ethereum blockchain.
+              Since the Dev Protocol started with an OSS focus, there are currently OSS developers registered. And the
+              properties lined up are the OSS on{' '}
+              <a href="//www.npmjs.com" target="_blank" rel="noreferrer">
+                npm
+              </a>
+              . There are going to be more and more diverse properties, such as creators and works. (For example,
+              musician properties and album properties.)
             </p>
 
-            <h3>What is the minimum amount of staking?</h3>
+            <h4>When can I get my staking reward?</h4>
+            <p>You will see them in real-time. (Per block of ethereum=15 seconds)</p>
+            <p>No more mining fees are needed after DIP4.</p>
+
+            <h4>What is the minimum amount of staking?</h4>
             <p>It is the same as the minimum unit of DEV, which is 0.000000000000000001.</p>
 
-            <h3>How much reward will I get?</h3>
-            <p>Reward rates are different for each project.</p>
-
-            <h3>The % shown in the site is the yearly ROI right?</h3>
+            <h4>How much staking reward will I get?</h4>
             <p>
-              It&apos;s the value of the last 3-month avg. Dev Protocol was deployed in January and the staking went
-              live in March.
+              The staking ROI/APY is the same for all properties. You can see the APY and Annual Supply Growth on the
+              top of <a href="/">Stakes.social</a>.
             </p>
 
-            <h3>Is the supply of Dev tokens fixed or unlimited?</h3>
+            <h4>Which project should I stake?</h4>
             <p>
-              It&apos;s not fixed, but the limit will come later. The total supply increases a little each time mining
-              occurs and rewards are created. The higher the staking rate, the less new coins, ultimately it will move
-              towards zero.
+              Staking on a project is supporting the creators of that project. Every project needs support, so please
+              stake where you want. Your favorite properties, and those of your friends, would be good too. Any project
+              would be happy to have you staking with them.{' '}
             </p>
 
-            <h3>The more the interest the more rewards you receive?</h3>
-            <p>The higher the avg intrest rate is, the more rewards you will get.</p>
-
-            <h3>Which project should I stake?</h3>
-            <p>
-              Every project needs support, so please stake where you want. Staking on a project is supporting the
-              developer of that project. Any project would be happy to have you staking with them.
-            </p>
-
-            <h3>Why do I have to do this?</h3>
+            <h4>Why do I have to do this?</h4>
             <p>
               Dev protcol is run by policy, and policy is suggested and voted on by the users. If you have an opinion,
               you are always welcome to suggest a policy.
             </p>
 
-            <h3>Is there benefit to being in a pool with less staked inside? More chance of rewards?</h3>
+            <h4>Is there benefit to being in a pool with less staked inside? More chance of rewards?</h4>
             <p>
               The amount of downloads of a project is taken into consideration so pools with less staked, if you have a
               larger percentage than another pool with amount of downloads that is the same, you will get a higher
@@ -212,6 +200,93 @@ const HowItWorks = () => {
               <a href="//www.npmjs.com/" target="_blank" rel="noreferrer">
                 npm
               </a>
+            </p>
+          </Faq>
+          <SubSectionHeader id="creators">For Creators</SubSectionHeader>
+          <Faq>
+            <h4>What can I do with stakes.social?</h4>
+            <p>You can earn creator rewards by tokenizing your work and accounts. </p>
+
+            <h4>How do I create a property? </h4>
+            <p>
+              Read this guide to create a property. This feature is a beta, wonderful features will be added in the
+              future. *No DEV in fees now.
+            </p>
+
+            <h4>What should I do after creating a property?</h4>
+            <p>Share the property URL and collect staking.</p>
+
+            <h4>What is holder rewards and how much holder rewards will I get?</h4>
+            <p>
+              Holder rewards mean the property owner{`'`}s rewards. You can see the APY - Annual Percentage Yield on the
+              top of <a href="/">Stakes.social</a>. This shows how many percent of the staked numbers increase in a
+              year. For example, if your staked is 100 DEV and the APY is 40%, then it will increase by 40 DEV in a
+              year.
+            </p>
+
+            <h4>How much money do creators receive?</h4>
+            <p>
+              In June, total creator rewards was $358,354. It{`'`}s worth noting that this is a profit for the OSS
+              developers. DEV is a great system that enables you to monetize open activities while keeping them open.
+            </p>
+
+            <h4>When can I withdraw my holder rewards?</h4>
+            <p>You can withdraw whenever you want.</p>
+
+            <h4>What should I do with the withdrawn DEV?</h4>
+            <p>You can increase DEV if you stake to someone else, or you can buy and sell DEV on Uniswap.</p>
+
+            <h4>What features are planned to be added in the future?</h4>
+            <p>
+              There will be creator information, setting reward rates, sharing rewards with contributors, and providing
+              benefits to stakers. These are just a few. Please share your ideas with our
+              <a href="https://discord.gg/VwJp4KM" target="_blank" rel="noreferrer">
+                Discord
+              </a>{' '}
+              community.
+            </p>
+          </Faq>
+          <SubSectionHeader id="dev">About DEV token</SubSectionHeader>
+          <Faq>
+            <h4>Is the supply of Dev tokens fixed or unlimited?</h4>
+            <p>
+              It{`'`}s not fixed, but the limit will come later. The total supply increases a little each time mining
+              occurs and rewards are created. The higher the staking rate, the less new coins, ultimately it will move
+              towards zero.
+            </p>
+
+            <h4>Where are staking rewards going to come from?</h4>
+            <p>It{`'`}s minted.</p>
+
+            <h4>Is there a maximum inflation percentage per year? Is there a minimum as well?</h4>
+            <p>The annual inflation rate is designed to be updated based on the amount of staking.</p>
+
+            <h4>If no new tokens get minted, how will staking work after maximum supply is reached?</h4>
+            <p>
+              Dev Protocol is also a governance token and is governed by Policy. If by any chance the current policy
+              remains the same, the staking fee will be zero in the future. We hope to have new policies proposed. There
+              are already 7 proposals in the last month alone.{' '}
+              <a href="//github.com/dev-protocol/DIPs/issues?q=is%3Aissue+is%3Aclosed" target="_blank" rel="noreferrer">
+                https://github.com/dev-protocol/DIPs/issues?q=is%3Aissue+is%3Aclosed
+              </a>
+            </p>
+
+            <h4>What{`'`}s the total supply going to be if everyone claims their Legacy Dev?</h4>
+            <p>Nothing has changed Legacy Dev is already counted in the total supply.</p>
+
+            <h4>How will the Developer tokens (Legacy DEV) be distributed into the pool?</h4>
+            <p>Legacy DEV will turn into the current DEV when it is migrated with 1:1 by Migrate contract.</p>
+
+            <p>
+              For more information on DEV tokens, please check the <a href="//devprtcl.com">Dev Protocol website</a> and{' '}
+              <a
+                href="//github.com/dev-protocol/protocol/blob/master/docs/WHITEPAPER.md"
+                target="_blank"
+                rel="noreferrer"
+              >
+                white paper
+              </a>
+              .
             </p>
           </Faq>
         </Article>
