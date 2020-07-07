@@ -100,8 +100,8 @@ export const getWithdrawalStatus = async (propertyAddress: string) => {
   const accountAddress = await getAccountAddress()
   if (client && accountAddress) {
     return client
-      .lockupStorage(await getContractAddress(client, 'lockupStorage'))
-      .getWithdrawalStatus(propertyAddress, accountAddress)
+      .lockup(await getContractAddress(client, 'lockup'))
+      .getStorageWithdrawalStatus(propertyAddress, accountAddress)
       .then(Number)
   }
   return undefined
