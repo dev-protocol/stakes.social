@@ -1448,10 +1448,10 @@
     exec-sh "^0.3.2"
     minimist "^1.2.0"
 
-"@devprtcl/dev-kit-js@0.7.2":
-  version "0.7.2"
-  resolved "https://registry.yarnpkg.com/@devprtcl/dev-kit-js/-/dev-kit-js-0.7.2.tgz#17e49dc6d5a46b5ff3efbe544d6161ceebd28df9"
-  integrity sha512-5r1Dsbgf+/ECFamrff2yGN/Ygbgiw/HK0Gy4FbJ7vLjNs3WmRJPlAmygDFuI9HYQdx/7CB9jP+HQbnyYNvvxLA==
+"@devprtcl/dev-kit-js@0.8.0":
+  version "0.8.0"
+  resolved "https://registry.yarnpkg.com/@devprtcl/dev-kit-js/-/dev-kit-js-0.8.0.tgz#99f904d2ce523e37a334616ed6abb76e74948257"
+  integrity sha512-CozZ47q/H7KXn9G/9mC8f2L37K7EEXP6scp2Cx7Bws6fKiLWY2E6QHCP5Ry+z24uTOaNw4fe8yAC1gYgTMyA7w==
   dependencies:
     ramda "^0.27.0"
     web3 "^1.2.5-rc.0"
