@@ -70,7 +70,7 @@
     "babel-loader": "8.1.0",
     "babel-plugin-import": "1.13.0",
     "babel-plugin-styled-components": "1.10.7",
-    "electron": "9.0.5",
+    "electron": "9.1.0",
     "identity-obj-proxy": "3.0.0",
     "react-docgen-typescript-loader": "3.7.2",
     "react-test-renderer": "16.13.1"
