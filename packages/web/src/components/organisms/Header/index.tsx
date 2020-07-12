@@ -5,6 +5,7 @@ import { useConnectWallet } from 'src/fixtures/wallet/hooks'
 import styled from 'styled-components'
 import { useAPY, useAnnualSupplyGrowthRatio } from 'src/fixtures/dev-kit/hooks'
 import { SupplySummaly } from 'src/components/molecules/SupplySummaly'
+import { A } from 'src/components/atoms/A'
 
 interface Props {
   colorSchema?: 'black' | 'white'
@@ -50,10 +51,15 @@ export const Header = ({ colorSchema = 'black' }: Props = {}) => {
         <BrandLogo colorSchema={colorSchema} props={{ height: undefined }}></BrandLogo>
         <SupplySummaly apy={apy} creators={creators} annualSupplyGrowthRatio={annualSupplyGrowthRatio}></SupplySummaly>
       </Logo>
-      <Button disabled={isConnected} onClick={handleClick}>
-        {isConnected && 'Wallet connected'}
-        {!isConnected && 'Connect to a wallet'}
-      </Button>
+      <div>
+        <div>
+          <Button disabled={isConnected} onClick={handleClick}>
+            {isConnected && 'Wallet connected'}
+            {!isConnected && 'Connect to a wallet'}
+          </Button>
+        </div>
+        <div>{A({ href: '/policy' })(<Button style={{ width: '100%', marginTop: '16px' }}>Governance</Button>)}</div>
+      </div>
     </HeaderContainer>
   )
 }

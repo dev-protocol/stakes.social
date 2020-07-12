@@ -81,14 +81,34 @@ exports[`AuthHeader Snapshot 1`] = `
           </div>
         </div>
       </div>
-      <button
-        class="ant-btn"
-        type="button"
-      >
-        <span>
-          Connect to a wallet
-        </span>
-      </button>
+      <div>
+        <div>
+          <button
+            class="ant-btn"
+            type="button"
+          >
+            <span>
+              Connect to a wallet
+            </span>
+          </button>
+        </div>
+        <div>
+          <a
+            class="sc-AxjAm bqVefi"
+            href="/policy"
+          >
+            <button
+              class="ant-btn"
+              style="width: 100%; margin-top: 16px;"
+              type="button"
+            >
+              <span>
+                Governance
+              </span>
+            </button>
+          </a>
+        </div>
+      </div>
     </div>
     <div
       class="sc-AxmLO eMgytc"
