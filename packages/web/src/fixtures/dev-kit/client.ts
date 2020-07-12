@@ -179,5 +179,5 @@ export const createGetVotablePolicy = async () => {
   if (web3Client) {
     return devKitClient.createGetVotablePolicy(getPolicySetContract(web3Client))()
   }
-  return undefined
+  throw new Error('web3 client is not found.')
 }
