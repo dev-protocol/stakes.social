@@ -356,20 +356,17 @@ export const useGetPolicyAddressesList = () => {
   const [error, setError] = useState<Error>()
   const callback = useCallback(async () => {
     setIsLoading(true)
-    message.loading({ content: 'Getting policy list now...', duration: 0, key })
     setError(undefined)
     return createGetVotablePolicy()
       .then(policyAddressesList => {
         setIsLoading(false)
-        message.success({ content: 'success authenticate!', key })
         return policyAddressesList
       })
       .catch(err => {
         setError(err)
         message.error({ content: err.message, key })
         setIsLoading(false)
-        return ''
       })
   }, [])
-  return { authenticate: callback, isLoading, error }
+  return { getPolicyAddressesList: callback, isLoading, error }
 }
