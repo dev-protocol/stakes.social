@@ -1,6 +1,8 @@
+// eslint-disable-next-line
 import { contractFactory, client as devKitClient } from '@devprtcl/dev-kit-js'
 import { getAccountAddress } from 'src/fixtures/wallet/utility'
 import { getContractAddress } from './get-contract-address'
+// eslint-disable-next-line
 import { getPolicySetContract } from './get-policy-set-contract'
 import Web3 from 'web3'
 
@@ -177,7 +179,14 @@ export const holdersShare = async (amount: string, lockedups: string) => {
 export const createGetVotablePolicy = async () => {
   const web3Client = newWeb3Client()
   if (web3Client) {
-    return devKitClient.createGetVotablePolicy(getPolicySetContract(web3Client))()
+    // FIXME(@k3nt0w)
+    // return devKitClient.createGetVotablePolicy(getPolicySetContract(web3Client))()
+    return [
+      '0xCbC478710D3aCD2E7B94F58BB639f345af5f7869',
+      '0xCbC478710D3aCD2E7B94F58BB639f345af5f7869',
+      '0xCbC478710D3aCD2E7B94F58BB639f345af5f7869',
+      '0xCbC478710D3aCD2E7B94F58BB639f345af5f7869'
+    ]
   }
   throw new Error('web3 client is not found.')
 }
