@@ -8,7 +8,7 @@ jest.mock('@dev/graphql')
 
 describe(`${PoliciesList.name}`, () => {
   test('Snapshot', () => {
-    const component = render(<PoliciesList policyList={[]} />)
+    const component = render(<PoliciesList />)
     const tree = component.baseElement
     expect(tree).toMatchSnapshot()
   })
