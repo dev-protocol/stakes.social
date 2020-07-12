@@ -13,12 +13,18 @@ export interface MarketInformation {
   }
 }
 
+export interface PolicyInformation {
+  name: string
+  description: string
+  reference: string
+}
+
 const getMarketInformation = (marketAddress: string): Promise<MarketInformation> =>
   fetch(`https://raw.githubusercontent.com/dev-protocol/assets/master/market/${marketAddress}/info.json`).then(res =>
     res.json()
   )
 
-const getPolicyInformation = (policyAddress: string): Promise<MarketInformation> =>
+const getPolicyInformation = (policyAddress: string): Promise<PolicyInformation> =>
   fetch(`https://raw.githubusercontent.com/dev-protocol/assets/master/policy/${policyAddress}/info.json`).then(res =>
     res.json()
   )
