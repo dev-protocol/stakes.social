@@ -21,6 +21,14 @@ const Wrap = styled.div`
   grid-gap: 1rem;
 `
 
+const ListWrap = styled.div`
+  width: 100%;
+  margin: 0 auto;
+  @media (min-width: 768px) {
+    width: 50%;
+  }
+`
+
 const Title = (props: { policyAddress: string }) => {
   const { data } = useGetPolicyInformation(props.policyAddress)
   return <H3>{data?.name}</H3>
@@ -42,7 +50,7 @@ export const PoliciesList = () => {
   return (
     <Wrap>
       {policyAddressesList.length > 0 ? (
-        <div style={{ width: '50%', margin: '0 auto' }}>
+        <ListWrap>
           <List
             bordered
             itemLayout="horizontal"
@@ -57,7 +65,7 @@ export const PoliciesList = () => {
               </List.Item>
             )}
           />
-        </div>
+        </ListWrap>
       ) : isLoading ? (
         <NotFound />
       ) : (
