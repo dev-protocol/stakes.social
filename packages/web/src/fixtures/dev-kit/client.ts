@@ -1,4 +1,4 @@
-import { contractFactory } from '@devprtcl/dev-kit-js'
+import { contractFactory, client as devKitClient } from '@devprtcl/dev-kit-js'
 import { getAccountAddress } from 'src/fixtures/wallet/utility'
 import { getContractAddress } from './get-contract-address'
 
@@ -162,4 +162,8 @@ export const holdersShare = async (amount: string, lockedups: string) => {
     return client.policy(await getContractAddress(client, 'policy')).holdersShare(amount, lockedups)
   }
   return undefined
+}
+
+export const createGetVotablePolicy = async (policySetContract: any) => {
+  return devKitClient.createGetVotablePolicy(policySetContract)()
 }
