@@ -19,18 +19,7 @@ const Policy = (_: Props) => {
         <div>Select one asset market to authenticate.</div>
       </Headline>
       <div style={{ padding: '1rem', maxWidth: '1048px', marginRight: 'auto', marginLeft: 'auto' }}>
-        <PoliciesList
-          policyList={[
-            {
-              title: 'DIP7',
-              description: 'Decrease Inflation Rate'
-            },
-            {
-              title: 'DIP7',
-              description: 'Decrease Inflation Rate'
-            }
-          ]}
-        />
+        <PoliciesList />
       </div>
       <Footer />
     </>
