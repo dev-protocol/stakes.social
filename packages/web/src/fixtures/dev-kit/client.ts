@@ -1,11 +1,21 @@
 import { contractFactory, client as devKitClient } from '@devprtcl/dev-kit-js'
 import { getAccountAddress } from 'src/fixtures/wallet/utility'
 import { getContractAddress } from './get-contract-address'
+import { getPolicySetContract } from './get-policy-set-contract'
+import Web3 from 'web3'
 
 const newClient = () => {
   const { ethereum } = window
   if (ethereum) {
     return contractFactory(ethereum)
+  }
+  return undefined
+}
+
+const newWeb3Client = () => {
+  const { ethereum } = window
+  if (ethereum) {
+    return new Web3(ethereum)
   }
   return undefined
 }
@@ -164,6 +174,10 @@ export const holdersShare = async (amount: string, lockedups: string) => {
   return undefined
 }
 
-export const createGetVotablePolicy = async (policySetContract: any) => {
-  return devKitClient.createGetVotablePolicy(policySetContract)()
+export const createGetVotablePolicy = async () => {
+  const web3Client = newWeb3Client()
+  if (web3Client) {
+    return devKitClient.createGetVotablePolicy(getPolicySetContract(web3Client))()
+  }
+  return undefined
 }
