@@ -1,4 +1,4 @@
-import { DevkitContract } from '@devprtcl/dev-kit-js/esm/client'
+import { DevkitContract } from '@devprtcl/dev-kit-js/esm/contract'
 import { RegistryContract } from '@devprtcl/dev-kit-js/esm/registry'
 import { addresses } from '@devprtcl/dev-kit-js'
 
