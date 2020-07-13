@@ -22,7 +22,6 @@ const Badge = styled.div`
   grid-gap: 0.5rem;
 `
 const Statistics = styled.span`
-  font-family: monospace;
   font-weight: bold;
 `
 const StatisticsInt = styled.span`

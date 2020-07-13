@@ -30,7 +30,7 @@ export default class extends Document {
           <meta charSet="utf-8" />
           {/* Use minimum-scale=1 to enable GPU rasterization */}
           <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no" />
-          <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500&display=swap" />
+          <link rel="stylesheet" href="https://use.typekit.net/owg1uzy.css" />
           <link rel="apple-touch-icon" sizes="57x57" href="//asset.stakes.social/apple-icon-57x57.png" />
           <link rel="apple-touch-icon" sizes="60x60" href="//asset.stakes.social/apple-icon-60x60.png" />
           <link rel="apple-touch-icon" sizes="72x72" href="//asset.stakes.social/apple-icon-72x72.png" />
