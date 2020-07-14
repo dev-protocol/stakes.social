@@ -30,7 +30,11 @@ exports[`Navigation Snapshot 1`] = `
         class="ant-menu-item ant-menu-item-only-child ant-menu-item-selected"
         role="menuitem"
       >
-        Propertis
+        <a
+          href="/"
+        >
+          Propertis
+        </a>
       </li>
       <li
         class="ant-menu-submenu ant-menu-submenu-horizontal ant-menu-overflowed-submenu"
@@ -55,7 +59,11 @@ exports[`Navigation Snapshot 1`] = `
         class="ant-menu-item ant-menu-item-only-child"
         role="menuitem"
       >
-        Create
+        <a
+          href="/auth"
+        >
+          Create
+        </a>
       </li>
       <li
         class="ant-menu-submenu ant-menu-submenu-horizontal ant-menu-overflowed-submenu"
