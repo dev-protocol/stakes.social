@@ -31,6 +31,11 @@ const StatisticTitle = styled.span`
   color: rgba(0, 0, 0, 0.45);
   font-size: 14px;
 `
+const StatisticWithLineBreakedTitle = styled(Statistic)`
+  .ant-statistic-title {
+    word-break: break-all;
+  }
+`
 
 const AssetStrengthBase = ({ assetStrength }: { assetStrength: number }) => (
   <div>
@@ -61,7 +66,7 @@ export const PropertyCard = ({ propertyAddress }: Props) => {
       <Card>
         <Row>
           <Col sm={24} md={10}>
-            <Statistic title={propertyAddress} value={includeAssets} />
+            <StatisticWithLineBreakedTitle title={propertyAddress} value={includeAssets} />
           </Col>
           <ResponsiveCol sm={24} md={14}>
             <ResponsiveRow>
