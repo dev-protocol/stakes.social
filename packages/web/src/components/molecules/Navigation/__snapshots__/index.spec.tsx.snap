@@ -1,0 +1,59 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`WithdrawCard Snapshot 1`] = `
+<body>
+  <div>
+    <div
+      class="ant-card ant-card-bordered"
+    >
+      <div
+        class="ant-card-body"
+      >
+        <div
+          class="ant-row"
+        >
+          <div
+            class="ant-col"
+            style="flex: 1 1 252px;"
+          >
+            <span
+              class="sc-AxjAm fxjwKc"
+            >
+              Withdraw 
+              Holder
+               Reward
+            </span>
+            <div
+              class="sc-AxirZ dRlJLK"
+            >
+              1000
+               DEV
+            </div>
+          </div>
+          <div
+            class="ant-col"
+            style="flex: 1 1 252px;"
+          >
+            <div
+              class="ant-space ant-space-vertical"
+            >
+              <div
+                class="ant-space-item"
+              >
+                <button
+                  class="ant-btn ant-btn-primary ant-btn-lg"
+                  type="button"
+                >
+                  <span>
+                    Withdraw
+                  </span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+`;
