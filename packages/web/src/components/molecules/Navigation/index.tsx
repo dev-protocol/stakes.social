@@ -5,6 +5,7 @@ import { useCallback } from 'react'
 import { ClickParam } from 'antd/lib/menu'
 import { useRouter } from 'next/router'
 import styled from 'styled-components'
+import Link from 'next/link'
 
 const navs = [
   {
@@ -22,7 +23,6 @@ const NavMenu = styled(Menu)`
   background: transparent;
 `
 
-const toPathname = (_key: string) => navs.find(({ key }) => key === _key)?.pathname
 const toKey = (_pathname: string) => navs.find(({ pathname }) => pathname === _pathname)?.key
 
 export const Navigation = () => {
@@ -31,17 +31,17 @@ export const Navigation = () => {
   const handleClick = useCallback(
     (e: ClickParam) => {
       const { key } = e
-      const pathname = toPathname(key)
       setCurrent(key)
-      pathname && router.push(pathname)
     },
-    [setCurrent, router]
+    [setCurrent]
   )
 
   return (
     <NavMenu onClick={handleClick} selectedKeys={[current]} mode="horizontal">
       {navs.map(nav => (
-        <NavMenu.Item key={nav.key}>{nav.label}</NavMenu.Item>
+        <NavMenu.Item key={nav.key}>
+          <Link href={nav.pathname}>{nav.label}</Link>
+        </NavMenu.Item>
       ))}
     </NavMenu>
   )
