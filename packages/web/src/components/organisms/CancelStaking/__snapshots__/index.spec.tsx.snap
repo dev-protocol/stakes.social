@@ -1,0 +1,51 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CancelStaking Snapshot 1`] = `
+<body>
+  <div>
+    <div
+      class="sc-AxjAm StDqN"
+    >
+      <p>
+        Cancel Staking
+      </p>
+      <div
+        class="ant-space ant-space-horizontal ant-space-align-center"
+      >
+        <div
+          class="ant-space-item"
+          style="margin-right: 16px;"
+        >
+          <button
+            class="ant-btn ant-btn-primary ant-btn-lg"
+            type="button"
+          >
+            <span>
+              Cancel
+            </span>
+          </button>
+        </div>
+        <div
+          class="ant-space-item"
+          style="margin-right: 16px;"
+        >
+          <button
+            class="ant-btn ant-btn-primary ant-btn-lg"
+            disabled=""
+            type="button"
+          >
+            <span>
+              Withdraw
+            </span>
+          </button>
+        </div>
+        <div
+          class="ant-space-item"
+        >
+          <div />
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+`;

@@ -8,7 +8,7 @@ exports[`PropertyCardList Snapshot 1`] = `
         style="margin: 54px 0px;"
       >
         <div
-          style="border: 1px solid #f0f0f0; padding: 1.2em; cursor: pointer;"
+          class="sc-AxirZ ggxpbf"
         >
           <div
             class="ant-row"
@@ -36,10 +36,10 @@ exports[`PropertyCardList Snapshot 1`] = `
               </div>
             </div>
             <div
-              class="ant-col sc-AxiKw dkDCXm ant-col-sm-24 ant-col-md-14"
+              class="ant-col sc-AxhCb cihgDy ant-col-sm-24 ant-col-md-14"
             >
               <div
-                class="ant-row sc-AxirZ dTFMDJ"
+                class="ant-row sc-AxiKw fdRmGt"
               >
                 <div
                   class="ant-col ant-col-12"
@@ -112,7 +112,7 @@ exports[`PropertyCardList Snapshot 1`] = `
                 >
                   <div>
                     <span
-                      class="sc-AxhCb aeUAL"
+                      class="sc-AxhUy cHgPVK"
                       style="position: absolute;"
                     >
                       25

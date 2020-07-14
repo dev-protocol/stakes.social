@@ -52,7 +52,7 @@ export const Header = ({ colorSchema = 'black' }: Props = {}) => {
           {!isConnected && 'Connect to a wallet'}
         </Button>
       </Top>
-      <Navigation />
+      <Navigation></Navigation>
     </HeaderContainer>
   )
 }

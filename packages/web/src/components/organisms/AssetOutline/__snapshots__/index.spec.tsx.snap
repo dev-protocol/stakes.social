@@ -3,66 +3,68 @@
 exports[`AssetOutline Snapshot 1`] = `
 <body>
   <div>
-    <div
-      class="sc-AxirZ sc-AxiKw jnBnXj"
-    >
-      <div>
-        <p>
-          Included Assets
-        </p>
-        <div
-          class="ant-list ant-list-split ant-list-bordered"
-          style="max-height: 224px;"
-        >
+    <div>
+      <div
+        class="sc-AxirZ sc-AxiKw bltTW"
+      >
+        <div>
+          <p>
+            Authenticated Assets
+          </p>
           <div
-            class="ant-spin-nested-loading"
+            class="ant-list sc-AxgMl isPfAf ant-list-split ant-list-bordered"
+            style="max-height: 224px;"
           >
             <div
-              class="ant-spin-container"
+              class="ant-spin-nested-loading"
             >
-              <ul
-                class="ant-list-items"
+              <div
+                class="ant-spin-container"
               >
-                <li
-                  class="ant-list-item sc-AxgMl jrRUnk"
+                <ul
+                  class="ant-list-items"
                 >
-                  <span
-                    style="overflow: auto;"
+                  <li
+                    class="ant-list-item sc-AxheI bkZCJS"
                   >
-                    authentication-id
-                  </span>
-                </li>
-              </ul>
+                    <span
+                      style="overflow: auto;"
+                    >
+                      authentication-id
+                    </span>
+                  </li>
+                </ul>
+              </div>
             </div>
           </div>
-        </div>
-        <button
-          class="ant-btn ant-btn-dashed ant-btn-sm"
-          style="margin-top: 0.5rem;"
-          type="button"
-        >
-          <span>
-            Add your asset
-          </span>
-        </button>
-      </div>
-      <div>
-        <p>
-          Staking Ratio
-        </p>
-        <div
-          class="sc-AxirZ sc-AxhCb jTLTcw"
-        >
-          <div
-            class="sc-AxjAm kkhYpD"
-          />
-          <div>
-            <span
-              class="sc-AxhUy dQrdLI"
-            >
-              26
-              %
+          <button
+            class="ant-btn ant-btn-dashed ant-btn-sm"
+            style="margin-top: 0.5rem;"
+            type="button"
+          >
+            <span>
+              Add your asset
             </span>
+          </button>
+        </div>
+        <div>
+          <p>
+            Staking Ratio
+          </p>
+          <div
+            class="sc-AxirZ sc-AxhCb dzDAau"
+          >
+            <div
+              class="sc-AxjAm kkhYpD"
+            />
+            <div>
+              <span
+                class="sc-AxhUy dQrdLI"
+              >
+                26
+                %
+              </span>
+            </div>
           </div>
         </div>
       </div>

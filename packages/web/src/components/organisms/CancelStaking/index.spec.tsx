@@ -1,11 +1,14 @@
 import React from 'react'
 import { render } from '@testing-library/react'
-import { CancelStakingCard } from '.'
+import { CancelStaking } from '.'
 import 'src/__mocks__/window/matchMedia.mock'
 
-describe(`${CancelStakingCard.name}`, () => {
+jest.mock('src/fixtures/dev-kit/hooks')
+jest.mock('@dev/graphql')
+
+describe(`${CancelStaking.name}`, () => {
   test('Snapshot', () => {
-    const component = render(<CancelStakingCard onClickCancel={() => {}} onClickWithdraw={() => {}} />)
+    const component = render(<CancelStaking propertyAddress="propertyAddress" />)
     const tree = component.baseElement
     expect(tree).toMatchSnapshot()
   })
