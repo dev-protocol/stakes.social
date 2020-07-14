@@ -35,8 +35,8 @@ const Main = styled(Container)`
       'cover outline'
       'stake outline'
       'possession outline'
-      'apps outline'
       'transact outline'
+      'apps outline'
       'cancel outline';
   }
 `
