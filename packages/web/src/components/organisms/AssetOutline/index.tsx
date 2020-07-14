@@ -16,6 +16,7 @@ const Wrap = styled.div`
 `
 const OutlinesWrap = styled(Wrap)`
   grid-gap: 1.5rem;
+  align-content: baseline;
 `
 const AssetStrengthWrap = styled(Wrap)`
   grid-auto-flow: column;
@@ -27,12 +28,8 @@ const AssetStrengthValue = styled.span`
   font-size: 2rem;
   color: black;
 `
-const AssetsList = styled(List)`
-  background: #fff;
-`
 const AssetListItem = styled(List.Item)`
   font-size: 1.3rem;
-  color: black;
 `
 
 const AssetStrengthBase = ({ assetStrength }: { assetStrength: number }) => (
@@ -57,31 +54,29 @@ export const AssetOutline = ({ className, propertyAddress }: Props) => {
   const includedAssetList = useMemo(() => data?.property_authentication.map(e => e.authentication_id), [data])
 
   return (
-    <div>
-      <OutlinesWrap className={className}>
-        <div>
-          <p>Authenticated Assets</p>
-          <AssetsList
-            bordered
-            dataSource={includedAssetList}
-            renderItem={item => (
-              <AssetListItem>
-                <span style={{ overflow: 'auto' }}>{item}</span>
-              </AssetListItem>
-            )}
-            style={{ maxHeight: '224px' }}
-          />
-          <Link href={'/auth/[property]'} as={`/auth/${propertyAddress}`}>
-            <Button type="dashed" size="small" style={{ marginTop: '0.5rem' }}>
-              Add your asset
-            </Button>
-          </Link>
-        </div>
-        <div>
-          <p>Staking Ratio</p>
-          <AssetStrength property={propertyAddress} />
-        </div>
-      </OutlinesWrap>
-    </div>
+    <OutlinesWrap className={className}>
+      <div>
+        <p>Included Assets</p>
+        <List
+          style={{ background: '#fff' }}
+          bordered
+          dataSource={includedAssetList}
+          renderItem={item => (
+            <AssetListItem>
+              <span style={{ overflow: 'auto' }}>{item}</span>
+            </AssetListItem>
+          )}
+        />
+        <Link href={'/auth/[property]'} as={`/auth/${propertyAddress}`}>
+          <Button type="dashed" size="small" style={{ marginTop: '0.5rem' }}>
+            Add your asset
+          </Button>
+        </Link>
+      </div>
+      <div>
+        <p>Staking Ratio</p>
+        <AssetStrength property={propertyAddress} />
+      </div>
+    </OutlinesWrap>
   )
 }

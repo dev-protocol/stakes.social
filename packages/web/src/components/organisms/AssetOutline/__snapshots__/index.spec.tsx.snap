@@ -3,68 +3,66 @@
 exports[`AssetOutline Snapshot 1`] = `
 <body>
   <div>
-    <div>
-      <div
-        class="sc-AxirZ sc-AxiKw bltTW"
-      >
-        <div>
-          <p>
-            Authenticated Assets
-          </p>
+    <div
+      class="sc-AxirZ sc-AxiKw jJlZOn"
+    >
+      <div>
+        <p>
+          Included Assets
+        </p>
+        <div
+          class="ant-list ant-list-split ant-list-bordered"
+          style="background: rgb(255, 255, 255);"
+        >
           <div
-            class="ant-list sc-AxgMl isPfAf ant-list-split ant-list-bordered"
-            style="max-height: 224px;"
+            class="ant-spin-nested-loading"
           >
             <div
-              class="ant-spin-nested-loading"
+              class="ant-spin-container"
             >
-              <div
-                class="ant-spin-container"
+              <ul
+                class="ant-list-items"
               >
-                <ul
-                  class="ant-list-items"
+                <li
+                  class="ant-list-item sc-AxgMl cQBOeR"
                 >
-                  <li
-                    class="ant-list-item sc-AxheI bkZCJS"
+                  <span
+                    style="overflow: auto;"
                   >
-                    <span
-                      style="overflow: auto;"
-                    >
-                      authentication-id
-                    </span>
-                  </li>
-                </ul>
-              </div>
+                    authentication-id
+                  </span>
+                </li>
+              </ul>
             </div>
           </div>
-          <button
-            class="ant-btn ant-btn-dashed ant-btn-sm"
-            style="margin-top: 0.5rem;"
-            type="button"
-          >
-            <span>
-              Add your asset
-            </span>
-          </button>
         </div>
-        <div>
-          <p>
-            Staking Ratio
-          </p>
+        <button
+          class="ant-btn ant-btn-dashed ant-btn-sm"
+          style="margin-top: 0.5rem;"
+          type="button"
+        >
+          <span>
+            Add your asset
+          </span>
+        </button>
+      </div>
+      <div>
+        <p>
+          Staking Ratio
+        </p>
+        <div
+          class="sc-AxirZ sc-AxhCb dzDAau"
+        >
           <div
-            class="sc-AxirZ sc-AxhCb dzDAau"
-          >
-            <div
-              class="sc-AxjAm kkhYpD"
-            />
-            <div>
-              <span
-                class="sc-AxhUy dQrdLI"
-              >
-                26
-                %
-              </span>
-            </div>
+            class="sc-AxjAm kkhYpD"
+          />
+          <div>
+            <span
+              class="sc-AxhUy dQrdLI"
+            >
+              26
+              %
+            </span>
           </div>
         </div>
       </div>
