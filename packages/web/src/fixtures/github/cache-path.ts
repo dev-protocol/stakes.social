@@ -1,4 +1,4 @@
 export const SWRCachePath = {
   getMarketInformation: (marketAddress: string) =>
-    `https://raw.githubusercontent.com/dev-protocol/assets/master/market/${marketAddress}/info.json`
+    `https://raw.githubusercontent.com/dev-protocol/assets/main/market/${marketAddress}/info.json`
 } as const

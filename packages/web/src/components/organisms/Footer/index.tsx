@@ -23,7 +23,7 @@ export const Footer = () => {
           </a>
           <span>, see the </span>
           <a
-            href="//github.com/dev-protocol/protocol/blob/master/docs/WHITEPAPER.md"
+            href="//github.com/dev-protocol/protocol/blob/main/docs/WHITEPAPER.md"
             target="_blank"
             rel="noreferrer noopener"
             style={{ textDecoration: 'underline' }}

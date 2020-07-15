@@ -11,7 +11,7 @@ const CoverImage = styled.div`
 `
 
 const assetsAsBackground = (address: string): string =>
-  `url('//raw.githubusercontent.com/dev-protocol/assets/master/property/${address}/header.jpg')`
+  `url('//raw.githubusercontent.com/dev-protocol/assets/main/property/${address}/header.jpg')`
 
 export const PropertyCoverImage = ({ propertyAddress }: Props) => (
   <CoverImage
