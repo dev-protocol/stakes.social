@@ -3,21 +3,20 @@ import { Button } from 'antd'
 import { BrandLogo } from 'src/components/atoms/BrandLogo'
 import { useConnectWallet } from 'src/fixtures/wallet/hooks'
 import styled from 'styled-components'
-import { useAPY, useAnnualSupplyGrowthRatio } from 'src/fixtures/dev-kit/hooks'
-import { SupplySummaly } from 'src/components/molecules/SupplySummaly'
+import { Navigation } from 'src/components/molecules/Navigation'
 
 interface Props {
   colorSchema?: 'black' | 'white'
 }
 
-const HeaderContainer = styled.div`
+const HeaderContainer = styled.header`
   display: grid;
-  max-width: 1048px;
-  width: 100%;
-  margin: auto;
+`
+const Top = styled.header`
+  display: grid;
   grid-auto-flow: column;
   justify-content: space-between;
-  align-items: baseline;
+  align-items: center;
   padding: 1rem;
   grid-gap: 1rem;
   svg {
@@ -38,22 +37,22 @@ const Logo = styled.div`
 
 export const Header = ({ colorSchema = 'black' }: Props = {}) => {
   const { isConnected, connect } = useConnectWallet()
-  const { apy, creators } = useAPY()
-  const { annualSupplyGrowthRatio } = useAnnualSupplyGrowthRatio()
   const handleClick = () => {
     connect()
   }
 
   return (
     <HeaderContainer>
-      <Logo>
-        <BrandLogo colorSchema={colorSchema} props={{ height: undefined }}></BrandLogo>
-        <SupplySummaly apy={apy} creators={creators} annualSupplyGrowthRatio={annualSupplyGrowthRatio}></SupplySummaly>
-      </Logo>
-      <Button disabled={isConnected} onClick={handleClick}>
-        {isConnected && 'Wallet connected'}
-        {!isConnected && 'Connect to a wallet'}
-      </Button>
+      <Top>
+        <Logo>
+          <BrandLogo colorSchema={colorSchema} props={{ height: undefined }}></BrandLogo>
+        </Logo>
+        <Button disabled={isConnected} onClick={handleClick}>
+          {isConnected && 'Wallet connected'}
+          {!isConnected && 'Connect to a wallet'}
+        </Button>
+      </Top>
+      <Navigation></Navigation>
     </HeaderContainer>
   )
 }

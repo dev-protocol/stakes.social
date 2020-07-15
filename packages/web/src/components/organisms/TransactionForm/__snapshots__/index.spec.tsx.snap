@@ -4,227 +4,60 @@ exports[`TransactionForm Snapshot 1`] = `
 <body>
   <div>
     <div
-      class="sc-AxhUy TlMSf"
+      class="sc-AxhCb inaksa"
     >
       <div
-        class="ant-card ant-card-bordered"
+        class="sc-AxjAm StDqN"
       >
+        <p>
+          Withdraw 
+          Stakers
+           Reward
+        </p>
         <div
-          class="ant-card-body"
+          class="sc-AxirZ djXUlT"
         >
           <div
-            class="ant-row"
+            class="sc-AxiKw dDKlW"
           >
-            <span
-              class="sc-AxiKw bKAVsB"
-            >
-              Stake Now
+            5000
+             DEV
+          </div>
+          <button
+            class="ant-btn ant-btn-primary ant-btn-lg"
+            type="button"
+          >
+            <span>
+              Withdraw
             </span>
-          </div>
+          </button>
+        </div>
+      </div>
+      <div
+        class="sc-AxjAm StDqN"
+      >
+        <p>
+          Withdraw 
+          Creators
+           Reward
+        </p>
+        <div
+          class="sc-AxirZ djXUlT"
+        >
           <div
-            class="ant-row"
+            class="sc-AxiKw dDKlW"
           >
-            <span
-              class="ant-input-search ant-input-search-enter-button ant-input-search-large ant-input-group-wrapper ant-input-group-wrapper-lg"
-              style="max-width: 578px;"
-            >
-              <span
-                class="ant-input-wrapper ant-input-group"
-              >
-                <span
-                  class="ant-input-search ant-input-search-enter-button ant-input-search-large ant-input-affix-wrapper ant-input-affix-wrapper-lg"
-                >
-                  <input
-                    class="ant-input ant-input-lg"
-                    type="number"
-                    value=""
-                  />
-                  <span
-                    class="ant-input-suffix"
-                  >
-                    DEV
-                  </span>
-                </span>
-                <span
-                  class="ant-input-group-addon"
-                >
-                  <button
-                    class="ant-btn ant-input-search-button ant-btn-primary ant-btn-lg"
-                    type="button"
-                  >
-                    <span>
-                      Stake
-                    </span>
-                  </button>
-                </span>
-              </span>
+            6000
+             DEV
+          </div>
+          <button
+            class="ant-btn ant-btn-primary ant-btn-lg"
+            type="button"
+          >
+            <span>
+              Withdraw
             </span>
-          </div>
-        </div>
-      </div>
-      <div
-        class="ant-card ant-card-bordered"
-      >
-        <div
-          class="ant-card-body"
-        >
-          <div
-            class="ant-row"
-          >
-            <div
-              class="ant-col"
-              style="flex: 1 1 252px;"
-            >
-              <span
-                class="sc-AxjAm fxjwKc"
-              >
-                Withdraw 
-                Staking
-                 Reward
-              </span>
-              <div
-                class="sc-AxirZ dRlJLK"
-              >
-                5000
-                 DEV
-              </div>
-            </div>
-            <div
-              class="ant-col"
-              style="flex: 1 1 252px;"
-            >
-              <div
-                class="ant-space ant-space-vertical"
-              >
-                <div
-                  class="ant-space-item"
-                >
-                  <button
-                    class="ant-btn ant-btn-primary ant-btn-lg"
-                    type="button"
-                  >
-                    <span>
-                      Withdraw
-                    </span>
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div
-        class="ant-card ant-card-bordered"
-      >
-        <div
-          class="ant-card-body"
-        >
-          <div
-            class="ant-row"
-          >
-            <div
-              class="ant-col"
-              style="flex: 1 1 252px;"
-            >
-              <span
-                class="sc-AxjAm fxjwKc"
-              >
-                Withdraw 
-                Holder
-                 Reward
-              </span>
-              <div
-                class="sc-AxirZ dRlJLK"
-              >
-                6000
-                 DEV
-              </div>
-            </div>
-            <div
-              class="ant-col"
-              style="flex: 1 1 252px;"
-            >
-              <div
-                class="ant-space ant-space-vertical"
-              >
-                <div
-                  class="ant-space-item"
-                >
-                  <button
-                    class="ant-btn ant-btn-primary ant-btn-lg"
-                    type="button"
-                  >
-                    <span>
-                      Withdraw
-                    </span>
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div
-        class="ant-card ant-card-bordered"
-      >
-        <div
-          class="ant-card-body"
-        >
-          <div
-            class="ant-row"
-          >
-            <div
-              class="ant-col"
-              style="display: flex; align-items: center; flex: 1 1 252px;"
-            >
-              <span
-                class="sc-AxhCb hTQwMP"
-              >
-                Cancel Staking
-              </span>
-            </div>
-            <div
-              class="ant-col"
-              style="flex: 1 1 252px;"
-            >
-              <div
-                class="ant-space ant-space-horizontal ant-space-align-center"
-              >
-                <div
-                  class="ant-space-item"
-                  style="margin-right: 16px;"
-                >
-                  <button
-                    class="ant-btn ant-btn-primary ant-btn-lg"
-                    type="button"
-                  >
-                    <span>
-                      Cancel
-                    </span>
-                  </button>
-                </div>
-                <div
-                  class="ant-space-item"
-                  style="margin-right: 16px;"
-                >
-                  <button
-                    class="ant-btn ant-btn-primary ant-btn-lg"
-                    disabled=""
-                    type="button"
-                  >
-                    <span>
-                      Withdraw
-                    </span>
-                  </button>
-                </div>
-                <div
-                  class="ant-space-item"
-                >
-                  <div />
-                </div>
-              </div>
-            </div>
-          </div>
+          </button>
         </div>
       </div>
     </div>

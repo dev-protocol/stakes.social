@@ -4,154 +4,122 @@ exports[`PossessionOutline Snapshot 1`] = `
 <body>
   <div>
     <div
-      class="ant-card ant-card-bordered"
+      class="sc-AxjAm wHYuT"
     >
       <div
-        class="ant-card-body"
+        class="ant-statistic"
       >
         <div
-          class="ant-row"
+          class="ant-statistic-title"
         >
-          <div
-            class="ant-col"
-            style="flex: 1 1 148px;"
+          Total Staking Amount
+        </div>
+        <div
+          class="ant-statistic-content"
+        >
+          <span
+            class="ant-statistic-content-value"
           >
-            <div
-              class="ant-statistic"
-              style="margin: 12px 0px;"
+            <span
+              class="ant-statistic-content-value-int"
             >
-              <div
-                class="ant-statistic-title"
-              >
-                Total Staking Amount
-              </div>
-              <div
-                class="ant-statistic-content"
-              >
-                <span
-                  class="ant-statistic-content-value"
-                >
-                  <span
-                    class="ant-statistic-content-value-int"
-                  >
-                    
-                    10,000
-                  </span>
-                  
-                </span>
-                <span
-                  class="ant-statistic-content-suffix"
-                >
-                  DEV
-                </span>
-              </div>
-            </div>
-          </div>
-          <div
-            class="ant-col"
-            style="flex: 1 1 148px;"
+              
+              10,000
+            </span>
+            
+          </span>
+          <span
+            class="ant-statistic-content-suffix"
           >
-            <div
-              class="ant-statistic"
-              style="margin: 12px 0px;"
-            >
-              <div
-                class="ant-statistic-title"
-              >
-                Your Staking Amount
-              </div>
-              <div
-                class="ant-statistic-content"
-              >
-                <span
-                  class="ant-statistic-content-value"
-                >
-                  <span
-                    class="ant-statistic-content-value-int"
-                  >
-                    
-                    5,000
-                  </span>
-                  
-                </span>
-                <span
-                  class="ant-statistic-content-suffix"
-                >
-                  DEV
-                </span>
-              </div>
-            </div>
-          </div>
-          <div
-            class="ant-col"
-            style="flex: 1 1 148px;"
+            DEV
+          </span>
+        </div>
+      </div>
+      <div
+        class="ant-statistic"
+      >
+        <div
+          class="ant-statistic-title"
+        >
+          Your Staking Amount
+        </div>
+        <div
+          class="ant-statistic-content"
+        >
+          <span
+            class="ant-statistic-content-value"
           >
-            <div
-              class="ant-statistic"
-              style="margin: 12px 0px;"
+            <span
+              class="ant-statistic-content-value-int"
             >
-              <div
-                class="ant-statistic-title"
-              >
-                Your Staking Share
-              </div>
-              <div
-                class="ant-statistic-content"
-              >
-                <span
-                  class="ant-statistic-content-value"
-                >
-                  <span
-                    class="ant-statistic-content-value-int"
-                  >
-                    
-                    50
-                  </span>
-                  
-                </span>
-                <span
-                  class="ant-statistic-content-suffix"
-                >
-                  %
-                </span>
-              </div>
-            </div>
-          </div>
-          <div
-            class="ant-col"
-            style="flex: 1 1 148px;"
+              
+              5,000
+            </span>
+            
+          </span>
+          <span
+            class="ant-statistic-content-suffix"
           >
-            <div
-              class="ant-statistic"
-              style="margin: 12px 0px;"
+            DEV
+          </span>
+        </div>
+      </div>
+      <div
+        class="ant-statistic"
+      >
+        <div
+          class="ant-statistic-title"
+        >
+          Your Staking Share
+        </div>
+        <div
+          class="ant-statistic-content"
+        >
+          <span
+            class="ant-statistic-content-value"
+          >
+            <span
+              class="ant-statistic-content-value-int"
             >
-              <div
-                class="ant-statistic-title"
-              >
-                totalRewards
-              </div>
-              <div
-                class="ant-statistic-content"
-              >
-                <span
-                  class="ant-statistic-content-value"
-                >
-                  <span
-                    class="ant-statistic-content-value-int"
-                  >
-                    
-                    10,000
-                  </span>
-                  
-                </span>
-                <span
-                  class="ant-statistic-content-suffix"
-                >
-                  DEV
-                </span>
-              </div>
-            </div>
-          </div>
+              
+              50
+            </span>
+            
+          </span>
+          <span
+            class="ant-statistic-content-suffix"
+          >
+            %
+          </span>
+        </div>
+      </div>
+      <div
+        class="ant-statistic"
+      >
+        <div
+          class="ant-statistic-title"
+        >
+          totalRewards
+        </div>
+        <div
+          class="ant-statistic-content"
+        >
+          <span
+            class="ant-statistic-content-value"
+          >
+            <span
+              class="ant-statistic-content-value-int"
+            >
+              
+              10,000
+            </span>
+            
+          </span>
+          <span
+            class="ant-statistic-content-suffix"
+          >
+            DEV
+          </span>
         </div>
       </div>
     </div>
