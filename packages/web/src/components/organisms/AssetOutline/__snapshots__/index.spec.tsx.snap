@@ -4,7 +4,7 @@ exports[`AssetOutline Snapshot 1`] = `
 <body>
   <div>
     <div
-      class="sc-AxirZ sc-AxiKw jnBnXj"
+      class="sc-AxirZ sc-AxiKw jJlZOn"
     >
       <div>
         <p>
@@ -12,7 +12,7 @@ exports[`AssetOutline Snapshot 1`] = `
         </p>
         <div
           class="ant-list ant-list-split ant-list-bordered"
-          style="max-height: 224px;"
+          style="background: rgb(255, 255, 255);"
         >
           <div
             class="ant-spin-nested-loading"
@@ -24,7 +24,7 @@ exports[`AssetOutline Snapshot 1`] = `
                 class="ant-list-items"
               >
                 <li
-                  class="ant-list-item sc-AxgMl jrRUnk"
+                  class="ant-list-item sc-AxgMl cQBOeR"
                 >
                   <span
                     style="overflow: auto;"
@@ -51,7 +51,7 @@ exports[`AssetOutline Snapshot 1`] = `
           Staking Ratio
         </p>
         <div
-          class="sc-AxirZ sc-AxhCb jTLTcw"
+          class="sc-AxirZ sc-AxhCb dzDAau"
         >
           <div
             class="sc-AxjAm kkhYpD"

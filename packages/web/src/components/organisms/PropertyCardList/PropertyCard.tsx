@@ -11,21 +11,30 @@ interface Props {
   propertyAddress: string
 }
 
+const Card = styled.div`
+  border: solid 1px #f0f0f0;
+  padding: 1.2em;
+  cursor: pointer;
+  background: #fff;
+`
 const ResponsiveRow = styled(Row)`
   @media (max-width: 768px) {
     margin-top: 1em;
   }
 `
-
 const ResponsiveCol = styled(Col)`
   @media (max-width: 768px) {
     width: 100%;
   }
 `
-
 const StatisticTitle = styled.span`
   color: rgba(0, 0, 0, 0.45);
   font-size: 14px;
+`
+const StatisticWithLineBreakedTitle = styled(Statistic)`
+  .ant-statistic-title {
+    word-break: break-all;
+  }
 `
 
 const AssetStrengthBase = ({ assetStrength }: { assetStrength: number }) => (
@@ -54,10 +63,10 @@ export const PropertyCard = ({ propertyAddress }: Props) => {
 
   return (
     <Link href={'/[propertyAddress]'} as={`/${propertyAddress}`}>
-      <div style={{ border: 'solid 1px #f0f0f0', padding: '1.2em', cursor: 'pointer' }}>
+      <Card>
         <Row>
           <Col sm={24} md={10}>
-            <Statistic title={propertyAddress} value={includeAssets} />
+            <StatisticWithLineBreakedTitle title={propertyAddress} value={includeAssets} />
           </Col>
           <ResponsiveCol sm={24} md={14}>
             <ResponsiveRow>
@@ -81,7 +90,7 @@ export const PropertyCard = ({ propertyAddress }: Props) => {
             </ResponsiveRow>
           </ResponsiveCol>
         </Row>
-      </div>
+      </Card>
     </Link>
   )
 }

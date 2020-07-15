@@ -1,0 +1,35 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`WithdrawForm Snapshot 1`] = `
+<body>
+  <div>
+    <div
+      class="sc-AxjAm StDqN"
+    >
+      <p>
+        Withdraw 
+        Creators
+         Reward
+      </p>
+      <div
+        class="sc-AxirZ djXUlT"
+      >
+        <div
+          class="sc-AxiKw dDKlW"
+        >
+          1000
+           DEV
+        </div>
+        <button
+          class="ant-btn ant-btn-primary ant-btn-lg"
+          type="button"
+        >
+          <span>
+            Withdraw
+          </span>
+        </button>
+      </div>
+    </div>
+  </div>
+</body>
+`;
