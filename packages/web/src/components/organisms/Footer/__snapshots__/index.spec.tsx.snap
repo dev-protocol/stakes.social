@@ -25,7 +25,7 @@ exports[`Footer Snapshot 1`] = `
             , see the 
           </span>
           <a
-            href="//github.com/dev-protocol/protocol/blob/master/docs/WHITEPAPER.md"
+            href="//github.com/dev-protocol/protocol/blob/main/docs/WHITEPAPER.md"
             rel="noreferrer noopener"
             style="text-decoration: underline;"
             target="_blank"

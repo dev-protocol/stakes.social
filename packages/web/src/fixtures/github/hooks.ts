@@ -14,7 +14,7 @@ export interface MarketInformation {
 }
 
 const getMarketInformation = (marketAddress: string): Promise<MarketInformation> =>
-  fetch(`https://raw.githubusercontent.com/dev-protocol/assets/master/market/${marketAddress}/info.json`).then(res =>
+  fetch(`https://raw.githubusercontent.com/dev-protocol/assets/main/market/${marketAddress}/info.json`).then(res =>
     res.json()
   )
 
