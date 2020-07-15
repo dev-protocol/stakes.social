@@ -10,7 +10,7 @@ import Link from 'next/link'
 const navs = [
   {
     key: 'properties',
-    label: 'Propertis',
+    label: 'Properties',
     pathname: '/'
   },
   {
