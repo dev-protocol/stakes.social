@@ -10,7 +10,7 @@
   },
   "command": {
     "version": {
-      "allowBranch": ["master", "release"]
+      "allowBranch": ["main", "release"]
     }
   },
   "npmClient": "yarn",
