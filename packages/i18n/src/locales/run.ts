@@ -1,5 +1,5 @@
 import { promises as fs } from 'fs'
-import { possessionOutlineTranslationEN, possessionOutlineTranslationJP } from './PossessionOutline'
+import { commonTranslationEN, commonTranslationJA } from './Common'
 
 const basePath = `${__dirname}/../../../web/public/locales`
 
@@ -7,8 +7,8 @@ export const makeLocaleJson = async (filePath: string, data: any) =>
   fs.writeFile(`${basePath}/${filePath}`, JSON.stringify(data))
 
 const run = async () => {
-  await makeLocaleJson('en/PossessionOutline.json', possessionOutlineTranslationEN)
-  await makeLocaleJson('jp/PossessionOutline.json', possessionOutlineTranslationJP)
+  await makeLocaleJson('en/Common.json', commonTranslationEN)
+  await makeLocaleJson('ja/Common.json', commonTranslationJA)
 }
 
 run()
