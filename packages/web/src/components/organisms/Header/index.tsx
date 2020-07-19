@@ -41,18 +41,19 @@ export const Header = ({ colorSchema = 'black' }: Props = {}) => {
   const handleClick = () => {
     connect()
   }
-
   return (
     <HeaderContainer>
       <Top>
         <Logo>
           <BrandLogo colorSchema={colorSchema} props={{ height: undefined }}></BrandLogo>
         </Logo>
-        <Button disabled={isConnected} onClick={handleClick}>
-          {isConnected && 'Wallet connected'}
-          {!isConnected && 'Connect to a wallet'}
-        </Button>
-        <div>{A({ href: '/policy' })(<Button style={{ width: '100%', marginTop: '16px' }}>Governance</Button>)}</div>
+        <div>
+          <Button disabled={isConnected} onClick={handleClick}>
+            {isConnected && 'Wallet connected'}
+            {!isConnected && 'Connect to a wallet'}
+          </Button>
+          <div>{A({ href: '/policy' })(<Button style={{ width: '100%', marginTop: '16px' }}>Governance</Button>)}</div>
+        </div>
       </Top>
       <Navigation></Navigation>
     </HeaderContainer>
