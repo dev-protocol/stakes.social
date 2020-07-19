@@ -167,7 +167,7 @@ export const holdersShare = async (amount: string, lockedups: string) => {
 export const createGetVotablePolicy = async () => {
   const client = newClient()
   if (client) {
-    client.policySet(await getContractAddress(client, 'policySet'))
+    return client.policySet(await getContractAddress(client, 'policySet'))
   }
   throw new Error(`No wallet`)
 }
