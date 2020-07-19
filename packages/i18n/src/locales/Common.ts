@@ -4,12 +4,12 @@ enum CommonTranslationKeys {
   totalRewards
 }
 
+type CommonTranslation = Record<keyof typeof CommonTranslationKeys, string>
+
 export const commonTranslationKeys = Object.keys(CommonTranslationKeys).reduce(
   (allKeys, key) => ({ ...allKeys, [key]: key }),
-  {}
+  {} as CommonTranslation
 )
-
-type CommonTranslation = Record<keyof typeof CommonTranslationKeys, string>
 
 export const commonTranslationEN: CommonTranslation = {
   totalRewards: 'Total Reward'
