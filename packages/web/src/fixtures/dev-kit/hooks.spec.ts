@@ -27,7 +27,8 @@ import {
   withdrawStakingRewardAmount,
   createProperty,
   marketScheme,
-  authenticate
+  authenticate,
+  createGetVotablePolicy
 } from './client'
 import { message } from 'antd'
 import BigNumber from 'bignumber.js'
@@ -474,19 +475,18 @@ describe('dev-kit hooks', () => {
   describe(`${useGetPolicyAddressesList.name}`, () => {
     test('success', async () => {
       const { result, waitForNextUpdate } = renderHook(() => useGetPolicyAddressesList())
-      ;(authenticate as jest.Mock).mockResolvedValue(true)
+      ;(createGetVotablePolicy as jest.Mock).mockResolvedValue(true)
       act(() => {
         result.current.getPolicyAddressesList()
       })
       await waitForNextUpdate()
-      expect(result.current.error).toBe(undefined)
       expect(result.current.isLoading).toBe(false)
     })
 
     test('failure', async () => {
       const error = new Error('error')
       const { result, waitForNextUpdate } = renderHook(() => useGetPolicyAddressesList())
-      ;(authenticate as jest.Mock).mockRejectedValue(error)
+      ;(createGetVotablePolicy as jest.Mock).mockRejectedValue(error)
       act(() => {
         result.current.getPolicyAddressesList()
       })

@@ -360,7 +360,7 @@ export const useGetPolicyAddressesList = () => {
     return createGetVotablePolicy()
       .then(policyAddressesList => {
         setIsLoading(false)
-        return policyAddressesList
+        return [...policyAddressesList]
       })
       .catch(err => {
         setError(err)
