@@ -34,29 +34,31 @@ exports[`AuthHeader Snapshot 1`] = `
             </svg>
           </a>
         </div>
-        <button
-          class="ant-btn"
-          type="button"
-        >
-          <span>
-            Connect to a wallet
-          </span>
-        </button>
         <div>
-          <a
-            class="sc-AxjAm bqVefi"
-            href="/policy"
+          <button
+            class="ant-btn"
+            type="button"
           >
-            <button
-              class="ant-btn"
-              style="width: 100%; margin-top: 16px;"
-              type="button"
+            <span>
+              Connect to a wallet
+            </span>
+          </button>
+          <div>
+            <a
+              class="sc-AxjAm bqVefi"
+              href="/policy"
             >
-              <span>
-                Governance
-              </span>
-            </button>
-          </a>
+              <button
+                class="ant-btn"
+                style="width: 100%; margin-top: 16px;"
+                type="button"
+              >
+                <span>
+                  Governance
+                </span>
+              </button>
+            </a>
+          </div>
         </div>
       </header>
       <ul
