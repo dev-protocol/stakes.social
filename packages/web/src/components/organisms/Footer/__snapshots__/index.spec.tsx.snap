@@ -3,108 +3,113 @@
 exports[`Footer Snapshot 1`] = `
 <body>
   <div>
-    <div
-      style="padding: 1rem; margin: 5rem auto; width: auto; max-width: 1048px; text-align: center; font-size: 18px; font-weight: bold; line-height: 24px;"
+    <footer
+      class="sc-AxirZ coIxHU"
     >
-      <div>
-        <span>
-          Stakes.social is powered by the 
-        </span>
-        <a
-          href="//devprtcl.com"
-          rel="noreferrer noopener"
-          style="text-decoration: underline;"
-          target="_blank"
-        >
-          Dev Protocol
-        </a>
-        <span>
-          , see the 
-        </span>
-        <a
-          href="//github.com/dev-protocol/protocol/blob/master/docs/WHITEPAPER.md"
-          rel="noreferrer noopener"
-          style="text-decoration: underline;"
-          target="_blank"
-        >
-          whitepaper
-        </a>
-        <span>
-           on 
-        </span>
-        <a
-          href="//github.com/dev-protocol/protocol"
-          rel="noreferrer noopener"
-          style="text-decoration: underline;"
-          target="_blank"
-        >
-          GitHub
-        </a>
-        .
-        <br />
-        <span>
-          Enjoy following the Dev Protocol community on 
-        </span>
-        <a
-          href="//discord.gg/VwJp4KM"
-          rel="noreferrer noopener"
-          style="text-decoration: underline;"
-          target="_blank"
-        >
-          Discord
-        </a>
-        <span>
-          , 
-        </span>
-        <a
-          href="//t.me/devprtcl"
-          rel="noreferrer noopener"
-          style="text-decoration: underline;"
-          target="_blank"
-        >
-          Telegram
-        </a>
-        <span>
-          , 
-        </span>
-        <a
-          href="//medium.com/devtoken"
-          rel="noreferrer noopener"
-          style="text-decoration: underline;"
-          target="_blank"
-        >
-          Medium
-        </a>
-        <span>
-          , 
-        </span>
-        <a
-          href="//spectrum.chat/devtoken"
-          rel="noreferrer noopener"
-          style="text-decoration: underline;"
-          target="_blank"
-        >
-          Spectrum
-        </a>
-        <span>
-          , and 
-        </span>
-        <a
-          href="//twitter.com/devprtcl"
-          rel="noreferrer noopener"
-          style="text-decoration: underline;"
-          target="_blank"
-        >
-          Twitter
-        </a>
-        !
+      <div
+        class="sc-AxjAm jsbXje"
+      >
+        <p>
+          <span>
+            Stakes.social is powered by the 
+          </span>
+          <a
+            href="//devprtcl.com"
+            rel="noreferrer noopener"
+            style="text-decoration: underline;"
+            target="_blank"
+          >
+            Dev Protocol
+          </a>
+          <span>
+            , see the 
+          </span>
+          <a
+            href="//github.com/dev-protocol/protocol/blob/main/docs/WHITEPAPER.md"
+            rel="noreferrer noopener"
+            style="text-decoration: underline;"
+            target="_blank"
+          >
+            whitepaper
+          </a>
+          <span>
+             on 
+          </span>
+          <a
+            href="//github.com/dev-protocol/protocol"
+            rel="noreferrer noopener"
+            style="text-decoration: underline;"
+            target="_blank"
+          >
+            GitHub
+          </a>
+          .
+        </p>
+        <p>
+          <span>
+            Enjoy following the Dev Protocol community on 
+          </span>
+          <a
+            href="//discord.gg/VwJp4KM"
+            rel="noreferrer noopener"
+            style="text-decoration: underline;"
+            target="_blank"
+          >
+            Discord
+          </a>
+          <span>
+            , 
+          </span>
+          <a
+            href="//t.me/devprtcl"
+            rel="noreferrer noopener"
+            style="text-decoration: underline;"
+            target="_blank"
+          >
+            Telegram
+          </a>
+          <span>
+            , 
+          </span>
+          <a
+            href="//medium.com/devtoken"
+            rel="noreferrer noopener"
+            style="text-decoration: underline;"
+            target="_blank"
+          >
+            Medium
+          </a>
+          <span>
+            , 
+          </span>
+          <a
+            href="//spectrum.chat/devtoken"
+            rel="noreferrer noopener"
+            style="text-decoration: underline;"
+            target="_blank"
+          >
+            Spectrum
+          </a>
+          <span>
+            , and 
+          </span>
+          <a
+            href="//twitter.com/devprtcl"
+            rel="noreferrer noopener"
+            style="text-decoration: underline;"
+            target="_blank"
+          >
+            Twitter
+          </a>
+          !
+        </p>
       </div>
       <div
-        style="margin: 66px 0px;"
+        class="sc-AxjAm jsbXje"
       >
         <svg
           viewBox="0 0 408 146"
-          width="120"
+          width="84"
         >
           <defs>
             <lineargradient
@@ -149,7 +154,25 @@ exports[`Footer Snapshot 1`] = `
           </g>
         </svg>
       </div>
-    </div>
+      <div
+        class="sc-AxjAm jsbXje"
+      >
+        <small>
+          All emojis designed by 
+          <a
+            href="//openmoji.org/library/"
+          >
+            OpenMoji
+          </a>
+           – the open-source emoji and icon project. License: 
+          <a
+            href="//creativecommons.org/licenses/by-sa/4.0/"
+          >
+            CC BY-SA 4.0
+          </a>
+        </small>
+      </div>
+    </footer>
   </div>
 </body>
 `;

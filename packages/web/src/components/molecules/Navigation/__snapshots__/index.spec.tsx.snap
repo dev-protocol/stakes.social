@@ -1,0 +1,90 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Navigation Snapshot 1`] = `
+<body>
+  <div>
+    <ul
+      class="ant-menu sc-AxjAm jAJNAM ant-menu-light ant-menu-root ant-menu-horizontal"
+      role="menu"
+    >
+      <li
+        class="ant-menu-submenu ant-menu-submenu-horizontal ant-menu-overflowed-submenu"
+        role="menuitem"
+        style="display: none;"
+      >
+        <div
+          aria-expanded="false"
+          aria-haspopup="true"
+          class="ant-menu-submenu-title"
+          role="button"
+        >
+          <span>
+            ···
+          </span>
+          <i
+            class="ant-menu-submenu-arrow"
+          />
+        </div>
+      </li>
+      <li
+        class="ant-menu-item ant-menu-item-only-child ant-menu-item-selected"
+        role="menuitem"
+      >
+        <a
+          href="/"
+        >
+          Properties
+        </a>
+      </li>
+      <li
+        class="ant-menu-submenu ant-menu-submenu-horizontal ant-menu-overflowed-submenu"
+        role="menuitem"
+        style="display: none;"
+      >
+        <div
+          aria-expanded="false"
+          aria-haspopup="true"
+          class="ant-menu-submenu-title"
+          role="button"
+        >
+          <span>
+            ···
+          </span>
+          <i
+            class="ant-menu-submenu-arrow"
+          />
+        </div>
+      </li>
+      <li
+        class="ant-menu-item ant-menu-item-only-child"
+        role="menuitem"
+      >
+        <a
+          href="/auth"
+        >
+          Create
+        </a>
+      </li>
+      <li
+        class="ant-menu-submenu ant-menu-submenu-horizontal ant-menu-overflowed-submenu"
+        role="menuitem"
+        style="visibility: hidden; position: absolute; display: none;"
+      >
+        <div
+          aria-expanded="false"
+          aria-haspopup="true"
+          class="ant-menu-submenu-title"
+          role="button"
+        >
+          <span>
+            ···
+          </span>
+          <i
+            class="ant-menu-submenu-arrow"
+          />
+        </div>
+      </li>
+    </ul>
+  </div>
+</body>
+`;

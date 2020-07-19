@@ -141,7 +141,7 @@ const HowItWorks = () => {
             <h3>Learn more</h3>
             <div>
               <p>
-                Read the <a href="//github.com/dev-protocol/protocol/blob/master/docs/WHITEPAPER.md">whitepaper</a>.
+                Read the <a href="//github.com/dev-protocol/protocol/blob/main/docs/WHITEPAPER.md">whitepaper</a>.
               </p>
             </div>
           </Section>
@@ -289,7 +289,7 @@ const HowItWorks = () => {
             <p>
               For more information on DEV tokens, please check the <a href="//devprtcl.com">Dev Protocol website</a> and{' '}
               <a
-                href="//github.com/dev-protocol/protocol/blob/master/docs/WHITEPAPER.md"
+                href="//github.com/dev-protocol/protocol/blob/main/docs/WHITEPAPER.md"
                 target="_blank"
                 rel="noreferrer"
               >

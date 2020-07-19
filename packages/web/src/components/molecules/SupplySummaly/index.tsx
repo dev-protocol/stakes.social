@@ -8,12 +8,7 @@ interface Props {
   annualSupplyGrowthRatio?: BigNumber
 }
 
-const Wrap = styled.div`
-  padding: 0.1rem 0.3rem;
-  background: #ffffff;
-  border-radius: 5px;
-  color: black;
-`
+const Wrap = styled.div``
 const Badge = styled.div`
   display: grid;
   grid-auto-flow: column;
@@ -22,7 +17,6 @@ const Badge = styled.div`
   grid-gap: 0.5rem;
 `
 const Statistics = styled.span`
-  font-family: monospace;
   font-weight: bold;
 `
 const StatisticsInt = styled.span`

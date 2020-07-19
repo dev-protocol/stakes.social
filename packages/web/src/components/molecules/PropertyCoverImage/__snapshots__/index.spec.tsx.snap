@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PropertyCoverImage Snapshot 1`] = `
+<body>
+  <div>
+    <div
+      class="sc-AxjAm gvnZMS"
+      style="background-size: cover;"
+    />
+  </div>
+</body>
+`;
