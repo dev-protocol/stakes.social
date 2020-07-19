@@ -14,7 +14,8 @@ import {
   useMarketScheme,
   useAuthenticate,
   useAPY,
-  useAnnualSupplyGrowthRatio
+  useAnnualSupplyGrowthRatio,
+  useGetPolicyAddressesList
 } from './hooks'
 import useSWR from 'swr'
 import { toNaturalNumber, toAmountNumber } from 'src/fixtures/utility'
@@ -467,6 +468,31 @@ describe('dev-kit hooks', () => {
       const { result } = renderHook(() => useAnnualSupplyGrowthRatio())
       expect(result.current.error).toBe(error)
       expect(result.current.error?.message).toBe(errorMessage)
+    })
+  })
+
+  describe(`${useGetPolicyAddressesList.name}`, () => {
+    test('success', async () => {
+      const { result, waitForNextUpdate } = renderHook(() => useGetPolicyAddressesList())
+      ;(authenticate as jest.Mock).mockResolvedValue(true)
+      act(() => {
+        result.current.getPolicyAddressesList()
+      })
+      await waitForNextUpdate()
+      expect(result.current.error).toBe(undefined)
+      expect(result.current.isLoading).toBe(false)
+    })
+
+    test('failure', async () => {
+      const error = new Error('error')
+      const { result, waitForNextUpdate } = renderHook(() => useGetPolicyAddressesList())
+      ;(authenticate as jest.Mock).mockRejectedValue(error)
+      act(() => {
+        result.current.getPolicyAddressesList()
+      })
+      await waitForNextUpdate()
+      expect(result.current.error).toBe(error)
+      expect(result.current.isLoading).toBe(false)
     })
   })
 })
