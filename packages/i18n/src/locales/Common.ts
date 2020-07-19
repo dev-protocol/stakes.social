@@ -1,16 +1,15 @@
 export const COMMON_NAMESPACE = 'Common'
 
-const COMMON_TOTAL_REWARDS = 'totalRewards'
-
-type CommonTranslation = {
-  [COMMON_TOTAL_REWARDS]: string
+enum CommonTranslationKeys {
+  totalRewards
 }
 
-export const commonTranslationKeys: {
-  [K in keyof CommonTranslation]: keyof CommonTranslation
-} = {
-  totalRewards: COMMON_TOTAL_REWARDS
-}
+export const commonTranslationKeys = Object.keys(CommonTranslationKeys).reduce(
+  (allKeys, key) => ({ ...allKeys, [key]: key }),
+  {}
+)
+
+type CommonTranslation = Record<keyof typeof CommonTranslationKeys, string>
 
 export const commonTranslationEN: CommonTranslation = {
   totalRewards: 'Total Reward'
