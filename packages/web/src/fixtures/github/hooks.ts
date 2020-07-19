@@ -25,7 +25,7 @@ const getMarketInformation = (marketAddress: string): Promise<MarketInformation>
   )
 
 const getPolicyInformation = (policyAddress: string): Promise<PolicyInformation> =>
-  fetch(`https://raw.githubusercontent.com/dev-protocol/assets/master/policy/${policyAddress}/info.json`).then(res =>
+  fetch(`https://raw.githubusercontent.com/dev-protocol/assets/main/policy/${policyAddress}/info.json`).then(res =>
     res.json()
   )
 
