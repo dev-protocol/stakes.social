@@ -67,9 +67,9 @@ export const PoliciesList = () => {
           />
         </ListWrap>
       ) : isLoading ? (
-        <NotFound />
-      ) : (
         <Spin size="large" style={{ display: 'block', width: 'auto', padding: '100px' }} />
+      ) : (
+        <NotFound />
       )}
     </Wrap>
   )
