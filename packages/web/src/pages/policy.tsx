@@ -17,7 +17,7 @@ const Policy = (_: Props) => {
       <Header />
       <Headline height={300}>
         <H2>Policy Proposals</H2>
-        <div>Select one asset market to authenticate.</div>
+        <div>Vote on policy proposals to improve the protocol.</div>
       </Headline>
       <Container>
         <PoliciesList />
