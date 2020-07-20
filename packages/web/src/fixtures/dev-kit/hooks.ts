@@ -16,7 +16,8 @@ import {
   getTotalStakingAmountOnProtocol,
   calculateMaxRewardsPerBlock,
   totalSupply,
-  holdersShare
+  holdersShare,
+  createGetVotablePolicy
 } from './client'
 import { SWRCachePath } from './cache-path'
 import { UnwrapFunc, toNaturalNumber, toAmountNumber } from 'src/fixtures/utility'
@@ -347,4 +348,25 @@ export const useAnnualSupplyGrowthRatio = () => {
     maxRewards && totalSupplyValue ? new BigNumber(maxRewards).times(year).div(totalSupplyValue).times(100) : undefined
 
   return { annualSupplyGrowthRatio, error: maxRewardsError || totalSupplyError }
+}
+
+export const useGetPolicyAddressesList = () => {
+  const key = 'useGetPolicyList'
+  const [isLoading, setIsLoading] = useState<boolean>(false)
+  const [error, setError] = useState<Error>()
+  const callback = useCallback(async () => {
+    setIsLoading(true)
+    setError(undefined)
+    return createGetVotablePolicy()
+      .then(policyAddressesList => {
+        setIsLoading(false)
+        return [...policyAddressesList]
+      })
+      .catch(err => {
+        setError(err)
+        message.error({ content: err.message, key })
+        setIsLoading(false)
+      })
+  }, [])
+  return { getPolicyAddressesList: callback, isLoading, error }
 }

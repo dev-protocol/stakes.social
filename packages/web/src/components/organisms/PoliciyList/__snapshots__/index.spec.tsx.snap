@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PoliciesList Snapshot 1`] = `
+<body>
+  <div>
+    <div
+      class="sc-AxirZ eUnHfC"
+    >
+      <div
+        class="ant-spin ant-spin-lg ant-spin-spinning"
+        style="display: block; width: auto; padding: 100px;"
+      >
+        <span
+          class="ant-spin-dot ant-spin-dot-spin"
+        >
+          <i
+            class="ant-spin-dot-item"
+          />
+          <i
+            class="ant-spin-dot-item"
+          />
+          <i
+            class="ant-spin-dot-item"
+          />
+          <i
+            class="ant-spin-dot-item"
+          />
+        </span>
+      </div>
+    </div>
+  </div>
+</body>
+`;
