@@ -52,8 +52,8 @@
     "react-dom": "16.13.1",
     "styled-components": "5.1.1",
     "swr": "0.2.3",
-    "web3": "1.2.10",
-    "web3-core": "1.2.9"
+    "web3": "1.2.11",
+    "web3-core": "1.2.11"
   },
   "devDependencies": {
     "@babel/core": "7.10.4",
