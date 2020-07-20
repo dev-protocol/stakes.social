@@ -5,6 +5,7 @@ import { H2 } from 'src/components/atoms/Typography'
 import { Headline } from 'src/components/atoms/Headline'
 import { PoliciesList } from 'src/components/organisms/PoliciyList'
 import { Header } from 'src/components/organisms/Header'
+import { Container } from 'src/components/atoms/Container'
 
 type InitialProps = {}
 type Props = {} & InitialProps
@@ -18,9 +19,9 @@ const Policy = (_: Props) => {
         <H2>Policy Proposals</H2>
         <div>Select one asset market to authenticate.</div>
       </Headline>
-      <div style={{ padding: '1rem', maxWidth: '1048px', marginRight: 'auto', marginLeft: 'auto' }}>
+      <Container>
         <PoliciesList />
-      </div>
+      </Container>
       <Footer />
     </>
   )
