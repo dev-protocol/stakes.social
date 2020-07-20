@@ -17,6 +17,11 @@ const navs = [
     key: 'create',
     label: 'Create',
     pathname: '/auth'
+  },
+  {
+    key: 'account',
+    label: 'Account',
+    pathname: '/settings/profile'
   }
 ]
 const NavMenu = styled(Menu)`
