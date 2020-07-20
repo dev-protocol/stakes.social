@@ -169,7 +169,11 @@ export const createGetVotablePolicy = async () => {
   const client = newClient()
   if (client) {
     const policySet = client.policySet(await getContractAddress(client, 'policySet'))
-    return devClient.createGetVotablePolicy(policySet)()
+    const [policies, currentPolicy] = await Promise.all([
+      devClient.createGetVotablePolicy(policySet)(),
+      getContractAddress(client, 'policy')
+    ])
+    return policies.filter(p => p !== currentPolicy)
   }
   throw new Error(`No wallet`)
 }
