@@ -1,6 +1,7 @@
 import { contractFactory } from '@devprtcl/dev-kit-js'
 import { getAccountAddress } from 'src/fixtures/wallet/utility'
 import { getContractAddress } from './get-contract-address'
+import { client as devClient } from '@devprtcl/dev-kit-js'
 
 const newClient = () => {
   const { ethereum } = window
@@ -162,4 +163,17 @@ export const holdersShare = async (amount: string, lockedups: string) => {
     return client.policy(await getContractAddress(client, 'policy')).holdersShare(amount, lockedups)
   }
   return undefined
+}
+
+export const createGetVotablePolicy = async () => {
+  const client = newClient()
+  if (client) {
+    const policySet = client.policySet(await getContractAddress(client, 'policySet'))
+    const [policies, currentPolicy] = await Promise.all([
+      devClient.createGetVotablePolicy(policySet)(),
+      getContractAddress(client, 'policy')
+    ])
+    return policies.filter(p => p !== currentPolicy)
+  }
+  throw new Error(`No wallet`)
 }

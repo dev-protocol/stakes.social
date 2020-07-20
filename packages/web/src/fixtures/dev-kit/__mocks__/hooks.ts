@@ -62,3 +62,7 @@ export const useAPY = () => {
 export const useAnnualSupplyGrowthRatio = () => {
   return { apy: new BigNumber(0.676) }
 }
+
+export const useGetPolicyAddressesList = () => {
+  return { getPolicyAddressesList: async () => {} }
+}
