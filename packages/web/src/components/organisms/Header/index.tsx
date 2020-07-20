@@ -3,7 +3,6 @@ import { Button } from 'antd'
 import { BrandLogo } from 'src/components/atoms/BrandLogo'
 import { useConnectWallet } from 'src/fixtures/wallet/hooks'
 import styled from 'styled-components'
-import { A } from 'src/components/atoms/A'
 import { Navigation } from 'src/components/molecules/Navigation'
 
 interface Props {
@@ -52,7 +51,6 @@ export const Header = ({ colorSchema = 'black' }: Props = {}) => {
             {isConnected && 'Wallet connected'}
             {!isConnected && 'Connect to a wallet'}
           </Button>
-          <div>{A({ href: '/policy' })(<Button style={{ width: '100%', marginTop: '16px' }}>Governance</Button>)}</div>
         </div>
       </Top>
       <Navigation></Navigation>

@@ -43,22 +43,6 @@ exports[`MainHeader Snapshot 1`] = `
               Connect to a wallet
             </span>
           </button>
-          <div>
-            <a
-              class="sc-AxjAm bqVefi"
-              href="/policy"
-            >
-              <button
-                class="ant-btn"
-                style="width: 100%; margin-top: 16px;"
-                type="button"
-              >
-                <span>
-                  Governance
-                </span>
-              </button>
-            </a>
-          </div>
         </div>
       </header>
       <ul
@@ -121,6 +105,35 @@ exports[`MainHeader Snapshot 1`] = `
             href="/auth"
           >
             Create
+          </a>
+        </li>
+        <li
+          class="ant-menu-submenu ant-menu-submenu-horizontal ant-menu-overflowed-submenu"
+          role="menuitem"
+          style="display: none;"
+        >
+          <div
+            aria-expanded="false"
+            aria-haspopup="true"
+            class="ant-menu-submenu-title"
+            role="button"
+          >
+            <span>
+              ···
+            </span>
+            <i
+              class="ant-menu-submenu-arrow"
+            />
+          </div>
+        </li>
+        <li
+          class="ant-menu-item ant-menu-item-only-child"
+          role="menuitem"
+        >
+          <a
+            href="/policy"
+          >
+            Governance
           </a>
         </li>
         <li
