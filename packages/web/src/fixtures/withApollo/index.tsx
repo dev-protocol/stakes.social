@@ -24,8 +24,7 @@ export default withApollo<NormalizedCacheObject>(
     const withHttp = createHttpLink({
       uri: 'https://api.devprtcl.com/v1/graphql', // Server URL (must be absolute),
       ...(!isBrowser && { fetch }),
-      headers,
-      credentials: 'same-origin'
+      headers
     })
 
     return new ApolloClient({
