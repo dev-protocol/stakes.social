@@ -34,14 +34,16 @@ exports[`Header Snapshot 1`] = `
             </svg>
           </a>
         </div>
-        <button
-          class="ant-btn"
-          type="button"
-        >
-          <span>
-            Connect to a wallet
-          </span>
-        </button>
+        <div>
+          <button
+            class="ant-btn"
+            type="button"
+          >
+            <span>
+              Connect to a wallet
+            </span>
+          </button>
+        </div>
       </header>
       <ul
         class="ant-menu sc-AxirZ kAUAIX ant-menu-light ant-menu-root ant-menu-horizontal"
@@ -73,7 +75,7 @@ exports[`Header Snapshot 1`] = `
           <a
             href="/"
           >
-            Propertis
+            Properties
           </a>
         </li>
         <li
@@ -103,6 +105,35 @@ exports[`Header Snapshot 1`] = `
             href="/auth"
           >
             Create
+          </a>
+        </li>
+        <li
+          class="ant-menu-submenu ant-menu-submenu-horizontal ant-menu-overflowed-submenu"
+          role="menuitem"
+          style="display: none;"
+        >
+          <div
+            aria-expanded="false"
+            aria-haspopup="true"
+            class="ant-menu-submenu-title"
+            role="button"
+          >
+            <span>
+              ···
+            </span>
+            <i
+              class="ant-menu-submenu-arrow"
+            />
+          </div>
+        </li>
+        <li
+          class="ant-menu-item ant-menu-item-only-child"
+          role="menuitem"
+        >
+          <a
+            href="/policy"
+          >
+            Governance
           </a>
         </li>
         <li

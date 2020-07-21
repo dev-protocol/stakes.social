@@ -10,13 +10,18 @@ import Link from 'next/link'
 const navs = [
   {
     key: 'properties',
-    label: 'Propertis',
+    label: 'Properties',
     pathname: '/'
   },
   {
     key: 'create',
     label: 'Create',
     pathname: '/auth'
+  },
+  {
+    key: 'governance',
+    label: 'Governance',
+    pathname: '/policy'
   }
 ]
 const NavMenu = styled(Menu)`
