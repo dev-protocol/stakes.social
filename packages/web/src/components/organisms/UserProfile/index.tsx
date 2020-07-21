@@ -2,7 +2,7 @@ import React, { useCallback, useState } from 'react'
 import { Button, Form, Input, Col, Row, Space } from 'antd'
 import { getAccountAddress } from 'src/fixtures/wallet/utility'
 import { useEffectAsync } from 'src/fixtures/utility'
-import { getUser, postUser } from 'src/fixtures/dev-for-apps/utility'
+import { useGetUser, usePostUser } from 'src/fixtures/dev-for-apps/hooks'
 import { sign } from 'src/fixtures/wallet/utility'
 import styled from 'styled-components'
 
@@ -30,47 +30,66 @@ const formLayout = {
   wrapperCol: { span: 22 }
 }
 
+const DisplayName = ({ address, displayName }: { address: string; displayName: string }) => {
+  const { data } = useGetUser(address)
+
+  return (
+    <Section>
+      <Title>Display name</Title>
+      <Text>{displayName || data?.displayName || '(Not set)'}</Text>
+    </Section>
+  )
+}
+
 export const UserProfile = (_: Props) => {
   const [author, setAuthor] = useState<string>('')
   const [isComplete, setIsComplete] = useState<boolean>(true)
-  const [displayName, setDisplayName] = useState<string>('(Not set)')
-  useEffectAsync(async () => {
-    const accountAddress = (await getAccountAddress()) || ''
-    setAuthor(accountAddress)
-    if (accountAddress !== '') {
-      const data = await getUser(accountAddress)
-      setDisplayName(data.displayName)
-    }
-  }, [])
+  const [displayName, setDisplayName] = useState<string>('')
+  const { postUserHandler: postUser } = usePostUser()
   const handleSubmitDisplayName = useCallback(
     async (name: string) => {
       setIsComplete(false)
       const message = `submit display name: ${name}`
       const signature = (await sign(message)) || ''
-      const data = await postUser(name, message, signature, author)
-      setDisplayName(data?.displayName)
+      await postUser(name, message, signature, author).then((data: any) => {
+        setDisplayName(data?.displayName)
+      })
       setIsComplete(true)
     },
-    [author]
+    [author, postUser]
   )
+  useEffectAsync(async () => {
+    const accountAddress = (await getAccountAddress()) || ''
+    setAuthor(accountAddress)
+  })
 
   return (
     <Container>
       <Section>
         <Title>Your Address</Title>
-        <Text>{author}</Text>
+        <Text>{author || '-'}</Text>
       </Section>
 
-      <Section>
-        <Title>Display name</Title>
-        <Text>{displayName}</Text>
-      </Section>
+      <DisplayName address={author} displayName={displayName} />
 
       <Section>
         <Form {...formLayout} onFinish={({ name }) => handleSubmitDisplayName(name)}>
           <Row>
             <Col flex="1 1 252px">
-              <Form.Item name="name" rules={[{ required: true, message: 'Please input display name.' }]}>
+              <Form.Item
+                name="name"
+                rules={[
+                  { required: true, message: 'Please input display name.' },
+                  () => ({
+                    validator() {
+                      if (author !== '') {
+                        return Promise.resolve()
+                      }
+                      return Promise.reject('Please connect to a wallet')
+                    }
+                  })
+                ]}
+              >
                 <Input placeholder="Enter the new display name" />
               </Form.Item>
             </Col>
