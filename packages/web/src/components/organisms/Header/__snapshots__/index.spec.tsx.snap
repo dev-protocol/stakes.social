@@ -139,6 +139,35 @@ exports[`Header Snapshot 1`] = `
         <li
           class="ant-menu-submenu ant-menu-submenu-horizontal ant-menu-overflowed-submenu"
           role="menuitem"
+          style="display: none;"
+        >
+          <div
+            aria-expanded="false"
+            aria-haspopup="true"
+            class="ant-menu-submenu-title"
+            role="button"
+          >
+            <span>
+              ···
+            </span>
+            <i
+              class="ant-menu-submenu-arrow"
+            />
+          </div>
+        </li>
+        <li
+          class="ant-menu-item ant-menu-item-only-child"
+          role="menuitem"
+        >
+          <a
+            href="/settings/profile"
+          >
+            Account
+          </a>
+        </li>
+        <li
+          class="ant-menu-submenu ant-menu-submenu-horizontal ant-menu-overflowed-submenu"
+          role="menuitem"
           style="visibility: hidden; position: absolute; display: none;"
         >
           <div
