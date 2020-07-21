@@ -5,9 +5,7 @@ export interface UserInformation {
 }
 
 export const getUser = (walletAddress: string): Promise<UserInformation> =>
-  fetch(`${BaseUrl}/mainnet/user/${walletAddress}`, {
-    mode: 'cors'
-  })
+  fetch(`${BaseUrl}/mainnet/user/${walletAddress}`)
     .then(res => res.json())
     .catch(() => '')
 
