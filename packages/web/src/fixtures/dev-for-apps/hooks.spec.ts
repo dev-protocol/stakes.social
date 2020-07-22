@@ -16,6 +16,16 @@ describe('dev-for-apps hooks', () => {
       const { result } = renderHook(() => useGetUser('0x01234567890'))
       expect(result.current.data).toBe(data)
     })
+
+    test('failure get profile', async () => {
+      const data = undefined
+      const errorMessage = 'error'
+      const error = new Error(errorMessage)
+      ;(useSWR as jest.Mock).mockImplementation(() => ({ data, error }))
+      const { result } = renderHook(() => useGetUser('0x01234567890'))
+      expect(result.current.error).toBe(error)
+      expect(result.current.error?.message).toBe(errorMessage)
+    })
   })
 
   describe('usePostUser', () => {
@@ -30,6 +40,21 @@ describe('dev-for-apps hooks', () => {
       })
       await waitForNextUpdate()
       expect(result.current.error).toBe(undefined)
+      expect(result.current.isLoading).toBe(false)
+    })
+
+    test('failure post profile', async () => {
+      const error = new Error('error')
+      const name = 'name'
+      const signature = 'signature'
+      const signMessage = 'message'
+      const { result, waitForNextUpdate } = renderHook(() => usePostUser())
+      ;(postUser as jest.Mock).mockRejectedValue(error)
+      act(() => {
+        result.current.postUserHandler(name, signature, signMessage, '0x01234567890')
+      })
+      await waitForNextUpdate()
+      expect(result.current.error).toBe(error)
       expect(result.current.isLoading).toBe(false)
     })
   })
