@@ -22,9 +22,11 @@ export const usePostUser = () => {
   const postUserHandler = useCallback(
     async (name: string, signMessage: string, signature: string, walletAddress: string) => {
       setIsLoading(true)
+      message.loading({ content: 'update display name...', duration: 0, key })
       setError(undefined)
       return postUser(name, signMessage, signature, walletAddress)
         .then(result => {
+          message.success({ content: 'success update display name', key })
           setIsLoading(false)
           return result
         })
