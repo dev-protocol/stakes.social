@@ -34,7 +34,7 @@ export const usePostUser = () => {
           setError(err)
           message.error({ content: err.message, key })
           setIsLoading(false)
-          return {}
+          return { error: err }
         })
     },
     []
