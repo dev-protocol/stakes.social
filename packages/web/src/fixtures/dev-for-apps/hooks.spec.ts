@@ -30,31 +30,25 @@ describe('dev-for-apps hooks', () => {
 
   describe('usePostUser', () => {
     test('success post profile', async () => {
-      const name = 'name'
-      const signature = 'signature'
-      const signMessage = 'message'
-      const { result, waitForNextUpdate } = renderHook(() => usePostUser())
+      const data = { displayName: 'Posted Your Dispaly Name' }
+      const error = undefined
+      ;(useSWR as jest.Mock).mockImplementation(() => ({ data, error, mutate: () => {} }))
       ;(postUser as jest.Mock).mockResolvedValue({ displayName: 'name' })
-      act(() => {
-        result.current.postUserHandler(name, signature, signMessage, '0x01234567890')
-      })
-      await waitForNextUpdate()
-      expect(result.current.error).toBe(undefined)
-      expect(result.current.isLoading).toBe(false)
+      const { result } = renderHook(() => usePostUser('0x01234567890'))
+      expect(result.current.data).toBe(data)
     })
 
     test('failure post profile', async () => {
-      const error = new Error('error')
-      const name = 'name'
-      const signature = 'signature'
-      const signMessage = 'message'
-      const { result, waitForNextUpdate } = renderHook(() => usePostUser())
-      ;(postUser as jest.Mock).mockRejectedValue(error)
+      const data = undefined
+      const errorMessage = 'error'
+      const error = new Error(errorMessage)
+      ;(useSWR as jest.Mock).mockImplementation(() => ({ data, error, mutate: () => {} }))
+      ;(postUser as jest.Mock).mockResolvedValue({ displayName: 'name' })
+      const { result, waitForNextUpdate } = renderHook(() => usePostUser('0x01234567890'))
       act(() => {
-        result.current.postUserHandler(name, signature, signMessage, '0x01234567890')
+        result.current.postUserHandler(name)
       })
       await waitForNextUpdate()
-      expect(result.current.error).toBe(error)
       expect(result.current.isLoading).toBe(false)
     })
   })
