@@ -1,5 +1,5 @@
 import { cachePath } from './catch-path'
-import { connectWallet, getBlockNumber } from './utility'
+import { connectWallet, getAccountAddress, getBlockNumber } from './utility'
 import { UnwrapFunc } from 'src/fixtures/utility'
 import useSWR from 'swr'
 
@@ -11,6 +11,14 @@ export const useConnectWallet = () => {
   }
 
   return { isConnected: data, connect }
+}
+
+export const useGetAccountAddress = () => {
+  const { data, error } = useSWR<UnwrapFunc<typeof getAccountAddress>, Error>(
+    cachePath.getAccountAddress(),
+    getAccountAddress
+  )
+  return { accountAddress: data, error }
 }
 
 export const useBlockNumberStream = (shouldFetch: boolean) => {
