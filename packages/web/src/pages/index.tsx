@@ -21,6 +21,13 @@ const Index = (_: Props) => {
     }
     return 1
   }, [router])
+  const word = useMemo(() => {
+    const { word: wordStr } = router.query
+    if (typeof wordStr === 'string') {
+      return wordStr
+    }
+    return ''
+  }, [router])
 
   return (
     <>
@@ -28,7 +35,7 @@ const Index = (_: Props) => {
       <MainHeader />
       <div style={{ padding: '1rem', maxWidth: '1048px', marginRight: 'auto', marginLeft: 'auto' }}>
         <SupplySummaly apy={apy} creators={creators} annualSupplyGrowthRatio={annualSupplyGrowthRatio}></SupplySummaly>
-        <PropertyCardList currentPage={page} />
+        <PropertyCardList currentPage={page} searchWord={word} />
       </div>
       <Footer />
     </>
