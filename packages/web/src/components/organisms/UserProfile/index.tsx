@@ -4,17 +4,11 @@ import { getAccountAddress } from 'src/fixtures/wallet/utility'
 import { useEffectAsync } from 'src/fixtures/utility'
 import { useGetUser, usePostUser } from 'src/fixtures/dev-for-apps/hooks'
 import { sign } from 'src/fixtures/wallet/utility'
+import { Container } from 'src/components/atoms/Container'
 import styled from 'styled-components'
 
 interface Props {}
 
-const Container = styled.div`
-  display: grid;
-  padding: 1rem;
-  max-width: 1120px;
-  margin: auto;
-  grid-gap: 1rem;
-`
 const Section = styled.section`
   display: grid;
   padding: 1rem;
