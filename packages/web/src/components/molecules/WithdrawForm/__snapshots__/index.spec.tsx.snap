@@ -4,7 +4,7 @@ exports[`WithdrawForm Snapshot 1`] = `
 <body>
   <div>
     <div
-      class="sc-AxjAm StDqN"
+      class="sc-1xz1jp7-0 jyGBzw"
     >
       <p>
         Withdraw 
@@ -12,10 +12,10 @@ exports[`WithdrawForm Snapshot 1`] = `
          Reward
       </p>
       <div
-        class="sc-AxirZ djXUlT"
+        class="sc-1xz1jp7-1 eWFbMA"
       >
         <div
-          class="sc-AxiKw dDKlW"
+          class="sc-1xz1jp7-2 cBVrPw"
         >
           1000
            DEV
