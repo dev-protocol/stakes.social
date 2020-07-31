@@ -4,10 +4,10 @@ exports[`PropertySelectForm Snapshot 1`] = `
 <body>
   <div>
     <div
-      class="sc-AxgMl eURUGM"
+      class="sc-5tv67d-0 gsMsuS"
     >
       <div
-        class="sc-AxheI sc-Axmtr jubTaX"
+        class="sc-5tv67d-1 sc-5tv67d-2 beBfOo"
       >
         <span>
           Associating Property:
@@ -73,10 +73,10 @@ exports[`PropertySelectForm Snapshot 1`] = `
         </div>
       </div>
       <div
-        class="sc-AxheI hoCgHb"
+        class="sc-5tv67d-1 fpxiQK"
       >
         <button
-          class="ant-btn sc-AxmLO daLPAh ant-btn-link"
+          class="ant-btn sc-5tv67d-3 jEUHCK ant-btn-link"
           type="button"
         >
           <span>
