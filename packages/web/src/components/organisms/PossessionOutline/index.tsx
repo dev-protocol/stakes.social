@@ -1,7 +1,7 @@
 import React from 'react'
 import { Statistic } from 'antd'
 import { useGetTotalStakingAmount, useGetMyStakingAmount, useGetTotalRewardsAmount } from 'src/fixtures/dev-kit/hooks'
-import { useTranslation, POSSESSION_OUTLINE_NAMESPACE, possessionOutlineTranslationKeys } from '@dev/i18n'
+import { useTranslation, COMMON_NAMESPACE, commonTranslationKeys } from '@dev/i18n'
 import styled from 'styled-components'
 
 interface Props {
@@ -24,7 +24,7 @@ const Wrap = styled.div`
 `
 
 export const PossessionOutline = ({ className, propertyAddress }: Props) => {
-  const { t } = useTranslation(POSSESSION_OUTLINE_NAMESPACE)
+  const { t } = useTranslation(COMMON_NAMESPACE)
   const { totalStakingAmount } = useGetTotalStakingAmount(propertyAddress)
   const { totalRewardsAmount } = useGetTotalRewardsAmount(propertyAddress)
   const { myStakingAmount } = useGetMyStakingAmount(propertyAddress)
@@ -47,7 +47,7 @@ export const PossessionOutline = ({ className, propertyAddress }: Props) => {
         suffix="%"
       />
       <Statistic
-        title={t(possessionOutlineTranslationKeys.totalRewards)}
+        title={t(commonTranslationKeys.totalRewards)}
         value={totalRewardsAmount && totalRewardsAmount.dp(5).toNumber()}
         suffix="DEV"
       />
