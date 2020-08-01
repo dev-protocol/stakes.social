@@ -1,5 +1,5 @@
 import React, { useCallback } from 'react'
-import { Button, Form, Input, Col, Row, Space } from 'antd'
+import { Button, Form, Input } from 'antd'
 import { useGetAccountAddress } from 'src/fixtures/wallet/hooks'
 import { useGetUser, usePostUser } from 'src/fixtures/dev-for-apps/hooks'
 import { Container } from 'src/components/atoms/Container'
