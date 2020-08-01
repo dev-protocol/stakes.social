@@ -15,7 +15,7 @@ exports[`UserProfile Snapshot 1`] = `
           Your Address
         </div>
         <div
-          class="sc-4avdzt-2 gnKTmS"
+          class="sc-4avdzt-2 dQtRtB"
         >
           -
         </div>
@@ -29,7 +29,7 @@ exports[`UserProfile Snapshot 1`] = `
           Display name
         </div>
         <div
-          class="sc-4avdzt-2 gnKTmS"
+          class="sc-4avdzt-2 dQtRtB"
         >
           (Not set)
         </div>
@@ -38,61 +38,39 @@ exports[`UserProfile Snapshot 1`] = `
         class="sc-4avdzt-0 bzVcJB"
       >
         <form
-          class="ant-form ant-form-horizontal"
+          class="ant-form ant-form-horizontal sc-4avdzt-3 hydkXI"
         >
           <div
-            class="ant-row"
+            class="ant-row ant-form-item"
           >
             <div
-              class="ant-col"
-              style="flex: 1 1 252px;"
+              class="ant-col ant-form-item-control"
             >
               <div
-                class="ant-row ant-form-item"
+                class="ant-form-item-control-input"
               >
                 <div
-                  class="ant-col ant-col-22 ant-form-item-control"
+                  class="ant-form-item-control-input-content"
                 >
-                  <div
-                    class="ant-form-item-control-input"
-                  >
-                    <div
-                      class="ant-form-item-control-input-content"
-                    >
-                      <input
-                        class="ant-input"
-                        id="name"
-                        placeholder="Enter the new display name"
-                        type="text"
-                        value=""
-                      />
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div
-              class="ant-col"
-              style="flex: 1 1 252px;"
-            >
-              <div
-                class="ant-space ant-space-vertical"
-              >
-                <div
-                  class="ant-space-item"
-                >
-                  <button
-                    class="ant-btn ant-btn-primary"
-                    type="submit"
-                  >
-                    <span>
-                      Sign to Save
-                    </span>
-                  </button>
+                  <input
+                    class="ant-input"
+                    id="name"
+                    placeholder="Enter the new display name"
+                    type="text"
+                    value=""
+                  />
                 </div>
               </div>
             </div>
           </div>
+          <button
+            class="ant-btn ant-btn-primary"
+            type="submit"
+          >
+            <span>
+              Sign to Save
+            </span>
+          </button>
         </form>
       </section>
     </div>

@@ -11,7 +11,7 @@ const SettingsProfile = (_: Props) => {
   return (
     <>
       <Header />
-      <Headline height={100}>
+      <Headline height={300}>
         <H2>Profile Settings</H2>
       </Headline>
       <UserProfile />
