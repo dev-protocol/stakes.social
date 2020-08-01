@@ -22,6 +22,11 @@ const navs = [
     key: 'governance',
     label: 'Governance',
     pathname: '/policy'
+  },
+  {
+    key: 'account',
+    label: 'Account',
+    pathname: '/settings/profile'
   }
 ]
 const NavMenu = styled(Menu)`
