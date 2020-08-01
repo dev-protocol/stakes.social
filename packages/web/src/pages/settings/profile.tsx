@@ -11,7 +11,11 @@ const SettingsProfile = (_: Props) => {
   return (
     <>
       <Header />
+<<<<<<< HEAD
+      <Headline height={300}>
+=======
       <Headline height={100}>
+>>>>>>> origin/release
         <H2>Profile Settings</H2>
       </Headline>
       <UserProfile />
