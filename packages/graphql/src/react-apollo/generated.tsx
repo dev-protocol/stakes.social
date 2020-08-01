@@ -6266,6 +6266,7 @@ export type ListAllocatorAllocationResultsQuery = { __typename?: 'query_root' } 
 export type ListPropertyQueryVariables = Exact<{
   limit?: Maybe<Scalars['Int']>
   offset?: Maybe<Scalars['Int']>
+  ilike?: Maybe<Scalars['String']>
 }>
 
 export type ListPropertyQuery = { __typename?: 'query_root' } & {
@@ -6618,15 +6619,16 @@ export type ListAllocatorAllocationResultsQueryResult = ApolloReactCommon.QueryR
   ListAllocatorAllocationResultsQueryVariables
 >
 export const ListPropertyDocument = gql`
-  query ListProperty($limit: Int, $offset: Int) {
+  query ListProperty($limit: Int, $offset: Int, $ilike: String) {
     property_factory_create(
       limit: $limit
       offset: $offset
       order_by: { allocation_aggregate: { sum: { result: desc_nulls_last } } }
+      where: { authentication: { authentication_id: { _ilike: $ilike } } }
     ) {
       ...propertyFactoryCreate
     }
-    property_factory_create_aggregate {
+    property_factory_create_aggregate(where: { authentication: { authentication_id: { _ilike: $ilike } } }) {
       aggregate {
         count
       }
@@ -6649,6 +6651,7 @@ export const ListPropertyDocument = gql`
  *   variables: {
  *      limit: // value for 'limit'
  *      offset: // value for 'offset'
+ *      ilike: // value for 'ilike'
  *   },
  * });
  */
