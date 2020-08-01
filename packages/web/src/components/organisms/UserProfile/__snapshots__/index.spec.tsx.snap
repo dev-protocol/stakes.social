@@ -1,0 +1,101 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`UserProfile Snapshot 1`] = `
+<body>
+  <div>
+    <div
+      class="sc-AxjAm jsbXje"
+    >
+      <section
+        class="sc-AxirZ cPzkMd"
+      >
+        <div
+          class="sc-AxiKw kJrFcD"
+        >
+          Your Address
+        </div>
+        <div
+          class="sc-AxhCb fOpnxU"
+        >
+          -
+        </div>
+      </section>
+      <section
+        class="sc-AxirZ cPzkMd"
+      >
+        <div
+          class="sc-AxiKw kJrFcD"
+        >
+          Display name
+        </div>
+        <div
+          class="sc-AxhCb fOpnxU"
+        >
+          (Not set)
+        </div>
+      </section>
+      <section
+        class="sc-AxirZ cPzkMd"
+      >
+        <form
+          class="ant-form ant-form-horizontal"
+        >
+          <div
+            class="ant-row"
+          >
+            <div
+              class="ant-col"
+              style="flex: 1 1 252px;"
+            >
+              <div
+                class="ant-row ant-form-item"
+              >
+                <div
+                  class="ant-col ant-col-22 ant-form-item-control"
+                >
+                  <div
+                    class="ant-form-item-control-input"
+                  >
+                    <div
+                      class="ant-form-item-control-input-content"
+                    >
+                      <input
+                        class="ant-input"
+                        id="name"
+                        placeholder="Enter the new display name"
+                        type="text"
+                        value=""
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              class="ant-col"
+              style="flex: 1 1 252px;"
+            >
+              <div
+                class="ant-space ant-space-vertical"
+              >
+                <div
+                  class="ant-space-item"
+                >
+                  <button
+                    class="ant-btn ant-btn-primary"
+                    type="submit"
+                  >
+                    <span>
+                      Sign to Save
+                    </span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </section>
+    </div>
+  </div>
+</body>
+`;

@@ -56,3 +56,16 @@ export const getBlockNumber = async () => {
   }
   return undefined
 }
+
+export const sign = async (message: string) => {
+  const { ethereum } = window
+  if (ethereum) {
+    const address = await getAccountAddress()
+    if (address === undefined) {
+      return undefined
+    }
+    const signature = await new Web3(ethereum).eth.personal.sign(message, address, '')
+    return signature
+  }
+  return undefined
+}
