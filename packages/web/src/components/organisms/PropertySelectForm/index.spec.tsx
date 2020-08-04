@@ -4,12 +4,11 @@ import { PropertySelectForm } from '.'
 import 'src/__mocks__/window/matchMedia.mock'
 
 jest.mock('src/fixtures/dev-kit/hooks')
-jest.mock('src/fixtures/utility/gql-hooks-wrapper')
 jest.mock('@dev/graphql')
 
 describe(`${PropertySelectForm.name}`, () => {
   test('Snapshot', () => {
-    const component = render(<PropertySelectForm market="npm" />)
+    const component = render(<PropertySelectForm />)
     const tree = component.baseElement
     expect(tree).toMatchSnapshot()
   })

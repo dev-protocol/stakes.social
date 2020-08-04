@@ -4,1012 +4,488 @@ schema {
   subscription: subscription_root
 }
 
-# columns and relationships of "allocator_allocation_result"
-type allocator_allocation_result {
-  arg_value: numeric!
+# current user lockup information.
+#
+#
+# columns and relationships of "account_lockup"
+#
+type account_lockup {
+  # account address
+  account_address: String!
 
-  # An object relationship
-  authentication: property_authentication
+  # block number
   block_number: Int!
 
-  # An object relationship
-  condition: allocator_before_allocation
-  event_id: String!
-  lockup_value: numeric!
-  log_index: Int!
-  market: String!
-  metrics: String!
-  property: String!
+  # event id of lockup_lockedup
+  locked_up_event_id: String!
 
-  # An object relationship
-  property_creation: property_factory_create
-  raw_data: String!
-  result: numeric!
+  # property address
+  property_address: String!
 
-  # An object relationship
-  reward: reward_calculation_result
-  transaction_index: Int!
+  # lockup value
+  value: numeric!
 }
 
-# aggregated selection of "allocator_allocation_result"
-type allocator_allocation_result_aggregate {
-  aggregate: allocator_allocation_result_aggregate_fields
-  nodes: [allocator_allocation_result!]!
+# aggregated selection of "account_lockup"
+type account_lockup_aggregate {
+  aggregate: account_lockup_aggregate_fields
+  nodes: [account_lockup!]!
 }
 
-# aggregate fields of "allocator_allocation_result"
-type allocator_allocation_result_aggregate_fields {
-  avg: allocator_allocation_result_avg_fields
-  count(columns: [allocator_allocation_result_select_column!], distinct: Boolean): Int
-  max: allocator_allocation_result_max_fields
-  min: allocator_allocation_result_min_fields
-  stddev: allocator_allocation_result_stddev_fields
-  stddev_pop: allocator_allocation_result_stddev_pop_fields
-  stddev_samp: allocator_allocation_result_stddev_samp_fields
-  sum: allocator_allocation_result_sum_fields
-  var_pop: allocator_allocation_result_var_pop_fields
-  var_samp: allocator_allocation_result_var_samp_fields
-  variance: allocator_allocation_result_variance_fields
+# aggregate fields of "account_lockup"
+type account_lockup_aggregate_fields {
+  avg: account_lockup_avg_fields
+  count(columns: [account_lockup_select_column!], distinct: Boolean): Int
+  max: account_lockup_max_fields
+  min: account_lockup_min_fields
+  stddev: account_lockup_stddev_fields
+  stddev_pop: account_lockup_stddev_pop_fields
+  stddev_samp: account_lockup_stddev_samp_fields
+  sum: account_lockup_sum_fields
+  var_pop: account_lockup_var_pop_fields
+  var_samp: account_lockup_var_samp_fields
+  variance: account_lockup_variance_fields
 }
 
-# order by aggregate values of table "allocator_allocation_result"
-input allocator_allocation_result_aggregate_order_by {
-  avg: allocator_allocation_result_avg_order_by
+# order by aggregate values of table "account_lockup"
+input account_lockup_aggregate_order_by {
+  avg: account_lockup_avg_order_by
   count: order_by
-  max: allocator_allocation_result_max_order_by
-  min: allocator_allocation_result_min_order_by
-  stddev: allocator_allocation_result_stddev_order_by
-  stddev_pop: allocator_allocation_result_stddev_pop_order_by
-  stddev_samp: allocator_allocation_result_stddev_samp_order_by
-  sum: allocator_allocation_result_sum_order_by
-  var_pop: allocator_allocation_result_var_pop_order_by
-  var_samp: allocator_allocation_result_var_samp_order_by
-  variance: allocator_allocation_result_variance_order_by
+  max: account_lockup_max_order_by
+  min: account_lockup_min_order_by
+  stddev: account_lockup_stddev_order_by
+  stddev_pop: account_lockup_stddev_pop_order_by
+  stddev_samp: account_lockup_stddev_samp_order_by
+  sum: account_lockup_sum_order_by
+  var_pop: account_lockup_var_pop_order_by
+  var_samp: account_lockup_var_samp_order_by
+  variance: account_lockup_variance_order_by
 }
 
-# input type for inserting array relation for remote table "allocator_allocation_result"
-input allocator_allocation_result_arr_rel_insert_input {
-  data: [allocator_allocation_result_insert_input!]!
-  on_conflict: allocator_allocation_result_on_conflict
+# input type for inserting array relation for remote table "account_lockup"
+input account_lockup_arr_rel_insert_input {
+  data: [account_lockup_insert_input!]!
+  on_conflict: account_lockup_on_conflict
 }
 
 # aggregate avg on columns
-type allocator_allocation_result_avg_fields {
-  arg_value: Float
+type account_lockup_avg_fields {
   block_number: Float
-  lockup_value: Float
-  log_index: Float
-  result: Float
-  transaction_index: Float
+  value: Float
 }
 
-# order by avg() on columns of table "allocator_allocation_result"
-input allocator_allocation_result_avg_order_by {
-  arg_value: order_by
+# order by avg() on columns of table "account_lockup"
+input account_lockup_avg_order_by {
   block_number: order_by
-  lockup_value: order_by
-  log_index: order_by
-  result: order_by
-  transaction_index: order_by
+  value: order_by
 }
 
-# Boolean expression to filter rows from the table "allocator_allocation_result".
-# All fields are combined with a logical 'AND'.
-input allocator_allocation_result_bool_exp {
-  _and: [allocator_allocation_result_bool_exp]
-  _not: allocator_allocation_result_bool_exp
-  _or: [allocator_allocation_result_bool_exp]
-  arg_value: numeric_comparison_exp
-  authentication: property_authentication_bool_exp
+# Boolean expression to filter rows from the table "account_lockup". All fields are combined with a logical 'AND'.
+input account_lockup_bool_exp {
+  _and: [account_lockup_bool_exp]
+  _not: account_lockup_bool_exp
+  _or: [account_lockup_bool_exp]
+  account_address: String_comparison_exp
   block_number: Int_comparison_exp
-  condition: allocator_before_allocation_bool_exp
-  event_id: String_comparison_exp
-  lockup_value: numeric_comparison_exp
-  log_index: Int_comparison_exp
-  market: String_comparison_exp
-  metrics: String_comparison_exp
-  property: String_comparison_exp
-  property_creation: property_factory_create_bool_exp
-  raw_data: String_comparison_exp
-  result: numeric_comparison_exp
-  reward: reward_calculation_result_bool_exp
-  transaction_index: Int_comparison_exp
+  locked_up_event_id: String_comparison_exp
+  property_address: String_comparison_exp
+  value: numeric_comparison_exp
 }
 
-# unique or primary key constraints on table "allocator_allocation_result"
-enum allocator_allocation_result_constraint {
+# unique or primary key constraints on table "account_lockup"
+enum account_lockup_constraint {
   # unique or primary key constraint
-  allocator_allocation_result_pkey
+  account_lockup_pkey
 }
 
-# input type for incrementing integer column in table "allocator_allocation_result"
-input allocator_allocation_result_inc_input {
-  arg_value: numeric
+# input type for incrementing integer column in table "account_lockup"
+input account_lockup_inc_input {
   block_number: Int
-  lockup_value: numeric
-  log_index: Int
-  result: numeric
-  transaction_index: Int
+  value: numeric
 }
 
-# input type for inserting data into table "allocator_allocation_result"
-input allocator_allocation_result_insert_input {
-  arg_value: numeric
-  authentication: property_authentication_obj_rel_insert_input
+# input type for inserting data into table "account_lockup"
+input account_lockup_insert_input {
+  account_address: String
   block_number: Int
-  condition: allocator_before_allocation_obj_rel_insert_input
-  event_id: String
-  lockup_value: numeric
-  log_index: Int
-  market: String
-  metrics: String
-  property: String
-  property_creation: property_factory_create_obj_rel_insert_input
-  raw_data: String
-  result: numeric
-  reward: reward_calculation_result_obj_rel_insert_input
-  transaction_index: Int
+  locked_up_event_id: String
+  property_address: String
+  value: numeric
 }
 
 # aggregate max on columns
-type allocator_allocation_result_max_fields {
-  arg_value: numeric
+type account_lockup_max_fields {
+  account_address: String
   block_number: Int
-  event_id: String
-  lockup_value: numeric
-  log_index: Int
-  market: String
-  metrics: String
-  property: String
-  raw_data: String
-  result: numeric
-  transaction_index: Int
+  locked_up_event_id: String
+  property_address: String
+  value: numeric
 }
 
-# order by max() on columns of table "allocator_allocation_result"
-input allocator_allocation_result_max_order_by {
-  arg_value: order_by
+# order by max() on columns of table "account_lockup"
+input account_lockup_max_order_by {
+  account_address: order_by
   block_number: order_by
-  event_id: order_by
-  lockup_value: order_by
-  log_index: order_by
-  market: order_by
-  metrics: order_by
-  property: order_by
-  raw_data: order_by
-  result: order_by
-  transaction_index: order_by
+  locked_up_event_id: order_by
+  property_address: order_by
+  value: order_by
 }
 
 # aggregate min on columns
-type allocator_allocation_result_min_fields {
-  arg_value: numeric
+type account_lockup_min_fields {
+  account_address: String
   block_number: Int
-  event_id: String
-  lockup_value: numeric
-  log_index: Int
-  market: String
-  metrics: String
-  property: String
-  raw_data: String
-  result: numeric
-  transaction_index: Int
+  locked_up_event_id: String
+  property_address: String
+  value: numeric
 }
 
-# order by min() on columns of table "allocator_allocation_result"
-input allocator_allocation_result_min_order_by {
-  arg_value: order_by
+# order by min() on columns of table "account_lockup"
+input account_lockup_min_order_by {
+  account_address: order_by
   block_number: order_by
-  event_id: order_by
-  lockup_value: order_by
-  log_index: order_by
-  market: order_by
-  metrics: order_by
-  property: order_by
-  raw_data: order_by
-  result: order_by
-  transaction_index: order_by
+  locked_up_event_id: order_by
+  property_address: order_by
+  value: order_by
 }
 
-# response of any mutation on the table "allocator_allocation_result"
-type allocator_allocation_result_mutation_response {
+# response of any mutation on the table "account_lockup"
+type account_lockup_mutation_response {
   # number of affected rows by the mutation
   affected_rows: Int!
 
   # data of the affected rows by the mutation
-  returning: [allocator_allocation_result!]!
+  returning: [account_lockup!]!
 }
 
-# input type for inserting object relation for remote table "allocator_allocation_result"
-input allocator_allocation_result_obj_rel_insert_input {
-  data: allocator_allocation_result_insert_input!
-  on_conflict: allocator_allocation_result_on_conflict
+# input type for inserting object relation for remote table "account_lockup"
+input account_lockup_obj_rel_insert_input {
+  data: account_lockup_insert_input!
+  on_conflict: account_lockup_on_conflict
 }
 
-# on conflict condition type for table "allocator_allocation_result"
-input allocator_allocation_result_on_conflict {
-  constraint: allocator_allocation_result_constraint!
-  update_columns: [allocator_allocation_result_update_column!]!
-  where: allocator_allocation_result_bool_exp
+# on conflict condition type for table "account_lockup"
+input account_lockup_on_conflict {
+  constraint: account_lockup_constraint!
+  update_columns: [account_lockup_update_column!]!
+  where: account_lockup_bool_exp
 }
 
-# ordering options when selecting data from "allocator_allocation_result"
-input allocator_allocation_result_order_by {
-  arg_value: order_by
-  authentication: property_authentication_order_by
+# ordering options when selecting data from "account_lockup"
+input account_lockup_order_by {
+  account_address: order_by
   block_number: order_by
-  condition: allocator_before_allocation_order_by
-  event_id: order_by
-  lockup_value: order_by
-  log_index: order_by
-  market: order_by
-  metrics: order_by
-  property: order_by
-  property_creation: property_factory_create_order_by
-  raw_data: order_by
-  result: order_by
-  reward: reward_calculation_result_order_by
-  transaction_index: order_by
+  locked_up_event_id: order_by
+  property_address: order_by
+  value: order_by
 }
 
-# primary key columns input for table: "allocator_allocation_result"
-input allocator_allocation_result_pk_columns_input {
-  event_id: String!
+# primary key columns input for table: "account_lockup"
+input account_lockup_pk_columns_input {
+  # account address
+  account_address: String!
+
+  # property address
+  property_address: String!
 }
 
-# select columns of table "allocator_allocation_result"
-enum allocator_allocation_result_select_column {
+# select columns of table "account_lockup"
+enum account_lockup_select_column {
   # column name
-  arg_value
+  account_address
 
   # column name
   block_number
 
   # column name
-  event_id
+  locked_up_event_id
 
   # column name
-  lockup_value
+  property_address
 
   # column name
-  log_index
-
-  # column name
-  market
-
-  # column name
-  metrics
-
-  # column name
-  property
-
-  # column name
-  raw_data
-
-  # column name
-  result
-
-  # column name
-  transaction_index
+  value
 }
 
-# input type for updating data in table "allocator_allocation_result"
-input allocator_allocation_result_set_input {
-  arg_value: numeric
+# input type for updating data in table "account_lockup"
+input account_lockup_set_input {
+  account_address: String
   block_number: Int
-  event_id: String
-  lockup_value: numeric
-  log_index: Int
-  market: String
-  metrics: String
-  property: String
-  raw_data: String
-  result: numeric
-  transaction_index: Int
+  locked_up_event_id: String
+  property_address: String
+  value: numeric
 }
 
 # aggregate stddev on columns
-type allocator_allocation_result_stddev_fields {
-  arg_value: Float
+type account_lockup_stddev_fields {
   block_number: Float
-  lockup_value: Float
-  log_index: Float
-  result: Float
-  transaction_index: Float
+  value: Float
 }
 
-# order by stddev() on columns of table "allocator_allocation_result"
-input allocator_allocation_result_stddev_order_by {
-  arg_value: order_by
+# order by stddev() on columns of table "account_lockup"
+input account_lockup_stddev_order_by {
   block_number: order_by
-  lockup_value: order_by
-  log_index: order_by
-  result: order_by
-  transaction_index: order_by
+  value: order_by
 }
 
 # aggregate stddev_pop on columns
-type allocator_allocation_result_stddev_pop_fields {
-  arg_value: Float
+type account_lockup_stddev_pop_fields {
   block_number: Float
-  lockup_value: Float
-  log_index: Float
-  result: Float
-  transaction_index: Float
+  value: Float
 }
 
-# order by stddev_pop() on columns of table "allocator_allocation_result"
-input allocator_allocation_result_stddev_pop_order_by {
-  arg_value: order_by
+# order by stddev_pop() on columns of table "account_lockup"
+input account_lockup_stddev_pop_order_by {
   block_number: order_by
-  lockup_value: order_by
-  log_index: order_by
-  result: order_by
-  transaction_index: order_by
+  value: order_by
 }
 
 # aggregate stddev_samp on columns
-type allocator_allocation_result_stddev_samp_fields {
-  arg_value: Float
+type account_lockup_stddev_samp_fields {
   block_number: Float
-  lockup_value: Float
-  log_index: Float
-  result: Float
-  transaction_index: Float
+  value: Float
 }
 
-# order by stddev_samp() on columns of table "allocator_allocation_result"
-input allocator_allocation_result_stddev_samp_order_by {
-  arg_value: order_by
+# order by stddev_samp() on columns of table "account_lockup"
+input account_lockup_stddev_samp_order_by {
   block_number: order_by
-  lockup_value: order_by
-  log_index: order_by
-  result: order_by
-  transaction_index: order_by
+  value: order_by
 }
 
 # aggregate sum on columns
-type allocator_allocation_result_sum_fields {
-  arg_value: numeric
+type account_lockup_sum_fields {
   block_number: Int
-  lockup_value: numeric
-  log_index: Int
-  result: numeric
-  transaction_index: Int
+  value: numeric
 }
 
-# order by sum() on columns of table "allocator_allocation_result"
-input allocator_allocation_result_sum_order_by {
-  arg_value: order_by
+# order by sum() on columns of table "account_lockup"
+input account_lockup_sum_order_by {
   block_number: order_by
-  lockup_value: order_by
-  log_index: order_by
-  result: order_by
-  transaction_index: order_by
+  value: order_by
 }
 
-# update columns of table "allocator_allocation_result"
-enum allocator_allocation_result_update_column {
-  # column name
-  arg_value
-
-  # column name
-  block_number
-
-  # column name
-  event_id
-
-  # column name
-  lockup_value
-
-  # column name
-  log_index
-
-  # column name
-  market
-
-  # column name
-  metrics
-
-  # column name
-  property
-
-  # column name
-  raw_data
-
-  # column name
-  result
-
-  # column name
-  transaction_index
+# columns and relationships of "account_lockup_sum_values"
+type account_lockup_sum_values {
+  account_address: String
+  sum_values: numeric
 }
 
-# aggregate var_pop on columns
-type allocator_allocation_result_var_pop_fields {
-  arg_value: Float
-  block_number: Float
-  lockup_value: Float
-  log_index: Float
-  result: Float
-  transaction_index: Float
+# aggregated selection of "account_lockup_sum_values"
+type account_lockup_sum_values_aggregate {
+  aggregate: account_lockup_sum_values_aggregate_fields
+  nodes: [account_lockup_sum_values!]!
 }
 
-# order by var_pop() on columns of table "allocator_allocation_result"
-input allocator_allocation_result_var_pop_order_by {
-  arg_value: order_by
-  block_number: order_by
-  lockup_value: order_by
-  log_index: order_by
-  result: order_by
-  transaction_index: order_by
+# aggregate fields of "account_lockup_sum_values"
+type account_lockup_sum_values_aggregate_fields {
+  avg: account_lockup_sum_values_avg_fields
+  count(columns: [account_lockup_sum_values_select_column!], distinct: Boolean): Int
+  max: account_lockup_sum_values_max_fields
+  min: account_lockup_sum_values_min_fields
+  stddev: account_lockup_sum_values_stddev_fields
+  stddev_pop: account_lockup_sum_values_stddev_pop_fields
+  stddev_samp: account_lockup_sum_values_stddev_samp_fields
+  sum: account_lockup_sum_values_sum_fields
+  var_pop: account_lockup_sum_values_var_pop_fields
+  var_samp: account_lockup_sum_values_var_samp_fields
+  variance: account_lockup_sum_values_variance_fields
 }
 
-# aggregate var_samp on columns
-type allocator_allocation_result_var_samp_fields {
-  arg_value: Float
-  block_number: Float
-  lockup_value: Float
-  log_index: Float
-  result: Float
-  transaction_index: Float
-}
-
-# order by var_samp() on columns of table "allocator_allocation_result"
-input allocator_allocation_result_var_samp_order_by {
-  arg_value: order_by
-  block_number: order_by
-  lockup_value: order_by
-  log_index: order_by
-  result: order_by
-  transaction_index: order_by
-}
-
-# aggregate variance on columns
-type allocator_allocation_result_variance_fields {
-  arg_value: Float
-  block_number: Float
-  lockup_value: Float
-  log_index: Float
-  result: Float
-  transaction_index: Float
-}
-
-# order by variance() on columns of table "allocator_allocation_result"
-input allocator_allocation_result_variance_order_by {
-  arg_value: order_by
-  block_number: order_by
-  lockup_value: order_by
-  log_index: order_by
-  result: order_by
-  transaction_index: order_by
-}
-
-# columns and relationships of "allocator_before_allocation"
-type allocator_before_allocation {
-  assets: numeric!
-  block_number: Int!
-  blocks: numeric!
-  event_id: String!
-  log_index: Int!
-  market_value: numeric!
-  mint: numeric!
-  raw_data: String!
-
-  # An object relationship
-  result: allocator_allocation_result
-  token_value: numeric!
-  total_assets: numeric!
-  transaction_index: Int!
-}
-
-# aggregated selection of "allocator_before_allocation"
-type allocator_before_allocation_aggregate {
-  aggregate: allocator_before_allocation_aggregate_fields
-  nodes: [allocator_before_allocation!]!
-}
-
-# aggregate fields of "allocator_before_allocation"
-type allocator_before_allocation_aggregate_fields {
-  avg: allocator_before_allocation_avg_fields
-  count(columns: [allocator_before_allocation_select_column!], distinct: Boolean): Int
-  max: allocator_before_allocation_max_fields
-  min: allocator_before_allocation_min_fields
-  stddev: allocator_before_allocation_stddev_fields
-  stddev_pop: allocator_before_allocation_stddev_pop_fields
-  stddev_samp: allocator_before_allocation_stddev_samp_fields
-  sum: allocator_before_allocation_sum_fields
-  var_pop: allocator_before_allocation_var_pop_fields
-  var_samp: allocator_before_allocation_var_samp_fields
-  variance: allocator_before_allocation_variance_fields
-}
-
-# order by aggregate values of table "allocator_before_allocation"
-input allocator_before_allocation_aggregate_order_by {
-  avg: allocator_before_allocation_avg_order_by
+# order by aggregate values of table "account_lockup_sum_values"
+input account_lockup_sum_values_aggregate_order_by {
+  avg: account_lockup_sum_values_avg_order_by
   count: order_by
-  max: allocator_before_allocation_max_order_by
-  min: allocator_before_allocation_min_order_by
-  stddev: allocator_before_allocation_stddev_order_by
-  stddev_pop: allocator_before_allocation_stddev_pop_order_by
-  stddev_samp: allocator_before_allocation_stddev_samp_order_by
-  sum: allocator_before_allocation_sum_order_by
-  var_pop: allocator_before_allocation_var_pop_order_by
-  var_samp: allocator_before_allocation_var_samp_order_by
-  variance: allocator_before_allocation_variance_order_by
-}
-
-# input type for inserting array relation for remote table "allocator_before_allocation"
-input allocator_before_allocation_arr_rel_insert_input {
-  data: [allocator_before_allocation_insert_input!]!
-  on_conflict: allocator_before_allocation_on_conflict
+  max: account_lockup_sum_values_max_order_by
+  min: account_lockup_sum_values_min_order_by
+  stddev: account_lockup_sum_values_stddev_order_by
+  stddev_pop: account_lockup_sum_values_stddev_pop_order_by
+  stddev_samp: account_lockup_sum_values_stddev_samp_order_by
+  sum: account_lockup_sum_values_sum_order_by
+  var_pop: account_lockup_sum_values_var_pop_order_by
+  var_samp: account_lockup_sum_values_var_samp_order_by
+  variance: account_lockup_sum_values_variance_order_by
 }
 
 # aggregate avg on columns
-type allocator_before_allocation_avg_fields {
-  assets: Float
-  block_number: Float
-  blocks: Float
-  log_index: Float
-  market_value: Float
-  mint: Float
-  token_value: Float
-  total_assets: Float
-  transaction_index: Float
+type account_lockup_sum_values_avg_fields {
+  sum_values: Float
 }
 
-# order by avg() on columns of table "allocator_before_allocation"
-input allocator_before_allocation_avg_order_by {
-  assets: order_by
-  block_number: order_by
-  blocks: order_by
-  log_index: order_by
-  market_value: order_by
-  mint: order_by
-  token_value: order_by
-  total_assets: order_by
-  transaction_index: order_by
+# order by avg() on columns of table "account_lockup_sum_values"
+input account_lockup_sum_values_avg_order_by {
+  sum_values: order_by
 }
 
-# Boolean expression to filter rows from the table "allocator_before_allocation".
-# All fields are combined with a logical 'AND'.
-input allocator_before_allocation_bool_exp {
-  _and: [allocator_before_allocation_bool_exp]
-  _not: allocator_before_allocation_bool_exp
-  _or: [allocator_before_allocation_bool_exp]
-  assets: numeric_comparison_exp
-  block_number: Int_comparison_exp
-  blocks: numeric_comparison_exp
-  event_id: String_comparison_exp
-  log_index: Int_comparison_exp
-  market_value: numeric_comparison_exp
-  mint: numeric_comparison_exp
-  raw_data: String_comparison_exp
-  result: allocator_allocation_result_bool_exp
-  token_value: numeric_comparison_exp
-  total_assets: numeric_comparison_exp
-  transaction_index: Int_comparison_exp
-}
-
-# unique or primary key constraints on table "allocator_before_allocation"
-enum allocator_before_allocation_constraint {
-  # unique or primary key constraint
-  allocator_before_allocation_pkey
-}
-
-# input type for incrementing integer column in table "allocator_before_allocation"
-input allocator_before_allocation_inc_input {
-  assets: numeric
-  block_number: Int
-  blocks: numeric
-  log_index: Int
-  market_value: numeric
-  mint: numeric
-  token_value: numeric
-  total_assets: numeric
-  transaction_index: Int
-}
-
-# input type for inserting data into table "allocator_before_allocation"
-input allocator_before_allocation_insert_input {
-  assets: numeric
-  block_number: Int
-  blocks: numeric
-  event_id: String
-  log_index: Int
-  market_value: numeric
-  mint: numeric
-  raw_data: String
-  result: allocator_allocation_result_obj_rel_insert_input
-  token_value: numeric
-  total_assets: numeric
-  transaction_index: Int
+# Boolean expression to filter rows from the table "account_lockup_sum_values". All fields are combined with a logical 'AND'.
+input account_lockup_sum_values_bool_exp {
+  _and: [account_lockup_sum_values_bool_exp]
+  _not: account_lockup_sum_values_bool_exp
+  _or: [account_lockup_sum_values_bool_exp]
+  account_address: String_comparison_exp
+  sum_values: numeric_comparison_exp
 }
 
 # aggregate max on columns
-type allocator_before_allocation_max_fields {
-  assets: numeric
-  block_number: Int
-  blocks: numeric
-  event_id: String
-  log_index: Int
-  market_value: numeric
-  mint: numeric
-  raw_data: String
-  token_value: numeric
-  total_assets: numeric
-  transaction_index: Int
+type account_lockup_sum_values_max_fields {
+  account_address: String
+  sum_values: numeric
 }
 
-# order by max() on columns of table "allocator_before_allocation"
-input allocator_before_allocation_max_order_by {
-  assets: order_by
-  block_number: order_by
-  blocks: order_by
-  event_id: order_by
-  log_index: order_by
-  market_value: order_by
-  mint: order_by
-  raw_data: order_by
-  token_value: order_by
-  total_assets: order_by
-  transaction_index: order_by
+# order by max() on columns of table "account_lockup_sum_values"
+input account_lockup_sum_values_max_order_by {
+  account_address: order_by
+  sum_values: order_by
 }
 
 # aggregate min on columns
-type allocator_before_allocation_min_fields {
-  assets: numeric
-  block_number: Int
-  blocks: numeric
-  event_id: String
-  log_index: Int
-  market_value: numeric
-  mint: numeric
-  raw_data: String
-  token_value: numeric
-  total_assets: numeric
-  transaction_index: Int
+type account_lockup_sum_values_min_fields {
+  account_address: String
+  sum_values: numeric
 }
 
-# order by min() on columns of table "allocator_before_allocation"
-input allocator_before_allocation_min_order_by {
-  assets: order_by
-  block_number: order_by
-  blocks: order_by
-  event_id: order_by
-  log_index: order_by
-  market_value: order_by
-  mint: order_by
-  raw_data: order_by
-  token_value: order_by
-  total_assets: order_by
-  transaction_index: order_by
+# order by min() on columns of table "account_lockup_sum_values"
+input account_lockup_sum_values_min_order_by {
+  account_address: order_by
+  sum_values: order_by
 }
 
-# response of any mutation on the table "allocator_before_allocation"
-type allocator_before_allocation_mutation_response {
-  # number of affected rows by the mutation
-  affected_rows: Int!
-
-  # data of the affected rows by the mutation
-  returning: [allocator_before_allocation!]!
+# ordering options when selecting data from "account_lockup_sum_values"
+input account_lockup_sum_values_order_by {
+  account_address: order_by
+  sum_values: order_by
 }
 
-# input type for inserting object relation for remote table "allocator_before_allocation"
-input allocator_before_allocation_obj_rel_insert_input {
-  data: allocator_before_allocation_insert_input!
-  on_conflict: allocator_before_allocation_on_conflict
-}
-
-# on conflict condition type for table "allocator_before_allocation"
-input allocator_before_allocation_on_conflict {
-  constraint: allocator_before_allocation_constraint!
-  update_columns: [allocator_before_allocation_update_column!]!
-  where: allocator_before_allocation_bool_exp
-}
-
-# ordering options when selecting data from "allocator_before_allocation"
-input allocator_before_allocation_order_by {
-  assets: order_by
-  block_number: order_by
-  blocks: order_by
-  event_id: order_by
-  log_index: order_by
-  market_value: order_by
-  mint: order_by
-  raw_data: order_by
-  result: allocator_allocation_result_order_by
-  token_value: order_by
-  total_assets: order_by
-  transaction_index: order_by
-}
-
-# primary key columns input for table: "allocator_before_allocation"
-input allocator_before_allocation_pk_columns_input {
-  event_id: String!
-}
-
-# select columns of table "allocator_before_allocation"
-enum allocator_before_allocation_select_column {
+# select columns of table "account_lockup_sum_values"
+enum account_lockup_sum_values_select_column {
   # column name
-  assets
+  account_address
 
   # column name
-  block_number
-
-  # column name
-  blocks
-
-  # column name
-  event_id
-
-  # column name
-  log_index
-
-  # column name
-  market_value
-
-  # column name
-  mint
-
-  # column name
-  raw_data
-
-  # column name
-  token_value
-
-  # column name
-  total_assets
-
-  # column name
-  transaction_index
-}
-
-# input type for updating data in table "allocator_before_allocation"
-input allocator_before_allocation_set_input {
-  assets: numeric
-  block_number: Int
-  blocks: numeric
-  event_id: String
-  log_index: Int
-  market_value: numeric
-  mint: numeric
-  raw_data: String
-  token_value: numeric
-  total_assets: numeric
-  transaction_index: Int
+  sum_values
 }
 
 # aggregate stddev on columns
-type allocator_before_allocation_stddev_fields {
-  assets: Float
-  block_number: Float
-  blocks: Float
-  log_index: Float
-  market_value: Float
-  mint: Float
-  token_value: Float
-  total_assets: Float
-  transaction_index: Float
+type account_lockup_sum_values_stddev_fields {
+  sum_values: Float
 }
 
-# order by stddev() on columns of table "allocator_before_allocation"
-input allocator_before_allocation_stddev_order_by {
-  assets: order_by
-  block_number: order_by
-  blocks: order_by
-  log_index: order_by
-  market_value: order_by
-  mint: order_by
-  token_value: order_by
-  total_assets: order_by
-  transaction_index: order_by
+# order by stddev() on columns of table "account_lockup_sum_values"
+input account_lockup_sum_values_stddev_order_by {
+  sum_values: order_by
 }
 
 # aggregate stddev_pop on columns
-type allocator_before_allocation_stddev_pop_fields {
-  assets: Float
-  block_number: Float
-  blocks: Float
-  log_index: Float
-  market_value: Float
-  mint: Float
-  token_value: Float
-  total_assets: Float
-  transaction_index: Float
+type account_lockup_sum_values_stddev_pop_fields {
+  sum_values: Float
 }
 
-# order by stddev_pop() on columns of table "allocator_before_allocation"
-input allocator_before_allocation_stddev_pop_order_by {
-  assets: order_by
-  block_number: order_by
-  blocks: order_by
-  log_index: order_by
-  market_value: order_by
-  mint: order_by
-  token_value: order_by
-  total_assets: order_by
-  transaction_index: order_by
+# order by stddev_pop() on columns of table "account_lockup_sum_values"
+input account_lockup_sum_values_stddev_pop_order_by {
+  sum_values: order_by
 }
 
 # aggregate stddev_samp on columns
-type allocator_before_allocation_stddev_samp_fields {
-  assets: Float
-  block_number: Float
-  blocks: Float
-  log_index: Float
-  market_value: Float
-  mint: Float
-  token_value: Float
-  total_assets: Float
-  transaction_index: Float
+type account_lockup_sum_values_stddev_samp_fields {
+  sum_values: Float
 }
 
-# order by stddev_samp() on columns of table "allocator_before_allocation"
-input allocator_before_allocation_stddev_samp_order_by {
-  assets: order_by
-  block_number: order_by
-  blocks: order_by
-  log_index: order_by
-  market_value: order_by
-  mint: order_by
-  token_value: order_by
-  total_assets: order_by
-  transaction_index: order_by
+# order by stddev_samp() on columns of table "account_lockup_sum_values"
+input account_lockup_sum_values_stddev_samp_order_by {
+  sum_values: order_by
 }
 
 # aggregate sum on columns
-type allocator_before_allocation_sum_fields {
-  assets: numeric
-  block_number: Int
-  blocks: numeric
-  log_index: Int
-  market_value: numeric
-  mint: numeric
-  token_value: numeric
-  total_assets: numeric
-  transaction_index: Int
+type account_lockup_sum_values_sum_fields {
+  sum_values: numeric
 }
 
-# order by sum() on columns of table "allocator_before_allocation"
-input allocator_before_allocation_sum_order_by {
-  assets: order_by
-  block_number: order_by
-  blocks: order_by
-  log_index: order_by
-  market_value: order_by
-  mint: order_by
-  token_value: order_by
-  total_assets: order_by
-  transaction_index: order_by
+# order by sum() on columns of table "account_lockup_sum_values"
+input account_lockup_sum_values_sum_order_by {
+  sum_values: order_by
 }
 
-# update columns of table "allocator_before_allocation"
-enum allocator_before_allocation_update_column {
+# aggregate var_pop on columns
+type account_lockup_sum_values_var_pop_fields {
+  sum_values: Float
+}
+
+# order by var_pop() on columns of table "account_lockup_sum_values"
+input account_lockup_sum_values_var_pop_order_by {
+  sum_values: order_by
+}
+
+# aggregate var_samp on columns
+type account_lockup_sum_values_var_samp_fields {
+  sum_values: Float
+}
+
+# order by var_samp() on columns of table "account_lockup_sum_values"
+input account_lockup_sum_values_var_samp_order_by {
+  sum_values: order_by
+}
+
+# aggregate variance on columns
+type account_lockup_sum_values_variance_fields {
+  sum_values: Float
+}
+
+# order by variance() on columns of table "account_lockup_sum_values"
+input account_lockup_sum_values_variance_order_by {
+  sum_values: order_by
+}
+
+# update columns of table "account_lockup"
+enum account_lockup_update_column {
   # column name
-  assets
+  account_address
 
   # column name
   block_number
 
   # column name
-  blocks
+  locked_up_event_id
 
   # column name
-  event_id
+  property_address
 
   # column name
-  log_index
-
-  # column name
-  market_value
-
-  # column name
-  mint
-
-  # column name
-  raw_data
-
-  # column name
-  token_value
-
-  # column name
-  total_assets
-
-  # column name
-  transaction_index
+  value
 }
 
 # aggregate var_pop on columns
-type allocator_before_allocation_var_pop_fields {
-  assets: Float
+type account_lockup_var_pop_fields {
   block_number: Float
-  blocks: Float
-  log_index: Float
-  market_value: Float
-  mint: Float
-  token_value: Float
-  total_assets: Float
-  transaction_index: Float
+  value: Float
 }
 
-# order by var_pop() on columns of table "allocator_before_allocation"
-input allocator_before_allocation_var_pop_order_by {
-  assets: order_by
+# order by var_pop() on columns of table "account_lockup"
+input account_lockup_var_pop_order_by {
   block_number: order_by
-  blocks: order_by
-  log_index: order_by
-  market_value: order_by
-  mint: order_by
-  token_value: order_by
-  total_assets: order_by
-  transaction_index: order_by
+  value: order_by
 }
 
 # aggregate var_samp on columns
-type allocator_before_allocation_var_samp_fields {
-  assets: Float
+type account_lockup_var_samp_fields {
   block_number: Float
-  blocks: Float
-  log_index: Float
-  market_value: Float
-  mint: Float
-  token_value: Float
-  total_assets: Float
-  transaction_index: Float
+  value: Float
 }
 
-# order by var_samp() on columns of table "allocator_before_allocation"
-input allocator_before_allocation_var_samp_order_by {
-  assets: order_by
+# order by var_samp() on columns of table "account_lockup"
+input account_lockup_var_samp_order_by {
   block_number: order_by
-  blocks: order_by
-  log_index: order_by
-  market_value: order_by
-  mint: order_by
-  token_value: order_by
-  total_assets: order_by
-  transaction_index: order_by
+  value: order_by
 }
 
 # aggregate variance on columns
-type allocator_before_allocation_variance_fields {
-  assets: Float
+type account_lockup_variance_fields {
   block_number: Float
-  blocks: Float
-  log_index: Float
-  market_value: Float
-  mint: Float
-  token_value: Float
-  total_assets: Float
-  transaction_index: Float
+  value: Float
 }
 
-# order by variance() on columns of table "allocator_before_allocation"
-input allocator_before_allocation_variance_order_by {
-  assets: order_by
+# order by variance() on columns of table "account_lockup"
+input account_lockup_variance_order_by {
   block_number: order_by
-  blocks: order_by
-  log_index: order_by
-  market_value: order_by
-  mint: order_by
-  token_value: order_by
-  total_assets: order_by
-  transaction_index: order_by
-}
-
-scalar bigint
-
-# expression to compare columns of type bigint. All fields are combined with logical 'AND'.
-input bigint_comparison_exp {
-  _eq: bigint
-  _gt: bigint
-  _gte: bigint
-  _in: [bigint!]
-  _is_null: Boolean
-  _lt: bigint
-  _lte: bigint
-  _neq: bigint
-  _nin: [bigint!]
+  value: order_by
 }
 
 # expression to compare columns of type Boolean. All fields are combined with logical 'AND'.
@@ -1025,19 +501,413 @@ input Boolean_comparison_exp {
   _nin: [Boolean!]
 }
 
-scalar float8
+# Transfer event for a DEV token whose from address or to address is a property address.
+#
+#
+# columns and relationships of "dev_property_transfer"
+#
+type dev_property_transfer {
+  # event block number
+  block_number: Int!
 
-# expression to compare columns of type float8. All fields are combined with logical 'AND'.
-input float8_comparison_exp {
-  _eq: float8
-  _gt: float8
-  _gte: float8
-  _in: [float8!]
-  _is_null: Boolean
-  _lt: float8
-  _lte: float8
-  _neq: float8
-  _nin: [float8!]
+  # event id
+  event_id: String!
+
+  # from address
+  from_address: String!
+
+  # if it is lockup trahsfer, true
+  is_lockup: Boolean!
+
+  # event log index
+  log_index: Int!
+
+  # event raw data
+  raw_data: String!
+
+  # to address
+  to_address: String!
+
+  # event transaction index
+  transaction_index: Int!
+
+  # value
+  value: numeric!
+}
+
+# aggregated selection of "dev_property_transfer"
+type dev_property_transfer_aggregate {
+  aggregate: dev_property_transfer_aggregate_fields
+  nodes: [dev_property_transfer!]!
+}
+
+# aggregate fields of "dev_property_transfer"
+type dev_property_transfer_aggregate_fields {
+  avg: dev_property_transfer_avg_fields
+  count(columns: [dev_property_transfer_select_column!], distinct: Boolean): Int
+  max: dev_property_transfer_max_fields
+  min: dev_property_transfer_min_fields
+  stddev: dev_property_transfer_stddev_fields
+  stddev_pop: dev_property_transfer_stddev_pop_fields
+  stddev_samp: dev_property_transfer_stddev_samp_fields
+  sum: dev_property_transfer_sum_fields
+  var_pop: dev_property_transfer_var_pop_fields
+  var_samp: dev_property_transfer_var_samp_fields
+  variance: dev_property_transfer_variance_fields
+}
+
+# order by aggregate values of table "dev_property_transfer"
+input dev_property_transfer_aggregate_order_by {
+  avg: dev_property_transfer_avg_order_by
+  count: order_by
+  max: dev_property_transfer_max_order_by
+  min: dev_property_transfer_min_order_by
+  stddev: dev_property_transfer_stddev_order_by
+  stddev_pop: dev_property_transfer_stddev_pop_order_by
+  stddev_samp: dev_property_transfer_stddev_samp_order_by
+  sum: dev_property_transfer_sum_order_by
+  var_pop: dev_property_transfer_var_pop_order_by
+  var_samp: dev_property_transfer_var_samp_order_by
+  variance: dev_property_transfer_variance_order_by
+}
+
+# input type for inserting array relation for remote table "dev_property_transfer"
+input dev_property_transfer_arr_rel_insert_input {
+  data: [dev_property_transfer_insert_input!]!
+  on_conflict: dev_property_transfer_on_conflict
+}
+
+# aggregate avg on columns
+type dev_property_transfer_avg_fields {
+  block_number: Float
+  log_index: Float
+  transaction_index: Float
+  value: Float
+}
+
+# order by avg() on columns of table "dev_property_transfer"
+input dev_property_transfer_avg_order_by {
+  block_number: order_by
+  log_index: order_by
+  transaction_index: order_by
+  value: order_by
+}
+
+# Boolean expression to filter rows from the table "dev_property_transfer". All fields are combined with a logical 'AND'.
+input dev_property_transfer_bool_exp {
+  _and: [dev_property_transfer_bool_exp]
+  _not: dev_property_transfer_bool_exp
+  _or: [dev_property_transfer_bool_exp]
+  block_number: Int_comparison_exp
+  event_id: String_comparison_exp
+  from_address: String_comparison_exp
+  is_lockup: Boolean_comparison_exp
+  log_index: Int_comparison_exp
+  raw_data: String_comparison_exp
+  to_address: String_comparison_exp
+  transaction_index: Int_comparison_exp
+  value: numeric_comparison_exp
+}
+
+# unique or primary key constraints on table "dev_property_transfer"
+enum dev_property_transfer_constraint {
+  # unique or primary key constraint
+  dev_property_transfer_pkey
+}
+
+# input type for incrementing integer column in table "dev_property_transfer"
+input dev_property_transfer_inc_input {
+  block_number: Int
+  log_index: Int
+  transaction_index: Int
+  value: numeric
+}
+
+# input type for inserting data into table "dev_property_transfer"
+input dev_property_transfer_insert_input {
+  block_number: Int
+  event_id: String
+  from_address: String
+  is_lockup: Boolean
+  log_index: Int
+  raw_data: String
+  to_address: String
+  transaction_index: Int
+  value: numeric
+}
+
+# aggregate max on columns
+type dev_property_transfer_max_fields {
+  block_number: Int
+  event_id: String
+  from_address: String
+  log_index: Int
+  raw_data: String
+  to_address: String
+  transaction_index: Int
+  value: numeric
+}
+
+# order by max() on columns of table "dev_property_transfer"
+input dev_property_transfer_max_order_by {
+  block_number: order_by
+  event_id: order_by
+  from_address: order_by
+  log_index: order_by
+  raw_data: order_by
+  to_address: order_by
+  transaction_index: order_by
+  value: order_by
+}
+
+# aggregate min on columns
+type dev_property_transfer_min_fields {
+  block_number: Int
+  event_id: String
+  from_address: String
+  log_index: Int
+  raw_data: String
+  to_address: String
+  transaction_index: Int
+  value: numeric
+}
+
+# order by min() on columns of table "dev_property_transfer"
+input dev_property_transfer_min_order_by {
+  block_number: order_by
+  event_id: order_by
+  from_address: order_by
+  log_index: order_by
+  raw_data: order_by
+  to_address: order_by
+  transaction_index: order_by
+  value: order_by
+}
+
+# response of any mutation on the table "dev_property_transfer"
+type dev_property_transfer_mutation_response {
+  # number of affected rows by the mutation
+  affected_rows: Int!
+
+  # data of the affected rows by the mutation
+  returning: [dev_property_transfer!]!
+}
+
+# input type for inserting object relation for remote table "dev_property_transfer"
+input dev_property_transfer_obj_rel_insert_input {
+  data: dev_property_transfer_insert_input!
+  on_conflict: dev_property_transfer_on_conflict
+}
+
+# on conflict condition type for table "dev_property_transfer"
+input dev_property_transfer_on_conflict {
+  constraint: dev_property_transfer_constraint!
+  update_columns: [dev_property_transfer_update_column!]!
+  where: dev_property_transfer_bool_exp
+}
+
+# ordering options when selecting data from "dev_property_transfer"
+input dev_property_transfer_order_by {
+  block_number: order_by
+  event_id: order_by
+  from_address: order_by
+  is_lockup: order_by
+  log_index: order_by
+  raw_data: order_by
+  to_address: order_by
+  transaction_index: order_by
+  value: order_by
+}
+
+# primary key columns input for table: "dev_property_transfer"
+input dev_property_transfer_pk_columns_input {
+  # event id
+  event_id: String!
+}
+
+# select columns of table "dev_property_transfer"
+enum dev_property_transfer_select_column {
+  # column name
+  block_number
+
+  # column name
+  event_id
+
+  # column name
+  from_address
+
+  # column name
+  is_lockup
+
+  # column name
+  log_index
+
+  # column name
+  raw_data
+
+  # column name
+  to_address
+
+  # column name
+  transaction_index
+
+  # column name
+  value
+}
+
+# input type for updating data in table "dev_property_transfer"
+input dev_property_transfer_set_input {
+  block_number: Int
+  event_id: String
+  from_address: String
+  is_lockup: Boolean
+  log_index: Int
+  raw_data: String
+  to_address: String
+  transaction_index: Int
+  value: numeric
+}
+
+# aggregate stddev on columns
+type dev_property_transfer_stddev_fields {
+  block_number: Float
+  log_index: Float
+  transaction_index: Float
+  value: Float
+}
+
+# order by stddev() on columns of table "dev_property_transfer"
+input dev_property_transfer_stddev_order_by {
+  block_number: order_by
+  log_index: order_by
+  transaction_index: order_by
+  value: order_by
+}
+
+# aggregate stddev_pop on columns
+type dev_property_transfer_stddev_pop_fields {
+  block_number: Float
+  log_index: Float
+  transaction_index: Float
+  value: Float
+}
+
+# order by stddev_pop() on columns of table "dev_property_transfer"
+input dev_property_transfer_stddev_pop_order_by {
+  block_number: order_by
+  log_index: order_by
+  transaction_index: order_by
+  value: order_by
+}
+
+# aggregate stddev_samp on columns
+type dev_property_transfer_stddev_samp_fields {
+  block_number: Float
+  log_index: Float
+  transaction_index: Float
+  value: Float
+}
+
+# order by stddev_samp() on columns of table "dev_property_transfer"
+input dev_property_transfer_stddev_samp_order_by {
+  block_number: order_by
+  log_index: order_by
+  transaction_index: order_by
+  value: order_by
+}
+
+# aggregate sum on columns
+type dev_property_transfer_sum_fields {
+  block_number: Int
+  log_index: Int
+  transaction_index: Int
+  value: numeric
+}
+
+# order by sum() on columns of table "dev_property_transfer"
+input dev_property_transfer_sum_order_by {
+  block_number: order_by
+  log_index: order_by
+  transaction_index: order_by
+  value: order_by
+}
+
+# update columns of table "dev_property_transfer"
+enum dev_property_transfer_update_column {
+  # column name
+  block_number
+
+  # column name
+  event_id
+
+  # column name
+  from_address
+
+  # column name
+  is_lockup
+
+  # column name
+  log_index
+
+  # column name
+  raw_data
+
+  # column name
+  to_address
+
+  # column name
+  transaction_index
+
+  # column name
+  value
+}
+
+# aggregate var_pop on columns
+type dev_property_transfer_var_pop_fields {
+  block_number: Float
+  log_index: Float
+  transaction_index: Float
+  value: Float
+}
+
+# order by var_pop() on columns of table "dev_property_transfer"
+input dev_property_transfer_var_pop_order_by {
+  block_number: order_by
+  log_index: order_by
+  transaction_index: order_by
+  value: order_by
+}
+
+# aggregate var_samp on columns
+type dev_property_transfer_var_samp_fields {
+  block_number: Float
+  log_index: Float
+  transaction_index: Float
+  value: Float
+}
+
+# order by var_samp() on columns of table "dev_property_transfer"
+input dev_property_transfer_var_samp_order_by {
+  block_number: order_by
+  log_index: order_by
+  transaction_index: order_by
+  value: order_by
+}
+
+# aggregate variance on columns
+type dev_property_transfer_variance_fields {
+  block_number: Float
+  log_index: Float
+  transaction_index: Float
+  value: Float
+}
+
+# order by variance() on columns of table "dev_property_transfer"
+input dev_property_transfer_variance_order_by {
+  block_number: order_by
+  log_index: order_by
+  transaction_index: order_by
+  value: order_by
 }
 
 # expression to compare columns of type Int. All fields are combined with logical 'AND'.
@@ -1053,53 +923,37 @@ input Int_comparison_exp {
   _nin: [Int!]
 }
 
+# lockup event information. records are added each time an lockup is executed.
+#
+#
 # columns and relationships of "lockup_lockedup"
+#
 type lockup_lockedup {
-  # An array relationship
-  allocation(
-    # distinct select on columns
-    distinct_on: [allocator_allocation_result_select_column!]
-
-    # limit the number of rows returned
-    limit: Int
-
-    # skip the first n rows. Use only with order_by
-    offset: Int
-
-    # sort the rows by one or more columns
-    order_by: [allocator_allocation_result_order_by!]
-
-    # filter the rows returned
-    where: allocator_allocation_result_bool_exp
-  ): [allocator_allocation_result!]!
-
-  # An aggregated array relationship
-  allocation_aggregate(
-    # distinct select on columns
-    distinct_on: [allocator_allocation_result_select_column!]
-
-    # limit the number of rows returned
-    limit: Int
-
-    # skip the first n rows. Use only with order_by
-    offset: Int
-
-    # sort the rows by one or more columns
-    order_by: [allocator_allocation_result_order_by!]
-
-    # filter the rows returned
-    where: allocator_allocation_result_bool_exp
-  ): allocator_allocation_result_aggregate!
+  # event block number
   block_number: Int!
+
+  # event id
   event_id: String!
+
+  # The address holding the Dev token to be locked up
   from_address: String!
+
+  # event log index
   log_index: Int!
+
+  # lockup destination property address
   property: String!
 
   # An object relationship
   property_creation: property_factory_create
+
+  # event raw data
   raw_data: String!
+
+  # lockup token value
   token_value: numeric!
+
+  # event transaction index
   transaction_index: Int!
 }
 
@@ -1166,7 +1020,6 @@ input lockup_lockedup_bool_exp {
   _and: [lockup_lockedup_bool_exp]
   _not: lockup_lockedup_bool_exp
   _or: [lockup_lockedup_bool_exp]
-  allocation: allocator_allocation_result_bool_exp
   block_number: Int_comparison_exp
   event_id: String_comparison_exp
   from_address: String_comparison_exp
@@ -1194,7 +1047,6 @@ input lockup_lockedup_inc_input {
 
 # input type for inserting data into table "lockup_lockedup"
 input lockup_lockedup_insert_input {
-  allocation: allocator_allocation_result_arr_rel_insert_input
   block_number: Int
   event_id: String
   from_address: String
@@ -1278,7 +1130,6 @@ input lockup_lockedup_on_conflict {
 
 # ordering options when selecting data from "lockup_lockedup"
 input lockup_lockedup_order_by {
-  allocation_aggregate: allocator_allocation_result_aggregate_order_by
   block_number: order_by
   event_id: order_by
   from_address: order_by
@@ -1292,6 +1143,7 @@ input lockup_lockedup_order_by {
 
 # primary key columns input for table: "lockup_lockedup"
 input lockup_lockedup_pk_columns_input {
+  # event id
   event_id: String!
 }
 
@@ -1473,43 +1325,13 @@ input lockup_lockedup_variance_order_by {
   transaction_index: order_by
 }
 
+# market create event information. records are added each time an market is created.
+#
+#
 # columns and relationships of "market_factory_create"
+#
 type market_factory_create {
-  # An array relationship
-  allocation(
-    # distinct select on columns
-    distinct_on: [allocator_allocation_result_select_column!]
-
-    # limit the number of rows returned
-    limit: Int
-
-    # skip the first n rows. Use only with order_by
-    offset: Int
-
-    # sort the rows by one or more columns
-    order_by: [allocator_allocation_result_order_by!]
-
-    # filter the rows returned
-    where: allocator_allocation_result_bool_exp
-  ): [allocator_allocation_result!]!
-
-  # An aggregated array relationship
-  allocation_aggregate(
-    # distinct select on columns
-    distinct_on: [allocator_allocation_result_select_column!]
-
-    # limit the number of rows returned
-    limit: Int
-
-    # skip the first n rows. Use only with order_by
-    offset: Int
-
-    # sort the rows by one or more columns
-    order_by: [allocator_allocation_result_order_by!]
-
-    # filter the rows returned
-    where: allocator_allocation_result_bool_exp
-  ): allocator_allocation_result_aggregate!
+  # event block number
   block_number: Int!
 
   # An array relationship
@@ -1547,9 +1369,17 @@ type market_factory_create {
     # filter the rows returned
     where: metrics_factory_destroy_bool_exp
   ): metrics_factory_destroy_aggregate!
+
+  # event id
   event_id: String!
+
+  # the address of the account where you created the market
   from_address: String!
+
+  # event log index
   log_index: Int!
+
+  # the address of the created market
   market: String!
 
   # An array relationship
@@ -1587,7 +1417,11 @@ type market_factory_create {
     # filter the rows returned
     where: metrics_factory_create_bool_exp
   ): metrics_factory_create_aggregate!
+
+  # event raw data
   raw_data: String!
+
+  # event transaction index
   transaction_index: Int!
 }
 
@@ -1652,7 +1486,6 @@ input market_factory_create_bool_exp {
   _and: [market_factory_create_bool_exp]
   _not: market_factory_create_bool_exp
   _or: [market_factory_create_bool_exp]
-  allocation: allocator_allocation_result_bool_exp
   block_number: Int_comparison_exp
   destroyed_metrics: metrics_factory_destroy_bool_exp
   event_id: String_comparison_exp
@@ -1679,7 +1512,6 @@ input market_factory_create_inc_input {
 
 # input type for inserting data into table "market_factory_create"
 input market_factory_create_insert_input {
-  allocation: allocator_allocation_result_arr_rel_insert_input
   block_number: Int
   destroyed_metrics: metrics_factory_destroy_arr_rel_insert_input
   event_id: String
@@ -1759,7 +1591,6 @@ input market_factory_create_on_conflict {
 
 # ordering options when selecting data from "market_factory_create"
 input market_factory_create_order_by {
-  allocation_aggregate: allocator_allocation_result_aggregate_order_by
   block_number: order_by
   destroyed_metrics_aggregate: metrics_factory_destroy_aggregate_order_by
   event_id: order_by
@@ -1773,6 +1604,7 @@ input market_factory_create_order_by {
 
 # primary key columns input for table: "market_factory_create"
 input market_factory_create_pk_columns_input {
+  # event id
   event_id: String!
 }
 
@@ -1933,20 +1765,37 @@ input market_factory_create_variance_order_by {
   transaction_index: order_by
 }
 
+# metrics create event information. records are added each time an metrics is created.
+#
+#
 # columns and relationships of "metrics_factory_create"
+#
 type metrics_factory_create {
+  # event block number
   block_number: Int!
 
   # An object relationship
   destroyed_metrics: metrics_factory_destroy
+
+  # event id
   event_id: String!
+
+  # the address of the market contract that created the metrics
   from_address: String!
+
+  # event log index
   log_index: Int!
 
   # An object relationship
   market: market_factory_create
+
+  # the address of the created metrics
   metrics: String!
+
+  # event raw data
   raw_data: String!
+
+  # event transaction index
   transaction_index: Int!
 }
 
@@ -2129,6 +1978,7 @@ input metrics_factory_create_order_by {
 
 # primary key columns input for table: "metrics_factory_create"
 input metrics_factory_create_pk_columns_input {
+  # event id
   event_id: String!
 }
 
@@ -2289,20 +2139,37 @@ input metrics_factory_create_variance_order_by {
   transaction_index: order_by
 }
 
+# metrics destroy event information. records are added each time an metrics is disable.
+#
+#
 # columns and relationships of "metrics_factory_destroy"
+#
 type metrics_factory_destroy {
+  # event block number
   block_number: Int!
+
+  # event id
   event_id: String!
+
+  # the address of the market contract that disabled the metrics
   from_address: String!
+
+  # event log index
   log_index: Int!
 
   # An object relationship
   market: market_factory_create
+
+  # the address of the disabled metrics
   metrics: String!
 
   # An object relationship
   metrics_creation: metrics_factory_create
+
+  # event raw data
   raw_data: String!
+
+  # event transaction index
   transaction_index: Int!
 }
 
@@ -2485,6 +2352,7 @@ input metrics_factory_destroy_order_by {
 
 # primary key columns input for table: "metrics_factory_destroy"
 input metrics_factory_destroy_pk_columns_input {
+  # event id
   event_id: String!
 }
 
@@ -2647,23 +2515,32 @@ input metrics_factory_destroy_variance_order_by {
 
 # mutation root
 type mutation_root {
-  # delete data from the table: "allocator_allocation_result"
-  delete_allocator_allocation_result(
+  # delete data from the table: "account_lockup"
+  delete_account_lockup(
     # filter the rows which have to be deleted
-    where: allocator_allocation_result_bool_exp!
-  ): allocator_allocation_result_mutation_response
+    where: account_lockup_bool_exp!
+  ): account_lockup_mutation_response
 
-  # delete single row from the table: "allocator_allocation_result"
-  delete_allocator_allocation_result_by_pk(event_id: String!): allocator_allocation_result
+  # delete single row from the table: "account_lockup"
+  delete_account_lockup_by_pk(
+    # account address
+    account_address: String!
 
-  # delete data from the table: "allocator_before_allocation"
-  delete_allocator_before_allocation(
+    # property address
+    property_address: String!
+  ): account_lockup
+
+  # delete data from the table: "dev_property_transfer"
+  delete_dev_property_transfer(
     # filter the rows which have to be deleted
-    where: allocator_before_allocation_bool_exp!
-  ): allocator_before_allocation_mutation_response
+    where: dev_property_transfer_bool_exp!
+  ): dev_property_transfer_mutation_response
 
-  # delete single row from the table: "allocator_before_allocation"
-  delete_allocator_before_allocation_by_pk(event_id: String!): allocator_before_allocation
+  # delete single row from the table: "dev_property_transfer"
+  delete_dev_property_transfer_by_pk(
+    # event id
+    event_id: String!
+  ): dev_property_transfer
 
   # delete data from the table: "lockup_lockedup"
   delete_lockup_lockedup(
@@ -2672,7 +2549,10 @@ type mutation_root {
   ): lockup_lockedup_mutation_response
 
   # delete single row from the table: "lockup_lockedup"
-  delete_lockup_lockedup_by_pk(event_id: String!): lockup_lockedup
+  delete_lockup_lockedup_by_pk(
+    # event id
+    event_id: String!
+  ): lockup_lockedup
 
   # delete data from the table: "market_factory_create"
   delete_market_factory_create(
@@ -2681,7 +2561,10 @@ type mutation_root {
   ): market_factory_create_mutation_response
 
   # delete single row from the table: "market_factory_create"
-  delete_market_factory_create_by_pk(event_id: String!): market_factory_create
+  delete_market_factory_create_by_pk(
+    # event id
+    event_id: String!
+  ): market_factory_create
 
   # delete data from the table: "metrics_factory_create"
   delete_metrics_factory_create(
@@ -2690,7 +2573,10 @@ type mutation_root {
   ): metrics_factory_create_mutation_response
 
   # delete single row from the table: "metrics_factory_create"
-  delete_metrics_factory_create_by_pk(event_id: String!): metrics_factory_create
+  delete_metrics_factory_create_by_pk(
+    # event id
+    event_id: String!
+  ): metrics_factory_create
 
   # delete data from the table: "metrics_factory_destroy"
   delete_metrics_factory_destroy(
@@ -2699,7 +2585,10 @@ type mutation_root {
   ): metrics_factory_destroy_mutation_response
 
   # delete single row from the table: "metrics_factory_destroy"
-  delete_metrics_factory_destroy_by_pk(event_id: String!): metrics_factory_destroy
+  delete_metrics_factory_destroy_by_pk(
+    # event id
+    event_id: String!
+  ): metrics_factory_destroy
 
   # delete data from the table: "policy_factory_create"
   delete_policy_factory_create(
@@ -2708,7 +2597,10 @@ type mutation_root {
   ): policy_factory_create_mutation_response
 
   # delete single row from the table: "policy_factory_create"
-  delete_policy_factory_create_by_pk(event_id: String!): policy_factory_create
+  delete_policy_factory_create_by_pk(
+    # event id
+    event_id: String!
+  ): policy_factory_create
 
   # delete data from the table: "property_authentication"
   delete_property_authentication(
@@ -2717,7 +2609,13 @@ type mutation_root {
   ): property_authentication_mutation_response
 
   # delete single row from the table: "property_authentication"
-  delete_property_authentication_by_pk(metrics: String!, property: String!): property_authentication
+  delete_property_authentication_by_pk(
+    # the metrics address for authentication
+    metrics: String!
+
+    # property address
+    property: String!
+  ): property_authentication
 
   # delete data from the table: "property_authentication_deleted"
   delete_property_authentication_deleted(
@@ -2726,7 +2624,13 @@ type mutation_root {
   ): property_authentication_deleted_mutation_response
 
   # delete single row from the table: "property_authentication_deleted"
-  delete_property_authentication_deleted_by_pk(metrics: String!, property: String!): property_authentication_deleted
+  delete_property_authentication_deleted_by_pk(
+    # disabled metrics address for authentication
+    metrics: String!
+
+    # property address
+    property: String!
+  ): property_authentication_deleted
 
   # delete data from the table: "property_factory_create"
   delete_property_factory_create(
@@ -2735,7 +2639,25 @@ type mutation_root {
   ): property_factory_create_mutation_response
 
   # delete single row from the table: "property_factory_create"
-  delete_property_factory_create_by_pk(event_id: String!): property_factory_create
+  delete_property_factory_create_by_pk(
+    # event id
+    event_id: String!
+  ): property_factory_create
+
+  # delete data from the table: "property_lockup"
+  delete_property_lockup(
+    # filter the rows which have to be deleted
+    where: property_lockup_bool_exp!
+  ): property_lockup_mutation_response
+
+  # delete single row from the table: "property_lockup"
+  delete_property_lockup_by_pk(
+    # account address
+    account_address: String!
+
+    # property address
+    property_address: String!
+  ): property_lockup
 
   # delete data from the table: "property_meta"
   delete_property_meta(
@@ -2744,52 +2666,49 @@ type mutation_root {
   ): property_meta_mutation_response
 
   # delete single row from the table: "property_meta"
-  delete_property_meta_by_pk(author: String!, property: String!): property_meta
+  delete_property_meta_by_pk(
+    # property author address
+    author: String!
 
-  # delete data from the table: "reward_calculation_result"
-  delete_reward_calculation_result(
-    # filter the rows which have to be deleted
-    where: reward_calculation_result_bool_exp!
-  ): reward_calculation_result_mutation_response
+    # property address
+    property: String!
+  ): property_meta
 
-  # delete single row from the table: "reward_calculation_result"
-  delete_reward_calculation_result_by_pk(event_id: String!): reward_calculation_result
-
-  # insert data into the table: "allocator_allocation_result"
-  insert_allocator_allocation_result(
+  # insert data into the table: "account_lockup"
+  insert_account_lockup(
     # the rows to be inserted
-    objects: [allocator_allocation_result_insert_input!]!
+    objects: [account_lockup_insert_input!]!
 
     # on conflict condition
-    on_conflict: allocator_allocation_result_on_conflict
-  ): allocator_allocation_result_mutation_response
+    on_conflict: account_lockup_on_conflict
+  ): account_lockup_mutation_response
 
-  # insert a single row into the table: "allocator_allocation_result"
-  insert_allocator_allocation_result_one(
+  # insert a single row into the table: "account_lockup"
+  insert_account_lockup_one(
     # the row to be inserted
-    object: allocator_allocation_result_insert_input!
+    object: account_lockup_insert_input!
 
     # on conflict condition
-    on_conflict: allocator_allocation_result_on_conflict
-  ): allocator_allocation_result
+    on_conflict: account_lockup_on_conflict
+  ): account_lockup
 
-  # insert data into the table: "allocator_before_allocation"
-  insert_allocator_before_allocation(
+  # insert data into the table: "dev_property_transfer"
+  insert_dev_property_transfer(
     # the rows to be inserted
-    objects: [allocator_before_allocation_insert_input!]!
+    objects: [dev_property_transfer_insert_input!]!
 
     # on conflict condition
-    on_conflict: allocator_before_allocation_on_conflict
-  ): allocator_before_allocation_mutation_response
+    on_conflict: dev_property_transfer_on_conflict
+  ): dev_property_transfer_mutation_response
 
-  # insert a single row into the table: "allocator_before_allocation"
-  insert_allocator_before_allocation_one(
+  # insert a single row into the table: "dev_property_transfer"
+  insert_dev_property_transfer_one(
     # the row to be inserted
-    object: allocator_before_allocation_insert_input!
+    object: dev_property_transfer_insert_input!
 
     # on conflict condition
-    on_conflict: allocator_before_allocation_on_conflict
-  ): allocator_before_allocation
+    on_conflict: dev_property_transfer_on_conflict
+  ): dev_property_transfer
 
   # insert data into the table: "lockup_lockedup"
   insert_lockup_lockedup(
@@ -2935,6 +2854,24 @@ type mutation_root {
     on_conflict: property_factory_create_on_conflict
   ): property_factory_create
 
+  # insert data into the table: "property_lockup"
+  insert_property_lockup(
+    # the rows to be inserted
+    objects: [property_lockup_insert_input!]!
+
+    # on conflict condition
+    on_conflict: property_lockup_on_conflict
+  ): property_lockup_mutation_response
+
+  # insert a single row into the table: "property_lockup"
+  insert_property_lockup_one(
+    # the row to be inserted
+    object: property_lockup_insert_input!
+
+    # on conflict condition
+    on_conflict: property_lockup_on_conflict
+  ): property_lockup
+
   # insert data into the table: "property_meta"
   insert_property_meta(
     # the rows to be inserted
@@ -2953,67 +2890,49 @@ type mutation_root {
     on_conflict: property_meta_on_conflict
   ): property_meta
 
-  # insert data into the table: "reward_calculation_result"
-  insert_reward_calculation_result(
-    # the rows to be inserted
-    objects: [reward_calculation_result_insert_input!]!
-
-    # on conflict condition
-    on_conflict: reward_calculation_result_on_conflict
-  ): reward_calculation_result_mutation_response
-
-  # insert a single row into the table: "reward_calculation_result"
-  insert_reward_calculation_result_one(
-    # the row to be inserted
-    object: reward_calculation_result_insert_input!
-
-    # on conflict condition
-    on_conflict: reward_calculation_result_on_conflict
-  ): reward_calculation_result
-
-  # update data of the table: "allocator_allocation_result"
-  update_allocator_allocation_result(
+  # update data of the table: "account_lockup"
+  update_account_lockup(
     # increments the integer columns with given value of the filtered values
-    _inc: allocator_allocation_result_inc_input
+    _inc: account_lockup_inc_input
 
     # sets the columns of the filtered rows to the given values
-    _set: allocator_allocation_result_set_input
+    _set: account_lockup_set_input
 
     # filter the rows which have to be updated
-    where: allocator_allocation_result_bool_exp!
-  ): allocator_allocation_result_mutation_response
+    where: account_lockup_bool_exp!
+  ): account_lockup_mutation_response
 
-  # update single row of the table: "allocator_allocation_result"
-  update_allocator_allocation_result_by_pk(
+  # update single row of the table: "account_lockup"
+  update_account_lockup_by_pk(
     # increments the integer columns with given value of the filtered values
-    _inc: allocator_allocation_result_inc_input
+    _inc: account_lockup_inc_input
 
     # sets the columns of the filtered rows to the given values
-    _set: allocator_allocation_result_set_input
-    pk_columns: allocator_allocation_result_pk_columns_input!
-  ): allocator_allocation_result
+    _set: account_lockup_set_input
+    pk_columns: account_lockup_pk_columns_input!
+  ): account_lockup
 
-  # update data of the table: "allocator_before_allocation"
-  update_allocator_before_allocation(
+  # update data of the table: "dev_property_transfer"
+  update_dev_property_transfer(
     # increments the integer columns with given value of the filtered values
-    _inc: allocator_before_allocation_inc_input
+    _inc: dev_property_transfer_inc_input
 
     # sets the columns of the filtered rows to the given values
-    _set: allocator_before_allocation_set_input
+    _set: dev_property_transfer_set_input
 
     # filter the rows which have to be updated
-    where: allocator_before_allocation_bool_exp!
-  ): allocator_before_allocation_mutation_response
+    where: dev_property_transfer_bool_exp!
+  ): dev_property_transfer_mutation_response
 
-  # update single row of the table: "allocator_before_allocation"
-  update_allocator_before_allocation_by_pk(
+  # update single row of the table: "dev_property_transfer"
+  update_dev_property_transfer_by_pk(
     # increments the integer columns with given value of the filtered values
-    _inc: allocator_before_allocation_inc_input
+    _inc: dev_property_transfer_inc_input
 
     # sets the columns of the filtered rows to the given values
-    _set: allocator_before_allocation_set_input
-    pk_columns: allocator_before_allocation_pk_columns_input!
-  ): allocator_before_allocation
+    _set: dev_property_transfer_set_input
+    pk_columns: dev_property_transfer_pk_columns_input!
+  ): dev_property_transfer
 
   # update data of the table: "lockup_lockedup"
   update_lockup_lockedup(
@@ -3191,6 +3110,28 @@ type mutation_root {
     pk_columns: property_factory_create_pk_columns_input!
   ): property_factory_create
 
+  # update data of the table: "property_lockup"
+  update_property_lockup(
+    # increments the integer columns with given value of the filtered values
+    _inc: property_lockup_inc_input
+
+    # sets the columns of the filtered rows to the given values
+    _set: property_lockup_set_input
+
+    # filter the rows which have to be updated
+    where: property_lockup_bool_exp!
+  ): property_lockup_mutation_response
+
+  # update single row of the table: "property_lockup"
+  update_property_lockup_by_pk(
+    # increments the integer columns with given value of the filtered values
+    _inc: property_lockup_inc_input
+
+    # sets the columns of the filtered rows to the given values
+    _set: property_lockup_set_input
+    pk_columns: property_lockup_pk_columns_input!
+  ): property_lockup
+
   # update data of the table: "property_meta"
   update_property_meta(
     # increments the integer columns with given value of the filtered values
@@ -3212,28 +3153,6 @@ type mutation_root {
     _set: property_meta_set_input
     pk_columns: property_meta_pk_columns_input!
   ): property_meta
-
-  # update data of the table: "reward_calculation_result"
-  update_reward_calculation_result(
-    # increments the integer columns with given value of the filtered values
-    _inc: reward_calculation_result_inc_input
-
-    # sets the columns of the filtered rows to the given values
-    _set: reward_calculation_result_set_input
-
-    # filter the rows which have to be updated
-    where: reward_calculation_result_bool_exp!
-  ): reward_calculation_result_mutation_response
-
-  # update single row of the table: "reward_calculation_result"
-  update_reward_calculation_result_by_pk(
-    # increments the integer columns with given value of the filtered values
-    _inc: reward_calculation_result_inc_input
-
-    # sets the columns of the filtered rows to the given values
-    _set: reward_calculation_result_set_input
-    pk_columns: reward_calculation_result_pk_columns_input!
-  ): reward_calculation_result
 }
 
 scalar numeric
@@ -3249,21 +3168,6 @@ input numeric_comparison_exp {
   _lte: numeric
   _neq: numeric
   _nin: [numeric!]
-}
-
-scalar oid
-
-# expression to compare columns of type oid. All fields are combined with logical 'AND'.
-input oid_comparison_exp {
-  _eq: oid
-  _gt: oid
-  _gte: oid
-  _in: [oid!]
-  _is_null: Boolean
-  _lt: oid
-  _lte: oid
-  _neq: oid
-  _nin: [oid!]
 }
 
 # column ordering options
@@ -3287,1015 +3191,31 @@ enum order_by {
   desc_nulls_last
 }
 
-# columns and relationships of "pg_buffercache"
-type pg_buffercache {
-  bufferid: Int
-  isdirty: Boolean
-  pinning_backends: Int
-  relblocknumber: bigint
-  reldatabase: oid
-  relfilenode: oid
-  relforknumber: smallint
-  reltablespace: oid
-  usagecount: smallint
-}
-
-# aggregated selection of "pg_buffercache"
-type pg_buffercache_aggregate {
-  aggregate: pg_buffercache_aggregate_fields
-  nodes: [pg_buffercache!]!
-}
-
-# aggregate fields of "pg_buffercache"
-type pg_buffercache_aggregate_fields {
-  avg: pg_buffercache_avg_fields
-  count(columns: [pg_buffercache_select_column!], distinct: Boolean): Int
-  max: pg_buffercache_max_fields
-  min: pg_buffercache_min_fields
-  stddev: pg_buffercache_stddev_fields
-  stddev_pop: pg_buffercache_stddev_pop_fields
-  stddev_samp: pg_buffercache_stddev_samp_fields
-  sum: pg_buffercache_sum_fields
-  var_pop: pg_buffercache_var_pop_fields
-  var_samp: pg_buffercache_var_samp_fields
-  variance: pg_buffercache_variance_fields
-}
-
-# order by aggregate values of table "pg_buffercache"
-input pg_buffercache_aggregate_order_by {
-  avg: pg_buffercache_avg_order_by
-  count: order_by
-  max: pg_buffercache_max_order_by
-  min: pg_buffercache_min_order_by
-  stddev: pg_buffercache_stddev_order_by
-  stddev_pop: pg_buffercache_stddev_pop_order_by
-  stddev_samp: pg_buffercache_stddev_samp_order_by
-  sum: pg_buffercache_sum_order_by
-  var_pop: pg_buffercache_var_pop_order_by
-  var_samp: pg_buffercache_var_samp_order_by
-  variance: pg_buffercache_variance_order_by
-}
-
-# aggregate avg on columns
-type pg_buffercache_avg_fields {
-  bufferid: Float
-  pinning_backends: Float
-  relblocknumber: Float
-  relforknumber: Float
-  usagecount: Float
-}
-
-# order by avg() on columns of table "pg_buffercache"
-input pg_buffercache_avg_order_by {
-  bufferid: order_by
-  pinning_backends: order_by
-  relblocknumber: order_by
-  relforknumber: order_by
-  usagecount: order_by
-}
-
-# Boolean expression to filter rows from the table "pg_buffercache". All fields are combined with a logical 'AND'.
-input pg_buffercache_bool_exp {
-  _and: [pg_buffercache_bool_exp]
-  _not: pg_buffercache_bool_exp
-  _or: [pg_buffercache_bool_exp]
-  bufferid: Int_comparison_exp
-  isdirty: Boolean_comparison_exp
-  pinning_backends: Int_comparison_exp
-  relblocknumber: bigint_comparison_exp
-  reldatabase: oid_comparison_exp
-  relfilenode: oid_comparison_exp
-  relforknumber: smallint_comparison_exp
-  reltablespace: oid_comparison_exp
-  usagecount: smallint_comparison_exp
-}
-
-# aggregate max on columns
-type pg_buffercache_max_fields {
-  bufferid: Int
-  pinning_backends: Int
-  relblocknumber: bigint
-  relforknumber: smallint
-  usagecount: smallint
-}
-
-# order by max() on columns of table "pg_buffercache"
-input pg_buffercache_max_order_by {
-  bufferid: order_by
-  pinning_backends: order_by
-  relblocknumber: order_by
-  relforknumber: order_by
-  usagecount: order_by
-}
-
-# aggregate min on columns
-type pg_buffercache_min_fields {
-  bufferid: Int
-  pinning_backends: Int
-  relblocknumber: bigint
-  relforknumber: smallint
-  usagecount: smallint
-}
-
-# order by min() on columns of table "pg_buffercache"
-input pg_buffercache_min_order_by {
-  bufferid: order_by
-  pinning_backends: order_by
-  relblocknumber: order_by
-  relforknumber: order_by
-  usagecount: order_by
-}
-
-# ordering options when selecting data from "pg_buffercache"
-input pg_buffercache_order_by {
-  bufferid: order_by
-  isdirty: order_by
-  pinning_backends: order_by
-  relblocknumber: order_by
-  reldatabase: order_by
-  relfilenode: order_by
-  relforknumber: order_by
-  reltablespace: order_by
-  usagecount: order_by
-}
-
-# select columns of table "pg_buffercache"
-enum pg_buffercache_select_column {
-  # column name
-  bufferid
-
-  # column name
-  isdirty
-
-  # column name
-  pinning_backends
-
-  # column name
-  relblocknumber
-
-  # column name
-  reldatabase
-
-  # column name
-  relfilenode
-
-  # column name
-  relforknumber
-
-  # column name
-  reltablespace
-
-  # column name
-  usagecount
-}
-
-# aggregate stddev on columns
-type pg_buffercache_stddev_fields {
-  bufferid: Float
-  pinning_backends: Float
-  relblocknumber: Float
-  relforknumber: Float
-  usagecount: Float
-}
-
-# order by stddev() on columns of table "pg_buffercache"
-input pg_buffercache_stddev_order_by {
-  bufferid: order_by
-  pinning_backends: order_by
-  relblocknumber: order_by
-  relforknumber: order_by
-  usagecount: order_by
-}
-
-# aggregate stddev_pop on columns
-type pg_buffercache_stddev_pop_fields {
-  bufferid: Float
-  pinning_backends: Float
-  relblocknumber: Float
-  relforknumber: Float
-  usagecount: Float
-}
-
-# order by stddev_pop() on columns of table "pg_buffercache"
-input pg_buffercache_stddev_pop_order_by {
-  bufferid: order_by
-  pinning_backends: order_by
-  relblocknumber: order_by
-  relforknumber: order_by
-  usagecount: order_by
-}
-
-# aggregate stddev_samp on columns
-type pg_buffercache_stddev_samp_fields {
-  bufferid: Float
-  pinning_backends: Float
-  relblocknumber: Float
-  relforknumber: Float
-  usagecount: Float
-}
-
-# order by stddev_samp() on columns of table "pg_buffercache"
-input pg_buffercache_stddev_samp_order_by {
-  bufferid: order_by
-  pinning_backends: order_by
-  relblocknumber: order_by
-  relforknumber: order_by
-  usagecount: order_by
-}
-
-# aggregate sum on columns
-type pg_buffercache_sum_fields {
-  bufferid: Int
-  pinning_backends: Int
-  relblocknumber: bigint
-  relforknumber: smallint
-  usagecount: smallint
-}
-
-# order by sum() on columns of table "pg_buffercache"
-input pg_buffercache_sum_order_by {
-  bufferid: order_by
-  pinning_backends: order_by
-  relblocknumber: order_by
-  relforknumber: order_by
-  usagecount: order_by
-}
-
-# aggregate var_pop on columns
-type pg_buffercache_var_pop_fields {
-  bufferid: Float
-  pinning_backends: Float
-  relblocknumber: Float
-  relforknumber: Float
-  usagecount: Float
-}
-
-# order by var_pop() on columns of table "pg_buffercache"
-input pg_buffercache_var_pop_order_by {
-  bufferid: order_by
-  pinning_backends: order_by
-  relblocknumber: order_by
-  relforknumber: order_by
-  usagecount: order_by
-}
-
-# aggregate var_samp on columns
-type pg_buffercache_var_samp_fields {
-  bufferid: Float
-  pinning_backends: Float
-  relblocknumber: Float
-  relforknumber: Float
-  usagecount: Float
-}
-
-# order by var_samp() on columns of table "pg_buffercache"
-input pg_buffercache_var_samp_order_by {
-  bufferid: order_by
-  pinning_backends: order_by
-  relblocknumber: order_by
-  relforknumber: order_by
-  usagecount: order_by
-}
-
-# aggregate variance on columns
-type pg_buffercache_variance_fields {
-  bufferid: Float
-  pinning_backends: Float
-  relblocknumber: Float
-  relforknumber: Float
-  usagecount: Float
-}
-
-# order by variance() on columns of table "pg_buffercache"
-input pg_buffercache_variance_order_by {
-  bufferid: order_by
-  pinning_backends: order_by
-  relblocknumber: order_by
-  relforknumber: order_by
-  usagecount: order_by
-}
-
-# columns and relationships of "pg_stat_statements"
-type pg_stat_statements {
-  blk_read_time: float8
-  blk_write_time: float8
-  calls: bigint
-  dbid: oid
-  local_blks_dirtied: bigint
-  local_blks_hit: bigint
-  local_blks_read: bigint
-  local_blks_written: bigint
-  max_time: float8
-  mean_time: float8
-  min_time: float8
-  query: String
-  queryid: bigint
-  rows: bigint
-  shared_blks_dirtied: bigint
-  shared_blks_hit: bigint
-  shared_blks_read: bigint
-  shared_blks_written: bigint
-  stddev_time: float8
-  temp_blks_read: bigint
-  temp_blks_written: bigint
-  total_time: float8
-  userid: oid
-}
-
-# aggregated selection of "pg_stat_statements"
-type pg_stat_statements_aggregate {
-  aggregate: pg_stat_statements_aggregate_fields
-  nodes: [pg_stat_statements!]!
-}
-
-# aggregate fields of "pg_stat_statements"
-type pg_stat_statements_aggregate_fields {
-  avg: pg_stat_statements_avg_fields
-  count(columns: [pg_stat_statements_select_column!], distinct: Boolean): Int
-  max: pg_stat_statements_max_fields
-  min: pg_stat_statements_min_fields
-  stddev: pg_stat_statements_stddev_fields
-  stddev_pop: pg_stat_statements_stddev_pop_fields
-  stddev_samp: pg_stat_statements_stddev_samp_fields
-  sum: pg_stat_statements_sum_fields
-  var_pop: pg_stat_statements_var_pop_fields
-  var_samp: pg_stat_statements_var_samp_fields
-  variance: pg_stat_statements_variance_fields
-}
-
-# order by aggregate values of table "pg_stat_statements"
-input pg_stat_statements_aggregate_order_by {
-  avg: pg_stat_statements_avg_order_by
-  count: order_by
-  max: pg_stat_statements_max_order_by
-  min: pg_stat_statements_min_order_by
-  stddev: pg_stat_statements_stddev_order_by
-  stddev_pop: pg_stat_statements_stddev_pop_order_by
-  stddev_samp: pg_stat_statements_stddev_samp_order_by
-  sum: pg_stat_statements_sum_order_by
-  var_pop: pg_stat_statements_var_pop_order_by
-  var_samp: pg_stat_statements_var_samp_order_by
-  variance: pg_stat_statements_variance_order_by
-}
-
-# aggregate avg on columns
-type pg_stat_statements_avg_fields {
-  blk_read_time: Float
-  blk_write_time: Float
-  calls: Float
-  local_blks_dirtied: Float
-  local_blks_hit: Float
-  local_blks_read: Float
-  local_blks_written: Float
-  max_time: Float
-  mean_time: Float
-  min_time: Float
-  queryid: Float
-  rows: Float
-  shared_blks_dirtied: Float
-  shared_blks_hit: Float
-  shared_blks_read: Float
-  shared_blks_written: Float
-  stddev_time: Float
-  temp_blks_read: Float
-  temp_blks_written: Float
-  total_time: Float
-}
-
-# order by avg() on columns of table "pg_stat_statements"
-input pg_stat_statements_avg_order_by {
-  blk_read_time: order_by
-  blk_write_time: order_by
-  calls: order_by
-  local_blks_dirtied: order_by
-  local_blks_hit: order_by
-  local_blks_read: order_by
-  local_blks_written: order_by
-  max_time: order_by
-  mean_time: order_by
-  min_time: order_by
-  queryid: order_by
-  rows: order_by
-  shared_blks_dirtied: order_by
-  shared_blks_hit: order_by
-  shared_blks_read: order_by
-  shared_blks_written: order_by
-  stddev_time: order_by
-  temp_blks_read: order_by
-  temp_blks_written: order_by
-  total_time: order_by
-}
-
-# Boolean expression to filter rows from the table "pg_stat_statements". All fields are combined with a logical 'AND'.
-input pg_stat_statements_bool_exp {
-  _and: [pg_stat_statements_bool_exp]
-  _not: pg_stat_statements_bool_exp
-  _or: [pg_stat_statements_bool_exp]
-  blk_read_time: float8_comparison_exp
-  blk_write_time: float8_comparison_exp
-  calls: bigint_comparison_exp
-  dbid: oid_comparison_exp
-  local_blks_dirtied: bigint_comparison_exp
-  local_blks_hit: bigint_comparison_exp
-  local_blks_read: bigint_comparison_exp
-  local_blks_written: bigint_comparison_exp
-  max_time: float8_comparison_exp
-  mean_time: float8_comparison_exp
-  min_time: float8_comparison_exp
-  query: String_comparison_exp
-  queryid: bigint_comparison_exp
-  rows: bigint_comparison_exp
-  shared_blks_dirtied: bigint_comparison_exp
-  shared_blks_hit: bigint_comparison_exp
-  shared_blks_read: bigint_comparison_exp
-  shared_blks_written: bigint_comparison_exp
-  stddev_time: float8_comparison_exp
-  temp_blks_read: bigint_comparison_exp
-  temp_blks_written: bigint_comparison_exp
-  total_time: float8_comparison_exp
-  userid: oid_comparison_exp
-}
-
-# aggregate max on columns
-type pg_stat_statements_max_fields {
-  blk_read_time: float8
-  blk_write_time: float8
-  calls: bigint
-  local_blks_dirtied: bigint
-  local_blks_hit: bigint
-  local_blks_read: bigint
-  local_blks_written: bigint
-  max_time: float8
-  mean_time: float8
-  min_time: float8
-  query: String
-  queryid: bigint
-  rows: bigint
-  shared_blks_dirtied: bigint
-  shared_blks_hit: bigint
-  shared_blks_read: bigint
-  shared_blks_written: bigint
-  stddev_time: float8
-  temp_blks_read: bigint
-  temp_blks_written: bigint
-  total_time: float8
-}
-
-# order by max() on columns of table "pg_stat_statements"
-input pg_stat_statements_max_order_by {
-  blk_read_time: order_by
-  blk_write_time: order_by
-  calls: order_by
-  local_blks_dirtied: order_by
-  local_blks_hit: order_by
-  local_blks_read: order_by
-  local_blks_written: order_by
-  max_time: order_by
-  mean_time: order_by
-  min_time: order_by
-  query: order_by
-  queryid: order_by
-  rows: order_by
-  shared_blks_dirtied: order_by
-  shared_blks_hit: order_by
-  shared_blks_read: order_by
-  shared_blks_written: order_by
-  stddev_time: order_by
-  temp_blks_read: order_by
-  temp_blks_written: order_by
-  total_time: order_by
-}
-
-# aggregate min on columns
-type pg_stat_statements_min_fields {
-  blk_read_time: float8
-  blk_write_time: float8
-  calls: bigint
-  local_blks_dirtied: bigint
-  local_blks_hit: bigint
-  local_blks_read: bigint
-  local_blks_written: bigint
-  max_time: float8
-  mean_time: float8
-  min_time: float8
-  query: String
-  queryid: bigint
-  rows: bigint
-  shared_blks_dirtied: bigint
-  shared_blks_hit: bigint
-  shared_blks_read: bigint
-  shared_blks_written: bigint
-  stddev_time: float8
-  temp_blks_read: bigint
-  temp_blks_written: bigint
-  total_time: float8
-}
-
-# order by min() on columns of table "pg_stat_statements"
-input pg_stat_statements_min_order_by {
-  blk_read_time: order_by
-  blk_write_time: order_by
-  calls: order_by
-  local_blks_dirtied: order_by
-  local_blks_hit: order_by
-  local_blks_read: order_by
-  local_blks_written: order_by
-  max_time: order_by
-  mean_time: order_by
-  min_time: order_by
-  query: order_by
-  queryid: order_by
-  rows: order_by
-  shared_blks_dirtied: order_by
-  shared_blks_hit: order_by
-  shared_blks_read: order_by
-  shared_blks_written: order_by
-  stddev_time: order_by
-  temp_blks_read: order_by
-  temp_blks_written: order_by
-  total_time: order_by
-}
-
-# ordering options when selecting data from "pg_stat_statements"
-input pg_stat_statements_order_by {
-  blk_read_time: order_by
-  blk_write_time: order_by
-  calls: order_by
-  dbid: order_by
-  local_blks_dirtied: order_by
-  local_blks_hit: order_by
-  local_blks_read: order_by
-  local_blks_written: order_by
-  max_time: order_by
-  mean_time: order_by
-  min_time: order_by
-  query: order_by
-  queryid: order_by
-  rows: order_by
-  shared_blks_dirtied: order_by
-  shared_blks_hit: order_by
-  shared_blks_read: order_by
-  shared_blks_written: order_by
-  stddev_time: order_by
-  temp_blks_read: order_by
-  temp_blks_written: order_by
-  total_time: order_by
-  userid: order_by
-}
-
-# select columns of table "pg_stat_statements"
-enum pg_stat_statements_select_column {
-  # column name
-  blk_read_time
-
-  # column name
-  blk_write_time
-
-  # column name
-  calls
-
-  # column name
-  dbid
-
-  # column name
-  local_blks_dirtied
-
-  # column name
-  local_blks_hit
-
-  # column name
-  local_blks_read
-
-  # column name
-  local_blks_written
-
-  # column name
-  max_time
-
-  # column name
-  mean_time
-
-  # column name
-  min_time
-
-  # column name
-  query
-
-  # column name
-  queryid
-
-  # column name
-  rows
-
-  # column name
-  shared_blks_dirtied
-
-  # column name
-  shared_blks_hit
-
-  # column name
-  shared_blks_read
-
-  # column name
-  shared_blks_written
-
-  # column name
-  stddev_time
-
-  # column name
-  temp_blks_read
-
-  # column name
-  temp_blks_written
-
-  # column name
-  total_time
-
-  # column name
-  userid
-}
-
-# aggregate stddev on columns
-type pg_stat_statements_stddev_fields {
-  blk_read_time: Float
-  blk_write_time: Float
-  calls: Float
-  local_blks_dirtied: Float
-  local_blks_hit: Float
-  local_blks_read: Float
-  local_blks_written: Float
-  max_time: Float
-  mean_time: Float
-  min_time: Float
-  queryid: Float
-  rows: Float
-  shared_blks_dirtied: Float
-  shared_blks_hit: Float
-  shared_blks_read: Float
-  shared_blks_written: Float
-  stddev_time: Float
-  temp_blks_read: Float
-  temp_blks_written: Float
-  total_time: Float
-}
-
-# order by stddev() on columns of table "pg_stat_statements"
-input pg_stat_statements_stddev_order_by {
-  blk_read_time: order_by
-  blk_write_time: order_by
-  calls: order_by
-  local_blks_dirtied: order_by
-  local_blks_hit: order_by
-  local_blks_read: order_by
-  local_blks_written: order_by
-  max_time: order_by
-  mean_time: order_by
-  min_time: order_by
-  queryid: order_by
-  rows: order_by
-  shared_blks_dirtied: order_by
-  shared_blks_hit: order_by
-  shared_blks_read: order_by
-  shared_blks_written: order_by
-  stddev_time: order_by
-  temp_blks_read: order_by
-  temp_blks_written: order_by
-  total_time: order_by
-}
-
-# aggregate stddev_pop on columns
-type pg_stat_statements_stddev_pop_fields {
-  blk_read_time: Float
-  blk_write_time: Float
-  calls: Float
-  local_blks_dirtied: Float
-  local_blks_hit: Float
-  local_blks_read: Float
-  local_blks_written: Float
-  max_time: Float
-  mean_time: Float
-  min_time: Float
-  queryid: Float
-  rows: Float
-  shared_blks_dirtied: Float
-  shared_blks_hit: Float
-  shared_blks_read: Float
-  shared_blks_written: Float
-  stddev_time: Float
-  temp_blks_read: Float
-  temp_blks_written: Float
-  total_time: Float
-}
-
-# order by stddev_pop() on columns of table "pg_stat_statements"
-input pg_stat_statements_stddev_pop_order_by {
-  blk_read_time: order_by
-  blk_write_time: order_by
-  calls: order_by
-  local_blks_dirtied: order_by
-  local_blks_hit: order_by
-  local_blks_read: order_by
-  local_blks_written: order_by
-  max_time: order_by
-  mean_time: order_by
-  min_time: order_by
-  queryid: order_by
-  rows: order_by
-  shared_blks_dirtied: order_by
-  shared_blks_hit: order_by
-  shared_blks_read: order_by
-  shared_blks_written: order_by
-  stddev_time: order_by
-  temp_blks_read: order_by
-  temp_blks_written: order_by
-  total_time: order_by
-}
-
-# aggregate stddev_samp on columns
-type pg_stat_statements_stddev_samp_fields {
-  blk_read_time: Float
-  blk_write_time: Float
-  calls: Float
-  local_blks_dirtied: Float
-  local_blks_hit: Float
-  local_blks_read: Float
-  local_blks_written: Float
-  max_time: Float
-  mean_time: Float
-  min_time: Float
-  queryid: Float
-  rows: Float
-  shared_blks_dirtied: Float
-  shared_blks_hit: Float
-  shared_blks_read: Float
-  shared_blks_written: Float
-  stddev_time: Float
-  temp_blks_read: Float
-  temp_blks_written: Float
-  total_time: Float
-}
-
-# order by stddev_samp() on columns of table "pg_stat_statements"
-input pg_stat_statements_stddev_samp_order_by {
-  blk_read_time: order_by
-  blk_write_time: order_by
-  calls: order_by
-  local_blks_dirtied: order_by
-  local_blks_hit: order_by
-  local_blks_read: order_by
-  local_blks_written: order_by
-  max_time: order_by
-  mean_time: order_by
-  min_time: order_by
-  queryid: order_by
-  rows: order_by
-  shared_blks_dirtied: order_by
-  shared_blks_hit: order_by
-  shared_blks_read: order_by
-  shared_blks_written: order_by
-  stddev_time: order_by
-  temp_blks_read: order_by
-  temp_blks_written: order_by
-  total_time: order_by
-}
-
-# aggregate sum on columns
-type pg_stat_statements_sum_fields {
-  blk_read_time: float8
-  blk_write_time: float8
-  calls: bigint
-  local_blks_dirtied: bigint
-  local_blks_hit: bigint
-  local_blks_read: bigint
-  local_blks_written: bigint
-  max_time: float8
-  mean_time: float8
-  min_time: float8
-  queryid: bigint
-  rows: bigint
-  shared_blks_dirtied: bigint
-  shared_blks_hit: bigint
-  shared_blks_read: bigint
-  shared_blks_written: bigint
-  stddev_time: float8
-  temp_blks_read: bigint
-  temp_blks_written: bigint
-  total_time: float8
-}
-
-# order by sum() on columns of table "pg_stat_statements"
-input pg_stat_statements_sum_order_by {
-  blk_read_time: order_by
-  blk_write_time: order_by
-  calls: order_by
-  local_blks_dirtied: order_by
-  local_blks_hit: order_by
-  local_blks_read: order_by
-  local_blks_written: order_by
-  max_time: order_by
-  mean_time: order_by
-  min_time: order_by
-  queryid: order_by
-  rows: order_by
-  shared_blks_dirtied: order_by
-  shared_blks_hit: order_by
-  shared_blks_read: order_by
-  shared_blks_written: order_by
-  stddev_time: order_by
-  temp_blks_read: order_by
-  temp_blks_written: order_by
-  total_time: order_by
-}
-
-# aggregate var_pop on columns
-type pg_stat_statements_var_pop_fields {
-  blk_read_time: Float
-  blk_write_time: Float
-  calls: Float
-  local_blks_dirtied: Float
-  local_blks_hit: Float
-  local_blks_read: Float
-  local_blks_written: Float
-  max_time: Float
-  mean_time: Float
-  min_time: Float
-  queryid: Float
-  rows: Float
-  shared_blks_dirtied: Float
-  shared_blks_hit: Float
-  shared_blks_read: Float
-  shared_blks_written: Float
-  stddev_time: Float
-  temp_blks_read: Float
-  temp_blks_written: Float
-  total_time: Float
-}
-
-# order by var_pop() on columns of table "pg_stat_statements"
-input pg_stat_statements_var_pop_order_by {
-  blk_read_time: order_by
-  blk_write_time: order_by
-  calls: order_by
-  local_blks_dirtied: order_by
-  local_blks_hit: order_by
-  local_blks_read: order_by
-  local_blks_written: order_by
-  max_time: order_by
-  mean_time: order_by
-  min_time: order_by
-  queryid: order_by
-  rows: order_by
-  shared_blks_dirtied: order_by
-  shared_blks_hit: order_by
-  shared_blks_read: order_by
-  shared_blks_written: order_by
-  stddev_time: order_by
-  temp_blks_read: order_by
-  temp_blks_written: order_by
-  total_time: order_by
-}
-
-# aggregate var_samp on columns
-type pg_stat_statements_var_samp_fields {
-  blk_read_time: Float
-  blk_write_time: Float
-  calls: Float
-  local_blks_dirtied: Float
-  local_blks_hit: Float
-  local_blks_read: Float
-  local_blks_written: Float
-  max_time: Float
-  mean_time: Float
-  min_time: Float
-  queryid: Float
-  rows: Float
-  shared_blks_dirtied: Float
-  shared_blks_hit: Float
-  shared_blks_read: Float
-  shared_blks_written: Float
-  stddev_time: Float
-  temp_blks_read: Float
-  temp_blks_written: Float
-  total_time: Float
-}
-
-# order by var_samp() on columns of table "pg_stat_statements"
-input pg_stat_statements_var_samp_order_by {
-  blk_read_time: order_by
-  blk_write_time: order_by
-  calls: order_by
-  local_blks_dirtied: order_by
-  local_blks_hit: order_by
-  local_blks_read: order_by
-  local_blks_written: order_by
-  max_time: order_by
-  mean_time: order_by
-  min_time: order_by
-  queryid: order_by
-  rows: order_by
-  shared_blks_dirtied: order_by
-  shared_blks_hit: order_by
-  shared_blks_read: order_by
-  shared_blks_written: order_by
-  stddev_time: order_by
-  temp_blks_read: order_by
-  temp_blks_written: order_by
-  total_time: order_by
-}
-
-# aggregate variance on columns
-type pg_stat_statements_variance_fields {
-  blk_read_time: Float
-  blk_write_time: Float
-  calls: Float
-  local_blks_dirtied: Float
-  local_blks_hit: Float
-  local_blks_read: Float
-  local_blks_written: Float
-  max_time: Float
-  mean_time: Float
-  min_time: Float
-  queryid: Float
-  rows: Float
-  shared_blks_dirtied: Float
-  shared_blks_hit: Float
-  shared_blks_read: Float
-  shared_blks_written: Float
-  stddev_time: Float
-  temp_blks_read: Float
-  temp_blks_written: Float
-  total_time: Float
-}
-
-# order by variance() on columns of table "pg_stat_statements"
-input pg_stat_statements_variance_order_by {
-  blk_read_time: order_by
-  blk_write_time: order_by
-  calls: order_by
-  local_blks_dirtied: order_by
-  local_blks_hit: order_by
-  local_blks_read: order_by
-  local_blks_written: order_by
-  max_time: order_by
-  mean_time: order_by
-  min_time: order_by
-  queryid: order_by
-  rows: order_by
-  shared_blks_dirtied: order_by
-  shared_blks_hit: order_by
-  shared_blks_read: order_by
-  shared_blks_written: order_by
-  stddev_time: order_by
-  temp_blks_read: order_by
-  temp_blks_written: order_by
-  total_time: order_by
-}
-
+# policy create event information. records are added each time a new policy is created.
+#
+#
 # columns and relationships of "policy_factory_create"
+#
 type policy_factory_create {
+  # event block number
   block_number: Int!
+
+  # event id
   event_id: String!
+
+  # author address of the policy
   from_address: String!
-  inner_policy: String!
+
+  # event log index
   log_index: Int!
+
+  # policy address
   policy_address: String!
+
+  # event raw data
   raw_data: String!
 
-  # An array relationship
-  reward(
-    # distinct select on columns
-    distinct_on: [reward_calculation_result_select_column!]
-
-    # limit the number of rows returned
-    limit: Int
-
-    # skip the first n rows. Use only with order_by
-    offset: Int
-
-    # sort the rows by one or more columns
-    order_by: [reward_calculation_result_order_by!]
-
-    # filter the rows returned
-    where: reward_calculation_result_bool_exp
-  ): [reward_calculation_result!]!
-
-  # An aggregated array relationship
-  reward_aggregate(
-    # distinct select on columns
-    distinct_on: [reward_calculation_result_select_column!]
-
-    # limit the number of rows returned
-    limit: Int
-
-    # skip the first n rows. Use only with order_by
-    offset: Int
-
-    # sort the rows by one or more columns
-    order_by: [reward_calculation_result_order_by!]
-
-    # filter the rows returned
-    where: reward_calculation_result_bool_exp
-  ): reward_calculation_result_aggregate!
+  # event transaction index
   transaction_index: Int!
 }
 
@@ -4363,11 +3283,9 @@ input policy_factory_create_bool_exp {
   block_number: Int_comparison_exp
   event_id: String_comparison_exp
   from_address: String_comparison_exp
-  inner_policy: String_comparison_exp
   log_index: Int_comparison_exp
   policy_address: String_comparison_exp
   raw_data: String_comparison_exp
-  reward: reward_calculation_result_bool_exp
   transaction_index: Int_comparison_exp
 }
 
@@ -4389,11 +3307,9 @@ input policy_factory_create_insert_input {
   block_number: Int
   event_id: String
   from_address: String
-  inner_policy: String
   log_index: Int
   policy_address: String
   raw_data: String
-  reward: reward_calculation_result_arr_rel_insert_input
   transaction_index: Int
 }
 
@@ -4402,7 +3318,6 @@ type policy_factory_create_max_fields {
   block_number: Int
   event_id: String
   from_address: String
-  inner_policy: String
   log_index: Int
   policy_address: String
   raw_data: String
@@ -4414,7 +3329,6 @@ input policy_factory_create_max_order_by {
   block_number: order_by
   event_id: order_by
   from_address: order_by
-  inner_policy: order_by
   log_index: order_by
   policy_address: order_by
   raw_data: order_by
@@ -4426,7 +3340,6 @@ type policy_factory_create_min_fields {
   block_number: Int
   event_id: String
   from_address: String
-  inner_policy: String
   log_index: Int
   policy_address: String
   raw_data: String
@@ -4438,7 +3351,6 @@ input policy_factory_create_min_order_by {
   block_number: order_by
   event_id: order_by
   from_address: order_by
-  inner_policy: order_by
   log_index: order_by
   policy_address: order_by
   raw_data: order_by
@@ -4472,16 +3384,15 @@ input policy_factory_create_order_by {
   block_number: order_by
   event_id: order_by
   from_address: order_by
-  inner_policy: order_by
   log_index: order_by
   policy_address: order_by
   raw_data: order_by
-  reward_aggregate: reward_calculation_result_aggregate_order_by
   transaction_index: order_by
 }
 
 # primary key columns input for table: "policy_factory_create"
 input policy_factory_create_pk_columns_input {
+  # event id
   event_id: String!
 }
 
@@ -4495,9 +3406,6 @@ enum policy_factory_create_select_column {
 
   # column name
   from_address
-
-  # column name
-  inner_policy
 
   # column name
   log_index
@@ -4517,7 +3425,6 @@ input policy_factory_create_set_input {
   block_number: Int
   event_id: String
   from_address: String
-  inner_policy: String
   log_index: Int
   policy_address: String
   raw_data: String
@@ -4592,9 +3499,6 @@ enum policy_factory_create_update_column {
   from_address
 
   # column name
-  inner_policy
-
-  # column name
   log_index
 
   # column name
@@ -4649,90 +3553,32 @@ input policy_factory_create_variance_order_by {
   transaction_index: order_by
 }
 
+# the authentication information for the property.
+#
+#
 # columns and relationships of "property_authentication"
+#
 type property_authentication {
-  # An array relationship
-  allocation(
-    # distinct select on columns
-    distinct_on: [allocator_allocation_result_select_column!]
-
-    # limit the number of rows returned
-    limit: Int
-
-    # skip the first n rows. Use only with order_by
-    offset: Int
-
-    # sort the rows by one or more columns
-    order_by: [allocator_allocation_result_order_by!]
-
-    # filter the rows returned
-    where: allocator_allocation_result_bool_exp
-  ): [allocator_allocation_result!]!
-
-  # An aggregated array relationship
-  allocation_aggregate(
-    # distinct select on columns
-    distinct_on: [allocator_allocation_result_select_column!]
-
-    # limit the number of rows returned
-    limit: Int
-
-    # skip the first n rows. Use only with order_by
-    offset: Int
-
-    # sort the rows by one or more columns
-    order_by: [allocator_allocation_result_order_by!]
-
-    # filter the rows returned
-    where: allocator_allocation_result_bool_exp
-  ): allocator_allocation_result_aggregate!
+  # authentication id
   authentication_id: String!
+
+  # the block number of the authentication process
   block_number: Int!
+
+  # authenticated market address
   market: String!
 
   # An object relationship
   market_creation: market_factory_create
+
+  # the metrics address for authentication
   metrics: String!
+
+  # property address
   property: String!
 
   # An object relationship
   property_creation: property_factory_create
-
-  # An array relationship
-  reward(
-    # distinct select on columns
-    distinct_on: [reward_calculation_result_select_column!]
-
-    # limit the number of rows returned
-    limit: Int
-
-    # skip the first n rows. Use only with order_by
-    offset: Int
-
-    # sort the rows by one or more columns
-    order_by: [reward_calculation_result_order_by!]
-
-    # filter the rows returned
-    where: reward_calculation_result_bool_exp
-  ): [reward_calculation_result!]!
-
-  # An aggregated array relationship
-  reward_aggregate(
-    # distinct select on columns
-    distinct_on: [reward_calculation_result_select_column!]
-
-    # limit the number of rows returned
-    limit: Int
-
-    # skip the first n rows. Use only with order_by
-    offset: Int
-
-    # sort the rows by one or more columns
-    order_by: [reward_calculation_result_order_by!]
-
-    # filter the rows returned
-    where: reward_calculation_result_bool_exp
-  ): reward_calculation_result_aggregate!
 }
 
 # aggregated selection of "property_authentication"
@@ -4792,7 +3638,6 @@ input property_authentication_bool_exp {
   _and: [property_authentication_bool_exp]
   _not: property_authentication_bool_exp
   _or: [property_authentication_bool_exp]
-  allocation: allocator_allocation_result_bool_exp
   authentication_id: String_comparison_exp
   block_number: Int_comparison_exp
   market: String_comparison_exp
@@ -4800,7 +3645,6 @@ input property_authentication_bool_exp {
   metrics: String_comparison_exp
   property: String_comparison_exp
   property_creation: property_factory_create_bool_exp
-  reward: reward_calculation_result_bool_exp
 }
 
 # unique or primary key constraints on table "property_authentication"
@@ -4809,90 +3653,32 @@ enum property_authentication_constraint {
   property_authentication_pkey
 }
 
+# The property de-authentication information.
+#
+#
 # columns and relationships of "property_authentication_deleted"
+#
 type property_authentication_deleted {
-  # An array relationship
-  allocation(
-    # distinct select on columns
-    distinct_on: [allocator_allocation_result_select_column!]
-
-    # limit the number of rows returned
-    limit: Int
-
-    # skip the first n rows. Use only with order_by
-    offset: Int
-
-    # sort the rows by one or more columns
-    order_by: [allocator_allocation_result_order_by!]
-
-    # filter the rows returned
-    where: allocator_allocation_result_bool_exp
-  ): [allocator_allocation_result!]!
-
-  # An aggregated array relationship
-  allocation_aggregate(
-    # distinct select on columns
-    distinct_on: [allocator_allocation_result_select_column!]
-
-    # limit the number of rows returned
-    limit: Int
-
-    # skip the first n rows. Use only with order_by
-    offset: Int
-
-    # sort the rows by one or more columns
-    order_by: [allocator_allocation_result_order_by!]
-
-    # filter the rows returned
-    where: allocator_allocation_result_bool_exp
-  ): allocator_allocation_result_aggregate!
+  # disabled authentication id
   authentication_id: String!
+
+  # block number where the de-authentication process was executed
   block_number: Int!
+
+  # de-authenticated market address
   market: String!
 
   # An object relationship
   market_creation: market_factory_create
+
+  # disabled metrics address for authentication
   metrics: String!
+
+  # property address
   property: String!
 
   # An object relationship
   property_creation: property_factory_create
-
-  # An array relationship
-  reward(
-    # distinct select on columns
-    distinct_on: [reward_calculation_result_select_column!]
-
-    # limit the number of rows returned
-    limit: Int
-
-    # skip the first n rows. Use only with order_by
-    offset: Int
-
-    # sort the rows by one or more columns
-    order_by: [reward_calculation_result_order_by!]
-
-    # filter the rows returned
-    where: reward_calculation_result_bool_exp
-  ): [reward_calculation_result!]!
-
-  # An aggregated array relationship
-  reward_aggregate(
-    # distinct select on columns
-    distinct_on: [reward_calculation_result_select_column!]
-
-    # limit the number of rows returned
-    limit: Int
-
-    # skip the first n rows. Use only with order_by
-    offset: Int
-
-    # sort the rows by one or more columns
-    order_by: [reward_calculation_result_order_by!]
-
-    # filter the rows returned
-    where: reward_calculation_result_bool_exp
-  ): reward_calculation_result_aggregate!
 }
 
 # aggregated selection of "property_authentication_deleted"
@@ -4953,7 +3739,6 @@ input property_authentication_deleted_bool_exp {
   _and: [property_authentication_deleted_bool_exp]
   _not: property_authentication_deleted_bool_exp
   _or: [property_authentication_deleted_bool_exp]
-  allocation: allocator_allocation_result_bool_exp
   authentication_id: String_comparison_exp
   block_number: Int_comparison_exp
   market: String_comparison_exp
@@ -4961,7 +3746,6 @@ input property_authentication_deleted_bool_exp {
   metrics: String_comparison_exp
   property: String_comparison_exp
   property_creation: property_factory_create_bool_exp
-  reward: reward_calculation_result_bool_exp
 }
 
 # unique or primary key constraints on table "property_authentication_deleted"
@@ -4977,7 +3761,6 @@ input property_authentication_deleted_inc_input {
 
 # input type for inserting data into table "property_authentication_deleted"
 input property_authentication_deleted_insert_input {
-  allocation: allocator_allocation_result_arr_rel_insert_input
   authentication_id: String
   block_number: Int
   market: String
@@ -4985,7 +3768,6 @@ input property_authentication_deleted_insert_input {
   metrics: String
   property: String
   property_creation: property_factory_create_obj_rel_insert_input
-  reward: reward_calculation_result_arr_rel_insert_input
 }
 
 # aggregate max on columns
@@ -5048,7 +3830,6 @@ input property_authentication_deleted_on_conflict {
 
 # ordering options when selecting data from "property_authentication_deleted"
 input property_authentication_deleted_order_by {
-  allocation_aggregate: allocator_allocation_result_aggregate_order_by
   authentication_id: order_by
   block_number: order_by
   market: order_by
@@ -5056,12 +3837,14 @@ input property_authentication_deleted_order_by {
   metrics: order_by
   property: order_by
   property_creation: property_factory_create_order_by
-  reward_aggregate: reward_calculation_result_aggregate_order_by
 }
 
 # primary key columns input for table: "property_authentication_deleted"
 input property_authentication_deleted_pk_columns_input {
+  # disabled metrics address for authentication
   metrics: String!
+
+  # property address
   property: String!
 }
 
@@ -5187,7 +3970,6 @@ input property_authentication_inc_input {
 
 # input type for inserting data into table "property_authentication"
 input property_authentication_insert_input {
-  allocation: allocator_allocation_result_arr_rel_insert_input
   authentication_id: String
   block_number: Int
   market: String
@@ -5195,7 +3977,6 @@ input property_authentication_insert_input {
   metrics: String
   property: String
   property_creation: property_factory_create_obj_rel_insert_input
-  reward: reward_calculation_result_arr_rel_insert_input
 }
 
 # aggregate max on columns
@@ -5258,7 +4039,6 @@ input property_authentication_on_conflict {
 
 # ordering options when selecting data from "property_authentication"
 input property_authentication_order_by {
-  allocation_aggregate: allocator_allocation_result_aggregate_order_by
   authentication_id: order_by
   block_number: order_by
   market: order_by
@@ -5266,12 +4046,14 @@ input property_authentication_order_by {
   metrics: order_by
   property: order_by
   property_creation: property_factory_create_order_by
-  reward_aggregate: reward_calculation_result_aggregate_order_by
 }
 
 # primary key columns input for table: "property_authentication"
 input property_authentication_pk_columns_input {
+  # the metrics address for authentication
   metrics: String!
+
+  # property address
   property: String!
 }
 
@@ -5390,44 +4172,12 @@ input property_authentication_variance_order_by {
   block_number: order_by
 }
 
+# property create event information. records are added each time an property is created.
+#
+#
 # columns and relationships of "property_factory_create"
+#
 type property_factory_create {
-  # An array relationship
-  allocation(
-    # distinct select on columns
-    distinct_on: [allocator_allocation_result_select_column!]
-
-    # limit the number of rows returned
-    limit: Int
-
-    # skip the first n rows. Use only with order_by
-    offset: Int
-
-    # sort the rows by one or more columns
-    order_by: [allocator_allocation_result_order_by!]
-
-    # filter the rows returned
-    where: allocator_allocation_result_bool_exp
-  ): [allocator_allocation_result!]!
-
-  # An aggregated array relationship
-  allocation_aggregate(
-    # distinct select on columns
-    distinct_on: [allocator_allocation_result_select_column!]
-
-    # limit the number of rows returned
-    limit: Int
-
-    # skip the first n rows. Use only with order_by
-    offset: Int
-
-    # sort the rows by one or more columns
-    order_by: [allocator_allocation_result_order_by!]
-
-    # filter the rows returned
-    where: allocator_allocation_result_bool_exp
-  ): allocator_allocation_result_aggregate!
-
   # An array relationship
   authentication(
     # distinct select on columns
@@ -5463,7 +4213,12 @@ type property_factory_create {
     # filter the rows returned
     where: property_authentication_bool_exp
   ): property_authentication_aggregate!
+
+  # event block number
   block_number: Int!
+
+  # An object relationship
+  current_lockup: property_lockup_sum_values
 
   # An array relationship
   deleted_authentication(
@@ -5500,9 +4255,53 @@ type property_factory_create {
     # filter the rows returned
     where: property_authentication_deleted_bool_exp
   ): property_authentication_deleted_aggregate!
+
+  # event id
   event_id: String!
+
+  # the address of the account where you created the property
   from_address: String!
+
+  # An array relationship
+  lockedup(
+    # distinct select on columns
+    distinct_on: [lockup_lockedup_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [lockup_lockedup_order_by!]
+
+    # filter the rows returned
+    where: lockup_lockedup_bool_exp
+  ): [lockup_lockedup!]!
+
+  # An aggregated array relationship
+  lockedup_aggregate(
+    # distinct select on columns
+    distinct_on: [lockup_lockedup_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [lockup_lockedup_order_by!]
+
+    # filter the rows returned
+    where: lockup_lockedup_bool_exp
+  ): lockup_lockedup_aggregate!
+
+  # event log index
   log_index: Int!
+
+  # the address of the created property
   property: String!
 
   # An array relationship
@@ -5540,7 +4339,11 @@ type property_factory_create {
     # filter the rows returned
     where: lockup_lockedup_bool_exp
   ): lockup_lockedup_aggregate!
+
+  # event raw data
   raw_data: String!
+
+  # event transaction index
   transaction_index: Int!
 }
 
@@ -5605,12 +4408,13 @@ input property_factory_create_bool_exp {
   _and: [property_factory_create_bool_exp]
   _not: property_factory_create_bool_exp
   _or: [property_factory_create_bool_exp]
-  allocation: allocator_allocation_result_bool_exp
   authentication: property_authentication_bool_exp
   block_number: Int_comparison_exp
+  current_lockup: property_lockup_sum_values_bool_exp
   deleted_authentication: property_authentication_deleted_bool_exp
   event_id: String_comparison_exp
   from_address: String_comparison_exp
+  lockedup: lockup_lockedup_bool_exp
   log_index: Int_comparison_exp
   property: String_comparison_exp
   property_creation: lockup_lockedup_bool_exp
@@ -5633,12 +4437,12 @@ input property_factory_create_inc_input {
 
 # input type for inserting data into table "property_factory_create"
 input property_factory_create_insert_input {
-  allocation: allocator_allocation_result_arr_rel_insert_input
   authentication: property_authentication_arr_rel_insert_input
   block_number: Int
   deleted_authentication: property_authentication_deleted_arr_rel_insert_input
   event_id: String
   from_address: String
+  lockedup: lockup_lockedup_arr_rel_insert_input
   log_index: Int
   property: String
   property_creation: lockup_lockedup_arr_rel_insert_input
@@ -5714,12 +4518,13 @@ input property_factory_create_on_conflict {
 
 # ordering options when selecting data from "property_factory_create"
 input property_factory_create_order_by {
-  allocation_aggregate: allocator_allocation_result_aggregate_order_by
   authentication_aggregate: property_authentication_aggregate_order_by
   block_number: order_by
+  current_lockup: property_lockup_sum_values_order_by
   deleted_authentication_aggregate: property_authentication_deleted_aggregate_order_by
   event_id: order_by
   from_address: order_by
+  lockedup_aggregate: lockup_lockedup_aggregate_order_by
   log_index: order_by
   property: order_by
   property_creation_aggregate: lockup_lockedup_aggregate_order_by
@@ -5729,6 +4534,7 @@ input property_factory_create_order_by {
 
 # primary key columns input for table: "property_factory_create"
 input property_factory_create_pk_columns_input {
+  # event id
   event_id: String!
 }
 
@@ -5889,14 +4695,514 @@ input property_factory_create_variance_order_by {
   transaction_index: order_by
 }
 
-# columns and relationships of "property_meta"
-type property_meta {
-  author: String!
+# current property lockuped information.
+#
+#
+# columns and relationships of "property_lockup"
+#
+type property_lockup {
+  # account address
+  account_address: String!
+
+  # block number
   block_number: Int!
+
+  # event id of lockup_lockedup
+  locked_up_event_id: String!
+
+  # property address
+  property_address: String!
+
+  # lockuped value
+  value: numeric!
+}
+
+# aggregated selection of "property_lockup"
+type property_lockup_aggregate {
+  aggregate: property_lockup_aggregate_fields
+  nodes: [property_lockup!]!
+}
+
+# aggregate fields of "property_lockup"
+type property_lockup_aggregate_fields {
+  avg: property_lockup_avg_fields
+  count(columns: [property_lockup_select_column!], distinct: Boolean): Int
+  max: property_lockup_max_fields
+  min: property_lockup_min_fields
+  stddev: property_lockup_stddev_fields
+  stddev_pop: property_lockup_stddev_pop_fields
+  stddev_samp: property_lockup_stddev_samp_fields
+  sum: property_lockup_sum_fields
+  var_pop: property_lockup_var_pop_fields
+  var_samp: property_lockup_var_samp_fields
+  variance: property_lockup_variance_fields
+}
+
+# order by aggregate values of table "property_lockup"
+input property_lockup_aggregate_order_by {
+  avg: property_lockup_avg_order_by
+  count: order_by
+  max: property_lockup_max_order_by
+  min: property_lockup_min_order_by
+  stddev: property_lockup_stddev_order_by
+  stddev_pop: property_lockup_stddev_pop_order_by
+  stddev_samp: property_lockup_stddev_samp_order_by
+  sum: property_lockup_sum_order_by
+  var_pop: property_lockup_var_pop_order_by
+  var_samp: property_lockup_var_samp_order_by
+  variance: property_lockup_variance_order_by
+}
+
+# input type for inserting array relation for remote table "property_lockup"
+input property_lockup_arr_rel_insert_input {
+  data: [property_lockup_insert_input!]!
+  on_conflict: property_lockup_on_conflict
+}
+
+# aggregate avg on columns
+type property_lockup_avg_fields {
+  block_number: Float
+  value: Float
+}
+
+# order by avg() on columns of table "property_lockup"
+input property_lockup_avg_order_by {
+  block_number: order_by
+  value: order_by
+}
+
+# Boolean expression to filter rows from the table "property_lockup". All fields are combined with a logical 'AND'.
+input property_lockup_bool_exp {
+  _and: [property_lockup_bool_exp]
+  _not: property_lockup_bool_exp
+  _or: [property_lockup_bool_exp]
+  account_address: String_comparison_exp
+  block_number: Int_comparison_exp
+  locked_up_event_id: String_comparison_exp
+  property_address: String_comparison_exp
+  value: numeric_comparison_exp
+}
+
+# unique or primary key constraints on table "property_lockup"
+enum property_lockup_constraint {
+  # unique or primary key constraint
+  property_lockup_pkey
+}
+
+# input type for incrementing integer column in table "property_lockup"
+input property_lockup_inc_input {
+  block_number: Int
+  value: numeric
+}
+
+# input type for inserting data into table "property_lockup"
+input property_lockup_insert_input {
+  account_address: String
+  block_number: Int
+  locked_up_event_id: String
+  property_address: String
+  value: numeric
+}
+
+# aggregate max on columns
+type property_lockup_max_fields {
+  account_address: String
+  block_number: Int
+  locked_up_event_id: String
+  property_address: String
+  value: numeric
+}
+
+# order by max() on columns of table "property_lockup"
+input property_lockup_max_order_by {
+  account_address: order_by
+  block_number: order_by
+  locked_up_event_id: order_by
+  property_address: order_by
+  value: order_by
+}
+
+# aggregate min on columns
+type property_lockup_min_fields {
+  account_address: String
+  block_number: Int
+  locked_up_event_id: String
+  property_address: String
+  value: numeric
+}
+
+# order by min() on columns of table "property_lockup"
+input property_lockup_min_order_by {
+  account_address: order_by
+  block_number: order_by
+  locked_up_event_id: order_by
+  property_address: order_by
+  value: order_by
+}
+
+# response of any mutation on the table "property_lockup"
+type property_lockup_mutation_response {
+  # number of affected rows by the mutation
+  affected_rows: Int!
+
+  # data of the affected rows by the mutation
+  returning: [property_lockup!]!
+}
+
+# input type for inserting object relation for remote table "property_lockup"
+input property_lockup_obj_rel_insert_input {
+  data: property_lockup_insert_input!
+  on_conflict: property_lockup_on_conflict
+}
+
+# on conflict condition type for table "property_lockup"
+input property_lockup_on_conflict {
+  constraint: property_lockup_constraint!
+  update_columns: [property_lockup_update_column!]!
+  where: property_lockup_bool_exp
+}
+
+# ordering options when selecting data from "property_lockup"
+input property_lockup_order_by {
+  account_address: order_by
+  block_number: order_by
+  locked_up_event_id: order_by
+  property_address: order_by
+  value: order_by
+}
+
+# primary key columns input for table: "property_lockup"
+input property_lockup_pk_columns_input {
+  # account address
+  account_address: String!
+
+  # property address
+  property_address: String!
+}
+
+# select columns of table "property_lockup"
+enum property_lockup_select_column {
+  # column name
+  account_address
+
+  # column name
+  block_number
+
+  # column name
+  locked_up_event_id
+
+  # column name
+  property_address
+
+  # column name
+  value
+}
+
+# input type for updating data in table "property_lockup"
+input property_lockup_set_input {
+  account_address: String
+  block_number: Int
+  locked_up_event_id: String
+  property_address: String
+  value: numeric
+}
+
+# aggregate stddev on columns
+type property_lockup_stddev_fields {
+  block_number: Float
+  value: Float
+}
+
+# order by stddev() on columns of table "property_lockup"
+input property_lockup_stddev_order_by {
+  block_number: order_by
+  value: order_by
+}
+
+# aggregate stddev_pop on columns
+type property_lockup_stddev_pop_fields {
+  block_number: Float
+  value: Float
+}
+
+# order by stddev_pop() on columns of table "property_lockup"
+input property_lockup_stddev_pop_order_by {
+  block_number: order_by
+  value: order_by
+}
+
+# aggregate stddev_samp on columns
+type property_lockup_stddev_samp_fields {
+  block_number: Float
+  value: Float
+}
+
+# order by stddev_samp() on columns of table "property_lockup"
+input property_lockup_stddev_samp_order_by {
+  block_number: order_by
+  value: order_by
+}
+
+# aggregate sum on columns
+type property_lockup_sum_fields {
+  block_number: Int
+  value: numeric
+}
+
+# order by sum() on columns of table "property_lockup"
+input property_lockup_sum_order_by {
+  block_number: order_by
+  value: order_by
+}
+
+# columns and relationships of "property_lockup_sum_values"
+type property_lockup_sum_values {
+  property_address: String
+  sum_values: numeric
+}
+
+# aggregated selection of "property_lockup_sum_values"
+type property_lockup_sum_values_aggregate {
+  aggregate: property_lockup_sum_values_aggregate_fields
+  nodes: [property_lockup_sum_values!]!
+}
+
+# aggregate fields of "property_lockup_sum_values"
+type property_lockup_sum_values_aggregate_fields {
+  avg: property_lockup_sum_values_avg_fields
+  count(columns: [property_lockup_sum_values_select_column!], distinct: Boolean): Int
+  max: property_lockup_sum_values_max_fields
+  min: property_lockup_sum_values_min_fields
+  stddev: property_lockup_sum_values_stddev_fields
+  stddev_pop: property_lockup_sum_values_stddev_pop_fields
+  stddev_samp: property_lockup_sum_values_stddev_samp_fields
+  sum: property_lockup_sum_values_sum_fields
+  var_pop: property_lockup_sum_values_var_pop_fields
+  var_samp: property_lockup_sum_values_var_samp_fields
+  variance: property_lockup_sum_values_variance_fields
+}
+
+# order by aggregate values of table "property_lockup_sum_values"
+input property_lockup_sum_values_aggregate_order_by {
+  avg: property_lockup_sum_values_avg_order_by
+  count: order_by
+  max: property_lockup_sum_values_max_order_by
+  min: property_lockup_sum_values_min_order_by
+  stddev: property_lockup_sum_values_stddev_order_by
+  stddev_pop: property_lockup_sum_values_stddev_pop_order_by
+  stddev_samp: property_lockup_sum_values_stddev_samp_order_by
+  sum: property_lockup_sum_values_sum_order_by
+  var_pop: property_lockup_sum_values_var_pop_order_by
+  var_samp: property_lockup_sum_values_var_samp_order_by
+  variance: property_lockup_sum_values_variance_order_by
+}
+
+# aggregate avg on columns
+type property_lockup_sum_values_avg_fields {
+  sum_values: Float
+}
+
+# order by avg() on columns of table "property_lockup_sum_values"
+input property_lockup_sum_values_avg_order_by {
+  sum_values: order_by
+}
+
+# Boolean expression to filter rows from the table "property_lockup_sum_values". All fields are combined with a logical 'AND'.
+input property_lockup_sum_values_bool_exp {
+  _and: [property_lockup_sum_values_bool_exp]
+  _not: property_lockup_sum_values_bool_exp
+  _or: [property_lockup_sum_values_bool_exp]
+  property_address: String_comparison_exp
+  sum_values: numeric_comparison_exp
+}
+
+# aggregate max on columns
+type property_lockup_sum_values_max_fields {
+  property_address: String
+  sum_values: numeric
+}
+
+# order by max() on columns of table "property_lockup_sum_values"
+input property_lockup_sum_values_max_order_by {
+  property_address: order_by
+  sum_values: order_by
+}
+
+# aggregate min on columns
+type property_lockup_sum_values_min_fields {
+  property_address: String
+  sum_values: numeric
+}
+
+# order by min() on columns of table "property_lockup_sum_values"
+input property_lockup_sum_values_min_order_by {
+  property_address: order_by
+  sum_values: order_by
+}
+
+# ordering options when selecting data from "property_lockup_sum_values"
+input property_lockup_sum_values_order_by {
+  property_address: order_by
+  sum_values: order_by
+}
+
+# select columns of table "property_lockup_sum_values"
+enum property_lockup_sum_values_select_column {
+  # column name
+  property_address
+
+  # column name
+  sum_values
+}
+
+# aggregate stddev on columns
+type property_lockup_sum_values_stddev_fields {
+  sum_values: Float
+}
+
+# order by stddev() on columns of table "property_lockup_sum_values"
+input property_lockup_sum_values_stddev_order_by {
+  sum_values: order_by
+}
+
+# aggregate stddev_pop on columns
+type property_lockup_sum_values_stddev_pop_fields {
+  sum_values: Float
+}
+
+# order by stddev_pop() on columns of table "property_lockup_sum_values"
+input property_lockup_sum_values_stddev_pop_order_by {
+  sum_values: order_by
+}
+
+# aggregate stddev_samp on columns
+type property_lockup_sum_values_stddev_samp_fields {
+  sum_values: Float
+}
+
+# order by stddev_samp() on columns of table "property_lockup_sum_values"
+input property_lockup_sum_values_stddev_samp_order_by {
+  sum_values: order_by
+}
+
+# aggregate sum on columns
+type property_lockup_sum_values_sum_fields {
+  sum_values: numeric
+}
+
+# order by sum() on columns of table "property_lockup_sum_values"
+input property_lockup_sum_values_sum_order_by {
+  sum_values: order_by
+}
+
+# aggregate var_pop on columns
+type property_lockup_sum_values_var_pop_fields {
+  sum_values: Float
+}
+
+# order by var_pop() on columns of table "property_lockup_sum_values"
+input property_lockup_sum_values_var_pop_order_by {
+  sum_values: order_by
+}
+
+# aggregate var_samp on columns
+type property_lockup_sum_values_var_samp_fields {
+  sum_values: Float
+}
+
+# order by var_samp() on columns of table "property_lockup_sum_values"
+input property_lockup_sum_values_var_samp_order_by {
+  sum_values: order_by
+}
+
+# aggregate variance on columns
+type property_lockup_sum_values_variance_fields {
+  sum_values: Float
+}
+
+# order by variance() on columns of table "property_lockup_sum_values"
+input property_lockup_sum_values_variance_order_by {
+  sum_values: order_by
+}
+
+# update columns of table "property_lockup"
+enum property_lockup_update_column {
+  # column name
+  account_address
+
+  # column name
+  block_number
+
+  # column name
+  locked_up_event_id
+
+  # column name
+  property_address
+
+  # column name
+  value
+}
+
+# aggregate var_pop on columns
+type property_lockup_var_pop_fields {
+  block_number: Float
+  value: Float
+}
+
+# order by var_pop() on columns of table "property_lockup"
+input property_lockup_var_pop_order_by {
+  block_number: order_by
+  value: order_by
+}
+
+# aggregate var_samp on columns
+type property_lockup_var_samp_fields {
+  block_number: Float
+  value: Float
+}
+
+# order by var_samp() on columns of table "property_lockup"
+input property_lockup_var_samp_order_by {
+  block_number: order_by
+  value: order_by
+}
+
+# aggregate variance on columns
+type property_lockup_variance_fields {
+  block_number: Float
+  value: Float
+}
+
+# order by variance() on columns of table "property_lockup"
+input property_lockup_variance_order_by {
+  block_number: order_by
+  value: order_by
+}
+
+# property meta-information.
+#
+#
+# columns and relationships of "property_meta"
+#
+type property_meta {
+  # property author address
+  author: String!
+
+  # the block number from which the property was created
+  block_number: Int!
+
+  # property name
   name: String!
+
+  # property address
   property: String!
+
+  # the address of the account where you created the property
   sender: String!
+
+  # property symbol
   symbol: String!
+  total_supply: numeric!
 }
 
 # aggregated selection of "property_meta"
@@ -5944,11 +5250,13 @@ input property_meta_arr_rel_insert_input {
 # aggregate avg on columns
 type property_meta_avg_fields {
   block_number: Float
+  total_supply: Float
 }
 
 # order by avg() on columns of table "property_meta"
 input property_meta_avg_order_by {
   block_number: order_by
+  total_supply: order_by
 }
 
 # Boolean expression to filter rows from the table "property_meta". All fields are combined with a logical 'AND'.
@@ -5962,6 +5270,7 @@ input property_meta_bool_exp {
   property: String_comparison_exp
   sender: String_comparison_exp
   symbol: String_comparison_exp
+  total_supply: numeric_comparison_exp
 }
 
 # unique or primary key constraints on table "property_meta"
@@ -5973,6 +5282,7 @@ enum property_meta_constraint {
 # input type for incrementing integer column in table "property_meta"
 input property_meta_inc_input {
   block_number: Int
+  total_supply: numeric
 }
 
 # input type for inserting data into table "property_meta"
@@ -5983,6 +5293,7 @@ input property_meta_insert_input {
   property: String
   sender: String
   symbol: String
+  total_supply: numeric
 }
 
 # aggregate max on columns
@@ -5993,6 +5304,7 @@ type property_meta_max_fields {
   property: String
   sender: String
   symbol: String
+  total_supply: numeric
 }
 
 # order by max() on columns of table "property_meta"
@@ -6003,6 +5315,7 @@ input property_meta_max_order_by {
   property: order_by
   sender: order_by
   symbol: order_by
+  total_supply: order_by
 }
 
 # aggregate min on columns
@@ -6013,6 +5326,7 @@ type property_meta_min_fields {
   property: String
   sender: String
   symbol: String
+  total_supply: numeric
 }
 
 # order by min() on columns of table "property_meta"
@@ -6023,6 +5337,7 @@ input property_meta_min_order_by {
   property: order_by
   sender: order_by
   symbol: order_by
+  total_supply: order_by
 }
 
 # response of any mutation on the table "property_meta"
@@ -6055,11 +5370,15 @@ input property_meta_order_by {
   property: order_by
   sender: order_by
   symbol: order_by
+  total_supply: order_by
 }
 
 # primary key columns input for table: "property_meta"
 input property_meta_pk_columns_input {
+  # property author address
   author: String!
+
+  # property address
   property: String!
 }
 
@@ -6082,6 +5401,9 @@ enum property_meta_select_column {
 
   # column name
   symbol
+
+  # column name
+  total_supply
 }
 
 # input type for updating data in table "property_meta"
@@ -6092,46 +5414,55 @@ input property_meta_set_input {
   property: String
   sender: String
   symbol: String
+  total_supply: numeric
 }
 
 # aggregate stddev on columns
 type property_meta_stddev_fields {
   block_number: Float
+  total_supply: Float
 }
 
 # order by stddev() on columns of table "property_meta"
 input property_meta_stddev_order_by {
   block_number: order_by
+  total_supply: order_by
 }
 
 # aggregate stddev_pop on columns
 type property_meta_stddev_pop_fields {
   block_number: Float
+  total_supply: Float
 }
 
 # order by stddev_pop() on columns of table "property_meta"
 input property_meta_stddev_pop_order_by {
   block_number: order_by
+  total_supply: order_by
 }
 
 # aggregate stddev_samp on columns
 type property_meta_stddev_samp_fields {
   block_number: Float
+  total_supply: Float
 }
 
 # order by stddev_samp() on columns of table "property_meta"
 input property_meta_stddev_samp_order_by {
   block_number: order_by
+  total_supply: order_by
 }
 
 # aggregate sum on columns
 type property_meta_sum_fields {
   block_number: Int
+  total_supply: numeric
 }
 
 # order by sum() on columns of table "property_meta"
 input property_meta_sum_order_by {
   block_number: order_by
+  total_supply: order_by
 }
 
 # update columns of table "property_meta"
@@ -6153,44 +5484,53 @@ enum property_meta_update_column {
 
   # column name
   symbol
+
+  # column name
+  total_supply
 }
 
 # aggregate var_pop on columns
 type property_meta_var_pop_fields {
   block_number: Float
+  total_supply: Float
 }
 
 # order by var_pop() on columns of table "property_meta"
 input property_meta_var_pop_order_by {
   block_number: order_by
+  total_supply: order_by
 }
 
 # aggregate var_samp on columns
 type property_meta_var_samp_fields {
   block_number: Float
+  total_supply: Float
 }
 
 # order by var_samp() on columns of table "property_meta"
 input property_meta_var_samp_order_by {
   block_number: order_by
+  total_supply: order_by
 }
 
 # aggregate variance on columns
 type property_meta_variance_fields {
   block_number: Float
+  total_supply: Float
 }
 
 # order by variance() on columns of table "property_meta"
 input property_meta_variance_order_by {
   block_number: order_by
+  total_supply: order_by
 }
 
 # query root
 type query_root {
-  # fetch data from the table: "allocator_allocation_result"
-  allocator_allocation_result(
+  # fetch data from the table: "account_lockup"
+  account_lockup(
     # distinct select on columns
-    distinct_on: [allocator_allocation_result_select_column!]
+    distinct_on: [account_lockup_select_column!]
 
     # limit the number of rows returned
     limit: Int
@@ -6199,16 +5539,16 @@ type query_root {
     offset: Int
 
     # sort the rows by one or more columns
-    order_by: [allocator_allocation_result_order_by!]
+    order_by: [account_lockup_order_by!]
 
     # filter the rows returned
-    where: allocator_allocation_result_bool_exp
-  ): [allocator_allocation_result!]!
+    where: account_lockup_bool_exp
+  ): [account_lockup!]!
 
-  # fetch aggregated fields from the table: "allocator_allocation_result"
-  allocator_allocation_result_aggregate(
+  # fetch aggregated fields from the table: "account_lockup"
+  account_lockup_aggregate(
     # distinct select on columns
-    distinct_on: [allocator_allocation_result_select_column!]
+    distinct_on: [account_lockup_select_column!]
 
     # limit the number of rows returned
     limit: Int
@@ -6217,19 +5557,25 @@ type query_root {
     offset: Int
 
     # sort the rows by one or more columns
-    order_by: [allocator_allocation_result_order_by!]
+    order_by: [account_lockup_order_by!]
 
     # filter the rows returned
-    where: allocator_allocation_result_bool_exp
-  ): allocator_allocation_result_aggregate!
+    where: account_lockup_bool_exp
+  ): account_lockup_aggregate!
 
-  # fetch data from the table: "allocator_allocation_result" using primary key columns
-  allocator_allocation_result_by_pk(event_id: String!): allocator_allocation_result
+  # fetch data from the table: "account_lockup" using primary key columns
+  account_lockup_by_pk(
+    # account address
+    account_address: String!
 
-  # fetch data from the table: "allocator_before_allocation"
-  allocator_before_allocation(
+    # property address
+    property_address: String!
+  ): account_lockup
+
+  # fetch data from the table: "account_lockup_sum_values"
+  account_lockup_sum_values(
     # distinct select on columns
-    distinct_on: [allocator_before_allocation_select_column!]
+    distinct_on: [account_lockup_sum_values_select_column!]
 
     # limit the number of rows returned
     limit: Int
@@ -6238,16 +5584,16 @@ type query_root {
     offset: Int
 
     # sort the rows by one or more columns
-    order_by: [allocator_before_allocation_order_by!]
+    order_by: [account_lockup_sum_values_order_by!]
 
     # filter the rows returned
-    where: allocator_before_allocation_bool_exp
-  ): [allocator_before_allocation!]!
+    where: account_lockup_sum_values_bool_exp
+  ): [account_lockup_sum_values!]!
 
-  # fetch aggregated fields from the table: "allocator_before_allocation"
-  allocator_before_allocation_aggregate(
+  # fetch aggregated fields from the table: "account_lockup_sum_values"
+  account_lockup_sum_values_aggregate(
     # distinct select on columns
-    distinct_on: [allocator_before_allocation_select_column!]
+    distinct_on: [account_lockup_sum_values_select_column!]
 
     # limit the number of rows returned
     limit: Int
@@ -6256,14 +5602,53 @@ type query_root {
     offset: Int
 
     # sort the rows by one or more columns
-    order_by: [allocator_before_allocation_order_by!]
+    order_by: [account_lockup_sum_values_order_by!]
 
     # filter the rows returned
-    where: allocator_before_allocation_bool_exp
-  ): allocator_before_allocation_aggregate!
+    where: account_lockup_sum_values_bool_exp
+  ): account_lockup_sum_values_aggregate!
 
-  # fetch data from the table: "allocator_before_allocation" using primary key columns
-  allocator_before_allocation_by_pk(event_id: String!): allocator_before_allocation
+  # fetch data from the table: "dev_property_transfer"
+  dev_property_transfer(
+    # distinct select on columns
+    distinct_on: [dev_property_transfer_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [dev_property_transfer_order_by!]
+
+    # filter the rows returned
+    where: dev_property_transfer_bool_exp
+  ): [dev_property_transfer!]!
+
+  # fetch aggregated fields from the table: "dev_property_transfer"
+  dev_property_transfer_aggregate(
+    # distinct select on columns
+    distinct_on: [dev_property_transfer_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [dev_property_transfer_order_by!]
+
+    # filter the rows returned
+    where: dev_property_transfer_bool_exp
+  ): dev_property_transfer_aggregate!
+
+  # fetch data from the table: "dev_property_transfer" using primary key columns
+  dev_property_transfer_by_pk(
+    # event id
+    event_id: String!
+  ): dev_property_transfer
 
   # fetch data from the table: "lockup_lockedup"
   lockup_lockedup(
@@ -6302,7 +5687,10 @@ type query_root {
   ): lockup_lockedup_aggregate!
 
   # fetch data from the table: "lockup_lockedup" using primary key columns
-  lockup_lockedup_by_pk(event_id: String!): lockup_lockedup
+  lockup_lockedup_by_pk(
+    # event id
+    event_id: String!
+  ): lockup_lockedup
 
   # fetch data from the table: "market_factory_create"
   market_factory_create(
@@ -6341,7 +5729,10 @@ type query_root {
   ): market_factory_create_aggregate!
 
   # fetch data from the table: "market_factory_create" using primary key columns
-  market_factory_create_by_pk(event_id: String!): market_factory_create
+  market_factory_create_by_pk(
+    # event id
+    event_id: String!
+  ): market_factory_create
 
   # fetch data from the table: "metrics_factory_create"
   metrics_factory_create(
@@ -6380,7 +5771,10 @@ type query_root {
   ): metrics_factory_create_aggregate!
 
   # fetch data from the table: "metrics_factory_create" using primary key columns
-  metrics_factory_create_by_pk(event_id: String!): metrics_factory_create
+  metrics_factory_create_by_pk(
+    # event id
+    event_id: String!
+  ): metrics_factory_create
 
   # fetch data from the table: "metrics_factory_destroy"
   metrics_factory_destroy(
@@ -6419,79 +5813,10 @@ type query_root {
   ): metrics_factory_destroy_aggregate!
 
   # fetch data from the table: "metrics_factory_destroy" using primary key columns
-  metrics_factory_destroy_by_pk(event_id: String!): metrics_factory_destroy
-
-  # fetch data from the table: "pg_buffercache"
-  pg_buffercache(
-    # distinct select on columns
-    distinct_on: [pg_buffercache_select_column!]
-
-    # limit the number of rows returned
-    limit: Int
-
-    # skip the first n rows. Use only with order_by
-    offset: Int
-
-    # sort the rows by one or more columns
-    order_by: [pg_buffercache_order_by!]
-
-    # filter the rows returned
-    where: pg_buffercache_bool_exp
-  ): [pg_buffercache!]!
-
-  # fetch aggregated fields from the table: "pg_buffercache"
-  pg_buffercache_aggregate(
-    # distinct select on columns
-    distinct_on: [pg_buffercache_select_column!]
-
-    # limit the number of rows returned
-    limit: Int
-
-    # skip the first n rows. Use only with order_by
-    offset: Int
-
-    # sort the rows by one or more columns
-    order_by: [pg_buffercache_order_by!]
-
-    # filter the rows returned
-    where: pg_buffercache_bool_exp
-  ): pg_buffercache_aggregate!
-
-  # fetch data from the table: "pg_stat_statements"
-  pg_stat_statements(
-    # distinct select on columns
-    distinct_on: [pg_stat_statements_select_column!]
-
-    # limit the number of rows returned
-    limit: Int
-
-    # skip the first n rows. Use only with order_by
-    offset: Int
-
-    # sort the rows by one or more columns
-    order_by: [pg_stat_statements_order_by!]
-
-    # filter the rows returned
-    where: pg_stat_statements_bool_exp
-  ): [pg_stat_statements!]!
-
-  # fetch aggregated fields from the table: "pg_stat_statements"
-  pg_stat_statements_aggregate(
-    # distinct select on columns
-    distinct_on: [pg_stat_statements_select_column!]
-
-    # limit the number of rows returned
-    limit: Int
-
-    # skip the first n rows. Use only with order_by
-    offset: Int
-
-    # sort the rows by one or more columns
-    order_by: [pg_stat_statements_order_by!]
-
-    # filter the rows returned
-    where: pg_stat_statements_bool_exp
-  ): pg_stat_statements_aggregate!
+  metrics_factory_destroy_by_pk(
+    # event id
+    event_id: String!
+  ): metrics_factory_destroy
 
   # fetch data from the table: "policy_factory_create"
   policy_factory_create(
@@ -6530,7 +5855,10 @@ type query_root {
   ): policy_factory_create_aggregate!
 
   # fetch data from the table: "policy_factory_create" using primary key columns
-  policy_factory_create_by_pk(event_id: String!): policy_factory_create
+  policy_factory_create_by_pk(
+    # event id
+    event_id: String!
+  ): policy_factory_create
 
   # fetch data from the table: "property_authentication"
   property_authentication(
@@ -6569,7 +5897,13 @@ type query_root {
   ): property_authentication_aggregate!
 
   # fetch data from the table: "property_authentication" using primary key columns
-  property_authentication_by_pk(metrics: String!, property: String!): property_authentication
+  property_authentication_by_pk(
+    # the metrics address for authentication
+    metrics: String!
+
+    # property address
+    property: String!
+  ): property_authentication
 
   # fetch data from the table: "property_authentication_deleted"
   property_authentication_deleted(
@@ -6608,7 +5942,13 @@ type query_root {
   ): property_authentication_deleted_aggregate!
 
   # fetch data from the table: "property_authentication_deleted" using primary key columns
-  property_authentication_deleted_by_pk(metrics: String!, property: String!): property_authentication_deleted
+  property_authentication_deleted_by_pk(
+    # disabled metrics address for authentication
+    metrics: String!
+
+    # property address
+    property: String!
+  ): property_authentication_deleted
 
   # fetch data from the table: "property_factory_create"
   property_factory_create(
@@ -6647,7 +5987,91 @@ type query_root {
   ): property_factory_create_aggregate!
 
   # fetch data from the table: "property_factory_create" using primary key columns
-  property_factory_create_by_pk(event_id: String!): property_factory_create
+  property_factory_create_by_pk(
+    # event id
+    event_id: String!
+  ): property_factory_create
+
+  # fetch data from the table: "property_lockup"
+  property_lockup(
+    # distinct select on columns
+    distinct_on: [property_lockup_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [property_lockup_order_by!]
+
+    # filter the rows returned
+    where: property_lockup_bool_exp
+  ): [property_lockup!]!
+
+  # fetch aggregated fields from the table: "property_lockup"
+  property_lockup_aggregate(
+    # distinct select on columns
+    distinct_on: [property_lockup_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [property_lockup_order_by!]
+
+    # filter the rows returned
+    where: property_lockup_bool_exp
+  ): property_lockup_aggregate!
+
+  # fetch data from the table: "property_lockup" using primary key columns
+  property_lockup_by_pk(
+    # account address
+    account_address: String!
+
+    # property address
+    property_address: String!
+  ): property_lockup
+
+  # fetch data from the table: "property_lockup_sum_values"
+  property_lockup_sum_values(
+    # distinct select on columns
+    distinct_on: [property_lockup_sum_values_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [property_lockup_sum_values_order_by!]
+
+    # filter the rows returned
+    where: property_lockup_sum_values_bool_exp
+  ): [property_lockup_sum_values!]!
+
+  # fetch aggregated fields from the table: "property_lockup_sum_values"
+  property_lockup_sum_values_aggregate(
+    # distinct select on columns
+    distinct_on: [property_lockup_sum_values_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [property_lockup_sum_values_order_by!]
+
+    # filter the rows returned
+    where: property_lockup_sum_values_bool_exp
+  ): property_lockup_sum_values_aggregate!
 
   # fetch data from the table: "property_meta"
   property_meta(
@@ -6686,478 +6110,13 @@ type query_root {
   ): property_meta_aggregate!
 
   # fetch data from the table: "property_meta" using primary key columns
-  property_meta_by_pk(author: String!, property: String!): property_meta
-
-  # fetch data from the table: "reward_calculation_result"
-  reward_calculation_result(
-    # distinct select on columns
-    distinct_on: [reward_calculation_result_select_column!]
-
-    # limit the number of rows returned
-    limit: Int
-
-    # skip the first n rows. Use only with order_by
-    offset: Int
-
-    # sort the rows by one or more columns
-    order_by: [reward_calculation_result_order_by!]
-
-    # filter the rows returned
-    where: reward_calculation_result_bool_exp
-  ): [reward_calculation_result!]!
-
-  # fetch aggregated fields from the table: "reward_calculation_result"
-  reward_calculation_result_aggregate(
-    # distinct select on columns
-    distinct_on: [reward_calculation_result_select_column!]
-
-    # limit the number of rows returned
-    limit: Int
-
-    # skip the first n rows. Use only with order_by
-    offset: Int
-
-    # sort the rows by one or more columns
-    order_by: [reward_calculation_result_order_by!]
-
-    # filter the rows returned
-    where: reward_calculation_result_bool_exp
-  ): reward_calculation_result_aggregate!
-
-  # fetch data from the table: "reward_calculation_result" using primary key columns
-  reward_calculation_result_by_pk(event_id: String!): reward_calculation_result
-}
-
-# columns and relationships of "reward_calculation_result"
-type reward_calculation_result {
-  allocate_result: numeric!
-
-  # An object relationship
-  allocation: allocator_allocation_result
-
-  # An object relationship
-  authentication: property_authentication
-  block_number: Int!
-  event_id: String!
-  holder_reward: numeric!
-  lockup: numeric!
-  metrics: String!
-
-  # An object relationship
-  metrics_creation: metrics_factory_create
-  policy: String!
-
-  # An object relationship
-  policy_creation: policy_factory_create
-  staking_reward: numeric!
-}
-
-# aggregated selection of "reward_calculation_result"
-type reward_calculation_result_aggregate {
-  aggregate: reward_calculation_result_aggregate_fields
-  nodes: [reward_calculation_result!]!
-}
-
-# aggregate fields of "reward_calculation_result"
-type reward_calculation_result_aggregate_fields {
-  avg: reward_calculation_result_avg_fields
-  count(columns: [reward_calculation_result_select_column!], distinct: Boolean): Int
-  max: reward_calculation_result_max_fields
-  min: reward_calculation_result_min_fields
-  stddev: reward_calculation_result_stddev_fields
-  stddev_pop: reward_calculation_result_stddev_pop_fields
-  stddev_samp: reward_calculation_result_stddev_samp_fields
-  sum: reward_calculation_result_sum_fields
-  var_pop: reward_calculation_result_var_pop_fields
-  var_samp: reward_calculation_result_var_samp_fields
-  variance: reward_calculation_result_variance_fields
-}
-
-# order by aggregate values of table "reward_calculation_result"
-input reward_calculation_result_aggregate_order_by {
-  avg: reward_calculation_result_avg_order_by
-  count: order_by
-  max: reward_calculation_result_max_order_by
-  min: reward_calculation_result_min_order_by
-  stddev: reward_calculation_result_stddev_order_by
-  stddev_pop: reward_calculation_result_stddev_pop_order_by
-  stddev_samp: reward_calculation_result_stddev_samp_order_by
-  sum: reward_calculation_result_sum_order_by
-  var_pop: reward_calculation_result_var_pop_order_by
-  var_samp: reward_calculation_result_var_samp_order_by
-  variance: reward_calculation_result_variance_order_by
-}
-
-# input type for inserting array relation for remote table "reward_calculation_result"
-input reward_calculation_result_arr_rel_insert_input {
-  data: [reward_calculation_result_insert_input!]!
-  on_conflict: reward_calculation_result_on_conflict
-}
-
-# aggregate avg on columns
-type reward_calculation_result_avg_fields {
-  allocate_result: Float
-  block_number: Float
-  holder_reward: Float
-  lockup: Float
-  staking_reward: Float
-}
-
-# order by avg() on columns of table "reward_calculation_result"
-input reward_calculation_result_avg_order_by {
-  allocate_result: order_by
-  block_number: order_by
-  holder_reward: order_by
-  lockup: order_by
-  staking_reward: order_by
-}
-
-# Boolean expression to filter rows from the table "reward_calculation_result". All fields are combined with a logical 'AND'.
-input reward_calculation_result_bool_exp {
-  _and: [reward_calculation_result_bool_exp]
-  _not: reward_calculation_result_bool_exp
-  _or: [reward_calculation_result_bool_exp]
-  allocate_result: numeric_comparison_exp
-  allocation: allocator_allocation_result_bool_exp
-  authentication: property_authentication_bool_exp
-  block_number: Int_comparison_exp
-  event_id: String_comparison_exp
-  holder_reward: numeric_comparison_exp
-  lockup: numeric_comparison_exp
-  metrics: String_comparison_exp
-  metrics_creation: metrics_factory_create_bool_exp
-  policy: String_comparison_exp
-  policy_creation: policy_factory_create_bool_exp
-  staking_reward: numeric_comparison_exp
-}
-
-# unique or primary key constraints on table "reward_calculation_result"
-enum reward_calculation_result_constraint {
-  # unique or primary key constraint
-  reward_calculation_result_pkey
-}
-
-# input type for incrementing integer column in table "reward_calculation_result"
-input reward_calculation_result_inc_input {
-  allocate_result: numeric
-  block_number: Int
-  holder_reward: numeric
-  lockup: numeric
-  staking_reward: numeric
-}
-
-# input type for inserting data into table "reward_calculation_result"
-input reward_calculation_result_insert_input {
-  allocate_result: numeric
-  allocation: allocator_allocation_result_obj_rel_insert_input
-  authentication: property_authentication_obj_rel_insert_input
-  block_number: Int
-  event_id: String
-  holder_reward: numeric
-  lockup: numeric
-  metrics: String
-  metrics_creation: metrics_factory_create_obj_rel_insert_input
-  policy: String
-  policy_creation: policy_factory_create_obj_rel_insert_input
-  staking_reward: numeric
-}
-
-# aggregate max on columns
-type reward_calculation_result_max_fields {
-  allocate_result: numeric
-  block_number: Int
-  event_id: String
-  holder_reward: numeric
-  lockup: numeric
-  metrics: String
-  policy: String
-  staking_reward: numeric
-}
-
-# order by max() on columns of table "reward_calculation_result"
-input reward_calculation_result_max_order_by {
-  allocate_result: order_by
-  block_number: order_by
-  event_id: order_by
-  holder_reward: order_by
-  lockup: order_by
-  metrics: order_by
-  policy: order_by
-  staking_reward: order_by
-}
-
-# aggregate min on columns
-type reward_calculation_result_min_fields {
-  allocate_result: numeric
-  block_number: Int
-  event_id: String
-  holder_reward: numeric
-  lockup: numeric
-  metrics: String
-  policy: String
-  staking_reward: numeric
-}
-
-# order by min() on columns of table "reward_calculation_result"
-input reward_calculation_result_min_order_by {
-  allocate_result: order_by
-  block_number: order_by
-  event_id: order_by
-  holder_reward: order_by
-  lockup: order_by
-  metrics: order_by
-  policy: order_by
-  staking_reward: order_by
-}
-
-# response of any mutation on the table "reward_calculation_result"
-type reward_calculation_result_mutation_response {
-  # number of affected rows by the mutation
-  affected_rows: Int!
-
-  # data of the affected rows by the mutation
-  returning: [reward_calculation_result!]!
-}
-
-# input type for inserting object relation for remote table "reward_calculation_result"
-input reward_calculation_result_obj_rel_insert_input {
-  data: reward_calculation_result_insert_input!
-  on_conflict: reward_calculation_result_on_conflict
-}
-
-# on conflict condition type for table "reward_calculation_result"
-input reward_calculation_result_on_conflict {
-  constraint: reward_calculation_result_constraint!
-  update_columns: [reward_calculation_result_update_column!]!
-  where: reward_calculation_result_bool_exp
-}
-
-# ordering options when selecting data from "reward_calculation_result"
-input reward_calculation_result_order_by {
-  allocate_result: order_by
-  allocation: allocator_allocation_result_order_by
-  authentication: property_authentication_order_by
-  block_number: order_by
-  event_id: order_by
-  holder_reward: order_by
-  lockup: order_by
-  metrics: order_by
-  metrics_creation: metrics_factory_create_order_by
-  policy: order_by
-  policy_creation: policy_factory_create_order_by
-  staking_reward: order_by
-}
-
-# primary key columns input for table: "reward_calculation_result"
-input reward_calculation_result_pk_columns_input {
-  event_id: String!
-}
-
-# select columns of table "reward_calculation_result"
-enum reward_calculation_result_select_column {
-  # column name
-  allocate_result
-
-  # column name
-  block_number
-
-  # column name
-  event_id
-
-  # column name
-  holder_reward
-
-  # column name
-  lockup
-
-  # column name
-  metrics
-
-  # column name
-  policy
-
-  # column name
-  staking_reward
-}
-
-# input type for updating data in table "reward_calculation_result"
-input reward_calculation_result_set_input {
-  allocate_result: numeric
-  block_number: Int
-  event_id: String
-  holder_reward: numeric
-  lockup: numeric
-  metrics: String
-  policy: String
-  staking_reward: numeric
-}
-
-# aggregate stddev on columns
-type reward_calculation_result_stddev_fields {
-  allocate_result: Float
-  block_number: Float
-  holder_reward: Float
-  lockup: Float
-  staking_reward: Float
-}
-
-# order by stddev() on columns of table "reward_calculation_result"
-input reward_calculation_result_stddev_order_by {
-  allocate_result: order_by
-  block_number: order_by
-  holder_reward: order_by
-  lockup: order_by
-  staking_reward: order_by
-}
-
-# aggregate stddev_pop on columns
-type reward_calculation_result_stddev_pop_fields {
-  allocate_result: Float
-  block_number: Float
-  holder_reward: Float
-  lockup: Float
-  staking_reward: Float
-}
-
-# order by stddev_pop() on columns of table "reward_calculation_result"
-input reward_calculation_result_stddev_pop_order_by {
-  allocate_result: order_by
-  block_number: order_by
-  holder_reward: order_by
-  lockup: order_by
-  staking_reward: order_by
-}
-
-# aggregate stddev_samp on columns
-type reward_calculation_result_stddev_samp_fields {
-  allocate_result: Float
-  block_number: Float
-  holder_reward: Float
-  lockup: Float
-  staking_reward: Float
-}
-
-# order by stddev_samp() on columns of table "reward_calculation_result"
-input reward_calculation_result_stddev_samp_order_by {
-  allocate_result: order_by
-  block_number: order_by
-  holder_reward: order_by
-  lockup: order_by
-  staking_reward: order_by
-}
-
-# aggregate sum on columns
-type reward_calculation_result_sum_fields {
-  allocate_result: numeric
-  block_number: Int
-  holder_reward: numeric
-  lockup: numeric
-  staking_reward: numeric
-}
-
-# order by sum() on columns of table "reward_calculation_result"
-input reward_calculation_result_sum_order_by {
-  allocate_result: order_by
-  block_number: order_by
-  holder_reward: order_by
-  lockup: order_by
-  staking_reward: order_by
-}
-
-# update columns of table "reward_calculation_result"
-enum reward_calculation_result_update_column {
-  # column name
-  allocate_result
-
-  # column name
-  block_number
-
-  # column name
-  event_id
-
-  # column name
-  holder_reward
-
-  # column name
-  lockup
-
-  # column name
-  metrics
-
-  # column name
-  policy
-
-  # column name
-  staking_reward
-}
-
-# aggregate var_pop on columns
-type reward_calculation_result_var_pop_fields {
-  allocate_result: Float
-  block_number: Float
-  holder_reward: Float
-  lockup: Float
-  staking_reward: Float
-}
-
-# order by var_pop() on columns of table "reward_calculation_result"
-input reward_calculation_result_var_pop_order_by {
-  allocate_result: order_by
-  block_number: order_by
-  holder_reward: order_by
-  lockup: order_by
-  staking_reward: order_by
-}
-
-# aggregate var_samp on columns
-type reward_calculation_result_var_samp_fields {
-  allocate_result: Float
-  block_number: Float
-  holder_reward: Float
-  lockup: Float
-  staking_reward: Float
-}
-
-# order by var_samp() on columns of table "reward_calculation_result"
-input reward_calculation_result_var_samp_order_by {
-  allocate_result: order_by
-  block_number: order_by
-  holder_reward: order_by
-  lockup: order_by
-  staking_reward: order_by
-}
-
-# aggregate variance on columns
-type reward_calculation_result_variance_fields {
-  allocate_result: Float
-  block_number: Float
-  holder_reward: Float
-  lockup: Float
-  staking_reward: Float
-}
-
-# order by variance() on columns of table "reward_calculation_result"
-input reward_calculation_result_variance_order_by {
-  allocate_result: order_by
-  block_number: order_by
-  holder_reward: order_by
-  lockup: order_by
-  staking_reward: order_by
-}
-
-scalar smallint
-
-# expression to compare columns of type smallint. All fields are combined with logical 'AND'.
-input smallint_comparison_exp {
-  _eq: smallint
-  _gt: smallint
-  _gte: smallint
-  _in: [smallint!]
-  _is_null: Boolean
-  _lt: smallint
-  _lte: smallint
-  _neq: smallint
-  _nin: [smallint!]
+  property_meta_by_pk(
+    # property author address
+    author: String!
+
+    # property address
+    property: String!
+  ): property_meta
 }
 
 # expression to compare columns of type String. All fields are combined with logical 'AND'.
@@ -7181,10 +6140,10 @@ input String_comparison_exp {
 
 # subscription root
 type subscription_root {
-  # fetch data from the table: "allocator_allocation_result"
-  allocator_allocation_result(
+  # fetch data from the table: "account_lockup"
+  account_lockup(
     # distinct select on columns
-    distinct_on: [allocator_allocation_result_select_column!]
+    distinct_on: [account_lockup_select_column!]
 
     # limit the number of rows returned
     limit: Int
@@ -7193,16 +6152,16 @@ type subscription_root {
     offset: Int
 
     # sort the rows by one or more columns
-    order_by: [allocator_allocation_result_order_by!]
+    order_by: [account_lockup_order_by!]
 
     # filter the rows returned
-    where: allocator_allocation_result_bool_exp
-  ): [allocator_allocation_result!]!
+    where: account_lockup_bool_exp
+  ): [account_lockup!]!
 
-  # fetch aggregated fields from the table: "allocator_allocation_result"
-  allocator_allocation_result_aggregate(
+  # fetch aggregated fields from the table: "account_lockup"
+  account_lockup_aggregate(
     # distinct select on columns
-    distinct_on: [allocator_allocation_result_select_column!]
+    distinct_on: [account_lockup_select_column!]
 
     # limit the number of rows returned
     limit: Int
@@ -7211,19 +6170,25 @@ type subscription_root {
     offset: Int
 
     # sort the rows by one or more columns
-    order_by: [allocator_allocation_result_order_by!]
+    order_by: [account_lockup_order_by!]
 
     # filter the rows returned
-    where: allocator_allocation_result_bool_exp
-  ): allocator_allocation_result_aggregate!
+    where: account_lockup_bool_exp
+  ): account_lockup_aggregate!
 
-  # fetch data from the table: "allocator_allocation_result" using primary key columns
-  allocator_allocation_result_by_pk(event_id: String!): allocator_allocation_result
+  # fetch data from the table: "account_lockup" using primary key columns
+  account_lockup_by_pk(
+    # account address
+    account_address: String!
 
-  # fetch data from the table: "allocator_before_allocation"
-  allocator_before_allocation(
+    # property address
+    property_address: String!
+  ): account_lockup
+
+  # fetch data from the table: "account_lockup_sum_values"
+  account_lockup_sum_values(
     # distinct select on columns
-    distinct_on: [allocator_before_allocation_select_column!]
+    distinct_on: [account_lockup_sum_values_select_column!]
 
     # limit the number of rows returned
     limit: Int
@@ -7232,16 +6197,16 @@ type subscription_root {
     offset: Int
 
     # sort the rows by one or more columns
-    order_by: [allocator_before_allocation_order_by!]
+    order_by: [account_lockup_sum_values_order_by!]
 
     # filter the rows returned
-    where: allocator_before_allocation_bool_exp
-  ): [allocator_before_allocation!]!
+    where: account_lockup_sum_values_bool_exp
+  ): [account_lockup_sum_values!]!
 
-  # fetch aggregated fields from the table: "allocator_before_allocation"
-  allocator_before_allocation_aggregate(
+  # fetch aggregated fields from the table: "account_lockup_sum_values"
+  account_lockup_sum_values_aggregate(
     # distinct select on columns
-    distinct_on: [allocator_before_allocation_select_column!]
+    distinct_on: [account_lockup_sum_values_select_column!]
 
     # limit the number of rows returned
     limit: Int
@@ -7250,14 +6215,53 @@ type subscription_root {
     offset: Int
 
     # sort the rows by one or more columns
-    order_by: [allocator_before_allocation_order_by!]
+    order_by: [account_lockup_sum_values_order_by!]
 
     # filter the rows returned
-    where: allocator_before_allocation_bool_exp
-  ): allocator_before_allocation_aggregate!
+    where: account_lockup_sum_values_bool_exp
+  ): account_lockup_sum_values_aggregate!
 
-  # fetch data from the table: "allocator_before_allocation" using primary key columns
-  allocator_before_allocation_by_pk(event_id: String!): allocator_before_allocation
+  # fetch data from the table: "dev_property_transfer"
+  dev_property_transfer(
+    # distinct select on columns
+    distinct_on: [dev_property_transfer_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [dev_property_transfer_order_by!]
+
+    # filter the rows returned
+    where: dev_property_transfer_bool_exp
+  ): [dev_property_transfer!]!
+
+  # fetch aggregated fields from the table: "dev_property_transfer"
+  dev_property_transfer_aggregate(
+    # distinct select on columns
+    distinct_on: [dev_property_transfer_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [dev_property_transfer_order_by!]
+
+    # filter the rows returned
+    where: dev_property_transfer_bool_exp
+  ): dev_property_transfer_aggregate!
+
+  # fetch data from the table: "dev_property_transfer" using primary key columns
+  dev_property_transfer_by_pk(
+    # event id
+    event_id: String!
+  ): dev_property_transfer
 
   # fetch data from the table: "lockup_lockedup"
   lockup_lockedup(
@@ -7296,7 +6300,10 @@ type subscription_root {
   ): lockup_lockedup_aggregate!
 
   # fetch data from the table: "lockup_lockedup" using primary key columns
-  lockup_lockedup_by_pk(event_id: String!): lockup_lockedup
+  lockup_lockedup_by_pk(
+    # event id
+    event_id: String!
+  ): lockup_lockedup
 
   # fetch data from the table: "market_factory_create"
   market_factory_create(
@@ -7335,7 +6342,10 @@ type subscription_root {
   ): market_factory_create_aggregate!
 
   # fetch data from the table: "market_factory_create" using primary key columns
-  market_factory_create_by_pk(event_id: String!): market_factory_create
+  market_factory_create_by_pk(
+    # event id
+    event_id: String!
+  ): market_factory_create
 
   # fetch data from the table: "metrics_factory_create"
   metrics_factory_create(
@@ -7374,7 +6384,10 @@ type subscription_root {
   ): metrics_factory_create_aggregate!
 
   # fetch data from the table: "metrics_factory_create" using primary key columns
-  metrics_factory_create_by_pk(event_id: String!): metrics_factory_create
+  metrics_factory_create_by_pk(
+    # event id
+    event_id: String!
+  ): metrics_factory_create
 
   # fetch data from the table: "metrics_factory_destroy"
   metrics_factory_destroy(
@@ -7413,79 +6426,10 @@ type subscription_root {
   ): metrics_factory_destroy_aggregate!
 
   # fetch data from the table: "metrics_factory_destroy" using primary key columns
-  metrics_factory_destroy_by_pk(event_id: String!): metrics_factory_destroy
-
-  # fetch data from the table: "pg_buffercache"
-  pg_buffercache(
-    # distinct select on columns
-    distinct_on: [pg_buffercache_select_column!]
-
-    # limit the number of rows returned
-    limit: Int
-
-    # skip the first n rows. Use only with order_by
-    offset: Int
-
-    # sort the rows by one or more columns
-    order_by: [pg_buffercache_order_by!]
-
-    # filter the rows returned
-    where: pg_buffercache_bool_exp
-  ): [pg_buffercache!]!
-
-  # fetch aggregated fields from the table: "pg_buffercache"
-  pg_buffercache_aggregate(
-    # distinct select on columns
-    distinct_on: [pg_buffercache_select_column!]
-
-    # limit the number of rows returned
-    limit: Int
-
-    # skip the first n rows. Use only with order_by
-    offset: Int
-
-    # sort the rows by one or more columns
-    order_by: [pg_buffercache_order_by!]
-
-    # filter the rows returned
-    where: pg_buffercache_bool_exp
-  ): pg_buffercache_aggregate!
-
-  # fetch data from the table: "pg_stat_statements"
-  pg_stat_statements(
-    # distinct select on columns
-    distinct_on: [pg_stat_statements_select_column!]
-
-    # limit the number of rows returned
-    limit: Int
-
-    # skip the first n rows. Use only with order_by
-    offset: Int
-
-    # sort the rows by one or more columns
-    order_by: [pg_stat_statements_order_by!]
-
-    # filter the rows returned
-    where: pg_stat_statements_bool_exp
-  ): [pg_stat_statements!]!
-
-  # fetch aggregated fields from the table: "pg_stat_statements"
-  pg_stat_statements_aggregate(
-    # distinct select on columns
-    distinct_on: [pg_stat_statements_select_column!]
-
-    # limit the number of rows returned
-    limit: Int
-
-    # skip the first n rows. Use only with order_by
-    offset: Int
-
-    # sort the rows by one or more columns
-    order_by: [pg_stat_statements_order_by!]
-
-    # filter the rows returned
-    where: pg_stat_statements_bool_exp
-  ): pg_stat_statements_aggregate!
+  metrics_factory_destroy_by_pk(
+    # event id
+    event_id: String!
+  ): metrics_factory_destroy
 
   # fetch data from the table: "policy_factory_create"
   policy_factory_create(
@@ -7524,7 +6468,10 @@ type subscription_root {
   ): policy_factory_create_aggregate!
 
   # fetch data from the table: "policy_factory_create" using primary key columns
-  policy_factory_create_by_pk(event_id: String!): policy_factory_create
+  policy_factory_create_by_pk(
+    # event id
+    event_id: String!
+  ): policy_factory_create
 
   # fetch data from the table: "property_authentication"
   property_authentication(
@@ -7563,7 +6510,13 @@ type subscription_root {
   ): property_authentication_aggregate!
 
   # fetch data from the table: "property_authentication" using primary key columns
-  property_authentication_by_pk(metrics: String!, property: String!): property_authentication
+  property_authentication_by_pk(
+    # the metrics address for authentication
+    metrics: String!
+
+    # property address
+    property: String!
+  ): property_authentication
 
   # fetch data from the table: "property_authentication_deleted"
   property_authentication_deleted(
@@ -7602,7 +6555,13 @@ type subscription_root {
   ): property_authentication_deleted_aggregate!
 
   # fetch data from the table: "property_authentication_deleted" using primary key columns
-  property_authentication_deleted_by_pk(metrics: String!, property: String!): property_authentication_deleted
+  property_authentication_deleted_by_pk(
+    # disabled metrics address for authentication
+    metrics: String!
+
+    # property address
+    property: String!
+  ): property_authentication_deleted
 
   # fetch data from the table: "property_factory_create"
   property_factory_create(
@@ -7641,7 +6600,91 @@ type subscription_root {
   ): property_factory_create_aggregate!
 
   # fetch data from the table: "property_factory_create" using primary key columns
-  property_factory_create_by_pk(event_id: String!): property_factory_create
+  property_factory_create_by_pk(
+    # event id
+    event_id: String!
+  ): property_factory_create
+
+  # fetch data from the table: "property_lockup"
+  property_lockup(
+    # distinct select on columns
+    distinct_on: [property_lockup_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [property_lockup_order_by!]
+
+    # filter the rows returned
+    where: property_lockup_bool_exp
+  ): [property_lockup!]!
+
+  # fetch aggregated fields from the table: "property_lockup"
+  property_lockup_aggregate(
+    # distinct select on columns
+    distinct_on: [property_lockup_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [property_lockup_order_by!]
+
+    # filter the rows returned
+    where: property_lockup_bool_exp
+  ): property_lockup_aggregate!
+
+  # fetch data from the table: "property_lockup" using primary key columns
+  property_lockup_by_pk(
+    # account address
+    account_address: String!
+
+    # property address
+    property_address: String!
+  ): property_lockup
+
+  # fetch data from the table: "property_lockup_sum_values"
+  property_lockup_sum_values(
+    # distinct select on columns
+    distinct_on: [property_lockup_sum_values_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [property_lockup_sum_values_order_by!]
+
+    # filter the rows returned
+    where: property_lockup_sum_values_bool_exp
+  ): [property_lockup_sum_values!]!
+
+  # fetch aggregated fields from the table: "property_lockup_sum_values"
+  property_lockup_sum_values_aggregate(
+    # distinct select on columns
+    distinct_on: [property_lockup_sum_values_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [property_lockup_sum_values_order_by!]
+
+    # filter the rows returned
+    where: property_lockup_sum_values_bool_exp
+  ): property_lockup_sum_values_aggregate!
 
   # fetch data from the table: "property_meta"
   property_meta(
@@ -7680,44 +6723,12 @@ type subscription_root {
   ): property_meta_aggregate!
 
   # fetch data from the table: "property_meta" using primary key columns
-  property_meta_by_pk(author: String!, property: String!): property_meta
+  property_meta_by_pk(
+    # property author address
+    author: String!
 
-  # fetch data from the table: "reward_calculation_result"
-  reward_calculation_result(
-    # distinct select on columns
-    distinct_on: [reward_calculation_result_select_column!]
-
-    # limit the number of rows returned
-    limit: Int
-
-    # skip the first n rows. Use only with order_by
-    offset: Int
-
-    # sort the rows by one or more columns
-    order_by: [reward_calculation_result_order_by!]
-
-    # filter the rows returned
-    where: reward_calculation_result_bool_exp
-  ): [reward_calculation_result!]!
-
-  # fetch aggregated fields from the table: "reward_calculation_result"
-  reward_calculation_result_aggregate(
-    # distinct select on columns
-    distinct_on: [reward_calculation_result_select_column!]
-
-    # limit the number of rows returned
-    limit: Int
-
-    # skip the first n rows. Use only with order_by
-    offset: Int
-
-    # sort the rows by one or more columns
-    order_by: [reward_calculation_result_order_by!]
-
-    # filter the rows returned
-    where: reward_calculation_result_bool_exp
-  ): reward_calculation_result_aggregate!
-
-  # fetch data from the table: "reward_calculation_result" using primary key columns
-  reward_calculation_result_by_pk(event_id: String!): reward_calculation_result
+    # property address
+    property: String!
+  ): property_meta
 }
+

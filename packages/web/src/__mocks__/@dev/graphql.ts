@@ -1,18 +1,9 @@
 import {
-  useGetLastAllocatorAllocationResultQuery as IUseGetLastAllocatorAllocationResultQuery,
   useListPropertyQuery as IUseListPropertyQuery,
   useGetPropertyAuthenticationQuery as IUseGetPropertyAuthenticationQuery,
   useGetMarketFactoryCreateQuery as IUseGetMarketFactoryCreateQuery,
   useListPropertyMetaQuery as IUseListPropertyMetaQuery
 } from '@dev/graphql'
-
-export const useGetLastAllocatorAllocationResultQuery = (): Partial<
-  ReturnType<typeof IUseGetLastAllocatorAllocationResultQuery>
-> => ({
-  data: {
-    allocator_allocation_result: [{ block_number: 42141412412 }]
-  }
-})
 
 export const useListPropertyQuery = (): Partial<ReturnType<typeof IUseListPropertyQuery>> => ({
   data: {
