@@ -10,876 +10,423 @@ export type Scalars = {
   Boolean: boolean
   Int: number
   Float: number
-  bigint: any
-  float8: any
   numeric: any
-  oid: any
-  smallint: any
 }
 
-export type Allocator_Allocation_Result = {
-  __typename?: 'allocator_allocation_result'
-  arg_value: Scalars['numeric']
-  authentication?: Maybe<Property_Authentication>
+export type Account_Lockup = {
+  __typename?: 'account_lockup'
+  account_address: Scalars['String']
   block_number: Scalars['Int']
-  condition?: Maybe<Allocator_Before_Allocation>
-  event_id: Scalars['String']
-  lockup_value: Scalars['numeric']
-  log_index: Scalars['Int']
-  market: Scalars['String']
-  metrics: Scalars['String']
-  property: Scalars['String']
-  property_creation?: Maybe<Property_Factory_Create>
-  raw_data: Scalars['String']
-  result: Scalars['numeric']
-  reward?: Maybe<Reward_Calculation_Result>
-  transaction_index: Scalars['Int']
+  locked_up_event_id: Scalars['String']
+  property_address: Scalars['String']
+  value: Scalars['numeric']
 }
 
-export type Allocator_Allocation_Result_Aggregate = {
-  __typename?: 'allocator_allocation_result_aggregate'
-  aggregate?: Maybe<Allocator_Allocation_Result_Aggregate_Fields>
-  nodes: Array<Allocator_Allocation_Result>
+export type Account_Lockup_Aggregate = {
+  __typename?: 'account_lockup_aggregate'
+  aggregate?: Maybe<Account_Lockup_Aggregate_Fields>
+  nodes: Array<Account_Lockup>
 }
 
-export type Allocator_Allocation_Result_Aggregate_Fields = {
-  __typename?: 'allocator_allocation_result_aggregate_fields'
-  avg?: Maybe<Allocator_Allocation_Result_Avg_Fields>
+export type Account_Lockup_Aggregate_Fields = {
+  __typename?: 'account_lockup_aggregate_fields'
+  avg?: Maybe<Account_Lockup_Avg_Fields>
   count?: Maybe<Scalars['Int']>
-  max?: Maybe<Allocator_Allocation_Result_Max_Fields>
-  min?: Maybe<Allocator_Allocation_Result_Min_Fields>
-  stddev?: Maybe<Allocator_Allocation_Result_Stddev_Fields>
-  stddev_pop?: Maybe<Allocator_Allocation_Result_Stddev_Pop_Fields>
-  stddev_samp?: Maybe<Allocator_Allocation_Result_Stddev_Samp_Fields>
-  sum?: Maybe<Allocator_Allocation_Result_Sum_Fields>
-  var_pop?: Maybe<Allocator_Allocation_Result_Var_Pop_Fields>
-  var_samp?: Maybe<Allocator_Allocation_Result_Var_Samp_Fields>
-  variance?: Maybe<Allocator_Allocation_Result_Variance_Fields>
+  max?: Maybe<Account_Lockup_Max_Fields>
+  min?: Maybe<Account_Lockup_Min_Fields>
+  stddev?: Maybe<Account_Lockup_Stddev_Fields>
+  stddev_pop?: Maybe<Account_Lockup_Stddev_Pop_Fields>
+  stddev_samp?: Maybe<Account_Lockup_Stddev_Samp_Fields>
+  sum?: Maybe<Account_Lockup_Sum_Fields>
+  var_pop?: Maybe<Account_Lockup_Var_Pop_Fields>
+  var_samp?: Maybe<Account_Lockup_Var_Samp_Fields>
+  variance?: Maybe<Account_Lockup_Variance_Fields>
 }
 
-export type Allocator_Allocation_Result_Aggregate_FieldsCountArgs = {
-  columns?: Maybe<Array<Allocator_Allocation_Result_Select_Column>>
+export type Account_Lockup_Aggregate_FieldsCountArgs = {
+  columns?: Maybe<Array<Account_Lockup_Select_Column>>
   distinct?: Maybe<Scalars['Boolean']>
 }
 
-export type Allocator_Allocation_Result_Aggregate_Order_By = {
-  avg?: Maybe<Allocator_Allocation_Result_Avg_Order_By>
+export type Account_Lockup_Aggregate_Order_By = {
+  avg?: Maybe<Account_Lockup_Avg_Order_By>
   count?: Maybe<Order_By>
-  max?: Maybe<Allocator_Allocation_Result_Max_Order_By>
-  min?: Maybe<Allocator_Allocation_Result_Min_Order_By>
-  stddev?: Maybe<Allocator_Allocation_Result_Stddev_Order_By>
-  stddev_pop?: Maybe<Allocator_Allocation_Result_Stddev_Pop_Order_By>
-  stddev_samp?: Maybe<Allocator_Allocation_Result_Stddev_Samp_Order_By>
-  sum?: Maybe<Allocator_Allocation_Result_Sum_Order_By>
-  var_pop?: Maybe<Allocator_Allocation_Result_Var_Pop_Order_By>
-  var_samp?: Maybe<Allocator_Allocation_Result_Var_Samp_Order_By>
-  variance?: Maybe<Allocator_Allocation_Result_Variance_Order_By>
+  max?: Maybe<Account_Lockup_Max_Order_By>
+  min?: Maybe<Account_Lockup_Min_Order_By>
+  stddev?: Maybe<Account_Lockup_Stddev_Order_By>
+  stddev_pop?: Maybe<Account_Lockup_Stddev_Pop_Order_By>
+  stddev_samp?: Maybe<Account_Lockup_Stddev_Samp_Order_By>
+  sum?: Maybe<Account_Lockup_Sum_Order_By>
+  var_pop?: Maybe<Account_Lockup_Var_Pop_Order_By>
+  var_samp?: Maybe<Account_Lockup_Var_Samp_Order_By>
+  variance?: Maybe<Account_Lockup_Variance_Order_By>
 }
 
-export type Allocator_Allocation_Result_Arr_Rel_Insert_Input = {
-  data: Array<Allocator_Allocation_Result_Insert_Input>
-  on_conflict?: Maybe<Allocator_Allocation_Result_On_Conflict>
+export type Account_Lockup_Arr_Rel_Insert_Input = {
+  data: Array<Account_Lockup_Insert_Input>
+  on_conflict?: Maybe<Account_Lockup_On_Conflict>
 }
 
-export type Allocator_Allocation_Result_Avg_Fields = {
-  __typename?: 'allocator_allocation_result_avg_fields'
-  arg_value?: Maybe<Scalars['Float']>
+export type Account_Lockup_Avg_Fields = {
+  __typename?: 'account_lockup_avg_fields'
   block_number?: Maybe<Scalars['Float']>
-  lockup_value?: Maybe<Scalars['Float']>
-  log_index?: Maybe<Scalars['Float']>
-  result?: Maybe<Scalars['Float']>
-  transaction_index?: Maybe<Scalars['Float']>
+  value?: Maybe<Scalars['Float']>
 }
 
-export type Allocator_Allocation_Result_Avg_Order_By = {
-  arg_value?: Maybe<Order_By>
+export type Account_Lockup_Avg_Order_By = {
   block_number?: Maybe<Order_By>
-  lockup_value?: Maybe<Order_By>
-  log_index?: Maybe<Order_By>
-  result?: Maybe<Order_By>
-  transaction_index?: Maybe<Order_By>
+  value?: Maybe<Order_By>
 }
 
-export type Allocator_Allocation_Result_Bool_Exp = {
-  _and?: Maybe<Array<Maybe<Allocator_Allocation_Result_Bool_Exp>>>
-  _not?: Maybe<Allocator_Allocation_Result_Bool_Exp>
-  _or?: Maybe<Array<Maybe<Allocator_Allocation_Result_Bool_Exp>>>
-  arg_value?: Maybe<Numeric_Comparison_Exp>
-  authentication?: Maybe<Property_Authentication_Bool_Exp>
+export type Account_Lockup_Bool_Exp = {
+  _and?: Maybe<Array<Maybe<Account_Lockup_Bool_Exp>>>
+  _not?: Maybe<Account_Lockup_Bool_Exp>
+  _or?: Maybe<Array<Maybe<Account_Lockup_Bool_Exp>>>
+  account_address?: Maybe<String_Comparison_Exp>
   block_number?: Maybe<Int_Comparison_Exp>
-  condition?: Maybe<Allocator_Before_Allocation_Bool_Exp>
-  event_id?: Maybe<String_Comparison_Exp>
-  lockup_value?: Maybe<Numeric_Comparison_Exp>
-  log_index?: Maybe<Int_Comparison_Exp>
-  market?: Maybe<String_Comparison_Exp>
-  metrics?: Maybe<String_Comparison_Exp>
-  property?: Maybe<String_Comparison_Exp>
-  property_creation?: Maybe<Property_Factory_Create_Bool_Exp>
-  raw_data?: Maybe<String_Comparison_Exp>
-  result?: Maybe<Numeric_Comparison_Exp>
-  reward?: Maybe<Reward_Calculation_Result_Bool_Exp>
-  transaction_index?: Maybe<Int_Comparison_Exp>
+  locked_up_event_id?: Maybe<String_Comparison_Exp>
+  property_address?: Maybe<String_Comparison_Exp>
+  value?: Maybe<Numeric_Comparison_Exp>
 }
 
-export enum Allocator_Allocation_Result_Constraint {
-  AllocatorAllocationResultPkey = 'allocator_allocation_result_pkey'
+export enum Account_Lockup_Constraint {
+  AccountLockupPkey = 'account_lockup_pkey'
 }
 
-export type Allocator_Allocation_Result_Inc_Input = {
-  arg_value?: Maybe<Scalars['numeric']>
+export type Account_Lockup_Inc_Input = {
   block_number?: Maybe<Scalars['Int']>
-  lockup_value?: Maybe<Scalars['numeric']>
-  log_index?: Maybe<Scalars['Int']>
-  result?: Maybe<Scalars['numeric']>
-  transaction_index?: Maybe<Scalars['Int']>
+  value?: Maybe<Scalars['numeric']>
 }
 
-export type Allocator_Allocation_Result_Insert_Input = {
-  arg_value?: Maybe<Scalars['numeric']>
-  authentication?: Maybe<Property_Authentication_Obj_Rel_Insert_Input>
+export type Account_Lockup_Insert_Input = {
+  account_address?: Maybe<Scalars['String']>
   block_number?: Maybe<Scalars['Int']>
-  condition?: Maybe<Allocator_Before_Allocation_Obj_Rel_Insert_Input>
-  event_id?: Maybe<Scalars['String']>
-  lockup_value?: Maybe<Scalars['numeric']>
-  log_index?: Maybe<Scalars['Int']>
-  market?: Maybe<Scalars['String']>
-  metrics?: Maybe<Scalars['String']>
-  property?: Maybe<Scalars['String']>
-  property_creation?: Maybe<Property_Factory_Create_Obj_Rel_Insert_Input>
-  raw_data?: Maybe<Scalars['String']>
-  result?: Maybe<Scalars['numeric']>
-  reward?: Maybe<Reward_Calculation_Result_Obj_Rel_Insert_Input>
-  transaction_index?: Maybe<Scalars['Int']>
+  locked_up_event_id?: Maybe<Scalars['String']>
+  property_address?: Maybe<Scalars['String']>
+  value?: Maybe<Scalars['numeric']>
 }
 
-export type Allocator_Allocation_Result_Max_Fields = {
-  __typename?: 'allocator_allocation_result_max_fields'
-  arg_value?: Maybe<Scalars['numeric']>
+export type Account_Lockup_Max_Fields = {
+  __typename?: 'account_lockup_max_fields'
+  account_address?: Maybe<Scalars['String']>
   block_number?: Maybe<Scalars['Int']>
-  event_id?: Maybe<Scalars['String']>
-  lockup_value?: Maybe<Scalars['numeric']>
-  log_index?: Maybe<Scalars['Int']>
-  market?: Maybe<Scalars['String']>
-  metrics?: Maybe<Scalars['String']>
-  property?: Maybe<Scalars['String']>
-  raw_data?: Maybe<Scalars['String']>
-  result?: Maybe<Scalars['numeric']>
-  transaction_index?: Maybe<Scalars['Int']>
+  locked_up_event_id?: Maybe<Scalars['String']>
+  property_address?: Maybe<Scalars['String']>
+  value?: Maybe<Scalars['numeric']>
 }
 
-export type Allocator_Allocation_Result_Max_Order_By = {
-  arg_value?: Maybe<Order_By>
+export type Account_Lockup_Max_Order_By = {
+  account_address?: Maybe<Order_By>
   block_number?: Maybe<Order_By>
-  event_id?: Maybe<Order_By>
-  lockup_value?: Maybe<Order_By>
-  log_index?: Maybe<Order_By>
-  market?: Maybe<Order_By>
-  metrics?: Maybe<Order_By>
-  property?: Maybe<Order_By>
-  raw_data?: Maybe<Order_By>
-  result?: Maybe<Order_By>
-  transaction_index?: Maybe<Order_By>
+  locked_up_event_id?: Maybe<Order_By>
+  property_address?: Maybe<Order_By>
+  value?: Maybe<Order_By>
 }
 
-export type Allocator_Allocation_Result_Min_Fields = {
-  __typename?: 'allocator_allocation_result_min_fields'
-  arg_value?: Maybe<Scalars['numeric']>
+export type Account_Lockup_Min_Fields = {
+  __typename?: 'account_lockup_min_fields'
+  account_address?: Maybe<Scalars['String']>
   block_number?: Maybe<Scalars['Int']>
-  event_id?: Maybe<Scalars['String']>
-  lockup_value?: Maybe<Scalars['numeric']>
-  log_index?: Maybe<Scalars['Int']>
-  market?: Maybe<Scalars['String']>
-  metrics?: Maybe<Scalars['String']>
-  property?: Maybe<Scalars['String']>
-  raw_data?: Maybe<Scalars['String']>
-  result?: Maybe<Scalars['numeric']>
-  transaction_index?: Maybe<Scalars['Int']>
+  locked_up_event_id?: Maybe<Scalars['String']>
+  property_address?: Maybe<Scalars['String']>
+  value?: Maybe<Scalars['numeric']>
 }
 
-export type Allocator_Allocation_Result_Min_Order_By = {
-  arg_value?: Maybe<Order_By>
+export type Account_Lockup_Min_Order_By = {
+  account_address?: Maybe<Order_By>
   block_number?: Maybe<Order_By>
-  event_id?: Maybe<Order_By>
-  lockup_value?: Maybe<Order_By>
-  log_index?: Maybe<Order_By>
-  market?: Maybe<Order_By>
-  metrics?: Maybe<Order_By>
-  property?: Maybe<Order_By>
-  raw_data?: Maybe<Order_By>
-  result?: Maybe<Order_By>
-  transaction_index?: Maybe<Order_By>
+  locked_up_event_id?: Maybe<Order_By>
+  property_address?: Maybe<Order_By>
+  value?: Maybe<Order_By>
 }
 
-export type Allocator_Allocation_Result_Mutation_Response = {
-  __typename?: 'allocator_allocation_result_mutation_response'
+export type Account_Lockup_Mutation_Response = {
+  __typename?: 'account_lockup_mutation_response'
   affected_rows: Scalars['Int']
-  returning: Array<Allocator_Allocation_Result>
+  returning: Array<Account_Lockup>
 }
 
-export type Allocator_Allocation_Result_Obj_Rel_Insert_Input = {
-  data: Allocator_Allocation_Result_Insert_Input
-  on_conflict?: Maybe<Allocator_Allocation_Result_On_Conflict>
+export type Account_Lockup_Obj_Rel_Insert_Input = {
+  data: Account_Lockup_Insert_Input
+  on_conflict?: Maybe<Account_Lockup_On_Conflict>
 }
 
-export type Allocator_Allocation_Result_On_Conflict = {
-  constraint: Allocator_Allocation_Result_Constraint
-  update_columns: Array<Allocator_Allocation_Result_Update_Column>
-  where?: Maybe<Allocator_Allocation_Result_Bool_Exp>
+export type Account_Lockup_On_Conflict = {
+  constraint: Account_Lockup_Constraint
+  update_columns: Array<Account_Lockup_Update_Column>
+  where?: Maybe<Account_Lockup_Bool_Exp>
 }
 
-export type Allocator_Allocation_Result_Order_By = {
-  arg_value?: Maybe<Order_By>
-  authentication?: Maybe<Property_Authentication_Order_By>
+export type Account_Lockup_Order_By = {
+  account_address?: Maybe<Order_By>
   block_number?: Maybe<Order_By>
-  condition?: Maybe<Allocator_Before_Allocation_Order_By>
-  event_id?: Maybe<Order_By>
-  lockup_value?: Maybe<Order_By>
-  log_index?: Maybe<Order_By>
-  market?: Maybe<Order_By>
-  metrics?: Maybe<Order_By>
-  property?: Maybe<Order_By>
-  property_creation?: Maybe<Property_Factory_Create_Order_By>
-  raw_data?: Maybe<Order_By>
-  result?: Maybe<Order_By>
-  reward?: Maybe<Reward_Calculation_Result_Order_By>
-  transaction_index?: Maybe<Order_By>
+  locked_up_event_id?: Maybe<Order_By>
+  property_address?: Maybe<Order_By>
+  value?: Maybe<Order_By>
 }
 
-export type Allocator_Allocation_Result_Pk_Columns_Input = {
-  event_id: Scalars['String']
+export type Account_Lockup_Pk_Columns_Input = {
+  account_address: Scalars['String']
+  property_address: Scalars['String']
 }
 
-export enum Allocator_Allocation_Result_Select_Column {
-  ArgValue = 'arg_value',
+export enum Account_Lockup_Select_Column {
+  AccountAddress = 'account_address',
   BlockNumber = 'block_number',
-  EventId = 'event_id',
-  LockupValue = 'lockup_value',
-  LogIndex = 'log_index',
-  Market = 'market',
-  Metrics = 'metrics',
-  Property = 'property',
-  RawData = 'raw_data',
-  Result = 'result',
-  TransactionIndex = 'transaction_index'
+  LockedUpEventId = 'locked_up_event_id',
+  PropertyAddress = 'property_address',
+  Value = 'value'
 }
 
-export type Allocator_Allocation_Result_Set_Input = {
-  arg_value?: Maybe<Scalars['numeric']>
+export type Account_Lockup_Set_Input = {
+  account_address?: Maybe<Scalars['String']>
   block_number?: Maybe<Scalars['Int']>
-  event_id?: Maybe<Scalars['String']>
-  lockup_value?: Maybe<Scalars['numeric']>
-  log_index?: Maybe<Scalars['Int']>
-  market?: Maybe<Scalars['String']>
-  metrics?: Maybe<Scalars['String']>
-  property?: Maybe<Scalars['String']>
-  raw_data?: Maybe<Scalars['String']>
-  result?: Maybe<Scalars['numeric']>
-  transaction_index?: Maybe<Scalars['Int']>
+  locked_up_event_id?: Maybe<Scalars['String']>
+  property_address?: Maybe<Scalars['String']>
+  value?: Maybe<Scalars['numeric']>
 }
 
-export type Allocator_Allocation_Result_Stddev_Fields = {
-  __typename?: 'allocator_allocation_result_stddev_fields'
-  arg_value?: Maybe<Scalars['Float']>
+export type Account_Lockup_Stddev_Fields = {
+  __typename?: 'account_lockup_stddev_fields'
   block_number?: Maybe<Scalars['Float']>
-  lockup_value?: Maybe<Scalars['Float']>
-  log_index?: Maybe<Scalars['Float']>
-  result?: Maybe<Scalars['Float']>
-  transaction_index?: Maybe<Scalars['Float']>
+  value?: Maybe<Scalars['Float']>
 }
 
-export type Allocator_Allocation_Result_Stddev_Order_By = {
-  arg_value?: Maybe<Order_By>
+export type Account_Lockup_Stddev_Order_By = {
   block_number?: Maybe<Order_By>
-  lockup_value?: Maybe<Order_By>
-  log_index?: Maybe<Order_By>
-  result?: Maybe<Order_By>
-  transaction_index?: Maybe<Order_By>
+  value?: Maybe<Order_By>
 }
 
-export type Allocator_Allocation_Result_Stddev_Pop_Fields = {
-  __typename?: 'allocator_allocation_result_stddev_pop_fields'
-  arg_value?: Maybe<Scalars['Float']>
+export type Account_Lockup_Stddev_Pop_Fields = {
+  __typename?: 'account_lockup_stddev_pop_fields'
   block_number?: Maybe<Scalars['Float']>
-  lockup_value?: Maybe<Scalars['Float']>
-  log_index?: Maybe<Scalars['Float']>
-  result?: Maybe<Scalars['Float']>
-  transaction_index?: Maybe<Scalars['Float']>
+  value?: Maybe<Scalars['Float']>
 }
 
-export type Allocator_Allocation_Result_Stddev_Pop_Order_By = {
-  arg_value?: Maybe<Order_By>
+export type Account_Lockup_Stddev_Pop_Order_By = {
   block_number?: Maybe<Order_By>
-  lockup_value?: Maybe<Order_By>
-  log_index?: Maybe<Order_By>
-  result?: Maybe<Order_By>
-  transaction_index?: Maybe<Order_By>
+  value?: Maybe<Order_By>
 }
 
-export type Allocator_Allocation_Result_Stddev_Samp_Fields = {
-  __typename?: 'allocator_allocation_result_stddev_samp_fields'
-  arg_value?: Maybe<Scalars['Float']>
+export type Account_Lockup_Stddev_Samp_Fields = {
+  __typename?: 'account_lockup_stddev_samp_fields'
   block_number?: Maybe<Scalars['Float']>
-  lockup_value?: Maybe<Scalars['Float']>
-  log_index?: Maybe<Scalars['Float']>
-  result?: Maybe<Scalars['Float']>
-  transaction_index?: Maybe<Scalars['Float']>
+  value?: Maybe<Scalars['Float']>
 }
 
-export type Allocator_Allocation_Result_Stddev_Samp_Order_By = {
-  arg_value?: Maybe<Order_By>
+export type Account_Lockup_Stddev_Samp_Order_By = {
   block_number?: Maybe<Order_By>
-  lockup_value?: Maybe<Order_By>
-  log_index?: Maybe<Order_By>
-  result?: Maybe<Order_By>
-  transaction_index?: Maybe<Order_By>
+  value?: Maybe<Order_By>
 }
 
-export type Allocator_Allocation_Result_Sum_Fields = {
-  __typename?: 'allocator_allocation_result_sum_fields'
-  arg_value?: Maybe<Scalars['numeric']>
+export type Account_Lockup_Sum_Fields = {
+  __typename?: 'account_lockup_sum_fields'
   block_number?: Maybe<Scalars['Int']>
-  lockup_value?: Maybe<Scalars['numeric']>
-  log_index?: Maybe<Scalars['Int']>
-  result?: Maybe<Scalars['numeric']>
-  transaction_index?: Maybe<Scalars['Int']>
+  value?: Maybe<Scalars['numeric']>
 }
 
-export type Allocator_Allocation_Result_Sum_Order_By = {
-  arg_value?: Maybe<Order_By>
+export type Account_Lockup_Sum_Order_By = {
   block_number?: Maybe<Order_By>
-  lockup_value?: Maybe<Order_By>
-  log_index?: Maybe<Order_By>
-  result?: Maybe<Order_By>
-  transaction_index?: Maybe<Order_By>
+  value?: Maybe<Order_By>
 }
 
-export enum Allocator_Allocation_Result_Update_Column {
-  ArgValue = 'arg_value',
-  BlockNumber = 'block_number',
-  EventId = 'event_id',
-  LockupValue = 'lockup_value',
-  LogIndex = 'log_index',
-  Market = 'market',
-  Metrics = 'metrics',
-  Property = 'property',
-  RawData = 'raw_data',
-  Result = 'result',
-  TransactionIndex = 'transaction_index'
+export type Account_Lockup_Sum_Values = {
+  __typename?: 'account_lockup_sum_values'
+  account_address?: Maybe<Scalars['String']>
+  sum_values?: Maybe<Scalars['numeric']>
 }
 
-export type Allocator_Allocation_Result_Var_Pop_Fields = {
-  __typename?: 'allocator_allocation_result_var_pop_fields'
-  arg_value?: Maybe<Scalars['Float']>
-  block_number?: Maybe<Scalars['Float']>
-  lockup_value?: Maybe<Scalars['Float']>
-  log_index?: Maybe<Scalars['Float']>
-  result?: Maybe<Scalars['Float']>
-  transaction_index?: Maybe<Scalars['Float']>
+export type Account_Lockup_Sum_Values_Aggregate = {
+  __typename?: 'account_lockup_sum_values_aggregate'
+  aggregate?: Maybe<Account_Lockup_Sum_Values_Aggregate_Fields>
+  nodes: Array<Account_Lockup_Sum_Values>
 }
 
-export type Allocator_Allocation_Result_Var_Pop_Order_By = {
-  arg_value?: Maybe<Order_By>
-  block_number?: Maybe<Order_By>
-  lockup_value?: Maybe<Order_By>
-  log_index?: Maybe<Order_By>
-  result?: Maybe<Order_By>
-  transaction_index?: Maybe<Order_By>
-}
-
-export type Allocator_Allocation_Result_Var_Samp_Fields = {
-  __typename?: 'allocator_allocation_result_var_samp_fields'
-  arg_value?: Maybe<Scalars['Float']>
-  block_number?: Maybe<Scalars['Float']>
-  lockup_value?: Maybe<Scalars['Float']>
-  log_index?: Maybe<Scalars['Float']>
-  result?: Maybe<Scalars['Float']>
-  transaction_index?: Maybe<Scalars['Float']>
-}
-
-export type Allocator_Allocation_Result_Var_Samp_Order_By = {
-  arg_value?: Maybe<Order_By>
-  block_number?: Maybe<Order_By>
-  lockup_value?: Maybe<Order_By>
-  log_index?: Maybe<Order_By>
-  result?: Maybe<Order_By>
-  transaction_index?: Maybe<Order_By>
-}
-
-export type Allocator_Allocation_Result_Variance_Fields = {
-  __typename?: 'allocator_allocation_result_variance_fields'
-  arg_value?: Maybe<Scalars['Float']>
-  block_number?: Maybe<Scalars['Float']>
-  lockup_value?: Maybe<Scalars['Float']>
-  log_index?: Maybe<Scalars['Float']>
-  result?: Maybe<Scalars['Float']>
-  transaction_index?: Maybe<Scalars['Float']>
-}
-
-export type Allocator_Allocation_Result_Variance_Order_By = {
-  arg_value?: Maybe<Order_By>
-  block_number?: Maybe<Order_By>
-  lockup_value?: Maybe<Order_By>
-  log_index?: Maybe<Order_By>
-  result?: Maybe<Order_By>
-  transaction_index?: Maybe<Order_By>
-}
-
-export type Allocator_Before_Allocation = {
-  __typename?: 'allocator_before_allocation'
-  assets: Scalars['numeric']
-  block_number: Scalars['Int']
-  blocks: Scalars['numeric']
-  event_id: Scalars['String']
-  log_index: Scalars['Int']
-  market_value: Scalars['numeric']
-  mint: Scalars['numeric']
-  raw_data: Scalars['String']
-  result?: Maybe<Allocator_Allocation_Result>
-  token_value: Scalars['numeric']
-  total_assets: Scalars['numeric']
-  transaction_index: Scalars['Int']
-}
-
-export type Allocator_Before_Allocation_Aggregate = {
-  __typename?: 'allocator_before_allocation_aggregate'
-  aggregate?: Maybe<Allocator_Before_Allocation_Aggregate_Fields>
-  nodes: Array<Allocator_Before_Allocation>
-}
-
-export type Allocator_Before_Allocation_Aggregate_Fields = {
-  __typename?: 'allocator_before_allocation_aggregate_fields'
-  avg?: Maybe<Allocator_Before_Allocation_Avg_Fields>
+export type Account_Lockup_Sum_Values_Aggregate_Fields = {
+  __typename?: 'account_lockup_sum_values_aggregate_fields'
+  avg?: Maybe<Account_Lockup_Sum_Values_Avg_Fields>
   count?: Maybe<Scalars['Int']>
-  max?: Maybe<Allocator_Before_Allocation_Max_Fields>
-  min?: Maybe<Allocator_Before_Allocation_Min_Fields>
-  stddev?: Maybe<Allocator_Before_Allocation_Stddev_Fields>
-  stddev_pop?: Maybe<Allocator_Before_Allocation_Stddev_Pop_Fields>
-  stddev_samp?: Maybe<Allocator_Before_Allocation_Stddev_Samp_Fields>
-  sum?: Maybe<Allocator_Before_Allocation_Sum_Fields>
-  var_pop?: Maybe<Allocator_Before_Allocation_Var_Pop_Fields>
-  var_samp?: Maybe<Allocator_Before_Allocation_Var_Samp_Fields>
-  variance?: Maybe<Allocator_Before_Allocation_Variance_Fields>
+  max?: Maybe<Account_Lockup_Sum_Values_Max_Fields>
+  min?: Maybe<Account_Lockup_Sum_Values_Min_Fields>
+  stddev?: Maybe<Account_Lockup_Sum_Values_Stddev_Fields>
+  stddev_pop?: Maybe<Account_Lockup_Sum_Values_Stddev_Pop_Fields>
+  stddev_samp?: Maybe<Account_Lockup_Sum_Values_Stddev_Samp_Fields>
+  sum?: Maybe<Account_Lockup_Sum_Values_Sum_Fields>
+  var_pop?: Maybe<Account_Lockup_Sum_Values_Var_Pop_Fields>
+  var_samp?: Maybe<Account_Lockup_Sum_Values_Var_Samp_Fields>
+  variance?: Maybe<Account_Lockup_Sum_Values_Variance_Fields>
 }
 
-export type Allocator_Before_Allocation_Aggregate_FieldsCountArgs = {
-  columns?: Maybe<Array<Allocator_Before_Allocation_Select_Column>>
+export type Account_Lockup_Sum_Values_Aggregate_FieldsCountArgs = {
+  columns?: Maybe<Array<Account_Lockup_Sum_Values_Select_Column>>
   distinct?: Maybe<Scalars['Boolean']>
 }
 
-export type Allocator_Before_Allocation_Aggregate_Order_By = {
-  avg?: Maybe<Allocator_Before_Allocation_Avg_Order_By>
+export type Account_Lockup_Sum_Values_Aggregate_Order_By = {
+  avg?: Maybe<Account_Lockup_Sum_Values_Avg_Order_By>
   count?: Maybe<Order_By>
-  max?: Maybe<Allocator_Before_Allocation_Max_Order_By>
-  min?: Maybe<Allocator_Before_Allocation_Min_Order_By>
-  stddev?: Maybe<Allocator_Before_Allocation_Stddev_Order_By>
-  stddev_pop?: Maybe<Allocator_Before_Allocation_Stddev_Pop_Order_By>
-  stddev_samp?: Maybe<Allocator_Before_Allocation_Stddev_Samp_Order_By>
-  sum?: Maybe<Allocator_Before_Allocation_Sum_Order_By>
-  var_pop?: Maybe<Allocator_Before_Allocation_Var_Pop_Order_By>
-  var_samp?: Maybe<Allocator_Before_Allocation_Var_Samp_Order_By>
-  variance?: Maybe<Allocator_Before_Allocation_Variance_Order_By>
+  max?: Maybe<Account_Lockup_Sum_Values_Max_Order_By>
+  min?: Maybe<Account_Lockup_Sum_Values_Min_Order_By>
+  stddev?: Maybe<Account_Lockup_Sum_Values_Stddev_Order_By>
+  stddev_pop?: Maybe<Account_Lockup_Sum_Values_Stddev_Pop_Order_By>
+  stddev_samp?: Maybe<Account_Lockup_Sum_Values_Stddev_Samp_Order_By>
+  sum?: Maybe<Account_Lockup_Sum_Values_Sum_Order_By>
+  var_pop?: Maybe<Account_Lockup_Sum_Values_Var_Pop_Order_By>
+  var_samp?: Maybe<Account_Lockup_Sum_Values_Var_Samp_Order_By>
+  variance?: Maybe<Account_Lockup_Sum_Values_Variance_Order_By>
 }
 
-export type Allocator_Before_Allocation_Arr_Rel_Insert_Input = {
-  data: Array<Allocator_Before_Allocation_Insert_Input>
-  on_conflict?: Maybe<Allocator_Before_Allocation_On_Conflict>
+export type Account_Lockup_Sum_Values_Avg_Fields = {
+  __typename?: 'account_lockup_sum_values_avg_fields'
+  sum_values?: Maybe<Scalars['Float']>
 }
 
-export type Allocator_Before_Allocation_Avg_Fields = {
-  __typename?: 'allocator_before_allocation_avg_fields'
-  assets?: Maybe<Scalars['Float']>
-  block_number?: Maybe<Scalars['Float']>
-  blocks?: Maybe<Scalars['Float']>
-  log_index?: Maybe<Scalars['Float']>
-  market_value?: Maybe<Scalars['Float']>
-  mint?: Maybe<Scalars['Float']>
-  token_value?: Maybe<Scalars['Float']>
-  total_assets?: Maybe<Scalars['Float']>
-  transaction_index?: Maybe<Scalars['Float']>
+export type Account_Lockup_Sum_Values_Avg_Order_By = {
+  sum_values?: Maybe<Order_By>
 }
 
-export type Allocator_Before_Allocation_Avg_Order_By = {
-  assets?: Maybe<Order_By>
-  block_number?: Maybe<Order_By>
-  blocks?: Maybe<Order_By>
-  log_index?: Maybe<Order_By>
-  market_value?: Maybe<Order_By>
-  mint?: Maybe<Order_By>
-  token_value?: Maybe<Order_By>
-  total_assets?: Maybe<Order_By>
-  transaction_index?: Maybe<Order_By>
+export type Account_Lockup_Sum_Values_Bool_Exp = {
+  _and?: Maybe<Array<Maybe<Account_Lockup_Sum_Values_Bool_Exp>>>
+  _not?: Maybe<Account_Lockup_Sum_Values_Bool_Exp>
+  _or?: Maybe<Array<Maybe<Account_Lockup_Sum_Values_Bool_Exp>>>
+  account_address?: Maybe<String_Comparison_Exp>
+  sum_values?: Maybe<Numeric_Comparison_Exp>
 }
 
-export type Allocator_Before_Allocation_Bool_Exp = {
-  _and?: Maybe<Array<Maybe<Allocator_Before_Allocation_Bool_Exp>>>
-  _not?: Maybe<Allocator_Before_Allocation_Bool_Exp>
-  _or?: Maybe<Array<Maybe<Allocator_Before_Allocation_Bool_Exp>>>
-  assets?: Maybe<Numeric_Comparison_Exp>
-  block_number?: Maybe<Int_Comparison_Exp>
-  blocks?: Maybe<Numeric_Comparison_Exp>
-  event_id?: Maybe<String_Comparison_Exp>
-  log_index?: Maybe<Int_Comparison_Exp>
-  market_value?: Maybe<Numeric_Comparison_Exp>
-  mint?: Maybe<Numeric_Comparison_Exp>
-  raw_data?: Maybe<String_Comparison_Exp>
-  result?: Maybe<Allocator_Allocation_Result_Bool_Exp>
-  token_value?: Maybe<Numeric_Comparison_Exp>
-  total_assets?: Maybe<Numeric_Comparison_Exp>
-  transaction_index?: Maybe<Int_Comparison_Exp>
+export type Account_Lockup_Sum_Values_Max_Fields = {
+  __typename?: 'account_lockup_sum_values_max_fields'
+  account_address?: Maybe<Scalars['String']>
+  sum_values?: Maybe<Scalars['numeric']>
 }
 
-export enum Allocator_Before_Allocation_Constraint {
-  AllocatorBeforeAllocationPkey = 'allocator_before_allocation_pkey'
+export type Account_Lockup_Sum_Values_Max_Order_By = {
+  account_address?: Maybe<Order_By>
+  sum_values?: Maybe<Order_By>
 }
 
-export type Allocator_Before_Allocation_Inc_Input = {
-  assets?: Maybe<Scalars['numeric']>
-  block_number?: Maybe<Scalars['Int']>
-  blocks?: Maybe<Scalars['numeric']>
-  log_index?: Maybe<Scalars['Int']>
-  market_value?: Maybe<Scalars['numeric']>
-  mint?: Maybe<Scalars['numeric']>
-  token_value?: Maybe<Scalars['numeric']>
-  total_assets?: Maybe<Scalars['numeric']>
-  transaction_index?: Maybe<Scalars['Int']>
+export type Account_Lockup_Sum_Values_Min_Fields = {
+  __typename?: 'account_lockup_sum_values_min_fields'
+  account_address?: Maybe<Scalars['String']>
+  sum_values?: Maybe<Scalars['numeric']>
 }
 
-export type Allocator_Before_Allocation_Insert_Input = {
-  assets?: Maybe<Scalars['numeric']>
-  block_number?: Maybe<Scalars['Int']>
-  blocks?: Maybe<Scalars['numeric']>
-  event_id?: Maybe<Scalars['String']>
-  log_index?: Maybe<Scalars['Int']>
-  market_value?: Maybe<Scalars['numeric']>
-  mint?: Maybe<Scalars['numeric']>
-  raw_data?: Maybe<Scalars['String']>
-  result?: Maybe<Allocator_Allocation_Result_Obj_Rel_Insert_Input>
-  token_value?: Maybe<Scalars['numeric']>
-  total_assets?: Maybe<Scalars['numeric']>
-  transaction_index?: Maybe<Scalars['Int']>
+export type Account_Lockup_Sum_Values_Min_Order_By = {
+  account_address?: Maybe<Order_By>
+  sum_values?: Maybe<Order_By>
 }
 
-export type Allocator_Before_Allocation_Max_Fields = {
-  __typename?: 'allocator_before_allocation_max_fields'
-  assets?: Maybe<Scalars['numeric']>
-  block_number?: Maybe<Scalars['Int']>
-  blocks?: Maybe<Scalars['numeric']>
-  event_id?: Maybe<Scalars['String']>
-  log_index?: Maybe<Scalars['Int']>
-  market_value?: Maybe<Scalars['numeric']>
-  mint?: Maybe<Scalars['numeric']>
-  raw_data?: Maybe<Scalars['String']>
-  token_value?: Maybe<Scalars['numeric']>
-  total_assets?: Maybe<Scalars['numeric']>
-  transaction_index?: Maybe<Scalars['Int']>
+export type Account_Lockup_Sum_Values_Order_By = {
+  account_address?: Maybe<Order_By>
+  sum_values?: Maybe<Order_By>
 }
 
-export type Allocator_Before_Allocation_Max_Order_By = {
-  assets?: Maybe<Order_By>
-  block_number?: Maybe<Order_By>
-  blocks?: Maybe<Order_By>
-  event_id?: Maybe<Order_By>
-  log_index?: Maybe<Order_By>
-  market_value?: Maybe<Order_By>
-  mint?: Maybe<Order_By>
-  raw_data?: Maybe<Order_By>
-  token_value?: Maybe<Order_By>
-  total_assets?: Maybe<Order_By>
-  transaction_index?: Maybe<Order_By>
+export enum Account_Lockup_Sum_Values_Select_Column {
+  AccountAddress = 'account_address',
+  SumValues = 'sum_values'
 }
 
-export type Allocator_Before_Allocation_Min_Fields = {
-  __typename?: 'allocator_before_allocation_min_fields'
-  assets?: Maybe<Scalars['numeric']>
-  block_number?: Maybe<Scalars['Int']>
-  blocks?: Maybe<Scalars['numeric']>
-  event_id?: Maybe<Scalars['String']>
-  log_index?: Maybe<Scalars['Int']>
-  market_value?: Maybe<Scalars['numeric']>
-  mint?: Maybe<Scalars['numeric']>
-  raw_data?: Maybe<Scalars['String']>
-  token_value?: Maybe<Scalars['numeric']>
-  total_assets?: Maybe<Scalars['numeric']>
-  transaction_index?: Maybe<Scalars['Int']>
+export type Account_Lockup_Sum_Values_Stddev_Fields = {
+  __typename?: 'account_lockup_sum_values_stddev_fields'
+  sum_values?: Maybe<Scalars['Float']>
 }
 
-export type Allocator_Before_Allocation_Min_Order_By = {
-  assets?: Maybe<Order_By>
-  block_number?: Maybe<Order_By>
-  blocks?: Maybe<Order_By>
-  event_id?: Maybe<Order_By>
-  log_index?: Maybe<Order_By>
-  market_value?: Maybe<Order_By>
-  mint?: Maybe<Order_By>
-  raw_data?: Maybe<Order_By>
-  token_value?: Maybe<Order_By>
-  total_assets?: Maybe<Order_By>
-  transaction_index?: Maybe<Order_By>
+export type Account_Lockup_Sum_Values_Stddev_Order_By = {
+  sum_values?: Maybe<Order_By>
 }
 
-export type Allocator_Before_Allocation_Mutation_Response = {
-  __typename?: 'allocator_before_allocation_mutation_response'
-  affected_rows: Scalars['Int']
-  returning: Array<Allocator_Before_Allocation>
+export type Account_Lockup_Sum_Values_Stddev_Pop_Fields = {
+  __typename?: 'account_lockup_sum_values_stddev_pop_fields'
+  sum_values?: Maybe<Scalars['Float']>
 }
 
-export type Allocator_Before_Allocation_Obj_Rel_Insert_Input = {
-  data: Allocator_Before_Allocation_Insert_Input
-  on_conflict?: Maybe<Allocator_Before_Allocation_On_Conflict>
+export type Account_Lockup_Sum_Values_Stddev_Pop_Order_By = {
+  sum_values?: Maybe<Order_By>
 }
 
-export type Allocator_Before_Allocation_On_Conflict = {
-  constraint: Allocator_Before_Allocation_Constraint
-  update_columns: Array<Allocator_Before_Allocation_Update_Column>
-  where?: Maybe<Allocator_Before_Allocation_Bool_Exp>
+export type Account_Lockup_Sum_Values_Stddev_Samp_Fields = {
+  __typename?: 'account_lockup_sum_values_stddev_samp_fields'
+  sum_values?: Maybe<Scalars['Float']>
 }
 
-export type Allocator_Before_Allocation_Order_By = {
-  assets?: Maybe<Order_By>
-  block_number?: Maybe<Order_By>
-  blocks?: Maybe<Order_By>
-  event_id?: Maybe<Order_By>
-  log_index?: Maybe<Order_By>
-  market_value?: Maybe<Order_By>
-  mint?: Maybe<Order_By>
-  raw_data?: Maybe<Order_By>
-  result?: Maybe<Allocator_Allocation_Result_Order_By>
-  token_value?: Maybe<Order_By>
-  total_assets?: Maybe<Order_By>
-  transaction_index?: Maybe<Order_By>
+export type Account_Lockup_Sum_Values_Stddev_Samp_Order_By = {
+  sum_values?: Maybe<Order_By>
 }
 
-export type Allocator_Before_Allocation_Pk_Columns_Input = {
-  event_id: Scalars['String']
+export type Account_Lockup_Sum_Values_Sum_Fields = {
+  __typename?: 'account_lockup_sum_values_sum_fields'
+  sum_values?: Maybe<Scalars['numeric']>
 }
 
-export enum Allocator_Before_Allocation_Select_Column {
-  Assets = 'assets',
+export type Account_Lockup_Sum_Values_Sum_Order_By = {
+  sum_values?: Maybe<Order_By>
+}
+
+export type Account_Lockup_Sum_Values_Var_Pop_Fields = {
+  __typename?: 'account_lockup_sum_values_var_pop_fields'
+  sum_values?: Maybe<Scalars['Float']>
+}
+
+export type Account_Lockup_Sum_Values_Var_Pop_Order_By = {
+  sum_values?: Maybe<Order_By>
+}
+
+export type Account_Lockup_Sum_Values_Var_Samp_Fields = {
+  __typename?: 'account_lockup_sum_values_var_samp_fields'
+  sum_values?: Maybe<Scalars['Float']>
+}
+
+export type Account_Lockup_Sum_Values_Var_Samp_Order_By = {
+  sum_values?: Maybe<Order_By>
+}
+
+export type Account_Lockup_Sum_Values_Variance_Fields = {
+  __typename?: 'account_lockup_sum_values_variance_fields'
+  sum_values?: Maybe<Scalars['Float']>
+}
+
+export type Account_Lockup_Sum_Values_Variance_Order_By = {
+  sum_values?: Maybe<Order_By>
+}
+
+export enum Account_Lockup_Update_Column {
+  AccountAddress = 'account_address',
   BlockNumber = 'block_number',
-  Blocks = 'blocks',
-  EventId = 'event_id',
-  LogIndex = 'log_index',
-  MarketValue = 'market_value',
-  Mint = 'mint',
-  RawData = 'raw_data',
-  TokenValue = 'token_value',
-  TotalAssets = 'total_assets',
-  TransactionIndex = 'transaction_index'
+  LockedUpEventId = 'locked_up_event_id',
+  PropertyAddress = 'property_address',
+  Value = 'value'
 }
 
-export type Allocator_Before_Allocation_Set_Input = {
-  assets?: Maybe<Scalars['numeric']>
-  block_number?: Maybe<Scalars['Int']>
-  blocks?: Maybe<Scalars['numeric']>
-  event_id?: Maybe<Scalars['String']>
-  log_index?: Maybe<Scalars['Int']>
-  market_value?: Maybe<Scalars['numeric']>
-  mint?: Maybe<Scalars['numeric']>
-  raw_data?: Maybe<Scalars['String']>
-  token_value?: Maybe<Scalars['numeric']>
-  total_assets?: Maybe<Scalars['numeric']>
-  transaction_index?: Maybe<Scalars['Int']>
-}
-
-export type Allocator_Before_Allocation_Stddev_Fields = {
-  __typename?: 'allocator_before_allocation_stddev_fields'
-  assets?: Maybe<Scalars['Float']>
+export type Account_Lockup_Var_Pop_Fields = {
+  __typename?: 'account_lockup_var_pop_fields'
   block_number?: Maybe<Scalars['Float']>
-  blocks?: Maybe<Scalars['Float']>
-  log_index?: Maybe<Scalars['Float']>
-  market_value?: Maybe<Scalars['Float']>
-  mint?: Maybe<Scalars['Float']>
-  token_value?: Maybe<Scalars['Float']>
-  total_assets?: Maybe<Scalars['Float']>
-  transaction_index?: Maybe<Scalars['Float']>
+  value?: Maybe<Scalars['Float']>
 }
 
-export type Allocator_Before_Allocation_Stddev_Order_By = {
-  assets?: Maybe<Order_By>
+export type Account_Lockup_Var_Pop_Order_By = {
   block_number?: Maybe<Order_By>
-  blocks?: Maybe<Order_By>
-  log_index?: Maybe<Order_By>
-  market_value?: Maybe<Order_By>
-  mint?: Maybe<Order_By>
-  token_value?: Maybe<Order_By>
-  total_assets?: Maybe<Order_By>
-  transaction_index?: Maybe<Order_By>
+  value?: Maybe<Order_By>
 }
 
-export type Allocator_Before_Allocation_Stddev_Pop_Fields = {
-  __typename?: 'allocator_before_allocation_stddev_pop_fields'
-  assets?: Maybe<Scalars['Float']>
+export type Account_Lockup_Var_Samp_Fields = {
+  __typename?: 'account_lockup_var_samp_fields'
   block_number?: Maybe<Scalars['Float']>
-  blocks?: Maybe<Scalars['Float']>
-  log_index?: Maybe<Scalars['Float']>
-  market_value?: Maybe<Scalars['Float']>
-  mint?: Maybe<Scalars['Float']>
-  token_value?: Maybe<Scalars['Float']>
-  total_assets?: Maybe<Scalars['Float']>
-  transaction_index?: Maybe<Scalars['Float']>
+  value?: Maybe<Scalars['Float']>
 }
 
-export type Allocator_Before_Allocation_Stddev_Pop_Order_By = {
-  assets?: Maybe<Order_By>
+export type Account_Lockup_Var_Samp_Order_By = {
   block_number?: Maybe<Order_By>
-  blocks?: Maybe<Order_By>
-  log_index?: Maybe<Order_By>
-  market_value?: Maybe<Order_By>
-  mint?: Maybe<Order_By>
-  token_value?: Maybe<Order_By>
-  total_assets?: Maybe<Order_By>
-  transaction_index?: Maybe<Order_By>
+  value?: Maybe<Order_By>
 }
 
-export type Allocator_Before_Allocation_Stddev_Samp_Fields = {
-  __typename?: 'allocator_before_allocation_stddev_samp_fields'
-  assets?: Maybe<Scalars['Float']>
+export type Account_Lockup_Variance_Fields = {
+  __typename?: 'account_lockup_variance_fields'
   block_number?: Maybe<Scalars['Float']>
-  blocks?: Maybe<Scalars['Float']>
-  log_index?: Maybe<Scalars['Float']>
-  market_value?: Maybe<Scalars['Float']>
-  mint?: Maybe<Scalars['Float']>
-  token_value?: Maybe<Scalars['Float']>
-  total_assets?: Maybe<Scalars['Float']>
-  transaction_index?: Maybe<Scalars['Float']>
+  value?: Maybe<Scalars['Float']>
 }
 
-export type Allocator_Before_Allocation_Stddev_Samp_Order_By = {
-  assets?: Maybe<Order_By>
+export type Account_Lockup_Variance_Order_By = {
   block_number?: Maybe<Order_By>
-  blocks?: Maybe<Order_By>
-  log_index?: Maybe<Order_By>
-  market_value?: Maybe<Order_By>
-  mint?: Maybe<Order_By>
-  token_value?: Maybe<Order_By>
-  total_assets?: Maybe<Order_By>
-  transaction_index?: Maybe<Order_By>
-}
-
-export type Allocator_Before_Allocation_Sum_Fields = {
-  __typename?: 'allocator_before_allocation_sum_fields'
-  assets?: Maybe<Scalars['numeric']>
-  block_number?: Maybe<Scalars['Int']>
-  blocks?: Maybe<Scalars['numeric']>
-  log_index?: Maybe<Scalars['Int']>
-  market_value?: Maybe<Scalars['numeric']>
-  mint?: Maybe<Scalars['numeric']>
-  token_value?: Maybe<Scalars['numeric']>
-  total_assets?: Maybe<Scalars['numeric']>
-  transaction_index?: Maybe<Scalars['Int']>
-}
-
-export type Allocator_Before_Allocation_Sum_Order_By = {
-  assets?: Maybe<Order_By>
-  block_number?: Maybe<Order_By>
-  blocks?: Maybe<Order_By>
-  log_index?: Maybe<Order_By>
-  market_value?: Maybe<Order_By>
-  mint?: Maybe<Order_By>
-  token_value?: Maybe<Order_By>
-  total_assets?: Maybe<Order_By>
-  transaction_index?: Maybe<Order_By>
-}
-
-export enum Allocator_Before_Allocation_Update_Column {
-  Assets = 'assets',
-  BlockNumber = 'block_number',
-  Blocks = 'blocks',
-  EventId = 'event_id',
-  LogIndex = 'log_index',
-  MarketValue = 'market_value',
-  Mint = 'mint',
-  RawData = 'raw_data',
-  TokenValue = 'token_value',
-  TotalAssets = 'total_assets',
-  TransactionIndex = 'transaction_index'
-}
-
-export type Allocator_Before_Allocation_Var_Pop_Fields = {
-  __typename?: 'allocator_before_allocation_var_pop_fields'
-  assets?: Maybe<Scalars['Float']>
-  block_number?: Maybe<Scalars['Float']>
-  blocks?: Maybe<Scalars['Float']>
-  log_index?: Maybe<Scalars['Float']>
-  market_value?: Maybe<Scalars['Float']>
-  mint?: Maybe<Scalars['Float']>
-  token_value?: Maybe<Scalars['Float']>
-  total_assets?: Maybe<Scalars['Float']>
-  transaction_index?: Maybe<Scalars['Float']>
-}
-
-export type Allocator_Before_Allocation_Var_Pop_Order_By = {
-  assets?: Maybe<Order_By>
-  block_number?: Maybe<Order_By>
-  blocks?: Maybe<Order_By>
-  log_index?: Maybe<Order_By>
-  market_value?: Maybe<Order_By>
-  mint?: Maybe<Order_By>
-  token_value?: Maybe<Order_By>
-  total_assets?: Maybe<Order_By>
-  transaction_index?: Maybe<Order_By>
-}
-
-export type Allocator_Before_Allocation_Var_Samp_Fields = {
-  __typename?: 'allocator_before_allocation_var_samp_fields'
-  assets?: Maybe<Scalars['Float']>
-  block_number?: Maybe<Scalars['Float']>
-  blocks?: Maybe<Scalars['Float']>
-  log_index?: Maybe<Scalars['Float']>
-  market_value?: Maybe<Scalars['Float']>
-  mint?: Maybe<Scalars['Float']>
-  token_value?: Maybe<Scalars['Float']>
-  total_assets?: Maybe<Scalars['Float']>
-  transaction_index?: Maybe<Scalars['Float']>
-}
-
-export type Allocator_Before_Allocation_Var_Samp_Order_By = {
-  assets?: Maybe<Order_By>
-  block_number?: Maybe<Order_By>
-  blocks?: Maybe<Order_By>
-  log_index?: Maybe<Order_By>
-  market_value?: Maybe<Order_By>
-  mint?: Maybe<Order_By>
-  token_value?: Maybe<Order_By>
-  total_assets?: Maybe<Order_By>
-  transaction_index?: Maybe<Order_By>
-}
-
-export type Allocator_Before_Allocation_Variance_Fields = {
-  __typename?: 'allocator_before_allocation_variance_fields'
-  assets?: Maybe<Scalars['Float']>
-  block_number?: Maybe<Scalars['Float']>
-  blocks?: Maybe<Scalars['Float']>
-  log_index?: Maybe<Scalars['Float']>
-  market_value?: Maybe<Scalars['Float']>
-  mint?: Maybe<Scalars['Float']>
-  token_value?: Maybe<Scalars['Float']>
-  total_assets?: Maybe<Scalars['Float']>
-  transaction_index?: Maybe<Scalars['Float']>
-}
-
-export type Allocator_Before_Allocation_Variance_Order_By = {
-  assets?: Maybe<Order_By>
-  block_number?: Maybe<Order_By>
-  blocks?: Maybe<Order_By>
-  log_index?: Maybe<Order_By>
-  market_value?: Maybe<Order_By>
-  mint?: Maybe<Order_By>
-  token_value?: Maybe<Order_By>
-  total_assets?: Maybe<Order_By>
-  transaction_index?: Maybe<Order_By>
-}
-
-export type Bigint_Comparison_Exp = {
-  _eq?: Maybe<Scalars['bigint']>
-  _gt?: Maybe<Scalars['bigint']>
-  _gte?: Maybe<Scalars['bigint']>
-  _in?: Maybe<Array<Scalars['bigint']>>
-  _is_null?: Maybe<Scalars['Boolean']>
-  _lt?: Maybe<Scalars['bigint']>
-  _lte?: Maybe<Scalars['bigint']>
-  _neq?: Maybe<Scalars['bigint']>
-  _nin?: Maybe<Array<Scalars['bigint']>>
+  value?: Maybe<Order_By>
 }
 
 export type Boolean_Comparison_Exp = {
@@ -894,16 +441,335 @@ export type Boolean_Comparison_Exp = {
   _nin?: Maybe<Array<Scalars['Boolean']>>
 }
 
-export type Float8_Comparison_Exp = {
-  _eq?: Maybe<Scalars['float8']>
-  _gt?: Maybe<Scalars['float8']>
-  _gte?: Maybe<Scalars['float8']>
-  _in?: Maybe<Array<Scalars['float8']>>
-  _is_null?: Maybe<Scalars['Boolean']>
-  _lt?: Maybe<Scalars['float8']>
-  _lte?: Maybe<Scalars['float8']>
-  _neq?: Maybe<Scalars['float8']>
-  _nin?: Maybe<Array<Scalars['float8']>>
+export type Dev_Property_Transfer = {
+  __typename?: 'dev_property_transfer'
+  block_number: Scalars['Int']
+  event_id: Scalars['String']
+  from_address: Scalars['String']
+  is_lockup: Scalars['Boolean']
+  log_index: Scalars['Int']
+  raw_data: Scalars['String']
+  to_address: Scalars['String']
+  transaction_index: Scalars['Int']
+  value: Scalars['numeric']
+}
+
+export type Dev_Property_Transfer_Aggregate = {
+  __typename?: 'dev_property_transfer_aggregate'
+  aggregate?: Maybe<Dev_Property_Transfer_Aggregate_Fields>
+  nodes: Array<Dev_Property_Transfer>
+}
+
+export type Dev_Property_Transfer_Aggregate_Fields = {
+  __typename?: 'dev_property_transfer_aggregate_fields'
+  avg?: Maybe<Dev_Property_Transfer_Avg_Fields>
+  count?: Maybe<Scalars['Int']>
+  max?: Maybe<Dev_Property_Transfer_Max_Fields>
+  min?: Maybe<Dev_Property_Transfer_Min_Fields>
+  stddev?: Maybe<Dev_Property_Transfer_Stddev_Fields>
+  stddev_pop?: Maybe<Dev_Property_Transfer_Stddev_Pop_Fields>
+  stddev_samp?: Maybe<Dev_Property_Transfer_Stddev_Samp_Fields>
+  sum?: Maybe<Dev_Property_Transfer_Sum_Fields>
+  var_pop?: Maybe<Dev_Property_Transfer_Var_Pop_Fields>
+  var_samp?: Maybe<Dev_Property_Transfer_Var_Samp_Fields>
+  variance?: Maybe<Dev_Property_Transfer_Variance_Fields>
+}
+
+export type Dev_Property_Transfer_Aggregate_FieldsCountArgs = {
+  columns?: Maybe<Array<Dev_Property_Transfer_Select_Column>>
+  distinct?: Maybe<Scalars['Boolean']>
+}
+
+export type Dev_Property_Transfer_Aggregate_Order_By = {
+  avg?: Maybe<Dev_Property_Transfer_Avg_Order_By>
+  count?: Maybe<Order_By>
+  max?: Maybe<Dev_Property_Transfer_Max_Order_By>
+  min?: Maybe<Dev_Property_Transfer_Min_Order_By>
+  stddev?: Maybe<Dev_Property_Transfer_Stddev_Order_By>
+  stddev_pop?: Maybe<Dev_Property_Transfer_Stddev_Pop_Order_By>
+  stddev_samp?: Maybe<Dev_Property_Transfer_Stddev_Samp_Order_By>
+  sum?: Maybe<Dev_Property_Transfer_Sum_Order_By>
+  var_pop?: Maybe<Dev_Property_Transfer_Var_Pop_Order_By>
+  var_samp?: Maybe<Dev_Property_Transfer_Var_Samp_Order_By>
+  variance?: Maybe<Dev_Property_Transfer_Variance_Order_By>
+}
+
+export type Dev_Property_Transfer_Arr_Rel_Insert_Input = {
+  data: Array<Dev_Property_Transfer_Insert_Input>
+  on_conflict?: Maybe<Dev_Property_Transfer_On_Conflict>
+}
+
+export type Dev_Property_Transfer_Avg_Fields = {
+  __typename?: 'dev_property_transfer_avg_fields'
+  block_number?: Maybe<Scalars['Float']>
+  log_index?: Maybe<Scalars['Float']>
+  transaction_index?: Maybe<Scalars['Float']>
+  value?: Maybe<Scalars['Float']>
+}
+
+export type Dev_Property_Transfer_Avg_Order_By = {
+  block_number?: Maybe<Order_By>
+  log_index?: Maybe<Order_By>
+  transaction_index?: Maybe<Order_By>
+  value?: Maybe<Order_By>
+}
+
+export type Dev_Property_Transfer_Bool_Exp = {
+  _and?: Maybe<Array<Maybe<Dev_Property_Transfer_Bool_Exp>>>
+  _not?: Maybe<Dev_Property_Transfer_Bool_Exp>
+  _or?: Maybe<Array<Maybe<Dev_Property_Transfer_Bool_Exp>>>
+  block_number?: Maybe<Int_Comparison_Exp>
+  event_id?: Maybe<String_Comparison_Exp>
+  from_address?: Maybe<String_Comparison_Exp>
+  is_lockup?: Maybe<Boolean_Comparison_Exp>
+  log_index?: Maybe<Int_Comparison_Exp>
+  raw_data?: Maybe<String_Comparison_Exp>
+  to_address?: Maybe<String_Comparison_Exp>
+  transaction_index?: Maybe<Int_Comparison_Exp>
+  value?: Maybe<Numeric_Comparison_Exp>
+}
+
+export enum Dev_Property_Transfer_Constraint {
+  DevPropertyTransferPkey = 'dev_property_transfer_pkey'
+}
+
+export type Dev_Property_Transfer_Inc_Input = {
+  block_number?: Maybe<Scalars['Int']>
+  log_index?: Maybe<Scalars['Int']>
+  transaction_index?: Maybe<Scalars['Int']>
+  value?: Maybe<Scalars['numeric']>
+}
+
+export type Dev_Property_Transfer_Insert_Input = {
+  block_number?: Maybe<Scalars['Int']>
+  event_id?: Maybe<Scalars['String']>
+  from_address?: Maybe<Scalars['String']>
+  is_lockup?: Maybe<Scalars['Boolean']>
+  log_index?: Maybe<Scalars['Int']>
+  raw_data?: Maybe<Scalars['String']>
+  to_address?: Maybe<Scalars['String']>
+  transaction_index?: Maybe<Scalars['Int']>
+  value?: Maybe<Scalars['numeric']>
+}
+
+export type Dev_Property_Transfer_Max_Fields = {
+  __typename?: 'dev_property_transfer_max_fields'
+  block_number?: Maybe<Scalars['Int']>
+  event_id?: Maybe<Scalars['String']>
+  from_address?: Maybe<Scalars['String']>
+  log_index?: Maybe<Scalars['Int']>
+  raw_data?: Maybe<Scalars['String']>
+  to_address?: Maybe<Scalars['String']>
+  transaction_index?: Maybe<Scalars['Int']>
+  value?: Maybe<Scalars['numeric']>
+}
+
+export type Dev_Property_Transfer_Max_Order_By = {
+  block_number?: Maybe<Order_By>
+  event_id?: Maybe<Order_By>
+  from_address?: Maybe<Order_By>
+  log_index?: Maybe<Order_By>
+  raw_data?: Maybe<Order_By>
+  to_address?: Maybe<Order_By>
+  transaction_index?: Maybe<Order_By>
+  value?: Maybe<Order_By>
+}
+
+export type Dev_Property_Transfer_Min_Fields = {
+  __typename?: 'dev_property_transfer_min_fields'
+  block_number?: Maybe<Scalars['Int']>
+  event_id?: Maybe<Scalars['String']>
+  from_address?: Maybe<Scalars['String']>
+  log_index?: Maybe<Scalars['Int']>
+  raw_data?: Maybe<Scalars['String']>
+  to_address?: Maybe<Scalars['String']>
+  transaction_index?: Maybe<Scalars['Int']>
+  value?: Maybe<Scalars['numeric']>
+}
+
+export type Dev_Property_Transfer_Min_Order_By = {
+  block_number?: Maybe<Order_By>
+  event_id?: Maybe<Order_By>
+  from_address?: Maybe<Order_By>
+  log_index?: Maybe<Order_By>
+  raw_data?: Maybe<Order_By>
+  to_address?: Maybe<Order_By>
+  transaction_index?: Maybe<Order_By>
+  value?: Maybe<Order_By>
+}
+
+export type Dev_Property_Transfer_Mutation_Response = {
+  __typename?: 'dev_property_transfer_mutation_response'
+  affected_rows: Scalars['Int']
+  returning: Array<Dev_Property_Transfer>
+}
+
+export type Dev_Property_Transfer_Obj_Rel_Insert_Input = {
+  data: Dev_Property_Transfer_Insert_Input
+  on_conflict?: Maybe<Dev_Property_Transfer_On_Conflict>
+}
+
+export type Dev_Property_Transfer_On_Conflict = {
+  constraint: Dev_Property_Transfer_Constraint
+  update_columns: Array<Dev_Property_Transfer_Update_Column>
+  where?: Maybe<Dev_Property_Transfer_Bool_Exp>
+}
+
+export type Dev_Property_Transfer_Order_By = {
+  block_number?: Maybe<Order_By>
+  event_id?: Maybe<Order_By>
+  from_address?: Maybe<Order_By>
+  is_lockup?: Maybe<Order_By>
+  log_index?: Maybe<Order_By>
+  raw_data?: Maybe<Order_By>
+  to_address?: Maybe<Order_By>
+  transaction_index?: Maybe<Order_By>
+  value?: Maybe<Order_By>
+}
+
+export type Dev_Property_Transfer_Pk_Columns_Input = {
+  event_id: Scalars['String']
+}
+
+export enum Dev_Property_Transfer_Select_Column {
+  BlockNumber = 'block_number',
+  EventId = 'event_id',
+  FromAddress = 'from_address',
+  IsLockup = 'is_lockup',
+  LogIndex = 'log_index',
+  RawData = 'raw_data',
+  ToAddress = 'to_address',
+  TransactionIndex = 'transaction_index',
+  Value = 'value'
+}
+
+export type Dev_Property_Transfer_Set_Input = {
+  block_number?: Maybe<Scalars['Int']>
+  event_id?: Maybe<Scalars['String']>
+  from_address?: Maybe<Scalars['String']>
+  is_lockup?: Maybe<Scalars['Boolean']>
+  log_index?: Maybe<Scalars['Int']>
+  raw_data?: Maybe<Scalars['String']>
+  to_address?: Maybe<Scalars['String']>
+  transaction_index?: Maybe<Scalars['Int']>
+  value?: Maybe<Scalars['numeric']>
+}
+
+export type Dev_Property_Transfer_Stddev_Fields = {
+  __typename?: 'dev_property_transfer_stddev_fields'
+  block_number?: Maybe<Scalars['Float']>
+  log_index?: Maybe<Scalars['Float']>
+  transaction_index?: Maybe<Scalars['Float']>
+  value?: Maybe<Scalars['Float']>
+}
+
+export type Dev_Property_Transfer_Stddev_Order_By = {
+  block_number?: Maybe<Order_By>
+  log_index?: Maybe<Order_By>
+  transaction_index?: Maybe<Order_By>
+  value?: Maybe<Order_By>
+}
+
+export type Dev_Property_Transfer_Stddev_Pop_Fields = {
+  __typename?: 'dev_property_transfer_stddev_pop_fields'
+  block_number?: Maybe<Scalars['Float']>
+  log_index?: Maybe<Scalars['Float']>
+  transaction_index?: Maybe<Scalars['Float']>
+  value?: Maybe<Scalars['Float']>
+}
+
+export type Dev_Property_Transfer_Stddev_Pop_Order_By = {
+  block_number?: Maybe<Order_By>
+  log_index?: Maybe<Order_By>
+  transaction_index?: Maybe<Order_By>
+  value?: Maybe<Order_By>
+}
+
+export type Dev_Property_Transfer_Stddev_Samp_Fields = {
+  __typename?: 'dev_property_transfer_stddev_samp_fields'
+  block_number?: Maybe<Scalars['Float']>
+  log_index?: Maybe<Scalars['Float']>
+  transaction_index?: Maybe<Scalars['Float']>
+  value?: Maybe<Scalars['Float']>
+}
+
+export type Dev_Property_Transfer_Stddev_Samp_Order_By = {
+  block_number?: Maybe<Order_By>
+  log_index?: Maybe<Order_By>
+  transaction_index?: Maybe<Order_By>
+  value?: Maybe<Order_By>
+}
+
+export type Dev_Property_Transfer_Sum_Fields = {
+  __typename?: 'dev_property_transfer_sum_fields'
+  block_number?: Maybe<Scalars['Int']>
+  log_index?: Maybe<Scalars['Int']>
+  transaction_index?: Maybe<Scalars['Int']>
+  value?: Maybe<Scalars['numeric']>
+}
+
+export type Dev_Property_Transfer_Sum_Order_By = {
+  block_number?: Maybe<Order_By>
+  log_index?: Maybe<Order_By>
+  transaction_index?: Maybe<Order_By>
+  value?: Maybe<Order_By>
+}
+
+export enum Dev_Property_Transfer_Update_Column {
+  BlockNumber = 'block_number',
+  EventId = 'event_id',
+  FromAddress = 'from_address',
+  IsLockup = 'is_lockup',
+  LogIndex = 'log_index',
+  RawData = 'raw_data',
+  ToAddress = 'to_address',
+  TransactionIndex = 'transaction_index',
+  Value = 'value'
+}
+
+export type Dev_Property_Transfer_Var_Pop_Fields = {
+  __typename?: 'dev_property_transfer_var_pop_fields'
+  block_number?: Maybe<Scalars['Float']>
+  log_index?: Maybe<Scalars['Float']>
+  transaction_index?: Maybe<Scalars['Float']>
+  value?: Maybe<Scalars['Float']>
+}
+
+export type Dev_Property_Transfer_Var_Pop_Order_By = {
+  block_number?: Maybe<Order_By>
+  log_index?: Maybe<Order_By>
+  transaction_index?: Maybe<Order_By>
+  value?: Maybe<Order_By>
+}
+
+export type Dev_Property_Transfer_Var_Samp_Fields = {
+  __typename?: 'dev_property_transfer_var_samp_fields'
+  block_number?: Maybe<Scalars['Float']>
+  log_index?: Maybe<Scalars['Float']>
+  transaction_index?: Maybe<Scalars['Float']>
+  value?: Maybe<Scalars['Float']>
+}
+
+export type Dev_Property_Transfer_Var_Samp_Order_By = {
+  block_number?: Maybe<Order_By>
+  log_index?: Maybe<Order_By>
+  transaction_index?: Maybe<Order_By>
+  value?: Maybe<Order_By>
+}
+
+export type Dev_Property_Transfer_Variance_Fields = {
+  __typename?: 'dev_property_transfer_variance_fields'
+  block_number?: Maybe<Scalars['Float']>
+  log_index?: Maybe<Scalars['Float']>
+  transaction_index?: Maybe<Scalars['Float']>
+  value?: Maybe<Scalars['Float']>
+}
+
+export type Dev_Property_Transfer_Variance_Order_By = {
+  block_number?: Maybe<Order_By>
+  log_index?: Maybe<Order_By>
+  transaction_index?: Maybe<Order_By>
+  value?: Maybe<Order_By>
 }
 
 export type Int_Comparison_Exp = {
@@ -920,8 +786,6 @@ export type Int_Comparison_Exp = {
 
 export type Lockup_Lockedup = {
   __typename?: 'lockup_lockedup'
-  allocation: Array<Allocator_Allocation_Result>
-  allocation_aggregate: Allocator_Allocation_Result_Aggregate
   block_number: Scalars['Int']
   event_id: Scalars['String']
   from_address: Scalars['String']
@@ -931,22 +795,6 @@ export type Lockup_Lockedup = {
   raw_data: Scalars['String']
   token_value: Scalars['numeric']
   transaction_index: Scalars['Int']
-}
-
-export type Lockup_LockedupAllocationArgs = {
-  distinct_on?: Maybe<Array<Allocator_Allocation_Result_Select_Column>>
-  limit?: Maybe<Scalars['Int']>
-  offset?: Maybe<Scalars['Int']>
-  order_by?: Maybe<Array<Allocator_Allocation_Result_Order_By>>
-  where?: Maybe<Allocator_Allocation_Result_Bool_Exp>
-}
-
-export type Lockup_LockedupAllocation_AggregateArgs = {
-  distinct_on?: Maybe<Array<Allocator_Allocation_Result_Select_Column>>
-  limit?: Maybe<Scalars['Int']>
-  offset?: Maybe<Scalars['Int']>
-  order_by?: Maybe<Array<Allocator_Allocation_Result_Order_By>>
-  where?: Maybe<Allocator_Allocation_Result_Bool_Exp>
 }
 
 export type Lockup_Lockedup_Aggregate = {
@@ -1013,7 +861,6 @@ export type Lockup_Lockedup_Bool_Exp = {
   _and?: Maybe<Array<Maybe<Lockup_Lockedup_Bool_Exp>>>
   _not?: Maybe<Lockup_Lockedup_Bool_Exp>
   _or?: Maybe<Array<Maybe<Lockup_Lockedup_Bool_Exp>>>
-  allocation?: Maybe<Allocator_Allocation_Result_Bool_Exp>
   block_number?: Maybe<Int_Comparison_Exp>
   event_id?: Maybe<String_Comparison_Exp>
   from_address?: Maybe<String_Comparison_Exp>
@@ -1037,7 +884,6 @@ export type Lockup_Lockedup_Inc_Input = {
 }
 
 export type Lockup_Lockedup_Insert_Input = {
-  allocation?: Maybe<Allocator_Allocation_Result_Arr_Rel_Insert_Input>
   block_number?: Maybe<Scalars['Int']>
   event_id?: Maybe<Scalars['String']>
   from_address?: Maybe<Scalars['String']>
@@ -1113,7 +959,6 @@ export type Lockup_Lockedup_On_Conflict = {
 }
 
 export type Lockup_Lockedup_Order_By = {
-  allocation_aggregate?: Maybe<Allocator_Allocation_Result_Aggregate_Order_By>
   block_number?: Maybe<Order_By>
   event_id?: Maybe<Order_By>
   from_address?: Maybe<Order_By>
@@ -1269,8 +1114,6 @@ export type Lockup_Lockedup_Variance_Order_By = {
 
 export type Market_Factory_Create = {
   __typename?: 'market_factory_create'
-  allocation: Array<Allocator_Allocation_Result>
-  allocation_aggregate: Allocator_Allocation_Result_Aggregate
   block_number: Scalars['Int']
   destroyed_metrics: Array<Metrics_Factory_Destroy>
   destroyed_metrics_aggregate: Metrics_Factory_Destroy_Aggregate
@@ -1282,22 +1125,6 @@ export type Market_Factory_Create = {
   metrics_aggregate: Metrics_Factory_Create_Aggregate
   raw_data: Scalars['String']
   transaction_index: Scalars['Int']
-}
-
-export type Market_Factory_CreateAllocationArgs = {
-  distinct_on?: Maybe<Array<Allocator_Allocation_Result_Select_Column>>
-  limit?: Maybe<Scalars['Int']>
-  offset?: Maybe<Scalars['Int']>
-  order_by?: Maybe<Array<Allocator_Allocation_Result_Order_By>>
-  where?: Maybe<Allocator_Allocation_Result_Bool_Exp>
-}
-
-export type Market_Factory_CreateAllocation_AggregateArgs = {
-  distinct_on?: Maybe<Array<Allocator_Allocation_Result_Select_Column>>
-  limit?: Maybe<Scalars['Int']>
-  offset?: Maybe<Scalars['Int']>
-  order_by?: Maybe<Array<Allocator_Allocation_Result_Order_By>>
-  where?: Maybe<Allocator_Allocation_Result_Bool_Exp>
 }
 
 export type Market_Factory_CreateDestroyed_MetricsArgs = {
@@ -1394,7 +1221,6 @@ export type Market_Factory_Create_Bool_Exp = {
   _and?: Maybe<Array<Maybe<Market_Factory_Create_Bool_Exp>>>
   _not?: Maybe<Market_Factory_Create_Bool_Exp>
   _or?: Maybe<Array<Maybe<Market_Factory_Create_Bool_Exp>>>
-  allocation?: Maybe<Allocator_Allocation_Result_Bool_Exp>
   block_number?: Maybe<Int_Comparison_Exp>
   destroyed_metrics?: Maybe<Metrics_Factory_Destroy_Bool_Exp>
   event_id?: Maybe<String_Comparison_Exp>
@@ -1417,7 +1243,6 @@ export type Market_Factory_Create_Inc_Input = {
 }
 
 export type Market_Factory_Create_Insert_Input = {
-  allocation?: Maybe<Allocator_Allocation_Result_Arr_Rel_Insert_Input>
   block_number?: Maybe<Scalars['Int']>
   destroyed_metrics?: Maybe<Metrics_Factory_Destroy_Arr_Rel_Insert_Input>
   event_id?: Maybe<Scalars['String']>
@@ -1489,7 +1314,6 @@ export type Market_Factory_Create_On_Conflict = {
 }
 
 export type Market_Factory_Create_Order_By = {
-  allocation_aggregate?: Maybe<Allocator_Allocation_Result_Aggregate_Order_By>
   block_number?: Maybe<Order_By>
   destroyed_metrics_aggregate?: Maybe<Metrics_Factory_Destroy_Aggregate_Order_By>
   event_id?: Maybe<Order_By>
@@ -2236,10 +2060,10 @@ export type Metrics_Factory_Destroy_Variance_Order_By = {
 
 export type Mutation_Root = {
   __typename?: 'mutation_root'
-  delete_allocator_allocation_result?: Maybe<Allocator_Allocation_Result_Mutation_Response>
-  delete_allocator_allocation_result_by_pk?: Maybe<Allocator_Allocation_Result>
-  delete_allocator_before_allocation?: Maybe<Allocator_Before_Allocation_Mutation_Response>
-  delete_allocator_before_allocation_by_pk?: Maybe<Allocator_Before_Allocation>
+  delete_account_lockup?: Maybe<Account_Lockup_Mutation_Response>
+  delete_account_lockup_by_pk?: Maybe<Account_Lockup>
+  delete_dev_property_transfer?: Maybe<Dev_Property_Transfer_Mutation_Response>
+  delete_dev_property_transfer_by_pk?: Maybe<Dev_Property_Transfer>
   delete_lockup_lockedup?: Maybe<Lockup_Lockedup_Mutation_Response>
   delete_lockup_lockedup_by_pk?: Maybe<Lockup_Lockedup>
   delete_market_factory_create?: Maybe<Market_Factory_Create_Mutation_Response>
@@ -2256,14 +2080,14 @@ export type Mutation_Root = {
   delete_property_authentication_deleted_by_pk?: Maybe<Property_Authentication_Deleted>
   delete_property_factory_create?: Maybe<Property_Factory_Create_Mutation_Response>
   delete_property_factory_create_by_pk?: Maybe<Property_Factory_Create>
+  delete_property_lockup?: Maybe<Property_Lockup_Mutation_Response>
+  delete_property_lockup_by_pk?: Maybe<Property_Lockup>
   delete_property_meta?: Maybe<Property_Meta_Mutation_Response>
   delete_property_meta_by_pk?: Maybe<Property_Meta>
-  delete_reward_calculation_result?: Maybe<Reward_Calculation_Result_Mutation_Response>
-  delete_reward_calculation_result_by_pk?: Maybe<Reward_Calculation_Result>
-  insert_allocator_allocation_result?: Maybe<Allocator_Allocation_Result_Mutation_Response>
-  insert_allocator_allocation_result_one?: Maybe<Allocator_Allocation_Result>
-  insert_allocator_before_allocation?: Maybe<Allocator_Before_Allocation_Mutation_Response>
-  insert_allocator_before_allocation_one?: Maybe<Allocator_Before_Allocation>
+  insert_account_lockup?: Maybe<Account_Lockup_Mutation_Response>
+  insert_account_lockup_one?: Maybe<Account_Lockup>
+  insert_dev_property_transfer?: Maybe<Dev_Property_Transfer_Mutation_Response>
+  insert_dev_property_transfer_one?: Maybe<Dev_Property_Transfer>
   insert_lockup_lockedup?: Maybe<Lockup_Lockedup_Mutation_Response>
   insert_lockup_lockedup_one?: Maybe<Lockup_Lockedup>
   insert_market_factory_create?: Maybe<Market_Factory_Create_Mutation_Response>
@@ -2280,14 +2104,14 @@ export type Mutation_Root = {
   insert_property_authentication_one?: Maybe<Property_Authentication>
   insert_property_factory_create?: Maybe<Property_Factory_Create_Mutation_Response>
   insert_property_factory_create_one?: Maybe<Property_Factory_Create>
+  insert_property_lockup?: Maybe<Property_Lockup_Mutation_Response>
+  insert_property_lockup_one?: Maybe<Property_Lockup>
   insert_property_meta?: Maybe<Property_Meta_Mutation_Response>
   insert_property_meta_one?: Maybe<Property_Meta>
-  insert_reward_calculation_result?: Maybe<Reward_Calculation_Result_Mutation_Response>
-  insert_reward_calculation_result_one?: Maybe<Reward_Calculation_Result>
-  update_allocator_allocation_result?: Maybe<Allocator_Allocation_Result_Mutation_Response>
-  update_allocator_allocation_result_by_pk?: Maybe<Allocator_Allocation_Result>
-  update_allocator_before_allocation?: Maybe<Allocator_Before_Allocation_Mutation_Response>
-  update_allocator_before_allocation_by_pk?: Maybe<Allocator_Before_Allocation>
+  update_account_lockup?: Maybe<Account_Lockup_Mutation_Response>
+  update_account_lockup_by_pk?: Maybe<Account_Lockup>
+  update_dev_property_transfer?: Maybe<Dev_Property_Transfer_Mutation_Response>
+  update_dev_property_transfer_by_pk?: Maybe<Dev_Property_Transfer>
   update_lockup_lockedup?: Maybe<Lockup_Lockedup_Mutation_Response>
   update_lockup_lockedup_by_pk?: Maybe<Lockup_Lockedup>
   update_market_factory_create?: Maybe<Market_Factory_Create_Mutation_Response>
@@ -2304,25 +2128,26 @@ export type Mutation_Root = {
   update_property_authentication_deleted_by_pk?: Maybe<Property_Authentication_Deleted>
   update_property_factory_create?: Maybe<Property_Factory_Create_Mutation_Response>
   update_property_factory_create_by_pk?: Maybe<Property_Factory_Create>
+  update_property_lockup?: Maybe<Property_Lockup_Mutation_Response>
+  update_property_lockup_by_pk?: Maybe<Property_Lockup>
   update_property_meta?: Maybe<Property_Meta_Mutation_Response>
   update_property_meta_by_pk?: Maybe<Property_Meta>
-  update_reward_calculation_result?: Maybe<Reward_Calculation_Result_Mutation_Response>
-  update_reward_calculation_result_by_pk?: Maybe<Reward_Calculation_Result>
 }
 
-export type Mutation_RootDelete_Allocator_Allocation_ResultArgs = {
-  where: Allocator_Allocation_Result_Bool_Exp
+export type Mutation_RootDelete_Account_LockupArgs = {
+  where: Account_Lockup_Bool_Exp
 }
 
-export type Mutation_RootDelete_Allocator_Allocation_Result_By_PkArgs = {
-  event_id: Scalars['String']
+export type Mutation_RootDelete_Account_Lockup_By_PkArgs = {
+  account_address: Scalars['String']
+  property_address: Scalars['String']
 }
 
-export type Mutation_RootDelete_Allocator_Before_AllocationArgs = {
-  where: Allocator_Before_Allocation_Bool_Exp
+export type Mutation_RootDelete_Dev_Property_TransferArgs = {
+  where: Dev_Property_Transfer_Bool_Exp
 }
 
-export type Mutation_RootDelete_Allocator_Before_Allocation_By_PkArgs = {
+export type Mutation_RootDelete_Dev_Property_Transfer_By_PkArgs = {
   event_id: Scalars['String']
 }
 
@@ -2392,6 +2217,15 @@ export type Mutation_RootDelete_Property_Factory_Create_By_PkArgs = {
   event_id: Scalars['String']
 }
 
+export type Mutation_RootDelete_Property_LockupArgs = {
+  where: Property_Lockup_Bool_Exp
+}
+
+export type Mutation_RootDelete_Property_Lockup_By_PkArgs = {
+  account_address: Scalars['String']
+  property_address: Scalars['String']
+}
+
 export type Mutation_RootDelete_Property_MetaArgs = {
   where: Property_Meta_Bool_Exp
 }
@@ -2401,32 +2235,24 @@ export type Mutation_RootDelete_Property_Meta_By_PkArgs = {
   property: Scalars['String']
 }
 
-export type Mutation_RootDelete_Reward_Calculation_ResultArgs = {
-  where: Reward_Calculation_Result_Bool_Exp
+export type Mutation_RootInsert_Account_LockupArgs = {
+  objects: Array<Account_Lockup_Insert_Input>
+  on_conflict?: Maybe<Account_Lockup_On_Conflict>
 }
 
-export type Mutation_RootDelete_Reward_Calculation_Result_By_PkArgs = {
-  event_id: Scalars['String']
+export type Mutation_RootInsert_Account_Lockup_OneArgs = {
+  object: Account_Lockup_Insert_Input
+  on_conflict?: Maybe<Account_Lockup_On_Conflict>
 }
 
-export type Mutation_RootInsert_Allocator_Allocation_ResultArgs = {
-  objects: Array<Allocator_Allocation_Result_Insert_Input>
-  on_conflict?: Maybe<Allocator_Allocation_Result_On_Conflict>
+export type Mutation_RootInsert_Dev_Property_TransferArgs = {
+  objects: Array<Dev_Property_Transfer_Insert_Input>
+  on_conflict?: Maybe<Dev_Property_Transfer_On_Conflict>
 }
 
-export type Mutation_RootInsert_Allocator_Allocation_Result_OneArgs = {
-  object: Allocator_Allocation_Result_Insert_Input
-  on_conflict?: Maybe<Allocator_Allocation_Result_On_Conflict>
-}
-
-export type Mutation_RootInsert_Allocator_Before_AllocationArgs = {
-  objects: Array<Allocator_Before_Allocation_Insert_Input>
-  on_conflict?: Maybe<Allocator_Before_Allocation_On_Conflict>
-}
-
-export type Mutation_RootInsert_Allocator_Before_Allocation_OneArgs = {
-  object: Allocator_Before_Allocation_Insert_Input
-  on_conflict?: Maybe<Allocator_Before_Allocation_On_Conflict>
+export type Mutation_RootInsert_Dev_Property_Transfer_OneArgs = {
+  object: Dev_Property_Transfer_Insert_Input
+  on_conflict?: Maybe<Dev_Property_Transfer_On_Conflict>
 }
 
 export type Mutation_RootInsert_Lockup_LockedupArgs = {
@@ -2509,6 +2335,16 @@ export type Mutation_RootInsert_Property_Factory_Create_OneArgs = {
   on_conflict?: Maybe<Property_Factory_Create_On_Conflict>
 }
 
+export type Mutation_RootInsert_Property_LockupArgs = {
+  objects: Array<Property_Lockup_Insert_Input>
+  on_conflict?: Maybe<Property_Lockup_On_Conflict>
+}
+
+export type Mutation_RootInsert_Property_Lockup_OneArgs = {
+  object: Property_Lockup_Insert_Input
+  on_conflict?: Maybe<Property_Lockup_On_Conflict>
+}
+
 export type Mutation_RootInsert_Property_MetaArgs = {
   objects: Array<Property_Meta_Insert_Input>
   on_conflict?: Maybe<Property_Meta_On_Conflict>
@@ -2519,38 +2355,28 @@ export type Mutation_RootInsert_Property_Meta_OneArgs = {
   on_conflict?: Maybe<Property_Meta_On_Conflict>
 }
 
-export type Mutation_RootInsert_Reward_Calculation_ResultArgs = {
-  objects: Array<Reward_Calculation_Result_Insert_Input>
-  on_conflict?: Maybe<Reward_Calculation_Result_On_Conflict>
+export type Mutation_RootUpdate_Account_LockupArgs = {
+  _inc?: Maybe<Account_Lockup_Inc_Input>
+  _set?: Maybe<Account_Lockup_Set_Input>
+  where: Account_Lockup_Bool_Exp
 }
 
-export type Mutation_RootInsert_Reward_Calculation_Result_OneArgs = {
-  object: Reward_Calculation_Result_Insert_Input
-  on_conflict?: Maybe<Reward_Calculation_Result_On_Conflict>
+export type Mutation_RootUpdate_Account_Lockup_By_PkArgs = {
+  _inc?: Maybe<Account_Lockup_Inc_Input>
+  _set?: Maybe<Account_Lockup_Set_Input>
+  pk_columns: Account_Lockup_Pk_Columns_Input
 }
 
-export type Mutation_RootUpdate_Allocator_Allocation_ResultArgs = {
-  _inc?: Maybe<Allocator_Allocation_Result_Inc_Input>
-  _set?: Maybe<Allocator_Allocation_Result_Set_Input>
-  where: Allocator_Allocation_Result_Bool_Exp
+export type Mutation_RootUpdate_Dev_Property_TransferArgs = {
+  _inc?: Maybe<Dev_Property_Transfer_Inc_Input>
+  _set?: Maybe<Dev_Property_Transfer_Set_Input>
+  where: Dev_Property_Transfer_Bool_Exp
 }
 
-export type Mutation_RootUpdate_Allocator_Allocation_Result_By_PkArgs = {
-  _inc?: Maybe<Allocator_Allocation_Result_Inc_Input>
-  _set?: Maybe<Allocator_Allocation_Result_Set_Input>
-  pk_columns: Allocator_Allocation_Result_Pk_Columns_Input
-}
-
-export type Mutation_RootUpdate_Allocator_Before_AllocationArgs = {
-  _inc?: Maybe<Allocator_Before_Allocation_Inc_Input>
-  _set?: Maybe<Allocator_Before_Allocation_Set_Input>
-  where: Allocator_Before_Allocation_Bool_Exp
-}
-
-export type Mutation_RootUpdate_Allocator_Before_Allocation_By_PkArgs = {
-  _inc?: Maybe<Allocator_Before_Allocation_Inc_Input>
-  _set?: Maybe<Allocator_Before_Allocation_Set_Input>
-  pk_columns: Allocator_Before_Allocation_Pk_Columns_Input
+export type Mutation_RootUpdate_Dev_Property_Transfer_By_PkArgs = {
+  _inc?: Maybe<Dev_Property_Transfer_Inc_Input>
+  _set?: Maybe<Dev_Property_Transfer_Set_Input>
+  pk_columns: Dev_Property_Transfer_Pk_Columns_Input
 }
 
 export type Mutation_RootUpdate_Lockup_LockedupArgs = {
@@ -2649,6 +2475,18 @@ export type Mutation_RootUpdate_Property_Factory_Create_By_PkArgs = {
   pk_columns: Property_Factory_Create_Pk_Columns_Input
 }
 
+export type Mutation_RootUpdate_Property_LockupArgs = {
+  _inc?: Maybe<Property_Lockup_Inc_Input>
+  _set?: Maybe<Property_Lockup_Set_Input>
+  where: Property_Lockup_Bool_Exp
+}
+
+export type Mutation_RootUpdate_Property_Lockup_By_PkArgs = {
+  _inc?: Maybe<Property_Lockup_Inc_Input>
+  _set?: Maybe<Property_Lockup_Set_Input>
+  pk_columns: Property_Lockup_Pk_Columns_Input
+}
+
 export type Mutation_RootUpdate_Property_MetaArgs = {
   _inc?: Maybe<Property_Meta_Inc_Input>
   _set?: Maybe<Property_Meta_Set_Input>
@@ -2659,18 +2497,6 @@ export type Mutation_RootUpdate_Property_Meta_By_PkArgs = {
   _inc?: Maybe<Property_Meta_Inc_Input>
   _set?: Maybe<Property_Meta_Set_Input>
   pk_columns: Property_Meta_Pk_Columns_Input
-}
-
-export type Mutation_RootUpdate_Reward_Calculation_ResultArgs = {
-  _inc?: Maybe<Reward_Calculation_Result_Inc_Input>
-  _set?: Maybe<Reward_Calculation_Result_Set_Input>
-  where: Reward_Calculation_Result_Bool_Exp
-}
-
-export type Mutation_RootUpdate_Reward_Calculation_Result_By_PkArgs = {
-  _inc?: Maybe<Reward_Calculation_Result_Inc_Input>
-  _set?: Maybe<Reward_Calculation_Result_Set_Input>
-  pk_columns: Reward_Calculation_Result_Pk_Columns_Input
 }
 
 export type Numeric_Comparison_Exp = {
@@ -2685,18 +2511,6 @@ export type Numeric_Comparison_Exp = {
   _nin?: Maybe<Array<Scalars['numeric']>>
 }
 
-export type Oid_Comparison_Exp = {
-  _eq?: Maybe<Scalars['oid']>
-  _gt?: Maybe<Scalars['oid']>
-  _gte?: Maybe<Scalars['oid']>
-  _in?: Maybe<Array<Scalars['oid']>>
-  _is_null?: Maybe<Scalars['Boolean']>
-  _lt?: Maybe<Scalars['oid']>
-  _lte?: Maybe<Scalars['oid']>
-  _neq?: Maybe<Scalars['oid']>
-  _nin?: Maybe<Array<Scalars['oid']>>
-}
-
 export enum Order_By {
   Asc = 'asc',
   AscNullsFirst = 'asc_nulls_first',
@@ -2706,918 +2520,15 @@ export enum Order_By {
   DescNullsLast = 'desc_nulls_last'
 }
 
-export type Pg_Buffercache = {
-  __typename?: 'pg_buffercache'
-  bufferid?: Maybe<Scalars['Int']>
-  isdirty?: Maybe<Scalars['Boolean']>
-  pinning_backends?: Maybe<Scalars['Int']>
-  relblocknumber?: Maybe<Scalars['bigint']>
-  reldatabase?: Maybe<Scalars['oid']>
-  relfilenode?: Maybe<Scalars['oid']>
-  relforknumber?: Maybe<Scalars['smallint']>
-  reltablespace?: Maybe<Scalars['oid']>
-  usagecount?: Maybe<Scalars['smallint']>
-}
-
-export type Pg_Buffercache_Aggregate = {
-  __typename?: 'pg_buffercache_aggregate'
-  aggregate?: Maybe<Pg_Buffercache_Aggregate_Fields>
-  nodes: Array<Pg_Buffercache>
-}
-
-export type Pg_Buffercache_Aggregate_Fields = {
-  __typename?: 'pg_buffercache_aggregate_fields'
-  avg?: Maybe<Pg_Buffercache_Avg_Fields>
-  count?: Maybe<Scalars['Int']>
-  max?: Maybe<Pg_Buffercache_Max_Fields>
-  min?: Maybe<Pg_Buffercache_Min_Fields>
-  stddev?: Maybe<Pg_Buffercache_Stddev_Fields>
-  stddev_pop?: Maybe<Pg_Buffercache_Stddev_Pop_Fields>
-  stddev_samp?: Maybe<Pg_Buffercache_Stddev_Samp_Fields>
-  sum?: Maybe<Pg_Buffercache_Sum_Fields>
-  var_pop?: Maybe<Pg_Buffercache_Var_Pop_Fields>
-  var_samp?: Maybe<Pg_Buffercache_Var_Samp_Fields>
-  variance?: Maybe<Pg_Buffercache_Variance_Fields>
-}
-
-export type Pg_Buffercache_Aggregate_FieldsCountArgs = {
-  columns?: Maybe<Array<Pg_Buffercache_Select_Column>>
-  distinct?: Maybe<Scalars['Boolean']>
-}
-
-export type Pg_Buffercache_Aggregate_Order_By = {
-  avg?: Maybe<Pg_Buffercache_Avg_Order_By>
-  count?: Maybe<Order_By>
-  max?: Maybe<Pg_Buffercache_Max_Order_By>
-  min?: Maybe<Pg_Buffercache_Min_Order_By>
-  stddev?: Maybe<Pg_Buffercache_Stddev_Order_By>
-  stddev_pop?: Maybe<Pg_Buffercache_Stddev_Pop_Order_By>
-  stddev_samp?: Maybe<Pg_Buffercache_Stddev_Samp_Order_By>
-  sum?: Maybe<Pg_Buffercache_Sum_Order_By>
-  var_pop?: Maybe<Pg_Buffercache_Var_Pop_Order_By>
-  var_samp?: Maybe<Pg_Buffercache_Var_Samp_Order_By>
-  variance?: Maybe<Pg_Buffercache_Variance_Order_By>
-}
-
-export type Pg_Buffercache_Avg_Fields = {
-  __typename?: 'pg_buffercache_avg_fields'
-  bufferid?: Maybe<Scalars['Float']>
-  pinning_backends?: Maybe<Scalars['Float']>
-  relblocknumber?: Maybe<Scalars['Float']>
-  relforknumber?: Maybe<Scalars['Float']>
-  usagecount?: Maybe<Scalars['Float']>
-}
-
-export type Pg_Buffercache_Avg_Order_By = {
-  bufferid?: Maybe<Order_By>
-  pinning_backends?: Maybe<Order_By>
-  relblocknumber?: Maybe<Order_By>
-  relforknumber?: Maybe<Order_By>
-  usagecount?: Maybe<Order_By>
-}
-
-export type Pg_Buffercache_Bool_Exp = {
-  _and?: Maybe<Array<Maybe<Pg_Buffercache_Bool_Exp>>>
-  _not?: Maybe<Pg_Buffercache_Bool_Exp>
-  _or?: Maybe<Array<Maybe<Pg_Buffercache_Bool_Exp>>>
-  bufferid?: Maybe<Int_Comparison_Exp>
-  isdirty?: Maybe<Boolean_Comparison_Exp>
-  pinning_backends?: Maybe<Int_Comparison_Exp>
-  relblocknumber?: Maybe<Bigint_Comparison_Exp>
-  reldatabase?: Maybe<Oid_Comparison_Exp>
-  relfilenode?: Maybe<Oid_Comparison_Exp>
-  relforknumber?: Maybe<Smallint_Comparison_Exp>
-  reltablespace?: Maybe<Oid_Comparison_Exp>
-  usagecount?: Maybe<Smallint_Comparison_Exp>
-}
-
-export type Pg_Buffercache_Max_Fields = {
-  __typename?: 'pg_buffercache_max_fields'
-  bufferid?: Maybe<Scalars['Int']>
-  pinning_backends?: Maybe<Scalars['Int']>
-  relblocknumber?: Maybe<Scalars['bigint']>
-  relforknumber?: Maybe<Scalars['smallint']>
-  usagecount?: Maybe<Scalars['smallint']>
-}
-
-export type Pg_Buffercache_Max_Order_By = {
-  bufferid?: Maybe<Order_By>
-  pinning_backends?: Maybe<Order_By>
-  relblocknumber?: Maybe<Order_By>
-  relforknumber?: Maybe<Order_By>
-  usagecount?: Maybe<Order_By>
-}
-
-export type Pg_Buffercache_Min_Fields = {
-  __typename?: 'pg_buffercache_min_fields'
-  bufferid?: Maybe<Scalars['Int']>
-  pinning_backends?: Maybe<Scalars['Int']>
-  relblocknumber?: Maybe<Scalars['bigint']>
-  relforknumber?: Maybe<Scalars['smallint']>
-  usagecount?: Maybe<Scalars['smallint']>
-}
-
-export type Pg_Buffercache_Min_Order_By = {
-  bufferid?: Maybe<Order_By>
-  pinning_backends?: Maybe<Order_By>
-  relblocknumber?: Maybe<Order_By>
-  relforknumber?: Maybe<Order_By>
-  usagecount?: Maybe<Order_By>
-}
-
-export type Pg_Buffercache_Order_By = {
-  bufferid?: Maybe<Order_By>
-  isdirty?: Maybe<Order_By>
-  pinning_backends?: Maybe<Order_By>
-  relblocknumber?: Maybe<Order_By>
-  reldatabase?: Maybe<Order_By>
-  relfilenode?: Maybe<Order_By>
-  relforknumber?: Maybe<Order_By>
-  reltablespace?: Maybe<Order_By>
-  usagecount?: Maybe<Order_By>
-}
-
-export enum Pg_Buffercache_Select_Column {
-  Bufferid = 'bufferid',
-  Isdirty = 'isdirty',
-  PinningBackends = 'pinning_backends',
-  Relblocknumber = 'relblocknumber',
-  Reldatabase = 'reldatabase',
-  Relfilenode = 'relfilenode',
-  Relforknumber = 'relforknumber',
-  Reltablespace = 'reltablespace',
-  Usagecount = 'usagecount'
-}
-
-export type Pg_Buffercache_Stddev_Fields = {
-  __typename?: 'pg_buffercache_stddev_fields'
-  bufferid?: Maybe<Scalars['Float']>
-  pinning_backends?: Maybe<Scalars['Float']>
-  relblocknumber?: Maybe<Scalars['Float']>
-  relforknumber?: Maybe<Scalars['Float']>
-  usagecount?: Maybe<Scalars['Float']>
-}
-
-export type Pg_Buffercache_Stddev_Order_By = {
-  bufferid?: Maybe<Order_By>
-  pinning_backends?: Maybe<Order_By>
-  relblocknumber?: Maybe<Order_By>
-  relforknumber?: Maybe<Order_By>
-  usagecount?: Maybe<Order_By>
-}
-
-export type Pg_Buffercache_Stddev_Pop_Fields = {
-  __typename?: 'pg_buffercache_stddev_pop_fields'
-  bufferid?: Maybe<Scalars['Float']>
-  pinning_backends?: Maybe<Scalars['Float']>
-  relblocknumber?: Maybe<Scalars['Float']>
-  relforknumber?: Maybe<Scalars['Float']>
-  usagecount?: Maybe<Scalars['Float']>
-}
-
-export type Pg_Buffercache_Stddev_Pop_Order_By = {
-  bufferid?: Maybe<Order_By>
-  pinning_backends?: Maybe<Order_By>
-  relblocknumber?: Maybe<Order_By>
-  relforknumber?: Maybe<Order_By>
-  usagecount?: Maybe<Order_By>
-}
-
-export type Pg_Buffercache_Stddev_Samp_Fields = {
-  __typename?: 'pg_buffercache_stddev_samp_fields'
-  bufferid?: Maybe<Scalars['Float']>
-  pinning_backends?: Maybe<Scalars['Float']>
-  relblocknumber?: Maybe<Scalars['Float']>
-  relforknumber?: Maybe<Scalars['Float']>
-  usagecount?: Maybe<Scalars['Float']>
-}
-
-export type Pg_Buffercache_Stddev_Samp_Order_By = {
-  bufferid?: Maybe<Order_By>
-  pinning_backends?: Maybe<Order_By>
-  relblocknumber?: Maybe<Order_By>
-  relforknumber?: Maybe<Order_By>
-  usagecount?: Maybe<Order_By>
-}
-
-export type Pg_Buffercache_Sum_Fields = {
-  __typename?: 'pg_buffercache_sum_fields'
-  bufferid?: Maybe<Scalars['Int']>
-  pinning_backends?: Maybe<Scalars['Int']>
-  relblocknumber?: Maybe<Scalars['bigint']>
-  relforknumber?: Maybe<Scalars['smallint']>
-  usagecount?: Maybe<Scalars['smallint']>
-}
-
-export type Pg_Buffercache_Sum_Order_By = {
-  bufferid?: Maybe<Order_By>
-  pinning_backends?: Maybe<Order_By>
-  relblocknumber?: Maybe<Order_By>
-  relforknumber?: Maybe<Order_By>
-  usagecount?: Maybe<Order_By>
-}
-
-export type Pg_Buffercache_Var_Pop_Fields = {
-  __typename?: 'pg_buffercache_var_pop_fields'
-  bufferid?: Maybe<Scalars['Float']>
-  pinning_backends?: Maybe<Scalars['Float']>
-  relblocknumber?: Maybe<Scalars['Float']>
-  relforknumber?: Maybe<Scalars['Float']>
-  usagecount?: Maybe<Scalars['Float']>
-}
-
-export type Pg_Buffercache_Var_Pop_Order_By = {
-  bufferid?: Maybe<Order_By>
-  pinning_backends?: Maybe<Order_By>
-  relblocknumber?: Maybe<Order_By>
-  relforknumber?: Maybe<Order_By>
-  usagecount?: Maybe<Order_By>
-}
-
-export type Pg_Buffercache_Var_Samp_Fields = {
-  __typename?: 'pg_buffercache_var_samp_fields'
-  bufferid?: Maybe<Scalars['Float']>
-  pinning_backends?: Maybe<Scalars['Float']>
-  relblocknumber?: Maybe<Scalars['Float']>
-  relforknumber?: Maybe<Scalars['Float']>
-  usagecount?: Maybe<Scalars['Float']>
-}
-
-export type Pg_Buffercache_Var_Samp_Order_By = {
-  bufferid?: Maybe<Order_By>
-  pinning_backends?: Maybe<Order_By>
-  relblocknumber?: Maybe<Order_By>
-  relforknumber?: Maybe<Order_By>
-  usagecount?: Maybe<Order_By>
-}
-
-export type Pg_Buffercache_Variance_Fields = {
-  __typename?: 'pg_buffercache_variance_fields'
-  bufferid?: Maybe<Scalars['Float']>
-  pinning_backends?: Maybe<Scalars['Float']>
-  relblocknumber?: Maybe<Scalars['Float']>
-  relforknumber?: Maybe<Scalars['Float']>
-  usagecount?: Maybe<Scalars['Float']>
-}
-
-export type Pg_Buffercache_Variance_Order_By = {
-  bufferid?: Maybe<Order_By>
-  pinning_backends?: Maybe<Order_By>
-  relblocknumber?: Maybe<Order_By>
-  relforknumber?: Maybe<Order_By>
-  usagecount?: Maybe<Order_By>
-}
-
-export type Pg_Stat_Statements = {
-  __typename?: 'pg_stat_statements'
-  blk_read_time?: Maybe<Scalars['float8']>
-  blk_write_time?: Maybe<Scalars['float8']>
-  calls?: Maybe<Scalars['bigint']>
-  dbid?: Maybe<Scalars['oid']>
-  local_blks_dirtied?: Maybe<Scalars['bigint']>
-  local_blks_hit?: Maybe<Scalars['bigint']>
-  local_blks_read?: Maybe<Scalars['bigint']>
-  local_blks_written?: Maybe<Scalars['bigint']>
-  max_time?: Maybe<Scalars['float8']>
-  mean_time?: Maybe<Scalars['float8']>
-  min_time?: Maybe<Scalars['float8']>
-  query?: Maybe<Scalars['String']>
-  queryid?: Maybe<Scalars['bigint']>
-  rows?: Maybe<Scalars['bigint']>
-  shared_blks_dirtied?: Maybe<Scalars['bigint']>
-  shared_blks_hit?: Maybe<Scalars['bigint']>
-  shared_blks_read?: Maybe<Scalars['bigint']>
-  shared_blks_written?: Maybe<Scalars['bigint']>
-  stddev_time?: Maybe<Scalars['float8']>
-  temp_blks_read?: Maybe<Scalars['bigint']>
-  temp_blks_written?: Maybe<Scalars['bigint']>
-  total_time?: Maybe<Scalars['float8']>
-  userid?: Maybe<Scalars['oid']>
-}
-
-export type Pg_Stat_Statements_Aggregate = {
-  __typename?: 'pg_stat_statements_aggregate'
-  aggregate?: Maybe<Pg_Stat_Statements_Aggregate_Fields>
-  nodes: Array<Pg_Stat_Statements>
-}
-
-export type Pg_Stat_Statements_Aggregate_Fields = {
-  __typename?: 'pg_stat_statements_aggregate_fields'
-  avg?: Maybe<Pg_Stat_Statements_Avg_Fields>
-  count?: Maybe<Scalars['Int']>
-  max?: Maybe<Pg_Stat_Statements_Max_Fields>
-  min?: Maybe<Pg_Stat_Statements_Min_Fields>
-  stddev?: Maybe<Pg_Stat_Statements_Stddev_Fields>
-  stddev_pop?: Maybe<Pg_Stat_Statements_Stddev_Pop_Fields>
-  stddev_samp?: Maybe<Pg_Stat_Statements_Stddev_Samp_Fields>
-  sum?: Maybe<Pg_Stat_Statements_Sum_Fields>
-  var_pop?: Maybe<Pg_Stat_Statements_Var_Pop_Fields>
-  var_samp?: Maybe<Pg_Stat_Statements_Var_Samp_Fields>
-  variance?: Maybe<Pg_Stat_Statements_Variance_Fields>
-}
-
-export type Pg_Stat_Statements_Aggregate_FieldsCountArgs = {
-  columns?: Maybe<Array<Pg_Stat_Statements_Select_Column>>
-  distinct?: Maybe<Scalars['Boolean']>
-}
-
-export type Pg_Stat_Statements_Aggregate_Order_By = {
-  avg?: Maybe<Pg_Stat_Statements_Avg_Order_By>
-  count?: Maybe<Order_By>
-  max?: Maybe<Pg_Stat_Statements_Max_Order_By>
-  min?: Maybe<Pg_Stat_Statements_Min_Order_By>
-  stddev?: Maybe<Pg_Stat_Statements_Stddev_Order_By>
-  stddev_pop?: Maybe<Pg_Stat_Statements_Stddev_Pop_Order_By>
-  stddev_samp?: Maybe<Pg_Stat_Statements_Stddev_Samp_Order_By>
-  sum?: Maybe<Pg_Stat_Statements_Sum_Order_By>
-  var_pop?: Maybe<Pg_Stat_Statements_Var_Pop_Order_By>
-  var_samp?: Maybe<Pg_Stat_Statements_Var_Samp_Order_By>
-  variance?: Maybe<Pg_Stat_Statements_Variance_Order_By>
-}
-
-export type Pg_Stat_Statements_Avg_Fields = {
-  __typename?: 'pg_stat_statements_avg_fields'
-  blk_read_time?: Maybe<Scalars['Float']>
-  blk_write_time?: Maybe<Scalars['Float']>
-  calls?: Maybe<Scalars['Float']>
-  local_blks_dirtied?: Maybe<Scalars['Float']>
-  local_blks_hit?: Maybe<Scalars['Float']>
-  local_blks_read?: Maybe<Scalars['Float']>
-  local_blks_written?: Maybe<Scalars['Float']>
-  max_time?: Maybe<Scalars['Float']>
-  mean_time?: Maybe<Scalars['Float']>
-  min_time?: Maybe<Scalars['Float']>
-  queryid?: Maybe<Scalars['Float']>
-  rows?: Maybe<Scalars['Float']>
-  shared_blks_dirtied?: Maybe<Scalars['Float']>
-  shared_blks_hit?: Maybe<Scalars['Float']>
-  shared_blks_read?: Maybe<Scalars['Float']>
-  shared_blks_written?: Maybe<Scalars['Float']>
-  stddev_time?: Maybe<Scalars['Float']>
-  temp_blks_read?: Maybe<Scalars['Float']>
-  temp_blks_written?: Maybe<Scalars['Float']>
-  total_time?: Maybe<Scalars['Float']>
-}
-
-export type Pg_Stat_Statements_Avg_Order_By = {
-  blk_read_time?: Maybe<Order_By>
-  blk_write_time?: Maybe<Order_By>
-  calls?: Maybe<Order_By>
-  local_blks_dirtied?: Maybe<Order_By>
-  local_blks_hit?: Maybe<Order_By>
-  local_blks_read?: Maybe<Order_By>
-  local_blks_written?: Maybe<Order_By>
-  max_time?: Maybe<Order_By>
-  mean_time?: Maybe<Order_By>
-  min_time?: Maybe<Order_By>
-  queryid?: Maybe<Order_By>
-  rows?: Maybe<Order_By>
-  shared_blks_dirtied?: Maybe<Order_By>
-  shared_blks_hit?: Maybe<Order_By>
-  shared_blks_read?: Maybe<Order_By>
-  shared_blks_written?: Maybe<Order_By>
-  stddev_time?: Maybe<Order_By>
-  temp_blks_read?: Maybe<Order_By>
-  temp_blks_written?: Maybe<Order_By>
-  total_time?: Maybe<Order_By>
-}
-
-export type Pg_Stat_Statements_Bool_Exp = {
-  _and?: Maybe<Array<Maybe<Pg_Stat_Statements_Bool_Exp>>>
-  _not?: Maybe<Pg_Stat_Statements_Bool_Exp>
-  _or?: Maybe<Array<Maybe<Pg_Stat_Statements_Bool_Exp>>>
-  blk_read_time?: Maybe<Float8_Comparison_Exp>
-  blk_write_time?: Maybe<Float8_Comparison_Exp>
-  calls?: Maybe<Bigint_Comparison_Exp>
-  dbid?: Maybe<Oid_Comparison_Exp>
-  local_blks_dirtied?: Maybe<Bigint_Comparison_Exp>
-  local_blks_hit?: Maybe<Bigint_Comparison_Exp>
-  local_blks_read?: Maybe<Bigint_Comparison_Exp>
-  local_blks_written?: Maybe<Bigint_Comparison_Exp>
-  max_time?: Maybe<Float8_Comparison_Exp>
-  mean_time?: Maybe<Float8_Comparison_Exp>
-  min_time?: Maybe<Float8_Comparison_Exp>
-  query?: Maybe<String_Comparison_Exp>
-  queryid?: Maybe<Bigint_Comparison_Exp>
-  rows?: Maybe<Bigint_Comparison_Exp>
-  shared_blks_dirtied?: Maybe<Bigint_Comparison_Exp>
-  shared_blks_hit?: Maybe<Bigint_Comparison_Exp>
-  shared_blks_read?: Maybe<Bigint_Comparison_Exp>
-  shared_blks_written?: Maybe<Bigint_Comparison_Exp>
-  stddev_time?: Maybe<Float8_Comparison_Exp>
-  temp_blks_read?: Maybe<Bigint_Comparison_Exp>
-  temp_blks_written?: Maybe<Bigint_Comparison_Exp>
-  total_time?: Maybe<Float8_Comparison_Exp>
-  userid?: Maybe<Oid_Comparison_Exp>
-}
-
-export type Pg_Stat_Statements_Max_Fields = {
-  __typename?: 'pg_stat_statements_max_fields'
-  blk_read_time?: Maybe<Scalars['float8']>
-  blk_write_time?: Maybe<Scalars['float8']>
-  calls?: Maybe<Scalars['bigint']>
-  local_blks_dirtied?: Maybe<Scalars['bigint']>
-  local_blks_hit?: Maybe<Scalars['bigint']>
-  local_blks_read?: Maybe<Scalars['bigint']>
-  local_blks_written?: Maybe<Scalars['bigint']>
-  max_time?: Maybe<Scalars['float8']>
-  mean_time?: Maybe<Scalars['float8']>
-  min_time?: Maybe<Scalars['float8']>
-  query?: Maybe<Scalars['String']>
-  queryid?: Maybe<Scalars['bigint']>
-  rows?: Maybe<Scalars['bigint']>
-  shared_blks_dirtied?: Maybe<Scalars['bigint']>
-  shared_blks_hit?: Maybe<Scalars['bigint']>
-  shared_blks_read?: Maybe<Scalars['bigint']>
-  shared_blks_written?: Maybe<Scalars['bigint']>
-  stddev_time?: Maybe<Scalars['float8']>
-  temp_blks_read?: Maybe<Scalars['bigint']>
-  temp_blks_written?: Maybe<Scalars['bigint']>
-  total_time?: Maybe<Scalars['float8']>
-}
-
-export type Pg_Stat_Statements_Max_Order_By = {
-  blk_read_time?: Maybe<Order_By>
-  blk_write_time?: Maybe<Order_By>
-  calls?: Maybe<Order_By>
-  local_blks_dirtied?: Maybe<Order_By>
-  local_blks_hit?: Maybe<Order_By>
-  local_blks_read?: Maybe<Order_By>
-  local_blks_written?: Maybe<Order_By>
-  max_time?: Maybe<Order_By>
-  mean_time?: Maybe<Order_By>
-  min_time?: Maybe<Order_By>
-  query?: Maybe<Order_By>
-  queryid?: Maybe<Order_By>
-  rows?: Maybe<Order_By>
-  shared_blks_dirtied?: Maybe<Order_By>
-  shared_blks_hit?: Maybe<Order_By>
-  shared_blks_read?: Maybe<Order_By>
-  shared_blks_written?: Maybe<Order_By>
-  stddev_time?: Maybe<Order_By>
-  temp_blks_read?: Maybe<Order_By>
-  temp_blks_written?: Maybe<Order_By>
-  total_time?: Maybe<Order_By>
-}
-
-export type Pg_Stat_Statements_Min_Fields = {
-  __typename?: 'pg_stat_statements_min_fields'
-  blk_read_time?: Maybe<Scalars['float8']>
-  blk_write_time?: Maybe<Scalars['float8']>
-  calls?: Maybe<Scalars['bigint']>
-  local_blks_dirtied?: Maybe<Scalars['bigint']>
-  local_blks_hit?: Maybe<Scalars['bigint']>
-  local_blks_read?: Maybe<Scalars['bigint']>
-  local_blks_written?: Maybe<Scalars['bigint']>
-  max_time?: Maybe<Scalars['float8']>
-  mean_time?: Maybe<Scalars['float8']>
-  min_time?: Maybe<Scalars['float8']>
-  query?: Maybe<Scalars['String']>
-  queryid?: Maybe<Scalars['bigint']>
-  rows?: Maybe<Scalars['bigint']>
-  shared_blks_dirtied?: Maybe<Scalars['bigint']>
-  shared_blks_hit?: Maybe<Scalars['bigint']>
-  shared_blks_read?: Maybe<Scalars['bigint']>
-  shared_blks_written?: Maybe<Scalars['bigint']>
-  stddev_time?: Maybe<Scalars['float8']>
-  temp_blks_read?: Maybe<Scalars['bigint']>
-  temp_blks_written?: Maybe<Scalars['bigint']>
-  total_time?: Maybe<Scalars['float8']>
-}
-
-export type Pg_Stat_Statements_Min_Order_By = {
-  blk_read_time?: Maybe<Order_By>
-  blk_write_time?: Maybe<Order_By>
-  calls?: Maybe<Order_By>
-  local_blks_dirtied?: Maybe<Order_By>
-  local_blks_hit?: Maybe<Order_By>
-  local_blks_read?: Maybe<Order_By>
-  local_blks_written?: Maybe<Order_By>
-  max_time?: Maybe<Order_By>
-  mean_time?: Maybe<Order_By>
-  min_time?: Maybe<Order_By>
-  query?: Maybe<Order_By>
-  queryid?: Maybe<Order_By>
-  rows?: Maybe<Order_By>
-  shared_blks_dirtied?: Maybe<Order_By>
-  shared_blks_hit?: Maybe<Order_By>
-  shared_blks_read?: Maybe<Order_By>
-  shared_blks_written?: Maybe<Order_By>
-  stddev_time?: Maybe<Order_By>
-  temp_blks_read?: Maybe<Order_By>
-  temp_blks_written?: Maybe<Order_By>
-  total_time?: Maybe<Order_By>
-}
-
-export type Pg_Stat_Statements_Order_By = {
-  blk_read_time?: Maybe<Order_By>
-  blk_write_time?: Maybe<Order_By>
-  calls?: Maybe<Order_By>
-  dbid?: Maybe<Order_By>
-  local_blks_dirtied?: Maybe<Order_By>
-  local_blks_hit?: Maybe<Order_By>
-  local_blks_read?: Maybe<Order_By>
-  local_blks_written?: Maybe<Order_By>
-  max_time?: Maybe<Order_By>
-  mean_time?: Maybe<Order_By>
-  min_time?: Maybe<Order_By>
-  query?: Maybe<Order_By>
-  queryid?: Maybe<Order_By>
-  rows?: Maybe<Order_By>
-  shared_blks_dirtied?: Maybe<Order_By>
-  shared_blks_hit?: Maybe<Order_By>
-  shared_blks_read?: Maybe<Order_By>
-  shared_blks_written?: Maybe<Order_By>
-  stddev_time?: Maybe<Order_By>
-  temp_blks_read?: Maybe<Order_By>
-  temp_blks_written?: Maybe<Order_By>
-  total_time?: Maybe<Order_By>
-  userid?: Maybe<Order_By>
-}
-
-export enum Pg_Stat_Statements_Select_Column {
-  BlkReadTime = 'blk_read_time',
-  BlkWriteTime = 'blk_write_time',
-  Calls = 'calls',
-  Dbid = 'dbid',
-  LocalBlksDirtied = 'local_blks_dirtied',
-  LocalBlksHit = 'local_blks_hit',
-  LocalBlksRead = 'local_blks_read',
-  LocalBlksWritten = 'local_blks_written',
-  MaxTime = 'max_time',
-  MeanTime = 'mean_time',
-  MinTime = 'min_time',
-  Query = 'query',
-  Queryid = 'queryid',
-  Rows = 'rows',
-  SharedBlksDirtied = 'shared_blks_dirtied',
-  SharedBlksHit = 'shared_blks_hit',
-  SharedBlksRead = 'shared_blks_read',
-  SharedBlksWritten = 'shared_blks_written',
-  StddevTime = 'stddev_time',
-  TempBlksRead = 'temp_blks_read',
-  TempBlksWritten = 'temp_blks_written',
-  TotalTime = 'total_time',
-  Userid = 'userid'
-}
-
-export type Pg_Stat_Statements_Stddev_Fields = {
-  __typename?: 'pg_stat_statements_stddev_fields'
-  blk_read_time?: Maybe<Scalars['Float']>
-  blk_write_time?: Maybe<Scalars['Float']>
-  calls?: Maybe<Scalars['Float']>
-  local_blks_dirtied?: Maybe<Scalars['Float']>
-  local_blks_hit?: Maybe<Scalars['Float']>
-  local_blks_read?: Maybe<Scalars['Float']>
-  local_blks_written?: Maybe<Scalars['Float']>
-  max_time?: Maybe<Scalars['Float']>
-  mean_time?: Maybe<Scalars['Float']>
-  min_time?: Maybe<Scalars['Float']>
-  queryid?: Maybe<Scalars['Float']>
-  rows?: Maybe<Scalars['Float']>
-  shared_blks_dirtied?: Maybe<Scalars['Float']>
-  shared_blks_hit?: Maybe<Scalars['Float']>
-  shared_blks_read?: Maybe<Scalars['Float']>
-  shared_blks_written?: Maybe<Scalars['Float']>
-  stddev_time?: Maybe<Scalars['Float']>
-  temp_blks_read?: Maybe<Scalars['Float']>
-  temp_blks_written?: Maybe<Scalars['Float']>
-  total_time?: Maybe<Scalars['Float']>
-}
-
-export type Pg_Stat_Statements_Stddev_Order_By = {
-  blk_read_time?: Maybe<Order_By>
-  blk_write_time?: Maybe<Order_By>
-  calls?: Maybe<Order_By>
-  local_blks_dirtied?: Maybe<Order_By>
-  local_blks_hit?: Maybe<Order_By>
-  local_blks_read?: Maybe<Order_By>
-  local_blks_written?: Maybe<Order_By>
-  max_time?: Maybe<Order_By>
-  mean_time?: Maybe<Order_By>
-  min_time?: Maybe<Order_By>
-  queryid?: Maybe<Order_By>
-  rows?: Maybe<Order_By>
-  shared_blks_dirtied?: Maybe<Order_By>
-  shared_blks_hit?: Maybe<Order_By>
-  shared_blks_read?: Maybe<Order_By>
-  shared_blks_written?: Maybe<Order_By>
-  stddev_time?: Maybe<Order_By>
-  temp_blks_read?: Maybe<Order_By>
-  temp_blks_written?: Maybe<Order_By>
-  total_time?: Maybe<Order_By>
-}
-
-export type Pg_Stat_Statements_Stddev_Pop_Fields = {
-  __typename?: 'pg_stat_statements_stddev_pop_fields'
-  blk_read_time?: Maybe<Scalars['Float']>
-  blk_write_time?: Maybe<Scalars['Float']>
-  calls?: Maybe<Scalars['Float']>
-  local_blks_dirtied?: Maybe<Scalars['Float']>
-  local_blks_hit?: Maybe<Scalars['Float']>
-  local_blks_read?: Maybe<Scalars['Float']>
-  local_blks_written?: Maybe<Scalars['Float']>
-  max_time?: Maybe<Scalars['Float']>
-  mean_time?: Maybe<Scalars['Float']>
-  min_time?: Maybe<Scalars['Float']>
-  queryid?: Maybe<Scalars['Float']>
-  rows?: Maybe<Scalars['Float']>
-  shared_blks_dirtied?: Maybe<Scalars['Float']>
-  shared_blks_hit?: Maybe<Scalars['Float']>
-  shared_blks_read?: Maybe<Scalars['Float']>
-  shared_blks_written?: Maybe<Scalars['Float']>
-  stddev_time?: Maybe<Scalars['Float']>
-  temp_blks_read?: Maybe<Scalars['Float']>
-  temp_blks_written?: Maybe<Scalars['Float']>
-  total_time?: Maybe<Scalars['Float']>
-}
-
-export type Pg_Stat_Statements_Stddev_Pop_Order_By = {
-  blk_read_time?: Maybe<Order_By>
-  blk_write_time?: Maybe<Order_By>
-  calls?: Maybe<Order_By>
-  local_blks_dirtied?: Maybe<Order_By>
-  local_blks_hit?: Maybe<Order_By>
-  local_blks_read?: Maybe<Order_By>
-  local_blks_written?: Maybe<Order_By>
-  max_time?: Maybe<Order_By>
-  mean_time?: Maybe<Order_By>
-  min_time?: Maybe<Order_By>
-  queryid?: Maybe<Order_By>
-  rows?: Maybe<Order_By>
-  shared_blks_dirtied?: Maybe<Order_By>
-  shared_blks_hit?: Maybe<Order_By>
-  shared_blks_read?: Maybe<Order_By>
-  shared_blks_written?: Maybe<Order_By>
-  stddev_time?: Maybe<Order_By>
-  temp_blks_read?: Maybe<Order_By>
-  temp_blks_written?: Maybe<Order_By>
-  total_time?: Maybe<Order_By>
-}
-
-export type Pg_Stat_Statements_Stddev_Samp_Fields = {
-  __typename?: 'pg_stat_statements_stddev_samp_fields'
-  blk_read_time?: Maybe<Scalars['Float']>
-  blk_write_time?: Maybe<Scalars['Float']>
-  calls?: Maybe<Scalars['Float']>
-  local_blks_dirtied?: Maybe<Scalars['Float']>
-  local_blks_hit?: Maybe<Scalars['Float']>
-  local_blks_read?: Maybe<Scalars['Float']>
-  local_blks_written?: Maybe<Scalars['Float']>
-  max_time?: Maybe<Scalars['Float']>
-  mean_time?: Maybe<Scalars['Float']>
-  min_time?: Maybe<Scalars['Float']>
-  queryid?: Maybe<Scalars['Float']>
-  rows?: Maybe<Scalars['Float']>
-  shared_blks_dirtied?: Maybe<Scalars['Float']>
-  shared_blks_hit?: Maybe<Scalars['Float']>
-  shared_blks_read?: Maybe<Scalars['Float']>
-  shared_blks_written?: Maybe<Scalars['Float']>
-  stddev_time?: Maybe<Scalars['Float']>
-  temp_blks_read?: Maybe<Scalars['Float']>
-  temp_blks_written?: Maybe<Scalars['Float']>
-  total_time?: Maybe<Scalars['Float']>
-}
-
-export type Pg_Stat_Statements_Stddev_Samp_Order_By = {
-  blk_read_time?: Maybe<Order_By>
-  blk_write_time?: Maybe<Order_By>
-  calls?: Maybe<Order_By>
-  local_blks_dirtied?: Maybe<Order_By>
-  local_blks_hit?: Maybe<Order_By>
-  local_blks_read?: Maybe<Order_By>
-  local_blks_written?: Maybe<Order_By>
-  max_time?: Maybe<Order_By>
-  mean_time?: Maybe<Order_By>
-  min_time?: Maybe<Order_By>
-  queryid?: Maybe<Order_By>
-  rows?: Maybe<Order_By>
-  shared_blks_dirtied?: Maybe<Order_By>
-  shared_blks_hit?: Maybe<Order_By>
-  shared_blks_read?: Maybe<Order_By>
-  shared_blks_written?: Maybe<Order_By>
-  stddev_time?: Maybe<Order_By>
-  temp_blks_read?: Maybe<Order_By>
-  temp_blks_written?: Maybe<Order_By>
-  total_time?: Maybe<Order_By>
-}
-
-export type Pg_Stat_Statements_Sum_Fields = {
-  __typename?: 'pg_stat_statements_sum_fields'
-  blk_read_time?: Maybe<Scalars['float8']>
-  blk_write_time?: Maybe<Scalars['float8']>
-  calls?: Maybe<Scalars['bigint']>
-  local_blks_dirtied?: Maybe<Scalars['bigint']>
-  local_blks_hit?: Maybe<Scalars['bigint']>
-  local_blks_read?: Maybe<Scalars['bigint']>
-  local_blks_written?: Maybe<Scalars['bigint']>
-  max_time?: Maybe<Scalars['float8']>
-  mean_time?: Maybe<Scalars['float8']>
-  min_time?: Maybe<Scalars['float8']>
-  queryid?: Maybe<Scalars['bigint']>
-  rows?: Maybe<Scalars['bigint']>
-  shared_blks_dirtied?: Maybe<Scalars['bigint']>
-  shared_blks_hit?: Maybe<Scalars['bigint']>
-  shared_blks_read?: Maybe<Scalars['bigint']>
-  shared_blks_written?: Maybe<Scalars['bigint']>
-  stddev_time?: Maybe<Scalars['float8']>
-  temp_blks_read?: Maybe<Scalars['bigint']>
-  temp_blks_written?: Maybe<Scalars['bigint']>
-  total_time?: Maybe<Scalars['float8']>
-}
-
-export type Pg_Stat_Statements_Sum_Order_By = {
-  blk_read_time?: Maybe<Order_By>
-  blk_write_time?: Maybe<Order_By>
-  calls?: Maybe<Order_By>
-  local_blks_dirtied?: Maybe<Order_By>
-  local_blks_hit?: Maybe<Order_By>
-  local_blks_read?: Maybe<Order_By>
-  local_blks_written?: Maybe<Order_By>
-  max_time?: Maybe<Order_By>
-  mean_time?: Maybe<Order_By>
-  min_time?: Maybe<Order_By>
-  queryid?: Maybe<Order_By>
-  rows?: Maybe<Order_By>
-  shared_blks_dirtied?: Maybe<Order_By>
-  shared_blks_hit?: Maybe<Order_By>
-  shared_blks_read?: Maybe<Order_By>
-  shared_blks_written?: Maybe<Order_By>
-  stddev_time?: Maybe<Order_By>
-  temp_blks_read?: Maybe<Order_By>
-  temp_blks_written?: Maybe<Order_By>
-  total_time?: Maybe<Order_By>
-}
-
-export type Pg_Stat_Statements_Var_Pop_Fields = {
-  __typename?: 'pg_stat_statements_var_pop_fields'
-  blk_read_time?: Maybe<Scalars['Float']>
-  blk_write_time?: Maybe<Scalars['Float']>
-  calls?: Maybe<Scalars['Float']>
-  local_blks_dirtied?: Maybe<Scalars['Float']>
-  local_blks_hit?: Maybe<Scalars['Float']>
-  local_blks_read?: Maybe<Scalars['Float']>
-  local_blks_written?: Maybe<Scalars['Float']>
-  max_time?: Maybe<Scalars['Float']>
-  mean_time?: Maybe<Scalars['Float']>
-  min_time?: Maybe<Scalars['Float']>
-  queryid?: Maybe<Scalars['Float']>
-  rows?: Maybe<Scalars['Float']>
-  shared_blks_dirtied?: Maybe<Scalars['Float']>
-  shared_blks_hit?: Maybe<Scalars['Float']>
-  shared_blks_read?: Maybe<Scalars['Float']>
-  shared_blks_written?: Maybe<Scalars['Float']>
-  stddev_time?: Maybe<Scalars['Float']>
-  temp_blks_read?: Maybe<Scalars['Float']>
-  temp_blks_written?: Maybe<Scalars['Float']>
-  total_time?: Maybe<Scalars['Float']>
-}
-
-export type Pg_Stat_Statements_Var_Pop_Order_By = {
-  blk_read_time?: Maybe<Order_By>
-  blk_write_time?: Maybe<Order_By>
-  calls?: Maybe<Order_By>
-  local_blks_dirtied?: Maybe<Order_By>
-  local_blks_hit?: Maybe<Order_By>
-  local_blks_read?: Maybe<Order_By>
-  local_blks_written?: Maybe<Order_By>
-  max_time?: Maybe<Order_By>
-  mean_time?: Maybe<Order_By>
-  min_time?: Maybe<Order_By>
-  queryid?: Maybe<Order_By>
-  rows?: Maybe<Order_By>
-  shared_blks_dirtied?: Maybe<Order_By>
-  shared_blks_hit?: Maybe<Order_By>
-  shared_blks_read?: Maybe<Order_By>
-  shared_blks_written?: Maybe<Order_By>
-  stddev_time?: Maybe<Order_By>
-  temp_blks_read?: Maybe<Order_By>
-  temp_blks_written?: Maybe<Order_By>
-  total_time?: Maybe<Order_By>
-}
-
-export type Pg_Stat_Statements_Var_Samp_Fields = {
-  __typename?: 'pg_stat_statements_var_samp_fields'
-  blk_read_time?: Maybe<Scalars['Float']>
-  blk_write_time?: Maybe<Scalars['Float']>
-  calls?: Maybe<Scalars['Float']>
-  local_blks_dirtied?: Maybe<Scalars['Float']>
-  local_blks_hit?: Maybe<Scalars['Float']>
-  local_blks_read?: Maybe<Scalars['Float']>
-  local_blks_written?: Maybe<Scalars['Float']>
-  max_time?: Maybe<Scalars['Float']>
-  mean_time?: Maybe<Scalars['Float']>
-  min_time?: Maybe<Scalars['Float']>
-  queryid?: Maybe<Scalars['Float']>
-  rows?: Maybe<Scalars['Float']>
-  shared_blks_dirtied?: Maybe<Scalars['Float']>
-  shared_blks_hit?: Maybe<Scalars['Float']>
-  shared_blks_read?: Maybe<Scalars['Float']>
-  shared_blks_written?: Maybe<Scalars['Float']>
-  stddev_time?: Maybe<Scalars['Float']>
-  temp_blks_read?: Maybe<Scalars['Float']>
-  temp_blks_written?: Maybe<Scalars['Float']>
-  total_time?: Maybe<Scalars['Float']>
-}
-
-export type Pg_Stat_Statements_Var_Samp_Order_By = {
-  blk_read_time?: Maybe<Order_By>
-  blk_write_time?: Maybe<Order_By>
-  calls?: Maybe<Order_By>
-  local_blks_dirtied?: Maybe<Order_By>
-  local_blks_hit?: Maybe<Order_By>
-  local_blks_read?: Maybe<Order_By>
-  local_blks_written?: Maybe<Order_By>
-  max_time?: Maybe<Order_By>
-  mean_time?: Maybe<Order_By>
-  min_time?: Maybe<Order_By>
-  queryid?: Maybe<Order_By>
-  rows?: Maybe<Order_By>
-  shared_blks_dirtied?: Maybe<Order_By>
-  shared_blks_hit?: Maybe<Order_By>
-  shared_blks_read?: Maybe<Order_By>
-  shared_blks_written?: Maybe<Order_By>
-  stddev_time?: Maybe<Order_By>
-  temp_blks_read?: Maybe<Order_By>
-  temp_blks_written?: Maybe<Order_By>
-  total_time?: Maybe<Order_By>
-}
-
-export type Pg_Stat_Statements_Variance_Fields = {
-  __typename?: 'pg_stat_statements_variance_fields'
-  blk_read_time?: Maybe<Scalars['Float']>
-  blk_write_time?: Maybe<Scalars['Float']>
-  calls?: Maybe<Scalars['Float']>
-  local_blks_dirtied?: Maybe<Scalars['Float']>
-  local_blks_hit?: Maybe<Scalars['Float']>
-  local_blks_read?: Maybe<Scalars['Float']>
-  local_blks_written?: Maybe<Scalars['Float']>
-  max_time?: Maybe<Scalars['Float']>
-  mean_time?: Maybe<Scalars['Float']>
-  min_time?: Maybe<Scalars['Float']>
-  queryid?: Maybe<Scalars['Float']>
-  rows?: Maybe<Scalars['Float']>
-  shared_blks_dirtied?: Maybe<Scalars['Float']>
-  shared_blks_hit?: Maybe<Scalars['Float']>
-  shared_blks_read?: Maybe<Scalars['Float']>
-  shared_blks_written?: Maybe<Scalars['Float']>
-  stddev_time?: Maybe<Scalars['Float']>
-  temp_blks_read?: Maybe<Scalars['Float']>
-  temp_blks_written?: Maybe<Scalars['Float']>
-  total_time?: Maybe<Scalars['Float']>
-}
-
-export type Pg_Stat_Statements_Variance_Order_By = {
-  blk_read_time?: Maybe<Order_By>
-  blk_write_time?: Maybe<Order_By>
-  calls?: Maybe<Order_By>
-  local_blks_dirtied?: Maybe<Order_By>
-  local_blks_hit?: Maybe<Order_By>
-  local_blks_read?: Maybe<Order_By>
-  local_blks_written?: Maybe<Order_By>
-  max_time?: Maybe<Order_By>
-  mean_time?: Maybe<Order_By>
-  min_time?: Maybe<Order_By>
-  queryid?: Maybe<Order_By>
-  rows?: Maybe<Order_By>
-  shared_blks_dirtied?: Maybe<Order_By>
-  shared_blks_hit?: Maybe<Order_By>
-  shared_blks_read?: Maybe<Order_By>
-  shared_blks_written?: Maybe<Order_By>
-  stddev_time?: Maybe<Order_By>
-  temp_blks_read?: Maybe<Order_By>
-  temp_blks_written?: Maybe<Order_By>
-  total_time?: Maybe<Order_By>
-}
-
 export type Policy_Factory_Create = {
   __typename?: 'policy_factory_create'
   block_number: Scalars['Int']
   event_id: Scalars['String']
   from_address: Scalars['String']
-  inner_policy: Scalars['String']
   log_index: Scalars['Int']
   policy_address: Scalars['String']
   raw_data: Scalars['String']
-  reward: Array<Reward_Calculation_Result>
-  reward_aggregate: Reward_Calculation_Result_Aggregate
   transaction_index: Scalars['Int']
-}
-
-export type Policy_Factory_CreateRewardArgs = {
-  distinct_on?: Maybe<Array<Reward_Calculation_Result_Select_Column>>
-  limit?: Maybe<Scalars['Int']>
-  offset?: Maybe<Scalars['Int']>
-  order_by?: Maybe<Array<Reward_Calculation_Result_Order_By>>
-  where?: Maybe<Reward_Calculation_Result_Bool_Exp>
-}
-
-export type Policy_Factory_CreateReward_AggregateArgs = {
-  distinct_on?: Maybe<Array<Reward_Calculation_Result_Select_Column>>
-  limit?: Maybe<Scalars['Int']>
-  offset?: Maybe<Scalars['Int']>
-  order_by?: Maybe<Array<Reward_Calculation_Result_Order_By>>
-  where?: Maybe<Reward_Calculation_Result_Bool_Exp>
 }
 
 export type Policy_Factory_Create_Aggregate = {
@@ -3685,11 +2596,9 @@ export type Policy_Factory_Create_Bool_Exp = {
   block_number?: Maybe<Int_Comparison_Exp>
   event_id?: Maybe<String_Comparison_Exp>
   from_address?: Maybe<String_Comparison_Exp>
-  inner_policy?: Maybe<String_Comparison_Exp>
   log_index?: Maybe<Int_Comparison_Exp>
   policy_address?: Maybe<String_Comparison_Exp>
   raw_data?: Maybe<String_Comparison_Exp>
-  reward?: Maybe<Reward_Calculation_Result_Bool_Exp>
   transaction_index?: Maybe<Int_Comparison_Exp>
 }
 
@@ -3707,11 +2616,9 @@ export type Policy_Factory_Create_Insert_Input = {
   block_number?: Maybe<Scalars['Int']>
   event_id?: Maybe<Scalars['String']>
   from_address?: Maybe<Scalars['String']>
-  inner_policy?: Maybe<Scalars['String']>
   log_index?: Maybe<Scalars['Int']>
   policy_address?: Maybe<Scalars['String']>
   raw_data?: Maybe<Scalars['String']>
-  reward?: Maybe<Reward_Calculation_Result_Arr_Rel_Insert_Input>
   transaction_index?: Maybe<Scalars['Int']>
 }
 
@@ -3720,7 +2627,6 @@ export type Policy_Factory_Create_Max_Fields = {
   block_number?: Maybe<Scalars['Int']>
   event_id?: Maybe<Scalars['String']>
   from_address?: Maybe<Scalars['String']>
-  inner_policy?: Maybe<Scalars['String']>
   log_index?: Maybe<Scalars['Int']>
   policy_address?: Maybe<Scalars['String']>
   raw_data?: Maybe<Scalars['String']>
@@ -3731,7 +2637,6 @@ export type Policy_Factory_Create_Max_Order_By = {
   block_number?: Maybe<Order_By>
   event_id?: Maybe<Order_By>
   from_address?: Maybe<Order_By>
-  inner_policy?: Maybe<Order_By>
   log_index?: Maybe<Order_By>
   policy_address?: Maybe<Order_By>
   raw_data?: Maybe<Order_By>
@@ -3743,7 +2648,6 @@ export type Policy_Factory_Create_Min_Fields = {
   block_number?: Maybe<Scalars['Int']>
   event_id?: Maybe<Scalars['String']>
   from_address?: Maybe<Scalars['String']>
-  inner_policy?: Maybe<Scalars['String']>
   log_index?: Maybe<Scalars['Int']>
   policy_address?: Maybe<Scalars['String']>
   raw_data?: Maybe<Scalars['String']>
@@ -3754,7 +2658,6 @@ export type Policy_Factory_Create_Min_Order_By = {
   block_number?: Maybe<Order_By>
   event_id?: Maybe<Order_By>
   from_address?: Maybe<Order_By>
-  inner_policy?: Maybe<Order_By>
   log_index?: Maybe<Order_By>
   policy_address?: Maybe<Order_By>
   raw_data?: Maybe<Order_By>
@@ -3782,11 +2685,9 @@ export type Policy_Factory_Create_Order_By = {
   block_number?: Maybe<Order_By>
   event_id?: Maybe<Order_By>
   from_address?: Maybe<Order_By>
-  inner_policy?: Maybe<Order_By>
   log_index?: Maybe<Order_By>
   policy_address?: Maybe<Order_By>
   raw_data?: Maybe<Order_By>
-  reward_aggregate?: Maybe<Reward_Calculation_Result_Aggregate_Order_By>
   transaction_index?: Maybe<Order_By>
 }
 
@@ -3798,7 +2699,6 @@ export enum Policy_Factory_Create_Select_Column {
   BlockNumber = 'block_number',
   EventId = 'event_id',
   FromAddress = 'from_address',
-  InnerPolicy = 'inner_policy',
   LogIndex = 'log_index',
   PolicyAddress = 'policy_address',
   RawData = 'raw_data',
@@ -3809,7 +2709,6 @@ export type Policy_Factory_Create_Set_Input = {
   block_number?: Maybe<Scalars['Int']>
   event_id?: Maybe<Scalars['String']>
   from_address?: Maybe<Scalars['String']>
-  inner_policy?: Maybe<Scalars['String']>
   log_index?: Maybe<Scalars['Int']>
   policy_address?: Maybe<Scalars['String']>
   raw_data?: Maybe<Scalars['String']>
@@ -3872,7 +2771,6 @@ export enum Policy_Factory_Create_Update_Column {
   BlockNumber = 'block_number',
   EventId = 'event_id',
   FromAddress = 'from_address',
-  InnerPolicy = 'inner_policy',
   LogIndex = 'log_index',
   PolicyAddress = 'policy_address',
   RawData = 'raw_data',
@@ -3920,8 +2818,6 @@ export type Policy_Factory_Create_Variance_Order_By = {
 
 export type Property_Authentication = {
   __typename?: 'property_authentication'
-  allocation: Array<Allocator_Allocation_Result>
-  allocation_aggregate: Allocator_Allocation_Result_Aggregate
   authentication_id: Scalars['String']
   block_number: Scalars['Int']
   market: Scalars['String']
@@ -3929,40 +2825,6 @@ export type Property_Authentication = {
   metrics: Scalars['String']
   property: Scalars['String']
   property_creation?: Maybe<Property_Factory_Create>
-  reward: Array<Reward_Calculation_Result>
-  reward_aggregate: Reward_Calculation_Result_Aggregate
-}
-
-export type Property_AuthenticationAllocationArgs = {
-  distinct_on?: Maybe<Array<Allocator_Allocation_Result_Select_Column>>
-  limit?: Maybe<Scalars['Int']>
-  offset?: Maybe<Scalars['Int']>
-  order_by?: Maybe<Array<Allocator_Allocation_Result_Order_By>>
-  where?: Maybe<Allocator_Allocation_Result_Bool_Exp>
-}
-
-export type Property_AuthenticationAllocation_AggregateArgs = {
-  distinct_on?: Maybe<Array<Allocator_Allocation_Result_Select_Column>>
-  limit?: Maybe<Scalars['Int']>
-  offset?: Maybe<Scalars['Int']>
-  order_by?: Maybe<Array<Allocator_Allocation_Result_Order_By>>
-  where?: Maybe<Allocator_Allocation_Result_Bool_Exp>
-}
-
-export type Property_AuthenticationRewardArgs = {
-  distinct_on?: Maybe<Array<Reward_Calculation_Result_Select_Column>>
-  limit?: Maybe<Scalars['Int']>
-  offset?: Maybe<Scalars['Int']>
-  order_by?: Maybe<Array<Reward_Calculation_Result_Order_By>>
-  where?: Maybe<Reward_Calculation_Result_Bool_Exp>
-}
-
-export type Property_AuthenticationReward_AggregateArgs = {
-  distinct_on?: Maybe<Array<Reward_Calculation_Result_Select_Column>>
-  limit?: Maybe<Scalars['Int']>
-  offset?: Maybe<Scalars['Int']>
-  order_by?: Maybe<Array<Reward_Calculation_Result_Order_By>>
-  where?: Maybe<Reward_Calculation_Result_Bool_Exp>
 }
 
 export type Property_Authentication_Aggregate = {
@@ -4023,7 +2885,6 @@ export type Property_Authentication_Bool_Exp = {
   _and?: Maybe<Array<Maybe<Property_Authentication_Bool_Exp>>>
   _not?: Maybe<Property_Authentication_Bool_Exp>
   _or?: Maybe<Array<Maybe<Property_Authentication_Bool_Exp>>>
-  allocation?: Maybe<Allocator_Allocation_Result_Bool_Exp>
   authentication_id?: Maybe<String_Comparison_Exp>
   block_number?: Maybe<Int_Comparison_Exp>
   market?: Maybe<String_Comparison_Exp>
@@ -4031,7 +2892,6 @@ export type Property_Authentication_Bool_Exp = {
   metrics?: Maybe<String_Comparison_Exp>
   property?: Maybe<String_Comparison_Exp>
   property_creation?: Maybe<Property_Factory_Create_Bool_Exp>
-  reward?: Maybe<Reward_Calculation_Result_Bool_Exp>
 }
 
 export enum Property_Authentication_Constraint {
@@ -4040,8 +2900,6 @@ export enum Property_Authentication_Constraint {
 
 export type Property_Authentication_Deleted = {
   __typename?: 'property_authentication_deleted'
-  allocation: Array<Allocator_Allocation_Result>
-  allocation_aggregate: Allocator_Allocation_Result_Aggregate
   authentication_id: Scalars['String']
   block_number: Scalars['Int']
   market: Scalars['String']
@@ -4049,40 +2907,6 @@ export type Property_Authentication_Deleted = {
   metrics: Scalars['String']
   property: Scalars['String']
   property_creation?: Maybe<Property_Factory_Create>
-  reward: Array<Reward_Calculation_Result>
-  reward_aggregate: Reward_Calculation_Result_Aggregate
-}
-
-export type Property_Authentication_DeletedAllocationArgs = {
-  distinct_on?: Maybe<Array<Allocator_Allocation_Result_Select_Column>>
-  limit?: Maybe<Scalars['Int']>
-  offset?: Maybe<Scalars['Int']>
-  order_by?: Maybe<Array<Allocator_Allocation_Result_Order_By>>
-  where?: Maybe<Allocator_Allocation_Result_Bool_Exp>
-}
-
-export type Property_Authentication_DeletedAllocation_AggregateArgs = {
-  distinct_on?: Maybe<Array<Allocator_Allocation_Result_Select_Column>>
-  limit?: Maybe<Scalars['Int']>
-  offset?: Maybe<Scalars['Int']>
-  order_by?: Maybe<Array<Allocator_Allocation_Result_Order_By>>
-  where?: Maybe<Allocator_Allocation_Result_Bool_Exp>
-}
-
-export type Property_Authentication_DeletedRewardArgs = {
-  distinct_on?: Maybe<Array<Reward_Calculation_Result_Select_Column>>
-  limit?: Maybe<Scalars['Int']>
-  offset?: Maybe<Scalars['Int']>
-  order_by?: Maybe<Array<Reward_Calculation_Result_Order_By>>
-  where?: Maybe<Reward_Calculation_Result_Bool_Exp>
-}
-
-export type Property_Authentication_DeletedReward_AggregateArgs = {
-  distinct_on?: Maybe<Array<Reward_Calculation_Result_Select_Column>>
-  limit?: Maybe<Scalars['Int']>
-  offset?: Maybe<Scalars['Int']>
-  order_by?: Maybe<Array<Reward_Calculation_Result_Order_By>>
-  where?: Maybe<Reward_Calculation_Result_Bool_Exp>
 }
 
 export type Property_Authentication_Deleted_Aggregate = {
@@ -4143,7 +2967,6 @@ export type Property_Authentication_Deleted_Bool_Exp = {
   _and?: Maybe<Array<Maybe<Property_Authentication_Deleted_Bool_Exp>>>
   _not?: Maybe<Property_Authentication_Deleted_Bool_Exp>
   _or?: Maybe<Array<Maybe<Property_Authentication_Deleted_Bool_Exp>>>
-  allocation?: Maybe<Allocator_Allocation_Result_Bool_Exp>
   authentication_id?: Maybe<String_Comparison_Exp>
   block_number?: Maybe<Int_Comparison_Exp>
   market?: Maybe<String_Comparison_Exp>
@@ -4151,7 +2974,6 @@ export type Property_Authentication_Deleted_Bool_Exp = {
   metrics?: Maybe<String_Comparison_Exp>
   property?: Maybe<String_Comparison_Exp>
   property_creation?: Maybe<Property_Factory_Create_Bool_Exp>
-  reward?: Maybe<Reward_Calculation_Result_Bool_Exp>
 }
 
 export enum Property_Authentication_Deleted_Constraint {
@@ -4163,7 +2985,6 @@ export type Property_Authentication_Deleted_Inc_Input = {
 }
 
 export type Property_Authentication_Deleted_Insert_Input = {
-  allocation?: Maybe<Allocator_Allocation_Result_Arr_Rel_Insert_Input>
   authentication_id?: Maybe<Scalars['String']>
   block_number?: Maybe<Scalars['Int']>
   market?: Maybe<Scalars['String']>
@@ -4171,7 +2992,6 @@ export type Property_Authentication_Deleted_Insert_Input = {
   metrics?: Maybe<Scalars['String']>
   property?: Maybe<Scalars['String']>
   property_creation?: Maybe<Property_Factory_Create_Obj_Rel_Insert_Input>
-  reward?: Maybe<Reward_Calculation_Result_Arr_Rel_Insert_Input>
 }
 
 export type Property_Authentication_Deleted_Max_Fields = {
@@ -4226,7 +3046,6 @@ export type Property_Authentication_Deleted_On_Conflict = {
 }
 
 export type Property_Authentication_Deleted_Order_By = {
-  allocation_aggregate?: Maybe<Allocator_Allocation_Result_Aggregate_Order_By>
   authentication_id?: Maybe<Order_By>
   block_number?: Maybe<Order_By>
   market?: Maybe<Order_By>
@@ -4234,7 +3053,6 @@ export type Property_Authentication_Deleted_Order_By = {
   metrics?: Maybe<Order_By>
   property?: Maybe<Order_By>
   property_creation?: Maybe<Property_Factory_Create_Order_By>
-  reward_aggregate?: Maybe<Reward_Calculation_Result_Aggregate_Order_By>
 }
 
 export type Property_Authentication_Deleted_Pk_Columns_Input = {
@@ -4334,7 +3152,6 @@ export type Property_Authentication_Inc_Input = {
 }
 
 export type Property_Authentication_Insert_Input = {
-  allocation?: Maybe<Allocator_Allocation_Result_Arr_Rel_Insert_Input>
   authentication_id?: Maybe<Scalars['String']>
   block_number?: Maybe<Scalars['Int']>
   market?: Maybe<Scalars['String']>
@@ -4342,7 +3159,6 @@ export type Property_Authentication_Insert_Input = {
   metrics?: Maybe<Scalars['String']>
   property?: Maybe<Scalars['String']>
   property_creation?: Maybe<Property_Factory_Create_Obj_Rel_Insert_Input>
-  reward?: Maybe<Reward_Calculation_Result_Arr_Rel_Insert_Input>
 }
 
 export type Property_Authentication_Max_Fields = {
@@ -4397,7 +3213,6 @@ export type Property_Authentication_On_Conflict = {
 }
 
 export type Property_Authentication_Order_By = {
-  allocation_aggregate?: Maybe<Allocator_Allocation_Result_Aggregate_Order_By>
   authentication_id?: Maybe<Order_By>
   block_number?: Maybe<Order_By>
   market?: Maybe<Order_By>
@@ -4405,7 +3220,6 @@ export type Property_Authentication_Order_By = {
   metrics?: Maybe<Order_By>
   property?: Maybe<Order_By>
   property_creation?: Maybe<Property_Factory_Create_Order_By>
-  reward_aggregate?: Maybe<Reward_Calculation_Result_Aggregate_Order_By>
 }
 
 export type Property_Authentication_Pk_Columns_Input = {
@@ -4502,37 +3316,22 @@ export type Property_Authentication_Variance_Order_By = {
 
 export type Property_Factory_Create = {
   __typename?: 'property_factory_create'
-  allocation: Array<Allocator_Allocation_Result>
-  allocation_aggregate: Allocator_Allocation_Result_Aggregate
   authentication: Array<Property_Authentication>
   authentication_aggregate: Property_Authentication_Aggregate
   block_number: Scalars['Int']
+  current_lockup?: Maybe<Property_Lockup_Sum_Values>
   deleted_authentication: Array<Property_Authentication_Deleted>
   deleted_authentication_aggregate: Property_Authentication_Deleted_Aggregate
   event_id: Scalars['String']
   from_address: Scalars['String']
+  lockedup: Array<Lockup_Lockedup>
+  lockedup_aggregate: Lockup_Lockedup_Aggregate
   log_index: Scalars['Int']
   property: Scalars['String']
   property_creation: Array<Lockup_Lockedup>
   property_creation_aggregate: Lockup_Lockedup_Aggregate
   raw_data: Scalars['String']
   transaction_index: Scalars['Int']
-}
-
-export type Property_Factory_CreateAllocationArgs = {
-  distinct_on?: Maybe<Array<Allocator_Allocation_Result_Select_Column>>
-  limit?: Maybe<Scalars['Int']>
-  offset?: Maybe<Scalars['Int']>
-  order_by?: Maybe<Array<Allocator_Allocation_Result_Order_By>>
-  where?: Maybe<Allocator_Allocation_Result_Bool_Exp>
-}
-
-export type Property_Factory_CreateAllocation_AggregateArgs = {
-  distinct_on?: Maybe<Array<Allocator_Allocation_Result_Select_Column>>
-  limit?: Maybe<Scalars['Int']>
-  offset?: Maybe<Scalars['Int']>
-  order_by?: Maybe<Array<Allocator_Allocation_Result_Order_By>>
-  where?: Maybe<Allocator_Allocation_Result_Bool_Exp>
 }
 
 export type Property_Factory_CreateAuthenticationArgs = {
@@ -4565,6 +3364,22 @@ export type Property_Factory_CreateDeleted_Authentication_AggregateArgs = {
   offset?: Maybe<Scalars['Int']>
   order_by?: Maybe<Array<Property_Authentication_Deleted_Order_By>>
   where?: Maybe<Property_Authentication_Deleted_Bool_Exp>
+}
+
+export type Property_Factory_CreateLockedupArgs = {
+  distinct_on?: Maybe<Array<Lockup_Lockedup_Select_Column>>
+  limit?: Maybe<Scalars['Int']>
+  offset?: Maybe<Scalars['Int']>
+  order_by?: Maybe<Array<Lockup_Lockedup_Order_By>>
+  where?: Maybe<Lockup_Lockedup_Bool_Exp>
+}
+
+export type Property_Factory_CreateLockedup_AggregateArgs = {
+  distinct_on?: Maybe<Array<Lockup_Lockedup_Select_Column>>
+  limit?: Maybe<Scalars['Int']>
+  offset?: Maybe<Scalars['Int']>
+  order_by?: Maybe<Array<Lockup_Lockedup_Order_By>>
+  where?: Maybe<Lockup_Lockedup_Bool_Exp>
 }
 
 export type Property_Factory_CreateProperty_CreationArgs = {
@@ -4645,12 +3460,13 @@ export type Property_Factory_Create_Bool_Exp = {
   _and?: Maybe<Array<Maybe<Property_Factory_Create_Bool_Exp>>>
   _not?: Maybe<Property_Factory_Create_Bool_Exp>
   _or?: Maybe<Array<Maybe<Property_Factory_Create_Bool_Exp>>>
-  allocation?: Maybe<Allocator_Allocation_Result_Bool_Exp>
   authentication?: Maybe<Property_Authentication_Bool_Exp>
   block_number?: Maybe<Int_Comparison_Exp>
+  current_lockup?: Maybe<Property_Lockup_Sum_Values_Bool_Exp>
   deleted_authentication?: Maybe<Property_Authentication_Deleted_Bool_Exp>
   event_id?: Maybe<String_Comparison_Exp>
   from_address?: Maybe<String_Comparison_Exp>
+  lockedup?: Maybe<Lockup_Lockedup_Bool_Exp>
   log_index?: Maybe<Int_Comparison_Exp>
   property?: Maybe<String_Comparison_Exp>
   property_creation?: Maybe<Lockup_Lockedup_Bool_Exp>
@@ -4669,12 +3485,12 @@ export type Property_Factory_Create_Inc_Input = {
 }
 
 export type Property_Factory_Create_Insert_Input = {
-  allocation?: Maybe<Allocator_Allocation_Result_Arr_Rel_Insert_Input>
   authentication?: Maybe<Property_Authentication_Arr_Rel_Insert_Input>
   block_number?: Maybe<Scalars['Int']>
   deleted_authentication?: Maybe<Property_Authentication_Deleted_Arr_Rel_Insert_Input>
   event_id?: Maybe<Scalars['String']>
   from_address?: Maybe<Scalars['String']>
+  lockedup?: Maybe<Lockup_Lockedup_Arr_Rel_Insert_Input>
   log_index?: Maybe<Scalars['Int']>
   property?: Maybe<Scalars['String']>
   property_creation?: Maybe<Lockup_Lockedup_Arr_Rel_Insert_Input>
@@ -4742,12 +3558,13 @@ export type Property_Factory_Create_On_Conflict = {
 }
 
 export type Property_Factory_Create_Order_By = {
-  allocation_aggregate?: Maybe<Allocator_Allocation_Result_Aggregate_Order_By>
   authentication_aggregate?: Maybe<Property_Authentication_Aggregate_Order_By>
   block_number?: Maybe<Order_By>
+  current_lockup?: Maybe<Property_Lockup_Sum_Values_Order_By>
   deleted_authentication_aggregate?: Maybe<Property_Authentication_Deleted_Aggregate_Order_By>
   event_id?: Maybe<Order_By>
   from_address?: Maybe<Order_By>
+  lockedup_aggregate?: Maybe<Lockup_Lockedup_Aggregate_Order_By>
   log_index?: Maybe<Order_By>
   property?: Maybe<Order_By>
   property_creation_aggregate?: Maybe<Lockup_Lockedup_Aggregate_Order_By>
@@ -4880,6 +3697,422 @@ export type Property_Factory_Create_Variance_Order_By = {
   transaction_index?: Maybe<Order_By>
 }
 
+export type Property_Lockup = {
+  __typename?: 'property_lockup'
+  account_address: Scalars['String']
+  block_number: Scalars['Int']
+  locked_up_event_id: Scalars['String']
+  property_address: Scalars['String']
+  value: Scalars['numeric']
+}
+
+export type Property_Lockup_Aggregate = {
+  __typename?: 'property_lockup_aggregate'
+  aggregate?: Maybe<Property_Lockup_Aggregate_Fields>
+  nodes: Array<Property_Lockup>
+}
+
+export type Property_Lockup_Aggregate_Fields = {
+  __typename?: 'property_lockup_aggregate_fields'
+  avg?: Maybe<Property_Lockup_Avg_Fields>
+  count?: Maybe<Scalars['Int']>
+  max?: Maybe<Property_Lockup_Max_Fields>
+  min?: Maybe<Property_Lockup_Min_Fields>
+  stddev?: Maybe<Property_Lockup_Stddev_Fields>
+  stddev_pop?: Maybe<Property_Lockup_Stddev_Pop_Fields>
+  stddev_samp?: Maybe<Property_Lockup_Stddev_Samp_Fields>
+  sum?: Maybe<Property_Lockup_Sum_Fields>
+  var_pop?: Maybe<Property_Lockup_Var_Pop_Fields>
+  var_samp?: Maybe<Property_Lockup_Var_Samp_Fields>
+  variance?: Maybe<Property_Lockup_Variance_Fields>
+}
+
+export type Property_Lockup_Aggregate_FieldsCountArgs = {
+  columns?: Maybe<Array<Property_Lockup_Select_Column>>
+  distinct?: Maybe<Scalars['Boolean']>
+}
+
+export type Property_Lockup_Aggregate_Order_By = {
+  avg?: Maybe<Property_Lockup_Avg_Order_By>
+  count?: Maybe<Order_By>
+  max?: Maybe<Property_Lockup_Max_Order_By>
+  min?: Maybe<Property_Lockup_Min_Order_By>
+  stddev?: Maybe<Property_Lockup_Stddev_Order_By>
+  stddev_pop?: Maybe<Property_Lockup_Stddev_Pop_Order_By>
+  stddev_samp?: Maybe<Property_Lockup_Stddev_Samp_Order_By>
+  sum?: Maybe<Property_Lockup_Sum_Order_By>
+  var_pop?: Maybe<Property_Lockup_Var_Pop_Order_By>
+  var_samp?: Maybe<Property_Lockup_Var_Samp_Order_By>
+  variance?: Maybe<Property_Lockup_Variance_Order_By>
+}
+
+export type Property_Lockup_Arr_Rel_Insert_Input = {
+  data: Array<Property_Lockup_Insert_Input>
+  on_conflict?: Maybe<Property_Lockup_On_Conflict>
+}
+
+export type Property_Lockup_Avg_Fields = {
+  __typename?: 'property_lockup_avg_fields'
+  block_number?: Maybe<Scalars['Float']>
+  value?: Maybe<Scalars['Float']>
+}
+
+export type Property_Lockup_Avg_Order_By = {
+  block_number?: Maybe<Order_By>
+  value?: Maybe<Order_By>
+}
+
+export type Property_Lockup_Bool_Exp = {
+  _and?: Maybe<Array<Maybe<Property_Lockup_Bool_Exp>>>
+  _not?: Maybe<Property_Lockup_Bool_Exp>
+  _or?: Maybe<Array<Maybe<Property_Lockup_Bool_Exp>>>
+  account_address?: Maybe<String_Comparison_Exp>
+  block_number?: Maybe<Int_Comparison_Exp>
+  locked_up_event_id?: Maybe<String_Comparison_Exp>
+  property_address?: Maybe<String_Comparison_Exp>
+  value?: Maybe<Numeric_Comparison_Exp>
+}
+
+export enum Property_Lockup_Constraint {
+  PropertyLockupPkey = 'property_lockup_pkey'
+}
+
+export type Property_Lockup_Inc_Input = {
+  block_number?: Maybe<Scalars['Int']>
+  value?: Maybe<Scalars['numeric']>
+}
+
+export type Property_Lockup_Insert_Input = {
+  account_address?: Maybe<Scalars['String']>
+  block_number?: Maybe<Scalars['Int']>
+  locked_up_event_id?: Maybe<Scalars['String']>
+  property_address?: Maybe<Scalars['String']>
+  value?: Maybe<Scalars['numeric']>
+}
+
+export type Property_Lockup_Max_Fields = {
+  __typename?: 'property_lockup_max_fields'
+  account_address?: Maybe<Scalars['String']>
+  block_number?: Maybe<Scalars['Int']>
+  locked_up_event_id?: Maybe<Scalars['String']>
+  property_address?: Maybe<Scalars['String']>
+  value?: Maybe<Scalars['numeric']>
+}
+
+export type Property_Lockup_Max_Order_By = {
+  account_address?: Maybe<Order_By>
+  block_number?: Maybe<Order_By>
+  locked_up_event_id?: Maybe<Order_By>
+  property_address?: Maybe<Order_By>
+  value?: Maybe<Order_By>
+}
+
+export type Property_Lockup_Min_Fields = {
+  __typename?: 'property_lockup_min_fields'
+  account_address?: Maybe<Scalars['String']>
+  block_number?: Maybe<Scalars['Int']>
+  locked_up_event_id?: Maybe<Scalars['String']>
+  property_address?: Maybe<Scalars['String']>
+  value?: Maybe<Scalars['numeric']>
+}
+
+export type Property_Lockup_Min_Order_By = {
+  account_address?: Maybe<Order_By>
+  block_number?: Maybe<Order_By>
+  locked_up_event_id?: Maybe<Order_By>
+  property_address?: Maybe<Order_By>
+  value?: Maybe<Order_By>
+}
+
+export type Property_Lockup_Mutation_Response = {
+  __typename?: 'property_lockup_mutation_response'
+  affected_rows: Scalars['Int']
+  returning: Array<Property_Lockup>
+}
+
+export type Property_Lockup_Obj_Rel_Insert_Input = {
+  data: Property_Lockup_Insert_Input
+  on_conflict?: Maybe<Property_Lockup_On_Conflict>
+}
+
+export type Property_Lockup_On_Conflict = {
+  constraint: Property_Lockup_Constraint
+  update_columns: Array<Property_Lockup_Update_Column>
+  where?: Maybe<Property_Lockup_Bool_Exp>
+}
+
+export type Property_Lockup_Order_By = {
+  account_address?: Maybe<Order_By>
+  block_number?: Maybe<Order_By>
+  locked_up_event_id?: Maybe<Order_By>
+  property_address?: Maybe<Order_By>
+  value?: Maybe<Order_By>
+}
+
+export type Property_Lockup_Pk_Columns_Input = {
+  account_address: Scalars['String']
+  property_address: Scalars['String']
+}
+
+export enum Property_Lockup_Select_Column {
+  AccountAddress = 'account_address',
+  BlockNumber = 'block_number',
+  LockedUpEventId = 'locked_up_event_id',
+  PropertyAddress = 'property_address',
+  Value = 'value'
+}
+
+export type Property_Lockup_Set_Input = {
+  account_address?: Maybe<Scalars['String']>
+  block_number?: Maybe<Scalars['Int']>
+  locked_up_event_id?: Maybe<Scalars['String']>
+  property_address?: Maybe<Scalars['String']>
+  value?: Maybe<Scalars['numeric']>
+}
+
+export type Property_Lockup_Stddev_Fields = {
+  __typename?: 'property_lockup_stddev_fields'
+  block_number?: Maybe<Scalars['Float']>
+  value?: Maybe<Scalars['Float']>
+}
+
+export type Property_Lockup_Stddev_Order_By = {
+  block_number?: Maybe<Order_By>
+  value?: Maybe<Order_By>
+}
+
+export type Property_Lockup_Stddev_Pop_Fields = {
+  __typename?: 'property_lockup_stddev_pop_fields'
+  block_number?: Maybe<Scalars['Float']>
+  value?: Maybe<Scalars['Float']>
+}
+
+export type Property_Lockup_Stddev_Pop_Order_By = {
+  block_number?: Maybe<Order_By>
+  value?: Maybe<Order_By>
+}
+
+export type Property_Lockup_Stddev_Samp_Fields = {
+  __typename?: 'property_lockup_stddev_samp_fields'
+  block_number?: Maybe<Scalars['Float']>
+  value?: Maybe<Scalars['Float']>
+}
+
+export type Property_Lockup_Stddev_Samp_Order_By = {
+  block_number?: Maybe<Order_By>
+  value?: Maybe<Order_By>
+}
+
+export type Property_Lockup_Sum_Fields = {
+  __typename?: 'property_lockup_sum_fields'
+  block_number?: Maybe<Scalars['Int']>
+  value?: Maybe<Scalars['numeric']>
+}
+
+export type Property_Lockup_Sum_Order_By = {
+  block_number?: Maybe<Order_By>
+  value?: Maybe<Order_By>
+}
+
+export type Property_Lockup_Sum_Values = {
+  __typename?: 'property_lockup_sum_values'
+  property_address?: Maybe<Scalars['String']>
+  sum_values?: Maybe<Scalars['numeric']>
+}
+
+export type Property_Lockup_Sum_Values_Aggregate = {
+  __typename?: 'property_lockup_sum_values_aggregate'
+  aggregate?: Maybe<Property_Lockup_Sum_Values_Aggregate_Fields>
+  nodes: Array<Property_Lockup_Sum_Values>
+}
+
+export type Property_Lockup_Sum_Values_Aggregate_Fields = {
+  __typename?: 'property_lockup_sum_values_aggregate_fields'
+  avg?: Maybe<Property_Lockup_Sum_Values_Avg_Fields>
+  count?: Maybe<Scalars['Int']>
+  max?: Maybe<Property_Lockup_Sum_Values_Max_Fields>
+  min?: Maybe<Property_Lockup_Sum_Values_Min_Fields>
+  stddev?: Maybe<Property_Lockup_Sum_Values_Stddev_Fields>
+  stddev_pop?: Maybe<Property_Lockup_Sum_Values_Stddev_Pop_Fields>
+  stddev_samp?: Maybe<Property_Lockup_Sum_Values_Stddev_Samp_Fields>
+  sum?: Maybe<Property_Lockup_Sum_Values_Sum_Fields>
+  var_pop?: Maybe<Property_Lockup_Sum_Values_Var_Pop_Fields>
+  var_samp?: Maybe<Property_Lockup_Sum_Values_Var_Samp_Fields>
+  variance?: Maybe<Property_Lockup_Sum_Values_Variance_Fields>
+}
+
+export type Property_Lockup_Sum_Values_Aggregate_FieldsCountArgs = {
+  columns?: Maybe<Array<Property_Lockup_Sum_Values_Select_Column>>
+  distinct?: Maybe<Scalars['Boolean']>
+}
+
+export type Property_Lockup_Sum_Values_Aggregate_Order_By = {
+  avg?: Maybe<Property_Lockup_Sum_Values_Avg_Order_By>
+  count?: Maybe<Order_By>
+  max?: Maybe<Property_Lockup_Sum_Values_Max_Order_By>
+  min?: Maybe<Property_Lockup_Sum_Values_Min_Order_By>
+  stddev?: Maybe<Property_Lockup_Sum_Values_Stddev_Order_By>
+  stddev_pop?: Maybe<Property_Lockup_Sum_Values_Stddev_Pop_Order_By>
+  stddev_samp?: Maybe<Property_Lockup_Sum_Values_Stddev_Samp_Order_By>
+  sum?: Maybe<Property_Lockup_Sum_Values_Sum_Order_By>
+  var_pop?: Maybe<Property_Lockup_Sum_Values_Var_Pop_Order_By>
+  var_samp?: Maybe<Property_Lockup_Sum_Values_Var_Samp_Order_By>
+  variance?: Maybe<Property_Lockup_Sum_Values_Variance_Order_By>
+}
+
+export type Property_Lockup_Sum_Values_Avg_Fields = {
+  __typename?: 'property_lockup_sum_values_avg_fields'
+  sum_values?: Maybe<Scalars['Float']>
+}
+
+export type Property_Lockup_Sum_Values_Avg_Order_By = {
+  sum_values?: Maybe<Order_By>
+}
+
+export type Property_Lockup_Sum_Values_Bool_Exp = {
+  _and?: Maybe<Array<Maybe<Property_Lockup_Sum_Values_Bool_Exp>>>
+  _not?: Maybe<Property_Lockup_Sum_Values_Bool_Exp>
+  _or?: Maybe<Array<Maybe<Property_Lockup_Sum_Values_Bool_Exp>>>
+  property_address?: Maybe<String_Comparison_Exp>
+  sum_values?: Maybe<Numeric_Comparison_Exp>
+}
+
+export type Property_Lockup_Sum_Values_Max_Fields = {
+  __typename?: 'property_lockup_sum_values_max_fields'
+  property_address?: Maybe<Scalars['String']>
+  sum_values?: Maybe<Scalars['numeric']>
+}
+
+export type Property_Lockup_Sum_Values_Max_Order_By = {
+  property_address?: Maybe<Order_By>
+  sum_values?: Maybe<Order_By>
+}
+
+export type Property_Lockup_Sum_Values_Min_Fields = {
+  __typename?: 'property_lockup_sum_values_min_fields'
+  property_address?: Maybe<Scalars['String']>
+  sum_values?: Maybe<Scalars['numeric']>
+}
+
+export type Property_Lockup_Sum_Values_Min_Order_By = {
+  property_address?: Maybe<Order_By>
+  sum_values?: Maybe<Order_By>
+}
+
+export type Property_Lockup_Sum_Values_Order_By = {
+  property_address?: Maybe<Order_By>
+  sum_values?: Maybe<Order_By>
+}
+
+export enum Property_Lockup_Sum_Values_Select_Column {
+  PropertyAddress = 'property_address',
+  SumValues = 'sum_values'
+}
+
+export type Property_Lockup_Sum_Values_Stddev_Fields = {
+  __typename?: 'property_lockup_sum_values_stddev_fields'
+  sum_values?: Maybe<Scalars['Float']>
+}
+
+export type Property_Lockup_Sum_Values_Stddev_Order_By = {
+  sum_values?: Maybe<Order_By>
+}
+
+export type Property_Lockup_Sum_Values_Stddev_Pop_Fields = {
+  __typename?: 'property_lockup_sum_values_stddev_pop_fields'
+  sum_values?: Maybe<Scalars['Float']>
+}
+
+export type Property_Lockup_Sum_Values_Stddev_Pop_Order_By = {
+  sum_values?: Maybe<Order_By>
+}
+
+export type Property_Lockup_Sum_Values_Stddev_Samp_Fields = {
+  __typename?: 'property_lockup_sum_values_stddev_samp_fields'
+  sum_values?: Maybe<Scalars['Float']>
+}
+
+export type Property_Lockup_Sum_Values_Stddev_Samp_Order_By = {
+  sum_values?: Maybe<Order_By>
+}
+
+export type Property_Lockup_Sum_Values_Sum_Fields = {
+  __typename?: 'property_lockup_sum_values_sum_fields'
+  sum_values?: Maybe<Scalars['numeric']>
+}
+
+export type Property_Lockup_Sum_Values_Sum_Order_By = {
+  sum_values?: Maybe<Order_By>
+}
+
+export type Property_Lockup_Sum_Values_Var_Pop_Fields = {
+  __typename?: 'property_lockup_sum_values_var_pop_fields'
+  sum_values?: Maybe<Scalars['Float']>
+}
+
+export type Property_Lockup_Sum_Values_Var_Pop_Order_By = {
+  sum_values?: Maybe<Order_By>
+}
+
+export type Property_Lockup_Sum_Values_Var_Samp_Fields = {
+  __typename?: 'property_lockup_sum_values_var_samp_fields'
+  sum_values?: Maybe<Scalars['Float']>
+}
+
+export type Property_Lockup_Sum_Values_Var_Samp_Order_By = {
+  sum_values?: Maybe<Order_By>
+}
+
+export type Property_Lockup_Sum_Values_Variance_Fields = {
+  __typename?: 'property_lockup_sum_values_variance_fields'
+  sum_values?: Maybe<Scalars['Float']>
+}
+
+export type Property_Lockup_Sum_Values_Variance_Order_By = {
+  sum_values?: Maybe<Order_By>
+}
+
+export enum Property_Lockup_Update_Column {
+  AccountAddress = 'account_address',
+  BlockNumber = 'block_number',
+  LockedUpEventId = 'locked_up_event_id',
+  PropertyAddress = 'property_address',
+  Value = 'value'
+}
+
+export type Property_Lockup_Var_Pop_Fields = {
+  __typename?: 'property_lockup_var_pop_fields'
+  block_number?: Maybe<Scalars['Float']>
+  value?: Maybe<Scalars['Float']>
+}
+
+export type Property_Lockup_Var_Pop_Order_By = {
+  block_number?: Maybe<Order_By>
+  value?: Maybe<Order_By>
+}
+
+export type Property_Lockup_Var_Samp_Fields = {
+  __typename?: 'property_lockup_var_samp_fields'
+  block_number?: Maybe<Scalars['Float']>
+  value?: Maybe<Scalars['Float']>
+}
+
+export type Property_Lockup_Var_Samp_Order_By = {
+  block_number?: Maybe<Order_By>
+  value?: Maybe<Order_By>
+}
+
+export type Property_Lockup_Variance_Fields = {
+  __typename?: 'property_lockup_variance_fields'
+  block_number?: Maybe<Scalars['Float']>
+  value?: Maybe<Scalars['Float']>
+}
+
+export type Property_Lockup_Variance_Order_By = {
+  block_number?: Maybe<Order_By>
+  value?: Maybe<Order_By>
+}
+
 export type Property_Meta = {
   __typename?: 'property_meta'
   author: Scalars['String']
@@ -4888,6 +4121,7 @@ export type Property_Meta = {
   property: Scalars['String']
   sender: Scalars['String']
   symbol: Scalars['String']
+  total_supply: Scalars['numeric']
 }
 
 export type Property_Meta_Aggregate = {
@@ -4938,10 +4172,12 @@ export type Property_Meta_Arr_Rel_Insert_Input = {
 export type Property_Meta_Avg_Fields = {
   __typename?: 'property_meta_avg_fields'
   block_number?: Maybe<Scalars['Float']>
+  total_supply?: Maybe<Scalars['Float']>
 }
 
 export type Property_Meta_Avg_Order_By = {
   block_number?: Maybe<Order_By>
+  total_supply?: Maybe<Order_By>
 }
 
 export type Property_Meta_Bool_Exp = {
@@ -4954,6 +4190,7 @@ export type Property_Meta_Bool_Exp = {
   property?: Maybe<String_Comparison_Exp>
   sender?: Maybe<String_Comparison_Exp>
   symbol?: Maybe<String_Comparison_Exp>
+  total_supply?: Maybe<Numeric_Comparison_Exp>
 }
 
 export enum Property_Meta_Constraint {
@@ -4962,6 +4199,7 @@ export enum Property_Meta_Constraint {
 
 export type Property_Meta_Inc_Input = {
   block_number?: Maybe<Scalars['Int']>
+  total_supply?: Maybe<Scalars['numeric']>
 }
 
 export type Property_Meta_Insert_Input = {
@@ -4971,6 +4209,7 @@ export type Property_Meta_Insert_Input = {
   property?: Maybe<Scalars['String']>
   sender?: Maybe<Scalars['String']>
   symbol?: Maybe<Scalars['String']>
+  total_supply?: Maybe<Scalars['numeric']>
 }
 
 export type Property_Meta_Max_Fields = {
@@ -4981,6 +4220,7 @@ export type Property_Meta_Max_Fields = {
   property?: Maybe<Scalars['String']>
   sender?: Maybe<Scalars['String']>
   symbol?: Maybe<Scalars['String']>
+  total_supply?: Maybe<Scalars['numeric']>
 }
 
 export type Property_Meta_Max_Order_By = {
@@ -4990,6 +4230,7 @@ export type Property_Meta_Max_Order_By = {
   property?: Maybe<Order_By>
   sender?: Maybe<Order_By>
   symbol?: Maybe<Order_By>
+  total_supply?: Maybe<Order_By>
 }
 
 export type Property_Meta_Min_Fields = {
@@ -5000,6 +4241,7 @@ export type Property_Meta_Min_Fields = {
   property?: Maybe<Scalars['String']>
   sender?: Maybe<Scalars['String']>
   symbol?: Maybe<Scalars['String']>
+  total_supply?: Maybe<Scalars['numeric']>
 }
 
 export type Property_Meta_Min_Order_By = {
@@ -5009,6 +4251,7 @@ export type Property_Meta_Min_Order_By = {
   property?: Maybe<Order_By>
   sender?: Maybe<Order_By>
   symbol?: Maybe<Order_By>
+  total_supply?: Maybe<Order_By>
 }
 
 export type Property_Meta_Mutation_Response = {
@@ -5035,6 +4278,7 @@ export type Property_Meta_Order_By = {
   property?: Maybe<Order_By>
   sender?: Maybe<Order_By>
   symbol?: Maybe<Order_By>
+  total_supply?: Maybe<Order_By>
 }
 
 export type Property_Meta_Pk_Columns_Input = {
@@ -5048,7 +4292,8 @@ export enum Property_Meta_Select_Column {
   Name = 'name',
   Property = 'property',
   Sender = 'sender',
-  Symbol = 'symbol'
+  Symbol = 'symbol',
+  TotalSupply = 'total_supply'
 }
 
 export type Property_Meta_Set_Input = {
@@ -5058,42 +4303,51 @@ export type Property_Meta_Set_Input = {
   property?: Maybe<Scalars['String']>
   sender?: Maybe<Scalars['String']>
   symbol?: Maybe<Scalars['String']>
+  total_supply?: Maybe<Scalars['numeric']>
 }
 
 export type Property_Meta_Stddev_Fields = {
   __typename?: 'property_meta_stddev_fields'
   block_number?: Maybe<Scalars['Float']>
+  total_supply?: Maybe<Scalars['Float']>
 }
 
 export type Property_Meta_Stddev_Order_By = {
   block_number?: Maybe<Order_By>
+  total_supply?: Maybe<Order_By>
 }
 
 export type Property_Meta_Stddev_Pop_Fields = {
   __typename?: 'property_meta_stddev_pop_fields'
   block_number?: Maybe<Scalars['Float']>
+  total_supply?: Maybe<Scalars['Float']>
 }
 
 export type Property_Meta_Stddev_Pop_Order_By = {
   block_number?: Maybe<Order_By>
+  total_supply?: Maybe<Order_By>
 }
 
 export type Property_Meta_Stddev_Samp_Fields = {
   __typename?: 'property_meta_stddev_samp_fields'
   block_number?: Maybe<Scalars['Float']>
+  total_supply?: Maybe<Scalars['Float']>
 }
 
 export type Property_Meta_Stddev_Samp_Order_By = {
   block_number?: Maybe<Order_By>
+  total_supply?: Maybe<Order_By>
 }
 
 export type Property_Meta_Sum_Fields = {
   __typename?: 'property_meta_sum_fields'
   block_number?: Maybe<Scalars['Int']>
+  total_supply?: Maybe<Scalars['numeric']>
 }
 
 export type Property_Meta_Sum_Order_By = {
   block_number?: Maybe<Order_By>
+  total_supply?: Maybe<Order_By>
 }
 
 export enum Property_Meta_Update_Column {
@@ -5102,44 +4356,53 @@ export enum Property_Meta_Update_Column {
   Name = 'name',
   Property = 'property',
   Sender = 'sender',
-  Symbol = 'symbol'
+  Symbol = 'symbol',
+  TotalSupply = 'total_supply'
 }
 
 export type Property_Meta_Var_Pop_Fields = {
   __typename?: 'property_meta_var_pop_fields'
   block_number?: Maybe<Scalars['Float']>
+  total_supply?: Maybe<Scalars['Float']>
 }
 
 export type Property_Meta_Var_Pop_Order_By = {
   block_number?: Maybe<Order_By>
+  total_supply?: Maybe<Order_By>
 }
 
 export type Property_Meta_Var_Samp_Fields = {
   __typename?: 'property_meta_var_samp_fields'
   block_number?: Maybe<Scalars['Float']>
+  total_supply?: Maybe<Scalars['Float']>
 }
 
 export type Property_Meta_Var_Samp_Order_By = {
   block_number?: Maybe<Order_By>
+  total_supply?: Maybe<Order_By>
 }
 
 export type Property_Meta_Variance_Fields = {
   __typename?: 'property_meta_variance_fields'
   block_number?: Maybe<Scalars['Float']>
+  total_supply?: Maybe<Scalars['Float']>
 }
 
 export type Property_Meta_Variance_Order_By = {
   block_number?: Maybe<Order_By>
+  total_supply?: Maybe<Order_By>
 }
 
 export type Query_Root = {
   __typename?: 'query_root'
-  allocator_allocation_result: Array<Allocator_Allocation_Result>
-  allocator_allocation_result_aggregate: Allocator_Allocation_Result_Aggregate
-  allocator_allocation_result_by_pk?: Maybe<Allocator_Allocation_Result>
-  allocator_before_allocation: Array<Allocator_Before_Allocation>
-  allocator_before_allocation_aggregate: Allocator_Before_Allocation_Aggregate
-  allocator_before_allocation_by_pk?: Maybe<Allocator_Before_Allocation>
+  account_lockup: Array<Account_Lockup>
+  account_lockup_aggregate: Account_Lockup_Aggregate
+  account_lockup_by_pk?: Maybe<Account_Lockup>
+  account_lockup_sum_values: Array<Account_Lockup_Sum_Values>
+  account_lockup_sum_values_aggregate: Account_Lockup_Sum_Values_Aggregate
+  dev_property_transfer: Array<Dev_Property_Transfer>
+  dev_property_transfer_aggregate: Dev_Property_Transfer_Aggregate
+  dev_property_transfer_by_pk?: Maybe<Dev_Property_Transfer>
   lockup_lockedup: Array<Lockup_Lockedup>
   lockup_lockedup_aggregate: Lockup_Lockedup_Aggregate
   lockup_lockedup_by_pk?: Maybe<Lockup_Lockedup>
@@ -5152,10 +4415,6 @@ export type Query_Root = {
   metrics_factory_destroy: Array<Metrics_Factory_Destroy>
   metrics_factory_destroy_aggregate: Metrics_Factory_Destroy_Aggregate
   metrics_factory_destroy_by_pk?: Maybe<Metrics_Factory_Destroy>
-  pg_buffercache: Array<Pg_Buffercache>
-  pg_buffercache_aggregate: Pg_Buffercache_Aggregate
-  pg_stat_statements: Array<Pg_Stat_Statements>
-  pg_stat_statements_aggregate: Pg_Stat_Statements_Aggregate
   policy_factory_create: Array<Policy_Factory_Create>
   policy_factory_create_aggregate: Policy_Factory_Create_Aggregate
   policy_factory_create_by_pk?: Maybe<Policy_Factory_Create>
@@ -5168,51 +4427,70 @@ export type Query_Root = {
   property_factory_create: Array<Property_Factory_Create>
   property_factory_create_aggregate: Property_Factory_Create_Aggregate
   property_factory_create_by_pk?: Maybe<Property_Factory_Create>
+  property_lockup: Array<Property_Lockup>
+  property_lockup_aggregate: Property_Lockup_Aggregate
+  property_lockup_by_pk?: Maybe<Property_Lockup>
+  property_lockup_sum_values: Array<Property_Lockup_Sum_Values>
+  property_lockup_sum_values_aggregate: Property_Lockup_Sum_Values_Aggregate
   property_meta: Array<Property_Meta>
   property_meta_aggregate: Property_Meta_Aggregate
   property_meta_by_pk?: Maybe<Property_Meta>
-  reward_calculation_result: Array<Reward_Calculation_Result>
-  reward_calculation_result_aggregate: Reward_Calculation_Result_Aggregate
-  reward_calculation_result_by_pk?: Maybe<Reward_Calculation_Result>
 }
 
-export type Query_RootAllocator_Allocation_ResultArgs = {
-  distinct_on?: Maybe<Array<Allocator_Allocation_Result_Select_Column>>
+export type Query_RootAccount_LockupArgs = {
+  distinct_on?: Maybe<Array<Account_Lockup_Select_Column>>
   limit?: Maybe<Scalars['Int']>
   offset?: Maybe<Scalars['Int']>
-  order_by?: Maybe<Array<Allocator_Allocation_Result_Order_By>>
-  where?: Maybe<Allocator_Allocation_Result_Bool_Exp>
+  order_by?: Maybe<Array<Account_Lockup_Order_By>>
+  where?: Maybe<Account_Lockup_Bool_Exp>
 }
 
-export type Query_RootAllocator_Allocation_Result_AggregateArgs = {
-  distinct_on?: Maybe<Array<Allocator_Allocation_Result_Select_Column>>
+export type Query_RootAccount_Lockup_AggregateArgs = {
+  distinct_on?: Maybe<Array<Account_Lockup_Select_Column>>
   limit?: Maybe<Scalars['Int']>
   offset?: Maybe<Scalars['Int']>
-  order_by?: Maybe<Array<Allocator_Allocation_Result_Order_By>>
-  where?: Maybe<Allocator_Allocation_Result_Bool_Exp>
+  order_by?: Maybe<Array<Account_Lockup_Order_By>>
+  where?: Maybe<Account_Lockup_Bool_Exp>
 }
 
-export type Query_RootAllocator_Allocation_Result_By_PkArgs = {
-  event_id: Scalars['String']
+export type Query_RootAccount_Lockup_By_PkArgs = {
+  account_address: Scalars['String']
+  property_address: Scalars['String']
 }
 
-export type Query_RootAllocator_Before_AllocationArgs = {
-  distinct_on?: Maybe<Array<Allocator_Before_Allocation_Select_Column>>
+export type Query_RootAccount_Lockup_Sum_ValuesArgs = {
+  distinct_on?: Maybe<Array<Account_Lockup_Sum_Values_Select_Column>>
   limit?: Maybe<Scalars['Int']>
   offset?: Maybe<Scalars['Int']>
-  order_by?: Maybe<Array<Allocator_Before_Allocation_Order_By>>
-  where?: Maybe<Allocator_Before_Allocation_Bool_Exp>
+  order_by?: Maybe<Array<Account_Lockup_Sum_Values_Order_By>>
+  where?: Maybe<Account_Lockup_Sum_Values_Bool_Exp>
 }
 
-export type Query_RootAllocator_Before_Allocation_AggregateArgs = {
-  distinct_on?: Maybe<Array<Allocator_Before_Allocation_Select_Column>>
+export type Query_RootAccount_Lockup_Sum_Values_AggregateArgs = {
+  distinct_on?: Maybe<Array<Account_Lockup_Sum_Values_Select_Column>>
   limit?: Maybe<Scalars['Int']>
   offset?: Maybe<Scalars['Int']>
-  order_by?: Maybe<Array<Allocator_Before_Allocation_Order_By>>
-  where?: Maybe<Allocator_Before_Allocation_Bool_Exp>
+  order_by?: Maybe<Array<Account_Lockup_Sum_Values_Order_By>>
+  where?: Maybe<Account_Lockup_Sum_Values_Bool_Exp>
 }
 
-export type Query_RootAllocator_Before_Allocation_By_PkArgs = {
+export type Query_RootDev_Property_TransferArgs = {
+  distinct_on?: Maybe<Array<Dev_Property_Transfer_Select_Column>>
+  limit?: Maybe<Scalars['Int']>
+  offset?: Maybe<Scalars['Int']>
+  order_by?: Maybe<Array<Dev_Property_Transfer_Order_By>>
+  where?: Maybe<Dev_Property_Transfer_Bool_Exp>
+}
+
+export type Query_RootDev_Property_Transfer_AggregateArgs = {
+  distinct_on?: Maybe<Array<Dev_Property_Transfer_Select_Column>>
+  limit?: Maybe<Scalars['Int']>
+  offset?: Maybe<Scalars['Int']>
+  order_by?: Maybe<Array<Dev_Property_Transfer_Order_By>>
+  where?: Maybe<Dev_Property_Transfer_Bool_Exp>
+}
+
+export type Query_RootDev_Property_Transfer_By_PkArgs = {
   event_id: Scalars['String']
 }
 
@@ -5294,38 +4572,6 @@ export type Query_RootMetrics_Factory_Destroy_AggregateArgs = {
 
 export type Query_RootMetrics_Factory_Destroy_By_PkArgs = {
   event_id: Scalars['String']
-}
-
-export type Query_RootPg_BuffercacheArgs = {
-  distinct_on?: Maybe<Array<Pg_Buffercache_Select_Column>>
-  limit?: Maybe<Scalars['Int']>
-  offset?: Maybe<Scalars['Int']>
-  order_by?: Maybe<Array<Pg_Buffercache_Order_By>>
-  where?: Maybe<Pg_Buffercache_Bool_Exp>
-}
-
-export type Query_RootPg_Buffercache_AggregateArgs = {
-  distinct_on?: Maybe<Array<Pg_Buffercache_Select_Column>>
-  limit?: Maybe<Scalars['Int']>
-  offset?: Maybe<Scalars['Int']>
-  order_by?: Maybe<Array<Pg_Buffercache_Order_By>>
-  where?: Maybe<Pg_Buffercache_Bool_Exp>
-}
-
-export type Query_RootPg_Stat_StatementsArgs = {
-  distinct_on?: Maybe<Array<Pg_Stat_Statements_Select_Column>>
-  limit?: Maybe<Scalars['Int']>
-  offset?: Maybe<Scalars['Int']>
-  order_by?: Maybe<Array<Pg_Stat_Statements_Order_By>>
-  where?: Maybe<Pg_Stat_Statements_Bool_Exp>
-}
-
-export type Query_RootPg_Stat_Statements_AggregateArgs = {
-  distinct_on?: Maybe<Array<Pg_Stat_Statements_Select_Column>>
-  limit?: Maybe<Scalars['Int']>
-  offset?: Maybe<Scalars['Int']>
-  order_by?: Maybe<Array<Pg_Stat_Statements_Order_By>>
-  where?: Maybe<Pg_Stat_Statements_Bool_Exp>
 }
 
 export type Query_RootPolicy_Factory_CreateArgs = {
@@ -5410,6 +4656,43 @@ export type Query_RootProperty_Factory_Create_By_PkArgs = {
   event_id: Scalars['String']
 }
 
+export type Query_RootProperty_LockupArgs = {
+  distinct_on?: Maybe<Array<Property_Lockup_Select_Column>>
+  limit?: Maybe<Scalars['Int']>
+  offset?: Maybe<Scalars['Int']>
+  order_by?: Maybe<Array<Property_Lockup_Order_By>>
+  where?: Maybe<Property_Lockup_Bool_Exp>
+}
+
+export type Query_RootProperty_Lockup_AggregateArgs = {
+  distinct_on?: Maybe<Array<Property_Lockup_Select_Column>>
+  limit?: Maybe<Scalars['Int']>
+  offset?: Maybe<Scalars['Int']>
+  order_by?: Maybe<Array<Property_Lockup_Order_By>>
+  where?: Maybe<Property_Lockup_Bool_Exp>
+}
+
+export type Query_RootProperty_Lockup_By_PkArgs = {
+  account_address: Scalars['String']
+  property_address: Scalars['String']
+}
+
+export type Query_RootProperty_Lockup_Sum_ValuesArgs = {
+  distinct_on?: Maybe<Array<Property_Lockup_Sum_Values_Select_Column>>
+  limit?: Maybe<Scalars['Int']>
+  offset?: Maybe<Scalars['Int']>
+  order_by?: Maybe<Array<Property_Lockup_Sum_Values_Order_By>>
+  where?: Maybe<Property_Lockup_Sum_Values_Bool_Exp>
+}
+
+export type Query_RootProperty_Lockup_Sum_Values_AggregateArgs = {
+  distinct_on?: Maybe<Array<Property_Lockup_Sum_Values_Select_Column>>
+  limit?: Maybe<Scalars['Int']>
+  offset?: Maybe<Scalars['Int']>
+  order_by?: Maybe<Array<Property_Lockup_Sum_Values_Order_By>>
+  where?: Maybe<Property_Lockup_Sum_Values_Bool_Exp>
+}
+
 export type Query_RootProperty_MetaArgs = {
   distinct_on?: Maybe<Array<Property_Meta_Select_Column>>
   limit?: Maybe<Scalars['Int']>
@@ -5429,395 +4712,6 @@ export type Query_RootProperty_Meta_AggregateArgs = {
 export type Query_RootProperty_Meta_By_PkArgs = {
   author: Scalars['String']
   property: Scalars['String']
-}
-
-export type Query_RootReward_Calculation_ResultArgs = {
-  distinct_on?: Maybe<Array<Reward_Calculation_Result_Select_Column>>
-  limit?: Maybe<Scalars['Int']>
-  offset?: Maybe<Scalars['Int']>
-  order_by?: Maybe<Array<Reward_Calculation_Result_Order_By>>
-  where?: Maybe<Reward_Calculation_Result_Bool_Exp>
-}
-
-export type Query_RootReward_Calculation_Result_AggregateArgs = {
-  distinct_on?: Maybe<Array<Reward_Calculation_Result_Select_Column>>
-  limit?: Maybe<Scalars['Int']>
-  offset?: Maybe<Scalars['Int']>
-  order_by?: Maybe<Array<Reward_Calculation_Result_Order_By>>
-  where?: Maybe<Reward_Calculation_Result_Bool_Exp>
-}
-
-export type Query_RootReward_Calculation_Result_By_PkArgs = {
-  event_id: Scalars['String']
-}
-
-export type Reward_Calculation_Result = {
-  __typename?: 'reward_calculation_result'
-  allocate_result: Scalars['numeric']
-  allocation?: Maybe<Allocator_Allocation_Result>
-  authentication?: Maybe<Property_Authentication>
-  block_number: Scalars['Int']
-  event_id: Scalars['String']
-  holder_reward: Scalars['numeric']
-  lockup: Scalars['numeric']
-  metrics: Scalars['String']
-  metrics_creation?: Maybe<Metrics_Factory_Create>
-  policy: Scalars['String']
-  policy_creation?: Maybe<Policy_Factory_Create>
-  staking_reward: Scalars['numeric']
-}
-
-export type Reward_Calculation_Result_Aggregate = {
-  __typename?: 'reward_calculation_result_aggregate'
-  aggregate?: Maybe<Reward_Calculation_Result_Aggregate_Fields>
-  nodes: Array<Reward_Calculation_Result>
-}
-
-export type Reward_Calculation_Result_Aggregate_Fields = {
-  __typename?: 'reward_calculation_result_aggregate_fields'
-  avg?: Maybe<Reward_Calculation_Result_Avg_Fields>
-  count?: Maybe<Scalars['Int']>
-  max?: Maybe<Reward_Calculation_Result_Max_Fields>
-  min?: Maybe<Reward_Calculation_Result_Min_Fields>
-  stddev?: Maybe<Reward_Calculation_Result_Stddev_Fields>
-  stddev_pop?: Maybe<Reward_Calculation_Result_Stddev_Pop_Fields>
-  stddev_samp?: Maybe<Reward_Calculation_Result_Stddev_Samp_Fields>
-  sum?: Maybe<Reward_Calculation_Result_Sum_Fields>
-  var_pop?: Maybe<Reward_Calculation_Result_Var_Pop_Fields>
-  var_samp?: Maybe<Reward_Calculation_Result_Var_Samp_Fields>
-  variance?: Maybe<Reward_Calculation_Result_Variance_Fields>
-}
-
-export type Reward_Calculation_Result_Aggregate_FieldsCountArgs = {
-  columns?: Maybe<Array<Reward_Calculation_Result_Select_Column>>
-  distinct?: Maybe<Scalars['Boolean']>
-}
-
-export type Reward_Calculation_Result_Aggregate_Order_By = {
-  avg?: Maybe<Reward_Calculation_Result_Avg_Order_By>
-  count?: Maybe<Order_By>
-  max?: Maybe<Reward_Calculation_Result_Max_Order_By>
-  min?: Maybe<Reward_Calculation_Result_Min_Order_By>
-  stddev?: Maybe<Reward_Calculation_Result_Stddev_Order_By>
-  stddev_pop?: Maybe<Reward_Calculation_Result_Stddev_Pop_Order_By>
-  stddev_samp?: Maybe<Reward_Calculation_Result_Stddev_Samp_Order_By>
-  sum?: Maybe<Reward_Calculation_Result_Sum_Order_By>
-  var_pop?: Maybe<Reward_Calculation_Result_Var_Pop_Order_By>
-  var_samp?: Maybe<Reward_Calculation_Result_Var_Samp_Order_By>
-  variance?: Maybe<Reward_Calculation_Result_Variance_Order_By>
-}
-
-export type Reward_Calculation_Result_Arr_Rel_Insert_Input = {
-  data: Array<Reward_Calculation_Result_Insert_Input>
-  on_conflict?: Maybe<Reward_Calculation_Result_On_Conflict>
-}
-
-export type Reward_Calculation_Result_Avg_Fields = {
-  __typename?: 'reward_calculation_result_avg_fields'
-  allocate_result?: Maybe<Scalars['Float']>
-  block_number?: Maybe<Scalars['Float']>
-  holder_reward?: Maybe<Scalars['Float']>
-  lockup?: Maybe<Scalars['Float']>
-  staking_reward?: Maybe<Scalars['Float']>
-}
-
-export type Reward_Calculation_Result_Avg_Order_By = {
-  allocate_result?: Maybe<Order_By>
-  block_number?: Maybe<Order_By>
-  holder_reward?: Maybe<Order_By>
-  lockup?: Maybe<Order_By>
-  staking_reward?: Maybe<Order_By>
-}
-
-export type Reward_Calculation_Result_Bool_Exp = {
-  _and?: Maybe<Array<Maybe<Reward_Calculation_Result_Bool_Exp>>>
-  _not?: Maybe<Reward_Calculation_Result_Bool_Exp>
-  _or?: Maybe<Array<Maybe<Reward_Calculation_Result_Bool_Exp>>>
-  allocate_result?: Maybe<Numeric_Comparison_Exp>
-  allocation?: Maybe<Allocator_Allocation_Result_Bool_Exp>
-  authentication?: Maybe<Property_Authentication_Bool_Exp>
-  block_number?: Maybe<Int_Comparison_Exp>
-  event_id?: Maybe<String_Comparison_Exp>
-  holder_reward?: Maybe<Numeric_Comparison_Exp>
-  lockup?: Maybe<Numeric_Comparison_Exp>
-  metrics?: Maybe<String_Comparison_Exp>
-  metrics_creation?: Maybe<Metrics_Factory_Create_Bool_Exp>
-  policy?: Maybe<String_Comparison_Exp>
-  policy_creation?: Maybe<Policy_Factory_Create_Bool_Exp>
-  staking_reward?: Maybe<Numeric_Comparison_Exp>
-}
-
-export enum Reward_Calculation_Result_Constraint {
-  RewardCalculationResultPkey = 'reward_calculation_result_pkey'
-}
-
-export type Reward_Calculation_Result_Inc_Input = {
-  allocate_result?: Maybe<Scalars['numeric']>
-  block_number?: Maybe<Scalars['Int']>
-  holder_reward?: Maybe<Scalars['numeric']>
-  lockup?: Maybe<Scalars['numeric']>
-  staking_reward?: Maybe<Scalars['numeric']>
-}
-
-export type Reward_Calculation_Result_Insert_Input = {
-  allocate_result?: Maybe<Scalars['numeric']>
-  allocation?: Maybe<Allocator_Allocation_Result_Obj_Rel_Insert_Input>
-  authentication?: Maybe<Property_Authentication_Obj_Rel_Insert_Input>
-  block_number?: Maybe<Scalars['Int']>
-  event_id?: Maybe<Scalars['String']>
-  holder_reward?: Maybe<Scalars['numeric']>
-  lockup?: Maybe<Scalars['numeric']>
-  metrics?: Maybe<Scalars['String']>
-  metrics_creation?: Maybe<Metrics_Factory_Create_Obj_Rel_Insert_Input>
-  policy?: Maybe<Scalars['String']>
-  policy_creation?: Maybe<Policy_Factory_Create_Obj_Rel_Insert_Input>
-  staking_reward?: Maybe<Scalars['numeric']>
-}
-
-export type Reward_Calculation_Result_Max_Fields = {
-  __typename?: 'reward_calculation_result_max_fields'
-  allocate_result?: Maybe<Scalars['numeric']>
-  block_number?: Maybe<Scalars['Int']>
-  event_id?: Maybe<Scalars['String']>
-  holder_reward?: Maybe<Scalars['numeric']>
-  lockup?: Maybe<Scalars['numeric']>
-  metrics?: Maybe<Scalars['String']>
-  policy?: Maybe<Scalars['String']>
-  staking_reward?: Maybe<Scalars['numeric']>
-}
-
-export type Reward_Calculation_Result_Max_Order_By = {
-  allocate_result?: Maybe<Order_By>
-  block_number?: Maybe<Order_By>
-  event_id?: Maybe<Order_By>
-  holder_reward?: Maybe<Order_By>
-  lockup?: Maybe<Order_By>
-  metrics?: Maybe<Order_By>
-  policy?: Maybe<Order_By>
-  staking_reward?: Maybe<Order_By>
-}
-
-export type Reward_Calculation_Result_Min_Fields = {
-  __typename?: 'reward_calculation_result_min_fields'
-  allocate_result?: Maybe<Scalars['numeric']>
-  block_number?: Maybe<Scalars['Int']>
-  event_id?: Maybe<Scalars['String']>
-  holder_reward?: Maybe<Scalars['numeric']>
-  lockup?: Maybe<Scalars['numeric']>
-  metrics?: Maybe<Scalars['String']>
-  policy?: Maybe<Scalars['String']>
-  staking_reward?: Maybe<Scalars['numeric']>
-}
-
-export type Reward_Calculation_Result_Min_Order_By = {
-  allocate_result?: Maybe<Order_By>
-  block_number?: Maybe<Order_By>
-  event_id?: Maybe<Order_By>
-  holder_reward?: Maybe<Order_By>
-  lockup?: Maybe<Order_By>
-  metrics?: Maybe<Order_By>
-  policy?: Maybe<Order_By>
-  staking_reward?: Maybe<Order_By>
-}
-
-export type Reward_Calculation_Result_Mutation_Response = {
-  __typename?: 'reward_calculation_result_mutation_response'
-  affected_rows: Scalars['Int']
-  returning: Array<Reward_Calculation_Result>
-}
-
-export type Reward_Calculation_Result_Obj_Rel_Insert_Input = {
-  data: Reward_Calculation_Result_Insert_Input
-  on_conflict?: Maybe<Reward_Calculation_Result_On_Conflict>
-}
-
-export type Reward_Calculation_Result_On_Conflict = {
-  constraint: Reward_Calculation_Result_Constraint
-  update_columns: Array<Reward_Calculation_Result_Update_Column>
-  where?: Maybe<Reward_Calculation_Result_Bool_Exp>
-}
-
-export type Reward_Calculation_Result_Order_By = {
-  allocate_result?: Maybe<Order_By>
-  allocation?: Maybe<Allocator_Allocation_Result_Order_By>
-  authentication?: Maybe<Property_Authentication_Order_By>
-  block_number?: Maybe<Order_By>
-  event_id?: Maybe<Order_By>
-  holder_reward?: Maybe<Order_By>
-  lockup?: Maybe<Order_By>
-  metrics?: Maybe<Order_By>
-  metrics_creation?: Maybe<Metrics_Factory_Create_Order_By>
-  policy?: Maybe<Order_By>
-  policy_creation?: Maybe<Policy_Factory_Create_Order_By>
-  staking_reward?: Maybe<Order_By>
-}
-
-export type Reward_Calculation_Result_Pk_Columns_Input = {
-  event_id: Scalars['String']
-}
-
-export enum Reward_Calculation_Result_Select_Column {
-  AllocateResult = 'allocate_result',
-  BlockNumber = 'block_number',
-  EventId = 'event_id',
-  HolderReward = 'holder_reward',
-  Lockup = 'lockup',
-  Metrics = 'metrics',
-  Policy = 'policy',
-  StakingReward = 'staking_reward'
-}
-
-export type Reward_Calculation_Result_Set_Input = {
-  allocate_result?: Maybe<Scalars['numeric']>
-  block_number?: Maybe<Scalars['Int']>
-  event_id?: Maybe<Scalars['String']>
-  holder_reward?: Maybe<Scalars['numeric']>
-  lockup?: Maybe<Scalars['numeric']>
-  metrics?: Maybe<Scalars['String']>
-  policy?: Maybe<Scalars['String']>
-  staking_reward?: Maybe<Scalars['numeric']>
-}
-
-export type Reward_Calculation_Result_Stddev_Fields = {
-  __typename?: 'reward_calculation_result_stddev_fields'
-  allocate_result?: Maybe<Scalars['Float']>
-  block_number?: Maybe<Scalars['Float']>
-  holder_reward?: Maybe<Scalars['Float']>
-  lockup?: Maybe<Scalars['Float']>
-  staking_reward?: Maybe<Scalars['Float']>
-}
-
-export type Reward_Calculation_Result_Stddev_Order_By = {
-  allocate_result?: Maybe<Order_By>
-  block_number?: Maybe<Order_By>
-  holder_reward?: Maybe<Order_By>
-  lockup?: Maybe<Order_By>
-  staking_reward?: Maybe<Order_By>
-}
-
-export type Reward_Calculation_Result_Stddev_Pop_Fields = {
-  __typename?: 'reward_calculation_result_stddev_pop_fields'
-  allocate_result?: Maybe<Scalars['Float']>
-  block_number?: Maybe<Scalars['Float']>
-  holder_reward?: Maybe<Scalars['Float']>
-  lockup?: Maybe<Scalars['Float']>
-  staking_reward?: Maybe<Scalars['Float']>
-}
-
-export type Reward_Calculation_Result_Stddev_Pop_Order_By = {
-  allocate_result?: Maybe<Order_By>
-  block_number?: Maybe<Order_By>
-  holder_reward?: Maybe<Order_By>
-  lockup?: Maybe<Order_By>
-  staking_reward?: Maybe<Order_By>
-}
-
-export type Reward_Calculation_Result_Stddev_Samp_Fields = {
-  __typename?: 'reward_calculation_result_stddev_samp_fields'
-  allocate_result?: Maybe<Scalars['Float']>
-  block_number?: Maybe<Scalars['Float']>
-  holder_reward?: Maybe<Scalars['Float']>
-  lockup?: Maybe<Scalars['Float']>
-  staking_reward?: Maybe<Scalars['Float']>
-}
-
-export type Reward_Calculation_Result_Stddev_Samp_Order_By = {
-  allocate_result?: Maybe<Order_By>
-  block_number?: Maybe<Order_By>
-  holder_reward?: Maybe<Order_By>
-  lockup?: Maybe<Order_By>
-  staking_reward?: Maybe<Order_By>
-}
-
-export type Reward_Calculation_Result_Sum_Fields = {
-  __typename?: 'reward_calculation_result_sum_fields'
-  allocate_result?: Maybe<Scalars['numeric']>
-  block_number?: Maybe<Scalars['Int']>
-  holder_reward?: Maybe<Scalars['numeric']>
-  lockup?: Maybe<Scalars['numeric']>
-  staking_reward?: Maybe<Scalars['numeric']>
-}
-
-export type Reward_Calculation_Result_Sum_Order_By = {
-  allocate_result?: Maybe<Order_By>
-  block_number?: Maybe<Order_By>
-  holder_reward?: Maybe<Order_By>
-  lockup?: Maybe<Order_By>
-  staking_reward?: Maybe<Order_By>
-}
-
-export enum Reward_Calculation_Result_Update_Column {
-  AllocateResult = 'allocate_result',
-  BlockNumber = 'block_number',
-  EventId = 'event_id',
-  HolderReward = 'holder_reward',
-  Lockup = 'lockup',
-  Metrics = 'metrics',
-  Policy = 'policy',
-  StakingReward = 'staking_reward'
-}
-
-export type Reward_Calculation_Result_Var_Pop_Fields = {
-  __typename?: 'reward_calculation_result_var_pop_fields'
-  allocate_result?: Maybe<Scalars['Float']>
-  block_number?: Maybe<Scalars['Float']>
-  holder_reward?: Maybe<Scalars['Float']>
-  lockup?: Maybe<Scalars['Float']>
-  staking_reward?: Maybe<Scalars['Float']>
-}
-
-export type Reward_Calculation_Result_Var_Pop_Order_By = {
-  allocate_result?: Maybe<Order_By>
-  block_number?: Maybe<Order_By>
-  holder_reward?: Maybe<Order_By>
-  lockup?: Maybe<Order_By>
-  staking_reward?: Maybe<Order_By>
-}
-
-export type Reward_Calculation_Result_Var_Samp_Fields = {
-  __typename?: 'reward_calculation_result_var_samp_fields'
-  allocate_result?: Maybe<Scalars['Float']>
-  block_number?: Maybe<Scalars['Float']>
-  holder_reward?: Maybe<Scalars['Float']>
-  lockup?: Maybe<Scalars['Float']>
-  staking_reward?: Maybe<Scalars['Float']>
-}
-
-export type Reward_Calculation_Result_Var_Samp_Order_By = {
-  allocate_result?: Maybe<Order_By>
-  block_number?: Maybe<Order_By>
-  holder_reward?: Maybe<Order_By>
-  lockup?: Maybe<Order_By>
-  staking_reward?: Maybe<Order_By>
-}
-
-export type Reward_Calculation_Result_Variance_Fields = {
-  __typename?: 'reward_calculation_result_variance_fields'
-  allocate_result?: Maybe<Scalars['Float']>
-  block_number?: Maybe<Scalars['Float']>
-  holder_reward?: Maybe<Scalars['Float']>
-  lockup?: Maybe<Scalars['Float']>
-  staking_reward?: Maybe<Scalars['Float']>
-}
-
-export type Reward_Calculation_Result_Variance_Order_By = {
-  allocate_result?: Maybe<Order_By>
-  block_number?: Maybe<Order_By>
-  holder_reward?: Maybe<Order_By>
-  lockup?: Maybe<Order_By>
-  staking_reward?: Maybe<Order_By>
-}
-
-export type Smallint_Comparison_Exp = {
-  _eq?: Maybe<Scalars['smallint']>
-  _gt?: Maybe<Scalars['smallint']>
-  _gte?: Maybe<Scalars['smallint']>
-  _in?: Maybe<Array<Scalars['smallint']>>
-  _is_null?: Maybe<Scalars['Boolean']>
-  _lt?: Maybe<Scalars['smallint']>
-  _lte?: Maybe<Scalars['smallint']>
-  _neq?: Maybe<Scalars['smallint']>
-  _nin?: Maybe<Array<Scalars['smallint']>>
 }
 
 export type String_Comparison_Exp = {
@@ -5840,12 +4734,14 @@ export type String_Comparison_Exp = {
 
 export type Subscription_Root = {
   __typename?: 'subscription_root'
-  allocator_allocation_result: Array<Allocator_Allocation_Result>
-  allocator_allocation_result_aggregate: Allocator_Allocation_Result_Aggregate
-  allocator_allocation_result_by_pk?: Maybe<Allocator_Allocation_Result>
-  allocator_before_allocation: Array<Allocator_Before_Allocation>
-  allocator_before_allocation_aggregate: Allocator_Before_Allocation_Aggregate
-  allocator_before_allocation_by_pk?: Maybe<Allocator_Before_Allocation>
+  account_lockup: Array<Account_Lockup>
+  account_lockup_aggregate: Account_Lockup_Aggregate
+  account_lockup_by_pk?: Maybe<Account_Lockup>
+  account_lockup_sum_values: Array<Account_Lockup_Sum_Values>
+  account_lockup_sum_values_aggregate: Account_Lockup_Sum_Values_Aggregate
+  dev_property_transfer: Array<Dev_Property_Transfer>
+  dev_property_transfer_aggregate: Dev_Property_Transfer_Aggregate
+  dev_property_transfer_by_pk?: Maybe<Dev_Property_Transfer>
   lockup_lockedup: Array<Lockup_Lockedup>
   lockup_lockedup_aggregate: Lockup_Lockedup_Aggregate
   lockup_lockedup_by_pk?: Maybe<Lockup_Lockedup>
@@ -5858,10 +4754,6 @@ export type Subscription_Root = {
   metrics_factory_destroy: Array<Metrics_Factory_Destroy>
   metrics_factory_destroy_aggregate: Metrics_Factory_Destroy_Aggregate
   metrics_factory_destroy_by_pk?: Maybe<Metrics_Factory_Destroy>
-  pg_buffercache: Array<Pg_Buffercache>
-  pg_buffercache_aggregate: Pg_Buffercache_Aggregate
-  pg_stat_statements: Array<Pg_Stat_Statements>
-  pg_stat_statements_aggregate: Pg_Stat_Statements_Aggregate
   policy_factory_create: Array<Policy_Factory_Create>
   policy_factory_create_aggregate: Policy_Factory_Create_Aggregate
   policy_factory_create_by_pk?: Maybe<Policy_Factory_Create>
@@ -5874,51 +4766,70 @@ export type Subscription_Root = {
   property_factory_create: Array<Property_Factory_Create>
   property_factory_create_aggregate: Property_Factory_Create_Aggregate
   property_factory_create_by_pk?: Maybe<Property_Factory_Create>
+  property_lockup: Array<Property_Lockup>
+  property_lockup_aggregate: Property_Lockup_Aggregate
+  property_lockup_by_pk?: Maybe<Property_Lockup>
+  property_lockup_sum_values: Array<Property_Lockup_Sum_Values>
+  property_lockup_sum_values_aggregate: Property_Lockup_Sum_Values_Aggregate
   property_meta: Array<Property_Meta>
   property_meta_aggregate: Property_Meta_Aggregate
   property_meta_by_pk?: Maybe<Property_Meta>
-  reward_calculation_result: Array<Reward_Calculation_Result>
-  reward_calculation_result_aggregate: Reward_Calculation_Result_Aggregate
-  reward_calculation_result_by_pk?: Maybe<Reward_Calculation_Result>
 }
 
-export type Subscription_RootAllocator_Allocation_ResultArgs = {
-  distinct_on?: Maybe<Array<Allocator_Allocation_Result_Select_Column>>
+export type Subscription_RootAccount_LockupArgs = {
+  distinct_on?: Maybe<Array<Account_Lockup_Select_Column>>
   limit?: Maybe<Scalars['Int']>
   offset?: Maybe<Scalars['Int']>
-  order_by?: Maybe<Array<Allocator_Allocation_Result_Order_By>>
-  where?: Maybe<Allocator_Allocation_Result_Bool_Exp>
+  order_by?: Maybe<Array<Account_Lockup_Order_By>>
+  where?: Maybe<Account_Lockup_Bool_Exp>
 }
 
-export type Subscription_RootAllocator_Allocation_Result_AggregateArgs = {
-  distinct_on?: Maybe<Array<Allocator_Allocation_Result_Select_Column>>
+export type Subscription_RootAccount_Lockup_AggregateArgs = {
+  distinct_on?: Maybe<Array<Account_Lockup_Select_Column>>
   limit?: Maybe<Scalars['Int']>
   offset?: Maybe<Scalars['Int']>
-  order_by?: Maybe<Array<Allocator_Allocation_Result_Order_By>>
-  where?: Maybe<Allocator_Allocation_Result_Bool_Exp>
+  order_by?: Maybe<Array<Account_Lockup_Order_By>>
+  where?: Maybe<Account_Lockup_Bool_Exp>
 }
 
-export type Subscription_RootAllocator_Allocation_Result_By_PkArgs = {
-  event_id: Scalars['String']
+export type Subscription_RootAccount_Lockup_By_PkArgs = {
+  account_address: Scalars['String']
+  property_address: Scalars['String']
 }
 
-export type Subscription_RootAllocator_Before_AllocationArgs = {
-  distinct_on?: Maybe<Array<Allocator_Before_Allocation_Select_Column>>
+export type Subscription_RootAccount_Lockup_Sum_ValuesArgs = {
+  distinct_on?: Maybe<Array<Account_Lockup_Sum_Values_Select_Column>>
   limit?: Maybe<Scalars['Int']>
   offset?: Maybe<Scalars['Int']>
-  order_by?: Maybe<Array<Allocator_Before_Allocation_Order_By>>
-  where?: Maybe<Allocator_Before_Allocation_Bool_Exp>
+  order_by?: Maybe<Array<Account_Lockup_Sum_Values_Order_By>>
+  where?: Maybe<Account_Lockup_Sum_Values_Bool_Exp>
 }
 
-export type Subscription_RootAllocator_Before_Allocation_AggregateArgs = {
-  distinct_on?: Maybe<Array<Allocator_Before_Allocation_Select_Column>>
+export type Subscription_RootAccount_Lockup_Sum_Values_AggregateArgs = {
+  distinct_on?: Maybe<Array<Account_Lockup_Sum_Values_Select_Column>>
   limit?: Maybe<Scalars['Int']>
   offset?: Maybe<Scalars['Int']>
-  order_by?: Maybe<Array<Allocator_Before_Allocation_Order_By>>
-  where?: Maybe<Allocator_Before_Allocation_Bool_Exp>
+  order_by?: Maybe<Array<Account_Lockup_Sum_Values_Order_By>>
+  where?: Maybe<Account_Lockup_Sum_Values_Bool_Exp>
 }
 
-export type Subscription_RootAllocator_Before_Allocation_By_PkArgs = {
+export type Subscription_RootDev_Property_TransferArgs = {
+  distinct_on?: Maybe<Array<Dev_Property_Transfer_Select_Column>>
+  limit?: Maybe<Scalars['Int']>
+  offset?: Maybe<Scalars['Int']>
+  order_by?: Maybe<Array<Dev_Property_Transfer_Order_By>>
+  where?: Maybe<Dev_Property_Transfer_Bool_Exp>
+}
+
+export type Subscription_RootDev_Property_Transfer_AggregateArgs = {
+  distinct_on?: Maybe<Array<Dev_Property_Transfer_Select_Column>>
+  limit?: Maybe<Scalars['Int']>
+  offset?: Maybe<Scalars['Int']>
+  order_by?: Maybe<Array<Dev_Property_Transfer_Order_By>>
+  where?: Maybe<Dev_Property_Transfer_Bool_Exp>
+}
+
+export type Subscription_RootDev_Property_Transfer_By_PkArgs = {
   event_id: Scalars['String']
 }
 
@@ -6000,38 +4911,6 @@ export type Subscription_RootMetrics_Factory_Destroy_AggregateArgs = {
 
 export type Subscription_RootMetrics_Factory_Destroy_By_PkArgs = {
   event_id: Scalars['String']
-}
-
-export type Subscription_RootPg_BuffercacheArgs = {
-  distinct_on?: Maybe<Array<Pg_Buffercache_Select_Column>>
-  limit?: Maybe<Scalars['Int']>
-  offset?: Maybe<Scalars['Int']>
-  order_by?: Maybe<Array<Pg_Buffercache_Order_By>>
-  where?: Maybe<Pg_Buffercache_Bool_Exp>
-}
-
-export type Subscription_RootPg_Buffercache_AggregateArgs = {
-  distinct_on?: Maybe<Array<Pg_Buffercache_Select_Column>>
-  limit?: Maybe<Scalars['Int']>
-  offset?: Maybe<Scalars['Int']>
-  order_by?: Maybe<Array<Pg_Buffercache_Order_By>>
-  where?: Maybe<Pg_Buffercache_Bool_Exp>
-}
-
-export type Subscription_RootPg_Stat_StatementsArgs = {
-  distinct_on?: Maybe<Array<Pg_Stat_Statements_Select_Column>>
-  limit?: Maybe<Scalars['Int']>
-  offset?: Maybe<Scalars['Int']>
-  order_by?: Maybe<Array<Pg_Stat_Statements_Order_By>>
-  where?: Maybe<Pg_Stat_Statements_Bool_Exp>
-}
-
-export type Subscription_RootPg_Stat_Statements_AggregateArgs = {
-  distinct_on?: Maybe<Array<Pg_Stat_Statements_Select_Column>>
-  limit?: Maybe<Scalars['Int']>
-  offset?: Maybe<Scalars['Int']>
-  order_by?: Maybe<Array<Pg_Stat_Statements_Order_By>>
-  where?: Maybe<Pg_Stat_Statements_Bool_Exp>
 }
 
 export type Subscription_RootPolicy_Factory_CreateArgs = {
@@ -6116,6 +4995,43 @@ export type Subscription_RootProperty_Factory_Create_By_PkArgs = {
   event_id: Scalars['String']
 }
 
+export type Subscription_RootProperty_LockupArgs = {
+  distinct_on?: Maybe<Array<Property_Lockup_Select_Column>>
+  limit?: Maybe<Scalars['Int']>
+  offset?: Maybe<Scalars['Int']>
+  order_by?: Maybe<Array<Property_Lockup_Order_By>>
+  where?: Maybe<Property_Lockup_Bool_Exp>
+}
+
+export type Subscription_RootProperty_Lockup_AggregateArgs = {
+  distinct_on?: Maybe<Array<Property_Lockup_Select_Column>>
+  limit?: Maybe<Scalars['Int']>
+  offset?: Maybe<Scalars['Int']>
+  order_by?: Maybe<Array<Property_Lockup_Order_By>>
+  where?: Maybe<Property_Lockup_Bool_Exp>
+}
+
+export type Subscription_RootProperty_Lockup_By_PkArgs = {
+  account_address: Scalars['String']
+  property_address: Scalars['String']
+}
+
+export type Subscription_RootProperty_Lockup_Sum_ValuesArgs = {
+  distinct_on?: Maybe<Array<Property_Lockup_Sum_Values_Select_Column>>
+  limit?: Maybe<Scalars['Int']>
+  offset?: Maybe<Scalars['Int']>
+  order_by?: Maybe<Array<Property_Lockup_Sum_Values_Order_By>>
+  where?: Maybe<Property_Lockup_Sum_Values_Bool_Exp>
+}
+
+export type Subscription_RootProperty_Lockup_Sum_Values_AggregateArgs = {
+  distinct_on?: Maybe<Array<Property_Lockup_Sum_Values_Select_Column>>
+  limit?: Maybe<Scalars['Int']>
+  offset?: Maybe<Scalars['Int']>
+  order_by?: Maybe<Array<Property_Lockup_Sum_Values_Order_By>>
+  where?: Maybe<Property_Lockup_Sum_Values_Bool_Exp>
+}
+
 export type Subscription_RootProperty_MetaArgs = {
   distinct_on?: Maybe<Array<Property_Meta_Select_Column>>
   limit?: Maybe<Scalars['Int']>
@@ -6137,55 +5053,10 @@ export type Subscription_RootProperty_Meta_By_PkArgs = {
   property: Scalars['String']
 }
 
-export type Subscription_RootReward_Calculation_ResultArgs = {
-  distinct_on?: Maybe<Array<Reward_Calculation_Result_Select_Column>>
-  limit?: Maybe<Scalars['Int']>
-  offset?: Maybe<Scalars['Int']>
-  order_by?: Maybe<Array<Reward_Calculation_Result_Order_By>>
-  where?: Maybe<Reward_Calculation_Result_Bool_Exp>
-}
-
-export type Subscription_RootReward_Calculation_Result_AggregateArgs = {
-  distinct_on?: Maybe<Array<Reward_Calculation_Result_Select_Column>>
-  limit?: Maybe<Scalars['Int']>
-  offset?: Maybe<Scalars['Int']>
-  order_by?: Maybe<Array<Reward_Calculation_Result_Order_By>>
-  where?: Maybe<Reward_Calculation_Result_Bool_Exp>
-}
-
-export type Subscription_RootReward_Calculation_Result_By_PkArgs = {
-  event_id: Scalars['String']
-}
-
-export type AllocatorAllocationResultFragment = { __typename?: 'allocator_allocation_result' } & Pick<
-  Allocator_Allocation_Result,
-  | 'block_number'
-  | 'arg_value'
-  | 'event_id'
-  | 'lockup_value'
-  | 'log_index'
-  | 'market'
-  | 'metrics'
-  | 'property'
-  | 'raw_data'
-  | 'result'
-  | 'transaction_index'
->
-
 export type PropertyFactoryCreateFragment = { __typename?: 'property_factory_create' } & Pick<
   Property_Factory_Create,
   'block_number' | 'event_id' | 'from_address' | 'log_index' | 'property' | 'raw_data' | 'transaction_index'
 >
-
-export type GetLastAllocatorAllocationResultQueryVariables = Exact<{
-  propertyAddress: Scalars['String']
-}>
-
-export type GetLastAllocatorAllocationResultQuery = { __typename?: 'query_root' } & {
-  allocator_allocation_result: Array<
-    { __typename?: 'allocator_allocation_result' } & Pick<Allocator_Allocation_Result, 'block_number'>
-  >
-}
 
 export type GetMarketFactoryCreateQueryVariables = Exact<{ [key: string]: never }>
 
@@ -6202,63 +5073,6 @@ export type GetPropertyAuthenticationQuery = { __typename?: 'query_root' } & {
     { __typename?: 'property_authentication' } & Pick<
       Property_Authentication,
       'authentication_id' | 'market' | 'metrics'
-    >
-  >
-}
-
-export type GetRewardCalculationResultAggregateQueryVariables = Exact<{
-  metricsList: Array<Scalars['String']>
-}>
-
-export type GetRewardCalculationResultAggregateQuery = { __typename?: 'query_root' } & {
-  reward_calculation_result_aggregate: { __typename?: 'reward_calculation_result_aggregate' } & {
-    aggregate?: Maybe<
-      { __typename?: 'reward_calculation_result_aggregate_fields' } & {
-        sum?: Maybe<
-          { __typename?: 'reward_calculation_result_sum_fields' } & Pick<
-            Reward_Calculation_Result_Sum_Fields,
-            'staking_reward' | 'lockup'
-          >
-        >
-      }
-    >
-  }
-  reward_calculation_result: Array<
-    { __typename?: 'reward_calculation_result' } & {
-      allocation?: Maybe<
-        { __typename?: 'allocator_allocation_result' } & {
-          condition?: Maybe<
-            { __typename?: 'allocator_before_allocation' } & Pick<Allocator_Before_Allocation, 'blocks'>
-          >
-        }
-      >
-    }
-  >
-}
-
-export type ListAllocatorAllocationResultsQueryVariables = Exact<{
-  distinct_on?: Maybe<Array<Allocator_Allocation_Result_Select_Column>>
-  limit?: Maybe<Scalars['Int']>
-  offset?: Maybe<Scalars['Int']>
-  order_by?: Maybe<Order_By>
-  where?: Maybe<Allocator_Allocation_Result_Bool_Exp>
-}>
-
-export type ListAllocatorAllocationResultsQuery = { __typename?: 'query_root' } & {
-  allocator_allocation_result: Array<
-    { __typename?: 'allocator_allocation_result' } & Pick<
-      Allocator_Allocation_Result,
-      | 'event_id'
-      | 'arg_value'
-      | 'block_number'
-      | 'lockup_value'
-      | 'log_index'
-      | 'market'
-      | 'metrics'
-      | 'property'
-      | 'raw_data'
-      | 'result'
-      | 'transaction_index'
     >
   >
 }
@@ -6291,21 +5105,6 @@ export type ListPropertyMetaQuery = { __typename?: 'query_root' } & {
   property_meta: Array<{ __typename?: 'property_meta' } & Pick<Property_Meta, 'property'>>
 }
 
-export const AllocatorAllocationResultFragmentDoc = gql`
-  fragment allocatorAllocationResult on allocator_allocation_result {
-    block_number
-    arg_value
-    event_id
-    lockup_value
-    log_index
-    market
-    metrics
-    property
-    raw_data
-    result
-    transaction_index
-  }
-`
 export const PropertyFactoryCreateFragmentDoc = gql`
   fragment propertyFactoryCreate on property_factory_create {
     block_number
@@ -6317,66 +5116,6 @@ export const PropertyFactoryCreateFragmentDoc = gql`
     transaction_index
   }
 `
-export const GetLastAllocatorAllocationResultDocument = gql`
-  query getLastAllocatorAllocationResult($propertyAddress: String!) {
-    allocator_allocation_result(
-      limit: 1
-      where: { property: { _eq: $propertyAddress } }
-      order_by: { block_number: desc }
-    ) {
-      block_number
-    }
-  }
-`
-
-/**
- * __useGetLastAllocatorAllocationResultQuery__
- *
- * To run a query within a React component, call `useGetLastAllocatorAllocationResultQuery` and pass it any options that fit your needs.
- * When your component renders, `useGetLastAllocatorAllocationResultQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useGetLastAllocatorAllocationResultQuery({
- *   variables: {
- *      propertyAddress: // value for 'propertyAddress'
- *   },
- * });
- */
-export function useGetLastAllocatorAllocationResultQuery(
-  baseOptions?: ApolloReactHooks.QueryHookOptions<
-    GetLastAllocatorAllocationResultQuery,
-    GetLastAllocatorAllocationResultQueryVariables
-  >
-) {
-  return ApolloReactHooks.useQuery<
-    GetLastAllocatorAllocationResultQuery,
-    GetLastAllocatorAllocationResultQueryVariables
-  >(GetLastAllocatorAllocationResultDocument, baseOptions)
-}
-export function useGetLastAllocatorAllocationResultLazyQuery(
-  baseOptions?: ApolloReactHooks.LazyQueryHookOptions<
-    GetLastAllocatorAllocationResultQuery,
-    GetLastAllocatorAllocationResultQueryVariables
-  >
-) {
-  return ApolloReactHooks.useLazyQuery<
-    GetLastAllocatorAllocationResultQuery,
-    GetLastAllocatorAllocationResultQueryVariables
-  >(GetLastAllocatorAllocationResultDocument, baseOptions)
-}
-export type GetLastAllocatorAllocationResultQueryHookResult = ReturnType<
-  typeof useGetLastAllocatorAllocationResultQuery
->
-export type GetLastAllocatorAllocationResultLazyQueryHookResult = ReturnType<
-  typeof useGetLastAllocatorAllocationResultLazyQuery
->
-export type GetLastAllocatorAllocationResultQueryResult = ApolloReactCommon.QueryResult<
-  GetLastAllocatorAllocationResultQuery,
-  GetLastAllocatorAllocationResultQueryVariables
->
 export const GetMarketFactoryCreateDocument = gql`
   query getMarketFactoryCreate {
     market_factory_create {
@@ -6476,154 +5215,12 @@ export type GetPropertyAuthenticationQueryResult = ApolloReactCommon.QueryResult
   GetPropertyAuthenticationQuery,
   GetPropertyAuthenticationQueryVariables
 >
-export const GetRewardCalculationResultAggregateDocument = gql`
-  query getRewardCalculationResultAggregate($metricsList: [String!]!) {
-    reward_calculation_result_aggregate(where: { block_number: { _gt: 9600000 }, metrics: { _in: $metricsList } }) {
-      aggregate {
-        sum {
-          staking_reward
-          lockup
-        }
-      }
-    }
-    reward_calculation_result(where: { block_number: { _gt: 9600000 }, metrics: { _in: $metricsList } }) {
-      allocation {
-        condition {
-          blocks
-        }
-      }
-    }
-  }
-`
-
-/**
- * __useGetRewardCalculationResultAggregateQuery__
- *
- * To run a query within a React component, call `useGetRewardCalculationResultAggregateQuery` and pass it any options that fit your needs.
- * When your component renders, `useGetRewardCalculationResultAggregateQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useGetRewardCalculationResultAggregateQuery({
- *   variables: {
- *      metricsList: // value for 'metricsList'
- *   },
- * });
- */
-export function useGetRewardCalculationResultAggregateQuery(
-  baseOptions?: ApolloReactHooks.QueryHookOptions<
-    GetRewardCalculationResultAggregateQuery,
-    GetRewardCalculationResultAggregateQueryVariables
-  >
-) {
-  return ApolloReactHooks.useQuery<
-    GetRewardCalculationResultAggregateQuery,
-    GetRewardCalculationResultAggregateQueryVariables
-  >(GetRewardCalculationResultAggregateDocument, baseOptions)
-}
-export function useGetRewardCalculationResultAggregateLazyQuery(
-  baseOptions?: ApolloReactHooks.LazyQueryHookOptions<
-    GetRewardCalculationResultAggregateQuery,
-    GetRewardCalculationResultAggregateQueryVariables
-  >
-) {
-  return ApolloReactHooks.useLazyQuery<
-    GetRewardCalculationResultAggregateQuery,
-    GetRewardCalculationResultAggregateQueryVariables
-  >(GetRewardCalculationResultAggregateDocument, baseOptions)
-}
-export type GetRewardCalculationResultAggregateQueryHookResult = ReturnType<
-  typeof useGetRewardCalculationResultAggregateQuery
->
-export type GetRewardCalculationResultAggregateLazyQueryHookResult = ReturnType<
-  typeof useGetRewardCalculationResultAggregateLazyQuery
->
-export type GetRewardCalculationResultAggregateQueryResult = ApolloReactCommon.QueryResult<
-  GetRewardCalculationResultAggregateQuery,
-  GetRewardCalculationResultAggregateQueryVariables
->
-export const ListAllocatorAllocationResultsDocument = gql`
-  query ListAllocatorAllocationResults(
-    $distinct_on: [allocator_allocation_result_select_column!]
-    $limit: Int
-    $offset: Int
-    $order_by: order_by
-    $where: allocator_allocation_result_bool_exp
-  ) {
-    allocator_allocation_result(distinct_on: $distinct_on, limit: $limit, offset: $offset, where: $where) {
-      event_id
-      arg_value
-      block_number
-      lockup_value
-      log_index
-      market
-      metrics
-      property
-      raw_data
-      result
-      transaction_index
-    }
-  }
-`
-
-/**
- * __useListAllocatorAllocationResultsQuery__
- *
- * To run a query within a React component, call `useListAllocatorAllocationResultsQuery` and pass it any options that fit your needs.
- * When your component renders, `useListAllocatorAllocationResultsQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useListAllocatorAllocationResultsQuery({
- *   variables: {
- *      distinct_on: // value for 'distinct_on'
- *      limit: // value for 'limit'
- *      offset: // value for 'offset'
- *      order_by: // value for 'order_by'
- *      where: // value for 'where'
- *   },
- * });
- */
-export function useListAllocatorAllocationResultsQuery(
-  baseOptions?: ApolloReactHooks.QueryHookOptions<
-    ListAllocatorAllocationResultsQuery,
-    ListAllocatorAllocationResultsQueryVariables
-  >
-) {
-  return ApolloReactHooks.useQuery<ListAllocatorAllocationResultsQuery, ListAllocatorAllocationResultsQueryVariables>(
-    ListAllocatorAllocationResultsDocument,
-    baseOptions
-  )
-}
-export function useListAllocatorAllocationResultsLazyQuery(
-  baseOptions?: ApolloReactHooks.LazyQueryHookOptions<
-    ListAllocatorAllocationResultsQuery,
-    ListAllocatorAllocationResultsQueryVariables
-  >
-) {
-  return ApolloReactHooks.useLazyQuery<
-    ListAllocatorAllocationResultsQuery,
-    ListAllocatorAllocationResultsQueryVariables
-  >(ListAllocatorAllocationResultsDocument, baseOptions)
-}
-export type ListAllocatorAllocationResultsQueryHookResult = ReturnType<typeof useListAllocatorAllocationResultsQuery>
-export type ListAllocatorAllocationResultsLazyQueryHookResult = ReturnType<
-  typeof useListAllocatorAllocationResultsLazyQuery
->
-export type ListAllocatorAllocationResultsQueryResult = ApolloReactCommon.QueryResult<
-  ListAllocatorAllocationResultsQuery,
-  ListAllocatorAllocationResultsQueryVariables
->
 export const ListPropertyDocument = gql`
   query ListProperty($limit: Int, $offset: Int, $ilike: String) {
     property_factory_create(
       limit: $limit
       offset: $offset
-      order_by: { allocation_aggregate: { sum: { result: desc_nulls_last } } }
+      order_by: { current_lockup: { sum_values: desc_nulls_last } }
       where: { authentication: { authentication_id: { _ilike: $ilike } } }
     ) {
       ...propertyFactoryCreate
