@@ -14,7 +14,7 @@
     "test": "jest"
   },
   "dependencies": {
-    "@ant-design/icons": "4.2.1",
+    "@ant-design/icons": "4.2.2",
     "@dev/graphql": "0.0.1",
     "@dev/i18n": "0.0.1",
     "@devprtcl/dev-kit-js": "0.9.1",
