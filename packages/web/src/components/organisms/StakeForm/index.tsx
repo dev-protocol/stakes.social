@@ -1,6 +1,6 @@
 import React from 'react'
 import { useStake } from 'src/fixtures/dev-kit/hooks'
-import { Input } from 'antd'
+import { Input, Alert } from 'antd'
 import styled from 'styled-components'
 
 interface Props {
@@ -39,7 +39,11 @@ export const StakeForm = ({ className, propertyAddress }: Props) => {
   return (
     <div className={className}>
       <p>Stake Now</p>
-      <StyledForm enterButton="Stake" size="large" onSearch={handleSubmit} suffix="DEV" type="number" />
+      <Alert
+        message="Sorry, we are temporarily stopping new staking at the moment for a patch. This should take a few hours to complete."
+        type="error"
+      ></Alert>
+      <StyledForm disabled enterButton="Stake" size="large" onSearch={handleSubmit} suffix="DEV" type="number" />
     </div>
   )
 }
