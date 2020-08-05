@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Space, Spin, Alert } from 'antd'
+import { Button, Space, Spin } from 'antd'
 import { LoadingOutlined, CheckCircleTwoTone } from '@ant-design/icons'
 import styled from 'styled-components'
 
@@ -19,15 +19,11 @@ export const CancelForm = ({ className, onClickCancel, onClickWithdraw, remainBl
   return (
     <Wrap className={className}>
       <p>Cancel Staking</p>
-      <Alert
-        message="Sorry, we are temporarily stopping the cancellation of staking at the moment, for a patch. This should take a few hours to complete."
-        type="error"
-      ></Alert>
       <Space size="middle">
-        <Button type="primary" size="large" onClick={onClickCancel} disabled={true || isCompleted}>
+        <Button type="primary" size="large" onClick={onClickCancel} disabled={isCompleted}>
           Cancel
         </Button>
-        <Button type="primary" size="large" onClick={onClickWithdraw} disabled={true || !isCompleted}>
+        <Button type="primary" size="large" onClick={onClickWithdraw} disabled={!isCompleted}>
           Withdraw
         </Button>
         <div>

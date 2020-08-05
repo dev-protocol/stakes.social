@@ -10,19 +10,6 @@ exports[`CancelStaking Snapshot 1`] = `
         Cancel Staking
       </p>
       <div
-        class="ant-alert ant-alert-error ant-alert-no-icon"
-        data-show="true"
-      >
-        <span
-          class="ant-alert-message"
-        >
-          Sorry, we are temporarily stopping the cancellation of staking at the moment, for a patch. This should take a few hours to complete.
-        </span>
-        <span
-          class="ant-alert-description"
-        />
-      </div>
-      <div
         class="ant-space ant-space-horizontal ant-space-align-center"
       >
         <div
@@ -31,7 +18,6 @@ exports[`CancelStaking Snapshot 1`] = `
         >
           <button
             class="ant-btn ant-btn-primary ant-btn-lg"
-            disabled=""
             type="button"
           >
             <span>

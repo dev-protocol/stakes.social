@@ -1,6 +1,6 @@
 import React from 'react'
 import BigNumber from 'bignumber.js'
-import { Button, Alert } from 'antd'
+import { Button } from 'antd'
 import styled from 'styled-components'
 
 interface Props {
@@ -30,11 +30,7 @@ export const WithdrawForm = ({ amount, label, onSubmitWithdraw }: Props) => {
       <p>Withdraw {label} Reward</p>
       <Form>
         <Statistic>{amount ? amount.dp(5).toNumber() : 0} DEV</Statistic>
-        <Alert
-          message="Sorry, we are temporarily stopping the rewards withdrawal at the moment, for a patch. This should take a few hours to complete."
-          type="error"
-        ></Alert>
-        <Button disabled type="primary" size="large" onClick={onSubmitWithdraw}>
+        <Button type="primary" size="large" onClick={onSubmitWithdraw}>
           Withdraw
         </Button>
       </Form>
