@@ -1,7 +1,7 @@
 import React from 'react'
 import { useQuery } from 'react-apollo'
 import getTopStakersOfPropertyQuery from './query/getTopStakersOfProperty'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 interface TopStakersProps {
   propertyAdress: string
@@ -29,11 +29,13 @@ const StakersList = styled.ol`
   }
 `
 
-const PlaceHolderList = styled.div`
-  display: flex;
-  min-height: 400px;
-  justify-content: center;
-  align-items: center;
+const PlaceHolderList = styled.div<{ noData?: boolean }>`
+  ${({ noData }) => css`
+    display: flex;
+    min-height: ${noData ? '150px' : '400px'};
+    justify-content: center;
+    align-items: center;
+  `}
 `
 
 const Flex = styled.div`
@@ -60,8 +62,8 @@ const TopStakers = ({ propertyAdress }: TopStakersProps) => {
         </PlaceHolderList>
       )}
 
-      {!loading && !topStakersData && (
-        <PlaceHolderList>
+      {!loading && stakerItems.length === 0 && (
+        <PlaceHolderList noData>
           <div>No data available...</div>
         </PlaceHolderList>
       )}
