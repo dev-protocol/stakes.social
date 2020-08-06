@@ -14,7 +14,6 @@ import { Header } from 'src/components/organisms/Header'
 import { StakeForm } from 'src/components/organisms/StakeForm'
 import { CancelStaking } from 'src/components/organisms/CancelStaking'
 import { ConnectedApps } from 'src/components/molecules/ConnectedApps'
-import { Alert } from 'antd'
 
 type Props = {}
 
@@ -23,7 +22,6 @@ const Main = styled(Container)`
   grid-gap: 1rem;
   grid-template-areas:
     'cover'
-    'alert'
     'stake'
     'outline'
     'possession'
@@ -35,7 +33,6 @@ const Main = styled(Container)`
     grid-template-columns: 0.9fr auto;
     grid-template-areas:
       'cover outline'
-      'alert outline'
       'stake outline'
       'possession outline'
       'transact outline'
@@ -64,9 +61,6 @@ const Apps = styled(ConnectedApps)`
 const Cancel = styled(CancelStaking)`
   grid-area: cancel;
 `
-const StyledAlert = styled(Alert)`
-  grid-area: alert;
-`
 
 const PropertyAddressDetail = (_: Props) => {
   const { propertyAddress } = useRouter().query as { propertyAddress: string }
@@ -85,10 +79,6 @@ const PropertyAddressDetail = (_: Props) => {
             <a target="_blank">Change the cover image</a>
           </Link>
         </Cover>
-        <StyledAlert
-          message="Sorry, the app is temporarily suspended for the fix patch. It will be completed in a few hours."
-          type="error"
-        ></StyledAlert>
         <Stake propertyAddress={propertyAddress} />
         <Outline propertyAddress={propertyAddress} />
         <Possession propertyAddress={propertyAddress} />

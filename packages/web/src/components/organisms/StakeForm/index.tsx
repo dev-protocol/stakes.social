@@ -39,7 +39,7 @@ export const StakeForm = ({ className, propertyAddress }: Props) => {
   return (
     <div className={className}>
       <p>Stake Now</p>
-      <StyledForm disabled enterButton="Stake" size="large" onSearch={handleSubmit} suffix="DEV" type="number" />
+      <StyledForm enterButton="Stake" size="large" onSearch={handleSubmit} suffix="DEV" type="number" />
     </div>
   )
 }
