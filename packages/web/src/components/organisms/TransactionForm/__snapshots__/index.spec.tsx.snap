@@ -25,6 +25,7 @@ exports[`TransactionForm Snapshot 1`] = `
           </div>
           <button
             class="ant-btn ant-btn-primary ant-btn-lg"
+            disabled=""
             type="button"
           >
             <span>
@@ -52,6 +53,7 @@ exports[`TransactionForm Snapshot 1`] = `
           </div>
           <button
             class="ant-btn ant-btn-primary ant-btn-lg"
+            disabled=""
             type="button"
           >
             <span>

@@ -20,10 +20,10 @@ export const CancelForm = ({ className, onClickCancel, onClickWithdraw, remainBl
     <Wrap className={className}>
       <p>Cancel Staking</p>
       <Space size="middle">
-        <Button type="primary" size="large" onClick={onClickCancel} disabled={isCompleted}>
+        <Button type="primary" size="large" onClick={onClickCancel} disabled={true || isCompleted}>
           Cancel
         </Button>
-        <Button type="primary" size="large" onClick={onClickWithdraw} disabled={!isCompleted}>
+        <Button type="primary" size="large" onClick={onClickWithdraw} disabled={true || !isCompleted}>
           Withdraw
         </Button>
         <div>

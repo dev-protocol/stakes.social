@@ -14,10 +14,11 @@ exports[`StakeForm Snapshot 1`] = `
           class="ant-input-wrapper ant-input-group"
         >
           <span
-            class="ant-input-search w1tfby-0 chlMkK ant-input-search-enter-button ant-input-search-large ant-input-affix-wrapper ant-input-affix-wrapper-lg"
+            class="ant-input-search w1tfby-0 chlMkK ant-input-search-enter-button ant-input-search-large ant-input-affix-wrapper ant-input-affix-wrapper-disabled ant-input-affix-wrapper-lg"
           >
             <input
-              class="ant-input ant-input-lg"
+              class="ant-input ant-input-lg ant-input-disabled"
+              disabled=""
               type="number"
               value=""
             />
@@ -32,6 +33,7 @@ exports[`StakeForm Snapshot 1`] = `
           >
             <button
               class="ant-btn ant-input-search-button ant-btn-primary ant-btn-lg"
+              disabled=""
               type="button"
             >
               <span>

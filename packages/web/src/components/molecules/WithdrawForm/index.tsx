@@ -30,7 +30,7 @@ export const WithdrawForm = ({ amount, label, onSubmitWithdraw }: Props) => {
       <p>Withdraw {label} Reward</p>
       <Form>
         <Statistic>{amount ? amount.dp(5).toNumber() : 0} DEV</Statistic>
-        <Button type="primary" size="large" onClick={onSubmitWithdraw}>
+        <Button disabled type="primary" size="large" onClick={onSubmitWithdraw}>
           Withdraw
         </Button>
       </Form>
