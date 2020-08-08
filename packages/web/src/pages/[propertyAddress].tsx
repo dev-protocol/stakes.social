@@ -14,6 +14,7 @@ import { Header } from 'src/components/organisms/Header'
 import { StakeForm } from 'src/components/organisms/StakeForm'
 import { CancelStaking } from 'src/components/organisms/CancelStaking'
 import { ConnectedApps } from 'src/components/molecules/ConnectedApps'
+import TopStakers from 'src/components/organisms/TopStakers'
 
 type Props = {}
 
@@ -22,6 +23,7 @@ const Main = styled(Container)`
   grid-gap: 1rem;
   grid-template-areas:
     'cover'
+    'topstake'
     'stake'
     'outline'
     'possession'
@@ -33,6 +35,7 @@ const Main = styled(Container)`
     grid-template-columns: 0.9fr auto;
     grid-template-areas:
       'cover outline'
+      'topstake outline'
       'stake outline'
       'possession outline'
       'transact outline'
@@ -46,6 +49,11 @@ const Cover = styled.div`
 const Outline = styled(AssetOutline)`
   grid-area: outline;
 `
+
+const TopStakerList = styled(TopStakers)`
+  grid-area: topstake;
+`
+
 const Stake = styled(StakeForm)`
   grid-area: stake;
 `
@@ -79,6 +87,7 @@ const PropertyAddressDetail = (_: Props) => {
             <a target="_blank">Change the cover image</a>
           </Link>
         </Cover>
+        <TopStakerList propertyAdress={propertyAddress} />
         <Stake propertyAddress={propertyAddress} />
         <Outline propertyAddress={propertyAddress} />
         <Possession propertyAddress={propertyAddress} />
