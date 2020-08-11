@@ -15,6 +15,6 @@
     "prebuild": "yarn clean"
   },
   "dependencies": {
-    "next-i18next": "4.5.0"
+    "next-i18next": "6.0.2"
   }
 }
