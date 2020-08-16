@@ -6,6 +6,7 @@ import { useGetPropertyAuthenticationQuery } from '@dev/graphql'
 import styled from 'styled-components'
 import Link from 'next/link'
 import useFetch from '../../../hooks/useFetch'
+import { ArrowUpRight } from 'react-feather'
 
 interface Props {
   className?: string
@@ -111,6 +112,7 @@ const Author = ({ propertyAddress }: { propertyAddress: string }) => {
                 {data?.author?.address}
               </EtherscanLink>
             </AuthorAddress>
+            <ArrowUpRight color="grey" />
           </Flex>
         </>
       )}
