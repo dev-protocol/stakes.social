@@ -3,10 +3,10 @@ import { List, Button } from 'antd'
 import { CircleGraph } from 'src/components/atoms/CircleGraph'
 import { useStakingShare } from 'src/fixtures/dev-kit/hooks'
 import { useGetPropertyAuthenticationQuery } from '@dev/graphql'
+import { useGetPropertytInformation } from 'src/fixtures/devprtcl/hooks'
 import styled from 'styled-components'
 import Link from 'next/link'
-import useFetch from '../../../hooks/useFetch'
-import { ArrowUpRight } from 'react-feather'
+import { ExportOutlined } from '@ant-design/icons'
 
 interface Props {
   className?: string
@@ -66,10 +66,12 @@ const AuthorAddress = styled.span`
 
 const Flex = styled.div`
   display: flex;
+  align-items: center;
 `
 
 const EtherscanLink = styled.a`
   text-decoration: none;
+  margin-right: 5px;
 `
 
 const AssetStrengthBase = ({ assetStrength }: { assetStrength: number }) => (
@@ -88,13 +90,13 @@ const AssetStrength = ({ property }: { property: string }) => {
 }
 
 const Author = ({ propertyAddress }: { propertyAddress: string }) => {
-  const BASELINE_URL = 'https://api.devprtcl.com/v1/property/'
-  const fetchUrl = `${BASELINE_URL}${propertyAddress}`
-  const { data, isLoading, hasError, errorMessage } = useFetch(fetchUrl)
+  // const BASELINE_URL = 'https://api.devprtcl.com/v1/property/'
+  // const fetchUrl = `${BASELINE_URL}${propertyAddress}`
+  const { data, error } = useGetPropertytInformation(propertyAddress)
 
   return (
     <AuthorContainer>
-      {!isLoading && data && (
+      {data && (
         <>
           <h2>Author</h2>
           <Account>
@@ -112,22 +114,22 @@ const Author = ({ propertyAddress }: { propertyAddress: string }) => {
                 {data?.author?.address}
               </EtherscanLink>
             </AuthorAddress>
-            <ArrowUpRight color="grey" />
+            <ExportOutlined color="grey" />
           </Flex>
         </>
       )}
 
-      {isLoading && (
+      {!data && !error && (
         <>
           <div>Author</div>
           <div>Loading...</div>
         </>
       )}
 
-      {hasError && (
+      {error && (
         <>
           <div>Author</div>
-          <div>Cannot load: {errorMessage}</div>
+          <div>Cannot load: {error}</div>
         </>
       )}
     </AuthorContainer>
