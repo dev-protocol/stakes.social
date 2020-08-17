@@ -127,7 +127,7 @@ const Author = ({ propertyAddress }: { propertyAddress: string }) => {
       {error && (
         <>
           <div>Author</div>
-          <div>Cannot load: {error}</div>
+          <div>Cannot load: {error.message}</div>
         </>
       )}
     </AuthorContainer>
