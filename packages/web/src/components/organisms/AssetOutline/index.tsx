@@ -90,8 +90,6 @@ const AssetStrength = ({ property }: { property: string }) => {
 }
 
 const Author = ({ propertyAddress }: { propertyAddress: string }) => {
-  // const BASELINE_URL = 'https://api.devprtcl.com/v1/property/'
-  // const fetchUrl = `${BASELINE_URL}${propertyAddress}`
   const { data, error } = useGetPropertytInformation(propertyAddress)
 
   return (
