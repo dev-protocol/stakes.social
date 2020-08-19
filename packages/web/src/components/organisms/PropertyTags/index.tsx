@@ -98,7 +98,7 @@ export const PropertyTags = ({ propertyAddress }: Props) => {
 
   return (
     <Wrap>
-      <p>Propery Tags</p>
+      <p>Property Tags</p>
       {propertyTags && (
         <TagsForm propertyAddress={propertyAddress} propertyTags={propertyTags?.tags} accountAddress={accountAddress} />
       )}
