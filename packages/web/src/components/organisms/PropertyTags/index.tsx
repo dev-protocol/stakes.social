@@ -50,9 +50,9 @@ export const TagsForm = ({ propertyAddress, propertyTags, accountAddress }: Tags
   const handleInputChange = (e: any) => {
     setInputValue(e.target.value)
   }
-  const handleInputConfirm = async () => {
+  const handleInputConfirm = () => {
     if (inputValue && tags.indexOf(inputValue) === -1) {
-      await setTags([...tags, inputValue])
+      setTags([...tags, inputValue])
     }
     setInputVisible(false)
     setInputValue('')
