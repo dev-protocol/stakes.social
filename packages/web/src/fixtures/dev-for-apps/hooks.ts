@@ -64,7 +64,7 @@ export const useGetPropertyTags = (propertyAddress: string) => {
 export const usePostPropertyTags = (propertyAddress: string, walletAddress: string) => {
   const key = 'useGetPropertyTags'
   const [isLoading, setIsLoading] = useState<boolean>(false)
-  const shouldFetch = propertyAddress !== ''
+  const shouldFetch = propertyAddress !== '' && walletAddress !== ''
   const { data, mutate } = useSWR<UnwrapFunc<typeof getPropertyTags>, Error>(
     shouldFetch ? SWRCachePath.getPropertyTags(propertyAddress) : null
   )
@@ -83,7 +83,8 @@ export const usePostPropertyTags = (propertyAddress: string, walletAddress: stri
           return result
         })
         .catch(err => {
-          message.error({ content: err.message, key })
+          const errorMessage = walletAddress === '' ? 'Please connect to a wallet' : err.message
+          message.error({ content: errorMessage, key })
           return Promise.reject(data)
         }),
       false
