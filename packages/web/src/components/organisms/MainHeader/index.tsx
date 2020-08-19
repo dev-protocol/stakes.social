@@ -1,22 +1,59 @@
 import React from 'react'
-import { Header } from '../Header'
 import { Button } from 'antd'
 import { Headline } from 'src/components/atoms/Headline'
 import { H1 } from 'src/components/atoms/Typography'
 import { A } from 'src/components/atoms/A'
+import styled from 'styled-components'
 
-export const MainHeader = () => {
+const BannerContainer = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  background-color: black;
+`
+
+const Slogan = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  padding: 50px 0;
+`
+
+const SloganTitle = styled.h1`
+  color: white;
+`
+
+const Logo = styled.div`
+  background-color: black;
+`
+
+export const Banner = () => {
   return (
-    <>
-      <Header />
-      <Headline>
-        <H1>Make a community sustainable together</H1>
-        {A({ href: '/how-it-works' })(
-          <Button type="primary" size="large">
-            How it works
-          </Button>
-        )}
-      </Headline>
-    </>
+    <BannerContainer>
+      <Slogan>
+        <SloganTitle color="white">A Sustainable Economy</SloganTitle>
+        <SloganTitle color="white">for Open Assets</SloganTitle>
+        <span>read more</span>
+      </Slogan>
+      <Logo>
+        <img src="/home/daan/stakes.social/packages/web/src/components/organisms/MainHeader/logo.png" />
+      </Logo>
+    </BannerContainer>
   )
 }
+
+// export const Banner = () => {
+//   return (
+//     <>
+//       <Headline>
+//         <H1>Make a community sustainable together</H1>
+//         {A({ href: '/how-it-works' })(
+//           <Button type="primary" size="large">
+//             How it works
+//           </Button>
+//         )}
+//       </Headline>
+//     </>
+//   )
+// }

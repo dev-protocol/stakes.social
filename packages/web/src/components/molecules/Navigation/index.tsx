@@ -31,6 +31,10 @@ const navs = [
 ]
 const NavMenu = styled(Menu)`
   background: transparent;
+  color: white;
+`
+const NavMenuItem = styled(NavMenu.Item)`
+  background-color: white;
 `
 
 const toKey = (_pathname: string) => navs.find(({ pathname }) => pathname === _pathname)?.key
@@ -49,9 +53,9 @@ export const Navigation = () => {
   return (
     <NavMenu onClick={handleClick} selectedKeys={[current]} mode="horizontal">
       {navs.map(nav => (
-        <NavMenu.Item key={nav.key}>
+        <NavMenuItem key={nav.key}>
           <Link href={nav.pathname}>{nav.label}</Link>
-        </NavMenu.Item>
+        </NavMenuItem>
       ))}
     </NavMenu>
   )

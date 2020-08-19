@@ -17,7 +17,8 @@ const Badge = styled.div`
   grid-gap: 0.5rem;
 `
 const Statistics = styled.span`
-  font-weight: bold;
+  font-size: 2em;
+  color: deeppink;
 `
 const StatisticsInt = styled.span`
   letter-spacing: 0.1rem;
@@ -39,6 +40,42 @@ const values = (v?: BigNumber, dp?: number) =>
     '-'
   )
 
+const SupplySummaryContainer = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  justify-content: center;
+  align-items: center;
+`
+
+const SupplyBadge = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`
+
+export const SupplySummary = ({ apy, creators, annualSupplyGrowthRatio }: Props) => {
+  return (
+    <>
+      <h2>Current Staking Rewards</h2>
+      <SupplySummaryContainer>
+        <SupplyBadge>
+          <Statistics>65%</Statistics>
+          <span>APY for Stakers</span>
+        </SupplyBadge>
+        <SupplyBadge>
+          <Statistics>85%</Statistics>
+          <span>APY for Creators</span>
+        </SupplyBadge>
+        <SupplyBadge>
+          <Statistics>2.33%</Statistics>
+          <span>Annual Supply Growth</span>
+        </SupplyBadge>
+      </SupplySummaryContainer>
+      <hr color="lightgrey" />
+    </>
+  )
+}
 export const SupplySummaly = ({ apy, creators, annualSupplyGrowthRatio }: Props) => {
   return (
     <Wrap>

@@ -4,11 +4,21 @@ import { useListPropertyQuery } from '@dev/graphql'
 import { PropertyCard } from './PropertyCard'
 import { PropertySearchForm } from './PropertySearchForm'
 import { useRouter } from 'next/router'
+import styled from 'styled-components'
 
 interface Props {
   currentPage: number
   searchWord: string
 }
+
+const Header = styled.h2`
+  padding-top: 10px;
+`
+
+const PropertiesHeader = styled.div`
+  display: grid;
+  grid-template-columns: 2fr 2fr 1fr 1fr;
+`
 
 const DEFAULT_PER_PAGE = 10
 
@@ -34,6 +44,10 @@ export const PropertyCardList = ({ currentPage, searchWord }: Props) => {
 
   return (
     <div>
+      <PropertiesHeader>
+        <Header>Asset Pools</Header>
+      </PropertiesHeader>
+
       <div style={{ margin: '20px 0 0 0' }}>
         <PropertySearchForm onSubmitSearchProperty={handleSearch} />
       </div>

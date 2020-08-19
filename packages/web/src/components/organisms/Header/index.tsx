@@ -17,13 +17,14 @@ const Top = styled.header`
   grid-auto-flow: column;
   justify-content: space-between;
   align-items: center;
+  background-color: black;
   padding: 1rem;
   grid-gap: 1rem;
   svg {
     width: 9rem;
   }
   @media (min-width: 768px) {
-    margin-top: 3.4em;
+    /* margin-top: 3.4em; */
     svg {
       width: 12rem;
     }
@@ -35,7 +36,7 @@ const Logo = styled.div`
   grid-gap: 1rem;
 `
 
-export const Header = ({ colorSchema = 'black' }: Props = {}) => {
+export const Header = ({ colorSchema = 'white' }: Props = {}) => {
   const { isConnected, connect } = useConnectWallet()
   const handleClick = () => {
     connect()
@@ -46,6 +47,7 @@ export const Header = ({ colorSchema = 'black' }: Props = {}) => {
         <Logo>
           <BrandLogo colorSchema={colorSchema} props={{ height: undefined }}></BrandLogo>
         </Logo>
+        <Navigation />
         <div>
           <Button disabled={isConnected} onClick={handleClick}>
             {isConnected && 'Wallet connected'}
@@ -53,7 +55,6 @@ export const Header = ({ colorSchema = 'black' }: Props = {}) => {
           </Button>
         </div>
       </Top>
-      <Navigation></Navigation>
     </HeaderContainer>
   )
 }
