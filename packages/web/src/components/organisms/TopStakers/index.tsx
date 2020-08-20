@@ -9,19 +9,19 @@ interface TopStakersProps {
 
 const ListItem = styled.div`
   display: grid;
-  justify-content: center;
   align-items: center;
-  grid-template-columns: 1fr 4fr 1fr;
+  grid-template-columns: 1fr 8fr 2fr;
+  grid-column-gap: 7.5px;
 `
 
 const StakersList = styled.ol`
   list-style: none;
-  padding: 12px 0 0 0 !important;
+  padding: 6px 0 0 0 !important;
 
   li {
     color: black;
     border-bottom: 1px solid lightgrey;
-    padding: 12px 18px;
+    padding: 6px 9px;
 
     &:last-child {
       border-bottom: 0;
@@ -43,6 +43,24 @@ const Flex = styled.div`
   flex-direction: column;
 `
 
+const AccountAddress = styled.span`
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  max-width: 250px;
+  @media (min-width: 1120px) {
+    max-width: 450px;
+  }
+`
+
+const Position = styled.span`
+  max-width: 20px;
+  flex-shrink: 1;
+`
+
+const AccountContainer = styled(Flex)`
+  flex-wrap: wrap;
+`
 const TopStakers = ({ propertyAdress }: TopStakersProps) => {
   const { data: topStakersData, loading } = useQuery(getTopStakersOfPropertyQuery, {
     variables: {
@@ -72,11 +90,11 @@ const TopStakers = ({ propertyAdress }: TopStakersProps) => {
         {stakerItems?.map(({ account_address, value }, index) => (
           <li key={`${account_address}-${value}`}>
             <ListItem>
-              <div>{index + 1}</div>
-              <Flex>
+              <Position>{index + 1}</Position>
+              <AccountContainer>
                 <h3>Account address</h3>
-                <span> {`${account_address}`}</span>
-              </Flex>
+                <AccountAddress> {`${account_address}`}</AccountAddress>
+              </AccountContainer>
               <Flex>
                 <h3>Value</h3>
                 <span>{`${(value / Math.pow(10, 18)).toFixed(2)}`}</span>
