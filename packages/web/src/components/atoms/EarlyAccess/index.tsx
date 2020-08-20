@@ -10,9 +10,7 @@ const Wrap = styled.div`
 `
 
 export const EarlyAccess = () => (
-  <>
-    <Wrap>
-      <span>🧪Early Access Version🧬</span>
-    </Wrap>
-  </>
+  <Wrap>
+    <span>🧪Early Access Version🧬</span>
+  </Wrap>
 )

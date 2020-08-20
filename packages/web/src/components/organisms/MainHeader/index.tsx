@@ -7,9 +7,20 @@ import styled from 'styled-components'
 
 const BannerContainer = styled.div`
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr;
   background-color: black;
   padding: 40px 0;
+  img {
+    width: 300px;
+    height: 200px;
+  }
+  @media (min-width: 1024px) {
+    grid-template-columns: 1fr 1fr;
+    img {
+      width: 600px;
+      height: 300px;
+    }
+  }
 `
 
 const Slogan = styled.div`
@@ -54,8 +65,8 @@ export const Banner = () => {
           </Slogan>
           <Logo>
             <img
-              width="600px"
-              height="300px"
+              width="24 rem"
+              height="12 rem"
               src="https://res.cloudinary.com/haas-storage/image/upload/v1597920927/b8793a8c-5200-4b5e-84fb-d6bf9fcbfb10_mo0xb5.jpg"
             />
           </Logo>
