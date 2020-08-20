@@ -12,12 +12,15 @@ interface Props {
 }
 
 const Header = styled.h2`
-  padding-top: 10px;
+  margin-bottom: 0;
 `
 
 const PropertiesHeader = styled.div`
   display: grid;
   grid-template-columns: 2fr 2fr 1fr 1fr;
+  justify-content: center;
+  align-items: center;
+  padding-top: 10px;
 `
 
 const DEFAULT_PER_PAGE = 10
@@ -46,11 +49,12 @@ export const PropertyCardList = ({ currentPage, searchWord }: Props) => {
     <div>
       <PropertiesHeader>
         <Header>Asset Pools</Header>
+        <PropertySearchForm onSubmitSearchProperty={handleSearch} />
       </PropertiesHeader>
 
-      <div style={{ margin: '20px 0 0 0' }}>
-        <PropertySearchForm onSubmitSearchProperty={handleSearch} />
-      </div>
+      {/* <div style={{ margin: '20px 0 0 0' }}>
+        
+      </div> */}
       {loading && <Spin size="large" style={{ display: 'block', width: 'auto', padding: '100px' }} />}
       {data && (
         <>

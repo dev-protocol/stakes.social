@@ -35,6 +35,9 @@ const NavMenu = styled(Menu)`
 `
 const NavMenuItem = styled(NavMenu.Item)`
   background-color: white;
+  .ant-menu-item-selected a {
+    color: deeppink;
+  }
 `
 
 const toKey = (_pathname: string) => navs.find(({ pathname }) => pathname === _pathname)?.key
@@ -53,7 +56,7 @@ export const Navigation = () => {
   return (
     <NavMenu onClick={handleClick} selectedKeys={[current]} mode="horizontal">
       {navs.map(nav => (
-        <NavMenuItem key={nav.key}>
+        <NavMenuItem color="deeppink" key={nav.key}>
           <Link href={nav.pathname}>{nav.label}</Link>
         </NavMenuItem>
       ))}

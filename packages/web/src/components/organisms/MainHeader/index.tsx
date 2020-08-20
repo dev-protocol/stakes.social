@@ -28,13 +28,20 @@ const Logo = styled.div`
   background-color: black;
 `
 
+const ReadMore = styled.span`
+  cursor: pointer;
+  :hover {
+    border-bottom: 1px solid white;
+  }
+`
+
 export const Banner = () => {
   return (
     <BannerContainer>
       <Slogan>
         <SloganTitle color="white">A Sustainable Economy</SloganTitle>
         <SloganTitle color="white">for Open Assets</SloganTitle>
-        <span>read more</span>
+        <ReadMore>read more</ReadMore>
       </Slogan>
       <Logo>
         <img src="/home/daan/stakes.social/packages/web/src/components/organisms/MainHeader/logo.png" />

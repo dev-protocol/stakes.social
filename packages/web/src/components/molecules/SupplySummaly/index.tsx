@@ -45,6 +45,7 @@ const SupplySummaryContainer = styled.div`
   grid-template-columns: 1fr 1fr 1fr;
   justify-content: center;
   align-items: center;
+  padding-bottom: 20px;
 `
 
 const SupplyBadge = styled.div`
@@ -54,9 +55,13 @@ const SupplyBadge = styled.div`
   align-items: center;
 `
 
+const Container = styled.div`
+  padding-bottom: 20px;
+`
+
 export const SupplySummary = ({ apy, creators, annualSupplyGrowthRatio }: Props) => {
   return (
-    <>
+    <Container>
       <h2>Current Staking Rewards</h2>
       <SupplySummaryContainer>
         <SupplyBadge>
@@ -73,7 +78,7 @@ export const SupplySummary = ({ apy, creators, annualSupplyGrowthRatio }: Props)
         </SupplyBadge>
       </SupplySummaryContainer>
       <hr color="lightgrey" />
-    </>
+    </Container>
   )
 }
 export const SupplySummaly = ({ apy, creators, annualSupplyGrowthRatio }: Props) => {
