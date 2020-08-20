@@ -9,6 +9,7 @@ const BannerContainer = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
   background-color: black;
+  padding: 40px 0;
 `
 
 const Slogan = styled.div`
@@ -22,17 +23,19 @@ const Slogan = styled.div`
 
 const SloganTitle = styled.h1`
   color: white;
+  font-size: 2em;
 `
 
 const Logo = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background-color: black;
 `
 
 const ReadMore = styled.span`
   cursor: pointer;
-  :hover {
-    border-bottom: 1px solid white;
-  }
+  border-bottom: 1px solid white;
 `
 
 export const Banner = () => {
@@ -44,7 +47,7 @@ export const Banner = () => {
         <ReadMore>read more</ReadMore>
       </Slogan>
       <Logo>
-        <img src="/home/daan/stakes.social/packages/web/src/components/organisms/MainHeader/logo.png" />
+        <img src="https://res.cloudinary.com/haas-storage/image/upload/v1597909955/Screenshot_from_2020-08-19_11-21-20_solkx6.png" />
       </Logo>
     </BannerContainer>
   )

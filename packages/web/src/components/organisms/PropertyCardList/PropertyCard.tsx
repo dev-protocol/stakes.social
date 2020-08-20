@@ -100,15 +100,16 @@ const AssetStrength = ({ property }: { property: string }) => {
 
 const RowContainer = styled.div`
   display: grid;
-  grid-template-columns: 1fr 2fr 1fr 1fr 1fr 2fr;
+  grid-template-columns: 2fr 1fr 1fr 1fr 2fr;
 `
 
-const Logo = styled.div``
-const Title = styled.div`
+const Property = styled.div`
   display: flex;
-  flex-direction: column;
-  /* justify-content: center; */
-  /* align-items: center; */
+  align-items: center;
+`
+const Title = styled.span`
+  font-size: 1.4em;
+  margin-left: 1em;
 `
 const Creator = styled.div`
   display: flex;
@@ -174,11 +175,16 @@ export const PropertyCard = ({ propertyAddress }: Props) => {
     <Link href={'/[propertyAddress]'} as={`/${propertyAddress}`}>
       <Card>
         <RowContainer>
-          <Logo> Logo here </Logo>
-          <Title>
-            <span>Chalk</span>
-            <MutedSpan>Property</MutedSpan>
-          </Title>
+          <Property>
+            <img
+              width="50px"
+              height="25px"
+              src="https://res.cloudinary.com/haas-storage/image/upload/v1597910958/Screenshot_from_2020-08-20_10-08-09-removebg-preview_td5opp.png"
+            />
+
+            <Title>Chalk</Title>
+          </Property>
+
           <Creator>
             <span>Chalk.eth</span>
             <MutedSpan>Creator</MutedSpan>

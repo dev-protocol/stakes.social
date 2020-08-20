@@ -34,9 +34,9 @@ const NavMenu = styled(Menu)`
   color: white;
 `
 const NavMenuItem = styled(NavMenu.Item)`
-  background-color: white;
-  .ant-menu-item-selected a {
-    color: deeppink;
+  background-color: black;
+  a.link:hover {
+    background-color: yellow;
   }
 `
 
@@ -54,7 +54,7 @@ export const Navigation = () => {
   )
 
   return (
-    <NavMenu onClick={handleClick} selectedKeys={[current]} mode="horizontal">
+    <NavMenu theme="dark" onClick={handleClick} selectedKeys={[current]} mode="horizontal">
       {navs.map(nav => (
         <NavMenuItem color="deeppink" key={nav.key}>
           <Link href={nav.pathname}>{nav.label}</Link>
