@@ -38,18 +38,30 @@ const ReadMore = styled.span`
   border-bottom: 1px solid white;
 `
 
+const Wrap = styled.div`
+  background-color: black;
+`
+
 export const Banner = () => {
   return (
-    <BannerContainer>
-      <Slogan>
-        <SloganTitle color="white">A Sustainable Economy</SloganTitle>
-        <SloganTitle color="white">for Open Assets</SloganTitle>
-        <ReadMore>read more</ReadMore>
-      </Slogan>
-      <Logo>
-        <img src="https://res.cloudinary.com/haas-storage/image/upload/v1597909955/Screenshot_from_2020-08-19_11-21-20_solkx6.png" />
-      </Logo>
-    </BannerContainer>
+    <Wrap>
+      <div style={{ maxWidth: '1048px', marginRight: 'auto', marginLeft: 'auto', background: 'black' }}>
+        <BannerContainer>
+          <Slogan>
+            <SloganTitle color="white">A Sustainable Economy</SloganTitle>
+            <SloganTitle color="white">for Open Assets</SloganTitle>
+            <ReadMore>read more</ReadMore>
+          </Slogan>
+          <Logo>
+            <img
+              width="600px"
+              height="300px"
+              src="https://res.cloudinary.com/haas-storage/image/upload/v1597920927/b8793a8c-5200-4b5e-84fb-d6bf9fcbfb10_mo0xb5.jpg"
+            />
+          </Logo>
+        </BannerContainer>
+      </div>
+    </Wrap>
   )
 }
 

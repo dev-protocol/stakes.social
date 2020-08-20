@@ -10,15 +10,15 @@ interface Props {
 }
 
 const HeaderContainer = styled.header`
-  display: grid;
+  background-color: black;
 `
 const Top = styled.header`
   display: grid;
   grid-auto-flow: column;
   justify-content: space-between;
   align-items: center;
-  background-color: black;
-  padding: 1rem;
+  border: 1px solid black;
+
   grid-gap: 1rem;
   svg {
     width: 9rem;
@@ -43,18 +43,20 @@ export const Header = ({ colorSchema = 'white' }: Props = {}) => {
   }
   return (
     <HeaderContainer>
-      <Top>
-        <Logo>
-          <BrandLogo colorSchema={colorSchema} props={{ height: undefined }}></BrandLogo>
-        </Logo>
-        <Navigation />
-        <div>
-          <Button disabled={isConnected} onClick={handleClick}>
-            {isConnected && 'Wallet connected'}
-            {!isConnected && 'Connect to a wallet'}
-          </Button>
-        </div>
-      </Top>
+      <div style={{ maxWidth: '1048px', marginRight: 'auto', marginLeft: 'auto' }}>
+        <Top>
+          <Logo>
+            <BrandLogo colorSchema={colorSchema} props={{ height: undefined }}></BrandLogo>
+          </Logo>
+          <Navigation />
+          <div>
+            <Button disabled={isConnected} onClick={handleClick}>
+              {isConnected && 'Wallet connected'}
+              {!isConnected && 'Connect to a wallet'}
+            </Button>
+          </div>
+        </Top>
+      </div>
     </HeaderContainer>
   )
 }

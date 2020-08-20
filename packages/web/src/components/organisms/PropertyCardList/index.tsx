@@ -5,6 +5,7 @@ import { PropertyCard } from './PropertyCard'
 import { PropertySearchForm } from './PropertySearchForm'
 import { useRouter } from 'next/router'
 import styled from 'styled-components'
+import Select from 'react-select'
 
 interface Props {
   currentPage: number
@@ -17,13 +18,45 @@ const Header = styled.h2`
 
 const PropertiesHeader = styled.div`
   display: grid;
-  grid-template-columns: 2fr 2fr 1fr 1fr;
+  grid-template-columns: 2fr 3fr 1.5fr 2fr;
   justify-content: center;
   align-items: center;
   padding-top: 10px;
 `
 
+const CurrencyContainer = styled.div`
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+`
+
+const Button = styled.button<{ isActive?: boolean }>`
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  cursor: pointer;
+  border: none;
+  border-radius: 6px;
+  background-color: ${props => (props.isActive ? 'black' : 'transparent')};
+  width: 65px;
+  span {
+    color: ${props => (props.isActive ? 'white' : 'black')};
+  }
+`
+
+const Circle = styled.div<{ isActive?: boolean }>`
+  padding: 6px;
+  border-radius: 45px;
+  background-color: ${props => (props.isActive ? 'white' : 'black')};
+`
+
 const DEFAULT_PER_PAGE = 10
+
+const FILTER_OPTIONS = [
+  { label: 'Your properties', value: 'YOUR_PROPS' },
+  { label: 'Most Staked', value: 'MOST_STAKED' },
+  { label: 'Most recent', value: 'MOST_RECENT' }
+]
 
 export const PropertyCardList = ({ currentPage, searchWord }: Props) => {
   const [perPage, setPerPage] = useState(DEFAULT_PER_PAGE)
@@ -50,11 +83,19 @@ export const PropertyCardList = ({ currentPage, searchWord }: Props) => {
       <PropertiesHeader>
         <Header>Asset Pools</Header>
         <PropertySearchForm onSubmitSearchProperty={handleSearch} />
+        <Select options={FILTER_OPTIONS} />
+        <CurrencyContainer>
+          <Button isActive>
+            <Circle isActive />
+            <span>DEV</span>
+          </Button>
+          <Button>
+            <Circle />
+            <span>USD</span>
+          </Button>
+        </CurrencyContainer>
       </PropertiesHeader>
 
-      {/* <div style={{ margin: '20px 0 0 0' }}>
-        
-      </div> */}
       {loading && <Spin size="large" style={{ display: 'block', width: 'auto', padding: '100px' }} />}
       {data && (
         <>
