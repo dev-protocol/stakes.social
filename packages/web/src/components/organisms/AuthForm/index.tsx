@@ -1,8 +1,11 @@
 import React, { useState } from 'react'
 import { Form, Input, Button, Result } from 'antd'
 import { useMarketScheme, useAuthenticate } from 'src/fixtures/dev-kit/hooks'
+import { usePostSignGitHubMarketAsset } from 'src/fixtures/khaos/hooks'
 import { useEffectAsync } from 'src/fixtures/utility'
 import styled from 'styled-components'
+
+const NpmMarketContractAddress = '0x88c7B1f41DdE50efFc25541a2E0769B887eB2ee7'
 
 export interface Props {
   market: string
@@ -24,13 +27,58 @@ const Row = styled.div`
   }
 `
 
+const DefaultMarketSchemeInput = ({ schemeList }: { schemeList: string[] }) => {
+  return (
+    <>
+      {schemeList.map(scheme => (
+        <Form.Item name={scheme} rules={[{ required: true, message: 'Please input name.' }]} key={scheme}>
+          <Input placeholder={scheme} />
+        </Form.Item>
+      ))}
+    </>
+  )
+}
+
+const GitHubMarketSchemeInput = () => {
+  return (
+    <>
+      <Form.Item
+        name="repositoryName"
+        rules={[{ required: true, message: 'Please input GitHub Repository name.' }]}
+        key="repositoryName"
+      >
+        <Input placeholder="repository name" />
+      </Form.Item>
+      <Form.Item
+        name="publicAccessToken"
+        rules={[{ required: true, message: 'Please input PAT.' }]}
+        key="publicAccessToken"
+      >
+        <Input placeholder="public access token" />
+      </Form.Item>
+    </>
+  )
+}
+
 export const AuthForm = ({ market, property }: Props) => {
   const [schemeList, setSchemeList] = useState<string[]>([])
   const [metrics, setMetrics] = useState<string>('')
   const { marketScheme } = useMarketScheme()
+  const { data: khaosSigned, postSignGitHubMarketAssetHandler } = usePostSignGitHubMarketAsset()
   const { authenticate } = useAuthenticate()
   const onFinish = async (values: any) => {
-    const metrics = await authenticate(market, property, Object.values(values))
+    const authRequestData =
+      market === NpmMarketContractAddress
+        ? Object.values(values)
+        : (async () => {
+            const repository = values.repositoryName
+            const publicAccessToken = values.publicAccessToken
+            await postSignGitHubMarketAssetHandler(repository, publicAccessToken)
+            return [repository, khaosSigned?.publicSignature]
+          })()
+
+    const metrics = await authenticate(market, property, authRequestData)
+
     if (metrics) {
       setMetrics(metrics)
     }
@@ -65,11 +113,11 @@ export const AuthForm = ({ market, property }: Props) => {
         <Row>
           <span>Arguments:</span>
           <Form name="basic" initialValues={{ remember: true }} onFinish={onFinish}>
-            {schemeList.map(scheme => (
-              <Form.Item name={scheme} rules={[{ required: true, message: 'Please input name.' }]} key={scheme}>
-                <Input placeholder={scheme} />
-              </Form.Item>
-            ))}
+            {market === NpmMarketContractAddress ? (
+              <DefaultMarketSchemeInput schemeList={schemeList} />
+            ) : (
+              <GitHubMarketSchemeInput />
+            )}
             <Button type="primary" htmlType="submit">
               Authenticate
             </Button>
