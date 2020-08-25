@@ -51,21 +51,19 @@ const GitHubMarketSchemeInput = () => {
         <Input placeholder="repository name" />
       </Form.Item>
       <Form.Item
-        name="publicAccessToken"
+        name="personalAccessToken"
         rules={[{ required: true, message: 'Please input PAT.' }]}
-        key="publicAccessToken"
+        key="personalAccessToken"
       >
-        <p>
-          <Input placeholder="Personal Access Token" />
-        </p>
-        <p>
-          Please{' '}
-          <a href="https://github.com/settings/tokens/new" target="_blank" rel="noreferrer">
-            create a Personal Access Token <Text mark>without all scopes</Text>
-          </a>{' '}
-          and paste it here.
-        </p>
+        <Input placeholder="Personal Access Token" />
       </Form.Item>
+      <p>
+        Please{' '}
+        <a href="https://github.com/settings/tokens/new" target="_blank" rel="noreferrer">
+          create a Personal Access Token <Text mark>without all scopes</Text>
+        </a>{' '}
+        and paste it here.
+      </p>
     </>
   )
 }
@@ -82,8 +80,8 @@ export const AuthForm = ({ market, property }: Props) => {
         ? Object.values(values)
         : await (async () => {
             const repository: string = values.repositoryName
-            const publicAccessToken = values.publicAccessToken
-            await postSignGitHubMarketAssetHandler(repository, publicAccessToken)
+            const personalAccessToken = values.personalAccessToken
+            await postSignGitHubMarketAssetHandler(repository, personalAccessToken)
             return [repository, khaosSigned?.publicSignature || '']
           })()
 

@@ -61,38 +61,37 @@ exports[`AuthForm Snapshot 1`] = `
                 <div
                   class="ant-form-item-control-input-content"
                 >
-                  <p>
-                    <input
-                      class="ant-input"
-                      placeholder="Personal Access Token"
-                      type="text"
-                      value=""
-                    />
-                  </p>
-                  <p>
-                    Please
-                     
-                    <a
-                      href="https://github.com/settings/tokens/new"
-                      rel="noreferrer"
-                      target="_blank"
-                    >
-                      create a Personal Access Token 
-                      <span
-                        class="ant-typography"
-                      >
-                        <mark>
-                          without all scopes
-                        </mark>
-                      </span>
-                    </a>
-                     
-                    and paste it here.
-                  </p>
+                  <input
+                    class="ant-input"
+                    id="basic_personalAccessToken"
+                    placeholder="Personal Access Token"
+                    type="text"
+                    value=""
+                  />
                 </div>
               </div>
             </div>
           </div>
+          <p>
+            Please
+             
+            <a
+              href="https://github.com/settings/tokens/new"
+              rel="noreferrer"
+              target="_blank"
+            >
+              create a Personal Access Token 
+              <span
+                class="ant-typography"
+              >
+                <mark>
+                  without all scopes
+                </mark>
+              </span>
+            </a>
+             
+            and paste it here.
+          </p>
           <button
             class="ant-btn ant-btn-primary"
             type="submit"

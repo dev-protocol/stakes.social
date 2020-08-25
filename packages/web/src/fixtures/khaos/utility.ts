@@ -8,7 +8,7 @@ export interface GitHubAssetInformation {
 export const postSignGitHubMarketAsset = (
   signMessage: string,
   signature: string,
-  publicAccessToken: string
+  personalAccessToken: string
 ): Promise<GitHubAssetInformation> =>
   fetch(`${BaseUrl}/sign/github-market`, {
     method: 'POST',
@@ -17,7 +17,7 @@ export const postSignGitHubMarketAsset = (
     },
     body: JSON.stringify({
       signature: signature,
-      secret: publicAccessToken,
+      secret: personalAccessToken,
       message: signMessage
     })
   }).then(res => res.json())

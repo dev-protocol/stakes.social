@@ -27,8 +27,8 @@ describe('khaos hooks', () => {
       const { result, waitForNextUpdate } = renderHook(() => usePostSignGitHubMarketAsset())
       act(() => {
         const repository = 'test/repo'
-        const publicAccessToken = 'dummy pat'
-        result.current.postSignGitHubMarketAssetHandler(repository, publicAccessToken)
+        const personalAccessToken = 'dummy pat'
+        result.current.postSignGitHubMarketAssetHandler(repository, personalAccessToken)
       })
       await waitForNextUpdate()
       expect(result.current.isLoading).toBe(false)

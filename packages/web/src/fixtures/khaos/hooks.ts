@@ -13,7 +13,7 @@ export const usePostSignGitHubMarketAsset = () => {
     SWRCachePath.postSignGitHubMarketAsset()
   )
 
-  const postSignGitHubMarketAssetHandler = async (repository: string, publicAccessToken: string) => {
+  const postSignGitHubMarketAssetHandler = async (repository: string, personalAccessToken: string) => {
     const signMessage = repository
     const signature = (await sign(signMessage)) || ''
 
@@ -21,7 +21,7 @@ export const usePostSignGitHubMarketAsset = () => {
     message.loading({ content: 'authenticate asset', duration: 0, key })
 
     await mutate(
-      postSignGitHubMarketAsset(signMessage, signature, publicAccessToken)
+      postSignGitHubMarketAsset(signMessage, signature, personalAccessToken)
         .then(result => {
           message.success({ content: 'success to authenticate asset', key })
           setIsLoading(false)
