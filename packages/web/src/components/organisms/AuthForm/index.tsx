@@ -4,6 +4,7 @@ import { useMarketScheme, useAuthenticate } from 'src/fixtures/dev-kit/hooks'
 import { usePostSignGitHubMarketAsset } from 'src/fixtures/khaos/hooks'
 import { useEffectAsync } from 'src/fixtures/utility'
 import styled from 'styled-components'
+import Text from 'antd/lib/typography/Text'
 
 const NpmMarketContractAddress = '0x88c7B1f41DdE50efFc25541a2E0769B887eB2ee7'
 
@@ -44,7 +45,7 @@ const GitHubMarketSchemeInput = () => {
     <>
       <Form.Item
         name="repositoryName"
-        rules={[{ required: true, message: 'Please input GitHub Repository name.' }]}
+        rules={[{ required: true, message: 'Please input GitHub Repository name (e.g., your/awesome-repos)' }]}
         key="repositoryName"
       >
         <Input placeholder="repository name" />
@@ -54,7 +55,16 @@ const GitHubMarketSchemeInput = () => {
         rules={[{ required: true, message: 'Please input PAT.' }]}
         key="publicAccessToken"
       >
-        <Input placeholder="public access token" />
+        <p>
+          <Input placeholder="Personal Access Token" />
+        </p>
+        <p>
+          Please{' '}
+          <a href="https://github.com/settings/tokens/new" target="_blank" rel="noreferrer">
+            create a Personal Access Token <Text mark>without all scopes</Text>
+          </a>{' '}
+          and paste it here.
+        </p>
       </Form.Item>
     </>
   )

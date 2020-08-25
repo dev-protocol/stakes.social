@@ -61,13 +61,34 @@ exports[`AuthForm Snapshot 1`] = `
                 <div
                   class="ant-form-item-control-input-content"
                 >
-                  <input
-                    class="ant-input"
-                    id="basic_publicAccessToken"
-                    placeholder="public access token"
-                    type="text"
-                    value=""
-                  />
+                  <p>
+                    <input
+                      class="ant-input"
+                      placeholder="Personal Access Token"
+                      type="text"
+                      value=""
+                    />
+                  </p>
+                  <p>
+                    Please
+                     
+                    <a
+                      href="https://github.com/settings/tokens/new"
+                      rel="noreferrer"
+                      target="_blank"
+                    >
+                      create a Personal Access Token 
+                      <span
+                        class="ant-typography"
+                      >
+                        <mark>
+                          without all scopes
+                        </mark>
+                      </span>
+                    </a>
+                     
+                    and paste it here.
+                  </p>
                 </div>
               </div>
             </div>
