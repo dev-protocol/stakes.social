@@ -72,7 +72,7 @@ export const AuthForm = ({ market, property }: Props) => {
   const [schemeList, setSchemeList] = useState<string[]>([])
   const [metrics, setMetrics] = useState<string>('')
   const { marketScheme } = useMarketScheme()
-  const { data: khaosSigned, postSignGitHubMarketAssetHandler } = usePostSignGitHubMarketAsset()
+  const { postSignGitHubMarketAssetHandler } = usePostSignGitHubMarketAsset()
   const { authenticate } = useAuthenticate()
   const onFinish = async (values: any) => {
     const authRequestData: string[] =
@@ -81,8 +81,8 @@ export const AuthForm = ({ market, property }: Props) => {
         : await (async () => {
             const repository: string = values.repositoryName
             const personalAccessToken = values.personalAccessToken
-            await postSignGitHubMarketAssetHandler(repository, personalAccessToken)
-            return [repository, khaosSigned?.publicSignature || '']
+            const khaos = await postSignGitHubMarketAssetHandler(repository, personalAccessToken)
+            return [repository, khaos.publicSignature || '']
           })()
 
     const metrics = await authenticate(market, property, authRequestData)

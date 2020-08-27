@@ -23,25 +23,22 @@ export const usePostSignGitHubMarketAsset = () => {
     setIsLoading(true)
     message.loading({ content: 'authenticate asset', duration: 0, key })
 
-    await mutate(
-      postSignGitHubMarketAsset(signMessage, signature || '', personalAccessToken)
-        .then(result => {
-          setIsLoading(false)
-          if (result instanceof Error) {
-            message.error({ content: result.message, key })
-            return {} as GitHubAssetInformation
-          } else {
-            message.success({ content: 'success to authenticate asset', key })
-            return result
-          }
-        })
-        .catch(err => {
-          message.error({ content: err.message, key })
-          setIsLoading(false)
-          return Promise.reject(err)
-        }),
-      false
-    )
+    return postSignGitHubMarketAsset(signMessage, signature || '', personalAccessToken)
+      .then(result => {
+        setIsLoading(false)
+        if (result instanceof Error) {
+          message.error({ content: result.message, key })
+          return {} as GitHubAssetInformation
+        } else {
+          message.success({ content: 'success to authenticate asset', key })
+          return result
+        }
+      })
+      .catch(err => {
+        message.error({ content: err.message, key })
+        setIsLoading(false)
+        return Promise.reject(err)
+      })
   }
 
   return { data, postSignGitHubMarketAssetHandler, isLoading }
