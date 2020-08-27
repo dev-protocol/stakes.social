@@ -3,7 +3,7 @@ import useSWR from 'swr'
 import { message } from 'antd'
 import { UnwrapFunc } from '../utility'
 import { SWRCachePath } from './cache-path'
-import { postSignGitHubMarketAsset } from './utility'
+import { postSignGitHubMarketAsset, GitHubAssetInformation } from './utility'
 import { sign } from 'src/fixtures/wallet/utility'
 
 export const usePostSignGitHubMarketAsset = () => {
@@ -26,9 +26,14 @@ export const usePostSignGitHubMarketAsset = () => {
     await mutate(
       postSignGitHubMarketAsset(signMessage, signature || '', personalAccessToken)
         .then(result => {
-          message.success({ content: 'success to authenticate asset', key })
           setIsLoading(false)
-          return result
+          if (result instanceof Error) {
+            message.error({ content: result.message, key })
+            return {} as GitHubAssetInformation
+          } else {
+            message.success({ content: 'success to authenticate asset', key })
+            return result
+          }
         })
         .catch(err => {
           message.error({ content: err.message, key })

@@ -20,4 +20,10 @@ export const postSignGitHubMarketAsset = (
       secret: personalAccessToken,
       message: signMessage
     })
-  }).then(res => res.json())
+  }).then(res => {
+    if (res.ok) {
+      return res.json()
+    } else {
+      return Promise.resolve(Error('fail to sign github market asset'))
+    }
+  })
