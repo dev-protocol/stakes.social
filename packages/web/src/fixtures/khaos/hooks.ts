@@ -15,13 +15,16 @@ export const usePostSignGitHubMarketAsset = () => {
 
   const postSignGitHubMarketAssetHandler = async (repository: string, personalAccessToken: string) => {
     const signMessage = repository
-    const signature = (await sign(signMessage)) || ''
+    const signature = await sign(signMessage)
+    if (signature === undefined) {
+      message.error({ content: 'Please connect to a wallet', key: key + 'WithWallet' })
+    }
 
     setIsLoading(true)
     message.loading({ content: 'authenticate asset', duration: 0, key })
 
     await mutate(
-      postSignGitHubMarketAsset(signMessage, signature, personalAccessToken)
+      postSignGitHubMarketAsset(signMessage, signature || '', personalAccessToken)
         .then(result => {
           message.success({ content: 'success to authenticate asset', key })
           setIsLoading(false)
