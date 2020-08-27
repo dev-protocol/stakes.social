@@ -9,9 +9,7 @@ import { sign } from 'src/fixtures/wallet/utility'
 export const usePostSignGitHubMarketAsset = () => {
   const key = 'usePostSignGitHubMarketAsset'
   const [isLoading, setIsLoading] = useState<boolean>(false)
-  const { data, mutate } = useSWR<UnwrapFunc<typeof postSignGitHubMarketAsset>, Error>(
-    SWRCachePath.postSignGitHubMarketAsset()
-  )
+  const { data } = useSWR<UnwrapFunc<typeof postSignGitHubMarketAsset>, Error>(SWRCachePath.postSignGitHubMarketAsset())
 
   const postSignGitHubMarketAssetHandler = async (repository: string, personalAccessToken: string) => {
     const signMessage = repository
