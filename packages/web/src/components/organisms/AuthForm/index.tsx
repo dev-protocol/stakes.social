@@ -68,6 +68,23 @@ const GitHubMarketSchemeInput = () => {
   )
 }
 
+const Notify = () => (
+  <Result
+    title="GitHub Market is currently by invitation only"
+    style={{ marginBottom: '6rem', padding: 0 }}
+    extra={
+      <>
+        <p>Please send our team an invitation request via the form.</p>
+        <p>
+          <Button type="primary" href="https://forms.gle/MVxEvdPNNig9YdBu6" target="_blank">
+            Apply form
+          </Button>
+        </p>
+      </>
+    }
+  />
+)
+
 export const AuthForm = ({ market, property }: Props) => {
   const [schemeList, setSchemeList] = useState<string[]>([])
   const [metrics, setMetrics] = useState<string>('')
@@ -99,6 +116,7 @@ export const AuthForm = ({ market, property }: Props) => {
 
   return (
     <Container>
+      {market !== NpmMarketContractAddress && metrics === '' ? <Notify /> : ''}
       <Row>
         <span>Associating Property:</span>
         <span>{property}</span>
