@@ -37,7 +37,7 @@ exports[`AuthForm Snapshot 1`] = `
         <div
           class="ant-result-title"
         >
-          GitHub Market is currently by invitation only
+          GitHub Market is currently invite-only
         </div>
         <div
           class="ant-result-extra"

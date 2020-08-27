@@ -70,7 +70,7 @@ const GitHubMarketSchemeInput = () => {
 
 const Notify = () => (
   <Result
-    title="GitHub Market is currently by invitation only"
+    title="GitHub Market is currently invite-only"
     style={{ marginBottom: '6rem', padding: 0 }}
     extra={
       <>
