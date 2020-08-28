@@ -1,12 +1,9 @@
-import React, { useMemo } from 'react'
+import React from 'react'
 import Link from 'next/link'
-import { Row, Col, Statistic } from 'antd'
-import { useGetTotalRewardsAmount, useStakingShare, useGetMyStakingAmount } from 'src/fixtures/dev-kit/hooks'
-import { truncate } from 'src/fixtures/utility/string'
-import { useGetPropertyAuthenticationQuery } from '@dev/graphql'
-import { CircleGraph } from 'src/components/atoms/CircleGraph'
+// import { useGetTotalRewardsAmount, useGetMyStakingAmount } from 'src/fixtures/dev-kit/hooks'
+// import { truncate } from 'src/fixtures/utility/string'
+// import { useGetPropertyAuthenticationQuery } from '@dev/graphql'
 import styled from 'styled-components'
-import BigNumber from 'bignumber.js'
 
 interface Props {
   propertyAddress: string
@@ -20,40 +17,25 @@ const Card = styled.div`
   cursor: pointer;
   background: #fff;
 `
-const ResponsiveRow = styled(Row)`
-  @media (max-width: 768px) {
-    margin-top: 1em;
-  }
-`
-const ResponsiveCol = styled(Col)`
-  @media (max-width: 768px) {
-    width: 100%;
-  }
-`
-const StatisticTitle = styled.span`
-  color: rgba(0, 0, 0, 0.45);
-  font-size: 14px;
-`
-const StatisticWithLineBreakedTitle = styled(Statistic)`
-  .ant-statistic-title {
-    word-break: break-all;
-  }
-`
+// const StatisticTitle = styled.span`
+//   color: rgba(0, 0, 0, 0.45);
+//   font-size: 14px;
+// `
 
-const AssetStrengthBase = ({ assetStrength }: { assetStrength: number }) => (
-  <div>
-    <StatisticTitle style={{ position: 'absolute' }}>
-      {Math.floor(assetStrength * 100)}% of the total stakes
-    </StatisticTitle>
-    <CircleGraph percentage={assetStrength} />
-  </div>
-)
+// const AssetStrengthBase = ({ assetStrength }: { assetStrength: number }) => (
+//   <div>
+//     <StatisticTitle style={{ position: 'absolute' }}>
+//       {Math.floor(assetStrength * 100)}% of the total stakes
+//     </StatisticTitle>
+//     <CircleGraph percentage={assetStrength} />
+//   </div>
+// )
 
-const AssetStrength = ({ property }: { property: string }) => {
-  const { stakingShare: maybeAssetStrength } = useStakingShare(property)
-  const assetStrength = useMemo(() => maybeAssetStrength || 0, [maybeAssetStrength])
-  return <AssetStrengthBase assetStrength={assetStrength} />
-}
+// const AssetStrength = ({ property }: { property: string }) => {
+//   const { stakingShare: maybeAssetStrength } = useStakingShare(property)
+//   const assetStrength = useMemo(() => maybeAssetStrength || 0, [maybeAssetStrength])
+//   return <AssetStrengthBase assetStrength={assetStrength} />
+// }
 
 // export const PropertyCard = ({ propertyAddress }: Props) => {
 //   const { totalRewardsAmount } = useGetTotalRewardsAmount(propertyAddress)
@@ -100,33 +82,59 @@ const AssetStrength = ({ property }: { property: string }) => {
 
 const RowContainer = styled.div`
   display: grid;
-  grid-template-columns: 2fr 1fr 1fr 1fr 2fr;
+  @media (min-width: 1024px) {
+    grid-template-columns: 2fr 1fr 1fr 1fr 2fr;
+    grid-template-areas: 'property creator ownedstake totalstaked buttoncontainer';
+  }
+  grid-template-columns: 2fr 1fr 1fr;
+  grid-template-areas: 'property creator ownedstake';
 `
 
 const Property = styled.div`
   display: flex;
   align-items: center;
 `
+const PropertyArea = styled(Property)`
+  grid-area: property;
+`
+
 const Title = styled.span`
   font-size: 1.4em;
+  grid-area: propertytitle;
   margin-left: 1em;
 `
 const Creator = styled.div`
   display: flex;
+  grid-area: creator;
   flex-direction: column;
 `
 const OwnedStake = styled.div`
   display: flex;
+  grid-area: ownedstake;
   flex-direction: column;
+  align-items: center;
 `
 const TotalStaked = styled.div`
-  display: flex;
-  flex-direction: column;
+  display: none;
+  @media (min-width: 1024px) {
+    display: flex;
+    grid-area: totalstaked;
+    flex-direction: column;
+  }
 `
 const ButtonContainer = styled.div`
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
+  display: none;
+  @media (min-width: 1024px) {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    grid-template-columns: 2fr 1fr 1fr 1fr 2fr;
+    grid-template-areas: 'property creator ownedstake totalstaked buttoncontainer';
+  }
+`
+
+const ButtonContainerArea = styled(ButtonContainer)`
+  grid-area: buttoncontainer;
 `
 
 const StakeButton = styled.button<{ bgColor?: string }>`
@@ -163,19 +171,19 @@ const MutedSpan = styled.span`
 `
 
 export const PropertyCard = ({ propertyAddress }: Props) => {
-  const { totalRewardsAmount } = useGetTotalRewardsAmount(propertyAddress)
-  const { data } = useGetPropertyAuthenticationQuery({ variables: { propertyAddress } })
-  const includeAssets = useMemo(
-    () => data && truncate(data.property_authentication.map(e => e.authentication_id).join(', '), 24),
-    [data]
-  )
-  const { myStakingAmount } = useGetMyStakingAmount(propertyAddress)
+  // const { totalRewardsAmount } = useGetTotalRewardsAmount(propertyAddress)
+  // const { data } = useGetPropertyAuthenticationQuery({ variables: { propertyAddress } })
+  // const includeAssets = useMemo(
+  //   () => data && truncate(data.property_authentication.map(e => e.authentication_id).join(', '), 24),
+  //   [data]
+  // )
+  // const { myStakingAmount } = useGetMyStakingAmount(propertyAddress)
 
   return (
     <Link href={'/[propertyAddress]'} as={`/${propertyAddress}`}>
       <Card>
         <RowContainer>
-          <Property>
+          <PropertyArea>
             <img
               width="50px"
               height="25px"
@@ -183,7 +191,7 @@ export const PropertyCard = ({ propertyAddress }: Props) => {
             />
 
             <Title>Chalk</Title>
-          </Property>
+          </PropertyArea>
 
           <Creator>
             <span>Chalk.eth</span>
@@ -197,38 +205,12 @@ export const PropertyCard = ({ propertyAddress }: Props) => {
             <span>250,000 DEV</span>
             <MutedSpan>Total staked</MutedSpan>
           </TotalStaked>
-          <ButtonContainer>
+          <ButtonContainerArea>
             {/* TODO: Make sure that the button is clicked and not the parent underneath it */}
             <StakeButton>Stake</StakeButton>
             <WithdrawButton>Withdraw</WithdrawButton>
-          </ButtonContainer>
+          </ButtonContainerArea>
         </RowContainer>
-        {/* <Row>
-          <Col sm={24} md={10}>
-            <StatisticWithLineBreakedTitle title={propertyAddress} value={includeAssets} />
-          </Col>
-          <ResponsiveCol sm={24} md={14}>
-            <ResponsiveRow>
-              <Col span={12}>
-                <Statistic
-                  title="Total Rewards"
-                  value={totalRewardsAmount && totalRewardsAmount.dp(5).toNumber()}
-                  suffix="DEV"
-                />
-              </Col>
-              <Col span={9}>
-                <Statistic
-                  title="Your Staking Amount"
-                  value={myStakingAmount && myStakingAmount.dp(5).toNumber()}
-                  suffix="DEV"
-                />
-              </Col>
-              <Col span={3}>
-                <AssetStrength property={propertyAddress} />
-              </Col>
-            </ResponsiveRow>
-          </ResponsiveCol>
-        </Row> */}
       </Card>
     </Link>
   )
