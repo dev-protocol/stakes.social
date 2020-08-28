@@ -2,12 +2,9 @@
 import React from 'react'
 import withApollo from 'next-with-apollo'
 import { NextPageContext } from 'next'
-import { InMemoryCache, NormalizedCacheObject } from 'apollo-cache-inmemory'
-import { ApolloLink } from 'apollo-link'
-import { ApolloClient } from 'apollo-client'
-import { createHttpLink } from 'apollo-link-http'
-import { onError, ErrorHandler } from 'apollo-link-error'
-import { ApolloProvider } from 'react-apollo'
+import { ApolloClient, InMemoryCache, ApolloLink, NormalizedCacheObject, ApolloProvider } from '@apollo/client'
+import { createHttpLink } from '@apollo/client/link/http'
+import { onError, ErrorHandler } from '@apollo/client/link/error'
 
 export const errorHandler = (_?: NextPageContext): ErrorHandler => ({ graphQLErrors }) => {
   if (graphQLErrors) {
