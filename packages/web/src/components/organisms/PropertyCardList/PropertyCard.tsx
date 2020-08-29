@@ -1,8 +1,6 @@
 import React from 'react'
 import Link from 'next/link'
-// import { useGetTotalRewardsAmount, useGetMyStakingAmount } from 'src/fixtures/dev-kit/hooks'
-// import { truncate } from 'src/fixtures/utility/string'
-// import { useGetPropertyAuthenticationQuery } from '@dev/graphql'
+import { useGetMyStakingAmount, useGetTotalStakingAmount } from 'src/fixtures/dev-kit/hooks'
 import styled from 'styled-components'
 
 interface Props {
@@ -17,68 +15,6 @@ const Card = styled.div`
   cursor: pointer;
   background: #fff;
 `
-// const StatisticTitle = styled.span`
-//   color: rgba(0, 0, 0, 0.45);
-//   font-size: 14px;
-// `
-
-// const AssetStrengthBase = ({ assetStrength }: { assetStrength: number }) => (
-//   <div>
-//     <StatisticTitle style={{ position: 'absolute' }}>
-//       {Math.floor(assetStrength * 100)}% of the total stakes
-//     </StatisticTitle>
-//     <CircleGraph percentage={assetStrength} />
-//   </div>
-// )
-
-// const AssetStrength = ({ property }: { property: string }) => {
-//   const { stakingShare: maybeAssetStrength } = useStakingShare(property)
-//   const assetStrength = useMemo(() => maybeAssetStrength || 0, [maybeAssetStrength])
-//   return <AssetStrengthBase assetStrength={assetStrength} />
-// }
-
-// export const PropertyCard = ({ propertyAddress }: Props) => {
-//   const { totalRewardsAmount } = useGetTotalRewardsAmount(propertyAddress)
-//   const { data } = useGetPropertyAuthenticationQuery({ variables: { propertyAddress } })
-//   const includeAssets = useMemo(
-//     () => data && truncate(data.property_authentication.map(e => e.authentication_id).join(', '), 24),
-//     [data]
-//   )
-//   const { myStakingAmount } = useGetMyStakingAmount(propertyAddress)
-
-//   return (
-//     <Link href={'/[propertyAddress]'} as={`/${propertyAddress}`}>
-//       <Card>
-//         <Row>
-//           <Col sm={24} md={10}>
-//             <StatisticWithLineBreakedTitle title={propertyAddress} value={includeAssets} />
-//           </Col>
-//           <ResponsiveCol sm={24} md={14}>
-//             <ResponsiveRow>
-//               <Col span={12}>
-//                 <Statistic
-//                   title="Total Rewards"
-//                   value={totalRewardsAmount && totalRewardsAmount.dp(5).toNumber()}
-//                   suffix="DEV"
-//                 />
-//               </Col>
-//               <Col span={9}>
-//                 <Statistic
-//                   title="Your Staking Amount"
-//                   value={myStakingAmount && myStakingAmount.dp(5).toNumber()}
-//                   suffix="DEV"
-//                 />
-//               </Col>
-//               <Col span={3}>
-//                 <AssetStrength property={propertyAddress} />
-//               </Col>
-//             </ResponsiveRow>
-//           </ResponsiveCol>
-//         </Row>
-//       </Card>
-//     </Link>
-//   )
-// }
 
 const RowContainer = styled.div`
   display: grid;
@@ -112,7 +48,7 @@ const OwnedStake = styled.div`
   display: flex;
   grid-area: ownedstake;
   flex-direction: column;
-  align-items: center;
+  /* align-items: center; */
 `
 const TotalStaked = styled.div`
   display: none;
@@ -159,10 +95,6 @@ const WithdrawButton = styled.button<{ bgColor?: string }>`
   background-color: transparent;
   color: grey;
   cursor: pointer;
-
-  /* :hover {
-    border: 1px solid lightgrey;
-  } */
 `
 
 const MutedSpan = styled.span`
@@ -171,13 +103,8 @@ const MutedSpan = styled.span`
 `
 
 export const PropertyCard = ({ propertyAddress }: Props) => {
-  // const { totalRewardsAmount } = useGetTotalRewardsAmount(propertyAddress)
-  // const { data } = useGetPropertyAuthenticationQuery({ variables: { propertyAddress } })
-  // const includeAssets = useMemo(
-  //   () => data && truncate(data.property_authentication.map(e => e.authentication_id).join(', '), 24),
-  //   [data]
-  // )
-  // const { myStakingAmount } = useGetMyStakingAmount(propertyAddress)
+  const { totalStakingAmount } = useGetTotalStakingAmount(propertyAddress)
+  const { myStakingAmount } = useGetMyStakingAmount(propertyAddress)
 
   return (
     <Link href={'/[propertyAddress]'} as={`/${propertyAddress}`}>
@@ -198,11 +125,11 @@ export const PropertyCard = ({ propertyAddress }: Props) => {
             <MutedSpan>Creator</MutedSpan>
           </Creator>
           <OwnedStake>
-            <span>2,000 DEV</span>
+            <span>{myStakingAmount?.dp(1)?.toNumber()} DEV</span>
             <MutedSpan>Your stake</MutedSpan>
           </OwnedStake>
           <TotalStaked>
-            <span>250,000 DEV</span>
+            <span>{totalStakingAmount?.dp(1)?.toNumber()} DEV</span>
             <MutedSpan>Total staked</MutedSpan>
           </TotalStaked>
           <ButtonContainerArea>

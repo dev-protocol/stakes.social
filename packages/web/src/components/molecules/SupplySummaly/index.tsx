@@ -17,7 +17,10 @@ const Badge = styled.div`
   grid-gap: 0.5rem;
 `
 const Statistics = styled.span`
-  font-size: 2em;
+  font-size: 1.5em;
+  @media (min-width: 1024px) {
+    font-size: 2em;
+  }
   color: deeppink;
 `
 const StatisticsInt = styled.span`
@@ -65,16 +68,16 @@ export const SupplySummary = ({ apy, creators, annualSupplyGrowthRatio }: Props)
       <h2>Current Staking Rewards</h2>
       <SupplySummaryContainer>
         <SupplyBadge>
-          <Statistics>65%</Statistics>
+          <Statistics>{apy?.dp(2).toNumber()}%</Statistics>
           <span>APY for Stakers</span>
         </SupplyBadge>
         <SupplyBadge>
-          <Statistics>85%</Statistics>
+          <Statistics>{creators?.dp(2).toNumber()}%</Statistics>
           <span>APY for Creators</span>
         </SupplyBadge>
         <SupplyBadge>
-          <Statistics>2.33%</Statistics>
-          <span>Annual Supply Growth</span>
+          <Statistics>{annualSupplyGrowthRatio?.dp(2).toNumber()}%</Statistics>
+          <span>ASG of DEV</span>
         </SupplyBadge>
       </SupplySummaryContainer>
       <hr color="lightgrey" />
