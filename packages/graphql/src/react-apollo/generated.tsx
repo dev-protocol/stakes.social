@@ -1,6 +1,6 @@
 import gql from 'graphql-tag'
-import * as ApolloReactCommon from '@apollo/react-common'
-import * as ApolloReactHooks from '@apollo/react-hooks'
+import * as ApolloReactCommon from '@apollo/client'
+import * as ApolloReactHooks from '@apollo/client'
 export type Maybe<T> = T
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] }
 /** All built-in and custom scalars, mapped to their actual values */
@@ -5118,7 +5118,7 @@ export const PropertyFactoryCreateFragmentDoc = gql`
 `
 export const GetMarketFactoryCreateDocument = gql`
   query getMarketFactoryCreate {
-    market_factory_create {
+    market_factory_create(limit: 1, order_by: { block_number: asc }) {
       market
     }
   }
