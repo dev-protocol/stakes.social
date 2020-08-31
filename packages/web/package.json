@@ -50,7 +50,7 @@
     "web3-core": "1.2.11"
   },
   "devDependencies": {
-    "@babel/core": "7.11.4",
+    "@babel/core": "7.11.5",
     "@testing-library/react": "10.4.9",
     "@testing-library/react-hooks": "3.4.1",
     "@types/body-parser": "1.19.0",
