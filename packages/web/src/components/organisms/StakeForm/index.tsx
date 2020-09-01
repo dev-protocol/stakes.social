@@ -1,6 +1,7 @@
 import React from 'react'
 import { useStake } from 'src/fixtures/dev-kit/hooks'
 import { Input } from 'antd'
+import { TransactionForm } from 'src/components/organisms/TransactionForm'
 import styled from 'styled-components'
 
 interface Props {
@@ -40,6 +41,7 @@ export const StakeForm = ({ className, propertyAddress }: Props) => {
     <div className={className}>
       <p>Stake Now</p>
       <StyledForm enterButton="Stake" size="large" onSearch={handleSubmit} suffix="DEV" type="number" />
+      <TransactionForm propertyAddress={propertyAddress} />
     </div>
   )
 }

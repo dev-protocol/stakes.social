@@ -5,16 +5,15 @@ import { TransactionForm } from 'src/components/organisms/TransactionForm'
 import { PropertyHeader } from 'src/components/organisms/PropertyHeader'
 import { AssetOutline } from 'src/components/organisms/AssetOutline'
 import { Footer } from 'src/components/organisms/Footer'
-import Link from 'next/link'
 import { EarlyAccess } from 'src/components/atoms/EarlyAccess'
 import styled from 'styled-components'
 import { Container } from 'src/components/atoms/Container'
-import { PropertyCoverImage } from 'src/components/molecules/PropertyCoverImage'
 import { Header } from 'src/components/organisms/Header'
 import { StakeForm } from 'src/components/organisms/StakeForm'
 import { CancelStaking } from 'src/components/organisms/CancelStaking'
 import { ConnectedApps } from 'src/components/molecules/ConnectedApps'
 import TopStakers from 'src/components/organisms/TopStakers'
+import { useAPY } from 'src/fixtures/dev-kit/hooks'
 
 type Props = {}
 
@@ -23,10 +22,10 @@ const Main = styled(Container)`
   grid-gap: 1rem;
   grid-template-areas:
     'cover'
-    'topstake'
-    'stake'
-    'outline'
     'possession'
+    'stake'
+    'topstake'
+    'outline'
     'transact'
     'apps'
     'cancel';
@@ -34,10 +33,10 @@ const Main = styled(Container)`
     grid-gap: 3rem 2rem;
     grid-template-columns: 0.9fr auto;
     grid-template-areas:
-      'cover outline'
-      'topstake outline'
-      'stake outline'
-      'possession outline'
+      'cover cover'
+      'possession possession'
+      /* 'topstake outline' */
+      'stake stake'
       'transact outline'
       'apps outline'
       'cancel outline';
@@ -45,6 +44,10 @@ const Main = styled(Container)`
 `
 const Cover = styled.div`
   grid-area: cover;
+  img {
+    border-radius: 8px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2), 0 2px 4px -1px rgba(0, 0, 0, 0.12);
+  }
 `
 const Outline = styled(AssetOutline)`
   grid-area: outline;
@@ -70,31 +73,42 @@ const Cancel = styled(CancelStaking)`
   grid-area: cancel;
 `
 
+const Wrap = styled.div`
+  margin: auto auto;
+  max-width: 1048px;
+`
+
 const PropertyAddressDetail = (_: Props) => {
   const { propertyAddress } = useRouter().query as { propertyAddress: string }
+  const { apy, creators } = useAPY()
 
   return (
     <>
-      <EarlyAccess></EarlyAccess>
       <Header></Header>
-      <Container>
-        <PropertyHeader propertyAddress={propertyAddress} />
-      </Container>
-      <Main>
-        <Cover>
-          <PropertyCoverImage propertyAddress={propertyAddress}></PropertyCoverImage>
-          <Link href="//github.com/dev-protocol/assets" passHref>
-            <a target="_blank">Change the cover image</a>
-          </Link>
-        </Cover>
-        <TopStakerList propertyAdress={propertyAddress} />
-        <Stake propertyAddress={propertyAddress} />
-        <Outline propertyAddress={propertyAddress} />
-        <Possession propertyAddress={propertyAddress} />
-        <Transact propertyAddress={propertyAddress} />
-        <Apps />
-        <Cancel propertyAddress={propertyAddress} />
-      </Main>
+      <EarlyAccess></EarlyAccess>
+      <Wrap>
+        <Container>
+          <PropertyHeader apy={apy} creators={creators} propertyAddress={propertyAddress} />
+        </Container>
+        <Main>
+          <Cover>
+            {/* <PropertyCoverImage propertyAddress={propertyAddress}></PropertyCoverImage> */}
+            <img
+              width="100%"
+              height="auto"
+              src="https://res.cloudinary.com/haas-storage/image/upload/v1598703382/vue_xfbs8i.webp"
+            />
+          </Cover>
+          <TopStakerList propertyAdress={propertyAddress} />
+          <Stake propertyAddress={propertyAddress} />
+          <Outline propertyAddress={propertyAddress} />
+          <Possession propertyAddress={propertyAddress} />
+          <Transact propertyAddress={propertyAddress} />
+          <Apps />
+          <Cancel propertyAddress={propertyAddress} />
+        </Main>
+      </Wrap>
+
       <Footer />
     </>
   )
