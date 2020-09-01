@@ -11,6 +11,7 @@ interface Props {
 
 const StyledForm = styled(Input.Search)`
   width: inherit;
+  bottom: 0;
   .ant-input-wrapper {
     display: grid;
     grid-auto-flow: column;
@@ -28,6 +29,11 @@ const StyledForm = styled(Input.Search)`
   }
 `
 
+const StakeContainer = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+`
+
 export const StakeForm = ({ className, propertyAddress }: Props) => {
   const { stake } = useStake()
   const handleSubmit = React.useCallback(
@@ -38,10 +44,12 @@ export const StakeForm = ({ className, propertyAddress }: Props) => {
   )
 
   return (
-    <div className={className}>
-      <p>Stake Now</p>
-      <StyledForm enterButton="Stake" size="large" onSearch={handleSubmit} suffix="DEV" type="number" />
+    <StakeContainer className={className}>
+      <div>
+        <p>Stake Now</p>
+        <StyledForm enterButton="Stake" size="large" onSearch={handleSubmit} suffix="DEV" type="number" />
+      </div>
       <TransactionForm propertyAddress={propertyAddress} />
-    </div>
+    </StakeContainer>
   )
 }

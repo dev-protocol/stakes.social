@@ -1,11 +1,11 @@
 import React, { useMemo } from 'react'
-import { List, Button } from 'antd'
+// import { List } from 'antd'
 import { CircleGraph } from 'src/components/atoms/CircleGraph'
 import { useStakingShare } from 'src/fixtures/dev-kit/hooks'
-import { useGetPropertyAuthenticationQuery } from '@dev/graphql'
+// import { useGetPropertyAuthenticationQuery } from '@dev/graphql'
 import { useGetPropertytInformation } from 'src/fixtures/devprtcl/hooks'
 import styled from 'styled-components'
-import Link from 'next/link'
+// import Link from 'next/link'
 import { ExportOutlined } from '@ant-design/icons'
 
 interface Props {
@@ -30,9 +30,9 @@ const AssetStrengthValue = styled.span`
   font-size: 2rem;
   color: black;
 `
-const AssetListItem = styled(List.Item)`
-  font-size: 1.3rem;
-`
+// const AssetListItem = styled(List.Item)`
+//   font-size: 1.3rem;
+// `
 
 const AuthorContainer = styled.div`
   display: flex;
@@ -135,31 +135,13 @@ const Author = ({ propertyAddress }: { propertyAddress: string }) => {
 }
 
 export const AssetOutline = ({ className, propertyAddress }: Props) => {
-  const { data } = useGetPropertyAuthenticationQuery({ variables: { propertyAddress } })
+  // const { data } = useGetPropertyAuthenticationQuery({ variables: { propertyAddress } })
   /* eslint-disable react-hooks/exhaustive-deps */
   // FYI: https://github.com/facebook/react/pull/19062
-  const includedAssetList = useMemo(() => data?.property_authentication.map(e => e.authentication_id), [data])
+  // const includedAssetList = useMemo(() => data?.property_authentication.map(e => e.authentication_id), [data])
 
   return (
     <OutlinesWrap className={className}>
-      <div>
-        <p>Included Assets</p>
-        <List
-          style={{ background: '#fff' }}
-          bordered
-          dataSource={includedAssetList}
-          renderItem={item => (
-            <AssetListItem>
-              <span style={{ overflow: 'auto' }}>{item}</span>
-            </AssetListItem>
-          )}
-        />
-        <Link href={'/auth/[property]'} as={`/auth/${propertyAddress}`}>
-          <Button type="dashed" size="small" style={{ marginTop: '0.5rem' }}>
-            Add your asset
-          </Button>
-        </Link>
-      </div>
       <Author propertyAddress={propertyAddress} />
       <div>
         <p>Staking Ratio</p>
