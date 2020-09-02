@@ -151,15 +151,12 @@ export const authenticate = async (marketAddress: string, propertyAddress: strin
 
 export const createAndAuthenticate = async (name: string, symbol: string, marketAddress: string, args: string[]) => {
   const client = newClient()
-  if (process.env.NODE_ENV == 'production' && client) {
+  if (client) {
     return client
       .propertyFactory(await getContractAddress(client, 'propertyFactory'))
       .createAndAuthenticate(name, symbol, marketAddress, args, {
         metricsFactory: await getContractAddress(client, 'metricsFactory')
       })
-  } else if (process.env.NODE_ENV == 'development') {
-    console.log('env:', process.env.NODE_ENV, 'return mock value')
-    return 'Dummy:metrics-address'
   }
   return undefined
 }
