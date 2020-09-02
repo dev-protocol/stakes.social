@@ -8,7 +8,7 @@ jest.mock('src/fixtures/github/hooks')
 
 describe(`${MarketOverview.name}`, () => {
   test('Snapshot', () => {
-    const component = render(<MarketOverview />)
+    const component = render(<MarketOverview propertyAddress="0x0" routePrefix="/auth" />)
     const tree = component.baseElement
     expect(tree).toMatchSnapshot()
   })

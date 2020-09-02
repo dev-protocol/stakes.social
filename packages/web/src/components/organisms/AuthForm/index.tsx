@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Form, Input, Button, Result } from 'antd'
-import { useMarketScheme, useAuthenticate } from 'src/fixtures/dev-kit/hooks'
+import { useMarketScheme, useAuthenticate, useCreateAndAuthenticate } from 'src/fixtures/dev-kit/hooks'
 import { usePostSignGitHubMarketAsset } from 'src/fixtures/khaos/hooks'
 import { useEffectAsync } from 'src/fixtures/utility'
 import styled from 'styled-components'
@@ -10,7 +10,7 @@ const NpmMarketContractAddress = '0x88c7B1f41DdE50efFc25541a2E0769B887eB2ee7'
 
 export interface Props {
   market: string
-  property: string
+  property?: string
 }
 
 const Container = styled.div`
@@ -68,6 +68,27 @@ const GitHubMarketSchemeInput = () => {
   )
 }
 
+const PropertyInput = () => {
+  return (
+    <>
+      <Form.Item
+        name="propertyName"
+        rules={[{ required: true, message: 'Please input your pool name' }]}
+        key="propertyName"
+      >
+        <Input placeholder="Your pool name" />
+      </Form.Item>
+      <Form.Item
+        name="propertySymbol"
+        rules={[{ required: true, message: 'Please input your pool symbol' }]}
+        key="propertySymbol"
+      >
+        <Input placeholder="Your pool symbol" />
+      </Form.Item>
+    </>
+  )
+}
+
 const Notify = () => (
   <Result
     title="GitHub Market is currently invite-only"
@@ -91,6 +112,7 @@ export const AuthForm = ({ market, property }: Props) => {
   const { marketScheme } = useMarketScheme()
   const { postSignGitHubMarketAssetHandler } = usePostSignGitHubMarketAsset()
   const { authenticate } = useAuthenticate()
+  const { createAndAuthenticate } = useCreateAndAuthenticate()
   const onFinish = async (values: any) => {
     const authRequestData: string[] =
       market === NpmMarketContractAddress
@@ -102,7 +124,12 @@ export const AuthForm = ({ market, property }: Props) => {
             return [repository, khaos.publicSignature || '']
           })()
 
-    const metrics = await authenticate(market, property, authRequestData)
+    const metrics = await (property
+      ? authenticate(market, property, authRequestData)
+      : ((name, symbol) => createAndAuthenticate(name, symbol, market, authRequestData))(
+          values.propertyName,
+          values.propertySymbol
+        ))
 
     if (metrics) {
       setMetrics(metrics)
@@ -118,8 +145,14 @@ export const AuthForm = ({ market, property }: Props) => {
     <Container>
       {market !== NpmMarketContractAddress && metrics === '' ? <Notify /> : ''}
       <Row>
-        <span>Associating Property:</span>
-        <span>{property}</span>
+        {property ? (
+          <>
+            <span>Associating Property:</span>
+            <span>{property}</span>
+          </>
+        ) : (
+          ''
+        )}
       </Row>
       {metrics ? (
         <Result
@@ -139,6 +172,7 @@ export const AuthForm = ({ market, property }: Props) => {
         <Row>
           <span>Arguments:</span>
           <Form name="basic" initialValues={{ remember: true }} onFinish={onFinish}>
+            {property ? '' : <PropertyInput />}
             {market === NpmMarketContractAddress ? (
               <DefaultMarketSchemeInput schemeList={schemeList} />
             ) : (

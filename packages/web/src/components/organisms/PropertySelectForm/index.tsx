@@ -55,17 +55,6 @@ export const PropertySelectForm = (_: Props) => {
         <span>Associating Property:</span>
         <AuthorSelector query={query} author={author} onChange={onChange} onSearch={onSearch} disabled={isCreated} />
       </TwoColumns>
-      <OneColumn>
-        <ButtonAsLink type="link" onClick={() => setIsOpen(!isOpen)}>
-          Or create a new Property
-        </ButtonAsLink>
-        {isOpen && <StyledPropertyCreateForm author={author} onSubmit={onSubmit} />}
-      </OneColumn>
-      {property && (
-        <Link href={'/auth/[property]'} as={`/auth/${property}`}>
-          <Button>Associate an asset</Button>
-        </Link>
-      )}
     </Form>
   )
 }

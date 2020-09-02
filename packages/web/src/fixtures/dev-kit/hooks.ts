@@ -17,7 +17,8 @@ import {
   calculateMaxRewardsPerBlock,
   totalSupply,
   holdersShare,
-  createGetVotablePolicy
+  createGetVotablePolicy,
+  createAndAuthenticate
 } from './client'
 import { SWRCachePath } from './cache-path'
 import { UnwrapFunc, toNaturalNumber, toAmountNumber } from 'src/fixtures/utility'
@@ -296,6 +297,30 @@ export const useAuthenticate = () => {
       })
   }, [])
   return { authenticate: callback, isLoading, error }
+}
+
+export const useCreateAndAuthenticate = () => {
+  const key = 'useCreateAndAuthenticate'
+  const [isLoading, setIsLoading] = useState<boolean>(false)
+  const [error, setError] = useState<Error>()
+  const callback = useCallback(async (name: string, symbol: string, marketAddress: string, args: string[]) => {
+    setIsLoading(true)
+    message.loading({ content: 'now authenticating...', duration: 0, key })
+    setError(undefined)
+    return createAndAuthenticate(name, symbol, marketAddress, args)
+      .then(metricsAddress => {
+        setIsLoading(false)
+        message.success({ content: 'success authenticate!', key })
+        return metricsAddress
+      })
+      .catch(err => {
+        setError(err)
+        message.error({ content: err.message, key })
+        setIsLoading(false)
+        return ''
+      })
+  }, [])
+  return { createAndAuthenticate: callback, isLoading, error }
 }
 
 export const useAPY = () => {

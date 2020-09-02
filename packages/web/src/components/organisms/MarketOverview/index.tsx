@@ -16,11 +16,22 @@ const Text: React.FC = ({ children }) => (
   </div>
 )
 
-const Contents = ({ marketAddress, propertyAddress }: { marketAddress: string; propertyAddress: string }) => {
+const Contents = ({
+  marketAddress,
+  propertyAddress,
+  routePrefix
+}: {
+  marketAddress: string
+  propertyAddress?: string
+  routePrefix: string
+}) => {
   const { data } = useGetMarketInformation(marketAddress)
   return data ? (
     <div>
-      <Link href={'/auth/[property]/[market]'} as={`/auth/${propertyAddress}/${marketAddress}`}>
+      <Link
+        href={propertyAddress ? `${routePrefix}/[property]/[market]` : `${routePrefix}/[market]`}
+        as={propertyAddress ? `${routePrefix}/${propertyAddress}/${marketAddress}` : `${routePrefix}/${marketAddress}`}
+      >
         <h2
           style={{
             fontSize: '36px',
@@ -41,14 +52,18 @@ const Contents = ({ marketAddress, propertyAddress }: { marketAddress: string; p
   )
 }
 
-export const MarketOverview = ({ propertyAddress }: { propertyAddress: string }) => {
+export const MarketOverview = ({ propertyAddress, routePrefix }: { propertyAddress?: string; routePrefix: string }) => {
   const { data } = useGetMarketFactoryCreateQuery()
   return (
     <div style={{ maxWidth: '680px', marginRight: 'auto', marginLeft: 'auto' }}>
       <Row style={{ margin: '82px 0px' }}>
         <Col span={24}>
           {data?.market_factory_create[0]?.market && (
-            <Contents propertyAddress={propertyAddress} marketAddress={data?.market_factory_create[0]?.market} />
+            <Contents
+              propertyAddress={propertyAddress}
+              marketAddress={data?.market_factory_create[0]?.market}
+              routePrefix={routePrefix}
+            />
           )}
         </Col>
       </Row>
