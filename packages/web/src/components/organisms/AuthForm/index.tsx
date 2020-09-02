@@ -71,20 +71,26 @@ const GitHubMarketSchemeInput = () => {
 const PropertyInput = () => {
   return (
     <>
-      <Form.Item
-        name="propertyName"
-        rules={[{ required: true, message: 'Please input your pool name' }]}
-        key="propertyName"
-      >
-        <Input placeholder="Your pool name" />
-      </Form.Item>
-      <Form.Item
-        name="propertySymbol"
-        rules={[{ required: true, message: 'Please input your pool symbol' }]}
-        key="propertySymbol"
-      >
-        <Input placeholder="Your pool symbol" />
-      </Form.Item>
+      <Row>
+        <span>Pool name:</span>
+        <Form.Item
+          name="propertyName"
+          rules={[{ required: true, message: 'Please input your pool name' }]}
+          key="propertyName"
+        >
+          <Input placeholder="Your pool name" />
+        </Form.Item>
+      </Row>
+      <Row>
+        <span>Pool symbol:</span>
+        <Form.Item
+          name="propertySymbol"
+          rules={[{ required: true, message: 'Please input your pool symbol' }]}
+          key="propertySymbol"
+        >
+          <Input placeholder="Your pool symbol" />
+        </Form.Item>
+      </Row>
     </>
   )
 }
@@ -124,6 +130,7 @@ export const AuthForm = ({ market, property }: Props) => {
             return [repository, khaos.publicSignature || '']
           })()
 
+    debugger
     const metrics = await (property
       ? authenticate(market, property, authRequestData)
       : ((name, symbol) => createAndAuthenticate(name, symbol, market, authRequestData))(
@@ -169,10 +176,11 @@ export const AuthForm = ({ market, property }: Props) => {
           ]}
         />
       ) : (
-        <Row>
-          <span>Arguments:</span>
-          <Form name="basic" initialValues={{ remember: true }} onFinish={onFinish}>
-            {property ? '' : <PropertyInput />}
+        <Form name="basic" initialValues={{ remember: true }} onFinish={onFinish}>
+          {property ? '' : <PropertyInput />}
+
+          <Row>
+            <span>Arguments:</span>
             {market === NpmMarketContractAddress ? (
               <DefaultMarketSchemeInput schemeList={schemeList} />
             ) : (
@@ -181,8 +189,8 @@ export const AuthForm = ({ market, property }: Props) => {
             <Button type="primary" htmlType="submit">
               Authenticate
             </Button>
-          </Form>
-        </Row>
+          </Row>
+        </Form>
       )}
     </Container>
   )

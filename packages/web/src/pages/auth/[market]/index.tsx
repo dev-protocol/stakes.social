@@ -17,7 +17,7 @@ const Container = styled.div`
 `
 
 const AuthenticateNewAsset = (_: Props) => {
-  const { market, property } = useRouter().query as { market: string; property: string }
+  const { market } = useRouter().query as { market: string }
 
   return (
     <>
@@ -26,7 +26,7 @@ const AuthenticateNewAsset = (_: Props) => {
         <H2>Create a new Property and authenticate</H2>
       </Headline>
       <Container>
-        <AuthForm market={market} property={property} />
+        <AuthForm market={market} />
       </Container>
       <Footer />
     </>

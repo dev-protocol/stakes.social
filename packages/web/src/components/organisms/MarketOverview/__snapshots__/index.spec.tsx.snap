@@ -30,12 +30,6 @@ exports[`MarketOverview Snapshot 1`] = `
               Authentication: 
               Your npm package
             </div>
-            <div
-              style="font-size: 18px; line-height: 24px; color: rgba(0, 0, 0, 0.85);"
-            >
-              Calculation: 
-              Number of downloads
-            </div>
           </div>
         </div>
       </div>

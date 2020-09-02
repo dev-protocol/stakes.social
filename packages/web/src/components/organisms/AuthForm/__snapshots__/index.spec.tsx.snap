@@ -68,16 +68,17 @@ exports[`AuthForm Snapshot 1`] = `
           property
         </span>
       </div>
-      <div
-        class="bja7zw-1 cmaEXV"
+      <form
+        class="ant-form ant-form-horizontal"
+        id="basic"
       >
-        <span>
-          Arguments:
-        </span>
-        <form
-          class="ant-form ant-form-horizontal"
-          id="basic"
+        
+        <div
+          class="bja7zw-1 cmaEXV"
         >
+          <span>
+            Arguments:
+          </span>
           <div
             class="ant-row ant-form-item"
           >
@@ -152,8 +153,8 @@ exports[`AuthForm Snapshot 1`] = `
               Authenticate
             </span>
           </button>
-        </form>
-      </div>
+        </div>
+      </form>
     </div>
   </div>
 </body>
