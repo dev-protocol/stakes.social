@@ -52,10 +52,11 @@ const ProfilePicture = styled.img`
   width: 150px;
   border-radius: 90px;
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2), 0 2px 4px -1px rgba(0, 0, 0, 0.12);
-  transform: translateY(-75px);
 `
 const Flex = styled.div`
-  display: flex;
+  display: grid;
+  grid-template-columns: 170px auto;
+  transform: translateY(-75px);
 `
 
 export const Banner = () => {
@@ -83,14 +84,21 @@ const AuthorAddressDetail = (_: Props) => {
       <EarlyAccess></EarlyAccess>
       <Banner />
       <Wrap>
+        {/* <Main> */}
+        <Flex>
+          <ProfilePicture src="https://res.cloudinary.com/haas-storage/image/upload/v1598963050/72989_gve7hf.jpg" />
+          <div style={{ display: 'grid', gridTemplateRows: '1fr 1fr' }}>
+            <div style={{ gridRow: '2 / -1' }}>
+              <h2>Kazuya Kawaguchi</h2>
+              <div>5,000 karma</div>
+            </div>
+          </div>
+        </Flex>
+        {/* </Main> */}
+      </Wrap>
+      <hr color="lightgrey" />
+      <Wrap>
         <Main>
-          <Flex>
-            <ProfilePicture src="https://res.cloudinary.com/haas-storage/image/upload/v1598963050/72989_gve7hf.jpg" />
-            <div>KAZUPO</div>
-            <div>5,000 karma</div>
-          </Flex>
-
-          <div> why</div>
           <div>sup {author}</div>
         </Main>
       </Wrap>
