@@ -11,7 +11,7 @@ interface Props {
 const Wrap = styled.div`
   display: grid;
   grid-gap: 1rem;
-  grid-template-columns: repeat(auto-fill, 200px);
+  grid-template-columns: 1fr 1fr;
   justify-content: space-between;
   @media (min-width: 1120px) {
     grid-auto-flow: column;

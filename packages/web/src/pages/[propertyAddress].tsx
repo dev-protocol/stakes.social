@@ -36,6 +36,7 @@ type Props = {}
 const Main = styled(Container)`
   display: grid;
   grid-gap: 1rem;
+  grid-template-columns: 1fr;
   grid-template-areas:
     'cover'
     'possession'
