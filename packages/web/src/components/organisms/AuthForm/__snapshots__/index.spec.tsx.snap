@@ -48,7 +48,7 @@ exports[`AuthForm Snapshot 1`] = `
           <p>
             <a
               class="ant-btn ant-btn-primary"
-              href="https://forms.gle/MVxEvdPNNig9YdBu6"
+              href="/invite/github"
               target="_blank"
             >
               <span>

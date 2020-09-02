@@ -1,0 +1,111 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`InvitationRequestForm Snapshot 1`] = `
+<body>
+  <div>
+    <div
+      class="dhltmz-0 fMwGGH"
+    >
+      <div
+        class="dhltmz-1 cVAoyt"
+      >
+        <span>
+          Associating Market:
+        </span>
+        <span>
+          market
+        </span>
+      </div>
+      <div
+        class="dhltmz-1 cVAoyt"
+      >
+        <span>
+          Arguments:
+        </span>
+        <form
+          class="ant-form ant-form-horizontal"
+          id="basic"
+        >
+          <div
+            class="ant-row ant-form-item"
+          >
+            <div
+              class="ant-col ant-form-item-control"
+            >
+              <div
+                class="ant-form-item-control-input"
+              >
+                <div
+                  class="ant-form-item-control-input-content"
+                >
+                  <input
+                    class="ant-input"
+                    id="basic_asset"
+                    placeholder="asset name"
+                    type="text"
+                    value=""
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            class="ant-row ant-form-item"
+          >
+            <div
+              class="ant-col ant-form-item-control"
+            >
+              <div
+                class="ant-form-item-control-input"
+              >
+                <div
+                  class="ant-form-item-control-input-content"
+                >
+                  <input
+                    class="ant-input"
+                    id="basic_email"
+                    placeholder="email address"
+                    type="text"
+                    value=""
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            class="ant-row ant-form-item"
+          >
+            <div
+              class="ant-col ant-form-item-control"
+            >
+              <div
+                class="ant-form-item-control-input"
+              >
+                <div
+                  class="ant-form-item-control-input-content"
+                >
+                  <input
+                    class="ant-input"
+                    id="basic_discord"
+                    placeholder="discord profile name"
+                    type="text"
+                    value=""
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+          <button
+            class="ant-btn ant-btn-primary"
+            type="submit"
+          >
+            <span>
+              Invitation Request
+            </span>
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</body>
+`;
