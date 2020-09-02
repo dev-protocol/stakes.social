@@ -6,49 +6,26 @@ exports[`InvitationRequestForm Snapshot 1`] = `
     <div
       class="dhltmz-0 fMwGGH"
     >
-      <div
-        class="dhltmz-1 cVAoyt"
+      <form
+        class="ant-form ant-form-horizontal"
+        id="basic"
       >
-        <span>
-          Associating Market:
-        </span>
-        <span>
-          market
-        </span>
-      </div>
-      <div
-        class="dhltmz-1 cVAoyt"
-      >
-        <span>
-          Arguments:
-        </span>
-        <form
-          class="ant-form ant-form-horizontal"
-          id="basic"
+        <div
+          class="dhltmz-1 innfzn"
         >
-          <div
-            class="ant-row ant-form-item"
-          >
-            <div
-              class="ant-col ant-form-item-control"
-            >
-              <div
-                class="ant-form-item-control-input"
-              >
-                <div
-                  class="ant-form-item-control-input-content"
-                >
-                  <input
-                    class="ant-input"
-                    id="basic_asset"
-                    placeholder="asset name"
-                    type="text"
-                    value=""
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
+          <span>
+            Associating Market:
+          </span>
+          <p>
+            market
+          </p>
+        </div>
+        <div
+          class="dhltmz-1 innfzn"
+        >
+          <span>
+            Your email:
+          </span>
           <div
             class="ant-row ant-form-item"
           >
@@ -64,7 +41,7 @@ exports[`InvitationRequestForm Snapshot 1`] = `
                   <input
                     class="ant-input"
                     id="basic_email"
-                    placeholder="email address"
+                    placeholder="email"
                     type="text"
                     value=""
                   />
@@ -72,6 +49,169 @@ exports[`InvitationRequestForm Snapshot 1`] = `
               </div>
             </div>
           </div>
+        </div>
+        <div
+          class="dhltmz-1 innfzn"
+        >
+          <span>
+            Your name:
+          </span>
+          <div
+            class="ant-row ant-form-item"
+          >
+            <div
+              class="ant-col ant-form-item-control"
+            >
+              <div
+                class="ant-form-item-control-input"
+              >
+                <div
+                  class="ant-form-item-control-input-content"
+                >
+                  <input
+                    class="ant-input"
+                    id="basic_name"
+                    placeholder="name"
+                    type="text"
+                    value=""
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          class="dhltmz-1 innfzn"
+        >
+          <span>
+            Your project:
+          </span>
+          <div
+            class="ant-row ant-form-item"
+          >
+            <div
+              class="ant-col ant-form-item-control"
+            >
+              <div
+                class="ant-form-item-control-input"
+              >
+                <div
+                  class="ant-form-item-control-input-content"
+                >
+                  <input
+                    class="ant-input"
+                    id="basic_asset"
+                    placeholder="project (e.g., your/awesome-repos)"
+                    type="text"
+                    value=""
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          class="dhltmz-1 innfzn"
+        >
+          <span>
+            Project
+            '
+            s use case:
+          </span>
+          <div
+            class="ant-row ant-form-item"
+          >
+            <div
+              class="ant-col ant-form-item-control"
+            >
+              <div
+                class="ant-form-item-control-input"
+              >
+                <div
+                  class="ant-form-item-control-input-content"
+                >
+                  <textarea
+                    class="ant-input"
+                    id="basic_useCase"
+                    placeholder="use case"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          class="dhltmz-1 innfzn"
+        >
+          <span>
+            Your role:
+          </span>
+          <div
+            class="ant-row ant-form-item"
+          >
+            <div
+              class="ant-col ant-form-item-control"
+            >
+              <div
+                class="ant-form-item-control-input"
+              >
+                <div
+                  class="ant-form-item-control-input-content"
+                >
+                  <input
+                    class="ant-input"
+                    id="basic_role"
+                    placeholder="role"
+                    type="text"
+                    value=""
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          class="dhltmz-1 innfzn"
+        >
+          <span>
+            Project website or social media:
+          </span>
+          <div
+            class="ant-row ant-form-item"
+          >
+            <div
+              class="ant-col ant-form-item-control"
+            >
+              <div
+                class="ant-form-item-control-input"
+              >
+                <div
+                  class="ant-form-item-control-input-content"
+                >
+                  <input
+                    class="ant-input"
+                    id="basic_url"
+                    placeholder="url"
+                    type="text"
+                    value=""
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          class="dhltmz-1 innfzn"
+        >
+          <span>
+            Your 
+            <a
+              href="https://discord.gg/WnQXqpQ"
+            >
+              Dev Protocol Discord
+            </a>
+             name:
+          </span>
           <div
             class="ant-row ant-form-item"
           >
@@ -87,7 +227,36 @@ exports[`InvitationRequestForm Snapshot 1`] = `
                   <input
                     class="ant-input"
                     id="basic_discord"
-                    placeholder="discord profile name"
+                    placeholder="discord name"
+                    type="text"
+                    value=""
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          class="dhltmz-1 innfzn"
+        >
+          <span>
+            Is there anything else to know?:
+          </span>
+          <div
+            class="ant-row ant-form-item"
+          >
+            <div
+              class="ant-col ant-form-item-control"
+            >
+              <div
+                class="ant-form-item-control-input"
+              >
+                <div
+                  class="ant-form-item-control-input-content"
+                >
+                  <input
+                    class="ant-input"
+                    id="basic_ask"
                     type="text"
                     value=""
                   />
@@ -100,11 +269,11 @@ exports[`InvitationRequestForm Snapshot 1`] = `
             type="submit"
           >
             <span>
-              Invitation Request
+              Sign to invitation request
             </span>
           </button>
-        </form>
-      </div>
+        </div>
+      </form>
     </div>
   </div>
 </body>

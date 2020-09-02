@@ -4,25 +4,47 @@ export interface InvitationResult {
   success: boolean
 }
 
-export const postInvitation = (
-  asset: string,
-  email: string,
-  discord: string,
-  signMessage: string,
-  marketAddress: string,
+export const postInvitation = ({
+  asset,
+  email,
+  discord,
+  signMessage,
+  market,
+  name,
+  role,
+  url,
+  useCase,
+  ask,
+  signature
+}: {
+  asset: string
+  email: string
+  discord: string
+  signMessage: string
+  market: string
+  name: string
+  role: string
+  url: string
+  useCase: string
+  ask: string
   signature?: string
-): Promise<InvitationResult> =>
+}): Promise<InvitationResult> =>
   fetch(`${BaseUrl}/invitation`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json; charset=utf-8'
     },
     body: JSON.stringify({
-      asset: asset,
-      email: email,
-      discord: discord,
-      signature: signature,
-      message: signMessage,
-      market: marketAddress
+      asset,
+      email,
+      discord,
+      signature,
+      name,
+      role,
+      url,
+      useCase,
+      ask,
+      market,
+      message: signMessage
     })
   }).then(res => res.json())

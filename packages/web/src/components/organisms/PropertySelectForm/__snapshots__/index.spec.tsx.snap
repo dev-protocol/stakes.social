@@ -72,18 +72,6 @@ exports[`PropertySelectForm Snapshot 1`] = `
           </span>
         </div>
       </div>
-      <div
-        class="sc-5tv67d-1 fpxiQK"
-      >
-        <button
-          class="ant-btn sc-5tv67d-3 jEUHCK ant-btn-link"
-          type="button"
-        >
-          <span>
-            Or create a new Property
-          </span>
-        </button>
-      </div>
     </div>
   </div>
 </body>

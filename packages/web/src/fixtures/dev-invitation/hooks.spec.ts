@@ -23,7 +23,23 @@ describe('dev-invitation hooks', () => {
         const asset = 'dummy asset'
         const email = 'dummy@dummy.com'
         const discord = 'dummy-discord'
-        const ret = await result.current.postInvitationHandler(asset, email, discord)
+        const name = 'Name'
+        const role = 'Role'
+        const url = 'Url'
+        const useCase = 'UseCase'
+        const ask = 'Ask'
+        const market = 'Market'
+        const ret = await result.current.postInvitationHandler({
+          asset,
+          email,
+          discord,
+          name,
+          role,
+          url,
+          useCase,
+          ask,
+          market
+        })
         expect(ret).toBe(data)
       })
     })
@@ -39,7 +55,23 @@ describe('dev-invitation hooks', () => {
         const asset = 'dummy asset'
         const email = 'dummy@dummy.com'
         const discord = 'dummy-discord'
-        const ret = await result.current.postInvitationHandler(asset, email, discord)
+        const name = 'Name'
+        const role = 'Role'
+        const url = 'Url'
+        const useCase = 'UseCase'
+        const ask = 'Ask'
+        const market = 'Market'
+        const ret = await result.current.postInvitationHandler({
+          asset,
+          email,
+          discord,
+          name,
+          role,
+          url,
+          useCase,
+          ask,
+          market
+        })
         expect(ret.success).toBe(false)
       })
       expect(result.current.isLoading).toBe(false)
@@ -57,7 +89,23 @@ describe('dev-invitation hooks', () => {
         const asset = 'dummy asset'
         const email = 'dummy@dummy.com'
         const discord = 'dummy-discord'
-        const ret = await result.current.postInvitationHandler(asset, email, discord)
+        const name = 'Name'
+        const role = 'Role'
+        const url = 'Url'
+        const useCase = 'UseCase'
+        const ask = 'Ask'
+        const market = 'Market'
+        const ret = await result.current.postInvitationHandler({
+          asset,
+          email,
+          discord,
+          name,
+          role,
+          url,
+          useCase,
+          ask,
+          market
+        })
         expect(ret.success).toBe(false)
       })
       expect(result.current.isLoading).toBe(false)
