@@ -47,6 +47,17 @@ const Logo = styled.div`
   background-color: black;
 `
 
+const ProfilePicture = styled.img`
+  height: 150px;
+  width: 150px;
+  border-radius: 90px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2), 0 2px 4px -1px rgba(0, 0, 0, 0.12);
+  transform: translateY(-75px);
+`
+const Flex = styled.div`
+  display: flex;
+`
+
 export const Banner = () => {
   return (
     <div style={{ backgroundColor: 'black' }}>
@@ -73,6 +84,13 @@ const AuthorAddressDetail = (_: Props) => {
       <Banner />
       <Wrap>
         <Main>
+          <Flex>
+            <ProfilePicture src="https://res.cloudinary.com/haas-storage/image/upload/v1598963050/72989_gve7hf.jpg" />
+            <div>KAZUPO</div>
+            <div>5,000 karma</div>
+          </Flex>
+
+          <div> why</div>
           <div>sup {author}</div>
         </Main>
       </Wrap>
