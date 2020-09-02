@@ -130,7 +130,6 @@ export const AuthForm = ({ market, property }: Props) => {
             return [repository, khaos.publicSignature || '']
           })()
 
-    debugger
     const metrics = await (property
       ? authenticate(market, property, authRequestData)
       : ((name, symbol) => createAndAuthenticate(name, symbol, market, authRequestData))(
@@ -181,14 +180,16 @@ export const AuthForm = ({ market, property }: Props) => {
 
           <Row>
             <span>Arguments:</span>
-            {market === NpmMarketContractAddress ? (
-              <DefaultMarketSchemeInput schemeList={schemeList} />
-            ) : (
-              <GitHubMarketSchemeInput />
-            )}
-            <Button type="primary" htmlType="submit">
-              Authenticate
-            </Button>
+            <div>
+              {market === NpmMarketContractAddress ? (
+                <DefaultMarketSchemeInput schemeList={schemeList} />
+              ) : (
+                <GitHubMarketSchemeInput />
+              )}
+              <Button type="primary" htmlType="submit">
+                Authenticate
+              </Button>
+            </div>
           </Row>
         </Form>
       )}
