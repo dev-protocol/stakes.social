@@ -16,7 +16,7 @@ export const getContractAddress = async (
     if (!cache.get(net)) {
       cache.set(net, new Map())
     }
-    const address = await client.registry('0xD6D07f1c048bDF2B3d5d9B6c25eD1FC5348D0A70')[contract]()
+    const address = await client.registry(addresses.eth[net]?.registry)[contract]()
     cache.get(net)?.set(contract, address)
     return address
   })(cache.get(net)?.get(contract))

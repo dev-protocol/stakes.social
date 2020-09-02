@@ -13,7 +13,27 @@ export const usePostInvitation = (marketAddress: string) => {
   const shouldFetch = marketAddress !== ''
   const { data } = useSWR<UnwrapFunc<typeof postInvitation>, Error>(shouldFetch ? SWRCachePath.postInvitation() : null)
 
-  const postInvitationHandler = async (asset: string, email: string, discord: string) => {
+  const postInvitationHandler = async ({
+    asset,
+    email,
+    discord,
+    market,
+    name,
+    role,
+    url,
+    useCase,
+    ask
+  }: {
+    asset: string
+    email: string
+    discord: string
+    market: string
+    name: string
+    role: string
+    url: string
+    useCase: string
+    ask: string
+  }) => {
     const signMessage = `invitation: ${asset}`
     const signature = await sign(signMessage)
     if (signature === undefined) {
@@ -24,7 +44,19 @@ export const usePostInvitation = (marketAddress: string) => {
     setIsLoading(true)
     message.loading({ content: 'invitation request...', duration: 0, key })
 
-    return postInvitation(asset, email, discord, signMessage, marketAddress, signature)
+    return postInvitation({
+      asset,
+      email,
+      discord,
+      signMessage,
+      market,
+      signature,
+      name,
+      role,
+      url,
+      useCase,
+      ask
+    })
       .then(result => {
         if (result.success) {
           message.success({ content: 'success', key })

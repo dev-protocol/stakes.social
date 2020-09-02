@@ -24,6 +24,10 @@ const InvitationRequest = (_: Props) => {
       <Header />
       <Headline height={300}>
         <H2>Invitation Request</H2>
+        <p>
+          Dev Protocol is now accepting creator{"'"}s applications to onboard your Github assets to Stakes.Social. Let
+          {"'"}s make open source sustainable!
+        </p>
       </Headline>
       <WrapContainer>
         <InvitationRequestForm market={market} />
