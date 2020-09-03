@@ -11,3 +11,8 @@ export const useGetMarketInformation = () => {
     }
   }
 }
+export const useGetMarkets = () => {
+  return {
+    data: ['0x34A7AdC94C4D41C3e3469F98033B372cB2fAf318']
+  }
+}
