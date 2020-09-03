@@ -95,7 +95,7 @@ exports[`AuthForm Snapshot 1`] = `
                     <input
                       class="ant-input"
                       id="basic_repositoryName"
-                      placeholder="repository name"
+                      placeholder="your/awesome-repos"
                       type="text"
                       value=""
                     />
@@ -144,14 +144,22 @@ exports[`AuthForm Snapshot 1`] = `
                 </span>
               </a>
                
-              and paste it here.
+              and paste it here. PAT is securely oraclize using Khaos(
+              <a
+                href="https://github.com/dev-protocol/khaos"
+                rel="noreferrer"
+                target="_blank"
+              >
+                *
+              </a>
+              ).
             </p>
             <button
               class="ant-btn ant-btn-primary"
               type="submit"
             >
               <span>
-                Authenticate
+                Sign to authenticate
               </span>
             </button>
           </div>
