@@ -48,7 +48,7 @@ exports[`AuthForm Snapshot 1`] = `
           <p>
             <a
               class="ant-btn ant-btn-primary"
-              href="https://forms.gle/MVxEvdPNNig9YdBu6"
+              href="/invite/github"
               target="_blank"
             >
               <span>
@@ -68,92 +68,103 @@ exports[`AuthForm Snapshot 1`] = `
           property
         </span>
       </div>
-      <div
-        class="bja7zw-1 cmaEXV"
+      <form
+        class="ant-form ant-form-horizontal"
+        id="basic"
       >
-        <span>
-          Arguments:
-        </span>
-        <form
-          class="ant-form ant-form-horizontal"
-          id="basic"
+        
+        <div
+          class="bja7zw-1 cmaEXV"
         >
-          <div
-            class="ant-row ant-form-item"
-          >
+          <span>
+            Arguments:
+          </span>
+          <div>
             <div
-              class="ant-col ant-form-item-control"
+              class="ant-row ant-form-item"
             >
               <div
-                class="ant-form-item-control-input"
+                class="ant-col ant-form-item-control"
               >
                 <div
-                  class="ant-form-item-control-input-content"
+                  class="ant-form-item-control-input"
                 >
-                  <input
-                    class="ant-input"
-                    id="basic_repositoryName"
-                    placeholder="repository name"
-                    type="text"
-                    value=""
-                  />
+                  <div
+                    class="ant-form-item-control-input-content"
+                  >
+                    <input
+                      class="ant-input"
+                      id="basic_repositoryName"
+                      placeholder="your/awesome-repos"
+                      type="text"
+                      value=""
+                    />
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-          <div
-            class="ant-row ant-form-item"
-          >
             <div
-              class="ant-col ant-form-item-control"
+              class="ant-row ant-form-item"
             >
               <div
-                class="ant-form-item-control-input"
+                class="ant-col ant-form-item-control"
               >
                 <div
-                  class="ant-form-item-control-input-content"
+                  class="ant-form-item-control-input"
                 >
-                  <input
-                    class="ant-input"
-                    id="basic_personalAccessToken"
-                    placeholder="Personal Access Token"
-                    type="text"
-                    value=""
-                  />
+                  <div
+                    class="ant-form-item-control-input-content"
+                  >
+                    <input
+                      class="ant-input"
+                      id="basic_personalAccessToken"
+                      placeholder="Personal Access Token"
+                      type="text"
+                      value=""
+                    />
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-          <p>
-            Please
-             
-            <a
-              href="https://github.com/settings/tokens/new"
-              rel="noreferrer"
-              target="_blank"
-            >
-              create a Personal Access Token 
-              <span
-                class="ant-typography"
+            <p>
+              Please
+               
+              <a
+                href="https://github.com/settings/tokens/new"
+                rel="noreferrer"
+                target="_blank"
               >
-                <mark>
-                  without all scopes
-                </mark>
+                create a Personal Access Token 
+                <span
+                  class="ant-typography"
+                >
+                  <mark>
+                    without all scopes
+                  </mark>
+                </span>
+              </a>
+               
+              and paste it here. PAT is securely oraclize using Khaos(
+              <a
+                href="https://github.com/dev-protocol/khaos"
+                rel="noreferrer"
+                target="_blank"
+              >
+                *
+              </a>
+              ).
+            </p>
+            <button
+              class="ant-btn ant-btn-primary"
+              type="submit"
+            >
+              <span>
+                Authenticate
               </span>
-            </a>
-             
-            and paste it here.
-          </p>
-          <button
-            class="ant-btn ant-btn-primary"
-            type="submit"
-          >
-            <span>
-              Authenticate
-            </span>
-          </button>
-        </form>
-      </div>
+            </button>
+          </div>
+        </div>
+      </form>
     </div>
   </div>
 </body>

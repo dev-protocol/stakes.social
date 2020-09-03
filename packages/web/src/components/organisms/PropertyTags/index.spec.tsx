@@ -1,14 +1,13 @@
 import React from 'react'
 import { render } from '@testing-library/react'
-import { MarketOverview } from '.'
+import { PropertyTags } from '.'
 import 'src/__mocks__/window/matchMedia.mock'
 
-jest.mock('@dev/graphql')
-jest.mock('src/fixtures/github/hooks')
+jest.mock('src/fixtures/dev-for-apps/hooks')
 
-describe(`${MarketOverview.name}`, () => {
+describe(`${PropertyTags.name}`, () => {
   test('Snapshot', () => {
-    const component = render(<MarketOverview propertyAddress="0x0" />)
+    const component = render(<PropertyTags />)
     const tree = component.baseElement
     expect(tree).toMatchSnapshot()
   })

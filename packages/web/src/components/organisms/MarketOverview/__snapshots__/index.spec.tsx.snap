@@ -13,28 +13,47 @@ exports[`MarketOverview Snapshot 1`] = `
         <div
           class="ant-col ant-col-24"
         >
-          <div>
-            <h2
-              style="font-size: 36px; line-height: 48px; color: rgb(47, 128, 237); cursor: pointer;"
-            >
-              npm
-            </h2>
+          <div
+            class="ant-list ant-list-split ant-list-bordered"
+          >
             <div
-              style="font-size: 18px; line-height: 24px; color: rgba(0, 0, 0, 0.85);"
+              class="ant-spin-nested-loading"
             >
-              Marketize the number of downloads of public npm packages.
-            </div>
-            <div
-              style="font-size: 18px; line-height: 24px; color: rgba(0, 0, 0, 0.85);"
-            >
-              Authentication: 
-              Your npm package
-            </div>
-            <div
-              style="font-size: 18px; line-height: 24px; color: rgba(0, 0, 0, 0.85);"
-            >
-              Calculation: 
-              Number of downloads
+              <div
+                class="ant-spin-container"
+              >
+                <ul
+                  class="ant-list-items"
+                >
+                  <li
+                    class="ant-list-item"
+                  >
+                    <div
+                      class="ant-list-item-meta"
+                    >
+                      <div
+                        class="ant-list-item-meta-content"
+                      >
+                        <h4
+                          class="ant-list-item-meta-title"
+                        >
+                          <a
+                            class="sc-25k07z-0 hXufaw"
+                            href="/auth/0x34A7AdC94C4D41C3e3469F98033B372cB2fAf318"
+                          >
+                            npm
+                          </a>
+                        </h4>
+                        <div
+                          class="ant-list-item-meta-description"
+                        >
+                          Marketize the number of downloads of public npm packages.
+                        </div>
+                      </div>
+                    </div>
+                  </li>
+                </ul>
+              </div>
             </div>
           </div>
         </div>

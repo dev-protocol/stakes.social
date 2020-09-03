@@ -68,7 +68,7 @@ exports[`UserProfile Snapshot 1`] = `
             type="submit"
           >
             <span>
-              Sign to Save
+              Save
             </span>
           </button>
         </form>

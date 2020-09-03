@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PropertyTags Snapshot 1`] = `
+<body>
+  <div>
+    <div
+      class="uh7l8d-0 fghZyI"
+    >
+      <p>
+        Property Tags
+      </p>
+    </div>
+  </div>
+</body>
+`;
