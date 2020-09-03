@@ -106,7 +106,7 @@ export const InvitationRequestForm = ({ market }: Props) => {
                 <Input />
               </Form.Item>
               <Button type="primary" htmlType="submit" loading={isLoading} disabled={isLoading}>
-                Sign to invitation request
+                Submit
               </Button>
             </div>
           </Row>

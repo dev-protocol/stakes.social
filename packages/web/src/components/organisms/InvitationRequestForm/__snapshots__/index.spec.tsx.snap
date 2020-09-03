@@ -270,7 +270,7 @@ exports[`InvitationRequestForm Snapshot 1`] = `
               type="submit"
             >
               <span>
-                Sign to invitation request
+                Submit
               </span>
             </button>
           </div>

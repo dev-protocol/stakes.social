@@ -159,7 +159,7 @@ exports[`AuthForm Snapshot 1`] = `
               type="submit"
             >
               <span>
-                Sign to authenticate
+                Authenticate
               </span>
             </button>
           </div>

@@ -191,7 +191,7 @@ export const AuthForm = ({ market, property }: Props) => {
                 <GitHubMarketSchemeInput />
               )}
               <Button type="primary" htmlType="submit">
-                {market === NpmMarketContractAddress ? 'Authenticate' : 'Sign to authenticate'}
+                Authenticate
               </Button>
             </div>
           </Row>
