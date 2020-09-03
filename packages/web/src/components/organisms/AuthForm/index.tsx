@@ -108,7 +108,7 @@ const Notify = () => (
         <p>Please send our team an invitation request via the form.</p>
         <p>
           <Button type="primary" href="/invite/github" target="_blank">
-            Apply form
+            Apply
           </Button>
         </p>
       </>
