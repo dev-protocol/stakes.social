@@ -48,7 +48,7 @@ const GitHubMarketSchemeInput = () => {
         rules={[{ required: true, message: 'Please input GitHub Repository name (e.g., your/awesome-repos)' }]}
         key="repositoryName"
       >
-        <Input placeholder="repository name" />
+        <Input placeholder="your/awesome-repos" />
       </Form.Item>
       <Form.Item
         name="personalAccessToken"
@@ -62,7 +62,11 @@ const GitHubMarketSchemeInput = () => {
         <a href="https://github.com/settings/tokens/new" target="_blank" rel="noreferrer">
           create a Personal Access Token <Text mark>without all scopes</Text>
         </a>{' '}
-        and paste it here.
+        and paste it here. PAT is securely oraclize using Khaos(
+        <a href="https://github.com/dev-protocol/khaos" target="_blank" rel="noreferrer">
+          *
+        </a>
+        ).
       </p>
     </>
   )
@@ -187,7 +191,7 @@ export const AuthForm = ({ market, property }: Props) => {
                 <GitHubMarketSchemeInput />
               )}
               <Button type="primary" htmlType="submit">
-                Authenticate
+                {market === NpmMarketContractAddress ? 'Authenticate' : 'Sign to authenticate'}
               </Button>
             </div>
           </Row>
