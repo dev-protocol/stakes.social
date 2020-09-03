@@ -101,12 +101,14 @@ export const InvitationRequestForm = ({ market }: Props) => {
           </Row>
           <Row>
             <span>Is there anything else to know?:</span>
-            <Form.Item name="ask" rules={[{ required: true, type: 'string' }]} key="ask">
-              <Input />
-            </Form.Item>
-            <Button type="primary" htmlType="submit" loading={isLoading} disabled={isLoading}>
-              Sign to invitation request
-            </Button>
+            <div>
+              <Form.Item name="ask" rules={[{ required: true, type: 'string' }]} key="ask">
+                <Input />
+              </Form.Item>
+              <Button type="primary" htmlType="submit" loading={isLoading} disabled={isLoading}>
+                Sign to invitation request
+              </Button>
+            </div>
           </Row>
         </Form>
       )}

@@ -242,36 +242,38 @@ exports[`InvitationRequestForm Snapshot 1`] = `
           <span>
             Is there anything else to know?:
           </span>
-          <div
-            class="ant-row ant-form-item"
-          >
+          <div>
             <div
-              class="ant-col ant-form-item-control"
+              class="ant-row ant-form-item"
             >
               <div
-                class="ant-form-item-control-input"
+                class="ant-col ant-form-item-control"
               >
                 <div
-                  class="ant-form-item-control-input-content"
+                  class="ant-form-item-control-input"
                 >
-                  <input
-                    class="ant-input"
-                    id="basic_ask"
-                    type="text"
-                    value=""
-                  />
+                  <div
+                    class="ant-form-item-control-input-content"
+                  >
+                    <input
+                      class="ant-input"
+                      id="basic_ask"
+                      type="text"
+                      value=""
+                    />
+                  </div>
                 </div>
               </div>
             </div>
+            <button
+              class="ant-btn ant-btn-primary"
+              type="submit"
+            >
+              <span>
+                Sign to invitation request
+              </span>
+            </button>
           </div>
-          <button
-            class="ant-btn ant-btn-primary"
-            type="submit"
-          >
-            <span>
-              Sign to invitation request
-            </span>
-          </button>
         </div>
       </form>
     </div>
