@@ -14,6 +14,7 @@ import { Header } from 'src/components/organisms/Header'
 import { StakeForm } from 'src/components/organisms/StakeForm'
 import { CancelStaking } from 'src/components/organisms/CancelStaking'
 import { ConnectedApps } from 'src/components/molecules/ConnectedApps'
+import { PropertyTags } from 'src/components/organisms/PropertyTags'
 import TopStakers from 'src/components/organisms/TopStakers'
 
 type Props = {}
@@ -29,7 +30,8 @@ const Main = styled(Container)`
     'possession'
     'transact'
     'apps'
-    'cancel';
+    'cancel'
+    'tags';
   @media (min-width: 1024px) {
     grid-gap: 3rem 2rem;
     grid-template-columns: 0.9fr auto;
@@ -40,7 +42,8 @@ const Main = styled(Container)`
       'possession outline'
       'transact outline'
       'apps outline'
-      'cancel outline';
+      'cancel outline'
+      'tags outline';
   }
 `
 const Cover = styled.div`
@@ -69,6 +72,9 @@ const Apps = styled(ConnectedApps)`
 const Cancel = styled(CancelStaking)`
   grid-area: cancel;
 `
+const Tags = styled(PropertyTags)`
+  grid-area: tags;
+`
 
 const PropertyAddressDetail = (_: Props) => {
   const { propertyAddress } = useRouter().query as { propertyAddress: string }
@@ -94,6 +100,7 @@ const PropertyAddressDetail = (_: Props) => {
         <Transact propertyAddress={propertyAddress} />
         <Apps />
         <Cancel propertyAddress={propertyAddress} />
+        <Tags propertyAddress={propertyAddress} />
       </Main>
       <Footer />
     </>
