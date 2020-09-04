@@ -149,6 +149,18 @@ export const authenticate = async (marketAddress: string, propertyAddress: strin
   return undefined
 }
 
+export const createAndAuthenticate = async (name: string, symbol: string, marketAddress: string, args: string[]) => {
+  const client = newClient()
+  if (client) {
+    return client
+      .propertyFactory(await getContractAddress(client, 'propertyFactory'))
+      .createAndAuthenticate(name, symbol, marketAddress, args, {
+        metricsFactory: await getContractAddress(client, 'metricsFactory')
+      })
+  }
+  return undefined
+}
+
 export const totalSupply = async () => {
   const client = newClient()
   if (client) {

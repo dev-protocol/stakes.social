@@ -11,3 +11,17 @@ export const usePostUser = () => {
     }
   }
 }
+
+export const useGetPropertyTags = () => {
+  return {
+    tags: ['dummy', 'tag']
+  }
+}
+
+export const usePostPropertyTags = () => {
+  return {
+    usePostPropertyTags: async () => {
+      return { tags: ['dummy', 'post', 'tag'] }
+    }
+  }
+}

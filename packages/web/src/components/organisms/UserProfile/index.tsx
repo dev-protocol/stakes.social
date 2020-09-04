@@ -58,7 +58,7 @@ export const ProfileUpdateForm = ({ accountAddress }: { accountAddress?: string 
         <Input placeholder="Enter the new display name" />
       </Form.Item>
       <Button type="primary" htmlType="submit" loading={isLoading} disabled={isLoading}>
-        Sign to Save
+        Save
       </Button>
     </StyledForm>
   )

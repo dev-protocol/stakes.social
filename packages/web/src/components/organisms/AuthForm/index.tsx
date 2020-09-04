@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Form, Input, Button, Result } from 'antd'
-import { useMarketScheme, useAuthenticate } from 'src/fixtures/dev-kit/hooks'
+import { useMarketScheme, useAuthenticate, useCreateAndAuthenticate } from 'src/fixtures/dev-kit/hooks'
 import { usePostSignGitHubMarketAsset } from 'src/fixtures/khaos/hooks'
 import { useEffectAsync } from 'src/fixtures/utility'
 import styled from 'styled-components'
@@ -10,7 +10,7 @@ const NpmMarketContractAddress = '0x88c7B1f41DdE50efFc25541a2E0769B887eB2ee7'
 
 export interface Props {
   market: string
-  property: string
+  property?: string
 }
 
 const Container = styled.div`
@@ -48,7 +48,7 @@ const GitHubMarketSchemeInput = () => {
         rules={[{ required: true, message: 'Please input GitHub Repository name (e.g., your/awesome-repos)' }]}
         key="repositoryName"
       >
-        <Input placeholder="repository name" />
+        <Input placeholder="your/awesome-repos" />
       </Form.Item>
       <Form.Item
         name="personalAccessToken"
@@ -62,8 +62,39 @@ const GitHubMarketSchemeInput = () => {
         <a href="https://github.com/settings/tokens/new" target="_blank" rel="noreferrer">
           create a Personal Access Token <Text mark>without all scopes</Text>
         </a>{' '}
-        and paste it here.
+        and paste it here. PAT is securely oraclize using Khaos(
+        <a href="https://github.com/dev-protocol/khaos" target="_blank" rel="noreferrer">
+          *
+        </a>
+        ).
       </p>
+    </>
+  )
+}
+
+const PropertyInput = () => {
+  return (
+    <>
+      <Row>
+        <span>Pool name:</span>
+        <Form.Item
+          name="propertyName"
+          rules={[{ required: true, message: 'Please input your pool name' }]}
+          key="propertyName"
+        >
+          <Input placeholder="Your pool name" />
+        </Form.Item>
+      </Row>
+      <Row>
+        <span>Pool symbol:</span>
+        <Form.Item
+          name="propertySymbol"
+          rules={[{ required: true, message: 'Please input your pool symbol' }]}
+          key="propertySymbol"
+        >
+          <Input placeholder="Your pool symbol" />
+        </Form.Item>
+      </Row>
     </>
   )
 }
@@ -76,8 +107,8 @@ const Notify = () => (
       <>
         <p>Please send our team an invitation request via the form.</p>
         <p>
-          <Button type="primary" href="https://forms.gle/MVxEvdPNNig9YdBu6" target="_blank">
-            Apply form
+          <Button type="primary" href="/invite/github" target="_blank">
+            Apply
           </Button>
         </p>
       </>
@@ -91,6 +122,7 @@ export const AuthForm = ({ market, property }: Props) => {
   const { marketScheme } = useMarketScheme()
   const { postSignGitHubMarketAssetHandler } = usePostSignGitHubMarketAsset()
   const { authenticate } = useAuthenticate()
+  const { createAndAuthenticate } = useCreateAndAuthenticate()
   const onFinish = async (values: any) => {
     const authRequestData: string[] =
       market === NpmMarketContractAddress
@@ -102,7 +134,12 @@ export const AuthForm = ({ market, property }: Props) => {
             return [repository, khaos.publicSignature || '']
           })()
 
-    const metrics = await authenticate(market, property, authRequestData)
+    const metrics = await (property
+      ? authenticate(market, property, authRequestData)
+      : ((name, symbol) => createAndAuthenticate(name, symbol, market, authRequestData))(
+          values.propertyName,
+          values.propertySymbol
+        ))
 
     if (metrics) {
       setMetrics(metrics)
@@ -118,8 +155,14 @@ export const AuthForm = ({ market, property }: Props) => {
     <Container>
       {market !== NpmMarketContractAddress && metrics === '' ? <Notify /> : ''}
       <Row>
-        <span>Associating Property:</span>
-        <span>{property}</span>
+        {property ? (
+          <>
+            <span>Associating Property:</span>
+            <span>{property}</span>
+          </>
+        ) : (
+          ''
+        )}
       </Row>
       {metrics ? (
         <Result
@@ -136,19 +179,23 @@ export const AuthForm = ({ market, property }: Props) => {
           ]}
         />
       ) : (
-        <Row>
-          <span>Arguments:</span>
-          <Form name="basic" initialValues={{ remember: true }} onFinish={onFinish}>
-            {market === NpmMarketContractAddress ? (
-              <DefaultMarketSchemeInput schemeList={schemeList} />
-            ) : (
-              <GitHubMarketSchemeInput />
-            )}
-            <Button type="primary" htmlType="submit">
-              Authenticate
-            </Button>
-          </Form>
-        </Row>
+        <Form name="basic" initialValues={{ remember: true }} onFinish={onFinish}>
+          {property ? '' : <PropertyInput />}
+
+          <Row>
+            <span>Arguments:</span>
+            <div>
+              {market === NpmMarketContractAddress ? (
+                <DefaultMarketSchemeInput schemeList={schemeList} />
+              ) : (
+                <GitHubMarketSchemeInput />
+              )}
+              <Button type="primary" htmlType="submit">
+                Authenticate
+              </Button>
+            </div>
+          </Row>
+        </Form>
       )}
     </Container>
   )
