@@ -102,7 +102,7 @@ export const InvitationRequestForm = ({ market }: Props) => {
           <Row>
             <span>Is there anything else to know?:</span>
             <div>
-              <Form.Item name="ask" rules={[{ required: true, type: 'string' }]} key="ask">
+              <Form.Item name="ask" rules={[{ type: 'string' }]} key="ask">
                 <Input />
               </Form.Item>
               <Button type="primary" htmlType="submit" loading={isLoading} disabled={isLoading}>
