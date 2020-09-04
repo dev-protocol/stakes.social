@@ -1,0 +1,5 @@
+fragment accountLockup on account_lockup {
+  locked_up_event_id
+  property_address
+  value
+}

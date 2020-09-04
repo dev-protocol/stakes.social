@@ -1,0 +1,5 @@
+query getAccountLockup($account: String) {
+  account_lockup(where: { account_address: { _eq: $account } }) {
+    ...accountLockup
+  }
+}

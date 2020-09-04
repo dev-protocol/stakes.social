@@ -5053,10 +5053,33 @@ export type Subscription_RootProperty_Meta_By_PkArgs = {
   property: Scalars['String']
 }
 
+export type AccountLockupFragment = { __typename?: 'account_lockup' } & Pick<
+  Account_Lockup,
+  'locked_up_event_id' | 'property_address' | 'value'
+>
+
+export type LockupLockedupFragment = { __typename?: 'lockup_lockedup' } & Pick<Lockup_Lockedup, 'raw_data'>
+
 export type PropertyFactoryCreateFragment = { __typename?: 'property_factory_create' } & Pick<
   Property_Factory_Create,
   'block_number' | 'event_id' | 'from_address' | 'log_index' | 'property' | 'raw_data' | 'transaction_index'
 >
+
+export type GetAccountLockupQueryVariables = Exact<{
+  account?: Maybe<Scalars['String']>
+}>
+
+export type GetAccountLockupQuery = { __typename?: 'query_root' } & {
+  account_lockup: Array<{ __typename?: 'account_lockup' } & AccountLockupFragment>
+}
+
+export type GetLockupLockedupQueryVariables = Exact<{
+  event_id?: Maybe<Scalars['String']>
+}>
+
+export type GetLockupLockedupQuery = { __typename?: 'query_root' } & {
+  lockup_lockedup: Array<{ __typename?: 'lockup_lockedup' } & LockupLockedupFragment>
+}
 
 export type GetMarketFactoryCreateQueryVariables = Exact<{ [key: string]: never }>
 
@@ -5105,6 +5128,18 @@ export type ListPropertyMetaQuery = { __typename?: 'query_root' } & {
   property_meta: Array<{ __typename?: 'property_meta' } & Pick<Property_Meta, 'property'>>
 }
 
+export const AccountLockupFragmentDoc = gql`
+  fragment accountLockup on account_lockup {
+    locked_up_event_id
+    property_address
+    value
+  }
+`
+export const LockupLockedupFragmentDoc = gql`
+  fragment lockupLockedup on lockup_lockedup {
+    raw_data
+  }
+`
 export const PropertyFactoryCreateFragmentDoc = gql`
   fragment propertyFactoryCreate on property_factory_create {
     block_number
@@ -5116,6 +5151,100 @@ export const PropertyFactoryCreateFragmentDoc = gql`
     transaction_index
   }
 `
+export const GetAccountLockupDocument = gql`
+  query getAccountLockup($account: String) {
+    account_lockup(where: { account_address: { _eq: $account } }) {
+      ...accountLockup
+    }
+  }
+  ${AccountLockupFragmentDoc}
+`
+
+/**
+ * __useGetAccountLockupQuery__
+ *
+ * To run a query within a React component, call `useGetAccountLockupQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetAccountLockupQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetAccountLockupQuery({
+ *   variables: {
+ *      account: // value for 'account'
+ *   },
+ * });
+ */
+export function useGetAccountLockupQuery(
+  baseOptions?: ApolloReactHooks.QueryHookOptions<GetAccountLockupQuery, GetAccountLockupQueryVariables>
+) {
+  return ApolloReactHooks.useQuery<GetAccountLockupQuery, GetAccountLockupQueryVariables>(
+    GetAccountLockupDocument,
+    baseOptions
+  )
+}
+export function useGetAccountLockupLazyQuery(
+  baseOptions?: ApolloReactHooks.LazyQueryHookOptions<GetAccountLockupQuery, GetAccountLockupQueryVariables>
+) {
+  return ApolloReactHooks.useLazyQuery<GetAccountLockupQuery, GetAccountLockupQueryVariables>(
+    GetAccountLockupDocument,
+    baseOptions
+  )
+}
+export type GetAccountLockupQueryHookResult = ReturnType<typeof useGetAccountLockupQuery>
+export type GetAccountLockupLazyQueryHookResult = ReturnType<typeof useGetAccountLockupLazyQuery>
+export type GetAccountLockupQueryResult = ApolloReactCommon.QueryResult<
+  GetAccountLockupQuery,
+  GetAccountLockupQueryVariables
+>
+export const GetLockupLockedupDocument = gql`
+  query getLockupLockedup($event_id: String) {
+    lockup_lockedup(where: { event_id: { _eq: $event_id } }) {
+      ...lockupLockedup
+    }
+  }
+  ${LockupLockedupFragmentDoc}
+`
+
+/**
+ * __useGetLockupLockedupQuery__
+ *
+ * To run a query within a React component, call `useGetLockupLockedupQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetLockupLockedupQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetLockupLockedupQuery({
+ *   variables: {
+ *      event_id: // value for 'event_id'
+ *   },
+ * });
+ */
+export function useGetLockupLockedupQuery(
+  baseOptions?: ApolloReactHooks.QueryHookOptions<GetLockupLockedupQuery, GetLockupLockedupQueryVariables>
+) {
+  return ApolloReactHooks.useQuery<GetLockupLockedupQuery, GetLockupLockedupQueryVariables>(
+    GetLockupLockedupDocument,
+    baseOptions
+  )
+}
+export function useGetLockupLockedupLazyQuery(
+  baseOptions?: ApolloReactHooks.LazyQueryHookOptions<GetLockupLockedupQuery, GetLockupLockedupQueryVariables>
+) {
+  return ApolloReactHooks.useLazyQuery<GetLockupLockedupQuery, GetLockupLockedupQueryVariables>(
+    GetLockupLockedupDocument,
+    baseOptions
+  )
+}
+export type GetLockupLockedupQueryHookResult = ReturnType<typeof useGetLockupLockedupQuery>
+export type GetLockupLockedupLazyQueryHookResult = ReturnType<typeof useGetLockupLockedupLazyQuery>
+export type GetLockupLockedupQueryResult = ApolloReactCommon.QueryResult<
+  GetLockupLockedupQuery,
+  GetLockupLockedupQueryVariables
+>
 export const GetMarketFactoryCreateDocument = gql`
   query getMarketFactoryCreate {
     market_factory_create(limit: 1, order_by: { block_number: asc }) {

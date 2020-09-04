@@ -1,0 +1,6 @@
+query getLockupLockedup($event_id: String) {
+  lockup_lockedup(where: { event_id: { _eq: $event_id } }) {
+    ...lockupLockedup
+  }
+}
+

@@ -57,6 +57,14 @@ export const getBlockNumber = async () => {
   return undefined
 }
 
+export const getBlock = async (blockNumber: string | number) => {
+  const { ethereum } = window
+  if (ethereum) {
+    return await new Web3(ethereum).eth.getBlock(blockNumber)
+  }
+  return undefined
+}
+
 export const sign = async (message: string) => {
   const { ethereum } = window
   if (ethereum) {
