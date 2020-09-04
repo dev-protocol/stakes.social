@@ -5102,7 +5102,7 @@ export type ListPropertyMetaQueryVariables = Exact<{
 }>
 
 export type ListPropertyMetaQuery = { __typename?: 'query_root' } & {
-  property_meta: Array<{ __typename?: 'property_meta' } & Pick<Property_Meta, 'property'>>
+  property_meta: Array<{ __typename?: 'property_meta' } & Pick<Property_Meta, 'property' | 'name'>>
 }
 
 export const PropertyFactoryCreateFragmentDoc = gql`
@@ -5269,6 +5269,7 @@ export const ListPropertyMetaDocument = gql`
   query listPropertyMeta($author: String!, $limit: Int, $ilike: String) {
     property_meta(where: { author: { _eq: $author }, property: { _ilike: $ilike } }, limit: $limit) {
       property
+      name
     }
   }
 `

@@ -62,6 +62,7 @@ export const Navigation = ({ handleMenuOpen }: NavigationProps) => {
       window.addEventListener('resize', updateMedia)
       return () => window.removeEventListener('resize', updateMedia)
     }
+    return setDesktop(true)
   }, [])
 
   const handleClick = useCallback(
