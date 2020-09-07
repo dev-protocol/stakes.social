@@ -5,9 +5,9 @@ import { toNaturalNumber } from 'src/fixtures/utility'
 import { Button, Table } from 'antd'
 import { Container } from 'src/components/atoms/Container'
 import { H3 } from 'src/components/atoms/Typography'
-import { useGetMyStakingRewardAmount } from 'src/fixtures/dev-kit/hooks'
+import { useGetMyStakingRewardAmount, useGetTotalRewardsAmount } from 'src/fixtures/dev-kit/hooks'
 import { useGetPropertyAuthenticationQuery, useGetAccountLockupQuery, useGetLockupLockedupQuery } from '@dev/graphql'
-import { useGetBlock } from 'src/fixtures/wallet/hooks'
+import { useGetAccountAddress, useGetBlock } from 'src/fixtures/wallet/hooks'
 
 interface Props {}
 
@@ -85,6 +85,11 @@ const WithdrawableRewards = ({ propertyAddress }: { propertyAddress: string }) =
   return myStakingRewardAmount ? <span>{myStakingRewardAmount.dp(5).toNumber()} DEV</span> : <></>
 }
 
+const TotalEarned = ({ propertyAddress }: { propertyAddress: string }) => {
+  const { totalRewardsAmount } = useGetTotalRewardsAmount(propertyAddress)
+  return totalRewardsAmount ? <span>{totalRewardsAmount.dp(5).toNumber()} DEV</span> : <></>
+}
+
 const Assets = ({ propertyAddress }: { propertyAddress: string }) => {
   const { data } = useGetPropertyAuthenticationQuery({ variables: { propertyAddress } })
   const includeAssets = useMemo(
@@ -95,11 +100,10 @@ const Assets = ({ propertyAddress }: { propertyAddress: string }) => {
 }
 
 export const MyStakingProperties = (_: Props) => {
+  const { accountAddress: account } = useGetAccountAddress()
   const { data, loading } = useGetAccountLockupQuery({
     variables: {
-      // account: '0x22C7C6C3D9d1df69E1aBf810f32d89cAe858CE78'
-      // account: '0x006f7DA5fE8B1a45D364a677499333099CDb4b75'
-      account: '0x1cB707C360a175F3c94cB68FdA8b0c2fc82222e4'
+      account
     }
   })
   const columns = [
@@ -145,8 +149,11 @@ export const MyStakingProperties = (_: Props) => {
     },
     {
       title: 'Total earned',
-      dataIndex: '',
-      key: 'earned'
+      dataIndex: 'property_address',
+      key: 'earned',
+      render: function totalEarnedRender(propertyAddress: string) {
+        return <TotalEarned key={propertyAddress} propertyAddress={propertyAddress} />
+      }
     },
     {
       title: 'Action',
