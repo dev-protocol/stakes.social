@@ -1,8 +1,8 @@
-import React, { useCallback } from 'react'
+import React, { useCallback, useState } from 'react'
 import moment from 'moment'
 import { useMemo } from 'react'
 import { toNaturalNumber } from 'src/fixtures/utility'
-import { Button, Table } from 'antd'
+import { Button, Divider, Table } from 'antd'
 import { Container } from 'src/components/atoms/Container'
 import { H3 } from 'src/components/atoms/Typography'
 import { CancelStaking } from 'src/components/organisms/CancelStaking'
@@ -11,8 +11,10 @@ import {
   useGetTotalRewardsAmount,
   useWithdrawStakingReward
 } from 'src/fixtures/dev-kit/hooks'
+import { getRewardsAmount } from 'src/fixtures/dev-kit/client'
 import { useGetPropertyAuthenticationQuery, useGetAccountLockupQuery, useGetLockupLockedupQuery } from '@dev/graphql'
 import { useGetAccountAddress, useGetBlock } from 'src/fixtures/wallet/hooks'
+import { useEffectAsync } from 'src/fixtures/utility'
 
 interface Props {}
 
@@ -122,7 +124,7 @@ export const MyStakingProperties = (_: Props) => {
   const { accountAddress: account } = useGetAccountAddress()
   const { data, loading } = useGetAccountLockupQuery({
     variables: {
-      account
+      account: account || 'nothing' // 'nothing' is guard with empty string query
     }
   })
   const columns = [
@@ -181,17 +183,42 @@ export const MyStakingProperties = (_: Props) => {
       render: function actionRender(propertyAddress: string) {
         return (
           <>
-            <CancelStaking propertyAddress={propertyAddress} />
+            <CancelStaking key={propertyAddress} propertyAddress={propertyAddress} />
           </>
         )
       }
     }
   ]
+  const totalStakingAmount = useMemo(() => {
+    const reducer = (accumulator: any, current: any) => accumulator + current
+    return (data && data.account_lockup.map(p => p.value).reduce(reducer)) || 0
+  }, [data])
+  const stakingPropertyCount = useMemo(() => {
+    return (data && data.account_lockup.length) || 0
+  }, [data])
+  const [totalEarned, setTotalEarned] = useState<number>(0)
+  useEffectAsync(async () => {
+    const reducer = (accumulator: any, current: any) => accumulator + current
+    const addresses = (data && data.account_lockup.map(p => p.property_address)) || []
+    const results = await Promise.all(
+      addresses.map(async (address: string) => {
+        const rewardsAmount = await getRewardsAmount(address)
+        return rewardsAmount || 0
+      }) || []
+    )
+    setTotalEarned(results && toNaturalNumber(results.reduce(reducer, 0)).dp(5).toNumber())
+  }, [data])
 
   return (
     <Container>
       <H3>Staking Properties</H3>
       <Table dataSource={(data?.account_lockup || []) as Object[]} columns={columns} loading={loading} />
+      <H3>Summary</H3>
+      <span>My Staking Properties: {stakingPropertyCount}</span>
+      <Divider type="vertical" />
+      <span>Total Staking Amount: {toNaturalNumber(totalStakingAmount).dp(5).toNumber()} DEV</span>
+      <Divider type="vertical" />
+      <span>Total Earned: {totalEarned} DEV</span>
     </Container>
   )
 }
