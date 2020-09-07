@@ -1,11 +1,16 @@
-import React from 'react'
+import React, { useCallback } from 'react'
 import moment from 'moment'
 import { useMemo } from 'react'
 import { toNaturalNumber } from 'src/fixtures/utility'
 import { Button, Table } from 'antd'
 import { Container } from 'src/components/atoms/Container'
 import { H3 } from 'src/components/atoms/Typography'
-import { useGetMyStakingRewardAmount, useGetTotalRewardsAmount } from 'src/fixtures/dev-kit/hooks'
+import { CancelStaking } from 'src/components/organisms/CancelStaking'
+import {
+  useGetMyStakingRewardAmount,
+  useGetTotalRewardsAmount,
+  useWithdrawStakingReward
+} from 'src/fixtures/dev-kit/hooks'
 import { useGetPropertyAuthenticationQuery, useGetAccountLockupQuery, useGetLockupLockedupQuery } from '@dev/graphql'
 import { useGetAccountAddress, useGetBlock } from 'src/fixtures/wallet/hooks'
 
@@ -81,8 +86,22 @@ const StakedDay = ({ eventId }: { eventId: string }) => {
 }
 
 const WithdrawableRewards = ({ propertyAddress }: { propertyAddress: string }) => {
+  const { withdrawStakingReward } = useWithdrawStakingReward()
   const { myStakingRewardAmount } = useGetMyStakingRewardAmount(propertyAddress)
-  return myStakingRewardAmount ? <span>{myStakingRewardAmount.dp(5).toNumber()} DEV</span> : <></>
+  const handleWithdrawStakingReward = useCallback(() => withdrawStakingReward(propertyAddress), [
+    propertyAddress,
+    withdrawStakingReward
+  ])
+  return myStakingRewardAmount ? (
+    <>
+      <span>{myStakingRewardAmount.dp(5).toNumber()} DEV</span>
+      <Button type="primary" onClick={handleWithdrawStakingReward}>
+        Withdraw
+      </Button>
+    </>
+  ) : (
+    <></>
+  )
 }
 
 const TotalEarned = ({ propertyAddress }: { propertyAddress: string }) => {
@@ -157,17 +176,12 @@ export const MyStakingProperties = (_: Props) => {
     },
     {
       title: 'Action',
+      dataIndex: 'property_address',
       key: 'action',
-      render: function actionRender() {
+      render: function actionRender(propertyAddress: string) {
         return (
           <>
-            <Button type="primary" size="small">
-              Withdraw
-            </Button>
-            <br />
-            <Button type="primary" size="small">
-              Cancel
-            </Button>
+            <CancelStaking propertyAddress={propertyAddress} />
           </>
         )
       }
@@ -176,7 +190,7 @@ export const MyStakingProperties = (_: Props) => {
 
   return (
     <Container>
-      <H3>My Staking Properties</H3>
+      <H3>Staking Properties</H3>
       <Table dataSource={(data?.account_lockup || []) as Object[]} columns={columns} loading={loading} />
     </Container>
   )

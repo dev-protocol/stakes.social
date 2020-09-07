@@ -8,9 +8,10 @@ import { useEffect } from 'react'
 interface Props {
   className?: string
   propertyAddress: string
+  label?: string
 }
 
-export const CancelStaking = ({ className, propertyAddress }: Props) => {
+export const CancelStaking = ({ className, propertyAddress, label }: Props) => {
   const [withdrawable, setWithdrawable] = useState(false)
   const [isCountingBlocks, setIsCountingBlocks] = useState(false)
   const [remainBlocks, setRemainBlocks] = useState(0)
@@ -54,6 +55,7 @@ export const CancelStaking = ({ className, propertyAddress }: Props) => {
       onClickWithdraw={handleWithdrawStaking}
       remainBlocks={remainBlocks}
       isCompleted={withdrawable}
+      label={label}
     />
   )
 }

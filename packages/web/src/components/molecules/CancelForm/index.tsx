@@ -9,16 +9,17 @@ interface Props {
   onClickWithdraw: () => void
   remainBlocks: number
   isCompleted: boolean
+  label?: string
 }
 
 const Wrap = styled.div``
 
 const spinner = <LoadingOutlined style={{ fontSize: 18 }} spin />
 
-export const CancelForm = ({ className, onClickCancel, onClickWithdraw, remainBlocks, isCompleted }: Props) => {
+export const CancelForm = ({ className, onClickCancel, onClickWithdraw, remainBlocks, isCompleted, label }: Props) => {
   return (
     <Wrap className={className}>
-      <p>Cancel Staking</p>
+      {label && <p>{label}</p>}
       <Space size="middle">
         <Button type="primary" size="large" onClick={onClickCancel} disabled={isCompleted}>
           Cancel

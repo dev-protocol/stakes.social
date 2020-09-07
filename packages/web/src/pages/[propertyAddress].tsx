@@ -99,7 +99,7 @@ const PropertyAddressDetail = (_: Props) => {
         <Possession propertyAddress={propertyAddress} />
         <Transact propertyAddress={propertyAddress} />
         <Apps />
-        <Cancel propertyAddress={propertyAddress} />
+        <Cancel label="Cancel Staking" propertyAddress={propertyAddress} />
         <Tags propertyAddress={propertyAddress} />
       </Main>
       <Footer />
