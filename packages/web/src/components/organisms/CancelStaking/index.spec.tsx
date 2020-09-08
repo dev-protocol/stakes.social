@@ -8,7 +8,7 @@ jest.mock('@dev/graphql')
 
 describe(`${CancelStaking.name}`, () => {
   test('Snapshot', () => {
-    const component = render(<CancelStaking propertyAddress="propertyAddress" />)
+    const component = render(<CancelStaking propertyAddress="propertyAddress" label="Cancel Staking" />)
     const tree = component.baseElement
     expect(tree).toMatchSnapshot()
   })
