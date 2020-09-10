@@ -269,7 +269,10 @@ const PropertyAddressDetail = (_: Props) => {
               src="https://res.cloudinary.com/haas-storage/image/upload/v1598703382/vue_xfbs8i.webp"
             />
           </Cover>
-          <TopStakerList propertyAdress={propertyAddress} />
+          <div>
+            <h2>Top stakers</h2>
+            <TopStakerList propertyAdress={propertyAddress} />
+          </div>
           <Stake propertyAddress={propertyAddress} />
           <AboutSection>
             <h2>About</h2>

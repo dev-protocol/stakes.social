@@ -90,14 +90,13 @@ const TopStakers = ({ propertyAdress }: TopStakersProps) => {
 
   return (
     <Flex>
-      <h2>Top stakers</h2>
       {loading && (
         <PlaceHolderList>
           <div>loading...</div>
         </PlaceHolderList>
       )}
 
-      {!loading && stakerItems.length === 0 && (
+      {!loading && stakerItems?.length === 0 && (
         <PlaceHolderList noData>
           <div>No data available...</div>
         </PlaceHolderList>

@@ -6,6 +6,9 @@ import { Footer } from 'src/components/organisms/Footer'
 import styled from 'styled-components'
 import { LoremIpsum } from 'lorem-ipsum'
 import { useListPropertyMetaQuery } from '@dev/graphql'
+import { useGetMyStakingAmount, useGetTotalStakingAmount } from 'src/fixtures/dev-kit/hooks'
+import TopStakers from 'src/components/organisms/TopStakers'
+import TopSupporting from 'src/components/organisms/TopSupporting'
 
 const lorem = new LoremIpsum({
   sentencesPerParagraph: {
@@ -19,6 +22,11 @@ const lorem = new LoremIpsum({
 })
 
 type Props = {}
+
+type PoolProps = {
+  propertyAddress: string
+  propertyName: string
+}
 
 const Wrap = styled.div`
   margin: auto auto;
@@ -141,6 +149,48 @@ const WithdrawButton = styled.button<{ bgColor?: string }>`
   cursor: pointer;
 `
 
+const Card = styled.div`
+  border: solid 1px #f0f0f0;
+  border-radius: 16px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  padding: 1.2em;
+  cursor: pointer;
+  background: #fff;
+  margin-bottom: 20px;
+`
+
+const Pool = ({ propertyAddress, propertyName }: PoolProps) => {
+  const { totalStakingAmount } = useGetTotalStakingAmount(propertyAddress)
+  const { myStakingAmount } = useGetMyStakingAmount(propertyAddress)
+
+  return (
+    <Card>
+      <PoolsOverview>
+        <PoolLogoSection>
+          <img
+            width="75px"
+            height="75px"
+            src="https://res.cloudinary.com/haas-storage/image/upload/v1599219478/61np1wbr9pL_xecoq7.png"
+          />
+          <h3>{propertyName}</h3>
+        </PoolLogoSection>
+        <OwnedStake>
+          <span>{myStakingAmount?.dp(2).toNumber() || 'N/A'} DEV</span>
+          <MutedSpan>Your stake</MutedSpan>
+        </OwnedStake>
+        <TotalStaked>
+          <span>{totalStakingAmount?.dp(2).toNumber() || 'N/A'} DEV</span>
+          <MutedSpan>Total staked</MutedSpan>
+        </TotalStaked>
+        <ButtonContainer>
+          <StakeButton>Stake</StakeButton>
+          <WithdrawButton>Withdraw</WithdrawButton>
+        </ButtonContainer>
+      </PoolsOverview>
+    </Card>
+  )
+}
+
 const AuthorAddressDetail = (_: Props) => {
   const router = useRouter()
   let { authorAddress } = router.query
@@ -152,9 +202,6 @@ const AuthorAddressDetail = (_: Props) => {
     }
   })
 
-  const pools: Array<{ name: string; property: string }> = data?.property_meta
-
-  console.log('data: ', data)
   return (
     <>
       <Header></Header>
@@ -183,35 +230,20 @@ const AuthorAddressDetail = (_: Props) => {
             <h2>Pools</h2>
             <div>
               {loading && <span>Loading...</span>}
-              {data && (
-                <PoolsOverview>
-                  {pools.map(property => (
-                    <>
-                      <PoolLogoSection>
-                        <img
-                          width="75px"
-                          height="75px"
-                          src="https://res.cloudinary.com/haas-storage/image/upload/v1599219478/61np1wbr9pL_xecoq7.png"
-                        />
-                        <h3>{property.name}</h3>
-                      </PoolLogoSection>
-                      <OwnedStake>
-                        <span>1,000 DEV</span>
-                        <MutedSpan>Your stake</MutedSpan>
-                      </OwnedStake>
-                      <TotalStaked>
-                        <span>150,000 DEV</span>
-                        <MutedSpan>Total staked</MutedSpan>
-                      </TotalStaked>
-                      <ButtonContainer>
-                        <StakeButton>Stake</StakeButton>
-                        <WithdrawButton>Withdraw</WithdrawButton>
-                      </ButtonContainer>
-                    </>
-                  ))}
-                </PoolsOverview>
-              )}
+
+              {data?.property_meta &&
+                data?.property_meta?.map((property: { property: string; name: string }, index: number) => (
+                  <Pool propertyAddress={property.property} propertyName={property.name} key={index} />
+                ))}
             </div>
+          </div>
+          <div style={{ gridColumn: '2 / -1' }}>
+            <h2>Top stakers</h2>
+            <TopStakers propertyAdress="0x44d871aebF0126Bf646753E2C976Aa7e68A66c15" />
+          </div>
+          <div style={{ gridColumn: '2 / -1' }}>
+            <h2>Supporting</h2>
+            <TopSupporting accountAddress={author} />
           </div>
         </Grid>
       </Wrap>

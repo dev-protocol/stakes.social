@@ -5105,6 +5105,15 @@ export type ListPropertyMetaQuery = { __typename?: 'query_root' } & {
   property_meta: Array<{ __typename?: 'property_meta' } & Pick<Property_Meta, 'property' | 'name'>>
 }
 
+export type ListTopSupportingAccountQueryVariables = Exact<{
+  account_address: Scalars['String']
+  limit: Scalars['Int']
+}>
+
+export type ListTopSupportingAccountQuery = { __typename?: 'query_root' } & {
+  account_lockup: Array<{ __typename?: 'account_lockup' } & Pick<Account_Lockup, 'property_address' | 'value'>>
+}
+
 export const PropertyFactoryCreateFragmentDoc = gql`
   fragment propertyFactoryCreate on property_factory_create {
     block_number
@@ -5313,4 +5322,55 @@ export type ListPropertyMetaLazyQueryHookResult = ReturnType<typeof useListPrope
 export type ListPropertyMetaQueryResult = ApolloReactCommon.QueryResult<
   ListPropertyMetaQuery,
   ListPropertyMetaQueryVariables
+>
+export const ListTopSupportingAccountDocument = gql`
+  query listTopSupportingAccount($account_address: String!, $limit: Int!) {
+    account_lockup(where: { account_address: { _eq: $account_address } }, order_by: { value: desc }, limit: $limit) {
+      property_address
+      value
+    }
+  }
+`
+
+/**
+ * __useListTopSupportingAccountQuery__
+ *
+ * To run a query within a React component, call `useListTopSupportingAccountQuery` and pass it any options that fit your needs.
+ * When your component renders, `useListTopSupportingAccountQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useListTopSupportingAccountQuery({
+ *   variables: {
+ *      account_address: // value for 'account_address'
+ *      limit: // value for 'limit'
+ *   },
+ * });
+ */
+export function useListTopSupportingAccountQuery(
+  baseOptions?: ApolloReactHooks.QueryHookOptions<ListTopSupportingAccountQuery, ListTopSupportingAccountQueryVariables>
+) {
+  return ApolloReactHooks.useQuery<ListTopSupportingAccountQuery, ListTopSupportingAccountQueryVariables>(
+    ListTopSupportingAccountDocument,
+    baseOptions
+  )
+}
+export function useListTopSupportingAccountLazyQuery(
+  baseOptions?: ApolloReactHooks.LazyQueryHookOptions<
+    ListTopSupportingAccountQuery,
+    ListTopSupportingAccountQueryVariables
+  >
+) {
+  return ApolloReactHooks.useLazyQuery<ListTopSupportingAccountQuery, ListTopSupportingAccountQueryVariables>(
+    ListTopSupportingAccountDocument,
+    baseOptions
+  )
+}
+export type ListTopSupportingAccountQueryHookResult = ReturnType<typeof useListTopSupportingAccountQuery>
+export type ListTopSupportingAccountLazyQueryHookResult = ReturnType<typeof useListTopSupportingAccountLazyQuery>
+export type ListTopSupportingAccountQueryResult = ApolloReactCommon.QueryResult<
+  ListTopSupportingAccountQuery,
+  ListTopSupportingAccountQueryVariables
 >
