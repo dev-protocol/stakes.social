@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { useListTopSupportingAccountQuery } from '@dev/graphql'
+import { useRouter } from 'next/router'
 
 type Props = {
   accountAddress: string
@@ -16,6 +17,7 @@ const SupportSection = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  cursor: pointer;
 
   img {
     border-radius: 90px;
@@ -37,6 +39,8 @@ const TopSupporting = ({ accountAddress }: Props) => {
     }
   })
 
+  const router = useRouter()
+
   console.log('top supporting data: ', data?.account_lockup)
 
   return (
@@ -46,7 +50,7 @@ const TopSupporting = ({ accountAddress }: Props) => {
       <TopSupportingContainer>
         {data?.account_lockup &&
           data?.account_lockup.map(({ property_address, value }, index) => (
-            <SupportSection key={index}>
+            <SupportSection key={index} onClick={() => router.push({ pathname: `/${property_address}` })}>
               <img
                 width="100px"
                 height="100px"
