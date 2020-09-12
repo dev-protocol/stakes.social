@@ -1,4 +1,3 @@
 fragment lockupLockedup on lockup_lockedup {
   raw_data
 }
-
