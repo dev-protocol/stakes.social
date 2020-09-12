@@ -3,4 +3,3 @@ query getLockupLockedup($event_id: String) {
     ...lockupLockedup
   }
 }
-
