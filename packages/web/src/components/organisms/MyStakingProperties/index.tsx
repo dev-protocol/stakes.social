@@ -191,7 +191,7 @@ export const MyStakingProperties = (_: Props) => {
   ]
   const totalStakingAmount = useMemo(() => {
     const reducer = (accumulator: any, current: any) => accumulator + current
-    return (data && data.account_lockup.map(p => p.value).reduce(reducer)) || 0
+    return (data && data.account_lockup.map(p => p.value).reduce(reducer, 0)) || 0
   }, [data])
   const stakingPropertyCount = useMemo(() => {
     return (data && data.account_lockup.length) || 0
