@@ -189,8 +189,8 @@ export const MyStakingProperties = (_: Props) => {
       }
     }
   ]
+  const reducer = (accumulator: any, current: any) => accumulator + current
   const totalStakingAmount = useMemo(() => {
-    const reducer = (accumulator: any, current: any) => accumulator + current
     return (data && data.account_lockup.map(p => p.value).reduce(reducer, 0)) || 0
   }, [data])
   const stakingPropertyCount = useMemo(() => {
@@ -198,7 +198,6 @@ export const MyStakingProperties = (_: Props) => {
   }, [data])
   const [totalEarned, setTotalEarned] = useState<number>(0)
   useEffectAsync(async () => {
-    const reducer = (accumulator: any, current: any) => accumulator + current
     const addresses = (data && data.account_lockup.map(p => p.property_address)) || []
     const results = await Promise.all(
       addresses.map(async (address: string) => {
