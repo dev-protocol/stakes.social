@@ -2,7 +2,9 @@ import {
   useListPropertyQuery as IUseListPropertyQuery,
   useGetPropertyAuthenticationQuery as IUseGetPropertyAuthenticationQuery,
   useGetMarketFactoryCreateQuery as IUseGetMarketFactoryCreateQuery,
-  useListPropertyMetaQuery as IUseListPropertyMetaQuery
+  useListPropertyMetaQuery as IUseListPropertyMetaQuery,
+  useGetAccountLockupQuery as IUseGetAccountLockupQuery,
+  useGetLockupLockedupQuery as IUseGetLockupLockedupQuery
 } from '@dev/graphql'
 
 export const useListPropertyQuery = (): Partial<ReturnType<typeof IUseListPropertyQuery>> => ({
@@ -55,6 +57,28 @@ export const useListPropertyMetaQuery = (): Partial<ReturnType<typeof IUseListPr
     property_meta: [
       {
         property: 'property-address'
+      }
+    ]
+  }
+})
+
+export const useGetAccountLockupQuery = (): Partial<ReturnType<typeof IUseGetAccountLockupQuery>> => ({
+  data: {
+    account_lockup: [
+      {
+        locked_up_event_id: 'log_dummy',
+        property_address: '0x01234567890',
+        value: 100000000000000000000
+      }
+    ]
+  }
+})
+
+export const useGetLockupLockedupQuery = (): Partial<ReturnType<typeof IUseGetLockupLockedupQuery>> => ({
+  data: {
+    lockup_lockedup: [
+      {
+        raw_data: '{}'
       }
     ]
   }
