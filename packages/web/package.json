@@ -19,7 +19,7 @@
     "@dev/i18n": "0.0.1",
     "@devprtcl/dev-kit-js": "0.10.0",
     "@quentin-sommer/react-useragent": "3.1.0",
-    "antd": "4.3.5",
+    "antd": "4.6.4",
     "@apollo/client": "3.1.4",
     "axios": "0.20.0",
     "bignumber.js": "9.0.0",
