@@ -60,6 +60,7 @@ const FILTER_OPTIONS = [
 
 export const PropertyCardList = ({ currentPage, searchWord }: Props) => {
   const [perPage, setPerPage] = useState(DEFAULT_PER_PAGE)
+  const [activeGridView] = useState(true)
   const { data, loading } = useListPropertyQuery({
     variables: {
       limit: perPage,
@@ -97,8 +98,8 @@ export const PropertyCardList = ({ currentPage, searchWord }: Props) => {
       </PropertiesHeader>
 
       {loading && <Spin size="large" style={{ display: 'block', width: 'auto', padding: '100px' }} />}
-      {data && (
-        <>
+      {data && !activeGridView && (
+        <div>
           {data.property_factory_create.map(d => (
             <div key={d.event_id} style={{ margin: '54px 0' }}>
               <PropertyCard propertyAddress={d.property} />
@@ -114,7 +115,26 @@ export const PropertyCardList = ({ currentPage, searchWord }: Props) => {
             total={data.property_factory_create_aggregate.aggregate?.count}
             style={{ margin: '0 0 20px 50%' }}
           />
-        </>
+        </div>
+      )}
+      {data && activeGridView && (
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', columnGap: '15px' }}>
+          {data.property_factory_create.map(d => (
+            <div key={d.event_id} style={{ margin: '54px 0' }}>
+              <PropertyCard isGrid={activeGridView} propertyAddress={d.property} />
+            </div>
+          ))}
+          <Pagination
+            current={currentPage}
+            size="default"
+            responsive={true}
+            defaultPageSize={perPage}
+            onChange={handlePagination}
+            onShowSizeChange={handleShowSizeChange}
+            total={data.property_factory_create_aggregate.aggregate?.count}
+            style={{ margin: '0 0 20px 50%' }}
+          />
+        </div>
       )}
     </div>
   )

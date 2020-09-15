@@ -159,6 +159,26 @@ const Card = styled.div`
   margin-bottom: 20px;
 `
 
+const AuthorDetailGrid = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+
+  div > button {
+    align-self: center;
+  }
+`
+
+const ShareList = styled.div`
+  display: flex;
+  align-items: center;
+
+  img,
+  svg {
+    cursor: pointer;
+    margin-right: 5px;
+  }
+`
+
 const Pool = ({ propertyAddress, propertyName }: PoolProps) => {
   const { totalStakingAmount } = useGetTotalStakingAmount(propertyAddress)
   const { myStakingAmount } = useGetMyStakingAmount(propertyAddress)
@@ -195,6 +215,7 @@ const AuthorAddressDetail = (_: Props) => {
   const router = useRouter()
   let { authorAddress } = router.query
   const author: string = typeof authorAddress == 'string' ? authorAddress : 'none'
+  // const { data, error } = useGetPropertytInformation(propertyAddress)
 
   const { data, loading } = useListPropertyMetaQuery({
     variables: {
@@ -212,7 +233,30 @@ const AuthorAddressDetail = (_: Props) => {
           <ProfilePicture src="https://res.cloudinary.com/haas-storage/image/upload/v1598963050/72989_gve7hf.jpg" />
           <div style={{ display: 'grid', gridTemplateRows: '1fr 1fr' }}>
             <div style={{ gridRow: '2 / -1' }}>
-              <h2>Kazuya Kawaguchi</h2>
+              <AuthorDetailGrid>
+                <h2>Kazuya Kawaguchi</h2>
+                <ShareList>
+                  <img
+                    src="https://res.cloudinary.com/haas-storage/image/upload/v1600172007/25231_hng64u.png"
+                    width="20"
+                    height="20"
+                  />
+                  <img
+                    src="https://res.cloudinary.com/haas-storage/image/upload/v1600172799/earth-globe-meridians-world-33880_tfa0p9.png"
+                    width="20"
+                    height="20"
+                  />
+                  <img
+                    src="https://res.cloudinary.com/haas-storage/image/upload/v1600172660/2018_social_media_popular_app_logo_youtube-512_jivvza.webp"
+                    width="20"
+                    height="20"
+                  />
+                </ShareList>
+                <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+                  <StakeButton>Edit</StakeButton>
+                </div>
+              </AuthorDetailGrid>
+
               <div>5,000 karma</div>
             </div>
           </div>

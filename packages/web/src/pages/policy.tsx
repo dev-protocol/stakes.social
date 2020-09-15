@@ -13,11 +13,11 @@ type Props = {} & InitialProps
 const Policy = (_: Props) => {
   return (
     <>
-      <EarlyAccess />
       <Header />
+      <EarlyAccess />
       <Headline height={300}>
         <H2>Policy Proposals</H2>
-        <div>Vote on policy proposals to improve the protocol.</div>
+        <div>As a DEV token holder you can vote on policy proposals to improve the protocol.</div>
       </Headline>
       <Container>
         <PoliciesList />

@@ -1,9 +1,7 @@
 import React, { useMemo } from 'react'
 import { useRouter } from 'next/router'
 import { PossessionOutline } from 'src/components/organisms/PossessionOutline'
-// import { TransactionForm } from 'src/components/organisms/TransactionForm'
 import { PropertyHeader } from 'src/components/organisms/PropertyHeader'
-// import { AssetOutline } from 'src/components/organisms/AssetOutline'
 import { Footer } from 'src/components/organisms/Footer'
 import { EarlyAccess } from 'src/components/atoms/EarlyAccess'
 import styled from 'styled-components'
@@ -11,7 +9,6 @@ import { Container } from 'src/components/atoms/Container'
 import { Header } from 'src/components/organisms/Header'
 import { StakeForm } from 'src/components/organisms/StakeForm'
 import { CancelStaking } from 'src/components/organisms/CancelStaking'
-// import { ConnectedApps } from 'src/components/molecules/ConnectedApps'
 import TopStakers from 'src/components/organisms/TopStakers'
 import { useAPY } from 'src/fixtures/dev-kit/hooks'
 import { LoremIpsum } from 'lorem-ipsum'
@@ -67,9 +64,6 @@ const Cover = styled.div`
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2), 0 2px 4px -1px rgba(0, 0, 0, 0.12);
   }
 `
-// const Outline = styled(AssetOutline)`
-//   grid-area: outline;
-// `
 
 const TopStakerList = styled(TopStakers)`
   grid-area: topstake;
@@ -81,12 +75,7 @@ const Stake = styled(StakeForm)`
 const Possession = styled(PossessionOutline)`
   grid-area: possession;
 `
-// const Transact = styled(TransactionForm)`
-//   grid-area: transact;
-// `
-// const Apps = styled(ConnectedApps)`
-//   grid-area: apps;
-// `
+
 const Cancel = styled(CancelStaking)`
   grid-area: cancel;
 `
@@ -142,30 +131,6 @@ const AuthorContainer = styled.div`
   grid-area: author;
 `
 
-// const KarmaBadge = styled.div`
-//   padding: 5px;
-//   margin-right: 5px;
-//   border-radius: 9px;
-//   box-shadow: 0 2px 1.5px -1.5px black;
-//   border: 1px solid lightgray;
-// `
-
-// const Account = styled.div`
-//   display: flex;
-//   flex-direction: row;
-//   justify-content: space-between;
-//   align-items: center;
-// `
-
-// const AuthorAddress = styled.span`
-//   border-bottom: transparent;
-//   :hover {
-//     cursor: pointer;
-//     border-bottom: 1px solid lightgrey;
-//     transition: 0.2s ease-in;
-//   }
-// `
-
 const Flex = styled.div`
   display: flex;
   /* align-items: center; */
@@ -174,11 +139,6 @@ const Flex = styled.div`
     border-radius: 90px;
   }
 `
-
-// const EtherscanLink = styled.a`
-//   text-decoration: none;
-//   margin-right: 5px;
-// `
 
 const CreatorContent = styled.div`
   display: flex;
@@ -211,19 +171,6 @@ const Author = ({ propertyAddress }: { propertyAddress: string }) => {
               <span> 5 Pools | 100 Supporters | {data?.author?.karma} Karma</span>
             </CreatorContent>
           </Flex>
-
-          {/* <Flex>
-            <AuthorAddress>
-              <EtherscanLink
-                href={`https://etherscan.io/address/${data?.author?.address}`}
-                rel="noreferrer"
-                target="_blank"
-              >
-                {data?.author?.address}
-              </EtherscanLink>
-            </AuthorAddress>
-            <ExportOutlined color="grey" />
-          </Flex> */}
         </>
       )}
 

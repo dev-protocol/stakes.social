@@ -1,10 +1,13 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import Link from 'next/link'
 import { useGetMyStakingAmount, useGetTotalStakingAmount } from 'src/fixtures/dev-kit/hooks'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
+import { useGetPropertyAuthenticationQuery } from '@dev/graphql'
+import { truncate } from 'src/fixtures/utility/string'
 
 interface Props {
   propertyAddress: string
+  isGrid: boolean
 }
 
 const Card = styled.div`
@@ -16,14 +19,32 @@ const Card = styled.div`
   background: #fff;
 `
 
-const RowContainer = styled.div`
+const RowContainer = styled.div<{ isGrid?: boolean }>`
   display: grid;
-  @media (min-width: 1024px) {
-    grid-template-columns: 2fr 1fr 1fr 1fr 2fr;
-    grid-template-areas: 'property creator ownedstake totalstaked buttoncontainer';
-  }
-  grid-template-columns: 2fr 1fr 1fr;
-  grid-template-areas: 'property creator ownedstake';
+  column-gap: 5px;
+
+  grid-template-columns: 2fr 1fr;
+  grid-template-areas: 'property creator';
+
+  ${({ isGrid }) => css`
+    ${isGrid &&
+    css`
+      grid-template-columns: 1fr 1fr;
+      grid-template-areas:
+        'property property'
+        'creator creator'
+        'ownedstake totalstake'
+        'buttoncontianer buttoncontainer';
+    `}
+
+    ${!isGrid &&
+    css`
+      @media (min-width: 1024px) {
+        grid-template-columns: 2fr 1fr 1fr 1fr 2fr;
+        grid-template-areas: 'property creator ownedstake totalstaked buttoncontainer';
+      }
+    `}
+  `}
 `
 
 const Property = styled.div`
@@ -35,7 +56,15 @@ const PropertyArea = styled(Property)`
 `
 
 const Title = styled.span`
-  font-size: 1.4em;
+  font-size: 1.1em;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  @media (min-width: 620px) {
+    max-width: 200px;
+  }
+
+  max-width: 130px;
   grid-area: propertytitle;
   margin-left: 1em;
 `
@@ -45,9 +74,12 @@ const Creator = styled.div`
   flex-direction: column;
 `
 const OwnedStake = styled.div`
-  display: flex;
-  grid-area: ownedstake;
-  flex-direction: column;
+  display: none;
+
+  @media (min-width: 1024px) {
+    grid-area: ownedstake;
+    flex-direction: column;
+  }
   /* align-items: center; */
 `
 const TotalStaked = styled.div`
@@ -102,14 +134,19 @@ const MutedSpan = styled.span`
   font-size: 0.9em;
 `
 
-export const PropertyCard = ({ propertyAddress }: Props) => {
+export const PropertyCard = ({ propertyAddress, isGrid }: Props) => {
   const { totalStakingAmount } = useGetTotalStakingAmount(propertyAddress)
   const { myStakingAmount } = useGetMyStakingAmount(propertyAddress)
+  const { data } = useGetPropertyAuthenticationQuery({ variables: { propertyAddress } })
+  const includeAssets = useMemo(
+    () => data && truncate(data.property_authentication.map(e => e.authentication_id).join(', '), 24),
+    [data]
+  )
 
   return (
     <Link href={'/[propertyAddress]'} as={`/${propertyAddress}`}>
       <Card>
-        <RowContainer>
+        <RowContainer isGrid={isGrid}>
           <PropertyArea>
             <img
               width="50px"
@@ -117,7 +154,7 @@ export const PropertyCard = ({ propertyAddress }: Props) => {
               src="https://res.cloudinary.com/haas-storage/image/upload/v1597910958/Screenshot_from_2020-08-20_10-08-09-removebg-preview_td5opp.png"
             />
 
-            <Title>Chalk</Title>
+            <Title>{includeAssets}</Title>
           </PropertyArea>
 
           <Creator>
