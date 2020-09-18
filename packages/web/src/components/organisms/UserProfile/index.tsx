@@ -32,6 +32,10 @@ const StyledForm = styled(Form)`
 export const ProfileUpdateForm = ({ accountAddress }: { accountAddress?: string }) => {
   const address = accountAddress || ''
   const { postUserHandler: postUser, isLoading } = usePostUser(address)
+  const onFinish = (values: any) => {
+    const { name } = values
+    handleSubmitDisplayName(name)
+  }
   const handleSubmitDisplayName = useCallback(
     async (name: string) => {
       postUser(name)
@@ -40,7 +44,7 @@ export const ProfileUpdateForm = ({ accountAddress }: { accountAddress?: string 
   )
 
   return (
-    <StyledForm onFinish={({ name }) => handleSubmitDisplayName(name)}>
+    <StyledForm onFinish={onFinish}>
       <Form.Item
         name="name"
         rules={[
