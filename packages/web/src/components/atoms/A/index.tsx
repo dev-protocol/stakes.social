@@ -7,10 +7,12 @@ const StyledLink = styled.a`
   display: contents;
 `
 
-export const A = (props: LinkProps) => (component: JSX.Element) => {
-  return (
-    <Link passHref {...props}>
-      <StyledLink>{component}</StyledLink>
-    </Link>
-  )
+export const A = (props: LinkProps) => {
+  return function linkStyledLink(component: JSX.Element) {
+    return (
+      <Link passHref {...props}>
+        <StyledLink>{component}</StyledLink>
+      </Link>
+    )
+  }
 }
