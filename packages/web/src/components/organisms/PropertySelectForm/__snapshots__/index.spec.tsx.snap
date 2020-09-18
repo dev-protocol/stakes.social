@@ -33,6 +33,7 @@ exports[`PropertySelectForm Snapshot 1`] = `
                 readonly=""
                 role="combobox"
                 style="opacity: 0;"
+                type="search"
                 unselectable="on"
                 value=""
               />
@@ -51,7 +52,7 @@ exports[`PropertySelectForm Snapshot 1`] = `
           >
             <span
               aria-label="down"
-              class="anticon anticon-down"
+              class="anticon anticon-down ant-select-suffix"
               role="img"
             >
               <svg
