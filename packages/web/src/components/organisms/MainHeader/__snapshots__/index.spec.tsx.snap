@@ -4,16 +4,16 @@ exports[`MainHeader Snapshot 1`] = `
 <body>
   <div>
     <header
-      class="sc-1bz6snd-0 beiBaa"
+      class="sc-1bz6snd-0 bsFArt"
     >
       <header
-        class="sc-1bz6snd-1 bTHlXA"
+        class="sc-1bz6snd-1 iAA-dyz"
       >
         <div
-          class="sc-1bz6snd-2 ioLeod"
+          class="sc-1bz6snd-2 bNYkse"
         >
           <a
-            class="sc-38x7tx-0 kobKfO"
+            class="sc-38x7tx-0 itjGxp"
             href="/"
           >
             <svg
@@ -46,7 +46,7 @@ exports[`MainHeader Snapshot 1`] = `
         </div>
       </header>
       <ul
-        class="ant-menu sc-9o0t4s-0 buSwZn ant-menu-light ant-menu-root ant-menu-horizontal"
+        class="ant-menu sc-9o0t4s-0 ebZAAw ant-menu-light ant-menu-root ant-menu-horizontal"
         role="menu"
       >
         <li
@@ -187,7 +187,7 @@ exports[`MainHeader Snapshot 1`] = `
       </ul>
     </header>
     <div
-      class="sc-9gd508-0 gmFvJL"
+      class="sc-9gd508-0 fUITkU"
     >
       <h1
         class="ant-typography"
@@ -196,7 +196,7 @@ exports[`MainHeader Snapshot 1`] = `
         Make a community sustainable together
       </h1>
       <a
-        class="sc-38x7tx-0 kobKfO"
+        class="sc-38x7tx-0 itjGxp"
         href="/how-it-works"
       >
         <button

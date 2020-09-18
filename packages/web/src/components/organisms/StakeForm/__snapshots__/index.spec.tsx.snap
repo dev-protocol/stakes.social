@@ -8,13 +8,13 @@ exports[`StakeForm Snapshot 1`] = `
         Stake Now
       </p>
       <span
-        class="ant-input-search w1tfby-0 chlMkK ant-input-search-enter-button ant-input-search-large ant-input-group-wrapper ant-input-group-wrapper-lg"
+        class="ant-input-search w1tfby-0 eoTIbN ant-input-search-enter-button ant-input-search-large ant-input-group-wrapper ant-input-group-wrapper-lg"
       >
         <span
           class="ant-input-wrapper ant-input-group"
         >
           <span
-            class="ant-input-search w1tfby-0 chlMkK ant-input-search-enter-button ant-input-search-large ant-input-affix-wrapper ant-input-affix-wrapper-lg"
+            class="ant-input-search w1tfby-0 eoTIbN ant-input-search-enter-button ant-input-search-large ant-input-affix-wrapper ant-input-affix-wrapper-lg"
           >
             <input
               class="ant-input ant-input-lg"
