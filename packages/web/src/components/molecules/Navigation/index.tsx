@@ -2,7 +2,7 @@ import React from 'react'
 import { Menu } from 'antd'
 import { useState } from 'react'
 import { useCallback } from 'react'
-import { ClickParam } from 'antd/lib/menu'
+import { MenuInfo } from 'rc-menu/lib/interface'
 import { useRouter } from 'next/router'
 import styled from 'styled-components'
 import Link from 'next/link'
@@ -39,9 +39,9 @@ export const Navigation = () => {
   const router = useRouter()
   const [current, setCurrent] = useState(toKey(router?.pathname) || navs[0].key)
   const handleClick = useCallback(
-    (e: ClickParam) => {
+    (e: MenuInfo) => {
       const { key } = e
-      setCurrent(key)
+      setCurrent(key as string)
     },
     [setCurrent]
   )
