@@ -7,6 +7,58 @@ exports[`AuthForm Snapshot 1`] = `
       class="bja7zw-0 bVsGvT"
     >
       <div
+        class="ant-result ant-result-info"
+        style="margin-bottom: 6rem; padding: 0px;"
+      >
+        <div
+          class="ant-result-icon"
+        >
+          <span
+            aria-label="exclamation-circle"
+            class="anticon anticon-exclamation-circle"
+            role="img"
+          >
+            <svg
+              aria-hidden="true"
+              class=""
+              data-icon="exclamation-circle"
+              fill="currentColor"
+              focusable="false"
+              height="1em"
+              viewBox="64 64 896 896"
+              width="1em"
+            >
+              <path
+                d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm-32 232c0-4.4 3.6-8 8-8h48c4.4 0 8 3.6 8 8v272c0 4.4-3.6 8-8 8h-48c-4.4 0-8-3.6-8-8V296zm32 440a48.01 48.01 0 010-96 48.01 48.01 0 010 96z"
+              />
+            </svg>
+          </span>
+        </div>
+        <div
+          class="ant-result-title"
+        >
+          GitHub Market is currently invite-only
+        </div>
+        <div
+          class="ant-result-extra"
+        >
+          <p>
+            Please send our team an invitation request via the form.
+          </p>
+          <p>
+            <a
+              class="ant-btn ant-btn-primary"
+              href="/invite/github"
+              target="_blank"
+            >
+              <span>
+                Apply
+              </span>
+            </a>
+          </p>
+        </div>
+      </div>
+      <div
         class="bja7zw-1 cmaEXV"
       >
         <span>
@@ -16,26 +68,103 @@ exports[`AuthForm Snapshot 1`] = `
           property
         </span>
       </div>
-      <div
-        class="bja7zw-1 cmaEXV"
+      <form
+        class="ant-form ant-form-horizontal"
+        id="basic"
       >
-        <span>
-          Arguments:
-        </span>
-        <form
-          class="ant-form ant-form-horizontal"
-          id="basic"
+        
+        <div
+          class="bja7zw-1 cmaEXV"
         >
-          <button
-            class="ant-btn ant-btn-primary"
-            type="submit"
-          >
-            <span>
-              Authenticate
-            </span>
-          </button>
-        </form>
-      </div>
+          <span>
+            Arguments:
+          </span>
+          <div>
+            <div
+              class="ant-row ant-form-item"
+            >
+              <div
+                class="ant-col ant-form-item-control"
+              >
+                <div
+                  class="ant-form-item-control-input"
+                >
+                  <div
+                    class="ant-form-item-control-input-content"
+                  >
+                    <input
+                      class="ant-input"
+                      id="basic_repositoryName"
+                      placeholder="your/awesome-repos"
+                      type="text"
+                      value=""
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              class="ant-row ant-form-item"
+            >
+              <div
+                class="ant-col ant-form-item-control"
+              >
+                <div
+                  class="ant-form-item-control-input"
+                >
+                  <div
+                    class="ant-form-item-control-input-content"
+                  >
+                    <input
+                      class="ant-input"
+                      id="basic_personalAccessToken"
+                      placeholder="Personal Access Token"
+                      type="text"
+                      value=""
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <p>
+              Please
+               
+              <a
+                href="https://github.com/settings/tokens/new"
+                rel="noreferrer"
+                target="_blank"
+              >
+                create a Personal Access Token 
+                <span
+                  class="ant-typography"
+                >
+                  <mark>
+                    without all scopes
+                  </mark>
+                </span>
+              </a>
+               
+              and paste it here. PAT is securely oraclize using Khaos(
+              <a
+                href="https://github.com/dev-protocol/khaos"
+                rel="noreferrer"
+                target="_blank"
+              >
+                *
+              </a>
+              ).
+            </p>
+            <button
+              class="ant-btn ant-btn-primary"
+              type="submit"
+            >
+              <span>
+                Authenticate
+              </span>
+            </button>
+          </div>
+        </div>
+      </form>
     </div>
   </div>
 </body>

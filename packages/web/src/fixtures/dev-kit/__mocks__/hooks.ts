@@ -55,6 +55,10 @@ export const useAuthenticate = () => {
   return { authenticate: () => {} }
 }
 
+export const useCreateAndAuthenticate = () => {
+  return { createAndAuthenticate: () => {} }
+}
+
 export const useAPY = () => {
   return { apy: new BigNumber(0.435) }
 }

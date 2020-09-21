@@ -9,6 +9,7 @@ import { Container } from 'src/components/atoms/Container'
 import { Header } from 'src/components/organisms/Header'
 import { StakeForm } from 'src/components/organisms/StakeForm'
 import { CancelStaking } from 'src/components/organisms/CancelStaking'
+// import { PropertyTags } from 'src/components/organisms/PropertyTags'
 import TopStakers from 'src/components/organisms/TopStakers'
 import { useAPY } from 'src/fixtures/dev-kit/hooks'
 import { LoremIpsum } from 'lorem-ipsum'
@@ -79,6 +80,9 @@ const Possession = styled(PossessionOutline)`
 const Cancel = styled(CancelStaking)`
   grid-area: cancel;
 `
+// const Tags = styled(PropertyTags)`
+//   grid-area: tags;
+// `
 
 const Wrap = styled.div`
   margin: auto auto;
@@ -209,7 +213,6 @@ const PropertyAddressDetail = (_: Props) => {
         </Container>
         <Main>
           <Cover>
-            {/* <PropertyCoverImage propertyAddress={propertyAddress}></PropertyCoverImage> */}
             <img
               width="100%"
               height="auto"

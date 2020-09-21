@@ -17,7 +17,7 @@ const Auth = (_: Props) => {
         <H2>Choose Market</H2>
         <div>Select one asset market to authenticate.</div>
       </Headline>
-      <MarketOverview propertyAddress={property} />
+      <MarketOverview associate={true} propertyAddress={property} />
       <Footer />
     </>
   )

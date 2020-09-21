@@ -5135,7 +5135,7 @@ export const PropertyFactoryCreateFragmentDoc = gql`
 `
 export const GetMarketFactoryCreateDocument = gql`
   query getMarketFactoryCreate {
-    market_factory_create {
+    market_factory_create(limit: 1, order_by: { block_number: asc }) {
       market
     }
   }
