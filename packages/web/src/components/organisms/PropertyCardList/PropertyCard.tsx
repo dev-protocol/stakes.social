@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react'
 import Link from 'next/link'
 import { useGetMyStakingAmount, useGetTotalStakingAmount } from 'src/fixtures/dev-kit/hooks'
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
 import { useGetPropertyAuthenticationQuery } from '@dev/graphql'
 import { truncate } from 'src/fixtures/utility/string'
 import { LoremIpsum } from 'lorem-ipsum'
@@ -16,10 +16,8 @@ const lorem = new LoremIpsum({
     min: 4
   }
 })
-
 interface Props {
   propertyAddress: string
-  isGrid: boolean
 }
 
 const Card = styled.div`
@@ -44,18 +42,11 @@ const Property = styled.div`
   display: flex;
   align-items: center;
 `
-const PropertyArea = styled(Property)<{ isGrid?: boolean }>`
-  ${({ isGrid }) => css`
-    padding: 15px;
-    ${isGrid &&
-    css`
-      display: flex;
-      justify-content: center;
-    `}
-    grid-area: property;
-  `}/* img { */
-  /* align-self: center; */
-  /* } */
+const PropertyArea = styled(Property)`
+  display: flex;
+  justify-content: center;
+  padding: 15px;
+  grid-area: property;
 `
 
 const Title = styled.span`
@@ -67,11 +58,6 @@ const Title = styled.span`
   margin-left: 16px;
   padding-bottom: 16px;
 `
-// const Creator = styled.div`
-//   display: flex;
-//   grid-area: creator;
-//   flex-direction: column;
-// `
 const OwnedStake = styled.div`
   display: none;
 
@@ -80,7 +66,6 @@ const OwnedStake = styled.div`
     grid-area: ownedstake;
     flex-direction: column;
   }
-  /* align-items: center; */
 `
 const TotalStaked = styled.div`
   display: none;
@@ -105,7 +90,6 @@ const ButtonContainerArea = styled(ButtonContainer)`
 
 const StakeButton = styled.button<{ bgColor?: string }>`
   padding: 6px 24px;
-  /* border-radius: 9px; */
   border-bottom-left-radius: 6px;
   width: 50%;
   border: none;
@@ -121,7 +105,6 @@ const StakeButton = styled.button<{ bgColor?: string }>`
 
 const WithdrawButton = styled.button<{ bgColor?: string }>`
   padding: 6px 24px;
-  /* border-radius: 9px; */
   width: 50%;
   border: transparent;
 
@@ -157,7 +140,7 @@ const FlewColumn = styled.div`
   }
 `
 
-export const PropertyCard = ({ propertyAddress, isGrid }: Props) => {
+export const PropertyCard = ({ propertyAddress }: Props) => {
   const { totalStakingAmount } = useGetTotalStakingAmount(propertyAddress)
   const { myStakingAmount } = useGetMyStakingAmount(propertyAddress)
   const { data } = useGetPropertyAuthenticationQuery({ variables: { propertyAddress } })
@@ -169,7 +152,7 @@ export const PropertyCard = ({ propertyAddress, isGrid }: Props) => {
   return (
     <Link href={'/[propertyAddress]'} as={`/${propertyAddress}`}>
       <Card>
-        <PropertyArea isGrid={isGrid}>
+        <PropertyArea>
           <img
             width="auto"
             height="auto"
@@ -193,10 +176,6 @@ export const PropertyCard = ({ propertyAddress, isGrid }: Props) => {
           </FlewColumn>
         </FlexRow>
         <RowContainer>
-          {/* <Creator>
-            <span>Chalk.eth</span>
-            <MutedSpan>Creator</MutedSpan>
-          </Creator> */}
           <OwnedStake>
             <span>{myStakingAmount?.dp(1)?.toNumber()} DEV</span>
             <MutedSpan>Your stake</MutedSpan>

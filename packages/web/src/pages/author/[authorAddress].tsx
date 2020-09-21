@@ -98,22 +98,6 @@ const TotalStaked = styled.div`
   justify-content: center;
 `
 
-export const Banner = () => {
-  return (
-    <div style={{ backgroundColor: 'black' }}>
-      <Wrap>
-        <div style={{ maxWidth: '1048px', marginRight: 'auto', marginLeft: 'auto', background: 'black' }}>
-          <BannerContainer>
-            <Logo>
-              <ResponsiveImage src="https://res.cloudinary.com/haas-storage/image/upload/v1598697538/background_wmc31h.png" />
-            </Logo>
-          </BannerContainer>
-        </div>
-      </Wrap>
-    </div>
-  )
-}
-
 const MutedSpan = styled.span`
   color: grey;
   font-size: 0.9em;
@@ -178,6 +162,22 @@ const ShareList = styled.div`
     margin-right: 5px;
   }
 `
+
+export const Banner = () => {
+  return (
+    <div style={{ backgroundColor: 'black' }}>
+      <Wrap>
+        <div style={{ maxWidth: '1048px', marginRight: 'auto', marginLeft: 'auto', background: 'black' }}>
+          <BannerContainer>
+            <Logo>
+              <ResponsiveImage src="https://res.cloudinary.com/haas-storage/image/upload/v1598697538/background_wmc31h.png" />
+            </Logo>
+          </BannerContainer>
+        </div>
+      </Wrap>
+    </div>
+  )
+}
 
 const Pool = ({ propertyAddress, propertyName }: PoolProps) => {
   const { totalStakingAmount } = useGetTotalStakingAmount(propertyAddress)
