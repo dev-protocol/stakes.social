@@ -17,7 +17,11 @@ const Badge = styled.div`
   grid-gap: 0.5rem;
 `
 const Statistics = styled.span`
-  font-weight: bold;
+  font-size: 1.5em;
+  @media (min-width: 1024px) {
+    font-size: 2em;
+  }
+  color: deeppink;
 `
 const StatisticsInt = styled.span`
   letter-spacing: 0.1rem;
@@ -39,6 +43,47 @@ const values = (v?: BigNumber, dp?: number) =>
     '-'
   )
 
+const SupplySummaryContainer = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 20px;
+`
+
+const SupplyBadge = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`
+
+const Container = styled.div`
+  padding-bottom: 20px;
+`
+
+export const SupplySummary = ({ apy, creators, annualSupplyGrowthRatio }: Props) => {
+  return (
+    <Container>
+      <h2>Current Staking Rewards</h2>
+      <SupplySummaryContainer>
+        <SupplyBadge>
+          <Statistics>{apy?.dp(2).toNumber()}%</Statistics>
+          <span>APY for Stakers</span>
+        </SupplyBadge>
+        <SupplyBadge>
+          <Statistics>{creators?.dp(2).toNumber()}%</Statistics>
+          <span>APY for Creators</span>
+        </SupplyBadge>
+        <SupplyBadge>
+          <Statistics>{annualSupplyGrowthRatio?.dp(2).toNumber()}%</Statistics>
+          <span>ASG of DEV</span>
+        </SupplyBadge>
+      </SupplySummaryContainer>
+      <hr color="lightgrey" />
+    </Container>
+  )
+}
 export const SupplySummaly = ({ apy, creators, annualSupplyGrowthRatio }: Props) => {
   return (
     <Wrap>

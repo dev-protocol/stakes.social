@@ -14,22 +14,24 @@ const Form = styled.div`
   display: grid;
   grid-auto-flow: column;
   justify-content: space-between;
+  align-items: center;
 `
-const Statistic = styled.div`
-  font-size: 1.4rem;
-  color: black;
-  margin-bottom: 1rem;
-  @media (min-width: 768px) {
-    margin-bottom: 0;
-  }
-`
+// const Statistic = styled.div`
+//   font-size: 1rem;
+//   color: black;
+//   margin-bottom: 1rem;
+//   @media (min-width: 768px) {
+//     margin-bottom: 0;
+//   }
+// `
 
 export const WithdrawForm = ({ amount, label, onSubmitWithdraw }: Props) => {
   return (
     <Wrap>
-      <p>Withdraw {label} Reward</p>
+      <p>
+        Withdraw {label} Reward ({amount ? amount.dp(2).toNumber() : 0} DEV available)
+      </p>
       <Form>
-        <Statistic>{amount ? amount.dp(5).toNumber() : 0} DEV</Statistic>
         <Button type="primary" size="large" onClick={onSubmitWithdraw}>
           Withdraw
         </Button>
