@@ -5,7 +5,7 @@ import { Footer } from 'src/components/organisms/Footer'
 import { useRouter } from 'next/router'
 import { EarlyAccess } from 'src/components/atoms/EarlyAccess'
 import { useAPY, useAnnualSupplyGrowthRatio } from 'src/fixtures/dev-kit/hooks'
-import { SupplySummaly, SupplySummary } from 'src/components/molecules/SupplySummaly'
+import { SupplySummary } from 'src/components/molecules/SupplySummaly'
 import { Header } from 'src/components/organisms/Header'
 
 type InitialProps = {}
@@ -37,7 +37,6 @@ const Index = (_: Props) => {
       <Banner />
       <div style={{ padding: '1rem', maxWidth: '1048px', marginRight: 'auto', marginLeft: 'auto' }}>
         <SupplySummary apy={apy} creators={creators} annualSupplyGrowthRatio={annualSupplyGrowthRatio} />
-        {/* <SupplySummaly apy={apy} creators={creators} annualSupplyGrowthRatio={annualSupplyGrowthRatio}></SupplySummaly> */}
         <PropertyCardList currentPage={page} searchWord={word} />
       </div>
       <Footer />
