@@ -6,48 +6,8 @@ exports[`AssetOutline Snapshot 1`] = `
     <div
       class="sc-10zn2q0-0 sc-10zn2q0-1 bmuHvT"
     >
-      <div>
-        <p>
-          Included Assets
-        </p>
-        <div
-          class="ant-list ant-list-split ant-list-bordered"
-          style="background: rgb(255, 255, 255);"
-        >
-          <div
-            class="ant-spin-nested-loading"
-          >
-            <div
-              class="ant-spin-container"
-            >
-              <ul
-                class="ant-list-items"
-              >
-                <li
-                  class="ant-list-item sc-10zn2q0-4 kqGDRV"
-                >
-                  <span
-                    style="overflow: auto;"
-                  >
-                    authentication-id
-                  </span>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-        <button
-          class="ant-btn ant-btn-dashed ant-btn-sm"
-          style="margin-top: 0.5rem;"
-          type="button"
-        >
-          <span>
-            Add your asset
-          </span>
-        </button>
-      </div>
       <div
-        class="sc-10zn2q0-5 gTzQCo"
+        class="sc-10zn2q0-4 cWvBJZ"
       >
         <div>
           Author

@@ -3,44 +3,98 @@
 exports[`StakeForm Snapshot 1`] = `
 <body>
   <div>
-    <div>
-      <p>
-        Stake Now
-      </p>
-      <span
-        class="ant-input-search w1tfby-0 chlMkK ant-input-search-enter-button ant-input-search-large ant-input-group-wrapper ant-input-group-wrapper-lg"
-      >
+    <div
+      class="w1tfby-1 KKxrt"
+    >
+      <div>
+        <p>
+          Stake Now
+        </p>
         <span
-          class="ant-input-wrapper ant-input-group"
+          class="ant-input-search w1tfby-0 kvBFDE ant-input-search-enter-button ant-input-search-large ant-input-group-wrapper ant-input-group-wrapper-lg"
         >
           <span
-            class="ant-input-search w1tfby-0 chlMkK ant-input-search-enter-button ant-input-search-large ant-input-affix-wrapper ant-input-affix-wrapper-lg"
+            class="ant-input-wrapper ant-input-group"
           >
-            <input
-              class="ant-input ant-input-lg"
-              type="number"
-              value=""
-            />
             <span
-              class="ant-input-suffix"
+              class="ant-input-search w1tfby-0 kvBFDE ant-input-search-enter-button ant-input-search-large ant-input-affix-wrapper ant-input-affix-wrapper-lg"
             >
-              DEV
+              <input
+                class="ant-input ant-input-lg"
+                type="number"
+                value=""
+              />
+              <span
+                class="ant-input-suffix"
+              >
+                DEV
+              </span>
+            </span>
+            <span
+              class="ant-input-group-addon"
+            >
+              <button
+                class="ant-btn ant-input-search-button ant-btn-primary ant-btn-lg"
+                type="button"
+              >
+                <span>
+                  Stake
+                </span>
+              </button>
             </span>
           </span>
-          <span
-            class="ant-input-group-addon"
+        </span>
+      </div>
+      <div
+        class="sc-1e3xeyk-0 ebcfrJ"
+      >
+        <div
+          class="sc-1xz1jp7-0 jyGBzw"
+        >
+          <p>
+            Withdraw 
+            Stakers
+             Reward (
+            5000
+             DEV available)
+          </p>
+          <div
+            class="sc-1xz1jp7-1 dGrgmE"
           >
             <button
-              class="ant-btn ant-input-search-button ant-btn-primary ant-btn-lg"
+              class="ant-btn ant-btn-primary ant-btn-lg"
               type="button"
             >
               <span>
-                Stake
+                Withdraw
               </span>
             </button>
-          </span>
-        </span>
-      </span>
+          </div>
+        </div>
+        <div
+          class="sc-1xz1jp7-0 jyGBzw"
+        >
+          <p>
+            Withdraw 
+            Creators
+             Reward (
+            6000
+             DEV available)
+          </p>
+          <div
+            class="sc-1xz1jp7-1 dGrgmE"
+          >
+            <button
+              class="ant-btn ant-btn-primary ant-btn-lg"
+              type="button"
+            >
+              <span>
+                Withdraw
+              </span>
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </body>
