@@ -7,7 +7,6 @@ import withApollo from 'src/fixtures/withApollo'
 import { List } from 'antd'
 import styled from 'styled-components'
 import { HelpUs } from 'src/components/atoms/HelpUs'
-import { appWithTranslation } from '@dev/i18n'
 
 const Wallet = styled.div`
   display: grid;
@@ -80,4 +79,4 @@ class NextApp extends App<AppInitialProps & WithApolloProps<{}>> {
   }
 }
 
-export default appWithTranslation(withApollo(NextApp))
+export default withApollo(NextApp)
