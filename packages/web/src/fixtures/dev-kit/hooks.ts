@@ -22,7 +22,7 @@ import {
 } from './client'
 import { SWRCachePath } from './cache-path'
 import { UnwrapFunc, toNaturalNumber, toAmountNumber } from 'src/fixtures/utility'
-import { getBlockNumber } from 'src/fixtures/wallet/utility'
+import { getBlockNumber, getDevAmount } from 'src/fixtures/wallet/utility'
 import useSWR from 'swr'
 import { message } from 'antd'
 import { useState, useCallback } from 'react'
@@ -208,6 +208,38 @@ export const useGetWithdrawalStatus = (propertyAddress: string) => {
   return { withdrawalStatus: data, withdrawable, error }
 }
 
+export const useTotalStakingAmountOnProtocol = () => {
+  const { data: stakingAmount, error } = useSWR<UnwrapFunc<typeof getTotalStakingAmountOnProtocol>, Error>(
+    SWRCachePath.getTotalStakingAmountOnProtocol,
+    () => getTotalStakingAmountOnProtocol(),
+    { onError: err => message.error(err.message) }
+  )
+  return {
+    totalStakingAmount: stakingAmount ? Number(stakingAmount) : undefined,
+    error
+  }
+}
+
+export const useTotalStakingRatio = () => {
+  const { data: totalSupplyValue, error: totalSupplyError } = useSWR<UnwrapFunc<typeof totalSupply>, Error>(
+    SWRCachePath.totalSupply,
+    () => totalSupply(),
+    {
+      onError: err => message.error(err.message)
+    }
+  )
+  const { data: stakingAmount, error: stakingAmountError } = useSWR<
+    UnwrapFunc<typeof getTotalStakingAmountOnProtocol>,
+    Error
+  >(SWRCachePath.getTotalStakingAmountOnProtocol, () => getTotalStakingAmountOnProtocol(), {
+    onError: err => message.error(err.message)
+  })
+  return {
+    totalStakingRatio: totalSupplyValue && stakingAmount ? Number(stakingAmount) / Number(totalSupplyValue) : undefined,
+    error: totalSupplyError || stakingAmountError
+  }
+}
+
 export const useStakingShare = (propertyAddress: string) => {
   const { data: inProperty, error: inPropertyError } = useSWR<UnwrapFunc<typeof getTotalStakingAmount>, Error>(
     SWRCachePath.getTotalStakingAmount(propertyAddress),
@@ -351,6 +383,35 @@ export const useAPY = () => {
   const creators = holders && totalStaking ? new BigNumber(holders).times(year).div(totalStaking).times(100) : undefined
 
   return { apy, creators, error: maxRewardsError || totalStakingError || holdersError }
+}
+
+export const useTotalSupply = () => {
+  const { data: totalSupplyValue, error } = useSWR<UnwrapFunc<typeof totalSupply>, Error>(
+    SWRCachePath.totalSupply,
+    () => totalSupply(),
+    {
+      onError: err => message.error(err.message)
+    }
+  )
+
+  return { totalSupply: new BigNumber(totalSupplyValue || '0'), error }
+}
+
+export const useCirculatingSupply = () => {
+  const { data: totalSupplyValue, error } = useSWR<UnwrapFunc<typeof totalSupply>, Error>(
+    SWRCachePath.totalSupply,
+    () => totalSupply(),
+    {
+      onError: err => message.error(err.message)
+    }
+  )
+
+  const circulatingSupplyValue = useCallback(async () => {
+    const teamAmount = await getDevAmount('0xe23fe51187a807d56189212591f5525127003bdf')
+    return new BigNumber(totalSupplyValue || '0').minus(new BigNumber(teamAmount || '0'))
+  }, [totalSupplyValue])
+
+  return { circulatingSupply: circulatingSupplyValue, error }
 }
 
 export const useAnnualSupplyGrowthRatio = () => {

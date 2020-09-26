@@ -67,6 +67,11 @@ const navs = [
     pathname: '/policy'
   },
   {
+    key: 'stats',
+    label: 'Stats',
+    pathname: '/stats'
+  },
+  {
     key: 'account',
     label: 'Account',
     pathname: '/settings/profile'
