@@ -51,7 +51,7 @@
     "@testing-library/react": "11.0.4",
     "@testing-library/react-hooks": "3.4.1",
     "@types/body-parser": "1.19.0",
-    "@types/faker": "5.1.0",
+    "@types/faker": "5.1.2",
     "@types/react": "16.9.49",
     "@types/react-dom": "16.9.8",
     "@types/styled-components": "5.1.1",
