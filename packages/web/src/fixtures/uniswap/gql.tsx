@@ -1,5 +1,7 @@
 import gql from 'graphql-tag'
 
+// see https://thegraph.com/explorer/subgraph/uniswap/uniswap-v2
+
 export const getBundleQuery = gql`
   query getBundle {
     bundle(id: 1) {
