@@ -61,7 +61,7 @@
     "babel-loader": "8.1.0",
     "babel-plugin-import": "1.13.0",
     "babel-plugin-styled-components": "1.11.1",
-    "electron": "10.1.0",
+    "electron": "10.1.2",
     "identity-obj-proxy": "3.0.0",
     "react-docgen-typescript-loader": "3.7.2",
     "react-test-renderer": "16.13.1"
