@@ -59,12 +59,11 @@ const DevTotalCap = (_: {}) => {
   const { data: devPrice } = useGetDevPrice()
 
   const devTotalCap = useMemo(() => {
-    const marketCap = devPrice.toNumber() * toNaturalNumber(totalSupply).toNumber()
-    const formatMarketCap = new BigNumber(Math.round(marketCap)).toFormat()
-    return formatMarketCap
+    const marketCap = new BigNumber(devPrice.toNumber() * toNaturalNumber(totalSupply).toNumber())
+    return marketCap
   }, [devPrice, totalSupply])
 
-  return devTotalCap ? <span>{devTotalCap}</span> : <></>
+  return devTotalCap ? <span>{devTotalCap.dp(0).toFormat()}</span> : <></>
 }
 
 const DevMarketCap = (_: {}) => {
@@ -75,7 +74,7 @@ const DevMarketCap = (_: {}) => {
   useEffect(() => {
     circulatingSupply().then((circulatingSupplyValue: any) => {
       const marketCap = devPrice.toNumber() * toNaturalNumber(circulatingSupplyValue).toNumber()
-      const formatMarketCap = new BigNumber(Math.round(marketCap)).toFormat()
+      const formatMarketCap = new BigNumber(marketCap).dp(0).toFormat()
       setDevMarketCap(formatMarketCap)
     })
   }, [devPrice, circulatingSupply])
@@ -85,7 +84,7 @@ const DevMarketCap = (_: {}) => {
 
 const DevPrice = (_: {}) => {
   const { data: devPrice } = useGetDevPrice()
-  return devPrice ? <span>{Math.round(devPrice?.toNumber() * 100) / 100}</span> : <></>
+  return devPrice ? <span>{devPrice?.dp(2).toNumber()}</span> : <></>
 }
 
 const DevStakingRatio = (_: {}) => {
@@ -97,8 +96,8 @@ const DevStakingValue = (_: {}) => {
   const { data: devPrice } = useGetDevPrice()
   const { totalStakingAmount } = useTotalStakingAmountOnProtocol()
   const totalStakingAmountValue = toNaturalNumber(new BigNumber(totalStakingAmount || 0))
-  const devStakingValue = new BigNumber(Math.round(totalStakingAmountValue.toNumber() * devPrice.toNumber()))
-  return totalStakingAmount ? <span>{devStakingValue.toFormat()}</span> : <></>
+  const devStakingValue = new BigNumber(totalStakingAmountValue.toNumber() * devPrice.toNumber())
+  return totalStakingAmount ? <span>{devStakingValue.dp(0).toFormat()}</span> : <></>
 }
 
 const CreatorAPY = (_: {}) => {
