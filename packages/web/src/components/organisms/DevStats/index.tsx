@@ -126,6 +126,29 @@ const AssetOnboarded = (_: {}) => {
   return data?.property_factory_create_aggregate ? <span>{formatAssetOnboarded.toFormat()}</span> : <></>
 }
 
+const CreatorsRewardsDev = (_: {}) => {
+  const { creators } = useAPY()
+  const { totalStakingAmount } = useTotalStakingAmountOnProtocol()
+  const totalStakingAmountValue = toNaturalNumber(new BigNumber(totalStakingAmount || 0))
+  const creatorsRewardsDev =
+    creators && totalStakingAmount
+      ? new BigNumber(creators.div(100).toNumber() * totalStakingAmountValue.toNumber())
+      : null
+  return creatorsRewardsDev ? <span>{creatorsRewardsDev?.dp(0).toFormat()}</span> : <></>
+}
+
+const CreatorsRewardsUsd = (_: {}) => {
+  const { data: devPrice } = useGetDevPrice()
+  const { creators } = useAPY()
+  const { totalStakingAmount } = useTotalStakingAmountOnProtocol()
+  const totalStakingAmountValue = toNaturalNumber(new BigNumber(totalStakingAmount || 0))
+  const creatorsRewardsDev =
+    creators && totalStakingAmount
+      ? new BigNumber(creators.div(100).toNumber() * totalStakingAmountValue.toNumber() * devPrice.toNumber())
+      : null
+  return creatorsRewardsDev ? <span>{creatorsRewardsDev?.dp(0).toFormat()}</span> : <></>
+}
+
 const items = [
   {
     title: 'DEV TOTAL CAP',
@@ -205,6 +228,23 @@ const items = [
     description: 'The total number of creator assets onboarded.',
     valueRender: function assetOnboardedRender() {
       return <AssetOnboarded />
+    }
+  },
+  {
+    title: "CREATOR'S REWARDS DEV",
+    unit: '',
+    description: "The value of current creator's rewards.",
+    valueRender: function creatorsReardsDevRender() {
+      return <CreatorsRewardsDev />
+    }
+  },
+  {
+    title: "CREATOR'S REWARDS USD",
+    unit: '$',
+    unitPosition: 'prefix',
+    description: "The value of current creator's rewards in USD.",
+    valueRender: function creatorsReardsUsdRender() {
+      return <CreatorsRewardsUsd />
     }
   }
 ]
