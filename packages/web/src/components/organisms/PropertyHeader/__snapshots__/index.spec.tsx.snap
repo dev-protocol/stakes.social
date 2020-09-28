@@ -22,11 +22,17 @@ exports[`PropertyHeader Snapshot 1`] = `
           N/A% APY Creators
           </span>
         </span>
-        <button
-          class="sc-1bnntxi-3 fQeOFO"
+        <a
+          href="https://app.uniswap.org/#/swap?outputCurrency=0x5caf454ba92e6f2c929df14667ee360ed9fd5b26"
+          rel="noreferrer"
+          target="_blank"
         >
-          Buy DEV
-        </button>
+          <button
+            class="sc-17tlp0z-0 cjefgD"
+          >
+            Buy DEV
+          </button>
+        </a>
       </div>
     </div>
   </div>
