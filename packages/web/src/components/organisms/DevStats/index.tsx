@@ -162,7 +162,7 @@ const items = [
     title: 'DEV MARKET CAP',
     unit: '$',
     unitPosition: 'prefix',
-    description: 'The total value of all DEV circulationg.',
+    description: 'The total value of all DEV circulating.',
     valueRender: function devMarketCapRender() {
       return <DevMarketCap />
     }
