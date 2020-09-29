@@ -24,7 +24,6 @@ export const getEthPrice = (): Promise<Bundle> => {
 }
 
 export const getDevEthPrice = (): Promise<Token> => {
-  // dev value of team wallet
   const client = newClient()
   return client
     .query({ query: getTokenQuery, variables: { Id: '0x5caf454ba92e6f2c929df14667ee360ed9fd5b26' } })
