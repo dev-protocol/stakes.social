@@ -27,13 +27,13 @@ const Card = styled.div`
 `
 
 const Title = styled.span`
-  font-size: 1.4em;
+  font-size: 1.2em;
   font-weight: 400;
   overflow: hidden;
-  white-space: nowrap;
   text-overflow: ellipsis;
   margin-top: 32px;
   margin-left: 16px;
+  margin-right: 16px;
   padding-bottom: 8px;
 `
 
