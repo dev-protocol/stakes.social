@@ -4,6 +4,7 @@ import { TransactionForm } from '.'
 import 'src/__mocks__/window/matchMedia.mock'
 
 jest.mock('src/fixtures/dev-kit/hooks')
+jest.mock('src/fixtures/uniswap/hooks')
 jest.mock('@dev/graphql')
 
 describe(`${TransactionForm.name}`, () => {
