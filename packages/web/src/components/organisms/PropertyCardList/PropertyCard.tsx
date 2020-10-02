@@ -10,6 +10,7 @@ import styled from 'styled-components'
 import { useGetPropertyAuthenticationQuery } from '@dev/graphql'
 import { truncate } from 'src/fixtures/utility/string'
 import { LoremIpsum } from 'lorem-ipsum'
+import { useGetPropertytInformation } from 'src/fixtures/devprtcl/hooks'
 
 const lorem = new LoremIpsum({
   sentencesPerParagraph: {
@@ -160,6 +161,7 @@ export const PropertyCard = ({ propertyAddress }: Props) => {
   const { totalRewardsAmount } = useGetTotalRewardsAmount(propertyAddress)
   const { myStakingRewardAmount } = useGetMyStakingRewardAmount(propertyAddress)
   const { myStakingAmount } = useGetMyStakingAmount(propertyAddress)
+  const { data: authorData } = useGetPropertytInformation(propertyAddress)
   const { data } = useGetPropertyAuthenticationQuery({ variables: { propertyAddress } })
   const includeAssets = useMemo(
     () => data && truncate(data.property_authentication.map(e => e.authentication_id).join(', '), 24),
@@ -186,8 +188,8 @@ export const PropertyCard = ({ propertyAddress }: Props) => {
           />
           <FlewColumn>
             <span style={{ fontWeight: 'lighter' }}>Creator</span>
-            <span style={{ color: '#1AC9FC' }}>Kazupon</span>
-            <span>5.000 karma</span>
+            <span style={{ color: '#1AC9FC' }}>{authorData?.name}</span>
+            <span>{authorData?.author.karma || 0} Karma</span>
           </FlewColumn>
         </FlexRow>
         <RowContainer>
