@@ -3,6 +3,7 @@ import { Spin, Pagination } from 'antd'
 import { useListPropertyQuery } from '@dev/graphql'
 import { PropertyCard } from './PropertyCard'
 import { PropertySearchForm } from './PropertySearchForm'
+import { CurrencySwitcher } from './CurrencySwitcher'
 import { useRouter } from 'next/router'
 import styled from 'styled-components'
 import Select from 'react-select'
@@ -22,32 +23,6 @@ const PropertiesHeader = styled.div`
   justify-content: center;
   align-items: center;
   padding-top: 10px;
-`
-
-const CurrencyContainer = styled.div`
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-`
-
-const Button = styled.button<{ isActive?: boolean }>`
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-  cursor: pointer;
-  border: none;
-  border-radius: 6px;
-  background-color: ${props => (props.isActive ? 'black' : 'transparent')};
-  width: 65px;
-  span {
-    color: ${props => (props.isActive ? 'white' : 'black')};
-  }
-`
-
-const Circle = styled.div<{ isActive?: boolean }>`
-  padding: 6px;
-  border-radius: 45px;
-  background-color: ${props => (props.isActive ? 'white' : 'black')};
 `
 
 const DEFAULT_PER_PAGE = 10
@@ -84,16 +59,7 @@ export const PropertyCardList = ({ currentPage, searchWord }: Props) => {
         <Header>Asset Pools</Header>
         <PropertySearchForm onSubmitSearchProperty={handleSearch} />
         <Select options={FILTER_OPTIONS} />
-        <CurrencyContainer>
-          <Button isActive>
-            <Circle isActive />
-            <span>DEV</span>
-          </Button>
-          <Button>
-            <Circle />
-            <span>USD</span>
-          </Button>
-        </CurrencyContainer>
+        <CurrencySwitcher />
       </PropertiesHeader>
 
       {loading && <Spin size="large" style={{ display: 'block', width: 'auto', padding: '100px' }} />}
