@@ -50,6 +50,17 @@ const Circle = styled.div<{ isActive?: boolean }>`
   background-color: ${props => (props.isActive ? 'white' : 'black')};
 `
 
+const PropertyOverview = styled.div`
+  display: grid;
+  grid-template-columns: 1fr;
+  row-gap: 0;
+
+  @media (min-width: 768px) {
+    grid-template-columns: 1fr 1fr 1fr;
+    column-gap: 15px;
+  }
+`
+
 const DEFAULT_PER_PAGE = 10
 
 const FILTER_OPTIONS = [
@@ -98,7 +109,7 @@ export const PropertyCardList = ({ currentPage, searchWord }: Props) => {
 
       {loading && <Spin size="large" style={{ display: 'block', width: 'auto', padding: '100px' }} />}
       {data && (
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', rowGap: '0', columnGap: '15px' }}>
+        <PropertyOverview>
           {data.property_factory_create.map(d => (
             <div key={d.event_id} style={{ margin: '54px 0' }}>
               <PropertyCard propertyAddress={d.property} />
@@ -116,7 +127,7 @@ export const PropertyCardList = ({ currentPage, searchWord }: Props) => {
               style={{ margin: '0 0 20px 50%' }}
             />
           </div>
-        </div>
+        </PropertyOverview>
       )}
     </div>
   )
