@@ -24,16 +24,6 @@ const Top = styled.header`
 
   grid-gap: 1rem;
 
-  @media (max-width: 768px) {
-    a {
-      position: absolute;
-      left: 0px;
-      display: block;
-      width: 100%;
-      text-align: center;
-    }
-  }
-
   #headerlogo {
     margin-left: 1em;
     width: 9rem;
@@ -46,6 +36,15 @@ const Top = styled.header`
 const Logo = styled.div`
   display: grid;
   grid-gap: 1rem;
+
+  @media (max-width: 768px) {
+    position: absolute;
+    left: 0px;
+    display: block;
+    width: 100%;
+    text-align: center;
+    pointer-events: none;
+  }
 `
 const ResponsiveWrap = styled.div`
   max-width: 1048px;
@@ -59,8 +58,8 @@ const ResponsiveWrap = styled.div`
 
 const navs = [
   {
-    key: 'properties',
-    label: 'Properties',
+    key: 'pools',
+    label: 'Pools',
     pathname: '/'
   },
   {
@@ -70,18 +69,13 @@ const navs = [
   },
   {
     key: 'governance',
-    label: 'Governance',
+    label: 'Govern',
     pathname: '/policy'
   },
   {
-    key: 'stats',
-    label: 'Stats',
+    key: 'dashboard',
+    label: 'Dashboard',
     pathname: '/stats'
-  },
-  {
-    key: 'account',
-    label: 'Account',
-    pathname: '/settings/profile'
   }
 ]
 
