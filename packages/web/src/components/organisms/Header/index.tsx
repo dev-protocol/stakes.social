@@ -18,28 +18,35 @@ const HeaderContainer = styled.header`
 const Top = styled.header`
   display: grid;
   grid-auto-flow: column;
-  justify-content: space-between;
-  align-items: center;
+  justify-content: start;
+  align-items: start;
   border-bottom: 1px solid black;
 
   grid-gap: 1rem;
+
+  @media (max-width: 768px) {
+    a {
+      position: absolute;
+      left: 0px;
+      display: block;
+      width: 100%;
+      text-align: center;
+    }
+  }
+
   #headerlogo {
     margin-left: 1em;
     width: 9rem;
-  }
-  @media (min-width: 768px) {
-    /* margin-top: 3.4em; */
-    svg {
-      width: 12rem;
+    height: 46px;
+    @media (max-width: 768px) {
+      margin-left: 0px;
     }
   }
 `
-
 const Logo = styled.div`
   display: grid;
   grid-gap: 1rem;
 `
-
 const ResponsiveWrap = styled.div`
   max-width: 1048px;
   margin-right: auto;
@@ -93,10 +100,6 @@ const NavigationMenu = styled.div`
 
 export const Header = ({ colorSchema = 'white' }: Props = {}) => {
   const [isMenuOpen, setMenuOpen] = useState(false)
-  // const { isConnected, connect } = useConnectWallet()
-  // const handleClick = () => {
-  //   connect()
-  // }
   return (
     <HeaderContainer>
       <ResponsiveWrap>
@@ -105,12 +108,6 @@ export const Header = ({ colorSchema = 'white' }: Props = {}) => {
             <BrandLogo colorSchema={colorSchema} props={{ height: undefined }}></BrandLogo>
           </Logo>
           <Navigation isMenuOpen={isMenuOpen} handleMenuOpen={setMenuOpen} />
-          {/* <div>
-            <Button disabled={isConnected} onClick={handleClick}>
-              {isConnected && 'Wallet connected'}
-              {!isConnected && 'Connect to a wallet'}
-            </Button>
-          </div> */}
         </Top>
         {isMenuOpen && (
           <NavigationMenu>
