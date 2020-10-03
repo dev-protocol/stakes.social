@@ -1,14 +1,16 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import { useRouter } from 'next/router'
 import { Header } from 'src/components/organisms/Header'
 import { EarlyAccess } from 'src/components/atoms/EarlyAccess'
 import { Footer } from 'src/components/organisms/Footer'
 import styled from 'styled-components'
 import { LoremIpsum } from 'lorem-ipsum'
-import { useListPropertyMetaQuery } from '@dev/graphql'
+import { useListPropertyMetaQuery, useGetPropertyAuthenticationQuery } from '@dev/graphql'
 import { useGetMyStakingAmount, useGetTotalStakingAmount } from 'src/fixtures/dev-kit/hooks'
 import TopStakers from 'src/components/organisms/TopStakers'
 import TopSupporting from 'src/components/organisms/TopSupporting'
+import { truncate } from 'src/fixtures/utility/string'
+// import { useGetPropertytInformation } from 'src/fixtures/devprtcl/hooks'
 
 const lorem = new LoremIpsum({
   sentencesPerParagraph: {
@@ -58,25 +60,49 @@ const Logo = styled.div`
 `
 
 const ProfilePicture = styled.img`
-  height: 150px;
-  width: 150px;
+  height: 100px;
+  width: 100px;
   border-radius: 90px;
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2), 0 2px 4px -1px rgba(0, 0, 0, 0.12);
+  margin-left: 1em;
+  @media (min-width: 768px) {
+    margin-left: 0;
+    height: 150px;
+    width: 150px;
+  }
 `
 const Grid = styled.div`
   display: grid;
-  grid-template-columns: 170px auto;
-  row-gap: 2rem;
+  grid-template-columns: 1fr;
+  > div {
+    padding: 16px;
+  }
+  @media (min-width: 768px) {
+    > div {
+      padding: 0;
+      padding-bottom: 1em;
+    }
+    grid-template-columns: 170px auto;
+  }
 `
 
-const TransformedGrid = styled(Grid)`
-  transform: translateY(-75px);
+const TransformedGrid = styled.div`
+  display: grid;
+  grid-template-columns: 120px auto;
+  transform: translateY(-50px);
+  @media (min-width: 768px) {
+    transform: translateY(-75px);
+    grid-template-columns: 170px auto;
+  }
 `
 
 const PoolsOverview = styled.div`
   display: grid;
-  grid-template-columns: 2fr 1fr 1fr 2fr;
+  grid-template-columns: 1fr;
   row-gap: 1rem;
+  @media (min-width: 768px) {
+    grid-template-columns: 3fr 1fr 1fr;
+  }
 `
 
 const PoolLogoSection = styled.div`
@@ -88,14 +114,21 @@ const PoolLogoSection = styled.div`
 `
 
 const OwnedStake = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  display: none;
+  @media (min-width: 768px) {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
 `
 const TotalStaked = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  display: none;
+
+  @media (min-width: 768px) {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
 `
 
 const MutedSpan = styled.span`
@@ -103,11 +136,11 @@ const MutedSpan = styled.span`
   font-size: 0.9em;
 `
 
-const ButtonContainer = styled.div`
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-`
+// const ButtonContainer = styled.div`
+//   display: flex;
+//   justify-content: space-evenly;
+//   align-items: center;
+// `
 
 const StakeButton = styled.button<{ bgColor?: string }>`
   padding: 6px 24px;
@@ -123,15 +156,15 @@ const StakeButton = styled.button<{ bgColor?: string }>`
   }
 `
 
-const WithdrawButton = styled.button<{ bgColor?: string }>`
-  padding: 6px 24px;
-  border-radius: 9px;
-  border: transparent;
+// const WithdrawButton = styled.button<{ bgColor?: string }>`
+//   padding: 6px 24px;
+//   border-radius: 9px;
+//   border: transparent;
 
-  background-color: transparent;
-  color: grey;
-  cursor: pointer;
-`
+//   background-color: transparent;
+//   color: grey;
+//   cursor: pointer;
+// `
 
 const Card = styled.div`
   border: solid 1px #f0f0f0;
@@ -155,6 +188,7 @@ const AuthorDetailGrid = styled.div`
 const ShareList = styled.div`
   display: flex;
   align-items: center;
+  justify-content: center;
 
   img,
   svg {
@@ -179,9 +213,14 @@ export const Banner = () => {
   )
 }
 
-const Pool = ({ propertyAddress, propertyName }: PoolProps) => {
+const Pool = ({ propertyAddress }: PoolProps) => {
   const { totalStakingAmount } = useGetTotalStakingAmount(propertyAddress)
   const { myStakingAmount } = useGetMyStakingAmount(propertyAddress)
+  const { data } = useGetPropertyAuthenticationQuery({ variables: { propertyAddress } })
+  const includeAssets = useMemo(
+    () => data && truncate(data.property_authentication.map(e => e.authentication_id).join(', '), 24),
+    [data]
+  )
 
   return (
     <Card>
@@ -192,20 +231,20 @@ const Pool = ({ propertyAddress, propertyName }: PoolProps) => {
             height="75px"
             src="https://res.cloudinary.com/haas-storage/image/upload/v1599219478/61np1wbr9pL_xecoq7.png"
           />
-          <h3>{propertyName}</h3>
+          <h3>{includeAssets}</h3>
         </PoolLogoSection>
         <OwnedStake>
-          <span>{myStakingAmount?.dp(2).toNumber() || 'N/A'} DEV</span>
+          <span>{myStakingAmount?.dp(2).toNumber() || 0} DEV</span>
           <MutedSpan>Your stake</MutedSpan>
         </OwnedStake>
         <TotalStaked>
-          <span>{totalStakingAmount?.dp(2).toNumber() || 'N/A'} DEV</span>
+          <span>{totalStakingAmount?.dp(2).toNumber() || 0} DEV</span>
           <MutedSpan>Total staked</MutedSpan>
         </TotalStaked>
-        <ButtonContainer>
+        {/* <ButtonContainer>
           <StakeButton>Stake</StakeButton>
           <WithdrawButton>Withdraw</WithdrawButton>
-        </ButtonContainer>
+        </ButtonContainer> */}
       </PoolsOverview>
     </Card>
   )
@@ -216,12 +255,14 @@ const AuthorAddressDetail = (_: Props) => {
   let { authorAddress } = router.query
   const author: string = typeof authorAddress == 'string' ? authorAddress : 'none'
   // const { data, error } = useGetPropertytInformation(propertyAddress)
-
+  // const { data: authorData } = useGetPropertytInformation(author)
   const { data, loading } = useListPropertyMetaQuery({
     variables: {
       author
     }
   })
+
+  // console.log(authorData)
 
   return (
     <>
@@ -231,10 +272,10 @@ const AuthorAddressDetail = (_: Props) => {
       <Wrap>
         <TransformedGrid>
           <ProfilePicture src="https://res.cloudinary.com/haas-storage/image/upload/v1598963050/72989_gve7hf.jpg" />
-          <div style={{ display: 'grid', gridTemplateRows: '1fr 1fr' }}>
-            <div style={{ gridRow: '2 / -1' }}>
+          <div style={{ display: 'grid', gridTemplateRows: '1fr' }}>
+            <div style={{ gridRow: '2 / -1', marginTop: '50px' }}>
               <AuthorDetailGrid>
-                <h2>Kazuya Kawaguchi</h2>
+                <span style={{ fontSize: '1.25em' }}>Kazuya Kawaguchi</span>
                 <ShareList>
                   <img
                     src="https://res.cloudinary.com/haas-storage/image/upload/v1600172007/25231_hng64u.png"
