@@ -4,20 +4,20 @@ exports[`StakeForm Snapshot 1`] = `
 <body>
   <div>
     <div
-      class="w1tfby-1 KKxrt"
+      class="w1tfby-1 CNHci"
     >
       <div>
         <p>
           Stake Now
         </p>
         <span
-          class="ant-input-search w1tfby-0 kvBFDE ant-input-search-enter-button ant-input-search-large ant-input-group-wrapper ant-input-group-wrapper-lg"
+          class="ant-input-search w1tfby-0 cbtsZP ant-input-search-enter-button ant-input-search-large ant-input-group-wrapper ant-input-group-wrapper-lg"
         >
           <span
             class="ant-input-wrapper ant-input-group"
           >
             <span
-              class="ant-input-search w1tfby-0 kvBFDE ant-input-search-enter-button ant-input-search-large ant-input-affix-wrapper ant-input-affix-wrapper-lg"
+              class="ant-input-search w1tfby-0 cbtsZP ant-input-search-enter-button ant-input-search-large ant-input-affix-wrapper ant-input-affix-wrapper-lg"
             >
               <input
                 class="ant-input ant-input-lg"
@@ -46,10 +46,10 @@ exports[`StakeForm Snapshot 1`] = `
         </span>
       </div>
       <div
-        class="sc-1e3xeyk-0 ebcfrJ"
+        class="sc-1e3xeyk-0 dFAruq"
       >
         <div
-          class="sc-1xz1jp7-0 jyGBzw"
+          class="sc-1xz1jp7-0"
         >
           <p>
             Withdraw 
@@ -59,7 +59,7 @@ exports[`StakeForm Snapshot 1`] = `
              DEV available)
           </p>
           <div
-            class="sc-1xz1jp7-1 dGrgmE"
+            class="sc-1xz1jp7-1 lgFbGj"
           >
             <button
               class="ant-btn ant-btn-primary ant-btn-lg"
@@ -72,7 +72,7 @@ exports[`StakeForm Snapshot 1`] = `
           </div>
         </div>
         <div
-          class="sc-1xz1jp7-0 jyGBzw"
+          class="sc-1xz1jp7-0"
         >
           <p>
             Withdraw 
@@ -82,7 +82,7 @@ exports[`StakeForm Snapshot 1`] = `
              DEV available)
           </p>
           <div
-            class="sc-1xz1jp7-1 dGrgmE"
+            class="sc-1xz1jp7-1 lgFbGj"
           >
             <button
               class="ant-btn ant-btn-primary ant-btn-lg"
