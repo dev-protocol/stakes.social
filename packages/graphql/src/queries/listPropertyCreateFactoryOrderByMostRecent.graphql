@@ -1,8 +1,6 @@
-query ListProperty($limit: Int, $offset: Int, $ilike: String, $from: String) {
+query ListPropertyOrderByMostRecent($limit: Int, $offset: Int, $ilike: String, $from: String) {
   property_factory_create(limit: $limit, offset: $offset, order_by: {
-      current_lockup: {
-        sum_values: desc_nulls_last
-      }
+      block_number: desc
     },
     where: { authentication: { authentication_id: { _ilike: $ilike } property_creation: { from_address: { _eq: $from } } } }
   ) {
