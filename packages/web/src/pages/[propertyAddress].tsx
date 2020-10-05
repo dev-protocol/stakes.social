@@ -164,11 +164,14 @@ const Author = ({ propertyAddress }: { propertyAddress: string }) => {
         <>
           <h2>Created by {data?.name}</h2>
           <Flex>
-            <img
-              height="150px"
-              width="150px"
-              src="https://res.cloudinary.com/haas-storage/image/upload/v1598963050/72989_gve7hf.jpg"
-            />
+            <div style={{ width: '150px' }}>
+              <img
+                height="150px"
+                width="150px"
+                src="https://res.cloudinary.com/haas-storage/image/upload/v1598963050/72989_gve7hf.jpg"
+              />
+            </div>
+
             <CreatorContent>
               <AboutParagraph>{lorem.generateSentences(4)}</AboutParagraph>
               {/* TODO: add query to get pools and amount of supporters */}
