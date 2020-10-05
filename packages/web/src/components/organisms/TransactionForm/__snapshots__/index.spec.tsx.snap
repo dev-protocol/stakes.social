@@ -4,10 +4,10 @@ exports[`TransactionForm Snapshot 1`] = `
 <body>
   <div>
     <div
-      class="sc-1e3xeyk-0 ebcfrJ"
+      class="sc-1e3xeyk-0 dFAruq"
     >
       <div
-        class="sc-1xz1jp7-0 jyGBzw"
+        class="sc-1xz1jp7-0"
       >
         <p>
           Withdraw 
@@ -17,7 +17,7 @@ exports[`TransactionForm Snapshot 1`] = `
            DEV available)
         </p>
         <div
-          class="sc-1xz1jp7-1 dGrgmE"
+          class="sc-1xz1jp7-1 lgFbGj"
         >
           <button
             class="ant-btn ant-btn-primary ant-btn-lg"
@@ -30,7 +30,7 @@ exports[`TransactionForm Snapshot 1`] = `
         </div>
       </div>
       <div
-        class="sc-1xz1jp7-0 jyGBzw"
+        class="sc-1xz1jp7-0"
       >
         <p>
           Withdraw 
@@ -40,7 +40,7 @@ exports[`TransactionForm Snapshot 1`] = `
            DEV available)
         </p>
         <div
-          class="sc-1xz1jp7-1 dGrgmE"
+          class="sc-1xz1jp7-1 lgFbGj"
         >
           <button
             class="ant-btn ant-btn-primary ant-btn-lg"

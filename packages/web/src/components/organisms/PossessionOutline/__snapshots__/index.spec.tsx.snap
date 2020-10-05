@@ -4,10 +4,10 @@ exports[`PossessionOutline Snapshot 1`] = `
 <body>
   <div>
     <div
-      class="zlzook-0 kMYijo"
+      class="zlzook-0 krkqv"
     >
       <div
-        class="zlzook-1 jeAHgc"
+        class="zlzook-1 cxefGn"
       >
         <h3>
           Total Staking Amount
@@ -18,7 +18,7 @@ exports[`PossessionOutline Snapshot 1`] = `
         </h3>
       </div>
       <div
-        class="zlzook-1 jeAHgc"
+        class="zlzook-1 cxefGn"
       >
         <h3>
           Your Staking Amount
@@ -29,7 +29,7 @@ exports[`PossessionOutline Snapshot 1`] = `
         </h3>
       </div>
       <div
-        class="zlzook-1 jeAHgc"
+        class="zlzook-1 cxefGn"
       >
         <h3>
           Your Staking Share
@@ -40,7 +40,7 @@ exports[`PossessionOutline Snapshot 1`] = `
         </h3>
       </div>
       <div
-        class="zlzook-1 jeAHgc"
+        class="zlzook-1 cxefGn"
       >
         <h3>
           Total Rewards

@@ -64,6 +64,11 @@ exports[`Navigation Snapshot 1`] = `
         />
       </g>
     </svg>
+    <div
+      class="sc-1dxoc5d-2 jifvIv"
+    >
+      SignIn
+    </div>
   </div>
 </body>
 `;
