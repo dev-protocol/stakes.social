@@ -4,7 +4,7 @@ exports[`PropertyHeader Snapshot 1`] = `
 <body>
   <div>
     <div
-      class="sc-1bnntxi-0 bxakBm"
+      class="sc-1bnntxi-0 dcirhd"
     >
       <div
         class="address"
@@ -12,10 +12,10 @@ exports[`PropertyHeader Snapshot 1`] = `
         authentication-id's Pool
       </div>
       <div
-        class="sc-1bnntxi-1 fvcifg"
+        class="sc-1bnntxi-1 fMPaEL"
       >
         <span
-          class="sc-1bnntxi-2 DQYPT"
+          class="sc-1bnntxi-2"
         >
           <span>
             N/A% APY Stakers | 
@@ -28,7 +28,7 @@ exports[`PropertyHeader Snapshot 1`] = `
           target="_blank"
         >
           <button
-            class="sc-17tlp0z-0 cjefgD"
+            class="sc-17tlp0z-0 cvfhWc"
           >
             Buy DEV
           </button>
