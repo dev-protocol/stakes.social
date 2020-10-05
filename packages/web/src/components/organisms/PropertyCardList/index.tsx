@@ -14,14 +14,24 @@ interface Props {
 
 const Header = styled.h2`
   margin-bottom: 0;
+
+  @media (min-width: 768px) {
+    grid-column: 1;
+  }
 `
 
 const PropertiesHeader = styled.div`
   display: grid;
-  grid-template-columns: 2fr 3fr 1.5fr 2fr;
+  grid-template-rows: 1fr 1fr;
+  grid-template-columns: 3fr 4fr;
   justify-content: center;
   align-items: center;
   padding-top: 10px;
+
+  @media (min-width: 768px) {
+    grid-template-rows: none;
+    grid-template-columns: 2fr 2fr 1.5fr 2fr;
+  }
 `
 
 const CurrencyContainer = styled.div`

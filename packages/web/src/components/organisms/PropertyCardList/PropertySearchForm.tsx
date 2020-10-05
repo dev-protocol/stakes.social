@@ -72,7 +72,7 @@ export const SearchbarInput = styled.input`
 export const PropertySearchForm = ({ onSubmitSearchProperty }: Props) => {
   return (
     <Flex>
-      <Form {...formLayout}>
+      <Form style={{ width: '100%' }} {...formLayout}>
         <Row>
           <Col sm={30} md={100}>
             <FlexFormItem name="searchWord">
