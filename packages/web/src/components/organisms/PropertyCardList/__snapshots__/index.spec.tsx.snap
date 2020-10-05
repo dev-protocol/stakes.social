@@ -84,7 +84,7 @@ exports[`PropertyCardList Snapshot 1`] = `
         style="margin: 54px 0px;"
       >
         <div
-          class="k29mxm-0 bFDgzV"
+          class="k29mxm-0 gLXTwm"
         >
           <div
             class="ant-row"
@@ -93,7 +93,7 @@ exports[`PropertyCardList Snapshot 1`] = `
               class="ant-col ant-col-sm-24 ant-col-md-10"
             >
               <div
-                class="ant-statistic k29mxm-4 chEuZd"
+                class="ant-statistic k29mxm-4 cJoHZC"
               >
                 <div
                   class="ant-statistic-title"
@@ -112,10 +112,10 @@ exports[`PropertyCardList Snapshot 1`] = `
               </div>
             </div>
             <div
-              class="ant-col k29mxm-2 kyfkZA ant-col-sm-24 ant-col-md-14"
+              class="ant-col k29mxm-2 jLfbuH ant-col-sm-24 ant-col-md-14"
             >
               <div
-                class="ant-row k29mxm-1 EIlQ"
+                class="ant-row k29mxm-1 jEjHXn"
               >
                 <div
                   class="ant-col ant-col-12"
@@ -188,14 +188,14 @@ exports[`PropertyCardList Snapshot 1`] = `
                 >
                   <div>
                     <span
-                      class="k29mxm-3 bUjBJG"
+                      class="k29mxm-3 jsHdqR"
                       style="position: absolute;"
                     >
                       25
                       % of the total stakes
                     </span>
                     <div
-                      class="sc-5ahzw8-0 bIgDqy"
+                      class="sc-5ahzw8-0 jTwvQh"
                     />
                   </div>
                 </div>

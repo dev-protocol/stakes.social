@@ -4,7 +4,7 @@ exports[`AuthForm Snapshot 1`] = `
 <body>
   <div>
     <div
-      class="bja7zw-0 bVsGvT"
+      class="bja7zw-0 cLoQSw"
     >
       <div
         class="ant-result ant-result-info"
@@ -59,7 +59,7 @@ exports[`AuthForm Snapshot 1`] = `
         </div>
       </div>
       <div
-        class="bja7zw-1 cmaEXV"
+        class="bja7zw-1 iWlyxO"
       >
         <span>
           Associating Property:
@@ -74,7 +74,7 @@ exports[`AuthForm Snapshot 1`] = `
       >
         
         <div
-          class="bja7zw-1 cmaEXV"
+          class="bja7zw-1 iWlyxO"
         >
           <span>
             Arguments:
