@@ -14,6 +14,10 @@ const Flex = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+
+  .ant-col-18 {
+    max-width: 100%;
+  }
 `
 
 const FlexFormItem = styled(Form.Item)`
@@ -73,7 +77,7 @@ export const PropertySearchForm = ({ onSubmitSearchProperty }: Props) => {
   return (
     <Flex>
       <Form style={{ width: '100%' }} {...formLayout}>
-        <Row>
+        <Row style={{ width: '100%' }}>
           <Col sm={30} md={100}>
             <FlexFormItem name="searchWord">
               <Input.Search
