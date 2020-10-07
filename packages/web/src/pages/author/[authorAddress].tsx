@@ -10,7 +10,7 @@ import { useGetMyStakingAmount, useGetTotalStakingAmount } from 'src/fixtures/de
 import TopStakers from 'src/components/organisms/TopStakers'
 import TopSupporting from 'src/components/organisms/TopSupporting'
 import { truncate } from 'src/fixtures/utility/string'
-// import { useGetPropertytInformation } from 'src/fixtures/devprtcl/hooks'
+import { useGetAuthorInformation } from 'src/fixtures/devprtcl/hooks'
 
 const lorem = new LoremIpsum({
   sentencesPerParagraph: {
@@ -254,7 +254,7 @@ const AuthorAddressDetail = (_: Props) => {
   const router = useRouter()
   let { authorAddress } = router.query
   const author: string = typeof authorAddress == 'string' ? authorAddress : 'none'
-  // const { data, error } = useGetPropertytInformation(propertyAddress)
+  const { data: authorInformation } = useGetAuthorInformation(author)
   // const { data: authorData } = useGetPropertytInformation(author)
   const { data, loading } = useListPropertyMetaQuery({
     variables: {
@@ -298,7 +298,9 @@ const AuthorAddressDetail = (_: Props) => {
                 </div>
               </AuthorDetailGrid>
 
-              <div>5,000 karma</div>
+              <p style={{ marginBottom: 0 }}>
+                <span style={{ color: '#1AC9FC' }}>{authorInformation?.karma || 0} </span>karma
+              </p>
             </div>
           </div>
         </TransformedGrid>
