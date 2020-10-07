@@ -5072,6 +5072,16 @@ export type GetPortofolioPoolsAccountQuery = { __typename?: 'query_root' } & {
   property_lockup: Array<{ __typename?: 'property_lockup' } & Pick<Property_Lockup, 'property_address'>>
 }
 
+export type GetPropertyAggregateQueryVariables = Exact<{
+  authorAddress?: Maybe<Scalars['String']>
+}>
+
+export type GetPropertyAggregateQuery = { __typename?: 'query_root' } & {
+  property_meta_aggregate: { __typename?: 'property_meta_aggregate' } & {
+    aggregate?: Maybe<{ __typename?: 'property_meta_aggregate_fields' } & Pick<Property_Meta_Aggregate_Fields, 'count'>>
+  }
+}
+
 export type GetPropertyAuthenticationQueryVariables = Exact<{
   propertyAddress: Scalars['String']
 }>
@@ -5229,6 +5239,54 @@ export type GetPortofolioPoolsAccountLazyQueryHookResult = ReturnType<typeof use
 export type GetPortofolioPoolsAccountQueryResult = ApolloReactCommon.QueryResult<
   GetPortofolioPoolsAccountQuery,
   GetPortofolioPoolsAccountQueryVariables
+>
+export const GetPropertyAggregateDocument = gql`
+  query getPropertyAggregate($authorAddress: String) {
+    property_meta_aggregate(where: { author: { _eq: $authorAddress } }) {
+      aggregate {
+        count
+      }
+    }
+  }
+`
+
+/**
+ * __useGetPropertyAggregateQuery__
+ *
+ * To run a query within a React component, call `useGetPropertyAggregateQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetPropertyAggregateQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetPropertyAggregateQuery({
+ *   variables: {
+ *      authorAddress: // value for 'authorAddress'
+ *   },
+ * });
+ */
+export function useGetPropertyAggregateQuery(
+  baseOptions?: ApolloReactHooks.QueryHookOptions<GetPropertyAggregateQuery, GetPropertyAggregateQueryVariables>
+) {
+  return ApolloReactHooks.useQuery<GetPropertyAggregateQuery, GetPropertyAggregateQueryVariables>(
+    GetPropertyAggregateDocument,
+    baseOptions
+  )
+}
+export function useGetPropertyAggregateLazyQuery(
+  baseOptions?: ApolloReactHooks.LazyQueryHookOptions<GetPropertyAggregateQuery, GetPropertyAggregateQueryVariables>
+) {
+  return ApolloReactHooks.useLazyQuery<GetPropertyAggregateQuery, GetPropertyAggregateQueryVariables>(
+    GetPropertyAggregateDocument,
+    baseOptions
+  )
+}
+export type GetPropertyAggregateQueryHookResult = ReturnType<typeof useGetPropertyAggregateQuery>
+export type GetPropertyAggregateLazyQueryHookResult = ReturnType<typeof useGetPropertyAggregateLazyQuery>
+export type GetPropertyAggregateQueryResult = ApolloReactCommon.QueryResult<
+  GetPropertyAggregateQuery,
+  GetPropertyAggregateQueryVariables
 >
 export const GetPropertyAuthenticationDocument = gql`
   query getPropertyAuthentication($propertyAddress: String!) {

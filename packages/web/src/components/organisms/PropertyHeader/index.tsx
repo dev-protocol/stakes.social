@@ -22,7 +22,6 @@ const SubHeader = styled.div`
   justify-content: space-between;
   align-items: center;
 `
-const ApyDetails = styled.span``
 
 const BuyButton = styled.button<{ bgColor?: string }>`
   padding: 6px 24px;
@@ -57,10 +56,10 @@ export const PropertyHeader = ({ propertyAddress, apy, creators }: Props) => {
         {`${data?.property_authentication?.[0]?.authentication_id}'s Pool` || `${propertyAddress} Pool`}
       </div>
       <SubHeader>
-        <ApyDetails>
-          <span>{`${apy?.dp(0).toNumber() || 'N/A'}% APY Stakers | 
-          ${creators?.dp(0).toNumber() || 'N/A'}% APY Creators`}</span>
-        </ApyDetails>
+        <p style={{ marginBottom: 0 }}>
+          <span style={{ color: '#1AC9FC' }}>{apy?.dp(0).toNumber() || 'N/A'}%</span> APY Stakers |{' '}
+          <span style={{ color: '#1AC9FC' }}> {creators?.dp(0).toNumber() || 'N/A'}%</span> APY Creators
+        </p>
         <BuyButton>Buy DEV</BuyButton>
       </SubHeader>
     </ResponsivePropertyAddressFrame>
