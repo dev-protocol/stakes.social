@@ -152,7 +152,9 @@ const CreatorContent = styled.div`
 `
 
 const AboutParagraph = styled.p`
-  padding-top: 15px;
+  @media (min-width: 768px) {
+    padding-top: 15px;
+  }
 `
 
 const Author = ({ propertyAddress }: { propertyAddress: string }) => {

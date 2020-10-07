@@ -69,15 +69,15 @@ export const SupplySummary = ({ apy, creators, annualSupplyGrowthRatio }: Props)
       <SupplySummaryContainer>
         <SupplyBadge>
           <Statistics>{apy?.dp(2).toNumber()}%</Statistics>
-          <span>APY for Stakers</span>
+          <span>APY Stakers</span>
         </SupplyBadge>
         <SupplyBadge>
           <Statistics>{creators?.dp(2).toNumber()}%</Statistics>
-          <span>APY for Creators</span>
+          <span>APY Creators</span>
         </SupplyBadge>
         <SupplyBadge>
           <Statistics>{annualSupplyGrowthRatio?.dp(2).toNumber()}%</Statistics>
-          <span>ASG of DEV</span>
+          <span>ASG DEV</span>
         </SupplyBadge>
       </SupplySummaryContainer>
       <hr color="lightgrey" />
