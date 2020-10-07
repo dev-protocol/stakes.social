@@ -87,6 +87,7 @@ const Grid = styled.div`
 `
 
 const TransformedGrid = styled.div`
+  position: relative;
   display: grid;
   grid-template-columns: 120px auto;
   transform: translateY(-50px);
@@ -136,12 +137,6 @@ const MutedSpan = styled.span`
   font-size: 0.9em;
 `
 
-// const ButtonContainer = styled.div`
-//   display: flex;
-//   justify-content: space-evenly;
-//   align-items: center;
-// `
-
 const StakeButton = styled.button<{ bgColor?: string }>`
   padding: 6px 24px;
   border-radius: 9px;
@@ -155,16 +150,6 @@ const StakeButton = styled.button<{ bgColor?: string }>`
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
   }
 `
-
-// const WithdrawButton = styled.button<{ bgColor?: string }>`
-//   padding: 6px 24px;
-//   border-radius: 9px;
-//   border: transparent;
-
-//   background-color: transparent;
-//   color: grey;
-//   cursor: pointer;
-// `
 
 const Card = styled.div`
   border: solid 1px #f0f0f0;
@@ -194,6 +179,30 @@ const ShareList = styled.div`
   svg {
     cursor: pointer;
     margin-right: 5px;
+  }
+`
+
+const AuthorLinks = styled.div`
+  display: flex;
+  grid-column: 1 / -1;
+  transform: translateY(59px);
+  font-size: 1.2em;
+  a {
+    text-decoration: none;
+    color: black;
+    border-bottom: 2px solid;
+    border-bottom-color: #1ac9fc;
+    margin-left: 1em;
+  }
+
+  @media (min-width: 768px) {
+    transform: translateY(84px);
+    grid-column: 2;
+    font-size: 1.3em;
+
+    a:first-of-type {
+      margin-left: 0em;
+    }
   }
 `
 
@@ -241,10 +250,6 @@ const Pool = ({ propertyAddress }: PoolProps) => {
           <span>{totalStakingAmount?.dp(2).toNumber() || 0} DEV</span>
           <MutedSpan>Total staked</MutedSpan>
         </TotalStaked>
-        {/* <ButtonContainer>
-          <StakeButton>Stake</StakeButton>
-          <WithdrawButton>Withdraw</WithdrawButton>
-        </ButtonContainer> */}
       </PoolsOverview>
     </Card>
   )
@@ -255,14 +260,11 @@ const AuthorAddressDetail = (_: Props) => {
   let { authorAddress } = router.query
   const author: string = typeof authorAddress == 'string' ? authorAddress : 'none'
   const { data: authorInformation } = useGetAuthorInformation(author)
-  // const { data: authorData } = useGetPropertytInformation(author)
   const { data, loading } = useListPropertyMetaQuery({
     variables: {
       author
     }
   })
-
-  // console.log(authorData)
 
   return (
     <>
@@ -303,17 +305,23 @@ const AuthorAddressDetail = (_: Props) => {
               </p>
             </div>
           </div>
+          <AuthorLinks>
+            <a href="#about">About</a>
+            <a href="#pools">Pools</a>
+            <a href="#top-stakers">Stakers</a>
+            <a href="#supporting">Supporting</a>
+          </AuthorLinks>
         </TransformedGrid>
       </Wrap>
       <hr color="lightgrey" />
       <Wrap>
         <Grid>
-          <div style={{ gridColumn: '2 / -1' }}>
+          <div id="about" style={{ gridColumn: '2 / -1' }}>
             <h2>About</h2>
             <p>{lorem.generateSentences(4)}</p>
             <p>{lorem.generateSentences(4)}</p>
           </div>
-          <div style={{ gridColumn: '2 / -1' }}>
+          <div id="pools" style={{ gridColumn: '2 / -1' }}>
             <h2>Pools</h2>
             <div>
               {loading && <span>Loading...</span>}
@@ -324,11 +332,11 @@ const AuthorAddressDetail = (_: Props) => {
                 ))}
             </div>
           </div>
-          <div style={{ gridColumn: '2 / -1' }}>
+          <div id="top-stakers" style={{ gridColumn: '2 / -1' }}>
             <h2>Top stakers</h2>
             <TopStakers propertyAdress="0x44d871aebF0126Bf646753E2C976Aa7e68A66c15" />
           </div>
-          <div style={{ gridColumn: '2 / -1' }}>
+          <div id="supporting" style={{ gridColumn: '2 / -1' }}>
             <h2>Supporting</h2>
             <TopSupporting accountAddress={author} />
           </div>
