@@ -1,4 +1,5 @@
 import Web3 from 'web3'
+import { AbiItem } from 'web3-utils'
 import { message } from 'antd'
 
 const cache: WeakMap<NonNullable<Window['ethereum']>, string> = new WeakMap()
@@ -66,6 +67,44 @@ export const sign = async (message: string) => {
     }
     const signature = await new Web3(ethereum).eth.personal.sign(message, address, '')
     return signature
+  }
+  return undefined
+}
+
+export const getDevAmount = async (walletAddress: string) => {
+  const abi: AbiItem[] = [
+    {
+      constant: true,
+      inputs: [{ name: '_owner', type: 'address' }],
+      name: 'balanceOf',
+      outputs: [{ name: 'balance', type: 'uint256' }],
+      stateMutability: 'view',
+      payable: false,
+      type: 'function'
+    },
+    {
+      constant: true,
+      inputs: [],
+      name: 'decimals',
+      outputs: [{ name: '', type: 'uint8' }],
+      stateMutability: 'view',
+      payable: false,
+      type: 'function'
+    }
+  ]
+  const { ethereum } = window
+  if (ethereum) {
+    return (async fromCache => {
+      if (typeof fromCache === 'string') {
+        return fromCache
+      }
+      const web3 = new Web3(ethereum)
+      // dev value of team wallet
+      const contract: any = new web3.eth.Contract(abi, '0x5caf454ba92e6f2c929df14667ee360ed9fd5b26')
+      const balance = await contract.methods.balanceOf(walletAddress).call()
+      cache.set(ethereum, balance)
+      return balance
+    })(cache.get(ethereum))
   }
   return undefined
 }

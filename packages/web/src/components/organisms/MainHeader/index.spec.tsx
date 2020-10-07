@@ -1,12 +1,12 @@
 import React from 'react'
 import { render } from '@testing-library/react'
-import { MainHeader } from '.'
+import { Banner } from '.'
 
 jest.mock('src/fixtures/dev-kit/hooks')
 
-describe(`${MainHeader.name}`, () => {
+describe(`${Banner.name}`, () => {
   test('Snapshot', () => {
-    const component = render(<MainHeader />)
+    const component = render(<Banner />)
     const tree = component.baseElement
     expect(tree).toMatchSnapshot()
   })

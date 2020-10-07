@@ -59,9 +59,11 @@ export const SearchbarInput = styled.input`
     border: 1px solid transparent;
     transition: all 0.2s ease-in;
     padding-right: 2.5rem;
+
     ${InputIcon} + & {
       padding-left: 2.5rem;
     }
+
     &:focus {
       transition: all 0.2s ease-in;
       border: 1px solid ${theme.colors.app.mutedAltOnDefault};

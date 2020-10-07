@@ -1,6 +1,5 @@
 import React from 'react'
 import { useGetTotalStakingAmount, useGetMyStakingAmount, useGetTotalRewardsAmount } from 'src/fixtures/dev-kit/hooks'
-import { useTranslation, COMMON_NAMESPACE, commonTranslationKeys } from '@dev/i18n'
 import styled from 'styled-components'
 
 interface Props {
@@ -24,7 +23,6 @@ const Flex = styled.div`
 `
 
 export const PossessionOutline = ({ className, propertyAddress }: Props) => {
-  const { t } = useTranslation(COMMON_NAMESPACE)
   const { totalStakingAmount } = useGetTotalStakingAmount(propertyAddress)
   const { totalRewardsAmount } = useGetTotalRewardsAmount(propertyAddress)
   const { myStakingAmount } = useGetMyStakingAmount(propertyAddress)
@@ -49,7 +47,7 @@ export const PossessionOutline = ({ className, propertyAddress }: Props) => {
         </h3>
       </Flex>
       <Flex>
-        <h3>{t(commonTranslationKeys.totalRewards)}</h3>
+        <h3>Total Rewards</h3>
         <h3>{totalRewardsAmount && totalRewardsAmount.dp(5).toNumber()} DEV</h3>
       </Flex>
     </Wrap>
