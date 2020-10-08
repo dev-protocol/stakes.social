@@ -4,6 +4,7 @@ import { useGetMyStakingAmount, useGetTotalStakingAmount } from 'src/fixtures/de
 import styled from 'styled-components'
 import { useGetPropertyAuthenticationQuery } from '@dev/graphql'
 import { truncate } from 'src/fixtures/utility/string'
+import { Currency } from 'src/components/molecules/Currency'
 import { LoremIpsum } from 'lorem-ipsum'
 
 const lorem = new LoremIpsum({
@@ -177,11 +178,11 @@ export const PropertyCard = ({ propertyAddress }: Props) => {
         </FlexRow>
         <RowContainer>
           <OwnedStake>
-            <span>{myStakingAmount?.dp(1)?.toNumber()} DEV</span>
+            <Currency value={myStakingAmount} />
             <MutedSpan>Your stake</MutedSpan>
           </OwnedStake>
           <TotalStaked>
-            <span>{totalStakingAmount?.dp(1)?.toNumber()} DEV</span>
+            <Currency value={totalStakingAmount} />
             <MutedSpan>Total staked</MutedSpan>
           </TotalStaked>
         </RowContainer>
