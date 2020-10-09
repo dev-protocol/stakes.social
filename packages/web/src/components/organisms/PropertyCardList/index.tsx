@@ -64,6 +64,9 @@ export const PropertyCardList = ({ currentPage, searchWord, sortBy }: Props) => 
       limit: perPage,
       offset: (currentPage - 1) * perPage,
       ilike: searchWord !== '' ? `%${searchWord}%` : undefined,
+      // NOTE: If accountAddress is undefined, all properties will be displayed,
+      //       so if YOUR_PROPS is selected and accountAddress is not available,
+      //       query with dummy values.
       from: sortBy === 'YOUR_PROPS' ? accountAddress || '0xdummy' : undefined
     }
   })
