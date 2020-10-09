@@ -15,14 +15,35 @@ interface Props {
 
 const Header = styled.h2`
   margin-bottom: 0;
+
+  @media (min-width: 768px) {
+    grid-column: 1;
+  }
 `
 
 const PropertiesHeader = styled.div`
   display: grid;
-  grid-template-columns: 2fr 3fr 1.5fr 2fr;
+  grid-template-rows: 1fr 1fr;
+  grid-template-columns: 3fr 4fr;
   justify-content: center;
   align-items: center;
   padding-top: 10px;
+
+  @media (min-width: 768px) {
+    grid-template-rows: none;
+    grid-template-columns: 2fr 2fr 1.5fr 2fr;
+  }
+`
+
+const PropertyOverview = styled.div`
+  display: grid;
+  grid-template-columns: 1fr;
+  row-gap: 0;
+
+  @media (min-width: 768px) {
+    grid-template-columns: 1fr 1fr 1fr;
+    column-gap: 15px;
+  }
 `
 
 const DEFAULT_PER_PAGE = 10
@@ -64,7 +85,7 @@ export const PropertyCardList = ({ currentPage, searchWord }: Props) => {
 
       {loading && <Spin size="large" style={{ display: 'block', width: 'auto', padding: '100px' }} />}
       {data && (
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', rowGap: '0', columnGap: '15px' }}>
+        <PropertyOverview>
           {data.property_factory_create.map(d => (
             <div key={d.event_id} style={{ margin: '54px 0' }}>
               <PropertyCard propertyAddress={d.property} />
@@ -82,7 +103,7 @@ export const PropertyCardList = ({ currentPage, searchWord }: Props) => {
               style={{ margin: '0 0 20px 50%' }}
             />
           </div>
-        </div>
+        </PropertyOverview>
       )}
     </div>
   )

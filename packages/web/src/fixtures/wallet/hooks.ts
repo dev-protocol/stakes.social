@@ -6,7 +6,7 @@ import { useState } from 'react'
 
 export const useConnectWallet = () => {
   const { data, mutate } = useSWR<UnwrapFunc<typeof connectWallet>, Error>(cachePath.connectWallet())
-  const [isConnecting, setIsConnecting] = useState(false);
+  const [isConnecting, setIsConnecting] = useState(false)
 
   const connect = () => {
     setIsConnecting(true)

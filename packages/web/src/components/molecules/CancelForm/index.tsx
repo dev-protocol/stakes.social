@@ -20,31 +20,36 @@ export const CancelForm = ({ className, onClickCancel, onClickWithdraw, remainBl
     <Wrap className={className}>
       <p>Cancel Staking</p>
       <Space size="middle">
-        <Button type="primary" size="large" onClick={onClickCancel} disabled={isCompleted}>
-          Cancel
-        </Button>
-        <Button type="primary" size="large" onClick={onClickWithdraw} disabled={!isCompleted}>
-          Withdraw
-        </Button>
-        <div>
-          {remainBlocks > 0 && !isCompleted && (
-            <>
-              <Spin indicator={spinner} style={{ marginRight: '8px' }} />
-              {remainBlocks} block(s) left
-            </>
-          )}
-          {isCompleted && (
-            <>
-              <CheckCircleTwoTone
-                twoToneColor="#52c41a"
-                style={{
-                  fontSize: 18,
-                  marginRight: '8px'
-                }}
-              />
-              You can withdraw
-            </>
-          )}
+        <div style={{ display: 'flex' }}>
+          <div style={{ marginRight: '5px' }}>
+            <Button type="primary" size="large" onClick={onClickCancel} disabled={isCompleted}>
+              Cancel
+            </Button>
+          </div>
+
+          <Button type="primary" size="large" onClick={onClickWithdraw} disabled={!isCompleted}>
+            Withdraw
+          </Button>
+          <div>
+            {remainBlocks > 0 && !isCompleted && (
+              <>
+                <Spin indicator={spinner} style={{ marginRight: '8px' }} />
+                {remainBlocks} block(s) left
+              </>
+            )}
+            {isCompleted && (
+              <>
+                <CheckCircleTwoTone
+                  twoToneColor="#52c41a"
+                  style={{
+                    fontSize: 18,
+                    marginRight: '8px'
+                  }}
+                />
+                You can withdraw
+              </>
+            )}
+          </div>
         </div>
       </Space>
     </Wrap>
