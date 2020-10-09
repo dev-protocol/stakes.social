@@ -1,9 +1,10 @@
-import { ApolloClient, InMemoryCache } from '@apollo/client'
+import fetch from 'cross-fetch'
+import { ApolloClient, HttpLink, InMemoryCache } from '@apollo/client'
 import { getBundleQuery, getTokenQuery } from './gql'
 
 const newClient = () => {
   return new ApolloClient({
-    uri: 'https://api.thegraph.com/subgraphs/name/uniswap/uniswap-v2',
+    link: new HttpLink({ uri: 'https://api.thegraph.com/subgraphs/name/uniswap/uniswap-v2', fetch }),
     cache: new InMemoryCache()
   })
 }
