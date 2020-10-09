@@ -14,14 +14,30 @@ exports[`PropertyHeader Snapshot 1`] = `
       <div
         class="sc-1bnntxi-1 fMPaEL"
       >
-        <span
-          class="sc-1bnntxi-2"
+        <p
+          style="margin-bottom: 0px;"
         >
-          <span>
-            N/A% APY Stakers | 
-          N/A% APY Creators
+          <span
+            style="color: rgb(26, 201, 252);"
+          >
+            N/A
+            %
           </span>
-        </span>
+           APY Stakers
+          <div
+            class="ant-divider ant-divider-vertical"
+            role="separator"
+            style="border-left: 1px solid black;"
+          />
+          <span
+            style="color: rgb(26, 201, 252);"
+          >
+             
+            N/A
+            %
+          </span>
+           APY Creators
+        </p>
         <a
           href="https://app.uniswap.org/#/swap?outputCurrency=0x5caf454ba92e6f2c929df14667ee360ed9fd5b26"
           rel="noreferrer"

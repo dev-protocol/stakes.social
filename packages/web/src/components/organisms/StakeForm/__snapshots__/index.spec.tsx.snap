@@ -55,8 +55,12 @@ exports[`StakeForm Snapshot 1`] = `
             Withdraw 
             Stakers
              Reward (
-            5000
-             DEV available)
+            <span>
+              5,000
+               
+              DEV
+            </span>
+             available)
           </p>
           <div
             class="sc-1xz1jp7-1 lgFbGj"
@@ -78,8 +82,12 @@ exports[`StakeForm Snapshot 1`] = `
             Withdraw 
             Creators
              Reward (
-            6000
-             DEV available)
+            <span>
+              6,000
+               
+              DEV
+            </span>
+             available)
           </p>
           <div
             class="sc-1xz1jp7-1 lgFbGj"

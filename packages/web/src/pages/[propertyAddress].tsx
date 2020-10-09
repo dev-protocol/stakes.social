@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react'
+import React, { useMemo, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import { PossessionOutline } from 'src/components/organisms/PossessionOutline'
 import { PropertyHeader } from 'src/components/organisms/PropertyHeader'
@@ -13,7 +13,7 @@ import { CancelStaking } from 'src/components/organisms/CancelStaking'
 import TopStakers from 'src/components/organisms/TopStakers'
 import { useAPY } from 'src/fixtures/dev-kit/hooks'
 import { LoremIpsum } from 'lorem-ipsum'
-import { useGetPropertyAuthenticationQuery } from '@dev/graphql'
+import { useGetPropertyAuthenticationQuery, useGetPropertyAggregateLazyQuery } from '@dev/graphql'
 import { PlusOutlined } from '@ant-design/icons'
 import Link from 'next/link'
 import { useGetPropertytInformation } from 'src/fixtures/devprtcl/hooks'
@@ -152,11 +152,25 @@ const CreatorContent = styled.div`
 `
 
 const AboutParagraph = styled.p`
-  padding-top: 15px;
+  @media (min-width: 768px) {
+    padding-top: 15px;
+  }
 `
 
 const Author = ({ propertyAddress }: { propertyAddress: string }) => {
   const { data, error } = useGetPropertytInformation(propertyAddress)
+
+  const [fetchAggregate, { data: aggregateData }] = useGetPropertyAggregateLazyQuery()
+
+  useEffect(() => {
+    if (data?.author.address) {
+      fetchAggregate({
+        variables: {
+          authorAddress: data?.author?.address
+        }
+      })
+    }
+  }, [data, fetchAggregate])
 
   return (
     <AuthorContainer>
@@ -164,15 +178,20 @@ const Author = ({ propertyAddress }: { propertyAddress: string }) => {
         <>
           <h2>Created by {data?.name}</h2>
           <Flex>
-            <img
-              height="150px"
-              width="150px"
-              src="https://res.cloudinary.com/haas-storage/image/upload/v1598963050/72989_gve7hf.jpg"
-            />
+            <div style={{ width: '150px' }}>
+              <img
+                height="150px"
+                width="150px"
+                src="https://res.cloudinary.com/haas-storage/image/upload/v1598963050/72989_gve7hf.jpg"
+              />
+            </div>
+
             <CreatorContent>
               <AboutParagraph>{lorem.generateSentences(4)}</AboutParagraph>
-              {/* TODO: add query to get pools and amount of supporters */}
-              <span> 5 Pools | 100 Supporters | {data?.author?.karma} Karma</span>
+              <p>
+                <span style={{ color: '#1AC9FC' }}>{aggregateData?.property_meta_aggregate.aggregate?.count || 0}</span>{' '}
+                Pool(s) | <span style={{ color: '#1AC9FC' }}>{data?.author?.karma || 0} </span> Karma
+              </p>
             </CreatorContent>
           </Flex>
         </>

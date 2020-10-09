@@ -42,7 +42,7 @@ export const PossessionOutline = ({ className, propertyAddress }: Props) => {
         <h3>
           {myStakingAmount &&
             totalStakingAmount &&
-            (myStakingAmount.dp(5).toNumber() / totalStakingAmount.dp(5).toNumber()) * 100}
+            ((myStakingAmount.dp(2).toNumber() / totalStakingAmount.dp(2).toNumber()) * 100).toFixed(2)}
           %
         </h3>
       </Flex>

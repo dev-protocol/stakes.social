@@ -1,9 +1,16 @@
 import React, { useMemo } from 'react'
 import Link from 'next/link'
-import { useGetMyStakingAmount, useGetTotalStakingAmount } from 'src/fixtures/dev-kit/hooks'
+import {
+  useGetMyStakingAmount,
+  useGetTotalStakingAmount,
+  useGetTotalRewardsAmount,
+  useGetMyStakingRewardAmount
+} from 'src/fixtures/dev-kit/hooks'
 import styled from 'styled-components'
 import { truncate } from 'src/fixtures/utility/string'
+import { Currency } from 'src/components/molecules/Currency'
 import { LoremIpsum } from 'lorem-ipsum'
+import { useGetPropertytInformation } from 'src/fixtures/devprtcl/hooks'
 
 const lorem = new LoremIpsum({
   sentencesPerParagraph: {
@@ -28,7 +35,7 @@ interface Props {
 const Card = styled.div`
   display: flex;
   flex-direction: column;
-  height: 400px;
+  height: 500px;
   border: solid 1px #f0f0f0;
   border-radius: 6px;
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
@@ -38,7 +45,8 @@ const Card = styled.div`
 
 const RowContainer = styled.div`
   display: grid;
-  padding: 0 1.2em 1.2em 1.2em;
+  padding: 0 1.2em 1.2em;
+  row-gap: 8px;
   grid-template-columns: 1fr 1fr;
   grid-template-areas: 'ownedstake totalstaked';
 `
@@ -64,29 +72,30 @@ const Title = styled.span`
   padding-bottom: 16px;
 `
 const OwnedStake = styled.div`
-  display: none;
-
-  @media (min-width: 1024px) {
-    display: flex;
-    grid-area: ownedstake;
-    flex-direction: column;
-  }
+  display: flex;
+  grid-area: ownedstake;
+  flex-direction: column;
 `
 const TotalStaked = styled.div`
-  display: none;
-  @media (min-width: 1024px) {
-    display: flex;
-    grid-area: totalstaked;
-    flex-direction: column;
-  }
+  display: flex;
+  grid-area: totalstaked;
+  flex-direction: column;
 `
+
+const YourReward = styled.div`
+  display: flex;
+  flex-direction: column;
+`
+
+const CreatorReward = styled.div`
+  display: flex;
+  flex-direction: column;
+`
+
 const ButtonContainer = styled.div`
-  display: none;
-  @media (min-width: 1024px) {
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-  }
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
 `
 
 const ButtonContainerArea = styled(ButtonContainer)`
@@ -126,16 +135,24 @@ const MutedSpan = styled.span`
 const FlexRow = styled.div`
   display: flex;
   margin-left: 16px;
+  margin-bottom: 8px;
 
   img {
     border-radius: 90px;
   }
 `
 
+const PropertyDescription = styled.p`
+  color: grey;
+  margin: 0;
+  flex-grow: 1;
+  padding: 0 16px 8px 16px;
+`
+
 const FlewColumn = styled.div`
   display: flex;
   flex-direction: column;
-  flex-grow: 1;
+  flex-grow: 0;
   max-lines: 3;
   padding-bottom: 16px;
 
@@ -147,7 +164,10 @@ const FlewColumn = styled.div`
 
 export const PropertyCard = ({ propertyAddress, assets }: Props) => {
   const { totalStakingAmount } = useGetTotalStakingAmount(propertyAddress)
+  const { totalRewardsAmount } = useGetTotalRewardsAmount(propertyAddress)
+  const { myStakingRewardAmount } = useGetMyStakingRewardAmount(propertyAddress)
   const { myStakingAmount } = useGetMyStakingAmount(propertyAddress)
+  const { data: authorData } = useGetPropertytInformation(propertyAddress)
   const includeAssets = useMemo(() => assets && truncate(assets.map(e => e.authentication_id).join(', '), 24), [assets])
 
   return (
@@ -161,9 +181,7 @@ export const PropertyCard = ({ propertyAddress, assets }: Props) => {
           />
         </PropertyArea>
         <Title>{includeAssets || 'Property'}</Title>
-        <p style={{ color: 'grey', padding: '16px', paddingTop: 0, flexGrow: 1, margin: 0 }}>
-          {lorem.generateSentences(2)}
-        </p>
+        <PropertyDescription>{lorem.generateSentences(2)}</PropertyDescription>
         <FlexRow>
           <img
             width="60"
@@ -172,19 +190,27 @@ export const PropertyCard = ({ propertyAddress, assets }: Props) => {
           />
           <FlewColumn>
             <span style={{ fontWeight: 'lighter' }}>Creator</span>
-            <span style={{ color: '#1AC9FC' }}>Kazupon</span>
-            <span>5.000 karma</span>
+            <span style={{ color: '#1AC9FC' }}>{authorData?.name}</span>
+            <span>{authorData?.author.karma || 0} Karma</span>
           </FlewColumn>
         </FlexRow>
         <RowContainer>
           <OwnedStake>
-            <span>{myStakingAmount?.dp(1)?.toNumber()} DEV</span>
+            <Currency value={myStakingAmount} />
             <MutedSpan>Your stake</MutedSpan>
           </OwnedStake>
+          <YourReward>
+            <span>{myStakingRewardAmount?.dp(1)?.toNumber() || 0} DEV</span>
+            <MutedSpan>Your reward</MutedSpan>
+          </YourReward>
           <TotalStaked>
-            <span>{totalStakingAmount?.dp(1)?.toNumber()} DEV</span>
+            <Currency value={totalStakingAmount} />
             <MutedSpan>Total staked</MutedSpan>
           </TotalStaked>
+          <CreatorReward>
+            <span>{totalRewardsAmount?.dp(1)?.toNumber() || 0} DEV</span>
+            <MutedSpan>Creator reward</MutedSpan>
+          </CreatorReward>
         </RowContainer>
         <ButtonContainerArea>
           <StakeButton>Stake</StakeButton>

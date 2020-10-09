@@ -1,5 +1,5 @@
 import React from 'react'
-import { Col, Row, Form, Input } from 'antd'
+import { Form, Input } from 'antd'
 import styled, { css } from 'styled-components'
 
 interface Props {
@@ -14,6 +14,10 @@ const Flex = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+
+  .ant-col-18 {
+    max-width: 100%;
+  }
 `
 
 const FlexFormItem = styled(Form.Item)`
@@ -34,7 +38,6 @@ export const InputIcon = styled.div`
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-
   svg {
     stroke: #838890;
     width: 1em;
@@ -73,17 +76,13 @@ export const PropertySearchForm = ({ onSubmitSearchProperty }: Props) => {
   return (
     <Flex>
       <Form {...formLayout}>
-        <Row>
-          <Col sm={30} md={100}>
-            <FlexFormItem name="searchWord">
-              <Input.Search
-                placeholder="input property search word"
-                onSearch={searchWord => onSubmitSearchProperty(searchWord)}
-                enterButton
-              />
-            </FlexFormItem>
-          </Col>
-        </Row>
+        <FlexFormItem name="searchWord">
+          <Input.Search
+            placeholder="input property search word"
+            onSearch={searchWord => onSubmitSearchProperty(searchWord)}
+            enterButton
+          />
+        </FlexFormItem>
       </Form>
     </Flex>
   )
