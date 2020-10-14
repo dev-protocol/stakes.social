@@ -1,5 +1,5 @@
 import React from 'react'
-import Document, { Head, Main, NextScript, DocumentContext } from 'next/document'
+import Document, { Html, Head, Main, NextScript, DocumentContext } from 'next/document'
 import { ServerStyleSheet } from 'styled-components'
 
 export default class extends Document {
@@ -25,7 +25,7 @@ export default class extends Document {
 
   render() {
     return (
-      <html lang="ja">
+      <Html lang="ja">
         <Head>
           <meta charSet="utf-8" />
           {/* Use minimum-scale=1 to enable GPU rasterization */}
@@ -53,7 +53,7 @@ export default class extends Document {
           <Main />
           <NextScript />
         </body>
-      </html>
+      </Html>
     )
   }
 }
