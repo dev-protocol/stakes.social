@@ -1,10 +1,11 @@
 import React, { Fragment } from 'react'
 import styled, { CSSProperties } from 'styled-components'
-import { Col, Row, Button, Card } from 'antd';
+import { Col, Row, Card } from 'antd';
 import { Header } from 'src/components/organisms/Header';
 import { Footer } from '../components/organisms/Footer/index';
 import Meta from 'antd/lib/card/Meta';
 import { useEffectAsync } from 'src/fixtures/utility';
+import { Twitter, Discord, Telegram, Spectrum, Medium } from '../components/atoms/SocialButtons/index';
 
 const hColor = '#e91e63'
 const primaryColor = '#5E81F4'
@@ -141,7 +142,7 @@ const Section = styled.section`
   }
 `
 
-const ThinButton = styled.button`
+const ThinButton = styled.a`
   margin: auto;
   margin-top: 40px;
   background: #FFFFFF;
@@ -154,10 +155,10 @@ const ThinButton = styled.button`
   color: ${ primaryColor };
   padding: .8rem;
   cursor: pointer;
-  line-height: 0px;
-`
+  line-height: 20px;
+  `
 
-const FButton = styled.button`
+const FButton = styled.a`
   background: ${ primaryColor };
   margin: auto;
   margin-top: 40px;
@@ -168,12 +169,15 @@ const FButton = styled.button`
   font-size: 13px;
   height: 50px;
   color: white;
+  display: inline-block;
   padding: .8rem;
   cursor: pointer;
   line-height: 0px;
   box-shadow: 1px 1px 6px 2px rgb(94 129 244 / 0.7);
   margin-right: 20px;
   width: 150px;
+  text-align: center;
+  line-height: 20px;
 
   :hover
   {
@@ -188,29 +192,15 @@ const grayBtn = {
   color: '#383838'
 } as CSSProperties
 
-const SocialButton = styled.button`
-  background: #ffffff;
-  border: 2px solid #ffffff;
-  border-radius: 6px;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 16px;
-  color: #6b6b6b;
-  padding: 2px 1.4rem;
-  cursor: pointer;
-  box-shadow: -11px 3px 50px 2px #f4f4f4;
+const metaMaskBtn = {
+  height: '35px',
+  marginTop: '10px',
+  padding: '5px',
+  display: 'block',
+  textAlign: 'center',
+  lineHeight: '15px'
+} as CSSProperties
 
-  svg{
-    width: 26px;
-  }
-
-  span{
-    vertical-align: top;
-    line-height: 37px;
-    font-size: 0.7rem;
-    padding-left: 10px;
-  }
-`
 
 const AboutCreator = () => {
 
@@ -229,7 +219,7 @@ const AboutCreator = () => {
       };
 
       // Construct Intersection Observer.
-      const observer = new IntersectionObserver((entries, observer) => {
+      const observer = new IntersectionObserver((entries) => {
         let observedImg: any = entries[0];
 
         if (!observedImg) {
@@ -259,8 +249,8 @@ const AboutCreator = () => {
                 <Title>Make Creative Work Sustainable!</Title>
                 <p>Stakes.social is the easiest way in the world to authenticate your open assets on the blockchain and earn revenue.
                 Open assets can be anything from open source software, Youtube videos, or Spotify music.</p>
-                <FButton>Get started now!</FButton>
-                <FButton style={grayBtn}>How it works?</FButton>
+                <FButton href="https://stakes.social/auth">Get started now!</FButton>
+                <FButton href="#works" style={grayBtn}>How it works?</FButton>
               </Col>
 
               <Col sm={{ span: 24 }} md={{ span: 12 }}>
@@ -277,7 +267,7 @@ const AboutCreator = () => {
                 Stakes.social’s solution allows for both creators and supporters to simultaneously earn money for supporting each other.
                 The result is a highly sustainable economy for creators.
               </div>
-              <ThinButton>Start Monetizing Now!</ThinButton>
+              <ThinButton href="https://stakes.social/auth">Start Monetizing Now!</ThinButton>
             </Row>
           </TextSection>
 
@@ -336,7 +326,7 @@ const AboutCreator = () => {
                   <div className="text-panel">
                     <Title>Share revenue</Title>
                     You can share the asset token with collaborators, rights-sharers, and investors to automatically distribute the rewards.
-                     It's your choice who receives the asset token.
+                     Its your choice who receives the asset token.
                     </div>
                 </div>
               </Col>
@@ -360,7 +350,7 @@ const AboutCreator = () => {
             </Row>
           </Section>
 
-          <Section>
+          <Section id="works">
             <Row className="howTo" style={{ maxWidth: '1000px' }}>
               <Col sm={{ span: 24 }} md={{ span: 8 }}>
                 <Card
@@ -370,8 +360,8 @@ const AboutCreator = () => {
                 >
                   <Meta title="Create an asset on Stakes.social" description={
                     <Fragment>
-                      <span>  Connect your wallet, authenticate, and name your asset.  (Don't have a crypto wallet yet?) </span>
-                      <ThinButton style={{ height: '35px', marginTop: '10px' }}> Metamask is easy!</ThinButton>
+                      <span>  Connect your wallet, authenticate, and name your asset.  (Dont have a crypto wallet yet?) </span>
+                      <ThinButton href="https://metamask.io/" style={metaMaskBtn}> Metamask is easy!</ThinButton>
                     </Fragment>
                   } />
                 </Card>
@@ -411,7 +401,7 @@ const AboutCreator = () => {
                       Stakes.social offers a sustainable option compared to donations.
                       Contact the Dev Protocol team to discuss how we can help your organization with your cause.
                     </div>
-                    <FButton>Contact Us!</FButton>
+                    <FButton href="https://devprtcl.com/">Contact Us!</FButton>
                   </div>
                 </div>
               </Col>
@@ -432,52 +422,13 @@ const AboutCreator = () => {
 
           <Section>
             <div style={{ textAlign: 'center', padding: '1rem 0' }}>
-              <SocialButton>
-                <svg width="35" height="39" viewBox="0 0 35 39" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M4.085 34.4246H26.6617L25.5835 30.9333C25.7434 31.0727 34.8333 38.8643 34.8333 38.8643V4.78301C34.7257 2.66451 32.9017 0.864258 30.6407 0.864258L4.09292 0.869008C1.8335 0.869008 0 2.67242 0 4.79092V30.5043C0 32.7383 1.83033 34.4246 4.085 34.4246ZM20.786 9.86234L20.7337 9.88134L20.7527 9.86234H20.786ZM8.70358 11.8716C11.6058 9.75942 14.2959 9.86076 14.2959 9.86076L14.5128 10.0745C10.9614 10.9216 9.35117 12.5081 9.35117 12.5081C9.51583 12.4733 16.6867 8.33601 25.3761 12.6126C25.3761 12.6126 23.7627 11.129 20.4297 10.179L20.7242 9.88926C21.185 9.89084 23.6233 9.97634 26.2327 11.8843C26.2327 11.8843 29.1523 16.8718 29.1523 22.9993C29.0557 22.8821 27.341 25.6371 22.9282 25.7321C22.9282 25.7321 22.1809 24.8866 21.6489 24.1488C24.2297 23.4078 25.1956 21.9258 25.1956 21.9258C20.1717 25.0893 15.7684 24.5953 10.5007 22.4578C10.4516 22.4578 10.4294 22.4356 10.4041 22.4103V22.4008C10.3787 22.377 10.3566 22.3533 10.3075 22.3533H10.2125C9.8895 22.1411 9.67417 22.0366 9.67417 22.0366C9.67417 22.0366 10.6384 23.5186 13.1163 24.2596C12.4656 25.0022 11.8212 25.8461 11.8212 25.8461C7.41 25.7416 5.80133 22.9866 5.80133 22.9866C5.80133 16.8496 8.70358 11.8716 8.70358 11.8716Z" fill="#5C6BC0" />
-                  <path d="M21.0698 21.085C22.1956 21.085 23.1123 20.135 23.1123 18.9634C23.1123 17.7996 22.2003 16.8496 21.0698 16.8496V16.8544C19.9488 16.8544 19.0305 17.8012 19.0273 18.9729C19.0273 20.135 19.9441 21.085 21.0698 21.085Z" fill="#5C6BC0" />
-                  <path d="M13.7573 21.085C14.8831 21.085 15.7998 20.135 15.7998 18.9634C15.7998 17.7996 14.8894 16.8496 13.7637 16.8496L13.7573 16.8544C12.6316 16.8544 11.7148 17.8012 11.7148 18.9729C11.7148 20.135 12.6316 21.085 13.7573 21.085Z" fill="#5C6BC0" />
-                </svg>
-                <span>Discord </span>
-              </SocialButton>
 
-              <SocialButton>
-                <svg width="35" height="39" viewBox="0 0 35 39" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M4.085 34.4246H26.6617L25.5835 30.9333C25.7434 31.0727 34.8333 38.8643 34.8333 38.8643V4.78301C34.7257 2.66451 32.9017 0.864258 30.6407 0.864258L4.09292 0.869008C1.8335 0.869008 0 2.67242 0 4.79092V30.5043C0 32.7383 1.83033 34.4246 4.085 34.4246ZM20.786 9.86234L20.7337 9.88134L20.7527 9.86234H20.786ZM8.70358 11.8716C11.6058 9.75942 14.2959 9.86076 14.2959 9.86076L14.5128 10.0745C10.9614 10.9216 9.35117 12.5081 9.35117 12.5081C9.51583 12.4733 16.6867 8.33601 25.3761 12.6126C25.3761 12.6126 23.7627 11.129 20.4297 10.179L20.7242 9.88926C21.185 9.89084 23.6233 9.97634 26.2327 11.8843C26.2327 11.8843 29.1523 16.8718 29.1523 22.9993C29.0557 22.8821 27.341 25.6371 22.9282 25.7321C22.9282 25.7321 22.1809 24.8866 21.6489 24.1488C24.2297 23.4078 25.1956 21.9258 25.1956 21.9258C20.1717 25.0893 15.7684 24.5953 10.5007 22.4578C10.4516 22.4578 10.4294 22.4356 10.4041 22.4103V22.4008C10.3787 22.377 10.3566 22.3533 10.3075 22.3533H10.2125C9.8895 22.1411 9.67417 22.0366 9.67417 22.0366C9.67417 22.0366 10.6384 23.5186 13.1163 24.2596C12.4656 25.0022 11.8212 25.8461 11.8212 25.8461C7.41 25.7416 5.80133 22.9866 5.80133 22.9866C5.80133 16.8496 8.70358 11.8716 8.70358 11.8716Z" fill="#039BE5" />
-                  <path d="M21.0698 21.085C22.1956 21.085 23.1123 20.135 23.1123 18.9634C23.1123 17.7996 22.2003 16.8496 21.0698 16.8496V16.8544C19.9488 16.8544 19.0305 17.8012 19.0273 18.9729C19.0273 20.135 19.9441 21.085 21.0698 21.085Z" fill="#039BE5" />
-                  <rect x="3" y="5.86426" width="27" height="22" fill="#039BE5" />
-                  <path d="M6.07094 16.7082L26.4682 8.9591C27.4149 8.62211 28.2417 9.18666 27.935 10.5972L27.9367 10.5954L24.4637 26.7172C24.2063 27.8602 23.517 28.1381 22.5527 27.5996L17.2639 23.7589L14.7129 26.1804C14.4308 26.4583 14.1928 26.6928 13.6463 26.6928L14.0218 21.3896L23.8238 12.6643C24.2504 12.2943 23.7286 12.0858 23.1662 12.4541L11.053 19.9686L5.83118 18.3636C4.69761 18.0092 4.67293 17.2467 6.07094 16.7082Z" fill="white" />
-                  <path d="M13.7573 21.085C14.8831 21.085 15.7998 20.135 15.7998 18.9634C15.7998 17.7996 14.8894 16.8496 13.7637 16.8496L13.7573 16.8544C12.6316 16.8544 11.7148 17.8012 11.7148 18.9729C11.7148 20.135 12.6316 21.085 13.7573 21.085Z" fill="#039BE5" />
-                </svg>
 
-                <span>Telegram </span>
-              </SocialButton>
-
-              <SocialButton>
-                <svg width="35" height="39" viewBox="0 0 35 39" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M4.085 34.4246H26.6617L25.5835 30.9333C25.7434 31.0727 34.8333 38.8643 34.8333 38.8643V4.78301C34.7257 2.66451 32.9017 0.864258 30.6407 0.864258L4.09292 0.869008C1.8335 0.869008 0 2.67242 0 4.79092V30.5043C0 32.7383 1.83033 34.4246 4.085 34.4246ZM20.786 9.86234L20.7337 9.88134L20.7527 9.86234H20.786ZM8.70358 11.8716C11.6058 9.75942 14.2959 9.86076 14.2959 9.86076L14.5128 10.0745C10.9614 10.9216 9.35117 12.5081 9.35117 12.5081C9.51583 12.4733 16.6867 8.33601 25.3761 12.6126C25.3761 12.6126 23.7627 11.129 20.4297 10.179L20.7242 9.88926C21.185 9.89084 23.6233 9.97634 26.2327 11.8843C26.2327 11.8843 29.1523 16.8718 29.1523 22.9993C29.0557 22.8821 27.341 25.6371 22.9282 25.7321C22.9282 25.7321 22.1809 24.8866 21.6489 24.1488C24.2297 23.4078 25.1956 21.9258 25.1956 21.9258C20.1717 25.0893 15.7684 24.5953 10.5007 22.4578C10.4516 22.4578 10.4294 22.4356 10.4041 22.4103V22.4008C10.3787 22.377 10.3566 22.3533 10.3075 22.3533H10.2125C9.8895 22.1411 9.67417 22.0366 9.67417 22.0366C9.67417 22.0366 10.6384 23.5186 13.1163 24.2596C12.4656 25.0022 11.8212 25.8461 11.8212 25.8461C7.41 25.7416 5.80133 22.9866 5.80133 22.9866C5.80133 16.8496 8.70358 11.8716 8.70358 11.8716Z" fill="#31193B" />
-                  <path d="M26.2446 9.97973L28 8.24415V7.86426H21.9188L17.5848 19.0129L12.6541 7.86426H6.27775V8.24415L8.32833 10.7954C8.52817 10.9839 8.63267 11.2596 8.60608 11.5372V21.5632C8.66933 21.9242 8.55567 22.2955 8.31 22.5579L6 25.4512V25.8264H12.5496V25.4465L10.2396 22.5579C9.98933 22.2946 9.87108 21.9298 9.9215 21.5632V12.891L15.6708 25.8311H16.3391L21.2827 12.891V23.1993C21.2827 23.4712 21.2827 23.5271 21.1103 23.7052L19.332 25.4834V25.8643H27.9597V25.4844L26.2455 23.7497C26.0952 23.6323 26.0173 23.4352 26.0493 23.2438V10.4856C26.0173 10.2933 26.0942 10.0963 26.2446 9.97973Z" fill="white" />
-                </svg>
-
-                <span>Medium </span>
-              </SocialButton>
-
-              <SocialButton>
-                <svg width="35" height="39" viewBox="0 0 35 39" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M4.085 34.4246H26.6617L25.5835 30.9333C25.7434 31.0727 34.8333 38.8643 34.8333 38.8643V4.78301C34.7257 2.66451 32.9017 0.864258 30.6407 0.864258L4.09292 0.869008C1.8335 0.869008 0 2.67242 0 4.79092V30.5043C0 32.7383 1.83033 34.4246 4.085 34.4246ZM20.786 9.86234L20.7337 9.88134L20.7527 9.86234H20.786ZM8.70358 11.8716C11.6058 9.75942 14.2959 9.86076 14.2959 9.86076L14.5128 10.0745C10.9614 10.9216 9.35117 12.5081 9.35117 12.5081C9.51583 12.4733 16.6867 8.33601 25.3761 12.6126C25.3761 12.6126 23.7627 11.129 20.4297 10.179L20.7242 9.88926C21.185 9.89084 23.6233 9.97634 26.2327 11.8843C26.2327 11.8843 29.1523 16.8718 29.1523 22.9993C29.0557 22.8821 27.341 25.6371 22.9282 25.7321C22.9282 25.7321 22.1809 24.8866 21.6489 24.1488C24.2297 23.4078 25.1956 21.9258 25.1956 21.9258C20.1717 25.0893 15.7684 24.5953 10.5007 22.4578C10.4516 22.4578 10.4294 22.4356 10.4041 22.4103V22.4008C10.3787 22.377 10.3566 22.3533 10.3075 22.3533H10.2125C9.8895 22.1411 9.67417 22.0366 9.67417 22.0366C9.67417 22.0366 10.6384 23.5186 13.1163 24.2596C12.4656 25.0022 11.8212 25.8461 11.8212 25.8461C7.41 25.7416 5.80133 22.9866 5.80133 22.9866C5.80133 16.8496 8.70358 11.8716 8.70358 11.8716Z" fill="#000C18" />
-                </svg>
-
-                <span>Spectrum </span>
-              </SocialButton>
-
-              <SocialButton>
-                <svg width="35" height="39" viewBox="0 0 35 39" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M4.085 34.4246H26.6617L25.5835 30.9333C25.7434 31.0727 34.8333 38.8643 34.8333 38.8643V4.78301C34.7257 2.66451 32.9017 0.864258 30.6407 0.864258L4.09292 0.869008C1.8335 0.869008 0 2.67242 0 4.79092V30.5043C0 32.7383 1.83033 34.4246 4.085 34.4246ZM20.786 9.86234L20.7337 9.88134L20.7527 9.86234H20.786ZM8.70358 11.8716C11.6058 9.75942 14.2959 9.86076 14.2959 9.86076L14.5128 10.0745C10.9614 10.9216 9.35117 12.5081 9.35117 12.5081C9.51583 12.4733 16.6867 8.33601 25.3761 12.6126C25.3761 12.6126 23.7627 11.129 20.4297 10.179L20.7242 9.88926C21.185 9.89084 23.6233 9.97634 26.2327 11.8843C26.2327 11.8843 29.1523 16.8718 29.1523 22.9993C29.0557 22.8821 27.341 25.6371 22.9282 25.7321C22.9282 25.7321 22.1809 24.8866 21.6489 24.1488C24.2297 23.4078 25.1956 21.9258 25.1956 21.9258C20.1717 25.0893 15.7684 24.5953 10.5007 22.4578C10.4516 22.4578 10.4294 22.4356 10.4041 22.4103V22.4008C10.3787 22.377 10.3566 22.3533 10.3075 22.3533H10.2125C9.8895 22.1411 9.67417 22.0366 9.67417 22.0366C9.67417 22.0366 10.6384 23.5186 13.1163 24.2596C12.4656 25.0022 11.8212 25.8461 11.8212 25.8461C7.41 25.7416 5.80133 22.9866 5.80133 22.9866C5.80133 16.8496 8.70358 11.8716 8.70358 11.8716Z" fill="#03A9F4" />
-                  <path d="M30 10.9952C29.1075 11.3566 28.1565 11.5961 27.165 11.7124C28.185 11.1503 28.9635 10.2669 29.3295 9.2021C28.3785 9.72549 27.3285 10.0952 26.2095 10.3015C25.3065 9.41395 24.0195 8.86426 22.6155 8.86426C19.8915 8.86426 17.6985 10.9052 17.6985 13.4072C17.6985 13.7672 17.7315 14.1133 17.8125 14.4429C13.722 14.2587 10.1025 12.449 7.671 9.69226C7.2465 10.3721 6.9975 11.1503 6.9975 11.988C6.9975 13.5609 7.875 14.9552 9.183 15.7624C8.3925 15.7486 7.617 15.5367 6.96 15.203C6.96 15.2169 6.96 15.2349 6.96 15.2529C6.96 17.46 8.6655 19.2932 10.902 19.7155C10.5015 19.8166 10.065 19.865 9.612 19.865C9.297 19.865 8.979 19.8484 8.6805 19.7875C9.318 21.5861 11.127 22.9084 13.278 22.9513C11.604 24.1601 9.4785 24.8884 7.1775 24.8884C6.774 24.8884 6.387 24.8718 6 24.8261C8.1795 26.1235 10.7625 26.8643 13.548 26.8643C22.602 26.8643 27.552 19.9412 27.552 13.9403C27.552 13.7395 27.5445 13.5456 27.534 13.3532C28.5105 12.7135 29.331 11.9146 30 10.9952Z" fill="white" />
-                </svg>
-
-                <span>Twitter </span>
-              </SocialButton>
+              <Discord />
+              <Telegram />
+              <Medium />
+              <Spectrum />
+              <Twitter />
             </div>
           </Section>
 
@@ -506,3 +457,4 @@ const AboutCreator = () => {
 }
 
 export default AboutCreator
+
