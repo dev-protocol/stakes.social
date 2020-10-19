@@ -15,7 +15,7 @@
   },
   "dependencies": {
     "@ant-design/icons": "4.2.2",
-    "@apollo/client": "3.2.4",
+    "@apollo/client": "3.2.5",
     "@dev/graphql": "0.0.1",
     "@devprtcl/dev-kit-js": "1.0.2",
     "@quentin-sommer/react-useragent": "3.1.0",
