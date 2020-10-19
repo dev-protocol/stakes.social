@@ -8,6 +8,10 @@ import Hamburger from 'src/components/atoms/Svgs/tsx/Hamburger'
 import { useConnectWallet } from 'src/fixtures/wallet/hooks'
 import { UserOutlined } from '@ant-design/icons'
 import { NavMenu, AccountBtn, Connecting, NavMenuItem } from './../../atoms/Navigation/index'
+import Web3 from 'web3'
+import Web3Modal from 'web3modal'
+import WalletConnectProvider from '@walletconnect/web3-provider'
+import Fortmatic from 'fortmatic'
 
 interface NavigationProps {
   isMenuOpen: boolean
@@ -49,7 +53,8 @@ export const Navigation = ({ handleMenuOpen }: NavigationProps) => {
   const router = useRouter()
   const [current, setCurrent] = useState(toKey(router?.pathname) || navs[0].key)
   const [isDesktop, setDesktop] = useState(typeof window !== 'undefined' && window?.innerWidth > 1024)
-  const { isConnected, connect, isConnecting } = useConnectWallet()
+  // const { isConnected, connect, isConnecting } = useConnectWallet()
+  const { isConnected, isConnecting } = useConnectWallet()
 
   const updateMedia = () => {
     setDesktop(window.innerWidth > 1024)
@@ -71,14 +76,36 @@ export const Navigation = ({ handleMenuOpen }: NavigationProps) => {
     [setCurrent]
   )
 
-  const accountBtnClick = () => {
+  const accountBtnClick = async () => {
     if (isConnected) {
       router.push({ pathname: `${navItemAccount.pathname}` })
       setCurrent(navItemAccount.key)
       return
     }
 
-    connect()
+    // connect()
+
+    const providerOptions = {
+      walletconnect: {
+        package: WalletConnectProvider,
+        options: {
+          infuraId: 'xxx7'
+        }
+      },
+      fortmatic: {
+        package: Fortmatic,
+        options: {
+          key: 'pk_test_C2D8B82458A36749'
+        }
+      }
+    }
+    const web3Modal = new Web3Modal({
+      cacheProvider: true,
+      providerOptions
+    })
+    const provider = await web3Modal.connect()
+    const web3: any = new Web3(provider)
+    console.log(web3.eth.getAccounts())
   }
 
   return (
