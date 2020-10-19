@@ -30,10 +30,8 @@ exports[`PropertySelectForm Snapshot 1`] = `
                 autocomplete="off"
                 class="ant-select-selection-search-input"
                 id="rc_select_TEST_OR_SSR"
-                readonly=""
                 role="combobox"
-                style="opacity: 0;"
-                unselectable="on"
+                type="search"
                 value=""
               />
             </span>
@@ -51,7 +49,7 @@ exports[`PropertySelectForm Snapshot 1`] = `
           >
             <span
               aria-label="down"
-              class="anticon anticon-down"
+              class="anticon anticon-down ant-select-suffix"
               role="img"
             >
               <svg
