@@ -180,9 +180,9 @@ export const holdersShare = async (amount: string, lockedups: string) => {
 export const createGetVotablePolicy = async () => {
   const client = newClient()
   if (client) {
-    const policySet = client.policySet(await getContractAddress(client, 'policySet'))
+    const policyGroup = client.policyGroup(await getContractAddress(client, 'policyGroup'))
     const [policies, currentPolicy] = await Promise.all([
-      devClient.createGetVotablePolicy(policySet)(),
+      devClient.createGetVotablePolicy(policyGroup)(),
       getContractAddress(client, 'policy')
     ])
     return policies.filter(p => p !== currentPolicy)
