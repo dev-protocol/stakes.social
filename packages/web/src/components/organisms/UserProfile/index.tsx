@@ -33,14 +33,14 @@ export const ProfileUpdateForm = ({ accountAddress }: { accountAddress?: string 
   const address = accountAddress || ''
   const { postUserHandler: postUser, isLoading } = usePostUser(address)
   const handleSubmitDisplayName = useCallback(
-    async (name: string) => {
+    (name: string) => {
       postUser(name)
     },
     [postUser]
   )
 
   return (
-    <StyledForm onFinish={({ name }) => handleSubmitDisplayName(name)}>
+    <StyledForm onFinish={(({ name }: { name: string }) => handleSubmitDisplayName(name)) as any}>
       <Form.Item
         name="name"
         rules={[

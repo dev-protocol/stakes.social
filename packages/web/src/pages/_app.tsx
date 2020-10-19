@@ -84,7 +84,8 @@ class NextApp extends App<AppInitialProps & WithApolloProps<{}>> {
       <SettingContext.Provider value={{ isCurrencyDEV: this.state.isCurrencyDEV, toggleCurrency: this.toggleCurrency }}>
         <Head>
           <title>Stakes.social</title>
-          <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+          {/* Use minimum-scale=1 to enable GPU rasterization */}
+          <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no" />
         </Head>
         <Component {...pageProps} apollo={apollo} />
         <HelpUs></HelpUs>
