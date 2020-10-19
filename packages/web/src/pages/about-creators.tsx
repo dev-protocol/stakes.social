@@ -12,7 +12,7 @@ const primaryColor = '#5E81F4'
 const centerAlign = {
   position: 'relative',
   top: '50%',
-  transform: 'translateY(-65%)'
+  transform: 'translateY(-50%)'
 } as CSSProperties
 
 const Article = styled.article`
@@ -201,6 +201,7 @@ const metaMaskBtn = {
   lineHeight: '15px'
 } as CSSProperties
 
+const BASE_IMGURL = 'https://github.com/dev-protocol/asset.stakes.social/blob/main/public/about-creators/';
 
 const AboutCreator = () => {
 
@@ -245,7 +246,7 @@ const AboutCreator = () => {
 
           <Head>
             <Row style={centerAlign}>
-              <Col sm={{ span: 24 }} md={{ span: 12 }}>
+              <Col style={{ marginBottom: '20px' }} sm={{ span: 24 }} md={{ span: 12 }}>
                 <Title>Make Creative Work Sustainable!</Title>
                 <p>Stakes.social is the easiest way in the world to authenticate your open assets on the blockchain and earn revenue.
                 Open assets can be anything from open source software, Youtube videos, or Spotify music.</p>
@@ -254,7 +255,7 @@ const AboutCreator = () => {
               </Col>
 
               <Col sm={{ span: 24 }} md={{ span: 12 }}>
-                <img src="https://lh3.googleusercontent.com/bOCnl8wlMjQ3e6FN72liAfD4m6Ah0eORv6nABI1gdhID-X_2L2Z7ivLuXlCtJxakHJXg21bn69jPexLDkGvt6jlWWeIFvoz7RhkH9AfGVxRf5Xk22IOF7aesnW92ZqNbrxHTNjI62YfbLMjrBF-Gd5tvI9VIeYSL8-ljVvGfgiaM3Q51hHVqcRBDQztOOIB5q57WBaeKw4Dg4T9XkREyDujLIDw0GwaYJZTFt77bdCODJfZbXG1i1q85CMM8d5WoCf1p0Uaa5aRiChFgAX8FixHHURmQeVThkADtOt-YnzjE-RmYCDno6jDe2dt1rWOM9macyh3Jn7fxmVIvJofmGudtvH6rbaBnaJAa7VnMOoqhPeqk-Cd5ddq1jhMbnLsHZu_NTnr2CrZlCpgdpafC6mNyGLUiv0hLQKsx6vQEMuSIClDD_kBhiGmxAOs8f7EEDn8QTR2rg0G-nP2WiVe2fGa5GbxrLKN7HzNk8xb-0q-2KgSvm-f95O3SR02mR_PNJkzRJ7TJon3bdoIsFAvD4cbXJNvxMHZvYPBKD-Ps1Idt54GpitQOex46qbfcw1ssPKVL20gSfb_9W86mFMt2ihvPmw-ze95PjEdHdK4zs9NZvg5CrtgUINcPswm4WvzEmpe_JeMpp6WSZADa2aFMspBei_MZCvxq5V6MMhWnJiPdP1wOzRSLYoX3l3k=w658-h361-no?authuser=0" />
+                <img src={`${ BASE_IMGURL }about_creative.png?raw=true`} />
               </Col>
             </Row>
           </Head>
@@ -287,7 +288,7 @@ const AboutCreator = () => {
             <Row>
               <h3 style={{ margin: '4rem 0px' }}>Stakes.social Features</h3>
               <Col sm={{ span: 24 }} md={{ span: 12 }}>
-                <img src="https://lh3.googleusercontent.com/9wYtg_vdD2B1HSzc5W_7IXuIGZgW74oTKdJhRx5GOg3JMl8A7ITp0Z8jQQ607H1lbpRuBMLncG-4He6mQqFYzOjxxv8LElR7FqjStD3CA4eJ2D84poAtvudtNhf5s9V_t2mA1Zjl8CCHPwcQuGsbtw4UnvV9GSzijzERRIcTUxb_H7VZq0jC8-KOaMaNOb0XQdGUh7euiUbr5_7xAGiAU6XOQ2jupNgVgiZLYlKUzdmw8n97PYI3SUZMh5s-7466oRog4fHqji8dJI4Qe93wnlp6QxCIfZ631iun-qFaCRzPC8MtNjCz1GmQfL1bQZ8YXfNBq9EgEFW4sC3-JA8r2cCoZtOot855GhW1i_D2qeFEkyccG6c46uu4simwJCCshHIXujBBfmkk2BraAON61x4o2VFkvYf4CdF7MH45Je035SJrSOmICni5lrvqMcCPPwRebcNKx_pD2SKgZIEjWGNbRAh2j7uZW8XvgldN9eN_Umaer1-BKhDgMBI4D7-TKajlKs7l2RBiIa_OhzRoJAY87kShAYzsY65WvVEWq2naYBuBraUsdPm4gS2zSPaMn1C1-WCT6usnSmFrRXEEhCSfEGWcLhbFHZFZufaisy_Ymz3v9dVclFXhY6Fv8G1RHVnX64eI5Y3JMMvu__L0nZuUEBfpoXaZ8qyRuaK1PJSC0Sh-EiK2See6Pbo=w797-h497-no?authuser=0" />
+                <img src={`${ BASE_IMGURL }about_earn.png?raw=true`} />
               </Col>
               <Col sm={{ span: 24 }} md={{ span: 12 }}>
                 <div style={centerAlign}>
@@ -311,7 +312,7 @@ const AboutCreator = () => {
                 </div>
               </Col>
               <Col className="hideOnSmall" sm={{ span: 24 }} md={{ span: 12 }}>
-                <img src="https://lh3.googleusercontent.com/sL5ivzmbRey72w4x_D7n7bW_psv9z7SESvoWM89EQod3vKB7OijzhLm4i3WaIN3jZhV38p4wkN_M3LCHHYc5XDBORaiLjI6KcuDj7hn0uJnqJzkXYLFacsDqirrzNMRpf0csGIHQ8D3ePzI8FWU8kV4H-3Bk9ITZoPabOEbrarRcCdIz4P7xFZW55wVzWiceb5K06bc8v2k_HuAj64BwPiMo6xxI_yLBE5K6bxF3o01Zes1dfz_x4fv_tCnO2EDW4ck3TuGhfUi7UR8HalL5fQkTzrdNH1K0UQ_2V1USWY3f6MmhcC1AMpusYkKun0feoDiaaOCqJFb3I_UXK44x5I4PmPz2SpZZOx7z3dIIHXE7gaziCAbZ03y4SeDk9byuRw1VbmPHHEyvgmIoKCUe4ikvQ30AqGz1aXeiu9sspweZwSgA4Iq1atuCyz7o54l4YsC-FRiaOM0-wflP4kirok8Av9HytdTXCShUhsK2pZ6Nkwxq9ZRC70gqdPYUe7Dp7EKxHj7plzUsjTX5Ay0J6Chg-qMrS-0Zl70eqwRAMgGiE-O0KjhU9UmAGA4csMf-GCJv2AqlpDA4ifF332_T3FssO5N3W0j8ZT32hFBYXwOs3fm_CCO9vUvrOmbFX_pYVEqNQOCsC2UwCYwbk3aeWxctM6YKfXvZfDII00uAcQOJWBqDpliu-JBHPk8=w685-h482-no?authuser=0" />
+                <img src={`${ BASE_IMGURL }about_manage.png?raw=true`} />
               </Col>
             </Row>
           </Section>
@@ -319,7 +320,7 @@ const AboutCreator = () => {
           <Section>
             <Row>
               <Col className="hideOnSmall" sm={{ span: 24 }} md={{ span: 12 }}>
-                <img src="https://lh3.googleusercontent.com/YYgFj2D8ypvqj5Eq6g2bRPpnjQVPF_3FWuxY14vSPvMaDJ4N6vyTN2NXC4PM6jhzAT7dF90Yn4pnwWQOVEBMl8sq4o0O6cepG1dUiDqZcx2OSvAtZkYIV1nKZY7iiDllV2uAEQhRgV8CX5q-pvN6W-F4DRhPhtAOtoGQLv1iw6LEU7KX3Yh-R1TkP2pvC-b5EF2DMdMUjF7hfG9P4HLmDLDsswPWsbrZ2egQmEzHsYjIObR-cRVUsvfGeYZ9JkkWJXmjQwWQgD-Al651UxX-uI_cJtQECezijkVsbGdrDM6bIyGRCNWGOKe0bkos8ITDOWEg8poe6tvkef6Zi7P1ThDm4fPxST1syuHGYFsou9_DaZXtLRQtLEeKxPpJLsOHP8htiNe-1hlUjrKMkyWyBSV6kp1Jr9g_5CxrCRBwJ1d6nvZzcnmKrxLP7BlJfh569bOamX6i73tG1jbnYjQR1cSY_n_ZkO9V2DvsR2j846LFO8LgHrQ8DXIC0B163Vx5LmCFYyp6Rkve6d8rBWh6agriU2qqsVpgx5TNNYtgJx5lsA7EoC7TveWy5_uw4glZI-czq-RP-aqX_mBhazSdNyN9hERXNZvamOr-jw2XQaBvX8mmFgVn6aiYobX0Tqma088V0RxTIhcNqWgMEyIwgvpjorgqFbC1XjpY1siyXzJIId6OSH8JjoLhg1c=w570-h387-no?authuser=0" />
+                <img src={`${ BASE_IMGURL }about_share.png?raw=true`} />
               </Col>
               <Col sm={{ span: 24 }} md={{ span: 12 }}>
                 <div style={centerAlign}>
@@ -345,7 +346,7 @@ const AboutCreator = () => {
                 </div>
               </Col>
               <Col style={{ textAlign: 'right' }} sm={{ span: 24 }} md={{ span: 12 }}>
-                <img style={{ width: '312px' }} src="https://lh3.googleusercontent.com/lwevJuYLZz11rWk33dLxZEX_5_e6ZRYMWXk3stHAg-zAE4WEwuJAKx7PjxRmZy1_mMzbsbt_3HAtloe1FWpbjwPDkG-VML61GizKtAjLyEwGBlChs4x7CCZJVhQq_diJ8N3viPUsu5ndEjaSeurjm2rOPgm56vkxmjQiFhrdnqMExdOWpUb3YFhL7HdvRDspwq559vUMDjc-KAYsQzK8G9JYm_u-vlQSDHqmbIx8nYDtYLuAZE1HwOxtErIoC_xocZQGnRd27lqgTvOVLD0wKLeufly_6vjPPUyymRb1YmK3FhZXQOlkTbrePAVx_pJMmtbmasYBsTXa6VivuRFeAaCFq-SETL6ORcltw1wPJxwebtnshjNwWjoR-fuO38XQ0BNM8yHV96rXm4k1LtfU86_E_z9XP-SA7f9M96tbRz_Xc4qziiicHeX98NUMsHc9NBYQGoIHdnm7tMjq8Y2QmX-3FY_WkbANBvnGlzVkeGTHSbfU4BfNMKssadNMy83AwmjVrzlirbdPij16GZiVuQ88oWdsemCReoGg-xezzam_TvxlMNVHe97sn0zvm1J7PuAlpTkC30Ft6xM8WaOgczPYE78Iy1uvzcRe7NnWOQ8xyjY6hVcTo_ZiBplM-ICIk_KnaYXiYWOkEFSdTdHVEQHOV9uZpZilW4sih9iRlgKPFCLsAVAmopoLLg0=w497-h261-no?authuser=0" />
+                <img style={{ width: '312px' }} src={`${ BASE_IMGURL }about_cubic.png?raw=true`} />
               </Col>
             </Row>
           </Section>
@@ -356,7 +357,7 @@ const AboutCreator = () => {
                 <Card
                   hoverable
                   style={{}}
-                  cover={<img alt="example" src="https://lh3.googleusercontent.com/gEJ3fJM93t2sY6vFxaKV5n4BjWYuQho5BZC_VoCdYu0pKffs_npRnbWRFzIrIXkqj-ZdfyVYdTG_Cvm6k-i0Te7OYO-ytnsTdRckR3p5Y7GFEdX3E2Zriuz_6WsWf0hhBLGK_kjhVjihqgmmDeFYQFYEDJyfV2tbPSMr3jDijB9YHkC65t_nmI5XJ93yIHdMrCTn6YbWVS63Dvqo1E2PwYZWY46XJ00DQdArUwzX3HX0eOlkRIU-9zjGBMdXlvg8YPmxtlJ-swJ3S1_W2Vu1eDl4dG0h9vLxJ32WB94EVn9boI9vrJ75bMnaWev4Y4iH4PYuLnsJ7hGBqfxg4ylfWDE0kid_m9hGkXPZPwWQmnDPLFECEdWqNcc54ly-AQBxIyVXFbMzucU5YHsRarGDhxdLi8C-ibS6k5cxx7FmTkeGVkV0zRtri3FltTqLyAnXUzHzqIxq86eQPwJtE83noFFOeyTuHHNDv0-svFu2P4KMl7HzBCNb6I3uERjK--xOfM5RiFtV8H6XW0moX7wpr2tWhYzKuyz6Zhe34NUL6SqYOjIroZdmRn8D23weVKUUeaI3T4MFZ_kx30v02CDVzEvfxWrCRo1gTMlyuN46niFrH1tLOY4TO7EM7HrF-wIIlVEP_97pX_d2KUFTMOVNOpmcpR8Yd4wS-4oshZdH5cLY63YH16zk9Rzrn2w=w160-h157-no?authuser=0" />}
+                  cover={<img alt="example" src={`${ BASE_IMGURL }about_how_build.png?raw=true`} />}
                 >
                   <Meta title="Create an asset on Stakes.social" description={
                     <Fragment>
@@ -370,7 +371,7 @@ const AboutCreator = () => {
                 <Card
                   hoverable
                   style={{}}
-                  cover={<img alt="example" src="https://lh3.googleusercontent.com/lz3YoUkLcj6hPM8JcQGKGdmtu4dGVNx1KfK7EXHKnsrNwYv284Iyb1v8bcOalHH-ghiRs1Tc7s8pTOfCxlM39O6O-DnxyibjZLz1dD8O_4OJoWxORHlsy6fylxSY4J1zG85RUgftfn_ny-76rm0jK5awqCpomMwrsrdS0jKpzsKp9rHJQXQhf4pOAKYjB38R4Dj58Ld08eUVvOvr4JKBcC3_B6_EdBLF_hCL2I1gp_jrS1Eh248CvOe_xCESp2ZfyCErljhwBZwPoRtcL_UBdFS55H8W9rUURhmPTLTdQE9Okie3TyK2fgxLAK5IrDGtFp0XxBVjHGV2guy0z91mesR2eBuLKEpt63cn0HQcCHNjQmbLjPMWw2hoCSrOQUyvwUk5GM991kF2KN1sMe3VH2rn1GIcjXMkWUcWjd-lRj3A5QJGNvjeTdPaoIarq7kdTyRNme_E3sJRZWCpiq-g8w9bXD1zQ7pDbMgm57HU-tvXlrPTJQXZpY42ElBUxr3qYaa6A8U2cvl6Ox5j030_mfQ9ZVb3Mxy0XXrUpkPJGipgNNkYMAbmEx0g1JXdoy_74eayVBttoACh3azBgdm95m94ydCCGIeQr2-xpNGIqMnLN6hLvchUu4X76eNzBbYKUiIg1Vv9JLpkvTPKXWU7C-7oAdSAEjHDyA7Fg0RZsGjYXFsIvHSB6Ku1TXc=w201-h165-no?authuser=0" />}
+                  cover={<img alt="example" src={`${ BASE_IMGURL }about_how_share.png?raw=true`} />}
                 >
                   <Meta title="Share it with your community!" description="Share your asset pool link to your community and have them stake DEV tokens. " />
                 </Card>
@@ -379,7 +380,7 @@ const AboutCreator = () => {
                 <Card
                   hoverable
                   style={{}}
-                  cover={<img alt="example" src="https://lh3.googleusercontent.com/wfi4Chr6ofvnbKPZ7jxJKOrSFOXhw7f_1hi4ZlRfiTV-6UJ1t9iNWBZhqyi9GArwaTgmpGfVAToIJ5uweIjNGKkNxmUbxtqo2HCdF91h8qv3ZKS5IDn-uykI7DKikyFMwe7hTa_mYd40fG0cI5SOGvZYjnx7zYGqZe6qBdduMPwi9uOnDAgEod3VTDW2DHTYUYhouB9BtSG8dN-kBfiqnxWpBPwCYW76L3wV9ZkDHBdN01YZgJeA8U8UVeDUBzYBmAnyjizjuUHuv9_uRq8cog5egS6K_-e9spssgjZQxcdBEBJ6AF625VYN0IMu2pOOemCLvpVaY7DT2jOISKiBCJu0nqfCOUuMs1hx6bcJ9leceUwOiHEERIAL5cX0bbsnbBL6SHUAzmEerVIgXflQ6PiQOY7GRwbrh-ruAFvzxh7CBggJQXtw6JsaByY63dY_i4qIKgIbgaEaKi5hCIOQXVyLHON0BHBrk4h8NpJXf7xdU-vAY42BL70lGjkNkSxQBZFi4NbRm18X-wnn5KHQQq5jLlqqHd-IphwII3I6iS13GIdZlyUnZ_lzdww4alXn4UShMokYP2SMXpL3zAzAlgBygzaJaWiPBD6vvZYVYMFyJ1rJx8AP59G2h6ozkXzuN5_KdpzPrzh6GRNLq4CPRbzjNZ1IX2y8u3-ynYDi2tyLXF5wgDwUFya-F_M=s167-no?authuser=0" />}
+                  cover={<img alt="example" src={`${ BASE_IMGURL }about_how_earn.png?raw=true`} />}
                 >
                   <Meta title="Withdraw rewards and manage them." description="You can withdraw creator rewards anytime and sell some on uniswap. 
                   Or stake your rewards in other creators to earn even more." />
@@ -391,7 +392,7 @@ const AboutCreator = () => {
           <Section style={{ background: '#EBF2F8' }}>
             <Row>
               <Col sm={{ span: 24 }} md={{ span: 12 }}>
-                <img src="https://lh3.googleusercontent.com/F6YnsI8EfSGDtEYP0tIGBRM5OCXvjoDpm0XQQ6PNZhns-2cFic48Avt6k16w4g6N8I1x-7-ZQzjx389YEjBi7bA0fC43vSY3R0OUrpzCldWkjZRYdPWetXYYOFi4JaZv4dsLYSk8-4s6TNgXxwwyG0_FCUgMK3SzAFsXeomOG9Me_zHOvvPFYWgsg8dgTmUgCkWPsKY547fgNOOfvMuia7dqk9mD1X7Z7uKrP854QpoHzIT1hHrWFFcQAP0bXFahc00Mk2mIg0KW3nZpyIQlrt0JflYdkhP1cE5PdpJr6Lq2KCXgslv_PmsrfId_MbFANUsDxWcVLxrMObBsJGxc_IR8eNQeMFnT2pUnoaB_5ILmnzP4xFQkfeaBWLJv9M-hzZg0Suo316HNsg6SGW0nkxShtd6mmsXLAOrpDOmpHSCMLnFNiYunBUb_bcrB_OQP7GiUIE-x9_wU_PsAW7qZM9osXyEs-Alw2s_clVplvErrDhGwLOkEgvWjN-VH6yCK2Yygs-ZsMHCK9jPs3dUNdQ4wkeK7Vs1Z9I57yW910J3EsoX_lvgeoN2Pe2YhsXNs3Cfstunw7jmEgVPyi39RQQRYyt6coruyt6bnJnWLHbJWbJZ5v2qzQuD_xMQXS8D6XxbCOvei7q_6DROzDqJ35WIJs1Q7yxvOHGrHT2YPb-vmi2qzoLNq6bbpOcM=w611-h355-no?authuser=0" />
+                <img src={`${ BASE_IMGURL }about_organize.png?raw=true`} />
               </Col>
               <Col sm={{ span: 24 }} md={{ span: 12 }}>
                 <div>
@@ -410,7 +411,7 @@ const AboutCreator = () => {
 
           <TextSection>
             <Row>
-              <img style={{ margin: 'auto', marginBottom: '40px', maxWidth: '500px', width: '100%' }} src="https://lh3.googleusercontent.com/0ryBW99ZoUkjNpFqEkb3MkpccUt8WOg3HTTyF12nN6Kms1iSVCedkxzltdm-uiGb_Fv-vEvM0Ws8-b-cKm3e_BpzqOtamkp2jrd9X5fs_rkhH_oTRIlKlL8d2VzdFqjxeoqCduBjDQ0ZjZsuLFcDO4QUUrui6kSto08noWJ_sElrtAa_n82ye_WBvQQpBf2rBLVkd28hGfWYltEZBcj2J3B0g_9DwWUsLqvw6rBuucGWlLaDWSAb5IBmiflphhYxfqw8_ddvuLH7m_GUBHisbBSyTvWed3wkhqh1TmKkiyDNJG5QH7mrYCPNTbSiUW7-rcEgK5EFwIZI_B_D5BIzKQJGG9Nqv5f8KNCTmj00lsno3izgT9VYeF3JuVcjIn661qaLmzs-pwCtuTKYpG19GwdYLJbQYfAUgt67x7pIv22mF5RdzJuP7C697VVgpx4xcDnrGjL_HH1vagpLZ2TkCvHbcFXkhhrj1B9WTEjYEyixMR8ONHBOQsbiCx-3CIo7mYoa5ISdIgh_A0HtJFDfl-3Rrq28RrcyvMPEgzsCN_nnB0A6sCm7rGXyLiOOBa-4xVPPkaPDbmfwL9Yseb_QQXOQJ_Fq_fayEbEMbPcCiiZVTUramGPYYY5wIUyzOO9kJMVeluQajYtLtx6Pn-QJrzjSKcEVMKPC5DP1dgbIcOcywx_IERM3GchvkNc=w660-h398-no?authuser=0" />
+              <img style={{ margin: 'auto', marginBottom: '40px', maxWidth: '500px', width: '100%' }} src={`${ BASE_IMGURL }about_connect.png?raw=true`} />
 
               <h3>Connect with us.</h3>
               <div>
@@ -444,7 +445,7 @@ const AboutCreator = () => {
                 </div>
               </Col>
               <Col style={{ textAlign: 'right' }} sm={{ span: 24 }} md={{ span: 14 }}>
-                <img style={{ maxWidth: '356px' }} src="https://lh3.googleusercontent.com/RUu9yeb7jfUQ1-inT-a1QVdPZvfPN-0B5g8mIz9NS_w7k4sNiRwgRmZG-qSLeKB5s4gr2EsvjbovS1VooBRsbkRM6X7BDeRSHgl8DHyrkmir2j_xkUY4V9vTonC8oA5s200jmqPKkXE9Sn4Q8V1sJVHnIFl3X1ghnuGMxjVnB26gRh_7tnd4AVF59Ypd-YK0hkbeXxHC_UCtaJwikNqpe1uqHkYZnuJcz6y2x_tnz9dwwoS0fwfuEvGUXGm4ADUq3ZCVHiFevm1Cp71feSLMwHjayy4VPtBYEljkqxshU7ONWhtbctQhuBhyKSGmok6QOW0FAHJNcwH3o0xqljyEL7sZF-x62lfPbZMchA3cVtRcQO_8VJxveU29AVuaVPxeiI9BE_k4QKwwPRcZVslpGxGIRDDs6nzw7djWA0GWHXTLdX8I4hieaRE5VQhjjEdOcTswqOqYThncfLOw5AgtwpS0Aoe7E0o16-bfWow2l29IkeRdkkmdZFJajNXsHhWF_bU4_bde0LTohk3OEno-EpQop3yvEWNzrPKiuXbNyKRB0AV84i7igwQuIbBgsO8EleYD3tVHeAdCaoTgaR0zKtW23IjyVoCyjN_vYblh5t2egFJg7ELSsov-Pac8IVTVS-tdg19UY6mTQIra2KHjCwDf7eToTixhsgY28-JEkMRCJl3yYJ-so-vRRLU=w328-h256-no?authuser=0" />
+                <img style={{ maxWidth: '356px' }} src={`${ BASE_IMGURL }about_join.png?raw=true`} />
               </Col>
             </Row>
           </Section>
