@@ -7,7 +7,7 @@ import Meta from 'antd/lib/card/Meta';
 import { useEffectAsync } from 'src/fixtures/utility';
 import { Twitter, Discord, Telegram, Spectrum, Medium } from '../components/atoms/SocialButtons/index';
 
-const hColor = '#e91e63'
+const hColor = '#ff1493'
 const primaryColor = '#5E81F4'
 const centerAlign = {
   position: 'relative',
@@ -175,7 +175,7 @@ const FButton = styled.a`
   line-height: 0px;
   box-shadow: 1px 1px 6px 2px rgb(94 129 244 / 0.7);
   margin-right: 20px;
-  width: 150px;
+  width: 140px;
   text-align: center;
   line-height: 20px;
 
@@ -215,7 +215,7 @@ const AboutCreator = () => {
 
       const options = {
         root: null,
-        rootMargin: '10px',
+        rootMargin: '50px',
         threshold: 1,
       };
 
@@ -254,7 +254,7 @@ const AboutCreator = () => {
                 <FButton href="#works" style={grayBtn}>How it works?</FButton>
               </Col>
 
-              <Col sm={{ span: 24 }} md={{ span: 12 }}>
+              <Col sm={{ span: 24 }} md={{ span: 12 }} style={{ padding: '20px' }}>
                 <img src={`${ BASE_IMGURL }about_creative.png?raw=true`} />
               </Col>
             </Row>
