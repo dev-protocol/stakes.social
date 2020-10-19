@@ -29,7 +29,7 @@ exports[`PropertyCardList Snapshot 1`] = `
                       class="ant-form-item-control-input-content"
                     >
                       <span
-                        class="ant-input-search ant-input-search-enter-button ant-input-group-wrapper"
+                        class="ant-input-group-wrapper ant-input-search"
                       >
                         <span
                           class="ant-input-wrapper ant-input-group"
@@ -45,7 +45,7 @@ exports[`PropertyCardList Snapshot 1`] = `
                             class="ant-input-group-addon"
                           >
                             <button
-                              class="ant-btn ant-input-search-button ant-btn-primary"
+                              class="ant-btn ant-btn-primary ant-input-search-button"
                               type="button"
                             >
                               <span
@@ -84,7 +84,7 @@ exports[`PropertyCardList Snapshot 1`] = `
         style="margin: 54px 0px;"
       >
         <div
-          class="k29mxm-0 bFDgzV"
+          class="k29mxm-0 gLXTwm"
         >
           <div
             class="ant-row"
@@ -93,7 +93,7 @@ exports[`PropertyCardList Snapshot 1`] = `
               class="ant-col ant-col-sm-24 ant-col-md-10"
             >
               <div
-                class="ant-statistic k29mxm-4 chEuZd"
+                class="ant-statistic k29mxm-4 cJoHZC"
               >
                 <div
                   class="ant-statistic-title"
@@ -112,10 +112,10 @@ exports[`PropertyCardList Snapshot 1`] = `
               </div>
             </div>
             <div
-              class="ant-col k29mxm-2 kyfkZA ant-col-sm-24 ant-col-md-14"
+              class="ant-col k29mxm-2 jLfbuH ant-col-sm-24 ant-col-md-14"
             >
               <div
-                class="ant-row k29mxm-1 EIlQ"
+                class="ant-row k29mxm-1 jEjHXn"
               >
                 <div
                   class="ant-col ant-col-12"
@@ -188,14 +188,14 @@ exports[`PropertyCardList Snapshot 1`] = `
                 >
                   <div>
                     <span
-                      class="k29mxm-3 bUjBJG"
+                      class="k29mxm-3 jsHdqR"
                       style="position: absolute;"
                     >
                       25
                       % of the total stakes
                     </span>
                     <div
-                      class="sc-5ahzw8-0 bIgDqy"
+                      class="sc-5ahzw8-0 jTwvQh"
                     />
                   </div>
                 </div>
@@ -214,9 +214,11 @@ exports[`PropertyCardList Snapshot 1`] = `
           class="ant-pagination-prev ant-pagination-disabled"
           title="Previous Page"
         >
-          <a
+          <button
             class="ant-pagination-item-link"
             disabled=""
+            tabindex="-1"
+            type="button"
           >
             <span
               aria-label="left"
@@ -238,14 +240,16 @@ exports[`PropertyCardList Snapshot 1`] = `
                 />
               </svg>
             </span>
-          </a>
+          </button>
         </li>
         <li
           class="ant-pagination-item ant-pagination-item-1 ant-pagination-item-active"
           tabindex="0"
           title="1"
         >
-          <a>
+          <a
+            rel="nofollow"
+          >
             1
           </a>
         </li>
@@ -254,7 +258,9 @@ exports[`PropertyCardList Snapshot 1`] = `
           tabindex="0"
           title="2"
         >
-          <a>
+          <a
+            rel="nofollow"
+          >
             2
           </a>
         </li>
@@ -263,7 +269,9 @@ exports[`PropertyCardList Snapshot 1`] = `
           tabindex="0"
           title="3"
         >
-          <a>
+          <a
+            rel="nofollow"
+          >
             3
           </a>
         </li>
@@ -272,7 +280,9 @@ exports[`PropertyCardList Snapshot 1`] = `
           tabindex="0"
           title="4"
         >
-          <a>
+          <a
+            rel="nofollow"
+          >
             4
           </a>
         </li>
@@ -281,7 +291,9 @@ exports[`PropertyCardList Snapshot 1`] = `
           tabindex="0"
           title="5"
         >
-          <a>
+          <a
+            rel="nofollow"
+          >
             5
           </a>
         </li>
@@ -291,8 +303,10 @@ exports[`PropertyCardList Snapshot 1`] = `
           tabindex="0"
           title="Next Page"
         >
-          <a
+          <button
             class="ant-pagination-item-link"
+            tabindex="-1"
+            type="button"
           >
             <span
               aria-label="right"
@@ -314,7 +328,7 @@ exports[`PropertyCardList Snapshot 1`] = `
                 />
               </svg>
             </span>
-          </a>
+          </button>
         </li>
       </ul>
     </div>

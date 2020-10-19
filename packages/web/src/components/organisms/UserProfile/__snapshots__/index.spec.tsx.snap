@@ -4,41 +4,41 @@ exports[`UserProfile Snapshot 1`] = `
 <body>
   <div>
     <div
-      class="sc-1wzqvkc-0 fMjlez"
+      class="sc-1wzqvkc-0 bqVTXQ"
     >
       <section
-        class="sc-4avdzt-0 bzVcJB"
+        class="sc-4avdzt-0 iEUrma"
       >
         <div
-          class="sc-4avdzt-1 hrwTlG"
+          class="sc-4avdzt-1 ktSftV"
         >
           Your Address
         </div>
         <div
-          class="sc-4avdzt-2 dQtRtB"
+          class="sc-4avdzt-2 bHZBpu"
         >
           -
         </div>
       </section>
       <section
-        class="sc-4avdzt-0 bzVcJB"
+        class="sc-4avdzt-0 iEUrma"
       >
         <div
-          class="sc-4avdzt-1 hrwTlG"
+          class="sc-4avdzt-1 ktSftV"
         >
           Display name
         </div>
         <div
-          class="sc-4avdzt-2 dQtRtB"
+          class="sc-4avdzt-2 bHZBpu"
         >
           (Not set)
         </div>
       </section>
       <section
-        class="sc-4avdzt-0 bzVcJB"
+        class="sc-4avdzt-0 iEUrma"
       >
         <form
-          class="ant-form ant-form-horizontal sc-4avdzt-3 hydkXI"
+          class="ant-form ant-form-horizontal sc-4avdzt-3 dQwfgz"
         >
           <div
             class="ant-row ant-form-item"

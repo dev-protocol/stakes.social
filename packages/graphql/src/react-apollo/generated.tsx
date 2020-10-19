@@ -1,6 +1,5 @@
-import gql from 'graphql-tag'
-import * as ApolloReactCommon from '@apollo/client'
-import * as ApolloReactHooks from '@apollo/client'
+import { gql } from '@apollo/client'
+import * as Apollo from '@apollo/client'
 export type Maybe<T> = T
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] }
 /** All built-in and custom scalars, mapped to their actual values */
@@ -5140,24 +5139,24 @@ export const GetMarketFactoryCreateDocument = gql`
  * });
  */
 export function useGetMarketFactoryCreateQuery(
-  baseOptions?: ApolloReactHooks.QueryHookOptions<GetMarketFactoryCreateQuery, GetMarketFactoryCreateQueryVariables>
+  baseOptions?: Apollo.QueryHookOptions<GetMarketFactoryCreateQuery, GetMarketFactoryCreateQueryVariables>
 ) {
-  return ApolloReactHooks.useQuery<GetMarketFactoryCreateQuery, GetMarketFactoryCreateQueryVariables>(
+  return Apollo.useQuery<GetMarketFactoryCreateQuery, GetMarketFactoryCreateQueryVariables>(
     GetMarketFactoryCreateDocument,
     baseOptions
   )
 }
 export function useGetMarketFactoryCreateLazyQuery(
-  baseOptions?: ApolloReactHooks.LazyQueryHookOptions<GetMarketFactoryCreateQuery, GetMarketFactoryCreateQueryVariables>
+  baseOptions?: Apollo.LazyQueryHookOptions<GetMarketFactoryCreateQuery, GetMarketFactoryCreateQueryVariables>
 ) {
-  return ApolloReactHooks.useLazyQuery<GetMarketFactoryCreateQuery, GetMarketFactoryCreateQueryVariables>(
+  return Apollo.useLazyQuery<GetMarketFactoryCreateQuery, GetMarketFactoryCreateQueryVariables>(
     GetMarketFactoryCreateDocument,
     baseOptions
   )
 }
 export type GetMarketFactoryCreateQueryHookResult = ReturnType<typeof useGetMarketFactoryCreateQuery>
 export type GetMarketFactoryCreateLazyQueryHookResult = ReturnType<typeof useGetMarketFactoryCreateLazyQuery>
-export type GetMarketFactoryCreateQueryResult = ApolloReactCommon.QueryResult<
+export type GetMarketFactoryCreateQueryResult = Apollo.QueryResult<
   GetMarketFactoryCreateQuery,
   GetMarketFactoryCreateQueryVariables
 >
@@ -5188,30 +5187,24 @@ export const GetPropertyAuthenticationDocument = gql`
  * });
  */
 export function useGetPropertyAuthenticationQuery(
-  baseOptions?: ApolloReactHooks.QueryHookOptions<
-    GetPropertyAuthenticationQuery,
-    GetPropertyAuthenticationQueryVariables
-  >
+  baseOptions?: Apollo.QueryHookOptions<GetPropertyAuthenticationQuery, GetPropertyAuthenticationQueryVariables>
 ) {
-  return ApolloReactHooks.useQuery<GetPropertyAuthenticationQuery, GetPropertyAuthenticationQueryVariables>(
+  return Apollo.useQuery<GetPropertyAuthenticationQuery, GetPropertyAuthenticationQueryVariables>(
     GetPropertyAuthenticationDocument,
     baseOptions
   )
 }
 export function useGetPropertyAuthenticationLazyQuery(
-  baseOptions?: ApolloReactHooks.LazyQueryHookOptions<
-    GetPropertyAuthenticationQuery,
-    GetPropertyAuthenticationQueryVariables
-  >
+  baseOptions?: Apollo.LazyQueryHookOptions<GetPropertyAuthenticationQuery, GetPropertyAuthenticationQueryVariables>
 ) {
-  return ApolloReactHooks.useLazyQuery<GetPropertyAuthenticationQuery, GetPropertyAuthenticationQueryVariables>(
+  return Apollo.useLazyQuery<GetPropertyAuthenticationQuery, GetPropertyAuthenticationQueryVariables>(
     GetPropertyAuthenticationDocument,
     baseOptions
   )
 }
 export type GetPropertyAuthenticationQueryHookResult = ReturnType<typeof useGetPropertyAuthenticationQuery>
 export type GetPropertyAuthenticationLazyQueryHookResult = ReturnType<typeof useGetPropertyAuthenticationLazyQuery>
-export type GetPropertyAuthenticationQueryResult = ApolloReactCommon.QueryResult<
+export type GetPropertyAuthenticationQueryResult = Apollo.QueryResult<
   GetPropertyAuthenticationQuery,
   GetPropertyAuthenticationQueryVariables
 >
@@ -5253,18 +5246,18 @@ export const ListPropertyDocument = gql`
  * });
  */
 export function useListPropertyQuery(
-  baseOptions?: ApolloReactHooks.QueryHookOptions<ListPropertyQuery, ListPropertyQueryVariables>
+  baseOptions?: Apollo.QueryHookOptions<ListPropertyQuery, ListPropertyQueryVariables>
 ) {
-  return ApolloReactHooks.useQuery<ListPropertyQuery, ListPropertyQueryVariables>(ListPropertyDocument, baseOptions)
+  return Apollo.useQuery<ListPropertyQuery, ListPropertyQueryVariables>(ListPropertyDocument, baseOptions)
 }
 export function useListPropertyLazyQuery(
-  baseOptions?: ApolloReactHooks.LazyQueryHookOptions<ListPropertyQuery, ListPropertyQueryVariables>
+  baseOptions?: Apollo.LazyQueryHookOptions<ListPropertyQuery, ListPropertyQueryVariables>
 ) {
-  return ApolloReactHooks.useLazyQuery<ListPropertyQuery, ListPropertyQueryVariables>(ListPropertyDocument, baseOptions)
+  return Apollo.useLazyQuery<ListPropertyQuery, ListPropertyQueryVariables>(ListPropertyDocument, baseOptions)
 }
 export type ListPropertyQueryHookResult = ReturnType<typeof useListPropertyQuery>
 export type ListPropertyLazyQueryHookResult = ReturnType<typeof useListPropertyLazyQuery>
-export type ListPropertyQueryResult = ApolloReactCommon.QueryResult<ListPropertyQuery, ListPropertyQueryVariables>
+export type ListPropertyQueryResult = Apollo.QueryResult<ListPropertyQuery, ListPropertyQueryVariables>
 export const ListPropertyMetaDocument = gql`
   query listPropertyMeta($author: String!, $limit: Int, $ilike: String) {
     property_meta(where: { author: { _eq: $author }, property: { _ilike: $ilike } }, limit: $limit) {
@@ -5292,24 +5285,18 @@ export const ListPropertyMetaDocument = gql`
  * });
  */
 export function useListPropertyMetaQuery(
-  baseOptions?: ApolloReactHooks.QueryHookOptions<ListPropertyMetaQuery, ListPropertyMetaQueryVariables>
+  baseOptions?: Apollo.QueryHookOptions<ListPropertyMetaQuery, ListPropertyMetaQueryVariables>
 ) {
-  return ApolloReactHooks.useQuery<ListPropertyMetaQuery, ListPropertyMetaQueryVariables>(
-    ListPropertyMetaDocument,
-    baseOptions
-  )
+  return Apollo.useQuery<ListPropertyMetaQuery, ListPropertyMetaQueryVariables>(ListPropertyMetaDocument, baseOptions)
 }
 export function useListPropertyMetaLazyQuery(
-  baseOptions?: ApolloReactHooks.LazyQueryHookOptions<ListPropertyMetaQuery, ListPropertyMetaQueryVariables>
+  baseOptions?: Apollo.LazyQueryHookOptions<ListPropertyMetaQuery, ListPropertyMetaQueryVariables>
 ) {
-  return ApolloReactHooks.useLazyQuery<ListPropertyMetaQuery, ListPropertyMetaQueryVariables>(
+  return Apollo.useLazyQuery<ListPropertyMetaQuery, ListPropertyMetaQueryVariables>(
     ListPropertyMetaDocument,
     baseOptions
   )
 }
 export type ListPropertyMetaQueryHookResult = ReturnType<typeof useListPropertyMetaQuery>
 export type ListPropertyMetaLazyQueryHookResult = ReturnType<typeof useListPropertyMetaLazyQuery>
-export type ListPropertyMetaQueryResult = ApolloReactCommon.QueryResult<
-  ListPropertyMetaQuery,
-  ListPropertyMetaQueryVariables
->
+export type ListPropertyMetaQueryResult = Apollo.QueryResult<ListPropertyMetaQuery, ListPropertyMetaQueryVariables>

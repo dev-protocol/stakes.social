@@ -4,14 +4,14 @@ exports[`InvitationRequestForm Snapshot 1`] = `
 <body>
   <div>
     <div
-      class="dhltmz-0 fMwGGH"
+      class="dhltmz-0 fGzGQU"
     >
       <form
         class="ant-form ant-form-horizontal"
         id="basic"
       >
         <div
-          class="dhltmz-1 innfzn"
+          class="dhltmz-1 bgYbRA"
         >
           <span>
             Associating Market:
@@ -21,7 +21,7 @@ exports[`InvitationRequestForm Snapshot 1`] = `
           </p>
         </div>
         <div
-          class="dhltmz-1 innfzn"
+          class="dhltmz-1 bgYbRA"
         >
           <span>
             Your email:
@@ -51,7 +51,7 @@ exports[`InvitationRequestForm Snapshot 1`] = `
           </div>
         </div>
         <div
-          class="dhltmz-1 innfzn"
+          class="dhltmz-1 bgYbRA"
         >
           <span>
             Your name:
@@ -81,7 +81,7 @@ exports[`InvitationRequestForm Snapshot 1`] = `
           </div>
         </div>
         <div
-          class="dhltmz-1 innfzn"
+          class="dhltmz-1 bgYbRA"
         >
           <span>
             Your project:
@@ -111,7 +111,7 @@ exports[`InvitationRequestForm Snapshot 1`] = `
           </div>
         </div>
         <div
-          class="dhltmz-1 innfzn"
+          class="dhltmz-1 bgYbRA"
         >
           <span>
             Project
@@ -130,18 +130,22 @@ exports[`InvitationRequestForm Snapshot 1`] = `
                 <div
                   class="ant-form-item-control-input-content"
                 >
-                  <textarea
-                    class="ant-input"
-                    id="basic_useCase"
-                    placeholder="use case"
-                  />
+                  <div
+                    class="ant-input-textarea"
+                  >
+                    <textarea
+                      class="ant-input"
+                      id="basic_useCase"
+                      placeholder="use case"
+                    />
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
         <div
-          class="dhltmz-1 innfzn"
+          class="dhltmz-1 bgYbRA"
         >
           <span>
             Your role:
@@ -171,7 +175,7 @@ exports[`InvitationRequestForm Snapshot 1`] = `
           </div>
         </div>
         <div
-          class="dhltmz-1 innfzn"
+          class="dhltmz-1 bgYbRA"
         >
           <span>
             Project website or social media:
@@ -201,7 +205,7 @@ exports[`InvitationRequestForm Snapshot 1`] = `
           </div>
         </div>
         <div
-          class="dhltmz-1 innfzn"
+          class="dhltmz-1 bgYbRA"
         >
           <span>
             Your 
@@ -237,7 +241,7 @@ exports[`InvitationRequestForm Snapshot 1`] = `
           </div>
         </div>
         <div
-          class="dhltmz-1 innfzn"
+          class="dhltmz-1 bgYbRA"
         >
           <span>
             Is there anything else to know?:
