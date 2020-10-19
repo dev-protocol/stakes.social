@@ -1,5 +1,5 @@
 import Web3 from 'web3'
-import { getAccountAddress } from './utility'
+import { getAccountAddress, getDevAmount } from './utility'
 
 jest.mock('web3')
 
@@ -39,6 +39,32 @@ describe('wallet utility', () => {
       expect(result).toBe('0x...')
       expect(getAccounts.mock.calls.length).toBe(1)
       delete window.ethereum
+    })
+  })
+
+  describe('getDevAmount', () => {
+    test('Return amount value', async () => {
+      const data = 9876543210123456789
+      const fakeContract = function () {}
+      fakeContract.prototype = {
+        methods: {
+          balanceOf: () => {
+            return {
+              call: async () => {
+                return data
+              }
+            }
+          }
+        }
+      }
+      window.ethereum = {} as any
+      ;((Web3 as unknown) as jest.Mock).mockImplementation(() => ({
+        eth: {
+          Contract: fakeContract
+        }
+      }))
+      const result = await getDevAmount('0x1234567890')
+      expect(result).toBe(data)
     })
   })
 })

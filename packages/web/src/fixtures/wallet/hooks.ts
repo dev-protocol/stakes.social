@@ -2,15 +2,21 @@ import { cachePath } from './catch-path'
 import { connectWallet, getAccountAddress, getBlockNumber } from './utility'
 import { UnwrapFunc } from 'src/fixtures/utility'
 import useSWR from 'swr'
+import { useState } from 'react'
 
 export const useConnectWallet = () => {
   const { data, mutate } = useSWR<UnwrapFunc<typeof connectWallet>, Error>(cachePath.connectWallet())
+  const [isConnecting, setIsConnecting] = useState(false)
 
   const connect = () => {
-    connectWallet().then(result => mutate(result))
+    setIsConnecting(true)
+    connectWallet().then(result => {
+      mutate(result)
+      setIsConnecting(false)
+    })
   }
 
-  return { isConnected: data, connect }
+  return { isConnected: data, connect, isConnecting: isConnecting }
 }
 
 export const useGetAccountAddress = () => {

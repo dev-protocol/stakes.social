@@ -7,27 +7,27 @@ interface TopStakersProps {
   propertyAdress: string
 }
 
-const ListItem = styled.div`
-  display: grid;
-  align-items: center;
-  grid-template-columns: 1fr 8fr 2fr;
-  grid-column-gap: 7.5px;
-`
+// const ListItem = styled.div`
+//   display: grid;
+//   align-items: center;
+//   grid-template-columns: 1fr 8fr 2fr;
+//   grid-column-gap: 7.5px;
+// `
 
-const StakersList = styled.ol`
-  list-style: none;
-  padding: 6px 0 0 0 !important;
+// const StakersList = styled.ol`
+//   list-style: none;
+//   padding: 6px 0 0 0 !important;
 
-  li {
-    color: black;
-    border-bottom: 1px solid lightgrey;
-    padding: 6px 9px;
+//   li {
+//     color: black;
+//     border-bottom: 1px solid lightgrey;
+//     padding: 6px 9px;
 
-    &:last-child {
-      border-bottom: 0;
-    }
-  }
-`
+//     &:last-child {
+//       border-bottom: 0;
+//     }
+//   }
+// `
 
 const PlaceHolderList = styled.div<{ noData?: boolean }>`
   ${({ noData }) => css`
@@ -47,20 +47,37 @@ const AccountAddress = styled.span`
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
-  max-width: 250px;
-  @media (min-width: 1120px) {
+  max-width: 100px;
+  /* @media (min-width: 1120px) {
     max-width: 450px;
+  } */
+`
+
+// const Position = styled.span`
+//   max-width: 20px;
+//   flex-shrink: 1;
+// `
+
+// const AccountContainer = styled(Flex)`
+//   flex-wrap: wrap;
+// `
+
+const TopStakerRanking = styled.div`
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+`
+
+const StakerSection = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  img {
+    border-radius: 90px;
   }
 `
 
-const Position = styled.span`
-  max-width: 20px;
-  flex-shrink: 1;
-`
-
-const AccountContainer = styled(Flex)`
-  flex-wrap: wrap;
-`
 const TopStakers = ({ propertyAdress }: TopStakersProps) => {
   const { data: topStakersData, loading } = useQuery(getTopStakersOfPropertyQuery, {
     variables: {
@@ -73,19 +90,32 @@ const TopStakers = ({ propertyAdress }: TopStakersProps) => {
 
   return (
     <Flex>
-      <h2>Top stakers</h2>
       {loading && (
         <PlaceHolderList>
           <div>loading...</div>
         </PlaceHolderList>
       )}
 
-      {!loading && stakerItems.length === 0 && (
+      {!loading && stakerItems?.length === 0 && (
         <PlaceHolderList noData>
           <div>No data available...</div>
         </PlaceHolderList>
       )}
 
+      <TopStakerRanking>
+        {stakerItems?.map(({ account_address, value }, index) => (
+          <StakerSection key={index}>
+            <img
+              width="100px"
+              height="100px"
+              src="https://res.cloudinary.com/haas-storage/image/upload/v1598963050/72989_gve7hf.jpg"
+            />
+            <AccountAddress>{account_address}</AccountAddress>
+            <span>{`${(value / Math.pow(10, 18)).toFixed(0)}`}</span>
+          </StakerSection>
+        ))}
+      </TopStakerRanking>
+      {/* 
       <StakersList>
         {stakerItems?.map(({ account_address, value }, index) => (
           <li key={`${account_address}-${value}`}>
@@ -102,7 +132,7 @@ const TopStakers = ({ propertyAdress }: TopStakersProps) => {
             </ListItem>
           </li>
         ))}
-      </StakersList>
+      </StakersList> */}
     </Flex>
   )
 }

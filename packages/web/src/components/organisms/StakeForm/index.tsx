@@ -1,6 +1,7 @@
 import React from 'react'
 import { useStake } from 'src/fixtures/dev-kit/hooks'
 import { Input } from 'antd'
+import { TransactionForm } from 'src/components/organisms/TransactionForm'
 import styled from 'styled-components'
 
 interface Props {
@@ -10,6 +11,7 @@ interface Props {
 
 const StyledForm = styled(Input.Search)`
   width: inherit;
+  bottom: 0;
   .ant-input-wrapper {
     display: grid;
     grid-auto-flow: column;
@@ -27,6 +29,14 @@ const StyledForm = styled(Input.Search)`
   }
 `
 
+const StakeContainer = styled.div`
+  display: grid;
+  grid-template-columns: 1fr;
+  @media (min-width: 1024px) {
+    grid-template-columns: 1fr 1fr;
+  }
+`
+
 export const StakeForm = ({ className, propertyAddress }: Props) => {
   const { stake } = useStake()
   const handleSubmit = React.useCallback(
@@ -37,9 +47,12 @@ export const StakeForm = ({ className, propertyAddress }: Props) => {
   )
 
   return (
-    <div className={className}>
-      <p>Stake Now</p>
-      <StyledForm enterButton="Stake" size="large" onSearch={handleSubmit} suffix="DEV" type="number" />
-    </div>
+    <StakeContainer className={className}>
+      <div>
+        <p>Stake Now</p>
+        <StyledForm enterButton="Stake" size="large" onSearch={handleSubmit} suffix="DEV" type="number" />
+      </div>
+      <TransactionForm propertyAddress={propertyAddress} />
+    </StakeContainer>
   )
 }
