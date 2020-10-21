@@ -10,6 +10,10 @@ type Props = {
   }>
 }
 
+const StyledTabs = styled(Tabs)`
+  overflow: visible;
+`
+
 const Contents = styled.div`
   margin: 2rem 0;
 `
@@ -18,12 +22,12 @@ export const Nav = ({ onChange, contents }: Props) => {
   const { TabPane } = Tabs
 
   return (
-    <Tabs defaultActiveKey="0" onChange={onChange}>
+    <StyledTabs defaultActiveKey="0" onChange={onChange}>
       {contents.map(({ name, node }, i) => (
         <TabPane tab={name} key={i}>
           <Contents>{node}</Contents>
         </TabPane>
       ))}
-    </Tabs>
+    </StyledTabs>
   )
 }

@@ -1,12 +1,18 @@
-import { SWRCachePath } from './cache-path'
 import BigNumber from 'bignumber.js'
-import useSWR from 'swr'
-import { balanceOf } from './client'
+import { approve } from './client'
+import { useCallback } from 'react'
+import { message } from 'antd'
 
-export const useBalanceOf = () => {
-  const { data, error } = useSWR<BigNumber, Error>(SWRCachePath.useBalanceOf, () => balanceOf())
-  return {
-    data,
-    error
-  }
+export const useApprove = () => {
+  const key = 'useApprove'
+  return useCallback(async (spender: string, value: BigNumber) => {
+    message.loading({ content: 'now approving...', duration: 0, key })
+    return approve(spender, value)
+      .then(() => {
+        message.success({ content: 'approved!', key })
+      })
+      .catch(err => {
+        message.error({ content: err.message, key })
+      })
+  }, [])
 }
