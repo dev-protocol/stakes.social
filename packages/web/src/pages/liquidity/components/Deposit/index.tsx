@@ -42,6 +42,7 @@ export const Deposit = () => {
   const onClickApprove = async () => {
     await approve(ETHDEV_V2_ADDRESS, toAmountNumber(amount ? amount : 0))
     setRequireApproval(false)
+    setRequireDeposit(true)
     setCurrentStep(1)
   }
   const onClickDeposit = async () => {
