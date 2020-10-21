@@ -5,9 +5,10 @@ import { createContract } from 'src/fixtures/utility/contract-client'
 import { getAccountAddress } from 'src/fixtures/wallet/utility'
 import { toBigNumber } from 'src/fixtures/utility'
 import BigNumber from 'bignumber.js'
-import { execute } from '@devprtcl/dev-kit-js/cjs/utils/execute'
+import { utils } from '@devprtcl/dev-kit-js'
 import { ETHDEV_V2_ADDRESS } from '../constants/address'
 
+const { execute } = utils
 const client: Map<string, Contract> = new Map()
 
 export const getClient = (contractAddress = ETHDEV_V2_ADDRESS): [Contract, Web3] => {
