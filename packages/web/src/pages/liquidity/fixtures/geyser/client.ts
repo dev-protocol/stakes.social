@@ -45,6 +45,10 @@ export const estimateReward = (amount: string): number => {
   return toBigNumber(amount).toNumber()
 }
 
+export const estimateRewardClaimed = (amount: string): number => {
+  return toBigNumber(amount).toNumber()
+}
+
 export const stake = async (amount: BigNumber) => {
   return process.env.NODE_ENV === 'production'
     ? (([contract, client]) =>
@@ -56,4 +60,30 @@ export const stake = async (amount: BigNumber) => {
           args: [amount.toFixed(), '']
         }))(getClient())
     : new Promise(resolve => setTimeout(resolve, 3000))
+}
+
+export const unstake = async (amount: BigNumber) => {
+  return process.env.NODE_ENV === 'production'
+    ? (([contract, client]) =>
+        execute({
+          contract,
+          client,
+          mutation: true,
+          method: 'unstake',
+          args: [amount.toFixed(), '']
+        }))(getClient())
+    : new Promise(resolve => setTimeout(resolve, 3000))
+}
+
+export const totalStakedFor = async () => {
+  const address = await getAccountAddress()
+  if (address === undefined) {
+    return toBigNumber(0)
+  }
+  return (([contract]) =>
+    execute({
+      contract,
+      method: 'totalStakedFor',
+      args: [address]
+    }))(getClient()).then(toBigNumber)
 }
