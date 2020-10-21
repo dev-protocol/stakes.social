@@ -1,7 +1,7 @@
-import React, { useCallback } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { Button, Form, Input } from 'antd'
 import { useGetAccountAddress } from 'src/fixtures/wallet/hooks'
-import { useGetUser, usePostUser } from 'src/fixtures/dev-for-apps/hooks'
+import { useGetAccount, useCreateAccount, useUpdateAccount } from 'src/fixtures/dev-for-apps/hooks'
 import { Container } from 'src/components/atoms/Container'
 import styled from 'styled-components'
 
@@ -29,14 +29,16 @@ const StyledForm = styled(Form)`
   justify-content: flex-start;
 `
 
-export const ProfileUpdateForm = ({ accountAddress }: { accountAddress?: string }) => {
+export const ProfileUpdateForm = ({ accountAddress, accountId }: { accountAddress?: string; accountId?: number }) => {
   const address = accountAddress || ''
-  const { postUserHandler: postUser, isLoading } = usePostUser(address)
+  const { postAccountHandler: createAccount, isLoading } = useCreateAccount(address)
+  const { putAccountHandler: updateAccount } = useUpdateAccount(accountId || 0, address)
   const handleSubmitDisplayName = useCallback(
     (name: string) => {
-      postUser(name)
+      const handler = accountId ? updateAccount : createAccount
+      handler(name)
     },
-    [postUser]
+    [createAccount, updateAccount, accountId]
   )
 
   return (
@@ -65,8 +67,14 @@ export const ProfileUpdateForm = ({ accountAddress }: { accountAddress?: string 
 }
 
 export const UserProfile = (_: Props) => {
+  const [accountId, setAccountId] = useState<number>(0)
   const { accountAddress } = useGetAccountAddress()
-  const { data: user } = useGetUser(accountAddress || '')
+  const { data: user } = useGetAccount(accountAddress || '')
+  useEffect(() => {
+    if (user && user.length === 1) {
+      setAccountId(user[0].id)
+    }
+  }, [user])
 
   return (
     <Container>
@@ -77,11 +85,11 @@ export const UserProfile = (_: Props) => {
 
       <Section>
         <Title>Display name</Title>
-        <Text>{user?.displayName || '(Not set)'}</Text>
+        <Text>{user && user.length == 1 ? user[0].name : '(Not set)'}</Text>
       </Section>
 
       <Section>
-        <ProfileUpdateForm accountAddress={accountAddress} />
+        <ProfileUpdateForm accountAddress={accountAddress} accountId={accountId} />
       </Section>
     </Container>
   )

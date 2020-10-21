@@ -3,7 +3,7 @@ import { SWRCachePath } from './cache-path'
 import useSWR from 'swr'
 import { message } from 'antd'
 import { UnwrapFunc } from '../utility'
-import { getUser, postUser, getPropertyTags, postPropertyTags } from './utility'
+import { getUser, postUser, getPropertyTags, postPropertyTags, getAccount, postAccount, putAccount } from './utility'
 import { sign } from 'src/fixtures/wallet/utility'
 
 export const useGetUser = (walletAddress: string) => {
@@ -94,4 +94,84 @@ export const usePostPropertyTags = (propertyAddress: string, walletAddress: stri
   }
 
   return { data, postPropertyTagsHandler, isLoading }
+}
+
+export const useGetAccount = (walletAddress: string) => {
+  const shouldFetch = walletAddress !== ''
+  const { data, error, mutate } = useSWR<UnwrapFunc<typeof getAccount>, Error>(
+    shouldFetch ? SWRCachePath.getAccount(walletAddress) : null,
+    () => getAccount(walletAddress),
+    { onError: err => message.error(err.message) }
+  )
+  return { data, error, mutate }
+}
+
+export const useCreateAccount = (walletAddress: string) => {
+  const key = 'useCreateAccount'
+  const [isLoading, setIsLoading] = useState<boolean>(false)
+
+  const shouldFetch = walletAddress !== ''
+  const { data, mutate } = useSWR<UnwrapFunc<typeof postAccount>, Error>(
+    shouldFetch ? SWRCachePath.createAccount() : null
+  )
+
+  const postAccountHandler = async (name?: string, biography?: string) => {
+    const signMessage = `create accout: ${name}, ${biography}`
+    const signature = (await sign(signMessage)) || ''
+
+    setIsLoading(true)
+    message.loading({ content: 'update account data...', duration: 0, key })
+
+    await mutate(
+      postAccount(signMessage, signature, walletAddress, name, biography)
+        .then(result => {
+          message.success({ content: 'success update account data', key })
+          return result
+        })
+        .catch(err => {
+          message.error({ content: err.message, key })
+          return Promise.reject(data)
+        }),
+      false
+    )
+
+    setIsLoading(false)
+  }
+
+  return { data, postAccountHandler, isLoading }
+}
+
+export const useUpdateAccount = (id: number, walletAddress: string) => {
+  const key = 'useUpdateAccount'
+  const [isLoading, setIsLoading] = useState<boolean>(false)
+
+  const shouldFetch = id !== 0
+  const { data, mutate } = useSWR<UnwrapFunc<typeof putAccount>, Error>(
+    shouldFetch ? SWRCachePath.updateAccount(id) : null
+  )
+
+  const putAccountHandler = async (name?: string, biography?: string) => {
+    const signMessage = `update accout: ${name}, ${biography}`
+    const signature = (await sign(signMessage)) || ''
+
+    setIsLoading(true)
+    message.loading({ content: 'update account data...', duration: 0, key })
+
+    await mutate(
+      putAccount(signMessage, signature, walletAddress, id, name, biography)
+        .then(result => {
+          message.success({ content: 'success update account data', key })
+          return result
+        })
+        .catch(err => {
+          message.error({ content: err.message, key })
+          return Promise.reject(data)
+        }),
+      false
+    )
+
+    setIsLoading(false)
+  }
+
+  return { data, putAccountHandler, isLoading }
 }
