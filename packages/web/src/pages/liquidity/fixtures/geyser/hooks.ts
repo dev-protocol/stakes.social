@@ -80,6 +80,9 @@ export const useFinalUnlockSchedules = () => {
 
 export const useEstimateReward = () => {
   return useCallback(async (amount: BigNumber) => {
+    if (amount.isZero()) {
+      return amount
+    }
     const [tStakingShares, tStaked, tUnlocked, { totalStakingShareSeconds }] = await Promise.all([
       totalStakingShares(),
       totalStaked(),
