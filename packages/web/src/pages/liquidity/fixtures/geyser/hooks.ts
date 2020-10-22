@@ -1,10 +1,10 @@
 import { SWRCachePath } from './cache-path'
 import BigNumber from 'bignumber.js'
 import useSWR from 'swr'
-import { stake, totalLocked, totalStaked, totalUnlocked, unstake } from './client'
+import { finalUnlockSchedules, stake, totalLocked, totalStaked, totalUnlocked, unstake } from './client'
 import { useCallback } from 'react'
 import { message } from 'antd'
-import { toBigNumber } from 'src/fixtures/utility'
+import { toBigNumber, UnwrapFunc } from 'src/fixtures/utility'
 
 export const useTotalStaked = () => {
   const { data, error } = useSWR<BigNumber, Error>(SWRCachePath.useTotalStaked, () => totalStaked())
@@ -55,4 +55,15 @@ export const useUnstake = () => {
         message.error({ content: err.message, key })
       })
   }, [])
+}
+
+export const useFinalUnlockSchedules = () => {
+  const { data, error } = useSWR<UnwrapFunc<typeof finalUnlockSchedules>, Error>(
+    SWRCachePath.getFinalUnlockSchedules,
+    () => finalUnlockSchedules()
+  )
+  return {
+    data,
+    error
+  }
 }

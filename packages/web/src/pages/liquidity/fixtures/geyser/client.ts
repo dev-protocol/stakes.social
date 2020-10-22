@@ -130,9 +130,8 @@ export const totalUnlocked = async (): Promise<BigNumber> => {
     }))(getClient()).then(toBigNumber)
 }
 
-// Not used
-// export const finalUnlockSchedules = async (): Promise<UnlockSchedule> => {
-//   const count = await unlockScheduleCount()
-//   const schedules = await Promise.all(new Array(count).fill(0).map((_, index) => unlockSchedules(index)))
-//   return schedules.reduce((a, c) => (toBigNumber(a.endAtSec).isGreaterThan(c.endAtSec) ? a : c))
-// }
+export const finalUnlockSchedules = async (): Promise<UnlockSchedule> => {
+  const count = await unlockScheduleCount()
+  const schedules = await Promise.all(new Array(count).fill(0).map((_, index) => unlockSchedules(index)))
+  return schedules.reduce((a, c) => (toBigNumber(a.endAtSec).isGreaterThan(c.endAtSec) ? a : c))
+}
