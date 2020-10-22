@@ -67,3 +67,28 @@ export const approve = async (spender: string, value: BigNumber) => {
         }))(getClient())
     : new Promise(resolve => setTimeout(resolve, 3000))
 }
+
+export const fromTheGraph = async (): Promise<{
+  data: {
+    pair: {
+      reserveUSD: string
+      totalSupply: string
+    } | null
+  }
+}> => {
+  return fetch('https://api.thegraph.com/subgraphs/name/ianlapham/uniswapv2', {
+    method: 'post',
+    headers: {
+      'content-type': 'application/json; charset=utf-8'
+    },
+    body: JSON.stringify({
+      query: `{
+        pair(id:"${ETHDEV_V2_ADDRESS}") {
+          reserveUSD
+          totalSupply
+        }
+      }`,
+      variables: null
+    })
+  }).then(res => res.json())
+}

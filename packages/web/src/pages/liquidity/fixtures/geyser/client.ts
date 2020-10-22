@@ -30,15 +30,10 @@ export const getClient = (contractAddress = GEYSER_ETHDEV_V2_ADDRESS): [Contract
 }
 
 export const totalStaked = async () => {
-  const address = await getAccountAddress()
-  if (address === undefined) {
-    return toBigNumber(0)
-  }
   return (([contract]) =>
     execute({
       contract,
-      method: 'totalStaked',
-      args: [address]
+      method: 'totalStaked'
     }))(getClient()).then(toBigNumber)
 }
 
