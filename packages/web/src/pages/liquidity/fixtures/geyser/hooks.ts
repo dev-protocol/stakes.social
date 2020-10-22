@@ -93,21 +93,11 @@ export const useEstimateReward = () => {
       tStakingShares.times(ONE_MONTH_SECONDS)
     )
     const stakingSharesToBurn = tStakingShares.plus(mintedStakingShares).times(amount).div(tStaked.plus(amount))
-    let sharesLeftToBurn = toBigNumber(stakingSharesToBurn.toFixed())
-    let reward = toBigNumber(0)
-    while (sharesLeftToBurn.isGreaterThan(0)) {
-      if (mintedStakingShares.isLessThanOrEqualTo(sharesLeftToBurn)) {
-        reward = reward.plus(
-          tUnlocked.times(mintedStakingShares.times(ONE_MONTH_SECONDS)).div(newTotalStakingShareSeconds)
-        )
-        sharesLeftToBurn = sharesLeftToBurn.minus(mintedStakingShares)
-      } else {
-        reward = reward.plus(
-          tUnlocked.times(sharesLeftToBurn.times(ONE_MONTH_SECONDS)).div(newTotalStakingShareSeconds)
-        )
-        sharesLeftToBurn = toBigNumber(0)
-      }
-    }
+    const n = stakingSharesToBurn.div(mintedStakingShares)
+    const reward = tUnlocked
+      .times(mintedStakingShares.times(ONE_MONTH_SECONDS))
+      .div(newTotalStakingShareSeconds)
+      .times(n)
 
     return reward
   }, [])

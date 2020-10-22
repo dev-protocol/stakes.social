@@ -15,7 +15,7 @@ export const Deposit = () => {
   const { Item } = Form
   const { Step } = Steps
   const [amount, setAmount] = useState<undefined | string>(undefined)
-  const [estimatedReward, setEstimatedReward] = useState(0)
+  const [estimatedReward, setEstimatedReward] = useState<number | string>(0)
   const [requireApproval, setRequireApproval] = useState(true)
   const [requireDeposit, setRequireDeposit] = useState(true)
   const [currentStep, setCurrentStep] = useState(0)
@@ -27,7 +27,8 @@ export const Deposit = () => {
       const amount = value.toString()
       setAmount(amount)
       estimate(toAmountNumber(amount)).then(estimated => {
-        setEstimatedReward(toNaturalNumber(estimated).toNumber())
+        console.log(estimated.toFixed())
+        setEstimatedReward(toNaturalNumber(estimated).dp(10).toFixed())
       })
       allowance(ETHDEV_V2_ADDRESS).then(x => {
         const req = x ? x.isLessThan(value) : true
@@ -86,7 +87,7 @@ export const Deposit = () => {
       <Item>
         <Gap>
           <label htmlFor="estimated">Your estimated reward</label>
-          <LargeInput disabled size="large" id="estimated" type="number" value={estimatedReward}></LargeInput>
+          <LargeInput disabled size="large" id="estimated" value={`${estimatedReward} / month`}></LargeInput>
           <small>*Estimated rewards assume you have achieved the maximum reward multiplier.</small>
         </Gap>
       </Item>
