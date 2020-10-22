@@ -7,6 +7,7 @@ import { toBigNumber } from 'src/fixtures/utility'
 import { GEYSER_ETHDEV_V2_ADDRESS } from '../constants/address'
 import { utils } from '@devprtcl/dev-kit-js'
 import BigNumber from 'bignumber.js'
+import { INITIAL_SHARES_PER_TOKEN, ONE_MONTH_SECONDS } from '../constants/number'
 
 const { execute } = utils
 const client: Map<string, Contract> = new Map()
@@ -37,9 +38,44 @@ export const totalStaked = async () => {
     }))(getClient()).then(toBigNumber)
 }
 
-export const estimateReward = (amount: string): number => {
-  return toBigNumber(amount).toNumber()
+export const totalStakingShares = async () => {
+  return (([contract]) =>
+    execute({
+      contract,
+      method: 'totalStakingShares'
+    }))(getClient()).then(toBigNumber)
 }
+
+// export const estimateReward = async (amount: BigNumber): Promise<BigNumber> => {
+//   const [tStakingShares, tStaked, tUnlocked, { totalStakingShareSeconds }] = await Promise.all([
+//     totalStakingShares(),
+//     totalStaked(),
+//     totalUnlocked(),
+//     updateAccounting()
+//   ])
+//   const mintedStakingShares = tStakingShares.isZero()
+//     ? tStakingShares.times(amount).div(tStaked)
+//     : amount.times(INITIAL_SHARES_PER_TOKEN)
+//   const newTotalStakingShareSeconds = toBigNumber(totalStakingShareSeconds).plus(
+//     tStakingShares.times(ONE_MONTH_SECONDS)
+//   )
+//   const stakingSharesToBurn = tStakingShares.plus(mintedStakingShares).times(amount).div(tStaked.plus(amount))
+//   let sharesLeftToBurn = toBigNumber(stakingSharesToBurn.toFixed())
+//   let reward = toBigNumber(0)
+//   while (sharesLeftToBurn.isGreaterThan(0)) {
+//     if (mintedStakingShares.isLessThanOrEqualTo(sharesLeftToBurn)) {
+//       reward = reward.plus(
+//         tUnlocked.times(mintedStakingShares.times(ONE_MONTH_SECONDS)).div(newTotalStakingShareSeconds)
+//       )
+//       sharesLeftToBurn = sharesLeftToBurn.minus(mintedStakingShares)
+//     } else {
+//       reward = reward.plus(tUnlocked.times(sharesLeftToBurn.times(ONE_MONTH_SECONDS)).div(newTotalStakingShareSeconds))
+//       sharesLeftToBurn = toBigNumber(0)
+//     }
+//   }
+
+//   return reward
+// }
 
 export const stake = async (amount: BigNumber) => {
   return process.env.NODE_ENV === 'production'
@@ -134,4 +170,41 @@ export const unstakeQuery = async (amount: BigNumber) => {
       method: 'unstakeQuery',
       args: [amount.toString()]
     }))(getClient()).then(toBigNumber)
+}
+
+type Accounting = {
+  0: string
+  1: string
+  2: string
+  3: string
+  4: string
+  5: string
+}
+
+type AccountingObject = {
+  totalLocked: string
+  totalUnlocked: string
+  totalsStakingShareSeconds: string
+  totalStakingShareSeconds: string
+  totalUserRewards: string
+  now: string
+}
+
+export const updateAccounting = async (): Promise<AccountingObject> => {
+  return (([contract]) =>
+    execute<Accounting>({
+      contract,
+      method: 'updateAccounting'
+    }))(
+    getClient()
+  ).then(
+    ({
+      0: totalLocked,
+      1: totalUnlocked,
+      2: totalsStakingShareSeconds,
+      3: totalStakingShareSeconds,
+      4: totalUserRewards,
+      5: now
+    }) => ({ totalLocked, totalUnlocked, totalsStakingShareSeconds, totalStakingShareSeconds, totalUserRewards, now })
+  )
 }

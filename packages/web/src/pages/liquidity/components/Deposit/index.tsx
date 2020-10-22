@@ -3,8 +3,7 @@ import React, { ChangeEvent, useCallback } from 'react'
 import { useState } from 'react'
 import { toAmountNumber, toNaturalNumber } from 'src/fixtures/utility'
 import { ETHDEV_V2_ADDRESS } from '../../fixtures/constants/address'
-import { estimateReward } from '../../fixtures/geyser/client'
-import { useStake } from '../../fixtures/geyser/hooks'
+import { useEstimateReward, useStake } from '../../fixtures/geyser/hooks'
 import { allowance, balanceOf } from '../../fixtures/uniswap-pool/client'
 import { useApprove } from '../../fixtures/uniswap-pool/hooks'
 import { Gap } from '../Gap'
@@ -20,18 +19,24 @@ export const Deposit = () => {
   const [requireApproval, setRequireApproval] = useState(true)
   const [requireDeposit, setRequireDeposit] = useState(true)
   const [currentStep, setCurrentStep] = useState(0)
+  const estimate = useEstimateReward()
   const approve = useApprove()
   const stake = useStake()
-  const updateAmount = useCallback((value: string | number) => {
-    const amount = value.toString()
-    setAmount(amount)
-    setEstimatedReward(estimateReward(amount))
-    allowance(ETHDEV_V2_ADDRESS).then(x => {
-      const req = x ? x.isLessThan(value) : true
-      setRequireApproval(req)
-      setCurrentStep(req ? 0 : 1)
-    })
-  }, [])
+  const updateAmount = useCallback(
+    (value: string | number) => {
+      const amount = value.toString()
+      setAmount(amount)
+      estimate(toAmountNumber(amount)).then(estimated => {
+        setEstimatedReward(toNaturalNumber(estimated).toNumber())
+      })
+      allowance(ETHDEV_V2_ADDRESS).then(x => {
+        const req = x ? x.isLessThan(value) : true
+        setRequireApproval(req)
+        setCurrentStep(req ? 0 : 1)
+      })
+    },
+    [estimate]
+  )
   const onClickMax = useCallback(() => balanceOf().then(x => updateAmount(toNaturalNumber(x ? x : 0).toString())), [
     updateAmount
   ])

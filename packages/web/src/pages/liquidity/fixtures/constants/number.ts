@@ -1,0 +1,3 @@
+export const INITIAL_SHARES_PER_TOKEN = 1
+
+export const ONE_MONTH_SECONDS = 2629746
