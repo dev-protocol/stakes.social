@@ -41,10 +41,6 @@ export const estimateReward = (amount: string): number => {
   return toBigNumber(amount).toNumber()
 }
 
-export const estimateRewardClaimed = (amount: string): number => {
-  return toBigNumber(amount).toNumber()
-}
-
 export const stake = async (amount: BigNumber) => {
   return process.env.NODE_ENV === 'production'
     ? (([contract, client]) =>
@@ -129,4 +125,13 @@ export const finalUnlockSchedules = async (): Promise<UnlockSchedule> => {
   const count = await unlockScheduleCount()
   const schedules = await Promise.all(new Array(count).fill(0).map((_, index) => unlockSchedules(index)))
   return schedules.reduce((a, c) => (toBigNumber(a.endAtSec).isGreaterThan(c.endAtSec) ? a : c))
+}
+
+export const unstakeQuery = async (amount: string) => {
+  return (([contract]) =>
+    execute({
+      contract,
+      method: 'unstakeQuery',
+      args: [amount]
+    }))(getClient()).then(toBigNumber)
 }

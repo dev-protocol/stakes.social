@@ -3,7 +3,7 @@ import React, { ChangeEvent, useCallback } from 'react'
 import { useState } from 'react'
 import { toAmountNumber, toNaturalNumber } from 'src/fixtures/utility'
 import styled from 'styled-components'
-import { estimateRewardClaimed, totalStakedFor } from '../../fixtures/geyser/client'
+import { totalStakedFor, unstakeQuery } from '../../fixtures/geyser/client'
 import { useUnstake } from '../../fixtures/geyser/hooks'
 import { Gap } from '../Gap'
 import { LargeInput } from '../LargeInput'
@@ -22,7 +22,7 @@ export const Withdraw = () => {
   const updateAmount = useCallback((value: string | number) => {
     const amount = value.toString()
     setAmount(amount)
-    setRewardClaimed(estimateRewardClaimed(amount))
+    unstakeQuery(amount).then(x => setRewardClaimed(toNaturalNumber(x).toNumber()))
   }, [])
   const onClickMax = useCallback(
     () => totalStakedFor().then(x => updateAmount(toNaturalNumber(x ? x : 0).toString())),
