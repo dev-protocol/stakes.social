@@ -24,7 +24,7 @@ export const Deposit = () => {
   const stake = useStake()
   const updateAmount = useCallback(
     (value: string | number) => {
-      const amount = value.toString()
+      const amount = (v => (v === '' ? '0' : v))(value.toString())
       setAmount(amount)
       estimate(toAmountNumber(amount)).then(estimated => {
         console.log(estimated.toFixed())
