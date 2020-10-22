@@ -22,7 +22,6 @@ export const Statistics = () => {
   const { data: theGraph } = useTheGraph(totalStaked?.toString())
   const { data: finalUnlockSchedules } = useFinalUnlockSchedules()
   const endofTheProgram = finalUnlockSchedules ? Number(finalUnlockSchedules.endAtSec) * 1000 : 0
-  console.log(totalStaked?.toString(), theGraph)
   const totalDepositsUSD =
     totalStaked && theGraph && theGraph.data.pair
       ? toNaturalNumber(totalStaked).div(theGraph.data.pair.totalSupply).times(theGraph.data.pair.reserveUSD)

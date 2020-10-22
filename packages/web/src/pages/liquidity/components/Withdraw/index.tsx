@@ -22,7 +22,9 @@ export const Withdraw = () => {
   const updateAmount = useCallback((value: string | number) => {
     const amount = value.toString()
     setAmount(amount)
-    unstakeQuery(amount).then(x => setRewardClaimed(toNaturalNumber(x).toNumber()))
+    unstakeQuery(toAmountNumber(amount || 0)).then(x => {
+      setRewardClaimed(toNaturalNumber(x).toNumber())
+    })
   }, [])
   const onClickMax = useCallback(
     () => totalStakedFor().then(x => updateAmount(toNaturalNumber(x ? x : 0).toString())),

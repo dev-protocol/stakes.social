@@ -127,11 +127,11 @@ export const finalUnlockSchedules = async (): Promise<UnlockSchedule> => {
   return schedules.reduce((a, c) => (toBigNumber(a.endAtSec).isGreaterThan(c.endAtSec) ? a : c))
 }
 
-export const unstakeQuery = async (amount: string) => {
+export const unstakeQuery = async (amount: BigNumber) => {
   return (([contract]) =>
     execute({
       contract,
       method: 'unstakeQuery',
-      args: [amount]
+      args: [amount.toString()]
     }))(getClient()).then(toBigNumber)
 }
