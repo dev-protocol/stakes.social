@@ -7,6 +7,7 @@ import {
   useAllTokensClaimed,
   useEstimateReward,
   useFinalUnlockSchedules,
+  useIsAlreadyFinished,
   useStake,
   useTotalRewards,
   useTotalStaked,
@@ -324,6 +325,33 @@ describe('geyser hooks', () => {
           })
           .toFixed()
       ).toBe('51307.13423854107800161899')
+    })
+  })
+
+  describe('useIsAlreadyFinished', () => {
+    test('data is undefined', () => {
+      const data = undefined
+      const error = undefined
+      ;(useSWR as jest.Mock).mockImplementationOnce(() => ({ data, error }))
+      const { result } = renderHook(() => useIsAlreadyFinished())
+      expect(result.current.data).toBe(data)
+    })
+
+    test('success fetching data', () => {
+      const error = undefined
+      ;(useSWR as jest.Mock).mockImplementationOnce(() => ({ data: true, error }))
+      const { result } = renderHook(() => useIsAlreadyFinished())
+      expect(result.current.data).toBe(true)
+    })
+
+    test('failure fetching data', () => {
+      const data = undefined
+      const errorMessage = 'error'
+      const error = new Error(errorMessage)
+      ;(useSWR as jest.Mock).mockImplementation(() => ({ data, error }))
+      const { result } = renderHook(() => useIsAlreadyFinished())
+      expect(result.current.error).toBe(error)
+      expect(result.current.error?.message).toBe(errorMessage)
     })
   })
 })

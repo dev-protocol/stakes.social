@@ -182,3 +182,15 @@ export const useEstimateReward = () => {
     []
   )
 }
+
+export const useIsAlreadyFinished = () => {
+  const { data, error } = useSWR<boolean, Error>(SWRCachePath.useIsAlreadyFinished, async () => {
+    const { endAtSec } = await finalUnlockSchedules()
+    const current = (date => date.getTime() / 1000 + date.getTimezoneOffset())(new Date())
+    return Number(endAtSec) <= current
+  })
+  return {
+    data,
+    error
+  }
+}

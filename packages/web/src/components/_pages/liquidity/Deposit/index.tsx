@@ -2,7 +2,7 @@ import { Button, Form, Steps } from 'antd'
 import React, { ChangeEvent, useCallback } from 'react'
 import { useState } from 'react'
 import { toAmountNumber, toBigNumber, toEVMBigNumber, toNaturalNumber } from 'src/fixtures/utility'
-import { ETHDEV_V2_ADDRESS } from '../../../../fixtures/_pages/liquidity/constants/address'
+import { ETHDEV_V2_ADDRESS, GEYSER_ETHDEV_V2_ADDRESS } from '../../../../fixtures/_pages/liquidity/constants/address'
 import {
   useAllTokensClaimed,
   useEstimateReward,
@@ -10,7 +10,8 @@ import {
   useStake,
   useTotalStaked,
   useTotalStakingShares,
-  useUpdateAccounting
+  useUpdateAccounting,
+  useIsAlreadyFinished
 } from '../../../../fixtures/_pages/liquidity/geyser/hooks'
 import { allowance, balanceOf } from '../../../../fixtures/_pages/liquidity/uniswap-pool/client'
 import { useApprove } from '../../../../fixtures/_pages/liquidity/uniswap-pool/hooks'
@@ -35,6 +36,7 @@ export const Deposit = () => {
   const { data: accounting } = useUpdateAccounting()
   const { data: finalUnlockSchedule } = useFinalUnlockSchedules()
 
+  const { data: isAlreadyFinished } = useIsAlreadyFinished()
   const estimate = useEstimateReward()
   const { approve } = useApprove()
   const { stake } = useStake()
@@ -64,8 +66,8 @@ export const Deposit = () => {
       const bnValue = toBigNumber(value)
       setAmount(value.toString())
       updateEstimate(value.toString())
-      allowance(ETHDEV_V2_ADDRESS).then(x => {
-        const req = x ? x.lt(toEVMBigNumber(bnValue)) : true
+      allowance(GEYSER_ETHDEV_V2_ADDRESS).then(x => {
+        const req = x ? x.lt(toEVMBigNumber(bnValue.toFixed())) : true
         setRequireApproval(req)
         setCurrentStep(req ? 0 : 1)
       })
@@ -100,6 +102,7 @@ export const Deposit = () => {
         <Gap>
           <label htmlFor="amount">Your amount</label>
           <LargeInput
+            disabled={isAlreadyFinished}
             size="large"
             id="amount"
             suffix={
@@ -135,7 +138,12 @@ export const Deposit = () => {
             description={
               <>
                 <p>Please approve the token transfer to deposit WETHDEV-V2.</p>
-                <Button disabled={!requireApproval} type="primary" size="large" onClick={onClickApprove}>
+                <Button
+                  disabled={isAlreadyFinished || !requireApproval}
+                  type="primary"
+                  size="large"
+                  onClick={onClickApprove}
+                >
                   Approve
                 </Button>
               </>
@@ -147,7 +155,7 @@ export const Deposit = () => {
               <>
                 <p>Deposit WETHDEV-V2.</p>
                 <Button
-                  disabled={requireApproval || !requireDeposit}
+                  disabled={isAlreadyFinished || requireApproval || !requireDeposit}
                   type="primary"
                   size="large"
                   onClick={onClickDeposit}

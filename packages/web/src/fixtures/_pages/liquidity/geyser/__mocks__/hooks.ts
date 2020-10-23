@@ -61,3 +61,7 @@ export const useFinalUnlockSchedules = () => {
 export const useEstimateReward = () => {
   return async (args: any) => console.log(args)
 }
+
+export const useIsAlreadyFinished = () => {
+  return async () => false
+}

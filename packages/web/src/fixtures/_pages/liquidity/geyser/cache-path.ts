@@ -5,5 +5,6 @@ export const SWRCachePath = {
   getFinalUnlockSchedules: `geyser/getFinalUnlockSchedules`,
   getTotalStakingShares: `geyser/getTotalStakingShares`,
   getUpdateAccounting: `geyser/getUpdateAccounting`,
-  useAllTokensClaimed: `geyser/useAllTokensClaimed`
+  useAllTokensClaimed: `geyser/useAllTokensClaimed`,
+  useIsAlreadyFinished: `geyser/useIsAlreadyFinished`
 } as const
