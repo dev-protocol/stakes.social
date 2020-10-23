@@ -9,56 +9,72 @@ import {
   totalStaked,
   totalStakingShares,
   totalUnlocked,
-  unlockTokens,
   unstake,
   updateAccounting
 } from './client'
-import { useCallback } from 'react'
+import { useCallback, useState } from 'react'
 import { message } from 'antd'
 import { EvmBigNumber, toBigNumber, toEVMBigNumber, UnwrapFunc } from 'src/fixtures/utility'
 import { INITIAL_SHARES_PER_TOKEN, ONE_MONTH_SECONDS } from '../constants/number'
 
 export const useTotalRewards = () => {
-  const { data: dataTotalLocked = toEVMBigNumber(0), error: errorTotalLocked } = useSWR<EvmBigNumber, Error>(
+  const { data: dataTotalLocked, error: errorTotalLocked } = useSWR<EvmBigNumber, Error>(
     SWRCachePath.getTotalLocked,
     () => totalLocked()
   )
-  const { data: dataTotalUnlocked = toEVMBigNumber(0), error: errorTotalUnlocked } = useSWR<EvmBigNumber, Error>(
+  const { data: dataTotalUnlocked, error: errorTotalUnlocked } = useSWR<EvmBigNumber, Error>(
     SWRCachePath.getTotalUnlocked,
     () => totalUnlocked()
   )
+  const data = dataTotalLocked && dataTotalUnlocked ? dataTotalLocked.add(dataTotalUnlocked) : toEVMBigNumber(0)
   return {
-    data: dataTotalLocked.add(dataTotalUnlocked),
+    data,
     error: errorTotalLocked || errorTotalUnlocked
   }
 }
 
 export const useStake = () => {
   const key = 'useStake'
-  return useCallback(async (amount: BigNumber) => {
+  const [isLoading, setIsLoading] = useState<boolean>(false)
+  const [error, setError] = useState<Error>()
+  const _stake = useCallback(async (amount: BigNumber) => {
+    setIsLoading(true)
     message.loading({ content: 'Depositing...', duration: 0, key })
+    setError(undefined)
     return stake(amount)
       .then(() => {
         message.success({ content: 'Deposit completed', key })
+        setIsLoading(false)
       })
       .catch(err => {
+        setError(err)
         message.error({ content: err.message, key })
+        setIsLoading(false)
       })
   }, [])
+  return { stake: _stake, isLoading, error }
 }
 
 export const useUnstake = () => {
   const key = 'useUnstake'
-  return useCallback(async (amount: BigNumber) => {
+  const [isLoading, setIsLoading] = useState<boolean>(false)
+  const [error, setError] = useState<Error>()
+  const _unstake = useCallback(async (amount: BigNumber) => {
+    setIsLoading(true)
     message.loading({ content: 'Withdrawing...', duration: 0, key })
+    setError(undefined)
     return unstake(amount)
       .then(() => {
         message.success({ content: 'Withdrawal completed', key })
+        setIsLoading(false)
       })
       .catch(err => {
+        setError(err)
         message.error({ content: err.message, key })
+        setIsLoading(false)
       })
   }, [])
+  return { unstake: _unstake, isLoading, error }
 }
 
 export const useAllTokensClaimed = () => {
@@ -119,7 +135,7 @@ export const useFinalUnlockSchedules = () => {
 
 export const useEstimateReward = () => {
   return useCallback(
-    async ({
+    ({
       amount,
       claimed,
       totalStakingShares: tStakingShares,

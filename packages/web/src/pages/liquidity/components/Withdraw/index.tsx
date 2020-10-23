@@ -18,7 +18,7 @@ export const Withdraw = () => {
   const { Item } = Form
   const [amount, setAmount] = useState<undefined | string>(undefined)
   const [rewardClaimed, setRewardClaimed] = useState(0)
-  const unstake = useUnstake()
+  const { unstake } = useUnstake()
   const updateAmount = useCallback((value: string | number) => {
     const amount = value.toString()
     setAmount(amount)

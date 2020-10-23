@@ -36,8 +36,8 @@ export const Deposit = () => {
   const { data: finalUnlockSchedule } = useFinalUnlockSchedules()
 
   const estimate = useEstimateReward()
-  const approve = useApprove()
-  const stake = useStake()
+  const { approve } = useApprove()
+  const { stake } = useStake()
   const isFulfilled = useCallback(() => {
     return !claimed || !totalStakingShares || !totalStaked || !accounting || !finalUnlockSchedule
       ? false
@@ -51,12 +51,11 @@ export const Deposit = () => {
       } else {
         setRequireReEstimate(false)
       }
-      estimate({
+      const estimated = estimate({
         ...data,
         amount: toAmountNumber(value ? value : 0)
-      }).then(estimated => {
-        setEstimatedReward(toNaturalNumber(estimated).dp(10).toFixed())
       })
+      setEstimatedReward(toNaturalNumber(estimated).dp(10).toFixed())
     },
     [estimate, isFulfilled]
   )
