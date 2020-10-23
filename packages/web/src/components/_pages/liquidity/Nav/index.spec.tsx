@@ -3,8 +3,8 @@ import { render } from '@testing-library/react'
 import { Nav } from '.'
 import 'src/__mocks__/window/matchMedia.mock'
 
-jest.mock('src/pages/liquidity/fixtures/geyser/hooks.ts')
-jest.mock('src/pages/liquidity/fixtures/uniswap-pool/hooks.ts')
+jest.mock('src/fixtures/_pages/liquidity/geyser/hooks.ts')
+jest.mock('src/fixtures/_pages/liquidity/uniswap-pool/hooks.ts')
 
 describe(`${Nav.name}`, () => {
   test('Snapshot', () => {

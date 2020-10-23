@@ -16,7 +16,7 @@ import {
 } from './hooks'
 
 jest.mock('swr')
-jest.mock('src/pages/liquidity/fixtures/geyser/client.ts')
+jest.mock('src/fixtures/_pages/liquidity/geyser/client.ts')
 
 describe('geyser hooks', () => {
   describe('useTotalRewards', () => {

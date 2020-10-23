@@ -19,7 +19,7 @@ exports[`Deposit Snapshot 1`] = `
               class="ant-form-item-control-input-content"
             >
               <div
-                class="sc-4swyw2-0 lpiJWU"
+                class="sc-69st3h-0 jbbUzn"
               >
                 <label
                   for="amount"
@@ -27,7 +27,7 @@ exports[`Deposit Snapshot 1`] = `
                   Your amount
                 </label>
                 <span
-                  class="ant-input-affix-wrapper ant-input-affix-wrapper-lg sx3fo9-0 iSujTX"
+                  class="ant-input-affix-wrapper ant-input-affix-wrapper-lg sicgyx-0 dwwWmc"
                 >
                   <input
                     class="ant-input ant-input-lg"
@@ -39,12 +39,12 @@ exports[`Deposit Snapshot 1`] = `
                     class="ant-input-suffix"
                   >
                     <span
-                      class="sc-141ox4c-0 jHfpSs"
+                      class="li6qma-0 ezIfWL"
                     >
                       WETHDEV-V2
                     </span>
                     <button
-                      class="ant-btn ant-btn-primary ant-btn-sm sc-1allgzb-0 jyemkU"
+                      class="ant-btn ant-btn-primary ant-btn-sm zinbpr-0 igIbjv"
                       type="button"
                     >
                       <span>
@@ -78,7 +78,7 @@ exports[`Deposit Snapshot 1`] = `
               class="ant-form-item-control-input-content"
             >
               <div
-                class="sc-4swyw2-0 lpiJWU"
+                class="sc-69st3h-0 jbbUzn"
               >
                 <label
                   for="estimated"
@@ -86,7 +86,7 @@ exports[`Deposit Snapshot 1`] = `
                   Your estimated reward
                 </label>
                 <input
-                  class="ant-input ant-input-lg ant-input-disabled sx3fo9-0 iSujTX"
+                  class="ant-input ant-input-lg ant-input-disabled sicgyx-0 dwwWmc"
                   disabled=""
                   id="estimated"
                   type="text"
