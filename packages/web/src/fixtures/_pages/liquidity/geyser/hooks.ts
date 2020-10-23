@@ -14,19 +14,18 @@ import {
 } from './client'
 import { useCallback, useState } from 'react'
 import { message } from 'antd'
-import { EvmBigNumber, toBigNumber, toEVMBigNumber, UnwrapFunc } from 'src/fixtures/utility'
+import { toBigNumber, toEVMBigNumber, UnwrapFunc } from 'src/fixtures/utility'
 import { INITIAL_SHARES_PER_TOKEN, ONE_MONTH_SECONDS } from '../constants/number'
 
 export const useTotalRewards = () => {
-  const { data: dataTotalLocked, error: errorTotalLocked } = useSWR<EvmBigNumber, Error>(
-    SWRCachePath.getTotalLocked,
-    () => totalLocked()
+  const { data: dataTotalLocked, error: errorTotalLocked } = useSWR<BigNumber, Error>(SWRCachePath.getTotalLocked, () =>
+    totalLocked()
   )
-  const { data: dataTotalUnlocked, error: errorTotalUnlocked } = useSWR<EvmBigNumber, Error>(
+  const { data: dataTotalUnlocked, error: errorTotalUnlocked } = useSWR<BigNumber, Error>(
     SWRCachePath.getTotalUnlocked,
     () => totalUnlocked()
   )
-  const data = dataTotalLocked && dataTotalUnlocked ? dataTotalLocked.add(dataTotalUnlocked) : toEVMBigNumber(0)
+  const data = dataTotalLocked && dataTotalUnlocked ? dataTotalLocked.plus(dataTotalUnlocked) : toEVMBigNumber(0)
   return {
     data,
     error: errorTotalLocked || errorTotalUnlocked
@@ -145,36 +144,36 @@ export const useEstimateReward = () => {
     }: {
       amount: BigNumber
       claimed: BigNumber
-      totalStakingShares: EvmBigNumber
-      totalStaked: EvmBigNumber
+      totalStakingShares: BigNumber
+      totalStaked: BigNumber
       accounting: UnwrapFunc<typeof updateAccounting>
       finalUnlockSchedule: UnwrapFunc<typeof finalUnlockSchedules>
     }) => {
       if (amount.isZero()) {
         return amount
       }
-      const eAmount = toEVMBigNumber(amount.toFixed())
+      const eAmount = toEVMBigNumber(amount)
       const { totalLocked: tLocked, totalUnlocked: tUnlocked, totalStakingShareSeconds } = accounting
       const { durationSec } = finalUnlockSchedule
 
       const e18 = toEVMBigNumber(10).pow(18)
-      const totalRewards = toEVMBigNumber(tLocked).add(tUnlocked).add(claimed.toFixed())
-      const unlockRatePerMonth = totalRewards.mul(e18).mul(ONE_MONTH_SECONDS).div(durationSec).div(e18)
-      const maxRewards = toBigNumber(unlockRatePerMonth.toString())
+      const totalRewards = toEVMBigNumber(tLocked).plus(tUnlocked).plus(claimed)
+      const unlockRatePerMonth = totalRewards.times(e18).times(ONE_MONTH_SECONDS).div(durationSec).div(e18)
+      const maxRewards = toBigNumber(unlockRatePerMonth)
 
       const mintedStakingShares = tStakingShares.isZero()
-        ? tStakingShares.mul(eAmount).div(tStaked)
-        : eAmount.mul(INITIAL_SHARES_PER_TOKEN)
-      const newTStakingShares = tStakingShares.add(mintedStakingShares)
-      const newTStaked = tStaked.add(eAmount)
-      const newTotalStakingShareSeconds = toEVMBigNumber(totalStakingShareSeconds).add(
-        newTStakingShares.mul(ONE_MONTH_SECONDS)
+        ? tStakingShares.times(eAmount).div(tStaked)
+        : eAmount.times(INITIAL_SHARES_PER_TOKEN)
+      const newTStakingShares = tStakingShares.plus(mintedStakingShares)
+      const newTStaked = tStaked.plus(eAmount)
+      const newTotalStakingShareSeconds = toEVMBigNumber(totalStakingShareSeconds).plus(
+        newTStakingShares.times(ONE_MONTH_SECONDS)
       )
-      const stakingSharesToBurn = newTStakingShares.mul(eAmount).div(newTStaked)
-      const n = toBigNumber(stakingSharesToBurn.toString()).div(mintedStakingShares.toString())
+      const stakingSharesToBurn = newTStakingShares.times(eAmount).div(newTStaked)
+      const n = toBigNumber(stakingSharesToBurn).div(mintedStakingShares)
       const reward = maxRewards
-        .times(mintedStakingShares.mul(ONE_MONTH_SECONDS).toString())
-        .div(newTotalStakingShareSeconds.toString())
+        .times(mintedStakingShares.times(ONE_MONTH_SECONDS))
+        .div(newTotalStakingShareSeconds)
         .times(n)
 
       return reward

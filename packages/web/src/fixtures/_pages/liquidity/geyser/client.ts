@@ -3,7 +3,7 @@ import Web3 from 'web3'
 import { Contract, EventData } from 'web3-eth-contract'
 import { createContract } from 'src/fixtures/utility/contract-client'
 import { getAccountAddress } from 'src/fixtures/wallet/utility'
-import { EvmBigNumber, toBigNumber, toEVMBigNumber } from 'src/fixtures/utility'
+import { toBigNumber, toEVMBigNumber } from 'src/fixtures/utility'
 import { GEYSER_ETHDEV_V2_ADDRESS } from '../constants/address'
 import { utils } from '@devprtcl/dev-kit-js'
 import BigNumber from 'bignumber.js'
@@ -29,7 +29,7 @@ export const getClient = (contractAddress = GEYSER_ETHDEV_V2_ADDRESS): [Contract
   return [contract, web3]
 }
 
-export const totalStaked = async (): Promise<EvmBigNumber> => {
+export const totalStaked = async (): Promise<BigNumber> => {
   return (([contract]) =>
     execute({
       contract,
@@ -37,7 +37,7 @@ export const totalStaked = async (): Promise<EvmBigNumber> => {
     }))(getClient()).then(toEVMBigNumber)
 }
 
-export const totalStakingShares = async (): Promise<EvmBigNumber> => {
+export const totalStakingShares = async (): Promise<BigNumber> => {
   return (([contract]) =>
     execute({
       contract,
@@ -71,7 +71,7 @@ export const unstake = async (amount: BigNumber) => {
     : new Promise(resolve => setTimeout(resolve, 3000))
 }
 
-export const totalStakedFor = async (): Promise<EvmBigNumber> => {
+export const totalStakedFor = async (): Promise<BigNumber> => {
   const address = await getAccountAddress()
   if (address === undefined) {
     return toEVMBigNumber(0)
@@ -109,7 +109,7 @@ export const unlockScheduleCount = async (): Promise<number> => {
     }))(getClient()).then(Number)
 }
 
-export const totalLocked = async (): Promise<EvmBigNumber> => {
+export const totalLocked = async (): Promise<BigNumber> => {
   return (([contract]) =>
     execute({
       contract,
@@ -117,7 +117,7 @@ export const totalLocked = async (): Promise<EvmBigNumber> => {
     }))(getClient()).then(toEVMBigNumber)
 }
 
-export const totalUnlocked = async (): Promise<EvmBigNumber> => {
+export const totalUnlocked = async (): Promise<BigNumber> => {
   return (([contract]) =>
     execute({
       contract,
@@ -131,7 +131,7 @@ export const finalUnlockSchedules = async (): Promise<UnlockSchedule> => {
   return schedules.reduce((a, c) => (toBigNumber(a.endAtSec).isGreaterThan(c.endAtSec) ? a : c))
 }
 
-export const unstakeQuery = async (amount: BigNumber): Promise<EvmBigNumber> => {
+export const unstakeQuery = async (amount: BigNumber): Promise<BigNumber> => {
   return (([contract]) =>
     execute({
       contract,
@@ -140,7 +140,7 @@ export const unstakeQuery = async (amount: BigNumber): Promise<EvmBigNumber> => 
     }))(getClient()).then(toEVMBigNumber)
 }
 
-export const unlockTokens = async (): Promise<EvmBigNumber> => {
+export const unlockTokens = async (): Promise<BigNumber> => {
   return (([contract]) =>
     execute({
       contract,
