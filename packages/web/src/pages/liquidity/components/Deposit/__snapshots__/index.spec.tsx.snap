@@ -1,0 +1,219 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Deposit Snapshot 1`] = `
+<body>
+  <div>
+    <form
+      class="ant-form ant-form-vertical"
+    >
+      <div
+        class="ant-row ant-form-item"
+      >
+        <div
+          class="ant-col ant-form-item-control"
+        >
+          <div
+            class="ant-form-item-control-input"
+          >
+            <div
+              class="ant-form-item-control-input-content"
+            >
+              <div
+                class="sc-4swyw2-0 lpiJWU"
+              >
+                <label
+                  for="amount"
+                >
+                  Your amount
+                </label>
+                <span
+                  class="ant-input-affix-wrapper ant-input-affix-wrapper-lg sx3fo9-0 iSujTX"
+                >
+                  <input
+                    class="ant-input ant-input-lg"
+                    id="amount"
+                    type="number"
+                    value=""
+                  />
+                  <span
+                    class="ant-input-suffix"
+                  >
+                    <span
+                      class="sc-141ox4c-0 jHfpSs"
+                    >
+                      WETHDEV-V2
+                    </span>
+                    <button
+                      class="ant-btn ant-btn-primary ant-btn-sm sc-1allgzb-0 jyemkU"
+                      type="button"
+                    >
+                      <span>
+                        Max
+                      </span>
+                    </button>
+                  </span>
+                </span>
+                <a
+                  href="https://app.uniswap.org/#/add/0x5caf454ba92e6f2c929df14667ee360ed9fd5b26/ETH"
+                  rel="noreferrer"
+                  target="_blank"
+                >
+                  Provide liquidity on Uniswap to get WETHDEV-V2 ↗
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="ant-row ant-form-item"
+      >
+        <div
+          class="ant-col ant-form-item-control"
+        >
+          <div
+            class="ant-form-item-control-input"
+          >
+            <div
+              class="ant-form-item-control-input-content"
+            >
+              <div
+                class="sc-4swyw2-0 lpiJWU"
+              >
+                <label
+                  for="estimated"
+                >
+                  Your estimated reward
+                </label>
+                <input
+                  class="ant-input ant-input-lg ant-input-disabled sx3fo9-0 iSujTX"
+                  disabled=""
+                  id="estimated"
+                  type="text"
+                  value="0 / month"
+                />
+                <small>
+                  *Estimated rewards assume you have achieved the maximum reward multiplier.
+                </small>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="ant-row ant-form-item"
+      >
+        <div
+          class="ant-col ant-form-item-control"
+        >
+          <div
+            class="ant-form-item-control-input"
+          >
+            <div
+              class="ant-form-item-control-input-content"
+            >
+              <div
+                class="ant-steps ant-steps-vertical ant-steps-dot"
+              >
+                <div
+                  class="ant-steps-item ant-steps-item-process ant-steps-item-active"
+                >
+                  <div
+                    class="ant-steps-item-container"
+                  >
+                    <div
+                      class="ant-steps-item-tail"
+                    />
+                    <div
+                      class="ant-steps-item-icon"
+                    >
+                      <span
+                        class="ant-steps-icon"
+                      >
+                        <span
+                          class="ant-steps-icon-dot"
+                        />
+                      </span>
+                    </div>
+                    <div
+                      class="ant-steps-item-content"
+                    >
+                      <div
+                        class="ant-steps-item-title"
+                      >
+                        Approve
+                      </div>
+                      <div
+                        class="ant-steps-item-description"
+                      >
+                        <p>
+                          Please approve the token transfer to deposit WETHDEV-V2.
+                        </p>
+                        <button
+                          class="ant-btn ant-btn-primary ant-btn-lg"
+                          type="button"
+                        >
+                          <span>
+                            Approve
+                          </span>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  class="ant-steps-item ant-steps-item-wait"
+                >
+                  <div
+                    class="ant-steps-item-container"
+                  >
+                    <div
+                      class="ant-steps-item-tail"
+                    />
+                    <div
+                      class="ant-steps-item-icon"
+                    >
+                      <span
+                        class="ant-steps-icon"
+                      >
+                        <span
+                          class="ant-steps-icon-dot"
+                        />
+                      </span>
+                    </div>
+                    <div
+                      class="ant-steps-item-content"
+                    >
+                      <div
+                        class="ant-steps-item-title"
+                      >
+                        Deposit
+                      </div>
+                      <div
+                        class="ant-steps-item-description"
+                      >
+                        <p>
+                          Deposit WETHDEV-V2.
+                        </p>
+                        <button
+                          class="ant-btn ant-btn-primary ant-btn-lg"
+                          disabled=""
+                          type="button"
+                        >
+                          <span>
+                            Deposit
+                          </span>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</body>
+`;

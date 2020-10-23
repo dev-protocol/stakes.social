@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`undefined Snapshot 1`] = `
+<body>
+  <div>
+    <span
+      class="sc-141ox4c-0 jHfpSs"
+    >
+      token
+    </span>
+  </div>
+</body>
+`;

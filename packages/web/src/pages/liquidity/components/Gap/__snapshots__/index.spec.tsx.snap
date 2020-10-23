@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`undefined Snapshot 1`] = `
+<body>
+  <div>
+    <div
+      class="sc-4swyw2-0 lpiJWU"
+    />
+  </div>
+</body>
+`;
