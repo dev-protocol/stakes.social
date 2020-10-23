@@ -2,39 +2,33 @@ import { SWRCachePath } from './cache-path'
 import BigNumber from 'bignumber.js'
 import useSWR from 'swr'
 import {
+  allTokensClaimed,
   finalUnlockSchedules,
   stake,
   totalLocked,
   totalStaked,
   totalStakingShares,
   totalUnlocked,
+  unlockTokens,
   unstake,
   updateAccounting
 } from './client'
 import { useCallback } from 'react'
 import { message } from 'antd'
-import { toBigNumber, UnwrapFunc } from 'src/fixtures/utility'
+import { EvmBigNumber, toBigNumber, toEVMBigNumber, UnwrapFunc } from 'src/fixtures/utility'
 import { INITIAL_SHARES_PER_TOKEN, ONE_MONTH_SECONDS } from '../constants/number'
 
-export const useTotalStaked = () => {
-  const { data, error } = useSWR<BigNumber, Error>(SWRCachePath.useTotalStaked, () => totalStaked())
-  return {
-    data,
-    error
-  }
-}
-
 export const useTotalRewards = () => {
-  const { data: dataTotalLocked = toBigNumber(0), error: errorTotalLocked } = useSWR<BigNumber, Error>(
+  const { data: dataTotalLocked = toEVMBigNumber(0), error: errorTotalLocked } = useSWR<EvmBigNumber, Error>(
     SWRCachePath.getTotalLocked,
     () => totalLocked()
   )
-  const { data: dataTotalUnlocked = toBigNumber(0), error: errorTotalUnlocked } = useSWR<BigNumber, Error>(
+  const { data: dataTotalUnlocked = toEVMBigNumber(0), error: errorTotalUnlocked } = useSWR<EvmBigNumber, Error>(
     SWRCachePath.getTotalUnlocked,
     () => totalUnlocked()
   )
   return {
-    data: dataTotalLocked.plus(dataTotalUnlocked),
+    data: dataTotalLocked.add(dataTotalUnlocked),
     error: errorTotalLocked || errorTotalUnlocked
   }
 }
@@ -67,6 +61,51 @@ export const useUnstake = () => {
   }, [])
 }
 
+export const useAllTokensClaimed = () => {
+  const { data, error } = useSWR<BigNumber, Error>(SWRCachePath.useAllTokensClaimed, () =>
+    allTokensClaimed().then(allEvents =>
+      allEvents.reduce(
+        (a: BigNumber, c) => a.plus(c.returnValues.amount),
+        toBigNumber(allEvents[0].returnValues.amount)
+      )
+    )
+  )
+  return {
+    data,
+    error
+  }
+}
+
+export const useTotalStakingShares = () => {
+  const { data, error } = useSWR<UnwrapFunc<typeof totalStakingShares>, Error>(SWRCachePath.getTotalStakingShares, () =>
+    totalStakingShares()
+  )
+  return {
+    data,
+    error
+  }
+}
+
+export const useTotalStaked = () => {
+  const { data, error } = useSWR<UnwrapFunc<typeof totalStakingShares>, Error>(SWRCachePath.useTotalStaked, () =>
+    totalStaked()
+  )
+  return {
+    data,
+    error
+  }
+}
+
+export const useUpdateAccounting = () => {
+  const { data, error } = useSWR<UnwrapFunc<typeof updateAccounting>, Error>(SWRCachePath.getUpdateAccounting, () =>
+    updateAccounting()
+  )
+  return {
+    data,
+    error
+  }
+}
+
 export const useFinalUnlockSchedules = () => {
   const { data, error } = useSWR<UnwrapFunc<typeof finalUnlockSchedules>, Error>(
     SWRCachePath.getFinalUnlockSchedules,
@@ -79,29 +118,51 @@ export const useFinalUnlockSchedules = () => {
 }
 
 export const useEstimateReward = () => {
-  return useCallback(async (amount: BigNumber) => {
-    if (amount.isZero()) {
-      return amount
-    }
-    const [tStakingShares, tStaked, tUnlocked, { totalStakingShareSeconds }] = await Promise.all([
-      totalStakingShares(),
-      totalStaked(),
-      totalUnlocked(),
-      updateAccounting()
-    ])
-    const mintedStakingShares = tStakingShares.isZero()
-      ? tStakingShares.times(amount).div(tStaked)
-      : amount.times(INITIAL_SHARES_PER_TOKEN)
-    const newTotalStakingShareSeconds = toBigNumber(totalStakingShareSeconds).plus(
-      tStakingShares.times(ONE_MONTH_SECONDS)
-    )
-    const stakingSharesToBurn = tStakingShares.plus(mintedStakingShares).times(amount).div(tStaked.plus(amount))
-    const n = stakingSharesToBurn.div(mintedStakingShares)
-    const reward = tUnlocked
-      .times(mintedStakingShares.times(ONE_MONTH_SECONDS))
-      .div(newTotalStakingShareSeconds)
-      .times(n)
+  return useCallback(
+    async ({
+      amount,
+      claimed,
+      totalStakingShares: tStakingShares,
+      totalStaked: tStaked,
+      accounting,
+      finalUnlockSchedule
+    }: {
+      amount: BigNumber
+      claimed: BigNumber
+      totalStakingShares: EvmBigNumber
+      totalStaked: EvmBigNumber
+      accounting: UnwrapFunc<typeof updateAccounting>
+      finalUnlockSchedule: UnwrapFunc<typeof finalUnlockSchedules>
+    }) => {
+      if (amount.isZero()) {
+        return amount
+      }
+      const eAmount = toEVMBigNumber(amount.toFixed())
+      const { totalLocked: tLocked, totalUnlocked: tUnlocked, totalStakingShareSeconds } = accounting
+      const { durationSec } = finalUnlockSchedule
 
-    return reward
-  }, [])
+      const e18 = toEVMBigNumber(10).pow(18)
+      const totalRewards = toEVMBigNumber(tLocked).add(tUnlocked).add(claimed.toFixed())
+      const unlockRatePerMonth = totalRewards.mul(e18).mul(ONE_MONTH_SECONDS).div(durationSec).div(e18)
+      const maxRewards = toBigNumber(unlockRatePerMonth.toString())
+
+      const mintedStakingShares = tStakingShares.isZero()
+        ? tStakingShares.mul(eAmount).div(tStaked)
+        : eAmount.mul(INITIAL_SHARES_PER_TOKEN)
+      const newTStakingShares = tStakingShares.add(mintedStakingShares)
+      const newTStaked = tStaked.add(eAmount)
+      const newTotalStakingShareSeconds = toEVMBigNumber(totalStakingShareSeconds).add(
+        newTStakingShares.mul(ONE_MONTH_SECONDS)
+      )
+      const stakingSharesToBurn = newTStakingShares.mul(eAmount).div(newTStaked)
+      const n = toBigNumber(stakingSharesToBurn.toString()).div(mintedStakingShares.toString())
+      const reward = maxRewards
+        .times(mintedStakingShares.mul(ONE_MONTH_SECONDS).toString())
+        .div(newTotalStakingShareSeconds.toString())
+        .times(n)
+
+      return reward
+    },
+    []
+  )
 }

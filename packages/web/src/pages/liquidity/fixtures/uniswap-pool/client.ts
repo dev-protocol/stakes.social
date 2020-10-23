@@ -3,7 +3,7 @@ import Web3 from 'web3'
 import { Contract } from 'web3-eth-contract'
 import { createContract } from 'src/fixtures/utility/contract-client'
 import { getAccountAddress } from 'src/fixtures/wallet/utility'
-import { toBigNumber } from 'src/fixtures/utility'
+import { EvmBigNumber, toEVMBigNumber } from 'src/fixtures/utility'
 import BigNumber from 'bignumber.js'
 import { utils } from '@devprtcl/dev-kit-js'
 import { ETHDEV_V2_ADDRESS } from '../constants/address'
@@ -29,7 +29,7 @@ export const getClient = (contractAddress = ETHDEV_V2_ADDRESS): [Contract, Web3]
   return [contract, web3]
 }
 
-export const balanceOf = async (): Promise<BigNumber | undefined> => {
+export const balanceOf = async (): Promise<EvmBigNumber | undefined> => {
   const address = await getAccountAddress()
   if (address === undefined) {
     return undefined
@@ -39,10 +39,10 @@ export const balanceOf = async (): Promise<BigNumber | undefined> => {
       contract,
       method: 'balanceOf',
       args: [address]
-    }))(getClient()).then(toBigNumber)
+    }))(getClient()).then(toEVMBigNumber)
 }
 
-export const allowance = async (spender: string): Promise<BigNumber | undefined> => {
+export const allowance = async (spender: string): Promise<EvmBigNumber | undefined> => {
   const address = await getAccountAddress()
   if (address === undefined) {
     return undefined
@@ -52,7 +52,7 @@ export const allowance = async (spender: string): Promise<BigNumber | undefined>
       contract,
       method: 'allowance',
       args: [address, spender]
-    }))(getClient()).then(toBigNumber)
+    }))(getClient()).then(toEVMBigNumber)
 }
 
 export const approve = async (spender: string, value: BigNumber) => {

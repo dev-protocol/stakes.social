@@ -1,9 +1,17 @@
 import { Button, Form, Steps } from 'antd'
 import React, { ChangeEvent, useCallback } from 'react'
 import { useState } from 'react'
-import { toAmountNumber, toNaturalNumber } from 'src/fixtures/utility'
+import { toAmountNumber, toBigNumber, toEVMBigNumber, toNaturalNumber } from 'src/fixtures/utility'
 import { ETHDEV_V2_ADDRESS } from '../../fixtures/constants/address'
-import { useEstimateReward, useStake } from '../../fixtures/geyser/hooks'
+import {
+  useAllTokensClaimed,
+  useEstimateReward,
+  useFinalUnlockSchedules,
+  useStake,
+  useTotalStaked,
+  useTotalStakingShares,
+  useUpdateAccounting
+} from '../../fixtures/geyser/hooks'
 import { allowance, balanceOf } from '../../fixtures/uniswap-pool/client'
 import { useApprove } from '../../fixtures/uniswap-pool/hooks'
 import { Gap } from '../Gap'
@@ -19,24 +27,51 @@ export const Deposit = () => {
   const [requireApproval, setRequireApproval] = useState(true)
   const [requireDeposit, setRequireDeposit] = useState(true)
   const [currentStep, setCurrentStep] = useState(0)
+  const [requireReEstimate, setRequireReEstimate] = useState(false)
+
+  const { data: claimed } = useAllTokensClaimed()
+  const { data: totalStakingShares } = useTotalStakingShares()
+  const { data: totalStaked } = useTotalStaked()
+  const { data: accounting } = useUpdateAccounting()
+  const { data: finalUnlockSchedule } = useFinalUnlockSchedules()
+
   const estimate = useEstimateReward()
   const approve = useApprove()
   const stake = useStake()
-  const updateAmount = useCallback(
-    (value: string | number) => {
-      const amount = value.toString()
-      setAmount(amount)
-      estimate(toAmountNumber(amount === '' ? 0 : amount)).then(estimated => {
-        console.log(estimated.toFixed())
+  const isFulfilled = useCallback(() => {
+    return !claimed || !totalStakingShares || !totalStaked || !accounting || !finalUnlockSchedule
+      ? false
+      : { claimed, totalStakingShares, totalStaked, accounting, finalUnlockSchedule }
+  }, [claimed, totalStakingShares, totalStaked, accounting, finalUnlockSchedule])
+  const updateEstimate = useCallback(
+    (value?: string) => {
+      const data = isFulfilled()
+      if (data === false) {
+        return setRequireReEstimate(true)
+      } else {
+        setRequireReEstimate(false)
+      }
+      estimate({
+        ...data,
+        amount: toAmountNumber(value ? value : 0)
+      }).then(estimated => {
         setEstimatedReward(toNaturalNumber(estimated).dp(10).toFixed())
       })
+    },
+    [estimate, isFulfilled]
+  )
+  const updateAmount = useCallback(
+    (value: string | number) => {
+      const bnValue = toBigNumber(value)
+      setAmount(value.toString())
+      updateEstimate(value.toString())
       allowance(ETHDEV_V2_ADDRESS).then(x => {
-        const req = x ? x.isLessThan(value) : true
+        const req = x ? x.lt(toEVMBigNumber(bnValue)) : true
         setRequireApproval(req)
         setCurrentStep(req ? 0 : 1)
       })
     },
-    [estimate]
+    [updateEstimate]
   )
   const onClickMax = useCallback(() => balanceOf().then(x => updateAmount(toNaturalNumber(x ? x : 0).toString())), [
     updateAmount
@@ -55,6 +90,9 @@ export const Deposit = () => {
     await stake(toAmountNumber(amount ? amount : 0))
     setRequireDeposit(false)
     updateAmount(0)
+  }
+  if (requireReEstimate) {
+    updateEstimate(amount)
   }
 
   return (

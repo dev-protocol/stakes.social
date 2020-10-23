@@ -1,13 +1,12 @@
 import { abi } from './abi'
 import Web3 from 'web3'
-import { Contract } from 'web3-eth-contract'
+import { Contract, EventData } from 'web3-eth-contract'
 import { createContract } from 'src/fixtures/utility/contract-client'
 import { getAccountAddress } from 'src/fixtures/wallet/utility'
-import { toBigNumber } from 'src/fixtures/utility'
+import { EvmBigNumber, toBigNumber, toEVMBigNumber } from 'src/fixtures/utility'
 import { GEYSER_ETHDEV_V2_ADDRESS } from '../constants/address'
 import { utils } from '@devprtcl/dev-kit-js'
 import BigNumber from 'bignumber.js'
-import { INITIAL_SHARES_PER_TOKEN, ONE_MONTH_SECONDS } from '../constants/number'
 
 const { execute } = utils
 const client: Map<string, Contract> = new Map()
@@ -30,20 +29,20 @@ export const getClient = (contractAddress = GEYSER_ETHDEV_V2_ADDRESS): [Contract
   return [contract, web3]
 }
 
-export const totalStaked = async () => {
+export const totalStaked = async (): Promise<EvmBigNumber> => {
   return (([contract]) =>
     execute({
       contract,
       method: 'totalStaked'
-    }))(getClient()).then(toBigNumber)
+    }))(getClient()).then(toEVMBigNumber)
 }
 
-export const totalStakingShares = async () => {
+export const totalStakingShares = async (): Promise<EvmBigNumber> => {
   return (([contract]) =>
     execute({
       contract,
       method: 'totalStakingShares'
-    }))(getClient()).then(toBigNumber)
+    }))(getClient()).then(toEVMBigNumber)
 }
 
 export const stake = async (amount: BigNumber) => {
@@ -72,17 +71,17 @@ export const unstake = async (amount: BigNumber) => {
     : new Promise(resolve => setTimeout(resolve, 3000))
 }
 
-export const totalStakedFor = async () => {
+export const totalStakedFor = async (): Promise<EvmBigNumber> => {
   const address = await getAccountAddress()
   if (address === undefined) {
-    return toBigNumber(0)
+    return toEVMBigNumber(0)
   }
   return (([contract]) =>
     execute({
       contract,
       method: 'totalStakedFor',
       args: [address]
-    }))(getClient()).then(toBigNumber)
+    }))(getClient()).then(toEVMBigNumber)
 }
 
 type UnlockSchedule = {
@@ -110,20 +109,20 @@ export const unlockScheduleCount = async (): Promise<number> => {
     }))(getClient()).then(Number)
 }
 
-export const totalLocked = async (): Promise<BigNumber> => {
+export const totalLocked = async (): Promise<EvmBigNumber> => {
   return (([contract]) =>
     execute({
       contract,
       method: 'totalLocked'
-    }))(getClient()).then(toBigNumber)
+    }))(getClient()).then(toEVMBigNumber)
 }
 
-export const totalUnlocked = async (): Promise<BigNumber> => {
+export const totalUnlocked = async (): Promise<EvmBigNumber> => {
   return (([contract]) =>
     execute({
       contract,
       method: 'totalUnlocked'
-    }))(getClient()).then(toBigNumber)
+    }))(getClient()).then(toEVMBigNumber)
 }
 
 export const finalUnlockSchedules = async (): Promise<UnlockSchedule> => {
@@ -132,13 +131,25 @@ export const finalUnlockSchedules = async (): Promise<UnlockSchedule> => {
   return schedules.reduce((a, c) => (toBigNumber(a.endAtSec).isGreaterThan(c.endAtSec) ? a : c))
 }
 
-export const unstakeQuery = async (amount: BigNumber) => {
+export const unstakeQuery = async (amount: BigNumber): Promise<EvmBigNumber> => {
   return (([contract]) =>
     execute({
       contract,
       method: 'unstakeQuery',
       args: [amount.toString()]
-    }))(getClient()).then(toBigNumber)
+    }))(getClient()).then(toEVMBigNumber)
+}
+
+export const unlockTokens = async (): Promise<EvmBigNumber> => {
+  return (([contract]) =>
+    execute({
+      contract,
+      method: 'unlockTokens'
+    }))(getClient()).then(toEVMBigNumber)
+}
+
+export const allTokensClaimed = async (): Promise<EventData[]> => {
+  return (([contract]) => contract.getPastEvents('TokensClaimed', { fromBlock: 0, toBlock: 'latest' }))(getClient())
 }
 
 type Accounting = {
