@@ -1,9 +1,13 @@
 import React from 'react'
 import { Statistic } from 'antd'
 import styled from 'styled-components'
-import { useFinalUnlockSchedules, useTotalRewards, useTotalStaked } from '../../fixtures/geyser/hooks'
+import {
+  useFinalUnlockSchedules,
+  useTotalRewards,
+  useTotalStaked
+} from '../../../../fixtures/for-pages/liquidity/geyser/hooks'
 import { toBigNumber, toNaturalNumber } from 'src/fixtures/utility'
-import { useTheGraph } from '../../fixtures/uniswap-pool/hooks'
+import { useTheGraph } from '../../../../fixtures/for-pages/liquidity/uniswap-pool/hooks'
 
 const Wrapper = styled.div`
   display: grid;
