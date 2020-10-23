@@ -14,7 +14,7 @@ import {
 } from './client'
 import { useCallback, useState } from 'react'
 import { message } from 'antd'
-import { toBigNumber, toEVMBigNumber, UnwrapFunc } from 'src/fixtures/utility'
+import { getUTC, toBigNumber, toEVMBigNumber, UnwrapFunc } from 'src/fixtures/utility'
 import { INITIAL_SHARES_PER_TOKEN, ONE_MONTH_SECONDS } from '../constants/number'
 
 export const useTotalRewards = () => {
@@ -136,30 +136,35 @@ export const useEstimateReward = () => {
   return useCallback(
     ({
       amount,
-      claimed,
       totalStakingShares: tStakingShares,
       totalStaked: tStaked,
       accounting,
-      finalUnlockSchedule
+      finalUnlockSchedule,
+      timestamp
     }: {
       amount: BigNumber
-      claimed: BigNumber
       totalStakingShares: BigNumber
       totalStaked: BigNumber
       accounting: UnwrapFunc<typeof updateAccounting>
       finalUnlockSchedule: UnwrapFunc<typeof finalUnlockSchedules>
+      timestamp: number
     }) => {
       if (amount.isZero()) {
         return amount
       }
       const eAmount = toEVMBigNumber(amount)
       const { totalLocked: tLocked, totalUnlocked: tUnlocked, totalStakingShareSeconds } = accounting
-      const { durationSec } = finalUnlockSchedule
+      const { endAtSec } = finalUnlockSchedule
 
       const e18 = toEVMBigNumber(10).pow(18)
-      const totalRewards = toEVMBigNumber(tLocked).plus(tUnlocked).plus(claimed)
-      const unlockRatePerMonth = totalRewards.times(e18).times(ONE_MONTH_SECONDS).div(durationSec).div(e18)
-      const maxRewards = toBigNumber(unlockRatePerMonth)
+      const totalRewards = toBigNumber(tLocked).plus(tUnlocked)
+      const timeToLeft = Number(endAtSec) - timestamp
+      const unlockRatePerMonth = totalRewards
+        .times(e18)
+        .times(timeToLeft > ONE_MONTH_SECONDS ? ONE_MONTH_SECONDS : timeToLeft)
+        .div(timeToLeft)
+        .div(e18)
+      const maxRewards = unlockRatePerMonth
 
       const mintedStakingShares = tStakingShares.isZero()
         ? tStakingShares.times(eAmount).div(tStaked)
@@ -185,7 +190,7 @@ export const useEstimateReward = () => {
 export const useIsAlreadyFinished = () => {
   const { data, error } = useSWR<boolean, Error>(SWRCachePath.useIsAlreadyFinished, async () => {
     const { endAtSec } = await finalUnlockSchedules()
-    const current = (date => date.getTime() / 1000 + date.getTimezoneOffset())(new Date())
+    const current = getUTC()
     return Number(endAtSec) <= current
   })
   return {

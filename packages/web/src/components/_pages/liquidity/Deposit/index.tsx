@@ -1,7 +1,7 @@
 import { Button, Form, Steps } from 'antd'
 import React, { ChangeEvent, useCallback } from 'react'
 import { useState } from 'react'
-import { toAmountNumber, toBigNumber, toEVMBigNumber, toNaturalNumber } from 'src/fixtures/utility'
+import { getUTC, toAmountNumber, toBigNumber, toEVMBigNumber, toNaturalNumber } from 'src/fixtures/utility'
 import { ETHDEV_V2_ADDRESS, GEYSER_ETHDEV_V2_ADDRESS } from '../../../../fixtures/_pages/liquidity/constants/address'
 import {
   useAllTokensClaimed,
@@ -30,7 +30,6 @@ export const Deposit = () => {
   const [currentStep, setCurrentStep] = useState(0)
   const [requireReEstimate, setRequireReEstimate] = useState(false)
 
-  const { data: claimed } = useAllTokensClaimed()
   const { data: totalStakingShares } = useTotalStakingShares()
   const { data: totalStaked } = useTotalStaked()
   const { data: accounting } = useUpdateAccounting()
@@ -41,10 +40,10 @@ export const Deposit = () => {
   const { approve } = useApprove()
   const { stake } = useStake()
   const isFulfilled = useCallback(() => {
-    return !claimed || !totalStakingShares || !totalStaked || !accounting || !finalUnlockSchedule
+    return !totalStakingShares || !totalStaked || !accounting || !finalUnlockSchedule
       ? false
-      : { claimed, totalStakingShares, totalStaked, accounting, finalUnlockSchedule }
-  }, [claimed, totalStakingShares, totalStaked, accounting, finalUnlockSchedule])
+      : { totalStakingShares, totalStaked, accounting, finalUnlockSchedule }
+  }, [totalStakingShares, totalStaked, accounting, finalUnlockSchedule])
   const updateEstimate = useCallback(
     (value?: string) => {
       const data = isFulfilled()
@@ -55,6 +54,7 @@ export const Deposit = () => {
       }
       const estimated = estimate({
         ...data,
+        timestamp: getUTC(),
         amount: toAmountNumber(value ? value : 0)
       })
       setEstimatedReward(toNaturalNumber(estimated).dp(10).toFixed())

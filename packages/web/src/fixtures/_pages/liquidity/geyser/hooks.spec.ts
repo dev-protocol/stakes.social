@@ -275,9 +275,9 @@ describe('geyser hooks', () => {
         result
           .current({
             amount: toBigNumber(0),
-            claimed: toBigNumber(0),
             totalStakingShares: toEVMBigNumber(0),
             totalStaked: toEVMBigNumber(0),
+            timestamp: 1603441393,
             accounting: {
               totalLocked: '100000',
               totalUnlocked: '100000',
@@ -304,9 +304,9 @@ describe('geyser hooks', () => {
         result
           .current({
             amount: toBigNumber(1),
-            claimed: toBigNumber(0),
             totalStakingShares: toEVMBigNumber(100),
             totalStaked: toEVMBigNumber(100),
+            timestamp: 1603441393,
             accounting: {
               totalLocked: '100000',
               totalUnlocked: '100000',
@@ -324,7 +324,7 @@ describe('geyser hooks', () => {
             }
           })
           .toFixed()
-      ).toBe('51307.13423854107800161899')
+      ).toBe('1979.44190735112183648221')
     })
   })
 
