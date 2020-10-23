@@ -5,11 +5,11 @@ import { EarlyAccess } from 'src/components/atoms/EarlyAccess'
 import { Container } from 'src/components/atoms/Container'
 import { Headline } from 'src/components/atoms/Headline'
 import { H2 } from 'src/components/atoms/Typography'
-import { Nav } from '../../components/for-pages/liquidity/Nav'
+import { Nav } from '../../components/_pages/liquidity/Nav'
 import styled from 'styled-components'
-import { Deposit } from '../../components/for-pages/liquidity/Deposit'
-import { Withdraw } from '../../components/for-pages/liquidity/Withdraw'
-import { Statistics } from '../../components/for-pages/liquidity/Statistics'
+import { Deposit } from '../../components/_pages/liquidity/Deposit'
+import { Withdraw } from '../../components/_pages/liquidity/Withdraw'
+import { Statistics } from '../../components/_pages/liquidity/Statistics'
 
 const NarrowContainer = styled(Container)`
   margin-top: 3rem;

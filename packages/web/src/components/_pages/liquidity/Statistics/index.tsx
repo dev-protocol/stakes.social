@@ -5,9 +5,9 @@ import {
   useFinalUnlockSchedules,
   useTotalRewards,
   useTotalStaked
-} from '../../../../fixtures/for-pages/liquidity/geyser/hooks'
+} from '../../../../fixtures/_pages/liquidity/geyser/hooks'
 import { toBigNumber, toNaturalNumber } from 'src/fixtures/utility'
-import { useTheGraph } from '../../../../fixtures/for-pages/liquidity/uniswap-pool/hooks'
+import { useTheGraph } from '../../../../fixtures/_pages/liquidity/uniswap-pool/hooks'
 
 const Wrapper = styled.div`
   display: grid;

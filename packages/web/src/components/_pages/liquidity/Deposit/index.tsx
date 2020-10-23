@@ -2,7 +2,7 @@ import { Button, Form, Steps } from 'antd'
 import React, { ChangeEvent, useCallback } from 'react'
 import { useState } from 'react'
 import { toAmountNumber, toBigNumber, toEVMBigNumber, toNaturalNumber } from 'src/fixtures/utility'
-import { ETHDEV_V2_ADDRESS } from '../../../../fixtures/for-pages/liquidity/constants/address'
+import { ETHDEV_V2_ADDRESS } from '../../../../fixtures/_pages/liquidity/constants/address'
 import {
   useAllTokensClaimed,
   useEstimateReward,
@@ -11,9 +11,9 @@ import {
   useTotalStaked,
   useTotalStakingShares,
   useUpdateAccounting
-} from '../../../../fixtures/for-pages/liquidity/geyser/hooks'
-import { allowance, balanceOf } from '../../../../fixtures/for-pages/liquidity/uniswap-pool/client'
-import { useApprove } from '../../../../fixtures/for-pages/liquidity/uniswap-pool/hooks'
+} from '../../../../fixtures/_pages/liquidity/geyser/hooks'
+import { allowance, balanceOf } from '../../../../fixtures/_pages/liquidity/uniswap-pool/client'
+import { useApprove } from '../../../../fixtures/_pages/liquidity/uniswap-pool/hooks'
 import { Gap } from '../Gap'
 import { LargeInput } from '../LargeInput'
 import { Max } from '../Max'
