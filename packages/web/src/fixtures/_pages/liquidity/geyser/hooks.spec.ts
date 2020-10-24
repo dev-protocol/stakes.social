@@ -300,6 +300,64 @@ describe('geyser hooks', () => {
       ).toBe('0')
     })
 
+    test('timestamp is equal to endAtSec', () => {
+      const { result } = renderHook(() => useEstimateReward())
+      expect(
+        result
+          .current({
+            amount: toBigNumber(1),
+            totalStakingShares: toEVMBigNumber(100),
+            totalStaked: toEVMBigNumber(100),
+            timestamp: 1603441393,
+            accounting: {
+              totalLocked: '100000',
+              totalUnlocked: '100000',
+              totalsStakingShareSeconds: '100000',
+              totalStakingShareSeconds: '100000',
+              totalUserRewards: '100000',
+              now: '100000'
+            },
+            finalUnlockSchedule: {
+              initialLockedShares: '100000',
+              unlockedShares: '100000',
+              lastUnlockTimestampSec: '100000',
+              endAtSec: '1603441393',
+              durationSec: '100000'
+            }
+          })
+          .toFixed()
+      ).toBe('0')
+    })
+
+    test('timestamp is greater than endAtSec', () => {
+      const { result } = renderHook(() => useEstimateReward())
+      expect(
+        result
+          .current({
+            amount: toBigNumber(1),
+            totalStakingShares: toEVMBigNumber(100),
+            totalStaked: toEVMBigNumber(100),
+            timestamp: 1603441394,
+            accounting: {
+              totalLocked: '100000',
+              totalUnlocked: '100000',
+              totalsStakingShareSeconds: '100000',
+              totalStakingShareSeconds: '100000',
+              totalUserRewards: '100000',
+              now: '100000'
+            },
+            finalUnlockSchedule: {
+              initialLockedShares: '100000',
+              unlockedShares: '100000',
+              lastUnlockTimestampSec: '100000',
+              endAtSec: '1603441393',
+              durationSec: '100000'
+            }
+          })
+          .toFixed()
+      ).toBe('0')
+    })
+
     test('amount is not 0', () => {
       const { result } = renderHook(() => useEstimateReward())
       expect(
