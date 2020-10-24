@@ -153,17 +153,20 @@ export const useEstimateReward = () => {
         return amount
       }
       const eAmount = toEVMBigNumber(amount)
-      const { totalLocked: tLocked, totalUnlocked: tUnlocked, totalStakingShareSeconds } = accounting
+      const { totalLocked: tLocked, totalStakingShareSeconds } = accounting
       const { endAtSec } = finalUnlockSchedule
 
       const e18 = toEVMBigNumber(10).pow(18)
-      const totalRewards = toBigNumber(tLocked).plus(tUnlocked)
+      const totalRewards = toBigNumber(tLocked)
       const timeToLeft = Number(endAtSec) - timestamp
-      const unlockRatePerMonth = totalRewards
-        .times(e18)
-        .times(timeToLeft > ONE_MONTH_SECONDS ? ONE_MONTH_SECONDS : timeToLeft)
-        .div(timeToLeft)
-        .div(e18)
+      const unlockRatePerMonth =
+        timeToLeft > 0
+          ? totalRewards
+              .times(e18)
+              .times(timeToLeft > ONE_MONTH_SECONDS ? ONE_MONTH_SECONDS : timeToLeft)
+              .div(timeToLeft)
+              .div(e18)
+          : toBigNumber(0)
       const maxRewards = unlockRatePerMonth
 
       const mintedStakingShares = tStakingShares.isZero()
