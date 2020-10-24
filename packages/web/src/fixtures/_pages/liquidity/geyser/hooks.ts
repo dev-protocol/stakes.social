@@ -17,6 +17,11 @@ import { message } from 'antd'
 import { getUTC, toBigNumber, toEVMBigNumber, UnwrapFunc } from 'src/fixtures/utility'
 import { INITIAL_SHARES_PER_TOKEN, ONE_MONTH_SECONDS } from '../constants/number'
 
+const getAllTokensClaimed = () =>
+  allTokensClaimed().then(allEvents =>
+    allEvents.reduce((a: BigNumber, c) => a.plus(c.returnValues.amount), toBigNumber(allEvents[0].returnValues.amount))
+  )
+
 export const useTotalRewards = () => {
   const { data: dataTotalLocked, error: errorTotalLocked } = useSWR<BigNumber, Error>(SWRCachePath.getTotalLocked, () =>
     totalLocked()
@@ -25,10 +30,17 @@ export const useTotalRewards = () => {
     SWRCachePath.getTotalUnlocked,
     () => totalUnlocked()
   )
-  const data = dataTotalLocked && dataTotalUnlocked ? dataTotalLocked.plus(dataTotalUnlocked) : toEVMBigNumber(0)
+  const { data: dataAllTokensClaimed, error: errorAllTokensClaimed } = useSWR<BigNumber, Error>(
+    SWRCachePath.useAllTokensClaimed,
+    getAllTokensClaimed
+  )
+  const data =
+    dataTotalLocked && dataTotalUnlocked && dataAllTokensClaimed
+      ? dataTotalLocked.plus(dataTotalUnlocked).plus(dataAllTokensClaimed)
+      : toEVMBigNumber(0)
   return {
     data,
-    error: errorTotalLocked || errorTotalUnlocked
+    error: errorTotalLocked || errorTotalUnlocked || errorAllTokensClaimed
   }
 }
 
@@ -77,14 +89,7 @@ export const useUnstake = () => {
 }
 
 export const useAllTokensClaimed = () => {
-  const { data, error } = useSWR<BigNumber, Error>(SWRCachePath.useAllTokensClaimed, () =>
-    allTokensClaimed().then(allEvents =>
-      allEvents.reduce(
-        (a: BigNumber, c) => a.plus(c.returnValues.amount),
-        toBigNumber(allEvents[0].returnValues.amount)
-      )
-    )
-  )
+  const { data, error } = useSWR<BigNumber, Error>(SWRCachePath.useAllTokensClaimed, getAllTokensClaimed)
   return {
     data,
     error

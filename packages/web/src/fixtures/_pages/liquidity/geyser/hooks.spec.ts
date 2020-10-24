@@ -26,6 +26,7 @@ describe('geyser hooks', () => {
       const error = undefined
       ;(useSWR as jest.Mock).mockImplementationOnce(() => ({ data, error }))
       ;(useSWR as jest.Mock).mockImplementationOnce(() => ({ data, error }))
+      ;(useSWR as jest.Mock).mockImplementationOnce(() => ({ data, error }))
       const { result } = renderHook(() => useTotalRewards())
       expect(result.current.data.toString()).toBe('0')
     })
@@ -34,8 +35,9 @@ describe('geyser hooks', () => {
       const error = undefined
       ;(useSWR as jest.Mock).mockImplementationOnce(() => ({ data: toEVMBigNumber('10000'), error }))
       ;(useSWR as jest.Mock).mockImplementationOnce(() => ({ data: toEVMBigNumber('20000'), error }))
+      ;(useSWR as jest.Mock).mockImplementationOnce(() => ({ data: toEVMBigNumber('30000'), error }))
       const { result } = renderHook(() => useTotalRewards())
-      expect(result.current.data.toString()).toBe('30000')
+      expect(result.current.data.toString()).toBe('60000')
     })
 
     test('failure fetching data', () => {
@@ -319,12 +321,12 @@ describe('geyser hooks', () => {
               initialLockedShares: '100000',
               unlockedShares: '100000',
               lastUnlockTimestampSec: '100000',
-              endAtSec: '100000',
+              endAtSec: '1605441393',
               durationSec: '100000'
             }
           })
           .toFixed()
-      ).toBe('1979.44190735112183648221')
+      ).toBe('989.72095367556091824111')
     })
   })
 
