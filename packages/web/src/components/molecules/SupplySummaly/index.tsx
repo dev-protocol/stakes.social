@@ -56,6 +56,17 @@ const SupplyBadge = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  position: relative;
+  a {
+    position: absolute;
+    bottom: -20px;
+    font-size: 0.6rem;
+  }
+  @media (max-width: 576px) {
+    label {
+      font-size: 0.6rem;
+    }
+  }
 `
 
 const Container = styled.div`
@@ -69,15 +80,15 @@ export const SupplySummary = ({ apy, creators, annualSupplyGrowthRatio }: Props)
       <SupplySummaryContainer>
         <SupplyBadge>
           <Statistics>{apy?.dp(2).toNumber()}%</Statistics>
-          <span>APY Stakers</span>
+          <label>Stakers APY</label>
         </SupplyBadge>
         <SupplyBadge>
           <Statistics>{creators?.dp(2).toNumber()}%</Statistics>
-          <span>APY Creators</span>
+          <label>Creators APY</label>
         </SupplyBadge>
         <SupplyBadge>
           <Statistics>{annualSupplyGrowthRatio?.dp(2).toNumber()}%</Statistics>
-          <span>ASG DEV</span>
+          <label>DEV ASG</label>
         </SupplyBadge>
       </SupplySummaryContainer>
       <hr color="lightgrey" />

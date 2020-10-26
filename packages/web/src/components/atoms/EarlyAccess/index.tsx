@@ -13,6 +13,6 @@ const Wrap = styled.div`
 
 export const EarlyAccess = () => (
   <Wrap>
-    <span> Early Access Version </span>
+    <span style={{ fontSize: '16px' }}> Early Access Version </span>
   </Wrap>
 )

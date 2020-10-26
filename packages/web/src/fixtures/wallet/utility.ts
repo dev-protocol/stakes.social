@@ -94,17 +94,11 @@ export const getDevAmount = async (walletAddress: string) => {
   ]
   const { ethereum } = window
   if (ethereum) {
-    return (async fromCache => {
-      if (typeof fromCache === 'string') {
-        return fromCache
-      }
-      const web3 = new Web3(ethereum)
-      // dev value of team wallet
-      const contract: any = new web3.eth.Contract(abi, '0x5caf454ba92e6f2c929df14667ee360ed9fd5b26')
-      const balance = await contract.methods.balanceOf(walletAddress).call()
-      cache.set(ethereum, balance)
-      return balance
-    })(cache.get(ethereum))
+    const web3 = new Web3(ethereum)
+    // dev value of team wallet
+    const contract: any = new web3.eth.Contract(abi, '0x5caf454ba92e6f2c929df14667ee360ed9fd5b26')
+    const balance = await contract.methods.balanceOf(walletAddress).call()
+    return balance
   }
   return undefined
 }

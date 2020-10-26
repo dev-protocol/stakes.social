@@ -9,6 +9,7 @@ import {
 import styled from 'styled-components'
 import { useGetPropertyAuthenticationQuery } from '@dev/graphql'
 import { truncate } from 'src/fixtures/utility/string'
+import { Currency } from 'src/components/molecules/Currency'
 import { LoremIpsum } from 'lorem-ipsum'
 import { useGetPropertytInformation } from 'src/fixtures/devprtcl/hooks'
 
@@ -194,7 +195,7 @@ export const PropertyCard = ({ propertyAddress }: Props) => {
         </FlexRow>
         <RowContainer>
           <OwnedStake>
-            <span>{myStakingAmount?.dp(1)?.toNumber() || 0} DEV</span>
+            <Currency value={myStakingAmount} />
             <MutedSpan>Your stake</MutedSpan>
           </OwnedStake>
           <YourReward>
@@ -202,7 +203,7 @@ export const PropertyCard = ({ propertyAddress }: Props) => {
             <MutedSpan>Your reward</MutedSpan>
           </YourReward>
           <TotalStaked>
-            <span>{totalStakingAmount?.dp(1)?.toNumber() || 0} DEV</span>
+            <Currency value={totalStakingAmount} />
             <MutedSpan>Total staked</MutedSpan>
           </TotalStaked>
           <CreatorReward>
