@@ -22,6 +22,9 @@ const Statistics = styled.span`
     font-size: 2em;
   }
   color: deeppink;
+  background-image: linear-gradient(12deg, #ff00e0, #6a00a0);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 `
 const StatisticsInt = styled.span`
   letter-spacing: 0.1rem;
@@ -62,6 +65,7 @@ const SupplyBadge = styled.div`
     bottom: -20px;
     font-size: 0.6rem;
   }
+
   @media (max-width: 576px) {
     label {
       font-size: 0.6rem;
@@ -85,6 +89,7 @@ export const SupplySummary = ({ apy, creators, annualSupplyGrowthRatio }: Props)
         <SupplyBadge>
           <Statistics>{creators?.dp(2).toNumber()}%</Statistics>
           <label>Creators APY</label>
+          <a href="https://docs.devprtcl.com/stakes-social/creators">Learn more</a>
         </SupplyBadge>
         <SupplyBadge>
           <Statistics>{annualSupplyGrowthRatio?.dp(2).toNumber()}%</Statistics>
@@ -95,6 +100,7 @@ export const SupplySummary = ({ apy, creators, annualSupplyGrowthRatio }: Props)
     </Container>
   )
 }
+
 export const SupplySummaly = ({ apy, creators, annualSupplyGrowthRatio }: Props) => {
   return (
     <Wrap>
