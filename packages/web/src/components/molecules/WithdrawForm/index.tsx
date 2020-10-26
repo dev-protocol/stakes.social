@@ -2,6 +2,7 @@ import React from 'react'
 import BigNumber from 'bignumber.js'
 import { Button } from 'antd'
 import styled from 'styled-components'
+import { Currency } from 'src/components/molecules/Currency'
 
 interface Props {
   label: 'Stakers' | 'Creators'
@@ -29,7 +30,7 @@ export const WithdrawForm = ({ amount, label, onSubmitWithdraw }: Props) => {
   return (
     <Wrap>
       <p>
-        Withdraw {label} Reward ({amount ? amount.dp(2).toNumber() : 0} DEV available)
+        Withdraw {label} Reward (<Currency value={amount} /> available)
       </p>
       <Form>
         <Button type="primary" size="large" onClick={onSubmitWithdraw}>

@@ -7,6 +7,7 @@ import withApollo from 'src/fixtures/withApollo'
 import { List } from 'antd'
 import styled from 'styled-components'
 import { HelpUs } from 'src/components/atoms/HelpUs'
+import SettingContext from 'src/context/settingContext'
 
 const Wallet = styled.div`
   display: grid;
@@ -27,6 +28,8 @@ const wallet = (name: string, url: string, desc: string) => (
 )
 
 class NextApp extends App<AppInitialProps & WithApolloProps<{}>> {
+  state = { isCurrencyDEV: true }
+
   componentDidCatch = (error: Error, errorInfo: React.ErrorInfo) => {
     super.componentDidCatch(error, errorInfo)
   }
@@ -61,20 +64,32 @@ class NextApp extends App<AppInitialProps & WithApolloProps<{}>> {
         )
       })
     }
+
+    const settings = localStorage.getItem('settings')
+    if (settings) {
+      const { currency } = JSON.parse(settings)
+      this.setState({ isCurrencyDEV: currency === 'DEV' })
+    }
+  }
+
+  toggleCurrency = () => {
+    localStorage.setItem('settings', JSON.stringify({ currency: !this.state.isCurrencyDEV ? 'DEV' : 'USD' }))
+    this.setState({ isCurrencyDEV: !this.state.isCurrencyDEV })
   }
 
   render() {
     const { Component, pageProps, apollo } = this.props
 
     return (
-      <>
+      <SettingContext.Provider value={{ isCurrencyDEV: this.state.isCurrencyDEV, toggleCurrency: this.toggleCurrency }}>
         <Head>
           <title>Stakes.social</title>
-          <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+          {/* Use minimum-scale=1 to enable GPU rasterization */}
+          <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no" />
         </Head>
         <Component {...pageProps} apollo={apollo} />
         <HelpUs></HelpUs>
-      </>
+      </SettingContext.Provider>
     )
   }
 }

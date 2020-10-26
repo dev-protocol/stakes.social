@@ -14,35 +14,33 @@ exports[`CancelStaking Snapshot 1`] = `
       >
         <div
           class="ant-space-item"
-          style="margin-right: 16px;"
         >
-          <button
-            class="ant-btn ant-btn-primary ant-btn-lg"
-            type="button"
+          <div
+            style="display: flex;"
           >
-            <span>
-              Cancel
-            </span>
-          </button>
-        </div>
-        <div
-          class="ant-space-item"
-          style="margin-right: 16px;"
-        >
-          <button
-            class="ant-btn ant-btn-primary ant-btn-lg"
-            disabled=""
-            type="button"
-          >
-            <span>
-              Withdraw
-            </span>
-          </button>
-        </div>
-        <div
-          class="ant-space-item"
-        >
-          <div />
+            <div
+              style="margin-right: 5px;"
+            >
+              <button
+                class="ant-btn ant-btn-primary ant-btn-lg"
+                type="button"
+              >
+                <span>
+                  Cancel
+                </span>
+              </button>
+            </div>
+            <button
+              class="ant-btn ant-btn-primary ant-btn-lg"
+              disabled=""
+              type="button"
+            >
+              <span>
+                Withdraw
+              </span>
+            </button>
+            <div />
+          </div>
         </div>
       </div>
     </div>

@@ -5,6 +5,7 @@ import BigNumber from 'bignumber.js'
 import 'src/__mocks__/window/matchMedia.mock'
 
 jest.mock('src/fixtures/dev-kit/hooks')
+jest.mock('src/fixtures/uniswap/hooks')
 
 describe(`${WithdrawForm.name}`, () => {
   test('Snapshot', () => {

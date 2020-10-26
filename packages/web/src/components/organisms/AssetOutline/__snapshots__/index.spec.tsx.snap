@@ -43,9 +43,9 @@ exports[`AssetOutline Snapshot 1`] = `
     <div
       class="ant-message"
     >
-      <span>
+      <div>
         <div
-          class="ant-message-notice move-up-enter"
+          class="ant-message-notice"
         >
           <div
             class="ant-message-notice-content"
@@ -79,7 +79,7 @@ exports[`AssetOutline Snapshot 1`] = `
             </div>
           </div>
         </div>
-      </span>
+      </div>
     </div>
   </div>
 </body>

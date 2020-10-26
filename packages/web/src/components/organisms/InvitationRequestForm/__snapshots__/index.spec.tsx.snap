@@ -130,11 +130,15 @@ exports[`InvitationRequestForm Snapshot 1`] = `
                 <div
                   class="ant-form-item-control-input-content"
                 >
-                  <textarea
-                    class="ant-input"
-                    id="basic_useCase"
-                    placeholder="use case"
-                  />
+                  <div
+                    class="ant-input-textarea"
+                  >
+                    <textarea
+                      class="ant-input"
+                      id="basic_useCase"
+                      placeholder="use case"
+                    />
+                  </div>
                 </div>
               </div>
             </div>

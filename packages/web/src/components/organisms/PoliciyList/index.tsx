@@ -7,15 +7,6 @@ import { useGetPolicyAddressesList } from 'src/fixtures/dev-kit/hooks'
 import { useGetPolicyInformation } from 'src/fixtures/github/hooks'
 import { NotFound } from './NotFound'
 
-interface Policy {
-  title: string
-  description: string
-}
-
-interface Props {
-  policyList: Policy[]
-}
-
 const Wrap = styled.div`
   display: grid;
   grid-gap: 1rem;

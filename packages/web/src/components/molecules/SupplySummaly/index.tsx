@@ -85,16 +85,17 @@ export const SupplySummary = ({ apy, creators, annualSupplyGrowthRatio }: Props)
       <SupplySummaryContainer>
         <SupplyBadge>
           <Statistics>{apy?.dp(2).toNumber()}%</Statistics>
-          <label>APY for Stakers</label>
+          <label>Stakers APY</label>
         </SupplyBadge>
         <SupplyBadge>
           <Statistics>{creators?.dp(2).toNumber()}%</Statistics>
-          <label>APY for Creators</label>
+          <label>Creators APY</label>
           <a href="https://docs.devprtcl.com/stakes-social/creators">Learn more</a>
         </SupplyBadge>
         <SupplyBadge>
           <Statistics>{annualSupplyGrowthRatio?.dp(2).toNumber()}%</Statistics>
-          <label>Annual Supply Growth</label>
+          <label>DEV ASG</label>
+
         </SupplyBadge>
       </SupplySummaryContainer>
       <hr color="lightgrey" />

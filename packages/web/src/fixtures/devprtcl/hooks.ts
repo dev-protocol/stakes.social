@@ -8,13 +8,30 @@ export interface PropertyInformation {
   author: { karma: number; address: string }
 }
 
+export interface AuthorInformation {
+  address: string
+  karma: number
+}
+
 export const getPropertytInformation = (propertyAddress: string): Promise<PropertyInformation> =>
   fetch(`https://api.devprtcl.com/v1/property/${propertyAddress}`).then(res => res.json())
+
+export const getAuthorInformation = (authorAddress: string): Promise<AuthorInformation> =>
+  fetch(`https://api.devprtcl.com/v1/author/${authorAddress}`).then(res => res.json())
 
 export const useGetPropertytInformation = (propertyAddress: string) => {
   const { data, error } = useSWR<UnwrapFunc<typeof getPropertytInformation>, Error>(
     SWRCachePath.getPropertyInformation(propertyAddress),
     () => getPropertytInformation(propertyAddress),
+    { onError: err => message.error(err.message) }
+  )
+  return { data, error }
+}
+
+export const useGetAuthorInformation = (authorAddress: string) => {
+  const { data, error } = useSWR<UnwrapFunc<typeof getAuthorInformation>, Error>(
+    SWRCachePath.getAuthorInformation(authorAddress),
+    () => getAuthorInformation(authorAddress),
     { onError: err => message.error(err.message) }
   )
   return { data, error }
