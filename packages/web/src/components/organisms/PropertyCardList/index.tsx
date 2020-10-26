@@ -31,7 +31,8 @@ const PropertiesHeader = styled.div`
 
   @media (min-width: 768px) {
     grid-template-rows: none;
-    grid-template-columns: 2fr 2fr 1.5fr 2fr;
+    grid-template-columns: 2fr 2fr 1fr 1fr;
+    column-gap: 48px;
   }
 `
 
@@ -39,10 +40,10 @@ const PropertyOverview = styled.div`
   display: grid;
   grid-template-columns: 1fr;
   row-gap: 0;
-  /* Change  */
+
   @media (min-width: 768px) {
     grid-template-columns: 1fr 1fr 1fr;
-    column-gap: 15px;
+    column-gap: 60px;
   }
 `
 

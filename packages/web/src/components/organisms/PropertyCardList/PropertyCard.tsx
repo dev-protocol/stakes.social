@@ -12,6 +12,7 @@ import { truncate } from 'src/fixtures/utility/string'
 import { Currency } from 'src/components/molecules/Currency'
 import { LoremIpsum } from 'lorem-ipsum'
 import { useGetPropertytInformation } from 'src/fixtures/devprtcl/hooks'
+import BigNumber from 'bignumber.js'
 
 const lorem = new LoremIpsum({
   sentencesPerParagraph: {
@@ -30,7 +31,9 @@ interface Props {
 const Card = styled.div`
   display: flex;
   flex-direction: column;
+  margin-right: 0;
   height: 500px;
+  width: 345px;
   border: solid 1px #f0f0f0;
   border-radius: 6px;
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
@@ -97,10 +100,11 @@ const ButtonContainerArea = styled(ButtonContainer)`
   grid-area: buttoncontainer;
 `
 
-const StakeButton = styled.button<{ bgColor?: string }>`
+const StakeButton = styled.button<{ isPropertyStaked?: Boolean }>`
   padding: 6px 24px;
   border-bottom-left-radius: 6px;
-  width: 50%;
+  border-bottom-right-radius: ${props => (props.isPropertyStaked ? '0px' : '6px')};
+  width: ${props => (props.isPropertyStaked ? '50%' : '100%')};
   border: none;
   background-color: #2f80ed;
   color: white;
@@ -112,7 +116,9 @@ const StakeButton = styled.button<{ bgColor?: string }>`
   }
 `
 
-const WithdrawButton = styled.button<{ bgColor?: string }>`
+const WithdrawButton = styled.button<{ isPropertyStaked?: Boolean }>`
+  display: ${props => (props.isPropertyStaked ? 'flex' : 'none')};
+  justify-content: center;
   padding: 6px 24px;
   width: 50%;
   border: transparent;
@@ -169,6 +175,8 @@ export const PropertyCard = ({ propertyAddress }: Props) => {
     [data]
   )
 
+  const zeroBigNumber = new BigNumber(0)
+
   return (
     <Link href={'/[propertyAddress]'} as={`/${propertyAddress}`}>
       <Card>
@@ -212,8 +220,12 @@ export const PropertyCard = ({ propertyAddress }: Props) => {
           </CreatorReward>
         </RowContainer>
         <ButtonContainerArea>
-          <StakeButton>Stake</StakeButton>
-          <WithdrawButton>Withdraw</WithdrawButton>
+          <StakeButton isPropertyStaked={typeof myStakingAmount !== 'undefined' && myStakingAmount > zeroBigNumber}>
+            Stake
+          </StakeButton>
+          <WithdrawButton isPropertyStaked={typeof myStakingAmount !== 'undefined' && myStakingAmount > zeroBigNumber}>
+            Withdraw
+          </WithdrawButton>
         </ButtonContainerArea>
       </Card>
     </Link>

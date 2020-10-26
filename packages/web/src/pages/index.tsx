@@ -35,7 +35,7 @@ const Index = (_: Props) => {
       <Header />
       <EarlyAccess />
       <Banner />
-      <div style={{ padding: '1rem', maxWidth: '1048px', marginRight: 'auto', marginLeft: 'auto' }}>
+      <div style={{ padding: '1rem', maxWidth: '1200px', marginRight: 'auto', marginLeft: 'auto' }}>
         <SupplySummary apy={apy} creators={creators} annualSupplyGrowthRatio={annualSupplyGrowthRatio} />
         <PropertyCardList currentPage={page} searchWord={word} />
       </div>
