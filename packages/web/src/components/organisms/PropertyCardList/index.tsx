@@ -39,7 +39,7 @@ const PropertyOverview = styled.div`
   display: grid;
   grid-template-columns: 1fr;
   row-gap: 0;
-
+  /* Change  */
   @media (min-width: 768px) {
     grid-template-columns: 1fr 1fr 1fr;
     column-gap: 15px;
