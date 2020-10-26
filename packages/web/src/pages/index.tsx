@@ -31,7 +31,7 @@ const Index = (_: Props) => {
   }, [router])
 
   return (
-    <>
+    <div style={{ background: 'white' }}>
       <Header />
       <EarlyAccess />
       <Banner />
@@ -40,7 +40,7 @@ const Index = (_: Props) => {
         <PropertyCardList currentPage={page} searchWord={word} />
       </div>
       <Footer />
-    </>
+    </div>
   )
 }
 
