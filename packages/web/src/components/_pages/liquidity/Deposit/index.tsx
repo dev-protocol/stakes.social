@@ -4,7 +4,6 @@ import { useState } from 'react'
 import { getUTC, toAmountNumber, toBigNumber, toEVMBigNumber, toNaturalNumber } from 'src/fixtures/utility'
 import { ETHDEV_V2_ADDRESS, GEYSER_ETHDEV_V2_ADDRESS } from '../../../../fixtures/_pages/liquidity/constants/address'
 import {
-  useAllTokensClaimed,
   useEstimateReward,
   useFinalUnlockSchedules,
   useStake,
