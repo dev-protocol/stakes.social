@@ -60,7 +60,6 @@ const SupplyBadge = styled.div`
   justify-content: center;
   align-items: center;
   position: relative;
-
   a {
     position: absolute;
     bottom: -20px;
@@ -95,13 +94,13 @@ export const SupplySummary = ({ apy, creators, annualSupplyGrowthRatio }: Props)
         <SupplyBadge>
           <Statistics>{annualSupplyGrowthRatio?.dp(2).toNumber()}%</Statistics>
           <label>DEV ASG</label>
-
         </SupplyBadge>
       </SupplySummaryContainer>
       <hr color="lightgrey" />
     </Container>
   )
 }
+
 export const SupplySummaly = ({ apy, creators, annualSupplyGrowthRatio }: Props) => {
   return (
     <Wrap>
