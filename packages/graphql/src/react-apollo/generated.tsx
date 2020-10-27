@@ -5098,10 +5098,42 @@ export type ListPropertyQueryVariables = Exact<{
   limit?: Maybe<Scalars['Int']>
   offset?: Maybe<Scalars['Int']>
   ilike?: Maybe<Scalars['String']>
+  from?: Maybe<Scalars['String']>
 }>
 
 export type ListPropertyQuery = { __typename?: 'query_root' } & {
-  property_factory_create: Array<{ __typename?: 'property_factory_create' } & PropertyFactoryCreateFragment>
+  property_factory_create: Array<
+    { __typename?: 'property_factory_create' } & {
+      authentication: Array<
+        { __typename?: 'property_authentication' } & Pick<Property_Authentication, 'authentication_id'>
+      >
+    } & PropertyFactoryCreateFragment
+  >
+  property_factory_create_aggregate: { __typename?: 'property_factory_create_aggregate' } & {
+    aggregate?: Maybe<
+      { __typename?: 'property_factory_create_aggregate_fields' } & Pick<
+        Property_Factory_Create_Aggregate_Fields,
+        'count'
+      >
+    >
+  }
+}
+
+export type ListPropertyOrderByMostRecentQueryVariables = Exact<{
+  limit?: Maybe<Scalars['Int']>
+  offset?: Maybe<Scalars['Int']>
+  ilike?: Maybe<Scalars['String']>
+  from?: Maybe<Scalars['String']>
+}>
+
+export type ListPropertyOrderByMostRecentQuery = { __typename?: 'query_root' } & {
+  property_factory_create: Array<
+    { __typename?: 'property_factory_create' } & {
+      authentication: Array<
+        { __typename?: 'property_authentication' } & Pick<Property_Authentication, 'authentication_id'>
+      >
+    } & PropertyFactoryCreateFragment
+  >
   property_factory_create_aggregate: { __typename?: 'property_factory_create_aggregate' } & {
     aggregate?: Maybe<
       { __typename?: 'property_factory_create_aggregate_fields' } & Pick<
@@ -5330,16 +5362,25 @@ export type GetPropertyAuthenticationQueryResult = Apollo.QueryResult<
   GetPropertyAuthenticationQueryVariables
 >
 export const ListPropertyDocument = gql`
-  query ListProperty($limit: Int, $offset: Int, $ilike: String) {
+  query ListProperty($limit: Int, $offset: Int, $ilike: String, $from: String) {
     property_factory_create(
       limit: $limit
       offset: $offset
       order_by: { current_lockup: { sum_values: desc_nulls_last } }
-      where: { authentication: { authentication_id: { _ilike: $ilike } } }
+      where: {
+        authentication: { authentication_id: { _ilike: $ilike }, property_creation: { from_address: { _eq: $from } } }
+      }
     ) {
+      authentication {
+        authentication_id
+      }
       ...propertyFactoryCreate
     }
-    property_factory_create_aggregate(where: { authentication: { authentication_id: { _ilike: $ilike } } }) {
+    property_factory_create_aggregate(
+      where: {
+        authentication: { authentication_id: { _ilike: $ilike }, property_creation: { from_address: { _eq: $from } } }
+      }
+    ) {
       aggregate {
         count
       }
@@ -5363,6 +5404,7 @@ export const ListPropertyDocument = gql`
  *      limit: // value for 'limit'
  *      offset: // value for 'offset'
  *      ilike: // value for 'ilike'
+ *      from: // value for 'from'
  *   },
  * });
  */
@@ -5379,6 +5421,80 @@ export function useListPropertyLazyQuery(
 export type ListPropertyQueryHookResult = ReturnType<typeof useListPropertyQuery>
 export type ListPropertyLazyQueryHookResult = ReturnType<typeof useListPropertyLazyQuery>
 export type ListPropertyQueryResult = Apollo.QueryResult<ListPropertyQuery, ListPropertyQueryVariables>
+export const ListPropertyOrderByMostRecentDocument = gql`
+  query ListPropertyOrderByMostRecent($limit: Int, $offset: Int, $ilike: String, $from: String) {
+    property_factory_create(
+      limit: $limit
+      offset: $offset
+      order_by: { block_number: desc }
+      where: {
+        authentication: { authentication_id: { _ilike: $ilike }, property_creation: { from_address: { _eq: $from } } }
+      }
+    ) {
+      authentication {
+        authentication_id
+      }
+      ...propertyFactoryCreate
+    }
+    property_factory_create_aggregate(
+      where: {
+        authentication: { authentication_id: { _ilike: $ilike }, property_creation: { from_address: { _eq: $from } } }
+      }
+    ) {
+      aggregate {
+        count
+      }
+    }
+  }
+  ${PropertyFactoryCreateFragmentDoc}
+`
+
+/**
+ * __useListPropertyOrderByMostRecentQuery__
+ *
+ * To run a query within a React component, call `useListPropertyOrderByMostRecentQuery` and pass it any options that fit your needs.
+ * When your component renders, `useListPropertyOrderByMostRecentQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useListPropertyOrderByMostRecentQuery({
+ *   variables: {
+ *      limit: // value for 'limit'
+ *      offset: // value for 'offset'
+ *      ilike: // value for 'ilike'
+ *      from: // value for 'from'
+ *   },
+ * });
+ */
+export function useListPropertyOrderByMostRecentQuery(
+  baseOptions?: Apollo.QueryHookOptions<ListPropertyOrderByMostRecentQuery, ListPropertyOrderByMostRecentQueryVariables>
+) {
+  return Apollo.useQuery<ListPropertyOrderByMostRecentQuery, ListPropertyOrderByMostRecentQueryVariables>(
+    ListPropertyOrderByMostRecentDocument,
+    baseOptions
+  )
+}
+export function useListPropertyOrderByMostRecentLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    ListPropertyOrderByMostRecentQuery,
+    ListPropertyOrderByMostRecentQueryVariables
+  >
+) {
+  return Apollo.useLazyQuery<ListPropertyOrderByMostRecentQuery, ListPropertyOrderByMostRecentQueryVariables>(
+    ListPropertyOrderByMostRecentDocument,
+    baseOptions
+  )
+}
+export type ListPropertyOrderByMostRecentQueryHookResult = ReturnType<typeof useListPropertyOrderByMostRecentQuery>
+export type ListPropertyOrderByMostRecentLazyQueryHookResult = ReturnType<
+  typeof useListPropertyOrderByMostRecentLazyQuery
+>
+export type ListPropertyOrderByMostRecentQueryResult = Apollo.QueryResult<
+  ListPropertyOrderByMostRecentQuery,
+  ListPropertyOrderByMostRecentQueryVariables
+>
 export const ListPropertyMetaDocument = gql`
   query listPropertyMeta($author: String!, $limit: Int, $ilike: String) {
     property_meta(where: { author: { _eq: $author }, property: { _ilike: $ilike } }, limit: $limit) {
