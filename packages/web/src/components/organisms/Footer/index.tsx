@@ -2,23 +2,23 @@ import * as React from 'react'
 import { Logo } from 'src/components/atoms/Svgs/tsx'
 import styled, { CSSProperties } from 'styled-components'
 import { Container } from 'src/components/atoms/Container'
-import { BrandLogo } from '../../atoms/BrandLogo/index';
-import { Twitter, Discord, Telegram, Spectrum, Medium } from '../../atoms/SocialButtons/index';
+import { BrandLogo } from '../../atoms/BrandLogo/index'
+import { Twitter, Discord, Telegram, Spectrum, Medium } from '../../atoms/SocialButtons/index'
 
 const Wrap = styled.footer`
-    display: grid;
-    grid-gap: 5rem;
-    padding-top: 5rem;
-    background: #EBF2F8;
-    margin-top: 50px;
-    border-top-right-radius: 60px;
-    border-top-left-radius: 60px;
+  display: grid;
+  grid-gap: 5rem;
+  padding-top: 5rem;
+  background: #ebf2f8;
+  margin-top: 50px;
+  border-top-right-radius: 60px;
+  border-top-left-radius: 60px;
 `
 
 const SocialContainer = styled.div`
-    text-align: center;
-    margin-top: 5rem;
-    margin-bottom: 15px;
+  text-align: center;
+  margin-top: 5rem;
+  margin-bottom: 15px;
 `
 
 const Licence = styled.small`
@@ -27,8 +27,8 @@ const Licence = styled.small`
   text-align: center;
   margin-right: 5px;
 
-  a{
-    font-size : 8px;
+  a {
+    font-size: 8px;
   }
 `
 
@@ -48,7 +48,7 @@ export const Footer = () => {
           <BrandLogo colorSchema={'black'} props={{ width: '170px' }}></BrandLogo>
         </div>
         <p style={{ marginTop: '30px' }}>
-          <span>  Stakes.social is powered by the </span>
+          <span> Stakes.social is powered by the </span>
           <a href="//devprtcl.com" target="_blank" rel="noreferrer noopener" style={{ textDecoration: 'underline' }}>
             Dev Protocol
           </a>
@@ -73,9 +73,7 @@ export const Footer = () => {
           .
         </p>
         <SocialContainer>
-          <div style={{ textAlign: 'center', marginBottom: '15px' }}>
-            Enjoy following the Dev Protocol community on
-           </div>
+          <div style={{ textAlign: 'center', marginBottom: '15px' }}>Enjoy following the Dev Protocol community on</div>
 
           <Discord />
           <Telegram />
