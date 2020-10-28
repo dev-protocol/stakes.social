@@ -25,3 +25,31 @@ export const usePostPropertyTags = () => {
     }
   }
 }
+
+export const useGetAccount = () => {
+  return [{ name: 'dummy name', biography: 'dummy biography' }]
+}
+
+export const useCreateAccount = () => {
+  return {
+    usePostCreateAccount: async () => {
+      return { id: 1, name: 'dummy name', biography: 'dummy biography' }
+    }
+  }
+}
+
+export const useUpdateAccount = () => {
+  return {
+    usePostUpdateAccount: async () => {
+      return { id: 1, name: 'dummy name', biography: 'dummy biography' }
+    }
+  }
+}
+
+export const useUploadFile = () => {
+  return {
+    usePostUploadFile: async () => {
+      return { id: 1 }
+    }
+  }
+}
