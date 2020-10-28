@@ -4,7 +4,7 @@ exports[`Footer Snapshot 1`] = `
 <body>
   <div>
     <footer
-      class="sc-1fvy930-0 emSpzv"
+      class="sc-1fvy930-0 kaRjiP"
     >
       <div
         class="sc-1wzqvkc-0 bqVTXQ"
@@ -39,7 +39,7 @@ exports[`Footer Snapshot 1`] = `
           style="margin-top: 30px;"
         >
           <span>
-              Stakes.social is powered by the 
+             Stakes.social is powered by the 
           </span>
           <a
             href="//devprtcl.com"
@@ -111,6 +111,7 @@ exports[`Footer Snapshot 1`] = `
           </a>
           <a
             class="sc-3pzwbd-0 lbDtNj"
+            href="https://t.me/devprtcl"
           >
             <svg
               fill="none"
