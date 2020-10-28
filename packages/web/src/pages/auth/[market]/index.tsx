@@ -23,7 +23,7 @@ const AuthenticateNewAsset = (_: Props) => {
     <>
       <Header />
       <Headline height={300}>
-        <H2>Create a new Property and authenticate</H2>
+        <H2>Create an Asset</H2>
       </Headline>
       <Container>
         <AuthForm market={market} />

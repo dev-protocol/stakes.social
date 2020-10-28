@@ -1,10 +1,11 @@
-import React, { useState } from 'react'
+import React, { useCallback, useState } from 'react'
 import { Form, Input, Button, Result } from 'antd'
 import { useMarketScheme, useAuthenticate, useCreateAndAuthenticate } from 'src/fixtures/dev-kit/hooks'
 import { usePostSignGitHubMarketAsset } from 'src/fixtures/khaos/hooks'
 import { useEffectAsync } from 'src/fixtures/utility'
 import styled from 'styled-components'
 import Text from 'antd/lib/typography/Text'
+import { useDropzone } from 'react-dropzone'
 
 const NpmMarketContractAddress = '0x88c7B1f41DdE50efFc25541a2E0769B887eB2ee7'
 
@@ -20,11 +21,19 @@ const Container = styled.div`
 const Row = styled.div`
   display: grid;
   grid-gap: 1rem;
-  @media (min-width: 768px) {
-    grid-template-columns: 150px 1fr;
-    & > *:first-child {
-      text-align: right;
-    }
+`
+
+const Capitalized = styled.span`
+  text-transform: capitalize;
+`
+
+const FileSelector = styled.div`
+  padding: 2rem;
+  border-radius: 5px;
+  background: linear-gradient(45deg, #29b7ff, transparent);
+  cursor: pointer;
+  [class^='ant'] {
+    display: none;
   }
 `
 
@@ -73,26 +82,50 @@ const GitHubMarketSchemeInput = () => {
 }
 
 const PropertyInput = () => {
+  const onDrop = useCallback(acceptedFiles => {
+    console.log(acceptedFiles)
+  }, [])
+  const { getRootProps, getInputProps } = useDropzone({ onDrop, accept: ['image/jpeg', 'image/png', 'image/gif'] })
+
   return (
     <>
+      <h2>
+        <Capitalized>Asset information</Capitalized>
+      </h2>
       <Row>
-        <span>Pool name:</span>
+        <label>
+          <Capitalized>Asset logo</Capitalized>
+        </label>
+
+        <FileSelector {...getRootProps()}>
+          <Form.Item name="propertyLogo" key="propertyLogo">
+            <input {...getInputProps()} />
+          </Form.Item>
+          <span>Drag and Drop or Browse</span>
+        </FileSelector>
+      </Row>
+      <Row>
+        <label>
+          <Capitalized>Asset name</Capitalized>
+        </label>
         <Form.Item
           name="propertyName"
-          rules={[{ required: true, message: 'Please input your pool name' }]}
+          rules={[{ required: true, message: 'Please input your asset name' }]}
           key="propertyName"
         >
-          <Input placeholder="Your pool name" />
+          <Input />
         </Form.Item>
       </Row>
       <Row>
-        <span>Pool symbol:</span>
+        <label>
+          <Capitalized>Symbol</Capitalized>
+        </label>
         <Form.Item
           name="propertySymbol"
-          rules={[{ required: true, message: 'Please input your pool symbol' }]}
+          rules={[{ required: true, message: 'Please input your asset symbol' }]}
           key="propertySymbol"
         >
-          <Input placeholder="Your pool symbol" />
+          <Input />
         </Form.Item>
       </Row>
     </>
@@ -181,7 +214,6 @@ export const AuthForm = ({ market, property }: Props) => {
       ) : (
         <Form name="basic" initialValues={{ remember: true }} onFinish={onFinish}>
           {property ? '' : <PropertyInput />}
-
           <Row>
             <span>Arguments:</span>
             <div>
