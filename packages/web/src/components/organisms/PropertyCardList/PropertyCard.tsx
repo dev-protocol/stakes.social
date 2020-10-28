@@ -7,12 +7,12 @@ import {
   useGetMyStakingRewardAmount
 } from 'src/fixtures/dev-kit/hooks'
 import styled from 'styled-components'
-import { useGetPropertyAuthenticationQuery } from '@dev/graphql'
 import { truncate } from 'src/fixtures/utility/string'
 import { Currency } from 'src/components/molecules/Currency'
 import { LoremIpsum } from 'lorem-ipsum'
 import { useGetPropertytInformation } from 'src/fixtures/devprtcl/hooks'
 import { Avatar } from 'src/components/molecules/Avatar'
+import BigNumber from 'bignumber.js'
 
 const lorem = new LoremIpsum({
   sentencesPerParagraph: {
@@ -24,14 +24,22 @@ const lorem = new LoremIpsum({
     min: 4
   }
 })
+
+interface Asset {
+  authentication_id: string
+}
+
 interface Props {
   propertyAddress: string
+  assets: Asset[]
 }
 
 const Card = styled.div`
   display: flex;
   flex-direction: column;
+  margin-right: 0;
   height: 500px;
+  width: 345px;
   border: solid 1px #f0f0f0;
   border-radius: 6px;
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
@@ -98,10 +106,11 @@ const ButtonContainerArea = styled(ButtonContainer)`
   grid-area: buttoncontainer;
 `
 
-const StakeButton = styled.button<{ bgColor?: string }>`
+const StakeButton = styled.button<{ isPropertyStaked?: Boolean }>`
   padding: 6px 24px;
   border-bottom-left-radius: 6px;
-  width: 50%;
+  border-bottom-right-radius: ${props => (props.isPropertyStaked ? '0px' : '6px')};
+  width: ${props => (props.isPropertyStaked ? '50%' : '100%')};
   border: none;
   background-color: #2f80ed;
   color: white;
@@ -113,7 +122,9 @@ const StakeButton = styled.button<{ bgColor?: string }>`
   }
 `
 
-const WithdrawButton = styled.button<{ bgColor?: string }>`
+const WithdrawButton = styled.button<{ isPropertyStaked?: Boolean }>`
+  display: ${props => (props.isPropertyStaked ? 'flex' : 'none')};
+  justify-content: center;
   padding: 6px 24px;
   width: 50%;
   border: transparent;
@@ -158,17 +169,15 @@ const FlewColumn = styled.div`
   }
 `
 
-export const PropertyCard = ({ propertyAddress }: Props) => {
+export const PropertyCard = ({ propertyAddress, assets }: Props) => {
   const { totalStakingAmount } = useGetTotalStakingAmount(propertyAddress)
   const { totalRewardsAmount } = useGetTotalRewardsAmount(propertyAddress)
   const { myStakingRewardAmount } = useGetMyStakingRewardAmount(propertyAddress)
   const { myStakingAmount } = useGetMyStakingAmount(propertyAddress)
   const { data: authorData } = useGetPropertytInformation(propertyAddress)
-  const { data } = useGetPropertyAuthenticationQuery({ variables: { propertyAddress } })
-  const includeAssets = useMemo(
-    () => data && truncate(data.property_authentication.map(e => e.authentication_id).join(', '), 24),
-    [data]
-  )
+  const includeAssets = useMemo(() => assets && truncate(assets.map(e => e.authentication_id).join(', '), 24), [assets])
+
+  const zeroBigNumber = new BigNumber(0)
 
   return (
     <Link href={'/[propertyAddress]'} as={`/${propertyAddress}`}>
@@ -209,8 +218,12 @@ export const PropertyCard = ({ propertyAddress }: Props) => {
           </CreatorReward>
         </RowContainer>
         <ButtonContainerArea>
-          <StakeButton>Stake</StakeButton>
-          <WithdrawButton>Withdraw</WithdrawButton>
+          <StakeButton isPropertyStaked={typeof myStakingAmount !== 'undefined' && myStakingAmount > zeroBigNumber}>
+            Stake
+          </StakeButton>
+          <WithdrawButton isPropertyStaked={typeof myStakingAmount !== 'undefined' && myStakingAmount > zeroBigNumber}>
+            Withdraw
+          </WithdrawButton>
         </ButtonContainerArea>
       </Card>
     </Link>

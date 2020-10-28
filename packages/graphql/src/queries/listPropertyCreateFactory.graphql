@@ -1,15 +1,18 @@
-query ListProperty($limit: Int, $offset: Int, $ilike: String) {
+query ListProperty($limit: Int, $offset: Int, $ilike: String, $from: String) {
   property_factory_create(limit: $limit, offset: $offset, order_by: {
       current_lockup: {
         sum_values: desc_nulls_last
       }
     },
-    where: { authentication: { authentication_id: { _ilike: $ilike } } }
+    where: { authentication: { authentication_id: { _ilike: $ilike } property_creation: { from_address: { _eq: $from } } } }
   ) {
+    authentication {
+      authentication_id
+    }
     ...propertyFactoryCreate
   }
   property_factory_create_aggregate(
-    where: { authentication: { authentication_id: { _ilike: $ilike } } }
+    where: { authentication: { authentication_id: { _ilike: $ilike } property_creation: { from_address: { _eq: $from } } } }
   ) {
     aggregate {
       count

@@ -47,7 +47,7 @@ const Logo = styled.div`
   }
 `
 const ResponsiveWrap = styled.div`
-  max-width: 1048px;
+  max-width: 1200px;
   margin-right: auto;
   margin-left: auto;
   @media (min-width: 1024px) {
