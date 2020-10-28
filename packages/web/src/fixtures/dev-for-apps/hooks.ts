@@ -1,9 +1,18 @@
 import { useState } from 'react'
 import { SWRCachePath } from './cache-path'
-import useSWR from 'swr'
+import useSWR, { mutate } from 'swr'
 import { message } from 'antd'
 import { UnwrapFunc } from '../utility'
-import { getUser, postUser, getPropertyTags, postPropertyTags, getAccount, postAccount, putAccount } from './utility'
+import {
+  getUser,
+  postUser,
+  getPropertyTags,
+  postPropertyTags,
+  getAccount,
+  postAccount,
+  putAccount,
+  postUploadFile
+} from './utility'
 import { sign } from 'src/fixtures/wallet/utility'
 
 export const useGetUser = (walletAddress: string) => {
@@ -174,4 +183,41 @@ export const useUpdateAccount = (id: number, walletAddress: string) => {
   }
 
   return { data, putAccountHandler, isLoading }
+}
+
+export const useUploadFile = (walletAddress: string) => {
+  const key = 'useUploadFile'
+  const [isLoading, setIsLoading] = useState<boolean>(false)
+
+  const postUploadFileHandler = async (refId: number, ref: string, field: string, file: any, path?: string) => {
+    const signMessage = `upload file: ${refId}, ${ref}, ${field}`
+    const signature = (await sign(signMessage)) || ''
+
+    setIsLoading(true)
+    message.loading({ content: 'upload data...', duration: 0, key })
+
+    const res = await mutate(
+      SWRCachePath.uploadFile(),
+      postUploadFile(signMessage, signature, walletAddress, refId, ref, field, file, path)
+        .then(result => {
+          if (result.error) {
+            message.error({ content: result.error, key })
+          } else {
+            message.success({ content: 'success upload', key })
+          }
+          return result
+        })
+        .catch(err => {
+          message.error({ content: err.message, key })
+          return Promise.reject({})
+        }),
+      false
+    )
+
+    setIsLoading(false)
+
+    return res
+  }
+
+  return { postUploadFileHandler, isLoading }
 }

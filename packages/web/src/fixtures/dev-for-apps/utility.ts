@@ -12,6 +12,13 @@ export interface Account {
   id: number
   name: string
   biography: string
+  portrait: any
+}
+
+export interface UploadFile {
+  id: number
+  formats: any
+  error?: string
 }
 
 export const getUser = (walletAddress: string): Promise<UserInformation> =>
@@ -109,3 +116,31 @@ export const putAccount = (
       signMessage
     })
   }).then(res => res.json())
+
+export const postUploadFile = (
+  signMessage: string,
+  signature: string,
+  address: string,
+  refId: number,
+  ref: string,
+  field: string,
+  file: any,
+  path?: string
+): Promise<UploadFile> => {
+  const formData = new FormData()
+  formData.append('signMessage', signMessage)
+  formData.append('signature', signature)
+  formData.append('address', address)
+  formData.append('files', file)
+  formData.append('refId', `${refId}`)
+  formData.append('ref', ref)
+  formData.append('field', field)
+  if (path) {
+    formData.append('path', path)
+  }
+
+  return fetch(`${StrapiBaseUrl}/upload`, {
+    method: 'POST',
+    body: formData
+  }).then(res => res.json())
+}
