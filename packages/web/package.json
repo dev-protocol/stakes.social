@@ -45,6 +45,7 @@
     "query-string": "6.13.6",
     "react": "16.14.0",
     "react-dom": "16.14.0",
+    "react-dropzone": "11.2.2",
     "react-select": "^3.1.0",
     "styled-components": "5.2.0",
     "swr": "0.3.5",
