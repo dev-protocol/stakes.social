@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Max Snapshot 1`] = `
+<body>
+  <div>
+    <button
+      class="ant-btn ant-btn-primary ant-btn-sm zinbpr-0 igIbjv"
+      type="button"
+    >
+      <span>
+        Max
+      </span>
+    </button>
+  </div>
+</body>
+`;

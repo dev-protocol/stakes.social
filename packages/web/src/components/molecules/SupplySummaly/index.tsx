@@ -22,6 +22,9 @@ const Statistics = styled.span`
     font-size: 2em;
   }
   color: deeppink;
+  background-image: linear-gradient(12deg, #ff00e0, #6a00a0);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 `
 const StatisticsInt = styled.span`
   letter-spacing: 0.1rem;
@@ -56,6 +59,18 @@ const SupplyBadge = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  position: relative;
+  a {
+    position: absolute;
+    bottom: -20px;
+    font-size: 0.6rem;
+  }
+
+  @media (max-width: 576px) {
+    label {
+      font-size: 0.6rem;
+    }
+  }
 `
 
 const Container = styled.div`
@@ -69,21 +84,23 @@ export const SupplySummary = ({ apy, creators, annualSupplyGrowthRatio }: Props)
       <SupplySummaryContainer>
         <SupplyBadge>
           <Statistics>{apy?.dp(2).toNumber()}%</Statistics>
-          <span>APY Stakers</span>
+          <label>Stakers APY</label>
         </SupplyBadge>
         <SupplyBadge>
           <Statistics>{creators?.dp(2).toNumber()}%</Statistics>
-          <span>APY Creators</span>
+          <label>Creators APY</label>
+          <a href="https://docs.devprtcl.com/stakes-social/creators">Learn more</a>
         </SupplyBadge>
         <SupplyBadge>
           <Statistics>{annualSupplyGrowthRatio?.dp(2).toNumber()}%</Statistics>
-          <span>ASG DEV</span>
+          <label>DEV ASG</label>
         </SupplyBadge>
       </SupplySummaryContainer>
       <hr color="lightgrey" />
     </Container>
   )
 }
+
 export const SupplySummaly = ({ apy, creators, annualSupplyGrowthRatio }: Props) => {
   return (
     <Wrap>

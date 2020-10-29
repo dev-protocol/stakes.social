@@ -11,6 +11,7 @@ import { StakeForm } from 'src/components/organisms/StakeForm'
 import { CancelStaking } from 'src/components/organisms/CancelStaking'
 // import { PropertyTags } from 'src/components/organisms/PropertyTags'
 import TopStakers from 'src/components/organisms/TopStakers'
+import { Avatar } from 'src/components/molecules/Avatar'
 import { useAPY } from 'src/fixtures/dev-kit/hooks'
 import { LoremIpsum } from 'lorem-ipsum'
 import { useGetPropertyAuthenticationQuery, useGetPropertyAggregateLazyQuery } from '@dev/graphql'
@@ -179,11 +180,7 @@ const Author = ({ propertyAddress }: { propertyAddress: string }) => {
           <h2>Created by {data?.name}</h2>
           <Flex>
             <div style={{ width: '150px' }}>
-              <img
-                height="150px"
-                width="150px"
-                src="https://res.cloudinary.com/haas-storage/image/upload/v1598963050/72989_gve7hf.jpg"
-              />
+              <Avatar accountAddress={data?.author.address} size={'150'} />
             </div>
 
             <CreatorContent>

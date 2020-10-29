@@ -1,7 +1,7 @@
 import React, { Fragment, useEffect } from 'react'
 import { useState } from 'react'
 import { useCallback } from 'react'
-import { ClickParam } from 'antd/lib/menu'
+import { MenuInfo } from 'rc-menu/lib/interface'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
 import Hamburger from 'src/components/atoms/Svgs/tsx/Hamburger'
@@ -69,9 +69,9 @@ export const Navigation = ({ handleMenuOpen }: NavigationProps) => {
   }, [])
 
   const handleClick = useCallback(
-    (e: ClickParam) => {
+    (e: MenuInfo) => {
       const { key } = e
-      setCurrent(key)
+      setCurrent(String(key))
     },
     [setCurrent]
   )

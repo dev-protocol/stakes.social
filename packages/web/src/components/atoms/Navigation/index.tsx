@@ -19,7 +19,7 @@ export const NavMenuItem = styled(NavMenu.Item)`
 `
 
 export const AccountBtn = styled.div`
-  color: deeppink;
+  color: white;
   position: absolute;
   font-size: 1.1rem;
   height: 47px;
