@@ -2,6 +2,7 @@ import { SWRCachePath } from './cache-path'
 import useSWR from 'swr'
 import { message } from 'antd'
 import { UnwrapFunc } from '../utility'
+import { whenDefined } from '../utility/logic'
 
 export interface PropertyInformation {
   name: string
@@ -28,10 +29,10 @@ export const useGetPropertytInformation = (propertyAddress: string) => {
   return { data, error }
 }
 
-export const useGetAuthorInformation = (authorAddress: string) => {
-  const { data, error } = useSWR<UnwrapFunc<typeof getAuthorInformation>, Error>(
+export const useGetAuthorInformation = (authorAddress?: string) => {
+  const { data, error } = useSWR<UnwrapFunc<typeof getAuthorInformation> | undefined, Error>(
     SWRCachePath.getAuthorInformation(authorAddress),
-    () => getAuthorInformation(authorAddress),
+    () => whenDefined(authorAddress, address => getAuthorInformation(address)),
     { onError: err => message.error(err.message) }
   )
   return { data, error }

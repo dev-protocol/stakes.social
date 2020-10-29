@@ -41,6 +41,14 @@ describe('devprtcl hooks', () => {
   })
 
   describe('useGetAuthorInformation', () => {
+    test('when given undefined', () => {
+      const data = undefined
+      const error = undefined
+      ;(useSWR as jest.Mock).mockImplementation(() => ({ data, error }))
+      const { result } = renderHook(() => useGetAuthorInformation())
+      expect(result.current.data).toBe(data)
+    })
+
     test('data is undefined', () => {
       const data = undefined
       const error = undefined

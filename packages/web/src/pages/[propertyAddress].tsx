@@ -86,8 +86,11 @@ const Cancel = styled(CancelStaking)`
 // `
 
 const Wrap = styled.div`
-  margin: auto auto;
+  margin: 2rem auto;
   max-width: 1048px;
+  @media (min-width: 768px) {
+    margin: 5rem auto;
+  }
 `
 
 const AboutSection = styled.div`

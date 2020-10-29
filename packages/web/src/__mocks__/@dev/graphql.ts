@@ -34,7 +34,10 @@ export const useGetPropertyAuthenticationQuery = (): Partial<
       {
         authentication_id: 'authentication-id',
         market: 'market-address',
-        metrics: 'metrics-address'
+        metrics: 'metrics-address',
+        property_meta: {
+          author: 'property-author'
+        }
       }
     ]
   }
