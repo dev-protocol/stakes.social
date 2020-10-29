@@ -1,6 +1,7 @@
 import React from 'react'
 import { useQuery } from '@apollo/client'
 import getTopStakersOfPropertyQuery from './query/getTopStakersOfProperty'
+import { Avatar } from 'src/components/molecules/Avatar'
 import styled, { css } from 'styled-components'
 
 interface TopStakersProps {
@@ -105,11 +106,7 @@ const TopStakers = ({ propertyAdress }: TopStakersProps) => {
       <TopStakerRanking>
         {stakerItems?.map(({ account_address, value }, index) => (
           <StakerSection key={index}>
-            <img
-              width="100px"
-              height="100px"
-              src="https://res.cloudinary.com/haas-storage/image/upload/v1598963050/72989_gve7hf.jpg"
-            />
+            <Avatar accountAddress={account_address} size={'100'} />
             <AccountAddress>{account_address}</AccountAddress>
             <span>{`${(value / Math.pow(10, 18)).toFixed(0)}`}</span>
           </StakerSection>
