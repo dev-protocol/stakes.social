@@ -49,7 +49,7 @@ export const PropertyHeader = ({ propertyAddress, apy, creators }: Props) => {
       propertyAddress
     }
   })
-  const { data: dataAuthor } = useGetAuthorInformation(data?.property_authentication?.[0]?.property_meta.author)
+  const { data: dataAuthor } = useGetAuthorInformation(data?.property_authentication?.[0]?.property_meta?.author)
 
   return (
     <ResponsivePropertyAddressFrame>
