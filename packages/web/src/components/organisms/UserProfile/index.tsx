@@ -65,8 +65,8 @@ export const AvatarUpdateForm = ({ accountAddress }: { accountAddress?: string }
   const [account, setAccount] = useState<Account>()
   const { data: user } = useGetAccount(accountAddress || '')
   useEffect(() => {
-    if (user && user.length === 1) {
-      setAccount(user[0])
+    if (user) {
+      setAccount(user)
     }
   }, [user])
 
@@ -150,8 +150,8 @@ export const ProfileUpdateForm = ({ accountAddress }: { accountAddress?: string 
   )
   const { data: user } = useGetAccount(accountAddress || '')
   useEffect(() => {
-    if (user && user.length === 1) {
-      setAccount(user[0])
+    if (user) {
+      setAccount(user)
     }
   }, [user])
 
