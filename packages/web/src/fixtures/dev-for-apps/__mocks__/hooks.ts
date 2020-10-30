@@ -53,3 +53,14 @@ export const useUploadFile = () => {
     }
   }
 }
+
+export const useGetProperty = () => {
+  return [
+    {
+      id: 'id',
+      name: 'name',
+      description: 'description',
+      cover_image: 'cover_image'
+    }
+  ]
+}

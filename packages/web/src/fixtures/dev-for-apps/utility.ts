@@ -15,6 +15,13 @@ export interface Account {
   portrait: any
 }
 
+export interface Property {
+  id: number
+  name: string
+  description: string
+  cover_image: string
+}
+
 export interface UploadFile {
   id: number
   formats: any
@@ -144,3 +151,8 @@ export const postUploadFile = (
     body: formData
   }).then(res => res.json())
 }
+
+export const getProperty = (propertyAddress: string): Promise<Array<Property>> =>
+  fetch(`${StrapiBaseUrl}/properties?address=${propertyAddress}`)
+    .then(res => res.json())
+    .catch(() => [])

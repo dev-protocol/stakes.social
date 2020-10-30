@@ -18,6 +18,8 @@ import { useGetPropertyAuthenticationQuery, useGetPropertyAggregateLazyQuery } f
 import { PlusOutlined } from '@ant-design/icons'
 import Link from 'next/link'
 import { useGetPropertytInformation } from 'src/fixtures/devprtcl/hooks'
+import { useGetProperty } from 'src/fixtures/dev-for-apps/hooks'
+import ReactMarkdown from 'react-markdown'
 
 const lorem = new LoremIpsum({
   sentencesPerParagraph: {
@@ -218,6 +220,7 @@ const PropertyAddressDetail = (_: Props) => {
   const { propertyAddress } = useRouter().query as { propertyAddress: string }
   const { apy, creators } = useAPY()
   const { data } = useGetPropertyAuthenticationQuery({ variables: { propertyAddress } })
+  const { data: dataProperty } = useGetProperty(propertyAddress)
   /* eslint-disable react-hooks/exhaustive-deps */
   // FYI: https://github.com/facebook/react/pull/19062
   const includedAssetList = useMemo(() => data?.property_authentication.map(e => e.authentication_id), [data])
@@ -245,7 +248,7 @@ const PropertyAddressDetail = (_: Props) => {
           <Stake propertyAddress={propertyAddress} />
           <AboutSection>
             <h2>About</h2>
-            <p>{lorem.generateParagraphs(2)}</p>
+            <ReactMarkdown>{dataProperty ? dataProperty[0].description : ''}</ReactMarkdown>
           </AboutSection>
           <AssetsSection>
             <h2>Included assets</h2>
