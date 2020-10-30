@@ -189,3 +189,11 @@ export const createGetVotablePolicy = async () => {
   }
   throw new Error(`No wallet`)
 }
+
+export const propertyAuthor = async (propertyAddress: string) => {
+  const client = newClient()
+  if (client) {
+    return client.property(propertyAddress).author()
+  }
+  return undefined
+}

@@ -106,14 +106,13 @@ export const usePostPropertyTags = (propertyAddress: string, walletAddress: stri
   return { data, postPropertyTagsHandler, isLoading }
 }
 
-export const useGetAccount = (walletAddress: string) => {
-  const shouldFetch = walletAddress !== ''
-  const { data, error, mutate } = useSWR<UnwrapFunc<typeof getAccount>, Error>(
-    shouldFetch ? SWRCachePath.getAccount(walletAddress) : null,
-    () => getAccount(walletAddress),
+export const useGetAccount = (walletAddress?: string) => {
+  const { data, error, mutate } = useSWR<undefined | UnwrapFunc<typeof getAccount>, Error>(
+    SWRCachePath.getAccount(walletAddress),
+    () => whenDefined(walletAddress, x => getAccount(x)),
     { onError: err => message.error(err.message) }
   )
-  return { data, error, mutate }
+  return { data: data ? data[0] : data, error, mutate }
 }
 
 export const useCreateAccount = (walletAddress: string) => {

@@ -1,6 +1,6 @@
 import useSWR from 'swr'
 import { renderHook, act } from '@testing-library/react-hooks'
-import { useGetUser, usePostUser, useGetPropertyTags, usePostPropertyTags } from './hooks'
+import { useGetUser, usePostUser, useGetPropertyTags, usePostPropertyTags, useGetAccount } from './hooks'
 import { postUser, postPropertyTags } from './utility'
 
 jest.mock('swr')
@@ -101,6 +101,33 @@ describe('dev-for-apps hooks for property tags', () => {
       })
       await waitForNextUpdate()
       expect(result.current.isLoading).toBe(false)
+    })
+  })
+})
+
+describe('dev-for-apps hooks with strapi for property', () => {
+  describe('useGetAccount', () => {
+    test('give undefined', async () => {
+      const { result } = renderHook(() => useGetAccount())
+      expect(result.current.data).toBe(undefined)
+    })
+
+    test('success get property', async () => {
+      const data = [{ a: 'a' }]
+      const error = undefined
+      ;(useSWR as jest.Mock).mockImplementation(() => ({ data, error }))
+      const { result } = renderHook(() => useGetAccount('0x01234567890'))
+      expect(result.current.data).toEqual({ a: 'a' })
+    })
+
+    test('failure get profile', async () => {
+      const data = undefined
+      const errorMessage = 'error'
+      const error = new Error(errorMessage)
+      ;(useSWR as jest.Mock).mockImplementation(() => ({ data, error }))
+      const { result } = renderHook(() => useGetAccount('0x01234567890'))
+      expect(result.current.error).toBe(error)
+      expect(result.current.error?.message).toBe(errorMessage)
     })
   })
 })

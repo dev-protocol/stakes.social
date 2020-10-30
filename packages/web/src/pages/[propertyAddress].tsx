@@ -12,13 +12,13 @@ import { CancelStaking } from 'src/components/organisms/CancelStaking'
 // import { PropertyTags } from 'src/components/organisms/PropertyTags'
 import TopStakers from 'src/components/organisms/TopStakers'
 import { Avatar } from 'src/components/molecules/Avatar'
-import { useAPY } from 'src/fixtures/dev-kit/hooks'
+import { useAPY, usePropertyAuthor } from 'src/fixtures/dev-kit/hooks'
 import { LoremIpsum } from 'lorem-ipsum'
 import { useGetPropertyAuthenticationQuery, useGetPropertyAggregateLazyQuery } from '@dev/graphql'
 import { PlusOutlined } from '@ant-design/icons'
 import Link from 'next/link'
 import { useGetPropertytInformation } from 'src/fixtures/devprtcl/hooks'
-import { useGetProperty } from 'src/fixtures/dev-for-apps/hooks'
+import { useGetAccount, useGetProperty } from 'src/fixtures/dev-for-apps/hooks'
 import ReactMarkdown from 'react-markdown'
 
 const lorem = new LoremIpsum({
@@ -157,26 +157,22 @@ const CreatorContent = styled.div`
   margin-left: 20px;
 `
 
-const AboutParagraph = styled.p`
-  @media (min-width: 768px) {
-    padding-top: 15px;
-  }
-`
-
 const Author = ({ propertyAddress }: { propertyAddress: string }) => {
   const { data, error } = useGetPropertytInformation(propertyAddress)
+  const { author: authorAddress } = usePropertyAuthor(propertyAddress)
+  const { data: dataAuthor } = useGetAccount(authorAddress)
 
   const [fetchAggregate, { data: aggregateData }] = useGetPropertyAggregateLazyQuery()
 
   useEffect(() => {
-    if (data?.author.address) {
+    if (authorAddress) {
       fetchAggregate({
         variables: {
-          authorAddress: data?.author?.address
+          authorAddress
         }
       })
     }
-  }, [data, fetchAggregate])
+  }, [authorAddress, fetchAggregate])
 
   return (
     <AuthorContainer>
@@ -185,11 +181,11 @@ const Author = ({ propertyAddress }: { propertyAddress: string }) => {
           <h2>Created by {data?.name}</h2>
           <Flex>
             <div style={{ width: '150px' }}>
-              <Avatar accountAddress={data?.author.address} size={'150'} />
+              <Avatar accountAddress={authorAddress} size={'150'} />
             </div>
 
             <CreatorContent>
-              <AboutParagraph>{lorem.generateSentences(4)}</AboutParagraph>
+              <ReactMarkdown>{dataAuthor ? dataAuthor.biography : ''}</ReactMarkdown>
               <p>
                 <span style={{ color: '#1AC9FC' }}>{aggregateData?.property_meta_aggregate.aggregate?.count || 0}</span>{' '}
                 Pool(s) | <span style={{ color: '#1AC9FC' }}>{data?.author?.karma || 0} </span> Karma

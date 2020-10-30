@@ -1,3 +1,4 @@
+import { always } from 'ramda'
 import { BaseUrl, StrapiBaseUrl } from './cache-path'
 
 export interface UserInformation {
@@ -79,7 +80,7 @@ export const postPropertyTags = (
 export const getAccount = (walletAddress: string): Promise<Array<Account>> =>
   fetch(`${StrapiBaseUrl}/accounts?address=${walletAddress}`)
     .then(res => res.json())
-    .catch(() => [])
+    .catch(always([]))
 
 export const postAccount = (
   signMessage: string,
