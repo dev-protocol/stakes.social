@@ -9,5 +9,6 @@ export const SWRCachePath = {
   getWithdrawalStatus: (propertyAddress: string) => `propertyAddresses/${propertyAddress}/getWithdrawalStatus`,
   calculateMaxRewardsPerBlock: `calculateMaxRewardsPerBlock`,
   totalSupply: `totalSupply`,
-  holdersShare: (amount?: string, lockedups?: string) => `amount/${amount}/lockedups/${lockedups}/holdersShare`
+  holdersShare: (amount?: string, lockedups?: string) => `amount/${amount}/lockedups/${lockedups}/holdersShare`,
+  propertyAuthor: (propertyAddress?: string) => `propertyAddresses/${propertyAddress}/author`
 } as const

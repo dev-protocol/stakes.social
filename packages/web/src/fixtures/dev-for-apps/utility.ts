@@ -1,3 +1,4 @@
+import { always } from 'ramda'
 import { BaseUrl, StrapiBaseUrl } from './cache-path'
 
 export interface UserInformation {
@@ -13,6 +14,13 @@ export interface Account {
   name: string
   biography: string
   portrait: any
+}
+
+export interface Property {
+  id: number
+  name: string
+  description: string
+  cover_image: string
 }
 
 export interface UploadFile {
@@ -72,7 +80,7 @@ export const postPropertyTags = (
 export const getAccount = (walletAddress: string): Promise<Array<Account>> =>
   fetch(`${StrapiBaseUrl}/accounts?address=${walletAddress}`)
     .then(res => res.json())
-    .catch(() => [])
+    .catch(always([]))
 
 export const postAccount = (
   signMessage: string,
@@ -144,3 +152,8 @@ export const postUploadFile = (
     body: formData
   }).then(res => res.json())
 }
+
+export const getProperty = (propertyAddress: string): Promise<Array<Property>> =>
+  fetch(`${StrapiBaseUrl}/properties?address=${propertyAddress}`)
+    .then(res => res.json())
+    .catch(() => [])

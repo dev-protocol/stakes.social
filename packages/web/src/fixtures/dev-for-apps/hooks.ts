@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { SWRCachePath } from './cache-path'
 import useSWR, { mutate } from 'swr'
 import { message } from 'antd'
-import { UnwrapFunc } from '../utility'
+import { UnwrapFunc, whenDefined } from '../utility'
 import {
   getUser,
   postUser,
@@ -11,7 +11,8 @@ import {
   getAccount,
   postAccount,
   putAccount,
-  postUploadFile
+  postUploadFile,
+  getProperty
 } from './utility'
 import { sign } from 'src/fixtures/wallet/utility'
 
@@ -105,14 +106,13 @@ export const usePostPropertyTags = (propertyAddress: string, walletAddress: stri
   return { data, postPropertyTagsHandler, isLoading }
 }
 
-export const useGetAccount = (walletAddress: string) => {
-  const shouldFetch = walletAddress !== ''
-  const { data, error, mutate } = useSWR<UnwrapFunc<typeof getAccount>, Error>(
-    shouldFetch ? SWRCachePath.getAccount(walletAddress) : null,
-    () => getAccount(walletAddress),
+export const useGetAccount = (walletAddress?: string) => {
+  const { data, error, mutate } = useSWR<undefined | UnwrapFunc<typeof getAccount>, Error>(
+    SWRCachePath.getAccount(walletAddress),
+    () => whenDefined(walletAddress, x => getAccount(x)),
     { onError: err => message.error(err.message) }
   )
-  return { data, error, mutate }
+  return { data: data ? data[0] : data, error, mutate }
 }
 
 export const useCreateAccount = (walletAddress: string) => {
@@ -220,4 +220,13 @@ export const useUploadFile = (walletAddress: string) => {
   }
 
   return { postUploadFileHandler, isLoading }
+}
+
+export const useGetProperty = (propertyAddress?: string) => {
+  const { data, error } = useSWR<undefined | UnwrapFunc<typeof getProperty>, Error>(
+    SWRCachePath.getProperty(propertyAddress),
+    () => whenDefined(propertyAddress, x => getProperty(x)),
+    { onError: err => message.error(err.message) }
+  )
+  return { data: data ? data[0] : data, error, mutate }
 }

@@ -4,8 +4,9 @@ export const StrapiBaseUrl = 'https://dev-for-apps-rest.azurewebsites.net'
 export const SWRCachePath = {
   getUser: (walletAddress: string) => `${BaseUrl}/mainnet/user/${walletAddress}`,
   getPropertyTags: (propertyAddress: string) => `${BaseUrl}/mainnet/property/${propertyAddress}/tags`,
-  getAccount: (walletAddress: string) => `${StrapiBaseUrl}/accounts?address=${walletAddress}`,
+  getAccount: (walletAddress?: string) => `${StrapiBaseUrl}/accounts?address=${walletAddress}`,
   createAccount: () => `${StrapiBaseUrl}/accounts`,
   updateAccount: (id: number) => `${StrapiBaseUrl}/accounts/${id}`,
-  uploadFile: () => `${StrapiBaseUrl}/upload`
+  uploadFile: () => `${StrapiBaseUrl}/upload`,
+  getProperty: (propertyAddress?: string) => `${StrapiBaseUrl}/properties?address=${propertyAddress}`
 } as const
