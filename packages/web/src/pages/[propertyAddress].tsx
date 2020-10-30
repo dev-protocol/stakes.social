@@ -13,24 +13,12 @@ import { CancelStaking } from 'src/components/organisms/CancelStaking'
 import TopStakers from 'src/components/organisms/TopStakers'
 import { Avatar } from 'src/components/molecules/Avatar'
 import { useAPY, usePropertyAuthor } from 'src/fixtures/dev-kit/hooks'
-import { LoremIpsum } from 'lorem-ipsum'
 import { useGetPropertyAuthenticationQuery, useGetPropertyAggregateLazyQuery } from '@dev/graphql'
 import { PlusOutlined } from '@ant-design/icons'
 import Link from 'next/link'
 import { useGetPropertytInformation } from 'src/fixtures/devprtcl/hooks'
 import { useGetAccount, useGetProperty } from 'src/fixtures/dev-for-apps/hooks'
 import ReactMarkdown from 'react-markdown'
-
-const lorem = new LoremIpsum({
-  sentencesPerParagraph: {
-    max: 8,
-    min: 4
-  },
-  wordsPerSentence: {
-    max: 16,
-    min: 4
-  }
-})
 
 type Props = {}
 
