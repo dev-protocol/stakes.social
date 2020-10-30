@@ -23,24 +23,21 @@ const getAllTokensClaimed = () =>
   )
 
 export const useTotalRewards = () => {
-  const { data: dataTotalLocked, error: errorTotalLocked } = useSWR<BigNumber, Error>(SWRCachePath.getTotalLocked, () =>
-    totalLocked()
-  )
-  const { data: dataTotalUnlocked, error: errorTotalUnlocked } = useSWR<BigNumber, Error>(
-    SWRCachePath.getTotalUnlocked,
-    () => totalUnlocked()
+  const { data: dataAccounting, error: errorAccounting } = useSWR<UnwrapFunc<typeof updateAccounting>, Error>(
+    SWRCachePath.getUpdateAccounting,
+    () => updateAccounting()
   )
   const { data: dataAllTokensClaimed, error: errorAllTokensClaimed } = useSWR<BigNumber, Error>(
     SWRCachePath.useAllTokensClaimed,
     getAllTokensClaimed
   )
   const data =
-    dataTotalLocked && dataTotalUnlocked && dataAllTokensClaimed
-      ? dataTotalLocked.plus(dataTotalUnlocked).plus(dataAllTokensClaimed)
+    dataAccounting && dataAllTokensClaimed
+      ? toBigNumber(dataAccounting.totalLocked).plus(dataAccounting.totalUnlocked).plus(dataAllTokensClaimed)
       : toEVMBigNumber(0)
   return {
     data,
-    error: errorTotalLocked || errorTotalUnlocked || errorAllTokensClaimed
+    error: errorAccounting || errorAllTokensClaimed
   }
 }
 

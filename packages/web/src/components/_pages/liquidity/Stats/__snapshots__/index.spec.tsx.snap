@@ -1,0 +1,163 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Stats Snapshot 1`] = `
+<body>
+  <div>
+    <div
+      class="rvt3gy-0 dhXBJV"
+    >
+      <div
+        class="ant-statistic"
+      >
+        <div
+          class="ant-statistic-title"
+        >
+          APY(monthly)
+        </div>
+        <div
+          class="ant-statistic-content"
+        >
+          <span
+            class="ant-statistic-content-value"
+          >
+            <span
+              class="ant-statistic-content-value-int"
+            >
+              
+              25,920,000,000,000,000,000
+            </span>
+            
+          </span>
+          <span
+            class="ant-statistic-content-suffix"
+          >
+            %
+          </span>
+        </div>
+      </div>
+      <div
+        class="ant-statistic"
+      >
+        <div
+          class="ant-statistic-title"
+        >
+          Total deposits
+        </div>
+        <div
+          class="ant-statistic-content"
+        >
+          <span
+            class="ant-statistic-content-value"
+          >
+            1e-13
+          </span>
+          <span
+            class="ant-statistic-content-suffix"
+          >
+            USD
+          </span>
+        </div>
+      </div>
+      <div
+        class="ant-statistic"
+      >
+        <div
+          class="ant-statistic-title"
+        >
+          Total rewards
+        </div>
+        <div
+          class="ant-statistic-content"
+        >
+          <span
+            class="ant-statistic-content-value"
+          >
+            1e-13
+          </span>
+          <span
+            class="ant-statistic-content-suffix"
+          >
+            DEV
+          </span>
+        </div>
+      </div>
+      <div
+        class="ant-statistic"
+      >
+        <div
+          class="ant-statistic-title"
+        >
+          Locked rewards
+        </div>
+        <div
+          class="ant-statistic-content"
+        >
+          <span
+            class="ant-statistic-content-value"
+          >
+            <span
+              class="ant-statistic-content-value-int"
+            >
+              
+              0
+            </span>
+            
+          </span>
+          <span
+            class="ant-statistic-content-suffix"
+          >
+            DEV
+          </span>
+        </div>
+      </div>
+      <div
+        class="ant-statistic"
+      >
+        <div
+          class="ant-statistic-title"
+        >
+          Unocked rewards
+        </div>
+        <div
+          class="ant-statistic-content"
+        >
+          <span
+            class="ant-statistic-content-value"
+          >
+            <span
+              class="ant-statistic-content-value-int"
+            >
+              
+              0
+            </span>
+            
+          </span>
+          <span
+            class="ant-statistic-content-suffix"
+          >
+            DEV
+          </span>
+        </div>
+      </div>
+      <div
+        class="ant-statistic"
+      >
+        <div
+          class="ant-statistic-title"
+        >
+          End of the Program
+        </div>
+        <div
+          class="ant-statistic-content"
+        >
+          <span
+            class="ant-statistic-content-value"
+          >
+            1/2/1970
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+`;

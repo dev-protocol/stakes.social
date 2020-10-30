@@ -10,6 +10,7 @@ import styled from 'styled-components'
 import { Deposit } from '../../components/_pages/liquidity/Deposit'
 import { Withdraw } from '../../components/_pages/liquidity/Withdraw'
 import { Statistics } from '../../components/_pages/liquidity/Statistics'
+import { Stats } from 'src/components/_pages/liquidity/Stats'
 
 const NarrowContainer = styled(Container)`
   margin-top: 3rem;
@@ -23,7 +24,8 @@ const LiquidityMining = () => {
   const [, setTab] = useState('0')
   const contents = [
     { name: 'Deposit', node: Deposit() },
-    { name: 'Withdraw', node: Withdraw() }
+    { name: 'Withdraw', node: Withdraw() },
+    { name: 'Stats', node: Stats() }
   ]
 
   return (

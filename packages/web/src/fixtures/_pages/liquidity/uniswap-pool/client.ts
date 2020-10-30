@@ -73,6 +73,7 @@ export const fromTheGraph = async (): Promise<{
     pair: {
       reserveUSD: string
       totalSupply: string
+      reserve0: string
     } | null
   }
 }> => {
@@ -86,6 +87,7 @@ export const fromTheGraph = async (): Promise<{
         pair(id:"${ETHDEV_V2_ADDRESS}") {
           reserveUSD
           totalSupply
+          reserve0
         }
       }`,
       variables: null

@@ -26,15 +26,23 @@ describe('geyser hooks', () => {
       const error = undefined
       ;(useSWR as jest.Mock).mockImplementationOnce(() => ({ data, error }))
       ;(useSWR as jest.Mock).mockImplementationOnce(() => ({ data, error }))
-      ;(useSWR as jest.Mock).mockImplementationOnce(() => ({ data, error }))
       const { result } = renderHook(() => useTotalRewards())
       expect(result.current.data.toString()).toBe('0')
     })
 
     test('success fetching data', () => {
       const error = undefined
-      ;(useSWR as jest.Mock).mockImplementationOnce(() => ({ data: toEVMBigNumber('10000'), error }))
-      ;(useSWR as jest.Mock).mockImplementationOnce(() => ({ data: toEVMBigNumber('20000'), error }))
+      ;(useSWR as jest.Mock).mockImplementationOnce(() => ({
+        data: {
+          totalLocked: '10000',
+          totalUnlocked: '20000',
+          totalsStakingShareSeconds: '10000',
+          totalStakingShareSeconds: '10000',
+          totalUserRewards: '10000',
+          now: '10000'
+        },
+        error
+      }))
       ;(useSWR as jest.Mock).mockImplementationOnce(() => ({ data: toEVMBigNumber('30000'), error }))
       const { result } = renderHook(() => useTotalRewards())
       expect(result.current.data.toString()).toBe('60000')
