@@ -36,8 +36,6 @@ export const Stats = () => {
           .times(ONE_MONTH_SECONDS)
       : toBigNumber(0)
 
-  console.log('totalRewards', totalRewards.toFixed())
-
   return (
     <Wrapper>
       <Statistic title="APY(monthly)" value={apy.dp(5).toNumber()} suffix="%" />
