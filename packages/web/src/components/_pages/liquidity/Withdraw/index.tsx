@@ -49,7 +49,7 @@ export const Withdraw = () => {
             id="amount"
             suffix={
               <>
-                <TokenSymbol>WETHDEV-V2</TokenSymbol>
+                <TokenSymbol>ETHDEV-V2</TokenSymbol>
                 <Max onClick={onClickMax}></Max>
               </>
             }

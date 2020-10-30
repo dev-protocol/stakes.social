@@ -2,6 +2,7 @@ import { Button, Form, Steps } from 'antd'
 import React, { ChangeEvent, useCallback } from 'react'
 import { useState } from 'react'
 import { getUTC, toAmountNumber, toBigNumber, toEVMBigNumber, toNaturalNumber } from 'src/fixtures/utility'
+import styled from 'styled-components'
 import { ETHDEV_V2_ADDRESS, GEYSER_ETHDEV_V2_ADDRESS } from '../../../../fixtures/_pages/liquidity/constants/address'
 import {
   useEstimateReward,
@@ -14,10 +15,16 @@ import {
 } from '../../../../fixtures/_pages/liquidity/geyser/hooks'
 import { allowance, balanceOf } from '../../../../fixtures/_pages/liquidity/uniswap-pool/client'
 import { useApprove } from '../../../../fixtures/_pages/liquidity/uniswap-pool/hooks'
+import { Countdown } from '../Countdown'
 import { Gap } from '../Gap'
 import { LargeInput } from '../LargeInput'
 import { Max } from '../Max'
 import { TokenSymbol } from '../TokenSymbol'
+
+const StyledForm = styled(Form)`
+  display: grid;
+  grid-gap: 2rem;
+`
 
 export const Deposit = () => {
   const { Item } = Form
@@ -96,7 +103,8 @@ export const Deposit = () => {
   }
 
   return (
-    <Form layout="vertical">
+    <StyledForm layout="vertical">
+      <Countdown></Countdown>
       <Item>
         <Gap>
           <label htmlFor="amount">Your amount</label>
@@ -106,7 +114,7 @@ export const Deposit = () => {
             id="amount"
             suffix={
               <>
-                <TokenSymbol>WETHDEV-V2</TokenSymbol>
+                <TokenSymbol>ETHDEV-V2</TokenSymbol>
                 <Max onClick={onClickMax}></Max>
               </>
             }
@@ -119,7 +127,7 @@ export const Deposit = () => {
             target="_blank"
             rel="noreferrer"
           >
-            Provide liquidity on Uniswap to get WETHDEV-V2 ↗
+            Provide liquidity on Uniswap to get ETHDEV-V2 ↗
           </a>
         </Gap>
       </Item>
@@ -136,7 +144,7 @@ export const Deposit = () => {
             title="Approve"
             description={
               <>
-                <p>Please approve the token transfer to deposit WETHDEV-V2.</p>
+                <p>Please approve the token transfer to deposit ETHDEV-V2.</p>
                 <Button
                   disabled={isAlreadyFinished || !requireApproval}
                   type="primary"
@@ -152,7 +160,7 @@ export const Deposit = () => {
             title="Deposit"
             description={
               <>
-                <p>Deposit WETHDEV-V2.</p>
+                <p>Deposit ETHDEV-V2.</p>
                 <Button
                   disabled={isAlreadyFinished || requireApproval || !requireDeposit}
                   type="primary"
@@ -166,6 +174,6 @@ export const Deposit = () => {
           />
         </Steps>
       </Item>
-    </Form>
+    </StyledForm>
   )
 }

@@ -5,10 +5,8 @@ import {
   allTokensClaimed,
   finalUnlockSchedules,
   stake,
-  totalLocked,
   totalStaked,
   totalStakingShares,
-  totalUnlocked,
   unstake,
   updateAccounting
 } from './client'

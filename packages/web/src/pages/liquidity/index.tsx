@@ -9,15 +9,10 @@ import { Nav } from '../../components/_pages/liquidity/Nav'
 import styled from 'styled-components'
 import { Deposit } from '../../components/_pages/liquidity/Deposit'
 import { Withdraw } from '../../components/_pages/liquidity/Withdraw'
-import { Statistics } from '../../components/_pages/liquidity/Statistics'
 import { Stats } from 'src/components/_pages/liquidity/Stats'
 
 const NarrowContainer = styled(Container)`
-  margin-top: 3rem;
   max-width: 640px;
-  @media (min-width: 768px) {
-    margin-top: 6rem;
-  }
 `
 
 const LiquidityMining = () => {
@@ -36,7 +31,6 @@ const LiquidityMining = () => {
         <Headline height={300}>
           <H2>Liquidity Mining</H2>
         </Headline>
-        <Statistics></Statistics>
       </Container>
       <NarrowContainer>
         <Nav contents={contents} onChange={setTab}></Nav>
