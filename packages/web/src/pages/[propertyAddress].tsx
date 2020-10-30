@@ -244,7 +244,7 @@ const PropertyAddressDetail = (_: Props) => {
           <Stake propertyAddress={propertyAddress} />
           <AboutSection>
             <h2>About</h2>
-            <ReactMarkdown>{dataProperty ? dataProperty[0].description : ''}</ReactMarkdown>
+            <ReactMarkdown>{dataProperty ? dataProperty.description : ''}</ReactMarkdown>
           </AboutSection>
           <AssetsSection>
             <h2>Included assets</h2>

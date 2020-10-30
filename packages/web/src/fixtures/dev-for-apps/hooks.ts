@@ -228,5 +228,5 @@ export const useGetProperty = (propertyAddress?: string) => {
     () => whenDefined(propertyAddress, x => getProperty(x)),
     { onError: err => message.error(err.message) }
   )
-  return { data, error, mutate }
+  return { data: data ? data[0] : data, error, mutate }
 }

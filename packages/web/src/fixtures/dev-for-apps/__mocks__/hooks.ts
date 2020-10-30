@@ -27,7 +27,7 @@ export const usePostPropertyTags = () => {
 }
 
 export const useGetAccount = () => {
-  return [{ name: 'dummy name', biography: 'dummy biography' }]
+  return { name: 'dummy name', biography: 'dummy biography' }
 }
 
 export const useCreateAccount = () => {
@@ -55,12 +55,10 @@ export const useUploadFile = () => {
 }
 
 export const useGetProperty = () => {
-  return [
-    {
-      id: 'id',
-      name: 'name',
-      description: 'description',
-      cover_image: 'cover_image'
-    }
-  ]
+  return {
+    id: 'id',
+    name: 'name',
+    description: 'description',
+    cover_image: 'cover_image'
+  }
 }
