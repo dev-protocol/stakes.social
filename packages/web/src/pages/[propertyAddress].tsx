@@ -220,8 +220,6 @@ const PropertyAddressDetail = (_: Props) => {
   // FYI: https://github.com/facebook/react/pull/19062
   const includedAssetList = useMemo(() => data?.property_authentication.map(e => e.authentication_id), [data])
 
-  console.log(dataProperty)
-
   return (
     <>
       <Header></Header>
