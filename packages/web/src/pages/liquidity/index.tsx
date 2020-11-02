@@ -28,7 +28,7 @@ const LiquidityMining = () => {
       <EarlyAccess></EarlyAccess>
       <Header></Header>
       <Container>
-        <Headline height={300}>
+        <Headline height={150}>
           <H2>Liquidity Mining</H2>
         </Headline>
       </Container>
