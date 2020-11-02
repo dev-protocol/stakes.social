@@ -18,10 +18,11 @@ import {
   totalSupply,
   holdersShare,
   createGetVotablePolicy,
-  createAndAuthenticate
+  createAndAuthenticate,
+  propertyAuthor
 } from './client'
 import { SWRCachePath } from './cache-path'
-import { UnwrapFunc, toNaturalNumber, toAmountNumber } from 'src/fixtures/utility'
+import { UnwrapFunc, toNaturalNumber, toAmountNumber, whenDefined } from 'src/fixtures/utility'
 import { getBlockNumber, getDevAmount } from 'src/fixtures/wallet/utility'
 import useSWR from 'swr'
 import { message } from 'antd'
@@ -460,4 +461,16 @@ export const useGetPolicyAddressesList = () => {
       })
   }, [])
   return { getPolicyAddressesList: callback, isLoading, error }
+}
+
+export const usePropertyAuthor = (propertyAddress?: string) => {
+  const { data, error } = useSWR<undefined | UnwrapFunc<typeof totalSupply>, Error>(
+    SWRCachePath.propertyAuthor(propertyAddress),
+    () => whenDefined(propertyAddress, x => propertyAuthor(x)),
+    {
+      onError: err => message.error(err.message)
+    }
+  )
+
+  return { author: data, error }
 }

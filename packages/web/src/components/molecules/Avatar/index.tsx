@@ -19,8 +19,8 @@ export const Avatar = ({ accountAddress, size }: Props) => {
   const [account, setAccount] = useState<Account>()
   const { data: user } = useGetAccount(accountAddress || '')
   useEffect(() => {
-    if (user && user.length === 1) {
-      setAccount(user[0])
+    if (user) {
+      setAccount(user)
     }
   }, [user])
 

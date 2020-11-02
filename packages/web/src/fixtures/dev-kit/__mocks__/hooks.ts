@@ -70,3 +70,7 @@ export const useAnnualSupplyGrowthRatio = () => {
 export const useGetPolicyAddressesList = () => {
   return { getPolicyAddressesList: async () => {} }
 }
+
+export const usePropertyAuthor = (propertyAddress?: string) => {
+  return { author: `${propertyAddress}-author` }
+}
