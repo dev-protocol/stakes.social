@@ -1,33 +1,49 @@
 import Web3 from 'web3'
+import Web3Modal from 'web3modal'
 import { AbiItem } from 'web3-utils'
 import { message } from 'antd'
 
-const cache: WeakMap<NonNullable<Window['ethereum']>, string> = new WeakMap()
+const cache: WeakMap<NonNullable<Web3>, string> = new WeakMap()
 
 export const isAvailableWallet = () => (window?.ethereum ? true : false)
 
-export const connectWallet = async () => {
-  const { ethereum } = window
-  if (ethereum) {
-    return ethereum
-      .enable()
-      .then(() => true)
-      .catch(() => false)
+export const connectWallet = async (web3Modal?: Web3Modal) => {
+  const provider = await web3Modal?.connect().catch(() => {
+    return undefined
+  })
+  if (provider === undefined) {
+    return false
+  }
+
+  const web3: Web3 = new Web3(provider)
+  if (web3) {
+    const account = await web3.eth
+      .getAccounts()
+      .then((accounts: Array<String>) => {
+        if (accounts.length === 0) {
+          return false
+        }
+        return true
+      })
+      .catch((error: any) => {
+        message.error({ content: error.message, key: 'connectWallet' })
+        return false
+      })
+    return account
   }
   return false
 }
 
-export const getAccountAddress = async () => {
-  const { ethereum } = window
-  if (ethereum) {
+export const getAccountAddress = async (web3?: Web3) => {
+  if (web3) {
     return (async fromCache => {
       if (typeof fromCache === 'string') {
         return fromCache
       }
-      const [account] = await new Web3(ethereum).eth.getAccounts()
-      cache.set(ethereum, account)
+      const [account] = await web3.eth.getAccounts()
+      cache.set(web3, account)
       return account
-    })(cache.get(ethereum))
+    })(cache.get(web3))
   }
   return undefined
 }
@@ -58,14 +74,19 @@ export const getBlockNumber = async () => {
   return undefined
 }
 
-export const sign = async (message: string) => {
-  const { ethereum } = window
-  if (ethereum) {
-    const address = await getAccountAddress()
+export const sign = async (web3: any, inputMessage: string) => {
+  const key = '@utility/web3sign'
+  if (web3) {
+    const address = await getAccountAddress(web3)
     if (address === undefined) {
       return undefined
     }
-    const signature = await new Web3(ethereum).eth.personal.sign(message, address, '')
+    const signature = await new web3.eth.personal.sign(inputMessage, address, '')
+      .then((result: string) => result)
+      .catch((error: any) => {
+        message.error({ content: error.message, key })
+        return undefined
+      })
     return signature
   }
   return undefined

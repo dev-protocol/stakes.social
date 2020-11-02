@@ -1,8 +1,9 @@
-import React, { useCallback, useState } from 'react'
+import React, { useCallback, useContext, useState } from 'react'
 import { Button, Form, Input, Tag } from 'antd'
 import { PlusOutlined } from '@ant-design/icons'
 import { useGetAccountAddress } from 'src/fixtures/wallet/hooks'
 import { useGetPropertyTags, usePostPropertyTags } from 'src/fixtures/dev-for-apps/hooks'
+import WalletContext from 'src/context/walletContext'
 import styled from 'styled-components'
 
 interface Props {
@@ -93,7 +94,8 @@ export const TagsForm = ({ propertyAddress, propertyTags, accountAddress }: Tags
 }
 
 export const PropertyTags = ({ propertyAddress }: Props) => {
-  const { accountAddress } = useGetAccountAddress()
+  const { web3 } = useContext(WalletContext)
+  const { accountAddress } = useGetAccountAddress(web3)
   const { data: propertyTags } = useGetPropertyTags(propertyAddress || '')
 
   return (

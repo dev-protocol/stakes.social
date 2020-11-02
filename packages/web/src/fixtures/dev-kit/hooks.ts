@@ -25,8 +25,9 @@ import { UnwrapFunc, toNaturalNumber, toAmountNumber } from 'src/fixtures/utilit
 import { getBlockNumber, getDevAmount } from 'src/fixtures/wallet/utility'
 import useSWR from 'swr'
 import { message } from 'antd'
-import { useState, useCallback } from 'react'
+import { useContext, useState, useCallback } from 'react'
 import BigNumber from 'bignumber.js'
+import WalletContext from 'src/context/walletContext'
 
 export const useGetTotalRewardsAmount = (propertyAddress: string) => {
   const { data, error } = useSWR<UnwrapFunc<typeof getRewardsAmount>, Error>(
@@ -61,9 +62,10 @@ export const useWithdrawHolderReward = () => {
 }
 
 export const useGetMyHolderAmount = (propertyAddress: string) => {
+  const { web3 } = useContext(WalletContext)
   const { data, error } = useSWR<UnwrapFunc<typeof getMyHolderAmount>, Error>(
     SWRCachePath.getMyHolderAmount(propertyAddress),
-    () => getMyHolderAmount(propertyAddress),
+    () => getMyHolderAmount(propertyAddress, web3),
     { onError: err => message.error(err.message) }
   )
   return { myHolderAmount: data ? toNaturalNumber(data) : undefined, error }
@@ -79,9 +81,10 @@ export const useGetTotalStakingAmount = (propertyAddress: string) => {
 }
 
 export const useGetMyStakingRewardAmount = (propertyAddress: string) => {
+  const { web3 } = useContext(WalletContext)
   const { data, error } = useSWR<UnwrapFunc<typeof getMyStakingRewardAmount>, Error>(
     SWRCachePath.getMyStakingRewardAmount(propertyAddress),
-    () => getMyStakingRewardAmount(propertyAddress),
+    () => getMyStakingRewardAmount(propertyAddress, web3),
     {
       onError: err => message.error(err.message)
     }
@@ -91,9 +94,10 @@ export const useGetMyStakingRewardAmount = (propertyAddress: string) => {
 }
 
 export const useGetMyStakingAmount = (propertyAddress: string) => {
+  const { web3 } = useContext(WalletContext)
   const { data, error } = useSWR<UnwrapFunc<typeof getMyStakingAmount>, Error>(
     SWRCachePath.getMyStakingAmount(propertyAddress),
-    () => getMyStakingAmount(propertyAddress),
+    () => getMyStakingAmount(propertyAddress, web3),
     {
       onError: err => message.error(err.message)
     }
@@ -196,9 +200,10 @@ export const useCancelStaking = () => {
 }
 
 export const useGetWithdrawalStatus = (propertyAddress: string) => {
+  const { web3 } = useContext(WalletContext)
   const { data, error } = useSWR<UnwrapFunc<typeof getWithdrawalStatus>, Error>(
     SWRCachePath.getWithdrawalStatus(propertyAddress),
-    () => getWithdrawalStatus(propertyAddress),
+    () => getWithdrawalStatus(propertyAddress, web3),
     {
       onError: err => message.error(err.message)
     }

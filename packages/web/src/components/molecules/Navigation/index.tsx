@@ -1,17 +1,15 @@
-import React, { Fragment, useEffect } from 'react'
-import { useState } from 'react'
+import React, { Fragment } from 'react'
+import { useContext, useState } from 'react'
 import { useCallback } from 'react'
 import { MenuInfo } from 'rc-menu/lib/interface'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
 import Hamburger from 'src/components/atoms/Svgs/tsx/Hamburger'
-import { useConnectWallet } from 'src/fixtures/wallet/hooks'
+import { useConnectWallet, useGetAccountAddress } from 'src/fixtures/wallet/hooks'
 import { UserOutlined } from '@ant-design/icons'
 import { NavMenu, AccountBtn, Connecting, NavMenuItem } from './../../atoms/Navigation/index'
-import Web3 from 'web3'
-import Web3Modal from 'web3modal'
-import WalletConnectProvider from '@walletconnect/web3-provider'
-import Fortmatic from 'fortmatic'
+import WalletContext from 'src/context/walletContext'
+import { useEffectAsync } from 'src/fixtures/utility'
 
 interface NavigationProps {
   isMenuOpen: boolean
@@ -53,20 +51,25 @@ export const Navigation = ({ handleMenuOpen }: NavigationProps) => {
   const router = useRouter()
   const [current, setCurrent] = useState(toKey(router?.pathname) || navs[0].key)
   const [isDesktop, setDesktop] = useState(typeof window !== 'undefined' && window?.innerWidth > 1024)
-  // const { isConnected, connect, isConnecting } = useConnectWallet()
-  const { isConnected, isConnecting } = useConnectWallet()
+  const { isConnected, connect, isConnecting } = useConnectWallet()
+  const { web3, web3Modal } = useContext(WalletContext)
+  const { accountAddress } = useGetAccountAddress(web3)
 
   const updateMedia = () => {
     setDesktop(window.innerWidth > 1024)
   }
 
-  useEffect(() => {
+  useEffectAsync(async () => {
+    if (web3Modal?.cachedProvider) {
+      await web3Modal.connect()
+    }
+
     if (typeof window !== 'undefined') {
       window.addEventListener('resize', updateMedia)
       return () => window.removeEventListener('resize', updateMedia)
     }
     return setDesktop(true)
-  }, [])
+  }, [web3Modal])
 
   const handleClick = useCallback(
     (e: MenuInfo) => {
@@ -77,35 +80,13 @@ export const Navigation = ({ handleMenuOpen }: NavigationProps) => {
   )
 
   const accountBtnClick = async () => {
-    if (isConnected) {
+    if (isConnected || accountAddress) {
       router.push({ pathname: `${navItemAccount.pathname}` })
       setCurrent(navItemAccount.key)
       return
     }
 
-    // connect()
-
-    const providerOptions = {
-      walletconnect: {
-        package: WalletConnectProvider,
-        options: {
-          infuraId: 'xxx7'
-        }
-      },
-      fortmatic: {
-        package: Fortmatic,
-        options: {
-          key: 'pk_test_C2D8B82458A36749'
-        }
-      }
-    }
-    const web3Modal = new Web3Modal({
-      cacheProvider: true,
-      providerOptions
-    })
-    const provider = await web3Modal.connect()
-    const web3: any = new Web3(provider)
-    console.log(web3.eth.getAccounts())
+    connect()
   }
 
   return (
@@ -127,7 +108,7 @@ export const Navigation = ({ handleMenuOpen }: NavigationProps) => {
         <AccountBtn onClick={accountBtnClick}>
           {isConnecting ? (
             <Connecting>{'Connecting...'}</Connecting>
-          ) : !isConnected ? (
+          ) : !isConnected && !accountAddress ? (
             'SignIn'
           ) : (
             <Fragment>

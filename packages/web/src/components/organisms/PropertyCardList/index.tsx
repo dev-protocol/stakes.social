@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react'
+import React, { useCallback, useContext, useState } from 'react'
 import { Spin, Pagination } from 'antd'
 import { useListPropertyQuery, useListPropertyOrderByMostRecentQuery } from '@dev/graphql'
 import { PropertyCard } from './PropertyCard'
@@ -8,6 +8,7 @@ import { useRouter } from 'next/router'
 import styled from 'styled-components'
 import Select from 'react-select'
 import { useGetAccountAddress } from 'src/fixtures/wallet/hooks'
+import WalletContext from 'src/context/walletContext'
 
 interface Props {
   currentPage: number
@@ -58,7 +59,8 @@ const FILTER_OPTIONS = [
 ]
 
 export const PropertyCardList = ({ currentPage, searchWord, sortBy }: Props) => {
-  const { accountAddress } = useGetAccountAddress()
+  const { web3 } = useContext(WalletContext)
+  const { accountAddress } = useGetAccountAddress(web3)
   const [perPage, setPerPage] = useState(DEFAULT_PER_PAGE)
   const { data, loading } = useListPropertyQuery({
     variables: {

@@ -42,9 +42,9 @@ export const getTotalStakingAmountOnProtocol = async () => {
   return undefined
 }
 
-export const getMyHolderAmount = async (propertyAddress: string) => {
+export const getMyHolderAmount = async (propertyAddress: string, web3?: any) => {
   const client = newClient()
-  const accountAddress = await getAccountAddress()
+  const accountAddress = await getAccountAddress(web3)
   if (client && accountAddress) {
     return client
       .withdraw(await getContractAddress(client, 'withdraw'))
@@ -53,9 +53,9 @@ export const getMyHolderAmount = async (propertyAddress: string) => {
   return undefined
 }
 
-export const getMyStakingRewardAmount = async (propertyAddress: string) => {
+export const getMyStakingRewardAmount = async (propertyAddress: string, web3?: any) => {
   const client = newClient()
-  const accountAddress = await getAccountAddress()
+  const accountAddress = await getAccountAddress(web3)
   if (client && accountAddress) {
     return client
       .lockup(await getContractAddress(client, 'lockup'))
@@ -64,9 +64,9 @@ export const getMyStakingRewardAmount = async (propertyAddress: string) => {
   return undefined
 }
 
-export const getMyStakingAmount = async (propertyAddress: string) => {
+export const getMyStakingAmount = async (propertyAddress: string, web3?: any) => {
   const client = newClient()
-  const accountAddress = await getAccountAddress()
+  const accountAddress = await getAccountAddress(web3)
   if (client && accountAddress) {
     return client.lockup(await getContractAddress(client, 'lockup')).getValue(propertyAddress, accountAddress)
   }
@@ -103,9 +103,9 @@ export const cancelStaking = async (propertyAddress: string) => {
   return client.lockup(await getContractAddress(client, 'lockup')).cancel(propertyAddress)
 }
 
-export const getWithdrawalStatus = async (propertyAddress: string) => {
+export const getWithdrawalStatus = async (propertyAddress: string, web3?: any) => {
   const client = newClient()
-  const accountAddress = await getAccountAddress()
+  const accountAddress = await getAccountAddress(web3)
   if (client && accountAddress) {
     return client
       .lockup(await getContractAddress(client, 'lockup'))
