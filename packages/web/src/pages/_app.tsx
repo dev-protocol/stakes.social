@@ -40,7 +40,8 @@ class NextApp extends App<AppInitialProps & WithApolloProps<{}>> {
   getProviderOptions = () => {
     const walletLink = new WalletLink({
       appName: 'name',
-      appLogoUrl: 'logo',
+      appLogoUrl:
+        'https://github.com/dev-protocol/asset.stakes.social/blob/main/public/wallet/coinbase-wallet.jpg?raw=true',
       darkMode: false
     })
     const { WEB3_PROVIDER_ENDPOINT } = process.env
@@ -69,7 +70,8 @@ class NextApp extends App<AppInitialProps & WithApolloProps<{}>> {
       },
       'custom-walletlink': {
         display: {
-          logo: `logo`,
+          logo:
+            'https://github.com/dev-protocol/asset.stakes.social/blob/main/public/wallet/coinbase-wallet.jpg?raw=true',
           name: 'Wallet Link',
           description: 'Scan with WalletLink to connect'
         },
