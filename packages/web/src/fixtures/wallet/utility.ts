@@ -7,7 +7,7 @@ const cache: WeakMap<NonNullable<Web3>, string> = new WeakMap()
 
 export const isAvailableWallet = () => (window?.ethereum ? true : false)
 
-export const connectWallet = async (web3Modal?: Web3Modal) => {
+export const connectWallet = async (setWeb3Handler: Function, web3Modal?: Web3Modal) => {
   const provider = await web3Modal?.connect().catch(() => {
     return undefined
   })
@@ -17,6 +17,7 @@ export const connectWallet = async (web3Modal?: Web3Modal) => {
 
   const web3: Web3 = new Web3(provider)
   if (web3) {
+    setWeb3Handler(web3)
     const account = await web3.eth
       .getAccounts()
       .then((accounts: Array<String>) => {

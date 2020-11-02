@@ -5,11 +5,13 @@ import { createContext } from 'react'
 interface IWallet {
   web3?: Web3
   web3Modal?: Web3Modal
+  setWeb3: Function
 }
 
 export const wallet: IWallet = {
   web3: undefined,
-  web3Modal: undefined
+  web3Modal: undefined,
+  setWeb3: () => {}
 }
 
 const WalletContext = createContext(wallet)

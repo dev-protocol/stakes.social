@@ -154,6 +154,10 @@ class NextApp extends App<AppInitialProps & WithApolloProps<{}>> {
     }
   }
 
+  setWeb3 = (web3: Web3) => {
+    this.setState({ web3 })
+  }
+
   toggleCurrency = () => {
     localStorage.setItem('settings', JSON.stringify({ currency: !this.state.isCurrencyDEV ? 'DEV' : 'USD' }))
     this.setState({ isCurrencyDEV: !this.state.isCurrencyDEV })
@@ -163,7 +167,7 @@ class NextApp extends App<AppInitialProps & WithApolloProps<{}>> {
     const { Component, pageProps, apollo } = this.props
 
     return (
-      <WalletContext.Provider value={{ web3: this.state.web3, web3Modal: this.state.web3Modal }}>
+      <WalletContext.Provider value={{ web3: this.state.web3, setWeb3: this.setWeb3, web3Modal: this.state.web3Modal }}>
         <SettingContext.Provider
           value={{ isCurrencyDEV: this.state.isCurrencyDEV, toggleCurrency: this.toggleCurrency }}
         >

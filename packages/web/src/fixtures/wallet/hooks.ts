@@ -6,14 +6,14 @@ import { useContext, useState } from 'react'
 import WalletContext from 'src/context/walletContext'
 
 export const useConnectWallet = () => {
-  const { web3Modal } = useContext(WalletContext)
+  const { web3Modal, setWeb3 } = useContext(WalletContext)
   const [isConnecting, setIsConnecting] = useState(false)
   const [isConnected, setIsConnected] = useState(false)
 
   const connect = async () => {
     setIsConnecting(true)
     setIsConnected(false)
-    return connectWallet(web3Modal).then(result => {
+    return connectWallet(setWeb3, web3Modal).then(result => {
       setIsConnecting(false)
       setIsConnected(result)
       return result
