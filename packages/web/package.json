@@ -27,7 +27,7 @@
     "core-js": "3.6.5",
     "date-fns": "2.16.1",
     "dotenv": "8.2.0",
-    "dotenv-webpack": "4.0.0",
+    "dotenv-webpack": "5.0.0",
     "faker": "5.1.0",
     "formik": "2.2.1",
     "formik-material-ui": "3.0.0",
