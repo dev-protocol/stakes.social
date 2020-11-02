@@ -11,23 +11,14 @@ import { StakeForm } from 'src/components/organisms/StakeForm'
 import { CancelStaking } from 'src/components/organisms/CancelStaking'
 // import { PropertyTags } from 'src/components/organisms/PropertyTags'
 import TopStakers from 'src/components/organisms/TopStakers'
-import { useAPY } from 'src/fixtures/dev-kit/hooks'
-import { LoremIpsum } from 'lorem-ipsum'
+import { Avatar } from 'src/components/molecules/Avatar'
+import { useAPY, usePropertyAuthor } from 'src/fixtures/dev-kit/hooks'
 import { useGetPropertyAuthenticationQuery, useGetPropertyAggregateLazyQuery } from '@dev/graphql'
 import { PlusOutlined } from '@ant-design/icons'
 import Link from 'next/link'
 import { useGetPropertytInformation } from 'src/fixtures/devprtcl/hooks'
-
-const lorem = new LoremIpsum({
-  sentencesPerParagraph: {
-    max: 8,
-    min: 4
-  },
-  wordsPerSentence: {
-    max: 16,
-    min: 4
-  }
-})
+import { useGetAccount, useGetProperty } from 'src/fixtures/dev-for-apps/hooks'
+import ReactMarkdown from 'react-markdown'
 
 type Props = {}
 
@@ -85,8 +76,11 @@ const Cancel = styled(CancelStaking)`
 // `
 
 const Wrap = styled.div`
-  margin: auto auto;
+  margin: 2rem auto;
   max-width: 1048px;
+  @media (min-width: 768px) {
+    margin: 5rem auto;
+  }
 `
 
 const AboutSection = styled.div`
@@ -151,26 +145,22 @@ const CreatorContent = styled.div`
   margin-left: 20px;
 `
 
-const AboutParagraph = styled.p`
-  @media (min-width: 768px) {
-    padding-top: 15px;
-  }
-`
-
 const Author = ({ propertyAddress }: { propertyAddress: string }) => {
   const { data, error } = useGetPropertytInformation(propertyAddress)
+  const { author: authorAddress } = usePropertyAuthor(propertyAddress)
+  const { data: dataAuthor } = useGetAccount(authorAddress)
 
   const [fetchAggregate, { data: aggregateData }] = useGetPropertyAggregateLazyQuery()
 
   useEffect(() => {
-    if (data?.author.address) {
+    if (authorAddress) {
       fetchAggregate({
         variables: {
-          authorAddress: data?.author?.address
+          authorAddress
         }
       })
     }
-  }, [data, fetchAggregate])
+  }, [authorAddress, fetchAggregate])
 
   return (
     <AuthorContainer>
@@ -179,15 +169,11 @@ const Author = ({ propertyAddress }: { propertyAddress: string }) => {
           <h2>Created by {data?.name}</h2>
           <Flex>
             <div style={{ width: '150px' }}>
-              <img
-                height="150px"
-                width="150px"
-                src="https://res.cloudinary.com/haas-storage/image/upload/v1598963050/72989_gve7hf.jpg"
-              />
+              <Avatar accountAddress={authorAddress} size={'150'} />
             </div>
 
             <CreatorContent>
-              <AboutParagraph>{lorem.generateSentences(4)}</AboutParagraph>
+              <ReactMarkdown>{dataAuthor ? dataAuthor.biography : ''}</ReactMarkdown>
               <p>
                 <span style={{ color: '#1AC9FC' }}>{aggregateData?.property_meta_aggregate.aggregate?.count || 0}</span>{' '}
                 Pool(s) | <span style={{ color: '#1AC9FC' }}>{data?.author?.karma || 0} </span> Karma
@@ -218,6 +204,7 @@ const PropertyAddressDetail = (_: Props) => {
   const { propertyAddress } = useRouter().query as { propertyAddress: string }
   const { apy, creators } = useAPY()
   const { data } = useGetPropertyAuthenticationQuery({ variables: { propertyAddress } })
+  const { data: dataProperty } = useGetProperty(propertyAddress)
   /* eslint-disable react-hooks/exhaustive-deps */
   // FYI: https://github.com/facebook/react/pull/19062
   const includedAssetList = useMemo(() => data?.property_authentication.map(e => e.authentication_id), [data])
@@ -245,7 +232,7 @@ const PropertyAddressDetail = (_: Props) => {
           <Stake propertyAddress={propertyAddress} />
           <AboutSection>
             <h2>About</h2>
-            <p>{lorem.generateParagraphs(2)}</p>
+            <ReactMarkdown>{dataProperty ? dataProperty.description : ''}</ReactMarkdown>
           </AboutSection>
           <AssetsSection>
             <h2>Included assets</h2>

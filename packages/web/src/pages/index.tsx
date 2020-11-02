@@ -29,6 +29,13 @@ const Index = (_: Props) => {
     }
     return ''
   }, [router])
+  const sortBy = useMemo(() => {
+    const { sortby: sortByStr } = router.query
+    if (typeof sortByStr === 'string') {
+      return sortByStr
+    }
+    return ''
+  }, [router])
 
   return (
     <div style={{ background: 'white' }}>
@@ -37,7 +44,7 @@ const Index = (_: Props) => {
       <Banner />
       <div style={{ padding: '1rem', maxWidth: '1200px', marginRight: 'auto', marginLeft: 'auto' }}>
         <SupplySummary apy={apy} creators={creators} annualSupplyGrowthRatio={annualSupplyGrowthRatio} />
-        <PropertyCardList currentPage={page} searchWord={word} />
+        <PropertyCardList currentPage={page} searchWord={word} sortBy={sortBy} />
       </div>
       <Footer />
     </div>

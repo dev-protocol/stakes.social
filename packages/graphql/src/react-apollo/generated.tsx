@@ -2077,12 +2077,16 @@ export type Mutation_Root = {
   delete_property_authentication_by_pk?: Maybe<Property_Authentication>
   delete_property_authentication_deleted?: Maybe<Property_Authentication_Deleted_Mutation_Response>
   delete_property_authentication_deleted_by_pk?: Maybe<Property_Authentication_Deleted>
+  delete_property_balance?: Maybe<Property_Balance_Mutation_Response>
+  delete_property_balance_by_pk?: Maybe<Property_Balance>
   delete_property_factory_create?: Maybe<Property_Factory_Create_Mutation_Response>
   delete_property_factory_create_by_pk?: Maybe<Property_Factory_Create>
   delete_property_lockup?: Maybe<Property_Lockup_Mutation_Response>
   delete_property_lockup_by_pk?: Maybe<Property_Lockup>
   delete_property_meta?: Maybe<Property_Meta_Mutation_Response>
   delete_property_meta_by_pk?: Maybe<Property_Meta>
+  delete_withdraw_property_transfer?: Maybe<Withdraw_Property_Transfer_Mutation_Response>
+  delete_withdraw_property_transfer_by_pk?: Maybe<Withdraw_Property_Transfer>
   insert_account_lockup?: Maybe<Account_Lockup_Mutation_Response>
   insert_account_lockup_one?: Maybe<Account_Lockup>
   insert_dev_property_transfer?: Maybe<Dev_Property_Transfer_Mutation_Response>
@@ -2101,12 +2105,16 @@ export type Mutation_Root = {
   insert_property_authentication_deleted?: Maybe<Property_Authentication_Deleted_Mutation_Response>
   insert_property_authentication_deleted_one?: Maybe<Property_Authentication_Deleted>
   insert_property_authentication_one?: Maybe<Property_Authentication>
+  insert_property_balance?: Maybe<Property_Balance_Mutation_Response>
+  insert_property_balance_one?: Maybe<Property_Balance>
   insert_property_factory_create?: Maybe<Property_Factory_Create_Mutation_Response>
   insert_property_factory_create_one?: Maybe<Property_Factory_Create>
   insert_property_lockup?: Maybe<Property_Lockup_Mutation_Response>
   insert_property_lockup_one?: Maybe<Property_Lockup>
   insert_property_meta?: Maybe<Property_Meta_Mutation_Response>
   insert_property_meta_one?: Maybe<Property_Meta>
+  insert_withdraw_property_transfer?: Maybe<Withdraw_Property_Transfer_Mutation_Response>
+  insert_withdraw_property_transfer_one?: Maybe<Withdraw_Property_Transfer>
   update_account_lockup?: Maybe<Account_Lockup_Mutation_Response>
   update_account_lockup_by_pk?: Maybe<Account_Lockup>
   update_dev_property_transfer?: Maybe<Dev_Property_Transfer_Mutation_Response>
@@ -2125,12 +2133,16 @@ export type Mutation_Root = {
   update_property_authentication_by_pk?: Maybe<Property_Authentication>
   update_property_authentication_deleted?: Maybe<Property_Authentication_Deleted_Mutation_Response>
   update_property_authentication_deleted_by_pk?: Maybe<Property_Authentication_Deleted>
+  update_property_balance?: Maybe<Property_Balance_Mutation_Response>
+  update_property_balance_by_pk?: Maybe<Property_Balance>
   update_property_factory_create?: Maybe<Property_Factory_Create_Mutation_Response>
   update_property_factory_create_by_pk?: Maybe<Property_Factory_Create>
   update_property_lockup?: Maybe<Property_Lockup_Mutation_Response>
   update_property_lockup_by_pk?: Maybe<Property_Lockup>
   update_property_meta?: Maybe<Property_Meta_Mutation_Response>
   update_property_meta_by_pk?: Maybe<Property_Meta>
+  update_withdraw_property_transfer?: Maybe<Withdraw_Property_Transfer_Mutation_Response>
+  update_withdraw_property_transfer_by_pk?: Maybe<Withdraw_Property_Transfer>
 }
 
 export type Mutation_RootDelete_Account_LockupArgs = {
@@ -2208,6 +2220,15 @@ export type Mutation_RootDelete_Property_Authentication_Deleted_By_PkArgs = {
   property: Scalars['String']
 }
 
+export type Mutation_RootDelete_Property_BalanceArgs = {
+  where: Property_Balance_Bool_Exp
+}
+
+export type Mutation_RootDelete_Property_Balance_By_PkArgs = {
+  account_address: Scalars['String']
+  property_address: Scalars['String']
+}
+
 export type Mutation_RootDelete_Property_Factory_CreateArgs = {
   where: Property_Factory_Create_Bool_Exp
 }
@@ -2232,6 +2253,14 @@ export type Mutation_RootDelete_Property_MetaArgs = {
 export type Mutation_RootDelete_Property_Meta_By_PkArgs = {
   author: Scalars['String']
   property: Scalars['String']
+}
+
+export type Mutation_RootDelete_Withdraw_Property_TransferArgs = {
+  where: Withdraw_Property_Transfer_Bool_Exp
+}
+
+export type Mutation_RootDelete_Withdraw_Property_Transfer_By_PkArgs = {
+  event_id: Scalars['String']
 }
 
 export type Mutation_RootInsert_Account_LockupArgs = {
@@ -2324,6 +2353,16 @@ export type Mutation_RootInsert_Property_Authentication_OneArgs = {
   on_conflict?: Maybe<Property_Authentication_On_Conflict>
 }
 
+export type Mutation_RootInsert_Property_BalanceArgs = {
+  objects: Array<Property_Balance_Insert_Input>
+  on_conflict?: Maybe<Property_Balance_On_Conflict>
+}
+
+export type Mutation_RootInsert_Property_Balance_OneArgs = {
+  object: Property_Balance_Insert_Input
+  on_conflict?: Maybe<Property_Balance_On_Conflict>
+}
+
 export type Mutation_RootInsert_Property_Factory_CreateArgs = {
   objects: Array<Property_Factory_Create_Insert_Input>
   on_conflict?: Maybe<Property_Factory_Create_On_Conflict>
@@ -2352,6 +2391,16 @@ export type Mutation_RootInsert_Property_MetaArgs = {
 export type Mutation_RootInsert_Property_Meta_OneArgs = {
   object: Property_Meta_Insert_Input
   on_conflict?: Maybe<Property_Meta_On_Conflict>
+}
+
+export type Mutation_RootInsert_Withdraw_Property_TransferArgs = {
+  objects: Array<Withdraw_Property_Transfer_Insert_Input>
+  on_conflict?: Maybe<Withdraw_Property_Transfer_On_Conflict>
+}
+
+export type Mutation_RootInsert_Withdraw_Property_Transfer_OneArgs = {
+  object: Withdraw_Property_Transfer_Insert_Input
+  on_conflict?: Maybe<Withdraw_Property_Transfer_On_Conflict>
 }
 
 export type Mutation_RootUpdate_Account_LockupArgs = {
@@ -2462,6 +2511,18 @@ export type Mutation_RootUpdate_Property_Authentication_Deleted_By_PkArgs = {
   pk_columns: Property_Authentication_Deleted_Pk_Columns_Input
 }
 
+export type Mutation_RootUpdate_Property_BalanceArgs = {
+  _inc?: Maybe<Property_Balance_Inc_Input>
+  _set?: Maybe<Property_Balance_Set_Input>
+  where: Property_Balance_Bool_Exp
+}
+
+export type Mutation_RootUpdate_Property_Balance_By_PkArgs = {
+  _inc?: Maybe<Property_Balance_Inc_Input>
+  _set?: Maybe<Property_Balance_Set_Input>
+  pk_columns: Property_Balance_Pk_Columns_Input
+}
+
 export type Mutation_RootUpdate_Property_Factory_CreateArgs = {
   _inc?: Maybe<Property_Factory_Create_Inc_Input>
   _set?: Maybe<Property_Factory_Create_Set_Input>
@@ -2496,6 +2557,18 @@ export type Mutation_RootUpdate_Property_Meta_By_PkArgs = {
   _inc?: Maybe<Property_Meta_Inc_Input>
   _set?: Maybe<Property_Meta_Set_Input>
   pk_columns: Property_Meta_Pk_Columns_Input
+}
+
+export type Mutation_RootUpdate_Withdraw_Property_TransferArgs = {
+  _inc?: Maybe<Withdraw_Property_Transfer_Inc_Input>
+  _set?: Maybe<Withdraw_Property_Transfer_Set_Input>
+  where: Withdraw_Property_Transfer_Bool_Exp
+}
+
+export type Mutation_RootUpdate_Withdraw_Property_Transfer_By_PkArgs = {
+  _inc?: Maybe<Withdraw_Property_Transfer_Inc_Input>
+  _set?: Maybe<Withdraw_Property_Transfer_Set_Input>
+  pk_columns: Withdraw_Property_Transfer_Pk_Columns_Input
 }
 
 export type Numeric_Comparison_Exp = {
@@ -2824,6 +2897,7 @@ export type Property_Authentication = {
   metrics: Scalars['String']
   property: Scalars['String']
   property_creation?: Maybe<Property_Factory_Create>
+  property_meta?: Maybe<Property_Meta>
 }
 
 export type Property_Authentication_Aggregate = {
@@ -2891,6 +2965,7 @@ export type Property_Authentication_Bool_Exp = {
   metrics?: Maybe<String_Comparison_Exp>
   property?: Maybe<String_Comparison_Exp>
   property_creation?: Maybe<Property_Factory_Create_Bool_Exp>
+  property_meta?: Maybe<Property_Meta_Bool_Exp>
 }
 
 export enum Property_Authentication_Constraint {
@@ -3158,6 +3233,7 @@ export type Property_Authentication_Insert_Input = {
   metrics?: Maybe<Scalars['String']>
   property?: Maybe<Scalars['String']>
   property_creation?: Maybe<Property_Factory_Create_Obj_Rel_Insert_Input>
+  property_meta?: Maybe<Property_Meta_Obj_Rel_Insert_Input>
 }
 
 export type Property_Authentication_Max_Fields = {
@@ -3219,6 +3295,7 @@ export type Property_Authentication_Order_By = {
   metrics?: Maybe<Order_By>
   property?: Maybe<Order_By>
   property_creation?: Maybe<Property_Factory_Create_Order_By>
+  property_meta?: Maybe<Property_Meta_Order_By>
 }
 
 export type Property_Authentication_Pk_Columns_Input = {
@@ -3310,6 +3387,260 @@ export type Property_Authentication_Variance_Fields = {
 }
 
 export type Property_Authentication_Variance_Order_By = {
+  block_number?: Maybe<Order_By>
+}
+
+export type Property_Balance = {
+  __typename?: 'property_balance'
+  account_address: Scalars['String']
+  balance: Scalars['numeric']
+  block_number: Scalars['Int']
+  is_author: Scalars['Boolean']
+  property_address: Scalars['String']
+}
+
+export type Property_Balance_Aggregate = {
+  __typename?: 'property_balance_aggregate'
+  aggregate?: Maybe<Property_Balance_Aggregate_Fields>
+  nodes: Array<Property_Balance>
+}
+
+export type Property_Balance_Aggregate_Fields = {
+  __typename?: 'property_balance_aggregate_fields'
+  avg?: Maybe<Property_Balance_Avg_Fields>
+  count?: Maybe<Scalars['Int']>
+  max?: Maybe<Property_Balance_Max_Fields>
+  min?: Maybe<Property_Balance_Min_Fields>
+  stddev?: Maybe<Property_Balance_Stddev_Fields>
+  stddev_pop?: Maybe<Property_Balance_Stddev_Pop_Fields>
+  stddev_samp?: Maybe<Property_Balance_Stddev_Samp_Fields>
+  sum?: Maybe<Property_Balance_Sum_Fields>
+  var_pop?: Maybe<Property_Balance_Var_Pop_Fields>
+  var_samp?: Maybe<Property_Balance_Var_Samp_Fields>
+  variance?: Maybe<Property_Balance_Variance_Fields>
+}
+
+export type Property_Balance_Aggregate_FieldsCountArgs = {
+  columns?: Maybe<Array<Property_Balance_Select_Column>>
+  distinct?: Maybe<Scalars['Boolean']>
+}
+
+export type Property_Balance_Aggregate_Order_By = {
+  avg?: Maybe<Property_Balance_Avg_Order_By>
+  count?: Maybe<Order_By>
+  max?: Maybe<Property_Balance_Max_Order_By>
+  min?: Maybe<Property_Balance_Min_Order_By>
+  stddev?: Maybe<Property_Balance_Stddev_Order_By>
+  stddev_pop?: Maybe<Property_Balance_Stddev_Pop_Order_By>
+  stddev_samp?: Maybe<Property_Balance_Stddev_Samp_Order_By>
+  sum?: Maybe<Property_Balance_Sum_Order_By>
+  var_pop?: Maybe<Property_Balance_Var_Pop_Order_By>
+  var_samp?: Maybe<Property_Balance_Var_Samp_Order_By>
+  variance?: Maybe<Property_Balance_Variance_Order_By>
+}
+
+export type Property_Balance_Arr_Rel_Insert_Input = {
+  data: Array<Property_Balance_Insert_Input>
+  on_conflict?: Maybe<Property_Balance_On_Conflict>
+}
+
+export type Property_Balance_Avg_Fields = {
+  __typename?: 'property_balance_avg_fields'
+  balance?: Maybe<Scalars['Float']>
+  block_number?: Maybe<Scalars['Float']>
+}
+
+export type Property_Balance_Avg_Order_By = {
+  balance?: Maybe<Order_By>
+  block_number?: Maybe<Order_By>
+}
+
+export type Property_Balance_Bool_Exp = {
+  _and?: Maybe<Array<Maybe<Property_Balance_Bool_Exp>>>
+  _not?: Maybe<Property_Balance_Bool_Exp>
+  _or?: Maybe<Array<Maybe<Property_Balance_Bool_Exp>>>
+  account_address?: Maybe<String_Comparison_Exp>
+  balance?: Maybe<Numeric_Comparison_Exp>
+  block_number?: Maybe<Int_Comparison_Exp>
+  is_author?: Maybe<Boolean_Comparison_Exp>
+  property_address?: Maybe<String_Comparison_Exp>
+}
+
+export enum Property_Balance_Constraint {
+  PropertyBalancePkey = 'property_balance_pkey'
+}
+
+export type Property_Balance_Inc_Input = {
+  balance?: Maybe<Scalars['numeric']>
+  block_number?: Maybe<Scalars['Int']>
+}
+
+export type Property_Balance_Insert_Input = {
+  account_address?: Maybe<Scalars['String']>
+  balance?: Maybe<Scalars['numeric']>
+  block_number?: Maybe<Scalars['Int']>
+  is_author?: Maybe<Scalars['Boolean']>
+  property_address?: Maybe<Scalars['String']>
+}
+
+export type Property_Balance_Max_Fields = {
+  __typename?: 'property_balance_max_fields'
+  account_address?: Maybe<Scalars['String']>
+  balance?: Maybe<Scalars['numeric']>
+  block_number?: Maybe<Scalars['Int']>
+  property_address?: Maybe<Scalars['String']>
+}
+
+export type Property_Balance_Max_Order_By = {
+  account_address?: Maybe<Order_By>
+  balance?: Maybe<Order_By>
+  block_number?: Maybe<Order_By>
+  property_address?: Maybe<Order_By>
+}
+
+export type Property_Balance_Min_Fields = {
+  __typename?: 'property_balance_min_fields'
+  account_address?: Maybe<Scalars['String']>
+  balance?: Maybe<Scalars['numeric']>
+  block_number?: Maybe<Scalars['Int']>
+  property_address?: Maybe<Scalars['String']>
+}
+
+export type Property_Balance_Min_Order_By = {
+  account_address?: Maybe<Order_By>
+  balance?: Maybe<Order_By>
+  block_number?: Maybe<Order_By>
+  property_address?: Maybe<Order_By>
+}
+
+export type Property_Balance_Mutation_Response = {
+  __typename?: 'property_balance_mutation_response'
+  affected_rows: Scalars['Int']
+  returning: Array<Property_Balance>
+}
+
+export type Property_Balance_Obj_Rel_Insert_Input = {
+  data: Property_Balance_Insert_Input
+  on_conflict?: Maybe<Property_Balance_On_Conflict>
+}
+
+export type Property_Balance_On_Conflict = {
+  constraint: Property_Balance_Constraint
+  update_columns: Array<Property_Balance_Update_Column>
+  where?: Maybe<Property_Balance_Bool_Exp>
+}
+
+export type Property_Balance_Order_By = {
+  account_address?: Maybe<Order_By>
+  balance?: Maybe<Order_By>
+  block_number?: Maybe<Order_By>
+  is_author?: Maybe<Order_By>
+  property_address?: Maybe<Order_By>
+}
+
+export type Property_Balance_Pk_Columns_Input = {
+  account_address: Scalars['String']
+  property_address: Scalars['String']
+}
+
+export enum Property_Balance_Select_Column {
+  AccountAddress = 'account_address',
+  Balance = 'balance',
+  BlockNumber = 'block_number',
+  IsAuthor = 'is_author',
+  PropertyAddress = 'property_address'
+}
+
+export type Property_Balance_Set_Input = {
+  account_address?: Maybe<Scalars['String']>
+  balance?: Maybe<Scalars['numeric']>
+  block_number?: Maybe<Scalars['Int']>
+  is_author?: Maybe<Scalars['Boolean']>
+  property_address?: Maybe<Scalars['String']>
+}
+
+export type Property_Balance_Stddev_Fields = {
+  __typename?: 'property_balance_stddev_fields'
+  balance?: Maybe<Scalars['Float']>
+  block_number?: Maybe<Scalars['Float']>
+}
+
+export type Property_Balance_Stddev_Order_By = {
+  balance?: Maybe<Order_By>
+  block_number?: Maybe<Order_By>
+}
+
+export type Property_Balance_Stddev_Pop_Fields = {
+  __typename?: 'property_balance_stddev_pop_fields'
+  balance?: Maybe<Scalars['Float']>
+  block_number?: Maybe<Scalars['Float']>
+}
+
+export type Property_Balance_Stddev_Pop_Order_By = {
+  balance?: Maybe<Order_By>
+  block_number?: Maybe<Order_By>
+}
+
+export type Property_Balance_Stddev_Samp_Fields = {
+  __typename?: 'property_balance_stddev_samp_fields'
+  balance?: Maybe<Scalars['Float']>
+  block_number?: Maybe<Scalars['Float']>
+}
+
+export type Property_Balance_Stddev_Samp_Order_By = {
+  balance?: Maybe<Order_By>
+  block_number?: Maybe<Order_By>
+}
+
+export type Property_Balance_Sum_Fields = {
+  __typename?: 'property_balance_sum_fields'
+  balance?: Maybe<Scalars['numeric']>
+  block_number?: Maybe<Scalars['Int']>
+}
+
+export type Property_Balance_Sum_Order_By = {
+  balance?: Maybe<Order_By>
+  block_number?: Maybe<Order_By>
+}
+
+export enum Property_Balance_Update_Column {
+  AccountAddress = 'account_address',
+  Balance = 'balance',
+  BlockNumber = 'block_number',
+  IsAuthor = 'is_author',
+  PropertyAddress = 'property_address'
+}
+
+export type Property_Balance_Var_Pop_Fields = {
+  __typename?: 'property_balance_var_pop_fields'
+  balance?: Maybe<Scalars['Float']>
+  block_number?: Maybe<Scalars['Float']>
+}
+
+export type Property_Balance_Var_Pop_Order_By = {
+  balance?: Maybe<Order_By>
+  block_number?: Maybe<Order_By>
+}
+
+export type Property_Balance_Var_Samp_Fields = {
+  __typename?: 'property_balance_var_samp_fields'
+  balance?: Maybe<Scalars['Float']>
+  block_number?: Maybe<Scalars['Float']>
+}
+
+export type Property_Balance_Var_Samp_Order_By = {
+  balance?: Maybe<Order_By>
+  block_number?: Maybe<Order_By>
+}
+
+export type Property_Balance_Variance_Fields = {
+  __typename?: 'property_balance_variance_fields'
+  balance?: Maybe<Scalars['Float']>
+  block_number?: Maybe<Scalars['Float']>
+}
+
+export type Property_Balance_Variance_Order_By = {
+  balance?: Maybe<Order_By>
   block_number?: Maybe<Order_By>
 }
 
@@ -4116,11 +4447,29 @@ export type Property_Meta = {
   __typename?: 'property_meta'
   author: Scalars['String']
   block_number: Scalars['Int']
+  lockup: Array<Property_Lockup>
+  lockup_aggregate: Property_Lockup_Aggregate
   name: Scalars['String']
   property: Scalars['String']
   sender: Scalars['String']
   symbol: Scalars['String']
   total_supply: Scalars['numeric']
+}
+
+export type Property_MetaLockupArgs = {
+  distinct_on?: Maybe<Array<Property_Lockup_Select_Column>>
+  limit?: Maybe<Scalars['Int']>
+  offset?: Maybe<Scalars['Int']>
+  order_by?: Maybe<Array<Property_Lockup_Order_By>>
+  where?: Maybe<Property_Lockup_Bool_Exp>
+}
+
+export type Property_MetaLockup_AggregateArgs = {
+  distinct_on?: Maybe<Array<Property_Lockup_Select_Column>>
+  limit?: Maybe<Scalars['Int']>
+  offset?: Maybe<Scalars['Int']>
+  order_by?: Maybe<Array<Property_Lockup_Order_By>>
+  where?: Maybe<Property_Lockup_Bool_Exp>
 }
 
 export type Property_Meta_Aggregate = {
@@ -4185,6 +4534,7 @@ export type Property_Meta_Bool_Exp = {
   _or?: Maybe<Array<Maybe<Property_Meta_Bool_Exp>>>
   author?: Maybe<String_Comparison_Exp>
   block_number?: Maybe<Int_Comparison_Exp>
+  lockup?: Maybe<Property_Lockup_Bool_Exp>
   name?: Maybe<String_Comparison_Exp>
   property?: Maybe<String_Comparison_Exp>
   sender?: Maybe<String_Comparison_Exp>
@@ -4204,6 +4554,7 @@ export type Property_Meta_Inc_Input = {
 export type Property_Meta_Insert_Input = {
   author?: Maybe<Scalars['String']>
   block_number?: Maybe<Scalars['Int']>
+  lockup?: Maybe<Property_Lockup_Arr_Rel_Insert_Input>
   name?: Maybe<Scalars['String']>
   property?: Maybe<Scalars['String']>
   sender?: Maybe<Scalars['String']>
@@ -4273,6 +4624,7 @@ export type Property_Meta_On_Conflict = {
 export type Property_Meta_Order_By = {
   author?: Maybe<Order_By>
   block_number?: Maybe<Order_By>
+  lockup_aggregate?: Maybe<Property_Lockup_Aggregate_Order_By>
   name?: Maybe<Order_By>
   property?: Maybe<Order_By>
   sender?: Maybe<Order_By>
@@ -4423,6 +4775,9 @@ export type Query_Root = {
   property_authentication_deleted: Array<Property_Authentication_Deleted>
   property_authentication_deleted_aggregate: Property_Authentication_Deleted_Aggregate
   property_authentication_deleted_by_pk?: Maybe<Property_Authentication_Deleted>
+  property_balance: Array<Property_Balance>
+  property_balance_aggregate: Property_Balance_Aggregate
+  property_balance_by_pk?: Maybe<Property_Balance>
   property_factory_create: Array<Property_Factory_Create>
   property_factory_create_aggregate: Property_Factory_Create_Aggregate
   property_factory_create_by_pk?: Maybe<Property_Factory_Create>
@@ -4434,6 +4789,9 @@ export type Query_Root = {
   property_meta: Array<Property_Meta>
   property_meta_aggregate: Property_Meta_Aggregate
   property_meta_by_pk?: Maybe<Property_Meta>
+  withdraw_property_transfer: Array<Withdraw_Property_Transfer>
+  withdraw_property_transfer_aggregate: Withdraw_Property_Transfer_Aggregate
+  withdraw_property_transfer_by_pk?: Maybe<Withdraw_Property_Transfer>
 }
 
 export type Query_RootAccount_LockupArgs = {
@@ -4635,6 +4993,27 @@ export type Query_RootProperty_Authentication_Deleted_By_PkArgs = {
   property: Scalars['String']
 }
 
+export type Query_RootProperty_BalanceArgs = {
+  distinct_on?: Maybe<Array<Property_Balance_Select_Column>>
+  limit?: Maybe<Scalars['Int']>
+  offset?: Maybe<Scalars['Int']>
+  order_by?: Maybe<Array<Property_Balance_Order_By>>
+  where?: Maybe<Property_Balance_Bool_Exp>
+}
+
+export type Query_RootProperty_Balance_AggregateArgs = {
+  distinct_on?: Maybe<Array<Property_Balance_Select_Column>>
+  limit?: Maybe<Scalars['Int']>
+  offset?: Maybe<Scalars['Int']>
+  order_by?: Maybe<Array<Property_Balance_Order_By>>
+  where?: Maybe<Property_Balance_Bool_Exp>
+}
+
+export type Query_RootProperty_Balance_By_PkArgs = {
+  account_address: Scalars['String']
+  property_address: Scalars['String']
+}
+
 export type Query_RootProperty_Factory_CreateArgs = {
   distinct_on?: Maybe<Array<Property_Factory_Create_Select_Column>>
   limit?: Maybe<Scalars['Int']>
@@ -4713,6 +5092,26 @@ export type Query_RootProperty_Meta_By_PkArgs = {
   property: Scalars['String']
 }
 
+export type Query_RootWithdraw_Property_TransferArgs = {
+  distinct_on?: Maybe<Array<Withdraw_Property_Transfer_Select_Column>>
+  limit?: Maybe<Scalars['Int']>
+  offset?: Maybe<Scalars['Int']>
+  order_by?: Maybe<Array<Withdraw_Property_Transfer_Order_By>>
+  where?: Maybe<Withdraw_Property_Transfer_Bool_Exp>
+}
+
+export type Query_RootWithdraw_Property_Transfer_AggregateArgs = {
+  distinct_on?: Maybe<Array<Withdraw_Property_Transfer_Select_Column>>
+  limit?: Maybe<Scalars['Int']>
+  offset?: Maybe<Scalars['Int']>
+  order_by?: Maybe<Array<Withdraw_Property_Transfer_Order_By>>
+  where?: Maybe<Withdraw_Property_Transfer_Bool_Exp>
+}
+
+export type Query_RootWithdraw_Property_Transfer_By_PkArgs = {
+  event_id: Scalars['String']
+}
+
 export type String_Comparison_Exp = {
   _eq?: Maybe<Scalars['String']>
   _gt?: Maybe<Scalars['String']>
@@ -4762,6 +5161,9 @@ export type Subscription_Root = {
   property_authentication_deleted: Array<Property_Authentication_Deleted>
   property_authentication_deleted_aggregate: Property_Authentication_Deleted_Aggregate
   property_authentication_deleted_by_pk?: Maybe<Property_Authentication_Deleted>
+  property_balance: Array<Property_Balance>
+  property_balance_aggregate: Property_Balance_Aggregate
+  property_balance_by_pk?: Maybe<Property_Balance>
   property_factory_create: Array<Property_Factory_Create>
   property_factory_create_aggregate: Property_Factory_Create_Aggregate
   property_factory_create_by_pk?: Maybe<Property_Factory_Create>
@@ -4773,6 +5175,9 @@ export type Subscription_Root = {
   property_meta: Array<Property_Meta>
   property_meta_aggregate: Property_Meta_Aggregate
   property_meta_by_pk?: Maybe<Property_Meta>
+  withdraw_property_transfer: Array<Withdraw_Property_Transfer>
+  withdraw_property_transfer_aggregate: Withdraw_Property_Transfer_Aggregate
+  withdraw_property_transfer_by_pk?: Maybe<Withdraw_Property_Transfer>
 }
 
 export type Subscription_RootAccount_LockupArgs = {
@@ -4974,6 +5379,27 @@ export type Subscription_RootProperty_Authentication_Deleted_By_PkArgs = {
   property: Scalars['String']
 }
 
+export type Subscription_RootProperty_BalanceArgs = {
+  distinct_on?: Maybe<Array<Property_Balance_Select_Column>>
+  limit?: Maybe<Scalars['Int']>
+  offset?: Maybe<Scalars['Int']>
+  order_by?: Maybe<Array<Property_Balance_Order_By>>
+  where?: Maybe<Property_Balance_Bool_Exp>
+}
+
+export type Subscription_RootProperty_Balance_AggregateArgs = {
+  distinct_on?: Maybe<Array<Property_Balance_Select_Column>>
+  limit?: Maybe<Scalars['Int']>
+  offset?: Maybe<Scalars['Int']>
+  order_by?: Maybe<Array<Property_Balance_Order_By>>
+  where?: Maybe<Property_Balance_Bool_Exp>
+}
+
+export type Subscription_RootProperty_Balance_By_PkArgs = {
+  account_address: Scalars['String']
+  property_address: Scalars['String']
+}
+
 export type Subscription_RootProperty_Factory_CreateArgs = {
   distinct_on?: Maybe<Array<Property_Factory_Create_Select_Column>>
   limit?: Maybe<Scalars['Int']>
@@ -5052,6 +5478,333 @@ export type Subscription_RootProperty_Meta_By_PkArgs = {
   property: Scalars['String']
 }
 
+export type Subscription_RootWithdraw_Property_TransferArgs = {
+  distinct_on?: Maybe<Array<Withdraw_Property_Transfer_Select_Column>>
+  limit?: Maybe<Scalars['Int']>
+  offset?: Maybe<Scalars['Int']>
+  order_by?: Maybe<Array<Withdraw_Property_Transfer_Order_By>>
+  where?: Maybe<Withdraw_Property_Transfer_Bool_Exp>
+}
+
+export type Subscription_RootWithdraw_Property_Transfer_AggregateArgs = {
+  distinct_on?: Maybe<Array<Withdraw_Property_Transfer_Select_Column>>
+  limit?: Maybe<Scalars['Int']>
+  offset?: Maybe<Scalars['Int']>
+  order_by?: Maybe<Array<Withdraw_Property_Transfer_Order_By>>
+  where?: Maybe<Withdraw_Property_Transfer_Bool_Exp>
+}
+
+export type Subscription_RootWithdraw_Property_Transfer_By_PkArgs = {
+  event_id: Scalars['String']
+}
+
+export type Withdraw_Property_Transfer = {
+  __typename?: 'withdraw_property_transfer'
+  block_number: Scalars['Int']
+  event_id: Scalars['String']
+  from_address: Scalars['String']
+  log_index: Scalars['Int']
+  property_address: Scalars['String']
+  raw_data: Scalars['String']
+  to_address: Scalars['String']
+  transaction_index: Scalars['Int']
+}
+
+export type Withdraw_Property_Transfer_Aggregate = {
+  __typename?: 'withdraw_property_transfer_aggregate'
+  aggregate?: Maybe<Withdraw_Property_Transfer_Aggregate_Fields>
+  nodes: Array<Withdraw_Property_Transfer>
+}
+
+export type Withdraw_Property_Transfer_Aggregate_Fields = {
+  __typename?: 'withdraw_property_transfer_aggregate_fields'
+  avg?: Maybe<Withdraw_Property_Transfer_Avg_Fields>
+  count?: Maybe<Scalars['Int']>
+  max?: Maybe<Withdraw_Property_Transfer_Max_Fields>
+  min?: Maybe<Withdraw_Property_Transfer_Min_Fields>
+  stddev?: Maybe<Withdraw_Property_Transfer_Stddev_Fields>
+  stddev_pop?: Maybe<Withdraw_Property_Transfer_Stddev_Pop_Fields>
+  stddev_samp?: Maybe<Withdraw_Property_Transfer_Stddev_Samp_Fields>
+  sum?: Maybe<Withdraw_Property_Transfer_Sum_Fields>
+  var_pop?: Maybe<Withdraw_Property_Transfer_Var_Pop_Fields>
+  var_samp?: Maybe<Withdraw_Property_Transfer_Var_Samp_Fields>
+  variance?: Maybe<Withdraw_Property_Transfer_Variance_Fields>
+}
+
+export type Withdraw_Property_Transfer_Aggregate_FieldsCountArgs = {
+  columns?: Maybe<Array<Withdraw_Property_Transfer_Select_Column>>
+  distinct?: Maybe<Scalars['Boolean']>
+}
+
+export type Withdraw_Property_Transfer_Aggregate_Order_By = {
+  avg?: Maybe<Withdraw_Property_Transfer_Avg_Order_By>
+  count?: Maybe<Order_By>
+  max?: Maybe<Withdraw_Property_Transfer_Max_Order_By>
+  min?: Maybe<Withdraw_Property_Transfer_Min_Order_By>
+  stddev?: Maybe<Withdraw_Property_Transfer_Stddev_Order_By>
+  stddev_pop?: Maybe<Withdraw_Property_Transfer_Stddev_Pop_Order_By>
+  stddev_samp?: Maybe<Withdraw_Property_Transfer_Stddev_Samp_Order_By>
+  sum?: Maybe<Withdraw_Property_Transfer_Sum_Order_By>
+  var_pop?: Maybe<Withdraw_Property_Transfer_Var_Pop_Order_By>
+  var_samp?: Maybe<Withdraw_Property_Transfer_Var_Samp_Order_By>
+  variance?: Maybe<Withdraw_Property_Transfer_Variance_Order_By>
+}
+
+export type Withdraw_Property_Transfer_Arr_Rel_Insert_Input = {
+  data: Array<Withdraw_Property_Transfer_Insert_Input>
+  on_conflict?: Maybe<Withdraw_Property_Transfer_On_Conflict>
+}
+
+export type Withdraw_Property_Transfer_Avg_Fields = {
+  __typename?: 'withdraw_property_transfer_avg_fields'
+  block_number?: Maybe<Scalars['Float']>
+  log_index?: Maybe<Scalars['Float']>
+  transaction_index?: Maybe<Scalars['Float']>
+}
+
+export type Withdraw_Property_Transfer_Avg_Order_By = {
+  block_number?: Maybe<Order_By>
+  log_index?: Maybe<Order_By>
+  transaction_index?: Maybe<Order_By>
+}
+
+export type Withdraw_Property_Transfer_Bool_Exp = {
+  _and?: Maybe<Array<Maybe<Withdraw_Property_Transfer_Bool_Exp>>>
+  _not?: Maybe<Withdraw_Property_Transfer_Bool_Exp>
+  _or?: Maybe<Array<Maybe<Withdraw_Property_Transfer_Bool_Exp>>>
+  block_number?: Maybe<Int_Comparison_Exp>
+  event_id?: Maybe<String_Comparison_Exp>
+  from_address?: Maybe<String_Comparison_Exp>
+  log_index?: Maybe<Int_Comparison_Exp>
+  property_address?: Maybe<String_Comparison_Exp>
+  raw_data?: Maybe<String_Comparison_Exp>
+  to_address?: Maybe<String_Comparison_Exp>
+  transaction_index?: Maybe<Int_Comparison_Exp>
+}
+
+export enum Withdraw_Property_Transfer_Constraint {
+  WithdrawPropertyTransferPkey = 'withdraw_property_transfer_pkey'
+}
+
+export type Withdraw_Property_Transfer_Inc_Input = {
+  block_number?: Maybe<Scalars['Int']>
+  log_index?: Maybe<Scalars['Int']>
+  transaction_index?: Maybe<Scalars['Int']>
+}
+
+export type Withdraw_Property_Transfer_Insert_Input = {
+  block_number?: Maybe<Scalars['Int']>
+  event_id?: Maybe<Scalars['String']>
+  from_address?: Maybe<Scalars['String']>
+  log_index?: Maybe<Scalars['Int']>
+  property_address?: Maybe<Scalars['String']>
+  raw_data?: Maybe<Scalars['String']>
+  to_address?: Maybe<Scalars['String']>
+  transaction_index?: Maybe<Scalars['Int']>
+}
+
+export type Withdraw_Property_Transfer_Max_Fields = {
+  __typename?: 'withdraw_property_transfer_max_fields'
+  block_number?: Maybe<Scalars['Int']>
+  event_id?: Maybe<Scalars['String']>
+  from_address?: Maybe<Scalars['String']>
+  log_index?: Maybe<Scalars['Int']>
+  property_address?: Maybe<Scalars['String']>
+  raw_data?: Maybe<Scalars['String']>
+  to_address?: Maybe<Scalars['String']>
+  transaction_index?: Maybe<Scalars['Int']>
+}
+
+export type Withdraw_Property_Transfer_Max_Order_By = {
+  block_number?: Maybe<Order_By>
+  event_id?: Maybe<Order_By>
+  from_address?: Maybe<Order_By>
+  log_index?: Maybe<Order_By>
+  property_address?: Maybe<Order_By>
+  raw_data?: Maybe<Order_By>
+  to_address?: Maybe<Order_By>
+  transaction_index?: Maybe<Order_By>
+}
+
+export type Withdraw_Property_Transfer_Min_Fields = {
+  __typename?: 'withdraw_property_transfer_min_fields'
+  block_number?: Maybe<Scalars['Int']>
+  event_id?: Maybe<Scalars['String']>
+  from_address?: Maybe<Scalars['String']>
+  log_index?: Maybe<Scalars['Int']>
+  property_address?: Maybe<Scalars['String']>
+  raw_data?: Maybe<Scalars['String']>
+  to_address?: Maybe<Scalars['String']>
+  transaction_index?: Maybe<Scalars['Int']>
+}
+
+export type Withdraw_Property_Transfer_Min_Order_By = {
+  block_number?: Maybe<Order_By>
+  event_id?: Maybe<Order_By>
+  from_address?: Maybe<Order_By>
+  log_index?: Maybe<Order_By>
+  property_address?: Maybe<Order_By>
+  raw_data?: Maybe<Order_By>
+  to_address?: Maybe<Order_By>
+  transaction_index?: Maybe<Order_By>
+}
+
+export type Withdraw_Property_Transfer_Mutation_Response = {
+  __typename?: 'withdraw_property_transfer_mutation_response'
+  affected_rows: Scalars['Int']
+  returning: Array<Withdraw_Property_Transfer>
+}
+
+export type Withdraw_Property_Transfer_Obj_Rel_Insert_Input = {
+  data: Withdraw_Property_Transfer_Insert_Input
+  on_conflict?: Maybe<Withdraw_Property_Transfer_On_Conflict>
+}
+
+export type Withdraw_Property_Transfer_On_Conflict = {
+  constraint: Withdraw_Property_Transfer_Constraint
+  update_columns: Array<Withdraw_Property_Transfer_Update_Column>
+  where?: Maybe<Withdraw_Property_Transfer_Bool_Exp>
+}
+
+export type Withdraw_Property_Transfer_Order_By = {
+  block_number?: Maybe<Order_By>
+  event_id?: Maybe<Order_By>
+  from_address?: Maybe<Order_By>
+  log_index?: Maybe<Order_By>
+  property_address?: Maybe<Order_By>
+  raw_data?: Maybe<Order_By>
+  to_address?: Maybe<Order_By>
+  transaction_index?: Maybe<Order_By>
+}
+
+export type Withdraw_Property_Transfer_Pk_Columns_Input = {
+  event_id: Scalars['String']
+}
+
+export enum Withdraw_Property_Transfer_Select_Column {
+  BlockNumber = 'block_number',
+  EventId = 'event_id',
+  FromAddress = 'from_address',
+  LogIndex = 'log_index',
+  PropertyAddress = 'property_address',
+  RawData = 'raw_data',
+  ToAddress = 'to_address',
+  TransactionIndex = 'transaction_index'
+}
+
+export type Withdraw_Property_Transfer_Set_Input = {
+  block_number?: Maybe<Scalars['Int']>
+  event_id?: Maybe<Scalars['String']>
+  from_address?: Maybe<Scalars['String']>
+  log_index?: Maybe<Scalars['Int']>
+  property_address?: Maybe<Scalars['String']>
+  raw_data?: Maybe<Scalars['String']>
+  to_address?: Maybe<Scalars['String']>
+  transaction_index?: Maybe<Scalars['Int']>
+}
+
+export type Withdraw_Property_Transfer_Stddev_Fields = {
+  __typename?: 'withdraw_property_transfer_stddev_fields'
+  block_number?: Maybe<Scalars['Float']>
+  log_index?: Maybe<Scalars['Float']>
+  transaction_index?: Maybe<Scalars['Float']>
+}
+
+export type Withdraw_Property_Transfer_Stddev_Order_By = {
+  block_number?: Maybe<Order_By>
+  log_index?: Maybe<Order_By>
+  transaction_index?: Maybe<Order_By>
+}
+
+export type Withdraw_Property_Transfer_Stddev_Pop_Fields = {
+  __typename?: 'withdraw_property_transfer_stddev_pop_fields'
+  block_number?: Maybe<Scalars['Float']>
+  log_index?: Maybe<Scalars['Float']>
+  transaction_index?: Maybe<Scalars['Float']>
+}
+
+export type Withdraw_Property_Transfer_Stddev_Pop_Order_By = {
+  block_number?: Maybe<Order_By>
+  log_index?: Maybe<Order_By>
+  transaction_index?: Maybe<Order_By>
+}
+
+export type Withdraw_Property_Transfer_Stddev_Samp_Fields = {
+  __typename?: 'withdraw_property_transfer_stddev_samp_fields'
+  block_number?: Maybe<Scalars['Float']>
+  log_index?: Maybe<Scalars['Float']>
+  transaction_index?: Maybe<Scalars['Float']>
+}
+
+export type Withdraw_Property_Transfer_Stddev_Samp_Order_By = {
+  block_number?: Maybe<Order_By>
+  log_index?: Maybe<Order_By>
+  transaction_index?: Maybe<Order_By>
+}
+
+export type Withdraw_Property_Transfer_Sum_Fields = {
+  __typename?: 'withdraw_property_transfer_sum_fields'
+  block_number?: Maybe<Scalars['Int']>
+  log_index?: Maybe<Scalars['Int']>
+  transaction_index?: Maybe<Scalars['Int']>
+}
+
+export type Withdraw_Property_Transfer_Sum_Order_By = {
+  block_number?: Maybe<Order_By>
+  log_index?: Maybe<Order_By>
+  transaction_index?: Maybe<Order_By>
+}
+
+export enum Withdraw_Property_Transfer_Update_Column {
+  BlockNumber = 'block_number',
+  EventId = 'event_id',
+  FromAddress = 'from_address',
+  LogIndex = 'log_index',
+  PropertyAddress = 'property_address',
+  RawData = 'raw_data',
+  ToAddress = 'to_address',
+  TransactionIndex = 'transaction_index'
+}
+
+export type Withdraw_Property_Transfer_Var_Pop_Fields = {
+  __typename?: 'withdraw_property_transfer_var_pop_fields'
+  block_number?: Maybe<Scalars['Float']>
+  log_index?: Maybe<Scalars['Float']>
+  transaction_index?: Maybe<Scalars['Float']>
+}
+
+export type Withdraw_Property_Transfer_Var_Pop_Order_By = {
+  block_number?: Maybe<Order_By>
+  log_index?: Maybe<Order_By>
+  transaction_index?: Maybe<Order_By>
+}
+
+export type Withdraw_Property_Transfer_Var_Samp_Fields = {
+  __typename?: 'withdraw_property_transfer_var_samp_fields'
+  block_number?: Maybe<Scalars['Float']>
+  log_index?: Maybe<Scalars['Float']>
+  transaction_index?: Maybe<Scalars['Float']>
+}
+
+export type Withdraw_Property_Transfer_Var_Samp_Order_By = {
+  block_number?: Maybe<Order_By>
+  log_index?: Maybe<Order_By>
+  transaction_index?: Maybe<Order_By>
+}
+
+export type Withdraw_Property_Transfer_Variance_Fields = {
+  __typename?: 'withdraw_property_transfer_variance_fields'
+  block_number?: Maybe<Scalars['Float']>
+  log_index?: Maybe<Scalars['Float']>
+  transaction_index?: Maybe<Scalars['Float']>
+}
+
+export type Withdraw_Property_Transfer_Variance_Order_By = {
+  block_number?: Maybe<Order_By>
+  log_index?: Maybe<Order_By>
+  transaction_index?: Maybe<Order_By>
+}
+
 export type PropertyFactoryCreateFragment = { __typename?: 'property_factory_create' } & Pick<
   Property_Factory_Create,
   'block_number' | 'event_id' | 'from_address' | 'log_index' | 'property' | 'raw_data' | 'transaction_index'
@@ -5090,7 +5843,7 @@ export type GetPropertyAuthenticationQuery = { __typename?: 'query_root' } & {
     { __typename?: 'property_authentication' } & Pick<
       Property_Authentication,
       'authentication_id' | 'market' | 'metrics'
-    >
+    > & { property_meta?: Maybe<{ __typename?: 'property_meta' } & Pick<Property_Meta, 'author'>> }
   >
 }
 
@@ -5098,10 +5851,42 @@ export type ListPropertyQueryVariables = Exact<{
   limit?: Maybe<Scalars['Int']>
   offset?: Maybe<Scalars['Int']>
   ilike?: Maybe<Scalars['String']>
+  from?: Maybe<Scalars['String']>
 }>
 
 export type ListPropertyQuery = { __typename?: 'query_root' } & {
-  property_factory_create: Array<{ __typename?: 'property_factory_create' } & PropertyFactoryCreateFragment>
+  property_factory_create: Array<
+    { __typename?: 'property_factory_create' } & {
+      authentication: Array<
+        { __typename?: 'property_authentication' } & Pick<Property_Authentication, 'authentication_id'>
+      >
+    } & PropertyFactoryCreateFragment
+  >
+  property_factory_create_aggregate: { __typename?: 'property_factory_create_aggregate' } & {
+    aggregate?: Maybe<
+      { __typename?: 'property_factory_create_aggregate_fields' } & Pick<
+        Property_Factory_Create_Aggregate_Fields,
+        'count'
+      >
+    >
+  }
+}
+
+export type ListPropertyOrderByMostRecentQueryVariables = Exact<{
+  limit?: Maybe<Scalars['Int']>
+  offset?: Maybe<Scalars['Int']>
+  ilike?: Maybe<Scalars['String']>
+  from?: Maybe<Scalars['String']>
+}>
+
+export type ListPropertyOrderByMostRecentQuery = { __typename?: 'query_root' } & {
+  property_factory_create: Array<
+    { __typename?: 'property_factory_create' } & {
+      authentication: Array<
+        { __typename?: 'property_authentication' } & Pick<Property_Authentication, 'authentication_id'>
+      >
+    } & PropertyFactoryCreateFragment
+  >
   property_factory_create_aggregate: { __typename?: 'property_factory_create_aggregate' } & {
     aggregate?: Maybe<
       { __typename?: 'property_factory_create_aggregate_fields' } & Pick<
@@ -5287,6 +6072,9 @@ export const GetPropertyAuthenticationDocument = gql`
       authentication_id
       market
       metrics
+      property_meta {
+        author
+      }
     }
   }
 `
@@ -5330,16 +6118,25 @@ export type GetPropertyAuthenticationQueryResult = Apollo.QueryResult<
   GetPropertyAuthenticationQueryVariables
 >
 export const ListPropertyDocument = gql`
-  query ListProperty($limit: Int, $offset: Int, $ilike: String) {
+  query ListProperty($limit: Int, $offset: Int, $ilike: String, $from: String) {
     property_factory_create(
       limit: $limit
       offset: $offset
       order_by: { current_lockup: { sum_values: desc_nulls_last } }
-      where: { authentication: { authentication_id: { _ilike: $ilike } } }
+      where: {
+        authentication: { authentication_id: { _ilike: $ilike }, property_creation: { from_address: { _eq: $from } } }
+      }
     ) {
+      authentication {
+        authentication_id
+      }
       ...propertyFactoryCreate
     }
-    property_factory_create_aggregate(where: { authentication: { authentication_id: { _ilike: $ilike } } }) {
+    property_factory_create_aggregate(
+      where: {
+        authentication: { authentication_id: { _ilike: $ilike }, property_creation: { from_address: { _eq: $from } } }
+      }
+    ) {
       aggregate {
         count
       }
@@ -5363,6 +6160,7 @@ export const ListPropertyDocument = gql`
  *      limit: // value for 'limit'
  *      offset: // value for 'offset'
  *      ilike: // value for 'ilike'
+ *      from: // value for 'from'
  *   },
  * });
  */
@@ -5379,6 +6177,80 @@ export function useListPropertyLazyQuery(
 export type ListPropertyQueryHookResult = ReturnType<typeof useListPropertyQuery>
 export type ListPropertyLazyQueryHookResult = ReturnType<typeof useListPropertyLazyQuery>
 export type ListPropertyQueryResult = Apollo.QueryResult<ListPropertyQuery, ListPropertyQueryVariables>
+export const ListPropertyOrderByMostRecentDocument = gql`
+  query ListPropertyOrderByMostRecent($limit: Int, $offset: Int, $ilike: String, $from: String) {
+    property_factory_create(
+      limit: $limit
+      offset: $offset
+      order_by: { block_number: desc }
+      where: {
+        authentication: { authentication_id: { _ilike: $ilike }, property_creation: { from_address: { _eq: $from } } }
+      }
+    ) {
+      authentication {
+        authentication_id
+      }
+      ...propertyFactoryCreate
+    }
+    property_factory_create_aggregate(
+      where: {
+        authentication: { authentication_id: { _ilike: $ilike }, property_creation: { from_address: { _eq: $from } } }
+      }
+    ) {
+      aggregate {
+        count
+      }
+    }
+  }
+  ${PropertyFactoryCreateFragmentDoc}
+`
+
+/**
+ * __useListPropertyOrderByMostRecentQuery__
+ *
+ * To run a query within a React component, call `useListPropertyOrderByMostRecentQuery` and pass it any options that fit your needs.
+ * When your component renders, `useListPropertyOrderByMostRecentQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useListPropertyOrderByMostRecentQuery({
+ *   variables: {
+ *      limit: // value for 'limit'
+ *      offset: // value for 'offset'
+ *      ilike: // value for 'ilike'
+ *      from: // value for 'from'
+ *   },
+ * });
+ */
+export function useListPropertyOrderByMostRecentQuery(
+  baseOptions?: Apollo.QueryHookOptions<ListPropertyOrderByMostRecentQuery, ListPropertyOrderByMostRecentQueryVariables>
+) {
+  return Apollo.useQuery<ListPropertyOrderByMostRecentQuery, ListPropertyOrderByMostRecentQueryVariables>(
+    ListPropertyOrderByMostRecentDocument,
+    baseOptions
+  )
+}
+export function useListPropertyOrderByMostRecentLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    ListPropertyOrderByMostRecentQuery,
+    ListPropertyOrderByMostRecentQueryVariables
+  >
+) {
+  return Apollo.useLazyQuery<ListPropertyOrderByMostRecentQuery, ListPropertyOrderByMostRecentQueryVariables>(
+    ListPropertyOrderByMostRecentDocument,
+    baseOptions
+  )
+}
+export type ListPropertyOrderByMostRecentQueryHookResult = ReturnType<typeof useListPropertyOrderByMostRecentQuery>
+export type ListPropertyOrderByMostRecentLazyQueryHookResult = ReturnType<
+  typeof useListPropertyOrderByMostRecentLazyQuery
+>
+export type ListPropertyOrderByMostRecentQueryResult = Apollo.QueryResult<
+  ListPropertyOrderByMostRecentQuery,
+  ListPropertyOrderByMostRecentQueryVariables
+>
 export const ListPropertyMetaDocument = gql`
   query listPropertyMeta($author: String!, $limit: Int, $ilike: String) {
     property_meta(where: { author: { _eq: $author }, property: { _ilike: $ilike } }, limit: $limit) {

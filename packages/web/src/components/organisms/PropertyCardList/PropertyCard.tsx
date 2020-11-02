@@ -7,11 +7,11 @@ import {
   useGetMyStakingRewardAmount
 } from 'src/fixtures/dev-kit/hooks'
 import styled from 'styled-components'
-import { useGetPropertyAuthenticationQuery } from '@dev/graphql'
 import { truncate } from 'src/fixtures/utility/string'
 import { Currency } from 'src/components/molecules/Currency'
 import { LoremIpsum } from 'lorem-ipsum'
 import { useGetPropertytInformation } from 'src/fixtures/devprtcl/hooks'
+import { Avatar } from 'src/components/molecules/Avatar'
 import BigNumber from 'bignumber.js'
 
 const lorem = new LoremIpsum({
@@ -24,8 +24,14 @@ const lorem = new LoremIpsum({
     min: 4
   }
 })
+
+interface Asset {
+  authentication_id: string
+}
+
 interface Props {
   propertyAddress: string
+  assets: Asset[]
 }
 
 const Card = styled.div`
@@ -163,17 +169,13 @@ const FlewColumn = styled.div`
   }
 `
 
-export const PropertyCard = ({ propertyAddress }: Props) => {
+export const PropertyCard = ({ propertyAddress, assets }: Props) => {
   const { totalStakingAmount } = useGetTotalStakingAmount(propertyAddress)
   const { totalRewardsAmount } = useGetTotalRewardsAmount(propertyAddress)
   const { myStakingRewardAmount } = useGetMyStakingRewardAmount(propertyAddress)
   const { myStakingAmount } = useGetMyStakingAmount(propertyAddress)
   const { data: authorData } = useGetPropertytInformation(propertyAddress)
-  const { data } = useGetPropertyAuthenticationQuery({ variables: { propertyAddress } })
-  const includeAssets = useMemo(
-    () => data && truncate(data.property_authentication.map(e => e.authentication_id).join(', '), 24),
-    [data]
-  )
+  const includeAssets = useMemo(() => assets && truncate(assets.map(e => e.authentication_id).join(', '), 24), [assets])
 
   const zeroBigNumber = new BigNumber(0)
 
@@ -190,11 +192,7 @@ export const PropertyCard = ({ propertyAddress }: Props) => {
         <Title>{includeAssets || 'Property'}</Title>
         <PropertyDescription>{lorem.generateSentences(2)}</PropertyDescription>
         <FlexRow>
-          <img
-            width="60"
-            height="60"
-            src="https://res.cloudinary.com/haas-storage/image/upload/v1598963050/72989_gve7hf.jpg"
-          />
+          <Avatar accountAddress={authorData?.author.address} size={'60'} />
           <FlewColumn>
             <span style={{ fontWeight: 'lighter' }}>Creator</span>
             <span style={{ color: '#1AC9FC' }}>{authorData?.name}</span>
