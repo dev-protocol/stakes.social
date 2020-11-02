@@ -51,10 +51,17 @@ const Main = styled(Container)`
 `
 const Cover = styled.div`
   grid-area: cover;
-  img {
-    border-radius: 8px;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2), 0 2px 4px -1px rgba(0, 0, 0, 0.12);
-  }
+  padding-top: 52.5%;
+  position: relative;
+  background-size: cover;
+  border-radius: 5px;
+  background-image: linear-gradient(
+    134deg,
+    rgb(47, 67, 237) 0%,
+    rgb(47, 128, 237) 23%,
+    rgb(47, 172, 237) 46%,
+    rgb(190, 208, 230) 100%
+  );
 `
 
 const TopStakerList = styled(TopStakers)`
@@ -145,6 +152,10 @@ const CreatorContent = styled.div`
   margin-left: 20px;
 `
 
+const CoverImageOrGradient = ({ src }: { src?: string }) => (
+  <Cover style={src ? { backgroundImage: `url(${src})` } : {}} />
+)
+
 const Author = ({ propertyAddress }: { propertyAddress: string }) => {
   const { data, error } = useGetPropertytInformation(propertyAddress)
   const { author: authorAddress } = usePropertyAuthor(propertyAddress)
@@ -209,6 +220,8 @@ const PropertyAddressDetail = (_: Props) => {
   // FYI: https://github.com/facebook/react/pull/19062
   const includedAssetList = useMemo(() => data?.property_authentication.map(e => e.authentication_id), [data])
 
+  console.log(dataProperty)
+
   return (
     <>
       <Header></Header>
@@ -218,13 +231,7 @@ const PropertyAddressDetail = (_: Props) => {
           <PropertyHeader apy={apy} creators={creators} propertyAddress={propertyAddress} />
         </Container>
         <Main>
-          <Cover>
-            <img
-              width="100%"
-              height="auto"
-              src="https://res.cloudinary.com/haas-storage/image/upload/v1598703382/vue_xfbs8i.webp"
-            />
-          </Cover>
+          <CoverImageOrGradient src={dataProperty?.cover_image.url} />
           <div>
             <h2>Top stakers</h2>
             <TopStakerList propertyAdress={propertyAddress} />

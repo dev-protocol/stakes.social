@@ -16,11 +16,24 @@ export interface Account {
   portrait: any
 }
 
+export interface Image {
+  url: string
+  width: number
+  height: number
+  formats: {
+    thumbnail: {
+      url: string
+      width: number
+      height: number
+    }
+  }
+}
+
 export interface Property {
   id: number
   name: string
   description: string
-  cover_image: string
+  cover_image: Image
 }
 
 export interface UploadFile {
