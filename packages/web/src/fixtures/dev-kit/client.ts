@@ -1,3 +1,4 @@
+import Web3 from 'web3'
 import { contractFactory } from '@devprtcl/dev-kit-js'
 import { getAccountAddress } from 'src/fixtures/wallet/utility'
 import { getContractAddress } from './get-contract-address'
@@ -7,8 +8,14 @@ const newClient = () => {
   const { ethereum } = window
   if (ethereum) {
     return contractFactory(ethereum)
+  } else {
+    const { WEB3_PROVIDER_ENDPOINT } = process.env
+    if (!WEB3_PROVIDER_ENDPOINT) {
+      return undefined
+    }
+    const web3 = new Web3(WEB3_PROVIDER_ENDPOINT)
+    return contractFactory(web3.currentProvider)
   }
-  return undefined
 }
 
 export const getRewardsAmount = async (propertyAddress: string) => {
