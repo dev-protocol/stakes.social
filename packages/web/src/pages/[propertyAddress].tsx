@@ -19,6 +19,7 @@ import Link from 'next/link'
 import { useGetPropertytInformation } from 'src/fixtures/devprtcl/hooks'
 import { useGetAccount, useGetProperty } from 'src/fixtures/dev-for-apps/hooks'
 import ReactMarkdown from 'react-markdown'
+import { WithGradient } from 'src/components/atoms/WithGradient'
 
 type Props = {}
 
@@ -186,8 +187,8 @@ const Author = ({ propertyAddress }: { propertyAddress: string }) => {
             <CreatorContent>
               <ReactMarkdown>{dataAuthor ? dataAuthor.biography : ''}</ReactMarkdown>
               <p>
-                <span style={{ color: '#1AC9FC' }}>{aggregateData?.property_meta_aggregate.aggregate?.count || 0}</span>{' '}
-                Pool(s) | <span style={{ color: '#1AC9FC' }}>{data?.author?.karma || 0} </span> Karma
+                <WithGradient>{aggregateData?.property_meta_aggregate.aggregate?.count || 0}</WithGradient> Pool(s) |{' '}
+                <WithGradient>{data?.author?.karma || 0} </WithGradient> Karma
               </p>
             </CreatorContent>
           </Flex>
