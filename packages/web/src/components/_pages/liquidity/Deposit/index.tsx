@@ -41,7 +41,7 @@ export const Deposit = () => {
   const { data: accounting } = useUpdateAccounting()
   const { data: finalUnlockSchedule } = useFinalUnlockSchedules()
 
-  const { data: isAlreadyFinished } = useIsAlreadyFinished()
+  const [isAlreadyFinished] = useIsAlreadyFinished(useState<boolean>(false))
   const estimate = useEstimateReward()
   const { approve } = useApprove()
   const { stake } = useStake()

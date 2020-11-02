@@ -1,3 +1,4 @@
+import { Dispatch, SetStateAction } from 'react'
 import { SWRCachePath } from './cache-path'
 import BigNumber from 'bignumber.js'
 import useSWR from 'swr'
@@ -10,10 +11,10 @@ import {
   unstake,
   updateAccounting
 } from './client'
-import { useCallback, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { message } from 'antd'
 import { getUTC, toBigNumber, toEVMBigNumber, UnwrapFunc } from 'src/fixtures/utility'
-import { INITIAL_SHARES_PER_TOKEN, ONE_MONTH_SECONDS } from '../constants/number'
+import { INITIAL_SHARES_PER_TOKEN, ONE_MONTH_SECONDS, SYSTEM_SETTIMEOUT_MAXIMUM_DELAY_VALUE } from '../constants/number'
 
 const getAllTokensClaimed = () =>
   allTokensClaimed().then(allEvents =>
@@ -190,14 +191,16 @@ export const useEstimateReward = () => {
   )
 }
 
-export const useIsAlreadyFinished = () => {
-  const { data, error } = useSWR<boolean, Error>(SWRCachePath.useIsAlreadyFinished, async () => {
-    const { endAtSec } = await finalUnlockSchedules()
+export const useIsAlreadyFinished = ([state, stateSetter]: [boolean, Dispatch<SetStateAction<boolean>>]): [
+  boolean,
+  Dispatch<SetStateAction<boolean>>
+] => {
+  finalUnlockSchedules().then(({ endAtSec }) => {
     const current = getUTC()
-    return Number(endAtSec) <= current
+    const duration = (d => (d > SYSTEM_SETTIMEOUT_MAXIMUM_DELAY_VALUE ? SYSTEM_SETTIMEOUT_MAXIMUM_DELAY_VALUE : d))(
+      (Number(endAtSec) - current) * 1000
+    )
+    setTimeout(() => stateSetter(true), duration)
   })
-  return {
-    data,
-    error
-  }
+  return [state, stateSetter]
 }

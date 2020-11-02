@@ -1,8 +1,9 @@
 import { renderHook, act } from '@testing-library/react-hooks'
 import { message } from 'antd'
-import { toBigNumber, toEVMBigNumber } from 'src/fixtures/utility'
+import { useState } from 'react'
+import { getUTC, toBigNumber, toEVMBigNumber } from 'src/fixtures/utility'
 import useSWR from 'swr'
-import { stake, unstake } from './client'
+import { finalUnlockSchedules, stake, unstake } from './client'
 import {
   useAllTokensClaimed,
   useEstimateReward,
@@ -397,29 +398,16 @@ describe('geyser hooks', () => {
   })
 
   describe('useIsAlreadyFinished', () => {
-    test('data is undefined', () => {
-      const data = undefined
-      const error = undefined
-      ;(useSWR as jest.Mock).mockImplementationOnce(() => ({ data, error }))
-      const { result } = renderHook(() => useIsAlreadyFinished())
-      expect(result.current.data).toBe(data)
-    })
-
-    test('success fetching data', () => {
-      const error = undefined
-      ;(useSWR as jest.Mock).mockImplementationOnce(() => ({ data: true, error }))
-      const { result } = renderHook(() => useIsAlreadyFinished())
-      expect(result.current.data).toBe(true)
-    })
-
-    test('failure fetching data', () => {
-      const data = undefined
-      const errorMessage = 'error'
-      const error = new Error(errorMessage)
-      ;(useSWR as jest.Mock).mockImplementation(() => ({ data, error }))
-      const { result } = renderHook(() => useIsAlreadyFinished())
-      expect(result.current.error).toBe(error)
-      expect(result.current.error?.message).toBe(errorMessage)
+    test('success fetching data', async () => {
+      ;(finalUnlockSchedules as jest.Mock).mockImplementation(() =>
+        Promise.resolve({
+          endAtSec: getUTC() + 1
+        })
+      )
+      const { result, waitForNextUpdate } = renderHook(() => useIsAlreadyFinished(useState<boolean>(false)))
+      expect(result.current[0]).toBe(false)
+      await waitForNextUpdate()
+      expect(result.current[0]).toBe(true)
     })
   })
 })
