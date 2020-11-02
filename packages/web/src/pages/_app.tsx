@@ -46,7 +46,9 @@ class NextApp extends App<AppInitialProps & WithApolloProps<{}>> {
     const { WEB3_PROVIDER_ENDPOINT } = process.env
     const { INFURA_ID } = process.env
     const { FORTMATIC_KEY } = process.env
-    const walletLinkProvider = walletLink.makeWeb3Provider(WEB3_PROVIDER_ENDPOINT || '', 1)
+    const walletLinkProvider = WEB3_PROVIDER_ENDPOINT
+      ? walletLink.makeWeb3Provider(WEB3_PROVIDER_ENDPOINT || '', 1)
+      : null
     const web3ForInjected = detectEthereumProvider()
 
     return {
@@ -115,7 +117,9 @@ class NextApp extends App<AppInitialProps & WithApolloProps<{}>> {
 
     if (!ethereum) {
       const { WEB3_PROVIDER_ENDPOINT } = process.env
-      if (WEB3_PROVIDER_ENDPOINT) {
+      const { INFURA_ID } = process.env
+      const { FORTMATIC_KEY } = process.env
+      if (WEB3_PROVIDER_ENDPOINT || INFURA_ID || FORTMATIC_KEY) {
         return
       }
 
