@@ -115,8 +115,13 @@ export const getDevAmount = async (walletAddress: string) => {
     }
   ]
   const { ethereum } = window
-  if (ethereum) {
-    const web3 = new Web3(ethereum)
+  const { WEB3_PROVIDER_ENDPOINT } = process.env
+  if (!ethereum && !WEB3_PROVIDER_ENDPOINT) {
+    return undefined
+  }
+
+  const web3 = WEB3_PROVIDER_ENDPOINT ? new Web3(WEB3_PROVIDER_ENDPOINT) : new Web3(ethereum || null)
+  if (web3) {
     // dev value of team wallet
     const contract: any = new web3.eth.Contract(abi, '0x5caf454ba92e6f2c929df14667ee360ed9fd5b26')
     const balance = await contract.methods.balanceOf(walletAddress).call()
