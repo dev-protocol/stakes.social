@@ -197,3 +197,12 @@ export const propertyAuthor = async (propertyAddress: string) => {
   }
   return undefined
 }
+
+export const balanceOf = async () => {
+  const client = newClient()
+  const accountAddress = await getAccountAddress()
+  if (client && accountAddress) {
+    return client.dev(await getContractAddress(client, 'token')).balanceOf(accountAddress)
+  }
+  return undefined
+}

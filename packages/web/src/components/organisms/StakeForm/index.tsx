@@ -1,8 +1,10 @@
-import React, { useCallback } from 'react'
+import React, { useCallback, useState, Dispatch, SetStateAction, ChangeEvent } from 'react'
+import { balanceOf, getMyStakingAmount } from 'src/fixtures/dev-kit/client'
 import { useStake, useWithdrawStakingReward } from 'src/fixtures/dev-kit/hooks'
 import { Input } from 'antd'
 import styled from 'styled-components'
 import { Max } from 'src/components/molecules/Max'
+import { toNaturalNumber } from 'src/fixtures/utility'
 
 interface Props {
   className?: string
@@ -63,7 +65,20 @@ const createSuffix = ({ onClick }: { onClick: () => void }) => (
   </>
 )
 
+const handleOnChange = (setter: Dispatch<SetStateAction<string>>) => (event: ChangeEvent<HTMLInputElement>) => {
+  setter(event.target.value)
+}
+
+const handleClickMax = (
+  setter: Dispatch<SetStateAction<string>>,
+  fetcher: () => Promise<string | number | undefined>
+) => async () => {
+  setter(await fetcher().then(x => toNaturalNumber(x ?? 0).toFixed()))
+}
+
 export const StakeForm = ({ className, propertyAddress }: Props) => {
+  const [stakeAmount, setStakeAmount] = useState<string>('')
+  const [withdrawAmount, setWithdrawAmount] = useState<string>('')
   const { stake } = useStake()
   const { withdrawStakingReward } = useWithdrawStakingReward()
   const stakeFor = useCallback(
@@ -80,8 +95,6 @@ export const StakeForm = ({ className, propertyAddress }: Props) => {
     },
     [withdrawStakingReward, propertyAddress]
   )
-  // TODO: Implement
-  const mockOnClick = console.log
 
   return (
     <StakeContainer className={className}>
@@ -91,8 +104,10 @@ export const StakeForm = ({ className, propertyAddress }: Props) => {
           id="stake"
           enterButton="Stake"
           size="large"
+          value={stakeAmount}
+          onChange={handleOnChange(setStakeAmount)}
           onSearch={stakeFor}
-          suffix={createSuffix({ onClick: mockOnClick })}
+          suffix={createSuffix({ onClick: handleClickMax(setStakeAmount, () => balanceOf()) })}
           type="number"
         />
       </FormContainer>
@@ -102,8 +117,12 @@ export const StakeForm = ({ className, propertyAddress }: Props) => {
           id="withdraw"
           enterButton="Withdraw"
           size="large"
+          value={withdrawAmount}
+          onChange={handleOnChange(setWithdrawAmount)}
           onSearch={withdrawFor}
-          suffix={createSuffix({ onClick: mockOnClick })}
+          suffix={createSuffix({
+            onClick: handleClickMax(setWithdrawAmount, () => getMyStakingAmount(propertyAddress))
+          })}
           type="number"
         />
       </FormContainer>
