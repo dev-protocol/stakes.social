@@ -1,10 +1,16 @@
-import React, { useCallback, useState, Dispatch, SetStateAction, ChangeEvent } from 'react'
+import React, { useCallback, useState, useEffect, Dispatch, SetStateAction, ChangeEvent } from 'react'
 import { balanceOf, getMyStakingAmount } from 'src/fixtures/dev-kit/client'
-import { useStake, useWithdrawStakingReward } from 'src/fixtures/dev-kit/hooks'
-import { Input } from 'antd'
+import {
+  useStake,
+  useWithdrawStakingReward,
+  useAPY,
+  useGetMyHolderAmount,
+  useGetMyStakingAmount
+} from 'src/fixtures/dev-kit/hooks'
+import { Card, Input } from 'antd'
 import styled from 'styled-components'
 import { Max } from 'src/components/molecules/Max'
-import { toNaturalNumber } from 'src/fixtures/utility'
+import { toBigNumber, toNaturalNumber, whenDefined } from 'src/fixtures/utility'
 
 interface Props {
   className?: string
@@ -58,6 +64,24 @@ const FormContainer = styled.div`
   }
 `
 
+const Estimated = styled(Card)`
+  border-color: #00000055;
+  background: transparent;
+  .ant-card-head {
+    padding: 0 1.5rem;
+  }
+  .ant-card-head-title {
+    font-size: 0.5rem 0;
+  }
+  .ant-card-body {
+    font-size: 1.4rem;
+    padding: 1rem 1.5rem;
+  }
+  p {
+    margin: 0;
+  }
+`
+
 const createSuffix = ({ onClick }: { onClick: () => void }) => (
   <>
     <span>DEV</span>
@@ -79,7 +103,14 @@ const handleClickMax = (
 export const StakeForm = ({ className, propertyAddress }: Props) => {
   const [stakeAmount, setStakeAmount] = useState<string>('')
   const [withdrawAmount, setWithdrawAmount] = useState<string>('')
+  const [estimatedStakingAPY, setEstimatedStakingAPY] = useState<string>('')
+  const [claimedTokens, setClaimedTokens] = useState<string | undefined>()
+  const [interestTokens, setInterestTokens] = useState<string | undefined>()
+  const [withdrawableTokens, setWithdrawableTokens] = useState<string>('')
+  const { myHolderAmount } = useGetMyHolderAmount(propertyAddress)
+  const { myStakingAmount } = useGetMyStakingAmount(propertyAddress)
   const { stake } = useStake()
+  const { apy } = useAPY()
   const { withdrawStakingReward } = useWithdrawStakingReward()
   const stakeFor = useCallback(
     (amount: string) => {
@@ -96,6 +127,22 @@ export const StakeForm = ({ className, propertyAddress }: Props) => {
     [withdrawStakingReward, propertyAddress]
   )
 
+  useEffect(() => {
+    const estimate = whenDefined(apy, x => x.times(stakeAmount || 0).div(100))
+    setEstimatedStakingAPY(estimate ? estimate.dp(5).toFixed() : '0')
+  }, [apy, stakeAmount, setEstimatedStakingAPY])
+
+  useEffect(() => {
+    const reward = whenDefined(myStakingAmount, toNaturalNumber)
+    const staking = (staked =>
+      whenDefined(staked, x => (x.isGreaterThan(withdrawAmount) ? toBigNumber(withdrawAmount) : x)))(
+      whenDefined(myStakingAmount, toNaturalNumber)
+    )
+    setClaimedTokens(whenDefined(staking, x => x.dp(5).toFixed()))
+    setInterestTokens(whenDefined(reward, x => x.dp(5).toFixed()))
+    setWithdrawableTokens(staking && reward ? staking.plus(reward).dp(5).toFixed() : '0')
+  }, [myHolderAmount, myStakingAmount, withdrawAmount, setClaimedTokens])
+
   return (
     <StakeContainer className={className}>
       <FormContainer>
@@ -110,6 +157,9 @@ export const StakeForm = ({ className, propertyAddress }: Props) => {
           suffix={createSuffix({ onClick: handleClickMax(setStakeAmount, () => balanceOf()) })}
           type="number"
         />
+        <Estimated title="Estimated Annual Reward">
+          <p>{estimatedStakingAPY || 0} DEV</p>
+        </Estimated>
       </FormContainer>
       <FormContainer>
         <label htmlFor="withdraw">Withdraw</label>
@@ -125,6 +175,12 @@ export const StakeForm = ({ className, propertyAddress }: Props) => {
           })}
           type="number"
         />
+        <Estimated title="Withdrawable Amount">
+          <p>
+            {withdrawableTokens || 0} DEV{' '}
+            {claimedTokens && interestTokens ? `(${claimedTokens} + ${interestTokens})` : ''}
+          </p>
+        </Estimated>
       </FormContainer>
     </StakeContainer>
   )

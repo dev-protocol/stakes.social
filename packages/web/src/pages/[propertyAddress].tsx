@@ -229,7 +229,7 @@ const PropertyAddressDetail = (_: Props) => {
           <PropertyHeader apy={apy} creators={creators} propertyAddress={propertyAddress} />
         </Container>
         <Main>
-          <CoverImageOrGradient src={dataProperty?.cover_image.url} />
+          <CoverImageOrGradient src={dataProperty?.cover_image?.url} />
           <div>
             <h2>Top stakers</h2>
             <TopStakerList propertyAdress={propertyAddress} />

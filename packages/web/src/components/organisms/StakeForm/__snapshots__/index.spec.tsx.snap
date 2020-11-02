@@ -59,6 +59,31 @@ exports[`StakeForm Snapshot 1`] = `
             </span>
           </span>
         </span>
+        <div
+          class="ant-card ant-card-bordered w1tfby-3 fIWfUe"
+        >
+          <div
+            class="ant-card-head"
+          >
+            <div
+              class="ant-card-head-wrapper"
+            >
+              <div
+                class="ant-card-head-title"
+              >
+                Estimated Annual Reward
+              </div>
+            </div>
+          </div>
+          <div
+            class="ant-card-body"
+          >
+            <p>
+              0
+               DEV
+            </p>
+          </div>
+        </div>
       </div>
       <div
         class="w1tfby-2 jebiJz"
@@ -113,6 +138,33 @@ exports[`StakeForm Snapshot 1`] = `
             </span>
           </span>
         </span>
+        <div
+          class="ant-card ant-card-bordered w1tfby-3 fIWfUe"
+        >
+          <div
+            class="ant-card-head"
+          >
+            <div
+              class="ant-card-head-wrapper"
+            >
+              <div
+                class="ant-card-head-title"
+              >
+                Withdrawable Amount
+              </div>
+            </div>
+          </div>
+          <div
+            class="ant-card-body"
+          >
+            <p>
+              0
+               DEV
+               
+              (0 + 0)
+            </p>
+          </div>
+        </div>
       </div>
     </div>
   </div>
