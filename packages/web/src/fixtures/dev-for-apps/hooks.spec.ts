@@ -2,10 +2,12 @@ import useSWR from 'swr'
 import { renderHook, act } from '@testing-library/react-hooks'
 import { useGetUser, usePostUser, useGetPropertyTags, usePostPropertyTags } from './hooks'
 import { postUser, postPropertyTags } from './utility'
+import { sign } from 'src/fixtures/wallet/utility'
 
 jest.mock('swr')
 jest.mock('src/fixtures/utility')
 jest.mock('src/fixtures/dev-for-apps/utility.ts')
+jest.mock('src/fixtures/wallet/utility.ts')
 
 describe('dev-for-apps hooks for user profile', () => {
   describe('useGetUser', () => {
@@ -44,6 +46,7 @@ describe('dev-for-apps hooks for user profile', () => {
       const error = new Error(errorMessage)
       ;(useSWR as jest.Mock).mockImplementation(() => ({ data, error, mutate: () => {} }))
       ;(postUser as jest.Mock).mockResolvedValue({ displayName: 'name' })
+      ;(sign as jest.Mock).mockImplementation(() => 'test sign message')
       const { result, waitForNextUpdate } = renderHook(() => usePostUser('0x01234567890'))
       act(() => {
         result.current.postUserHandler('dummy')
