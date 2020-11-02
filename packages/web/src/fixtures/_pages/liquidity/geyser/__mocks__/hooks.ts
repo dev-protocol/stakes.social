@@ -63,5 +63,5 @@ export const useEstimateReward = () => {
 }
 
 export const useIsAlreadyFinished = () => {
-  return async () => false
+  return [false]
 }
