@@ -72,8 +72,8 @@ export const unstake = async (amount: BigNumber) => {
     : new Promise(resolve => setTimeout(resolve, 3000))
 }
 
-export const totalStakedFor = async (): Promise<BigNumber> => {
-  const address = await getAccountAddress()
+export const totalStakedFor = async (web3?: Web3): Promise<BigNumber> => {
+  const address = await getAccountAddress(web3)
   if (address === undefined) {
     return toEVMBigNumber(0)
   }

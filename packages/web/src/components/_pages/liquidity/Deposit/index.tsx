@@ -1,5 +1,5 @@
 import { Button, Form, Steps } from 'antd'
-import React, { ChangeEvent, useCallback } from 'react'
+import React, { ChangeEvent, useCallback, useContext } from 'react'
 import { useState } from 'react'
 import { getUTC, toAmountNumber, toBigNumber, toEVMBigNumber, toNaturalNumber } from 'src/fixtures/utility'
 import { ETHDEV_V2_ADDRESS, GEYSER_ETHDEV_V2_ADDRESS } from '../../../../fixtures/_pages/liquidity/constants/address'
@@ -18,6 +18,7 @@ import { Gap } from '../Gap'
 import { LargeInput } from '../LargeInput'
 import { Max } from '../Max'
 import { TokenSymbol } from '../TokenSymbol'
+import WalletContext from 'src/context/walletContext'
 
 export const Deposit = () => {
   const { Item } = Form
@@ -38,6 +39,7 @@ export const Deposit = () => {
   const estimate = useEstimateReward()
   const { approve } = useApprove()
   const { stake } = useStake()
+  const { web3 } = useContext(WalletContext)
   const isFulfilled = useCallback(() => {
     return !totalStakingShares || !totalStaked || !accounting || !finalUnlockSchedule
       ? false
@@ -65,16 +67,17 @@ export const Deposit = () => {
       const bnValue = toBigNumber(value)
       setAmount(value.toString())
       updateEstimate(value.toString())
-      allowance(GEYSER_ETHDEV_V2_ADDRESS).then(x => {
+      allowance(GEYSER_ETHDEV_V2_ADDRESS, web3).then(x => {
         const req = x ? x.lt(toEVMBigNumber(bnValue.toFixed())) : true
         setRequireApproval(req)
         setCurrentStep(req ? 0 : 1)
       })
     },
-    [updateEstimate]
+    [updateEstimate, web3]
   )
-  const onClickMax = useCallback(() => balanceOf().then(x => updateAmount(toNaturalNumber(x ? x : 0).toString())), [
-    updateAmount
+  const onClickMax = useCallback(() => balanceOf(web3).then(x => updateAmount(toNaturalNumber(x ? x : 0).toString())), [
+    updateAmount,
+    web3
   ])
   const onChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target

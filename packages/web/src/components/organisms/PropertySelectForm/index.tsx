@@ -1,9 +1,10 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import Link from 'next/link'
 import { Button } from 'antd'
 import { AuthorSelector } from './AuthorSelector'
 import { getAccountAddress } from 'src/fixtures/wallet/utility'
 import { useEffectAsync } from 'src/fixtures/utility'
+import WalletContext from 'src/context/walletContext'
 import styled from 'styled-components'
 
 interface Props {}
@@ -26,13 +27,14 @@ const TwoColumns = styled(OneColumn)`
 `
 
 export const PropertySelectForm = (_: Props) => {
+  const { web3 } = useContext(WalletContext)
   const [author, setAuthor] = useState<string>('')
   const [property, setProperty] = useState<string>()
   const [query, setQuery] = useState<string>('')
   const onChange = (value: string) => setProperty(value)
   const onSearch = (query: string) => setQuery(query)
   useEffectAsync(async () => {
-    const accountAddress = await getAccountAddress()
+    const accountAddress = await getAccountAddress(web3)
     const dafaultValue = process.env.NODE_ENV === 'development' ? '0x69Cc2C86aeB26f52F6645a2DFdec1051DD5584C0' : ''
     setAuthor(accountAddress || dafaultValue)
   }, [])
