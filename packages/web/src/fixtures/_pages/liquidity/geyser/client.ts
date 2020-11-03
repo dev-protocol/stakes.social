@@ -13,10 +13,11 @@ const client: Map<string, Contract> = new Map()
 
 export const getClient = (contractAddress = GEYSER_ETHDEV_V2_ADDRESS): [Contract, Web3] => {
   const { ethereum } = window
-  if (!ethereum) {
+  const { WEB3_PROVIDER_ENDPOINT } = process.env
+  const web3 = ethereum ? new Web3(ethereum) : WEB3_PROVIDER_ENDPOINT ? new Web3(WEB3_PROVIDER_ENDPOINT) : null
+  if (!web3) {
     throw new Error('Ethereum provider is not found')
   }
-  const web3 = new Web3(ethereum)
 
   const stored = client.get(contractAddress)
   if (stored) {
