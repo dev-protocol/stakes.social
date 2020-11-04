@@ -20,7 +20,7 @@ exports[`Stats Snapshot 1`] = `
           <span
             class="ant-statistic-content-value"
           >
-            -
+            100+
           </span>
           <span
             class="ant-statistic-content-suffix"
@@ -110,7 +110,7 @@ exports[`Stats Snapshot 1`] = `
         <div
           class="ant-statistic-title"
         >
-          Unocked rewards
+          Unlocked rewards
         </div>
         <div
           class="ant-statistic-content"

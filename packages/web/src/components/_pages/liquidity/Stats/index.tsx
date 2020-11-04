@@ -39,7 +39,7 @@ export const Stats = () => {
 
   return (
     <Wrapper>
-      <Statistic title="APY(monthly)" value={apy.isLessThanOrEqualTo(1000) ? apy.dp(5).toNumber() : '-'} suffix="%" />
+      <Statistic title="APY(monthly)" value={apy.isLessThanOrEqualTo(100) ? apy.dp(5).toNumber() : '100+'} suffix="%" />
       <Statistic title="Total deposits" value={totalDepositsUSD.toString()} suffix="USD" precision={2} />
       <Statistic title="Total rewards" value={toNaturalNumber(totalRewards).toNumber()} suffix="DEV" precision={2} />
       <Statistic
@@ -48,7 +48,7 @@ export const Stats = () => {
         suffix="DEV"
       />
       <Statistic
-        title="Unocked rewards"
+        title="Unlocked rewards"
         value={accounting ? toNaturalNumber(accounting.totalUnlocked).dp(5).toFixed() : 0}
         suffix="DEV"
       />
