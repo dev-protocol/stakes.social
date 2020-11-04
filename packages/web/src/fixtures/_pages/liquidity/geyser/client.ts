@@ -188,6 +188,38 @@ export const allTokensClaimed = async (): Promise<EventData[]> => {
   )
 }
 
+export const getStaked = async (): Promise<EventData[]> => {
+  const user = await getAccountAddress()
+  if (user === undefined) {
+    return []
+  }
+
+  return (([contract]) =>
+    contract
+      ? contract.getPastEvents('Staked', { filter: { user }, fromBlock: 0, toBlock: 'latest' })
+      : Promise.resolve([]))(getClient())
+}
+
+export const bonusPeriodSec = async (): Promise<BigNumber> => {
+  return (([contract]) =>
+    contract
+      ? execute({
+          contract,
+          method: 'bonusPeriodSec'
+        })
+      : Promise.resolve(''))(getClient()).then(toEVMBigNumber)
+}
+
+export const startBonus = async (): Promise<BigNumber> => {
+  return (([contract]) =>
+    contract
+      ? execute({
+          contract,
+          method: 'startBonus'
+        })
+      : Promise.resolve(''))(getClient()).then(toEVMBigNumber)
+}
+
 type Accounting = {
   0: string
   1: string

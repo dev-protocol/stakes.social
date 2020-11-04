@@ -1,10 +1,10 @@
-import { Button, Form } from 'antd'
+import { Button, Form, Statistic } from 'antd'
 import React, { ChangeEvent, useCallback } from 'react'
 import { useState } from 'react'
 import { toAmountNumber, toNaturalNumber } from 'src/fixtures/utility'
 import styled from 'styled-components'
 import { totalStakedFor, unstakeQuery } from '../../../../fixtures/_pages/liquidity/geyser/client'
-import { useUnstake } from '../../../../fixtures/_pages/liquidity/geyser/hooks'
+import { useRewardMultiplier, useUnstake } from '../../../../fixtures/_pages/liquidity/geyser/hooks'
 import { Gap } from '../Gap'
 import { LargeInput } from '../LargeInput'
 import { Max } from '../Max'
@@ -14,11 +14,17 @@ const CenterdItem = styled(Form.Item)`
   text-align: center;
 `
 
+const StyledForm = styled(Form)`
+  display: grid;
+  grid-gap: 2rem;
+`
+
 export const Withdraw = () => {
   const { Item } = Form
   const [amount, setAmount] = useState<undefined | string>(undefined)
   const [rewardClaimed, setRewardClaimed] = useState(0)
   const { unstake } = useUnstake()
+  const { data: rewardMultiplier, max } = useRewardMultiplier()
   const updateAmount = useCallback((value: string | number) => {
     const amount = value.toString()
     setAmount(amount)
@@ -40,7 +46,13 @@ export const Withdraw = () => {
   }
 
   return (
-    <Form layout="vertical">
+    <StyledForm layout="vertical">
+      <Statistic
+        title="Your Reward Multiplier"
+        value={rewardMultiplier || '-'}
+        suffix={`X / ${max}X`}
+        precision={1}
+      ></Statistic>
       <Item>
         <Gap>
           <label htmlFor="amount">Your amount</label>
@@ -70,6 +82,6 @@ export const Withdraw = () => {
           Withdraw
         </Button>
       </CenterdItem>
-    </Form>
+    </StyledForm>
   )
 }

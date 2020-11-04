@@ -5,16 +5,20 @@ import useSWR from 'swr'
 import {
   allTokensClaimed,
   finalUnlockSchedules,
+  getStaked,
   stake,
   totalStaked,
   totalStakingShares,
   unstake,
-  updateAccounting
+  updateAccounting,
+  bonusPeriodSec,
+  startBonus
 } from './client'
 import { useCallback, useState } from 'react'
 import { message } from 'antd'
 import { getUTC, toBigNumber, toEVMBigNumber, UnwrapFunc } from 'src/fixtures/utility'
 import { INITIAL_SHARES_PER_TOKEN, ONE_MONTH_SECONDS, SYSTEM_SETTIMEOUT_MAXIMUM_DELAY_VALUE } from '../constants/number'
+import { getBlock } from 'src/fixtures/wallet/utility'
 
 const getAllTokensClaimed = () =>
   allTokensClaimed().then(allEvents =>
@@ -210,4 +214,43 @@ export const useIsAlreadyFinished = ([state, stateSetter]: [boolean, Dispatch<Se
     setTimeout(() => stateSetter(true), duration)
   })
   return [state, stateSetter]
+}
+
+export const useRewardMultiplier = () => {
+  const { data: block, error: errorGetStaked } = useSWR<number, Error>(SWRCachePath.getStaked(), () =>
+    getStaked().then(allEvents => {
+      return allEvents[0]?.blockNumber
+    })
+  )
+  const { data: timestamp, error: errorGetBlock } = useSWR<number | undefined, Error>(
+    SWRCachePath.getBlock(block),
+    () => (block ? getBlock(block).then(Number) : undefined)
+  )
+  const { data: bonusPeriod, error: errorBonusPeriodSec } = useSWR<BigNumber, Error>(
+    SWRCachePath.getBonusPeriodSec,
+    () => bonusPeriodSec()
+  )
+  const { data: _startBonus, error: errorStartBonus } = useSWR<BigNumber, Error>(SWRCachePath.getStartBonus, () =>
+    startBonus()
+  )
+  const startBonusPct = _startBonus ? toBigNumber(_startBonus).div(100) : toBigNumber(0)
+  const data =
+    timestamp && bonusPeriod && startBonusPct
+      ? startBonusPct
+          .plus(
+            toBigNumber(1)
+              .minus(startBonusPct)
+              .times(getUTC() - timestamp)
+              .div(bonusPeriod)
+          )
+          .div(startBonusPct)
+          .toNumber()
+      : undefined
+  const max = toBigNumber(1).div(startBonusPct).dp(1).toNumber()
+
+  return {
+    data,
+    max,
+    error: errorGetStaked || errorGetBlock || errorBonusPeriodSec || errorStartBonus
+  }
 }
