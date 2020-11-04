@@ -32,10 +32,9 @@ export const Withdraw = () => {
       setRewardClaimed(toNaturalNumber(x).toFixed())
     })
   }, [])
-  const onClickMax = useCallback(
-    () => totalStakedFor().then(x => updateAmount(toNaturalNumber(x ? x : 0).toString())),
-    [updateAmount]
-  )
+  const onClickMax = useCallback(() => totalStakedFor().then(x => updateAmount(toNaturalNumber(x ? x : 0).toFixed())), [
+    updateAmount
+  ])
   const onChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target
     updateAmount(value)

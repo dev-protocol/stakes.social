@@ -1,4 +1,4 @@
-import { Button, Form, Steps } from 'antd'
+import { Button, Divider, Form, message, Steps } from 'antd'
 import BigNumber from 'bignumber.js'
 import React, { ChangeEvent, useCallback } from 'react'
 import { useState } from 'react'
@@ -26,6 +26,16 @@ const StyledForm = styled(Form)`
   display: grid;
   grid-gap: 2rem;
 `
+
+const LinkToUniswap = () => (
+  <a
+    href="https://app.uniswap.org/#/add/0x5caf454ba92e6f2c929df14667ee360ed9fd5b26/ETH"
+    target="_blank"
+    rel="noreferrer"
+  >
+    Provide liquidity on Uniswap to get ETHDEV-V2 ↗
+  </a>
+)
 
 const ZERO = toBigNumber(0)
 
@@ -85,9 +95,22 @@ export const Deposit = () => {
     },
     [updateEstimate]
   )
-  const onClickMax = useCallback(() => balanceOf().then(x => updateAmount(x ? toNaturalNumber(x).toFixed() : '0')), [
-    updateAmount
-  ])
+  const onClickMax = useCallback(
+    () =>
+      balanceOf().then(x => {
+        updateAmount(x ? toNaturalNumber(x).toFixed() : '0')
+        if (x?.toNumber() === 0) {
+          message.warn(
+            <>
+              <span>Your ETHDEV-V2 token is 0</span>
+              <Divider type="vertical"></Divider>
+              <LinkToUniswap />
+            </>
+          )
+        }
+      }),
+    [updateAmount]
+  )
   const onChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target
     updateAmount(value)
@@ -133,13 +156,7 @@ export const Deposit = () => {
             onChange={onChange}
             value={displayAmount}
           ></LargeInput>
-          <a
-            href="https://app.uniswap.org/#/add/0x5caf454ba92e6f2c929df14667ee360ed9fd5b26/ETH"
-            target="_blank"
-            rel="noreferrer"
-          >
-            Provide liquidity on Uniswap to get ETHDEV-V2 ↗
-          </a>
+          <LinkToUniswap />
         </Gap>
       </Item>
       <Item>
