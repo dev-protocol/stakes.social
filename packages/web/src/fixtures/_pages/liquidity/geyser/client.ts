@@ -157,10 +157,11 @@ export const finalUnlockSchedules = async (): Promise<undefined | UnlockSchedule
 }
 
 export const unstakeQuery = async (amount: BigNumber): Promise<BigNumber> => {
-  return (([contract]) =>
-    contract
+  return (([contract, client]) =>
+    contract && client
       ? execute({
           contract,
+          client,
           method: 'unstakeQuery',
           args: [amount.toFixed()]
         })
@@ -235,10 +236,11 @@ type AccountingObject = {
 }
 
 export const updateAccounting = async (): Promise<AccountingObject> => {
-  return (([contract]) =>
-    contract
+  return (([contract, client]) =>
+    contract && client
       ? execute<Accounting>({
           contract,
+          client,
           method: 'updateAccounting'
         })
       : Promise.resolve({
