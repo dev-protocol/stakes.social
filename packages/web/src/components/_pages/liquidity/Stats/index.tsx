@@ -34,11 +34,12 @@ export const Stats = () => {
           .div(toNaturalNumber(totalStaked).div(theGraph.data.pair.totalSupply).times(theGraph.data.pair.reserve0))
           .div(finalUnlockSchedules.durationSec)
           .times(ONE_MONTH_SECONDS)
+          .times(100)
       : toBigNumber(0)
 
   return (
     <Wrapper>
-      <Statistic title="APY(monthly)" value={apy.dp(5).toNumber()} suffix="%" />
+      <Statistic title="APY(monthly)" value={apy.isLessThanOrEqualTo(1000) ? apy.dp(5).toNumber() : '-'} suffix="%" />
       <Statistic title="Total deposits" value={totalDepositsUSD.toString()} suffix="USD" precision={2} />
       <Statistic title="Total rewards" value={toNaturalNumber(totalRewards).toNumber()} suffix="DEV" precision={2} />
       <Statistic

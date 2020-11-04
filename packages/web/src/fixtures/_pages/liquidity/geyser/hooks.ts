@@ -18,7 +18,10 @@ import { INITIAL_SHARES_PER_TOKEN, ONE_MONTH_SECONDS, SYSTEM_SETTIMEOUT_MAXIMUM_
 
 const getAllTokensClaimed = () =>
   allTokensClaimed().then(allEvents =>
-    allEvents.reduce((a: BigNumber, c) => a.plus(c.returnValues.amount), toBigNumber(allEvents[0].returnValues.amount))
+    allEvents.reduce(
+      (a: BigNumber, c) => a.plus(c.returnValues.amount),
+      toBigNumber(allEvents[0]?.returnValues.amount || 0)
+    )
   )
 
 export const useTotalRewards = () => {
@@ -170,7 +173,7 @@ export const useEstimateReward = () => {
           : toBigNumber(0)
       const maxRewards = unlockRatePerMonth
 
-      const mintedStakingShares = tStakingShares.isZero()
+      const mintedStakingShares = tStakingShares.isGreaterThan(0)
         ? tStakingShares.times(eAmount).div(tStaked)
         : eAmount.times(INITIAL_SHARES_PER_TOKEN)
       const newTStakingShares = tStakingShares.plus(mintedStakingShares)

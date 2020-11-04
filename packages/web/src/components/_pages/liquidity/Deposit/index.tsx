@@ -136,6 +136,7 @@ export const Deposit = () => {
           <label htmlFor="estimated">Your estimated reward</label>
           <LargeInput disabled size="large" id="estimated" value={`${estimatedReward} / month`}></LargeInput>
           <small>*Estimated rewards assume you have achieved the maximum reward multiplier.</small>
+          <small>*Estimated rewards does not include any increase or decrease in liquidity providers.</small>
         </Gap>
       </Item>
       <Item>
