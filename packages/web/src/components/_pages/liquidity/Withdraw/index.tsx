@@ -1,7 +1,7 @@
 import { Button, Form, Statistic } from 'antd'
 import React, { ChangeEvent, useCallback } from 'react'
 import { useState } from 'react'
-import { toAmountNumber, toNaturalNumber } from 'src/fixtures/utility'
+import { toAmountNumber, toBigNumber, toNaturalNumber } from 'src/fixtures/utility'
 import styled from 'styled-components'
 import { totalStakedFor, unstakeQuery } from '../../../../fixtures/_pages/liquidity/geyser/client'
 import { useRewardMultiplier, useUnstake } from '../../../../fixtures/_pages/liquidity/geyser/hooks'
@@ -22,14 +22,14 @@ const StyledForm = styled(Form)`
 export const Withdraw = () => {
   const { Item } = Form
   const [amount, setAmount] = useState<undefined | string>(undefined)
-  const [rewardClaimed, setRewardClaimed] = useState(0)
+  const [rewardClaimed, setRewardClaimed] = useState('0')
   const { unstake } = useUnstake()
   const { data: rewardMultiplier, max } = useRewardMultiplier()
   const updateAmount = useCallback((value: string | number) => {
-    const amount = value.toString()
+    const amount = toBigNumber(value).toFixed()
     setAmount(amount)
     unstakeQuery(toAmountNumber(amount || 0)).then(x => {
-      setRewardClaimed(toNaturalNumber(x).toNumber())
+      setRewardClaimed(toNaturalNumber(x).toFixed())
     })
   }, [])
   const onClickMax = useCallback(

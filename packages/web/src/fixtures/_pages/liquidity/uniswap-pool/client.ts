@@ -63,18 +63,16 @@ export const allowance = async (spender: string): Promise<BigNumber | undefined>
 }
 
 export const approve = async (spender: string, value: BigNumber) => {
-  return process.env.NODE_ENV === 'production'
-    ? (([contract, client]) =>
-        contract && client
-          ? execute({
-              contract,
-              client,
-              mutation: true,
-              method: 'approve',
-              args: [spender, value.toFixed()]
-            })
-          : Promise.resolve())(getClient())
-    : new Promise(resolve => setTimeout(resolve, 3000))
+  return (([contract, client]) =>
+    contract && client
+      ? execute({
+          contract,
+          client,
+          mutation: true,
+          method: 'approve',
+          args: [spender, value.toFixed()]
+        })
+      : Promise.resolve())(getClient())
 }
 
 export const fromTheGraph = async (): Promise<{

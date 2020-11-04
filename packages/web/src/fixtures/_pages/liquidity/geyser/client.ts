@@ -53,33 +53,29 @@ export const totalStakingShares = async (): Promise<BigNumber> => {
 }
 
 export const stake = async (amount: BigNumber) => {
-  return process.env.NODE_ENV === 'production'
-    ? (([contract, client]) =>
-        contract && client
-          ? execute({
-              contract,
-              client,
-              mutation: true,
-              method: 'stake',
-              args: [amount.toFixed(), '']
-            })
-          : Promise.resolve())(getClient())
-    : new Promise(resolve => setTimeout(resolve, 3000))
+  return (([contract, client]) =>
+    contract && client
+      ? execute({
+          contract,
+          client,
+          mutation: true,
+          method: 'stake',
+          args: [amount.toFixed(), '0x0']
+        })
+      : Promise.resolve())(getClient())
 }
 
 export const unstake = async (amount: BigNumber) => {
-  return process.env.NODE_ENV === 'production'
-    ? (([contract, client]) =>
-        contract && client
-          ? execute({
-              contract,
-              client,
-              mutation: true,
-              method: 'unstake',
-              args: [amount.toFixed(), '']
-            })
-          : Promise.resolve())(getClient())
-    : new Promise(resolve => setTimeout(resolve, 3000))
+  return (([contract, client]) =>
+    contract && client
+      ? execute({
+          contract,
+          client,
+          mutation: true,
+          method: 'unstake',
+          args: [amount.toFixed(), '']
+        })
+      : Promise.resolve())(getClient())
 }
 
 export const totalStakedFor = async (): Promise<BigNumber> => {
