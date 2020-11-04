@@ -107,7 +107,7 @@ export const unlockSchedules = async (index: number): Promise<UnlockSchedule> =>
       ? execute<UnlockSchedule>({
           contract,
           method: 'unlockSchedules',
-          args: [index.toString()]
+          args: [index.toFixed()]
         })
       : Promise.resolve({
           initialLockedShares: '0',
@@ -162,7 +162,7 @@ export const unstakeQuery = async (amount: BigNumber): Promise<BigNumber> => {
       ? execute({
           contract,
           method: 'unstakeQuery',
-          args: [amount.toString()]
+          args: [amount.toFixed()]
         })
       : Promise.resolve(''))(getClient()).then(toEVMBigNumber)
 }
