@@ -49,8 +49,8 @@ export const Withdraw = () => {
     <StyledForm layout="vertical">
       <Statistic
         title="Your Reward Multiplier"
-        value={rewardMultiplier || '-'}
-        suffix={`X / ${max}X`}
+        value={rewardMultiplier ? rewardMultiplier : '(not staked)'}
+        suffix={rewardMultiplier ? `X / ${max}X` : undefined}
         precision={1}
       ></Statistic>
       <Item>
