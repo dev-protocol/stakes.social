@@ -4,8 +4,41 @@ exports[`Withdraw Snapshot 1`] = `
 <body>
   <div>
     <form
-      class="ant-form ant-form-vertical"
+      class="ant-form ant-form-vertical sc-401ks8-1 icUxox"
     >
+      <div
+        class="ant-statistic"
+      >
+        <div
+          class="ant-statistic-title"
+        >
+          Your Reward Multiplier
+        </div>
+        <div
+          class="ant-statistic-content"
+        >
+          <span
+            class="ant-statistic-content-value"
+          >
+            <span
+              class="ant-statistic-content-value-int"
+            >
+              
+              1
+            </span>
+            <span
+              class="ant-statistic-content-value-decimal"
+            >
+              .0
+            </span>
+          </span>
+          <span
+            class="ant-statistic-content-suffix"
+          >
+            X / 5X
+          </span>
+        </div>
+      </div>
       <div
         class="ant-row ant-form-item"
       >

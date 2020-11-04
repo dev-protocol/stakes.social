@@ -65,3 +65,10 @@ export const useEstimateReward = () => {
 export const useIsAlreadyFinished = () => {
   return [false]
 }
+
+export const useRewardMultiplier = () => {
+  return {
+    data: 1,
+    max: 5
+  }
+}
