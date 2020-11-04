@@ -88,13 +88,19 @@ export const Deposit = () => {
     updateAmount(value)
   }
   const onClickApprove = async () => {
-    await approve(ETHDEV_V2_ADDRESS, toAmountNumber(amount ? amount : 0))
+    const res = await approve(ETHDEV_V2_ADDRESS, toAmountNumber(amount ? amount : 0))
+    if (res === false) {
+      return
+    }
     setRequireApproval(false)
     setRequireDeposit(true)
     setCurrentStep(1)
   }
   const onClickDeposit = async () => {
-    await stake(toAmountNumber(amount ? amount : 0))
+    const res = await stake(toAmountNumber(amount ? amount : 0))
+    if (res === false) {
+      return
+    }
     setRequireDeposit(false)
     updateAmount(0)
   }

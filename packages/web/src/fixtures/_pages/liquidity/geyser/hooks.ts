@@ -59,11 +59,13 @@ export const useStake = () => {
       .then(() => {
         message.success({ content: 'Deposit completed', key })
         setIsLoading(false)
+        return true
       })
       .catch(err => {
         setError(err)
         message.error({ content: err.message, key })
         setIsLoading(false)
+        return false
       })
   }, [])
   return { stake: _stake, isLoading, error }
