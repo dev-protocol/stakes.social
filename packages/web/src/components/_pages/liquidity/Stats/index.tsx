@@ -48,7 +48,7 @@ export const Stats = () => {
         suffix="DEV"
       />
       <Statistic
-        title="Unocked rewards"
+        title="Unlocked rewards"
         value={accounting ? toNaturalNumber(accounting.totalUnlocked).dp(5).toFixed() : 0}
         suffix="DEV"
       />
