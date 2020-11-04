@@ -104,7 +104,7 @@ export const Deposit = () => {
 
   return (
     <StyledForm layout="vertical">
-      <Countdown></Countdown>
+      <Countdown endAtSec={finalUnlockSchedule ? Number(finalUnlockSchedule.endAtSec) : 0}></Countdown>
       <Item>
         <Gap>
           <label htmlFor="amount">Your amount</label>

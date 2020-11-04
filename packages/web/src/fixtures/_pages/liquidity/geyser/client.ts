@@ -155,7 +155,7 @@ export const totalUnlocked = async (): Promise<BigNumber> => {
 export const finalUnlockSchedules = async (): Promise<undefined | UnlockSchedule> => {
   const count = await unlockScheduleCount()
   const schedules = await Promise.all(new Array(count).fill(0).map((_, index) => unlockSchedules(index)))
-  return schedules.length > 1
+  return schedules.length > 0
     ? schedules.reduce((a, c) => (toBigNumber(a.endAtSec).isGreaterThan(c.endAtSec) ? a : c))
     : undefined
 }
