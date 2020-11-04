@@ -14,6 +14,11 @@ const navs = [
     pathname: '/'
   },
   {
+    key: 'liquidity',
+    label: 'Liquidity',
+    pathname: '/liquidity'
+  },
+  {
     key: 'create',
     label: 'Create',
     pathname: '/auth'

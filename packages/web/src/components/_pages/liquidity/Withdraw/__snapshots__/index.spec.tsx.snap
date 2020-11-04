@@ -1,0 +1,153 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Withdraw Snapshot 1`] = `
+<body>
+  <div>
+    <form
+      class="ant-form ant-form-vertical sc-401ks8-1 icUxox"
+    >
+      <div
+        class="ant-statistic"
+      >
+        <div
+          class="ant-statistic-title"
+        >
+          Your Reward Multiplier
+        </div>
+        <div
+          class="ant-statistic-content"
+        >
+          <span
+            class="ant-statistic-content-value"
+          >
+            <span
+              class="ant-statistic-content-value-int"
+            >
+              
+              1
+            </span>
+            <span
+              class="ant-statistic-content-value-decimal"
+            >
+              .0
+            </span>
+          </span>
+          <span
+            class="ant-statistic-content-suffix"
+          >
+            X / 5X
+          </span>
+        </div>
+      </div>
+      <div
+        class="ant-row ant-form-item"
+      >
+        <div
+          class="ant-col ant-form-item-control"
+        >
+          <div
+            class="ant-form-item-control-input"
+          >
+            <div
+              class="ant-form-item-control-input-content"
+            >
+              <div
+                class="sc-69st3h-0 jbbUzn"
+              >
+                <label
+                  for="amount"
+                >
+                  Your amount
+                </label>
+                <span
+                  class="ant-input-affix-wrapper ant-input-affix-wrapper-lg sicgyx-0 dwwWmc"
+                >
+                  <input
+                    class="ant-input ant-input-lg"
+                    id="amount"
+                    type="number"
+                    value=""
+                  />
+                  <span
+                    class="ant-input-suffix"
+                  >
+                    <span
+                      class="li6qma-0 ezIfWL"
+                    >
+                      ETHDEV-V2
+                    </span>
+                    <button
+                      class="ant-btn ant-btn-primary ant-btn-sm zinbpr-0 igIbjv"
+                      type="button"
+                    >
+                      <span>
+                        Max
+                      </span>
+                    </button>
+                  </span>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="ant-row ant-form-item"
+      >
+        <div
+          class="ant-col ant-form-item-control"
+        >
+          <div
+            class="ant-form-item-control-input"
+          >
+            <div
+              class="ant-form-item-control-input-content"
+            >
+              <div
+                class="sc-69st3h-0 jbbUzn"
+              >
+                <label
+                  for="estimated"
+                >
+                  Rewards claimed
+                </label>
+                <input
+                  class="ant-input ant-input-lg ant-input-disabled sicgyx-0 dwwWmc"
+                  disabled=""
+                  id="estimated"
+                  type="number"
+                  value="0"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="ant-row ant-form-item sc-401ks8-0 gnLUWa"
+      >
+        <div
+          class="ant-col ant-form-item-control"
+        >
+          <div
+            class="ant-form-item-control-input"
+          >
+            <div
+              class="ant-form-item-control-input-content"
+            >
+              <button
+                class="ant-btn ant-btn-primary ant-btn-lg"
+                type="button"
+              >
+                <span>
+                  Withdraw
+                </span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</body>
+`;
