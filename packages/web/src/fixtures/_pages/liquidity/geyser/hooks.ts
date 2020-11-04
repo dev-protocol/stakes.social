@@ -147,7 +147,7 @@ export const useEstimateReward = () => {
       totalStakingShares: BigNumber
       totalStaked: BigNumber
       accounting: UnwrapFunc<typeof updateAccounting>
-      finalUnlockSchedule: UnwrapFunc<typeof finalUnlockSchedules>
+      finalUnlockSchedule: NonNullable<UnwrapFunc<typeof finalUnlockSchedules>>
       timestamp: number
     }) => {
       if (amount.isZero()) {
@@ -195,7 +195,11 @@ export const useIsAlreadyFinished = ([state, stateSetter]: [boolean, Dispatch<Se
   boolean,
   Dispatch<SetStateAction<boolean>>
 ] => {
-  finalUnlockSchedules().then(({ endAtSec }) => {
+  finalUnlockSchedules().then(res => {
+    if (res === undefined) {
+      return
+    }
+    const { endAtSec } = res
     const current = getUTC()
     const duration = (d => (d > SYSTEM_SETTIMEOUT_MAXIMUM_DELAY_VALUE ? SYSTEM_SETTIMEOUT_MAXIMUM_DELAY_VALUE : d))(
       (Number(endAtSec) - current) * 1000
