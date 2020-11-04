@@ -73,7 +73,7 @@ export const unstake = async (amount: BigNumber) => {
           client,
           mutation: true,
           method: 'unstake',
-          args: [amount.toFixed(), '']
+          args: [amount.toFixed(), '0x0']
         })
       : Promise.resolve())(getClient())
 }
