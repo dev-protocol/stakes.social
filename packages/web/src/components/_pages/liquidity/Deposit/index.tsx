@@ -1,6 +1,6 @@
 import { Button, Divider, Form, message, Steps } from 'antd'
 import BigNumber from 'bignumber.js'
-import React, { ChangeEvent, useCallback, useContext } from 'react'
+import React, { ChangeEvent, useCallback } from 'react'
 import { useState } from 'react'
 import { getUTC, toAmountNumber, toBigNumber, toNaturalNumber } from 'src/fixtures/utility'
 import styled from 'styled-components'
@@ -22,7 +22,6 @@ import { Gap } from '../Gap'
 import { LargeInput } from '../LargeInput'
 import { Max } from '../Max'
 import { TokenSymbol } from '../TokenSymbol'
-import WalletContext from 'src/context/walletContext'
 
 const StyledForm = styled(Form)`
   display: grid;
@@ -62,7 +61,6 @@ export const Deposit = () => {
   const estimate = useEstimateReward()
   const { approve } = useApprove()
   const { stake } = useStake()
-  const { web3 } = useContext(WalletContext)
   const isFulfilled = useCallback(() => {
     return !totalStakingShares || !totalStaked || !accounting || !finalUnlockSchedule
       ? false
@@ -91,17 +89,17 @@ export const Deposit = () => {
       setAmount(bn)
       setDisplayAmount(value)
       updateEstimate(bn)
-      allowance(GEYSER_ETHDEV_V2_ADDRESS, web3).then(x => {
+      allowance(GEYSER_ETHDEV_V2_ADDRESS).then(x => {
         const req = x ? x.isLessThanOrEqualTo(bn) : true
         setRequireApproval(req)
         setCurrentStep(req ? 0 : 1)
       })
     },
-    [updateEstimate, web3]
+    [updateEstimate]
   )
   const onClickMax = useCallback(
     () =>
-      balanceOf(web3).then(x => {
+      balanceOf().then(x => {
         updateAmount(x ? toNaturalNumber(x).toFixed() : '0')
         if (x?.toNumber() === 0) {
           message.warn(
@@ -113,7 +111,7 @@ export const Deposit = () => {
           )
         }
       }),
-    [updateAmount, web3]
+    [updateAmount]
   )
   const onChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target
