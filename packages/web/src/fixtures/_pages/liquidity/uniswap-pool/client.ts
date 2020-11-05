@@ -13,10 +13,11 @@ const client: Map<string, Contract> = new Map()
 
 export const getClient = (contractAddress = ETHDEV_V2_ADDRESS): [Contract, Web3] => {
   const { ethereum } = window
-  if (!ethereum) {
+  const { WEB3_PROVIDER_ENDPOINT } = process.env
+  const web3 = ethereum ? new Web3(ethereum) : WEB3_PROVIDER_ENDPOINT ? new Web3(WEB3_PROVIDER_ENDPOINT) : null
+  if (!web3) {
     throw new Error('Ethereum provider is not found')
   }
-  const web3 = new Web3(ethereum)
 
   const stored = client.get(contractAddress)
   if (stored) {
@@ -29,8 +30,8 @@ export const getClient = (contractAddress = ETHDEV_V2_ADDRESS): [Contract, Web3]
   return [contract, web3]
 }
 
-export const balanceOf = async (): Promise<BigNumber | undefined> => {
-  const address = await getAccountAddress()
+export const balanceOf = async (web3?: Web3): Promise<BigNumber | undefined> => {
+  const address = await getAccountAddress(web3)
   if (address === undefined) {
     return undefined
   }
@@ -42,8 +43,8 @@ export const balanceOf = async (): Promise<BigNumber | undefined> => {
     }))(getClient()).then(toEVMBigNumber)
 }
 
-export const allowance = async (spender: string): Promise<BigNumber | undefined> => {
-  const address = await getAccountAddress()
+export const allowance = async (spender: string, web3?: Web3): Promise<BigNumber | undefined> => {
+  const address = await getAccountAddress(web3)
   if (address === undefined) {
     return undefined
   }

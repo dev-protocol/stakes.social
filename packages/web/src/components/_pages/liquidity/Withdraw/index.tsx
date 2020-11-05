@@ -1,6 +1,6 @@
 import { Button, Form } from 'antd'
 import React, { ChangeEvent, useCallback } from 'react'
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import { toAmountNumber, toNaturalNumber } from 'src/fixtures/utility'
 import styled from 'styled-components'
 import { totalStakedFor, unstakeQuery } from '../../../../fixtures/_pages/liquidity/geyser/client'
@@ -9,12 +9,14 @@ import { Gap } from '../Gap'
 import { LargeInput } from '../LargeInput'
 import { Max } from '../Max'
 import { TokenSymbol } from '../TokenSymbol'
+import WalletContext from 'src/context/walletContext'
 
 const CenterdItem = styled(Form.Item)`
   text-align: center;
 `
 
 export const Withdraw = () => {
+  const { web3 } = useContext(WalletContext)
   const { Item } = Form
   const [amount, setAmount] = useState<undefined | string>(undefined)
   const [rewardClaimed, setRewardClaimed] = useState(0)
@@ -27,8 +29,8 @@ export const Withdraw = () => {
     })
   }, [])
   const onClickMax = useCallback(
-    () => totalStakedFor().then(x => updateAmount(toNaturalNumber(x ? x : 0).toString())),
-    [updateAmount]
+    () => totalStakedFor(web3).then(x => updateAmount(toNaturalNumber(x ? x : 0).toString())),
+    [updateAmount, web3]
   )
   const onChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target

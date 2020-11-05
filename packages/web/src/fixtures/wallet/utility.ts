@@ -1,33 +1,50 @@
 import Web3 from 'web3'
+import Web3Modal from 'web3modal'
 import { AbiItem } from 'web3-utils'
 import { message } from 'antd'
 
-const cache: WeakMap<NonNullable<Window['ethereum']>, string> = new WeakMap()
+const cache: WeakMap<NonNullable<Web3>, string> = new WeakMap()
 
 export const isAvailableWallet = () => (window?.ethereum ? true : false)
 
-export const connectWallet = async () => {
-  const { ethereum } = window
-  if (ethereum) {
-    return ethereum
-      .enable()
-      .then(() => true)
-      .catch(() => false)
+export const connectWallet = async (setWeb3Handler: Function, web3Modal?: Web3Modal) => {
+  const provider = await web3Modal?.connect().catch(() => {
+    return undefined
+  })
+  if (provider === undefined) {
+    return false
+  }
+
+  const web3: Web3 = new Web3(provider)
+  if (web3) {
+    setWeb3Handler(web3)
+    const account = await web3.eth
+      .getAccounts()
+      .then((accounts: Array<String>) => {
+        if (accounts.length === 0) {
+          return false
+        }
+        return true
+      })
+      .catch((error: any) => {
+        message.error({ content: error.message, key: 'connectWallet' })
+        return false
+      })
+    return account
   }
   return false
 }
 
-export const getAccountAddress = async () => {
-  const { ethereum } = window
-  if (ethereum) {
+export const getAccountAddress = async (web3?: Web3) => {
+  if (web3) {
     return (async fromCache => {
       if (typeof fromCache === 'string') {
         return fromCache
       }
-      const [account] = await new Web3(ethereum).eth.getAccounts()
-      cache.set(ethereum, account)
+      const [account] = await web3.eth.getAccounts()
+      cache.set(web3, account)
       return account
-    })(cache.get(ethereum))
+    })(cache.get(web3))
   }
   return undefined
 }
@@ -58,14 +75,19 @@ export const getBlockNumber = async () => {
   return undefined
 }
 
-export const sign = async (message: string) => {
-  const { ethereum } = window
-  if (ethereum) {
-    const address = await getAccountAddress()
+export const sign = async (web3: any, inputMessage: string) => {
+  const key = '@utility/web3sign'
+  if (web3) {
+    const address = await getAccountAddress(web3)
     if (address === undefined) {
       return undefined
     }
-    const signature = await new Web3(ethereum).eth.personal.sign(message, address, '')
+    const signature = await new web3.eth.personal.sign(inputMessage, address, '')
+      .then((result: string) => result)
+      .catch((error: any) => {
+        message.error({ content: error.message, key })
+        return undefined
+      })
     return signature
   }
   return undefined
@@ -93,8 +115,13 @@ export const getDevAmount = async (walletAddress: string) => {
     }
   ]
   const { ethereum } = window
-  if (ethereum) {
-    const web3 = new Web3(ethereum)
+  const { WEB3_PROVIDER_ENDPOINT } = process.env
+  if (!ethereum && !WEB3_PROVIDER_ENDPOINT) {
+    return undefined
+  }
+
+  const web3 = WEB3_PROVIDER_ENDPOINT ? new Web3(WEB3_PROVIDER_ENDPOINT) : new Web3(ethereum || null)
+  if (web3) {
     // dev value of team wallet
     const contract: any = new web3.eth.Contract(abi, '0x5caf454ba92e6f2c929df14667ee360ed9fd5b26')
     const balance = await contract.methods.balanceOf(walletAddress).call()
