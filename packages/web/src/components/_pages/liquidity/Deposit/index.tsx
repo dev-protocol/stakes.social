@@ -12,7 +12,8 @@ import {
   useTotalStaked,
   useTotalStakingShares,
   useUpdateAccounting,
-  useIsAlreadyFinished
+  useIsAlreadyFinished,
+  useMutateDepositDependence
 } from '../../../../fixtures/_pages/liquidity/geyser/hooks'
 import { allowance, balanceOf } from '../../../../fixtures/_pages/liquidity/uniswap-pool/client'
 import { useApprove } from '../../../../fixtures/_pages/liquidity/uniswap-pool/hooks'
@@ -49,6 +50,7 @@ export const Deposit = () => {
   const [requireDeposit, setRequireDeposit] = useState(true)
   const [currentStep, setCurrentStep] = useState(0)
   const [requireReEstimate, setRequireReEstimate] = useState(false)
+  const { purge } = useMutateDepositDependence()
 
   const { data: totalStakingShares } = useTotalStakingShares()
   const { data: totalStaked } = useTotalStaked()
@@ -131,6 +133,7 @@ export const Deposit = () => {
     }
     setRequireDeposit(false)
     updateAmount('0')
+    purge()
   }
   if (requireReEstimate) {
     updateEstimate(amount)
