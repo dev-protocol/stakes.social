@@ -2,7 +2,6 @@ import { abi } from './abi'
 import Web3 from 'web3'
 import { Contract, EventData } from 'web3-eth-contract'
 import { createContract } from 'src/fixtures/utility/contract-client'
-import { getAccountAddress } from 'src/fixtures/wallet/utility'
 import { toBigNumber, toEVMBigNumber } from 'src/fixtures/utility'
 import { GEYSER_ETHDEV_V2_ADDRESS } from '../constants/address'
 import { utils } from '@devprtcl/dev-kit-js'
@@ -78,11 +77,7 @@ export const unstake = async (amount: BigNumber) => {
       : Promise.resolve())(getClient())
 }
 
-export const totalStakedFor = async (): Promise<BigNumber> => {
-  const address = await getAccountAddress()
-  if (address === undefined) {
-    return toEVMBigNumber(0)
-  }
+export const totalStakedFor = async (address: string): Promise<BigNumber> => {
   return (([contract]) =>
     contract
       ? execute({
@@ -185,12 +180,7 @@ export const allTokensClaimed = async (): Promise<EventData[]> => {
   )
 }
 
-export const getStaked = async (): Promise<EventData[]> => {
-  const user = await getAccountAddress()
-  if (user === undefined) {
-    return []
-  }
-
+export const getStaked = async (user: string): Promise<EventData[]> => {
   return (([contract]) =>
     contract
       ? contract.getPastEvents('Staked', { filter: { user }, fromBlock: 0, toBlock: 'latest' })
