@@ -20,6 +20,7 @@ import { message } from 'antd'
 import { getUTC, toBigNumber, toEVMBigNumber, UnwrapFunc } from 'src/fixtures/utility'
 import { INITIAL_SHARES_PER_TOKEN, ONE_MONTH_SECONDS, SYSTEM_SETTIMEOUT_MAXIMUM_DELAY_VALUE } from '../constants/number'
 import { getBlock } from 'src/fixtures/wallet/utility'
+import { useGetAccountAddress } from 'src/fixtures/wallet/hooks'
 
 const getAllTokensClaimed = () =>
   allTokensClaimed().then(allEvents =>
@@ -220,10 +221,15 @@ export const useIsAlreadyFinished = ([state, stateSetter]: [boolean, Dispatch<Se
 }
 
 export const useRewardMultiplier = () => {
-  const { data: block, error: errorGetStaked, mutate } = useSWR<number, Error>(SWRCachePath.getStaked, () =>
-    getStaked().then(allEvents => {
-      return allEvents[0]?.blockNumber
-    })
+  const { accountAddress } = useGetAccountAddress()
+  const { data: block, error: errorGetStaked, mutate } = useSWR<number | undefined, Error>(
+    SWRCachePath.getStaked(accountAddress),
+    () =>
+      accountAddress
+        ? getStaked(accountAddress).then(allEvents => {
+            return allEvents[0]?.blockNumber
+          })
+        : undefined
   )
   const { data: timestamp, error: errorGetBlock } = useSWR<number | undefined, Error>(
     SWRCachePath.getBlock(block),
@@ -260,8 +266,10 @@ export const useRewardMultiplier = () => {
 }
 
 export const useTotalStakedFor = () => {
-  const { data, error, mutate } = useSWR<UnwrapFunc<typeof totalStakedFor>, Error>(SWRCachePath.totalStakedFor, () =>
-    totalStakedFor()
+  const { accountAddress } = useGetAccountAddress()
+  const { data, error, mutate } = useSWR<UnwrapFunc<typeof totalStakedFor> | undefined, Error>(
+    SWRCachePath.totalStakedFor(accountAddress),
+    () => (accountAddress ? totalStakedFor(accountAddress) : undefined)
   )
   return {
     data,

@@ -424,6 +424,7 @@ describe('geyser hooks', () => {
 
     test('success fetching data', () => {
       const utc = getUTC()
+      ;(useSWR as jest.Mock).mockImplementationOnce(() => ({ data: '0x' }))
       ;(useSWR as jest.Mock).mockImplementationOnce(() => ({ data: 12345 }))
       ;(useSWR as jest.Mock).mockImplementationOnce(() => ({ data: utc - 10000 }))
       ;(useSWR as jest.Mock).mockImplementationOnce(() => ({ data: toBigNumber(20000) }))
@@ -451,6 +452,7 @@ describe('geyser hooks', () => {
     })
 
     test('success fetching data', () => {
+      ;(useSWR as jest.Mock).mockImplementationOnce(() => ({ data: '0x' }))
       ;(useSWR as jest.Mock).mockImplementationOnce(() => ({ data: toBigNumber(12345) }))
       const { result } = renderHook(() => useTotalStakedFor())
       expect(result.current.data?.toString()).toBe('12345')
