@@ -20,7 +20,13 @@ exports[`Stats Snapshot 1`] = `
           <span
             class="ant-statistic-content-value"
           >
-            100+
+            <span
+              class="ant-statistic-content-value-int"
+            >
+              
+              2,592
+            </span>
+            
           </span>
           <span
             class="ant-statistic-content-suffix"
