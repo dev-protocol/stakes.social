@@ -18,11 +18,13 @@ export const useApprove = () => {
       .then(() => {
         message.success({ content: 'Approval completed', key })
         setIsLoading(false)
+        return true
       })
       .catch(err => {
         setError(err)
         message.error({ content: err.message, key })
         setIsLoading(false)
+        return false
       })
   }, [])
   return { approve: _approve, isLoading, error }

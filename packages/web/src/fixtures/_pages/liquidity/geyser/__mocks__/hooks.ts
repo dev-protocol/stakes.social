@@ -63,5 +63,25 @@ export const useEstimateReward = () => {
 }
 
 export const useIsAlreadyFinished = () => {
-  return async () => false
+  return [false]
+}
+
+export const useRewardMultiplier = () => {
+  return {
+    data: 1,
+    max: 5
+  }
+}
+
+export const useTotalStakedFor = () => {
+  return {
+    data: '10000',
+    mutate: () => {}
+  }
+}
+
+export const useMutateDepositDependence = () => {
+  return {
+    mutate: () => {}
+  }
 }

@@ -6,5 +6,11 @@ export const SWRCachePath = {
   getTotalStakingShares: `geyser/getTotalStakingShares`,
   getUpdateAccounting: `geyser/getUpdateAccounting`,
   useAllTokensClaimed: `geyser/useAllTokensClaimed`,
-  useIsAlreadyFinished: `geyser/useIsAlreadyFinished`
+  useIsAlreadyFinished: (time: number) => `geyser/${time}/useIsAlreadyFinished`,
+  useRewardMultiplier: (user: string) => `geyser/${user}/useRewardMultiplier`,
+  getBlock: (block?: number) => `geyser/${block}/getBlock`,
+  getBonusPeriodSec: `geyser/bonusPeriodSec`,
+  getStartBonus: `geyser/startBonus`,
+  getStaked: `geyser/getStaked`,
+  totalStakedFor: `geyser/totalStakedFor`
 } as const

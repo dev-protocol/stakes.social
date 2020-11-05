@@ -1,16 +1,21 @@
 import { renderHook, act } from '@testing-library/react-hooks'
 import { message } from 'antd'
-import { toBigNumber, toEVMBigNumber } from 'src/fixtures/utility'
-import useSWR from 'swr'
-import { stake, unstake } from './client'
+import { useState } from 'react'
+import { getUTC, toBigNumber, toEVMBigNumber } from 'src/fixtures/utility'
+import useSWR, { mutate } from 'swr'
+import { SWRCachePath } from './cache-path'
+import { finalUnlockSchedules, stake, unstake } from './client'
 import {
   useAllTokensClaimed,
   useEstimateReward,
   useFinalUnlockSchedules,
   useIsAlreadyFinished,
+  useMutateDepositDependence,
+  useRewardMultiplier,
   useStake,
   useTotalRewards,
   useTotalStaked,
+  useTotalStakedFor,
   useTotalStakingShares,
   useUnstake,
   useUpdateAccounting
@@ -26,15 +31,23 @@ describe('geyser hooks', () => {
       const error = undefined
       ;(useSWR as jest.Mock).mockImplementationOnce(() => ({ data, error }))
       ;(useSWR as jest.Mock).mockImplementationOnce(() => ({ data, error }))
-      ;(useSWR as jest.Mock).mockImplementationOnce(() => ({ data, error }))
       const { result } = renderHook(() => useTotalRewards())
       expect(result.current.data.toString()).toBe('0')
     })
 
     test('success fetching data', () => {
       const error = undefined
-      ;(useSWR as jest.Mock).mockImplementationOnce(() => ({ data: toEVMBigNumber('10000'), error }))
-      ;(useSWR as jest.Mock).mockImplementationOnce(() => ({ data: toEVMBigNumber('20000'), error }))
+      ;(useSWR as jest.Mock).mockImplementationOnce(() => ({
+        data: {
+          totalLocked: '10000',
+          totalUnlocked: '20000',
+          totalsStakingShareSeconds: '10000',
+          totalStakingShareSeconds: '10000',
+          totalUserRewards: '10000',
+          now: '10000'
+        },
+        error
+      }))
       ;(useSWR as jest.Mock).mockImplementationOnce(() => ({ data: toEVMBigNumber('30000'), error }))
       const { result } = renderHook(() => useTotalRewards())
       expect(result.current.data.toString()).toBe('60000')
@@ -389,19 +402,34 @@ describe('geyser hooks', () => {
   })
 
   describe('useIsAlreadyFinished', () => {
+    test('success fetching data', async () => {
+      ;(finalUnlockSchedules as jest.Mock).mockImplementation(() =>
+        Promise.resolve({
+          endAtSec: getUTC() + 1
+        })
+      )
+      const { result, waitForNextUpdate } = renderHook(() => useIsAlreadyFinished(useState<boolean>(false)))
+      expect(result.current[0]).toBe(false)
+      await waitForNextUpdate()
+      expect(result.current[0]).toBe(true)
+    })
+  })
+
+  describe('useRewardMultiplier', () => {
     test('data is undefined', () => {
-      const data = undefined
-      const error = undefined
-      ;(useSWR as jest.Mock).mockImplementationOnce(() => ({ data, error }))
-      const { result } = renderHook(() => useIsAlreadyFinished())
-      expect(result.current.data).toBe(data)
+      ;(useSWR as jest.Mock).mockImplementation(() => ({ data: undefined }))
+      const { result } = renderHook(() => useRewardMultiplier())
+      expect(result.current.data).toBe(undefined)
     })
 
     test('success fetching data', () => {
-      const error = undefined
-      ;(useSWR as jest.Mock).mockImplementationOnce(() => ({ data: true, error }))
-      const { result } = renderHook(() => useIsAlreadyFinished())
-      expect(result.current.data).toBe(true)
+      const utc = getUTC()
+      ;(useSWR as jest.Mock).mockImplementationOnce(() => ({ data: 12345 }))
+      ;(useSWR as jest.Mock).mockImplementationOnce(() => ({ data: utc - 10000 }))
+      ;(useSWR as jest.Mock).mockImplementationOnce(() => ({ data: toBigNumber(20000) }))
+      ;(useSWR as jest.Mock).mockImplementationOnce(() => ({ data: toBigNumber(20) }))
+      const { result } = renderHook(() => useRewardMultiplier())
+      expect(result.current.data).toBe(3)
     })
 
     test('failure fetching data', () => {
@@ -409,9 +437,45 @@ describe('geyser hooks', () => {
       const errorMessage = 'error'
       const error = new Error(errorMessage)
       ;(useSWR as jest.Mock).mockImplementation(() => ({ data, error }))
-      const { result } = renderHook(() => useIsAlreadyFinished())
+      const { result } = renderHook(() => useRewardMultiplier())
       expect(result.current.error).toBe(error)
       expect(result.current.error?.message).toBe(errorMessage)
+    })
+  })
+
+  describe('useTotalStakedFor', () => {
+    test('data is undefined', () => {
+      ;(useSWR as jest.Mock).mockImplementation(() => ({ data: undefined }))
+      const { result } = renderHook(() => useTotalStakedFor())
+      expect(result.current.data).toBe(undefined)
+    })
+
+    test('success fetching data', () => {
+      ;(useSWR as jest.Mock).mockImplementationOnce(() => ({ data: toBigNumber(12345) }))
+      const { result } = renderHook(() => useTotalStakedFor())
+      expect(result.current.data?.toString()).toBe('12345')
+    })
+
+    test('failure fetching data', () => {
+      const data = undefined
+      const errorMessage = 'error'
+      const error = new Error(errorMessage)
+      ;(useSWR as jest.Mock).mockImplementation(() => ({ data, error }))
+      const { result } = renderHook(() => useTotalStakedFor())
+      expect(result.current.error).toBe(error)
+      expect(result.current.error?.message).toBe(errorMessage)
+    })
+  })
+
+  describe('useMutateDepositDependence', () => {
+    test('mutate data', () => {
+      const { result } = renderHook(() => useMutateDepositDependence())
+      act(() => {
+        result.current.purge()
+      })
+      expect((mutate as jest.Mock).mock.calls.length).toBe(2)
+      expect((mutate as jest.Mock).mock.calls[0][0]).toBe(SWRCachePath.getStaked)
+      expect((mutate as jest.Mock).mock.calls[1][0]).toBe(SWRCachePath.totalStakedFor)
     })
   })
 })
