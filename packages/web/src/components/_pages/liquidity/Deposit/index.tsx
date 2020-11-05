@@ -1,9 +1,10 @@
-import { Button, Form, Steps } from 'antd'
+import { Button, Divider, Form, message, Steps } from 'antd'
+import BigNumber from 'bignumber.js'
 import React, { ChangeEvent, useCallback } from 'react'
 import { useState } from 'react'
-import { getUTC, toAmountNumber, toBigNumber, toEVMBigNumber, toNaturalNumber } from 'src/fixtures/utility'
+import { getUTC, toAmountNumber, toBigNumber, toNaturalNumber } from 'src/fixtures/utility'
 import styled from 'styled-components'
-import { ETHDEV_V2_ADDRESS, GEYSER_ETHDEV_V2_ADDRESS } from '../../../../fixtures/_pages/liquidity/constants/address'
+import { GEYSER_ETHDEV_V2_ADDRESS } from '../../../../fixtures/_pages/liquidity/constants/address'
 import {
   useEstimateReward,
   useFinalUnlockSchedules,
@@ -11,7 +12,8 @@ import {
   useTotalStaked,
   useTotalStakingShares,
   useUpdateAccounting,
-  useIsAlreadyFinished
+  useIsAlreadyFinished,
+  useMutateDepositDependence
 } from '../../../../fixtures/_pages/liquidity/geyser/hooks'
 import { allowance, balanceOf } from '../../../../fixtures/_pages/liquidity/uniswap-pool/client'
 import { useApprove } from '../../../../fixtures/_pages/liquidity/uniswap-pool/hooks'
@@ -26,15 +28,29 @@ const StyledForm = styled(Form)`
   grid-gap: 2rem;
 `
 
+const LinkToUniswap = () => (
+  <a
+    href="https://app.uniswap.org/#/add/0x5caf454ba92e6f2c929df14667ee360ed9fd5b26/ETH"
+    target="_blank"
+    rel="noreferrer"
+  >
+    Provide liquidity on Uniswap to get ETHDEV-V2 ↗
+  </a>
+)
+
+const ZERO = toBigNumber(0)
+
 export const Deposit = () => {
   const { Item } = Form
   const { Step } = Steps
-  const [amount, setAmount] = useState<undefined | string>(undefined)
+  const [amount, setAmount] = useState<undefined | BigNumber>(undefined)
+  const [displayAmount, setDisplayAmount] = useState<undefined | string>(undefined)
   const [estimatedReward, setEstimatedReward] = useState<number | string>(0)
   const [requireApproval, setRequireApproval] = useState(true)
   const [requireDeposit, setRequireDeposit] = useState(true)
   const [currentStep, setCurrentStep] = useState(0)
   const [requireReEstimate, setRequireReEstimate] = useState(false)
+  const { purge } = useMutateDepositDependence()
 
   const { data: totalStakingShares } = useTotalStakingShares()
   const { data: totalStaked } = useTotalStaked()
@@ -51,7 +67,7 @@ export const Deposit = () => {
       : { totalStakingShares, totalStaked, accounting, finalUnlockSchedule }
   }, [totalStakingShares, totalStaked, accounting, finalUnlockSchedule])
   const updateEstimate = useCallback(
-    (value?: string) => {
+    (value?: BigNumber) => {
       const data = isFulfilled()
       if (data === false) {
         return setRequireReEstimate(true)
@@ -61,34 +77,48 @@ export const Deposit = () => {
       const estimated = estimate({
         ...data,
         timestamp: getUTC(),
-        amount: toAmountNumber(value ? value : 0)
+        amount: value ? value : toBigNumber(0)
       })
       setEstimatedReward(toNaturalNumber(estimated).dp(10).toFixed())
     },
     [estimate, isFulfilled]
   )
   const updateAmount = useCallback(
-    (value: string | number) => {
-      const bnValue = toBigNumber(value)
-      setAmount(value.toString())
-      updateEstimate(value.toString())
+    (value: string) => {
+      const bn = toAmountNumber(value)
+      setAmount(bn)
+      setDisplayAmount(value)
+      updateEstimate(bn)
       allowance(GEYSER_ETHDEV_V2_ADDRESS).then(x => {
-        const req = x ? x.lt(toEVMBigNumber(bnValue.toFixed())) : true
+        const req = x ? x.isLessThanOrEqualTo(bn) : true
         setRequireApproval(req)
         setCurrentStep(req ? 0 : 1)
       })
     },
     [updateEstimate]
   )
-  const onClickMax = useCallback(() => balanceOf().then(x => updateAmount(toNaturalNumber(x ? x : 0).toString())), [
-    updateAmount
-  ])
+  const onClickMax = useCallback(
+    () =>
+      balanceOf().then(x => {
+        updateAmount(x ? toNaturalNumber(x).toFixed() : '0')
+        if (x?.toNumber() === 0) {
+          message.warn(
+            <>
+              <span>Your ETHDEV-V2 token is 0</span>
+              <Divider type="vertical"></Divider>
+              <LinkToUniswap />
+            </>
+          )
+        }
+      }),
+    [updateAmount]
+  )
   const onChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target
     updateAmount(value)
   }
   const onClickApprove = async () => {
-    const res = await approve(ETHDEV_V2_ADDRESS, toAmountNumber(amount ? amount : 0))
+    const res = await approve(GEYSER_ETHDEV_V2_ADDRESS, amount ? amount : ZERO)
     if (res === false) {
       return
     }
@@ -97,12 +127,13 @@ export const Deposit = () => {
     setCurrentStep(1)
   }
   const onClickDeposit = async () => {
-    const res = await stake(toAmountNumber(amount ? amount : 0))
+    const res = await stake(amount ? amount : ZERO)
     if (res === false) {
       return
     }
     setRequireDeposit(false)
-    updateAmount(0)
+    updateAmount('0')
+    purge()
   }
   if (requireReEstimate) {
     updateEstimate(amount)
@@ -126,15 +157,9 @@ export const Deposit = () => {
             }
             type="number"
             onChange={onChange}
-            value={amount}
+            value={displayAmount}
           ></LargeInput>
-          <a
-            href="https://app.uniswap.org/#/add/0x5caf454ba92e6f2c929df14667ee360ed9fd5b26/ETH"
-            target="_blank"
-            rel="noreferrer"
-          >
-            Provide liquidity on Uniswap to get ETHDEV-V2 ↗
-          </a>
+          <LinkToUniswap />
         </Gap>
       </Item>
       <Item>

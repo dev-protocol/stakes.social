@@ -72,3 +72,16 @@ export const useRewardMultiplier = () => {
     max: 5
   }
 }
+
+export const useTotalStakedFor = () => {
+  return {
+    data: '10000',
+    mutate: () => {}
+  }
+}
+
+export const useMutateDepositDependence = () => {
+  return {
+    mutate: () => {}
+  }
+}

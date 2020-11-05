@@ -1,7 +1,7 @@
 import { Dispatch, SetStateAction } from 'react'
 import { SWRCachePath } from './cache-path'
 import BigNumber from 'bignumber.js'
-import useSWR from 'swr'
+import useSWR, { mutate } from 'swr'
 import {
   allTokensClaimed,
   finalUnlockSchedules,
@@ -12,7 +12,8 @@ import {
   unstake,
   updateAccounting,
   bonusPeriodSec,
-  startBonus
+  startBonus,
+  totalStakedFor
 } from './client'
 import { useCallback, useState } from 'react'
 import { message } from 'antd'
@@ -219,7 +220,7 @@ export const useIsAlreadyFinished = ([state, stateSetter]: [boolean, Dispatch<Se
 }
 
 export const useRewardMultiplier = () => {
-  const { data: block, error: errorGetStaked } = useSWR<number, Error>(SWRCachePath.getStaked(), () =>
+  const { data: block, error: errorGetStaked, mutate } = useSWR<number, Error>(SWRCachePath.getStaked, () =>
     getStaked().then(allEvents => {
       return allEvents[0]?.blockNumber
     })
@@ -253,6 +254,29 @@ export const useRewardMultiplier = () => {
   return {
     data,
     max,
+    mutate,
     error: errorGetStaked || errorGetBlock || errorBonusPeriodSec || errorStartBonus
+  }
+}
+
+export const useTotalStakedFor = () => {
+  const { data, error, mutate } = useSWR<UnwrapFunc<typeof totalStakedFor>, Error>(SWRCachePath.totalStakedFor, () =>
+    totalStakedFor()
+  )
+  return {
+    data,
+    error,
+    mutate
+  }
+}
+
+export const useMutateDepositDependence = () => {
+  const purge = useCallback(() => {
+    mutate(SWRCachePath.getStaked)
+    mutate(SWRCachePath.totalStakedFor)
+  }, [])
+
+  return {
+    purge
   }
 }

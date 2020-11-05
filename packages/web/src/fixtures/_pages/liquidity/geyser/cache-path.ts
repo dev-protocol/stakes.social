@@ -11,5 +11,6 @@ export const SWRCachePath = {
   getBlock: (block?: number) => `geyser/${block}/getBlock`,
   getBonusPeriodSec: `geyser/bonusPeriodSec`,
   getStartBonus: `geyser/startBonus`,
-  getStaked: () => `geyser/getStaked`
+  getStaked: `geyser/getStaked`,
+  totalStakedFor: `geyser/totalStakedFor`
 } as const

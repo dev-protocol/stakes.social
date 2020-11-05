@@ -53,33 +53,29 @@ export const totalStakingShares = async (): Promise<BigNumber> => {
 }
 
 export const stake = async (amount: BigNumber) => {
-  return process.env.NODE_ENV === 'production'
-    ? (([contract, client]) =>
-        contract && client
-          ? execute({
-              contract,
-              client,
-              mutation: true,
-              method: 'stake',
-              args: [amount.toFixed(), '']
-            })
-          : Promise.resolve())(getClient())
-    : new Promise(resolve => setTimeout(resolve, 3000))
+  return (([contract, client]) =>
+    contract && client
+      ? execute({
+          contract,
+          client,
+          mutation: true,
+          method: 'stake',
+          args: [amount.toFixed(), '0x0']
+        })
+      : Promise.resolve())(getClient())
 }
 
 export const unstake = async (amount: BigNumber) => {
-  return process.env.NODE_ENV === 'production'
-    ? (([contract, client]) =>
-        contract && client
-          ? execute({
-              contract,
-              client,
-              mutation: true,
-              method: 'unstake',
-              args: [amount.toFixed(), '']
-            })
-          : Promise.resolve())(getClient())
-    : new Promise(resolve => setTimeout(resolve, 3000))
+  return (([contract, client]) =>
+    contract && client
+      ? execute({
+          contract,
+          client,
+          mutation: true,
+          method: 'unstake',
+          args: [amount.toFixed(), '0x0']
+        })
+      : Promise.resolve())(getClient())
 }
 
 export const totalStakedFor = async (): Promise<BigNumber> => {
@@ -111,7 +107,7 @@ export const unlockSchedules = async (index: number): Promise<UnlockSchedule> =>
       ? execute<UnlockSchedule>({
           contract,
           method: 'unlockSchedules',
-          args: [index.toString()]
+          args: [index.toFixed()]
         })
       : Promise.resolve({
           initialLockedShares: '0',
@@ -161,12 +157,13 @@ export const finalUnlockSchedules = async (): Promise<undefined | UnlockSchedule
 }
 
 export const unstakeQuery = async (amount: BigNumber): Promise<BigNumber> => {
-  return (([contract]) =>
-    contract
+  return (([contract, client]) =>
+    contract && client
       ? execute({
           contract,
+          client,
           method: 'unstakeQuery',
-          args: [amount.toString()]
+          args: [amount.toFixed()]
         })
       : Promise.resolve(''))(getClient()).then(toEVMBigNumber)
 }
@@ -239,10 +236,11 @@ type AccountingObject = {
 }
 
 export const updateAccounting = async (): Promise<AccountingObject> => {
-  return (([contract]) =>
-    contract
+  return (([contract, client]) =>
+    contract && client
       ? execute<Accounting>({
           contract,
+          client,
           method: 'updateAccounting'
         })
       : Promise.resolve({
