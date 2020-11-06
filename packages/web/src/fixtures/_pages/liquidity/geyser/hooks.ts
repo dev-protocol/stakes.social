@@ -17,7 +17,7 @@ import {
 } from './client'
 import { useCallback, useState } from 'react'
 import { message } from 'antd'
-import { getUTC, toBigNumber, toEVMBigNumber, UnwrapFunc } from 'src/fixtures/utility'
+import { getUTC, toBigNumber, toEVMBigNumber, UnwrapFunc, whenDefined } from 'src/fixtures/utility'
 import { INITIAL_SHARES_PER_TOKEN, ONE_MONTH_SECONDS, SYSTEM_SETTIMEOUT_MAXIMUM_DELAY_VALUE } from '../constants/number'
 import { getBlock } from 'src/fixtures/wallet/utility'
 import { useGetAccountAddress } from 'src/fixtures/wallet/hooks'
@@ -225,11 +225,11 @@ export const useRewardMultiplier = () => {
   const { data: block, error: errorGetStaked, mutate } = useSWR<number | undefined, Error>(
     SWRCachePath.getStaked(accountAddress),
     () =>
-      accountAddress
-        ? getStaked(accountAddress).then(allEvents => {
-            return allEvents[0]?.blockNumber
-          })
-        : undefined
+      whenDefined(accountAddress, address =>
+        getStaked(address).then(allEvents => {
+          return allEvents[0]?.blockNumber
+        })
+      )
   )
   const { data: timestamp, error: errorGetBlock } = useSWR<number | undefined, Error>(
     SWRCachePath.getBlock(block),
@@ -269,7 +269,7 @@ export const useTotalStakedFor = () => {
   const { accountAddress } = useGetAccountAddress()
   const { data, error, mutate } = useSWR<UnwrapFunc<typeof totalStakedFor> | undefined, Error>(
     SWRCachePath.totalStakedFor(accountAddress),
-    () => (accountAddress ? totalStakedFor(accountAddress) : undefined)
+    () => whenDefined(accountAddress, address => totalStakedFor(address))
   )
   return {
     data,

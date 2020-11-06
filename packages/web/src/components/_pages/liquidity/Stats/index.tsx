@@ -42,7 +42,7 @@ export const Stats = () => {
 
   return (
     <Wrapper>
-      <Statistic title="APY(monthly)" value={apy.dp(5).toNumber()} suffix="%" />
+      <Statistic title="APM" value={apy.dp(5).toNumber()} suffix="%" />
       <Statistic title="Total deposits" value={totalDepositsUSD.toString()} suffix="USD" precision={2} />
       <Statistic title="Total rewards" value={toNaturalNumber(totalRewards).toNumber()} suffix="DEV" precision={2} />
       <Statistic

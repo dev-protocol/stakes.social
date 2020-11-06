@@ -12,7 +12,7 @@ exports[`Stats Snapshot 1`] = `
         <div
           class="ant-statistic-title"
         >
-          APY(monthly)
+          APM
         </div>
         <div
           class="ant-statistic-content"
