@@ -29,7 +29,7 @@ exports[`PropertyCardList Snapshot 1`] = `
                       class="ant-form-item-control-input-content"
                     >
                       <span
-                        class="ant-input-group-wrapper ant-input-search"
+                        class="ant-input-group-wrapper ant-input-search ant-input-search-with-button"
                       >
                         <span
                           class="ant-input-wrapper ant-input-group"
