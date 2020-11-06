@@ -57,8 +57,8 @@ export const Navigation = ({ handleMenuOpen }: NavigationProps) => {
   const [current, setCurrent] = useState(toKey(router?.pathname) || navs[0].key)
   const [isDesktop, setDesktop] = useState(typeof window !== 'undefined' && window?.innerWidth > 1024)
   const { isConnected, connect, isConnecting } = useConnectWallet()
-  const { web3, web3Modal } = useContext(WalletContext)
-  const { accountAddress } = useGetAccountAddress(web3)
+  const { web3Modal } = useContext(WalletContext)
+  const { accountAddress } = useGetAccountAddress()
 
   const updateMedia = () => {
     setDesktop(window.innerWidth > 1024)
