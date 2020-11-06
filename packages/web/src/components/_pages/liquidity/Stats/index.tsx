@@ -1,5 +1,5 @@
 import React from 'react'
-import { Statistic } from 'antd'
+import { Statistic, Tooltip } from 'antd'
 import styled from 'styled-components'
 import {
   useFinalUnlockSchedules,
@@ -11,11 +11,16 @@ import { toBigNumber, toNaturalNumber } from 'src/fixtures/utility'
 import { useTheGraph } from '../../../../fixtures/_pages/liquidity/uniswap-pool/hooks'
 import { format } from 'date-fns'
 import { ONE_MONTH_SECONDS } from 'src/fixtures/_pages/liquidity/constants/number'
+import { InfoCircleOutlined } from '@ant-design/icons'
 
 const Wrapper = styled.div`
   display: grid;
   grid-gap: 2rem;
   grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+`
+
+const StyledInfoCircleOutlined = styled(InfoCircleOutlined)`
+  margin-left: 0.5rem;
 `
 
 export const Stats = () => {
@@ -42,7 +47,18 @@ export const Stats = () => {
 
   return (
     <Wrapper>
-      <Statistic title="APM" value={apy.dp(5).toNumber()} suffix="%" />
+      <Statistic
+        title="APM"
+        value={apy.dp(5).toNumber()}
+        suffix={
+          <>
+            %
+            <Tooltip title="APM is assumed users have achieved the maximum reward multiplier.">
+              <StyledInfoCircleOutlined />
+            </Tooltip>
+          </>
+        }
+      />
       <Statistic title="Total deposits" value={totalDepositsUSD.toString()} suffix="USD" precision={2} />
       <Statistic title="Total rewards" value={toNaturalNumber(totalRewards).toNumber()} suffix="DEV" precision={2} />
       <Statistic
