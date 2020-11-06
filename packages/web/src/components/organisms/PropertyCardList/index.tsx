@@ -1,4 +1,5 @@
 import React, { useCallback, useState } from 'react'
+import Link from 'next/link'
 import { Spin, Pagination } from 'antd'
 import { useListPropertyQuery, useListPropertyOrderByMostRecentQuery } from '@dev/graphql'
 import { PropertyCard } from './PropertyCard'
@@ -9,10 +10,18 @@ import styled from 'styled-components'
 import Select from 'react-select'
 import { useGetAccountAddress } from 'src/fixtures/wallet/hooks'
 
+export type FeatureTag = '' | 'GitHub' | 'Npmjs' | 'Creators'
 interface Props {
   currentPage: number
   searchWord: string
   sortBy: string
+  featureTag: FeatureTag
+}
+
+// TODO: use valid market list via other data source
+const markets = {
+  GitHub: '0x34A7AdC94C4D41C3e3469F98033B372cB2fAf318',
+  Npmjs: '0x88c7B1f41DdE50efFc25541a2E0769B887eB2ee7'
 }
 
 const Header = styled.h2`
@@ -49,6 +58,14 @@ const PropertyOverview = styled.div`
   }
 `
 
+const Wrap = styled.div`
+  display: grid;
+  column-gap: 2em;
+  grid-template-rows: 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  padding-top: 1rem;
+`
+
 const DEFAULT_PER_PAGE = 10
 
 const FILTER_OPTIONS = [
@@ -57,7 +74,25 @@ const FILTER_OPTIONS = [
   { label: 'Most recent', value: 'MOST_RECENT' }
 ]
 
-export const PropertyCardList = ({ currentPage, searchWord, sortBy }: Props) => {
+const FeatureTags = ({ tag }: { tag: FeatureTag }) => {
+  const tags = ['GitHub', 'Npmjs', 'Creators']
+
+  return (
+    <Wrap>
+      <Link href="/">
+        <a style={tag !== '' ? { color: '#c9c9c9' } : {}}>All Pools</a>
+      </Link>
+      {tags &&
+        tags.map((d: string) => (
+          <Link href={`/?tag=${d}`} key={d}>
+            <a style={{ color: tag !== d ? '#c9c9c9' : '' }}>{d}</a>
+          </Link>
+        ))}
+    </Wrap>
+  )
+}
+
+export const PropertyCardList = ({ currentPage, searchWord, sortBy, featureTag }: Props) => {
   const { accountAddress } = useGetAccountAddress()
   const [perPage, setPerPage] = useState(DEFAULT_PER_PAGE)
   const { data, loading } = useListPropertyQuery({
@@ -65,6 +100,11 @@ export const PropertyCardList = ({ currentPage, searchWord, sortBy }: Props) => 
       limit: perPage,
       offset: (currentPage - 1) * perPage,
       ilike: searchWord !== '' ? `%${searchWord}%` : undefined,
+      market: featureTag === 'GitHub' || featureTag === 'Npmjs' ? markets[featureTag] : undefined,
+      marketOther:
+        featureTag === 'Creators'
+          ? ['0x88c7B1f41DdE50efFc25541a2E0769B887eB2ee7', '0x34A7AdC94C4D41C3e3469F98033B372cB2fAf318']
+          : undefined,
       // NOTE: If accountAddress is undefined, all properties will be displayed,
       //       so if YOUR_PROPS is selected and accountAddress is not available,
       //       query with dummy values.
@@ -76,6 +116,11 @@ export const PropertyCardList = ({ currentPage, searchWord, sortBy }: Props) => 
       limit: perPage,
       offset: (currentPage - 1) * perPage,
       ilike: searchWord !== '' ? `%${searchWord}%` : undefined,
+      market: featureTag === 'GitHub' || featureTag === 'Npmjs' ? markets[featureTag] : undefined,
+      marketOther:
+        featureTag === 'Creators'
+          ? ['0x88c7B1f41DdE50efFc25541a2E0769B887eB2ee7', '0x34A7AdC94C4D41C3e3469F98033B372cB2fAf318']
+          : undefined,
       from: sortBy === 'YOUR_PROPS' ? accountAddress || '0xdummy' : undefined
     }
   })
@@ -83,19 +128,25 @@ export const PropertyCardList = ({ currentPage, searchWord, sortBy }: Props) => 
   const router = useRouter()
   const handlePagination = useCallback(
     (page: number) => {
-      const query = searchWord !== '' ? { page, word: searchWord } : { page }
+      const query = { page, word: searchWord, sortby: sortBy, tag: featureTag }
       router.push({ pathname: '/', query })
     },
-    [router, searchWord]
+    [router, searchWord, sortBy, featureTag]
   )
   const handleShowSizeChange = (_: number, pageSize: number) => setPerPage(pageSize)
-  const handleSearch = useCallback((word: string) => router.push({ pathname: '/', query: { word, sortby: sortBy } }), [
-    router,
-    sortBy
-  ])
-  const handleChangeSortBy = (e: any) => {
-    router.push({ pathname: '/', query: { word: searchWord, sortby: e?.value || '' } })
-  }
+  const handleSearch = useCallback(
+    (word: string) => router.push({ pathname: '/', query: { word, sortby: sortBy, tag: featureTag } }),
+    [router, sortBy, featureTag]
+  )
+  const handleChangeSortBy = useCallback(
+    (e: any) => {
+      router.push({
+        pathname: '/',
+        query: { word: searchWord, sortby: e?.value || '', tag: featureTag }
+      })
+    },
+    [router, searchWord, featureTag]
+  )
 
   return (
     <>
@@ -105,6 +156,8 @@ export const PropertyCardList = ({ currentPage, searchWord, sortBy }: Props) => 
         <Select options={FILTER_OPTIONS} onChange={handleChangeSortBy} isClearable={true} />
         <CurrencySwitcher />
       </PropertiesHeader>
+
+      <FeatureTags tag={featureTag} />
 
       {loading && <Spin size="large" style={{ display: 'block', width: 'auto', padding: '100px' }} />}
       {data && mostRecentData && (
