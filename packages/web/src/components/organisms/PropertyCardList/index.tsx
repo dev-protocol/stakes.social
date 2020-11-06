@@ -101,10 +101,7 @@ export const PropertyCardList = ({ currentPage, searchWord, sortBy, featureTag }
       offset: (currentPage - 1) * perPage,
       ilike: searchWord !== '' ? `%${searchWord}%` : undefined,
       market: featureTag === 'GitHub' || featureTag === 'Npmjs' ? markets[featureTag] : undefined,
-      marketOther:
-        featureTag === 'Creators'
-          ? ['0x88c7B1f41DdE50efFc25541a2E0769B887eB2ee7', '0x34A7AdC94C4D41C3e3469F98033B372cB2fAf318']
-          : undefined,
+      marketOther: featureTag === 'Creators' ? Object.values(markets) : undefined,
       // NOTE: If accountAddress is undefined, all properties will be displayed,
       //       so if YOUR_PROPS is selected and accountAddress is not available,
       //       query with dummy values.
@@ -117,10 +114,7 @@ export const PropertyCardList = ({ currentPage, searchWord, sortBy, featureTag }
       offset: (currentPage - 1) * perPage,
       ilike: searchWord !== '' ? `%${searchWord}%` : undefined,
       market: featureTag === 'GitHub' || featureTag === 'Npmjs' ? markets[featureTag] : undefined,
-      marketOther:
-        featureTag === 'Creators'
-          ? ['0x88c7B1f41DdE50efFc25541a2E0769B887eB2ee7', '0x34A7AdC94C4D41C3e3469F98033B372cB2fAf318']
-          : undefined,
+      marketOther: featureTag === 'Creators' ? Object.values(markets) : undefined,
       from: sortBy === 'YOUR_PROPS' ? accountAddress || '0xdummy' : undefined
     }
   })
