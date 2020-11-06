@@ -4,10 +4,10 @@ exports[`Footer Snapshot 1`] = `
 <body>
   <div>
     <footer
-      class="sc-1fvy930-0 dLEaIG"
+      class="sc-1fvy930-0 eqCrSP"
     >
       <div
-        class="sc-1wzqvkc-0 bqVTXQ"
+        class="sc-1wzqvkc-0 byYDMh"
       >
         <p>
           <span>
@@ -105,7 +105,7 @@ exports[`Footer Snapshot 1`] = `
         </p>
       </div>
       <div
-        class="sc-1wzqvkc-0 bqVTXQ"
+        class="sc-1wzqvkc-0 byYDMh"
       >
         <svg
           viewBox="0 0 408 146"
@@ -155,7 +155,7 @@ exports[`Footer Snapshot 1`] = `
         </svg>
       </div>
       <div
-        class="sc-1wzqvkc-0 bqVTXQ"
+        class="sc-1wzqvkc-0 byYDMh"
       >
         <small>
           All emojis designed by 
