@@ -53,7 +53,7 @@ export const Stats = () => {
         suffix={
           <>
             %
-            <Tooltip title="APM is assumed users have achieved the maximum reward multiplier.">
+            <Tooltip title="APM assumes users have achieved the maximum reward multiplier.">
               <StyledInfoCircleOutlined />
             </Tooltip>
           </>

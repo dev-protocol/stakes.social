@@ -4,7 +4,7 @@ exports[`TransactionForm Snapshot 1`] = `
 <body>
   <div>
     <div
-      class="sc-1e3xeyk-0 dFAruq"
+      class="sc-1e3xeyk-0 jWLMOX"
     >
       <div
         class="sc-1xz1jp7-0"
@@ -15,10 +15,10 @@ exports[`TransactionForm Snapshot 1`] = `
            Reward
         </p>
         <div
-          class="sc-1xz1jp7-1 gMLLA-D"
+          class="sc-1xz1jp7-1 iqapOK"
         >
           <div
-            class="sc-1xz1jp7-2 clypbP"
+            class="sc-1xz1jp7-2 ibjEnO"
           >
             5000
              DEV
@@ -42,10 +42,10 @@ exports[`TransactionForm Snapshot 1`] = `
            Reward
         </p>
         <div
-          class="sc-1xz1jp7-1 gMLLA-D"
+          class="sc-1xz1jp7-1 iqapOK"
         >
           <div
-            class="sc-1xz1jp7-2 clypbP"
+            class="sc-1xz1jp7-2 ibjEnO"
           >
             6000
              DEV
