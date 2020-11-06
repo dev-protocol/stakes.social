@@ -1,3 +1,4 @@
+import Web3 from 'web3'
 import { contractFactory } from '@devprtcl/dev-kit-js'
 import { getAccountAddress } from 'src/fixtures/wallet/utility'
 import { getContractAddress } from './get-contract-address'
@@ -7,8 +8,14 @@ const newClient = () => {
   const { ethereum } = window
   if (ethereum) {
     return contractFactory(ethereum)
+  } else {
+    const { WEB3_PROVIDER_ENDPOINT } = process.env
+    if (!WEB3_PROVIDER_ENDPOINT) {
+      return undefined
+    }
+    const web3 = new Web3(WEB3_PROVIDER_ENDPOINT)
+    return contractFactory(web3.currentProvider)
   }
-  return undefined
 }
 
 export const getRewardsAmount = async (propertyAddress: string) => {
@@ -35,9 +42,9 @@ export const getTotalStakingAmountOnProtocol = async () => {
   return undefined
 }
 
-export const getMyHolderAmount = async (propertyAddress: string) => {
+export const getMyHolderAmount = async (propertyAddress: string, web3?: Web3) => {
   const client = newClient()
-  const accountAddress = await getAccountAddress()
+  const accountAddress = await getAccountAddress(web3)
   if (client && accountAddress) {
     return client
       .withdraw(await getContractAddress(client, 'withdraw'))
@@ -46,9 +53,9 @@ export const getMyHolderAmount = async (propertyAddress: string) => {
   return undefined
 }
 
-export const getMyStakingRewardAmount = async (propertyAddress: string) => {
+export const getMyStakingRewardAmount = async (propertyAddress: string, web3?: Web3) => {
   const client = newClient()
-  const accountAddress = await getAccountAddress()
+  const accountAddress = await getAccountAddress(web3)
   if (client && accountAddress) {
     return client
       .lockup(await getContractAddress(client, 'lockup'))
@@ -57,9 +64,9 @@ export const getMyStakingRewardAmount = async (propertyAddress: string) => {
   return undefined
 }
 
-export const getMyStakingAmount = async (propertyAddress: string) => {
+export const getMyStakingAmount = async (propertyAddress: string, web3?: Web3) => {
   const client = newClient()
-  const accountAddress = await getAccountAddress()
+  const accountAddress = await getAccountAddress(web3)
   if (client && accountAddress) {
     return client.lockup(await getContractAddress(client, 'lockup')).getValue(propertyAddress, accountAddress)
   }
@@ -96,9 +103,9 @@ export const cancelStaking = async (propertyAddress: string) => {
   return client.lockup(await getContractAddress(client, 'lockup')).cancel(propertyAddress)
 }
 
-export const getWithdrawalStatus = async (propertyAddress: string) => {
+export const getWithdrawalStatus = async (propertyAddress: string, web3?: Web3) => {
   const client = newClient()
-  const accountAddress = await getAccountAddress()
+  const accountAddress = await getAccountAddress(web3)
   if (client && accountAddress) {
     return client
       .lockup(await getContractAddress(client, 'lockup'))

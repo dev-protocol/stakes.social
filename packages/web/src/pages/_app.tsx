@@ -8,6 +8,13 @@ import { List } from 'antd'
 import styled from 'styled-components'
 import { HelpUs } from 'src/components/atoms/HelpUs'
 import SettingContext from 'src/context/settingContext'
+import WalletContext from 'src/context/walletContext'
+import Web3 from 'web3'
+import Web3Modal from 'web3modal'
+import detectEthereumProvider from '@metamask/detect-provider'
+import WalletConnectProvider from '@walletconnect/web3-provider'
+import Fortmatic from 'fortmatic'
+import WalletLink from 'walletlink'
 
 const Wallet = styled.div`
   display: grid;
@@ -28,7 +35,70 @@ const wallet = (name: string, url: string, desc: string) => (
 )
 
 class NextApp extends App<AppInitialProps & WithApolloProps<{}>> {
-  state = { isCurrencyDEV: true }
+  state = { isCurrencyDEV: true, web3: undefined, web3Modal: undefined }
+
+  getProviderOptions = () => {
+    const walletLink = new WalletLink({
+      appName: 'name',
+      appLogoUrl:
+        'https://github.com/dev-protocol/asset.stakes.social/blob/main/public/wallet/coinbase-wallet.jpg?raw=true',
+      darkMode: false
+    })
+    const { WEB3_PROVIDER_ENDPOINT } = process.env
+    const { INFURA_ID } = process.env
+    const { FORTMATIC_KEY } = process.env
+    const walletLinkProvider = WEB3_PROVIDER_ENDPOINT
+      ? walletLink.makeWeb3Provider(WEB3_PROVIDER_ENDPOINT || '', 1)
+      : null
+    const web3ForInjected = detectEthereumProvider()
+
+    return {
+      injected: {
+        package: web3ForInjected
+      },
+      walletconnect: {
+        package: WalletConnectProvider,
+        options: {
+          infuraId: INFURA_ID
+        }
+      },
+      fortmatic: {
+        package: Fortmatic,
+        options: {
+          key: FORTMATIC_KEY
+        }
+      },
+      'custom-walletlink': {
+        display: {
+          logo:
+            'https://github.com/dev-protocol/asset.stakes.social/blob/main/public/wallet/coinbase-wallet.jpg?raw=true',
+          name: 'Wallet Link',
+          description: 'Scan with WalletLink to connect'
+        },
+        package: walletLinkProvider,
+        connector: async (provider: any) => {
+          await provider.enable()
+
+          return provider
+        }
+      }
+    }
+  }
+
+  web3Modal: any
+
+  onWalletConnet = async () => {
+    const provider = await this.web3Modal.connect().catch(() => {
+      return undefined
+    })
+    if (provider === undefined) {
+      return undefined
+    }
+
+    const web3: any = new Web3(provider)
+    this.setState({ web3 })
+    return web3
+  }
 
   componentDidCatch = (error: Error, errorInfo: React.ErrorInfo) => {
     super.componentDidCatch(error, errorInfo)
@@ -36,7 +106,25 @@ class NextApp extends App<AppInitialProps & WithApolloProps<{}>> {
 
   componentDidMount = () => {
     const { ethereum } = window
+    this.web3Modal = new Web3Modal({
+      network: 'mainnet',
+      cacheProvider: true,
+      providerOptions: this.getProviderOptions()
+    })
+    this.setState({ web3Modal: this.web3Modal })
+
+    if (this.web3Modal.cachedProvider) {
+      this.onWalletConnet()
+    }
+
     if (!ethereum) {
+      const { WEB3_PROVIDER_ENDPOINT } = process.env
+      const { INFURA_ID } = process.env
+      const { FORTMATIC_KEY } = process.env
+      if (WEB3_PROVIDER_ENDPOINT || INFURA_ID || FORTMATIC_KEY) {
+        return
+      }
+
       Modal.error({
         title: 'Ethereum wallet not found',
         content: (
@@ -72,6 +160,10 @@ class NextApp extends App<AppInitialProps & WithApolloProps<{}>> {
     }
   }
 
+  setWeb3 = (web3: Web3) => {
+    this.setState({ web3 })
+  }
+
   toggleCurrency = () => {
     localStorage.setItem('settings', JSON.stringify({ currency: !this.state.isCurrencyDEV ? 'DEV' : 'USD' }))
     this.setState({ isCurrencyDEV: !this.state.isCurrencyDEV })
@@ -81,15 +173,19 @@ class NextApp extends App<AppInitialProps & WithApolloProps<{}>> {
     const { Component, pageProps, apollo } = this.props
 
     return (
-      <SettingContext.Provider value={{ isCurrencyDEV: this.state.isCurrencyDEV, toggleCurrency: this.toggleCurrency }}>
-        <Head>
-          <title>Stakes.social</title>
-          {/* Use minimum-scale=1 to enable GPU rasterization */}
-          <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no" />
-        </Head>
-        <Component {...pageProps} apollo={apollo} />
-        <HelpUs></HelpUs>
-      </SettingContext.Provider>
+      <WalletContext.Provider value={{ web3: this.state.web3, setWeb3: this.setWeb3, web3Modal: this.state.web3Modal }}>
+        <SettingContext.Provider
+          value={{ isCurrencyDEV: this.state.isCurrencyDEV, toggleCurrency: this.toggleCurrency }}
+        >
+          <Head>
+            <title>Stakes.social</title>
+            {/* Use minimum-scale=1 to enable GPU rasterization */}
+            <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no" />
+          </Head>
+          <Component {...pageProps} apollo={apollo} />
+          <HelpUs></HelpUs>
+        </SettingContext.Provider>
+      </WalletContext.Provider>
     )
   }
 }

@@ -1,9 +1,10 @@
-import React, { useCallback, useEffect, useState } from 'react'
+import React, { useCallback, useContext, useEffect, useState } from 'react'
 import { message, Button, Form, Input, Upload } from 'antd'
 import { LoadingOutlined, PlusOutlined } from '@ant-design/icons'
 import { useGetAccountAddress } from 'src/fixtures/wallet/hooks'
 import { useGetAccount, useCreateAccount, useUpdateAccount, useUploadFile } from 'src/fixtures/dev-for-apps/hooks'
 import { Account } from 'src/fixtures/dev-for-apps/utility'
+import WalletContext from 'src/context/walletContext'
 import { Container } from 'src/components/atoms/Container'
 import { Avatar } from 'src/components/molecules/Avatar'
 import styled from 'styled-components'
@@ -228,7 +229,8 @@ export const ProfileUpdateForm = ({ accountAddress }: { accountAddress?: string 
 }
 
 export const UserProfile = (_: Props) => {
-  const { accountAddress } = useGetAccountAddress()
+  const { web3 } = useContext(WalletContext)
+  const { accountAddress } = useGetAccountAddress(web3)
 
   return (
     <Container>

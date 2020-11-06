@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react'
+import React, { useCallback, useContext, useState } from 'react'
 import Link from 'next/link'
 import { Spin, Pagination } from 'antd'
 import { useListPropertyQuery, useListPropertyOrderByMostRecentQuery } from '@dev/graphql'
@@ -9,6 +9,7 @@ import { useRouter } from 'next/router'
 import styled from 'styled-components'
 import Select from 'react-select'
 import { useGetAccountAddress } from 'src/fixtures/wallet/hooks'
+import WalletContext from 'src/context/walletContext'
 
 export type FeatureTag = '' | 'GitHub' | 'Npmjs' | 'Creators'
 interface Props {
@@ -93,7 +94,8 @@ const FeatureTags = ({ tag }: { tag: FeatureTag }) => {
 }
 
 export const PropertyCardList = ({ currentPage, searchWord, sortBy, featureTag }: Props) => {
-  const { accountAddress } = useGetAccountAddress()
+  const { web3 } = useContext(WalletContext)
+  const { accountAddress } = useGetAccountAddress(web3)
   const [perPage, setPerPage] = useState(DEFAULT_PER_PAGE)
   const { data, loading } = useListPropertyQuery({
     variables: {
