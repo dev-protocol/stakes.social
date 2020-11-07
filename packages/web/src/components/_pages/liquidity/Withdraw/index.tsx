@@ -40,7 +40,8 @@ export const Withdraw = () => {
         : 0
       if (queryAmount !== 0) {
         unstakeQuery(queryAmount).then(x => {
-          setRewardClaimed(toBigNumber(x).div(1e9).dp(5).toFixed())
+          console.log(x.toFixed())
+          setRewardClaimed(toNaturalNumber(x).toFixed())
         })
       }
     },
