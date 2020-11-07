@@ -11,7 +11,8 @@ export const useTheGraph = (key: string = '') => {
       data: {
         pair: {
           reserveUSD: '100000',
-          totalSupply: '100000'
+          totalSupply: '100000',
+          reserve0: '100000'
         }
       }
     }

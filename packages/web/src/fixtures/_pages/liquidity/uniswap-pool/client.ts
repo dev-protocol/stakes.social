@@ -11,12 +11,15 @@ import { ETHDEV_V2_ADDRESS } from '../constants/address'
 const { execute } = utils
 const client: Map<string, Contract> = new Map()
 
-export const getClient = (contractAddress = ETHDEV_V2_ADDRESS): [Contract, Web3] => {
+export const getClient = (contractAddress = ETHDEV_V2_ADDRESS): [] | [Contract, Web3] => {
+  if (typeof window === 'undefined') {
+    return []
+  }
   const { ethereum } = window
   const { WEB3_PROVIDER_ENDPOINT } = process.env
   const web3 = ethereum ? new Web3(ethereum) : WEB3_PROVIDER_ENDPOINT ? new Web3(WEB3_PROVIDER_ENDPOINT) : null
   if (!web3) {
-    throw new Error('Ethereum provider is not found')
+    return []
   }
 
   const stored = client.get(contractAddress)
@@ -36,11 +39,13 @@ export const balanceOf = async (web3?: Web3): Promise<BigNumber | undefined> => 
     return undefined
   }
   return (([contract]) =>
-    execute({
-      contract,
-      method: 'balanceOf',
-      args: [address]
-    }))(getClient()).then(toEVMBigNumber)
+    contract
+      ? execute({
+          contract,
+          method: 'balanceOf',
+          args: [address]
+        })
+      : Promise.resolve(''))(getClient()).then(toEVMBigNumber)
 }
 
 export const allowance = async (spender: string, web3?: Web3): Promise<BigNumber | undefined> => {
@@ -49,24 +54,26 @@ export const allowance = async (spender: string, web3?: Web3): Promise<BigNumber
     return undefined
   }
   return (([contract]) =>
-    execute({
-      contract,
-      method: 'allowance',
-      args: [address, spender]
-    }))(getClient()).then(toEVMBigNumber)
+    contract
+      ? execute({
+          contract,
+          method: 'allowance',
+          args: [address, spender]
+        })
+      : Promise.resolve(''))(getClient()).then(toEVMBigNumber)
 }
 
 export const approve = async (spender: string, value: BigNumber) => {
-  return process.env.NODE_ENV === 'production'
-    ? (([contract, client]) =>
-        execute({
+  return (([contract, client]) =>
+    contract && client
+      ? execute({
           contract,
           client,
           mutation: true,
           method: 'approve',
           args: [spender, value.toFixed()]
-        }))(getClient())
-    : new Promise(resolve => setTimeout(resolve, 3000))
+        })
+      : Promise.resolve())(getClient())
 }
 
 export const fromTheGraph = async (): Promise<{
@@ -74,6 +81,7 @@ export const fromTheGraph = async (): Promise<{
     pair: {
       reserveUSD: string
       totalSupply: string
+      reserve0: string
     } | null
   }
 }> => {
@@ -87,6 +95,7 @@ export const fromTheGraph = async (): Promise<{
         pair(id:"${ETHDEV_V2_ADDRESS}") {
           reserveUSD
           totalSupply
+          reserve0
         }
       }`,
       variables: null

@@ -129,3 +129,11 @@ export const getDevAmount = async (walletAddress: string) => {
   }
   return undefined
 }
+
+export const getBlock = async (blockNumber: number) => {
+  const { ethereum } = window
+  if (ethereum) {
+    return (await new Web3(ethereum).eth.getBlock(blockNumber)).timestamp
+  }
+  return undefined
+}

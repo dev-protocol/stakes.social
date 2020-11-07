@@ -23,7 +23,8 @@ export const useConnectWallet = () => {
   return { isConnected, connect, isConnecting: isConnecting }
 }
 
-export const useGetAccountAddress = (web3?: any) => {
+export const useGetAccountAddress = () => {
+  const { web3 } = useContext(WalletContext)
   const shouldFetch = web3 ? true : false
   const { data, error } = useSWR<UnwrapFunc<typeof getAccountAddress>, Error>(
     shouldFetch ? cachePath.getAccountAddress() : null,
