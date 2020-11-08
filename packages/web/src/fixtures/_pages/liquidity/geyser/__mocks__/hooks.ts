@@ -85,3 +85,15 @@ export const useMutateDepositDependence = () => {
     mutate: () => {}
   }
 }
+
+export const useAPY = () => {
+  return {
+    data: toBigNumber(1000)
+  }
+}
+
+export const useUnstakeQuery = () => {
+  return {
+    data: toBigNumber(10000)
+  }
+}
