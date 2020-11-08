@@ -42,27 +42,29 @@ export const Informations = () => {
   const { data: apy } = useAPY()
   const { data: rewardMultiplier, max } = useRewardMultiplier()
   const { data: totalStakedFor } = useTotalStakedFor()
-  const { data: accruedRewards } = useUnstakeQuery(totalStakedFor)
+  const { data: unstakeQuery } = useUnstakeQuery(totalStakedFor)
   const { data: finalUnlockSchedules } = useFinalUnlockSchedules()
-  const apm = finalUnlockSchedules ? apy.div(finalUnlockSchedules.durationSec).times(ONE_MONTH_SECONDS) : toBigNumber(0)
+  const apm = finalUnlockSchedules ? apy.div(finalUnlockSchedules.durationSec).times(ONE_MONTH_SECONDS) : undefined
+  const accruedRewards =
+    totalStakedFor && unstakeQuery ? (totalStakedFor.isZero() ? toBigNumber(0) : unstakeQuery) : toBigNumber(0)
 
   return (
     <Wrapper>
       <Apm>
-        <Statistic title="APM" value={apm.dp(5).toNumber()} suffix="%" />
+        <Statistic title="APM" value={apm ? apm.dp(5).toNumber() : '...'} suffix="%" />
       </Apm>
       <Multiplier>
         <Statistic
           title="Reward Multiplier"
-          value={rewardMultiplier ? rewardMultiplier : '(not staked)'}
-          suffix={rewardMultiplier ? `X / ${max}X` : undefined}
+          value={rewardMultiplier ? rewardMultiplier : 0}
+          suffix={`X / ${max < Infinity ? max : '-'}X`}
           precision={1}
         ></Statistic>
       </Multiplier>
       <Rewards>
         <Statistic
           title="Accrued Rewards"
-          value={accruedRewards ? toNaturalNumber(accruedRewards).toNumber() : 0}
+          value={toNaturalNumber(accruedRewards).dp(2).toFixed()}
           suffix="DEV"
           precision={2}
         />
