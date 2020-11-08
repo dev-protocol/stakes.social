@@ -75,7 +75,7 @@ export const useRewardMultiplier = () => {
 
 export const useTotalStakedFor = () => {
   return {
-    data: '10000',
+    data: toBigNumber('10000'),
     mutate: () => {}
   }
 }

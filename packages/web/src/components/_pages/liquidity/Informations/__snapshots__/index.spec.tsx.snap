@@ -104,7 +104,17 @@ exports[`Informations Snapshot 1`] = `
               <span
                 class="ant-statistic-content-value"
               >
-                1e-14
+                <span
+                  class="ant-statistic-content-value-int"
+                >
+                  
+                  0
+                </span>
+                <span
+                  class="ant-statistic-content-value-decimal"
+                >
+                  .00
+                </span>
               </span>
               <span
                 class="ant-statistic-content-suffix"
