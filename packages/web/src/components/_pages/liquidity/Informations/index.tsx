@@ -3,21 +3,23 @@ import { Card, Statistic } from 'antd'
 import styled from 'styled-components'
 import {
   useAPY,
+  useFinalUnlockSchedules,
   useRewardMultiplier,
   useTotalStakedFor,
   useUnstakeQuery
 } from '../../../../fixtures/_pages/liquidity/geyser/hooks'
-import { toNaturalNumber } from 'src/fixtures/utility'
+import { toBigNumber, toNaturalNumber } from 'src/fixtures/utility'
+import { ONE_MONTH_SECONDS } from 'src/fixtures/_pages/liquidity/constants/number'
 
 const Wrapper = styled.div`
   display: grid;
   grid-gap: 1rem;
   grid-template-areas:
-    'apy multiplier'
+    'apm multiplier'
     'rewards rewards';
   justify-content: stretch;
   @media (min-width: 768px) {
-    grid-template-areas: 'apy multiplier rewards';
+    grid-template-areas: 'apm multiplier rewards';
   }
 `
 
@@ -26,8 +28,8 @@ const BaseCard = styled(Card)`
   border-color: #ccc;
 `
 
-const Apy = styled(BaseCard)`
-  grid-area: apy;
+const Apm = styled(BaseCard)`
+  grid-area: apm;
 `
 const Multiplier = styled(BaseCard)`
   grid-area: multiplier;
@@ -41,12 +43,14 @@ export const Informations = () => {
   const { data: rewardMultiplier, max } = useRewardMultiplier()
   const { data: totalStakedFor } = useTotalStakedFor()
   const { data: accruedRewards } = useUnstakeQuery(totalStakedFor)
+  const { data: finalUnlockSchedules } = useFinalUnlockSchedules()
+  const apm = finalUnlockSchedules ? apy.div(finalUnlockSchedules.durationSec).times(ONE_MONTH_SECONDS) : toBigNumber(0)
 
   return (
     <Wrapper>
-      <Apy>
-        <Statistic title="APY" value={apy.dp(5).toNumber()} suffix="%" />
-      </Apy>
+      <Apm>
+        <Statistic title="APM" value={apm.dp(5).toNumber()} suffix="%" />
+      </Apm>
       <Multiplier>
         <Statistic
           title="Reward Multiplier"

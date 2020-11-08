@@ -4,10 +4,10 @@ exports[`Informations Snapshot 1`] = `
 <body>
   <div>
     <div
-      class="sc-1u5gbu5-0 kERdUm"
+      class="sc-1u5gbu5-0 csoAHa"
     >
       <div
-        class="ant-card ant-card-bordered sc-1u5gbu5-1 sc-1u5gbu5-2 hGfXno hJoNbA"
+        class="ant-card ant-card-bordered sc-1u5gbu5-1 sc-1u5gbu5-2 hGfXno beijLw"
       >
         <div
           class="ant-card-body"
@@ -18,7 +18,7 @@ exports[`Informations Snapshot 1`] = `
             <div
               class="ant-statistic-title"
             >
-              APY
+              APM
             </div>
             <div
               class="ant-statistic-content"
@@ -30,7 +30,7 @@ exports[`Informations Snapshot 1`] = `
                   class="ant-statistic-content-value-int"
                 >
                   
-                  1,000
+                  25,920
                 </span>
                 
               </span>
