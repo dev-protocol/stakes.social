@@ -51,7 +51,7 @@ export const Informations = () => {
   return (
     <Wrapper>
       <Apm>
-        <Statistic title="APM" value={apm ? apm.dp(5).toNumber() : '...'} suffix="%" />
+        <Statistic title="APM" value={apm ? apm.dp(2).toNumber() : '...'} suffix="%" />
       </Apm>
       <Multiplier>
         <Statistic
