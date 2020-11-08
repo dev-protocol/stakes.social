@@ -5,7 +5,8 @@ import {
   useFinalUnlockSchedules,
   useTotalRewards,
   useTotalStaked,
-  useUpdateAccounting
+  useUpdateAccounting,
+  useAPY
 } from '../../../../fixtures/_pages/liquidity/geyser/hooks'
 import { toBigNumber, toNaturalNumber } from 'src/fixtures/utility'
 import { useTheGraph } from '../../../../fixtures/_pages/liquidity/uniswap-pool/hooks'
@@ -29,27 +30,18 @@ export const Stats = () => {
   const { data: accounting } = useUpdateAccounting()
   const { data: theGraph } = useTheGraph(totalStaked?.toString())
   const { data: finalUnlockSchedules } = useFinalUnlockSchedules()
+  const { data: apy } = useAPY()
   const totalDepositsUSD =
     totalStaked && theGraph && theGraph.data.pair
       ? toNaturalNumber(totalStaked).div(theGraph.data.pair.totalSupply).times(theGraph.data.pair.reserveUSD)
       : toBigNumber(0)
-  const apy =
-    totalStaked && theGraph && theGraph.data.pair && totalRewards && finalUnlockSchedules
-      ? (() => {
-          const max = toNaturalNumber(totalRewards)
-          const stakedDev = toNaturalNumber(totalStaked)
-            .div(theGraph.data.pair.totalSupply)
-            .times(theGraph.data.pair.reserve0)
-
-          return max.div(stakedDev).div(finalUnlockSchedules.durationSec).times(ONE_MONTH_SECONDS).times(100)
-        })()
-      : toBigNumber(0)
+  const apm = finalUnlockSchedules ? apy.div(finalUnlockSchedules.durationSec).times(ONE_MONTH_SECONDS) : toBigNumber(0)
 
   return (
     <Wrapper>
       <Statistic
         title="APM"
-        value={apy.dp(5).toNumber()}
+        value={apm.dp(5).toNumber()}
         suffix={
           <>
             %
