@@ -4,7 +4,7 @@ import { useState } from 'react'
 import { getUTC, toBigNumber, toEVMBigNumber } from 'src/fixtures/utility'
 import useSWR, { mutate } from 'swr'
 import { SWRCachePath } from './cache-path'
-import { finalUnlockSchedules, stake, unstake, unstakeQuery } from './client'
+import { finalUnlockSchedules, stake, unstake } from './client'
 import {
   useAllTokensClaimed,
   useAPY,
