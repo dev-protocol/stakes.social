@@ -14,7 +14,8 @@ import {
   bonusPeriodSec,
   startBonus,
   totalStakedFor,
-  unstakeQuery
+  unstakeQuery,
+  allTokensLocked
 } from './client'
 import { useCallback, useState } from 'react'
 import { message } from 'antd'
@@ -25,29 +26,25 @@ import { useGetAccountAddress } from 'src/fixtures/wallet/hooks'
 import { useTheGraph } from '../uniswap-pool/hooks'
 
 const getAllTokensClaimed = () =>
-  allTokensClaimed().then(allEvents =>
-    allEvents.reduce(
+  allTokensClaimed().then(allEvents => {
+    console.log(allEvents)
+    return allEvents.reduce(
       (a: BigNumber, c) => a.plus(c.returnValues.amount),
       toBigNumber(allEvents[0]?.returnValues.amount || 0)
     )
-  )
+  })
+
+const getTokensLocked = () =>
+  allTokensLocked().then(allEvents => {
+    console.log(allEvents)
+    return allEvents.reduce((a: BigNumber, c) => a.plus(c.returnValues.amount), toBigNumber(0))
+  })
 
 export const useTotalRewards = () => {
-  const { data: dataAccounting, error: errorAccounting } = useSWR<UnwrapFunc<typeof updateAccounting>, Error>(
-    SWRCachePath.getUpdateAccounting,
-    () => updateAccounting()
-  )
-  const { data: dataAllTokensClaimed, error: errorAllTokensClaimed } = useSWR<BigNumber, Error>(
-    SWRCachePath.useAllTokensClaimed,
-    getAllTokensClaimed
-  )
-  const data =
-    dataAccounting && dataAllTokensClaimed
-      ? toBigNumber(dataAccounting.totalLocked).plus(dataAccounting.totalUnlocked).plus(dataAllTokensClaimed)
-      : toEVMBigNumber(0)
+  const { data, error } = useSWR<BigNumber, Error>(SWRCachePath.allTokensLocked, getTokensLocked)
   return {
     data,
-    error: errorAccounting || errorAllTokensClaimed
+    error
   }
 }
 

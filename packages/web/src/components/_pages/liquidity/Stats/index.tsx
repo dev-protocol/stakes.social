@@ -35,7 +35,12 @@ export const Stats = () => {
 
   return (
     <Wrapper>
-      <Statistic title="Total rewards" value={toNaturalNumber(totalRewards).toNumber()} suffix="DEV" precision={2} />
+      <Statistic
+        title="Total rewards"
+        value={totalRewards ? toNaturalNumber(totalRewards).toNumber() : '-'}
+        suffix="DEV"
+        precision={2}
+      />
       <Statistic title="Total deposits" value={totalDepositsUSD.toString()} suffix="USD" precision={2} />
       <Statistic
         title="Locked rewards"
