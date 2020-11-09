@@ -4,8 +4,26 @@ exports[`Deposit Snapshot 1`] = `
 <body>
   <div>
     <form
-      class="ant-form ant-form-vertical"
+      class="ant-form ant-form-vertical pju26w-0 bSBNGA"
     >
+      <div
+        class="ant-statistic"
+      >
+        <div
+          class="ant-statistic-title"
+        >
+          Program duration
+        </div>
+        <div
+          class="ant-statistic-content"
+        >
+          <span
+            class="ant-statistic-content-value"
+          >
+            0 day(s) 00:00:00 left
+          </span>
+        </div>
+      </div>
       <div
         class="ant-row ant-form-item"
       >
@@ -41,7 +59,7 @@ exports[`Deposit Snapshot 1`] = `
                     <span
                       class="li6qma-0 ezIfWL"
                     >
-                      WETHDEV-V2
+                      ETHDEV-V2
                     </span>
                     <button
                       class="ant-btn ant-btn-primary ant-btn-sm zinbpr-0 igIbjv"
@@ -58,7 +76,7 @@ exports[`Deposit Snapshot 1`] = `
                   rel="noreferrer"
                   target="_blank"
                 >
-                  Provide liquidity on Uniswap to get WETHDEV-V2 ↗
+                  Provide liquidity on Uniswap to get ETHDEV-V2 ↗
                 </a>
               </div>
             </div>
@@ -147,7 +165,7 @@ exports[`Deposit Snapshot 1`] = `
                         class="ant-steps-item-description"
                       >
                         <p>
-                          Please approve the token transfer to deposit WETHDEV-V2.
+                          Please approve the token transfer to deposit ETHDEV-V2.
                         </p>
                         <button
                           class="ant-btn ant-btn-primary ant-btn-lg"
@@ -193,7 +211,7 @@ exports[`Deposit Snapshot 1`] = `
                         class="ant-steps-item-description"
                       >
                         <p>
-                          Deposit WETHDEV-V2.
+                          Deposit ETHDEV-V2.
                         </p>
                         <button
                           class="ant-btn ant-btn-primary ant-btn-lg"

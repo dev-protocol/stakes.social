@@ -5,21 +5,20 @@ jest.mock('web3')
 
 describe('wallet utility', () => {
   describe('getAccountAddress', () => {
-    test('Returns undefined as a value when window.ethereum not existed', async () => {
+    test('Returns undefined as a value when web3 not existed', async () => {
       const result = await getAccountAddress()
-      expect(window.ethereum).toBe(undefined)
       expect(result).toBe(undefined)
     })
 
-    test('Returns account address as a value when window.ethereum existed', async () => {
+    test('Returns account address as a value when web3 existed', async () => {
       window.ethereum = {} as any
       ;((Web3 as unknown) as jest.Mock).mockImplementation(() => ({
         eth: {
           getAccounts: async () => ['0x...']
         }
       }))
-      const result = await getAccountAddress()
-      expect(window.ethereum).not.toBe(undefined)
+      const web3 = new Web3()
+      const result = await getAccountAddress(web3)
       expect(result).toBe('0x...')
       delete window.ethereum
     })
@@ -32,10 +31,10 @@ describe('wallet utility', () => {
           getAccounts
         }
       }))
-      await getAccountAddress() // First call
-      await getAccountAddress() // Second call
-      const result = await getAccountAddress() // Third call
-      expect(window.ethereum).not.toBe(undefined)
+      const web3 = new Web3()
+      await getAccountAddress(web3) // First call
+      await getAccountAddress(web3) // Second call
+      const result = await getAccountAddress(web3) // Third call
       expect(result).toBe('0x...')
       expect(getAccounts.mock.calls.length).toBe(1)
       delete window.ethereum

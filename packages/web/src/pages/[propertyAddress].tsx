@@ -19,6 +19,7 @@ import Link from 'next/link'
 import { useGetPropertytInformation } from 'src/fixtures/devprtcl/hooks'
 import { useGetAccount, useGetProperty } from 'src/fixtures/dev-for-apps/hooks'
 import ReactMarkdown from 'react-markdown'
+import { WithGradient } from 'src/components/atoms/WithGradient'
 
 type Props = {}
 
@@ -51,10 +52,17 @@ const Main = styled(Container)`
 `
 const Cover = styled.div`
   grid-area: cover;
-  img {
-    border-radius: 8px;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2), 0 2px 4px -1px rgba(0, 0, 0, 0.12);
-  }
+  padding-top: 52.5%;
+  position: relative;
+  background-size: cover;
+  border-radius: 5px;
+  background-image: linear-gradient(
+    134deg,
+    rgb(47, 67, 237) 0%,
+    rgb(47, 128, 237) 23%,
+    rgb(47, 172, 237) 46%,
+    rgb(190, 208, 230) 100%
+  );
 `
 
 const TopStakerList = styled(TopStakers)`
@@ -145,6 +153,10 @@ const CreatorContent = styled.div`
   margin-left: 20px;
 `
 
+const CoverImageOrGradient = ({ src }: { src?: string }) => (
+  <Cover style={src ? { backgroundImage: `url(${src})` } : {}} />
+)
+
 const Author = ({ propertyAddress }: { propertyAddress: string }) => {
   const { data, error } = useGetPropertytInformation(propertyAddress)
   const { author: authorAddress } = usePropertyAuthor(propertyAddress)
@@ -175,8 +187,8 @@ const Author = ({ propertyAddress }: { propertyAddress: string }) => {
             <CreatorContent>
               <ReactMarkdown>{dataAuthor ? dataAuthor.biography : ''}</ReactMarkdown>
               <p>
-                <span style={{ color: '#1AC9FC' }}>{aggregateData?.property_meta_aggregate.aggregate?.count || 0}</span>{' '}
-                Pool(s) | <span style={{ color: '#1AC9FC' }}>{data?.author?.karma || 0} </span> Karma
+                <WithGradient>{aggregateData?.property_meta_aggregate.aggregate?.count || 0}</WithGradient> Pool(s) |{' '}
+                <WithGradient>{data?.author?.karma || 0} </WithGradient> Karma
               </p>
             </CreatorContent>
           </Flex>
@@ -218,13 +230,7 @@ const PropertyAddressDetail = (_: Props) => {
           <PropertyHeader apy={apy} creators={creators} propertyAddress={propertyAddress} />
         </Container>
         <Main>
-          <Cover>
-            <img
-              width="100%"
-              height="auto"
-              src="https://res.cloudinary.com/haas-storage/image/upload/v1598703382/vue_xfbs8i.webp"
-            />
-          </Cover>
+          <CoverImageOrGradient src={dataProperty?.cover_image?.url} />
           <div>
             <h2>Top stakers</h2>
             <TopStakerList propertyAdress={propertyAddress} />
