@@ -2,10 +2,9 @@ import Web3 from 'web3'
 import Web3Modal from 'web3modal'
 import { AbiItem } from 'web3-utils'
 import { message } from 'antd'
+import { WEB3_PROVIDER_ENDPOINT } from 'src/fixtures/wallet/constants'
 
 const cache: WeakMap<NonNullable<Web3>, string> = new WeakMap()
-
-export const isAvailableWallet = () => (window?.ethereum ? true : false)
 
 export const connectWallet = async (setWeb3Handler: Function, web3Modal?: Web3Modal) => {
   const provider = await web3Modal?.connect().catch(() => {
@@ -51,10 +50,10 @@ export const getAccountAddress = async (web3?: Web3) => {
 
 export const getSubscription = () => {
   const key = '@utility/getSubscription'
-  const { ethereum } = window
-  if (ethereum) {
+  const web3 = new Web3(WEB3_PROVIDER_ENDPOINT)
+  if (web3) {
     return () => {
-      return new Web3(ethereum).eth
+      return web3.eth
         .subscribe('newBlockHeaders', (error, result) => {
           if (error) throw error
           return result
@@ -68,9 +67,9 @@ export const getSubscription = () => {
 }
 
 export const getBlockNumber = async () => {
-  const { ethereum } = window
-  if (ethereum) {
-    return await new Web3(ethereum).eth.getBlockNumber()
+  const web3 = new Web3(WEB3_PROVIDER_ENDPOINT)
+  if (web3) {
+    return await web3.eth.getBlockNumber()
   }
   return undefined
 }
@@ -114,13 +113,8 @@ export const getDevAmount = async (walletAddress: string) => {
       type: 'function'
     }
   ]
-  const { ethereum } = window
-  const { WEB3_PROVIDER_ENDPOINT } = process.env
-  if (!ethereum && !WEB3_PROVIDER_ENDPOINT) {
-    return undefined
-  }
 
-  const web3 = WEB3_PROVIDER_ENDPOINT ? new Web3(WEB3_PROVIDER_ENDPOINT) : new Web3(ethereum || null)
+  const web3 = new Web3(WEB3_PROVIDER_ENDPOINT)
   if (web3) {
     // dev value of team wallet
     const contract: any = new web3.eth.Contract(abi, '0x5caf454ba92e6f2c929df14667ee360ed9fd5b26')
@@ -131,9 +125,9 @@ export const getDevAmount = async (walletAddress: string) => {
 }
 
 export const getBlock = async (blockNumber: number) => {
-  const { ethereum } = window
-  if (ethereum) {
-    return (await new Web3(ethereum).eth.getBlock(blockNumber)).timestamp
+  const web3 = new Web3(WEB3_PROVIDER_ENDPOINT)
+  if (web3) {
+    return (await web3.eth.getBlock(blockNumber)).timestamp
   }
   return undefined
 }

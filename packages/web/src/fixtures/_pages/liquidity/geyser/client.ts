@@ -6,17 +6,13 @@ import { toBigNumber, toEVMBigNumber } from 'src/fixtures/utility'
 import { GEYSER_ETHDEV_V2_ADDRESS } from '../constants/address'
 import { utils } from '@devprtcl/dev-kit-js'
 import BigNumber from 'bignumber.js'
+import { WEB3_PROVIDER_ENDPOINT } from 'src/fixtures/wallet/constants'
 
 const { execute } = utils
 const client: Map<string, Contract> = new Map()
 
 export const getClient = (contractAddress = GEYSER_ETHDEV_V2_ADDRESS): [] | [Contract, Web3] => {
-  if (typeof window === 'undefined') {
-    return []
-  }
-  const { ethereum } = window
-  const { WEB3_PROVIDER_ENDPOINT } = process.env
-  const web3 = ethereum ? new Web3(ethereum) : WEB3_PROVIDER_ENDPOINT ? new Web3(WEB3_PROVIDER_ENDPOINT) : null
+  const web3 = new Web3(WEB3_PROVIDER_ENDPOINT)
   if (!web3) {
     return []
   }
