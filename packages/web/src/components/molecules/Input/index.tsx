@@ -2,7 +2,7 @@ import React from 'react'
 import { Form } from 'antd'
 import styled from 'styled-components'
 
-export const SearchbarInputContainer = styled(Form.Item)`
+export const InputContainer = styled(Form.Item)`
   position: relative;
   width: 100%;
   margin: 0;
@@ -28,7 +28,7 @@ export const EmptyInputIcon = styled(InputIcon)`
   right: 0;
 `
 
-export const SearchbarInput = styled.input`
+export const Input = styled.input`
   width: 100%;
   padding: 8px 12px;
   border-radius: 6px;
@@ -57,12 +57,12 @@ export const SearchbarInput = styled.input`
 
 const CustomInput = ({ Icon, placeholder, label }: { label: string; Icon?: any; placeholder?: string }) => {
   return (
-    <SearchbarInputContainer>
+    <InputContainer>
       <InputIcon>{Icon && <Icon style={{ color: 'grey' }} />}</InputIcon>
       <Form.Item name={label} noStyle>
-        <SearchbarInput placeholder={placeholder || ''} />
+        <Input placeholder={placeholder || ''} />
       </Form.Item>
-    </SearchbarInputContainer>
+    </InputContainer>
   )
 }
 
