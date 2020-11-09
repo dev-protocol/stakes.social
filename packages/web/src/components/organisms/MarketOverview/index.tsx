@@ -56,19 +56,21 @@ export const MarketsOverview = () => {
     <MarketsContainer>
       <MarketSection>
         <MarketTypeHeader>Get started</MarketTypeHeader>
-        <MarketEntryContainer>
-          <img
-            src="https://res.cloudinary.com/haas-storage/image/upload/v1600172007/25231_hng64u.png"
-            width="100"
-            height="auto"
-          />
-          <MarketEntryInfo>
-            <div style={{ padding: '1em' }}>
-              <h3 style={{ color: 'white', fontWeight: 'bolder' }}>Github</h3>
-              <span>Authenticate and tokenize your Github OSS project.</span>
-            </div>
-          </MarketEntryInfo>
-        </MarketEntryContainer>
+        <Link href={'/invite/github'} as={`/invite/github`} passHref>
+          <MarketEntryContainer>
+            <img
+              src="https://res.cloudinary.com/haas-storage/image/upload/v1600172007/25231_hng64u.png"
+              width="100"
+              height="auto"
+            />
+            <MarketEntryInfo>
+              <div style={{ padding: '1em' }}>
+                <h3 style={{ color: 'white', fontWeight: 'bolder' }}>Github</h3>
+                <span>Authenticate and tokenize your Github OSS project.</span>
+              </div>
+            </MarketEntryInfo>
+          </MarketEntryContainer>
+        </Link>
       </MarketSection>
       <MarketSection>
         <MarketTypeHeader>Coming soon</MarketTypeHeader>

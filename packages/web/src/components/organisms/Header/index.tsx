@@ -22,7 +22,7 @@ const Top = styled.header`
   align-items: start;
   border-bottom: 1px solid black;
 
-  grid-gap: 1rem;
+  grid-gap: 4rem;
 
   #headerlogo {
     margin-left: 1em;
