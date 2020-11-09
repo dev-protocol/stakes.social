@@ -94,7 +94,6 @@ export const InvitationRequestForm = ({ market }: Props) => {
   const { postInvitationHandler, isLoading } = usePostInvitation(market)
   const onFinish = async (values: any) => {
     const { asset, email, discord, name, role, url, useCase, ask } = values
-    console.log('values: ', values)
     const metrics = await postInvitationHandler({
       asset,
       email,

@@ -145,7 +145,6 @@ export const MarketOverview = ({
   propertyAddress?: string
 }) => {
   const { data } = useGetMarkets()
-  console.log('data: ', data)
   return (
     <div style={{ maxWidth: '680px', marginRight: 'auto', marginLeft: 'auto' }}>
       <Row style={{ margin: '82px 0px' }}>
