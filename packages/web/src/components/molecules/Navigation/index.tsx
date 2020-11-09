@@ -5,7 +5,7 @@ import { MenuInfo } from 'rc-menu/lib/interface'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
 import Hamburger from 'src/components/atoms/Svgs/tsx/Hamburger'
-import { useConnectWallet, useGetAccountAddress } from 'src/fixtures/wallet/hooks'
+import { useConnectWallet, useProvider } from 'src/fixtures/wallet/hooks'
 import { UserOutlined } from '@ant-design/icons'
 import { NavMenu, AccountBtn, Connecting, NavMenuItem } from './../../atoms/Navigation/index'
 import WalletContext from 'src/context/walletContext'
@@ -58,7 +58,7 @@ export const Navigation = ({ handleMenuOpen }: NavigationProps) => {
   const [isDesktop, setDesktop] = useState(typeof window !== 'undefined' && window?.innerWidth > 1024)
   const { isConnected, connect, isConnecting } = useConnectWallet()
   const { web3Modal } = useContext(WalletContext)
-  const { accountAddress } = useGetAccountAddress()
+  const { accountAddress } = useProvider()
 
   const updateMedia = () => {
     setDesktop(window.innerWidth > 1024)

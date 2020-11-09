@@ -85,3 +85,7 @@ export const useMutateDepositDependence = () => {
     mutate: () => {}
   }
 }
+
+export const useUnstakeQuery = () => {
+  return { unstakeQuery: () => {} }
+}

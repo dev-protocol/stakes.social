@@ -7,7 +7,7 @@ import { CurrencySwitcher } from './CurrencySwitcher'
 import { useRouter } from 'next/router'
 import styled from 'styled-components'
 import Select from 'react-select'
-import { useGetAccountAddress } from 'src/fixtures/wallet/hooks'
+import { useProvider } from 'src/fixtures/wallet/hooks'
 
 interface Props {
   currentPage: number
@@ -58,7 +58,7 @@ const FILTER_OPTIONS = [
 ]
 
 export const PropertyCardList = ({ currentPage, searchWord, sortBy }: Props) => {
-  const { accountAddress } = useGetAccountAddress()
+  const { accountAddress } = useProvider()
   const [perPage, setPerPage] = useState(DEFAULT_PER_PAGE)
   const { data, loading } = useListPropertyQuery({
     variables: {
