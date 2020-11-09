@@ -19,7 +19,7 @@ import {
   usePropertyAuthor
 } from './hooks'
 import useSWR from 'swr'
-import { toNaturalNumber, toAmountNumber } from 'src/fixtures/utility'
+import { toNaturalNumber, toAmountNumber } from 'src/fixtures/utility/number'
 import {
   withdrawHolderAmount,
   withdrawStakingAmount,
@@ -35,7 +35,8 @@ import { message } from 'antd'
 import BigNumber from 'bignumber.js'
 
 jest.mock('swr')
-jest.mock('src/fixtures/utility')
+jest.mock('src/fixtures/wallet/hooks.ts')
+jest.mock('src/fixtures/utility/number.ts')
 jest.mock('src/fixtures/dev-kit/client.ts')
 
 describe('dev-kit hooks', () => {

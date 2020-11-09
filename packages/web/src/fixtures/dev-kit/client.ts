@@ -1,41 +1,39 @@
 import Web3 from 'web3'
 import { contractFactory } from '@devprtcl/dev-kit-js'
-import { WEB3_PROVIDER_ENDPOINT } from 'src/fixtures/wallet/constants'
 import { getAccountAddress } from 'src/fixtures/wallet/utility'
 import { getContractAddress } from './get-contract-address'
 import { client as devClient } from '@devprtcl/dev-kit-js'
 
-const newClient = () => {
-  const web3 = new Web3(WEB3_PROVIDER_ENDPOINT)
+const newClient = (web3: Web3) => {
   return contractFactory(web3.currentProvider)
 }
 
-export const getRewardsAmount = async (propertyAddress: string) => {
-  const client = newClient()
+export const getRewardsAmount = async (web3: Web3, propertyAddress: string) => {
+  const client = newClient(web3)
   if (client) {
     return client.withdraw(await getContractAddress(client, 'withdraw')).getRewardsAmount(propertyAddress)
   }
   return undefined
 }
 
-export const getTotalStakingAmount = async (proepertyAddress: string) => {
-  const client = newClient()
+export const getTotalStakingAmount = async (web3: Web3, proepertyAddress: string) => {
+  const client = newClient(web3)
   if (client) {
     return client.lockup(await getContractAddress(client, 'lockup')).getPropertyValue(proepertyAddress)
   }
   return undefined
 }
 
-export const getTotalStakingAmountOnProtocol = async () => {
-  const client = newClient()
+export const getTotalStakingAmountOnProtocol = async (web3: Web3) => {
+  const client = newClient(web3)
   if (client) {
     return client.lockup(await getContractAddress(client, 'lockup')).getAllValue()
   }
   return undefined
 }
 
-export const getMyHolderAmount = async (propertyAddress: string, web3?: Web3) => {
-  const client = newClient()
+export const getMyHolderAmount = async (web3: Web3, propertyAddress: string) => {
+  const client = newClient(web3)
   const accountAddress = await getAccountAddress(web3)
   if (client && accountAddress) {
     return client
@@ -45,8 +43,8 @@ export const getMyHolderAmount = async (propertyAddress: string, web3?: Web3) =>
   return undefined
 }
 
-export const getMyStakingRewardAmount = async (propertyAddress: string, web3?: Web3) => {
-  const client = newClient()
+export const getMyStakingRewardAmount = async (web3: Web3, propertyAddress: string) => {
+  const client = newClient(web3)
   const accountAddress = await getAccountAddress(web3)
   if (client && accountAddress) {
     return client
@@ -56,8 +54,8 @@ export const getMyStakingRewardAmount = async (propertyAddress: string, web3?: W
   return undefined
 }
 
-export const getMyStakingAmount = async (propertyAddress: string, web3?: Web3) => {
-  const client = newClient()
+export const getMyStakingAmount = async (web3: Web3, propertyAddress: string) => {
+  const client = newClient(web3)
   const accountAddress = await getAccountAddress(web3)
   if (client && accountAddress) {
     return client.lockup(await getContractAddress(client, 'lockup')).getValue(propertyAddress, accountAddress)
@@ -65,38 +63,38 @@ export const getMyStakingAmount = async (propertyAddress: string, web3?: Web3) =
   return undefined
 }
 
-export const withdrawHolderAmount = async (propertyAddress: string) => {
-  const client = newClient()
+export const withdrawHolderAmount = async (web3: Web3, propertyAddress: string) => {
+  const client = newClient(web3)
   if (!client) throw new Error(`No wallet`)
   return client.withdraw(await getContractAddress(client, 'withdraw')).withdraw(propertyAddress)
 }
 
-export const withdrawStakingAmount = async (propertyAddress: string) => {
-  const client = newClient()
+export const withdrawStakingAmount = async (web3: Web3, propertyAddress: string) => {
+  const client = newClient(web3)
   if (!client) throw new Error(`No wallet`)
   return client.lockup(await getContractAddress(client, 'lockup')).withdraw(propertyAddress)
 }
 
-export const withdrawStakingRewardAmount = async (propertyAddress: string) => {
-  const client = newClient()
+export const withdrawStakingRewardAmount = async (web3: Web3, propertyAddress: string) => {
+  const client = newClient(web3)
   if (!client) throw new Error(`No wallet`)
   return client.lockup(await getContractAddress(client, 'lockup')).withdrawInterest(propertyAddress)
 }
 
-export const stakeDev = async (propertyAddress: string, amount: string) => {
-  const client = newClient()
+export const stakeDev = async (web3: Web3, propertyAddress: string, amount: string) => {
+  const client = newClient(web3)
   if (!client) throw new Error(`No wallet`)
   return client.dev(await getContractAddress(client, 'token')).deposit(propertyAddress, amount)
 }
 
-export const cancelStaking = async (propertyAddress: string) => {
-  const client = newClient()
+export const cancelStaking = async (web3: Web3, propertyAddress: string) => {
+  const client = newClient(web3)
   if (!client) throw new Error(`No wallet`)
   return client.lockup(await getContractAddress(client, 'lockup')).cancel(propertyAddress)
 }
 
-export const getWithdrawalStatus = async (propertyAddress: string, web3?: Web3) => {
-  const client = newClient()
+export const getWithdrawalStatus = async (web3: Web3, propertyAddress: string) => {
+  const client = newClient(web3)
   const accountAddress = await getAccountAddress(web3)
   if (client && accountAddress) {
     return client
@@ -107,16 +105,16 @@ export const getWithdrawalStatus = async (propertyAddress: string, web3?: Web3) 
   return undefined
 }
 
-export const calculateMaxRewardsPerBlock = async () => {
-  const client = newClient()
+export const calculateMaxRewardsPerBlock = async (web3: Web3) => {
+  const client = newClient(web3)
   if (client) {
     return client.allocator(await getContractAddress(client, 'allocator')).calculateMaxRewardsPerBlock()
   }
   return undefined
 }
 
-export const createProperty = async (name: string, symbol: string, author: string) => {
-  const client = newClient()
+export const createProperty = async (web3: Web3, name: string, symbol: string, author: string) => {
+  const client = newClient(web3)
   if (process.env.NODE_ENV == 'production' && client) {
     return client.propertyFactory(await getContractAddress(client, 'propertyFactory')).create(name, symbol, author)
   } else if (process.env.NODE_ENV == 'development') {
@@ -126,16 +124,16 @@ export const createProperty = async (name: string, symbol: string, author: strin
   return undefined
 }
 
-export const marketScheme = async (marketAddress: string) => {
-  const client = newClient()
+export const marketScheme = async (web3: Web3, marketAddress: string) => {
+  const client = newClient(web3)
   if (client) {
     return client.market(marketAddress).schema()
   }
   return []
 }
 
-export const authenticate = async (marketAddress: string, propertyAddress: string, args: string[]) => {
-  const client = newClient()
+export const authenticate = async (web3: Web3, marketAddress: string, propertyAddress: string, args: string[]) => {
+  const client = newClient(web3)
   if (process.env.NODE_ENV == 'production' && client) {
     const _args = ['', '', '', '', ''].map((x, i) => (args[i] ? args[i] : x))
     return client.market(marketAddress).authenticate(propertyAddress, _args, {
@@ -148,8 +146,14 @@ export const authenticate = async (marketAddress: string, propertyAddress: strin
   return undefined
 }
 
-export const createAndAuthenticate = async (name: string, symbol: string, marketAddress: string, args: string[]) => {
-  const client = newClient()
+export const createAndAuthenticate = async (
+  web3: Web3,
+  name: string,
+  symbol: string,
+  marketAddress: string,
+  args: string[]
+) => {
+  const client = newClient(web3)
   if (client) {
     return client
       .propertyFactory(await getContractAddress(client, 'propertyFactory'))
@@ -160,24 +164,24 @@ export const createAndAuthenticate = async (name: string, symbol: string, market
   return undefined
 }
 
-export const totalSupply = async () => {
-  const client = newClient()
+export const totalSupply = async (web3: Web3) => {
+  const client = newClient(web3)
   if (client) {
     return client.dev(await getContractAddress(client, 'token')).totalSupply()
   }
   return undefined
 }
 
-export const holdersShare = async (amount: string, lockedups: string) => {
-  const client = newClient()
+export const holdersShare = async (web3: Web3, amount: string, lockedups: string) => {
+  const client = newClient(web3)
   if (client) {
     return client.policy(await getContractAddress(client, 'policy')).holdersShare(amount, lockedups)
   }
   return undefined
 }
 
-export const createGetVotablePolicy = async () => {
-  const client = newClient()
+export const createGetVotablePolicy = async (web3: Web3) => {
+  const client = newClient(web3)
   if (client) {
     const policyGroup = client.policyGroup(await getContractAddress(client, 'policyGroup'))
     const [policies, currentPolicy] = await Promise.all([
@@ -189,16 +193,16 @@ export const createGetVotablePolicy = async () => {
   throw new Error(`No wallet`)
 }
 
-export const propertyAuthor = async (propertyAddress: string) => {
-  const client = newClient()
+export const propertyAuthor = async (web3: Web3, propertyAddress: string) => {
+  const client = newClient(web3)
   if (client) {
     return client.property(propertyAddress).author()
   }
   return undefined
 }
 
-export const balanceOf = async () => {
-  const client = newClient()
+export const balanceOf = async (web3: Web3) => {
+  const client = newClient(web3)
   const accountAddress = await getAccountAddress()
   if (client && accountAddress) {
     return client.dev(await getContractAddress(client, 'token')).balanceOf(accountAddress)

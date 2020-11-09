@@ -1,14 +1,20 @@
 export const SWRCachePath = {
-  getTotalRewardsAmount: (propertyAddress: string) => `propertyAddresses/${propertyAddress}/getTotalRewardsAmount`,
-  getTotalStakingAmount: (propertyAddress: string) => `propertyAddresses/${propertyAddress}/getTotalStakingAmount`,
-  getMyHolderAmount: (propertyAddress: string) => `propertyAddresses/${propertyAddress}/getMyHolderAmount`,
-  getMyStakingRewardAmount: (propertyAddress: string) =>
-    `propertyAddresses/${propertyAddress}/getMyStakingRewardAmount`,
-  getMyStakingAmount: (propertyAddress: string) => `propertyAddresses/${propertyAddress}/getMyStakingAmount`,
-  getTotalStakingAmountOnProtocol: `getTotalStakingAmountOnProtocol`,
-  getWithdrawalStatus: (propertyAddress: string) => `propertyAddresses/${propertyAddress}/getWithdrawalStatus`,
-  calculateMaxRewardsPerBlock: `calculateMaxRewardsPerBlock`,
-  totalSupply: `totalSupply`,
-  holdersShare: (amount?: string, lockedups?: string) => `amount/${amount}/lockedups/${lockedups}/holdersShare`,
-  propertyAuthor: (propertyAddress?: string) => `propertyAddresses/${propertyAddress}/author`
+  getTotalRewardsAmount: (propertyAddress: string, user?: string) =>
+    `propertyAddresses/${user}${propertyAddress}/getTotalRewardsAmount`,
+  getTotalStakingAmount: (propertyAddress: string, user?: string) =>
+    `propertyAddresses/${user}${propertyAddress}/getTotalStakingAmount`,
+  getMyHolderAmount: (propertyAddress: string, user?: string) =>
+    `propertyAddresses/${user}${propertyAddress}/getMyHolderAmount`,
+  getMyStakingRewardAmount: (propertyAddress: string, user?: string) =>
+    `propertyAddresses/${user}${propertyAddress}/getMyStakingRewardAmount`,
+  getMyStakingAmount: (propertyAddress: string, user?: string) =>
+    `propertyAddresses/${user}${propertyAddress}/getMyStakingAmount`,
+  getTotalStakingAmountOnProtocol: (user?: string) => `getTotalStakingAmountOnProtocol/${user}`,
+  getWithdrawalStatus: (propertyAddress: string, user?: string) =>
+    `propertyAddresses/${user}${propertyAddress}/getWithdrawalStatus`,
+  calculateMaxRewardsPerBlock: (user?: string) => `calculateMaxRewardsPerBlock/${user}`,
+  totalSupply: (user?: string) => `totalSupply/${user}`,
+  holdersShare: (amount?: string, lockedups?: string, user?: string) =>
+    `amount/${amount}/lockedups/${lockedups}/holdersShare/${user}`,
+  propertyAuthor: (propertyAddress?: string, user?: string) => `propertyAddresses/${user}${propertyAddress}/author`
 } as const
