@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import { SWRCachePath } from './cache-path'
 import useSWR, { mutate } from 'swr'
 import { message } from 'antd'
@@ -15,6 +15,7 @@ import {
   getProperty
 } from './utility'
 import { sign } from 'src/fixtures/wallet/utility'
+import WalletContext from 'src/context/walletContext'
 
 export const useGetUser = (walletAddress: string) => {
   const shouldFetch = walletAddress !== ''
@@ -28,6 +29,7 @@ export const useGetUser = (walletAddress: string) => {
 
 export const usePostUser = (walletAddress: string) => {
   const key = 'useGetUser'
+  const { web3 } = useContext(WalletContext)
   const [isLoading, setIsLoading] = useState<boolean>(false)
 
   const shouldFetch = walletAddress !== ''
@@ -37,7 +39,10 @@ export const usePostUser = (walletAddress: string) => {
 
   const postUserHandler = async (name: string) => {
     const signMessage = `submit display name: ${name}`
-    const signature = (await sign(signMessage)) || ''
+    const signature = (await sign(web3, signMessage)) || ''
+    if (!signature) {
+      return
+    }
 
     setIsLoading(true)
     message.loading({ content: 'update display name...', duration: 0, key })
@@ -73,6 +78,7 @@ export const useGetPropertyTags = (propertyAddress: string) => {
 
 export const usePostPropertyTags = (propertyAddress: string, walletAddress: string) => {
   const key = 'useGetPropertyTags'
+  const { web3 } = useContext(WalletContext)
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const shouldFetch = propertyAddress !== '' && walletAddress !== ''
   const { data, mutate } = useSWR<UnwrapFunc<typeof getPropertyTags>, Error>(
@@ -81,7 +87,10 @@ export const usePostPropertyTags = (propertyAddress: string, walletAddress: stri
 
   const postPropertyTagsHandler = async (tags: string) => {
     const signMessage = `submit property tags: ${tags}`
-    const signature = (await sign(signMessage)) || ''
+    const signature = (await sign(web3, signMessage)) || ''
+    if (!signature) {
+      return
+    }
 
     setIsLoading(true)
     message.loading({ content: 'update property tags...', duration: 0, key })
@@ -117,6 +126,7 @@ export const useGetAccount = (walletAddress?: string) => {
 
 export const useCreateAccount = (walletAddress: string) => {
   const key = 'useCreateAccount'
+  const { web3 } = useContext(WalletContext)
   const [isLoading, setIsLoading] = useState<boolean>(false)
 
   const shouldFetch = walletAddress !== ''
@@ -126,7 +136,10 @@ export const useCreateAccount = (walletAddress: string) => {
 
   const postAccountHandler = async (name?: string, biography?: string) => {
     const signMessage = `create accout: ${name}, ${biography}`
-    const signature = (await sign(signMessage)) || ''
+    const signature = (await sign(web3, signMessage)) || ''
+    if (!signature) {
+      return
+    }
 
     setIsLoading(true)
     message.loading({ content: 'update account data...', duration: 0, key })
@@ -152,6 +165,7 @@ export const useCreateAccount = (walletAddress: string) => {
 
 export const useUpdateAccount = (id: number, walletAddress: string) => {
   const key = 'useUpdateAccount'
+  const { web3 } = useContext(WalletContext)
   const [isLoading, setIsLoading] = useState<boolean>(false)
 
   const shouldFetch = id !== 0
@@ -161,7 +175,10 @@ export const useUpdateAccount = (id: number, walletAddress: string) => {
 
   const putAccountHandler = async (name?: string, biography?: string) => {
     const signMessage = `update accout: ${name}, ${biography}`
-    const signature = (await sign(signMessage)) || ''
+    const signature = (await sign(web3, signMessage)) || ''
+    if (!signature) {
+      return
+    }
 
     setIsLoading(true)
     message.loading({ content: 'update account data...', duration: 0, key })
@@ -187,11 +204,15 @@ export const useUpdateAccount = (id: number, walletAddress: string) => {
 
 export const useUploadFile = (walletAddress: string) => {
   const key = 'useUploadFile'
+  const { web3 } = useContext(WalletContext)
   const [isLoading, setIsLoading] = useState<boolean>(false)
 
   const postUploadFileHandler = async (refId: number, ref: string, field: string, file: any, path?: string) => {
     const signMessage = `upload file: ${refId}, ${ref}, ${field}`
-    const signature = (await sign(signMessage)) || ''
+    const signature = (await sign(web3, signMessage)) || ''
+    if (!signature) {
+      return
+    }
 
     setIsLoading(true)
     message.loading({ content: 'upload data...', duration: 0, key })
