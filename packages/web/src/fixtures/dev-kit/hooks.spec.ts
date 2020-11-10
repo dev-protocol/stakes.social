@@ -7,7 +7,6 @@ import {
   useWithdrawStakingReward,
   useGetMyHolderAmount,
   useStake,
-  useCancelStaking,
   useStakingShare,
   useWithdrawStaking,
   useCreateProperty,
@@ -18,13 +17,11 @@ import {
   useGetPolicyAddressesList
 } from './hooks'
 import useSWR from 'swr'
-import { toNaturalNumber, toAmountNumber } from 'src/fixtures/utility'
+import { toNaturalNumber, toAmountNumber, toBigNumber } from 'src/fixtures/utility'
 import {
   withdrawHolderAmount,
   withdrawStakingAmount,
   stakeDev,
-  cancelStaking,
-  withdrawStakingRewardAmount,
   createProperty,
   marketScheme,
   authenticate,
@@ -187,7 +184,7 @@ describe('dev-kit hooks', () => {
   describe('useWithdrawStakingReward', () => {
     test('success withdraw', async () => {
       const { result, waitForNextUpdate } = renderHook(() => useWithdrawStakingReward())
-      ;(withdrawStakingRewardAmount as jest.Mock).mockResolvedValue(true)
+      ;(withdrawStakingAmount as jest.Mock).mockResolvedValue(true)
       act(() => {
         result.current.withdrawStakingReward('property-address')
       })
@@ -199,7 +196,7 @@ describe('dev-kit hooks', () => {
     test('failure withdraw', async () => {
       const error = new Error('error')
       const { result, waitForNextUpdate } = renderHook(() => useWithdrawStakingReward())
-      ;(withdrawStakingRewardAmount as jest.Mock).mockRejectedValue(error)
+      ;(withdrawStakingAmount as jest.Mock).mockRejectedValue(error)
       message.error = jest.fn(() => {}) as any
       act(() => {
         result.current.withdrawStakingReward('property-address')
@@ -215,7 +212,7 @@ describe('dev-kit hooks', () => {
       const { result, waitForNextUpdate } = renderHook(() => useWithdrawStaking())
       ;(withdrawStakingAmount as jest.Mock).mockResolvedValue(true)
       act(() => {
-        result.current.withdrawStaking('property-address')
+        result.current.withdrawStaking('property-address', toBigNumber(0))
       })
       await waitForNextUpdate()
       expect(result.current.error).toBe(undefined)
@@ -228,7 +225,7 @@ describe('dev-kit hooks', () => {
       ;(withdrawStakingAmount as jest.Mock).mockRejectedValue(error)
       message.error = jest.fn(() => {}) as any
       act(() => {
-        result.current.withdrawStaking('property-address')
+        result.current.withdrawStaking('property-address', toBigNumber(0))
       })
       await waitForNextUpdate()
       expect(result.current.error).toBe(error)
@@ -266,27 +263,6 @@ describe('dev-kit hooks', () => {
       await waitForNextUpdate()
       expect(result.current.error).toBe(error)
       expect(result.current.isLoading).toBe(false)
-    })
-  })
-
-  describe('useCancelStaking', () => {
-    test('success cancel', async () => {
-      const { result, waitForNextUpdate } = renderHook(() => useCancelStaking())
-      ;(cancelStaking as jest.Mock).mockResolvedValue(true)
-      act(() => {
-        result.current.cancel('property-address')
-      })
-      await waitForNextUpdate()
-      expect(result.current.error).toBe(undefined)
-      expect(result.current.isLoading).toBe(false)
-    })
-
-    test('failure cancel', async () => {
-      const { result } = renderHook(() => useCancelStaking())
-      act(() => {
-        result.current.cancel('property-address')
-      })
-      expect(result.current.error).toBe(undefined)
     })
   })
 
