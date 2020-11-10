@@ -144,7 +144,7 @@ export const finalUnlockSchedules = async (client: Web3): Promise<undefined | Un
 
 export const unstakeQuery = async (client: Web3, amount: BigNumber): Promise<BigNumber> => {
   return (contract =>
-    contract && client
+    contract && client.currentProvider
       ? execute({
           contract,
           client,
@@ -218,7 +218,7 @@ type AccountingObject = {
 
 export const updateAccounting = async (client: Web3): Promise<AccountingObject> => {
   return (contract =>
-    contract && client
+    contract && client.currentProvider
       ? execute<Accounting>({
           contract,
           client,
