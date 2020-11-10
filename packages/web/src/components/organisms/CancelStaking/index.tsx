@@ -1,7 +1,8 @@
 import React, { useState, useCallback } from 'react'
 import { useWithdrawStaking, useCancelStaking } from 'src/fixtures/dev-kit/hooks'
 import { CancelForm } from 'src/components/molecules/CancelForm'
-import { useBlockNumberStream } from 'src/fixtures/wallet/hooks'
+import { useBlockNumberStream, useProvider } from 'src/fixtures/wallet/hooks'
+import { whenDefined } from 'src/fixtures/utility'
 import { getWithdrawalStatus } from 'src/fixtures/dev-kit/client'
 import { useEffect } from 'react'
 
@@ -17,18 +18,21 @@ export const CancelStaking = ({ className, propertyAddress }: Props) => {
   const { cancel } = useCancelStaking()
   const { withdrawStaking } = useWithdrawStaking()
   const { blockNumber } = useBlockNumberStream(isCountingBlocks)
+  const { web3 } = useProvider()
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const checkWithdrawable = useCallback(
     () =>
-      getWithdrawalStatus(propertyAddress).then(withdrawStatus => {
-        setWithdrawable(
-          withdrawable ? withdrawable : Boolean(withdrawStatus && blockNumber && withdrawStatus <= blockNumber)
-        )
-        setRemainBlocks((withdrawStatus || 0) - (blockNumber || 0))
-        withdrawStatus && !withdrawable ? setIsCountingBlocks(true) : setIsCountingBlocks(false)
+      whenDefined(web3, x => {
+        getWithdrawalStatus(x, propertyAddress).then(withdrawStatus => {
+          setWithdrawable(
+            withdrawable ? withdrawable : Boolean(withdrawStatus && blockNumber && withdrawStatus <= blockNumber)
+          )
+          setRemainBlocks((withdrawStatus || 0) - (blockNumber || 0))
+          withdrawStatus && !withdrawable ? setIsCountingBlocks(true) : setIsCountingBlocks(false)
+        })
       }),
-    [propertyAddress, withdrawable, blockNumber]
+    [propertyAddress, withdrawable, blockNumber, web3]
   )
   const handleCancelStaking = useCallback(() => {
     cancel(propertyAddress)

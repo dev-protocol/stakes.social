@@ -319,19 +319,21 @@ export const useCreateProperty = () => {
       setIsLoading(true)
       message.loading({ content: 'now creating property...', duration: 0, key })
       setError(undefined)
-      return whenDefined(web3, x =>
-        createProperty(x, name, symbol, author)
-          .then(result => {
-            message.success({ content: 'success creating property!', key })
-            setIsLoading(false)
-            return result || ''
-          })
-          .catch(err => {
-            setError(err)
-            message.error({ content: err.message, key })
-            setIsLoading(false)
-            return ''
-          })
+      return (
+        whenDefined(web3, x =>
+          createProperty(x, name, symbol, author)
+            .then(result => {
+              message.success({ content: 'success creating property!', key })
+              setIsLoading(false)
+              return result || ''
+            })
+            .catch(err => {
+              setError(err)
+              message.error({ content: err.message, key })
+              setIsLoading(false)
+              return ''
+            })
+        ) || ''
       )
     },
     [web3]

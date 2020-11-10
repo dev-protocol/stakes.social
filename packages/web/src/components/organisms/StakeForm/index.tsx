@@ -1,4 +1,5 @@
 import React, { useCallback, useState, useEffect, Dispatch, SetStateAction, ChangeEvent } from 'react'
+import { useProvider } from 'src/fixtures/wallet/hooks'
 import { balanceOf, getMyStakingAmount } from 'src/fixtures/dev-kit/client'
 import {
   useStake,
@@ -109,6 +110,7 @@ export const StakeForm = ({ className, propertyAddress }: Props) => {
   const [withdrawableTokens, setWithdrawableTokens] = useState<string>('')
   const { myHolderAmount } = useGetMyHolderAmount(propertyAddress)
   const { myStakingAmount } = useGetMyStakingAmount(propertyAddress)
+  const { web3 } = useProvider()
   const { stake } = useStake()
   const { apy } = useAPY()
   const { withdrawStakingReward } = useWithdrawStakingReward()
@@ -154,7 +156,7 @@ export const StakeForm = ({ className, propertyAddress }: Props) => {
           value={stakeAmount}
           onChange={handleOnChange(setStakeAmount)}
           onSearch={stakeFor}
-          suffix={createSuffix({ onClick: handleClickMax(setStakeAmount, () => balanceOf()) })}
+          suffix={web3 && createSuffix({ onClick: handleClickMax(setStakeAmount, () => balanceOf(web3)) })}
           type="number"
         />
         <Estimated title="Estimated Annual Reward">
@@ -170,9 +172,12 @@ export const StakeForm = ({ className, propertyAddress }: Props) => {
           value={withdrawAmount}
           onChange={handleOnChange(setWithdrawAmount)}
           onSearch={withdrawFor}
-          suffix={createSuffix({
-            onClick: handleClickMax(setWithdrawAmount, () => getMyStakingAmount(propertyAddress))
-          })}
+          suffix={
+            web3 &&
+            createSuffix({
+              onClick: handleClickMax(setWithdrawAmount, () => getMyStakingAmount(web3, propertyAddress))
+            })
+          }
           type="number"
         />
         <Estimated title="Withdrawable Amount">
