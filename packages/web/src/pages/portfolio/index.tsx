@@ -10,17 +10,31 @@ import { BuyDevButton } from 'src/components/molecules/BuyButton'
 
 const PortfolioHeader = styled.div`
   display: grid;
-  grid-template-rows: 1fr 1fr;
-  grid-template-columns: 3fr 4fr;
-  justify-content: center;
+  grid-gap: 1rem;
+  grid-template-areas:
+    'heading heading'
+    'switcher buy';
+  grid-template-rows: auto;
+  justify-content: stretch;
+  grid-template-columns: 1fr auto;
   align-items: center;
   padding-top: 10px;
 
   @media (min-width: 768px) {
-    grid-template-rows: none;
-    grid-template-columns: 2fr 2fr 1fr 1fr;
-    column-gap: 48px;
+    grid-template-areas: 'heading switcher buy';
+    grid-template-columns: 1fr auto auto;
+    grid-gap: 2rem;
   }
+`
+
+const Heading = styled(H2)`
+  grid-area: heading;
+`
+const Switcher = styled(CurrencySwitcher)`
+  grid-area: switcher;
+`
+const Buy = styled(BuyDevButton)`
+  grid-area: buy;
 `
 
 const Portfolio = () => {
@@ -30,9 +44,9 @@ const Portfolio = () => {
       <Header></Header>
       <Container>
         <PortfolioHeader>
-          <H2>Your Portfoilo</H2>
-          <CurrencySwitcher></CurrencySwitcher>
-          <BuyDevButton></BuyDevButton>
+          <Heading>Your Portfoilo</Heading>
+          <Switcher />
+          <Buy />
         </PortfolioHeader>
       </Container>
       <Footer />
