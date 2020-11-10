@@ -7,6 +7,7 @@ import { SWRCachePath } from './cache-path'
 import { finalUnlockSchedules, stake, unstake } from './client'
 import {
   useAllTokensClaimed,
+  useAPY,
   useEstimateReward,
   useFinalUnlockSchedules,
   useIsAlreadyFinished,
@@ -18,11 +19,13 @@ import {
   useTotalStakedFor,
   useTotalStakingShares,
   useUnstake,
+  useUnstakeQuery,
   useUpdateAccounting
 } from './hooks'
 
 jest.mock('swr')
 jest.mock('src/fixtures/_pages/liquidity/geyser/client.ts')
+jest.mock('src/fixtures/_pages/liquidity/uniswap-pool/client.ts')
 
 describe('geyser hooks', () => {
   describe('useTotalRewards', () => {
@@ -30,27 +33,15 @@ describe('geyser hooks', () => {
       const data = undefined
       const error = undefined
       ;(useSWR as jest.Mock).mockImplementationOnce(() => ({ data, error }))
-      ;(useSWR as jest.Mock).mockImplementationOnce(() => ({ data, error }))
       const { result } = renderHook(() => useTotalRewards())
-      expect(result.current.data.toString()).toBe('0')
+      expect(result.current.data?.toString()).toBe(undefined)
     })
 
     test('success fetching data', () => {
       const error = undefined
-      ;(useSWR as jest.Mock).mockImplementationOnce(() => ({
-        data: {
-          totalLocked: '10000',
-          totalUnlocked: '20000',
-          totalsStakingShareSeconds: '10000',
-          totalStakingShareSeconds: '10000',
-          totalUserRewards: '10000',
-          now: '10000'
-        },
-        error
-      }))
       ;(useSWR as jest.Mock).mockImplementationOnce(() => ({ data: toEVMBigNumber('30000'), error }))
       const { result } = renderHook(() => useTotalRewards())
-      expect(result.current.data.toString()).toBe('60000')
+      expect(result.current.data?.toString()).toBe('30000')
     })
 
     test('failure fetching data', () => {
@@ -464,6 +455,80 @@ describe('geyser hooks', () => {
       const error = new Error(errorMessage)
       ;(useSWR as jest.Mock).mockImplementation(() => ({ data, error }))
       const { result } = renderHook(() => useTotalStakedFor())
+      expect(result.current.error).toBe(error)
+      expect(result.current.error?.message).toBe(errorMessage)
+    })
+  })
+
+  describe('useMutateDepositDependence', () => {
+    test('mutate data', () => {
+      const { result } = renderHook(() => useMutateDepositDependence())
+      act(() => {
+        result.current.purge()
+      })
+      expect((mutate as jest.Mock).mock.calls.length).toBe(2)
+      expect((mutate as jest.Mock).mock.calls[0][0]).toBe(SWRCachePath.getStaked)
+      expect((mutate as jest.Mock).mock.calls[1][0]).toBe(SWRCachePath.totalStakedFor)
+    })
+  })
+
+  describe('useAPY', () => {
+    test('data is undefined', () => {
+      ;(useSWR as jest.Mock).mockImplementationOnce(() => ({ data: undefined }))
+      ;(useSWR as jest.Mock).mockImplementationOnce(() => ({ data: undefined }))
+      ;(useSWR as jest.Mock).mockImplementationOnce(() => ({ data: undefined }))
+      const { result } = renderHook(() => useAPY())
+      expect(result.current.data.toString()).toBe('0')
+    })
+
+    test('success fetching data', () => {
+      ;(useSWR as jest.Mock).mockImplementationOnce(() => ({ data: toEVMBigNumber('30000') }))
+      ;(useSWR as jest.Mock).mockImplementationOnce(() => ({ data: toEVMBigNumber('10000') }))
+      ;(useSWR as jest.Mock).mockImplementationOnce(() => ({
+        data: {
+          data: {
+            pair: {
+              reserveUSD: '10000',
+              totalSupply: '10000',
+              reserve0: '10000'
+            }
+          }
+        }
+      }))
+      const { result } = renderHook(() => useAPY())
+      expect(result.current.data.toString()).toBe('300')
+    })
+
+    test('failure fetching data', () => {
+      const data = undefined
+      const errorMessage = 'error'
+      const error = new Error(errorMessage)
+      ;(useSWR as jest.Mock).mockImplementation(() => ({ data, error }))
+      const { result } = renderHook(() => useAPY())
+      expect(result.current.data.toString()).toBe('0')
+    })
+  })
+
+  describe('useUnstakeQuery', () => {
+    test('data is undefined', () => {
+      ;(useSWR as jest.Mock).mockImplementation(() => ({ data: undefined }))
+      const { result } = renderHook(() => useUnstakeQuery())
+      expect(result.current.data).toBe(undefined)
+    })
+
+    test('success fetching data', () => {
+      const value = '12345'
+      ;(useSWR as jest.Mock).mockImplementation(() => ({ data: toBigNumber(value) }))
+      const { result } = renderHook(() => useUnstakeQuery(toBigNumber(value)))
+      expect(result.current.data?.toString()).toBe(value)
+    })
+
+    test('failure fetching data', () => {
+      const data = undefined
+      const errorMessage = 'error'
+      const error = new Error(errorMessage)
+      ;(useSWR as jest.Mock).mockImplementation(() => ({ data, error }))
+      const { result } = renderHook(() => useUnstakeQuery())
       expect(result.current.error).toBe(error)
       expect(result.current.error?.message).toBe(errorMessage)
     })

@@ -174,6 +174,13 @@ export const unlockTokens = async (): Promise<BigNumber> => {
       : Promise.resolve(''))(getClient()).then(toEVMBigNumber)
 }
 
+export const allTokensLocked = async (): Promise<EventData[]> => {
+  return (([contract]) =>
+    contract ? contract.getPastEvents('TokensLocked', { fromBlock: 0, toBlock: 'latest' }) : Promise.resolve([]))(
+    getClient()
+  )
+}
+
 export const allTokensClaimed = async (): Promise<EventData[]> => {
   return (([contract]) =>
     contract ? contract.getPastEvents('TokensClaimed', { fromBlock: 0, toBlock: 'latest' }) : Promise.resolve([]))(

@@ -4,10 +4,10 @@ exports[`StakeForm Snapshot 1`] = `
 <body>
   <div>
     <div
-      class="w1tfby-1 cwhvuR"
+      class="w1tfby-1 jGLtYs"
     >
       <div
-        class="w1tfby-2 jebiJz"
+        class="w1tfby-2 htxnGK"
       >
         <label
           for="stake"
@@ -15,13 +15,13 @@ exports[`StakeForm Snapshot 1`] = `
           Stake
         </label>
         <span
-          class="ant-input-group-wrapper ant-input-group-wrapper-lg ant-input-search ant-input-search-large w1tfby-0 dOmxnM"
+          class="ant-input-group-wrapper ant-input-group-wrapper-lg ant-input-search ant-input-search-large w1tfby-0 frIYqB"
         >
           <span
             class="ant-input-wrapper ant-input-group"
           >
             <span
-              class="ant-input-affix-wrapper ant-input-affix-wrapper-lg ant-input-search ant-input-search-large w1tfby-0 dOmxnM"
+              class="ant-input-affix-wrapper ant-input-affix-wrapper-lg ant-input-search ant-input-search-large w1tfby-0 frIYqB"
             >
               <input
                 class="ant-input ant-input-lg"
@@ -36,7 +36,7 @@ exports[`StakeForm Snapshot 1`] = `
                   DEV
                 </span>
                 <button
-                  class="ant-btn ant-btn-primary ant-btn-sm sc-1ttu0x8-0 jYmkYf"
+                  class="ant-btn ant-btn-primary ant-btn-sm sc-1ttu0x8-0 pssBW"
                   type="button"
                 >
                   <span>
@@ -60,7 +60,7 @@ exports[`StakeForm Snapshot 1`] = `
           </span>
         </span>
         <div
-          class="ant-card ant-card-bordered w1tfby-3 fIWfUe"
+          class="ant-card ant-card-bordered w1tfby-3 gaYbxX"
         >
           <div
             class="ant-card-head"
@@ -86,7 +86,7 @@ exports[`StakeForm Snapshot 1`] = `
         </div>
       </div>
       <div
-        class="w1tfby-2 jebiJz"
+        class="w1tfby-2 htxnGK"
       >
         <label
           for="withdraw"
@@ -94,13 +94,13 @@ exports[`StakeForm Snapshot 1`] = `
           Withdraw
         </label>
         <span
-          class="ant-input-group-wrapper ant-input-group-wrapper-lg ant-input-search ant-input-search-large w1tfby-0 dOmxnM"
+          class="ant-input-group-wrapper ant-input-group-wrapper-lg ant-input-search ant-input-search-large w1tfby-0 frIYqB"
         >
           <span
             class="ant-input-wrapper ant-input-group"
           >
             <span
-              class="ant-input-affix-wrapper ant-input-affix-wrapper-lg ant-input-search ant-input-search-large w1tfby-0 dOmxnM"
+              class="ant-input-affix-wrapper ant-input-affix-wrapper-lg ant-input-search ant-input-search-large w1tfby-0 frIYqB"
             >
               <input
                 class="ant-input ant-input-lg"
@@ -115,7 +115,7 @@ exports[`StakeForm Snapshot 1`] = `
                   DEV
                 </span>
                 <button
-                  class="ant-btn ant-btn-primary ant-btn-sm sc-1ttu0x8-0 jYmkYf"
+                  class="ant-btn ant-btn-primary ant-btn-sm sc-1ttu0x8-0 pssBW"
                   type="button"
                 >
                   <span>
@@ -139,7 +139,7 @@ exports[`StakeForm Snapshot 1`] = `
           </span>
         </span>
         <div
-          class="ant-card ant-card-bordered w1tfby-3 fIWfUe"
+          class="ant-card ant-card-bordered w1tfby-3 gaYbxX"
         >
           <div
             class="ant-card-head"

@@ -13,39 +13,38 @@ import {
   updateAccounting,
   bonusPeriodSec,
   startBonus,
-  totalStakedFor
+  allTokensLocked,
+  totalStakedFor,
+  unstakeQuery
 } from './client'
 import { useCallback, useState } from 'react'
 import { message } from 'antd'
-import { getUTC, toBigNumber, toEVMBigNumber, UnwrapFunc, whenDefined } from 'src/fixtures/utility'
+import { getUTC, toBigNumber, toEVMBigNumber, toNaturalNumber, UnwrapFunc, whenDefined } from 'src/fixtures/utility'
 import { INITIAL_SHARES_PER_TOKEN, ONE_MONTH_SECONDS, SYSTEM_SETTIMEOUT_MAXIMUM_DELAY_VALUE } from '../constants/number'
 import { getBlock } from 'src/fixtures/wallet/utility'
 import { useGetAccountAddress } from 'src/fixtures/wallet/hooks'
+import { useTheGraph } from '../uniswap-pool/hooks'
 
 const getAllTokensClaimed = () =>
-  allTokensClaimed().then(allEvents =>
-    allEvents.reduce(
+  allTokensClaimed().then(allEvents => {
+    console.log(allEvents)
+    return allEvents.reduce(
       (a: BigNumber, c) => a.plus(c.returnValues.amount),
       toBigNumber(allEvents[0]?.returnValues.amount || 0)
     )
-  )
+  })
+
+const getTokensLocked = () =>
+  allTokensLocked().then(allEvents => {
+    console.log(allEvents)
+    return allEvents.reduce((a: BigNumber, c) => a.plus(c.returnValues.amount), toBigNumber(0))
+  })
 
 export const useTotalRewards = () => {
-  const { data: dataAccounting, error: errorAccounting } = useSWR<UnwrapFunc<typeof updateAccounting>, Error>(
-    SWRCachePath.getUpdateAccounting,
-    () => updateAccounting()
-  )
-  const { data: dataAllTokensClaimed, error: errorAllTokensClaimed } = useSWR<BigNumber, Error>(
-    SWRCachePath.useAllTokensClaimed,
-    getAllTokensClaimed
-  )
-  const data =
-    dataAccounting && dataAllTokensClaimed
-      ? toBigNumber(dataAccounting.totalLocked).plus(dataAccounting.totalUnlocked).plus(dataAllTokensClaimed)
-      : toEVMBigNumber(0)
+  const { data, error } = useSWR<BigNumber, Error>(SWRCachePath.allTokensLocked, getTokensLocked)
   return {
     data,
-    error: errorAccounting || errorAllTokensClaimed
+    error
   }
 }
 
@@ -286,5 +285,37 @@ export const useMutateDepositDependence = () => {
 
   return {
     purge
+  }
+}
+
+export const useAPY = () => {
+  const { data: totalRewards } = useTotalRewards()
+  const { data: totalStaked } = useTotalStaked()
+  const { data: theGraph } = useTheGraph(totalStaked?.toString())
+  const apy =
+    totalStaked && theGraph && theGraph.data.pair && totalRewards
+      ? (() => {
+          const max = toNaturalNumber(totalRewards)
+          const stakedDev = toNaturalNumber(totalStaked)
+            .div(theGraph.data.pair.totalSupply)
+            .times(theGraph.data.pair.reserve0)
+
+          return max.div(stakedDev).times(100)
+        })()
+      : toBigNumber(0)
+
+  return {
+    data: apy
+  }
+}
+
+export const useUnstakeQuery = (amount?: BigNumber) => {
+  const { data, error } = useSWR<UnwrapFunc<typeof totalStakedFor> | undefined, Error>(
+    SWRCachePath.unstakeQuery(amount?.toFixed()),
+    () => whenDefined(amount, x => unstakeQuery(x))
+  )
+  return {
+    data,
+    error
   }
 }
