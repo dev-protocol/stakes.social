@@ -158,10 +158,10 @@ exports[`StakeForm Snapshot 1`] = `
             class="ant-card-body"
           >
             <p>
-              0
+              5000
                DEV
                
-              (0 + 0)
+              (0 + 5000)
             </p>
           </div>
         </div>

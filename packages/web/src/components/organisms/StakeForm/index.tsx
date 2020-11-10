@@ -1,16 +1,17 @@
-import React, { useCallback, useState, useEffect, Dispatch, SetStateAction, ChangeEvent } from 'react'
+import React, { useCallback, useState, useEffect, Dispatch, SetStateAction, ChangeEvent, useContext } from 'react'
 import { balanceOf, getMyStakingAmount } from 'src/fixtures/dev-kit/client'
 import {
   useStake,
-  useWithdrawStakingReward,
+  useWithdrawStaking,
   useAPY,
-  useGetMyHolderAmount,
-  useGetMyStakingAmount
+  useGetMyStakingAmount,
+  useGetMyStakingRewardAmount
 } from 'src/fixtures/dev-kit/hooks'
 import { Card, Input } from 'antd'
 import styled from 'styled-components'
 import { Max } from 'src/components/molecules/Max'
-import { toBigNumber, toNaturalNumber, whenDefined } from 'src/fixtures/utility'
+import { toAmountNumber, toBigNumber, toNaturalNumber, whenDefined } from 'src/fixtures/utility'
+import WalletContext from 'src/context/walletContext'
 
 interface Props {
   className?: string
@@ -101,17 +102,18 @@ const handleClickMax = (
 }
 
 export const StakeForm = ({ className, propertyAddress }: Props) => {
+  const { web3 } = useContext(WalletContext)
   const [stakeAmount, setStakeAmount] = useState<string>('')
   const [withdrawAmount, setWithdrawAmount] = useState<string>('')
   const [estimatedStakingAPY, setEstimatedStakingAPY] = useState<string>('')
   const [claimedTokens, setClaimedTokens] = useState<string | undefined>()
   const [interestTokens, setInterestTokens] = useState<string | undefined>()
   const [withdrawableTokens, setWithdrawableTokens] = useState<string>('')
-  const { myHolderAmount } = useGetMyHolderAmount(propertyAddress)
+  const { myStakingRewardAmount } = useGetMyStakingRewardAmount(propertyAddress)
   const { myStakingAmount } = useGetMyStakingAmount(propertyAddress)
   const { stake } = useStake()
   const { apy } = useAPY()
-  const { withdrawStakingReward } = useWithdrawStakingReward()
+  const { withdrawStaking } = useWithdrawStaking()
   const stakeFor = useCallback(
     (amount: string) => {
       stake(propertyAddress, amount)
@@ -119,12 +121,10 @@ export const StakeForm = ({ className, propertyAddress }: Props) => {
     [stake, propertyAddress]
   )
   const withdrawFor = useCallback(
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     (amount: string) => {
-      // TODO: Supports partial withdrawal once the protocol core is updated
-      withdrawStakingReward(propertyAddress)
+      withdrawStaking(propertyAddress, toAmountNumber(amount))
     },
-    [withdrawStakingReward, propertyAddress]
+    [withdrawStaking, propertyAddress]
   )
 
   useEffect(() => {
@@ -133,15 +133,14 @@ export const StakeForm = ({ className, propertyAddress }: Props) => {
   }, [apy, stakeAmount, setEstimatedStakingAPY])
 
   useEffect(() => {
-    const reward = whenDefined(myStakingAmount, toNaturalNumber)
-    const staking = (staked =>
-      whenDefined(staked, x => (x.isGreaterThan(withdrawAmount) ? toBigNumber(withdrawAmount) : x)))(
-      whenDefined(myStakingAmount, toNaturalNumber)
+    const reward = myStakingRewardAmount
+    const staking = whenDefined(myStakingAmount, x =>
+      x.isGreaterThan(withdrawAmount || 0) ? toBigNumber(withdrawAmount) : x
     )
-    setClaimedTokens(whenDefined(staking, x => x.dp(5).toFixed()))
-    setInterestTokens(whenDefined(reward, x => x.dp(5).toFixed()))
-    setWithdrawableTokens(staking && reward ? staking.plus(reward).dp(5).toFixed() : '0')
-  }, [myHolderAmount, myStakingAmount, withdrawAmount, setClaimedTokens])
+    setClaimedTokens(whenDefined(staking, x => x.dp(2).toFixed()))
+    setInterestTokens(whenDefined(reward, x => x.dp(2).toFixed()))
+    setWithdrawableTokens(staking && reward ? staking.plus(reward).dp(2).toFixed() : '0')
+  }, [myStakingRewardAmount, myStakingAmount, withdrawAmount, setClaimedTokens])
 
   return (
     <StakeContainer className={className}>
@@ -171,7 +170,7 @@ export const StakeForm = ({ className, propertyAddress }: Props) => {
           onChange={handleOnChange(setWithdrawAmount)}
           onSearch={withdrawFor}
           suffix={createSuffix({
-            onClick: handleClickMax(setWithdrawAmount, () => getMyStakingAmount(propertyAddress))
+            onClick: handleClickMax(setWithdrawAmount, () => getMyStakingAmount(propertyAddress, web3))
           })}
           type="number"
         />
