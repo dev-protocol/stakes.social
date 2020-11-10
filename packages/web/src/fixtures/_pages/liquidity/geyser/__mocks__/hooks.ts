@@ -75,7 +75,7 @@ export const useRewardMultiplier = () => {
 
 export const useTotalStakedFor = () => {
   return {
-    data: '10000',
+    data: toBigNumber('10000'),
     mutate: () => {}
   }
 }
@@ -83,5 +83,17 @@ export const useTotalStakedFor = () => {
 export const useMutateDepositDependence = () => {
   return {
     mutate: () => {}
+  }
+}
+
+export const useAPY = () => {
+  return {
+    data: toBigNumber(1000)
+  }
+}
+
+export const useUnstakeQuery = () => {
+  return {
+    data: toBigNumber(10000)
   }
 }

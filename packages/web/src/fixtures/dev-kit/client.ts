@@ -3,6 +3,7 @@ import { contractFactory } from '@devprtcl/dev-kit-js'
 import { getAccountAddress } from 'src/fixtures/wallet/utility'
 import { getContractAddress } from './get-contract-address'
 import { client as devClient } from '@devprtcl/dev-kit-js'
+import BigNumber from 'bignumber.js'
 
 const newClient = () => {
   const { ethereum } = window
@@ -79,40 +80,16 @@ export const withdrawHolderAmount = async (propertyAddress: string) => {
   return client.withdraw(await getContractAddress(client, 'withdraw')).withdraw(propertyAddress)
 }
 
-export const withdrawStakingAmount = async (propertyAddress: string) => {
+export const withdrawStakingAmount = async (propertyAddress: string, amount: BigNumber) => {
   const client = newClient()
   if (!client) throw new Error(`No wallet`)
-  return client.lockup(await getContractAddress(client, 'lockup')).withdraw(propertyAddress)
-}
-
-export const withdrawStakingRewardAmount = async (propertyAddress: string) => {
-  const client = newClient()
-  if (!client) throw new Error(`No wallet`)
-  return client.lockup(await getContractAddress(client, 'lockup')).withdrawInterest(propertyAddress)
+  return client.lockup(await getContractAddress(client, 'lockup')).withdraw(propertyAddress, amount.toFixed())
 }
 
 export const stakeDev = async (propertyAddress: string, amount: string) => {
   const client = newClient()
   if (!client) throw new Error(`No wallet`)
   return client.dev(await getContractAddress(client, 'token')).deposit(propertyAddress, amount)
-}
-
-export const cancelStaking = async (propertyAddress: string) => {
-  const client = newClient()
-  if (!client) throw new Error(`No wallet`)
-  return client.lockup(await getContractAddress(client, 'lockup')).cancel(propertyAddress)
-}
-
-export const getWithdrawalStatus = async (propertyAddress: string, web3?: Web3) => {
-  const client = newClient()
-  const accountAddress = await getAccountAddress(web3)
-  if (client && accountAddress) {
-    return client
-      .lockup(await getContractAddress(client, 'lockup'))
-      .getStorageWithdrawalStatus(propertyAddress, accountAddress)
-      .then(Number)
-  }
-  return undefined
 }
 
 export const calculateMaxRewardsPerBlock = async () => {
