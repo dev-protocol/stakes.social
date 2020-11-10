@@ -2,7 +2,6 @@ import styled from 'styled-components'
 import { Menu } from 'antd'
 
 export const NavMenu = styled(Menu)`
-  background: transparent;
   color: white;
 
   .ant-menu-item-selected {
@@ -16,6 +15,7 @@ export const NavMenuItem = styled(NavMenu.Item)`
   a.link:hover {
     background-color: yellow;
   }
+  margin-right: 4em;
 `
 
 export const AccountBtn = styled.div`

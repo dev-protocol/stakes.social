@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react'
 
-import useDebouncedEffect from './hooks/useDebouncedEffect'
+import useDebouncedEffect from '../../organisms/PropertyCardList/hooks/useDebouncedEffect'
 
 import styled from 'styled-components'
 import { SearchOutlined } from '@ant-design/icons'

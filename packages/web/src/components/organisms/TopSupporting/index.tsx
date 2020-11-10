@@ -41,8 +41,6 @@ const TopSupporting = ({ accountAddress }: Props) => {
 
   const router = useRouter()
 
-  console.log('top supporting data: ', data?.account_lockup)
-
   return (
     <div>
       {!loading && data?.account_lockup?.length === 0 && <div>This author doesnt support other projects</div>}

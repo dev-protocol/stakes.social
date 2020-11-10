@@ -6,13 +6,14 @@ import { Header } from 'src/components/organisms/Header'
 import { Headline } from 'src/components/atoms/Headline'
 import { H2 } from 'src/components/atoms/Typography'
 import styled from 'styled-components'
+import { EarlyAccess } from 'src/components/atoms/EarlyAccess'
 
 type Props = {}
 
 const WrapContainer = styled.div`
   max-width: 760px;
   margin: auto;
-  padding: 1rem;
+  padding-top: 1rem;
   word-break: break-all;
 `
 
@@ -22,11 +23,11 @@ const InvitationRequest = (_: Props) => {
   return (
     <>
       <Header />
+      <EarlyAccess />
       <Headline height={300}>
-        <H2>Invitation Request</H2>
-        <p>
-          Dev Protocol is now accepting creator{"'"}s applications to onboard your Github assets to Stakes.Social. Let
-          {"'"}s make open source sustainable!
+        <H2>Creator Waitlist</H2>
+        <p style={{ textAlign: 'center' }}>
+          Dev Protocol is now accepting applications to onboard your Github OSS project.
         </p>
       </Headline>
       <WrapContainer>
