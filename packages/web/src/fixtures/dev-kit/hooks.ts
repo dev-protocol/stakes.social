@@ -5,8 +5,6 @@ import {
   withdrawHolderAmount,
   getMyHolderAmount,
   stakeDev,
-  cancelStaking,
-  withdrawStakingRewardAmount,
   withdrawStakingAmount,
   getMyStakingRewardAmount,
   createProperty,
@@ -21,7 +19,7 @@ import {
   createAndAuthenticate
 } from './client'
 import { SWRCachePath } from './cache-path'
-import { UnwrapFunc, toNaturalNumber, toAmountNumber } from 'src/fixtures/utility'
+import { UnwrapFunc, toNaturalNumber, toAmountNumber, toBigNumber } from 'src/fixtures/utility'
 import { getBlockNumber } from 'src/fixtures/wallet/utility'
 import useSWR from 'swr'
 import { message } from 'antd'
@@ -110,7 +108,7 @@ export const useWithdrawStakingReward = () => {
     setIsLoading(true)
     message.loading({ content: 'now withdrawing staking reward...', duration: 0, key })
     setError(undefined)
-    return withdrawStakingRewardAmount(propertyAddress)
+    return withdrawStakingAmount(propertyAddress, toBigNumber(0))
       .then(() => {
         message.success({ content: 'success withdrawing!', key })
         setIsLoading(false)
@@ -129,11 +127,11 @@ export const useWithdrawStaking = () => {
   const key = 'useWithdrawStaking'
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [error, setError] = useState<Error>()
-  const withdrawStaking = useCallback(async (propertyAddress: string) => {
+  const withdrawStaking = useCallback(async (propertyAddress: string, amount: BigNumber) => {
     setIsLoading(true)
     message.loading({ content: 'now withdrawing staking...', duration: 0, key })
     setError(undefined)
-    return withdrawStakingAmount(propertyAddress)
+    return withdrawStakingAmount(propertyAddress, amount)
       .then(() => {
         message.success({ content: 'success withdrawing!', key })
         setIsLoading(false)
@@ -169,30 +167,6 @@ export const useStake = () => {
   }, [])
 
   return { stake, isLoading, error }
-}
-
-export const useCancelStaking = () => {
-  const key = 'useCancelStaking'
-  const [isLoading, setIsLoading] = useState<boolean>(false)
-  const [error, setError] = useState<Error>()
-  const cancel = useCallback(async (propertyAddress: string) => {
-    setIsLoading(true)
-    message.loading({ content: 'now canceling staking...', duration: 0, key })
-    setError(undefined)
-    return cancelStaking(propertyAddress)
-      .then(() => {
-        message.success({ content: 'canceled staking', key })
-        setIsLoading(false)
-      })
-      .catch(err => {
-        setError(err)
-        message.error({ content: err.message, key })
-        setIsLoading(false)
-        throw err
-      })
-  }, [])
-
-  return { cancel, isLoading, error }
 }
 
 export const useGetWithdrawalStatus = (propertyAddress: string) => {
