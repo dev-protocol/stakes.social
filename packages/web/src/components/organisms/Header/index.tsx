@@ -108,7 +108,9 @@ export const Header = ({ colorSchema = 'white' }: Props = {}) => {
             {navs.map(nav => (
               <>
                 <NavigationItem key={nav.key}>
-                  <Link href={nav.pathname}>{nav.label}</Link>
+                  <Link href={nav.pathname}>
+                    <a>{nav.label}</a>
+                  </Link>
                 </NavigationItem>
               </>
             ))}
