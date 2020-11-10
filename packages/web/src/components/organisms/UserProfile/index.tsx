@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import { message, Button, Form, Input, Upload } from 'antd'
-import { useProvidersOutlined } from '@ant-design/icons'
+import { LoadingOutlined, PlusOutlined } from '@ant-design/icons'
 import { useProvider } from 'src/fixtures/wallet/hooks'
 import { useGetAccount, useCreateAccount, useUpdateAccount, useUploadFile } from 'src/fixtures/dev-for-apps/hooks'
 import { Account } from 'src/fixtures/dev-for-apps/utility'
