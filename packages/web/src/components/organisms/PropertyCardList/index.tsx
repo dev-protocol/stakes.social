@@ -8,7 +8,7 @@ import { CurrencySwitcher } from './CurrencySwitcher'
 import { useRouter } from 'next/router'
 import styled from 'styled-components'
 import Select from 'react-select'
-import { useGetAccountAddress } from 'src/fixtures/wallet/hooks'
+import { useProvider } from 'src/fixtures/wallet/hooks'
 
 export type FeatureTag = '' | 'GitHub' | 'Npmjs' | 'Creators'
 interface Props {
@@ -93,7 +93,7 @@ const FeatureTags = ({ tag }: { tag: FeatureTag }) => {
 }
 
 export const PropertyCardList = ({ currentPage, searchWord, sortBy, featureTag }: Props) => {
-  const { accountAddress } = useGetAccountAddress()
+  const { accountAddress } = useProvider()
   const [perPage, setPerPage] = useState(DEFAULT_PER_PAGE)
   const { data, loading } = useListPropertyQuery({
     variables: {

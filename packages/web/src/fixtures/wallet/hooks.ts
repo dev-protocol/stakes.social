@@ -2,7 +2,7 @@ import { cachePath } from './catch-path'
 import { connectWallet, getAccountAddress, getBlockNumber } from './utility'
 import { UnwrapFunc } from 'src/fixtures/utility'
 import useSWR from 'swr'
-import { useContext, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import WalletContext from 'src/context/walletContext'
 
 export const useConnectWallet = () => {
@@ -23,14 +23,13 @@ export const useConnectWallet = () => {
   return { isConnected, connect, isConnecting: isConnecting }
 }
 
-export const useGetAccountAddress = () => {
+export const useProvider = () => {
   const { web3 } = useContext(WalletContext)
-  const shouldFetch = web3 ? true : false
-  const { data, error } = useSWR<UnwrapFunc<typeof getAccountAddress>, Error>(
-    shouldFetch ? cachePath.getAccountAddress() : null,
-    () => getAccountAddress(web3)
-  )
-  return { accountAddress: data, error }
+  const [accountAddress, setAccountAddress] = useState<undefined | string>(undefined)
+  useEffect(() => {
+    getAccountAddress(web3).then(x => setAccountAddress(x))
+  }, [web3])
+  return { web3, accountAddress }
 }
 
 export const useBlockNumberStream = (shouldFetch: boolean) => {

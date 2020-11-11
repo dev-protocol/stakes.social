@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import { message, Button, Form, Input, Upload } from 'antd'
 import { LoadingOutlined, PlusOutlined } from '@ant-design/icons'
-import { useGetAccountAddress } from 'src/fixtures/wallet/hooks'
+import { useProvider } from 'src/fixtures/wallet/hooks'
 import { useGetAccount, useCreateAccount, useUpdateAccount, useUploadFile } from 'src/fixtures/dev-for-apps/hooks'
 import { Account } from 'src/fixtures/dev-for-apps/utility'
 import { Container } from 'src/components/atoms/Container'
@@ -66,6 +66,7 @@ export const AvatarUpdateForm = ({ accountAddress }: { accountAddress?: string }
   const { data: user } = useGetAccount(accountAddress || '')
   useEffect(() => {
     if (user) {
+      useProvider
       setAccount(user)
     }
   }, [user])
@@ -228,7 +229,7 @@ export const ProfileUpdateForm = ({ accountAddress }: { accountAddress?: string 
 }
 
 export const UserProfile = (_: Props) => {
-  const { accountAddress } = useGetAccountAddress()
+  const { accountAddress } = useProvider()
 
   return (
     <Container>

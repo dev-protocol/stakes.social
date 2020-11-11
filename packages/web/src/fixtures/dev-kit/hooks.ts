@@ -25,68 +25,75 @@ import { UnwrapFunc, toNaturalNumber, toAmountNumber, toBigNumber, whenDefined }
 import { getDevAmount } from 'src/fixtures/wallet/utility'
 import useSWR from 'swr'
 import { message } from 'antd'
-import { useContext, useState, useCallback } from 'react'
+import { useState, useCallback } from 'react'
 import BigNumber from 'bignumber.js'
-import WalletContext from 'src/context/walletContext'
-import { useGetAccountAddress } from '../wallet/hooks'
+import { useProvider } from 'src/fixtures/wallet/hooks'
 import { useCurrency } from 'src/fixtures/currency/functions/useCurrency'
 
 export const useGetTotalRewardsAmount = (propertyAddress: string) => {
-  const { data, error } = useSWR<UnwrapFunc<typeof getRewardsAmount>, Error>(
-    SWRCachePath.getTotalRewardsAmount(propertyAddress),
-    () => getRewardsAmount(propertyAddress),
+  const { web3, accountAddress } = useProvider()
+  const { data, error } = useSWR<undefined | UnwrapFunc<typeof getRewardsAmount>, Error>(
+    SWRCachePath.getTotalRewardsAmount(propertyAddress, accountAddress),
+    () => whenDefined(web3, x => getRewardsAmount(x, propertyAddress)),
     { onError: err => message.error(err.message) }
   )
   return { totalRewardsAmount: data ? toNaturalNumber(data) : undefined, error }
 }
 
 export const useWithdrawHolderReward = () => {
+  const { web3 } = useProvider()
   const key = 'useWithdrawHolderReward'
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [error, setError] = useState<Error>()
-  const withdrawHolder = useCallback(async (propertyAddress: string) => {
-    setIsLoading(true)
-    message.loading({ content: 'now withdrawing holder reward...', duration: 0, key })
-    setError(undefined)
-    return withdrawHolderAmount(propertyAddress)
-      .then(() => {
-        message.success({ content: 'success withdrawing!', key })
-        setIsLoading(false)
-      })
-      .catch(err => {
-        setError(err)
-        message.error({ content: err.message, key })
-        setIsLoading(false)
-      })
-  }, [])
+  const withdrawHolder = useCallback(
+    async (propertyAddress: string) => {
+      setIsLoading(true)
+      message.loading({ content: 'now withdrawing holder reward...', duration: 0, key })
+      setError(undefined)
+      return whenDefined(web3, x =>
+        withdrawHolderAmount(x, propertyAddress)
+          .then(() => {
+            message.success({ content: 'success withdrawing!', key })
+            setIsLoading(false)
+          })
+          .catch(err => {
+            setError(err)
+            message.error({ content: err.message, key })
+            setIsLoading(false)
+          })
+      )
+    },
+    [web3]
+  )
 
   return { withdrawHolder, isLoading, error }
 }
 
 export const useGetMyHolderAmount = (propertyAddress: string) => {
-  const { web3 } = useContext(WalletContext)
+  const { web3, accountAddress } = useProvider()
   const { data, error } = useSWR<UnwrapFunc<typeof getMyHolderAmount>, Error>(
-    SWRCachePath.getMyHolderAmount(propertyAddress),
-    () => getMyHolderAmount(propertyAddress, web3),
+    SWRCachePath.getMyHolderAmount(propertyAddress, accountAddress),
+    () => whenDefined(web3, x => getMyHolderAmount(x, propertyAddress)),
     { onError: err => message.error(err.message) }
   )
   return { myHolderAmount: data ? toNaturalNumber(data) : undefined, error }
 }
 
 export const useGetTotalStakingAmount = (propertyAddress: string) => {
+  const { web3, accountAddress } = useProvider()
   const { data, error } = useSWR<UnwrapFunc<typeof getTotalStakingAmount>, Error>(
-    SWRCachePath.getTotalStakingAmount(propertyAddress),
-    () => getTotalStakingAmount(propertyAddress),
+    SWRCachePath.getTotalStakingAmount(propertyAddress, accountAddress),
+    () => whenDefined(web3, x => getTotalStakingAmount(x, propertyAddress)),
     { onError: err => message.error(err.message) }
   )
   return { totalStakingAmount: data ? toNaturalNumber(data) : undefined, error }
 }
 
 export const useGetMyStakingRewardAmount = (propertyAddress: string) => {
-  const { web3 } = useContext(WalletContext)
+  const { web3, accountAddress } = useProvider()
   const { data, error } = useSWR<UnwrapFunc<typeof getMyStakingRewardAmount>, Error>(
-    SWRCachePath.getMyStakingRewardAmount(propertyAddress),
-    () => getMyStakingRewardAmount(propertyAddress, web3),
+    SWRCachePath.getMyStakingRewardAmount(propertyAddress, accountAddress),
+    () => whenDefined(web3, x => getMyStakingRewardAmount(x, propertyAddress)),
     {
       onError: err => message.error(err.message)
     }
@@ -96,10 +103,10 @@ export const useGetMyStakingRewardAmount = (propertyAddress: string) => {
 }
 
 export const useGetMyStakingAmount = (propertyAddress: string) => {
-  const { web3 } = useContext(WalletContext)
+  const { web3, accountAddress } = useProvider()
   const { data, error } = useSWR<UnwrapFunc<typeof getMyStakingAmount>, Error>(
-    SWRCachePath.getMyStakingAmount(propertyAddress),
-    () => getMyStakingAmount(propertyAddress, web3),
+    SWRCachePath.getMyStakingAmount(propertyAddress, accountAddress),
+    () => whenDefined(web3, x => getMyStakingAmount(x, propertyAddress)),
     {
       onError: err => message.error(err.message)
     }
@@ -109,78 +116,97 @@ export const useGetMyStakingAmount = (propertyAddress: string) => {
 }
 
 export const useWithdrawStakingReward = () => {
+  const { web3 } = useProvider()
   const key = 'useWithdrawStakingReward'
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [error, setError] = useState<Error>()
-  const withdrawStakingReward = useCallback(async (propertyAddress: string) => {
-    setIsLoading(true)
-    message.loading({ content: 'now withdrawing staking reward...', duration: 0, key })
-    setError(undefined)
-    return withdrawStakingAmount(propertyAddress, toBigNumber(0))
-      .then(() => {
-        message.success({ content: 'success withdrawing!', key })
-        setIsLoading(false)
-      })
-      .catch(err => {
-        setError(err)
-        message.error({ content: err.message, key })
-        setIsLoading(false)
-      })
-  }, [])
+  const withdrawStakingReward = useCallback(
+    async (propertyAddress: string) => {
+      setIsLoading(true)
+      message.loading({ content: 'now withdrawing staking reward...', duration: 0, key })
+      setError(undefined)
+      return whenDefined(web3, x =>
+        withdrawStakingAmount(x, propertyAddress, toBigNumber(0))
+          .then(() => {
+            message.success({ content: 'success withdrawing!', key })
+            setIsLoading(false)
+          })
+          .catch(err => {
+            setError(err)
+            message.error({ content: err.message, key })
+            setIsLoading(false)
+          })
+      )
+    },
+    [web3]
+  )
 
   return { withdrawStakingReward, isLoading, error }
 }
 
 export const useWithdrawStaking = () => {
+  const { web3 } = useProvider()
   const key = 'useWithdrawStaking'
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [error, setError] = useState<Error>()
-  const withdrawStaking = useCallback(async (propertyAddress: string, amount: BigNumber) => {
-    setIsLoading(true)
-    message.loading({ content: 'now withdrawing staking...', duration: 0, key })
-    setError(undefined)
-    return withdrawStakingAmount(propertyAddress, amount)
-      .then(() => {
-        message.success({ content: 'success withdrawing!', key })
-        setIsLoading(false)
-      })
-      .catch(err => {
-        setError(err)
-        message.error({ content: err.message, key })
-        setIsLoading(false)
-      })
-  }, [])
+  const withdrawStaking = useCallback(
+    async (propertyAddress: string, amount: BigNumber) => {
+      setIsLoading(true)
+      message.loading({ content: 'now withdrawing staking...', duration: 0, key })
+      setError(undefined)
+      return whenDefined(web3, x =>
+        withdrawStakingAmount(x, propertyAddress, amount)
+          .then(() => {
+            message.success({ content: 'success withdrawing!', key })
+            setIsLoading(false)
+          })
+          .catch(err => {
+            setError(err)
+            message.error({ content: err.message, key })
+            setIsLoading(false)
+          })
+      )
+    },
+    [web3]
+  )
 
   return { withdrawStaking, isLoading, error }
 }
 
 export const useStake = () => {
+  const { web3 } = useProvider()
   const key = 'useStake'
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [error, setError] = useState<Error>()
-  const stake = useCallback(async (propertyAddress: string, amount: string) => {
-    setIsLoading(true)
-    message.loading({ content: 'now staking...', duration: 0, key })
-    setError(undefined)
-    return stakeDev(propertyAddress, toAmountNumber(amount).toFormat({ decimalSeparator: '' }))
-      .then(() => {
-        message.success({ content: 'success staking!', key })
-        setIsLoading(false)
-      })
-      .catch(err => {
-        setError(err)
-        message.error({ content: err.message, key })
-        setIsLoading(false)
-      })
-  }, [])
+  const stake = useCallback(
+    async (propertyAddress: string, amount: string) => {
+      setIsLoading(true)
+      message.loading({ content: 'now staking...', duration: 0, key })
+      setError(undefined)
+      return whenDefined(web3, x =>
+        stakeDev(x, propertyAddress, toAmountNumber(amount).toFormat({ decimalSeparator: '' }))
+          .then(() => {
+            message.success({ content: 'success staking!', key })
+            setIsLoading(false)
+          })
+          .catch(err => {
+            setError(err)
+            message.error({ content: err.message, key })
+            setIsLoading(false)
+          })
+      )
+    },
+    [web3]
+  )
 
   return { stake, isLoading, error }
 }
 
 export const useTotalStakingAmountOnProtocol = () => {
+  const { web3, accountAddress } = useProvider()
   const { data: stakingAmount, error } = useSWR<UnwrapFunc<typeof getTotalStakingAmountOnProtocol>, Error>(
-    SWRCachePath.getTotalStakingAmountOnProtocol,
-    () => getTotalStakingAmountOnProtocol(),
+    SWRCachePath.getTotalStakingAmountOnProtocol(accountAddress),
+    () => whenDefined(web3, x => getTotalStakingAmountOnProtocol(x)),
     { onError: err => message.error(err.message) }
   )
   return {
@@ -190,9 +216,10 @@ export const useTotalStakingAmountOnProtocol = () => {
 }
 
 export const useTotalStakingRatio = () => {
+  const { web3, accountAddress } = useProvider()
   const { data: totalSupplyValue, error: totalSupplyError } = useSWR<UnwrapFunc<typeof totalSupply>, Error>(
-    SWRCachePath.totalSupply,
-    () => totalSupply(),
+    SWRCachePath.totalSupply(accountAddress),
+    () => whenDefined(web3, x => totalSupply(x)),
     {
       onError: err => message.error(err.message)
     }
@@ -200,9 +227,13 @@ export const useTotalStakingRatio = () => {
   const { data: stakingAmount, error: stakingAmountError } = useSWR<
     UnwrapFunc<typeof getTotalStakingAmountOnProtocol>,
     Error
-  >(SWRCachePath.getTotalStakingAmountOnProtocol, () => getTotalStakingAmountOnProtocol(), {
-    onError: err => message.error(err.message)
-  })
+  >(
+    SWRCachePath.getTotalStakingAmountOnProtocol(accountAddress),
+    () => whenDefined(web3, x => getTotalStakingAmountOnProtocol(x)),
+    {
+      onError: err => message.error(err.message)
+    }
+  )
   return {
     totalStakingRatio: totalSupplyValue && stakingAmount ? Number(stakingAmount) / Number(totalSupplyValue) : undefined,
     error: totalSupplyError || stakingAmountError
@@ -210,9 +241,10 @@ export const useTotalStakingRatio = () => {
 }
 
 export const useStakingShare = (propertyAddress: string) => {
+  const { web3, accountAddress } = useProvider()
   const { data: inProperty, error: inPropertyError } = useSWR<UnwrapFunc<typeof getTotalStakingAmount>, Error>(
-    SWRCachePath.getTotalStakingAmount(propertyAddress),
-    () => getTotalStakingAmount(propertyAddress),
+    SWRCachePath.getTotalStakingAmount(propertyAddress, accountAddress),
+    () => whenDefined(web3, x => getTotalStakingAmount(x, propertyAddress)),
     {
       onError: err => message.error(err.message)
     }
@@ -220,9 +252,13 @@ export const useStakingShare = (propertyAddress: string) => {
   const { data: inProtocol, error: inProtocolError } = useSWR<
     UnwrapFunc<typeof getTotalStakingAmountOnProtocol>,
     Error
-  >(SWRCachePath.getTotalStakingAmountOnProtocol, () => getTotalStakingAmountOnProtocol(), {
-    onError: err => message.error(err.message)
-  })
+  >(
+    SWRCachePath.getTotalStakingAmountOnProtocol(accountAddress),
+    () => whenDefined(web3, x => getTotalStakingAmountOnProtocol(x)),
+    {
+      onError: err => message.error(err.message)
+    }
+  )
   return {
     stakingShare: inProperty && inProtocol ? Number(inProperty) / Number(inProtocol) : undefined,
     error: inPropertyError || inProtocolError
@@ -230,104 +266,131 @@ export const useStakingShare = (propertyAddress: string) => {
 }
 
 export const useCreateProperty = () => {
+  const { web3 } = useProvider()
   const key = 'useCreateProperty'
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [error, setError] = useState<Error>()
-  const callback = useCallback(async (name: string, symbol: string, author: string) => {
-    setIsLoading(true)
-    message.loading({ content: 'now creating property...', duration: 0, key })
-    setError(undefined)
-    return createProperty(name, symbol, author)
-      .then(result => {
-        message.success({ content: 'success creating property!', key })
-        setIsLoading(false)
-        return result || ''
-      })
-      .catch(err => {
-        setError(err)
-        message.error({ content: err.message, key })
-        setIsLoading(false)
-        return ''
-      })
-  }, [])
+  const callback = useCallback(
+    async (name: string, symbol: string, author: string) => {
+      setIsLoading(true)
+      message.loading({ content: 'now creating property...', duration: 0, key })
+      setError(undefined)
+      return (
+        whenDefined(web3, x =>
+          createProperty(x, name, symbol, author)
+            .then(result => {
+              message.success({ content: 'success creating property!', key })
+              setIsLoading(false)
+              return result || ''
+            })
+            .catch(err => {
+              setError(err)
+              message.error({ content: err.message, key })
+              setIsLoading(false)
+              return ''
+            })
+        ) || ''
+      )
+    },
+    [web3]
+  )
   return { createProperty: callback, isLoading, error }
 }
 
 export const useMarketScheme = () => {
+  const { web3 } = useProvider()
   const key = 'useMarketScheme'
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [error, setError] = useState<Error>()
-  const callback = useCallback(async (marketAddress: string) => {
-    setIsLoading(true)
-    message.loading({ content: 'now loading...', duration: 0, key })
-    setError(undefined)
-    return marketScheme(marketAddress)
-      .then(result => {
-        message.success({ content: 'success!', key })
-        setIsLoading(false)
-        return result || []
-      })
-      .catch(err => {
-        setError(err)
-        message.error({ content: err.message, key })
-        setIsLoading(false)
-      })
-  }, [])
+  const callback = useCallback(
+    async (marketAddress: string) => {
+      setIsLoading(true)
+      message.loading({ content: 'now loading...', duration: 0, key })
+      setError(undefined)
+      return whenDefined(web3, x =>
+        marketScheme(x, marketAddress)
+          .then(result => {
+            message.success({ content: 'success!', key })
+            setIsLoading(false)
+            return result || []
+          })
+          .catch(err => {
+            setError(err)
+            message.error({ content: err.message, key })
+            setIsLoading(false)
+          })
+      )
+    },
+    [web3]
+  )
   return { marketScheme: callback, isLoading, error }
 }
 
 export const useAuthenticate = () => {
+  const { web3 } = useProvider()
   const key = 'useAuthenticate'
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [error, setError] = useState<Error>()
-  const callback = useCallback(async (marketAddress: string, propertyAddress: string, args: string[]) => {
-    setIsLoading(true)
-    message.loading({ content: 'now authenticating...', duration: 0, key })
-    setError(undefined)
-    return authenticate(marketAddress, propertyAddress, args)
-      .then(metricsAddress => {
-        setIsLoading(false)
-        message.success({ content: 'success authenticate!', key })
-        return metricsAddress
-      })
-      .catch(err => {
-        setError(err)
-        message.error({ content: err.message, key })
-        setIsLoading(false)
-        return ''
-      })
-  }, [])
+  const callback = useCallback(
+    async (marketAddress: string, propertyAddress: string, args: string[]) => {
+      setIsLoading(true)
+      message.loading({ content: 'now authenticating...', duration: 0, key })
+      setError(undefined)
+      return whenDefined(web3, x =>
+        authenticate(x, marketAddress, propertyAddress, args)
+          .then(metricsAddress => {
+            setIsLoading(false)
+            message.success({ content: 'success authenticate!', key })
+            return metricsAddress
+          })
+          .catch(err => {
+            setError(err)
+            message.error({ content: err.message, key })
+            setIsLoading(false)
+            return ''
+          })
+      )
+    },
+    [web3]
+  )
   return { authenticate: callback, isLoading, error }
 }
 
 export const useCreateAndAuthenticate = () => {
+  const { web3 } = useProvider()
   const key = 'useCreateAndAuthenticate'
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [error, setError] = useState<Error>()
-  const callback = useCallback(async (name: string, symbol: string, marketAddress: string, args: string[]) => {
-    setIsLoading(true)
-    message.loading({ content: 'now authenticating...', duration: 0, key })
-    setError(undefined)
-    return createAndAuthenticate(name, symbol, marketAddress, args)
-      .then(metricsAddress => {
-        setIsLoading(false)
-        message.success({ content: 'success authenticate!', key })
-        return metricsAddress
-      })
-      .catch(err => {
-        setError(err)
-        message.error({ content: err.message, key })
-        setIsLoading(false)
-        return ''
-      })
-  }, [])
+  const callback = useCallback(
+    async (name: string, symbol: string, marketAddress: string, args: string[]) => {
+      setIsLoading(true)
+      message.loading({ content: 'now authenticating...', duration: 0, key })
+      setError(undefined)
+      return whenDefined(web3, x =>
+        createAndAuthenticate(x, name, symbol, marketAddress, args)
+          .then(metricsAddress => {
+            setIsLoading(false)
+            message.success({ content: 'success authenticate!', key })
+            return metricsAddress
+          })
+          .catch(err => {
+            setError(err)
+            message.error({ content: err.message, key })
+            setIsLoading(false)
+            return ''
+          })
+      )
+    },
+    [web3]
+  )
   return { createAndAuthenticate: callback, isLoading, error }
 }
 
 export const useAPY = () => {
+  const { web3, accountAddress } = useProvider()
   const { data: maxRewards, error: maxRewardsError } = useSWR<UnwrapFunc<typeof calculateMaxRewardsPerBlock>, Error>(
-    SWRCachePath.calculateMaxRewardsPerBlock,
-    () => calculateMaxRewardsPerBlock().catch(() => '0'),
+    SWRCachePath.calculateMaxRewardsPerBlock(accountAddress),
+    () => whenDefined(web3, x => calculateMaxRewardsPerBlock(x).catch(() => '0')),
     {
       onError: err => message.error(err.message)
     }
@@ -335,12 +398,16 @@ export const useAPY = () => {
   const { data: totalStaking, error: totalStakingError } = useSWR<
     UnwrapFunc<typeof getTotalStakingAmountOnProtocol>,
     Error
-  >(SWRCachePath.getTotalStakingAmountOnProtocol, () => getTotalStakingAmountOnProtocol(), {
-    onError: err => message.error(err.message)
-  })
+  >(
+    SWRCachePath.getTotalStakingAmountOnProtocol(accountAddress),
+    () => whenDefined(web3, x => getTotalStakingAmountOnProtocol(x)),
+    {
+      onError: err => message.error(err.message)
+    }
+  )
   const { data: holders, error: holdersError } = useSWR<UnwrapFunc<typeof holdersShare>, Error>(
     SWRCachePath.holdersShare(maxRewards, totalStaking),
-    () => (maxRewards && totalStaking ? holdersShare(maxRewards, totalStaking) : undefined),
+    () => (maxRewards && totalStaking ? whenDefined(web3, x => holdersShare(x, maxRewards, totalStaking)) : undefined),
     {
       onError: err => message.error(err.message)
     }
@@ -355,9 +422,10 @@ export const useAPY = () => {
 }
 
 export const useTotalSupply = () => {
+  const { web3, accountAddress } = useProvider()
   const { data: totalSupplyValue, error } = useSWR<UnwrapFunc<typeof totalSupply>, Error>(
-    SWRCachePath.totalSupply,
-    () => totalSupply(),
+    SWRCachePath.totalSupply(accountAddress),
+    () => whenDefined(web3, x => totalSupply(x)),
     {
       onError: err => message.error(err.message)
     }
@@ -367,9 +435,10 @@ export const useTotalSupply = () => {
 }
 
 export const useCirculatingSupply = () => {
+  const { web3, accountAddress } = useProvider()
   const { data: totalSupplyValue, error } = useSWR<UnwrapFunc<typeof totalSupply>, Error>(
-    SWRCachePath.totalSupply,
-    () => totalSupply(),
+    SWRCachePath.totalSupply(accountAddress),
+    () => whenDefined(web3, x => totalSupply(x)),
     {
       onError: err => message.error(err.message)
     }
@@ -384,16 +453,17 @@ export const useCirculatingSupply = () => {
 }
 
 export const useAnnualSupplyGrowthRatio = () => {
+  const { web3, accountAddress } = useProvider()
   const { data: maxRewards, error: maxRewardsError } = useSWR<UnwrapFunc<typeof calculateMaxRewardsPerBlock>, Error>(
-    SWRCachePath.calculateMaxRewardsPerBlock,
-    () => calculateMaxRewardsPerBlock().catch(() => '0'),
+    SWRCachePath.calculateMaxRewardsPerBlock(accountAddress),
+    () => whenDefined(web3, x => calculateMaxRewardsPerBlock(x).catch(() => '0')),
     {
       onError: err => message.error(err.message)
     }
   )
   const { data: totalSupplyValue, error: totalSupplyError } = useSWR<UnwrapFunc<typeof totalSupply>, Error>(
-    SWRCachePath.totalSupply,
-    () => totalSupply(),
+    SWRCachePath.totalSupply(accountAddress),
+    () => whenDefined(web3, x => totalSupply(x)),
     {
       onError: err => message.error(err.message)
     }
@@ -406,30 +476,34 @@ export const useAnnualSupplyGrowthRatio = () => {
 }
 
 export const useGetPolicyAddressesList = () => {
+  const { web3 } = useProvider()
   const key = 'useGetPolicyList'
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [error, setError] = useState<Error>()
   const callback = useCallback(async () => {
     setIsLoading(true)
     setError(undefined)
-    return createGetVotablePolicy()
-      .then(policyAddressesList => {
-        setIsLoading(false)
-        return [...policyAddressesList]
-      })
-      .catch(err => {
-        setError(err)
-        message.error({ content: err.message, key })
-        setIsLoading(false)
-      })
-  }, [])
+    return whenDefined(web3, x =>
+      createGetVotablePolicy(x)
+        .then(policyAddressesList => {
+          setIsLoading(false)
+          return [...policyAddressesList]
+        })
+        .catch(err => {
+          setError(err)
+          message.error({ content: err.message, key })
+          setIsLoading(false)
+        })
+    )
+  }, [web3])
   return { getPolicyAddressesList: callback, isLoading, error }
 }
 
 export const usePropertyAuthor = (propertyAddress?: string) => {
+  const { web3, accountAddress } = useProvider()
   const { data, error } = useSWR<undefined | UnwrapFunc<typeof totalSupply>, Error>(
-    SWRCachePath.propertyAuthor(propertyAddress),
-    () => whenDefined(propertyAddress, x => propertyAuthor(x)),
+    SWRCachePath.propertyAuthor(propertyAddress, accountAddress),
+    () => whenDefined(propertyAddress, x => whenDefined(web3, client => propertyAuthor(client, x))),
     {
       onError: err => message.error(err.message)
     }
@@ -440,9 +514,9 @@ export const usePropertyAuthor = (propertyAddress?: string) => {
 
 export const useBalanceOf = () => {
   const { currency, toCurrency } = useCurrency()
-  const { accountAddress } = useGetAccountAddress()
+  const { web3, accountAddress } = useProvider()
   const { data, error } = useSWR<BigNumber | undefined, Error>(SWRCachePath.balanceOf(accountAddress), () =>
-    balanceOf().then(toBigNumber)
+    whenDefined(web3, x => balanceOf(x).then(toBigNumber))
   )
   const humanizedDev = whenDefined(data, toNaturalNumber)
   const amount = toCurrency(humanizedDev)
@@ -451,11 +525,15 @@ export const useBalanceOf = () => {
 
 export const useAllClaimedRewards = () => {
   const { currency, toCurrency } = useCurrency()
-  const { accountAddress } = useGetAccountAddress()
+  const { web3, accountAddress } = useProvider()
   const { data, error } = useSWR<BigNumber | undefined, Error>(SWRCachePath.allClaimedRewards(accountAddress), () =>
-    allClaimedRewards().then(allEvents => {
-      return allEvents.reduce((a, c) => a.plus(c.returnValues.value), toBigNumber(0))
-    })
+    whenDefined(web3, x =>
+      whenDefined(accountAddress, y =>
+        allClaimedRewards(x, y).then(allEvents => {
+          return allEvents.reduce((a, c) => a.plus(c.returnValues.value), toBigNumber(0))
+        })
+      )
+    )
   )
   const humanizedDev = whenDefined(data, toNaturalNumber)
   const amount = toCurrency(humanizedDev)
