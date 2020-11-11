@@ -15,13 +15,13 @@ exports[`StakeForm Snapshot 1`] = `
           Stake
         </label>
         <span
-          class="ant-input-group-wrapper ant-input-group-wrapper-lg ant-input-search ant-input-search-large w1tfby-0 frIYqB"
+          class="ant-input-group-wrapper ant-input-group-wrapper-lg ant-input-search ant-input-search-large ant-input-search-with-button w1tfby-0 frIYqB"
         >
           <span
             class="ant-input-wrapper ant-input-group"
           >
             <span
-              class="ant-input-affix-wrapper ant-input-affix-wrapper-lg ant-input-search ant-input-search-large w1tfby-0 frIYqB"
+              class="ant-input-affix-wrapper ant-input-affix-wrapper-lg"
             >
               <input
                 class="ant-input ant-input-lg"
@@ -94,13 +94,13 @@ exports[`StakeForm Snapshot 1`] = `
           Withdraw
         </label>
         <span
-          class="ant-input-group-wrapper ant-input-group-wrapper-lg ant-input-search ant-input-search-large w1tfby-0 frIYqB"
+          class="ant-input-group-wrapper ant-input-group-wrapper-lg ant-input-search ant-input-search-large ant-input-search-with-button w1tfby-0 frIYqB"
         >
           <span
             class="ant-input-wrapper ant-input-group"
           >
             <span
-              class="ant-input-affix-wrapper ant-input-affix-wrapper-lg ant-input-search ant-input-search-large w1tfby-0 frIYqB"
+              class="ant-input-affix-wrapper ant-input-affix-wrapper-lg"
             >
               <input
                 class="ant-input ant-input-lg"
