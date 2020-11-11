@@ -10,13 +10,13 @@ const Wrap = styled.div`
 `
 
 export const Statistics = ({ ...props }: HTMLAttributes<HTMLDivElement>) => {
-  const { humanized } = useBalanceOf()
+  const { amount, currency } = useBalanceOf()
   const { apy, creators } = useAPY()
 
   return (
     <Wrap {...props}>
-      <Statistic title="Account Value" value={humanized ? humanized.toNumber() : 'N/A'} suffix="DEV" precision={2} />
-      <Statistic title="Rewards Earned" value="(devloping)" suffix="DEV" precision={2} />
+      <Statistic title="Account Value" value={amount ? amount.toNumber() : 'N/A'} suffix={currency} precision={2} />
+      <Statistic title="Rewards Earned" value="(devloping)" suffix={currency} precision={2} />
       <Statistic title="Staker APY" value={apy ? apy.toNumber() : 'N/A'} suffix="%" precision={2} />
       <Statistic title="Creator APY" value={creators ? creators.toNumber() : 'N/A'} suffix="%" precision={2} />
     </Wrap>

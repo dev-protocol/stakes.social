@@ -30,7 +30,7 @@ const PortfolioHeader = styled.div`
 
 const Heading = styled(H2)`
   grid-area: heading;
-  font-weight: normal;
+  font-weight: normal !important;
 `
 const Switcher = styled(CurrencySwitcher)`
   grid-area: switcher;
@@ -42,6 +42,7 @@ const Buy = styled(BuyDevButton)`
 const StyledContainer = styled(Container)`
   display: grid;
   gap: 3rem;
+  padding: 3rem 0;
 `
 
 const Portfolio = () => {

@@ -28,6 +28,7 @@ import { useContext, useState, useCallback } from 'react'
 import BigNumber from 'bignumber.js'
 import WalletContext from 'src/context/walletContext'
 import { useGetAccountAddress } from '../wallet/hooks'
+import { useCurrency } from 'src/fixtures/currency/hooks'
 
 export const useGetTotalRewardsAmount = (propertyAddress: string) => {
   const { data, error } = useSWR<UnwrapFunc<typeof getRewardsAmount>, Error>(
@@ -437,10 +438,12 @@ export const usePropertyAuthor = (propertyAddress?: string) => {
 }
 
 export const useBalanceOf = () => {
+  const { currency, toCurrency } = useCurrency()
   const { accountAddress } = useGetAccountAddress()
   const { data, error } = useSWR<BigNumber | undefined, Error>(SWRCachePath.balanceOf(accountAddress), () =>
     balanceOf().then(toBigNumber)
   )
-  const humanized = whenDefined(data, toNaturalNumber)
-  return { data, humanized, error }
+  const humanizedDev = whenDefined(data, toNaturalNumber)
+  const amount = currency === 'DEV' ? humanizedDev : toCurrency(humanizedDev)
+  return { amount, currency, error }
 }

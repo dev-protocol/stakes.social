@@ -77,5 +77,5 @@ export const usePropertyAuthor = (propertyAddress?: string) => {
 }
 
 export const useBalanceOf = () => {
-  return { data: toBigNumber(10e18), humanized: toBigNumber(10) }
+  return { amount: toBigNumber(10), currency: 'DEV' }
 }
