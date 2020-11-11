@@ -28,7 +28,7 @@ import { useContext, useState, useCallback } from 'react'
 import BigNumber from 'bignumber.js'
 import WalletContext from 'src/context/walletContext'
 import { useGetAccountAddress } from '../wallet/hooks'
-import { useCurrency } from 'src/fixtures/currency/hooks'
+import { useCurrency } from 'src/fixtures/currency/functions/useCurrency'
 
 export const useGetTotalRewardsAmount = (propertyAddress: string) => {
   const { data, error } = useSWR<UnwrapFunc<typeof getRewardsAmount>, Error>(
