@@ -18,7 +18,7 @@ import {
   usePropertyAuthor,
   useBalanceOf
 } from './hooks'
-import { useCurrency } from 'src/fixtures/currency/hooks'
+import { useCurrency } from 'src/fixtures/currency/functions/useCurrency'
 import useSWR from 'swr'
 import { toBigNumber, toNaturalNumber } from 'src/fixtures/utility'
 import {
@@ -35,7 +35,7 @@ import BigNumber from 'bignumber.js'
 
 jest.mock('swr')
 jest.mock('src/fixtures/dev-kit/client.ts')
-jest.mock('src/fixtures/currency/hooks.ts')
+jest.mock('src/fixtures/currency/functions/useCurrency')
 
 describe('dev-kit hooks', () => {
   describe('useGetTotalRewardsAmount', () => {
