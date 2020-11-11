@@ -20,7 +20,6 @@ import {
   useAllClaimedRewards
 } from './hooks'
 import { useCurrency } from 'src/fixtures/currency/functions/useCurrency'
-import { useProvider } from 'src/fixtures/wallet/hooks'
 import useSWR from 'swr'
 import { toNaturalNumber, toBigNumber } from 'src/fixtures/utility'
 import {
