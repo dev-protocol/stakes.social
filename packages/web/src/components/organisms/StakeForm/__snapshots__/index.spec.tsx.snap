@@ -3,44 +3,169 @@
 exports[`StakeForm Snapshot 1`] = `
 <body>
   <div>
-    <div>
-      <p>
-        Stake Now
-      </p>
-      <span
-        class="ant-input-group-wrapper ant-input-group-wrapper-lg ant-input-search ant-input-search-large w1tfby-0 kiNThE"
+    <div
+      class="w1tfby-1 jGLtYs"
+    >
+      <div
+        class="w1tfby-2 htxnGK"
       >
+        <label
+          for="stake"
+        >
+          Stake
+        </label>
         <span
-          class="ant-input-wrapper ant-input-group"
+          class="ant-input-group-wrapper ant-input-group-wrapper-lg ant-input-search ant-input-search-large w1tfby-0 frIYqB"
         >
           <span
-            class="ant-input-affix-wrapper ant-input-affix-wrapper-lg ant-input-search ant-input-search-large w1tfby-0 kiNThE"
+            class="ant-input-wrapper ant-input-group"
           >
-            <input
-              class="ant-input ant-input-lg"
-              type="number"
-              value=""
-            />
             <span
-              class="ant-input-suffix"
+              class="ant-input-affix-wrapper ant-input-affix-wrapper-lg ant-input-search ant-input-search-large w1tfby-0 frIYqB"
             >
-              DEV
+              <input
+                class="ant-input ant-input-lg"
+                id="stake"
+                type="number"
+                value=""
+              />
+              <span
+                class="ant-input-suffix"
+              >
+                <span>
+                  DEV
+                </span>
+                <button
+                  class="ant-btn ant-btn-primary ant-btn-sm sc-1ttu0x8-0 pssBW"
+                  type="button"
+                >
+                  <span>
+                    Max
+                  </span>
+                </button>
+              </span>
+            </span>
+            <span
+              class="ant-input-group-addon"
+            >
+              <button
+                class="ant-btn ant-btn-primary ant-btn-lg ant-input-search-button"
+                type="button"
+              >
+                <span>
+                  Stake
+                </span>
+              </button>
             </span>
           </span>
-          <span
-            class="ant-input-group-addon"
+        </span>
+        <div
+          class="ant-card ant-card-bordered w1tfby-3 gaYbxX"
+        >
+          <div
+            class="ant-card-head"
           >
-            <button
-              class="ant-btn ant-btn-primary ant-btn-lg ant-input-search-button"
-              type="button"
+            <div
+              class="ant-card-head-wrapper"
             >
-              <span>
-                Stake
+              <div
+                class="ant-card-head-title"
+              >
+                Estimated Annual Reward
+              </div>
+            </div>
+          </div>
+          <div
+            class="ant-card-body"
+          >
+            <p>
+              0
+               DEV
+            </p>
+          </div>
+        </div>
+      </div>
+      <div
+        class="w1tfby-2 htxnGK"
+      >
+        <label
+          for="withdraw"
+        >
+          Withdraw
+        </label>
+        <span
+          class="ant-input-group-wrapper ant-input-group-wrapper-lg ant-input-search ant-input-search-large w1tfby-0 frIYqB"
+        >
+          <span
+            class="ant-input-wrapper ant-input-group"
+          >
+            <span
+              class="ant-input-affix-wrapper ant-input-affix-wrapper-lg ant-input-search ant-input-search-large w1tfby-0 frIYqB"
+            >
+              <input
+                class="ant-input ant-input-lg"
+                id="withdraw"
+                type="number"
+                value=""
+              />
+              <span
+                class="ant-input-suffix"
+              >
+                <span>
+                  DEV
+                </span>
+                <button
+                  class="ant-btn ant-btn-primary ant-btn-sm sc-1ttu0x8-0 pssBW"
+                  type="button"
+                >
+                  <span>
+                    Max
+                  </span>
+                </button>
               </span>
-            </button>
+            </span>
+            <span
+              class="ant-input-group-addon"
+            >
+              <button
+                class="ant-btn ant-btn-primary ant-btn-lg ant-input-search-button"
+                type="button"
+              >
+                <span>
+                  Withdraw
+                </span>
+              </button>
+            </span>
           </span>
         </span>
-      </span>
+        <div
+          class="ant-card ant-card-bordered w1tfby-3 gaYbxX"
+        >
+          <div
+            class="ant-card-head"
+          >
+            <div
+              class="ant-card-head-wrapper"
+            >
+              <div
+                class="ant-card-head-title"
+              >
+                Withdrawable Amount
+              </div>
+            </div>
+          </div>
+          <div
+            class="ant-card-body"
+          >
+            <p>
+              5000
+               DEV
+               
+              (0 + 5000)
+            </p>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </body>

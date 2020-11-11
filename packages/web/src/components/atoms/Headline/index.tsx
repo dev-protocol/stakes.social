@@ -6,11 +6,8 @@ interface Props {
 
 export const Headline = styled.div<Props>`
   display: flex;
-  padding: 1rem;
+  padding-top: 1.5rem;
   justify-content: center;
   align-items: center;
   flex-flow: column;
-  @media (min-width: 768px) {
-    height: ${props => props.height || 380}px;
-  }
 `

@@ -14,10 +14,14 @@ import {
   useAuthenticate,
   useAPY,
   useAnnualSupplyGrowthRatio,
-  useGetPolicyAddressesList
+  useGetPolicyAddressesList,
+  usePropertyAuthor,
+  useBalanceOf,
+  useAllClaimedRewards
 } from './hooks'
+import { useCurrency } from 'src/fixtures/currency/functions/useCurrency'
 import useSWR from 'swr'
-import { toNaturalNumber, toAmountNumber, toBigNumber } from 'src/fixtures/utility'
+import { toNaturalNumber, toBigNumber } from 'src/fixtures/utility'
 import {
   withdrawHolderAmount,
   withdrawStakingAmount,
@@ -31,8 +35,10 @@ import { message } from 'antd'
 import BigNumber from 'bignumber.js'
 
 jest.mock('swr')
-jest.mock('src/fixtures/utility')
+jest.mock('src/fixtures/wallet/hooks.ts')
 jest.mock('src/fixtures/dev-kit/client.ts')
+jest.mock('src/fixtures/uniswap/client.ts')
+jest.mock('src/fixtures/currency/functions/useCurrency')
 
 describe('dev-kit hooks', () => {
   describe('useGetTotalRewardsAmount', () => {
@@ -48,9 +54,8 @@ describe('dev-kit hooks', () => {
       const data = '10000'
       const error = undefined
       ;(useSWR as jest.Mock).mockImplementation(() => ({ data, error }))
-      ;(toNaturalNumber as jest.Mock).mockImplementation(() => Number(data))
       const { result } = renderHook(() => useGetTotalRewardsAmount('property-address'))
-      expect(result.current.totalRewardsAmount).toBe(Number(data))
+      expect(result.current.totalRewardsAmount?.toFixed()).toBe(toNaturalNumber(data).toFixed())
     })
 
     test('failure fetching data', () => {
@@ -58,7 +63,6 @@ describe('dev-kit hooks', () => {
       const errorMessage = 'error'
       const error = new Error(errorMessage)
       ;(useSWR as jest.Mock).mockImplementation(() => ({ data, error }))
-      ;(toNaturalNumber as jest.Mock).mockImplementation(() => Number(data))
       const { result } = renderHook(() => useGetTotalRewardsAmount('property-address'))
       expect(result.current.error).toBe(error)
       expect(result.current.error?.message).toBe(errorMessage)
@@ -78,9 +82,8 @@ describe('dev-kit hooks', () => {
       const data = '10000'
       const error = undefined
       ;(useSWR as jest.Mock).mockImplementation(() => ({ data, error }))
-      ;(toNaturalNumber as jest.Mock).mockImplementation(() => Number(data))
       const { result } = renderHook(() => useGetTotalStakingAmount('property-address'))
-      expect(result.current.totalStakingAmount).toBe(Number(data))
+      expect(result.current.totalStakingAmount?.toFixed()).toBe(toNaturalNumber(data).toFixed())
     })
 
     test('failure fetching data', () => {
@@ -88,7 +91,6 @@ describe('dev-kit hooks', () => {
       const errorMessage = 'error'
       const error = new Error(errorMessage)
       ;(useSWR as jest.Mock).mockImplementation(() => ({ data, error }))
-      ;(toNaturalNumber as jest.Mock).mockImplementation(() => Number(data))
       const { result } = renderHook(() => useGetTotalStakingAmount('property-address'))
       expect(result.current.error).toBe(error)
       expect(result.current.error?.message).toBe(errorMessage)
@@ -108,9 +110,8 @@ describe('dev-kit hooks', () => {
       const data = '10000'
       const error = undefined
       ;(useSWR as jest.Mock).mockImplementation(() => ({ data, error }))
-      ;(toNaturalNumber as jest.Mock).mockImplementation(() => Number(data))
       const { result } = renderHook(() => useGetMyHolderAmount('property-address'))
-      expect(result.current.myHolderAmount).toBe(Number(data))
+      expect(result.current.myHolderAmount?.toFixed()).toBe(toNaturalNumber(data).toFixed())
     })
 
     test('failure fetching data', () => {
@@ -118,7 +119,6 @@ describe('dev-kit hooks', () => {
       const errorMessage = 'error'
       const error = new Error(errorMessage)
       ;(useSWR as jest.Mock).mockImplementation(() => ({ data, error }))
-      ;(toNaturalNumber as jest.Mock).mockImplementation(() => Number(data))
       const { result } = renderHook(() => useGetMyHolderAmount('property-address'))
       expect(result.current.error).toBe(error)
       expect(result.current.error?.message).toBe(errorMessage)
@@ -138,9 +138,8 @@ describe('dev-kit hooks', () => {
       const data = '10000'
       const error = undefined
       ;(useSWR as jest.Mock).mockImplementation(() => ({ data, error }))
-      ;(toNaturalNumber as jest.Mock).mockImplementation(() => Number(data))
       const { result } = renderHook(() => useGetMyStakingAmount('property-address'))
-      expect(result.current.myStakingAmount).toBe(Number(data))
+      expect(result.current.myStakingAmount?.toFixed()).toBe(toNaturalNumber(data).toFixed())
     })
 
     test('failure fetching data', () => {
@@ -148,7 +147,6 @@ describe('dev-kit hooks', () => {
       const errorMessage = 'error'
       const error = new Error(errorMessage)
       ;(useSWR as jest.Mock).mockImplementation(() => ({ data, error }))
-      ;(toNaturalNumber as jest.Mock).mockImplementation(() => Number(data))
       const { result } = renderHook(() => useGetMyStakingAmount('property-address'))
       expect(result.current.error).toBe(error)
       expect(result.current.error?.message).toBe(errorMessage)
@@ -238,9 +236,6 @@ describe('dev-kit hooks', () => {
       const data = '11111'
       const { result, waitForNextUpdate } = renderHook(() => useStake())
       ;(stakeDev as jest.Mock).mockResolvedValue(true)
-      ;(toAmountNumber as jest.Mock).mockImplementation(() => ({
-        toFormat: () => data
-      }))
       act(() => {
         result.current.stake('property-address', data)
       })
@@ -250,13 +245,9 @@ describe('dev-kit hooks', () => {
     })
 
     test('failure withdraw', async () => {
-      const data = '11111'
       const error = new Error('error')
       const { result, waitForNextUpdate } = renderHook(() => useStake())
       ;(stakeDev as jest.Mock).mockRejectedValue(error)
-      ;(toAmountNumber as jest.Mock).mockImplementation(() => ({
-        toFormat: () => data
-      }))
       act(() => {
         result.current.stake('property-address', '11111')
       })
@@ -469,6 +460,138 @@ describe('dev-kit hooks', () => {
       await waitForNextUpdate()
       expect(result.current.error).toBe(error)
       expect(result.current.isLoading).toBe(false)
+    })
+  })
+
+  describe('usePropertyAuthor', () => {
+    test('data is undefined', () => {
+      const data = undefined
+      const error = undefined
+      ;(useSWR as jest.Mock).mockImplementation(() => ({ data, error }))
+      const { result } = renderHook(() => usePropertyAuthor('property-address'))
+      expect(result.current.author).toBe(data)
+    })
+
+    test('success fetching data', () => {
+      const data = 'author'
+      const error = undefined
+      ;(useSWR as jest.Mock).mockImplementation(() => ({ data, error }))
+      const { result } = renderHook(() => usePropertyAuthor('property-address'))
+      expect(result.current.author).toBe(data)
+    })
+
+    test('failure fetching data', () => {
+      const data = undefined
+      const errorMessage = 'error'
+      const error = new Error(errorMessage)
+      ;(useSWR as jest.Mock).mockImplementation(() => ({ data, error }))
+      const { result } = renderHook(() => usePropertyAuthor('property-address'))
+      expect(result.current.error).toBe(error)
+      expect(result.current.error?.message).toBe(errorMessage)
+    })
+  })
+
+  describe('useBalanceOf', () => {
+    test('data is undefined and currency is DEV', () => {
+      const data = undefined
+      const error = undefined
+      const toCurrency = (x?: BigNumber) => x
+      ;(useCurrency as jest.Mock).mockImplementationOnce(() => ({ currency: 'DEV', toCurrency }))
+      ;(useSWR as jest.Mock).mockImplementationOnce(() => ({ data, error }))
+      const { result } = renderHook(() => useBalanceOf())
+      expect(result.current.amount).toBe(data)
+      expect(result.current.currency).toBe('DEV')
+    })
+
+    test('data is undefined and currncy is USD', () => {
+      const data = undefined
+      const error = undefined
+      const toCurrency = (x?: BigNumber) => x
+      ;(useCurrency as jest.Mock).mockImplementationOnce(() => ({ currency: 'USD', toCurrency }))
+      ;(useSWR as jest.Mock).mockImplementationOnce(() => ({ data, error }))
+      const { result } = renderHook(() => useBalanceOf())
+      expect(result.current.amount).toBe(data)
+      expect(result.current.currency).toBe('USD')
+    })
+
+    test('success fetching data and currency is DEV', () => {
+      const toCurrency = (x?: BigNumber) => x
+      ;(useCurrency as jest.Mock).mockImplementation(() => ({ currency: 'DEV', toCurrency }))
+      ;(useSWR as jest.Mock).mockImplementationOnce(() => ({ data: toBigNumber('10000000000000000000') }))
+      const { result } = renderHook(() => useBalanceOf())
+      expect(result.current.amount?.toFixed()).toBe('10')
+      expect(result.current.currency).toBe('DEV')
+    })
+
+    test('success fetching data and currency is USD', () => {
+      const toCurrency = (x?: BigNumber) => toBigNumber(x).times(3)
+      ;(useCurrency as jest.Mock).mockImplementation(() => ({ currency: 'USD', toCurrency }))
+      ;(useSWR as jest.Mock).mockImplementationOnce(() => ({ data: toBigNumber('10000000000000000000') }))
+      const { result } = renderHook(() => useBalanceOf())
+      expect(result.current.amount?.toFixed()).toBe('30')
+      expect(result.current.currency).toBe('USD')
+    })
+
+    test('failure fetching data', () => {
+      const data = undefined
+      const errorMessage = 'error'
+      const error = new Error(errorMessage)
+      ;(useSWR as jest.Mock).mockImplementation(() => ({ data, error }))
+      const { result } = renderHook(() => useBalanceOf())
+      expect(result.current.error).toBe(error)
+      expect(result.current.error?.message).toBe(errorMessage)
+    })
+  })
+
+  describe('useAllClaimedRewards', () => {
+    test('data is undefined and currency is DEV', () => {
+      const data = undefined
+      const error = undefined
+      const toCurrency = (x?: BigNumber) => x
+      ;(useCurrency as jest.Mock).mockImplementationOnce(() => ({ currency: 'DEV', toCurrency }))
+      ;(useSWR as jest.Mock).mockImplementationOnce(() => ({ data, error }))
+      const { result } = renderHook(() => useAllClaimedRewards())
+      expect(result.current.amount).toBe(data)
+      expect(result.current.currency).toBe('DEV')
+    })
+
+    test('data is undefined and currncy is USD', () => {
+      const data = undefined
+      const error = undefined
+      const toCurrency = (x?: BigNumber) => x
+      ;(useCurrency as jest.Mock).mockImplementationOnce(() => ({ currency: 'USD', toCurrency }))
+      ;(useSWR as jest.Mock).mockImplementationOnce(() => ({ data, error }))
+      const { result } = renderHook(() => useAllClaimedRewards())
+      expect(result.current.amount).toBe(data)
+      expect(result.current.currency).toBe('USD')
+    })
+
+    test('success fetching data and currency is DEV', () => {
+      const toCurrency = (x?: BigNumber) => x
+      ;(useCurrency as jest.Mock).mockImplementation(() => ({ currency: 'DEV', toCurrency }))
+      ;(useSWR as jest.Mock).mockImplementationOnce(() => ({ data: toBigNumber('10000000000000000000') }))
+      const { result } = renderHook(() => useAllClaimedRewards())
+      expect(result.current.amount?.toFixed()).toBe('10')
+      expect(result.current.currency).toBe('DEV')
+    })
+
+    test('success fetching data and currency is USD', () => {
+      const toCurrency = (x?: BigNumber) => toBigNumber(x).times(3)
+      ;(useCurrency as jest.Mock).mockImplementation(() => ({ currency: 'USD', toCurrency }))
+      ;(useSWR as jest.Mock).mockImplementationOnce(() => ({ data: toBigNumber('10000000000000000000') }))
+      const { result } = renderHook(() => useAllClaimedRewards())
+      expect(result.current.amount?.toFixed()).toBe('30')
+      expect(result.current.currency).toBe('USD')
+    })
+
+    test('failure fetching data', () => {
+      const data = undefined
+      const errorMessage = 'error'
+      const error = new Error(errorMessage)
+      ;(useSWR as jest.Mock).mockImplementation(() => ({ data, error }))
+      const { result } = renderHook(() => useAllClaimedRewards())
+      expect(result.current.error).toBe(error)
+      expect(result.current.error?.message).toBe(errorMessage)
     })
   })
 })

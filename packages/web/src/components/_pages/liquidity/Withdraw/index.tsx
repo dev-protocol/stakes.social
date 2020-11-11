@@ -2,7 +2,8 @@ import { Button, Form, Statistic } from 'antd'
 import BigNumber from 'bignumber.js'
 import React, { ChangeEvent, useCallback } from 'react'
 import { useState } from 'react'
-import { toAmountNumber, toBigNumber, toNaturalNumber } from 'src/fixtures/utility'
+import { toAmountNumber, toBigNumber, toNaturalNumber, whenDefined } from 'src/fixtures/utility'
+import { useProvider } from 'src/fixtures/wallet/hooks'
 import styled from 'styled-components'
 import { unstakeQuery } from '../../../../fixtures/_pages/liquidity/geyser/client'
 import { useRewardMultiplier, useTotalStakedFor, useUnstake } from '../../../../fixtures/_pages/liquidity/geyser/hooks'
@@ -28,6 +29,7 @@ export const Withdraw = () => {
   const { unstake } = useUnstake()
   const { data: rewardMultiplier, max } = useRewardMultiplier()
   const { data: totalStakedFor } = useTotalStakedFor()
+  const { web3 } = useProvider()
   const updateAmount = useCallback(
     (value: string | number) => {
       const amountE18 = toAmountNumber(value)
@@ -39,13 +41,17 @@ export const Withdraw = () => {
           : 0
         : 0
       if (queryAmount !== 0) {
-        unstakeQuery(queryAmount).then(x => {
-          console.log(x.toFixed())
-          setRewardClaimed(toNaturalNumber(x).toFixed())
-        })
+        whenDefined(web3, w =>
+          unstakeQuery(w, queryAmount).then(x => {
+            if (x) {
+              console.log(x.toFixed())
+              setRewardClaimed(toNaturalNumber(x).toFixed())
+            }
+          })
+        )
       }
     },
-    [totalStakedFor]
+    [totalStakedFor, web3]
   )
   const onClickMax = useCallback(() => updateAmount(toNaturalNumber(totalStakedFor ? totalStakedFor : 0).toFixed()), [
     updateAmount,

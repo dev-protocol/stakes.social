@@ -1,56 +1,68 @@
-import React from 'react'
+import React, { useMemo, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import { PossessionOutline } from 'src/components/organisms/PossessionOutline'
-import { TransactionForm } from 'src/components/organisms/TransactionForm'
 import { PropertyHeader } from 'src/components/organisms/PropertyHeader'
-import { AssetOutline } from 'src/components/organisms/AssetOutline'
 import { Footer } from 'src/components/organisms/Footer'
-import Link from 'next/link'
 import { EarlyAccess } from 'src/components/atoms/EarlyAccess'
 import styled from 'styled-components'
 import { Container } from 'src/components/atoms/Container'
-import { PropertyCoverImage } from 'src/components/molecules/PropertyCoverImage'
 import { Header } from 'src/components/organisms/Header'
 import { StakeForm } from 'src/components/organisms/StakeForm'
 import { CancelStaking } from 'src/components/organisms/CancelStaking'
-import { ConnectedApps } from 'src/components/molecules/ConnectedApps'
-import { PropertyTags } from 'src/components/organisms/PropertyTags'
+// import { PropertyTags } from 'src/components/organisms/PropertyTags'
 import TopStakers from 'src/components/organisms/TopStakers'
+import { Avatar } from 'src/components/molecules/Avatar'
+import { useAPY, usePropertyAuthor } from 'src/fixtures/dev-kit/hooks'
+import { useGetPropertyAuthenticationQuery, useGetPropertyAggregateLazyQuery } from '@dev/graphql'
+import { PlusOutlined } from '@ant-design/icons'
+import Link from 'next/link'
+import { useGetPropertytInformation } from 'src/fixtures/devprtcl/hooks'
+import { useGetAccount, useGetProperty } from 'src/fixtures/dev-for-apps/hooks'
+import ReactMarkdown from 'react-markdown'
+import { WithGradient } from 'src/components/atoms/WithGradient'
 
 type Props = {}
 
 const Main = styled(Container)`
   display: grid;
   grid-gap: 1rem;
+  grid-template-columns: 1fr;
   grid-template-areas:
     'cover'
-    'topstake'
-    'stake'
-    'outline'
     'possession'
-    'transact'
-    'apps'
-    'cancel'
-    'tags';
+    'stake'
+    'about'
+    'assets'
+    'author'
+    'topstake'
+    'cancel';
   @media (min-width: 1024px) {
     grid-gap: 3rem 2rem;
-    grid-template-columns: 0.9fr auto;
+    grid-template-columns: 1fr;
     grid-template-areas:
-      'cover outline'
-      'topstake outline'
-      'stake outline'
-      'possession outline'
-      'transact outline'
-      'apps outline'
-      'cancel outline'
-      'tags outline';
+      'cover'
+      'possession'
+      'stake'
+      'about'
+      'assets'
+      'author'
+      'topstake'
+      'cancel';
   }
 `
 const Cover = styled.div`
   grid-area: cover;
-`
-const Outline = styled(AssetOutline)`
-  grid-area: outline;
+  padding-top: 52.5%;
+  position: relative;
+  background-size: cover;
+  border-radius: 5px;
+  background-image: linear-gradient(
+    134deg,
+    rgb(47, 67, 237) 0%,
+    rgb(47, 128, 237) 23%,
+    rgb(47, 172, 237) 46%,
+    rgb(190, 208, 230) 100%
+  );
 `
 
 const TopStakerList = styled(TopStakers)`
@@ -63,45 +75,193 @@ const Stake = styled(StakeForm)`
 const Possession = styled(PossessionOutline)`
   grid-area: possession;
 `
-const Transact = styled(TransactionForm)`
-  grid-area: transact;
-`
-const Apps = styled(ConnectedApps)`
-  grid-area: apps;
-`
+
 const Cancel = styled(CancelStaking)`
   grid-area: cancel;
 `
-const Tags = styled(PropertyTags)`
-  grid-area: tags;
+// const Tags = styled(PropertyTags)`
+//   grid-area: tags;
+// `
+
+const Wrap = styled.div`
+  margin: 2rem auto;
+  max-width: 1048px;
+  @media (min-width: 768px) {
+    margin: 5rem auto;
+  }
 `
+
+const AboutSection = styled.div`
+  display: flex;
+  flex-direction: column;
+  grid-area: about;
+`
+
+const AssetsSection = styled.div`
+  display: flex;
+  flex-direction: column;
+  grid-area: assets;
+`
+const AssetList = styled.div`
+  display: flex;
+`
+
+const AssetListItem = styled.div`
+  padding: 5px 8px;
+  border: 1px solid lightgrey;
+  border-radius: 6px;
+  margin-right: 5px;
+  box-shadow: 0 2px 3px -1px rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.06);
+`
+
+const AddAsset = styled.button`
+  display: flex;
+  background: none;
+  justify-content: space-evenly;
+  align-items: center;
+  cursor: pointer;
+  border: 1px solid lightgrey;
+  border-radius: 6px;
+  box-shadow: 0 2px 3px -1px rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.06);
+
+  &:hover {
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2), 0 2px 4px -1px rgba(0, 0, 0, 0.12);
+    transition: 0.2 ease-in;
+  }
+`
+
+const AuthorContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  grid-area: author;
+`
+
+const Flex = styled.div`
+  display: flex;
+  /* align-items: center; */
+
+  img {
+    border-radius: 90px;
+  }
+`
+
+const CreatorContent = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-left: 20px;
+`
+
+const CoverImageOrGradient = ({ src }: { src?: string }) => (
+  <Cover style={src ? { backgroundImage: `url(${src})` } : {}} />
+)
+
+const Author = ({ propertyAddress }: { propertyAddress: string }) => {
+  const { data, error } = useGetPropertytInformation(propertyAddress)
+  const { author: authorAddress } = usePropertyAuthor(propertyAddress)
+  const { data: dataAuthor } = useGetAccount(authorAddress)
+
+  const [fetchAggregate, { data: aggregateData }] = useGetPropertyAggregateLazyQuery()
+
+  useEffect(() => {
+    if (authorAddress) {
+      fetchAggregate({
+        variables: {
+          authorAddress
+        }
+      })
+    }
+  }, [authorAddress, fetchAggregate])
+
+  return (
+    <AuthorContainer>
+      {data && (
+        <>
+          <h2>Created by {data?.name}</h2>
+          <Flex>
+            <div style={{ width: '150px' }}>
+              <Avatar accountAddress={authorAddress} size={'150'} />
+            </div>
+
+            <CreatorContent>
+              <ReactMarkdown>{dataAuthor ? dataAuthor.biography : ''}</ReactMarkdown>
+              <p>
+                <WithGradient>{aggregateData?.property_meta_aggregate.aggregate?.count || 0}</WithGradient> Pool(s) |{' '}
+                <WithGradient>{data?.author?.karma || 0} </WithGradient> Karma
+              </p>
+            </CreatorContent>
+          </Flex>
+        </>
+      )}
+
+      {!data && !error && (
+        <>
+          <div>Author</div>
+          <div>Loading...</div>
+        </>
+      )}
+
+      {error && (
+        <>
+          <div>Author</div>
+          <div>Cannot load: {error.message}</div>
+        </>
+      )}
+    </AuthorContainer>
+  )
+}
 
 const PropertyAddressDetail = (_: Props) => {
   const { propertyAddress } = useRouter().query as { propertyAddress: string }
+  const { apy, creators } = useAPY()
+  const { data } = useGetPropertyAuthenticationQuery({ variables: { propertyAddress } })
+  const { data: dataProperty } = useGetProperty(propertyAddress)
+  /* eslint-disable react-hooks/exhaustive-deps */
+  // FYI: https://github.com/facebook/react/pull/19062
+  const includedAssetList = useMemo(() => data?.property_authentication.map(e => e.authentication_id), [data])
 
   return (
     <>
-      <EarlyAccess></EarlyAccess>
       <Header></Header>
-      <Container>
-        <PropertyHeader propertyAddress={propertyAddress} />
-      </Container>
-      <Main>
-        <Cover>
-          <PropertyCoverImage propertyAddress={propertyAddress}></PropertyCoverImage>
-          <Link href="//github.com/dev-protocol/assets" passHref>
-            <a target="_blank">Change the cover image</a>
-          </Link>
-        </Cover>
-        <TopStakerList propertyAdress={propertyAddress} />
-        <Stake propertyAddress={propertyAddress} />
-        <Outline propertyAddress={propertyAddress} />
-        <Possession propertyAddress={propertyAddress} />
-        <Transact propertyAddress={propertyAddress} />
-        <Apps />
-        <Cancel propertyAddress={propertyAddress} />
-        <Tags propertyAddress={propertyAddress} />
-      </Main>
+      <EarlyAccess></EarlyAccess>
+      <Wrap>
+        <Container>
+          <PropertyHeader apy={apy} creators={creators} propertyAddress={propertyAddress} />
+        </Container>
+        <Main>
+          <CoverImageOrGradient src={dataProperty?.cover_image?.url} />
+          <div>
+            <h2>Top stakers</h2>
+            <TopStakerList propertyAdress={propertyAddress} />
+          </div>
+          <Stake propertyAddress={propertyAddress} />
+          <AboutSection>
+            <h2>About</h2>
+            <ReactMarkdown>{dataProperty ? dataProperty.description : ''}</ReactMarkdown>
+          </AboutSection>
+          <AssetsSection>
+            <h2>Included assets</h2>
+            <AssetList>
+              {includedAssetList?.map((asset, index) => (
+                <AssetListItem key={index}>{asset}</AssetListItem>
+              ))}
+              <Link href={'/auth/[property]'} as={`/auth/${propertyAddress}`}>
+                <AddAsset>
+                  <PlusOutlined />
+                  <span>Add asset</span>
+                </AddAsset>
+              </Link>
+            </AssetList>
+          </AssetsSection>
+          <Author propertyAddress={propertyAddress} />
+          {/* <Outline propertyAddress={propertyAddress} /> */}
+          <Possession propertyAddress={propertyAddress} />
+          {/* <Apps /> */}
+          <Cancel propertyAddress={propertyAddress} />
+        </Main>
+      </Wrap>
+
       <Footer />
     </>
   )

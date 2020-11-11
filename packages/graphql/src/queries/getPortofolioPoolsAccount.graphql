@@ -1,0 +1,5 @@
+query getPortofolioPoolsAccount($accountAddress: String!) {
+    property_lockup(where: { account_address: {_eq: $accountAddress }}) {
+        property_address   
+  }
+}
