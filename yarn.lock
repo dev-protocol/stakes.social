@@ -17671,10 +17671,10 @@ walker@^1.0.7, walker@~1.0.5:
   dependencies:
     makeerror "1.0.x"
 
-walletlink@2.0.1:
-  version "2.0.1"
-  resolved "https://registry.yarnpkg.com/walletlink/-/walletlink-2.0.1.tgz#6e27db2e56281164d25e8b7a1588d80de5d20f23"
-  integrity sha512-S5A9E+v/scysC0XOAIPZIdRLy2lyyVnhnU0kkAL5qYi8Cqai5nQV6EjuOFiwYrbjthFQH9xsaxES46Jz9P+A5Q==
+walletlink@2.0.2:
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/walletlink/-/walletlink-2.0.2.tgz#8640e42d3df49b4661019287ab9789e94b72db98"
+  integrity sha512-4MIctCHAjcPHSQUHpHuU9leUAvYqRF+/4kCq7x9AngZQ2Jd74dbpC8dfZ55uOwW8TXc7z9XYeSyzRrGHbv5ZXg==
   dependencies:
     bind-decorator "^1.0.11"
     bn.js "^5.1.1"
