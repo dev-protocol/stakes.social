@@ -53,7 +53,17 @@ exports[`Statistics Snapshot 1`] = `
           <span
             class="ant-statistic-content-value"
           >
-            (devloping)
+            <span
+              class="ant-statistic-content-value-int"
+            >
+              
+              10
+            </span>
+            <span
+              class="ant-statistic-content-value-decimal"
+            >
+              .00
+            </span>
           </span>
           <span
             class="ant-statistic-content-suffix"

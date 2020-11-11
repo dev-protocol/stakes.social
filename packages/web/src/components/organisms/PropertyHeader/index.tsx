@@ -55,7 +55,7 @@ export const PropertyHeader = ({ propertyAddress, apy, creators }: Props) => {
           <StyledDivider type="vertical" />
           <WithGradient> {dataAuthor?.karma.toLocaleString() || 'N/A'}</WithGradient> Karma
         </div>
-        <BuyDevButton>Buy DEV</BuyDevButton>
+        <BuyDevButton />
       </SubHeader>
     </ResponsivePropertyAddressFrame>
   )

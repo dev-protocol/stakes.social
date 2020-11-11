@@ -17,7 +17,8 @@ import {
   createGetVotablePolicy,
   createAndAuthenticate,
   propertyAuthor,
-  balanceOf
+  balanceOf,
+  allClaimedRewards
 } from './client'
 import { SWRCachePath } from './cache-path'
 import { UnwrapFunc, toNaturalNumber, toAmountNumber, toBigNumber, whenDefined } from 'src/fixtures/utility'
@@ -444,6 +445,20 @@ export const useBalanceOf = () => {
     balanceOf().then(toBigNumber)
   )
   const humanizedDev = whenDefined(data, toNaturalNumber)
-  const amount = currency === 'DEV' ? humanizedDev : toCurrency(humanizedDev)
+  const amount = toCurrency(humanizedDev)
+  return { amount, currency, error }
+}
+
+export const useAllClaimedRewards = () => {
+  const { currency, toCurrency } = useCurrency()
+  const { accountAddress } = useGetAccountAddress()
+  const { data, error } = useSWR<BigNumber | undefined, Error>(SWRCachePath.allClaimedRewards(accountAddress), () =>
+    allClaimedRewards().then(allEvents => {
+      return allEvents.reduce((a, c) => a.plus(c.returnValues.value), toBigNumber(0))
+    })
+  )
+  const humanizedDev = whenDefined(data, toNaturalNumber)
+  const amount = toCurrency(humanizedDev)
+
   return { amount, currency, error }
 }

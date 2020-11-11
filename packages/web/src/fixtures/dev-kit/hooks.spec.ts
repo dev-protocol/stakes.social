@@ -16,7 +16,8 @@ import {
   useAnnualSupplyGrowthRatio,
   useGetPolicyAddressesList,
   usePropertyAuthor,
-  useBalanceOf
+  useBalanceOf,
+  useAllClaimedRewards
 } from './hooks'
 import { useCurrency } from 'src/fixtures/currency/functions/useCurrency'
 import useSWR from 'swr'
@@ -539,6 +540,62 @@ describe('dev-kit hooks', () => {
       const error = new Error(errorMessage)
       ;(useSWR as jest.Mock).mockImplementation(() => ({ data, error }))
       const { result } = renderHook(() => useBalanceOf())
+      expect(result.current.error).toBe(error)
+      expect(result.current.error?.message).toBe(errorMessage)
+    })
+  })
+
+  describe('useAllClaimedRewards', () => {
+    test('data is undefined and currency is DEV', () => {
+      const data = undefined
+      const error = undefined
+      const toCurrency = (x?: BigNumber) => x
+      ;(useCurrency as jest.Mock).mockImplementationOnce(() => ({ currency: 'DEV', toCurrency }))
+      ;(useSWR as jest.Mock).mockImplementationOnce(() => ({ data: '0x' }))
+      ;(useSWR as jest.Mock).mockImplementationOnce(() => ({ data, error }))
+      const { result } = renderHook(() => useAllClaimedRewards())
+      expect(result.current.amount).toBe(data)
+      expect(result.current.currency).toBe('DEV')
+    })
+
+    test('data is undefined and currncy is USD', () => {
+      const data = undefined
+      const error = undefined
+      const toCurrency = (x?: BigNumber) => x
+      ;(useCurrency as jest.Mock).mockImplementationOnce(() => ({ currency: 'USD', toCurrency }))
+      ;(useSWR as jest.Mock).mockImplementationOnce(() => ({ data: '0x' }))
+      ;(useSWR as jest.Mock).mockImplementationOnce(() => ({ data, error }))
+      const { result } = renderHook(() => useAllClaimedRewards())
+      expect(result.current.amount).toBe(data)
+      expect(result.current.currency).toBe('USD')
+    })
+
+    test('success fetching data and currency is DEV', () => {
+      const toCurrency = (x?: BigNumber) => x
+      ;(useCurrency as jest.Mock).mockImplementation(() => ({ currency: 'DEV', toCurrency }))
+      ;(useSWR as jest.Mock).mockImplementationOnce(() => ({ data: '0x' }))
+      ;(useSWR as jest.Mock).mockImplementationOnce(() => ({ data: toBigNumber('10000000000000000000') }))
+      const { result } = renderHook(() => useAllClaimedRewards())
+      expect(result.current.amount?.toFixed()).toBe('10')
+      expect(result.current.currency).toBe('DEV')
+    })
+
+    test('success fetching data and currency is USD', () => {
+      const toCurrency = (x?: BigNumber) => toBigNumber(x).times(3)
+      ;(useCurrency as jest.Mock).mockImplementation(() => ({ currency: 'USD', toCurrency }))
+      ;(useSWR as jest.Mock).mockImplementationOnce(() => ({ data: '0x' }))
+      ;(useSWR as jest.Mock).mockImplementationOnce(() => ({ data: toBigNumber('10000000000000000000') }))
+      const { result } = renderHook(() => useAllClaimedRewards())
+      expect(result.current.amount?.toFixed()).toBe('30')
+      expect(result.current.currency).toBe('USD')
+    })
+
+    test('failure fetching data', () => {
+      const data = undefined
+      const errorMessage = 'error'
+      const error = new Error(errorMessage)
+      ;(useSWR as jest.Mock).mockImplementation(() => ({ data, error }))
+      const { result } = renderHook(() => useAllClaimedRewards())
       expect(result.current.error).toBe(error)
       expect(result.current.error?.message).toBe(errorMessage)
     })
