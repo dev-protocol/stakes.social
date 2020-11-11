@@ -4,48 +4,48 @@ exports[`UserProfile Snapshot 1`] = `
 <body>
   <div>
     <div
-      class="sc-1wzqvkc-0 bqVTXQ"
+      class="sc-1wzqvkc-0 byYDMh"
     >
       <section
-        class="sc-4avdzt-0 iEUrma"
+        class="sc-4avdzt-0 jbRCmr"
       >
         <div
-          class="sc-4avdzt-1 ktSftV"
+          class="sc-4avdzt-1 jGXkIY"
         >
           Your Address
         </div>
         <div
-          class="sc-4avdzt-2 bHZBpu"
+          class="sc-4avdzt-2 daxNIz"
         >
           -
         </div>
       </section>
       <section
-        class="sc-4avdzt-0 iEUrma"
+        class="sc-4avdzt-0 jbRCmr"
       >
         <div
-          class="sc-4avdzt-1 ktSftV"
+          class="sc-4avdzt-1 jGXkIY"
         >
           Display name
         </div>
         <div
-          class="sc-4avdzt-2 bHZBpu"
+          class="sc-4avdzt-2 daxNIz"
         >
           (Not set)
         </div>
         <div
-          class="sc-4avdzt-1 ktSftV"
+          class="sc-4avdzt-1 jGXkIY"
         >
           Biography
         </div>
         <div
-          class="sc-4avdzt-3 efDWlY"
+          class="sc-4avdzt-3 lczEAN"
         >
           (Not set)
         </div>
       </section>
       <section
-        class="sc-4avdzt-0 iEUrma"
+        class="sc-4avdzt-0 jbRCmr"
       >
         <button
           class="ant-btn ant-btn-primary"
@@ -57,18 +57,18 @@ exports[`UserProfile Snapshot 1`] = `
         </button>
       </section>
       <section
-        class="sc-4avdzt-0 iEUrma"
+        class="sc-4avdzt-0 jbRCmr"
       >
         <div
-          class="sc-4avdzt-1 ktSftV"
+          class="sc-4avdzt-1 jGXkIY"
         >
           Your Avatar
         </div>
         <div
-          class="sc-17om263-0 eyeSpH"
+          class="sc-17om263-0 enaAkK"
         />
         <form
-          class="ant-form ant-form-vertical sc-4avdzt-4 cjwGrs"
+          class="ant-form ant-form-vertical sc-4avdzt-4 hdQhkp"
         >
           <div
             class="ant-row ant-form-item"

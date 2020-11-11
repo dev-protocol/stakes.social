@@ -13,42 +13,39 @@ import {
   updateAccounting,
   bonusPeriodSec,
   startBonus,
+  allTokensLocked,
   totalStakedFor,
   unstakeQuery
 } from './client'
 import { useCallback, useState } from 'react'
 import { message } from 'antd'
-import { getUTC, toBigNumber, toEVMBigNumber, UnwrapFunc, whenDefined } from 'src/fixtures/utility'
+import { getUTC, toBigNumber, toEVMBigNumber, toNaturalNumber, UnwrapFunc, whenDefined } from 'src/fixtures/utility'
 import { INITIAL_SHARES_PER_TOKEN, ONE_MONTH_SECONDS, SYSTEM_SETTIMEOUT_MAXIMUM_DELAY_VALUE } from '../constants/number'
 import { getBlock } from 'src/fixtures/wallet/utility'
 import { useProvider } from 'src/fixtures/wallet/hooks'
+import { useTheGraph } from '../uniswap-pool/hooks'
 import Web3 from 'web3'
 
 const getAllTokensClaimed = (client: Web3) => () =>
-  allTokensClaimed(client).then(allEvents =>
-    allEvents.reduce(
+  allTokensClaimed(client).then(allEvents => {
+    console.log(allEvents)
+    return allEvents.reduce(
       (a: BigNumber, c) => a.plus(c.returnValues.amount),
       toBigNumber(allEvents[0]?.returnValues.amount || 0)
     )
-  )
+  })
+
+const getTokensLocked = (client: Web3) =>
+  allTokensLocked(client).then(allEvents => {
+    console.log(allEvents)
+    return allEvents.reduce((a: BigNumber, c) => a.plus(c.returnValues.amount), toBigNumber(0))
+  })
 
 export const useTotalRewards = () => {
-  const { web3, accountAddress } = useProvider()
-  const { data: dataAccounting, error: errorAccounting } = useSWR<
-    undefined | UnwrapFunc<typeof updateAccounting>,
-    Error
-  >(SWRCachePath.getUpdateAccounting(accountAddress), () => whenDefined(web3, x => updateAccounting(x)))
-  const { data: dataAllTokensClaimed, error: errorAllTokensClaimed } = useSWR<BigNumber, Error>(
-    SWRCachePath.useAllTokensClaimed(accountAddress),
-    whenDefined(web3, x => getAllTokensClaimed(x))
-  )
-  const data =
-    dataAccounting && dataAllTokensClaimed
-      ? toBigNumber(dataAccounting.totalLocked).plus(dataAccounting.totalUnlocked).plus(dataAllTokensClaimed)
-      : toEVMBigNumber(0)
+  const { data, error } = useSWR<BigNumber, Error>(SWRCachePath.allTokensLocked, getTokensLocked)
   return {
     data,
-    error: errorAccounting || errorAllTokensClaimed
+    error
   }
 }
 
@@ -322,13 +319,35 @@ export const useMutateDepositDependence = () => {
   }
 }
 
-export const useUnstakeQuery = () => {
+export const useAPY = () => {
+  const { data: totalRewards } = useTotalRewards()
+  const { data: totalStaked } = useTotalStaked()
+  const { data: theGraph } = useTheGraph(totalStaked?.toString())
+  const apy =
+    totalStaked && theGraph && theGraph.data.pair && totalRewards
+      ? (() => {
+          const max = toNaturalNumber(totalRewards)
+          const stakedDev = toNaturalNumber(totalStaked)
+            .div(theGraph.data.pair.totalSupply)
+            .times(theGraph.data.pair.reserve0)
+
+          return max.div(stakedDev).times(100)
+        })()
+      : toBigNumber(0)
+
+  return {
+    data: apy
+  }
+}
+
+export const useUnstakeQuery = (amount?: BigNumber) => {
   const { web3 } = useProvider()
-  const _unstakeQuery = useCallback(
-    async (amount: BigNumber) => {
-      return whenDefined(web3, x => unstakeQuery(x, amount))
-    },
-    [web3]
+  const { data, error } = useSWR<UnwrapFunc<typeof totalStakedFor> | undefined, Error>(
+    SWRCachePath.unstakeQuery(amount?.toFixed()),
+    () => whenDefined(web3, w3 => whenDefined(amount, x => unstakeQuery(w3, x)))
   )
-  return { unstakeQuery: _unstakeQuery }
+  return {
+    data,
+    error
+  }
 }

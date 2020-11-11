@@ -4,32 +4,32 @@ exports[`PropertyHeader Snapshot 1`] = `
 <body>
   <div>
     <div
-      class="sc-1bnntxi-0 dsbteV"
+      class="sc-1bnntxi-0 abVPQ"
     >
       <h1
-        class="sc-1bnntxi-1 iCZLYm"
+        class="sc-1bnntxi-1 fIBpSf"
       >
         authentication-id's Pool
       </h1>
       <div
-        class="sc-1bnntxi-2 cxuokw"
+        class="sc-1bnntxi-2 gCPcUN"
       >
         <div
           style="margin-bottom: 0px;"
         >
           <span
-            class="xnqjv4-0 gvtyPq"
+            class="xnqjv4-0 iiUDCf"
           >
             N/A
             %
           </span>
            APY Stakers
           <div
-            class="ant-divider ant-divider-vertical sc-1bnntxi-3 iTHJht"
+            class="ant-divider ant-divider-vertical sc-1bnntxi-3 ikThBI"
             role="separator"
           />
           <span
-            class="xnqjv4-0 gvtyPq"
+            class="xnqjv4-0 iiUDCf"
           >
              
             N/A
@@ -37,11 +37,11 @@ exports[`PropertyHeader Snapshot 1`] = `
           </span>
            APY Creators
           <div
-            class="ant-divider ant-divider-vertical sc-1bnntxi-3 iTHJht"
+            class="ant-divider ant-divider-vertical sc-1bnntxi-3 ikThBI"
             role="separator"
           />
           <span
-            class="xnqjv4-0 gvtyPq"
+            class="xnqjv4-0 iiUDCf"
           >
              
             N/A
@@ -54,7 +54,7 @@ exports[`PropertyHeader Snapshot 1`] = `
           target="_blank"
         >
           <button
-            class="sc-17tlp0z-0 cvfhWc"
+            class="sc-17tlp0z-0 eabppD"
           >
             Buy DEV
           </button>

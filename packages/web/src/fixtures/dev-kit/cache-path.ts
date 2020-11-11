@@ -10,8 +10,6 @@ export const SWRCachePath = {
   getMyStakingAmount: (propertyAddress: string, user?: string) =>
     `propertyAddresses/${user}${propertyAddress}/getMyStakingAmount`,
   getTotalStakingAmountOnProtocol: (user?: string) => `getTotalStakingAmountOnProtocol/${user}`,
-  getWithdrawalStatus: (propertyAddress: string, user?: string) =>
-    `propertyAddresses/${user}${propertyAddress}/getWithdrawalStatus`,
   calculateMaxRewardsPerBlock: (user?: string) => `calculateMaxRewardsPerBlock/${user}`,
   totalSupply: (user?: string) => `totalSupply/${user}`,
   holdersShare: (amount?: string, lockedups?: string, user?: string) =>

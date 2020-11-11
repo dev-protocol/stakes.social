@@ -5,14 +5,11 @@ import {
   withdrawHolderAmount,
   getMyHolderAmount,
   stakeDev,
-  cancelStaking,
-  withdrawStakingRewardAmount,
   withdrawStakingAmount,
   getMyStakingRewardAmount,
   createProperty,
   marketScheme,
   authenticate,
-  getWithdrawalStatus,
   getTotalStakingAmountOnProtocol,
   calculateMaxRewardsPerBlock,
   totalSupply,
@@ -22,8 +19,8 @@ import {
   propertyAuthor
 } from './client'
 import { SWRCachePath } from './cache-path'
-import { UnwrapFunc, toNaturalNumber, toAmountNumber, whenDefined } from 'src/fixtures/utility'
-import { getBlockNumber, getDevAmount } from 'src/fixtures/wallet/utility'
+import { UnwrapFunc, toNaturalNumber, toAmountNumber, toBigNumber, whenDefined } from 'src/fixtures/utility'
+import { getDevAmount } from 'src/fixtures/wallet/utility'
 import useSWR from 'swr'
 import { message } from 'antd'
 import { useState, useCallback } from 'react'
@@ -126,7 +123,7 @@ export const useWithdrawStakingReward = () => {
       message.loading({ content: 'now withdrawing staking reward...', duration: 0, key })
       setError(undefined)
       return whenDefined(web3, x =>
-        withdrawStakingRewardAmount(x, propertyAddress)
+        withdrawStakingAmount(x, propertyAddress, toBigNumber(0))
           .then(() => {
             message.success({ content: 'success withdrawing!', key })
             setIsLoading(false)
@@ -150,12 +147,12 @@ export const useWithdrawStaking = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [error, setError] = useState<Error>()
   const withdrawStaking = useCallback(
-    async (propertyAddress: string) => {
+    async (propertyAddress: string, amount: BigNumber) => {
       setIsLoading(true)
       message.loading({ content: 'now withdrawing staking...', duration: 0, key })
       setError(undefined)
       return whenDefined(web3, x =>
-        withdrawStakingAmount(x, propertyAddress)
+        withdrawStakingAmount(x, propertyAddress, amount)
           .then(() => {
             message.success({ content: 'success withdrawing!', key })
             setIsLoading(false)
@@ -200,50 +197,6 @@ export const useStake = () => {
   )
 
   return { stake, isLoading, error }
-}
-
-export const useCancelStaking = () => {
-  const { web3 } = useProvider()
-  const key = 'useCancelStaking'
-  const [isLoading, setIsLoading] = useState<boolean>(false)
-  const [error, setError] = useState<Error>()
-  const cancel = useCallback(
-    async (propertyAddress: string) => {
-      setIsLoading(true)
-      message.loading({ content: 'now canceling staking...', duration: 0, key })
-      setError(undefined)
-      return whenDefined(web3, x =>
-        cancelStaking(x, propertyAddress)
-          .then(() => {
-            message.success({ content: 'canceled staking', key })
-            setIsLoading(false)
-          })
-          .catch(err => {
-            setError(err)
-            message.error({ content: err.message, key })
-            setIsLoading(false)
-            throw err
-          })
-      )
-    },
-    [web3]
-  )
-
-  return { cancel, isLoading, error }
-}
-
-export const useGetWithdrawalStatus = (propertyAddress: string) => {
-  const { web3, accountAddress } = useProvider()
-  const { data, error } = useSWR<UnwrapFunc<typeof getWithdrawalStatus>, Error>(
-    SWRCachePath.getWithdrawalStatus(propertyAddress, accountAddress),
-    () => whenDefined(web3, x => getWithdrawalStatus(x, propertyAddress)),
-    {
-      onError: err => message.error(err.message)
-    }
-  )
-  const withdrawable = getBlockNumber()?.then(x => (x && data ? x >= data : false))
-
-  return { withdrawalStatus: data, withdrawable, error }
 }
 
 export const useTotalStakingAmountOnProtocol = () => {

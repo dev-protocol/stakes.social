@@ -4,19 +4,19 @@ exports[`Header Snapshot 1`] = `
 <body>
   <div>
     <header
-      class="sc-1bz6snd-0 hQPKZt"
+      class="sc-1bz6snd-0 TlprQ"
     >
       <div
-        class="sc-1bz6snd-3 hfiHED"
+        class="sc-1bz6snd-3 iRUEtO"
       >
         <header
-          class="sc-1bz6snd-1 jxufrg"
+          class="sc-1bz6snd-1 fywCvk"
         >
           <div
-            class="sc-1bz6snd-2 cwDMQA"
+            class="sc-1bz6snd-2 bmyIOd"
           >
             <a
-              class="sc-38x7tx-0 itjGxp"
+              class="sc-38x7tx-0 eHXdRo"
               href="/"
             >
               <svg
@@ -100,7 +100,7 @@ exports[`Header Snapshot 1`] = `
             </g>
           </svg>
           <div
-            class="sc-1dxoc5d-2 ePXQBM"
+            class="sc-1dxoc5d-2 mdZQR"
           >
             SignIn
           </div>

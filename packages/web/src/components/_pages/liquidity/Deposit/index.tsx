@@ -61,8 +61,8 @@ export const Deposit = () => {
 
   const [isAlreadyFinished] = useIsAlreadyFinished(useState<boolean>(false))
   const estimate = useEstimateReward()
-  const { approve } = useApprove()
-  const { stake } = useStake()
+  const { approve, isLoading: isApproving } = useApprove()
+  const { stake, isLoading: isStaking } = useStake()
   const isFulfilled = useCallback(() => {
     return !totalStakingShares || !totalStaked || !accounting || !finalUnlockSchedule
       ? false
@@ -184,6 +184,7 @@ export const Deposit = () => {
                 <p>Please approve the token transfer to deposit ETHDEV-V2.</p>
                 <Button
                   disabled={isAlreadyFinished || !requireApproval}
+                  loading={isApproving}
                   type="primary"
                   size="large"
                   onClick={onClickApprove}
@@ -200,6 +201,7 @@ export const Deposit = () => {
                 <p>Deposit ETHDEV-V2.</p>
                 <Button
                   disabled={isAlreadyFinished || requireApproval || !requireDeposit}
+                  loading={isStaking}
                   type="primary"
                   size="large"
                   onClick={onClickDeposit}

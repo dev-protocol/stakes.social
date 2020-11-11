@@ -5852,6 +5852,8 @@ export type ListPropertyQueryVariables = Exact<{
   offset?: Maybe<Scalars['Int']>
   ilike?: Maybe<Scalars['String']>
   from?: Maybe<Scalars['String']>
+  market?: Maybe<Scalars['String']>
+  marketOther?: Maybe<Array<Scalars['String']>>
 }>
 
 export type ListPropertyQuery = { __typename?: 'query_root' } & {
@@ -5877,6 +5879,8 @@ export type ListPropertyOrderByMostRecentQueryVariables = Exact<{
   offset?: Maybe<Scalars['Int']>
   ilike?: Maybe<Scalars['String']>
   from?: Maybe<Scalars['String']>
+  market?: Maybe<Scalars['String']>
+  marketOther?: Maybe<Array<Scalars['String']>>
 }>
 
 export type ListPropertyOrderByMostRecentQuery = { __typename?: 'query_root' } & {
@@ -6118,13 +6122,24 @@ export type GetPropertyAuthenticationQueryResult = Apollo.QueryResult<
   GetPropertyAuthenticationQueryVariables
 >
 export const ListPropertyDocument = gql`
-  query ListProperty($limit: Int, $offset: Int, $ilike: String, $from: String) {
+  query ListProperty(
+    $limit: Int
+    $offset: Int
+    $ilike: String
+    $from: String
+    $market: String
+    $marketOther: [String!]
+  ) {
     property_factory_create(
       limit: $limit
       offset: $offset
       order_by: { current_lockup: { sum_values: desc_nulls_last } }
       where: {
-        authentication: { authentication_id: { _ilike: $ilike }, property_creation: { from_address: { _eq: $from } } }
+        authentication: {
+          authentication_id: { _ilike: $ilike }
+          property_creation: { from_address: { _eq: $from } }
+          market: { _eq: $market, _nin: $marketOther }
+        }
       }
     ) {
       authentication {
@@ -6134,7 +6149,11 @@ export const ListPropertyDocument = gql`
     }
     property_factory_create_aggregate(
       where: {
-        authentication: { authentication_id: { _ilike: $ilike }, property_creation: { from_address: { _eq: $from } } }
+        authentication: {
+          authentication_id: { _ilike: $ilike }
+          property_creation: { from_address: { _eq: $from } }
+          market: { _eq: $market, _nin: $marketOther }
+        }
       }
     ) {
       aggregate {
@@ -6161,6 +6180,8 @@ export const ListPropertyDocument = gql`
  *      offset: // value for 'offset'
  *      ilike: // value for 'ilike'
  *      from: // value for 'from'
+ *      market: // value for 'market'
+ *      marketOther: // value for 'marketOther'
  *   },
  * });
  */
@@ -6178,13 +6199,24 @@ export type ListPropertyQueryHookResult = ReturnType<typeof useListPropertyQuery
 export type ListPropertyLazyQueryHookResult = ReturnType<typeof useListPropertyLazyQuery>
 export type ListPropertyQueryResult = Apollo.QueryResult<ListPropertyQuery, ListPropertyQueryVariables>
 export const ListPropertyOrderByMostRecentDocument = gql`
-  query ListPropertyOrderByMostRecent($limit: Int, $offset: Int, $ilike: String, $from: String) {
+  query ListPropertyOrderByMostRecent(
+    $limit: Int
+    $offset: Int
+    $ilike: String
+    $from: String
+    $market: String
+    $marketOther: [String!]
+  ) {
     property_factory_create(
       limit: $limit
       offset: $offset
       order_by: { block_number: desc }
       where: {
-        authentication: { authentication_id: { _ilike: $ilike }, property_creation: { from_address: { _eq: $from } } }
+        authentication: {
+          authentication_id: { _ilike: $ilike }
+          property_creation: { from_address: { _eq: $from } }
+          market: { _eq: $market, _nin: $marketOther }
+        }
       }
     ) {
       authentication {
@@ -6194,7 +6226,11 @@ export const ListPropertyOrderByMostRecentDocument = gql`
     }
     property_factory_create_aggregate(
       where: {
-        authentication: { authentication_id: { _ilike: $ilike }, property_creation: { from_address: { _eq: $from } } }
+        authentication: {
+          authentication_id: { _ilike: $ilike }
+          property_creation: { from_address: { _eq: $from } }
+          market: { _eq: $market, _nin: $marketOther }
+        }
       }
     ) {
       aggregate {
@@ -6221,6 +6257,8 @@ export const ListPropertyOrderByMostRecentDocument = gql`
  *      offset: // value for 'offset'
  *      ilike: // value for 'ilike'
  *      from: // value for 'from'
+ *      market: // value for 'market'
+ *      marketOther: // value for 'marketOther'
  *   },
  * });
  */

@@ -97,10 +97,18 @@ export const Navigation = ({ handleMenuOpen }: NavigationProps) => {
   return (
     <>
       {isDesktop && (
-        <NavMenu theme="dark" onClick={handleClick} selectedKeys={[current]} mode="horizontal">
+        <NavMenu
+          style={{ background: 'black' }}
+          theme="dark"
+          onClick={handleClick}
+          selectedKeys={[current]}
+          mode="horizontal"
+        >
           {navs.map(nav => (
             <NavMenuItem color="deeppink" key={nav.key}>
-              <Link href={nav.pathname}>{nav.label}</Link>
+              <Link href={nav.pathname}>
+                <a>{nav.label}</a>
+              </Link>
             </NavMenuItem>
           ))}
         </NavMenu>

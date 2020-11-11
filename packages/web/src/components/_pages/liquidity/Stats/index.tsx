@@ -7,9 +7,9 @@ import {
   useTotalStaked,
   useUpdateAccounting
 } from '../../../../fixtures/_pages/liquidity/geyser/hooks'
+import { format } from 'date-fns'
 import { toBigNumber, toNaturalNumber } from 'src/fixtures/utility'
 import { useTheGraph } from '../../../../fixtures/_pages/liquidity/uniswap-pool/hooks'
-import { format } from 'date-fns'
 import { ONE_MONTH_SECONDS } from 'src/fixtures/_pages/liquidity/constants/number'
 
 const Wrapper = styled.div`
@@ -28,23 +28,20 @@ export const Stats = () => {
     totalStaked && theGraph && theGraph.data.pair
       ? toNaturalNumber(totalStaked).div(theGraph.data.pair.totalSupply).times(theGraph.data.pair.reserveUSD)
       : toBigNumber(0)
-  const apy =
-    totalStaked && theGraph && theGraph.data.pair && totalRewards && finalUnlockSchedules
-      ? (() => {
-          const max = toNaturalNumber(totalRewards)
-          const stakedDev = toNaturalNumber(totalStaked)
-            .div(theGraph.data.pair.totalSupply)
-            .times(theGraph.data.pair.reserve0)
-
-          return max.div(stakedDev).div(finalUnlockSchedules.durationSec).times(ONE_MONTH_SECONDS).times(100)
-        })()
+  const unlockRate =
+    totalRewards && finalUnlockSchedules
+      ? totalRewards.div(finalUnlockSchedules.durationSec).times(ONE_MONTH_SECONDS)
       : toBigNumber(0)
 
   return (
     <Wrapper>
-      <Statistic title="APY(monthly)" value={apy.dp(5).toNumber()} suffix="%" />
+      <Statistic
+        title="Total rewards"
+        value={totalRewards ? toNaturalNumber(totalRewards).toNumber() : '-'}
+        suffix="DEV"
+        precision={2}
+      />
       <Statistic title="Total deposits" value={totalDepositsUSD.toString()} suffix="USD" precision={2} />
-      <Statistic title="Total rewards" value={toNaturalNumber(totalRewards).toNumber()} suffix="DEV" precision={2} />
       <Statistic
         title="Locked rewards"
         value={accounting ? toNaturalNumber(accounting.totalLocked).dp(5).toNumber() : 0}
@@ -59,6 +56,7 @@ export const Stats = () => {
         title="End of the Program"
         value={finalUnlockSchedules ? format(Number(finalUnlockSchedules.endAtSec) * 1000, 'M/d/Y') : ''}
       />
+      <Statistic title="Reward unlock rate" value={toNaturalNumber(unlockRate).toNumber()} suffix="DEV" precision={2} />
     </Wrapper>
   )
 }
