@@ -9,17 +9,15 @@ exports[`WithdrawForm Snapshot 1`] = `
       <p>
         Withdraw 
         Creators
-         Reward
+         Reward 
+        1000
+         
+        DEV
+         available
       </p>
       <div
-        class="sc-1xz1jp7-1 gMLLA-D"
+        class="sc-1xz1jp7-1 fXaeQW"
       >
-        <div
-          class="sc-1xz1jp7-2 clypbP"
-        >
-          1000
-           DEV
-        </div>
         <button
           class="ant-btn ant-btn-primary ant-btn-lg"
           type="button"

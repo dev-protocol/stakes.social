@@ -4,50 +4,10 @@ exports[`AssetOutline Snapshot 1`] = `
 <body>
   <div>
     <div
-      class="sc-10zn2q0-0 sc-10zn2q0-1 jKwsaN cLtLBy"
+      class="sc-10zn2q0-0 sc-10zn2q0-1 hFmgoo iQODLr"
     >
-      <div>
-        <p>
-          Included Assets
-        </p>
-        <div
-          class="ant-list ant-list-split ant-list-bordered"
-          style="background: rgb(255, 255, 255);"
-        >
-          <div
-            class="ant-spin-nested-loading"
-          >
-            <div
-              class="ant-spin-container"
-            >
-              <ul
-                class="ant-list-items"
-              >
-                <li
-                  class="ant-list-item sc-10zn2q0-4 kyHQyS"
-                >
-                  <span
-                    style="overflow: auto;"
-                  >
-                    authentication-id
-                  </span>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-        <button
-          class="ant-btn ant-btn-dashed ant-btn-sm"
-          style="margin-top: 0.5rem;"
-          type="button"
-        >
-          <span>
-            Add your asset
-          </span>
-        </button>
-      </div>
       <div
-        class="sc-10zn2q0-5 chlJSP"
+        class="sc-10zn2q0-4 dxTMZT"
       >
         <div>
           Author
@@ -62,14 +22,14 @@ exports[`AssetOutline Snapshot 1`] = `
           Staking Ratio
         </p>
         <div
-          class="sc-10zn2q0-0 sc-10zn2q0-2 jKwsaN ccSIBw"
+          class="sc-10zn2q0-0 sc-10zn2q0-2 hFmgoo ejKgQR"
         >
           <div
-            class="sc-5ahzw8-0 jTwvQh"
+            class="sc-5ahzw8-0 iRyfEw"
           />
           <div>
             <span
-              class="sc-10zn2q0-3 htfPjk"
+              class="sc-10zn2q0-3 kYCxeV"
             >
               26
               %

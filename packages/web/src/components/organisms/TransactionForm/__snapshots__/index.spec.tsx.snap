@@ -4,7 +4,7 @@ exports[`TransactionForm Snapshot 1`] = `
 <body>
   <div>
     <div
-      class="sc-1e3xeyk-0 dFAruq"
+      class="sc-1e3xeyk-0 jWLMOX"
     >
       <div
         class="sc-1xz1jp7-0"
@@ -12,17 +12,15 @@ exports[`TransactionForm Snapshot 1`] = `
         <p>
           Withdraw 
           Stakers
-           Reward
+           Reward 
+          5000
+           
+          DEV
+           available
         </p>
         <div
-          class="sc-1xz1jp7-1 gMLLA-D"
+          class="sc-1xz1jp7-1 fXaeQW"
         >
-          <div
-            class="sc-1xz1jp7-2 clypbP"
-          >
-            5000
-             DEV
-          </div>
           <button
             class="ant-btn ant-btn-primary ant-btn-lg"
             type="button"
@@ -39,17 +37,15 @@ exports[`TransactionForm Snapshot 1`] = `
         <p>
           Withdraw 
           Creators
-           Reward
+           Reward 
+          6000
+           
+          DEV
+           available
         </p>
         <div
-          class="sc-1xz1jp7-1 gMLLA-D"
+          class="sc-1xz1jp7-1 fXaeQW"
         >
-          <div
-            class="sc-1xz1jp7-2 clypbP"
-          >
-            6000
-             DEV
-          </div>
           <button
             class="ant-btn ant-btn-primary ant-btn-lg"
             type="button"

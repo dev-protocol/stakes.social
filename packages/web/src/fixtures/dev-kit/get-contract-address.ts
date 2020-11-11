@@ -6,7 +6,7 @@ const cache: Map<'main', Map<string, string>> = new Map()
 
 export const getContractAddress = async (
   client: DevkitContract,
-  contract: keyof RegistryContract,
+  contract: keyof Omit<RegistryContract, 'contract'>,
   net: 'main' = 'main'
 ): Promise<string> =>
   (async fromCache => {

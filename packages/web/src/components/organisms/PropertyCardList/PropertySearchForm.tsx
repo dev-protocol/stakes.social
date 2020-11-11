@@ -1,30 +1,25 @@
 import React from 'react'
-import { Col, Row, Form, Input } from 'antd'
+import styled from 'styled-components'
+import SearchBar from '../../molecules/SearchBar'
 
 interface Props {
   onSubmitSearchProperty: (word: string) => void
 }
 
-const formLayout = {
-  wrapperCol: { span: 18 }
-}
+const Flex = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  input {
+    width: 100%;
+  }
+`
 
 export const PropertySearchForm = ({ onSubmitSearchProperty }: Props) => {
   return (
-    <>
-      <Form {...formLayout}>
-        <Row>
-          <Col sm={20} md={12}>
-            <Form.Item name="searchWord">
-              <Input.Search
-                placeholder="input property search word"
-                onSearch={searchWord => onSubmitSearchProperty(searchWord)}
-                enterButton
-              />
-            </Form.Item>
-          </Col>
-        </Row>
-      </Form>
-    </>
+    <Flex>
+      <SearchBar onSearchTermChange={onSubmitSearchProperty} activeSearchTerm="" />
+    </Flex>
   )
 }

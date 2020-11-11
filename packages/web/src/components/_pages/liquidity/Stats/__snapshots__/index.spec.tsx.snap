@@ -4,7 +4,7 @@ exports[`Stats Snapshot 1`] = `
 <body>
   <div>
     <div
-      class="rvt3gy-0 dhXBJV"
+      class="rvt3gy-0 hhARWk"
     >
       <div
         class="ant-statistic"
@@ -12,7 +12,7 @@ exports[`Stats Snapshot 1`] = `
         <div
           class="ant-statistic-title"
         >
-          APY(monthly)
+          Total rewards
         </div>
         <div
           class="ant-statistic-content"
@@ -20,18 +20,12 @@ exports[`Stats Snapshot 1`] = `
           <span
             class="ant-statistic-content-value"
           >
-            <span
-              class="ant-statistic-content-value-int"
-            >
-              
-              25,920,000,000,000,000,000
-            </span>
-            
+            1e-13
           </span>
           <span
             class="ant-statistic-content-suffix"
           >
-            %
+            DEV
           </span>
         </div>
       </div>
@@ -55,29 +49,6 @@ exports[`Stats Snapshot 1`] = `
             class="ant-statistic-content-suffix"
           >
             USD
-          </span>
-        </div>
-      </div>
-      <div
-        class="ant-statistic"
-      >
-        <div
-          class="ant-statistic-title"
-        >
-          Total rewards
-        </div>
-        <div
-          class="ant-statistic-content"
-        >
-          <span
-            class="ant-statistic-content-value"
-          >
-            1e-13
-          </span>
-          <span
-            class="ant-statistic-content-suffix"
-          >
-            DEV
           </span>
         </div>
       </div>
@@ -116,7 +87,7 @@ exports[`Stats Snapshot 1`] = `
         <div
           class="ant-statistic-title"
         >
-          Unocked rewards
+          Unlocked rewards
         </div>
         <div
           class="ant-statistic-content"
@@ -154,6 +125,29 @@ exports[`Stats Snapshot 1`] = `
             class="ant-statistic-content-value"
           >
             1/2/1970
+          </span>
+        </div>
+      </div>
+      <div
+        class="ant-statistic"
+      >
+        <div
+          class="ant-statistic-title"
+        >
+          Reward unlock rate
+        </div>
+        <div
+          class="ant-statistic-content"
+        >
+          <span
+            class="ant-statistic-content-value"
+          >
+            2.592e-12
+          </span>
+          <span
+            class="ant-statistic-content-suffix"
+          >
+            DEV
           </span>
         </div>
       </div>

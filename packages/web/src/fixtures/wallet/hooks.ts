@@ -2,23 +2,34 @@ import { cachePath } from './catch-path'
 import { connectWallet, getAccountAddress, getBlockNumber } from './utility'
 import { UnwrapFunc } from 'src/fixtures/utility'
 import useSWR from 'swr'
+import { useContext, useEffect, useState } from 'react'
+import WalletContext from 'src/context/walletContext'
 
 export const useConnectWallet = () => {
-  const { data, mutate } = useSWR<UnwrapFunc<typeof connectWallet>, Error>(cachePath.connectWallet())
+  const { web3Modal, setWeb3 } = useContext(WalletContext)
+  const [isConnecting, setIsConnecting] = useState(false)
+  const [isConnected, setIsConnected] = useState(false)
 
-  const connect = () => {
-    connectWallet().then(result => mutate(result))
+  const connect = async () => {
+    setIsConnecting(true)
+    setIsConnected(false)
+    return connectWallet(setWeb3, web3Modal).then(result => {
+      setIsConnecting(false)
+      setIsConnected(result)
+      return result
+    })
   }
 
-  return { isConnected: data, connect }
+  return { isConnected, connect, isConnecting: isConnecting }
 }
 
-export const useGetAccountAddress = () => {
-  const { data, error } = useSWR<UnwrapFunc<typeof getAccountAddress>, Error>(
-    cachePath.getAccountAddress(),
-    getAccountAddress
-  )
-  return { accountAddress: data, error }
+export const useProvider = () => {
+  const { web3 } = useContext(WalletContext)
+  const [accountAddress, setAccountAddress] = useState<undefined | string>(undefined)
+  useEffect(() => {
+    getAccountAddress(web3).then(x => setAccountAddress(x))
+  }, [web3])
+  return { web3, accountAddress }
 }
 
 export const useBlockNumberStream = (shouldFetch: boolean) => {

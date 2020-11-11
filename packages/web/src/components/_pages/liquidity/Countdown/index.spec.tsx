@@ -8,7 +8,7 @@ jest.mock('src/fixtures/_pages/liquidity/uniswap-pool/hooks.ts')
 
 describe(`${Countdown.name}`, () => {
   test('Snapshot', () => {
-    const component = render(<Countdown></Countdown>)
+    const component = render(<Countdown endAtSec={1234567}></Countdown>)
     const tree = component.baseElement
     expect(tree).toMatchSnapshot()
   })

@@ -65,3 +65,35 @@ export const useEstimateReward = () => {
 export const useIsAlreadyFinished = () => {
   return [false]
 }
+
+export const useRewardMultiplier = () => {
+  return {
+    data: 1,
+    max: 5
+  }
+}
+
+export const useTotalStakedFor = () => {
+  return {
+    data: toBigNumber('10000'),
+    mutate: () => {}
+  }
+}
+
+export const useMutateDepositDependence = () => {
+  return {
+    mutate: () => {}
+  }
+}
+
+export const useAPY = () => {
+  return {
+    data: toBigNumber(1000)
+  }
+}
+
+export const useUnstakeQuery = () => {
+  return {
+    data: toBigNumber(10000)
+  }
+}
