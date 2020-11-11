@@ -188,10 +188,9 @@ export const balanceOf = async (web3: Web3) => {
   return undefined
 }
 
-export const allClaimedRewards = async (): Promise<EventData[]> => {
-  const client = newClient()
-  const accountAddress = await getAccountAddress()
-  if (client && accountAddress) {
+export const allClaimedRewards = async (web3: Web3, accountAddress: string): Promise<EventData[]> => {
+  const client = newClient(web3)
+  if (client) {
     return client
       .dev(await getContractAddress(client, 'token'))
       .contract()

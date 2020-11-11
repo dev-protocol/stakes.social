@@ -525,11 +525,15 @@ export const useBalanceOf = () => {
 
 export const useAllClaimedRewards = () => {
   const { currency, toCurrency } = useCurrency()
-  const { accountAddress } = useProvider()
+  const { web3, accountAddress } = useProvider()
   const { data, error } = useSWR<BigNumber | undefined, Error>(SWRCachePath.allClaimedRewards(accountAddress), () =>
-    allClaimedRewards().then(allEvents => {
-      return allEvents.reduce((a, c) => a.plus(c.returnValues.value), toBigNumber(0))
-    })
+    whenDefined(web3, x =>
+      whenDefined(accountAddress, y =>
+        allClaimedRewards(x, y).then(allEvents => {
+          return allEvents.reduce((a, c) => a.plus(c.returnValues.value), toBigNumber(0))
+        })
+      )
+    )
   )
   const humanizedDev = whenDefined(data, toNaturalNumber)
   const amount = toCurrency(humanizedDev)
