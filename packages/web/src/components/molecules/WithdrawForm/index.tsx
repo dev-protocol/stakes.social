@@ -2,7 +2,7 @@ import React from 'react'
 import BigNumber from 'bignumber.js'
 import { Button } from 'antd'
 import styled from 'styled-components'
-import { Currency } from 'src/components/molecules/Currency'
+import { useCurrency } from 'src/fixtures/currency/hooks'
 
 interface Props {
   label: 'Stakers' | 'Creators'
@@ -27,10 +27,12 @@ const Form = styled.div`
 // `
 
 export const WithdrawForm = ({ amount, label, onSubmitWithdraw }: Props) => {
+  const { currency, toCurrency } = useCurrency()
+
   return (
     <Wrap>
       <p>
-        Withdraw {label} Reward (<Currency value={amount} /> available)
+        Withdraw {label} Reward {toCurrency(amount).dp(1).toFixed()} {currency} available
       </p>
       <Form>
         <Button type="primary" size="large" onClick={onSubmitWithdraw}>

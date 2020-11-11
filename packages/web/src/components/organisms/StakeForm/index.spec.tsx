@@ -7,7 +7,7 @@ import WalletContext from 'src/context/walletContext'
 
 jest.mock('src/fixtures/dev-kit/hooks')
 jest.mock('src/fixtures/uniswap/hooks')
-jest.mock('src/context/walletContext')
+jest.mock('src/fixtures/wallet/hooks')
 jest.mock('web3')
 jest.mock('@dev/graphql')
 

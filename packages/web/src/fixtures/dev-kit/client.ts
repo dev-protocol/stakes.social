@@ -1,4 +1,5 @@
 import Web3 from 'web3'
+import { EventData } from 'web3-eth-contract'
 import { contractFactory } from '@devprtcl/dev-kit-js'
 import { getAccountAddress } from 'src/fixtures/wallet/utility'
 import { getContractAddress } from './get-contract-address'
@@ -185,4 +186,20 @@ export const balanceOf = async (web3: Web3) => {
     return client.dev(await getContractAddress(client, 'token')).balanceOf(accountAddress)
   }
   return undefined
+}
+
+export const allClaimedRewards = async (): Promise<EventData[]> => {
+  const client = newClient()
+  const accountAddress = await getAccountAddress()
+  if (client && accountAddress) {
+    return client
+      .dev(await getContractAddress(client, 'token'))
+      .contract()
+      .getPastEvents('Transfer', {
+        filter: { from: '0x0000000000000000000000000000000000000000', to: accountAddress },
+        fromBlock: 0,
+        toBlock: 'latest'
+      })
+  }
+  return []
 }

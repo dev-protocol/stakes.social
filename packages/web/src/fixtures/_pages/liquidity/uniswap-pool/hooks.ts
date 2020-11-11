@@ -5,7 +5,7 @@ import { message } from 'antd'
 import useSWR from 'swr'
 import { UnwrapFunc, whenDefined } from 'src/fixtures/utility'
 import { SWRCachePath } from './cache-path'
-import { useProvider } from 'src/fixtures/wallet/hooks'
+import { useProvider } from "src/fixtures/wallet/hooks"
 
 export const useApprove = () => {
   const { web3 } = useProvider()

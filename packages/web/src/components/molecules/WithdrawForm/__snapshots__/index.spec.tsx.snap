@@ -9,13 +9,11 @@ exports[`WithdrawForm Snapshot 1`] = `
       <p>
         Withdraw 
         Creators
-         Reward (
-        <span>
-          1,000
-           
-          DEV
-        </span>
-         available)
+         Reward 
+        1000
+         
+        DEV
+         available
       </p>
       <div
         class="sc-1xz1jp7-1 fXaeQW"

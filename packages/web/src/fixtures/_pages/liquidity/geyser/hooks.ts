@@ -22,7 +22,7 @@ import { message } from 'antd'
 import { getUTC, toBigNumber, toEVMBigNumber, toNaturalNumber, UnwrapFunc, whenDefined } from 'src/fixtures/utility'
 import { INITIAL_SHARES_PER_TOKEN, ONE_MONTH_SECONDS, SYSTEM_SETTIMEOUT_MAXIMUM_DELAY_VALUE } from '../constants/number'
 import { getBlock } from 'src/fixtures/wallet/utility'
-import { useProvider } from 'src/fixtures/wallet/hooks'
+import { useProvider } from "src/fixtures/wallet/hooks"
 import { useTheGraph } from '../uniswap-pool/hooks'
 import Web3 from 'web3'
 

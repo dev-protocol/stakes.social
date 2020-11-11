@@ -16,7 +16,9 @@ import {
   holdersShare,
   createGetVotablePolicy,
   createAndAuthenticate,
-  propertyAuthor
+  propertyAuthor,
+  balanceOf,
+  allClaimedRewards
 } from './client'
 import { SWRCachePath } from './cache-path'
 import { UnwrapFunc, toNaturalNumber, toAmountNumber, toBigNumber, whenDefined } from 'src/fixtures/utility'
@@ -25,7 +27,8 @@ import useSWR from 'swr'
 import { message } from 'antd'
 import { useState, useCallback } from 'react'
 import BigNumber from 'bignumber.js'
-import { useProvider } from '../wallet/hooks'
+import { useProvider } from 'src/fixtures/wallet/hooks'
+import { useCurrency } from 'src/fixtures/currency/functions/useCurrency'
 
 export const useGetTotalRewardsAmount = (propertyAddress: string) => {
   const { web3, accountAddress } = useProvider()
@@ -507,4 +510,29 @@ export const usePropertyAuthor = (propertyAddress?: string) => {
   )
 
   return { author: data, error }
+}
+
+export const useBalanceOf = () => {
+  const { currency, toCurrency } = useCurrency()
+  const { web3, accountAddress } = useProvider()
+  const { data, error } = useSWR<BigNumber | undefined, Error>(SWRCachePath.balanceOf(accountAddress), () =>
+    whenDefined(web3, x => balanceOf(x).then(toBigNumber))
+  )
+  const humanizedDev = whenDefined(data, toNaturalNumber)
+  const amount = toCurrency(humanizedDev)
+  return { amount, currency, error }
+}
+
+export const useAllClaimedRewards = () => {
+  const { currency, toCurrency } = useCurrency()
+  const { accountAddress } = useProvider()
+  const { data, error } = useSWR<BigNumber | undefined, Error>(SWRCachePath.allClaimedRewards(accountAddress), () =>
+    allClaimedRewards().then(allEvents => {
+      return allEvents.reduce((a, c) => a.plus(c.returnValues.value), toBigNumber(0))
+    })
+  )
+  const humanizedDev = whenDefined(data, toNaturalNumber)
+  const amount = toCurrency(humanizedDev)
+
+  return { amount, currency, error }
 }
