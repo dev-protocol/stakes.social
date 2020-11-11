@@ -16,7 +16,8 @@ import {
   holdersShare,
   createGetVotablePolicy,
   createAndAuthenticate,
-  propertyAuthor
+  propertyAuthor,
+  balanceOf
 } from './client'
 import { SWRCachePath } from './cache-path'
 import { UnwrapFunc, toNaturalNumber, toAmountNumber, toBigNumber, whenDefined } from 'src/fixtures/utility'
@@ -26,6 +27,7 @@ import { message } from 'antd'
 import { useContext, useState, useCallback } from 'react'
 import BigNumber from 'bignumber.js'
 import WalletContext from 'src/context/walletContext'
+import { useGetAccountAddress } from '../wallet/hooks'
 
 export const useGetTotalRewardsAmount = (propertyAddress: string) => {
   const { data, error } = useSWR<UnwrapFunc<typeof getRewardsAmount>, Error>(
@@ -432,4 +434,13 @@ export const usePropertyAuthor = (propertyAddress?: string) => {
   )
 
   return { author: data, error }
+}
+
+export const useBalanceOf = () => {
+  const { accountAddress } = useGetAccountAddress()
+  const { data, error } = useSWR<BigNumber | undefined, Error>(SWRCachePath.balanceOf(accountAddress), () =>
+    balanceOf().then(toBigNumber)
+  )
+  const humanized = whenDefined(data, toNaturalNumber)
+  return { data, humanized, error }
 }

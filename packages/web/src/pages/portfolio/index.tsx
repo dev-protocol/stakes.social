@@ -7,6 +7,7 @@ import { H2 } from 'src/components/atoms/Typography'
 import styled from 'styled-components'
 import { CurrencySwitcher } from 'src/components/organisms/PropertyCardList/CurrencySwitcher'
 import { BuyDevButton } from 'src/components/molecules/BuyButton'
+import { Statistics } from 'src/components/_pages/portfolio/Statistics'
 
 const PortfolioHeader = styled.div`
   display: grid;
@@ -29,6 +30,7 @@ const PortfolioHeader = styled.div`
 
 const Heading = styled(H2)`
   grid-area: heading;
+  font-weight: normal;
 `
 const Switcher = styled(CurrencySwitcher)`
   grid-area: switcher;
@@ -37,18 +39,24 @@ const Buy = styled(BuyDevButton)`
   grid-area: buy;
 `
 
+const StyledContainer = styled(Container)`
+  display: grid;
+  gap: 3rem;
+`
+
 const Portfolio = () => {
   return (
     <>
       <EarlyAccess></EarlyAccess>
       <Header></Header>
-      <Container>
+      <StyledContainer>
         <PortfolioHeader>
           <Heading>Your Portfoilo</Heading>
           <Switcher />
           <Buy />
         </PortfolioHeader>
-      </Container>
+        <Statistics />
+      </StyledContainer>
       <Footer />
     </>
   )
