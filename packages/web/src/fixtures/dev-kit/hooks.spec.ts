@@ -21,7 +21,7 @@ import {
 } from './hooks'
 import { useCurrency } from 'src/fixtures/currency/functions/useCurrency'
 import useSWR from 'swr'
-import { toBigNumber, toNaturalNumber } from 'src/fixtures/utility'
+import { toNaturalNumber, toBigNumber } from 'src/fixtures/utility'
 import {
   withdrawHolderAmount,
   withdrawStakingAmount,
