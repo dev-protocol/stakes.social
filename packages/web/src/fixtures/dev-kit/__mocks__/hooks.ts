@@ -79,3 +79,7 @@ export const usePropertyAuthor = (propertyAddress?: string) => {
 export const useBalanceOf = () => {
   return { amount: toBigNumber(10), currency: 'DEV' }
 }
+
+export const useAllClaimedRewards = () => {
+  return { amount: toBigNumber(10), currency: 'DEV' }
+}
