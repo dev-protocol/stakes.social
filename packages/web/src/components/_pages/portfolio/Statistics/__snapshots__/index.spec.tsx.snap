@@ -1,0 +1,124 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Statistics Snapshot 1`] = `
+<body>
+  <div>
+    <div
+      class="sc-1irnp4p-0 ea-DhpJ"
+    >
+      <div
+        class="ant-statistic"
+      >
+        <div
+          class="ant-statistic-title"
+        >
+          Account Value
+        </div>
+        <div
+          class="ant-statistic-content"
+        >
+          <span
+            class="ant-statistic-content-value"
+          >
+            <span
+              class="ant-statistic-content-value-int"
+            >
+              
+              10
+            </span>
+            <span
+              class="ant-statistic-content-value-decimal"
+            >
+              .00
+            </span>
+          </span>
+          <span
+            class="ant-statistic-content-suffix"
+          >
+            DEV
+          </span>
+        </div>
+      </div>
+      <div
+        class="ant-statistic"
+      >
+        <div
+          class="ant-statistic-title"
+        >
+          Rewards Earned
+        </div>
+        <div
+          class="ant-statistic-content"
+        >
+          <span
+            class="ant-statistic-content-value"
+          >
+            (devloping)
+          </span>
+          <span
+            class="ant-statistic-content-suffix"
+          >
+            DEV
+          </span>
+        </div>
+      </div>
+      <div
+        class="ant-statistic"
+      >
+        <div
+          class="ant-statistic-title"
+        >
+          Staker APY
+        </div>
+        <div
+          class="ant-statistic-content"
+        >
+          <span
+            class="ant-statistic-content-value"
+          >
+            <span
+              class="ant-statistic-content-value-int"
+            >
+              
+              0
+            </span>
+            <span
+              class="ant-statistic-content-value-decimal"
+            >
+              .43
+            </span>
+          </span>
+          <span
+            class="ant-statistic-content-suffix"
+          >
+            %
+          </span>
+        </div>
+      </div>
+      <div
+        class="ant-statistic"
+      >
+        <div
+          class="ant-statistic-title"
+        >
+          Creator APY
+        </div>
+        <div
+          class="ant-statistic-content"
+        >
+          <span
+            class="ant-statistic-content-value"
+          >
+            N/A
+          </span>
+          <span
+            class="ant-statistic-content-suffix"
+          >
+            %
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+`;

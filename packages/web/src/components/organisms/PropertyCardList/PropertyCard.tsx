@@ -8,11 +8,11 @@ import {
 } from 'src/fixtures/dev-kit/hooks'
 import styled from 'styled-components'
 import { truncate } from 'src/fixtures/utility/string'
-import { Currency } from 'src/components/molecules/Currency'
 import { LoremIpsum } from 'lorem-ipsum'
 import { useGetPropertytInformation } from 'src/fixtures/devprtcl/hooks'
 import { Avatar } from 'src/components/molecules/Avatar'
 import BigNumber from 'bignumber.js'
+import { useCurrency } from 'src/fixtures/currency/hooks'
 
 const lorem = new LoremIpsum({
   sentencesPerParagraph: {
@@ -174,6 +174,7 @@ export const PropertyCard = ({ propertyAddress, assets }: Props) => {
   const { totalRewardsAmount } = useGetTotalRewardsAmount(propertyAddress)
   const { myStakingRewardAmount } = useGetMyStakingRewardAmount(propertyAddress)
   const { myStakingAmount } = useGetMyStakingAmount(propertyAddress)
+  const { currency, toCurrency } = useCurrency()
   const { data: authorData } = useGetPropertytInformation(propertyAddress)
   const includeAssets = useMemo(() => assets && truncate(assets.map(e => e.authentication_id).join(', '), 24), [assets])
 
@@ -201,7 +202,9 @@ export const PropertyCard = ({ propertyAddress, assets }: Props) => {
         </FlexRow>
         <RowContainer>
           <OwnedStake>
-            <Currency value={myStakingAmount} />
+            <span>
+              {toCurrency(myStakingAmount).dp(1).toFixed()} {currency}
+            </span>
             <MutedSpan>Your stake</MutedSpan>
           </OwnedStake>
           <YourReward>
@@ -209,7 +212,9 @@ export const PropertyCard = ({ propertyAddress, assets }: Props) => {
             <MutedSpan>Your reward</MutedSpan>
           </YourReward>
           <TotalStaked>
-            <Currency value={totalStakingAmount} />
+            <span>
+              {toCurrency(totalStakingAmount).dp(1).toFixed()} {currency}
+            </span>
             <MutedSpan>Total staked</MutedSpan>
           </TotalStaked>
           <CreatorReward>

@@ -1,4 +1,5 @@
 import BigNumber from 'bignumber.js'
+import { toBigNumber } from 'src/fixtures/utility'
 export const useGetTotalRewardsAmount = () => {
   return { totalRewardsAmount: new BigNumber(10000) }
 }
@@ -73,4 +74,8 @@ export const useGetPolicyAddressesList = () => {
 
 export const usePropertyAuthor = (propertyAddress?: string) => {
   return { author: `${propertyAddress}-author` }
+}
+
+export const useBalanceOf = () => {
+  return { amount: toBigNumber(10), currency: 'DEV' }
 }
