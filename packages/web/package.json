@@ -32,7 +32,7 @@
     "dotenv": "8.2.0",
     "dotenv-webpack": "5.1.0",
     "faker": "5.1.0",
-    "formik": "2.2.4",
+    "formik": "2.2.5",
     "formik-material-ui": "3.0.0",
     "fortmatic": "2.2.1",
     "jdenticon": "3.0.1",
