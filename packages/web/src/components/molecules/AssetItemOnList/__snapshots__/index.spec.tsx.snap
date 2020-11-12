@@ -1,0 +1,78 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AssetItemOnList Snapshot 1`] = `
+<body>
+  <div>
+    <div
+      class="hzc567-2 jPKjGt"
+    >
+      <div
+        class="sc-2tazhb-0 floQve"
+      />
+      <h3
+        class="sc-1w8sy4l-2 hzc567-4 gdOONv lfaQrh"
+      >
+        property-address-name
+      </h3>
+      <div
+        class="ant-statistic hzc567-0 hzc567-5 bWyUkR keQvYD"
+      >
+        <div
+          class="ant-statistic-title"
+        >
+          Your Stake
+        </div>
+        <div
+          class="ant-statistic-content"
+        >
+          <span
+            class="ant-statistic-content-value"
+          >
+            <span
+              class="ant-statistic-content-value-int"
+            >
+              
+              5,000
+            </span>
+            <span
+              class="ant-statistic-content-value-decimal"
+            >
+              .00
+            </span>
+          </span>
+        </div>
+      </div>
+      <div
+        class="ant-statistic hzc567-0 hzc567-6 bWyUkR jrcjYC"
+      >
+        <div
+          class="ant-statistic-title"
+        >
+          Total Staked
+        </div>
+        <div
+          class="ant-statistic-content"
+        >
+          <span
+            class="ant-statistic-content-value"
+          >
+            <span
+              class="ant-statistic-content-value-int"
+            >
+              
+              10,000
+            </span>
+            <span
+              class="ant-statistic-content-value-decimal"
+            >
+              .00
+            </span>
+          </span>
+        </div>
+      </div>
+      
+      
+    </div>
+  </div>
+</body>
+`;

@@ -30,10 +30,11 @@ export interface Image {
 }
 
 export interface Property {
-  id: number
+  id: string
   name: string
   description: string
   cover_image: Image
+  portrait: Image
 }
 
 export interface UploadFile {

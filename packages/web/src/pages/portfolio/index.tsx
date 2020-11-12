@@ -8,6 +8,9 @@ import styled from 'styled-components'
 import { CurrencySwitcher } from 'src/components/organisms/PropertyCardList/CurrencySwitcher'
 import { BuyDevButton } from 'src/components/molecules/BuyButton'
 import { Statistics } from 'src/components/_pages/portfolio/Statistics'
+import { Divider } from 'antd'
+import { YourStakes } from 'src/components/_pages/portfolio/YourStakes'
+import { useProvider } from 'src/fixtures/wallet/hooks'
 
 const PortfolioHeader = styled.div`
   display: grid;
@@ -39,12 +42,14 @@ const Buy = styled(BuyDevButton)`
 `
 
 const StyledContainer = styled(Container)`
-  display: grid;
+  display: flex;
   gap: 3rem;
-  padding: 3rem 0;
+  padding: 3rem 1rem;
+  flex-flow: column;
 `
 
 const Portfolio = () => {
+  const { accountAddress } = useProvider()
   return (
     <>
       <EarlyAccess></EarlyAccess>
@@ -56,6 +61,10 @@ const Portfolio = () => {
           <Buy />
         </PortfolioHeader>
         <Statistics />
+        <Divider type="horizontal" />
+        <Heading>Your Stakes</Heading>
+        <YourStakes accountAddress={accountAddress} />
+        <Divider type="horizontal" />
       </StyledContainer>
       <Footer />
     </>

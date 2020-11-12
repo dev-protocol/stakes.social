@@ -179,6 +179,14 @@ export const propertyAuthor = async (web3: Web3, propertyAddress: string) => {
   return undefined
 }
 
+export const propertyName = async (web3: Web3, propertyAddress: string): Promise<undefined | string> => {
+  const client = newClient(web3)
+  if (client) {
+    return client.property(propertyAddress).contract().methods.name().call()
+  }
+  return undefined
+}
+
 export const balanceOf = async (web3: Web3) => {
   const client = newClient(web3)
   const accountAddress = await getAccountAddress()

@@ -18,7 +18,8 @@ import {
   createAndAuthenticate,
   propertyAuthor,
   balanceOf,
-  allClaimedRewards
+  allClaimedRewards,
+  propertyName
 } from './client'
 import { SWRCachePath } from './cache-path'
 import { UnwrapFunc, toNaturalNumber, toAmountNumber, toBigNumber, whenDefined } from 'src/fixtures/utility'
@@ -32,12 +33,13 @@ import { useCurrency } from 'src/fixtures/currency/functions/useCurrency'
 
 export const useGetTotalRewardsAmount = (propertyAddress: string) => {
   const { web3, accountAddress } = useProvider()
+  const { currency, toCurrency } = useCurrency()
   const { data, error } = useSWR<undefined | UnwrapFunc<typeof getRewardsAmount>, Error>(
     SWRCachePath.getTotalRewardsAmount(propertyAddress, accountAddress),
     () => whenDefined(web3, x => getRewardsAmount(x, propertyAddress)),
     { onError: err => message.error(err.message) }
   )
-  return { totalRewardsAmount: data ? toNaturalNumber(data) : undefined, error }
+  return { totalRewardsAmount: whenDefined(data, x => toCurrency(toNaturalNumber(x))), currency, error }
 }
 
 export const useWithdrawHolderReward = () => {
@@ -81,16 +83,18 @@ export const useGetMyHolderAmount = (propertyAddress: string) => {
 
 export const useGetTotalStakingAmount = (propertyAddress: string) => {
   const { web3, accountAddress } = useProvider()
+  const { currency, toCurrency } = useCurrency()
   const { data, error } = useSWR<UnwrapFunc<typeof getTotalStakingAmount>, Error>(
     SWRCachePath.getTotalStakingAmount(propertyAddress, accountAddress),
     () => whenDefined(web3, x => getTotalStakingAmount(x, propertyAddress)),
     { onError: err => message.error(err.message) }
   )
-  return { totalStakingAmount: data ? toNaturalNumber(data) : undefined, error }
+  return { totalStakingAmount: whenDefined(data, x => toCurrency(toNaturalNumber(x))), currency, error }
 }
 
 export const useGetMyStakingRewardAmount = (propertyAddress: string) => {
   const { web3, accountAddress } = useProvider()
+  const { currency, toCurrency } = useCurrency()
   const { data, error } = useSWR<UnwrapFunc<typeof getMyStakingRewardAmount>, Error>(
     SWRCachePath.getMyStakingRewardAmount(propertyAddress, accountAddress),
     () => whenDefined(web3, x => getMyStakingRewardAmount(x, propertyAddress)),
@@ -99,11 +103,17 @@ export const useGetMyStakingRewardAmount = (propertyAddress: string) => {
     }
   )
 
-  return { myStakingRewardAmount: data ? toNaturalNumber(data) : undefined, error }
+  return {
+    dev: whenDefined(data, x => toNaturalNumber(x)),
+    myStakingRewardAmount: whenDefined(data, x => toCurrency(toNaturalNumber(x))),
+    currency,
+    error
+  }
 }
 
 export const useGetMyStakingAmount = (propertyAddress: string) => {
   const { web3, accountAddress } = useProvider()
+  const { currency, toCurrency } = useCurrency()
   const { data, error } = useSWR<UnwrapFunc<typeof getMyStakingAmount>, Error>(
     SWRCachePath.getMyStakingAmount(propertyAddress, accountAddress),
     () => whenDefined(web3, x => getMyStakingAmount(x, propertyAddress)),
@@ -112,7 +122,7 @@ export const useGetMyStakingAmount = (propertyAddress: string) => {
     }
   )
 
-  return { myStakingAmount: data ? toNaturalNumber(data) : undefined, error }
+  return { myStakingAmount: whenDefined(data, x => toCurrency(toNaturalNumber(x))), currency, error }
 }
 
 export const useWithdrawStakingReward = () => {
@@ -539,4 +549,17 @@ export const useAllClaimedRewards = () => {
   const amount = toCurrency(humanizedDev)
 
   return { amount, currency, error }
+}
+
+export const usePropertyName = (propertyAddress?: string) => {
+  const { web3, accountAddress } = useProvider()
+  const { data, error } = useSWR<UnwrapFunc<typeof totalSupply>, Error>(
+    SWRCachePath.propertyName(propertyAddress, accountAddress),
+    () => whenDefined(propertyAddress, property => whenDefined(web3, client => propertyName(client, property))),
+    {
+      onError: err => message.error(err.message)
+    }
+  )
+
+  return { name: data, error }
 }

@@ -11,7 +11,7 @@ import { StakeForm } from 'src/components/organisms/StakeForm'
 import { CancelStaking } from 'src/components/organisms/CancelStaking'
 // import { PropertyTags } from 'src/components/organisms/PropertyTags'
 import TopStakers from 'src/components/organisms/TopStakers'
-import { Avatar } from 'src/components/molecules/Avatar'
+import { AvatarUser } from 'src/components/molecules/AvatarUser'
 import { useAPY, usePropertyAuthor } from 'src/fixtures/dev-kit/hooks'
 import { useGetPropertyAuthenticationQuery, useGetPropertyAggregateLazyQuery } from '@dev/graphql'
 import { PlusOutlined } from '@ant-design/icons'
@@ -181,7 +181,7 @@ const Author = ({ propertyAddress }: { propertyAddress: string }) => {
           <h2>Created by {data?.name}</h2>
           <Flex>
             <div style={{ width: '150px' }}>
-              <Avatar accountAddress={authorAddress} size={'150'} />
+              <AvatarUser accountAddress={authorAddress} size={150} />
             </div>
 
             <CreatorContent>

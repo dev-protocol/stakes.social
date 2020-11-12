@@ -5847,6 +5847,26 @@ export type GetPropertyAuthenticationQuery = { __typename?: 'query_root' } & {
   >
 }
 
+export type ListAccountLockupQueryVariables = Exact<{
+  account_address: Scalars['String']
+  offset?: Maybe<Scalars['Int']>
+  limit: Scalars['Int']
+}>
+
+export type ListAccountLockupQuery = { __typename?: 'query_root' } & {
+  account_lockup: Array<{ __typename?: 'account_lockup' } & Pick<Account_Lockup, 'property_address'>>
+}
+
+export type ListOwnedPropertyMetaQueryVariables = Exact<{
+  account_address: Scalars['String']
+  offset: Scalars['Int']
+  limit: Scalars['Int']
+}>
+
+export type ListOwnedPropertyMetaQuery = { __typename?: 'query_root' } & {
+  property_meta: Array<{ __typename?: 'property_meta' } & Pick<Property_Meta, 'property' | 'name'>>
+}
+
 export type ListPropertyQueryVariables = Exact<{
   limit?: Maybe<Scalars['Int']>
   offset?: Maybe<Scalars['Int']>
@@ -6120,6 +6140,110 @@ export type GetPropertyAuthenticationLazyQueryHookResult = ReturnType<typeof use
 export type GetPropertyAuthenticationQueryResult = Apollo.QueryResult<
   GetPropertyAuthenticationQuery,
   GetPropertyAuthenticationQueryVariables
+>
+export const ListAccountLockupDocument = gql`
+  query listAccountLockup($account_address: String!, $offset: Int, $limit: Int!) {
+    account_lockup(
+      where: { account_address: { _eq: $account_address } }
+      order_by: { value: desc }
+      offset: $offset
+      limit: $limit
+    ) {
+      property_address
+    }
+  }
+`
+
+/**
+ * __useListAccountLockupQuery__
+ *
+ * To run a query within a React component, call `useListAccountLockupQuery` and pass it any options that fit your needs.
+ * When your component renders, `useListAccountLockupQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useListAccountLockupQuery({
+ *   variables: {
+ *      account_address: // value for 'account_address'
+ *      offset: // value for 'offset'
+ *      limit: // value for 'limit'
+ *   },
+ * });
+ */
+export function useListAccountLockupQuery(
+  baseOptions: Apollo.QueryHookOptions<ListAccountLockupQuery, ListAccountLockupQueryVariables>
+) {
+  return Apollo.useQuery<ListAccountLockupQuery, ListAccountLockupQueryVariables>(
+    ListAccountLockupDocument,
+    baseOptions
+  )
+}
+export function useListAccountLockupLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<ListAccountLockupQuery, ListAccountLockupQueryVariables>
+) {
+  return Apollo.useLazyQuery<ListAccountLockupQuery, ListAccountLockupQueryVariables>(
+    ListAccountLockupDocument,
+    baseOptions
+  )
+}
+export type ListAccountLockupQueryHookResult = ReturnType<typeof useListAccountLockupQuery>
+export type ListAccountLockupLazyQueryHookResult = ReturnType<typeof useListAccountLockupLazyQuery>
+export type ListAccountLockupQueryResult = Apollo.QueryResult<ListAccountLockupQuery, ListAccountLockupQueryVariables>
+export const ListOwnedPropertyMetaDocument = gql`
+  query listOwnedPropertyMeta($account_address: String!, $offset: Int!, $limit: Int!) {
+    property_meta(
+      where: { author: { _eq: $account_address } }
+      order_by: { lockup_aggregate: { sum: { value: desc } } }
+      offset: $offset
+      limit: $limit
+    ) {
+      property
+      name
+    }
+  }
+`
+
+/**
+ * __useListOwnedPropertyMetaQuery__
+ *
+ * To run a query within a React component, call `useListOwnedPropertyMetaQuery` and pass it any options that fit your needs.
+ * When your component renders, `useListOwnedPropertyMetaQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useListOwnedPropertyMetaQuery({
+ *   variables: {
+ *      account_address: // value for 'account_address'
+ *      offset: // value for 'offset'
+ *      limit: // value for 'limit'
+ *   },
+ * });
+ */
+export function useListOwnedPropertyMetaQuery(
+  baseOptions: Apollo.QueryHookOptions<ListOwnedPropertyMetaQuery, ListOwnedPropertyMetaQueryVariables>
+) {
+  return Apollo.useQuery<ListOwnedPropertyMetaQuery, ListOwnedPropertyMetaQueryVariables>(
+    ListOwnedPropertyMetaDocument,
+    baseOptions
+  )
+}
+export function useListOwnedPropertyMetaLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<ListOwnedPropertyMetaQuery, ListOwnedPropertyMetaQueryVariables>
+) {
+  return Apollo.useLazyQuery<ListOwnedPropertyMetaQuery, ListOwnedPropertyMetaQueryVariables>(
+    ListOwnedPropertyMetaDocument,
+    baseOptions
+  )
+}
+export type ListOwnedPropertyMetaQueryHookResult = ReturnType<typeof useListOwnedPropertyMetaQuery>
+export type ListOwnedPropertyMetaLazyQueryHookResult = ReturnType<typeof useListOwnedPropertyMetaLazyQuery>
+export type ListOwnedPropertyMetaQueryResult = Apollo.QueryResult<
+  ListOwnedPropertyMetaQuery,
+  ListOwnedPropertyMetaQueryVariables
 >
 export const ListPropertyDocument = gql`
   query ListProperty(

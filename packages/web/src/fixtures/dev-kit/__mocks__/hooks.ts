@@ -83,3 +83,7 @@ export const useBalanceOf = () => {
 export const useAllClaimedRewards = () => {
   return { amount: toBigNumber(10), currency: 'DEV' }
 }
+
+export const usePropertyName = (propertyAddress?: string) => {
+  return { name: `${propertyAddress}-name` }
+}
