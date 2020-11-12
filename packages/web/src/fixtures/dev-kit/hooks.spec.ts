@@ -17,7 +17,9 @@ import {
   useGetPolicyAddressesList,
   usePropertyAuthor,
   useBalanceOf,
-  useAllClaimedRewards
+  useAllClaimedRewards,
+  usePropertyName,
+  useGetMyStakingRewardAmount
 } from './hooks'
 import { useCurrency } from 'src/fixtures/currency/functions/useCurrency'
 import useSWR from 'swr'
@@ -45,23 +47,53 @@ describe('dev-kit hooks', () => {
     test('data is undefined', () => {
       const data = undefined
       const error = undefined
+      const toCurrency = (x: BigNumber) => x
+      ;(useCurrency as jest.Mock).mockImplementationOnce(() => ({ currency: 'DEV', toCurrency }))
       ;(useSWR as jest.Mock).mockImplementation(() => ({ data, error }))
       const { result } = renderHook(() => useGetTotalRewardsAmount('property-address'))
       expect(result.current.totalRewardsAmount).toBe(data)
+      expect(result.current.currency).toBe('DEV')
+    })
+
+    test('data is undefined and USD', () => {
+      const data = undefined
+      const error = undefined
+      const toCurrency = (x: BigNumber) => x
+      ;(useCurrency as jest.Mock).mockImplementationOnce(() => ({ currency: 'USD', toCurrency }))
+      ;(useSWR as jest.Mock).mockImplementation(() => ({ data, error }))
+      const { result } = renderHook(() => useGetTotalRewardsAmount('property-address'))
+      expect(result.current.totalRewardsAmount).toBe(data)
+      expect(result.current.currency).toBe('USD')
     })
 
     test('success fetching data', () => {
       const data = '10000'
       const error = undefined
+      const toCurrency = (x: BigNumber) => x
+      ;(useCurrency as jest.Mock).mockImplementationOnce(() => ({ currency: 'DEV', toCurrency }))
       ;(useSWR as jest.Mock).mockImplementation(() => ({ data, error }))
       const { result } = renderHook(() => useGetTotalRewardsAmount('property-address'))
       expect(result.current.totalRewardsAmount?.toFixed()).toBe(toNaturalNumber(data).toFixed())
+      expect(result.current.currency).toBe('DEV')
+    })
+
+    test('success fetching data and USD', () => {
+      const data = '10000'
+      const error = undefined
+      const toCurrency = (x: BigNumber) => x.times(3)
+      ;(useCurrency as jest.Mock).mockImplementationOnce(() => ({ currency: 'USD', toCurrency }))
+      ;(useSWR as jest.Mock).mockImplementation(() => ({ data, error }))
+      const { result } = renderHook(() => useGetTotalRewardsAmount('property-address'))
+      expect(result.current.totalRewardsAmount?.toFixed()).toBe(toNaturalNumber(data).times(3).toFixed())
+      expect(result.current.currency).toBe('USD')
     })
 
     test('failure fetching data', () => {
       const data = undefined
       const errorMessage = 'error'
       const error = new Error(errorMessage)
+      const toCurrency = (x: BigNumber) => x
+      ;(useCurrency as jest.Mock).mockImplementationOnce(() => ({ currency: 'DEV', toCurrency }))
       ;(useSWR as jest.Mock).mockImplementation(() => ({ data, error }))
       const { result } = renderHook(() => useGetTotalRewardsAmount('property-address'))
       expect(result.current.error).toBe(error)
@@ -73,23 +105,53 @@ describe('dev-kit hooks', () => {
     test('data is undefined', () => {
       const data = undefined
       const error = undefined
+      const toCurrency = (x?: BigNumber) => x
+      ;(useCurrency as jest.Mock).mockImplementationOnce(() => ({ currency: 'DEV', toCurrency }))
       ;(useSWR as jest.Mock).mockImplementation(() => ({ data, error }))
       const { result } = renderHook(() => useGetTotalStakingAmount('property-address'))
       expect(result.current.totalStakingAmount).toBe(data)
+      expect(result.current.currency).toBe('DEV')
+    })
+
+    test('data is undefined and USD', () => {
+      const data = undefined
+      const error = undefined
+      const toCurrency = (x?: BigNumber) => x
+      ;(useCurrency as jest.Mock).mockImplementationOnce(() => ({ currency: 'USD', toCurrency }))
+      ;(useSWR as jest.Mock).mockImplementation(() => ({ data, error }))
+      const { result } = renderHook(() => useGetTotalStakingAmount('property-address'))
+      expect(result.current.totalStakingAmount).toBe(data)
+      expect(result.current.currency).toBe('USD')
     })
 
     test('success fetching data', () => {
       const data = '10000'
       const error = undefined
+      const toCurrency = (x?: BigNumber) => x
+      ;(useCurrency as jest.Mock).mockImplementationOnce(() => ({ currency: 'DEV', toCurrency }))
       ;(useSWR as jest.Mock).mockImplementation(() => ({ data, error }))
       const { result } = renderHook(() => useGetTotalStakingAmount('property-address'))
       expect(result.current.totalStakingAmount?.toFixed()).toBe(toNaturalNumber(data).toFixed())
+      expect(result.current.currency).toBe('DEV')
+    })
+
+    test('success fetching data and USD', () => {
+      const data = '10000'
+      const error = undefined
+      const toCurrency = (x: BigNumber) => x.times(3)
+      ;(useCurrency as jest.Mock).mockImplementationOnce(() => ({ currency: 'USD', toCurrency }))
+      ;(useSWR as jest.Mock).mockImplementation(() => ({ data, error }))
+      const { result } = renderHook(() => useGetTotalStakingAmount('property-address'))
+      expect(result.current.totalStakingAmount?.toFixed()).toBe(toNaturalNumber(data).times(3).toFixed())
+      expect(result.current.currency).toBe('USD')
     })
 
     test('failure fetching data', () => {
       const data = undefined
       const errorMessage = 'error'
       const error = new Error(errorMessage)
+      const toCurrency = (x?: BigNumber) => x
+      ;(useCurrency as jest.Mock).mockImplementationOnce(() => ({ currency: 'DEV', toCurrency }))
       ;(useSWR as jest.Mock).mockImplementation(() => ({ data, error }))
       const { result } = renderHook(() => useGetTotalStakingAmount('property-address'))
       expect(result.current.error).toBe(error)
@@ -125,27 +187,119 @@ describe('dev-kit hooks', () => {
     })
   })
 
-  describe('useGetMylStakingAmount', () => {
+  describe('useGetMyStakingRewardAmount', () => {
     test('data is undefined', () => {
       const data = undefined
       const error = undefined
+      const toCurrency = (x: BigNumber) => x
+      ;(useCurrency as jest.Mock).mockImplementationOnce(() => ({ currency: 'DEV', toCurrency }))
       ;(useSWR as jest.Mock).mockImplementation(() => ({ data, error }))
-      const { result } = renderHook(() => useGetMyStakingAmount('property-address'))
-      expect(result.current.myStakingAmount).toBe(data)
+      const { result } = renderHook(() => useGetMyStakingRewardAmount('property-address'))
+      expect(result.current.myStakingRewardAmount).toBe(data)
+      expect(result.current.dev).toBe(data)
+      expect(result.current.currency).toBe('DEV')
+    })
+
+    test('data is undefined and USD', () => {
+      const data = undefined
+      const error = undefined
+      const toCurrency = (x: BigNumber) => x
+      ;(useCurrency as jest.Mock).mockImplementationOnce(() => ({ currency: 'USD', toCurrency }))
+      ;(useSWR as jest.Mock).mockImplementation(() => ({ data, error }))
+      const { result } = renderHook(() => useGetMyStakingRewardAmount('property-address'))
+      expect(result.current.myStakingRewardAmount).toBe(data)
+      expect(result.current.dev).toBe(data)
+      expect(result.current.currency).toBe('USD')
     })
 
     test('success fetching data', () => {
       const data = '10000'
       const error = undefined
+      const toCurrency = (x?: BigNumber) => x
+      ;(useCurrency as jest.Mock).mockImplementationOnce(() => ({ currency: 'DEV', toCurrency }))
       ;(useSWR as jest.Mock).mockImplementation(() => ({ data, error }))
-      const { result } = renderHook(() => useGetMyStakingAmount('property-address'))
-      expect(result.current.myStakingAmount?.toFixed()).toBe(toNaturalNumber(data).toFixed())
+      const { result } = renderHook(() => useGetMyStakingRewardAmount('property-address'))
+      expect(result.current.myStakingRewardAmount?.toFixed()).toBe(toNaturalNumber(data).toFixed())
+      expect(result.current.dev?.toFixed()).toBe(toNaturalNumber(data).toFixed())
+      expect(result.current.currency).toBe('DEV')
+    })
+
+    test('success fetching data', () => {
+      const data = '10000'
+      const error = undefined
+      const toCurrency = (x: BigNumber) => x.times(3)
+      ;(useCurrency as jest.Mock).mockImplementationOnce(() => ({ currency: 'USD', toCurrency }))
+      ;(useSWR as jest.Mock).mockImplementation(() => ({ data, error }))
+      const { result } = renderHook(() => useGetMyStakingRewardAmount('property-address'))
+      expect(result.current.myStakingRewardAmount?.toFixed()).toBe(toNaturalNumber(data).times(3).toFixed())
+      expect(result.current.dev?.toFixed()).toBe(toNaturalNumber(data).toFixed())
+      expect(result.current.currency).toBe('USD')
     })
 
     test('failure fetching data', () => {
       const data = undefined
       const errorMessage = 'error'
       const error = new Error(errorMessage)
+      const toCurrency = (x?: BigNumber) => x
+      ;(useCurrency as jest.Mock).mockImplementationOnce(() => ({ currency: 'DEV', toCurrency }))
+      ;(useSWR as jest.Mock).mockImplementation(() => ({ data, error }))
+      const { result } = renderHook(() => useGetMyStakingRewardAmount('property-address'))
+      expect(result.current.error).toBe(error)
+      expect(result.current.error?.message).toBe(errorMessage)
+    })
+  })
+
+  describe('useGetMylStakingAmount', () => {
+    test('data is undefined', () => {
+      const data = undefined
+      const error = undefined
+      const toCurrency = (x: BigNumber) => x
+      ;(useCurrency as jest.Mock).mockImplementationOnce(() => ({ currency: 'DEV', toCurrency }))
+      ;(useSWR as jest.Mock).mockImplementation(() => ({ data, error }))
+      const { result } = renderHook(() => useGetMyStakingAmount('property-address'))
+      expect(result.current.myStakingAmount).toBe(data)
+      expect(result.current.currency).toBe('DEV')
+    })
+
+    test('data is undefined and USD', () => {
+      const data = undefined
+      const error = undefined
+      const toCurrency = (x: BigNumber) => x
+      ;(useCurrency as jest.Mock).mockImplementationOnce(() => ({ currency: 'USD', toCurrency }))
+      ;(useSWR as jest.Mock).mockImplementation(() => ({ data, error }))
+      const { result } = renderHook(() => useGetMyStakingAmount('property-address'))
+      expect(result.current.myStakingAmount).toBe(data)
+      expect(result.current.currency).toBe('USD')
+    })
+
+    test('success fetching data', () => {
+      const data = '10000'
+      const error = undefined
+      const toCurrency = (x?: BigNumber) => x
+      ;(useCurrency as jest.Mock).mockImplementationOnce(() => ({ currency: 'DEV', toCurrency }))
+      ;(useSWR as jest.Mock).mockImplementation(() => ({ data, error }))
+      const { result } = renderHook(() => useGetMyStakingAmount('property-address'))
+      expect(result.current.myStakingAmount?.toFixed()).toBe(toNaturalNumber(data).toFixed())
+      expect(result.current.currency).toBe('DEV')
+    })
+
+    test('success fetching data', () => {
+      const data = '10000'
+      const error = undefined
+      const toCurrency = (x: BigNumber) => x.times(3)
+      ;(useCurrency as jest.Mock).mockImplementationOnce(() => ({ currency: 'USD', toCurrency }))
+      ;(useSWR as jest.Mock).mockImplementation(() => ({ data, error }))
+      const { result } = renderHook(() => useGetMyStakingAmount('property-address'))
+      expect(result.current.myStakingAmount?.toFixed()).toBe(toNaturalNumber(data).times(3).toFixed())
+      expect(result.current.currency).toBe('USD')
+    })
+
+    test('failure fetching data', () => {
+      const data = undefined
+      const errorMessage = 'error'
+      const error = new Error(errorMessage)
+      const toCurrency = (x?: BigNumber) => x
+      ;(useCurrency as jest.Mock).mockImplementationOnce(() => ({ currency: 'DEV', toCurrency }))
       ;(useSWR as jest.Mock).mockImplementation(() => ({ data, error }))
       const { result } = renderHook(() => useGetMyStakingAmount('property-address'))
       expect(result.current.error).toBe(error)
@@ -590,6 +744,34 @@ describe('dev-kit hooks', () => {
       const error = new Error(errorMessage)
       ;(useSWR as jest.Mock).mockImplementation(() => ({ data, error }))
       const { result } = renderHook(() => useAllClaimedRewards())
+      expect(result.current.error).toBe(error)
+      expect(result.current.error?.message).toBe(errorMessage)
+    })
+  })
+
+  describe('usePropertyName', () => {
+    test('data is undefined', () => {
+      const data = undefined
+      const error = undefined
+      ;(useSWR as jest.Mock).mockImplementation(() => ({ data, error }))
+      const { result } = renderHook(() => usePropertyName('property-address'))
+      expect(result.current.name).toBe(data)
+    })
+
+    test('success fetching data', () => {
+      const data = 'name'
+      const error = undefined
+      ;(useSWR as jest.Mock).mockImplementation(() => ({ data, error }))
+      const { result } = renderHook(() => usePropertyName('property-address'))
+      expect(result.current.name).toBe(data)
+    })
+
+    test('failure fetching data', () => {
+      const data = undefined
+      const errorMessage = 'error'
+      const error = new Error(errorMessage)
+      ;(useSWR as jest.Mock).mockImplementation(() => ({ data, error }))
+      const { result } = renderHook(() => usePropertyName('property-address'))
       expect(result.current.error).toBe(error)
       expect(result.current.error?.message).toBe(errorMessage)
     })

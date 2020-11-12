@@ -1,7 +1,7 @@
 import React from 'react'
 import { useQuery } from '@apollo/client'
 import getTopStakersOfPropertyQuery from './query/getTopStakersOfProperty'
-import { Avatar } from 'src/components/molecules/Avatar'
+import { Avatar } from 'src/components/molecules/AvatarUser'
 import styled, { css } from 'styled-components'
 
 interface TopStakersProps {
