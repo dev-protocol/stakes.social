@@ -1,9 +1,13 @@
+import Web3 from 'web3'
 import { cachePath } from './catch-path'
 import { connectWallet, getAccountAddress, getBlockNumber } from './utility'
 import { UnwrapFunc } from 'src/fixtures/utility'
 import useSWR from 'swr'
 import { useContext, useEffect, useState } from 'react'
 import WalletContext from 'src/context/walletContext'
+import { WEB3_PROVIDER_ENDPOINT } from 'src/fixtures/wallet/constants'
+
+const nonConnectedWeb3 = new Web3(WEB3_PROVIDER_ENDPOINT)
 
 export const useConnectWallet = () => {
   const { web3Modal, setWeb3 } = useContext(WalletContext)
@@ -29,7 +33,7 @@ export const useProvider = () => {
   useEffect(() => {
     getAccountAddress(web3).then(x => setAccountAddress(x))
   }, [web3])
-  return { web3, accountAddress }
+  return { web3, nonConnectedWeb3, accountAddress }
 }
 
 export const useBlockNumberStream = (shouldFetch: boolean) => {
