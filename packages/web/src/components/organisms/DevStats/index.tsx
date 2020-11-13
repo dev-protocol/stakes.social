@@ -74,7 +74,7 @@ const DevMarketCap = (_: {}) => {
   useEffect(() => {
     circulatingSupply().then((circulatingSupplyValue: any) => {
       const marketCap = devPrice.toNumber() * toNaturalNumber(circulatingSupplyValue).toNumber()
-      const formatMarketCap = new BigNumber(marketCap).dp(0).toFormat()
+      const formatMarketCap = new BigNumber(marketCap && marketCap > 0 ? marketCap : 0).dp(0).toFormat()
       setDevMarketCap(formatMarketCap)
     })
   }, [devPrice, circulatingSupply])
