@@ -25,14 +25,12 @@ export const Avatar = ({ accountAddress, size }: Props) => {
   }, [user])
 
   return (
-    <>
-      <AvatarImage>
-        {account?.portrait ? (
-          <img src={account?.portrait.url} alt="avatar" style={{ width: `${size}px` }} />
-        ) : (
-          <Jdenticon value={accountAddress || ''} size={size} />
-        )}
-      </AvatarImage>
-    </>
+    <AvatarImage>
+      {account?.portrait ? (
+        <img src={account?.portrait.url} alt="avatar" style={{ width: `${size}px` }} />
+      ) : (
+        <Jdenticon value={accountAddress || ''} size={size} />
+      )}
+    </AvatarImage>
   )
 }

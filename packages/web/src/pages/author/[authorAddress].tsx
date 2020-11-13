@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react'
+import React, { useMemo, useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import { Header } from 'src/components/organisms/Header'
 import { EarlyAccess } from 'src/components/atoms/EarlyAccess'
@@ -11,6 +11,7 @@ import TopStakers from 'src/components/organisms/TopStakers'
 import TopSupporting from 'src/components/organisms/TopSupporting'
 import { truncate } from 'src/fixtures/utility/string'
 import { useGetAuthorInformation } from 'src/fixtures/devprtcl/hooks'
+import { Avatar } from 'src/components/molecules/Avatar'
 
 const lorem = new LoremIpsum({
   sentencesPerParagraph: {
@@ -59,12 +60,16 @@ const Logo = styled.div`
   background-color: black;
 `
 
-const ProfilePicture = styled.img`
+const ProfilePicture = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
   position: absolute;
   transform: translateY(-50px);
   height: 100px;
   width: 100px;
   border-radius: 90px;
+  background: white;
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2), 0 2px 4px -1px rgba(0, 0, 0, 0.12);
   margin-left: 1em;
   @media (min-width: 768px) {
@@ -275,6 +280,7 @@ const Pool = ({ propertyAddress }: PoolProps) => {
 const AuthorAddressDetail = (_: Props) => {
   const router = useRouter()
   let { authorAddress } = router.query
+  const [isDesktop, setDesktop] = useState(typeof window !== 'undefined' && window?.innerWidth > 1024)
   const author: string = typeof authorAddress == 'string' ? authorAddress : 'none'
   const { data: authorInformation } = useGetAuthorInformation(author)
   const { data, loading } = useListPropertyMetaQuery({
@@ -283,13 +289,28 @@ const AuthorAddressDetail = (_: Props) => {
     }
   })
 
+  const updateMedia = () => {
+    setDesktop(window.innerWidth > 1024)
+  }
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      window.addEventListener('resize', updateMedia)
+      return () => window.removeEventListener('resize', updateMedia)
+    }
+    return setDesktop(true)
+  }, [])
+
   return (
     <>
       <Header></Header>
       <EarlyAccess></EarlyAccess>
       <Banner />
       <Wrap>
-        <ProfilePicture src="https://res.cloudinary.com/haas-storage/image/upload/v1598963050/72989_gve7hf.jpg" />
+        <ProfilePicture>
+          <Avatar accountAddress={author} size={isDesktop ? '140' : '90'} />
+        </ProfilePicture>
+
         <TransformedGrid>
           {/* <div style={{ display: 'grid', gridTemplateRows: '1fr' }}> */}
           <div style={{ gridColumn: '2 / -1', marginTop: '10px' }}>
@@ -312,16 +333,12 @@ const AuthorAddressDetail = (_: Props) => {
                   height="20"
                 />
               </ShareList>
-              {/* <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-                <StakeButton>Edit</StakeButton>
-              </div> */}
             </AuthorDetailGrid>
 
             <p style={{ marginBottom: '15px' }}>
               <span style={{ color: '#1AC9FC' }}>{authorInformation?.karma || 0} </span>karma
             </p>
           </div>
-          {/* </div> */}
           <AuthorLinks>
             <a href="#about">About</a>
             <a href="#pools">Pools</a>
