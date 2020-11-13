@@ -5997,7 +5997,7 @@ export const GetPortofolioPoolsAccountDocument = gql`
  * });
  */
 export function useGetPortofolioPoolsAccountQuery(
-  baseOptions?: Apollo.QueryHookOptions<GetPortofolioPoolsAccountQuery, GetPortofolioPoolsAccountQueryVariables>
+  baseOptions: Apollo.QueryHookOptions<GetPortofolioPoolsAccountQuery, GetPortofolioPoolsAccountQueryVariables>
 ) {
   return Apollo.useQuery<GetPortofolioPoolsAccountQuery, GetPortofolioPoolsAccountQueryVariables>(
     GetPortofolioPoolsAccountDocument,
@@ -6096,7 +6096,7 @@ export const GetPropertyAuthenticationDocument = gql`
  * });
  */
 export function useGetPropertyAuthenticationQuery(
-  baseOptions?: Apollo.QueryHookOptions<GetPropertyAuthenticationQuery, GetPropertyAuthenticationQueryVariables>
+  baseOptions: Apollo.QueryHookOptions<GetPropertyAuthenticationQuery, GetPropertyAuthenticationQueryVariables>
 ) {
   return Apollo.useQuery<GetPropertyAuthenticationQuery, GetPropertyAuthenticationQueryVariables>(
     GetPropertyAuthenticationDocument,
@@ -6279,7 +6279,7 @@ export const ListPropertyMetaDocument = gql`
  * });
  */
 export function useListPropertyMetaQuery(
-  baseOptions?: Apollo.QueryHookOptions<ListPropertyMetaQuery, ListPropertyMetaQueryVariables>
+  baseOptions: Apollo.QueryHookOptions<ListPropertyMetaQuery, ListPropertyMetaQueryVariables>
 ) {
   return Apollo.useQuery<ListPropertyMetaQuery, ListPropertyMetaQueryVariables>(ListPropertyMetaDocument, baseOptions)
 }
@@ -6321,7 +6321,7 @@ export const ListTopSupportingAccountDocument = gql`
  * });
  */
 export function useListTopSupportingAccountQuery(
-  baseOptions?: Apollo.QueryHookOptions<ListTopSupportingAccountQuery, ListTopSupportingAccountQueryVariables>
+  baseOptions: Apollo.QueryHookOptions<ListTopSupportingAccountQuery, ListTopSupportingAccountQueryVariables>
 ) {
   return Apollo.useQuery<ListTopSupportingAccountQuery, ListTopSupportingAccountQueryVariables>(
     ListTopSupportingAccountDocument,
