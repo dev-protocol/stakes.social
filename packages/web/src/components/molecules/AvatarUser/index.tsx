@@ -17,5 +17,5 @@ export const AvatarUser = ({ accountAddress, size }: Props) => {
     }
   }, [user])
 
-  return <Avatar url={account?.portrait?.url} key={accountAddress} size={size}></Avatar>
+  return <Avatar url={account?.portrait?.url} genkey={accountAddress} size={size}></Avatar>
 }

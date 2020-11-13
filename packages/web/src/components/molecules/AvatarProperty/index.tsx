@@ -17,5 +17,5 @@ export const AvatarProperty = ({ propertyAddress, size }: Props) => {
     }
   }, [property])
 
-  return <Avatar url={data?.portrait?.url} key={propertyAddress} size={size}></Avatar>
+  return <Avatar url={data?.portrait?.url} genkey={propertyAddress} size={size}></Avatar>
 }

@@ -4,7 +4,7 @@ import Jdenticon from 'react-jdenticon'
 
 type Props = {
   url?: string
-  key?: string
+  genkey?: string
   size: string | number
 }
 
@@ -14,13 +14,13 @@ const AvatarImage = styled.div`
   }
 `
 
-export const Avatar = ({ url, key, size }: Props) => {
+export const Avatar = ({ url, genkey, size }: Props) => {
   return (
     <AvatarImage>
       {url ? (
         <img src={url} alt="avatar" style={{ width: `${size}px` }} />
       ) : (
-        <Jdenticon value={key || ''} size={size} />
+        <Jdenticon value={genkey || ''} size={`${size}`} />
       )}
     </AvatarImage>
   )
