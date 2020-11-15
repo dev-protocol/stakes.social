@@ -7,7 +7,6 @@ import { EarlyAccess } from 'src/components/atoms/EarlyAccess'
 import styled from 'styled-components'
 import { Container } from 'src/components/atoms/Container'
 import { Header } from 'src/components/organisms/Header'
-import { StakeForm } from 'src/components/organisms/StakeForm'
 import { CancelStaking } from 'src/components/organisms/CancelStaking'
 // import { PropertyTags } from 'src/components/organisms/PropertyTags'
 import TopStakers from 'src/components/organisms/TopStakers'
@@ -20,6 +19,8 @@ import { useGetPropertytInformation } from 'src/fixtures/devprtcl/hooks'
 import { useGetAccount, useGetProperty } from 'src/fixtures/dev-for-apps/hooks'
 import ReactMarkdown from 'react-markdown'
 import { WithGradient } from 'src/components/atoms/WithGradient'
+import { Stake } from 'src/components/organisms/Stake'
+import { Withdraw } from 'src/components/organisms/Withdraw'
 
 type Props = {}
 
@@ -69,8 +70,14 @@ const TopStakerList = styled(TopStakers)`
   grid-area: topstake;
 `
 
-const Stake = styled(StakeForm)`
+const Transact = styled.div`
   grid-area: stake;
+  display: grid;
+  grid-gap: 1rem;
+  @media (min-width: 1024px) {
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 3rem;
+  }
 `
 const Possession = styled(PossessionOutline)`
   grid-area: possession;
@@ -235,7 +242,10 @@ const PropertyAddressDetail = (_: Props) => {
             <h2>Top stakers</h2>
             <TopStakerList propertyAdress={propertyAddress} />
           </div>
-          <Stake propertyAddress={propertyAddress} />
+          <Transact>
+            <Stake propertyAddress={propertyAddress} />
+            <Withdraw propertyAddress={propertyAddress} />
+          </Transact>
           <AboutSection>
             <h2>About</h2>
             <ReactMarkdown>{dataProperty ? dataProperty.description : ''}</ReactMarkdown>
