@@ -87,3 +87,7 @@ export const useAllClaimedRewards = () => {
 export const usePropertyName = (propertyAddress?: string) => {
   return { name: `${propertyAddress}-name` }
 }
+
+export const useBalanceOfProperty = () => {
+  return { balance: toBigNumber(1000) }
+}

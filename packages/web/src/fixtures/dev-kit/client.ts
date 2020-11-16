@@ -210,3 +210,11 @@ export const allClaimedRewards = async (web3: Web3, accountAddress: string): Pro
   }
   return []
 }
+
+export const balanceOfProperty = async (web3: Web3, propertyAddress: string, accountAddress: string) => {
+  const client = newClient(web3)
+  if (client && accountAddress) {
+    return client.property(propertyAddress).contract().methods.balanceOf(accountAddress).call()
+  }
+  return undefined
+}

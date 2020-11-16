@@ -4,7 +4,12 @@ import React from 'react'
 import { ButtonWithGradient } from 'src/components/atoms/ButtonWithGradient'
 import { H3 } from 'src/components/atoms/Typography'
 import { useGetProperty } from 'src/fixtures/dev-for-apps/hooks'
-import { useGetMyStakingAmount, useGetTotalStakingAmount, usePropertyName } from 'src/fixtures/dev-kit/hooks'
+import {
+  useBalanceOfProperty,
+  useGetMyStakingAmount,
+  useGetTotalStakingAmount,
+  usePropertyName
+} from 'src/fixtures/dev-kit/hooks'
 import styled from 'styled-components'
 import { AvatarProperty } from '../AvatarProperty'
 
@@ -82,10 +87,12 @@ export const AssetItemOnList = ({
   onClickWithdrawHoldersReward
 }: Props) => {
   const { data: property } = useGetProperty(propertyAddress)
+  const { balance } = useBalanceOfProperty(propertyAddress)
   const { name } = usePropertyName(propertyAddress)
   const { myStakingAmount, currency: myStakingAmountCurrency } = useGetMyStakingAmount(propertyAddress)
   const { totalStakingAmount, currency: totalStakingAmountCurrency } = useGetTotalStakingAmount(propertyAddress)
   const propertyName = property && property.name ? property.name : name
+  const hasNotBalanceOnTheProperty = balance ? balance.isZero() : false
   const onClick = (
     hook: undefined | typeof onClickStake | typeof onClickWithdrawStakersReward | typeof onClickWithdrawHoldersReward
   ) => () => (typeof hook === 'undefined' ? undefined : hook(propertyAddress))
@@ -111,7 +118,11 @@ export const AssetItemOnList = ({
         precision={2}
       />
       <GridButtons>
-        {enableStake ? <ButtonWithGradient onClick={onClick(onClickStake)}>Stake</ButtonWithGradient> : ''}
+        {enableStake && hasNotBalanceOnTheProperty ? (
+          <ButtonWithGradient onClick={onClick(onClickStake)}>Stake</ButtonWithGradient>
+        ) : (
+          ''
+        )}
         {enableWithdrawStakersReward ? (
           <Button type="link" onClick={onClick(onClickWithdrawStakersReward)}>
             Withdraw
