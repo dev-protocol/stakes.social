@@ -6,6 +6,7 @@ import { DevStats } from 'src/components/organisms/DevStats'
 import { H2 } from 'src/components/atoms/Typography'
 import { Headline } from 'src/components/atoms/Headline'
 import { BuyDevButton } from 'src/components/molecules/BuyButton'
+import { DevChart } from 'src/components/organisms/DevChart'
 
 type Props = {}
 
@@ -21,6 +22,7 @@ const DevProtocolStats = (_: Props) => {
           <BuyDevButton />
         </Headline>
         <DevStats />
+        <DevChart />
       </div>
       <Footer />
     </>
