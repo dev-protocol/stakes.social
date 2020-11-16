@@ -3,12 +3,14 @@ import { Card, Input } from 'antd'
 import styled from 'styled-components'
 import { Max } from 'src/components/molecules/Max'
 import { SearchProps } from 'antd/lib/input'
+import { always } from 'ramda'
+import { ButtonWithGradient } from 'src/components/atoms/ButtonWithGradient'
 
 type Props = SearchProps &
   React.RefAttributes<Input> & {
-    onClickMax: () => void
     estimateTitle: string
     estimatedValue: string | React.ReactNode
+    onClickMax?: () => void
   }
 
 const StyledForm = styled(Input.Search)`
@@ -80,24 +82,31 @@ export const TransactForm = ({
   estimateTitle,
   estimatedValue
 }: Props) => {
+  const onClick = onSearch ? () => onSearch('') : always(undefined)
   return (
     <FormContainer className={className}>
       {title ? <label htmlFor={id}>{title}</label> : undefined}
-      <StyledForm
-        id={id}
-        enterButton={enterButton}
-        size="large"
-        value={value}
-        onChange={onChange}
-        onSearch={onSearch}
-        suffix={
-          <>
-            {suffix}
-            <Max onClick={onClickMax} />
-          </>
-        }
-        type="number"
-      />
+      {onChange ? (
+        <StyledForm
+          id={id}
+          enterButton={enterButton}
+          size="large"
+          value={value}
+          onChange={onChange}
+          onSearch={onSearch}
+          suffix={
+            <>
+              {suffix}
+              {onClickMax ? <Max onClick={onClickMax} /> : undefined}
+            </>
+          }
+          type="number"
+        />
+      ) : (
+        <ButtonWithGradient size="large" onClick={onClick}>
+          {enterButton}
+        </ButtonWithGradient>
+      )}
       <Estimated title={estimateTitle}>{estimatedValue}</Estimated>
     </FormContainer>
   )

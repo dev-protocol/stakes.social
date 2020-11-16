@@ -7,7 +7,7 @@ exports[`AssetList Snapshot 1`] = `
       class="sc-17dikip-0 dFeHQH"
     >
       <div
-        class="hzc567-2 jPKjGt sc-17dikip-1 cROPlx"
+        class="hzc567-1 jJDlWb sc-17dikip-1 cROPlx"
       >
         <div
           class="sc-2tazhb-0 floQve"
@@ -73,25 +73,23 @@ exports[`AssetList Snapshot 1`] = `
             </span>
           </div>
         </div>
-        <button
-          class="ant-btn hzc567-1 hzc567-7 kHuMzD evOEQz"
-          type="button"
+        <div
+          class="hzc567-2 hzc567-7 ckRZOi frZjZU"
         >
-          <span>
-            Stake
-          </span>
-        </button>
-        <button
-          class="ant-btn ant-btn-link hzc567-8 bVwvty"
-          type="button"
-        >
-          <span>
-            Withdraw
-          </span>
-        </button>
+          <button
+            class="ant-btn sc-1ho13tb-0 EDnks"
+            type="button"
+          >
+            <span>
+              Stake
+            </span>
+          </button>
+          
+          
+        </div>
       </div>
       <div
-        class="hzc567-2 jPKjGt sc-17dikip-1 cROPlx"
+        class="hzc567-1 jJDlWb sc-17dikip-1 cROPlx"
       >
         <div
           class="sc-2tazhb-0 floQve"
@@ -157,25 +155,23 @@ exports[`AssetList Snapshot 1`] = `
             </span>
           </div>
         </div>
-        <button
-          class="ant-btn hzc567-1 hzc567-7 kHuMzD evOEQz"
-          type="button"
+        <div
+          class="hzc567-2 hzc567-7 ckRZOi frZjZU"
         >
-          <span>
-            Stake
-          </span>
-        </button>
-        <button
-          class="ant-btn ant-btn-link hzc567-8 bVwvty"
-          type="button"
-        >
-          <span>
-            Withdraw
-          </span>
-        </button>
+          <button
+            class="ant-btn sc-1ho13tb-0 EDnks"
+            type="button"
+          >
+            <span>
+              Stake
+            </span>
+          </button>
+          
+          
+        </div>
       </div>
       <div
-        class="hzc567-2 jPKjGt sc-17dikip-1 cROPlx"
+        class="hzc567-1 jJDlWb sc-17dikip-1 cROPlx"
       >
         <div
           class="sc-2tazhb-0 floQve"
@@ -241,22 +237,20 @@ exports[`AssetList Snapshot 1`] = `
             </span>
           </div>
         </div>
-        <button
-          class="ant-btn hzc567-1 hzc567-7 kHuMzD evOEQz"
-          type="button"
+        <div
+          class="hzc567-2 hzc567-7 ckRZOi frZjZU"
         >
-          <span>
-            Stake
-          </span>
-        </button>
-        <button
-          class="ant-btn ant-btn-link hzc567-8 bVwvty"
-          type="button"
-        >
-          <span>
-            Withdraw
-          </span>
-        </button>
+          <button
+            class="ant-btn sc-1ho13tb-0 EDnks"
+            type="button"
+          >
+            <span>
+              Stake
+            </span>
+          </button>
+          
+          
+        </div>
       </div>
       <ul
         class="ant-pagination sc-17dikip-2 cMqJJE"

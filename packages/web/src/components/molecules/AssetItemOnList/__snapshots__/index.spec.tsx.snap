@@ -4,7 +4,7 @@ exports[`AssetItemOnList Snapshot 1`] = `
 <body>
   <div>
     <div
-      class="hzc567-2 jPKjGt"
+      class="hzc567-1 jJDlWb"
     >
       <div
         class="sc-2tazhb-0 floQve"
@@ -70,8 +70,13 @@ exports[`AssetItemOnList Snapshot 1`] = `
           </span>
         </div>
       </div>
-      
-      
+      <div
+        class="hzc567-2 hzc567-7 ckRZOi frZjZU"
+      >
+        
+        
+        
+      </div>
     </div>
   </div>
 </body>

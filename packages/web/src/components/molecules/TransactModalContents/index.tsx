@@ -6,11 +6,12 @@ import { AvatarProperty } from '../AvatarProperty'
 import { H4 } from 'src/components/atoms/Typography'
 import { useGetProperty } from 'src/fixtures/dev-for-apps/hooks'
 import { usePropertyName } from 'src/fixtures/dev-kit/hooks'
+import { WithdrawalForHolders } from 'src/components/organisms/WithdrawalForHolders'
 
 interface Props {
   className?: string
   propertyAddress: string
-  type: 'stake' | 'withdraw'
+  type: 'stake' | 'withdraw' | 'holders'
 }
 
 const Wrap = styled.div`
@@ -48,7 +49,7 @@ export const TransactModalContents = ({ className, propertyAddress, type }: Prop
   const { data: property } = useGetProperty(propertyAddress)
   const { name } = usePropertyName(propertyAddress)
   const propertyName = property && property.name ? property.name : name
-  const Form = type === 'stake' ? Stake : Withdraw
+  const Form = type === 'stake' ? Stake : type === 'withdraw' ? Withdraw : WithdrawalForHolders
 
   return (
     <Wrap className={className}>

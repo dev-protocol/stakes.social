@@ -1,10 +1,9 @@
 import { Button, Statistic } from 'antd'
 import React from 'react'
+import { ButtonWithGradient } from 'src/components/atoms/ButtonWithGradient'
 import { H3 } from 'src/components/atoms/Typography'
 import { useGetProperty } from 'src/fixtures/dev-for-apps/hooks'
 import { useGetMyStakingAmount, useGetTotalStakingAmount, usePropertyName } from 'src/fixtures/dev-kit/hooks'
-import { boxShahowWithOnHover } from 'src/styles/boxShahow'
-import { blueGradient } from 'src/styles/gradient'
 import styled from 'styled-components'
 import { AvatarProperty } from '../AvatarProperty'
 
@@ -12,9 +11,11 @@ interface Props {
   className?: string
   propertyAddress: string
   enableStake?: boolean
-  enableWithdraw?: boolean
+  enableWithdrawStakersReward?: boolean
+  enableWithdrawHoldersReward?: boolean
   onClickStake?: (propertyAddress: string) => void
-  onClickWithdraw?: (propertyAddress: string) => void
+  onClickWithdrawStakersReward?: (propertyAddress: string) => void
+  onClickWithdrawHoldersReward?: (propertyAddress: string) => void
 }
 
 const StyledStatistic = styled(Statistic)`
@@ -29,18 +30,6 @@ const StyledStatistic = styled(Statistic)`
   }
 `
 
-const StakeButton = styled(Button)`
-  &,
-  &:hover,
-  &:active,
-  &:focus {
-    ${blueGradient()}
-    color: white;
-    border: 0;
-  }
-  ${boxShahowWithOnHover()}
-`
-
 const Wrap = styled.div`
   display: grid;
   gap: 1rem;
@@ -48,14 +37,20 @@ const Wrap = styled.div`
   grid-template-areas:
     'avatar name name name'
     'stake stake totalStake totalStake'
-    'stakeButton stakeButton withdrawButton withdrawButton';
+    'buttons buttons buttons buttons';
   grid-template-columns: repeat(4, 1fr);
   @media (min-width: 768px) {
-    grid-template-areas: 'avatar name stake totalStake stakeButton withdrawButton';
-    grid-template-columns: 1fr 2fr 2fr 2fr 1fr 1fr;
+    grid-template-areas: 'avatar name stake totalStake buttons';
+    grid-template-columns: 1fr 2fr 2fr 2fr 240px;
   }
 `
 
+const ButtonsWrap = styled.div`
+  display: grid;
+  gap: 1rem;
+  align-items: center;
+  grid-auto-flow: column;
+`
 const GridAvatar = styled(AvatarProperty)`
   grid-area: avatar;
 `
@@ -68,28 +63,28 @@ const GridStake = styled(StyledStatistic)`
 const GridTotalStake = styled(StyledStatistic)`
   grid-area: totalStake;
 `
-const GridStakeButton = styled(StakeButton)`
-  grid-area: stakeButton;
-`
-const GridWithdrawButton = styled(Button)`
-  grid-area: withdrawButton;
+const GridButtons = styled(ButtonsWrap)`
+  grid-area: buttons;
 `
 
 export const AssetItemOnList = ({
   className,
   propertyAddress,
   enableStake,
-  enableWithdraw,
+  enableWithdrawStakersReward,
+  enableWithdrawHoldersReward,
   onClickStake,
-  onClickWithdraw
+  onClickWithdrawStakersReward,
+  onClickWithdrawHoldersReward
 }: Props) => {
   const { data: property } = useGetProperty(propertyAddress)
   const { name } = usePropertyName(propertyAddress)
   const { myStakingAmount, currency: myStakingAmountCurrency } = useGetMyStakingAmount(propertyAddress)
   const { totalStakingAmount, currency: totalStakingAmountCurrency } = useGetTotalStakingAmount(propertyAddress)
   const propertyName = property && property.name ? property.name : name
-  const onClick = (hook: undefined | typeof onClickStake | typeof onClickWithdraw) => () =>
-    typeof hook === 'undefined' ? undefined : hook(propertyAddress)
+  const onClick = (
+    hook: undefined | typeof onClickStake | typeof onClickWithdrawStakersReward | typeof onClickWithdrawHoldersReward
+  ) => () => (typeof hook === 'undefined' ? undefined : hook(propertyAddress))
 
   return (
     <Wrap className={className}>
@@ -107,14 +102,23 @@ export const AssetItemOnList = ({
         suffix={totalStakingAmountCurrency}
         precision={2}
       />
-      {enableStake ? <GridStakeButton onClick={onClick(onClickStake)}>Stake</GridStakeButton> : ''}
-      {enableWithdraw ? (
-        <GridWithdrawButton type="link" onClick={onClick(onClickWithdraw)}>
-          Withdraw
-        </GridWithdrawButton>
-      ) : (
-        ''
-      )}
+      <GridButtons>
+        {enableStake ? <ButtonWithGradient onClick={onClick(onClickStake)}>Stake</ButtonWithGradient> : ''}
+        {enableWithdrawStakersReward ? (
+          <Button type="link" onClick={onClick(onClickWithdrawStakersReward)}>
+            Withdraw
+          </Button>
+        ) : (
+          ''
+        )}
+        {enableWithdrawHoldersReward ? (
+          <Button type="link" onClick={onClick(onClickWithdrawHoldersReward)}>
+            Withdraw
+          </Button>
+        ) : (
+          ''
+        )}
+      </GridButtons>
     </Wrap>
   )
 }
