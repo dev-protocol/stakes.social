@@ -82,12 +82,7 @@ const Estimated = styled(Card)`
   }
 `
 
-const createSuffix = ({ onClick }: { onClick: () => void }) => (
-  <>
-    <span>DEV</span>
-    <Max onClick={onClick} />
-  </>
-)
+const createSuffix = ({ onClick }: { onClick: () => void }) => <Max onClick={onClick} />
 
 const handleOnChange = (setter: Dispatch<SetStateAction<string>>) => (event: ChangeEvent<HTMLInputElement>) => {
   setter(event.target.value)
