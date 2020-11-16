@@ -2,6 +2,8 @@ import React, { useCallback, useState } from 'react'
 import styled from 'styled-components'
 import { Empty, Pagination, Skeleton } from 'antd'
 import { AssetItemOnList } from '../AssetItemOnList'
+import { ResponsiveModal } from 'src/components/atoms/ResponsiveModal'
+import { TransactModalContents } from '../TransactModalContents'
 
 interface Props {
   className?: string
@@ -10,6 +12,12 @@ interface Props {
   loading?: boolean
   enableStake?: boolean
   enableWithdraw?: boolean
+}
+
+interface ModalStates {
+  visible: boolean
+  title?: string
+  contents?: React.ReactNode
 }
 
 const Wrap = styled.div`
@@ -37,6 +45,7 @@ export const AssetList = ({
   loading = false
 }: Props) => {
   const [page, setPage] = useState<number>(0)
+  const [modalStates, setModalStates] = useState<ModalStates>({ visible: false })
   const handlePagination = useCallback(
     (page: number) => {
       setPage(page)
@@ -46,6 +55,14 @@ export const AssetList = ({
     },
     [setPage, onPagination]
   )
+  const showModal = (type: 'stake' | 'withdraw') => (propertyAddress: string) => {
+    const contents = <TransactModalContents propertyAddress={propertyAddress} type={type} />
+    const title = type === 'stake' ? 'Stake' : 'Withdraw'
+    setModalStates({ visible: true, contents, title })
+  }
+  const closeModal = () => {
+    setModalStates({ ...modalStates, visible: false })
+  }
 
   return loading ? (
     <Skeleton active></Skeleton>
@@ -53,11 +70,21 @@ export const AssetList = ({
     <Wrap className={className}>
       {properties && properties.length > 0 ? (
         properties.map(item => (
-          <Item propertyAddress={item} key={item} enableStake={enableStake} enableWithdraw={enableWithdraw}></Item>
+          <Item
+            propertyAddress={item}
+            key={item}
+            enableStake={enableStake}
+            enableWithdraw={enableWithdraw}
+            onClickStake={showModal('stake')}
+            onClickWithdraw={showModal('withdraw')}
+          ></Item>
         ))
       ) : (
         <Empty />
       )}
+      <ResponsiveModal visible={modalStates.visible} title={modalStates.title} onCancel={closeModal} footer={null}>
+        {modalStates.contents}
+      </ResponsiveModal>
       <StyledPagination current={page} size="default" responsive={true} onChange={handlePagination} />
     </Wrap>
   )
