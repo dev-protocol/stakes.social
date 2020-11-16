@@ -8,7 +8,6 @@ import {
   useAnnualSupplyGrowthRatio,
   useCirculatingSupply,
   useTotalSupply,
-  useTotalStakingRatio,
   useTotalStakingAmountOnProtocol
 } from 'src/fixtures/dev-kit/hooks'
 import { toNaturalNumber } from 'src/fixtures/utility'
@@ -73,6 +72,9 @@ const DevMarketCap = (_: {}) => {
 
   useEffect(() => {
     circulatingSupply().then((circulatingSupplyValue: any) => {
+      if (circulatingSupplyValue <= 0) {
+        return
+      }
       const marketCap = devPrice.toNumber() * toNaturalNumber(circulatingSupplyValue).toNumber()
       const formatMarketCap = new BigNumber(marketCap && marketCap > 0 ? marketCap : 0).dp(0).toFormat()
       setDevMarketCap(formatMarketCap)
@@ -88,8 +90,22 @@ const DevPrice = (_: {}) => {
 }
 
 const DevStakingRatio = (_: {}) => {
-  const { totalStakingRatio } = useTotalStakingRatio()
-  return totalStakingRatio ? <span>{Math.round(totalStakingRatio * 10000) / 100}</span> : <></>
+  const [devStakingRatio, setDevStakingRatio] = useState<string>('')
+  const { totalStakingAmount } = useTotalStakingAmountOnProtocol()
+  const { circulatingSupply } = useCirculatingSupply()
+
+  useEffect(() => {
+    circulatingSupply().then((circulatingSupplyValue: any) => {
+      const totalStakingAmountValue = toNaturalNumber(new BigNumber(totalStakingAmount || 0))
+      if (circulatingSupplyValue <= 0 || (totalStakingAmount || 0) <= 0) {
+        return
+      }
+      setDevStakingRatio(
+        totalStakingAmountValue.div(toNaturalNumber(circulatingSupplyValue)).times(100).dp(2).toFormat()
+      )
+    })
+  }, [circulatingSupply, totalStakingAmount])
+  return devStakingRatio !== '' ? <span>{devStakingRatio}</span> : <></>
 }
 
 const DevStakingValue = (_: {}) => {
@@ -149,15 +165,6 @@ const CreatorsRewardsUsd = (_: {}) => {
 }
 
 const items = [
-  {
-    title: 'DEV TOTAL CAP',
-    unit: '$',
-    unitPosition: 'prefix',
-    description: 'The total value of all DEV.',
-    valueRender: function devMarketCapRender() {
-      return <DevTotalCap />
-    }
-  },
   {
     title: 'DEV MARKET CAP',
     unit: '$',
@@ -244,6 +251,15 @@ const items = [
     description: "The value of current creator's rewards in USD.",
     valueRender: function creatorsReardsUsdRender() {
       return <CreatorsRewardsUsd />
+    }
+  },
+  {
+    title: 'DEV TOTAL CAP',
+    unit: '$',
+    unitPosition: 'prefix',
+    description: 'The total value of all DEV.',
+    valueRender: function devMarketCapRender() {
+      return <DevTotalCap />
     }
   }
 ]
