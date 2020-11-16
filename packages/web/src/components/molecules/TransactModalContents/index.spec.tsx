@@ -1,23 +1,19 @@
 import React from 'react'
-import Web3 from 'web3'
 import { render } from '@testing-library/react'
 import { TransactModalContents } from '.'
+import Jdenticon from 'react-jdenticon'
 import 'src/__mocks__/window/matchMedia.mock'
-import WalletContext from 'src/context/walletContext'
 
 jest.mock('src/fixtures/dev-kit/hooks')
-jest.mock('src/fixtures/uniswap/hooks')
 jest.mock('src/fixtures/wallet/hooks')
 jest.mock('web3')
 jest.mock('@dev/graphql')
+jest.mock('react-jdenticon')
 
 describe(`${TransactModalContents.name}`, () => {
   test('Snapshot', () => {
-    const component = render(
-      <WalletContext.Provider value={{ web3: new Web3(), setWeb3: () => {} }}>
-        <TransactModalContents type="stake" propertyAddress="0x0" />
-      </WalletContext.Provider>
-    )
+    ;(Jdenticon as jest.Mock).mockImplementation(() => <></>)
+    const component = render(<TransactModalContents type="stake" propertyAddress="0x0" />)
     const tree = component.baseElement
     expect(tree).toMatchSnapshot()
   })
