@@ -1,7 +1,7 @@
 import { Empty } from 'antd'
 import { EmptyProps } from 'antd/lib/empty'
 import React from 'react'
-import { useConnectWallet } from 'src/fixtures/wallet/hooks'
+import { useConnectWallet, useProvider } from 'src/fixtures/wallet/hooks'
 import { ButtonWithGradient } from '../ButtonWithGradient'
 
 const SignIn = () => {
@@ -14,7 +14,8 @@ const SignIn = () => {
 }
 
 export const NotConnectedAndEmpty = (props: EmptyProps) => {
-  const { isConnected } = useConnectWallet()
+  const { accountAddress } = useProvider()
+  const isConnected = Boolean(accountAddress)
   const description = isConnected ? 'No Data' : 'Please signing in'
 
   return (
