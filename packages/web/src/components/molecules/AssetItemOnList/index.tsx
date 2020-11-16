@@ -36,6 +36,7 @@ const StakeButton = styled(Button)`
   &:focus {
     ${blueGradient()}
     color: white;
+    border: 0;
   }
   ${boxShahowWithOnHover()}
 `
