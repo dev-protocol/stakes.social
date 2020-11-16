@@ -19,7 +19,7 @@ const LowerFooter = {
 } as CSSProperties
 
 const FooterContainer = styled.div`
-  max-width: 1170px;
+  max-width: 1160px;
   margin-left: auto;
   margin-right: auto;
 `

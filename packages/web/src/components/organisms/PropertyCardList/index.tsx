@@ -136,7 +136,7 @@ export const PropertyCardList = ({ currentPage, searchWord, sortBy }: Props) => 
                 <PropertyCard propertyAddress={d.property} assets={d.authentication} />
               </div>
             ))}
-          <div style={{ gridColumn: '1/-1' }}>
+          <div style={{ display: 'flex', justifyContent: 'flex-end', gridColumn: '1/-1' }}>
             <Pagination
               current={currentPage}
               size="default"
