@@ -7,10 +7,11 @@ import { TransactForm } from 'src/components/molecules/TransactForm'
 
 interface Props {
   className?: string
+  title?: string
   propertyAddress: string
 }
 
-export const Withdraw = ({ className, propertyAddress }: Props) => {
+export const Withdraw = ({ className, title, propertyAddress }: Props) => {
   const [withdrawAmount, setWithdrawAmount] = useState<string>('')
   const [claimedTokens, setClaimedTokens] = useState<string | undefined>()
   const [interestTokens, setInterestTokens] = useState<string | undefined>()
@@ -48,7 +49,7 @@ export const Withdraw = ({ className, propertyAddress }: Props) => {
   return (
     <TransactForm
       className={className}
-      title="Withdraw"
+      title={title}
       id="withdraw"
       enterButton="Withdraw"
       value={withdrawAmount}

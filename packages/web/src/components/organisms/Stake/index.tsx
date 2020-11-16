@@ -7,10 +7,11 @@ import { TransactForm } from 'src/components/molecules/TransactForm'
 
 interface Props {
   className?: string
+  title?: string
   propertyAddress: string
 }
 
-export const Stake = ({ className, propertyAddress }: Props) => {
+export const Stake = ({ className, title, propertyAddress }: Props) => {
   const [stakeAmount, setStakeAmount] = useState<string>('')
   const [estimatedStakingAPY, setEstimatedStakingAPY] = useState<string>('')
   const { web3 } = useProvider()
@@ -40,7 +41,7 @@ export const Stake = ({ className, propertyAddress }: Props) => {
   return (
     <TransactForm
       className={className}
-      title="Stake"
+      title={title}
       id="stake"
       enterButton="Stake"
       value={stakeAmount}

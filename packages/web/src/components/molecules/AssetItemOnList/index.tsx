@@ -3,6 +3,7 @@ import React from 'react'
 import { H3 } from 'src/components/atoms/Typography'
 import { useGetProperty } from 'src/fixtures/dev-for-apps/hooks'
 import { useGetMyStakingAmount, useGetTotalStakingAmount, usePropertyName } from 'src/fixtures/dev-kit/hooks'
+import { boxShahowWithOnHover } from 'src/styles/boxShahow'
 import { blueGradient } from 'src/styles/gradient'
 import styled from 'styled-components'
 import { AvatarProperty } from '../AvatarProperty'
@@ -12,6 +13,8 @@ interface Props {
   propertyAddress: string
   enableStake?: boolean
   enableWithdraw?: boolean
+  onClickStake?: (propertyAddress: string) => void
+  onClickWithdraw?: (propertyAddress: string) => void
 }
 
 const StyledStatistic = styled(Statistic)`
@@ -27,8 +30,15 @@ const StyledStatistic = styled(Statistic)`
 `
 
 const StakeButton = styled(Button)`
-  ${blueGradient()}
-  color: white;
+  &,
+  &:hover,
+  &:active,
+  &:focus {
+    ${blueGradient()}
+    color: white;
+    border: 0;
+  }
+  ${boxShahowWithOnHover()}
 `
 
 const Wrap = styled.div`
@@ -65,12 +75,21 @@ const GridWithdrawButton = styled(Button)`
   grid-area: withdrawButton;
 `
 
-export const AssetItemOnList = ({ className, propertyAddress, enableStake, enableWithdraw }: Props) => {
+export const AssetItemOnList = ({
+  className,
+  propertyAddress,
+  enableStake,
+  enableWithdraw,
+  onClickStake,
+  onClickWithdraw
+}: Props) => {
   const { data: property } = useGetProperty(propertyAddress)
   const { name } = usePropertyName(propertyAddress)
   const { myStakingAmount, currency: myStakingAmountCurrency } = useGetMyStakingAmount(propertyAddress)
   const { totalStakingAmount, currency: totalStakingAmountCurrency } = useGetTotalStakingAmount(propertyAddress)
   const propertyName = property && property.name ? property.name : name
+  const onClick = (hook: undefined | typeof onClickStake | typeof onClickWithdraw) => () =>
+    typeof hook === 'undefined' ? undefined : hook(propertyAddress)
 
   return (
     <Wrap className={className}>
@@ -88,8 +107,14 @@ export const AssetItemOnList = ({ className, propertyAddress, enableStake, enabl
         suffix={totalStakingAmountCurrency}
         precision={2}
       />
-      {enableStake ? <GridStakeButton>Stake</GridStakeButton> : ''}
-      {enableWithdraw ? <GridWithdrawButton type="link">Withdraw</GridWithdrawButton> : ''}
+      {enableStake ? <GridStakeButton onClick={onClick(onClickStake)}>Stake</GridStakeButton> : ''}
+      {enableWithdraw ? (
+        <GridWithdrawButton type="link" onClick={onClick(onClickWithdraw)}>
+          Withdraw
+        </GridWithdrawButton>
+      ) : (
+        ''
+      )}
     </Wrap>
   )
 }

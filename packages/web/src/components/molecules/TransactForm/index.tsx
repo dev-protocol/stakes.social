@@ -82,7 +82,7 @@ export const TransactForm = ({
 }: Props) => {
   return (
     <FormContainer className={className}>
-      <label htmlFor={id}>{title}</label>
+      {title ? <label htmlFor={id}>{title}</label> : undefined}
       <StyledForm
         id={id}
         enterButton={enterButton}

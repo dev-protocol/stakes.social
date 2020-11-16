@@ -6,11 +6,6 @@ exports[`Withdraw Snapshot 1`] = `
     <div
       class="sc-1d8aayd-1 hozPOf"
     >
-      <label
-        for="withdraw"
-      >
-        Withdraw
-      </label>
       <span
         class="ant-input-group-wrapper ant-input-group-wrapper-lg ant-input-search ant-input-search-large ant-input-search-with-button sc-1d8aayd-0 fcsYkX"
       >
