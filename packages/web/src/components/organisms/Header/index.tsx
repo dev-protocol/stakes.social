@@ -16,32 +16,31 @@ const HeaderContainer = styled.header`
   width: 100%;
 `
 const Top = styled.header`
-  display: grid;
-  grid-auto-flow: column;
+  display: flex;
   justify-content: start;
-  align-items: start;
+  align-items: center;
   border-bottom: 1px solid black;
-
-  grid-gap: 4rem;
 
   #headerlogo {
     margin-left: 1em;
     width: 9rem;
-    height: 46px;
+    height: auto;
     @media (max-width: 768px) {
       margin-left: 0px;
     }
   }
 `
 const Logo = styled.div`
-  display: grid;
-  grid-gap: 1rem;
+  display: flex;
+  margin-right: 64px;
 
   @media (max-width: 768px) {
     position: absolute;
     left: 0px;
+    transform: translateY(2px);
     display: block;
     width: 100%;
+    height: auto;
     text-align: center;
     pointer-events: none;
   }

@@ -14,6 +14,10 @@ const Flex = styled.div`
   input {
     width: 100%;
   }
+
+  @media (max-width: 760px) {
+    grid-row: 2;
+  }
 `
 
 export const PropertySearchForm = ({ onSubmitSearchProperty }: Props) => {

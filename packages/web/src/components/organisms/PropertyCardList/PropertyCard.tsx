@@ -37,7 +37,7 @@ interface Props {
 const Card = styled.div`
   display: flex;
   flex-direction: column;
-  margin-right: 0;
+  margin: 0;
   height: 500px;
   width: 345px;
   border: solid 1px #f0f0f0;

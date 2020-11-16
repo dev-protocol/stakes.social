@@ -9,11 +9,10 @@ const Wrap = styled.div`
   background: -webkit-linear-gradient(top, #639fff 1%, #2187ed 100%);
   background: linear-gradient(to bottom, #639fff 1%, #2187ed 100%);
   color: white;
-  padding-bottom: 2px;
+  padding-bottom: 3px;
   text-align: center;
-  > span {
-    font-size: 0.8em;
-  }
+
+  font-size: 0.8em;
 `
 
-export const EarlyAccess = () => <Wrap>Early Access Version</Wrap>
+export const EarlyAccess = () => <Wrap>Beta Version</Wrap>

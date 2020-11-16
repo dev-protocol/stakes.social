@@ -25,16 +25,17 @@ const Header = styled.h2`
 
 const PropertiesHeader = styled.div`
   display: grid;
-  grid-template-rows: 1fr 1fr;
-  grid-template-columns: 3fr 4fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  grid-template-columns: 1fr;
+  row-gap: 10px;
   justify-content: center;
   align-items: center;
   padding-top: 10px;
 
   @media (min-width: 768px) {
     grid-template-rows: none;
-    grid-template-columns: 2fr 2fr 1fr 1fr;
-    column-gap: 48px;
+    grid-template-columns: 1fr 1fr 1fr;
+    column-gap: 60px;
   }
 `
 
@@ -56,6 +57,15 @@ const FILTER_OPTIONS = [
   { label: 'Most Staked', value: 'MOST_STAKED' },
   { label: 'Most recent', value: 'MOST_RECENT' }
 ]
+
+const FilterOptionContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+
+  @media (max-width: 760px) {
+    grid-row: 3;
+  }
+`
 
 export const PropertyCardList = ({ currentPage, searchWord, sortBy }: Props) => {
   const { accountAddress } = useGetAccountAddress()
@@ -102,8 +112,13 @@ export const PropertyCardList = ({ currentPage, searchWord, sortBy }: Props) => 
       <PropertiesHeader>
         <Header>Asset Pools</Header>
         <PropertySearchForm onSubmitSearchProperty={handleSearch} />
-        <Select placeholder="Sort" options={FILTER_OPTIONS} onChange={handleChangeSortBy} isClearable={true} />
-        <CurrencySwitcher />
+        <FilterOptionContainer>
+          <div style={{ flexGrow: 1 }}>
+            <Select placeholder="Sort" options={FILTER_OPTIONS} onChange={handleChangeSortBy} isClearable={true} />
+          </div>
+
+          <CurrencySwitcher />
+        </FilterOptionContainer>
       </PropertiesHeader>
 
       {loading && <Spin size="large" style={{ display: 'block', width: 'auto', padding: '100px' }} />}
