@@ -15,7 +15,7 @@ export const NavMenuItem = styled(NavMenu.Item)`
   a.link:hover {
     background-color: yellow;
   }
-  margin-right: 4em;
+  margin-right: 3em;
 `
 
 export const AccountBtn = styled.div`

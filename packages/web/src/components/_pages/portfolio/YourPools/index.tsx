@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useListAccountLockupQuery } from '@dev/graphql'
+import { useListOwnedPropertyMetaQuery } from '@dev/graphql'
 import { AssetList } from 'src/components/molecules/AssetList'
 import { useCallback } from 'react'
 
@@ -9,9 +9,9 @@ interface Props {
 
 const perPage = 5
 
-export const YourStakes = ({ accountAddress }: Props) => {
+export const YourPools = ({ accountAddress }: Props) => {
   const [page, setPage] = useState(0)
-  const { data, loading } = useListAccountLockupQuery({
+  const { data, loading } = useListOwnedPropertyMetaQuery({
     variables: {
       account_address: accountAddress || '',
       limit: perPage,
@@ -24,15 +24,14 @@ export const YourStakes = ({ accountAddress }: Props) => {
     },
     [setPage]
   )
-  const properties = data?.account_lockup.map(x => x.property_address)
+  const properties = data?.property_meta.map(x => x.property)
 
   return (
     <AssetList
       onPagination={onPagination}
       loading={loading}
       properties={properties}
-      enableStake={true}
-      enableWithdrawStakersReward={true}
+      enableWithdrawHoldersReward={true}
     ></AssetList>
   )
 }

@@ -1,9 +1,10 @@
 import React, { useCallback, useState } from 'react'
 import styled from 'styled-components'
-import { Empty, Pagination, Skeleton } from 'antd'
+import { Pagination, Skeleton } from 'antd'
 import { AssetItemOnList } from '../AssetItemOnList'
 import { ResponsiveModal } from 'src/components/atoms/ResponsiveModal'
 import { TransactModalContents } from '../TransactModalContents'
+import { NotConnectedAndEmpty } from 'src/components/atoms/NotConnectedAndEmpty'
 
 interface Props {
   className?: string
@@ -11,7 +12,8 @@ interface Props {
   onPagination?: (page: number) => void
   loading?: boolean
   enableStake?: boolean
-  enableWithdraw?: boolean
+  enableWithdrawStakersReward?: boolean
+  enableWithdrawHoldersReward?: boolean
 }
 
 interface ModalStates {
@@ -41,7 +43,8 @@ export const AssetList = ({
   properties,
   onPagination,
   enableStake,
-  enableWithdraw,
+  enableWithdrawStakersReward,
+  enableWithdrawHoldersReward,
   loading = false
 }: Props) => {
   const [page, setPage] = useState<number>(0)
@@ -55,7 +58,7 @@ export const AssetList = ({
     },
     [setPage, onPagination]
   )
-  const showModal = (type: 'stake' | 'withdraw') => (propertyAddress: string) => {
+  const showModal = (type: 'stake' | 'withdraw' | 'holders') => (propertyAddress: string) => {
     const contents = <TransactModalContents propertyAddress={propertyAddress} type={type} />
     const title = type === 'stake' ? 'Stake' : 'Withdraw'
     setModalStates({ visible: true, contents, title })
@@ -74,13 +77,15 @@ export const AssetList = ({
             propertyAddress={item}
             key={item}
             enableStake={enableStake}
-            enableWithdraw={enableWithdraw}
+            enableWithdrawStakersReward={enableWithdrawStakersReward}
+            enableWithdrawHoldersReward={enableWithdrawHoldersReward}
             onClickStake={showModal('stake')}
-            onClickWithdraw={showModal('withdraw')}
+            onClickWithdrawStakersReward={showModal('withdraw')}
+            onClickWithdrawHoldersReward={showModal('holders')}
           ></Item>
         ))
       ) : (
-        <Empty />
+        <NotConnectedAndEmpty description="Assets not found" />
       )}
       <ResponsiveModal visible={modalStates.visible} title={modalStates.title} onCancel={closeModal} footer={null}>
         {modalStates.contents}

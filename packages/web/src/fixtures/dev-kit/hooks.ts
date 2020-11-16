@@ -19,7 +19,8 @@ import {
   propertyAuthor,
   balanceOf,
   allClaimedRewards,
-  propertyName
+  propertyName,
+  balanceOfProperty
 } from './client'
 import { SWRCachePath } from './cache-path'
 import { UnwrapFunc, toNaturalNumber, toAmountNumber, toBigNumber, whenDefined } from 'src/fixtures/utility'
@@ -562,4 +563,16 @@ export const usePropertyName = (propertyAddress?: string) => {
   )
 
   return { name: data, error }
+}
+
+export const useBalanceOfProperty = (propertyAddress: string) => {
+  const { web3, accountAddress } = useProvider()
+  const { data, error } = useSWR<BigNumber | undefined, Error>(
+    SWRCachePath.balanceOfProperty(propertyAddress, accountAddress),
+    () =>
+      whenDefined(web3, client =>
+        whenDefined(accountAddress, account => balanceOfProperty(client, propertyAddress, account).then(toBigNumber))
+      )
+  )
+  return { balance: data, error }
 }

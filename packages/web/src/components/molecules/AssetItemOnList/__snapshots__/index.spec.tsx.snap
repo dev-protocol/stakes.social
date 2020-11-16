@@ -4,16 +4,21 @@ exports[`AssetItemOnList Snapshot 1`] = `
 <body>
   <div>
     <div
-      class="hzc567-2 jPKjGt"
+      class="hzc567-1 bPLVas"
     >
-      <div
-        class="sc-2tazhb-0 floQve"
-      />
-      <h3
-        class="sc-1w8sy4l-2 hzc567-4 gdOONv lfaQrh"
+      <a
+        class="hzc567-2 hzc567-4 QbOgQ gbmhAv"
+        href="/property-address"
       >
-        property-address-name
-      </h3>
+        <div
+          class="sc-2tazhb-0 floQve"
+        />
+        <h3
+          class="sc-1w8sy4l-2 gdOONv"
+        >
+          property-address-name
+        </h3>
+      </a>
       <div
         class="ant-statistic hzc567-0 hzc567-5 bWyUkR keQvYD"
       >
@@ -70,8 +75,13 @@ exports[`AssetItemOnList Snapshot 1`] = `
           </span>
         </div>
       </div>
-      
-      
+      <div
+        class="hzc567-3 hzc567-7 jtNtWj frZjZU"
+      >
+        
+        
+        
+      </div>
     </div>
   </div>
 </body>

@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`TransactForm Snapshot 1`] = `
+exports[`WithdrawalForHolders Snapshot 1`] = `
 <body>
   <div>
     <div
@@ -9,7 +9,11 @@ exports[`TransactForm Snapshot 1`] = `
       <button
         class="ant-btn ant-btn-lg sc-1ho13tb-0 EDnks"
         type="button"
-      />
+      >
+        <span>
+          Withdraw
+        </span>
+      </button>
       <div
         class="ant-card ant-card-bordered sc-1d8aayd-2 cnjKQM"
       >
@@ -22,14 +26,17 @@ exports[`TransactForm Snapshot 1`] = `
             <div
               class="ant-card-head-title"
             >
-              Test
+              Withdrawable Amount
             </div>
           </div>
         </div>
         <div
           class="ant-card-body"
         >
-          test
+          <p>
+            6000
+             DEV
+          </p>
         </div>
       </div>
     </div>
