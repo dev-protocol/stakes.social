@@ -2,7 +2,6 @@ import { Modal } from 'antd'
 import styled from 'styled-components'
 
 export const ResponsiveModal = styled(Modal)`
-  width: 620px;
   @media (max-width: 768px) {
     position: absolute;
     top: 0;
