@@ -44,13 +44,7 @@ const Circle = styled(Button)`
 `
 
 export const HelpUs = () => (
-  <Tooltip placement="top" color="pink" overlayStyle={{ fontSize: '0.8rem' }} title="Can you help?">
-    <Circle
-      shape="circle"
-      size="large"
-      href="//paper.dropbox.com/doc/Were-missing-the-following-resources--A1eBXtT1lNDsorUT3g4zQYk7AQ-QU7SbfwRE7V6TnCTyGWQM"
-      target="_blank"
-      icon={<HeartIcon />}
-    ></Circle>
+  <Tooltip placement="top" color="pink" overlayStyle={{ fontSize: '0.8rem' }} title="Do you need help?">
+    <Circle shape="circle" size="large" href="https://docs.devprtcl.com" target="_blank" icon={<HeartIcon />}></Circle>
   </Tooltip>
 )

@@ -8,8 +8,6 @@ import styled from 'styled-components'
 import { Container } from 'src/components/atoms/Container'
 import { Header } from 'src/components/organisms/Header'
 import { StakeForm } from 'src/components/organisms/StakeForm'
-import { CancelStaking } from 'src/components/organisms/CancelStaking'
-// import { PropertyTags } from 'src/components/organisms/PropertyTags'
 import TopStakers from 'src/components/organisms/TopStakers'
 import { Avatar } from 'src/components/molecules/Avatar'
 import { useAPY, usePropertyAuthor } from 'src/fixtures/dev-kit/hooks'
@@ -20,6 +18,7 @@ import { useGetPropertytInformation } from 'src/fixtures/devprtcl/hooks'
 import { useGetAccount, useGetProperty } from 'src/fixtures/dev-for-apps/hooks'
 import ReactMarkdown from 'react-markdown'
 import { WithGradient } from 'src/components/atoms/WithGradient'
+import { useGetAccountAddress } from 'src/fixtures/wallet/hooks'
 
 type Props = {}
 
@@ -75,13 +74,6 @@ const Stake = styled(StakeForm)`
 const Possession = styled(PossessionOutline)`
   grid-area: possession;
 `
-
-const Cancel = styled(CancelStaking)`
-  grid-area: cancel;
-`
-// const Tags = styled(PropertyTags)`
-//   grid-area: tags;
-// `
 
 const Wrap = styled.div`
   margin: 2rem auto;
@@ -216,10 +208,12 @@ const PropertyAddressDetail = (_: Props) => {
   const { propertyAddress } = useRouter().query as { propertyAddress: string }
   const { apy, creators } = useAPY()
   const { data } = useGetPropertyAuthenticationQuery({ variables: { propertyAddress } })
+  const { data: propertyInformation } = useGetPropertytInformation(propertyAddress)
   const { data: dataProperty } = useGetProperty(propertyAddress)
   /* eslint-disable react-hooks/exhaustive-deps */
   // FYI: https://github.com/facebook/react/pull/19062
   const includedAssetList = useMemo(() => data?.property_authentication.map(e => e.authentication_id), [data])
+  const loggedInWallet = useGetAccountAddress()
 
   return (
     <>
@@ -246,19 +240,18 @@ const PropertyAddressDetail = (_: Props) => {
               {includedAssetList?.map((asset, index) => (
                 <AssetListItem key={index}>{asset}</AssetListItem>
               ))}
-              <Link href={'/auth/[property]'} as={`/auth/${propertyAddress}`}>
-                <AddAsset>
-                  <PlusOutlined />
-                  <span>Add asset</span>
-                </AddAsset>
-              </Link>
+              {propertyInformation?.author?.address === loggedInWallet?.accountAddress && (
+                <Link href={'/auth/[property]'} as={`/auth/${propertyAddress}`}>
+                  <AddAsset>
+                    <PlusOutlined />
+                    <span>Add asset</span>
+                  </AddAsset>
+                </Link>
+              )}
             </AssetList>
           </AssetsSection>
           <Author propertyAddress={propertyAddress} />
-          {/* <Outline propertyAddress={propertyAddress} /> */}
           <Possession propertyAddress={propertyAddress} />
-          {/* <Apps /> */}
-          <Cancel propertyAddress={propertyAddress} />
         </Main>
       </Wrap>
 

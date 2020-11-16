@@ -51,10 +51,14 @@ export const SearchbarInput = styled.input`
     padding-left: 2.5rem;
   }
 
+  &:hover {
+    border: 1px solid deeppink;
+  }
+
   &:focus {
     transition: all 0.2s ease-in;
-    border: 1px solid lightpink;
-    box-shadow: 0 0 0 1px deeppink;
+    border: 1px solid black;
+    box-shadow: 0 0 0 1px grey;
   }
 `
 

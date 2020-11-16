@@ -21,9 +21,12 @@ const Slogan = styled.div`
   padding: 50px 0;
 `
 
-const SloganTitle = styled.h1`
+const SloganTitle = styled.span`
   color: white;
-  font-size: 2em;
+  font-size: 1.8em;
+  @media (min-width: 760px) {
+    font-size: 2em;
+  }
 `
 
 const Logo = styled.div`
@@ -35,7 +38,7 @@ const Logo = styled.div`
 
 const ReadMore = styled.span`
   cursor: pointer;
-  border-bottom: 1px solid white;
+  margin-top: 5px;
 `
 
 const Wrap = styled.div`
@@ -59,7 +62,7 @@ export const Banner = () => {
           <Slogan>
             <SloganTitle color="white">A Sustainable Economy</SloganTitle>
             <SloganTitle color="white">for Open Assets</SloganTitle>
-            <ReadMore>read more</ReadMore>
+            <ReadMore>Read More</ReadMore>
           </Slogan>
           <Logo>
             <ResponsiveImage src="https://res.cloudinary.com/haas-storage/image/upload/v1598697538/background_wmc31h.png" />

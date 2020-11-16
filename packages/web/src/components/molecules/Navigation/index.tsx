@@ -6,7 +6,6 @@ import { useRouter } from 'next/router'
 import Link from 'next/link'
 import Hamburger from 'src/components/atoms/Svgs/tsx/Hamburger'
 import { useConnectWallet, useGetAccountAddress } from 'src/fixtures/wallet/hooks'
-import { UserOutlined } from '@ant-design/icons'
 import { NavMenu, AccountBtn, Connecting, NavMenuItem } from './../../atoms/Navigation/index'
 import WalletContext from 'src/context/walletContext'
 import { useEffectAsync } from 'src/fixtures/utility'
@@ -120,10 +119,9 @@ export const Navigation = ({ handleMenuOpen }: NavigationProps) => {
           {isConnecting ? (
             <Connecting>{'Connecting...'}</Connecting>
           ) : !isConnected && !accountAddress ? (
-            'SignIn'
+            'Sign in'
           ) : (
             <Fragment>
-              <UserOutlined />
               <span className="hideOnSmall"> {'Profile'} </span>
             </Fragment>
           )}

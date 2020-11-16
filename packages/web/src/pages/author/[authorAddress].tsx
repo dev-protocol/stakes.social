@@ -280,7 +280,7 @@ const Pool = ({ propertyAddress }: PoolProps) => {
 const AuthorAddressDetail = (_: Props) => {
   const router = useRouter()
   let { authorAddress } = router.query
-  const [isDesktop, setDesktop] = useState(typeof window !== 'undefined' && window?.innerWidth > 1024)
+  const [isDesktop, setDesktop] = useState(true)
   const author: string = typeof authorAddress == 'string' ? authorAddress : 'none'
   const { data: authorInformation } = useGetAuthorInformation(author)
   const { data, loading } = useListPropertyMetaQuery({
@@ -289,17 +289,17 @@ const AuthorAddressDetail = (_: Props) => {
     }
   })
 
-  const updateMedia = () => {
-    setDesktop(window.innerWidth > 1024)
-  }
-
   useEffect(() => {
+    const updateMedia = () => {
+      setDesktop(window.innerWidth > 1024)
+    }
+
     if (typeof window !== 'undefined') {
       window.addEventListener('resize', updateMedia)
       return () => window.removeEventListener('resize', updateMedia)
     }
     return setDesktop(true)
-  }, [])
+  }, [setDesktop])
 
   return (
     <>

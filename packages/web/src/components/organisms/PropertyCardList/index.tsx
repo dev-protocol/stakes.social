@@ -49,7 +49,7 @@ const PropertyOverview = styled.div`
   }
 `
 
-const DEFAULT_PER_PAGE = 10
+const DEFAULT_PER_PAGE = 9
 
 const FILTER_OPTIONS = [
   { label: 'Your properties', value: 'YOUR_PROPS' },
@@ -102,7 +102,7 @@ export const PropertyCardList = ({ currentPage, searchWord, sortBy }: Props) => 
       <PropertiesHeader>
         <Header>Asset Pools</Header>
         <PropertySearchForm onSubmitSearchProperty={handleSearch} />
-        <Select options={FILTER_OPTIONS} onChange={handleChangeSortBy} isClearable={true} />
+        <Select placeholder="Sort" options={FILTER_OPTIONS} onChange={handleChangeSortBy} isClearable={true} />
         <CurrencySwitcher />
       </PropertiesHeader>
 
@@ -127,6 +127,7 @@ export const PropertyCardList = ({ currentPage, searchWord, sortBy }: Props) => 
               size="default"
               responsive={true}
               defaultPageSize={perPage}
+              pageSizeOptions={['9', '12', '15', '18', '21']}
               onChange={handlePagination}
               onShowSizeChange={handleShowSizeChange}
               total={data.property_factory_create_aggregate.aggregate?.count}
