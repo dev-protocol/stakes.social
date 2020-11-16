@@ -1,6 +1,6 @@
 import fetch from 'cross-fetch'
 import { ApolloClient, HttpLink, InMemoryCache } from '@apollo/client'
-import { getBundleQuery, getTokenQuery } from './gql'
+import { getBundleQuery, getTokenQuery, getTokenDayDatasQuery } from './gql'
 
 const newClient = () => {
   return new ApolloClient({
@@ -29,4 +29,11 @@ export const getDevEthPrice = (): Promise<Token> => {
   return client
     .query({ query: getTokenQuery, variables: { Id: '0x5caf454ba92e6f2c929df14667ee360ed9fd5b26' } })
     .then(res => res.data.token)
+}
+
+export const getTokenDayDatas = (): Promise<any> => {
+  const client = newClient()
+  return client
+    .query({ query: getTokenDayDatasQuery, variables: { token: '0x5caf454ba92e6f2c929df14667ee360ed9fd5b26' } })
+    .then(res => res.data)
 }
