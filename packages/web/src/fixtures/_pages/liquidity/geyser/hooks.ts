@@ -35,14 +35,18 @@ const getAllTokensClaimed = (client: Web3) => () =>
     )
   })
 
-const getTokensLocked = (client: Web3) =>
+const getTokensLocked = (client: Web3) => () =>
   allTokensLocked(client).then(allEvents => {
     console.log(allEvents)
     return allEvents.reduce((a: BigNumber, c) => a.plus(c.returnValues.amount), toBigNumber(0))
   })
 
 export const useTotalRewards = () => {
-  const { data, error } = useSWR<BigNumber, Error>(SWRCachePath.allTokensLocked, getTokensLocked)
+  const { nonConnectedWeb3: web3 } = useProvider()
+  const { data, error } = useSWR<BigNumber, Error>(
+    SWRCachePath.allTokensLocked,
+    whenDefined(web3, x => getTokensLocked(x))
+  )
   return {
     data,
     error
@@ -108,7 +112,7 @@ export const useUnstake = () => {
 }
 
 export const useAllTokensClaimed = () => {
-  const { web3, accountAddress } = useProvider()
+  const { nonConnectedWeb3: web3, accountAddress } = useProvider()
   const { data, error } = useSWR<BigNumber, Error>(
     SWRCachePath.useAllTokensClaimed(accountAddress),
     whenDefined(web3, x => getAllTokensClaimed(x))
@@ -120,7 +124,7 @@ export const useAllTokensClaimed = () => {
 }
 
 export const useTotalStakingShares = () => {
-  const { web3, accountAddress } = useProvider()
+  const { nonConnectedWeb3: web3, accountAddress } = useProvider()
   const { data, error } = useSWR<undefined | UnwrapFunc<typeof totalStakingShares>, Error>(
     SWRCachePath.getTotalStakingShares(accountAddress),
     () => whenDefined(web3, x => totalStakingShares(x))
@@ -132,7 +136,7 @@ export const useTotalStakingShares = () => {
 }
 
 export const useTotalStaked = () => {
-  const { web3, accountAddress } = useProvider()
+  const { nonConnectedWeb3: web3, accountAddress } = useProvider()
   const { data, error } = useSWR<undefined | UnwrapFunc<typeof totalStakingShares>, Error>(
     SWRCachePath.useTotalStaked(accountAddress),
     () => whenDefined(web3, x => totalStaked(x))
@@ -156,7 +160,7 @@ export const useUpdateAccounting = () => {
 }
 
 export const useFinalUnlockSchedules = () => {
-  const { web3, accountAddress } = useProvider()
+  const { nonConnectedWeb3: web3, accountAddress } = useProvider()
   const { data, error } = useSWR<undefined | UnwrapFunc<typeof finalUnlockSchedules>, Error>(
     SWRCachePath.getFinalUnlockSchedules(accountAddress),
     () => whenDefined(web3, x => finalUnlockSchedules(x))
@@ -295,7 +299,7 @@ export const useRewardMultiplier = () => {
 }
 
 export const useTotalStakedFor = () => {
-  const { web3, accountAddress } = useProvider()
+  const { nonConnectedWeb3: web3, accountAddress } = useProvider()
   const { data, error, mutate } = useSWR<UnwrapFunc<typeof totalStakedFor> | undefined, Error>(
     SWRCachePath.totalStakedFor(accountAddress),
     () => whenDefined(accountAddress, address => whenDefined(web3, x => totalStakedFor(x, address)))

@@ -32,7 +32,7 @@ import { useProvider } from 'src/fixtures/wallet/hooks'
 import { useCurrency } from 'src/fixtures/currency/functions/useCurrency'
 
 export const useGetTotalRewardsAmount = (propertyAddress: string) => {
-  const { web3, accountAddress } = useProvider()
+  const { nonConnectedWeb3: web3, accountAddress } = useProvider()
   const { currency, toCurrency } = useCurrency()
   const { data, error } = useSWR<undefined | UnwrapFunc<typeof getRewardsAmount>, Error>(
     SWRCachePath.getTotalRewardsAmount(propertyAddress, accountAddress),
@@ -82,7 +82,7 @@ export const useGetMyHolderAmount = (propertyAddress: string) => {
 }
 
 export const useGetTotalStakingAmount = (propertyAddress: string) => {
-  const { web3, accountAddress } = useProvider()
+  const { nonConnectedWeb3: web3, accountAddress } = useProvider()
   const { currency, toCurrency } = useCurrency()
   const { data, error } = useSWR<UnwrapFunc<typeof getTotalStakingAmount>, Error>(
     SWRCachePath.getTotalStakingAmount(propertyAddress, accountAddress),
@@ -226,7 +226,7 @@ export const useTotalStakingAmountOnProtocol = () => {
 }
 
 export const useTotalStakingRatio = () => {
-  const { web3, accountAddress } = useProvider()
+  const { nonConnectedWeb3: web3, accountAddress } = useProvider()
   const { data: totalSupplyValue, error: totalSupplyError } = useSWR<UnwrapFunc<typeof totalSupply>, Error>(
     SWRCachePath.totalSupply(accountAddress),
     () => whenDefined(web3, x => totalSupply(x)),
@@ -397,7 +397,7 @@ export const useCreateAndAuthenticate = () => {
 }
 
 export const useAPY = () => {
-  const { web3, accountAddress } = useProvider()
+  const { nonConnectedWeb3: web3, accountAddress } = useProvider()
   const { data: maxRewards, error: maxRewardsError } = useSWR<UnwrapFunc<typeof calculateMaxRewardsPerBlock>, Error>(
     SWRCachePath.calculateMaxRewardsPerBlock(accountAddress),
     () => whenDefined(web3, x => calculateMaxRewardsPerBlock(x).catch(() => '0')),
@@ -432,7 +432,7 @@ export const useAPY = () => {
 }
 
 export const useTotalSupply = () => {
-  const { web3, accountAddress } = useProvider()
+  const { nonConnectedWeb3: web3, accountAddress } = useProvider()
   const { data: totalSupplyValue, error } = useSWR<UnwrapFunc<typeof totalSupply>, Error>(
     SWRCachePath.totalSupply(accountAddress),
     () => whenDefined(web3, x => totalSupply(x)),
@@ -463,7 +463,7 @@ export const useCirculatingSupply = () => {
 }
 
 export const useAnnualSupplyGrowthRatio = () => {
-  const { web3, accountAddress } = useProvider()
+  const { nonConnectedWeb3: web3, accountAddress } = useProvider()
   const { data: maxRewards, error: maxRewardsError } = useSWR<UnwrapFunc<typeof calculateMaxRewardsPerBlock>, Error>(
     SWRCachePath.calculateMaxRewardsPerBlock(accountAddress),
     () => whenDefined(web3, x => calculateMaxRewardsPerBlock(x).catch(() => '0')),
@@ -486,7 +486,7 @@ export const useAnnualSupplyGrowthRatio = () => {
 }
 
 export const useGetPolicyAddressesList = () => {
-  const { web3 } = useProvider()
+  const { nonConnectedWeb3: web3 } = useProvider()
   const key = 'useGetPolicyList'
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [error, setError] = useState<Error>()

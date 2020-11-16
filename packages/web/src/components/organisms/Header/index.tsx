@@ -3,7 +3,7 @@ import * as React from 'react'
 import { BrandLogo } from 'src/components/atoms/BrandLogo'
 // imp ort { useConnectWallet } from 'src/fixtures/wallet/hooks'
 import styled from 'styled-components'
-import { Navigation } from 'src/components/molecules/Navigation'
+import { Navigation, Navigations } from 'src/components/molecules/Navigation'
 import { useState } from 'react'
 import Link from 'next/link'
 
@@ -56,29 +56,6 @@ const ResponsiveWrap = styled.div`
   }
 `
 
-const navs = [
-  {
-    key: 'pools',
-    label: 'Pools',
-    pathname: '/'
-  },
-  {
-    key: 'create',
-    label: 'Create',
-    pathname: '/auth'
-  },
-  {
-    key: 'governance',
-    label: 'Govern',
-    pathname: '/policy'
-  },
-  {
-    key: 'dashboard',
-    label: 'Dashboard',
-    pathname: '/stats'
-  }
-]
-
 const NavigationItem = styled.div`
   padding: 5px 0;
   border-top: 1px solid;
@@ -105,14 +82,12 @@ export const Header = ({ colorSchema = 'white' }: Props = {}) => {
         </Top>
         {isMenuOpen && (
           <NavigationMenu>
-            {navs.map(nav => (
-              <>
-                <NavigationItem key={nav.key}>
-                  <Link href={nav.pathname}>
-                    <a>{nav.label}</a>
-                  </Link>
-                </NavigationItem>
-              </>
+            {Navigations.map(nav => (
+              <NavigationItem key={nav.key}>
+                <Link href={nav.pathname}>
+                  <a>{nav.label}</a>
+                </Link>
+              </NavigationItem>
             ))}
           </NavigationMenu>
         )}
