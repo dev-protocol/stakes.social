@@ -7,16 +7,21 @@ exports[`AssetList Snapshot 1`] = `
       class="sc-17dikip-0 dFeHQH"
     >
       <div
-        class="hzc567-1 jJDlWb sc-17dikip-1 cROPlx"
+        class="hzc567-1 bPLVas sc-17dikip-1 cROPlx"
       >
-        <div
-          class="sc-2tazhb-0 floQve"
-        />
-        <h3
-          class="sc-1w8sy4l-2 hzc567-4 gdOONv lfaQrh"
+        <a
+          class="hzc567-2 hzc567-4 QbOgQ gbmhAv"
+          href="/1"
         >
-          1-name
-        </h3>
+          <div
+            class="sc-2tazhb-0 floQve"
+          />
+          <h3
+            class="sc-1w8sy4l-2 gdOONv"
+          >
+            1-name
+          </h3>
+        </a>
         <div
           class="ant-statistic hzc567-0 hzc567-5 bWyUkR keQvYD"
         >
@@ -74,7 +79,7 @@ exports[`AssetList Snapshot 1`] = `
           </div>
         </div>
         <div
-          class="hzc567-2 hzc567-7 ckRZOi frZjZU"
+          class="hzc567-3 hzc567-7 jtNtWj frZjZU"
         >
           <button
             class="ant-btn sc-1ho13tb-0 EDnks"
@@ -89,16 +94,21 @@ exports[`AssetList Snapshot 1`] = `
         </div>
       </div>
       <div
-        class="hzc567-1 jJDlWb sc-17dikip-1 cROPlx"
+        class="hzc567-1 bPLVas sc-17dikip-1 cROPlx"
       >
-        <div
-          class="sc-2tazhb-0 floQve"
-        />
-        <h3
-          class="sc-1w8sy4l-2 hzc567-4 gdOONv lfaQrh"
+        <a
+          class="hzc567-2 hzc567-4 QbOgQ gbmhAv"
+          href="/2"
         >
-          2-name
-        </h3>
+          <div
+            class="sc-2tazhb-0 floQve"
+          />
+          <h3
+            class="sc-1w8sy4l-2 gdOONv"
+          >
+            2-name
+          </h3>
+        </a>
         <div
           class="ant-statistic hzc567-0 hzc567-5 bWyUkR keQvYD"
         >
@@ -156,7 +166,7 @@ exports[`AssetList Snapshot 1`] = `
           </div>
         </div>
         <div
-          class="hzc567-2 hzc567-7 ckRZOi frZjZU"
+          class="hzc567-3 hzc567-7 jtNtWj frZjZU"
         >
           <button
             class="ant-btn sc-1ho13tb-0 EDnks"
@@ -171,16 +181,21 @@ exports[`AssetList Snapshot 1`] = `
         </div>
       </div>
       <div
-        class="hzc567-1 jJDlWb sc-17dikip-1 cROPlx"
+        class="hzc567-1 bPLVas sc-17dikip-1 cROPlx"
       >
-        <div
-          class="sc-2tazhb-0 floQve"
-        />
-        <h3
-          class="sc-1w8sy4l-2 hzc567-4 gdOONv lfaQrh"
+        <a
+          class="hzc567-2 hzc567-4 QbOgQ gbmhAv"
+          href="/3"
         >
-          3-name
-        </h3>
+          <div
+            class="sc-2tazhb-0 floQve"
+          />
+          <h3
+            class="sc-1w8sy4l-2 gdOONv"
+          >
+            3-name
+          </h3>
+        </a>
         <div
           class="ant-statistic hzc567-0 hzc567-5 bWyUkR keQvYD"
         >
@@ -238,7 +253,7 @@ exports[`AssetList Snapshot 1`] = `
           </div>
         </div>
         <div
-          class="hzc567-2 hzc567-7 ckRZOi frZjZU"
+          class="hzc567-3 hzc567-7 jtNtWj frZjZU"
         >
           <button
             class="ant-btn sc-1ho13tb-0 EDnks"

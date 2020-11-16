@@ -1,4 +1,5 @@
 import { Button, Statistic } from 'antd'
+import Link from 'next/link'
 import React from 'react'
 import { ButtonWithGradient } from 'src/components/atoms/ButtonWithGradient'
 import { H3 } from 'src/components/atoms/Typography'
@@ -35,27 +36,30 @@ const Wrap = styled.div`
   gap: 1rem;
   align-items: center;
   grid-template-areas:
-    'avatar name name name'
-    'stake stake totalStake totalStake'
-    'buttons buttons buttons buttons';
-  grid-template-columns: repeat(4, 1fr);
+    'avatar avatar'
+    'stake totalStake'
+    'buttons buttons';
+  grid-template-columns: repeat(2, 1fr);
   @media (min-width: 768px) {
-    grid-template-areas: 'avatar name stake totalStake buttons';
-    grid-template-columns: 1fr 2fr 2fr 2fr 240px;
+    grid-template-areas: 'avatar stake totalStake buttons';
+    grid-template-columns: 1fr 1fr 1fr 240px;
   }
 `
 
+const AvatarWrap = styled.a`
+  display: grid;
+  gap: 1rem;
+  align-items: center;
+  grid-template-columns: 1fr 5fr;
+`
 const ButtonsWrap = styled.div`
   display: grid;
   gap: 1rem;
   align-items: center;
   grid-auto-flow: column;
 `
-const GridAvatar = styled(AvatarProperty)`
+const GridAvatar = styled(AvatarWrap)`
   grid-area: avatar;
-`
-const GridName = styled(H3)`
-  grid-area: name;
 `
 const GridStake = styled(StyledStatistic)`
   grid-area: stake;
@@ -88,8 +92,12 @@ export const AssetItemOnList = ({
 
   return (
     <Wrap className={className}>
-      <GridAvatar propertyAddress={propertyAddress} size={90} />
-      <GridName>{propertyName}</GridName>
+      <Link href={'/[propertyAddress]'} as={`/${propertyAddress}`} passHref>
+        <GridAvatar>
+          <AvatarProperty propertyAddress={propertyAddress} size={90} />
+          <H3>{propertyName}</H3>
+        </GridAvatar>
+      </Link>
       <GridStake
         title="Your Stake"
         value={myStakingAmount?.dp(2).toNumber() || 'N/A'}
