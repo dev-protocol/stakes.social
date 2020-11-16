@@ -13,7 +13,7 @@ const SignIn = () => {
   )
 }
 
-export const EmptyToConnect = (props: EmptyProps) => {
+export const NotConnectedAndEmpty = (props: EmptyProps) => {
   const { isConnected } = useConnectWallet()
   const description = isConnected ? 'No Data' : 'Please signing in'
 

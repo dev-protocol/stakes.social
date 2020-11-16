@@ -4,7 +4,7 @@ import { Pagination, Skeleton } from 'antd'
 import { AssetItemOnList } from '../AssetItemOnList'
 import { ResponsiveModal } from 'src/components/atoms/ResponsiveModal'
 import { TransactModalContents } from '../TransactModalContents'
-import { EmptyToConnect } from 'src/components/atoms/EmptyToConnect'
+import { NotConnectedAndEmpty } from 'src/components/atoms/NotConnectedAndEmpty'
 
 interface Props {
   className?: string
@@ -85,7 +85,7 @@ export const AssetList = ({
           ></Item>
         ))
       ) : (
-        <EmptyToConnect />
+        <NotConnectedAndEmpty description="Assets not found" />
       )}
       <ResponsiveModal visible={modalStates.visible} title={modalStates.title} onCancel={closeModal} footer={null}>
         {modalStates.contents}
