@@ -1,9 +1,10 @@
 import React, { useCallback, useState } from 'react'
 import styled from 'styled-components'
-import { Empty, Pagination, Skeleton } from 'antd'
+import { Pagination, Skeleton } from 'antd'
 import { AssetItemOnList } from '../AssetItemOnList'
 import { ResponsiveModal } from 'src/components/atoms/ResponsiveModal'
 import { TransactModalContents } from '../TransactModalContents'
+import { EmptyToConnect } from 'src/components/atoms/EmptyToConnect'
 
 interface Props {
   className?: string
@@ -84,7 +85,7 @@ export const AssetList = ({
           ></Item>
         ))
       ) : (
-        <Empty />
+        <EmptyToConnect />
       )}
       <ResponsiveModal visible={modalStates.visible} title={modalStates.title} onCancel={closeModal} footer={null}>
         {modalStates.contents}
