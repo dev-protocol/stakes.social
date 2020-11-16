@@ -17,7 +17,7 @@ interface NavigationProps {
   handleMenuOpen: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const navs = [
+export const Navigations = [
   {
     key: 'pools',
     label: 'Pools',
@@ -51,11 +51,11 @@ const navItemAccount = {
   pathname: '/settings/profile'
 }
 
-const toKey = (_pathname: string) => navs.find(({ pathname }) => pathname === _pathname)?.key
+const toKey = (_pathname: string) => Navigations.find(({ pathname }) => pathname === _pathname)?.key
 
 export const Navigation = ({ handleMenuOpen }: NavigationProps) => {
   const router = useRouter()
-  const [current, setCurrent] = useState(toKey(router?.pathname) || navs[0].key)
+  const [current, setCurrent] = useState(toKey(router?.pathname) || Navigations[0].key)
   const [isDesktop, setDesktop] = useState(typeof window !== 'undefined' && window?.innerWidth > 1024)
   const { isConnected, connect, isConnecting } = useConnectWallet()
   const { web3Modal } = useContext(WalletContext)
@@ -105,7 +105,7 @@ export const Navigation = ({ handleMenuOpen }: NavigationProps) => {
           selectedKeys={[current]}
           mode="horizontal"
         >
-          {navs.map(nav => (
+          {Navigations.map(nav => (
             <NavMenuItem color="deeppink" key={nav.key}>
               <Link href={nav.pathname}>
                 <a>{nav.label}</a>

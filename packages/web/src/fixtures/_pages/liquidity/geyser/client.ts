@@ -11,13 +11,14 @@ const { execute } = utils
 const client: Map<string, Contract> = new Map()
 
 export const getContract = (web3: Web3, contractAddress = GEYSER_ETHDEV_V2_ADDRESS): Contract => {
-  const stored = client.get(contractAddress)
+  const clientCacheKey = `${contractAddress}_${web3?.currentProvider}`
+  const stored = client.get(clientCacheKey)
   if (stored) {
     return stored
   }
 
   const contract = (createContract(abi, contractAddress, web3) as unknown) as Contract
-  client.set(contractAddress, contract)
+  client.set(clientCacheKey, contract)
 
   return contract
 }
