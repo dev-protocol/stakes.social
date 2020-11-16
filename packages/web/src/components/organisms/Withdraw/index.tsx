@@ -2,7 +2,7 @@ import React, { useCallback, useState, useEffect, ChangeEvent } from 'react'
 import { useProvider } from 'src/fixtures/wallet/hooks'
 import { getMyStakingAmount } from 'src/fixtures/dev-kit/client'
 import { useWithdrawStaking, useGetMyStakingAmount, useGetMyStakingRewardAmount } from 'src/fixtures/dev-kit/hooks'
-import { toAmountNumber, toBigNumber, toNaturalNumber, whenDefined } from 'src/fixtures/utility'
+import { toAmountNumber, toBigNumber, toNaturalNumber, whenDefined, whenDefinedAll } from 'src/fixtures/utility'
 import { TransactForm } from 'src/components/molecules/TransactForm'
 
 interface Props {
@@ -18,7 +18,7 @@ export const Withdraw = ({ className, title, propertyAddress }: Props) => {
   const [withdrawableTokens, setWithdrawableTokens] = useState<string>('')
   const { myStakingRewardAmount } = useGetMyStakingRewardAmount(propertyAddress)
   const { myStakingAmount } = useGetMyStakingAmount(propertyAddress)
-  const { web3 } = useProvider()
+  const { web3, accountAddress } = useProvider()
   const { withdrawStaking } = useWithdrawStaking()
   const withdrawFor = useCallback(
     (amount: string) => {
@@ -30,8 +30,8 @@ export const Withdraw = ({ className, title, propertyAddress }: Props) => {
     setWithdrawAmount(event.target.value)
   }
   const onClickMax = () =>
-    whenDefined(web3, libWeb3 =>
-      getMyStakingAmount(libWeb3, propertyAddress)
+    whenDefinedAll([web3, accountAddress], ([libWeb3, account]) =>
+      getMyStakingAmount(libWeb3, propertyAddress, account)
         .then(async x => toNaturalNumber(x))
         .then(x => setWithdrawAmount(x.toFixed()))
     )

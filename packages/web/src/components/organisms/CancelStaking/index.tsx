@@ -2,7 +2,7 @@ import React, { useCallback } from 'react'
 import { useWithdrawStaking } from 'src/fixtures/dev-kit/hooks'
 import { CancelForm } from 'src/components/molecules/CancelForm'
 import { useProvider } from 'src/fixtures/wallet/hooks'
-import { whenDefined, toBigNumber } from 'src/fixtures/utility'
+import { toBigNumber, whenDefinedAll } from 'src/fixtures/utility'
 import { getMyStakingAmount } from 'src/fixtures/dev-kit/client'
 import { message } from 'antd'
 
@@ -13,11 +13,11 @@ interface Props {
 
 export const CancelStaking = ({ className, propertyAddress }: Props) => {
   const { withdrawStaking } = useWithdrawStaking()
-  const { web3 } = useProvider()
+  const { web3, accountAddress } = useProvider()
 
   const handleCancelStaking = useCallback(() => {
-    whenDefined(web3, x => {
-      getMyStakingAmount(x, propertyAddress).then(amount => {
+    whenDefinedAll([web3, accountAddress], ([x, account]) => {
+      getMyStakingAmount(x, propertyAddress, account).then(amount => {
         if (amount) {
           withdrawStaking(propertyAddress, toBigNumber(amount))
         } else {
@@ -25,7 +25,7 @@ export const CancelStaking = ({ className, propertyAddress }: Props) => {
         }
       })
     })
-  }, [propertyAddress, withdrawStaking, web3])
+  }, [propertyAddress, withdrawStaking, web3, accountAddress])
 
   return <CancelForm className={className} onClickCancel={handleCancelStaking} />
 }

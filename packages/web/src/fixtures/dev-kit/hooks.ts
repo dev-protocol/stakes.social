@@ -23,7 +23,14 @@ import {
   balanceOfProperty
 } from './client'
 import { SWRCachePath } from './cache-path'
-import { UnwrapFunc, toNaturalNumber, toAmountNumber, toBigNumber, whenDefined } from 'src/fixtures/utility'
+import {
+  UnwrapFunc,
+  toNaturalNumber,
+  toAmountNumber,
+  toBigNumber,
+  whenDefined,
+  whenDefinedAll
+} from 'src/fixtures/utility'
 import { getDevAmount } from 'src/fixtures/wallet/utility'
 import useSWR from 'swr'
 import { message } from 'antd'
@@ -76,7 +83,10 @@ export const useGetMyHolderAmount = (propertyAddress: string) => {
   const { web3, accountAddress } = useProvider()
   const { data, error } = useSWR<UnwrapFunc<typeof getMyHolderAmount>, Error>(
     SWRCachePath.getMyHolderAmount(propertyAddress, accountAddress),
-    () => whenDefined(web3, x => getMyHolderAmount(x, propertyAddress)),
+    () =>
+      whenDefinedAll([web3, accountAddress], ([client, account]) =>
+        getMyHolderAmount(client, propertyAddress, account)
+      ),
     { onError: err => message.error(err.message) }
   )
   return { myHolderAmount: data ? toNaturalNumber(data) : undefined, error }
@@ -98,7 +108,10 @@ export const useGetMyStakingRewardAmount = (propertyAddress: string) => {
   const { currency, toCurrency } = useCurrency()
   const { data, error } = useSWR<UnwrapFunc<typeof getMyStakingRewardAmount>, Error>(
     SWRCachePath.getMyStakingRewardAmount(propertyAddress, accountAddress),
-    () => whenDefined(web3, x => getMyStakingRewardAmount(x, propertyAddress)),
+    () =>
+      whenDefinedAll([web3, accountAddress], ([client, account]) =>
+        getMyStakingRewardAmount(client, propertyAddress, account)
+      ),
     {
       onError: err => message.error(err.message)
     }
@@ -117,7 +130,10 @@ export const useGetMyStakingAmount = (propertyAddress: string) => {
   const { currency, toCurrency } = useCurrency()
   const { data, error } = useSWR<UnwrapFunc<typeof getMyStakingAmount>, Error>(
     SWRCachePath.getMyStakingAmount(propertyAddress, accountAddress),
-    () => whenDefined(web3, x => getMyStakingAmount(x, propertyAddress)),
+    () =>
+      whenDefinedAll([web3, accountAddress], ([client, account]) =>
+        getMyStakingAmount(client, propertyAddress, account)
+      ),
     {
       onError: err => message.error(err.message)
     }
@@ -514,7 +530,7 @@ export const usePropertyAuthor = (propertyAddress?: string) => {
   const { web3, accountAddress } = useProvider()
   const { data, error } = useSWR<undefined | UnwrapFunc<typeof totalSupply>, Error>(
     SWRCachePath.propertyAuthor(propertyAddress, accountAddress),
-    () => whenDefined(propertyAddress, x => whenDefined(web3, client => propertyAuthor(client, x))),
+    () => whenDefinedAll([web3, propertyAddress], ([client, property]) => propertyAuthor(client, property)),
     {
       onError: err => message.error(err.message)
     }
@@ -527,7 +543,7 @@ export const useBalanceOf = () => {
   const { currency, toCurrency } = useCurrency()
   const { web3, accountAddress } = useProvider()
   const { data, error } = useSWR<BigNumber | undefined, Error>(SWRCachePath.balanceOf(accountAddress), () =>
-    whenDefined(web3, x => balanceOf(x).then(toBigNumber))
+    whenDefinedAll([web3, accountAddress], ([client, account]) => balanceOf(client, account).then(toBigNumber))
   )
   const humanizedDev = whenDefined(data, toNaturalNumber)
   const amount = toCurrency(humanizedDev)
@@ -538,12 +554,10 @@ export const useAllClaimedRewards = () => {
   const { currency, toCurrency } = useCurrency()
   const { web3, accountAddress } = useProvider()
   const { data, error } = useSWR<BigNumber | undefined, Error>(SWRCachePath.allClaimedRewards(accountAddress), () =>
-    whenDefined(web3, x =>
-      whenDefined(accountAddress, y =>
-        allClaimedRewards(x, y).then(allEvents => {
-          return allEvents.reduce((a, c) => a.plus(c.returnValues.value), toBigNumber(0))
-        })
-      )
+    whenDefinedAll([web3, accountAddress], ([client, account]) =>
+      allClaimedRewards(client, account).then(allEvents => {
+        return allEvents.reduce((a, c) => a.plus(c.returnValues.value), toBigNumber(0))
+      })
     )
   )
   const humanizedDev = whenDefined(data, toNaturalNumber)
@@ -556,7 +570,7 @@ export const usePropertyName = (propertyAddress?: string) => {
   const { web3, accountAddress } = useProvider()
   const { data, error } = useSWR<UnwrapFunc<typeof totalSupply>, Error>(
     SWRCachePath.propertyName(propertyAddress, accountAddress),
-    () => whenDefined(propertyAddress, property => whenDefined(web3, client => propertyName(client, property))),
+    () => whenDefinedAll([web3, propertyAddress], ([client, property]) => propertyName(client, property)),
     {
       onError: err => message.error(err.message)
     }
@@ -570,8 +584,8 @@ export const useBalanceOfProperty = (propertyAddress: string) => {
   const { data, error } = useSWR<BigNumber | undefined, Error>(
     SWRCachePath.balanceOfProperty(propertyAddress, accountAddress),
     () =>
-      whenDefined(web3, client =>
-        whenDefined(accountAddress, account => balanceOfProperty(client, propertyAddress, account).then(toBigNumber))
+      whenDefinedAll([web3, accountAddress], ([client, account]) =>
+        balanceOfProperty(client, propertyAddress, account).then(toBigNumber)
       )
   )
   return { balance: data, error }
