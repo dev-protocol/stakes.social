@@ -1,15 +1,12 @@
-import React from 'react'
-import { Card, Input } from 'antd'
+import React, { useMemo } from 'react'
+import { Input } from 'antd'
 import styled from 'styled-components'
 import { Max } from 'src/components/molecules/Max'
 import { SearchProps } from 'antd/lib/input'
-import { always } from 'ramda'
 import { ButtonWithGradient } from 'src/components/atoms/ButtonWithGradient'
 
 type Props = SearchProps &
   React.RefAttributes<Input> & {
-    estimateTitle: string
-    estimatedValue: string | React.ReactNode
     onClickMax?: () => void
   }
 
@@ -43,30 +40,13 @@ const StyledForm = styled(Input.Search)`
   }
 `
 
-const FormContainer = styled.div`
+const Wrap = styled.div`
   display: grid;
-  grid-gap: 1rem;
-  label {
-    font-size: 1.2rem;
-  }
 `
 
-const Estimated = styled(Card)`
-  border-color: #00000055;
-  background: transparent;
-  .ant-card-head {
-    padding: 0 1.5rem;
-  }
-  .ant-card-head-title {
-    font-size: 0.5rem 0;
-  }
-  .ant-card-body {
-    font-size: 1.4rem;
-    padding: 1rem 1.5rem;
-  }
-  p {
-    margin: 0;
-  }
+const StyledButtonWithGradient = styled(ButtonWithGradient)`
+  font-size: 1.6rem;
+  height: 100%;
 `
 
 export const TransactForm = ({
@@ -76,16 +56,34 @@ export const TransactForm = ({
   value,
   onChange,
   onSearch,
-  suffix,
+  suffix: _suffix,
   onClickMax,
   id,
-  estimateTitle,
-  estimatedValue
+  placeholder
 }: Props) => {
-  const onClick = onSearch ? () => onSearch('') : always(undefined)
+  const onClick = useMemo(() => (onSearch ? () => onSearch('') : () => undefined), [onSearch])
+  const suffix = useMemo(
+    () => (
+      <>
+        {_suffix}
+        {onClickMax ? <Max onClick={onClickMax} /> : undefined}
+      </>
+    ),
+    [_suffix, onClickMax]
+  )
+  const Label = useMemo(() => (title ? () => <label htmlFor={id}>{title}</label> : () => <></>), [id, title])
+  const OnlyButton = useMemo(
+    () => (
+      <StyledButtonWithGradient size="large" onClick={onClick}>
+        {enterButton}
+      </StyledButtonWithGradient>
+    ),
+    [onClick, enterButton]
+  )
+
   return (
-    <FormContainer className={className}>
-      {title ? <label htmlFor={id}>{title}</label> : undefined}
+    <Wrap className={className}>
+      <Label />
       {onChange ? (
         <StyledForm
           id={id}
@@ -94,20 +92,13 @@ export const TransactForm = ({
           value={value}
           onChange={onChange}
           onSearch={onSearch}
-          suffix={
-            <>
-              {suffix}
-              {onClickMax ? <Max onClick={onClickMax} /> : undefined}
-            </>
-          }
+          suffix={suffix}
           type="number"
+          placeholder={placeholder}
         />
       ) : (
-        <ButtonWithGradient size="large" onClick={onClick}>
-          {enterButton}
-        </ButtonWithGradient>
+        OnlyButton
       )}
-      <Estimated title={estimateTitle}>{estimatedValue}</Estimated>
-    </FormContainer>
+    </Wrap>
   )
 }

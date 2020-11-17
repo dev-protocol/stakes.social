@@ -4,6 +4,8 @@ import { balanceOf } from 'src/fixtures/dev-kit/client'
 import { useStake, useAPY } from 'src/fixtures/dev-kit/hooks'
 import { toNaturalNumber, whenDefined, whenDefinedAll } from 'src/fixtures/utility'
 import { TransactForm } from 'src/components/molecules/TransactForm'
+import { FormContainer } from 'src/components/molecules/TransactForm/FormContainer'
+import { Estimated } from 'src/components/molecules/TransactForm/Estimated'
 
 interface Props {
   className?: string
@@ -39,18 +41,19 @@ export const Stake = ({ className, title, propertyAddress }: Props) => {
   }, [apy, stakeAmount, setEstimatedStakingAPY])
 
   return (
-    <TransactForm
-      className={className}
-      title={title}
-      id="stake"
-      enterButton="Stake"
-      value={stakeAmount}
-      onChange={onChange}
-      onSearch={stakeFor}
-      suffix="DEV"
-      onClickMax={onClickMax}
-      estimateTitle="Estimated Annual Reward"
-      estimatedValue={<p>{estimatedStakingAPY || 0} DEV</p>}
-    ></TransactForm>
+    <FormContainer>
+      <TransactForm
+        className={className}
+        title={title}
+        id="stake"
+        enterButton="Stake"
+        value={stakeAmount}
+        onChange={onChange}
+        onSearch={stakeFor}
+        suffix="DEV"
+        onClickMax={onClickMax}
+      ></TransactForm>
+      <Estimated title="Estimated Annual Reward">{<p>{estimatedStakingAPY || 0} DEV</p>}</Estimated>
+    </FormContainer>
   )
 }

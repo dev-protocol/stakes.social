@@ -4,34 +4,12 @@ exports[`TransactForm Snapshot 1`] = `
 <body>
   <div>
     <div
-      class="sc-1d8aayd-1 hozPOf"
+      class="sc-1d8aayd-1 lldfxv"
     >
       <button
-        class="ant-btn ant-btn-lg sc-1ho13tb-0 EDnks"
+        class="ant-btn ant-btn-lg sc-1ho13tb-0 sc-1d8aayd-2 EDnks VzRMQ"
         type="button"
       />
-      <div
-        class="ant-card ant-card-bordered sc-1d8aayd-2 cnjKQM"
-      >
-        <div
-          class="ant-card-head"
-        >
-          <div
-            class="ant-card-head-wrapper"
-          >
-            <div
-              class="ant-card-head-title"
-            >
-              Test
-            </div>
-          </div>
-        </div>
-        <div
-          class="ant-card-body"
-        >
-          test
-        </div>
-      </div>
     </div>
   </div>
 </body>
