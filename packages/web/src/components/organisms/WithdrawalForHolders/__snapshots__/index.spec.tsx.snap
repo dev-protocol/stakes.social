@@ -1,41 +1,22 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Withdraw Snapshot 1`] = `
+exports[`WithdrawalForHolders Snapshot 1`] = `
 <body>
   <div>
     <div
       class="sc-89297o-0 LrdOg"
     >
       <div
-        class="sc-1al8l63-0 brBwXr"
+        class="sc-1d8aayd-1 lldfxv"
       >
         <button
-          aria-checked="false"
-          class="ant-switch"
-          role="switch"
+          class="ant-btn ant-btn-lg sc-1ho13tb-0 sc-1d8aayd-2 EDnks VzRMQ"
           type="button"
         >
-          <div
-            class="ant-switch-handle"
-          />
-          <span
-            class="ant-switch-inner"
-          >
-            Stake
+          <span>
+            Withdraw
           </span>
         </button>
-        <div
-          class="sc-1d8aayd-1 lldfxv"
-        >
-          <button
-            class="ant-btn ant-btn-lg sc-1ho13tb-0 sc-1d8aayd-2 EDnks VzRMQ"
-            type="button"
-          >
-            <span>
-              Withdraw
-            </span>
-          </button>
-        </div>
       </div>
       <div
         class="ant-card ant-card-bordered sc-1lowp9k-0 dtNkpz"
@@ -49,7 +30,7 @@ exports[`Withdraw Snapshot 1`] = `
             <div
               class="ant-card-head-title"
             >
-              Withdrawable Reward Amount
+              Withdrawable Amount
             </div>
           </div>
         </div>
@@ -57,7 +38,7 @@ exports[`Withdraw Snapshot 1`] = `
           class="ant-card-body"
         >
           <p>
-            5000
+            6000
              DEV
           </p>
         </div>

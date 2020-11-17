@@ -11,6 +11,7 @@ import { Statistics } from 'src/components/_pages/portfolio/Statistics'
 import { Divider } from 'antd'
 import { YourStakes } from 'src/components/_pages/portfolio/YourStakes'
 import { useProvider } from 'src/fixtures/wallet/hooks'
+import { YourPools } from 'src/components/_pages/portfolio/YourPools'
 
 const PortfolioHeader = styled.div`
   display: grid;
@@ -65,6 +66,8 @@ const Portfolio = () => {
         <Heading>Your Stakes</Heading>
         <YourStakes accountAddress={accountAddress} />
         <Divider type="horizontal" />
+        <Heading>Your Pools</Heading>
+        <YourPools accountAddress={accountAddress} />
       </StyledContainer>
       <Footer />
     </>

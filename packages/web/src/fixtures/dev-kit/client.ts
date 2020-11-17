@@ -1,7 +1,6 @@
 import Web3 from 'web3'
 import { EventData } from 'web3-eth-contract'
 import { contractFactory } from '@devprtcl/dev-kit-js'
-import { getAccountAddress } from 'src/fixtures/wallet/utility'
 import { getContractAddress } from './get-contract-address'
 import { client as devClient } from '@devprtcl/dev-kit-js'
 import BigNumber from 'bignumber.js'
@@ -34,9 +33,8 @@ export const getTotalStakingAmountOnProtocol = async (web3: Web3) => {
   return undefined
 }
 
-export const getMyHolderAmount = async (web3: Web3, propertyAddress: string) => {
+export const getMyHolderAmount = async (web3: Web3, propertyAddress: string, accountAddress: string) => {
   const client = newClient(web3)
-  const accountAddress = await getAccountAddress(web3)
   if (client && accountAddress) {
     return client
       .withdraw(await getContractAddress(client, 'withdraw'))
@@ -45,9 +43,8 @@ export const getMyHolderAmount = async (web3: Web3, propertyAddress: string) => 
   return undefined
 }
 
-export const getMyStakingRewardAmount = async (web3: Web3, propertyAddress: string) => {
+export const getMyStakingRewardAmount = async (web3: Web3, propertyAddress: string, accountAddress: string) => {
   const client = newClient(web3)
-  const accountAddress = await getAccountAddress(web3)
   if (client && accountAddress) {
     return client
       .lockup(await getContractAddress(client, 'lockup'))
@@ -56,9 +53,8 @@ export const getMyStakingRewardAmount = async (web3: Web3, propertyAddress: stri
   return undefined
 }
 
-export const getMyStakingAmount = async (web3: Web3, propertyAddress: string) => {
+export const getMyStakingAmount = async (web3: Web3, propertyAddress: string, accountAddress: string) => {
   const client = newClient(web3)
-  const accountAddress = await getAccountAddress(web3)
   if (client && accountAddress) {
     return client.lockup(await getContractAddress(client, 'lockup')).getValue(propertyAddress, accountAddress)
   }
@@ -187,9 +183,8 @@ export const propertyName = async (web3: Web3, propertyAddress: string): Promise
   return undefined
 }
 
-export const balanceOf = async (web3: Web3) => {
+export const balanceOf = async (web3: Web3, accountAddress: string) => {
   const client = newClient(web3)
-  const accountAddress = await getAccountAddress()
   if (client && accountAddress) {
     return client.dev(await getContractAddress(client, 'token')).balanceOf(accountAddress)
   }
@@ -209,4 +204,12 @@ export const allClaimedRewards = async (web3: Web3, accountAddress: string): Pro
       })
   }
   return []
+}
+
+export const balanceOfProperty = async (web3: Web3, propertyAddress: string, accountAddress: string) => {
+  const client = newClient(web3)
+  if (client && accountAddress) {
+    return client.property(propertyAddress).contract().methods.balanceOf(accountAddress).call()
+  }
+  return undefined
 }

@@ -1,9 +1,13 @@
-import React, { useCallback, useState, useEffect, ChangeEvent } from 'react'
+import React, { useCallback, useState, useMemo, useEffect, ChangeEvent } from 'react'
 import { useProvider } from 'src/fixtures/wallet/hooks'
 import { getMyStakingAmount } from 'src/fixtures/dev-kit/client'
 import { useWithdrawStaking, useGetMyStakingAmount, useGetMyStakingRewardAmount } from 'src/fixtures/dev-kit/hooks'
-import { toAmountNumber, toBigNumber, toNaturalNumber, whenDefined } from 'src/fixtures/utility'
+import { toAmountNumber, toBigNumber, toNaturalNumber, whenDefined, whenDefinedAll } from 'src/fixtures/utility'
 import { TransactForm } from 'src/components/molecules/TransactForm'
+import styled from 'styled-components'
+import { Switch } from 'antd'
+import { FormContainer } from 'src/components/molecules/TransactForm/FormContainer'
+import { Estimated } from 'src/components/molecules/TransactForm/Estimated'
 
 interface Props {
   className?: string
@@ -11,14 +15,23 @@ interface Props {
   propertyAddress: string
 }
 
+const Wrap = styled.div`
+  display: grid;
+  gap: 0.5rem;
+  justify-content: stretch;
+  align-items: center;
+  grid-template-columns: auto 1fr;
+`
+
 export const Withdraw = ({ className, title, propertyAddress }: Props) => {
+  const [withdrawBoth, setWithdrawBoth] = useState<boolean>(false)
   const [withdrawAmount, setWithdrawAmount] = useState<string>('')
   const [claimedTokens, setClaimedTokens] = useState<string | undefined>()
   const [interestTokens, setInterestTokens] = useState<string | undefined>()
   const [withdrawableTokens, setWithdrawableTokens] = useState<string>('')
   const { myStakingRewardAmount } = useGetMyStakingRewardAmount(propertyAddress)
   const { myStakingAmount } = useGetMyStakingAmount(propertyAddress)
-  const { web3 } = useProvider()
+  const { web3, accountAddress } = useProvider()
   const { withdrawStaking } = useWithdrawStaking()
   const withdrawFor = useCallback(
     (amount: string) => {
@@ -26,15 +39,42 @@ export const Withdraw = ({ className, title, propertyAddress }: Props) => {
     },
     [withdrawStaking, propertyAddress]
   )
-  const onChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setWithdrawAmount(event.target.value)
+  const onChangeSwitch = (checked: boolean) => {
+    setWithdrawBoth(checked)
+    setWithdrawAmount('')
   }
   const onClickMax = () =>
-    whenDefined(web3, libWeb3 =>
-      getMyStakingAmount(libWeb3, propertyAddress)
+    whenDefinedAll([web3, accountAddress], ([libWeb3, account]) =>
+      getMyStakingAmount(libWeb3, propertyAddress, account)
         .then(async x => toNaturalNumber(x))
         .then(x => setWithdrawAmount(x.toFixed()))
     )
+  const onChange = useMemo(
+    () =>
+      withdrawBoth
+        ? (event: ChangeEvent<HTMLInputElement>) => {
+            setWithdrawAmount(event.target.value)
+          }
+        : undefined,
+    [withdrawBoth, setWithdrawAmount]
+  )
+  const suffix = useMemo(() => (Number(withdrawAmount) ? 'DEV' : ''), [withdrawAmount])
+  const estimatedTitle = useMemo(() => (withdrawBoth ? 'Staked and Reward Amount' : 'Withdrawable Reward Amount'), [
+    withdrawBoth
+  ])
+  const estimatedValue = useMemo(
+    () =>
+      withdrawBoth ? (
+        <p>
+          {withdrawableTokens || 0} DEV{' '}
+          {claimedTokens && interestTokens ? `(${claimedTokens} + ${interestTokens})` : ''}
+        </p>
+      ) : (
+        <p>{withdrawableTokens || 0} DEV</p>
+      ),
+    [withdrawBoth, withdrawableTokens, claimedTokens, interestTokens]
+  )
+  const Label = useMemo(() => (title ? () => <label htmlFor="withdraw">{title}</label> : () => <></>), [title])
 
   useEffect(() => {
     const reward = myStakingRewardAmount
@@ -47,23 +87,22 @@ export const Withdraw = ({ className, title, propertyAddress }: Props) => {
   }, [myStakingRewardAmount, myStakingAmount, withdrawAmount, setClaimedTokens])
 
   return (
-    <TransactForm
-      className={className}
-      title={title}
-      id="withdraw"
-      enterButton="Withdraw"
-      value={withdrawAmount}
-      onChange={onChange}
-      onSearch={withdrawFor}
-      suffix="DEV"
-      onClickMax={onClickMax}
-      estimateTitle="Withdrawable Amount"
-      estimatedValue={
-        <p>
-          {withdrawableTokens || 0} DEV{' '}
-          {claimedTokens && interestTokens ? `(${claimedTokens} + ${interestTokens})` : ''}
-        </p>
-      }
-    ></TransactForm>
+    <FormContainer>
+      <Label />
+      <Wrap>
+        <Switch unCheckedChildren="Stake" onChange={onChangeSwitch} />
+        <TransactForm
+          className={className}
+          id="withdraw"
+          enterButton="Withdraw"
+          value={withdrawAmount}
+          onChange={onChange}
+          onSearch={withdrawFor}
+          suffix={suffix}
+          onClickMax={onClickMax}
+        ></TransactForm>
+      </Wrap>
+      <Estimated title={estimatedTitle}>{estimatedValue}</Estimated>
+    </FormContainer>
   )
 }
