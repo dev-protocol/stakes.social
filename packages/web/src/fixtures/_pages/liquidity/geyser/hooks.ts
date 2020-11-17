@@ -19,7 +19,15 @@ import {
 } from './client'
 import { useCallback, useState } from 'react'
 import { message } from 'antd'
-import { getUTC, toBigNumber, toEVMBigNumber, toNaturalNumber, UnwrapFunc, whenDefined } from 'src/fixtures/utility'
+import {
+  getUTC,
+  toBigNumber,
+  toEVMBigNumber,
+  toNaturalNumber,
+  UnwrapFunc,
+  whenDefined,
+  whenDefinedAll
+} from 'src/fixtures/utility'
 import { INITIAL_SHARES_PER_TOKEN, ONE_MONTH_SECONDS, SYSTEM_SETTIMEOUT_MAXIMUM_DELAY_VALUE } from '../constants/number'
 import { getBlock } from 'src/fixtures/wallet/utility'
 import { useProvider } from 'src/fixtures/wallet/hooks'
@@ -42,10 +50,10 @@ const getTokensLocked = (client: Web3) => () =>
   })
 
 export const useTotalRewards = () => {
-  const { nonConnectedWeb3: web3 } = useProvider()
+  const { nonConnectedWeb3 } = useProvider()
   const { data, error } = useSWR<BigNumber, Error>(
     SWRCachePath.allTokensLocked,
-    whenDefined(web3, x => getTokensLocked(x))
+    whenDefined(nonConnectedWeb3, x => getTokensLocked(x))
   )
   return {
     data,
@@ -112,10 +120,10 @@ export const useUnstake = () => {
 }
 
 export const useAllTokensClaimed = () => {
-  const { nonConnectedWeb3: web3, accountAddress } = useProvider()
+  const { nonConnectedWeb3, accountAddress } = useProvider()
   const { data, error } = useSWR<BigNumber, Error>(
     SWRCachePath.useAllTokensClaimed(accountAddress),
-    whenDefined(web3, x => getAllTokensClaimed(x))
+    whenDefined(nonConnectedWeb3, x => getAllTokensClaimed(x))
   )
   return {
     data,
@@ -124,10 +132,10 @@ export const useAllTokensClaimed = () => {
 }
 
 export const useTotalStakingShares = () => {
-  const { nonConnectedWeb3: web3, accountAddress } = useProvider()
+  const { nonConnectedWeb3, accountAddress } = useProvider()
   const { data, error } = useSWR<undefined | UnwrapFunc<typeof totalStakingShares>, Error>(
     SWRCachePath.getTotalStakingShares(accountAddress),
-    () => whenDefined(web3, x => totalStakingShares(x))
+    () => whenDefined(nonConnectedWeb3, x => totalStakingShares(x))
   )
   return {
     data,
@@ -136,10 +144,10 @@ export const useTotalStakingShares = () => {
 }
 
 export const useTotalStaked = () => {
-  const { nonConnectedWeb3: web3, accountAddress } = useProvider()
+  const { nonConnectedWeb3, accountAddress } = useProvider()
   const { data, error } = useSWR<undefined | UnwrapFunc<typeof totalStakingShares>, Error>(
     SWRCachePath.useTotalStaked(accountAddress),
-    () => whenDefined(web3, x => totalStaked(x))
+    () => whenDefined(nonConnectedWeb3, x => totalStaked(x))
   )
   return {
     data,
@@ -160,10 +168,10 @@ export const useUpdateAccounting = () => {
 }
 
 export const useFinalUnlockSchedules = () => {
-  const { nonConnectedWeb3: web3, accountAddress } = useProvider()
+  const { nonConnectedWeb3, accountAddress } = useProvider()
   const { data, error } = useSWR<undefined | UnwrapFunc<typeof finalUnlockSchedules>, Error>(
     SWRCachePath.getFinalUnlockSchedules(accountAddress),
-    () => whenDefined(web3, x => finalUnlockSchedules(x))
+    () => whenDefined(nonConnectedWeb3, x => finalUnlockSchedules(x))
   )
   return {
     data,
@@ -233,8 +241,8 @@ export const useIsAlreadyFinished = ([state, stateSetter]: [boolean, Dispatch<Se
   boolean,
   Dispatch<SetStateAction<boolean>>
 ] => {
-  const { web3 } = useProvider()
-  whenDefined(web3, x =>
+  const { nonConnectedWeb3 } = useProvider()
+  whenDefined(nonConnectedWeb3, x =>
     finalUnlockSchedules(x).then(res => {
       if (res === undefined) {
         return
@@ -251,16 +259,14 @@ export const useIsAlreadyFinished = ([state, stateSetter]: [boolean, Dispatch<Se
 }
 
 export const useRewardMultiplier = () => {
-  const { web3, accountAddress } = useProvider()
+  const { nonConnectedWeb3, accountAddress } = useProvider()
   const { data: block, error: errorGetStaked, mutate } = useSWR<number | undefined, Error>(
     SWRCachePath.getStaked(accountAddress),
     () =>
-      whenDefined(accountAddress, address =>
-        whenDefined(web3, x =>
-          getStaked(x, address).then(allEvents => {
-            return allEvents[0]?.blockNumber
-          })
-        )
+      whenDefinedAll([nonConnectedWeb3, accountAddress], ([client, address]) =>
+        getStaked(client, address).then(allEvents => {
+          return allEvents[0]?.blockNumber
+        })
       )
   )
   const { data: timestamp, error: errorGetBlock } = useSWR<number | undefined, Error>(
@@ -269,11 +275,11 @@ export const useRewardMultiplier = () => {
   )
   const { data: bonusPeriod, error: errorBonusPeriodSec } = useSWR<undefined | BigNumber, Error>(
     SWRCachePath.getBonusPeriodSec(accountAddress),
-    () => whenDefined(web3, x => bonusPeriodSec(x))
+    () => whenDefined(nonConnectedWeb3, x => bonusPeriodSec(x))
   )
   const { data: _startBonus, error: errorStartBonus } = useSWR<undefined | BigNumber, Error>(
     SWRCachePath.getStartBonus(accountAddress),
-    () => whenDefined(web3, x => startBonus(x))
+    () => whenDefined(nonConnectedWeb3, x => startBonus(x))
   )
   const startBonusPct = _startBonus ? toBigNumber(_startBonus).div(100) : toBigNumber(0)
   const data =
@@ -299,10 +305,10 @@ export const useRewardMultiplier = () => {
 }
 
 export const useTotalStakedFor = () => {
-  const { nonConnectedWeb3: web3, accountAddress } = useProvider()
+  const { nonConnectedWeb3, accountAddress } = useProvider()
   const { data, error, mutate } = useSWR<UnwrapFunc<typeof totalStakedFor> | undefined, Error>(
     SWRCachePath.totalStakedFor(accountAddress),
-    () => whenDefined(accountAddress, address => whenDefined(web3, x => totalStakedFor(x, address)))
+    () => whenDefinedAll([nonConnectedWeb3, accountAddress], ([client, address]) => totalStakedFor(client, address))
   )
   return {
     data,

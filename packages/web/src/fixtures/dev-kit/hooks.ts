@@ -80,11 +80,11 @@ export const useWithdrawHolderReward = () => {
 }
 
 export const useGetMyHolderAmount = (propertyAddress: string) => {
-  const { web3, accountAddress } = useProvider()
+  const { nonConnectedWeb3, accountAddress } = useProvider()
   const { data, error } = useSWR<UnwrapFunc<typeof getMyHolderAmount>, Error>(
     SWRCachePath.getMyHolderAmount(propertyAddress, accountAddress),
     () =>
-      whenDefinedAll([web3, accountAddress], ([client, account]) =>
+      whenDefinedAll([nonConnectedWeb3, accountAddress], ([client, account]) =>
         getMyHolderAmount(client, propertyAddress, account)
       ),
     { onError: err => message.error(err.message) }
@@ -93,23 +93,23 @@ export const useGetMyHolderAmount = (propertyAddress: string) => {
 }
 
 export const useGetTotalStakingAmount = (propertyAddress: string) => {
-  const { nonConnectedWeb3: web3, accountAddress } = useProvider()
+  const { nonConnectedWeb3, accountAddress } = useProvider()
   const { currency, toCurrency } = useCurrency()
   const { data, error } = useSWR<UnwrapFunc<typeof getTotalStakingAmount>, Error>(
     SWRCachePath.getTotalStakingAmount(propertyAddress, accountAddress),
-    () => whenDefined(web3, x => getTotalStakingAmount(x, propertyAddress)),
+    () => whenDefined(nonConnectedWeb3, x => getTotalStakingAmount(x, propertyAddress)),
     { onError: err => message.error(err.message) }
   )
   return { totalStakingAmount: whenDefined(data, x => toCurrency(toNaturalNumber(x))), currency, error }
 }
 
 export const useGetMyStakingRewardAmount = (propertyAddress: string) => {
-  const { web3, accountAddress } = useProvider()
+  const { nonConnectedWeb3, accountAddress } = useProvider()
   const { currency, toCurrency } = useCurrency()
   const { data, error } = useSWR<UnwrapFunc<typeof getMyStakingRewardAmount>, Error>(
     SWRCachePath.getMyStakingRewardAmount(propertyAddress, accountAddress),
     () =>
-      whenDefinedAll([web3, accountAddress], ([client, account]) =>
+      whenDefinedAll([nonConnectedWeb3, accountAddress], ([client, account]) =>
         getMyStakingRewardAmount(client, propertyAddress, account)
       ),
     {
@@ -126,12 +126,12 @@ export const useGetMyStakingRewardAmount = (propertyAddress: string) => {
 }
 
 export const useGetMyStakingAmount = (propertyAddress: string) => {
-  const { web3, accountAddress } = useProvider()
+  const { nonConnectedWeb3, accountAddress } = useProvider()
   const { currency, toCurrency } = useCurrency()
   const { data, error } = useSWR<UnwrapFunc<typeof getMyStakingAmount>, Error>(
     SWRCachePath.getMyStakingAmount(propertyAddress, accountAddress),
     () =>
-      whenDefinedAll([web3, accountAddress], ([client, account]) =>
+      whenDefinedAll([nonConnectedWeb3, accountAddress], ([client, account]) =>
         getMyStakingAmount(client, propertyAddress, account)
       ),
     {
@@ -230,10 +230,10 @@ export const useStake = () => {
 }
 
 export const useTotalStakingAmountOnProtocol = () => {
-  const { web3, accountAddress } = useProvider()
+  const { nonConnectedWeb3, accountAddress } = useProvider()
   const { data: stakingAmount, error } = useSWR<UnwrapFunc<typeof getTotalStakingAmountOnProtocol>, Error>(
     SWRCachePath.getTotalStakingAmountOnProtocol(accountAddress),
-    () => whenDefined(web3, x => getTotalStakingAmountOnProtocol(x)),
+    () => whenDefined(nonConnectedWeb3, x => getTotalStakingAmountOnProtocol(x)),
     { onError: err => message.error(err.message) }
   )
   return {
@@ -243,10 +243,10 @@ export const useTotalStakingAmountOnProtocol = () => {
 }
 
 export const useTotalStakingRatio = () => {
-  const { nonConnectedWeb3: web3, accountAddress } = useProvider()
+  const { nonConnectedWeb3, accountAddress } = useProvider()
   const { data: totalSupplyValue, error: totalSupplyError } = useSWR<UnwrapFunc<typeof totalSupply>, Error>(
     SWRCachePath.totalSupply(accountAddress),
-    () => whenDefined(web3, x => totalSupply(x)),
+    () => whenDefined(nonConnectedWeb3, x => totalSupply(x)),
     {
       onError: err => message.error(err.message)
     }
@@ -256,7 +256,7 @@ export const useTotalStakingRatio = () => {
     Error
   >(
     SWRCachePath.getTotalStakingAmountOnProtocol(accountAddress),
-    () => whenDefined(web3, x => getTotalStakingAmountOnProtocol(x)),
+    () => whenDefined(nonConnectedWeb3, x => getTotalStakingAmountOnProtocol(x)),
     {
       onError: err => message.error(err.message)
     }
@@ -268,10 +268,10 @@ export const useTotalStakingRatio = () => {
 }
 
 export const useStakingShare = (propertyAddress: string) => {
-  const { web3, accountAddress } = useProvider()
+  const { nonConnectedWeb3, accountAddress } = useProvider()
   const { data: inProperty, error: inPropertyError } = useSWR<UnwrapFunc<typeof getTotalStakingAmount>, Error>(
     SWRCachePath.getTotalStakingAmount(propertyAddress, accountAddress),
-    () => whenDefined(web3, x => getTotalStakingAmount(x, propertyAddress)),
+    () => whenDefined(nonConnectedWeb3, x => getTotalStakingAmount(x, propertyAddress)),
     {
       onError: err => message.error(err.message)
     }
@@ -281,7 +281,7 @@ export const useStakingShare = (propertyAddress: string) => {
     Error
   >(
     SWRCachePath.getTotalStakingAmountOnProtocol(accountAddress),
-    () => whenDefined(web3, x => getTotalStakingAmountOnProtocol(x)),
+    () => whenDefined(nonConnectedWeb3, x => getTotalStakingAmountOnProtocol(x)),
     {
       onError: err => message.error(err.message)
     }
@@ -414,10 +414,10 @@ export const useCreateAndAuthenticate = () => {
 }
 
 export const useAPY = () => {
-  const { nonConnectedWeb3: web3, accountAddress } = useProvider()
+  const { nonConnectedWeb3, accountAddress } = useProvider()
   const { data: maxRewards, error: maxRewardsError } = useSWR<UnwrapFunc<typeof calculateMaxRewardsPerBlock>, Error>(
     SWRCachePath.calculateMaxRewardsPerBlock(accountAddress),
-    () => whenDefined(web3, x => calculateMaxRewardsPerBlock(x).catch(() => '0')),
+    () => whenDefined(nonConnectedWeb3, x => calculateMaxRewardsPerBlock(x).catch(() => '0')),
     {
       onError: err => message.error(err.message)
     }
@@ -427,14 +427,17 @@ export const useAPY = () => {
     Error
   >(
     SWRCachePath.getTotalStakingAmountOnProtocol(accountAddress),
-    () => whenDefined(web3, x => getTotalStakingAmountOnProtocol(x)),
+    () => whenDefined(nonConnectedWeb3, x => getTotalStakingAmountOnProtocol(x)),
     {
       onError: err => message.error(err.message)
     }
   )
   const { data: holders, error: holdersError } = useSWR<UnwrapFunc<typeof holdersShare>, Error>(
     SWRCachePath.holdersShare(maxRewards, totalStaking),
-    () => (maxRewards && totalStaking ? whenDefined(web3, x => holdersShare(x, maxRewards, totalStaking)) : undefined),
+    () =>
+      maxRewards && totalStaking
+        ? whenDefined(nonConnectedWeb3, x => holdersShare(x, maxRewards, totalStaking))
+        : undefined,
     {
       onError: err => message.error(err.message)
     }
@@ -449,10 +452,10 @@ export const useAPY = () => {
 }
 
 export const useTotalSupply = () => {
-  const { nonConnectedWeb3: web3, accountAddress } = useProvider()
+  const { nonConnectedWeb3, accountAddress } = useProvider()
   const { data: totalSupplyValue, error } = useSWR<UnwrapFunc<typeof totalSupply>, Error>(
     SWRCachePath.totalSupply(accountAddress),
-    () => whenDefined(web3, x => totalSupply(x)),
+    () => whenDefined(nonConnectedWeb3, x => totalSupply(x)),
     {
       onError: err => message.error(err.message)
     }
@@ -462,10 +465,10 @@ export const useTotalSupply = () => {
 }
 
 export const useCirculatingSupply = () => {
-  const { web3, accountAddress } = useProvider()
+  const { nonConnectedWeb3, accountAddress } = useProvider()
   const { data: totalSupplyValue, error } = useSWR<UnwrapFunc<typeof totalSupply>, Error>(
     SWRCachePath.totalSupply(accountAddress),
-    () => whenDefined(web3, x => totalSupply(x)),
+    () => whenDefined(nonConnectedWeb3, x => totalSupply(x)),
     {
       onError: err => message.error(err.message)
     }
@@ -480,17 +483,17 @@ export const useCirculatingSupply = () => {
 }
 
 export const useAnnualSupplyGrowthRatio = () => {
-  const { nonConnectedWeb3: web3, accountAddress } = useProvider()
+  const { nonConnectedWeb3, accountAddress } = useProvider()
   const { data: maxRewards, error: maxRewardsError } = useSWR<UnwrapFunc<typeof calculateMaxRewardsPerBlock>, Error>(
     SWRCachePath.calculateMaxRewardsPerBlock(accountAddress),
-    () => whenDefined(web3, x => calculateMaxRewardsPerBlock(x).catch(() => '0')),
+    () => whenDefined(nonConnectedWeb3, x => calculateMaxRewardsPerBlock(x).catch(() => '0')),
     {
       onError: err => message.error(err.message)
     }
   )
   const { data: totalSupplyValue, error: totalSupplyError } = useSWR<UnwrapFunc<typeof totalSupply>, Error>(
     SWRCachePath.totalSupply(accountAddress),
-    () => whenDefined(web3, x => totalSupply(x)),
+    () => whenDefined(nonConnectedWeb3, x => totalSupply(x)),
     {
       onError: err => message.error(err.message)
     }
@@ -503,14 +506,14 @@ export const useAnnualSupplyGrowthRatio = () => {
 }
 
 export const useGetPolicyAddressesList = () => {
-  const { nonConnectedWeb3: web3 } = useProvider()
+  const { nonConnectedWeb3 } = useProvider()
   const key = 'useGetPolicyList'
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [error, setError] = useState<Error>()
   const callback = useCallback(async () => {
     setIsLoading(true)
     setError(undefined)
-    return whenDefined(web3, x =>
+    return whenDefined(nonConnectedWeb3, x =>
       createGetVotablePolicy(x)
         .then(policyAddressesList => {
           setIsLoading(false)
@@ -522,15 +525,15 @@ export const useGetPolicyAddressesList = () => {
           setIsLoading(false)
         })
     )
-  }, [web3])
+  }, [nonConnectedWeb3])
   return { getPolicyAddressesList: callback, isLoading, error }
 }
 
 export const usePropertyAuthor = (propertyAddress?: string) => {
-  const { web3, accountAddress } = useProvider()
+  const { nonConnectedWeb3, accountAddress } = useProvider()
   const { data, error } = useSWR<undefined | UnwrapFunc<typeof totalSupply>, Error>(
     SWRCachePath.propertyAuthor(propertyAddress, accountAddress),
-    () => whenDefinedAll([web3, propertyAddress], ([client, property]) => propertyAuthor(client, property)),
+    () => whenDefinedAll([nonConnectedWeb3, propertyAddress], ([client, property]) => propertyAuthor(client, property)),
     {
       onError: err => message.error(err.message)
     }
@@ -541,9 +544,11 @@ export const usePropertyAuthor = (propertyAddress?: string) => {
 
 export const useBalanceOf = () => {
   const { currency, toCurrency } = useCurrency()
-  const { web3, accountAddress } = useProvider()
+  const { nonConnectedWeb3, accountAddress } = useProvider()
   const { data, error } = useSWR<BigNumber | undefined, Error>(SWRCachePath.balanceOf(accountAddress), () =>
-    whenDefinedAll([web3, accountAddress], ([client, account]) => balanceOf(client, account).then(toBigNumber))
+    whenDefinedAll([nonConnectedWeb3, accountAddress], ([client, account]) =>
+      balanceOf(client, account).then(toBigNumber)
+    )
   )
   const humanizedDev = whenDefined(data, toNaturalNumber)
   const amount = toCurrency(humanizedDev)
@@ -552,9 +557,9 @@ export const useBalanceOf = () => {
 
 export const useAllClaimedRewards = () => {
   const { currency, toCurrency } = useCurrency()
-  const { web3, accountAddress } = useProvider()
+  const { nonConnectedWeb3, accountAddress } = useProvider()
   const { data, error } = useSWR<BigNumber | undefined, Error>(SWRCachePath.allClaimedRewards(accountAddress), () =>
-    whenDefinedAll([web3, accountAddress], ([client, account]) =>
+    whenDefinedAll([nonConnectedWeb3, accountAddress], ([client, account]) =>
       allClaimedRewards(client, account).then(allEvents => {
         return allEvents.reduce((a, c) => a.plus(c.returnValues.value), toBigNumber(0))
       })
@@ -567,10 +572,10 @@ export const useAllClaimedRewards = () => {
 }
 
 export const usePropertyName = (propertyAddress?: string) => {
-  const { web3, accountAddress } = useProvider()
+  const { nonConnectedWeb3, accountAddress } = useProvider()
   const { data, error } = useSWR<UnwrapFunc<typeof totalSupply>, Error>(
     SWRCachePath.propertyName(propertyAddress, accountAddress),
-    () => whenDefinedAll([web3, propertyAddress], ([client, property]) => propertyName(client, property)),
+    () => whenDefinedAll([nonConnectedWeb3, propertyAddress], ([client, property]) => propertyName(client, property)),
     {
       onError: err => message.error(err.message)
     }
@@ -580,11 +585,11 @@ export const usePropertyName = (propertyAddress?: string) => {
 }
 
 export const useBalanceOfProperty = (propertyAddress: string) => {
-  const { web3, accountAddress } = useProvider()
+  const { nonConnectedWeb3, accountAddress } = useProvider()
   const { data, error } = useSWR<BigNumber | undefined, Error>(
     SWRCachePath.balanceOfProperty(propertyAddress, accountAddress),
     () =>
-      whenDefinedAll([web3, accountAddress], ([client, account]) =>
+      whenDefinedAll([nonConnectedWeb3, accountAddress], ([client, account]) =>
         balanceOfProperty(client, propertyAddress, account).then(toBigNumber)
       )
   )
