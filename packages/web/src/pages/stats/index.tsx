@@ -1,4 +1,5 @@
 import React from 'react'
+import { Divider } from 'antd'
 import { Footer } from 'src/components/organisms/Footer'
 import { EarlyAccess } from 'src/components/atoms/EarlyAccess'
 import { Header } from 'src/components/organisms/Header'
@@ -22,6 +23,9 @@ const DevProtocolStats = (_: Props) => {
           <BuyDevButton />
         </Headline>
         <DevStats />
+      </div>
+      <Divider type="horizontal" />
+      <div style={{ padding: '1rem', maxWidth: '1200px', marginRight: 'auto', marginLeft: 'auto' }}>
         <DevChart />
       </div>
       <Footer />
