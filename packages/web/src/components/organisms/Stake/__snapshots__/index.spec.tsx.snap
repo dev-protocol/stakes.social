@@ -4,53 +4,57 @@ exports[`Stake Snapshot 1`] = `
 <body>
   <div>
     <div
-      class="sc-1d8aayd-1 hozPOf"
+      class="sc-89297o-0 LrdOg"
     >
-      <span
-        class="ant-input-group-wrapper ant-input-group-wrapper-lg ant-input-search ant-input-search-large ant-input-search-with-button sc-1d8aayd-0 fcsYkX"
+      <div
+        class="sc-1d8aayd-1 lldfxv"
       >
         <span
-          class="ant-input-wrapper ant-input-group"
+          class="ant-input-group-wrapper ant-input-group-wrapper-lg ant-input-search ant-input-search-large ant-input-search-with-button sc-1d8aayd-0 fcsYkX"
         >
           <span
-            class="ant-input-affix-wrapper ant-input-affix-wrapper-lg"
+            class="ant-input-wrapper ant-input-group"
           >
-            <input
-              class="ant-input ant-input-lg"
-              id="stake"
-              type="number"
-              value=""
-            />
             <span
-              class="ant-input-suffix"
+              class="ant-input-affix-wrapper ant-input-affix-wrapper-lg"
             >
-              DEV
+              <input
+                class="ant-input ant-input-lg"
+                id="stake"
+                type="number"
+                value=""
+              />
+              <span
+                class="ant-input-suffix"
+              >
+                DEV
+                <button
+                  class="ant-btn ant-btn-primary ant-btn-sm sc-1ttu0x8-0 pssBW"
+                  type="button"
+                >
+                  <span>
+                    Max
+                  </span>
+                </button>
+              </span>
+            </span>
+            <span
+              class="ant-input-group-addon"
+            >
               <button
-                class="ant-btn ant-btn-primary ant-btn-sm sc-1ttu0x8-0 pssBW"
+                class="ant-btn ant-btn-primary ant-btn-lg ant-input-search-button"
                 type="button"
               >
                 <span>
-                  Max
+                  Stake
                 </span>
               </button>
             </span>
           </span>
-          <span
-            class="ant-input-group-addon"
-          >
-            <button
-              class="ant-btn ant-btn-primary ant-btn-lg ant-input-search-button"
-              type="button"
-            >
-              <span>
-                Stake
-              </span>
-            </button>
-          </span>
         </span>
-      </span>
+      </div>
       <div
-        class="ant-card ant-card-bordered sc-1d8aayd-2 cnjKQM"
+        class="ant-card ant-card-bordered sc-1lowp9k-0 igFbtV"
       >
         <div
           class="ant-card-head"
