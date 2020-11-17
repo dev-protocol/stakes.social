@@ -4,34 +4,31 @@ import * as am4core from '@amcharts/amcharts4/core'
 import * as am4charts from '@amcharts/amcharts4/charts'
 import am4themes_animated from '@amcharts/amcharts4/themes/animated'
 import { useGetTokenDayDatas } from 'src/fixtures/uniswap/hooks'
+import { TokenDayData } from 'src/fixtures/uniswap/client'
 
 am4core.useTheme(am4themes_animated)
 
 interface Props {}
-interface UniswapData {
-  priceUSD: string
-  date: number
-  dailyVolumeUSD: string
-  totalLiquidityUSD: string
-}
 
 const CHART_OPTIONS = [
-  { label: 'Price [USD]', value: 'price' },
-  { label: 'Volume [USD]', value: 'volume' },
-  { label: 'Liquidity [USD]', value: 'liquidity' }
+  { label: 'Price [USD]', value: 'PRICE_USD' },
+  { label: 'Volume [ETH]', value: 'VOLUME_ETH' },
+  { label: 'Volume [USD]', value: 'VOLUME_USD' },
+  { label: 'Liquidity [USD]', value: 'LIQUIDITY_USD' }
 ]
 
 export const DevChart = (_: Props) => {
   const { data: chartData } = useGetTokenDayDatas()
-  const [chartSelectItem, setChartSelectItem] = useState('price')
+  const [chartSelectItem, setChartSelectItem] = useState('PRICE_USD')
 
   const datas = useMemo(() => {
-    const formatChartData = (inputChartData: Array<UniswapData>) => {
+    const formatChartData = (inputChartData: Array<TokenDayData>) => {
       inputChartData.forEach((d, index, all) => {
         const yesterdayData = index === 0 ? undefined : all[index - 1]
         datas.push({
           date: d.date * 1000,
           dailyVolumeUSD: d.dailyVolumeUSD,
+          dailyVolumeETH: d.dailyVolumeETH,
           totalLiquidityUSD: d.totalLiquidityUSD,
           open: d.priceUSD,
           close: yesterdayData ? yesterdayData.priceUSD : d.priceUSD,
@@ -41,7 +38,7 @@ export const DevChart = (_: Props) => {
       })
     }
     let datas: Array<Object> = []
-    formatChartData(chartData?.tokenDayDatas.slice() || [])
+    formatChartData(chartData?.slice() || [])
     return datas
   }, [chartData])
 
@@ -59,7 +56,8 @@ export const DevChart = (_: Props) => {
       let valueAxis = chart.yAxes.push(new am4charts.ValueAxis())
       valueAxis.renderer.minWidth = 35
 
-      if (chartSelectItem == 'price') {
+      if (chartSelectItem == 'PRICE_USD') {
+        // price chart
         chart.numberFormatter.numberFormat = '#,###.00'
 
         const series = chart.series.push(new am4charts.CandlestickSeries())
@@ -70,24 +68,27 @@ export const DevChart = (_: Props) => {
         series.dataFields.highValueY = 'high'
 
         series.tooltipText = 'Date: {dateX}\nPrice: ${valueY.value}'
-
-        const scrollbarX = new am4charts.XYChartScrollbar()
-        scrollbarX.series.push(series)
-        chart.scrollbarX = scrollbarX
-      } else if (chartSelectItem === 'volume') {
+      } else if (chartSelectItem === 'VOLUME_USD') {
         // volume chart
         let series = chart.series.push(new am4charts.ColumnSeries())
         series.dataFields.dateX = 'date'
         series.dataFields.valueY = 'dailyVolumeUSD'
 
-        series.tooltipText = 'Date: {dateX}\nPrice: ${valueY.value}'
+        series.tooltipText = 'Date: {dateX}\nVolume: ${valueY.value}'
+      } else if (chartSelectItem === 'VOLUME_ETH') {
+        // volume chart
+        let series = chart.series.push(new am4charts.ColumnSeries())
+        series.dataFields.dateX = 'date'
+        series.dataFields.valueY = 'dailyVolumeETH'
+
+        series.tooltipText = 'Date: {dateX}\nVolume: {valueY.value}'
       } else {
         // liquidity chart
         let series = chart.series.push(new am4charts.LineSeries())
         series.dataFields.dateX = 'date'
         series.dataFields.valueY = 'totalLiquidityUSD'
 
-        series.tooltipText = 'Date: {dateX}\nPrice: ${valueY.value}'
+        series.tooltipText = 'Date: {dateX}\nLiquidity: ${valueY.value}'
       }
 
       chart.data = datas
@@ -114,7 +115,11 @@ export const DevChart = (_: Props) => {
 
   return (
     <>
-      <Select options={CHART_OPTIONS} onChange={handleChangeChartItem} />
+      <Select
+        options={CHART_OPTIONS}
+        value={CHART_OPTIONS.filter((x: any) => x.value === chartSelectItem)}
+        onChange={handleChangeChartItem}
+      />
       <div id="chartdiv" style={{ width: '100%', height: '500px' }}></div>
     </>
   )
