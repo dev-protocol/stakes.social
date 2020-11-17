@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import { Max } from 'src/components/molecules/Max'
 import { SearchProps } from 'antd/lib/input'
 import { ButtonWithGradient } from 'src/components/atoms/ButtonWithGradient'
+import { blueGradient } from 'src/styles/gradient'
 
 type Props = SearchProps &
   React.RefAttributes<Input> & {
@@ -21,10 +22,6 @@ const StyledForm = styled(Input.Search)`
   .ant-btn {
     width: 100%;
   }
-  .ant-input-search,
-  .ant-btn {
-    border: 3px solid #2f80ed;
-  }
   .ant-input-search {
     border-right: 0;
   }
@@ -33,6 +30,7 @@ const StyledForm = styled(Input.Search)`
       border-left: 0;
       height: 100%;
       font-size: 1.2rem;
+      ${blueGradient()}
     }
   }
   input {
@@ -51,7 +49,6 @@ const StyledButtonWithGradient = styled(ButtonWithGradient)`
 
 export const TransactForm = ({
   className,
-  title,
   enterButton,
   value,
   onChange,
@@ -71,7 +68,6 @@ export const TransactForm = ({
     ),
     [_suffix, onClickMax]
   )
-  const Label = useMemo(() => (title ? () => <label htmlFor={id}>{title}</label> : () => <></>), [id, title])
   const OnlyButton = useMemo(
     () => (
       <StyledButtonWithGradient size="large" onClick={onClick}>
@@ -83,7 +79,6 @@ export const TransactForm = ({
 
   return (
     <Wrap className={className}>
-      <Label />
       {onChange ? (
         <StyledForm
           id={id}

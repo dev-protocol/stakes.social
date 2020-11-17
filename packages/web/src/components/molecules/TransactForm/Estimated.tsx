@@ -2,7 +2,6 @@ import { Card } from 'antd'
 import styled from 'styled-components'
 
 export const Estimated = styled(Card)`
-  border-color: #00000055;
   background: transparent;
   .ant-card-head {
     padding: 0 1.5rem;

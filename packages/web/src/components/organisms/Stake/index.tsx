@@ -1,4 +1,4 @@
-import React, { useCallback, useState, useEffect, ChangeEvent } from 'react'
+import React, { useCallback, useState, useEffect, ChangeEvent, useMemo } from 'react'
 import { useProvider } from 'src/fixtures/wallet/hooks'
 import { balanceOf } from 'src/fixtures/dev-kit/client'
 import { useStake, useAPY } from 'src/fixtures/dev-kit/hooks'
@@ -34,6 +34,7 @@ export const Stake = ({ className, title, propertyAddress }: Props) => {
         .then(async x => toNaturalNumber(x))
         .then(x => setStakeAmount(x.toFixed()))
     )
+  const Label = useMemo(() => (title ? () => <label htmlFor="stake">{title}</label> : () => <></>), [title])
 
   useEffect(() => {
     const estimate = whenDefined(apy, x => x.times(stakeAmount || 0).div(100))
@@ -42,9 +43,9 @@ export const Stake = ({ className, title, propertyAddress }: Props) => {
 
   return (
     <FormContainer>
+      <Label />
       <TransactForm
         className={className}
-        title={title}
         id="stake"
         enterButton="Stake"
         value={stakeAmount}

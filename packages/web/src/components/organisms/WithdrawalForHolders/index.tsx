@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react'
+import React, { useCallback, useMemo } from 'react'
 import { useGetMyHolderAmount, useWithdrawHolderReward } from 'src/fixtures/dev-kit/hooks'
 import { TransactForm } from 'src/components/molecules/TransactForm'
 import { FormContainer } from 'src/components/molecules/TransactForm/FormContainer'
@@ -16,12 +16,15 @@ export const WithdrawalForHolders = ({ className, title, propertyAddress }: Prop
   const withdraw = useCallback(() => {
     withdrawHolder(propertyAddress)
   }, [withdrawHolder, propertyAddress])
+  const Label = useMemo(() => (title ? () => <label htmlFor="withdrawalForHolders">{title}</label> : () => <></>), [
+    title
+  ])
 
   return (
     <FormContainer>
+      <Label />
       <TransactForm
         className={className}
-        title={title}
         id="withdrawalForHolders"
         enterButton="Withdraw"
         value={myHolderAmount?.toFixed()}

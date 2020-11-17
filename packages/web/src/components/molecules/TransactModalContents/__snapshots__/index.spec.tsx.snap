@@ -30,7 +30,7 @@ exports[`TransactModalContents Snapshot 1`] = `
           class="sc-1d8aayd-1 lldfxv"
         >
           <span
-            class="ant-input-group-wrapper ant-input-group-wrapper-lg ant-input-search ant-input-search-large ant-input-search-with-button sc-1d8aayd-0 fcsYkX"
+            class="ant-input-group-wrapper ant-input-group-wrapper-lg ant-input-search ant-input-search-large ant-input-search-with-button sc-1d8aayd-0 dMAKRx"
           >
             <span
               class="ant-input-wrapper ant-input-group"
@@ -49,7 +49,7 @@ exports[`TransactModalContents Snapshot 1`] = `
                 >
                   DEV
                   <button
-                    class="ant-btn ant-btn-primary ant-btn-sm sc-1ttu0x8-0 pssBW"
+                    class="ant-btn ant-btn-primary ant-btn-sm sc-1ttu0x8-0 kqGLQy"
                     type="button"
                   >
                     <span>
@@ -74,7 +74,7 @@ exports[`TransactModalContents Snapshot 1`] = `
           </span>
         </div>
         <div
-          class="ant-card ant-card-bordered sc-1lowp9k-0 igFbtV"
+          class="ant-card ant-card-bordered sc-1lowp9k-0 dtNkpz"
         >
           <div
             class="ant-card-head"

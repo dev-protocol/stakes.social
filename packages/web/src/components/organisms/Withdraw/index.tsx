@@ -74,6 +74,7 @@ export const Withdraw = ({ className, title, propertyAddress }: Props) => {
       ),
     [withdrawBoth, withdrawableTokens, claimedTokens, interestTokens]
   )
+  const Label = useMemo(() => (title ? () => <label htmlFor="withdraw">{title}</label> : () => <></>), [title])
 
   useEffect(() => {
     const reward = myStakingRewardAmount
@@ -87,11 +88,11 @@ export const Withdraw = ({ className, title, propertyAddress }: Props) => {
 
   return (
     <FormContainer>
+      <Label />
       <Wrap>
         <Switch unCheckedChildren="Stake" onChange={onChangeSwitch} />
         <TransactForm
           className={className}
-          title={title}
           id="withdraw"
           enterButton="Withdraw"
           value={withdrawAmount}

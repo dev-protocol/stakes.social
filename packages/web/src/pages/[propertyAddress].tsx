@@ -7,8 +7,6 @@ import { EarlyAccess } from 'src/components/atoms/EarlyAccess'
 import styled from 'styled-components'
 import { Container } from 'src/components/atoms/Container'
 import { Header } from 'src/components/organisms/Header'
-import { CancelStaking } from 'src/components/organisms/CancelStaking'
-// import { PropertyTags } from 'src/components/organisms/PropertyTags'
 import TopStakers from 'src/components/organisms/TopStakers'
 import { AvatarUser } from 'src/components/molecules/AvatarUser'
 import { useAPY, usePropertyAuthor } from 'src/fixtures/dev-kit/hooks'
@@ -26,33 +24,13 @@ type Props = {}
 
 const Main = styled(Container)`
   display: grid;
-  grid-gap: 1rem;
+  grid-gap: 3rem;
   grid-template-columns: 1fr;
-  grid-template-areas:
-    'cover'
-    'possession'
-    'stake'
-    'about'
-    'assets'
-    'author'
-    'topstake'
-    'cancel';
   @media (min-width: 1024px) {
     grid-gap: 3rem 2rem;
-    grid-template-columns: 1fr;
-    grid-template-areas:
-      'cover'
-      'possession'
-      'stake'
-      'about'
-      'assets'
-      'author'
-      'topstake'
-      'cancel';
   }
 `
 const Cover = styled.div`
-  grid-area: cover;
   padding-top: 52.5%;
   position: relative;
   background-size: cover;
@@ -66,12 +44,9 @@ const Cover = styled.div`
   );
 `
 
-const TopStakerList = styled(TopStakers)`
-  grid-area: topstake;
-`
+const TopStakerList = styled(TopStakers)``
 
 const Transact = styled.div`
-  grid-area: stake;
   display: grid;
   grid-gap: 1rem;
   @media (min-width: 1024px) {
@@ -79,16 +54,7 @@ const Transact = styled.div`
     grid-gap: 3rem;
   }
 `
-const Possession = styled(PossessionOutline)`
-  grid-area: possession;
-`
-
-const Cancel = styled(CancelStaking)`
-  grid-area: cancel;
-`
-// const Tags = styled(PropertyTags)`
-//   grid-area: tags;
-// `
+const Possession = styled(PossessionOutline)``
 
 const Wrap = styled.div`
   margin: 2rem auto;
@@ -101,13 +67,11 @@ const Wrap = styled.div`
 const AboutSection = styled.div`
   display: flex;
   flex-direction: column;
-  grid-area: about;
 `
 
 const AssetsSection = styled.div`
   display: flex;
   flex-direction: column;
-  grid-area: assets;
 `
 const AssetList = styled.div`
   display: flex;
@@ -141,7 +105,6 @@ const AuthorContainer = styled.div`
   display: flex;
   flex-direction: column;
   position: relative;
-  grid-area: author;
 `
 
 const Flex = styled.div`
@@ -238,13 +201,10 @@ const PropertyAddressDetail = (_: Props) => {
         </Container>
         <Main>
           <CoverImageOrGradient src={dataProperty?.cover_image?.url} />
-          <div>
-            <h2>Top stakers</h2>
-            <TopStakerList propertyAdress={propertyAddress} />
-          </div>
+          <Possession propertyAddress={propertyAddress} />
           <Transact>
-            <Stake propertyAddress={propertyAddress} />
-            <Withdraw propertyAddress={propertyAddress} />
+            <Stake title="Stake" propertyAddress={propertyAddress} />
+            <Withdraw title="Withdraw" propertyAddress={propertyAddress} />
           </Transact>
           <AboutSection>
             <h2>About</h2>
@@ -265,10 +225,10 @@ const PropertyAddressDetail = (_: Props) => {
             </AssetList>
           </AssetsSection>
           <Author propertyAddress={propertyAddress} />
-          {/* <Outline propertyAddress={propertyAddress} /> */}
-          <Possession propertyAddress={propertyAddress} />
-          {/* <Apps /> */}
-          <Cancel propertyAddress={propertyAddress} />
+          <div>
+            <h2>Top stakers</h2>
+            <TopStakerList propertyAdress={propertyAddress} />
+          </div>
         </Main>
       </Wrap>
 
