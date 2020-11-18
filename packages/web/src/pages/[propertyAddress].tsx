@@ -150,9 +150,13 @@ const Author = ({ propertyAddress }: { propertyAddress: string }) => {
         <>
           <h2>Created by {data?.name}</h2>
           <Flex>
-            <div style={{ width: '150px' }}>
-              <AvatarUser accountAddress={authorAddress} size={150} />
-            </div>
+            <Link passHref href="/profile/[accountAddress]" as={`/profile/${authorAddress}`}>
+              <a>
+                <div style={{ width: '150px' }}>
+                  <AvatarUser accountAddress={authorAddress} size={150} />
+                </div>
+              </a>
+            </Link>
 
             <CreatorContent>
               <ReactMarkdown>{dataAuthor ? dataAuthor.biography : ''}</ReactMarkdown>
