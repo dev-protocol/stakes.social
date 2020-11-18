@@ -17,7 +17,7 @@ interface Props {
   propertyAddress: string
 }
 
-const StyledForm = styled(Input.Search)`
+const StyledForm = styled(Input.Search)<{ isBlack?: Boolean }>`
   width: inherit;
   bottom: 0;
   .ant-input-wrapper {
@@ -30,7 +30,7 @@ const StyledForm = styled(Input.Search)`
   }
   .ant-input-search,
   .ant-btn {
-    border: 3px solid #2f80ed;
+    border: ${props => (props.isBlack ? '2px solid #5B5B5B' : '2px solid #2f80ed')};
   }
   .ant-input-search {
     border-right: 0;
@@ -40,6 +40,8 @@ const StyledForm = styled(Input.Search)`
       border-left: 0;
       height: 100%;
       font-size: 1.2rem;
+      background-image: ${props =>
+        props.isBlack ? 'linear-gradient(to right, #5B5B5B, #2A2A2A)' : 'linear-gradient(to right, #2f80ed, #1ac9fc)'};
     }
   }
   input {
@@ -159,6 +161,7 @@ export const StakeForm = ({ className, propertyAddress }: Props) => {
       <FormContainer>
         <label htmlFor="withdraw">Withdraw</label>
         <StyledForm
+          isBlack
           id="withdraw"
           enterButton="Withdraw"
           size="large"

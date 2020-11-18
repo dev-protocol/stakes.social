@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
-import Jdenticon from 'react-jdenticon'
 import { useGetAccount } from 'src/fixtures/dev-for-apps/hooks'
 import { Account } from 'src/fixtures/dev-for-apps/utility'
 
@@ -13,6 +12,13 @@ const AvatarImage = styled.div`
   img {
     border-radius: 90px;
   }
+`
+
+const AvatarPlaceholder = styled.div<{ size: string }>`
+  width: ${props => `${props.size}px`};
+  height: ${props => `${props.size}px`};
+  border-radius: 90px;
+  background-image: linear-gradient(to right, #36d1dc, #5b86e5);
 `
 
 export const Avatar = ({ accountAddress, size }: Props) => {
@@ -29,7 +35,7 @@ export const Avatar = ({ accountAddress, size }: Props) => {
       {account?.portrait ? (
         <img src={account?.portrait.url} alt="avatar" style={{ width: `${size}px` }} />
       ) : (
-        <Jdenticon value={accountAddress || ''} size={size} />
+        <AvatarPlaceholder size={size} />
       )}
     </AvatarImage>
   )

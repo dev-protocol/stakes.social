@@ -19,9 +19,13 @@ const LowerFooter = {
 } as CSSProperties
 
 const FooterContainer = styled.div`
-  max-width: 1160px;
+  max-width: 350px;
   margin-left: auto;
   margin-right: auto;
+
+  @media (min-width: 760px) {
+    max-width: 1160px;
+  }
 `
 
 const LogoContainer = styled.div`
