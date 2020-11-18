@@ -89,7 +89,7 @@ const TextArea = styled.textarea`
 
 export const InvitationRequestForm = ({ market }: Props) => {
   const [metrics, setMetrics] = useState<boolean>(false)
-  const { postInvitationHandler, isLoading } = usePostInvitation(market)
+  const { postInvitationHandler, isLoading } = usePostInvitation()
   const onFinish = async (values: any) => {
     const { asset, email, discord, name, role, url, useCase, ask } = values
     const metrics = await postInvitationHandler({
