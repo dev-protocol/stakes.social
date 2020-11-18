@@ -302,3 +302,5 @@ export const AuthForm = ({ market, property }: Props) => {
     </div>
   )
 }
+
+export default AuthForm

@@ -9,9 +9,11 @@ exports[`CancelForm Snapshot 1`] = `
       <p>
         Cancel Staking
       </p>
-      <div
-        class="ant-space ant-space-horizontal ant-space-align-center"
+      <button
+        class="ant-btn ant-btn-primary ant-btn-lg"
+        type="button"
       >
+<<<<<<< HEAD
         <div
           class="ant-space-item"
         >
@@ -72,6 +74,12 @@ exports[`CancelForm Snapshot 1`] = `
           </div>
         </div>
       </div>
+=======
+        <span>
+          Cancel
+        </span>
+      </button>
+>>>>>>> upstream/main
     </div>
   </div>
 </body>

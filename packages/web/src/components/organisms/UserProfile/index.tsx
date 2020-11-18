@@ -1,11 +1,11 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import { message, Button, Form, Input, Upload } from 'antd'
 import { LoadingOutlined, PlusOutlined } from '@ant-design/icons'
-import { useGetAccountAddress } from 'src/fixtures/wallet/hooks'
-import { useGetAccount, useCreateAccount, useUpdateAccount, useUploadFile } from 'src/fixtures/dev-for-apps/hooks'
 import { Account } from 'src/fixtures/dev-for-apps/utility'
-import { Container } from 'src/components/atoms/Container'
 import { Avatar } from 'src/components/molecules/Avatar'
+import { useProvider } from 'src/fixtures/wallet/hooks'
+import { useGetAccount, useCreateAccount, useUpdateAccount, useUploadFile } from 'src/fixtures/dev-for-apps/hooks'
+import { Container } from 'src/components/atoms/Container'
 import styled from 'styled-components'
 
 interface Props {}
@@ -64,6 +64,7 @@ export const AvatarUpdateForm = ({ accountAddress }: { accountAddress?: string }
   const { postUploadFileHandler: uploadFile, isLoading: isUploadLoading } = useUploadFile(accountAddress || '')
   const [account, setAccount] = useState<Account>()
   const { data: user } = useGetAccount(accountAddress || '')
+  const { accountAddress: accAddress } = useProvider()
   useEffect(() => {
     if (user) {
       setAccount(user)
@@ -100,7 +101,7 @@ export const AvatarUpdateForm = ({ accountAddress }: { accountAddress?: string }
   return (
     <Section>
       <Title>Your Avatar</Title>
-      <Avatar accountAddress={accountAddress} size={avatarImageSize} />
+      <Avatar accountAddress={accAddress} size={avatarImageSize} />
       <StyledForm layout="vertical" onFinish={((fileList: object[]) => handleSubmit(fileList)) as any}>
         <Form.Item name="upload" valuePropName="files">
           <Upload
@@ -228,7 +229,7 @@ export const ProfileUpdateForm = ({ accountAddress }: { accountAddress?: string 
 }
 
 export const UserProfile = (_: Props) => {
-  const { accountAddress } = useGetAccountAddress()
+  const { accountAddress } = useProvider()
 
   return (
     <Container>

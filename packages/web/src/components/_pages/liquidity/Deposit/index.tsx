@@ -2,7 +2,8 @@ import { Button, Divider, Form, message, Steps } from 'antd'
 import BigNumber from 'bignumber.js'
 import React, { ChangeEvent, useCallback } from 'react'
 import { useState } from 'react'
-import { getUTC, toAmountNumber, toBigNumber, toNaturalNumber } from 'src/fixtures/utility'
+import { getUTC, toAmountNumber, toBigNumber, toNaturalNumber, whenDefined } from 'src/fixtures/utility'
+import { useProvider } from 'src/fixtures/wallet/hooks'
 import styled from 'styled-components'
 import { GEYSER_ETHDEV_V2_ADDRESS } from '../../../../fixtures/_pages/liquidity/constants/address'
 import {
@@ -43,6 +44,7 @@ const ZERO = toBigNumber(0)
 export const Deposit = () => {
   const { Item } = Form
   const { Step } = Steps
+  const { web3 } = useProvider()
   const [amount, setAmount] = useState<undefined | BigNumber>(undefined)
   const [displayAmount, setDisplayAmount] = useState<undefined | string>(undefined)
   const [estimatedReward, setEstimatedReward] = useState<number | string>(0)
@@ -59,8 +61,8 @@ export const Deposit = () => {
 
   const [isAlreadyFinished] = useIsAlreadyFinished(useState<boolean>(false))
   const estimate = useEstimateReward()
-  const { approve } = useApprove()
-  const { stake } = useStake()
+  const { approve, isLoading: isApproving } = useApprove()
+  const { stake, isLoading: isStaking } = useStake()
   const isFulfilled = useCallback(() => {
     return !totalStakingShares || !totalStaked || !accounting || !finalUnlockSchedule
       ? false
@@ -89,29 +91,33 @@ export const Deposit = () => {
       setAmount(bn)
       setDisplayAmount(value)
       updateEstimate(bn)
-      allowance(GEYSER_ETHDEV_V2_ADDRESS).then(x => {
-        const req = x ? x.isLessThanOrEqualTo(bn) : true
-        setRequireApproval(req)
-        setCurrentStep(req ? 0 : 1)
-      })
+      whenDefined(web3, x =>
+        allowance(x, GEYSER_ETHDEV_V2_ADDRESS).then(x => {
+          const req = x ? x.isLessThanOrEqualTo(bn) : true
+          setRequireApproval(req)
+          setCurrentStep(req ? 0 : 1)
+        })
+      )
     },
-    [updateEstimate]
+    [updateEstimate, web3]
   )
   const onClickMax = useCallback(
     () =>
-      balanceOf().then(x => {
-        updateAmount(x ? toNaturalNumber(x).toFixed() : '0')
-        if (x?.toNumber() === 0) {
-          message.warn(
-            <>
-              <span>Your ETHDEV-V2 token is 0</span>
-              <Divider type="vertical"></Divider>
-              <LinkToUniswap />
-            </>
-          )
-        }
-      }),
-    [updateAmount]
+      whenDefined(web3, x =>
+        balanceOf(x).then(x => {
+          updateAmount(x ? toNaturalNumber(x).toFixed() : '0')
+          if (x?.toNumber() === 0) {
+            message.warn(
+              <>
+                <span>Your ETHDEV-V2 token is 0</span>
+                <Divider type="vertical"></Divider>
+                <LinkToUniswap />
+              </>
+            )
+          }
+        })
+      ),
+    [updateAmount, web3]
   )
   const onChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target
@@ -178,6 +184,7 @@ export const Deposit = () => {
                 <p>Please approve the token transfer to deposit ETHDEV-V2.</p>
                 <Button
                   disabled={isAlreadyFinished || !requireApproval}
+                  loading={isApproving}
                   type="primary"
                   size="large"
                   onClick={onClickApprove}
@@ -194,6 +201,7 @@ export const Deposit = () => {
                 <p>Deposit ETHDEV-V2.</p>
                 <Button
                   disabled={isAlreadyFinished || requireApproval || !requireDeposit}
+                  loading={isStaking}
                   type="primary"
                   size="large"
                   onClick={onClickDeposit}

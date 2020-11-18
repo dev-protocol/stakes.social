@@ -9,17 +9,17 @@ type Props = {}
 
 const CreateOrAssociateAProperty = (_: Props) => {
   return (
-    <>
+    <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
       <Header />
       <Headline>
         <H2>Create an Asset</H2>
         <span style={{ fontSize: '0.9em' }}>Tokenize your open assets in minutes.</span>
       </Headline>
-      <div style={{ maxWidth: '1048px', marginRight: 'auto', marginLeft: 'auto' }}>
+      <div style={{ maxWidth: '1048px', marginRight: 'auto', marginLeft: 'auto', flexGrow: 1 }}>
         <MarketsOverview />
       </div>
       <Footer />
-    </>
+    </div>
   )
 }
 

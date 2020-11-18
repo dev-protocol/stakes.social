@@ -13,6 +13,8 @@ import {
   FontColorsOutlined,
   NotificationOutlined
 } from '@ant-design/icons'
+import { blueGradient } from 'src/styles/gradient'
+import { boxShahowWithOnHover } from 'src/styles/boxShahow'
 
 export interface Props {
   market: string
@@ -53,21 +55,17 @@ const Span = styled.div`
 
 const ButtonContainer = styled.div`
   width: auto;
-  align-self: flex-start;
+  align-self: flex-end;
 `
 const Submit = styled.button`
   padding: 10px 40px;
   border-radius: 6px;
   border: none;
   background-image: linear-gradient(to right, #2f80ed, #1ac9fc);
-  color: white;
-  box-shadow: 0 2px 3px -1px rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.06);
-
   cursor: pointer;
-  :hover {
-    transition: ease-in-out 0.2s;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2), 0 2px 4px -1px rgba(0, 0, 0, 0.12);
-  }
+  color: white;
+  ${blueGradient()}
+  ${boxShahowWithOnHover()}
 `
 
 const TextArea = styled.textarea`

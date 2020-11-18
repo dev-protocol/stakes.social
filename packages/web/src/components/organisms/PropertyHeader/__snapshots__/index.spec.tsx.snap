@@ -4,32 +4,55 @@ exports[`PropertyHeader Snapshot 1`] = `
 <body>
   <div>
     <div
+<<<<<<< HEAD
       class="sc-1bnntxi-0 dsbteV"
     >
       <h1
         class="sc-1bnntxi-1 iCZLYm"
+=======
+      class="sc-1bnntxi-0 abVPQ"
+    >
+      <h1
+        class="sc-1bnntxi-1 fIBpSf"
+>>>>>>> upstream/main
       >
         authentication-id's Pool
       </h1>
       <div
+<<<<<<< HEAD
         class="sc-1bnntxi-2 cxuokw"
+=======
+        class="sc-1bnntxi-2 gCPcUN"
+>>>>>>> upstream/main
       >
         <div
           style="margin-bottom: 0px;"
         >
           <span
+<<<<<<< HEAD
             class="xnqjv4-0 gvtyPq"
+=======
+            class="xnqjv4-0 iiUDCf"
+>>>>>>> upstream/main
           >
             N/A
             %
           </span>
            APY Stakers
           <div
+<<<<<<< HEAD
             class="ant-divider ant-divider-vertical sc-1bnntxi-3 iTHJht"
             role="separator"
           />
           <span
             class="xnqjv4-0 gvtyPq"
+=======
+            class="ant-divider ant-divider-vertical sc-1bnntxi-3 ikThBI"
+            role="separator"
+          />
+          <span
+            class="xnqjv4-0 iiUDCf"
+>>>>>>> upstream/main
           >
              
             N/A
@@ -37,11 +60,19 @@ exports[`PropertyHeader Snapshot 1`] = `
           </span>
            APY Creators
           <div
+<<<<<<< HEAD
             class="ant-divider ant-divider-vertical sc-1bnntxi-3 iTHJht"
             role="separator"
           />
           <span
             class="xnqjv4-0 gvtyPq"
+=======
+            class="ant-divider ant-divider-vertical sc-1bnntxi-3 ikThBI"
+            role="separator"
+          />
+          <span
+            class="xnqjv4-0 iiUDCf"
+>>>>>>> upstream/main
           >
              
             N/A
@@ -49,15 +80,23 @@ exports[`PropertyHeader Snapshot 1`] = `
            Karma
         </div>
         <a
+<<<<<<< HEAD
+=======
+          class="sc-17tlp0z-0 iZUfkf"
+>>>>>>> upstream/main
           href="https://app.uniswap.org/#/swap?outputCurrency=0x5caf454ba92e6f2c929df14667ee360ed9fd5b26"
           rel="noreferrer"
           target="_blank"
         >
+<<<<<<< HEAD
           <button
             class="sc-17tlp0z-0 cvfhWc"
           >
             Buy DEV
           </button>
+=======
+          Buy DEV
+>>>>>>> upstream/main
         </a>
       </div>
     </div>

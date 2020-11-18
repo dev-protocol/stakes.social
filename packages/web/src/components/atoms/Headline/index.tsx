@@ -6,7 +6,7 @@ interface Props {
 
 export const Headline = styled.div<Props>`
   display: flex;
-  padding-top: 1.5rem;
+  padding-top: 6em;
   justify-content: center;
   align-items: center;
   flex-flow: column;

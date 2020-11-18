@@ -9,6 +9,7 @@ exports[`WithdrawForm Snapshot 1`] = `
       <p>
         Withdraw 
         Creators
+<<<<<<< HEAD
          Reward (
         <span>
           1,000
@@ -19,6 +20,16 @@ exports[`WithdrawForm Snapshot 1`] = `
       </p>
       <div
         class="sc-1xz1jp7-1 lgFbGj"
+=======
+         Reward 
+        1000
+         
+        DEV
+         available
+      </p>
+      <div
+        class="sc-1xz1jp7-1 fXaeQW"
+>>>>>>> upstream/main
       >
         <button
           class="ant-btn ant-btn-primary ant-btn-lg"

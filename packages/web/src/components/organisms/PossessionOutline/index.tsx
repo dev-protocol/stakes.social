@@ -1,6 +1,7 @@
 import React from 'react'
 import { useGetTotalStakingAmount, useGetMyStakingAmount, useGetTotalRewardsAmount } from 'src/fixtures/dev-kit/hooks'
 import styled from 'styled-components'
+import { Statistic } from 'antd'
 
 interface Props {
   className?: string
@@ -17,39 +18,40 @@ const Wrap = styled.div`
     grid-template-columns: auto;
   }
 `
-const Flex = styled.div`
-  display: flex;
-  flex-direction: column;
-`
 
 export const PossessionOutline = ({ className, propertyAddress }: Props) => {
-  const { totalStakingAmount } = useGetTotalStakingAmount(propertyAddress)
-  const { totalRewardsAmount } = useGetTotalRewardsAmount(propertyAddress)
-  const { myStakingAmount } = useGetMyStakingAmount(propertyAddress)
+  const { totalStakingAmount, currency: totalStakingAmountCurrency } = useGetTotalStakingAmount(propertyAddress)
+  const { totalRewardsAmount, currency: totalRewardsAmountCurrency } = useGetTotalRewardsAmount(propertyAddress)
+  const { myStakingAmount, currency: myStakingAmountCurrency } = useGetMyStakingAmount(propertyAddress)
 
   return (
     <Wrap className={className}>
-      <Flex>
-        <h3>Total Staking Amount</h3>
-        <h3>{totalStakingAmount ? totalStakingAmount.dp(5).toNumber() : 'N/A'} DEV</h3>
-      </Flex>
-      <Flex>
-        <h3>Your Staking Amount</h3>
-        <h3>{myStakingAmount ? myStakingAmount.dp(5).toNumber() : 'N/A'} DEV</h3>
-      </Flex>
-      <Flex>
-        <h3>Your Staking Share</h3>
-        <h3>
-          {myStakingAmount &&
-            totalStakingAmount &&
-            ((myStakingAmount.dp(2).toNumber() / totalStakingAmount.dp(2).toNumber()) * 100).toFixed(2)}
-          %
-        </h3>
-      </Flex>
-      <Flex>
-        <h3>Total Rewards</h3>
-        <h3>{totalRewardsAmount && totalRewardsAmount.dp(5).toNumber()} DEV</h3>
-      </Flex>
+      <Statistic
+        title="Total Staking Amount"
+        value={totalStakingAmount ? totalStakingAmount.toNumber() : 'N/A'}
+        precision={2}
+        suffix={totalStakingAmountCurrency}
+      />
+      <Statistic
+        title="Your Staking Amount"
+        value={myStakingAmount ? myStakingAmount.toNumber() : 'N/A'}
+        precision={2}
+        suffix={myStakingAmountCurrency}
+      />
+      <Statistic
+        title="Your Staking Share"
+        value={
+          myStakingAmount && totalStakingAmount && (myStakingAmount.toNumber() / totalStakingAmount.toNumber()) * 100
+        }
+        precision={2}
+        suffix="%"
+      />
+      <Statistic
+        title="Total Rewards"
+        value={totalRewardsAmount && totalRewardsAmount.toNumber()}
+        precision={2}
+        suffix={totalRewardsAmountCurrency}
+      />
     </Wrap>
   )
 }

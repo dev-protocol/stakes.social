@@ -63,7 +63,7 @@ export const PropertyHeader = ({ propertyAddress, apy, creators }: Props) => {
           <StyledDivider type="vertical" />
           Karma
         </div>
-        <BuyDevButton>Buy DEV</BuyDevButton>
+        <BuyDevButton />
       </SubHeader>
     </ResponsivePropertyAddressFrame>
   )

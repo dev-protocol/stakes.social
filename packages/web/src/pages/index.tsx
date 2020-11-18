@@ -7,6 +7,7 @@ import { useRouter } from 'next/router'
 import { useAPY, useAnnualSupplyGrowthRatio } from 'src/fixtures/dev-kit/hooks'
 import { SupplySummary } from 'src/components/molecules/SupplySummaly'
 import { Header } from 'src/components/organisms/Header'
+import { FeatureTag } from 'src/components/organisms/PropertyCardList'
 
 type InitialProps = {}
 type Props = {} & InitialProps
@@ -36,14 +37,21 @@ const Index = (_: Props) => {
     }
     return ''
   }, [router])
+  const featureTag = useMemo(() => {
+    const { tag: wordStr } = router.query
+    if (typeof wordStr === 'string') {
+      return wordStr as FeatureTag
+    }
+    return '' as FeatureTag
+  }, [router])
 
   return (
-    <div style={{ background: 'white' }}>
+    <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
       <Header />
       <Banner />
       <div style={{ padding: '1rem', maxWidth: '1200px', marginRight: 'auto', marginLeft: 'auto' }}>
         <SupplySummary apy={apy} creators={creators} annualSupplyGrowthRatio={annualSupplyGrowthRatio} />
-        <PropertyCardList currentPage={page} searchWord={word} sortBy={sortBy} />
+        <PropertyCardList currentPage={page} searchWord={word} sortBy={sortBy} featureTag={featureTag} />
       </div>
       <Footer />
     </div>

@@ -5,6 +5,12 @@ import { Container } from 'src/components/atoms/Container'
 import { Twitter, Discord, Telegram, Medium, Github } from '../../atoms/SocialButtons/index'
 import { Divider } from 'antd'
 
+const Wrap = styled.footer`
+  display: grid;
+  /* padding-top: 5rem;
+  margin-top: 50px; */
+`
+
 const SocialContainer = styled.div`
   display: flex;
   justify-content: space-between;
@@ -40,31 +46,33 @@ const LogoContainer = styled.div`
 
 export const Footer = () => {
   return (
-    <Container style={LowerFooter}>
-      <FooterContainer>
-        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-          <LogoContainer>
-            <StakesSocialWhite id="headerlogo"></StakesSocialWhite>
-          </LogoContainer>
-          <div style={{ color: 'white', fontSize: '0.9em' }}>
-            <span>Powered by</span>
-            <Divider style={{ marginLeft: '2px', marginRight: '2px' }} type="vertical" />
-            <span style={{ fontWeight: 'bold' }}>Dev Protocol</span>
+    <Wrap>
+      <Container style={LowerFooter}>
+        <FooterContainer>
+          <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+            <LogoContainer>
+              <StakesSocialWhite id="headerlogo"></StakesSocialWhite>
+            </LogoContainer>
+            <div style={{ color: 'white', fontSize: '0.9em' }}>
+              <span>Powered by</span>
+              <Divider style={{ marginLeft: '2px', marginRight: '2px' }} type="vertical" />
+              <span style={{ fontWeight: 'bold' }}>Dev Protocol</span>
+            </div>
           </div>
-        </div>
 
-        <hr style={{ color: 'white', marginTop: '2px' }} />
-        <div style={{ display: 'flex', justifyContent: 'space-between', color: 'white', fontSize: '0.9em' }}>
-          <span>2020 All rights reserverd.</span>
-          <SocialContainer>
-            <Twitter />
-            <Discord />
-            <Github />
-            <Telegram />
-            <Medium />
-          </SocialContainer>
-        </div>
-      </FooterContainer>
-    </Container>
+          <hr style={{ color: 'white', marginTop: '2px' }} />
+          <div style={{ display: 'flex', justifyContent: 'space-between', color: 'white', fontSize: '0.9em' }}>
+            <span>2020 All rights reserverd.</span>
+            <SocialContainer>
+              <Twitter />
+              <Discord />
+              <Github />
+              <Telegram />
+              <Medium />
+            </SocialContainer>
+          </div>
+        </FooterContainer>
+      </Container>
+    </Wrap>
   )
 }

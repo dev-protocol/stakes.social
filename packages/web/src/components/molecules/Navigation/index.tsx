@@ -5,7 +5,8 @@ import { MenuInfo } from 'rc-menu/lib/interface'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
 import Hamburger from 'src/components/atoms/Svgs/tsx/Hamburger'
-import { useConnectWallet, useGetAccountAddress } from 'src/fixtures/wallet/hooks'
+import { useConnectWallet } from 'src/fixtures/wallet/hooks'
+import { useProvider } from 'src/fixtures/wallet/hooks'
 import { NavMenu, AccountBtn, Connecting, NavMenuItem } from './../../atoms/Navigation/index'
 import WalletContext from 'src/context/walletContext'
 import { useEffectAsync } from 'src/fixtures/utility'
@@ -15,7 +16,7 @@ interface NavigationProps {
   handleMenuOpen: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const navs = [
+export const Navigations = [
   {
     key: 'pools',
     label: 'Pools',
@@ -49,15 +50,15 @@ const navItemAccount = {
   pathname: '/settings/profile'
 }
 
-const toKey = (_pathname: string) => navs.find(({ pathname }) => pathname === _pathname)?.key
+const toKey = (_pathname: string) => Navigations.find(({ pathname }) => pathname === _pathname)?.key
 
 export const Navigation = ({ handleMenuOpen }: NavigationProps) => {
   const router = useRouter()
-  const [current, setCurrent] = useState(toKey(router?.pathname) || navs[0].key)
+  const [current, setCurrent] = useState(toKey(router?.pathname) || Navigations[0].key)
   const [isDesktop, setDesktop] = useState(typeof window !== 'undefined' && window?.innerWidth > 1024)
   const { isConnected, connect, isConnecting } = useConnectWallet()
   const { web3Modal } = useContext(WalletContext)
-  const { accountAddress } = useGetAccountAddress()
+  const { accountAddress } = useProvider()
 
   const updateMedia = () => {
     setDesktop(window.innerWidth > 1024)
@@ -103,9 +104,11 @@ export const Navigation = ({ handleMenuOpen }: NavigationProps) => {
           selectedKeys={[current]}
           mode="horizontal"
         >
-          {navs.map(nav => (
+          {Navigations.map(nav => (
             <NavMenuItem color="deeppink" key={nav.key}>
-              <Link href={nav.pathname}>{nav.label}</Link>
+              <Link href={nav.pathname}>
+                <a>{nav.label}</a>
+              </Link>
             </NavMenuItem>
           ))}
         </NavMenu>

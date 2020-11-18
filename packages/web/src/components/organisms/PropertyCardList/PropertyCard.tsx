@@ -8,7 +8,6 @@ import {
 } from 'src/fixtures/dev-kit/hooks'
 import styled from 'styled-components'
 import { truncate } from 'src/fixtures/utility/string'
-import { Currency } from 'src/components/molecules/Currency'
 import { LoremIpsum } from 'lorem-ipsum'
 import { useGetPropertytInformation } from 'src/fixtures/devprtcl/hooks'
 import { Avatar } from 'src/components/molecules/Avatar'
@@ -170,10 +169,12 @@ const FlewColumn = styled.div`
 `
 
 export const PropertyCard = ({ propertyAddress, assets }: Props) => {
-  const { totalStakingAmount } = useGetTotalStakingAmount(propertyAddress)
-  const { totalRewardsAmount } = useGetTotalRewardsAmount(propertyAddress)
-  const { myStakingRewardAmount } = useGetMyStakingRewardAmount(propertyAddress)
-  const { myStakingAmount } = useGetMyStakingAmount(propertyAddress)
+  const { totalStakingAmount, currency: totalStakingAmountCurrency } = useGetTotalStakingAmount(propertyAddress)
+  const { totalRewardsAmount, currency: totalRewardsAmountCurrency } = useGetTotalRewardsAmount(propertyAddress)
+  const { myStakingRewardAmount, currency: myStakingRewardAmountCurrency } = useGetMyStakingRewardAmount(
+    propertyAddress
+  )
+  const { myStakingAmount, currency: myStakingAmountCurrency } = useGetMyStakingAmount(propertyAddress)
   const { data: authorData } = useGetPropertytInformation(propertyAddress)
   const includeAssets = useMemo(() => assets && truncate(assets.map(e => e.authentication_id).join(', '), 24), [assets])
 
@@ -201,19 +202,27 @@ export const PropertyCard = ({ propertyAddress, assets }: Props) => {
         </FlexRow>
         <RowContainer>
           <OwnedStake>
-            <Currency value={myStakingAmount} />
+            <span>
+              {myStakingAmount?.dp(1).toFixed() || 0} {myStakingAmountCurrency}
+            </span>
             <MutedSpan>Your stake</MutedSpan>
           </OwnedStake>
           <YourReward>
-            <span>{myStakingRewardAmount?.dp(1)?.toNumber() || 0} DEV</span>
+            <span>
+              {myStakingRewardAmount?.dp(1)?.toNumber() || 0} {myStakingRewardAmountCurrency}
+            </span>
             <MutedSpan>Your reward</MutedSpan>
           </YourReward>
           <TotalStaked>
-            <Currency value={totalStakingAmount} />
+            <span>
+              {totalStakingAmount?.dp(1).toFixed()} {totalStakingAmountCurrency}
+            </span>
             <MutedSpan>Total staked</MutedSpan>
           </TotalStaked>
           <CreatorReward>
-            <span>{totalRewardsAmount?.dp(1)?.toNumber() || 0} DEV</span>
+            <span>
+              {totalRewardsAmount?.dp(1)?.toNumber() || 0} {totalRewardsAmountCurrency}
+            </span>
             <MutedSpan>Creator reward</MutedSpan>
           </CreatorReward>
         </RowContainer>

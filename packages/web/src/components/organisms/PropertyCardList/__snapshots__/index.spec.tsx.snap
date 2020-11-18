@@ -29,7 +29,7 @@ exports[`PropertyCardList Snapshot 1`] = `
                       class="ant-form-item-control-input-content"
                     >
                       <span
-                        class="ant-input-group-wrapper ant-input-search"
+                        class="ant-input-group-wrapper ant-input-search ant-input-search-with-button"
                       >
                         <span
                           class="ant-input-wrapper ant-input-group"
@@ -84,7 +84,7 @@ exports[`PropertyCardList Snapshot 1`] = `
         style="margin: 54px 0px;"
       >
         <div
-          class="k29mxm-0 gLXTwm"
+          class="k29mxm-0 cfjrPr"
         >
           <div
             class="ant-row"
@@ -93,7 +93,7 @@ exports[`PropertyCardList Snapshot 1`] = `
               class="ant-col ant-col-sm-24 ant-col-md-10"
             >
               <div
-                class="ant-statistic k29mxm-4 cJoHZC"
+                class="ant-statistic k29mxm-4 kbxQVD"
               >
                 <div
                   class="ant-statistic-title"
@@ -112,10 +112,10 @@ exports[`PropertyCardList Snapshot 1`] = `
               </div>
             </div>
             <div
-              class="ant-col k29mxm-2 jLfbuH ant-col-sm-24 ant-col-md-14"
+              class="ant-col k29mxm-2 ctDRvm ant-col-sm-24 ant-col-md-14"
             >
               <div
-                class="ant-row k29mxm-1 jEjHXn"
+                class="ant-row k29mxm-1 URXsy"
               >
                 <div
                   class="ant-col ant-col-12"
@@ -188,14 +188,14 @@ exports[`PropertyCardList Snapshot 1`] = `
                 >
                   <div>
                     <span
-                      class="k29mxm-3 jsHdqR"
+                      class="k29mxm-3 cikeEI"
                       style="position: absolute;"
                     >
                       25
                       % of the total stakes
                     </span>
                     <div
-                      class="sc-5ahzw8-0 jTwvQh"
+                      class="sc-5ahzw8-0 iRyfEw"
                     />
                   </div>
                 </div>

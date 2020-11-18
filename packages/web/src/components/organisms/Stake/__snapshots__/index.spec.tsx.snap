@@ -1,0 +1,84 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Stake Snapshot 1`] = `
+<body>
+  <div>
+    <div
+      class="sc-89297o-0 LrdOg"
+    >
+      <div
+        class="sc-1d8aayd-1 lldfxv"
+      >
+        <span
+          class="ant-input-group-wrapper ant-input-group-wrapper-lg ant-input-search ant-input-search-large ant-input-search-with-button sc-1d8aayd-0 dMAKRx"
+        >
+          <span
+            class="ant-input-wrapper ant-input-group"
+          >
+            <span
+              class="ant-input-affix-wrapper ant-input-affix-wrapper-lg"
+            >
+              <input
+                class="ant-input ant-input-lg"
+                id="stake"
+                type="number"
+                value=""
+              />
+              <span
+                class="ant-input-suffix"
+              >
+                DEV
+                <button
+                  class="ant-btn ant-btn-primary ant-btn-sm sc-1ttu0x8-0 kqGLQy"
+                  type="button"
+                >
+                  <span>
+                    Max
+                  </span>
+                </button>
+              </span>
+            </span>
+            <span
+              class="ant-input-group-addon"
+            >
+              <button
+                class="ant-btn ant-btn-primary ant-btn-lg ant-input-search-button"
+                type="button"
+              >
+                <span>
+                  Stake
+                </span>
+              </button>
+            </span>
+          </span>
+        </span>
+      </div>
+      <div
+        class="ant-card ant-card-bordered sc-1lowp9k-0 dtNkpz"
+      >
+        <div
+          class="ant-card-head"
+        >
+          <div
+            class="ant-card-head-wrapper"
+          >
+            <div
+              class="ant-card-head-title"
+            >
+              Estimated Annual Reward
+            </div>
+          </div>
+        </div>
+        <div
+          class="ant-card-body"
+        >
+          <p>
+            0
+             DEV
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+`;

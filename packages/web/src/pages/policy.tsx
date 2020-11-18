@@ -11,7 +11,7 @@ type Props = {} & InitialProps
 
 const Policy = (_: Props) => {
   return (
-    <>
+    <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
       <Header />
       <Headline height={300}>
         <H2>Policy Proposals</H2>
@@ -21,7 +21,7 @@ const Policy = (_: Props) => {
         <PoliciesList />
       </Container>
       <Footer />
-    </>
+    </div>
   )
 }
 

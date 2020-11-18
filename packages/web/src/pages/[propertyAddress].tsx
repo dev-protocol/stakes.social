@@ -3,13 +3,10 @@ import { useRouter } from 'next/router'
 import { PossessionOutline } from 'src/components/organisms/PossessionOutline'
 import { PropertyHeader } from 'src/components/organisms/PropertyHeader'
 import { Footer } from 'src/components/organisms/Footer'
-
 import styled from 'styled-components'
 import { Container } from 'src/components/atoms/Container'
 import { Header } from 'src/components/organisms/Header'
-import { StakeForm } from 'src/components/organisms/StakeForm'
 import TopStakers from 'src/components/organisms/TopStakers'
-import { Avatar } from 'src/components/molecules/Avatar'
 import { useAPY, usePropertyAuthor } from 'src/fixtures/dev-kit/hooks'
 import { useGetPropertyAuthenticationQuery, useGetPropertyAggregateLazyQuery } from '@dev/graphql'
 import { PlusOutlined } from '@ant-design/icons'
@@ -18,39 +15,22 @@ import { useGetPropertytInformation } from 'src/fixtures/devprtcl/hooks'
 import { useGetAccount, useGetProperty } from 'src/fixtures/dev-for-apps/hooks'
 import ReactMarkdown from 'react-markdown'
 import { WithGradient } from 'src/components/atoms/WithGradient'
-import { useGetAccountAddress } from 'src/fixtures/wallet/hooks'
+import { Stake } from 'src/components/organisms/Stake'
+import { Withdraw } from 'src/components/organisms/Withdraw'
+import { useProvider } from 'src/fixtures/wallet/hooks'
+import { Avatar } from 'src/components/molecules/Avatar'
 
 type Props = {}
 
 const Main = styled(Container)`
   display: grid;
-  grid-gap: 1rem;
+  grid-gap: 3rem;
   grid-template-columns: 1fr;
-  grid-template-areas:
-    'cover'
-    'possession'
-    'stake'
-    'about'
-    'assets'
-    'author'
-    'topstake'
-    'cancel';
   @media (min-width: 1024px) {
     grid-gap: 3rem 2rem;
-    grid-template-columns: 1fr;
-    grid-template-areas:
-      'cover'
-      'possession'
-      'stake'
-      'about'
-      'assets'
-      'author'
-      'topstake'
-      'cancel';
   }
 `
 const Cover = styled.div`
-  grid-area: cover;
   padding-top: 52.5%;
   position: relative;
   background-size: cover;
@@ -64,16 +44,17 @@ const Cover = styled.div`
   );
 `
 
-const TopStakerList = styled(TopStakers)`
-  grid-area: topstake;
-`
+const TopStakerList = styled(TopStakers)``
 
-const Stake = styled(StakeForm)`
-  grid-area: stake;
+const Transact = styled.div`
+  display: grid;
+  grid-gap: 1rem;
+  @media (min-width: 1024px) {
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 3rem;
+  }
 `
-const Possession = styled(PossessionOutline)`
-  grid-area: possession;
-`
+const Possession = styled(PossessionOutline)``
 
 const Wrap = styled.div`
   margin: 2rem auto;
@@ -86,13 +67,11 @@ const Wrap = styled.div`
 const AboutSection = styled.div`
   display: flex;
   flex-direction: column;
-  grid-area: about;
 `
 
 const AssetsSection = styled.div`
   display: flex;
   flex-direction: column;
-  grid-area: assets;
 `
 const AssetList = styled.div`
   display: flex;
@@ -126,7 +105,6 @@ const AuthorContainer = styled.div`
   display: flex;
   flex-direction: column;
   position: relative;
-  grid-area: author;
 `
 
 const Flex = styled.div`
@@ -172,9 +150,13 @@ const Author = ({ propertyAddress }: { propertyAddress: string }) => {
         <>
           <h2>Created by {data?.name}</h2>
           <Flex>
-            <div style={{ width: '150px' }}>
-              <Avatar accountAddress={authorAddress} size={'150'} />
-            </div>
+            <Link passHref href="/profile/[accountAddress]" as={`/profile/${authorAddress}`}>
+              <a>
+                <div style={{ width: '150px' }}>
+                  <Avatar size={'150'} />
+                </div>
+              </a>
+            </Link>
 
             <CreatorContent>
               <ReactMarkdown>{dataAuthor ? dataAuthor.biography : ''}</ReactMarkdown>
@@ -208,12 +190,12 @@ const PropertyAddressDetail = (_: Props) => {
   const { propertyAddress } = useRouter().query as { propertyAddress: string }
   const { apy, creators } = useAPY()
   const { data } = useGetPropertyAuthenticationQuery({ variables: { propertyAddress } })
-  const { data: propertyInformation } = useGetPropertytInformation(propertyAddress)
   const { data: dataProperty } = useGetProperty(propertyAddress)
+  const { data: propertyInformation } = useGetPropertytInformation(propertyAddress)
   /* eslint-disable react-hooks/exhaustive-deps */
   // FYI: https://github.com/facebook/react/pull/19062
   const includedAssetList = useMemo(() => data?.property_authentication.map(e => e.authentication_id), [data])
-  const loggedInWallet = useGetAccountAddress()
+  const { accountAddress: loggedInWallet } = useProvider()
 
   return (
     <>
@@ -224,11 +206,11 @@ const PropertyAddressDetail = (_: Props) => {
         </Container>
         <Main>
           <CoverImageOrGradient src={dataProperty?.cover_image?.url} />
-          <div>
-            <h2>Top stakers</h2>
-            <TopStakerList propertyAdress={propertyAddress} />
-          </div>
-          <Stake propertyAddress={propertyAddress} />
+          <Possession propertyAddress={propertyAddress} />
+          <Transact>
+            <Stake title="Stake" propertyAddress={propertyAddress} />
+            <Withdraw title="Withdraw" propertyAddress={propertyAddress} />
+          </Transact>
           <AboutSection>
             <h2>About</h2>
             <ReactMarkdown>{dataProperty ? dataProperty.description : ''}</ReactMarkdown>
@@ -236,10 +218,10 @@ const PropertyAddressDetail = (_: Props) => {
           <AssetsSection>
             <h2>Included assets</h2>
             <AssetList>
-              {includedAssetList?.map((asset, index) => (
+              {includedAssetList?.map((asset: any, index: any) => (
                 <AssetListItem key={index}>{asset}</AssetListItem>
               ))}
-              {propertyInformation?.author?.address === loggedInWallet?.accountAddress && (
+              {propertyInformation?.author?.address === loggedInWallet && (
                 <Link href={'/auth/[property]'} as={`/auth/${propertyAddress}`}>
                   <AddAsset>
                     <PlusOutlined />
@@ -250,7 +232,10 @@ const PropertyAddressDetail = (_: Props) => {
             </AssetList>
           </AssetsSection>
           <Author propertyAddress={propertyAddress} />
-          <Possession propertyAddress={propertyAddress} />
+          <div>
+            <h2>Top stakers</h2>
+            <TopStakerList propertyAdress={propertyAddress} />
+          </div>
         </Main>
       </Wrap>
 

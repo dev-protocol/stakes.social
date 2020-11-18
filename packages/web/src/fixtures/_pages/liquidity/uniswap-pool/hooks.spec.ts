@@ -6,6 +6,7 @@ import { approve } from './client'
 import { useApprove, useTheGraph } from './hooks'
 
 jest.mock('swr')
+jest.mock('src/fixtures/wallet/hooks.ts')
 jest.mock('src/fixtures/_pages/liquidity/uniswap-pool/client.ts')
 
 describe('uniswap-pool hooks', () => {

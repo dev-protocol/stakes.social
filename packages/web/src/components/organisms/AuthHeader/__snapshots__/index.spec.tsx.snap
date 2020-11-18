@@ -4,6 +4,7 @@ exports[`AuthHeader Snapshot 1`] = `
 <body>
   <div>
     <header
+<<<<<<< HEAD
       class="sc-1bz6snd-0 hQPKZt"
     >
       <div
@@ -17,6 +18,21 @@ exports[`AuthHeader Snapshot 1`] = `
           >
             <a
               class="sc-38x7tx-0 itjGxp"
+=======
+      class="sc-1bz6snd-0 TlprQ"
+    >
+      <div
+        class="sc-1bz6snd-3 iRUEtO"
+      >
+        <header
+          class="sc-1bz6snd-1 fywCvk"
+        >
+          <div
+            class="sc-1bz6snd-2 bmyIOd"
+          >
+            <a
+              class="sc-38x7tx-0 eHXdRo"
+>>>>>>> upstream/main
               href="/"
             >
               <svg
@@ -100,7 +116,11 @@ exports[`AuthHeader Snapshot 1`] = `
             </g>
           </svg>
           <div
+<<<<<<< HEAD
             class="sc-1dxoc5d-2 ePXQBM"
+=======
+            class="sc-1dxoc5d-2 mdZQR"
+>>>>>>> upstream/main
           >
             SignIn
           </div>
@@ -108,11 +128,11 @@ exports[`AuthHeader Snapshot 1`] = `
       </div>
     </header>
     <div
-      class="sc-9gd508-0 bqBhvA"
+      class="sc-9gd508-0 huODHz"
       height="300"
     >
       <h2
-        class="ant-typography"
+        class="sc-1w8sy4l-1 jkEgFw"
       >
         Choose Market
       </h2>

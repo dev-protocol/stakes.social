@@ -11,7 +11,6 @@ describe('wallet utility', () => {
     })
 
     test('Returns account address as a value when web3 existed', async () => {
-      window.ethereum = {} as any
       ;((Web3 as unknown) as jest.Mock).mockImplementation(() => ({
         eth: {
           getAccounts: async () => ['0x...']
@@ -20,11 +19,9 @@ describe('wallet utility', () => {
       const web3 = new Web3()
       const result = await getAccountAddress(web3)
       expect(result).toBe('0x...')
-      delete window.ethereum
     })
 
-    test('Returns account address from the cache as a value when window.ethereum existed and 2nd subsequent call', async () => {
-      window.ethereum = {} as any
+    test('Returns account address from the cache as a value when web3 providerexisted and 2nd subsequent call', async () => {
       const getAccounts = jest.fn(async () => ['0x...'])
       ;((Web3 as unknown) as jest.Mock).mockImplementation(() => ({
         eth: {
@@ -37,7 +34,31 @@ describe('wallet utility', () => {
       const result = await getAccountAddress(web3) // Third call
       expect(result).toBe('0x...')
       expect(getAccounts.mock.calls.length).toBe(1)
-      delete window.ethereum
+    })
+  })
+
+  describe('getDevAmount', () => {
+    test('Return amount value', async () => {
+      const data = 9876543210123456789
+      const fakeContract = function () {}
+      fakeContract.prototype = {
+        methods: {
+          balanceOf: () => {
+            return {
+              call: async () => {
+                return data
+              }
+            }
+          }
+        }
+      }
+      ;((Web3 as unknown) as jest.Mock).mockImplementation(() => ({
+        eth: {
+          Contract: fakeContract
+        }
+      }))
+      const result = await getDevAmount('0x1234567890')
+      expect(result).toBe(data)
     })
   })
 

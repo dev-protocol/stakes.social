@@ -1,6 +1,5 @@
 import React from 'react'
 import { Footer } from 'src/components/organisms/Footer'
-
 import { Header } from 'src/components/organisms/Header'
 import { DevStats } from 'src/components/organisms/DevStats'
 import { H2 } from 'src/components/atoms/Typography'

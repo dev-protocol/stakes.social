@@ -230,7 +230,7 @@ const AuthorLinks = styled.div`
 
 export const Banner = () => {
   return (
-    <div style={{ backgroundColor: 'black' }}>
+    <div style={{ backgroundColor: 'black', paddingTop: '50px' }}>
       <Wrap>
         <div style={{ maxWidth: '1048px', marginRight: 'auto', marginLeft: 'auto', background: 'black' }}>
           <BannerContainer>

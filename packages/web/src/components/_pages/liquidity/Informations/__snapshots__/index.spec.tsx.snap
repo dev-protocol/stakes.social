@@ -1,0 +1,131 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Informations Snapshot 1`] = `
+<body>
+  <div>
+    <div
+      class="sc-1u5gbu5-0 csoAHa"
+    >
+      <div
+        class="ant-card ant-card-bordered sc-1u5gbu5-1 sc-1u5gbu5-2 hGfXno beijLw"
+      >
+        <div
+          class="ant-card-body"
+        >
+          <div
+            class="ant-statistic"
+          >
+            <div
+              class="ant-statistic-title"
+            >
+              Monthly Yield
+            </div>
+            <div
+              class="ant-statistic-content"
+            >
+              <span
+                class="ant-statistic-content-value"
+              >
+                <span
+                  class="ant-statistic-content-value-int"
+                >
+                  
+                  25,920
+                </span>
+                
+              </span>
+              <span
+                class="ant-statistic-content-suffix"
+              >
+                %
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="ant-card ant-card-bordered sc-1u5gbu5-1 sc-1u5gbu5-3 hGfXno BZZdW"
+      >
+        <div
+          class="ant-card-body"
+        >
+          <div
+            class="ant-statistic"
+          >
+            <div
+              class="ant-statistic-title"
+            >
+              Reward Multiplier
+            </div>
+            <div
+              class="ant-statistic-content"
+            >
+              <span
+                class="ant-statistic-content-value"
+              >
+                <span
+                  class="ant-statistic-content-value-int"
+                >
+                  
+                  1
+                </span>
+                <span
+                  class="ant-statistic-content-value-decimal"
+                >
+                  .0
+                </span>
+              </span>
+              <span
+                class="ant-statistic-content-suffix"
+              >
+                X / 5X
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="ant-card ant-card-bordered sc-1u5gbu5-1 sc-1u5gbu5-4 hGfXno foezPq"
+      >
+        <div
+          class="ant-card-body"
+        >
+          <div
+            class="ant-statistic"
+          >
+            <div
+              class="ant-statistic-title"
+            >
+              Accrued Rewards
+            </div>
+            <div
+              class="ant-statistic-content"
+            >
+              <span
+                class="ant-statistic-content-value"
+              >
+                <span
+                  class="ant-statistic-content-value-int"
+                >
+                  
+                  0
+                </span>
+                <span
+                  class="ant-statistic-content-value-decimal"
+                >
+                  .00
+                </span>
+              </span>
+              <span
+                class="ant-statistic-content-suffix"
+              >
+                DEV
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+`;
