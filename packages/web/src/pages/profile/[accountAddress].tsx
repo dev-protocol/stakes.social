@@ -3,13 +3,8 @@ import { Header } from 'src/components/organisms/Header'
 import { Footer } from 'src/components/organisms/Footer'
 import { EarlyAccess } from 'src/components/atoms/EarlyAccess'
 import { Container } from 'src/components/atoms/Container'
-import { H1 } from 'src/components/atoms/Typography'
-import styled from 'styled-components'
 import { useRouter } from 'next/router'
-
-const Heading = styled.div`
-  display: grid;
-`
+import { ProfileHeader } from 'src/components/_pages/profile/ProfileHeader'
 
 const Profile = () => {
   const { accountAddress } = useRouter().query as { accountAddress: string }
@@ -18,11 +13,8 @@ const Profile = () => {
     <>
       <EarlyAccess></EarlyAccess>
       <Header></Header>
-      <Container>
-        <Heading>
-          <H1>Profile of {accountAddress}</H1>
-        </Heading>
-      </Container>
+      <ProfileHeader accountAddress={accountAddress} />
+      <Container></Container>
       <Footer />
     </>
   )

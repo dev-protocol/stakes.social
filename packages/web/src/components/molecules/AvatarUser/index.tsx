@@ -6,9 +6,10 @@ import { Avatar } from 'src/components/atoms/Avatar'
 type Props = {
   accountAddress?: string
   size: string | number
+  className?: string
 }
 
-export const AvatarUser = ({ accountAddress, size }: Props) => {
+export const AvatarUser = ({ accountAddress, size, className }: Props) => {
   const [account, setAccount] = useState<Account>()
   const { data: user } = useGetAccount(accountAddress)
   useEffect(() => {
@@ -17,5 +18,5 @@ export const AvatarUser = ({ accountAddress, size }: Props) => {
     }
   }, [user])
 
-  return <Avatar url={account?.portrait?.url} genkey={accountAddress} size={size}></Avatar>
+  return <Avatar url={account?.portrait?.url} genkey={accountAddress} size={size} className={className}></Avatar>
 }

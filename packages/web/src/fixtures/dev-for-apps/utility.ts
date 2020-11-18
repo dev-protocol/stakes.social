@@ -9,32 +9,45 @@ export interface PropertyTags {
   tags: Array<string>
 }
 
+export type ProfileLinks = {
+  github?: string
+  website?: string
+}
+
+export type NullableProfileLinks = ProfileLinks | null
+
 export interface Account {
   id: number
   name: string
   biography: string
-  portrait: any
+  portrait: Image
+  links: NullableProfileLinks
+  cover_images: Image[]
 }
 
-export interface Image {
+export type ImageFormat = {
   url: string
   width: number
   height: number
+}
+
+export type Image = ImageFormat & {
   formats: {
-    thumbnail: {
-      url: string
-      width: number
-      height: number
-    }
+    thumbnail: ImageFormat
+    small: ImageFormat
+    medium: ImageFormat
+    large: ImageFormat
   }
 }
+
+export type NullableImage = Image | null
 
 export interface Property {
   id: string
   name: string
   description: string
-  cover_image: Image
-  portrait: Image
+  cover_image: NullableImage
+  portrait: NullableImage
 }
 
 export interface UploadFile {
