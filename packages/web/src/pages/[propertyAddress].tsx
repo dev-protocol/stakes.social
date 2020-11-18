@@ -3,7 +3,7 @@ import { useRouter } from 'next/router'
 import { PossessionOutline } from 'src/components/organisms/PossessionOutline'
 import { PropertyHeader } from 'src/components/organisms/PropertyHeader'
 import { Footer } from 'src/components/organisms/Footer'
-import { EarlyAccess } from 'src/components/atoms/EarlyAccess'
+
 import styled from 'styled-components'
 import { Container } from 'src/components/atoms/Container'
 import { Header } from 'src/components/organisms/Header'
@@ -218,7 +218,6 @@ const PropertyAddressDetail = (_: Props) => {
   return (
     <>
       <Header></Header>
-      <EarlyAccess></EarlyAccess>
       <Wrap>
         <Container>
           <PropertyHeader apy={apy} creators={creators} propertyAddress={propertyAddress} />

@@ -1,7 +1,7 @@
 import React, { useMemo, useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import { Header } from 'src/components/organisms/Header'
-import { EarlyAccess } from 'src/components/atoms/EarlyAccess'
+
 import { Footer } from 'src/components/organisms/Footer'
 import styled from 'styled-components'
 import { LoremIpsum } from 'lorem-ipsum'
@@ -304,7 +304,6 @@ const AuthorAddressDetail = (_: Props) => {
   return (
     <>
       <Header></Header>
-      <EarlyAccess></EarlyAccess>
       <Banner />
       <Wrap>
         <ProfilePicture>

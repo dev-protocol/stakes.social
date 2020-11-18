@@ -5,7 +5,7 @@ const BannerContainer = styled.div`
   display: grid;
   grid-template-columns: 1fr;
   background-color: black;
-  padding: 40px 0;
+  padding: 100px 0 40px 0;
 
   @media (min-width: 1024px) {
     grid-template-columns: 1fr 1fr;

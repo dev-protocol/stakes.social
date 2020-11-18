@@ -86,7 +86,7 @@ const SearchBar = ({ activeSearchTerm, onSearchTermChange }: SearchBarProps) => 
       <SearchbarInput
         data-cy="SearchbarInput"
         defaultValue={activeSearchTerm}
-        placeholder="Search for an asset pool or creator"
+        placeholder="Search for a project"
         onChange={e => {
           startedRef.current = true
           setSearchTerm(e.target.value)

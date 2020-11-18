@@ -4,7 +4,6 @@ import { Footer } from 'src/components/organisms/Footer'
 import styled from 'styled-components'
 import Text from 'antd/lib/typography/Text'
 import { Button } from 'antd'
-import { EarlyAccess } from 'src/components/atoms/EarlyAccess'
 
 const Article = styled.article`
   padding: 2em;
@@ -69,7 +68,6 @@ const MavigationButtons = styled.div`
 const HowItWorks = () => {
   return (
     <>
-      <EarlyAccess></EarlyAccess>
       <main>
         <Header />
         <Article>

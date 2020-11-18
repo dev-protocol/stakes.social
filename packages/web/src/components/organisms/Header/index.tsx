@@ -6,6 +6,7 @@ import styled from 'styled-components'
 import { Navigation } from 'src/components/molecules/Navigation'
 import { useState } from 'react'
 import Link from 'next/link'
+import { EarlyAccess } from 'src/components/atoms/EarlyAccess'
 
 interface Props {
   colorSchema?: 'black' | 'white'
@@ -94,26 +95,29 @@ const NavigationMenu = styled.div`
 export const Header = ({ colorSchema = 'white' }: Props = {}) => {
   const [isMenuOpen, setMenuOpen] = useState(false)
   return (
-    <HeaderContainer>
-      <ResponsiveWrap>
-        <Top>
-          <Logo>
-            <BrandLogo colorSchema={colorSchema} props={{ height: undefined }}></BrandLogo>
-          </Logo>
-          <Navigation isMenuOpen={isMenuOpen} handleMenuOpen={setMenuOpen} />
-        </Top>
-        {isMenuOpen && (
-          <NavigationMenu>
-            {navs.map(nav => (
-              <>
-                <NavigationItem key={nav.key}>
-                  <Link href={nav.pathname}>{nav.label}</Link>
-                </NavigationItem>
-              </>
-            ))}
-          </NavigationMenu>
-        )}
-      </ResponsiveWrap>
-    </HeaderContainer>
+    <div style={{ position: 'fixed', top: 0, width: '100%', zIndex: 2 }}>
+      <HeaderContainer>
+        <ResponsiveWrap>
+          <Top>
+            <Logo>
+              <BrandLogo colorSchema={colorSchema} props={{ height: undefined }}></BrandLogo>
+            </Logo>
+            <Navigation isMenuOpen={isMenuOpen} handleMenuOpen={setMenuOpen} />
+          </Top>
+          {isMenuOpen && (
+            <NavigationMenu>
+              {navs.map(nav => (
+                <>
+                  <NavigationItem key={nav.key}>
+                    <Link href={nav.pathname}>{nav.label}</Link>
+                  </NavigationItem>
+                </>
+              ))}
+            </NavigationMenu>
+          )}
+        </ResponsiveWrap>
+      </HeaderContainer>
+      <EarlyAccess />
+    </div>
   )
 }
