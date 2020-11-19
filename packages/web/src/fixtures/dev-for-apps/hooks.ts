@@ -197,7 +197,7 @@ export const useGetProperty = (propertyAddress?: string) => {
 }
 
 export const useUploadAccountAvatar = (accountAddress: string) => {
-  const { data: account } = useGetAccount(accountAddress)
+  const { data: account, mutate } = useGetAccount(accountAddress)
   const { postUploadFileHandler, isLoading, error } = useUploadFile(accountAddress)
 
   const upload = async (file: any) => {
@@ -205,7 +205,27 @@ export const useUploadAccountAvatar = (accountAddress: string) => {
     const ref = 'Account'
     const field = 'portrait'
     const path = `assets/${accountAddress}`
-    return postUploadFileHandler(refId, ref, field, file, path)
+    return postUploadFileHandler(refId, ref, field, file, path).then(x => {
+      mutate()
+      return x
+    })
+  }
+  return { upload, isLoading, error }
+}
+
+export const useUploadAccountCoverImages = (accountAddress: string) => {
+  const { data: account, mutate } = useGetAccount(accountAddress)
+  const { postUploadFileHandler, isLoading, error } = useUploadFile(accountAddress)
+
+  const upload = async (file: any) => {
+    const refId = Number(account?.id)
+    const ref = 'Account'
+    const field = 'cover_images'
+    const path = `assets/${accountAddress}/${field}`
+    return postUploadFileHandler(refId, ref, field, file, path).then(x => {
+      mutate()
+      return x
+    })
   }
   return { upload, isLoading, error }
 }

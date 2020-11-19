@@ -22,25 +22,21 @@ export const useUploadFile = (accountAddress: string) => {
     setIsLoading(true)
     message.loading({ content: 'upload data...', duration: 0, key })
 
-    const res = await mutate(
-      SWRCachePath.uploadFile(),
-      postUploadFile(signMessage, signature, accountAddress, refId, ref, field, file, path)
-        .then(result => {
-          if (result.error) {
-            message.error({ content: result.error, key })
-            setError(new Error(result.error))
-          } else {
-            message.success({ content: 'success upload', key })
-          }
-          return result
-        })
-        .catch(err => {
-          message.error({ content: err.message, key })
-          setError(err)
-          return err
-        }),
-      false
-    )
+    const res = postUploadFile(signMessage, signature, accountAddress, refId, ref, field, file, path)
+      .then(result => {
+        if (result.error) {
+          message.error({ content: result.error, key })
+          setError(new Error(result.error))
+        } else {
+          message.success({ content: 'success upload', key })
+        }
+        return result
+      })
+      .catch((err: Error) => {
+        message.error({ content: err.message, key })
+        setError(err)
+        return err
+      })
 
     setIsLoading(false)
 

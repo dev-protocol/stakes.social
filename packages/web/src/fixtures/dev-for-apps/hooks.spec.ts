@@ -123,8 +123,9 @@ describe('dev-for-apps hooks for property tags', () => {
 describe('dev-for-apps hooks with strapi for account', () => {
   describe('useUploadAccountAvatar', () => {
     test('success post file', async () => {
-      ;(useGetAccount as jest.Mock).mockImplementation(() => ({ data: { id: 123 } }))
       const mockHandler = jest.fn().mockImplementation(() => jest.fn())
+      const mockMutate = jest.fn().mockImplementation(() => jest.fn())
+      ;(useGetAccount as jest.Mock).mockImplementation(() => ({ data: { id: 123 }, mutate: mockMutate }))
       ;(useUploadFile as jest.Mock).mockImplementation(() => ({
         postUploadFileHandler: mockHandler,
         isLoading: false
@@ -138,6 +139,7 @@ describe('dev-for-apps hooks with strapi for account', () => {
       expect(mockHandler.mock.calls[0][2]).toBe('portrait')
       expect(mockHandler.mock.calls[0][3]).toBe('image data')
       expect(mockHandler.mock.calls[0][4]).toBe('assets/0x01234567890')
+      expect(mockMutate.mock.calls.length).toBe(1)
     })
 
     test('failure post file', async () => {

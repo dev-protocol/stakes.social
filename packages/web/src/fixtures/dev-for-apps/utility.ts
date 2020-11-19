@@ -29,6 +29,10 @@ export type ImageFormat = {
   url: string
   width: number
   height: number
+  hash: string
+  name: string
+  mime: string
+  size: number
 }
 
 export type Image = ImageFormat & {

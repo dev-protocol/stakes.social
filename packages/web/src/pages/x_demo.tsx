@@ -9,21 +9,27 @@ import {
   useCreateAccount,
   useGetAccount,
   useUpdateAccount,
-  useUploadAccountAvatar
+  useUploadAccountAvatar,
+  useUploadAccountCoverImages
 } from 'src/fixtures/dev-for-apps/hooks'
-import { Button, Divider, Form, Input, message, Upload } from 'antd'
+import { Button, Divider, Form, Input, Upload } from 'antd'
 import { whenDefined } from 'src/fixtures/utility'
-import { LoadingOutlined, PlusOutlined } from '@ant-design/icons'
 import { NotConnectedAndEmpty } from 'src/components/atoms/NotConnectedAndEmpty'
+import { UploadChangeParam, UploadFile } from 'antd/lib/upload/interface'
+import { useEffect } from 'react'
+import { Image } from 'src/fixtures/dev-for-apps/utility'
 
 type InitialProps = {}
 type Props = {} & InitialProps
 
-const getBase64 = (img: any, callback: any) => {
-  const reader = new FileReader()
-  reader.addEventListener('load', () => callback(reader.result))
-  reader.readAsDataURL(img)
-}
+const apiDataToUploadFile = ({ hash: uid, url, name, size, mime: type }: Image): UploadFile => ({
+  status: 'done',
+  uid,
+  url,
+  name,
+  size,
+  type
+})
 
 const ShowProfile = ({ accountAddress }: { accountAddress: string }) => {
   const { data } = useGetAccount(accountAddress)
@@ -71,73 +77,50 @@ const ProfileUpdateForm = ({ accountAddress }: { accountAddress: string }) => {
 }
 
 const AvatarUpdateForm = ({ accountAddress }: { accountAddress: string }) => {
-  const avatarImageSize = 120
-  const [loading, setLoading] = useState<boolean>(false)
-  const [imageUrl, setImageUrl] = useState<string>('')
-  const { upload, isLoading: isUploadLoading } = useUploadAccountAvatar(accountAddress)
+  const { data } = useGetAccount(accountAddress)
+  const [fileList, setFileList] = useState<UploadFile[] | undefined>()
+  const { upload } = useUploadAccountAvatar(accountAddress)
+  useEffect(() => {
+    setFileList(whenDefined(data?.portrait, x => [apiDataToUploadFile(x)]))
+  }, [setFileList, data])
 
-  const beforeUpload = (file: any) => {
-    const isValidImage = file.type === 'image/jpeg' || file.type === 'image/png'
-    if (!isValidImage) {
-      message.error('can only upload JPG/PNG file')
-    }
-    const isValidSize = file.size / 1024 / 1024 < 2
-    if (!isValidSize) {
-      message.error('image file must smaller than 2MB')
-    }
-    return isValidImage && isValidSize
-  }
-
-  const handleChange = (info: any) => {
-    if (info.file.status === 'uploading') {
-      setLoading(true)
-      return
-    }
-    if (info.file.status === 'done') {
-      getBase64(info.file.originFileObj, (imageUrl: string) => {
-        setLoading(false)
-        setImageUrl(imageUrl)
-      })
+  const handleChange = (info: UploadChangeParam<UploadFile>) => {
+    if (info.event) {
+      setFileList([{ ...info.file, status: 'uploading' }])
+      upload(info.file.originFileObj)
     }
   }
-  const handleSubmit = useCallback(
-    (info: any) => {
-      upload(info.upload.file.originFileObj)
-      setImageUrl('')
-    },
-    [upload]
-  )
 
   return (
-    <Form layout="vertical" onFinish={(fileList: object[]) => handleSubmit(fileList)}>
-      <Form.Item name="upload" valuePropName="files">
-        <Upload
-          name="portrait"
-          multiple={false}
-          listType="picture-card"
-          className="avatar-uploader"
-          showUploadList={false}
-          beforeUpload={beforeUpload}
-          onChange={handleChange}
-        >
-          {imageUrl ? (
-            <div>
-              <img src={imageUrl} alt="avatar" style={{ width: `${avatarImageSize}px` }} />
-            </div>
-          ) : (
-            <div>
-              {loading ? <LoadingOutlined /> : <PlusOutlined />}
-              <div style={{ marginTop: 8 }}>Upload</div>
-            </div>
-          )}
-        </Upload>
-      </Form.Item>
-      <Form.Item>
-        <Button type="primary" htmlType="submit" loading={isUploadLoading}>
-          Save
-        </Button>
-      </Form.Item>
-    </Form>
+    <Upload name="portrait" multiple={false} listType="picture-card" fileList={fileList} onChange={handleChange}>
+      <div>
+        <p>{data && data.portrait ? 'Change' : 'Upload'}</p>
+      </div>
+    </Upload>
+  )
+}
+
+const CoverImagesUpdateForm = ({ accountAddress }: { accountAddress: string }) => {
+  const { data } = useGetAccount(accountAddress)
+  const [fileList, setFileList] = useState<UploadFile[] | undefined>()
+  const { upload } = useUploadAccountCoverImages(accountAddress)
+  useEffect(() => {
+    setFileList(whenDefined(data?.cover_images, x => x.map(y => apiDataToUploadFile(y))))
+  }, [setFileList, data])
+
+  const handleChange = (info: UploadChangeParam<UploadFile>) => {
+    if (info.event) {
+      setFileList([...(fileList ?? []), { ...info.file, status: 'uploading' }])
+      upload(info.file.originFileObj)
+    }
+  }
+
+  return (
+    <Upload name="portrait" multiple={false} listType="picture-card" fileList={fileList} onChange={handleChange}>
+      <div>
+        <p>Upload</p>
+      </div>
+    </Upload>
   )
 }
 
@@ -162,6 +145,8 @@ const Demo = (_: Props) => {
           <Divider />
           <h2>Avatar</h2>
           <AvatarUpdateForm accountAddress={account} />
+          <h2>Cover Images</h2>
+          <CoverImagesUpdateForm accountAddress={account} />
         </Container>
       )) ?? <NotConnectedAndEmpty />}
       <Footer />
