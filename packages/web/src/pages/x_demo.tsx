@@ -1,12 +1,16 @@
-import React, { useCallback, useEffect, useState } from 'react'
+import React, { useCallback, useState } from 'react'
 import { Footer } from 'src/components/organisms/Footer'
 import { EarlyAccess } from 'src/components/atoms/EarlyAccess'
 import { Headline } from 'src/components/atoms/Headline'
 import { Header } from 'src/components/organisms/Header'
 import { Container } from 'src/components/atoms/Container'
 import { useProvider } from 'src/fixtures/wallet/hooks'
-import { useCreateAccount, useGetAccount, useUpdateAccount, useUploadFile } from 'src/fixtures/dev-for-apps/hooks'
-import { Account } from 'src/fixtures/dev-for-apps/utility'
+import {
+  useCreateAccount,
+  useGetAccount,
+  useUpdateAccount,
+  useUploadAccountAvatar
+} from 'src/fixtures/dev-for-apps/hooks'
 import { Button, Divider, Form, Input, message, Upload } from 'antd'
 import { whenDefined } from 'src/fixtures/utility'
 import { LoadingOutlined, PlusOutlined } from '@ant-design/icons'
@@ -31,9 +35,9 @@ const ShowProfile = ({ accountAddress }: { accountAddress: string }) => {
 const ProfileUpdateForm = ({ accountAddress }: { accountAddress: string }) => {
   const { data } = useGetAccount(accountAddress)
   const { postAccountHandler: createAccount, isLoading } = useCreateAccount(accountAddress)
-  const { putAccountHandler: updateAccount } = useUpdateAccount(Number(data?.id || 0), accountAddress)
+  const { putAccountHandler: updateAccount } = useUpdateAccount(Number(data?.id), accountAddress)
   const isExists = Boolean(data)
-  const handleSubmitDisplayName = useCallback(
+  const handleSubmit = useCallback(
     (displayName: string, biography: string) => {
       const handler = isExists ? updateAccount : createAccount
       handler(displayName, biography)
@@ -46,7 +50,7 @@ const ProfileUpdateForm = ({ accountAddress }: { accountAddress: string }) => {
       layout="vertical"
       onFinish={
         (({ displayName, biography }: { displayName: string; biography: string }) =>
-          handleSubmitDisplayName(displayName, biography)) as any
+          handleSubmit(displayName, biography)) as any
       }
     >
       <Form.Item
@@ -70,15 +74,7 @@ const AvatarUpdateForm = ({ accountAddress }: { accountAddress: string }) => {
   const avatarImageSize = 120
   const [loading, setLoading] = useState<boolean>(false)
   const [imageUrl, setImageUrl] = useState<string>('')
-  const { postUploadFileHandler: uploadFile, isLoading: isUploadLoading } = useUploadFile(accountAddress)
-  const [account, setAccount] = useState<Account>()
-  const { data: user } = useGetAccount(accountAddress)
-  useEffect(() => {
-    if (user) {
-      useProvider
-      setAccount(user)
-    }
-  }, [user])
+  const { upload, isLoading: isUploadLoading } = useUploadAccountAvatar(accountAddress)
 
   const beforeUpload = (file: any) => {
     const isValidImage = file.type === 'image/jpeg' || file.type === 'image/png'
@@ -106,21 +102,14 @@ const AvatarUpdateForm = ({ accountAddress }: { accountAddress: string }) => {
   }
   const handleSubmit = useCallback(
     (info: any) => {
-      const refId = account?.id
-      const ref = 'Account'
-      const field = 'portrait'
-      const path = `assets/${accountAddress}`
-      if (refId === undefined) {
-        return
-      }
-      uploadFile(refId, ref, field, info.upload.file.originFileObj, path)
+      upload(info.upload.file.originFileObj)
       setImageUrl('')
     },
-    [account, accountAddress, uploadFile]
+    [upload]
   )
 
   return (
-    <Form layout="vertical" onFinish={((fileList: object[]) => handleSubmit(fileList)) as any}>
+    <Form layout="vertical" onFinish={(fileList: object[]) => handleSubmit(fileList)}>
       <Form.Item name="upload" valuePropName="files">
         <Upload
           name="portrait"

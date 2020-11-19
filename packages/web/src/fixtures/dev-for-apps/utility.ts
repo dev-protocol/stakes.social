@@ -139,7 +139,7 @@ export const putAccount = (
     })
   }).then(res => res.json())
 
-export const postUploadFile = (
+export const postUploadFile = async (
   signMessage: string,
   signature: string,
   address: string,
