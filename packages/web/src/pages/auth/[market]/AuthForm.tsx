@@ -104,13 +104,13 @@ const TextArea = styled.textarea`
 
   &:hover {
     transition: all 0.2s ease-in;
-    border: 1px solid grey;
+    border: 1px solid deeppink;
   }
 
   &:focus {
     transition: all 0.2s ease-in;
-    border: 1px solid black;
-    box-shadow: 0 0 0 1px grey;
+    border: 1px solid deeppink;
+    box-shadow: 0 0 0 1px lightpink;
   }
 `
 

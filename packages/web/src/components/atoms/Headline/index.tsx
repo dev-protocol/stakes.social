@@ -11,7 +11,9 @@ export const Headline = styled.div<Props>`
   align-items: center;
   flex-flow: column;
 
-  h2,
+  h2 {
+    color: black;
+  }
   span {
     color: #4f4f4f;
   }

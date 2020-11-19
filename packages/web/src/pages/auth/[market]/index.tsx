@@ -24,9 +24,9 @@ const AuthenticateNewAsset = (_: Props) => {
   return (
     <>
       <Header />
-      <Headline height={300}>
+      <Headline>
         <H2>Create an Asset</H2>
-        <span style={{ fontSize: '0.9em' }}>Create an asset or authenticate an existing pool.</span>
+        <span>Create an asset or authenticate an existing pool.</span>
       </Headline>
       <Container>
         <AuthForm market={market} />
