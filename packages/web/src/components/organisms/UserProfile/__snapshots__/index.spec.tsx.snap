@@ -43,6 +43,16 @@ exports[`UserProfile Snapshot 1`] = `
         >
           (Not set)
         </div>
+        <div
+          class="sc-4avdzt-1 ktSftV"
+        >
+          Biography
+        </div>
+        <div
+          class="sc-4avdzt-3 efDWlY"
+        >
+          (Not set)
+        </div>
       </section>
       <section
         class="sc-4avdzt-0 jbRCmr"
@@ -57,18 +67,32 @@ exports[`UserProfile Snapshot 1`] = `
         </button>
       </section>
       <section
+<<<<<<< HEAD
+        class="sc-4avdzt-0 iEUrma"
+      >
+        <div
+          class="sc-4avdzt-1 ktSftV"
+=======
         class="sc-4avdzt-0 jbRCmr"
       >
         <div
           class="sc-4avdzt-1 jGXkIY"
+>>>>>>> upstream/main
         >
           Your Avatar
         </div>
         <div
+<<<<<<< HEAD
+          class="sc-17om263-0 eyeSpH"
+        />
+        <form
+          class="ant-form ant-form-vertical sc-4avdzt-4 cjwGrs"
+=======
           class="sc-2tazhb-0 floQve"
         />
         <form
           class="ant-form ant-form-vertical sc-4avdzt-4 hdQhkp"
+>>>>>>> upstream/main
         >
           <div
             class="ant-row ant-form-item"

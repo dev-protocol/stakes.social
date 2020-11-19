@@ -2,11 +2,10 @@ import React, { useCallback, useContext } from 'react'
 import styled from 'styled-components'
 import SettingContext from 'src/context/settingContext'
 
-interface Props {
-  className?: string
-}
+interface Props {}
 
-const Button = styled.button<{ isActive?: boolean }>`
+const Button = styled.button<{ isActive?: boolean; isFirst?: boolean }>`
+  margin-right: ${props => (props?.isFirst ? '10px' : 'none')};
   display: flex;
   justify-content: space-evenly;
   align-items: center;
@@ -28,25 +27,28 @@ const Circle = styled.div<{ isActive?: boolean }>`
 
 const CurrencyContainer = styled.div`
   display: flex;
-  justify-content: stretch;
+  justify-content: flex-end;
   align-items: center;
+  margin-left: 30px;
 `
 
-export const CurrencySwitcher = ({ className }: Props) => {
+export const CurrencySwitcher = (_: Props) => {
   const { isCurrencyDEV, toggleCurrency } = useContext(SettingContext)
   const handleToggleCurrency = useCallback(() => {
     toggleCurrency()
   }, [toggleCurrency])
   return (
-    <CurrencyContainer className={className} onClick={handleToggleCurrency}>
-      <Button isActive={isCurrencyDEV}>
-        <Circle isActive={isCurrencyDEV} />
-        <span>DEV</span>
-      </Button>
-      <Button isActive={!isCurrencyDEV}>
-        <Circle isActive={!isCurrencyDEV} />
-        <span>USD</span>
-      </Button>
-    </CurrencyContainer>
+    <>
+      <CurrencyContainer onClick={handleToggleCurrency}>
+        <Button isActive={isCurrencyDEV} isFirst>
+          <Circle isActive={isCurrencyDEV} />
+          <span>DEV</span>
+        </Button>
+        <Button isActive={!isCurrencyDEV}>
+          <Circle isActive={!isCurrencyDEV} />
+          <span>USD</span>
+        </Button>
+      </CurrencyContainer>
+    </>
   )
 }

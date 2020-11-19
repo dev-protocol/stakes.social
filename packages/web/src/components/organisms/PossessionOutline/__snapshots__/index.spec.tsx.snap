@@ -4,15 +4,24 @@ exports[`PossessionOutline Snapshot 1`] = `
 <body>
   <div>
     <div
+<<<<<<< HEAD
+      class="zlzook-0 krkqv"
+=======
       class="zlzook-0 eXXiQS"
+>>>>>>> upstream/main
     >
       <div
-        class="ant-statistic"
+        class="zlzook-1 cxefGn"
       >
-        <div
-          class="ant-statistic-title"
-        >
+        <h3>
           Total Staking Amount
+<<<<<<< HEAD
+        </h3>
+        <h3>
+          10000
+           DEV
+        </h3>
+=======
         </div>
         <div
           class="ant-statistic-content"
@@ -33,14 +42,20 @@ exports[`PossessionOutline Snapshot 1`] = `
             </span>
           </span>
         </div>
+>>>>>>> upstream/main
       </div>
       <div
-        class="ant-statistic"
+        class="zlzook-1 cxefGn"
       >
-        <div
-          class="ant-statistic-title"
-        >
+        <h3>
           Your Staking Amount
+<<<<<<< HEAD
+        </h3>
+        <h3>
+          5000
+           DEV
+        </h3>
+=======
         </div>
         <div
           class="ant-statistic-content"
@@ -61,14 +76,20 @@ exports[`PossessionOutline Snapshot 1`] = `
             </span>
           </span>
         </div>
+>>>>>>> upstream/main
       </div>
       <div
-        class="ant-statistic"
+        class="zlzook-1 cxefGn"
       >
-        <div
-          class="ant-statistic-title"
-        >
+        <h3>
           Your Staking Share
+<<<<<<< HEAD
+        </h3>
+        <h3>
+          50.00
+          %
+        </h3>
+=======
         </div>
         <div
           class="ant-statistic-content"
@@ -94,14 +115,20 @@ exports[`PossessionOutline Snapshot 1`] = `
             %
           </span>
         </div>
+>>>>>>> upstream/main
       </div>
       <div
-        class="ant-statistic"
+        class="zlzook-1 cxefGn"
       >
-        <div
-          class="ant-statistic-title"
-        >
+        <h3>
           Total Rewards
+<<<<<<< HEAD
+        </h3>
+        <h3>
+          10000
+           DEV
+        </h3>
+=======
         </div>
         <div
           class="ant-statistic-content"
@@ -122,6 +149,7 @@ exports[`PossessionOutline Snapshot 1`] = `
             </span>
           </span>
         </div>
+>>>>>>> upstream/main
       </div>
     </div>
   </div>

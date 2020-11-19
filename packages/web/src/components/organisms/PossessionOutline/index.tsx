@@ -1,7 +1,7 @@
-import { Statistic } from 'antd'
 import React from 'react'
 import { useGetTotalStakingAmount, useGetMyStakingAmount, useGetTotalRewardsAmount } from 'src/fixtures/dev-kit/hooks'
 import styled from 'styled-components'
+import { Statistic } from 'antd'
 
 interface Props {
   className?: string

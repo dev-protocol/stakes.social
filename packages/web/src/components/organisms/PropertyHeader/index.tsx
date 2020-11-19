@@ -27,7 +27,9 @@ const SubHeader = styled.div`
 `
 
 const StyledDivider = styled(Divider)`
-  border-left: 1px solid black;
+  padding: 0;
+  margin-left: 2px;
+  margin-right: 2px;
 `
 
 interface Props {
@@ -48,12 +50,18 @@ export const PropertyHeader = ({ propertyAddress, apy, creators }: Props) => {
     <ResponsivePropertyAddressFrame>
       <Header>{`${data?.property_authentication?.[0]?.authentication_id}'s Pool` || `${propertyAddress} Pool`}</Header>
       <SubHeader>
-        <div style={{ marginBottom: 0 }}>
-          <WithGradient>{apy?.dp(0).toNumber() || 'N/A'}%</WithGradient> APY Stakers
+        <div style={{ display: 'flex', marginBottom: 0 }}>
+          <WithGradient>{apy?.dp(0).toNumber() || 'N/A'}%</WithGradient>
           <StyledDivider type="vertical" />
-          <WithGradient> {creators?.dp(0).toNumber() || 'N/A'}%</WithGradient> APY Creators
+          APY Stakers
+          <StyledDivider type="vertical">|</StyledDivider>
+          <WithGradient> {creators?.dp(0).toNumber() || 'N/A'}%</WithGradient>
           <StyledDivider type="vertical" />
-          <WithGradient> {dataAuthor?.karma.toLocaleString() || 'N/A'}</WithGradient> Karma
+          APY Creators
+          <StyledDivider type="vertical">|</StyledDivider>
+          <WithGradient> {dataAuthor?.karma.toLocaleString() || 'N/A'}</WithGradient>
+          <StyledDivider type="vertical" />
+          Karma
         </div>
         <BuyDevButton />
       </SubHeader>

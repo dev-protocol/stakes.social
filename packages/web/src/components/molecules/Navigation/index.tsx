@@ -7,7 +7,6 @@ import Link from 'next/link'
 import Hamburger from 'src/components/atoms/Svgs/tsx/Hamburger'
 import { useConnectWallet } from 'src/fixtures/wallet/hooks'
 import { useProvider } from 'src/fixtures/wallet/hooks'
-import { UserOutlined } from '@ant-design/icons'
 import { NavMenu, AccountBtn, Connecting, NavMenuItem } from './../../atoms/Navigation/index'
 import WalletContext from 'src/context/walletContext'
 import { useEffectAsync } from 'src/fixtures/utility'
@@ -27,11 +26,6 @@ export const Navigations = [
     key: 'liquidity',
     label: 'Liquidity',
     pathname: '/liquidity'
-  },
-  {
-    key: 'portfolio',
-    label: 'Portfolio',
-    pathname: '/portfolio'
   },
   {
     key: 'create',
@@ -128,10 +122,9 @@ export const Navigation = ({ handleMenuOpen }: NavigationProps) => {
           {isConnecting ? (
             <Connecting>{'Connecting...'}</Connecting>
           ) : !isConnected && !accountAddress ? (
-            'SignIn'
+            'Sign in'
           ) : (
             <Fragment>
-              <UserOutlined />
               <span className="hideOnSmall"> {'Profile'} </span>
             </Fragment>
           )}

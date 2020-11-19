@@ -4,7 +4,11 @@ exports[`Footer Snapshot 1`] = `
 <body>
   <div>
     <footer
+<<<<<<< HEAD
+      class="sc-1fvy930-0 kaRjiP"
+=======
       class="sc-1fvy930-0 jIxbju"
+>>>>>>> upstream/main
     >
       <div
         class="sc-1wzqvkc-0 byYDMh"
@@ -13,7 +17,11 @@ exports[`Footer Snapshot 1`] = `
           style="text-align: left;"
         >
           <a
+<<<<<<< HEAD
+            class="sc-38x7tx-0 itjGxp"
+=======
             class="sc-38x7tx-0 eHXdRo"
+>>>>>>> upstream/main
             href="/"
           >
             <svg
@@ -74,7 +82,11 @@ exports[`Footer Snapshot 1`] = `
           .
         </p>
         <div
+<<<<<<< HEAD
+          class="sc-1fvy930-1 RFsvn"
+=======
           class="sc-1fvy930-1 cyOmEy"
+>>>>>>> upstream/main
         >
           <div
             style="text-align: center; margin-bottom: 15px;"
@@ -82,7 +94,11 @@ exports[`Footer Snapshot 1`] = `
             Enjoy following the Dev Protocol community on
           </div>
           <a
+<<<<<<< HEAD
+            class="sc-3pzwbd-0 lbDtNj"
+=======
             class="sc-3pzwbd-0 bmKzdy"
+>>>>>>> upstream/main
             href="//discord.gg/VwJp4KM"
           >
             <svg
@@ -110,7 +126,11 @@ exports[`Footer Snapshot 1`] = `
             </span>
           </a>
           <a
+<<<<<<< HEAD
+            class="sc-3pzwbd-0 lbDtNj"
+=======
             class="sc-3pzwbd-0 bmKzdy"
+>>>>>>> upstream/main
             href="https://t.me/devprtcl"
           >
             <svg
@@ -149,7 +169,11 @@ exports[`Footer Snapshot 1`] = `
             </span>
           </a>
           <a
+<<<<<<< HEAD
+            class="sc-3pzwbd-0 lbDtNj"
+=======
             class="sc-3pzwbd-0 bmKzdy"
+>>>>>>> upstream/main
             href="//medium.com/devtoken"
           >
             <svg
@@ -188,7 +212,11 @@ exports[`Footer Snapshot 1`] = `
             </span>
           </a>
           <a
+<<<<<<< HEAD
+            class="sc-3pzwbd-0 lbDtNj"
+=======
             class="sc-3pzwbd-0 bmKzdy"
+>>>>>>> upstream/main
             href="//spectrum.chat/devtoken"
           >
             <svg
@@ -249,7 +277,11 @@ exports[`Footer Snapshot 1`] = `
             </span>
           </a>
           <a
+<<<<<<< HEAD
+            class="sc-3pzwbd-0 lbDtNj"
+=======
             class="sc-3pzwbd-0 bmKzdy"
+>>>>>>> upstream/main
             href="//twitter.com/devprtcl"
           >
             <svg
@@ -290,7 +322,11 @@ exports[`Footer Snapshot 1`] = `
         </div>
       </div>
       <div
+<<<<<<< HEAD
+        class="sc-1wzqvkc-0 bqVTXQ"
+=======
         class="sc-1wzqvkc-0 byYDMh"
+>>>>>>> upstream/main
         style="margin: unset; text-align: center; max-width: unset; background: black; padding: 50px 0px;"
       >
         <svg
@@ -346,7 +382,11 @@ exports[`Footer Snapshot 1`] = `
           Powered by Dev Protocol
         </div>
         <small
+<<<<<<< HEAD
+          class="sc-1fvy930-2 gOpqvM"
+=======
           class="sc-1fvy930-2 dYudel"
+>>>>>>> upstream/main
         >
           All emojis designed by 
           <a

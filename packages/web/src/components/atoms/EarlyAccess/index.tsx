@@ -9,10 +9,9 @@ const Wrap = styled.div`
   color: white;
   padding: 2px;
   text-align: center;
+
+  font-size: 0.8em;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
 `
 
-export const EarlyAccess = () => (
-  <Wrap>
-    <span style={{ fontSize: '16px' }}> Early Access Version </span>
-  </Wrap>
-)
+export const EarlyAccess = () => <Wrap>Beta Version</Wrap>

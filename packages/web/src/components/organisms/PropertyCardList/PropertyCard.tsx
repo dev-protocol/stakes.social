@@ -10,7 +10,7 @@ import styled from 'styled-components'
 import { truncate } from 'src/fixtures/utility/string'
 import { LoremIpsum } from 'lorem-ipsum'
 import { useGetPropertytInformation } from 'src/fixtures/devprtcl/hooks'
-import { AvatarUser } from 'src/components/molecules/AvatarUser'
+import { Avatar } from 'src/components/molecules/Avatar'
 import BigNumber from 'bignumber.js'
 
 const lorem = new LoremIpsum({
@@ -36,7 +36,7 @@ interface Props {
 const Card = styled.div`
   display: flex;
   flex-direction: column;
-  margin-right: 0;
+  margin: 0;
   height: 500px;
   width: 345px;
   border: solid 1px #f0f0f0;
@@ -193,7 +193,7 @@ export const PropertyCard = ({ propertyAddress, assets }: Props) => {
         <Title>{includeAssets || 'Property'}</Title>
         <PropertyDescription>{lorem.generateSentences(2)}</PropertyDescription>
         <FlexRow>
-          <AvatarUser accountAddress={authorData?.author.address} size={60} />
+          <Avatar accountAddress={authorData?.author.address} size={'60'} />
           <FlewColumn>
             <span style={{ fontWeight: 'lighter' }}>Creator</span>
             <span style={{ color: '#1AC9FC' }}>{authorData?.name}</span>

@@ -3,12 +3,10 @@ import { useRouter } from 'next/router'
 import { PossessionOutline } from 'src/components/organisms/PossessionOutline'
 import { PropertyHeader } from 'src/components/organisms/PropertyHeader'
 import { Footer } from 'src/components/organisms/Footer'
-import { EarlyAccess } from 'src/components/atoms/EarlyAccess'
 import styled from 'styled-components'
 import { Container } from 'src/components/atoms/Container'
 import { Header } from 'src/components/organisms/Header'
 import TopStakers from 'src/components/organisms/TopStakers'
-import { AvatarUser } from 'src/components/molecules/AvatarUser'
 import { useAPY, usePropertyAuthor } from 'src/fixtures/dev-kit/hooks'
 import { useGetPropertyAuthenticationQuery, useGetPropertyAggregateLazyQuery } from '@dev/graphql'
 import { PlusOutlined } from '@ant-design/icons'
@@ -19,6 +17,8 @@ import ReactMarkdown from 'react-markdown'
 import { WithGradient } from 'src/components/atoms/WithGradient'
 import { Stake } from 'src/components/organisms/Stake'
 import { Withdraw } from 'src/components/organisms/Withdraw'
+import { useProvider } from 'src/fixtures/wallet/hooks'
+import { Avatar } from 'src/components/molecules/Avatar'
 
 type Props = {}
 
@@ -153,7 +153,7 @@ const Author = ({ propertyAddress }: { propertyAddress: string }) => {
             <Link passHref href="/profile/[accountAddress]" as={`/profile/${authorAddress}`}>
               <a>
                 <div style={{ width: '150px' }}>
-                  <AvatarUser accountAddress={authorAddress} size={150} />
+                  <Avatar size={'150'} />
                 </div>
               </a>
             </Link>
@@ -191,14 +191,15 @@ const PropertyAddressDetail = (_: Props) => {
   const { apy, creators } = useAPY()
   const { data } = useGetPropertyAuthenticationQuery({ variables: { propertyAddress } })
   const { data: dataProperty } = useGetProperty(propertyAddress)
+  const { data: propertyInformation } = useGetPropertytInformation(propertyAddress)
   /* eslint-disable react-hooks/exhaustive-deps */
   // FYI: https://github.com/facebook/react/pull/19062
   const includedAssetList = useMemo(() => data?.property_authentication.map(e => e.authentication_id), [data])
+  const { accountAddress: loggedInWallet } = useProvider()
 
   return (
     <>
       <Header></Header>
-      <EarlyAccess></EarlyAccess>
       <Wrap>
         <Container>
           <PropertyHeader apy={apy} creators={creators} propertyAddress={propertyAddress} />
@@ -217,15 +218,17 @@ const PropertyAddressDetail = (_: Props) => {
           <AssetsSection>
             <h2>Included assets</h2>
             <AssetList>
-              {includedAssetList?.map((asset, index) => (
+              {includedAssetList?.map((asset: any, index: any) => (
                 <AssetListItem key={index}>{asset}</AssetListItem>
               ))}
-              <Link href={'/auth/[property]'} as={`/auth/${propertyAddress}`}>
-                <AddAsset>
-                  <PlusOutlined />
-                  <span>Add asset</span>
-                </AddAsset>
-              </Link>
+              {propertyInformation?.author?.address === loggedInWallet && (
+                <Link href={'/auth/[property]'} as={`/auth/${propertyAddress}`}>
+                  <AddAsset>
+                    <PlusOutlined />
+                    <span>Add asset</span>
+                  </AddAsset>
+                </Link>
+              )}
             </AssetList>
           </AssetsSection>
           <Author propertyAddress={propertyAddress} />

@@ -4,12 +4,25 @@ exports[`Banner Snapshot 1`] = `
 <body>
   <div>
     <div
+<<<<<<< HEAD
+      class="sc-3hjy97-5 fBFgkr"
+=======
       class="sc-3hjy97-5 fRmgQW"
+>>>>>>> upstream/main
     >
       <div
         style="max-width: 1048px; margin-right: auto; margin-left: auto; background: black;"
       >
         <div
+<<<<<<< HEAD
+          class="sc-3hjy97-0 cjdaSr"
+        >
+          <div
+            class="sc-3hjy97-1 gbdczN"
+          >
+            <h1
+              class="sc-3hjy97-2 guCAST"
+=======
           class="sc-3hjy97-0 gMLKYy"
         >
           <div
@@ -17,27 +30,43 @@ exports[`Banner Snapshot 1`] = `
           >
             <h1
               class="sc-3hjy97-2 eAsZxG"
+>>>>>>> upstream/main
               color="white"
             >
               A Sustainable Economy
             </h1>
             <h1
+<<<<<<< HEAD
+              class="sc-3hjy97-2 guCAST"
+=======
               class="sc-3hjy97-2 eAsZxG"
+>>>>>>> upstream/main
               color="white"
             >
               for Open Assets
             </h1>
             <span
+<<<<<<< HEAD
+              class="sc-3hjy97-4 cWjbVG"
+=======
               class="sc-3hjy97-4 dFsAnz"
+>>>>>>> upstream/main
             >
               read more
             </span>
           </div>
           <div
+<<<<<<< HEAD
+            class="sc-3hjy97-3 dqSznl"
+          >
+            <img
+              class="sc-3hjy97-6 cXUszp"
+=======
             class="sc-3hjy97-3 jrMPqU"
           >
             <img
               class="sc-3hjy97-6 VhWuY"
+>>>>>>> upstream/main
               src="https://res.cloudinary.com/haas-storage/image/upload/v1598697538/background_wmc31h.png"
             />
           </div>

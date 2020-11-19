@@ -4,6 +4,21 @@ exports[`AuthHeader Snapshot 1`] = `
 <body>
   <div>
     <header
+<<<<<<< HEAD
+      class="sc-1bz6snd-0 hQPKZt"
+    >
+      <div
+        class="sc-1bz6snd-3 hfiHED"
+      >
+        <header
+          class="sc-1bz6snd-1 jxufrg"
+        >
+          <div
+            class="sc-1bz6snd-2 cwDMQA"
+          >
+            <a
+              class="sc-38x7tx-0 itjGxp"
+=======
       class="sc-1bz6snd-0 TlprQ"
     >
       <div
@@ -17,6 +32,7 @@ exports[`AuthHeader Snapshot 1`] = `
           >
             <a
               class="sc-38x7tx-0 eHXdRo"
+>>>>>>> upstream/main
               href="/"
             >
               <svg
@@ -100,7 +116,11 @@ exports[`AuthHeader Snapshot 1`] = `
             </g>
           </svg>
           <div
+<<<<<<< HEAD
+            class="sc-1dxoc5d-2 ePXQBM"
+=======
             class="sc-1dxoc5d-2 mdZQR"
+>>>>>>> upstream/main
           >
             SignIn
           </div>

@@ -1,11 +1,11 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import { message, Button, Form, Input, Upload } from 'antd'
 import { LoadingOutlined, PlusOutlined } from '@ant-design/icons'
+import { Account } from 'src/fixtures/dev-for-apps/utility'
+import { Avatar } from 'src/components/molecules/Avatar'
 import { useProvider } from 'src/fixtures/wallet/hooks'
 import { useGetAccount, useCreateAccount, useUpdateAccount, useUploadFile } from 'src/fixtures/dev-for-apps/hooks'
-import { Account } from 'src/fixtures/dev-for-apps/utility'
 import { Container } from 'src/components/atoms/Container'
-import { AvatarUser } from 'src/components/molecules/AvatarUser'
 import styled from 'styled-components'
 
 interface Props {}
@@ -58,15 +58,15 @@ const beforeUpload = (file: any) => {
 }
 
 export const AvatarUpdateForm = ({ accountAddress }: { accountAddress?: string }) => {
-  const avatarImageSize = 120
+  const avatarImageSize = '120'
   const [loading, setLoading] = useState<boolean>(false)
   const [imageUrl, setImageUrl] = useState<string>('')
   const { postUploadFileHandler: uploadFile, isLoading: isUploadLoading } = useUploadFile(accountAddress || '')
   const [account, setAccount] = useState<Account>()
   const { data: user } = useGetAccount(accountAddress || '')
+  const { accountAddress: accAddress } = useProvider()
   useEffect(() => {
     if (user) {
-      useProvider
       setAccount(user)
     }
   }, [user])
@@ -101,7 +101,7 @@ export const AvatarUpdateForm = ({ accountAddress }: { accountAddress?: string }
   return (
     <Section>
       <Title>Your Avatar</Title>
-      <AvatarUser accountAddress={accountAddress} size={avatarImageSize} />
+      <Avatar accountAddress={accAddress} size={avatarImageSize} />
       <StyledForm layout="vertical" onFinish={((fileList: object[]) => handleSubmit(fileList)) as any}>
         <Form.Item name="upload" valuePropName="files">
           <Upload

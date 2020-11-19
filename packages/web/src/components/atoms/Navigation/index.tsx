@@ -15,7 +15,7 @@ export const NavMenuItem = styled(NavMenu.Item)`
   a.link:hover {
     background-color: yellow;
   }
-  margin-right: 3em;
+  margin-right: 4em;
 `
 
 export const AccountBtn = styled.div`
@@ -42,6 +42,7 @@ export const AccountBtn = styled.div`
 `
 
 export const Connecting = styled.div`
+  color: white;
   @keyframes blink {
     0% {
       opacity: 0.7;

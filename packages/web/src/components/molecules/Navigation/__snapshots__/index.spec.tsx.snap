@@ -65,7 +65,11 @@ exports[`Navigation Snapshot 1`] = `
       </g>
     </svg>
     <div
+<<<<<<< HEAD
+      class="sc-1dxoc5d-2 ePXQBM"
+=======
       class="sc-1dxoc5d-2 mdZQR"
+>>>>>>> upstream/main
     >
       SignIn
     </div>

@@ -6,7 +6,6 @@ import { Header } from 'src/components/organisms/Header'
 import { Headline } from 'src/components/atoms/Headline'
 import { H2 } from 'src/components/atoms/Typography'
 import styled from 'styled-components'
-import { EarlyAccess } from 'src/components/atoms/EarlyAccess'
 
 type Props = {}
 
@@ -23,7 +22,6 @@ const InvitationRequest = (_: Props) => {
   return (
     <>
       <Header />
-      <EarlyAccess />
       <Headline height={300}>
         <H2>Creator Waitlist</H2>
         <p style={{ textAlign: 'center' }}>

@@ -4,7 +4,11 @@ exports[`Max Snapshot 1`] = `
 <body>
   <div>
     <button
+<<<<<<< HEAD
+      class="ant-btn ant-btn-primary ant-btn-sm sc-1ttu0x8-0 jYmkYf"
+=======
       class="ant-btn ant-btn-primary ant-btn-sm sc-1ttu0x8-0 kqGLQy"
+>>>>>>> upstream/main
       type="button"
     >
       <span>

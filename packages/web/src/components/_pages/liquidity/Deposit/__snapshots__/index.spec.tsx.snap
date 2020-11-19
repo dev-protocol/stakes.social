@@ -4,7 +4,11 @@ exports[`Deposit Snapshot 1`] = `
 <body>
   <div>
     <form
+<<<<<<< HEAD
+      class="ant-form ant-form-vertical pju26w-0 bSBNGA"
+=======
       class="ant-form ant-form-vertical pju26w-0 lnGzgd"
+>>>>>>> upstream/main
     >
       <div
         class="ant-statistic"

@@ -1,6 +1,5 @@
 import React from 'react'
 import { Footer } from 'src/components/organisms/Footer'
-import { EarlyAccess } from 'src/components/atoms/EarlyAccess'
 import { Header } from 'src/components/organisms/Header'
 import { DevStats } from 'src/components/organisms/DevStats'
 import { H2 } from 'src/components/atoms/Typography'
@@ -13,7 +12,6 @@ const DevProtocolStats = (_: Props) => {
   return (
     <>
       <Header />
-      <EarlyAccess />
       <div style={{ padding: '1rem', maxWidth: '1200px', marginRight: 'auto', marginLeft: 'auto' }}>
         <Headline height={200}>
           <H2>Dev Protocol Stats</H2>
