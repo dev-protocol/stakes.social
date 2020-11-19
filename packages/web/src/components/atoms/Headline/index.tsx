@@ -10,4 +10,9 @@ export const Headline = styled.div<Props>`
   justify-content: center;
   align-items: center;
   flex-flow: column;
+
+  h2,
+  span {
+    color: #4f4f4f;
+  }
 `

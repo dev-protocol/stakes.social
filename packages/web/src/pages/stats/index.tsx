@@ -13,7 +13,7 @@ const DevProtocolStats = (_: Props) => {
     <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
       <Header />
       <Headline>
-        <H2>Dev Protocol Stats</H2>
+        <H2 color="#4f4f4f">Dev Protocol Stats</H2>
         <span style={{ marginBottom: '10px' }}>Dev Protocol is being adopted, see for yourself.</span>
         <BuyDevButton />
       </Headline>
