@@ -29,12 +29,9 @@ exports[`Stake Snapshot 1`] = `
               >
                 DEV
                 <button
-                  class="ant-btn ant-btn-primary ant-btn-sm sc-1ttu0x8-0 kqGLQy"
-                  type="button"
+                  class="sc-1ttu0x8-0 ibloSD"
                 >
-                  <span>
-                    Max
-                  </span>
+                  DEV
                 </button>
               </span>
             </span>

@@ -34,30 +34,12 @@ describe('geyser hooks', () => {
       const data = undefined
       const error = undefined
       ;(useSWR as jest.Mock).mockImplementationOnce(() => ({ data, error }))
-<<<<<<< HEAD
-      ;(useSWR as jest.Mock).mockImplementationOnce(() => ({ data, error }))
-=======
->>>>>>> upstream/main
       const { result } = renderHook(() => useTotalRewards())
       expect(result.current.data?.toString()).toBe(undefined)
     })
 
     test('success fetching data', () => {
       const error = undefined
-<<<<<<< HEAD
-      ;(useSWR as jest.Mock).mockImplementationOnce(() => ({
-        data: {
-          totalLocked: '10000',
-          totalUnlocked: '20000',
-          totalsStakingShareSeconds: '10000',
-          totalStakingShareSeconds: '10000',
-          totalUserRewards: '10000',
-          now: '10000'
-        },
-        error
-      }))
-=======
->>>>>>> upstream/main
       ;(useSWR as jest.Mock).mockImplementationOnce(() => ({ data: toEVMBigNumber('30000'), error }))
       const { result } = renderHook(() => useTotalRewards())
       expect(result.current.data?.toString()).toBe('30000')
@@ -434,10 +416,6 @@ describe('geyser hooks', () => {
 
     test('success fetching data', () => {
       const utc = getUTC()
-<<<<<<< HEAD
-      ;(useSWR as jest.Mock).mockImplementationOnce(() => ({ data: '0x' }))
-=======
->>>>>>> upstream/main
       ;(useSWR as jest.Mock).mockImplementationOnce(() => ({ data: 12345 }))
       ;(useSWR as jest.Mock).mockImplementationOnce(() => ({ data: utc - 10000 }))
       ;(useSWR as jest.Mock).mockImplementationOnce(() => ({ data: toBigNumber(20000) }))
@@ -465,12 +443,6 @@ describe('geyser hooks', () => {
     })
 
     test('success fetching data', () => {
-<<<<<<< HEAD
-      ;(useSWR as jest.Mock).mockImplementationOnce(() => ({ data: '0x' }))
-      ;(useSWR as jest.Mock).mockImplementationOnce(() => ({ data: toBigNumber(12345) }))
-      const { result } = renderHook(() => useTotalStakedFor())
-      expect(result.current.data?.toString()).toBe('12345')
-=======
       ;(useSWR as jest.Mock).mockImplementationOnce(() => ({ data: toBigNumber(12345) }))
       const { result } = renderHook(() => useTotalStakedFor())
       expect(result.current.data?.toString()).toBe('12345')
@@ -548,7 +520,6 @@ describe('geyser hooks', () => {
       ;(useSWR as jest.Mock).mockImplementation(() => ({ data: toBigNumber(value) }))
       const { result } = renderHook(() => useUnstakeQuery(toBigNumber(value)))
       expect(result.current.data?.toString()).toBe(value)
->>>>>>> upstream/main
     })
 
     test('failure fetching data', () => {
@@ -556,25 +527,9 @@ describe('geyser hooks', () => {
       const errorMessage = 'error'
       const error = new Error(errorMessage)
       ;(useSWR as jest.Mock).mockImplementation(() => ({ data, error }))
-<<<<<<< HEAD
-      const { result } = renderHook(() => useTotalStakedFor())
-=======
       const { result } = renderHook(() => useUnstakeQuery())
->>>>>>> upstream/main
       expect(result.current.error).toBe(error)
       expect(result.current.error?.message).toBe(errorMessage)
-    })
-  })
-
-  describe('useMutateDepositDependence', () => {
-    test('mutate data', () => {
-      const { result } = renderHook(() => useMutateDepositDependence())
-      act(() => {
-        result.current.purge()
-      })
-      expect((mutate as jest.Mock).mock.calls.length).toBe(2)
-      expect((mutate as jest.Mock).mock.calls[0][0]).toBe(SWRCachePath.getStaked)
-      expect((mutate as jest.Mock).mock.calls[1][0]).toBe(SWRCachePath.totalStakedFor)
     })
   })
 })

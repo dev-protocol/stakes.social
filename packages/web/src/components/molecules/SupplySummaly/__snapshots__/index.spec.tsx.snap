@@ -13,11 +13,7 @@ exports[`SupplySummaly Snapshot 1`] = `
           APY for Stakers:
         </span>
         <span
-<<<<<<< HEAD
-          class="re975l-2 gJEZXF"
-=======
-          class="re975l-2 grrHTo"
->>>>>>> upstream/main
+          class="re975l-2 gaTfxh"
         >
           <span
             class="re975l-3 djAODx"
@@ -39,11 +35,7 @@ exports[`SupplySummaly Snapshot 1`] = `
           APY for Creators:
         </span>
         <span
-<<<<<<< HEAD
-          class="re975l-2 gJEZXF"
-=======
-          class="re975l-2 grrHTo"
->>>>>>> upstream/main
+          class="re975l-2 gaTfxh"
         >
           -
         </span>
@@ -55,11 +47,7 @@ exports[`SupplySummaly Snapshot 1`] = `
           Annual Supply Growth:
         </span>
         <span
-<<<<<<< HEAD
-          class="re975l-2 gJEZXF"
-=======
-          class="re975l-2 grrHTo"
->>>>>>> upstream/main
+          class="re975l-2 gaTfxh"
         >
           <span
             class="re975l-3 djAODx"

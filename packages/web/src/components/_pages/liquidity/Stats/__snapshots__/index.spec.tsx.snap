@@ -4,11 +4,7 @@ exports[`Stats Snapshot 1`] = `
 <body>
   <div>
     <div
-<<<<<<< HEAD
-      class="rvt3gy-0 dhXBJV"
-=======
       class="rvt3gy-0 hhARWk"
->>>>>>> upstream/main
     >
       <div
         class="ant-statistic"
@@ -16,11 +12,7 @@ exports[`Stats Snapshot 1`] = `
         <div
           class="ant-statistic-title"
         >
-<<<<<<< HEAD
-          APY(monthly)
-=======
           Total rewards
->>>>>>> upstream/main
         </div>
         <div
           class="ant-statistic-content"
@@ -28,26 +20,12 @@ exports[`Stats Snapshot 1`] = `
           <span
             class="ant-statistic-content-value"
           >
-<<<<<<< HEAD
-            <span
-              class="ant-statistic-content-value-int"
-            >
-              
-              2,592
-            </span>
-            
-=======
             1e-13
->>>>>>> upstream/main
           </span>
           <span
             class="ant-statistic-content-suffix"
           >
-<<<<<<< HEAD
-            %
-=======
             DEV
->>>>>>> upstream/main
           </span>
         </div>
       </div>
@@ -80,48 +58,7 @@ exports[`Stats Snapshot 1`] = `
         <div
           class="ant-statistic-title"
         >
-<<<<<<< HEAD
-          Total rewards
-=======
           Locked rewards
->>>>>>> upstream/main
-        </div>
-        <div
-          class="ant-statistic-content"
-        >
-          <span
-            class="ant-statistic-content-value"
-          >
-<<<<<<< HEAD
-            1e-13
-=======
-            <span
-              class="ant-statistic-content-value-int"
-            >
-              
-              0
-            </span>
-            
->>>>>>> upstream/main
-          </span>
-          <span
-            class="ant-statistic-content-suffix"
-          >
-            DEV
-          </span>
-        </div>
-      </div>
-      <div
-        class="ant-statistic"
-      >
-        <div
-          class="ant-statistic-title"
-        >
-<<<<<<< HEAD
-          Locked rewards
-=======
-          Unlocked rewards
->>>>>>> upstream/main
         </div>
         <div
           class="ant-statistic-content"
@@ -150,11 +87,36 @@ exports[`Stats Snapshot 1`] = `
         <div
           class="ant-statistic-title"
         >
-<<<<<<< HEAD
           Unlocked rewards
-=======
+        </div>
+        <div
+          class="ant-statistic-content"
+        >
+          <span
+            class="ant-statistic-content-value"
+          >
+            <span
+              class="ant-statistic-content-value-int"
+            >
+              
+              0
+            </span>
+            
+          </span>
+          <span
+            class="ant-statistic-content-suffix"
+          >
+            DEV
+          </span>
+        </div>
+      </div>
+      <div
+        class="ant-statistic"
+      >
+        <div
+          class="ant-statistic-title"
+        >
           End of the Program
->>>>>>> upstream/main
         </div>
         <div
           class="ant-statistic-content"
@@ -162,22 +124,7 @@ exports[`Stats Snapshot 1`] = `
           <span
             class="ant-statistic-content-value"
           >
-<<<<<<< HEAD
-            <span
-              class="ant-statistic-content-value-int"
-            >
-              
-              0
-            </span>
-            
-          </span>
-          <span
-            class="ant-statistic-content-suffix"
-          >
-            DEV
-=======
             1/2/1970
->>>>>>> upstream/main
           </span>
         </div>
       </div>
@@ -187,11 +134,7 @@ exports[`Stats Snapshot 1`] = `
         <div
           class="ant-statistic-title"
         >
-<<<<<<< HEAD
-          End of the Program
-=======
           Reward unlock rate
->>>>>>> upstream/main
         </div>
         <div
           class="ant-statistic-content"
@@ -199,16 +142,12 @@ exports[`Stats Snapshot 1`] = `
           <span
             class="ant-statistic-content-value"
           >
-<<<<<<< HEAD
-            1/2/1970
-=======
             2.592e-12
           </span>
           <span
             class="ant-statistic-content-suffix"
           >
             DEV
->>>>>>> upstream/main
           </span>
         </div>
       </div>
