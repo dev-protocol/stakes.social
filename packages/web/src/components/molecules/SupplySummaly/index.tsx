@@ -21,7 +21,7 @@ const Statistics = styled.span`
   @media (min-width: 1024px) {
     font-size: 2em;
   }
-  color: deeppink;
+  color: deep;
   background-image: linear-gradient(12deg, #2f80ed, #1ac9fc);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;

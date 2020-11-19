@@ -52,7 +52,7 @@ export const SearchbarInput = styled.input`
   }
 
   &:hover {
-    border: 1px solid deeppink;
+    border: 1px solid deep;
   }
 
   &:focus {

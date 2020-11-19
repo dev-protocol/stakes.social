@@ -105,7 +105,7 @@ export const Navigation = ({ handleMenuOpen }: NavigationProps) => {
           mode="horizontal"
         >
           {Navigations.map(nav => (
-            <NavMenuItem color="deeppink" key={nav.key}>
+            <NavMenuItem key={nav.key}>
               <Link href={nav.pathname}>
                 <a>{nav.label}</a>
               </Link>
