@@ -53,6 +53,12 @@ const DashboardValue = styled.span`
   margin: 0;
 `
 
+const Wrap = styled.div`
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+`
+
 const DevTotalCap = (_: {}) => {
   const { totalSupply } = useTotalSupply()
   const { data: devPrice } = useGetDevPrice()
@@ -266,20 +272,18 @@ const items = [
 
 export const DevStats = (_: Props) => {
   return (
-    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr 1fr', rowGap: '0', columnGap: '15px' }}>
+    <Wrap>
       {items.map(item => (
-        <div key={item.title} style={{ margin: '15px 0' }}>
-          <Card>
-            <Title>{item.title}</Title>
-            <DashboardValue>
-              {item.unitPosition == 'prefix' ? <span>{item.unit}</span> : <></>}
-              {item.valueRender ? item.valueRender() : <span>-</span>}
-              {item.unitPosition == 'suffix' ? <span>{item.unit}</span> : <></>}
-            </DashboardValue>
-            <Description>{item.description}</Description>
-          </Card>
-        </div>
+        <Card key={item.title}>
+          <Title>{item.title}</Title>
+          <DashboardValue>
+            {item.unitPosition == 'prefix' ? <span>{item.unit}</span> : <></>}
+            {item.valueRender ? item.valueRender() : <span>-</span>}
+            {item.unitPosition == 'suffix' ? <span>{item.unit}</span> : <></>}
+          </DashboardValue>
+          <Description>{item.description}</Description>
+        </Card>
       ))}
-    </div>
+    </Wrap>
   )
 }
