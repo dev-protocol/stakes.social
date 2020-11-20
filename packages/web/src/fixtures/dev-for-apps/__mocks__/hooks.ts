@@ -54,6 +54,14 @@ export const useUploadFile = () => {
   }
 }
 
+export const useUploadAccountAvatar = () => {
+  return {
+    upload: async () => {
+      return { id: 1 }
+    }
+  }
+}
+
 export const useGetProperty = () => {
   return {
     id: 'id',

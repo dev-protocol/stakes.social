@@ -3475,10 +3475,10 @@
     "@babel/runtime" "^7.5.4"
     "@types/testing-library__react-hooks" "^3.4.0"
 
-"@testing-library/react@11.2.0":
-  version "11.2.0"
-  resolved "https://registry.yarnpkg.com/@testing-library/react/-/react-11.2.0.tgz#ce977a76b6342ea95c71ccd6de3012b1635fb559"
-  integrity sha512-90xKYJzskZ7q/AoSuWraQL4EGZlr75uZvDt3nrO4M+rugN02zjO45tmOBq/JBOgDiMIL1tkhHioKXjJsVaSINA==
+"@testing-library/react@11.2.1":
+  version "11.2.1"
+  resolved "https://registry.yarnpkg.com/@testing-library/react/-/react-11.2.1.tgz#01b3d2dd5768ac27402b5d7e41c87e605be3c326"
+  integrity sha512-/rKucr9p/mhMongaeTXwgIRfDnsAUu6LbfN+moNUn2oU0Kw5a7inN5vGvPWv7Ef0YndpERAfODjeseUIlhzRHw==
   dependencies:
     "@babel/runtime" "^7.12.5"
     "@testing-library/dom" "^7.27.1"
@@ -14734,10 +14734,10 @@ react-lifecycles-compat@^3.0.4:
   resolved "https://registry.yarnpkg.com/react-lifecycles-compat/-/react-lifecycles-compat-3.0.4.tgz#4f1a273afdfc8f3488a8c516bfda78f872352362"
   integrity sha512-fBASbA6LnOU9dOU2eW7aQ8xmYBSXUIWr+UmF9b1efZBazGNO+rcXT/icdKnYm2pTwcRylVUYwW7H1PHfLekVzA==
 
-react-markdown@5.0.2:
-  version "5.0.2"
-  resolved "https://registry.yarnpkg.com/react-markdown/-/react-markdown-5.0.2.tgz#d15a8beb37b4ec34fc23dd892e7755eb7040b8db"
-  integrity sha512-kmkB4JbV7LqkDAjvaKRKtodB3n3Id76/DalaDun1U8FuLB0SenPfvH+jAQ5Pcpo54cACRQc1LB1yXmuuuIVecw==
+react-markdown@5.0.3:
+  version "5.0.3"
+  resolved "https://registry.yarnpkg.com/react-markdown/-/react-markdown-5.0.3.tgz#41040ea7a9324b564b328fb81dd6c04f2a5373ac"
+  integrity sha512-jDWOc1AvWn0WahpjW6NK64mtx6cwjM4iSsLHJPNBqoAgGOVoIdJMqaKX4++plhOtdd4JksdqzlDibgPx6B/M2w==
   dependencies:
     "@types/mdast" "^3.0.3"
     "@types/unist" "^2.0.3"
@@ -17224,10 +17224,10 @@ typedarray@^0.0.6:
   resolved "https://registry.yarnpkg.com/typedarray/-/typedarray-0.0.6.tgz#867ac74e3864187b1d3d47d996a78ec5c8830777"
   integrity sha1-hnrHTjhkGHsdPUfZlqeOxciDB3c=
 
-typescript@4.0.5:
-  version "4.0.5"
-  resolved "https://registry.yarnpkg.com/typescript/-/typescript-4.0.5.tgz#ae9dddfd1069f1cb5beb3ef3b2170dd7c1332389"
-  integrity sha512-ywmr/VrTVCmNTJ6iV2LwIrfG1P+lv6luD8sUJs+2eI9NLGigaN+nUQc13iHqisq7bra9lnmUSYqbJvegraBOPQ==
+typescript@4.1.2:
+  version "4.1.2"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-4.1.2.tgz#6369ef22516fe5e10304aae5a5c4862db55380e9"
+  integrity sha512-thGloWsGH3SOxv1SoY7QojKi0tc+8FnOmiarEGMbd/lar7QOEd3hvlx3Fp5y6FlDUGl9L+pd4n2e+oToGMmhRQ==
 
 ua-parser-js@^0.7.18, ua-parser-js@^0.7.20:
   version "0.7.22"
