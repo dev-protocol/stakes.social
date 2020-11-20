@@ -168,6 +168,8 @@ const FlewColumn = styled.div`
   }
 `
 
+const formatter = new Intl.NumberFormat('en-US')
+
 export const PropertyCard = ({ propertyAddress, assets }: Props) => {
   const { totalStakingAmount, currency: totalStakingAmountCurrency } = useGetTotalStakingAmount(propertyAddress)
   const { totalRewardsAmount, currency: totalRewardsAmountCurrency } = useGetTotalRewardsAmount(propertyAddress)
@@ -197,31 +199,37 @@ export const PropertyCard = ({ propertyAddress, assets }: Props) => {
           <FlewColumn>
             <span style={{ fontWeight: 'lighter' }}>Creator</span>
             <span style={{ color: '#1AC9FC' }}>{authorData?.name}</span>
-            <span>{authorData?.author.karma || 0} Karma</span>
+            <span>{authorData?.author?.karma ? formatter.format(authorData?.author?.karma) : 0} Karma</span>
           </FlewColumn>
         </FlexRow>
         <RowContainer>
           <OwnedStake>
             <span>
-              {myStakingAmount?.dp(1).toFixed() || 0} {myStakingAmountCurrency}
+              {myStakingAmount?.dp(0).toFixed() ? formatter.format(myStakingAmount?.dp(1).toNumber()) : 0}{' '}
+              {myStakingAmountCurrency}
             </span>
             <MutedSpan>Your stake</MutedSpan>
           </OwnedStake>
           <YourReward>
             <span>
-              {myStakingRewardAmount?.dp(1)?.toNumber() || 0} {myStakingRewardAmountCurrency}
+              {myStakingRewardAmount?.dp(0)?.toNumber()
+                ? formatter.format(myStakingRewardAmount?.dp(0)?.toNumber())
+                : 0}{' '}
+              {myStakingRewardAmountCurrency}
             </span>
             <MutedSpan>Your reward</MutedSpan>
           </YourReward>
           <TotalStaked>
             <span>
-              {totalStakingAmount?.dp(1).toFixed()} {totalStakingAmountCurrency}
+              {totalStakingAmount?.dp(0).toNumber() ? formatter.format(totalStakingAmount?.dp(0).toNumber()) : 0}{' '}
+              {totalStakingAmountCurrency}
             </span>
             <MutedSpan>Total staked</MutedSpan>
           </TotalStaked>
           <CreatorReward>
             <span>
-              {totalRewardsAmount?.dp(1)?.toNumber() || 0} {totalRewardsAmountCurrency}
+              {totalRewardsAmount?.dp(0)?.toNumber() ? formatter.format(totalRewardsAmount?.dp(0).toNumber()) : 0}{' '}
+              {totalRewardsAmountCurrency}
             </span>
             <MutedSpan>Creator reward</MutedSpan>
           </CreatorReward>

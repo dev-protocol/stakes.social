@@ -45,7 +45,7 @@ export const Input = styled.input`
 
   &:hover {
     transition: all 0.2s ease-in;
-    border: 1px solid deeppink;
+    border: 1px solid grey;
   }
 
   &:focus {

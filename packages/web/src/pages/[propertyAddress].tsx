@@ -123,6 +123,8 @@ const CreatorContent = styled.div`
   margin-left: 20px;
 `
 
+const formatter = new Intl.NumberFormat('en-US')
+
 const CoverImageOrGradient = ({ src }: { src?: string }) => (
   <Cover style={src ? { backgroundImage: `url(${src})` } : {}} />
 )
@@ -162,7 +164,7 @@ const Author = ({ propertyAddress }: { propertyAddress: string }) => {
               <ReactMarkdown>{dataAuthor ? dataAuthor.biography : ''}</ReactMarkdown>
               <p>
                 <WithGradient>{aggregateData?.property_meta_aggregate.aggregate?.count || 0}</WithGradient> Pool(s) |{' '}
-                <WithGradient>{data?.author?.karma || 0} </WithGradient> Karma
+                <WithGradient>{data?.author?.karma ? formatter.format(data?.author.karma) : 0} </WithGradient> Karma
               </p>
             </CreatorContent>
           </Flex>
