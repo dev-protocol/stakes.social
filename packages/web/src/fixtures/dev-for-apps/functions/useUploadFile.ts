@@ -1,6 +1,4 @@
 import { useState } from 'react'
-import { SWRCachePath } from '../cache-path'
-import { mutate } from 'swr'
 import { message } from 'antd'
 import { postUploadFile } from '../utility'
 import { sign } from 'src/fixtures/wallet/utility'
