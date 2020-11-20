@@ -30,7 +30,7 @@ exports[`TransactModalContents Snapshot 1`] = `
           class="sc-1d8aayd-1 lldfxv"
         >
           <span
-            class="ant-input-group-wrapper ant-input-group-wrapper-lg ant-input-search ant-input-search-large ant-input-search-with-button sc-1d8aayd-0 dMAKRx"
+            class="ant-input-group-wrapper ant-input-group-wrapper-lg ant-input-search ant-input-search-large ant-input-search-with-button sc-1d8aayd-0 dMeuEc"
           >
             <span
               class="ant-input-wrapper ant-input-group"
@@ -47,7 +47,6 @@ exports[`TransactModalContents Snapshot 1`] = `
                 <span
                   class="ant-input-suffix"
                 >
-                  DEV
                   <button
                     class="sc-1ttu0x8-0 ibloSD"
                   >
@@ -82,7 +81,7 @@ exports[`TransactModalContents Snapshot 1`] = `
               <div
                 class="ant-card-head-title"
               >
-                Estimated Annual Reward
+                Annual Reward
               </div>
             </div>
           </div>

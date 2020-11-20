@@ -76,7 +76,7 @@ exports[`InvitationRequestForm Snapshot 1`] = `
                             </span>
                           </div>
                           <input
-                            class="sc-8mjbdn-3 girqLT"
+                            class="sc-8mjbdn-3 gPpZky"
                             id="basic_name"
                             placeholder="name"
                             value=""
@@ -148,7 +148,7 @@ exports[`InvitationRequestForm Snapshot 1`] = `
                             </span>
                           </div>
                           <input
-                            class="sc-8mjbdn-3 girqLT"
+                            class="sc-8mjbdn-3 gPpZky"
                             id="basic_email"
                             placeholder="email"
                             value=""
@@ -220,7 +220,7 @@ exports[`InvitationRequestForm Snapshot 1`] = `
                             </span>
                           </div>
                           <input
-                            class="sc-8mjbdn-3 girqLT"
+                            class="sc-8mjbdn-3 gPpZky"
                             id="basic_asset"
                             placeholder="project (e.g., your/awesome-repos)"
                             value=""
@@ -255,7 +255,7 @@ exports[`InvitationRequestForm Snapshot 1`] = `
                   class="ant-form-item-control-input-content"
                 >
                   <textarea
-                    class="dhltmz-6 hLmbog"
+                    class="dhltmz-6 gKRzXR"
                     id="basic_useCase"
                     placeholder="Our project aims to..."
                     rows="4"
@@ -323,7 +323,7 @@ exports[`InvitationRequestForm Snapshot 1`] = `
                             </span>
                           </div>
                           <input
-                            class="sc-8mjbdn-3 girqLT"
+                            class="sc-8mjbdn-3 gPpZky"
                             id="basic_role"
                             placeholder="role"
                             value=""
@@ -396,7 +396,7 @@ exports[`InvitationRequestForm Snapshot 1`] = `
                             </span>
                           </div>
                           <input
-                            class="sc-8mjbdn-3 girqLT"
+                            class="sc-8mjbdn-3 gPpZky"
                             id="basic_url"
                             placeholder="url"
                             value=""
@@ -480,7 +480,7 @@ exports[`InvitationRequestForm Snapshot 1`] = `
                             </span>
                           </div>
                           <input
-                            class="sc-8mjbdn-3 girqLT"
+                            class="sc-8mjbdn-3 gPpZky"
                             id="basic_discord"
                             placeholder="discord name"
                             value=""
@@ -552,7 +552,7 @@ exports[`InvitationRequestForm Snapshot 1`] = `
                             </span>
                           </div>
                           <input
-                            class="sc-8mjbdn-3 girqLT"
+                            class="sc-8mjbdn-3 gPpZky"
                             id="basic_ask"
                             placeholder="I'd like to say..."
                             value=""
