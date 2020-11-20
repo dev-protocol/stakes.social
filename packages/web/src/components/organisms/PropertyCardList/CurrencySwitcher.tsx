@@ -2,7 +2,9 @@ import React, { useCallback, useContext } from 'react'
 import styled from 'styled-components'
 import SettingContext from 'src/context/settingContext'
 
-interface Props {}
+interface Props {
+  className?: string
+}
 
 const Button = styled.button<{ isActive?: boolean; isFirst?: boolean }>`
   margin-right: ${props => (props?.isFirst ? '10px' : 'none')};
@@ -32,14 +34,14 @@ const CurrencyContainer = styled.div`
   margin-left: 30px;
 `
 
-export const CurrencySwitcher = (_: Props) => {
+export const CurrencySwitcher = ({ className }: Props) => {
   const { isCurrencyDEV, toggleCurrency } = useContext(SettingContext)
   const handleToggleCurrency = useCallback(() => {
     toggleCurrency()
   }, [toggleCurrency])
   return (
     <>
-      <CurrencyContainer onClick={handleToggleCurrency}>
+      <CurrencyContainer className={className} onClick={handleToggleCurrency}>
         <Button isActive={isCurrencyDEV} isFirst>
           <Circle isActive={isCurrencyDEV} />
           <span>DEV</span>
