@@ -69,31 +69,6 @@ exports[`TransactModalContents Snapshot 1`] = `
             </span>
           </span>
         </div>
-        <div
-          class="ant-card ant-card-bordered sc-1lowp9k-0 dtNkpz"
-        >
-          <div
-            class="ant-card-head"
-          >
-            <div
-              class="ant-card-head-wrapper"
-            >
-              <div
-                class="ant-card-head-title"
-              >
-                Annual Reward
-              </div>
-            </div>
-          </div>
-          <div
-            class="ant-card-body"
-          >
-            <p>
-              0
-               DEV
-            </p>
-          </div>
-        </div>
       </div>
     </div>
   </div>
