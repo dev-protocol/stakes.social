@@ -58,6 +58,16 @@ const StyledButtonWithGradient = styled(ButtonWithGradient)`
   font-size: 1.6rem;
   height: 100%;
 `
+const StyledButtonWithGradientForWithdraw = styled(ButtonWithGradient)`
+  font-size: 1.6rem;
+  height: 100%;
+  &,
+  &:hover,
+  &:active,
+  &:focus {
+    background-image: linear-gradient(to right, #5b5b5b, #2a2a2a);
+  }
+`
 
 export const TransactForm = ({
   className,
@@ -81,12 +91,17 @@ export const TransactForm = ({
     [_suffix, onClickMax]
   )
   const OnlyButton = useMemo(
-    () => (
-      <StyledButtonWithGradient size="large" onClick={onClick}>
-        {enterButton}
-      </StyledButtonWithGradient>
-    ),
-    [onClick, enterButton]
+    () =>
+      id === 'withdraw' ? (
+        <StyledButtonWithGradientForWithdraw size="large" onClick={onClick}>
+          {enterButton}
+        </StyledButtonWithGradientForWithdraw>
+      ) : (
+        <StyledButtonWithGradient size="large" onClick={onClick}>
+          {enterButton}
+        </StyledButtonWithGradient>
+      ),
+    [id, onClick, enterButton]
   )
 
   return (

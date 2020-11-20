@@ -1,10 +1,11 @@
-import React, { useCallback, useState, ChangeEvent, useMemo } from 'react'
+import React, { useCallback, useEffect, useState, ChangeEvent, useMemo } from 'react'
 import { useProvider } from 'src/fixtures/wallet/hooks'
 import { balanceOf } from 'src/fixtures/dev-kit/client'
-import { useStake } from 'src/fixtures/dev-kit/hooks'
-import { toNaturalNumber, whenDefinedAll } from 'src/fixtures/utility'
+import { useStake, useAPY } from 'src/fixtures/dev-kit/hooks'
+import { toNaturalNumber, whenDefined, whenDefinedAll } from 'src/fixtures/utility'
 import { TransactForm } from 'src/components/molecules/TransactForm'
 import { FormContainer } from 'src/components/molecules/TransactForm/FormContainer'
+import { Estimated } from 'src/components/molecules/TransactForm/Estimated'
 
 interface Props {
   className?: string
@@ -14,8 +15,10 @@ interface Props {
 
 export const Stake = ({ className, title, propertyAddress }: Props) => {
   const [stakeAmount, setStakeAmount] = useState<string>('')
+  const [estimatedStakingAPY, setEstimatedStakingAPY] = useState<string>('')
   const { web3, accountAddress } = useProvider()
   const { stake } = useStake()
+  const { apy } = useAPY()
   const stakeFor = useCallback(
     (amount: string) => {
       stake(propertyAddress, amount)
@@ -33,6 +36,11 @@ export const Stake = ({ className, title, propertyAddress }: Props) => {
     )
   const Label = useMemo(() => (title ? () => <label htmlFor="stake">{title}</label> : () => <></>), [title])
 
+  useEffect(() => {
+    const estimate = whenDefined(apy, x => x.times(stakeAmount || 0).div(100))
+    setEstimatedStakingAPY(estimate ? estimate.dp(5).toFixed() : '0')
+  }, [apy, stakeAmount, setEstimatedStakingAPY])
+
   return (
     <FormContainer>
       <Label />
@@ -45,6 +53,7 @@ export const Stake = ({ className, title, propertyAddress }: Props) => {
         onSearch={stakeFor}
         onClickMax={onClickMax}
       ></TransactForm>
+      <Estimated title="Annual Reward">{<p>{estimatedStakingAPY || 0} DEV</p>}</Estimated>
     </FormContainer>
   )
 }
