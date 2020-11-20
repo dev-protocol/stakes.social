@@ -7,8 +7,7 @@ import { Divider } from 'antd'
 
 const Wrap = styled.footer`
   display: grid;
-  /* padding-top: 5rem;
-  margin-top: 50px; */
+  margin-top: 3em;
 `
 
 const SocialContainer = styled.div`

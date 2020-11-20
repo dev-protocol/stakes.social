@@ -1,5 +1,5 @@
 import React from 'react'
-import styled, { keyframes } from 'styled-components'
+import styled from 'styled-components'
 import { Tooltip, Button } from 'antd'
 import Icon, { QuestionOutlined } from '@ant-design/icons'
 
@@ -7,7 +7,12 @@ const IconContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  transform: translateY(-5px);
+  /* transform: translateY(-1px); */
+
+  svg {
+    width: 30px;
+    height: 30px;
+  }
 `
 
 const IconComponent = () => (
@@ -18,31 +23,20 @@ const IconComponent = () => (
 
 const QuestionIcon = () => <Icon component={IconComponent} />
 
-const color = keyframes`
-  0% {
-    color: #f8bbd0;
-  }
-  100% {
-    color: #fff;
-  }
-`
 const Circle = styled(Button)`
   position: fixed;
   bottom: 1.5rem;
   right: 2rem;
-  background: #e91e63;
-  border-color: #e91e63;
-  box-shadow: 0 3px 12px #e91e6333;
+  background: black;
+  border-color: black;
+  box-shadow: 0 1.5px 3px black;
   &,
   &:hover,
   &:focus,
   &:active {
-    background: #e91e63;
-    border-color: #e91e63;
-    color: #f8bbd0;
-  }
-  &:hover {
-    animation: ${color} 0.5s linear infinite alternate;
+    background: black;
+    border-color: black;
+    color: white;
   }
   @media (min-width: 768px) {
     bottom: 3rem;
@@ -51,7 +45,7 @@ const Circle = styled(Button)`
 `
 
 export const HelpUs = () => (
-  <Tooltip placement="top" color="pink" overlayStyle={{ fontSize: '0.8rem' }} title="Do you need help?">
+  <Tooltip placement="top" color="black" overlayStyle={{ fontSize: '0.8rem' }} title="Do you need help?">
     <Circle
       shape="circle"
       size="large"
