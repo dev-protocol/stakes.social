@@ -56,7 +56,7 @@ export const Connecting = styled.div`
     }
   }
 
-  -webkit-text-fill-color: #af0060;
+  -webkit-text-fill-color: white;
   animation-name: blink;
   animation-duration: 2s;
   animation-iteration-count: infinite;
