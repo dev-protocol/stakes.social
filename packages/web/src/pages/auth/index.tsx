@@ -48,11 +48,9 @@ export const CreateOrAuthenticateProperty = (_: Props) => {
         style={{
           display: 'flex',
           flexDirection: 'column',
-          // justifyContent: 'center',
-          paddingTop: '2rem',
+          justifyContent: 'center',
           maxWidth: '680px',
-          marginRight: 'auto',
-          marginLeft: 'auto',
+          margin: 'auto',
           flexGrow: 1
         }}
       >

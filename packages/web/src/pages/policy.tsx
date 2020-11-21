@@ -17,7 +17,7 @@ const Policy = (_: Props) => {
         <H2>Policy Proposals</H2>
         <span>As a DEV token holder you can vote on policy proposals to improve the protocol.</span>
       </Headline>
-      <Container>
+      <Container style={{ display: 'flex', justifyContent: 'center' }}>
         <PoliciesList />
       </Container>
       <Footer />

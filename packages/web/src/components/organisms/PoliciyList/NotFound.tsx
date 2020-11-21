@@ -3,7 +3,7 @@ import { Empty, Button } from 'antd'
 
 export const NotFound = () => {
   return (
-    <div style={{ margin: '0 auto', alignItems: 'center' }}>
+    <div style={{ alignSelf: 'center', alignItems: 'center' }}>
       <Empty
         image={Empty.PRESENTED_IMAGE_SIMPLE}
         description={
