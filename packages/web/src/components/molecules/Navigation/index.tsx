@@ -28,11 +28,6 @@ export const Navigations = [
     pathname: '/liquidity'
   },
   {
-    key: 'portfolio',
-    label: 'Portfolio',
-    pathname: '/portfolio'
-  },
-  {
     key: 'create',
     label: 'Create',
     pathname: '/auth'

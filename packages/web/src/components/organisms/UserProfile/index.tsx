@@ -9,7 +9,6 @@ import {
   useUploadAccountAvatar
 } from 'src/fixtures/dev-for-apps/hooks'
 import { Account } from 'src/fixtures/dev-for-apps/utility'
-import { Container } from 'src/components/atoms/Container'
 import { AvatarUser } from 'src/components/molecules/AvatarUser'
 import styled from 'styled-components'
 
@@ -17,7 +16,7 @@ interface Props {}
 
 const Section = styled.section`
   display: grid;
-  padding: 1rem;
+  /* padding: 1rem; */
   grid-gap: 0.5rem;
 `
 const Title = styled.div`
@@ -218,11 +217,16 @@ export const ProfileUpdateForm = ({ accountAddress }: { accountAddress?: string 
   )
 }
 
+const UserProfileContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+`
+
 export const UserProfile = (_: Props) => {
   const { accountAddress } = useProvider()
 
   return (
-    <Container>
+    <UserProfileContainer>
       <Section>
         <Title>Your Address</Title>
         <Text>{accountAddress || '-'}</Text>
@@ -230,6 +234,6 @@ export const UserProfile = (_: Props) => {
 
       <ProfileUpdateForm accountAddress={accountAddress} />
       <AvatarUpdateForm accountAddress={accountAddress} />
-    </Container>
+    </UserProfileContainer>
   )
 }
