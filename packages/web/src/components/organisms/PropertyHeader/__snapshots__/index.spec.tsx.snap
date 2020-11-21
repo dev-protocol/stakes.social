@@ -15,7 +15,7 @@ exports[`PropertyHeader Snapshot 1`] = `
         class="sc-1bnntxi-2 gCPcUN"
       >
         <div
-          style="margin-bottom: 0px;"
+          style="display: flex; margin-bottom: 0px;"
         >
           <span
             class="xnqjv4-0 iiUDCf"
@@ -23,11 +23,21 @@ exports[`PropertyHeader Snapshot 1`] = `
             N/A
             %
           </span>
-           APY Stakers
           <div
-            class="ant-divider ant-divider-vertical sc-1bnntxi-3 ikThBI"
+            class="ant-divider ant-divider-vertical sc-1bnntxi-3 cqhMcf"
             role="separator"
           />
+          APY Stakers
+          <div
+            class="ant-divider ant-divider-vertical ant-divider-with-text ant-divider-with-text-center sc-1bnntxi-3 cqhMcf"
+            role="separator"
+          >
+            <span
+              class="ant-divider-inner-text"
+            >
+              |
+            </span>
+          </div>
           <span
             class="xnqjv4-0 iiUDCf"
           >
@@ -35,18 +45,32 @@ exports[`PropertyHeader Snapshot 1`] = `
             N/A
             %
           </span>
-           APY Creators
           <div
-            class="ant-divider ant-divider-vertical sc-1bnntxi-3 ikThBI"
+            class="ant-divider ant-divider-vertical sc-1bnntxi-3 cqhMcf"
             role="separator"
           />
+          APY Creators
+          <div
+            class="ant-divider ant-divider-vertical ant-divider-with-text ant-divider-with-text-center sc-1bnntxi-3 cqhMcf"
+            role="separator"
+          >
+            <span
+              class="ant-divider-inner-text"
+            >
+              |
+            </span>
+          </div>
           <span
             class="xnqjv4-0 iiUDCf"
           >
              
             N/A
           </span>
-           Karma
+          <div
+            class="ant-divider ant-divider-vertical sc-1bnntxi-3 cqhMcf"
+            role="separator"
+          />
+          Karma
         </div>
         <a
           class="sc-17tlp0z-0 iZUfkf"

@@ -21,8 +21,8 @@ const Statistics = styled.span`
   @media (min-width: 1024px) {
     font-size: 2em;
   }
-  color: deeppink;
-  background-image: linear-gradient(12deg, #ff00e0, #6a00a0);
+  color: deep;
+  background-image: linear-gradient(12deg, #2f80ed, #1ac9fc);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 `
@@ -89,7 +89,7 @@ export const SupplySummary = ({ apy, creators, annualSupplyGrowthRatio }: Props)
         <SupplyBadge>
           <Statistics>{creators?.dp(2).toNumber()}%</Statistics>
           <label>Creators APY</label>
-          <a href="https://docs.devprtcl.com/stakes-social/creators">Learn more</a>
+          <a href="https://docs.devprtcl.com/protocol/tokenomics">Learn more</a>
         </SupplyBadge>
         <SupplyBadge>
           <Statistics>{annualSupplyGrowthRatio?.dp(2).toNumber()}%</Statistics>

@@ -77,19 +77,19 @@ const TextArea = styled.textarea`
 
   &:hover {
     transition: all 0.2s ease-in;
-    border: 1px solid deeppink;
+    border: 1px solid grey;
   }
 
   &:focus {
     transition: all 0.2s ease-in;
-    border: 1px solid deeppink;
-    box-shadow: 0 0 0 1px lightpink;
+    border: 1px solid black;
+    box-shadow: 0 0 0 1px grey;
   }
 `
 
 export const InvitationRequestForm = ({ market }: Props) => {
   const [metrics, setMetrics] = useState<boolean>(false)
-  const { postInvitationHandler, isLoading } = usePostInvitation(market)
+  const { postInvitationHandler, isLoading } = usePostInvitation()
   const onFinish = async (values: any) => {
     const { asset, email, discord, name, role, url, useCase, ask } = values
     const metrics = await postInvitationHandler({
@@ -157,19 +157,24 @@ export const InvitationRequestForm = ({ market }: Props) => {
             </Form.Item>
           </Row>
           <Row>
-            <Span>
-              <a href="https://discord.gg/WnQXqpQ">Dev Protocol Discord</a> name:
-            </Span>
+            <div>
+              <Span style={{ marginTop: 0, fontSize: '1.1em' }}>
+                <a href="https://discord.gg/WnQXqpQ">Dev Protocol</a>
+              </Span>
+              <span style={{ fontSize: '1.1em' }}>Discord name:</span>
+            </div>
             <Form.Item name="discord" rules={[{ required: true, type: 'string' }]} key="discord">
               <Input Icon={MessageOutlined} placeholder="discord name" label="discord" />
             </Form.Item>
           </Row>
           <Row>
             <Span>Additional info:</Span>
-            <div style={{ display: 'flex', flexDirection: 'column' }}>
-              <Form.Item name="ask" rules={[{ type: 'string' }]} key="ask">
-                <Input Icon={NotificationOutlined} placeholder="I'd like to say..." label="ask" />
-              </Form.Item>
+            <Form.Item name="ask" rules={[{ type: 'string' }]} key="ask">
+              <Input Icon={NotificationOutlined} placeholder="I'd like to say..." label="ask" />
+            </Form.Item>
+          </Row>
+          <Row>
+            <div style={{ display: 'flex', gridColumn: '1/-1', justifyContent: 'center' }}>
               <ButtonContainer>
                 <Submit type="submit" disabled={isLoading}>
                   Submit

@@ -7,60 +7,47 @@ exports[`Withdraw Snapshot 1`] = `
       class="sc-89297o-0 LrdOg"
     >
       <div
-        class="sc-1al8l63-0 brBwXr"
+        class="sc-1d8aayd-1 lldfxv"
       >
-        <button
-          aria-checked="false"
-          class="ant-switch"
-          role="switch"
-          type="button"
+        <span
+          class="ant-input-group-wrapper ant-input-group-wrapper-lg ant-input-search ant-input-search-large ant-input-search-with-button sc-1d8aayd-0 fnjsag"
         >
-          <div
-            class="ant-switch-handle"
-          />
           <span
-            class="ant-switch-inner"
+            class="ant-input-wrapper ant-input-group"
           >
-            Stake
-          </span>
-        </button>
-        <div
-          class="sc-1d8aayd-1 lldfxv"
-        >
-          <button
-            class="ant-btn ant-btn-lg sc-1ho13tb-0 sc-1d8aayd-2 EDnks VzRMQ"
-            type="button"
-          >
-            <span>
-              Withdraw
-            </span>
-          </button>
-        </div>
-      </div>
-      <div
-        class="ant-card ant-card-bordered sc-1lowp9k-0 dtNkpz"
-      >
-        <div
-          class="ant-card-head"
-        >
-          <div
-            class="ant-card-head-wrapper"
-          >
-            <div
-              class="ant-card-head-title"
+            <span
+              class="ant-input-affix-wrapper ant-input-affix-wrapper-lg"
             >
-              Withdrawable Reward Amount
-            </div>
-          </div>
-        </div>
-        <div
-          class="ant-card-body"
-        >
-          <p>
-            5000
-             DEV
-          </p>
-        </div>
+              <input
+                class="ant-input ant-input-lg"
+                id="withdraw"
+                type="number"
+                value=""
+              />
+              <span
+                class="ant-input-suffix"
+              >
+                <button
+                  class="sc-1ttu0x8-0 ibloSD"
+                >
+                  DEV
+                </button>
+              </span>
+            </span>
+            <span
+              class="ant-input-group-addon"
+            >
+              <button
+                class="ant-btn ant-btn-primary ant-btn-lg ant-input-search-button"
+                type="button"
+              >
+                <span>
+                  Withdraw
+                </span>
+              </button>
+            </span>
+          </span>
+        </span>
       </div>
     </div>
   </div>

@@ -1,7 +1,6 @@
 import React from 'react'
 import { Divider } from 'antd'
 import { Footer } from 'src/components/organisms/Footer'
-import { EarlyAccess } from 'src/components/atoms/EarlyAccess'
 import { Header } from 'src/components/organisms/Header'
 import { DevStats } from 'src/components/organisms/DevStats'
 import { H2 } from 'src/components/atoms/Typography'
@@ -22,15 +21,14 @@ const Wrap = styled.div`
 
 const DevProtocolStats = (_: Props) => {
   return (
-    <>
+    <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
       <Header />
-      <EarlyAccess />
-      <Wrap>
-        <Headline height={200}>
-          <H2>Dev Protocol Stats</H2>
-          <p>Dev Protocol is being adopted, see for yourself.</p>
-          <BuyDevButton />
-        </Headline>
+      <Headline>
+        <H2 color="#4f4f4f">Dev Protocol Stats</H2>
+        <span style={{ marginBottom: '10px' }}>Dev Protocol is being adopted, see for yourself.</span>
+        <BuyDevButton />
+      </Headline>
+      <div style={{ padding: '1rem', maxWidth: '1200px', marginRight: 'auto', marginLeft: 'auto' }}>
         <DevStats />
       </Wrap>
       <Divider type="horizontal" />
@@ -38,7 +36,7 @@ const DevProtocolStats = (_: Props) => {
         <DevChart />
       </Wrap>
       <Footer />
-    </>
+    </div>
   )
 }
 

@@ -18,12 +18,6 @@ interface Props {
   featureTag: FeatureTag
 }
 
-// TODO: use valid market list via other data source
-const markets = {
-  GitHub: '0x34A7AdC94C4D41C3e3469F98033B372cB2fAf318',
-  Npmjs: '0x88c7B1f41DdE50efFc25541a2E0769B887eB2ee7'
-}
-
 const Header = styled.h2`
   margin-bottom: 0;
 
@@ -34,16 +28,17 @@ const Header = styled.h2`
 
 const PropertiesHeader = styled.div`
   display: grid;
-  grid-template-rows: 1fr 1fr;
-  grid-template-columns: 3fr 4fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  grid-template-columns: 1fr;
+  row-gap: 10px;
   justify-content: center;
   align-items: center;
   padding-top: 10px;
 
   @media (min-width: 768px) {
     grid-template-rows: none;
-    grid-template-columns: 2fr 2fr 1fr 1fr;
-    column-gap: 48px;
+    grid-template-columns: 1fr 1fr 1fr;
+    column-gap: 60px;
   }
 `
 
@@ -58,6 +53,14 @@ const PropertyOverview = styled.div`
   }
 `
 
+const DEFAULT_PER_PAGE = 9
+
+// TODO: use valid market list via other data source
+const markets = {
+  GitHub: '0x34A7AdC94C4D41C3e3469F98033B372cB2fAf318',
+  Npmjs: '0x88c7B1f41DdE50efFc25541a2E0769B887eB2ee7'
+}
+
 const Wrap = styled.div`
   display: grid;
   column-gap: 2em;
@@ -66,13 +69,20 @@ const Wrap = styled.div`
   padding-top: 1rem;
 `
 
-const DEFAULT_PER_PAGE = 10
-
 const FILTER_OPTIONS = [
   { label: 'Your properties', value: 'YOUR_PROPS' },
   { label: 'Most Staked', value: 'MOST_STAKED' },
   { label: 'Most recent', value: 'MOST_RECENT' }
 ]
+
+const FilterOptionContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+
+  @media (max-width: 760px) {
+    grid-row: 3;
+  }
+`
 
 const FeatureTags = ({ tag }: { tag: FeatureTag }) => {
   const tags = ['GitHub', 'Npmjs', 'Creators']
@@ -143,14 +153,18 @@ export const PropertyCardList = ({ currentPage, searchWord, sortBy, featureTag }
   )
 
   return (
-    <>
+    <div style={{ flexGrow: 1 }}>
       <PropertiesHeader>
         <Header>Asset Pools</Header>
         <PropertySearchForm onSubmitSearchProperty={handleSearch} />
-        <Select options={FILTER_OPTIONS} onChange={handleChangeSortBy} isClearable={true} />
-        <CurrencySwitcher />
-      </PropertiesHeader>
+        <FilterOptionContainer>
+          <div style={{ flexGrow: 1 }}>
+            <Select placeholder="Sort" options={FILTER_OPTIONS} onChange={handleChangeSortBy} isClearable={true} />
+          </div>
 
+          <CurrencySwitcher />
+        </FilterOptionContainer>
+      </PropertiesHeader>
       <FeatureTags tag={featureTag} />
 
       {loading && <Spin size="large" style={{ display: 'block', width: 'auto', padding: '100px' }} />}
@@ -168,12 +182,13 @@ export const PropertyCardList = ({ currentPage, searchWord, sortBy, featureTag }
                 <PropertyCard propertyAddress={d.property} assets={d.authentication} />
               </div>
             ))}
-          <div style={{ gridColumn: '1/-1' }}>
+          <div style={{ display: 'flex', justifyContent: 'flex-end', gridColumn: '1/-1' }}>
             <Pagination
               current={currentPage}
               size="default"
               responsive={true}
               defaultPageSize={perPage}
+              pageSizeOptions={['9', '12', '15', '18', '21']}
               onChange={handlePagination}
               onShowSizeChange={handleShowSizeChange}
               total={data.property_factory_create_aggregate.aggregate?.count}
@@ -182,6 +197,6 @@ export const PropertyCardList = ({ currentPage, searchWord, sortBy, featureTag }
           </div>
         </PropertyOverview>
       )}
-    </>
+    </div>
   )
 }

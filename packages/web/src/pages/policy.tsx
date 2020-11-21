@@ -1,6 +1,5 @@
 import React from 'react'
 import { Footer } from 'src/components/organisms/Footer'
-import { EarlyAccess } from 'src/components/atoms/EarlyAccess'
 import { H2 } from 'src/components/atoms/Typography'
 import { Headline } from 'src/components/atoms/Headline'
 import { PoliciesList } from 'src/components/organisms/PoliciyList'
@@ -12,18 +11,17 @@ type Props = {} & InitialProps
 
 const Policy = (_: Props) => {
   return (
-    <>
+    <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
       <Header />
-      <EarlyAccess />
-      <Headline height={300}>
+      <Headline>
         <H2>Policy Proposals</H2>
-        <div>As a DEV token holder you can vote on policy proposals to improve the protocol.</div>
+        <span>As a DEV token holder you can vote on policy proposals to improve the protocol.</span>
       </Headline>
       <Container>
         <PoliciesList />
       </Container>
       <Footer />
-    </>
+    </div>
   )
 }
 

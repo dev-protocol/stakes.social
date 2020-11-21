@@ -6,7 +6,8 @@ interface Props {
   className?: string
 }
 
-const Button = styled.button<{ isActive?: boolean }>`
+const Button = styled.button<{ isActive?: boolean; isFirst?: boolean }>`
+  margin-right: ${props => (props?.isFirst ? '10px' : 'none')};
   display: flex;
   justify-content: space-evenly;
   align-items: center;
@@ -28,8 +29,9 @@ const Circle = styled.div<{ isActive?: boolean }>`
 
 const CurrencyContainer = styled.div`
   display: flex;
-  justify-content: stretch;
+  justify-content: flex-end;
   align-items: center;
+  margin-left: 30px;
 `
 
 export const CurrencySwitcher = ({ className }: Props) => {
@@ -38,15 +40,17 @@ export const CurrencySwitcher = ({ className }: Props) => {
     toggleCurrency()
   }, [toggleCurrency])
   return (
-    <CurrencyContainer className={className} onClick={handleToggleCurrency}>
-      <Button isActive={isCurrencyDEV}>
-        <Circle isActive={isCurrencyDEV} />
-        <span>DEV</span>
-      </Button>
-      <Button isActive={!isCurrencyDEV}>
-        <Circle isActive={!isCurrencyDEV} />
-        <span>USD</span>
-      </Button>
-    </CurrencyContainer>
+    <>
+      <CurrencyContainer className={className} onClick={handleToggleCurrency}>
+        <Button isActive={isCurrencyDEV} isFirst>
+          <Circle isActive={isCurrencyDEV} />
+          <span>DEV</span>
+        </Button>
+        <Button isActive={!isCurrencyDEV}>
+          <Circle isActive={!isCurrencyDEV} />
+          <span>USD</span>
+        </Button>
+      </CurrencyContainer>
+    </>
   )
 }
