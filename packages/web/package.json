@@ -14,7 +14,7 @@
     "test": "jest"
   },
   "dependencies": {
-    "@amcharts/amcharts4": "^4.10.11",
+    "@amcharts/amcharts4": "4.10.11",
     "@ant-design/icons": "4.2.2",
     "@apollo/client": "3.2.7",
     "@dev/graphql": "0.0.1",
@@ -43,7 +43,7 @@
     "next": "9.5.4",
     "next-i18next": "4.5.0",
     "next-offline": "5.0.3",
-    "next-transpile-modules": "^4.1.0",
+    "next-transpile-modules": "4.1.0",
     "next-with-apollo": "5.1.0",
     "nookies": "2.5.0",
     "null-loader": "4.0.1",
