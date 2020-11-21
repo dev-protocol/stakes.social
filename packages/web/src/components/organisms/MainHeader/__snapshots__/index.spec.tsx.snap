@@ -10,27 +10,27 @@ exports[`Banner Snapshot 1`] = `
         style="max-width: 1048px; margin-right: auto; margin-left: auto; background: black;"
       >
         <div
-          class="sc-3hjy97-0 gMLKYy"
+          class="sc-3hjy97-0 eeukqP"
         >
           <div
             class="sc-3hjy97-1 bjdNFE"
           >
-            <h1
-              class="sc-3hjy97-2 eAsZxG"
+            <span
+              class="sc-3hjy97-2 fNJzFm"
               color="white"
             >
               A Sustainable Economy
-            </h1>
-            <h1
-              class="sc-3hjy97-2 eAsZxG"
+            </span>
+            <span
+              class="sc-3hjy97-2 fNJzFm"
               color="white"
             >
               for Open Assets
-            </h1>
+            </span>
             <span
-              class="sc-3hjy97-4 dFsAnz"
+              class="sc-3hjy97-4 iTyHzX"
             >
-              read more
+              Read More
             </span>
           </div>
           <div

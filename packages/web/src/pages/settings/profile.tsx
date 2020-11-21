@@ -9,14 +9,14 @@ type Props = {}
 
 const SettingsProfile = (_: Props) => {
   return (
-    <>
+    <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
       <Header />
       <Headline height={300}>
         <H2>Profile Settings</H2>
       </Headline>
       <UserProfile />
       <Footer />
-    </>
+    </div>
   )
 }
 

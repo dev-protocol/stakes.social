@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { Stake } from 'src/components/organisms/Stake'
-import { Withdraw } from 'src/components/organisms/Withdraw'
+import { WithdrawWithEstimate } from 'src/components/organisms/Withdraw/WithdrawWithEstimate'
 import { AvatarProperty } from '../AvatarProperty'
 import { H4 } from 'src/components/atoms/Typography'
 import { useGetProperty } from 'src/fixtures/dev-for-apps/hooks'
@@ -49,7 +49,7 @@ export const TransactModalContents = ({ className, propertyAddress, type }: Prop
   const { data: property } = useGetProperty(propertyAddress)
   const { name } = usePropertyName(propertyAddress)
   const propertyName = property && property.name ? property.name : name
-  const Form = type === 'stake' ? Stake : type === 'withdraw' ? Withdraw : WithdrawalForHolders
+  const Form = type === 'stake' ? Stake : type === 'withdraw' ? WithdrawWithEstimate : WithdrawalForHolders
 
   return (
     <Wrap className={className}>

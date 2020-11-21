@@ -6,6 +6,7 @@ import styled from 'styled-components'
 import { Navigation, Navigations } from 'src/components/molecules/Navigation'
 import { useState } from 'react'
 import Link from 'next/link'
+import { EarlyAccess } from 'src/components/atoms/EarlyAccess'
 
 interface Props {
   colorSchema?: 'black' | 'white'
@@ -16,32 +17,31 @@ const HeaderContainer = styled.header`
   width: 100%;
 `
 const Top = styled.header`
-  display: grid;
-  grid-auto-flow: column;
+  display: flex;
   justify-content: start;
-  align-items: start;
+  align-items: center;
   border-bottom: 1px solid black;
-
-  grid-gap: 4rem;
 
   #headerlogo {
     margin-left: 1em;
     width: 9rem;
-    height: 46px;
+    height: auto;
     @media (max-width: 768px) {
       margin-left: 0px;
     }
   }
 `
 const Logo = styled.div`
-  display: grid;
-  grid-gap: 1rem;
+  display: flex;
+  margin-right: 64px;
 
   @media (max-width: 768px) {
     position: absolute;
     left: 0px;
+    transform: translateY(2px);
     display: block;
     width: 100%;
+    height: auto;
     text-align: center;
     pointer-events: none;
   }
@@ -72,26 +72,29 @@ const NavigationMenu = styled.div`
 export const Header = ({ colorSchema = 'white' }: Props = {}) => {
   const [isMenuOpen, setMenuOpen] = useState(false)
   return (
-    <HeaderContainer>
-      <ResponsiveWrap>
-        <Top>
-          <Logo>
-            <BrandLogo colorSchema={colorSchema} props={{ height: undefined }}></BrandLogo>
-          </Logo>
-          <Navigation isMenuOpen={isMenuOpen} handleMenuOpen={setMenuOpen} />
-        </Top>
-        {isMenuOpen && (
-          <NavigationMenu>
-            {Navigations.map(nav => (
-              <NavigationItem key={nav.key}>
-                <Link href={nav.pathname}>
-                  <a>{nav.label}</a>
-                </Link>
-              </NavigationItem>
-            ))}
-          </NavigationMenu>
-        )}
-      </ResponsiveWrap>
-    </HeaderContainer>
+    <div style={{ position: 'fixed', top: 0, width: '100%', zIndex: 2 }}>
+      <HeaderContainer>
+        <ResponsiveWrap>
+          <Top>
+            <Logo>
+              <BrandLogo colorSchema={colorSchema} props={{ height: undefined }}></BrandLogo>
+            </Logo>
+            <Navigation isMenuOpen={isMenuOpen} handleMenuOpen={setMenuOpen} />
+          </Top>
+          {isMenuOpen && (
+            <NavigationMenu>
+              {Navigations.map(nav => (
+                <>
+                  <NavigationItem key={nav.key}>
+                    <Link href={nav.pathname}>{nav.label}</Link>
+                  </NavigationItem>
+                </>
+              ))}
+            </NavigationMenu>
+          )}
+        </ResponsiveWrap>
+      </HeaderContainer>
+      <EarlyAccess />
+    </div>
   )
 }

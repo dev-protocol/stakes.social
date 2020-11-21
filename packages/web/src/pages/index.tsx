@@ -3,7 +3,7 @@ import { PropertyCardList } from 'src/components/organisms/PropertyCardList'
 import { Banner } from 'src/components/organisms/MainHeader'
 import { Footer } from 'src/components/organisms/Footer'
 import { useRouter } from 'next/router'
-import { EarlyAccess } from 'src/components/atoms/EarlyAccess'
+
 import { useAPY, useAnnualSupplyGrowthRatio } from 'src/fixtures/dev-kit/hooks'
 import { SupplySummary } from 'src/components/molecules/SupplySummaly'
 import { Header } from 'src/components/organisms/Header'
@@ -46,9 +46,8 @@ const Index = (_: Props) => {
   }, [router])
 
   return (
-    <div style={{ background: 'white' }}>
+    <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
       <Header />
-      <EarlyAccess />
       <Banner />
       <div style={{ padding: '1rem', maxWidth: '1200px', marginRight: 'auto', marginLeft: 'auto' }}>
         <SupplySummary apy={apy} creators={creators} annualSupplyGrowthRatio={annualSupplyGrowthRatio} />

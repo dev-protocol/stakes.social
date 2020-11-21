@@ -7,7 +7,6 @@ import Link from 'next/link'
 import Hamburger from 'src/components/atoms/Svgs/tsx/Hamburger'
 import { useConnectWallet } from 'src/fixtures/wallet/hooks'
 import { useProvider } from 'src/fixtures/wallet/hooks'
-import { UserOutlined } from '@ant-design/icons'
 import { NavMenu, AccountBtn, Connecting, NavMenuItem } from './../../atoms/Navigation/index'
 import WalletContext from 'src/context/walletContext'
 import { useEffectAsync } from 'src/fixtures/utility'
@@ -111,7 +110,7 @@ export const Navigation = ({ handleMenuOpen }: NavigationProps) => {
           mode="horizontal"
         >
           {Navigations.map(nav => (
-            <NavMenuItem color="deeppink" key={nav.key}>
+            <NavMenuItem key={nav.key}>
               <Link href={nav.pathname}>
                 <a>{nav.label}</a>
               </Link>
@@ -128,10 +127,9 @@ export const Navigation = ({ handleMenuOpen }: NavigationProps) => {
           {isConnecting ? (
             <Connecting>{'Connecting...'}</Connecting>
           ) : !isConnected && !accountAddress ? (
-            'SignIn'
+            'Sign in'
           ) : (
             <Fragment>
-              <UserOutlined />
               <span className="hideOnSmall"> {'Profile'} </span>
             </Fragment>
           )}

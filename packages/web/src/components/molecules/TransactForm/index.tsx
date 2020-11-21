@@ -4,7 +4,6 @@ import styled from 'styled-components'
 import { Max } from 'src/components/molecules/Max'
 import { SearchProps } from 'antd/lib/input'
 import { ButtonWithGradient } from 'src/components/atoms/ButtonWithGradient'
-import { blueGradient } from 'src/styles/gradient'
 
 type Props = SearchProps &
   React.RefAttributes<Input> & {
@@ -14,6 +13,11 @@ type Props = SearchProps &
 const StyledForm = styled(Input.Search)`
   width: inherit;
   bottom: 0;
+  .ant-input-affix-wrapper-focused {
+    box-shadow: none;
+    outline: 0;
+    -webkit-box-shadow: none;
+  }
   .ant-input-wrapper {
     display: grid;
     grid-template-columns: 1fr auto;
@@ -21,6 +25,11 @@ const StyledForm = styled(Input.Search)`
   .ant-input-group-addon,
   .ant-btn {
     width: 100%;
+  }
+  .ant-input-affix-wrapper,
+  .ant-input-search,
+  .ant-btn {
+    border: ${props => (props.id === 'withdraw' ? '2px solid #5B5B5B' : '2px solid #2f80ed')};
   }
   .ant-input-search {
     border-right: 0;
@@ -30,7 +39,10 @@ const StyledForm = styled(Input.Search)`
       border-left: 0;
       height: 100%;
       font-size: 1.2rem;
-      ${blueGradient()}
+      background-image: ${props =>
+        props.id === 'withdraw'
+          ? 'linear-gradient(to right, #5B5B5B, #2A2A2A)'
+          : 'linear-gradient(to right, #2f80ed, #1ac9fc)'};
     }
   }
   input {
@@ -45,6 +57,16 @@ const Wrap = styled.div`
 const StyledButtonWithGradient = styled(ButtonWithGradient)`
   font-size: 1.6rem;
   height: 100%;
+`
+const StyledButtonWithGradientForWithdraw = styled(ButtonWithGradient)`
+  font-size: 1.6rem;
+  height: 100%;
+  &,
+  &:hover,
+  &:active,
+  &:focus {
+    background-image: linear-gradient(to right, #5b5b5b, #2a2a2a);
+  }
 `
 
 export const TransactForm = ({
@@ -69,12 +91,17 @@ export const TransactForm = ({
     [_suffix, onClickMax]
   )
   const OnlyButton = useMemo(
-    () => (
-      <StyledButtonWithGradient size="large" onClick={onClick}>
-        {enterButton}
-      </StyledButtonWithGradient>
-    ),
-    [onClick, enterButton]
+    () =>
+      id === 'withdraw' ? (
+        <StyledButtonWithGradientForWithdraw size="large" onClick={onClick}>
+          {enterButton}
+        </StyledButtonWithGradientForWithdraw>
+      ) : (
+        <StyledButtonWithGradient size="large" onClick={onClick}>
+          {enterButton}
+        </StyledButtonWithGradient>
+      ),
+    [id, onClick, enterButton]
   )
 
   return (

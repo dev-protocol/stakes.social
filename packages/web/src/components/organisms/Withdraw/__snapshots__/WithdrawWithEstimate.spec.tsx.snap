@@ -1,0 +1,85 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`WithdrawWithEstimate Snapshot 1`] = `
+<body>
+  <div>
+    <div
+      class="sc-89297o-0 LrdOg"
+    >
+      <div
+        class="sc-89297o-0 LrdOg"
+      >
+        <div
+          class="sc-1d8aayd-1 lldfxv"
+        >
+          <span
+            class="ant-input-group-wrapper ant-input-group-wrapper-lg ant-input-search ant-input-search-large ant-input-search-with-button sc-1d8aayd-0 fnjsag"
+          >
+            <span
+              class="ant-input-wrapper ant-input-group"
+            >
+              <span
+                class="ant-input-affix-wrapper ant-input-affix-wrapper-lg"
+              >
+                <input
+                  class="ant-input ant-input-lg"
+                  id="withdraw"
+                  type="number"
+                  value=""
+                />
+                <span
+                  class="ant-input-suffix"
+                >
+                  <button
+                    class="sc-1ttu0x8-0 ibloSD"
+                  >
+                    DEV
+                  </button>
+                </span>
+              </span>
+              <span
+                class="ant-input-group-addon"
+              >
+                <button
+                  class="ant-btn ant-btn-primary ant-btn-lg ant-input-search-button"
+                  type="button"
+                >
+                  <span>
+                    Withdraw
+                  </span>
+                </button>
+              </span>
+            </span>
+          </span>
+        </div>
+      </div>
+      <div
+        class="ant-card ant-card-bordered sc-1lowp9k-0 dtNkpz"
+      >
+        <div
+          class="ant-card-head"
+        >
+          <div
+            class="ant-card-head-wrapper"
+          >
+            <div
+              class="ant-card-head-title"
+            >
+              Staked and Reward Amount
+            </div>
+          </div>
+        </div>
+        <div
+          class="ant-card-body"
+        >
+          <p>
+            5000
+             DEV 
+            (0 + 5000)
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+`;
