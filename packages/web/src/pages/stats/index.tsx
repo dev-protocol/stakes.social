@@ -21,7 +21,7 @@ const Wrap = styled.div`
 
 const DevProtocolStats = (_: Props) => {
   return (
-   <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
+    <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
       <Header />
       <Headline>
         <H2 color="#4f4f4f">Dev Protocol Stats</H2>
