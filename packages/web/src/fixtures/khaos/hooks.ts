@@ -1,8 +1,5 @@
 import { useContext, useState } from 'react'
-import useSWR from 'swr'
 import { message } from 'antd'
-import { UnwrapFunc } from '../utility'
-import { SWRCachePath } from './cache-path'
 import { postSignGitHubMarketAsset, GitHubAssetInformation } from './utility'
 import { sign } from 'src/fixtures/wallet/utility'
 import WalletContext from 'src/context/walletContext'
@@ -11,7 +8,6 @@ export const usePostSignGitHubMarketAsset = () => {
   const key = 'usePostSignGitHubMarketAsset'
   const { web3 } = useContext(WalletContext)
   const [isLoading, setIsLoading] = useState<boolean>(false)
-  const { data } = useSWR<UnwrapFunc<typeof postSignGitHubMarketAsset>, Error>(SWRCachePath.postSignGitHubMarketAsset())
 
   const postSignGitHubMarketAssetHandler = async (repository: string, personalAccessToken: string) => {
     const signMessage = repository
@@ -41,5 +37,5 @@ export const usePostSignGitHubMarketAsset = () => {
       })
   }
 
-  return { data, postSignGitHubMarketAssetHandler, isLoading }
+  return { postSignGitHubMarketAssetHandler, isLoading }
 }
