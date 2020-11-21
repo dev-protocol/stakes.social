@@ -16,7 +16,6 @@ interface Props {}
 
 const Section = styled.section`
   display: grid;
-  /* padding: 1rem; */
   grid-gap: 0.5rem;
 `
 const Title = styled.div`
