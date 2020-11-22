@@ -47,7 +47,11 @@ export const useGetTotalRewardsAmount = (propertyAddress: string) => {
     () => whenDefined(web3, x => getRewardsAmount(x, propertyAddress)),
     { onError: err => message.error(err.message) }
   )
-  return { totalRewardsAmount: whenDefined(data, x => toCurrency(toNaturalNumber(x))), currency, error }
+  return {
+    totalRewardsAmount: whenDefined(data, x => toCurrency(toNaturalNumber(toNaturalNumber(x)))),
+    currency,
+    error
+  }
 }
 
 export const useWithdrawHolderReward = () => {
