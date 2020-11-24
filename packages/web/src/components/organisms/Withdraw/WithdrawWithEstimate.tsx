@@ -16,7 +16,7 @@ export const WithdrawWithEstimate = ({ className, title, propertyAddress }: Prop
   const [claimedTokens, setClaimedTokens] = useState<string | undefined>()
   const [interestTokens, setInterestTokens] = useState<string | undefined>()
   const [withdrawableTokens, setWithdrawableTokens] = useState<string>('')
-  const { myStakingRewardAmount } = useGetMyStakingRewardAmount(propertyAddress)
+  const { dev: myStakingRewardAmount } = useGetMyStakingRewardAmount(propertyAddress)
   const { myStakingAmount } = useGetMyStakingAmount(propertyAddress)
 
   const estimatedValue = useMemo(
