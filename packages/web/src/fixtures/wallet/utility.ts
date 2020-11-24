@@ -6,6 +6,13 @@ import { WEB3_PROVIDER_ENDPOINT } from 'src/fixtures/wallet/constants'
 
 const cache: WeakMap<NonNullable<Web3>, string> = new WeakMap()
 
+type signCache = {
+  message: string
+  signature: string
+}
+
+const signCacheContainer: Map<string, signCache> = new Map()
+
 export const connectWallet = async (setWeb3Handler: Function, web3Modal?: Web3Modal) => {
   const provider = await web3Modal?.connect().catch(() => {
     return undefined
@@ -90,6 +97,34 @@ export const sign = async (web3: any, inputMessage: string) => {
     return signature
   }
   return undefined
+}
+
+export const signWithCache = async (web3: any, inputMessage: string) => {
+  const key = '@utility/web3sign'
+  if (web3) {
+    const address = await getAccountAddress(web3)
+    if (address === undefined) {
+      return { signature: undefined, message: undefined }
+    }
+
+    const c = signCacheContainer.get(address)
+    if (c) {
+      return { signature: c.signature, message: c.message }
+    }
+
+    const signature = await new web3.eth.personal.sign(inputMessage, address, '')
+      .then((result: string) => result)
+      .catch((error: any) => {
+        message.error({ content: error.message, key })
+        return undefined
+      })
+
+    if (signature !== undefined) {
+      signCacheContainer.set(address, { signature, message: inputMessage })
+    }
+    return { signature, message: inputMessage }
+  }
+  return { signature: undefined, message: undefined }
 }
 
 export const getDevAmount = async (walletAddress: string) => {

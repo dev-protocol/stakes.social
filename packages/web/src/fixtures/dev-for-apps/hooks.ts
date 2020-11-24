@@ -81,8 +81,8 @@ export const usePostPropertyTags = (propertyAddress: string, walletAddress: stri
 
   const postPropertyTagsHandler = async (tags: string) => {
     const signMessage = `submit property tags: ${tags}`
-    const signature = (await sign(web3, signMessage)) || ''
-    if (!signature) {
+    const { signature, message: signedMessage } = await signWithCache(web3, signMessage)
+    if (!signature || !signedMessage) {
       return
     }
 
@@ -90,7 +90,7 @@ export const usePostPropertyTags = (propertyAddress: string, walletAddress: stri
     message.loading({ content: 'update property tags...', duration: 0, key })
 
     await mutate(
-      postPropertyTags(propertyAddress, tags, signMessage, signature, walletAddress)
+      postPropertyTags(propertyAddress, tags, signedMessage, signature, walletAddress)
         .then(result => {
           message.success({ content: 'success update property tags', key })
           return result
@@ -121,8 +121,8 @@ export const useCreateAccount = (walletAddress: string) => {
 
   const postAccountHandler = async (name?: string, biography?: string) => {
     const signMessage = `create accout: ${name}, ${biography}`
-    const signature = (await sign(web3, signMessage)) || ''
-    if (!signature) {
+    const { signature, message: signedMessage } = await signWithCache(web3, signMessage)
+    if (!signature || !signedMessage) {
       return
     }
 
@@ -130,7 +130,7 @@ export const useCreateAccount = (walletAddress: string) => {
     message.loading({ content: 'update account data...', duration: 0, key })
 
     await mutate(
-      postAccount(signMessage, signature, walletAddress, name, biography)
+      postAccount(signedMessage, signature, walletAddress, name, biography)
         .then(result => {
           message.success({ content: 'success update account data', key })
           return result
@@ -160,8 +160,8 @@ export const useUpdateAccount = (id: number, walletAddress: string) => {
 
   const putAccountHandler = async (name?: string, biography?: string) => {
     const signMessage = `update accout: ${name}, ${biography}`
-    const signature = (await sign(web3, signMessage)) || ''
-    if (!signature) {
+    const { signature, message: signedMessage } = await signWithCache(web3, signMessage)
+    if (!signature || !signedMessage) {
       return
     }
 
@@ -169,7 +169,7 @@ export const useUpdateAccount = (id: number, walletAddress: string) => {
     message.loading({ content: 'update account data...', duration: 0, key })
 
     await mutate(
-      putAccount(signMessage, signature, walletAddress, id, name, biography)
+      putAccount(signedMessage, signature, walletAddress, id, name, biography)
         .then(result => {
           message.success({ content: 'success update account data', key })
           return result
