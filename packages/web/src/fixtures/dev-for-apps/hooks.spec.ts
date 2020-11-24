@@ -53,20 +53,22 @@ describe('dev-for-apps hooks for property tags', () => {
       expect(result.current.data).toBe(data)
     })
 
-    test('failure post property tags', async () => {
+    test('failure post property tags with web3.sign error', async () => {
       const propertyAddress = '0x01234567890'
       const accountAddress = '0x09876543210'
       const data = undefined
       const errorMessage = 'error'
       const error = new Error(errorMessage)
       ;(useSWR as jest.Mock).mockImplementation(() => ({ data, error, mutate: () => {} }))
-      ;(postPropertyTags as jest.Mock).mockResolvedValue({ tags: ['dummy', 'post', 'tag'] })
-      const { result, waitForNextUpdate } = renderHook(() => usePostPropertyTags(propertyAddress, accountAddress))
-      act(() => {
+      ;(signWithCache as jest.Mock).mockImplementation(() => ({ signature: undefined, message: undefined }))
+      ;(postPropertyTags as jest.Mock).mockImplementation(() => {})
+      const { result } = renderHook(() => usePostPropertyTags(propertyAddress, accountAddress))
+      await act(() => {
         result.current.postPropertyTagsHandler('dummy tags')
       })
-      await waitForNextUpdate()
       expect(result.current.isLoading).toBe(false)
+      expect(result.current.data).toBe(undefined)
+      expect((postPropertyTags as jest.Mock).mock.calls.length).toBe(0)
     })
   })
 })
