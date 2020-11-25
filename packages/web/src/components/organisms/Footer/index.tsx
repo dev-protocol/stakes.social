@@ -20,7 +20,7 @@ const LowerFooter = {
   textAlign: 'center',
   maxWidth: 'unset',
   background: 'black',
-  padding: '50px 0px'
+  padding: '30px 0px 30px 0px'
 } as CSSProperties
 
 const FooterContainer = styled.div`

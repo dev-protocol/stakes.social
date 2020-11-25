@@ -4,10 +4,10 @@ exports[`PoliciesList Snapshot 1`] = `
 <body>
   <div>
     <div
-      class="sc-1xckrk7-0 ljVAYE"
+      style="display: flex; justify-content: center;"
     >
       <div
-        style="margin: 0px auto; align-items: center;"
+        style="align-self: center; align-items: center;"
       >
         <div
           class="ant-empty ant-empty-normal"
@@ -59,18 +59,6 @@ exports[`PoliciesList Snapshot 1`] = `
               You can look for a under discussion or consideration, or you can propose one.
             </div>
           </p>
-        </div>
-        <div
-          style="width: 100%; text-align: center;"
-        >
-          <button
-            class="ant-btn ant-btn-primary"
-            type="button"
-          >
-            <span>
-              Access DIPs
-            </span>
-          </button>
         </div>
       </div>
     </div>

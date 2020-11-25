@@ -4,10 +4,10 @@ exports[`UserProfile Snapshot 1`] = `
 <body>
   <div>
     <div
-      class="sc-1wzqvkc-0 ZmrPe"
+      class="sc-4avdzt-5 dTyofh"
     >
       <section
-        class="sc-4avdzt-0 jbRCmr"
+        class="sc-4avdzt-0 hoKPng"
       >
         <div
           class="sc-4avdzt-1 jGXkIY"
@@ -21,7 +21,7 @@ exports[`UserProfile Snapshot 1`] = `
         </div>
       </section>
       <section
-        class="sc-4avdzt-0 jbRCmr"
+        class="sc-4avdzt-0 hoKPng"
       >
         <div
           class="sc-4avdzt-1 jGXkIY"
@@ -45,7 +45,7 @@ exports[`UserProfile Snapshot 1`] = `
         </div>
       </section>
       <section
-        class="sc-4avdzt-0 jbRCmr"
+        class="sc-4avdzt-0 hoKPng"
       >
         <button
           class="ant-btn ant-btn-primary"
@@ -57,7 +57,7 @@ exports[`UserProfile Snapshot 1`] = `
         </button>
       </section>
       <section
-        class="sc-4avdzt-0 jbRCmr"
+        class="sc-4avdzt-0 hoKPng"
       >
         <div
           class="sc-4avdzt-1 jGXkIY"
