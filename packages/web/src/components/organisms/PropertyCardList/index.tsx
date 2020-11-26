@@ -62,11 +62,24 @@ const markets = {
 }
 
 const Wrap = styled.div`
-  display: grid;
-  column-gap: 2em;
-  grid-template-rows: 1fr;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  display: flex;
   padding-top: 1rem;
+  justify-content: space-between;
+  a {
+    margin-right: 20px;
+  }
+
+  a:last-child {
+    margin-right: 0px;
+  }
+
+  @media (min-width: 768px) {
+    justify-content: flex-start;
+
+    a {
+      margin-right: 40px;
+    }
+  }
 `
 
 const FILTER_OPTIONS = [
@@ -78,6 +91,7 @@ const FILTER_OPTIONS = [
 const FilterOptionContainer = styled.div`
   display: flex;
   justify-content: space-between;
+  max-width: 100vw;
 
   @media (max-width: 760px) {
     grid-row: 3;
@@ -168,7 +182,7 @@ export const PropertyCardList = ({ currentPage, searchWord, sortBy, featureTag }
   )
 
   return (
-    <div style={{ flexGrow: 1 }}>
+    <div style={{ flexGrow: 1, maxWidth: '100vw' }}>
       <PropertiesHeader>
         <Header>Asset Pools</Header>
         <PropertySearchForm onSubmitSearchProperty={handleSearch} />
