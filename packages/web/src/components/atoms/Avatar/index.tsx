@@ -1,6 +1,5 @@
 import React from 'react'
 import styled from 'styled-components'
-import Jdenticon from 'react-jdenticon'
 
 type Props = {
   url?: string
@@ -14,14 +13,17 @@ const AvatarImage = styled.div`
   }
 `
 
-export const Avatar = ({ url, genkey, size }: Props) => {
+const AvatarPlaceholder = styled.div<{ size: string | number }>`
+  width: ${props => `${props.size}px`};
+  height: ${props => `${props.size}px`};
+  border-radius: 90px;
+  background-image: linear-gradient(to right, #36d1dc, #5b86e5);
+`
+
+export const Avatar = ({ url, size }: Props) => {
   return (
     <AvatarImage>
-      {url ? (
-        <img src={url} alt="avatar" style={{ width: `${size}px` }} />
-      ) : (
-        <Jdenticon value={genkey || ''} size={`${size}`} />
-      )}
+      {url ? <img src={url} alt="avatar" style={{ width: `${size}px` }} /> : <AvatarPlaceholder size={size} />}
     </AvatarImage>
   )
 }
