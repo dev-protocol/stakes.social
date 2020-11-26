@@ -164,7 +164,7 @@ const Author = ({ propertyAddress }: { propertyAddress: string }) => {
             <Link passHref href="/profile/[accountAddress]" as={`/profile/${authorAddress}`}>
               <a>
                 <div style={{ width: '150px' }}>
-                  <Avatar size={'150'} />
+                  <Avatar size={'150'} accountAddress={authorAddress} />
                 </div>
               </a>
             </Link>
