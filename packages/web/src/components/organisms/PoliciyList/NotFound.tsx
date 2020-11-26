@@ -1,5 +1,5 @@
 import React from 'react'
-import { Empty } from 'antd'
+import { Empty, Button } from 'antd'
 
 export const NotFound = () => {
   return (
@@ -13,9 +13,11 @@ export const NotFound = () => {
           </>
         }
       />
-      {/* <div style={{ width: '100%', textAlign: 'center' }}>
-        <Button type="primary">Access DIPs</Button>
-      </div> */}
+      <div style={{ width: '100%', textAlign: 'center' }}>
+        <Button href="https://github.com/dev-protocol/DIPs/issues" type="primary">
+          Access DIPs
+        </Button>
+      </div>
     </div>
   )
 }
