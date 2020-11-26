@@ -162,6 +162,13 @@ const FlewColumn = styled.div`
 
 const formatter = new Intl.NumberFormat('en-US')
 
+const PlaceholderCoverImageOrGradient = styled(CoverImageOrGradient)`
+  background: url('https://asset.stakes.social/logo/dev.svg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 80px;
+`
+
 export const PropertyCard = ({ propertyAddress, assets }: Props) => {
   const { totalStakingAmount, currency: totalStakingAmountCurrency } = useGetTotalStakingAmount(propertyAddress)
   const { totalRewardsAmount, currency: totalRewardsAmountCurrency } = useGetTotalRewardsAmount(propertyAddress)
@@ -178,7 +185,11 @@ export const PropertyCard = ({ propertyAddress, assets }: Props) => {
   return (
     <Link href={'/[propertyAddress]'} as={`/${propertyAddress}`}>
       <Card>
-        <CoverImageOrGradient src={dataProperty?.cover_image?.url} ratio={20} />
+        {dataProperty?.cover_image?.url ? (
+          <CoverImageOrGradient src={dataProperty.cover_image.url} ratio={20} />
+        ) : (
+          <PlaceholderCoverImageOrGradient ratio={20} />
+        )}
         <Title>{includeAssets || 'Property'}</Title>
         <PropertyDescription>{lorem.generateSentences(2)}</PropertyDescription>
         <FlexRow>
