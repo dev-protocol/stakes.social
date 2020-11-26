@@ -43,6 +43,8 @@ export const AccountBtn = styled.div`
 
 export const Connecting = styled.div`
   color: white;
+  font-size: 0.8em;
+
   @keyframes blink {
     0% {
       opacity: 0.7;
