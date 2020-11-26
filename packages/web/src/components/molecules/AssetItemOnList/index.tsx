@@ -8,7 +8,8 @@ import {
   useBalanceOfProperty,
   useGetMyStakingAmount,
   usePropertyName,
-  useGetMyStakingRewardAmount
+  useGetMyStakingRewardAmount,
+  useGetMyHolderAmount
 } from 'src/fixtures/dev-kit/hooks'
 import styled from 'styled-components'
 import { AvatarProperty } from '../AvatarProperty'
@@ -22,6 +23,7 @@ interface Props {
   onClickStake?: (propertyAddress: string) => void
   onClickWithdrawStakersReward?: (propertyAddress: string) => void
   onClickWithdrawHoldersReward?: (propertyAddress: string) => void
+  isPool?: Boolean
 }
 
 const StyledStatistic = styled(Statistic)`
@@ -84,7 +86,8 @@ export const AssetItemOnList = ({
   enableWithdrawHoldersReward,
   onClickStake,
   onClickWithdrawStakersReward,
-  onClickWithdrawHoldersReward
+  onClickWithdrawHoldersReward,
+  isPool
 }: Props) => {
   const { data: property } = useGetProperty(propertyAddress)
   const { balance } = useBalanceOfProperty(propertyAddress)
@@ -92,6 +95,7 @@ export const AssetItemOnList = ({
   const { myStakingRewardAmount, currency: myStakingRewardAmountCurrency } = useGetMyStakingRewardAmount(
     propertyAddress
   )
+  const { myHolderAmount } = useGetMyHolderAmount(propertyAddress)
   const { myStakingAmount, currency: myStakingAmountCurrency } = useGetMyStakingAmount(propertyAddress)
   const propertyName = property && property.name ? property.name : name
   const hasNotBalanceOnTheProperty = balance ? balance.isZero() : false
@@ -115,7 +119,7 @@ export const AssetItemOnList = ({
       />
       <GridTotalStake
         title="Your Rewards"
-        value={myStakingRewardAmount?.dp(2).toNumber() || 'N/A'}
+        value={(isPool ? myHolderAmount?.dp(2).toNumber() : myStakingRewardAmount?.dp(2).toNumber()) || 'N/A'}
         suffix={myStakingRewardAmountCurrency}
         precision={2}
       />
