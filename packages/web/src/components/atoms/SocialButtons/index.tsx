@@ -46,8 +46,16 @@ const SocialButton = styled.a`
   margin-left: 20px;
 `
 
-export const Twitter = ({ link = '//twitter.com/devprtcl' }: { link?: string }) => (
-  <SocialButton href={link}>
+export const Twitter = ({
+  target,
+  rel,
+  href = '//twitter.com/devprtcl'
+}: {
+  target?: string
+  rel?: string
+  href?: string
+}) => (
+  <SocialButton href={href} target={target} rel={rel}>
     <svg
       height="100%"
       fillRule="evenodd"
@@ -100,8 +108,16 @@ export const Telegram = () => (
   </SocialButton>
 )
 
-export const Github = ({ link = 'https://github.com/dev-protocol/stakes.social' }: { link?: string }) => (
-  <SocialButton href={link}>
+export const Github = ({
+  target,
+  rel,
+  href = 'https://github.com/dev-protocol/stakes.social'
+}: {
+  target?: string
+  rel?: string
+  href?: string
+}) => (
+  <SocialButton href={href} target={target} rel={rel}>
     <svg id="github" enableBackground="new 0 0 64 64" version="1.1" viewBox="0 0 64 64">
       <g id="Layer_3">
         <g>
