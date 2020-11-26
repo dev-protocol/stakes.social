@@ -12,7 +12,9 @@ const newClient = (web3: Web3) => {
 export const getRewardsAmount = async (web3: Web3, propertyAddress: string) => {
   const client = newClient(web3)
   if (client) {
-    return client.withdraw(await getContractAddress(client, 'withdraw')).getRewardsAmount(propertyAddress)
+    return client
+      .lockup(await getContractAddress(client, 'lockup'))
+      .calculateCumulativeHoldersRewardAmount(propertyAddress)
   }
   return undefined
 }

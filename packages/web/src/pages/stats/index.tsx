@@ -28,7 +28,7 @@ const DevProtocolStats = (_: Props) => {
         <span style={{ marginBottom: '10px' }}>Dev Protocol is being adopted, see for yourself.</span>
         <BuyDevButton />
       </Headline>
-      <div style={{ padding: '1rem', maxWidth: '1200px', marginRight: 'auto', marginLeft: 'auto' }}>
+      <div style={{ padding: '1rem', maxWidth: '1200px', margin: '0 auto', width: '95%' }}>
         <DevStats />
         <Divider type="horizontal" />
         <Wrap>

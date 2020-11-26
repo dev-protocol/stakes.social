@@ -74,7 +74,7 @@ describe('dev-kit hooks', () => {
       ;(useCurrency as jest.Mock).mockImplementationOnce(() => ({ currency: 'DEV', toCurrency }))
       ;(useSWR as jest.Mock).mockImplementation(() => ({ data, error }))
       const { result } = renderHook(() => useGetTotalRewardsAmount('property-address'))
-      expect(result.current.totalRewardsAmount?.toFixed()).toBe(toNaturalNumber(data).toFixed())
+      expect(result.current.totalRewardsAmount?.toFixed()).toBe(toNaturalNumber(toNaturalNumber(data)).toFixed())
       expect(result.current.currency).toBe('DEV')
     })
 
@@ -85,7 +85,9 @@ describe('dev-kit hooks', () => {
       ;(useCurrency as jest.Mock).mockImplementationOnce(() => ({ currency: 'USD', toCurrency }))
       ;(useSWR as jest.Mock).mockImplementation(() => ({ data, error }))
       const { result } = renderHook(() => useGetTotalRewardsAmount('property-address'))
-      expect(result.current.totalRewardsAmount?.toFixed()).toBe(toNaturalNumber(data).times(3).toFixed())
+      expect(result.current.totalRewardsAmount?.toFixed()).toBe(
+        toNaturalNumber(toNaturalNumber(data)).times(3).toFixed()
+      )
       expect(result.current.currency).toBe('USD')
     })
 
