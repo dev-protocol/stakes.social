@@ -215,7 +215,7 @@ const PropertyAddressDetail = (_: Props) => {
           </Transact>
           <AboutSection>
             <h2>About</h2>
-            <ReactMarkdown>{dataProperty ? dataProperty.description : ''}</ReactMarkdown>
+            <ReactMarkdown>{dataProperty ? dataProperty.description : 'No information available'}</ReactMarkdown>
           </AboutSection>
           <AssetsSection>
             <h2>Included assets</h2>

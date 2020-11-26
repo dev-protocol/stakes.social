@@ -7,8 +7,8 @@ import { useGetProperty } from 'src/fixtures/dev-for-apps/hooks'
 import {
   useBalanceOfProperty,
   useGetMyStakingAmount,
-  useGetTotalStakingAmount,
-  usePropertyName
+  usePropertyName,
+  useGetMyStakingRewardAmount
 } from 'src/fixtures/dev-kit/hooks'
 import styled from 'styled-components'
 import { AvatarProperty } from '../AvatarProperty'
@@ -89,8 +89,10 @@ export const AssetItemOnList = ({
   const { data: property } = useGetProperty(propertyAddress)
   const { balance } = useBalanceOfProperty(propertyAddress)
   const { name } = usePropertyName(propertyAddress)
+  const { myStakingRewardAmount, currency: myStakingRewardAmountCurrency } = useGetMyStakingRewardAmount(
+    propertyAddress
+  )
   const { myStakingAmount, currency: myStakingAmountCurrency } = useGetMyStakingAmount(propertyAddress)
-  const { totalStakingAmount, currency: totalStakingAmountCurrency } = useGetTotalStakingAmount(propertyAddress)
   const propertyName = property && property.name ? property.name : name
   const hasNotBalanceOnTheProperty = balance ? balance.isZero() : false
   const onClick = (
@@ -112,9 +114,9 @@ export const AssetItemOnList = ({
         precision={2}
       />
       <GridTotalStake
-        title="Total Staked"
-        value={totalStakingAmount?.dp(2).toNumber() || 'N/A'}
-        suffix={totalStakingAmountCurrency}
+        title="Your Rewards"
+        value={myStakingRewardAmount?.dp(2).toNumber() || 'N/A'}
+        suffix={myStakingRewardAmountCurrency}
         precision={2}
       />
       <GridButtons>
