@@ -227,9 +227,7 @@ const PropertyAddressDetail = (_: Props) => {
             <ReactMarkdown>{dataProperty ? dataProperty.description : ''}</ReactMarkdown>
             <H3>Links</H3>
             <LinksArea>
-              {dataProperty?.links.github && (
-                <Github style={{ marginLeft: '10px' }} link={dataProperty?.links.github} />
-              )}
+              {dataProperty?.links.github && <Github link={dataProperty?.links.github} />}
               {dataProperty?.links.twitter && <Twitter link={dataProperty?.links.twitter} />}
               {dataProperty?.links.website && (
                 <Button
