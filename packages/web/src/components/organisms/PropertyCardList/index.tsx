@@ -84,6 +84,21 @@ const FilterOptionContainer = styled.div`
   }
 `
 
+const PaginationContainer = styled.div`
+  display: flex;
+  grid-column: 1/-1;
+  justify-content: flex-start;
+
+  ul {
+    margin-left: 0px;
+  }
+
+  @media (min-width: 768px) {
+    justify-content: flex-end;
+    margin-left: 0;
+  }
+`
+
 const FeatureTags = ({ tag }: { tag: FeatureTag }) => {
   const tags = ['GitHub', 'Npmjs', 'Creators']
 
@@ -182,7 +197,7 @@ export const PropertyCardList = ({ currentPage, searchWord, sortBy, featureTag }
                 <PropertyCard propertyAddress={d.property} assets={d.authentication} />
               </div>
             ))}
-          <div style={{ display: 'flex', justifyContent: 'flex-end', gridColumn: '1/-1' }}>
+          <PaginationContainer>
             <Pagination
               current={currentPage}
               size="default"
@@ -192,9 +207,8 @@ export const PropertyCardList = ({ currentPage, searchWord, sortBy, featureTag }
               onChange={handlePagination}
               onShowSizeChange={handleShowSizeChange}
               total={data.property_factory_create_aggregate.aggregate?.count}
-              style={{ margin: '0 0 20px 50%' }}
             />
-          </div>
+          </PaginationContainer>
         </PropertyOverview>
       )}
     </div>

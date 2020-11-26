@@ -107,7 +107,7 @@ export const Navigation = ({ handleMenuOpen }: NavigationProps) => {
           {Navigations.map(nav => (
             <NavMenuItem key={nav.key}>
               <Link href={nav.pathname}>
-                <a>{nav.label}</a>
+                <a style={{ fontSize: '0.8em' }}>{nav.label}</a>
               </Link>
             </NavMenuItem>
           ))}
@@ -122,10 +122,12 @@ export const Navigation = ({ handleMenuOpen }: NavigationProps) => {
           {isConnecting ? (
             <Connecting>{'Connecting...'}</Connecting>
           ) : !isConnected && !accountAddress ? (
-            'Sign in'
+            <span style={{ fontSize: '0.8em' }}>Sign in</span>
           ) : (
             <Fragment>
-              <span className="hideOnSmall"> {'Profile'} </span>
+              <span style={{ fontSize: '0.8em' }} className="hideOnSmall">
+                Profile
+              </span>
             </Fragment>
           )}
         </AccountBtn>

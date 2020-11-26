@@ -15,7 +15,7 @@ export const NavMenuItem = styled(NavMenu.Item)`
   a.link:hover {
     background-color: yellow;
   }
-  margin-right: 4em;
+  margin-right: 2em;
 `
 
 export const AccountBtn = styled.div`
@@ -26,7 +26,7 @@ export const AccountBtn = styled.div`
   cursor: pointer;
   line-height: 45px;
   padding: 0px 15px;
-  right: 0px;
+  right: 20px;
 
   &:hover {
     background: #272727;
