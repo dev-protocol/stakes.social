@@ -9,7 +9,8 @@ import { Header } from 'src/components/organisms/Header'
 import TopStakers from 'src/components/organisms/TopStakers'
 import { useAPY, usePropertyAuthor } from 'src/fixtures/dev-kit/hooks'
 import { useGetPropertyAuthenticationQuery, useGetPropertyAggregateLazyQuery } from '@dev/graphql'
-import { PlusOutlined } from '@ant-design/icons'
+import { PlusOutlined, LinkOutlined } from '@ant-design/icons'
+import { Button } from 'antd'
 import Link from 'next/link'
 import { useGetPropertytInformation } from 'src/fixtures/devprtcl/hooks'
 import { useGetAccount, useGetProperty } from 'src/fixtures/dev-for-apps/hooks'
@@ -20,6 +21,8 @@ import { Withdraw } from 'src/components/organisms/Withdraw'
 import { useProvider } from 'src/fixtures/wallet/hooks'
 import { Avatar } from 'src/components/molecules/Avatar'
 import { CoverImageOrGradient } from 'src/components/atoms/CoverImageOrGradient'
+import { H3 } from 'src/components/atoms/Typography'
+import { Twitter, Github } from 'src/components/atoms/SocialButtons'
 
 type Props = {}
 
@@ -114,6 +117,11 @@ const CreatorContent = styled.div`
 const RoundedCoverImageOrGradient = styled(CoverImageOrGradient)`
   border-radius: 5px;
 `
+const LinksArea = styled.div`
+  display: flex;
+  align-items: start;
+  margin-left: -20px;
+`
 
 const formatter = new Intl.NumberFormat('en-US')
 
@@ -204,6 +212,19 @@ const PropertyAddressDetail = (_: Props) => {
           <AboutSection>
             <h2>About</h2>
             <ReactMarkdown>{dataProperty ? dataProperty.description : ''}</ReactMarkdown>
+            <H3>Links</H3>
+            <LinksArea>
+              {dataProperty?.links.github && <Github link={dataProperty?.links.github} />}
+              {dataProperty?.links.twitter && <Twitter link={dataProperty?.links.twitter} />}
+              {dataProperty?.links.website && (
+                <Button
+                  style={{ marginLeft: '20px', padding: 3, width: '38px', height: '38px' }}
+                  shape="circle"
+                  icon={<LinkOutlined />}
+                  href={dataProperty?.links.website}
+                />
+              )}
+            </LinksArea>
           </AboutSection>
           <AssetsSection>
             <h2>Included assets</h2>
