@@ -1,32 +1,37 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Select } from 'antd'
-import { useListPropertyMetaQuery } from '@dev/graphql'
+import { useListPropertyMetaLazyQuery } from '@dev/graphql'
 
 interface Props {
-  query: string
-  author: string
-  onSearch: (value: string) => void
-  onChange: (value: string) => void
+  author: string | undefined
+  label: string
+  onChange: (propertyAddress: string) => void
 }
 
 const { Option } = Select
 
-export const AuthorSelector = ({ query, onSearch, onChange, author }: Props) => {
-  const { data } = useListPropertyMetaQuery({ variables: { author, ilike: `%${query}%` } })
+export const AuthorSelector = ({ author, onChange }: Props) => {
+  const [fetchProperties, { data, loading }] = useListPropertyMetaLazyQuery()
 
+  useEffect(() => {
+    if (author) {
+      fetchProperties({ variables: { author } })
+    }
+  }, [fetchProperties, author])
+
+  console.log('properties data: ', data)
   return (
     <Select
-      showSearch
+      loading={loading}
       placeholder="Please select"
       optionFilterProp="children"
       onChange={onChange}
-      onSearch={onSearch}
       filterOption={(input, option: any) => option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}
     >
       {data &&
-        data.property_meta.map(({ property }) => (
+        data.property_meta.map(({ name, property }) => (
           <Option value={property} key={property}>
-            {property}
+            {name}
           </Option>
         ))}
     </Select>

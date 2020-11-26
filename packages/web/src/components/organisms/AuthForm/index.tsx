@@ -7,6 +7,8 @@ import { blueGradient } from 'src/styles/gradient'
 import { boxShahowWithOnHover } from 'src/styles/boxShahow'
 import Input from 'src/components/molecules/Input'
 import { InfoCircleOutlined, CodeOutlined, DeploymentUnitOutlined } from '@ant-design/icons'
+import { useProvider } from 'src/fixtures/wallet/hooks'
+import { AuthorSelector } from '../PropertySelectForm/AuthorSelector'
 
 const NpmMarketContractAddress = '0x88c7B1f41DdE50efFc25541a2E0769B887eB2ee7'
 
@@ -64,7 +66,9 @@ export const AuthForm = ({ market, property }: Props) => {
   const { postSignGitHubMarketAssetHandler, isLoading } = usePostSignGitHubMarketAsset()
   const { authenticate } = useAuthenticate()
   const { createAndAuthenticate } = useCreateAndAuthenticate()
+  const { accountAddress } = useProvider()
   const onFinish = async (values: any) => {
+    console.log('values: ', values)
     const authRequestData: string[] =
       market === NpmMarketContractAddress
         ? Object.values(values)
@@ -87,6 +91,16 @@ export const AuthForm = ({ market, property }: Props) => {
     }
   }
 
+  const [form] = Form.useForm()
+
+  const handleSelectChange = (propertyAddress: string) => {
+    form.setFieldsValue({
+      propertyAddress
+    })
+  }
+
+  console.log('form value:?', form.getFieldValue('propertyAddress'))
+
   return (
     <Container>
       {metrics ? (
@@ -105,6 +119,16 @@ export const AuthForm = ({ market, property }: Props) => {
         />
       ) : (
         <Form name="basic" initialValues={{ remember: true }} onFinish={onFinish}>
+          <Row>
+            <Span>Property:</Span>
+            <Form.Item
+              name="propertyAddress"
+              rules={[{ required: true, message: 'Please input GitHub Repository name (e.g., your/awesome-repos)' }]}
+              key="propertyAddress"
+            >
+              <AuthorSelector onChange={handleSelectChange} label="propertyAddress" author={accountAddress} />
+            </Form.Item>
+          </Row>
           <Row>
             <Span>Project name</Span>
             <Form.Item
