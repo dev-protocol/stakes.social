@@ -10,8 +10,10 @@ import styled from 'styled-components'
 import { truncate } from 'src/fixtures/utility/string'
 import { LoremIpsum } from 'lorem-ipsum'
 import { useGetPropertytInformation } from 'src/fixtures/devprtcl/hooks'
+import { useGetProperty } from 'src/fixtures/dev-for-apps/hooks'
 import { Avatar } from 'src/components/molecules/Avatar'
 import BigNumber from 'bignumber.js'
+import { CoverImageOrGradient } from 'src/components/atoms/CoverImageOrGradient'
 
 const lorem = new LoremIpsum({
   sentencesPerParagraph: {
@@ -44,6 +46,7 @@ const Card = styled.div`
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
   cursor: pointer;
   background: #fff;
+  overflow: hidden;
 `
 
 const RowContainer = styled.div`
@@ -52,17 +55,6 @@ const RowContainer = styled.div`
   row-gap: 8px;
   grid-template-columns: 1fr 1fr;
   grid-template-areas: 'ownedstake totalstaked';
-`
-
-const Property = styled.div`
-  display: flex;
-  align-items: center;
-`
-const PropertyArea = styled(Property)`
-  display: flex;
-  justify-content: center;
-  padding: 15px;
-  grid-area: property;
 `
 
 const Title = styled.span`
@@ -178,6 +170,7 @@ export const PropertyCard = ({ propertyAddress, assets }: Props) => {
   )
   const { myStakingAmount, currency: myStakingAmountCurrency } = useGetMyStakingAmount(propertyAddress)
   const { data: authorData } = useGetPropertytInformation(propertyAddress)
+  const { data: dataProperty } = useGetProperty(propertyAddress)
   const includeAssets = useMemo(() => assets && truncate(assets.map(e => e.authentication_id).join(', '), 24), [assets])
 
   const zeroBigNumber = new BigNumber(0)
@@ -185,13 +178,7 @@ export const PropertyCard = ({ propertyAddress, assets }: Props) => {
   return (
     <Link href={'/[propertyAddress]'} as={`/${propertyAddress}`}>
       <Card>
-        <PropertyArea>
-          <img
-            width="auto"
-            height="auto"
-            src="https://res.cloudinary.com/haas-storage/image/upload/v1597910958/Screenshot_from_2020-08-20_10-08-09-removebg-preview_td5opp.png"
-          />
-        </PropertyArea>
+        <CoverImageOrGradient src={dataProperty?.cover_image?.url} ratio={20} />
         <Title>{includeAssets || 'Property'}</Title>
         <PropertyDescription>{lorem.generateSentences(2)}</PropertyDescription>
         <FlexRow>
