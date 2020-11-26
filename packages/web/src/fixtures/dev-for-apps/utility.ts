@@ -52,7 +52,7 @@ export interface Property {
   description: string
   cover_image: NullableImage
   portrait: NullableImage
-  links: {
+  links?: {
     github: string
     twitter: string
     website: string
