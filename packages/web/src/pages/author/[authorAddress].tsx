@@ -367,7 +367,7 @@ const AuthorAddressDetail = (_: Props) => {
           </div>
           <div id="top-stakers" style={{ gridColumn: '2 / -1', width: 'auto' }}>
             <h2>Top stakers</h2>
-            <TopStakers propertyAdress="0x44d871aebF0126Bf646753E2C976Aa7e68A66c15" />
+            <TopStakers authorAddress={author} />
           </div>
           <div id="supporting" style={{ gridColumn: '2 / -1', width: 'auto' }}>
             <h2>Supporting</h2>
