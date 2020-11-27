@@ -4,7 +4,7 @@ exports[`AuthForm Snapshot 1`] = `
 <body>
   <div>
     <div
-      class="bja7zw-0 sjTPd"
+      class="bja7zw-0 jhHiFw"
     >
       <form
         class="ant-form ant-form-horizontal"
@@ -243,56 +243,68 @@ exports[`AuthForm Snapshot 1`] = `
           style="display: flex; align-items: center; margin-bottom: 1em;"
         >
           <div
-            class="bja7zw-5 gIHiEi"
+            style="display: flex; align-items: center; align-self: flex-end;"
           >
-            <span
-              aria-label="info-circle"
-              class="anticon anticon-info-circle"
-              role="img"
+            <div
+              class="bja7zw-5 gIHiEi"
             >
-              <svg
-                aria-hidden="true"
-                class=""
-                data-icon="info-circle"
-                fill="currentColor"
-                focusable="false"
-                height="1em"
-                viewBox="64 64 896 896"
-                width="1em"
+              <span
+                aria-label="info-circle"
+                class="anticon anticon-info-circle"
+                role="img"
               >
-                <path
-                  d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 820c-205.4 0-372-166.6-372-372s166.6-372 372-372 372 166.6 372 372-166.6 372-372 372z"
-                />
-                <path
-                  d="M464 336a48 48 0 1096 0 48 48 0 10-96 0zm72 112h-48c-4.4 0-8 3.6-8 8v272c0 4.4 3.6 8 8 8h48c4.4 0 8-3.6 8-8V456c0-4.4-3.6-8-8-8z"
-                />
-              </svg>
-            </span>
-          </div>
-          <div
-            style="font-size: 0.9em;"
-          >
-            <div>
-              Please
-               
-              <a
-                href="https://github.com/settings/tokens/new"
-                rel="noreferrer"
-                target="_blank"
-              >
-                create a Personal Access Token without any scopes.
-              </a>
+                <svg
+                  aria-hidden="true"
+                  class=""
+                  data-icon="info-circle"
+                  fill="currentColor"
+                  focusable="false"
+                  height="1em"
+                  viewBox="64 64 896 896"
+                  width="1em"
+                >
+                  <path
+                    d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 820c-205.4 0-372-166.6-372-372s166.6-372 372-372 372 166.6 372 372-166.6 372-372 372z"
+                  />
+                  <path
+                    d="M464 336a48 48 0 1096 0 48 48 0 10-96 0zm72 112h-48c-4.4 0-8 3.6-8 8v272c0 4.4 3.6 8 8 8h48c4.4 0 8-3.6 8-8V456c0-4.4-3.6-8-8-8z"
+                  />
+                </svg>
+              </span>
             </div>
-            <div>
-              The PAT is confidentially authenticated using the Khaos oracle(
-              <a
-                href="https://github.com/dev-protocol/khaos"
-                rel="noreferrer"
-                target="_blank"
-              >
-                *
-              </a>
-              ).
+            <div
+              style="font-size: 0.9em;"
+            >
+              <div>
+                Please
+                 
+                <a
+                  href="https://github.com/settings/tokens/new"
+                  rel="noreferrer"
+                  target="_blank"
+                >
+                  <span
+                    style="word-break: normal;"
+                  >
+                    create a Personal Access Token without any scopes.
+                  </span>
+                </a>
+              </div>
+              <div>
+                <span
+                  style="word-break: normal;"
+                >
+                  The PAT is confidentially authenticated using the Khaos oracle(
+                </span>
+                <a
+                  href="https://github.com/dev-protocol/khaos"
+                  rel="noreferrer"
+                  target="_blank"
+                >
+                  *
+                </a>
+                ).
+              </div>
             </div>
           </div>
         </div>
