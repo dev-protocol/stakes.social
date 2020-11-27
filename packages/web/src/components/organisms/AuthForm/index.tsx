@@ -63,7 +63,7 @@ const InfoContainer = styled.div`
   }
 `
 
-export const AuthForm = ({ market, property }: Props) => {
+export const AuthForm = ({ market }: Props) => {
   const [metrics, setMetrics] = useState<string>('')
   const { postSignGitHubMarketAssetHandler, isLoading } = usePostSignGitHubMarketAsset()
   const { authenticate } = useAuthenticate()
@@ -81,8 +81,8 @@ export const AuthForm = ({ market, property }: Props) => {
             return [repository, khaos.publicSignature || '']
           })()
 
-    const metrics = await (property
-      ? authenticate(market, property, authRequestData)
+    const metrics = await (values.propertyAddress
+      ? authenticate(market, values.propertyAddress, authRequestData)
       : ((name, symbol) => createAndAuthenticate(name, symbol, market, authRequestData))(
           values.propertyName,
           values.propertySymbol
@@ -109,12 +109,12 @@ export const AuthForm = ({ market, property }: Props) => {
         <Result
           status="success"
           title="Successfully Authenticated Your Asset!"
-          subTitle="Viewing a new asset will take dozens of minutes, but you can also check it out right away on Etherscan."
+          subTitle="It might take a while until your new asset will appear on stakes.social, but you can already check it out on Etherscan."
           extra={[
             <Button key="etherscan" href={`https://etherscan.io/address/${metrics}`}>
               Etherscan
             </Button>,
-            <Button key="property" href={`/${property}`} type="primary">
+            <Button key="property" href={`/${metrics}`} type="primary">
               Go the Property
             </Button>
           ]}

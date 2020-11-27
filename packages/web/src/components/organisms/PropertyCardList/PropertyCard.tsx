@@ -204,7 +204,8 @@ export const PropertyCard = ({ propertyAddress, assets }: Props) => {
         <div style={{ display: 'flex', flexDirection: 'column', flexGrow: 1 }}>
           <Title>{includeAssets || 'Property'}</Title>
           <PropertyDescription>
-            {dataProperty?.description || 'Please stake for us to support our OSS project.'}
+            {dataProperty?.description ||
+              'Stake DEV tokens to provide funding for OSS projects so that they can maintain development.'}
           </PropertyDescription>
           <FlexRow>
             <Avatar accountAddress={authorData?.author.address} size={'60'} />
