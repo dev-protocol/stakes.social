@@ -21,6 +21,7 @@ import { useRouter } from 'next/router'
 import { useListOwnedPropertyMetaQuery } from '@dev/graphql'
 import { useProvider } from 'src/fixtures/wallet/hooks'
 import Link from 'next/link'
+import { FullpageWrap } from 'src/components/atoms/FullpageWrap'
 
 type InitialProps = {}
 type Props = {} & InitialProps
@@ -127,41 +128,43 @@ const AuthorEdit = (_: Props) => {
   const isAuthor = Boolean(data?.property_meta?.length) && accountAddress?.toLowerCase() === authorAddress.toLowerCase()
 
   return (
-    <>
-      <Header />
-      <EarlyAccess />
-      <Headline height={300}>
-        <h1>Profile settings</h1>
-      </Headline>
-      <Container>
-        {loading ? (
-          <Skeleton />
-        ) : isAuthor ? (
-          <>
-            <h2>Basic</h2>
-            <ProfileUpdateForm accountAddress={authorAddress} />
-            <Divider />
-            <h2>Avatar</h2>
-            <AvatarUpdateForm accountAddress={authorAddress} />
-            <Divider />
-            <h2>Cover Images</h2>
-            <CoverImagesUpdateForm accountAddress={authorAddress} />
-          </>
-        ) : (
-          <Result
-            status="error"
-            title="Not authorized"
-            subTitle="You do not have sufficient permission to edit this page."
-            extra={
-              <Link as={`/author/${authorAddress}`} href="/author/[authorAddress]">
-                <Button type="primary">Author Profile</Button>
-              </Link>
-            }
-          />
-        )}
-      </Container>
+    <FullpageWrap>
+      <main>
+        <Header />
+        <EarlyAccess />
+        <Headline height={300}>
+          <h1>Profile settings</h1>
+        </Headline>
+        <Container>
+          {loading ? (
+            <Skeleton />
+          ) : isAuthor ? (
+            <>
+              <h2>Basic</h2>
+              <ProfileUpdateForm accountAddress={authorAddress} />
+              <Divider />
+              <h2>Avatar</h2>
+              <AvatarUpdateForm accountAddress={authorAddress} />
+              <Divider />
+              <h2>Cover Images</h2>
+              <CoverImagesUpdateForm accountAddress={authorAddress} />
+            </>
+          ) : (
+            <Result
+              status="error"
+              title="Not authorized"
+              subTitle="You do not have sufficient permission to edit this page."
+              extra={
+                <Link as={`/author/${authorAddress}`} href="/author/[authorAddress]">
+                  <Button type="primary">Author Profile</Button>
+                </Link>
+              }
+            />
+          )}
+        </Container>
+      </main>
       <Footer />
-    </>
+    </FullpageWrap>
   )
 }
 
