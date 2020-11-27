@@ -162,7 +162,8 @@ const FlewColumn = styled.div`
 
 const formatter = new Intl.NumberFormat('en-US')
 
-const PlaceholderCoverImageOrGradient = styled(CoverImageOrGradient)`
+const PlaceholderCoverImageOrGradient = styled.div`
+  padding-top: 20%;
   background: url('https://asset.stakes.social/logo/dev.svg');
   background-position: center;
   background-repeat: no-repeat;
@@ -182,13 +183,15 @@ export const PropertyCard = ({ propertyAddress, assets }: Props) => {
 
   const zeroBigNumber = new BigNumber(0)
 
+  console.table({ dataProperty })
+
   return (
     <Link href={'/[propertyAddress]'} as={`/${propertyAddress}`}>
       <Card>
         {dataProperty?.cover_image?.url ? (
           <CoverImageOrGradient src={dataProperty.cover_image.url} ratio={20} />
         ) : (
-          <PlaceholderCoverImageOrGradient ratio={20} />
+          <PlaceholderCoverImageOrGradient />
         )}
         <Title>{includeAssets || 'Property'}</Title>
         <PropertyDescription>{lorem.generateSentences(2)}</PropertyDescription>
