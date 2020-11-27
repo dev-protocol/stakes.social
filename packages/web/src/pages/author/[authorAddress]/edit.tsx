@@ -35,16 +35,15 @@ const apiDataToUploadFile = ({ hash: uid, url, name, size, mime: type }: Image):
 })
 
 const ProfileUpdateForm = ({ accountAddress }: { accountAddress: string }) => {
-  const { data } = useGetAccount(accountAddress)
+  const { data, found } = useGetAccount(accountAddress)
   const { postAccountHandler: createAccount, isLoading } = useCreateAccount(accountAddress)
   const { putAccountHandler: updateAccount } = useUpdateAccount(Number(data?.id), accountAddress)
-  const isExists = Boolean(data)
   const handleSubmit = useCallback(
     (displayName: string, biography: string) => {
-      const handler = isExists ? updateAccount : createAccount
+      const handler = found ? updateAccount : createAccount
       handler(displayName, biography)
     },
-    [createAccount, updateAccount, isExists]
+    [createAccount, updateAccount, found]
   )
 
   return (
@@ -55,17 +54,13 @@ const ProfileUpdateForm = ({ accountAddress }: { accountAddress: string }) => {
       }
     >
       <Form.Item label="Dispaly Name" name="displayName">
-        {data === undefined ? (
-          <SkeletonInput />
-        ) : (
-          <Input placeholder="Enter the new display name" defaultValue={data.name} />
-        )}
+        {found ? <Input placeholder="Enter the new display name" defaultValue={data?.name} /> : <SkeletonInput />}
       </Form.Item>
       <Form.Item label="Biography" name="biography">
-        {data === undefined ? (
-          <SkeletonInput />
+        {found ? (
+          <Input.TextArea placeholder="Enter the biography" defaultValue={data?.biography} />
         ) : (
-          <Input.TextArea placeholder="Enter the biography" defaultValue={data.biography} />
+          <SkeletonInput />
         )}
       </Form.Item>
       <Button type="primary" htmlType="submit" loading={isLoading} disabled={isLoading}>
