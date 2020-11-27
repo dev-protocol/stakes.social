@@ -47,6 +47,10 @@ const Wrap = styled.div`
     'stake totalStake'
     'buttons buttons';
   grid-template-columns: repeat(2, 1fr);
+  border-radius: 8px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2), 0 2px 4px -1px rgba(0, 0, 0, 0.12);
+  padding: 0.5em;
+
   @media (min-width: 768px) {
     grid-template-areas: 'avatar stake totalStake buttons';
     grid-template-columns: 1fr 1fr 1fr 240px;
