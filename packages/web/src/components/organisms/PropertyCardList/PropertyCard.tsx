@@ -8,7 +8,6 @@ import {
 } from 'src/fixtures/dev-kit/hooks'
 import styled from 'styled-components'
 import { truncate } from 'src/fixtures/utility/string'
-import { LoremIpsum } from 'lorem-ipsum'
 import { useGetPropertytInformation } from 'src/fixtures/devprtcl/hooks'
 import { useGetProperty } from 'src/fixtures/dev-for-apps/hooks'
 import { Avatar } from 'src/components/molecules/Avatar'
@@ -16,17 +15,6 @@ import BigNumber from 'bignumber.js'
 import { TransactModalContents } from 'src/components/molecules/TransactModalContents'
 import { ResponsiveModal } from 'src/components/atoms/ResponsiveModal'
 import { CoverImageOrGradient } from 'src/components/atoms/CoverImageOrGradient'
-
-const lorem = new LoremIpsum({
-  sentencesPerParagraph: {
-    max: 3,
-    min: 3
-  },
-  wordsPerSentence: {
-    max: 10,
-    min: 4
-  }
-})
 
 interface Asset {
   authentication_id: string
@@ -215,7 +203,9 @@ export const PropertyCard = ({ propertyAddress, assets }: Props) => {
       <Link href={'/[propertyAddress]'} as={`/${propertyAddress}`}>
         <div style={{ display: 'flex', flexDirection: 'column', flexGrow: 1 }}>
           <Title>{includeAssets || 'Property'}</Title>
-          <PropertyDescription>{lorem.generateParagraphs(1)}</PropertyDescription>
+          <PropertyDescription>
+            {dataProperty?.description || 'Please stake for us to support our OSS project.'}
+          </PropertyDescription>
           <FlexRow>
             <Avatar accountAddress={authorData?.author.address} size={'60'} />
             <FlewColumn>
