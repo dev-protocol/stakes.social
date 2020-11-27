@@ -14,7 +14,12 @@ export const NotFound = () => {
         }
       />
       <div style={{ width: '100%', textAlign: 'center' }}>
-        <Button href="https://github.com/dev-protocol/DIPs/issues" type="primary">
+        <Button
+          target="_blank"
+          rel="noopener noreferrer"
+          href="https://github.com/dev-protocol/DIPs/issues"
+          type="primary"
+        >
           Access DIPs
         </Button>
       </div>
