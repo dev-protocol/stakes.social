@@ -73,9 +73,9 @@ exports[`WithdrawWithEstimate Snapshot 1`] = `
           class="ant-card-body"
         >
           <p>
-            5000
+            3000
              DEV 
-            (0 + 5000)
+            (0 + 3000)
           </p>
         </div>
       </div>
