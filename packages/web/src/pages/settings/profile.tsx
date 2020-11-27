@@ -121,7 +121,7 @@ const CoverImagesUpdateForm = ({ accountAddress }: { accountAddress: string }) =
   )
 }
 
-const Demo = (_: Props) => {
+const ProfileSettings = (_: Props) => {
   const { accountAddress } = useProvider()
 
   return (
@@ -148,4 +148,4 @@ const Demo = (_: Props) => {
   )
 }
 
-export default Demo
+export default ProfileSettings
