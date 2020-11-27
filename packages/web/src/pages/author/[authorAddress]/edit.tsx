@@ -4,7 +4,6 @@ import { EarlyAccess } from 'src/components/atoms/EarlyAccess'
 import { Headline } from 'src/components/atoms/Headline'
 import { Header } from 'src/components/organisms/Header'
 import { Container } from 'src/components/atoms/Container'
-import { useProvider } from 'src/fixtures/wallet/hooks'
 import {
   useCreateAccount,
   useGetAccount,
@@ -12,13 +11,16 @@ import {
   useUploadAccountAvatar,
   useUploadAccountCoverImages
 } from 'src/fixtures/dev-for-apps/hooks'
-import { Button, Divider, Form, Input, Upload } from 'antd'
+import { Button, Divider, Form, Input, Result, Skeleton, Upload } from 'antd'
 import { whenDefined } from 'src/fixtures/utility'
-import { NotConnectedAndEmpty } from 'src/components/atoms/NotConnectedAndEmpty'
 import { UploadChangeParam, UploadFile } from 'antd/lib/upload/interface'
 import { useEffect } from 'react'
 import { Image } from 'src/fixtures/dev-for-apps/utility'
 import SkeletonInput from 'antd/lib/skeleton/Input'
+import { useRouter } from 'next/router'
+import { useListOwnedPropertyMetaQuery } from '@dev/graphql'
+import { useProvider } from 'src/fixtures/wallet/hooks'
+import Link from 'next/link'
 
 type InitialProps = {}
 type Props = {} & InitialProps
@@ -121,8 +123,13 @@ const CoverImagesUpdateForm = ({ accountAddress }: { accountAddress: string }) =
   )
 }
 
-const ProfileSettings = (_: Props) => {
+const AuthorEdit = (_: Props) => {
   const { accountAddress } = useProvider()
+  const { authorAddress } = useRouter().query as { authorAddress: string }
+  const { data, loading } = useListOwnedPropertyMetaQuery({
+    variables: { account_address: authorAddress, offset: 0, limit: 1 }
+  })
+  const isAuthor = Boolean(data?.property_meta?.length) && accountAddress?.toLowerCase() === authorAddress.toLowerCase()
 
   return (
     <>
@@ -131,21 +138,36 @@ const ProfileSettings = (_: Props) => {
       <Headline height={300}>
         <h1>Profile settings</h1>
       </Headline>
-      {whenDefined(accountAddress, account => (
-        <Container>
-          <h2>Basic</h2>
-          <ProfileUpdateForm accountAddress={account} />
-          <Divider />
-          <h2>Avatar</h2>
-          <AvatarUpdateForm accountAddress={account} />
-          <Divider />
-          <h2>Cover Images</h2>
-          <CoverImagesUpdateForm accountAddress={account} />
-        </Container>
-      )) ?? <NotConnectedAndEmpty />}
+      <Container>
+        {loading ? (
+          <Skeleton />
+        ) : isAuthor ? (
+          <>
+            <h2>Basic</h2>
+            <ProfileUpdateForm accountAddress={authorAddress} />
+            <Divider />
+            <h2>Avatar</h2>
+            <AvatarUpdateForm accountAddress={authorAddress} />
+            <Divider />
+            <h2>Cover Images</h2>
+            <CoverImagesUpdateForm accountAddress={authorAddress} />
+          </>
+        ) : (
+          <Result
+            status="error"
+            title="Not authorized"
+            subTitle="You do not have sufficient permission to edit this page."
+            extra={
+              <Link as={`/author/${authorAddress}`} href="/author/[authorAddress]">
+                <Button type="primary">Author Profile</Button>
+              </Link>
+            }
+          />
+        )}
+      </Container>
       <Footer />
     </>
   )
 }
 
-export default ProfileSettings
+export default AuthorEdit
