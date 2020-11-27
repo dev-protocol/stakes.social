@@ -1482,10 +1482,10 @@
     exec-sh "^0.3.2"
     minimist "^1.2.0"
 
-"@devprtcl/dev-kit-js@3.4.0":
-  version "3.4.0"
-  resolved "https://registry.yarnpkg.com/@devprtcl/dev-kit-js/-/dev-kit-js-3.4.0.tgz#59844305255f498f7f16520ab31b2dd72025679c"
-  integrity sha512-dmT50LfJxsal0EJXu1X5fW5SlCTYM8kQ3lI8O0vnatGjtE6o266qpxZ+AZ8illabVmHrBsNXQxd0gObAPF0i2g==
+"@devprtcl/dev-kit-js@3.4.1":
+  version "3.4.1"
+  resolved "https://registry.yarnpkg.com/@devprtcl/dev-kit-js/-/dev-kit-js-3.4.1.tgz#5dfe3c601e5b453d43e1e760e0eddae4cb43cf66"
+  integrity sha512-ldaeg8wjOS5q4LOtonwJ4I9F1Im+QIupWtGMK8U6LJR8MwkyWafBjNSZf8ryvw9mRPISbCtP4svbLcvLWbzaoQ==
   dependencies:
     "@types/bent" "^7.3.1"
     async-ray "^3.2.0"
