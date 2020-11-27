@@ -214,14 +214,20 @@ const PropertyAddressDetail = (_: Props) => {
             <ReactMarkdown>{dataProperty ? dataProperty.description : ''}</ReactMarkdown>
             <H3>Links</H3>
             <LinksArea>
-              {dataProperty?.links.github && <Github link={dataProperty?.links.github} />}
-              {dataProperty?.links.twitter && <Twitter link={dataProperty?.links.twitter} />}
-              {dataProperty?.links.website && (
+              {dataProperty?.links?.github && (
+                <Github href={dataProperty?.links.github} target="_blank" rel="noopener noreferrer" />
+              )}
+              {dataProperty?.links?.twitter && (
+                <Twitter href={dataProperty?.links.twitter} target="_blank" rel="noopener noreferrer" />
+              )}
+              {dataProperty?.links?.website && (
                 <Button
                   style={{ marginLeft: '20px', padding: 3, width: '38px', height: '38px' }}
                   shape="circle"
                   icon={<LinkOutlined />}
                   href={dataProperty?.links.website}
+                  target="_blank"
+                  rel="noopener noreferrer"
                 />
               )}
             </LinksArea>
