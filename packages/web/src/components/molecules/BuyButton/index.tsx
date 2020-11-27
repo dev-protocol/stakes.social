@@ -34,6 +34,6 @@ export const BuyDevButton = ({ className }: Props) => (
     rel="noreferrer"
     target="_blank"
   >
-    <span>Buy DEV</span>
+    <span style={{ color: 'white' }}>Buy DEV</span>
   </BuyButton>
 )

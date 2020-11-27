@@ -85,6 +85,7 @@ input account_lockup_bool_exp {
   _and: [account_lockup_bool_exp]
   _not: account_lockup_bool_exp
   _or: [account_lockup_bool_exp]
+  property_meta: property_meta_bool_exp
   account_address: String_comparison_exp
   block_number: Int_comparison_exp
   locked_up_event_id: String_comparison_exp

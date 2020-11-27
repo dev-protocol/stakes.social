@@ -235,7 +235,7 @@ const items = [
     }
   },
   {
-    title: 'ASSET ONBOARDED',
+    title: 'OSS PROJECTS ONBOARDED',
     unit: '',
     description: 'The total number of creator assets onboarded.',
     valueRender: function assetOnboardedRender() {

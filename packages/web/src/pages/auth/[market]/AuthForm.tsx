@@ -1,12 +1,9 @@
 import React, { useState } from 'react'
 import { Form, Button, Result } from 'antd'
-import { useAuthenticate, useCreateAndAuthenticate } from 'src/fixtures/dev-kit/hooks' // useMarketScheme
+import { useAuthenticate, useCreateAndAuthenticate } from 'src/fixtures/dev-kit/hooks'
 import { usePostSignGitHubMarketAsset } from 'src/fixtures/khaos/hooks'
-// import { useEffectAsync } from 'src/fixtures/utility'
 import styled from 'styled-components'
-// import Text from 'antd/lib/typography/Text'
 import Input from 'src/components/molecules/Input'
-// import { FontColorsOutlined } from '@ant-design/icons'
 
 const NpmMarketContractAddress = '0x88c7B1f41DdE50efFc25541a2E0769B887eB2ee7'
 
@@ -30,54 +27,6 @@ const Row = styled.div`
     }
   }
 `
-
-// const DefaultMarketSchemeInput = ({ schemeList }: { schemeList: string[] }) => {
-//   return (
-//     <>
-//       {schemeList.map(scheme => (
-//         <Form.Item name={scheme} rules={[{ required: true, message: 'Please input name.' }]} key={scheme}>
-//           <Input label={scheme} placeholder={scheme} />
-//         </Form.Item>
-//       ))}
-//     </>
-//   )
-// }
-
-// const GitHubMarketSchemeInput = () => {
-//   return (
-//     <>
-//       <Row>
-//         <Form.Item
-//           name="repositoryName"
-//           rules={[{ required: true, message: 'Please input GitHub Repository name (e.g., your/awesome-repos)' }]}
-//           key="repositoryName"
-//         >
-//           <Span>Repository name</Span>
-//           <Input label="repositoryName" placeholder="your/awesome-repos" />
-//         </Form.Item>
-//       </Row>
-
-//       <Form.Item
-//         name="personalAccessToken"
-//         rules={[{ required: true, message: 'Please input PAT.' }]}
-//         key="personalAccessToken"
-//       >
-//         <Input label="personalAccessToken" placeholder="Personal Access Token" />
-//       </Form.Item>
-//       <p>
-//         Please{' '}
-//         <a href="https://github.com/settings/tokens/new" target="_blank" rel="noreferrer">
-//           create a Personal Access Token <Text mark>without all scopes</Text>
-//         </a>{' '}
-//         and paste it here. PAT is securely oraclize using Khaos(
-//         <a href="https://github.com/dev-protocol/khaos" target="_blank" rel="noreferrer">
-//           *
-//         </a>
-//         ).
-//       </p>
-//     </>
-//   )
-// }
 
 const FormTitle = styled.div`
   display: grid;
@@ -134,9 +83,7 @@ const Submit = styled.button`
 `
 
 export const AuthForm = ({ market, property }: Props) => {
-  // const [schemeList, setSchemeList] = useState<string[]>([])
   const [metrics, setMetrics] = useState<string>('')
-  // const { marketScheme } = useMarketScheme()
   const { postSignGitHubMarketAssetHandler, isLoading } = usePostSignGitHubMarketAsset()
   const { authenticate } = useAuthenticate()
   const { createAndAuthenticate } = useCreateAndAuthenticate()
@@ -162,11 +109,6 @@ export const AuthForm = ({ market, property }: Props) => {
       setMetrics(metrics)
     }
   }
-
-  // useEffectAsync(async () => {
-  //   const schemeList = await marketScheme(market)
-  //   setSchemeList([...(schemeList || [])])
-  // }, [])
 
   return (
     <div style={{ maxWidth: '760px' }}>
@@ -277,25 +219,6 @@ export const AuthForm = ({ market, property }: Props) => {
                 </ButtonContainer>
               </div>
             </Row>
-
-            {/* <Form.Item
-              name="personalAccessToken"
-              rules={[{ required: true, message: 'Please input PAT.' }]}
-              key="personalAccessToken"
-            >
-              <Input label="personalAccessToken" placeholder="Personal Access Token" />
-            </Form.Item>
-            <p>
-              Please{' '}
-              <a href="https://github.com/settings/tokens/new" target="_blank" rel="noreferrer">
-                create a Personal Access Token <Text mark>without all scopes</Text>
-              </a>{' '}
-              and paste it here. PAT is securely oraclize using Khaos(
-              <a href="https://github.com/dev-protocol/khaos" target="_blank" rel="noreferrer">
-                *
-              </a>
-              ).
-            </p> */}
           </Form>
         )}
       </Container>

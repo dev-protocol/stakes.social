@@ -83,6 +83,7 @@ export type Account_Lockup_Bool_Exp = {
   _and?: Maybe<Array<Maybe<Account_Lockup_Bool_Exp>>>
   _not?: Maybe<Account_Lockup_Bool_Exp>
   _or?: Maybe<Array<Maybe<Account_Lockup_Bool_Exp>>>
+  property_meta?: Maybe<Property_Meta_Bool_Exp>
   account_address?: Maybe<String_Comparison_Exp>
   block_number?: Maybe<Int_Comparison_Exp>
   locked_up_event_id?: Maybe<String_Comparison_Exp>
@@ -5933,6 +5934,17 @@ export type ListPropertyMetaQuery = { __typename?: 'query_root' } & {
   property_meta: Array<{ __typename?: 'property_meta' } & Pick<Property_Meta, 'property' | 'name'>>
 }
 
+export type ListTopStakersAccountQueryVariables = Exact<{
+  author_address: Scalars['String']
+  limit?: Maybe<Scalars['Int']>
+}>
+
+export type ListTopStakersAccountQuery = { __typename?: 'query_root' } & {
+  account_lockup: Array<
+    { __typename?: 'account_lockup' } & Pick<Account_Lockup, 'account_address' | 'value' | 'property_address'>
+  >
+}
+
 export type ListTopSupportingAccountQueryVariables = Exact<{
   account_address: Scalars['String']
   limit?: Maybe<Scalars['Int']>
@@ -6458,6 +6470,59 @@ export function useListPropertyMetaLazyQuery(
 export type ListPropertyMetaQueryHookResult = ReturnType<typeof useListPropertyMetaQuery>
 export type ListPropertyMetaLazyQueryHookResult = ReturnType<typeof useListPropertyMetaLazyQuery>
 export type ListPropertyMetaQueryResult = Apollo.QueryResult<ListPropertyMetaQuery, ListPropertyMetaQueryVariables>
+export const ListTopStakersAccountDocument = gql`
+  query listTopStakersAccount($author_address: String!, $limit: Int) {
+    account_lockup(
+      where: { property_meta: { author: { _eq: $author_address } } }
+      limit: $limit
+      order_by: { value: desc }
+    ) {
+      account_address
+      value
+      property_address
+    }
+  }
+`
+
+/**
+ * __useListTopStakersAccountQuery__
+ *
+ * To run a query within a React component, call `useListTopStakersAccountQuery` and pass it any options that fit your needs.
+ * When your component renders, `useListTopStakersAccountQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useListTopStakersAccountQuery({
+ *   variables: {
+ *      author_address: // value for 'author_address'
+ *      limit: // value for 'limit'
+ *   },
+ * });
+ */
+export function useListTopStakersAccountQuery(
+  baseOptions: Apollo.QueryHookOptions<ListTopStakersAccountQuery, ListTopStakersAccountQueryVariables>
+) {
+  return Apollo.useQuery<ListTopStakersAccountQuery, ListTopStakersAccountQueryVariables>(
+    ListTopStakersAccountDocument,
+    baseOptions
+  )
+}
+export function useListTopStakersAccountLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<ListTopStakersAccountQuery, ListTopStakersAccountQueryVariables>
+) {
+  return Apollo.useLazyQuery<ListTopStakersAccountQuery, ListTopStakersAccountQueryVariables>(
+    ListTopStakersAccountDocument,
+    baseOptions
+  )
+}
+export type ListTopStakersAccountQueryHookResult = ReturnType<typeof useListTopStakersAccountQuery>
+export type ListTopStakersAccountLazyQueryHookResult = ReturnType<typeof useListTopStakersAccountLazyQuery>
+export type ListTopStakersAccountQueryResult = Apollo.QueryResult<
+  ListTopStakersAccountQuery,
+  ListTopStakersAccountQueryVariables
+>
 export const ListTopSupportingAccountDocument = gql`
   query listTopSupportingAccount($account_address: String!, $limit: Int) {
     account_lockup(where: { account_address: { _eq: $account_address } }, order_by: { value: desc }, limit: $limit) {
