@@ -120,7 +120,7 @@ export const AuthForm = ({ market, property }: Props) => {
       ) : (
         <Form name="basic" initialValues={{ remember: true }} onFinish={onFinish}>
           <Row>
-            <Span>Property:</Span>
+            <Span>Project:</Span>
             <Form.Item
               name="propertyAddress"
               rules={[{ required: true, message: 'Please input GitHub Repository name (e.g., your/awesome-repos)' }]}
@@ -130,7 +130,7 @@ export const AuthForm = ({ market, property }: Props) => {
             </Form.Item>
           </Row>
           <Row>
-            <Span>Project name</Span>
+            <Span>Project name:</Span>
             <Form.Item
               name="projectName"
               rules={[{ required: true, message: 'Please input GitHub Repository name (e.g., your/awesome-repos)' }]}
@@ -141,7 +141,7 @@ export const AuthForm = ({ market, property }: Props) => {
           </Row>
 
           <Row>
-            <Span>Personal Access Token</Span>
+            <Span>Personal Access Token:</Span>
             <Form.Item
               name="personalAccessToken"
               rules={[{ required: true, message: 'Please input PAT.' }]}
