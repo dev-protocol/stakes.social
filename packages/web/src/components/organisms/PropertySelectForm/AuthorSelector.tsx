@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { Select } from 'antd'
-import { useListPropertyMetaLazyQuery } from '@dev/graphql'
+import { useListPropertyMetaQuery } from '@dev/graphql'
 
 interface Props {
   author: string | undefined
@@ -11,15 +11,13 @@ interface Props {
 const { Option } = Select
 
 export const AuthorSelector = ({ author, onChange }: Props) => {
-  const [fetchProperties, { data, loading }] = useListPropertyMetaLazyQuery()
+  const { data, loading } = useListPropertyMetaQuery({
+    variables: {
+      author: author || ''
+    },
+    skip: !author
+  })
 
-  useEffect(() => {
-    if (author) {
-      fetchProperties({ variables: { author } })
-    }
-  }, [fetchProperties, author])
-
-  console.log('properties data: ', data)
   return (
     <Select
       loading={loading}

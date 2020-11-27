@@ -10,7 +10,7 @@ jest.mock('src/fixtures/dev-kit/hooks')
 describe(`${AuthForm.name}`, () => {
   test('Snapshot', () => {
     ;(useEffectAsync as jest.Mock).mockImplementation(() => {})
-    const component = render(<AuthForm property="property" />)
+    const component = render(<AuthForm market="market" property="property" />)
     const tree = component.baseElement
     expect(tree).toMatchSnapshot()
   })

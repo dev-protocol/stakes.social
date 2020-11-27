@@ -13,7 +13,7 @@ exports[`AuthHeader Snapshot 1`] = `
           class="sc-1bz6snd-3 iRUEtO"
         >
           <header
-            class="sc-1bz6snd-1 jVHjUP"
+            class="sc-1bz6snd-1 fDJyiY"
           >
             <div
               class="sc-1bz6snd-2 fFsVPH"
@@ -103,9 +103,13 @@ exports[`AuthHeader Snapshot 1`] = `
               </g>
             </svg>
             <div
-              class="sc-1dxoc5d-2 mdZQR"
+              class="sc-1dxoc5d-2 iAeGbD"
             >
-              Sign in
+              <span
+                style="font-size: 0.8em;"
+              >
+                Sign in
+              </span>
             </div>
           </header>
         </div>

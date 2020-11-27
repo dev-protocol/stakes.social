@@ -116,9 +116,10 @@ export const AuthForm = ({ market, property }: Props) => {
         {metrics ? (
           <Result
             status="success"
-            title="Successfully Authenticated Your Asset!"
-            subTitle="Viewing a new asset will take dozens of minutes, but you can also check it out right away on Etherscan."
+            title="Successfully Tokenized Your Asset!"
+            subTitle="Now comes the last step: authentication"
             extra={[
+              // TODO: Link element to metrics
               <Button key="etherscan" href={`https://etherscan.io/address/${metrics}`}>
                 Etherscan
               </Button>,
