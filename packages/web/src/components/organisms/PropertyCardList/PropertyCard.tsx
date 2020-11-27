@@ -183,8 +183,6 @@ export const PropertyCard = ({ propertyAddress, assets }: Props) => {
 
   const zeroBigNumber = new BigNumber(0)
 
-  console.table({ dataProperty })
-
   return (
     <Link href={'/[propertyAddress]'} as={`/${propertyAddress}`}>
       <Card>
