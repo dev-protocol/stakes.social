@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { message } from 'antd'
 import { postUploadFile } from '../utility'
-import { sign } from 'src/fixtures/wallet/utility'
+import { signWithCache } from 'src/fixtures/wallet/utility'
 import { useProvider } from '../../wallet/hooks'
 
 export const useUploadFile = (accountAddress: string) => {
@@ -12,15 +12,15 @@ export const useUploadFile = (accountAddress: string) => {
 
   const postUploadFileHandler = async (refId: number, ref: string, field: string, file: any, path?: string) => {
     const signMessage = `upload file: ${refId}, ${ref}, ${field}`
-    const signature = (await sign(web3, signMessage)) || ''
-    if (!signature) {
+    const { signature, message: signedMessage } = await signWithCache(web3, signMessage)
+    if (!signature || !signedMessage) {
       return
     }
 
     setIsLoading(true)
     message.loading({ content: 'upload data...', duration: 0, key })
 
-    const res = postUploadFile(signMessage, signature, accountAddress, refId, ref, field, file, path)
+    const res = postUploadFile(signedMessage, signature, accountAddress, refId, ref, field, file, path)
       .then(result => {
         if (result.error) {
           message.error({ content: result.error, key })
