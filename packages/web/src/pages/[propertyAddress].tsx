@@ -146,7 +146,9 @@ const Author = ({ propertyAddress }: { propertyAddress: string }) => {
     <AuthorContainer>
       {data && (
         <>
-          <h2>Created by {data?.name}</h2>
+          <h2>
+            Created by <Link href={`/author/${authorAddress}`}>{data?.name}</Link>
+          </h2>
           <Flex>
             <Link passHref href="/profile/[accountAddress]" as={`/profile/${authorAddress}`}>
               <a>

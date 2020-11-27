@@ -1,4 +1,4 @@
-import React, { useMemo, useState, useEffect } from 'react'
+import React, { useMemo } from 'react'
 import { useRouter } from 'next/router'
 import { Header } from 'src/components/organisms/Header'
 
@@ -12,6 +12,7 @@ import TopSupporting from 'src/components/organisms/TopSupporting'
 import { truncate } from 'src/fixtures/utility/string'
 import { useGetAuthorInformation } from 'src/fixtures/devprtcl/hooks'
 import { Avatar } from 'src/components/molecules/Avatar'
+import useWindowDimensions from './useWindowDimensions'
 
 const lorem = new LoremIpsum({
   sentencesPerParagraph: {
@@ -118,7 +119,9 @@ const PoolsOverview = styled.div`
 const PoolLogoSection = styled.div`
   display: flex;
   align-items: center;
-  img {
+  img,
+  svg,
+  div {
     margin-right: 20px;
   }
 `
@@ -280,7 +283,6 @@ const Pool = ({ propertyAddress }: PoolProps) => {
 const AuthorAddressDetail = (_: Props) => {
   const router = useRouter()
   let { authorAddress } = router.query
-  const [isDesktop, setDesktop] = useState(true)
   const author: string = typeof authorAddress == 'string' ? authorAddress : 'none'
   const { data: authorInformation } = useGetAuthorInformation(author)
   const { data, loading } = useListPropertyMetaQuery({
@@ -289,17 +291,7 @@ const AuthorAddressDetail = (_: Props) => {
     }
   })
 
-  useEffect(() => {
-    const updateMedia = () => {
-      setDesktop(window.innerWidth > 1024)
-    }
-
-    if (typeof window !== 'undefined') {
-      window.addEventListener('resize', updateMedia)
-      return () => window.removeEventListener('resize', updateMedia)
-    }
-    return setDesktop(true)
-  }, [setDesktop])
+  const { width } = useWindowDimensions()
 
   return (
     <>
@@ -307,14 +299,14 @@ const AuthorAddressDetail = (_: Props) => {
       <Banner />
       <Wrap>
         <ProfilePicture>
-          <Avatar accountAddress={author} size={isDesktop ? '140' : '90'} />
+          {width > 0 && <Avatar accountAddress={author} size={width > 1024 ? '140' : '90'} />}
         </ProfilePicture>
 
         <TransformedGrid>
           {/* <div style={{ display: 'grid', gridTemplateRows: '1fr' }}> */}
           <div style={{ gridColumn: '2 / -1', marginTop: '10px' }}>
             <AuthorDetailGrid>
-              <span style={{ fontSize: '1.25em' }}>Kazuya Kawaguchi</span>
+              <span style={{ fontSize: '1.25em' }}>{data?.property_meta?.[0]?.name || author}</span>
               <ShareList>
                 <img
                   src="https://res.cloudinary.com/haas-storage/image/upload/v1600172007/25231_hng64u.png"
