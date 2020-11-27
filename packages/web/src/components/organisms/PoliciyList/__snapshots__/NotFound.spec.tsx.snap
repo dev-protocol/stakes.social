@@ -63,6 +63,8 @@ exports[`NotFound Snapshot 1`] = `
         <a
           class="ant-btn ant-btn-primary"
           href="https://github.com/dev-protocol/DIPs/issues"
+          rel="noopener noreferrer"
+          target="_blank"
         >
           <span>
             Access DIPs
