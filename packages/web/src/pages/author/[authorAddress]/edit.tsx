@@ -54,7 +54,7 @@ const ProfileUpdateForm = ({ accountAddress }: { accountAddress: string }) => {
         handleSubmit(displayName, biography)
       }
     >
-      <Form.Item label="Dispaly Name" name="displayName">
+      <Form.Item label="Display Name" name="displayName">
         {found ? <Input placeholder="Enter the new display name" defaultValue={data?.name} /> : <SkeletonInput />}
       </Form.Item>
       <Form.Item label="Biography" name="biography">
