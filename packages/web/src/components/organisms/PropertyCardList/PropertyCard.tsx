@@ -174,7 +174,8 @@ interface ModalStates {
 
 const formatter = new Intl.NumberFormat('en-US')
 
-const PlaceholderCoverImageOrGradient = styled(CoverImageOrGradient)`
+const PlaceholderCoverImageOrGradient = styled.div`
+  padding-top: 20%;
   background: url('https://asset.stakes.social/logo/dev.svg');
   background-position: center;
   background-repeat: no-repeat;
@@ -209,7 +210,7 @@ export const PropertyCard = ({ propertyAddress, assets }: Props) => {
       {dataProperty?.cover_image?.url ? (
         <CoverImageOrGradient src={dataProperty.cover_image.url} ratio={20} />
       ) : (
-        <PlaceholderCoverImageOrGradient ratio={20} />
+        <PlaceholderCoverImageOrGradient />
       )}
       <Link href={'/[propertyAddress]'} as={`/${propertyAddress}`}>
         <div style={{ display: 'flex', flexDirection: 'column', flexGrow: 1 }}>
