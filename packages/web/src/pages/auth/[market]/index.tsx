@@ -18,21 +18,30 @@ const Container = styled.div`
   padding-top: 2em;
 `
 
+const ResponsiveContainer = styled(Container)`
+  display: flex;
+  flex-grow: 1;
+
+  @media (min-width: 1024px) {
+    width: 690px;
+  }
+`
+
 const AuthenticateNewAsset = (_: Props) => {
   const { market } = useRouter().query as { market: string }
 
   return (
-    <>
+    <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
       <Header />
       <Headline>
         <H2>Create an Asset</H2>
         <span>Create an asset or authenticate an existing pool.</span>
       </Headline>
-      <Container>
+      <ResponsiveContainer style={{ flexGrow: 1 }}>
         <AuthForm market={market} />
-      </Container>
+      </ResponsiveContainer>
       <Footer />
-    </>
+    </div>
   )
 }
 

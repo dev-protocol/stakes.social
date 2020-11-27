@@ -63,7 +63,7 @@ export const CreateOrAuthenticateProperty = (_: Props) => {
         </Link>
 
         <Span style={{ margin: '1em 0', alignSelf: 'center', color: '#9F9F9F' }}>Or</Span>
-        <Link href={'/auth/github'} passHref>
+        <Link href={'/auth/associate/github'} passHref>
           <A>Authenticate an existing project</A>
         </Link>
       </div>
@@ -71,22 +71,5 @@ export const CreateOrAuthenticateProperty = (_: Props) => {
     </div>
   )
 }
-
-// TODO: Navigate a user to this component when invitation request is accepeted
-// const CreateOrAssociateAProperty = (_: Props) => {
-//   return (
-//     <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
-//       <Header />
-//       <Headline>
-//         <H2>Create an Asset</H2>
-//         <span>Tokenize your open assets in minutes.</span>
-//       </Headline>
-//       <div style={{ maxWidth: '1048px', marginRight: 'auto', marginLeft: 'auto', flexGrow: 1 }}>
-//         <MarketsOverview />
-//       </div>
-//       <Footer />
-//     </div>
-//   )
-// }
 
 export default CreateOrAuthenticateProperty

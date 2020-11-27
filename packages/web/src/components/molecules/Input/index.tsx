@@ -55,7 +55,14 @@ export const Input = styled.input`
   }
 `
 
-const CustomInput = ({ Icon, placeholder, label }: { label: string; Icon?: any; placeholder?: string }) => {
+type CustomInputProps = {
+  label: string
+  Icon?: any
+  placeholder?: string
+  defaultValue?: number | string
+}
+
+const CustomInput = ({ Icon, placeholder, label }: CustomInputProps) => {
   return (
     <InputContainer>
       <InputIcon>{Icon && <Icon style={{ color: 'grey' }} />}</InputIcon>

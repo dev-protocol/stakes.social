@@ -1,11 +1,13 @@
 import React, { useState } from 'react'
 import { Form, Button, Result } from 'antd'
-import { useAuthenticate, useCreateAndAuthenticate } from 'src/fixtures/dev-kit/hooks'
-import { usePostSignGitHubMarketAsset } from 'src/fixtures/khaos/hooks'
+// import { useAuthenticate, useCreateAndAuthenticate } from 'src/fixtures/dev-kit/hooks'
+// import { usePostSignGitHubMarketAsset } from 'src/fixtures/khaos/hooks'
 import styled from 'styled-components'
 import Input from 'src/components/molecules/Input'
+import { useProvider } from 'src/fixtures/wallet/hooks'
+import { AccountBookOutlined, FontColorsOutlined } from '@ant-design/icons'
 
-const NpmMarketContractAddress = '0x88c7B1f41DdE50efFc25541a2E0769B887eB2ee7'
+// const NpmMarketContractAddress = '0x88c7B1f41DdE50efFc25541a2E0769B887eB2ee7'
 
 export interface Props {
   market: string
@@ -44,25 +46,6 @@ const Span = styled.div`
   margin-top: 5px;
 `
 
-const TextArea = styled.textarea`
-  outline: none;
-  border: 1px solid lightgrey;
-  border-radius: 6px;
-  width: 100%;
-  padding-left: 10px;
-
-  &:hover {
-    transition: all 0.2s ease-in;
-    border: 1px solid lightgrey;
-  }
-
-  &:focus {
-    transition: all 0.2s ease-in;
-    border: 1px solid grey;
-    box-shadow: 0 0 0 1px lightgrey;
-  }
-`
-
 const ButtonContainer = styled.div`
   width: auto;
   align-self: flex-end;
@@ -82,29 +65,32 @@ const Submit = styled.button`
   }
 `
 
-export const AuthForm = ({ market, property }: Props) => {
+export const AuthForm = ({ property }: Props) => {
   const [metrics, setMetrics] = useState<string>('')
-  const { postSignGitHubMarketAssetHandler, isLoading } = usePostSignGitHubMarketAsset()
-  const { authenticate } = useAuthenticate()
-  const { createAndAuthenticate } = useCreateAndAuthenticate()
+  // const { postSignGitHubMarketAssetHandler, isLoading } = usePostSignGitHubMarketAsset()
+  // const { authenticate } = useAuthenticate()
+  // const { createAndAuthenticate } = useCreateAndAuthenticate()
+  const { accountAddress } = useProvider()
   const onFinish = async (values: any) => {
-    const authRequestData: string[] =
-      market === NpmMarketContractAddress
-        ? Object.values(values)
-        : await (async () => {
-            const repository: string = values.repositoryName
-            const personalAccessToken = values.personalAccessToken
-            const khaos = await postSignGitHubMarketAssetHandler(repository, personalAccessToken)
-            return [repository, khaos.publicSignature || '']
-          })()
+    // const authRequestData: string[] =
+    //   market === NpmMarketContractAddress
+    //     ? Object.values(values)
+    //     : await (async () => {
+    //         const repository: string = values.repositoryName
+    //         const personalAccessToken = values.personalAccessToken
+    //         const khaos = await postSignGitHubMarketAssetHandler(repository, personalAccessToken)
+    //         return [repository, khaos.publicSignature || '']
+    //       })()
 
-    const metrics = await (property
-      ? authenticate(market, property, authRequestData)
-      : ((name, symbol) => createAndAuthenticate(name, symbol, market, authRequestData))(
-          values.propertyName,
-          values.propertySymbol
-        ))
-
+    // const metrics = await (property
+    //   ? authenticate(market, property, authRequestData)
+    //   : ((name, symbol) => createAndAuthenticate(name, symbol, market, authRequestData))(
+    //       values.propertyName,
+    //       values.propertySymbol
+    //     ))
+    console.log('Values: ', values)
+    // TODO: Function to be called to tokenize based input
+    const metrics = 'content here'
     if (metrics) {
       setMetrics(metrics)
     }
@@ -133,81 +119,43 @@ export const AuthForm = ({ market, property }: Props) => {
             <FormTitle>
               <h2>Asset Information</h2>
             </FormTitle>
+            <Row style={{ marginBottom: '20px' }}>
+              {/* TODO: This field can probably be replaced by using useProvider() */}
+              <Span style={{ marginTop: 0 }}>Creator wallet address:</Span>
+              <span style={{ marginTop: '5px', maxWidth: '100vw', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                {accountAddress || 'Fetching wallet...'}
+              </span>
+            </Row>
 
             <Row>
-              <Span>Asset name:</Span>
+              <Span>Project name:</Span>
               <Form.Item
-                name="repositoryName"
-                rules={[{ required: true, message: 'Please input GitHub Repository name (e.g., your/awesome-repos)' }]}
-                key="repositoryName"
+                name="projectName"
+                rules={[{ required: true, message: 'Please input the name of the project' }]}
+                key="projectName"
               >
-                <Input label="repositoryName" placeholder="your/awesome-repos" />
+                <Input Icon={FontColorsOutlined} label="projectName" placeholder="Project name" />
               </Form.Item>
             </Row>
 
             <Row>
               <Span>Token symbol:</Span>
-              <Form.Item
-                name="repositoryName"
-                rules={[{ required: true, message: 'Please input GitHub Repository name (e.g., your/awesome-repos)' }]}
-                key="repositoryName"
-              >
-                <Input label="repositoryName" placeholder="your/awesome-repos" />
-              </Form.Item>
+              <div style={{ display: 'flex', flexDirection: 'column' }}>
+                <Form.Item
+                  name="tokenSymbol"
+                  rules={[{ required: true, message: 'Please input a token symbol' }]}
+                  key="tokenSymbol"
+                >
+                  <Input Icon={AccountBookOutlined} label="tokenSymbol" placeholder="Choose your token's name" />
+                </Form.Item>
+                <ButtonContainer>
+                  {/* disabled={isLoading} */}
+                  <Submit type="submit">Tokenize</Submit>
+                </ButtonContainer>
+              </div>
             </Row>
 
-            <Row>
-              <Span>Token supply:</Span>
-              <Form.Item
-                name="repositoryName"
-                rules={[{ required: true, message: 'Please input GitHub Repository name (e.g., your/awesome-repos)' }]}
-                key="repositoryName"
-              >
-                <Input label="repositoryName" placeholder="your/awesome-repos" />
-              </Form.Item>
-            </Row>
-
-            <Row>
-              <Span>Creator wallet address:</Span>
-              <Form.Item
-                name="repositoryName"
-                rules={[{ required: true, message: 'Please input GitHub Repository name (e.g., your/awesome-repos)' }]}
-                key="repositoryName"
-              >
-                <Input label="repositoryName" placeholder="your/awesome-repos" />
-              </Form.Item>
-            </Row>
-
-            <Row>
-              <Span>Property description:</Span>
-              <Form.Item name="useCase" rules={[{ required: true, type: 'string' }]} key="useCase">
-                <TextArea rows={4} placeholder="Our project aims to..." />
-              </Form.Item>
-            </Row>
-
-            <Row>
-              <Span>Creator wallet address:</Span>
-              <Form.Item
-                name="repositoryName"
-                rules={[{ required: true, message: 'Please input GitHub Repository name (e.g., your/awesome-repos)' }]}
-                key="repositoryName"
-              >
-                <Input label="repositoryName" placeholder="your/awesome-repos" />
-              </Form.Item>
-            </Row>
-
-            <Row>
-              <Span>Project website:</Span>
-              <Form.Item
-                name="repositoryName"
-                rules={[{ required: true, message: 'Please input GitHub Repository name (e.g., your/awesome-repos)' }]}
-                key="repositoryName"
-              >
-                <Input label="repositoryName" placeholder="your/awesome-repos" />
-              </Form.Item>
-            </Row>
-
-            <Row>
+            {/* <Row>
               <Span>Add tags:</Span>
               <div style={{ display: 'flex', flexDirection: 'column' }}>
                 <Form.Item name="ask" rules={[{ type: 'string' }]} key="ask">
@@ -219,7 +167,7 @@ export const AuthForm = ({ market, property }: Props) => {
                   </Submit>
                 </ButtonContainer>
               </div>
-            </Row>
+            </Row> */}
           </Form>
         )}
       </Container>

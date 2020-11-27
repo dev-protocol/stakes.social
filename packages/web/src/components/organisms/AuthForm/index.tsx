@@ -19,6 +19,8 @@ export interface Props {
 
 const Container = styled.div`
   display: grid;
+  width: 100%;
+  align-self: center;
   grid-gap: 1rem;
 `
 
@@ -151,22 +153,26 @@ export const AuthForm = ({ market, property }: Props) => {
             </Form.Item>
           </Row>
           <div style={{ display: 'flex', alignItems: 'center', marginBottom: '1em' }}>
-            <InfoContainer>
-              <InfoCircleOutlined />
-            </InfoContainer>
-            <div style={{ fontSize: '0.9em' }}>
-              <div>
-                Please{' '}
-                <a href="https://github.com/settings/tokens/new" target="_blank" rel="noreferrer">
-                  create a Personal Access Token without any scopes.
-                </a>
-              </div>
-              <div>
-                The PAT is confidentially authenticated using the Khaos oracle(
-                <a href="https://github.com/dev-protocol/khaos" target="_blank" rel="noreferrer">
-                  *
-                </a>
-                ).
+            <div style={{ display: 'flex', alignItems: 'center', alignSelf: 'flex-end' }}>
+              <InfoContainer>
+                <InfoCircleOutlined />
+              </InfoContainer>
+              <div style={{ fontSize: '0.9em' }}>
+                <div>
+                  Please{' '}
+                  <a href="https://github.com/settings/tokens/new" target="_blank" rel="noreferrer">
+                    <span style={{ wordBreak: 'normal' }}>create a Personal Access Token without any scopes.</span>
+                  </a>
+                </div>
+                <div>
+                  <span style={{ wordBreak: 'normal' }}>
+                    The PAT is confidentially authenticated using the Khaos oracle(
+                  </span>
+                  <a href="https://github.com/dev-protocol/khaos" target="_blank" rel="noreferrer">
+                    *
+                  </a>
+                  ).
+                </div>
               </div>
             </div>
           </div>
