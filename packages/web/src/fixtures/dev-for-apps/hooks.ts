@@ -3,7 +3,16 @@ import { SWRCachePath } from './cache-path'
 import useSWR from 'swr'
 import { message } from 'antd'
 import { UnwrapFunc } from '../utility'
-import { getPropertyTags, postPropertyTags, postAccount, putAccount, postProperty, putProperty } from './utility'
+import {
+  getPropertyTags,
+  postPropertyTags,
+  postAccount,
+  putAccount,
+  postProperty,
+  putProperty,
+  ProfileLinks,
+  PropertyLinks
+} from './utility'
 import { signWithCache } from 'src/fixtures/wallet/utility'
 import { useProvider } from '../wallet/hooks'
 import { useUploadFile } from './functions/useUploadFile'
@@ -71,7 +80,11 @@ export const useCreateAccount = (walletAddress: string) => {
     shouldFetch ? SWRCachePath.createAccount() : null
   )
 
-  const postAccountHandler = async (name?: string, biography?: string) => {
+  const postAccountHandler = async (name?: string, biography?: string, website?: string, github?: string) => {
+    const links: ProfileLinks = {
+      github,
+      website
+    }
     const signMessage = `create accout: ${name}, ${biography}`
     const { signature, message: signedMessage } = await signWithCache(web3, signMessage)
     if (!signature || !signedMessage) {
@@ -82,7 +95,7 @@ export const useCreateAccount = (walletAddress: string) => {
     message.loading({ content: 'update account data...', duration: 0, key })
 
     await mutate(
-      postAccount(signedMessage, signature, walletAddress, name, biography)
+      postAccount(signedMessage, signature, walletAddress, name, biography, links)
         .then(result => {
           message.success({ content: 'success update account data', key })
           return result
@@ -110,7 +123,11 @@ export const useUpdateAccount = (id: number, walletAddress: string) => {
     shouldFetch ? SWRCachePath.updateAccount(id) : null
   )
 
-  const putAccountHandler = async (name?: string, biography?: string) => {
+  const putAccountHandler = async (name?: string, biography?: string, website?: string, github?: string) => {
+    const links: ProfileLinks = {
+      github,
+      website
+    }
     const signMessage = `update accout: ${name}, ${biography}`
     const { signature, message: signedMessage } = await signWithCache(web3, signMessage)
     if (!signature || !signedMessage) {
@@ -121,7 +138,7 @@ export const useUpdateAccount = (id: number, walletAddress: string) => {
     message.loading({ content: 'update account data...', duration: 0, key })
 
     await mutate(
-      putAccount(signedMessage, signature, walletAddress, id, name, biography)
+      putAccount(signedMessage, signature, walletAddress, id, name, biography, links)
         .then(result => {
           message.success({ content: 'success update account data', key })
           return result
@@ -166,7 +183,18 @@ export const useCreateProperty = (walletAddress: string) => {
     shouldFetch ? SWRCachePath.createProperty() : null
   )
 
-  const postPropertyHandler = async (name?: string, description?: string) => {
+  const postPropertyHandler = async (
+    name?: string,
+    description?: string,
+    website?: string,
+    twitter?: string,
+    github?: string
+  ) => {
+    const links: PropertyLinks = {
+      github,
+      twitter,
+      website
+    }
     const signMessage = `create property: ${name}, ${description}`
     const { signature, message: signedMessage } = await signWithCache(web3, signMessage)
     if (!signature || !signedMessage) {
@@ -177,7 +205,7 @@ export const useCreateProperty = (walletAddress: string) => {
     message.loading({ content: 'update property data...', duration: 0, key })
 
     await mutate(
-      postProperty(signedMessage, signature, walletAddress, name, description)
+      postProperty(signedMessage, signature, walletAddress, name, description, links)
         .then(result => {
           message.success({ content: 'success update property data', key })
           return result
@@ -205,7 +233,18 @@ export const useUpdateProperty = (id: number, walletAddress: string) => {
     shouldFetch ? SWRCachePath.updateProperty(id) : null
   )
 
-  const putPropertyHandler = async (name?: string, description?: string) => {
+  const putPropertyHandler = async (
+    name?: string,
+    description?: string,
+    website?: string,
+    twitter?: string,
+    github?: string
+  ) => {
+    const links: PropertyLinks = {
+      github,
+      twitter,
+      website
+    }
     const signMessage = `update property: ${name}, ${description}`
     const { signature, message: signedMessage } = await signWithCache(web3, signMessage)
     if (!signature || !signedMessage) {
@@ -216,7 +255,7 @@ export const useUpdateProperty = (id: number, walletAddress: string) => {
     message.loading({ content: 'update property data...', duration: 0, key })
 
     await mutate(
-      putProperty(signedMessage, signature, walletAddress, id, name, description)
+      putProperty(signedMessage, signature, walletAddress, id, name, description, links)
         .then(result => {
           message.success({ content: 'success update property data', key })
           return result
