@@ -73,10 +73,10 @@ const ProfileUpdateForm = ({ accountAddress }: { accountAddress: string }) => {
         )}
       </Form.Item>
       <Form.Item label="Website" name="website">
-        {found ? <Input placeholder="your website url" defaultValue={data?.website} /> : <SkeletonInput />}
+        {found ? <Input placeholder="your website url" defaultValue={data?.links?.website} /> : <SkeletonInput />}
       </Form.Item>
       <Form.Item label="GitHub" name="github">
-        {found ? <Input placeholder="your github account url" defaultValue={data?.github} /> : <SkeletonInput />}
+        {found ? <Input placeholder="your github account url" defaultValue={data?.links?.github} /> : <SkeletonInput />}
       </Form.Item>
       <Button type="primary" htmlType="submit" loading={isLoading} disabled={isLoading}>
         Save
