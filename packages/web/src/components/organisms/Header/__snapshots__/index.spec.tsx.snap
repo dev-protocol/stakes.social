@@ -13,10 +13,10 @@ exports[`Header Snapshot 1`] = `
           class="sc-1bz6snd-3 iRUEtO"
         >
           <header
-            class="sc-1bz6snd-1 fDJyiY"
+            class="sc-1bz6snd-1 hVEMVU"
           >
             <div
-              class="sc-1bz6snd-2 fFsVPH"
+              class="sc-1bz6snd-2 jcwtoG"
             >
               <a
                 class="sc-38x7tx-0 eHXdRo"
@@ -41,77 +41,81 @@ exports[`Header Snapshot 1`] = `
                 </svg>
               </a>
             </div>
-            <svg
-              height="50"
-              id="emoji"
-              style="margin-right: 0.5em;"
-              viewBox="0 0 72 72"
-              width="50"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <g
-                id="color"
-              />
-              <g
-                id="hair"
-              />
-              <g
-                id="skin"
-              />
-              <g
-                id="skin-shadow"
-              />
-              <g
-                id="line"
-              >
-                <line
-                  fill="none"
-                  stroke="white"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-miterlimit="10"
-                  stroke-width="2"
-                  x1="16"
-                  x2="56"
-                  y1="26"
-                  y2="26"
-                />
-                <line
-                  fill="none"
-                  stroke="white"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-miterlimit="10"
-                  stroke-width="2"
-                  x1="16"
-                  x2="56"
-                  y1="36"
-                  y2="36"
-                />
-                <line
-                  fill="none"
-                  stroke="white"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-miterlimit="10"
-                  stroke-width="2"
-                  x1="16"
-                  x2="56"
-                  y1="46"
-                  y2="46"
-                />
-              </g>
-            </svg>
             <div
-              class="sc-1dxoc5d-2 iAeGbD"
+              class="sc-1bz6snd-6 hfrpeU"
             >
-              <span
-                style="font-size: 0.8em;"
+              <svg
+                height="50"
+                id="emoji"
+                style="margin-right: 0.5em; cursor: pointer;"
+                viewBox="0 0 72 72"
+                width="50"
+                xmlns="http://www.w3.org/2000/svg"
               >
-                Sign in
-              </span>
+                <g
+                  id="color"
+                />
+                <g
+                  id="hair"
+                />
+                <g
+                  id="skin"
+                />
+                <g
+                  id="skin-shadow"
+                />
+                <g
+                  id="line"
+                >
+                  <line
+                    fill="none"
+                    stroke="white"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-miterlimit="10"
+                    stroke-width="2"
+                    x1="16"
+                    x2="56"
+                    y1="26"
+                    y2="26"
+                  />
+                  <line
+                    fill="none"
+                    stroke="white"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-miterlimit="10"
+                    stroke-width="2"
+                    x1="16"
+                    x2="56"
+                    y1="36"
+                    y2="36"
+                  />
+                  <line
+                    fill="none"
+                    stroke="white"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-miterlimit="10"
+                    stroke-width="2"
+                    x1="16"
+                    x2="56"
+                    y1="46"
+                    y2="46"
+                  />
+                </g>
+              </svg>
             </div>
           </header>
+        </div>
+        <div
+          class="sc-1dxoc5d-2 gMPGUA"
+        >
+          <span
+            style="font-size: 0.8em;"
+          >
+            Sign in
+          </span>
         </div>
       </header>
       <div

@@ -1,6 +1,6 @@
 import React from 'react'
 import { useRouter } from 'next/router'
-import { AuthForm } from './AuthForm'
+import { AuthForm } from '../../../fixtures/_pages/Tokenization/AuthForm'
 import { Footer } from 'src/components/organisms/Footer'
 import { Header } from 'src/components/organisms/Header'
 import { Headline } from 'src/components/atoms/Headline'

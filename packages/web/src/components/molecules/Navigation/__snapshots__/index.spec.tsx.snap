@@ -6,7 +6,7 @@ exports[`Navigation Snapshot 1`] = `
     <svg
       height="50"
       id="emoji"
-      style="margin-right: 0.5em;"
+      style="margin-right: 0.5em; cursor: pointer;"
       viewBox="0 0 72 72"
       width="50"
       xmlns="http://www.w3.org/2000/svg"
@@ -64,15 +64,6 @@ exports[`Navigation Snapshot 1`] = `
         />
       </g>
     </svg>
-    <div
-      class="sc-1dxoc5d-2 iAeGbD"
-    >
-      <span
-        style="font-size: 0.8em;"
-      >
-        Sign in
-      </span>
-    </div>
   </div>
 </body>
 `;

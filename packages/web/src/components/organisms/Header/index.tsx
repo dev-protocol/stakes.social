@@ -87,7 +87,7 @@ export const Header = ({ colorSchema = 'white' }: Props = {}) => {
 
   const accountBtnClick = async () => {
     if (isConnected || accountAddress) {
-      router.push({ pathname: '/settings/profile' })
+      router.push({ pathname: '/profile' })
       return
     }
 

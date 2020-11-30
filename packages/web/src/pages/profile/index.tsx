@@ -11,7 +11,6 @@ import { Divider } from 'antd'
 import { YourStakes } from 'src/components/_pages/portfolio/YourStakes'
 import { useProvider } from 'src/fixtures/wallet/hooks'
 import { YourPools } from 'src/components/_pages/portfolio/YourPools'
-// import { UserProfile } from 'src/components/organisms/UserProfile'
 
 const PortfolioHeader = styled.div`
   display: grid;
@@ -57,7 +56,6 @@ const Portfolio = () => {
     <div style={{ display: 'flex', minHeight: '100vh', flexDirection: 'column' }}>
       <Header />
       <StyledContainer>
-        {/* <UserProfile /> */}
         <PortfolioHeader>
           <Heading>Your Portfolio</Heading>
           <Switcher />
