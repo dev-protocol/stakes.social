@@ -201,13 +201,13 @@ export const PropertyCardList = ({ currentPage, searchWord, sortBy, featureTag }
         <PropertyOverview>
           {sortBy !== 'MOST_RECENT' &&
             data.property_factory_create.map(d => (
-              <div key={d.event_id} style={{ margin: '54px 0' }}>
+              <div key={d.event_id} style={{ margin: '54px auto' }}>
                 <PropertyCard propertyAddress={d.property} assets={d.authentication} />
               </div>
             ))}
           {sortBy === 'MOST_RECENT' &&
             mostRecentData.property_factory_create.map(d => (
-              <div key={d.event_id} style={{ margin: '54px 0' }}>
+              <div key={d.event_id} style={{ margin: '54px auto' }}>
                 <PropertyCard propertyAddress={d.property} assets={d.authentication} />
               </div>
             ))}
