@@ -35,7 +35,7 @@ const PropertiesHeader = styled.div`
   align-items: center;
   padding-top: 10px;
 
-  @media (min-width: 768px) {
+  @media (min-width: 1200px) {
     grid-template-rows: none;
     grid-template-columns: 1fr 1fr 1fr;
     column-gap: 60px;
@@ -47,8 +47,14 @@ const PropertyOverview = styled.div`
   grid-template-columns: 1fr;
   row-gap: 0;
 
-  @media (min-width: 768px) {
+  @media (min-width: 800px) {
     grid-template-columns: 1fr 1fr 1fr;
+    column-gap: 60px;
+  }
+
+  @media (min-width: 800px) and (max-width: 1200px) {
+    grid-template-rows: none;
+    grid-template-columns: 1fr 1fr;
     column-gap: 60px;
   }
 `

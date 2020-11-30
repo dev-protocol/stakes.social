@@ -116,7 +116,7 @@ const PoolLogoSection = styled.div`
   img,
   svg,
   div {
-    margin-right: 20px;
+    margin-right: 10px;
   }
 `
 
@@ -290,6 +290,10 @@ const EditButton = styled.a`
 
   :hover {
     color: white;
+  }
+
+  @media (max-width: 768px) {
+    margin-right: 5px;
   }
 `
 
