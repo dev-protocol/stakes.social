@@ -13,6 +13,7 @@ import {
 } from 'src/fixtures/dev-kit/hooks'
 import styled from 'styled-components'
 import { AvatarProperty } from '../AvatarProperty'
+import { useCurrency } from 'src/fixtures/currency/hooks'
 
 interface Props {
   className?: string
@@ -99,6 +100,7 @@ export const AssetItemOnList = ({
   const { myStakingRewardAmount, currency: myStakingRewardAmountCurrency } = useGetMyStakingRewardAmount(
     propertyAddress
   )
+  const { toCurrency } = useCurrency()
   const { myHolderAmount } = useGetMyHolderAmount(propertyAddress)
   const { myStakingAmount, currency: myStakingAmountCurrency } = useGetMyStakingAmount(propertyAddress)
   const propertyName = property && property.name ? property.name : name
@@ -123,7 +125,9 @@ export const AssetItemOnList = ({
       />
       <GridTotalStake
         title="Your Rewards"
-        value={(isPool ? myHolderAmount?.dp(2).toNumber() : myStakingRewardAmount?.dp(2).toNumber()) || 'N/A'}
+        value={
+          (isPool ? toCurrency(myHolderAmount?.dp(2)).toNumber() : myStakingRewardAmount?.dp(2).toNumber()) || 'N/A'
+        }
         suffix={myStakingRewardAmountCurrency}
         precision={2}
       />
