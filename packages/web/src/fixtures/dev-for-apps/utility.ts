@@ -193,3 +193,46 @@ export const getProperty = (propertyAddress: string): Promise<Array<Property>> =
   fetch(`${StrapiBaseUrl}/properties?address=${propertyAddress}`)
     .then(res => res.json())
     .catch(() => [])
+
+export const postProperty = (
+  signMessage: string,
+  signature: string,
+  address: string,
+  name?: string,
+  description?: string
+): Promise<Property> =>
+  fetch(`${StrapiBaseUrl}/properties`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json; charset=utf-8'
+    },
+    body: JSON.stringify({
+      name,
+      description,
+      address,
+      signature,
+      signMessage
+    })
+  }).then(res => res.json())
+
+export const putProperty = (
+  signMessage: string,
+  signature: string,
+  address: string,
+  id: number,
+  name?: string,
+  description?: string
+): Promise<Property> =>
+  fetch(`${StrapiBaseUrl}/properties/${id}`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json; charset=utf-8'
+    },
+    body: JSON.stringify({
+      name,
+      description,
+      address,
+      signature,
+      signMessage
+    })
+  }).then(res => res.json())
