@@ -40,9 +40,9 @@ const ProfileUpdateForm = ({ accountAddress }: { accountAddress: string }) => {
   const { postAccountHandler: createAccount, isLoading } = useCreateAccount(accountAddress)
   const { putAccountHandler: updateAccount } = useUpdateAccount(Number(data?.id), accountAddress)
   const handleSubmit = useCallback(
-    (displayName: string, biography: string) => {
+    (displayName: string, biography: string, website: string, github: string) => {
       const handler = found ? updateAccount : createAccount
-      handler(displayName, biography)
+      handler(displayName, biography, website, github)
     },
     [createAccount, updateAccount, found]
   )
@@ -50,9 +50,17 @@ const ProfileUpdateForm = ({ accountAddress }: { accountAddress: string }) => {
   return (
     <Form
       layout="vertical"
-      onFinish={({ displayName, biography }: { displayName: string; biography: string }) =>
-        handleSubmit(displayName, biography)
-      }
+      onFinish={({
+        displayName,
+        biography,
+        website,
+        github
+      }: {
+        displayName: string
+        biography: string
+        website: string
+        github: string
+      }) => handleSubmit(displayName, biography, website, github)}
     >
       <Form.Item label="Display Name" name="displayName">
         {found ? <Input placeholder="Enter the new display name" defaultValue={data?.name} /> : <SkeletonInput />}
@@ -63,6 +71,12 @@ const ProfileUpdateForm = ({ accountAddress }: { accountAddress: string }) => {
         ) : (
           <SkeletonInput />
         )}
+      </Form.Item>
+      <Form.Item label="Website" name="website">
+        {found ? <Input placeholder="your website url" defaultValue={data?.website} /> : <SkeletonInput />}
+      </Form.Item>
+      <Form.Item label="GitHub" name="github">
+        {found ? <Input placeholder="your github account url" defaultValue={data?.github} /> : <SkeletonInput />}
       </Form.Item>
       <Button type="primary" htmlType="submit" loading={isLoading} disabled={isLoading}>
         Save
