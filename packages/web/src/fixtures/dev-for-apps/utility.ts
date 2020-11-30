@@ -51,7 +51,7 @@ export interface Property {
   name: string
   description: string
   cover_image: NullableImage
-  portrait: NullableImage
+  avatar: NullableImage
   links?: {
     github: string
     twitter: string
