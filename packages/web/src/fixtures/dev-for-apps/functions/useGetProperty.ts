@@ -12,5 +12,5 @@ export const useGetProperty = (propertyAddress?: string) => {
   )
   const found = data instanceof Array
 
-  return { data: data ? data[0] : data, error, mutate, found }
+  return { data: whenDefined(data, x => x[0]), error, mutate, found }
 }
