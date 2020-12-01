@@ -69,11 +69,12 @@ const ProfilePicture = styled.div`
   background: white;
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2), 0 2px 4px -1px rgba(0, 0, 0, 0.12);
   margin-left: 1em;
+
   @media (min-width: 768px) {
     margin-left: 0;
     height: 150px;
     width: 150px;
-    transform: translateY(-75px);
+    transform: translate(-75px, -75px);
   }
 `
 const Grid = styled.div`

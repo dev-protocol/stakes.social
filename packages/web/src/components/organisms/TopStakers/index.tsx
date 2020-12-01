@@ -15,7 +15,7 @@ interface TopStakersProps {
 const PlaceHolderList = styled.div<{ noData?: boolean }>`
   ${({ noData }) => css`
     display: flex;
-    min-height: ${noData ? '150px' : '400px'};
+    min-height: ${noData ? '150px' : '300px'};
     justify-content: center;
     align-items: center;
   `}
