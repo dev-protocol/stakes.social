@@ -98,7 +98,6 @@ exports[`TransactModalContents Snapshot 1`] = `
               >
                 <svg
                   aria-hidden="true"
-                  class=""
                   data-icon="close-circle"
                   fill="currentColor"
                   focusable="false"
@@ -133,7 +132,6 @@ exports[`TransactModalContents Snapshot 1`] = `
               >
                 <svg
                   aria-hidden="true"
-                  class=""
                   data-icon="close-circle"
                   fill="currentColor"
                   focusable="false"
