@@ -49,8 +49,7 @@ const StakerSection = styled.div`
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2), 0 2px 4px -1px rgba(0, 0, 0, 0.12);
   border-radius: 6px;
   width: 180px;
-  margin-right: 0.5em;
-  margin-bottom: 0.5em;
+  margin-bottom: 1em;
   img {
     border-radius: 90px;
   }
