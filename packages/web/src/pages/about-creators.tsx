@@ -245,7 +245,7 @@ const AboutCreator = () => {
                   Stakes.social is the easiest way in the world to authenticate your open assets on the blockchain and
                   earn revenue. Open assets can be anything from open source software, Youtube videos, or Spotify music.
                 </p>
-                <FButton href="https://stakes.social/auth">Get started now!</FButton>
+                <FButton href="https://stakes.social/create">Get started now!</FButton>
                 <FButton href="#works" style={grayBtn}>
                   How it works?
                 </FButton>
@@ -265,7 +265,7 @@ const AboutCreator = () => {
                 solution allows for both creators and supporters to simultaneously earn money for supporting each other.
                 The result is a highly sustainable economy for creators.
               </div>
-              <ThinButton href="https://stakes.social/auth">Start Monetizing Now!</ThinButton>
+              <ThinButton href="https://stakes.social/create">Start Monetizing Now!</ThinButton>
             </Row>
           </TextSection>
 

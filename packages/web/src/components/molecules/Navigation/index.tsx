@@ -28,7 +28,7 @@ export const Navigations = [
   {
     key: 'create',
     label: 'Create',
-    pathname: '/auth'
+    pathname: '/create'
   },
   {
     key: 'governance',

@@ -98,7 +98,7 @@ const ContentsForAuthPage = ({ marketAddress }: { marketAddress: string }) => {
     <List.Item>
       <List.Item.Meta
         title={
-          <Link href={'/auth/[market]'} as={`/auth/${marketAddress}`} passHref>
+          <Link href={'/create/[market]'} as={`/create/${marketAddress}`} passHref>
             <A>{data.name}</A>
           </Link>
         }
@@ -122,8 +122,8 @@ const ContentsForAssociatePage = ({
       <List.Item.Meta
         title={
           <Link
-            href={'/auth/associate/[property]/[market]'}
-            as={`/auth/associate/${propertyAddress}/${marketAddress}`}
+            href={'/create/associate/[property]/[market]'}
+            as={`/create/associate/${propertyAddress}/${marketAddress}`}
             passHref
           >
             <A>{data.name}</A>
