@@ -30,7 +30,9 @@ const AccountAddress = styled.span`
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
-  max-width: 100px;
+  max-width: 120px;
+  /* align-self: flex-start; */
+  /* padding: 0 0.5em; */
 `
 
 const TopStakerRanking = styled.div`
@@ -43,9 +45,20 @@ const StakerSection = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-
+  padding: 1em 2em;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2), 0 2px 4px -1px rgba(0, 0, 0, 0.12);
+  border-radius: 6px;
+  width: 180px;
+  margin-right: 0.5em;
+  margin-bottom: 0.5em;
   img {
     border-radius: 90px;
+  }
+
+  @media (max-width: 768px) {
+    margin-right: 0.5em;
+    margin-bottom: 1em;
+    width: 160px;
   }
 `
 
