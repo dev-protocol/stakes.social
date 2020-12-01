@@ -147,7 +147,7 @@ const Author = ({ propertyAddress }: { propertyAddress: string }) => {
       {data && (
         <>
           <h2>
-            Created by <Link href={`/author/${authorAddress}`}>{data?.name}</Link>
+            Created by <Link href={`/author/${authorAddress}`}>{dataAuthor?.name || data?.name}</Link>
           </h2>
           <Flex>
             <Link passHref href="/author/[accountAddress]" as={`/author/${authorAddress}`}>

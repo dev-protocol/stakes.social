@@ -5,6 +5,7 @@ import { Avatar } from 'src/components/molecules/Avatar'
 import styled, { css } from 'styled-components'
 import { useEffect } from 'react'
 import { useListTopStakersAccountLazyQuery } from '@dev/graphql'
+import { useGetAccount } from 'src/fixtures/dev-for-apps/hooks'
 
 interface TopStakersProps {
   propertyAdress?: string
@@ -50,6 +51,17 @@ const StakerSection = styled.div`
 
 const formatter = new Intl.NumberFormat('en-US')
 
+const Staker = ({ accountAddress, value }: { accountAddress: string; value: number }) => {
+  const { data } = useGetAccount(accountAddress)
+  return (
+    <StakerSection>
+      <Avatar accountAddress={accountAddress} size={'100'} />
+      <AccountAddress>{data?.name || accountAddress}</AccountAddress>
+      <span>{`${formatter.format(parseInt((value / Math.pow(10, 18)).toFixed(0)))}`}</span>
+    </StakerSection>
+  )
+}
+
 const TopStakers = ({ authorAddress, propertyAdress }: TopStakersProps) => {
   const { data: topPropertyStakersData, loading: isPropertyStakingLoading } = useQuery(getTopStakersOfPropertyQuery, {
     variables: {
@@ -93,12 +105,8 @@ const TopStakers = ({ authorAddress, propertyAdress }: TopStakersProps) => {
       )}
 
       <TopStakerRanking>
-        {stakerItems?.map(({ account_address, value }, index) => (
-          <StakerSection key={index}>
-            <Avatar accountAddress={account_address} size={'100'} />
-            <AccountAddress>{account_address}</AccountAddress>
-            <span>{`${formatter.format(parseInt((value / Math.pow(10, 18)).toFixed(0)))}`}</span>
-          </StakerSection>
+        {stakerItems?.map(({ account_address, value }) => (
+          <Staker key={account_address} accountAddress={account_address} value={value} />
         ))}
       </TopStakerRanking>
     </Flex>

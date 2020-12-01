@@ -19,6 +19,7 @@ import { blueGradient } from 'src/styles/gradient'
 import Link from 'next/link'
 import { useProvider } from 'src/fixtures/wallet/hooks'
 import { useState } from 'react'
+import { useCurrency } from 'src/fixtures/currency/hooks'
 
 type Props = {}
 
@@ -79,8 +80,7 @@ const Grid = styled.div`
   display: grid;
   grid-template-columns: 1fr;
   width: 100%;
-  /* margin-left: 1em; */
-  /* margin-right: 1em; */
+
   > div {
     padding: 1em;
   }
@@ -229,25 +229,29 @@ const Pool = ({ propertyAddress }: PoolProps) => {
     () => data && truncate(data.property_authentication.map(e => e.authentication_id).join(', '), 24),
     [data]
   )
+
+  const { currency } = useCurrency()
   console.log('propertyData: ', propertyData?.avatar?.url)
 
   return (
-    <Card>
-      <PoolsOverview>
-        <PoolLogoSection>
-          <AvatarProperty size={75} propertyAddress={propertyAddress} />
-          <h4>{includeAssets}</h4>
-        </PoolLogoSection>
-        <OwnedStake>
-          <span>{myStakingAmount?.dp(2).toNumber() || 0} DEV</span>
-          <MutedSpan>Your stake</MutedSpan>
-        </OwnedStake>
-        <TotalStaked>
-          <span>{totalStakingAmount?.dp(2).toNumber() || 0} DEV</span>
-          <MutedSpan>Total staked</MutedSpan>
-        </TotalStaked>
-      </PoolsOverview>
-    </Card>
+    <Link href={`/${propertyAddress}`} passHref>
+      <Card>
+        <PoolsOverview>
+          <PoolLogoSection>
+            <AvatarProperty size={75} propertyAddress={propertyAddress} />
+            <h4>{includeAssets}</h4>
+          </PoolLogoSection>
+          <OwnedStake>
+            <span>{`${myStakingAmount?.dp(2).toNumber().toLocaleString() || 0} ${currency}`}</span>
+            <MutedSpan>Your stake</MutedSpan>
+          </OwnedStake>
+          <TotalStaked>
+            <span>{`${totalStakingAmount?.dp(2).toNumber().toLocaleString() || 0} ${currency}`}</span>
+            <MutedSpan>Total staked</MutedSpan>
+          </TotalStaked>
+        </PoolsOverview>
+      </Card>
+    </Link>
   )
 }
 
