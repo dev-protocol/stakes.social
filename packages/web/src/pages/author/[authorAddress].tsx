@@ -1,28 +1,23 @@
-import React, { useMemo, useState, useEffect } from 'react'
+import React, { useMemo } from 'react'
 import { useRouter } from 'next/router'
 import { Header } from 'src/components/organisms/Header'
 
 import { Footer } from 'src/components/organisms/Footer'
 import styled from 'styled-components'
-import { LoremIpsum } from 'lorem-ipsum'
 import { useListPropertyMetaQuery, useGetPropertyAuthenticationQuery } from '@dev/graphql'
 import { useGetMyStakingAmount, useGetTotalStakingAmount } from 'src/fixtures/dev-kit/hooks'
 import TopStakers from 'src/components/organisms/TopStakers'
 import TopSupporting from 'src/components/organisms/TopSupporting'
 import { truncate } from 'src/fixtures/utility/string'
 import { useGetAuthorInformation } from 'src/fixtures/devprtcl/hooks'
-import { Avatar } from 'src/components/molecules/Avatar'
-
-const lorem = new LoremIpsum({
-  sentencesPerParagraph: {
-    max: 8,
-    min: 4
-  },
-  wordsPerSentence: {
-    max: 16,
-    min: 4
-  }
-})
+import { Avatar as AuthorAvatar } from 'src/components/molecules/Avatar'
+import useWindowDimensions from '../../fixtures/utility/useWindowDimensions'
+import { useGetAccount, useGetProperty } from 'src/fixtures/dev-for-apps/hooks'
+import { AvatarProperty } from 'src/components/molecules/AvatarProperty'
+import { Links } from '../../fixtures/_pages/ProfileHeader/Links'
+import { blueGradient } from 'src/styles/gradient'
+import Link from 'next/link'
+import { useProvider } from 'src/fixtures/wallet/hooks'
 
 type Props = {}
 
@@ -118,8 +113,10 @@ const PoolsOverview = styled.div`
 const PoolLogoSection = styled.div`
   display: flex;
   align-items: center;
-  img {
-    margin-right: 20px;
+  img,
+  svg,
+  div {
+    margin-right: 10px;
   }
 `
 
@@ -173,7 +170,7 @@ const Card = styled.div`
 
 const AuthorDetailGrid = styled.div`
   display: grid;
-  grid-template-columns: 1fr 2fr;
+  grid-template-columns: 1fr 2fr 1fr;
 
   div > button {
     align-self: center;
@@ -248,20 +245,18 @@ const Pool = ({ propertyAddress }: PoolProps) => {
   const { totalStakingAmount } = useGetTotalStakingAmount(propertyAddress)
   const { myStakingAmount } = useGetMyStakingAmount(propertyAddress)
   const { data } = useGetPropertyAuthenticationQuery({ variables: { propertyAddress } })
+  const { data: propertyData } = useGetProperty(propertyAddress)
   const includeAssets = useMemo(
     () => data && truncate(data.property_authentication.map(e => e.authentication_id).join(', '), 24),
     [data]
   )
+  console.log('propertyData: ', propertyData?.avatar?.url)
 
   return (
     <Card>
       <PoolsOverview>
         <PoolLogoSection>
-          <img
-            width="75px"
-            height="75px"
-            src="https://res.cloudinary.com/haas-storage/image/upload/v1599219478/61np1wbr9pL_xecoq7.png"
-          />
+          <AvatarProperty size={75} propertyAddress={propertyAddress} />
           <h4>{includeAssets}</h4>
         </PoolLogoSection>
         <OwnedStake>
@@ -277,10 +272,34 @@ const Pool = ({ propertyAddress }: PoolProps) => {
   )
 }
 
+const AreaLinks = styled(Links)`
+  grid-area: links;
+  margin-top: -0.5em;
+  @media (min-width: 768px) {
+    margin: 0;
+  }
+`
+
+const EditButton = styled.a`
+  display: flex;
+  ${blueGradient('horizontal')}
+  padding: 4px 16px;
+  color: white;
+  width: fit-content;
+  border-radius: 8px;
+
+  :hover {
+    color: white;
+  }
+
+  @media (max-width: 768px) {
+    margin-right: 5px;
+  }
+`
+
 const AuthorAddressDetail = (_: Props) => {
   const router = useRouter()
   let { authorAddress } = router.query
-  const [isDesktop, setDesktop] = useState(true)
   const author: string = typeof authorAddress == 'string' ? authorAddress : 'none'
   const { data: authorInformation } = useGetAuthorInformation(author)
   const { data, loading } = useListPropertyMetaQuery({
@@ -288,18 +307,11 @@ const AuthorAddressDetail = (_: Props) => {
       author
     }
   })
+  const { accountAddress } = useProvider()
 
-  useEffect(() => {
-    const updateMedia = () => {
-      setDesktop(window.innerWidth > 1024)
-    }
-
-    if (typeof window !== 'undefined') {
-      window.addEventListener('resize', updateMedia)
-      return () => window.removeEventListener('resize', updateMedia)
-    }
-    return setDesktop(true)
-  }, [setDesktop])
+  const { data: dataAuthor } = useGetAccount(author)
+  const { width } = useWindowDimensions()
+  const isSelf = author.toLowerCase() === accountAddress?.toLowerCase()
 
   return (
     <>
@@ -307,35 +319,28 @@ const AuthorAddressDetail = (_: Props) => {
       <Banner />
       <Wrap>
         <ProfilePicture>
-          <Avatar accountAddress={author} size={isDesktop ? '140' : '90'} />
+          {width > 0 && <AuthorAvatar accountAddress={author} size={width > 1024 ? '140' : '90'} />}
         </ProfilePicture>
 
         <TransformedGrid>
           {/* <div style={{ display: 'grid', gridTemplateRows: '1fr' }}> */}
           <div style={{ gridColumn: '2 / -1', marginTop: '10px' }}>
             <AuthorDetailGrid>
-              <span style={{ fontSize: '1.25em' }}>Kazuya Kawaguchi</span>
+              <span style={{ fontSize: '1.25em' }}>{dataAuthor?.name || data?.property_meta?.[0]?.name}</span>
               <ShareList>
-                <img
-                  src="https://res.cloudinary.com/haas-storage/image/upload/v1600172007/25231_hng64u.png"
-                  width="20"
-                  height="20"
-                />
-                <img
-                  src="https://res.cloudinary.com/haas-storage/image/upload/v1600172799/earth-globe-meridians-world-33880_tfa0p9.png"
-                  width="20"
-                  height="20"
-                />
-                <img
-                  src="https://res.cloudinary.com/haas-storage/image/upload/v1600172660/2018_social_media_popular_app_logo_youtube-512_jivvza.webp"
-                  width="20"
-                  height="20"
-                />
+                <AreaLinks links={dataAuthor?.links} />
               </ShareList>
+              {isSelf && (
+                <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+                  <Link href={`/author/${author}/edit`}>
+                    <EditButton>Edit</EditButton>
+                  </Link>
+                </div>
+              )}
             </AuthorDetailGrid>
 
             <p style={{ marginBottom: '15px' }}>
-              <span style={{ color: '#1AC9FC' }}>{authorInformation?.karma || 0} </span>karma
+              <span style={{ color: '#1AC9FC' }}>{authorInformation?.karma.toLocaleString() || 0} </span>karma
             </p>
           </div>
           <AuthorLinks>
@@ -351,8 +356,7 @@ const AuthorAddressDetail = (_: Props) => {
         <Grid>
           <div id="about" style={{ gridColumn: '2 / -1' }}>
             <h2>About</h2>
-            <p>{lorem.generateSentences(4)}</p>
-            <p>{lorem.generateSentences(4)}</p>
+            <p>{dataAuthor?.biography || 'No information available for this creator'}</p>
           </div>
           <div id="pools" style={{ gridColumn: '2 / -1', width: '100%' }}>
             <h2>Pools</h2>
@@ -367,7 +371,7 @@ const AuthorAddressDetail = (_: Props) => {
           </div>
           <div id="top-stakers" style={{ gridColumn: '2 / -1', width: 'auto' }}>
             <h2>Top stakers</h2>
-            <TopStakers propertyAdress="0x44d871aebF0126Bf646753E2C976Aa7e68A66c15" />
+            <TopStakers authorAddress={author} />
           </div>
           <div id="supporting" style={{ gridColumn: '2 / -1', width: 'auto' }}>
             <h2>Supporting</h2>

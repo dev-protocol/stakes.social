@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react'
+import React, { useMemo, useState } from 'react'
 import Link from 'next/link'
 import {
   useGetMyStakingAmount,
@@ -8,21 +8,13 @@ import {
 } from 'src/fixtures/dev-kit/hooks'
 import styled from 'styled-components'
 import { truncate } from 'src/fixtures/utility/string'
-import { LoremIpsum } from 'lorem-ipsum'
 import { useGetPropertytInformation } from 'src/fixtures/devprtcl/hooks'
+import { useGetProperty } from 'src/fixtures/dev-for-apps/hooks'
 import { Avatar } from 'src/components/molecules/Avatar'
 import BigNumber from 'bignumber.js'
-
-const lorem = new LoremIpsum({
-  sentencesPerParagraph: {
-    max: 8,
-    min: 4
-  },
-  wordsPerSentence: {
-    max: 16,
-    min: 4
-  }
-})
+import { TransactModalContents } from 'src/components/molecules/TransactModalContents'
+import { ResponsiveModal } from 'src/components/atoms/ResponsiveModal'
+import { CoverImageOrGradient } from 'src/components/atoms/CoverImageOrGradient'
 
 interface Asset {
   authentication_id: string
@@ -44,6 +36,7 @@ const Card = styled.div`
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
   cursor: pointer;
   background: #fff;
+  overflow: hidden;
 `
 
 const RowContainer = styled.div`
@@ -52,17 +45,6 @@ const RowContainer = styled.div`
   row-gap: 8px;
   grid-template-columns: 1fr 1fr;
   grid-template-areas: 'ownedstake totalstaked';
-`
-
-const Property = styled.div`
-  display: flex;
-  align-items: center;
-`
-const PropertyArea = styled(Property)`
-  display: flex;
-  justify-content: center;
-  padding: 15px;
-  grid-area: property;
 `
 
 const Title = styled.span`
@@ -141,7 +123,6 @@ const MutedSpan = styled.span`
 const FlexRow = styled.div`
   display: flex;
   margin-left: 16px;
-  margin-bottom: 8px;
 
   img {
     border-radius: 90px;
@@ -153,6 +134,11 @@ const PropertyDescription = styled.p`
   margin: 0;
   flex-grow: 1;
   padding: 0 16px 8px 16px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 4; /* number of lines to show */
+  -webkit-box-orient: vertical;
 `
 
 const FlewColumn = styled.div`
@@ -168,9 +154,24 @@ const FlewColumn = styled.div`
   }
 `
 
+interface ModalStates {
+  visible: boolean
+  title?: string
+  contents?: React.ReactNode
+}
+
 const formatter = new Intl.NumberFormat('en-US')
 
+const PlaceholderCoverImageOrGradient = styled.div`
+  padding-top: 20%;
+  background: url('https://asset.stakes.social/logo/dev.svg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 80px;
+`
+
 export const PropertyCard = ({ propertyAddress, assets }: Props) => {
+  const [modalStates, setModalStates] = useState<ModalStates>({ visible: false })
   const { totalStakingAmount, currency: totalStakingAmountCurrency } = useGetTotalStakingAmount(propertyAddress)
   const { totalRewardsAmount, currency: totalRewardsAmountCurrency } = useGetTotalRewardsAmount(propertyAddress)
   const { myStakingRewardAmount, currency: myStakingRewardAmountCurrency } = useGetMyStakingRewardAmount(
@@ -178,71 +179,93 @@ export const PropertyCard = ({ propertyAddress, assets }: Props) => {
   )
   const { myStakingAmount, currency: myStakingAmountCurrency } = useGetMyStakingAmount(propertyAddress)
   const { data: authorData } = useGetPropertytInformation(propertyAddress)
+  const { data: dataProperty } = useGetProperty(propertyAddress)
   const includeAssets = useMemo(() => assets && truncate(assets.map(e => e.authentication_id).join(', '), 24), [assets])
 
   const zeroBigNumber = new BigNumber(0)
 
+  const showModal = (type: 'stake' | 'withdraw' | 'holders') => {
+    const contents = <TransactModalContents propertyAddress={propertyAddress} type={type} />
+    const title = type === 'stake' ? 'Stake' : 'Withdraw'
+    setModalStates({ visible: true, contents, title })
+  }
+  const closeModal = () => {
+    setModalStates({ ...modalStates, visible: false })
+  }
+
   return (
-    <Link href={'/[propertyAddress]'} as={`/${propertyAddress}`}>
-      <Card>
-        <PropertyArea>
-          <img
-            width="auto"
-            height="auto"
-            src="https://res.cloudinary.com/haas-storage/image/upload/v1597910958/Screenshot_from_2020-08-20_10-08-09-removebg-preview_td5opp.png"
-          />
-        </PropertyArea>
-        <Title>{includeAssets || 'Property'}</Title>
-        <PropertyDescription>{lorem.generateSentences(2)}</PropertyDescription>
-        <FlexRow>
-          <Avatar accountAddress={authorData?.author.address} size={'60'} />
-          <FlewColumn>
-            <span style={{ fontWeight: 'lighter' }}>Creator</span>
-            <span style={{ color: '#1AC9FC' }}>{authorData?.name}</span>
-            <span>{authorData?.author?.karma ? formatter.format(authorData?.author?.karma) : 0} Karma</span>
-          </FlewColumn>
-        </FlexRow>
-        <RowContainer>
-          <OwnedStake>
-            <span>
-              {myStakingAmount?.dp(0).toFixed() ? formatter.format(myStakingAmount?.dp(1).toNumber()) : 0}{' '}
-              {myStakingAmountCurrency}
-            </span>
-            <MutedSpan>Your stake</MutedSpan>
-          </OwnedStake>
-          <YourReward>
-            <span>
-              {myStakingRewardAmount?.dp(0)?.toNumber()
-                ? formatter.format(myStakingRewardAmount?.dp(0)?.toNumber())
-                : 0}{' '}
-              {myStakingRewardAmountCurrency}
-            </span>
-            <MutedSpan>Your reward</MutedSpan>
-          </YourReward>
-          <TotalStaked>
-            <span>
-              {totalStakingAmount?.dp(0).toNumber() ? formatter.format(totalStakingAmount?.dp(0).toNumber()) : 0}{' '}
-              {totalStakingAmountCurrency}
-            </span>
-            <MutedSpan>Total staked</MutedSpan>
-          </TotalStaked>
-          <CreatorReward>
-            <span>
-              {totalRewardsAmount?.dp(0)?.toNumber() ? formatter.format(totalRewardsAmount?.dp(0).toNumber()) : 0}{' '}
-              {totalRewardsAmountCurrency}
-            </span>
-            <MutedSpan>Creator reward</MutedSpan>
-          </CreatorReward>
-        </RowContainer>
-        <ButtonContainerArea>
-          <StakeButton isPropertyStaked={typeof myStakingAmount !== 'undefined' && myStakingAmount > zeroBigNumber}>
-            Stake
-          </StakeButton>
-          <WithdrawButton isPropertyStaked={typeof myStakingAmount !== 'undefined' && myStakingAmount > zeroBigNumber}>
-            Withdraw
-          </WithdrawButton>
-        </ButtonContainerArea>
-      </Card>
-    </Link>
+    <Card>
+      {dataProperty?.cover_image?.url ? (
+        <CoverImageOrGradient src={dataProperty.cover_image.url} ratio={20} />
+      ) : (
+        <PlaceholderCoverImageOrGradient />
+      )}
+      <Link href={'/[propertyAddress]'} as={`/${propertyAddress}`}>
+        <div style={{ display: 'flex', flexDirection: 'column', flexGrow: 1 }}>
+          <Title>{includeAssets || 'Property'}</Title>
+          <PropertyDescription>
+            {dataProperty?.description ||
+              'Stake DEV tokens to provide funding for OSS projects so that they can maintain development.'}
+          </PropertyDescription>
+          <FlexRow>
+            <Avatar accountAddress={authorData?.author.address} size={'60'} />
+            <FlewColumn>
+              <span style={{ fontWeight: 'lighter' }}>Creator</span>
+              <span style={{ color: '#1AC9FC' }}>{authorData?.name}</span>
+              <span>{authorData?.author?.karma ? formatter.format(authorData?.author?.karma) : 0} Karma</span>
+            </FlewColumn>
+          </FlexRow>
+          <RowContainer>
+            <OwnedStake>
+              <span>
+                {myStakingAmount?.dp(0).toFixed() ? formatter.format(myStakingAmount?.dp(1).toNumber()) : 0}{' '}
+                {myStakingAmountCurrency}
+              </span>
+              <MutedSpan>Your stake</MutedSpan>
+            </OwnedStake>
+            <YourReward>
+              <span>
+                {myStakingRewardAmount?.dp(0)?.toNumber()
+                  ? formatter.format(myStakingRewardAmount?.dp(0)?.toNumber())
+                  : 0}{' '}
+                {myStakingRewardAmountCurrency}
+              </span>
+              <MutedSpan>Your reward</MutedSpan>
+            </YourReward>
+            <TotalStaked>
+              <span>
+                {totalStakingAmount?.dp(0).toNumber() ? formatter.format(totalStakingAmount?.dp(0).toNumber()) : 0}{' '}
+                {totalStakingAmountCurrency}
+              </span>
+              <MutedSpan>Total staked</MutedSpan>
+            </TotalStaked>
+            <CreatorReward>
+              <span>
+                {totalRewardsAmount?.dp(0)?.toNumber() ? formatter.format(totalRewardsAmount?.dp(0).toNumber()) : 0}{' '}
+                {totalRewardsAmountCurrency}
+              </span>
+              <MutedSpan>Creator reward</MutedSpan>
+            </CreatorReward>
+          </RowContainer>
+        </div>
+      </Link>
+      <ButtonContainerArea>
+        <StakeButton
+          onClick={() => showModal('stake')}
+          isPropertyStaked={typeof myStakingAmount !== 'undefined' && myStakingAmount > zeroBigNumber}
+        >
+          Stake
+        </StakeButton>
+        <WithdrawButton
+          onClick={() => showModal('withdraw')}
+          isPropertyStaked={typeof myStakingAmount !== 'undefined' && myStakingAmount > zeroBigNumber}
+        >
+          Withdraw
+        </WithdrawButton>
+      </ButtonContainerArea>
+      <ResponsiveModal visible={modalStates.visible} title={modalStates.title} onCancel={closeModal} footer={null}>
+        {modalStates.contents}
+      </ResponsiveModal>
+    </Card>
   )
 }

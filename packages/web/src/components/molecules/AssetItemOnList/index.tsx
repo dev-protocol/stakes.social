@@ -7,11 +7,13 @@ import { useGetProperty } from 'src/fixtures/dev-for-apps/hooks'
 import {
   useBalanceOfProperty,
   useGetMyStakingAmount,
-  useGetTotalStakingAmount,
-  usePropertyName
+  usePropertyName,
+  useGetMyStakingRewardAmount,
+  useGetMyHolderAmount
 } from 'src/fixtures/dev-kit/hooks'
 import styled from 'styled-components'
 import { AvatarProperty } from '../AvatarProperty'
+import { useCurrency } from 'src/fixtures/currency/hooks'
 
 interface Props {
   className?: string
@@ -22,6 +24,7 @@ interface Props {
   onClickStake?: (propertyAddress: string) => void
   onClickWithdrawStakersReward?: (propertyAddress: string) => void
   onClickWithdrawHoldersReward?: (propertyAddress: string) => void
+  isPool?: Boolean
 }
 
 const StyledStatistic = styled(Statistic)`
@@ -45,6 +48,10 @@ const Wrap = styled.div`
     'stake totalStake'
     'buttons buttons';
   grid-template-columns: repeat(2, 1fr);
+  border-radius: 8px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  padding: 0.5em;
+
   @media (min-width: 768px) {
     grid-template-areas: 'avatar stake totalStake buttons';
     grid-template-columns: 1fr 1fr 1fr 240px;
@@ -84,13 +91,18 @@ export const AssetItemOnList = ({
   enableWithdrawHoldersReward,
   onClickStake,
   onClickWithdrawStakersReward,
-  onClickWithdrawHoldersReward
+  onClickWithdrawHoldersReward,
+  isPool
 }: Props) => {
   const { data: property } = useGetProperty(propertyAddress)
   const { balance } = useBalanceOfProperty(propertyAddress)
   const { name } = usePropertyName(propertyAddress)
+  const { myStakingRewardAmount, currency: myStakingRewardAmountCurrency } = useGetMyStakingRewardAmount(
+    propertyAddress
+  )
+  const { toCurrency } = useCurrency()
+  const { myHolderAmount } = useGetMyHolderAmount(propertyAddress)
   const { myStakingAmount, currency: myStakingAmountCurrency } = useGetMyStakingAmount(propertyAddress)
-  const { totalStakingAmount, currency: totalStakingAmountCurrency } = useGetTotalStakingAmount(propertyAddress)
   const propertyName = property && property.name ? property.name : name
   const hasNotBalanceOnTheProperty = balance ? balance.isZero() : false
   const onClick = (
@@ -112,9 +124,11 @@ export const AssetItemOnList = ({
         precision={2}
       />
       <GridTotalStake
-        title="Total Staked"
-        value={totalStakingAmount?.dp(2).toNumber() || 'N/A'}
-        suffix={totalStakingAmountCurrency}
+        title="Your Rewards"
+        value={
+          (isPool ? toCurrency(myHolderAmount?.dp(2)).toNumber() : myStakingRewardAmount?.dp(2).toNumber()) || 'N/A'
+        }
+        suffix={myStakingRewardAmountCurrency}
         precision={2}
       />
       <GridButtons>

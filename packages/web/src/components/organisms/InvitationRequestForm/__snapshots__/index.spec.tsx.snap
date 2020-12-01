@@ -61,7 +61,6 @@ exports[`InvitationRequestForm Snapshot 1`] = `
                             >
                               <svg
                                 aria-hidden="true"
-                                class=""
                                 data-icon="font-colors"
                                 fill="currentColor"
                                 focusable="false"
@@ -133,7 +132,6 @@ exports[`InvitationRequestForm Snapshot 1`] = `
                             >
                               <svg
                                 aria-hidden="true"
-                                class=""
                                 data-icon="mail"
                                 fill="currentColor"
                                 focusable="false"
@@ -205,7 +203,6 @@ exports[`InvitationRequestForm Snapshot 1`] = `
                             >
                               <svg
                                 aria-hidden="true"
-                                class=""
                                 data-icon="code"
                                 fill="currentColor"
                                 focusable="false"
@@ -308,7 +305,6 @@ exports[`InvitationRequestForm Snapshot 1`] = `
                             >
                               <svg
                                 aria-hidden="true"
-                                class=""
                                 data-icon="user"
                                 fill="currentColor"
                                 focusable="false"
@@ -381,7 +377,6 @@ exports[`InvitationRequestForm Snapshot 1`] = `
                             >
                               <svg
                                 aria-hidden="true"
-                                class=""
                                 data-icon="branches"
                                 fill="currentColor"
                                 focusable="false"
@@ -465,7 +460,6 @@ exports[`InvitationRequestForm Snapshot 1`] = `
                             >
                               <svg
                                 aria-hidden="true"
-                                class=""
                                 data-icon="message"
                                 fill="currentColor"
                                 focusable="false"
@@ -537,7 +531,6 @@ exports[`InvitationRequestForm Snapshot 1`] = `
                             >
                               <svg
                                 aria-hidden="true"
-                                class=""
                                 data-icon="notification"
                                 fill="currentColor"
                                 focusable="false"
@@ -570,7 +563,7 @@ exports[`InvitationRequestForm Snapshot 1`] = `
           class="dhltmz-2 yBHac"
         >
           <div
-            style="display: flex; grid-column: 1/-1; justify-content: center;"
+            style="display: flex; grid-column: 1/-1; justify-content: flex-end;"
           >
             <div
               class="dhltmz-4 dscthD"

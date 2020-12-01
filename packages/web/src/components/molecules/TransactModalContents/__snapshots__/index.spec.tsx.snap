@@ -11,7 +11,12 @@ exports[`TransactModalContents Snapshot 1`] = `
       >
         <div
           class="sc-2tazhb-0 floQve"
-        />
+        >
+          <div
+            class="sc-2tazhb-1 jDlbso"
+            size="60"
+          />
+        </div>
         <h4
           class="sc-1w8sy4l-3 qs0k37-3 cqQVgy jVYmtO"
         >
@@ -93,7 +98,6 @@ exports[`TransactModalContents Snapshot 1`] = `
               >
                 <svg
                   aria-hidden="true"
-                  class=""
                   data-icon="close-circle"
                   fill="currentColor"
                   focusable="false"
@@ -128,7 +132,6 @@ exports[`TransactModalContents Snapshot 1`] = `
               >
                 <svg
                   aria-hidden="true"
-                  class=""
                   data-icon="close-circle"
                   fill="currentColor"
                   focusable="false"

@@ -10,7 +10,7 @@ import styled from 'styled-components'
 type Props = {}
 
 const WrapContainer = styled.div`
-  max-width: 760px;
+  max-width: 690px;
   margin: auto;
   padding-top: 1rem;
   word-break: break-all;

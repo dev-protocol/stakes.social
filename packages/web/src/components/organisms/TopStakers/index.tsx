@@ -3,9 +3,12 @@ import { useQuery } from '@apollo/client'
 import getTopStakersOfPropertyQuery from './query/getTopStakersOfProperty'
 import { Avatar } from 'src/components/molecules/Avatar'
 import styled, { css } from 'styled-components'
+import { useEffect } from 'react'
+import { useListTopStakersAccountLazyQuery } from '@dev/graphql'
 
 interface TopStakersProps {
-  propertyAdress: string
+  propertyAdress?: string
+  authorAddress?: string
 }
 
 const PlaceHolderList = styled.div<{ noData?: boolean }>`
@@ -47,25 +50,43 @@ const StakerSection = styled.div`
 
 const formatter = new Intl.NumberFormat('en-US')
 
-const TopStakers = ({ propertyAdress }: TopStakersProps) => {
-  const { data: topStakersData, loading } = useQuery(getTopStakersOfPropertyQuery, {
+const TopStakers = ({ authorAddress, propertyAdress }: TopStakersProps) => {
+  const { data: topPropertyStakersData, loading: isPropertyStakingLoading } = useQuery(getTopStakersOfPropertyQuery, {
     variables: {
       limit: 5,
       property_address: propertyAdress
-    }
+    },
+    skip: !!authorAddress || !propertyAdress
   })
 
-  const stakerItems: Array<{ account_address: string; value: number }> = topStakersData?.property_lockup
+  const [
+    fetchTopCreatorStakers,
+    { data: topCreatorStakersData, loading: isCreatorStakingLoading }
+  ] = useListTopStakersAccountLazyQuery()
+
+  useEffect(() => {
+    if (authorAddress) {
+      fetchTopCreatorStakers({
+        variables: {
+          limit: 5,
+          author_address: authorAddress
+        }
+      })
+    }
+  }, [authorAddress, fetchTopCreatorStakers])
+
+  const stakerItems: Array<{ account_address: string; value: number }> =
+    topPropertyStakersData?.property_lockup || topCreatorStakersData?.account_lockup
 
   return (
     <Flex>
-      {loading && (
+      {(isPropertyStakingLoading || isCreatorStakingLoading) && (
         <PlaceHolderList>
           <div>loading...</div>
         </PlaceHolderList>
       )}
 
-      {!loading && stakerItems?.length === 0 && (
+      {!isCreatorStakingLoading && !isPropertyStakingLoading && stakerItems?.length === 0 && (
         <PlaceHolderList noData>
           <div>No data available...</div>
         </PlaceHolderList>

@@ -35,7 +35,7 @@ const PropertiesHeader = styled.div`
   align-items: center;
   padding-top: 10px;
 
-  @media (min-width: 768px) {
+  @media (min-width: 1200px) {
     grid-template-rows: none;
     grid-template-columns: 1fr 1fr 1fr;
     column-gap: 60px;
@@ -47,8 +47,14 @@ const PropertyOverview = styled.div`
   grid-template-columns: 1fr;
   row-gap: 0;
 
-  @media (min-width: 768px) {
+  @media (min-width: 800px) {
     grid-template-columns: 1fr 1fr 1fr;
+    column-gap: 60px;
+  }
+
+  @media (min-width: 800px) and (max-width: 1200px) {
+    grid-template-rows: none;
+    grid-template-columns: 1fr 1fr;
     column-gap: 60px;
   }
 `
@@ -62,11 +68,24 @@ const markets = {
 }
 
 const Wrap = styled.div`
-  display: grid;
-  column-gap: 2em;
-  grid-template-rows: 1fr;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  display: flex;
   padding-top: 1rem;
+  justify-content: space-between;
+  a {
+    margin-right: 20px;
+  }
+
+  a:last-child {
+    margin-right: 0px;
+  }
+
+  @media (min-width: 768px) {
+    justify-content: flex-start;
+
+    a {
+      margin-right: 40px;
+    }
+  }
 `
 
 const FILTER_OPTIONS = [
@@ -78,9 +97,25 @@ const FILTER_OPTIONS = [
 const FilterOptionContainer = styled.div`
   display: flex;
   justify-content: space-between;
+  max-width: 100vw;
 
   @media (max-width: 760px) {
     grid-row: 3;
+  }
+`
+
+const PaginationContainer = styled.div`
+  display: flex;
+  grid-column: 1/-1;
+  justify-content: flex-start;
+
+  ul {
+    margin-left: 0px;
+  }
+
+  @media (min-width: 768px) {
+    justify-content: flex-end;
+    margin-left: 0;
   }
 `
 
@@ -153,7 +188,7 @@ export const PropertyCardList = ({ currentPage, searchWord, sortBy, featureTag }
   )
 
   return (
-    <div style={{ flexGrow: 1 }}>
+    <div style={{ flexGrow: 1, maxWidth: '100vw' }}>
       <PropertiesHeader>
         <Header>Asset Pools</Header>
         <PropertySearchForm onSubmitSearchProperty={handleSearch} />
@@ -172,17 +207,17 @@ export const PropertyCardList = ({ currentPage, searchWord, sortBy, featureTag }
         <PropertyOverview>
           {sortBy !== 'MOST_RECENT' &&
             data.property_factory_create.map(d => (
-              <div key={d.event_id} style={{ margin: '54px 0' }}>
+              <div key={d.event_id} style={{ margin: '54px auto' }}>
                 <PropertyCard propertyAddress={d.property} assets={d.authentication} />
               </div>
             ))}
           {sortBy === 'MOST_RECENT' &&
             mostRecentData.property_factory_create.map(d => (
-              <div key={d.event_id} style={{ margin: '54px 0' }}>
+              <div key={d.event_id} style={{ margin: '54px auto' }}>
                 <PropertyCard propertyAddress={d.property} assets={d.authentication} />
               </div>
             ))}
-          <div style={{ display: 'flex', justifyContent: 'flex-end', gridColumn: '1/-1' }}>
+          <PaginationContainer>
             <Pagination
               current={currentPage}
               size="default"
@@ -192,9 +227,8 @@ export const PropertyCardList = ({ currentPage, searchWord, sortBy, featureTag }
               onChange={handlePagination}
               onShowSizeChange={handleShowSizeChange}
               total={data.property_factory_create_aggregate.aggregate?.count}
-              style={{ margin: '0 0 20px 50%' }}
             />
-          </div>
+          </PaginationContainer>
         </PropertyOverview>
       )}
     </div>
