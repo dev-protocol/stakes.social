@@ -71,7 +71,6 @@ exports[`Nav Snapshot 1`] = `
             >
               <svg
                 aria-hidden="true"
-                class=""
                 data-icon="ellipsis"
                 fill="currentColor"
                 focusable="false"
