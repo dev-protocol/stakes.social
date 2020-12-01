@@ -19,6 +19,7 @@ const SupportSection = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  cursor: pointer;
   padding: 1em 2em;
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2), 0 2px 4px -1px rgba(0, 0, 0, 0.12);
   border-radius: 6px;

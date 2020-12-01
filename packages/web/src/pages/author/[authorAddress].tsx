@@ -1,10 +1,14 @@
-import React, { useMemo } from 'react'
+import React, { useMemo, useCallback } from 'react'
 import { useRouter } from 'next/router'
 import { Header } from 'src/components/organisms/Header'
 
 import { Footer } from 'src/components/organisms/Footer'
 import styled from 'styled-components'
-import { useListPropertyMetaQuery, useGetPropertyAuthenticationQuery } from '@dev/graphql'
+import {
+  useListPropertyMetaQuery,
+  useGetPropertyAuthenticationQuery,
+  useListOwnedPropertyMetaQuery
+} from '@dev/graphql'
 import { useGetMyStakingAmount, useGetTotalStakingAmount } from 'src/fixtures/dev-kit/hooks'
 import TopStakers from 'src/components/organisms/TopStakers'
 import TopSupporting from 'src/components/organisms/TopSupporting'
@@ -20,6 +24,7 @@ import Link from 'next/link'
 import { useProvider } from 'src/fixtures/wallet/hooks'
 import { useState } from 'react'
 import { useCurrency } from 'src/fixtures/currency/hooks'
+import { Pagination } from 'antd'
 
 type Props = {}
 
@@ -296,9 +301,24 @@ const AuthorAddressDetail = (_: Props) => {
   let { authorAddress } = router.query
   const author: string = typeof authorAddress == 'string' ? authorAddress : 'none'
   const { data: authorInformation } = useGetAuthorInformation(author)
-  const { data, loading } = useListPropertyMetaQuery({
+  const [paginationProps, setPaginationProps] = useState<{ offset: number; limit: number; currentPage: number }>({
+    offset: 0,
+    limit: 5,
+    currentPage: 0
+  })
+  const { data, loading, variables } = useListPropertyMetaQuery({
     variables: {
-      author
+      author,
+      offset: paginationProps.offset,
+      limit: paginationProps.limit
+    }
+  })
+
+  const currentPage = variables?.offset ? variables?.offset / 5 : 1
+
+  const { data: totalProperties } = useListOwnedPropertyMetaQuery({
+    variables: {
+      account_address: author
     }
   })
   const { accountAddress } = useProvider()
@@ -307,6 +327,16 @@ const AuthorAddressDetail = (_: Props) => {
   const { width } = useWindowDimensions()
   const isSelf = author.toLowerCase() === accountAddress?.toLowerCase()
   const [activeSection, setActiveSection] = useState<string>('about')
+
+  console.log('list property: ', data?.property_meta)
+
+  const handlePagination = useCallback((page: number) => {
+    console.log('pagination number: ', page)
+    setPaginationProps(oldPaginationProps => {
+      const newOffset = 5 * page
+      return { ...oldPaginationProps, offset: newOffset }
+    })
+  }, [])
 
   return (
     <>
@@ -390,6 +420,17 @@ const AuthorAddressDetail = (_: Props) => {
                 data?.property_meta?.map((property: { property: string; name: string }, index: number) => (
                   <Pool propertyAddress={property.property} propertyName={property.name} key={index} />
                 ))}
+              <div style={{ display: 'flex' }}>
+                <Pagination
+                  current={currentPage}
+                  showSizeChanger={false}
+                  size="default"
+                  responsive={true}
+                  defaultPageSize={5}
+                  onChange={handlePagination}
+                  total={totalProperties?.property_meta?.length}
+                />
+              </div>
             </div>
           </div>
           <div id="top-stakers" style={{ gridColumn: '2 / -1', width: 'auto' }}>
