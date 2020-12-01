@@ -14,6 +14,7 @@ interface Props {
   enableStake?: boolean
   enableWithdrawStakersReward?: boolean
   enableWithdrawHoldersReward?: boolean
+  isPool?: boolean
 }
 
 interface ModalStates {
@@ -45,7 +46,8 @@ export const AssetList = ({
   enableStake,
   enableWithdrawStakersReward,
   enableWithdrawHoldersReward,
-  loading = false
+  loading = false,
+  isPool
 }: Props) => {
   const [page, setPage] = useState<number>(0)
   const [modalStates, setModalStates] = useState<ModalStates>({ visible: false })
@@ -74,6 +76,7 @@ export const AssetList = ({
       {properties && properties.length > 0 ? (
         properties.map(item => (
           <Item
+            isPool={isPool}
             propertyAddress={item}
             key={item}
             enableStake={enableStake}

@@ -18,6 +18,21 @@ const Container = styled.div`
   flex-grow: 1;
 `
 
+const ResponsiveContainer = styled(Container)`
+  display: flex;
+  flex-grow: 1;
+  max-width: 690px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 1rem;
+  word-break: break-all;
+  flex-grow: 1;
+
+  @media (min-width: 1024px) {
+    width: 760px;
+  }
+`
+
 const AuthenticateNewAsset = (_: Props) => {
   const { market, property } = useRouter().query as { market: string; property: string }
 
@@ -28,9 +43,9 @@ const AuthenticateNewAsset = (_: Props) => {
         <H2>Authenticate a new asset</H2>
         <span>Confidentially verify your ownership with our Khaos oracle</span>
       </Headline>
-      <Container>
+      <ResponsiveContainer>
         <AuthForm market={market} property={property} />
-      </Container>
+      </ResponsiveContainer>
       <Footer />
     </div>
   )

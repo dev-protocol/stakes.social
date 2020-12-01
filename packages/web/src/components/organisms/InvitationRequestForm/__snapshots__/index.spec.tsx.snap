@@ -570,7 +570,7 @@ exports[`InvitationRequestForm Snapshot 1`] = `
           class="dhltmz-2 yBHac"
         >
           <div
-            style="display: flex; grid-column: 1/-1; justify-content: center;"
+            style="display: flex; grid-column: 1/-1; justify-content: flex-end;"
           >
             <div
               class="dhltmz-4 dscthD"

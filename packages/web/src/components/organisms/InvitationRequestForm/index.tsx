@@ -174,7 +174,7 @@ export const InvitationRequestForm = ({ market }: Props) => {
             </Form.Item>
           </Row>
           <Row>
-            <div style={{ display: 'flex', gridColumn: '1/-1', justifyContent: 'center' }}>
+            <div style={{ display: 'flex', gridColumn: '1/-1', justifyContent: 'flex-end' }}>
               <ButtonContainer>
                 <Submit type="submit" disabled={isLoading}>
                   Submit

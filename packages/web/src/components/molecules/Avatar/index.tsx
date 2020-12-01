@@ -14,7 +14,7 @@ const AvatarImage = styled.div`
   }
 `
 
-const AvatarPlaceholder = styled.div<{ size: string }>`
+export const AvatarPlaceholder = styled.div<{ size: string }>`
   width: ${props => `${props.size}px`};
   height: ${props => `${props.size}px`};
   border-radius: 90px;

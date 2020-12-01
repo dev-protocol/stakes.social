@@ -60,6 +60,20 @@ exports[`PoliciesList Snapshot 1`] = `
             </div>
           </p>
         </div>
+        <div
+          style="width: 100%; text-align: center;"
+        >
+          <a
+            class="ant-btn ant-btn-primary"
+            href="https://github.com/dev-protocol/DIPs/issues"
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            <span>
+              Access DIPs
+            </span>
+          </a>
+        </div>
       </div>
     </div>
   </div>

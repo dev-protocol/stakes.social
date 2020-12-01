@@ -2,6 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import { useListTopSupportingAccountQuery } from '@dev/graphql'
 import { useRouter } from 'next/router'
+import { Avatar } from 'src/components/molecules/Avatar'
 
 type Props = {
   accountAddress: string
@@ -49,11 +50,7 @@ const TopSupporting = ({ accountAddress }: Props) => {
         {data?.account_lockup &&
           data?.account_lockup.map(({ property_address, value }, index) => (
             <SupportSection key={index} onClick={() => router.push({ pathname: `/${property_address}` })}>
-              <img
-                width="100px"
-                height="100px"
-                src="https://res.cloudinary.com/haas-storage/image/upload/v1598963050/72989_gve7hf.jpg"
-              />
+              <Avatar size={'100'} accountAddress={accountAddress} />
               <AccountAddress>{property_address}</AccountAddress>
               <span>{`${(value / Math.pow(10, 18)).toFixed(0)}`}</span>
             </SupportSection>

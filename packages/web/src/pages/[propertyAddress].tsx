@@ -48,7 +48,7 @@ const Transact = styled.div`
 const Possession = styled(PossessionOutline)``
 
 const Wrap = styled.div`
-  margin: 2rem auto;
+  margin: 5rem auto;
   max-width: 1048px;
   @media (min-width: 768px) {
     margin: 5rem auto;
@@ -146,9 +146,11 @@ const Author = ({ propertyAddress }: { propertyAddress: string }) => {
     <AuthorContainer>
       {data && (
         <>
-          <h2>Created by {data?.name}</h2>
+          <h2>
+            Created by <Link href={`/author/${authorAddress}`}>{data?.name}</Link>
+          </h2>
           <Flex>
-            <Link passHref href="/profile/[accountAddress]" as={`/profile/${authorAddress}`}>
+            <Link passHref href="/author/[accountAddress]" as={`/author/${authorAddress}`}>
               <a>
                 <div style={{ width: '150px' }}>
                   <Avatar size={'150'} accountAddress={authorAddress} />

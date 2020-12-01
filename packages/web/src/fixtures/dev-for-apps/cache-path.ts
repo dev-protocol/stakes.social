@@ -8,5 +8,7 @@ export const SWRCachePath = {
   createAccount: () => `${StrapiBaseUrl}/accounts`,
   updateAccount: (id: number) => `${StrapiBaseUrl}/accounts/${id}`,
   uploadFile: () => `${StrapiBaseUrl}/upload`,
-  getProperty: (propertyAddress?: string) => `${StrapiBaseUrl}/properties?address=${propertyAddress}`
+  getProperty: (propertyAddress?: string) => `${StrapiBaseUrl}/properties?address=${propertyAddress}`,
+  createProperty: () => `${StrapiBaseUrl}/properties`,
+  updateProperty: (id: number) => `${StrapiBaseUrl}/properties/${id}`
 } as const

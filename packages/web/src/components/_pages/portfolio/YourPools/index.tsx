@@ -28,6 +28,7 @@ export const YourPools = ({ accountAddress }: Props) => {
 
   return (
     <AssetList
+      isPool={true}
       onPagination={onPagination}
       loading={loading}
       properties={properties}

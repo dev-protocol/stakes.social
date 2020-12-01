@@ -46,17 +46,19 @@ export type Image = ImageFormat & {
 
 export type NullableImage = Image | null
 
+export type PropertyLinks = {
+  github?: string
+  twitter?: string
+  website?: string
+}
+
 export interface Property {
   id: string
   name: string
   description: string
   cover_image: NullableImage
-  portrait: NullableImage
-  links?: {
-    github: string
-    twitter: string
-    website: string
-  }
+  avatar: NullableImage
+  links?: PropertyLinks
 }
 
 export interface UploadFile {
@@ -123,7 +125,8 @@ export const postAccount = (
   signature: string,
   address: string,
   name?: string,
-  biography?: string
+  biography?: string,
+  links?: ProfileLinks
 ): Promise<Account> =>
   fetch(`${StrapiBaseUrl}/accounts`, {
     method: 'POST',
@@ -133,6 +136,7 @@ export const postAccount = (
     body: JSON.stringify({
       name,
       biography,
+      links,
       address,
       signature,
       signMessage
@@ -145,7 +149,8 @@ export const putAccount = (
   address: string,
   id: number,
   name?: string,
-  biography?: string
+  biography?: string,
+  links?: ProfileLinks
 ): Promise<Account> =>
   fetch(`${StrapiBaseUrl}/accounts/${id}`, {
     method: 'PUT',
@@ -155,6 +160,7 @@ export const putAccount = (
     body: JSON.stringify({
       name,
       biography,
+      links,
       address,
       signature,
       signMessage
@@ -193,3 +199,50 @@ export const getProperty = (propertyAddress: string): Promise<Array<Property>> =
   fetch(`${StrapiBaseUrl}/properties?address=${propertyAddress}`)
     .then(res => res.json())
     .catch(() => [])
+
+export const postProperty = (
+  signMessage: string,
+  signature: string,
+  address: string,
+  name?: string,
+  description?: string,
+  links?: PropertyLinks
+): Promise<Property> =>
+  fetch(`${StrapiBaseUrl}/properties`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json; charset=utf-8'
+    },
+    body: JSON.stringify({
+      name,
+      description,
+      links,
+      address,
+      signature,
+      signMessage
+    })
+  }).then(res => res.json())
+
+export const putProperty = (
+  signMessage: string,
+  signature: string,
+  address: string,
+  id: number,
+  name?: string,
+  description?: string,
+  links?: PropertyLinks
+): Promise<Property> =>
+  fetch(`${StrapiBaseUrl}/properties/${id}`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json; charset=utf-8'
+    },
+    body: JSON.stringify({
+      name,
+      description,
+      links,
+      address,
+      signature,
+      signMessage
+    })
+  }).then(res => res.json())

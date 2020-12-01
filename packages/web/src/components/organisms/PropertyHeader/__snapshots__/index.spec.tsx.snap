@@ -12,74 +12,87 @@ exports[`PropertyHeader Snapshot 1`] = `
         authentication-id's Pool
       </h1>
       <div
-        class="sc-1bnntxi-2 gCPcUN"
+        class="sc-1bnntxi-2 brWFqW"
       >
         <div
-          style="display: flex; margin-bottom: 0px;"
+          class="sc-1bnntxi-5 iKltlT"
         >
-          <span
-            class="xnqjv4-0 iiUDCf"
-          >
-            N/A
-            %
-          </span>
           <div
-            class="ant-divider ant-divider-vertical sc-1bnntxi-3 cqhMcf"
-            role="separator"
-          />
-          APY Stakers
-          <div
-            class="ant-divider ant-divider-vertical ant-divider-with-text ant-divider-with-text-center sc-1bnntxi-3 cqhMcf"
-            role="separator"
+            class="sc-1bnntxi-4 fXFCBO"
           >
             <span
-              class="ant-divider-inner-text"
+              class="xnqjv4-0 iiUDCf"
             >
-              |
+              N/A
+              %
+            </span>
+            <div
+              class="sc-1bnntxi-3 VZTWB"
+            />
+            <span>
+              APY Stakers
             </span>
           </div>
-          <span
-            class="xnqjv4-0 iiUDCf"
+          <div
+            class="sc-1bnntxi-3 VZTWB"
           >
-             
-            N/A
-            %
-          </span>
+            |
+          </div>
           <div
-            class="ant-divider ant-divider-vertical sc-1bnntxi-3 cqhMcf"
-            role="separator"
-          />
-          APY Creators
-          <div
-            class="ant-divider ant-divider-vertical ant-divider-with-text ant-divider-with-text-center sc-1bnntxi-3 cqhMcf"
-            role="separator"
+            class="sc-1bnntxi-4 fXFCBO"
           >
             <span
-              class="ant-divider-inner-text"
+              class="xnqjv4-0 iiUDCf"
             >
-              |
+               
+              N/A
+              %
+            </span>
+            <div
+              class="sc-1bnntxi-3 VZTWB"
+            />
+            <span>
+              APY Creators
             </span>
           </div>
-          <span
-            class="xnqjv4-0 iiUDCf"
-          >
-             
-            N/A
-          </span>
           <div
-            class="ant-divider ant-divider-vertical sc-1bnntxi-3 cqhMcf"
-            role="separator"
-          />
-          Karma
+            class="sc-1bnntxi-3 VZTWB"
+          >
+            |
+          </div>
+          <div
+            class="sc-1bnntxi-4 fXFCBO"
+          >
+            <span
+              class="xnqjv4-0 iiUDCf"
+            >
+               
+              N/A
+            </span>
+            <div
+              class="sc-1bnntxi-3 VZTWB"
+            />
+            <span>
+              Karma
+            </span>
+          </div>
         </div>
-        <a
-          class="sc-17tlp0z-0 iZUfkf"
-          href="https://app.uniswap.org/#/swap?outputCurrency=0x5caf454ba92e6f2c929df14667ee360ed9fd5b26"
-          rel="noreferrer"
-          target="_blank"
+        <div
+          class="sc-1bnntxi-6 gYTABt"
         >
-          Buy DEV
-        </a>
+          <a
+            class="sc-17tlp0z-0 LBlkX"
+            href="https://app.uniswap.org/#/swap?outputCurrency=0x5caf454ba92e6f2c929df14667ee360ed9fd5b26"
+            rel="noreferrer"
+            target="_blank"
+          >
+            <span
+              style="color: white;"
+            >
+              Buy DEV
+            </span>
+          </a>
+        </div>
       </div>
     </div>
   </div>
