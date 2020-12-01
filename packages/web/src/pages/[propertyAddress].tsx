@@ -150,7 +150,7 @@ const Author = ({ propertyAddress }: { propertyAddress: string }) => {
             Created by <Link href={`/author/${authorAddress}`}>{data?.name}</Link>
           </h2>
           <Flex>
-            <Link passHref href="/profile/[accountAddress]" as={`/profile/${authorAddress}`}>
+            <Link passHref href="/author/[accountAddress]" as={`/author/${authorAddress}`}>
               <a>
                 <div style={{ width: '150px' }}>
                   <Avatar size={'150'} accountAddress={authorAddress} />
