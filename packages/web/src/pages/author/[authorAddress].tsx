@@ -18,6 +18,7 @@ import { Links } from '../../fixtures/_pages/ProfileHeader/Links'
 import { blueGradient } from 'src/styles/gradient'
 import Link from 'next/link'
 import { useProvider } from 'src/fixtures/wallet/hooks'
+import { useState } from 'react'
 
 type Props = {}
 
@@ -143,20 +144,6 @@ const MutedSpan = styled.span`
   font-size: 0.9em;
 `
 
-// const StakeButton = styled.button<{ bgColor?: string }>`
-//   padding: 6px 24px;
-//   border-radius: 9px;
-//   border: none;
-//   background-color: #2f80ed;
-//   color: white;
-
-//   cursor: pointer;
-//   :hover {
-//     transition: ease-in-out 0.2s;
-//     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-//   }
-// `
-
 const Card = styled.div`
   width: auto;
   border: solid 1px #f0f0f0;
@@ -199,16 +186,8 @@ const AuthorLinks = styled.div`
     text-decoration: none;
     color: black;
 
-    /* linear-gradient(to right, #1ac9fc, #2f80ed); */
     border-bottom-color: #1ac9fc;
     margin-left: 0.8em;
-  }
-
-  a::after {
-    content: '';
-    display: block;
-    height: 5px;
-    background: linear-gradient(to right, #1ac9fc, #2f80ed);
   }
 
   @media (min-width: 768px) {
@@ -297,6 +276,16 @@ const EditButton = styled.a`
   }
 `
 
+const Section = styled.a<{ activeSection: string; section: string }>`
+  ::after {
+    content: '';
+    display: block;
+    height: 5px;
+    background: ${props =>
+      props.activeSection === props.section ? 'linear-gradient(to right, #1ac9fc, #2f80ed)' : 'none'};
+  }
+`
+
 const AuthorAddressDetail = (_: Props) => {
   const router = useRouter()
   let { authorAddress } = router.query
@@ -312,6 +301,7 @@ const AuthorAddressDetail = (_: Props) => {
   const { data: dataAuthor } = useGetAccount(author)
   const { width } = useWindowDimensions()
   const isSelf = author.toLowerCase() === accountAddress?.toLowerCase()
+  const [activeSection, setActiveSection] = useState<string>('about')
 
   return (
     <>
@@ -344,10 +334,38 @@ const AuthorAddressDetail = (_: Props) => {
             </p>
           </div>
           <AuthorLinks>
-            <a href="#about">About</a>
-            <a href="#pools">Pools</a>
-            <a href="#top-stakers">Stakers</a>
-            <a href="#supporting">Supporting</a>
+            <Section
+              onClick={() => setActiveSection('about')}
+              section="about"
+              activeSection={activeSection}
+              href="#about"
+            >
+              About
+            </Section>
+            <Section
+              onClick={() => setActiveSection('pools')}
+              section="pools"
+              activeSection={activeSection}
+              href="#pools"
+            >
+              Pools
+            </Section>
+            <Section
+              onClick={() => setActiveSection('stakers')}
+              section="stakers"
+              activeSection={activeSection}
+              href="#top-stakers"
+            >
+              Stakers
+            </Section>
+            <Section
+              onClick={() => setActiveSection('supporting')}
+              section="supporting"
+              activeSection={activeSection}
+              href="#supporting"
+            >
+              Supporting
+            </Section>
           </AuthorLinks>
         </TransformedGrid>
       </Wrap>
