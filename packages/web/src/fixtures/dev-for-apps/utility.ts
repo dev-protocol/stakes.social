@@ -22,7 +22,6 @@ export interface Account {
   biography: string
   portrait: Image
   links: NullableProfileLinks
-  cover_images: Image[]
 }
 
 export type ImageFormat = {

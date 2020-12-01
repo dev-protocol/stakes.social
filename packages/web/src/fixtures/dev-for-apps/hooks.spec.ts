@@ -8,7 +8,6 @@ import {
   useCreateProperty,
   useUpdateProperty,
   useUploadAccountAvatar,
-  useUploadAccountCoverImages,
   useUploadPropertyCoverImages
 } from './hooks'
 import { postPropertyTags, postAccount, putAccount, postProperty, putProperty } from './utility'
@@ -111,45 +110,6 @@ describe('dev-for-apps hooks with strapi for account', () => {
         error
       }))
       const { result } = renderHook(() => useUploadAccountAvatar('0x01234567890'))
-      act(() => {
-        result.current.upload({})
-      })
-      expect(result.current.isLoading).toBe(false)
-      expect(result.current.error?.message).toBe(errorMessage)
-    })
-  })
-
-  describe('useUploadAccountCoverImages', () => {
-    test('success post file', async () => {
-      const mockHandler = jest.fn().mockImplementation(jest.fn().mockImplementation(() => Promise.resolve()))
-      const mockMutate = jest.fn().mockImplementation(() => {})
-      ;(useGetAccount as jest.Mock).mockImplementation(() => ({ data: { id: 123 }, mutate: mockMutate }))
-      ;(useUploadFile as jest.Mock).mockImplementation(() => ({
-        postUploadFileHandler: mockHandler,
-        isLoading: false
-      }))
-      const { result } = renderHook(() => useUploadAccountCoverImages('0x01234567890'))
-      await act(() => {
-        result.current.upload('image data')
-      })
-      expect(mockHandler.mock.calls[0][0]).toBe(123)
-      expect(mockHandler.mock.calls[0][1]).toBe('Account')
-      expect(mockHandler.mock.calls[0][2]).toBe('cover_images')
-      expect(mockHandler.mock.calls[0][3]).toBe('image data')
-      expect(mockHandler.mock.calls[0][4]).toBe('assets/0x01234567890/cover_images')
-      expect(mockMutate.mock.calls.length).toBe(1)
-    })
-
-    test('failure post file', async () => {
-      const errorMessage = 'error'
-      const error = new Error(errorMessage)
-      ;(useGetAccount as jest.Mock).mockImplementation(() => ({ data: { id: 123 }, mutate: () => {} }))
-      ;(useUploadFile as jest.Mock).mockImplementation(() => ({
-        postUploadFileHandler: () => Promise.resolve(),
-        isLoading: false,
-        error
-      }))
-      const { result } = renderHook(() => useUploadAccountCoverImages('0x01234567890'))
       act(() => {
         result.current.upload({})
       })

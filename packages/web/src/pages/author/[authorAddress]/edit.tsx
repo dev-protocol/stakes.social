@@ -8,8 +8,7 @@ import {
   useCreateAccount,
   useGetAccount,
   useUpdateAccount,
-  useUploadAccountAvatar,
-  useUploadAccountCoverImages
+  useUploadAccountAvatar
 } from 'src/fixtures/dev-for-apps/hooks'
 import { Button, Divider, Form, Input, Result, Skeleton, Upload } from 'antd'
 import { whenDefined } from 'src/fixtures/utility'
@@ -109,30 +108,6 @@ const AvatarUpdateForm = ({ accountAddress }: { accountAddress: string }) => {
   )
 }
 
-const CoverImagesUpdateForm = ({ accountAddress }: { accountAddress: string }) => {
-  const { data } = useGetAccount(accountAddress)
-  const [fileList, setFileList] = useState<UploadFile[] | undefined>()
-  const { upload } = useUploadAccountCoverImages(accountAddress)
-  useEffect(() => {
-    setFileList(whenDefined(data?.cover_images, x => x.map(y => apiDataToUploadFile(y))))
-  }, [setFileList, data])
-
-  const handleChange = (info: UploadChangeParam<UploadFile>) => {
-    if (info.event) {
-      setFileList([...(fileList ?? []), { ...info.file, status: 'uploading' }])
-      upload(info.file.originFileObj)
-    }
-  }
-
-  return (
-    <Upload name="portrait" multiple={false} listType="picture-card" fileList={fileList} onChange={handleChange}>
-      <div>
-        <p>Upload</p>
-      </div>
-    </Upload>
-  )
-}
-
 const AuthorEdit = (_: Props) => {
   const { accountAddress } = useProvider()
   const { authorAddress } = useRouter().query as { authorAddress: string }
@@ -159,9 +134,6 @@ const AuthorEdit = (_: Props) => {
               <Divider />
               <h2>Avatar</h2>
               <AvatarUpdateForm accountAddress={authorAddress} />
-              <Divider />
-              <h2>Cover Images</h2>
-              <CoverImagesUpdateForm accountAddress={authorAddress} />
             </>
           ) : (
             <Result
