@@ -17,6 +17,7 @@ exports[`ConnectedApps Snapshot 1`] = `
             height="1em"
             viewBox="0 0 72 72"
             width="100%"
+            xmlns="http://www.w3.org/2000/svg"
           >
             <path
               d="M27 35L12.5 60h29L27 35"

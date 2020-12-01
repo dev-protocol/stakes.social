@@ -11,9 +11,7 @@ import { useConnectWallet, useProvider } from 'src/fixtures/wallet/hooks'
 import { useRouter } from 'next/router'
 import { AccountBtn, Connecting } from 'src/components/atoms/Navigation'
 
-interface Props {
-  colorSchema?: 'black' | 'white'
-}
+interface Props {}
 
 const HeaderContainer = styled.header`
   background-color: black;
@@ -24,16 +22,8 @@ const Top = styled.header`
   display: grid;
   grid-template-columns: 1fr 2fr;
   border-bottom: 1px solid black;
-
-  #headerlogo {
-    margin-left: 1em;
-    width: 9rem;
-    height: auto;
-    @media (max-width: 768px) {
-      margin-left: 0px;
-    }
-  }
 `
+
 const Logo = styled.div`
   display: flex;
   margin-right: 64px;
@@ -42,7 +32,7 @@ const Logo = styled.div`
     position: absolute;
     left: 50%;
     transform: translate(-50%, 50%);
-    padding-top: 2px;
+    margin-top: -0.3em;
     margin-right: 0;
   }
 `
@@ -79,7 +69,7 @@ const RepsonsiveNav = styled.div`
   }
 `
 
-export const Header = ({ colorSchema = 'white' }: Props = {}) => {
+export const Header = (_: Props = {}) => {
   const router = useRouter()
   const [isMenuOpen, setMenuOpen] = useState(false)
   const { isConnected, connect, isConnecting } = useConnectWallet()
@@ -100,7 +90,7 @@ export const Header = ({ colorSchema = 'white' }: Props = {}) => {
         <ResponsiveWrap>
           <Top>
             <Logo>
-              <BrandLogo colorSchema={colorSchema} props={{ height: undefined }}></BrandLogo>
+              <BrandLogo />
             </Logo>
             <RepsonsiveNav>
               <Navigation isMenuOpen={isMenuOpen} handleMenuOpen={setMenuOpen} />
