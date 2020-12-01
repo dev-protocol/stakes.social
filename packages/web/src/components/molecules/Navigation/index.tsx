@@ -33,7 +33,7 @@ export const Navigations = [
   {
     key: 'governance',
     label: 'Govern',
-    pathname: '/policy'
+    pathname: '/gov'
   },
   {
     key: 'dashboard',
