@@ -241,7 +241,7 @@ const PropertyAddressDetail = (_: Props) => {
                 <AssetListItem key={index}>{asset}</AssetListItem>
               ))}
               {propertyInformation?.author?.address === loggedInWallet && (
-                <Link href={'/auth/[property]'} as={`/auth/${propertyAddress}`}>
+                <Link href={'/create/[property]'} as={`/create/${propertyAddress}`}>
                   <AddAsset>
                     <PlusOutlined />
                     <span>Add asset</span>

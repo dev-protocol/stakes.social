@@ -63,7 +63,7 @@ export const CreateOrAuthenticateProperty = (_: Props) => {
         </Link>
 
         <Span style={{ margin: '1em 0', alignSelf: 'center', color: '#9F9F9F' }}>Or</Span>
-        <Link href={'/auth/associate/github'} passHref>
+        <Link href={'/create/associate/github'} passHref>
           <A>Authenticate an existing project</A>
         </Link>
       </div>
