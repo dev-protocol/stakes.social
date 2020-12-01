@@ -112,7 +112,6 @@ exports[`UserProfile Snapshot 1`] = `
                           >
                             <svg
                               aria-hidden="true"
-                              class=""
                               data-icon="plus"
                               fill="currentColor"
                               focusable="false"
