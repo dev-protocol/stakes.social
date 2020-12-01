@@ -4,6 +4,8 @@ import { Menu } from 'antd'
 export const NavMenu = styled(Menu)`
   color: white;
 
+  width: fit-content;
+
   .ant-menu-item-selected {
     background: -moz-linear-gradient(top, #639fff 1%, #2187ed 100%);
     background: -webkit-linear-gradient(top, #639fff 1%, #2187ed 100%);
@@ -12,37 +14,35 @@ export const NavMenu = styled(Menu)`
 `
 export const NavMenuItem = styled(NavMenu.Item)`
   background-color: black;
-  a.link:hover {
-    background-color: yellow;
-  }
-  margin-right: 4em;
+  margin-left: 2em;
 `
 
 export const AccountBtn = styled.div`
   color: white;
   position: absolute;
+  top: 0px;
+  right: 20px;
   font-size: 1.1rem;
   height: 47px;
   cursor: pointer;
   line-height: 45px;
   padding: 0px 15px;
-  right: 0px;
 
   &:hover {
     background: #272727;
   }
 
   @media (max-width: 768px) {
+    right: 5px;
     padding: 0px 10px;
-
-    .hideOnSmall {
-      display: none;
-    }
+    transform: translateY(1px);
   }
 `
 
 export const Connecting = styled.div`
   color: white;
+  font-size: 0.8em;
+
   @keyframes blink {
     0% {
       opacity: 0.7;

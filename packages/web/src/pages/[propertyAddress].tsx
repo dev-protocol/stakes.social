@@ -48,7 +48,7 @@ const Transact = styled.div`
 const Possession = styled(PossessionOutline)``
 
 const Wrap = styled.div`
-  margin: 2rem auto;
+  margin: 5rem auto;
   max-width: 1048px;
   @media (min-width: 768px) {
     margin: 5rem auto;
@@ -146,9 +146,11 @@ const Author = ({ propertyAddress }: { propertyAddress: string }) => {
     <AuthorContainer>
       {data && (
         <>
-          <h2>Created by {data?.name}</h2>
+          <h2>
+            Created by <Link href={`/author/${authorAddress}`}>{data?.name}</Link>
+          </h2>
           <Flex>
-            <Link passHref href="/profile/[accountAddress]" as={`/profile/${authorAddress}`}>
+            <Link passHref href="/author/[accountAddress]" as={`/author/${authorAddress}`}>
               <a>
                 <div style={{ width: '150px' }}>
                   <Avatar size={'150'} accountAddress={authorAddress} />
@@ -214,14 +216,20 @@ const PropertyAddressDetail = (_: Props) => {
             <ReactMarkdown>{dataProperty ? dataProperty.description : ''}</ReactMarkdown>
             <H3>Links</H3>
             <LinksArea>
-              {dataProperty?.links.github && <Github link={dataProperty?.links.github} />}
-              {dataProperty?.links.twitter && <Twitter link={dataProperty?.links.twitter} />}
-              {dataProperty?.links.website && (
+              {dataProperty?.links?.github && (
+                <Github href={dataProperty?.links.github} target="_blank" rel="noopener noreferrer" />
+              )}
+              {dataProperty?.links?.twitter && (
+                <Twitter href={dataProperty?.links.twitter} target="_blank" rel="noopener noreferrer" />
+              )}
+              {dataProperty?.links?.website && (
                 <Button
                   style={{ marginLeft: '20px', padding: 3, width: '38px', height: '38px' }}
                   shape="circle"
                   icon={<LinkOutlined />}
                   href={dataProperty?.links.website}
+                  target="_blank"
+                  rel="noopener noreferrer"
                 />
               )}
             </LinksArea>
@@ -233,7 +241,7 @@ const PropertyAddressDetail = (_: Props) => {
                 <AssetListItem key={index}>{asset}</AssetListItem>
               ))}
               {propertyInformation?.author?.address === loggedInWallet && (
-                <Link href={'/auth/[property]'} as={`/auth/${propertyAddress}`}>
+                <Link href={'/create/[property]'} as={`/create/${propertyAddress}`}>
                   <AddAsset>
                     <PlusOutlined />
                     <span>Add asset</span>

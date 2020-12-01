@@ -1,15 +1,25 @@
 import { useState } from 'react'
 import { SWRCachePath } from './cache-path'
-import useSWR, { mutate } from 'swr'
+import useSWR from 'swr'
 import { message } from 'antd'
-import { UnwrapFunc, whenDefined } from '../utility'
-import { getPropertyTags, postPropertyTags, postAccount, putAccount, getProperty } from './utility'
+import { UnwrapFunc } from '../utility'
+import {
+  getPropertyTags,
+  postPropertyTags,
+  postAccount,
+  putAccount,
+  postProperty,
+  putProperty,
+  ProfileLinks,
+  PropertyLinks
+} from './utility'
 import { signWithCache } from 'src/fixtures/wallet/utility'
 import { useProvider } from '../wallet/hooks'
 import { useUploadFile } from './functions/useUploadFile'
 import { useGetAccount } from './functions/useGetAccount'
+import { useGetProperty } from './functions/useGetProperty'
 
-export { useUploadFile, useGetAccount }
+export { useUploadFile, useGetAccount, useGetProperty }
 
 export const useGetPropertyTags = (propertyAddress: string) => {
   const shouldFetch = propertyAddress !== ''
@@ -70,7 +80,11 @@ export const useCreateAccount = (walletAddress: string) => {
     shouldFetch ? SWRCachePath.createAccount() : null
   )
 
-  const postAccountHandler = async (name?: string, biography?: string) => {
+  const postAccountHandler = async (name?: string, biography?: string, website?: string, github?: string) => {
+    const links: ProfileLinks = {
+      github,
+      website
+    }
     const signMessage = `create accout: ${name}, ${biography}`
     const { signature, message: signedMessage } = await signWithCache(web3, signMessage)
     if (!signature || !signedMessage) {
@@ -81,7 +95,7 @@ export const useCreateAccount = (walletAddress: string) => {
     message.loading({ content: 'update account data...', duration: 0, key })
 
     await mutate(
-      postAccount(signedMessage, signature, walletAddress, name, biography)
+      postAccount(signedMessage, signature, walletAddress, name, biography, links)
         .then(result => {
           message.success({ content: 'success update account data', key })
           return result
@@ -109,7 +123,11 @@ export const useUpdateAccount = (id: number, walletAddress: string) => {
     shouldFetch ? SWRCachePath.updateAccount(id) : null
   )
 
-  const putAccountHandler = async (name?: string, biography?: string) => {
+  const putAccountHandler = async (name?: string, biography?: string, website?: string, github?: string) => {
+    const links: ProfileLinks = {
+      github,
+      website
+    }
     const signMessage = `update accout: ${name}, ${biography}`
     const { signature, message: signedMessage } = await signWithCache(web3, signMessage)
     if (!signature || !signedMessage) {
@@ -120,7 +138,7 @@ export const useUpdateAccount = (id: number, walletAddress: string) => {
     message.loading({ content: 'update account data...', duration: 0, key })
 
     await mutate(
-      putAccount(signedMessage, signature, walletAddress, id, name, biography)
+      putAccount(signedMessage, signature, walletAddress, id, name, biography, links)
         .then(result => {
           message.success({ content: 'success update account data', key })
           return result
@@ -136,15 +154,6 @@ export const useUpdateAccount = (id: number, walletAddress: string) => {
   }
 
   return { data, putAccountHandler, isLoading }
-}
-
-export const useGetProperty = (propertyAddress?: string) => {
-  const { data, error } = useSWR<undefined | UnwrapFunc<typeof getProperty>, Error>(
-    SWRCachePath.getProperty(propertyAddress),
-    () => whenDefined(propertyAddress, x => getProperty(x)),
-    { onError: err => message.error(err.message) }
-  )
-  return { data: data ? data[0] : data, error, mutate }
 }
 
 export const useUploadAccountAvatar = (accountAddress: string) => {
@@ -164,6 +173,106 @@ export const useUploadAccountAvatar = (accountAddress: string) => {
   return { upload, isLoading, error }
 }
 
+export const useCreateProperty = (walletAddress: string) => {
+  const key = 'useCreateProperty'
+  const { web3 } = useProvider()
+  const [isLoading, setIsLoading] = useState<boolean>(false)
+
+  const shouldFetch = walletAddress !== ''
+  const { data, mutate } = useSWR<UnwrapFunc<typeof postProperty>, Error>(
+    shouldFetch ? SWRCachePath.createProperty() : null
+  )
+
+  const postPropertyHandler = async (
+    name?: string,
+    description?: string,
+    website?: string,
+    twitter?: string,
+    github?: string
+  ) => {
+    const links: PropertyLinks = {
+      github,
+      twitter,
+      website
+    }
+    const signMessage = `create property: ${name}, ${description}`
+    const { signature, message: signedMessage } = await signWithCache(web3, signMessage)
+    if (!signature || !signedMessage) {
+      return
+    }
+
+    setIsLoading(true)
+    message.loading({ content: 'update property data...', duration: 0, key })
+
+    await mutate(
+      postProperty(signedMessage, signature, walletAddress, name, description, links)
+        .then(result => {
+          message.success({ content: 'success update property data', key })
+          return result
+        })
+        .catch(err => {
+          message.error({ content: err.message, key })
+          return Promise.reject(data)
+        }),
+      false
+    )
+
+    setIsLoading(false)
+  }
+
+  return { data, postPropertyHandler, isLoading }
+}
+
+export const useUpdateProperty = (id: number, walletAddress: string) => {
+  const key = 'useUpdateProperty'
+  const { web3 } = useProvider()
+  const [isLoading, setIsLoading] = useState<boolean>(false)
+
+  const shouldFetch = id !== 0
+  const { data, mutate } = useSWR<UnwrapFunc<typeof putProperty>, Error>(
+    shouldFetch ? SWRCachePath.updateProperty(id) : null
+  )
+
+  const putPropertyHandler = async (
+    name?: string,
+    description?: string,
+    website?: string,
+    twitter?: string,
+    github?: string
+  ) => {
+    const links: PropertyLinks = {
+      github,
+      twitter,
+      website
+    }
+    const signMessage = `update property: ${name}, ${description}`
+    const { signature, message: signedMessage } = await signWithCache(web3, signMessage)
+    if (!signature || !signedMessage) {
+      return
+    }
+
+    setIsLoading(true)
+    message.loading({ content: 'update property data...', duration: 0, key })
+
+    await mutate(
+      putProperty(signedMessage, signature, walletAddress, id, name, description, links)
+        .then(result => {
+          message.success({ content: 'success update property data', key })
+          return result
+        })
+        .catch(err => {
+          message.error({ content: err.message, key })
+          return Promise.reject(data)
+        }),
+      false
+    )
+
+    setIsLoading(false)
+  }
+
+  return { data, putPropertyHandler, isLoading }
+}
+
 export const useUploadAccountCoverImages = (accountAddress: string) => {
   const { data: account, mutate } = useGetAccount(accountAddress)
   const { postUploadFileHandler, isLoading, error } = useUploadFile(accountAddress)
@@ -173,6 +282,23 @@ export const useUploadAccountCoverImages = (accountAddress: string) => {
     const ref = 'Account'
     const field = 'cover_images'
     const path = `assets/${accountAddress}/${field}`
+    return postUploadFileHandler(refId, ref, field, file, path).then(x => {
+      mutate()
+      return x
+    })
+  }
+  return { upload, isLoading, error }
+}
+
+export const useUploadPropertyCoverImages = (propertyAddress: string) => {
+  const { data: property, mutate } = useGetProperty(propertyAddress)
+  const { postUploadFileHandler, isLoading, error } = useUploadFile(propertyAddress)
+
+  const upload = async (file: any) => {
+    const refId = Number(property?.id)
+    const ref = 'Property'
+    const field = 'cover_image'
+    const path = `assets/${propertyAddress}/${field}`
     return postUploadFileHandler(refId, ref, field, file, path).then(x => {
       mutate()
       return x

@@ -7,6 +7,8 @@ import { blueGradient } from 'src/styles/gradient'
 import { boxShahowWithOnHover } from 'src/styles/boxShahow'
 import Input from 'src/components/molecules/Input'
 import { InfoCircleOutlined, CodeOutlined, DeploymentUnitOutlined } from '@ant-design/icons'
+import { useProvider } from 'src/fixtures/wallet/hooks'
+import { AuthorSelector } from '../PropertySelectForm/AuthorSelector'
 
 const NpmMarketContractAddress = '0x88c7B1f41DdE50efFc25541a2E0769B887eB2ee7'
 
@@ -17,6 +19,8 @@ export interface Props {
 
 const Container = styled.div`
   display: grid;
+  width: 100%;
+  align-self: center;
   grid-gap: 1rem;
 `
 
@@ -59,12 +63,14 @@ const InfoContainer = styled.div`
   }
 `
 
-export const AuthForm = ({ market, property }: Props) => {
+export const AuthForm = ({ market }: Props) => {
   const [metrics, setMetrics] = useState<string>('')
   const { postSignGitHubMarketAssetHandler, isLoading } = usePostSignGitHubMarketAsset()
   const { authenticate } = useAuthenticate()
   const { createAndAuthenticate } = useCreateAndAuthenticate()
+  const { accountAddress } = useProvider()
   const onFinish = async (values: any) => {
+    console.log('values: ', values)
     const authRequestData: string[] =
       market === NpmMarketContractAddress
         ? Object.values(values)
@@ -75,8 +81,8 @@ export const AuthForm = ({ market, property }: Props) => {
             return [repository, khaos.publicSignature || '']
           })()
 
-    const metrics = await (property
-      ? authenticate(market, property, authRequestData)
+    const metrics = await (values.propertyAddress
+      ? authenticate(market, values.propertyAddress, authRequestData)
       : ((name, symbol) => createAndAuthenticate(name, symbol, market, authRequestData))(
           values.propertyName,
           values.propertySymbol
@@ -87,18 +93,28 @@ export const AuthForm = ({ market, property }: Props) => {
     }
   }
 
+  const [form] = Form.useForm()
+
+  const handleSelectChange = (propertyAddress: string) => {
+    form.setFieldsValue({
+      propertyAddress
+    })
+  }
+
+  console.log('form value:?', form.getFieldValue('propertyAddress'))
+
   return (
     <Container>
       {metrics ? (
         <Result
           status="success"
           title="Successfully Authenticated Your Asset!"
-          subTitle="Viewing a new asset will take dozens of minutes, but you can also check it out right away on Etherscan."
+          subTitle="It might take a while until your new asset will appear on stakes.social, but you can already check it out on Etherscan."
           extra={[
             <Button key="etherscan" href={`https://etherscan.io/address/${metrics}`}>
               Etherscan
             </Button>,
-            <Button key="property" href={`/${property}`} type="primary">
+            <Button key="property" href={`/${metrics}`} type="primary">
               Go the Property
             </Button>
           ]}
@@ -106,7 +122,17 @@ export const AuthForm = ({ market, property }: Props) => {
       ) : (
         <Form name="basic" initialValues={{ remember: true }} onFinish={onFinish}>
           <Row>
-            <Span>Project name</Span>
+            <Span>Project:</Span>
+            <Form.Item
+              name="propertyAddress"
+              rules={[{ required: true, message: 'Please input GitHub Repository name (e.g., your/awesome-repos)' }]}
+              key="propertyAddress"
+            >
+              <AuthorSelector onChange={handleSelectChange} label="propertyAddress" author={accountAddress} />
+            </Form.Item>
+          </Row>
+          <Row>
+            <Span>Project name:</Span>
             <Form.Item
               name="projectName"
               rules={[{ required: true, message: 'Please input GitHub Repository name (e.g., your/awesome-repos)' }]}
@@ -117,7 +143,7 @@ export const AuthForm = ({ market, property }: Props) => {
           </Row>
 
           <Row>
-            <Span>Personal Access Token</Span>
+            <Span>Personal Access Token:</Span>
             <Form.Item
               name="personalAccessToken"
               rules={[{ required: true, message: 'Please input PAT.' }]}
@@ -127,22 +153,26 @@ export const AuthForm = ({ market, property }: Props) => {
             </Form.Item>
           </Row>
           <div style={{ display: 'flex', alignItems: 'center', marginBottom: '1em' }}>
-            <InfoContainer>
-              <InfoCircleOutlined />
-            </InfoContainer>
-            <div style={{ fontSize: '0.9em' }}>
-              <div>
-                Please{' '}
-                <a href="https://github.com/settings/tokens/new" target="_blank" rel="noreferrer">
-                  create a Personal Access Token without any scopes.
-                </a>
-              </div>
-              <div>
-                The PAT is confidentially authenticated using the Khaos oracle(
-                <a href="https://github.com/dev-protocol/khaos" target="_blank" rel="noreferrer">
-                  *
-                </a>
-                ).
+            <div style={{ display: 'flex', alignItems: 'center', alignSelf: 'flex-end' }}>
+              <InfoContainer>
+                <InfoCircleOutlined />
+              </InfoContainer>
+              <div style={{ fontSize: '0.9em' }}>
+                <div>
+                  Please{' '}
+                  <a href="https://github.com/settings/tokens/new" target="_blank" rel="noreferrer">
+                    <span style={{ wordBreak: 'normal' }}>create a Personal Access Token without any scopes.</span>
+                  </a>
+                </div>
+                <div>
+                  <span style={{ wordBreak: 'normal' }}>
+                    The PAT is confidentially authenticated using the Khaos oracle(
+                  </span>
+                  <a href="https://github.com/dev-protocol/khaos" target="_blank" rel="noreferrer">
+                    *
+                  </a>
+                  ).
+                </div>
               </div>
             </div>
           </div>

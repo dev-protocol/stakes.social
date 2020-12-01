@@ -4,7 +4,6 @@ import { EarlyAccess } from 'src/components/atoms/EarlyAccess'
 import { Headline } from 'src/components/atoms/Headline'
 import { Header } from 'src/components/organisms/Header'
 import { Container } from 'src/components/atoms/Container'
-import { useProvider } from 'src/fixtures/wallet/hooks'
 import {
   useCreateAccount,
   useGetAccount,
@@ -12,13 +11,17 @@ import {
   useUploadAccountAvatar,
   useUploadAccountCoverImages
 } from 'src/fixtures/dev-for-apps/hooks'
-import { Button, Divider, Form, Input, Upload } from 'antd'
+import { Button, Divider, Form, Input, Result, Skeleton, Upload } from 'antd'
 import { whenDefined } from 'src/fixtures/utility'
-import { NotConnectedAndEmpty } from 'src/components/atoms/NotConnectedAndEmpty'
 import { UploadChangeParam, UploadFile } from 'antd/lib/upload/interface'
 import { useEffect } from 'react'
 import { Image } from 'src/fixtures/dev-for-apps/utility'
 import SkeletonInput from 'antd/lib/skeleton/Input'
+import { useRouter } from 'next/router'
+import { useListOwnedPropertyMetaQuery } from '@dev/graphql'
+import { useProvider } from 'src/fixtures/wallet/hooks'
+import Link from 'next/link'
+import { FullpageWrap } from 'src/components/atoms/FullpageWrap'
 
 type InitialProps = {}
 type Props = {} & InitialProps
@@ -33,38 +36,47 @@ const apiDataToUploadFile = ({ hash: uid, url, name, size, mime: type }: Image):
 })
 
 const ProfileUpdateForm = ({ accountAddress }: { accountAddress: string }) => {
-  const { data } = useGetAccount(accountAddress)
+  const { data, found } = useGetAccount(accountAddress)
   const { postAccountHandler: createAccount, isLoading } = useCreateAccount(accountAddress)
   const { putAccountHandler: updateAccount } = useUpdateAccount(Number(data?.id), accountAddress)
-  const isExists = Boolean(data)
   const handleSubmit = useCallback(
-    (displayName: string, biography: string) => {
-      const handler = isExists ? updateAccount : createAccount
-      handler(displayName, biography)
+    (displayName: string, biography: string, website: string, github: string) => {
+      const handler = found ? updateAccount : createAccount
+      handler(displayName, biography, website, github)
     },
-    [createAccount, updateAccount, isExists]
+    [createAccount, updateAccount, found]
   )
 
   return (
     <Form
       layout="vertical"
-      onFinish={({ displayName, biography }: { displayName: string; biography: string }) =>
-        handleSubmit(displayName, biography)
-      }
+      onFinish={({
+        displayName,
+        biography,
+        website,
+        github
+      }: {
+        displayName: string
+        biography: string
+        website: string
+        github: string
+      }) => handleSubmit(displayName, biography, website, github)}
     >
-      <Form.Item label="Dispaly Name" name="displayName">
-        {data === undefined ? (
-          <SkeletonInput />
-        ) : (
-          <Input placeholder="Enter the new display name" defaultValue={data.name} />
-        )}
+      <Form.Item label="Display Name" name="displayName">
+        {found ? <Input placeholder="Enter the new display name" defaultValue={data?.name} /> : <SkeletonInput />}
       </Form.Item>
       <Form.Item label="Biography" name="biography">
-        {data === undefined ? (
-          <SkeletonInput />
+        {found ? (
+          <Input.TextArea placeholder="Enter the biography" defaultValue={data?.biography} />
         ) : (
-          <Input.TextArea placeholder="Enter the biography" defaultValue={data.biography} />
+          <SkeletonInput />
         )}
+      </Form.Item>
+      <Form.Item label="Website" name="website">
+        {found ? <Input placeholder="your website url" defaultValue={data?.links?.website} /> : <SkeletonInput />}
+      </Form.Item>
+      <Form.Item label="GitHub" name="github">
+        {found ? <Input placeholder="your github account url" defaultValue={data?.links?.github} /> : <SkeletonInput />}
       </Form.Item>
       <Button type="primary" htmlType="submit" loading={isLoading} disabled={isLoading}>
         Save
@@ -121,31 +133,53 @@ const CoverImagesUpdateForm = ({ accountAddress }: { accountAddress: string }) =
   )
 }
 
-const ProfileSettings = (_: Props) => {
+const AuthorEdit = (_: Props) => {
   const { accountAddress } = useProvider()
+  const { authorAddress } = useRouter().query as { authorAddress: string }
+  const { data, loading } = useListOwnedPropertyMetaQuery({
+    variables: { account_address: authorAddress, offset: 0, limit: 1 }
+  })
+  const isAuthor = Boolean(data?.property_meta?.length) && accountAddress?.toLowerCase() === authorAddress.toLowerCase()
 
   return (
-    <>
-      <Header />
-      <EarlyAccess />
-      <Headline height={300}>
-        <h1>Profile settings</h1>
-      </Headline>
-      {whenDefined(accountAddress, account => (
+    <FullpageWrap>
+      <main>
+        <Header />
+        <EarlyAccess />
+        <Headline height={300}>
+          <h1>Profile settings</h1>
+        </Headline>
         <Container>
-          <h2>Basic</h2>
-          <ProfileUpdateForm accountAddress={account} />
-          <Divider />
-          <h2>Avatar</h2>
-          <AvatarUpdateForm accountAddress={account} />
-          <Divider />
-          <h2>Cover Images</h2>
-          <CoverImagesUpdateForm accountAddress={account} />
+          {loading ? (
+            <Skeleton />
+          ) : isAuthor ? (
+            <>
+              <h2>Basic</h2>
+              <ProfileUpdateForm accountAddress={authorAddress} />
+              <Divider />
+              <h2>Avatar</h2>
+              <AvatarUpdateForm accountAddress={authorAddress} />
+              <Divider />
+              <h2>Cover Images</h2>
+              <CoverImagesUpdateForm accountAddress={authorAddress} />
+            </>
+          ) : (
+            <Result
+              status="error"
+              title="Not authorized"
+              subTitle="You do not have sufficient permission to edit this page."
+              extra={
+                <Link as={`/author/${authorAddress}`} href="/author/[authorAddress]">
+                  <Button type="primary">Author Profile</Button>
+                </Link>
+              }
+            />
+          )}
         </Container>
-      )) ?? <NotConnectedAndEmpty />}
+      </main>
       <Footer />
-    </>
+    </FullpageWrap>
   )
 }
 
-export default ProfileSettings
+export default AuthorEdit

@@ -15,6 +15,7 @@ export const Headline = styled.div<Props>`
     color: black;
   }
   span {
+    text-align: center;
     color: #4f4f4f;
   }
 `

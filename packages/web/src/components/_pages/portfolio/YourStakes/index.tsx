@@ -28,6 +28,7 @@ export const YourStakes = ({ accountAddress }: Props) => {
 
   return (
     <AssetList
+      isPool={false}
       onPagination={onPagination}
       loading={loading}
       properties={properties}
