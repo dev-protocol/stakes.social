@@ -75,7 +75,7 @@ export const AuthForm = ({ market }: Props) => {
       market === NpmMarketContractAddress
         ? Object.values(values)
         : await (async () => {
-            const repository: string = values.repositoryName
+            const repository: string = values.projectName
             const personalAccessToken = values.personalAccessToken
             const khaos = await postSignGitHubMarketAssetHandler(repository, personalAccessToken)
             return [repository, khaos.publicSignature || '']
