@@ -1499,10 +1499,10 @@
   resolved "https://registry.yarnpkg.com/@ctrl/tinycolor/-/tinycolor-3.2.0.tgz#77a8a33edb2fdc02318c828be78f6fb3d6c65eb2"
   integrity sha512-cP1tbXA1qJp/er2CJaO+Pbe38p7RlhV9WytUxUe79xj++Q6s/jKVvzJ9U2dF9f1/lZAdG+j94A38CsNR+uW4gw==
 
-"@devprtcl/dev-kit-js@3.4.1":
-  version "3.4.1"
-  resolved "https://registry.yarnpkg.com/@devprtcl/dev-kit-js/-/dev-kit-js-3.4.1.tgz#5dfe3c601e5b453d43e1e760e0eddae4cb43cf66"
-  integrity sha512-ldaeg8wjOS5q4LOtonwJ4I9F1Im+QIupWtGMK8U6LJR8MwkyWafBjNSZf8ryvw9mRPISbCtP4svbLcvLWbzaoQ==
+"@devprtcl/dev-kit-js@3.5.0":
+  version "3.5.0"
+  resolved "https://registry.yarnpkg.com/@devprtcl/dev-kit-js/-/dev-kit-js-3.5.0.tgz#08820107724fb3583456d130e9b3595557807667"
+  integrity sha512-VadqFvBBe80UMtdXJZUTAe81W9f/Rieonby1momq1Kq1KFOlFkRcSUcqlrSNIdJyNTjwQNRoA1EgTupoyyW/YA==
   dependencies:
     "@types/bent" "^7.3.1"
     async-ray "^3.2.0"
@@ -3743,7 +3743,15 @@
   dependencies:
     "@types/istanbul-lib-report" "*"
 
-"@types/jest@26.0.15", "@types/jest@26.x":
+"@types/jest@26.0.16":
+  version "26.0.16"
+  resolved "https://registry.yarnpkg.com/@types/jest/-/jest-26.0.16.tgz#b47abd50f6ed0503f589db8e126fc8eb470cf87c"
+  integrity sha512-Gp12+7tmKCgv9JjtltxUXokohCAEZfpJaEW5tn871SGRp8I+bRWBonQO7vW5NHwnAHe5dd50+Q4zyKuN35i09g==
+  dependencies:
+    jest-diff "^26.0.0"
+    pretty-format "^26.0.0"
+
+"@types/jest@26.x":
   version "26.0.15"
   resolved "https://registry.yarnpkg.com/@types/jest/-/jest-26.0.15.tgz#12e02c0372ad0548e07b9f4e19132b834cb1effe"
   integrity sha512-s2VMReFXRg9XXxV+CW9e5Nz8fH2K1aEhwgjUqPPbQd7g95T0laAcvLv032EhFHIa5GHsZ8W7iJEQVaJq6k3Gog==

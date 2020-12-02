@@ -5862,8 +5862,8 @@ export type ListAccountLockupQuery = { __typename?: 'query_root' } & {
 
 export type ListOwnedPropertyMetaQueryVariables = Exact<{
   account_address: Scalars['String']
-  offset: Scalars['Int']
-  limit: Scalars['Int']
+  offset?: Maybe<Scalars['Int']>
+  limit?: Maybe<Scalars['Int']>
 }>
 
 export type ListOwnedPropertyMetaQuery = { __typename?: 'query_root' } & {
@@ -5926,12 +5926,28 @@ export type ListPropertyOrderByMostRecentQuery = { __typename?: 'query_root' } &
 
 export type ListPropertyMetaQueryVariables = Exact<{
   author: Scalars['String']
+  offset?: Maybe<Scalars['Int']>
   limit?: Maybe<Scalars['Int']>
   ilike?: Maybe<Scalars['String']>
 }>
 
 export type ListPropertyMetaQuery = { __typename?: 'query_root' } & {
-  property_meta: Array<{ __typename?: 'property_meta' } & Pick<Property_Meta, 'property' | 'name'>>
+  property_meta: Array<
+    { __typename?: 'property_meta' } & Pick<Property_Meta, 'property' | 'name'> & {
+        lockup_aggregate: { __typename?: 'property_lockup_aggregate' } & {
+          aggregate?: Maybe<
+            { __typename?: 'property_lockup_aggregate_fields' } & Pick<Property_Lockup_Aggregate_Fields, 'count'> & {
+                sum?: Maybe<
+                  { __typename?: 'property_lockup_sum_fields' } & Pick<
+                    Property_Lockup_Sum_Fields,
+                    'block_number' | 'value'
+                  >
+                >
+              }
+          >
+        }
+      }
+  >
 }
 
 export type ListTopStakersAccountQueryVariables = Exact<{
@@ -6206,7 +6222,7 @@ export type ListAccountLockupQueryHookResult = ReturnType<typeof useListAccountL
 export type ListAccountLockupLazyQueryHookResult = ReturnType<typeof useListAccountLockupLazyQuery>
 export type ListAccountLockupQueryResult = Apollo.QueryResult<ListAccountLockupQuery, ListAccountLockupQueryVariables>
 export const ListOwnedPropertyMetaDocument = gql`
-  query listOwnedPropertyMeta($account_address: String!, $offset: Int!, $limit: Int!) {
+  query listOwnedPropertyMeta($account_address: String!, $offset: Int, $limit: Int) {
     property_meta(
       where: { author: { _eq: $account_address } }
       order_by: { lockup_aggregate: { sum: { value: desc } } }
@@ -6428,10 +6444,24 @@ export type ListPropertyOrderByMostRecentQueryResult = Apollo.QueryResult<
   ListPropertyOrderByMostRecentQueryVariables
 >
 export const ListPropertyMetaDocument = gql`
-  query listPropertyMeta($author: String!, $limit: Int, $ilike: String) {
-    property_meta(where: { author: { _eq: $author }, property: { _ilike: $ilike } }, limit: $limit) {
+  query listPropertyMeta($author: String!, $offset: Int, $limit: Int, $ilike: String) {
+    property_meta(
+      where: { author: { _eq: $author }, property: { _ilike: $ilike } }
+      offset: $offset
+      limit: $limit
+      order_by: { lockup_aggregate: { sum: { value: desc_nulls_last } } }
+    ) {
       property
       name
+      lockup_aggregate {
+        aggregate {
+          count
+          sum {
+            block_number
+            value
+          }
+        }
+      }
     }
   }
 `
@@ -6449,6 +6479,7 @@ export const ListPropertyMetaDocument = gql`
  * const { data, loading, error } = useListPropertyMetaQuery({
  *   variables: {
  *      author: // value for 'author'
+ *      offset: // value for 'offset'
  *      limit: // value for 'limit'
  *      ilike: // value for 'ilike'
  *   },

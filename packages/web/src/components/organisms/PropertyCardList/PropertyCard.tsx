@@ -4,12 +4,13 @@ import {
   useGetMyStakingAmount,
   useGetTotalStakingAmount,
   useGetTotalRewardsAmount,
-  useGetMyStakingRewardAmount
+  useGetMyStakingRewardAmount,
+  usePropertyAuthor
 } from 'src/fixtures/dev-kit/hooks'
 import styled from 'styled-components'
 import { truncate } from 'src/fixtures/utility/string'
 import { useGetPropertytInformation } from 'src/fixtures/devprtcl/hooks'
-import { useGetProperty } from 'src/fixtures/dev-for-apps/hooks'
+import { useGetProperty, useGetAccount } from 'src/fixtures/dev-for-apps/hooks'
 import { Avatar } from 'src/components/molecules/Avatar'
 import BigNumber from 'bignumber.js'
 import { TransactModalContents } from 'src/components/molecules/TransactModalContents'
@@ -137,7 +138,7 @@ const PropertyDescription = styled.p`
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
-  -webkit-line-clamp: 4; /* number of lines to show */
+  -webkit-line-clamp: 5; /* number of lines to show */
   -webkit-box-orient: vertical;
 `
 
@@ -179,6 +180,8 @@ export const PropertyCard = ({ propertyAddress, assets }: Props) => {
   )
   const { myStakingAmount, currency: myStakingAmountCurrency } = useGetMyStakingAmount(propertyAddress)
   const { data: authorData } = useGetPropertytInformation(propertyAddress)
+  const { author: authorAddress } = usePropertyAuthor(propertyAddress)
+  const { data: dataAuthor } = useGetAccount(authorAddress)
   const { data: dataProperty } = useGetProperty(propertyAddress)
   const includeAssets = useMemo(() => assets && truncate(assets.map(e => e.authentication_id).join(', '), 24), [assets])
 
@@ -211,7 +214,7 @@ export const PropertyCard = ({ propertyAddress, assets }: Props) => {
             <Avatar accountAddress={authorData?.author.address} size={'60'} />
             <FlewColumn>
               <span style={{ fontWeight: 'lighter' }}>Creator</span>
-              <span style={{ color: '#1AC9FC' }}>{authorData?.name}</span>
+              <span style={{ color: '#1AC9FC' }}>{dataAuthor?.name || authorData?.name}</span>
               <span>{authorData?.author?.karma ? formatter.format(authorData?.author?.karma) : 0} Karma</span>
             </FlewColumn>
           </FlexRow>
