@@ -1,7 +1,6 @@
 import React from 'react'
 import { Header } from 'src/components/organisms/Header'
 import { Footer } from 'src/components/organisms/Footer'
-import { EarlyAccess } from 'src/components/atoms/EarlyAccess'
 import { Container } from 'src/components/atoms/Container'
 import { H2 } from 'src/components/atoms/Typography'
 import styled from 'styled-components'
@@ -47,17 +46,18 @@ const StyledContainer = styled(Container)`
   gap: 3rem;
   padding: 3rem 1rem;
   flex-flow: column;
+  flex-grow: 1;
+  padding-top: 6em;
 `
 
 const Portfolio = () => {
   const { accountAddress } = useProvider()
   return (
-    <>
-      <EarlyAccess></EarlyAccess>
-      <Header></Header>
-      <StyledContainer>
-        <PortfolioHeader>
-          <Heading>Your Portfoilo</Heading>
+    <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh', width: '100%', height: 'auto' }}>
+      <Header />
+      <StyledContainer style={{ width: '50%' }}>
+        <PortfolioHeader style={{ marginTop: '2rem' }}>
+          <Heading>Your Portfolio</Heading>
           <Switcher />
           <Buy />
         </PortfolioHeader>
@@ -70,7 +70,7 @@ const Portfolio = () => {
         <YourPools accountAddress={accountAddress} />
       </StyledContainer>
       <Footer />
-    </>
+    </div>
   )
 }
 
