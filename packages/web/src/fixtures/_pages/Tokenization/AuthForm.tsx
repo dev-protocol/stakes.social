@@ -97,6 +97,7 @@ export const AuthForm = ({ market, property }: Props) => {
           values.propertyName,
           values.propertySymbol
         ))
+    // TODO: Function to be called to tokenize based input
     if (metrics) {
       setMetrics(metrics)
     }
