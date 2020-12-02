@@ -5,6 +5,7 @@ import { Avatar } from 'src/components/molecules/Avatar'
 import styled, { css } from 'styled-components'
 import { useEffect } from 'react'
 import { useListTopStakersAccountLazyQuery } from '@dev/graphql'
+import { useGetAccount } from 'src/fixtures/dev-for-apps/hooks'
 
 interface TopStakersProps {
   propertyAdress?: string
@@ -14,7 +15,7 @@ interface TopStakersProps {
 const PlaceHolderList = styled.div<{ noData?: boolean }>`
   ${({ noData }) => css`
     display: flex;
-    min-height: ${noData ? '150px' : '400px'};
+    min-height: ${noData ? '150px' : '300px'};
     justify-content: center;
     align-items: center;
   `}
@@ -29,7 +30,9 @@ const AccountAddress = styled.span`
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
-  max-width: 100px;
+  max-width: 120px;
+  /* align-self: flex-start; */
+  /* padding: 0 0.5em; */
 `
 
 const TopStakerRanking = styled.div`
@@ -42,13 +45,34 @@ const StakerSection = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-
+  padding: 1em 2em;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2), 0 2px 4px -1px rgba(0, 0, 0, 0.12);
+  border-radius: 6px;
+  width: 180px;
+  margin-bottom: 1em;
   img {
     border-radius: 90px;
+  }
+
+  @media (max-width: 768px) {
+    margin-right: 0.5em;
+    margin-bottom: 1em;
+    width: 160px;
   }
 `
 
 const formatter = new Intl.NumberFormat('en-US')
+
+const Staker = ({ accountAddress, value }: { accountAddress: string; value: number }) => {
+  const { data } = useGetAccount(accountAddress)
+  return (
+    <StakerSection>
+      <Avatar accountAddress={accountAddress} size={'100'} />
+      <AccountAddress>{data?.name || accountAddress}</AccountAddress>
+      <span>{`${formatter.format(parseInt((value / Math.pow(10, 18)).toFixed(0)))}`}</span>
+    </StakerSection>
+  )
+}
 
 const TopStakers = ({ authorAddress, propertyAdress }: TopStakersProps) => {
   const { data: topPropertyStakersData, loading: isPropertyStakingLoading } = useQuery(getTopStakersOfPropertyQuery, {
@@ -93,12 +117,8 @@ const TopStakers = ({ authorAddress, propertyAdress }: TopStakersProps) => {
       )}
 
       <TopStakerRanking>
-        {stakerItems?.map(({ account_address, value }, index) => (
-          <StakerSection key={index}>
-            <Avatar accountAddress={account_address} size={'100'} />
-            <AccountAddress>{account_address}</AccountAddress>
-            <span>{`${formatter.format(parseInt((value / Math.pow(10, 18)).toFixed(0)))}`}</span>
-          </StakerSection>
+        {stakerItems?.map(({ account_address, value }) => (
+          <Staker key={account_address} accountAddress={account_address} value={value} />
         ))}
       </TopStakerRanking>
     </Flex>

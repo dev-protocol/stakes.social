@@ -147,7 +147,7 @@ const Author = ({ propertyAddress }: { propertyAddress: string }) => {
       {data && (
         <>
           <h2>
-            Created by <Link href={`/author/${authorAddress}`}>{data?.name}</Link>
+            Created by <Link href={`/author/${authorAddress}`}>{dataAuthor?.name || data?.name}</Link>
           </h2>
           <Flex>
             <Link passHref href="/author/[accountAddress]" as={`/author/${authorAddress}`}>
@@ -205,7 +205,7 @@ const PropertyAddressDetail = (_: Props) => {
           <PropertyHeader apy={apy} creators={creators} propertyAddress={propertyAddress} />
         </Container>
         <Main>
-          <RoundedCoverImageOrGradient src={dataProperty?.cover_image?.url} />
+          <RoundedCoverImageOrGradient src={dataProperty?.cover_image?.url} ratio={52.5} />
           <Possession propertyAddress={propertyAddress} />
           <Transact>
             <Stake title="Stake" propertyAddress={propertyAddress} />

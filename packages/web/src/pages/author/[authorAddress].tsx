@@ -1,10 +1,14 @@
-import React, { useMemo } from 'react'
+import React, { useMemo, useCallback } from 'react'
 import { useRouter } from 'next/router'
 import { Header } from 'src/components/organisms/Header'
 
 import { Footer } from 'src/components/organisms/Footer'
 import styled from 'styled-components'
-import { useListPropertyMetaQuery, useGetPropertyAuthenticationQuery } from '@dev/graphql'
+import {
+  useListPropertyMetaQuery,
+  useGetPropertyAuthenticationQuery,
+  useListOwnedPropertyMetaQuery
+} from '@dev/graphql'
 import { useGetMyStakingAmount, useGetTotalStakingAmount } from 'src/fixtures/dev-kit/hooks'
 import TopStakers from 'src/components/organisms/TopStakers'
 import TopSupporting from 'src/components/organisms/TopSupporting'
@@ -18,6 +22,9 @@ import { Links } from '../../fixtures/_pages/ProfileHeader/Links'
 import { blueGradient } from 'src/styles/gradient'
 import Link from 'next/link'
 import { useProvider } from 'src/fixtures/wallet/hooks'
+import { useState } from 'react'
+import { useCurrency } from 'src/fixtures/currency/hooks'
+import { Pagination } from 'antd'
 
 type Props = {}
 
@@ -67,19 +74,19 @@ const ProfilePicture = styled.div`
   background: white;
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2), 0 2px 4px -1px rgba(0, 0, 0, 0.12);
   margin-left: 1em;
+
   @media (min-width: 768px) {
     margin-left: 0;
     height: 150px;
     width: 150px;
-    transform: translateY(-75px);
+    transform: translate(-75px, -75px);
   }
 `
 const Grid = styled.div`
   display: grid;
   grid-template-columns: 1fr;
   width: 100%;
-  /* margin-left: 1em; */
-  /* margin-right: 1em; */
+
   > div {
     padding: 1em;
   }
@@ -143,20 +150,6 @@ const MutedSpan = styled.span`
   font-size: 0.9em;
 `
 
-// const StakeButton = styled.button<{ bgColor?: string }>`
-//   padding: 6px 24px;
-//   border-radius: 9px;
-//   border: none;
-//   background-color: #2f80ed;
-//   color: white;
-
-//   cursor: pointer;
-//   :hover {
-//     transition: ease-in-out 0.2s;
-//     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-//   }
-// `
-
 const Card = styled.div`
   width: auto;
   border: solid 1px #f0f0f0;
@@ -199,16 +192,8 @@ const AuthorLinks = styled.div`
     text-decoration: none;
     color: black;
 
-    /* linear-gradient(to right, #1ac9fc, #2f80ed); */
     border-bottom-color: #1ac9fc;
     margin-left: 0.8em;
-  }
-
-  a::after {
-    content: '';
-    display: block;
-    height: 5px;
-    background: linear-gradient(to right, #1ac9fc, #2f80ed);
   }
 
   @media (min-width: 768px) {
@@ -250,25 +235,29 @@ const Pool = ({ propertyAddress }: PoolProps) => {
     () => data && truncate(data.property_authentication.map(e => e.authentication_id).join(', '), 24),
     [data]
   )
+
+  const { currency } = useCurrency()
   console.log('propertyData: ', propertyData?.avatar?.url)
 
   return (
-    <Card>
-      <PoolsOverview>
-        <PoolLogoSection>
-          <AvatarProperty size={75} propertyAddress={propertyAddress} />
-          <h4>{includeAssets}</h4>
-        </PoolLogoSection>
-        <OwnedStake>
-          <span>{myStakingAmount?.dp(2).toNumber() || 0} DEV</span>
-          <MutedSpan>Your stake</MutedSpan>
-        </OwnedStake>
-        <TotalStaked>
-          <span>{totalStakingAmount?.dp(2).toNumber() || 0} DEV</span>
-          <MutedSpan>Total staked</MutedSpan>
-        </TotalStaked>
-      </PoolsOverview>
-    </Card>
+    <Link href={`/${propertyAddress}`} passHref>
+      <Card>
+        <PoolsOverview>
+          <PoolLogoSection>
+            <AvatarProperty size={75} propertyAddress={propertyAddress} />
+            <h4>{includeAssets}</h4>
+          </PoolLogoSection>
+          <OwnedStake>
+            <span>{`${myStakingAmount?.dp(2).toNumber().toLocaleString() || 0} ${currency}`}</span>
+            <MutedSpan>Your stake</MutedSpan>
+          </OwnedStake>
+          <TotalStaked>
+            <span>{`${totalStakingAmount?.dp(2).toNumber().toLocaleString() || 0} ${currency}`}</span>
+            <MutedSpan>Total staked</MutedSpan>
+          </TotalStaked>
+        </PoolsOverview>
+      </Card>
+    </Link>
   )
 }
 
@@ -297,14 +286,39 @@ const EditButton = styled.a`
   }
 `
 
+const Section = styled.a<{ activeSection: string; section: string }>`
+  ::after {
+    content: '';
+    display: block;
+    height: 5px;
+    background: ${props =>
+      props.activeSection === props.section ? 'linear-gradient(to right, #1ac9fc, #2f80ed)' : 'none'};
+  }
+`
+
 const AuthorAddressDetail = (_: Props) => {
   const router = useRouter()
   let { authorAddress } = router.query
   const author: string = typeof authorAddress == 'string' ? authorAddress : 'none'
   const { data: authorInformation } = useGetAuthorInformation(author)
-  const { data, loading } = useListPropertyMetaQuery({
+  const [paginationProps, setPaginationProps] = useState<{ offset: number; limit: number; currentPage: number }>({
+    offset: 0,
+    limit: 5,
+    currentPage: 0
+  })
+  const { data, loading, variables } = useListPropertyMetaQuery({
     variables: {
-      author
+      author,
+      offset: paginationProps.offset,
+      limit: paginationProps.limit
+    }
+  })
+
+  const currentPage = variables?.offset ? variables?.offset / 5 : 1
+
+  const { data: totalProperties } = useListOwnedPropertyMetaQuery({
+    variables: {
+      account_address: author
     }
   })
   const { accountAddress } = useProvider()
@@ -312,6 +326,17 @@ const AuthorAddressDetail = (_: Props) => {
   const { data: dataAuthor } = useGetAccount(author)
   const { width } = useWindowDimensions()
   const isSelf = author.toLowerCase() === accountAddress?.toLowerCase()
+  const [activeSection, setActiveSection] = useState<string>('about')
+
+  console.log('list property: ', data?.property_meta)
+
+  const handlePagination = useCallback((page: number) => {
+    console.log('pagination number: ', page)
+    setPaginationProps(oldPaginationProps => {
+      const newOffset = 5 * page
+      return { ...oldPaginationProps, offset: newOffset }
+    })
+  }, [])
 
   return (
     <>
@@ -344,10 +369,38 @@ const AuthorAddressDetail = (_: Props) => {
             </p>
           </div>
           <AuthorLinks>
-            <a href="#about">About</a>
-            <a href="#pools">Pools</a>
-            <a href="#top-stakers">Stakers</a>
-            <a href="#supporting">Supporting</a>
+            <Section
+              onClick={() => setActiveSection('about')}
+              section="about"
+              activeSection={activeSection}
+              href="#about"
+            >
+              About
+            </Section>
+            <Section
+              onClick={() => setActiveSection('pools')}
+              section="pools"
+              activeSection={activeSection}
+              href="#pools"
+            >
+              Pools
+            </Section>
+            <Section
+              onClick={() => setActiveSection('stakers')}
+              section="stakers"
+              activeSection={activeSection}
+              href="#top-stakers"
+            >
+              Stakers
+            </Section>
+            <Section
+              onClick={() => setActiveSection('supporting')}
+              section="supporting"
+              activeSection={activeSection}
+              href="#supporting"
+            >
+              Supporting
+            </Section>
           </AuthorLinks>
         </TransformedGrid>
       </Wrap>
@@ -367,6 +420,17 @@ const AuthorAddressDetail = (_: Props) => {
                 data?.property_meta?.map((property: { property: string; name: string }, index: number) => (
                   <Pool propertyAddress={property.property} propertyName={property.name} key={index} />
                 ))}
+              <div style={{ display: 'flex' }}>
+                <Pagination
+                  current={currentPage}
+                  showSizeChanger={false}
+                  size="default"
+                  responsive={true}
+                  defaultPageSize={5}
+                  onChange={handlePagination}
+                  total={totalProperties?.property_meta?.length}
+                />
+              </div>
             </div>
           </div>
           <div id="top-stakers" style={{ gridColumn: '2 / -1', width: 'auto' }}>

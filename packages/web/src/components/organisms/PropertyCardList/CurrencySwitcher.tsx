@@ -31,7 +31,7 @@ const CurrencyContainer = styled.div`
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  margin-left: 30px;
+  margin-left: 11px;
 `
 
 export const CurrencySwitcher = ({ className }: Props) => {
