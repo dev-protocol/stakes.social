@@ -75,11 +75,6 @@ export const useCreateAccount = (walletAddress: string) => {
   const { web3 } = useProvider()
   const [isLoading, setIsLoading] = useState<boolean>(false)
 
-  const shouldFetch = walletAddress !== ''
-  const { data, mutate } = useSWR<UnwrapFunc<typeof postAccount>, Error>(
-    shouldFetch ? SWRCachePath.createAccount() : null
-  )
-
   const postAccountHandler = async (name?: string, biography?: string, website?: string, github?: string) => {
     const links: ProfileLinks = {
       github,
@@ -94,34 +89,28 @@ export const useCreateAccount = (walletAddress: string) => {
     setIsLoading(true)
     message.loading({ content: 'update account data...', duration: 0, key })
 
-    await mutate(
-      postAccount(signedMessage, signature, walletAddress, name, biography, links)
-        .then(result => {
-          message.success({ content: 'success update account data', key })
-          return result
-        })
-        .catch(err => {
-          message.error({ content: err.message, key })
-          return Promise.reject(data)
-        }),
-      false
-    )
+    const data = await postAccount(signedMessage, signature, walletAddress, name, biography, links)
+      .then(result => {
+        message.success({ content: 'success update account data', key })
+        return result
+      })
+      .catch(err => {
+        message.error({ content: err.message, key })
+        return Promise.reject({})
+      })
 
     setIsLoading(false)
+
+    return data
   }
 
-  return { data, postAccountHandler, isLoading }
+  return { postAccountHandler, isLoading }
 }
 
 export const useUpdateAccount = (id: number, walletAddress: string) => {
   const key = 'useUpdateAccount'
   const { web3 } = useProvider()
   const [isLoading, setIsLoading] = useState<boolean>(false)
-
-  const shouldFetch = id !== 0
-  const { data, mutate } = useSWR<UnwrapFunc<typeof putAccount>, Error>(
-    shouldFetch ? SWRCachePath.updateAccount(id) : null
-  )
 
   const putAccountHandler = async (name?: string, biography?: string, website?: string, github?: string) => {
     const links: ProfileLinks = {
@@ -137,23 +126,22 @@ export const useUpdateAccount = (id: number, walletAddress: string) => {
     setIsLoading(true)
     message.loading({ content: 'update account data...', duration: 0, key })
 
-    await mutate(
-      putAccount(signedMessage, signature, walletAddress, id, name, biography, links)
-        .then(result => {
-          message.success({ content: 'success update account data', key })
-          return result
-        })
-        .catch(err => {
-          message.error({ content: err.message, key })
-          return Promise.reject(data)
-        }),
-      false
-    )
+    const data = await putAccount(signedMessage, signature, walletAddress, id, name, biography, links)
+      .then(result => {
+        message.success({ content: 'success update account data', key })
+        return result
+      })
+      .catch(err => {
+        message.error({ content: err.message, key })
+        return Promise.reject({})
+      })
 
     setIsLoading(false)
+
+    return data
   }
 
-  return { data, putAccountHandler, isLoading }
+  return { putAccountHandler, isLoading }
 }
 
 export const useUploadAccountAvatar = (accountAddress: string) => {
@@ -178,11 +166,6 @@ export const useCreateProperty = (walletAddress: string) => {
   const { web3 } = useProvider()
   const [isLoading, setIsLoading] = useState<boolean>(false)
 
-  const shouldFetch = walletAddress !== ''
-  const { data, mutate } = useSWR<UnwrapFunc<typeof postProperty>, Error>(
-    shouldFetch ? SWRCachePath.createProperty() : null
-  )
-
   const postPropertyHandler = async (
     name?: string,
     description?: string,
@@ -204,34 +187,28 @@ export const useCreateProperty = (walletAddress: string) => {
     setIsLoading(true)
     message.loading({ content: 'update property data...', duration: 0, key })
 
-    await mutate(
-      postProperty(signedMessage, signature, walletAddress, name, description, links)
-        .then(result => {
-          message.success({ content: 'success update property data', key })
-          return result
-        })
-        .catch(err => {
-          message.error({ content: err.message, key })
-          return Promise.reject(data)
-        }),
-      false
-    )
+    const data = await postProperty(signedMessage, signature, walletAddress, name, description, links)
+      .then(result => {
+        message.success({ content: 'success update property data', key })
+        return result
+      })
+      .catch(err => {
+        message.error({ content: err.message, key })
+        return Promise.reject({})
+      })
 
     setIsLoading(false)
+
+    return data
   }
 
-  return { data, postPropertyHandler, isLoading }
+  return { postPropertyHandler, isLoading }
 }
 
 export const useUpdateProperty = (id: number, walletAddress: string) => {
   const key = 'useUpdateProperty'
   const { web3 } = useProvider()
   const [isLoading, setIsLoading] = useState<boolean>(false)
-
-  const shouldFetch = id !== 0
-  const { data, mutate } = useSWR<UnwrapFunc<typeof putProperty>, Error>(
-    shouldFetch ? SWRCachePath.updateProperty(id) : null
-  )
 
   const putPropertyHandler = async (
     name?: string,
@@ -254,23 +231,22 @@ export const useUpdateProperty = (id: number, walletAddress: string) => {
     setIsLoading(true)
     message.loading({ content: 'update property data...', duration: 0, key })
 
-    await mutate(
-      putProperty(signedMessage, signature, walletAddress, id, name, description, links)
-        .then(result => {
-          message.success({ content: 'success update property data', key })
-          return result
-        })
-        .catch(err => {
-          message.error({ content: err.message, key })
-          return Promise.reject(data)
-        }),
-      false
-    )
+    const data = await putProperty(signedMessage, signature, walletAddress, id, name, description, links)
+      .then(result => {
+        message.success({ content: 'success update property data', key })
+        return result
+      })
+      .catch(err => {
+        message.error({ content: err.message, key })
+        return Promise.reject({})
+      })
 
     setIsLoading(false)
+
+    return data
   }
 
-  return { data, putPropertyHandler, isLoading }
+  return { putPropertyHandler, isLoading }
 }
 
 export const useUploadAccountCoverImages = (accountAddress: string) => {
