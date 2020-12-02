@@ -273,6 +273,8 @@ const EditButton = styled.a`
   color: white;
   width: fit-content;
   border-radius: 8px;
+  justify-content: center;
+  align-items: center;
 
   :hover {
     color: white;
@@ -352,7 +354,9 @@ const AuthorAddressDetail = (_: Props) => {
               {isSelf && (
                 <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
                   <Link href={`/author/${author}/edit`}>
-                    <EditButton>Edit</EditButton>
+                    <EditButton>
+                      <span>Edit</span>
+                    </EditButton>
                   </Link>
                 </div>
               )}
