@@ -41,10 +41,10 @@ const ProfileUpdateForm = ({ accountAddress }: { accountAddress: string }) => {
   const { putAccountHandler: updateAccount } = useUpdateAccount(Number(data?.id), accountAddress)
   const handleSubmit = useCallback(
     (displayName: string, biography: string, website: string, github: string) => {
-      const handler = found ? updateAccount : createAccount
+      const handler = data?.id ? updateAccount : createAccount
       handler(displayName, biography, website, github)
     },
-    [createAccount, updateAccount, found]
+    [createAccount, updateAccount, data]
   )
 
   return (

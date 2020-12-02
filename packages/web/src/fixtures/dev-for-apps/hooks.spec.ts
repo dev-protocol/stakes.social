@@ -3,14 +3,19 @@ import { renderHook, act } from '@testing-library/react-hooks'
 import {
   useGetPropertyTags,
   usePostPropertyTags,
-  useGetProperty,
+  useCreateAccount,
+  useUpdateAccount,
+  useCreateProperty,
+  useUpdateProperty,
   useUploadAccountAvatar,
-  useUploadAccountCoverImages
+  useUploadAccountCoverImages,
+  useUploadPropertyCoverImages
 } from './hooks'
-import { postPropertyTags } from './utility'
+import { postPropertyTags, postAccount, putAccount, postProperty, putProperty } from './utility'
 import { signWithCache } from 'src/fixtures/wallet/utility'
 import { useUploadFile } from './functions/useUploadFile'
 import { useGetAccount } from './functions/useGetAccount'
+import { useGetProperty } from './functions/useGetProperty'
 
 jest.mock('swr')
 jest.mock('src/fixtures/utility')
@@ -19,6 +24,7 @@ jest.mock('src/fixtures/wallet/utility.ts')
 jest.mock('src/fixtures/wallet/hooks.ts')
 jest.mock('src/fixtures/dev-for-apps/functions/useUploadFile')
 jest.mock('src/fixtures/dev-for-apps/functions/useGetAccount')
+jest.mock('src/fixtures/dev-for-apps/functions/useGetProperty')
 
 describe('dev-for-apps hooks for property tags', () => {
   describe('useGetPropertyTags', () => {
@@ -151,31 +157,193 @@ describe('dev-for-apps hooks with strapi for account', () => {
       expect(result.current.error?.message).toBe(errorMessage)
     })
   })
+
+  describe('useCreateAccount', () => {
+    test('create account success', async () => {
+      const walletAddress = '0x12345'
+      const data = {}
+      ;(postAccount as jest.Mock).mockResolvedValue(data)
+      ;(signWithCache as jest.Mock).mockImplementation(() => ({
+        signature: 'test signature',
+        message: 'test sign message'
+      }))
+      const { result } = renderHook(() => useCreateAccount(walletAddress))
+      await act(async () => {
+        const name = 'dummy name'
+        await result.current.postAccountHandler(name)
+      })
+      expect(result.current.isLoading).toBe(false)
+      expect((postAccount as jest.Mock).mock.calls.length).toBe(1)
+    })
+
+    test('fail to create account with web3.sign error', async () => {
+      const walletAddress = '0x12345'
+      const data = {}
+      ;(postAccount as jest.Mock).mockResolvedValue(data)
+      ;(signWithCache as jest.Mock).mockImplementation(() => ({
+        signature: undefined,
+        message: undefined
+      }))
+      const { result } = renderHook(() => useCreateAccount(walletAddress))
+      await act(async () => {
+        const name = 'dummy name'
+        await result.current.postAccountHandler(name)
+      })
+      expect(result.current.isLoading).toBe(false)
+      expect((postAccount as jest.Mock).mock.calls.length).toBe(0)
+    })
+  })
+
+  describe('useUpdateAccount', () => {
+    test('update account success', async () => {
+      const id = 99
+      const walletAddress = '0x12345'
+      const data = {}
+      ;(putAccount as jest.Mock).mockResolvedValue(data)
+      ;(signWithCache as jest.Mock).mockImplementation(() => ({
+        signature: 'test signature',
+        message: 'test sign message'
+      }))
+      const { result } = renderHook(() => useUpdateAccount(id, walletAddress))
+      await act(async () => {
+        const name = 'dummy name'
+        await result.current.putAccountHandler(name)
+      })
+      expect(result.current.isLoading).toBe(false)
+      expect((putAccount as jest.Mock).mock.calls.length).toBe(1)
+    })
+
+    test('fail to update account with web3.sign error', async () => {
+      const id = 99
+      const walletAddress = '0x12345'
+      const data = {}
+      ;(postAccount as jest.Mock).mockResolvedValue(data)
+      ;(signWithCache as jest.Mock).mockImplementation(() => ({
+        signature: undefined,
+        message: undefined
+      }))
+      const { result } = renderHook(() => useUpdateAccount(id, walletAddress))
+      await act(async () => {
+        const name = 'dummy name'
+        await result.current.putAccountHandler(name)
+      })
+      expect(result.current.isLoading).toBe(false)
+      expect((postAccount as jest.Mock).mock.calls.length).toBe(0)
+    })
+  })
 })
 
 describe('dev-for-apps hooks with strapi for property', () => {
-  describe('useGetProperty', () => {
-    test('give undefined', async () => {
-      const { result } = renderHook(() => useGetProperty())
-      expect(result.current.data).toBe(undefined)
+  describe('useUploadPropertyCoverImages', () => {
+    test('success post file', async () => {
+      const mockHandler = jest.fn().mockImplementation(jest.fn().mockImplementation(() => Promise.resolve()))
+      const mockMutate = jest.fn().mockImplementation(() => {})
+      ;(useGetProperty as jest.Mock).mockImplementation(() => ({ data: { id: 123 }, mutate: mockMutate }))
+      ;(useUploadFile as jest.Mock).mockImplementation(() => ({
+        postUploadFileHandler: mockHandler,
+        isLoading: false
+      }))
+      const { result } = renderHook(() => useUploadPropertyCoverImages('0x01234567890'))
+      await act(() => {
+        result.current.upload('image data')
+      })
+      expect(mockHandler.mock.calls[0][0]).toBe(123)
+      expect(mockHandler.mock.calls[0][1]).toBe('Property')
+      expect(mockHandler.mock.calls[0][2]).toBe('cover_image')
+      expect(mockHandler.mock.calls[0][3]).toBe('image data')
+      expect(mockHandler.mock.calls[0][4]).toBe('assets/0x01234567890/cover_image')
+      expect(mockMutate.mock.calls.length).toBe(1)
     })
 
-    test('success get property', async () => {
-      const data = [{ a: 'a' }]
-      const error = undefined
-      ;(useSWR as jest.Mock).mockImplementation(() => ({ data, error }))
-      const { result } = renderHook(() => useGetProperty('0x01234567890'))
-      expect(result.current.data).toEqual({ a: 'a' })
-    })
-
-    test('failure get profile', async () => {
-      const data = undefined
+    test('failure post file', async () => {
       const errorMessage = 'error'
       const error = new Error(errorMessage)
-      ;(useSWR as jest.Mock).mockImplementation(() => ({ data, error }))
-      const { result } = renderHook(() => useGetProperty('0x01234567890'))
-      expect(result.current.error).toBe(error)
+      ;(useGetProperty as jest.Mock).mockImplementation(() => ({ data: { id: 123 }, mutate: () => {} }))
+      ;(useUploadFile as jest.Mock).mockImplementation(() => ({
+        postUploadFileHandler: () => Promise.resolve(),
+        isLoading: false,
+        error
+      }))
+      const { result } = renderHook(() => useUploadPropertyCoverImages('0x01234567890'))
+      act(() => {
+        result.current.upload({})
+      })
+      expect(result.current.isLoading).toBe(false)
       expect(result.current.error?.message).toBe(errorMessage)
+    })
+  })
+
+  describe('useCreateProperty', () => {
+    test('success create property', async () => {
+      const walletAddress = '0x12345'
+      const data = {}
+      ;(postProperty as jest.Mock).mockResolvedValue(data)
+      ;(signWithCache as jest.Mock).mockImplementation(() => ({
+        signature: 'test signature',
+        message: 'test sign message'
+      }))
+      const { result } = renderHook(() => useCreateProperty(walletAddress))
+      await act(async () => {
+        const name = 'dummy name'
+        await result.current.postPropertyHandler(name)
+      })
+      expect(result.current.isLoading).toBe(false)
+      expect((postProperty as jest.Mock).mock.calls.length).toBe(1)
+    })
+
+    test('fail to create property with web3.sign error', async () => {
+      const walletAddress = '0x12345'
+      const data = {}
+      ;(postProperty as jest.Mock).mockResolvedValue(data)
+      ;(signWithCache as jest.Mock).mockImplementation(() => ({
+        signature: undefined,
+        message: undefined
+      }))
+      const { result } = renderHook(() => useCreateProperty(walletAddress))
+      await act(async () => {
+        const name = 'dummy name'
+        await result.current.postPropertyHandler(name)
+      })
+      expect(result.current.isLoading).toBe(false)
+      expect((postProperty as jest.Mock).mock.calls.length).toBe(0)
+    })
+  })
+
+  describe('useUpdateProperty', () => {
+    test('success update property', async () => {
+      const id = 98
+      const walletAddress = '0x12345'
+      const data = {}
+      ;(putProperty as jest.Mock).mockResolvedValue(data)
+      ;(signWithCache as jest.Mock).mockImplementation(() => ({
+        signature: 'test signature',
+        message: 'test sign message'
+      }))
+      const { result } = renderHook(() => useUpdateProperty(id, walletAddress))
+      await act(async () => {
+        const name = 'dummy name'
+        await result.current.putPropertyHandler(name)
+      })
+      expect(result.current.isLoading).toBe(false)
+      expect((putProperty as jest.Mock).mock.calls.length).toBe(1)
+    })
+
+    test('fail to update property with web3.sign error', async () => {
+      const id = 98
+      const walletAddress = '0x12345'
+      const data = {}
+      ;(putProperty as jest.Mock).mockResolvedValue(data)
+      ;(signWithCache as jest.Mock).mockImplementation(() => ({
+        signature: undefined,
+        message: undefined
+      }))
+      const { result } = renderHook(() => useUpdateProperty(id, walletAddress))
+      await act(async () => {
+        const name = 'dummy name'
+        await result.current.putPropertyHandler(name)
+      })
+      expect(result.current.isLoading).toBe(false)
+      expect((putProperty as jest.Mock).mock.calls.length).toBe(0)
     })
   })
 })
