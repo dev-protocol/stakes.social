@@ -4,6 +4,7 @@ import { useListTopSupportingAccountQuery, useGetPropertyAuthenticationQuery } f
 import Link from 'next/link'
 import { useGetProperty } from 'src/fixtures/dev-for-apps/hooks'
 import { AvatarProperty } from 'src/components/molecules/AvatarProperty'
+import { Spin } from 'antd'
 
 type Props = {
   accountAddress: string
@@ -72,7 +73,7 @@ const TopSupporting = ({ accountAddress }: Props) => {
   return (
     <div>
       {!loading && data?.account_lockup?.length === 0 && <div>This author doesnt support other projects</div>}
-      {loading && <div>Loading...</div>}
+      {loading && <Spin size="large" style={{ display: 'block', width: 'auto', padding: '100px' }} />}
       <TopSupportingContainer>
         {data?.account_lockup &&
           data?.account_lockup.map(({ property_address, value }) => (

@@ -33,7 +33,7 @@ export const Avatar = ({ accountAddress, size }: Props) => {
   return (
     <AvatarImage>
       {account?.portrait ? (
-        <img src={account?.portrait.url} alt="avatar" style={{ width: `${size}px` }} />
+        <img src={account?.portrait.url} alt="avatar" style={{ height: `${size}px`, width: `${size}px` }} />
       ) : (
         <AvatarPlaceholder size={size} />
       )}

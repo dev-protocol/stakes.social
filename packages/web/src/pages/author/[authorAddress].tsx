@@ -16,7 +16,7 @@ import { truncate } from 'src/fixtures/utility/string'
 import { useGetAuthorInformation } from 'src/fixtures/devprtcl/hooks'
 import { Avatar as AuthorAvatar } from 'src/components/molecules/Avatar'
 import useWindowDimensions from '../../fixtures/utility/useWindowDimensions'
-import { useGetAccount, useGetProperty } from 'src/fixtures/dev-for-apps/hooks'
+import { useGetAccount } from 'src/fixtures/dev-for-apps/hooks'
 import { AvatarProperty } from 'src/components/molecules/AvatarProperty'
 import { Links } from '../../fixtures/_pages/ProfileHeader/Links'
 import { blueGradient } from 'src/styles/gradient'
@@ -24,7 +24,7 @@ import Link from 'next/link'
 import { useProvider } from 'src/fixtures/wallet/hooks'
 import { useState } from 'react'
 import { useCurrency } from 'src/fixtures/currency/hooks'
-import { Pagination } from 'antd'
+import { Pagination, Spin } from 'antd'
 
 type Props = {}
 
@@ -230,21 +230,18 @@ const Pool = ({ propertyAddress }: PoolProps) => {
   const { totalStakingAmount } = useGetTotalStakingAmount(propertyAddress)
   const { myStakingAmount } = useGetMyStakingAmount(propertyAddress)
   const { data } = useGetPropertyAuthenticationQuery({ variables: { propertyAddress } })
-  const { data: propertyData } = useGetProperty(propertyAddress)
+  // const { data: propertyData } = useGetProperty(propertyAddress)
   const includeAssets = useMemo(
     () => data && truncate(data.property_authentication.map(e => e.authentication_id).join(', '), 24),
     [data]
   )
-
   const { currency } = useCurrency()
-  console.log('propertyData: ', propertyData?.avatar?.url)
-
   return (
     <Link href={`/${propertyAddress}`} passHref>
       <Card>
         <PoolsOverview>
           <PoolLogoSection>
-            <AvatarProperty size={75} propertyAddress={propertyAddress} />
+            <AvatarProperty size={'75'} propertyAddress={propertyAddress} />
             <h4>{includeAssets}</h4>
           </PoolLogoSection>
           <OwnedStake>
@@ -276,6 +273,8 @@ const EditButton = styled.a`
   color: white;
   width: fit-content;
   border-radius: 8px;
+  justify-content: center;
+  align-items: center;
 
   :hover {
     color: white;
@@ -306,15 +305,13 @@ const AuthorAddressDetail = (_: Props) => {
     limit: 5,
     currentPage: 0
   })
-  const { data, loading, variables } = useListPropertyMetaQuery({
+  const { data, loading } = useListPropertyMetaQuery({
     variables: {
       author,
       offset: paginationProps.offset,
       limit: paginationProps.limit
     }
   })
-
-  const currentPage = variables?.offset ? variables?.offset / 5 : 1
 
   const { data: totalProperties } = useListOwnedPropertyMetaQuery({
     variables: {
@@ -328,13 +325,12 @@ const AuthorAddressDetail = (_: Props) => {
   const isSelf = author.toLowerCase() === accountAddress?.toLowerCase()
   const [activeSection, setActiveSection] = useState<string>('about')
 
-  console.log('list property: ', data?.property_meta)
-
   const handlePagination = useCallback((page: number) => {
     console.log('pagination number: ', page)
     setPaginationProps(oldPaginationProps => {
-      const newOffset = 5 * page
-      return { ...oldPaginationProps, offset: newOffset }
+      const newOffset = page === 1 ? 0 : 5 * (page - 1)
+      console.log('new offset: ', newOffset)
+      return { ...oldPaginationProps, currentPage: page, offset: newOffset }
     })
   }, [])
 
@@ -358,7 +354,9 @@ const AuthorAddressDetail = (_: Props) => {
               {isSelf && (
                 <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
                   <Link href={`/author/${author}/edit`}>
-                    <EditButton>Edit</EditButton>
+                    <EditButton>
+                      <span>Edit</span>
+                    </EditButton>
                   </Link>
                 </div>
               )}
@@ -414,15 +412,15 @@ const AuthorAddressDetail = (_: Props) => {
           <div id="pools" style={{ gridColumn: '2 / -1', width: '100%' }}>
             <h2>Pools</h2>
             <div style={{ display: 'flex', flexDirection: 'column' }}>
-              {loading && <span>Loading...</span>}
+              {loading && <Spin size="large" style={{ display: 'block', width: 'auto', padding: '100px' }} />}
 
               {data?.property_meta &&
                 data?.property_meta?.map((property: { property: string; name: string }, index: number) => (
                   <Pool propertyAddress={property.property} propertyName={property.name} key={index} />
                 ))}
-              <div style={{ display: 'flex' }}>
+              <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
                 <Pagination
-                  current={currentPage}
+                  current={paginationProps.currentPage}
                   showSizeChanger={false}
                   size="default"
                   responsive={true}
