@@ -75,21 +75,22 @@ export const AuthForm = ({ market }: Props) => {
       market === NpmMarketContractAddress
         ? Object.values(values)
         : await (async () => {
-            const repository: string = values.repositoryName
+            const repository: string = values.projectName
             const personalAccessToken = values.personalAccessToken
             const khaos = await postSignGitHubMarketAssetHandler(repository, personalAccessToken)
             return [repository, khaos.publicSignature || '']
           })()
 
-    const metrics = await (values.propertyAddress
+    const res = await (values.propertyAddress
       ? authenticate(market, values.propertyAddress, authRequestData)
       : ((name, symbol) => createAndAuthenticate(name, symbol, market, authRequestData))(
           values.propertyName,
           values.propertySymbol
         ))
 
-    if (metrics) {
-      setMetrics(metrics)
+    if (res) {
+      const metricsAddress = typeof res === 'string' ? res : res.metrics
+      setMetrics(metricsAddress)
     }
   }
 
