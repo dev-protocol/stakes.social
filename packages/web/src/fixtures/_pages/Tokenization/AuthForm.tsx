@@ -1,13 +1,13 @@
 import React, { useState } from 'react'
 import { Form, Button, Result } from 'antd'
-// import { useAuthenticate, useCreateAndAuthenticate } from 'src/fixtures/dev-kit/hooks'
-// import { usePostSignGitHubMarketAsset } from 'src/fixtures/khaos/hooks'
+import { useAuthenticate, useCreateAndAuthenticate } from 'src/fixtures/dev-kit/hooks'
+import { usePostSignGitHubMarketAsset } from 'src/fixtures/khaos/hooks'
 import styled from 'styled-components'
 import Input from 'src/components/molecules/Input'
 import { useProvider } from 'src/fixtures/wallet/hooks'
-import { AccountBookOutlined, FontColorsOutlined } from '@ant-design/icons'
+import { InfoCircleOutlined, AccountBookOutlined, CodeOutlined, FontColorsOutlined } from '@ant-design/icons'
 
-// const NpmMarketContractAddress = '0x88c7B1f41DdE50efFc25541a2E0769B887eB2ee7'
+const NpmMarketContractAddress = '0x88c7B1f41DdE50efFc25541a2E0769B887eB2ee7'
 
 export interface Props {
   market: string
@@ -65,34 +65,44 @@ const Submit = styled.button`
   }
 `
 
-export const AuthForm = ({ property }: Props) => {
+const InfoContainer = styled.div`
+  margin-right: 20px;
+  svg {
+    width: 1.5em;
+    height: auto;
+  }
+`
+
+export const AuthForm = ({ market, property }: Props) => {
+  console.log({ market })
   const [metrics, setMetrics] = useState<string>('')
-  // const { postSignGitHubMarketAssetHandler, isLoading } = usePostSignGitHubMarketAsset()
-  // const { authenticate } = useAuthenticate()
-  // const { createAndAuthenticate } = useCreateAndAuthenticate()
+  const { postSignGitHubMarketAssetHandler, isLoading } = usePostSignGitHubMarketAsset()
+  const { authenticate } = useAuthenticate()
+  const { createAndAuthenticate } = useCreateAndAuthenticate()
   const { accountAddress } = useProvider()
   const onFinish = async (values: any) => {
-    // const authRequestData: string[] =
-    //   market === NpmMarketContractAddress
-    //     ? Object.values(values)
-    //     : await (async () => {
-    //         const repository: string = values.repositoryName
-    //         const personalAccessToken = values.personalAccessToken
-    //         const khaos = await postSignGitHubMarketAssetHandler(repository, personalAccessToken)
-    //         return [repository, khaos.publicSignature || '']
-    //       })()
+    const authRequestData: string[] =
+      market === NpmMarketContractAddress
+        ? Object.values(values)
+        : await (async () => {
+            const repository: string = values.projectName
+            const personalAccessToken = values.personalAccessToken
+            const khaos = await postSignGitHubMarketAssetHandler(repository, personalAccessToken)
+            return [repository, khaos.publicSignature || '']
+          })()
 
-    // const metrics = await (property
-    //   ? authenticate(market, property, authRequestData)
-    //   : ((name, symbol) => createAndAuthenticate(name, symbol, market, authRequestData))(
-    //       values.propertyName,
-    //       values.propertySymbol
-    //     ))
-    console.log('Values: ', values)
+    const res = await (property
+      ? authenticate(market, property, authRequestData)
+      : ((name, symbol) => createAndAuthenticate(name, symbol, market, authRequestData))(
+          values.propertyName,
+          values.propertySymbol
+        ))
     // TODO: Function to be called to tokenize based input
-    const metrics = 'content here'
-    if (metrics) {
-      setMetrics(metrics)
+    if (res) {
+      const metricsAddress = typeof res === 'string' ? res : res.metrics
+      const propertyAddress = typeof res === 'string' ? property : res.property
+      console.log({ propertyAddress })
+      setMetrics(metricsAddress)
     }
   }
 
@@ -148,9 +158,50 @@ export const AuthForm = ({ property }: Props) => {
                 >
                   <Input Icon={AccountBookOutlined} label="tokenSymbol" placeholder="Choose your token's name" />
                 </Form.Item>
+              </div>
+            </Row>
+
+            <Row>
+              <Span>Personal Access Token:</Span>
+              <Form.Item
+                name="personalAccessToken"
+                rules={[{ required: true, message: 'Please input PAT.' }]}
+                key="personalAccessToken"
+              >
+                <Input Icon={CodeOutlined} label="personalAccessToken" placeholder="Personal Access Token" />
+              </Form.Item>
+            </Row>
+            <div style={{ display: 'flex', alignItems: 'center', marginBottom: '1em' }}>
+              <div style={{ display: 'flex', alignItems: 'center', alignSelf: 'flex-end' }}>
+                <InfoContainer>
+                  <InfoCircleOutlined />
+                </InfoContainer>
+                <div style={{ fontSize: '0.9em' }}>
+                  <div>
+                    Please{' '}
+                    <a href="https://github.com/settings/tokens/new" target="_blank" rel="noreferrer">
+                      <span style={{ wordBreak: 'normal' }}>create a Personal Access Token without any scopes.</span>
+                    </a>
+                  </div>
+                  <div>
+                    <span style={{ wordBreak: 'normal' }}>
+                      The PAT is confidentially authenticated using the Khaos oracle(
+                    </span>
+                    <a href="https://github.com/dev-protocol/khaos" target="_blank" rel="noreferrer">
+                      *
+                    </a>
+                    ).
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <Row>
+              <div style={{ display: 'flex', gridColumn: '1/-1', justifyContent: 'flex-end' }}>
                 <ButtonContainer>
-                  {/* disabled={isLoading} */}
-                  <Submit type="submit">Tokenize</Submit>
+                  <Submit type="submit" disabled={isLoading}>
+                    Tokenize
+                  </Submit>
                 </ButtonContainer>
               </div>
             </Row>

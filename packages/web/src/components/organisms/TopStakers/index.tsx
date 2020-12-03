@@ -6,6 +6,7 @@ import styled, { css } from 'styled-components'
 import { useEffect } from 'react'
 import { useListTopStakersAccountLazyQuery } from '@dev/graphql'
 import { useGetAccount } from 'src/fixtures/dev-for-apps/hooks'
+import { Spin } from 'antd'
 
 interface TopStakersProps {
   propertyAdress?: string
@@ -106,7 +107,7 @@ const TopStakers = ({ authorAddress, propertyAdress }: TopStakersProps) => {
     <Flex>
       {(isPropertyStakingLoading || isCreatorStakingLoading) && (
         <PlaceHolderList>
-          <div>loading...</div>
+          <Spin size="large" style={{ display: 'block', width: 'auto', padding: '100px' }} />
         </PlaceHolderList>
       )}
 

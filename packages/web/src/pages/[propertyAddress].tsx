@@ -10,7 +10,7 @@ import TopStakers from 'src/components/organisms/TopStakers'
 import { useAPY, usePropertyAuthor } from 'src/fixtures/dev-kit/hooks'
 import { useGetPropertyAuthenticationQuery, useGetPropertyAggregateLazyQuery } from '@dev/graphql'
 import { PlusOutlined, LinkOutlined } from '@ant-design/icons'
-import { Button } from 'antd'
+import { Button, Spin } from 'antd'
 import Link from 'next/link'
 import { useGetPropertytInformation } from 'src/fixtures/devprtcl/hooks'
 import { useGetAccount, useGetProperty } from 'src/fixtures/dev-for-apps/hooks'
@@ -172,7 +172,7 @@ const Author = ({ propertyAddress }: { propertyAddress: string }) => {
       {!data && !error && (
         <>
           <div>Author</div>
-          <div>Loading...</div>
+          <Spin size="large" style={{ display: 'block', width: 'auto', padding: '100px' }} />
         </>
       )}
 

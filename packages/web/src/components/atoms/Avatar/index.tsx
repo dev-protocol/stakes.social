@@ -23,7 +23,11 @@ const AvatarPlaceholder = styled.div<{ size: string | number }>`
 export const Avatar = ({ url, size }: Props) => {
   return (
     <AvatarImage>
-      {url ? <img src={url} alt="avatar" style={{ width: `${size}px` }} /> : <AvatarPlaceholder size={size} />}
+      {url ? (
+        <img src={url} alt="avatar" style={{ height: `${size}px`, width: `${size}px` }} />
+      ) : (
+        <AvatarPlaceholder size={size} />
+      )}
     </AvatarImage>
   )
 }
