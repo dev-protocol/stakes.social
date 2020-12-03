@@ -13,6 +13,7 @@ import WalletConnectProvider from '@walletconnect/web3-provider'
 import Fortmatic from 'fortmatic'
 import WalletLink from 'walletlink'
 import { WEB3_PROVIDER_ENDPOINT } from 'src/fixtures/wallet/constants'
+import { getAccountAddress } from 'src/fixtures/wallet/utility'
 
 class NextApp extends App<AppInitialProps & WithApolloProps<{}>> {
   state = { isCurrencyDEV: true, web3: undefined, web3Modal: undefined }
@@ -65,6 +66,14 @@ class NextApp extends App<AppInitialProps & WithApolloProps<{}>> {
   web3Modal: any
 
   onWalletConnet = async () => {
+    const web3ForInjected: any = await detectEthereumProvider()
+    if (!web3ForInjected) {
+      return
+    }
+    const isAuthorized = await getAccountAddress(new Web3(web3ForInjected))
+    if (!isAuthorized) {
+      return
+    }
     const provider = await this.web3Modal.connect().catch(() => {
       return undefined
     })
@@ -89,7 +98,7 @@ class NextApp extends App<AppInitialProps & WithApolloProps<{}>> {
     })
     this.setState({ web3Modal: this.web3Modal })
 
-    if (this.web3Modal.cachedProvider) {
+    if (this.web3Modal.cachedProvider === 'injected') {
       this.onWalletConnet()
     }
 
