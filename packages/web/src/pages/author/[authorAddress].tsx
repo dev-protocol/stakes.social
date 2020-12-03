@@ -303,7 +303,7 @@ const AuthorAddressDetail = (_: Props) => {
   const [paginationProps, setPaginationProps] = useState<{ offset: number; limit: number; currentPage: number }>({
     offset: 0,
     limit: 5,
-    currentPage: 0
+    currentPage: 1
   })
   const { data, loading } = useListPropertyMetaQuery({
     variables: {

@@ -119,15 +119,13 @@ export const AssetItemOnList = ({
       </Link>
       <GridStake
         title="Your Stake"
-        value={myStakingAmount?.dp(2).toNumber() || 'N/A'}
+        value={myStakingAmount?.dp(2).toNumber() || 0}
         suffix={myStakingAmountCurrency}
         precision={2}
       />
       <GridTotalStake
         title="Your Rewards"
-        value={
-          (isPool ? toCurrency(myHolderAmount?.dp(2)).toNumber() : myStakingRewardAmount?.dp(2).toNumber()) || 'N/A'
-        }
+        value={(isPool ? toCurrency(myHolderAmount?.dp(2)).toNumber() : myStakingRewardAmount?.dp(2).toNumber()) || 0}
         suffix={myStakingRewardAmountCurrency}
         precision={2}
       />
