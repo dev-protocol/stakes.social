@@ -27,11 +27,14 @@ exports[`Banner Snapshot 1`] = `
             >
               for Open Assets
             </span>
-            <span
-              class="sc-3hjy97-4 iTyHzX"
+            <a
+              class="sc-3hjy97-4 gpaQko"
+              href="http://docs.devprtcl.com/"
+              rel="noopener noreferrer"
+              target="_blank"
             >
               Read More
-            </span>
+            </a>
           </div>
           <div
             class="sc-3hjy97-3 jrMPqU"
