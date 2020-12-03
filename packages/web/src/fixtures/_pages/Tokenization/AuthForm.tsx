@@ -91,15 +91,18 @@ export const AuthForm = ({ market, property }: Props) => {
             return [repository, khaos.publicSignature || '']
           })()
 
-    const metrics = await (property
+    const res = await (property
       ? authenticate(market, property, authRequestData)
       : ((name, symbol) => createAndAuthenticate(name, symbol, market, authRequestData))(
           values.propertyName,
           values.propertySymbol
         ))
     // TODO: Function to be called to tokenize based input
-    if (metrics) {
-      setMetrics(metrics)
+    if (res) {
+      const metricsAddress = typeof res === 'string' ? res : res.metrics
+      const propertyAddress = typeof res === 'string' ? property : res.property
+      console.log({ propertyAddress })
+      setMetrics(metricsAddress)
     }
   }
 

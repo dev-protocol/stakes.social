@@ -81,15 +81,16 @@ export const AuthForm = ({ market }: Props) => {
             return [repository, khaos.publicSignature || '']
           })()
 
-    const metrics = await (values.propertyAddress
+    const res = await (values.propertyAddress
       ? authenticate(market, values.propertyAddress, authRequestData)
       : ((name, symbol) => createAndAuthenticate(name, symbol, market, authRequestData))(
           values.propertyName,
           values.propertySymbol
         ))
 
-    if (metrics) {
-      setMetrics(metrics)
+    if (res) {
+      const metricsAddress = typeof res === 'string' ? res : res.metrics
+      setMetrics(metricsAddress)
     }
   }
 
