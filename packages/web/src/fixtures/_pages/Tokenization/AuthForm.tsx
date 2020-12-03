@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Form, Button, Result } from 'antd'
-import { useAuthenticate, useCreateAndAuthenticate } from 'src/fixtures/dev-kit/hooks'
+import { useCreateAndAuthenticate } from 'src/fixtures/dev-kit/hooks'
 import { usePostSignGitHubMarketAsset } from 'src/fixtures/khaos/hooks'
 import styled from 'styled-components'
 import Input from 'src/components/molecules/Input'
@@ -11,7 +11,6 @@ const NpmMarketContractAddress = '0x88c7B1f41DdE50efFc25541a2E0769B887eB2ee7'
 
 export interface Props {
   market: string
-  property?: string
 }
 
 const Container = styled.div`
@@ -73,11 +72,10 @@ const InfoContainer = styled.div`
   }
 `
 
-export const AuthForm = ({ market, property }: Props) => {
-  console.log({ market })
+export const AuthForm = ({ market }: Props) => {
   const [metrics, setMetrics] = useState<string>('')
+  const [property, setProperty] = useState<string>('')
   const { postSignGitHubMarketAssetHandler, isLoading } = usePostSignGitHubMarketAsset()
-  const { authenticate } = useAuthenticate()
   const { createAndAuthenticate } = useCreateAndAuthenticate()
   const { accountAddress } = useProvider()
   const onFinish = async (values: any) => {
@@ -91,18 +89,12 @@ export const AuthForm = ({ market, property }: Props) => {
             return [repository, khaos.publicSignature || '']
           })()
 
-    const res = await (property
-      ? authenticate(market, property, authRequestData)
-      : ((name, symbol) => createAndAuthenticate(name, symbol, market, authRequestData))(
-          values.propertyName,
-          values.propertySymbol
-        ))
+    const res = await createAndAuthenticate(values.propertyName, values.propertySymbol, market, authRequestData)
     // TODO: Function to be called to tokenize based input
     if (res) {
-      const metricsAddress = typeof res === 'string' ? res : res.metrics
-      const propertyAddress = typeof res === 'string' ? property : res.property
-      console.log({ propertyAddress })
+      const { metrics: metricsAddress, property: propertyAddress } = res
       setMetrics(metricsAddress)
+      setProperty(propertyAddress)
     }
   }
 
