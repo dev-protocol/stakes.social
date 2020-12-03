@@ -7,6 +7,7 @@ import { useEffect } from 'react'
 import { useListTopStakersAccountLazyQuery } from '@dev/graphql'
 import { useGetAccount } from 'src/fixtures/dev-for-apps/hooks'
 import { Spin } from 'antd'
+import Link from 'next/link'
 
 interface TopStakersProps {
   propertyAdress?: string
@@ -42,8 +43,9 @@ const TopStakerRanking = styled.div`
   flex-wrap: wrap;
 `
 
-const StakerSection = styled.div`
+const StakerSection = styled.div<{ isCreator?: Boolean }>`
   display: flex;
+  cursor: ${props => (props?.isCreator ? 'pointer' : 'auto')};
   flex-direction: column;
   align-items: center;
   padding: 1em 2em;
@@ -66,12 +68,25 @@ const formatter = new Intl.NumberFormat('en-US')
 
 const Staker = ({ accountAddress, value }: { accountAddress: string; value: number }) => {
   const { data } = useGetAccount(accountAddress)
+  const isCreator = !!data
   return (
-    <StakerSection>
-      <Avatar accountAddress={accountAddress} size={'100'} />
-      <AccountAddress>{data?.name || accountAddress}</AccountAddress>
-      <span>{`${formatter.format(parseInt((value / Math.pow(10, 18)).toFixed(0)))}`}</span>
-    </StakerSection>
+    <>
+      {isCreator ? (
+        <Link href={`/author/${accountAddress}`} passHref>
+          <StakerSection isCreator={isCreator}>
+            <Avatar accountAddress={accountAddress} size={'100'} />
+            <AccountAddress>{data?.name || accountAddress}</AccountAddress>
+            <span>{`${formatter.format(parseInt((value / Math.pow(10, 18)).toFixed(0)))}`}</span>
+          </StakerSection>
+        </Link>
+      ) : (
+        <StakerSection>
+          <Avatar accountAddress={accountAddress} size={'100'} />
+          <AccountAddress>{data?.name || accountAddress}</AccountAddress>
+          <span>{`${formatter.format(parseInt((value / Math.pow(10, 18)).toFixed(0)))}`}</span>
+        </StakerSection>
+      )}
+    </>
   )
 }
 
