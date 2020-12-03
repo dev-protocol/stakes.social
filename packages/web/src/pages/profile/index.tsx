@@ -43,6 +43,7 @@ const Buy = styled(BuyDevButton)`
 
 const StyledContainer = styled(Container)`
   display: flex;
+  width: 100%;
   gap: 3rem;
   padding: 3rem 1rem;
   flex-flow: column;
