@@ -163,7 +163,7 @@ const Card = styled.div`
 
 const AuthorDetailGrid = styled.div`
   display: grid;
-  grid-template-columns: 1fr 2fr 1fr;
+  grid-template-columns: 2fr 2fr 1fr;
 
   div > button {
     align-self: center;
@@ -405,11 +405,11 @@ const AuthorAddressDetail = (_: Props) => {
       <hr color="#F5F5F5" style={{ height: '5px' }} />
       <Wrap>
         <Grid>
-          <div id="about" style={{ gridColumn: '2 / -1' }}>
+          <div id="about" style={{ gridColumn: '1 / -1' }}>
             <h2>About</h2>
             <p>{dataAuthor?.biography || 'No information available for this creator'}</p>
           </div>
-          <div id="pools" style={{ gridColumn: '2 / -1', width: '100%' }}>
+          <div id="pools" style={{ gridColumn: '1 / -1', width: '100%' }}>
             <h2>Pools</h2>
             <div style={{ display: 'flex', flexDirection: 'column' }}>
               {loading && <Spin size="large" style={{ display: 'block', width: 'auto', padding: '100px' }} />}
@@ -431,11 +431,11 @@ const AuthorAddressDetail = (_: Props) => {
               </div>
             </div>
           </div>
-          <div id="top-stakers" style={{ gridColumn: '2 / -1', width: 'auto' }}>
+          <div id="top-stakers" style={{ gridColumn: '1 / -1', width: 'auto' }}>
             <h2>Top stakers</h2>
             <TopStakers authorAddress={author} />
           </div>
-          <div id="supporting" style={{ gridColumn: '2 / -1', width: 'auto' }}>
+          <div id="supporting" style={{ gridColumn: '1 / -1', width: 'auto' }}>
             <h2>Supporting</h2>
             <TopSupporting accountAddress={author} />
           </div>
