@@ -115,11 +115,7 @@ export const DevChart = (_: Props) => {
 
   return (
     <>
-      <Select
-        options={CHART_OPTIONS}
-        value={CHART_OPTIONS.filter((x: any) => x.value === chartSelectItem)}
-        onChange={handleChangeChartItem}
-      />
+      <Select options={CHART_OPTIONS} defaultValue={CHART_OPTIONS[0]} onChange={handleChangeChartItem} />
       <div id="chartdiv" style={{ width: '100%', height: '500px' }}></div>
     </>
   )
