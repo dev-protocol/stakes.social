@@ -115,10 +115,9 @@ export const AuthForm = ({ market, onHeaderChange, onSubHeaderChange }: Props) =
     if (res) {
       const { metrics: metricsAddress } = res
       setMetrics(metricsAddress)
+      onHeaderChange('Succesfully Tokenized Your Project')
+      onSubHeaderChange('Authenticate your Project to onboard to Stakes Social.')
     }
-    setMetrics(metrics)
-    onHeaderChange('Succesfully Tokenized Your Project')
-    onSubHeaderChange('Authenticate your Project to onboard to Stakes Social.')
   }
 
   return (
