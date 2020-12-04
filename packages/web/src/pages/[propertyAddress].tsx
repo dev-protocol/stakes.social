@@ -1,4 +1,5 @@
 import React, { useMemo, useEffect } from 'react'
+import Error from 'next/error'
 import { useRouter } from 'next/router'
 import { PossessionOutline } from 'src/components/organisms/PossessionOutline'
 import { PropertyHeader } from 'src/components/organisms/PropertyHeader'
@@ -190,12 +191,18 @@ const PropertyAddressDetail = (_: Props) => {
   const { propertyAddress } = useRouter().query as { propertyAddress: string }
   const { apy, creators } = useAPY()
   const { data } = useGetPropertyAuthenticationQuery({ variables: { propertyAddress } })
-  const { data: dataProperty } = useGetProperty(propertyAddress)
-  const { data: propertyInformation } = useGetPropertytInformation(propertyAddress)
+  const { data: dataProperty } = useGetProperty(data?.property_authentication.length > 0 ? propertyAddress : undefined)
+  const { data: propertyInformation } = useGetPropertytInformation(
+    data?.property_authentication.length > 0 ? propertyAddress : undefined
+  )
   /* eslint-disable react-hooks/exhaustive-deps */
   // FYI: https://github.com/facebook/react/pull/19062
   const includedAssetList = useMemo(() => data?.property_authentication.map(e => e.authentication_id), [data])
   const { accountAddress: loggedInWallet } = useProvider()
+
+  if (!data || data?.property_authentication.length <= 0) {
+    return <Error statusCode={404} />
+  }
 
   return (
     <>
