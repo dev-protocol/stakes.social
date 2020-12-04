@@ -81,10 +81,10 @@ const Etherscan = styled(ButtonWithGradient)`
   margin-right: 10px;
 `
 
-const GoPool = styled(ButtonWithGradient)`
-  border-radius: 6px;
-  padding: 0 24px;
-`
+// const GoPool = styled(ButtonWithGradient)`
+//   border-radius: 6px;
+//   padding: 0 24px;
+// `
 
 const ResultContainer = styled.div`
   display: flex;
@@ -92,6 +92,13 @@ const ResultContainer = styled.div`
   padding: 48px 32px;
   justify-content: center;
   align-items: center;
+`
+
+const SuccessContainer = styled.div`
+  svg {
+    width: 150px;
+    height: auto;
+  }
 `
 
 export const AuthForm = ({ market, onHeaderChange, onSubHeaderChange }: Props) => {
@@ -116,7 +123,9 @@ export const AuthForm = ({ market, onHeaderChange, onSubHeaderChange }: Props) =
       const { metrics: metricsAddress } = res
       setMetrics(metricsAddress)
       onHeaderChange('Succesfully Tokenized Your Project')
-      onSubHeaderChange('Authenticate your Project to onboard to Stakes Social.')
+      onSubHeaderChange(
+        'Please wait for your project to become available on Stakes Social. This can take several minutes.'
+      )
     }
   }
 
@@ -125,21 +134,25 @@ export const AuthForm = ({ market, onHeaderChange, onSubHeaderChange }: Props) =
       <Container>
         {metrics ? (
           <ResultContainer>
-            <SuccessLogo />
-            <div style={{ display: 'flex', width: '300px', justifyContent: 'space-between' }}>
+            <SuccessContainer>
+              <SuccessLogo />
+            </SuccessContainer>
+
+            <div style={{ display: 'flex', width: '300px', justifyContent: 'center' }}>
               <Etherscan
+                style={{ width: '100%' }}
                 alternative={true}
                 rel="noopener noreferrer"
                 target="_blank"
                 key="etherscan"
                 href={`https://etherscan.io/address/${metrics}`}
               >
-                <span>Etherscan</span>
+                <span>Go to Etherscan</span>
               </Etherscan>
               ,
-              <GoPool key="property" href={`/${metrics}`} type="primary">
+              {/* <GoPool key="property" href={`/${metrics}`} type="primary">
                 See Property
-              </GoPool>
+              </GoPool> */}
             </div>
           </ResultContainer>
         ) : (
@@ -148,7 +161,6 @@ export const AuthForm = ({ market, onHeaderChange, onSubHeaderChange }: Props) =
               <h2>Asset Information</h2>
             </FormTitle>
             <Row style={{ marginBottom: '20px' }}>
-              {/* TODO: This field can probably be replaced by using useProvider() */}
               <Span style={{ marginTop: 0 }}>Creator wallet address:</Span>
               <span style={{ marginTop: '5px', maxWidth: '100vw', overflow: 'hidden', textOverflow: 'ellipsis' }}>
                 {accountAddress || 'Fetching wallet...'}
