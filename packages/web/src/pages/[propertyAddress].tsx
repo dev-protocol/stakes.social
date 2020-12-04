@@ -24,6 +24,7 @@ import { Avatar } from 'src/components/molecules/Avatar'
 import { CoverImageOrGradient } from 'src/components/atoms/CoverImageOrGradient'
 import { H3 } from 'src/components/atoms/Typography'
 import { Twitter, Github } from 'src/components/atoms/SocialButtons'
+import { getPath } from 'src/fixtures/utility/route'
 
 type Props = {}
 
@@ -188,7 +189,7 @@ const Author = ({ propertyAddress }: { propertyAddress: string }) => {
 }
 
 const PropertyAddressDetail = (_: Props) => {
-  const { propertyAddress } = useRouter().query as { propertyAddress: string }
+  const [propertyAddress] = getPath(useRouter().asPath)
   const { apy, creators } = useAPY()
   const { data } = useGetPropertyAuthenticationQuery({ variables: { propertyAddress } })
   const { data: dataProperty } = useGetProperty(data?.property_authentication.length > 0 ? propertyAddress : undefined)
