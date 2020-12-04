@@ -36,9 +36,15 @@ const Logo = styled.div`
   background-color: black;
 `
 
-const ReadMore = styled.span`
+const ReadMore = styled.a`
   cursor: pointer;
   margin-top: 5px;
+  text-decoration: none;
+  color: white;
+
+  :hover {
+    color: white;
+  }
 `
 
 const Wrap = styled.div`
@@ -62,7 +68,9 @@ export const Banner = () => {
           <Slogan>
             <SloganTitle color="white">A Sustainable Economy</SloganTitle>
             <SloganTitle color="white">for Open Assets</SloganTitle>
-            <ReadMore>Read More</ReadMore>
+            <ReadMore rel="noopener noreferrer" target="_blank" href="http://docs.devprtcl.com/">
+              Read More
+            </ReadMore>
           </Slogan>
           <Logo>
             <ResponsiveImage src="https://res.cloudinary.com/haas-storage/image/upload/v1598697538/background_wmc31h.png" />

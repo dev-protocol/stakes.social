@@ -8,9 +8,15 @@ import { useAPY, useAnnualSupplyGrowthRatio } from 'src/fixtures/dev-kit/hooks'
 import { SupplySummary } from 'src/components/molecules/SupplySummaly'
 import { Header } from 'src/components/organisms/Header'
 import { FeatureTag } from 'src/components/organisms/PropertyCardList'
+import { Container } from 'src/components/atoms/Container'
+import styled from 'styled-components'
 
 type InitialProps = {}
 type Props = {} & InitialProps
+
+const StyledSupplySummary = styled(SupplySummary)`
+  margin-top: 1rem;
+`
 
 const Index = (_: Props) => {
   const router = useRouter()
@@ -49,10 +55,10 @@ const Index = (_: Props) => {
     <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
       <Header />
       <Banner />
-      <div style={{ padding: '1rem', maxWidth: '1200px', marginRight: 'auto', marginLeft: 'auto' }}>
-        <SupplySummary apy={apy} creators={creators} annualSupplyGrowthRatio={annualSupplyGrowthRatio} />
+      <Container>
+        <StyledSupplySummary apy={apy} creators={creators} annualSupplyGrowthRatio={annualSupplyGrowthRatio} />
         <PropertyCardList currentPage={page} searchWord={word} sortBy={sortBy} featureTag={featureTag} />
-      </div>
+      </Container>
       <Footer />
     </div>
   )

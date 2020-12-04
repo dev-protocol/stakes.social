@@ -16,6 +16,7 @@ import BigNumber from 'bignumber.js'
 import { TransactModalContents } from 'src/components/molecules/TransactModalContents'
 import { ResponsiveModal } from 'src/components/atoms/ResponsiveModal'
 import { CoverImageOrGradient } from 'src/components/atoms/CoverImageOrGradient'
+import { Grid } from 'src/components/atoms/Grid'
 
 interface Asset {
   authentication_id: string
@@ -26,23 +27,22 @@ interface Props {
   assets: Asset[]
 }
 
-const Card = styled.div`
-  display: flex;
-  flex-direction: column;
-  margin: 0;
-  height: 500px;
-  width: 345px;
-  border: solid 1px #f0f0f0;
+const Card = styled(Grid)`
+  grid-template-rows: auto 1fr auto;
+  grid-template-columns: 1fr;
+  justify-content: stretch;
+  border: solid 1px rgba(0, 0, 0, 0.1);
+  border-bottom: 0;
   border-radius: 6px;
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
   cursor: pointer;
   background: #fff;
   overflow: hidden;
+  height: 500px;
 `
 
 const RowContainer = styled.div`
   display: grid;
-  padding: 0 1.2em 1.2em;
   row-gap: 8px;
   grid-template-columns: 1fr 1fr;
   grid-template-areas: 'ownedstake totalstaked';
@@ -54,8 +54,6 @@ const Title = styled.span`
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
-  margin-left: 16px;
-  padding-bottom: 16px;
 `
 const OwnedStake = styled.div`
   display: flex;
@@ -84,14 +82,16 @@ const ButtonContainer = styled.div`
   align-items: center;
 `
 
-const ButtonContainerArea = styled(ButtonContainer)`
-  grid-area: buttoncontainer;
+const CardContents = styled(Grid)`
+  grid-auto-flow: row;
+  grid-gap: 1rem;
+  align-content: baseline;
+  grid-template-rows: auto 1fr;
+  padding: 16px;
 `
 
 const StakeButton = styled.button<{ isPropertyStaked?: Boolean }>`
   padding: 6px 24px;
-  border-bottom-left-radius: 6px;
-  border-bottom-right-radius: ${props => (props.isPropertyStaked ? '0px' : '6px')};
   width: ${props => (props.isPropertyStaked ? '50%' : '100%')};
   border: none;
   background-color: #2f80ed;
@@ -123,22 +123,21 @@ const MutedSpan = styled.span`
 
 const FlexRow = styled.div`
   display: flex;
-  margin-left: 16px;
 
   img {
     border-radius: 90px;
   }
 `
 
-const PropertyDescription = styled.p`
+const PropertyDescription = styled.span`
   color: grey;
   margin: 0;
   flex-grow: 1;
-  padding: 0 16px 8px 16px;
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
-  -webkit-line-clamp: 5; /* number of lines to show */
+  line-height: 1.4em;
+  -webkit-line-clamp: 4; /* number of lines to show */
   -webkit-box-orient: vertical;
 `
 
@@ -204,7 +203,7 @@ export const PropertyCard = ({ propertyAddress, assets }: Props) => {
         <PlaceholderCoverImageOrGradient />
       )}
       <Link href={'/[propertyAddress]'} as={`/${propertyAddress}`}>
-        <div style={{ display: 'flex', flexDirection: 'column', flexGrow: 1 }}>
+        <CardContents>
           <Title>{includeAssets || 'Property'}</Title>
           <PropertyDescription>
             {dataProperty?.description ||
@@ -250,9 +249,9 @@ export const PropertyCard = ({ propertyAddress, assets }: Props) => {
               <MutedSpan>Creator reward</MutedSpan>
             </CreatorReward>
           </RowContainer>
-        </div>
+        </CardContents>
       </Link>
-      <ButtonContainerArea>
+      <ButtonContainer>
         <StakeButton
           onClick={() => showModal('stake')}
           isPropertyStaked={typeof myStakingAmount !== 'undefined' && myStakingAmount > zeroBigNumber}
@@ -265,7 +264,7 @@ export const PropertyCard = ({ propertyAddress, assets }: Props) => {
         >
           Withdraw
         </WithdrawButton>
-      </ButtonContainerArea>
+      </ButtonContainer>
       <ResponsiveModal visible={modalStates.visible} title={modalStates.title} onCancel={closeModal} footer={null}>
         {modalStates.contents}
       </ResponsiveModal>
