@@ -8,7 +8,7 @@
     "start:prod": "next start",
     "prestart:prod": "yarn build",
     "build": "run-p -l build:*",
-    "build:next": "next build",
+    "build:next": "next build && next export",
     "svgr": "npx @svgr/cli --icon -d src/components/atoms/Svgs/tsx src/components/atoms/Svgs/svg --ext tsx --template src/components/atoms/Svgs/template.js",
     "lint": "eslint --fix -c ./.eslintrc.json './src/**/*.{ts,tsx}'",
     "test": "jest"
