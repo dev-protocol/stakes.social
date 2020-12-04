@@ -2,8 +2,22 @@ import {
   useListPropertyQuery as IUseListPropertyQuery,
   useGetPropertyAuthenticationQuery as IUseGetPropertyAuthenticationQuery,
   useGetMarketFactoryCreateQuery as IUseGetMarketFactoryCreateQuery,
-  useListPropertyMetaQuery as IUseListPropertyMetaQuery
+  useListPropertyMetaQuery as IUseListPropertyMetaQuery,
+  useTotalStakedAccountLazyQuery as IUseTotalStakedAccountLazyQuery
 } from '@dev/graphql'
+
+export const useTotalStakedAccountLazyQuery = (): Partial<ReturnType<typeof IUseTotalStakedAccountLazyQuery>> => [
+  () => '',
+  {
+    data: {
+      account_lockup: [
+        {
+          value: 9000
+        }
+      ]
+    }
+  }
+]
 
 export const useListPropertyQuery = (): Partial<ReturnType<typeof IUseListPropertyQuery>> => ({
   data: {

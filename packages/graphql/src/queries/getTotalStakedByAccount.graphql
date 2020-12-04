@@ -1,0 +1,5 @@
+query totalStakedAccount($account_address: String!) {
+  account_lockup(where: { account_address: { _eq:  $account_address }}) {
+    value
+  }
+}

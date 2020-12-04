@@ -51,18 +51,25 @@ const StyledContainer = styled(Container)`
   padding-top: 6em;
 `
 
+const SwitcherContainer = styled.div`
+  display: flex;
+`
+
 const Portfolio = () => {
   const { accountAddress } = useProvider()
+
   return (
     <div style={{ display: 'flex', minHeight: '100vh', flexDirection: 'column' }}>
       <Header />
       <StyledContainer>
         <PortfolioHeader>
           <Heading>Your Portfolio</Heading>
-          <Switcher />
+          <SwitcherContainer>
+            <Switcher />
+          </SwitcherContainer>
           <Buy />
         </PortfolioHeader>
-        <Statistics />
+        <Statistics accountAddress={accountAddress} />
         <Divider type="horizontal" />
         <Heading>Your Stakes</Heading>
         <YourStakes accountAddress={accountAddress} />
