@@ -9,9 +9,14 @@ import { SupplySummary } from 'src/components/molecules/SupplySummaly'
 import { Header } from 'src/components/organisms/Header'
 import { FeatureTag } from 'src/components/organisms/PropertyCardList'
 import { Container } from 'src/components/atoms/Container'
+import styled from 'styled-components'
 
 type InitialProps = {}
 type Props = {} & InitialProps
+
+const StyledSupplySummary = styled(SupplySummary)`
+  margin-top: 1rem;
+`
 
 const Index = (_: Props) => {
   const router = useRouter()
@@ -51,7 +56,7 @@ const Index = (_: Props) => {
       <Header />
       <Banner />
       <Container>
-        <SupplySummary apy={apy} creators={creators} annualSupplyGrowthRatio={annualSupplyGrowthRatio} />
+        <StyledSupplySummary apy={apy} creators={creators} annualSupplyGrowthRatio={annualSupplyGrowthRatio} />
         <PropertyCardList currentPage={page} searchWord={word} sortBy={sortBy} featureTag={featureTag} />
       </Container>
       <Footer />

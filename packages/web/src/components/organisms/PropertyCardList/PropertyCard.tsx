@@ -38,6 +38,7 @@ const Card = styled(Grid)`
   cursor: pointer;
   background: #fff;
   overflow: hidden;
+  height: 500px;
 `
 
 const RowContainer = styled.div`
@@ -135,7 +136,8 @@ const PropertyDescription = styled.span`
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
-  -webkit-line-clamp: 5; /* number of lines to show */
+  line-height: 1.4em;
+  -webkit-line-clamp: 4; /* number of lines to show */
   -webkit-box-orient: vertical;
 `
 

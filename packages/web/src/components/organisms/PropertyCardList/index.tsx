@@ -195,15 +195,17 @@ export const PropertyCardList = ({ currentPage, searchWord, sortBy, featureTag }
 
       {loading && <Spin size="large" style={{ display: 'block', width: 'auto', padding: '100px' }} />}
       {data && mostRecentData && (
-        <PropertyOverview>
-          {sortBy !== 'MOST_RECENT' &&
-            data.property_factory_create.map(d => (
-              <PropertyCard key={d.event_id} propertyAddress={d.property} assets={d.authentication} />
-            ))}
-          {sortBy === 'MOST_RECENT' &&
-            mostRecentData.property_factory_create.map(d => (
-              <PropertyCard key={d.event_id} propertyAddress={d.property} assets={d.authentication} />
-            ))}
+        <>
+          <PropertyOverview>
+            {sortBy !== 'MOST_RECENT' &&
+              data.property_factory_create.map(d => (
+                <PropertyCard key={d.event_id} propertyAddress={d.property} assets={d.authentication} />
+              ))}
+            {sortBy === 'MOST_RECENT' &&
+              mostRecentData.property_factory_create.map(d => (
+                <PropertyCard key={d.event_id} propertyAddress={d.property} assets={d.authentication} />
+              ))}
+          </PropertyOverview>
           <PaginationContainer>
             <Pagination
               current={currentPage}
@@ -216,7 +218,7 @@ export const PropertyCardList = ({ currentPage, searchWord, sortBy, featureTag }
               total={data.property_factory_create_aggregate.aggregate?.count}
             />
           </PaginationContainer>
-        </PropertyOverview>
+        </>
       )}
     </div>
   )
