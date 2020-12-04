@@ -77,6 +77,9 @@ const ProfilePicture = styled.div`
 
   @media (min-width: 768px) {
     margin-left: 0;
+  }
+
+  @media (min-width: 1240px) {
     height: 150px;
     width: 150px;
     transform: translate(-75px, -75px);
@@ -90,7 +93,7 @@ const Grid = styled.div`
   > div {
     padding: 1em;
   }
-  @media (min-width: 768px) {
+  @media (min-width: 1240px) {
     > div {
       padding: 0;
       padding-bottom: 1em;
@@ -103,7 +106,7 @@ const TransformedGrid = styled.div`
   position: relative;
   display: grid;
   grid-template-columns: 120px auto;
-  @media (min-width: 768px) {
+  @media (min-width: 1240px) {
     grid-template-columns: 170px auto;
   }
 `
@@ -163,7 +166,7 @@ const Card = styled.div`
 
 const AuthorDetailGrid = styled.div`
   display: grid;
-  grid-template-columns: 1fr 2fr 1fr;
+  grid-template-columns: 2fr 2fr 1fr;
 
   div > button {
     align-self: center;
@@ -196,7 +199,7 @@ const AuthorLinks = styled.div`
     margin-left: 0.8em;
   }
 
-  @media (min-width: 768px) {
+  @media (min-width: 1240px) {
     transform: translateY(14px);
     grid-column: 2;
     font-size: 1.2em;
@@ -230,7 +233,6 @@ const Pool = ({ propertyAddress }: PoolProps) => {
   const { totalStakingAmount } = useGetTotalStakingAmount(propertyAddress)
   const { myStakingAmount } = useGetMyStakingAmount(propertyAddress)
   const { data } = useGetPropertyAuthenticationQuery({ variables: { propertyAddress } })
-  // const { data: propertyData } = useGetProperty(propertyAddress)
   const includeAssets = useMemo(
     () => data && truncate(data.property_authentication.map(e => e.authentication_id).join(', '), 24),
     [data]
@@ -261,7 +263,7 @@ const Pool = ({ propertyAddress }: PoolProps) => {
 const AreaLinks = styled(Links)`
   grid-area: links;
   margin-top: -0.5em;
-  @media (min-width: 768px) {
+  @media (min-width: 1240px) {
     margin: 0;
   }
 `
@@ -280,7 +282,7 @@ const EditButton = styled.a`
     color: white;
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: 1240px) {
     margin-right: 5px;
   }
 `
@@ -303,7 +305,7 @@ const AuthorAddressDetail = (_: Props) => {
   const [paginationProps, setPaginationProps] = useState<{ offset: number; limit: number; currentPage: number }>({
     offset: 0,
     limit: 5,
-    currentPage: 0
+    currentPage: 1
   })
   const { data, loading } = useListPropertyMetaQuery({
     variables: {
@@ -340,11 +342,10 @@ const AuthorAddressDetail = (_: Props) => {
       <Banner />
       <Wrap>
         <ProfilePicture>
-          {width > 0 && <AuthorAvatar accountAddress={author} size={width > 1024 ? '140' : '90'} />}
+          {width > 0 && <AuthorAvatar accountAddress={author} size={width >= 1240 ? '140' : '90'} />}
         </ProfilePicture>
 
         <TransformedGrid>
-          {/* <div style={{ display: 'grid', gridTemplateRows: '1fr' }}> */}
           <div style={{ gridColumn: '2 / -1', marginTop: '10px' }}>
             <AuthorDetailGrid>
               <span style={{ fontSize: '1.25em' }}>{dataAuthor?.name || data?.property_meta?.[0]?.name}</span>
@@ -405,11 +406,11 @@ const AuthorAddressDetail = (_: Props) => {
       <hr color="#F5F5F5" style={{ height: '5px' }} />
       <Wrap>
         <Grid>
-          <div id="about" style={{ gridColumn: '2 / -1' }}>
+          <div id="about" style={{ gridColumn: '1 / -1' }}>
             <h2>About</h2>
             <p>{dataAuthor?.biography || 'No information available for this creator'}</p>
           </div>
-          <div id="pools" style={{ gridColumn: '2 / -1', width: '100%' }}>
+          <div id="pools" style={{ gridColumn: '1 / -1', width: '100%' }}>
             <h2>Pools</h2>
             <div style={{ display: 'flex', flexDirection: 'column' }}>
               {loading && <Spin size="large" style={{ display: 'block', width: 'auto', padding: '100px' }} />}
@@ -431,11 +432,11 @@ const AuthorAddressDetail = (_: Props) => {
               </div>
             </div>
           </div>
-          <div id="top-stakers" style={{ gridColumn: '2 / -1', width: 'auto' }}>
+          <div id="top-stakers" style={{ gridColumn: '1 / -1', width: 'auto' }}>
             <h2>Top stakers</h2>
             <TopStakers authorAddress={author} />
           </div>
-          <div id="supporting" style={{ gridColumn: '2 / -1', width: 'auto' }}>
+          <div id="supporting" style={{ gridColumn: '1 / -1', width: 'auto' }}>
             <h2>Supporting</h2>
             <TopSupporting accountAddress={author} />
           </div>

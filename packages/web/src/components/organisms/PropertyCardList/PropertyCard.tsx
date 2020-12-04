@@ -128,7 +128,7 @@ const FlexRow = styled.div`
   }
 `
 
-const PropertyDescription = styled.p`
+const PropertyDescription = styled.span`
   color: grey;
   margin: 0;
   flex-grow: 1;

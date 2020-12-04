@@ -10,6 +10,7 @@ interface Props {
 
 const AvatarImage = styled.div`
   img {
+    border: 1px solid lightgrey;
     border-radius: 90px;
   }
 `
