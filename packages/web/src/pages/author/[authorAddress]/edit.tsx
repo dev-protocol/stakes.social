@@ -22,6 +22,7 @@ import { useListOwnedPropertyMetaQuery } from '@dev/graphql'
 import { useProvider } from 'src/fixtures/wallet/hooks'
 import Link from 'next/link'
 import { FullpageWrap } from 'src/components/atoms/FullpageWrap'
+import { getPath } from 'src/fixtures/utility/route'
 
 type InitialProps = {}
 type Props = {} & InitialProps
@@ -135,7 +136,7 @@ const CoverImagesUpdateForm = ({ accountAddress }: { accountAddress: string }) =
 
 const AuthorEdit = (_: Props) => {
   const { accountAddress } = useProvider()
-  const { authorAddress } = useRouter().query as { authorAddress: string }
+  const [, authorAddress] = getPath(useRouter().asPath)
   const { data, loading } = useListOwnedPropertyMetaQuery({
     variables: { account_address: authorAddress, offset: 0, limit: 1 }
   })
