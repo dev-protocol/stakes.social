@@ -87,6 +87,10 @@ const TextArea = styled.textarea`
   }
 `
 
+const Capitalize = styled.span`
+  text-transform: capitalize;
+`
+
 export const InvitationRequestForm = ({ market }: Props) => {
   const [metrics, setMetrics] = useState<boolean>(false)
   const { postInvitationHandler, isLoading } = usePostInvitation()
@@ -108,8 +112,6 @@ export const InvitationRequestForm = ({ market }: Props) => {
       setMetrics(metrics.success)
     }
   }
-
-  const marketCaps = market.charAt(0).toUpperCase() + market.slice(1)
 
   return (
     <Wrap>
@@ -151,7 +153,9 @@ export const InvitationRequestForm = ({ market }: Props) => {
             </Form.Item>
           </Row>
           <Row>
-            <Span>{marketCaps} repo:</Span>
+            <Span>
+              <Capitalize>{market}</Capitalize> repo:
+            </Span>
             <Form.Item name="url" rules={[{ required: true, type: 'string' }]} key="url">
               <Input Icon={BranchesOutlined} placeholder="url" label="url" />
             </Form.Item>
