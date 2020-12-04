@@ -32,7 +32,9 @@ export const Statistics = ({
       })
   }, [accountAddress, fetchStaked])
 
-  const totalStaked = data?.account_lockup?.[0]?.value && data?.account_lockup?.[0]?.value / Math.pow(10, 18)
+  const totalStaked =
+    data?.account_lockup_sum_values?.[0]?.sum_values &&
+    data?.account_lockup_sum_values?.[0]?.sum_values / Math.pow(10, 18)
 
   return (
     <Wrap {...props}>

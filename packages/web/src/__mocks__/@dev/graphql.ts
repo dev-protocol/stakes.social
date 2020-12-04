@@ -10,9 +10,9 @@ export const useTotalStakedAccountLazyQuery = (): Partial<ReturnType<typeof IUse
   () => '',
   {
     data: {
-      account_lockup: [
+      account_lockup_sum_values: [
         {
-          value: 9000
+          sum_values: 9000
         }
       ]
     }

@@ -5855,7 +5855,9 @@ export type TotalStakedAccountQueryVariables = Exact<{
 }>
 
 export type TotalStakedAccountQuery = { __typename?: 'query_root' } & {
-  account_lockup: Array<{ __typename?: 'account_lockup' } & Pick<Account_Lockup, 'value'>>
+  account_lockup_sum_values: Array<
+    { __typename?: 'account_lockup_sum_values' } & Pick<Account_Lockup_Sum_Values, 'sum_values'>
+  >
 }
 
 export type ListAccountLockupQueryVariables = Exact<{
@@ -6181,8 +6183,8 @@ export type GetPropertyAuthenticationQueryResult = Apollo.QueryResult<
 >
 export const TotalStakedAccountDocument = gql`
   query totalStakedAccount($account_address: String!) {
-    account_lockup(where: { account_address: { _eq: $account_address } }) {
-      value
+    account_lockup_sum_values(where: { account_address: { _eq: $account_address } }) {
+      sum_values
     }
   }
 `

@@ -61,7 +61,7 @@ const Portfolio = () => {
           <Switcher />
           <Buy />
         </PortfolioHeader>
-        <Statistics />
+        <Statistics accountAddress={accountAddress} />
         <Divider type="horizontal" />
         <Heading>Your Stakes</Heading>
         <YourStakes accountAddress={accountAddress} />
