@@ -6,6 +6,7 @@ interface Props {
   apy?: BigNumber
   creators?: BigNumber
   annualSupplyGrowthRatio?: BigNumber
+  className?: string
 }
 
 const Wrap = styled.div``
@@ -77,9 +78,9 @@ const Container = styled.div`
   padding-bottom: 20px;
 `
 
-export const SupplySummary = ({ apy, creators, annualSupplyGrowthRatio }: Props) => {
+export const SupplySummary = ({ apy, creators, annualSupplyGrowthRatio, className }: Props) => {
   return (
-    <Container>
+    <Container className={className}>
       <h2>Current Staking Rewards</h2>
       <SupplySummaryContainer>
         <SupplyBadge>
