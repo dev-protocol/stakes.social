@@ -1,0 +1,13 @@
+{
+  "public": true,
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "rewrites": [
+    { "source": "/create/accociate/:address", "destination": "/create/accociate/[market]/index.html" },
+    { "source": "/create/:address", "destination": "/create/[market]/index.html" },
+    { "source": "/author/:address/edit", "destination": "/author/[authorAddress]/edit.html" },
+    { "source": "/author/:address", "destination": "/author/[authorAddress].html" },
+    { "source": "/invite/:id", "destination": "/invite/[market]/index.html" },
+    { "source": "/:address", "destination": "/[propertyAddress].html" }
+  ]
+}

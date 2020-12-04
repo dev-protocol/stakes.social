@@ -339,7 +339,11 @@ exports[`InvitationRequestForm Snapshot 1`] = `
           <div
             class="dhltmz-3 eWpujX"
           >
-            Market
+            <span
+              class="dhltmz-7 OSLBN"
+            >
+              market
+            </span>
              repo:
           </div>
           <div
