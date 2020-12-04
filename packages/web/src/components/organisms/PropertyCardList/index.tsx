@@ -9,6 +9,7 @@ import { useRouter } from 'next/router'
 import styled from 'styled-components'
 import Select from 'react-select'
 import { useProvider } from 'src/fixtures/wallet/hooks'
+import { Grid } from 'src/components/atoms/Grid'
 
 export type FeatureTag = '' | 'GitHub' | 'Npmjs' | 'Creators'
 interface Props {
@@ -42,21 +43,11 @@ const PropertiesHeader = styled.div`
   }
 `
 
-const PropertyOverview = styled.div`
-  display: grid;
-  grid-template-columns: 1fr;
-  row-gap: 0;
-
-  @media (min-width: 800px) {
-    grid-template-columns: 1fr 1fr 1fr;
-    column-gap: 60px;
-  }
-
-  @media (min-width: 800px) and (max-width: 1200px) {
-    grid-template-rows: none;
-    grid-template-columns: 1fr 1fr;
-    column-gap: 60px;
-  }
+const PropertyOverview = styled(Grid)`
+  grid-template-columns: repeat(auto-fit, minmax(345px, 1fr));
+  grid-gap: 6rem 3rem;
+  justify-content: space-between;
+  margin: 3rem 0;
 `
 
 const DEFAULT_PER_PAGE = 9
@@ -207,15 +198,11 @@ export const PropertyCardList = ({ currentPage, searchWord, sortBy, featureTag }
         <PropertyOverview>
           {sortBy !== 'MOST_RECENT' &&
             data.property_factory_create.map(d => (
-              <div key={d.event_id} style={{ margin: '54px auto' }}>
-                <PropertyCard propertyAddress={d.property} assets={d.authentication} />
-              </div>
+              <PropertyCard key={d.event_id} propertyAddress={d.property} assets={d.authentication} />
             ))}
           {sortBy === 'MOST_RECENT' &&
             mostRecentData.property_factory_create.map(d => (
-              <div key={d.event_id} style={{ margin: '54px auto' }}>
-                <PropertyCard propertyAddress={d.property} assets={d.authentication} />
-              </div>
+              <PropertyCard key={d.event_id} propertyAddress={d.property} assets={d.authentication} />
             ))}
           <PaginationContainer>
             <Pagination

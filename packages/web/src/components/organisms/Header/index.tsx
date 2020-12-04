@@ -10,6 +10,7 @@ import { EarlyAccess } from 'src/components/atoms/EarlyAccess'
 import { useConnectWallet, useProvider } from 'src/fixtures/wallet/hooks'
 import { useRouter } from 'next/router'
 import { AccountBtn, Connecting } from 'src/components/atoms/Navigation'
+import { Container } from 'src/components/atoms/Container'
 
 interface Props {}
 
@@ -34,15 +35,6 @@ const Logo = styled.div`
     transform: translate(-50%, 50%);
     margin-top: -0.3em;
     margin-right: 0;
-  }
-`
-const ResponsiveWrap = styled.div`
-  max-width: 1200px;
-  margin-right: auto;
-  margin-left: auto;
-  @media (min-width: 1024px) {
-    margin-right: auto;
-    margin-left: auto;
   }
 `
 
@@ -87,7 +79,7 @@ export const Header = (_: Props = {}) => {
   return (
     <div style={{ position: 'fixed', top: 0, width: '100%', zIndex: 2 }}>
       <HeaderContainer>
-        <ResponsiveWrap>
+        <Container>
           <Top>
             <Logo>
               <BrandLogo />
@@ -107,7 +99,7 @@ export const Header = (_: Props = {}) => {
               ))}
             </NavigationMenu>
           )}
-        </ResponsiveWrap>
+        </Container>
         <AccountBtn onClick={accountBtnClick}>
           {isConnecting ? (
             <Connecting>{'Connecting...'}</Connecting>

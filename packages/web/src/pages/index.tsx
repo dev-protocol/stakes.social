@@ -8,6 +8,7 @@ import { useAPY, useAnnualSupplyGrowthRatio } from 'src/fixtures/dev-kit/hooks'
 import { SupplySummary } from 'src/components/molecules/SupplySummaly'
 import { Header } from 'src/components/organisms/Header'
 import { FeatureTag } from 'src/components/organisms/PropertyCardList'
+import { Container } from 'src/components/atoms/Container'
 
 type InitialProps = {}
 type Props = {} & InitialProps
@@ -49,10 +50,10 @@ const Index = (_: Props) => {
     <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
       <Header />
       <Banner />
-      <div style={{ padding: '1rem', maxWidth: '1200px', marginRight: 'auto', marginLeft: 'auto' }}>
+      <Container>
         <SupplySummary apy={apy} creators={creators} annualSupplyGrowthRatio={annualSupplyGrowthRatio} />
         <PropertyCardList currentPage={page} searchWord={word} sortBy={sortBy} featureTag={featureTag} />
-      </div>
+      </Container>
       <Footer />
     </div>
   )

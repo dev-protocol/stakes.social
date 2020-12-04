@@ -7,34 +7,31 @@ import { H2 } from 'src/components/atoms/Typography'
 import { Headline } from 'src/components/atoms/Headline'
 import { BuyDevButton } from 'src/components/molecules/BuyButton'
 import { DevChart } from 'src/components/organisms/DevChart'
+import { Container } from 'src/components/atoms/Container'
 import styled from 'styled-components'
 
 type Props = {}
 
-const Wrap = styled.div`
-  display: grid;
-  padding: 1rem;
-  gap: 1rem;
-  max-width: 1200px;
-  margin: auto;
+const StyledHeadline = styled(Headline)`
+  margin-bottom: 1rem;
 `
 
 const DevProtocolStats = (_: Props) => {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
       <Header />
-      <Headline>
+      <StyledHeadline>
         <H2 color="#4f4f4f">Dev Protocol Stats</H2>
         <span style={{ marginBottom: '10px' }}>Dev Protocol is being adopted, see for yourself.</span>
         <BuyDevButton />
-      </Headline>
-      <div style={{ padding: '1rem', maxWidth: '1200px', margin: '0 auto', width: '95%' }}>
+      </StyledHeadline>
+      <Container>
         <DevStats />
         <Divider type="horizontal" />
-        <Wrap>
-          <DevChart />
-        </Wrap>
-      </div>
+      </Container>
+      <Container>
+        <DevChart />
+      </Container>
       <Footer />
     </div>
   )
