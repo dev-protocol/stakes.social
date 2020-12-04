@@ -10,6 +10,8 @@ type Props = {
 const AvatarImage = styled.div`
   img {
     border-radius: 90px;
+    padding: 5px;
+    border: 1px solid lightgrey;
   }
 `
 

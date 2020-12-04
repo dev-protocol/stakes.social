@@ -124,13 +124,14 @@ const MutedSpan = styled.span`
 const FlexRow = styled.div`
   display: flex;
   margin-left: 16px;
+  padding-top: 5px;
 
   img {
     border-radius: 90px;
   }
 `
 
-const PropertyDescription = styled.p`
+const PropertyDescription = styled.span`
   color: grey;
   margin: 0;
   flex-grow: 1;

@@ -89,7 +89,9 @@ export const SupplySummary = ({ apy, creators, annualSupplyGrowthRatio }: Props)
         <SupplyBadge>
           <Statistics>{creators?.dp(2).toNumber()}%</Statistics>
           <label>Creators APY</label>
-          <a href="https://docs.devprtcl.com/protocol/tokenomics">Learn more</a>
+          <a target="_blank" rel="noopener noreferrer" href="https://docs.devprtcl.com/protocol/tokenomics">
+            Learn more
+          </a>
         </SupplyBadge>
         <SupplyBadge>
           <Statistics>{annualSupplyGrowthRatio?.dp(2).toNumber()}%</Statistics>

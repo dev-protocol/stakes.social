@@ -25,6 +25,7 @@ const SupportSection = styled.div`
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2), 0 2px 4px -1px rgba(0, 0, 0, 0.12);
   border-radius: 6px;
   width: 180px;
+  height: 180px;
   margin-bottom: 1em;
 
   @media (max-width: 768px) {
@@ -38,7 +39,7 @@ const AccountAddress = styled.span`
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
-  max-width: 100px;
+  max-width: 150px;
 `
 
 const Support = ({ propertyAddress, value }: { propertyAddress: string; value: number }) => {
