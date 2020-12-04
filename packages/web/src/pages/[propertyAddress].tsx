@@ -192,7 +192,7 @@ const PropertyAddressDetail = (_: Props) => {
   const [propertyAddress] = getPath(useRouter().asPath)
   const { apy, creators } = useAPY()
   const { data } = useGetPropertyAuthenticationQuery({ variables: { propertyAddress } })
-  const isExistProperty = useMemo(() => data?.property_authentication.length > 0, [data])
+  const isExistProperty = useMemo(() => data && data?.property_authentication.length > 0, [data])
   const { data: dataProperty } = useGetProperty(isExistProperty ? propertyAddress : undefined)
   const { data: propertyInformation } = useGetPropertytInformation(isExistProperty ? propertyAddress : undefined)
   /* eslint-disable react-hooks/exhaustive-deps */
