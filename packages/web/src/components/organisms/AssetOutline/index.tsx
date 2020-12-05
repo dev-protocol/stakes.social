@@ -1,11 +1,8 @@
 import React, { useMemo } from 'react'
-// import { List } from 'antd'
 import { CircleGraph } from 'src/components/atoms/CircleGraph'
 import { useStakingShare } from 'src/fixtures/dev-kit/hooks'
-// import { useGetPropertyAuthenticationQuery } from '@dev/graphql'
 import { useGetPropertytInformation } from 'src/fixtures/devprtcl/hooks'
 import styled from 'styled-components'
-// import Link from 'next/link'
 import { ExportOutlined } from '@ant-design/icons'
 
 interface Props {
@@ -30,9 +27,6 @@ const AssetStrengthValue = styled.span`
   font-size: 2rem;
   color: black;
 `
-// const AssetListItem = styled(List.Item)`
-//   font-size: 1.3rem;
-// `
 
 const AuthorContainer = styled.div`
   display: flex;
@@ -135,11 +129,6 @@ const Author = ({ propertyAddress }: { propertyAddress: string }) => {
 }
 
 export const AssetOutline = ({ className, propertyAddress }: Props) => {
-  // const { data } = useGetPropertyAuthenticationQuery({ variables: { propertyAddress } })
-  /* eslint-disable react-hooks/exhaustive-deps */
-  // FYI: https://github.com/facebook/react/pull/19062
-  // const includedAssetList = useMemo(() => data?.property_authentication.map(e => e.authentication_id), [data])
-
   return (
     <OutlinesWrap className={className}>
       <Author propertyAddress={propertyAddress} />

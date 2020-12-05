@@ -193,8 +193,6 @@ const PropertyAddressDetail = (_: Props) => {
   const { data } = useGetPropertyAuthenticationQuery({ variables: { propertyAddress } })
   const { data: dataProperty } = useGetProperty(propertyAddress)
   const { data: propertyInformation } = useGetPropertytInformation(propertyAddress)
-  /* eslint-disable react-hooks/exhaustive-deps */
-  // FYI: https://github.com/facebook/react/pull/19062
   const includedAssetList = useMemo(() => data?.property_authentication.map(e => e.authentication_id), [data])
   const { accountAddress: loggedInWallet } = useProvider()
 

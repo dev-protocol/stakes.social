@@ -1,7 +1,5 @@
 import * as React from 'react'
-// import { Button } from 'antd'
 import { BrandLogo } from 'src/components/atoms/BrandLogo'
-// imp ort { useConnectWallet } from 'src/fixtures/wallet/hooks'
 import styled from 'styled-components'
 import { Navigation, Navigations } from 'src/components/molecules/Navigation'
 import { useState } from 'react'
