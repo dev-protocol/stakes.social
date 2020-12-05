@@ -200,11 +200,10 @@ const PropertyAddressDetail = (_: Props) => {
   const includedAssetList = useMemo(() => data?.property_authentication.map(e => e.authentication_id), [data])
   const { accountAddress: loggedInWallet } = useProvider()
 
-  if (data && !isExistProperty) {
-    return <Error statusCode={404} />
-  }
-
-  return (
+  return data && !isExistProperty ? (
+    // property is not found
+    <Error statusCode={404} />
+  ) : (
     <>
       <Header></Header>
       <Wrap>
