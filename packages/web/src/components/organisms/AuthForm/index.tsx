@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Form, Button, Result } from 'antd'
-import { useAuthenticate, useCreateAndAuthenticate } from 'src/fixtures/dev-kit/hooks'
+import { useAuthenticate } from 'src/fixtures/dev-kit/hooks'
 import { usePostSignGitHubMarketAsset } from 'src/fixtures/khaos/hooks'
 import styled from 'styled-components'
 import { blueGradient } from 'src/styles/gradient'
@@ -14,7 +14,6 @@ const NpmMarketContractAddress = '0x88c7B1f41DdE50efFc25541a2E0769B887eB2ee7'
 
 export interface Props {
   market: string
-  property?: string
 }
 
 const Container = styled.div`
@@ -67,7 +66,6 @@ export const AuthForm = ({ market }: Props) => {
   const [metrics, setMetrics] = useState<string>('')
   const { postSignGitHubMarketAssetHandler, isLoading } = usePostSignGitHubMarketAsset()
   const { authenticate } = useAuthenticate()
-  const { createAndAuthenticate } = useCreateAndAuthenticate()
   const { accountAddress } = useProvider()
   const onFinish = async (values: any) => {
     console.log('values: ', values)
@@ -81,15 +79,10 @@ export const AuthForm = ({ market }: Props) => {
             return [repository, khaos.publicSignature || '']
           })()
 
-    const res = await (values.propertyAddress
-      ? authenticate(market, values.propertyAddress, authRequestData)
-      : ((name, symbol) => createAndAuthenticate(name, symbol, market, authRequestData))(
-          values.propertyName,
-          values.propertySymbol
-        ))
+    const res = await authenticate(market, values.propertyAddress, authRequestData)
 
     if (res) {
-      const metricsAddress = typeof res === 'string' ? res : res.metrics
+      const metricsAddress = res
       setMetrics(metricsAddress)
     }
   }
