@@ -70,10 +70,10 @@ export const Footer = () => {
             <span>2020 All rights reserverd.</span>
             <SocialContainer>
               <Twitter target="_blank" rel="noopener noreferrer" />
-              <Discord target="_blank" rel="noopener noreferrer" />
+              <Discord />
               <Github target="_blank" rel="noopener noreferrer" />
-              <Telegram target="_blank" rel="noopener noreferrer" />
-              <Medium target="_blank" rel="noopener noreferrer" />
+              <Telegram />
+              <Medium />
             </SocialContainer>
           </div>
         </FooterContainer>
