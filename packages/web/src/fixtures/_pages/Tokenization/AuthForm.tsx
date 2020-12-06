@@ -79,7 +79,7 @@ const InfoContainer = styled.div`
 const Etherscan = styled(ButtonWithGradient)`
   border-radius: 6px;
   padding: 0 24px;
-  margin-right: 10px;
+  /* margin-right: 10px; */
 `
 
 // const GoPool = styled(ButtonWithGradient)`
