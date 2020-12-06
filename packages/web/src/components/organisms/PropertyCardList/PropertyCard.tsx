@@ -80,6 +80,7 @@ const ButtonContainer = styled.div`
   display: flex;
   justify-content: space-evenly;
   align-items: center;
+  padding-top: 16px;
 `
 
 const CardContents = styled(Grid)`
@@ -87,7 +88,7 @@ const CardContents = styled(Grid)`
   grid-gap: 1rem;
   align-content: baseline;
   grid-template-rows: auto 1fr;
-  padding: 16px;
+  padding: 16px 16px 0 16px;
 `
 
 const StakeButton = styled.button<{ isPropertyStaked?: Boolean }>`
