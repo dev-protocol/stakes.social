@@ -88,7 +88,7 @@ const CardContents = styled(Grid)`
   grid-gap: 1rem;
   align-content: baseline;
   grid-template-rows: auto 1fr;
-  padding: 16px 16px 0 16px;
+  padding: 4px 16px 0 16px;
 `
 
 const StakeButton = styled.button<{ isPropertyStaked?: Boolean }>`
