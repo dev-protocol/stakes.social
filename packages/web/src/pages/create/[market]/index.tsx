@@ -7,6 +7,7 @@ import { Headline } from 'src/components/atoms/Headline'
 import { H2 } from 'src/components/atoms/Typography'
 import styled from 'styled-components'
 import { useState } from 'react'
+import { getPath } from 'src/fixtures/utility/route'
 
 type Props = {}
 
@@ -29,9 +30,10 @@ const ResponsiveContainer = styled(Container)`
 `
 
 const AuthenticateNewAsset = (_: Props) => {
-  const { market } = useRouter().query as { market: string }
   const [header, setHeader] = useState('Create an Asset')
   const [subHeader, setSubHeader] = useState('Create an asset or authenticate an existing pool.')
+  const [, market] = getPath(useRouter().asPath)
+
   return (
     <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
       <Header />
@@ -39,7 +41,7 @@ const AuthenticateNewAsset = (_: Props) => {
         <H2>{header}</H2>
         <span>{subHeader}</span>
       </Headline>
-      <ResponsiveContainer style={{ flexGrow: 1 }}>
+      <ResponsiveContainer>
         <AuthForm onHeaderChange={setHeader} onSubHeaderChange={setSubHeader} market={market} />
       </ResponsiveContainer>
       <Footer />

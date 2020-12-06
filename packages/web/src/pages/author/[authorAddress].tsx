@@ -25,6 +25,7 @@ import { useProvider } from 'src/fixtures/wallet/hooks'
 import { useState } from 'react'
 import { useCurrency } from 'src/fixtures/currency/hooks'
 import { Pagination, Spin } from 'antd'
+import { getPath } from 'src/fixtures/utility/route'
 
 type Props = {}
 
@@ -298,8 +299,7 @@ const Section = styled.a<{ activeSection: string; section: string }>`
 `
 
 const AuthorAddressDetail = (_: Props) => {
-  const router = useRouter()
-  let { authorAddress } = router.query
+  const [, authorAddress] = getPath(useRouter().asPath)
   const author: string = typeof authorAddress == 'string' ? authorAddress : 'none'
   const { data: authorInformation } = useGetAuthorInformation(author)
   const [paginationProps, setPaginationProps] = useState<{ offset: number; limit: number; currentPage: number }>({
