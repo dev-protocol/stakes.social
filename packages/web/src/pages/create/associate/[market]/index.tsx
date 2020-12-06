@@ -35,7 +35,7 @@ const ResponsiveContainer = styled(Container)`
 `
 
 const AuthenticateNewAsset = (_: Props) => {
-  const [, , market, property] = getPath(useRouter().asPath)
+  const [, , market] = getPath(useRouter().asPath)
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
@@ -45,7 +45,7 @@ const AuthenticateNewAsset = (_: Props) => {
         <span>Confidentially verify your ownership with our Khaos oracle</span>
       </Headline>
       <ResponsiveContainer>
-        <AuthForm market={market} property={property} />
+        <AuthForm market={market} />
       </ResponsiveContainer>
       <Footer />
     </div>

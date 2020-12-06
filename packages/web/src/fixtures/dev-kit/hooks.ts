@@ -389,26 +389,17 @@ export const useAuthenticate = () => {
 
 export const useCreateAndAuthenticate = () => {
   const { web3 } = useProvider()
-  const key = 'useCreateAndAuthenticate'
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [error, setError] = useState<Error>()
   const callback = useCallback(
     async (name: string, symbol: string, marketAddress: string, args: string[]) => {
       setIsLoading(true)
-      message.loading({ content: 'now authenticating...', duration: 0, key })
       setError(undefined)
       return whenDefined(web3, x =>
         createAndAuthenticate(x, name, symbol, marketAddress, args)
-          .then(metricsAddress => {
+          .catch(setError)
+          .finally(() => {
             setIsLoading(false)
-            message.success({ content: 'success authenticate!', key })
-            return metricsAddress
-          })
-          .catch(err => {
-            setError(err)
-            message.error({ content: err.message, key })
-            setIsLoading(false)
-            return undefined
           })
       )
     },
