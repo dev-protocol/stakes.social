@@ -17,7 +17,6 @@ export const usePostSignGitHubMarketAsset = () => {
     }
 
     setIsLoading(true)
-    message.loading({ content: 'authenticate asset', duration: 0, key })
 
     return postSignGitHubMarketAsset(signMessage, signature || '', personalAccessToken)
       .then(result => {
@@ -26,7 +25,6 @@ export const usePostSignGitHubMarketAsset = () => {
           message.error({ content: result.message, key })
           return {} as GitHubAssetInformation
         } else {
-          message.success({ content: 'success to authenticate asset', key })
           return result
         }
       })

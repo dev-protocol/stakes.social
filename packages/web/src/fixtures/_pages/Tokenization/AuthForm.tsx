@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Form, Button, Result } from 'antd'
+import { Form, Button, Result, message } from 'antd'
 import { useCreateAndAuthenticate } from 'src/fixtures/dev-kit/hooks'
 import { usePostSignGitHubMarketAsset } from 'src/fixtures/khaos/hooks'
 import styled from 'styled-components'
@@ -57,10 +57,11 @@ const Submit = styled.button`
   color: white;
   box-shadow: 0 2px 3px -1px rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.06);
 
-  cursor: pointer;
+  cursor: ${props => (props.disabled ? 'auto' : 'pointer')};
   :hover {
     transition: ease-in-out 0.2s;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2), 0 2px 4px -1px rgba(0, 0, 0, 0.12);
+    box-shadow: ${props =>
+      props.disabled ? 'none' : '0 4px 6px -1px rgba(0, 0, 0, 0.2), 0 2px 4px -1px rgba(0, 0, 0, 0.12)'};
   }
 `
 
@@ -76,25 +77,50 @@ export const AuthForm = ({ market }: Props) => {
   const [metrics, setMetrics] = useState<string>('')
   const [property, setProperty] = useState<string>('')
   const { postSignGitHubMarketAssetHandler, isLoading } = usePostSignGitHubMarketAsset()
-  const { createAndAuthenticate } = useCreateAndAuthenticate()
+  const { createAndAuthenticate, isLoading: isAuthenticating } = useCreateAndAuthenticate()
   const { accountAddress } = useProvider()
   const onFinish = async (values: any) => {
+    const key = 'tokenization'
+    message.loading({ content: 'now tokenizing...', duration: 0, key })
+
     const authRequestData: string[] =
       market === NpmMarketContractAddress
         ? Object.values(values)
         : await (async () => {
+            // If the target market is not NpmMarket, it is the GitHubMarket with Khaos.
+            // TODO: Needs dynamically switch to use Khaos or not use Khaos by target Market
+
             const repository: string = values.projectName
             const personalAccessToken = values.personalAccessToken
+
+            // Create a public signature from the user's signature and the entered PAT.
             const khaos = await postSignGitHubMarketAssetHandler(repository, personalAccessToken)
+            message.success({ content: 'Successful creation of public signature by Khaos' })
             return [repository, khaos.publicSignature || '']
           })()
 
-    const res = await createAndAuthenticate(values.projectName, values.tokenSymbol, market, authRequestData)
-    // TODO: Function to be called to tokenize based input
-    if (res) {
-      const { metrics: metricsAddress, property: propertyAddress } = res
+    // Send Ethereum transaction and create new Property Tokens, aka Creator Tokens, and starts authentication flow.
+    const results = await createAndAuthenticate(values.projectName, values.tokenSymbol, market, authRequestData)
+    if (results) {
+      // TODO: Function to be called to tokenize based input
+      // New Property Tokens have been created.
+      /**
+       * results interfaces
+       *
+       * property - created new Property address
+       * transaction - Ethereum transaction information
+       * waitForAuthentication - Promise that expects resolve by completing the authentication
+       */
+      message.success({ content: `success creation your tokens: ${results.property}` })
+      message.loading({ content: 'now authenticating...', duration: 0, key })
+
+      // Wait for completing the authentication
+      const metricsAddress = await results.waitForAuthentication()
+      message.success({ content: 'completed tokenization!', key })
+
+      // Completed the all flow
+      setProperty(results.property)
       setMetrics(metricsAddress)
-      setProperty(propertyAddress)
     }
   }
 
@@ -191,26 +217,12 @@ export const AuthForm = ({ market }: Props) => {
             <Row>
               <div style={{ display: 'flex', gridColumn: '1/-1', justifyContent: 'flex-end' }}>
                 <ButtonContainer>
-                  <Submit type="submit" disabled={isLoading}>
+                  <Submit type="submit" disabled={isLoading || isAuthenticating}>
                     Tokenize
                   </Submit>
                 </ButtonContainer>
               </div>
             </Row>
-
-            {/* <Row>
-              <Span>Add tags:</Span>
-              <div style={{ display: 'flex', flexDirection: 'column' }}>
-                <Form.Item name="ask" rules={[{ type: 'string' }]} key="ask">
-                  <Input placeholder="I'd like to say..." label="ask" />
-                </Form.Item>
-                <ButtonContainer>
-                  <Submit type="submit" disabled={isLoading}>
-                    Tokenize
-                  </Submit>
-                </ButtonContainer>
-              </div>
-            </Row> */}
           </Form>
         )}
       </Container>
