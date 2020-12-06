@@ -91,6 +91,7 @@ const CardContents = styled(Grid)`
 `
 
 const StakeButton = styled.button<{ isPropertyStaked?: Boolean }>`
+  height: 35px;
   padding: 6px 24px;
   width: ${props => (props.isPropertyStaked ? '50%' : '100%')};
   border: none;
