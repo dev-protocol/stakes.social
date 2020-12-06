@@ -6,6 +6,7 @@ import { Header } from 'src/components/organisms/Header'
 import { Headline } from 'src/components/atoms/Headline'
 import { H2 } from 'src/components/atoms/Typography'
 import styled from 'styled-components'
+import { getPath } from 'src/fixtures/utility/route'
 
 type Props = {}
 
@@ -34,7 +35,7 @@ const ResponsiveContainer = styled(Container)`
 `
 
 const AuthenticateNewAsset = (_: Props) => {
-  const { market, property } = useRouter().query as { market: string; property: string }
+  const [, , market, property] = getPath(useRouter().asPath)
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>

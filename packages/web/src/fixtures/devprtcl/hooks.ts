@@ -20,10 +20,10 @@ export const getPropertytInformation = (propertyAddress: string): Promise<Proper
 export const getAuthorInformation = (authorAddress: string): Promise<AuthorInformation> =>
   fetch(`https://api.devprtcl.com/v1/author/${authorAddress}`).then(res => res.json())
 
-export const useGetPropertytInformation = (propertyAddress: string) => {
-  const { data, error } = useSWR<UnwrapFunc<typeof getPropertytInformation>, Error>(
+export const useGetPropertytInformation = (propertyAddress?: string) => {
+  const { data, error } = useSWR<UnwrapFunc<typeof getPropertytInformation> | undefined, Error>(
     SWRCachePath.getPropertyInformation(propertyAddress),
-    () => getPropertytInformation(propertyAddress),
+    () => whenDefined(propertyAddress, address => getPropertytInformation(address)),
     { onError: err => message.error(err.message) }
   )
   return { data, error }
