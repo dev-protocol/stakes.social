@@ -9,13 +9,13 @@ const Wrap = styled.span`
   color: white;
   display: flex;
   align-items: center;
-  gap: 0.5em;
   & > svg {
     width: 2em;
   }
 `
 
 const Text = styled.span`
+  margin-left: 0.5em;
   font-size: 1.2rem;
   font-weight: bold;
 `

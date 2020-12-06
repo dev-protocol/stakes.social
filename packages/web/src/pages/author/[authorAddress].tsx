@@ -328,10 +328,8 @@ const AuthorAddressDetail = (_: Props) => {
   const [activeSection, setActiveSection] = useState<string>('about')
 
   const handlePagination = useCallback((page: number) => {
-    console.log('pagination number: ', page)
     setPaginationProps(oldPaginationProps => {
       const newOffset = page === 1 ? 0 : 5 * (page - 1)
-      console.log('new offset: ', newOffset)
       return { ...oldPaginationProps, currentPage: page, offset: newOffset }
     })
   }, [])

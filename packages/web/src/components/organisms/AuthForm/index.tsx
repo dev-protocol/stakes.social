@@ -68,7 +68,6 @@ export const AuthForm = ({ market }: Props) => {
   const { authenticate } = useAuthenticate()
   const { accountAddress } = useProvider()
   const onFinish = async (values: any) => {
-    console.log('values: ', values)
     const authRequestData: string[] =
       market === NpmMarketContractAddress
         ? Object.values(values)
@@ -94,8 +93,6 @@ export const AuthForm = ({ market }: Props) => {
       propertyAddress
     })
   }
-
-  console.log('form value:?', form.getFieldValue('propertyAddress'))
 
   return (
     <Container>
