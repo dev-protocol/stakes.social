@@ -69,11 +69,11 @@ export const Footer = () => {
           <div style={{ display: 'flex', justifyContent: 'space-between', color: 'white', fontSize: '0.9em' }}>
             <span>2020 All rights reserverd.</span>
             <SocialContainer>
-              <Twitter />
-              <Discord />
-              <Github />
-              <Telegram />
-              <Medium />
+              <Twitter target="_blank" rel="noopener noreferrer" />
+              <Discord target="_blank" rel="noopener noreferrer" />
+              <Github target="_blank" rel="noopener noreferrer" />
+              <Telegram target="_blank" rel="noopener noreferrer" />
+              <Medium target="_blank" rel="noopener noreferrer" />
             </SocialContainer>
           </div>
         </FooterContainer>
