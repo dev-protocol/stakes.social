@@ -24,7 +24,7 @@ exports[`Footer Snapshot 1`] = `
                 href="/"
               >
                 <span
-                  class="sc-1u809dt-0 fuSEHu"
+                  class="sc-1u809dt-0 gWcVAK"
                 >
                   <svg
                     id="headerlogo"
@@ -40,7 +40,7 @@ exports[`Footer Snapshot 1`] = `
                     />
                   </svg>
                   <span
-                    class="sc-1u809dt-1 iuiHFu"
+                    class="sc-1u809dt-1 hLxuiA"
                   >
                     Stakes.social
                   </span>
@@ -48,7 +48,7 @@ exports[`Footer Snapshot 1`] = `
               </a>
             </div>
             <div
-              style="color: white; font-size: 0.9em;"
+              style="display: flex; align-items: center; color: white; font-size: 0.9em;"
             >
               <span>
                 Powered by
@@ -58,11 +58,14 @@ exports[`Footer Snapshot 1`] = `
                 role="separator"
                 style="margin-left: 2px; margin-right: 2px;"
               />
-              <span
-                style="font-weight: bold;"
+              <a
+                class="sc-1fvy930-4 hsgAxc"
+                href="https://devprtcl.com/"
+                rel="noopener noreferrer"
+                target="_blank"
               >
                 Dev Protocol
-              </span>
+              </a>
             </div>
           </div>
           <hr
