@@ -77,7 +77,7 @@ export const Header = (_: Props = {}) => {
   }
 
   return (
-    <div style={{ position: 'fixed', top: 0, width: '100%', zIndex: 2 }}>
+    <div style={{ position: 'sticky', top: 0, width: '100%', zIndex: 2 }}>
       <HeaderContainer>
         <Container>
           <Top>

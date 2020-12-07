@@ -38,7 +38,7 @@ const Card = styled(Grid)`
   cursor: pointer;
   background: #fff;
   overflow: hidden;
-  height: 500px;
+  min-height: 500px;
 `
 
 const RowContainer = styled.div`
@@ -80,6 +80,7 @@ const ButtonContainer = styled.div`
   display: flex;
   justify-content: space-evenly;
   align-items: center;
+  padding-top: 16px;
 `
 
 const CardContents = styled(Grid)`
@@ -87,10 +88,11 @@ const CardContents = styled(Grid)`
   grid-gap: 1rem;
   align-content: baseline;
   grid-template-rows: auto 1fr;
-  padding: 16px;
+  padding: 4px 16px 0 16px;
 `
 
 const StakeButton = styled.button<{ isPropertyStaked?: Boolean }>`
+  height: 35px;
   padding: 6px 24px;
   width: ${props => (props.isPropertyStaked ? '50%' : '100%')};
   border: none;
@@ -136,7 +138,6 @@ const PropertyDescription = styled.span`
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
-  line-height: 1.4em;
   -webkit-line-clamp: 4; /* number of lines to show */
   -webkit-box-orient: vertical;
 `

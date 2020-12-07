@@ -19,12 +19,6 @@ const BuyButton = styled.a`
   :hover {
     color: white;
   }
-
-  margin-top: 10px;
-
-  @media (min-width: 768px) {
-    margin-top: 0px;
-  }
 `
 
 export const BuyDevButton = ({ className }: Props) => (

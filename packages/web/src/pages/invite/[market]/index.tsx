@@ -15,13 +15,14 @@ const WrapContainer = styled.div`
   margin: auto;
   padding-top: 1rem;
   word-break: break-all;
+  flex-grow: 1;
 `
 
 const InvitationRequest = (_: Props) => {
   const [, market] = getPath(useRouter().asPath)
 
   return (
-    <>
+    <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
       <Header />
       <Headline height={300}>
         <H2>Creator Waitlist</H2>
@@ -33,7 +34,7 @@ const InvitationRequest = (_: Props) => {
         <InvitationRequestForm market={market} />
       </WrapContainer>
       <Footer />
-    </>
+    </div>
   )
 }
 
