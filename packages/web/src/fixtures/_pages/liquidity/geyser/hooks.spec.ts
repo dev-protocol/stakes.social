@@ -421,7 +421,20 @@ describe('geyser hooks', () => {
       ;(useSWR as jest.Mock).mockImplementationOnce(() => ({ data: toBigNumber(20000) }))
       ;(useSWR as jest.Mock).mockImplementationOnce(() => ({ data: toBigNumber(20) }))
       const { result } = renderHook(() => useRewardMultiplier())
+      expect(result.current.max).toBe(5)
       expect(result.current.data).toBe(3)
+    })
+
+    test('success fetching data (max)', () => {
+      const utc = getUTC()
+      ;(useSWR as jest.Mock).mockImplementationOnce(() => ({ data: '0x' }))
+      ;(useSWR as jest.Mock).mockImplementationOnce(() => ({ data: 12345 }))
+      ;(useSWR as jest.Mock).mockImplementationOnce(() => ({ data: utc - 10000 }))
+      ;(useSWR as jest.Mock).mockImplementationOnce(() => ({ data: toBigNumber(8000) }))
+      ;(useSWR as jest.Mock).mockImplementationOnce(() => ({ data: toBigNumber(20) }))
+      const { result } = renderHook(() => useRewardMultiplier())
+      expect(result.current.max).toBe(5)
+      expect(result.current.data).toBe(5)
     })
 
     test('failure fetching data', () => {

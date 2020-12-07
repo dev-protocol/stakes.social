@@ -282,7 +282,7 @@ export const useRewardMultiplier = () => {
     () => whenDefined(nonConnectedWeb3, x => startBonus(x))
   )
   const startBonusPct = _startBonus ? toBigNumber(_startBonus).div(100) : toBigNumber(0)
-  const data =
+  const multiplier =
     timestamp && bonusPeriod && startBonusPct
       ? startBonusPct
           .plus(
@@ -295,6 +295,7 @@ export const useRewardMultiplier = () => {
           .toNumber()
       : undefined
   const max = toBigNumber(1).div(startBonusPct).dp(1).toNumber()
+  const data = (multiplier ?? 0) < max ? multiplier : max
 
   return {
     data,
