@@ -3,5 +3,8 @@ query getPropertyAuthentication($propertyAddress: String!) {
     authentication_id
     market
     metrics
+    property_meta {
+      author
+    }
   }
 }

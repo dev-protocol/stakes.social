@@ -4,173 +4,232 @@ exports[`Footer Snapshot 1`] = `
 <body>
   <div>
     <footer
-      class="sc-1fvy930-0 eqCrSP"
+      class="sc-1fvy930-0 igvLHC"
     >
       <div
-        class="sc-1wzqvkc-0 byYDMh"
+        class="sc-1wzqvkc-0 cBjuIs"
+        style="margin: unset; text-align: center; max-width: unset; background: black; padding: 30px 0px 30px 0px;"
       >
-        <p>
-          <span>
-            Stakes.social is powered by the 
-          </span>
-          <a
-            href="//devprtcl.com"
-            rel="noreferrer noopener"
-            style="text-decoration: underline;"
-            target="_blank"
-          >
-            Dev Protocol
-          </a>
-          <span>
-            , see the 
-          </span>
-          <a
-            href="//github.com/dev-protocol/protocol/blob/main/docs/WHITEPAPER.md"
-            rel="noreferrer noopener"
-            style="text-decoration: underline;"
-            target="_blank"
-          >
-            whitepaper
-          </a>
-          <span>
-             on 
-          </span>
-          <a
-            href="//github.com/dev-protocol/protocol"
-            rel="noreferrer noopener"
-            style="text-decoration: underline;"
-            target="_blank"
-          >
-            GitHub
-          </a>
-          .
-        </p>
-        <p>
-          <span>
-            Enjoy following the Dev Protocol community on 
-          </span>
-          <a
-            href="//discord.gg/VwJp4KM"
-            rel="noreferrer noopener"
-            style="text-decoration: underline;"
-            target="_blank"
-          >
-            Discord
-          </a>
-          <span>
-            , 
-          </span>
-          <a
-            href="//t.me/devprtcl"
-            rel="noreferrer noopener"
-            style="text-decoration: underline;"
-            target="_blank"
-          >
-            Telegram
-          </a>
-          <span>
-            , 
-          </span>
-          <a
-            href="//medium.com/devtoken"
-            rel="noreferrer noopener"
-            style="text-decoration: underline;"
-            target="_blank"
-          >
-            Medium
-          </a>
-          <span>
-            , 
-          </span>
-          <a
-            href="//spectrum.chat/devtoken"
-            rel="noreferrer noopener"
-            style="text-decoration: underline;"
-            target="_blank"
-          >
-            Spectrum
-          </a>
-          <span>
-            , and 
-          </span>
-          <a
-            href="//twitter.com/devprtcl"
-            rel="noreferrer noopener"
-            style="text-decoration: underline;"
-            target="_blank"
-          >
-            Twitter
-          </a>
-          !
-        </p>
-      </div>
-      <div
-        class="sc-1wzqvkc-0 byYDMh"
-      >
-        <svg
-          viewBox="0 0 408 146"
-          width="84"
+        <div
+          class="sc-1fvy930-2 dFrKmz"
         >
-          <defs>
-            <lineargradient
-              gradientTransform="matrix(1 0 0 -1 0 148)"
-              gradientUnits="userSpaceOnUse"
-              id="Logo_svg__b"
-              x2="405.98"
-              y1="74.5"
-              y2="74.5"
+          <div
+            style="display: flex; justify-content: space-between;"
+          >
+            <div
+              class="sc-1fvy930-3"
             >
-              <stop
-                offset="0"
-                stop-color="#00ebff"
-              />
-              <stop
-                offset="0.35"
-                stop-color="#f200df"
-              />
-              <stop
-                offset="1"
-                stop-color="#ff4700"
-              />
-            </lineargradient>
-            <clippath
-              id="Logo_svg__a"
-              transform="translate(0 -.5)"
+              <a
+                class="sc-38x7tx-0 eHXdRo"
+                href="/"
+              >
+                <span
+                  class="sc-1u809dt-0 gWcVAK"
+                >
+                  <svg
+                    id="headerlogo"
+                    viewBox="0 0 25 20"
+                    width="1em"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M9.14 4a5.77 5.77 0 00-.9-.21A3.66 3.66 0 004.88 4.9c-1.34 1.45-1.46 3.77-.51 6a25.32 25.32 0 014.14-6.2c.21-.27.42-.48.63-.7zm3.36-2.6A10.45 10.45 0 008.76.09a7.36 7.36 0 00-6.63 2.27C-1.13 5.89-.2 11 1.94 14.21a8.19 8.19 0 00.7.94c-.15.47-.28.89-.38 1.25s-.2.73-.25 1l-.07.27v.07l1.83.38-1.83-.38a1.87 1.87 0 103.67.77 1.49 1.49 0 01.05-.21c0-.14.08-.34.15-.57a14.18 14.18 0 006.62 1.66h.16a14.25 14.25 0 006.63-1.66c.06.23.11.43.15.57s0 .16 0 .21a1.87 1.87 0 003.67-.77l-1.84.38 1.84-.38v-.07a2.32 2.32 0 00-.06-.27c-.06-.23-.14-.56-.26-1s-.22-.78-.38-1.25a9.64 9.64 0 00.71-.94c2.15-3.21 3.08-8.32-.17-11.85A7.38 7.38 0 0016.24.09a10.45 10.45 0 00-3.74 1.32zm0 4.6c-.41.36-.82.76-1.25 1.21A23.43 23.43 0 007 14.06a10.2 10.2 0 005.38 1.53h.16A10.2 10.2 0 0018 14.06a23.22 23.22 0 00-4.21-6.85c-.46-.45-.88-.85-1.29-1.21zm8.13 4.86a25.32 25.32 0 00-4.14-6.2c-.21-.23-.42-.44-.63-.65a5.62 5.62 0 01.91-.21 3.64 3.64 0 013.35 1.1c1.34 1.45 1.46 3.77.51 5.96z"
+                      data-name="Layer 1"
+                      fill="#fff"
+                      fill-rule="evenodd"
+                    />
+                  </svg>
+                  <span
+                    class="sc-1u809dt-1 hLxuiA"
+                  >
+                    Stakes.social
+                  </span>
+                </span>
+              </a>
+            </div>
+            <div
+              style="display: flex; align-items: center; color: white; font-size: 0.9em;"
             >
-              <path
-                d="M147.14 72.87c0 42.9-33.85 72.88-82.75 72.88H0V0h65.72c48.01 0 81.42 29.77 81.42 72.87zm-35.62.21c0-26.86-19.91-45.39-46.47-45.39H35v90.37h31.6c25.89 0 44.92-18.32 44.92-44.98zm145.15 34.36l19.47 16.66c-13.72 15.2-31.87 22.9-53.55 22.9-37.84 0-63.28-22.9-63.28-57 0-33.73 23.67-57 61.07-57.26 34.51-.21 57.3 19.57 58.63 51.64l-82.31 20.4C201.79 115.56 212 122 225 122c11.53 0 22.59-5 31.67-14.56zm-63.29-21.86l52.22-13.33c-3.76-10.83-11.95-15.83-23.45-15.83-16.82 0-27.66 10.21-28.77 29.16zm124.79-51.85l28.1 81.62 27.88-81.62H408l-44.92 112h-35L283 33.94z"
-                fill="none"
+              <span>
+                Powered by
+              </span>
+              <div
+                class="ant-divider ant-divider-vertical"
+                role="separator"
+                style="margin-left: 2px; margin-right: 2px;"
               />
-            </clippath>
-          </defs>
-          <g
-            clip-path="url(#Logo_svg__a)"
+              <a
+                class="sc-1fvy930-4 hsgAxc"
+                href="https://devprotocol.xyz/"
+                rel="noopener noreferrer"
+                target="_blank"
+              >
+                Dev Protocol
+              </a>
+            </div>
+          </div>
+          <hr
+            style="color: white; margin-top: 2px;"
+          />
+          <div
+            style="display: flex; justify-content: space-between; color: white; font-size: 0.9em;"
           >
-            <path
-              d="M408 .5H0v146h408z"
-              fill="url(#Logo_svg__b)"
-              transform="translate(0 -.5)"
-            />
-          </g>
-        </svg>
-      </div>
-      <div
-        class="sc-1wzqvkc-0 byYDMh"
-      >
-        <small>
-          All emojis designed by 
-          <a
-            href="//openmoji.org/library/"
-          >
-            OpenMoji
-          </a>
-           – the open-source emoji and icon project. License: 
-          <a
-            href="//creativecommons.org/licenses/by-sa/4.0/"
-          >
-            CC BY-SA 4.0
-          </a>
-        </small>
+            <span>
+              2020 All rights reserverd.
+            </span>
+            <div
+              class="sc-1fvy930-1 gowQmZ"
+            >
+              <a
+                class="sc-3pzwbd-0 drlMNU"
+                href="//twitter.com/devprtcl"
+                rel="noopener noreferrer"
+                target="_blank"
+              >
+                <svg
+                  clip-rule="evenodd"
+                  fill-rule="evenodd"
+                  height="100%"
+                  stroke-linejoin="round"
+                  stroke-miterlimit="2"
+                  version="1.1"
+                  viewBox="0 0 512 512"
+                  width="100%"
+                >
+                  <g>
+                    <circle
+                      cx="256"
+                      cy="256"
+                      fill="#1da1f2"
+                      id="Dark_Blue"
+                      r="256"
+                    />
+                    <path
+                      d="M209.152,391.04c113.536,0 175.616,-94.08 175.616,-175.616c0,-2.688 0,-5.376 -0.128,-7.936c12.032,-8.704 22.528,-19.584 30.848,-32c-11.008,4.864 -22.912,8.192 -35.456,9.728c12.8,-7.68 22.528,-19.712 27.136,-34.176c-11.904,7.04 -25.088,12.16 -39.168,14.976c-11.264,-12.032 -27.264,-19.456 -45.056,-19.456c-34.048,0 -61.696,27.648 -61.696,61.696c0,4.864 0.512,9.6 1.664,14.08c-51.328,-2.56 -96.768,-27.136 -127.232,-64.512c-5.248,9.088 -8.32,19.712 -8.32,30.976c0,21.376 10.88,40.32 27.52,51.328c-10.112,-0.256 -19.584,-3.072 -27.904,-7.68l0,0.768c0,29.952 21.248,54.784 49.536,60.544c-5.12,1.408 -10.624,2.176 -16.256,2.176c-3.968,0 -7.808,-0.384 -11.648,-1.152c7.808,24.576 30.592,42.368 57.6,42.88c-21.12,16.512 -47.744,26.368 -76.672,26.368c-4.992,0 -9.856,-0.256 -14.72,-0.896c27.008,17.664 59.52,27.904 94.336,27.904"
+                      fill="#fff"
+                      fill-rule="nonzero"
+                      id="Logo__x2014__FIXED"
+                    />
+                  </g>
+                </svg>
+              </a>
+              <a
+                class="sc-3pzwbd-0 drlMNU"
+                href="//discord.gg/VwJp4KM"
+                rel="noopener noreferrer"
+                target="_blank"
+              >
+                <svg
+                  enable-background="new 0 0 512 512"
+                  id="Layer_1"
+                  version="1.1"
+                  viewBox="0 0 512 512"
+                >
+                  <circle
+                    cx="256"
+                    cy="256"
+                    fill="#8C9EFF"
+                    id="ellipse"
+                    r="256"
+                  />
+                  <path
+                    d="M372.4,168.7c0,0-33.3-26.1-72.7-29.1l-3.5,7.1c35.6,8.7,51.9,21.2,69,36.5  c-29.4-15-58.5-29.1-109.1-29.1s-79.7,14.1-109.1,29.1c17.1-15.3,36.5-29.2,69-36.5l-3.5-7.1c-41.3,3.9-72.7,29.1-72.7,29.1  s-37.2,54-43.6,160c37.5,43.3,94.5,43.6,94.5,43.6l11.9-15.9c-20.2-7-43.1-19.6-62.8-42.3c23.5,17.8,59.1,36.4,116.4,36.4  s92.8-18.5,116.4-36.4c-19.7,22.7-42.6,35.3-62.8,42.3l11.9,15.9c0,0,57-0.3,94.5-43.6C409.6,222.7,372.4,168.7,372.4,168.7z   M208.7,299.6c-14.1,0-25.5-13-25.5-29.1s11.4-29.1,25.5-29.1c14.1,0,25.5,13,25.5,29.1S222.8,299.6,208.7,299.6z M303.3,299.6  c-14.1,0-25.5-13-25.5-29.1s11.4-29.1,25.5-29.1s25.5,13,25.5,29.1S317.3,299.6,303.3,299.6z"
+                    fill="#FFFFFF"
+                    id="logo"
+                  />
+                </svg>
+              </a>
+              <a
+                class="sc-3pzwbd-0 drlMNU"
+                href="https://github.com/dev-protocol/stakes.social"
+                rel="noopener noreferrer"
+                target="_blank"
+              >
+                <svg
+                  enable-background="new 0 0 64 64"
+                  id="github"
+                  version="1.1"
+                  viewBox="0 0 64 64"
+                >
+                  <g
+                    id="Layer_3"
+                  >
+                    <g>
+                      <g>
+                        <path
+                          d="M32,0C14.327,0,0,14.327,0,32c0,17.673,14.327,32,32,32s32-14.327,32-32C64,14.327,49.673,0,32,0z"
+                          fill="#333333"
+                        />
+                      </g>
+                    </g>
+                    <g
+                      id="Outline_Filled"
+                    >
+                      <path
+                        d="M38.592,50.166h-4.84h-4.844c0,0,0.014-2.874,0-4.844c-6.629,1.428-8.479-3.633-8.479-3.633    c-1.21-2.423-2.423-3.633-2.423-3.633c-2.423-1.438,0-1.21,0-1.21c2.423,0,3.633,2.423,3.633,2.423    c2.126,3.609,5.908,3.028,7.266,2.423c0-1.21,0.53-3.042,1.21-3.633c-5.29-0.595-9.693-3.633-9.693-9.689s1.216-7.266,2.427-8.479    c-0.244-0.597-1.259-2.805,0.037-6.056c0,0,2.38,0,4.803,3.633c1.2-1.2,4.844-1.21,6.056-1.21c1.208,0,4.854,0.01,6.054,1.21    c2.423-3.633,4.809-3.633,4.809-3.633c1.296,3.251,0.282,5.459,0.037,6.056c1.21,1.21,2.423,2.423,2.423,8.479    s-4.397,9.092-9.689,9.689c0.682,0.591,1.21,2.675,1.21,3.633L38.592,50.166L38.592,50.166z"
+                        fill="#FFFFFF"
+                        id="Cat_3_"
+                      />
+                    </g>
+                  </g>
+                </svg>
+              </a>
+              <a
+                class="sc-3pzwbd-0 drlMNU"
+                href="https://t.me/devprtcl"
+                rel="noopener noreferrer"
+                target="_blank"
+              >
+                <svg
+                  enable-background="new 0 0 100 100"
+                  id="Layer_1"
+                  version="1.1"
+                  viewBox="0 0 100 100"
+                >
+                  <g>
+                    <circle
+                      cx="50"
+                      cy="50"
+                      fill="#139BD0"
+                      r="50"
+                    />
+                    <path
+                      clip-rule="evenodd"
+                      d="M51.474,60.754c-1.733,1.688-3.451,3.348-5.153,5.021   c-0.595,0.586-1.264,0.91-2.118,0.865c-0.583-0.031-0.909-0.287-1.088-0.84c-1.304-4.047-2.627-8.084-3.924-12.135   c-0.126-0.393-0.312-0.584-0.71-0.707c-3.072-0.938-6.138-1.898-9.199-2.871c-0.471-0.15-0.946-0.346-1.353-0.623   c-0.629-0.426-0.721-1.121-0.157-1.621c0.521-0.461,1.143-0.863,1.789-1.119c3.755-1.488,7.53-2.928,11.299-4.381   c9.565-3.693,19.13-7.383,28.696-11.076c1.819-0.703,3.217,0.287,3.028,2.254c-0.121,1.258-0.447,2.496-0.71,3.738   c-2.077,9.807-4.156,19.615-6.244,29.42c-0.496,2.328-2.131,2.936-4.047,1.523c-3.209-2.365-6.415-4.738-9.622-7.107   C51.808,60.984,51.649,60.877,51.474,60.754z M44.271,63.732c0.036-0.01,0.072-0.02,0.108-0.029   c0.02-0.092,0.049-0.182,0.057-0.273c0.206-2.223,0.424-4.445,0.603-6.672c0.04-0.496,0.21-0.848,0.583-1.182   c2.958-2.645,5.898-5.307,8.844-7.963c3.261-2.941,6.523-5.879,9.772-8.832c0.201-0.182,0.285-0.492,0.423-0.744   c-0.306-0.033-0.634-0.156-0.912-0.084c-0.379,0.098-0.738,0.318-1.076,0.531c-7.197,4.533-14.388,9.074-21.59,13.598   c-0.407,0.256-0.483,0.473-0.328,0.92c0.531,1.525,1.014,3.064,1.515,4.6C42.937,59.646,43.604,61.689,44.271,63.732z"
+                      fill="#FFFFFF"
+                      fill-rule="evenodd"
+                    />
+                  </g>
+                </svg>
+              </a>
+              <a
+                class="sc-3pzwbd-0 drlMNU"
+                href="//medium.com/devtoken"
+                rel="noopener noreferrer"
+                target="_blank"
+              >
+                <div
+                  style="display: flex; justify-content: center; align-items: center; width: 36px; height: 36px; border-radius: 90px; background-color: white;"
+                >
+                  <svg
+                    clip-rule="evenodd"
+                    fill-rule="evenodd"
+                    stroke-linejoin="round"
+                    stroke-miterlimit="2"
+                    version="1.1"
+                    viewBox="0 0 512 512"
+                  >
+                    <path
+                      d="M60.713,135.684c0.637,-6.285 -1.759,-12.499 -6.453,-16.728l-47.807,-57.59l0,-8.603l148.437,0l114.735,251.627l100.872,-251.627l141.503,0.001l0,8.602l-40.874,39.189c-3.525,2.685 -5.272,7.102 -4.541,11.472l0,287.947c-0.731,4.37 1.016,8.786 4.541,11.471l39.917,39.19l0,8.602l-200.782,0l0,-8.602l41.35,-40.147c4.065,-4.061 4.065,-5.257 4.065,-11.468l0,-232.749l-114.973,292.009l-15.536,0l-133.859,-292.009l0,195.709c-1.114,8.228 1.618,16.513 7.41,22.462l53.784,65.235l0,8.603l-152.502,0l0,-8.603l53.784,-65.235c5.749,-5.96 8.321,-14.301 6.929,-22.462l0,-226.296Z"
+                      fill-rule="nonzero"
+                      id="Shape"
+                    />
+                  </svg>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
       </div>
     </footer>
   </div>

@@ -9,3 +9,12 @@ export const useGetPropertytInformation = () => {
     }
   }
 }
+
+export const useGetAuthorInformation = () => {
+  return {
+    data: {
+      address: 'hex_address',
+      karma: 40124
+    }
+  }
+}

@@ -1,0 +1,7 @@
+query listTopStakersAccount($author_address: String!, $limit: Int){ 
+ account_lockup(where: { property_meta: {author: {_eq: $author_address }}}, limit: $limit, order_by: { value: desc }) {
+    account_address
+    value
+    property_address
+  }
+}

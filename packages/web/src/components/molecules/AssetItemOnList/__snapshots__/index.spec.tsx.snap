@@ -1,0 +1,93 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AssetItemOnList Snapshot 1`] = `
+<body>
+  <div>
+    <div
+      class="hzc567-1 JDkCk"
+    >
+      <a
+        class="hzc567-2 hzc567-4 QbOgQ gbmhAv"
+        href="/property-address"
+      >
+        <div
+          class="sc-2tazhb-0 xkRoZ"
+        >
+          <div
+            class="sc-2tazhb-1 giNcew"
+            size="90"
+          />
+        </div>
+        <h3
+          class="sc-1w8sy4l-2 gdOONv"
+        >
+          property-address-name
+        </h3>
+      </a>
+      <div
+        class="ant-statistic hzc567-0 hzc567-5 bWyUkR keQvYD"
+      >
+        <div
+          class="ant-statistic-title"
+        >
+          Your Stake
+        </div>
+        <div
+          class="ant-statistic-content"
+        >
+          <span
+            class="ant-statistic-content-value"
+          >
+            <span
+              class="ant-statistic-content-value-int"
+            >
+              
+              5,000
+            </span>
+            <span
+              class="ant-statistic-content-value-decimal"
+            >
+              .00
+            </span>
+          </span>
+        </div>
+      </div>
+      <div
+        class="ant-statistic hzc567-0 hzc567-6 bWyUkR jrcjYC"
+      >
+        <div
+          class="ant-statistic-title"
+        >
+          Your Rewards
+        </div>
+        <div
+          class="ant-statistic-content"
+        >
+          <span
+            class="ant-statistic-content-value"
+          >
+            <span
+              class="ant-statistic-content-value-int"
+            >
+              
+              5,000
+            </span>
+            <span
+              class="ant-statistic-content-value-decimal"
+            >
+              .00
+            </span>
+          </span>
+        </div>
+      </div>
+      <div
+        class="hzc567-3 hzc567-7 jtNtWj frZjZU"
+      >
+        
+        
+        
+      </div>
+    </div>
+  </div>
+</body>
+`;

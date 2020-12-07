@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Header } from 'src/components/organisms/Header'
 import { Footer } from 'src/components/organisms/Footer'
-import { EarlyAccess } from 'src/components/atoms/EarlyAccess'
+
 import { Container } from 'src/components/atoms/Container'
 import { Headline } from 'src/components/atoms/Headline'
 import { H2 } from 'src/components/atoms/Typography'
@@ -30,11 +30,10 @@ const LiquidityMining = () => {
 
   return (
     <>
-      <EarlyAccess></EarlyAccess>
       <Header></Header>
       <Container>
         <Headline height={150}>
-          <H2>Liquidity Mining</H2>
+          <H2>Liquidity Program</H2>
         </Headline>
       </Container>
       <NarrowContainer>

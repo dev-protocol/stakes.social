@@ -1,0 +1,6 @@
+query listOwnedPropertyMeta($account_address: String!, $offset: Int, $limit: Int) {
+  property_meta(where: { author: { _eq: $account_address } }, order_by: {lockup_aggregate: {sum: {value: desc}}}, offset: $offset, limit: $limit) {
+    property
+    name
+  }
+}

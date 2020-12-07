@@ -3,13 +3,18 @@ const lessToJS = require('less-vars-to-js')
 const fs = require('fs')
 const path = require('path')
 const withCss = require('@zeit/next-css')
+const withTM = require('next-transpile-modules')([
+  "@amcharts/amcharts4/core",
+  "@amcharts/amcharts4/charts",
+  "@amcharts/amcharts4/themes/animated"
+])
 
 const themeVariables = lessToJS(fs.readFileSync(path.resolve(__dirname, './src/assets/antd-custom.less'), 'utf8'))
 if (typeof require !== 'undefined') {
   require.extensions['.less'] = file => {}
 }
 
-module.exports = withCss(
+module.exports = withTM(withCss(
   withLess({
     webpack: (config, { isServer }) => {
       if (isServer) {
@@ -61,4 +66,4 @@ module.exports = withCss(
     distDir: 'dist/src/.next',
     target: 'serverless'
   })
-)
+))

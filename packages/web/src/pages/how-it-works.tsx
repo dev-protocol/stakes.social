@@ -4,7 +4,6 @@ import { Footer } from 'src/components/organisms/Footer'
 import styled from 'styled-components'
 import Text from 'antd/lib/typography/Text'
 import { Button } from 'antd'
-import { EarlyAccess } from 'src/components/atoms/EarlyAccess'
 
 const Article = styled.article`
   padding: 2em;
@@ -69,7 +68,6 @@ const MavigationButtons = styled.div`
 const HowItWorks = () => {
   return (
     <>
-      <EarlyAccess></EarlyAccess>
       <main>
         <Header />
         <Article>
@@ -287,7 +285,8 @@ const HowItWorks = () => {
             <p>Legacy DEV will turn into the current DEV when it is migrated with 1:1 by Migrate contract.</p>
 
             <p>
-              For more information on DEV tokens, please check the <a href="//devprtcl.com">Dev Protocol website</a> and{' '}
+              For more information on DEV tokens, please check the <a href="//devprotocol.xyz">Dev Protocol website</a>{' '}
+              and{' '}
               <a
                 href="//github.com/dev-protocol/protocol/blob/main/docs/WHITEPAPER.md"
                 target="_blank"

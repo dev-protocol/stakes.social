@@ -17,8 +17,7 @@ describe('dev-invitation hooks', () => {
       ;(useSWR as jest.Mock).mockImplementation(() => ({ data, error, mutate: () => {} }))
       ;(sign as jest.Mock).mockResolvedValue('dummy signature')
       ;(postInvitation as jest.Mock).mockResolvedValue(data)
-      const { result } = renderHook(() => usePostInvitation('dummy market'))
-      expect(result.current.data).toBe(data)
+      const { result } = renderHook(() => usePostInvitation())
       await act(async () => {
         const asset = 'dummy asset'
         const email = 'dummy@dummy.com'
@@ -50,7 +49,7 @@ describe('dev-invitation hooks', () => {
       ;(useSWR as jest.Mock).mockImplementation(() => ({ data, error, mutate: () => {} }))
       ;(sign as jest.Mock).mockResolvedValue('dummy signature')
       ;(postInvitation as jest.Mock).mockResolvedValue({ success: false })
-      const { result } = renderHook(() => usePostInvitation('dummy market'))
+      const { result } = renderHook(() => usePostInvitation())
       await act(async () => {
         const asset = 'dummy asset'
         const email = 'dummy@dummy.com'
@@ -84,7 +83,7 @@ describe('dev-invitation hooks', () => {
       ;(useSWR as jest.Mock).mockImplementation(() => ({ data, error, mutate: () => {} }))
       ;(sign as jest.Mock).mockResolvedValue(undefined)
       ;(postInvitation as jest.Mock).mockResolvedValue({ success: true })
-      const { result } = renderHook(() => usePostInvitation('dummy market'))
+      const { result } = renderHook(() => usePostInvitation())
       await act(async () => {
         const asset = 'dummy asset'
         const email = 'dummy@dummy.com'

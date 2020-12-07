@@ -7,13 +7,98 @@ import styled from 'styled-components'
 const A = styled.a`
   color: #2f80ed;
 `
+
+const MarketsContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  max-width: 680px;
+  margin-right: auto;
+  margin-left: auto;
+  padding-top: 5em;
+`
+
+const MarketEntryContainer = styled.div<{ isNotActive?: Boolean }>`
+  display: grid;
+  grid-template-columns: 100px auto;
+  column-gap: 10px;
+  margin-bottom: 20px;
+  opacity: ${props => (props?.isNotActive ? '0.4' : '1')};
+  cursor: ${props => (!props?.isNotActive ? 'pointer' : 'auto')};
+
+  @media (max-width: 768px) {
+    padding-left: 5px;
+    padding-right: 10px;
+  }
+`
+
+const MarketEntryInfo = styled.div<{ bgColor?: string }>`
+  display: flex;
+  flex-direction: column;
+  color: white;
+  background: ${props => props.bgColor || 'black'};
+  border-radius: 6px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2), 0 2px 4px -1px rgba(0, 0, 0, 0.12);
+`
+
+const MarketTypeHeader = styled.div`
+  font-size: 1.2em;
+  margin-left: 110px;
+  font-weight: bolder;
+  margin-bottom: 10px;
+`
+
+const MarketSection = styled.div`
+  margin-bottom: 2em;
+`
+
+export const MarketsOverview = () => {
+  return (
+    <MarketsContainer>
+      <MarketSection>
+        <MarketTypeHeader>Get started</MarketTypeHeader>
+        <Link href={'/invite/github'} as={`/invite/github`} passHref>
+          <MarketEntryContainer>
+            <img
+              src="https://res.cloudinary.com/haas-storage/image/upload/v1600172007/25231_hng64u.png"
+              width="100"
+              height="auto"
+            />
+            <MarketEntryInfo>
+              <div style={{ padding: '1em' }}>
+                <h3 style={{ color: 'white', fontWeight: 'bolder' }}>Github</h3>
+                <span>Authenticate and tokenize your Github OSS project.</span>
+              </div>
+            </MarketEntryInfo>
+          </MarketEntryContainer>
+        </Link>
+      </MarketSection>
+      <MarketSection>
+        <MarketTypeHeader>Coming soon</MarketTypeHeader>
+        <MarketEntryContainer isNotActive>
+          <img
+            src="https://res.cloudinary.com/haas-storage/image/upload/v1604315606/npm_icon_146141_w61uhw.png"
+            width="100"
+            height="auto"
+          />
+          <MarketEntryInfo bgColor="#c42424">
+            <div style={{ padding: '1em' }}>
+              <h3 style={{ color: 'white', fontWeight: 'bolder' }}>NPM</h3>
+              <span>Authenticate and tokenize your NPM OSS project.</span>
+            </div>
+          </MarketEntryInfo>
+        </MarketEntryContainer>
+      </MarketSection>
+    </MarketsContainer>
+  )
+}
+
 const ContentsForAuthPage = ({ marketAddress }: { marketAddress: string }) => {
   const { data } = useGetMarketInformation(marketAddress)
   return data ? (
     <List.Item>
       <List.Item.Meta
         title={
-          <Link href={'/auth/[market]'} as={`/auth/${marketAddress}`} passHref>
+          <Link href={'/create/[market]'} as={`/create/${marketAddress}`} passHref>
             <A>{data.name}</A>
           </Link>
         }
@@ -37,8 +122,8 @@ const ContentsForAssociatePage = ({
       <List.Item.Meta
         title={
           <Link
-            href={'/auth/associate/[property]/[market]'}
-            as={`/auth/associate/${propertyAddress}/${marketAddress}`}
+            href={'/create/associate/[property]/[market]'}
+            as={`/create/associate/${propertyAddress}/${marketAddress}`}
             passHref
           >
             <A>{data.name}</A>

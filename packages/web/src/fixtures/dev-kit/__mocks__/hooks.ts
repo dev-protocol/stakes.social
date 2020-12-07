@@ -1,4 +1,5 @@
 import BigNumber from 'bignumber.js'
+import { toBigNumber } from 'src/fixtures/utility'
 export const useGetTotalRewardsAmount = () => {
   return { totalRewardsAmount: new BigNumber(10000) }
 }
@@ -12,7 +13,7 @@ export const useGetMyHolderAmount = () => {
 }
 
 export const useGetMyStakingRewardAmount = () => {
-  return { myStakingRewardAmount: new BigNumber(5000) }
+  return { myStakingRewardAmount: new BigNumber(5000), dev: new BigNumber(3000) }
 }
 
 export const useGetMyStakingAmount = () => {
@@ -69,4 +70,24 @@ export const useAnnualSupplyGrowthRatio = () => {
 
 export const useGetPolicyAddressesList = () => {
   return { getPolicyAddressesList: async () => {} }
+}
+
+export const usePropertyAuthor = (propertyAddress?: string) => {
+  return { author: `${propertyAddress}-author` }
+}
+
+export const useBalanceOf = () => {
+  return { amount: toBigNumber(10), currency: 'DEV' }
+}
+
+export const useAllClaimedRewards = () => {
+  return { amount: toBigNumber(10), currency: 'DEV' }
+}
+
+export const usePropertyName = (propertyAddress?: string) => {
+  return { name: `${propertyAddress}-name` }
+}
+
+export const useBalanceOfProperty = () => {
+  return { balance: toBigNumber(1000) }
 }

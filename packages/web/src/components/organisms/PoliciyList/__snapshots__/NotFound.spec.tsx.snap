@@ -4,7 +4,7 @@ exports[`NotFound Snapshot 1`] = `
 <body>
   <div>
     <div
-      style="margin: 0px auto; align-items: center;"
+      style="align-self: center; align-items: center;"
     >
       <div
         class="ant-empty ant-empty-normal"
@@ -60,14 +60,16 @@ exports[`NotFound Snapshot 1`] = `
       <div
         style="width: 100%; text-align: center;"
       >
-        <button
+        <a
           class="ant-btn ant-btn-primary"
-          type="button"
+          href="https://github.com/dev-protocol/DIPs/issues"
+          rel="noopener noreferrer"
+          target="_blank"
         >
           <span>
             Access DIPs
           </span>
-        </button>
+        </a>
       </div>
     </div>
   </div>

@@ -10,50 +10,42 @@ import BigNumber from 'bignumber.js'
 const { execute } = utils
 const client: Map<string, Contract> = new Map()
 
-export const getClient = (contractAddress = GEYSER_ETHDEV_V2_ADDRESS): [] | [Contract, Web3] => {
-  if (typeof window === 'undefined') {
-    return []
-  }
-  const { ethereum } = window
-  if (!ethereum) {
-    return []
-  }
-  const web3 = new Web3(ethereum)
-
-  const stored = client.get(contractAddress)
+export const getContract = (web3: Web3, contractAddress = GEYSER_ETHDEV_V2_ADDRESS): Contract => {
+  const clientCacheKey = `${contractAddress}_${web3?.currentProvider}`
+  const stored = client.get(clientCacheKey)
   if (stored) {
-    return [stored, web3]
+    return stored
   }
 
   const contract = (createContract(abi, contractAddress, web3) as unknown) as Contract
-  client.set(contractAddress, contract)
+  client.set(clientCacheKey, contract)
 
-  return [contract, web3]
+  return contract
 }
 
-export const totalStaked = async (): Promise<BigNumber> => {
-  return (([contract]) =>
+export const totalStaked = async (client: Web3): Promise<BigNumber> => {
+  return (contract =>
     contract
       ? execute({
           contract,
           method: 'totalStaked'
         })
-      : Promise.resolve(''))(getClient()).then(toEVMBigNumber)
+      : Promise.resolve(''))(getContract(client)).then(toEVMBigNumber)
 }
 
-export const totalStakingShares = async (): Promise<BigNumber> => {
-  return (([contract]) =>
+export const totalStakingShares = async (client: Web3): Promise<BigNumber> => {
+  return (contract =>
     contract
       ? execute({
           contract,
           method: 'totalStakingShares'
         })
-      : Promise.resolve(''))(getClient()).then(toEVMBigNumber)
+      : Promise.resolve(''))(getContract(client)).then(toEVMBigNumber)
 }
 
-export const stake = async (amount: BigNumber) => {
-  return (([contract, client]) =>
-    contract && client
+export const stake = async (client: Web3, amount: BigNumber) => {
+  return (contract =>
+    contract
       ? execute({
           contract,
           client,
@@ -61,12 +53,12 @@ export const stake = async (amount: BigNumber) => {
           method: 'stake',
           args: [amount.toFixed(), '0x0']
         })
-      : Promise.resolve())(getClient())
+      : Promise.resolve())(getContract(client))
 }
 
-export const unstake = async (amount: BigNumber) => {
-  return (([contract, client]) =>
-    contract && client
+export const unstake = async (client: Web3, amount: BigNumber) => {
+  return (contract =>
+    contract
       ? execute({
           contract,
           client,
@@ -74,18 +66,18 @@ export const unstake = async (amount: BigNumber) => {
           method: 'unstake',
           args: [amount.toFixed(), '0x0']
         })
-      : Promise.resolve())(getClient())
+      : Promise.resolve())(getContract(client))
 }
 
-export const totalStakedFor = async (address: string): Promise<BigNumber> => {
-  return (([contract]) =>
+export const totalStakedFor = async (client: Web3, address: string): Promise<BigNumber> => {
+  return (contract =>
     contract
       ? execute({
           contract,
           method: 'totalStakedFor',
           args: [address]
         })
-      : Promise.resolve(''))(getClient()).then(toEVMBigNumber)
+      : Promise.resolve(''))(getContract(client)).then(toEVMBigNumber)
 }
 
 type UnlockSchedule = {
@@ -96,8 +88,8 @@ type UnlockSchedule = {
   durationSec: string
 }
 
-export const unlockSchedules = async (index: number): Promise<UnlockSchedule> => {
-  return (([contract]) =>
+export const unlockSchedules = async (client: Web3, index: number): Promise<UnlockSchedule> => {
+  return (contract =>
     contract
       ? execute<UnlockSchedule>({
           contract,
@@ -110,108 +102,108 @@ export const unlockSchedules = async (index: number): Promise<UnlockSchedule> =>
           lastUnlockTimestampSec: '0',
           endAtSec: '0',
           durationSec: '0'
-        }))(getClient())
+        }))(getContract(client))
 }
 
-export const unlockScheduleCount = async (): Promise<number> => {
-  return (([contract]) =>
+export const unlockScheduleCount = async (client: Web3): Promise<number> => {
+  return (contract =>
     contract
       ? execute({
           contract,
           method: 'unlockScheduleCount'
         })
-      : Promise.resolve(''))(getClient()).then(Number)
+      : Promise.resolve(''))(getContract(client)).then(Number)
 }
 
-export const totalLocked = async (): Promise<BigNumber> => {
-  return (([contract]) =>
+export const totalLocked = async (client: Web3): Promise<BigNumber> => {
+  return (contract =>
     contract
       ? execute({
           contract,
           method: 'totalLocked'
         })
-      : Promise.resolve(''))(getClient()).then(toEVMBigNumber)
+      : Promise.resolve(''))(getContract(client)).then(toEVMBigNumber)
 }
 
-export const totalUnlocked = async (): Promise<BigNumber> => {
-  return (([contract]) =>
+export const totalUnlocked = async (client: Web3): Promise<BigNumber> => {
+  return (contract =>
     contract
       ? execute({
           contract,
           method: 'totalUnlocked'
         })
-      : Promise.resolve(''))(getClient()).then(toEVMBigNumber)
+      : Promise.resolve(''))(getContract(client)).then(toEVMBigNumber)
 }
 
-export const finalUnlockSchedules = async (): Promise<undefined | UnlockSchedule> => {
-  const count = await unlockScheduleCount()
-  const schedules = await Promise.all(new Array(count).fill(0).map((_, index) => unlockSchedules(index)))
+export const finalUnlockSchedules = async (client: Web3): Promise<undefined | UnlockSchedule> => {
+  const count = await unlockScheduleCount(client)
+  const schedules = await Promise.all(new Array(count).fill(0).map((_, index) => unlockSchedules(client, index)))
   return schedules.length > 0
     ? schedules.reduce((a, c) => (toBigNumber(a.endAtSec).isGreaterThan(c.endAtSec) ? a : c))
     : undefined
 }
 
-export const unstakeQuery = async (amount: BigNumber): Promise<BigNumber> => {
-  return (([contract, client]) =>
-    contract && client
+export const unstakeQuery = async (client: Web3, amount: BigNumber): Promise<BigNumber> => {
+  return (contract =>
+    contract && client.currentProvider
       ? execute({
           contract,
           client,
           method: 'unstakeQuery',
           args: [amount.toFixed()]
         })
-      : Promise.resolve(''))(getClient()).then(toEVMBigNumber)
+      : Promise.resolve(''))(getContract(client)).then(toEVMBigNumber)
 }
 
-export const unlockTokens = async (): Promise<BigNumber> => {
-  return (([contract]) =>
+export const unlockTokens = async (client: Web3): Promise<BigNumber> => {
+  return (contract =>
     contract
       ? execute({
           contract,
           method: 'unlockTokens'
         })
-      : Promise.resolve(''))(getClient()).then(toEVMBigNumber)
+      : Promise.resolve(''))(getContract(client)).then(toEVMBigNumber)
 }
 
-export const allTokensLocked = async (): Promise<EventData[]> => {
-  return (([contract]) =>
+export const allTokensLocked = async (client: Web3): Promise<EventData[]> => {
+  return (contract =>
     contract ? contract.getPastEvents('TokensLocked', { fromBlock: 0, toBlock: 'latest' }) : Promise.resolve([]))(
-    getClient()
+    getContract(client)
   )
 }
 
-export const allTokensClaimed = async (): Promise<EventData[]> => {
-  return (([contract]) =>
+export const allTokensClaimed = async (client: Web3): Promise<EventData[]> => {
+  return (contract =>
     contract ? contract.getPastEvents('TokensClaimed', { fromBlock: 0, toBlock: 'latest' }) : Promise.resolve([]))(
-    getClient()
+    getContract(client)
   )
 }
 
-export const getStaked = async (user: string): Promise<EventData[]> => {
-  return (([contract]) =>
+export const getStaked = async (client: Web3, user: string): Promise<EventData[]> => {
+  return (contract =>
     contract
       ? contract.getPastEvents('Staked', { filter: { user }, fromBlock: 0, toBlock: 'latest' })
-      : Promise.resolve([]))(getClient())
+      : Promise.resolve([]))(getContract(client))
 }
 
-export const bonusPeriodSec = async (): Promise<BigNumber> => {
-  return (([contract]) =>
+export const bonusPeriodSec = async (client: Web3): Promise<BigNumber> => {
+  return (contract =>
     contract
       ? execute({
           contract,
           method: 'bonusPeriodSec'
         })
-      : Promise.resolve(''))(getClient()).then(toEVMBigNumber)
+      : Promise.resolve(''))(getContract(client)).then(toEVMBigNumber)
 }
 
-export const startBonus = async (): Promise<BigNumber> => {
-  return (([contract]) =>
+export const startBonus = async (client: Web3): Promise<BigNumber> => {
+  return (contract =>
     contract
       ? execute({
           contract,
           method: 'startBonus'
         })
-      : Promise.resolve(''))(getClient()).then(toEVMBigNumber)
+      : Promise.resolve(''))(getContract(client)).then(toEVMBigNumber)
 }
 
 type Accounting = {
@@ -232,9 +224,9 @@ type AccountingObject = {
   now: string
 }
 
-export const updateAccounting = async (): Promise<AccountingObject> => {
-  return (([contract, client]) =>
-    contract && client
+export const updateAccounting = async (client: Web3): Promise<AccountingObject> => {
+  return (contract =>
+    contract && client.currentProvider
       ? execute<Accounting>({
           contract,
           client,
@@ -248,7 +240,7 @@ export const updateAccounting = async (): Promise<AccountingObject> => {
           4: '0',
           5: '0'
         }))(
-    getClient()
+    getContract(client)
   ).then(
     ({
       0: totalLocked,

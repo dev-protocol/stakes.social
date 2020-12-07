@@ -1,7 +1,7 @@
 import * as React from 'react'
 
 const SvgCamp = (props: React.SVGProps<SVGSVGElement>) => (
-  <svg viewBox="0 0 72 72" width="1em" height="1em" {...props}>
+  <svg viewBox="0 0 72 72" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" {...props}>
     <path
       fill="#FCEA2B"
       stroke="#FCEA2B"

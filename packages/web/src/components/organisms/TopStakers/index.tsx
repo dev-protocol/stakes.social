@@ -1,38 +1,23 @@
 import React from 'react'
 import { useQuery } from '@apollo/client'
 import getTopStakersOfPropertyQuery from './query/getTopStakersOfProperty'
+import { Avatar } from 'src/components/molecules/Avatar'
 import styled, { css } from 'styled-components'
+import { useEffect } from 'react'
+import { useListTopStakersAccountLazyQuery } from '@dev/graphql'
+import { useGetAccount } from 'src/fixtures/dev-for-apps/hooks'
+import { Spin } from 'antd'
+import Link from 'next/link'
 
 interface TopStakersProps {
-  propertyAdress: string
+  propertyAdress?: string
+  authorAddress?: string
 }
-
-const ListItem = styled.div`
-  display: grid;
-  align-items: center;
-  grid-template-columns: 1fr 8fr 2fr;
-  grid-column-gap: 7.5px;
-`
-
-const StakersList = styled.ol`
-  list-style: none;
-  padding: 6px 0 0 0 !important;
-
-  li {
-    color: black;
-    border-bottom: 1px solid lightgrey;
-    padding: 6px 9px;
-
-    &:last-child {
-      border-bottom: 0;
-    }
-  }
-`
 
 const PlaceHolderList = styled.div<{ noData?: boolean }>`
   ${({ noData }) => css`
     display: flex;
-    min-height: ${noData ? '150px' : '400px'};
+    min-height: ${noData ? '150px' : '300px'};
     justify-content: center;
     align-items: center;
   `}
@@ -47,62 +32,111 @@ const AccountAddress = styled.span`
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
-  max-width: 250px;
-  @media (min-width: 1120px) {
-    max-width: 450px;
+  max-width: 150px;
+`
+
+const TopStakerRanking = styled.div`
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+`
+
+const StakerSection = styled.div<{ isCreator?: Boolean }>`
+  display: flex;
+  justify-content: space-evenly;
+  cursor: ${props => (props?.isCreator ? 'pointer' : 'auto')};
+  flex-direction: column;
+  align-items: center;
+  /* padding: 1em 2em; */
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2), 0 2px 4px -1px rgba(0, 0, 0, 0.12);
+  border-radius: 6px;
+  width: 180px;
+  height: 180px;
+  margin-bottom: 1em;
+  img {
+    border-radius: 90px;
+  }
+
+  @media (max-width: 768px) {
+    margin-right: 0.5em;
+    margin-bottom: 1em;
+    width: 160px;
   }
 `
 
-const Position = styled.span`
-  max-width: 20px;
-  flex-shrink: 1;
-`
+const formatter = new Intl.NumberFormat('en-US')
 
-const AccountContainer = styled(Flex)`
-  flex-wrap: wrap;
-`
-const TopStakers = ({ propertyAdress }: TopStakersProps) => {
-  const { data: topStakersData, loading } = useQuery(getTopStakersOfPropertyQuery, {
+const Staker = ({ accountAddress, value }: { accountAddress: string; value: number }) => {
+  const { data } = useGetAccount(accountAddress)
+  const isCreator = !!data
+  return (
+    <>
+      {isCreator ? (
+        <Link href={`/author/${accountAddress}`} passHref>
+          <StakerSection isCreator={isCreator}>
+            <Avatar accountAddress={accountAddress} size={'100'} />
+            <AccountAddress>{data?.name || accountAddress}</AccountAddress>
+            <span>{`${formatter.format(parseInt((value / Math.pow(10, 18)).toFixed(0)))}`}</span>
+          </StakerSection>
+        </Link>
+      ) : (
+        <StakerSection>
+          <Avatar accountAddress={accountAddress} size={'100'} />
+          <AccountAddress>{data?.name || accountAddress}</AccountAddress>
+          <span>{`${formatter.format(parseInt((value / Math.pow(10, 18)).toFixed(0)))}`}</span>
+        </StakerSection>
+      )}
+    </>
+  )
+}
+
+const TopStakers = ({ authorAddress, propertyAdress }: TopStakersProps) => {
+  const { data: topPropertyStakersData, loading: isPropertyStakingLoading } = useQuery(getTopStakersOfPropertyQuery, {
     variables: {
       limit: 5,
       property_address: propertyAdress
-    }
+    },
+    skip: !!authorAddress || !propertyAdress
   })
 
-  const stakerItems: Array<{ account_address: string; value: number }> = topStakersData?.property_lockup
+  const [
+    fetchTopCreatorStakers,
+    { data: topCreatorStakersData, loading: isCreatorStakingLoading }
+  ] = useListTopStakersAccountLazyQuery()
+
+  useEffect(() => {
+    if (authorAddress) {
+      fetchTopCreatorStakers({
+        variables: {
+          limit: 5,
+          author_address: authorAddress
+        }
+      })
+    }
+  }, [authorAddress, fetchTopCreatorStakers])
+
+  const stakerItems: Array<{ account_address: string; value: number }> =
+    topPropertyStakersData?.property_lockup || topCreatorStakersData?.account_lockup
 
   return (
     <Flex>
-      <h2>Top stakers</h2>
-      {loading && (
+      {(isPropertyStakingLoading || isCreatorStakingLoading) && (
         <PlaceHolderList>
-          <div>loading...</div>
+          <Spin size="large" style={{ display: 'block', width: 'auto', padding: '100px' }} />
         </PlaceHolderList>
       )}
 
-      {!loading && stakerItems.length === 0 && (
+      {!isCreatorStakingLoading && !isPropertyStakingLoading && stakerItems?.length === 0 && (
         <PlaceHolderList noData>
           <div>No data available...</div>
         </PlaceHolderList>
       )}
 
-      <StakersList>
-        {stakerItems?.map(({ account_address, value }, index) => (
-          <li key={`${account_address}-${value}`}>
-            <ListItem>
-              <Position>{index + 1}</Position>
-              <AccountContainer>
-                <h3>Account address</h3>
-                <AccountAddress> {`${account_address}`}</AccountAddress>
-              </AccountContainer>
-              <Flex>
-                <h3>Value</h3>
-                <span>{`${(value / Math.pow(10, 18)).toFixed(2)}`}</span>
-              </Flex>
-            </ListItem>
-          </li>
+      <TopStakerRanking>
+        {stakerItems?.map(({ account_address, value }) => (
+          <Staker key={account_address} accountAddress={account_address} value={value} />
         ))}
-      </StakersList>
+      </TopStakerRanking>
     </Flex>
   )
 }

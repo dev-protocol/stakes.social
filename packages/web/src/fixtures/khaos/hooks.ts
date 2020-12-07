@@ -1,25 +1,22 @@
-import { useState } from 'react'
-import useSWR from 'swr'
+import { useContext, useState } from 'react'
 import { message } from 'antd'
-import { UnwrapFunc } from '../utility'
-import { SWRCachePath } from './cache-path'
 import { postSignGitHubMarketAsset, GitHubAssetInformation } from './utility'
 import { sign } from 'src/fixtures/wallet/utility'
+import WalletContext from 'src/context/walletContext'
 
 export const usePostSignGitHubMarketAsset = () => {
   const key = 'usePostSignGitHubMarketAsset'
+  const { web3 } = useContext(WalletContext)
   const [isLoading, setIsLoading] = useState<boolean>(false)
-  const { data } = useSWR<UnwrapFunc<typeof postSignGitHubMarketAsset>, Error>(SWRCachePath.postSignGitHubMarketAsset())
 
   const postSignGitHubMarketAssetHandler = async (repository: string, personalAccessToken: string) => {
     const signMessage = repository
-    const signature = await sign(signMessage)
+    const signature = await sign(web3, signMessage)
     if (signature === undefined) {
       message.error({ content: 'Please connect to a wallet', key: key + 'WithWallet' })
     }
 
     setIsLoading(true)
-    message.loading({ content: 'authenticate asset', duration: 0, key })
 
     return postSignGitHubMarketAsset(signMessage, signature || '', personalAccessToken)
       .then(result => {
@@ -28,7 +25,6 @@ export const usePostSignGitHubMarketAsset = () => {
           message.error({ content: result.message, key })
           return {} as GitHubAssetInformation
         } else {
-          message.success({ content: 'success to authenticate asset', key })
           return result
         }
       })
@@ -39,5 +35,5 @@ export const usePostSignGitHubMarketAsset = () => {
       })
   }
 
-  return { data, postSignGitHubMarketAssetHandler, isLoading }
+  return { postSignGitHubMarketAssetHandler, isLoading }
 }

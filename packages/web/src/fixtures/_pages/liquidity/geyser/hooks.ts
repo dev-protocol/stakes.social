@@ -13,20 +13,29 @@ import {
   updateAccounting,
   bonusPeriodSec,
   startBonus,
+  allTokensLocked,
   totalStakedFor,
-  unstakeQuery,
-  allTokensLocked
+  unstakeQuery
 } from './client'
 import { useCallback, useState } from 'react'
 import { message } from 'antd'
-import { getUTC, toBigNumber, toEVMBigNumber, toNaturalNumber, UnwrapFunc, whenDefined } from 'src/fixtures/utility'
+import {
+  getUTC,
+  toBigNumber,
+  toEVMBigNumber,
+  toNaturalNumber,
+  UnwrapFunc,
+  whenDefined,
+  whenDefinedAll
+} from 'src/fixtures/utility'
 import { INITIAL_SHARES_PER_TOKEN, ONE_MONTH_SECONDS, SYSTEM_SETTIMEOUT_MAXIMUM_DELAY_VALUE } from '../constants/number'
 import { getBlock } from 'src/fixtures/wallet/utility'
-import { useGetAccountAddress } from 'src/fixtures/wallet/hooks'
+import { useProvider } from 'src/fixtures/wallet/hooks'
 import { useTheGraph } from '../uniswap-pool/hooks'
+import Web3 from 'web3'
 
-const getAllTokensClaimed = () =>
-  allTokensClaimed().then(allEvents => {
+const getAllTokensClaimed = (client: Web3) => () =>
+  allTokensClaimed(client).then(allEvents => {
     console.log(allEvents)
     return allEvents.reduce(
       (a: BigNumber, c) => a.plus(c.returnValues.amount),
@@ -34,14 +43,18 @@ const getAllTokensClaimed = () =>
     )
   })
 
-const getTokensLocked = () =>
-  allTokensLocked().then(allEvents => {
+const getTokensLocked = (client: Web3) => () =>
+  allTokensLocked(client).then(allEvents => {
     console.log(allEvents)
     return allEvents.reduce((a: BigNumber, c) => a.plus(c.returnValues.amount), toBigNumber(0))
   })
 
 export const useTotalRewards = () => {
-  const { data, error } = useSWR<BigNumber, Error>(SWRCachePath.allTokensLocked, getTokensLocked)
+  const { nonConnectedWeb3 } = useProvider()
+  const { data, error } = useSWR<BigNumber, Error>(
+    SWRCachePath.allTokensLocked,
+    whenDefined(nonConnectedWeb3, x => getTokensLocked(x))
+  )
   return {
     data,
     error
@@ -49,53 +62,69 @@ export const useTotalRewards = () => {
 }
 
 export const useStake = () => {
+  const { web3 } = useProvider()
   const key = 'useStake'
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [error, setError] = useState<Error>()
-  const _stake = useCallback(async (amount: BigNumber) => {
-    setIsLoading(true)
-    message.loading({ content: 'Depositing...', duration: 0, key })
-    setError(undefined)
-    return stake(amount)
-      .then(() => {
-        message.success({ content: 'Deposit completed', key })
-        setIsLoading(false)
-        return true
-      })
-      .catch(err => {
-        setError(err)
-        message.error({ content: err.message, key })
-        setIsLoading(false)
-        return false
-      })
-  }, [])
+  const _stake = useCallback(
+    async (amount: BigNumber) => {
+      setIsLoading(true)
+      message.loading({ content: 'Depositing...', duration: 0, key })
+      setError(undefined)
+      return whenDefined(web3, x =>
+        stake(x, amount)
+          .then(() => {
+            message.success({ content: 'Deposit completed', key })
+            setIsLoading(false)
+            return true
+          })
+          .catch(err => {
+            setError(err)
+            message.error({ content: err.message, key })
+            setIsLoading(false)
+            return false
+          })
+      )
+    },
+    [web3]
+  )
   return { stake: _stake, isLoading, error }
 }
 
 export const useUnstake = () => {
+  const { web3 } = useProvider()
   const key = 'useUnstake'
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [error, setError] = useState<Error>()
-  const _unstake = useCallback(async (amount: BigNumber) => {
-    setIsLoading(true)
-    message.loading({ content: 'Withdrawing...', duration: 0, key })
-    setError(undefined)
-    return unstake(amount)
-      .then(() => {
-        message.success({ content: 'Withdrawal completed', key })
-        setIsLoading(false)
-      })
-      .catch(err => {
-        setError(err)
-        message.error({ content: err.message, key })
-        setIsLoading(false)
-      })
-  }, [])
+  const _unstake = useCallback(
+    async (amount: BigNumber) => {
+      setIsLoading(true)
+      message.loading({ content: 'Withdrawing...', duration: 0, key })
+      setError(undefined)
+      return whenDefined(web3, x =>
+        unstake(x, amount)
+          .then(() => {
+            message.success({ content: 'Withdrawal completed', key })
+            setIsLoading(false)
+          })
+          .catch(err => {
+            setError(err)
+            message.error({ content: err.message, key })
+            setIsLoading(false)
+          })
+      )
+    },
+    [web3]
+  )
   return { unstake: _unstake, isLoading, error }
 }
 
 export const useAllTokensClaimed = () => {
-  const { data, error } = useSWR<BigNumber, Error>(SWRCachePath.useAllTokensClaimed, getAllTokensClaimed)
+  const { nonConnectedWeb3, accountAddress } = useProvider()
+  const { data, error } = useSWR<BigNumber, Error>(
+    SWRCachePath.useAllTokensClaimed(accountAddress),
+    whenDefined(nonConnectedWeb3, x => getAllTokensClaimed(x))
+  )
   return {
     data,
     error
@@ -103,8 +132,10 @@ export const useAllTokensClaimed = () => {
 }
 
 export const useTotalStakingShares = () => {
-  const { data, error } = useSWR<UnwrapFunc<typeof totalStakingShares>, Error>(SWRCachePath.getTotalStakingShares, () =>
-    totalStakingShares()
+  const { nonConnectedWeb3, accountAddress } = useProvider()
+  const { data, error } = useSWR<undefined | UnwrapFunc<typeof totalStakingShares>, Error>(
+    SWRCachePath.getTotalStakingShares(accountAddress),
+    () => whenDefined(nonConnectedWeb3, x => totalStakingShares(x))
   )
   return {
     data,
@@ -113,8 +144,10 @@ export const useTotalStakingShares = () => {
 }
 
 export const useTotalStaked = () => {
-  const { data, error } = useSWR<UnwrapFunc<typeof totalStakingShares>, Error>(SWRCachePath.useTotalStaked, () =>
-    totalStaked()
+  const { nonConnectedWeb3, accountAddress } = useProvider()
+  const { data, error } = useSWR<undefined | UnwrapFunc<typeof totalStakingShares>, Error>(
+    SWRCachePath.useTotalStaked(accountAddress),
+    () => whenDefined(nonConnectedWeb3, x => totalStaked(x))
   )
   return {
     data,
@@ -123,8 +156,10 @@ export const useTotalStaked = () => {
 }
 
 export const useUpdateAccounting = () => {
-  const { data, error } = useSWR<UnwrapFunc<typeof updateAccounting>, Error>(SWRCachePath.getUpdateAccounting, () =>
-    updateAccounting()
+  const { web3, accountAddress } = useProvider()
+  const { data, error } = useSWR<undefined | UnwrapFunc<typeof updateAccounting>, Error>(
+    SWRCachePath.getUpdateAccounting(accountAddress),
+    () => whenDefined(web3, x => updateAccounting(x))
   )
   return {
     data,
@@ -133,9 +168,10 @@ export const useUpdateAccounting = () => {
 }
 
 export const useFinalUnlockSchedules = () => {
-  const { data, error } = useSWR<UnwrapFunc<typeof finalUnlockSchedules>, Error>(
-    SWRCachePath.getFinalUnlockSchedules,
-    () => finalUnlockSchedules()
+  const { nonConnectedWeb3, accountAddress } = useProvider()
+  const { data, error } = useSWR<undefined | UnwrapFunc<typeof finalUnlockSchedules>, Error>(
+    SWRCachePath.getFinalUnlockSchedules(accountAddress),
+    () => whenDefined(nonConnectedWeb3, x => finalUnlockSchedules(x))
   )
   return {
     data,
@@ -205,27 +241,30 @@ export const useIsAlreadyFinished = ([state, stateSetter]: [boolean, Dispatch<Se
   boolean,
   Dispatch<SetStateAction<boolean>>
 ] => {
-  finalUnlockSchedules().then(res => {
-    if (res === undefined) {
-      return
-    }
-    const { endAtSec } = res
-    const current = getUTC()
-    const duration = (d => (d > SYSTEM_SETTIMEOUT_MAXIMUM_DELAY_VALUE ? SYSTEM_SETTIMEOUT_MAXIMUM_DELAY_VALUE : d))(
-      (Number(endAtSec) - current) * 1000
-    )
-    setTimeout(() => stateSetter(true), duration)
-  })
+  const { nonConnectedWeb3 } = useProvider()
+  whenDefined(nonConnectedWeb3, x =>
+    finalUnlockSchedules(x).then(res => {
+      if (res === undefined) {
+        return
+      }
+      const { endAtSec } = res
+      const current = getUTC()
+      const duration = (d => (d > SYSTEM_SETTIMEOUT_MAXIMUM_DELAY_VALUE ? SYSTEM_SETTIMEOUT_MAXIMUM_DELAY_VALUE : d))(
+        (Number(endAtSec) - current) * 1000
+      )
+      setTimeout(() => stateSetter(true), duration)
+    })
+  )
   return [state, stateSetter]
 }
 
 export const useRewardMultiplier = () => {
-  const { accountAddress } = useGetAccountAddress()
+  const { nonConnectedWeb3, accountAddress } = useProvider()
   const { data: block, error: errorGetStaked, mutate } = useSWR<number | undefined, Error>(
     SWRCachePath.getStaked(accountAddress),
     () =>
-      whenDefined(accountAddress, address =>
-        getStaked(address).then(allEvents => {
+      whenDefinedAll([nonConnectedWeb3, accountAddress], ([client, address]) =>
+        getStaked(client, address).then(allEvents => {
           return allEvents[0]?.blockNumber
         })
       )
@@ -234,12 +273,13 @@ export const useRewardMultiplier = () => {
     SWRCachePath.getBlock(block),
     () => (block ? getBlock(block).then(Number) : undefined)
   )
-  const { data: bonusPeriod, error: errorBonusPeriodSec } = useSWR<BigNumber, Error>(
-    SWRCachePath.getBonusPeriodSec,
-    () => bonusPeriodSec()
+  const { data: bonusPeriod, error: errorBonusPeriodSec } = useSWR<undefined | BigNumber, Error>(
+    SWRCachePath.getBonusPeriodSec(accountAddress),
+    () => whenDefined(nonConnectedWeb3, x => bonusPeriodSec(x))
   )
-  const { data: _startBonus, error: errorStartBonus } = useSWR<BigNumber, Error>(SWRCachePath.getStartBonus, () =>
-    startBonus()
+  const { data: _startBonus, error: errorStartBonus } = useSWR<undefined | BigNumber, Error>(
+    SWRCachePath.getStartBonus(accountAddress),
+    () => whenDefined(nonConnectedWeb3, x => startBonus(x))
   )
   const startBonusPct = _startBonus ? toBigNumber(_startBonus).div(100) : toBigNumber(0)
   const multiplier =
@@ -266,10 +306,10 @@ export const useRewardMultiplier = () => {
 }
 
 export const useTotalStakedFor = () => {
-  const { accountAddress } = useGetAccountAddress()
+  const { nonConnectedWeb3, accountAddress } = useProvider()
   const { data, error, mutate } = useSWR<UnwrapFunc<typeof totalStakedFor> | undefined, Error>(
     SWRCachePath.totalStakedFor(accountAddress),
-    () => whenDefined(accountAddress, address => totalStakedFor(address))
+    () => whenDefinedAll([nonConnectedWeb3, accountAddress], ([client, address]) => totalStakedFor(client, address))
   )
   return {
     data,
@@ -279,10 +319,11 @@ export const useTotalStakedFor = () => {
 }
 
 export const useMutateDepositDependence = () => {
+  const { accountAddress } = useProvider()
   const purge = useCallback(() => {
-    mutate(SWRCachePath.getStaked)
-    mutate(SWRCachePath.totalStakedFor)
-  }, [])
+    mutate(SWRCachePath.getStaked(accountAddress))
+    mutate(SWRCachePath.totalStakedFor(accountAddress))
+  }, [accountAddress])
 
   return {
     purge
@@ -311,9 +352,10 @@ export const useAPY = () => {
 }
 
 export const useUnstakeQuery = (amount?: BigNumber) => {
+  const { web3 } = useProvider()
   const { data, error } = useSWR<UnwrapFunc<typeof totalStakedFor> | undefined, Error>(
     SWRCachePath.unstakeQuery(amount?.toFixed()),
-    () => whenDefined(amount, x => unstakeQuery(x))
+    () => whenDefined(web3, w3 => whenDefined(amount, x => unstakeQuery(w3, x)))
   )
   return {
     data,

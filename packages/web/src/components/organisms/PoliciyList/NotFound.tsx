@@ -3,7 +3,7 @@ import { Empty, Button } from 'antd'
 
 export const NotFound = () => {
   return (
-    <div style={{ margin: '0 auto', alignItems: 'center' }}>
+    <div style={{ alignSelf: 'center', alignItems: 'center' }}>
       <Empty
         image={Empty.PRESENTED_IMAGE_SIMPLE}
         description={
@@ -14,7 +14,14 @@ export const NotFound = () => {
         }
       />
       <div style={{ width: '100%', textAlign: 'center' }}>
-        <Button type="primary">Access DIPs</Button>
+        <Button
+          target="_blank"
+          rel="noopener noreferrer"
+          href="https://github.com/dev-protocol/DIPs/issues"
+          type="primary"
+        >
+          Access DIPs
+        </Button>
       </div>
     </div>
   )

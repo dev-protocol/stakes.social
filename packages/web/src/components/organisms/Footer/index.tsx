@@ -1,98 +1,82 @@
 import * as React from 'react'
-import { Logo } from 'src/components/atoms/Svgs/tsx'
-import styled from 'styled-components'
+import { BrandLogo } from 'src/components/atoms/BrandLogo'
+import styled, { CSSProperties } from 'styled-components'
 import { Container } from 'src/components/atoms/Container'
+import { Twitter, Discord, Telegram, Medium, Github } from '../../atoms/SocialButtons/index'
+import { Divider } from 'antd'
 
 const Wrap = styled.footer`
   display: grid;
-  justify-content: center;
-  grid-gap: 5rem;
-  padding: 5rem 0;
-  margin-top: 5rem;
-  border-top: 1px solid #e6e6e6;
+  margin-top: 3em;
+`
+
+const SocialContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+`
+const LowerFooter = {
+  margin: 'unset',
+  textAlign: 'center',
+  maxWidth: 'unset',
+  background: 'black',
+  padding: '30px 0px 30px 0px'
+} as CSSProperties
+
+const FooterContainer = styled.div`
+  max-width: 350px;
+  margin-left: auto;
+  margin-right: auto;
+
+  @media (min-width: 760px) {
+    max-width: 1160px;
+  }
+`
+
+const LogoContainer = styled.div``
+
+const DevProtocol = styled.a`
+  font-weight: bold;
+  text-decoration: none;
+  cursor: pointer;
+
+  color: white;
+
+  :hover {
+    color: inherit;
+  }
 `
 
 export const Footer = () => {
   return (
     <Wrap>
-      <Container>
-        <p>
-          <span>Stakes.social is powered by the </span>
-          <a href="//devprtcl.com" target="_blank" rel="noreferrer noopener" style={{ textDecoration: 'underline' }}>
-            Dev Protocol
-          </a>
-          <span>, see the </span>
-          <a
-            href="//github.com/dev-protocol/protocol/blob/main/docs/WHITEPAPER.md"
-            target="_blank"
-            rel="noreferrer noopener"
-            style={{ textDecoration: 'underline' }}
-          >
-            whitepaper
-          </a>
-          <span> on </span>
-          <a
-            href="//github.com/dev-protocol/protocol"
-            target="_blank"
-            rel="noreferrer noopener"
-            style={{ textDecoration: 'underline' }}
-          >
-            GitHub
-          </a>
-          .
-        </p>
-        <p>
-          <span>Enjoy following the Dev Protocol community on </span>
-          <a
-            href="//discord.gg/VwJp4KM"
-            target="_blank"
-            rel="noreferrer noopener"
-            style={{ textDecoration: 'underline' }}
-          >
-            Discord
-          </a>
-          <span>, </span>
-          <a href="//t.me/devprtcl" target="_blank" rel="noreferrer noopener" style={{ textDecoration: 'underline' }}>
-            Telegram
-          </a>
-          <span>, </span>
-          <a
-            href="//medium.com/devtoken"
-            target="_blank"
-            rel="noreferrer noopener"
-            style={{ textDecoration: 'underline' }}
-          >
-            Medium
-          </a>
-          <span>, </span>
-          <a
-            href="//spectrum.chat/devtoken"
-            target="_blank"
-            rel="noreferrer noopener"
-            style={{ textDecoration: 'underline' }}
-          >
-            Spectrum
-          </a>
-          <span>, and </span>
-          <a
-            href="//twitter.com/devprtcl"
-            target="_blank"
-            rel="noreferrer noopener"
-            style={{ textDecoration: 'underline' }}
-          >
-            Twitter
-          </a>
-          !
-        </p>
-      </Container>
-      <Container>
-        <Logo width={84} height={undefined}></Logo>
-      </Container>
-      <Container>
-        <small>
-          All emojis designed by <a href="//openmoji.org/library/">OpenMoji</a> – the open-source emoji and icon
-          project. License: <a href="//creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>
-        </small>
+      <Container style={LowerFooter}>
+        <FooterContainer>
+          <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+            <LogoContainer>
+              <BrandLogo />
+            </LogoContainer>
+            <div style={{ display: 'flex', alignItems: 'center', color: 'white', fontSize: '0.9em' }}>
+              <span>Powered by</span>
+              <Divider style={{ marginLeft: '2px', marginRight: '2px' }} type="vertical" />
+              <DevProtocol target="_blank" rel="noopener noreferrer" href="https://devprotocol.xyz/">
+                Dev Protocol
+              </DevProtocol>
+            </div>
+          </div>
+
+          <hr style={{ color: 'white', marginTop: '2px' }} />
+          <div style={{ display: 'flex', justifyContent: 'space-between', color: 'white', fontSize: '0.9em' }}>
+            <span>2020 All rights reserverd.</span>
+            <SocialContainer>
+              <Twitter target="_blank" rel="noopener noreferrer" />
+              <Discord />
+              <Github target="_blank" rel="noopener noreferrer" />
+              <Telegram />
+              <Medium />
+            </SocialContainer>
+          </div>
+        </FooterContainer>
       </Container>
     </Wrap>
   )

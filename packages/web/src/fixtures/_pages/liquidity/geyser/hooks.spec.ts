@@ -24,6 +24,7 @@ import {
 } from './hooks'
 
 jest.mock('swr')
+jest.mock('src/fixtures/wallet/hooks.ts')
 jest.mock('src/fixtures/_pages/liquidity/geyser/client.ts')
 jest.mock('src/fixtures/_pages/liquidity/uniswap-pool/client.ts')
 
@@ -415,7 +416,6 @@ describe('geyser hooks', () => {
 
     test('success fetching data', () => {
       const utc = getUTC()
-      ;(useSWR as jest.Mock).mockImplementationOnce(() => ({ data: '0x' }))
       ;(useSWR as jest.Mock).mockImplementationOnce(() => ({ data: 12345 }))
       ;(useSWR as jest.Mock).mockImplementationOnce(() => ({ data: utc - 10000 }))
       ;(useSWR as jest.Mock).mockImplementationOnce(() => ({ data: toBigNumber(20000) }))
@@ -427,7 +427,6 @@ describe('geyser hooks', () => {
 
     test('success fetching data (max)', () => {
       const utc = getUTC()
-      ;(useSWR as jest.Mock).mockImplementationOnce(() => ({ data: '0x' }))
       ;(useSWR as jest.Mock).mockImplementationOnce(() => ({ data: 12345 }))
       ;(useSWR as jest.Mock).mockImplementationOnce(() => ({ data: utc - 10000 }))
       ;(useSWR as jest.Mock).mockImplementationOnce(() => ({ data: toBigNumber(8000) }))
@@ -456,7 +455,6 @@ describe('geyser hooks', () => {
     })
 
     test('success fetching data', () => {
-      ;(useSWR as jest.Mock).mockImplementationOnce(() => ({ data: '0x' }))
       ;(useSWR as jest.Mock).mockImplementationOnce(() => ({ data: toBigNumber(12345) }))
       const { result } = renderHook(() => useTotalStakedFor())
       expect(result.current.data?.toString()).toBe('12345')
@@ -480,8 +478,8 @@ describe('geyser hooks', () => {
         result.current.purge()
       })
       expect((mutate as jest.Mock).mock.calls.length).toBe(2)
-      expect((mutate as jest.Mock).mock.calls[0][0]).toBe(SWRCachePath.getStaked)
-      expect((mutate as jest.Mock).mock.calls[1][0]).toBe(SWRCachePath.totalStakedFor)
+      expect((mutate as jest.Mock).mock.calls[0][0]).toBe(SWRCachePath.getStaked('0x'))
+      expect((mutate as jest.Mock).mock.calls[1][0]).toBe(SWRCachePath.totalStakedFor('0x'))
     })
   })
 

@@ -2,6 +2,8 @@ import { gql } from '@apollo/client'
 import * as Apollo from '@apollo/client'
 export type Maybe<T> = T
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] }
+export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> }
+export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> }
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
   ID: string
@@ -81,6 +83,7 @@ export type Account_Lockup_Bool_Exp = {
   _and?: Maybe<Array<Maybe<Account_Lockup_Bool_Exp>>>
   _not?: Maybe<Account_Lockup_Bool_Exp>
   _or?: Maybe<Array<Maybe<Account_Lockup_Bool_Exp>>>
+  property_meta?: Maybe<Property_Meta_Bool_Exp>
   account_address?: Maybe<String_Comparison_Exp>
   block_number?: Maybe<Int_Comparison_Exp>
   locked_up_event_id?: Maybe<String_Comparison_Exp>
@@ -2077,12 +2080,16 @@ export type Mutation_Root = {
   delete_property_authentication_by_pk?: Maybe<Property_Authentication>
   delete_property_authentication_deleted?: Maybe<Property_Authentication_Deleted_Mutation_Response>
   delete_property_authentication_deleted_by_pk?: Maybe<Property_Authentication_Deleted>
+  delete_property_balance?: Maybe<Property_Balance_Mutation_Response>
+  delete_property_balance_by_pk?: Maybe<Property_Balance>
   delete_property_factory_create?: Maybe<Property_Factory_Create_Mutation_Response>
   delete_property_factory_create_by_pk?: Maybe<Property_Factory_Create>
   delete_property_lockup?: Maybe<Property_Lockup_Mutation_Response>
   delete_property_lockup_by_pk?: Maybe<Property_Lockup>
   delete_property_meta?: Maybe<Property_Meta_Mutation_Response>
   delete_property_meta_by_pk?: Maybe<Property_Meta>
+  delete_withdraw_property_transfer?: Maybe<Withdraw_Property_Transfer_Mutation_Response>
+  delete_withdraw_property_transfer_by_pk?: Maybe<Withdraw_Property_Transfer>
   insert_account_lockup?: Maybe<Account_Lockup_Mutation_Response>
   insert_account_lockup_one?: Maybe<Account_Lockup>
   insert_dev_property_transfer?: Maybe<Dev_Property_Transfer_Mutation_Response>
@@ -2101,12 +2108,16 @@ export type Mutation_Root = {
   insert_property_authentication_deleted?: Maybe<Property_Authentication_Deleted_Mutation_Response>
   insert_property_authentication_deleted_one?: Maybe<Property_Authentication_Deleted>
   insert_property_authentication_one?: Maybe<Property_Authentication>
+  insert_property_balance?: Maybe<Property_Balance_Mutation_Response>
+  insert_property_balance_one?: Maybe<Property_Balance>
   insert_property_factory_create?: Maybe<Property_Factory_Create_Mutation_Response>
   insert_property_factory_create_one?: Maybe<Property_Factory_Create>
   insert_property_lockup?: Maybe<Property_Lockup_Mutation_Response>
   insert_property_lockup_one?: Maybe<Property_Lockup>
   insert_property_meta?: Maybe<Property_Meta_Mutation_Response>
   insert_property_meta_one?: Maybe<Property_Meta>
+  insert_withdraw_property_transfer?: Maybe<Withdraw_Property_Transfer_Mutation_Response>
+  insert_withdraw_property_transfer_one?: Maybe<Withdraw_Property_Transfer>
   update_account_lockup?: Maybe<Account_Lockup_Mutation_Response>
   update_account_lockup_by_pk?: Maybe<Account_Lockup>
   update_dev_property_transfer?: Maybe<Dev_Property_Transfer_Mutation_Response>
@@ -2125,12 +2136,16 @@ export type Mutation_Root = {
   update_property_authentication_by_pk?: Maybe<Property_Authentication>
   update_property_authentication_deleted?: Maybe<Property_Authentication_Deleted_Mutation_Response>
   update_property_authentication_deleted_by_pk?: Maybe<Property_Authentication_Deleted>
+  update_property_balance?: Maybe<Property_Balance_Mutation_Response>
+  update_property_balance_by_pk?: Maybe<Property_Balance>
   update_property_factory_create?: Maybe<Property_Factory_Create_Mutation_Response>
   update_property_factory_create_by_pk?: Maybe<Property_Factory_Create>
   update_property_lockup?: Maybe<Property_Lockup_Mutation_Response>
   update_property_lockup_by_pk?: Maybe<Property_Lockup>
   update_property_meta?: Maybe<Property_Meta_Mutation_Response>
   update_property_meta_by_pk?: Maybe<Property_Meta>
+  update_withdraw_property_transfer?: Maybe<Withdraw_Property_Transfer_Mutation_Response>
+  update_withdraw_property_transfer_by_pk?: Maybe<Withdraw_Property_Transfer>
 }
 
 export type Mutation_RootDelete_Account_LockupArgs = {
@@ -2208,6 +2223,15 @@ export type Mutation_RootDelete_Property_Authentication_Deleted_By_PkArgs = {
   property: Scalars['String']
 }
 
+export type Mutation_RootDelete_Property_BalanceArgs = {
+  where: Property_Balance_Bool_Exp
+}
+
+export type Mutation_RootDelete_Property_Balance_By_PkArgs = {
+  account_address: Scalars['String']
+  property_address: Scalars['String']
+}
+
 export type Mutation_RootDelete_Property_Factory_CreateArgs = {
   where: Property_Factory_Create_Bool_Exp
 }
@@ -2232,6 +2256,14 @@ export type Mutation_RootDelete_Property_MetaArgs = {
 export type Mutation_RootDelete_Property_Meta_By_PkArgs = {
   author: Scalars['String']
   property: Scalars['String']
+}
+
+export type Mutation_RootDelete_Withdraw_Property_TransferArgs = {
+  where: Withdraw_Property_Transfer_Bool_Exp
+}
+
+export type Mutation_RootDelete_Withdraw_Property_Transfer_By_PkArgs = {
+  event_id: Scalars['String']
 }
 
 export type Mutation_RootInsert_Account_LockupArgs = {
@@ -2324,6 +2356,16 @@ export type Mutation_RootInsert_Property_Authentication_OneArgs = {
   on_conflict?: Maybe<Property_Authentication_On_Conflict>
 }
 
+export type Mutation_RootInsert_Property_BalanceArgs = {
+  objects: Array<Property_Balance_Insert_Input>
+  on_conflict?: Maybe<Property_Balance_On_Conflict>
+}
+
+export type Mutation_RootInsert_Property_Balance_OneArgs = {
+  object: Property_Balance_Insert_Input
+  on_conflict?: Maybe<Property_Balance_On_Conflict>
+}
+
 export type Mutation_RootInsert_Property_Factory_CreateArgs = {
   objects: Array<Property_Factory_Create_Insert_Input>
   on_conflict?: Maybe<Property_Factory_Create_On_Conflict>
@@ -2352,6 +2394,16 @@ export type Mutation_RootInsert_Property_MetaArgs = {
 export type Mutation_RootInsert_Property_Meta_OneArgs = {
   object: Property_Meta_Insert_Input
   on_conflict?: Maybe<Property_Meta_On_Conflict>
+}
+
+export type Mutation_RootInsert_Withdraw_Property_TransferArgs = {
+  objects: Array<Withdraw_Property_Transfer_Insert_Input>
+  on_conflict?: Maybe<Withdraw_Property_Transfer_On_Conflict>
+}
+
+export type Mutation_RootInsert_Withdraw_Property_Transfer_OneArgs = {
+  object: Withdraw_Property_Transfer_Insert_Input
+  on_conflict?: Maybe<Withdraw_Property_Transfer_On_Conflict>
 }
 
 export type Mutation_RootUpdate_Account_LockupArgs = {
@@ -2462,6 +2514,18 @@ export type Mutation_RootUpdate_Property_Authentication_Deleted_By_PkArgs = {
   pk_columns: Property_Authentication_Deleted_Pk_Columns_Input
 }
 
+export type Mutation_RootUpdate_Property_BalanceArgs = {
+  _inc?: Maybe<Property_Balance_Inc_Input>
+  _set?: Maybe<Property_Balance_Set_Input>
+  where: Property_Balance_Bool_Exp
+}
+
+export type Mutation_RootUpdate_Property_Balance_By_PkArgs = {
+  _inc?: Maybe<Property_Balance_Inc_Input>
+  _set?: Maybe<Property_Balance_Set_Input>
+  pk_columns: Property_Balance_Pk_Columns_Input
+}
+
 export type Mutation_RootUpdate_Property_Factory_CreateArgs = {
   _inc?: Maybe<Property_Factory_Create_Inc_Input>
   _set?: Maybe<Property_Factory_Create_Set_Input>
@@ -2496,6 +2560,18 @@ export type Mutation_RootUpdate_Property_Meta_By_PkArgs = {
   _inc?: Maybe<Property_Meta_Inc_Input>
   _set?: Maybe<Property_Meta_Set_Input>
   pk_columns: Property_Meta_Pk_Columns_Input
+}
+
+export type Mutation_RootUpdate_Withdraw_Property_TransferArgs = {
+  _inc?: Maybe<Withdraw_Property_Transfer_Inc_Input>
+  _set?: Maybe<Withdraw_Property_Transfer_Set_Input>
+  where: Withdraw_Property_Transfer_Bool_Exp
+}
+
+export type Mutation_RootUpdate_Withdraw_Property_Transfer_By_PkArgs = {
+  _inc?: Maybe<Withdraw_Property_Transfer_Inc_Input>
+  _set?: Maybe<Withdraw_Property_Transfer_Set_Input>
+  pk_columns: Withdraw_Property_Transfer_Pk_Columns_Input
 }
 
 export type Numeric_Comparison_Exp = {
@@ -2824,6 +2900,7 @@ export type Property_Authentication = {
   metrics: Scalars['String']
   property: Scalars['String']
   property_creation?: Maybe<Property_Factory_Create>
+  property_meta?: Maybe<Property_Meta>
 }
 
 export type Property_Authentication_Aggregate = {
@@ -2891,6 +2968,7 @@ export type Property_Authentication_Bool_Exp = {
   metrics?: Maybe<String_Comparison_Exp>
   property?: Maybe<String_Comparison_Exp>
   property_creation?: Maybe<Property_Factory_Create_Bool_Exp>
+  property_meta?: Maybe<Property_Meta_Bool_Exp>
 }
 
 export enum Property_Authentication_Constraint {
@@ -3158,6 +3236,7 @@ export type Property_Authentication_Insert_Input = {
   metrics?: Maybe<Scalars['String']>
   property?: Maybe<Scalars['String']>
   property_creation?: Maybe<Property_Factory_Create_Obj_Rel_Insert_Input>
+  property_meta?: Maybe<Property_Meta_Obj_Rel_Insert_Input>
 }
 
 export type Property_Authentication_Max_Fields = {
@@ -3219,6 +3298,7 @@ export type Property_Authentication_Order_By = {
   metrics?: Maybe<Order_By>
   property?: Maybe<Order_By>
   property_creation?: Maybe<Property_Factory_Create_Order_By>
+  property_meta?: Maybe<Property_Meta_Order_By>
 }
 
 export type Property_Authentication_Pk_Columns_Input = {
@@ -3310,6 +3390,260 @@ export type Property_Authentication_Variance_Fields = {
 }
 
 export type Property_Authentication_Variance_Order_By = {
+  block_number?: Maybe<Order_By>
+}
+
+export type Property_Balance = {
+  __typename?: 'property_balance'
+  account_address: Scalars['String']
+  balance: Scalars['numeric']
+  block_number: Scalars['Int']
+  is_author: Scalars['Boolean']
+  property_address: Scalars['String']
+}
+
+export type Property_Balance_Aggregate = {
+  __typename?: 'property_balance_aggregate'
+  aggregate?: Maybe<Property_Balance_Aggregate_Fields>
+  nodes: Array<Property_Balance>
+}
+
+export type Property_Balance_Aggregate_Fields = {
+  __typename?: 'property_balance_aggregate_fields'
+  avg?: Maybe<Property_Balance_Avg_Fields>
+  count?: Maybe<Scalars['Int']>
+  max?: Maybe<Property_Balance_Max_Fields>
+  min?: Maybe<Property_Balance_Min_Fields>
+  stddev?: Maybe<Property_Balance_Stddev_Fields>
+  stddev_pop?: Maybe<Property_Balance_Stddev_Pop_Fields>
+  stddev_samp?: Maybe<Property_Balance_Stddev_Samp_Fields>
+  sum?: Maybe<Property_Balance_Sum_Fields>
+  var_pop?: Maybe<Property_Balance_Var_Pop_Fields>
+  var_samp?: Maybe<Property_Balance_Var_Samp_Fields>
+  variance?: Maybe<Property_Balance_Variance_Fields>
+}
+
+export type Property_Balance_Aggregate_FieldsCountArgs = {
+  columns?: Maybe<Array<Property_Balance_Select_Column>>
+  distinct?: Maybe<Scalars['Boolean']>
+}
+
+export type Property_Balance_Aggregate_Order_By = {
+  avg?: Maybe<Property_Balance_Avg_Order_By>
+  count?: Maybe<Order_By>
+  max?: Maybe<Property_Balance_Max_Order_By>
+  min?: Maybe<Property_Balance_Min_Order_By>
+  stddev?: Maybe<Property_Balance_Stddev_Order_By>
+  stddev_pop?: Maybe<Property_Balance_Stddev_Pop_Order_By>
+  stddev_samp?: Maybe<Property_Balance_Stddev_Samp_Order_By>
+  sum?: Maybe<Property_Balance_Sum_Order_By>
+  var_pop?: Maybe<Property_Balance_Var_Pop_Order_By>
+  var_samp?: Maybe<Property_Balance_Var_Samp_Order_By>
+  variance?: Maybe<Property_Balance_Variance_Order_By>
+}
+
+export type Property_Balance_Arr_Rel_Insert_Input = {
+  data: Array<Property_Balance_Insert_Input>
+  on_conflict?: Maybe<Property_Balance_On_Conflict>
+}
+
+export type Property_Balance_Avg_Fields = {
+  __typename?: 'property_balance_avg_fields'
+  balance?: Maybe<Scalars['Float']>
+  block_number?: Maybe<Scalars['Float']>
+}
+
+export type Property_Balance_Avg_Order_By = {
+  balance?: Maybe<Order_By>
+  block_number?: Maybe<Order_By>
+}
+
+export type Property_Balance_Bool_Exp = {
+  _and?: Maybe<Array<Maybe<Property_Balance_Bool_Exp>>>
+  _not?: Maybe<Property_Balance_Bool_Exp>
+  _or?: Maybe<Array<Maybe<Property_Balance_Bool_Exp>>>
+  account_address?: Maybe<String_Comparison_Exp>
+  balance?: Maybe<Numeric_Comparison_Exp>
+  block_number?: Maybe<Int_Comparison_Exp>
+  is_author?: Maybe<Boolean_Comparison_Exp>
+  property_address?: Maybe<String_Comparison_Exp>
+}
+
+export enum Property_Balance_Constraint {
+  PropertyBalancePkey = 'property_balance_pkey'
+}
+
+export type Property_Balance_Inc_Input = {
+  balance?: Maybe<Scalars['numeric']>
+  block_number?: Maybe<Scalars['Int']>
+}
+
+export type Property_Balance_Insert_Input = {
+  account_address?: Maybe<Scalars['String']>
+  balance?: Maybe<Scalars['numeric']>
+  block_number?: Maybe<Scalars['Int']>
+  is_author?: Maybe<Scalars['Boolean']>
+  property_address?: Maybe<Scalars['String']>
+}
+
+export type Property_Balance_Max_Fields = {
+  __typename?: 'property_balance_max_fields'
+  account_address?: Maybe<Scalars['String']>
+  balance?: Maybe<Scalars['numeric']>
+  block_number?: Maybe<Scalars['Int']>
+  property_address?: Maybe<Scalars['String']>
+}
+
+export type Property_Balance_Max_Order_By = {
+  account_address?: Maybe<Order_By>
+  balance?: Maybe<Order_By>
+  block_number?: Maybe<Order_By>
+  property_address?: Maybe<Order_By>
+}
+
+export type Property_Balance_Min_Fields = {
+  __typename?: 'property_balance_min_fields'
+  account_address?: Maybe<Scalars['String']>
+  balance?: Maybe<Scalars['numeric']>
+  block_number?: Maybe<Scalars['Int']>
+  property_address?: Maybe<Scalars['String']>
+}
+
+export type Property_Balance_Min_Order_By = {
+  account_address?: Maybe<Order_By>
+  balance?: Maybe<Order_By>
+  block_number?: Maybe<Order_By>
+  property_address?: Maybe<Order_By>
+}
+
+export type Property_Balance_Mutation_Response = {
+  __typename?: 'property_balance_mutation_response'
+  affected_rows: Scalars['Int']
+  returning: Array<Property_Balance>
+}
+
+export type Property_Balance_Obj_Rel_Insert_Input = {
+  data: Property_Balance_Insert_Input
+  on_conflict?: Maybe<Property_Balance_On_Conflict>
+}
+
+export type Property_Balance_On_Conflict = {
+  constraint: Property_Balance_Constraint
+  update_columns: Array<Property_Balance_Update_Column>
+  where?: Maybe<Property_Balance_Bool_Exp>
+}
+
+export type Property_Balance_Order_By = {
+  account_address?: Maybe<Order_By>
+  balance?: Maybe<Order_By>
+  block_number?: Maybe<Order_By>
+  is_author?: Maybe<Order_By>
+  property_address?: Maybe<Order_By>
+}
+
+export type Property_Balance_Pk_Columns_Input = {
+  account_address: Scalars['String']
+  property_address: Scalars['String']
+}
+
+export enum Property_Balance_Select_Column {
+  AccountAddress = 'account_address',
+  Balance = 'balance',
+  BlockNumber = 'block_number',
+  IsAuthor = 'is_author',
+  PropertyAddress = 'property_address'
+}
+
+export type Property_Balance_Set_Input = {
+  account_address?: Maybe<Scalars['String']>
+  balance?: Maybe<Scalars['numeric']>
+  block_number?: Maybe<Scalars['Int']>
+  is_author?: Maybe<Scalars['Boolean']>
+  property_address?: Maybe<Scalars['String']>
+}
+
+export type Property_Balance_Stddev_Fields = {
+  __typename?: 'property_balance_stddev_fields'
+  balance?: Maybe<Scalars['Float']>
+  block_number?: Maybe<Scalars['Float']>
+}
+
+export type Property_Balance_Stddev_Order_By = {
+  balance?: Maybe<Order_By>
+  block_number?: Maybe<Order_By>
+}
+
+export type Property_Balance_Stddev_Pop_Fields = {
+  __typename?: 'property_balance_stddev_pop_fields'
+  balance?: Maybe<Scalars['Float']>
+  block_number?: Maybe<Scalars['Float']>
+}
+
+export type Property_Balance_Stddev_Pop_Order_By = {
+  balance?: Maybe<Order_By>
+  block_number?: Maybe<Order_By>
+}
+
+export type Property_Balance_Stddev_Samp_Fields = {
+  __typename?: 'property_balance_stddev_samp_fields'
+  balance?: Maybe<Scalars['Float']>
+  block_number?: Maybe<Scalars['Float']>
+}
+
+export type Property_Balance_Stddev_Samp_Order_By = {
+  balance?: Maybe<Order_By>
+  block_number?: Maybe<Order_By>
+}
+
+export type Property_Balance_Sum_Fields = {
+  __typename?: 'property_balance_sum_fields'
+  balance?: Maybe<Scalars['numeric']>
+  block_number?: Maybe<Scalars['Int']>
+}
+
+export type Property_Balance_Sum_Order_By = {
+  balance?: Maybe<Order_By>
+  block_number?: Maybe<Order_By>
+}
+
+export enum Property_Balance_Update_Column {
+  AccountAddress = 'account_address',
+  Balance = 'balance',
+  BlockNumber = 'block_number',
+  IsAuthor = 'is_author',
+  PropertyAddress = 'property_address'
+}
+
+export type Property_Balance_Var_Pop_Fields = {
+  __typename?: 'property_balance_var_pop_fields'
+  balance?: Maybe<Scalars['Float']>
+  block_number?: Maybe<Scalars['Float']>
+}
+
+export type Property_Balance_Var_Pop_Order_By = {
+  balance?: Maybe<Order_By>
+  block_number?: Maybe<Order_By>
+}
+
+export type Property_Balance_Var_Samp_Fields = {
+  __typename?: 'property_balance_var_samp_fields'
+  balance?: Maybe<Scalars['Float']>
+  block_number?: Maybe<Scalars['Float']>
+}
+
+export type Property_Balance_Var_Samp_Order_By = {
+  balance?: Maybe<Order_By>
+  block_number?: Maybe<Order_By>
+}
+
+export type Property_Balance_Variance_Fields = {
+  __typename?: 'property_balance_variance_fields'
+  balance?: Maybe<Scalars['Float']>
+  block_number?: Maybe<Scalars['Float']>
+}
+
+export type Property_Balance_Variance_Order_By = {
+  balance?: Maybe<Order_By>
   block_number?: Maybe<Order_By>
 }
 
@@ -4116,11 +4450,29 @@ export type Property_Meta = {
   __typename?: 'property_meta'
   author: Scalars['String']
   block_number: Scalars['Int']
+  lockup: Array<Property_Lockup>
+  lockup_aggregate: Property_Lockup_Aggregate
   name: Scalars['String']
   property: Scalars['String']
   sender: Scalars['String']
   symbol: Scalars['String']
   total_supply: Scalars['numeric']
+}
+
+export type Property_MetaLockupArgs = {
+  distinct_on?: Maybe<Array<Property_Lockup_Select_Column>>
+  limit?: Maybe<Scalars['Int']>
+  offset?: Maybe<Scalars['Int']>
+  order_by?: Maybe<Array<Property_Lockup_Order_By>>
+  where?: Maybe<Property_Lockup_Bool_Exp>
+}
+
+export type Property_MetaLockup_AggregateArgs = {
+  distinct_on?: Maybe<Array<Property_Lockup_Select_Column>>
+  limit?: Maybe<Scalars['Int']>
+  offset?: Maybe<Scalars['Int']>
+  order_by?: Maybe<Array<Property_Lockup_Order_By>>
+  where?: Maybe<Property_Lockup_Bool_Exp>
 }
 
 export type Property_Meta_Aggregate = {
@@ -4185,6 +4537,7 @@ export type Property_Meta_Bool_Exp = {
   _or?: Maybe<Array<Maybe<Property_Meta_Bool_Exp>>>
   author?: Maybe<String_Comparison_Exp>
   block_number?: Maybe<Int_Comparison_Exp>
+  lockup?: Maybe<Property_Lockup_Bool_Exp>
   name?: Maybe<String_Comparison_Exp>
   property?: Maybe<String_Comparison_Exp>
   sender?: Maybe<String_Comparison_Exp>
@@ -4204,6 +4557,7 @@ export type Property_Meta_Inc_Input = {
 export type Property_Meta_Insert_Input = {
   author?: Maybe<Scalars['String']>
   block_number?: Maybe<Scalars['Int']>
+  lockup?: Maybe<Property_Lockup_Arr_Rel_Insert_Input>
   name?: Maybe<Scalars['String']>
   property?: Maybe<Scalars['String']>
   sender?: Maybe<Scalars['String']>
@@ -4273,6 +4627,7 @@ export type Property_Meta_On_Conflict = {
 export type Property_Meta_Order_By = {
   author?: Maybe<Order_By>
   block_number?: Maybe<Order_By>
+  lockup_aggregate?: Maybe<Property_Lockup_Aggregate_Order_By>
   name?: Maybe<Order_By>
   property?: Maybe<Order_By>
   sender?: Maybe<Order_By>
@@ -4423,6 +4778,9 @@ export type Query_Root = {
   property_authentication_deleted: Array<Property_Authentication_Deleted>
   property_authentication_deleted_aggregate: Property_Authentication_Deleted_Aggregate
   property_authentication_deleted_by_pk?: Maybe<Property_Authentication_Deleted>
+  property_balance: Array<Property_Balance>
+  property_balance_aggregate: Property_Balance_Aggregate
+  property_balance_by_pk?: Maybe<Property_Balance>
   property_factory_create: Array<Property_Factory_Create>
   property_factory_create_aggregate: Property_Factory_Create_Aggregate
   property_factory_create_by_pk?: Maybe<Property_Factory_Create>
@@ -4434,6 +4792,9 @@ export type Query_Root = {
   property_meta: Array<Property_Meta>
   property_meta_aggregate: Property_Meta_Aggregate
   property_meta_by_pk?: Maybe<Property_Meta>
+  withdraw_property_transfer: Array<Withdraw_Property_Transfer>
+  withdraw_property_transfer_aggregate: Withdraw_Property_Transfer_Aggregate
+  withdraw_property_transfer_by_pk?: Maybe<Withdraw_Property_Transfer>
 }
 
 export type Query_RootAccount_LockupArgs = {
@@ -4635,6 +4996,27 @@ export type Query_RootProperty_Authentication_Deleted_By_PkArgs = {
   property: Scalars['String']
 }
 
+export type Query_RootProperty_BalanceArgs = {
+  distinct_on?: Maybe<Array<Property_Balance_Select_Column>>
+  limit?: Maybe<Scalars['Int']>
+  offset?: Maybe<Scalars['Int']>
+  order_by?: Maybe<Array<Property_Balance_Order_By>>
+  where?: Maybe<Property_Balance_Bool_Exp>
+}
+
+export type Query_RootProperty_Balance_AggregateArgs = {
+  distinct_on?: Maybe<Array<Property_Balance_Select_Column>>
+  limit?: Maybe<Scalars['Int']>
+  offset?: Maybe<Scalars['Int']>
+  order_by?: Maybe<Array<Property_Balance_Order_By>>
+  where?: Maybe<Property_Balance_Bool_Exp>
+}
+
+export type Query_RootProperty_Balance_By_PkArgs = {
+  account_address: Scalars['String']
+  property_address: Scalars['String']
+}
+
 export type Query_RootProperty_Factory_CreateArgs = {
   distinct_on?: Maybe<Array<Property_Factory_Create_Select_Column>>
   limit?: Maybe<Scalars['Int']>
@@ -4713,6 +5095,26 @@ export type Query_RootProperty_Meta_By_PkArgs = {
   property: Scalars['String']
 }
 
+export type Query_RootWithdraw_Property_TransferArgs = {
+  distinct_on?: Maybe<Array<Withdraw_Property_Transfer_Select_Column>>
+  limit?: Maybe<Scalars['Int']>
+  offset?: Maybe<Scalars['Int']>
+  order_by?: Maybe<Array<Withdraw_Property_Transfer_Order_By>>
+  where?: Maybe<Withdraw_Property_Transfer_Bool_Exp>
+}
+
+export type Query_RootWithdraw_Property_Transfer_AggregateArgs = {
+  distinct_on?: Maybe<Array<Withdraw_Property_Transfer_Select_Column>>
+  limit?: Maybe<Scalars['Int']>
+  offset?: Maybe<Scalars['Int']>
+  order_by?: Maybe<Array<Withdraw_Property_Transfer_Order_By>>
+  where?: Maybe<Withdraw_Property_Transfer_Bool_Exp>
+}
+
+export type Query_RootWithdraw_Property_Transfer_By_PkArgs = {
+  event_id: Scalars['String']
+}
+
 export type String_Comparison_Exp = {
   _eq?: Maybe<Scalars['String']>
   _gt?: Maybe<Scalars['String']>
@@ -4762,6 +5164,9 @@ export type Subscription_Root = {
   property_authentication_deleted: Array<Property_Authentication_Deleted>
   property_authentication_deleted_aggregate: Property_Authentication_Deleted_Aggregate
   property_authentication_deleted_by_pk?: Maybe<Property_Authentication_Deleted>
+  property_balance: Array<Property_Balance>
+  property_balance_aggregate: Property_Balance_Aggregate
+  property_balance_by_pk?: Maybe<Property_Balance>
   property_factory_create: Array<Property_Factory_Create>
   property_factory_create_aggregate: Property_Factory_Create_Aggregate
   property_factory_create_by_pk?: Maybe<Property_Factory_Create>
@@ -4773,6 +5178,9 @@ export type Subscription_Root = {
   property_meta: Array<Property_Meta>
   property_meta_aggregate: Property_Meta_Aggregate
   property_meta_by_pk?: Maybe<Property_Meta>
+  withdraw_property_transfer: Array<Withdraw_Property_Transfer>
+  withdraw_property_transfer_aggregate: Withdraw_Property_Transfer_Aggregate
+  withdraw_property_transfer_by_pk?: Maybe<Withdraw_Property_Transfer>
 }
 
 export type Subscription_RootAccount_LockupArgs = {
@@ -4974,6 +5382,27 @@ export type Subscription_RootProperty_Authentication_Deleted_By_PkArgs = {
   property: Scalars['String']
 }
 
+export type Subscription_RootProperty_BalanceArgs = {
+  distinct_on?: Maybe<Array<Property_Balance_Select_Column>>
+  limit?: Maybe<Scalars['Int']>
+  offset?: Maybe<Scalars['Int']>
+  order_by?: Maybe<Array<Property_Balance_Order_By>>
+  where?: Maybe<Property_Balance_Bool_Exp>
+}
+
+export type Subscription_RootProperty_Balance_AggregateArgs = {
+  distinct_on?: Maybe<Array<Property_Balance_Select_Column>>
+  limit?: Maybe<Scalars['Int']>
+  offset?: Maybe<Scalars['Int']>
+  order_by?: Maybe<Array<Property_Balance_Order_By>>
+  where?: Maybe<Property_Balance_Bool_Exp>
+}
+
+export type Subscription_RootProperty_Balance_By_PkArgs = {
+  account_address: Scalars['String']
+  property_address: Scalars['String']
+}
+
 export type Subscription_RootProperty_Factory_CreateArgs = {
   distinct_on?: Maybe<Array<Property_Factory_Create_Select_Column>>
   limit?: Maybe<Scalars['Int']>
@@ -5052,15 +5481,362 @@ export type Subscription_RootProperty_Meta_By_PkArgs = {
   property: Scalars['String']
 }
 
+export type Subscription_RootWithdraw_Property_TransferArgs = {
+  distinct_on?: Maybe<Array<Withdraw_Property_Transfer_Select_Column>>
+  limit?: Maybe<Scalars['Int']>
+  offset?: Maybe<Scalars['Int']>
+  order_by?: Maybe<Array<Withdraw_Property_Transfer_Order_By>>
+  where?: Maybe<Withdraw_Property_Transfer_Bool_Exp>
+}
+
+export type Subscription_RootWithdraw_Property_Transfer_AggregateArgs = {
+  distinct_on?: Maybe<Array<Withdraw_Property_Transfer_Select_Column>>
+  limit?: Maybe<Scalars['Int']>
+  offset?: Maybe<Scalars['Int']>
+  order_by?: Maybe<Array<Withdraw_Property_Transfer_Order_By>>
+  where?: Maybe<Withdraw_Property_Transfer_Bool_Exp>
+}
+
+export type Subscription_RootWithdraw_Property_Transfer_By_PkArgs = {
+  event_id: Scalars['String']
+}
+
+export type Withdraw_Property_Transfer = {
+  __typename?: 'withdraw_property_transfer'
+  block_number: Scalars['Int']
+  event_id: Scalars['String']
+  from_address: Scalars['String']
+  log_index: Scalars['Int']
+  property_address: Scalars['String']
+  raw_data: Scalars['String']
+  to_address: Scalars['String']
+  transaction_index: Scalars['Int']
+}
+
+export type Withdraw_Property_Transfer_Aggregate = {
+  __typename?: 'withdraw_property_transfer_aggregate'
+  aggregate?: Maybe<Withdraw_Property_Transfer_Aggregate_Fields>
+  nodes: Array<Withdraw_Property_Transfer>
+}
+
+export type Withdraw_Property_Transfer_Aggregate_Fields = {
+  __typename?: 'withdraw_property_transfer_aggregate_fields'
+  avg?: Maybe<Withdraw_Property_Transfer_Avg_Fields>
+  count?: Maybe<Scalars['Int']>
+  max?: Maybe<Withdraw_Property_Transfer_Max_Fields>
+  min?: Maybe<Withdraw_Property_Transfer_Min_Fields>
+  stddev?: Maybe<Withdraw_Property_Transfer_Stddev_Fields>
+  stddev_pop?: Maybe<Withdraw_Property_Transfer_Stddev_Pop_Fields>
+  stddev_samp?: Maybe<Withdraw_Property_Transfer_Stddev_Samp_Fields>
+  sum?: Maybe<Withdraw_Property_Transfer_Sum_Fields>
+  var_pop?: Maybe<Withdraw_Property_Transfer_Var_Pop_Fields>
+  var_samp?: Maybe<Withdraw_Property_Transfer_Var_Samp_Fields>
+  variance?: Maybe<Withdraw_Property_Transfer_Variance_Fields>
+}
+
+export type Withdraw_Property_Transfer_Aggregate_FieldsCountArgs = {
+  columns?: Maybe<Array<Withdraw_Property_Transfer_Select_Column>>
+  distinct?: Maybe<Scalars['Boolean']>
+}
+
+export type Withdraw_Property_Transfer_Aggregate_Order_By = {
+  avg?: Maybe<Withdraw_Property_Transfer_Avg_Order_By>
+  count?: Maybe<Order_By>
+  max?: Maybe<Withdraw_Property_Transfer_Max_Order_By>
+  min?: Maybe<Withdraw_Property_Transfer_Min_Order_By>
+  stddev?: Maybe<Withdraw_Property_Transfer_Stddev_Order_By>
+  stddev_pop?: Maybe<Withdraw_Property_Transfer_Stddev_Pop_Order_By>
+  stddev_samp?: Maybe<Withdraw_Property_Transfer_Stddev_Samp_Order_By>
+  sum?: Maybe<Withdraw_Property_Transfer_Sum_Order_By>
+  var_pop?: Maybe<Withdraw_Property_Transfer_Var_Pop_Order_By>
+  var_samp?: Maybe<Withdraw_Property_Transfer_Var_Samp_Order_By>
+  variance?: Maybe<Withdraw_Property_Transfer_Variance_Order_By>
+}
+
+export type Withdraw_Property_Transfer_Arr_Rel_Insert_Input = {
+  data: Array<Withdraw_Property_Transfer_Insert_Input>
+  on_conflict?: Maybe<Withdraw_Property_Transfer_On_Conflict>
+}
+
+export type Withdraw_Property_Transfer_Avg_Fields = {
+  __typename?: 'withdraw_property_transfer_avg_fields'
+  block_number?: Maybe<Scalars['Float']>
+  log_index?: Maybe<Scalars['Float']>
+  transaction_index?: Maybe<Scalars['Float']>
+}
+
+export type Withdraw_Property_Transfer_Avg_Order_By = {
+  block_number?: Maybe<Order_By>
+  log_index?: Maybe<Order_By>
+  transaction_index?: Maybe<Order_By>
+}
+
+export type Withdraw_Property_Transfer_Bool_Exp = {
+  _and?: Maybe<Array<Maybe<Withdraw_Property_Transfer_Bool_Exp>>>
+  _not?: Maybe<Withdraw_Property_Transfer_Bool_Exp>
+  _or?: Maybe<Array<Maybe<Withdraw_Property_Transfer_Bool_Exp>>>
+  block_number?: Maybe<Int_Comparison_Exp>
+  event_id?: Maybe<String_Comparison_Exp>
+  from_address?: Maybe<String_Comparison_Exp>
+  log_index?: Maybe<Int_Comparison_Exp>
+  property_address?: Maybe<String_Comparison_Exp>
+  raw_data?: Maybe<String_Comparison_Exp>
+  to_address?: Maybe<String_Comparison_Exp>
+  transaction_index?: Maybe<Int_Comparison_Exp>
+}
+
+export enum Withdraw_Property_Transfer_Constraint {
+  WithdrawPropertyTransferPkey = 'withdraw_property_transfer_pkey'
+}
+
+export type Withdraw_Property_Transfer_Inc_Input = {
+  block_number?: Maybe<Scalars['Int']>
+  log_index?: Maybe<Scalars['Int']>
+  transaction_index?: Maybe<Scalars['Int']>
+}
+
+export type Withdraw_Property_Transfer_Insert_Input = {
+  block_number?: Maybe<Scalars['Int']>
+  event_id?: Maybe<Scalars['String']>
+  from_address?: Maybe<Scalars['String']>
+  log_index?: Maybe<Scalars['Int']>
+  property_address?: Maybe<Scalars['String']>
+  raw_data?: Maybe<Scalars['String']>
+  to_address?: Maybe<Scalars['String']>
+  transaction_index?: Maybe<Scalars['Int']>
+}
+
+export type Withdraw_Property_Transfer_Max_Fields = {
+  __typename?: 'withdraw_property_transfer_max_fields'
+  block_number?: Maybe<Scalars['Int']>
+  event_id?: Maybe<Scalars['String']>
+  from_address?: Maybe<Scalars['String']>
+  log_index?: Maybe<Scalars['Int']>
+  property_address?: Maybe<Scalars['String']>
+  raw_data?: Maybe<Scalars['String']>
+  to_address?: Maybe<Scalars['String']>
+  transaction_index?: Maybe<Scalars['Int']>
+}
+
+export type Withdraw_Property_Transfer_Max_Order_By = {
+  block_number?: Maybe<Order_By>
+  event_id?: Maybe<Order_By>
+  from_address?: Maybe<Order_By>
+  log_index?: Maybe<Order_By>
+  property_address?: Maybe<Order_By>
+  raw_data?: Maybe<Order_By>
+  to_address?: Maybe<Order_By>
+  transaction_index?: Maybe<Order_By>
+}
+
+export type Withdraw_Property_Transfer_Min_Fields = {
+  __typename?: 'withdraw_property_transfer_min_fields'
+  block_number?: Maybe<Scalars['Int']>
+  event_id?: Maybe<Scalars['String']>
+  from_address?: Maybe<Scalars['String']>
+  log_index?: Maybe<Scalars['Int']>
+  property_address?: Maybe<Scalars['String']>
+  raw_data?: Maybe<Scalars['String']>
+  to_address?: Maybe<Scalars['String']>
+  transaction_index?: Maybe<Scalars['Int']>
+}
+
+export type Withdraw_Property_Transfer_Min_Order_By = {
+  block_number?: Maybe<Order_By>
+  event_id?: Maybe<Order_By>
+  from_address?: Maybe<Order_By>
+  log_index?: Maybe<Order_By>
+  property_address?: Maybe<Order_By>
+  raw_data?: Maybe<Order_By>
+  to_address?: Maybe<Order_By>
+  transaction_index?: Maybe<Order_By>
+}
+
+export type Withdraw_Property_Transfer_Mutation_Response = {
+  __typename?: 'withdraw_property_transfer_mutation_response'
+  affected_rows: Scalars['Int']
+  returning: Array<Withdraw_Property_Transfer>
+}
+
+export type Withdraw_Property_Transfer_Obj_Rel_Insert_Input = {
+  data: Withdraw_Property_Transfer_Insert_Input
+  on_conflict?: Maybe<Withdraw_Property_Transfer_On_Conflict>
+}
+
+export type Withdraw_Property_Transfer_On_Conflict = {
+  constraint: Withdraw_Property_Transfer_Constraint
+  update_columns: Array<Withdraw_Property_Transfer_Update_Column>
+  where?: Maybe<Withdraw_Property_Transfer_Bool_Exp>
+}
+
+export type Withdraw_Property_Transfer_Order_By = {
+  block_number?: Maybe<Order_By>
+  event_id?: Maybe<Order_By>
+  from_address?: Maybe<Order_By>
+  log_index?: Maybe<Order_By>
+  property_address?: Maybe<Order_By>
+  raw_data?: Maybe<Order_By>
+  to_address?: Maybe<Order_By>
+  transaction_index?: Maybe<Order_By>
+}
+
+export type Withdraw_Property_Transfer_Pk_Columns_Input = {
+  event_id: Scalars['String']
+}
+
+export enum Withdraw_Property_Transfer_Select_Column {
+  BlockNumber = 'block_number',
+  EventId = 'event_id',
+  FromAddress = 'from_address',
+  LogIndex = 'log_index',
+  PropertyAddress = 'property_address',
+  RawData = 'raw_data',
+  ToAddress = 'to_address',
+  TransactionIndex = 'transaction_index'
+}
+
+export type Withdraw_Property_Transfer_Set_Input = {
+  block_number?: Maybe<Scalars['Int']>
+  event_id?: Maybe<Scalars['String']>
+  from_address?: Maybe<Scalars['String']>
+  log_index?: Maybe<Scalars['Int']>
+  property_address?: Maybe<Scalars['String']>
+  raw_data?: Maybe<Scalars['String']>
+  to_address?: Maybe<Scalars['String']>
+  transaction_index?: Maybe<Scalars['Int']>
+}
+
+export type Withdraw_Property_Transfer_Stddev_Fields = {
+  __typename?: 'withdraw_property_transfer_stddev_fields'
+  block_number?: Maybe<Scalars['Float']>
+  log_index?: Maybe<Scalars['Float']>
+  transaction_index?: Maybe<Scalars['Float']>
+}
+
+export type Withdraw_Property_Transfer_Stddev_Order_By = {
+  block_number?: Maybe<Order_By>
+  log_index?: Maybe<Order_By>
+  transaction_index?: Maybe<Order_By>
+}
+
+export type Withdraw_Property_Transfer_Stddev_Pop_Fields = {
+  __typename?: 'withdraw_property_transfer_stddev_pop_fields'
+  block_number?: Maybe<Scalars['Float']>
+  log_index?: Maybe<Scalars['Float']>
+  transaction_index?: Maybe<Scalars['Float']>
+}
+
+export type Withdraw_Property_Transfer_Stddev_Pop_Order_By = {
+  block_number?: Maybe<Order_By>
+  log_index?: Maybe<Order_By>
+  transaction_index?: Maybe<Order_By>
+}
+
+export type Withdraw_Property_Transfer_Stddev_Samp_Fields = {
+  __typename?: 'withdraw_property_transfer_stddev_samp_fields'
+  block_number?: Maybe<Scalars['Float']>
+  log_index?: Maybe<Scalars['Float']>
+  transaction_index?: Maybe<Scalars['Float']>
+}
+
+export type Withdraw_Property_Transfer_Stddev_Samp_Order_By = {
+  block_number?: Maybe<Order_By>
+  log_index?: Maybe<Order_By>
+  transaction_index?: Maybe<Order_By>
+}
+
+export type Withdraw_Property_Transfer_Sum_Fields = {
+  __typename?: 'withdraw_property_transfer_sum_fields'
+  block_number?: Maybe<Scalars['Int']>
+  log_index?: Maybe<Scalars['Int']>
+  transaction_index?: Maybe<Scalars['Int']>
+}
+
+export type Withdraw_Property_Transfer_Sum_Order_By = {
+  block_number?: Maybe<Order_By>
+  log_index?: Maybe<Order_By>
+  transaction_index?: Maybe<Order_By>
+}
+
+export enum Withdraw_Property_Transfer_Update_Column {
+  BlockNumber = 'block_number',
+  EventId = 'event_id',
+  FromAddress = 'from_address',
+  LogIndex = 'log_index',
+  PropertyAddress = 'property_address',
+  RawData = 'raw_data',
+  ToAddress = 'to_address',
+  TransactionIndex = 'transaction_index'
+}
+
+export type Withdraw_Property_Transfer_Var_Pop_Fields = {
+  __typename?: 'withdraw_property_transfer_var_pop_fields'
+  block_number?: Maybe<Scalars['Float']>
+  log_index?: Maybe<Scalars['Float']>
+  transaction_index?: Maybe<Scalars['Float']>
+}
+
+export type Withdraw_Property_Transfer_Var_Pop_Order_By = {
+  block_number?: Maybe<Order_By>
+  log_index?: Maybe<Order_By>
+  transaction_index?: Maybe<Order_By>
+}
+
+export type Withdraw_Property_Transfer_Var_Samp_Fields = {
+  __typename?: 'withdraw_property_transfer_var_samp_fields'
+  block_number?: Maybe<Scalars['Float']>
+  log_index?: Maybe<Scalars['Float']>
+  transaction_index?: Maybe<Scalars['Float']>
+}
+
+export type Withdraw_Property_Transfer_Var_Samp_Order_By = {
+  block_number?: Maybe<Order_By>
+  log_index?: Maybe<Order_By>
+  transaction_index?: Maybe<Order_By>
+}
+
+export type Withdraw_Property_Transfer_Variance_Fields = {
+  __typename?: 'withdraw_property_transfer_variance_fields'
+  block_number?: Maybe<Scalars['Float']>
+  log_index?: Maybe<Scalars['Float']>
+  transaction_index?: Maybe<Scalars['Float']>
+}
+
+export type Withdraw_Property_Transfer_Variance_Order_By = {
+  block_number?: Maybe<Order_By>
+  log_index?: Maybe<Order_By>
+  transaction_index?: Maybe<Order_By>
+}
+
 export type PropertyFactoryCreateFragment = { __typename?: 'property_factory_create' } & Pick<
   Property_Factory_Create,
-  'block_number' | 'event_id' | 'from_address' | 'log_index' | 'property' | 'raw_data' | 'transaction_index'
+  'undefined' | 'undefined' | 'undefined' | 'undefined' | 'undefined' | 'undefined' | 'undefined'
 >
 
 export type GetMarketFactoryCreateQueryVariables = Exact<{ [key: string]: never }>
 
 export type GetMarketFactoryCreateQuery = { __typename?: 'query_root' } & {
-  market_factory_create: Array<{ __typename?: 'market_factory_create' } & Pick<Market_Factory_Create, 'market'>>
+  market_factory_create: Array<{ __typename?: 'market_factory_create' } & Pick<Market_Factory_Create, 'undefined'>>
+}
+
+export type GetPortofolioPoolsAccountQueryVariables = Exact<{
+  accountAddress: Scalars['String']
+}>
+
+export type GetPortofolioPoolsAccountQuery = { __typename?: 'query_root' } & {
+  property_lockup: Array<{ __typename?: 'property_lockup' } & Pick<Property_Lockup, 'undefined'>>
+}
+
+export type GetPropertyAggregateQueryVariables = Exact<{
+  authorAddress?: Maybe<Scalars['String']>
+}>
+
+export type GetPropertyAggregateQuery = { __typename?: 'query_root' } & {
+  property_meta_aggregate: { __typename?: 'property_meta_aggregate' } & {
+    aggregate?: Maybe<
+      { __typename?: 'property_meta_aggregate_fields' } & Pick<Property_Meta_Aggregate_Fields, 'undefined'>
+    >
+  }
 }
 
 export type GetPropertyAuthenticationQueryVariables = Exact<{
@@ -5071,24 +5847,86 @@ export type GetPropertyAuthenticationQuery = { __typename?: 'query_root' } & {
   property_authentication: Array<
     { __typename?: 'property_authentication' } & Pick<
       Property_Authentication,
-      'authentication_id' | 'market' | 'metrics'
-    >
+      'undefined' | 'undefined' | 'undefined'
+    > & { property_meta?: Maybe<{ __typename?: 'property_meta' } & Pick<Property_Meta, 'undefined'>> }
   >
+}
+
+export type TotalStakedAccountQueryVariables = Exact<{
+  account_address: Scalars['String']
+}>
+
+export type TotalStakedAccountQuery = { __typename?: 'query_root' } & {
+  account_lockup_sum_values: Array<
+    { __typename?: 'account_lockup_sum_values' } & Pick<Account_Lockup_Sum_Values, 'undefined'>
+  >
+}
+
+export type ListAccountLockupQueryVariables = Exact<{
+  account_address: Scalars['String']
+  offset?: Maybe<Scalars['Int']>
+  limit: Scalars['Int']
+}>
+
+export type ListAccountLockupQuery = { __typename?: 'query_root' } & {
+  account_lockup: Array<{ __typename?: 'account_lockup' } & Pick<Account_Lockup, 'undefined'>>
+}
+
+export type ListOwnedPropertyMetaQueryVariables = Exact<{
+  account_address: Scalars['String']
+  offset?: Maybe<Scalars['Int']>
+  limit?: Maybe<Scalars['Int']>
+}>
+
+export type ListOwnedPropertyMetaQuery = { __typename?: 'query_root' } & {
+  property_meta: Array<{ __typename?: 'property_meta' } & Pick<Property_Meta, 'undefined' | 'undefined'>>
 }
 
 export type ListPropertyQueryVariables = Exact<{
   limit?: Maybe<Scalars['Int']>
   offset?: Maybe<Scalars['Int']>
   ilike?: Maybe<Scalars['String']>
+  from?: Maybe<Scalars['String']>
+  market?: Maybe<Scalars['String']>
+  marketOther?: Maybe<Array<Scalars['String']>>
 }>
 
 export type ListPropertyQuery = { __typename?: 'query_root' } & {
-  property_factory_create: Array<{ __typename?: 'property_factory_create' } & PropertyFactoryCreateFragment>
+  property_factory_create: Array<
+    { __typename?: 'property_factory_create' } & {
+      authentication: Array<{ __typename?: 'property_authentication' } & Pick<Property_Authentication, 'undefined'>>
+    } & PropertyFactoryCreateFragment
+  >
   property_factory_create_aggregate: { __typename?: 'property_factory_create_aggregate' } & {
     aggregate?: Maybe<
       { __typename?: 'property_factory_create_aggregate_fields' } & Pick<
         Property_Factory_Create_Aggregate_Fields,
-        'count'
+        'undefined'
+      >
+    >
+  }
+}
+
+export type ListPropertyOrderByMostRecentQueryVariables = Exact<{
+  limit?: Maybe<Scalars['Int']>
+  offset?: Maybe<Scalars['Int']>
+  ilike?: Maybe<Scalars['String']>
+  from?: Maybe<Scalars['String']>
+  market?: Maybe<Scalars['String']>
+  marketOther?: Maybe<Array<Scalars['String']>>
+}>
+
+export type ListPropertyOrderByMostRecentQuery = { __typename?: 'query_root' } & {
+  property_factory_create: Array<
+    { __typename?: 'property_factory_create' } & {
+      authentication: Array<{ __typename?: 'property_authentication' } & Pick<Property_Authentication, 'undefined'>>
+    } & PropertyFactoryCreateFragment
+  >
+  property_factory_create_aggregate: { __typename?: 'property_factory_create_aggregate' } & {
+    aggregate?: Maybe<
+      { __typename?: 'property_factory_create_aggregate_fields' } & Pick<
+        Property_Factory_Create_Aggregate_Fields,
+        'undefined'
       >
     >
   }
@@ -5096,12 +5934,51 @@ export type ListPropertyQuery = { __typename?: 'query_root' } & {
 
 export type ListPropertyMetaQueryVariables = Exact<{
   author: Scalars['String']
+  offset?: Maybe<Scalars['Int']>
   limit?: Maybe<Scalars['Int']>
   ilike?: Maybe<Scalars['String']>
 }>
 
 export type ListPropertyMetaQuery = { __typename?: 'query_root' } & {
-  property_meta: Array<{ __typename?: 'property_meta' } & Pick<Property_Meta, 'property'>>
+  property_meta: Array<
+    { __typename?: 'property_meta' } & Pick<Property_Meta, 'undefined' | 'undefined'> & {
+        lockup_aggregate: { __typename?: 'property_lockup_aggregate' } & {
+          aggregate?: Maybe<
+            { __typename?: 'property_lockup_aggregate_fields' } & Pick<
+              Property_Lockup_Aggregate_Fields,
+              'undefined'
+            > & {
+                sum?: Maybe<
+                  { __typename?: 'property_lockup_sum_fields' } & Pick<
+                    Property_Lockup_Sum_Fields,
+                    'undefined' | 'undefined'
+                  >
+                >
+              }
+          >
+        }
+      }
+  >
+}
+
+export type ListTopStakersAccountQueryVariables = Exact<{
+  author_address: Scalars['String']
+  limit?: Maybe<Scalars['Int']>
+}>
+
+export type ListTopStakersAccountQuery = { __typename?: 'query_root' } & {
+  account_lockup: Array<
+    { __typename?: 'account_lockup' } & Pick<Account_Lockup, 'undefined' | 'undefined' | 'undefined'>
+  >
+}
+
+export type ListTopSupportingAccountQueryVariables = Exact<{
+  account_address: Scalars['String']
+  limit?: Maybe<Scalars['Int']>
+}>
+
+export type ListTopSupportingAccountQuery = { __typename?: 'query_root' } & {
+  account_lockup: Array<{ __typename?: 'account_lockup' } & Pick<Account_Lockup, 'undefined' | 'undefined'>>
 }
 
 export const PropertyFactoryCreateFragmentDoc = gql`
@@ -5160,12 +6037,109 @@ export type GetMarketFactoryCreateQueryResult = Apollo.QueryResult<
   GetMarketFactoryCreateQuery,
   GetMarketFactoryCreateQueryVariables
 >
+export const GetPortofolioPoolsAccountDocument = gql`
+  query getPortofolioPoolsAccount($accountAddress: String!) {
+    property_lockup(where: { account_address: { _eq: $accountAddress } }) {
+      property_address
+    }
+  }
+`
+
+/**
+ * __useGetPortofolioPoolsAccountQuery__
+ *
+ * To run a query within a React component, call `useGetPortofolioPoolsAccountQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetPortofolioPoolsAccountQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetPortofolioPoolsAccountQuery({
+ *   variables: {
+ *      accountAddress: // value for 'accountAddress'
+ *   },
+ * });
+ */
+export function useGetPortofolioPoolsAccountQuery(
+  baseOptions: Apollo.QueryHookOptions<GetPortofolioPoolsAccountQuery, GetPortofolioPoolsAccountQueryVariables>
+) {
+  return Apollo.useQuery<GetPortofolioPoolsAccountQuery, GetPortofolioPoolsAccountQueryVariables>(
+    GetPortofolioPoolsAccountDocument,
+    baseOptions
+  )
+}
+export function useGetPortofolioPoolsAccountLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<GetPortofolioPoolsAccountQuery, GetPortofolioPoolsAccountQueryVariables>
+) {
+  return Apollo.useLazyQuery<GetPortofolioPoolsAccountQuery, GetPortofolioPoolsAccountQueryVariables>(
+    GetPortofolioPoolsAccountDocument,
+    baseOptions
+  )
+}
+export type GetPortofolioPoolsAccountQueryHookResult = ReturnType<typeof useGetPortofolioPoolsAccountQuery>
+export type GetPortofolioPoolsAccountLazyQueryHookResult = ReturnType<typeof useGetPortofolioPoolsAccountLazyQuery>
+export type GetPortofolioPoolsAccountQueryResult = Apollo.QueryResult<
+  GetPortofolioPoolsAccountQuery,
+  GetPortofolioPoolsAccountQueryVariables
+>
+export const GetPropertyAggregateDocument = gql`
+  query getPropertyAggregate($authorAddress: String) {
+    property_meta_aggregate(where: { author: { _eq: $authorAddress } }) {
+      aggregate {
+        count
+      }
+    }
+  }
+`
+
+/**
+ * __useGetPropertyAggregateQuery__
+ *
+ * To run a query within a React component, call `useGetPropertyAggregateQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetPropertyAggregateQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetPropertyAggregateQuery({
+ *   variables: {
+ *      authorAddress: // value for 'authorAddress'
+ *   },
+ * });
+ */
+export function useGetPropertyAggregateQuery(
+  baseOptions?: Apollo.QueryHookOptions<GetPropertyAggregateQuery, GetPropertyAggregateQueryVariables>
+) {
+  return Apollo.useQuery<GetPropertyAggregateQuery, GetPropertyAggregateQueryVariables>(
+    GetPropertyAggregateDocument,
+    baseOptions
+  )
+}
+export function useGetPropertyAggregateLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<GetPropertyAggregateQuery, GetPropertyAggregateQueryVariables>
+) {
+  return Apollo.useLazyQuery<GetPropertyAggregateQuery, GetPropertyAggregateQueryVariables>(
+    GetPropertyAggregateDocument,
+    baseOptions
+  )
+}
+export type GetPropertyAggregateQueryHookResult = ReturnType<typeof useGetPropertyAggregateQuery>
+export type GetPropertyAggregateLazyQueryHookResult = ReturnType<typeof useGetPropertyAggregateLazyQuery>
+export type GetPropertyAggregateQueryResult = Apollo.QueryResult<
+  GetPropertyAggregateQuery,
+  GetPropertyAggregateQueryVariables
+>
 export const GetPropertyAuthenticationDocument = gql`
   query getPropertyAuthentication($propertyAddress: String!) {
     property_authentication(where: { property: { _eq: $propertyAddress } }) {
       authentication_id
       market
       metrics
+      property_meta {
+        author
+      }
     }
   }
 `
@@ -5187,7 +6161,7 @@ export const GetPropertyAuthenticationDocument = gql`
  * });
  */
 export function useGetPropertyAuthenticationQuery(
-  baseOptions?: Apollo.QueryHookOptions<GetPropertyAuthenticationQuery, GetPropertyAuthenticationQueryVariables>
+  baseOptions: Apollo.QueryHookOptions<GetPropertyAuthenticationQuery, GetPropertyAuthenticationQueryVariables>
 ) {
   return Apollo.useQuery<GetPropertyAuthenticationQuery, GetPropertyAuthenticationQueryVariables>(
     GetPropertyAuthenticationDocument,
@@ -5208,17 +6182,191 @@ export type GetPropertyAuthenticationQueryResult = Apollo.QueryResult<
   GetPropertyAuthenticationQuery,
   GetPropertyAuthenticationQueryVariables
 >
+export const TotalStakedAccountDocument = gql`
+  query totalStakedAccount($account_address: String!) {
+    account_lockup_sum_values(where: { account_address: { _eq: $account_address } }) {
+      sum_values
+    }
+  }
+`
+
+/**
+ * __useTotalStakedAccountQuery__
+ *
+ * To run a query within a React component, call `useTotalStakedAccountQuery` and pass it any options that fit your needs.
+ * When your component renders, `useTotalStakedAccountQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useTotalStakedAccountQuery({
+ *   variables: {
+ *      account_address: // value for 'account_address'
+ *   },
+ * });
+ */
+export function useTotalStakedAccountQuery(
+  baseOptions: Apollo.QueryHookOptions<TotalStakedAccountQuery, TotalStakedAccountQueryVariables>
+) {
+  return Apollo.useQuery<TotalStakedAccountQuery, TotalStakedAccountQueryVariables>(
+    TotalStakedAccountDocument,
+    baseOptions
+  )
+}
+export function useTotalStakedAccountLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<TotalStakedAccountQuery, TotalStakedAccountQueryVariables>
+) {
+  return Apollo.useLazyQuery<TotalStakedAccountQuery, TotalStakedAccountQueryVariables>(
+    TotalStakedAccountDocument,
+    baseOptions
+  )
+}
+export type TotalStakedAccountQueryHookResult = ReturnType<typeof useTotalStakedAccountQuery>
+export type TotalStakedAccountLazyQueryHookResult = ReturnType<typeof useTotalStakedAccountLazyQuery>
+export type TotalStakedAccountQueryResult = Apollo.QueryResult<
+  TotalStakedAccountQuery,
+  TotalStakedAccountQueryVariables
+>
+export const ListAccountLockupDocument = gql`
+  query listAccountLockup($account_address: String!, $offset: Int, $limit: Int!) {
+    account_lockup(
+      where: { account_address: { _eq: $account_address } }
+      order_by: { value: desc }
+      offset: $offset
+      limit: $limit
+    ) {
+      property_address
+    }
+  }
+`
+
+/**
+ * __useListAccountLockupQuery__
+ *
+ * To run a query within a React component, call `useListAccountLockupQuery` and pass it any options that fit your needs.
+ * When your component renders, `useListAccountLockupQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useListAccountLockupQuery({
+ *   variables: {
+ *      account_address: // value for 'account_address'
+ *      offset: // value for 'offset'
+ *      limit: // value for 'limit'
+ *   },
+ * });
+ */
+export function useListAccountLockupQuery(
+  baseOptions: Apollo.QueryHookOptions<ListAccountLockupQuery, ListAccountLockupQueryVariables>
+) {
+  return Apollo.useQuery<ListAccountLockupQuery, ListAccountLockupQueryVariables>(
+    ListAccountLockupDocument,
+    baseOptions
+  )
+}
+export function useListAccountLockupLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<ListAccountLockupQuery, ListAccountLockupQueryVariables>
+) {
+  return Apollo.useLazyQuery<ListAccountLockupQuery, ListAccountLockupQueryVariables>(
+    ListAccountLockupDocument,
+    baseOptions
+  )
+}
+export type ListAccountLockupQueryHookResult = ReturnType<typeof useListAccountLockupQuery>
+export type ListAccountLockupLazyQueryHookResult = ReturnType<typeof useListAccountLockupLazyQuery>
+export type ListAccountLockupQueryResult = Apollo.QueryResult<ListAccountLockupQuery, ListAccountLockupQueryVariables>
+export const ListOwnedPropertyMetaDocument = gql`
+  query listOwnedPropertyMeta($account_address: String!, $offset: Int, $limit: Int) {
+    property_meta(
+      where: { author: { _eq: $account_address } }
+      order_by: { lockup_aggregate: { sum: { value: desc } } }
+      offset: $offset
+      limit: $limit
+    ) {
+      property
+      name
+    }
+  }
+`
+
+/**
+ * __useListOwnedPropertyMetaQuery__
+ *
+ * To run a query within a React component, call `useListOwnedPropertyMetaQuery` and pass it any options that fit your needs.
+ * When your component renders, `useListOwnedPropertyMetaQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useListOwnedPropertyMetaQuery({
+ *   variables: {
+ *      account_address: // value for 'account_address'
+ *      offset: // value for 'offset'
+ *      limit: // value for 'limit'
+ *   },
+ * });
+ */
+export function useListOwnedPropertyMetaQuery(
+  baseOptions: Apollo.QueryHookOptions<ListOwnedPropertyMetaQuery, ListOwnedPropertyMetaQueryVariables>
+) {
+  return Apollo.useQuery<ListOwnedPropertyMetaQuery, ListOwnedPropertyMetaQueryVariables>(
+    ListOwnedPropertyMetaDocument,
+    baseOptions
+  )
+}
+export function useListOwnedPropertyMetaLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<ListOwnedPropertyMetaQuery, ListOwnedPropertyMetaQueryVariables>
+) {
+  return Apollo.useLazyQuery<ListOwnedPropertyMetaQuery, ListOwnedPropertyMetaQueryVariables>(
+    ListOwnedPropertyMetaDocument,
+    baseOptions
+  )
+}
+export type ListOwnedPropertyMetaQueryHookResult = ReturnType<typeof useListOwnedPropertyMetaQuery>
+export type ListOwnedPropertyMetaLazyQueryHookResult = ReturnType<typeof useListOwnedPropertyMetaLazyQuery>
+export type ListOwnedPropertyMetaQueryResult = Apollo.QueryResult<
+  ListOwnedPropertyMetaQuery,
+  ListOwnedPropertyMetaQueryVariables
+>
 export const ListPropertyDocument = gql`
-  query ListProperty($limit: Int, $offset: Int, $ilike: String) {
+  query ListProperty(
+    $limit: Int
+    $offset: Int
+    $ilike: String
+    $from: String
+    $market: String
+    $marketOther: [String!]
+  ) {
     property_factory_create(
       limit: $limit
       offset: $offset
       order_by: { current_lockup: { sum_values: desc_nulls_last } }
-      where: { authentication: { authentication_id: { _ilike: $ilike } } }
+      where: {
+        authentication: {
+          authentication_id: { _ilike: $ilike }
+          property_creation: { from_address: { _eq: $from } }
+          market: { _eq: $market, _nin: $marketOther }
+        }
+      }
     ) {
+      authentication {
+        authentication_id
+      }
       ...propertyFactoryCreate
     }
-    property_factory_create_aggregate(where: { authentication: { authentication_id: { _ilike: $ilike } } }) {
+    property_factory_create_aggregate(
+      where: {
+        authentication: {
+          authentication_id: { _ilike: $ilike }
+          property_creation: { from_address: { _eq: $from } }
+          market: { _eq: $market, _nin: $marketOther }
+        }
+      }
+    ) {
       aggregate {
         count
       }
@@ -5242,6 +6390,9 @@ export const ListPropertyDocument = gql`
  *      limit: // value for 'limit'
  *      offset: // value for 'offset'
  *      ilike: // value for 'ilike'
+ *      from: // value for 'from'
+ *      market: // value for 'market'
+ *      marketOther: // value for 'marketOther'
  *   },
  * });
  */
@@ -5258,10 +6409,116 @@ export function useListPropertyLazyQuery(
 export type ListPropertyQueryHookResult = ReturnType<typeof useListPropertyQuery>
 export type ListPropertyLazyQueryHookResult = ReturnType<typeof useListPropertyLazyQuery>
 export type ListPropertyQueryResult = Apollo.QueryResult<ListPropertyQuery, ListPropertyQueryVariables>
+export const ListPropertyOrderByMostRecentDocument = gql`
+  query ListPropertyOrderByMostRecent(
+    $limit: Int
+    $offset: Int
+    $ilike: String
+    $from: String
+    $market: String
+    $marketOther: [String!]
+  ) {
+    property_factory_create(
+      limit: $limit
+      offset: $offset
+      order_by: { block_number: desc }
+      where: {
+        authentication: {
+          authentication_id: { _ilike: $ilike }
+          property_creation: { from_address: { _eq: $from } }
+          market: { _eq: $market, _nin: $marketOther }
+        }
+      }
+    ) {
+      authentication {
+        authentication_id
+      }
+      ...propertyFactoryCreate
+    }
+    property_factory_create_aggregate(
+      where: {
+        authentication: {
+          authentication_id: { _ilike: $ilike }
+          property_creation: { from_address: { _eq: $from } }
+          market: { _eq: $market, _nin: $marketOther }
+        }
+      }
+    ) {
+      aggregate {
+        count
+      }
+    }
+  }
+  ${PropertyFactoryCreateFragmentDoc}
+`
+
+/**
+ * __useListPropertyOrderByMostRecentQuery__
+ *
+ * To run a query within a React component, call `useListPropertyOrderByMostRecentQuery` and pass it any options that fit your needs.
+ * When your component renders, `useListPropertyOrderByMostRecentQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useListPropertyOrderByMostRecentQuery({
+ *   variables: {
+ *      limit: // value for 'limit'
+ *      offset: // value for 'offset'
+ *      ilike: // value for 'ilike'
+ *      from: // value for 'from'
+ *      market: // value for 'market'
+ *      marketOther: // value for 'marketOther'
+ *   },
+ * });
+ */
+export function useListPropertyOrderByMostRecentQuery(
+  baseOptions?: Apollo.QueryHookOptions<ListPropertyOrderByMostRecentQuery, ListPropertyOrderByMostRecentQueryVariables>
+) {
+  return Apollo.useQuery<ListPropertyOrderByMostRecentQuery, ListPropertyOrderByMostRecentQueryVariables>(
+    ListPropertyOrderByMostRecentDocument,
+    baseOptions
+  )
+}
+export function useListPropertyOrderByMostRecentLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    ListPropertyOrderByMostRecentQuery,
+    ListPropertyOrderByMostRecentQueryVariables
+  >
+) {
+  return Apollo.useLazyQuery<ListPropertyOrderByMostRecentQuery, ListPropertyOrderByMostRecentQueryVariables>(
+    ListPropertyOrderByMostRecentDocument,
+    baseOptions
+  )
+}
+export type ListPropertyOrderByMostRecentQueryHookResult = ReturnType<typeof useListPropertyOrderByMostRecentQuery>
+export type ListPropertyOrderByMostRecentLazyQueryHookResult = ReturnType<
+  typeof useListPropertyOrderByMostRecentLazyQuery
+>
+export type ListPropertyOrderByMostRecentQueryResult = Apollo.QueryResult<
+  ListPropertyOrderByMostRecentQuery,
+  ListPropertyOrderByMostRecentQueryVariables
+>
 export const ListPropertyMetaDocument = gql`
-  query listPropertyMeta($author: String!, $limit: Int, $ilike: String) {
-    property_meta(where: { author: { _eq: $author }, property: { _ilike: $ilike } }, limit: $limit) {
+  query listPropertyMeta($author: String!, $offset: Int, $limit: Int, $ilike: String) {
+    property_meta(
+      where: { author: { _eq: $author }, property: { _ilike: $ilike } }
+      offset: $offset
+      limit: $limit
+      order_by: { lockup_aggregate: { sum: { value: desc_nulls_last } } }
+    ) {
       property
+      name
+      lockup_aggregate {
+        aggregate {
+          count
+          sum {
+            block_number
+            value
+          }
+        }
+      }
     }
   }
 `
@@ -5279,13 +6536,14 @@ export const ListPropertyMetaDocument = gql`
  * const { data, loading, error } = useListPropertyMetaQuery({
  *   variables: {
  *      author: // value for 'author'
+ *      offset: // value for 'offset'
  *      limit: // value for 'limit'
  *      ilike: // value for 'ilike'
  *   },
  * });
  */
 export function useListPropertyMetaQuery(
-  baseOptions?: Apollo.QueryHookOptions<ListPropertyMetaQuery, ListPropertyMetaQueryVariables>
+  baseOptions: Apollo.QueryHookOptions<ListPropertyMetaQuery, ListPropertyMetaQueryVariables>
 ) {
   return Apollo.useQuery<ListPropertyMetaQuery, ListPropertyMetaQueryVariables>(ListPropertyMetaDocument, baseOptions)
 }
@@ -5300,3 +6558,104 @@ export function useListPropertyMetaLazyQuery(
 export type ListPropertyMetaQueryHookResult = ReturnType<typeof useListPropertyMetaQuery>
 export type ListPropertyMetaLazyQueryHookResult = ReturnType<typeof useListPropertyMetaLazyQuery>
 export type ListPropertyMetaQueryResult = Apollo.QueryResult<ListPropertyMetaQuery, ListPropertyMetaQueryVariables>
+export const ListTopStakersAccountDocument = gql`
+  query listTopStakersAccount($author_address: String!, $limit: Int) {
+    account_lockup(
+      where: { property_meta: { author: { _eq: $author_address } } }
+      limit: $limit
+      order_by: { value: desc }
+    ) {
+      account_address
+      value
+      property_address
+    }
+  }
+`
+
+/**
+ * __useListTopStakersAccountQuery__
+ *
+ * To run a query within a React component, call `useListTopStakersAccountQuery` and pass it any options that fit your needs.
+ * When your component renders, `useListTopStakersAccountQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useListTopStakersAccountQuery({
+ *   variables: {
+ *      author_address: // value for 'author_address'
+ *      limit: // value for 'limit'
+ *   },
+ * });
+ */
+export function useListTopStakersAccountQuery(
+  baseOptions: Apollo.QueryHookOptions<ListTopStakersAccountQuery, ListTopStakersAccountQueryVariables>
+) {
+  return Apollo.useQuery<ListTopStakersAccountQuery, ListTopStakersAccountQueryVariables>(
+    ListTopStakersAccountDocument,
+    baseOptions
+  )
+}
+export function useListTopStakersAccountLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<ListTopStakersAccountQuery, ListTopStakersAccountQueryVariables>
+) {
+  return Apollo.useLazyQuery<ListTopStakersAccountQuery, ListTopStakersAccountQueryVariables>(
+    ListTopStakersAccountDocument,
+    baseOptions
+  )
+}
+export type ListTopStakersAccountQueryHookResult = ReturnType<typeof useListTopStakersAccountQuery>
+export type ListTopStakersAccountLazyQueryHookResult = ReturnType<typeof useListTopStakersAccountLazyQuery>
+export type ListTopStakersAccountQueryResult = Apollo.QueryResult<
+  ListTopStakersAccountQuery,
+  ListTopStakersAccountQueryVariables
+>
+export const ListTopSupportingAccountDocument = gql`
+  query listTopSupportingAccount($account_address: String!, $limit: Int) {
+    account_lockup(where: { account_address: { _eq: $account_address } }, order_by: { value: desc }, limit: $limit) {
+      property_address
+      value
+    }
+  }
+`
+
+/**
+ * __useListTopSupportingAccountQuery__
+ *
+ * To run a query within a React component, call `useListTopSupportingAccountQuery` and pass it any options that fit your needs.
+ * When your component renders, `useListTopSupportingAccountQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useListTopSupportingAccountQuery({
+ *   variables: {
+ *      account_address: // value for 'account_address'
+ *      limit: // value for 'limit'
+ *   },
+ * });
+ */
+export function useListTopSupportingAccountQuery(
+  baseOptions: Apollo.QueryHookOptions<ListTopSupportingAccountQuery, ListTopSupportingAccountQueryVariables>
+) {
+  return Apollo.useQuery<ListTopSupportingAccountQuery, ListTopSupportingAccountQueryVariables>(
+    ListTopSupportingAccountDocument,
+    baseOptions
+  )
+}
+export function useListTopSupportingAccountLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<ListTopSupportingAccountQuery, ListTopSupportingAccountQueryVariables>
+) {
+  return Apollo.useLazyQuery<ListTopSupportingAccountQuery, ListTopSupportingAccountQueryVariables>(
+    ListTopSupportingAccountDocument,
+    baseOptions
+  )
+}
+export type ListTopSupportingAccountQueryHookResult = ReturnType<typeof useListTopSupportingAccountQuery>
+export type ListTopSupportingAccountLazyQueryHookResult = ReturnType<typeof useListTopSupportingAccountLazyQuery>
+export type ListTopSupportingAccountQueryResult = Apollo.QueryResult<
+  ListTopSupportingAccountQuery,
+  ListTopSupportingAccountQueryVariables
+>

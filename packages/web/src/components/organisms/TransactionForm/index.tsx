@@ -21,7 +21,7 @@ const Wrap = styled.div`
 export const TransactionForm = ({ className, propertyAddress }: Props) => {
   const { withdrawStakingReward } = useWithdrawStakingReward()
   const { withdrawHolder } = useWithdrawHolderReward()
-  const { myStakingRewardAmount } = useGetMyStakingRewardAmount(propertyAddress)
+  const { dev: rewardedDev } = useGetMyStakingRewardAmount(propertyAddress)
   const { myHolderAmount } = useGetMyHolderAmount(propertyAddress)
 
   const handleWithdrawStakingReward = useCallback(() => withdrawStakingReward(propertyAddress), [
@@ -32,7 +32,7 @@ export const TransactionForm = ({ className, propertyAddress }: Props) => {
 
   return (
     <Wrap className={className}>
-      <WithdrawForm label="Stakers" onSubmitWithdraw={handleWithdrawStakingReward} amount={myStakingRewardAmount} />
+      <WithdrawForm label="Stakers" onSubmitWithdraw={handleWithdrawStakingReward} amount={rewardedDev} />
       <WithdrawForm label="Creators" onSubmitWithdraw={handleWithdrawHolder} amount={myHolderAmount} />
     </Wrap>
   )

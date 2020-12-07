@@ -85,6 +85,7 @@ input account_lockup_bool_exp {
   _and: [account_lockup_bool_exp]
   _not: account_lockup_bool_exp
   _or: [account_lockup_bool_exp]
+  property_meta: property_meta_bool_exp
   account_address: String_comparison_exp
   block_number: Int_comparison_exp
   locked_up_event_id: String_comparison_exp
@@ -2632,6 +2633,21 @@ type mutation_root {
     property: String!
   ): property_authentication_deleted
 
+  # delete data from the table: "property_balance"
+  delete_property_balance(
+    # filter the rows which have to be deleted
+    where: property_balance_bool_exp!
+  ): property_balance_mutation_response
+
+  # delete single row from the table: "property_balance"
+  delete_property_balance_by_pk(
+    # account_address
+    account_address: String!
+
+    # property address
+    property_address: String!
+  ): property_balance
+
   # delete data from the table: "property_factory_create"
   delete_property_factory_create(
     # filter the rows which have to be deleted
@@ -2673,6 +2689,18 @@ type mutation_root {
     # property address
     property: String!
   ): property_meta
+
+  # delete data from the table: "withdraw_property_transfer"
+  delete_withdraw_property_transfer(
+    # filter the rows which have to be deleted
+    where: withdraw_property_transfer_bool_exp!
+  ): withdraw_property_transfer_mutation_response
+
+  # delete single row from the table: "withdraw_property_transfer"
+  delete_withdraw_property_transfer_by_pk(
+    # event id
+    event_id: String!
+  ): withdraw_property_transfer
 
   # insert data into the table: "account_lockup"
   insert_account_lockup(
@@ -2836,6 +2864,24 @@ type mutation_root {
     on_conflict: property_authentication_on_conflict
   ): property_authentication
 
+  # insert data into the table: "property_balance"
+  insert_property_balance(
+    # the rows to be inserted
+    objects: [property_balance_insert_input!]!
+
+    # on conflict condition
+    on_conflict: property_balance_on_conflict
+  ): property_balance_mutation_response
+
+  # insert a single row into the table: "property_balance"
+  insert_property_balance_one(
+    # the row to be inserted
+    object: property_balance_insert_input!
+
+    # on conflict condition
+    on_conflict: property_balance_on_conflict
+  ): property_balance
+
   # insert data into the table: "property_factory_create"
   insert_property_factory_create(
     # the rows to be inserted
@@ -2889,6 +2935,24 @@ type mutation_root {
     # on conflict condition
     on_conflict: property_meta_on_conflict
   ): property_meta
+
+  # insert data into the table: "withdraw_property_transfer"
+  insert_withdraw_property_transfer(
+    # the rows to be inserted
+    objects: [withdraw_property_transfer_insert_input!]!
+
+    # on conflict condition
+    on_conflict: withdraw_property_transfer_on_conflict
+  ): withdraw_property_transfer_mutation_response
+
+  # insert a single row into the table: "withdraw_property_transfer"
+  insert_withdraw_property_transfer_one(
+    # the row to be inserted
+    object: withdraw_property_transfer_insert_input!
+
+    # on conflict condition
+    on_conflict: withdraw_property_transfer_on_conflict
+  ): withdraw_property_transfer
 
   # update data of the table: "account_lockup"
   update_account_lockup(
@@ -3088,6 +3152,28 @@ type mutation_root {
     pk_columns: property_authentication_deleted_pk_columns_input!
   ): property_authentication_deleted
 
+  # update data of the table: "property_balance"
+  update_property_balance(
+    # increments the integer columns with given value of the filtered values
+    _inc: property_balance_inc_input
+
+    # sets the columns of the filtered rows to the given values
+    _set: property_balance_set_input
+
+    # filter the rows which have to be updated
+    where: property_balance_bool_exp!
+  ): property_balance_mutation_response
+
+  # update single row of the table: "property_balance"
+  update_property_balance_by_pk(
+    # increments the integer columns with given value of the filtered values
+    _inc: property_balance_inc_input
+
+    # sets the columns of the filtered rows to the given values
+    _set: property_balance_set_input
+    pk_columns: property_balance_pk_columns_input!
+  ): property_balance
+
   # update data of the table: "property_factory_create"
   update_property_factory_create(
     # increments the integer columns with given value of the filtered values
@@ -3153,6 +3239,28 @@ type mutation_root {
     _set: property_meta_set_input
     pk_columns: property_meta_pk_columns_input!
   ): property_meta
+
+  # update data of the table: "withdraw_property_transfer"
+  update_withdraw_property_transfer(
+    # increments the integer columns with given value of the filtered values
+    _inc: withdraw_property_transfer_inc_input
+
+    # sets the columns of the filtered rows to the given values
+    _set: withdraw_property_transfer_set_input
+
+    # filter the rows which have to be updated
+    where: withdraw_property_transfer_bool_exp!
+  ): withdraw_property_transfer_mutation_response
+
+  # update single row of the table: "withdraw_property_transfer"
+  update_withdraw_property_transfer_by_pk(
+    # increments the integer columns with given value of the filtered values
+    _inc: withdraw_property_transfer_inc_input
+
+    # sets the columns of the filtered rows to the given values
+    _set: withdraw_property_transfer_set_input
+    pk_columns: withdraw_property_transfer_pk_columns_input!
+  ): withdraw_property_transfer
 }
 
 scalar numeric
@@ -3579,6 +3687,9 @@ type property_authentication {
 
   # An object relationship
   property_creation: property_factory_create
+
+  # An object relationship
+  property_meta: property_meta
 }
 
 # aggregated selection of "property_authentication"
@@ -3645,6 +3756,7 @@ input property_authentication_bool_exp {
   metrics: String_comparison_exp
   property: String_comparison_exp
   property_creation: property_factory_create_bool_exp
+  property_meta: property_meta_bool_exp
 }
 
 # unique or primary key constraints on table "property_authentication"
@@ -3977,6 +4089,7 @@ input property_authentication_insert_input {
   metrics: String
   property: String
   property_creation: property_factory_create_obj_rel_insert_input
+  property_meta: property_meta_obj_rel_insert_input
 }
 
 # aggregate max on columns
@@ -4046,6 +4159,7 @@ input property_authentication_order_by {
   metrics: order_by
   property: order_by
   property_creation: property_factory_create_order_by
+  property_meta: property_meta_order_by
 }
 
 # primary key columns input for table: "property_authentication"
@@ -4169,6 +4283,316 @@ type property_authentication_variance_fields {
 
 # order by variance() on columns of table "property_authentication"
 input property_authentication_variance_order_by {
+  block_number: order_by
+}
+
+# property token balance
+#
+#
+# columns and relationships of "property_balance"
+#
+type property_balance {
+  # account_address
+  account_address: String!
+
+  # property token balance
+  balance: numeric!
+
+  # block number
+  block_number: Int!
+
+  # if account_address is author, true
+  is_author: Boolean!
+
+  # property address
+  property_address: String!
+}
+
+# aggregated selection of "property_balance"
+type property_balance_aggregate {
+  aggregate: property_balance_aggregate_fields
+  nodes: [property_balance!]!
+}
+
+# aggregate fields of "property_balance"
+type property_balance_aggregate_fields {
+  avg: property_balance_avg_fields
+  count(columns: [property_balance_select_column!], distinct: Boolean): Int
+  max: property_balance_max_fields
+  min: property_balance_min_fields
+  stddev: property_balance_stddev_fields
+  stddev_pop: property_balance_stddev_pop_fields
+  stddev_samp: property_balance_stddev_samp_fields
+  sum: property_balance_sum_fields
+  var_pop: property_balance_var_pop_fields
+  var_samp: property_balance_var_samp_fields
+  variance: property_balance_variance_fields
+}
+
+# order by aggregate values of table "property_balance"
+input property_balance_aggregate_order_by {
+  avg: property_balance_avg_order_by
+  count: order_by
+  max: property_balance_max_order_by
+  min: property_balance_min_order_by
+  stddev: property_balance_stddev_order_by
+  stddev_pop: property_balance_stddev_pop_order_by
+  stddev_samp: property_balance_stddev_samp_order_by
+  sum: property_balance_sum_order_by
+  var_pop: property_balance_var_pop_order_by
+  var_samp: property_balance_var_samp_order_by
+  variance: property_balance_variance_order_by
+}
+
+# input type for inserting array relation for remote table "property_balance"
+input property_balance_arr_rel_insert_input {
+  data: [property_balance_insert_input!]!
+  on_conflict: property_balance_on_conflict
+}
+
+# aggregate avg on columns
+type property_balance_avg_fields {
+  balance: Float
+  block_number: Float
+}
+
+# order by avg() on columns of table "property_balance"
+input property_balance_avg_order_by {
+  balance: order_by
+  block_number: order_by
+}
+
+# Boolean expression to filter rows from the table "property_balance". All fields are combined with a logical 'AND'.
+input property_balance_bool_exp {
+  _and: [property_balance_bool_exp]
+  _not: property_balance_bool_exp
+  _or: [property_balance_bool_exp]
+  account_address: String_comparison_exp
+  balance: numeric_comparison_exp
+  block_number: Int_comparison_exp
+  is_author: Boolean_comparison_exp
+  property_address: String_comparison_exp
+}
+
+# unique or primary key constraints on table "property_balance"
+enum property_balance_constraint {
+  # unique or primary key constraint
+  property_balance_pkey
+}
+
+# input type for incrementing integer column in table "property_balance"
+input property_balance_inc_input {
+  balance: numeric
+  block_number: Int
+}
+
+# input type for inserting data into table "property_balance"
+input property_balance_insert_input {
+  account_address: String
+  balance: numeric
+  block_number: Int
+  is_author: Boolean
+  property_address: String
+}
+
+# aggregate max on columns
+type property_balance_max_fields {
+  account_address: String
+  balance: numeric
+  block_number: Int
+  property_address: String
+}
+
+# order by max() on columns of table "property_balance"
+input property_balance_max_order_by {
+  account_address: order_by
+  balance: order_by
+  block_number: order_by
+  property_address: order_by
+}
+
+# aggregate min on columns
+type property_balance_min_fields {
+  account_address: String
+  balance: numeric
+  block_number: Int
+  property_address: String
+}
+
+# order by min() on columns of table "property_balance"
+input property_balance_min_order_by {
+  account_address: order_by
+  balance: order_by
+  block_number: order_by
+  property_address: order_by
+}
+
+# response of any mutation on the table "property_balance"
+type property_balance_mutation_response {
+  # number of affected rows by the mutation
+  affected_rows: Int!
+
+  # data of the affected rows by the mutation
+  returning: [property_balance!]!
+}
+
+# input type for inserting object relation for remote table "property_balance"
+input property_balance_obj_rel_insert_input {
+  data: property_balance_insert_input!
+  on_conflict: property_balance_on_conflict
+}
+
+# on conflict condition type for table "property_balance"
+input property_balance_on_conflict {
+  constraint: property_balance_constraint!
+  update_columns: [property_balance_update_column!]!
+  where: property_balance_bool_exp
+}
+
+# ordering options when selecting data from "property_balance"
+input property_balance_order_by {
+  account_address: order_by
+  balance: order_by
+  block_number: order_by
+  is_author: order_by
+  property_address: order_by
+}
+
+# primary key columns input for table: "property_balance"
+input property_balance_pk_columns_input {
+  # account_address
+  account_address: String!
+
+  # property address
+  property_address: String!
+}
+
+# select columns of table "property_balance"
+enum property_balance_select_column {
+  # column name
+  account_address
+
+  # column name
+  balance
+
+  # column name
+  block_number
+
+  # column name
+  is_author
+
+  # column name
+  property_address
+}
+
+# input type for updating data in table "property_balance"
+input property_balance_set_input {
+  account_address: String
+  balance: numeric
+  block_number: Int
+  is_author: Boolean
+  property_address: String
+}
+
+# aggregate stddev on columns
+type property_balance_stddev_fields {
+  balance: Float
+  block_number: Float
+}
+
+# order by stddev() on columns of table "property_balance"
+input property_balance_stddev_order_by {
+  balance: order_by
+  block_number: order_by
+}
+
+# aggregate stddev_pop on columns
+type property_balance_stddev_pop_fields {
+  balance: Float
+  block_number: Float
+}
+
+# order by stddev_pop() on columns of table "property_balance"
+input property_balance_stddev_pop_order_by {
+  balance: order_by
+  block_number: order_by
+}
+
+# aggregate stddev_samp on columns
+type property_balance_stddev_samp_fields {
+  balance: Float
+  block_number: Float
+}
+
+# order by stddev_samp() on columns of table "property_balance"
+input property_balance_stddev_samp_order_by {
+  balance: order_by
+  block_number: order_by
+}
+
+# aggregate sum on columns
+type property_balance_sum_fields {
+  balance: numeric
+  block_number: Int
+}
+
+# order by sum() on columns of table "property_balance"
+input property_balance_sum_order_by {
+  balance: order_by
+  block_number: order_by
+}
+
+# update columns of table "property_balance"
+enum property_balance_update_column {
+  # column name
+  account_address
+
+  # column name
+  balance
+
+  # column name
+  block_number
+
+  # column name
+  is_author
+
+  # column name
+  property_address
+}
+
+# aggregate var_pop on columns
+type property_balance_var_pop_fields {
+  balance: Float
+  block_number: Float
+}
+
+# order by var_pop() on columns of table "property_balance"
+input property_balance_var_pop_order_by {
+  balance: order_by
+  block_number: order_by
+}
+
+# aggregate var_samp on columns
+type property_balance_var_samp_fields {
+  balance: Float
+  block_number: Float
+}
+
+# order by var_samp() on columns of table "property_balance"
+input property_balance_var_samp_order_by {
+  balance: order_by
+  block_number: order_by
+}
+
+# aggregate variance on columns
+type property_balance_variance_fields {
+  balance: Float
+  block_number: Float
+}
+
+# order by variance() on columns of table "property_balance"
+input property_balance_variance_order_by {
+  balance: order_by
   block_number: order_by
 }
 
@@ -5191,6 +5615,42 @@ type property_meta {
   # the block number from which the property was created
   block_number: Int!
 
+  # An array relationship
+  lockup(
+    # distinct select on columns
+    distinct_on: [property_lockup_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [property_lockup_order_by!]
+
+    # filter the rows returned
+    where: property_lockup_bool_exp
+  ): [property_lockup!]!
+
+  # An aggregated array relationship
+  lockup_aggregate(
+    # distinct select on columns
+    distinct_on: [property_lockup_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [property_lockup_order_by!]
+
+    # filter the rows returned
+    where: property_lockup_bool_exp
+  ): property_lockup_aggregate!
+
   # property name
   name: String!
 
@@ -5266,6 +5726,7 @@ input property_meta_bool_exp {
   _or: [property_meta_bool_exp]
   author: String_comparison_exp
   block_number: Int_comparison_exp
+  lockup: property_lockup_bool_exp
   name: String_comparison_exp
   property: String_comparison_exp
   sender: String_comparison_exp
@@ -5289,6 +5750,7 @@ input property_meta_inc_input {
 input property_meta_insert_input {
   author: String
   block_number: Int
+  lockup: property_lockup_arr_rel_insert_input
   name: String
   property: String
   sender: String
@@ -5366,6 +5828,7 @@ input property_meta_on_conflict {
 input property_meta_order_by {
   author: order_by
   block_number: order_by
+  lockup_aggregate: property_lockup_aggregate_order_by
   name: order_by
   property: order_by
   sender: order_by
@@ -5950,6 +6413,51 @@ type query_root {
     property: String!
   ): property_authentication_deleted
 
+  # fetch data from the table: "property_balance"
+  property_balance(
+    # distinct select on columns
+    distinct_on: [property_balance_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [property_balance_order_by!]
+
+    # filter the rows returned
+    where: property_balance_bool_exp
+  ): [property_balance!]!
+
+  # fetch aggregated fields from the table: "property_balance"
+  property_balance_aggregate(
+    # distinct select on columns
+    distinct_on: [property_balance_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [property_balance_order_by!]
+
+    # filter the rows returned
+    where: property_balance_bool_exp
+  ): property_balance_aggregate!
+
+  # fetch data from the table: "property_balance" using primary key columns
+  property_balance_by_pk(
+    # account_address
+    account_address: String!
+
+    # property address
+    property_address: String!
+  ): property_balance
+
   # fetch data from the table: "property_factory_create"
   property_factory_create(
     # distinct select on columns
@@ -6117,6 +6625,48 @@ type query_root {
     # property address
     property: String!
   ): property_meta
+
+  # fetch data from the table: "withdraw_property_transfer"
+  withdraw_property_transfer(
+    # distinct select on columns
+    distinct_on: [withdraw_property_transfer_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [withdraw_property_transfer_order_by!]
+
+    # filter the rows returned
+    where: withdraw_property_transfer_bool_exp
+  ): [withdraw_property_transfer!]!
+
+  # fetch aggregated fields from the table: "withdraw_property_transfer"
+  withdraw_property_transfer_aggregate(
+    # distinct select on columns
+    distinct_on: [withdraw_property_transfer_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [withdraw_property_transfer_order_by!]
+
+    # filter the rows returned
+    where: withdraw_property_transfer_bool_exp
+  ): withdraw_property_transfer_aggregate!
+
+  # fetch data from the table: "withdraw_property_transfer" using primary key columns
+  withdraw_property_transfer_by_pk(
+    # event id
+    event_id: String!
+  ): withdraw_property_transfer
 }
 
 # expression to compare columns of type String. All fields are combined with logical 'AND'.
@@ -6563,6 +7113,51 @@ type subscription_root {
     property: String!
   ): property_authentication_deleted
 
+  # fetch data from the table: "property_balance"
+  property_balance(
+    # distinct select on columns
+    distinct_on: [property_balance_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [property_balance_order_by!]
+
+    # filter the rows returned
+    where: property_balance_bool_exp
+  ): [property_balance!]!
+
+  # fetch aggregated fields from the table: "property_balance"
+  property_balance_aggregate(
+    # distinct select on columns
+    distinct_on: [property_balance_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [property_balance_order_by!]
+
+    # filter the rows returned
+    where: property_balance_bool_exp
+  ): property_balance_aggregate!
+
+  # fetch data from the table: "property_balance" using primary key columns
+  property_balance_by_pk(
+    # account_address
+    account_address: String!
+
+    # property address
+    property_address: String!
+  ): property_balance
+
   # fetch data from the table: "property_factory_create"
   property_factory_create(
     # distinct select on columns
@@ -6730,5 +7325,426 @@ type subscription_root {
     # property address
     property: String!
   ): property_meta
+
+  # fetch data from the table: "withdraw_property_transfer"
+  withdraw_property_transfer(
+    # distinct select on columns
+    distinct_on: [withdraw_property_transfer_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [withdraw_property_transfer_order_by!]
+
+    # filter the rows returned
+    where: withdraw_property_transfer_bool_exp
+  ): [withdraw_property_transfer!]!
+
+  # fetch aggregated fields from the table: "withdraw_property_transfer"
+  withdraw_property_transfer_aggregate(
+    # distinct select on columns
+    distinct_on: [withdraw_property_transfer_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [withdraw_property_transfer_order_by!]
+
+    # filter the rows returned
+    where: withdraw_property_transfer_bool_exp
+  ): withdraw_property_transfer_aggregate!
+
+  # fetch data from the table: "withdraw_property_transfer" using primary key columns
+  withdraw_property_transfer_by_pk(
+    # event id
+    event_id: String!
+  ): withdraw_property_transfer
+}
+
+# property transfer information
+#
+#
+# columns and relationships of "withdraw_property_transfer"
+#
+type withdraw_property_transfer {
+  # event block number
+  block_number: Int!
+
+  # event id
+  event_id: String!
+
+  # from address
+  from_address: String!
+
+  # event log index
+  log_index: Int!
+
+  # property address
+  property_address: String!
+
+  # event raw data
+  raw_data: String!
+
+  # to address
+  to_address: String!
+
+  # event transaction index
+  transaction_index: Int!
+}
+
+# aggregated selection of "withdraw_property_transfer"
+type withdraw_property_transfer_aggregate {
+  aggregate: withdraw_property_transfer_aggregate_fields
+  nodes: [withdraw_property_transfer!]!
+}
+
+# aggregate fields of "withdraw_property_transfer"
+type withdraw_property_transfer_aggregate_fields {
+  avg: withdraw_property_transfer_avg_fields
+  count(columns: [withdraw_property_transfer_select_column!], distinct: Boolean): Int
+  max: withdraw_property_transfer_max_fields
+  min: withdraw_property_transfer_min_fields
+  stddev: withdraw_property_transfer_stddev_fields
+  stddev_pop: withdraw_property_transfer_stddev_pop_fields
+  stddev_samp: withdraw_property_transfer_stddev_samp_fields
+  sum: withdraw_property_transfer_sum_fields
+  var_pop: withdraw_property_transfer_var_pop_fields
+  var_samp: withdraw_property_transfer_var_samp_fields
+  variance: withdraw_property_transfer_variance_fields
+}
+
+# order by aggregate values of table "withdraw_property_transfer"
+input withdraw_property_transfer_aggregate_order_by {
+  avg: withdraw_property_transfer_avg_order_by
+  count: order_by
+  max: withdraw_property_transfer_max_order_by
+  min: withdraw_property_transfer_min_order_by
+  stddev: withdraw_property_transfer_stddev_order_by
+  stddev_pop: withdraw_property_transfer_stddev_pop_order_by
+  stddev_samp: withdraw_property_transfer_stddev_samp_order_by
+  sum: withdraw_property_transfer_sum_order_by
+  var_pop: withdraw_property_transfer_var_pop_order_by
+  var_samp: withdraw_property_transfer_var_samp_order_by
+  variance: withdraw_property_transfer_variance_order_by
+}
+
+# input type for inserting array relation for remote table "withdraw_property_transfer"
+input withdraw_property_transfer_arr_rel_insert_input {
+  data: [withdraw_property_transfer_insert_input!]!
+  on_conflict: withdraw_property_transfer_on_conflict
+}
+
+# aggregate avg on columns
+type withdraw_property_transfer_avg_fields {
+  block_number: Float
+  log_index: Float
+  transaction_index: Float
+}
+
+# order by avg() on columns of table "withdraw_property_transfer"
+input withdraw_property_transfer_avg_order_by {
+  block_number: order_by
+  log_index: order_by
+  transaction_index: order_by
+}
+
+# Boolean expression to filter rows from the table "withdraw_property_transfer". All fields are combined with a logical 'AND'.
+input withdraw_property_transfer_bool_exp {
+  _and: [withdraw_property_transfer_bool_exp]
+  _not: withdraw_property_transfer_bool_exp
+  _or: [withdraw_property_transfer_bool_exp]
+  block_number: Int_comparison_exp
+  event_id: String_comparison_exp
+  from_address: String_comparison_exp
+  log_index: Int_comparison_exp
+  property_address: String_comparison_exp
+  raw_data: String_comparison_exp
+  to_address: String_comparison_exp
+  transaction_index: Int_comparison_exp
+}
+
+# unique or primary key constraints on table "withdraw_property_transfer"
+enum withdraw_property_transfer_constraint {
+  # unique or primary key constraint
+  withdraw_property_transfer_pkey
+}
+
+# input type for incrementing integer column in table "withdraw_property_transfer"
+input withdraw_property_transfer_inc_input {
+  block_number: Int
+  log_index: Int
+  transaction_index: Int
+}
+
+# input type for inserting data into table "withdraw_property_transfer"
+input withdraw_property_transfer_insert_input {
+  block_number: Int
+  event_id: String
+  from_address: String
+  log_index: Int
+  property_address: String
+  raw_data: String
+  to_address: String
+  transaction_index: Int
+}
+
+# aggregate max on columns
+type withdraw_property_transfer_max_fields {
+  block_number: Int
+  event_id: String
+  from_address: String
+  log_index: Int
+  property_address: String
+  raw_data: String
+  to_address: String
+  transaction_index: Int
+}
+
+# order by max() on columns of table "withdraw_property_transfer"
+input withdraw_property_transfer_max_order_by {
+  block_number: order_by
+  event_id: order_by
+  from_address: order_by
+  log_index: order_by
+  property_address: order_by
+  raw_data: order_by
+  to_address: order_by
+  transaction_index: order_by
+}
+
+# aggregate min on columns
+type withdraw_property_transfer_min_fields {
+  block_number: Int
+  event_id: String
+  from_address: String
+  log_index: Int
+  property_address: String
+  raw_data: String
+  to_address: String
+  transaction_index: Int
+}
+
+# order by min() on columns of table "withdraw_property_transfer"
+input withdraw_property_transfer_min_order_by {
+  block_number: order_by
+  event_id: order_by
+  from_address: order_by
+  log_index: order_by
+  property_address: order_by
+  raw_data: order_by
+  to_address: order_by
+  transaction_index: order_by
+}
+
+# response of any mutation on the table "withdraw_property_transfer"
+type withdraw_property_transfer_mutation_response {
+  # number of affected rows by the mutation
+  affected_rows: Int!
+
+  # data of the affected rows by the mutation
+  returning: [withdraw_property_transfer!]!
+}
+
+# input type for inserting object relation for remote table "withdraw_property_transfer"
+input withdraw_property_transfer_obj_rel_insert_input {
+  data: withdraw_property_transfer_insert_input!
+  on_conflict: withdraw_property_transfer_on_conflict
+}
+
+# on conflict condition type for table "withdraw_property_transfer"
+input withdraw_property_transfer_on_conflict {
+  constraint: withdraw_property_transfer_constraint!
+  update_columns: [withdraw_property_transfer_update_column!]!
+  where: withdraw_property_transfer_bool_exp
+}
+
+# ordering options when selecting data from "withdraw_property_transfer"
+input withdraw_property_transfer_order_by {
+  block_number: order_by
+  event_id: order_by
+  from_address: order_by
+  log_index: order_by
+  property_address: order_by
+  raw_data: order_by
+  to_address: order_by
+  transaction_index: order_by
+}
+
+# primary key columns input for table: "withdraw_property_transfer"
+input withdraw_property_transfer_pk_columns_input {
+  # event id
+  event_id: String!
+}
+
+# select columns of table "withdraw_property_transfer"
+enum withdraw_property_transfer_select_column {
+  # column name
+  block_number
+
+  # column name
+  event_id
+
+  # column name
+  from_address
+
+  # column name
+  log_index
+
+  # column name
+  property_address
+
+  # column name
+  raw_data
+
+  # column name
+  to_address
+
+  # column name
+  transaction_index
+}
+
+# input type for updating data in table "withdraw_property_transfer"
+input withdraw_property_transfer_set_input {
+  block_number: Int
+  event_id: String
+  from_address: String
+  log_index: Int
+  property_address: String
+  raw_data: String
+  to_address: String
+  transaction_index: Int
+}
+
+# aggregate stddev on columns
+type withdraw_property_transfer_stddev_fields {
+  block_number: Float
+  log_index: Float
+  transaction_index: Float
+}
+
+# order by stddev() on columns of table "withdraw_property_transfer"
+input withdraw_property_transfer_stddev_order_by {
+  block_number: order_by
+  log_index: order_by
+  transaction_index: order_by
+}
+
+# aggregate stddev_pop on columns
+type withdraw_property_transfer_stddev_pop_fields {
+  block_number: Float
+  log_index: Float
+  transaction_index: Float
+}
+
+# order by stddev_pop() on columns of table "withdraw_property_transfer"
+input withdraw_property_transfer_stddev_pop_order_by {
+  block_number: order_by
+  log_index: order_by
+  transaction_index: order_by
+}
+
+# aggregate stddev_samp on columns
+type withdraw_property_transfer_stddev_samp_fields {
+  block_number: Float
+  log_index: Float
+  transaction_index: Float
+}
+
+# order by stddev_samp() on columns of table "withdraw_property_transfer"
+input withdraw_property_transfer_stddev_samp_order_by {
+  block_number: order_by
+  log_index: order_by
+  transaction_index: order_by
+}
+
+# aggregate sum on columns
+type withdraw_property_transfer_sum_fields {
+  block_number: Int
+  log_index: Int
+  transaction_index: Int
+}
+
+# order by sum() on columns of table "withdraw_property_transfer"
+input withdraw_property_transfer_sum_order_by {
+  block_number: order_by
+  log_index: order_by
+  transaction_index: order_by
+}
+
+# update columns of table "withdraw_property_transfer"
+enum withdraw_property_transfer_update_column {
+  # column name
+  block_number
+
+  # column name
+  event_id
+
+  # column name
+  from_address
+
+  # column name
+  log_index
+
+  # column name
+  property_address
+
+  # column name
+  raw_data
+
+  # column name
+  to_address
+
+  # column name
+  transaction_index
+}
+
+# aggregate var_pop on columns
+type withdraw_property_transfer_var_pop_fields {
+  block_number: Float
+  log_index: Float
+  transaction_index: Float
+}
+
+# order by var_pop() on columns of table "withdraw_property_transfer"
+input withdraw_property_transfer_var_pop_order_by {
+  block_number: order_by
+  log_index: order_by
+  transaction_index: order_by
+}
+
+# aggregate var_samp on columns
+type withdraw_property_transfer_var_samp_fields {
+  block_number: Float
+  log_index: Float
+  transaction_index: Float
+}
+
+# order by var_samp() on columns of table "withdraw_property_transfer"
+input withdraw_property_transfer_var_samp_order_by {
+  block_number: order_by
+  log_index: order_by
+  transaction_index: order_by
+}
+
+# aggregate variance on columns
+type withdraw_property_transfer_variance_fields {
+  block_number: Float
+  log_index: Float
+  transaction_index: Float
+}
+
+# order by variance() on columns of table "withdraw_property_transfer"
+input withdraw_property_transfer_variance_order_by {
+  block_number: order_by
+  log_index: order_by
+  transaction_index: order_by
 }
 

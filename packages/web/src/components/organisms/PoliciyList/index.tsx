@@ -7,11 +7,6 @@ import { useGetPolicyAddressesList } from 'src/fixtures/dev-kit/hooks'
 import { useGetPolicyInformation } from 'src/fixtures/github/hooks'
 import { NotFound } from './NotFound'
 
-const Wrap = styled.div`
-  display: grid;
-  grid-gap: 1rem;
-`
-
 const ListWrap = styled.div`
   width: 100%;
   margin: 0 auto;
@@ -39,9 +34,9 @@ export const PoliciesList = () => {
     })
   }, [getPolicyAddressesList])
   return (
-    <Wrap>
+    <div style={{ display: 'flex', justifyContent: 'center' }}>
       {policyAddressesList.length > 0 ? (
-        <ListWrap>
+        <ListWrap style={{ margin: 0 }}>
           <List
             bordered
             itemLayout="horizontal"
@@ -58,10 +53,10 @@ export const PoliciesList = () => {
           />
         </ListWrap>
       ) : isLoading ? (
-        <Spin size="large" style={{ display: 'block', width: 'auto', padding: '100px' }} />
+        <Spin size="large" style={{ alignSelf: 'center', display: 'block', width: 'auto', padding: '100px' }} />
       ) : (
         <NotFound />
       )}
-    </Wrap>
+    </div>
   )
 }

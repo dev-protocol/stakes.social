@@ -1,17 +1,13 @@
-import { useState } from 'react'
-import { SWRCachePath } from './cache-path'
-import useSWR from 'swr'
+import { useContext, useState } from 'react'
 import { message } from 'antd'
-import { UnwrapFunc } from '../utility'
 import { postInvitation } from './utility'
 import { sign } from 'src/fixtures/wallet/utility'
+import WalletContext from 'src/context/walletContext'
 
-export const usePostInvitation = (marketAddress: string) => {
+export const usePostInvitation = () => {
   const key = 'usePostInvitation'
+  const { web3 } = useContext(WalletContext)
   const [isLoading, setIsLoading] = useState<boolean>(false)
-
-  const shouldFetch = marketAddress !== ''
-  const { data } = useSWR<UnwrapFunc<typeof postInvitation>, Error>(shouldFetch ? SWRCachePath.postInvitation() : null)
 
   const postInvitationHandler = async ({
     asset,
@@ -35,7 +31,7 @@ export const usePostInvitation = (marketAddress: string) => {
     ask: string
   }) => {
     const signMessage = `invitation: ${asset}`
-    const signature = await sign(signMessage)
+    const signature = await sign(web3, signMessage)
     if (signature === undefined) {
       message.error({ content: 'Please connect to a wallet', key: key + 'WithWallet' })
       return { success: false }
@@ -73,5 +69,5 @@ export const usePostInvitation = (marketAddress: string) => {
       })
   }
 
-  return { data, postInvitationHandler, isLoading }
+  return { postInvitationHandler, isLoading }
 }

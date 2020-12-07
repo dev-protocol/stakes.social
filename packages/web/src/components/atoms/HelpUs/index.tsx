@@ -1,41 +1,30 @@
 import React from 'react'
-import styled, { keyframes } from 'styled-components'
-import { Tooltip, Button } from 'antd'
-import Icon from '@ant-design/icons'
+import styled from 'styled-components'
+import { Tooltip } from 'antd'
 
-const HeartSvg = () => (
-  <svg width="1.5em" height="1.5em" fill="currentColor" viewBox="0 0 1024 1024">
-    <path d="M923 283.6c-13.4-31.1-32.6-58.9-56.9-82.8-24.3-23.8-52.5-42.4-84-55.5-32.5-13.5-66.9-20.3-102.4-20.3-49.3 0-97.4 13.5-139.2 39-10 6.1-19.5 12.8-28.5 20.1-9-7.3-18.5-14-28.5-20.1-41.8-25.5-89.9-39-139.2-39-35.5 0-69.9 6.8-102.4 20.3-31.4 13-59.7 31.7-84 55.5-24.4 23.9-43.5 51.7-56.9 82.8-13.9 32.3-21 66.6-21 101.9 0 33.3 6.8 68 20.3 103.3 11.3 29.5 27.5 60.1 48.2 91 32.8 48.9 77.9 99.9 133.9 151.6 92.8 85.7 184.7 144.9 188.6 147.3l23.7 15.2c10.5 6.7 24 6.7 34.5 0l23.7-15.2c3.9-2.5 95.7-61.6 188.6-147.3 56-51.7 101.1-102.7 133.9-151.6 20.7-30.9 37-61.5 48.2-91 13.5-35.3 20.3-70 20.3-103.3 0.1-35.3-7-69.6-20.9-101.9z" />
-  </svg>
-)
-
-const HeartIcon = () => <Icon component={HeartSvg} />
-
-const color = keyframes`
-  0% {
-    color: #f8bbd0;
-  }
-  100% {
-    color: #fff;
-  }
-`
-const Circle = styled(Button)`
+const Circle = styled.a`
+  position: relative;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   position: fixed;
   bottom: 1.5rem;
   right: 2rem;
-  background: #e91e63;
-  border-color: #e91e63;
-  box-shadow: 0 3px 12px #e91e6333;
+  padding: 0;
+
+  svg {
+    z-index: 2;
+  }
+
+  border: none;
+  background: none;
+  border-radius: 90px;
   &,
   &:hover,
   &:focus,
   &:active {
-    background: #e91e63;
-    border-color: #e91e63;
-    color: #f8bbd0;
-  }
-  &:hover {
-    animation: ${color} 0.5s linear infinite alternate;
+    color: white;
   }
   @media (min-width: 768px) {
     bottom: 3rem;
@@ -44,13 +33,17 @@ const Circle = styled(Button)`
 `
 
 export const HelpUs = () => (
-  <Tooltip placement="top" color="pink" overlayStyle={{ fontSize: '0.8rem' }} title="Can you help?">
-    <Circle
-      shape="circle"
-      size="large"
-      href="//paper.dropbox.com/doc/Were-missing-the-following-resources--A1eBXtT1lNDsorUT3g4zQYk7AQ-QU7SbfwRE7V6TnCTyGWQM"
-      target="_blank"
-      icon={<HeartIcon />}
-    ></Circle>
+  <Tooltip placement="top" color="black" overlayStyle={{ fontSize: '0.8rem' }} title="Do you need help?">
+    <Circle href="https://docs.devprtcl.com" target="_blank">
+      <div
+        style={{ position: 'absolute', width: '20px', height: '20px', left: '15px', top: '15px', background: 'white' }}
+      />
+      <svg width="50" height="50" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path
+          d="M25 4.6875C13.7793 4.6875 4.6875 13.7793 4.6875 25C4.6875 36.2207 13.7793 45.3125 25 45.3125C36.2207 45.3125 45.3125 36.2207 45.3125 25C45.3125 13.7793 36.2207 4.6875 25 4.6875ZM24.5801 34.375C23.4277 34.375 22.4902 33.4961 22.4902 32.3633C22.4902 31.2402 23.4277 30.3516 24.5801 30.3516C25.7422 30.3516 26.6797 31.2305 26.6797 32.3633C26.6797 33.4961 25.752 34.375 24.5801 34.375ZM28.5059 24.9121C26.8066 25.8984 26.2305 26.6211 26.2305 27.8711V28.6426H22.8418L22.8125 27.8027C22.6465 25.791 23.3496 24.541 25.1172 23.5059C26.7676 22.5195 27.4609 21.8945 27.4609 20.6836C27.4609 19.4727 26.2891 18.584 24.834 18.584C23.3594 18.584 22.2949 19.541 22.2168 20.9863H18.75C18.8184 17.8418 21.1426 15.6152 25.0684 15.6152C28.7305 15.6152 31.25 17.6465 31.25 20.5664C31.25 22.5098 30.3125 23.8477 28.5059 24.9121Z"
+          fill="#333333"
+        />
+      </svg>
+    </Circle>
   </Tooltip>
 )

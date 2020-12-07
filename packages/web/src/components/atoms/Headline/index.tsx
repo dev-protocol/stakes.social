@@ -6,11 +6,17 @@ interface Props {
 
 export const Headline = styled.div<Props>`
   display: flex;
-  padding: 1rem;
+  padding: 2rem 0;
   justify-content: center;
   align-items: center;
   flex-flow: column;
-  @media (min-width: 768px) {
-    height: ${props => props.height || 380}px;
+
+  h2 {
+    text-align: center;
+    color: black;
+  }
+  span {
+    text-align: center;
+    color: #4f4f4f;
   }
 `

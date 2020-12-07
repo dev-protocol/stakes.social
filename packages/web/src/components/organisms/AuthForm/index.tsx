@@ -1,198 +1,180 @@
 import React, { useState } from 'react'
-import { Form, Input, Button, Result } from 'antd'
-import { useMarketScheme, useAuthenticate, useCreateAndAuthenticate } from 'src/fixtures/dev-kit/hooks'
+import { Form, Button, Result } from 'antd'
+import { useAuthenticate } from 'src/fixtures/dev-kit/hooks'
 import { usePostSignGitHubMarketAsset } from 'src/fixtures/khaos/hooks'
-import { useEffectAsync } from 'src/fixtures/utility'
 import styled from 'styled-components'
-import Text from 'antd/lib/typography/Text'
+import { blueGradient } from 'src/styles/gradient'
+import { boxShahowWithOnHover } from 'src/styles/boxShahow'
+import Input from 'src/components/molecules/Input'
+import { InfoCircleOutlined, CodeOutlined, DeploymentUnitOutlined } from '@ant-design/icons'
+import { useProvider } from 'src/fixtures/wallet/hooks'
+import { AuthorSelector } from '../PropertySelectForm/AuthorSelector'
 
 const NpmMarketContractAddress = '0x88c7B1f41DdE50efFc25541a2E0769B887eB2ee7'
 
 export interface Props {
   market: string
-  property?: string
 }
 
 const Container = styled.div`
   display: grid;
+  width: 100%;
+  align-self: center;
   grid-gap: 1rem;
 `
+
 const Row = styled.div`
   display: grid;
-  grid-gap: 1rem;
+  grid-gap: 0.75rem;
   @media (min-width: 768px) {
-    grid-template-columns: 150px 1fr;
+    grid-template-columns: 240px 1fr;
     & > *:first-child {
-      text-align: right;
+      text-align: left;
     }
   }
 `
 
-const DefaultMarketSchemeInput = ({ schemeList }: { schemeList: string[] }) => {
-  return (
-    <>
-      {schemeList.map(scheme => (
-        <Form.Item name={scheme} rules={[{ required: true, message: 'Please input name.' }]} key={scheme}>
-          <Input placeholder={scheme} />
-        </Form.Item>
-      ))}
-    </>
-  )
-}
+const Span = styled.div`
+  font-size: 1.2em;
+  margin-top: 5px;
+`
 
-const GitHubMarketSchemeInput = () => {
-  return (
-    <>
-      <Form.Item
-        name="repositoryName"
-        rules={[{ required: true, message: 'Please input GitHub Repository name (e.g., your/awesome-repos)' }]}
-        key="repositoryName"
-      >
-        <Input placeholder="your/awesome-repos" />
-      </Form.Item>
-      <Form.Item
-        name="personalAccessToken"
-        rules={[{ required: true, message: 'Please input PAT.' }]}
-        key="personalAccessToken"
-      >
-        <Input placeholder="Personal Access Token" />
-      </Form.Item>
-      <p>
-        Please{' '}
-        <a href="https://github.com/settings/tokens/new" target="_blank" rel="noreferrer">
-          create a Personal Access Token <Text mark>without all scopes</Text>
-        </a>{' '}
-        and paste it here. PAT is securely oraclize using Khaos(
-        <a href="https://github.com/dev-protocol/khaos" target="_blank" rel="noreferrer">
-          *
-        </a>
-        ).
-      </p>
-    </>
-  )
-}
+const ButtonContainer = styled.div`
+  width: auto;
+  align-self: flex-end;
+`
+const Submit = styled.button`
+  padding: 10px 40px;
+  border-radius: 6px;
+  border: none;
+  background-image: linear-gradient(to right, #2f80ed, #1ac9fc);
+  cursor: pointer;
+  color: white;
+  ${blueGradient()}
+  ${boxShahowWithOnHover()}
+`
 
-const PropertyInput = () => {
-  return (
-    <>
-      <Row>
-        <span>Pool name:</span>
-        <Form.Item
-          name="propertyName"
-          rules={[{ required: true, message: 'Please input your pool name' }]}
-          key="propertyName"
-        >
-          <Input placeholder="Your pool name" />
-        </Form.Item>
-      </Row>
-      <Row>
-        <span>Pool symbol:</span>
-        <Form.Item
-          name="propertySymbol"
-          rules={[{ required: true, message: 'Please input your pool symbol' }]}
-          key="propertySymbol"
-        >
-          <Input placeholder="Your pool symbol" />
-        </Form.Item>
-      </Row>
-    </>
-  )
-}
+const InfoContainer = styled.div`
+  margin-right: 20px;
+  svg {
+    width: 1.5em;
+    height: auto;
+  }
+`
 
-const Notify = () => (
-  <Result
-    title="GitHub Market is currently invite-only"
-    style={{ marginBottom: '6rem', padding: 0 }}
-    extra={
-      <>
-        <p>Please send our team an invitation request via the form.</p>
-        <p>
-          <Button type="primary" href="/invite/github" target="_blank">
-            Apply
-          </Button>
-        </p>
-      </>
-    }
-  />
-)
-
-export const AuthForm = ({ market, property }: Props) => {
-  const [schemeList, setSchemeList] = useState<string[]>([])
+export const AuthForm = ({ market }: Props) => {
   const [metrics, setMetrics] = useState<string>('')
-  const { marketScheme } = useMarketScheme()
-  const { postSignGitHubMarketAssetHandler } = usePostSignGitHubMarketAsset()
+  const { postSignGitHubMarketAssetHandler, isLoading } = usePostSignGitHubMarketAsset()
   const { authenticate } = useAuthenticate()
-  const { createAndAuthenticate } = useCreateAndAuthenticate()
+  const { accountAddress } = useProvider()
   const onFinish = async (values: any) => {
     const authRequestData: string[] =
       market === NpmMarketContractAddress
         ? Object.values(values)
         : await (async () => {
-            const repository: string = values.repositoryName
+            const repository: string = values.projectName
             const personalAccessToken = values.personalAccessToken
             const khaos = await postSignGitHubMarketAssetHandler(repository, personalAccessToken)
             return [repository, khaos.publicSignature || '']
           })()
 
-    const metrics = await (property
-      ? authenticate(market, property, authRequestData)
-      : ((name, symbol) => createAndAuthenticate(name, symbol, market, authRequestData))(
-          values.propertyName,
-          values.propertySymbol
-        ))
+    const res = await authenticate(market, values.propertyAddress, authRequestData)
 
-    if (metrics) {
-      setMetrics(metrics)
+    if (res) {
+      const metricsAddress = res
+      setMetrics(metricsAddress)
     }
   }
 
-  useEffectAsync(async () => {
-    const schemeList = await marketScheme(market)
-    setSchemeList([...(schemeList || [])])
-  }, [])
+  const [form] = Form.useForm()
+
+  const handleSelectChange = (propertyAddress: string) => {
+    form.setFieldsValue({
+      propertyAddress
+    })
+  }
 
   return (
     <Container>
-      {market !== NpmMarketContractAddress && metrics === '' ? <Notify /> : ''}
-      <Row>
-        {property ? (
-          <>
-            <span>Associating Property:</span>
-            <span>{property}</span>
-          </>
-        ) : (
-          ''
-        )}
-      </Row>
       {metrics ? (
         <Result
           status="success"
           title="Successfully Authenticated Your Asset!"
-          subTitle="Viewing a new asset will take dozens of minutes, but you can also check it out right away on Etherscan."
+          subTitle="It might take a while until your new asset will appear on stakes.social, but you can already check it out on Etherscan."
           extra={[
             <Button key="etherscan" href={`https://etherscan.io/address/${metrics}`}>
               Etherscan
             </Button>,
-            <Button key="property" href={`/${property}`} type="primary">
+            <Button key="property" href={`/${metrics}`} type="primary">
               Go the Property
             </Button>
           ]}
         />
       ) : (
         <Form name="basic" initialValues={{ remember: true }} onFinish={onFinish}>
-          {property ? '' : <PropertyInput />}
+          <Row>
+            <Span>Project:</Span>
+            <Form.Item
+              name="propertyAddress"
+              rules={[{ required: true, message: 'Please input GitHub Repository name (e.g., your/awesome-repos)' }]}
+              key="propertyAddress"
+            >
+              <AuthorSelector onChange={handleSelectChange} label="propertyAddress" author={accountAddress} />
+            </Form.Item>
+          </Row>
+          <Row>
+            <Span>Project name:</Span>
+            <Form.Item
+              name="projectName"
+              rules={[{ required: true, message: 'Please input GitHub Repository name (e.g., your/awesome-repos)' }]}
+              key="projectName"
+            >
+              <Input Icon={DeploymentUnitOutlined} label="projectName" placeholder="OSS Project name" />
+            </Form.Item>
+          </Row>
 
           <Row>
-            <span>Arguments:</span>
-            <div>
-              {market === NpmMarketContractAddress ? (
-                <DefaultMarketSchemeInput schemeList={schemeList} />
-              ) : (
-                <GitHubMarketSchemeInput />
-              )}
-              <Button type="primary" htmlType="submit">
-                Authenticate
-              </Button>
+            <Span>Personal Access Token:</Span>
+            <Form.Item
+              name="personalAccessToken"
+              rules={[{ required: true, message: 'Please input PAT.' }]}
+              key="personalAccessToken"
+            >
+              <Input Icon={CodeOutlined} label="personalAccessToken" placeholder="Personal Access Token" />
+            </Form.Item>
+          </Row>
+          <div style={{ display: 'flex', alignItems: 'center', marginBottom: '1em' }}>
+            <div style={{ display: 'flex', alignItems: 'center', alignSelf: 'flex-end' }}>
+              <InfoContainer>
+                <InfoCircleOutlined />
+              </InfoContainer>
+              <div style={{ fontSize: '0.9em' }}>
+                <div>
+                  Please{' '}
+                  <a href="https://github.com/settings/tokens/new" target="_blank" rel="noreferrer">
+                    <span style={{ wordBreak: 'normal' }}>create a Personal Access Token without any scopes.</span>
+                  </a>
+                </div>
+                <div>
+                  <span style={{ wordBreak: 'normal' }}>
+                    The PAT is confidentially authenticated using the Khaos oracle(
+                  </span>
+                  <a href="https://github.com/dev-protocol/khaos" target="_blank" rel="noreferrer">
+                    *
+                  </a>
+                  ).
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <Row>
+            <div style={{ display: 'flex', gridColumn: '1/-1', justifyContent: 'flex-end' }}>
+              <ButtonContainer>
+                <Submit type="submit" disabled={isLoading}>
+                  Authenticate
+                </Submit>
+              </ButtonContainer>
             </div>
           </Row>
         </Form>
