@@ -419,7 +419,7 @@ const AboutCreator = () => {
                       Stakes.social offers a sustainable option compared to donations. Contact the Dev Protocol team to
                       discuss how we can help your organization with your cause.
                     </div>
-                    <FButton href="https://devprtcl.com/">Contact Us!</FButton>
+                    <FButton href="https://devprotocol.xyz">Contact Us!</FButton>
                   </div>
                 </div>
               </Col>

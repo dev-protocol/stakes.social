@@ -59,7 +59,7 @@ export const Footer = () => {
             <div style={{ display: 'flex', alignItems: 'center', color: 'white', fontSize: '0.9em' }}>
               <span>Powered by</span>
               <Divider style={{ marginLeft: '2px', marginRight: '2px' }} type="vertical" />
-              <DevProtocol target="_blank" rel="noopener noreferrer" href="https://devprtcl.com/">
+              <DevProtocol target="_blank" rel="noopener noreferrer" href="https://devprotocol.xyz/">
                 Dev Protocol
               </DevProtocol>
             </div>
