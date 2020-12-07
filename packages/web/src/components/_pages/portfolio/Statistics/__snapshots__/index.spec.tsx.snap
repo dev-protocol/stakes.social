@@ -4,7 +4,7 @@ exports[`Statistics Snapshot 1`] = `
 <body>
   <div>
     <div
-      class="sc-1irnp4p-0 ea-DhpJ"
+      class="sc-1irnp4p-0 lhjRZd"
     >
       <div
         class="ant-statistic"
@@ -12,7 +12,40 @@ exports[`Statistics Snapshot 1`] = `
         <div
           class="ant-statistic-title"
         >
-          Account Value
+          Staked Amount
+        </div>
+        <div
+          class="ant-statistic-content"
+        >
+          <span
+            class="ant-statistic-content-value"
+          >
+            <span
+              class="ant-statistic-content-value-int"
+            >
+              
+              0
+            </span>
+            <span
+              class="ant-statistic-content-value-decimal"
+            >
+              .00
+            </span>
+          </span>
+          <span
+            class="ant-statistic-content-suffix"
+          >
+            DEV
+          </span>
+        </div>
+      </div>
+      <div
+        class="ant-statistic"
+      >
+        <div
+          class="ant-statistic-title"
+        >
+          Rewards Amount
         </div>
         <div
           class="ant-statistic-content"
@@ -45,7 +78,7 @@ exports[`Statistics Snapshot 1`] = `
         <div
           class="ant-statistic-title"
         >
-          Rewards Earned
+          Unstaked Value
         </div>
         <div
           class="ant-statistic-content"

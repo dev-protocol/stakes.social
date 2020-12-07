@@ -33,7 +33,7 @@ const LiquidityMining = () => {
       <Header></Header>
       <Container>
         <Headline height={150}>
-          <H2>Liquidity Mining</H2>
+          <H2>Liquidity Program</H2>
         </Headline>
       </Container>
       <NarrowContainer>

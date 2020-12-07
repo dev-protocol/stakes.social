@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Form, Result } from 'antd'
+import { Form } from 'antd'
 import Input from 'src/components/molecules/Input'
 import styled from 'styled-components'
 import { usePostInvitation } from 'src/fixtures/dev-invitation/hooks'
@@ -15,6 +15,7 @@ import {
 } from '@ant-design/icons'
 import { blueGradient } from 'src/styles/gradient'
 import { boxShahowWithOnHover } from 'src/styles/boxShahow'
+import SuccessLogo from 'src/components/atoms/Success'
 
 export interface Props {
   market: string
@@ -91,6 +92,21 @@ const Capitalize = styled.span`
   text-transform: capitalize;
 `
 
+const ResultContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding: 48px 32px;
+  justify-content: center;
+  align-items: center;
+`
+
+const SuccessContainer = styled.div`
+  svg {
+    width: 150px;
+    height: auto;
+  }
+`
+
 export const InvitationRequestForm = ({ market }: Props) => {
   const [metrics, setMetrics] = useState<boolean>(false)
   const { postInvitationHandler, isLoading } = usePostInvitation()
@@ -116,7 +132,15 @@ export const InvitationRequestForm = ({ market }: Props) => {
   return (
     <Wrap>
       {metrics ? (
-        <Result status="success" title="Successfully requested verification of your Asset!" subTitle="" />
+        <ResultContainer>
+          <SuccessContainer>
+            <SuccessLogo />
+          </SuccessContainer>
+          <h2 style={{ textAlign: 'center', wordBreak: 'normal' }}>
+            Successfully requested verification of your project.
+          </h2>
+          <h3>We will come back to you soon!</h3>
+        </ResultContainer>
       ) : (
         <Form name="basic" style={{ padding: '0.75em' }} initialValues={{ remember: true }} onFinish={onFinish}>
           <FormTitle>

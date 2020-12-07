@@ -1,16 +1,19 @@
 import React, { useState } from 'react'
-import { Form, Button, Result, message } from 'antd'
+import { Form, message } from 'antd'
 import { useCreateAndAuthenticate } from 'src/fixtures/dev-kit/hooks'
 import { usePostSignGitHubMarketAsset } from 'src/fixtures/khaos/hooks'
 import styled from 'styled-components'
 import Input from 'src/components/molecules/Input'
 import { useProvider } from 'src/fixtures/wallet/hooks'
 import { InfoCircleOutlined, AccountBookOutlined, CodeOutlined, FontColorsOutlined } from '@ant-design/icons'
-
+import { ButtonWithGradient } from 'src/components/atoms/ButtonWithGradient/index'
+import SuccessLogo from 'src/components/atoms/Success'
 const NpmMarketContractAddress = '0x88c7B1f41DdE50efFc25541a2E0769B887eB2ee7'
 
 export interface Props {
   market: string
+  onHeaderChange: React.Dispatch<React.SetStateAction<string>>
+  onSubHeaderChange: React.Dispatch<React.SetStateAction<string>>
 }
 
 const Container = styled.div`
@@ -73,11 +76,38 @@ const InfoContainer = styled.div`
   }
 `
 
-export const AuthForm = ({ market }: Props) => {
+const Etherscan = styled(ButtonWithGradient)`
+  border-radius: 6px;
+  padding: 0 24px;
+  /* margin-right: 10px; */
+`
+
+// const GoPool = styled(ButtonWithGradient)`
+//   border-radius: 6px;
+//   padding: 0 24px;
+// `
+
+const ResultContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding: 48px 32px;
+  justify-content: center;
+  align-items: center;
+`
+
+const SuccessContainer = styled.div`
+  svg {
+    width: 150px;
+    height: auto;
+  }
+`
+
+export const AuthForm = ({ market, onHeaderChange, onSubHeaderChange }: Props) => {
   const [metrics, setMetrics] = useState<string>('')
-  const [property, setProperty] = useState<string>('')
+  // const [property, setProperty] = useState<string>('')
   const { postSignGitHubMarketAssetHandler, isLoading } = usePostSignGitHubMarketAsset()
   const { createAndAuthenticate, isLoading: isAuthenticating } = useCreateAndAuthenticate()
+
   const { accountAddress } = useProvider()
   const onFinish = async (values: any) => {
     const key = 'tokenization'
@@ -119,8 +149,12 @@ export const AuthForm = ({ market }: Props) => {
       message.success({ content: 'completed tokenization!', key })
 
       // Completed the all flow
-      setProperty(results.property)
+      // setProperty(results.property)
       setMetrics(metricsAddress)
+      onHeaderChange('Succesfully Tokenized Your Project')
+      onSubHeaderChange(
+        'Please wait for your project to become available on Stakes Social. This can take several minutes.'
+      )
     }
   }
 
@@ -128,27 +162,34 @@ export const AuthForm = ({ market }: Props) => {
     <div style={{ maxWidth: '760px' }}>
       <Container>
         {metrics ? (
-          <Result
-            status="success"
-            title="Successfully Tokenized Your Asset!"
-            subTitle="Now comes the last step: authentication"
-            extra={[
-              // TODO: Link element to metrics
-              <Button key="etherscan" href={`https://etherscan.io/address/${metrics}`}>
-                Etherscan
-              </Button>,
-              <Button key="property" href={`/${property}`} type="primary">
-                Go the Property
-              </Button>
-            ]}
-          />
+          <ResultContainer>
+            <SuccessContainer>
+              <SuccessLogo />
+            </SuccessContainer>
+
+            <div style={{ display: 'flex', width: '300px', justifyContent: 'center' }}>
+              <Etherscan
+                style={{ width: '100%' }}
+                alternative={true}
+                rel="noopener noreferrer"
+                target="_blank"
+                key="etherscan"
+                href={`https://etherscan.io/address/${metrics}`}
+              >
+                <span>Go to Etherscan</span>
+              </Etherscan>
+              ,
+              {/* <GoPool key="property" href={`/${property}`} type="primary">
+                See Property
+              </GoPool> */}
+            </div>
+          </ResultContainer>
         ) : (
           <Form name="basic" style={{ padding: '1em' }} initialValues={{ remember: true }} onFinish={onFinish}>
             <FormTitle>
               <h2>Asset Information</h2>
             </FormTitle>
             <Row style={{ marginBottom: '20px' }}>
-              {/* TODO: This field can probably be replaced by using useProvider() */}
               <Span style={{ marginTop: 0 }}>Creator wallet address:</Span>
               <span style={{ marginTop: '5px', maxWidth: '100vw', overflow: 'hidden', textOverflow: 'ellipsis' }}>
                 {accountAddress || 'Fetching wallet...'}

@@ -35,6 +35,18 @@ const FooterContainer = styled.div`
 
 const LogoContainer = styled.div``
 
+const DevProtocol = styled.a`
+  font-weight: bold;
+  text-decoration: none;
+  cursor: pointer;
+
+  color: white;
+
+  :hover {
+    color: inherit;
+  }
+`
+
 export const Footer = () => {
   return (
     <Wrap>
@@ -44,10 +56,12 @@ export const Footer = () => {
             <LogoContainer>
               <BrandLogo />
             </LogoContainer>
-            <div style={{ color: 'white', fontSize: '0.9em' }}>
+            <div style={{ display: 'flex', alignItems: 'center', color: 'white', fontSize: '0.9em' }}>
               <span>Powered by</span>
               <Divider style={{ marginLeft: '2px', marginRight: '2px' }} type="vertical" />
-              <span style={{ fontWeight: 'bold' }}>Dev Protocol</span>
+              <DevProtocol target="_blank" rel="noopener noreferrer" href="https://devprtcl.com/">
+                Dev Protocol
+              </DevProtocol>
             </div>
           </div>
 
@@ -55,9 +69,9 @@ export const Footer = () => {
           <div style={{ display: 'flex', justifyContent: 'space-between', color: 'white', fontSize: '0.9em' }}>
             <span>2020 All rights reserverd.</span>
             <SocialContainer>
-              <Twitter />
+              <Twitter target="_blank" rel="noopener noreferrer" />
               <Discord />
-              <Github />
+              <Github target="_blank" rel="noopener noreferrer" />
               <Telegram />
               <Medium />
             </SocialContainer>
