@@ -427,7 +427,6 @@ describe('geyser hooks', () => {
 
     test('success fetching data (max)', () => {
       const utc = getUTC()
-      ;(useSWR as jest.Mock).mockImplementationOnce(() => ({ data: '0x' }))
       ;(useSWR as jest.Mock).mockImplementationOnce(() => ({ data: 12345 }))
       ;(useSWR as jest.Mock).mockImplementationOnce(() => ({ data: utc - 10000 }))
       ;(useSWR as jest.Mock).mockImplementationOnce(() => ({ data: toBigNumber(8000) }))
