@@ -48,9 +48,8 @@ class NextApp extends App<AppInitialProps & WithApolloProps<{}>> {
       },
       'custom-walletlink': {
         display: {
-          logo:
-            'https://github.com/dev-protocol/asset.stakes.social/blob/main/public/wallet/coinbase-wallet.jpg?raw=true',
-          name: 'Wallet Link',
+          logo: 'https://github.com/dev-protocol/asset.stakes.social/blob/main/public/wallet/walletlink.jpg?raw=true',
+          name: 'WalletLink',
           description: 'Scan with WalletLink to connect'
         },
         package: walletLinkProvider,
