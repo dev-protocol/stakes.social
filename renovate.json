@@ -1,4 +1,10 @@
 {
   "extends": ["config:base"],
-  "automerge": true
+  "automerge": true,
+  "packageRules": [
+    {
+      "packageNames": ["web3", "web3-core"],
+      "allowedVersions": "<1.3.x"
+    }
+  ]
 }
