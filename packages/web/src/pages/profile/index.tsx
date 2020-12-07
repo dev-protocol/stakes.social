@@ -45,10 +45,9 @@ const StyledContainer = styled(Container)`
   display: flex;
   width: 100%;
   gap: 3rem;
-  padding: 3rem 1rem;
+  padding: 2rem 1rem;
   flex-flow: column;
   flex-grow: 1;
-  padding-top: 6em;
 `
 
 const SwitcherContainer = styled.div`

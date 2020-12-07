@@ -5810,13 +5810,13 @@ export type Withdraw_Property_Transfer_Variance_Order_By = {
 
 export type PropertyFactoryCreateFragment = { __typename?: 'property_factory_create' } & Pick<
   Property_Factory_Create,
-  'block_number' | 'event_id' | 'from_address' | 'log_index' | 'property' | 'raw_data' | 'transaction_index'
+  'undefined' | 'undefined' | 'undefined' | 'undefined' | 'undefined' | 'undefined' | 'undefined'
 >
 
 export type GetMarketFactoryCreateQueryVariables = Exact<{ [key: string]: never }>
 
 export type GetMarketFactoryCreateQuery = { __typename?: 'query_root' } & {
-  market_factory_create: Array<{ __typename?: 'market_factory_create' } & Pick<Market_Factory_Create, 'market'>>
+  market_factory_create: Array<{ __typename?: 'market_factory_create' } & Pick<Market_Factory_Create, 'undefined'>>
 }
 
 export type GetPortofolioPoolsAccountQueryVariables = Exact<{
@@ -5824,7 +5824,7 @@ export type GetPortofolioPoolsAccountQueryVariables = Exact<{
 }>
 
 export type GetPortofolioPoolsAccountQuery = { __typename?: 'query_root' } & {
-  property_lockup: Array<{ __typename?: 'property_lockup' } & Pick<Property_Lockup, 'property_address'>>
+  property_lockup: Array<{ __typename?: 'property_lockup' } & Pick<Property_Lockup, 'undefined'>>
 }
 
 export type GetPropertyAggregateQueryVariables = Exact<{
@@ -5833,7 +5833,9 @@ export type GetPropertyAggregateQueryVariables = Exact<{
 
 export type GetPropertyAggregateQuery = { __typename?: 'query_root' } & {
   property_meta_aggregate: { __typename?: 'property_meta_aggregate' } & {
-    aggregate?: Maybe<{ __typename?: 'property_meta_aggregate_fields' } & Pick<Property_Meta_Aggregate_Fields, 'count'>>
+    aggregate?: Maybe<
+      { __typename?: 'property_meta_aggregate_fields' } & Pick<Property_Meta_Aggregate_Fields, 'undefined'>
+    >
   }
 }
 
@@ -5845,8 +5847,8 @@ export type GetPropertyAuthenticationQuery = { __typename?: 'query_root' } & {
   property_authentication: Array<
     { __typename?: 'property_authentication' } & Pick<
       Property_Authentication,
-      'authentication_id' | 'market' | 'metrics'
-    > & { property_meta?: Maybe<{ __typename?: 'property_meta' } & Pick<Property_Meta, 'author'>> }
+      'undefined' | 'undefined' | 'undefined'
+    > & { property_meta?: Maybe<{ __typename?: 'property_meta' } & Pick<Property_Meta, 'undefined'>> }
   >
 }
 
@@ -5856,7 +5858,7 @@ export type TotalStakedAccountQueryVariables = Exact<{
 
 export type TotalStakedAccountQuery = { __typename?: 'query_root' } & {
   account_lockup_sum_values: Array<
-    { __typename?: 'account_lockup_sum_values' } & Pick<Account_Lockup_Sum_Values, 'sum_values'>
+    { __typename?: 'account_lockup_sum_values' } & Pick<Account_Lockup_Sum_Values, 'undefined'>
   >
 }
 
@@ -5867,7 +5869,7 @@ export type ListAccountLockupQueryVariables = Exact<{
 }>
 
 export type ListAccountLockupQuery = { __typename?: 'query_root' } & {
-  account_lockup: Array<{ __typename?: 'account_lockup' } & Pick<Account_Lockup, 'property_address'>>
+  account_lockup: Array<{ __typename?: 'account_lockup' } & Pick<Account_Lockup, 'undefined'>>
 }
 
 export type ListOwnedPropertyMetaQueryVariables = Exact<{
@@ -5877,7 +5879,7 @@ export type ListOwnedPropertyMetaQueryVariables = Exact<{
 }>
 
 export type ListOwnedPropertyMetaQuery = { __typename?: 'query_root' } & {
-  property_meta: Array<{ __typename?: 'property_meta' } & Pick<Property_Meta, 'property' | 'name'>>
+  property_meta: Array<{ __typename?: 'property_meta' } & Pick<Property_Meta, 'undefined' | 'undefined'>>
 }
 
 export type ListPropertyQueryVariables = Exact<{
@@ -5892,16 +5894,14 @@ export type ListPropertyQueryVariables = Exact<{
 export type ListPropertyQuery = { __typename?: 'query_root' } & {
   property_factory_create: Array<
     { __typename?: 'property_factory_create' } & {
-      authentication: Array<
-        { __typename?: 'property_authentication' } & Pick<Property_Authentication, 'authentication_id'>
-      >
+      authentication: Array<{ __typename?: 'property_authentication' } & Pick<Property_Authentication, 'undefined'>>
     } & PropertyFactoryCreateFragment
   >
   property_factory_create_aggregate: { __typename?: 'property_factory_create_aggregate' } & {
     aggregate?: Maybe<
       { __typename?: 'property_factory_create_aggregate_fields' } & Pick<
         Property_Factory_Create_Aggregate_Fields,
-        'count'
+        'undefined'
       >
     >
   }
@@ -5919,16 +5919,14 @@ export type ListPropertyOrderByMostRecentQueryVariables = Exact<{
 export type ListPropertyOrderByMostRecentQuery = { __typename?: 'query_root' } & {
   property_factory_create: Array<
     { __typename?: 'property_factory_create' } & {
-      authentication: Array<
-        { __typename?: 'property_authentication' } & Pick<Property_Authentication, 'authentication_id'>
-      >
+      authentication: Array<{ __typename?: 'property_authentication' } & Pick<Property_Authentication, 'undefined'>>
     } & PropertyFactoryCreateFragment
   >
   property_factory_create_aggregate: { __typename?: 'property_factory_create_aggregate' } & {
     aggregate?: Maybe<
       { __typename?: 'property_factory_create_aggregate_fields' } & Pick<
         Property_Factory_Create_Aggregate_Fields,
-        'count'
+        'undefined'
       >
     >
   }
@@ -5943,14 +5941,17 @@ export type ListPropertyMetaQueryVariables = Exact<{
 
 export type ListPropertyMetaQuery = { __typename?: 'query_root' } & {
   property_meta: Array<
-    { __typename?: 'property_meta' } & Pick<Property_Meta, 'property' | 'name'> & {
+    { __typename?: 'property_meta' } & Pick<Property_Meta, 'undefined' | 'undefined'> & {
         lockup_aggregate: { __typename?: 'property_lockup_aggregate' } & {
           aggregate?: Maybe<
-            { __typename?: 'property_lockup_aggregate_fields' } & Pick<Property_Lockup_Aggregate_Fields, 'count'> & {
+            { __typename?: 'property_lockup_aggregate_fields' } & Pick<
+              Property_Lockup_Aggregate_Fields,
+              'undefined'
+            > & {
                 sum?: Maybe<
                   { __typename?: 'property_lockup_sum_fields' } & Pick<
                     Property_Lockup_Sum_Fields,
-                    'block_number' | 'value'
+                    'undefined' | 'undefined'
                   >
                 >
               }
@@ -5967,7 +5968,7 @@ export type ListTopStakersAccountQueryVariables = Exact<{
 
 export type ListTopStakersAccountQuery = { __typename?: 'query_root' } & {
   account_lockup: Array<
-    { __typename?: 'account_lockup' } & Pick<Account_Lockup, 'account_address' | 'value' | 'property_address'>
+    { __typename?: 'account_lockup' } & Pick<Account_Lockup, 'undefined' | 'undefined' | 'undefined'>
   >
 }
 
@@ -5977,7 +5978,7 @@ export type ListTopSupportingAccountQueryVariables = Exact<{
 }>
 
 export type ListTopSupportingAccountQuery = { __typename?: 'query_root' } & {
-  account_lockup: Array<{ __typename?: 'account_lockup' } & Pick<Account_Lockup, 'property_address' | 'value'>>
+  account_lockup: Array<{ __typename?: 'account_lockup' } & Pick<Account_Lockup, 'undefined' | 'undefined'>>
 }
 
 export const PropertyFactoryCreateFragmentDoc = gql`

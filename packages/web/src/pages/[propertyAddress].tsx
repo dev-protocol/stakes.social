@@ -50,11 +50,8 @@ const Transact = styled.div`
 const Possession = styled(PossessionOutline)``
 
 const Wrap = styled.div`
-  margin: 5rem auto;
+  margin: 1rem auto;
   max-width: 1048px;
-  @media (min-width: 768px) {
-    margin: 5rem auto;
-  }
 `
 
 const AboutSection = styled.div`
