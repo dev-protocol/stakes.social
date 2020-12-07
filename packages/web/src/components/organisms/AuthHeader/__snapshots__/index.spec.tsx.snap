@@ -4,7 +4,7 @@ exports[`AuthHeader Snapshot 1`] = `
 <body>
   <div>
     <div
-      style="position: fixed; top: 0px; width: 100%; z-index: 2;"
+      style="position: sticky; top: 0px; width: 100%; z-index: 2;"
     >
       <header
         class="sc-1bz6snd-0 TlprQ"
@@ -130,7 +130,7 @@ exports[`AuthHeader Snapshot 1`] = `
       </div>
     </div>
     <div
-      class="sc-9gd508-0 jYpvAT"
+      class="sc-9gd508-0 cwxwOZ"
       height="300"
     >
       <h2

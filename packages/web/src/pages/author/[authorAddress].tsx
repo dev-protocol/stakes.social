@@ -26,6 +26,7 @@ import { useState } from 'react'
 import { useCurrency } from 'src/fixtures/currency/hooks'
 import { Pagination, Spin } from 'antd'
 import { getPath } from 'src/fixtures/utility/route'
+import { CoverImages } from 'src/components/_pages/author/CoverImages'
 
 type Props = {}
 
@@ -37,30 +38,6 @@ type PoolProps = {
 const Wrap = styled.div`
   margin: auto auto;
   max-width: 1048px;
-`
-
-const BannerContainer = styled.div`
-  display: grid;
-  grid-template-columns: 3fr 2fr;
-  justify-content: center;
-  background-color: black;
-  padding: 40px 0;
-`
-
-const ResponsiveImage = styled.img`
-  width: auto;
-  height: 200px;
-  @media (min-width: 1024px) {
-    width: 18rem;
-    height: 10rem;
-  }
-`
-const Logo = styled.div`
-  display: flex;
-  grid-column: 2 / -1;
-  justify-content: center;
-  align-items: center;
-  background-color: black;
 `
 
 const ProfilePicture = styled.div`
@@ -214,22 +191,6 @@ const AuthorLinks = styled.div`
   }
 `
 
-export const Banner = () => {
-  return (
-    <div style={{ backgroundColor: 'black', paddingTop: '50px' }}>
-      <Wrap>
-        <div style={{ maxWidth: '1048px', marginRight: 'auto', marginLeft: 'auto', background: 'black' }}>
-          <BannerContainer>
-            <Logo>
-              <ResponsiveImage src="https://res.cloudinary.com/haas-storage/image/upload/v1598697538/background_wmc31h.png" />
-            </Logo>
-          </BannerContainer>
-        </div>
-      </Wrap>
-    </div>
-  )
-}
-
 const Pool = ({ propertyAddress }: PoolProps) => {
   const { totalStakingAmount } = useGetTotalStakingAmount(propertyAddress)
   const { myStakingAmount } = useGetMyStakingAmount(propertyAddress)
@@ -337,7 +298,7 @@ const AuthorAddressDetail = (_: Props) => {
   return (
     <>
       <Header></Header>
-      <Banner />
+      <CoverImages accountAddress={authorAddress} />
       <Wrap>
         <ProfilePicture>
           {width > 0 && <AuthorAvatar accountAddress={author} size={width >= 1240 ? '140' : '90'} />}
