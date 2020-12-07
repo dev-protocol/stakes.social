@@ -25,7 +25,7 @@ class NextApp extends App<AppInitialProps & WithApolloProps<{}>> {
         'https://github.com/dev-protocol/asset.stakes.social/blob/main/public/wallet/coinbase-wallet.jpg?raw=true',
       darkMode: false
     })
-    const { INFURA_ID } = process.env
+    const INFURA_ID = '75ebe953349644b6998136d868f5cd97'
     const { FORTMATIC_KEY } = process.env
     const walletLinkProvider = walletLink.makeWeb3Provider(WEB3_PROVIDER_ENDPOINT, 1)
     const web3ForInjected = detectEthereumProvider()
