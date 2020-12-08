@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { Footer } from 'src/components/organisms/Footer'
 import { EarlyAccess } from 'src/components/atoms/EarlyAccess'
 import { Headline } from 'src/components/atoms/Headline'
@@ -14,7 +14,6 @@ import {
 import { Button, Divider, Form, Input, Result, Skeleton, Upload } from 'antd'
 import { whenDefined } from 'src/fixtures/utility'
 import { UploadChangeParam, UploadFile } from 'antd/lib/upload/interface'
-import { useEffect } from 'react'
 import { Image } from 'src/fixtures/dev-for-apps/utility'
 import SkeletonInput from 'antd/lib/skeleton/Input'
 import { useRouter } from 'next/router'
@@ -37,6 +36,7 @@ const apiDataToUploadFile = ({ hash: uid, url, name, size, mime: type }: Image):
 })
 
 const ProfileUpdateForm = ({ accountAddress }: { accountAddress: string }) => {
+  const [form] = Form.useForm()
   const { data, found } = useGetAccount(accountAddress)
   const { postAccountHandler: createAccount, isLoading } = useCreateAccount(accountAddress)
   const { putAccountHandler: updateAccount } = useUpdateAccount(Number(data?.id), accountAddress)
@@ -48,9 +48,19 @@ const ProfileUpdateForm = ({ accountAddress }: { accountAddress: string }) => {
     [createAccount, updateAccount, data]
   )
 
+  useEffect(() => {
+    form.setFieldsValue({
+      displayName: data?.name,
+      biography: data?.biography,
+      website: data?.links?.website,
+      github: data?.links?.github
+    })
+  }, [data, form])
+
   return (
     <Form
       layout="vertical"
+      form={form}
       onFinish={({
         displayName,
         biography,
@@ -64,20 +74,16 @@ const ProfileUpdateForm = ({ accountAddress }: { accountAddress: string }) => {
       }) => handleSubmit(displayName, biography, website, github)}
     >
       <Form.Item label="Display Name" name="displayName">
-        {found ? <Input placeholder="Enter the new display name" defaultValue={data?.name} /> : <SkeletonInput />}
+        <Input placeholder="Enter the new display name" />
       </Form.Item>
       <Form.Item label="Biography" name="biography">
-        {found ? (
-          <Input.TextArea placeholder="Enter the biography" defaultValue={data?.biography} />
-        ) : (
-          <SkeletonInput />
-        )}
+        {found ? <Input.TextArea placeholder="Enter the biography" /> : <SkeletonInput />}
       </Form.Item>
       <Form.Item label="Website" name="website">
-        {found ? <Input placeholder="your website url" defaultValue={data?.links?.website} /> : <SkeletonInput />}
+        {found ? <Input placeholder="your website url" /> : <SkeletonInput />}
       </Form.Item>
       <Form.Item label="GitHub" name="github">
-        {found ? <Input placeholder="your github account url" defaultValue={data?.links?.github} /> : <SkeletonInput />}
+        {found ? <Input placeholder="your github account url" /> : <SkeletonInput />}
       </Form.Item>
       <Button type="primary" htmlType="submit" loading={isLoading} disabled={isLoading}>
         Save
