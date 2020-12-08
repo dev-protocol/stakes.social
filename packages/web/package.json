@@ -58,7 +58,7 @@
     "walletlink": "2.0.2",
     "web3": "1.2.11",
     "web3-core": "1.2.11",
-    "web3modal": "dev-protocol/web3modal#be3c2a9b887e73f10212e882111950940d53d2ba"
+    "web3modal": "dev-protocol/web3modal#96e21eaed09f8efc8c04f94c8738422a437cb52b"
   },
   "devDependencies": {
     "@babel/core": "7.12.9",
