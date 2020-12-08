@@ -63,7 +63,7 @@
   "devDependencies": {
     "@babel/core": "7.12.9",
     "@testing-library/react": "11.2.2",
-    "@testing-library/react-hooks": "3.6.0",
+    "@testing-library/react-hooks": "3.7.0",
     "@types/body-parser": "1.19.0",
     "@types/faker": "5.1.5",
     "@types/ramda": "0.27.32",
