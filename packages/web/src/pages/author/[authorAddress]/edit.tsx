@@ -1,6 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import { Footer } from 'src/components/organisms/Footer'
-import { EarlyAccess } from 'src/components/atoms/EarlyAccess'
 import { Headline } from 'src/components/atoms/Headline'
 import { Header } from 'src/components/organisms/Header'
 import { Container } from 'src/components/atoms/Container'
@@ -152,7 +151,6 @@ const AuthorEdit = (_: Props) => {
     <FullpageWrap>
       <main>
         <Header />
-        <EarlyAccess />
         <Headline height={300}>
           <h1>Profile settings</h1>
         </Headline>
