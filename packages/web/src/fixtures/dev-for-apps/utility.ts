@@ -195,6 +195,17 @@ export const postUploadFile = (
   }).then(res => res.json())
 }
 
+export const deleteUploadFile = (signMessage: string, signature: string, address: string, id: number) => {
+  const formData = new FormData()
+  formData.append('signMessage', signMessage)
+  formData.append('signature', signature)
+  formData.append('address', address)
+  return fetch(`${StrapiBaseUrl}/upload/files/${id}`, {
+    method: 'DELETE',
+    body: formData
+  }).then(res => res.json())
+}
+
 export const getProperty = (propertyAddress: string): Promise<Array<Property>> =>
   fetch(`${StrapiBaseUrl}/properties?address=${propertyAddress}`)
     .then(res => res.json())

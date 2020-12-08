@@ -8,7 +8,8 @@ import {
   useGetAccount,
   useUpdateAccount,
   useUploadAccountAvatar,
-  useUploadAccountCoverImages
+  useUploadAccountCoverImages,
+  useDeleteFile
 } from 'src/fixtures/dev-for-apps/hooks'
 import { Button, Divider, Form, Input, Result, Skeleton, Upload } from 'antd'
 import { whenDefined } from 'src/fixtures/utility'
@@ -95,6 +96,7 @@ const AvatarUpdateForm = ({ accountAddress }: { accountAddress: string }) => {
   const { data } = useGetAccount(accountAddress)
   const [fileList, setFileList] = useState<UploadFile[] | undefined>()
   const { upload } = useUploadAccountAvatar(accountAddress)
+  const { deleteFileHandler: deleteFile } = useDeleteFile(accountAddress)
   useEffect(() => {
     setFileList(whenDefined(data?.portrait, x => [apiDataToUploadFile(x)]))
   }, [setFileList, data])
@@ -106,8 +108,20 @@ const AvatarUpdateForm = ({ accountAddress }: { accountAddress: string }) => {
     }
   }
 
+  const handleRemove = (file: UploadFile) => {
+    whenDefined(data?.portrait.id, x => deleteFile(x, file.name))
+    setFileList([])
+  }
+
   return (
-    <Upload name="portrait" multiple={false} listType="picture-card" fileList={fileList} onChange={handleChange}>
+    <Upload
+      name="portrait"
+      multiple={false}
+      listType="picture-card"
+      fileList={fileList}
+      onChange={handleChange}
+      onRemove={handleRemove}
+    >
       <div>
         <p>{data && data.portrait ? 'Change' : 'Upload'}</p>
       </div>
@@ -119,6 +133,7 @@ const CoverImagesUpdateForm = ({ accountAddress }: { accountAddress: string }) =
   const { data } = useGetAccount(accountAddress)
   const [fileList, setFileList] = useState<UploadFile[] | undefined>()
   const { upload } = useUploadAccountCoverImages(accountAddress)
+  const { deleteFileHandler: deleteFile } = useDeleteFile(accountAddress)
   useEffect(() => {
     setFileList(whenDefined(data?.cover_images, x => x.map(y => apiDataToUploadFile(y))))
   }, [setFileList, data])
@@ -130,8 +145,26 @@ const CoverImagesUpdateForm = ({ accountAddress }: { accountAddress: string }) =
     }
   }
 
+  const handleRemove = async (file: UploadFile) => {
+    const target = data?.cover_images.filter(x => x.hash === file.uid)
+    if (target.length !== 1) {
+      return
+    }
+    const deletedFileList = data?.cover_images.filter(x => x.hash !== file.uid)
+    await deleteFile(target[0].id, file.name).then(res => {
+      whenDefined(res?.id, _ => setFileList(deletedFileList))
+    })
+  }
+
   return (
-    <Upload name="portrait" multiple={false} listType="picture-card" fileList={fileList} onChange={handleChange}>
+    <Upload
+      name="portrait"
+      multiple={false}
+      listType="picture-card"
+      fileList={fileList}
+      onChange={handleChange}
+      onRemove={handleRemove}
+    >
       <div>
         <p>Upload</p>
       </div>
