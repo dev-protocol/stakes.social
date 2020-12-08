@@ -146,12 +146,12 @@ const CoverImagesUpdateForm = ({ accountAddress }: { accountAddress: string }) =
   }
 
   const handleRemove = async (file: UploadFile) => {
-    const target = data?.cover_images.filter(x => x.hash === file.uid)
-    if (target.length !== 1) {
+    const target = data?.cover_images.find(x => x.hash === file.uid)
+    if (!target || !fileList) {
       return
     }
-    const deletedFileList = data?.cover_images.filter(x => x.hash !== file.uid)
-    await deleteFile(target[0].id, file.name).then(res => {
+    const deletedFileList = fileList.filter(x => x.uid !== target.hash)
+    await deleteFile(target.id, file.name).then(res => {
       whenDefined(res?.id, _ => setFileList(deletedFileList))
     })
   }
