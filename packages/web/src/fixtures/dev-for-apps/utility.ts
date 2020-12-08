@@ -197,13 +197,12 @@ export const postUploadFile = (
 }
 
 export const deleteUploadFile = (signMessage: string, signature: string, address: string, id: number) => {
-  const formData = new FormData()
-  formData.append('signMessage', signMessage)
-  formData.append('signature', signature)
-  formData.append('address', address)
+  const authToken = `${address};${signature};${signMessage}`
   return fetch(`${StrapiBaseUrl}/upload/files/${id}`, {
     method: 'DELETE',
-    body: formData
+    headers: {
+      'X-Dev-Auth': authToken
+    }
   }).then(res => res.json())
 }
 
