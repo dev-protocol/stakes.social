@@ -61,7 +61,7 @@
     "web3modal": "dev-protocol/web3modal#be3c2a9b887e73f10212e882111950940d53d2ba"
   },
   "devDependencies": {
-    "@babel/core": "7.12.9",
+    "@babel/core": "7.12.10",
     "@testing-library/react": "11.2.2",
     "@testing-library/react-hooks": "3.7.0",
     "@types/body-parser": "1.19.0",
