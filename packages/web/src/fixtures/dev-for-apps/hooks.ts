@@ -15,11 +15,11 @@ import {
 } from './utility'
 import { signWithCache } from 'src/fixtures/wallet/utility'
 import { useProvider } from '../wallet/hooks'
-import { useUploadFile } from './functions/useUploadFile'
+import { useUploadFile, useDeleteFile } from './functions/useUploadFile'
 import { useGetAccount } from './functions/useGetAccount'
 import { useGetProperty } from './functions/useGetProperty'
 
-export { useUploadFile, useGetAccount, useGetProperty }
+export { useUploadFile, useDeleteFile, useGetAccount, useGetProperty }
 
 export const useGetPropertyTags = (propertyAddress: string) => {
   const shouldFetch = propertyAddress !== ''
