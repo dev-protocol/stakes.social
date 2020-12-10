@@ -12,6 +12,8 @@ const AvatarImage = styled.div`
   img {
     border: 1px solid lightgrey;
     border-radius: 90px;
+    object-fit: cover;
+    object-position: center;
   }
 `
 
