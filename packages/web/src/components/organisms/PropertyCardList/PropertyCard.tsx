@@ -100,7 +100,7 @@ const StakeButton = styled.button<{ isPropertyStaked?: Boolean }>`
   background-color: #2f80ed;
   color: white;
 
-  cursor: pointer;
+  cursor: ${props => (props.disabled ? 'auto' : 'pointer')};
   :hover {
     transition: ease-in-out 0.2s;
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
