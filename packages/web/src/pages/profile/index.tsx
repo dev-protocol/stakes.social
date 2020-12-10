@@ -20,8 +20,9 @@ const PortfolioHeader = styled.div`
   display: grid;
   grid-gap: 1rem;
   grid-template-areas:
-    'heading creator'
-    'switcher buy';
+    'heading heading'
+    'switcher creator'
+    'buy edit';
   grid-template-rows: auto;
   justify-content: stretch;
   grid-template-columns: 1fr auto;
@@ -29,8 +30,8 @@ const PortfolioHeader = styled.div`
   padding-top: 10px;
 
   @media (min-width: 768px) {
-    grid-template-areas: 'heading switcher buy creator';
-    grid-template-columns: 1fr auto auto auto;
+    grid-template-areas: 'heading switcher buy creator edit';
+    grid-template-columns: 1fr auto auto auto auto;
     grid-gap: 2rem;
   }
 `
@@ -58,7 +59,7 @@ const SwitcherContainer = styled.div`
   display: flex;
 `
 
-const CreatorButton = styled.a`
+const Button = styled.a`
   display: flex;
   justify-content: center;
   grid-area: creator;
@@ -72,6 +73,13 @@ const CreatorButton = styled.a`
   :hover {
     color: white;
   }
+`
+const CreatorButton = styled(Button)`
+  grid-area: creator;
+`
+
+const EditButton = styled(Button)`
+  grid-area: edit;
 `
 
 const Portfolio = () => {
@@ -89,9 +97,14 @@ const Portfolio = () => {
           </SwitcherContainer>
           <Buy />
           {data?.id && (
-            <Link href={`/author/${accountAddress}`}>
-              <CreatorButton>Creator page</CreatorButton>
-            </Link>
+            <>
+              <Link href={`/author/${accountAddress}`}>
+                <CreatorButton>View profile</CreatorButton>
+              </Link>
+              <Link href={`/author/${accountAddress}/edit`}>
+                <EditButton>Edit profile</EditButton>
+              </Link>
+            </>
           )}
         </PortfolioHeader>
         <Statistics accountAddress={accountAddress} />
