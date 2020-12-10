@@ -11,12 +11,16 @@ import { Divider } from 'antd'
 import { YourStakes } from 'src/components/_pages/portfolio/YourStakes'
 import { useProvider } from 'src/fixtures/wallet/hooks'
 import { YourPools } from 'src/components/_pages/portfolio/YourPools'
+import { blueGradient } from 'src/styles/gradient'
+import { boxShahowWithOnHover } from 'src/styles/boxShahow'
+import Link from 'next/link'
+import { useGetAccount } from 'src/fixtures/dev-for-apps/hooks'
 
 const PortfolioHeader = styled.div`
   display: grid;
   grid-gap: 1rem;
   grid-template-areas:
-    'heading heading'
+    'heading creator'
     'switcher buy';
   grid-template-rows: auto;
   justify-content: stretch;
@@ -25,8 +29,8 @@ const PortfolioHeader = styled.div`
   padding-top: 10px;
 
   @media (min-width: 768px) {
-    grid-template-areas: 'heading switcher buy';
-    grid-template-columns: 1fr auto auto;
+    grid-template-areas: 'heading switcher buy creator';
+    grid-template-columns: 1fr auto auto auto;
     grid-gap: 2rem;
   }
 `
@@ -54,9 +58,26 @@ const SwitcherContainer = styled.div`
   display: flex;
 `
 
+const CreatorButton = styled.a`
+  display: flex;
+  justify-content: center;
+  grid-area: creator;
+  padding: 6px 24px;
+  border-radius: 9px;
+  border: none;
+  cursor: pointer;
+  ${blueGradient()}
+  ${boxShahowWithOnHover()}
+  &,
+  :hover {
+    color: white;
+  }
+`
+
 const Portfolio = () => {
   const { accountAddress } = useProvider()
 
+  const { data } = useGetAccount(accountAddress)
   return (
     <div style={{ display: 'flex', minHeight: '100vh', flexDirection: 'column' }}>
       <Header />
@@ -67,6 +88,11 @@ const Portfolio = () => {
             <Switcher />
           </SwitcherContainer>
           <Buy />
+          {data?.id && (
+            <Link href={`/author/${accountAddress}`}>
+              <CreatorButton>Creator page</CreatorButton>
+            </Link>
+          )}
         </PortfolioHeader>
         <Statistics accountAddress={accountAddress} />
         <Divider type="horizontal" />
