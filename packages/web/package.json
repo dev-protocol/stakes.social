@@ -69,7 +69,7 @@
     "@types/ramda": "0.27.32",
     "@types/react": "16.14.0",
     "@types/react-dom": "16.9.9",
-    "@types/styled-components": "5.1.4",
+    "@types/styled-components": "5.1.5",
     "@types/ua-parser-js": "0.7.35",
     "@zeit/next-css": "1.0.1",
     "@zeit/next-less": "1.0.1",
