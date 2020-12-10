@@ -7,6 +7,7 @@ import {
   useGetMyStakingRewardAmount,
   usePropertyAuthor
 } from 'src/fixtures/dev-kit/hooks'
+import { useProvider } from 'src/fixtures/wallet/hooks'
 import styled from 'styled-components'
 import { truncate } from 'src/fixtures/utility/string'
 import { useGetPropertytInformation } from 'src/fixtures/devprtcl/hooks'
@@ -104,6 +105,7 @@ const StakeButton = styled.button<{ isPropertyStaked?: Boolean }>`
     transition: ease-in-out 0.2s;
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
   }
+  ${props => props.disabled && 'opacity: 0.3'}
 `
 
 const WithdrawButton = styled.button<{ isPropertyStaked?: Boolean }>`
@@ -172,6 +174,7 @@ const PlaceholderCoverImageOrGradient = styled.div`
 `
 
 export const PropertyCard = ({ propertyAddress, assets }: Props) => {
+  const { accountAddress } = useProvider()
   const [modalStates, setModalStates] = useState<ModalStates>({ visible: false })
   const { totalStakingAmount, currency: totalStakingAmountCurrency } = useGetTotalStakingAmount(propertyAddress)
   const { totalRewardsAmount, currency: totalRewardsAmountCurrency } = useGetTotalRewardsAmount(propertyAddress)
@@ -254,6 +257,7 @@ export const PropertyCard = ({ propertyAddress, assets }: Props) => {
       </Link>
       <ButtonContainer>
         <StakeButton
+          disabled={accountAddress === authorAddress}
           onClick={() => showModal('stake')}
           isPropertyStaked={typeof myStakingAmount !== 'undefined' && myStakingAmount > zeroBigNumber}
         >

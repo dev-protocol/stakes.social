@@ -8,17 +8,17 @@ import { utils } from '@devprtcl/dev-kit-js'
 import BigNumber from 'bignumber.js'
 
 const { execute } = utils
-const client: Map<string, Contract> = new Map()
+const client: Map<string, WeakMap<Web3, Contract>> = new Map()
 
 export const getContract = (web3: Web3, contractAddress = GEYSER_ETHDEV_V2_ADDRESS): Contract => {
-  const clientCacheKey = `${contractAddress}_${web3?.currentProvider}`
-  const stored = client.get(clientCacheKey)
-  if (stored) {
-    return stored
+  const cache = client.get(contractAddress)
+  const fromCache = cache?.get(web3)
+  if (fromCache) {
+    return fromCache
   }
 
   const contract = (createContract(abi, contractAddress, web3) as unknown) as Contract
-  client.set(clientCacheKey, contract)
+  client.set(contractAddress, cache ? cache.set(web3, contract) : new WeakMap([[web3, contract]]))
 
   return contract
 }

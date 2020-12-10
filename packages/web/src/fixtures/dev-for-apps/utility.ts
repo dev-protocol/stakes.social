@@ -36,6 +36,7 @@ export type ImageFormat = {
 }
 
 export type Image = ImageFormat & {
+  id: number
   formats: {
     thumbnail: ImageFormat
     small: ImageFormat
@@ -192,6 +193,16 @@ export const postUploadFile = (
   return fetch(`${StrapiBaseUrl}/upload`, {
     method: 'POST',
     body: formData
+  }).then(res => res.json())
+}
+
+export const deleteUploadFile = (signMessage: string, signature: string, address: string, id: number) => {
+  const authToken = `${address};${signature};${signMessage}`
+  return fetch(`${StrapiBaseUrl}/upload/files/${id}`, {
+    method: 'DELETE',
+    headers: {
+      'X-Dev-Auth': authToken
+    }
   }).then(res => res.json())
 }
 
