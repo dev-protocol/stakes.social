@@ -10,12 +10,15 @@ interface Props {
 const perPage = 5
 
 export const YourPools = ({ accountAddress }: Props) => {
-  const [page, setPage] = useState(0)
+  const [page, setPage] = useState(1)
+  const { data: totalProperties } = useListOwnedPropertyMetaQuery({
+    variables: { account_address: accountAddress || '' }
+  })
   const { data, loading } = useListOwnedPropertyMetaQuery({
     variables: {
       account_address: accountAddress || '',
       limit: perPage,
-      offset: perPage * page
+      offset: (page - 1) * perPage
     }
   })
   const onPagination = useCallback(
@@ -29,6 +32,7 @@ export const YourPools = ({ accountAddress }: Props) => {
   return (
     <AssetList
       isPool={true}
+      total={totalProperties?.property_meta.length || 0}
       onPagination={onPagination}
       loading={loading}
       properties={properties}

@@ -196,6 +196,7 @@ const PropertyAddressDetail = (_: Props) => {
   // FYI: https://github.com/facebook/react/pull/19062
   const includedAssetList = useMemo(() => data?.property_authentication.map(e => e.authentication_id), [data])
   const { accountAddress: loggedInWallet } = useProvider()
+  const { author: authorAddress } = usePropertyAuthor(propertyAddress)
 
   return data && !isExistProperty ? (
     // property is not found
@@ -211,7 +212,9 @@ const PropertyAddressDetail = (_: Props) => {
           <RoundedCoverImageOrGradient src={dataProperty?.cover_image?.url} ratio={52.5} />
           {isExistProperty && <Possession propertyAddress={propertyAddress} />}
           <Transact>
-            {isExistProperty && <Stake title="Stake" propertyAddress={propertyAddress} />}
+            {isExistProperty && (loggedInWallet ? loggedInWallet !== authorAddress : true) && (
+              <Stake title="Stake" propertyAddress={propertyAddress} />
+            )}
             {isExistProperty && <Withdraw title="Withdraw" propertyAddress={propertyAddress} />}
           </Transact>
           <AboutSection>

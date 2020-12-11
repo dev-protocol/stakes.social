@@ -10,12 +10,12 @@ interface Props {
 const perPage = 5
 
 export const YourStakes = ({ accountAddress }: Props) => {
-  const [page, setPage] = useState(0)
+  const [page, setPage] = useState(1)
   const { data, loading } = useListAccountLockupQuery({
     variables: {
       account_address: accountAddress || '',
       limit: perPage,
-      offset: perPage * page
+      offset: (page - 1) * perPage
     }
   })
   const onPagination = useCallback(
@@ -29,6 +29,7 @@ export const YourStakes = ({ accountAddress }: Props) => {
   return (
     <AssetList
       isPool={false}
+      total={data?.account_lockup_aggregate?.aggregate?.count || 0}
       onPagination={onPagination}
       loading={loading}
       properties={properties}

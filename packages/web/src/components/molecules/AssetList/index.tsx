@@ -15,6 +15,7 @@ interface Props {
   enableWithdrawStakersReward?: boolean
   enableWithdrawHoldersReward?: boolean
   isPool?: boolean
+  total: number
 }
 
 interface ModalStates {
@@ -47,9 +48,10 @@ export const AssetList = ({
   enableWithdrawStakersReward,
   enableWithdrawHoldersReward,
   loading = false,
-  isPool
+  isPool,
+  total
 }: Props) => {
-  const [page, setPage] = useState<number>(0)
+  const [page, setPage] = useState<number>(1)
   const [modalStates, setModalStates] = useState<ModalStates>({ visible: false })
   const handlePagination = useCallback(
     (page: number) => {
@@ -93,7 +95,14 @@ export const AssetList = ({
       <ResponsiveModal visible={modalStates.visible} title={modalStates.title} onCancel={closeModal} footer={null}>
         {modalStates.contents}
       </ResponsiveModal>
-      <StyledPagination current={page} size="default" responsive={true} onChange={handlePagination} />
+      <StyledPagination
+        current={page}
+        size="default"
+        responsive={true}
+        onChange={handlePagination}
+        total={total}
+        defaultPageSize={5}
+      />
     </Wrap>
   )
 }
