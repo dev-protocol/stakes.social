@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { SWRCachePath } from './cache-path'
 import useSWR from 'swr'
 import { message } from 'antd'
-import { UnwrapFunc } from '../utility'
+import { UnwrapFunc, whenDefined } from '../utility'
 import {
   getPropertyTags,
   postPropertyTags,
@@ -11,7 +11,8 @@ import {
   postProperty,
   putProperty,
   ProfileLinks,
-  PropertyLinks
+  PropertyLinks,
+  getPropertySetting
 } from './utility'
 import { signWithCache } from 'src/fixtures/wallet/utility'
 import { useProvider } from '../wallet/hooks'
@@ -281,4 +282,16 @@ export const useUploadPropertyCoverImages = (propertyAddress: string) => {
     })
   }
   return { upload, isLoading, error }
+}
+
+export const useGetPropertySetting = (propertyAddress: string, accountAddress: string) => {
+  const shouldFetch = propertyAddress !== '' && accountAddress !== ''
+  const { data, error, mutate } = useSWR<UnwrapFunc<typeof getPropertySetting>, Error>(
+    shouldFetch ? SWRCachePath.getPropertySetting(propertyAddress, accountAddress) : null,
+    () => getPropertySetting(propertyAddress, accountAddress),
+    { onError: err => message.error(err.message) }
+  )
+  const found = data instanceof Array
+
+  return { data: whenDefined(data, x => x[0]), error, mutate, found }
 }

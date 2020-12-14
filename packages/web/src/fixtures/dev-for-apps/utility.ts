@@ -62,6 +62,13 @@ export interface Property {
   links?: PropertyLinks
 }
 
+export interface PropertySetting {
+  id: string
+  property_address: string
+  account_address: string
+  private_staking?: boolean
+}
+
 export interface UploadFile {
   id: number
   formats: any
@@ -257,3 +264,8 @@ export const putProperty = (
       signMessage
     })
   }).then(res => res.json())
+
+export const getPropertySetting = (propertyAddress: string, accountAddress: string): Promise<Array<PropertySetting>> =>
+  fetch(`${StrapiBaseUrl}/property-settings?property_address=${propertyAddress}&account_address=${accountAddress}`)
+    .then(res => res.json())
+    .catch(always([]))
