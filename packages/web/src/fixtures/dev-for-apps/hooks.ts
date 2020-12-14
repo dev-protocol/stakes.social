@@ -325,7 +325,7 @@ export const useUpdatePropertySetting = (propertyAddress: string, walletAddress:
   const { web3 } = useProvider()
   const [isLoading, setIsLoading] = useState<boolean>(false)
 
-  const postPropertySettingHandler = async (isPrivateStaking: boolean) => {
+  const putPropertySettingHandler = async (isPrivateStaking: boolean) => {
     const id = Number(propertySetting?.id)
     const signMessage = `update property setting: ${propertyAddress}, ${walletAddress}}`
     const { signature, message: signedMessage } = await signWithCache(web3, signMessage)
@@ -359,5 +359,5 @@ export const useUpdatePropertySetting = (propertyAddress: string, walletAddress:
     return data
   }
 
-  return { postPropertySettingHandler, isLoading }
+  return { putPropertySettingHandler, isLoading }
 }
