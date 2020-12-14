@@ -9,6 +9,7 @@ interface Props {
 
 const BuyButton = styled.a`
   display: flex;
+  justify-content: center;
   padding: 6px 24px;
   border-radius: 9px;
   border: none;
