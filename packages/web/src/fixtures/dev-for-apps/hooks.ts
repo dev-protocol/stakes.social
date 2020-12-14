@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { SWRCachePath } from './cache-path'
 import useSWR from 'swr'
 import { message } from 'antd'
-import { UnwrapFunc, whenDefined } from '../utility'
+import { UnwrapFunc } from '../utility'
 import {
   getPropertyTags,
   postPropertyTags,
@@ -12,15 +12,17 @@ import {
   putProperty,
   ProfileLinks,
   PropertyLinks,
-  getPropertySetting
+  postPropertySetting,
+  putPropertySetting
 } from './utility'
 import { signWithCache } from 'src/fixtures/wallet/utility'
 import { useProvider } from '../wallet/hooks'
 import { useUploadFile, useDeleteFile } from './functions/useUploadFile'
 import { useGetAccount } from './functions/useGetAccount'
 import { useGetProperty } from './functions/useGetProperty'
+import { useGetPropertySetting } from './functions/useGetPropertySetting'
 
-export { useUploadFile, useDeleteFile, useGetAccount, useGetProperty }
+export { useUploadFile, useDeleteFile, useGetAccount, useGetProperty, useGetPropertySetting }
 
 export const useGetPropertyTags = (propertyAddress: string) => {
   const shouldFetch = propertyAddress !== ''
@@ -284,14 +286,78 @@ export const useUploadPropertyCoverImages = (propertyAddress: string) => {
   return { upload, isLoading, error }
 }
 
-export const useGetPropertySetting = (propertyAddress: string, accountAddress: string) => {
-  const shouldFetch = propertyAddress !== '' && accountAddress !== ''
-  const { data, error, mutate } = useSWR<UnwrapFunc<typeof getPropertySetting>, Error>(
-    shouldFetch ? SWRCachePath.getPropertySetting(propertyAddress, accountAddress) : null,
-    () => getPropertySetting(propertyAddress, accountAddress),
-    { onError: err => message.error(err.message) }
-  )
-  const found = data instanceof Array
+export const useCreatePropertySetting = (propertyAddress: string, walletAddress: string) => {
+  const key = 'useCreatePropertySetting'
+  const { web3 } = useProvider()
+  const [isLoading, setIsLoading] = useState<boolean>(false)
 
-  return { data: whenDefined(data, x => x[0]), error, mutate, found }
+  const postPropertySettingHandler = async (isPrivateStaking: boolean) => {
+    const signMessage = `create property setting: ${propertyAddress}, ${walletAddress}}`
+    const { signature, message: signedMessage } = await signWithCache(web3, signMessage)
+    if (!signature || !signedMessage) {
+      return
+    }
+
+    setIsLoading(true)
+    message.loading({ content: 'create property setting...', duration: 0, key })
+
+    const data = await postPropertySetting(signedMessage, signature, propertyAddress, walletAddress, isPrivateStaking)
+      .then(result => {
+        message.success({ content: 'success create property setting', key })
+        return result
+      })
+      .catch(err => {
+        message.error({ content: err.message, key })
+        return Promise.reject({})
+      })
+
+    setIsLoading(false)
+
+    return data
+  }
+
+  return { postPropertySettingHandler, isLoading }
+}
+
+export const useUpdatePropertySetting = (propertyAddress: string, walletAddress: string) => {
+  const key = 'useUpdatePropertySetting'
+  const { data: propertySetting, mutate } = useGetPropertySetting(propertyAddress, walletAddress)
+  const { web3 } = useProvider()
+  const [isLoading, setIsLoading] = useState<boolean>(false)
+
+  const postPropertySettingHandler = async (isPrivateStaking: boolean) => {
+    const id = Number(propertySetting?.id)
+    const signMessage = `update property setting: ${propertyAddress}, ${walletAddress}}`
+    const { signature, message: signedMessage } = await signWithCache(web3, signMessage)
+    if (!signature || !signedMessage) {
+      return
+    }
+
+    setIsLoading(true)
+    message.loading({ content: 'update property setting...', duration: 0, key })
+
+    const data = await putPropertySetting(
+      signedMessage,
+      signature,
+      id,
+      propertyAddress,
+      walletAddress,
+      isPrivateStaking
+    )
+      .then(result => {
+        message.success({ content: 'success update property setting', key })
+        return result
+      })
+      .catch(err => {
+        message.error({ content: err.message, key })
+        return Promise.reject({})
+      })
+
+    setIsLoading(false)
+    mutate()
+
+    return data
+  }
+
+  return { postPropertySettingHandler, isLoading }
 }

@@ -18,7 +18,6 @@ import { useGetAccount } from './functions/useGetAccount'
 import { useGetProperty } from './functions/useGetProperty'
 
 jest.mock('swr')
-jest.mock('src/fixtures/utility')
 jest.mock('src/fixtures/dev-for-apps/utility.ts')
 jest.mock('src/fixtures/wallet/utility.ts')
 jest.mock('src/fixtures/wallet/hooks.ts')

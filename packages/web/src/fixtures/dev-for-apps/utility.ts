@@ -269,3 +269,48 @@ export const getPropertySetting = (propertyAddress: string, accountAddress: stri
   fetch(`${StrapiBaseUrl}/property-settings?property_address=${propertyAddress}&account_address=${accountAddress}`)
     .then(res => res.json())
     .catch(always([]))
+
+export const postPropertySetting = (
+  signMessage: string,
+  signature: string,
+  propertyAddress: string,
+  accountAddress: string,
+  isPrivateStaking: boolean
+): Promise<PropertySetting> =>
+  fetch(`${StrapiBaseUrl}/property-settings`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json; charset=utf-8'
+    },
+    body: JSON.stringify({
+      name,
+      property_address: propertyAddress,
+      account_address: accountAddress,
+      private_staking: isPrivateStaking,
+      signature,
+      signMessage
+    })
+  }).then(res => res.json())
+
+export const putPropertySetting = (
+  signMessage: string,
+  signature: string,
+  id: number,
+  propertyAddress: string,
+  accountAddress: string,
+  isPrivateStaking: boolean
+): Promise<PropertySetting> =>
+  fetch(`${StrapiBaseUrl}/property-settings/${id}`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json; charset=utf-8'
+    },
+    body: JSON.stringify({
+      name,
+      property_address: propertyAddress,
+      account_address: accountAddress,
+      private_staking: isPrivateStaking,
+      signature,
+      signMessage
+    })
+  }).then(res => res.json())
