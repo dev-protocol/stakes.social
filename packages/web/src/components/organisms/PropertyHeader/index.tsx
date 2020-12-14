@@ -5,6 +5,10 @@ import BigNumber from 'bignumber.js'
 import { BuyDevButton } from 'src/components/molecules/BuyButton'
 import { useGetAuthorInformation } from 'src/fixtures/devprtcl/hooks'
 import { WithGradient } from 'src/components/atoms/WithGradient'
+import ReactMarkdown from 'react-markdown'
+import { useClipboard } from 'use-clipboard-copy'
+import { CopyOutlined, CheckCircleTwoTone } from '@ant-design/icons'
+import { useProvider } from 'src/fixtures/wallet/hooks'
 
 const ResponsivePropertyAddressFrame = styled.div`
   margin: 1rem auto;
@@ -75,23 +79,101 @@ const ButtonContainer = styled.div`
   }
 `
 
+const HeaderContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  @media (min-width: 768px) {
+    flex-direction: row;
+  }
+`
+
+const FlexRow = styled.div`
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  width: auto;
+  align-self: flex-start;
+  margin-left: 10px;
+  margin-top: 2px;
+
+  @media (min-width: 768px) {
+    align-self: auto;
+    margin-top: 8px;
+  }
+`
+
 interface Props {
   propertyAddress: string
   apy?: BigNumber
   creators?: BigNumber
 }
 
+export const CopyBadge = ({ propertyAddress }: { propertyAddress: string }) => {
+  const badge = `[![Stake to support us](https://badge.devprotocol.xyz/${propertyAddress})](https://stakes.social/${propertyAddress})`
+  const { copied, copy } = useClipboard({
+    copiedTimeout: 1000
+  })
+  const handleCopy = () => {
+    copy(badge)
+  }
+
+  const IconContainer = styled.div`
+    svg {
+      width: 16px;
+      height: auto;
+    }
+    @media (min-width: 768px) {
+      margin-left: 2px;
+    }
+  `
+
+  const CopyContainer = styled.div`
+    display: flex;
+
+    @media (min-width: 768px) {
+      justify-content: center;
+      align-items: center;
+      p {
+        height: 20px;
+        margin-left: 10px;
+        margin-bottom: 0;
+      }
+    }
+  `
+
+  return (
+    <CopyContainer>
+      <ReactMarkdown>{badge}</ReactMarkdown>
+      <FlexRow onClick={handleCopy}>
+        <IconContainer>
+          {!copied && <CopyOutlined />}
+          {copied && <CheckCircleTwoTone twoToneColor="#52c41a" />}
+        </IconContainer>
+        <span style={{ fontSize: '0.8em', marginLeft: '2px' }}>{!copied ? 'Copy' : 'Copied badge!'}</span>
+      </FlexRow>
+    </CopyContainer>
+  )
+}
+
 export const PropertyHeader = ({ propertyAddress, apy, creators }: Props) => {
+  const { accountAddress } = useProvider()
   const { data } = useGetPropertyAuthenticationQuery({
     variables: {
       propertyAddress
     }
   })
   const { data: dataAuthor } = useGetAuthorInformation(data?.property_authentication?.[0]?.property_meta?.author)
+  const isSelf = dataAuthor?.address == accountAddress
 
   return (
     <ResponsivePropertyAddressFrame>
-      <Header>{`${data?.property_authentication?.[0]?.authentication_id}'s Pool` || `${propertyAddress} Pool`}</Header>
+      <HeaderContainer>
+        <Header>
+          {`${data?.property_authentication?.[0]?.authentication_id}'s Pool` || `${propertyAddress} Pool`}
+        </Header>
+        {isSelf && <CopyBadge propertyAddress={propertyAddress} />}
+      </HeaderContainer>
+
       <SubHeader>
         <ApyContainer>
           <ResponsiveSubheaderSection>
