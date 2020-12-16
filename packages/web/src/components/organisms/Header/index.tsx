@@ -106,7 +106,7 @@ export const Header = (_: Props = {}) => {
             <AccountBtn>
               <React.Fragment>
                 <span style={{ fontSize: '0.8em' }} className="hideOnSmall">
-                  Profile
+                  Portfolio
                 </span>
               </React.Fragment>
             </AccountBtn>

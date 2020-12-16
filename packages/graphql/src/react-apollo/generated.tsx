@@ -5868,6 +5868,11 @@ export type ListAccountLockupQueryVariables = Exact<{
 
 export type ListAccountLockupQuery = { __typename?: 'query_root' } & {
   account_lockup: Array<{ __typename?: 'account_lockup' } & Pick<Account_Lockup, 'property_address'>>
+  account_lockup_aggregate: { __typename?: 'account_lockup_aggregate' } & {
+    aggregate?: Maybe<
+      { __typename?: 'account_lockup_aggregate_fields' } & Pick<Account_Lockup_Aggregate_Fields, 'count'>
+    >
+  }
 }
 
 export type ListOwnedPropertyMetaQueryVariables = Exact<{
@@ -5878,6 +5883,9 @@ export type ListOwnedPropertyMetaQueryVariables = Exact<{
 
 export type ListOwnedPropertyMetaQuery = { __typename?: 'query_root' } & {
   property_meta: Array<{ __typename?: 'property_meta' } & Pick<Property_Meta, 'property' | 'name'>>
+  property_meta_aggregate: { __typename?: 'property_meta_aggregate' } & {
+    aggregate?: Maybe<{ __typename?: 'property_meta_aggregate_fields' } & Pick<Property_Meta_Aggregate_Fields, 'count'>>
+  }
 }
 
 export type ListPropertyQueryVariables = Exact<{
@@ -6237,6 +6245,11 @@ export const ListAccountLockupDocument = gql`
     ) {
       property_address
     }
+    account_lockup_aggregate(where: { account_address: { _eq: $account_address } }) {
+      aggregate {
+        count
+      }
+    }
   }
 `
 
@@ -6287,6 +6300,11 @@ export const ListOwnedPropertyMetaDocument = gql`
     ) {
       property
       name
+    }
+    property_meta_aggregate(where: { author: { _eq: $account_address } }) {
+      aggregate {
+        count
+      }
     }
   }
 `

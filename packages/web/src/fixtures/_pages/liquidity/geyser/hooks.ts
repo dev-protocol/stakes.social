@@ -19,6 +19,7 @@ import {
 } from './client'
 import { useCallback, useState } from 'react'
 import { message } from 'antd'
+import Web3 from 'web3'
 import {
   getUTC,
   toBigNumber,
@@ -31,8 +32,8 @@ import {
 import { INITIAL_SHARES_PER_TOKEN, ONE_MONTH_SECONDS, SYSTEM_SETTIMEOUT_MAXIMUM_DELAY_VALUE } from '../constants/number'
 import { getBlock } from 'src/fixtures/wallet/utility'
 import { useProvider } from 'src/fixtures/wallet/hooks'
+import { INFURA_ENDPOINT } from 'src/fixtures/wallet/constants'
 import { useTheGraph } from '../uniswap-pool/hooks'
-import Web3 from 'web3'
 
 const getAllTokensClaimed = (client: Web3) => () =>
   allTokensClaimed(client).then(allEvents => {
@@ -50,10 +51,12 @@ const getTokensLocked = (client: Web3) => () =>
   })
 
 export const useTotalRewards = () => {
-  const { nonConnectedWeb3 } = useProvider()
+  // TODO: use own node
+  // NOTE: use Infura now becuase calling getPastEvents is very slow or error occured
+  const web3 = new Web3(INFURA_ENDPOINT)
   const { data, error } = useSWR<BigNumber, Error>(
     SWRCachePath.allTokensLocked,
-    whenDefined(nonConnectedWeb3, x => getTokensLocked(x))
+    whenDefined(web3, x => getTokensLocked(x))
   )
   return {
     data,
@@ -120,10 +123,13 @@ export const useUnstake = () => {
 }
 
 export const useAllTokensClaimed = () => {
-  const { nonConnectedWeb3, accountAddress } = useProvider()
+  // TODO: use own node
+  // NOTE: use Infura now becuase calling getPastEvents is very slow or error occured
+  const web3 = new Web3(INFURA_ENDPOINT)
+  const { accountAddress } = useProvider()
   const { data, error } = useSWR<BigNumber, Error>(
     SWRCachePath.useAllTokensClaimed(accountAddress),
-    whenDefined(nonConnectedWeb3, x => getAllTokensClaimed(x))
+    whenDefined(web3, x => getAllTokensClaimed(x))
   )
   return {
     data,
@@ -259,11 +265,14 @@ export const useIsAlreadyFinished = ([state, stateSetter]: [boolean, Dispatch<Se
 }
 
 export const useRewardMultiplier = () => {
+  // TODO: use own node
+  // NOTE: use Infura now becuase calling getPastEvents is very slow or error occured
+  const web3 = new Web3(INFURA_ENDPOINT)
   const { nonConnectedWeb3, accountAddress } = useProvider()
   const { data: block, error: errorGetStaked, mutate } = useSWR<number | undefined, Error>(
     SWRCachePath.getStaked(accountAddress),
     () =>
-      whenDefinedAll([nonConnectedWeb3, accountAddress], ([client, address]) =>
+      whenDefinedAll([web3, accountAddress], ([client, address]) =>
         getStaked(client, address).then(allEvents => {
           return allEvents[0]?.blockNumber
         })
