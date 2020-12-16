@@ -5883,9 +5883,6 @@ export type ListOwnedPropertyMetaQueryVariables = Exact<{
 
 export type ListOwnedPropertyMetaQuery = { __typename?: 'query_root' } & {
   property_meta: Array<{ __typename?: 'property_meta' } & Pick<Property_Meta, 'property' | 'name'>>
-  property_meta_aggregate: { __typename?: 'property_meta_aggregate' } & {
-    aggregate?: Maybe<{ __typename?: 'property_meta_aggregate_fields' } & Pick<Property_Meta_Aggregate_Fields, 'count'>>
-  }
 }
 
 export type ListPropertyQueryVariables = Exact<{
@@ -6300,11 +6297,6 @@ export const ListOwnedPropertyMetaDocument = gql`
     ) {
       property
       name
-    }
-    property_meta_aggregate(where: { author: { _eq: $account_address } }) {
-      aggregate {
-        count
-      }
     }
   }
 `

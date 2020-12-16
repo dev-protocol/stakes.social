@@ -133,31 +133,31 @@ export const createAndAuthenticate = async (
   marketAddress: string,
   args: string[]
 ) => {
-  const client = newClient(web3)
-  return client
-    .propertyFactory(await getContractAddress(client, 'propertyFactory'))
-    .createAndAuthenticate(name, symbol, marketAddress, args, {
-      metricsFactory: await getContractAddress(client, 'metricsFactory')
-    })
+  // const client = newClient(web3)
+  // return client
+  //   .propertyFactory(await getContractAddress(client, 'propertyFactory'))
+  //   .createAndAuthenticate(name, symbol, marketAddress, args, {
+  //     metricsFactory: await getContractAddress(client, 'metricsFactory')
+  //   })
 
   /**
    * During development, you can check the operation using the commented out code below.
    * If you want to use these, comment out the return statement above.
    */
-  // return new Promise<UnwrapFunc<ReturnType<CreateCreateAndAuthenticateCaller>>>(resolve => {
-  //   setTimeout(
-  //     () =>
-  //       resolve({
-  //         property: 'property_address',
-  //         transaction: {} as any,
-  //         waitForAuthentication: () =>
-  //           new Promise(res => {
-  //             setTimeout(() => res('metrics_address'), 1000 * 15)
-  //           })
-  //       }),
-  //     1000 * 15
-  //   )
-  // })
+  return new Promise<UnwrapFunc<ReturnType<CreateCreateAndAuthenticateCaller>>>(resolve => {
+    setTimeout(
+      () =>
+        resolve({
+          property: 'property_address',
+          transaction: {} as any,
+          waitForAuthentication: () =>
+            new Promise(res => {
+              setTimeout(() => res('metrics_address'), 1000 * 15)
+            })
+        }),
+      1000 * 15
+    )
+  })
 }
 
 export const totalSupply = async (web3: Web3) => {
