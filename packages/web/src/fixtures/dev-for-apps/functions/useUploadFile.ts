@@ -11,14 +11,14 @@ export const useUploadFile = (accountAddress: string) => {
   const [isLoading, setIsLoading] = useState<boolean>(false)
 
   const postUploadFileHandler = async (refId: number, ref: string, field: string, file: any, path?: string) => {
-    const signMessage = `upload file: ${refId}, ${ref}, ${field}`
+    const signMessage = `Upload file: ${refId}, ${ref}, ${field}`
     const { signature, message: signedMessage } = await signWithCache(web3, signMessage)
     if (!signature || !signedMessage) {
       return
     }
 
     setIsLoading(true)
-    message.loading({ content: 'upload data...', duration: 0, key })
+    message.loading({ content: 'Uploading File...', duration: 0, key })
 
     const res = postUploadFile(signedMessage, signature, accountAddress, refId, ref, field, file, path)
       .then(result => {
@@ -26,7 +26,7 @@ export const useUploadFile = (accountAddress: string) => {
           message.error({ content: result.error, key })
           setError(new Error(result.error))
         } else {
-          message.success({ content: 'success upload', key })
+          message.success({ content: 'Upload Completed!', key })
         }
         return result
       })
@@ -51,14 +51,14 @@ export const useDeleteFile = (accountAddress: string) => {
   const [isLoading, setIsLoading] = useState<boolean>(false)
 
   const deleteFileHandler = async (id: number, filename: string) => {
-    const signMessage = `delete file: ${id}, ${filename}`
+    const signMessage = `Delete file: ${id}, ${filename}`
     const { signature, message: signedMessage } = await signWithCache(web3, signMessage)
     if (!signature || !signedMessage) {
       return
     }
 
     setIsLoading(true)
-    message.loading({ content: 'delete file...', duration: 0, key })
+    message.loading({ content: 'Deleting File...', duration: 0, key })
 
     const res = deleteUploadFile(signedMessage, signature, accountAddress, id)
       .then(result => {
@@ -66,7 +66,7 @@ export const useDeleteFile = (accountAddress: string) => {
           message.error({ content: result.error, key })
           setError(new Error(result.error))
         } else {
-          message.success({ content: 'success delete', key })
+          message.success({ content: 'Deletion Completed!', key })
         }
         return result
       })
