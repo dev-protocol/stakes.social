@@ -1,11 +1,11 @@
 import Web3 from 'web3'
 import { EventData } from 'web3-eth-contract'
-import { contractFactory } from '@devprtcl/dev-kit-js'
+import { contractFactory } from '@devprotocol/dev-kit'
 import { getContractAddress } from './get-contract-address'
-import { client as devClient } from '@devprtcl/dev-kit-js'
+import { client as devClient } from '@devprotocol/dev-kit'
 import BigNumber from 'bignumber.js'
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { CreateCreateAndAuthenticateCaller } from '@devprtcl/dev-kit-js/esm/property-factory/createAndAuthenticate'
+import { CreateCreateAndAuthenticateCaller } from '@devprotocol/dev-kit/esm/property-factory/createAndAuthenticate'
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { UnwrapFunc } from '../utility'
 
