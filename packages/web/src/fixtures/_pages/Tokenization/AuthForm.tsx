@@ -1,19 +1,15 @@
-import React, { useState } from 'react'
-import { Form, message } from 'antd'
-import { useCreateAndAuthenticate } from 'src/fixtures/dev-kit/hooks'
-import { usePostSignGitHubMarketAsset } from 'src/fixtures/khaos/hooks'
+import React from 'react'
+import { Form } from 'antd'
 import styled from 'styled-components'
 import Input from 'src/components/molecules/Input'
 import { useProvider } from 'src/fixtures/wallet/hooks'
 import { InfoCircleOutlined, AccountBookOutlined, CodeOutlined, FontColorsOutlined } from '@ant-design/icons'
-import { ButtonWithGradient } from 'src/components/atoms/ButtonWithGradient/index'
-import SuccessLogo from 'src/components/atoms/Success'
-const NpmMarketContractAddress = '0x88c7B1f41DdE50efFc25541a2E0769B887eB2ee7'
 
 export interface Props {
   market: string
   onHeaderChange: React.Dispatch<React.SetStateAction<string>>
   onSubHeaderChange: React.Dispatch<React.SetStateAction<string>>
+  onFormDataSubmit: React.Dispatch<React.SetStateAction<any>>
 }
 
 const Container = styled.div`
@@ -76,196 +72,97 @@ const InfoContainer = styled.div`
   }
 `
 
-const Etherscan = styled(ButtonWithGradient)`
-  border-radius: 6px;
-  padding: 0 24px;
-  /* margin-right: 10px; */
-`
-
-// const GoPool = styled(ButtonWithGradient)`
-//   border-radius: 6px;
-//   padding: 0 24px;
-// `
-
-const ResultContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  padding: 48px 32px;
-  justify-content: center;
-  align-items: center;
-`
-
-const SuccessContainer = styled.div`
-  svg {
-    width: 150px;
-    height: auto;
-  }
-`
-
-export const AuthForm = ({ market, onHeaderChange, onSubHeaderChange }: Props) => {
-  const [metrics, setMetrics] = useState<string>('')
-  // const [property, setProperty] = useState<string>('')
-  const { postSignGitHubMarketAssetHandler, isLoading } = usePostSignGitHubMarketAsset()
-  const { createAndAuthenticate, isLoading: isAuthenticating } = useCreateAndAuthenticate()
-
+export const AuthForm = ({ onHeaderChange, onSubHeaderChange, onFormDataSubmit }: Props) => {
   const { accountAddress } = useProvider()
   const onFinish = async (values: any) => {
-    const key = 'tokenization'
-    message.loading({ content: 'now tokenizing...', duration: 0, key })
-
-    const authRequestData: string[] =
-      market === NpmMarketContractAddress
-        ? Object.values(values)
-        : await (async () => {
-            // If the target market is not NpmMarket, it is the GitHubMarket with Khaos.
-            // TODO: Needs dynamically switch to use Khaos or not use Khaos by target Market
-
-            const repository: string = values.projectName
-            const personalAccessToken = values.personalAccessToken
-
-            // Create a public signature from the user's signature and the entered PAT.
-            const khaos = await postSignGitHubMarketAssetHandler(repository, personalAccessToken)
-            message.success({ content: 'Successful creation of public signature by Khaos' })
-            return [repository, khaos.publicSignature || '']
-          })()
-
-    // Send Ethereum transaction and create new Property Tokens, aka Creator Tokens, and starts authentication flow.
-    const results = await createAndAuthenticate(values.projectName, values.tokenSymbol, market, authRequestData)
-    if (results) {
-      // TODO: Function to be called to tokenize based input
-      // New Property Tokens have been created.
-      /**
-       * results interfaces
-       *
-       * property - created new Property address
-       * transaction - Ethereum transaction information
-       * waitForAuthentication - Promise that expects resolve by completing the authentication
-       */
-      message.success({ content: `success creation your tokens: ${results.property}` })
-      message.loading({ content: 'now authenticating...', duration: 0, key })
-
-      // Wait for completing the authentication
-      const metricsAddress = await results.waitForAuthentication()
-      message.success({ content: 'completed tokenization!', key })
-
-      // Completed the all flow
-      // setProperty(results.property)
-      setMetrics(metricsAddress)
-      onHeaderChange('Succesfully Tokenized Your Project')
-      onSubHeaderChange(
-        'Please wait for your project to become available on Stakes Social. This can take several minutes.'
-      )
-    }
+    onFormDataSubmit(values)
+    onHeaderChange('Tokenization Review')
+    onSubHeaderChange('Check the details before continuing.')
   }
 
   return (
     <div style={{ maxWidth: '760px' }}>
       <Container>
-        {metrics ? (
-          <ResultContainer>
-            <SuccessContainer>
-              <SuccessLogo />
-            </SuccessContainer>
+        <Form name="basic" style={{ padding: '1em' }} initialValues={{ remember: true }} onFinish={onFinish}>
+          <FormTitle>
+            <h2>Asset Information</h2>
+          </FormTitle>
+          <Row style={{ marginBottom: '20px' }}>
+            <Span style={{ marginTop: 0 }}>Creator wallet address:</Span>
+            <span style={{ marginTop: '5px', maxWidth: '100vw', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+              {accountAddress || 'Fetching wallet...'}
+            </span>
+          </Row>
 
-            <div style={{ display: 'flex', width: '300px', justifyContent: 'center' }}>
-              <Etherscan
-                style={{ width: '100%' }}
-                alternative={true}
-                rel="noopener noreferrer"
-                target="_blank"
-                key="etherscan"
-                href={`https://etherscan.io/address/${metrics}`}
+          <Row>
+            <Span>Project name:</Span>
+            <Form.Item
+              name="projectName"
+              rules={[{ required: true, message: 'Please input the name of the project' }]}
+              key="projectName"
+            >
+              <Input Icon={FontColorsOutlined} label="projectName" placeholder="Project name" />
+            </Form.Item>
+          </Row>
+
+          <Row>
+            <Span>Token symbol:</Span>
+            <div style={{ display: 'flex', flexDirection: 'column' }}>
+              <Form.Item
+                name="tokenSymbol"
+                rules={[{ required: true, message: 'Please input a token symbol' }]}
+                key="tokenSymbol"
               >
-                <span>Go to Etherscan</span>
-              </Etherscan>
-              ,
-              {/* <GoPool key="property" href={`/${property}`} type="primary">
-                See Property
-              </GoPool> */}
+                <Input Icon={AccountBookOutlined} label="tokenSymbol" placeholder="Choose your token's name" />
+              </Form.Item>
             </div>
-          </ResultContainer>
-        ) : (
-          <Form name="basic" style={{ padding: '1em' }} initialValues={{ remember: true }} onFinish={onFinish}>
-            <FormTitle>
-              <h2>Asset Information</h2>
-            </FormTitle>
-            <Row style={{ marginBottom: '20px' }}>
-              <Span style={{ marginTop: 0 }}>Creator wallet address:</Span>
-              <span style={{ marginTop: '5px', maxWidth: '100vw', overflow: 'hidden', textOverflow: 'ellipsis' }}>
-                {accountAddress || 'Fetching wallet...'}
-              </span>
-            </Row>
+          </Row>
 
-            <Row>
-              <Span>Project name:</Span>
-              <Form.Item
-                name="projectName"
-                rules={[{ required: true, message: 'Please input the name of the project' }]}
-                key="projectName"
-              >
-                <Input Icon={FontColorsOutlined} label="projectName" placeholder="Project name" />
-              </Form.Item>
-            </Row>
-
-            <Row>
-              <Span>Token symbol:</Span>
-              <div style={{ display: 'flex', flexDirection: 'column' }}>
-                <Form.Item
-                  name="tokenSymbol"
-                  rules={[{ required: true, message: 'Please input a token symbol' }]}
-                  key="tokenSymbol"
-                >
-                  <Input Icon={AccountBookOutlined} label="tokenSymbol" placeholder="Choose your token's name" />
-                </Form.Item>
-              </div>
-            </Row>
-
-            <Row>
-              <Span>Personal Access Token:</Span>
-              <Form.Item
-                name="personalAccessToken"
-                rules={[{ required: true, message: 'Please input PAT.' }]}
-                key="personalAccessToken"
-              >
-                <Input Icon={CodeOutlined} label="personalAccessToken" placeholder="Personal Access Token" />
-              </Form.Item>
-            </Row>
-            <div style={{ display: 'flex', alignItems: 'center', marginBottom: '1em' }}>
-              <div style={{ display: 'flex', alignItems: 'center', alignSelf: 'flex-end' }}>
-                <InfoContainer>
-                  <InfoCircleOutlined />
-                </InfoContainer>
-                <div style={{ fontSize: '0.9em' }}>
-                  <div>
-                    Please{' '}
-                    <a href="https://github.com/settings/tokens/new" target="_blank" rel="noreferrer">
-                      <span style={{ wordBreak: 'normal' }}>create a Personal Access Token without any scopes.</span>
-                    </a>
-                  </div>
-                  <div>
-                    <span style={{ wordBreak: 'normal' }}>
-                      The PAT is confidentially authenticated using the Khaos oracle(
-                    </span>
-                    <a href="https://github.com/dev-protocol/khaos" target="_blank" rel="noreferrer">
-                      *
-                    </a>
-                    ).
-                  </div>
+          <Row>
+            <Span>Personal Access Token:</Span>
+            <Form.Item
+              name="personalAccessToken"
+              rules={[{ required: true, message: 'Please input PAT.' }]}
+              key="personalAccessToken"
+            >
+              <Input Icon={CodeOutlined} label="personalAccessToken" placeholder="Personal Access Token" />
+            </Form.Item>
+          </Row>
+          <div style={{ display: 'flex', alignItems: 'center', marginBottom: '1em' }}>
+            <div style={{ display: 'flex', alignItems: 'center', alignSelf: 'flex-end' }}>
+              <InfoContainer>
+                <InfoCircleOutlined />
+              </InfoContainer>
+              <div style={{ fontSize: '0.9em' }}>
+                <div>
+                  Please{' '}
+                  <a href="https://github.com/settings/tokens/new" target="_blank" rel="noreferrer">
+                    <span style={{ wordBreak: 'normal' }}>create a Personal Access Token without any scopes.</span>
+                  </a>
+                </div>
+                <div>
+                  <span style={{ wordBreak: 'normal' }}>
+                    The PAT is confidentially authenticated using the Khaos oracle(
+                  </span>
+                  <a href="https://github.com/dev-protocol/khaos" target="_blank" rel="noreferrer">
+                    *
+                  </a>
+                  ).
                 </div>
               </div>
             </div>
+          </div>
 
-            <Row>
-              <div style={{ display: 'flex', gridColumn: '1/-1', justifyContent: 'flex-end' }}>
-                <ButtonContainer>
-                  <Submit type="submit" disabled={isLoading || isAuthenticating}>
-                    Tokenize
-                  </Submit>
-                </ButtonContainer>
-              </div>
-            </Row>
-          </Form>
-        )}
+          <Row>
+            <div style={{ display: 'flex', gridColumn: '1/-1', justifyContent: 'flex-end' }}>
+              <ButtonContainer>
+                <Submit type="submit" disabled={!accountAddress}>
+                  Tokenize
+                </Submit>
+              </ButtonContainer>
+            </div>
+          </Row>
+        </Form>
       </Container>
     </div>
   )
