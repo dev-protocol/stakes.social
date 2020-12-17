@@ -65,8 +65,8 @@ export const MarketsOverview = () => {
             />
             <MarketEntryInfo>
               <div style={{ padding: '1em' }}>
-                <h3 style={{ color: 'white', fontWeight: 'bolder' }}>Github</h3>
-                <span>Authenticate and tokenize your Github OSS project.</span>
+                <h3 style={{ color: 'white', fontWeight: 'bolder' }}>GitHub</h3>
+                <span>Authenticate and tokenize your GitHub OSS project.</span>
               </div>
             </MarketEntryInfo>
           </MarketEntryContainer>
