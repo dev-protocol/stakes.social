@@ -4,7 +4,7 @@ import { Contract, EventData } from 'web3-eth-contract'
 import { createContract } from 'src/fixtures/utility/contract-client'
 import { toBigNumber, toEVMBigNumber } from 'src/fixtures/utility'
 import { GEYSER_ETHDEV_V2_ADDRESS } from '../constants/address'
-import { utils } from '@devprtcl/dev-kit-js'
+import { utils } from '@devprotocol/dev-kit'
 import BigNumber from 'bignumber.js'
 
 const { execute } = utils

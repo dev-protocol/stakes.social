@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { DevkitContract } from '@devprtcl/dev-kit-js/esm/contract'
+import { DevkitContract } from '@devprotocol/dev-kit/esm/contract'
 import { getContractAddress } from './get-contract-address'
-import { addresses } from '@devprtcl/dev-kit-js'
+import { addresses } from '@devprotocol/dev-kit'
 
 describe('get-contract-address.ts', () => {
   describe('getContractAddress', () => {
