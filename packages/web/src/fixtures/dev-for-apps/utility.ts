@@ -283,10 +283,10 @@ export const postPropertySetting = (
       'Content-Type': 'application/json; charset=utf-8'
     },
     body: JSON.stringify({
-      name,
       property_address: propertyAddress,
       account_address: accountAddress,
       private_staking: isPrivateStaking,
+      address: accountAddress, // for auth
       signature,
       signMessage
     })
@@ -306,10 +306,10 @@ export const putPropertySetting = (
       'Content-Type': 'application/json; charset=utf-8'
     },
     body: JSON.stringify({
-      name,
       property_address: propertyAddress,
       account_address: accountAddress,
       private_staking: isPrivateStaking,
+      address: accountAddress, // for auth
       signature,
       signMessage
     })
