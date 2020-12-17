@@ -77,7 +77,7 @@ const Staker = ({
 }) => {
   const { data } = useGetAccount(accountAddress)
   const isCreator = !!data
-  const { data: incognitoSettings } = useGetPropertySetting(propertyAddress, accountAddress)
+  const { data: incognitoSettings } = useGetPropertySetting(propertyAddress || '', accountAddress)
 
   return (
     <>
