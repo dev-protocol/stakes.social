@@ -284,9 +284,8 @@ export const postPropertySetting = (
     },
     body: JSON.stringify({
       property_address: propertyAddress,
-      account_address: accountAddress,
+      address: accountAddress,
       private_staking: isPrivateStaking,
-      address: accountAddress, // for auth
       signature,
       signMessage
     })
@@ -307,9 +306,8 @@ export const putPropertySetting = (
     },
     body: JSON.stringify({
       property_address: propertyAddress,
-      account_address: accountAddress,
+      address: accountAddress,
       private_staking: isPrivateStaking,
-      address: accountAddress, // for auth
       signature,
       signMessage
     })
