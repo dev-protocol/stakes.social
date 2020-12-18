@@ -1,5 +1,4 @@
 import { always } from 'ramda'
-import { whenDefined } from 'src/fixtures/utility'
 import { BaseUrl, StrapiBaseUrl } from './cache-path'
 
 export interface UserInformation {
