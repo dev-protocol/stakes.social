@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import { useListTopSupportingAccountQuery, useGetPropertyAuthenticationQuery } from '@dev/graphql'
 import Link from 'next/link'
-import { useGetProperty } from 'src/fixtures/dev-for-apps/hooks'
+import { useGetProperty, useGetPropertySetting } from 'src/fixtures/dev-for-apps/hooks'
 import { AvatarProperty } from 'src/components/molecules/AvatarProperty'
 import { Spin } from 'antd'
 
@@ -42,7 +42,15 @@ const AccountAddress = styled.span`
   max-width: 150px;
 `
 
-const Support = ({ propertyAddress, value }: { propertyAddress: string; value: number }) => {
+const Support = ({
+  accountAddress,
+  propertyAddress,
+  value
+}: {
+  accountAddress: string
+  propertyAddress: string
+  value: number
+}) => {
   const { data: propertyData } = useGetProperty(propertyAddress)
   const { data } = useGetPropertyAuthenticationQuery({
     variables: {
@@ -51,15 +59,28 @@ const Support = ({ propertyAddress, value }: { propertyAddress: string; value: n
   })
 
   const propertyTitle = data?.property_authentication?.[0]?.authentication_id
+  const { data: incognitoSettings } = useGetPropertySetting(propertyAddress, accountAddress)
 
   return (
-    <Link href={`/${propertyAddress}`} passHref>
-      <SupportSection>
-        <AvatarProperty size={'100'} propertyAddress={propertyAddress} />
-        <AccountAddress>{propertyData?.name || propertyTitle || propertyAddress}</AccountAddress>
-        <span>{`${(value / Math.pow(10, 18)).toFixed(0)}`}</span>
-      </SupportSection>
-    </Link>
+    <>
+      {!incognitoSettings?.private_staking ? (
+        <Link href={`/${propertyAddress}`} passHref>
+          <SupportSection>
+            <AvatarProperty size={'100'} propertyAddress={propertyAddress} />
+            <AccountAddress>{propertyData?.name || propertyTitle || propertyAddress}</AccountAddress>
+            <span>{`${(value / Math.pow(10, 18)).toFixed(0)}`}</span>
+          </SupportSection>
+        </Link>
+      ) : (
+        <SupportSection style={{ cursor: 'auto' }}>
+          <AvatarProperty size={'100'} propertyAddress={undefined} />
+          <AccountAddress>
+            <span style={{ fontStyle: 'italic' }}>Hidden project</span>
+          </AccountAddress>
+          <span>-</span>
+        </SupportSection>
+      )}
+    </>
   )
 }
 
@@ -78,7 +99,12 @@ const TopSupporting = ({ accountAddress }: Props) => {
       <TopSupportingContainer>
         {data?.account_lockup &&
           data?.account_lockup.map(({ property_address, value }) => (
-            <Support key={property_address} propertyAddress={property_address} value={value} />
+            <Support
+              key={property_address}
+              accountAddress={accountAddress}
+              propertyAddress={property_address}
+              value={value}
+            />
           ))}
       </TopSupportingContainer>
     </div>

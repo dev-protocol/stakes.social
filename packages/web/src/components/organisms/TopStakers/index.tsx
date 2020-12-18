@@ -5,7 +5,7 @@ import { Avatar } from 'src/components/molecules/Avatar'
 import styled, { css } from 'styled-components'
 import { useEffect } from 'react'
 import { useListTopStakersAccountLazyQuery } from '@dev/graphql'
-import { useGetAccount } from 'src/fixtures/dev-for-apps/hooks'
+import { useGetAccount, useGetPropertySetting } from 'src/fixtures/dev-for-apps/hooks'
 import { Spin } from 'antd'
 import Link from 'next/link'
 
@@ -66,23 +66,45 @@ const StakerSection = styled.div<{ isCreator?: Boolean }>`
 
 const formatter = new Intl.NumberFormat('en-US')
 
-const Staker = ({ accountAddress, value }: { accountAddress: string; value: number }) => {
+const Staker = ({
+  propertyAddress,
+  accountAddress,
+  value
+}: {
+  propertyAddress: string | undefined
+  accountAddress: string
+  value: number
+}) => {
   const { data } = useGetAccount(accountAddress)
   const isCreator = !!data
+  const { data: incognitoSettings } = useGetPropertySetting(propertyAddress || '', accountAddress)
+
   return (
     <>
-      {isCreator ? (
+      {isCreator && !incognitoSettings?.private_staking ? (
         <Link href={`/author/${accountAddress}`} passHref>
           <StakerSection isCreator={isCreator}>
-            <Avatar accountAddress={accountAddress} size={'100'} />
-            <AccountAddress>{data?.name || accountAddress}</AccountAddress>
+            <Avatar accountAddress={incognitoSettings?.private_staking ? undefined : accountAddress} size={'100'} />
+            <AccountAddress>
+              {incognitoSettings?.private_staking ? (
+                <span style={{ fontStyle: 'italic' }}>Hidden user</span>
+              ) : (
+                data?.name || accountAddress
+              )}
+            </AccountAddress>
             <span>{`${formatter.format(parseInt((value / Math.pow(10, 18)).toFixed(0)))}`}</span>
           </StakerSection>
         </Link>
       ) : (
         <StakerSection>
-          <Avatar accountAddress={accountAddress} size={'100'} />
-          <AccountAddress>{data?.name || accountAddress}</AccountAddress>
+          <Avatar accountAddress={incognitoSettings?.private_staking ? undefined : accountAddress} size={'100'} />
+          <AccountAddress>
+            {incognitoSettings?.private_staking ? (
+              <span style={{ fontStyle: 'italic' }}>Hidden user</span>
+            ) : (
+              data?.name || accountAddress
+            )}
+          </AccountAddress>
           <span>{`${formatter.format(parseInt((value / Math.pow(10, 18)).toFixed(0)))}`}</span>
         </StakerSection>
       )}
@@ -134,7 +156,12 @@ const TopStakers = ({ authorAddress, propertyAdress }: TopStakersProps) => {
 
       <TopStakerRanking>
         {stakerItems?.map(({ account_address, value }) => (
-          <Staker key={account_address} accountAddress={account_address} value={value} />
+          <Staker
+            key={account_address}
+            propertyAddress={propertyAdress}
+            accountAddress={account_address}
+            value={value}
+          />
         ))}
       </TopStakerRanking>
     </Flex>
