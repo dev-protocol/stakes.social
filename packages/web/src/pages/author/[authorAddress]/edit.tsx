@@ -43,7 +43,9 @@ const ProfileUpdateForm = ({ accountAddress }: { accountAddress: string }) => {
   const handleSubmit = useCallback(
     (displayName: string, biography: string, website: string, github: string) => {
       const handler = data?.id ? updateAccount : createAccount
-      handler(displayName, biography, website, github)
+      // TODO: set from form data
+      const isPrivateStaking = false
+      handler(displayName, biography, website, github, isPrivateStaking)
     },
     [createAccount, updateAccount, data]
   )

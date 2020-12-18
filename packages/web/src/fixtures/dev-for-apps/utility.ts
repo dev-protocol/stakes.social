@@ -1,4 +1,5 @@
 import { always } from 'ramda'
+import { whenDefined } from 'src/fixtures/utility'
 import { BaseUrl, StrapiBaseUrl } from './cache-path'
 
 export interface UserInformation {
@@ -23,6 +24,9 @@ export interface Account {
   portrait: Image
   links: NullableProfileLinks
   cover_images: Image[]
+  property_settings?: {
+    private_staking: boolean
+  }
 }
 
 export type ImageFormat = {
@@ -134,7 +138,8 @@ export const postAccount = (
   address: string,
   name?: string,
   biography?: string,
-  links?: ProfileLinks
+  links?: ProfileLinks,
+  isPrivateStaking?: boolean
 ): Promise<Account> =>
   fetch(`${StrapiBaseUrl}/accounts`, {
     method: 'POST',
@@ -147,7 +152,8 @@ export const postAccount = (
       links,
       address,
       signature,
-      signMessage
+      signMessage,
+      property_settings: isPrivateStaking === undefined ? undefined : { private_staking: isPrivateStaking }
     })
   }).then(res => res.json())
 
@@ -158,7 +164,8 @@ export const putAccount = (
   id: number,
   name?: string,
   biography?: string,
-  links?: ProfileLinks
+  links?: ProfileLinks,
+  isPrivateStaking?: boolean
 ): Promise<Account> =>
   fetch(`${StrapiBaseUrl}/accounts/${id}`, {
     method: 'PUT',
@@ -171,7 +178,8 @@ export const putAccount = (
       links,
       address,
       signature,
-      signMessage
+      signMessage,
+      property_settings: isPrivateStaking === undefined ? undefined : { private_staking: isPrivateStaking }
     })
   }).then(res => res.json())
 

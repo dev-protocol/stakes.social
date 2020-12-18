@@ -78,7 +78,13 @@ export const useCreateAccount = (walletAddress: string) => {
   const { web3 } = useProvider()
   const [isLoading, setIsLoading] = useState<boolean>(false)
 
-  const postAccountHandler = async (name?: string, biography?: string, website?: string, github?: string) => {
+  const postAccountHandler = async (
+    name?: string,
+    biography?: string,
+    website?: string,
+    github?: string,
+    isPrivateStaking?: boolean
+  ) => {
     const links: ProfileLinks = {
       github,
       website
@@ -92,7 +98,7 @@ export const useCreateAccount = (walletAddress: string) => {
     setIsLoading(true)
     message.loading({ content: 'update account data...', duration: 0, key })
 
-    const data = await postAccount(signedMessage, signature, walletAddress, name, biography, links)
+    const data = await postAccount(signedMessage, signature, walletAddress, name, biography, links, isPrivateStaking)
       .then(result => {
         message.success({ content: 'success update account data', key })
         return result
@@ -115,7 +121,13 @@ export const useUpdateAccount = (id: number, walletAddress: string) => {
   const { web3 } = useProvider()
   const [isLoading, setIsLoading] = useState<boolean>(false)
 
-  const putAccountHandler = async (name?: string, biography?: string, website?: string, github?: string) => {
+  const putAccountHandler = async (
+    name?: string,
+    biography?: string,
+    website?: string,
+    github?: string,
+    isPrivateStaking?: boolean
+  ) => {
     const links: ProfileLinks = {
       github,
       website
@@ -129,7 +141,7 @@ export const useUpdateAccount = (id: number, walletAddress: string) => {
     setIsLoading(true)
     message.loading({ content: 'update account data...', duration: 0, key })
 
-    const data = await putAccount(signedMessage, signature, walletAddress, id, name, biography, links)
+    const data = await putAccount(signedMessage, signature, walletAddress, id, name, biography, links, isPrivateStaking)
       .then(result => {
         message.success({ content: 'success update account data', key })
         return result
