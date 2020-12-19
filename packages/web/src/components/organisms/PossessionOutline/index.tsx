@@ -64,7 +64,7 @@ export const PossessionOutline = ({ className, propertyAddress }: Props) => {
       <Card>
         <Statistic
           title="Your Staking Share"
-          value={myStakingAmount && totalStakingAmount ? stakingShare || '0' : 'N/A'}
+          value={myStakingAmount && totalStakingAmount ? stakingShare || 0 : 'N/A'}
           precision={2}
           suffix="%"
         />
