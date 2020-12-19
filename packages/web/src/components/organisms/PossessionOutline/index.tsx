@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import {
   useGetTotalStakingAmount,
   useGetMyStakingAmount,
@@ -37,6 +37,11 @@ export const PossessionOutline = ({ className, propertyAddress }: Props) => {
   const { myStakingRewardAmount, currency: myStakingRewardAmountCurrency } = useGetMyStakingRewardAmount(
     propertyAddress
   )
+  const stakingShare = useMemo(
+    () =>
+      myStakingAmount && totalStakingAmount ? (myStakingAmount.toNumber() / totalStakingAmount.toNumber()) * 100 : 0,
+    [myStakingAmount, totalStakingAmount]
+  )
 
   return (
     <Wrap className={className}>
@@ -59,9 +64,7 @@ export const PossessionOutline = ({ className, propertyAddress }: Props) => {
       <Card>
         <Statistic
           title="Your Staking Share"
-          value={
-            myStakingAmount && totalStakingAmount && (myStakingAmount.toNumber() / totalStakingAmount.toNumber()) * 100
-          }
+          value={myStakingAmount && totalStakingAmount ? stakingShare || '0' : 'N/A'}
           precision={2}
           suffix="%"
         />
