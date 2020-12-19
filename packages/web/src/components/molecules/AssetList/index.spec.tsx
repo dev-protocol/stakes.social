@@ -8,7 +8,9 @@ jest.mock('src/fixtures/dev-for-apps/hooks')
 
 describe(`${AssetList.name}`, () => {
   test('Snapshot', () => {
-    const component = render(<AssetList properties={['1', '2', '3']} onPagination={() => {}} enableStake={true} />)
+    const component = render(
+      <AssetList properties={['1', '2', '3']} onPagination={() => {}} enableStake={true} total={6} />
+    )
     const tree = component.baseElement
     expect(tree).toMatchSnapshot()
   })

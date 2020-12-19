@@ -50,7 +50,7 @@ export const Twitter = ({
 )
 
 export const Discord = () => (
-  <SocialButton href="//discord.gg/VwJp4KM">
+  <SocialButton target="_blank" rel="noopener noreferrer" href="//discord.gg/VwJp4KM">
     <svg enableBackground="new 0 0 512 512" id="Layer_1" version="1.1" viewBox="0 0 512 512">
       <circle cx="256" cy="256" fill="#8C9EFF" id="ellipse" r="256" />
       <path
@@ -63,7 +63,7 @@ export const Discord = () => (
 )
 
 export const Telegram = () => (
-  <SocialButton href="https://t.me/devprtcl">
+  <SocialButton target="_blank" rel="noopener noreferrer" href="https://t.me/devprtcl">
     <svg enableBackground="new 0 0 100 100" id="Layer_1" version="1.1" viewBox="0 0 100 100">
       <g>
         <circle cx="50" cy="50" fill="#139BD0" r="50" />
@@ -111,7 +111,7 @@ export const Github = ({
 )
 
 export const Medium = () => (
-  <SocialButton href="//medium.com/devtoken">
+  <SocialButton target="_blank" rel="noopener noreferrer" href="//medium.com/devtoken">
     <div
       style={{
         display: 'flex',

@@ -5850,6 +5850,16 @@ export type GetPropertyAuthenticationQuery = { __typename?: 'query_root' } & {
   >
 }
 
+export type TotalStakedAccountQueryVariables = Exact<{
+  account_address: Scalars['String']
+}>
+
+export type TotalStakedAccountQuery = { __typename?: 'query_root' } & {
+  account_lockup_sum_values: Array<
+    { __typename?: 'account_lockup_sum_values' } & Pick<Account_Lockup_Sum_Values, 'sum_values'>
+  >
+}
+
 export type ListAccountLockupQueryVariables = Exact<{
   account_address: Scalars['String']
   offset?: Maybe<Scalars['Int']>
@@ -5858,6 +5868,11 @@ export type ListAccountLockupQueryVariables = Exact<{
 
 export type ListAccountLockupQuery = { __typename?: 'query_root' } & {
   account_lockup: Array<{ __typename?: 'account_lockup' } & Pick<Account_Lockup, 'property_address'>>
+  account_lockup_aggregate: { __typename?: 'account_lockup_aggregate' } & {
+    aggregate?: Maybe<
+      { __typename?: 'account_lockup_aggregate_fields' } & Pick<Account_Lockup_Aggregate_Fields, 'count'>
+    >
+  }
 }
 
 export type ListOwnedPropertyMetaQueryVariables = Exact<{
@@ -6171,6 +6186,52 @@ export type GetPropertyAuthenticationQueryResult = Apollo.QueryResult<
   GetPropertyAuthenticationQuery,
   GetPropertyAuthenticationQueryVariables
 >
+export const TotalStakedAccountDocument = gql`
+  query totalStakedAccount($account_address: String!) {
+    account_lockup_sum_values(where: { account_address: { _eq: $account_address } }) {
+      sum_values
+    }
+  }
+`
+
+/**
+ * __useTotalStakedAccountQuery__
+ *
+ * To run a query within a React component, call `useTotalStakedAccountQuery` and pass it any options that fit your needs.
+ * When your component renders, `useTotalStakedAccountQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useTotalStakedAccountQuery({
+ *   variables: {
+ *      account_address: // value for 'account_address'
+ *   },
+ * });
+ */
+export function useTotalStakedAccountQuery(
+  baseOptions: Apollo.QueryHookOptions<TotalStakedAccountQuery, TotalStakedAccountQueryVariables>
+) {
+  return Apollo.useQuery<TotalStakedAccountQuery, TotalStakedAccountQueryVariables>(
+    TotalStakedAccountDocument,
+    baseOptions
+  )
+}
+export function useTotalStakedAccountLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<TotalStakedAccountQuery, TotalStakedAccountQueryVariables>
+) {
+  return Apollo.useLazyQuery<TotalStakedAccountQuery, TotalStakedAccountQueryVariables>(
+    TotalStakedAccountDocument,
+    baseOptions
+  )
+}
+export type TotalStakedAccountQueryHookResult = ReturnType<typeof useTotalStakedAccountQuery>
+export type TotalStakedAccountLazyQueryHookResult = ReturnType<typeof useTotalStakedAccountLazyQuery>
+export type TotalStakedAccountQueryResult = Apollo.QueryResult<
+  TotalStakedAccountQuery,
+  TotalStakedAccountQueryVariables
+>
 export const ListAccountLockupDocument = gql`
   query listAccountLockup($account_address: String!, $offset: Int, $limit: Int!) {
     account_lockup(
@@ -6180,6 +6241,11 @@ export const ListAccountLockupDocument = gql`
       limit: $limit
     ) {
       property_address
+    }
+    account_lockup_aggregate(where: { account_address: { _eq: $account_address } }) {
+      aggregate {
+        count
+      }
     }
   }
 `

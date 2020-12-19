@@ -9,6 +9,7 @@ interface Props {
 
 const BuyButton = styled.a`
   display: flex;
+  justify-content: center;
   padding: 6px 24px;
   border-radius: 9px;
   border: none;
@@ -18,12 +19,6 @@ const BuyButton = styled.a`
   &,
   :hover {
     color: white;
-  }
-
-  margin-top: 10px;
-
-  @media (min-width: 768px) {
-    margin-top: 0px;
   }
 `
 

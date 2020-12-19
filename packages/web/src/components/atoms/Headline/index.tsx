@@ -6,12 +6,13 @@ interface Props {
 
 export const Headline = styled.div<Props>`
   display: flex;
-  padding-top: 6em;
+  padding: 2rem 1em;
   justify-content: center;
   align-items: center;
   flex-flow: column;
 
   h2 {
+    text-align: center;
     color: black;
   }
   span {

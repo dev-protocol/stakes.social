@@ -15,25 +15,26 @@ const WrapContainer = styled.div`
   margin: auto;
   padding-top: 1rem;
   word-break: break-all;
+  flex-grow: 1;
 `
 
 const InvitationRequest = (_: Props) => {
   const [, market] = getPath(useRouter().asPath)
 
   return (
-    <>
+    <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
       <Header />
       <Headline height={300}>
         <H2>Creator Waitlist</H2>
         <p style={{ textAlign: 'center' }}>
-          Dev Protocol is now accepting applications to onboard your Github OSS project.
+          Dev Protocol is now accepting applications to onboard your GitHub OSS project.
         </p>
       </Headline>
       <WrapContainer>
         <InvitationRequestForm market={market} />
       </WrapContainer>
       <Footer />
-    </>
+    </div>
   )
 }
 

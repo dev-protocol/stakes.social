@@ -1,6 +1,5 @@
-import React, { useCallback, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { Footer } from 'src/components/organisms/Footer'
-import { EarlyAccess } from 'src/components/atoms/EarlyAccess'
 import { Headline } from 'src/components/atoms/Headline'
 import { Header } from 'src/components/organisms/Header'
 import { Container } from 'src/components/atoms/Container'
@@ -9,12 +8,12 @@ import {
   useGetAccount,
   useUpdateAccount,
   useUploadAccountAvatar,
-  useUploadAccountCoverImages
+  useUploadAccountCoverImages,
+  useDeleteFile
 } from 'src/fixtures/dev-for-apps/hooks'
 import { Button, Divider, Form, Input, Result, Skeleton, Upload } from 'antd'
 import { whenDefined } from 'src/fixtures/utility'
 import { UploadChangeParam, UploadFile } from 'antd/lib/upload/interface'
-import { useEffect } from 'react'
 import { Image } from 'src/fixtures/dev-for-apps/utility'
 import SkeletonInput from 'antd/lib/skeleton/Input'
 import { useRouter } from 'next/router'
@@ -37,6 +36,7 @@ const apiDataToUploadFile = ({ hash: uid, url, name, size, mime: type }: Image):
 })
 
 const ProfileUpdateForm = ({ accountAddress }: { accountAddress: string }) => {
+  const [form] = Form.useForm()
   const { data, found } = useGetAccount(accountAddress)
   const { postAccountHandler: createAccount, isLoading } = useCreateAccount(accountAddress)
   const { putAccountHandler: updateAccount } = useUpdateAccount(Number(data?.id), accountAddress)
@@ -48,9 +48,19 @@ const ProfileUpdateForm = ({ accountAddress }: { accountAddress: string }) => {
     [createAccount, updateAccount, data]
   )
 
+  useEffect(() => {
+    form.setFieldsValue({
+      displayName: data?.name,
+      biography: data?.biography,
+      website: data?.links?.website,
+      github: data?.links?.github
+    })
+  }, [data, form])
+
   return (
     <Form
       layout="vertical"
+      form={form}
       onFinish={({
         displayName,
         biography,
@@ -64,20 +74,16 @@ const ProfileUpdateForm = ({ accountAddress }: { accountAddress: string }) => {
       }) => handleSubmit(displayName, biography, website, github)}
     >
       <Form.Item label="Display Name" name="displayName">
-        {found ? <Input placeholder="Enter the new display name" defaultValue={data?.name} /> : <SkeletonInput />}
+        <Input placeholder="Enter the new display name" />
       </Form.Item>
       <Form.Item label="Biography" name="biography">
-        {found ? (
-          <Input.TextArea placeholder="Enter the biography" defaultValue={data?.biography} />
-        ) : (
-          <SkeletonInput />
-        )}
+        {found ? <Input.TextArea placeholder="Enter the biography" /> : <SkeletonInput />}
       </Form.Item>
       <Form.Item label="Website" name="website">
-        {found ? <Input placeholder="your website url" defaultValue={data?.links?.website} /> : <SkeletonInput />}
+        {found ? <Input placeholder="your website url" /> : <SkeletonInput />}
       </Form.Item>
       <Form.Item label="GitHub" name="github">
-        {found ? <Input placeholder="your github account url" defaultValue={data?.links?.github} /> : <SkeletonInput />}
+        {found ? <Input placeholder="your github account url" /> : <SkeletonInput />}
       </Form.Item>
       <Button type="primary" htmlType="submit" loading={isLoading} disabled={isLoading}>
         Save
@@ -90,6 +96,7 @@ const AvatarUpdateForm = ({ accountAddress }: { accountAddress: string }) => {
   const { data } = useGetAccount(accountAddress)
   const [fileList, setFileList] = useState<UploadFile[] | undefined>()
   const { upload } = useUploadAccountAvatar(accountAddress)
+  const { deleteFileHandler: deleteFile } = useDeleteFile(accountAddress)
   useEffect(() => {
     setFileList(whenDefined(data?.portrait, x => [apiDataToUploadFile(x)]))
   }, [setFileList, data])
@@ -101,8 +108,20 @@ const AvatarUpdateForm = ({ accountAddress }: { accountAddress: string }) => {
     }
   }
 
+  const handleRemove = (file: UploadFile) => {
+    whenDefined(data?.portrait.id, x => deleteFile(x, file.name))
+    setFileList([])
+  }
+
   return (
-    <Upload name="portrait" multiple={false} listType="picture-card" fileList={fileList} onChange={handleChange}>
+    <Upload
+      name="portrait"
+      multiple={false}
+      listType="picture-card"
+      fileList={fileList}
+      onChange={handleChange}
+      onRemove={handleRemove}
+    >
       <div>
         <p>{data && data.portrait ? 'Change' : 'Upload'}</p>
       </div>
@@ -114,6 +133,7 @@ const CoverImagesUpdateForm = ({ accountAddress }: { accountAddress: string }) =
   const { data } = useGetAccount(accountAddress)
   const [fileList, setFileList] = useState<UploadFile[] | undefined>()
   const { upload } = useUploadAccountCoverImages(accountAddress)
+  const { deleteFileHandler: deleteFile } = useDeleteFile(accountAddress)
   useEffect(() => {
     setFileList(whenDefined(data?.cover_images, x => x.map(y => apiDataToUploadFile(y))))
   }, [setFileList, data])
@@ -125,8 +145,26 @@ const CoverImagesUpdateForm = ({ accountAddress }: { accountAddress: string }) =
     }
   }
 
+  const handleRemove = async (file: UploadFile) => {
+    const target = data?.cover_images.find(x => x.hash === file.uid)
+    if (!target || !fileList) {
+      return
+    }
+    const deletedFileList = fileList.filter(x => x.uid !== target.hash)
+    await deleteFile(target.id, file.name).then(res => {
+      whenDefined(res?.id, _ => setFileList(deletedFileList))
+    })
+  }
+
   return (
-    <Upload name="portrait" multiple={false} listType="picture-card" fileList={fileList} onChange={handleChange}>
+    <Upload
+      name="portrait"
+      multiple={false}
+      listType="picture-card"
+      fileList={fileList}
+      onChange={handleChange}
+      onRemove={handleRemove}
+    >
       <div>
         <p>Upload</p>
       </div>
@@ -146,7 +184,6 @@ const AuthorEdit = (_: Props) => {
     <FullpageWrap>
       <main>
         <Header />
-        <EarlyAccess />
         <Headline height={300}>
           <h1>Profile settings</h1>
         </Headline>

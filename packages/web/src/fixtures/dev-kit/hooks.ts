@@ -38,6 +38,8 @@ import { useState, useCallback } from 'react'
 import BigNumber from 'bignumber.js'
 import { useProvider } from 'src/fixtures/wallet/hooks'
 import { useCurrency } from 'src/fixtures/currency/functions/useCurrency'
+import Web3 from 'web3'
+import { INFURA_ENDPOINT } from 'src/fixtures/wallet/constants'
 
 export const useGetTotalRewardsAmount = (propertyAddress: string) => {
   const { nonConnectedWeb3: web3, accountAddress } = useProvider()
@@ -389,26 +391,17 @@ export const useAuthenticate = () => {
 
 export const useCreateAndAuthenticate = () => {
   const { web3 } = useProvider()
-  const key = 'useCreateAndAuthenticate'
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [error, setError] = useState<Error>()
   const callback = useCallback(
     async (name: string, symbol: string, marketAddress: string, args: string[]) => {
       setIsLoading(true)
-      message.loading({ content: 'now authenticating...', duration: 0, key })
       setError(undefined)
       return whenDefined(web3, x =>
         createAndAuthenticate(x, name, symbol, marketAddress, args)
-          .then(metricsAddress => {
+          .catch(setError)
+          .finally(() => {
             setIsLoading(false)
-            message.success({ content: 'success authenticate!', key })
-            return metricsAddress
-          })
-          .catch(err => {
-            setError(err)
-            message.error({ content: err.message, key })
-            setIsLoading(false)
-            return undefined
           })
       )
     },
@@ -560,10 +553,13 @@ export const useBalanceOf = () => {
 }
 
 export const useAllClaimedRewards = () => {
+  // TODO: use own node
+  // NOTE: use Infura now becuase calling getPastEvents is very slow or error occured
+  const web3 = new Web3(INFURA_ENDPOINT)
   const { currency, toCurrency } = useCurrency()
-  const { nonConnectedWeb3, accountAddress } = useProvider()
+  const { accountAddress } = useProvider()
   const { data, error } = useSWR<BigNumber | undefined, Error>(SWRCachePath.allClaimedRewards(accountAddress), () =>
-    whenDefinedAll([nonConnectedWeb3, accountAddress], ([client, account]) =>
+    whenDefinedAll([web3, accountAddress], ([client, account]) =>
       allClaimedRewards(client, account).then(allEvents => {
         return allEvents.reduce((a, c) => a.plus(c.returnValues.value), toBigNumber(0))
       })

@@ -1,4 +1,5 @@
 import React, { useMemo, useEffect } from 'react'
+import Error from 'next/error'
 import { useRouter } from 'next/router'
 import { PossessionOutline } from 'src/components/organisms/PossessionOutline'
 import { PropertyHeader } from 'src/components/organisms/PropertyHeader'
@@ -49,11 +50,8 @@ const Transact = styled.div`
 const Possession = styled(PossessionOutline)``
 
 const Wrap = styled.div`
-  margin: 5rem auto;
+  margin: 1rem auto;
   max-width: 1048px;
-  @media (min-width: 768px) {
-    margin: 5rem auto;
-  }
 `
 
 const AboutSection = styled.div`
@@ -191,12 +189,19 @@ const PropertyAddressDetail = (_: Props) => {
   const [propertyAddress] = getPath(useRouter().asPath)
   const { apy, creators } = useAPY()
   const { data } = useGetPropertyAuthenticationQuery({ variables: { propertyAddress } })
-  const { data: dataProperty } = useGetProperty(propertyAddress)
-  const { data: propertyInformation } = useGetPropertytInformation(propertyAddress)
+  const isExistProperty = useMemo(() => data && data?.property_authentication.length > 0, [data])
+  const { data: dataProperty } = useGetProperty(isExistProperty ? propertyAddress : undefined)
+  const { data: propertyInformation } = useGetPropertytInformation(isExistProperty ? propertyAddress : undefined)
+  /* eslint-disable react-hooks/exhaustive-deps */
+  // FYI: https://github.com/facebook/react/pull/19062
   const includedAssetList = useMemo(() => data?.property_authentication.map(e => e.authentication_id), [data])
   const { accountAddress: loggedInWallet } = useProvider()
+  const { author: authorAddress } = usePropertyAuthor(propertyAddress)
 
-  return (
+  return data && !isExistProperty ? (
+    // property is not found
+    <Error statusCode={404} />
+  ) : (
     <>
       <Header></Header>
       <Wrap>
@@ -205,10 +210,12 @@ const PropertyAddressDetail = (_: Props) => {
         </Container>
         <Main>
           <RoundedCoverImageOrGradient src={dataProperty?.cover_image?.url} ratio={52.5} />
-          <Possession propertyAddress={propertyAddress} />
+          {isExistProperty && <Possession propertyAddress={propertyAddress} />}
           <Transact>
-            <Stake title="Stake" propertyAddress={propertyAddress} />
-            <Withdraw title="Withdraw" propertyAddress={propertyAddress} />
+            {isExistProperty && (loggedInWallet ? loggedInWallet !== authorAddress : true) && (
+              <Stake title="Stake" propertyAddress={propertyAddress} />
+            )}
+            {isExistProperty && <Withdraw title="Withdraw" propertyAddress={propertyAddress} />}
           </Transact>
           <AboutSection>
             <h2>About</h2>
@@ -249,10 +256,10 @@ const PropertyAddressDetail = (_: Props) => {
               )}
             </AssetList>
           </AssetsSection>
-          <Author propertyAddress={propertyAddress} />
+          {isExistProperty && <Author propertyAddress={propertyAddress} />}
           <div>
             <h2>Top stakers</h2>
-            <TopStakerList propertyAdress={propertyAddress} />
+            {isExistProperty && <TopStakerList propertyAdress={propertyAddress} />}
           </div>
         </Main>
       </Wrap>

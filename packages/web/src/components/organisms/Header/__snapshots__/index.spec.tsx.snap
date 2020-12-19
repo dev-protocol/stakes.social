@@ -4,7 +4,7 @@ exports[`Header Snapshot 1`] = `
 <body>
   <div>
     <div
-      style="position: fixed; top: 0px; width: 100%; z-index: 2;"
+      style="position: sticky; top: 0px; width: 100%; z-index: 2;"
     >
       <header
         class="sc-1bz6snd-0 TlprQ"
@@ -23,7 +23,7 @@ exports[`Header Snapshot 1`] = `
                 href="/"
               >
                 <span
-                  class="sc-1u809dt-0 fuSEHu"
+                  class="sc-1u809dt-0 gWcVAK"
                 >
                   <svg
                     id="headerlogo"
@@ -39,7 +39,7 @@ exports[`Header Snapshot 1`] = `
                     />
                   </svg>
                   <span
-                    class="sc-1u809dt-1 iuiHFu"
+                    class="sc-1u809dt-1 hLxuiA"
                   >
                     Stakes.social
                   </span>

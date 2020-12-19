@@ -1,14 +1,14 @@
 import { Button } from 'antd'
 import { boxShahowWithOnHover } from 'src/styles/boxShahow'
-import { blueGradient } from 'src/styles/gradient'
+import { blueGradient, blackGradient } from 'src/styles/gradient'
 import styled from 'styled-components'
 
-export const ButtonWithGradient = styled(Button)`
+export const ButtonWithGradient = styled(Button)<{ alternative?: Boolean }>`
   &,
   &:hover,
   &:active,
   &:focus {
-    ${blueGradient()}
+    ${props => (props.alternative ? blackGradient() : blueGradient())};
     color: white;
     border: 0;
   }

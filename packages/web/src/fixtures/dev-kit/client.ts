@@ -1,9 +1,13 @@
 import Web3 from 'web3'
 import { EventData } from 'web3-eth-contract'
-import { contractFactory } from '@devprtcl/dev-kit-js'
+import { contractFactory } from '@devprotocol/dev-kit'
 import { getContractAddress } from './get-contract-address'
-import { client as devClient } from '@devprtcl/dev-kit-js'
+import { client as devClient } from '@devprotocol/dev-kit'
 import BigNumber from 'bignumber.js'
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+import { CreateCreateAndAuthenticateCaller } from '@devprotocol/dev-kit/esm/property-factory/createAndAuthenticate'
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+import { UnwrapFunc } from '../utility'
 
 const newClient = (web3: Web3) => {
   return contractFactory(web3.currentProvider)
@@ -130,14 +134,30 @@ export const createAndAuthenticate = async (
   args: string[]
 ) => {
   const client = newClient(web3)
-  if (client) {
-    return client
-      .propertyFactory(await getContractAddress(client, 'propertyFactory'))
-      .createAndAuthenticate(name, symbol, marketAddress, args, {
-        metricsFactory: await getContractAddress(client, 'metricsFactory')
-      })
-  }
-  return undefined
+  return client
+    .propertyFactory(await getContractAddress(client, 'propertyFactory'))
+    .createAndAuthenticate(name, symbol, marketAddress, args, {
+      metricsFactory: await getContractAddress(client, 'metricsFactory')
+    })
+
+  /**
+   * During development, you can check the operation using the commented out code below.
+   * If you want to use these, comment out the return statement above.
+   */
+  // return new Promise<UnwrapFunc<ReturnType<CreateCreateAndAuthenticateCaller>>>(resolve => {
+  //   setTimeout(
+  //     () =>
+  //       resolve({
+  //         property: 'property_address',
+  //         transaction: {} as any,
+  //         waitForAuthentication: () =>
+  //           new Promise(res => {
+  //             setTimeout(() => res('metrics_address'), 1000 * 15)
+  //           })
+  //       }),
+  //     1000 * 15
+  //   )
+  // })
 }
 
 export const totalSupply = async (web3: Web3) => {

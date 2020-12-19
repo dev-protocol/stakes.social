@@ -6,7 +6,6 @@ import { useState } from 'react'
 import Link from 'next/link'
 import { EarlyAccess } from 'src/components/atoms/EarlyAccess'
 import { useConnectWallet, useProvider } from 'src/fixtures/wallet/hooks'
-import { useRouter } from 'next/router'
 import { AccountBtn, Connecting } from 'src/components/atoms/Navigation'
 import { Container } from 'src/components/atoms/Container'
 
@@ -60,22 +59,16 @@ const RepsonsiveNav = styled.div`
 `
 
 export const Header = (_: Props = {}) => {
-  const router = useRouter()
   const [isMenuOpen, setMenuOpen] = useState(false)
   const { isConnected, connect, isConnecting } = useConnectWallet()
   const { accountAddress } = useProvider()
 
   const accountBtnClick = async () => {
-    if (isConnected || accountAddress) {
-      router.push({ pathname: '/profile' })
-      return
-    }
-
     connect()
   }
 
   return (
-    <div style={{ position: 'fixed', top: 0, width: '100%', zIndex: 2 }}>
+    <div style={{ position: 'sticky', top: 0, width: '100%', zIndex: 2 }}>
       <HeaderContainer>
         <Container>
           <Top>
@@ -98,19 +91,25 @@ export const Header = (_: Props = {}) => {
             </NavigationMenu>
           )}
         </Container>
-        <AccountBtn onClick={accountBtnClick}>
-          {isConnecting ? (
+        {isConnecting ? (
+          <AccountBtn>
             <Connecting>{'Connecting...'}</Connecting>
-          ) : !isConnected && !accountAddress ? (
+          </AccountBtn>
+        ) : !isConnected && !accountAddress ? (
+          <AccountBtn onClick={accountBtnClick}>
             <span style={{ fontSize: '0.8em' }}>Sign in</span>
-          ) : (
-            <React.Fragment>
-              <span style={{ fontSize: '0.8em' }} className="hideOnSmall">
-                Profile
-              </span>
-            </React.Fragment>
-          )}
-        </AccountBtn>
+          </AccountBtn>
+        ) : (
+          <Link href="/profile" as={`/profile`} passHref>
+            <AccountBtn>
+              <React.Fragment>
+                <span style={{ fontSize: '0.8em' }} className="hideOnSmall">
+                  Portfolio
+                </span>
+              </React.Fragment>
+            </AccountBtn>
+          </Link>
+        )}
       </HeaderContainer>
       <EarlyAccess />
     </div>

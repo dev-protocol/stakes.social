@@ -7,6 +7,7 @@ import {
   useGetMyStakingRewardAmount,
   usePropertyAuthor
 } from 'src/fixtures/dev-kit/hooks'
+import { useProvider } from 'src/fixtures/wallet/hooks'
 import styled from 'styled-components'
 import { truncate } from 'src/fixtures/utility/string'
 import { useGetPropertytInformation } from 'src/fixtures/devprtcl/hooks'
@@ -38,7 +39,7 @@ const Card = styled(Grid)`
   cursor: pointer;
   background: #fff;
   overflow: hidden;
-  height: 500px;
+  min-height: 500px;
 `
 
 const RowContainer = styled.div`
@@ -80,6 +81,7 @@ const ButtonContainer = styled.div`
   display: flex;
   justify-content: space-evenly;
   align-items: center;
+  padding-top: 16px;
 `
 
 const CardContents = styled(Grid)`
@@ -87,21 +89,23 @@ const CardContents = styled(Grid)`
   grid-gap: 1rem;
   align-content: baseline;
   grid-template-rows: auto 1fr;
-  padding: 16px;
+  padding: 4px 16px 0 16px;
 `
 
 const StakeButton = styled.button<{ isPropertyStaked?: Boolean }>`
+  height: 35px;
   padding: 6px 24px;
   width: ${props => (props.isPropertyStaked ? '50%' : '100%')};
   border: none;
   background-color: #2f80ed;
   color: white;
 
-  cursor: pointer;
+  cursor: ${props => (props.disabled ? 'auto' : 'pointer')};
   :hover {
     transition: ease-in-out 0.2s;
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
   }
+  ${props => props.disabled && 'opacity: 0.3'}
 `
 
 const WithdrawButton = styled.button<{ isPropertyStaked?: Boolean }>`
@@ -136,7 +140,6 @@ const PropertyDescription = styled.span`
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
-  line-height: 1.4em;
   -webkit-line-clamp: 4; /* number of lines to show */
   -webkit-box-orient: vertical;
 `
@@ -171,6 +174,7 @@ const PlaceholderCoverImageOrGradient = styled.div`
 `
 
 export const PropertyCard = ({ propertyAddress, assets }: Props) => {
+  const { accountAddress } = useProvider()
   const [modalStates, setModalStates] = useState<ModalStates>({ visible: false })
   const { totalStakingAmount, currency: totalStakingAmountCurrency } = useGetTotalStakingAmount(propertyAddress)
   const { totalRewardsAmount, currency: totalRewardsAmountCurrency } = useGetTotalRewardsAmount(propertyAddress)
@@ -253,6 +257,7 @@ export const PropertyCard = ({ propertyAddress, assets }: Props) => {
       </Link>
       <ButtonContainer>
         <StakeButton
+          disabled={accountAddress === authorAddress}
           onClick={() => showModal('stake')}
           isPropertyStaked={typeof myStakingAmount !== 'undefined' && myStakingAmount > zeroBigNumber}
         >
