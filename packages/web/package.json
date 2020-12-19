@@ -54,7 +54,7 @@
     "react-markdown": "5.0.3",
     "react-select": "3.1.1",
     "styled-components": "5.2.1",
-    "swr": "0.3.9",
+    "swr": "0.3.10",
     "use-clipboard-copy": "0.1.2",
     "walletlink": "2.0.2",
     "web3": "1.2.11",
