@@ -42,6 +42,7 @@ const LinkToUniswap = () => (
 const ZERO = toBigNumber(0)
 
 export const Deposit = () => {
+  const messageKey = 'liquidityDeposit'
   const { Item } = Form
   const { Step } = Steps
   const { web3 } = useProvider()
@@ -70,6 +71,9 @@ export const Deposit = () => {
   }, [totalStakingShares, totalStaked, accounting, finalUnlockSchedule])
   const updateEstimate = useCallback(
     (value?: BigNumber) => {
+      if (!web3) {
+        return
+      }
       const data = isFulfilled()
       if (data === false) {
         return setRequireReEstimate(true)
@@ -83,7 +87,7 @@ export const Deposit = () => {
       })
       setEstimatedReward(toNaturalNumber(estimated).dp(10).toFixed())
     },
-    [estimate, isFulfilled]
+    [web3, estimate, isFulfilled]
   )
   const updateAmount = useCallback(
     (value: string) => {
@@ -107,16 +111,19 @@ export const Deposit = () => {
         balanceOf(x).then(x => {
           updateAmount(x ? toNaturalNumber(x).toFixed() : '0')
           if (x?.toNumber() === 0) {
-            message.warn(
-              <>
-                <span>Your ETHDEV-V2 token is 0</span>
-                <Divider type="vertical"></Divider>
-                <LinkToUniswap />
-              </>
-            )
+            message.warn({
+              content: (
+                <>
+                  <span>Your ETHDEV-V2 token is 0</span>
+                  <Divider type="vertical"></Divider>
+                  <LinkToUniswap />
+                </>
+              ),
+              key: messageKey
+            })
           }
         })
-      ),
+      ) || message.warn({ content: 'Please signing in', key: messageKey }),
     [updateAmount, web3]
   )
   const onChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -124,6 +131,10 @@ export const Deposit = () => {
     updateAmount(value)
   }
   const onClickApprove = async () => {
+    if (!web3) {
+      message.warn({ content: 'Please signing in', key: messageKey })
+      return
+    }
     const res = await approve(GEYSER_ETHDEV_V2_ADDRESS, amount ? amount : ZERO)
     if (res === false) {
       return
