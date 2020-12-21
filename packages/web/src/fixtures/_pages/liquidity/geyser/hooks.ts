@@ -45,7 +45,6 @@ const getAllTokensClaimed = (client: Web3) => () =>
 
 const getTokensLocked = (client: Web3) => () =>
   allTokensLocked(client).then(allEvents => {
-    console.log(allEvents)
     return allEvents.reduce((a: BigNumber, c) => a.plus(c.returnValues.amount), toBigNumber(0))
   })
 
