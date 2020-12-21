@@ -7,6 +7,7 @@ import { toAmountNumber, toNaturalNumber, whenDefinedAll } from 'src/fixtures/ut
 import { TransactForm } from 'src/components/molecules/TransactForm'
 import { FormContainer } from 'src/components/molecules/TransactForm/FormContainer'
 import { InfoCircleOutlined } from '@ant-design/icons'
+import { message } from 'antd'
 
 interface Props {
   className?: string
@@ -35,9 +36,18 @@ export const Withdraw = ({ className, title, propertyAddress, onChange: onChange
   const { withdrawStaking } = useWithdrawStaking()
   const withdrawFor = useCallback(
     (amount: string) => {
-      withdrawStaking(propertyAddress, toAmountNumber(amount))
+      if (!web3) {
+        message.warn({ content: 'Please signing in', key: 'WithdrawButton' })
+        return
+      }
+      const amountNumber = toAmountNumber(amount)
+      if (amountNumber.toNumber() <= 0) {
+        message.warn({ content: 'Please enter a value greater than 0', key: 'WithdrawButton' })
+        return
+      }
+      withdrawStaking(propertyAddress, amountNumber)
     },
-    [withdrawStaking, propertyAddress]
+    [withdrawStaking, propertyAddress, web3]
   )
   const onClickMax = () =>
     whenDefinedAll([web3, accountAddress], ([libWeb3, account]) =>
@@ -66,6 +76,7 @@ export const Withdraw = ({ className, title, propertyAddress, onChange: onChange
         value={withdrawAmount}
         onChange={onChange}
         onSearch={withdrawFor}
+        disabled={!web3}
         onClickMax={onClickMax}
       />
       <SubtitleContianer>
