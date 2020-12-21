@@ -6357,7 +6357,7 @@ export const ListPropertyDocument = gql`
       where: {
         authentication: {
           authentication_id: { _ilike: $ilike }
-          property_creation: { from_address: { _eq: $from } }
+          property_meta: { author: { _eq: $from } }
           market: { _eq: $market, _nin: $marketOther }
         }
       }
@@ -6371,7 +6371,7 @@ export const ListPropertyDocument = gql`
       where: {
         authentication: {
           authentication_id: { _ilike: $ilike }
-          property_creation: { from_address: { _eq: $from } }
+          property_meta: { author: { _eq: $from } }
           market: { _eq: $market, _nin: $marketOther }
         }
       }
@@ -6434,7 +6434,7 @@ export const ListPropertyOrderByMostRecentDocument = gql`
       where: {
         authentication: {
           authentication_id: { _ilike: $ilike }
-          property_creation: { from_address: { _eq: $from } }
+          property_meta: { author: { _eq: $from } }
           market: { _eq: $market, _nin: $marketOther }
         }
       }
@@ -6448,7 +6448,7 @@ export const ListPropertyOrderByMostRecentDocument = gql`
       where: {
         authentication: {
           authentication_id: { _ilike: $ilike }
-          property_creation: { from_address: { _eq: $from } }
+          property_meta: { author: { _eq: $from } }
           market: { _eq: $market, _nin: $marketOther }
         }
       }
