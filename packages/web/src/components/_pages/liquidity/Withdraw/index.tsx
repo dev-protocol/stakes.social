@@ -44,7 +44,6 @@ export const Withdraw = () => {
         whenDefined(web3, w =>
           unstakeQuery(w, queryAmount).then(x => {
             if (x) {
-              console.log(x.toFixed())
               setRewardClaimed(toNaturalNumber(x).toFixed())
             }
           })
