@@ -71,9 +71,6 @@ export const Deposit = () => {
   }, [totalStakingShares, totalStaked, accounting, finalUnlockSchedule])
   const updateEstimate = useCallback(
     (value?: BigNumber) => {
-      if (!web3) {
-        return
-      }
       const data = isFulfilled()
       if (data === false) {
         return setRequireReEstimate(true)
@@ -87,7 +84,7 @@ export const Deposit = () => {
       })
       setEstimatedReward(toNaturalNumber(estimated).dp(10).toFixed())
     },
-    [web3, estimate, isFulfilled]
+    [estimate, isFulfilled]
   )
   const updateAmount = useCallback(
     (value: string) => {
@@ -152,7 +149,7 @@ export const Deposit = () => {
     updateAmount('0')
     purge()
   }
-  if (requireReEstimate) {
+  if (requireReEstimate && web3) {
     updateEstimate(amount)
   }
 
