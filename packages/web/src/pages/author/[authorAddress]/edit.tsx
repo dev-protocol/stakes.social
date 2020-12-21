@@ -16,7 +16,7 @@ import {
   useCreatePropertySetting,
   useUpdatePropertySetting
 } from 'src/fixtures/dev-for-apps/hooks'
-import { Pagination, Spin, Button, Divider, Form, Input, Result, Skeleton, Upload } from 'antd'
+import { Pagination, Spin, Button, Divider, Form, Input, Result, Skeleton, Switch, Upload } from 'antd'
 import { whenDefined } from 'src/fixtures/utility'
 import { UploadChangeParam, UploadFile } from 'antd/lib/upload/interface'
 import { Image } from 'src/fixtures/dev-for-apps/utility'
@@ -49,18 +49,20 @@ const apiDataToUploadFile = ({ hash: uid, url, name, size, mime: type }: Image):
 
 const ProfileUpdateForm = ({ accountAddress }: { accountAddress: string }) => {
   const [form] = Form.useForm()
+  const [isPrivateStaking, setIsPrivateStaking] = useState(false)
   const { data, found } = useGetAccount(accountAddress)
   const { postAccountHandler: createAccount, isLoading } = useCreateAccount(accountAddress)
   const { putAccountHandler: updateAccount } = useUpdateAccount(Number(data?.id), accountAddress)
   const handleSubmit = useCallback(
-    (displayName: string, biography: string, website: string, github: string) => {
+    (displayName: string, biography: string, website: string, github: string, isPrivateStaking: boolean) => {
       const handler = data?.id ? updateAccount : createAccount
-      // TODO: set from form data
-      const isPrivateStaking = false
       handler(displayName, biography, website, github, isPrivateStaking)
     },
     [createAccount, updateAccount, data]
   )
+  const onChange = (checked: boolean) => {
+    setIsPrivateStaking(checked)
+  }
 
   useEffect(() => {
     form.setFieldsValue({
@@ -69,6 +71,7 @@ const ProfileUpdateForm = ({ accountAddress }: { accountAddress: string }) => {
       website: data?.links?.website,
       github: data?.links?.github
     })
+    setIsPrivateStaking(data?.property_settings?.private_staking || false)
   }, [data, form])
 
   return (
@@ -79,13 +82,15 @@ const ProfileUpdateForm = ({ accountAddress }: { accountAddress: string }) => {
         displayName,
         biography,
         website,
-        github
+        github,
+        isPrivateStaking
       }: {
         displayName: string
         biography: string
         website: string
         github: string
-      }) => handleSubmit(displayName, biography, website, github)}
+        isPrivateStaking: boolean
+      }) => handleSubmit(displayName, biography, website, github, isPrivateStaking)}
     >
       <Form.Item label="Display Name" name="displayName">
         <Input placeholder="Enter the new display name" />
@@ -98,6 +103,10 @@ const ProfileUpdateForm = ({ accountAddress }: { accountAddress: string }) => {
       </Form.Item>
       <Form.Item label="GitHub" name="github">
         {found ? <Input placeholder="your github account url" /> : <SkeletonInput />}
+      </Form.Item>
+      <h3>Staking Setting</h3>
+      <Form.Item label="Incognito Mode" name="isPrivateStaking">
+        <Switch checked={isPrivateStaking} onChange={onChange} />
       </Form.Item>
       <Button type="primary" htmlType="submit" loading={isLoading} disabled={isLoading}>
         Save
