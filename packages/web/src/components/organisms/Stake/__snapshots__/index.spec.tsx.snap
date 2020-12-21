@@ -49,6 +49,9 @@ exports[`Stake Snapshot 1`] = `
           </span>
         </span>
       </div>
+      <div
+        style="height: 40px;"
+      />
     </div>
   </div>
 </body>
