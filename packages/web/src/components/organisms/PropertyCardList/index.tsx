@@ -80,9 +80,9 @@ const Wrap = styled.div`
 `
 
 const FILTER_OPTIONS = [
-  { label: 'Your properties', value: 'YOUR_PROPS' },
+  { label: 'Your Properties', value: 'YOUR_PROPS' },
   { label: 'Most Staked', value: 'MOST_STAKED' },
-  { label: 'Most recent', value: 'MOST_RECENT' }
+  { label: 'Most Recent', value: 'MOST_RECENT' }
 ]
 
 const FilterOptionContainer = styled.div`

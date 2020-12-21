@@ -27,7 +27,7 @@ const InvitationRequest = (_: Props) => {
       <Headline height={300}>
         <H2>Creator Waitlist</H2>
         <p style={{ textAlign: 'center' }}>
-          Dev Protocol is now accepting applications to onboard your Github OSS project.
+          Dev Protocol is now accepting applications to onboard your GitHub OSS project.
         </p>
       </Headline>
       <WrapContainer>

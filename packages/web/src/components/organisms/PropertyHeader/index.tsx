@@ -169,7 +169,9 @@ export const PropertyHeader = ({ propertyAddress, apy, creators }: Props) => {
     <ResponsivePropertyAddressFrame>
       <HeaderContainer>
         <Header>
-          {`${data?.property_authentication?.[0]?.authentication_id}'s Pool` || `${propertyAddress} Pool`}
+          {data?.property_authentication?.[0]?.authentication_id
+            ? `${data?.property_authentication?.[0]?.authentication_id}'s Pool`
+            : `${propertyAddress} Pool`}
         </Header>
         {isSelf && <CopyBadge propertyAddress={propertyAddress} />}
       </HeaderContainer>
