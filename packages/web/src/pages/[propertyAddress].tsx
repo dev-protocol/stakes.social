@@ -209,7 +209,7 @@ const PropertyAddressDetail = (_: Props) => {
           {data ? (
             <PropertyHeader apy={apy} creators={creators} propertyAddress={propertyAddress} />
           ) : (
-            <Skeleton paragraph={{ rows: 1 }} />
+            <Skeleton active paragraph={{ rows: 1 }} />
           )}
         </Container>
         <Main>
