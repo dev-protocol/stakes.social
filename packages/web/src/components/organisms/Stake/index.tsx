@@ -45,6 +45,7 @@ export const Stake = ({ className, title, propertyAddress }: Props) => {
         onSearch={stakeFor}
         onClickMax={onClickMax}
       />
+      <div style={{ height: '40px' }}></div>
     </FormContainer>
   )
 }
