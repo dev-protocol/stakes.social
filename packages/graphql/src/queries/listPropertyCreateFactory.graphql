@@ -7,7 +7,7 @@ query ListProperty($limit: Int, $offset: Int, $ilike: String, $from: String, $ma
     where: {
       authentication: {
         authentication_id: { _ilike: $ilike }
-        property_creation: { from_address: { _eq: $from } }
+        property_meta: { author: { _eq: $from } }
         market: { _eq: $market, _nin: $marketOther }
       }
     }
@@ -18,7 +18,7 @@ query ListProperty($limit: Int, $offset: Int, $ilike: String, $from: String, $ma
     ...propertyFactoryCreate
   }
   property_factory_create_aggregate(
-    where: { authentication: { authentication_id: { _ilike: $ilike } property_creation: { from_address: { _eq: $from } } market: { _eq: $market, _nin: $marketOther } } }
+    where: { authentication: { authentication_id: { _ilike: $ilike } property_meta: { author: { _eq: $from } } market: { _eq: $market, _nin: $marketOther } } }
   ) {
     aggregate {
       count
@@ -33,7 +33,7 @@ query ListPropertyOrderByMostRecent($limit: Int, $offset: Int, $ilike: String, $
     where: {
       authentication: {
         authentication_id: { _ilike: $ilike }
-        property_creation: { from_address: { _eq: $from } }
+        property_meta: { author: { _eq: $from } }
         market: { _eq: $market, _nin: $marketOther }
       }
     }
@@ -47,7 +47,7 @@ query ListPropertyOrderByMostRecent($limit: Int, $offset: Int, $ilike: String, $
     where: {
       authentication: {
         authentication_id: { _ilike: $ilike }
-        property_creation: { from_address: { _eq: $from } }
+        property_meta: { author: { _eq: $from } }
         market: { _eq: $market, _nin: $marketOther }
       }
     }
