@@ -38,6 +38,11 @@ export const Navigations = [
     key: 'dashboard',
     label: 'Dashboard',
     pathname: '/stats'
+  },
+  {
+    key: 'portfolio',
+    label: 'Portfolio',
+    pathname: '/profile'
   }
 ]
 
@@ -45,7 +50,7 @@ const toKey = (_pathname: string) => Navigations.find(({ pathname }) => pathname
 
 export const Navigation = ({ handleMenuOpen }: NavigationProps) => {
   const router = useRouter()
-  const [current, setCurrent] = useState(toKey(router?.pathname) || Navigations[0].key)
+  const [current, setCurrent] = useState(toKey(router?.pathname || Navigations[0].key)) // || Navigations[0].key
   const [isDesktop, setDesktop] = useState(typeof window !== 'undefined' && window?.innerWidth > 1400)
 
   const updateMedia = () => {
@@ -68,6 +73,8 @@ export const Navigation = ({ handleMenuOpen }: NavigationProps) => {
     [setCurrent]
   )
 
+  const filteredNavigations = Navigations.filter(navigation => navigation.pathname !== '/profile')
+
   return (
     <>
       {isDesktop && (
@@ -75,10 +82,10 @@ export const Navigation = ({ handleMenuOpen }: NavigationProps) => {
           style={{ background: 'black' }}
           theme="dark"
           onClick={handleClick}
-          selectedKeys={[current]}
+          selectedKeys={[current || '']}
           mode="horizontal"
         >
-          {Navigations.map(nav => (
+          {filteredNavigations.map(nav => (
             <NavMenuItem key={nav.key}>
               <Link href={nav.pathname}>
                 <a style={{ display: 'block', width: 'auto', fontSize: '0.8em' }}>{nav.label}</a>

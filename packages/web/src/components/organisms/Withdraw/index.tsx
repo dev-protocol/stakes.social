@@ -1,10 +1,12 @@
 import React, { useCallback, useState, useMemo, ChangeEvent, useEffect } from 'react'
+import styled from 'styled-components'
 import { useProvider } from 'src/fixtures/wallet/hooks'
 import { getMyStakingAmount } from 'src/fixtures/dev-kit/client'
 import { useWithdrawStaking } from 'src/fixtures/dev-kit/hooks'
 import { toAmountNumber, toNaturalNumber, whenDefinedAll } from 'src/fixtures/utility'
 import { TransactForm } from 'src/components/molecules/TransactForm'
 import { FormContainer } from 'src/components/molecules/TransactForm/FormContainer'
+import { InfoCircleOutlined } from '@ant-design/icons'
 
 interface Props {
   className?: string
@@ -12,6 +14,20 @@ interface Props {
   propertyAddress: string
   onChange?: (value: string) => void
 }
+
+const InfoContainer = styled.div`
+  margin-right: 20px;
+  svg {
+    width: 1.5em;
+    height: auto;
+  }
+`
+
+const SubtitleContianer = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+`
 
 export const Withdraw = ({ className, title, propertyAddress, onChange: onChangeAmount }: Props) => {
   const [withdrawAmount, setWithdrawAmount] = useState<string>('')
@@ -51,7 +67,15 @@ export const Withdraw = ({ className, title, propertyAddress, onChange: onChange
         onChange={onChange}
         onSearch={withdrawFor}
         onClickMax={onClickMax}
-      ></TransactForm>
+      />
+      <SubtitleContianer>
+        <InfoContainer>
+          <InfoCircleOutlined />
+        </InfoContainer>
+        <span style={{ fontSize: '0.8em' }}>
+          You will receive all accumulated rewards when withdrawing any amount of staked DEV.
+        </span>
+      </SubtitleContianer>
     </FormContainer>
   )
 }

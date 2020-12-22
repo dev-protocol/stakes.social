@@ -37,7 +37,6 @@ import { useTheGraph } from '../uniswap-pool/hooks'
 
 const getAllTokensClaimed = (client: Web3) => () =>
   allTokensClaimed(client).then(allEvents => {
-    console.log(allEvents)
     return allEvents.reduce(
       (a: BigNumber, c) => a.plus(c.returnValues.amount),
       toBigNumber(allEvents[0]?.returnValues.amount || 0)
@@ -46,7 +45,6 @@ const getAllTokensClaimed = (client: Web3) => () =>
 
 const getTokensLocked = (client: Web3) => () =>
   allTokensLocked(client).then(allEvents => {
-    console.log(allEvents)
     return allEvents.reduce((a: BigNumber, c) => a.plus(c.returnValues.amount), toBigNumber(0))
   })
 

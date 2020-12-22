@@ -44,7 +44,8 @@ export const Stake = ({ className, title, propertyAddress }: Props) => {
         onChange={onChange}
         onSearch={stakeFor}
         onClickMax={onClickMax}
-      ></TransactForm>
+      />
+      <div style={{ height: '40px' }}></div>
     </FormContainer>
   )
 }
