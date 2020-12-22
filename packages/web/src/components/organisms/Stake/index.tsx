@@ -5,6 +5,7 @@ import { useStake } from 'src/fixtures/dev-kit/hooks'
 import { toNaturalNumber, whenDefinedAll } from 'src/fixtures/utility'
 import { TransactForm } from 'src/components/molecules/TransactForm'
 import { FormContainer } from 'src/components/molecules/TransactForm/FormContainer'
+import { IncognitoSwitch } from 'src/components/molecules/IncognitoSwitch'
 
 interface Props {
   className?: string
@@ -45,7 +46,9 @@ export const Stake = ({ className, title, propertyAddress }: Props) => {
         onSearch={stakeFor}
         onClickMax={onClickMax}
       />
-      <div style={{ height: '40px' }}></div>
+      <div style={{ height: '40px' }}>
+        <IncognitoSwitch propertyAddress={propertyAddress} />
+      </div>
     </FormContainer>
   )
 }
