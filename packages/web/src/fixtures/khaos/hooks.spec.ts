@@ -15,8 +15,11 @@ describe('khaos hooks', () => {
       ;(useSWR as jest.Mock).mockImplementation(() => ({ data, error }))
       ;(postSignGitHubMarketAsset as jest.Mock).mockResolvedValue({ publicSignature: 'dummy signature' })
       const { result } = renderHook(() => usePostSignGitHubMarketAsset())
-      const postResult = await result.current.postSignGitHubMarketAssetHandler('repo', 'token')
-      expect(postResult).toEqual(data)
+      await act(async () => {
+        const postResult = await result.current.postSignGitHubMarketAssetHandler('repo', 'token')
+        expect(postResult).toEqual(data)
+      })
+      expect(result.current.isLoading).toBe(false)
     })
 
     test('failure post auth github asset', async () => {
