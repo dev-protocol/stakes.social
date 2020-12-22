@@ -191,6 +191,7 @@ const IncognitoProperty = ({
     accountAddress
   )
   const { data: incognitoSettings } = useGetPropertySetting(propertyAddress, accountAddress)
+  const [incognitoMode, setIncognitoMode] = useState(false)
   const { data } = useGetPropertyAuthenticationQuery({ variables: { propertyAddress } })
   const includeAssets = useMemo(
     () => data && truncate(data.property_authentication.map(e => e.authentication_id).join(', '), 24),
@@ -201,9 +202,15 @@ const IncognitoProperty = ({
   const handleModeChange = async (isIncognito: boolean) => {
     if (!incognitoSettings) {
       await postPropertySettingHandler(isIncognito)
+    } else {
+      await putPropertySettingHandler(isIncognito)
     }
-    await putPropertySettingHandler(isIncognito)
+    setIncognitoMode(isIncognito)
   }
+
+  useEffect(() => {
+    setIncognitoMode(incognitoSettings?.private_staking || false)
+  }, [incognitoSettings])
 
   return (
     <Card>
@@ -218,31 +225,18 @@ const IncognitoProperty = ({
             style={{ marginLeft: '5px' }}
             disabled={isCreatePropertyLoading || isUpdatePropertyLoading}
             onClick={() => handleModeChange(false)}
-            isActive={
-              typeof incognitoSettings?.private_staking === 'undefined' || incognitoSettings?.private_staking === false
-            }
+            isActive={!incognitoMode}
             isFirst
           >
-            <Circle
-              isActive={
-                typeof incognitoSettings?.private_staking === 'undefined' ||
-                incognitoSettings?.private_staking === false
-              }
-            />
+            <Circle isActive={!incognitoMode} />
             <span style={{ marginLeft: '2px' }}>Public</span>
           </IncognitoButton>
           <IncognitoButton
             disabled={isCreatePropertyLoading || isUpdatePropertyLoading}
             onClick={() => handleModeChange(true)}
-            isActive={
-              typeof incognitoSettings?.private_staking !== 'undefined' && incognitoSettings?.private_staking === true
-            }
+            isActive={incognitoMode}
           >
-            <Circle
-              isActive={
-                typeof incognitoSettings?.private_staking !== 'undefined' && incognitoSettings?.private_staking === true
-              }
-            />
+            <Circle isActive={incognitoMode} />
             <span style={{ marginLeft: '2px' }}>Hidden</span>
           </IncognitoButton>
         </CurrencyContainer>
