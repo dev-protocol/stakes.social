@@ -17,25 +17,31 @@ export const NavMenuItem = styled(NavMenu.Item)`
   margin-left: 2em;
 `
 
-export const AccountBtn = styled.div`
-  color: white;
+export const AccountBtn = styled.div<{ currentRouter?: string }>`
+  color: ${props => (props.currentRouter === '/profile' ? 'white' : 'grey')};
   position: absolute;
   top: 0px;
   right: 20px;
-  font-size: 1.1rem;
+  font-size: 1em;
   height: 47px;
   cursor: pointer;
   line-height: 45px;
   padding: 0px 15px;
 
+  background: ${props => (props.currentRouter === '/profile' ? '#2f80ed' : 'none')};
+
   &:hover {
-    background: #272727;
+    color: white;
+    background: ${props => (props.currentRouter === '/profile' ? '#none' : '#2f80ed')};
   }
+
+  transition: all 0.3s ease 0s;
 
   @media (max-width: 768px) {
     right: 5px;
     padding: 0px 10px;
     transform: translateY(1px);
+    background: black;
   }
 `
 
