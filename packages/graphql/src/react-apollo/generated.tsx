@@ -5978,6 +5978,7 @@ export type ListTopStakersAccountQuery = { __typename?: 'query_root' } & {
 
 export type ListTopSupportingAccountQueryVariables = Exact<{
   account_address: Scalars['String']
+  notin_property_addresses?: Maybe<Array<Scalars['String']>>
   limit?: Maybe<Scalars['Int']>
   offset?: Maybe<Scalars['Int']>
 }>
@@ -6622,9 +6623,14 @@ export type ListTopStakersAccountQueryResult = Apollo.QueryResult<
   ListTopStakersAccountQueryVariables
 >
 export const ListTopSupportingAccountDocument = gql`
-  query listTopSupportingAccount($account_address: String!, $limit: Int, $offset: Int) {
+  query listTopSupportingAccount(
+    $account_address: String!
+    $notin_property_addresses: [String!]
+    $limit: Int
+    $offset: Int
+  ) {
     account_lockup(
-      where: { account_address: { _eq: $account_address } }
+      where: { account_address: { _eq: $account_address }, property_address: { _nin: $notin_property_addresses } }
       order_by: { value: desc }
       limit: $limit
       offset: $offset
@@ -6648,6 +6654,7 @@ export const ListTopSupportingAccountDocument = gql`
  * const { data, loading, error } = useListTopSupportingAccountQuery({
  *   variables: {
  *      account_address: // value for 'account_address'
+ *      notin_property_addresses: // value for 'notin_property_addresses'
  *      limit: // value for 'limit'
  *      offset: // value for 'offset'
  *   },

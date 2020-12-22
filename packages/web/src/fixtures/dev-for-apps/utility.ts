@@ -272,11 +272,16 @@ export const putProperty = (
     })
   }).then(res => res.json())
 
-export const getPropertySetting = (propertyAddress: string, accountAddress?: string): Promise<Array<PropertySetting>> =>
+export const getPropertySetting = (
+  propertyAddress?: string,
+  accountAddress?: string
+): Promise<Array<PropertySetting>> =>
   fetch(
-    accountAddress
+    propertyAddress && accountAddress
       ? `${StrapiBaseUrl}/property-settings?property_address=${propertyAddress}&address=${accountAddress}`
-      : `${StrapiBaseUrl}/property-settings?property_address=${propertyAddress}`
+      : propertyAddress && !accountAddress
+      ? `${StrapiBaseUrl}/property-settings?property_address=${propertyAddress}`
+      : `${StrapiBaseUrl}/property-settings?address=${accountAddress}`
   )
     .then(res => res.json())
     .catch(always([]))

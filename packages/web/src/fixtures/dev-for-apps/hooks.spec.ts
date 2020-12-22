@@ -13,7 +13,15 @@ import {
   useUploadAccountCoverImages,
   useUploadPropertyCoverImages
 } from './hooks'
-import { postPropertyTags, postAccount, putAccount, postProperty, putProperty, postPropertySetting, putPropertySetting } from './utility'
+import {
+  postPropertyTags,
+  postAccount,
+  putAccount,
+  postProperty,
+  putProperty,
+  postPropertySetting,
+  putPropertySetting
+} from './utility'
 import { signWithCache } from 'src/fixtures/wallet/utility'
 import { useUploadFile } from './functions/useUploadFile'
 import { useGetAccount } from './functions/useGetAccount'

@@ -6,8 +6,10 @@ export const SWRCachePath = {
   getPropertyTags: (propertyAddress: string) => `${BaseUrl}/mainnet/property/${propertyAddress}/tags`,
   getAccount: (walletAddress?: string) => `${StrapiBaseUrl}/accounts?address=${walletAddress}`,
   getProperty: (propertyAddress?: string) => `${StrapiBaseUrl}/properties?address=${propertyAddress}`,
-  getPropertySettings: (propertyAddress: string) =>
+  getPropertySettingsByProperty: (propertyAddress: string) =>
     `${StrapiBaseUrl}/property-settings?property_address=${propertyAddress}`,
+  getPropertySettingsByAccount: (accountAddress: string) =>
+    `${StrapiBaseUrl}/property-settings?address=${accountAddress}`,
   getPropertySetting: (propertyAddress: string, accountAddress: string) =>
     `${StrapiBaseUrl}/property-settings?property_address=${propertyAddress}&address=${accountAddress}`
 } as const

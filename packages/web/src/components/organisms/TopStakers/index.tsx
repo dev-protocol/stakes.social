@@ -5,7 +5,7 @@ import { Avatar } from 'src/components/molecules/Avatar'
 import styled, { css } from 'styled-components'
 import { useEffect } from 'react'
 import { useListTopStakersAccountLazyQuery } from '@dev/graphql'
-import { useGetAccount, useGetPropertySettings } from 'src/fixtures/dev-for-apps/hooks'
+import { useGetAccount, useGetPropertySettingsByProperty } from 'src/fixtures/dev-for-apps/hooks'
 import { Spin } from 'antd'
 import Link from 'next/link'
 
@@ -92,7 +92,7 @@ const Staker = ({ accountAddress, value }: { accountAddress: string; value: numb
 }
 
 const TopStakers = ({ authorAddress, propertyAddress }: TopStakersProps) => {
-  const { data: incognitoSettings } = useGetPropertySettings(propertyAddress || '')
+  const { data: incognitoSettings } = useGetPropertySettingsByProperty(propertyAddress || '')
   const incognitoAddresses = useMemo(() => {
     return incognitoSettings?.filter(x => x.private_staking).map(x => x.address) || []
   }, [incognitoSettings])

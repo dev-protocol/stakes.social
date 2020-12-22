@@ -1,8 +1,8 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import styled from 'styled-components'
 import { useListTopSupportingAccountQuery, useGetPropertyAuthenticationQuery } from '@dev/graphql'
 import Link from 'next/link'
-import { useGetProperty, useGetPropertySetting } from 'src/fixtures/dev-for-apps/hooks'
+import { useGetProperty, useGetPropertySettingsByAccount } from 'src/fixtures/dev-for-apps/hooks'
 import { AvatarProperty } from 'src/components/molecules/AvatarProperty'
 import { Spin } from 'antd'
 
@@ -42,15 +42,7 @@ const AccountAddress = styled.span`
   max-width: 150px;
 `
 
-const Support = ({
-  accountAddress,
-  propertyAddress,
-  value
-}: {
-  accountAddress: string
-  propertyAddress: string
-  value: number
-}) => {
+const Support = ({ propertyAddress, value }: { propertyAddress: string; value: number }) => {
   const { data: propertyData } = useGetProperty(propertyAddress)
   const { data } = useGetPropertyAuthenticationQuery({
     variables: {
@@ -59,52 +51,45 @@ const Support = ({
   })
 
   const propertyTitle = data?.property_authentication?.[0]?.authentication_id
-  const { data: incognitoSettings } = useGetPropertySetting(propertyAddress, accountAddress)
 
   return (
     <>
-      {!incognitoSettings?.private_staking ? (
-        <Link href={`/${propertyAddress}`} passHref>
-          <SupportSection>
-            <AvatarProperty size={'100'} propertyAddress={propertyAddress} />
-            <AccountAddress>{propertyData?.name || propertyTitle || propertyAddress}</AccountAddress>
-            <span>{`${(value / Math.pow(10, 18)).toFixed(0)}`}</span>
-          </SupportSection>
-        </Link>
-      ) : (
-        <SupportSection style={{ cursor: 'auto' }}>
-          <AvatarProperty size={'100'} propertyAddress={undefined} />
-          <AccountAddress>
-            <span style={{ fontStyle: 'italic' }}>Hidden project</span>
-          </AccountAddress>
-          <span>-</span>
+      <Link href={`/${propertyAddress}`} passHref>
+        <SupportSection>
+          <AvatarProperty size={'100'} propertyAddress={propertyAddress} />
+          <AccountAddress>{propertyData?.name || propertyTitle || propertyAddress}</AccountAddress>
+          <span>{`${(value / Math.pow(10, 18)).toFixed(0)}`}</span>
         </SupportSection>
-      )}
+      </Link>
     </>
   )
 }
 
 const TopSupporting = ({ accountAddress }: Props) => {
+  const { data: incognitoSettings } = useGetPropertySettingsByAccount(accountAddress)
+  const incognitoPropertyAddresses = useMemo(() => {
+    return incognitoSettings?.filter(x => x.private_staking).map(x => x.property_address) || []
+  }, [incognitoSettings])
   const { data, loading } = useListTopSupportingAccountQuery({
     variables: {
       account_address: accountAddress,
+      notin_property_addresses: incognitoPropertyAddresses,
       limit: 5
     }
   })
 
+  const filteredTopSupportingAccount = useMemo(() => {
+    return data?.account_lockup.filter(x => !incognitoPropertyAddresses.includes(x.property_address)) || []
+  }, [data, incognitoPropertyAddresses])
+
   return (
     <div>
-      {!loading && data?.account_lockup?.length === 0 && <div>This author doesnt support other projects</div>}
+      {!loading && filteredTopSupportingAccount.length === 0 && <div>This author doesnt support other projects</div>}
       {loading && <Spin size="large" style={{ display: 'block', width: 'auto', padding: '100px' }} />}
       <TopSupportingContainer>
         {data?.account_lockup &&
-          data?.account_lockup.map(({ property_address, value }) => (
-            <Support
-              key={property_address}
-              accountAddress={accountAddress}
-              propertyAddress={property_address}
-              value={value}
-            />
+          filteredTopSupportingAccount.map(({ property_address, value }) => (
+            <Support key={property_address} propertyAddress={property_address} value={value} />
           ))}
       </TopSupportingContainer>
     </div>
