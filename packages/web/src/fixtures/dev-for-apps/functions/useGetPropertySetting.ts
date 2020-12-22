@@ -15,3 +15,15 @@ export const useGetPropertySetting = (propertyAddress: string, accountAddress: s
 
   return { data: whenDefined(data, x => x[0]), error, mutate, found }
 }
+
+export const useGetPropertySettings = (propertyAddress: string) => {
+  const shouldFetch = propertyAddress !== ''
+  const { data, error, mutate } = useSWR<UnwrapFunc<typeof getPropertySetting>, Error>(
+    shouldFetch ? SWRCachePath.getPropertySettings(propertyAddress) : null,
+    () => getPropertySetting(propertyAddress),
+    { onError: err => message.error(err.message) }
+  )
+  const found = data instanceof Array
+
+  return { data: whenDefined(data, x => x), error, mutate, found }
+}

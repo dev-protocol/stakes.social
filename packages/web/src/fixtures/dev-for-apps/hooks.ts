@@ -20,9 +20,9 @@ import { useProvider } from '../wallet/hooks'
 import { useUploadFile, useDeleteFile } from './functions/useUploadFile'
 import { useGetAccount } from './functions/useGetAccount'
 import { useGetProperty } from './functions/useGetProperty'
-import { useGetPropertySetting } from './functions/useGetPropertySetting'
+import { useGetPropertySetting, useGetPropertySettings } from './functions/useGetPropertySetting'
 
-export { useUploadFile, useDeleteFile, useGetAccount, useGetProperty, useGetPropertySetting }
+export { useUploadFile, useDeleteFile, useGetAccount, useGetProperty, useGetPropertySetting, useGetPropertySettings }
 
 export const useGetPropertyTags = (propertyAddress: string) => {
   const shouldFetch = propertyAddress !== ''

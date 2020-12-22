@@ -263,7 +263,7 @@ const PropertyAddressDetail = (_: Props) => {
           {isExistProperty && <Author propertyAddress={propertyAddress} />}
           <div>
             <h2>Top stakers</h2>
-            {isExistProperty && <TopStakerList propertyAdress={propertyAddress} />}
+            {isExistProperty && <TopStakerList propertyAddress={propertyAddress} />}
           </div>
         </Main>
       </Wrap>

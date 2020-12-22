@@ -1,16 +1,16 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import { useQuery } from '@apollo/client'
 import getTopStakersOfPropertyQuery from './query/getTopStakersOfProperty'
 import { Avatar } from 'src/components/molecules/Avatar'
 import styled, { css } from 'styled-components'
 import { useEffect } from 'react'
 import { useListTopStakersAccountLazyQuery } from '@dev/graphql'
-import { useGetAccount, useGetPropertySetting } from 'src/fixtures/dev-for-apps/hooks'
+import { useGetAccount, useGetPropertySettings } from 'src/fixtures/dev-for-apps/hooks'
 import { Spin } from 'antd'
 import Link from 'next/link'
 
 interface TopStakersProps {
-  propertyAdress?: string
+  propertyAddress?: string
   authorAddress?: string
 }
 
@@ -66,45 +66,24 @@ const StakerSection = styled.div<{ isCreator?: Boolean }>`
 
 const formatter = new Intl.NumberFormat('en-US')
 
-const Staker = ({
-  propertyAddress,
-  accountAddress,
-  value
-}: {
-  propertyAddress: string | undefined
-  accountAddress: string
-  value: number
-}) => {
+const Staker = ({ accountAddress, value }: { accountAddress: string; value: number }) => {
   const { data } = useGetAccount(accountAddress)
   const isCreator = !!data
-  const { data: incognitoSettings } = useGetPropertySetting(propertyAddress || '', accountAddress)
 
   return (
     <>
-      {isCreator && !incognitoSettings?.private_staking ? (
+      {isCreator ? (
         <Link href={`/author/${accountAddress}`} passHref>
           <StakerSection isCreator={isCreator}>
-            <Avatar accountAddress={incognitoSettings?.private_staking ? undefined : accountAddress} size={'100'} />
-            <AccountAddress>
-              {incognitoSettings?.private_staking ? (
-                <span style={{ fontStyle: 'italic' }}>Hidden user</span>
-              ) : (
-                data?.name || accountAddress
-              )}
-            </AccountAddress>
+            <Avatar accountAddress={accountAddress} size={'100'} />
+            <AccountAddress>{data?.name || accountAddress}</AccountAddress>
             <span>{`${formatter.format(parseInt((value / Math.pow(10, 18)).toFixed(0)))}`}</span>
           </StakerSection>
         </Link>
       ) : (
         <StakerSection>
-          <Avatar accountAddress={incognitoSettings?.private_staking ? undefined : accountAddress} size={'100'} />
-          <AccountAddress>
-            {incognitoSettings?.private_staking ? (
-              <span style={{ fontStyle: 'italic' }}>Hidden user</span>
-            ) : (
-              data?.name || accountAddress
-            )}
-          </AccountAddress>
+          <Avatar accountAddress={accountAddress} size={'100'} />
+          <AccountAddress>{data?.name || accountAddress}</AccountAddress>
           <span>{`${formatter.format(parseInt((value / Math.pow(10, 18)).toFixed(0)))}`}</span>
         </StakerSection>
       )}
@@ -112,13 +91,19 @@ const Staker = ({
   )
 }
 
-const TopStakers = ({ authorAddress, propertyAdress }: TopStakersProps) => {
+const TopStakers = ({ authorAddress, propertyAddress }: TopStakersProps) => {
+  const { data: incognitoSettings } = useGetPropertySettings(propertyAddress || '')
+  const incognitoAddresses = useMemo(() => {
+    return incognitoSettings?.filter(x => x.private_staking).map(x => x.address) || []
+  }, [incognitoSettings])
+
   const { data: topPropertyStakersData, loading: isPropertyStakingLoading } = useQuery(getTopStakersOfPropertyQuery, {
     variables: {
       limit: 5,
-      property_address: propertyAdress
+      property_address: propertyAddress,
+      notin_account_addresses: incognitoAddresses
     },
-    skip: !!authorAddress || !propertyAdress
+    skip: !!authorAddress || !propertyAddress
   })
 
   const [
@@ -156,12 +141,7 @@ const TopStakers = ({ authorAddress, propertyAdress }: TopStakersProps) => {
 
       <TopStakerRanking>
         {stakerItems?.map(({ account_address, value }) => (
-          <Staker
-            key={account_address}
-            propertyAddress={propertyAdress}
-            accountAddress={account_address}
-            value={value}
-          />
+          <Staker key={account_address} accountAddress={account_address} value={value} />
         ))}
       </TopStakerRanking>
     </Flex>
