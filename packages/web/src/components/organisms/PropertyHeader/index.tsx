@@ -173,7 +173,7 @@ export const PropertyHeader = ({ propertyAddress, apy, creators }: Props) => {
             ? `${data?.property_authentication?.[0]?.authentication_id}'s Pool`
             : `${propertyAddress} Pool`}
         </Header>
-        {!isNotSelf && <CopyBadge propertyAddress={propertyAddress} />}
+        {dataAuthor && !isNotSelf && <CopyBadge propertyAddress={propertyAddress} />}
       </HeaderContainer>
 
       <SubHeader>
