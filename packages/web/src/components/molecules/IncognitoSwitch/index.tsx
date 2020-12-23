@@ -55,7 +55,7 @@ export const IncognitoSwitch = ({ propertyAddress }: Props) => {
         <span style={{ fontSize: '0.8em' }}>
           Incognito Staking:
           <br />
-          If this is ON, other users cannot see that you are staking.
+          If this is ON, your staking will be hidden from the public.
         </span>
       </SubtitleContianer>
     </>

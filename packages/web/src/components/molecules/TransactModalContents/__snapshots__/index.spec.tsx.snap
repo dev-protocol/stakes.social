@@ -124,7 +124,7 @@ exports[`TransactModalContents Snapshot 1`] = `
             >
               Incognito Staking:
               <br />
-              If this is ON, other users cannot see that you are staking.
+              If this is ON, your staking will be hidden from the public.
             </span>
           </div>
         </div>
