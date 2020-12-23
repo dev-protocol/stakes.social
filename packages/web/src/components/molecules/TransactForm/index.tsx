@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import { Max } from 'src/components/molecules/Max'
 import { SearchProps } from 'antd/lib/input'
 import { ButtonWithGradient } from 'src/components/atoms/ButtonWithGradient'
+import { useProvider } from 'src/fixtures/wallet/hooks'
 
 type Props = SearchProps &
   React.RefAttributes<Input> & {
@@ -81,6 +82,7 @@ export const TransactForm = ({
   id,
   placeholder
 }: Props) => {
+  const { accountAddress } = useProvider()
   const onClick = useMemo(() => (onSearch ? () => onSearch('') : () => undefined), [onSearch])
   const suffix = useMemo(
     () => (
@@ -115,6 +117,7 @@ export const TransactForm = ({
           value={value}
           onChange={onChange}
           onSearch={onSearch}
+          disabled={accountAddress === '' || typeof accountAddress === 'undefined'}
           suffix={suffix}
           type="number"
           placeholder={placeholder}

@@ -16,7 +16,7 @@ const SignIn = () => {
 export const NotConnectedAndEmpty = (props: EmptyProps) => {
   const { accountAddress } = useProvider()
   const isConnected = Boolean(accountAddress)
-  const description = isConnected ? 'No Data' : 'Please signing in'
+  const description = isConnected ? 'No Data' : 'Please sign in'
 
   return (
     <Empty description={description} {...props}>

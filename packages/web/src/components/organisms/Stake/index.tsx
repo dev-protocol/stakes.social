@@ -20,7 +20,7 @@ export const Stake = ({ className, title, propertyAddress }: Props) => {
   const stakeFor = useCallback(
     (amount: string) => {
       if (!web3) {
-        message.warn({ content: 'Please signing in', key: 'StakeButton' })
+        message.warn({ content: 'Please sign in', key: 'StakeButton' })
         return
       }
       const amountNumber = toAmountNumber(amount)

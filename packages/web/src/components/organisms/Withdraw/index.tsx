@@ -37,7 +37,7 @@ export const Withdraw = ({ className, title, propertyAddress, onChange: onChange
   const withdrawFor = useCallback(
     (amount: string) => {
       if (!web3) {
-        message.warn({ content: 'Please signing in', key: 'WithdrawButton' })
+        message.warn({ content: 'Please sign in', key: 'WithdrawButton' })
         return
       }
       const amountNumber = toAmountNumber(amount)
