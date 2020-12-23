@@ -41,8 +41,8 @@ export const Withdraw = ({ className, title, propertyAddress, onChange: onChange
         return
       }
       const amountNumber = toAmountNumber(amount)
-      if (amountNumber.toNumber() <= 0) {
-        message.warn({ content: 'Please enter a value greater than 0', key: 'WithdrawButton' })
+      if (amountNumber.toNumber() < 0) {
+        message.warn({ content: 'Please enter a value greater than or equal to 0', key: 'WithdrawButton' })
         return
       }
       withdrawStaking(propertyAddress, amountNumber)
