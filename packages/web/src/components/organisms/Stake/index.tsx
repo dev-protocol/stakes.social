@@ -2,9 +2,10 @@ import React, { useCallback, useState, ChangeEvent, useMemo } from 'react'
 import { useProvider } from 'src/fixtures/wallet/hooks'
 import { balanceOf } from 'src/fixtures/dev-kit/client'
 import { useStake } from 'src/fixtures/dev-kit/hooks'
-import { toNaturalNumber, whenDefinedAll } from 'src/fixtures/utility'
+import { toAmountNumber, toNaturalNumber, whenDefinedAll } from 'src/fixtures/utility'
 import { TransactForm } from 'src/components/molecules/TransactForm'
 import { FormContainer } from 'src/components/molecules/TransactForm/FormContainer'
+import { message } from 'antd'
 
 interface Props {
   className?: string
@@ -18,9 +19,18 @@ export const Stake = ({ className, title, propertyAddress }: Props) => {
   const { stake } = useStake()
   const stakeFor = useCallback(
     (amount: string) => {
+      if (!web3) {
+        message.warn({ content: 'Please sign in', key: 'StakeButton' })
+        return
+      }
+      const amountNumber = toAmountNumber(amount)
+      if (amountNumber.toNumber() <= 0) {
+        message.warn({ content: 'Please enter a value greater than 0', key: 'StakeButton' })
+        return
+      }
       stake(propertyAddress, amount)
     },
-    [stake, propertyAddress]
+    [stake, propertyAddress, web3]
   )
   const onChange = (event: ChangeEvent<HTMLInputElement>) => {
     setStakeAmount(event.target.value)
@@ -43,6 +53,7 @@ export const Stake = ({ className, title, propertyAddress }: Props) => {
         value={stakeAmount}
         onChange={onChange}
         onSearch={stakeFor}
+        disabled={!web3}
         onClickMax={onClickMax}
       />
       <div style={{ height: '40px' }}></div>

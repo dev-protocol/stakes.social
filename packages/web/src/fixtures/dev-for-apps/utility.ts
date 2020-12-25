@@ -37,7 +37,7 @@ export type ImageFormat = {
 
 export type Image = ImageFormat & {
   id: number
-  formats: {
+  formats?: {
     thumbnail: ImageFormat
     small: ImageFormat
     medium: ImageFormat
