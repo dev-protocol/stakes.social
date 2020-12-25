@@ -77,6 +77,7 @@ export const TransactForm = ({
   onSearch,
   suffix: _suffix,
   onClickMax,
+  disabled,
   id,
   placeholder
 }: Props) => {
@@ -105,7 +106,7 @@ export const TransactForm = ({
   )
 
   return (
-    <Wrap className={className}>
+    <Wrap className={className} style={{ opacity: disabled ? '0.3' : '1.0' }}>
       {onChange ? (
         <StyledForm
           id={id}
@@ -114,6 +115,7 @@ export const TransactForm = ({
           value={value}
           onChange={onChange}
           onSearch={onSearch}
+          disabled={disabled}
           suffix={suffix}
           type="number"
           placeholder={placeholder}

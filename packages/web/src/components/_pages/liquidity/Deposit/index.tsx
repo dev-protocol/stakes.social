@@ -120,7 +120,7 @@ export const Deposit = () => {
             })
           }
         })
-      ) || message.warn({ content: 'Please signing in', key: messageKey }),
+      ) || message.warn({ content: 'Please sign in', key: messageKey }),
     [updateAmount, web3]
   )
   const onChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -129,7 +129,7 @@ export const Deposit = () => {
   }
   const onClickApprove = async () => {
     if (!web3) {
-      message.warn({ content: 'Please signing in', key: messageKey })
+      message.warn({ content: 'Please sign in', key: messageKey })
       return
     }
     const res = await approve(GEYSER_ETHDEV_V2_ADDRESS, amount ? amount : ZERO)
