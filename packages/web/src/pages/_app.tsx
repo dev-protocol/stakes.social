@@ -12,6 +12,7 @@ import detectEthereumProvider from '@metamask/detect-provider'
 import WalletConnectProvider from '@walletconnect/web3-provider'
 import Fortmatic from 'fortmatic'
 import WalletLink from 'walletlink'
+import { message } from 'antd'
 import { WEB3_PROVIDER_ENDPOINT } from 'src/fixtures/wallet/constants'
 import { getAccountAddress } from 'src/fixtures/wallet/utility'
 
@@ -90,6 +91,10 @@ class NextApp extends App<AppInitialProps & WithApolloProps<{}>> {
   }
 
   componentDidMount = () => {
+    message.config({
+      maxCount: 5
+    })
+
     this.web3Modal = new Web3Modal({
       network: 'mainnet',
       cacheProvider: true,
