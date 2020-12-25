@@ -64,7 +64,7 @@ class NextApp extends App<AppInitialProps & WithApolloProps<{}>> {
 
   web3Modal: any
 
-  onWalletConnet = async () => {
+  onWalletConnect = async () => {
     const web3ForInjected: any = await detectEthereumProvider()
     if (!web3ForInjected) {
       return
@@ -98,7 +98,7 @@ class NextApp extends App<AppInitialProps & WithApolloProps<{}>> {
     this.setState({ web3Modal: this.web3Modal })
 
     if (this.web3Modal.cachedProvider === 'injected') {
-      this.onWalletConnet()
+      this.onWalletConnect()
     }
 
     const settings = localStorage.getItem('settings')
