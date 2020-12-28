@@ -15,7 +15,7 @@ import { blueGradient } from 'src/styles/gradient'
 import { boxShahowWithOnHover } from 'src/styles/boxShahow'
 import Link from 'next/link'
 import { useGetAccount } from 'src/fixtures/dev-for-apps/hooks'
-import { isIE } from 'react-device-detect'
+import { isIE, browserName, engineName, getUA, fullBrowserVersion } from 'react-device-detect'
 import NotSupported from 'src/fixtures/_pages/NotSupportedComponent'
 
 const PortfolioHeader = styled.div`
@@ -86,8 +86,20 @@ const EditButton = styled(Button)`
 
 const Portfolio = () => {
   const { accountAddress } = useProvider()
-
   const { data } = useGetAccount(accountAddress)
+
+  console.log(
+    'is IE: ',
+    isIE,
+    'browserName: ',
+    browserName,
+    'engineName: ',
+    engineName,
+    'getUa',
+    getUA,
+    'full browser version: ',
+    fullBrowserVersion
+  )
   return (
     <>
       {isIE && <NotSupported />}
