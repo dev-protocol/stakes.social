@@ -15,6 +15,8 @@ import { blueGradient } from 'src/styles/gradient'
 import { boxShahowWithOnHover } from 'src/styles/boxShahow'
 import Link from 'next/link'
 import { useGetAccount } from 'src/fixtures/dev-for-apps/hooks'
+import { isIE, isChrome } from 'react-device-detect'
+import NotSupported from 'src/fixtures/_pages/NotSupportedComponent'
 
 const PortfolioHeader = styled.div`
   display: grid;
@@ -87,36 +89,41 @@ const Portfolio = () => {
 
   const { data } = useGetAccount(accountAddress)
   return (
-    <div style={{ display: 'flex', minHeight: '100vh', flexDirection: 'column' }}>
-      <Header />
-      <StyledContainer>
-        <PortfolioHeader>
-          <Heading>Your Portfolio</Heading>
-          <SwitcherContainer>
-            <Switcher />
-          </SwitcherContainer>
-          <Buy />
-          {data?.id && (
-            <>
-              <Link href={`/author/${accountAddress}`}>
-                <CreatorButton>View profile</CreatorButton>
-              </Link>
-              <Link href={`/author/${accountAddress}/edit`}>
-                <EditButton>Edit profile</EditButton>
-              </Link>
-            </>
-          )}
-        </PortfolioHeader>
-        <Statistics accountAddress={accountAddress} />
-        <Divider type="horizontal" />
-        <Heading>Your Stakes</Heading>
-        <YourStakes accountAddress={accountAddress} />
-        <Divider type="horizontal" />
-        <Heading>Your Pools</Heading>
-        <YourPools accountAddress={accountAddress} />
-      </StyledContainer>
-      <Footer />
-    </div>
+    <>
+      {isChrome && <NotSupported />}
+      {!isChrome && (
+        <div style={{ display: 'flex', minHeight: '100vh', flexDirection: 'column' }}>
+          <Header />
+          <StyledContainer>
+            <PortfolioHeader>
+              <Heading>Your Portfolio</Heading>
+              <SwitcherContainer>
+                <Switcher />
+              </SwitcherContainer>
+              <Buy />
+              {data?.id && (
+                <>
+                  <Link href={`/author/${accountAddress}`}>
+                    <CreatorButton>View profile</CreatorButton>
+                  </Link>
+                  <Link href={`/author/${accountAddress}/edit`}>
+                    <EditButton>Edit profile</EditButton>
+                  </Link>
+                </>
+              )}
+            </PortfolioHeader>
+            <Statistics accountAddress={accountAddress} />
+            <Divider type="horizontal" />
+            <Heading>Your Stakes</Heading>
+            <YourStakes accountAddress={accountAddress} />
+            <Divider type="horizontal" />
+            <Heading>Your Pools</Heading>
+            <YourPools accountAddress={accountAddress} />
+          </StyledContainer>
+          <Footer />
+        </div>
+      )}
+    </>
   )
 }
 
