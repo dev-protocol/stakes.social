@@ -15,7 +15,7 @@ import { blueGradient } from 'src/styles/gradient'
 import { boxShahowWithOnHover } from 'src/styles/boxShahow'
 import Link from 'next/link'
 import { useGetAccount } from 'src/fixtures/dev-for-apps/hooks'
-import { isIE, isChrome } from 'react-device-detect'
+import { isIE } from 'react-device-detect'
 import NotSupported from 'src/fixtures/_pages/NotSupportedComponent'
 
 const PortfolioHeader = styled.div`
@@ -90,8 +90,8 @@ const Portfolio = () => {
   const { data } = useGetAccount(accountAddress)
   return (
     <>
-      {isChrome && <NotSupported />}
-      {!isChrome && (
+      {isIE && <NotSupported />}
+      {!isIE && (
         <div style={{ display: 'flex', minHeight: '100vh', flexDirection: 'column' }}>
           <Header />
           <StyledContainer>
