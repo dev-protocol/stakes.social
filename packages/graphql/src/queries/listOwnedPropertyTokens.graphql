@@ -1,0 +1,19 @@
+query listOwnedPropertyTokens($accountAddress: String!, $limit: Int, $offset: Int){
+  property_balance(
+    where: { 
+      account_address: { 
+        _eq: $accountAddress 
+      } 
+    }, 
+    order_by: { 
+      balance: desc_nulls_last 
+    },
+    offset: $offset,
+    limit: $limit,
+  ) {
+      account_address
+      balance
+      is_author
+      property_address
+    }
+}

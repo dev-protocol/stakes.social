@@ -5885,6 +5885,21 @@ export type ListOwnedPropertyMetaQuery = { __typename?: 'query_root' } & {
   property_meta: Array<{ __typename?: 'property_meta' } & Pick<Property_Meta, 'property' | 'name'>>
 }
 
+export type ListOwnedPropertyTokensQueryVariables = Exact<{
+  accountAddress: Scalars['String']
+  limit?: Maybe<Scalars['Int']>
+  offset?: Maybe<Scalars['Int']>
+}>
+
+export type ListOwnedPropertyTokensQuery = { __typename?: 'query_root' } & {
+  property_balance: Array<
+    { __typename?: 'property_balance' } & Pick<
+      Property_Balance,
+      'account_address' | 'balance' | 'is_author' | 'property_address'
+    >
+  >
+}
+
 export type ListPropertyQueryVariables = Exact<{
   limit?: Maybe<Scalars['Int']>
   offset?: Maybe<Scalars['Int']>
@@ -6340,6 +6355,62 @@ export type ListOwnedPropertyMetaLazyQueryHookResult = ReturnType<typeof useList
 export type ListOwnedPropertyMetaQueryResult = Apollo.QueryResult<
   ListOwnedPropertyMetaQuery,
   ListOwnedPropertyMetaQueryVariables
+>
+export const ListOwnedPropertyTokensDocument = gql`
+  query listOwnedPropertyTokens($accountAddress: String!, $limit: Int, $offset: Int) {
+    property_balance(
+      where: { account_address: { _eq: $accountAddress } }
+      order_by: { balance: desc_nulls_last }
+      offset: $offset
+      limit: $limit
+    ) {
+      account_address
+      balance
+      is_author
+      property_address
+    }
+  }
+`
+
+/**
+ * __useListOwnedPropertyTokensQuery__
+ *
+ * To run a query within a React component, call `useListOwnedPropertyTokensQuery` and pass it any options that fit your needs.
+ * When your component renders, `useListOwnedPropertyTokensQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useListOwnedPropertyTokensQuery({
+ *   variables: {
+ *      accountAddress: // value for 'accountAddress'
+ *      limit: // value for 'limit'
+ *      offset: // value for 'offset'
+ *   },
+ * });
+ */
+export function useListOwnedPropertyTokensQuery(
+  baseOptions: Apollo.QueryHookOptions<ListOwnedPropertyTokensQuery, ListOwnedPropertyTokensQueryVariables>
+) {
+  return Apollo.useQuery<ListOwnedPropertyTokensQuery, ListOwnedPropertyTokensQueryVariables>(
+    ListOwnedPropertyTokensDocument,
+    baseOptions
+  )
+}
+export function useListOwnedPropertyTokensLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<ListOwnedPropertyTokensQuery, ListOwnedPropertyTokensQueryVariables>
+) {
+  return Apollo.useLazyQuery<ListOwnedPropertyTokensQuery, ListOwnedPropertyTokensQueryVariables>(
+    ListOwnedPropertyTokensDocument,
+    baseOptions
+  )
+}
+export type ListOwnedPropertyTokensQueryHookResult = ReturnType<typeof useListOwnedPropertyTokensQuery>
+export type ListOwnedPropertyTokensLazyQueryHookResult = ReturnType<typeof useListOwnedPropertyTokensLazyQuery>
+export type ListOwnedPropertyTokensQueryResult = Apollo.QueryResult<
+  ListOwnedPropertyTokensQuery,
+  ListOwnedPropertyTokensQueryVariables
 >
 export const ListPropertyDocument = gql`
   query ListProperty(
