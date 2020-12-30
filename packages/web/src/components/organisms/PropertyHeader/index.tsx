@@ -163,15 +163,17 @@ export const PropertyHeader = ({ propertyAddress, apy, creators }: Props) => {
     }
   })
   const { data: dataAuthor } = useGetAuthorInformation(data?.property_authentication?.[0]?.property_meta?.author)
-  const isSelf = dataAuthor?.address == accountAddress
+  const isNotSelf = dataAuthor?.address !== accountAddress
 
   return (
     <ResponsivePropertyAddressFrame>
       <HeaderContainer>
         <Header>
-          {`${data?.property_authentication?.[0]?.authentication_id}'s Pool` || `${propertyAddress} Pool`}
+          {data?.property_authentication?.[0]?.authentication_id
+            ? `${data?.property_authentication?.[0]?.authentication_id}'s Pool`
+            : `${propertyAddress} Pool`}
         </Header>
-        {isSelf && <CopyBadge propertyAddress={propertyAddress} />}
+        {dataAuthor && !isNotSelf && <CopyBadge propertyAddress={propertyAddress} />}
       </HeaderContainer>
 
       <SubHeader>

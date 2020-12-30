@@ -42,6 +42,7 @@ const LinkToUniswap = () => (
 const ZERO = toBigNumber(0)
 
 export const Deposit = () => {
+  const messageKey = 'liquidityDeposit'
   const { Item } = Form
   const { Step } = Steps
   const { web3 } = useProvider()
@@ -107,16 +108,19 @@ export const Deposit = () => {
         balanceOf(x).then(x => {
           updateAmount(x ? toNaturalNumber(x).toFixed() : '0')
           if (x?.toNumber() === 0) {
-            message.warn(
-              <>
-                <span>Your ETHDEV-V2 token is 0</span>
-                <Divider type="vertical"></Divider>
-                <LinkToUniswap />
-              </>
-            )
+            message.warn({
+              content: (
+                <>
+                  <span>Your ETHDEV-V2 token is 0</span>
+                  <Divider type="vertical"></Divider>
+                  <LinkToUniswap />
+                </>
+              ),
+              key: messageKey
+            })
           }
         })
-      ),
+      ) || message.warn({ content: 'Please sign in', key: messageKey }),
     [updateAmount, web3]
   )
   const onChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -124,6 +128,10 @@ export const Deposit = () => {
     updateAmount(value)
   }
   const onClickApprove = async () => {
+    if (!web3) {
+      message.warn({ content: 'Please sign in', key: messageKey })
+      return
+    }
     const res = await approve(GEYSER_ETHDEV_V2_ADDRESS, amount ? amount : ZERO)
     if (res === false) {
       return
@@ -141,7 +149,7 @@ export const Deposit = () => {
     updateAmount('0')
     purge()
   }
-  if (requireReEstimate) {
+  if (requireReEstimate && web3) {
     updateEstimate(amount)
   }
 
