@@ -64,9 +64,12 @@ class NextApp extends App<AppInitialProps & WithApolloProps<{}>> {
 
   web3Modal: any
 
-  onWalletConnet = async () => {
+  onWalletConnect = async () => {
     const web3ForInjected: any = await detectEthereumProvider()
     if (!web3ForInjected) {
+      // NOTE: If the localStorage cache and metamask extension do not exist,
+      //       processing conflicts and will not be able to login, so clear the cache here.
+      this.web3Modal.clearCachedProvider()
       return
     }
     const isAuthorized = await getAccountAddress(new Web3(web3ForInjected))
@@ -98,7 +101,7 @@ class NextApp extends App<AppInitialProps & WithApolloProps<{}>> {
     this.setState({ web3Modal: this.web3Modal })
 
     if (this.web3Modal.cachedProvider === 'injected') {
-      this.onWalletConnet()
+      this.onWalletConnect()
     }
 
     const settings = localStorage.getItem('settings')
