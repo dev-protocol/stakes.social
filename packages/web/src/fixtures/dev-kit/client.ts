@@ -5,7 +5,7 @@ import { getContractAddress } from './get-contract-address'
 import { client as devClient } from '@devprotocol/dev-kit'
 import BigNumber from 'bignumber.js'
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { CreateCreateAndAuthenticateCaller } from '@devprotocol/dev-kit/esm/property-factory/createAndAuthenticate'
+import { PropertyFactoryContract } from '@devprotocol/dev-kit'
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { UnwrapFunc } from '../utility'
 
@@ -144,7 +144,7 @@ export const createAndAuthenticate = async (
    * During development, you can check the operation using the commented out code below.
    * If you want to use these, comment out the return statement above.
    */
-  // return new Promise<UnwrapFunc<ReturnType<CreateCreateAndAuthenticateCaller>>>(resolve => {
+  // return new Promise<UnwrapFunc<PropertyFactoryContract['createAndAuthenticate']>>(resolve => {
   //   setTimeout(
   //     () =>
   //       resolve({
