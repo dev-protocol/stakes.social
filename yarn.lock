@@ -3961,10 +3961,10 @@
   dependencies:
     "@types/react" "*"
 
-"@types/react-select@3.1.0":
-  version "3.1.0"
-  resolved "https://registry.yarnpkg.com/@types/react-select/-/react-select-3.1.0.tgz#6d63bb0d8d44a71a0d5fa984a77c61ce3805d296"
-  integrity sha512-INfN1SkxmmhQxwHizPck2sBmdh7rEe0WrP4bMf1t7HAoQAX0G0nEqVrgX67h56hoaeA6+OImj/caIKEhwPkViQ==
+"@types/react-select@3.1.1":
+  version "3.1.1"
+  resolved "https://registry.yarnpkg.com/@types/react-select/-/react-select-3.1.1.tgz#853391382c90e95ce9dc6ee8fb6c64218c508507"
+  integrity sha512-zPMf4/2g76wG/gRIdbJ7Rz9U++cGZHvjmta51GUEG6QAb0eWZvRghvhh45kHZsqCPq+l+UnbXwmM6uW79ImULw==
   dependencies:
     "@types/react" "*"
     "@types/react-dom" "*"
