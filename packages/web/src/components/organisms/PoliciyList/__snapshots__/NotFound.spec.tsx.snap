@@ -49,12 +49,13 @@ exports[`NotFound Snapshot 1`] = `
         <p
           class="ant-empty-description"
         >
-          <div>
+          <span>
             There are currently no policies available to vote.
-          </div>
-          <div>
+          </span>
+          <br />
+          <span>
             You can look for a under discussion or consideration, or you can propose one.
-          </div>
+          </span>
         </p>
       </div>
       <div

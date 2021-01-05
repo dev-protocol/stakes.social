@@ -102,6 +102,30 @@ const FlexRow = styled.div`
   }
 `
 
+const IconContainer = styled.div`
+  svg {
+    width: 16px;
+    height: auto;
+  }
+  @media (min-width: 768px) {
+    margin-left: 2px;
+  }
+`
+
+const CopyContainer = styled.div`
+  display: flex;
+
+  @media (min-width: 768px) {
+    justify-content: center;
+    align-items: center;
+    p {
+      height: 20px;
+      margin-left: 10px;
+      margin-bottom: 0;
+    }
+  }
+`
+
 interface Props {
   propertyAddress: string
   apy?: BigNumber
@@ -116,30 +140,6 @@ export const CopyBadge = ({ propertyAddress }: { propertyAddress: string }) => {
   const handleCopy = () => {
     copy(badge)
   }
-
-  const IconContainer = styled.div`
-    svg {
-      width: 16px;
-      height: auto;
-    }
-    @media (min-width: 768px) {
-      margin-left: 2px;
-    }
-  `
-
-  const CopyContainer = styled.div`
-    display: flex;
-
-    @media (min-width: 768px) {
-      justify-content: center;
-      align-items: center;
-      p {
-        height: 20px;
-        margin-left: 10px;
-        margin-bottom: 0;
-      }
-    }
-  `
 
   return (
     <CopyContainer>

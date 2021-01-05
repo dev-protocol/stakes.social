@@ -7,5 +7,4 @@ export function useEffectAsync(effect: () => void, deps?: DependencyList): void 
   }, deps)
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type UnwrapFunc<T> = T extends (...arg: any) => Promise<infer U> ? U : T
