@@ -54,7 +54,7 @@ const Index = (_: Props) => {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
       <Header />
-      <Banner />
+      {/* <Banner /> */}
       <Container>
         <StyledSupplySummary apy={apy} creators={creators} annualSupplyGrowthRatio={annualSupplyGrowthRatio} />
         <PropertyCardList currentPage={page} searchWord={word} sortBy={sortBy} featureTag={featureTag} />
