@@ -315,9 +315,8 @@ const AuthorAddressDetail = (_: Props) => {
 
         <TransformedGrid>
           <div style={{ gridColumn: '2 / -1', marginTop: '10px' }}>
-            <span>{ens}</span>
             <AuthorDetailGrid>
-              <span style={{ fontSize: '1.25em' }}>{dataAuthor?.name || data?.property_meta?.[0]?.name}</span>
+              <span style={{ fontSize: '1.25em' }}>{dataAuthor?.name || ens || data?.property_meta?.[0]?.name}</span>
               <ShareList>
                 <AreaLinks links={dataAuthor?.links} />
               </ShareList>
