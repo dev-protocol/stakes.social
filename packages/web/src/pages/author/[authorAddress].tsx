@@ -1,4 +1,4 @@
-import React, { useMemo, useCallback } from 'react'
+import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import { useRouter } from 'next/router'
 import { Header } from 'src/components/organisms/Header'
 
@@ -22,11 +22,11 @@ import { Links } from '../../fixtures/_pages/ProfileHeader/Links'
 import { blueGradient } from 'src/styles/gradient'
 import Link from 'next/link'
 import { useProvider } from 'src/fixtures/wallet/hooks'
-import { useState } from 'react'
 import { useCurrency } from 'src/fixtures/currency/hooks'
 import { Pagination, Spin } from 'antd'
 import { getPath } from 'src/fixtures/utility/route'
 import { CoverImages } from 'src/components/_pages/author/CoverImages'
+import { useENS } from 'src/fixtures/ens/hooks'
 
 type Props = {}
 
@@ -260,6 +260,7 @@ const Section = styled.a<{ activeSection: string; section: string }>`
 `
 
 const AuthorAddressDetail = (_: Props) => {
+  const [ens, setENS] = useState('')
   const [, authorAddress] = getPath(useRouter().asPath)
   const author: string = typeof authorAddress == 'string' ? authorAddress : 'none'
   const { data: authorInformation } = useGetAuthorInformation(author)
@@ -295,6 +296,14 @@ const AuthorAddressDetail = (_: Props) => {
     })
   }, [])
 
+  const { getENS } = useENS()
+  useEffect(() => {
+    const fetchENS = async () => {
+      await getENS(author || '').then((o?: string) => setENS(o || ''))
+    }
+    fetchENS()
+  }, [author, getENS])
+
   return (
     <>
       <Header></Header>
@@ -306,6 +315,7 @@ const AuthorAddressDetail = (_: Props) => {
 
         <TransformedGrid>
           <div style={{ gridColumn: '2 / -1', marginTop: '10px' }}>
+            <span>{ens}</span>
             <AuthorDetailGrid>
               <span style={{ fontSize: '1.25em' }}>{dataAuthor?.name || data?.property_meta?.[0]?.name}</span>
               <ShareList>
