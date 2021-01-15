@@ -41,6 +41,11 @@ export const connectWallet = async (setWeb3Handler: Function, web3Modal?: Web3Mo
   return false
 }
 
+export const disconnectWallet = (setWeb3Handler: Function, web3Modal?: Web3Modal) => {
+  web3Modal?.clearCachedProvider()
+  setWeb3Handler(undefined)
+}
+
 export const getAccountAddress = async (web3?: Web3) => {
   if (web3) {
     return (async fromCache => {
