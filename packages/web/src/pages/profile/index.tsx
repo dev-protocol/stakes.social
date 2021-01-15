@@ -115,6 +115,7 @@ const Portfolio = () => {
         <Divider type="horizontal" />
         <Heading>Your Pools</Heading>
         <YourPools accountAddress={accountAddress} />
+        <Divider type="horizontal" />
         <Heading>Wallet Settings</Heading>
         <WalletSettings />
       </StyledContainer>

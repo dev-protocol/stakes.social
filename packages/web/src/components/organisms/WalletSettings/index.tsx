@@ -1,10 +1,20 @@
 import React, { useContext, useMemo, useState } from 'react'
+import styled from 'styled-components'
 import { useRouter } from 'next/router'
 import { providers } from 'web3modal'
 import { Button } from 'antd'
 import WalletContext from 'src/context/walletContext'
 import { useProvider, useConnectWallet } from 'src/fixtures/wallet/hooks'
 import { ResponsiveModal } from 'src/components/atoms/ResponsiveModal'
+
+const WalletContainer = styled.div`
+  margin: -2rem 0 1rem 0;
+`
+const WalletAddressContainer = styled.div`
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+`
 
 interface Props {}
 
@@ -28,27 +38,32 @@ export const WalletSettings = (_: Props) => {
   }
 
   const reconnectWallet = async () => {
-    await disconnect()
+    disconnect()
     await connect()
   }
 
-  const walletName = useMemo(() => {
+  const wallet = useMemo(() => {
     return web3Modal?.cachedProvider === providers.WALLETCONNECT.id
-      ? providers.WALLETCONNECT.name
+      ? { name: providers.WALLETCONNECT.name, logo: providers.WALLETCONNECT.logo }
       : web3Modal?.cachedProvider === providers.FORTMATIC.id
-      ? providers.FORTMATIC.name
+      ? { name: providers.FORTMATIC.name, logo: providers.FORTMATIC.logo }
       : web3Modal?.cachedProvider === 'custom-walletlink'
-      ? 'WalletLink'
+      ? {
+          name: 'WalletLink',
+          logo:
+            'https://github.com/dev-protocol/asset.stakes.social/blob/main/public/wallet/coinbase-wallet.jpg?raw=true'
+        }
       : web3Modal?.cachedProvider === providers.METAMASK.id
-      ? providers.METAMASK.name
+      ? { name: providers.METAMASK.name, logo: providers.METAMASK.logo }
       : undefined
   }, [web3Modal?.cachedProvider])
 
-  return walletName ? (
-    <>
-      <span>
-        {walletName}: {accountAddress}
-      </span>
+  return wallet ? (
+    <div>
+      <WalletContainer>
+        <img src={wallet.logo} height="30" width="30" />
+        <WalletAddressContainer>{accountAddress}</WalletAddressContainer>
+      </WalletContainer>
       <div>
         <Button type="primary" onClick={showDisconnectModal}>
           Disconnect
@@ -60,7 +75,7 @@ export const WalletSettings = (_: Props) => {
           <p>Disconnecting the Wallet?</p>
         </ResponsiveModal>
       </div>
-    </>
+    </div>
   ) : (
     <></>
   )
