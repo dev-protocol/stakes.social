@@ -13487,10 +13487,10 @@ nodemon@2.0.7:
     undefsafe "^2.0.3"
     update-notifier "^4.1.0"
 
-nookies@2.5.0:
-  version "2.5.0"
-  resolved "https://registry.yarnpkg.com/nookies/-/nookies-2.5.0.tgz#00c78ac9a91c3af82ab4bc8b193ad7bd41ee7aa5"
-  integrity sha512-yFIKz80h6SRqO1a6fcgO7D2qfnXAjXmGftPw5KrMWH+zGm1xHvyHyZ93z1yul9snwG/9LLvSY8pyZ3G5s6/UJQ==
+nookies@2.5.1:
+  version "2.5.1"
+  resolved "https://registry.yarnpkg.com/nookies/-/nookies-2.5.1.tgz#f6988a3b0abb4378b710a75860fe247e873bc666"
+  integrity sha512-5zKrA+KpwlzxohICzdzrll3+Er0yBZvRgkIwXDUYE7U7G2KSw3Npir+oo+z5ahwMRyCnpv8G/YLYh+oarllSrQ==
   dependencies:
     cookie "^0.4.1"
     set-cookie-parser "^2.4.6"
