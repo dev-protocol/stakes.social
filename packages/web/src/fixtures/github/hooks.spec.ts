@@ -1,5 +1,5 @@
 import { renderHook } from '@testing-library/react-hooks'
-import { useGetMarketInformation, useGetMarkets } from './hooks'
+import { useGetMarketInformation, useGetMarkets, useGetPolicyInformation } from './hooks'
 import useSWR from 'swr'
 
 jest.mock('swr')
@@ -66,6 +66,21 @@ describe('github hooks', () => {
       const { result } = renderHook(() => useGetMarkets())
       expect(result.current.error).toBe(error)
       expect(result.current.error?.message).toBe(errorMessage)
+    })
+  })
+
+  describe('useGetPolicyInformation', () => {
+    test('success fetching data', () => {
+      const policyAddress = '0x11223344'
+      const data = {
+        name: 'DIP7',
+        description: 'Decrease Inflation Rate',
+        reference: 'https://github.com/dev-protocol/DIPs/issues/7'
+      }
+      const error = undefined
+      ;(useSWR as jest.Mock).mockImplementation(() => ({ data, error }))
+      const { result } = renderHook(() => useGetPolicyInformation(policyAddress))
+      expect(result.current.data).toBe(data)
     })
   })
 })
