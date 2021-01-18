@@ -5,7 +5,7 @@ import useSWR from 'swr'
 jest.mock('swr')
 jest.mock('src/fixtures/utility')
 
-describe('dev-kit hooks', () => {
+describe('github hooks', () => {
   describe('useGetTotalRewardsAmount', () => {
     test('data is undefined', () => {
       const data = undefined
