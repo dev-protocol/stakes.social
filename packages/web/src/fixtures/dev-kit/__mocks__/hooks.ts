@@ -28,9 +28,9 @@ export const useWithdrawStakingReward = () => {
   return { withdrawStakingReward: () => {} }
 }
 
-export const useWithdrawStaking = () => {
-  return { withdrawStaking: () => {} }
-}
+export const useWithdrawStaking = jest.fn(() => {
+  return { withdrawStaking: jest.fn(() => {}) }
+})
 
 export const useStake = () => {
   return { stake: () => {} }
