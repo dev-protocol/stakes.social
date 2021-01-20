@@ -1,4 +1,5 @@
 import * as React from 'react'
+import { SWRConfig } from 'swr'
 import App, { AppInitialProps } from 'next/app'
 import { WithApolloProps } from 'next-with-apollo'
 import Head from 'next/head'
@@ -124,19 +125,23 @@ class NextApp extends App<AppInitialProps & WithApolloProps<{}>> {
     const { Component, pageProps, apollo } = this.props
 
     return (
-      <WalletContext.Provider value={{ web3: this.state.web3, setWeb3: this.setWeb3, web3Modal: this.state.web3Modal }}>
-        <SettingContext.Provider
-          value={{ isCurrencyDEV: this.state.isCurrencyDEV, toggleCurrency: this.toggleCurrency }}
+      <SWRConfig value={{ revalidateOnReconnect: false }}>
+        <WalletContext.Provider
+          value={{ web3: this.state.web3, setWeb3: this.setWeb3, web3Modal: this.state.web3Modal }}
         >
-          <Head>
-            <title>Stakes.social</title>
-            {/* Use minimum-scale=1 to enable GPU rasterization */}
-            <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no" />
-          </Head>
-          <Component {...pageProps} apollo={apollo} />
-          <HelpUs></HelpUs>
-        </SettingContext.Provider>
-      </WalletContext.Provider>
+          <SettingContext.Provider
+            value={{ isCurrencyDEV: this.state.isCurrencyDEV, toggleCurrency: this.toggleCurrency }}
+          >
+            <Head>
+              <title>Stakes.social</title>
+              {/* Use minimum-scale=1 to enable GPU rasterization */}
+              <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no" />
+            </Head>
+            <Component {...pageProps} apollo={apollo} />
+            <HelpUs></HelpUs>
+          </SettingContext.Provider>
+        </WalletContext.Provider>
+      </SWRConfig>
     )
   }
 }
