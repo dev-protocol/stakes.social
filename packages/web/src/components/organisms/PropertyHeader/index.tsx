@@ -133,7 +133,7 @@ interface Props {
 }
 
 export const CopyBadge = ({ propertyAddress }: { propertyAddress: string }) => {
-  const badge = `[![Stake to support us](https://badge.devprotocol.xyz/${propertyAddress})](https://stakes.social/${propertyAddress})`
+  const badge = `[![Stake to support us](https://badge.devprotocol.xyz/${propertyAddress}/descriptive)](https://stakes.social/${propertyAddress})`
   const { copied, copy } = useClipboard({
     copiedTimeout: 1000
   })
