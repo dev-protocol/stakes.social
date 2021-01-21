@@ -8,8 +8,9 @@ export const NotFound = () => {
         image={Empty.PRESENTED_IMAGE_SIMPLE}
         description={
           <>
-            <div>There are currently no policies available to vote.</div>
-            <div>You can look for a under discussion or consideration, or you can propose one.</div>
+            <span>There are currently no policies available to vote.</span>
+            <br />
+            <span>You can look for a under discussion or consideration, or you can propose one.</span>
           </>
         }
       />

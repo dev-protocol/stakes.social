@@ -3,7 +3,6 @@ import { Footer } from 'src/components/organisms/Footer'
 import { Header } from 'src/components/organisms/Header'
 import { Headline } from 'src/components/atoms/Headline'
 import { H2 } from 'src/components/atoms/Typography'
-// import { MarketsOverview } from 'src/components/organisms/MarketOverview'
 import styled from 'styled-components'
 import Link from 'next/link'
 

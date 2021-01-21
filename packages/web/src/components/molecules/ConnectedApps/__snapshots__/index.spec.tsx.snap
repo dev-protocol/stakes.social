@@ -72,11 +72,11 @@ exports[`ConnectedApps Snapshot 1`] = `
             </g>
           </svg>
         </div>
-        <p
+        <div
           class="ant-empty-description"
         >
           This feature is under construction
-        </p>
+        </div>
       </div>
     </div>
   </div>

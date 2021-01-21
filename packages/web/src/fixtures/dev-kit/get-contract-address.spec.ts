@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { DevkitContract } from '@devprotocol/dev-kit/esm/contract'
+import { DevkitContract } from '@devprotocol/dev-kit'
 import { getContractAddress } from './get-contract-address'
 import { addresses } from '@devprotocol/dev-kit'
 

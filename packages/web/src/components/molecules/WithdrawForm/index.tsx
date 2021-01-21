@@ -17,14 +17,6 @@ const Form = styled.div`
   justify-content: space-between;
   align-items: center;
 `
-// const Statistic = styled.div`
-//   font-size: 1rem;
-//   color: black;
-//   margin-bottom: 1rem;
-//   @media (min-width: 768px) {
-//     margin-bottom: 0;
-//   }
-// `
 
 export const WithdrawForm = ({ amount, label, onSubmitWithdraw }: Props) => {
   const { currency, toCurrency } = useCurrency()
