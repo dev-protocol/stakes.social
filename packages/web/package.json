@@ -18,7 +18,7 @@
     "@ant-design/icons": "4.4.0",
     "@apollo/client": "3.3.7",
     "@dev/graphql": "0.0.1",
-    "@devprotocol/dev-kit": "4.0.2",
+    "@devprotocol/dev-kit": "4.1.0",
     "@metamask/detect-provider": "1.2.0",
     "@quentin-sommer/react-useragent": "3.1.0",
     "@types/react-select": "3.1.2",
