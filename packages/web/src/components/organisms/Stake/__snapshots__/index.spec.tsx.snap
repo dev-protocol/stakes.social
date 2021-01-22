@@ -57,3 +57,66 @@ exports[`Stake Snapshot 1`] = `
   </div>
 </body>
 `;
+
+exports[`Stake Snapshot with title 1`] = `
+<body>
+  <div>
+    <div
+      class="sc-89297o-0 hdakyE"
+    >
+      <label
+        for="stake"
+      >
+        Stake
+      </label>
+      <div
+        class="sc-1d8aayd-1 lldfxv"
+        style="opacity: 1;"
+      >
+        <span
+          class="ant-input-group-wrapper ant-input-group-wrapper-lg ant-input-search ant-input-search-large ant-input-search-with-button sc-1d8aayd-0 dMeuEc"
+        >
+          <span
+            class="ant-input-wrapper ant-input-group"
+          >
+            <span
+              class="ant-input-affix-wrapper ant-input-affix-wrapper-lg"
+            >
+              <input
+                class="ant-input ant-input-lg"
+                id="stake"
+                type="number"
+                value=""
+              />
+              <span
+                class="ant-input-suffix"
+              >
+                <button
+                  class="sc-1ttu0x8-0 ibloSD"
+                >
+                  DEV
+                </button>
+              </span>
+            </span>
+            <span
+              class="ant-input-group-addon"
+            >
+              <button
+                class="ant-btn ant-btn-primary ant-btn-lg ant-input-search-button"
+                type="button"
+              >
+                <span>
+                  Stake
+                </span>
+              </button>
+            </span>
+          </span>
+        </span>
+      </div>
+      <div
+        style="height: 40px;"
+      />
+    </div>
+  </div>
+</body>
+`;
