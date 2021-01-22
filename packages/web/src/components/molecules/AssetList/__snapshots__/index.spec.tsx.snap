@@ -429,11 +429,11 @@ exports[`AssetList Snapshot with empty properties 1`] = `
             </g>
           </svg>
         </div>
-        <p
+        <div
           class="ant-empty-description"
         >
           Assets not found
-        </p>
+        </div>
       </div>
       <ul
         class="ant-pagination sc-17dikip-2 cMqJJE"
@@ -603,11 +603,11 @@ exports[`AssetList Snapshot with empty properties and sign in button 1`] = `
             </g>
           </svg>
         </div>
-        <p
+        <div
           class="ant-empty-description"
         >
           Assets not found
-        </p>
+        </div>
         <div
           class="ant-empty-footer"
         >
