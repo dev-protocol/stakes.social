@@ -1,6 +1,6 @@
 import Web3 from 'web3'
 import { cachePath } from './catch-path'
-import { connectWallet, getAccountAddress, getBlockNumber } from './utility'
+import { connectWallet, disconnectWallet, getAccountAddress, getBlockNumber } from './utility'
 import { UnwrapFunc } from 'src/fixtures/utility'
 import useSWR from 'swr'
 import { useContext, useEffect, useState } from 'react'
@@ -24,7 +24,13 @@ export const useConnectWallet = () => {
     })
   }
 
-  return { isConnected, connect, isConnecting: isConnecting }
+  const disconnect = () => {
+    disconnectWallet(setWeb3, web3Modal)
+    setIsConnecting(false)
+    setIsConnected(false)
+  }
+
+  return { isConnected, connect, disconnect, isConnecting }
 }
 
 export const useProvider = () => {
