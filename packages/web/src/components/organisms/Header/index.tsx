@@ -1,5 +1,4 @@
 import * as React from 'react'
-import { isIE } from 'react-device-detect'
 import { BrandLogo } from 'src/components/atoms/BrandLogo'
 import styled from 'styled-components'
 import { Navigation, Navigations } from 'src/components/molecules/Navigation'
@@ -70,7 +69,9 @@ export const Header = (_: Props = {}) => {
   const accountBtnClick = async () => {
     connect()
   }
-  const isIEDummy = true
+  const userAgent = typeof window !== 'undefined' ? window?.navigator.userAgent : ''
+  const isIE = userAgent.indexOf('MSIE') !== -1 || userAgent.indexOf('Trident') !== -1
+  console.log('is ie:', isIE)
 
   return (
     <div style={{ position: 'sticky', top: 0, width: '100%', zIndex: 2 }}>
@@ -118,7 +119,6 @@ export const Header = (_: Props = {}) => {
       </HeaderContainer>
       {isIE && <NotSupported />}
       <EarlyAccess />
-      {isIEDummy && <NotSupported />}
     </div>
   )
 }
