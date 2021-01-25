@@ -4,6 +4,7 @@ const fs = require('fs')
 const path = require('path')
 const withCss = require('@zeit/next-css')
 const withTM = require('next-transpile-modules')([
+  "antd",
   "@amcharts/amcharts4/core",
   "@amcharts/amcharts4/charts",
   "@amcharts/amcharts4/themes/animated"
