@@ -115,7 +115,7 @@ export const Header = (_: Props = {}) => {
           </Link>
         )}
       </HeaderContainer>
-      {!isIE && <NotSupported />}
+      {isIE && <NotSupported />}
       <EarlyAccess />
     </div>
   )
