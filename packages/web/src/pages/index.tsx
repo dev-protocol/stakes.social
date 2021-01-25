@@ -53,7 +53,7 @@ const Index = (_: Props) => {
     return '' as FeatureTag
   }, [router])
 
-  if (!isIE) {
+  if (isIE) {
     Modal.error({
       title: 'aa',
       content: <NotSupported />
