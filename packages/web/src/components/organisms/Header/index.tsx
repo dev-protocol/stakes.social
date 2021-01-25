@@ -5,7 +5,6 @@ import { Navigation, Navigations } from 'src/components/molecules/Navigation'
 import { useState } from 'react'
 import Link from 'next/link'
 import { EarlyAccess } from 'src/components/atoms/EarlyAccess'
-import { isIE } from 'react-device-detect'
 import NotSupported from 'src/fixtures/_pages/NotSupportedComponent'
 import { useConnectWallet, useProvider } from 'src/fixtures/wallet/hooks'
 import { AccountBtn, Connecting } from 'src/components/atoms/Navigation'
@@ -71,12 +70,6 @@ export const Header = (_: Props = {}) => {
     connect()
   }
 
-  if (isIE) {
-    console.log('is ie')
-  } else {
-    console.log('is not ie')
-  }
-
   return (
     <div style={{ position: 'sticky', top: 0, width: '100%', zIndex: 2 }}>
       <HeaderContainer>
@@ -121,7 +114,7 @@ export const Header = (_: Props = {}) => {
           </Link>
         )}
       </HeaderContainer>
-      {isIE && <NotSupported />}
+      <NotSupported />
       <EarlyAccess />
     </div>
   )
