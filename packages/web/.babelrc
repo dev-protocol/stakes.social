@@ -7,7 +7,8 @@
           "debug": true,
           "targets": {
             "browsers": ">1%, ie 10-11, not op_mini all"
-          }
+          },
+          "useBuiltIns": "usage"
         }
       }
     ]
