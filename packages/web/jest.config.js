@@ -8,5 +8,6 @@ module.exports = {
   moduleNameMapper: {
     '^src/(.+)': '<rootDir>/src/$1',
     '\\.(css|less)$': 'identity-obj-proxy'
-  }
+  },
+  setupFilesAfterEnv: ['./jest.setup.regenerator-runtime.js']
 }

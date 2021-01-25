@@ -1,7 +1,5 @@
 import * as React from 'react'
-// import { Button } from 'antd'
 import { BrandLogo } from 'src/components/atoms/BrandLogo'
-// imp ort { useConnectWallet } from 'src/fixtures/wallet/hooks'
 import styled from 'styled-components'
 import { Navigation, Navigations } from 'src/components/molecules/Navigation'
 import { useState } from 'react'
@@ -10,6 +8,7 @@ import { EarlyAccess } from 'src/components/atoms/EarlyAccess'
 import { useConnectWallet, useProvider } from 'src/fixtures/wallet/hooks'
 import { AccountBtn, Connecting } from 'src/components/atoms/Navigation'
 import { Container } from 'src/components/atoms/Container'
+import { useRouter } from 'next/router'
 
 interface Props {}
 
@@ -64,6 +63,7 @@ export const Header = (_: Props = {}) => {
   const [isMenuOpen, setMenuOpen] = useState(false)
   const { isConnected, connect, isConnecting } = useConnectWallet()
   const { accountAddress } = useProvider()
+  const router = useRouter()
 
   const accountBtnClick = async () => {
     connect()
@@ -103,7 +103,7 @@ export const Header = (_: Props = {}) => {
           </AccountBtn>
         ) : (
           <Link href="/profile" as={`/profile`} passHref>
-            <AccountBtn>
+            <AccountBtn currentRouter={router?.pathname}>
               <React.Fragment>
                 <span style={{ fontSize: '0.8em' }} className="hideOnSmall">
                   Portfolio

@@ -46,16 +46,17 @@ exports[`NotFound Snapshot 1`] = `
             </g>
           </svg>
         </div>
-        <p
+        <div
           class="ant-empty-description"
         >
-          <div>
+          <span>
             There are currently no policies available to vote.
-          </div>
-          <div>
+          </span>
+          <br />
+          <span>
             You can look for a under discussion or consideration, or you can propose one.
-          </div>
-        </p>
+          </span>
+        </div>
       </div>
       <div
         style="width: 100%; text-align: center;"

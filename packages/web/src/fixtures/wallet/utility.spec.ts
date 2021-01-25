@@ -1,7 +1,9 @@
 import Web3 from 'web3'
-import { getAccountAddress, getDevAmount } from './utility'
+import Web3Modal from 'web3modal'
+import { connectWallet, disconnectWallet, getAccountAddress, getDevAmount } from './utility'
 
 jest.mock('web3')
+jest.mock('web3modal')
 
 describe('wallet utility', () => {
   describe('getAccountAddress', () => {
@@ -60,9 +62,7 @@ describe('wallet utility', () => {
       const result = await getDevAmount('0x1234567890')
       expect(result).toBe(data)
     })
-  })
 
-  describe('getDevAmount', () => {
     test('Return amount value', async () => {
       const data = 9876543210123456789
       const fakeContract = function () {}
@@ -85,6 +85,44 @@ describe('wallet utility', () => {
       }))
       const result = await getDevAmount('0x1234567890')
       expect(result).toBe(data)
+    })
+  })
+
+  describe('connectWallet', () => {
+    test('connect success', async () => {
+      const web3Modal = new Web3Modal()
+      web3Modal.connect = jest.fn(() => Promise.resolve({}))
+      ;((Web3 as unknown) as jest.Mock).mockImplementation(() => ({
+        eth: {
+          getAccounts: async () => ['0x...']
+        }
+      }))
+      const result = await connectWallet(
+        jest.fn(() => true),
+        web3Modal
+      )
+      expect(result).toBe(true)
+    })
+
+    test('fail to web3Modal connect', async () => {
+      const web3Modal = new Web3Modal()
+      web3Modal.connect = jest.fn(() => Promise.reject({}))
+      const result = await connectWallet(
+        jest.fn(() => true),
+        web3Modal
+      )
+      expect(result).toBe(false)
+    })
+  })
+
+  describe('disconnectWallet', () => {
+    test('smoke test', async () => {
+      const setWeb3Handler = jest.fn(() => true)
+      const web3Modal = new Web3Modal()
+      web3Modal.clearCachedProvider = jest.fn(() => true)
+      await disconnectWallet(setWeb3Handler, web3Modal)
+      expect((web3Modal.clearCachedProvider as jest.Mock).mock.calls.length).toBe(1)
+      expect(setWeb3Handler.mock.calls.length).toBe(1)
     })
   })
 })

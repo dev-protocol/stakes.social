@@ -3,6 +3,7 @@ import { render } from '@testing-library/react'
 import { PropertyHeader } from '.'
 
 jest.mock('src/fixtures/dev-kit/hooks')
+jest.mock('src/fixtures/wallet/hooks')
 
 describe(`${PropertyHeader.name}`, () => {
   test('Snapshot', () => {

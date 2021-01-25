@@ -1,5 +1,5 @@
-import { DevkitContract } from '@devprotocol/dev-kit/esm/contract'
-import { RegistryContract } from '@devprotocol/dev-kit/esm/registry'
+import { DevkitContract } from '@devprotocol/dev-kit'
+import { RegistryContract } from '@devprotocol/dev-kit'
 import { addresses } from '@devprotocol/dev-kit'
 
 const cache: Map<'main', Map<string, string>> = new Map()

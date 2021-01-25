@@ -69,8 +69,8 @@ describe('dev-for-apps hooks for property tags', () => {
       ;(signWithCache as jest.Mock).mockImplementation(() => ({ signature: undefined, message: undefined }))
       ;(postPropertyTags as jest.Mock).mockImplementation(() => {})
       const { result } = renderHook(() => usePostPropertyTags(propertyAddress, accountAddress))
-      await act(() => {
-        result.current.postPropertyTagsHandler('dummy tags')
+      await act(async () => {
+        await result.current.postPropertyTagsHandler('dummy tags')
       })
       expect(result.current.isLoading).toBe(false)
       expect(result.current.data).toBe(undefined)
@@ -90,8 +90,8 @@ describe('dev-for-apps hooks with strapi for account', () => {
         isLoading: false
       }))
       const { result } = renderHook(() => useUploadAccountAvatar('0x01234567890'))
-      await act(() => {
-        result.current.upload('image data')
+      await act(async () => {
+        await result.current.upload('image data')
       })
       expect(mockHandler.mock.calls[0][0]).toBe(123)
       expect(mockHandler.mock.calls[0][1]).toBe('Account')
@@ -129,8 +129,8 @@ describe('dev-for-apps hooks with strapi for account', () => {
         isLoading: false
       }))
       const { result } = renderHook(() => useUploadAccountCoverImages('0x01234567890'))
-      await act(() => {
-        result.current.upload('image data')
+      await act(async () => {
+        await result.current.upload('image data')
       })
       expect(mockHandler.mock.calls[0][0]).toBe(123)
       expect(mockHandler.mock.calls[0][1]).toBe('Account')
@@ -244,8 +244,8 @@ describe('dev-for-apps hooks with strapi for property', () => {
         isLoading: false
       }))
       const { result } = renderHook(() => useUploadPropertyCoverImages('0x01234567890'))
-      await act(() => {
-        result.current.upload('image data')
+      await act(async () => {
+        await result.current.upload('image data')
       })
       expect(mockHandler.mock.calls[0][0]).toBe(123)
       expect(mockHandler.mock.calls[0][1]).toBe('Property')
