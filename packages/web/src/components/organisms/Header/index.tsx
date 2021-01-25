@@ -71,6 +71,12 @@ export const Header = (_: Props = {}) => {
     connect()
   }
 
+  if (isIE) {
+    console.log('is ie')
+  } else {
+    console.log('is not ie')
+  }
+
   return (
     <div style={{ position: 'sticky', top: 0, width: '100%', zIndex: 2 }}>
       <HeaderContainer>
