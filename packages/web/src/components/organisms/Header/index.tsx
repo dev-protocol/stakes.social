@@ -1,4 +1,5 @@
 import * as React from 'react'
+import { isIE } from 'react-device-detect'
 import { BrandLogo } from 'src/components/atoms/BrandLogo'
 import styled from 'styled-components'
 import { Navigation, Navigations } from 'src/components/molecules/Navigation'
@@ -69,6 +70,7 @@ export const Header = (_: Props = {}) => {
   const accountBtnClick = async () => {
     connect()
   }
+  const isIEDummy = true
 
   return (
     <div style={{ position: 'sticky', top: 0, width: '100%', zIndex: 2 }}>
@@ -114,8 +116,9 @@ export const Header = (_: Props = {}) => {
           </Link>
         )}
       </HeaderContainer>
-      <NotSupported />
+      {isIE && <NotSupported />}
       <EarlyAccess />
+      {isIEDummy && <NotSupported />}
     </div>
   )
 }
