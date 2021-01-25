@@ -3,12 +3,14 @@ import { PropertyCardList } from 'src/components/organisms/PropertyCardList'
 import { Banner } from 'src/components/organisms/MainHeader'
 import { Footer } from 'src/components/organisms/Footer'
 import { useRouter } from 'next/router'
-
+import { Modal } from 'antd'
 import { useAPY, useAnnualSupplyGrowthRatio } from 'src/fixtures/dev-kit/hooks'
 import { SupplySummary } from 'src/components/molecules/SupplySummaly'
 import { Header } from 'src/components/organisms/Header'
 import { FeatureTag } from 'src/components/organisms/PropertyCardList'
 import { Container } from 'src/components/atoms/Container'
+import { isIE } from 'react-device-detect'
+import NotSupported from 'src/fixtures/_pages/NotSupportedComponent'
 import styled from 'styled-components'
 
 type InitialProps = {}
@@ -50,6 +52,13 @@ const Index = (_: Props) => {
     }
     return '' as FeatureTag
   }, [router])
+
+  if (!isIE) {
+    Modal.error({
+      title: 'aa',
+      content: <NotSupported />
+    })
+  }
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
