@@ -5,6 +5,8 @@ import { Navigation, Navigations } from 'src/components/molecules/Navigation'
 import { useState } from 'react'
 import Link from 'next/link'
 import { EarlyAccess } from 'src/components/atoms/EarlyAccess'
+import { isIE } from 'react-device-detect'
+import NotSupported from 'src/fixtures/_pages/NotSupportedComponent'
 import { useConnectWallet, useProvider } from 'src/fixtures/wallet/hooks'
 import { AccountBtn, Connecting } from 'src/components/atoms/Navigation'
 import { Container } from 'src/components/atoms/Container'
@@ -113,6 +115,7 @@ export const Header = (_: Props = {}) => {
           </Link>
         )}
       </HeaderContainer>
+      {!isIE && <NotSupported />}
       <EarlyAccess />
     </div>
   )
