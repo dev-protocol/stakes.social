@@ -50,6 +50,10 @@ const Index = (_: Props) => {
     return '' as FeatureTag
   }, [router])
 
+  const userAgent = typeof window !== 'undefined' ? window?.navigator.userAgent : ''
+  const isIE = userAgent.indexOf('MSIE') !== -1 || userAgent.indexOf('Trident') !== -1
+  console.log('is ie on:', isIE, userAgent)
+
   return (
     <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
       <Header />
