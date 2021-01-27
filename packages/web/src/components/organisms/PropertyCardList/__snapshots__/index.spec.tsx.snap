@@ -164,10 +164,10 @@ exports[`PropertyCardList Snapshot 1`] = `
           GitHub
         </a>
         <a
-          href="/?tag=Npmjs"
+          href="/?tag=npm"
           style="color: rgb(201, 201, 201);"
         >
-          Npmjs
+          npm
         </a>
         <a
           href="/?tag=Creators"
