@@ -14,7 +14,7 @@
     "test": "jest"
   },
   "dependencies": {
-    "@amcharts/amcharts4": "4.10.13",
+    "@amcharts/amcharts4": "4.10.14",
     "@ant-design/icons": "4.4.0",
     "@apollo/client": "3.3.7",
     "@dev/graphql": "0.0.1",
@@ -32,7 +32,7 @@
     "date-fns": "2.16.1",
     "dotenv": "8.2.0",
     "dotenv-webpack": "5.1.0",
-    "ethers": "5.0.26",
+    "ethers": "5.0.27",
     "faker": "5.2.0",
     "formik": "2.2.6",
     "formik-material-ui": "3.0.1",
@@ -66,9 +66,9 @@
   },
   "devDependencies": {
     "@babel/core": "7.12.10",
-    "@testing-library/react": "11.2.3",
+    "@testing-library/react": "11.2.4",
     "@testing-library/react-hooks": "3.7.0",
-    "@testing-library/user-event": "12.6.2",
+    "@testing-library/user-event": "12.6.3",
     "@types/body-parser": "1.19.0",
     "@types/faker": "5.1.6",
     "@types/ramda": "0.27.36",
