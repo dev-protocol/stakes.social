@@ -22,7 +22,7 @@
     "@metamask/detect-provider": "1.2.0",
     "@quentin-sommer/react-useragent": "3.1.0",
     "@types/react-select": "3.1.2",
-    "@walletconnect/web3-provider": "1.3.5",
+    "@walletconnect/web3-provider": "1.3.6",
     "antd": "4.12.2",
     "axios": "0.21.1",
     "bignumber.js": "9.0.1",
