@@ -71,7 +71,7 @@
     "@testing-library/user-event": "12.6.3",
     "@types/body-parser": "1.19.0",
     "@types/faker": "5.1.6",
-    "@types/ramda": "0.27.37",
+    "@types/ramda": "0.27.38",
     "@types/react": "16.14.0",
     "@types/react-dom": "16.9.9",
     "@types/string-hash": "1.1.1",
