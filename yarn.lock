@@ -2199,10 +2199,10 @@
   dependencies:
     "@ethersproject/logger" "^5.0.8"
 
-"@ethersproject/providers@5.0.21":
-  version "5.0.21"
-  resolved "https://registry.yarnpkg.com/@ethersproject/providers/-/providers-5.0.21.tgz#04e6b7734637a82ea4df22ef49311f419fc5e3bd"
-  integrity sha512-KyH9TylyLqspbO/2C0ph+0ZpOnb/2GkKQtpcs7IyHZ/wHXdhbClLeaBdO0b4Fpo6zAZWjgIdN6WUOMGkyy7b6A==
+"@ethersproject/providers@5.0.22":
+  version "5.0.22"
+  resolved "https://registry.yarnpkg.com/@ethersproject/providers/-/providers-5.0.22.tgz#a84b48d74d7f243d1f4f5c789c4a3342bd3f690c"
+  integrity sha512-6C6agQsz/7FRFfZFok+m1HVUS6G+IU1grLwBx9+W11SF3UeP8vquXRMVDfOiKWyvy+g4bJT1+9C/QuC8lG08DQ==
   dependencies:
     "@ethersproject/abstract-provider" "^5.0.8"
     "@ethersproject/abstract-signer" "^5.0.10"
@@ -2282,15 +2282,15 @@
     "@ethersproject/logger" "^5.0.8"
     hash.js "1.1.3"
 
-"@ethersproject/signing-key@5.0.9":
-  version "5.0.9"
-  resolved "https://registry.yarnpkg.com/@ethersproject/signing-key/-/signing-key-5.0.9.tgz#37e3038e26b53979d41dd90a2077fb0efd020fcc"
-  integrity sha512-AobnsEiLv+Z4a/NbbelwB/Lsnc+qxeNejXDlEwbo/nwjijvxLpwiNN+rjx/lQGel1QnQ/d+lEv7xezyUaXdKFQ==
+"@ethersproject/signing-key@5.0.10":
+  version "5.0.10"
+  resolved "https://registry.yarnpkg.com/@ethersproject/signing-key/-/signing-key-5.0.10.tgz#05e26e04f0aa5360dc78674d7331bacea8fea5c1"
+  integrity sha512-w5it3GbFOvN6e0mTd5gDNj+bwSe6L9jqqYjU+uaYS8/hAEp4qYLk5p8ZjbJJkNn7u1p0iwocp8X9oH/OdK8apA==
   dependencies:
     "@ethersproject/bytes" "^5.0.9"
     "@ethersproject/logger" "^5.0.8"
     "@ethersproject/properties" "^5.0.7"
-    elliptic "6.5.3"
+    elliptic "6.5.4"
 
 "@ethersproject/signing-key@^5.0.4":
   version "5.0.5"
@@ -6327,7 +6327,7 @@ brfs@^2.0.0, brfs@^2.0.2:
     static-module "^3.0.2"
     through2 "^2.0.0"
 
-brorand@^1.0.1:
+brorand@^1.0.1, brorand@^1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/brorand/-/brorand-1.1.0.tgz#12c25efe40a45e3c323eb8675a0a0ce57b22371f"
   integrity sha1-EsJe/kCkXjwyPrhnWgoM5XsiNx8=
@@ -8782,6 +8782,19 @@ elliptic@6.5.3, elliptic@^6.4.0, elliptic@^6.5.2, elliptic@^6.5.3:
     minimalistic-assert "^1.0.0"
     minimalistic-crypto-utils "^1.0.0"
 
+elliptic@6.5.4:
+  version "6.5.4"
+  resolved "https://registry.yarnpkg.com/elliptic/-/elliptic-6.5.4.tgz#da37cebd31e79a1367e941b592ed1fbebd58abbb"
+  integrity sha512-iLhC6ULemrljPZb+QutR5TQGB+pdW6KGD5RSegS+8sorOZT+rdQFbsQFJgvN3eRqNALqJer4oQ16YvJHlU8hzQ==
+  dependencies:
+    bn.js "^4.11.9"
+    brorand "^1.1.0"
+    hash.js "^1.0.0"
+    hmac-drbg "^1.0.1"
+    inherits "^2.0.4"
+    minimalistic-assert "^1.0.1"
+    minimalistic-crypto-utils "^1.0.1"
+
 emittery@^0.7.1:
   version "0.7.2"
   resolved "https://registry.yarnpkg.com/emittery/-/emittery-0.7.2.tgz#25595908e13af0f5674ab419396e2fb394cdfa82"
@@ -9497,10 +9510,10 @@ ethereumjs-vm@^2.3.4:
     rustbn.js "~0.2.0"
     safe-buffer "^5.1.1"
 
-ethers@5.0.29:
-  version "5.0.29"
-  resolved "https://registry.yarnpkg.com/ethers/-/ethers-5.0.29.tgz#37034758b31e6545926e400ffbe7222a39e39e7b"
-  integrity sha512-uNMOIbr9dXzBrHwcdelYlkvkPuL8chlPE8i++aNPCCAgI4agl0e9l/FRdToqu/cCQG8uNwmJlJp2eq4wU0oAMA==
+ethers@5.0.30:
+  version "5.0.30"
+  resolved "https://registry.yarnpkg.com/ethers/-/ethers-5.0.30.tgz#db440553ad9710bb9f3b1299c6d831cb258cdc8a"
+  integrity sha512-CdY/zb8d0uEBaWNmDkAVWXO8FLs2plAPOjgukgYC95L5VKIZzZaCav7PAeG2IqGico4vtNu8l3ibXdXd6FqjrQ==
   dependencies:
     "@ethersproject/abi" "5.0.12"
     "@ethersproject/abstract-provider" "5.0.9"
@@ -9520,11 +9533,11 @@ ethers@5.0.29:
     "@ethersproject/networks" "5.0.8"
     "@ethersproject/pbkdf2" "5.0.8"
     "@ethersproject/properties" "5.0.8"
-    "@ethersproject/providers" "5.0.21"
+    "@ethersproject/providers" "5.0.22"
     "@ethersproject/random" "5.0.8"
     "@ethersproject/rlp" "5.0.8"
     "@ethersproject/sha2" "5.0.8"
-    "@ethersproject/signing-key" "5.0.9"
+    "@ethersproject/signing-key" "5.0.10"
     "@ethersproject/solidity" "5.0.9"
     "@ethersproject/strings" "5.0.9"
     "@ethersproject/transactions" "5.0.10"
@@ -10834,7 +10847,7 @@ he@1.2.0, he@^1.1.0:
   resolved "https://registry.yarnpkg.com/he/-/he-1.2.0.tgz#84ae65fa7eafb165fddb61566ae14baf05664f0f"
   integrity sha512-F/1DnUGPopORZi0ni+CvrCgHQ5FyEAHRLSApuYWMmrbSwoN2Mn/7k+Gl38gJnR7yyDZk6WLXwiGod1JOWNDKGw==
 
-hmac-drbg@^1.0.0:
+hmac-drbg@^1.0.0, hmac-drbg@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/hmac-drbg/-/hmac-drbg-1.0.1.tgz#d2745701025a6c775a6c545793ed502fc0c649a1"
   integrity sha1-0nRXAQJabHdabFRXk+1QL8DGSaE=
