@@ -1,4 +1,4 @@
-import gql from 'graphql-tag'
+import { gql } from '@apollo/client'
 
 export const getTopStakersOfPropertyQuery = gql`
   query getTopStakersOfProperty($property_address: String!, $limit: Int!) {
