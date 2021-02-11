@@ -1,6 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
 
+import { Span } from 'src/components/organisms/Incubator/Typography'
+
 const JumboContainer = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -11,12 +13,6 @@ const JumboContainer = styled.div`
   flex-grow: 1;
   padding-top: 4em;
   padding-bottom: 3em;
-`
-
-const Span = styled.span<{ fontSize: string; fontWeight?: string; color?: string }>`
-  font-size: ${props => props.fontSize || 'auto'};
-  font-weight: ${props => props?.fontWeight || 'auto'};
-  color: ${props => props.color || 'auto'};
 `
 
 const TitleContainer = styled.div`
