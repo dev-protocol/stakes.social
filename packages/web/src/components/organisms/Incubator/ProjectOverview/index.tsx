@@ -203,6 +203,7 @@ const ProjectOverview = () => {
     <div
       style={{
         paddingTop: '1em',
+        paddingBottom: '1em',
         width: '100%',
         backgroundImage: 'linear-gradient(#00d0fd, #5b8bf5, #d500e6, #ff3815)'
       }}
@@ -228,17 +229,19 @@ const ProjectOverview = () => {
             projects.map(({ funding, title, url }, index) => (
               <ProjectEntry key={index} url={url} funding={funding} title={title} />
             ))}
-          <div style={{ padding: '2em', display: 'flex', gridColumn: '1/-1', justifyContent: 'center' }}>
-            <Button
-              onClick={() => setShowAll(true)}
-              style={{ width: '180px' }}
-              backgroundColor="white"
-              hoverBackgroundColor="#D500E6"
-              textColor="black"
-            >
-              Show all {PLACHEOLDER_DATA.length}
-            </Button>
-          </div>
+          {!showAll && (
+            <div style={{ padding: '2em', display: 'flex', gridColumn: '1/-1', justifyContent: 'center' }}>
+              <Button
+                onClick={() => setShowAll(true)}
+                style={{ width: '180px' }}
+                backgroundColor="white"
+                hoverBackgroundColor="#D500E6"
+                textColor="black"
+              >
+                Show all {PLACHEOLDER_DATA.length}
+              </Button>
+            </div>
+          )}
         </Overview>
       </ProjectOverviewContainer>
     </div>

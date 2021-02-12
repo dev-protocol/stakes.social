@@ -2,14 +2,18 @@ import React from 'react'
 import IncubatorHeader from 'src/components/organisms/Incubator/Header'
 import { Footer } from 'src/components/organisms/Footer'
 import ProjectOverview from 'src/components/organisms/Incubator/ProjectOverview'
+import Committee from 'src/components/organisms/Incubator/Committee'
+import RandomTips from 'src/components/organisms/Incubator/Tips'
 
 const Incubator = () => {
   return (
-    <div style={{ display: 'flex', minHeight: '100vh', flexDirection: 'column' }}>
+    <>
       <IncubatorHeader />
       <ProjectOverview />
+      <Committee />
+      <RandomTips />
       <Footer />
-    </div>
+    </>
   )
 }
 
