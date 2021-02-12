@@ -2,6 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 
 import { Span } from 'src/components/organisms/Incubator/Typography'
+import Hr from '../molecules/Hr'
 
 const CommitteeContainer = styled.div`
   display: flex;
@@ -53,15 +54,6 @@ const IconContainer = styled.div`
   > a {
     text-decoration: none;
   }
-`
-
-const Hr = styled.hr`
-  border: 0;
-  clear: both;
-  display: block;
-  width: 100%;
-  background-color: #cccccc;
-  height: 1px;
 `
 
 const Person = ({ image, name, company, job, twitter, github }: PersonProps) => (
