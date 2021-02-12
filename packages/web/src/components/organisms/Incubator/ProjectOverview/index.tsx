@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import { Span } from 'src/components/organisms/Incubator/Typography'
 import { Button } from 'src/components/organisms/Incubator/molecules/Button'
 import ProjectEntry from 'src/components/organisms/Incubator/ProjectOverview/Project'
+import { CurrencySwitcher } from '../molecules/CurrencySwitcher'
 
 const PLACHEOLDER_DATA = [
   {
@@ -134,7 +135,6 @@ const ProjectOverviewContainer = styled.div`
   width: 100%;
   margin: 0 auto;
   max-width: 1200px;
-  min-height: 1100px;
   flex-grow: 1;
   padding-top: 1em;
   background-image: linear-gradient(#00d0fd, #5b8bf5, #d500e6, #ff3815);
@@ -146,31 +146,6 @@ const OverviewHeader = styled.div`
   align-items: center;
 `
 
-const CurrencySwitcher = styled.div`
-  display: flex;
-`
-
-const Dev = styled.div<{ isSelected?: boolean }>`
-  cursor: pointer;
-  border-top-left-radius: 8px;
-  border-bottom-left-radius: 8px;
-  border: 1px solid white;
-  background: ${props => (props.isSelected ? 'white' : 'transparent')};
-  padding: 0 15px;
-  color: ${props => (props.isSelected ? '#5B8BF5' : 'white')};
-  font-size: 20px;
-`
-const Usd = styled.div<{ isSelected: boolean }>`
-  cursor: pointer;
-  border-top-right-radius: 8px;
-  border-bottom-right-radius: 8px;
-  border: 1px solid white;
-  background: ${props => (props.isSelected ? 'white' : 'transparent')};
-  padding: 0 15px;
-  color: ${props => (props.isSelected ? '#5B8BF5' : 'white')};
-  font-size: 20px;
-`
-
 const FilterOptions = styled.div`
   display: flex;
   padding: 3em 0;
@@ -179,13 +154,13 @@ const FilterOptions = styled.div`
   justify-content: space-around;
 `
 
-const FilterOption = styled.div<{ isSelected?: boolean }>`
+const FilterOption = styled.div<{ filter: string; activeFilter: string }>`
   cursor: pointer;
   padding: 10px 25px;
   border-radius: 24px;
   border: 1px solid white;
-  color: ${props => (props.isSelected ? '#5B8BF5' : 'white')};
-  background: ${props => (props.isSelected ? 'white' : 'transparent')};
+  color: ${props => (props.activeFilter === props.filter ? '#5B8BF5' : 'white')};
+  background: ${props => (props.activeFilter === props.filter ? 'white' : 'transparent')};
   font-size: 24px;
 `
 
@@ -195,56 +170,77 @@ const Overview = styled.div`
   grid-gap: 20px;
 `
 
+const GradientContainer = styled.div<{ isExpanded?: boolean }>`
+  position: relative;
+  padding-top: 1em;
+  padding-bottom: 3em;
+  max-height: ${props => (props.isExpanded ? 'auto' : '1050px')};
+  overflow-y: hidden;
+  width: 100%;
+  background-image: linear-gradient(#00d0fd, #5b8bf5, #d500e6, #ff3815);
+`
+
+const SeeMore = styled.div<{ isExpanded?: boolean }>`
+  position: absolute;
+  display: ${props => (props.isExpanded ? 'none' : 'initial')};
+  bottom: 0;
+  width: 100%;
+  height: 300px;
+  background-image: linear-gradient(transparent, #ff3815 50%);
+`
+
 const ProjectOverview = () => {
   const [showAll, setShowAll] = useState(false)
+  const [activeFilter, setActiveFilter] = useState('')
 
   const projects = showAll ? PLACHEOLDER_DATA : PLACHEOLDER_DATA.slice(0, 8)
   return (
-    <div
-      style={{
-        paddingTop: '1em',
-        paddingBottom: '1em',
-        width: '100%',
-        backgroundImage: 'linear-gradient(#00d0fd, #5b8bf5, #d500e6, #ff3815)'
-      }}
-    >
+    <GradientContainer isExpanded={showAll}>
       <ProjectOverviewContainer>
         <OverviewHeader>
           <Span color="white" fontSize="20px">
             Meet our incubated projects
           </Span>
-          <CurrencySwitcher>
-            <Dev>DEV</Dev>
-            <Usd isSelected>USD</Usd>
-          </CurrencySwitcher>
+          <CurrencySwitcher />
         </OverviewHeader>
         <FilterOptions>
-          <FilterOption>Infrastructure</FilterOption>
-          <FilterOption isSelected>Hosting</FilterOption>
-          <FilterOption>Crypto OSS</FilterOption>
-          <FilterOption>Women that code</FilterOption>
+          <FilterOption
+            onClick={() => setActiveFilter('Infrastructure')}
+            filter="Infrastructure"
+            activeFilter={activeFilter}
+          >
+            Infrastructure
+          </FilterOption>
+          <FilterOption onClick={() => setActiveFilter('Hosting')} filter="Hosting" activeFilter={activeFilter}>
+            Hosting
+          </FilterOption>
+          <FilterOption onClick={() => setActiveFilter('Crypto')} filter="Crypto" activeFilter={activeFilter}>
+            Crypto OSS
+          </FilterOption>
+          <FilterOption onClick={() => setActiveFilter('Women')} filter="Women" activeFilter={activeFilter}>
+            Women that code
+          </FilterOption>
         </FilterOptions>
         <Overview>
           {projects &&
             projects.map(({ funding, title, url }, index) => (
               <ProjectEntry key={index} url={url} funding={funding} title={title} />
             ))}
-          {!showAll && (
-            <div style={{ padding: '2em', display: 'flex', gridColumn: '1/-1', justifyContent: 'center' }}>
-              <Button
-                onClick={() => setShowAll(true)}
-                style={{ width: '180px' }}
-                backgroundColor="white"
-                hoverBackgroundColor="#D500E6"
-                textColor="black"
-              >
-                Show all {PLACHEOLDER_DATA.length}
-              </Button>
-            </div>
-          )}
         </Overview>
       </ProjectOverviewContainer>
-    </div>
+      <SeeMore isExpanded={showAll} />
+      {!showAll && (
+        <Button
+          onClick={() => setShowAll(true)}
+          style={{ width: '180px', position: 'absolute', bottom: '50px', left: '50%', transform: 'translateX(-50%)' }}
+          backgroundColor="white"
+          hoverBackgroundColor="#D500E6"
+          textColor="black"
+        >
+          Show all {PLACHEOLDER_DATA.length}
+        </Button>
+      )}
+    </GradientContainer>
   )
 }
 

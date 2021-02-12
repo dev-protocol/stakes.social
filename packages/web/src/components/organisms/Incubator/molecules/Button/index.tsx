@@ -1,10 +1,6 @@
 import styled from 'styled-components'
 
-export const Button = styled.button<{
-  backgroundColor?: string
-  hoverBackgroundColor?: string
-  textColor?: string
-}>`
+export const Button = styled.button<{ backgroundColor?: string; hoverBackgroundColor?: string; textColor?: string }>`
   cursor: pointer;
   width: 110px;
   height: 50px;

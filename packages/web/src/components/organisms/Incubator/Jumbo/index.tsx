@@ -35,7 +35,8 @@ const QualificationMethodologyContainer = styled.div`
     padding-bottom: 3px;
     color: black;
     :hover {
-      color: black;
+      color: #5b8bf5;
+      border-bottom: 1px solid #5b8bf5;
     }
   }
 `

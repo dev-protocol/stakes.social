@@ -65,7 +65,8 @@ const ShowAllContainer = styled.div`
     border-bottom: 1px solid black;
 
     :hover {
-      color: black;
+      color: #5b8bf5;
+      border-bottom: 1px solid #5b8bf5;
     }
   }
 `

@@ -9,7 +9,7 @@ const CommitteeContainer = styled.div`
   width: 100%;
   margin: 0 auto;
   max-width: 1200px;
-  padding: 1em 0 0 0;
+  padding: 2em 0 0 0;
 `
 
 const PersonsOverview = styled.div`
