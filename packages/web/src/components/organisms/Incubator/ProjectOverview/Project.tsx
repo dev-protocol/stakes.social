@@ -4,6 +4,7 @@ import * as lorem from 'lorem-ipsum'
 
 import { Span } from 'src/components/organisms/Incubator/Typography'
 import { Button } from 'src/components/organisms/Incubator/molecules/Button'
+import Link from 'next/link'
 
 const ipsum = new lorem.LoremIpsum({
   sentencesPerParagraph: { min: 1, max: 3 },
@@ -80,7 +81,9 @@ const ProjectEntry = ({ funding, title, url }: ProjectProps) => {
         </Span>
       </FundingSection>
       <ClaimButtonContainer>
-        <Button>Claim</Button>
+        <Link href={'/incubator/[project]'} as={`/incubator/${title}`} passHref>
+          <Button>Claim</Button>
+        </Link>
       </ClaimButtonContainer>
     </ProjectContainer>
   )

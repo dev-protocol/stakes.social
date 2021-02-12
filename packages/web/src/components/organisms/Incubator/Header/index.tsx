@@ -1,6 +1,5 @@
 import React from 'react'
 import { IncubatorLogo } from 'src/components/organisms/Incubator/Logo'
-import Jumbo from 'src/components/organisms/Incubator/Jumbo'
 import styled from 'styled-components'
 
 const HeaderContainer = styled.div`
@@ -44,7 +43,6 @@ const IncubatorHeader = () => {
           <HeaderLink color="#00D0FD">Connect Wallet</HeaderLink>
         </ConnectWalletContainer>
       </HeaderContainer>
-      <Jumbo />
     </div>
   )
 }
