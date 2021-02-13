@@ -247,6 +247,13 @@ const DownloadMetamaskDescription = styled.div`
   flex-direction: column;
 `
 
+const NextButtonContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  grid-column: 1/-1;
+  padding-bottom: 5em;
+`
+
 const DownloadMetamask = () => {
   return (
     <DownloadMetamaskContainer>
@@ -265,6 +272,9 @@ const DownloadMetamask = () => {
         </Span>
         <LinkB style={{ paddingTop: '4em' }}>Download MetaMask Browser Extension for Chrome</LinkB>
       </DownloadMetamaskDescription>
+      <NextButtonContainer>
+        <Button>Next</Button>
+      </NextButtonContainer>
     </DownloadMetamaskContainer>
   )
 }
