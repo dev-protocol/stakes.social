@@ -12,6 +12,9 @@ import Footer from 'src/components/organisms/Incubator/Footer'
 import BackArrow from 'src/components/organisms/Incubator/molecules/BackArrow'
 import DevCurrencySymbol from 'src/components/organisms/Incubator/molecules/DevCurrency'
 import Hr from 'src/components/organisms/Incubator/molecules/Hr'
+import TimelineSection from 'src/components/organisms/Incubator/Timeline'
+import TopArrow from 'src/components/organisms/Incubator/molecules/TopArrow'
+import DownloadMetamaskAnimation from 'src/components/organisms/Incubator/molecules/Animations/MetaMaskDownload'
 
 const LABEL_PLACEHOLDERS = ['Crypto OSS', 'Women that Code']
 
@@ -52,7 +55,7 @@ const Contact = styled.div`
   display: flex;
   flex-direction: column;
 `
-const WebsiteLink = styled.a`
+const LinkB = styled.a`
   text-decoration: none;
 
   padding: 2px;
@@ -140,7 +143,7 @@ const ProjectDetails = ({ fundingDEV, fundingUSD, github, logo, twitter, website
             <Span fontSize="40px" fontWeight="bold">
               {name}
             </Span>
-            <WebsiteLink>{website}</WebsiteLink>
+            <LinkB>{website}</LinkB>
             <SocialMediaContainer>
               <IconContainer style={{ paddingLeft: 0 }}>
                 <a target="_blank" rel="noopener noreferrer" href={twitter}>
@@ -229,72 +232,45 @@ const OnboardSwitch = () => {
 
 const TimelineContainer = styled.div`
   display: flex;
-  padding-top: 1em;
 `
 
-const Timepoint = styled.div<{ isFinished?: boolean }>`
-  z-index: 1;
-  width: 20px;
-  height: 20px;
-  border-radius: 90px;
-  background: ${props => (props.isFinished ? '#5B8BF5' : '#dddddd')};
-  align-items: center;
-  align-content: center;
+const DownloadMetamaskContainer = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 1em 3em;
+
+  padding-top: 2em;
 `
 
-const TimepointContainer = styled.div<{ isFirst?: boolean }>`
-  position: relative;
+const DownloadMetamaskDescription = styled.div`
   display: flex;
-  justify-content: center;
-  align-items: center;
   flex-direction: column;
-  height: 100px;
-
-  transform: ${props => (props.isFirst ? 'translate(0)' : 'translateX(-50%)')};
 `
 
-const Timeline = styled.div<{ isFinished?: boolean; isLast?: boolean }>`
-  /* align-self: flex-end; */
-  display: ${props => props.isLast && 'none'};
-  z-index: -1;
-  border-top: ${props => (props.isFinished ? '4px solid #5B8BF5' : '4px solid #dddddd')};
-  width: 200px;
-  transform: translate(-5%, 47.5%);
-`
-
-const StepSpan = styled(Span)<{ isActive?: boolean }>`
-  position: absolute;
-  bottom: 0;
-  width: 50px;
-  color: ${props => (props.isActive ? '#5B8BF5' : '#dddddd')};
-`
-
-type TimelineSectionType = {
-  part: number
-  currentPart: number
-  isFirst?: boolean
-  isLast?: boolean
-}
-
-const TimelineSection = ({ part, currentPart, isFirst, isLast }: TimelineSectionType) => {
-  const isPointActive = currentPart >= part
-  const isPartFinished = currentPart > part
+const DownloadMetamask = () => {
   return (
-    <>
-      <TimepointContainer isFirst={isFirst}>
-        <Timepoint isFinished={isPointActive} />
-        <StepSpan fontSize="16px" isActive={isPointActive}>
-          Step {part}
-        </StepSpan>
-      </TimepointContainer>
-
-      <Timeline isLast={isLast} isFinished={isPartFinished} />
-    </>
+    <DownloadMetamaskContainer>
+      <div style={{ width: '550px', height: '460px' }}>
+        <DownloadMetamaskAnimation />
+      </div>
+      <DownloadMetamaskDescription>
+        <Span style={{ paddingTop: '3em' }} fontWeight="bold" fontSize="24px">
+          Download MetaMask
+        </Span>
+        <Span style={{ paddingTop: '3em' }} fontSize="16px">
+          MetaMask is a blockchain wallet used to interact with the Ethereum blockchain. It allows users to store and
+          manage account keys, broadcast transactions, send and receive Ethereum-based cryptocurrencies and tokens, and
+          securely connect to decentralized applications through a compatible web browser or the mobile app's built-in
+          browser.
+        </Span>
+        <LinkB style={{ paddingTop: '4em' }}>Download MetaMask Browser Extension for Chrome</LinkB>
+      </DownloadMetamaskDescription>
+    </DownloadMetamaskContainer>
   )
 }
 
 const OnboardingSection = () => {
-  const [activePart] = useState(3)
+  const [activePart] = useState(1)
 
   return (
     <>
@@ -309,6 +285,7 @@ const OnboardingSection = () => {
         <TimelineSection part={4} currentPart={activePart} />
         <TimelineSection isLast={true} part={5} currentPart={activePart} />
       </TimelineContainer>
+      {activePart === 1 && <DownloadMetamask />}
     </>
   )
 }
