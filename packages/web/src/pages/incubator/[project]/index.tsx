@@ -227,18 +227,88 @@ const OnboardSwitch = () => {
   )
 }
 
-// const TimelineContainer = styled.div`
-//   display: flex;
+const TimelineContainer = styled.div`
+  display: flex;
+  padding-top: 1em;
+`
 
-// `
+const Timepoint = styled.div<{ isFinished?: boolean }>`
+  z-index: 1;
+  width: 20px;
+  height: 20px;
+  border-radius: 90px;
+  background: ${props => (props.isFinished ? '#5B8BF5' : '#dddddd')};
+  align-items: center;
+  align-content: center;
+`
+
+const TimepointContainer = styled.div<{ isFirst?: boolean }>`
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100px;
+
+  transform: ${props => (props.isFirst ? 'translate(0)' : 'translateX(-50%)')};
+`
+
+const Timeline = styled.div<{ isFinished?: boolean; isLast?: boolean }>`
+  /* align-self: flex-end; */
+  display: ${props => props.isLast && 'none'};
+  z-index: -1;
+  border-top: ${props => (props.isFinished ? '4px solid #5B8BF5' : '4px solid #dddddd')};
+  width: 200px;
+  transform: translate(-5%, 47.5%);
+`
+
+const StepSpan = styled(Span)<{ isActive?: boolean }>`
+  position: absolute;
+  bottom: 0;
+  width: 50px;
+  color: ${props => (props.isActive ? '#5B8BF5' : '#dddddd')};
+`
+
+type TimelineSectionType = {
+  part: number
+  currentPart: number
+  isFirst?: boolean
+  isLast?: boolean
+}
+
+const TimelineSection = ({ part, currentPart, isFirst, isLast }: TimelineSectionType) => {
+  const isPointActive = currentPart >= part
+  const isPartFinished = currentPart > part
+  return (
+    <>
+      <TimepointContainer isFirst={isFirst}>
+        <Timepoint isFinished={isPointActive} />
+        <StepSpan fontSize="16px" isActive={isPointActive}>
+          Step {part}
+        </StepSpan>
+      </TimepointContainer>
+
+      <Timeline isLast={isLast} isFinished={isPartFinished} />
+    </>
+  )
+}
 
 const OnboardingSection = () => {
+  const [activePart] = useState(3)
+
   return (
     <>
       <SpaceBetween style={{ paddingTop: '1em' }}>
         <Span fontSize="20px">How to get your reward?</Span>
         <OnboardSwitch />
       </SpaceBetween>
+      <TimelineContainer style={{ alignSelf: 'center' }}>
+        <TimelineSection isFirst={true} part={1} currentPart={activePart} />
+        <TimelineSection part={2} currentPart={activePart} />
+        <TimelineSection part={3} currentPart={activePart} />
+        <TimelineSection part={4} currentPart={activePart} />
+        <TimelineSection isLast={true} part={5} currentPart={activePart} />
+      </TimelineContainer>
     </>
   )
 }
