@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import Link from 'next/link'
 import * as lorem from 'lorem-ipsum'
 import { Form } from 'antd'
+import Confetti from 'react-confetti'
 
 import { Span } from 'src/components/organisms/Incubator/Typography'
 import { Button } from 'src/components/organisms/Incubator/molecules/Button'
@@ -20,6 +21,7 @@ import DownloadMetamask from 'src/components/organisms/Incubator/Onboarding/Down
 import { LoadingPlaceholder, InfoIcon } from 'src/components/organisms/Incubator/Icons'
 import { Input } from 'src/components/organisms/Incubator/Form'
 import { usePostSignGitHubMarketAsset } from 'src/fixtures/khaos/hooks'
+import useWindowDimensions from 'src/fixtures/utility/useWindowDimensions'
 
 const LABEL_PLACEHOLDERS = ['Crypto OSS', 'Women that Code']
 
@@ -62,7 +64,7 @@ const Contact = styled.div`
 `
 const LinkB = styled.a`
   text-decoration: none;
-
+  height: fit-content;
   padding: 2px;
   color: black;
   border-bottom: 1px solid black;
@@ -270,6 +272,8 @@ const Authentication = ({ onStateChange }: AuthenticationProps) => {
         <hr color="#CCCCCC" />
         <MintedTokens />
       </div>
+
+
 
       <AuthenticationForm onStateChange={onStateChange} />
 
@@ -487,6 +491,69 @@ const AuthenticateLoading = () => {
   )
 }
 
+const SuccessMessageContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+`
+
+const ClaimSuccesful = () => {
+  const { width, height } = useWindowDimensions()
+  const githubUrl = 'sigp/lighthouse'
+  const logo = 'https://res.cloudinary.com/haas-storage/image/upload/v1613044939/sigma_tye6kg.png'
+  const name = 'Sigma'
+
+  return (
+    <>
+      <DetailsContainer>
+        <div>
+          <SpaceBetween style={{ paddingBottom: '4.5em' }}>
+            <Contact>
+              <Span fontSize="40px" fontWeight="bold">
+                {name}
+              </Span>
+              <div style={{ display: 'flex' }}>
+                <div style={{ marginRight: '5px', width: '24px', height: '24px' }}>
+                  <img src="https://res.cloudinary.com/haas-storage/image/upload/v1613111071/github_rg8ngo.png" />
+                </div>
+                <LinkB>{githubUrl}</LinkB>
+              </div>
+            </Contact>
+
+            <LogoContainer>
+              <img src={logo} />
+            </LogoContainer>
+
+          </SpaceBetween>
+          <hr color="#CCCCCC" />
+          <MintedTokens />
+        </div>
+        <SuccessMessageContainer>
+          <Span color="#D500E6" fontSize="40px" fontWeight="bold">
+            Success!
+          </Span>
+          <Span style={{ paddingTop: "2em" }} fontSize="20px">
+            Congratulations! {name} has sucessfully joined Stakes Social.
+            The Incubator funding has been sent to your Metamask wallet.
+            Please continue to the next steps to learn how to maximize your experience on Stakes Social.
+        </Span>
+        <SpaceBetween style={{ paddingTop: "4em", alignItems: 'center' }}>
+          <div style={{ display: 'flex', height: 'fit-content' }}>
+            <LinkB> Receipt</LinkB>
+            <div style={{ paddingRight: '1em', marginRight: '1em', borderRight: '1px solid black' }} />
+            <LinkB>Stakes.Social</LinkB>
+          </div>
+          <Button style={{ width: '168px', height: '48px'}}>Next steps</Button>
+        </SpaceBetween>
+        </SuccessMessageContainer>
+      </DetailsContainer>
+      <Confetti width={width} height={height} recycle={false} />
+    </>
+  )
+
+
+
+}
+
 const OnboardingSection = () => {
   const [activePart, setActivePart] = useState(1)
 
@@ -513,7 +580,7 @@ const OnboardingPage = () => {
   // const [, project] = getPath(useRouter().asPath)
   // TODO: Fetch data from strapi based on project
 
-  const [currentState, setCurrentState] = useState<string>('overview')
+  const [currentState, setCurrentState] = useState<string>('success')
   const { name, fundingDEV, fundingUSD, github, logo, twitter, website } = {
     name: 'Sigma',
     website: 'sigmaprime.io',
@@ -562,6 +629,10 @@ const OnboardingPage = () => {
 
         {currentState === 'loading' && (
           <AuthenticateLoading />
+        )}
+
+        {currentState === 'success' && (
+          <ClaimSuccesful />
         )}
 
       </Container>

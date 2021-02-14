@@ -1,6 +1,7 @@
 import React from 'react'
 import { IncubatorLogo } from 'src/components/organisms/Incubator/Icons'
 import styled from 'styled-components'
+import Link from 'next/link'
 
 const HeaderContainer = styled.div`
   display: grid;
@@ -32,7 +33,13 @@ const IncubatorHeader = () => {
   return (
     <div>
       <HeaderContainer>
-        <IncubatorLogo />
+        <Link href="/incubator" passHref>
+          <div style={{ cursor: 'pointer' }}>
+           <IncubatorLogo />
+          </div>
+         
+        </Link>
+
         <HeaderLinkContainer>
           <HeaderLink>Projects</HeaderLink>
           <HeaderLink>Comittee</HeaderLink>
