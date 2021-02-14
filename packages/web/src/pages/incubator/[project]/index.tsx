@@ -237,11 +237,15 @@ const OurDocsLink = styled.a`
   }
 `
 
-const Authentication = () => {
+type AuthenticationProps = {
+  onStateChange: React.Dispatch<React.SetStateAction<string>>
+}
+
+const Authentication = ({ onStateChange }: AuthenticationProps) => {
   const githubUrl = 'sigp/lighthouse'
   const logo = 'https://res.cloudinary.com/haas-storage/image/upload/v1613044939/sigma_tye6kg.png'
   const name = 'Sigma'
-  
+
   return (
     <DetailsContainer>
       <div>
@@ -251,7 +255,7 @@ const Authentication = () => {
               {name}
             </Span>
             <div style={{ display: 'flex' }}>
-              <div style={{ marginRight: '5px', width: '24px', height: '24px'}}>
+              <div style={{ marginRight: '5px', width: '24px', height: '24px' }}>
                 <img src="https://res.cloudinary.com/haas-storage/image/upload/v1613111071/github_rg8ngo.png" />
               </div>
               <LinkB>{githubUrl}</LinkB>
@@ -267,16 +271,17 @@ const Authentication = () => {
         <MintedTokens />
       </div>
 
-      <AuthenticationForm />
+      <AuthenticationForm onStateChange={onStateChange} />
 
     </DetailsContainer>
   )
 }
 
-const AuthenticationForm = () => {
+const AuthenticationForm = ({ onStateChange }: AuthenticationProps) => {
 
   const onSubmit = (data: any) => {
     console.log('data: ', data)
+    onStateChange('loading')
   }
 
   return (
@@ -330,7 +335,7 @@ const AuthenticationForm = () => {
   )
 }
 
-const ProjectDetails = ({ fundingDEV, fundingUSD, github, logo, twitter, website, name, onStateChange  }: ProjectDetailsProps) => {
+const ProjectDetails = ({ fundingDEV, fundingUSD, github, logo, twitter, website, name, onStateChange }: ProjectDetailsProps) => {
   return (
     <DetailsContainer>
       <div>
@@ -523,14 +528,23 @@ const OnboardingPage = () => {
       <IncubatorHeader />
       <Container style={{ paddingBottom: '6em' }}>
         <BackArrowContainer>
-          <Link href="/incubator" as="/incubator" passHref>
-            <div style={{ cursor: 'pointer' }}>
+          {currentState === 'overview' && (
+            <Link href="/incubator" as="/incubator" passHref>
+              <div style={{ cursor: 'pointer' }}>
+                <BackArrow />
+              </div>
+            </Link>
+          )}
+
+          {currentState === 'authentication' && (
+            <div onClick={() => setCurrentState('overview')} style={{ cursor: 'pointer' }}>
               <BackArrow />
             </div>
-          </Link>
+          )}
+
         </BackArrowContainer>
         {currentState === 'overview' && (
-            <ProjectDetails
+          <ProjectDetails
             onStateChange={setCurrentState}
             name={name}
             fundingDEV={fundingDEV}
@@ -543,9 +557,13 @@ const OnboardingPage = () => {
         )}
 
         {currentState === 'authentication' && (
-          <Authentication />
+          <Authentication onStateChange={setCurrentState} />
         )}
-      
+
+        {currentState === 'loading' && (
+          <AuthenticateLoading />
+        )}
+
       </Container>
 
       <Container>
