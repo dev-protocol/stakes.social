@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import styled from 'styled-components'
 import Link from 'next/link'
 import * as lorem from 'lorem-ipsum'
+import { Form } from 'antd'
 
 import { Span } from 'src/components/organisms/Incubator/Typography'
 import { Button } from 'src/components/organisms/Incubator/molecules/Button'
@@ -10,11 +11,15 @@ import { Button } from 'src/components/organisms/Incubator/molecules/Button'
 import IncubatorHeader from 'src/components/organisms/Incubator/Header'
 import Footer from 'src/components/organisms/Incubator/Footer'
 import BackArrow from 'src/components/organisms/Incubator/molecules/BackArrow'
-import DevCurrencySymbol from 'src/components/organisms/Incubator/molecules/DevCurrency'
+import DevCurrencySymbol, { DecCurrencySmall } from 'src/components/organisms/Incubator/molecules/DevCurrency'
 import Hr from 'src/components/organisms/Incubator/molecules/Hr'
 import TimelineSection from 'src/components/organisms/Incubator/Timeline'
 import TopArrow from 'src/components/organisms/Incubator/molecules/TopArrow'
-import DownloadMetamaskAnimation from 'src/components/organisms/Incubator/molecules/Animations/MetaMaskDownload'
+import DownloadMetamaskAnimation from 'src/components/organisms/Incubator/Onboarding/DownloadMetamask/Animations/'
+import DownloadMetamask from 'src/components/organisms/Incubator/Onboarding/DownloadMetamask'
+import { LoadingPlaceholder, InfoIcon } from 'src/components/organisms/Incubator/Icons'
+import { Input } from 'src/components/organisms/Incubator/Form'
+import { usePostSignGitHubMarketAsset } from 'src/fixtures/khaos/hooks'
 
 const LABEL_PLACEHOLDERS = ['Crypto OSS', 'Women that Code']
 
@@ -125,6 +130,7 @@ const FilterOption = styled.div`
 `
 
 type ProjectDetailsProps = {
+  onStateChange: React.Dispatch<React.SetStateAction<string>>
   website: string
   twitter: string
   github: string
@@ -134,7 +140,197 @@ type ProjectDetailsProps = {
   fundingUSD: string
 }
 
-const ProjectDetails = ({ fundingDEV, fundingUSD, github, logo, twitter, website, name }: ProjectDetailsProps) => {
+const MintedTokensContainer = styled.div`
+  padding-top: 1em;
+  display: flex;
+  flex-direction: column;
+
+  > div {
+    padding-bottom: 0.5em;
+  }
+
+`
+
+const InfoIconContainer = styled.div`
+  cursor: pointer;
+  margin-left: 2px;
+  transform: translateY(-2.5px);
+`
+
+const MintedTokens = () => {
+  const { ticker } = { ticker: 'SIGP' }
+  return (
+    <MintedTokensContainer>
+      <SpaceBetween>
+        <div style={{ display: 'flex' }}>
+          <Span fontSize="16px">{ticker} tokens Minted</Span>
+          <InfoIconContainer>
+            <InfoIcon fill={"#5B8BF5"} />
+          </InfoIconContainer>
+        </div>
+        <div style={{ display: 'flex', alignItems: 'center' }}>
+          <div style={{ width: '16px', height: '16px', marginRight: '5px', transform: 'translateY(-1px)' }}>
+            <DecCurrencySmall />
+          </div>
+          <Span fontWeight="bold" fontSize="16px">
+            10,000,000 {ticker}
+          </Span>
+        </div>
+      </SpaceBetween>
+      <SpaceBetween>
+        <div style={{ display: 'flex' }}>
+          <Span fontSize="16px">Dev Protocol Treasury Fee</Span>
+          <InfoIconContainer>
+            <InfoIcon fill={"#D500E6"} />
+          </InfoIconContainer>
+        </div>
+        <div style={{ display: 'flex', alignItems: 'center' }}>
+          <div style={{ width: '16px', height: '16px', marginRight: '5px', transform: 'translateY(-1px)' }}>
+            <DecCurrencySmall />
+          </div>
+          <Span fontWeight="bold" fontSize="16px">
+            500,000 {ticker}
+          </Span>
+        </div>
+      </SpaceBetween>
+      <SpaceBetween>
+        <Span fontSize="16px">You'll receive</Span>
+        <div style={{ display: 'flex', alignItems: 'center' }}>
+          <div style={{ width: '16px', height: '16px', marginRight: '5px', transform: 'translateY(-1px)' }}>
+            <DecCurrencySmall />
+          </div>
+          <Span fontWeight="bold" fontSize="16px">
+            9,500,000 {ticker}
+          </Span>
+        </div>
+      </SpaceBetween>
+      <SpaceBetween>
+        <Span fontSize="16px">Funding received</Span>
+        <Span fontWeight="bold" fontSize="16px">$ 20,000</Span>
+      </SpaceBetween>
+
+    </MintedTokensContainer>
+  )
+}
+
+const AuthenticationContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+`
+
+const FormContainer = styled.div`
+  display: grid;
+  width: 100%;
+  align-self: center;
+  grid-gap: 1rem;
+`
+
+const OurDocsLink = styled.a`
+  font-size: 14px;
+  text-decoration: none;
+  color: #5B8BF5;
+  padding-bottom: 1px;
+  border-bottom: 1px solid #5B8BF5;
+
+  :hover {
+    color: #5B8BF5;
+  }
+`
+
+const Authentication = () => {
+  const githubUrl = 'sigp/lighthouse'
+  const logo = 'https://res.cloudinary.com/haas-storage/image/upload/v1613044939/sigma_tye6kg.png'
+  const name = 'Sigma'
+  
+  return (
+    <DetailsContainer>
+      <div>
+        <SpaceBetween style={{ paddingBottom: '4.5em' }}>
+          <Contact>
+            <Span fontSize="40px" fontWeight="bold">
+              {name}
+            </Span>
+            <div style={{ display: 'flex' }}>
+              <div style={{ marginRight: '5px', width: '24px', height: '24px'}}>
+                <img src="https://res.cloudinary.com/haas-storage/image/upload/v1613111071/github_rg8ngo.png" />
+              </div>
+              <LinkB>{githubUrl}</LinkB>
+            </div>
+          </Contact>
+
+          <LogoContainer>
+            <img src={logo} />
+          </LogoContainer>
+
+        </SpaceBetween>
+        <hr color="#CCCCCC" />
+        <MintedTokens />
+      </div>
+
+      <AuthenticationForm />
+
+    </DetailsContainer>
+  )
+}
+
+const AuthenticationForm = () => {
+
+  const onSubmit = (data: any) => {
+    console.log('data: ', data)
+  }
+
+  return (
+    <AuthenticationContainer>
+      <Span fontSize="40px" fontWeight="bold">
+        Authentication
+      </Span>
+      <Span style={{ paddingTop: '3em' }} fontSize="14px">Repository’s Personal Access Token</Span>
+      <FormContainer style={{ paddingTop: '0.4em' }}>
+        <Form initialValues={{ remember: true }} onFinish={onSubmit}>
+          <div style={{ display: 'grid', gridGap: '1.5em' }}>
+            <div>
+              <Form.Item
+                noStyle
+                name="personalAccessToken"
+                rules={[{ required: true, message: 'Please input PAT.' }]}
+                key="personalAccessToken"
+              >
+                <Input value="" name="personalAccessToken" />
+              </Form.Item>
+            </div>
+
+            <Span fontSize="14px" color="#5B8BF5">
+              The Khaos Oracle confidentially authenticates your Github Personal Access Token.
+              Please see
+              <OurDocsLink rel="noopener noreferrer" target="_blank" href="https://github.com/dev-protocol/khaos">
+                {' '}our docs
+              </OurDocsLink> for more details.
+          </Span>
+          </div>
+
+          <div style={{ paddingTop: '2.5em' }}>
+            <SpaceBetween style={{ alignItems: 'center' }}>
+              <div style={{ height: 'fit-content' }}>
+                <LinkB
+                  rel="noopener noreferrer"
+                  target="_blank"
+                  href="https://github.com/settings/tokens/new" >
+                  Create a PAT
+                </LinkB>
+              </div>
+
+              <Button type="submit">Submit</Button>
+            </SpaceBetween>
+
+          </div>
+        </Form>
+      </FormContainer>
+
+    </AuthenticationContainer>
+  )
+}
+
+const ProjectDetails = ({ fundingDEV, fundingUSD, github, logo, twitter, website, name, onStateChange  }: ProjectDetailsProps) => {
   return (
     <DetailsContainer>
       <div>
@@ -162,6 +358,7 @@ const ProjectDetails = ({ fundingDEV, fundingUSD, github, logo, twitter, website
           </LogoContainer>
         </SpaceBetween>
         <hr color="#CCCCCC" />
+
         <SpaceBetween style={{ alignItems: 'center' }}>
           <FundingContainer>
             <Span fontSize="14px" color="#CCCCCC">
@@ -174,7 +371,7 @@ const ProjectDetails = ({ fundingDEV, fundingUSD, github, logo, twitter, website
                   {fundingDEV} DEV
                 </Span>
               </DevCurrencyContainer>
-              <Button>Claim</Button>
+              <Button onClick={() => onStateChange('authentication')}>Claim</Button>
             </SpaceBetween>
 
             <Span fontSize="14px" color="#999999">
@@ -183,7 +380,6 @@ const ProjectDetails = ({ fundingDEV, fundingUSD, github, logo, twitter, website
           </FundingContainer>
         </SpaceBetween>
       </div>
-
       <DescriptionContainer>
         <Span fontSize="20px">{ipsum.generateSentences(9)}</Span>
         <LabelContainer>
@@ -234,53 +430,60 @@ const TimelineContainer = styled.div`
   display: flex;
 `
 
-const DownloadMetamaskContainer = styled.div`
+const AuthenticateLoadingContainer = styled.div`
   display: grid;
+  padding-top: 3em;
   grid-template-columns: 1fr 1fr;
-  grid-gap: 1em 3em;
+  grid-column-gap: 1em;
+`
 
+const LoadingContainer = styled.div`
   padding-top: 2em;
+  width: 336px;
+  height: 168px;
 `
 
-const DownloadMetamaskDescription = styled.div`
+const LinkWithIcon = styled.div`
   display: flex;
-  flex-direction: column;
+  align-items: center;
+
+  img,
+  svg {
+    margin-right: 5px;
+  }
 `
 
-const NextButtonContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  grid-column: 1/-1;
-  padding-bottom: 5em;
-`
-
-const DownloadMetamask = () => {
+const AuthenticateLoading = () => {
   return (
-    <DownloadMetamaskContainer>
-      <div style={{ width: '550px', height: '460px' }}>
-        <DownloadMetamaskAnimation />
+    <AuthenticateLoadingContainer>
+      <div style={{ display: 'flex', justifyContent: 'center' }}>
+        <LoadingContainer>
+          <LoadingPlaceholder />
+        </LoadingContainer>
       </div>
-      <DownloadMetamaskDescription>
-        <Span style={{ paddingTop: '3em' }} fontWeight="bold" fontSize="24px">
-          Download MetaMask
+      <div style={{ display: 'flex', flexDirection: 'column' }}>
+        <Span fontSize="40px" fontWeight="bold">One moment, please...</Span>
+        <Span style={{ paddingTop: "2em" }} fontSize="20px">
+          Authenticating your ownership of the designated Github repository.
+          This could take 2 minutes. Please add the following tokens to your wallet by clicking the link below.
         </Span>
-        <Span style={{ paddingTop: '3em' }} fontSize="16px">
-          MetaMask is a blockchain wallet used to interact with the Ethereum blockchain. It allows users to store and
-          manage account keys, broadcast transactions, send and receive Ethereum-based cryptocurrencies and tokens, and
-          securely connect to decentralized applications through a compatible web browser or the mobile app's built-in
-          browser.
-        </Span>
-        <LinkB style={{ paddingTop: '4em' }}>Download MetaMask Browser Extension for Chrome</LinkB>
-      </DownloadMetamaskDescription>
-      <NextButtonContainer>
-        <Button>Next</Button>
-      </NextButtonContainer>
-    </DownloadMetamaskContainer>
+        <SpaceBetween style={{ paddingTop: '3em' }}>
+          <LinkWithIcon>
+            <img width="16px" height="16px" src="/images/img_0.png" />
+            <LinkB>DEV on MetaMask</LinkB>
+          </LinkWithIcon>
+          <LinkWithIcon>
+            <img width="16px" height="16px" src="/images/img_0.png" />
+            <LinkB>SIG on MetaMask</LinkB>
+          </LinkWithIcon>
+        </SpaceBetween>
+      </div>
+    </AuthenticateLoadingContainer>
   )
 }
 
 const OnboardingSection = () => {
-  const [activePart] = useState(1)
+  const [activePart, setActivePart] = useState(1)
 
   return (
     <>
@@ -295,7 +498,8 @@ const OnboardingSection = () => {
         <TimelineSection part={4} currentPart={activePart} />
         <TimelineSection isLast={true} part={5} currentPart={activePart} />
       </TimelineContainer>
-      {activePart === 1 && <DownloadMetamask />}
+      {activePart === 1 && <DownloadMetamask onActivePartChange={setActivePart} />}
+      {activePart === 2 && <AuthenticateLoading />}
     </>
   )
 }
@@ -303,6 +507,8 @@ const OnboardingSection = () => {
 const OnboardingPage = () => {
   // const [, project] = getPath(useRouter().asPath)
   // TODO: Fetch data from strapi based on project
+
+  const [currentState, setCurrentState] = useState<string>('overview')
   const { name, fundingDEV, fundingUSD, github, logo, twitter, website } = {
     name: 'Sigma',
     website: 'sigmaprime.io',
@@ -323,15 +529,23 @@ const OnboardingPage = () => {
             </div>
           </Link>
         </BackArrowContainer>
-        <ProjectDetails
-          name={name}
-          fundingDEV={fundingDEV}
-          fundingUSD={fundingUSD}
-          github={github}
-          logo={logo}
-          twitter={twitter}
-          website={website}
-        />
+        {currentState === 'overview' && (
+            <ProjectDetails
+            onStateChange={setCurrentState}
+            name={name}
+            fundingDEV={fundingDEV}
+            fundingUSD={fundingUSD}
+            github={github}
+            logo={logo}
+            twitter={twitter}
+            website={website}
+          />
+        )}
+
+        {currentState === 'authentication' && (
+          <Authentication />
+        )}
+      
       </Container>
 
       <Container>

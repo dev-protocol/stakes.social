@@ -2,7 +2,7 @@ import * as React from 'react'
 import styled, { CSSProperties } from 'styled-components'
 
 import { Container } from 'src/components/atoms/Container'
-import { StakesSocialLogo, MadeByDev } from 'src/components/organisms/Incubator/Logo'
+import { StakesSocialLogo, MadeByDev } from 'src/components/organisms/Incubator/Icons'
 import { Span } from 'src/components/organisms/Incubator/Typography'
 
 const Wrap = styled.footer`

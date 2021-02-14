@@ -1,5 +1,5 @@
 import React from 'react'
-import { IncubatorLogo } from 'src/components/organisms/Incubator/Logo'
+import { IncubatorLogo } from 'src/components/organisms/Incubator/Icons'
 import styled from 'styled-components'
 
 const HeaderContainer = styled.div`

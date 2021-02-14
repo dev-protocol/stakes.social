@@ -221,3 +221,25 @@ export const MadeByDev = () => (
     </defs>
   </svg>
 )
+
+export const LoadingPlaceholder = () => {
+  return (
+    <svg width="336" height="168" viewBox="0 0 336 168" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M42 126H0V168H42V126Z" fill="#00D0FD" />
+      <path d="M42 84V42H0V84V126H42V84Z" fill="#5B8BF5" />
+      <path d="M294 42H252V84H210H168V126H126V168H168H210V126H252H294V84H336V42V0H294V42Z" fill="#FF3815" />
+      <path d="M84 168H126V126V84H84V42H42V84V126H84V168Z" fill="#D500E6" />
+    </svg>
+
+  )
+}
+
+export const InfoIcon = ({ fill } : { fill: string}) => {
+  return (
+    <svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M7 6.01363H9V4.23206H7V6.01363ZM7.06623 13.5654H8.94702V6.91772H7.06623V13.5654Z" fill={fill} />
+      <path fillRule="evenodd" clipRule="evenodd" d="M8 15.5653C11.6819 15.5653 14.6667 12.5806 14.6667 8.89868C14.6667 5.21678 11.6819 2.23202 8 2.23202C4.3181 2.23202 1.33333 5.21678 1.33333 8.89868C1.33333 12.5806 4.3181 15.5653 8 15.5653ZM8 16.8987C12.4183 16.8987 16 13.317 16 8.89868C16 4.4804 12.4183 0.898682 8 0.898682C3.58172 0.898682 0 4.4804 0 8.89868C0 13.317 3.58172 16.8987 8 16.8987Z" fill={fill} />
+    </svg>
+
+  )
+}
