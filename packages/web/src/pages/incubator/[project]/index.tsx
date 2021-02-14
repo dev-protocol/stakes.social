@@ -22,6 +22,7 @@ import { LoadingPlaceholder, InfoIcon } from 'src/components/organisms/Incubator
 import { Input } from 'src/components/organisms/Incubator/Form'
 import { usePostSignGitHubMarketAsset } from 'src/fixtures/khaos/hooks'
 import useWindowDimensions from 'src/fixtures/utility/useWindowDimensions'
+import { useEffect } from 'react'
 
 const LABEL_PLACEHOLDERS = ['Crypto OSS', 'Women that Code']
 
@@ -580,7 +581,7 @@ const OnboardingPage = () => {
   // const [, project] = getPath(useRouter().asPath)
   // TODO: Fetch data from strapi based on project
 
-  const [currentState, setCurrentState] = useState<string>('success')
+  const [currentState, setCurrentState] = useState<string>('overview')
   const { name, fundingDEV, fundingUSD, github, logo, twitter, website } = {
     name: 'Sigma',
     website: 'sigmaprime.io',
@@ -590,6 +591,14 @@ const OnboardingPage = () => {
     fundingDEV: '71,000',
     logo: 'https://res.cloudinary.com/haas-storage/image/upload/v1613044939/sigma_tye6kg.png'
   }
+
+  useEffect(() => {
+    if (currentState === 'loading')
+    setTimeout(() => {
+      setCurrentState('success')
+    }, 3000)
+  }, [currentState])
+
   return (
     <>
       <IncubatorHeader />
