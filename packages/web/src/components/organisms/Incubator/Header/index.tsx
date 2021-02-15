@@ -35,15 +35,17 @@ const IncubatorHeader = () => {
       <HeaderContainer>
         <Link href="/incubator" passHref>
           <div style={{ cursor: 'pointer' }}>
-           <IncubatorLogo />
+            <IncubatorLogo />
           </div>
-         
         </Link>
 
         <HeaderLinkContainer>
           <HeaderLink>Projects</HeaderLink>
           <HeaderLink>Comittee</HeaderLink>
-          <HeaderLink>{'Q&As'}</HeaderLink>
+          <Link href="/incubator/QA">
+            <HeaderLink>{'Q&As'}</HeaderLink>
+          </Link>
+
           <HeaderLink color="#FF3815">Stakes.social</HeaderLink>
         </HeaderLinkContainer>
         <ConnectWalletContainer>

@@ -81,7 +81,7 @@ const ProjectEntry = ({ funding, title, url }: ProjectProps) => {
         </Span>
       </FundingSection>
       <ClaimButtonContainer>
-        <Link href={'/incubator/[project]'} as={`/incubator/${title}`} passHref>
+        <Link href={'/incubator/project/[project]'} as={`/incubator/project/${title}`} passHref>
           <Button>Claim</Button>
         </Link>
       </ClaimButtonContainer>
