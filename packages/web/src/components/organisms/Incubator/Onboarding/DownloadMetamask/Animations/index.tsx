@@ -1,14 +1,10 @@
-import React from "react";
-import Lottie from "lottie-react";
-import styled from 'styled-components'
+import React from 'react'
+import Lottie from 'lottie-react'
 
-import groovyWalkAnimation from "./data.json";
+import groovyWalkAnimation from './data.json'
 
 const DownloadMetamaskAnimation = () => {
-  return (
-    
-    <Lottie  assetsPath="/images/" animationData={groovyWalkAnimation} />
-  )
+  return <Lottie assetsPath="/images/" animationData={groovyWalkAnimation} />
 }
 
 export default DownloadMetamaskAnimation

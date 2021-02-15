@@ -271,7 +271,7 @@ const OnboardingPage = () => {
   // const [, project] = getPath(useRouter().asPath)
   // TODO: Fetch data from strapi based on project
 
-  const [currentState, setCurrentState] = useState<string>('loading')
+  const [currentState, setCurrentState] = useState<string>('overview')
   const { name, fundingDEV, fundingUSD, github, logo, twitter, website } = {
     name: 'Sigma',
     website: 'sigmaprime.io',

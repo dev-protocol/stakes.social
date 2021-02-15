@@ -29,7 +29,7 @@ type DownloadMetamaskType = {
   onActivePartChange: React.Dispatch<React.SetStateAction<number>>
 }
 
-const DownloadMetamask = ({ onActivePartChange } : DownloadMetamaskType) => {
+const DownloadMetamask = ({ onActivePartChange }: DownloadMetamaskType) => {
   return (
     <DownloadMetamaskContainer>
       <div style={{ width: '550px', height: '460px' }}>

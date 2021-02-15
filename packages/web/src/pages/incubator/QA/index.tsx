@@ -1,17 +1,12 @@
 import React from 'react'
 import styled from 'styled-components'
 import Link from 'next/link'
-import * as lorem from 'lorem-ipsum'
+
 import IncubatorHeader from 'src/components/organisms/Incubator/Header'
 import Hr from 'src/components/organisms/Incubator/molecules/Hr'
 import Footer from 'src/components/organisms/Incubator/Footer'
 import BackArrow from 'src/components/organisms/Incubator/molecules/BackArrow'
 import { Span } from 'src/components/organisms/Incubator/Typography'
-
-const ipsum = new lorem.LoremIpsum({
-  sentencesPerParagraph: { min: 1, max: 3 },
-  wordsPerSentence: { min: 6, max: 10 }
-})
 
 const Container = styled.div`
   display: flex;
@@ -28,12 +23,6 @@ const BackArrowContainer = styled.div`
   > svg {
     cursor: pointer;
   }
-`
-
-const DetailsContainer = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-gap: 5em;
 `
 
 const QAGrid = styled.div`
