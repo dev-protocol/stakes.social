@@ -1,7 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import { Span } from 'src/components/organisms/Incubator/Typography'
+import { Span, LinkB } from 'src/components/organisms/Incubator/Typography'
+import Link from 'next/link'
 
 const tips = [
   {
@@ -82,7 +83,9 @@ const RandomTip = () => {
         {randomElement.answer}
       </Span>
       <ShowAllContainer>
-        <a>{'Show all Q&As'}</a>
+        <Link href="/incubator/QA">
+          <LinkB>{'Show all Q&As'}</LinkB>
+        </Link>
       </ShowAllContainer>
     </TipGrid>
   )

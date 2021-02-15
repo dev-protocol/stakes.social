@@ -496,11 +496,6 @@ const AuthenticateLoading = () => {
   )
 }
 
-const SuccessMessageContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-`
-
 type ClaimSuccesfulProps = {
   onStateChange: React.Dispatch<React.SetStateAction<string>>
 }
@@ -662,7 +657,7 @@ const OnboardingPage = () => {
   // const [, project] = getPath(useRouter().asPath)
   // TODO: Fetch data from strapi based on project
 
-  const [currentState, setCurrentState] = useState<string>('overview')
+  const [currentState, setCurrentState] = useState<string>('loading')
   const { name, fundingDEV, fundingUSD, github, logo, twitter, website } = {
     name: 'Sigma',
     website: 'sigmaprime.io',
@@ -681,9 +676,9 @@ const OnboardingPage = () => {
   }, [currentState])
 
   return (
-    <>
+    <div style={{ display: 'flex', minHeight: '100vh', flexDirection: 'column' }}>
       <IncubatorHeader />
-      <Container style={{ paddingBottom: '6em' }}>
+      <Container style={{ paddingBottom: '6em', flexGrow: 1 }}>
         <BackArrowContainer>
           {currentState === 'overview' && (
             <Link href="/incubator" as="/incubator" passHref>
@@ -721,13 +716,15 @@ const OnboardingPage = () => {
         {currentState === 'whatsnext' && <WhatsNext />}
       </Container>
 
-      <Container>
-        <Hr />
-        <OnboardingSection />
-      </Container>
+      {currentState === 'overview' && (
+        <Container>
+          <Hr />
+          <OnboardingSection />
+        </Container>
+      )}
 
       <Footer />
-    </>
+    </div>
   )
 }
 
