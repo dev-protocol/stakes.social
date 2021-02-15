@@ -14,7 +14,7 @@ import Footer from 'src/components/organisms/Incubator/Footer'
 import BackArrow from 'src/components/organisms/Incubator/molecules/BackArrow'
 import DevCurrencySymbol, { DecCurrencySmall } from 'src/components/organisms/Incubator/molecules/DevCurrency'
 import Hr from 'src/components/organisms/Incubator/molecules/Hr'
-import TimelineSection from 'src/components/organisms/Incubator/Timeline'
+import TimelineSection, { StepSpan, Step } from 'src/components/organisms/Incubator/Timeline'
 import TopArrow from 'src/components/organisms/Incubator/molecules/TopArrow'
 import DownloadMetamaskAnimation from 'src/components/organisms/Incubator/Onboarding/DownloadMetamask/Animations/'
 import DownloadMetamask from 'src/components/organisms/Incubator/Onboarding/DownloadMetamask'
@@ -151,7 +151,6 @@ const MintedTokensContainer = styled.div`
   > div {
     padding-bottom: 0.5em;
   }
-
 `
 
 const InfoIconContainer = styled.div`
@@ -168,7 +167,7 @@ const MintedTokens = () => {
         <div style={{ display: 'flex' }}>
           <Span fontSize="16px">{ticker} tokens Minted</Span>
           <InfoIconContainer>
-            <InfoIcon fill={"#5B8BF5"} />
+            <InfoIcon fill={'#5B8BF5'} />
           </InfoIconContainer>
         </div>
         <div style={{ display: 'flex', alignItems: 'center' }}>
@@ -184,7 +183,7 @@ const MintedTokens = () => {
         <div style={{ display: 'flex' }}>
           <Span fontSize="16px">Dev Protocol Treasury Fee</Span>
           <InfoIconContainer>
-            <InfoIcon fill={"#D500E6"} />
+            <InfoIcon fill={'#D500E6'} />
           </InfoIconContainer>
         </div>
         <div style={{ display: 'flex', alignItems: 'center' }}>
@@ -209,9 +208,10 @@ const MintedTokens = () => {
       </SpaceBetween>
       <SpaceBetween>
         <Span fontSize="16px">Funding received</Span>
-        <Span fontWeight="bold" fontSize="16px">$ 20,000</Span>
+        <Span fontWeight="bold" fontSize="16px">
+          $ 20,000
+        </Span>
       </SpaceBetween>
-
     </MintedTokensContainer>
   )
 }
@@ -231,12 +231,12 @@ const FormContainer = styled.div`
 const OurDocsLink = styled.a`
   font-size: 14px;
   text-decoration: none;
-  color: #5B8BF5;
+  color: #5b8bf5;
   padding-bottom: 1px;
-  border-bottom: 1px solid #5B8BF5;
+  border-bottom: 1px solid #5b8bf5;
 
   :hover {
-    color: #5B8BF5;
+    color: #5b8bf5;
   }
 `
 
@@ -268,22 +268,17 @@ const Authentication = ({ onStateChange }: AuthenticationProps) => {
           <LogoContainer>
             <img src={logo} />
           </LogoContainer>
-
         </SpaceBetween>
         <hr color="#CCCCCC" />
         <MintedTokens />
       </div>
 
-
-
       <AuthenticationForm onStateChange={onStateChange} />
-
     </DetailsContainer>
   )
 }
 
 const AuthenticationForm = ({ onStateChange }: AuthenticationProps) => {
-
   const onSubmit = (data: any) => {
     console.log('data: ', data)
     onStateChange('loading')
@@ -294,7 +289,9 @@ const AuthenticationForm = ({ onStateChange }: AuthenticationProps) => {
       <Span fontSize="40px" fontWeight="bold">
         Authentication
       </Span>
-      <Span style={{ paddingTop: '3em' }} fontSize="14px">Repository’s Personal Access Token</Span>
+      <Span style={{ paddingTop: '3em' }} fontSize="14px">
+        Repository’s Personal Access Token
+      </Span>
       <FormContainer style={{ paddingTop: '0.4em' }}>
         <Form initialValues={{ remember: true }} onFinish={onSubmit}>
           <div style={{ display: 'grid', gridGap: '1.5em' }}>
@@ -310,37 +307,42 @@ const AuthenticationForm = ({ onStateChange }: AuthenticationProps) => {
             </div>
 
             <Span fontSize="14px" color="#5B8BF5">
-              The Khaos Oracle confidentially authenticates your Github Personal Access Token.
-              Please see
+              The Khaos Oracle confidentially authenticates your Github Personal Access Token. Please see
               <OurDocsLink rel="noopener noreferrer" target="_blank" href="https://github.com/dev-protocol/khaos">
-                {' '}our docs
-              </OurDocsLink> for more details.
-          </Span>
+                {' '}
+                our docs
+              </OurDocsLink>{' '}
+              for more details.
+            </Span>
           </div>
 
           <div style={{ paddingTop: '2.5em' }}>
             <SpaceBetween style={{ alignItems: 'center' }}>
               <div style={{ height: 'fit-content' }}>
-                <LinkB
-                  rel="noopener noreferrer"
-                  target="_blank"
-                  href="https://github.com/settings/tokens/new" >
+                <LinkB rel="noopener noreferrer" target="_blank" href="https://github.com/settings/tokens/new">
                   Create a PAT
                 </LinkB>
               </div>
 
               <Button type="submit">Submit</Button>
             </SpaceBetween>
-
           </div>
         </Form>
       </FormContainer>
-
     </AuthenticationContainer>
   )
 }
 
-const ProjectDetails = ({ fundingDEV, fundingUSD, github, logo, twitter, website, name, onStateChange }: ProjectDetailsProps) => {
+const ProjectDetails = ({
+  fundingDEV,
+  fundingUSD,
+  github,
+  logo,
+  twitter,
+  website,
+  name,
+  onStateChange
+}: ProjectDetailsProps) => {
   return (
     <DetailsContainer>
       <div>
@@ -472,10 +474,12 @@ const AuthenticateLoading = () => {
         </LoadingContainer>
       </div>
       <div style={{ display: 'flex', flexDirection: 'column' }}>
-        <Span fontSize="40px" fontWeight="bold">One moment, please...</Span>
-        <Span style={{ paddingTop: "2em" }} fontSize="20px">
-          Authenticating your ownership of the designated Github repository.
-          This could take 2 minutes. Please add the following tokens to your wallet by clicking the link below.
+        <Span fontSize="40px" fontWeight="bold">
+          One moment, please...
+        </Span>
+        <Span style={{ paddingTop: '2em' }} fontSize="20px">
+          Authenticating your ownership of the designated Github repository. This could take 2 minutes. Please add the
+          following tokens to your wallet by clicking the link below.
         </Span>
         <SpaceBetween style={{ paddingTop: '3em' }}>
           <LinkWithIcon>
@@ -497,7 +501,11 @@ const SuccessMessageContainer = styled.div`
   flex-direction: column;
 `
 
-const ClaimSuccesful = () => {
+type ClaimSuccesfulProps = {
+  onStateChange: React.Dispatch<React.SetStateAction<string>>
+}
+
+const ClaimSuccesful = ({ onStateChange }: ClaimSuccesfulProps) => {
   const { width, height } = useWindowDimensions()
   const githubUrl = 'sigp/lighthouse'
   const logo = 'https://res.cloudinary.com/haas-storage/image/upload/v1613044939/sigma_tye6kg.png'
@@ -523,7 +531,6 @@ const ClaimSuccesful = () => {
             <LogoContainer>
               <img src={logo} />
             </LogoContainer>
-
           </SpaceBetween>
           <hr color="#CCCCCC" />
           <MintedTokens />
@@ -532,27 +539,26 @@ const ClaimSuccesful = () => {
           <Span color="#D500E6" fontSize="40px" fontWeight="bold">
             Success!
           </Span>
-          <Span style={{ paddingTop: "2em" }} fontSize="20px">
-            Congratulations! {name} has sucessfully joined Stakes Social.
-            The Incubator funding has been sent to your Metamask wallet.
-            Please continue to the next steps to learn how to maximize your experience on Stakes Social.
-        </Span>
-        <SpaceBetween style={{ paddingTop: "4em", alignItems: 'center' }}>
-          <div style={{ display: 'flex', height: 'fit-content' }}>
-            <LinkB> Receipt</LinkB>
-            <div style={{ paddingRight: '1em', marginRight: '1em', borderRight: '1px solid black' }} />
-            <LinkB>Stakes.Social</LinkB>
-          </div>
-          <Button style={{ width: '168px', height: '48px'}}>Next steps</Button>
-        </SpaceBetween>
+          <Span style={{ paddingTop: '2em' }} fontSize="20px">
+            Congratulations! {name} has sucessfully joined Stakes Social. The Incubator funding has been sent to your
+            Metamask wallet. Please continue to the next steps to learn how to maximize your experience on Stakes
+            Social.
+          </Span>
+          <SpaceBetween style={{ paddingTop: '4em', alignItems: 'center' }}>
+            <div style={{ display: 'flex', height: 'fit-content' }}>
+              <LinkB> Receipt</LinkB>
+              <div style={{ paddingRight: '1em', marginRight: '1em', borderRight: '1px solid black' }} />
+              <LinkB>Stakes.Social</LinkB>
+            </div>
+            <Button onClick={() => onStateChange('whatsnext')} style={{ width: '168px', height: '48px' }}>
+              Next steps
+            </Button>
+          </SpaceBetween>
         </SuccessMessageContainer>
       </DetailsContainer>
       <Confetti width={width} height={height} recycle={false} />
     </>
   )
-
-
-
 }
 
 const OnboardingSection = () => {
@@ -569,7 +575,66 @@ const OnboardingSection = () => {
         <TimelineSection part={2} currentPart={activePart} />
         <TimelineSection part={3} currentPart={activePart} />
         <TimelineSection part={4} currentPart={activePart} />
-        <TimelineSection isLast={true} part={5} currentPart={activePart} />
+        <TimelineSection part={5} currentPart={activePart} isLast={true} />
+      </TimelineContainer>
+      {activePart === 1 && <DownloadMetamask onActivePartChange={setActivePart} />}
+      {activePart === 2 && <AuthenticateLoading />}
+    </>
+  )
+}
+
+const WhatsNext = () => {
+  const [activePart, setActivePart] = useState(2)
+  const pointerOnly = true
+  return (
+    <>
+      <SpaceBetween style={{ paddingTop: '1em' }}>
+        <Span fontSize="20px">What's next?</Span>
+        <LinkB>Skip</LinkB>
+      </SpaceBetween>
+      <TimelineContainer style={{ alignSelf: 'center' }}>
+        <TimelineSection
+          StepSpanComponent={(info: any) => <Step info={{ ...info, width: '40px', fontSize: '16px' }}>Tip 1</Step>}
+          isFirst={true}
+          part={1}
+          currentPart={activePart}
+          pointerText="Tip"
+          currentColor="#D500E6"
+          finishedColor="black"
+        />
+        <TimelineSection
+          StepSpanComponent={(info: any) => <Step info={{ ...info, width: '40px', fontSize: '16px' }}>Tip 2</Step>}
+          part={2}
+          currentPart={activePart}
+          pointerText="Tip"
+          currentColor="#D500E6"
+          finishedColor="black"
+        />
+        <TimelineSection
+          StepSpanComponent={(info: any) => <Step info={{ ...info, width: '40px', fontSize: '16px' }}>Tip 3</Step>}
+          part={3}
+          currentPart={activePart}
+          pointerText="Tip"
+          currentColor="#D500E6"
+          finishedColor="black"
+        />
+        <TimelineSection
+          StepSpanComponent={(info: any) => <Step info={{ ...info, width: '40px', fontSize: '16px' }}>Tip 4</Step>}
+          part={4}
+          currentPart={activePart}
+          pointerText="Tip"
+          currentColor="#D500E6"
+          finishedColor="black"
+        />
+        <TimelineSection
+          StepSpanComponent={(info: any) => <Step info={{ ...info, width: '40px', fontSize: '16px' }}>Tip 5</Step>}
+          isLast={true}
+          part={5}
+          currentPart={activePart}
+          pointerText="Tip"
+          currentColor="#D500E6"
+          finishedColor="black"
+        />
       </TimelineContainer>
       {activePart === 1 && <DownloadMetamask onActivePartChange={setActivePart} />}
       {activePart === 2 && <AuthenticateLoading />}
@@ -594,9 +659,9 @@ const OnboardingPage = () => {
 
   useEffect(() => {
     if (currentState === 'loading')
-    setTimeout(() => {
-      setCurrentState('success')
-    }, 3000)
+      setTimeout(() => {
+        setCurrentState('success')
+      }, 3000)
   }, [currentState])
 
   return (
@@ -617,7 +682,6 @@ const OnboardingPage = () => {
               <BackArrow />
             </div>
           )}
-
         </BackArrowContainer>
         {currentState === 'overview' && (
           <ProjectDetails
@@ -632,18 +696,13 @@ const OnboardingPage = () => {
           />
         )}
 
-        {currentState === 'authentication' && (
-          <Authentication onStateChange={setCurrentState} />
-        )}
+        {currentState === 'authentication' && <Authentication onStateChange={setCurrentState} />}
 
-        {currentState === 'loading' && (
-          <AuthenticateLoading />
-        )}
+        {currentState === 'loading' && <AuthenticateLoading />}
 
-        {currentState === 'success' && (
-          <ClaimSuccesful />
-        )}
+        {currentState === 'success' && <ClaimSuccesful onStateChange={setCurrentState} />}
 
+        {currentState === 'whatsnext' && <WhatsNext />}
       </Container>
 
       <Container>
