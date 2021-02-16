@@ -41,7 +41,7 @@ const Index = (_: Props) => {
     if (typeof sortByStr === 'string') {
       return sortByStr
     }
-    return ''
+    return 'MOST_RECENT'
   }, [router])
   const featureTag = useMemo(() => {
     const { tag: wordStr } = router.query
