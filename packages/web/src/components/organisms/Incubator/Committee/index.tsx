@@ -85,7 +85,7 @@ const Committee = () => {
   return (
     <CommitteeContainer>
       <Span color="black" fontSize="20px">
-        The incubator committee
+        The Incubator Committee
       </Span>
       <PersonsOverview>
         <Person

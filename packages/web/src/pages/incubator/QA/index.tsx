@@ -52,17 +52,8 @@ const QAPage = () => {
         <Span fontSize="40px" fontWeight="bold">
           {'Q&As'}
         </Span>
-        <QAGrid style={{ paddingTop: '2em' }}>
-          <Span fontSize="24px">What is Stakes Social?</Span>
-          <Span fontSize="20px">
-            Stakes Social is Dev Protocol’s user facing application where OSS projects and patrons connect. OSS projects
-            use Stakes Social to tokenize, obtain patrons, build communities, and incentive stakeholders in order to
-            grow their project. Patrons use Stakes Social to stake the DEV token for OSS projects they support.
-          </Span>
-        </QAGrid>
-        <Hr />
 
-        <QAGrid style={{ paddingTop: '1em' }}>
+        <QAGrid style={{ paddingTop: '2em' }}>
           <Span fontSize="24px">What is Dev Protocol?</Span>
           <Span fontSize="20px">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
@@ -70,6 +61,16 @@ const QAPage = () => {
             ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat
             nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit
             anim id est laborum.
+          </Span>
+        </QAGrid>
+        <Hr />
+
+        <QAGrid style={{ paddingTop: '1em' }}>
+          <Span fontSize="24px">What is Stakes Social?</Span>
+          <Span fontSize="20px">
+            Stakes Social is Dev Protocol’s user facing application where OSS projects and patrons connect. OSS projects
+            use Stakes Social to tokenize, obtain patrons, build communities, and incentive stakeholders in order to
+            grow their project. Patrons use Stakes Social to stake the DEV token for OSS projects they support.
           </Span>
         </QAGrid>
         <Hr />

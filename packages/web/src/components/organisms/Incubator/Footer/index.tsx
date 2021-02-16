@@ -52,7 +52,7 @@ export const Footer = () => {
           </div>
           <div style={{ display: 'flex', justifyContent: 'space-between' }}>
             <Span color="white" fontSize="20px">
-              2021. All rights reserverd
+              2021. All Rights Reserverd
             </Span>
             <SocialContainer>
               <SocialMediaLink target="_blank" rel="noopener noreferrer" href="https://twitter.com/devprtcl">

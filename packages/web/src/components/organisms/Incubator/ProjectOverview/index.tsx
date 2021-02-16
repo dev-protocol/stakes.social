@@ -199,7 +199,7 @@ const ProjectOverview = () => {
       <ProjectOverviewContainer>
         <OverviewHeader>
           <Span color="white" fontSize="20px">
-            Meet our incubated projects
+            Meet our Incubated Projects
           </Span>
           <CurrencySwitcher />
         </OverviewHeader>

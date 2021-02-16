@@ -190,7 +190,7 @@ const ProjectDetails = ({
                   {fundingDEV} DEV
                 </Span>
               </DevCurrencyContainer>
-              <Button onClick={() => onStateChange('authentication')}>Claim</Button>
+              <Button onClick={() => onStateChange('onboarding')}>Claim</Button>
             </SpaceBetween>
 
             <Span fontSize="14px" color="#999999">
@@ -219,11 +219,13 @@ const DescriptionContainer = styled.div`
 const OnboardSwitchContainer = styled.div`
   display: flex;
   padding: 10px;
+  width: fit-content;
 `
 
 const OnboardEntry = styled.div<{ isActive?: boolean }>`
   cursor: pointer;
   font-size: 20px;
+  width: fit-content;
   color: ${props => (props?.isActive ? '#00D0FD' : 'black')};
 
   padding-bottom: ${props => (!props.isActive ? '2px' : 'none')};
@@ -249,14 +251,25 @@ const TimelineContainer = styled.div`
   display: flex;
 `
 
-const OnboardingSection = () => {
+type OnboardingSectionProps = {
+  isModal?: boolean
+  onStateChange: React.Dispatch<React.SetStateAction<string>>
+}
+
+const OnboardingSection = ({ isModal, onStateChange }: OnboardingSectionProps) => {
   const [activePart, setActivePart] = useState(1)
 
   return (
     <>
-      <SpaceBetween style={{ paddingTop: '1em' }}>
+      <SpaceBetween style={{ alignItems: 'center', paddingTop: '1em' }}>
         <Span fontSize="20px">How to get your reward?</Span>
-        <OnboardSwitch />
+        {isModal ? (
+          <LinkB onClick={() => onStateChange('authentication')} style={{ fontSize: '20px' }}>
+            Skip
+          </LinkB>
+        ) : (
+          <OnboardSwitch />
+        )}
       </SpaceBetween>
       <TimelineContainer style={{ alignSelf: 'center' }}>
         <TimelineSection isFirst={true} part={1} currentPart={activePart} />
@@ -269,7 +282,7 @@ const OnboardingSection = () => {
       {activePart === 2 && <PurchaseEthereum onActivePartChange={setActivePart} />}
       {activePart === 3 && <ConnectWallet onActivePartChange={setActivePart} />}
       {activePart === 4 && <CopyPat onActivePartChange={setActivePart} />}
-      {activePart === 5 && <SubmitTransaction />}
+      {activePart === 5 && <SubmitTransaction onStateChange={onStateChange} />}
     </>
   )
 }
@@ -277,7 +290,6 @@ const OnboardingSection = () => {
 const OnboardingPage = () => {
   // const [, project] = getPath(useRouter().asPath)
   // TODO: Fetch data from strapi based on project
-
   const [currentState, setCurrentState] = useState<string>('overview')
   const { name, fundingDEV, fundingUSD, github, logo, twitter, website } = {
     name: 'Sigma',
@@ -297,7 +309,7 @@ const OnboardingPage = () => {
   }, [currentState])
 
   return (
-    <div style={{ display: 'flex', minHeight: '100vh', flexDirection: 'column' }}>
+    <div style={{ position: 'relative', display: 'flex', minHeight: '100vh', flexDirection: 'column' }}>
       <IncubatorHeader />
       <Container style={{ paddingBottom: '6em', flexGrow: 1 }}>
         <BackArrowContainer>
@@ -309,7 +321,7 @@ const OnboardingPage = () => {
             </Link>
           )}
 
-          {currentState === 'authentication' && (
+          {(currentState === 'authentication' || currentState === 'onboarding') && (
             <div onClick={() => setCurrentState('overview')} style={{ cursor: 'pointer' }}>
               <BackArrow />
             </div>
@@ -328,6 +340,12 @@ const OnboardingPage = () => {
           />
         )}
 
+        {currentState === 'onboarding' && (
+          <Container>
+            <OnboardingSection onStateChange={setCurrentState} isModal={true} />
+          </Container>
+        )}
+
         {currentState === 'authentication' && <Authentication onStateChange={setCurrentState} />}
 
         {currentState === 'loading' && <AuthenticateLoading />}
@@ -340,7 +358,7 @@ const OnboardingPage = () => {
       {currentState === 'overview' && (
         <Container>
           <Hr />
-          <OnboardingSection />
+          <OnboardingSection onStateChange={setCurrentState} />
         </Container>
       )}
 

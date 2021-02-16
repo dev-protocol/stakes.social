@@ -3,6 +3,7 @@ import styled from 'styled-components'
 
 import { Span } from 'src/components/organisms/Incubator/Typography'
 import Animation from './Animations'
+import { Button } from '../../molecules/Button'
 
 const Container = styled.div`
   display: grid;
@@ -17,7 +18,18 @@ const DescriptionContainer = styled.div`
   flex-direction: column;
 `
 
-const SubmitTransaction = () => {
+const NextButtonContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  grid-column: 1/-1;
+  padding-bottom: 5em;
+`
+
+type SubmitTranscriptType = {
+  onStateChange: React.Dispatch<React.SetStateAction<string>>
+}
+
+const SubmitTransaction = ({ onStateChange }: SubmitTranscriptType) => {
   return (
     <Container>
       <div style={{ width: '550px', height: '460px' }}>
@@ -33,7 +45,9 @@ const SubmitTransaction = () => {
           account.
         </Span>
       </DescriptionContainer>
-      <div style={{ gridColumn: '1/-1', height: '130px', paddingBottom: '5em' }} />
+      <NextButtonContainer>
+        <Button onClick={() => onStateChange('authentication')}>Next</Button>
+      </NextButtonContainer>
     </Container>
   )
 }
