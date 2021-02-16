@@ -16,6 +16,10 @@ import AuthenticateLoading from 'src/components/organisms/Incubator/Claiming/Aut
 import ClaimSuccesful from 'src/components/organisms/Incubator/Claiming/ClaimSuccesful'
 import WhatsNext from 'src/components/organisms/Incubator/Claiming/WhatsNext'
 import Authentication from 'src/components/organisms/Incubator/Claiming/Authentication'
+import PurchaseEthereum from 'src/components/organisms/Incubator/Onboarding/PurchaseEthereum'
+import ConnectWallet from 'src/components/organisms/Incubator/Onboarding/ConnectWallet'
+import CopyPat from 'src/components/organisms/Incubator/Onboarding/CopyPAT'
+import SubmitTransaction from 'src/components/organisms/Incubator/Onboarding/SubmitTransaction'
 
 const LABEL_PLACEHOLDERS = ['Crypto OSS', 'Women that Code']
 
@@ -262,7 +266,10 @@ const OnboardingSection = () => {
         <TimelineSection part={5} currentPart={activePart} isLast={true} />
       </TimelineContainer>
       {activePart === 1 && <DownloadMetamask onActivePartChange={setActivePart} />}
-      {activePart === 2 && <AuthenticateLoading />}
+      {activePart === 2 && <PurchaseEthereum onActivePartChange={setActivePart} />}
+      {activePart === 3 && <ConnectWallet onActivePartChange={setActivePart} />}
+      {activePart === 4 && <CopyPat onActivePartChange={setActivePart} />}
+      {activePart === 5 && <SubmitTransaction />}
     </>
   )
 }
