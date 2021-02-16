@@ -30,14 +30,6 @@
     cross-fetch "3.0.6"
     lru-cache "6.0.0"
 
-"@ampproject/toolbox-core@^2.7.1-alpha.0", "@ampproject/toolbox-core@^2.7.2":
-  version "2.7.2"
-  resolved "https://registry.yarnpkg.com/@ampproject/toolbox-core/-/toolbox-core-2.7.2.tgz#43acd7c1d0331be1db611d781d7dc2184c0aadb5"
-  integrity sha512-deQiuOghOShoEBoTIDNsSER5gMC6qZfVqYKvlQYcQ+OxKR7J3FtA5XDz98UQsuWx1EB2x2hivrpC6G9BQaXMHw==
-  dependencies:
-    lru-cache "6.0.0"
-    node-fetch "2.6.1"
-
 "@ampproject/toolbox-optimizer@2.6.0":
   version "2.6.0"
   resolved "https://registry.yarnpkg.com/@ampproject/toolbox-optimizer/-/toolbox-optimizer-2.6.0.tgz#e1bde0697d0fb25ab888bc0d0422998abaf6bad1"
@@ -62,43 +54,12 @@
     postcss-safe-parser "4.0.2"
     terser "4.8.0"
 
-"@ampproject/toolbox-optimizer@2.7.1-alpha.0":
-  version "2.7.1-alpha.0"
-  resolved "https://registry.yarnpkg.com/@ampproject/toolbox-optimizer/-/toolbox-optimizer-2.7.1-alpha.0.tgz#1571dcd02608223ff68f6b7223102a123e381197"
-  integrity sha512-WGPZKVQvHgNYJk1XVJCCmY+NVGTGJtvn0OALDyiegN4FJWOcilQUhCIcjMkZN59u1flz/u+sEKccM5qsROqVyg==
-  dependencies:
-    "@ampproject/toolbox-core" "^2.7.1-alpha.0"
-    "@ampproject/toolbox-runtime-version" "^2.7.1-alpha.0"
-    "@ampproject/toolbox-script-csp" "^2.5.4"
-    "@ampproject/toolbox-validator-rules" "^2.7.1-alpha.0"
-    abort-controller "3.0.0"
-    cross-fetch "3.0.6"
-    cssnano-simple "1.2.1"
-    dom-serializer "1.1.0"
-    domhandler "3.3.0"
-    domutils "2.4.2"
-    htmlparser2 "5.0.1"
-    https-proxy-agent "5.0.0"
-    lru-cache "6.0.0"
-    node-fetch "2.6.1"
-    normalize-html-whitespace "1.0.0"
-    postcss "7.0.32"
-    postcss-safe-parser "4.0.2"
-    terser "5.5.1"
-
 "@ampproject/toolbox-runtime-version@^2.6.0":
   version "2.6.0"
   resolved "https://registry.yarnpkg.com/@ampproject/toolbox-runtime-version/-/toolbox-runtime-version-2.6.0.tgz#c2a310840a6c60a7f5046d2ccaf45646a761bd4f"
   integrity sha512-wT+Ehsoq2PRXqpgjebygHD01BpSlaAE4HfDEVxgPVT8oAsLzE4ywZgzI2VQZfaCdb8qLyO5+WXrLSoJXxDBo2Q==
   dependencies:
     "@ampproject/toolbox-core" "^2.6.0"
-
-"@ampproject/toolbox-runtime-version@^2.7.1-alpha.0":
-  version "2.7.2"
-  resolved "https://registry.yarnpkg.com/@ampproject/toolbox-runtime-version/-/toolbox-runtime-version-2.7.2.tgz#32d0867c4a0625b7fe0f2114df6669d9d2e63863"
-  integrity sha512-BKDl29i/cvC0xtrUHnF2YR25gMfyVnXCaV1ZaMDNcPNRJGbBSNQtW6eZt9+rPoV/hKpFxyJia30ECw42FVhh9g==
-  dependencies:
-    "@ampproject/toolbox-core" "^2.7.2"
 
 "@ampproject/toolbox-script-csp@^2.5.4":
   version "2.5.4"
@@ -111,13 +72,6 @@
   integrity sha512-bS7uF+h0s5aiklc/iRaujiSsiladOsZBLrJ6QImJDXvubCAQtvE7om7ShlGSXixkMAO0OVMDWyuwLlEy8V1Ing==
   dependencies:
     cross-fetch "3.0.5"
-
-"@ampproject/toolbox-validator-rules@^2.7.1-alpha.0":
-  version "2.7.2"
-  resolved "https://registry.yarnpkg.com/@ampproject/toolbox-validator-rules/-/toolbox-validator-rules-2.7.2.tgz#6e13245418a27cc9a1c49692890a6113b087cbdf"
-  integrity sha512-/XNa5nhyZl8ET63HQv73AjgEZN03YMBZVZwZ62luxsuEsfzpVzs/tU/RaOHCnL2EuRyaAX95O7GO3Gyxp8z79g==
-  dependencies:
-    node-fetch "2.6.1"
 
 "@ant-design/colors@^6.0.0":
   version "6.0.0"
@@ -3970,30 +3924,30 @@
     call-me-maybe "^1.0.1"
     glob-to-regexp "^0.3.0"
 
-"@next/env@10.0.6":
-  version "10.0.6"
-  resolved "https://registry.yarnpkg.com/@next/env/-/env-10.0.6.tgz#e3c845491a8b0fffda219b5bda84b361b8b2f9c2"
-  integrity sha512-++zgrcSL9SprjWKBbO3YuVj/8CTmxJl+zLErW/Kbr2VCT0u12SrBcMKvD236lEGs5/qUgeBfU3Dvmr6MASWrtA==
+"@next/env@10.0.7":
+  version "10.0.7"
+  resolved "https://registry.yarnpkg.com/@next/env/-/env-10.0.7.tgz#7b3e87a9029ca37491e2ec25c27593f0906725f9"
+  integrity sha512-/vnz2SL/mk3Tei58WfRtVnvz5xHmAqcBmZL5sTBEy1CZG6OtZGNx0qAFCjtVkeJ5m1Bh4Ut+WFh/RF333wx8Sg==
 
 "@next/env@9.5.5":
   version "9.5.5"
   resolved "https://registry.yarnpkg.com/@next/env/-/env-9.5.5.tgz#db993649ec6e619e34a36de90dc2baa52fc5280f"
   integrity sha512-N9wdjU6XoqLqNQWtrGiWtp1SUuJsYK1cNrZ24A6YD+4w5CNV5SkZX6aewKZCCLP5Y8UNfTij2FkJiSYUfBjX8g==
 
-"@next/polyfill-module@10.0.6":
-  version "10.0.6"
-  resolved "https://registry.yarnpkg.com/@next/polyfill-module/-/polyfill-module-10.0.6.tgz#9d4c651456d90b5bafb3d9a3a93100d309d47746"
-  integrity sha512-Sk3HYFxiI3AyIhw7Nnc5un//duCthAP2XtPb4N1SamymOU2QSb8I1zkcsxVIlZRvftdXikQQgra6Ck2zfJRxpA==
+"@next/polyfill-module@10.0.7":
+  version "10.0.7"
+  resolved "https://registry.yarnpkg.com/@next/polyfill-module/-/polyfill-module-10.0.7.tgz#ec45ec1f28f47beed15ed67dffc907edd7143094"
+  integrity sha512-HxqzRpoSgmZP0kRIWwH+e0SgtAXqJ0VkYtwWcsQFED8+xF4Eqn+7Twyp4uE6hutC8gr8IFSFqH+DEYhRtg1ltQ==
 
 "@next/polyfill-module@9.5.5":
   version "9.5.5"
   resolved "https://registry.yarnpkg.com/@next/polyfill-module/-/polyfill-module-9.5.5.tgz#d9c65679a66664ab4859078f58997113c9d01f10"
   integrity sha512-itqYFeHo3yN4ccpHq2uNFC2UVQm12K6DxUVwYdui9MJiiueT0pSGb2laYEjf/G5+vVq7M2vb+DkjkOkPMBVfeg==
 
-"@next/react-dev-overlay@10.0.6":
-  version "10.0.6"
-  resolved "https://registry.yarnpkg.com/@next/react-dev-overlay/-/react-dev-overlay-10.0.6.tgz#9e9828cfd75a62e852a3d1861e605c92d97c4ff4"
-  integrity sha512-KbxpyVT6gr1KZ7JoFDKGNM0hK7CxPkIC14j/gYgR6qSOhxGs3GEIBScJRXfKD7LNPMgVgQtaJlBYlEJ7aQu1xg==
+"@next/react-dev-overlay@10.0.7":
+  version "10.0.7"
+  resolved "https://registry.yarnpkg.com/@next/react-dev-overlay/-/react-dev-overlay-10.0.7.tgz#5fe777011cab75ec09ad539ee61bb95ab5a2bdeb"
+  integrity sha512-yq71MDHVqN2N+IqOvZDiFsMpQrBcymrdpTx1ShhAADX7cWQvW4dhcIir4BbfrS10vS1LLz/3a8uKZkGdNoJj3w==
   dependencies:
     "@babel/code-frame" "7.12.11"
     anser "1.4.9"
@@ -4023,10 +3977,10 @@
     stacktrace-parser "0.1.10"
     strip-ansi "6.0.0"
 
-"@next/react-refresh-utils@10.0.6":
-  version "10.0.6"
-  resolved "https://registry.yarnpkg.com/@next/react-refresh-utils/-/react-refresh-utils-10.0.6.tgz#896a182654d54eec6b6374251d834199efa70081"
-  integrity sha512-4BF+8PyzDcYpumQJ22yBUjVP/CL2KLPM+3K3ZQb61HvmIptB/t+jFnH2ew8S7ORQNu/caVQC6wP5wAfOtpJNsg==
+"@next/react-refresh-utils@10.0.7":
+  version "10.0.7"
+  resolved "https://registry.yarnpkg.com/@next/react-refresh-utils/-/react-refresh-utils-10.0.7.tgz#866ce30fe2f321e011255e81ed5d55eeda05894b"
+  integrity sha512-d/71vtQglv6m7sh4W1O9drc2hYti7UnAdEXfBLZAS354g2S80lvCRGIhbDrMx4w0rpShoxBIZboE2++LihAESg==
 
 "@next/react-refresh-utils@9.5.5":
   version "9.5.5"
@@ -7946,14 +7900,6 @@ cssnano-preset-simple@1.2.0:
     caniuse-lite "^1.0.30001093"
     postcss "^7.0.32"
 
-cssnano-preset-simple@1.2.1:
-  version "1.2.1"
-  resolved "https://registry.yarnpkg.com/cssnano-preset-simple/-/cssnano-preset-simple-1.2.1.tgz#8976013114b1fc4718253d30f21aaed1780fb80e"
-  integrity sha512-B2KahOIFTV6dw5Ioy9jHshTh/vAYNnUB2enyWRgnAEg3oJBjI/035ExpePaMqS2SwpbH7gCgvQqwpMBH6hTJSw==
-  dependencies:
-    caniuse-lite "^1.0.30001093"
-    postcss "^7.0.32"
-
 cssnano-preset-simple@1.2.2:
   version "1.2.2"
   resolved "https://registry.yarnpkg.com/cssnano-preset-simple/-/cssnano-preset-simple-1.2.2.tgz#c631bf79ffec7fdfc4069e2f2da3ca67d99d8413"
@@ -7976,14 +7922,6 @@ cssnano-simple@1.2.0:
   integrity sha512-pton9cZ70/wOCWMAbEGHO1ACsW1KggTB6Ikj7k71uOEsz6SfByH++86+WAmXjRSc9q/g9gxkpFP9bDX9vRotdA==
   dependencies:
     cssnano-preset-simple "1.2.0"
-    postcss "^7.0.32"
-
-cssnano-simple@1.2.1:
-  version "1.2.1"
-  resolved "https://registry.yarnpkg.com/cssnano-simple/-/cssnano-simple-1.2.1.tgz#6de5d9dd75774bc8f31767573410a952c7dd8a12"
-  integrity sha512-9vOyjw8Dj/T12kIOnXPZ5VnEIo6F3YMaIn0wqJXmn277R58cWpI3AvtdlCBtohX7VAUNYcyk2d0dKcXXkb5I6Q==
-  dependencies:
-    cssnano-preset-simple "1.2.1"
     postcss "^7.0.32"
 
 cssnano-simple@1.2.2:
@@ -8553,21 +8491,21 @@ dom-serializer@1.0.1:
     domhandler "^3.0.0"
     entities "^2.0.0"
 
-dom-serializer@1.1.0, dom-serializer@^1.0.1:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/dom-serializer/-/dom-serializer-1.1.0.tgz#5f7c828f1bfc44887dc2a315ab5c45691d544b58"
-  integrity sha512-ox7bvGXt2n+uLWtCRLybYx60IrOlWL/aCebWJk1T0d4m3y2tzf4U3ij9wBMUb6YJZpz06HCCYuyCDveE2xXmzQ==
-  dependencies:
-    domelementtype "^2.0.1"
-    domhandler "^3.0.0"
-    entities "^2.0.0"
-
 dom-serializer@^0.2.1:
   version "0.2.2"
   resolved "https://registry.yarnpkg.com/dom-serializer/-/dom-serializer-0.2.2.tgz#1afb81f533717175d478655debc5e332d9f9bb51"
   integrity sha512-2/xPb3ORsQ42nHYiSunXkDjPLBaEj/xTwUO4B7XCZQTRk7EBtTOPaygh10YAAh2OI1Qrp6NWfpAhzswj0ydt9g==
   dependencies:
     domelementtype "^2.0.1"
+    entities "^2.0.0"
+
+dom-serializer@^1.0.1:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/dom-serializer/-/dom-serializer-1.1.0.tgz#5f7c828f1bfc44887dc2a315ab5c45691d544b58"
+  integrity sha512-ox7bvGXt2n+uLWtCRLybYx60IrOlWL/aCebWJk1T0d4m3y2tzf4U3ij9wBMUb6YJZpz06HCCYuyCDveE2xXmzQ==
+  dependencies:
+    domelementtype "^2.0.1"
+    domhandler "^3.0.0"
     entities "^2.0.0"
 
 dom-walk@^0.1.0:
@@ -8599,7 +8537,7 @@ domhandler@3.0.0:
   dependencies:
     domelementtype "^2.0.1"
 
-domhandler@3.3.0, domhandler@^3.0.0, domhandler@^3.3.0:
+domhandler@^3.0.0, domhandler@^3.3.0:
   version "3.3.0"
   resolved "https://registry.yarnpkg.com/domhandler/-/domhandler-3.3.0.tgz#6db7ea46e4617eb15cf875df68b2b8524ce0037a"
   integrity sha512-J1C5rIANUbuYK+FuFL98650rihynUOEzRLxW+90bKZRWB6A1X1Tf82GxR1qAWLyfNPRvjqfip3Q5tdYlmAa9lA==
@@ -8615,7 +8553,7 @@ domutils@2.1.0:
     domelementtype "^2.0.1"
     domhandler "^3.0.0"
 
-domutils@2.4.2, domutils@^2.0.0, domutils@^2.4.2:
+domutils@^2.0.0, domutils@^2.4.2:
   version "2.4.2"
   resolved "https://registry.yarnpkg.com/domutils/-/domutils-2.4.2.tgz#7ee5be261944e1ad487d9aa0616720010123922b"
   integrity sha512-NKbgaM8ZJOecTZsIzW5gSuplsX2IWW2mIK7xVr8hTQF2v1CJWTmLZ1HOCh5sH+IzVPAGE5IucooOkvwBRAdowA==
@@ -10898,7 +10836,7 @@ htmlparser2@4.1.0:
     domutils "^2.0.0"
     entities "^2.0.0"
 
-htmlparser2@5.0.1, htmlparser2@^5.0:
+htmlparser2@^5.0:
   version "5.0.1"
   resolved "https://registry.yarnpkg.com/htmlparser2/-/htmlparser2-5.0.1.tgz#7daa6fc3e35d6107ac95a4fc08781f091664f6e7"
   integrity sha512-vKZZra6CSe9qsJzh0BjBGXo8dvzNsq/oGvsjfRdOrrryfeD9UOBEEQdeoqCRmKZchF5h2zOBMQ6YuQ0uRUmdbQ==
@@ -13993,18 +13931,17 @@ next-with-apollo@5.1.1:
   dependencies:
     isomorphic-unfetch "^3.0.0"
 
-next@10.0.6:
-  version "10.0.6"
-  resolved "https://registry.yarnpkg.com/next/-/next-10.0.6.tgz#1d33723d714c85f282b9bf6ff59dcae40f9252cb"
-  integrity sha512-uM5Yv4Ha9iL6Lbg7Ez36GyJ0YTdRLzXLA9b1REH3rX2Wytw0Ls5qPuFGk4BHSQpQhYx6Z61iA2qPkGl33W4iBg==
+next@10.0.7:
+  version "10.0.7"
+  resolved "https://registry.yarnpkg.com/next/-/next-10.0.7.tgz#442f8e1da7454de33b0bbcc1ce5684b923597ee6"
+  integrity sha512-We0utmwwfkvO12eLyUZd3tX9VLDE3FPpOaHpH3kqKdUTxJzUKt8FLBXCTm0mwsTKW5XColWG8mJvz2OLu3+3QA==
   dependencies:
-    "@ampproject/toolbox-optimizer" "2.7.1-alpha.0"
     "@babel/runtime" "7.12.5"
     "@hapi/accept" "5.0.1"
-    "@next/env" "10.0.6"
-    "@next/polyfill-module" "10.0.6"
-    "@next/react-dev-overlay" "10.0.6"
-    "@next/react-refresh-utils" "10.0.6"
+    "@next/env" "10.0.7"
+    "@next/polyfill-module" "10.0.7"
+    "@next/react-dev-overlay" "10.0.7"
+    "@next/react-refresh-utils" "10.0.7"
     "@opentelemetry/api" "0.14.0"
     ast-types "0.13.2"
     browserslist "4.16.1"
@@ -17750,7 +17687,7 @@ source-map-support@^0.3.2:
   dependencies:
     source-map "0.1.32"
 
-source-map-support@^0.5.17, source-map-support@^0.5.6, source-map-support@~0.5.12, source-map-support@~0.5.19:
+source-map-support@^0.5.17, source-map-support@^0.5.6, source-map-support@~0.5.12:
   version "0.5.19"
   resolved "https://registry.yarnpkg.com/source-map-support/-/source-map-support-0.5.19.tgz#a98b62f86dcaf4f67399648c085291ab9e8fed61"
   integrity sha512-Wonm7zOCIJzBGQdB+thsPar0kYuCIzYvxZwlBa87yi/Mdjv7Tip2cyVbLj5o0cFPN4EVkuTwb3GDDyUx2DGnGw==
@@ -17775,7 +17712,7 @@ source-map@0.6.1, source-map@^0.6.0, source-map@^0.6.1, source-map@~0.6.0, sourc
   resolved "https://registry.yarnpkg.com/source-map/-/source-map-0.6.1.tgz#74722af32e9614e9c287a8d0bbde48b5e2f1a263"
   integrity sha512-UjgapumWlbMhkBgzT7Ykc5YXUT46F0iKu8SGXq0bcwP5dz/h0Plj6enJqjz1Zbq2l5WaqYnrVbwWOWMyF3F47g==
 
-source-map@0.7.3, source-map@^0.7.3, source-map@~0.7.2:
+source-map@0.7.3, source-map@^0.7.3:
   version "0.7.3"
   resolved "https://registry.yarnpkg.com/source-map/-/source-map-0.7.3.tgz#5302f8169031735226544092e64981f751750383"
   integrity sha512-CkCj6giN3S+n9qrYiBTX5gystlENnRW5jZeNLHpe6aue+SrHcG5VYwujhW9s4dY31mEGsxBDrHR6oI69fTXsaQ==
@@ -18596,15 +18533,6 @@ terser@4.8.0, terser@^4.1.2, terser@^4.6.2:
     commander "^2.20.0"
     source-map "~0.6.1"
     source-map-support "~0.5.12"
-
-terser@5.5.1:
-  version "5.5.1"
-  resolved "https://registry.yarnpkg.com/terser/-/terser-5.5.1.tgz#540caa25139d6f496fdea056e414284886fb2289"
-  integrity sha512-6VGWZNVP2KTUcltUQJ25TtNjx/XgdDsBDKGt8nN0MpydU36LmbPPcMBd2kmtZNNGVVDLg44k7GKeHHj+4zPIBQ==
-  dependencies:
-    commander "^2.20.0"
-    source-map "~0.7.2"
-    source-map-support "~0.5.19"
 
 test-exclude@^6.0.0:
   version "6.0.0"
