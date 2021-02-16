@@ -9,19 +9,6 @@ const SpaceBetween = styled.div`
   justify-content: space-between;
 `
 
-const Contact = styled.div`
-  display: flex;
-  flex-direction: column;
-`
-
-const LogoContainer = styled.div`
-  img,
-  svg {
-    width: 72px;
-    height: auto;
-  }
-`
-
 const MintedTokensContainer = styled.div`
   padding-top: 1em;
   display: flex;

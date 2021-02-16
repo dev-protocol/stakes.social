@@ -25,7 +25,7 @@ const WhatsNext = () => {
   return (
     <>
       <SpaceBetween style={{ paddingTop: '1em' }}>
-        <Span fontSize="20px">What's next?</Span>
+        <Span fontSize="20px">{"What's next?"}</Span>
         <LinkB>Skip</LinkB>
       </SpaceBetween>
       <TimelineContainer style={{ alignSelf: 'center' }}>

@@ -10,11 +10,6 @@ const DetailsContainer = styled.div`
   grid-gap: 5em;
 `
 
-const AuthenticationContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-`
-
 const SpaceBetween = styled.div`
   display: flex;
   justify-content: space-between;
