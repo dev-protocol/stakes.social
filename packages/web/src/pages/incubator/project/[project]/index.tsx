@@ -14,7 +14,7 @@ import TimelineSection from 'src/components/organisms/Incubator/Timeline'
 import DownloadMetamask from 'src/components/organisms/Incubator/Onboarding/DownloadMetamask'
 import AuthenticateLoading from 'src/components/organisms/Incubator/Claiming/AuthenticateLoading'
 import ClaimSuccesful from 'src/components/organisms/Incubator/Claiming/ClaimSuccesful'
-import WhatsNext from 'src/components/organisms/Incubator/Claiming/WhatsNext'
+import WhatsNext from 'src/components/organisms/Incubator/PostOnboarding'
 import Authentication from 'src/components/organisms/Incubator/Claiming/Authentication'
 import PurchaseEthereum from 'src/components/organisms/Incubator/Onboarding/PurchaseEthereum'
 import ConnectWallet from 'src/components/organisms/Incubator/Onboarding/ConnectWallet'
@@ -232,15 +232,19 @@ const OnboardEntry = styled.div<{ isActive?: boolean }>`
   border-bottom: ${props => (!props.isActive ? '1px solid black' : 'none')};
 `
 
-const OnboardSwitch = () => {
-  const [isOnboarding, setIsOnboarding] = useState(true)
+type OnboardSwitchType = {
+  isOnboarding: boolean
+  onOnboardChange: React.Dispatch<React.SetStateAction<boolean>>
+}
+
+const OnboardSwitch = ({ isOnboarding, onOnboardChange }: OnboardSwitchType) => {
   return (
     <OnboardSwitchContainer>
-      <OnboardEntry onClick={() => setIsOnboarding(true)} isActive={isOnboarding}>
+      <OnboardEntry onClick={() => onOnboardChange(true)} isActive={isOnboarding}>
         Onboarding
       </OnboardEntry>
       <div style={{ paddingRight: '3em', marginRight: '3em', borderRight: '1px solid black' }} />
-      <OnboardEntry onClick={() => setIsOnboarding(false)} isActive={!isOnboarding}>
+      <OnboardEntry onClick={() => onOnboardChange(false)} isActive={!isOnboarding}>
         Post-Onboarding
       </OnboardEntry>
     </OnboardSwitchContainer>
@@ -258,31 +262,38 @@ type OnboardingSectionProps = {
 
 const OnboardingSection = ({ isModal, onStateChange }: OnboardingSectionProps) => {
   const [activePart, setActivePart] = useState(1)
+  const [isOnboarding, setIsOnboarding] = useState(true)
 
   return (
     <>
       <SpaceBetween style={{ alignItems: 'center', paddingTop: '1em' }}>
-        <Span fontSize="20px">How to get your reward?</Span>
+        <Span fontSize="20px">{isOnboarding ? 'How to get your reward?' : "What's next?"}</Span>
         {isModal ? (
           <LinkB onClick={() => onStateChange('authentication')} style={{ fontSize: '20px' }}>
             Skip
           </LinkB>
         ) : (
-          <OnboardSwitch />
+          <OnboardSwitch isOnboarding={isOnboarding} onOnboardChange={setIsOnboarding} />
         )}
       </SpaceBetween>
-      <TimelineContainer style={{ alignSelf: 'center' }}>
-        <TimelineSection isFirst={true} part={1} currentPart={activePart} />
-        <TimelineSection part={2} currentPart={activePart} />
-        <TimelineSection part={3} currentPart={activePart} />
-        <TimelineSection part={4} currentPart={activePart} />
-        <TimelineSection part={5} currentPart={activePart} isLast={true} />
-      </TimelineContainer>
-      {activePart === 1 && <DownloadMetamask onActivePartChange={setActivePart} />}
-      {activePart === 2 && <PurchaseEthereum onActivePartChange={setActivePart} />}
-      {activePart === 3 && <ConnectWallet onActivePartChange={setActivePart} />}
-      {activePart === 4 && <CopyPat onActivePartChange={setActivePart} />}
-      {activePart === 5 && <SubmitTransaction onStateChange={onStateChange} />}
+      {isOnboarding && (
+        <>
+          <TimelineContainer style={{ alignSelf: 'center' }}>
+            <TimelineSection isFirst={true} part={1} currentPart={activePart} />
+            <TimelineSection part={2} currentPart={activePart} />
+            <TimelineSection part={3} currentPart={activePart} />
+            <TimelineSection part={4} currentPart={activePart} />
+            <TimelineSection part={5} currentPart={activePart} isLast={true} />
+          </TimelineContainer>
+          {activePart === 1 && <DownloadMetamask onActivePartChange={setActivePart} />}
+          {activePart === 2 && <PurchaseEthereum onActivePartChange={setActivePart} />}
+          {activePart === 3 && <ConnectWallet onActivePartChange={setActivePart} />}
+          {activePart === 4 && <CopyPat onActivePartChange={setActivePart} />}
+          {activePart === 5 && <SubmitTransaction onStateChange={onStateChange} />}
+        </>
+      )}
+
+      {!isOnboarding && <WhatsNext isOverview={true} />}
     </>
   )
 }
