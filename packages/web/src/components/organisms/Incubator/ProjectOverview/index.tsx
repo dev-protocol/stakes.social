@@ -10,38 +10,93 @@ const PLACHEOLDER_DATA = [
   {
     title: 'Sigma',
     funding: 26000,
-    url: 'https://res.cloudinary.com/haas-storage/image/upload/v1613044939/sigma_tye6kg.png'
+    url: 'https://res.cloudinary.com/haas-storage/image/upload/v1613044939/sigma_tye6kg.png',
+    tags: ['Infrastructure']
   },
   {
     title: 'BrightID',
     funding: 12000,
     claimed: true,
-    url: 'https://res.cloudinary.com/haas-storage/image/upload/v1613045021/bright_id_siwjeu.png'
+    url: 'https://res.cloudinary.com/haas-storage/image/upload/v1613045021/bright_id_siwjeu.png',
+    tags: ['Infrastructure']
   },
   {
     title: 'Wallet Connect',
     funding: 34000,
-    url: 'https://res.cloudinary.com/haas-storage/image/upload/v1613045241/walletconnect-logo_bgdxkx.png'
+    url: 'https://res.cloudinary.com/haas-storage/image/upload/v1613045241/walletconnect-logo_bgdxkx.png',
+    tags: ['Infrastructure']
   },
   {
     title: 'ChainSafe',
     funding: 19000,
-    url: 'https://res.cloudinary.com/haas-storage/image/upload/v1613045322/chain_safe_ohqczw.png'
+    url: 'https://res.cloudinary.com/haas-storage/image/upload/v1613045322/chain_safe_ohqczw.png',
+    tags: ['Infrastructure']
   },
   {
     title: 'ZeroPool',
     funding: 23000,
-    url: 'https://res.cloudinary.com/haas-storage/image/upload/v1613043066/zeropool_lykmbs.png'
+    url: 'https://res.cloudinary.com/haas-storage/image/upload/v1613043066/zeropool_lykmbs.png',
+    tags: ['Women']
   },
   {
     title: 'Redux-Saga',
     funding: 76000,
-    url: 'https://res.cloudinary.com/haas-storage/image/upload/v1613045672/redux_sage_sxncfk.png'
+    url: 'https://res.cloudinary.com/haas-storage/image/upload/v1613045672/redux_sage_sxncfk.png',
+    tags: []
   },
   {
     title: 'Jekyll',
     funding: 38000,
-    url: 'https://res.cloudinary.com/haas-storage/image/upload/v1613045746/jekyll_jpzssa.png'
+    url: 'https://res.cloudinary.com/haas-storage/image/upload/v1613045746/jekyll_jpzssa.png',
+    tags: []
+  },
+  {
+    title: 'BoostNode',
+    funding: 7500,
+    url: 'https://res.cloudinary.com/haas-storage/image/upload/v1613045786/boostnode_n7hjmr.png',
+    tags: []
+  },
+  {
+    title: 'Sigma',
+    funding: 26000,
+    url: 'https://res.cloudinary.com/haas-storage/image/upload/v1613044939/sigma_tye6kg.png',
+    tags: []
+  },
+  {
+    title: 'BrightID',
+    funding: 12000,
+    url: 'https://res.cloudinary.com/haas-storage/image/upload/v1613045021/bright_id_siwjeu.png',
+    tags: []
+  },
+  {
+    title: 'Wallet Connect',
+    funding: 34000,
+    url: 'https://res.cloudinary.com/haas-storage/image/upload/v1613045241/walletconnect-logo_bgdxkx.png',
+    tags: []
+  },
+  {
+    title: 'ChainSafe',
+    funding: 19000,
+    url: 'https://res.cloudinary.com/haas-storage/image/upload/v1613045322/chain_safe_ohqczw.png',
+    tags: []
+  },
+  {
+    title: 'ZeroPool',
+    funding: 23000,
+    url: 'https://res.cloudinary.com/haas-storage/image/upload/v1613043066/zeropool_lykmbs.png',
+    tags: ['Women']
+  },
+  {
+    title: 'Redux-Saga',
+    funding: 76000,
+    url: 'https://res.cloudinary.com/haas-storage/image/upload/v1613045672/redux_sage_sxncfk.png',
+    tags: []
+  },
+  {
+    title: 'Jekyll',
+    funding: 38000,
+    url: 'https://res.cloudinary.com/haas-storage/image/upload/v1613045746/jekyll_jpzssa.png',
+    tags: []
   },
   {
     title: 'BoostNode',
@@ -51,82 +106,50 @@ const PLACHEOLDER_DATA = [
   {
     title: 'Sigma',
     funding: 26000,
-    url: 'https://res.cloudinary.com/haas-storage/image/upload/v1613044939/sigma_tye6kg.png'
+    url: 'https://res.cloudinary.com/haas-storage/image/upload/v1613044939/sigma_tye6kg.png',
+    tags: []
   },
   {
     title: 'BrightID',
     funding: 12000,
-    url: 'https://res.cloudinary.com/haas-storage/image/upload/v1613045021/bright_id_siwjeu.png'
+    url: 'https://res.cloudinary.com/haas-storage/image/upload/v1613045021/bright_id_siwjeu.png',
+    tags: []
   },
   {
     title: 'Wallet Connect',
     funding: 34000,
-    url: 'https://res.cloudinary.com/haas-storage/image/upload/v1613045241/walletconnect-logo_bgdxkx.png'
+    url: 'https://res.cloudinary.com/haas-storage/image/upload/v1613045241/walletconnect-logo_bgdxkx.png',
+    tags: []
   },
   {
     title: 'ChainSafe',
     funding: 19000,
-    url: 'https://res.cloudinary.com/haas-storage/image/upload/v1613045322/chain_safe_ohqczw.png'
+    url: 'https://res.cloudinary.com/haas-storage/image/upload/v1613045322/chain_safe_ohqczw.png',
+    tags: []
   },
   {
     title: 'ZeroPool',
     funding: 23000,
-    url: 'https://res.cloudinary.com/haas-storage/image/upload/v1613043066/zeropool_lykmbs.png'
+    url: 'https://res.cloudinary.com/haas-storage/image/upload/v1613043066/zeropool_lykmbs.png',
+    tags: []
   },
   {
     title: 'Redux-Saga',
     funding: 76000,
-    url: 'https://res.cloudinary.com/haas-storage/image/upload/v1613045672/redux_sage_sxncfk.png'
+    url: 'https://res.cloudinary.com/haas-storage/image/upload/v1613045672/redux_sage_sxncfk.png',
+    tags: []
   },
   {
     title: 'Jekyll',
     funding: 38000,
-    url: 'https://res.cloudinary.com/haas-storage/image/upload/v1613045746/jekyll_jpzssa.png'
+    url: 'https://res.cloudinary.com/haas-storage/image/upload/v1613045746/jekyll_jpzssa.png',
+    tags: ['Hosting']
   },
   {
     title: 'BoostNode',
     funding: 7500,
-    url: 'https://res.cloudinary.com/haas-storage/image/upload/v1613045786/boostnode_n7hjmr.png'
-  },
-  {
-    title: 'Sigma',
-    funding: 26000,
-    url: 'https://res.cloudinary.com/haas-storage/image/upload/v1613044939/sigma_tye6kg.png'
-  },
-  {
-    title: 'BrightID',
-    funding: 12000,
-    url: 'https://res.cloudinary.com/haas-storage/image/upload/v1613045021/bright_id_siwjeu.png'
-  },
-  {
-    title: 'Wallet Connect',
-    funding: 34000,
-    url: 'https://res.cloudinary.com/haas-storage/image/upload/v1613045241/walletconnect-logo_bgdxkx.png'
-  },
-  {
-    title: 'ChainSafe',
-    funding: 19000,
-    url: 'https://res.cloudinary.com/haas-storage/image/upload/v1613045322/chain_safe_ohqczw.png'
-  },
-  {
-    title: 'ZeroPool',
-    funding: 23000,
-    url: 'https://res.cloudinary.com/haas-storage/image/upload/v1613043066/zeropool_lykmbs.png'
-  },
-  {
-    title: 'Redux-Saga',
-    funding: 76000,
-    url: 'https://res.cloudinary.com/haas-storage/image/upload/v1613045672/redux_sage_sxncfk.png'
-  },
-  {
-    title: 'Jekyll',
-    funding: 38000,
-    url: 'https://res.cloudinary.com/haas-storage/image/upload/v1613045746/jekyll_jpzssa.png'
-  },
-  {
-    title: 'BoostNode',
-    funding: 7500,
-    url: 'https://res.cloudinary.com/haas-storage/image/upload/v1613045786/boostnode_n7hjmr.png'
+    url: 'https://res.cloudinary.com/haas-storage/image/upload/v1613045786/boostnode_n7hjmr.png',
+    tags: ['Crypto']
   }
 ]
 
@@ -193,7 +216,25 @@ const ProjectOverview = () => {
   const [showAll, setShowAll] = useState(false)
   const [activeFilter, setActiveFilter] = useState('')
 
-  const projects = showAll ? PLACHEOLDER_DATA : PLACHEOLDER_DATA.slice(0, 8)
+  const handleFilterChange = (filter: string) => {
+    setActiveFilter(prevFilter => {
+      if (prevFilter === filter) {
+        return ''
+      }
+      return filter
+    })
+    if (!showAll) {
+      setShowAll(true)
+    }
+  }
+
+  const showDataByFilter = () => {
+    return activeFilter === ''
+      ? PLACHEOLDER_DATA
+      : PLACHEOLDER_DATA.filter(project => project.tags?.includes(activeFilter))
+  }
+
+  const projects = showAll ? showDataByFilter() : PLACHEOLDER_DATA.slice(0, 8)
   return (
     <GradientContainer id="projects" isExpanded={showAll}>
       <ProjectOverviewContainer>
@@ -205,19 +246,19 @@ const ProjectOverview = () => {
         </OverviewHeader>
         <FilterOptions>
           <FilterOption
-            onClick={() => setActiveFilter('Infrastructure')}
+            onClick={() => handleFilterChange('Infrastructure')}
             filter="Infrastructure"
             activeFilter={activeFilter}
           >
             Infrastructure
           </FilterOption>
-          <FilterOption onClick={() => setActiveFilter('Hosting')} filter="Hosting" activeFilter={activeFilter}>
+          <FilterOption onClick={() => handleFilterChange('Hosting')} filter="Hosting" activeFilter={activeFilter}>
             Hosting
           </FilterOption>
-          <FilterOption onClick={() => setActiveFilter('Crypto')} filter="Crypto" activeFilter={activeFilter}>
+          <FilterOption onClick={() => handleFilterChange('Crypto')} filter="Crypto" activeFilter={activeFilter}>
             Crypto OSS
           </FilterOption>
-          <FilterOption onClick={() => setActiveFilter('Women')} filter="Women" activeFilter={activeFilter}>
+          <FilterOption onClick={() => handleFilterChange('Women')} filter="Women" activeFilter={activeFilter}>
             Women that code
           </FilterOption>
         </FilterOptions>
