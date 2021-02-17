@@ -7,7 +7,7 @@ const Grid = styled.div`
   display: grid;
   padding-top: 3em;
   grid-template-columns: 1fr 1fr;
-  grid-column-gap: 1em;
+  grid-gap: 1em 3em;
 `
 
 type PostOnboardType = {
@@ -30,7 +30,7 @@ const WhatsDEV = ({ onActivePageChange }: PostOnboardType) => {
           their project. Patrons use Stakes Social to stake the DEV token for OSS projects they support.
         </Span>
       </div>
-      <div style={{ gridColumn: '1/-1', display: 'flex', justifyContent: 'center' }}>
+      <div style={{ paddingBottom: '5em', gridColumn: '1/-1', display: 'flex', justifyContent: 'center' }}>
         <Button onClick={() => onActivePageChange(2)}>Next</Button>
       </div>
     </Grid>

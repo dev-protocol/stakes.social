@@ -138,6 +138,7 @@ type ProjectDetailsProps = {
   fundingDEV: string
   name: string
   fundingUSD: string
+  claimed: boolean
 }
 
 const ProjectDetails = ({
@@ -148,6 +149,7 @@ const ProjectDetails = ({
   twitter,
   website,
   name,
+  claimed,
   onStateChange
 }: ProjectDetailsProps) => {
   return (
@@ -190,7 +192,9 @@ const ProjectDetails = ({
                   {fundingDEV} DEV
                 </Span>
               </DevCurrencyContainer>
-              <Button onClick={() => onStateChange('onboarding')}>Claim</Button>
+              <Button disabled={claimed} onClick={() => onStateChange('onboarding')}>
+                {claimed ? 'Claimed' : 'Claim'}
+              </Button>
             </SpaceBetween>
 
             <Span fontSize="14px" color="#999999">
@@ -302,13 +306,14 @@ const OnboardingPage = () => {
   // const [, project] = getPath(useRouter().asPath)
   // TODO: Fetch data from strapi based on project
   const [currentState, setCurrentState] = useState<string>('overview')
-  const { name, fundingDEV, fundingUSD, github, logo, twitter, website } = {
+  const { name, fundingDEV, fundingUSD, github, logo, twitter, website, claimed } = {
     name: 'Sigma',
     website: 'sigmaprime.io',
     twitter: '',
     github: '',
     fundingUSD: '26,000',
     fundingDEV: '71,000',
+    claimed: true,
     logo: 'https://res.cloudinary.com/haas-storage/image/upload/v1613044939/sigma_tye6kg.png'
   }
 

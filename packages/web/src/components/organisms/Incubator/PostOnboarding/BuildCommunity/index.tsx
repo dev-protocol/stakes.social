@@ -7,7 +7,7 @@ const Grid = styled.div`
   display: grid;
   padding-top: 3em;
   grid-template-columns: 1fr 1fr;
-  grid-column-gap: 1em;
+  grid-gap: 1em 3em;
 `
 
 const BuildCommunity = () => {
@@ -28,7 +28,9 @@ const BuildCommunity = () => {
           est laborum.
         </Span>
       </div>
-      <div style={{ height: '50px', gridColumn: '1/-1', display: 'flex', justifyContent: 'center' }}></div>
+      <div
+        style={{ paddingBottom: '5em', height: '50px', gridColumn: '1/-1', display: 'flex', justifyContent: 'center' }}
+      ></div>
     </Grid>
   )
 }

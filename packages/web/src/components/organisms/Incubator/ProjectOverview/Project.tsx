@@ -16,6 +16,7 @@ type ProjectProps = {
   title: string
   funding: number
   url: string
+  claimed?: boolean
 }
 
 const ProjectContainer = styled.div`
@@ -62,7 +63,7 @@ const ClaimButtonContainer = styled.div`
   align-items: center;
 `
 
-const ProjectEntry = ({ funding, title, url }: ProjectProps) => {
+const ProjectEntry = ({ funding, title, url, claimed }: ProjectProps) => {
   const { currency, toCurrency } = useCurrency()
   const convertedFunding = toCurrency(funding).dp(0).toNumber().toLocaleString()
   // Probably fetch data per project async here
@@ -86,7 +87,7 @@ const ProjectEntry = ({ funding, title, url }: ProjectProps) => {
       </FundingSection>
       <ClaimButtonContainer>
         <Link href={'/incubator/project/[project]'} as={`/incubator/project/${title}`} passHref>
-          <Button>Claim</Button>
+          <Button disabled={claimed}>{claimed ? 'Claimed' : 'Claim'}</Button>
         </Link>
       </ClaimButtonContainer>
     </ProjectContainer>

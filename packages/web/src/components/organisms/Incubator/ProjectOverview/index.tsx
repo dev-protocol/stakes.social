@@ -15,6 +15,7 @@ const PLACHEOLDER_DATA = [
   {
     title: 'BrightID',
     funding: 12000,
+    claimed: true,
     url: 'https://res.cloudinary.com/haas-storage/image/upload/v1613045021/bright_id_siwjeu.png'
   },
   {
@@ -222,8 +223,8 @@ const ProjectOverview = () => {
         </FilterOptions>
         <Overview>
           {projects &&
-            projects.map(({ funding, title, url }, index) => (
-              <ProjectEntry key={index} url={url} funding={funding} title={title} />
+            projects.map(({ funding, title, url, claimed }, index) => (
+              <ProjectEntry claimed={claimed} key={index} url={url} funding={funding} title={title} />
             ))}
         </Overview>
       </ProjectOverviewContainer>
