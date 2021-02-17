@@ -109,7 +109,15 @@ const AuthenticateLoading = () => {
           </LinkWithIcon>
           <LinkWithIcon>
             <img width="16px" height="16px" src="/images/img_0.png" />
-            <LinkB>SIG on MetaMask</LinkB>
+            <LinkB>
+              {accountAddress ? (
+                'SIG on MetaMask'
+              ) : (
+                <abbr title="Please connect your wallet" style={{ textDecoration: 'none' }}>
+                  SIG on MetaMask
+                </abbr>
+              )}
+            </LinkB>
           </LinkWithIcon>
         </SpaceBetween>
       </div>
