@@ -313,7 +313,7 @@ const OnboardingPage = () => {
     github: '',
     fundingUSD: '26,000',
     fundingDEV: '71,000',
-    claimed: true,
+    claimed: false,
     logo: 'https://res.cloudinary.com/haas-storage/image/upload/v1613044939/sigma_tye6kg.png'
   }
 
