@@ -28,9 +28,10 @@ const NextButtonContainer = styled.div`
 
 type SubmitTranscriptType = {
   onStateChange: React.Dispatch<React.SetStateAction<string>>
+  isModal?: boolean
 }
 
-const SubmitTransaction = ({ onStateChange }: SubmitTranscriptType) => {
+const SubmitTransaction = ({ onStateChange, isModal }: SubmitTranscriptType) => {
   return (
     <Container>
       <AnimationContainer>
@@ -38,7 +39,7 @@ const SubmitTransaction = ({ onStateChange }: SubmitTranscriptType) => {
       </AnimationContainer>
       <DescriptionContainer>
         <Span style={{ paddingTop: '3em' }} fontWeight="bold" fontSize="24px">
-          Enter Personal Access token
+          Submit transaction
         </Span>
         <Span style={{ paddingTop: '3em' }} fontSize="16px">
           Copy an PAT from github and paste it into the incubator field. We recommend you to create a new PAT with no
@@ -47,7 +48,8 @@ const SubmitTransaction = ({ onStateChange }: SubmitTranscriptType) => {
         </Span>
       </DescriptionContainer>
       <NextButtonContainer>
-        <Button onClick={() => onStateChange('authentication')}>Next</Button>
+        {isModal && <Button onClick={() => onStateChange('authentication')}>Next</Button>}
+        {!isModal && <div style={{ height: '50px' }}></div>}
       </NextButtonContainer>
     </Container>
   )
