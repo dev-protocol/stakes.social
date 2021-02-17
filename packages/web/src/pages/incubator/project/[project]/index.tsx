@@ -345,6 +345,7 @@ const OnboardingPage = () => {
         </BackArrowContainer>
         {currentState === 'overview' && (
           <ProjectDetails
+            claimed={claimed}
             onStateChange={setCurrentState}
             name={name}
             fundingDEV={fundingDEV}
