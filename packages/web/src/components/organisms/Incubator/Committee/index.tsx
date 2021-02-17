@@ -83,7 +83,7 @@ const Person = ({ image, name, company, job, twitter, github }: PersonProps) => 
 
 const Committee = () => {
   return (
-    <CommitteeContainer>
+    <CommitteeContainer id="committee">
       <Span color="black" fontSize="20px">
         The Incubator Committee
       </Span>

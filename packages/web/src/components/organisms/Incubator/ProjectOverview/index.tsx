@@ -194,7 +194,7 @@ const ProjectOverview = () => {
 
   const projects = showAll ? PLACHEOLDER_DATA : PLACHEOLDER_DATA.slice(0, 8)
   return (
-    <GradientContainer isExpanded={showAll}>
+    <GradientContainer id="projects" isExpanded={showAll}>
       <ProjectOverviewContainer>
         <OverviewHeader>
           <Span color="white" fontSize="20px">

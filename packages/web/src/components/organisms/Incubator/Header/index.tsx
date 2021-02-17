@@ -50,13 +50,21 @@ const IncubatorHeader = () => {
         </Link>
 
         <HeaderLinkContainer>
-          <HeaderLink>Projects</HeaderLink>
-          <HeaderLink>Comittee</HeaderLink>
+          <Link href="/incubator#projects">
+            <HeaderLink>Projects</HeaderLink>
+          </Link>
+
+          <Link href="/incubator#committee">
+            <HeaderLink>Committee</HeaderLink>
+          </Link>
+
           <Link href="/incubator/QA">
             <HeaderLink>{'Q&As'}</HeaderLink>
           </Link>
 
-          <HeaderLink color="#FF3815">Stakes.social</HeaderLink>
+          <HeaderLink href="https://stakes.social/" color="#FF3815">
+            Stakes.social
+          </HeaderLink>
         </HeaderLinkContainer>
         <ConnectWalletContainer>
           {isConnecting ? (
