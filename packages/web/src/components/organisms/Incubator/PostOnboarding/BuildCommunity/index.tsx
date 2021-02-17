@@ -1,21 +1,15 @@
 import React from 'react'
-import styled from 'styled-components'
 import { Span } from '../../Typography'
 import BuildCommunityAnimation from './Animations'
-
-const Grid = styled.div`
-  display: grid;
-  padding-top: 3em;
-  grid-template-columns: 1fr 1fr;
-  grid-gap: 1em 3em;
-`
+import BoardingGrid from '../../molecules/BoardingGrid'
+import AnimationContainer from '../../molecules/AnimationContainer'
 
 const BuildCommunity = () => {
   return (
-    <Grid>
-      <div style={{ display: 'flex', justifyContent: 'center' }}>
+    <BoardingGrid>
+      <AnimationContainer>
         <BuildCommunityAnimation />
-      </div>
+      </AnimationContainer>
       <div style={{ display: 'flex', flexDirection: 'column' }}>
         <Span fontSize="24px" fontWeight="bold">
           Build a community to stake DEV tokens for you
@@ -31,7 +25,7 @@ const BuildCommunity = () => {
       <div
         style={{ paddingBottom: '5em', height: '50px', gridColumn: '1/-1', display: 'flex', justifyContent: 'center' }}
       ></div>
-    </Grid>
+    </BoardingGrid>
   )
 }
 

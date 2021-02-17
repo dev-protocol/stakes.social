@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import { Span } from 'src/components/organisms/Incubator/Typography'
 import { Button } from 'src/components/organisms/Incubator/molecules/Button'
 import Animation from './Animations'
+import AnimationContainer from '../../molecules/AnimationContainer'
 
 const Container = styled.div`
   display: grid;
@@ -32,9 +33,9 @@ type PurchaseEthereumType = {
 const PurchaseEthereum = ({ onActivePartChange }: PurchaseEthereumType) => {
   return (
     <Container>
-      <div style={{ width: '550px', height: '460px' }}>
+      <AnimationContainer>
         <Animation />
-      </div>
+      </AnimationContainer>
       <DescriptionContainer>
         <Span style={{ paddingTop: '3em' }} fontWeight="bold" fontSize="24px">
           Purchase ETH in Metamask

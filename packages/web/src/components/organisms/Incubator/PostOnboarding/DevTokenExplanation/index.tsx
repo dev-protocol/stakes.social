@@ -1,15 +1,9 @@
 import React from 'react'
-import styled from 'styled-components'
 import { Span } from '../../Typography'
 import { Button } from '../../molecules/Button'
 import AddTokenToMetamaskAnimation from './Animations'
-
-const Grid = styled.div`
-  display: grid;
-  padding-top: 3em;
-  grid-template-columns: 1fr 1fr;
-  grid-gap: 1em 3em;
-`
+import BoardingGrid from '../../molecules/BoardingGrid'
+import AnimationContainer from '../../molecules/AnimationContainer'
 
 type PostOnboardType = {
   onActivePageChange: React.Dispatch<React.SetStateAction<number>>
@@ -17,10 +11,10 @@ type PostOnboardType = {
 
 const DevTokenExplanation = ({ onActivePageChange }: PostOnboardType) => {
   return (
-    <Grid>
-      <div style={{ display: 'flex', justifyContent: 'center' }}>
+    <BoardingGrid>
+      <AnimationContainer>
         <AddTokenToMetamaskAnimation />
-      </div>
+      </AnimationContainer>
       <div style={{ display: 'flex', flexDirection: 'column' }}>
         <Span fontSize="24px" fontWeight="bold">
           How your DEV token works
@@ -36,7 +30,7 @@ const DevTokenExplanation = ({ onActivePageChange }: PostOnboardType) => {
       <div style={{ paddingBottom: '5em', gridColumn: '1/-1', display: 'flex', justifyContent: 'center' }}>
         <Button onClick={() => onActivePageChange(4)}>Next</Button>
       </div>
-    </Grid>
+    </BoardingGrid>
   )
 }
 

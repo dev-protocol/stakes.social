@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import { Span, LinkB } from 'src/components/organisms/Incubator/Typography'
 import { Button } from 'src/components/organisms/Incubator/molecules/Button'
 import DownloadMetamaskAnimation from './Animations'
+import AnimationContainer from '../../molecules/AnimationContainer'
 
 const DownloadMetamaskContainer = styled.div`
   display: grid;
@@ -32,9 +33,9 @@ type DownloadMetamaskType = {
 const DownloadMetamask = ({ onActivePartChange }: DownloadMetamaskType) => {
   return (
     <DownloadMetamaskContainer>
-      <div style={{ width: '550px', height: '460px' }}>
+      <AnimationContainer>
         <DownloadMetamaskAnimation />
-      </div>
+      </AnimationContainer>
       <DownloadMetamaskDescription>
         <Span style={{ paddingTop: '3em' }} fontWeight="bold" fontSize="24px">
           Download MetaMask

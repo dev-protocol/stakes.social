@@ -4,7 +4,7 @@ export const Button = styled.button<{ backgroundColor?: string; hoverBackgroundC
   cursor: pointer;
   width: 110px;
   height: 50px;
-  ${({ disabled, backgroundColor, textColor, hoverBackgroundColor }) => css`
+  ${({ disabled, backgroundColor, textColor }) => css`
     background: ${backgroundColor || 'black'};
     color: ${textColor || 'white'};
     ${disabled &&
