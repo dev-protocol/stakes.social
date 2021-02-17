@@ -185,7 +185,13 @@ export const PropertyCardList = ({ currentPage, searchWord, sortBy, featureTag }
         <PropertySearchForm onSubmitSearchProperty={handleSearch} />
         <FilterOptionContainer>
           <div style={{ flexGrow: 1 }}>
-            <Select placeholder="Sort" options={FILTER_OPTIONS} onChange={handleChangeSortBy} isClearable={true} />
+            <Select
+              placeholder="Sort"
+              defaultValue={{ label: 'Most Recent', value: 'MOST_RECENT' }}
+              options={FILTER_OPTIONS}
+              onChange={handleChangeSortBy}
+              isClearable={true}
+            />
           </div>
 
           <CurrencySwitcher />
