@@ -50,10 +50,7 @@ const AuthenticateLoading = () => {
   const tokenDecimals = 18
   const tokenImage = 'https://res.cloudinary.com/haas-storage/image/upload/v1613533437/OSS_Token_qj3yrn.png'
   const handleAddClick = () => {
-    console.log('web3: ', web3)
     const ethereum = web3?.currentProvider as AbstractProvider
-    console.log('ethereum: ', ethereum)
-    console.log('has request function: ', typeof ethereum.request === 'function')
     try {
       // wasAdded is a boolean. Like any RPC method, an error may be thrown.
       const wasAdded =

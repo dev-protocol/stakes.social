@@ -41,7 +41,6 @@ type AuthenticationProps = {
 
 const AuthenticationForm = ({ onStateChange }: AuthenticationProps) => {
   const onSubmit = (data: any) => {
-    console.log('data: ', data)
     onStateChange('loading')
   }
 
