@@ -1,6 +1,6 @@
 export const useGetPropertyTags = () => {
   return {
-    tags: ['dummy', 'tag']
+    data: { tags: ['dummy', 'tag'] }
   }
 }
 

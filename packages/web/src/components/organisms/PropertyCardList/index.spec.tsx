@@ -8,8 +8,8 @@ jest.mock('@dev/graphql')
 jest.mock('src/fixtures/currency/hooks')
 
 describe(`${PropertyCardList.name}`, () => {
-  test.skip('Snapshot', () => {
-    const component = render(<PropertyCardList currentPage={1} searchWord="" />)
+  test('Snapshot', () => {
+    const component = render(<PropertyCardList currentPage={1} searchWord="" sortBy="" featureTag="" />)
     const tree = component.baseElement
     expect(tree).toMatchSnapshot()
   })

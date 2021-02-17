@@ -5891,7 +5891,7 @@ export type ListPropertyQueryVariables = Exact<{
   ilike?: Maybe<Scalars['String']>
   from?: Maybe<Scalars['String']>
   market?: Maybe<Scalars['String']>
-  marketOther?: Maybe<Array<Scalars['String']>>
+  marketOther?: Maybe<Array<Scalars['String']> | Scalars['String']>
 }>
 
 export type ListPropertyQuery = { __typename?: 'query_root' } & {
@@ -5918,7 +5918,7 @@ export type ListPropertyOrderByMostRecentQueryVariables = Exact<{
   ilike?: Maybe<Scalars['String']>
   from?: Maybe<Scalars['String']>
   market?: Maybe<Scalars['String']>
-  marketOther?: Maybe<Array<Scalars['String']>>
+  marketOther?: Maybe<Array<Scalars['String']> | Scalars['String']>
 }>
 
 export type ListPropertyOrderByMostRecentQuery = { __typename?: 'query_root' } & {

@@ -1,20 +1,21 @@
 import React from 'react'
+import { Divider } from 'antd'
+import Link from 'next/link'
+import styled from 'styled-components'
 import { Header } from 'src/components/organisms/Header'
 import { Footer } from 'src/components/organisms/Footer'
 import { Container } from 'src/components/atoms/Container'
 import { H2 } from 'src/components/atoms/Typography'
-import styled from 'styled-components'
 import { CurrencySwitcher } from 'src/components/organisms/PropertyCardList/CurrencySwitcher'
 import { BuyDevButton } from 'src/components/molecules/BuyButton'
 import { Statistics } from 'src/components/_pages/portfolio/Statistics'
-import { Divider } from 'antd'
 import { YourStakes } from 'src/components/_pages/portfolio/YourStakes'
 import { useProvider } from 'src/fixtures/wallet/hooks'
 import { YourPools } from 'src/components/_pages/portfolio/YourPools'
 import { blueGradient } from 'src/styles/gradient'
 import { boxShahowWithOnHover } from 'src/styles/boxShahow'
-import Link from 'next/link'
 import { useGetAccount } from 'src/fixtures/dev-for-apps/hooks'
+import { WalletSettings } from 'src/components/organisms/WalletSettings'
 
 const PortfolioHeader = styled.div`
   display: grid;
@@ -114,6 +115,9 @@ const Portfolio = () => {
         <Divider type="horizontal" />
         <Heading>Your Pools</Heading>
         <YourPools accountAddress={accountAddress} />
+        <Divider type="horizontal" />
+        <Heading>Wallet Settings</Heading>
+        <WalletSettings />
       </StyledContainer>
       <Footer />
     </div>

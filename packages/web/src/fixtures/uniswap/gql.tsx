@@ -1,4 +1,4 @@
-import gql from 'graphql-tag'
+import { gql } from '@apollo/client'
 
 // see https://thegraph.com/explorer/subgraph/uniswap/uniswap-v2
 
