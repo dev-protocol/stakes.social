@@ -6,6 +6,7 @@ import { Span } from 'src/components/organisms/Incubator/Typography'
 import { Button } from 'src/components/organisms/Incubator/molecules/Button'
 import Link from 'next/link'
 import { useCurrency } from 'src/fixtures/currency/hooks'
+import DevCurrencySymbol from '../molecules/DevCurrency'
 
 const ipsum = new lorem.LoremIpsum({
   sentencesPerParagraph: { min: 1, max: 3 },
@@ -80,10 +81,13 @@ const ProjectEntry = ({ funding, title, url, claimed }: ProjectProps) => {
         <Span fontSize="16px" color="#CCCCCC">
           Funding received
         </Span>
-        <Span fontSize="24px" fontWeight="bold">
-          {currency === 'USD' && '$ '}
-          {convertedFunding} {currency}
-        </Span>
+        <div style={{ display: 'flex', alignItems: 'center' }}>
+          {currency === 'DEV' && <DevCurrencySymbol />}
+          <Span style={{ marginLeft: currency === 'DEV' ? '10px' : '0' }} fontSize="24px" fontWeight="bold">
+            {currency === 'USD' && '$ '}
+            {convertedFunding} {currency}
+          </Span>
+        </div>
       </FundingSection>
       <ClaimButtonContainer>
         <Link href={'/incubator/project/[project]'} as={`/incubator/project/${title}`} passHref>
