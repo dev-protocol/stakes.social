@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import Countdown, { CountdownRenderProps } from 'react-countdown'
 
 import { Span } from 'src/components/organisms/Incubator/Typography'
+import { useCurrency } from 'src/fixtures/currency/hooks'
 
 const JumboContainer = styled.div`
   display: grid;
@@ -78,6 +79,8 @@ const renderer = ({ formatted, completed }: CountdownRenderProps) => {
 }
 
 const Jumbo = () => {
+  const { currency, toCurrency } = useCurrency()
+  const convertedFunding = toCurrency(12000000).dp(0).toNumber().toLocaleString()
   return (
     <JumboContainer>
       <TitleContainer>
@@ -114,7 +117,7 @@ const Jumbo = () => {
             Total rewards collected
           </Span>
           <Span fontWeight="bold" fontSize="32px" color="#0A0A0A">
-            $ 12,000 USD
+            {currency === 'USD' && '$ '} {convertedFunding} {currency}
           </Span>
         </RewardCollected>
       </RoundRewardContainer>

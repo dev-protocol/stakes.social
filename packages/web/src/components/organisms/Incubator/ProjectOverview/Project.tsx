@@ -5,6 +5,7 @@ import * as lorem from 'lorem-ipsum'
 import { Span } from 'src/components/organisms/Incubator/Typography'
 import { Button } from 'src/components/organisms/Incubator/molecules/Button'
 import Link from 'next/link'
+import { useCurrency } from 'src/fixtures/currency/hooks'
 
 const ipsum = new lorem.LoremIpsum({
   sentencesPerParagraph: { min: 1, max: 3 },
@@ -13,7 +14,7 @@ const ipsum = new lorem.LoremIpsum({
 
 type ProjectProps = {
   title: string
-  funding: string
+  funding: number
   url: string
 }
 
@@ -62,6 +63,8 @@ const ClaimButtonContainer = styled.div`
 `
 
 const ProjectEntry = ({ funding, title, url }: ProjectProps) => {
+  const { currency, toCurrency } = useCurrency()
+  const convertedFunding = toCurrency(funding).dp(0).toNumber().toLocaleString()
   // Probably fetch data per project async here
   return (
     <ProjectContainer>
@@ -77,7 +80,8 @@ const ProjectEntry = ({ funding, title, url }: ProjectProps) => {
           Funding received
         </Span>
         <Span fontSize="24px" fontWeight="bold">
-          ${funding} USD
+          {currency === 'USD' && '$ '}
+          {convertedFunding} {currency}
         </Span>
       </FundingSection>
       <ClaimButtonContainer>

@@ -9,122 +9,122 @@ import { CurrencySwitcher } from '../molecules/CurrencySwitcher'
 const PLACHEOLDER_DATA = [
   {
     title: 'Sigma',
-    funding: '26,000',
+    funding: 26000,
     url: 'https://res.cloudinary.com/haas-storage/image/upload/v1613044939/sigma_tye6kg.png'
   },
   {
     title: 'BrightID',
-    funding: '12,000',
+    funding: 12000,
     url: 'https://res.cloudinary.com/haas-storage/image/upload/v1613045021/bright_id_siwjeu.png'
   },
   {
     title: 'Wallet Connect',
-    funding: '34,000',
+    funding: 34000,
     url: 'https://res.cloudinary.com/haas-storage/image/upload/v1613045241/walletconnect-logo_bgdxkx.png'
   },
   {
     title: 'ChainSafe',
-    funding: '19,000',
+    funding: 19000,
     url: 'https://res.cloudinary.com/haas-storage/image/upload/v1613045322/chain_safe_ohqczw.png'
   },
   {
     title: 'ZeroPool',
-    funding: '23,000',
+    funding: 23000,
     url: 'https://res.cloudinary.com/haas-storage/image/upload/v1613043066/zeropool_lykmbs.png'
   },
   {
     title: 'Redux-Saga',
-    funding: '76,000',
+    funding: 76000,
     url: 'https://res.cloudinary.com/haas-storage/image/upload/v1613045672/redux_sage_sxncfk.png'
   },
   {
     title: 'Jekyll',
-    funding: '38,000',
+    funding: 38000,
     url: 'https://res.cloudinary.com/haas-storage/image/upload/v1613045746/jekyll_jpzssa.png'
   },
   {
     title: 'BoostNode',
-    funding: '7,500',
+    funding: 7500,
     url: 'https://res.cloudinary.com/haas-storage/image/upload/v1613045786/boostnode_n7hjmr.png'
   },
   {
     title: 'Sigma',
-    funding: '26,000',
+    funding: 26000,
     url: 'https://res.cloudinary.com/haas-storage/image/upload/v1613044939/sigma_tye6kg.png'
   },
   {
     title: 'BrightID',
-    funding: '12,000',
+    funding: 12000,
     url: 'https://res.cloudinary.com/haas-storage/image/upload/v1613045021/bright_id_siwjeu.png'
   },
   {
     title: 'Wallet Connect',
-    funding: '34,000',
+    funding: 34000,
     url: 'https://res.cloudinary.com/haas-storage/image/upload/v1613045241/walletconnect-logo_bgdxkx.png'
   },
   {
     title: 'ChainSafe',
-    funding: '19,000',
+    funding: 19000,
     url: 'https://res.cloudinary.com/haas-storage/image/upload/v1613045322/chain_safe_ohqczw.png'
   },
   {
     title: 'ZeroPool',
-    funding: '23,000',
+    funding: 23000,
     url: 'https://res.cloudinary.com/haas-storage/image/upload/v1613043066/zeropool_lykmbs.png'
   },
   {
     title: 'Redux-Saga',
-    funding: '76,000',
+    funding: 76000,
     url: 'https://res.cloudinary.com/haas-storage/image/upload/v1613045672/redux_sage_sxncfk.png'
   },
   {
     title: 'Jekyll',
-    funding: '38,000',
+    funding: 38000,
     url: 'https://res.cloudinary.com/haas-storage/image/upload/v1613045746/jekyll_jpzssa.png'
   },
   {
     title: 'BoostNode',
-    funding: '7,500',
+    funding: 7500,
     url: 'https://res.cloudinary.com/haas-storage/image/upload/v1613045786/boostnode_n7hjmr.png'
   },
   {
     title: 'Sigma',
-    funding: '26,000',
+    funding: 26000,
     url: 'https://res.cloudinary.com/haas-storage/image/upload/v1613044939/sigma_tye6kg.png'
   },
   {
     title: 'BrightID',
-    funding: '12,000',
+    funding: 12000,
     url: 'https://res.cloudinary.com/haas-storage/image/upload/v1613045021/bright_id_siwjeu.png'
   },
   {
     title: 'Wallet Connect',
-    funding: '34,000',
+    funding: 34000,
     url: 'https://res.cloudinary.com/haas-storage/image/upload/v1613045241/walletconnect-logo_bgdxkx.png'
   },
   {
     title: 'ChainSafe',
-    funding: '19,000',
+    funding: 19000,
     url: 'https://res.cloudinary.com/haas-storage/image/upload/v1613045322/chain_safe_ohqczw.png'
   },
   {
     title: 'ZeroPool',
-    funding: '23,000',
+    funding: 23000,
     url: 'https://res.cloudinary.com/haas-storage/image/upload/v1613043066/zeropool_lykmbs.png'
   },
   {
     title: 'Redux-Saga',
-    funding: '76,000',
+    funding: 76000,
     url: 'https://res.cloudinary.com/haas-storage/image/upload/v1613045672/redux_sage_sxncfk.png'
   },
   {
     title: 'Jekyll',
-    funding: '38,000',
+    funding: 38000,
     url: 'https://res.cloudinary.com/haas-storage/image/upload/v1613045746/jekyll_jpzssa.png'
   },
   {
     title: 'BoostNode',
-    funding: '7,500',
+    funding: 7500,
     url: 'https://res.cloudinary.com/haas-storage/image/upload/v1613045786/boostnode_n7hjmr.png'
   }
 ]
