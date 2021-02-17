@@ -7,6 +7,7 @@ import WhatsStakesSocial from './WhatsStakeSocial'
 import DevTokenExplanation from './DevTokenExplanation'
 import OssTokenExplanation from './OssTokenExplanation'
 import BuildCommunity from './BuildCommunity'
+import Link from 'next/link'
 
 const SpaceBetween = styled.div`
   display: flex;
@@ -28,7 +29,9 @@ const PostOnboarding = ({ isOverview }: WhatsNextType) => {
       {!isOverview && (
         <SpaceBetween style={{ paddingTop: '1em' }}>
           <Span fontSize="20px">{"What's next?"}</Span>
-          <LinkB>Skip</LinkB>
+          <Link href="/incubator">
+            <LinkB>{activePart === 5 ? 'Back to overview' : 'Skip'}</LinkB>
+          </Link>
         </SpaceBetween>
       )}
 
