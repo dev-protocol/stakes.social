@@ -2,6 +2,7 @@ import React from 'react'
 import { IncubatorLogo } from 'src/components/organisms/Incubator/Icons'
 import styled from 'styled-components'
 import Link from 'next/link'
+import { useConnectWallet, useProvider } from 'src/fixtures/wallet/hooks'
 
 const HeaderContainer = styled.div`
   display: grid;
@@ -29,7 +30,16 @@ const HeaderLink = styled.a<{ color?: string }>`
   color: ${props => (props.color ? props.color : 'black')};
 `
 
+const ConnectWalletLink = styled(HeaderLink)`
+  :hover {
+    color: ${props => props.color};
+  }
+`
+
 const IncubatorHeader = () => {
+  const { isConnected, connect, isConnecting } = useConnectWallet()
+  const { accountAddress } = useProvider()
+
   return (
     <div>
       <HeaderContainer>
@@ -49,7 +59,15 @@ const IncubatorHeader = () => {
           <HeaderLink color="#FF3815">Stakes.social</HeaderLink>
         </HeaderLinkContainer>
         <ConnectWalletContainer>
-          <HeaderLink color="#00D0FD">Connect Wallet</HeaderLink>
+          {isConnecting ? (
+            <ConnectWalletLink color="#00D0FD">Connecting...</ConnectWalletLink>
+          ) : !isConnected && !accountAddress ? (
+            <ConnectWalletLink onClick={connect} color="#00D0FD">
+              Connect Wallet
+            </ConnectWalletLink>
+          ) : (
+            <ConnectWalletLink color="#00e84b">Connected</ConnectWalletLink>
+          )}
         </ConnectWalletContainer>
       </HeaderContainer>
     </div>
