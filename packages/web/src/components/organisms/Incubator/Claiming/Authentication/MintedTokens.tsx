@@ -62,7 +62,7 @@ const MintedTokens = () => {
         </div>
       </SpaceBetween>
       <SpaceBetween>
-        <Span fontSize="16px">You'll receive</Span>
+        <Span fontSize="16px">{"You'll receive"}</Span>
         <div style={{ display: 'flex', alignItems: 'center' }}>
           <div style={{ width: '16px', height: '16px', marginRight: '5px', transform: 'translateY(-1px)' }}>
             <DecCurrencySmall />

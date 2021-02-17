@@ -312,12 +312,12 @@ const OnboardingPage = () => {
     logo: 'https://res.cloudinary.com/haas-storage/image/upload/v1613044939/sigma_tye6kg.png'
   }
 
-  // useEffect(() => {
-  //   if (currentState === 'loading')
-  //     setTimeout(() => {
-  //       setCurrentState('success')
-  //     }, 3000)
-  // }, [currentState])
+  useEffect(() => {
+    if (currentState === 'loading')
+      setTimeout(() => {
+        setCurrentState('success')
+      }, 3000)
+  }, [currentState])
 
   return (
     <div style={{ position: 'relative', display: 'flex', minHeight: '100vh', flexDirection: 'column' }}>

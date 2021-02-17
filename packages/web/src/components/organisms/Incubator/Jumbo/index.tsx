@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import Countdown, { CountdownRenderProps } from 'react-countdown'
 
 import { Span } from 'src/components/organisms/Incubator/Typography'
 
@@ -57,6 +58,25 @@ const RewardCollected = styled.div`
   flex-direction: column;
 `
 
+const Completionist = () => (
+  <Span fontWeight="bold" fontSize="32px" color="#0A0A0A">
+    Round 1 of incubator has finished
+  </Span>
+)
+
+// Renderer callback with condition
+const renderer = ({ formatted, completed }: CountdownRenderProps) => {
+  if (completed) {
+    return <Completionist />
+  } else {
+    return (
+      <Span fontWeight="bold" fontSize="32px" color="#0A0A0A">
+        {formatted.days}d : {formatted.hours}h : {formatted.minutes}m : {formatted.seconds}s
+      </Span>
+    )
+  }
+}
+
 const Jumbo = () => {
   return (
     <JumboContainer>
@@ -87,9 +107,7 @@ const Jumbo = () => {
           <Span color="#999999" fontSize="20px">
             Round 1 ends in
           </Span>
-          <Span fontWeight="bold" fontSize="32px" color="#0A0A0A">
-            62d : 11h : 56m : 11s
-          </Span>
+          <Countdown date={Date.now() + 5400000000} renderer={renderer} />
         </Round>
         <RewardCollected>
           <Span color="#999999" fontSize="20px">
