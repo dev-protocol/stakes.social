@@ -137,7 +137,6 @@ const ProjectOverviewContainer = styled.div`
   max-width: 1200px;
   flex-grow: 1;
   padding-top: 1em;
-  background-image: linear-gradient(#00d0fd, #5b8bf5, #d500e6, #ff3815);
 `
 
 const OverviewHeader = styled.div`
