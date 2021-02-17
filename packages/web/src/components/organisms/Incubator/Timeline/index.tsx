@@ -35,6 +35,7 @@ type TimelineSectionType = {
   finishedColor?: string
   pointerText?: string
   StepSpanComponent?: (input: any) => React.ReactNode
+  onActivePartChange?: React.Dispatch<React.SetStateAction<number>>
 }
 
 const Timepoint = styled.div<{
@@ -42,7 +43,9 @@ const Timepoint = styled.div<{
   finishedColor?: string
   currentColor?: string
   isCurrent?: boolean
+  hasClick: boolean
 }>`
+  cursor: ${props => (props.hasClick ? 'pointer' : 'auto')};
   z-index: 1;
   width: 20px;
   height: 20px;
@@ -95,6 +98,7 @@ type StepProps = {
   isFinished: boolean
   currentColor: string
   isCurrent: boolean
+  onActivePartChange?: React.Dispatch<React.SetStateAction<number>>
 }
 
 export const Step = ({ info, children }: { info: StepProps; children: any }) => {
@@ -122,7 +126,8 @@ const TimelineSection = ({
   currentColor,
   finishedColor,
   pointerText,
-  StepSpanComponent
+  StepSpanComponent,
+  onActivePartChange
 }: TimelineSectionType) => {
   const isFinished = currentPart > part
   const isPartFinished = currentPart > part
@@ -139,6 +144,8 @@ const TimelineSection = ({
     <>
       <TimepointContainer isFirst={isFirst}>
         <Timepoint
+          hasClick={typeof onActivePartChange !== 'undefined'}
+          onClick={() => onActivePartChange && onActivePartChange(part)}
           finishedColor={finishedColor}
           isFinished={isFinished}
           currentColor={currentColor}

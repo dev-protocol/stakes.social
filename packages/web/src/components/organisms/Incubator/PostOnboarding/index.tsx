@@ -37,6 +37,7 @@ const PostOnboarding = ({ isOverview }: WhatsNextType) => {
           StepSpanComponent={(info: any) => <Step info={{ ...info, width: '40px', fontSize: '16px' }}>Tip 1</Step>}
           isFirst={true}
           part={1}
+          onActivePartChange={setActivePart}
           currentPart={activePart}
           currentColor="#D500E6"
           finishedColor="black"
@@ -44,6 +45,7 @@ const PostOnboarding = ({ isOverview }: WhatsNextType) => {
         <TimelineSection
           StepSpanComponent={(info: any) => <Step info={{ ...info, width: '40px', fontSize: '16px' }}>Tip 2</Step>}
           part={2}
+          onActivePartChange={setActivePart}
           currentPart={activePart}
           currentColor="#D500E6"
           finishedColor="black"
@@ -51,6 +53,7 @@ const PostOnboarding = ({ isOverview }: WhatsNextType) => {
         <TimelineSection
           StepSpanComponent={(info: any) => <Step info={{ ...info, width: '40px', fontSize: '16px' }}>Tip 3</Step>}
           part={3}
+          onActivePartChange={setActivePart}
           currentPart={activePart}
           currentColor="#D500E6"
           finishedColor="black"
@@ -58,6 +61,7 @@ const PostOnboarding = ({ isOverview }: WhatsNextType) => {
         <TimelineSection
           StepSpanComponent={(info: any) => <Step info={{ ...info, width: '40px', fontSize: '16px' }}>Tip 4</Step>}
           part={4}
+          onActivePartChange={setActivePart}
           currentPart={activePart}
           currentColor="#D500E6"
           finishedColor="black"
@@ -66,6 +70,7 @@ const PostOnboarding = ({ isOverview }: WhatsNextType) => {
           StepSpanComponent={(info: any) => <Step info={{ ...info, width: '40px', fontSize: '16px' }}>Tip 5</Step>}
           isLast={true}
           part={5}
+          onActivePartChange={setActivePart}
           currentPart={activePart}
           currentColor="#D500E6"
           finishedColor="black"

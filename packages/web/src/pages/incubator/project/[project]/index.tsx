@@ -283,11 +283,11 @@ const OnboardingSection = ({ isModal, onStateChange }: OnboardingSectionProps) =
       {isOnboarding && (
         <>
           <TimelineContainer style={{ alignSelf: 'center' }}>
-            <TimelineSection isFirst={true} part={1} currentPart={activePart} />
-            <TimelineSection part={2} currentPart={activePart} />
-            <TimelineSection part={3} currentPart={activePart} />
-            <TimelineSection part={4} currentPart={activePart} />
-            <TimelineSection part={5} currentPart={activePart} isLast={true} />
+            <TimelineSection isFirst={true} onActivePartChange={setActivePart} part={1} currentPart={activePart} />
+            <TimelineSection part={2} onActivePartChange={setActivePart} currentPart={activePart} />
+            <TimelineSection part={3} onActivePartChange={setActivePart} currentPart={activePart} />
+            <TimelineSection part={4} onActivePartChange={setActivePart} currentPart={activePart} />
+            <TimelineSection part={5} onActivePartChange={setActivePart} currentPart={activePart} isLast={true} />
           </TimelineContainer>
           {activePart === 1 && <DownloadMetamask onActivePartChange={setActivePart} />}
           {activePart === 2 && <PurchaseEthereum onActivePartChange={setActivePart} />}
