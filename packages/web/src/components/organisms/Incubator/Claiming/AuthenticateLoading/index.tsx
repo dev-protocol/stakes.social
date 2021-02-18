@@ -4,6 +4,7 @@ import { Span, LinkB } from '../../Typography'
 import { LoadingPlaceholder } from 'src/components/organisms/Incubator/Icons'
 import { AbstractProvider } from 'web3-core'
 import { useProvider } from 'src/fixtures/wallet/hooks'
+import LoadingAnimation from './Animations'
 
 const AuthenticateLoadingContainer = styled.div`
   display: grid;
@@ -13,9 +14,8 @@ const AuthenticateLoadingContainer = styled.div`
 `
 
 const LoadingContainer = styled.div`
-  padding-top: 2em;
-  width: 336px;
-  height: 168px;
+  width: 400px;
+  height: auto;
 `
 
 const LinkWithIcon = styled.button`
@@ -83,7 +83,7 @@ const AuthenticateLoading = () => {
     <AuthenticateLoadingContainer>
       <div style={{ display: 'flex', justifyContent: 'center' }}>
         <LoadingContainer>
-          <LoadingPlaceholder />
+          <LoadingAnimation />
         </LoadingContainer>
       </div>
       <div style={{ display: 'flex', flexDirection: 'column' }}>

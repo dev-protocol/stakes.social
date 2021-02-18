@@ -1,8 +1,7 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 import { Form } from 'antd'
 
-import { Input } from 'src/components/organisms/Incubator/Form'
 import { Span, LinkB } from '../../Typography'
 import { Button } from '../../molecules/Button'
 
@@ -35,14 +34,80 @@ const SpaceBetween = styled.div`
   justify-content: space-between;
 `
 
+export const InputContainer = styled(Form.Item)`
+  position: relative;
+  width: 100%;
+  margin: 0;
+`
+
+const FormItem = styled(Form.Item)<{ isError?: boolean }>`
+  .ant-form-item-explain,
+  .ant-form-item-explain-error {
+    padding-top: 0.5em;
+    font-size: 12px;
+  }
+
+  #pat {
+    ${props => {
+      if (props.isError) {
+        return 'border-bottom: red 2px solid'
+      }
+      return 'border-bottom: auto'
+    }}
+  }
+`
+
+export const Input = styled.input`
+  width: 100%;
+  padding: 8px 0;
+  border: 0;
+  background: transparent;
+  outline: none;
+  border-bottom: 2px solid #cccccc;
+  transition: all 0.2s ease-in;
+
+  &:hover {
+    transition: all 0.2s ease-in;
+    border-bottom: 2px solid #5b8bf5;
+  }
+
+  &:focus {
+    transition: all 0.2s ease-in;
+    border-bottom: 2px solid #5b8bf5;
+    /* box-shadow: 0 0 0 1px grey; */
+  }
+`
+
+type CustomInputProps = {
+  label: string
+  placeholder?: string
+  defaultValue?: number | string
+}
+
+export const CustomInput = ({ placeholder, label }: CustomInputProps) => {
+  return (
+    <InputContainer>
+      <Form.Item name={label} noStyle>
+        <Input id="pat" placeholder={placeholder || ''} />
+      </Form.Item>
+    </InputContainer>
+  )
+}
+
 type AuthenticationProps = {
   onStateChange: React.Dispatch<React.SetStateAction<string>>
 }
 
 const AuthenticationForm = ({ onStateChange }: AuthenticationProps) => {
+  const [form] = Form.useForm()
   const onSubmit = (data: any) => {
     console.log('data: ', data)
     onStateChange('loading')
+  }
+  const [isError, setIsError] = useState(false)
+
+  const onFinishFailed = () => {
+    setIsError(true)
   }
 
   return (
@@ -54,28 +119,30 @@ const AuthenticationForm = ({ onStateChange }: AuthenticationProps) => {
         Repository’s Personal Access Token
       </Span>
       <FormContainer style={{ paddingTop: '0.4em' }}>
-        <Form initialValues={{ remember: true }} onFinish={onSubmit}>
-          <div style={{ display: 'grid', gridGap: '1.5em' }}>
-            <div>
-              <Form.Item
-                noStyle
-                name="personalAccessToken"
-                rules={[{ required: true, message: 'Please input PAT.' }]}
-                key="personalAccessToken"
-              >
-                <Input value="" name="personalAccessToken" />
-              </Form.Item>
-            </div>
+        <Form
+          form={form}
+          name="basic"
+          initialValues={{ remember: true }}
+          onFinish={onSubmit}
+          onFinishFailed={onFinishFailed}
+        >
+          <FormItem
+            isError={isError}
+            name="pat"
+            rules={[{ required: true, message: 'Please enter a valid PAT' }]}
+            key="pat"
+          >
+            <CustomInput label="pat" placeholder="Paste a token from Github" />
+          </FormItem>
 
-            <Span fontSize="14px" color="#5B8BF5">
-              The Khaos Oracle confidentially authenticates your Github Personal Access Token. Please see
-              <OurDocsLink rel="noopener noreferrer" target="_blank" href="https://github.com/dev-protocol/khaos">
-                {' '}
-                our docs
-              </OurDocsLink>{' '}
-              for more details.
-            </Span>
-          </div>
+          <Span fontSize="14px" color="#5B8BF5">
+            The Khaos Oracle confidentially authenticates your Github Personal Access Token. Please see
+            <OurDocsLink rel="noopener noreferrer" target="_blank" href="https://github.com/dev-protocol/khaos">
+              {' '}
+              our docs
+            </OurDocsLink>{' '}
+            for more details.
+          </Span>
 
           <div style={{ paddingTop: '2.5em' }}>
             <SpaceBetween style={{ alignItems: 'center' }}>
