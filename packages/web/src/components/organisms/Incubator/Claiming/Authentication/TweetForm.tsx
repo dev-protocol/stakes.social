@@ -4,7 +4,7 @@ import { Form } from 'antd'
 
 import { Span, LinkB } from '../../Typography'
 import { Button } from '../../molecules/Button'
-import { ClipboardIcon } from '../../Icons'
+import { ClipboardIcon, TwitterIcon } from '../../Icons'
 
 const AuthenticationContainer = styled.div`
   position: relative;
@@ -135,7 +135,7 @@ const ProgressItem = styled.div<{ isSelected?: boolean }>`
   }
 `
 
-const AuthenticationForm = ({ onStateChange }: AuthenticationProps) => {
+const TweetForm = ({ onStateChange }: AuthenticationProps) => {
   const [form] = Form.useForm()
   const onSubmit = (data: any) => {
     console.log('data: ', data)
@@ -150,15 +150,23 @@ const AuthenticationForm = ({ onStateChange }: AuthenticationProps) => {
   return (
     <AuthenticationContainer>
       <ProgressContainer>
-        <ProgressItem isSelected={true}>
+        <ProgressItem>
           <Span fontSize="32px">1</Span>
         </ProgressItem>
-        <ProgressItem>
+        <ProgressItem isSelected={true}>
           <Span fontSize="32px">2</Span>
         </ProgressItem>
       </ProgressContainer>
-      <Span fontSize="40px" fontWeight="bold">
-        Authentication
+      <SpaceBetween>
+        <Span fontSize="40px" fontWeight="bold">
+          Tweet it!
+        </Span>
+        <TwitterIcon />
+      </SpaceBetween>
+      <Span fontSize="20px" style={{ paddingTop: '2em' }}>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+        magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+        consequat.{' '}
       </Span>
       <Span style={{ paddingTop: '3em' }} fontSize="14px">
         Repository’s Personal Access Token
@@ -206,4 +214,4 @@ const AuthenticationForm = ({ onStateChange }: AuthenticationProps) => {
   )
 }
 
-export default AuthenticationForm
+export default TweetForm

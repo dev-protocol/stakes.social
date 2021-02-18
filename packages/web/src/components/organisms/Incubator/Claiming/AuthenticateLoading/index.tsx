@@ -1,7 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
 import { Span, LinkB } from '../../Typography'
-import { LoadingPlaceholder } from 'src/components/organisms/Incubator/Icons'
 import { AbstractProvider } from 'web3-core'
 import { useProvider } from 'src/fixtures/wallet/hooks'
 import LoadingAnimation from './Animations'

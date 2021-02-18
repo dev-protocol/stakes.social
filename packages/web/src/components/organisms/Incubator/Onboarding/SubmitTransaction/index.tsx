@@ -39,12 +39,12 @@ const SubmitTransaction = ({ onStateChange, isModal }: SubmitTranscriptType) => 
       </AnimationContainer>
       <DescriptionContainer>
         <Span style={{ paddingTop: '3em' }} fontWeight="bold" fontSize="24px">
-          Submit transaction
+          Share the News on Twitter
         </Span>
         <Span style={{ paddingTop: '3em' }} fontSize="16px">
-          Copy an PAT from github and paste it into the incubator field. We recommend you to create a new PAT with no
-          permissions for this. By following this step we can authenticate you and connect the incubated project to your
-          account.
+          The last step to redeem your funding is to share the news on Twitter! We generate a message for each project
+          announcing their arrival on Stakes Social. After you publish the tweet copy and paste the link and the Khaos
+          oracle will authenticate if it was successfully completed.
         </Span>
       </DescriptionContainer>
       <NextButtonContainer>

@@ -1,8 +1,9 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 import AuthenticationForm from './AuthenticationForm'
 import { Span, LinkB } from '../../Typography'
 import MintedTokens from './MintedTokens'
+import TweetForm from './TweetForm'
 
 const DetailsContainer = styled.div`
   display: grid;
@@ -33,6 +34,7 @@ type AuthenticationProps = {
 }
 
 const Authentication = ({ onStateChange }: AuthenticationProps) => {
+  const [activeStage] = useState(1)
   const githubUrl = 'sigp/lighthouse'
   const logo = 'https://res.cloudinary.com/haas-storage/image/upload/v1613044939/sigma_tye6kg.png'
   const name = 'Sigma'
@@ -61,7 +63,9 @@ const Authentication = ({ onStateChange }: AuthenticationProps) => {
         <MintedTokens />
       </div>
 
-      <AuthenticationForm onStateChange={onStateChange} />
+      {activeStage === 1 && <AuthenticationForm onStateChange={onStateChange} />}
+
+      {activeStage === 2 && <TweetForm onStateChange={onStateChange} />}
     </DetailsContainer>
   )
 }

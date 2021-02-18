@@ -41,9 +41,9 @@ const CopyPat = ({ onActivePartChange }: CopyPatType) => {
           Enter Personal Access token
         </Span>
         <Span style={{ paddingTop: '3em' }} fontSize="16px">
-          Copy an PAT from github and paste it into the incubator field. We recommend you to create a new PAT with no
-          permissions for this. By following this step we can authenticate you and connect the incubated project to your
-          account.
+          In order to authenticate your ownership of the project you’re attempting to claim we require you to submit
+          your Github Personal Access Token (PAT). If you like you can create a new PAT with no permissions. Our Khaos
+          oracle confidentially authenticates your PAT so it remains secure!
         </Span>
       </DescriptionContainer>
       <NextButtonContainer>

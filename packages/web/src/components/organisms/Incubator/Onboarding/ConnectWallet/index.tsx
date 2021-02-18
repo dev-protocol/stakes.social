@@ -41,8 +41,8 @@ const ConnectWallet = ({ onActivePartChange }: ConnectWalletType) => {
           Connect Wallet
         </Span>
         <Span style={{ paddingTop: '3em' }} fontSize="16px">
-          Click the &quot;Connect Wallet&quot; option in the top right corner of the website. This allows us to retrieve
-          your wallet address and verify your identity before authenticating.
+          Click &quot;Connect Wallet&quot; in the top right corner of the website. This allows you to interact with our
+          website to retrieve your funding.
         </Span>
       </DescriptionContainer>
       <NextButtonContainer>
