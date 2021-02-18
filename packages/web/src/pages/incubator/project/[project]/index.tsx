@@ -306,6 +306,7 @@ const OnboardingPage = () => {
   // const [, project] = getPath(useRouter().asPath)
   // TODO: Fetch data from strapi based on project
   const [currentState, setCurrentState] = useState<string>('overview')
+  const [authenticationProgress, setAuthenticationProgress] = useState(1)
   const { name, fundingDEV, fundingUSD, github, logo, twitter, website, claimed } = {
     name: 'Sigma',
     website: 'sigmaprime.io',
@@ -318,11 +319,14 @@ const OnboardingPage = () => {
   }
 
   useEffect(() => {
-    if (currentState === 'loading')
+    if (currentState === 'loading') {
+      const status = authenticationProgress === 2 ? 'success' : 'authentication'
       setTimeout(() => {
-        setCurrentState('success')
+        setCurrentState(status)
+        setAuthenticationProgress(2)
       }, 3000)
-  }, [currentState])
+    }
+  }, [currentState, authenticationProgress])
 
   return (
     <div style={{ position: 'relative', display: 'flex', minHeight: '100vh', flexDirection: 'column' }}>
@@ -363,7 +367,9 @@ const OnboardingPage = () => {
           </Container>
         )}
 
-        {currentState === 'authentication' && <Authentication onStateChange={setCurrentState} />}
+        {currentState === 'authentication' && (
+          <Authentication progress={authenticationProgress} onStateChange={setCurrentState} />
+        )}
 
         {currentState === 'loading' && <AuthenticateLoading />}
 

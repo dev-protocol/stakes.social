@@ -16,7 +16,7 @@ const DevTokenExplanation = ({ onActivePageChange }: PostOnboardType) => {
         <AddTokenToMetamaskAnimation />
       </AnimationContainer>
       <div style={{ display: 'flex', flexDirection: 'column' }}>
-        <Span fontSize="24px" fontWeight="bold">
+        <Span style={{ paddingTop: '3em' }} fontSize="24px" fontWeight="bold">
           How your DEV token works
         </Span>
         <Span style={{ paddingTop: '3em' }} fontSize="16px">

@@ -11,7 +11,7 @@ const BuildCommunity = () => {
         <BuildCommunityAnimation />
       </AnimationContainer>
       <div style={{ display: 'flex', flexDirection: 'column' }}>
-        <Span fontSize="24px" fontWeight="bold">
+        <Span style={{ paddingTop: '3em' }} fontSize="24px" fontWeight="bold">
           Build a community to stake DEV tokens for you
         </Span>
         <Span style={{ paddingTop: '3em' }} fontSize="16px">

@@ -205,7 +205,8 @@ const TweetForm = ({ onStateChange }: AuthenticationProps) => {
                 </LinkB>
               </div>
 
-              <Button type="submit">Submit</Button>
+              {/* <Button type="submit">Submit</Button> */}
+              <Button onClick={() => onStateChange('loading')}>Submit</Button>
             </SpaceBetween>
           </div>
         </Form>

@@ -46,7 +46,14 @@ const DownloadMetamask = ({ onActivePartChange }: DownloadMetamaskType) => {
           securely connect to decentralized applications through a compatible web browser or the mobile {"app's"}{' '}
           built-in browser.
         </Span>
-        <LinkB style={{ paddingTop: '4em' }}>Download MetaMask Browser Extension for Chrome</LinkB>
+        <LinkB
+          target="_blank"
+          rel="noopener noreferrer"
+          href="https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn?hl=en"
+          style={{ paddingTop: '4em' }}
+        >
+          Download MetaMask Browser Extension for Chrome
+        </LinkB>
       </DownloadMetamaskDescription>
       <NextButtonContainer>
         <Button onClick={() => onActivePartChange(2)}>Next</Button>

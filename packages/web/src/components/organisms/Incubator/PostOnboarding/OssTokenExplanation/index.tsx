@@ -32,7 +32,7 @@ const OssTokenExplanation = ({ onActivePageChange }: PostOnboardType) => {
         <OssTokenLogo />
       </AnimationContainer>
       <div style={{ display: 'flex', flexDirection: 'column' }}>
-        <Span fontSize="24px" fontWeight="bold">
+        <Span style={{ paddingTop: '3em' }} fontSize="24px" fontWeight="bold">
           How your OSS token works
         </Span>
         <Span style={{ paddingTop: '3em' }} fontSize="16px">
