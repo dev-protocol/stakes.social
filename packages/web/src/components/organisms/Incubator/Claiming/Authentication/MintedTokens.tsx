@@ -33,7 +33,9 @@ const MintedTokens = () => {
         <div style={{ display: 'flex' }}>
           <Span fontSize="16px">{ticker} tokens Minted</Span>
           <InfoIconContainer>
-            <InfoIcon fill={'#5B8BF5'} />
+            <div title="The 'shares' of your OSS project">
+              <InfoIcon fill={'#5B8BF5'} />
+            </div>
           </InfoIconContainer>
         </div>
         <div style={{ display: 'flex', alignItems: 'center' }}>
@@ -49,7 +51,9 @@ const MintedTokens = () => {
         <div style={{ display: 'flex' }}>
           <Span fontSize="16px">Dev Protocol Treasury Fee</Span>
           <InfoIconContainer>
-            <InfoIcon fill={'#D500E6'} />
+            <div title="The amount of tokens sent to the DEV treasury">
+              <InfoIcon fill={'#D500E6'} />
+            </div>
           </InfoIconContainer>
         </div>
         <div style={{ display: 'flex', alignItems: 'center' }}>

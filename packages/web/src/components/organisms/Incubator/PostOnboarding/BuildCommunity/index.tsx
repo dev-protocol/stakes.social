@@ -22,9 +22,9 @@ const BuildCommunity = () => {
           est laborum.
         </Span>
       </div>
-      <div
-        style={{ paddingBottom: '5em', height: '50px', gridColumn: '1/-1', display: 'flex', justifyContent: 'center' }}
-      ></div>
+      <div style={{ paddingBottom: '5em', gridColumn: '1/-1', display: 'flex', justifyContent: 'center' }}>
+        <div style={{ height: '50px' }} />
+      </div>
     </BoardingGrid>
   )
 }
