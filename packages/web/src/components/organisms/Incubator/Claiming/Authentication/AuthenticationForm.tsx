@@ -4,6 +4,7 @@ import { Form } from 'antd'
 
 import { Span, LinkB } from '../../Typography'
 import { Button } from '../../molecules/Button'
+import { ClipboardIcon } from '../../Icons'
 
 const AuthenticationContainer = styled.div`
   display: flex;
@@ -84,12 +85,21 @@ type CustomInputProps = {
   defaultValue?: number | string
 }
 
+const ClipboardIconContainer = styled.div`
+  position: absolute;
+  right: 0;
+  top: 12px;
+`
+
 export const CustomInput = ({ placeholder, label }: CustomInputProps) => {
   return (
     <InputContainer>
       <Form.Item name={label} noStyle>
         <Input id="pat" placeholder={placeholder || ''} />
       </Form.Item>
+      <ClipboardIconContainer>
+        <ClipboardIcon />
+      </ClipboardIconContainer>
     </InputContainer>
   )
 }
