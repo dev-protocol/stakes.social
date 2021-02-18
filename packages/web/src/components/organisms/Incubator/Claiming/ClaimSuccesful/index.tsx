@@ -68,7 +68,7 @@ const ClaimSuccesful = ({ onStateChange }: ClaimSuccesfulProps) => {
             </LogoContainer>
           </SpaceBetween>
           <hr color="#CCCCCC" />
-          <MintedTokens />
+          <MintedTokens isSucces={true} />
         </div>
         <SuccessMessageContainer>
           <Span color="#D500E6" fontSize="40px" fontWeight="bold">
