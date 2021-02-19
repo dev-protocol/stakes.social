@@ -161,7 +161,7 @@ const AuthenticationForm = ({ onStateChange }: AuthenticationProps) => {
         Authentication
       </Span>
       <Span style={{ paddingTop: '3em' }} fontSize="14px">
-        Repository’s Personal Access Token
+        Admin’s Personal Access Token
       </Span>
       <FormContainer style={{ paddingTop: '0.4em' }}>
         <Form
@@ -177,7 +177,7 @@ const AuthenticationForm = ({ onStateChange }: AuthenticationProps) => {
             rules={[{ required: true, message: 'Please enter a valid PAT' }]}
             key="pat"
           >
-            <CustomInput label="pat" placeholder="Paste a token from Github" />
+            <CustomInput label="pat" placeholder="Paste the PAT token from Github" />
           </FormItem>
 
           <Span fontSize="14px" color="#5B8BF5">
