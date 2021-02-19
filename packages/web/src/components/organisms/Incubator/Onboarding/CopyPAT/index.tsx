@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { Span } from 'src/components/organisms/Incubator/Typography'
+import { Span, LinkB } from 'src/components/organisms/Incubator/Typography'
 import Animation from './Animations'
 import { AnimationContainer, Container, DescriptionContainer, BoardingNavigation } from '../../molecules/Onboarding'
 
@@ -23,6 +23,14 @@ const CopyPat = ({ onActivePartChange }: CopyPatType) => {
           your Github Personal Access Token (PAT). If you like you can create a new PAT with no permissions. Our Khaos
           oracle confidentially authenticates your PAT so it remains secure!
         </Span>
+        <LinkB
+          rel="noopener noreferrer"
+          target="_blank"
+          href="https://github.com/settings/tokens/new"
+          style={{ paddingTop: '4em' }}
+        >
+          Create PAT
+        </LinkB>
       </DescriptionContainer>
       <BoardingNavigation
         backwardCallback={() => onActivePartChange(3)}

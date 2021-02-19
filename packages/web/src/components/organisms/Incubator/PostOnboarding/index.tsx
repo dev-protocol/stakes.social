@@ -24,13 +24,14 @@ type WhatsNextType = {
 
 const PostOnboarding = ({ isOverview }: WhatsNextType) => {
   const [activePart, setActivePart] = useState(1)
+  const { projectId } = { projectId: '0xF6899a1536E6474f0a6Aa2b36714e9632FB97D40' }
   return (
     <>
       {!isOverview && (
         <SpaceBetween style={{ paddingTop: '1em' }}>
           <Span fontSize="20px">{"What's next?"}</Span>
-          <Link href="/incubator">
-            <LinkB>{activePart === 5 ? 'Back to overview' : 'Skip'}</LinkB>
+          <Link href="/[propertyAddress]" as={`/${projectId}`} passHref>
+            <LinkB>{activePart === 5 ? 'To your project' : 'Skip'}</LinkB>
           </Link>
         </SpaceBetween>
       )}
