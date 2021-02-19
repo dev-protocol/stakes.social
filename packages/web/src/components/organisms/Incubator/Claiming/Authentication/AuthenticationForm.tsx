@@ -112,27 +112,9 @@ type AuthenticationProps = {
 const ProgressContainer = styled.div`
   position: absolute;
   top: 0;
-  right: 0;
-  transform: translateY(-75px);
+  left: 0;
+  transform: translateY(-50px);
   display: flex;
-`
-
-const ProgressItem = styled.div<{ isSelected?: boolean }>`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 40px;
-  width: 40px;
-  border-radius: 90px;
-  margin: 5px;
-
-  border: 1px solid black;
-  background: ${props => (props.isSelected ? 'black' : 'white')};
-  color: ${props => (props.isSelected ? 'white' : 'black')};
-
-  span {
-    transform: translateY(-2px);
-  }
 `
 
 const AuthenticationForm = ({ onStateChange }: AuthenticationProps) => {
@@ -150,12 +132,7 @@ const AuthenticationForm = ({ onStateChange }: AuthenticationProps) => {
   return (
     <AuthenticationContainer>
       <ProgressContainer>
-        <ProgressItem isSelected={true}>
-          <Span fontSize="32px">1</Span>
-        </ProgressItem>
-        <ProgressItem>
-          <Span fontSize="32px">2</Span>
-        </ProgressItem>
+        <Span fontSize="20px">First step</Span>
       </ProgressContainer>
       <Span fontSize="40px" fontWeight="bold">
         Authentication

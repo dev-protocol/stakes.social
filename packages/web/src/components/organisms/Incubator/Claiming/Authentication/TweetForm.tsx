@@ -117,23 +117,23 @@ const ProgressContainer = styled.div`
   display: flex;
 `
 
-const ProgressItem = styled.div<{ isSelected?: boolean }>`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 40px;
-  width: 40px;
-  border-radius: 90px;
-  margin: 5px;
+// const ProgressItem = styled.div<{ isSelected?: boolean }>`
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+//   height: 40px;
+//   width: 40px;
+//   border-radius: 90px;
+//   margin: 5px;
 
-  border: 1px solid black;
-  background: ${props => (props.isSelected ? 'black' : 'white')};
-  color: ${props => (props.isSelected ? 'white' : 'black')};
+//   border: 1px solid black;
+//   background: ${props => (props.isSelected ? 'black' : 'white')};
+//   color: ${props => (props.isSelected ? 'white' : 'black')};
 
-  span {
-    transform: translateY(-2px);
-  }
-`
+//   span {
+//     transform: translateY(-2px);
+//   }
+// `
 
 const TweetForm = ({ onStateChange }: AuthenticationProps) => {
   const [form] = Form.useForm()
@@ -150,12 +150,7 @@ const TweetForm = ({ onStateChange }: AuthenticationProps) => {
   return (
     <AuthenticationContainer>
       <ProgressContainer>
-        <ProgressItem>
-          <Span fontSize="32px">1</Span>
-        </ProgressItem>
-        <ProgressItem isSelected={true}>
-          <Span fontSize="32px">2</Span>
-        </ProgressItem>
+        <Span fontSize="20px">Last step</Span>
       </ProgressContainer>
       <SpaceBetween>
         <Span fontSize="40px" fontWeight="bold">
