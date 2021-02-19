@@ -1,8 +1,7 @@
 import React from 'react'
 import { Span } from '../../Typography'
-import { Button } from '../../molecules/Button'
-import BoardingGrid from '../../molecules/BoardingGrid'
-import AnimationContainer from '../../molecules/AnimationContainer'
+
+import { AnimationContainer, DescriptionContainer, Container, BoardingNavigation } from '../../molecules/Onboarding'
 
 const DevProtocolLogo = () => {
   return (
@@ -61,11 +60,11 @@ type PostOnboardType = {
 
 const WhatsDEV = ({ onActivePageChange }: PostOnboardType) => {
   return (
-    <BoardingGrid>
+    <Container>
       <AnimationContainer>
         <DevProtocolLogo />
       </AnimationContainer>
-      <div style={{ display: 'flex', flexDirection: 'column' }}>
+      <DescriptionContainer>
         <Span style={{ paddingTop: '3em' }} fontSize="24px" fontWeight="bold">
           What is DEV protocol?
         </Span>
@@ -74,11 +73,12 @@ const WhatsDEV = ({ onActivePageChange }: PostOnboardType) => {
           use Stakes Social to tokenize, obtain patrons, build communities, and incentive stakeholders in order to grow
           their project. Patrons use Stakes Social to stake the DEV token for OSS projects they support.
         </Span>
-      </div>
-      <div style={{ paddingBottom: '5em', gridColumn: '1/-1', display: 'flex', justifyContent: 'center' }}>
-        <Button onClick={() => onActivePageChange(2)}>Next</Button>
-      </div>
-    </BoardingGrid>
+      </DescriptionContainer>
+      <BoardingNavigation
+        backwardCallback={() => onActivePageChange(5)}
+        forwardCallback={() => onActivePageChange(2)}
+      />
+    </Container>
   )
 }
 

@@ -1,30 +1,8 @@
 import React from 'react'
-import styled from 'styled-components'
 
 import { Span, LinkB } from 'src/components/organisms/Incubator/Typography'
-import { Button } from 'src/components/organisms/Incubator/molecules/Button'
 import DownloadMetamaskAnimation from './Animations'
-import AnimationContainer from '../../molecules/AnimationContainer'
-
-const DownloadMetamaskContainer = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-gap: 1em 3em;
-
-  padding-top: 2em;
-`
-
-const DownloadMetamaskDescription = styled.div`
-  display: flex;
-  flex-direction: column;
-`
-
-const NextButtonContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  grid-column: 1/-1;
-  padding-bottom: 5em;
-`
+import { AnimationContainer, Container, DescriptionContainer, BoardingNavigation } from '../../molecules/Onboarding'
 
 type DownloadMetamaskType = {
   onActivePartChange: React.Dispatch<React.SetStateAction<number>>
@@ -32,11 +10,11 @@ type DownloadMetamaskType = {
 
 const DownloadMetamask = ({ onActivePartChange }: DownloadMetamaskType) => {
   return (
-    <DownloadMetamaskContainer>
+    <Container>
       <AnimationContainer>
         <DownloadMetamaskAnimation />
       </AnimationContainer>
-      <DownloadMetamaskDescription>
+      <DescriptionContainer>
         <Span style={{ paddingTop: '3em' }} fontWeight="bold" fontSize="24px">
           Download MetaMask
         </Span>
@@ -54,11 +32,12 @@ const DownloadMetamask = ({ onActivePartChange }: DownloadMetamaskType) => {
         >
           Download MetaMask Browser Extension for Chrome
         </LinkB>
-      </DownloadMetamaskDescription>
-      <NextButtonContainer>
-        <Button onClick={() => onActivePartChange(2)}>Next</Button>
-      </NextButtonContainer>
-    </DownloadMetamaskContainer>
+      </DescriptionContainer>
+      <BoardingNavigation
+        backwardCallback={() => onActivePartChange(5)}
+        forwardCallback={() => onActivePartChange(2)}
+      />
+    </Container>
   )
 }
 

@@ -1,37 +1,14 @@
 import React from 'react'
-import styled from 'styled-components'
 
 import { Span } from 'src/components/organisms/Incubator/Typography'
 import Animation from './Animations'
-import { Button } from '../../molecules/Button'
-import AnimationContainer from '../../molecules/AnimationContainer'
-
-const Container = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-gap: 1em 3em;
-
-  padding-top: 2em;
-`
-
-const DescriptionContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-`
-
-const NextButtonContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  grid-column: 1/-1;
-  padding-bottom: 5em;
-`
+import { Container, AnimationContainer, DescriptionContainer, BoardingNavigation } from '../../molecules/Onboarding'
 
 type SubmitTranscriptType = {
-  onStateChange: React.Dispatch<React.SetStateAction<string>>
-  isModal?: boolean
+  onActivePartChange: React.Dispatch<React.SetStateAction<number>>
 }
 
-const SubmitTransaction = ({ onStateChange, isModal }: SubmitTranscriptType) => {
+const SubmitTransaction = ({ onActivePartChange }: SubmitTranscriptType) => {
   return (
     <Container>
       <AnimationContainer>
@@ -47,10 +24,10 @@ const SubmitTransaction = ({ onStateChange, isModal }: SubmitTranscriptType) => 
           oracle will authenticate if it was successfully completed.
         </Span>
       </DescriptionContainer>
-      <NextButtonContainer>
-        {isModal && <Button onClick={() => onStateChange('authentication')}>Next</Button>}
-        {!isModal && <div style={{ height: '50px' }}></div>}
-      </NextButtonContainer>
+      <BoardingNavigation
+        backwardCallback={() => onActivePartChange(4)}
+        forwardCallback={() => onActivePartChange(1)}
+      />
     </Container>
   )
 }

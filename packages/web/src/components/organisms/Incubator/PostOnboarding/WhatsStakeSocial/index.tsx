@@ -1,8 +1,6 @@
 import React from 'react'
 import { Span } from '../../Typography'
-import { Button } from '../../molecules/Button'
-import BoardingGrid from '../../molecules/BoardingGrid'
-import AnimationContainer from '../../molecules/AnimationContainer'
+import { AnimationContainer, Container, DescriptionContainer, BoardingNavigation } from '../../molecules/Onboarding'
 
 type PostOnboardType = {
   onActivePageChange: React.Dispatch<React.SetStateAction<number>>
@@ -46,11 +44,11 @@ const StakesSocialLogo = () => {
 
 const WhatsStakesSocial = ({ onActivePageChange }: PostOnboardType) => {
   return (
-    <BoardingGrid>
+    <Container>
       <AnimationContainer>
         <StakesSocialLogo />
       </AnimationContainer>
-      <div style={{ display: 'flex', flexDirection: 'column' }}>
+      <DescriptionContainer>
         <Span style={{ paddingTop: '3em' }} fontSize="24px" fontWeight="bold">
           What is Stakes Social?
         </Span>
@@ -61,11 +59,12 @@ const WhatsStakesSocial = ({ onActivePageChange }: PostOnboardType) => {
           pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
           est laborum.
         </Span>
-      </div>
-      <div style={{ paddingBottom: '5em', gridColumn: '1/-1', display: 'flex', justifyContent: 'center' }}>
-        <Button onClick={() => onActivePageChange(3)}>Next</Button>
-      </div>
-    </BoardingGrid>
+      </DescriptionContainer>
+      <BoardingNavigation
+        backwardCallback={() => onActivePageChange(1)}
+        forwardCallback={() => onActivePageChange(3)}
+      />
+    </Container>
   )
 }
 

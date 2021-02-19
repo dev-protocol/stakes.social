@@ -1,30 +1,8 @@
 import React from 'react'
-import styled from 'styled-components'
 
 import { Span } from 'src/components/organisms/Incubator/Typography'
-import { Button } from 'src/components/organisms/Incubator/molecules/Button'
 import Animation from './Animations'
-import AnimationContainer from '../../molecules/AnimationContainer'
-
-const Container = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-gap: 1em 3em;
-
-  padding-top: 2em;
-`
-
-const DescriptionContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-`
-
-const NextButtonContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  grid-column: 1/-1;
-  padding-bottom: 5em;
-`
+import { AnimationContainer, Container, DescriptionContainer, BoardingNavigation } from '../../molecules/Onboarding'
 
 type PurchaseEthereumType = {
   onActivePartChange: React.Dispatch<React.SetStateAction<number>>
@@ -46,9 +24,10 @@ const PurchaseEthereum = ({ onActivePartChange }: PurchaseEthereumType) => {
           required steps and your ETH will be sent to your wallet once your purchase is successful.
         </Span>
       </DescriptionContainer>
-      <NextButtonContainer>
-        <Button onClick={() => onActivePartChange(3)}>Next</Button>
-      </NextButtonContainer>
+      <BoardingNavigation
+        backwardCallback={() => onActivePartChange(1)}
+        forwardCallback={() => onActivePartChange(3)}
+      />
     </Container>
   )
 }

@@ -293,7 +293,7 @@ const OnboardingSection = ({ isModal, onStateChange }: OnboardingSectionProps) =
           {activePart === 2 && <PurchaseEthereum onActivePartChange={setActivePart} />}
           {activePart === 3 && <ConnectWallet onActivePartChange={setActivePart} />}
           {activePart === 4 && <CopyPat onActivePartChange={setActivePart} />}
-          {activePart === 5 && <SubmitTransaction isModal={isModal} onStateChange={onStateChange} />}
+          {activePart === 5 && <SubmitTransaction onActivePartChange={setActivePart} />}
         </>
       )}
 

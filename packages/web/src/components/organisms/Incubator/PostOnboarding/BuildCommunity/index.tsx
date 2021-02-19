@@ -1,16 +1,19 @@
 import React from 'react'
 import { Span } from '../../Typography'
 import BuildCommunityAnimation from './Animations'
-import BoardingGrid from '../../molecules/BoardingGrid'
-import AnimationContainer from '../../molecules/AnimationContainer'
+import { AnimationContainer, Container, DescriptionContainer, BoardingNavigation } from '../../molecules/Onboarding'
 
-const BuildCommunity = () => {
+type PostOnboardType = {
+  onActivePageChange: React.Dispatch<React.SetStateAction<number>>
+}
+
+const BuildCommunity = ({ onActivePageChange }: PostOnboardType) => {
   return (
-    <BoardingGrid>
+    <Container>
       <AnimationContainer>
         <BuildCommunityAnimation />
       </AnimationContainer>
-      <div style={{ display: 'flex', flexDirection: 'column' }}>
+      <DescriptionContainer>
         <Span style={{ paddingTop: '3em' }} fontSize="24px" fontWeight="bold">
           Build a community to stake DEV tokens for you
         </Span>
@@ -21,11 +24,12 @@ const BuildCommunity = () => {
           pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
           est laborum.
         </Span>
-      </div>
-      <div style={{ paddingBottom: '5em', gridColumn: '1/-1', display: 'flex', justifyContent: 'center' }}>
-        <div style={{ height: '50px' }} />
-      </div>
-    </BoardingGrid>
+      </DescriptionContainer>
+      <BoardingNavigation
+        backwardCallback={() => onActivePageChange(4)}
+        forwardCallback={() => onActivePageChange(1)}
+      />
+    </Container>
   )
 }
 

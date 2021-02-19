@@ -1,8 +1,6 @@
 import React from 'react'
 import { Span } from '../../Typography'
-import { Button } from '../../molecules/Button'
-import BoardingGrid from '../../molecules/BoardingGrid'
-import AnimationContainer from '../../molecules/AnimationContainer'
+import { AnimationContainer, Container, DescriptionContainer, BoardingNavigation } from '../../molecules/Onboarding'
 
 type PostOnboardType = {
   onActivePageChange: React.Dispatch<React.SetStateAction<number>>
@@ -27,11 +25,11 @@ const OssTokenLogo = () => {
 
 const OssTokenExplanation = ({ onActivePageChange }: PostOnboardType) => {
   return (
-    <BoardingGrid>
+    <Container>
       <AnimationContainer>
         <OssTokenLogo />
       </AnimationContainer>
-      <div style={{ display: 'flex', flexDirection: 'column' }}>
+      <DescriptionContainer>
         <Span style={{ paddingTop: '3em' }} fontSize="24px" fontWeight="bold">
           How your OSS token works
         </Span>
@@ -42,11 +40,12 @@ const OssTokenExplanation = ({ onActivePageChange }: PostOnboardType) => {
           pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
           est laborum.
         </Span>
-      </div>
-      <div style={{ paddingBottom: '5em', gridColumn: '1/-1', display: 'flex', justifyContent: 'center' }}>
-        <Button onClick={() => onActivePageChange(5)}>Next</Button>
-      </div>
-    </BoardingGrid>
+      </DescriptionContainer>
+      <BoardingNavigation
+        backwardCallback={() => onActivePageChange(3)}
+        forwardCallback={() => onActivePageChange(5)}
+      />
+    </Container>
   )
 }
 

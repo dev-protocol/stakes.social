@@ -88,7 +88,7 @@ const PostOnboarding = ({ isOverview }: WhatsNextType) => {
 
       {activePart === 4 && <OssTokenExplanation onActivePageChange={setActivePart} />}
 
-      {activePart === 5 && <BuildCommunity />}
+      {activePart === 5 && <BuildCommunity onActivePageChange={setActivePart} />}
     </>
   )
 }
