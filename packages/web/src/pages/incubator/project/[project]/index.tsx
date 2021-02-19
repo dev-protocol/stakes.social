@@ -61,6 +61,7 @@ const Contact = styled.div`
   flex-direction: column;
 `
 const LinkB = styled.a`
+  font-family: WhyteInktrap;
   text-decoration: none;
   height: fit-content;
   padding: 2px;
@@ -207,7 +208,11 @@ const ProjectDetails = ({
         <Span fontSize="20px">{ipsum.generateSentences(9)}</Span>
         <LabelContainer>
           {LABEL_PLACEHOLDERS.map((label, index) => {
-            return <FilterOption key={index}>{label}</FilterOption>
+            return (
+              <FilterOption key={index}>
+                <Span fontSize="20px">{label}</Span>
+              </FilterOption>
+            )
           })}
         </LabelContainer>
       </DescriptionContainer>
@@ -245,11 +250,11 @@ const OnboardSwitch = ({ isOnboarding, onOnboardChange }: OnboardSwitchType) => 
   return (
     <OnboardSwitchContainer>
       <OnboardEntry onClick={() => onOnboardChange(true)} isActive={isOnboarding}>
-        Onboarding
+        <Span fontSize="20px">Onboarding</Span>
       </OnboardEntry>
       <div style={{ paddingRight: '3em', marginRight: '3em', borderRight: '1px solid black' }} />
       <OnboardEntry onClick={() => onOnboardChange(false)} isActive={!isOnboarding}>
-        Post-Onboarding
+        <Span fontSize="20px">Post-Onboarding</Span>
       </OnboardEntry>
     </OnboardSwitchContainer>
   )

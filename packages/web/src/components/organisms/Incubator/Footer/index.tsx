@@ -56,23 +56,23 @@ export const Footer = () => {
             </Span>
             <SocialContainer>
               <SocialMediaLink target="_blank" rel="noopener noreferrer" href="https://twitter.com/devprtcl">
-                Twitter
+                <Span fontSize="20px">Twitter</Span>
               </SocialMediaLink>
               <SocialMediaLink target="_blank" rel="noopener noreferrer" href="https://discord.gg/VwJp4KM">
-                Discord
+                <Span fontSize="20px">Discord</Span>
               </SocialMediaLink>
               <SocialMediaLink
                 target="_blank"
                 rel="noopener noreferrer"
                 href="https://github.com/dev-protocol/stakes.social"
               >
-                GitHub
+                <Span fontSize="20px">GitHub</Span>
               </SocialMediaLink>
               <SocialMediaLink target="_blank" rel="noopener noreferrer" href="https://t.me/devprtcl">
-                Telegram
+                <Span fontSize="20px">Telegram</Span>
               </SocialMediaLink>
               <SocialMediaLink target="_blank" rel="noopener noreferrer" href="https://medium.com/devtoken">
-                Medium
+                <Span fontSize="20px">Medium</Span>
               </SocialMediaLink>
             </SocialContainer>
           </div>

@@ -26,6 +26,7 @@ const ConnectWalletContainer = styled.div`
 `
 
 const HeaderLink = styled.a<{ color?: string }>`
+  font-family: WhyteInktrap;
   text-decoration: none;
   color: ${props => (props.color ? props.color : 'black')};
 `

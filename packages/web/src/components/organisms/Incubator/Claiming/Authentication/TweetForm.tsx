@@ -112,28 +112,10 @@ type AuthenticationProps = {
 const ProgressContainer = styled.div`
   position: absolute;
   top: 0;
-  right: 0;
+  left: 0;
   transform: translateY(-75px);
   display: flex;
 `
-
-// const ProgressItem = styled.div<{ isSelected?: boolean }>`
-//   display: flex;
-//   justify-content: center;
-//   align-items: center;
-//   height: 40px;
-//   width: 40px;
-//   border-radius: 90px;
-//   margin: 5px;
-
-//   border: 1px solid black;
-//   background: ${props => (props.isSelected ? 'black' : 'white')};
-//   color: ${props => (props.isSelected ? 'white' : 'black')};
-
-//   span {
-//     transform: translateY(-2px);
-//   }
-// `
 
 const TweetForm = ({ onStateChange }: AuthenticationProps) => {
   const [form] = Form.useForm()

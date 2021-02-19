@@ -250,16 +250,16 @@ const ProjectOverview = () => {
             filter="Infrastructure"
             activeFilter={activeFilter}
           >
-            Infrastructure
+            <Span fontSize="24px">Infrastructure</Span>
           </FilterOption>
           <FilterOption onClick={() => handleFilterChange('Hosting')} filter="Hosting" activeFilter={activeFilter}>
-            Hosting
+            <Span fontSize="24px">Hosting</Span>
           </FilterOption>
           <FilterOption onClick={() => handleFilterChange('Crypto')} filter="Crypto" activeFilter={activeFilter}>
-            Crypto OSS
+            <Span fontSize="24px">Crypto OSS</Span>
           </FilterOption>
           <FilterOption onClick={() => handleFilterChange('Women')} filter="Women" activeFilter={activeFilter}>
-            Women that code
+            <Span fontSize="24px">Women that code</Span>
           </FilterOption>
         </FilterOptions>
         <Overview>

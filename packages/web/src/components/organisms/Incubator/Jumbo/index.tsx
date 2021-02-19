@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import Countdown, { CountdownRenderProps } from 'react-countdown'
 
-import { Span } from 'src/components/organisms/Incubator/Typography'
+import { Span, LinkB } from 'src/components/organisms/Incubator/Typography'
 import { useCurrency } from 'src/fixtures/currency/hooks'
 
 const JumboContainer = styled.div`
@@ -84,7 +84,7 @@ const Jumbo = () => {
   return (
     <JumboContainer>
       <TitleContainer>
-        <Span fontSize="80px" fontWeight="bold">
+        <Span fontSize="40px" fontWeight="bold">
           Funding the World’s
         </Span>
         <Span fontSize="40px" fontWeight="bold">
@@ -100,9 +100,9 @@ const Jumbo = () => {
           <Span fontSize="24px">most critical Open Source projects.</Span>
         </SubTitleContainer>
         <QualificationMethodologyContainer>
-          <a href="https://docs.devprtcl.com" target="_blank" rel="noreferrer">
+          <LinkB href="https://docs.devprtcl.com" target="_blank" rel="noreferrer">
             Qualification Methodology
-          </a>
+          </LinkB>
         </QualificationMethodologyContainer>
       </div>
       <RoundRewardContainer>

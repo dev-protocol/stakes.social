@@ -28,6 +28,7 @@ export default class extends Document {
       <Html lang="ja">
         <Head>
           <meta charSet="utf-8" />
+          <link href="/fonts/style.css" rel="stylesheet" />
           <link rel="stylesheet" href="https://use.typekit.net/owg1uzy.css" />
           <link rel="apple-touch-icon" sizes="57x57" href="//asset.stakes.social/apple-icon-57x57.png" />
           <link rel="apple-touch-icon" sizes="60x60" href="//asset.stakes.social/apple-icon-60x60.png" />
