@@ -96,8 +96,11 @@ const Jumbo = () => {
       </TitleContainer>
       <div style={{ display: 'flex', justifyContent: 'space-between', flexDirection: 'column' }}>
         <SubTitleContainer>
-          <Span fontSize="24px">{"Dev Protocol's Incubator provides funding to the"}</Span>
-          <Span fontSize="24px">most critical Open Source projects.</Span>
+          <Span fontSize="24px">
+            {
+              "Dev Protocol's Incubator provides funding to Open source software projects tackling large problems with inadequate resources."
+            }
+          </Span>
         </SubTitleContainer>
         <QualificationMethodologyContainer>
           <LinkB href="https://docs.devprtcl.com" target="_blank" rel="noreferrer">
