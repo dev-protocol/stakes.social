@@ -84,7 +84,7 @@ const Jumbo = () => {
   return (
     <JumboContainer>
       <TitleContainer>
-        <Span fontSize="40px" fontWeight="bold">
+        <Span fontSize="80px" fontWeight="bold">
           Funding the World’s
         </Span>
         <Span fontSize="40px" fontWeight="bold">

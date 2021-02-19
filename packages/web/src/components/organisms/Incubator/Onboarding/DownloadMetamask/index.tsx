@@ -15,10 +15,10 @@ const DownloadMetamask = ({ onActivePartChange }: DownloadMetamaskType) => {
         <DownloadMetamaskAnimation />
       </AnimationContainer>
       <DescriptionContainer>
-        <Span style={{ paddingTop: '3em' }} fontWeight="bold" fontSize="24px">
+        <Span style={{ paddingTop: '3em', fontFamily: 'WhyteInktrap' }} fontWeight="bold" fontSize="24px">
           Download MetaMask
         </Span>
-        <Span style={{ paddingTop: '3em' }} fontSize="16px">
+        <Span style={{ paddingTop: '3em', fontFamily: 'WhyteInktrap' }} fontSize="16px">
           MetaMask is a blockchain wallet used to interact with the Ethereum blockchain. It allows users to store and
           manage account keys, broadcast transactions, send and receive Ethereum-based cryptocurrencies and tokens, and
           securely connect to decentralized applications through a compatible web browser or the mobile {"app's"}{' '}

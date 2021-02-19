@@ -271,7 +271,7 @@ const OnboardingSection = ({ isModal, onStateChange }: OnboardingSectionProps) =
   return (
     <>
       <SpaceBetween style={{ alignItems: 'center', paddingTop: '1em' }}>
-        <Span fontSize="20px">{isOnboarding ? 'How to get your reward?' : "What's next?"}</Span>
+        <Span fontSize="20px">{isOnboarding ? 'How to receive your funding?' : "What's next?"}</Span>
         {isModal ? (
           <LinkB onClick={() => onStateChange('authentication')} style={{ fontSize: '20px' }}>
             Skip
