@@ -2,12 +2,15 @@ import Web3 from 'web3'
 import { EventData } from 'web3-eth-contract'
 import { contractFactory } from '@devprotocol/dev-kit'
 import { getContractAddress } from './get-contract-address'
-import { client as devClient } from '@devprotocol/dev-kit'
+import { client as devClient, utils } from '@devprotocol/dev-kit'
 import BigNumber from 'bignumber.js'
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { PropertyFactoryContract } from '@devprotocol/dev-kit'
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { UnwrapFunc } from '../utility'
+import { metricsAbi, metricsFactoryAbi } from './abi'
+
+const { execute, watchEvent } = utils
 
 const newClient = (web3: Web3) => {
   return contractFactory(web3.currentProvider)
@@ -232,6 +235,43 @@ export const balanceOfProperty = async (web3: Web3, propertyAddress: string, acc
   const client = newClient(web3)
   if (client && accountAddress) {
     return client.property(propertyAddress).contract().methods.balanceOf(accountAddress).call()
+  }
+  return undefined
+}
+
+const getMetricsProperty = async (address: string, client: Web3): Promise<string> =>
+  execute({
+    contract: new client.eth.Contract([...metricsAbi], address),
+    method: 'property'
+  })
+
+export const waitForCreateMetrics = async (web3: Web3): Promise<string> => {
+  const client = newClient(web3)
+  const [fromBlock, metricsFactoryAddress] = await Promise.all([
+    web3.eth.getBlockNumber(),
+    getContractAddress(client, 'metricsFactory')
+  ])
+  return new Promise((resolve, reject) => {
+    watchEvent({
+      fromBlock,
+      contract: new web3.eth.Contract([...metricsFactoryAbi], metricsFactoryAddress),
+      resolver: async e =>
+        (metricsAddress =>
+          metricsAddress
+            ? getMetricsProperty(metricsAddress, web3)
+                .then(property => (property ? true : false))
+                .catch(reject)
+            : false)(e.event === 'Create' ? (e.returnValues._metrics as string) : undefined)
+    })
+      .then(res => resolve(res.returnValues._metrics as string))
+      .catch(reject)
+  })
+}
+
+export const wrapWaitForCreateMetrics = async (web3: Web3, propertyAddress: string, accountAddress: string) => {
+  const client = newClient(web3)
+  if (client) {
+    return await getContractAddress(client, 'metricsFactory')
   }
   return undefined
 }
