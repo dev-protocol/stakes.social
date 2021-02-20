@@ -126,30 +126,6 @@ const PLACHEOLDER_DATA = [
     funding: 19000,
     url: 'https://res.cloudinary.com/haas-storage/image/upload/v1613045322/chain_safe_ohqczw.png',
     tags: []
-  },
-  {
-    title: 'ZeroPool',
-    funding: 23000,
-    url: 'https://res.cloudinary.com/haas-storage/image/upload/v1613043066/zeropool_lykmbs.png',
-    tags: []
-  },
-  {
-    title: 'Redux-Saga',
-    funding: 76000,
-    url: 'https://res.cloudinary.com/haas-storage/image/upload/v1613045672/redux_sage_sxncfk.png',
-    tags: []
-  },
-  {
-    title: 'Jekyll',
-    funding: 38000,
-    url: 'https://res.cloudinary.com/haas-storage/image/upload/v1613045746/jekyll_jpzssa.png',
-    tags: ['Hosting']
-  },
-  {
-    title: 'BoostNode',
-    funding: 7500,
-    url: 'https://res.cloudinary.com/haas-storage/image/upload/v1613045786/boostnode_n7hjmr.png',
-    tags: ['Crypto']
   }
 ]
 
