@@ -4,7 +4,7 @@ import { Form } from 'antd'
 
 import { Span, LinkB } from '../../Typography'
 import { Button } from '../../molecules/Button'
-import { ClipboardIcon, TwitterIcon } from '../../Icons'
+import { ClipboardIcon, TwitterBird } from '../../Icons'
 
 const AuthenticationContainer = styled.div`
   position: relative;
@@ -117,6 +117,41 @@ const ProgressContainer = styled.div`
   display: flex;
 `
 
+const TweetContainer = styled.div`
+  position: relative;
+  font-size: 20px;
+  margin-top: 2em;
+  padding: 15px 40px 30px 20px;
+  border-radius: 16px;
+  border: 1px solid #1da1f2;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+`
+
+const TwitterBirdContainer = styled.div`
+  position: absolute;
+  top: 7.5px;
+  right: 7.5px;
+`
+
+const TweetButtonContainer = styled.div`
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  transform: translate(-20px, 50%);
+`
+
+const TweetButton = styled(Button)`
+  border-radius: 24px;
+  width: 120px;
+  height: 48px;
+  color: white;
+  background: #1da1f2;
+
+  :hover {
+    background: #1da1f2;
+  }
+`
+
 const TweetForm = ({ onStateChange }: AuthenticationProps) => {
   const [form] = Form.useForm()
   const onSubmit = (data: any) => {
@@ -129,6 +164,8 @@ const TweetForm = ({ onStateChange }: AuthenticationProps) => {
     setIsError(true)
   }
 
+  const { project } = { project: 'Sigma' }
+
   return (
     <AuthenticationContainer>
       <ProgressContainer>
@@ -138,8 +175,24 @@ const TweetForm = ({ onStateChange }: AuthenticationProps) => {
         <Span fontSize="40px" fontWeight="bold">
           Tweet it!
         </Span>
-        <TwitterIcon />
       </SpaceBetween>
+      <TweetContainer>
+        <TwitterBirdContainer>
+          <TwitterBird />
+        </TwitterBirdContainer>
+        <Span fontSize="20px">
+          {project} just received $20,000 in funding from the{' '}
+          <Span fontSize="20px" style={{ color: '#D500E6' }}>
+            @devprtcl
+          </Span>{' '}
+          Incubator. Follow the link below to support us and earn by staking DEV tokens.
+        </Span>
+        <TweetButtonContainer>
+          <TweetButton>
+            <Span fontSize="20px">Submit</Span>
+          </TweetButton>
+        </TweetButtonContainer>
+      </TweetContainer>
       <Span fontSize="20px" style={{ paddingTop: '2em' }}>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
         magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
