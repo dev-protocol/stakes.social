@@ -14,7 +14,7 @@ export const StepSpan = styled(Span)<{
 }>`
   position: absolute;
   bottom: 50px;
-  width: 50px;
+  width: 55px;
   color: ${({ isCurrent, isFinished, currentColor, finishedColor }) => {
     if (isCurrent) {
       return currentColor || '#5B8BF5'

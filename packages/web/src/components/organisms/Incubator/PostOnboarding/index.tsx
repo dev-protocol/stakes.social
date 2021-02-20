@@ -38,7 +38,7 @@ const PostOnboarding = ({ isOverview }: WhatsNextType) => {
 
       <TimelineContainer style={{ alignSelf: 'center' }}>
         <TimelineSection
-          StepSpanComponent={(info: any) => <Step info={{ ...info, width: '40px', fontSize: '16px' }}>Tip 1</Step>}
+          StepSpanComponent={(info: any) => <Step info={{ ...info, width: '50px', fontSize: '16px' }}>Tip 1</Step>}
           isFirst={true}
           part={1}
           onActivePartChange={setActivePart}
@@ -47,7 +47,7 @@ const PostOnboarding = ({ isOverview }: WhatsNextType) => {
           finishedColor="black"
         />
         <TimelineSection
-          StepSpanComponent={(info: any) => <Step info={{ ...info, width: '40px', fontSize: '16px' }}>Tip 2</Step>}
+          StepSpanComponent={(info: any) => <Step info={{ ...info, width: '50px', fontSize: '16px' }}>Tip 2</Step>}
           part={2}
           onActivePartChange={setActivePart}
           currentPart={activePart}
@@ -55,7 +55,7 @@ const PostOnboarding = ({ isOverview }: WhatsNextType) => {
           finishedColor="black"
         />
         <TimelineSection
-          StepSpanComponent={(info: any) => <Step info={{ ...info, width: '40px', fontSize: '16px' }}>Tip 3</Step>}
+          StepSpanComponent={(info: any) => <Step info={{ ...info, width: '50px', fontSize: '16px' }}>Tip 3</Step>}
           part={3}
           onActivePartChange={setActivePart}
           currentPart={activePart}
@@ -63,7 +63,7 @@ const PostOnboarding = ({ isOverview }: WhatsNextType) => {
           finishedColor="black"
         />
         <TimelineSection
-          StepSpanComponent={(info: any) => <Step info={{ ...info, width: '40px', fontSize: '16px' }}>Tip 4</Step>}
+          StepSpanComponent={(info: any) => <Step info={{ ...info, width: '50px', fontSize: '16px' }}>Tip 4</Step>}
           part={4}
           onActivePartChange={setActivePart}
           currentPart={activePart}
@@ -71,7 +71,7 @@ const PostOnboarding = ({ isOverview }: WhatsNextType) => {
           finishedColor="black"
         />
         <TimelineSection
-          StepSpanComponent={(info: any) => <Step info={{ ...info, width: '40px', fontSize: '16px' }}>Tip 5</Step>}
+          StepSpanComponent={(info: any) => <Step info={{ ...info, width: '50px', fontSize: '16px' }}>Tip 5</Step>}
           isLast={true}
           part={5}
           onActivePartChange={setActivePart}
