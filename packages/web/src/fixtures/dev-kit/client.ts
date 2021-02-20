@@ -267,11 +267,3 @@ export const waitForCreateMetrics = async (web3: Web3): Promise<string> => {
       .catch(reject)
   })
 }
-
-export const wrapWaitForCreateMetrics = async (web3: Web3, propertyAddress: string, accountAddress: string) => {
-  const client = newClient(web3)
-  if (client) {
-    return await getContractAddress(client, 'metricsFactory')
-  }
-  return undefined
-}
