@@ -113,7 +113,7 @@ const ProgressContainer = styled.div`
   position: absolute;
   top: 0;
   left: 0;
-  transform: translateY(-50px);
+  transform: translateY(-35px);
   display: flex;
 `
 
@@ -132,7 +132,9 @@ const AuthenticationForm = ({ onStateChange }: AuthenticationProps) => {
   return (
     <AuthenticationContainer>
       <ProgressContainer>
-        <Span fontSize="20px">First step</Span>
+        <Span fontSize="16px" color="#999999">
+          First step
+        </Span>
       </ProgressContainer>
       <Span fontSize="40px" fontWeight="bold">
         Authentication

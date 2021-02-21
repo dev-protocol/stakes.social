@@ -5,6 +5,7 @@ import { Form } from 'antd'
 import { Span, LinkB } from '../../Typography'
 import { Button } from '../../molecules/Button'
 import { ClipboardIcon, TwitterBird } from '../../Icons'
+import DownArrow from '../../molecules/DownArrow'
 
 const AuthenticationContainer = styled.div`
   position: relative;
@@ -75,7 +76,7 @@ export const Input = styled.input`
 
   &:focus {
     transition: all 0.2s ease-in;
-    border-bottom: 2px solid #5b8bf5;
+    border-bottom: 2px solid black;
     /* box-shadow: 0 0 0 1px grey; */
   }
 `
@@ -113,14 +114,14 @@ const ProgressContainer = styled.div`
   position: absolute;
   top: 0;
   left: 0;
-  transform: translateY(-75px);
+  transform: translateY(-35px);
   display: flex;
 `
 
 const TweetContainer = styled.div`
   position: relative;
   font-size: 20px;
-  margin-top: 2em;
+  margin-top: 1em;
   padding: 15px 40px 30px 20px;
   border-radius: 16px;
   border: 1px solid #1da1f2;
@@ -169,7 +170,9 @@ const TweetForm = ({ onStateChange }: AuthenticationProps) => {
   return (
     <AuthenticationContainer>
       <ProgressContainer>
-        <Span fontSize="20px">Last step</Span>
+        <Span fontSize="16px" color="#999999">
+          Last step
+        </Span>
       </ProgressContainer>
       <SpaceBetween>
         <Span fontSize="40px" fontWeight="bold">
@@ -193,13 +196,17 @@ const TweetForm = ({ onStateChange }: AuthenticationProps) => {
           </TweetButton>
         </TweetButtonContainer>
       </TweetContainer>
-      <Span fontSize="20px" style={{ paddingTop: '2em' }}>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-        magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-        consequat.{' '}
-      </Span>
-      <Span style={{ paddingTop: '3em' }} fontSize="14px">
-        Repository’s Personal Access Token
+      <div style={{ display: 'grid', gridTemplateColumns: 'auto 1fr', marginTop: '3em' }}>
+        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', padding: '0 20px' }}>
+          <DownArrow />
+        </div>
+        <Span fontSize="14px" color="#5B8BF5">
+          The last step is to share the news with your community. Once completed paste the url below and click “Done”.
+        </Span>
+      </div>
+
+      <Span style={{ paddingTop: '2em' }} fontSize="14px">
+        Twitter Post URL
       </Span>
       <FormContainer style={{ paddingTop: '0.4em' }}>
         <Form
@@ -211,33 +218,15 @@ const TweetForm = ({ onStateChange }: AuthenticationProps) => {
         >
           <FormItem
             isError={isError}
-            name="pat"
-            rules={[{ required: true, message: 'Please enter a valid PAT' }]}
-            key="pat"
+            name="twitter"
+            rules={[{ required: true, message: 'Please enter a valid twitter URL' }]}
+            key="twitter"
           >
-            <CustomInput label="pat" placeholder="Paste a token from Github" />
+            <CustomInput label="twitter" placeholder="Paste the url of the Twitter post " />
           </FormItem>
 
-          <Span fontSize="14px" color="#5B8BF5">
-            The Khaos Oracle confidentially authenticates your Github Personal Access Token. Please see
-            <OurDocsLink rel="noopener noreferrer" target="_blank" href="https://github.com/dev-protocol/khaos">
-              {' '}
-              our docs
-            </OurDocsLink>{' '}
-            for more details.
-          </Span>
-
-          <div style={{ paddingTop: '2.5em' }}>
-            <SpaceBetween style={{ alignItems: 'center' }}>
-              <div style={{ height: 'fit-content' }}>
-                <LinkB rel="noopener noreferrer" target="_blank" href="https://github.com/settings/tokens/new">
-                  Create a PAT
-                </LinkB>
-              </div>
-
-              {/* <Button type="submit">Submit</Button> */}
-              <Button onClick={() => onStateChange('loading')}>Submit</Button>
-            </SpaceBetween>
+          <div style={{ display: 'flex', justifyContent: 'flex-end', paddingTop: '2.5em' }}>
+            <Button onClick={() => onStateChange('loading')}>Done</Button>
           </div>
         </Form>
       </FormContainer>
