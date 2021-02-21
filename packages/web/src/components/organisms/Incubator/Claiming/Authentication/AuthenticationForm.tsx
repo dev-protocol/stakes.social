@@ -14,6 +14,7 @@ const AuthenticationContainer = styled.div`
 
 const FormContainer = styled.div`
   display: grid;
+  height: 446px;
   width: 100%;
   align-self: center;
   grid-gap: 1rem;
@@ -160,9 +161,8 @@ const AuthenticationForm = ({ onStateChange }: AuthenticationProps) => {
           </FormItem>
 
           <Span fontSize="14px" color="#5B8BF5">
-            The Khaos Oracle confidentially authenticates your Github Personal Access Token. Please see
+            The Khaos Oracle confidentially authenticates your Github Personal Access Token. Please see{' '}
             <OurDocsLink rel="noopener noreferrer" target="_blank" href="https://github.com/dev-protocol/khaos">
-              {' '}
               our docs
             </OurDocsLink>{' '}
             for more details.

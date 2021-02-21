@@ -32,6 +32,7 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
+  height: 100%;
   margin: 0 auto;
   max-width: 1200px;
 `
@@ -39,6 +40,7 @@ const Container = styled.div`
 const BackArrowContainer = styled.div`
   display: flex;
   padding: 1em 0 3em 0;
+  height: 94px;
 
   > svg {
     cursor: pointer;
@@ -49,6 +51,7 @@ const DetailsContainer = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-gap: 5em;
+  margin-bottom: 3em;
 `
 
 const SpaceBetween = styled.div`
@@ -276,7 +279,7 @@ const OnboardingSection = ({ isModal, onStateChange, onBoardChange, isOnboarding
 
   return (
     <>
-      <SpaceBetween style={{ alignItems: 'center', paddingTop: '1em' }}>
+      <SpaceBetween style={{ alignItems: 'center' }}>
         <Span fontSize="16px">{'How to receive your funding?'}</Span>
 
         <TimelineContainer style={{ alignSelf: 'center' }}>
@@ -331,12 +334,10 @@ const OnboardingPage = () => {
     }
   }, [currentState, authenticationProgress])
 
-  console.log('isOnboarding: ', isOnboarding)
-
   return (
     <div style={{ position: 'relative', display: 'flex', minHeight: '100vh', flexDirection: 'column' }}>
       <IncubatorHeader />
-      <Container style={{ paddingBottom: '4em', flexGrow: 1 }}>
+      <Container style={{ flexGrow: 1 }}>
         <BackArrowContainer>
           {currentState === 'overview' && (
             <Link href="/incubator" as="/incubator" passHref>

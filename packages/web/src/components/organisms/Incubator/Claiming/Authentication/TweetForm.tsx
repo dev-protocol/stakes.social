@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import styled from 'styled-components'
 import { Form } from 'antd'
 
-import { Span, LinkB } from '../../Typography'
+import { Span } from '../../Typography'
 import { Button } from '../../molecules/Button'
 import { ClipboardIcon, TwitterBird } from '../../Icons'
 import DownArrow from '../../molecules/DownArrow'
@@ -11,6 +11,7 @@ const AuthenticationContainer = styled.div`
   position: relative;
   display: flex;
   flex-direction: column;
+  height: 572px;
 `
 
 const FormContainer = styled.div`
@@ -18,18 +19,6 @@ const FormContainer = styled.div`
   width: 100%;
   align-self: center;
   grid-gap: 1rem;
-`
-
-const OurDocsLink = styled.a`
-  font-size: 14px;
-  text-decoration: none;
-  color: #5b8bf5;
-  padding-bottom: 1px;
-  border-bottom: 1px solid #5b8bf5;
-
-  :hover {
-    color: #5b8bf5;
-  }
 `
 
 const SpaceBetween = styled.div`

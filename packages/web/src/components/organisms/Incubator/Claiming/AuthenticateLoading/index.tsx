@@ -10,6 +10,7 @@ const AuthenticateLoadingContainer = styled.div`
   padding-top: 3em;
   grid-template-columns: 1fr 1fr;
   grid-column-gap: 1em;
+  height: 572px;
 `
 
 const LoadingContainer = styled.div`

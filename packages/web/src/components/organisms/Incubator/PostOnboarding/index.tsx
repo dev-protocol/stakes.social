@@ -30,7 +30,7 @@ const PostOnboarding = ({ isOverview, isOnboarding, onBoardChange }: WhatsNextTy
   const { projectId } = { projectId: '0xF6899a1536E6474f0a6Aa2b36714e9632FB97D40' }
   return (
     <>
-      <SpaceBetween style={{ alignItems: 'center', paddingTop: '1em' }}>
+      <SpaceBetween style={{ alignItems: 'center' }}>
         <Span fontSize="16px">{"What's next?"}</Span>
         <TimelineContainer style={{ alignSelf: 'center' }}>
           <TimelineSection

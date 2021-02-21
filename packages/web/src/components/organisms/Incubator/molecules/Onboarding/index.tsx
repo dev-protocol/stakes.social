@@ -33,9 +33,7 @@ export const DescriptionContainer = styled.div`
 export const Container = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-template-areas:
-    'animation description'
-    '. navigation';
+  grid-template-areas: 'animation description';
   grid-gap: 1em 3em;
 
   padding-top: 2em;

@@ -48,7 +48,7 @@ const ClaimSuccesful = ({ onStateChange }: ClaimSuccesfulProps) => {
 
   return (
     <>
-      <DetailsContainer>
+      <DetailsContainer style={{ height: '572px' }}>
         <div>
           <SpaceBetween style={{ paddingBottom: '4.5em' }}>
             <Contact>
