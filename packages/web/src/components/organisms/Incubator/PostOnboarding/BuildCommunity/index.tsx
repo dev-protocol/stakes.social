@@ -14,7 +14,7 @@ const BuildCommunity = ({ onActivePageChange }: PostOnboardType) => {
         <BuildCommunityAnimation />
       </AnimationContainer>
       <DescriptionContainer>
-        <Span style={{ paddingTop: '3em' }} fontSize="24px" fontWeight="bold">
+        <Span fontSize="24px" fontWeight="bold">
           Build a community to stake DEV tokens for you
         </Span>
         <Span style={{ paddingTop: '3em' }} fontSize="16px">
@@ -24,11 +24,11 @@ const BuildCommunity = ({ onActivePageChange }: PostOnboardType) => {
           pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
           est laborum.
         </Span>
+        <BoardingNavigation
+          backwardCallback={() => onActivePageChange(4)}
+          forwardCallback={() => onActivePageChange(1)}
+        />
       </DescriptionContainer>
-      <BoardingNavigation
-        backwardCallback={() => onActivePageChange(4)}
-        forwardCallback={() => onActivePageChange(1)}
-      />
     </Container>
   )
 }

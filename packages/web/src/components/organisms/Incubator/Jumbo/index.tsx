@@ -32,7 +32,7 @@ const QualificationMethodologyContainer = styled.div`
   justify-content: flex-end;
 
   > a {
-    font-size: 20px;
+    font-size: 16px;
     border-bottom: 1px solid black;
     padding-bottom: 3px;
     color: black;

@@ -15,7 +15,7 @@ const PurchaseEthereum = ({ onActivePartChange }: PurchaseEthereumType) => {
         <Animation />
       </AnimationContainer>
       <DescriptionContainer>
-        <Span style={{ paddingTop: '3em' }} fontWeight="bold" fontSize="24px">
+        <Span fontWeight="bold" fontSize="24px">
           Purchase ETH in Metamask
         </Span>
         <Span style={{ paddingTop: '3em' }} fontSize="16px">
@@ -23,11 +23,12 @@ const PurchaseEthereum = ({ onActivePartChange }: PurchaseEthereumType) => {
           right corner of your browser. Once opened, click the buy button and select “Buy ETH” on Wyre. Follow the
           required steps and your ETH will be sent to your wallet once your purchase is successful.
         </Span>
+
+        <BoardingNavigation
+          backwardCallback={() => onActivePartChange(1)}
+          forwardCallback={() => onActivePartChange(3)}
+        />
       </DescriptionContainer>
-      <BoardingNavigation
-        backwardCallback={() => onActivePartChange(1)}
-        forwardCallback={() => onActivePartChange(3)}
-      />
     </Container>
   )
 }

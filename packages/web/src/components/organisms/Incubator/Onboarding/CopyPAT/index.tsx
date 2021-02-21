@@ -15,7 +15,7 @@ const CopyPat = ({ onActivePartChange }: CopyPatType) => {
         <Animation />
       </AnimationContainer>
       <DescriptionContainer>
-        <Span style={{ paddingTop: '3em' }} fontWeight="bold" fontSize="24px">
+        <Span fontWeight="bold" fontSize="24px">
           Enter Personal Access token
         </Span>
         <Span style={{ paddingTop: '3em' }} fontSize="16px">
@@ -27,15 +27,15 @@ const CopyPat = ({ onActivePartChange }: CopyPatType) => {
           rel="noopener noreferrer"
           target="_blank"
           href="https://github.com/settings/tokens/new"
-          style={{ paddingTop: '4em' }}
+          style={{ paddingTop: '1em' }}
         >
           Create PAT
         </LinkB>
+        <BoardingNavigation
+          backwardCallback={() => onActivePartChange(3)}
+          forwardCallback={() => onActivePartChange(5)}
+        />
       </DescriptionContainer>
-      <BoardingNavigation
-        backwardCallback={() => onActivePartChange(3)}
-        forwardCallback={() => onActivePartChange(5)}
-      />
     </Container>
   )
 }

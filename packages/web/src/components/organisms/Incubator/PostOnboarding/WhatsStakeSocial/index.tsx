@@ -49,7 +49,7 @@ const WhatsStakesSocial = ({ onActivePageChange }: PostOnboardType) => {
         <StakesSocialLogo />
       </AnimationContainer>
       <DescriptionContainer>
-        <Span style={{ paddingTop: '3em' }} fontSize="24px" fontWeight="bold">
+        <Span fontSize="24px" fontWeight="bold">
           What is Stakes Social?
         </Span>
         <Span style={{ paddingTop: '3em' }} fontSize="16px">
@@ -59,11 +59,11 @@ const WhatsStakesSocial = ({ onActivePageChange }: PostOnboardType) => {
           pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
           est laborum.
         </Span>
+        <BoardingNavigation
+          backwardCallback={() => onActivePageChange(1)}
+          forwardCallback={() => onActivePageChange(3)}
+        />
       </DescriptionContainer>
-      <BoardingNavigation
-        backwardCallback={() => onActivePageChange(1)}
-        forwardCallback={() => onActivePageChange(3)}
-      />
     </Container>
   )
 }

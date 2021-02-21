@@ -21,7 +21,7 @@ import ConnectWallet from 'src/components/organisms/Incubator/Onboarding/Connect
 import CopyPat from 'src/components/organisms/Incubator/Onboarding/CopyPAT'
 import SubmitTransaction from 'src/components/organisms/Incubator/Onboarding/SubmitTransaction'
 
-const LABEL_PLACEHOLDERS = ['Crypto OSS', 'Women that Code']
+// const LABEL_PLACEHOLDERS = ['Crypto OSS', 'Women that Code']
 
 const ipsum = new lorem.LoremIpsum({
   sentencesPerParagraph: { min: 1, max: 3 },
@@ -113,22 +113,22 @@ const DevCurrencyContainer = styled.div`
   }
 `
 
-const LabelContainer = styled.div`
-  display: flex;
-  padding-top: 3em;
+// const LabelContainer = styled.div`
+//   display: flex;
+//   padding-top: 3em;
 
-  > div {
-    margin-right: 15px;
-  }
-`
+//   > div {
+//     margin-right: 15px;
+//   }
+// `
 
-const FilterOption = styled.div`
-  padding: 10px 25px;
-  border-radius: 24px;
-  border: 1px solid #999999;
-  color: #999999;
-  font-size: 20px;
-`
+// const FilterOption = styled.div`
+//   padding: 10px 25px;
+//   border-radius: 24px;
+//   border: 1px solid #999999;
+//   color: #999999;
+//   font-size: 20px;
+// `
 
 type ProjectDetailsProps = {
   onStateChange: React.Dispatch<React.SetStateAction<string>>
@@ -206,7 +206,7 @@ const ProjectDetails = ({
       </div>
       <DescriptionContainer>
         <Span fontSize="20px">{ipsum.generateSentences(9)}</Span>
-        <LabelContainer>
+        {/* <LabelContainer>
           {LABEL_PLACEHOLDERS.map((label, index) => {
             return (
               <FilterOption key={index}>
@@ -214,7 +214,7 @@ const ProjectDetails = ({
               </FilterOption>
             )
           })}
-        </LabelContainer>
+        </LabelContainer> */}
       </DescriptionContainer>
     </DetailsContainer>
   )
@@ -233,7 +233,7 @@ const OnboardSwitchContainer = styled.div`
 
 const OnboardEntry = styled.div<{ isActive?: boolean }>`
   cursor: pointer;
-  font-size: 20px;
+  font-size: 16px;
   width: fit-content;
   color: ${props => (props?.isActive ? '#00D0FD' : 'black')};
 
@@ -246,15 +246,15 @@ type OnboardSwitchType = {
   onOnboardChange: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const OnboardSwitch = ({ isOnboarding, onOnboardChange }: OnboardSwitchType) => {
+export const OnboardSwitch = ({ isOnboarding, onOnboardChange }: OnboardSwitchType) => {
   return (
     <OnboardSwitchContainer>
       <OnboardEntry onClick={() => onOnboardChange(true)} isActive={isOnboarding}>
-        <Span fontSize="20px">Onboarding</Span>
+        <Span fontSize="16px">Onboarding</Span>
       </OnboardEntry>
-      <div style={{ paddingRight: '3em', marginRight: '3em', borderRight: '1px solid black' }} />
+      <div style={{ paddingRight: '1.5em', marginRight: '1.5em', borderRight: '1px solid black' }} />
       <OnboardEntry onClick={() => onOnboardChange(false)} isActive={!isOnboarding}>
-        <Span fontSize="20px">Post-Onboarding</Span>
+        <Span fontSize="16px">Post-Onboarding</Span>
       </OnboardEntry>
     </OnboardSwitchContainer>
   )
@@ -265,44 +265,41 @@ const TimelineContainer = styled.div`
 `
 
 type OnboardingSectionProps = {
+  onBoardChange: React.Dispatch<React.SetStateAction<boolean>>
   isModal?: boolean
   onStateChange: React.Dispatch<React.SetStateAction<string>>
+  isOnboarding: boolean
 }
 
-const OnboardingSection = ({ isModal, onStateChange }: OnboardingSectionProps) => {
+const OnboardingSection = ({ isModal, onStateChange, onBoardChange, isOnboarding }: OnboardingSectionProps) => {
   const [activePart, setActivePart] = useState(1)
-  const [isOnboarding, setIsOnboarding] = useState(true)
 
   return (
     <>
       <SpaceBetween style={{ alignItems: 'center', paddingTop: '1em' }}>
-        <Span fontSize="20px">{isOnboarding ? 'How to receive your funding?' : "What's next?"}</Span>
+        <Span fontSize="16px">{'How to receive your funding?'}</Span>
+
+        <TimelineContainer style={{ alignSelf: 'center' }}>
+          <TimelineSection isFirst={true} onActivePartChange={setActivePart} part={1} currentPart={activePart} />
+          <TimelineSection part={2} onActivePartChange={setActivePart} currentPart={activePart} />
+          <TimelineSection part={3} onActivePartChange={setActivePart} currentPart={activePart} />
+          <TimelineSection part={4} onActivePartChange={setActivePart} currentPart={activePart} />
+          <TimelineSection part={5} onActivePartChange={setActivePart} currentPart={activePart} isLast={true} />
+        </TimelineContainer>
+
         {isModal ? (
-          <LinkB onClick={() => onStateChange('authentication')} style={{ fontSize: '20px' }}>
-            Skip
-          </LinkB>
+          <LinkB onClick={() => onStateChange('authentication')}>Skip</LinkB>
         ) : (
-          <OnboardSwitch isOnboarding={isOnboarding} onOnboardChange={setIsOnboarding} />
+          <OnboardSwitch isOnboarding={isOnboarding} onOnboardChange={onBoardChange} />
         )}
       </SpaceBetween>
-      {isOnboarding && (
-        <>
-          <TimelineContainer style={{ alignSelf: 'center' }}>
-            <TimelineSection isFirst={true} onActivePartChange={setActivePart} part={1} currentPart={activePart} />
-            <TimelineSection part={2} onActivePartChange={setActivePart} currentPart={activePart} />
-            <TimelineSection part={3} onActivePartChange={setActivePart} currentPart={activePart} />
-            <TimelineSection part={4} onActivePartChange={setActivePart} currentPart={activePart} />
-            <TimelineSection part={5} onActivePartChange={setActivePart} currentPart={activePart} isLast={true} />
-          </TimelineContainer>
-          {activePart === 1 && <DownloadMetamask onActivePartChange={setActivePart} />}
-          {activePart === 2 && <PurchaseEthereum onActivePartChange={setActivePart} />}
-          {activePart === 3 && <ConnectWallet onActivePartChange={setActivePart} />}
-          {activePart === 4 && <CopyPat onActivePartChange={setActivePart} />}
-          {activePart === 5 && <SubmitTransaction onActivePartChange={setActivePart} />}
-        </>
-      )}
+      {activePart === 1 && <DownloadMetamask onActivePartChange={setActivePart} />}
+      {activePart === 2 && <PurchaseEthereum onActivePartChange={setActivePart} />}
+      {activePart === 3 && <ConnectWallet onActivePartChange={setActivePart} />}
+      {activePart === 4 && <CopyPat onActivePartChange={setActivePart} />}
+      {activePart === 5 && <SubmitTransaction onActivePartChange={setActivePart} />}
 
-      {!isOnboarding && <WhatsNext isOverview={true} />}
+      {/* {!isOnboarding && <WhatsNext isOverview={true} />} */}
     </>
   )
 }
@@ -311,6 +308,7 @@ const OnboardingPage = () => {
   // const [, project] = getPath(useRouter().asPath)
   // TODO: Fetch data from strapi based on project
   const [currentState, setCurrentState] = useState<string>('overview')
+  const [isOnboarding, setIsOnboarding] = useState(true)
   const [authenticationProgress, setAuthenticationProgress] = useState(1)
   const { name, fundingDEV, fundingUSD, github, logo, twitter, website, claimed } = {
     name: 'Sigma',
@@ -333,10 +331,12 @@ const OnboardingPage = () => {
     }
   }, [currentState, authenticationProgress])
 
+  console.log('isOnboarding: ', isOnboarding)
+
   return (
     <div style={{ position: 'relative', display: 'flex', minHeight: '100vh', flexDirection: 'column' }}>
       <IncubatorHeader />
-      <Container style={{ paddingBottom: '6em', flexGrow: 1 }}>
+      <Container style={{ paddingBottom: '4em', flexGrow: 1 }}>
         <BackArrowContainer>
           {currentState === 'overview' && (
             <Link href="/incubator" as="/incubator" passHref>
@@ -368,7 +368,12 @@ const OnboardingPage = () => {
 
         {currentState === 'onboarding' && (
           <Container>
-            <OnboardingSection onStateChange={setCurrentState} isModal={true} />
+            <OnboardingSection
+              isOnboarding={isOnboarding}
+              onBoardChange={setIsOnboarding}
+              onStateChange={setCurrentState}
+              isModal={true}
+            />
           </Container>
         )}
 
@@ -380,13 +385,24 @@ const OnboardingPage = () => {
 
         {currentState === 'success' && <ClaimSuccesful onStateChange={setCurrentState} />}
 
-        {currentState === 'whatsnext' && <WhatsNext />}
+        {currentState === 'whatsnext' && <WhatsNext onBoardChange={setIsOnboarding} isOnboarding={false} />}
       </Container>
 
-      {currentState === 'overview' && (
+      {currentState === 'overview' && isOnboarding && (
         <Container>
           <Hr />
-          <OnboardingSection onStateChange={setCurrentState} />
+          <OnboardingSection
+            isOnboarding={isOnboarding}
+            onBoardChange={setIsOnboarding}
+            onStateChange={setCurrentState}
+          />
+        </Container>
+      )}
+
+      {currentState === 'overview' && !isOnboarding && (
+        <Container>
+          <Hr />
+          <WhatsNext isOverview={true} isOnboarding={isOnboarding} onBoardChange={setIsOnboarding} />
         </Container>
       )}
 

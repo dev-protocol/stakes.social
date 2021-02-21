@@ -21,7 +21,7 @@ const Dev = styled.div<{ isActive?: boolean }>`
   background: ${props => (props.isActive ? 'white' : 'transparent')};
   padding: 0 15px;
   color: ${props => (props.isActive ? '#5B8BF5' : 'white')};
-  font-size: 20px;
+  font-size: 16px;
 `
 const Usd = styled.div<{ isActive: boolean }>`
   cursor: pointer;
@@ -31,7 +31,7 @@ const Usd = styled.div<{ isActive: boolean }>`
   background: ${props => (props.isActive ? 'white' : 'transparent')};
   padding: 0 15px;
   color: ${props => (props.isActive ? '#5B8BF5' : 'white')};
-  font-size: 20px;
+  font-size: 16px;
 `
 
 export const CurrencySwitcher = ({ className }: Props) => {

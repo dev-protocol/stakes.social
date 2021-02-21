@@ -15,10 +15,10 @@ const DownloadMetamask = ({ onActivePartChange }: DownloadMetamaskType) => {
         <DownloadMetamaskAnimation />
       </AnimationContainer>
       <DescriptionContainer>
-        <Span style={{ paddingTop: '3em', fontFamily: 'WhyteInktrap' }} fontWeight="bold" fontSize="24px">
+        <Span fontWeight="bold" fontSize="24px">
           Download MetaMask
         </Span>
-        <Span style={{ paddingTop: '3em', fontFamily: 'WhyteInktrap' }} fontSize="16px">
+        <Span style={{ paddingTop: '3em' }} fontSize="16px">
           MetaMask is a blockchain wallet used to interact with the Ethereum blockchain. It allows users to store and
           manage account keys, broadcast transactions, send and receive Ethereum-based cryptocurrencies and tokens, and
           securely connect to decentralized applications through a compatible web browser or the mobile {"app's"}{' '}
@@ -28,15 +28,15 @@ const DownloadMetamask = ({ onActivePartChange }: DownloadMetamaskType) => {
           target="_blank"
           rel="noopener noreferrer"
           href="https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn?hl=en"
-          style={{ paddingTop: '4em' }}
+          style={{ paddingTop: '1em' }}
         >
           Download MetaMask Browser Extension for Chrome
         </LinkB>
+        <BoardingNavigation
+          backwardCallback={() => onActivePartChange(5)}
+          forwardCallback={() => onActivePartChange(2)}
+        />
       </DescriptionContainer>
-      <BoardingNavigation
-        backwardCallback={() => onActivePartChange(5)}
-        forwardCallback={() => onActivePartChange(2)}
-      />
     </Container>
   )
 }

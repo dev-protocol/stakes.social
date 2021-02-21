@@ -15,18 +15,18 @@ const ConnectWallet = ({ onActivePartChange }: ConnectWalletType) => {
         <Animation />
       </AnimationContainer>
       <DescriptionContainer>
-        <Span style={{ paddingTop: '3em' }} fontWeight="bold" fontSize="24px">
+        <Span fontWeight="bold" fontSize="24px">
           Connect Wallet
         </Span>
         <Span style={{ paddingTop: '3em' }} fontSize="16px">
           Click &quot;Connect Wallet&quot; in the top right corner of the website. This allows you to interact with our
           website to retrieve your funding.
         </Span>
+        <BoardingNavigation
+          backwardCallback={() => onActivePartChange(2)}
+          forwardCallback={() => onActivePartChange(4)}
+        />
       </DescriptionContainer>
-      <BoardingNavigation
-        backwardCallback={() => onActivePartChange(2)}
-        forwardCallback={() => onActivePartChange(4)}
-      />
     </Container>
   )
 }

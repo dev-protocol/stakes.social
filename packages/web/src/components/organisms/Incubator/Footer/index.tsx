@@ -29,7 +29,7 @@ const FooterContainer = styled.div`
 `
 
 const SocialMediaLink = styled.a`
-  font-size: 20px;
+  font-size: 16px;
   margin-left: 3em;
   text-decoration: none;
   color: white;

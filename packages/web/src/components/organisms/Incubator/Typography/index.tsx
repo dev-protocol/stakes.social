@@ -12,7 +12,7 @@ export const Span = styled.span<{ fontSize: string; fontWeight?: string; color?:
 
 export const LinkB = styled.a`
   font-family: WhyteInktrap;
-  font-size: 20px;
+  font-size: 16px;
   text-decoration: none;
   height: fit-content;
 

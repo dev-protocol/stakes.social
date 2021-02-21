@@ -17,7 +17,7 @@ export const Button = styled.button<{ backgroundColor?: string; hoverBackgroundC
   `}
 
   border: none;
-  font-size: 24px;
+  font-size: 20px;
 
   &:hover {
     background: ${props => props.hoverBackgroundColor || '#00d0fd'};

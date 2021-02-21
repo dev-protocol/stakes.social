@@ -145,28 +145,29 @@ const OverviewHeader = styled.div`
   align-items: center;
 `
 
-const FilterOptions = styled.div`
-  display: flex;
-  padding: 3em 0;
-  min-width: 950px;
-  margin: 0 auto;
-  justify-content: space-around;
-`
+// const FilterOptions = styled.div`
+//   display: flex;
+//   padding: 3em 0;
+//   min-width: 950px;
+//   margin: 0 auto;
+//   justify-content: space-around;
+// `
 
-const FilterOption = styled.div<{ filter: string; activeFilter: string }>`
-  cursor: pointer;
-  padding: 10px 25px;
-  border-radius: 24px;
-  border: 1px solid white;
-  color: ${props => (props.activeFilter === props.filter ? '#5B8BF5' : 'white')};
-  background: ${props => (props.activeFilter === props.filter ? 'white' : 'transparent')};
-  font-size: 24px;
-`
+// const FilterOption = styled.div<{ filter: string; activeFilter: string }>`
+//   cursor: pointer;
+//   padding: 10px 25px;
+//   border-radius: 24px;
+//   border: 1px solid white;
+//   color: ${props => (props.activeFilter === props.filter ? '#5B8BF5' : 'white')};
+//   background: ${props => (props.activeFilter === props.filter ? 'white' : 'transparent')};
+//   font-size: 24px;
+// `
 
 const Overview = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(265px, 1fr));
   grid-gap: 20px;
+  padding-top: 5em;
 `
 
 const GradientContainer = styled.div<{ isExpanded?: boolean }>`
@@ -192,17 +193,17 @@ const ProjectOverview = () => {
   const [showAll, setShowAll] = useState(false)
   const [activeFilter, setActiveFilter] = useState('')
 
-  const handleFilterChange = (filter: string) => {
-    setActiveFilter(prevFilter => {
-      if (prevFilter === filter) {
-        return ''
-      }
-      return filter
-    })
-    if (!showAll) {
-      setShowAll(true)
-    }
-  }
+  // const handleFilterChange = (filter: string) => {
+  //   setActiveFilter(prevFilter => {
+  //     if (prevFilter === filter) {
+  //       return ''
+  //     }
+  //     return filter
+  //   })
+  //   if (!showAll) {
+  //     setShowAll(true)
+  //   }
+  // }
 
   const showDataByFilter = () => {
     return activeFilter === ''
@@ -220,7 +221,7 @@ const ProjectOverview = () => {
           </Span>
           <CurrencySwitcher />
         </OverviewHeader>
-        <FilterOptions>
+        {/* <FilterOptions>
           <FilterOption
             onClick={() => handleFilterChange('Infrastructure')}
             filter="Infrastructure"
@@ -237,7 +238,7 @@ const ProjectOverview = () => {
           <FilterOption onClick={() => handleFilterChange('Women')} filter="Women" activeFilter={activeFilter}>
             <Span fontSize="24px">Women that code</Span>
           </FilterOption>
-        </FilterOptions>
+        </FilterOptions> */}
         <Overview>
           {projects &&
             projects.map(({ funding, title, url, claimed }, index) => (

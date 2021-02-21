@@ -8,6 +8,7 @@ import DevTokenExplanation from './DevTokenExplanation'
 import OssTokenExplanation from './OssTokenExplanation'
 import BuildCommunity from './BuildCommunity'
 import Link from 'next/link'
+import { OnboardSwitch } from 'src/pages/incubator/project/[project]'
 
 const SpaceBetween = styled.div`
   display: flex;
@@ -20,66 +21,69 @@ const TimelineContainer = styled.div`
 
 type WhatsNextType = {
   isOverview?: boolean
+  isOnboarding: boolean
+  onBoardChange: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const PostOnboarding = ({ isOverview }: WhatsNextType) => {
+const PostOnboarding = ({ isOverview, isOnboarding, onBoardChange }: WhatsNextType) => {
   const [activePart, setActivePart] = useState(1)
   const { projectId } = { projectId: '0xF6899a1536E6474f0a6Aa2b36714e9632FB97D40' }
   return (
     <>
-      {!isOverview && (
-        <SpaceBetween style={{ paddingTop: '1em' }}>
-          <Span fontSize="20px">{"What's next?"}</Span>
+      <SpaceBetween style={{ alignItems: 'center', paddingTop: '1em' }}>
+        <Span fontSize="16px">{"What's next?"}</Span>
+        <TimelineContainer style={{ alignSelf: 'center' }}>
+          <TimelineSection
+            StepSpanComponent={(info: any) => <Step info={{ ...info, width: '40px', fontSize: '12px' }}>Tip 1</Step>}
+            isFirst={true}
+            part={1}
+            onActivePartChange={setActivePart}
+            currentPart={activePart}
+            currentColor="#D500E6"
+            finishedColor="black"
+          />
+          <TimelineSection
+            StepSpanComponent={(info: any) => <Step info={{ ...info, width: '40px', fontSize: '12px' }}>Tip 2</Step>}
+            part={2}
+            onActivePartChange={setActivePart}
+            currentPart={activePart}
+            currentColor="#D500E6"
+            finishedColor="black"
+          />
+          <TimelineSection
+            StepSpanComponent={(info: any) => <Step info={{ ...info, width: '40px', fontSize: '12px' }}>Tip 3</Step>}
+            part={3}
+            onActivePartChange={setActivePart}
+            currentPart={activePart}
+            currentColor="#D500E6"
+            finishedColor="black"
+          />
+          <TimelineSection
+            StepSpanComponent={(info: any) => <Step info={{ ...info, width: '40px', fontSize: '12px' }}>Tip 4</Step>}
+            part={4}
+            onActivePartChange={setActivePart}
+            currentPart={activePart}
+            currentColor="#D500E6"
+            finishedColor="black"
+          />
+          <TimelineSection
+            StepSpanComponent={(info: any) => <Step info={{ ...info, width: '40px', fontSize: '12px' }}>Tip 5</Step>}
+            isLast={true}
+            part={5}
+            onActivePartChange={setActivePart}
+            currentPart={activePart}
+            currentColor="#D500E6"
+            finishedColor="black"
+          />
+        </TimelineContainer>
+        {isOverview ? (
+          <OnboardSwitch isOnboarding={isOnboarding} onOnboardChange={onBoardChange} />
+        ) : (
           <Link href="/[propertyAddress]" as={`/${projectId}`} passHref>
-            <LinkB>{activePart === 5 ? 'To your project' : 'Skip'}</LinkB>
+            <LinkB>Skip</LinkB>
           </Link>
-        </SpaceBetween>
-      )}
-
-      <TimelineContainer style={{ alignSelf: 'center' }}>
-        <TimelineSection
-          StepSpanComponent={(info: any) => <Step info={{ ...info, width: '50px', fontSize: '16px' }}>Tip 1</Step>}
-          isFirst={true}
-          part={1}
-          onActivePartChange={setActivePart}
-          currentPart={activePart}
-          currentColor="#D500E6"
-          finishedColor="black"
-        />
-        <TimelineSection
-          StepSpanComponent={(info: any) => <Step info={{ ...info, width: '50px', fontSize: '16px' }}>Tip 2</Step>}
-          part={2}
-          onActivePartChange={setActivePart}
-          currentPart={activePart}
-          currentColor="#D500E6"
-          finishedColor="black"
-        />
-        <TimelineSection
-          StepSpanComponent={(info: any) => <Step info={{ ...info, width: '50px', fontSize: '16px' }}>Tip 3</Step>}
-          part={3}
-          onActivePartChange={setActivePart}
-          currentPart={activePart}
-          currentColor="#D500E6"
-          finishedColor="black"
-        />
-        <TimelineSection
-          StepSpanComponent={(info: any) => <Step info={{ ...info, width: '50px', fontSize: '16px' }}>Tip 4</Step>}
-          part={4}
-          onActivePartChange={setActivePart}
-          currentPart={activePart}
-          currentColor="#D500E6"
-          finishedColor="black"
-        />
-        <TimelineSection
-          StepSpanComponent={(info: any) => <Step info={{ ...info, width: '50px', fontSize: '16px' }}>Tip 5</Step>}
-          isLast={true}
-          part={5}
-          onActivePartChange={setActivePart}
-          currentPart={activePart}
-          currentColor="#D500E6"
-          finishedColor="black"
-        />
-      </TimelineContainer>
+        )}
+      </SpaceBetween>
 
       {activePart === 1 && <WhatsDEV onActivePageChange={setActivePart} />}
 

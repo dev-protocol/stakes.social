@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 
 import { Span } from 'src/components/organisms/Incubator/Typography'
-import TopArrow from '../molecules/TopArrow'
+// import TopArrow from '../molecules/TopArrow'
 
 export const StepSpan = styled(Span)<{
   data?: any
@@ -13,8 +13,8 @@ export const StepSpan = styled(Span)<{
   finishedColor?: string
 }>`
   position: absolute;
-  bottom: 50px;
-  width: 55px;
+  bottom: -10px;
+  width: 45px;
   color: ${({ isCurrent, isFinished, currentColor, finishedColor }) => {
     if (isCurrent) {
       return currentColor || '#5B8BF5'
@@ -47,8 +47,8 @@ const Timepoint = styled.div<{
 }>`
   cursor: ${props => (props.hasClick ? 'pointer' : 'auto')};
   z-index: 1;
-  width: 20px;
-  height: 20px;
+  width: 8px;
+  height: 8px;
   border-radius: 90px;
   background: ${({ isCurrent, isFinished, currentColor, finishedColor }) => {
     if (isCurrent) {
@@ -69,7 +69,7 @@ const TimepointContainer = styled.div<{ isFirst?: boolean }>`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  height: 180px;
+  height: 40px;
   transform: ${props => (props.isFirst ? 'translate(0)' : 'translateX(-50%)')};
 `
 
@@ -78,17 +78,17 @@ const Timeline = styled.div<{ isFinished?: boolean; isLast?: boolean; finishedCo
   z-index: -1;
   border-top: ${props => {
     if (!props.isFinished) {
-      return '4px solid #dddddd'
+      return '2px solid #dddddd'
     }
-    return props.finishedColor ? `4px solid ${props.finishedColor}` : '4px solid #5B8BF5'
+    return props.finishedColor ? `2px solid ${props.finishedColor}` : '2px solid #5B8BF5'
   }};
-  width: 120px;
-  transform: translate(-10px, 49%);
+  width: 100px;
+  transform: translate(-4px, 48%);
 `
-const TopArrowContainer = styled.div`
-  position: absolute;
-  bottom: 0;
-`
+// const TopArrowContainer = styled.div`
+//   position: absolute;
+//   bottom: 0;
+// `
 
 type StepProps = {
   width: string
@@ -155,7 +155,7 @@ const TimelineSection = ({
           StepSpanComponent(info)
         ) : (
           <StepSpan
-            fontSize="16px"
+            fontSize="12px"
             isActive={isFinished}
             finishedColor={finishedColor}
             isFinished={isFinished}
@@ -166,11 +166,11 @@ const TimelineSection = ({
           </StepSpan>
         )}
 
-        {isArrowActive && (
+        {/* {isArrowActive && (
           <TopArrowContainer>
             <TopArrow color={currentColor} />
           </TopArrowContainer>
-        )}
+        )} */}
       </TimepointContainer>
       <Timeline isLast={isLast} finishedColor={finishedColor} isFinished={isPartFinished} />
     </>

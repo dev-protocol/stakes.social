@@ -120,7 +120,7 @@ const ProgressContainer = styled.div`
 
 const TweetContainer = styled.div`
   position: relative;
-  font-size: 20px;
+  font-size: 16px;
   margin-top: 1em;
   padding: 15px 40px 30px 20px;
   border-radius: 16px;

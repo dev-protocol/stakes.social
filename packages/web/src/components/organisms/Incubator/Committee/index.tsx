@@ -106,7 +106,7 @@ const Committee = () => {
         />
         <Person
           name="Bilgin Ibryam"
-          company="RedHat"
+          company="Kubernetes Patterns"
           job="Project Manager"
           image="https://res.cloudinary.com/haas-storage/image/upload/v1613110035/bilgin_dy3gvz.png"
           github="https://github.com/bibryam"

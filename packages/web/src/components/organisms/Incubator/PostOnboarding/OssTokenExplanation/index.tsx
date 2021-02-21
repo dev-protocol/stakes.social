@@ -30,7 +30,7 @@ const OssTokenExplanation = ({ onActivePageChange }: PostOnboardType) => {
         <OssTokenLogo />
       </AnimationContainer>
       <DescriptionContainer>
-        <Span style={{ paddingTop: '3em' }} fontSize="24px" fontWeight="bold">
+        <Span fontSize="24px" fontWeight="bold">
           How your OSS token works
         </Span>
         <Span style={{ paddingTop: '3em' }} fontSize="16px">
@@ -40,11 +40,11 @@ const OssTokenExplanation = ({ onActivePageChange }: PostOnboardType) => {
           pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
           est laborum.
         </Span>
+        <BoardingNavigation
+          backwardCallback={() => onActivePageChange(3)}
+          forwardCallback={() => onActivePageChange(5)}
+        />
       </DescriptionContainer>
-      <BoardingNavigation
-        backwardCallback={() => onActivePageChange(3)}
-        forwardCallback={() => onActivePageChange(5)}
-      />
     </Container>
   )
 }

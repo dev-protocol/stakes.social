@@ -60,7 +60,7 @@ const ShowAllContainer = styled.div`
   > a {
     margin-left: 15px;
     color: black;
-    font-size: 20px;
+    font-size: 16px;
     text-decoration: none;
     padding-bottom: 3px;
     border-bottom: 1px solid black;

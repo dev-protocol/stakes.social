@@ -13,14 +13,18 @@ export const AnimationContainer = styled.div`
 `
 
 export const NextButtonContainer = styled.div`
+  padding-bottom: 3em;
+  width: 100%;
+  height: fit-content;
   display: flex;
   grid-area: navigation;
   justify-content: space-between;
   align-items: center;
-  padding-bottom: 5em;
+  /* padding-bottom: 2em; */
 `
 
 export const DescriptionContainer = styled.div`
+  padding-top: 3em;
   grid-area: description;
   display: flex;
   flex-direction: column;
@@ -44,11 +48,13 @@ type BoardingNavigationType = {
 
 export const BoardingNavigation = ({ backwardCallback, forwardCallback }: BoardingNavigationType) => {
   return (
-    <NextButtonContainer>
-      <LinkB style={{ fontSize: '20px' }} onClick={backwardCallback}>
-        Back
-      </LinkB>
-      <Button onClick={forwardCallback}>Next</Button>
-    </NextButtonContainer>
+    <div style={{ display: 'flex', flexGrow: 1, width: '100%', flexDirection: 'column', justifyContent: 'flex-end' }}>
+      <NextButtonContainer>
+        <LinkB style={{ fontSize: '16px' }} onClick={backwardCallback}>
+          Back
+        </LinkB>
+        <Button onClick={forwardCallback}>Next</Button>
+      </NextButtonContainer>
+    </div>
   )
 }

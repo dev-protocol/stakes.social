@@ -65,7 +65,7 @@ const WhatsDEV = ({ onActivePageChange }: PostOnboardType) => {
         <DevProtocolLogo />
       </AnimationContainer>
       <DescriptionContainer>
-        <Span style={{ paddingTop: '3em' }} fontSize="24px" fontWeight="bold">
+        <Span fontSize="24px" fontWeight="bold">
           What is DEV protocol?
         </Span>
         <Span style={{ paddingTop: '3em' }} fontSize="16px">
@@ -73,11 +73,11 @@ const WhatsDEV = ({ onActivePageChange }: PostOnboardType) => {
           use Stakes Social to tokenize, obtain patrons, build communities, and incentive stakeholders in order to grow
           their project. Patrons use Stakes Social to stake the DEV token for OSS projects they support.
         </Span>
+        <BoardingNavigation
+          backwardCallback={() => onActivePageChange(5)}
+          forwardCallback={() => onActivePageChange(2)}
+        />
       </DescriptionContainer>
-      <BoardingNavigation
-        backwardCallback={() => onActivePageChange(5)}
-        forwardCallback={() => onActivePageChange(2)}
-      />
     </Container>
   )
 }

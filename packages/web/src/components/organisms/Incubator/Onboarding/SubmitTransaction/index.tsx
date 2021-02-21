@@ -15,7 +15,7 @@ const SubmitTransaction = ({ onActivePartChange }: SubmitTranscriptType) => {
         <Animation />
       </AnimationContainer>
       <DescriptionContainer>
-        <Span style={{ paddingTop: '3em' }} fontWeight="bold" fontSize="24px">
+        <Span fontWeight="bold" fontSize="24px">
           Share the News on Twitter
         </Span>
         <Span style={{ paddingTop: '3em' }} fontSize="16px">
@@ -23,11 +23,11 @@ const SubmitTransaction = ({ onActivePartChange }: SubmitTranscriptType) => {
           announcing their arrival on Stakes Social. After you publish the tweet copy and paste the link and the Khaos
           oracle will authenticate if it was successfully completed.
         </Span>
+        <BoardingNavigation
+          backwardCallback={() => onActivePartChange(4)}
+          forwardCallback={() => onActivePartChange(1)}
+        />
       </DescriptionContainer>
-      <BoardingNavigation
-        backwardCallback={() => onActivePartChange(4)}
-        forwardCallback={() => onActivePartChange(1)}
-      />
     </Container>
   )
 }

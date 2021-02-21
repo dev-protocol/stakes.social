@@ -14,7 +14,7 @@ const DevTokenExplanation = ({ onActivePageChange }: PostOnboardType) => {
         <AddTokenToMetamaskAnimation />
       </AnimationContainer>
       <DescriptionContainer>
-        <Span style={{ paddingTop: '3em' }} fontSize="24px" fontWeight="bold">
+        <Span fontSize="24px" fontWeight="bold">
           How your DEV token works
         </Span>
         <Span style={{ paddingTop: '3em' }} fontSize="16px">
@@ -24,11 +24,11 @@ const DevTokenExplanation = ({ onActivePageChange }: PostOnboardType) => {
           pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
           est laborum.
         </Span>
+        <BoardingNavigation
+          backwardCallback={() => onActivePageChange(2)}
+          forwardCallback={() => onActivePageChange(4)}
+        />
       </DescriptionContainer>
-      <BoardingNavigation
-        backwardCallback={() => onActivePageChange(2)}
-        forwardCallback={() => onActivePageChange(4)}
-      />
     </Container>
   )
 }
