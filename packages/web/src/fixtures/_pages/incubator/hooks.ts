@@ -2,7 +2,7 @@ import { useCallback, useState } from 'react'
 import { useProvider } from 'src/fixtures/wallet/hooks'
 import { waitForCreateMetrics } from 'src/fixtures/dev-kit/client'
 import { whenDefined } from 'src/fixtures/utility'
-import { authenticate, intermediateProcess, waitForFinishEvent } from './client'
+import { authenticate, getPropertyAddress, intermediateProcess, waitForFinishEvent } from './client'
 
 export const useAuthenticate = () => {
   const { web3 } = useProvider()
@@ -15,14 +15,19 @@ export const useAuthenticate = () => {
     },
     [web3]
   )
-  const waitCallback = useCallback(async () => {
-    setIsWaiting(true)
-    return whenDefined(web3, x =>
-      waitForCreateMetrics(x)
-        .catch(setWaitError)
-        .finally(() => setIsWaiting(false))
-    )
-  }, [web3])
+  const waitCallback = useCallback(
+    async (githubRepository: string) => {
+      setIsWaiting(true)
+      return whenDefined(web3, x => {
+        getPropertyAddress(x, githubRepository)
+          .then(propertyAddress => {
+            waitForCreateMetrics(x, propertyAddress).catch(setWaitError)
+          })
+          .finally(() => setIsWaiting(false))
+      })
+    },
+    [web3]
+  )
   return {
     authenticate: callback,
     waitForCreateMetrics: waitCallback,

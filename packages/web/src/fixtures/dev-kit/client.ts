@@ -245,7 +245,7 @@ const getMetricsProperty = async (address: string, client: Web3): Promise<string
     method: 'property'
   })
 
-export const waitForCreateMetrics = async (web3: Web3): Promise<string> => {
+export const waitForCreateMetrics = async (web3: Web3, propertyAddress: string): Promise<string> => {
   const client = newClient(web3)
   const [fromBlock, metricsFactoryAddress] = await Promise.all([
     web3.eth.getBlockNumber(),
@@ -259,7 +259,7 @@ export const waitForCreateMetrics = async (web3: Web3): Promise<string> => {
         (metricsAddress =>
           metricsAddress
             ? getMetricsProperty(metricsAddress, web3)
-                .then(property => (property ? true : false))
+                .then(property => (property === propertyAddress ? true : false))
                 .catch(reject)
             : false)(e.event === 'Create' ? (e.returnValues._metrics as string) : undefined)
     })

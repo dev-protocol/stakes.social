@@ -40,6 +40,18 @@ export const waitForFinishEvent = async (client: Web3, githubPublicSignature: st
   })
 }
 
+export const getPropertyAddress = async (client: Web3, githubRepository: string): Promise<string> => {
+  return (contract =>
+    contract
+      ? execute({
+          contract,
+          client,
+          method: 'getPropertyAddress',
+          args: [githubRepository]
+        })
+      : Promise.resolve(''))(getContract(client))
+}
+
 export const authenticate = async (client: Web3, githubRepository: string, publicSignature: string) => {
   return (contract =>
     contract
