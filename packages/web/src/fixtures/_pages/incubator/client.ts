@@ -6,7 +6,8 @@ import { utils } from '@devprotocol/dev-kit'
 
 const { execute, watchEvent } = utils
 const client: Map<string, WeakMap<Web3, Contract>> = new Map()
-const INCUBATOR_CONTRACT_ADDRESS = '0x1'
+// TODO: fix incubator contract on mainnet
+const INCUBATOR_CONTRACT_ADDRESS = '0x'
 
 export const getContract = (web3: Web3, contractAddress = INCUBATOR_CONTRACT_ADDRESS): Contract => {
   const cache = client.get(contractAddress)
