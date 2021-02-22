@@ -117,7 +117,7 @@ const Jumbo = () => {
         </Round>
         <RewardCollected>
           <Span color="#999999" fontSize="20px">
-            Total rewards collected
+            Total funding granted
           </Span>
           <Span fontWeight="bold" fontSize="32px" color="#0A0A0A">
             {currency === 'USD' && '$ '} {convertedFunding} {currency}

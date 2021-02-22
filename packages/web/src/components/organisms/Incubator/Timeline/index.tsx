@@ -2,7 +2,6 @@ import React from 'react'
 import styled from 'styled-components'
 
 import { Span } from 'src/components/organisms/Incubator/Typography'
-// import TopArrow from '../molecules/TopArrow'
 
 export const StepSpan = styled(Span)<{
   data?: any
@@ -34,6 +33,8 @@ type TimelineSectionType = {
   currentColor?: string
   finishedColor?: string
   pointerText?: string
+  pendingColor?: string
+  isRecommended?: boolean
   StepSpanComponent?: (input: any) => React.ReactNode
   onActivePartChange?: React.Dispatch<React.SetStateAction<number>>
 }
@@ -44,13 +45,17 @@ const Timepoint = styled.div<{
   currentColor?: string
   isCurrent?: boolean
   hasClick: boolean
+  pendingColor?: string
 }>`
   cursor: ${props => (props.hasClick ? 'pointer' : 'auto')};
   z-index: 1;
   width: 8px;
   height: 8px;
   border-radius: 90px;
-  background: ${({ isCurrent, isFinished, currentColor, finishedColor }) => {
+  background: ${({ isCurrent, isFinished, currentColor, finishedColor, pendingColor }) => {
+    if (!isCurrent && pendingColor) {
+      return pendingColor
+    }
     if (isCurrent) {
       return currentColor || '#5B8BF5'
     }
@@ -90,6 +95,30 @@ const Timeline = styled.div<{ isFinished?: boolean; isLast?: boolean; finishedCo
 //   bottom: 0;
 // `
 
+const RecommendedContainer = styled.span<{
+  isFinished?: boolean
+  finishedColor?: string
+  currentColor?: string
+  isCurrent?: boolean
+  pendingColor?: string
+}>`
+  position: absolute;
+  top: -5px;
+  font-size: 12px;
+  color: ${({ isCurrent, isFinished, currentColor, finishedColor, pendingColor }) => {
+    if (!isCurrent && pendingColor) {
+      return pendingColor
+    }
+    if (isCurrent) {
+      return currentColor || '#5B8BF5'
+    }
+    if (!isFinished) {
+      return '#dddddd'
+    }
+    return finishedColor || '#5B8BF5'
+  }};
+`
+
 type StepProps = {
   width: string
   fontSize: string
@@ -127,7 +156,9 @@ const TimelineSection = ({
   finishedColor,
   pointerText,
   StepSpanComponent,
-  onActivePartChange
+  onActivePartChange,
+  pendingColor,
+  isRecommended
 }: TimelineSectionType) => {
   const isFinished = currentPart > part
   const isPartFinished = currentPart > part
@@ -137,7 +168,8 @@ const TimelineSection = ({
     finishedColor,
     isFinished,
     currentColor,
-    isCurrent: isArrowActive
+    isCurrent: isArrowActive,
+    pendingColor
   }
 
   return (
@@ -150,6 +182,7 @@ const TimelineSection = ({
           isFinished={isFinished}
           currentColor={currentColor}
           isCurrent={isArrowActive}
+          pendingColor={!isFinished ? pendingColor : ''}
         />
         {StepSpanComponent ? (
           StepSpanComponent(info)
@@ -166,11 +199,17 @@ const TimelineSection = ({
           </StepSpan>
         )}
 
-        {/* {isArrowActive && (
-          <TopArrowContainer>
-            <TopArrow color={currentColor} />
-          </TopArrowContainer>
-        )} */}
+        {isRecommended && (
+          <RecommendedContainer
+            finishedColor={finishedColor}
+            isFinished={isFinished}
+            currentColor={currentColor}
+            isCurrent={isArrowActive}
+            pendingColor={!isFinished ? pendingColor : ''}
+          >
+            Recommended
+          </RecommendedContainer>
+        )}
       </TimepointContainer>
       <Timeline isLast={isLast} finishedColor={finishedColor} isFinished={isPartFinished} />
     </>

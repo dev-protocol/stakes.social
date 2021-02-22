@@ -39,32 +39,26 @@ const PostOnboarding = ({ isOverview, isOnboarding, onBoardChange }: WhatsNextTy
             part={1}
             onActivePartChange={setActivePart}
             currentPart={activePart}
-            currentColor="#D500E6"
-            finishedColor="black"
           />
           <TimelineSection
             StepSpanComponent={(info: any) => <Step info={{ ...info, width: '40px', fontSize: '12px' }}>Tip 2</Step>}
             part={2}
             onActivePartChange={setActivePart}
             currentPart={activePart}
-            currentColor="#D500E6"
-            finishedColor="black"
           />
           <TimelineSection
             StepSpanComponent={(info: any) => <Step info={{ ...info, width: '40px', fontSize: '12px' }}>Tip 3</Step>}
             part={3}
             onActivePartChange={setActivePart}
             currentPart={activePart}
-            currentColor="#D500E6"
-            finishedColor="black"
+            pendingColor="red"
+            isRecommended={true}
           />
           <TimelineSection
             StepSpanComponent={(info: any) => <Step info={{ ...info, width: '40px', fontSize: '12px' }}>Tip 4</Step>}
             part={4}
             onActivePartChange={setActivePart}
             currentPart={activePart}
-            currentColor="#D500E6"
-            finishedColor="black"
           />
           <TimelineSection
             StepSpanComponent={(info: any) => <Step info={{ ...info, width: '40px', fontSize: '12px' }}>Tip 5</Step>}
@@ -72,8 +66,6 @@ const PostOnboarding = ({ isOverview, isOnboarding, onBoardChange }: WhatsNextTy
             part={5}
             onActivePartChange={setActivePart}
             currentPart={activePart}
-            currentColor="#D500E6"
-            finishedColor="black"
           />
         </TimelineContainer>
         {isOverview ? (

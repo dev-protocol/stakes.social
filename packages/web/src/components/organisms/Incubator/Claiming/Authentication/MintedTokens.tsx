@@ -37,7 +37,130 @@ const AddToMetaMask = styled.button`
   border: none;
   background: transparent;
   padding-bottom: 4px;
+  transform: translateY(-1px);
 `
+
+const MintedTokenGrid = styled.div`
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  column-gap: 0.5em;
+`
+
+type MintedProps = {
+  ticker: string
+  isSucces?: boolean
+  onHandleClick: () => void
+}
+
+const TotalMinted = ({ ticker, isSucces, onHandleClick }: MintedProps) => {
+  return (
+    <>
+      <div style={{ display: 'flex' }}>
+        <Span fontSize="16px">{ticker} tokens Minted</Span>
+        <InfoIconContainer>
+          <div title="The 'shares' of your OSS project">
+            <InfoIcon fill={'#5B8BF5'} />
+          </div>
+        </InfoIconContainer>
+      </div>
+      <div style={{ display: 'flex', alignItems: 'center' }}>
+        <div style={{ width: '16px', height: '16px', marginRight: '5px', transform: 'translateY(-3px)' }}>
+          <DecCurrencySmall />
+        </div>
+        <Span fontWeight="bold" fontSize="16px">
+          10,000,000
+        </Span>
+      </div>
+      <div style={{ display: 'flex', alignItems: 'center' }}>
+        <Span fontSize="16px" fontWeight="bold">
+          {ticker}
+        </Span>
+        {isSucces && (
+          <AddToMetaMask onClick={onHandleClick}>
+            <img width="16px" height="16px" src="/images/img_0.png" />
+          </AddToMetaMask>
+        )}
+      </div>
+    </>
+  )
+}
+
+const TreasuryFee = ({ onHandleClick, ticker, isSucces }: MintedProps) => {
+  return (
+    <>
+      <div style={{ display: 'flex' }}>
+        <Span fontSize="16px">Dev Protocol Treasury Fee</Span>
+        <InfoIconContainer>
+          <div title="The amount of tokens sent to the DEV treasury">
+            <InfoIcon fill={'#D500E6'} />
+          </div>
+        </InfoIconContainer>
+      </div>
+      <div style={{ display: 'flex', alignItems: 'center' }}>
+        <div style={{ width: '16px', height: '16px', marginRight: '5px', transform: 'translateY(-3px)' }}>
+          <DecCurrencySmall />
+        </div>
+        <div style={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
+          <Span style={{ width: 'fit-content', alignSelf: 'flex-end' }} fontWeight="bold" fontSize="16px">
+            500,000
+          </Span>
+        </div>
+      </div>
+      <div style={{ display: 'flex', alignItems: 'center' }}>
+        <Span fontSize="16px" fontWeight="bold">
+          {ticker}
+        </Span>
+        {isSucces && (
+          <AddToMetaMask onClick={onHandleClick}>
+            <img width="16px" height="16px" src="/images/img_0.png" />
+          </AddToMetaMask>
+        )}
+      </div>
+    </>
+  )
+}
+
+const YouReceive = ({ ticker }: { ticker: string }) => {
+  return (
+    <>
+      <Span fontSize="16px">{"You'll receive"}</Span>
+
+      <div style={{ display: 'flex', alignItems: 'center' }}>
+        <div style={{ width: '16px', height: '16px', marginRight: '5px', transform: 'translateY(-3px)' }}>
+          <DecCurrencySmall />
+        </div>
+        <div style={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
+          <Span style={{ width: 'fit-content', alignSelf: 'flex-end' }} fontWeight="bold" fontSize="16px">
+            9,500,000
+          </Span>
+        </div>
+      </div>
+      <Span fontSize="16px" fontWeight="bold">
+        {ticker}
+      </Span>
+    </>
+  )
+}
+
+const FundingReceived = ({ funding }: { funding: string }) => {
+  return (
+    <>
+      <Span fontSize="16px">Funding received</Span>
+      <SpaceBetween>
+        <Span style={{ marginLeft: '3.5px' }} fontWeight="bold" fontSize="16px">
+          $
+        </Span>
+        <Span fontWeight="bold" fontSize="16px">
+          {funding}
+        </Span>
+      </SpaceBetween>
+
+      <Span fontWeight="bold" fontSize="16px">
+        USD
+      </Span>
+    </>
+  )
+}
 
 const MintedTokens = ({ isSucces }: MintedTokensType) => {
   const { web3 } = useProvider()
@@ -76,69 +199,12 @@ const MintedTokens = ({ isSucces }: MintedTokensType) => {
 
   return (
     <MintedTokensContainer>
-      <SpaceBetween>
-        <div style={{ display: 'flex' }}>
-          <Span fontSize="16px">{ticker} tokens Minted</Span>
-          <InfoIconContainer>
-            <div title="The 'shares' of your OSS project">
-              <InfoIcon fill={'#5B8BF5'} />
-            </div>
-          </InfoIconContainer>
-        </div>
-        <div style={{ display: 'flex', alignItems: 'center' }}>
-          <div style={{ width: '16px', height: '16px', marginRight: '5px', transform: 'translateY(-1px)' }}>
-            <DecCurrencySmall />
-          </div>
-          <Span fontWeight="bold" fontSize="16px">
-            10,000,000 {ticker}
-          </Span>
-          {isSucces && (
-            <AddToMetaMask onClick={handleAddClick}>
-              <img width="16px" height="16px" src="/images/img_0.png" />
-            </AddToMetaMask>
-          )}
-        </div>
-      </SpaceBetween>
-      <SpaceBetween>
-        <div style={{ display: 'flex' }}>
-          <Span fontSize="16px">Dev Protocol Treasury Fee</Span>
-          <InfoIconContainer>
-            <div title="The amount of tokens sent to the DEV treasury">
-              <InfoIcon fill={'#D500E6'} />
-            </div>
-          </InfoIconContainer>
-        </div>
-        <div style={{ display: 'flex', alignItems: 'center' }}>
-          <div style={{ width: '16px', height: '16px', marginRight: '5px', transform: 'translateY(-1px)' }}>
-            <DecCurrencySmall />
-          </div>
-          <Span fontWeight="bold" fontSize="16px">
-            500,000 {ticker}
-          </Span>
-          {isSucces && (
-            <AddToMetaMask onClick={handleAddClick}>
-              <img width="16px" height="16px" src="/images/img_0.png" />
-            </AddToMetaMask>
-          )}
-        </div>
-      </SpaceBetween>
-      <SpaceBetween>
-        <Span fontSize="16px">{"You'll receive"}</Span>
-        <div style={{ display: 'flex', alignItems: 'center' }}>
-          <div style={{ width: '16px', height: '16px', marginRight: '5px', transform: 'translateY(-1px)' }}>
-            <DecCurrencySmall />
-          </div>
-          <Span fontWeight="bold" fontSize="16px">
-            9,500,000 {ticker}
-          </Span>
-        </div>
-      </SpaceBetween>
-      <SpaceBetween>
-        <Span fontSize="16px">Funding received</Span>
-        <Span fontWeight="bold" fontSize="16px">
-          $ 20,000
-        </Span>
-      </SpaceBetween>
+      <MintedTokenGrid>
+        <TotalMinted isSucces={isSucces} onHandleClick={handleAddClick} ticker={ticker} />
+        <TreasuryFee onHandleClick={handleAddClick} ticker={ticker} isSucces={isSucces} />
+        <YouReceive ticker={ticker} />
+        <FundingReceived funding="12,000" />
+      </MintedTokenGrid>
     </MintedTokensContainer>
   )
 }
