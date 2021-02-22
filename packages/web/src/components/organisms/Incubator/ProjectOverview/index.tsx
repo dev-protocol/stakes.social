@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
 
-import { Span } from 'src/components/organisms/Incubator/Typography'
+import { Span, H3Xs } from 'src/components/organisms/Incubator/Typography'
 import { Button } from 'src/components/organisms/Incubator/molecules/Button'
 import ProjectEntry from 'src/components/organisms/Incubator/ProjectOverview/Project'
 import { CurrencySwitcher } from '../molecules/CurrencySwitcher'
@@ -145,24 +145,6 @@ const OverviewHeader = styled.div`
   align-items: center;
 `
 
-// const FilterOptions = styled.div`
-//   display: flex;
-//   padding: 3em 0;
-//   min-width: 950px;
-//   margin: 0 auto;
-//   justify-content: space-around;
-// `
-
-// const FilterOption = styled.div<{ filter: string; activeFilter: string }>`
-//   cursor: pointer;
-//   padding: 10px 25px;
-//   border-radius: 24px;
-//   border: 1px solid white;
-//   color: ${props => (props.activeFilter === props.filter ? '#5B8BF5' : 'white')};
-//   background: ${props => (props.activeFilter === props.filter ? 'white' : 'transparent')};
-//   font-size: 24px;
-// `
-
 const Overview = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(265px, 1fr));
@@ -191,54 +173,15 @@ const SeeMore = styled.div<{ isExpanded?: boolean }>`
 
 const ProjectOverview = () => {
   const [showAll, setShowAll] = useState(false)
-  // const [activeFilter, setActiveFilter] = useState('')
-
-  // const handleFilterChange = (filter: string) => {
-  //   setActiveFilter(prevFilter => {
-  //     if (prevFilter === filter) {
-  //       return ''
-  //     }
-  //     return filter
-  //   })
-  //   if (!showAll) {
-  //     setShowAll(true)
-  //   }
-  // }
-
-  // const showDataByFilter = () => {
-  //   return activeFilter === ''
-  //     ? PLACHEOLDER_DATA
-  //     : PLACHEOLDER_DATA.filter(project => project.tags?.includes(activeFilter))
-  // }
 
   const projects = showAll ? PLACHEOLDER_DATA : PLACHEOLDER_DATA.slice(0, 8)
   return (
     <GradientContainer id="projects" isExpanded={showAll}>
       <ProjectOverviewContainer>
         <OverviewHeader>
-          <Span color="white" fontSize="20px">
-            Meet our Incubated Projects
-          </Span>
+          <H3Xs color="white">Meet our Incubated Projects</H3Xs>
           <CurrencySwitcher />
         </OverviewHeader>
-        {/* <FilterOptions>
-          <FilterOption
-            onClick={() => handleFilterChange('Infrastructure')}
-            filter="Infrastructure"
-            activeFilter={activeFilter}
-          >
-            <Span fontSize="24px">Infrastructure</Span>
-          </FilterOption>
-          <FilterOption onClick={() => handleFilterChange('Hosting')} filter="Hosting" activeFilter={activeFilter}>
-            <Span fontSize="24px">Hosting</Span>
-          </FilterOption>
-          <FilterOption onClick={() => handleFilterChange('Crypto')} filter="Crypto" activeFilter={activeFilter}>
-            <Span fontSize="24px">Crypto OSS</Span>
-          </FilterOption>
-          <FilterOption onClick={() => handleFilterChange('Women')} filter="Women" activeFilter={activeFilter}>
-            <Span fontSize="24px">Women that code</Span>
-          </FilterOption>
-        </FilterOptions> */}
         <Overview>
           {projects &&
             projects.map(({ funding, title, url, claimed }, index) => (
@@ -252,7 +195,8 @@ const ProjectOverview = () => {
           onClick={() => setShowAll(true)}
           style={{ width: '180px', position: 'absolute', bottom: '50px', left: '50%', transform: 'translateX(-50%)' }}
           backgroundColor="white"
-          hoverBackgroundColor="#D500E6"
+          hoverBackgroundColor="black"
+          hoverTextColor="white"
           textColor="black"
         >
           Show all {PLACHEOLDER_DATA.length}

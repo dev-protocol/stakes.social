@@ -1,6 +1,7 @@
 import React, { useCallback, useContext } from 'react'
 import styled from 'styled-components'
 import SettingContext from 'src/context/settingContext'
+import { H3Xs } from '../../Typography'
 
 interface Props {
   className?: string
@@ -43,10 +44,10 @@ export const CurrencySwitcher = ({ className }: Props) => {
     <>
       <CurrencyContainer className={className} onClick={handleToggleCurrency}>
         <Dev isActive={isCurrencyDEV}>
-          <span>DEV</span>
+          <H3Xs>DEV</H3Xs>
         </Dev>
         <Usd isActive={!isCurrencyDEV}>
-          <span>USD</span>
+          <H3Xs>USD</H3Xs>
         </Usd>
       </CurrencyContainer>
     </>

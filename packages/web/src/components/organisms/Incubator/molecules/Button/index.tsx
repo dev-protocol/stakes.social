@@ -1,8 +1,14 @@
 import styled, { css } from 'styled-components'
 
-export const Button = styled.button<{ backgroundColor?: string; hoverBackgroundColor?: string; textColor?: string }>`
+export const Button = styled.button<{
+  backgroundColor?: string
+  hoverBackgroundColor?: string
+  textColor?: string
+  hoverTextColor?: string
+}>`
   cursor: pointer;
-  font-family: WhyteInktrap;
+  font-family: 'IBM Plex Mono';
+  font-weight: 500;
   width: 110px;
   height: 50px;
   ${({ disabled, backgroundColor, textColor }) => css`
@@ -21,5 +27,6 @@ export const Button = styled.button<{ backgroundColor?: string; hoverBackgroundC
 
   &:hover {
     background: ${props => props.hoverBackgroundColor || '#00d0fd'};
+    color: ${props => props.hoverTextColor || 'black'};
   }
 `
