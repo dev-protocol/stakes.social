@@ -18,11 +18,9 @@ const DevTokenExplanation = ({ onActivePageChange }: PostOnboardType) => {
           How your DEV token works
         </Span>
         <Span style={{ paddingTop: '3em' }} fontSize="16px">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-          magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-          consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-          pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
-          est laborum.
+          The DEV token is a governance token with utility that is minted via inflation. Patrons stake DEV tokens for
+          OSS projects they want to support. OSS projects can choose to sell the DEV token to fund their projects or
+          stake it for other OSS projects. The DEV token also gives you voting rights on protocol decisions.
         </Span>
         <BoardingNavigation
           backwardCallback={() => onActivePageChange(2)}

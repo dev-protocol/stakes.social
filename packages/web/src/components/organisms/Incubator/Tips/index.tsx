@@ -15,11 +15,7 @@ const tips = [
   {
     question: 'What is Dev Protocol?',
     answer:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt \
-    ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris \
-    nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit \
-    esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt \
-    in culpa qui officia deserunt mollit anim id est laborum.'
+      'Dev is a blockchain protocol that allows Open Source projects to sustainably fund their development. Patrons stake the DEV token for projects they want to fund. The protocol then mints new DEV tokens that are split between the OSS project and Patron. Dev Protocol is the only platform that allows both Patrons and OSS projects to earn money by supporting each other. The Protocol’s APY is based on DEV staked on the protocol and OSS projects onboarded.'
   },
   {
     question: 'How much time is remaining in the round?',

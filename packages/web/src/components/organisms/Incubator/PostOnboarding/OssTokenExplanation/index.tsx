@@ -34,11 +34,9 @@ const OssTokenExplanation = ({ onActivePageChange }: PostOnboardType) => {
           How your OSS token works
         </Span>
         <Span style={{ paddingTop: '3em' }} fontSize="16px">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-          magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-          consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-          pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
-          est laborum.
+          OSS projects mint their own token when they join Dev Protocol. These tokens are named after your project. OSS
+          token holder(s) receive a proportion of the inflationary funding awarded to the project. Therefore make sure
+          to only share your token with trusted parties.
         </Span>
         <BoardingNavigation
           backwardCallback={() => onActivePageChange(3)}

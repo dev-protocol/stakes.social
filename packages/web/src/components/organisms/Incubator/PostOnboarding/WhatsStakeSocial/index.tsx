@@ -53,11 +53,9 @@ const WhatsStakesSocial = ({ onActivePageChange }: PostOnboardType) => {
           What is Stakes Social?
         </Span>
         <Span style={{ paddingTop: '3em' }} fontSize="16px">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-          magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-          consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-          pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
-          est laborum.
+          Stakes Social is Dev Protocol’s user facing application where OSS projects and patrons connect. OSS projects
+          use Stakes Social to obtain patrons, build communities, and incentive stakeholders in order to grow their
+          project. Patrons use Stakes Social to stake the DEV token for OSS projects they support.
         </Span>
         <BoardingNavigation
           backwardCallback={() => onActivePageChange(1)}

@@ -69,9 +69,11 @@ const WhatsDEV = ({ onActivePageChange }: PostOnboardType) => {
           What is DEV protocol?
         </Span>
         <Span style={{ paddingTop: '3em' }} fontSize="16px">
-          Stakes Social is Dev Protocol’s user facing application where OSS projects and patrons connect. OSS projects
-          use Stakes Social to tokenize, obtain patrons, build communities, and incentive stakeholders in order to grow
-          their project. Patrons use Stakes Social to stake the DEV token for OSS projects they support.
+          Dev is a blockchain protocol that allows Open Source projects to sustainably fund their development. Patrons
+          stake the DEV token for projects they want to fund. The protocol then mints new DEV tokens that are split
+          between the OSS project and Patron. Dev Protocol is the only platform that allows both Patrons and OSS
+          projects to earn money by supporting each other. The Protocol’s APY is based on DEV staked on the protocol and
+          OSS projects onboarded.
         </Span>
         <BoardingNavigation
           backwardCallback={() => onActivePageChange(5)}

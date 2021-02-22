@@ -191,7 +191,7 @@ const SeeMore = styled.div<{ isExpanded?: boolean }>`
 
 const ProjectOverview = () => {
   const [showAll, setShowAll] = useState(false)
-  const [activeFilter, setActiveFilter] = useState('')
+  // const [activeFilter, setActiveFilter] = useState('')
 
   // const handleFilterChange = (filter: string) => {
   //   setActiveFilter(prevFilter => {
@@ -205,13 +205,13 @@ const ProjectOverview = () => {
   //   }
   // }
 
-  const showDataByFilter = () => {
-    return activeFilter === ''
-      ? PLACHEOLDER_DATA
-      : PLACHEOLDER_DATA.filter(project => project.tags?.includes(activeFilter))
-  }
+  // const showDataByFilter = () => {
+  //   return activeFilter === ''
+  //     ? PLACHEOLDER_DATA
+  //     : PLACHEOLDER_DATA.filter(project => project.tags?.includes(activeFilter))
+  // }
 
-  const projects = showAll ? showDataByFilter() : PLACHEOLDER_DATA.slice(0, 8)
+  const projects = showAll ? PLACHEOLDER_DATA : PLACHEOLDER_DATA.slice(0, 8)
   return (
     <GradientContainer id="projects" isExpanded={showAll}>
       <ProjectOverviewContainer>
