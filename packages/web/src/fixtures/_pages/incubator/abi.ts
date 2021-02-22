@@ -179,7 +179,7 @@ export const abi = [
       {
         indexed: false,
         internalType: 'string',
-        name: '_twitterUrl',
+        name: '_twitterId',
         type: 'string'
       },
       {
@@ -711,7 +711,7 @@ export const abi = [
       },
       {
         internalType: 'string',
-        name: '_twitterUrl',
+        name: '_twitterId',
         type: 'string'
       },
       {
