@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-export const Span = styled.span<{ fontSize: string; fontWeight?: string; color?: string }>`
+export const Span = styled.span<{ fontSize?: string; fontWeight?: string; color?: string }>`
   font-family: WhyteInktrap;
   font-size: ${props => props.fontSize || 'auto'};
   font-weight: ${props => props?.fontWeight || 'auto'};
@@ -11,7 +11,7 @@ export const Span = styled.span<{ fontSize: string; fontWeight?: string; color?:
 `
 
 export const LinkB = styled.a`
-  font-family: WhyteInktrap;
+  font-family: 'IBM Plex Mono';
   font-size: 16px;
   text-decoration: none;
   height: fit-content;
@@ -25,4 +25,33 @@ export const LinkB = styled.a`
     color: #5b8bf5;
     border-bottom: 1px solid #5b8bf5;
   }
+`
+
+export const H1Large = styled(Span)`
+  font-size: 40px;
+  font-family: WhyteInktrap;
+  font-weight: 700;
+  line-height: 56px;
+`
+
+export const H1M = styled(Span)`
+  font-size: 32px;
+  font-family: WhyteInktrap;
+  font-weight: 700;
+  line-height: 48px;
+`
+
+export const Text1Xl = styled(Span)`
+  font-size: 24px;
+  font-family: Whyte;
+  font-weight: 400;
+  line-height: 40px;
+`
+
+export const H3Xs = styled(Span)`
+  font-size: 16px;
+  font-family: WhyteInktrap;
+  font-weight: 400;
+  line-height: 28px;
+  letter-spacing: 2px;
 `

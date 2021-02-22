@@ -2,13 +2,13 @@ import React from 'react'
 import styled from 'styled-components'
 import Countdown, { CountdownRenderProps } from 'react-countdown'
 
-import { Span, LinkB } from 'src/components/organisms/Incubator/Typography'
+import { Span, LinkB, H1Large, Text1Xl, H3Xs, H1M } from 'src/components/organisms/Incubator/Typography'
 import { useCurrency } from 'src/fixtures/currency/hooks'
 
 const JumboContainer = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-gap: 6rem 8rem;
+  grid-gap: 111px 152px;
   width: 100%;
   margin: 0 auto;
   max-width: 1200px;
@@ -30,6 +30,7 @@ const SubTitleContainer = styled.div`
 const QualificationMethodologyContainer = styled.div`
   display: flex;
   justify-content: flex-end;
+  padding-top: 1.5em;
 
   > a {
     font-size: 16px;
@@ -71,36 +72,30 @@ const renderer = ({ formatted, completed }: CountdownRenderProps) => {
     return <Completionist />
   } else {
     return (
-      <Span fontWeight="bold" fontSize="32px" color="#0A0A0A">
-        {formatted.days}d : {formatted.hours}h : {formatted.minutes}m : {formatted.seconds}s
-      </Span>
+      <H1M>
+        {formatted.days}d:{formatted.hours}h:{formatted.minutes}m:{formatted.seconds}s
+      </H1M>
     )
   }
 }
 
 const Jumbo = () => {
   const { currency, toCurrency } = useCurrency()
-  const convertedFunding = toCurrency(12000000).dp(0).toNumber().toLocaleString()
+  const convertedFunding = toCurrency(12000).dp(0).toNumber().toLocaleString()
   return (
     <JumboContainer>
       <TitleContainer>
-        <Span fontSize="40px" fontWeight="bold">
-          Funding the World’s
-        </Span>
-        <Span fontSize="40px" fontWeight="bold">
-          Technological
-        </Span>
-        <Span fontSize="40px" fontWeight="bold">
-          Infrastructure
-        </Span>
+        <H1Large>Funding the World’s</H1Large>
+        <H1Large>Technological</H1Large>
+        <H1Large>Infrastructure</H1Large>
       </TitleContainer>
       <div style={{ display: 'flex', justifyContent: 'space-between', flexDirection: 'column' }}>
         <SubTitleContainer>
-          <Span fontSize="24px">
+          <Text1Xl>
             {
               "Dev Protocol's Incubator provides funding to Open source software projects tackling large problems with inadequate resources."
             }
-          </Span>
+          </Text1Xl>
         </SubTitleContainer>
         <QualificationMethodologyContainer>
           <LinkB href="https://docs.devprtcl.com" target="_blank" rel="noreferrer">
@@ -110,18 +105,16 @@ const Jumbo = () => {
       </div>
       <RoundRewardContainer>
         <Round>
-          <Span color="#999999" fontSize="20px">
-            Round 1 ends in
-          </Span>
+          <H3Xs color="#999999">Round 1 ends in</H3Xs>
           <Countdown date={Date.now() + 5400000000} renderer={renderer} />
         </Round>
         <RewardCollected>
-          <Span color="#999999" fontSize="20px">
+          <H3Xs style={{ alignSelf: 'flex-end' }} color="#999999">
             Total funding granted
-          </Span>
-          <Span fontWeight="bold" fontSize="32px" color="#0A0A0A">
+          </H3Xs>
+          <H1M>
             {currency === 'USD' && '$ '} {convertedFunding} {currency}
-          </Span>
+          </H1M>
         </RewardCollected>
       </RoundRewardContainer>
     </JumboContainer>
