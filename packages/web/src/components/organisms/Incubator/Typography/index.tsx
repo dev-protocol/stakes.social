@@ -41,11 +41,61 @@ export const H1M = styled(Span)`
   line-height: 48px;
 `
 
+export const H1S = styled(Span)`
+  font-size: 24px;
+  font-family: WhyteInktrap;
+  font-weight: 700;
+  line-height: 40px;
+`
+
+export const H2Xs = styled(Span)`
+  font-size: 16px;
+  font-family: 'IBM Plex Mono';
+  font-weight: 500;
+  line-height: 28px;
+`
+
+export const H2M = styled(Span)`
+  font-size: 24px;
+  font-family: 'IBM Plex Mono';
+  font-weight: 500;
+  line-height: 40px;
+`
+
 export const Text1Xl = styled(Span)`
   font-size: 24px;
   font-family: Whyte;
   font-weight: 400;
   line-height: 40px;
+`
+
+export const Text1L = styled(Span)`
+  font-size: 20px;
+  font-family: Whyte;
+  font-weight: 400;
+  line-height: 32px;
+`
+
+export const Text1S = styled(Span)`
+  font-size: 14px;
+  font-family: Whyte;
+  font-weight: 400;
+  line-height: 24px;
+`
+
+export const Text1Xs = styled(Span)`
+  font-size: 12px;
+  font-family: Whyte;
+  font-weight: 400;
+  line-height: 20px;
+`
+
+export const H3S = styled(Span)`
+  font-size: 20px;
+  font-family: WhyteInktrap;
+  font-weight: 400;
+  line-height: 32px;
+  letter-spacing: 2px;
 `
 
 export const H3Xs = styled(Span)`

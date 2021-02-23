@@ -13,7 +13,7 @@ const Container = styled.div`
   flex-direction: column;
   width: 100%;
   margin: 0 auto;
-  max-width: 1200px;
+  max-width: 1128px;
 `
 
 const BackArrowContainer = styled.div`

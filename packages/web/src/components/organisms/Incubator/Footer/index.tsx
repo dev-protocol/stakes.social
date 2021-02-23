@@ -25,7 +25,7 @@ const LowerFooter = {
 
 const FooterContainer = styled.div`
   margin: 0 auto;
-  max-width: 1200px;
+  max-width: 1128px;
 `
 
 const SocialMediaLink = styled.a`

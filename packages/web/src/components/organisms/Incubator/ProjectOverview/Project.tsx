@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import * as lorem from 'lorem-ipsum'
 
-import { Span } from 'src/components/organisms/Incubator/Typography'
+import { H1S, H3S, Text1S } from 'src/components/organisms/Incubator/Typography'
 import { Button } from 'src/components/organisms/Incubator/molecules/Button'
 import Link from 'next/link'
 import { useCurrency } from 'src/fixtures/currency/hooks'
@@ -24,12 +24,12 @@ const ProjectContainer = styled.div`
   display: grid;
   background: white;
   border-radius: 16px;
-  height: 455px;
+  height: 456px;
   width: 100%;
   grid-template-columns: 1fr;
-  grid-template-rows: 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1.5fr 1fr 1fr;
   row-gap: 2em;
-  padding: 2rem;
+  padding: 2em 1.5em;
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2), 0 2px 4px -1px rgba(0, 0, 0, 0.12);
 `
 
@@ -45,6 +45,10 @@ const IconContainer = styled.div`
 
 const DescriptionContainer = styled.div`
   grid-column: 1/1;
+  font-family: Whyte;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 24px;
   line-clamp: 4;
   box-orient: vertical;
   overflow: hidden;
@@ -71,22 +75,20 @@ const ProjectEntry = ({ funding, title, url, claimed }: ProjectProps) => {
   return (
     <ProjectContainer>
       <TitleContainer>
-        <Span fontSize="24px">{title}</Span>
+        <H3S>{title}</H3S>
         <IconContainer>
           <img src={url} width="64px" height="64px" />
         </IconContainer>
       </TitleContainer>
       <DescriptionContainer>{ipsum.generateSentences(3)}</DescriptionContainer>
       <FundingSection>
-        <Span fontSize="16px" color="#CCCCCC">
-          Funding received
-        </Span>
+        <Text1S color="#CCCCCC">Funding received</Text1S>
         <div style={{ display: 'flex', alignItems: 'center' }}>
           {currency === 'DEV' && <DevCurrencySymbol />}
-          <Span style={{ marginLeft: currency === 'DEV' ? '10px' : '0' }} fontSize="24px" fontWeight="bold">
+          <H1S style={{ marginLeft: currency === 'DEV' ? '10px' : '0' }}>
             {currency === 'USD' && '$ '}
             {convertedFunding} {currency}
-          </Span>
+          </H1S>
         </div>
       </FundingSection>
       <ClaimButtonContainer>

@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import { Span, LinkB } from 'src/components/organisms/Incubator/Typography'
+import { LinkB, H3Xs, Text1L, H2M } from 'src/components/organisms/Incubator/Typography'
 import Link from 'next/link'
 
 const tips = [
@@ -37,8 +37,8 @@ const RandomTipContainer = styled.div`
   flex-direction: column;
   width: 100%;
   margin: 0 auto;
-  max-width: 1200px;
-  padding: 1em 0;
+  max-width: 1128px;
+  padding: 1.5em 0;
 `
 
 const TipGrid = styled.div`
@@ -47,7 +47,8 @@ const TipGrid = styled.div`
   grid-template-areas:
     'question answer'
     '. all';
-  grid-gap: 6rem 8rem;
+  grid-gap: 75px 8rem;
+  padding-top: 4.25em;
   padding-bottom: 3em;
 `
 
@@ -72,12 +73,10 @@ const RandomTip = () => {
   const randomElement = tips[Math.floor(Math.random() * tips.length)]
   return (
     <TipGrid>
-      <Span style={{ gridArea: 'question' }} fontSize="24px">
-        {randomElement.question}
-      </Span>
-      <Span style={{ gridArea: 'answer' }} fontSize="20px">
+      <H2M style={{ gridArea: 'question' }}>{randomElement.question}</H2M>
+      <Text1L style={{ gridArea: 'answer' }} fontSize="20px">
         {randomElement.answer}
-      </Span>
+      </Text1L>
       <ShowAllContainer>
         <Link href="/incubator/QA">
           <LinkB>{'Show all Q&As'}</LinkB>
@@ -90,9 +89,7 @@ const RandomTip = () => {
 const RandomTips = () => {
   return (
     <RandomTipContainer>
-      <div style={{ paddingBottom: '4em' }}>
-        <Span fontSize="20px">Random Incubator Tip</Span>
-      </div>
+      <H3Xs>Random Incubator Tip</H3Xs>
       <RandomTip />
     </RandomTipContainer>
   )

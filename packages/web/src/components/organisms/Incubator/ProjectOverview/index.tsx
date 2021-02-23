@@ -134,9 +134,8 @@ const ProjectOverviewContainer = styled.div`
   flex-direction: column;
   width: 100%;
   margin: 0 auto;
-  max-width: 1200px;
+  max-width: 1128px;
   flex-grow: 1;
-  padding-top: 1em;
 `
 
 const OverviewHeader = styled.div`
@@ -147,14 +146,14 @@ const OverviewHeader = styled.div`
 
 const Overview = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(265px, 1fr));
-  grid-gap: 20px;
+  grid-template-columns: repeat(auto-fit, 264px); /* minmax(264px, 1fr) */
+  grid-gap: 1.5em;
   padding-top: 5em;
 `
 
 const GradientContainer = styled.div<{ isExpanded?: boolean }>`
   position: relative;
-  padding-top: 1em;
+  padding-top: 1.5em;
   padding-bottom: 3em;
   max-height: ${props => (props.isExpanded ? 'auto' : '1050px')};
   overflow-y: hidden;

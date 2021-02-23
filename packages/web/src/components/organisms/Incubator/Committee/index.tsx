@@ -1,22 +1,23 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import { Span } from 'src/components/organisms/Incubator/Typography'
+import { H3Xs, H1M, H2Xs, Text1Xs } from 'src/components/organisms/Incubator/Typography'
 import Hr from '../molecules/Hr'
+import { GithubIcon, TwitterBlackWhite } from '../Icons'
 
 const CommitteeContainer = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
   margin: 0 auto;
-  max-width: 1200px;
-  padding: 2em 0 0 0;
+  max-width: 1128px;
+  padding: 1.5em 0 0 0;
 `
 
 const PersonsOverview = styled.div`
   display: flex;
   justify-content: space-evenly;
-  padding: 4em 0 5em 0;
+  padding: 4.25em 0 114.59px 0;
 `
 
 const PersonContainer = styled.div`
@@ -45,11 +46,12 @@ const SocialMediaContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  padding-top: 1.5em;
 `
 
 const IconContainer = styled.div`
   cursor: pointer;
-  padding: 7.5px;
+  padding: 0 8px;
 
   > a {
     text-decoration: none;
@@ -61,20 +63,18 @@ const Person = ({ image, name, company, job, twitter, github }: PersonProps) => 
     <div style={{ overflow: 'hidden', borderRadius: '90px' }}>
       <Icon src={image} />
     </div>
-    <Span fontWeight="bold" fontSize="32px">
-      {name}
-    </Span>
-    <Span fontSize="20px">{company}</Span>
-    <Span fontSize="12px">{job}</Span>
+    <H1M style={{ marginTop: '24px' }}>{name}</H1M>
+    <H2Xs style={{ marginTop: '4px' }}>{company}</H2Xs>
+    <Text1Xs style={{ marginTop: '2px' }}>{job}</Text1Xs>
     <SocialMediaContainer>
       <IconContainer>
         <a target="_blank" rel="noopener noreferrer" href={twitter}>
-          <img src="https://res.cloudinary.com/haas-storage/image/upload/v1613111072/twitter_kggvre.png" />
+          <TwitterBlackWhite />
         </a>
       </IconContainer>
       <IconContainer>
         <a target="_blank" rel="noopener noreferrer" href={github}>
-          <img src="https://res.cloudinary.com/haas-storage/image/upload/v1613111071/github_rg8ngo.png" />
+          <GithubIcon />
         </a>
       </IconContainer>
     </SocialMediaContainer>
@@ -84,9 +84,7 @@ const Person = ({ image, name, company, job, twitter, github }: PersonProps) => 
 const Committee = () => {
   return (
     <CommitteeContainer id="committee">
-      <Span color="black" fontSize="20px">
-        The Incubator Committee
-      </Span>
+      <H3Xs color="black">The Incubator Committee</H3Xs>
       <PersonsOverview>
         <Person
           name="Aggre Hara"

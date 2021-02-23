@@ -8,10 +8,10 @@ import { useCurrency } from 'src/fixtures/currency/hooks'
 const JumboContainer = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-gap: 111px 152px;
+  grid-gap: 111px 30px;
   width: 100%;
   margin: 0 auto;
-  max-width: 1200px;
+  max-width: 1128px;
   flex-grow: 1;
   padding-top: 4em;
   padding-bottom: 3em;
