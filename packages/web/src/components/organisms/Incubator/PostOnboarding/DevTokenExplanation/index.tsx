@@ -1,5 +1,5 @@
 import React from 'react'
-import { Span } from '../../Typography'
+import { H1S, Text1M } from '../../Typography'
 import AddTokenToMetamaskAnimation from './Animations'
 import { AnimationContainer, Container, DescriptionContainer, BoardingNavigation } from '../../molecules/Onboarding'
 
@@ -14,14 +14,12 @@ const DevTokenExplanation = ({ onActivePageChange }: PostOnboardType) => {
         <AddTokenToMetamaskAnimation />
       </AnimationContainer>
       <DescriptionContainer>
-        <Span fontSize="24px" fontWeight="bold">
-          How your DEV token works
-        </Span>
-        <Span style={{ paddingTop: '3em' }} fontSize="16px">
+        <H1S>How your DEV token works</H1S>
+        <Text1M style={{ paddingTop: '1.5em' }}>
           The DEV token is a governance token with utility that is minted via inflation. Patrons stake DEV tokens for
           OSS projects they want to support. OSS projects can choose to sell the DEV token to fund their projects or
           stake it for other OSS projects. The DEV token also gives you voting rights on protocol decisions.
-        </Span>
+        </Text1M>
         <BoardingNavigation
           backwardCallback={() => onActivePageChange(2)}
           forwardCallback={() => onActivePageChange(4)}

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Span } from '../../Typography'
+import { Span, Text1M, H1S } from '../../Typography'
 import { AnimationContainer, Container, DescriptionContainer, BoardingNavigation } from '../../molecules/Onboarding'
 
 type PostOnboardType = {
@@ -30,14 +30,12 @@ const OssTokenExplanation = ({ onActivePageChange }: PostOnboardType) => {
         <OssTokenLogo />
       </AnimationContainer>
       <DescriptionContainer>
-        <Span fontSize="24px" fontWeight="bold">
-          How your OSS token works
-        </Span>
-        <Span style={{ paddingTop: '3em' }} fontSize="16px">
+        <H1S>How your OSS token works</H1S>
+        <Text1M style={{ paddingTop: '1.5em' }}>
           OSS projects mint their own token when they join Dev Protocol. These tokens are named after your project. OSS
           token holder(s) receive a proportion of the inflationary funding awarded to the project. Therefore make sure
           to only share your token with trusted parties.
-        </Span>
+        </Text1M>
         <BoardingNavigation
           backwardCallback={() => onActivePageChange(3)}
           forwardCallback={() => onActivePageChange(5)}

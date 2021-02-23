@@ -1,5 +1,5 @@
 import React from 'react'
-import { Span } from '../../Typography'
+import { H1S, Text1M } from '../../Typography'
 
 import { AnimationContainer, DescriptionContainer, Container, BoardingNavigation } from '../../molecules/Onboarding'
 
@@ -65,16 +65,14 @@ const WhatsDEV = ({ onActivePageChange }: PostOnboardType) => {
         <DevProtocolLogo />
       </AnimationContainer>
       <DescriptionContainer>
-        <Span fontSize="24px" fontWeight="bold">
-          What is DEV protocol?
-        </Span>
-        <Span style={{ paddingTop: '3em' }} fontSize="16px">
+        <H1S>What is DEV protocol?</H1S>
+        <Text1M style={{ paddingTop: '1.5em' }}>
           Dev is a blockchain protocol that allows Open Source projects to sustainably fund their development. Patrons
           stake the DEV token for projects they want to fund. The protocol then mints new DEV tokens that are split
           between the OSS project and Patron. Dev Protocol is the only platform that allows both Patrons and OSS
           projects to earn money by supporting each other. The Protocol’s APY is based on DEV staked on the protocol and
           OSS projects onboarded.
-        </Span>
+        </Text1M>
         <BoardingNavigation
           backwardCallback={() => onActivePageChange(5)}
           forwardCallback={() => onActivePageChange(2)}

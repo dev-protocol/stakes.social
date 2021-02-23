@@ -1,5 +1,5 @@
 import React from 'react'
-import { Span } from '../../Typography'
+import { Span, H1S, Text1M } from '../../Typography'
 import BuildCommunityAnimation from './Animations'
 import { AnimationContainer, Container, DescriptionContainer, BoardingNavigation } from '../../molecules/Onboarding'
 
@@ -14,13 +14,11 @@ const BuildCommunity = ({ onActivePageChange }: PostOnboardType) => {
         <BuildCommunityAnimation />
       </AnimationContainer>
       <DescriptionContainer>
-        <Span fontSize="24px" fontWeight="bold">
-          Build a community to stake DEV tokens for you
-        </Span>
-        <Span style={{ paddingTop: '3em' }} fontSize="16px">
+        <H1S>Build a community to stake DEV tokens for you</H1S>
+        <Text1M style={{ paddingTop: '1.5em' }}>
           The most successful projects build a community of Patrons to stake DEV tokens for them. Add the DEV badge to
           your Github so users know they can earn money by supporting your project!
-        </Span>
+        </Text1M>
         <BoardingNavigation
           backwardCallback={() => onActivePageChange(4)}
           forwardCallback={() => onActivePageChange(1)}

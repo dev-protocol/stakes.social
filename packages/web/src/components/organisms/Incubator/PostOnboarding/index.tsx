@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
-import { Span, LinkB } from '../Typography'
+import { Span, LinkB, H3Xs } from '../Typography'
 import TimelineSection, { Step } from '../Timeline'
 import WhatsDEV from './WhatsDEV'
 import WhatsStakesSocial from './WhatsStakeSocial'
@@ -30,8 +30,8 @@ const PostOnboarding = ({ isOverview, isOnboarding, onBoardChange }: WhatsNextTy
   const { projectId } = { projectId: '0xF6899a1536E6474f0a6Aa2b36714e9632FB97D40' }
   return (
     <>
-      <SpaceBetween style={{ alignItems: 'center' }}>
-        <Span fontSize="16px">{"What's next?"}</Span>
+      <SpaceBetween style={{ paddingTop: '64px', alignItems: 'center', paddingBottom: '1em' }}>
+        <H3Xs>{"What's next?"}</H3Xs>
         <TimelineContainer style={{ alignSelf: 'center' }}>
           <TimelineSection
             StepSpanComponent={(info: any) => <Step info={{ ...info, width: '40px', fontSize: '12px' }}>Tip 1</Step>}

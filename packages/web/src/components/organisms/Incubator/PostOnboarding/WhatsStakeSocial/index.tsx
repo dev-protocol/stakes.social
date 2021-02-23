@@ -1,5 +1,5 @@
 import React from 'react'
-import { Span } from '../../Typography'
+import { Span, H1S, Text1M } from '../../Typography'
 import { AnimationContainer, Container, DescriptionContainer, BoardingNavigation } from '../../molecules/Onboarding'
 
 type PostOnboardType = {
@@ -49,14 +49,12 @@ const WhatsStakesSocial = ({ onActivePageChange }: PostOnboardType) => {
         <StakesSocialLogo />
       </AnimationContainer>
       <DescriptionContainer>
-        <Span fontSize="24px" fontWeight="bold">
-          What is Stakes Social?
-        </Span>
-        <Span style={{ paddingTop: '3em' }} fontSize="16px">
+        <H1S>What is Stakes Social?</H1S>
+        <Text1M style={{ paddingTop: '1.5em' }}>
           Stakes Social is Dev Protocol’s user facing application where OSS projects and patrons connect. OSS projects
           use Stakes Social to obtain patrons, build communities, and incentive stakeholders in order to grow their
           project. Patrons use Stakes Social to stake the DEV token for OSS projects they support.
-        </Span>
+        </Text1M>
         <BoardingNavigation
           backwardCallback={() => onActivePageChange(1)}
           forwardCallback={() => onActivePageChange(3)}
