@@ -9,7 +9,7 @@ const HeaderContainer = styled.div`
   grid-template-columns: 1fr 1.5fr 1fr;
   width: 100%;
   margin: 0 auto;
-  padding: 1rem 0;
+  padding: 1em 0;
   max-width: 1128px;
 `
 

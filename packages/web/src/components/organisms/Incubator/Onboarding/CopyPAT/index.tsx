@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { Span, LinkB } from 'src/components/organisms/Incubator/Typography'
+import { Span, LinkB, H1S, Text1M } from 'src/components/organisms/Incubator/Typography'
 import Animation from './Animations'
 import { AnimationContainer, Container, DescriptionContainer, BoardingNavigation } from '../../molecules/Onboarding'
 
@@ -15,19 +15,17 @@ const CopyPat = ({ onActivePartChange }: CopyPatType) => {
         <Animation />
       </AnimationContainer>
       <DescriptionContainer>
-        <Span fontWeight="bold" fontSize="24px">
-          Enter Personal Access token
-        </Span>
-        <Span style={{ paddingTop: '3em' }} fontSize="16px">
+        <H1S>Enter Personal Access token</H1S>
+        <Text1M style={{ paddingTop: '1.5em' }}>
           In order to authenticate your ownership of the project you’re attempting to claim we require you to submit
           your Github Personal Access Token (PAT). If you like you can create a new PAT with no permissions. Our Khaos
           oracle confidentially authenticates your PAT so it remains secure!
-        </Span>
+        </Text1M>
         <LinkB
           rel="noopener noreferrer"
           target="_blank"
           href="https://github.com/settings/tokens/new"
-          style={{ paddingTop: '1em' }}
+          style={{ paddingTop: '1.5em' }}
         >
           Create PAT
         </LinkB>

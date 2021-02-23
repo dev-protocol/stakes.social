@@ -189,6 +189,7 @@ const TimelineSection = ({
         ) : (
           <StepSpan
             fontSize="12px"
+            style={{ fontFamily: 'IBM Plex Mono', lineHeight: '20px' }}
             isActive={isFinished}
             finishedColor={finishedColor}
             isFinished={isFinished}

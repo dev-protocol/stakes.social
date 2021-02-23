@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { Span, LinkB } from 'src/components/organisms/Incubator/Typography'
+import { Span, LinkB, H1S, Text1M } from 'src/components/organisms/Incubator/Typography'
 import DownloadMetamaskAnimation from './Animations'
 import { AnimationContainer, Container, DescriptionContainer, BoardingNavigation } from '../../molecules/Onboarding'
 
@@ -15,20 +15,18 @@ const DownloadMetamask = ({ onActivePartChange }: DownloadMetamaskType) => {
         <DownloadMetamaskAnimation />
       </AnimationContainer>
       <DescriptionContainer>
-        <Span fontWeight="bold" fontSize="24px">
-          Download MetaMask
-        </Span>
-        <Span style={{ paddingTop: '3em' }} fontSize="16px">
+        <H1S>Download MetaMask</H1S>
+        <Text1M style={{ paddingTop: '1.5em' }}>
           MetaMask is a blockchain wallet used to interact with the Ethereum blockchain. It allows users to store and
           manage account keys, broadcast transactions, send and receive Ethereum-based cryptocurrencies and tokens, and
           securely connect to decentralized applications through a compatible web browser or the mobile {"app's"}{' '}
           built-in browser.
-        </Span>
+        </Text1M>
         <LinkB
           target="_blank"
           rel="noopener noreferrer"
           href="https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn?hl=en"
-          style={{ paddingTop: '1em' }}
+          style={{ paddingTop: '1.5em' }}
         >
           Download MetaMask Browser Extension for Chrome
         </LinkB>

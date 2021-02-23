@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import Link from 'next/link'
 import * as lorem from 'lorem-ipsum'
 
-import { Span } from 'src/components/organisms/Incubator/Typography'
+import { Span, H1Large, Text1S, H1M, Text1L, H3Xs, ButtonM } from 'src/components/organisms/Incubator/Typography'
 import { Button } from 'src/components/organisms/Incubator/molecules/Button'
 import IncubatorHeader from 'src/components/organisms/Incubator/Header'
 import Footer from 'src/components/organisms/Incubator/Footer'
@@ -20,8 +20,7 @@ import PurchaseEthereum from 'src/components/organisms/Incubator/Onboarding/Purc
 import ConnectWallet from 'src/components/organisms/Incubator/Onboarding/ConnectWallet'
 import CopyPat from 'src/components/organisms/Incubator/Onboarding/CopyPAT'
 import SubmitTransaction from 'src/components/organisms/Incubator/Onboarding/SubmitTransaction'
-
-// const LABEL_PLACEHOLDERS = ['Crypto OSS', 'Women that Code']
+import { TwitterBlackWhite, GithubIcon } from 'src/components/organisms/Incubator/Icons'
 
 const ipsum = new lorem.LoremIpsum({
   sentencesPerParagraph: { min: 1, max: 3 },
@@ -39,8 +38,7 @@ const Container = styled.div`
 
 const BackArrowContainer = styled.div`
   display: flex;
-  padding: 1em 0 3em 0;
-  height: 94px;
+  margin-bottom: 95px;
 
   > svg {
     cursor: pointer;
@@ -50,8 +48,8 @@ const BackArrowContainer = styled.div`
 const DetailsContainer = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-gap: 5em;
-  margin-bottom: 3em;
+  column-gap: 120px;
+  margin-bottom: 5em;
 `
 
 const SpaceBetween = styled.div`
@@ -62,6 +60,7 @@ const SpaceBetween = styled.div`
 const Contact = styled.div`
   display: flex;
   flex-direction: column;
+  margin-bottom: 54px;
 `
 const LinkB = styled.a`
   font-family: WhyteInktrap;
@@ -80,12 +79,13 @@ const LinkB = styled.a`
 
 const SocialMediaContainer = styled.div`
   display: flex;
+  padding-top: 1em;
 `
 
 const IconContainer = styled.div`
   cursor: pointer;
-  padding: 7.5px;
-
+  padding-left: 8px;
+  padding-right: 8px;
   > a {
     text-decoration: none;
   }
@@ -102,7 +102,7 @@ const LogoContainer = styled.div`
 const FundingContainer = styled.div`
   display: flex;
   flex-direction: column;
-  padding-top: 1em;
+  padding-top: 21px;
   width: 100%;
 `
 
@@ -111,27 +111,10 @@ const DevCurrencyContainer = styled.div`
   align-items: center;
 
   svg {
-    width: 28px;
+    width: 24px;
     height: auto;
   }
 `
-
-// const LabelContainer = styled.div`
-//   display: flex;
-//   padding-top: 3em;
-
-//   > div {
-//     margin-right: 15px;
-//   }
-// `
-
-// const FilterOption = styled.div`
-//   padding: 10px 25px;
-//   border-radius: 24px;
-//   border: 1px solid #999999;
-//   color: #999999;
-//   font-size: 20px;
-// `
 
 type ProjectDetailsProps = {
   onStateChange: React.Dispatch<React.SetStateAction<string>>
@@ -159,21 +142,19 @@ const ProjectDetails = ({
   return (
     <DetailsContainer>
       <div>
-        <SpaceBetween style={{ paddingBottom: '3em' }}>
+        <SpaceBetween>
           <Contact>
-            <Span fontSize="40px" fontWeight="bold">
-              {name}
-            </Span>
-            <LinkB>{website}</LinkB>
+            <H1Large>{name}</H1Large>
+            <LinkB style={{ paddingTop: '11px' }}>{website}</LinkB>
             <SocialMediaContainer>
               <IconContainer style={{ paddingLeft: 0 }}>
                 <a target="_blank" rel="noopener noreferrer" href={twitter}>
-                  <img src="https://res.cloudinary.com/haas-storage/image/upload/v1613111072/twitter_kggvre.png" />
+                  <TwitterBlackWhite />
                 </a>
               </IconContainer>
               <IconContainer>
                 <a target="_blank" rel="noopener noreferrer" href={github}>
-                  <img src="https://res.cloudinary.com/haas-storage/image/upload/v1613111071/github_rg8ngo.png" />
+                  <GithubIcon />
                 </a>
               </IconContainer>
             </SocialMediaContainer>
@@ -186,38 +167,23 @@ const ProjectDetails = ({
 
         <SpaceBetween style={{ alignItems: 'center' }}>
           <FundingContainer>
-            <Span fontSize="14px" color="#CCCCCC">
-              Funding received
-            </Span>
+            <Text1S color="#CCCCCC">Funding received</Text1S>
             <SpaceBetween>
               <DevCurrencyContainer>
                 <DevCurrencySymbol />
-                <Span style={{ marginLeft: '5px', transform: 'translateY(-2px)' }} fontWeight="bold" fontSize="32px">
-                  {fundingDEV} DEV
-                </Span>
+                <H1M style={{ marginLeft: '5px', transform: 'translateY(-2px)' }}>{fundingDEV} DEV</H1M>
               </DevCurrencyContainer>
               <Button disabled={claimed} onClick={() => onStateChange('onboarding')}>
                 {claimed ? 'Claimed' : 'Claim'}
               </Button>
             </SpaceBetween>
 
-            <Span fontSize="14px" color="#999999">
-              $ {fundingUSD} USD
-            </Span>
+            <Text1S color="#999999">$ {fundingUSD} USD</Text1S>
           </FundingContainer>
         </SpaceBetween>
       </div>
       <DescriptionContainer>
-        <Span fontSize="20px">{ipsum.generateSentences(9)}</Span>
-        {/* <LabelContainer>
-          {LABEL_PLACEHOLDERS.map((label, index) => {
-            return (
-              <FilterOption key={index}>
-                <Span fontSize="20px">{label}</Span>
-              </FilterOption>
-            )
-          })}
-        </LabelContainer> */}
+        <Text1L>{ipsum.generateSentences(9)}</Text1L>
       </DescriptionContainer>
     </DetailsContainer>
   )
@@ -253,11 +219,11 @@ export const OnboardSwitch = ({ isOnboarding, onOnboardChange }: OnboardSwitchTy
   return (
     <OnboardSwitchContainer>
       <OnboardEntry onClick={() => onOnboardChange(true)} isActive={isOnboarding}>
-        <Span fontSize="16px">Onboarding</Span>
+        <ButtonM fontSize="16px">Onboarding</ButtonM>
       </OnboardEntry>
       <div style={{ paddingRight: '1.5em', marginRight: '1.5em', borderRight: '1px solid black' }} />
       <OnboardEntry onClick={() => onOnboardChange(false)} isActive={!isOnboarding}>
-        <Span fontSize="16px">Post-Onboarding</Span>
+        <ButtonM fontSize="16px">Post-Onboarding</ButtonM>
       </OnboardEntry>
     </OnboardSwitchContainer>
   )
@@ -279,8 +245,8 @@ const OnboardingSection = ({ isModal, onStateChange, onBoardChange, isOnboarding
 
   return (
     <>
-      <SpaceBetween style={{ alignItems: 'center' }}>
-        <Span fontSize="16px">{'How to receive your funding?'}</Span>
+      <SpaceBetween style={{ paddingTop: '64px', alignItems: 'center', paddingBottom: '1em' }}>
+        <H3Xs>{'How to receive your funding?'}</H3Xs>
 
         <TimelineContainer style={{ alignSelf: 'center' }}>
           <TimelineSection isFirst={true} onActivePartChange={setActivePart} part={1} currentPart={activePart} />
@@ -301,8 +267,6 @@ const OnboardingSection = ({ isModal, onStateChange, onBoardChange, isOnboarding
       {activePart === 3 && <ConnectWallet onActivePartChange={setActivePart} />}
       {activePart === 4 && <CopyPat onActivePartChange={setActivePart} />}
       {activePart === 5 && <SubmitTransaction onActivePartChange={setActivePart} />}
-
-      {/* {!isOnboarding && <WhatsNext isOverview={true} />} */}
     </>
   )
 }
@@ -321,7 +285,7 @@ const OnboardingPage = () => {
     fundingUSD: '26,000',
     fundingDEV: '71,000',
     claimed: false,
-    logo: 'https://res.cloudinary.com/haas-storage/image/upload/v1613044939/sigma_tye6kg.png'
+    logo: 'https://res.cloudinary.com/haas-storage/image/upload/v1614068316/sigma_2x_aibcyi.png'
   }
 
   useEffect(() => {

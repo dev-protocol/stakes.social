@@ -76,6 +76,13 @@ export const Text1L = styled(Span)`
   line-height: 32px;
 `
 
+export const Text1M = styled(Span)`
+  font-size: 16px;
+  font-family: Whyte;
+  font-weight: 400;
+  line-height: 28px;
+`
+
 export const Text1S = styled(Span)`
   font-size: 14px;
   font-family: Whyte;
@@ -86,6 +93,13 @@ export const Text1S = styled(Span)`
 export const Text1Xs = styled(Span)`
   font-size: 12px;
   font-family: Whyte;
+  font-weight: 400;
+  line-height: 20px;
+`
+
+export const Text2Xs = styled(Span)`
+  font-size: 12px;
+  font-family: 'IBM Plex Mono';
   font-weight: 400;
   line-height: 20px;
 `
@@ -103,5 +117,11 @@ export const H3Xs = styled(Span)`
   font-family: WhyteInktrap;
   font-weight: 400;
   line-height: 28px;
-  letter-spacing: 2px;
+`
+
+export const ButtonM = styled(Span)`
+  font-size: 16px;
+  font-family: 'IBM Plex Mono';
+  font-weight: 500;
+  line-height: 28px;
 `

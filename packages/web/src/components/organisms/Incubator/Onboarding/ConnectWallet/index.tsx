@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { Span } from 'src/components/organisms/Incubator/Typography'
+import { Span, H1S, Text1M } from 'src/components/organisms/Incubator/Typography'
 import Animation from './Animations'
 import { Container, AnimationContainer, DescriptionContainer, BoardingNavigation } from '../../molecules/Onboarding'
 
@@ -15,13 +15,11 @@ const ConnectWallet = ({ onActivePartChange }: ConnectWalletType) => {
         <Animation />
       </AnimationContainer>
       <DescriptionContainer>
-        <Span fontWeight="bold" fontSize="24px">
-          Connect Wallet
-        </Span>
-        <Span style={{ paddingTop: '3em' }} fontSize="16px">
+        <H1S>Connect Wallet</H1S>
+        <Text1M style={{ paddingTop: '1.5em' }}>
           Click &quot;Connect Wallet&quot; in the top right corner of the website. This allows you to interact with our
           website to retrieve your funding.
-        </Span>
+        </Text1M>
         <BoardingNavigation
           backwardCallback={() => onActivePartChange(2)}
           forwardCallback={() => onActivePartChange(4)}
