@@ -37,12 +37,14 @@ const ResponsiveContainer = styled(Container)`
 
 type DisclaimerProps = {
   projectName: string
+  tokenName: string
   tokenSymbol: string
   personalAccessToken: string
   onFormDataChange: React.Dispatch<
     React.SetStateAction<
       | {
           projectName: string
+          tokenName: string
           tokenSymbol: string
           personalAccessToken: string
         }
@@ -149,6 +151,7 @@ const Etherscan = styled(ButtonWithGradient)`
 
 const TokenizationDisclaimer = ({
   projectName,
+  tokenName,
   tokenSymbol,
   personalAccessToken,
   onFormDataChange,
@@ -164,7 +167,7 @@ const TokenizationDisclaimer = ({
     const key = 'tokenization'
     message.loading({ content: 'now tokenizing...', duration: 0, key })
 
-    const authRequestData: string[] = await (async () => {
+    const authRequestData: [string, string] = await (async () => {
       // If the target market is not NpmMarket, it is the GitHubMarket with Khaos.
       // TODO: Needs dynamically switch to use Khaos or not use Khaos by target Market
 
@@ -173,11 +176,11 @@ const TokenizationDisclaimer = ({
       // Create a public signature from the user's signature and the entered PAT.
       const khaos = await postSignGitHubMarketAssetHandler(repository, personalAccessToken)
       message.success({ content: 'Successful creation of public signature by Khaos' })
-      return [repository, khaos.publicSignature || '']
+      return [repository, khaos.publicSignature || ''] as [string, string]
     })()
 
     // Send Ethereum transaction and create new Property Tokens, aka Creator Tokens, and starts authentication flow.
-    const results = await createAndAuthenticate(projectName, tokenSymbol, market, authRequestData)
+    const results = await createAndAuthenticate(tokenName, tokenSymbol, market, authRequestData)
     if (results) {
       // TODO: Function to be called to tokenize based input
       // New Property Tokens have been created.
@@ -219,6 +222,10 @@ const TokenizationDisclaimer = ({
       <Row>
         <Span>Project Name:</Span>
         <Span>{projectName}</Span>
+      </Row>
+      <Row>
+        <Span>Token Name:</Span>
+        <Span>{tokenName}</Span>
       </Row>
       <Row>
         <Span>Token Symbol:</Span>
@@ -272,7 +279,7 @@ const AuthenticateNewAsset = (_: Props) => {
   const [subHeader, setSubHeader] = useState('Create an asset or authenticate an existing pool.')
   const [, market] = getPath(useRouter().asPath)
   const [formData, setFormData] = useState<
-    { projectName: string; tokenSymbol: string; personalAccessToken: string } | undefined
+    { projectName: string; tokenName: string; tokenSymbol: string; personalAccessToken: string } | undefined
   >(undefined)
   const [metrics, setMetrics] = useState<string>('')
 
@@ -301,6 +308,7 @@ const AuthenticateNewAsset = (_: Props) => {
             onHeaderChange={setHeader}
             onSubHeaderChange={setSubHeader}
             projectName={formData.projectName}
+            tokenName={formData.tokenName}
             tokenSymbol={formData.tokenSymbol}
             personalAccessToken={formData.personalAccessToken}
             onMetricsChange={setMetrics}
