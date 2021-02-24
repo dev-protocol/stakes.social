@@ -3,7 +3,7 @@ import styled, { CSSProperties } from 'styled-components'
 
 import { Container } from 'src/components/atoms/Container'
 import { StakesSocialLogo, MadeByDev } from 'src/components/organisms/Incubator/Icons'
-import { Span } from 'src/components/organisms/Incubator/Typography'
+import { Span, ButtonM, H3Xs } from 'src/components/organisms/Incubator/Typography'
 
 const Wrap = styled.footer`
   display: grid;
@@ -46,33 +46,31 @@ export const Footer = () => {
     <Wrap>
       <Container style={LowerFooter}>
         <FooterContainer>
-          <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '30px' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '32px' }}>
             <StakesSocialLogo />
             <MadeByDev />
           </div>
           <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-            <Span color="white" fontSize="20px">
-              2021. All Rights Reserverd
-            </Span>
+            <H3Xs color="white">2021. All Rights Reserverd</H3Xs>
             <SocialContainer>
               <SocialMediaLink target="_blank" rel="noopener noreferrer" href="https://twitter.com/devprtcl">
-                <Span fontSize="20px">Twitter</Span>
+                <ButtonM>Twitter</ButtonM>
               </SocialMediaLink>
               <SocialMediaLink target="_blank" rel="noopener noreferrer" href="https://discord.gg/VwJp4KM">
-                <Span fontSize="20px">Discord</Span>
+                <ButtonM>Discord</ButtonM>
               </SocialMediaLink>
               <SocialMediaLink
                 target="_blank"
                 rel="noopener noreferrer"
                 href="https://github.com/dev-protocol/stakes.social"
               >
-                <Span fontSize="20px">GitHub</Span>
+                <ButtonM>GitHub</ButtonM>
               </SocialMediaLink>
               <SocialMediaLink target="_blank" rel="noopener noreferrer" href="https://t.me/devprtcl">
-                <Span fontSize="20px">Telegram</Span>
+                <ButtonM>Telegram</ButtonM>
               </SocialMediaLink>
               <SocialMediaLink target="_blank" rel="noopener noreferrer" href="https://medium.com/devtoken">
-                <Span fontSize="20px">Medium</Span>
+                <ButtonM>Medium</ButtonM>
               </SocialMediaLink>
             </SocialContainer>
           </div>

@@ -48,6 +48,13 @@ export const H1S = styled(Span)`
   line-height: 40px;
 `
 
+export const H1Xss = styled(Span)`
+  font-size: 16px;
+  font-family: WhyteInktrap;
+  font-weight: 700;
+  line-height: 28px;
+`
+
 export const H2Xs = styled(Span)`
   font-size: 16px;
   font-family: 'IBM Plex Mono';
@@ -102,6 +109,20 @@ export const Text2Xs = styled(Span)`
   font-family: 'IBM Plex Mono';
   font-weight: 400;
   line-height: 20px;
+`
+
+export const Text2S = styled(Span)`
+  font-size: 14px;
+  font-family: 'IBM Plex Mono';
+  font-weight: 400;
+  line-height: 24px;
+`
+
+export const Text2M = styled(Span)`
+  font-size: 16px;
+  font-family: 'IBM Plex Mono';
+  font-weight: 400;
+  line-height: 28px;
 `
 
 export const H3S = styled(Span)`

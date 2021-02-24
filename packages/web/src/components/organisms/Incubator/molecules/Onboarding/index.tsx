@@ -30,12 +30,12 @@ export const DescriptionContainer = styled.div`
   flex-direction: column;
 `
 
-export const Container = styled.div`
+export const Container = styled.div<{ isOverview?: boolean }>`
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-areas: 'animation description';
   column-gap: 24px;
-  margin-bottom: 184px;
+  margin-bottom: ${props => (props.isOverview ? '184px' : '80px')};
 `
 
 type BoardingNavigationType = {

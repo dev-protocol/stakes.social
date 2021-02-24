@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import styled from 'styled-components'
 import { Form } from 'antd'
 
-import { Span, LinkB } from '../../Typography'
+import { LinkB, Text2M, H1Large, Text2S } from '../../Typography'
 import { Button } from '../../molecules/Button'
 import { ClipboardIcon } from '../../Icons'
 
@@ -13,11 +13,11 @@ const AuthenticationContainer = styled.div`
 `
 
 const FormContainer = styled.div`
-  display: grid;
-  height: 446px;
+  display: flex;
+  flex-direction: column;
+  /* height: 446px; */
   width: 100%;
   align-self: center;
-  grid-gap: 1rem;
 `
 
 const OurDocsLink = styled.a`
@@ -66,18 +66,51 @@ export const Input = styled.input`
   border: 0;
   background: transparent;
   outline: none;
-  border-bottom: 2px solid #cccccc;
+  border-bottom: 1px solid #cccccc;
   transition: all 0.2s ease-in;
 
   &:hover {
     transition: all 0.2s ease-in;
-    border-bottom: 2px solid #5b8bf5;
+    border-bottom: 1px solid #5b8bf5;
   }
 
   &:focus {
     transition: all 0.2s ease-in;
-    border-bottom: 2px solid #5b8bf5;
+    border-bottom: 1px solid black;
     /* box-shadow: 0 0 0 1px grey; */
+  }
+
+  ::-webkit-input-placeholder {
+    /* Chrome/Opera/Safari */
+    font-family: 'IBM Plex Mono';
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 32px;
+    color: #cccccc;
+  }
+  ::-moz-placeholder {
+    /* Firefox 19+ */
+    font-family: 'IBM Plex Mono';
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 32px;
+    color: #cccccc;
+  }
+  :-ms-input-placeholder {
+    /* IE 10+ */
+    font-family: 'IBM Plex Mono';
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 32px;
+    color: #cccccc;
+  }
+  :-moz-placeholder {
+    /* Firefox 18- */
+    font-family: 'IBM Plex Mono';
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 32px;
+    color: #cccccc;
   }
 `
 
@@ -90,7 +123,7 @@ type CustomInputProps = {
 const ClipboardIconContainer = styled.div`
   position: absolute;
   right: 0;
-  top: 12px;
+  bottom: 4px;
 `
 
 export const CustomInput = ({ placeholder, label }: CustomInputProps) => {
@@ -106,6 +139,12 @@ export const CustomInput = ({ placeholder, label }: CustomInputProps) => {
   )
 }
 
+const StyledForm = styled(Form)`
+  .ant-form-item {
+    margin-bottom: 24px;
+  }
+`
+
 type AuthenticationProps = {
   onStateChange: React.Dispatch<React.SetStateAction<string>>
 }
@@ -114,7 +153,7 @@ const ProgressContainer = styled.div`
   position: absolute;
   top: 0;
   left: 0;
-  transform: translateY(-35px);
+  transform: translateY(-48px);
   display: flex;
 `
 
@@ -133,18 +172,12 @@ const AuthenticationForm = ({ onStateChange }: AuthenticationProps) => {
   return (
     <AuthenticationContainer>
       <ProgressContainer>
-        <Span fontSize="16px" color="#999999">
-          First step
-        </Span>
+        <Text2M color="#999999">First step</Text2M>
       </ProgressContainer>
-      <Span fontSize="40px" fontWeight="bold">
-        Authentication
-      </Span>
-      <Span style={{ paddingTop: '3em' }} fontSize="14px">
-        Admin’s Personal Access Token
-      </Span>
-      <FormContainer style={{ paddingTop: '0.4em' }}>
-        <Form
+      <H1Large>Authentication</H1Large>
+      <Text2S style={{ paddingTop: '46px' }}>Admin’s Personal Access Token</Text2S>
+      <FormContainer style={{ paddingTop: '8px' }}>
+        <StyledForm
           form={form}
           name="basic"
           initialValues={{ remember: true }}
@@ -160,15 +193,17 @@ const AuthenticationForm = ({ onStateChange }: AuthenticationProps) => {
             <CustomInput label="pat" placeholder="Paste the PAT token from Github" />
           </FormItem>
 
-          <Span fontSize="14px" color="#5B8BF5">
-            The Khaos Oracle confidentially authenticates your Github Personal Access Token. Please see{' '}
-            <OurDocsLink rel="noopener noreferrer" target="_blank" href="https://github.com/dev-protocol/khaos">
-              our docs
-            </OurDocsLink>{' '}
-            for more details.
-          </Span>
+          <div style={{ display: 'flex' }}>
+            <Text2S style={{ width: 'inherit' }} color="#5B8BF5">
+              The Khaos Oracle confidentially authenticates your Github Personal Access Token. Please see{' '}
+              <OurDocsLink rel="noopener noreferrer" target="_blank" href="https://github.com/dev-protocol/khaos">
+                our docs
+              </OurDocsLink>{' '}
+              for more details.
+            </Text2S>
+          </div>
 
-          <div style={{ paddingTop: '2.5em' }}>
+          <div style={{ paddingTop: '48px' }}>
             <SpaceBetween style={{ alignItems: 'center' }}>
               <div style={{ height: 'fit-content' }}>
                 <LinkB rel="noopener noreferrer" target="_blank" href="https://github.com/settings/tokens/new">
@@ -179,7 +214,7 @@ const AuthenticationForm = ({ onStateChange }: AuthenticationProps) => {
               <Button type="submit">Submit</Button>
             </SpaceBetween>
           </div>
-        </Form>
+        </StyledForm>
       </FormContainer>
     </AuthenticationContainer>
   )

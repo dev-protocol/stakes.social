@@ -1,14 +1,17 @@
 import React from 'react'
 import styled from 'styled-components'
 import AuthenticationForm from './AuthenticationForm'
-import { Span, LinkB } from '../../Typography'
+import { LinkB, H1Large } from '../../Typography'
 import MintedTokens from './MintedTokens'
 import TweetForm from './TweetForm'
+import Hr from '../../molecules/Hr'
 
 const DetailsContainer = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-gap: 5em;
+  column-gap: 115px;
+  padding-top: 90px;
+  margin-bottom: 159px;
 `
 
 const SpaceBetween = styled.div`
@@ -36,18 +39,16 @@ type AuthenticationProps = {
 
 const Authentication = ({ onStateChange, progress }: AuthenticationProps) => {
   const githubUrl = 'sigp/lighthouse'
-  const logo = 'https://res.cloudinary.com/haas-storage/image/upload/v1613044939/sigma_tye6kg.png'
+  const logo = 'https://res.cloudinary.com/haas-storage/image/upload/v1614068316/sigma_2x_aibcyi.png'
   const name = 'Sigma'
 
   return (
     <DetailsContainer>
       <div>
-        <SpaceBetween style={{ paddingBottom: '4.5em' }}>
+        <SpaceBetween style={{ paddingBottom: '70px' }}>
           <Contact>
-            <Span fontSize="40px" fontWeight="bold">
-              {name}
-            </Span>
-            <div style={{ display: 'flex' }}>
+            <H1Large>{name}</H1Large>
+            <div style={{ display: 'flex', paddingTop: '11px' }}>
               <div style={{ marginRight: '5px', width: '24px', height: '24px' }}>
                 <img src="https://res.cloudinary.com/haas-storage/image/upload/v1613111071/github_rg8ngo.png" />
               </div>
@@ -59,7 +60,7 @@ const Authentication = ({ onStateChange, progress }: AuthenticationProps) => {
             <img src={logo} />
           </LogoContainer>
         </SpaceBetween>
-        <hr color="#CCCCCC" />
+        <Hr color="#CCCCCC" />
         <MintedTokens />
       </div>
 

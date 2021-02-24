@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Span } from '../../Typography'
+import { Span, Text2M, H1Xss } from '../../Typography'
 import { InfoIcon } from '../../Icons'
 import { DecCurrencySmall } from '../../molecules/DevCurrency'
 import { AbstractProvider } from 'web3-core'
@@ -12,7 +12,7 @@ const SpaceBetween = styled.div`
 `
 
 const MintedTokensContainer = styled.div`
-  padding-top: 1em;
+  padding-top: 22px;
   display: flex;
   flex-direction: column;
 
@@ -44,6 +44,7 @@ const MintedTokenGrid = styled.div`
   display: grid;
   grid-template-columns: 1fr auto auto;
   column-gap: 0.5em;
+  row-gap: 8px;
 `
 
 type MintedProps = {
@@ -56,7 +57,7 @@ const TotalMinted = ({ ticker, isSucces, onHandleClick }: MintedProps) => {
   return (
     <>
       <div style={{ display: 'flex' }}>
-        <Span fontSize="16px">{ticker} tokens Minted</Span>
+        <Text2M>{ticker} tokens Minted</Text2M>
         <InfoIconContainer>
           <div title="The 'shares' of your OSS project">
             <InfoIcon fill={'#5B8BF5'} />
@@ -67,14 +68,10 @@ const TotalMinted = ({ ticker, isSucces, onHandleClick }: MintedProps) => {
         <div style={{ width: '16px', height: '16px', marginRight: '5px', transform: 'translateY(-3px)' }}>
           <DecCurrencySmall />
         </div>
-        <Span fontWeight="bold" fontSize="16px">
-          10,000,000
-        </Span>
+        <H1Xss>10,000,000</H1Xss>
       </div>
       <div style={{ display: 'flex', alignItems: 'center' }}>
-        <Span fontSize="16px" fontWeight="bold">
-          {ticker}
-        </Span>
+        <H1Xss>{ticker}</H1Xss>
         {isSucces && (
           <AddToMetaMask onClick={onHandleClick}>
             <img width="16px" height="16px" src="/images/img_0.png" />
@@ -89,7 +86,7 @@ const TreasuryFee = ({ onHandleClick, ticker, isSucces }: MintedProps) => {
   return (
     <>
       <div style={{ display: 'flex' }}>
-        <Span fontSize="16px">Dev Protocol Treasury Fee</Span>
+        <Text2M>Dev Protocol Treasury Fee</Text2M>
         <InfoIconContainer>
           <div title="The amount of tokens sent to the DEV treasury">
             <InfoIcon fill={'#D500E6'} />
@@ -101,15 +98,11 @@ const TreasuryFee = ({ onHandleClick, ticker, isSucces }: MintedProps) => {
           <DecCurrencySmall />
         </div>
         <div style={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
-          <Span style={{ width: 'fit-content', alignSelf: 'flex-end' }} fontWeight="bold" fontSize="16px">
-            500,000
-          </Span>
+          <H1Xss style={{ width: 'fit-content', alignSelf: 'flex-end' }}>500,000</H1Xss>
         </div>
       </div>
       <div style={{ display: 'flex', alignItems: 'center' }}>
-        <Span fontSize="16px" fontWeight="bold">
-          {ticker}
-        </Span>
+        <H1Xss>{ticker}</H1Xss>
         {isSucces && (
           <AddToMetaMask onClick={onHandleClick}>
             <img width="16px" height="16px" src="/images/img_0.png" />
@@ -123,21 +116,17 @@ const TreasuryFee = ({ onHandleClick, ticker, isSucces }: MintedProps) => {
 const YouReceive = ({ ticker }: { ticker: string }) => {
   return (
     <>
-      <Span fontSize="16px">{"You'll receive"}</Span>
+      <Text2M>{"You'll receive"}</Text2M>
 
       <div style={{ display: 'flex', alignItems: 'center' }}>
         <div style={{ width: '16px', height: '16px', marginRight: '5px', transform: 'translateY(-3px)' }}>
           <DecCurrencySmall />
         </div>
         <div style={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
-          <Span style={{ width: 'fit-content', alignSelf: 'flex-end' }} fontWeight="bold" fontSize="16px">
-            9,500,000
-          </Span>
+          <H1Xss style={{ width: 'fit-content', alignSelf: 'flex-end' }}>9,500,000</H1Xss>
         </div>
       </div>
-      <Span fontSize="16px" fontWeight="bold">
-        {ticker}
-      </Span>
+      <H1Xss>{ticker}</H1Xss>
     </>
   )
 }
@@ -145,19 +134,13 @@ const YouReceive = ({ ticker }: { ticker: string }) => {
 const FundingReceived = ({ funding }: { funding: string }) => {
   return (
     <>
-      <Span fontSize="16px">Funding received</Span>
+      <Text2M>Funding received</Text2M>
       <SpaceBetween>
-        <Span style={{ marginLeft: '3.5px' }} fontWeight="bold" fontSize="16px">
-          $
-        </Span>
-        <Span fontWeight="bold" fontSize="16px">
-          {funding}
-        </Span>
+        <H1Xss style={{ marginLeft: '3.5px' }}>$</H1Xss>
+        <H1Xss>{funding}</H1Xss>
       </SpaceBetween>
 
-      <Span fontWeight="bold" fontSize="16px">
-        USD
-      </Span>
+      <H1Xss>USD</H1Xss>
     </>
   )
 }

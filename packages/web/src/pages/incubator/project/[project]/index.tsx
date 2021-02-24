@@ -38,7 +38,6 @@ const Container = styled.div`
 
 const BackArrowContainer = styled.div`
   display: flex;
-  margin-bottom: 95px;
 
   > svg {
     cursor: pointer;
@@ -47,6 +46,7 @@ const BackArrowContainer = styled.div`
 
 const DetailsContainer = styled.div`
   display: grid;
+  padding-top: 95px;
   grid-template-columns: 1fr 1fr;
   column-gap: 120px;
   margin-bottom: 5em;
@@ -245,7 +245,7 @@ const OnboardingSection = ({ isModal, onStateChange, onBoardChange, isOnboarding
 
   return (
     <>
-      <SpaceBetween style={{ paddingTop: '64px', alignItems: 'center', paddingBottom: '1em' }}>
+      <SpaceBetween style={{ paddingTop: isModal ? '27px' : '64px', alignItems: 'center', paddingBottom: '1em' }}>
         <H3Xs>{'How to receive your funding?'}</H3Xs>
 
         <TimelineContainer style={{ alignSelf: 'center' }}>
