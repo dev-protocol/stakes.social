@@ -68,6 +68,12 @@ export interface UploadFile {
   error?: string
 }
 
+export interface Incubator {
+  id: number
+  name: string
+  property?: Property
+}
+
 export const getUser = (walletAddress: string): Promise<UserInformation> =>
   fetch(`${BaseUrl}/mainnet/user/${walletAddress}`)
     .then(res => res.json())
@@ -257,3 +263,8 @@ export const putProperty = (
       signMessage
     })
   }).then(res => res.json())
+
+export const getIncubators = (): Promise<Array<Incubator>> =>
+  fetch(`${StrapiBaseUrl}/incubators`)
+    .then(res => res.json())
+    .catch(() => [])
