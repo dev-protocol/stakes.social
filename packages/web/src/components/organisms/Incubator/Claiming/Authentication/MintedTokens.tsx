@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Span, Text2M, H1Xss } from '../../Typography'
+import { Text2M, H1Xss } from '../../Typography'
 import { InfoIcon } from '../../Icons'
 import { DecCurrencySmall } from '../../molecules/DevCurrency'
 import { AbstractProvider } from 'web3-core'

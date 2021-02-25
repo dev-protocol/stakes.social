@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { Span, H1S, Text1M } from 'src/components/organisms/Incubator/Typography'
+import { H1S, Text1M } from 'src/components/organisms/Incubator/Typography'
 import Animation from './Animations'
 import { Container, AnimationContainer, DescriptionContainer, BoardingNavigation } from '../../molecules/Onboarding'
 

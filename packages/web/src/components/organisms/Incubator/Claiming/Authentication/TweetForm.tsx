@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import styled from 'styled-components'
 import { Form } from 'antd'
 
-import { Span, Text2M, H1Large, Text1L, Text2S } from '../../Typography'
+import { ButtonL, Text2M, H1Large, Text1L, Text2S } from '../../Typography'
 import { Button } from '../../molecules/Button'
 import { ClipboardIcon, TwitterBird } from '../../Icons'
 import DownArrow from '../../molecules/DownArrow'
@@ -217,7 +217,7 @@ const TweetForm = ({ onStateChange }: AuthenticationProps) => {
         </Text1L>
         <TweetButtonContainer>
           <TweetButton>
-            <Span fontSize="20px">Submit</Span>
+            <ButtonL>Submit</ButtonL>
           </TweetButton>
         </TweetButtonContainer>
       </TweetContainer>

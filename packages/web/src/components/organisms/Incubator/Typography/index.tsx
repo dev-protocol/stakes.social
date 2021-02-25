@@ -146,3 +146,10 @@ export const ButtonM = styled(Span)`
   font-weight: 500;
   line-height: 28px;
 `
+
+export const ButtonL = styled(Span)`
+  font-size: 20;
+  font-family: 'IBM Plex Mono';
+  font-weight: 500;
+  line-height: 32px;
+`

@@ -96,7 +96,7 @@ const Committee = () => {
         />
         <Person
           name="Sindre Sorhus"
-          company="OSS"
+          company="Chalk"
           job="BDFL"
           image="https://res.cloudinary.com/haas-storage/image/upload/v1613110031/sindre_v1ljpa.png"
           github="https://github.com/sindresorhus"
@@ -105,7 +105,7 @@ const Committee = () => {
         <Person
           name="Bilgin Ibryam"
           company="Kubernetes Patterns"
-          job="Project Manager"
+          job="Project Manager @ Red Hat"
           image="https://res.cloudinary.com/haas-storage/image/upload/v1613110035/bilgin_dy3gvz.png"
           github="https://github.com/bibryam"
           twitter="https://twitter.com/aggre_?lang=bg"

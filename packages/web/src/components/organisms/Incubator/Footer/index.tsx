@@ -3,7 +3,7 @@ import styled, { CSSProperties } from 'styled-components'
 
 import { Container } from 'src/components/atoms/Container'
 import { StakesSocialLogo, MadeByDev } from 'src/components/organisms/Incubator/Icons'
-import { Span, ButtonM, H3Xs } from 'src/components/organisms/Incubator/Typography'
+import { ButtonM, H3Xs } from 'src/components/organisms/Incubator/Typography'
 
 const Wrap = styled.footer`
   display: grid;
@@ -48,7 +48,9 @@ export const Footer = () => {
         <FooterContainer>
           <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '32px' }}>
             <StakesSocialLogo />
-            <MadeByDev />
+            <div style={{ zIndex: 9000 }}>
+              <MadeByDev />
+            </div>
           </div>
           <div style={{ display: 'flex', justifyContent: 'space-between' }}>
             <H3Xs color="white">2021. All Rights Reserved</H3Xs>
