@@ -118,21 +118,24 @@ type CustomInputProps = {
   label: string
   placeholder?: string
   defaultValue?: number | string
+  onHandlePaste: () => void
 }
 
 const ClipboardIconContainer = styled.div`
+  z-index: 3;
+  cursor: pointer;
   position: absolute;
   right: 0;
   bottom: 4px;
 `
 
-export const CustomInput = ({ placeholder, label }: CustomInputProps) => {
+export const CustomInput = ({ placeholder, label, onHandlePaste }: CustomInputProps) => {
   return (
     <InputContainer>
       <Form.Item name={label} noStyle>
         <Input id="pat" placeholder={placeholder || ''} />
       </Form.Item>
-      <ClipboardIconContainer>
+      <ClipboardIconContainer onClick={onHandlePaste}>
         <ClipboardIcon />
       </ClipboardIconContainer>
     </InputContainer>
@@ -169,6 +172,18 @@ const AuthenticationForm = ({ onStateChange }: AuthenticationProps) => {
     setIsError(true)
   }
 
+  const handlePaste = () => {
+    navigator.clipboard
+      .readText()
+      .then(pat => {
+        form.setFieldsValue({ pat })
+        console.log('Pasted content: ', pat)
+      })
+      .catch(err => {
+        console.error('Failed to read clipboard contents: ', err)
+      })
+  }
+
   return (
     <AuthenticationContainer>
       <ProgressContainer>
@@ -190,7 +205,7 @@ const AuthenticationForm = ({ onStateChange }: AuthenticationProps) => {
             rules={[{ required: true, message: 'Please enter a valid PAT' }]}
             key="pat"
           >
-            <CustomInput label="pat" placeholder="Paste the PAT token from Github" />
+            <CustomInput onHandlePaste={handlePaste} label="pat" placeholder="Paste the PAT token from Github" />
           </FormItem>
 
           <div style={{ display: 'flex' }}>

@@ -107,21 +107,24 @@ type CustomInputProps = {
   label: string
   placeholder?: string
   defaultValue?: number | string
+  onHandlePaste: () => void
 }
 
 const ClipboardIconContainer = styled.div`
+  z-index: 3;
+  cursor: pointer;
   position: absolute;
   right: 0;
   bottom: 4px;
 `
 
-export const CustomInput = ({ placeholder, label }: CustomInputProps) => {
+export const CustomInput = ({ placeholder, label, onHandlePaste }: CustomInputProps) => {
   return (
     <InputContainer>
       <Form.Item name={label} noStyle>
         <Input id="pat" placeholder={placeholder || ''} />
       </Form.Item>
-      <ClipboardIconContainer>
+      <ClipboardIconContainer onClick={onHandlePaste}>
         <ClipboardIcon />
       </ClipboardIconContainer>
     </InputContainer>
@@ -145,10 +148,11 @@ const TweetContainer = styled.div`
   position: relative;
   font-size: 16px;
   margin-top: 1em;
-  padding: 16px 24px;
+  padding: 16px 32px 24px 16px;
   border-radius: 16px;
   border: 1px solid #1da1f2;
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  letter-spacing: -1px;
 `
 
 const TwitterBirdContainer = styled.div`
@@ -192,6 +196,18 @@ const TweetForm = ({ onStateChange }: AuthenticationProps) => {
 
   const onFinishFailed = () => {
     setIsError(true)
+  }
+
+  const handlePaste = () => {
+    navigator.clipboard
+      .readText()
+      .then(pat => {
+        form.setFieldsValue({ pat })
+        console.log('Pasted content: ', pat)
+      })
+      .catch(err => {
+        console.error('Failed to read clipboard contents: ', err)
+      })
   }
 
   const { project } = { project: 'Sigma' }
@@ -245,7 +261,7 @@ const TweetForm = ({ onStateChange }: AuthenticationProps) => {
             rules={[{ required: true, message: 'Please enter a valid twitter URL' }]}
             key="twitter"
           >
-            <CustomInput label="twitter" placeholder="Paste the url of the Twitter post " />
+            <CustomInput onHandlePaste={handlePaste} label="twitter" placeholder="Paste the url of the Twitter post " />
           </FormItem>
 
           <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
