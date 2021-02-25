@@ -1,16 +1,17 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Span, LinkB } from '../../Typography'
+import { LinkB, H1S, Text1L } from '../../Typography'
 import { AbstractProvider } from 'web3-core'
 import { useProvider } from 'src/fixtures/wallet/hooks'
 import LoadingAnimation from './Animations'
 
 const AuthenticateLoadingContainer = styled.div`
   display: grid;
-  padding-top: 3em;
+  padding-top: 140px;
   grid-template-columns: 1fr 1fr;
   grid-column-gap: 1em;
-  height: 572px;
+  height: 535px;
+  margin-bottom: 113px;
 `
 
 const LoadingContainer = styled.div`
@@ -87,14 +88,12 @@ const AuthenticateLoading = () => {
         </LoadingContainer>
       </div>
       <div style={{ display: 'flex', flexDirection: 'column' }}>
-        <Span fontSize="40px" fontWeight="bold">
-          One moment, please...
-        </Span>
-        <Span style={{ paddingTop: '2em' }} fontSize="20px">
+        <H1S>One moment, please...</H1S>
+        <Text1L style={{ paddingTop: '24px' }}>
           Authenticating your ownership of the designated Github repository. This could take 2 minutes. Please add the
           following tokens to your wallet by clicking the link below.
-        </Span>
-        <SpaceBetween style={{ paddingTop: '3em' }}>
+        </Text1L>
+        <SpaceBetween style={{ paddingTop: '67px' }}>
           <LinkWithIcon disabled={!accountAddress} onClick={handleAddClick}>
             <img width="16px" height="16px" src="/images/img_0.png" />
             <LinkB>

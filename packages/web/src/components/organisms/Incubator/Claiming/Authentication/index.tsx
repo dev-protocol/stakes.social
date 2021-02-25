@@ -11,7 +11,8 @@ const DetailsContainer = styled.div`
   grid-template-columns: 1fr 1fr;
   column-gap: 115px;
   padding-top: 90px;
-  margin-bottom: 159px;
+  height: 535px;
+  margin-bottom: 84px;
 `
 
 const SpaceBetween = styled.div`

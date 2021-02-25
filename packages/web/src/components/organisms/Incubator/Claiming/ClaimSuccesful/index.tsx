@@ -3,9 +3,10 @@ import styled from 'styled-components'
 import Confetti from 'react-confetti'
 
 import useWindowDimensions from 'src/fixtures/utility/useWindowDimensions'
-import { Span, LinkB } from '../../Typography'
+import { LinkB, H1Large, Text1L } from '../../Typography'
 import { Button } from '../../molecules/Button'
 import MintedTokens from '../Authentication/MintedTokens'
+import Hr from '../../molecules/Hr'
 
 const SuccessMessageContainer = styled.div`
   display: flex;
@@ -14,8 +15,10 @@ const SuccessMessageContainer = styled.div`
 
 const DetailsContainer = styled.div`
   display: grid;
+  padding-top: 120px;
   grid-template-columns: 1fr 1fr;
-  grid-gap: 5em;
+  column-gap: 120px;
+  margin-bottom: 84px;
 `
 
 const SpaceBetween = styled.div`
@@ -48,14 +51,12 @@ const ClaimSuccesful = ({ onStateChange }: ClaimSuccesfulProps) => {
 
   return (
     <>
-      <DetailsContainer style={{ height: '572px' }}>
-        <div>
-          <SpaceBetween style={{ paddingBottom: '4.5em' }}>
+      <DetailsContainer>
+        <div style={{ height: '445px' }}>
+          <SpaceBetween style={{ paddingBottom: '70px' }}>
             <Contact>
-              <Span fontSize="40px" fontWeight="bold">
-                {name}
-              </Span>
-              <div style={{ display: 'flex' }}>
+              <H1Large>{name}</H1Large>
+              <div style={{ display: 'flex', paddingTop: '11px' }}>
                 <div style={{ marginRight: '5px', width: '24px', height: '24px' }}>
                   <img src="https://res.cloudinary.com/haas-storage/image/upload/v1613111071/github_rg8ngo.png" />
                 </div>
@@ -67,21 +68,19 @@ const ClaimSuccesful = ({ onStateChange }: ClaimSuccesfulProps) => {
               <img src={logo} />
             </LogoContainer>
           </SpaceBetween>
-          <hr color="#CCCCCC" />
-          <MintedTokens isSucces={true} />
+          <Hr color="#CCCCCC" />
+          <MintedTokens />
         </div>
         <SuccessMessageContainer>
-          <Span color="#D500E6" fontSize="40px" fontWeight="bold">
-            Success!
-          </Span>
-          <Span style={{ paddingTop: '2em' }} fontSize="20px">
+          <H1Large color="#1FED33">Success!</H1Large>
+          <Text1L style={{ paddingTop: '40px' }}>
             Congratulations! {name} has sucessfully joined Stakes Social. The Incubator funding has been sent to your
             Metamask wallet. Please continue to the next steps to learn how to maximize your experience on Stakes
             Social.
-          </Span>
-          <SpaceBetween style={{ paddingTop: '4em', alignItems: 'center' }}>
+          </Text1L>
+          <SpaceBetween style={{ paddingTop: '48px', alignItems: 'center' }}>
             <div style={{ display: 'flex', height: 'fit-content' }}>
-              <LinkB> Receipt</LinkB>
+              <LinkB>Receipt</LinkB>
               <div style={{ paddingRight: '1em', marginRight: '1em', borderRight: '1px solid black' }} />
               <LinkB>Stakes.Social</LinkB>
             </div>
@@ -91,7 +90,7 @@ const ClaimSuccesful = ({ onStateChange }: ClaimSuccesfulProps) => {
           </SpaceBetween>
         </SuccessMessageContainer>
       </DetailsContainer>
-      <Confetti width={width} height={height} recycle={false} />
+      <Confetti width={width - 20} height={height} recycle={false} />
     </>
   )
 }

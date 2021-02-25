@@ -51,7 +51,7 @@ export const Footer = () => {
             <MadeByDev />
           </div>
           <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-            <H3Xs color="white">2021. All Rights Reserverd</H3Xs>
+            <H3Xs color="white">2021. All Rights Reserved</H3Xs>
             <SocialContainer>
               <SocialMediaLink target="_blank" rel="noopener noreferrer" href="https://twitter.com/devprtcl">
                 <ButtonM>Twitter</ButtonM>
