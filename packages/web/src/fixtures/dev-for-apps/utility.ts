@@ -71,6 +71,7 @@ export interface UploadFile {
 export interface Incubator {
   id: number
   name: string
+  verifier_id: string
   property?: Property
 }
 
