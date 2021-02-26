@@ -6,7 +6,6 @@ import { authenticate, getPropertyAddress, getReward, intermediateProcess, waitF
 import { useCurrency } from 'src/fixtures/currency/hooks'
 import useSWR from 'swr'
 import { SWRCachePath } from './cache-path'
-import { message } from 'antd'
 
 export const useAuthenticate = () => {
   const { web3 } = useProvider()
