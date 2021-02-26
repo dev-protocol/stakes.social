@@ -151,6 +151,7 @@ const TweetContainer = styled.div`
   padding: 16px 32px 24px 16px;
   border-radius: 16px;
   border: 1px solid #1da1f2;
+  background: rgba(29, 161, 242, 0.03);
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
   letter-spacing: -1px;
 `

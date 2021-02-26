@@ -287,7 +287,7 @@ const OnboardingPage = () => {
   return (
     <div style={{ position: 'relative', display: 'flex', minHeight: '100vh', flexDirection: 'column' }}>
       <IncubatorHeader />
-      <Container style={{ flexGrow: 1, height: '650px' }}>
+      <Container style={{ flexGrow: 1, height: currentState === 'overview' ? '600px' : '850px' }}>
         <BackArrowContainer>
           {currentState === 'overview' && (
             <Link href="/incubator" as="/incubator" passHref>
