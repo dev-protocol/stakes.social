@@ -1,7 +1,7 @@
 import useSWR from 'swr'
 import { SWRCachePath } from '../cache-path'
 import { message } from 'antd'
-import { UnwrapFunc, whenDefined } from 'src/fixtures/utility'
+import { UnwrapFunc } from 'src/fixtures/utility'
 import { getIncubators } from '../utility'
 
 export const useGetIncubators = () => {
