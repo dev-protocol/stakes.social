@@ -72,6 +72,7 @@ export interface Incubator {
   id: number
   name: string
   verifier_id: string
+  tag?: string
   property?: Property
 }
 
