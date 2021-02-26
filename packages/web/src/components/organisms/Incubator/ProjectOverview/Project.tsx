@@ -7,6 +7,8 @@ import { Button } from 'src/components/organisms/Incubator/molecules/Button'
 import Link from 'next/link'
 import { useCurrency } from 'src/fixtures/currency/hooks'
 import DevCurrencySymbol from '../molecules/DevCurrency'
+import { Incubator } from 'src/fixtures/dev-for-apps/utility'
+import { useGetReward } from 'src/fixtures/_pages/incubator/hooks'
 
 const ipsum = new lorem.LoremIpsum({
   sentencesPerParagraph: { min: 1, max: 3 },
@@ -14,10 +16,7 @@ const ipsum = new lorem.LoremIpsum({
 })
 
 type ProjectProps = {
-  title: string
-  funding: number
-  url: string
-  claimed?: boolean
+  project: Incubator
 }
 
 const ProjectContainer = styled.div`
@@ -68,19 +67,21 @@ const ClaimButtonContainer = styled.div`
   align-items: center;
 `
 
-const ProjectEntry = ({ funding, title, url, claimed }: ProjectProps) => {
-  const { currency, toCurrency } = useCurrency()
-  const convertedFunding = toCurrency(funding).dp(0).toNumber().toLocaleString()
+const ProjectEntry = ({ project }: ProjectProps) => {
   // Probably fetch data per project async here
+  const { currency, reward } = useGetReward(project.verifier_id)
+  const convertedFunding = reward ? reward.dp(0).toNumber().toLocaleString() : 0
+  console.log('property: ', project)
+  const CLAIMED = false
   return (
     <ProjectContainer>
       <TitleContainer>
-        <H3S>{title}</H3S>
+        <H3S>{project.name}</H3S>
         <IconContainer>
-          <img src={url} width="64px" height="64px" />
+          {project.property?.avatar && <img src={project.property?.avatar.url} width="64px" height="64px" />}
         </IconContainer>
       </TitleContainer>
-      <DescriptionContainer>{ipsum.generateSentences(3)}</DescriptionContainer>
+      <DescriptionContainer>{project.property?.description || ipsum.generateSentences(3)}</DescriptionContainer>
       <FundingSection>
         <Text1S color="#CCCCCC">Funding received</Text1S>
         <div style={{ display: 'flex', alignItems: 'center' }}>
@@ -92,8 +93,8 @@ const ProjectEntry = ({ funding, title, url, claimed }: ProjectProps) => {
         </div>
       </FundingSection>
       <ClaimButtonContainer>
-        <Link href={'/incubator/project/[project]'} as={`/incubator/project/${title}`} passHref>
-          <Button disabled={claimed}>{claimed ? 'Claimed' : 'Claim'}</Button>
+        <Link href={'/incubator/project/[project]'} as={`/incubator/project/${project.property?.name}`} passHref>
+          <Button disabled={CLAIMED}>{CLAIMED ? 'Claimed' : 'Claim'}</Button>
         </Link>
       </ClaimButtonContainer>
     </ProjectContainer>

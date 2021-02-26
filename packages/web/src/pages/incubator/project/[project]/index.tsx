@@ -21,6 +21,11 @@ import ConnectWallet from 'src/components/organisms/Incubator/Onboarding/Connect
 import CopyPat from 'src/components/organisms/Incubator/Onboarding/CopyPAT'
 import SubmitTransaction from 'src/components/organisms/Incubator/Onboarding/SubmitTransaction'
 import { TwitterBlackWhite, GithubIcon } from 'src/components/organisms/Incubator/Icons'
+import { useGetReward } from 'src/fixtures/_pages/incubator/hooks'
+import { Incubator, Property } from 'src/fixtures/dev-for-apps/utility'
+import { useGetProperty } from 'src/fixtures/dev-for-apps/hooks'
+import { getPath } from 'src/fixtures/utility/route'
+import { useRouter } from 'next/router'
 
 const ipsum = new lorem.LoremIpsum({
   sentencesPerParagraph: { min: 1, max: 3 },
@@ -109,45 +114,43 @@ type ProjectDetailsProps = {
   github: string
   logo: string
   fundingDEV: string
-  name: string
   fundingUSD: string
   claimed: boolean
+  project: Property
 }
 
-const ProjectDetails = ({
-  fundingDEV,
-  fundingUSD,
-  github,
-  logo,
-  twitter,
-  website,
-  name,
-  claimed,
-  onStateChange
-}: ProjectDetailsProps) => {
+const ProjectDetails = ({ fundingDEV, fundingUSD, claimed, onStateChange, project }: ProjectDetailsProps) => {
   return (
     <DetailsContainer>
       <div>
         <SpaceBetween>
           <Contact>
-            <H1Large>{name}</H1Large>
-            <LinkB style={{ paddingTop: '11px' }}>{website}</LinkB>
+            <H1Large>{project?.name}</H1Large>
+            {project?.links?.website && <LinkB style={{ paddingTop: '11px' }}>{project?.links?.website}</LinkB>}
+
             <SocialMediaContainer>
-              <IconContainer style={{ paddingLeft: 0 }}>
-                <a target="_blank" rel="noopener noreferrer" href={twitter}>
-                  <TwitterBlackWhite />
-                </a>
-              </IconContainer>
-              <IconContainer>
-                <a target="_blank" rel="noopener noreferrer" href={github}>
-                  <GithubIcon />
-                </a>
-              </IconContainer>
+              {project?.links?.twitter && (
+                <IconContainer style={{ paddingLeft: 0 }}>
+                  <a target="_blank" rel="noopener noreferrer" href={project?.links?.twitter}>
+                    <TwitterBlackWhite />
+                  </a>
+                </IconContainer>
+              )}
+
+              {project?.links?.github && (
+                <IconContainer>
+                  <a target="_blank" rel="noopener noreferrer" href={project?.links?.github}>
+                    <GithubIcon />
+                  </a>
+                </IconContainer>
+              )}
             </SocialMediaContainer>
           </Contact>
-          <LogoContainer>
-            <img src={logo} />
-          </LogoContainer>
+          {project?.avatar && (
+            <LogoContainer>
+              <img src={project?.avatar?.url} />
+            </LogoContainer>
+          )}
         </SpaceBetween>
         <hr color="#CCCCCC" />
 
@@ -258,11 +261,12 @@ const OnboardingSection = ({ isModal, onStateChange, onBoardChange, isOnboarding
 }
 
 const OnboardingPage = () => {
-  // const [, project] = getPath(useRouter().asPath)
-  // TODO: Fetch data from strapi based on project
+  const [, propertyAddress] = getPath(useRouter().asPath)
   const [currentState, setCurrentState] = useState<string>('overview')
   const [isOnboarding, setIsOnboarding] = useState(true)
   const [authenticationProgress, setAuthenticationProgress] = useState(1)
+  const { data: project } = useGetProperty(propertyAddress)
+
   const { name, fundingDEV, fundingUSD, github, logo, twitter, website, claimed } = {
     name: 'Sigma',
     website: 'sigmaprime.io',
@@ -273,6 +277,9 @@ const OnboardingPage = () => {
     claimed: false,
     logo: 'https://res.cloudinary.com/haas-storage/image/upload/v1614068316/sigma_2x_aibcyi.png'
   }
+
+  const { currency, reward } = useGetReward('ipfs/go-ipfs')
+  console.log('Rewards: ', reward)
 
   useEffect(() => {
     if (currentState === 'loading') {
@@ -305,9 +312,9 @@ const OnboardingPage = () => {
         </BackArrowContainer>
         {currentState === 'overview' && (
           <ProjectDetails
+            project={project}
             claimed={claimed}
             onStateChange={setCurrentState}
-            name={name}
             fundingDEV={fundingDEV}
             fundingUSD={fundingUSD}
             github={github}

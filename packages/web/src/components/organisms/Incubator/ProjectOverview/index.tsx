@@ -5,6 +5,7 @@ import { H3Xs } from 'src/components/organisms/Incubator/Typography'
 import { Button } from 'src/components/organisms/Incubator/molecules/Button'
 import ProjectEntry from 'src/components/organisms/Incubator/ProjectOverview/Project'
 import { CurrencySwitcher } from '../molecules/CurrencySwitcher'
+import { useGetIncubators } from 'src/fixtures/dev-for-apps/hooks'
 
 const PLACHEOLDER_DATA = [
   {
@@ -172,8 +173,9 @@ const SeeMore = styled.div<{ isExpanded?: boolean }>`
 
 const ProjectOverview = () => {
   const [showAll, setShowAll] = useState(false)
+  const { data } = useGetIncubators()
 
-  const projects = showAll ? PLACHEOLDER_DATA : PLACHEOLDER_DATA.slice(0, 8)
+  const projects = showAll ? data : data?.slice(0, 8)
   return (
     <GradientContainer id="projects" isExpanded={showAll}>
       <ProjectOverviewContainer>
@@ -182,10 +184,7 @@ const ProjectOverview = () => {
           <CurrencySwitcher />
         </OverviewHeader>
         <Overview>
-          {projects &&
-            projects.map(({ funding, title, url, claimed }, index) => (
-              <ProjectEntry claimed={claimed} key={index} url={url} funding={funding} title={title} />
-            ))}
+          {projects && projects.map((project, index) => <ProjectEntry key={index} project={project} />)}
         </Overview>
       </ProjectOverviewContainer>
       <SeeMore isExpanded={showAll} />
