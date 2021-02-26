@@ -234,7 +234,7 @@ const TweetForm = ({ onStateChange }: AuthenticationProps) => {
         </Text1L>
         <TweetButtonContainer>
           <TweetButton>
-            <ButtonL>Submit</ButtonL>
+            <ButtonL>Tweet</ButtonL>
           </TweetButton>
         </TweetButtonContainer>
       </TweetContainer>

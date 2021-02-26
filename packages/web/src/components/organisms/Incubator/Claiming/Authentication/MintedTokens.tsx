@@ -87,7 +87,7 @@ const TreasuryFee = ({ onHandleClick, ticker, isSucces }: MintedProps) => {
     <>
       <div style={{ display: 'flex' }}>
         <div style={{ width: 'fit-content', display: 'flex', position: 'relative' }}>
-          <Text2M>Dev Protocol Treasury Fee</Text2M>
+          <Text2M>Treasury Fee</Text2M>
           <InfoIconContainer style={{ position: 'absolute', top: '0px', right: '-16px' }}>
             <div title="The amount of tokens sent to the DEV treasury">
               <InfoIcon fill={'#D500E6'} />

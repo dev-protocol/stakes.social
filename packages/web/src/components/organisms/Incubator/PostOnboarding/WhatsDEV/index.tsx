@@ -65,11 +65,11 @@ const WhatsDEV = ({ onActivePageChange }: PostOnboardType) => {
         <DevProtocolLogo />
       </AnimationContainer>
       <DescriptionContainer>
-        <H1S>What is DEV protocol?</H1S>
+        <H1S>What is Dev Protocol?</H1S>
         <Text1M style={{ paddingTop: '1.5em' }}>
-          Dev is a blockchain protocol that allows Open Source projects to sustainably fund their development. Patrons
-          stake the DEV token for projects they want to fund. The protocol then mints new DEV tokens that are split
-          between the OSS project and Patron. Dev Protocol is the only platform that allows both Patrons and OSS
+          Dev Protocol is a blockchain protocol that allows Open Source projects to sustainably fund their development.
+          Patrons stake the DEV token for projects they want to fund. The protocol then mints new DEV tokens that are
+          split between the OSS project and Patron. Dev Protocol is the only platform that allows both Patrons and OSS
           projects to earn money by supporting each other. The Protocol’s APY is based on DEV staked on the protocol and
           OSS projects onboarded.
         </Text1M>

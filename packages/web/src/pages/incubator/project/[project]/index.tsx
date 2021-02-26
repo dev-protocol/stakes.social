@@ -297,7 +297,7 @@ const OnboardingPage = () => {
             </Link>
           )}
 
-          {(currentState === 'authentication' || currentState === 'onboarding') && (
+          {((currentState === 'authentication' && authenticationProgress === 1) || currentState === 'onboarding') && (
             <div onClick={() => setCurrentState('overview')} style={{ cursor: 'pointer' }}>
               <BackArrow />
             </div>
