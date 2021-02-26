@@ -35,7 +35,7 @@ export const Container = styled.div<{ isOverview?: boolean }>`
   grid-template-columns: 1fr 1fr;
   grid-template-areas: 'animation description';
   column-gap: 24px;
-  margin-bottom: ${props => (props.isOverview ? '184px' : '80px')};
+  margin-bottom: ${props => (props.isOverview ? '184px' : '74px')};
 `
 
 type BoardingNavigationType = {

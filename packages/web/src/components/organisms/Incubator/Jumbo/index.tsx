@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import Countdown, { CountdownRenderProps } from 'react-countdown'
 
-import { Span, LinkB, H1Large, Text1Xl, H3Xs, H1M } from 'src/components/organisms/Incubator/Typography'
+import { LinkB, H1Large, Text1Xl, H3Xs, H1M } from 'src/components/organisms/Incubator/Typography'
 import { useCurrency } from 'src/fixtures/currency/hooks'
 
 const JumboContainer = styled.div`
@@ -60,11 +60,7 @@ const RewardCollected = styled.div`
   flex-direction: column;
 `
 
-const Completionist = () => (
-  <Span fontWeight="bold" fontSize="32px" color="#0A0A0A">
-    Round 1 of incubator has finished
-  </Span>
-)
+const Completionist = () => <H1M color="#0A0A0A">Round 1 of incubator has finished</H1M>
 
 // Renderer callback with condition
 const renderer = ({ formatted, completed }: CountdownRenderProps) => {

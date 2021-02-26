@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import Link from 'next/link'
 import * as lorem from 'lorem-ipsum'
 
-import { Span, H1Large, Text1S, H1M, Text1L, H3Xs, ButtonM } from 'src/components/organisms/Incubator/Typography'
+import { H1Large, Text1S, H1M, Text1L, H3Xs, ButtonM, LinkB } from 'src/components/organisms/Incubator/Typography'
 import { Button } from 'src/components/organisms/Incubator/molecules/Button'
 import IncubatorHeader from 'src/components/organisms/Incubator/Header'
 import Footer from 'src/components/organisms/Incubator/Footer'
@@ -61,20 +61,6 @@ const Contact = styled.div`
   display: flex;
   flex-direction: column;
   margin-bottom: 54px;
-`
-const LinkB = styled.a`
-  font-family: WhyteInktrap;
-  text-decoration: none;
-  height: fit-content;
-  padding: 2px;
-  color: black;
-  border-bottom: 1px solid black;
-  max-width: fit-content;
-
-  :hover {
-    color: #5b8bf5;
-    border-bottom: 1px solid #5b8bf5;
-  }
 `
 
 const SocialMediaContainer = styled.div`
@@ -245,7 +231,7 @@ const OnboardingSection = ({ isModal, onStateChange, onBoardChange, isOnboarding
 
   return (
     <>
-      <SpaceBetween style={{ paddingTop: isModal ? '27px' : '64px', alignItems: 'center', paddingBottom: '1em' }}>
+      <SpaceBetween style={{ paddingTop: isModal ? '43px' : '64px', alignItems: 'center', paddingBottom: '1em' }}>
         <H3Xs>{'How to receive your funding?'}</H3Xs>
 
         <TimelineContainer style={{ alignSelf: 'center' }}>
@@ -301,7 +287,7 @@ const OnboardingPage = () => {
   return (
     <div style={{ position: 'relative', display: 'flex', minHeight: '100vh', flexDirection: 'column' }}>
       <IncubatorHeader />
-      <Container style={{ flexGrow: 1 }}>
+      <Container style={{ flexGrow: 1, height: currentState === 'overview' ? '600px' : '850px' }}>
         <BackArrowContainer>
           {currentState === 'overview' && (
             <Link href="/incubator" as="/incubator" passHref>
@@ -332,14 +318,12 @@ const OnboardingPage = () => {
         )}
 
         {currentState === 'onboarding' && (
-          <Container>
-            <OnboardingSection
-              isOnboarding={isOnboarding}
-              onBoardChange={setIsOnboarding}
-              onStateChange={setCurrentState}
-              isModal={true}
-            />
-          </Container>
+          <OnboardingSection
+            isOnboarding={isOnboarding}
+            onBoardChange={setIsOnboarding}
+            onStateChange={setCurrentState}
+            isModal={true}
+          />
         )}
 
         {currentState === 'authentication' && (

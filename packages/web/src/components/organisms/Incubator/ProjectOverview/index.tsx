@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
 
-import { Span, H3Xs } from 'src/components/organisms/Incubator/Typography'
+import { H3Xs } from 'src/components/organisms/Incubator/Typography'
 import { Button } from 'src/components/organisms/Incubator/molecules/Button'
 import ProjectEntry from 'src/components/organisms/Incubator/ProjectOverview/Project'
 import { CurrencySwitcher } from '../molecules/CurrencySwitcher'

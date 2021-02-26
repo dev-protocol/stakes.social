@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Span, Text2M, H1Xss } from '../../Typography'
+import { Text2M, H1Xss } from '../../Typography'
 import { InfoIcon } from '../../Icons'
 import { DecCurrencySmall } from '../../molecules/DevCurrency'
 import { AbstractProvider } from 'web3-core'
@@ -86,12 +86,14 @@ const TreasuryFee = ({ onHandleClick, ticker, isSucces }: MintedProps) => {
   return (
     <>
       <div style={{ display: 'flex' }}>
-        <Text2M>Dev Protocol Treasury Fee</Text2M>
-        <InfoIconContainer>
-          <div title="The amount of tokens sent to the DEV treasury">
-            <InfoIcon fill={'#D500E6'} />
-          </div>
-        </InfoIconContainer>
+        <div style={{ width: 'fit-content', display: 'flex', position: 'relative' }}>
+          <Text2M>Dev Protocol Treasury Fee</Text2M>
+          <InfoIconContainer style={{ position: 'absolute', top: '0px', right: '-16px' }}>
+            <div title="The amount of tokens sent to the DEV treasury">
+              <InfoIcon fill={'#D500E6'} />
+            </div>
+          </InfoIconContainer>
+        </div>
       </div>
       <div style={{ display: 'flex', alignItems: 'center' }}>
         <div style={{ width: '16px', height: '16px', marginRight: '5px', transform: 'translateY(-3px)' }}>

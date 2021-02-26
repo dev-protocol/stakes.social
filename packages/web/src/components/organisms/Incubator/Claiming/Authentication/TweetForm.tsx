@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import styled from 'styled-components'
 import { Form } from 'antd'
 
-import { Span } from '../../Typography'
+import { ButtonL, Text2M, H1Large, Text1L, Text2S } from '../../Typography'
 import { Button } from '../../molecules/Button'
 import { ClipboardIcon, TwitterBird } from '../../Icons'
 import DownArrow from '../../molecules/DownArrow'
@@ -11,14 +11,13 @@ const AuthenticationContainer = styled.div`
   position: relative;
   display: flex;
   flex-direction: column;
-  height: 572px;
+  height: fit-content;
 `
 
 const FormContainer = styled.div`
   display: grid;
   width: 100%;
   align-self: center;
-  grid-gap: 1rem;
 `
 
 const SpaceBetween = styled.div`
@@ -29,6 +28,7 @@ const SpaceBetween = styled.div`
 export const InputContainer = styled(Form.Item)`
   position: relative;
   width: 100%;
+  padding-bottom: 48px;
   margin: 0;
 `
 
@@ -55,18 +55,51 @@ export const Input = styled.input`
   border: 0;
   background: transparent;
   outline: none;
-  border-bottom: 2px solid #cccccc;
+  border-bottom: 1px solid #cccccc;
   transition: all 0.2s ease-in;
 
   &:hover {
     transition: all 0.2s ease-in;
-    border-bottom: 2px solid #5b8bf5;
+    border-bottom: 1px solid #5b8bf5;
   }
 
   &:focus {
     transition: all 0.2s ease-in;
-    border-bottom: 2px solid black;
+    border-bottom: 1px solid black;
     /* box-shadow: 0 0 0 1px grey; */
+  }
+
+  ::-webkit-input-placeholder {
+    /* Chrome/Opera/Safari */
+    font-family: 'IBM Plex Mono';
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 32px;
+    color: #cccccc;
+  }
+  ::-moz-placeholder {
+    /* Firefox 19+ */
+    font-family: 'IBM Plex Mono';
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 32px;
+    color: #cccccc;
+  }
+  :-ms-input-placeholder {
+    /* IE 10+ */
+    font-family: 'IBM Plex Mono';
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 32px;
+    color: #cccccc;
+  }
+  :-moz-placeholder {
+    /* Firefox 18- */
+    font-family: 'IBM Plex Mono';
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 32px;
+    color: #cccccc;
   }
 `
 
@@ -74,21 +107,24 @@ type CustomInputProps = {
   label: string
   placeholder?: string
   defaultValue?: number | string
+  onHandlePaste: () => void
 }
 
 const ClipboardIconContainer = styled.div`
+  z-index: 3;
+  cursor: pointer;
   position: absolute;
   right: 0;
-  top: 12px;
+  bottom: 4px;
 `
 
-export const CustomInput = ({ placeholder, label }: CustomInputProps) => {
+export const CustomInput = ({ placeholder, label, onHandlePaste }: CustomInputProps) => {
   return (
     <InputContainer>
       <Form.Item name={label} noStyle>
         <Input id="pat" placeholder={placeholder || ''} />
       </Form.Item>
-      <ClipboardIconContainer>
+      <ClipboardIconContainer onClick={onHandlePaste}>
         <ClipboardIcon />
       </ClipboardIconContainer>
     </InputContainer>
@@ -103,18 +139,21 @@ const ProgressContainer = styled.div`
   position: absolute;
   top: 0;
   left: 0;
-  transform: translateY(-35px);
+  transform: translateY(-48px);
   display: flex;
 `
 
 const TweetContainer = styled.div`
+  display: flex;
   position: relative;
   font-size: 16px;
   margin-top: 1em;
-  padding: 15px 40px 30px 20px;
+  padding: 16px 32px 24px 16px;
   border-radius: 16px;
   border: 1px solid #1da1f2;
+  background: rgba(29, 161, 242, 0.03);
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  letter-spacing: -1px;
 `
 
 const TwitterBirdContainer = styled.div`
@@ -142,6 +181,12 @@ const TweetButton = styled(Button)`
   }
 `
 
+const StyledForm = styled(Form)`
+  .ant-form-item {
+    margin-bottom: 0px;
+  }
+`
+
 const TweetForm = ({ onStateChange }: AuthenticationProps) => {
   const [form] = Form.useForm()
   const onSubmit = (data: any) => {
@@ -154,51 +199,57 @@ const TweetForm = ({ onStateChange }: AuthenticationProps) => {
     setIsError(true)
   }
 
+  const handlePaste = () => {
+    navigator.clipboard
+      .readText()
+      .then(pat => {
+        form.setFieldsValue({ pat })
+        console.log('Pasted content: ', pat)
+      })
+      .catch(err => {
+        console.error('Failed to read clipboard contents: ', err)
+      })
+  }
+
   const { project } = { project: 'Sigma' }
 
   return (
     <AuthenticationContainer>
       <ProgressContainer>
-        <Span fontSize="16px" color="#999999">
-          Last step
-        </Span>
+        <Text2M color="#999999">Last step</Text2M>
       </ProgressContainer>
       <SpaceBetween>
-        <Span fontSize="40px" fontWeight="bold">
-          Tweet it!
-        </Span>
+        <H1Large>Tweet it!</H1Large>
       </SpaceBetween>
       <TweetContainer>
         <TwitterBirdContainer>
           <TwitterBird />
         </TwitterBirdContainer>
-        <Span fontSize="20px">
+        <Text1L fontSize="20px">
           {project} just received $20,000 in funding from the{' '}
-          <Span fontSize="20px" style={{ color: '#D500E6' }}>
+          <Text1L fontSize="20px" style={{ color: '#D500E6' }}>
             @devprtcl
-          </Span>{' '}
+          </Text1L>{' '}
           Incubator. Follow the link below to support us and earn by staking DEV tokens.
-        </Span>
+        </Text1L>
         <TweetButtonContainer>
           <TweetButton>
-            <Span fontSize="20px">Submit</Span>
+            <ButtonL>Submit</ButtonL>
           </TweetButton>
         </TweetButtonContainer>
       </TweetContainer>
-      <div style={{ display: 'grid', gridTemplateColumns: 'auto 1fr', marginTop: '3em' }}>
-        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', padding: '0 20px' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'auto 1fr', marginTop: '41px' }}>
+        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', padding: '0 24px' }}>
           <DownArrow />
         </div>
-        <Span fontSize="14px" color="#5B8BF5">
+        <Text2S color="#5B8BF5">
           The last step is to share the news with your community. Once completed paste the url below and click “Done”.
-        </Span>
+        </Text2S>
       </div>
 
-      <Span style={{ paddingTop: '2em' }} fontSize="14px">
-        Twitter Post URL
-      </Span>
-      <FormContainer style={{ paddingTop: '0.4em' }}>
-        <Form
+      <Text2S style={{ paddingTop: '24px' }}>Twitter Post URL</Text2S>
+      <FormContainer style={{ paddingTop: 0 }}>
+        <StyledForm
           form={form}
           name="basic"
           initialValues={{ remember: true }}
@@ -211,13 +262,13 @@ const TweetForm = ({ onStateChange }: AuthenticationProps) => {
             rules={[{ required: true, message: 'Please enter a valid twitter URL' }]}
             key="twitter"
           >
-            <CustomInput label="twitter" placeholder="Paste the url of the Twitter post " />
+            <CustomInput onHandlePaste={handlePaste} label="twitter" placeholder="Paste the url of the Twitter post " />
           </FormItem>
 
-          <div style={{ display: 'flex', justifyContent: 'flex-end', paddingTop: '2.5em' }}>
+          <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
             <Button onClick={() => onStateChange('loading')}>Done</Button>
           </div>
-        </Form>
+        </StyledForm>
       </FormContainer>
     </AuthenticationContainer>
   )

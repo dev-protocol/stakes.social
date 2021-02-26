@@ -1,5 +1,5 @@
 import React from 'react'
-import { Span, Text1M, H1S } from '../../Typography'
+import { Text1M, H1S } from '../../Typography'
 import { AnimationContainer, Container, DescriptionContainer, BoardingNavigation } from '../../molecules/Onboarding'
 
 type PostOnboardType = {

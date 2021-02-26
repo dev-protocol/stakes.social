@@ -11,6 +11,8 @@ export const StepSpan = styled(Span)<{
   isFinished?: boolean
   finishedColor?: string
 }>`
+  font-family: 'IBM Plex Mono';
+  line-height: 20px;
   position: absolute;
   bottom: -10px;
   width: 45px;
