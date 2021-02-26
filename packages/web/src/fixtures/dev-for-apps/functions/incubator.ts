@@ -11,5 +11,5 @@ export const useGetIncubators = () => {
     { onError: err => message.error(err.message) }
   )
 
-  return { data: whenDefined(data, x => x[0]), error, mutate }
+  return { data, error, mutate }
 }
