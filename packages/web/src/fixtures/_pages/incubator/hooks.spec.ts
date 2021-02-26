@@ -1,13 +1,19 @@
 import { renderHook, act } from '@testing-library/react-hooks'
 import { useProvider } from 'src/fixtures/wallet/hooks'
 import { waitForCreateMetrics } from 'src/fixtures/dev-kit/client'
-import { useAuthenticate, useIntermediateProcess } from './hooks'
+import { useAuthenticate, useGetReward, useIntermediateProcess } from './hooks'
 import { authenticate, getPropertyAddress, intermediateProcess, waitForFinishEvent } from './client'
+import BigNumber from 'bignumber.js'
+import { useCurrency } from 'src/fixtures/currency/hooks'
+import useSWR from 'swr'
+import { toNaturalNumber } from 'src/fixtures/utility'
 
 jest.mock('src/fixtures/wallet/utility.ts')
 jest.mock('src/fixtures/wallet/hooks.ts')
 jest.mock('src/fixtures/dev-kit/client.ts')
 jest.mock('src/fixtures/_pages/incubator/client.ts')
+jest.mock('src/fixtures/currency/functions/useCurrency')
+jest.mock('swr')
 
 describe('incubator hooks', () => {
   describe('useAuthenticate', () => {
@@ -91,6 +97,64 @@ describe('incubator hooks', () => {
       expect(result.current.isWaiting).toBe(false)
       expect((intermediateProcess as jest.Mock).mock.calls.length).toBe(1)
       expect((waitForFinishEvent as jest.Mock).mock.calls.length).toBe(1)
+    })
+  })
+
+  describe('useGetReward', () => {
+    test('data is undefined', () => {
+      const data = undefined
+      const error = undefined
+      const toCurrency = (x?: BigNumber) => x
+      ;(useCurrency as jest.Mock).mockImplementationOnce(() => ({ currency: 'DEV', toCurrency }))
+      ;(useSWR as jest.Mock).mockImplementation(() => ({ data, error }))
+      const { result } = renderHook(() => useGetReward('repos'))
+      expect(result.current.reward).toBe(data)
+      expect(result.current.currency).toBe('DEV')
+    })
+
+    test('data is undefined and USD', () => {
+      const data = undefined
+      const error = undefined
+      const toCurrency = (x?: BigNumber) => x
+      ;(useCurrency as jest.Mock).mockImplementationOnce(() => ({ currency: 'USD', toCurrency }))
+      ;(useSWR as jest.Mock).mockImplementation(() => ({ data, error }))
+      const { result } = renderHook(() => useGetReward('repos'))
+      expect(result.current.reward).toBe(data)
+      expect(result.current.currency).toBe('USD')
+    })
+
+    test('success fetching data', () => {
+      const data = '10000'
+      const error = undefined
+      const toCurrency = (x?: BigNumber) => x
+      ;(useCurrency as jest.Mock).mockImplementationOnce(() => ({ currency: 'DEV', toCurrency }))
+      ;(useSWR as jest.Mock).mockImplementation(() => ({ data, error }))
+      const { result } = renderHook(() => useGetReward('repos'))
+      expect(result.current.reward?.toFixed()).toBe(toNaturalNumber(data).toFixed())
+      expect(result.current.currency).toBe('DEV')
+    })
+
+    test('success fetching data and USD', () => {
+      const data = '10000'
+      const error = undefined
+      const toCurrency = (x: BigNumber) => x.times(3)
+      ;(useCurrency as jest.Mock).mockImplementationOnce(() => ({ currency: 'USD', toCurrency }))
+      ;(useSWR as jest.Mock).mockImplementation(() => ({ data, error }))
+      const { result } = renderHook(() => useGetReward('repos'))
+      expect(result.current.reward?.toFixed()).toBe(toNaturalNumber(data).times(3).toFixed())
+      expect(result.current.currency).toBe('USD')
+    })
+
+    test('failure fetching data', () => {
+      const data = undefined
+      const errorMessage = 'error'
+      const error = new Error(errorMessage)
+      const toCurrency = (x?: BigNumber) => x
+      ;(useCurrency as jest.Mock).mockImplementationOnce(() => ({ currency: 'DEV', toCurrency }))
+      ;(useSWR as jest.Mock).mockImplementation(() => ({ data, error }))
+      const { result } = renderHook(() => useGetReward('repos'))
+      expect(result.current.error).toBe(error)
+      expect(result.current.error?.message).toBe(errorMessage)
     })
   })
 })

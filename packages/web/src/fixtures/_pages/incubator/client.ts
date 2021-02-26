@@ -90,3 +90,15 @@ export const intermediateProcess = async (
         })
       : Promise.resolve())(getContract(client))
 }
+
+export const getReward = async (client: Web3, githubRepository: string): Promise<string> => {
+  return (contract =>
+    contract
+      ? execute({
+          contract,
+          client,
+          method: 'getReward',
+          args: [githubRepository]
+        })
+      : Promise.resolve(''))(getContract(client))
+}
