@@ -144,7 +144,7 @@ export const CustomInput = ({ placeholder, label, onHandlePaste }: CustomInputPr
 
 const StyledForm = styled(Form)`
   .ant-form-item {
-    margin-bottom: 24px;
+    margin-bottom: 0x;
   }
 `
 
@@ -208,7 +208,7 @@ const AuthenticationForm = ({ onStateChange }: AuthenticationProps) => {
             <CustomInput onHandlePaste={handlePaste} label="pat" placeholder="Paste the PAT token from Github" />
           </FormItem>
 
-          <div style={{ display: 'flex' }}>
+          <div style={{ display: 'flex', marginTop: '24px' }}>
             <Text2S style={{ width: 'inherit' }} color="#5B8BF5">
               The Khaos Oracle confidentially authenticates your Github Personal Access Token. Please see{' '}
               <OurDocsLink rel="noopener noreferrer" target="_blank" href="https://github.com/dev-protocol/khaos">

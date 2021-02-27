@@ -15,7 +15,9 @@ const AuthenticationContainer = styled.div`
 `
 
 const FormContainer = styled.div`
-  display: grid;
+  display: flex;
+  flex-direction: column;
+  /* height: 446px; */
   width: 100%;
   align-self: center;
 `
@@ -28,7 +30,6 @@ const SpaceBetween = styled.div`
 export const InputContainer = styled(Form.Item)`
   position: relative;
   width: 100%;
-  padding-bottom: 48px;
   margin: 0;
 `
 
@@ -264,8 +265,8 @@ const TweetForm = ({ onStateChange, projectName }: AuthenticationProps) => {
             <CustomInput onHandlePaste={handlePaste} label="twitter" placeholder="Paste the url of the Twitter post " />
           </FormItem>
 
-          <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-            <Button onClick={() => onStateChange('loading')}>Done</Button>
+          <div style={{ display: 'flex', justifyContent: 'flex-end', paddingTop: '48px' }}>
+            <Button type="submit">Done</Button>
           </div>
         </StyledForm>
       </FormContainer>
