@@ -24,6 +24,7 @@ import { TwitterBlackWhite, GithubIcon } from 'src/components/organisms/Incubato
 import { useGetProperty } from 'src/fixtures/dev-for-apps/hooks'
 import { getPath } from 'src/fixtures/utility/route'
 import LoadingAnimation from 'src/components/organisms/Incubator/Claiming/AuthenticateLoading/Animations'
+import { useGetReward } from 'src/fixtures/_pages/incubator/hooks'
 
 const Container = styled.div`
   display: flex;
@@ -102,8 +103,6 @@ const DevCurrencyContainer = styled.div`
 
 type ProjectDetailsProps = {
   onStateChange: React.Dispatch<React.SetStateAction<string>>
-  fundingDEV: string
-  fundingUSD: string
   claimed: boolean
 
   project: {
@@ -121,7 +120,11 @@ type ProjectDetailsProps = {
   }
 }
 
-const ProjectDetails = ({ fundingDEV, fundingUSD, claimed, onStateChange, project }: ProjectDetailsProps) => {
+const ProjectDetails = ({ claimed, onStateChange, project }: ProjectDetailsProps) => {
+  const { inDEV, inUSD } = useGetReward(project.address)
+  const fundingDEV = inDEV ? inDEV.dp(0).toNumber().toLocaleString() : 0
+  const fundingUSD = inUSD ? inUSD.dp(0).toNumber().toLocaleString() : 0
+
   return (
     <DetailsContainer>
       <div>
@@ -310,11 +313,7 @@ const OnboardingPage = ({ project }: OnboardingPageProps) => {
   const [authenticationProgress, setAuthenticationProgress] = useState(1)
 
   // FIXME: NEED CONTENT IN HOOK
-  const { fundingDEV, fundingUSD, claimed } = {
-    fundingUSD: '26,000',
-    fundingDEV: '71,000',
-    claimed: false
-  }
+  const { claimed } = { claimed: false }
 
   useEffect(() => {
     if (currentState === 'loading') {
@@ -346,13 +345,7 @@ const OnboardingPage = ({ project }: OnboardingPageProps) => {
           )}
         </BackArrowContainer>
         {currentState === 'overview' && (
-          <ProjectDetails
-            project={project}
-            claimed={claimed}
-            onStateChange={setCurrentState}
-            fundingDEV={fundingDEV}
-            fundingUSD={fundingUSD}
-          />
+          <ProjectDetails project={project} claimed={claimed} onStateChange={setCurrentState} />
         )}
 
         {currentState === 'onboarding' && (
