@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useMemo, useState } from 'react'
 import styled from 'styled-components'
 import { Form } from 'antd'
 
@@ -6,7 +6,7 @@ import { ButtonL, Text2M, H1Large, Text1L, Text2S } from '../../Typography'
 import { Button, LinkAsButton } from '../../molecules/Button'
 import { ClipboardIcon, TwitterBird } from '../../Icons'
 import DownArrow from '../../molecules/DownArrow'
-import { useIntermediateProcess } from 'src/fixtures/_pages/incubator/hooks'
+import { useGetReward, useIntermediateProcess } from 'src/fixtures/_pages/incubator/hooks'
 import { Incubator } from 'src/fixtures/dev-for-apps/utility'
 
 const AuthenticationContainer = styled.div`
@@ -195,12 +195,14 @@ const StyledForm = styled(Form)`
   }
 `
 
-const createTweetBody = (project: Incubator) =>
-  `${project.name} just received $20,000 in funding from the @devprtcl Incubator. Follow the link below to support us and earn by staking DEV tokens. https://stakes.social/${project.property?.address}`
+const createTweetBody = (project: Incubator, funds?: string) =>
+  `${project.name} just received ${funds} in funding from the @devprtcl Incubator. Follow the link below to support us and earn by staking DEV tokens. https://stakes.social/${project.property?.address}`
 
 const IS_DEVELOPMENT_ENV = process.env.NODE_ENV === 'development'
 
 const TweetForm = ({ onStateChange, project, metricsAddress }: AuthenticationProps) => {
+  const { inUSD } = useGetReward(project.verifier_id)
+  const funds = useMemo(() => (inUSD ? `$${inUSD.dp(2).toNumber().toLocaleString()}` : '$N/A'), [inUSD])
   const [form] = Form.useForm()
   const { intermediateProcess, waitForFinishEvent } = useIntermediateProcess()
   const onSubmit = async (data: any) => {
@@ -246,7 +248,7 @@ const TweetForm = ({ onStateChange, project, metricsAddress }: AuthenticationPro
           <TwitterBird />
         </TwitterBirdContainer>
         <Text1L fontSize="20px">
-          {project.name} just received $20,000 in funding from the{' '}
+          {project.name} just received {funds} in funding from the{' '}
           <Text1L fontSize="20px" style={{ color: '#D500E6' }}>
             @devprtcl
           </Text1L>{' '}
@@ -259,7 +261,7 @@ const TweetForm = ({ onStateChange, project, metricsAddress }: AuthenticationPro
           <TweetButton
             target="_blank"
             rel="noreferrer"
-            href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(createTweetBody(project))}`}
+            href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(createTweetBody(project, funds))}`}
           >
             <ButtonL>Tweet</ButtonL>
           </TweetButton>
