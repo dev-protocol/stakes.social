@@ -40,6 +40,7 @@ import BigNumber from 'bignumber.js'
 import { useProvider } from 'src/fixtures/wallet/hooks'
 import { useCurrency } from 'src/fixtures/currency/functions/useCurrency'
 import Web3 from 'web3'
+import { isAddress } from 'web3-utils'
 import { INFURA_ENDPOINT } from 'src/fixtures/wallet/constants'
 
 export const useGetTotalRewardsAmount = (propertyAddress: string) => {
@@ -576,7 +577,10 @@ export const usePropertyName = (propertyAddress?: string) => {
   const { nonConnectedWeb3, accountAddress } = useProvider()
   const { data, error } = useSWR<UnwrapFunc<typeof totalSupply>, Error>(
     SWRCachePath.propertyName(propertyAddress, accountAddress),
-    () => whenDefinedAll([nonConnectedWeb3, propertyAddress], ([client, property]) => propertyName(client, property)),
+    () =>
+      whenDefinedAll([nonConnectedWeb3, propertyAddress], ([client, property]) =>
+        isAddress(property) ? propertyName(client, property) : 'Foo'
+      ),
     {
       onError: err => message.error(err.message)
     }
@@ -589,7 +593,10 @@ export const usePropertySymbol = (propertyAddress?: string) => {
   const { nonConnectedWeb3, accountAddress } = useProvider()
   const { data, error } = useSWR<UnwrapFunc<typeof totalSupply>, Error>(
     SWRCachePath.propertySymbol(propertyAddress, accountAddress),
-    () => whenDefinedAll([nonConnectedWeb3, propertyAddress], ([client, property]) => propertySymbol(client, property)),
+    () =>
+      whenDefinedAll([nonConnectedWeb3, propertyAddress], ([client, property]) =>
+        isAddress(property) ? propertySymbol(client, property) : 'FOO'
+      ),
     {
       onError: err => message.error(err.message)
     }
