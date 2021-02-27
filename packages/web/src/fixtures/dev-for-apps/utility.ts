@@ -55,6 +55,7 @@ export type PropertyLinks = {
 
 export interface Property {
   id: string
+  address: string
   name: string
   description: string
   cover_image: NullableImage
