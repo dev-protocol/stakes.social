@@ -72,24 +72,29 @@ export const useIntermediateProcess = () => {
 
 export const useGetReward = (githubRepository: string) => {
   const { nonConnectedWeb3 } = useProvider()
-  const { currency, toCurrency } = useCurrency()
+  const { currency, toCurrency, devToUSD } = useCurrency()
   const { data, error } = useSWR<UnwrapFunc<typeof getReward> | undefined, Error>(
     SWRCachePath.getReward(githubRepository),
     () => whenDefined(nonConnectedWeb3, client => getReward(client, githubRepository))
   )
 
-  return { reward: whenDefined(data, x => toCurrency(toNaturalNumber(x))), currency, error }
+  const inDEV = whenDefined(data, x => toNaturalNumber(x))
+  const inUSD = whenDefined(inDEV, x => devToUSD(x))
+  const reward = whenDefined(inDEV, x => toCurrency(x))
+  return { reward, currency, error, inDEV, inUSD }
 }
 
 export const useGetEntireRewards = () => {
   const { data: incubators } = useGetIncubators()
-  const { currency, toCurrency } = useCurrency()
+  const { currency, toCurrency, devToUSD } = useCurrency()
   const { nonConnectedWeb3 } = useProvider()
   const { data: rewards, error } = useSWR<string[] | undefined, Error>(SWRCachePath.getEntireRewards(incubators), () =>
     whenDefinedAll([nonConnectedWeb3, incubators], ([client, items]) =>
       Promise.all(items.map(item => getReward(client, item.verifier_id)))
     )
   )
-  const data = whenDefined(rewards, x => x.map(toBigNumber).reduce((i, p) => i.plus(p)))
-  return { reward: whenDefined(data, x => toCurrency(toNaturalNumber(x))), currency, error }
+  const inDEV = whenDefined(rewards, x => toNaturalNumber(x.map(toBigNumber).reduce((i, p) => i.plus(p))))
+  const inUSD = whenDefined(inDEV, x => devToUSD(x))
+  const reward = whenDefined(inDEV, x => toCurrency(x))
+  return { reward, currency, error, inDEV, inUSD }
 }

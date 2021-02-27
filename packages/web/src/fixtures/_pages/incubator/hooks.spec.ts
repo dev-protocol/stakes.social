@@ -106,10 +106,12 @@ describe('incubator hooks', () => {
       const data = undefined
       const error = undefined
       const toCurrency = (x?: BigNumber) => x
-      ;(useCurrency as jest.Mock).mockImplementationOnce(() => ({ currency: 'DEV', toCurrency }))
+      ;(useCurrency as jest.Mock).mockImplementationOnce(() => ({ currency: 'DEV', toCurrency, devToUSD: toCurrency }))
       ;(useSWR as jest.Mock).mockImplementation(() => ({ data, error }))
       const { result } = renderHook(() => useGetReward('repos'))
       expect(result.current.reward).toBe(data)
+      expect(result.current.inDEV).toBe(data)
+      expect(result.current.inUSD).toBe(data)
       expect(result.current.currency).toBe('DEV')
     })
 
@@ -117,10 +119,12 @@ describe('incubator hooks', () => {
       const data = undefined
       const error = undefined
       const toCurrency = (x?: BigNumber) => x
-      ;(useCurrency as jest.Mock).mockImplementationOnce(() => ({ currency: 'USD', toCurrency }))
+      ;(useCurrency as jest.Mock).mockImplementationOnce(() => ({ currency: 'USD', toCurrency, devToUSD: toCurrency }))
       ;(useSWR as jest.Mock).mockImplementation(() => ({ data, error }))
       const { result } = renderHook(() => useGetReward('repos'))
       expect(result.current.reward).toBe(data)
+      expect(result.current.inDEV).toBe(data)
+      expect(result.current.inUSD).toBe(data)
       expect(result.current.currency).toBe('USD')
     })
 
@@ -128,10 +132,12 @@ describe('incubator hooks', () => {
       const data = '10000'
       const error = undefined
       const toCurrency = (x?: BigNumber) => x
-      ;(useCurrency as jest.Mock).mockImplementationOnce(() => ({ currency: 'DEV', toCurrency }))
+      ;(useCurrency as jest.Mock).mockImplementationOnce(() => ({ currency: 'DEV', toCurrency, devToUSD: toCurrency }))
       ;(useSWR as jest.Mock).mockImplementation(() => ({ data, error }))
       const { result } = renderHook(() => useGetReward('repos'))
       expect(result.current.reward?.toFixed()).toBe(toNaturalNumber(data).toFixed())
+      expect(result.current.inDEV?.toFixed()).toBe(toNaturalNumber(data).toFixed())
+      expect(result.current.inUSD?.toFixed()).toBe(toNaturalNumber(data).toFixed())
       expect(result.current.currency).toBe('DEV')
     })
 
@@ -139,10 +145,12 @@ describe('incubator hooks', () => {
       const data = '10000'
       const error = undefined
       const toCurrency = (x: BigNumber) => x.times(3)
-      ;(useCurrency as jest.Mock).mockImplementationOnce(() => ({ currency: 'USD', toCurrency }))
+      ;(useCurrency as jest.Mock).mockImplementationOnce(() => ({ currency: 'USD', toCurrency, devToUSD: toCurrency }))
       ;(useSWR as jest.Mock).mockImplementation(() => ({ data, error }))
       const { result } = renderHook(() => useGetReward('repos'))
       expect(result.current.reward?.toFixed()).toBe(toNaturalNumber(data).times(3).toFixed())
+      expect(result.current.inDEV?.toFixed()).toBe(toNaturalNumber(data).toFixed())
+      expect(result.current.inUSD?.toFixed()).toBe(toNaturalNumber(data).times(3).toFixed())
       expect(result.current.currency).toBe('USD')
     })
 
@@ -151,7 +159,7 @@ describe('incubator hooks', () => {
       const errorMessage = 'error'
       const error = new Error(errorMessage)
       const toCurrency = (x?: BigNumber) => x
-      ;(useCurrency as jest.Mock).mockImplementationOnce(() => ({ currency: 'DEV', toCurrency }))
+      ;(useCurrency as jest.Mock).mockImplementationOnce(() => ({ currency: 'DEV', toCurrency, devToUSD: toCurrency }))
       ;(useSWR as jest.Mock).mockImplementation(() => ({ data, error }))
       const { result } = renderHook(() => useGetReward('repos'))
       expect(result.current.error).toBe(error)
@@ -164,10 +172,12 @@ describe('incubator hooks', () => {
       const data = undefined
       const error = undefined
       const toCurrency = (x?: BigNumber) => x
-      ;(useCurrency as jest.Mock).mockImplementationOnce(() => ({ currency: 'DEV', toCurrency }))
+      ;(useCurrency as jest.Mock).mockImplementationOnce(() => ({ currency: 'DEV', toCurrency, devToUSD: toCurrency }))
       ;(useSWR as jest.Mock).mockImplementation(() => ({ data, error }))
       const { result } = renderHook(() => useGetEntireRewards())
       expect(result.current.reward).toBe(data)
+      expect(result.current.inDEV).toBe(data)
+      expect(result.current.inUSD).toBe(data)
       expect(result.current.currency).toBe('DEV')
     })
 
@@ -175,10 +185,12 @@ describe('incubator hooks', () => {
       const data = undefined
       const error = undefined
       const toCurrency = (x?: BigNumber) => x
-      ;(useCurrency as jest.Mock).mockImplementationOnce(() => ({ currency: 'USD', toCurrency }))
+      ;(useCurrency as jest.Mock).mockImplementationOnce(() => ({ currency: 'USD', toCurrency, devToUSD: toCurrency }))
       ;(useSWR as jest.Mock).mockImplementation(() => ({ data, error }))
       const { result } = renderHook(() => useGetEntireRewards())
       expect(result.current.reward).toBe(data)
+      expect(result.current.inDEV).toBe(data)
+      expect(result.current.inUSD).toBe(data)
       expect(result.current.currency).toBe('USD')
     })
 
@@ -186,10 +198,12 @@ describe('incubator hooks', () => {
       const data = ['10000']
       const error = undefined
       const toCurrency = (x?: BigNumber) => x
-      ;(useCurrency as jest.Mock).mockImplementationOnce(() => ({ currency: 'DEV', toCurrency }))
+      ;(useCurrency as jest.Mock).mockImplementationOnce(() => ({ currency: 'DEV', toCurrency, devToUSD: toCurrency }))
       ;(useSWR as jest.Mock).mockImplementation(() => ({ data, error }))
       const { result } = renderHook(() => useGetEntireRewards())
       expect(result.current.reward?.toFixed()).toBe(toNaturalNumber(data[0]).toFixed())
+      expect(result.current.inDEV?.toFixed()).toBe(toNaturalNumber(data[0]).toFixed())
+      expect(result.current.inUSD?.toFixed()).toBe(toNaturalNumber(data[0]).toFixed())
       expect(result.current.currency).toBe('DEV')
     })
 
@@ -197,10 +211,12 @@ describe('incubator hooks', () => {
       const data = ['10000']
       const error = undefined
       const toCurrency = (x: BigNumber) => x.times(3)
-      ;(useCurrency as jest.Mock).mockImplementationOnce(() => ({ currency: 'USD', toCurrency }))
+      ;(useCurrency as jest.Mock).mockImplementationOnce(() => ({ currency: 'USD', toCurrency, devToUSD: toCurrency }))
       ;(useSWR as jest.Mock).mockImplementation(() => ({ data, error }))
       const { result } = renderHook(() => useGetEntireRewards())
       expect(result.current.reward?.toFixed()).toBe(toNaturalNumber(data[0]).times(3).toFixed())
+      expect(result.current.inDEV?.toFixed()).toBe(toNaturalNumber(data[0]).toFixed())
+      expect(result.current.inUSD?.toFixed()).toBe(toNaturalNumber(data[0]).times(3).toFixed())
       expect(result.current.currency).toBe('USD')
     })
 
@@ -209,7 +225,7 @@ describe('incubator hooks', () => {
       const errorMessage = 'error'
       const error = new Error(errorMessage)
       const toCurrency = (x?: BigNumber) => x
-      ;(useCurrency as jest.Mock).mockImplementationOnce(() => ({ currency: 'DEV', toCurrency }))
+      ;(useCurrency as jest.Mock).mockImplementationOnce(() => ({ currency: 'DEV', toCurrency, devToUSD: toCurrency }))
       ;(useSWR as jest.Mock).mockImplementation(() => ({ data, error }))
       const { result } = renderHook(() => useGetEntireRewards())
       expect(result.current.error).toBe(error)
