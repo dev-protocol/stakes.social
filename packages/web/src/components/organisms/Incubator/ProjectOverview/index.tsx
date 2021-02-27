@@ -175,7 +175,7 @@ const ProjectOverview = () => {
   const [showAll, setShowAll] = useState(false)
   const { data } = useGetIncubators()
 
-  const projects = showAll ? data : data?.slice(0, 8)
+  const projects: Array<any> = showAll && data ? data : data?.slice(0, 8) || []
   return (
     <GradientContainer id="projects" isExpanded={showAll}>
       <ProjectOverviewContainer>
@@ -197,7 +197,7 @@ const ProjectOverview = () => {
           hoverTextColor="white"
           textColor="black"
         >
-          Show all {PLACHEOLDER_DATA.length}
+          Show all {data?.length || 20}
         </Button>
       )}
     </GradientContainer>

@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import Link from 'next/link'
-import * as lorem from 'lorem-ipsum'
+import { useRouter } from 'next/router'
+import { Spin } from 'antd'
 
 import { H1Large, Text1S, H1M, Text1L, H3Xs, ButtonM, LinkB } from 'src/components/organisms/Incubator/Typography'
 import { Button } from 'src/components/organisms/Incubator/molecules/Button'
@@ -21,16 +22,8 @@ import ConnectWallet from 'src/components/organisms/Incubator/Onboarding/Connect
 import CopyPat from 'src/components/organisms/Incubator/Onboarding/CopyPAT'
 import SubmitTransaction from 'src/components/organisms/Incubator/Onboarding/SubmitTransaction'
 import { TwitterBlackWhite, GithubIcon } from 'src/components/organisms/Incubator/Icons'
-import { useGetReward } from 'src/fixtures/_pages/incubator/hooks'
-import { Incubator, Property } from 'src/fixtures/dev-for-apps/utility'
 import { useGetProperty } from 'src/fixtures/dev-for-apps/hooks'
 import { getPath } from 'src/fixtures/utility/route'
-import { useRouter } from 'next/router'
-
-const ipsum = new lorem.LoremIpsum({
-  sentencesPerParagraph: { min: 1, max: 3 },
-  wordsPerSentence: { min: 6, max: 10 }
-})
 
 const Container = styled.div`
   display: flex;
@@ -109,14 +102,23 @@ const DevCurrencyContainer = styled.div`
 
 type ProjectDetailsProps = {
   onStateChange: React.Dispatch<React.SetStateAction<string>>
-  website: string
-  twitter: string
-  github: string
-  logo: string
   fundingDEV: string
   fundingUSD: string
   claimed: boolean
-  project: Property
+
+  project: {
+    name: string
+    address: string
+    avatar: {
+      url: string
+    }
+    description: string
+    links: {
+      github?: string
+      website?: string
+      twitter?: string
+    }
+  }
 }
 
 const ProjectDetails = ({ fundingDEV, fundingUSD, claimed, onStateChange, project }: ProjectDetailsProps) => {
@@ -172,7 +174,7 @@ const ProjectDetails = ({ fundingDEV, fundingUSD, claimed, onStateChange, projec
         </SpaceBetween>
       </div>
       <DescriptionContainer>
-        <Text1L>{ipsum.generateSentences(9)}</Text1L>
+        <Text1L>{project?.description || 'No description available for this project.'}</Text1L>
       </DescriptionContainer>
     </DetailsContainer>
   )
@@ -260,26 +262,47 @@ const OnboardingSection = ({ isModal, onStateChange, onBoardChange, isOnboarding
   )
 }
 
-const OnboardingPage = () => {
-  const [, propertyAddress] = getPath(useRouter().asPath)
+const GatherOnboardingContentPage = () => {
+  const [, , propertyAddress] = getPath(useRouter().asPath)
+  const { data } = useGetProperty(propertyAddress)
+  const project: any = data
+
+  if (!project)
+    return (
+      <div style={{ display: 'flex', width: '100vw', height: '100vh', justifyContent: 'center', alignItems: 'center' }}>
+        <Spin size="large" />
+      </div>
+    )
+
+  return <OnboardingPage project={project} />
+}
+
+type OnboardingPageProps = {
+  project: {
+    name: string
+    address: string
+    avatar: {
+      url: string
+    }
+    description: string
+    links: {
+      github?: string
+      website?: string
+      twitter?: string
+    }
+  }
+}
+
+const OnboardingPage = ({ project }: OnboardingPageProps) => {
   const [currentState, setCurrentState] = useState<string>('overview')
   const [isOnboarding, setIsOnboarding] = useState(true)
   const [authenticationProgress, setAuthenticationProgress] = useState(1)
-  const { data: project } = useGetProperty(propertyAddress)
 
-  const { name, fundingDEV, fundingUSD, github, logo, twitter, website, claimed } = {
-    name: 'Sigma',
-    website: 'sigmaprime.io',
-    twitter: '',
-    github: '',
+  const { fundingDEV, fundingUSD, claimed } = {
     fundingUSD: '26,000',
     fundingDEV: '71,000',
-    claimed: false,
-    logo: 'https://res.cloudinary.com/haas-storage/image/upload/v1614068316/sigma_2x_aibcyi.png'
+    claimed: false
   }
-
-  const { currency, reward } = useGetReward('ipfs/go-ipfs')
-  console.log('Rewards: ', reward)
 
   useEffect(() => {
     if (currentState === 'loading') {
@@ -317,10 +340,6 @@ const OnboardingPage = () => {
             onStateChange={setCurrentState}
             fundingDEV={fundingDEV}
             fundingUSD={fundingUSD}
-            github={github}
-            logo={logo}
-            twitter={twitter}
-            website={website}
           />
         )}
 
@@ -367,4 +386,4 @@ const OnboardingPage = () => {
   )
 }
 
-export default OnboardingPage
+export default GatherOnboardingContentPage

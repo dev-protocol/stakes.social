@@ -5,9 +5,7 @@ import * as lorem from 'lorem-ipsum'
 import { H1S, H3S, Text1S } from 'src/components/organisms/Incubator/Typography'
 import { Button } from 'src/components/organisms/Incubator/molecules/Button'
 import Link from 'next/link'
-import { useCurrency } from 'src/fixtures/currency/hooks'
 import DevCurrencySymbol from '../molecules/DevCurrency'
-import { Incubator } from 'src/fixtures/dev-for-apps/utility'
 import { useGetReward } from 'src/fixtures/_pages/incubator/hooks'
 
 const ipsum = new lorem.LoremIpsum({
@@ -16,7 +14,23 @@ const ipsum = new lorem.LoremIpsum({
 })
 
 type ProjectProps = {
-  project: Incubator
+  project: {
+    id: number
+    name: string
+    verifier_id: string
+    property: {
+      address: string
+      avatar: {
+        url: string
+      }
+      description: string
+      links: {
+        github?: string
+        website?: string
+        twitter?: string
+      }
+    }
+  }
 }
 
 const ProjectContainer = styled.div`
@@ -34,7 +48,8 @@ const ProjectContainer = styled.div`
 
 const TitleContainer = styled.div`
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr auto;
+  column-gap: 10px;
 `
 
 const IconContainer = styled.div`
@@ -48,9 +63,11 @@ const DescriptionContainer = styled.div`
   font-weight: 400;
   font-size: 14px;
   line-height: 24px;
-  line-clamp: 4;
-  box-orient: vertical;
   overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 4; /* number of lines to show */
+  -webkit-box-orient: vertical;
 `
 
 const FundingSection = styled.div`
@@ -67,6 +84,24 @@ const ClaimButtonContainer = styled.div`
   align-items: center;
 `
 
+const Name = styled(H3S)`
+  /* These are technically the same, but use both */
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+
+  -ms-word-break: break-all;
+  /* This is the dangerous one in WebKit, as it breaks things wherever */
+  word-break: break-all;
+  /* Instead use this non-standard one: */
+  word-break: break-word;
+
+  /* Adds a hyphen where the word breaks, if supported (No Blink) */
+  -ms-hyphens: auto;
+  -moz-hyphens: auto;
+  -webkit-hyphens: auto;
+  hyphens: auto;
+`
+
 const ProjectEntry = ({ project }: ProjectProps) => {
   // Probably fetch data per project async here
   const { currency, reward } = useGetReward(project.verifier_id)
@@ -76,7 +111,7 @@ const ProjectEntry = ({ project }: ProjectProps) => {
   return (
     <ProjectContainer>
       <TitleContainer>
-        <H3S>{project.name}</H3S>
+        <Name>{project.name}</Name>
         <IconContainer>
           {project.property?.avatar && <img src={project.property?.avatar.url} width="64px" height="64px" />}
         </IconContainer>
@@ -93,7 +128,7 @@ const ProjectEntry = ({ project }: ProjectProps) => {
         </div>
       </FundingSection>
       <ClaimButtonContainer>
-        <Link href={'/incubator/project/[project]'} as={`/incubator/project/${project.property?.name}`} passHref>
+        <Link href={'/incubator/project/[project]'} as={`/incubator/project/${project.property?.address}`} passHref>
           <Button disabled={CLAIMED}>{CLAIMED ? 'Claimed' : 'Claim'}</Button>
         </Link>
       </ClaimButtonContainer>
