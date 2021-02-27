@@ -1,11 +1,12 @@
 import { useCallback, useState } from 'react'
 import { useProvider } from 'src/fixtures/wallet/hooks'
 import { waitForCreateMetrics } from 'src/fixtures/dev-kit/client'
-import { toNaturalNumber, UnwrapFunc, whenDefined } from 'src/fixtures/utility'
+import { toBigNumber, toNaturalNumber, UnwrapFunc, whenDefined, whenDefinedAll } from 'src/fixtures/utility'
 import { authenticate, getPropertyAddress, getReward, intermediateProcess, waitForFinishEvent } from './client'
 import { useCurrency } from 'src/fixtures/currency/hooks'
 import useSWR from 'swr'
 import { SWRCachePath } from './cache-path'
+import { useGetIncubators } from 'src/fixtures/dev-for-apps/hooks'
 
 export const useAuthenticate = () => {
   const { web3 } = useProvider()
@@ -77,5 +78,18 @@ export const useGetReward = (githubRepository: string) => {
     () => whenDefined(nonConnectedWeb3, client => getReward(client, githubRepository))
   )
 
+  return { reward: whenDefined(data, x => toCurrency(toNaturalNumber(x))), currency, error }
+}
+
+export const useGetEntireRewards = () => {
+  const { data: incubators } = useGetIncubators()
+  const { currency, toCurrency } = useCurrency()
+  const { nonConnectedWeb3 } = useProvider()
+  const { data: rewards, error } = useSWR<string[] | undefined, Error>(SWRCachePath.getEntireRewards(incubators), () =>
+    whenDefinedAll([nonConnectedWeb3, incubators], ([client, items]) =>
+      Promise.all(items.map(item => getReward(client, item.verifier_id)))
+    )
+  )
+  const data = whenDefined(rewards, x => x.map(toBigNumber).reduce((i, p) => i.plus(p)))
   return { reward: whenDefined(data, x => toCurrency(toNaturalNumber(x))), currency, error }
 }

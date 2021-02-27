@@ -1,7 +1,7 @@
 import { renderHook, act } from '@testing-library/react-hooks'
 import { useProvider } from 'src/fixtures/wallet/hooks'
 import { waitForCreateMetrics } from 'src/fixtures/dev-kit/client'
-import { useAuthenticate, useGetReward, useIntermediateProcess } from './hooks'
+import { useAuthenticate, useGetEntireRewards, useGetReward, useIntermediateProcess } from './hooks'
 import { authenticate, getPropertyAddress, intermediateProcess, waitForFinishEvent } from './client'
 import BigNumber from 'bignumber.js'
 import { useCurrency } from 'src/fixtures/currency/hooks'
@@ -14,6 +14,7 @@ jest.mock('src/fixtures/dev-kit/client.ts')
 jest.mock('src/fixtures/_pages/incubator/client.ts')
 jest.mock('src/fixtures/currency/functions/useCurrency')
 jest.mock('swr')
+jest.mock('src/fixtures/dev-for-apps/hooks')
 
 describe('incubator hooks', () => {
   describe('useAuthenticate', () => {
@@ -153,6 +154,64 @@ describe('incubator hooks', () => {
       ;(useCurrency as jest.Mock).mockImplementationOnce(() => ({ currency: 'DEV', toCurrency }))
       ;(useSWR as jest.Mock).mockImplementation(() => ({ data, error }))
       const { result } = renderHook(() => useGetReward('repos'))
+      expect(result.current.error).toBe(error)
+      expect(result.current.error?.message).toBe(errorMessage)
+    })
+  })
+
+  describe('useGetEntireRewards', () => {
+    test('data is undefined', () => {
+      const data = undefined
+      const error = undefined
+      const toCurrency = (x?: BigNumber) => x
+      ;(useCurrency as jest.Mock).mockImplementationOnce(() => ({ currency: 'DEV', toCurrency }))
+      ;(useSWR as jest.Mock).mockImplementation(() => ({ data, error }))
+      const { result } = renderHook(() => useGetEntireRewards())
+      expect(result.current.reward).toBe(data)
+      expect(result.current.currency).toBe('DEV')
+    })
+
+    test('data is undefined and USD', () => {
+      const data = undefined
+      const error = undefined
+      const toCurrency = (x?: BigNumber) => x
+      ;(useCurrency as jest.Mock).mockImplementationOnce(() => ({ currency: 'USD', toCurrency }))
+      ;(useSWR as jest.Mock).mockImplementation(() => ({ data, error }))
+      const { result } = renderHook(() => useGetEntireRewards())
+      expect(result.current.reward).toBe(data)
+      expect(result.current.currency).toBe('USD')
+    })
+
+    test('success fetching data', () => {
+      const data = ['10000']
+      const error = undefined
+      const toCurrency = (x?: BigNumber) => x
+      ;(useCurrency as jest.Mock).mockImplementationOnce(() => ({ currency: 'DEV', toCurrency }))
+      ;(useSWR as jest.Mock).mockImplementation(() => ({ data, error }))
+      const { result } = renderHook(() => useGetEntireRewards())
+      expect(result.current.reward?.toFixed()).toBe(toNaturalNumber(data[0]).toFixed())
+      expect(result.current.currency).toBe('DEV')
+    })
+
+    test('success fetching data and USD', () => {
+      const data = ['10000']
+      const error = undefined
+      const toCurrency = (x: BigNumber) => x.times(3)
+      ;(useCurrency as jest.Mock).mockImplementationOnce(() => ({ currency: 'USD', toCurrency }))
+      ;(useSWR as jest.Mock).mockImplementation(() => ({ data, error }))
+      const { result } = renderHook(() => useGetEntireRewards())
+      expect(result.current.reward?.toFixed()).toBe(toNaturalNumber(data[0]).times(3).toFixed())
+      expect(result.current.currency).toBe('USD')
+    })
+
+    test('failure fetching data', () => {
+      const data = undefined
+      const errorMessage = 'error'
+      const error = new Error(errorMessage)
+      const toCurrency = (x?: BigNumber) => x
+      ;(useCurrency as jest.Mock).mockImplementationOnce(() => ({ currency: 'DEV', toCurrency }))
+      ;(useSWR as jest.Mock).mockImplementation(() => ({ data, error }))
+      const { result } = renderHook(() => useGetEntireRewards())
       expect(result.current.error).toBe(error)
       expect(result.current.error?.message).toBe(errorMessage)
     })
