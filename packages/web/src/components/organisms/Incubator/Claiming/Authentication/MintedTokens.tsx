@@ -29,6 +29,8 @@ const InfoIconContainer = styled.div`
 
 type MintedTokensType = {
   isSucces?: boolean
+  ticker: string
+  address: string
 }
 
 const AddToMetaMask = styled.button`
@@ -147,9 +149,8 @@ const FundingReceived = ({ funding }: { funding: string }) => {
   )
 }
 
-const MintedTokens = ({ isSucces }: MintedTokensType) => {
+const MintedTokens = ({ isSucces, ticker, address }: MintedTokensType) => {
   const { web3 } = useProvider()
-  const { ticker, address } = { ticker: 'SIGP', address: '0x5caf454ba92e6f2c929df14667ee360ed9fd5b26' }
 
   const TOKEN_DECIMALS = 18
   const handleAddClick = () => {

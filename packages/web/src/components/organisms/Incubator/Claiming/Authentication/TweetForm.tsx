@@ -115,7 +115,7 @@ const ClipboardIconContainer = styled.div`
   cursor: pointer;
   position: absolute;
   right: 0;
-  bottom: 4px;
+  top: 8px;
 `
 
 export const CustomInput = ({ placeholder, label, onHandlePaste }: CustomInputProps) => {
@@ -133,6 +133,7 @@ export const CustomInput = ({ placeholder, label, onHandlePaste }: CustomInputPr
 
 type AuthenticationProps = {
   onStateChange: React.Dispatch<React.SetStateAction<string>>
+  projectName: string
 }
 
 const ProgressContainer = styled.div`
@@ -187,7 +188,7 @@ const StyledForm = styled(Form)`
   }
 `
 
-const TweetForm = ({ onStateChange }: AuthenticationProps) => {
+const TweetForm = ({ onStateChange, projectName }: AuthenticationProps) => {
   const [form] = Form.useForm()
   const onSubmit = (data: any) => {
     console.log('data: ', data)
@@ -202,16 +203,14 @@ const TweetForm = ({ onStateChange }: AuthenticationProps) => {
   const handlePaste = () => {
     navigator.clipboard
       .readText()
-      .then(pat => {
-        form.setFieldsValue({ pat })
-        console.log('Pasted content: ', pat)
+      .then(twitter => {
+        form.setFieldsValue({ twitter })
+        console.log('Pasted content: ', twitter)
       })
       .catch(err => {
         console.error('Failed to read clipboard contents: ', err)
       })
   }
-
-  const { project } = { project: 'Sigma' }
 
   return (
     <AuthenticationContainer>
@@ -226,7 +225,7 @@ const TweetForm = ({ onStateChange }: AuthenticationProps) => {
           <TwitterBird />
         </TwitterBirdContainer>
         <Text1L fontSize="20px">
-          {project} just received $20,000 in funding from the{' '}
+          {projectName} just received $20,000 in funding from the{' '}
           <Text1L fontSize="20px" style={{ color: '#D500E6' }}>
             @devprtcl
           </Text1L>{' '}

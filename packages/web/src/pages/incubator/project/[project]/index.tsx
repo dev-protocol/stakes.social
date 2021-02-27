@@ -300,6 +300,7 @@ const OnboardingPage = ({ project }: OnboardingPageProps) => {
   const [isOnboarding, setIsOnboarding] = useState(true)
   const [authenticationProgress, setAuthenticationProgress] = useState(1)
 
+  // FIXME: NEED CONTENT IN HOOK
   const { fundingDEV, fundingUSD, claimed } = {
     fundingUSD: '26,000',
     fundingDEV: '71,000',
@@ -355,14 +356,16 @@ const OnboardingPage = ({ project }: OnboardingPageProps) => {
         )}
 
         {currentState === 'authentication' && (
-          <Authentication progress={authenticationProgress} onStateChange={setCurrentState} />
+          <Authentication project={project} progress={authenticationProgress} onStateChange={setCurrentState} />
         )}
 
         {currentState === 'loading' && <AuthenticateLoading />}
 
-        {currentState === 'success' && <ClaimSuccesful onStateChange={setCurrentState} />}
+        {currentState === 'success' && <ClaimSuccesful project={project} onStateChange={setCurrentState} />}
 
-        {currentState === 'whatsnext' && <WhatsNext onBoardChange={setIsOnboarding} isOnboarding={false} />}
+        {currentState === 'whatsnext' && (
+          <WhatsNext project={project} onBoardChange={setIsOnboarding} isOnboarding={false} />
+        )}
       </Container>
 
       {currentState === 'overview' && isOnboarding && (
@@ -379,7 +382,7 @@ const OnboardingPage = ({ project }: OnboardingPageProps) => {
       {currentState === 'overview' && !isOnboarding && (
         <Container>
           <Hr />
-          <WhatsNext isOverview={true} isOnboarding={isOnboarding} onBoardChange={setIsOnboarding} />
+          <WhatsNext project={project} isOverview={true} isOnboarding={isOnboarding} onBoardChange={setIsOnboarding} />
         </Container>
       )}
 

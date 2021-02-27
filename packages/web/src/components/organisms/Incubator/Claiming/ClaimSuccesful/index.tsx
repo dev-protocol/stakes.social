@@ -41,35 +41,52 @@ const LogoContainer = styled.div`
 
 type ClaimSuccesfulProps = {
   onStateChange: React.Dispatch<React.SetStateAction<string>>
+  project: {
+    name: string
+    address: string
+    avatar: {
+      url: string
+    }
+    description: string
+    links: {
+      github?: string
+      website?: string
+      twitter?: string
+    }
+  }
 }
 
-const ClaimSuccesful = ({ onStateChange }: ClaimSuccesfulProps) => {
+const ClaimSuccesful = ({ onStateChange, project }: ClaimSuccesfulProps) => {
   const { width, height } = useWindowDimensions()
   const githubUrl = 'sigp/lighthouse'
-  const logo = 'https://res.cloudinary.com/haas-storage/image/upload/v1613044939/sigma_tye6kg.png'
-  const name = 'Sigma'
+  const ticker = 'SIGP'
 
   return (
     <>
       <DetailsContainer>
-        <div style={{ height: '445px' }}>
+        <div>
           <SpaceBetween style={{ paddingBottom: '70px' }}>
             <Contact>
-              <H1Large>{name}</H1Large>
-              <div style={{ display: 'flex', paddingTop: '11px' }}>
-                <div style={{ marginRight: '5px', width: '24px', height: '24px' }}>
-                  <img src="https://res.cloudinary.com/haas-storage/image/upload/v1613111071/github_rg8ngo.png" />
+              <H1Large>{project?.name}</H1Large>
+              {project.links?.github && (
+                <div style={{ display: 'flex', paddingTop: '11px' }}>
+                  <div style={{ marginRight: '5px', width: '24px', height: '24px' }}>
+                    <img src="https://res.cloudinary.com/haas-storage/image/upload/v1613111071/github_rg8ngo.png" />
+                  </div>
+                  <LinkB href={project.links.github} rel="noopener noreferrer" target="_blank">
+                    {githubUrl}
+                  </LinkB>
                 </div>
-                <LinkB>{githubUrl}</LinkB>
-              </div>
+              )}
             </Contact>
-
-            <LogoContainer>
-              <img src={logo} />
-            </LogoContainer>
+            {project.avatar?.url && (
+              <LogoContainer>
+                <img src={project.avatar?.url} />
+              </LogoContainer>
+            )}
           </SpaceBetween>
           <Hr color="#CCCCCC" />
-          <MintedTokens />
+          <MintedTokens isSucces={true} address={project.address} ticker={ticker} />
         </div>
         <SuccessMessageContainer>
           <H1Large color="#1FED33">Success!</H1Large>

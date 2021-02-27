@@ -36,38 +36,56 @@ const LogoContainer = styled.div`
 type AuthenticationProps = {
   onStateChange: React.Dispatch<React.SetStateAction<string>>
   progress: number
+  project: {
+    name: string
+    address: string
+    avatar: {
+      url: string
+    }
+    description: string
+    links: {
+      github?: string
+      website?: string
+      twitter?: string
+    }
+  }
 }
 
-const Authentication = ({ onStateChange, progress }: AuthenticationProps) => {
+const Authentication = ({ onStateChange, progress, project }: AuthenticationProps) => {
+  // FIXME: Need content in hook
+  const ticker = 'SIGP'
   const githubUrl = 'sigp/lighthouse'
-  const logo = 'https://res.cloudinary.com/haas-storage/image/upload/v1614068316/sigma_2x_aibcyi.png'
-  const name = 'Sigma'
 
   return (
     <DetailsContainer>
       <div>
         <SpaceBetween style={{ paddingBottom: '70px' }}>
           <Contact>
-            <H1Large>{name}</H1Large>
-            <div style={{ display: 'flex', paddingTop: '11px' }}>
-              <div style={{ marginRight: '5px', width: '24px', height: '24px' }}>
-                <img src="https://res.cloudinary.com/haas-storage/image/upload/v1613111071/github_rg8ngo.png" />
+            <H1Large>{project.name}</H1Large>
+            {project.links?.github && (
+              <div style={{ display: 'flex', paddingTop: '11px' }}>
+                <div style={{ marginRight: '5px', width: '24px', height: '24px' }}>
+                  <img src="https://res.cloudinary.com/haas-storage/image/upload/v1613111071/github_rg8ngo.png" />
+                </div>
+                <LinkB href={project.links.github} rel="noopener noreferrer" target="_blank">
+                  {githubUrl}
+                </LinkB>
               </div>
-              <LinkB>{githubUrl}</LinkB>
-            </div>
+            )}
           </Contact>
-
-          <LogoContainer>
-            <img src={logo} />
-          </LogoContainer>
+          {project.avatar?.url && (
+            <LogoContainer>
+              <img src={project.avatar?.url} />
+            </LogoContainer>
+          )}
         </SpaceBetween>
         <Hr color="#CCCCCC" />
-        <MintedTokens />
+        <MintedTokens address={project.address} ticker={ticker} />
       </div>
 
       {progress === 1 && <AuthenticationForm onStateChange={onStateChange} />}
 
-      {progress === 2 && <TweetForm onStateChange={onStateChange} />}
+      {progress === 2 && <TweetForm projectName={project.name} onStateChange={onStateChange} />}
     </DetailsContainer>
   )
 }

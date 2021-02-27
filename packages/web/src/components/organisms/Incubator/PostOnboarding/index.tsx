@@ -23,11 +23,24 @@ type WhatsNextType = {
   isOverview?: boolean
   isOnboarding: boolean
   onBoardChange: React.Dispatch<React.SetStateAction<boolean>>
+  project: {
+    name: string
+    address: string
+    avatar: {
+      url: string
+    }
+    description: string
+    links: {
+      github?: string
+      website?: string
+      twitter?: string
+    }
+  }
 }
 
-const PostOnboarding = ({ isOverview, isOnboarding, onBoardChange }: WhatsNextType) => {
+const PostOnboarding = ({ isOverview, isOnboarding, onBoardChange, project }: WhatsNextType) => {
   const [activePart, setActivePart] = useState(1)
-  const { projectId } = { projectId: '0xF6899a1536E6474f0a6Aa2b36714e9632FB97D40' }
+
   return (
     <>
       <SpaceBetween style={{ paddingTop: isOverview ? '64px' : '72px', alignItems: 'center', paddingBottom: '1em' }}>
@@ -71,7 +84,7 @@ const PostOnboarding = ({ isOverview, isOnboarding, onBoardChange }: WhatsNextTy
         {isOverview ? (
           <OnboardSwitch isOnboarding={isOnboarding} onOnboardChange={onBoardChange} />
         ) : (
-          <Link href="/[propertyAddress]" as={`/${projectId}`} passHref>
+          <Link href="/[propertyAddress]" as={`/${project.address}`} passHref>
             <LinkB>Skip</LinkB>
           </Link>
         )}
@@ -85,7 +98,7 @@ const PostOnboarding = ({ isOverview, isOnboarding, onBoardChange }: WhatsNextTy
 
       {activePart === 4 && <OssTokenExplanation onActivePageChange={setActivePart} />}
 
-      {activePart === 5 && <BuildCommunity onActivePageChange={setActivePart} />}
+      {activePart === 5 && <BuildCommunity projectAddress={project.address} onActivePageChange={setActivePart} />}
     </>
   )
 }
