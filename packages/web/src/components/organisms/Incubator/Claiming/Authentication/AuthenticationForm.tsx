@@ -205,7 +205,7 @@ const AuthenticationForm = ({ onStateChange }: AuthenticationProps) => {
             rules={[{ required: true, message: 'Please enter a valid PAT' }]}
             key="pat"
           >
-            <CustomInput onHandlePaste={handlePaste} label="pat" placeholder="Paste the PAT token from Github" />
+            <CustomInput onHandlePaste={handlePaste} label="pat" placeholder="Paste the PAT from Github" />
           </FormItem>
 
           <div style={{ display: 'flex', marginTop: '24px' }}>
