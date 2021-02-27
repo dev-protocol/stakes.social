@@ -53,6 +53,7 @@ const ProjectOverview = () => {
   const { data } = useGetIncubators()
 
   const projects: Array<any> = showAll && data ? data : data?.slice(0, 8) || []
+  console.log('projects: ', projects)
   return (
     <GradientContainer id="projects" isExpanded={showAll}>
       <ProjectOverviewContainer>

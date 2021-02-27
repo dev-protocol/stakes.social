@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import { Spin } from 'antd'
 
 import { H1Large, Text1S, H1M, Text1L, H3Xs, ButtonM, LinkB } from 'src/components/organisms/Incubator/Typography'
 import { Button } from 'src/components/organisms/Incubator/molecules/Button'
@@ -24,6 +23,7 @@ import SubmitTransaction from 'src/components/organisms/Incubator/Onboarding/Sub
 import { TwitterBlackWhite, GithubIcon } from 'src/components/organisms/Incubator/Icons'
 import { useGetProperty } from 'src/fixtures/dev-for-apps/hooks'
 import { getPath } from 'src/fixtures/utility/route'
+import LoadingAnimation from 'src/components/organisms/Incubator/Claiming/AuthenticateLoading/Animations'
 
 const Container = styled.div`
   display: flex;
@@ -270,7 +270,9 @@ const GatherOnboardingContentPage = () => {
   if (!project)
     return (
       <div style={{ display: 'flex', width: '100vw', height: '100vh', justifyContent: 'center', alignItems: 'center' }}>
-        <Spin size="large" />
+        <div style={{ width: '300px', height: 'auto' }}>
+          <LoadingAnimation />
+        </div>
       </div>
     )
 
