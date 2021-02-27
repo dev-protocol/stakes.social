@@ -22,13 +22,12 @@ export const useAuthenticate = () => {
   const waitCallback = useCallback(
     async (githubRepository: string) => {
       setIsWaiting(true)
-      return whenDefined(web3, x => {
+      return whenDefined(web3, x =>
         getPropertyAddress(x, githubRepository)
-          .then(propertyAddress => {
-            waitForCreateMetrics(x, propertyAddress).catch(setWaitError)
-          })
+          .then(propertyAddress => waitForCreateMetrics(x, propertyAddress))
+          .catch(setWaitError)
           .finally(() => setIsWaiting(false))
-      })
+      )
     },
     [web3]
   )
@@ -46,10 +45,10 @@ export const useIntermediateProcess = () => {
   const [error, setError] = useState<Error>()
   const [waitError, setWaitError] = useState<Error>()
   const callback = useCallback(
-    async (githubRepository: string, address: string, twitterStatusId: string, twitterPublicSignature: string) => {
+    async (githubRepository: string, address: string, twitterStatusUrl: string, twitterPublicSignature: string) => {
       setIsWaiting(true)
       return whenDefined(web3, x =>
-        intermediateProcess(x, githubRepository, address, twitterStatusId, twitterPublicSignature)
+        intermediateProcess(x, githubRepository, address, twitterStatusUrl, twitterPublicSignature)
           .catch(setError)
           .finally(() => setIsWaiting(false))
       )
@@ -57,10 +56,10 @@ export const useIntermediateProcess = () => {
     [web3]
   )
   const waitCallback = useCallback(
-    async (githubPublicSignature: string) => {
+    async (propertyAddress: string) => {
       setIsWaiting(true)
       return whenDefined(web3, x =>
-        waitForFinishEvent(x, githubPublicSignature)
+        waitForFinishEvent(x, propertyAddress)
           .catch(setWaitError)
           .finally(() => setIsWaiting(false))
       )

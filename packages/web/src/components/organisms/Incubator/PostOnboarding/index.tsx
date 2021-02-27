@@ -9,6 +9,7 @@ import OssTokenExplanation from './OssTokenExplanation'
 import BuildCommunity from './BuildCommunity'
 import Link from 'next/link'
 import { OnboardSwitch } from 'src/pages/incubator/project/[project]'
+import { Incubator } from 'src/fixtures/dev-for-apps/utility'
 
 const SpaceBetween = styled.div`
   display: flex;
@@ -23,19 +24,7 @@ type WhatsNextType = {
   isOverview?: boolean
   isOnboarding: boolean
   onBoardChange: React.Dispatch<React.SetStateAction<boolean>>
-  project: {
-    name: string
-    address: string
-    avatar: {
-      url: string
-    }
-    description: string
-    links: {
-      github?: string
-      website?: string
-      twitter?: string
-    }
-  }
+  project: Incubator
 }
 
 const PostOnboarding = ({ isOverview, isOnboarding, onBoardChange, project }: WhatsNextType) => {
@@ -84,7 +73,7 @@ const PostOnboarding = ({ isOverview, isOnboarding, onBoardChange, project }: Wh
         {isOverview ? (
           <OnboardSwitch isOnboarding={isOnboarding} onOnboardChange={onBoardChange} />
         ) : (
-          <Link href="/[propertyAddress]" as={`/${project.address}`} passHref>
+          <Link href="/[propertyAddress]" as={`/${project.property?.address}`} passHref>
             <LinkB>Skip</LinkB>
           </Link>
         )}
@@ -98,7 +87,9 @@ const PostOnboarding = ({ isOverview, isOnboarding, onBoardChange, project }: Wh
 
       {activePart === 4 && <OssTokenExplanation onActivePageChange={setActivePart} />}
 
-      {activePart === 5 && <BuildCommunity projectAddress={project.address} onActivePageChange={setActivePart} />}
+      {activePart === 5 && (
+        <BuildCommunity projectAddress={project.property?.address} onActivePageChange={setActivePart} />
+      )}
     </>
   )
 }

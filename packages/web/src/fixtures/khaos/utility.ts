@@ -24,6 +24,6 @@ export const postSignGitHubMarketAsset = (
     if (res.ok) {
       return res.json()
     } else {
-      return Promise.resolve(Error('fail to sign github market asset'))
+      return Promise.reject(Error('fail to sign github market asset'))
     }
   })

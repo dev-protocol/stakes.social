@@ -1,10 +1,12 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
-import { Form } from 'antd'
-
+import { Form, message } from 'antd'
 import { LinkB, Text2M, H1Large, Text2S } from '../../Typography'
 import { Button } from '../../molecules/Button'
 import { ClipboardIcon } from '../../Icons'
+import { usePostSignGitHubMarketAsset } from 'src/fixtures/khaos/hooks'
+import { Incubator } from 'src/fixtures/dev-for-apps/utility'
+import { useAuthenticate } from 'src/fixtures/_pages/incubator/hooks'
 
 const AuthenticationContainer = styled.div`
   position: relative;
@@ -41,6 +43,11 @@ export const InputContainer = styled(Form.Item)`
   position: relative;
   width: 100%;
   margin: 0;
+`
+
+const SubmitButtons = styled.div`
+  display: grid;
+  gap: 1em;
 `
 
 const FormItem = styled(Form.Item)<{ isError?: boolean }>`
@@ -150,6 +157,8 @@ const StyledForm = styled(Form)`
 
 type AuthenticationProps = {
   onStateChange: React.Dispatch<React.SetStateAction<string>>
+  onMetricsCreated: (metrics: string) => void
+  project: Incubator
 }
 
 const ProgressContainer = styled.div`
@@ -160,11 +169,41 @@ const ProgressContainer = styled.div`
   display: flex;
 `
 
-const AuthenticationForm = ({ onStateChange }: AuthenticationProps) => {
+const IS_DEVELOPMENT_ENV = process.env.NODE_ENV === 'development'
+
+const AuthenticationForm = ({ onStateChange, onMetricsCreated, project }: AuthenticationProps) => {
   const [form] = Form.useForm()
-  const onSubmit = (data: any) => {
-    console.log('data: ', data)
+  const { postSignGitHubMarketAssetHandler } = usePostSignGitHubMarketAsset()
+  const { authenticate, waitForCreateMetrics } = useAuthenticate()
+  const [publicSignature, setPublicSignature] = useState<undefined | string>()
+  const onSign = async (data: any) => {
+    console.log({ data })
+    const signature = await postSignGitHubMarketAssetHandler(project.verifier_id, data.pat).catch((err: Error) => {
+      return IS_DEVELOPMENT_ENV ? { publicSignature: 'dummy_pulic_signature' } : err
+    })
+    if (signature instanceof Error) {
+      return message.error(signature)
+    }
+    setPublicSignature(signature.publicSignature)
+  }
+  const onSend = async () => {
+    if (!publicSignature) {
+      return
+    }
     onStateChange('loading')
+    if (!IS_DEVELOPMENT_ENV) {
+      await authenticate(project.verifier_id, publicSignature)
+    }
+    const metrics = IS_DEVELOPMENT_ENV
+      ? '0x_dummy_metrics'
+      : await waitForCreateMetrics(project.verifier_id).catch((err: Error) => err)
+    if (metrics instanceof Error) {
+      return message.error(metrics)
+    }
+    if (!metrics) {
+      return message.error('authentication failed')
+    }
+    onMetricsCreated(metrics)
   }
   const [isError, setIsError] = useState(false)
 
@@ -196,7 +235,7 @@ const AuthenticationForm = ({ onStateChange }: AuthenticationProps) => {
           form={form}
           name="basic"
           initialValues={{ remember: true }}
-          onFinish={onSubmit}
+          onFinish={onSign}
           onFinishFailed={onFinishFailed}
         >
           <FormItem
@@ -226,7 +265,14 @@ const AuthenticationForm = ({ onStateChange }: AuthenticationProps) => {
                 </LinkB>
               </div>
 
-              <Button type="submit">Submit</Button>
+              <SubmitButtons>
+                <Button type="submit" disabled={Boolean(publicSignature)}>
+                  Sign
+                </Button>
+                <Button onClick={onSend} disabled={!publicSignature}>
+                  Submit
+                </Button>
+              </SubmitButtons>
             </SpaceBetween>
           </div>
         </StyledForm>

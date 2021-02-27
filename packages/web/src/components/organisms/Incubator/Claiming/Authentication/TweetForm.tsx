@@ -3,9 +3,11 @@ import styled from 'styled-components'
 import { Form } from 'antd'
 
 import { ButtonL, Text2M, H1Large, Text1L, Text2S } from '../../Typography'
-import { Button } from '../../molecules/Button'
+import { Button, LinkAsButton } from '../../molecules/Button'
 import { ClipboardIcon, TwitterBird } from '../../Icons'
 import DownArrow from '../../molecules/DownArrow'
+import { useIntermediateProcess } from 'src/fixtures/_pages/incubator/hooks'
+import { Incubator } from 'src/fixtures/dev-for-apps/utility'
 
 const AuthenticationContainer = styled.div`
   position: relative;
@@ -134,7 +136,8 @@ export const CustomInput = ({ placeholder, label, onHandlePaste }: CustomInputPr
 
 type AuthenticationProps = {
   onStateChange: React.Dispatch<React.SetStateAction<string>>
-  projectName: string
+  project: Incubator
+  metricsAddress: string
 }
 
 const ProgressContainer = styled.div`
@@ -171,7 +174,7 @@ const TweetButtonContainer = styled.div`
   transform: translate(-20px, 50%);
 `
 
-const TweetButton = styled(Button)`
+const TweetButton = styled(LinkAsButton)`
   border-radius: 24px;
   width: 120px;
   height: 48px;
@@ -189,11 +192,22 @@ const StyledForm = styled(Form)`
   }
 `
 
-const TweetForm = ({ onStateChange, projectName }: AuthenticationProps) => {
+const IS_DEVELOPMENT_ENV = process.env.NODE_ENV === 'development'
+
+const TweetForm = ({ onStateChange, project, metricsAddress }: AuthenticationProps) => {
   const [form] = Form.useForm()
-  const onSubmit = (data: any) => {
+  const { intermediateProcess, waitForFinishEvent } = useIntermediateProcess()
+  const onSubmit = async (data: any) => {
     console.log('data: ', data)
+    if (!project.property?.address) {
+      return
+    }
     onStateChange('loading')
+
+    if (!IS_DEVELOPMENT_ENV) {
+      await intermediateProcess(project.verifier_id, metricsAddress, data.twitter, '')
+      await waitForFinishEvent(project.property.address)
+    }
   }
   const [isError, setIsError] = useState(false)
 
@@ -226,14 +240,14 @@ const TweetForm = ({ onStateChange, projectName }: AuthenticationProps) => {
           <TwitterBird />
         </TwitterBirdContainer>
         <Text1L fontSize="20px">
-          {projectName} just received $20,000 in funding from the{' '}
+          {project.name} just received $20,000 in funding from the{' '}
           <Text1L fontSize="20px" style={{ color: '#D500E6' }}>
             @devprtcl
           </Text1L>{' '}
           Incubator. Follow the link below to support us and earn by staking DEV tokens.
         </Text1L>
         <TweetButtonContainer>
-          <TweetButton>
+          <TweetButton target="_blank" rel="noreferrer" href={`https://twitter.com/intent/tweet?text=Hello%20world`}>
             <ButtonL>Tweet</ButtonL>
           </TweetButton>
         </TweetButtonContainer>

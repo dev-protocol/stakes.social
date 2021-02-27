@@ -7,6 +7,7 @@ import { LinkB, H1Large, Text1L } from '../../Typography'
 import { Button } from '../../molecules/Button'
 import MintedTokens from '../Authentication/MintedTokens'
 import Hr from '../../molecules/Hr'
+import { Incubator } from 'src/fixtures/dev-for-apps/utility'
 
 const SuccessMessageContainer = styled.div`
   display: flex;
@@ -41,19 +42,7 @@ const LogoContainer = styled.div`
 
 type ClaimSuccesfulProps = {
   onStateChange: React.Dispatch<React.SetStateAction<string>>
-  project: {
-    name: string
-    address: string
-    avatar: {
-      url: string
-    }
-    description: string
-    links: {
-      github?: string
-      website?: string
-      twitter?: string
-    }
-  }
+  project: Incubator
 }
 
 const ClaimSuccesful = ({ onStateChange, project }: ClaimSuccesfulProps) => {
@@ -67,26 +56,28 @@ const ClaimSuccesful = ({ onStateChange, project }: ClaimSuccesfulProps) => {
         <div>
           <SpaceBetween style={{ paddingBottom: '70px' }}>
             <Contact>
-              <H1Large>{project?.name}</H1Large>
-              {project.links?.github && (
+              <H1Large>{project.property?.name}</H1Large>
+              {project.property?.links?.github && (
                 <div style={{ display: 'flex', paddingTop: '11px' }}>
                   <div style={{ marginRight: '5px', width: '24px', height: '24px' }}>
                     <img src="https://res.cloudinary.com/haas-storage/image/upload/v1613111071/github_rg8ngo.png" />
                   </div>
-                  <LinkB href={project.links.github} rel="noopener noreferrer" target="_blank">
+                  <LinkB href={project.property?.links.github} rel="noopener noreferrer" target="_blank">
                     {githubUrl}
                   </LinkB>
                 </div>
               )}
             </Contact>
-            {project.avatar?.url && (
+            {project.property?.avatar?.url && (
               <LogoContainer>
-                <img src={project.avatar?.url} />
+                <img src={project.property?.avatar?.url} />
               </LogoContainer>
             )}
           </SpaceBetween>
           <Hr color="#CCCCCC" />
-          <MintedTokens isSucces={true} address={project.address} ticker={ticker} />
+          {project.property?.address && (
+            <MintedTokens isSucces={true} address={project.property.address} ticker={ticker} />
+          )}
         </div>
         <SuccessMessageContainer>
           <H1Large color="#1FED33">Success!</H1Large>

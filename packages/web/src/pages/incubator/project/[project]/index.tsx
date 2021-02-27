@@ -21,10 +21,12 @@ import ConnectWallet from 'src/components/organisms/Incubator/Onboarding/Connect
 import CopyPat from 'src/components/organisms/Incubator/Onboarding/CopyPAT'
 import SubmitTransaction from 'src/components/organisms/Incubator/Onboarding/SubmitTransaction'
 import { TwitterBlackWhite, GithubIcon } from 'src/components/organisms/Incubator/Icons'
-import { useGetProperty } from 'src/fixtures/dev-for-apps/hooks'
+import { useGetIncubators } from 'src/fixtures/dev-for-apps/hooks'
 import { getPath } from 'src/fixtures/utility/route'
 import LoadingAnimation from 'src/components/organisms/Incubator/Claiming/AuthenticateLoading/Animations'
 import { useGetReward } from 'src/fixtures/_pages/incubator/hooks'
+import { Incubator } from 'src/fixtures/dev-for-apps/utility'
+import { whenDefined } from 'src/fixtures/utility'
 
 const Container = styled.div`
   display: flex;
@@ -105,19 +107,7 @@ type ProjectDetailsProps = {
   onStateChange: React.Dispatch<React.SetStateAction<string>>
   claimed: boolean
 
-  project: {
-    name: string
-    address: string
-    avatar: {
-      url: string
-    }
-    description: string
-    links: {
-      github?: string
-      website?: string
-      twitter?: string
-    }
-  }
+  project: Incubator['property']
 }
 
 const ProjectDetails = ({ claimed, onStateChange, project }: ProjectDetailsProps) => {
@@ -276,10 +266,10 @@ const OnboardingSection = ({ isModal, onStateChange, onBoardChange, isOnboarding
 
 const GatherOnboardingContentPage = () => {
   const [, , propertyAddress] = getPath(useRouter().asPath)
-  const { data } = useGetProperty(propertyAddress)
-  const project: any = data
+  const { data } = useGetIncubators()
+  const project = whenDefined(data, x => x.find(y => y.property?.address === propertyAddress))
 
-  if (!project)
+  if (!project) {
     return (
       <div style={{ display: 'flex', width: '100vw', height: '100vh', justifyContent: 'center', alignItems: 'center' }}>
         <div style={{ width: '300px', height: 'auto' }}>
@@ -287,24 +277,13 @@ const GatherOnboardingContentPage = () => {
         </div>
       </div>
     )
+  }
 
   return <OnboardingPage project={project} />
 }
 
 type OnboardingPageProps = {
-  project: {
-    name: string
-    address: string
-    avatar: {
-      url: string
-    }
-    description: string
-    links: {
-      github?: string
-      website?: string
-      twitter?: string
-    }
-  }
+  project: Incubator
 }
 
 const OnboardingPage = ({ project }: OnboardingPageProps) => {
@@ -344,8 +323,8 @@ const OnboardingPage = ({ project }: OnboardingPageProps) => {
             </div>
           )}
         </BackArrowContainer>
-        {currentState === 'overview' && (
-          <ProjectDetails project={project} claimed={claimed} onStateChange={setCurrentState} />
+        {currentState === 'overview' && project.property && (
+          <ProjectDetails project={project.property} claimed={claimed} onStateChange={setCurrentState} />
         )}
 
         {currentState === 'onboarding' && (

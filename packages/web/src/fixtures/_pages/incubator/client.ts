@@ -21,7 +21,7 @@ export const getContract = (web3: Web3, contractAddress = INCUBATOR_CONTRACT_ADD
   return contract
 }
 
-export const waitForFinishEvent = async (client: Web3, githubPublicSignature: string): Promise<string> => {
+export const waitForFinishEvent = async (client: Web3, propertyAddress: string): Promise<string> => {
   const fromBlock = await client.eth.getBlockNumber()
   const contract = getContract(client)
   return new Promise((resolve, reject) => {
@@ -29,10 +29,8 @@ export const waitForFinishEvent = async (client: Web3, githubPublicSignature: st
       fromBlock,
       contract,
       resolver: async e =>
-        ((propertyAddress, publicSignature) => (propertyAddress ? githubPublicSignature === publicSignature : false))(
-          e.event === 'Finish'
-            ? (e.returnValues._property as string, e.returnValues._publicSignature as string)
-            : undefined
+        (dispatchedPropertyAddress => dispatchedPropertyAddress === propertyAddress)(
+          e.event === 'Finish' ? (e.returnValues._property as string) : undefined
         )
     })
       .then(res => resolve(res.returnValues._property as string))
@@ -68,8 +66,8 @@ export const authenticate = async (client: Web3, githubRepository: string, publi
 export const intermediateProcess = async (
   client: Web3,
   githubRepository: string,
-  address: string,
-  twitterStatusId: string,
+  metricsAddress: string,
+  twitterStatusUrl: string,
   twitterPublicSignature: string
 ) => {
   const stripId = (word: string) => {
@@ -77,14 +75,14 @@ export const intermediateProcess = async (
     const _ = word.split('/')
     return _[_.length - 1]
   }
-  const strippedTwitterStatusId = stripId(twitterStatusId)
+  const strippedTwitterStatusId = stripId(twitterStatusUrl)
   return (contract =>
     contract
       ? execute({
           contract,
           client,
           method: 'intermediateProcess',
-          args: [githubRepository, address, strippedTwitterStatusId, twitterPublicSignature],
+          args: [githubRepository, metricsAddress, strippedTwitterStatusId, twitterPublicSignature],
           mutation: true
         })
       : Promise.resolve())(getContract(client))

@@ -1,10 +1,11 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 import AuthenticationForm from './AuthenticationForm'
 import { LinkB, H1Large } from '../../Typography'
 import MintedTokens from './MintedTokens'
 import TweetForm from './TweetForm'
 import Hr from '../../molecules/Hr'
+import { Incubator } from 'src/fixtures/dev-for-apps/utility'
 
 const DetailsContainer = styled.div`
   display: grid;
@@ -36,19 +37,7 @@ const LogoContainer = styled.div`
 type AuthenticationProps = {
   onStateChange: React.Dispatch<React.SetStateAction<string>>
   progress: number
-  project: {
-    name: string
-    address: string
-    avatar: {
-      url: string
-    }
-    description: string
-    links: {
-      github?: string
-      website?: string
-      twitter?: string
-    }
-  }
+  project: Incubator
 }
 
 const Authentication = ({ onStateChange, progress, project }: AuthenticationProps) => {
@@ -56,36 +45,40 @@ const Authentication = ({ onStateChange, progress, project }: AuthenticationProp
   const ticker = 'SIGP'
   const githubUrl = 'sigp/lighthouse'
 
+  const [metricsAddress, setMetricsAddress] = useState<undefined | string>()
+
   return (
     <DetailsContainer>
       <div>
         <SpaceBetween style={{ paddingBottom: '70px' }}>
           <Contact>
             <H1Large>{project.name}</H1Large>
-            {project.links?.github && (
+            {project.property?.links?.github && (
               <div style={{ display: 'flex', paddingTop: '11px' }}>
                 <div style={{ marginRight: '5px', width: '24px', height: '24px' }}>
                   <img src="https://res.cloudinary.com/haas-storage/image/upload/v1613111071/github_rg8ngo.png" />
                 </div>
-                <LinkB href={project.links.github} rel="noopener noreferrer" target="_blank">
+                <LinkB href={project.property?.links.github} rel="noopener noreferrer" target="_blank">
                   {githubUrl}
                 </LinkB>
               </div>
             )}
           </Contact>
-          {project.avatar?.url && (
+          {project.property?.avatar?.url && (
             <LogoContainer>
-              <img src={project.avatar?.url} />
+              <img src={project.property?.avatar?.url} />
             </LogoContainer>
           )}
         </SpaceBetween>
         <Hr color="#CCCCCC" />
-        <MintedTokens address={project.address} ticker={ticker} />
+        {project.property?.address && <MintedTokens address={project.property.address} ticker={ticker} />}
       </div>
 
-      {progress === 1 && <AuthenticationForm onStateChange={onStateChange} />}
+      {progress === 1 && (
+        <AuthenticationForm project={project} onStateChange={onStateChange} onMetricsCreated={setMetricsAddress} />
+      )}
 
-      {progress === 2 && <TweetForm projectName={project.name} onStateChange={onStateChange} />}
+      {progress === 2 && <TweetForm project={project} metricsAddress={metricsAddress} onStateChange={onStateChange} />}
     </DetailsContainer>
   )
 }
