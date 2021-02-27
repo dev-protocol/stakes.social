@@ -128,7 +128,16 @@ const ProjectDetails = ({ fundingDEV, fundingUSD, claimed, onStateChange, projec
         <SpaceBetween>
           <Contact>
             <H1Large>{project?.name}</H1Large>
-            {project?.links?.website && <LinkB style={{ paddingTop: '11px' }}>{project?.links?.website}</LinkB>}
+            {project?.links?.website && (
+              <LinkB
+                target="_blank"
+                rel="noopener noreferrer"
+                href={project?.links?.website}
+                style={{ paddingTop: '11px' }}
+              >
+                {project?.links?.website}
+              </LinkB>
+            )}
 
             <SocialMediaContainer>
               {project?.links?.twitter && (
