@@ -180,9 +180,12 @@ const TweetButton = styled(LinkAsButton)`
   height: 48px;
   color: white;
   background: #1da1f2;
-
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
   :hover {
     background: #1da1f2;
+    color: white;
   }
 `
 
@@ -191,6 +194,9 @@ const StyledForm = styled(Form)`
     margin-bottom: 0px;
   }
 `
+
+const createTweetBody = (project: Incubator) =>
+  `${project.name} just received $20,000 in funding from the @devprtcl Incubator. Follow the link below to support us and earn by staking DEV tokens. https://stakes.social/${project.property?.address}`
 
 const IS_DEVELOPMENT_ENV = process.env.NODE_ENV === 'development'
 
@@ -244,10 +250,17 @@ const TweetForm = ({ onStateChange, project, metricsAddress }: AuthenticationPro
           <Text1L fontSize="20px" style={{ color: '#D500E6' }}>
             @devprtcl
           </Text1L>{' '}
-          Incubator. Follow the link below to support us and earn by staking DEV tokens.
+          Incubator. Follow the link below to support us and earn by staking DEV tokens.{' '}
+          <Text1L fontSize="20px" style={{ color: '#D500E6' }}>
+            {`https://stakes.social/${project.property?.address}`}
+          </Text1L>
         </Text1L>
         <TweetButtonContainer>
-          <TweetButton target="_blank" rel="noreferrer" href={`https://twitter.com/intent/tweet?text=Hello%20world`}>
+          <TweetButton
+            target="_blank"
+            rel="noreferrer"
+            href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(createTweetBody(project))}`}
+          >
             <ButtonL>Tweet</ButtonL>
           </TweetButton>
         </TweetButtonContainer>
@@ -280,7 +293,7 @@ const TweetForm = ({ onStateChange, project, metricsAddress }: AuthenticationPro
           </FormItem>
 
           <div style={{ display: 'flex', justifyContent: 'flex-end', paddingTop: '48px' }}>
-            <Button type="submit">Done</Button>
+            <Button htmlType="submit">Done</Button>
           </div>
         </StyledForm>
       </FormContainer>

@@ -1,12 +1,13 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
-import { Form, message } from 'antd'
+import { Alert, Form, message } from 'antd'
 import { LinkB, Text2M, H1Large, Text2S } from '../../Typography'
 import { Button } from '../../molecules/Button'
 import { ClipboardIcon } from '../../Icons'
 import { usePostSignGitHubMarketAsset } from 'src/fixtures/khaos/hooks'
 import { Incubator } from 'src/fixtures/dev-for-apps/utility'
 import { useAuthenticate } from 'src/fixtures/_pages/incubator/hooks'
+import { CheckCircleOutlined } from '@ant-design/icons'
 
 const AuthenticationContainer = styled.div`
   position: relative;
@@ -45,9 +46,15 @@ export const InputContainer = styled(Form.Item)`
   margin: 0;
 `
 
-const SubmitButtons = styled.div`
-  display: grid;
-  gap: 1em;
+const ButtonWithIcon = styled(Button)`
+  width: 130px;
+`
+
+const StyledAlert = styled(Alert)`
+  margin: -15px;
+  margin-top: 2rem;
+  border-radius: 0;
+  background: #cce4ff;
 `
 
 const FormItem = styled(Form.Item)<{ isError?: boolean }>`
@@ -173,7 +180,7 @@ const IS_DEVELOPMENT_ENV = process.env.NODE_ENV === 'development'
 
 const AuthenticationForm = ({ onStateChange, onMetricsCreated, project }: AuthenticationProps) => {
   const [form] = Form.useForm()
-  const { postSignGitHubMarketAssetHandler } = usePostSignGitHubMarketAsset()
+  const { postSignGitHubMarketAssetHandler, isLoading } = usePostSignGitHubMarketAsset()
   const { authenticate, waitForCreateMetrics } = useAuthenticate()
   const [publicSignature, setPublicSignature] = useState<undefined | string>()
   const onSign = async (data: any) => {
@@ -247,7 +254,7 @@ const AuthenticationForm = ({ onStateChange, onMetricsCreated, project }: Authen
             <CustomInput onHandlePaste={handlePaste} label="pat" placeholder="Paste the PAT from Github" />
           </FormItem>
 
-          <div style={{ display: 'flex', marginTop: '24px' }}>
+          <div style={{ display: 'flex', marginTop: '1rem' }}>
             <Text2S style={{ width: 'inherit' }} color="#5B8BF5">
               The Khaos Oracle confidentially authenticates your Github Personal Access Token. Please see{' '}
               <OurDocsLink rel="noopener noreferrer" target="_blank" href="https://github.com/dev-protocol/khaos">
@@ -257,24 +264,32 @@ const AuthenticationForm = ({ onStateChange, onMetricsCreated, project }: Authen
             </Text2S>
           </div>
 
-          <div style={{ paddingTop: '48px' }}>
-            <SpaceBetween style={{ alignItems: 'center' }}>
-              <div style={{ height: 'fit-content' }}>
-                <LinkB rel="noopener noreferrer" target="_blank" href="https://github.com/settings/tokens/new">
-                  Create a PAT
-                </LinkB>
-              </div>
+          <SpaceBetween style={{ alignItems: 'center', marginTop: '2rem' }}>
+            <div style={{ height: 'fit-content' }}>
+              <LinkB rel="noopener noreferrer" target="_blank" href="https://github.com/settings/tokens/new">
+                Create a PAT
+              </LinkB>
+            </div>
 
-              <SubmitButtons>
-                <Button type="submit" disabled={Boolean(publicSignature)}>
-                  Sign
-                </Button>
-                <Button onClick={onSend} disabled={!publicSignature}>
-                  Submit
-                </Button>
-              </SubmitButtons>
-            </SpaceBetween>
-          </div>
+            <ButtonWithIcon
+              icon={publicSignature ? <CheckCircleOutlined /> : undefined}
+              loading={isLoading}
+              htmlType="submit"
+              disabled={Boolean(publicSignature)}
+            >
+              Sign
+            </ButtonWithIcon>
+          </SpaceBetween>
+
+          {publicSignature && (
+            <StyledAlert
+              message="Authentication"
+              showIcon
+              description="Verification of the credential has been completed. Please submit the signature to finalize authentication."
+              type="info"
+              action={<ButtonWithIcon onClick={onSend}>Submit</ButtonWithIcon>}
+            />
+          )}
         </StyledForm>
       </FormContainer>
     </AuthenticationContainer>
