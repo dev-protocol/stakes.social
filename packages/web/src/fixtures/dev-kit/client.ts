@@ -1,6 +1,6 @@
 import Web3 from 'web3'
 import { EventData } from 'web3-eth-contract'
-import { contractFactory } from '@devprotocol/dev-kit'
+import { contractFactory, DevkitContract } from '@devprotocol/dev-kit'
 import { getContractAddress } from './get-contract-address'
 import { client as devClient, utils } from '@devprotocol/dev-kit'
 import BigNumber from 'bignumber.js'
@@ -12,8 +12,15 @@ import { metricsAbi, metricsFactoryAbi } from './abi'
 
 const { execute, watchEvent } = utils
 
+const cache: WeakMap<Web3, DevkitContract> = new WeakMap()
 const newClient = (web3: Web3) => {
-  return contractFactory(web3.currentProvider)
+  const fromCache = cache.get(web3)
+  if (fromCache) {
+    return fromCache
+  }
+  const contracts = contractFactory(web3.currentProvider)
+  cache.set(web3, contracts)
+  return contracts
 }
 
 export const getRewardsAmount = async (web3: Web3, propertyAddress: string) => {
@@ -203,7 +210,15 @@ export const propertyAuthor = async (web3: Web3, propertyAddress: string) => {
 export const propertyName = async (web3: Web3, propertyAddress: string): Promise<undefined | string> => {
   const client = newClient(web3)
   if (client) {
-    return client.property(propertyAddress).contract().methods.name().call()
+    return client.property(propertyAddress).name()
+  }
+  return undefined
+}
+
+export const propertySymbol = async (web3: Web3, propertyAddress: string): Promise<undefined | string> => {
+  const client = newClient(web3)
+  if (client) {
+    return client.property(propertyAddress).symbol()
   }
   return undefined
 }

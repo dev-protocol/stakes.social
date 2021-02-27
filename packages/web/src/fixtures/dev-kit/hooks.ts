@@ -20,6 +20,7 @@ import {
   balanceOf,
   allClaimedRewards,
   propertyName,
+  propertySymbol,
   balanceOfProperty
 } from './client'
 import { SWRCachePath } from './cache-path'
@@ -582,6 +583,19 @@ export const usePropertyName = (propertyAddress?: string) => {
   )
 
   return { name: data, error }
+}
+
+export const usePropertySymbol = (propertyAddress?: string) => {
+  const { nonConnectedWeb3, accountAddress } = useProvider()
+  const { data, error } = useSWR<UnwrapFunc<typeof totalSupply>, Error>(
+    SWRCachePath.propertySymbol(propertyAddress, accountAddress),
+    () => whenDefinedAll([nonConnectedWeb3, propertyAddress], ([client, property]) => propertySymbol(client, property)),
+    {
+      onError: err => message.error(err.message)
+    }
+  )
+
+  return { symbol: data, error }
 }
 
 export const useBalanceOfProperty = (propertyAddress: string) => {
