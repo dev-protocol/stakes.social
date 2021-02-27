@@ -2,6 +2,9 @@ import styled, { css } from 'styled-components'
 import { Button as antButton } from 'antd'
 
 const sharedStyle = `
+  display: flex;
+  justify-content: center;
+  align-items: center;
   cursor: pointer;
   font-family: 'IBM Plex Mono';
   font-weight: 500;
