@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import Countdown, { CountdownRenderProps } from 'react-countdown'
 
 import { LinkB, H1Large, Text1Xl, H3Xs, H1M } from 'src/components/organisms/Incubator/Typography'
-import { useCurrency } from 'src/fixtures/currency/hooks'
+import { useGetEntireRewards } from 'src/fixtures/_pages/incubator/hooks'
 
 const JumboContainer = styled.div`
   display: grid;
@@ -76,8 +76,9 @@ const renderer = ({ formatted, completed }: CountdownRenderProps) => {
 }
 
 const Jumbo = () => {
-  const { currency, toCurrency } = useCurrency()
-  const convertedFunding = toCurrency(12000).dp(0).toNumber().toLocaleString()
+  const { currency, reward } = useGetEntireRewards()
+  const convertedFunding = reward ? reward.dp(0).toNumber().toLocaleString() : 0
+
   return (
     <JumboContainer>
       <TitleContainer>
