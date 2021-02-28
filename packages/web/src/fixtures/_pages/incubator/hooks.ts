@@ -2,7 +2,14 @@ import { useCallback, useState } from 'react'
 import { useProvider } from 'src/fixtures/wallet/hooks'
 import { waitForCreateMetrics } from 'src/fixtures/dev-kit/client'
 import { toBigNumber, toNaturalNumber, UnwrapFunc, whenDefined, whenDefinedAll } from 'src/fixtures/utility'
-import { authenticate, getPropertyAddress, getReward, intermediateProcess, waitForFinishEvent } from './client'
+import {
+  authenticate,
+  getPropertyAddress,
+  getReward,
+  intermediateProcess,
+  isFinished,
+  waitForFinishEvent
+} from './client'
 import { useCurrency } from 'src/fixtures/currency/hooks'
 import useSWR from 'swr'
 import { SWRCachePath } from './cache-path'
@@ -96,4 +103,12 @@ export const useGetEntireRewards = () => {
   const inUSD = whenDefined(inDEV, x => devToUSD(x))
   const reward = whenDefined(inDEV, x => toCurrency(x))
   return { reward, currency, error, inDEV, inUSD }
+}
+
+export const useIsFinished = (propertyAddress?: string) => {
+  const { web3, accountAddress } = useProvider()
+  return useSWR<UnwrapFunc<typeof isFinished> | undefined, Error>(
+    SWRCachePath.isFinished(propertyAddress, accountAddress),
+    () => whenDefinedAll([web3, propertyAddress], ([client, property]) => isFinished(client, property))
+  )
 }

@@ -24,7 +24,7 @@ import { TwitterBlackWhite, GithubIcon } from 'src/components/organisms/Incubato
 import { useGetIncubators } from 'src/fixtures/dev-for-apps/hooks'
 import { getPath } from 'src/fixtures/utility/route'
 import LoadingAnimation from 'src/components/organisms/Incubator/Claiming/AuthenticateLoading/Animations'
-import { useGetReward } from 'src/fixtures/_pages/incubator/hooks'
+import { useGetReward, useIsFinished } from 'src/fixtures/_pages/incubator/hooks'
 import { Incubator } from 'src/fixtures/dev-for-apps/utility'
 import { whenDefined } from 'src/fixtures/utility'
 
@@ -287,12 +287,10 @@ type OnboardingPageProps = {
 }
 
 const OnboardingPage = ({ project }: OnboardingPageProps) => {
+  const { data: claimed } = useIsFinished(project.property?.address)
   const [currentState, setCurrentState] = useState<string>('overview')
   const [isOnboarding, setIsOnboarding] = useState(true)
   const [authenticationProgress, setAuthenticationProgress] = useState(1)
-
-  // FIXME: NEED CONTENT IN HOOK
-  const { claimed } = { claimed: false }
 
   useEffect(() => {
     if (currentState === 'loading') {
@@ -324,7 +322,7 @@ const OnboardingPage = ({ project }: OnboardingPageProps) => {
           )}
         </BackArrowContainer>
         {currentState === 'overview' && (
-          <ProjectDetails project={project} claimed={claimed} onStateChange={setCurrentState} />
+          <ProjectDetails project={project} claimed={Boolean(claimed)} onStateChange={setCurrentState} />
         )}
 
         {currentState === 'onboarding' && (
@@ -340,7 +338,7 @@ const OnboardingPage = ({ project }: OnboardingPageProps) => {
           <Authentication project={project} progress={authenticationProgress} onStateChange={setCurrentState} />
         )}
 
-        {currentState === 'loading' && <AuthenticateLoading />}
+        {currentState === 'loading' && <AuthenticateLoading project={project} />}
 
         {currentState === 'success' && <ClaimSuccesful project={project} onStateChange={setCurrentState} />}
 

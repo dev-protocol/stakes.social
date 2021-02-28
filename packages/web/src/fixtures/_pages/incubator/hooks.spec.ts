@@ -1,8 +1,8 @@
 import { renderHook, act } from '@testing-library/react-hooks'
 import { useProvider } from 'src/fixtures/wallet/hooks'
 import { waitForCreateMetrics } from 'src/fixtures/dev-kit/client'
-import { useAuthenticate, useGetEntireRewards, useGetReward, useIntermediateProcess } from './hooks'
-import { authenticate, getPropertyAddress, intermediateProcess, waitForFinishEvent } from './client'
+import { useAuthenticate, useGetEntireRewards, useGetReward, useIntermediateProcess, useIsFinished } from './hooks'
+import { authenticate, getPropertyAddress, intermediateProcess, isFinished, waitForFinishEvent } from './client'
 import BigNumber from 'bignumber.js'
 import { useCurrency } from 'src/fixtures/currency/hooks'
 import useSWR from 'swr'
@@ -230,6 +230,36 @@ describe('incubator hooks', () => {
       const { result } = renderHook(() => useGetEntireRewards())
       expect(result.current.error).toBe(error)
       expect(result.current.error?.message).toBe(errorMessage)
+    })
+  })
+
+  describe('useIsFinished', () => {
+    test('data is undefined', () => {
+      const data = undefined
+      const error = undefined
+      ;(useSWR as jest.Mock).mockImplementation(() => ({ data, error }))
+      const { result } = renderHook(() => useIsFinished('test'))
+      expect(result.current.data).toBe(data)
+      expect(result.current.error).toBe(error)
+    })
+
+    test('success fetching data', () => {
+      const data = true
+      const error = undefined
+      ;(useSWR as jest.Mock).mockImplementation(() => ({ data, error }))
+      const { result } = renderHook(() => useIsFinished('test'))
+      expect(result.current.data).toBe(data)
+      expect(result.current.error).toBe(error)
+    })
+
+    test('failure fetching data', () => {
+      const data = undefined
+      const errorMessage = 'error'
+      const error = new Error(errorMessage)
+      ;(useSWR as jest.Mock).mockImplementation(() => ({ data, error }))
+      const { result } = renderHook(() => useIsFinished('test'))
+      expect(result.current.data).toBe(data)
+      expect(result.current.error).toBe(error)
     })
   })
 })

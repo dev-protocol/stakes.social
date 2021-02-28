@@ -5,6 +5,10 @@ import { InfoIcon } from '../../Icons'
 import { DecCurrencySmall } from '../../molecules/DevCurrency'
 import { AbstractProvider } from 'web3-core'
 import { useProvider } from 'src/fixtures/wallet/hooks'
+import { Incubator } from 'src/fixtures/dev-for-apps/utility'
+import { usePropertySymbol } from 'src/fixtures/dev-kit/hooks'
+import { useGetReward } from 'src/fixtures/_pages/incubator/hooks'
+import { whenDefined } from 'src/fixtures/utility'
 
 const SpaceBetween = styled.div`
   display: flex;
@@ -29,8 +33,7 @@ const InfoIconContainer = styled.div`
 
 type MintedTokensType = {
   isSucces?: boolean
-  ticker: string
-  address: string
+  project: Incubator
 }
 
 const AddToMetaMask = styled.button`
@@ -50,16 +53,18 @@ const MintedTokenGrid = styled.div`
 `
 
 type MintedProps = {
-  ticker: string
+  address?: string
   isSucces?: boolean
   onHandleClick: () => void
 }
 
-const TotalMinted = ({ ticker, isSucces, onHandleClick }: MintedProps) => {
+const TotalMinted = ({ address, isSucces, onHandleClick }: MintedProps) => {
+  const { symbol } = usePropertySymbol(address)
+
   return (
     <>
       <div style={{ display: 'flex' }}>
-        <Text2M>{ticker} tokens Minted</Text2M>
+        <Text2M>{symbol} tokens Minted</Text2M>
         <InfoIconContainer>
           <div title="The 'shares' of your OSS project">
             <InfoIcon fill={'#5B8BF5'} />
@@ -73,7 +78,7 @@ const TotalMinted = ({ ticker, isSucces, onHandleClick }: MintedProps) => {
         <H1Xss>10,000,000</H1Xss>
       </div>
       <div style={{ display: 'flex', alignItems: 'center' }}>
-        <H1Xss>{ticker}</H1Xss>
+        <H1Xss>{symbol}</H1Xss>
         {isSucces && (
           <AddToMetaMask onClick={onHandleClick}>
             <img width="16px" height="16px" src="/images/img_0.png" />
@@ -84,7 +89,9 @@ const TotalMinted = ({ ticker, isSucces, onHandleClick }: MintedProps) => {
   )
 }
 
-const TreasuryFee = ({ onHandleClick, ticker, isSucces }: MintedProps) => {
+const TreasuryFee = ({ onHandleClick, address, isSucces }: MintedProps) => {
+  const { symbol } = usePropertySymbol(address)
+
   return (
     <>
       <div style={{ display: 'flex' }}>
@@ -106,7 +113,7 @@ const TreasuryFee = ({ onHandleClick, ticker, isSucces }: MintedProps) => {
         </div>
       </div>
       <div style={{ display: 'flex', alignItems: 'center' }}>
-        <H1Xss>{ticker}</H1Xss>
+        <H1Xss>{symbol}</H1Xss>
         {isSucces && (
           <AddToMetaMask onClick={onHandleClick}>
             <img width="16px" height="16px" src="/images/img_0.png" />
@@ -117,7 +124,9 @@ const TreasuryFee = ({ onHandleClick, ticker, isSucces }: MintedProps) => {
   )
 }
 
-const YouReceive = ({ ticker }: { ticker: string }) => {
+const YouReceive = ({ address }: { address?: string }) => {
+  const { symbol } = usePropertySymbol(address)
+
   return (
     <>
       <Text2M>{"You'll receive"}</Text2M>
@@ -130,18 +139,18 @@ const YouReceive = ({ ticker }: { ticker: string }) => {
           <H1Xss style={{ width: 'fit-content', alignSelf: 'flex-end' }}>9,500,000</H1Xss>
         </div>
       </div>
-      <H1Xss>{ticker}</H1Xss>
+      <H1Xss>{symbol}</H1Xss>
     </>
   )
 }
 
-const FundingReceived = ({ funding }: { funding: string }) => {
+const FundingReceived = ({ funding }: { funding?: number }) => {
   return (
     <>
       <Text2M>Funding received</Text2M>
       <SpaceBetween>
         <H1Xss style={{ marginLeft: '3.5px' }}>$</H1Xss>
-        <H1Xss>{funding}</H1Xss>
+        <H1Xss>{funding ? funding.toLocaleString() : 'N/A'}</H1Xss>
       </SpaceBetween>
 
       <H1Xss>USD</H1Xss>
@@ -149,8 +158,11 @@ const FundingReceived = ({ funding }: { funding: string }) => {
   )
 }
 
-const MintedTokens = ({ isSucces, ticker, address }: MintedTokensType) => {
+const MintedTokens = ({ isSucces, project }: MintedTokensType) => {
+  const { symbol } = usePropertySymbol(project.property?.address)
+  const { reward } = useGetReward(project.verifier_id)
   const { web3 } = useProvider()
+  const funding = whenDefined(reward, x => x.dp(0).toNumber())
 
   const TOKEN_DECIMALS = 18
   const handleAddClick = () => {
@@ -165,8 +177,8 @@ const MintedTokens = ({ isSucces, ticker, address }: MintedTokensType) => {
             params: {
               type: 'ERC20', // Initially only supports ERC20, but eventually more!
               options: {
-                address: address, // The address that the token is at.
-                symbol: ticker, // A ticker symbol or shorthand, up to 5 chars.
+                symbol, // A ticker symbol or shorthand, up to 5 chars.
+                address: project.property?.address, // The address that the token is at.
                 decimals: TOKEN_DECIMALS // The number of decimals in the token
               }
             }
@@ -186,10 +198,10 @@ const MintedTokens = ({ isSucces, ticker, address }: MintedTokensType) => {
   return (
     <MintedTokensContainer>
       <MintedTokenGrid>
-        <TotalMinted isSucces={isSucces} onHandleClick={handleAddClick} ticker={ticker} />
-        <TreasuryFee onHandleClick={handleAddClick} ticker={ticker} isSucces={isSucces} />
-        <YouReceive ticker={ticker} />
-        <FundingReceived funding="12,000" />
+        <TotalMinted isSucces={isSucces} onHandleClick={handleAddClick} address={project.property?.address} />
+        <TreasuryFee onHandleClick={handleAddClick} address={project.property?.address} isSucces={isSucces} />
+        <YouReceive address={project.property?.address} />
+        <FundingReceived funding={funding} />
       </MintedTokenGrid>
     </MintedTokensContainer>
   )

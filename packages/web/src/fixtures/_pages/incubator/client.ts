@@ -99,3 +99,13 @@ export const getReward = async (client: Web3, githubRepository: string): Promise
         })
       : Promise.resolve(''))(getContract(client))
 }
+
+export const isFinished = async (client: Web3, propertyAddress: string): Promise<boolean> => {
+  const contract = getContract(client)
+  const events = await contract.getPastEvents('Finish', {
+    fromBlock: 0,
+    toBlock: 'latest',
+    filter: { _property: propertyAddress, _status: 0 }
+  })
+  return events.length > 0
+}

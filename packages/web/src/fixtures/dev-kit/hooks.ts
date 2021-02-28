@@ -43,6 +43,8 @@ import Web3 from 'web3'
 import { isAddress } from 'web3-utils'
 import { INFURA_ENDPOINT } from 'src/fixtures/wallet/constants'
 
+const validAddress = (address?: string = ''): boolean => isAddress(address) && address?.length === 42
+
 export const useGetTotalRewardsAmount = (propertyAddress: string) => {
   const { nonConnectedWeb3: web3, accountAddress } = useProvider()
   const { currency, toCurrency } = useCurrency()
@@ -575,12 +577,12 @@ export const useAllClaimedRewards = () => {
 
 export const usePropertyName = (propertyAddress?: string) => {
   const { nonConnectedWeb3, accountAddress } = useProvider()
-  const { data, error } = useSWR<UnwrapFunc<typeof totalSupply>, Error>(
+  const { data, error } = useSWR<UnwrapFunc<typeof propertyName>, Error>(
     SWRCachePath.propertyName(propertyAddress, accountAddress),
     () =>
-      whenDefinedAll([nonConnectedWeb3, propertyAddress], ([client, property]) =>
-        isAddress(property) ? propertyName(client, property) : 'Foo'
-      ),
+      validAddress(propertyAddress)
+        ? whenDefinedAll([nonConnectedWeb3, propertyAddress], ([client, property]) => propertyName(client, property))
+        : 'Foo',
     {
       onError: err => message.error(err.message)
     }
@@ -591,12 +593,12 @@ export const usePropertyName = (propertyAddress?: string) => {
 
 export const usePropertySymbol = (propertyAddress?: string) => {
   const { nonConnectedWeb3, accountAddress } = useProvider()
-  const { data, error } = useSWR<UnwrapFunc<typeof totalSupply>, Error>(
+  const { data, error } = useSWR<UnwrapFunc<typeof propertySymbol>, Error>(
     SWRCachePath.propertySymbol(propertyAddress, accountAddress),
     () =>
-      whenDefinedAll([nonConnectedWeb3, propertyAddress], ([client, property]) =>
-        isAddress(property) ? propertySymbol(client, property) : 'FOO'
-      ),
+      validAddress(propertyAddress)
+        ? whenDefinedAll([nonConnectedWeb3, propertyAddress], ([client, property]) => propertySymbol(client, property))
+        : 'FOO',
     {
       onError: err => message.error(err.message)
     }
@@ -612,6 +614,18 @@ export const useBalanceOfProperty = (propertyAddress: string) => {
     () =>
       whenDefinedAll([nonConnectedWeb3, accountAddress], ([client, account]) =>
         balanceOfProperty(client, propertyAddress, account).then(toBigNumber)
+      )
+  )
+  return { balance: data, error }
+}
+
+export const useBalanceOfAccountProperty = (propertyAddress?: string, accountAddress?: string) => {
+  const { nonConnectedWeb3 } = useProvider()
+  const { data, error } = useSWR<BigNumber | undefined, Error>(
+    SWRCachePath.balanceOfProperty(propertyAddress, accountAddress),
+    () =>
+      whenDefinedAll([nonConnectedWeb3, propertyAddress, accountAddress], ([client, property, account]) =>
+        balanceOfProperty(client, property, account).then(toBigNumber)
       )
   )
   return { balance: data, error }
