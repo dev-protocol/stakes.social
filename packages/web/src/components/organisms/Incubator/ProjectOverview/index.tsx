@@ -6,6 +6,7 @@ import { Button } from 'src/components/organisms/Incubator/molecules/Button'
 import ProjectEntry from 'src/components/organisms/Incubator/ProjectOverview/Project'
 import { CurrencySwitcher } from '../molecules/CurrencySwitcher'
 import { useGetIncubators } from 'src/fixtures/dev-for-apps/hooks'
+import { Incubator } from 'src/fixtures/dev-for-apps/utility'
 
 const ProjectOverviewContainer = styled.div`
   display: flex;
@@ -52,7 +53,7 @@ const ProjectOverview = () => {
   const [showAll, setShowAll] = useState(false)
   const { data } = useGetIncubators()
 
-  const projects: Array<any> = showAll && data ? data : data?.slice(0, 8) || []
+  const projects: Array<Incubator> = showAll && data ? data : data?.slice(0, 8) || []
   console.log('projects: ', projects)
   return (
     <GradientContainer id="projects" isExpanded={showAll}>

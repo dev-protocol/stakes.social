@@ -7,6 +7,7 @@ import { Button } from 'src/components/organisms/Incubator/molecules/Button'
 import Link from 'next/link'
 import DevCurrencySymbol from '../molecules/DevCurrency'
 import { useGetReward } from 'src/fixtures/_pages/incubator/hooks'
+import { Incubator } from 'src/fixtures/dev-for-apps/utility'
 
 const ipsum = new lorem.LoremIpsum({
   sentencesPerParagraph: { min: 1, max: 3 },
@@ -14,23 +15,7 @@ const ipsum = new lorem.LoremIpsum({
 })
 
 type ProjectProps = {
-  project: {
-    id: number
-    name: string
-    verifier_id: string
-    property: {
-      address: string
-      avatar: {
-        url: string
-      }
-      description: string
-      links: {
-        github?: string
-        website?: string
-        twitter?: string
-      }
-    }
-  }
+  project: Incubator
 }
 
 const ProjectContainer = styled.div`
