@@ -107,11 +107,11 @@ type ProjectDetailsProps = {
   onStateChange: React.Dispatch<React.SetStateAction<string>>
   claimed: boolean
 
-  project: Incubator['property']
+  project: Incubator
 }
 
 const ProjectDetails = ({ claimed, onStateChange, project }: ProjectDetailsProps) => {
-  const { inDEV, inUSD } = useGetReward(project.address)
+  const { inDEV, inUSD } = useGetReward(project.verifier_id)
   const fundingDEV = inDEV ? inDEV.dp(0).toNumber().toLocaleString() : 0
   const fundingUSD = inUSD ? inUSD.dp(0).toNumber().toLocaleString() : 0
 
@@ -121,38 +121,38 @@ const ProjectDetails = ({ claimed, onStateChange, project }: ProjectDetailsProps
         <SpaceBetween>
           <Contact>
             <H1Large>{project?.name}</H1Large>
-            {project?.links?.website && (
+            {project.property?.links?.website && (
               <LinkB
                 target="_blank"
                 rel="noopener noreferrer"
-                href={project?.links?.website}
+                href={project.property?.links?.website}
                 style={{ paddingTop: '11px' }}
               >
-                {project?.links?.website}
+                {project.property?.links?.website}
               </LinkB>
             )}
 
             <SocialMediaContainer>
-              {project?.links?.twitter && (
+              {project.property?.links?.twitter && (
                 <IconContainer style={{ paddingLeft: 0 }}>
-                  <a target="_blank" rel="noopener noreferrer" href={project?.links?.twitter}>
+                  <a target="_blank" rel="noopener noreferrer" href={project.property?.links?.twitter}>
                     <TwitterBlackWhite />
                   </a>
                 </IconContainer>
               )}
 
-              {project?.links?.github && (
+              {project.property?.links?.github && (
                 <IconContainer>
-                  <a target="_blank" rel="noopener noreferrer" href={project?.links?.github}>
+                  <a target="_blank" rel="noopener noreferrer" href={project.property?.links?.github}>
                     <GithubIcon />
                   </a>
                 </IconContainer>
               )}
             </SocialMediaContainer>
           </Contact>
-          {project?.avatar && (
+          {project.property?.avatar && (
             <LogoContainer>
-              <img src={project?.avatar?.url} />
+              <img src={project.property?.avatar?.url} />
             </LogoContainer>
           )}
         </SpaceBetween>
@@ -176,7 +176,7 @@ const ProjectDetails = ({ claimed, onStateChange, project }: ProjectDetailsProps
         </SpaceBetween>
       </div>
       <DescriptionContainer>
-        <Text1L>{project?.description || 'No description available for this project.'}</Text1L>
+        <Text1L>{project.property?.description || 'No description available for this project.'}</Text1L>
       </DescriptionContainer>
     </DetailsContainer>
   )
@@ -323,8 +323,8 @@ const OnboardingPage = ({ project }: OnboardingPageProps) => {
             </div>
           )}
         </BackArrowContainer>
-        {currentState === 'overview' && project.property && (
-          <ProjectDetails project={project.property} claimed={claimed} onStateChange={setCurrentState} />
+        {currentState === 'overview' && (
+          <ProjectDetails project={project} claimed={claimed} onStateChange={setCurrentState} />
         )}
 
         {currentState === 'onboarding' && (
