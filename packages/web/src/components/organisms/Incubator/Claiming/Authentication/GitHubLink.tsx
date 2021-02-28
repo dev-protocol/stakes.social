@@ -22,16 +22,18 @@ const GitHubLink = ({ project }: AuthenticationProps) => {
   const githubUrl = project.verifier_id
 
   return (
-    project.property?.links?.github && (
-      <Wrap>
-        <ImageWrap>
-          <img src="https://res.cloudinary.com/haas-storage/image/upload/v1613111071/github_rg8ngo.png" />
-        </ImageWrap>
-        <LinkB href={project.property?.links.github} rel="noopener noreferrer" target="_blank">
-          {githubUrl}
-        </LinkB>
-      </Wrap>
-    )
+    <>
+      {project.property?.links?.github && (
+        <Wrap>
+          <ImageWrap>
+            <img src="https://res.cloudinary.com/haas-storage/image/upload/v1613111071/github_rg8ngo.png" />
+          </ImageWrap>
+          <LinkB href={project.property?.links.github} rel="noopener noreferrer" target="_blank">
+            {githubUrl}
+          </LinkB>
+        </Wrap>
+      )}
+    </>
   )
 }
 

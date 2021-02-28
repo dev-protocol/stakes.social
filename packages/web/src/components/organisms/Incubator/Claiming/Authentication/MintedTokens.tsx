@@ -1,14 +1,14 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import styled from 'styled-components'
 import { Text2M, H1Xss } from '../../Typography'
 import { InfoIcon } from '../../Icons'
 import { DecCurrencySmall } from '../../molecules/DevCurrency'
-import { AbstractProvider } from 'web3-core'
 import { useProvider } from 'src/fixtures/wallet/hooks'
 import { Incubator } from 'src/fixtures/dev-for-apps/utility'
 import { usePropertySymbol } from 'src/fixtures/dev-kit/hooks'
 import { useGetReward } from 'src/fixtures/_pages/incubator/hooks'
 import { whenDefined } from 'src/fixtures/utility'
+import { createHandleAddClick } from 'src/fixtures/wallet/utility'
 
 const SpaceBetween = styled.div`
   display: flex;
@@ -55,7 +55,7 @@ const MintedTokenGrid = styled.div`
 type MintedProps = {
   address?: string
   isSucces?: boolean
-  onHandleClick: () => void
+  onHandleClick?: () => void
 }
 
 const TotalMinted = ({ address, isSucces, onHandleClick }: MintedProps) => {
@@ -164,42 +164,33 @@ const MintedTokens = ({ isSucces, project }: MintedTokensType) => {
   const { web3 } = useProvider()
   const funding = whenDefined(reward, x => x.dp(0).toNumber())
 
-  const TOKEN_DECIMALS = 18
-  const handleAddClick = () => {
-    const ethereum = web3?.currentProvider as AbstractProvider
-    try {
-      // wasAdded is a boolean. Like any RPC method, an error may be thrown.
-      const wasAdded =
-        typeof ethereum.request === 'function' &&
-        ethereum
-          .request({
-            method: 'wallet_watchAsset',
-            params: {
-              type: 'ERC20', // Initially only supports ERC20, but eventually more!
-              options: {
-                symbol, // A ticker symbol or shorthand, up to 5 chars.
-                address: project.property?.address, // The address that the token is at.
-                decimals: TOKEN_DECIMALS // The number of decimals in the token
-              }
-            }
-          })
-          .catch(e => console.log('SOMETHING HAPPENED: ', e))
-
-      if (wasAdded) {
-        console.log('Thanks for your interest!')
-      } else {
-        console.log('Your loss!')
-      }
-    } catch (error) {
-      console.log(error)
-    }
-  }
+  const addCreatorToken = useMemo(
+    () =>
+      symbol &&
+      web3?.currentProvider &&
+      project?.property?.address &&
+      createHandleAddClick({
+        provider: web3.currentProvider,
+        tokenAddress: project.property.address,
+        tokenSymbol: symbol,
+        tokenImage: project.property?.avatar?.url
+      }),
+    [web3?.currentProvider, project, symbol]
+  )
 
   return (
     <MintedTokensContainer>
       <MintedTokenGrid>
-        <TotalMinted isSucces={isSucces} onHandleClick={handleAddClick} address={project.property?.address} />
-        <TreasuryFee onHandleClick={handleAddClick} address={project.property?.address} isSucces={isSucces} />
+        <TotalMinted
+          isSucces={isSucces}
+          onHandleClick={addCreatorToken ? addCreatorToken : undefined}
+          address={project.property?.address}
+        />
+        <TreasuryFee
+          onHandleClick={addCreatorToken ? addCreatorToken : undefined}
+          address={project.property?.address}
+          isSucces={isSucces}
+        />
         <YouReceive address={project.property?.address} />
         <FundingReceived funding={funding} />
       </MintedTokenGrid>

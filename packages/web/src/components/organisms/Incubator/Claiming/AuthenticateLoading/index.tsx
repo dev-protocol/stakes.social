@@ -1,11 +1,11 @@
 import React, { useMemo } from 'react'
 import styled from 'styled-components'
 import { LinkB, H1S, Text1L } from '../../Typography'
-import { AbstractProvider, provider } from 'web3-core'
 import { useProvider } from 'src/fixtures/wallet/hooks'
 import LoadingAnimation from './Animations'
 import { usePropertySymbol } from 'src/fixtures/dev-kit/hooks'
 import { Incubator } from 'src/fixtures/dev-for-apps/utility'
+import { createHandleAddClick } from 'src/fixtures/wallet/utility'
 
 const AuthenticateLoadingContainer = styled.div`
   display: grid;
@@ -43,50 +43,6 @@ const SpaceBetween = styled.div`
   display: flex;
   justify-content: space-between;
 `
-const isAbstractProvider = (prov?: provider): prov is AbstractProvider =>
-  Boolean(prov && typeof prov !== 'string' && typeof (prov as any).request === 'function')
-
-const createHandleAddClick = ({
-  provider,
-  tokenAddress,
-  tokenSymbol,
-  tokenDecimals = 18,
-  tokenImage
-}: {
-  provider?: provider
-  tokenAddress: string
-  tokenSymbol: string
-  tokenDecimals?: number
-  tokenImage?: string
-}) => async () => {
-  try {
-    // wasAdded is a boolean. Like any RPC method, an error may be thrown.
-    const wasAdded =
-      isAbstractProvider(provider) &&
-      (await provider
-        .request({
-          method: 'wallet_watchAsset',
-          params: {
-            type: 'ERC20', // Initially only supports ERC20, but eventually more!
-            options: {
-              address: tokenAddress, // The address that the token is at.
-              symbol: tokenSymbol, // A ticker symbol or shorthand, up to 5 chars.
-              decimals: tokenDecimals, // The number of decimals in the token
-              image: tokenImage // A string url of the token logo
-            }
-          }
-        })
-        .catch(e => console.log('SOMETHING HAPPENED: ', e)))
-
-    if (wasAdded) {
-      console.log('Thanks for your interest!')
-    } else {
-      console.log('Your loss!')
-    }
-  } catch (error) {
-    console.log(error)
-  }
-}
 
 const AuthenticateLoading = ({ project }: { project?: Incubator }) => {
   const { web3, accountAddress } = useProvider() // accountAddress
@@ -97,8 +53,9 @@ const AuthenticateLoading = ({ project }: { project?: Incubator }) => {
 
   const addDevToken = useMemo(
     () =>
+      web3?.currentProvider &&
       createHandleAddClick({
-        provider: web3?.currentProvider,
+        provider: web3.currentProvider,
         tokenAddress: '0x5cAf454Ba92e6F2c929DF14667Ee360eD9fD5b26',
         tokenSymbol: 'DEV',
         tokenImage: tokenImageDev
@@ -108,9 +65,10 @@ const AuthenticateLoading = ({ project }: { project?: Incubator }) => {
   const addCreatorToken = useMemo(
     () =>
       symbol &&
+      web3?.currentProvider &&
       project?.property?.address &&
       createHandleAddClick({
-        provider: web3?.currentProvider,
+        provider: web3.currentProvider,
         tokenAddress: project.property.address,
         tokenSymbol: symbol,
         tokenImage: tokenImageProperty
@@ -132,7 +90,7 @@ const AuthenticateLoading = ({ project }: { project?: Incubator }) => {
           following tokens to your wallet by clicking the link below.
         </Text1L>
         <SpaceBetween style={{ paddingTop: '67px' }}>
-          <LinkWithIcon disabled={!accountAddress} onClick={addDevToken}>
+          <LinkWithIcon disabled={!accountAddress} onClick={addDevToken ? addDevToken : undefined}>
             <img width="16px" height="16px" src="/images/img_0.png" />
             <LinkB>
               {accountAddress ? (

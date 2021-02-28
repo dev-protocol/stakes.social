@@ -43,7 +43,8 @@ import Web3 from 'web3'
 import { isAddress } from 'web3-utils'
 import { INFURA_ENDPOINT } from 'src/fixtures/wallet/constants'
 
-const validAddress = (address?: string = ''): boolean => isAddress(address) && address?.length === 42
+const validAddress = (address: string = ''): boolean =>
+  typeof address === 'string' && isAddress(address) && address.length === 42
 
 export const useGetTotalRewardsAmount = (propertyAddress: string) => {
   const { nonConnectedWeb3: web3, accountAddress } = useProvider()
