@@ -9,6 +9,7 @@ import MintedTokens from '../Authentication/MintedTokens'
 import Hr from '../../molecules/Hr'
 import { Incubator } from 'src/fixtures/dev-for-apps/utility'
 import { SetOnboardingPageStatus } from 'src/pages/incubator/project/[project]'
+import GitHubLink from '../Authentication/GitHubLink'
 
 const SuccessMessageContainer = styled.div`
   display: flex;
@@ -48,7 +49,6 @@ type ClaimSuccesfulProps = {
 
 const ClaimSuccesful = ({ onStateChange, project }: ClaimSuccesfulProps) => {
   const { width, height } = useWindowDimensions()
-  const githubUrl = project.verifier_id
 
   return (
     <>
@@ -57,16 +57,7 @@ const ClaimSuccesful = ({ onStateChange, project }: ClaimSuccesfulProps) => {
           <SpaceBetween style={{ paddingBottom: '70px' }}>
             <Contact>
               <H1Large>{project.property?.name}</H1Large>
-              {project.property?.links?.github && (
-                <div style={{ display: 'flex', paddingTop: '11px' }}>
-                  <div style={{ marginRight: '5px', width: '24px', height: '24px' }}>
-                    <img src="https://res.cloudinary.com/haas-storage/image/upload/v1613111071/github_rg8ngo.png" />
-                  </div>
-                  <LinkB href={project.property?.links.github} rel="noopener noreferrer" target="_blank">
-                    {githubUrl}
-                  </LinkB>
-                </div>
-              )}
+              <GitHubLink project={project} />
             </Contact>
             {project.property?.avatar?.url && (
               <LogoContainer>

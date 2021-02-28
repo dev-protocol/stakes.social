@@ -22,7 +22,6 @@ const LoadingContainer = styled.div`
 `
 
 const LinkWithIcon = styled.button`
-  display: flex;
   align-items: center;
 
   border: none;
