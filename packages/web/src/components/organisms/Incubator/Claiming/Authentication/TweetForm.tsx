@@ -8,6 +8,7 @@ import { ClipboardIcon, TwitterBird } from '../../Icons'
 import DownArrow from '../../molecules/DownArrow'
 import { useGetReward, useIntermediateProcess } from 'src/fixtures/_pages/incubator/hooks'
 import { Incubator } from 'src/fixtures/dev-for-apps/utility'
+import { SetOnboardingPageStatus } from 'src/pages/incubator/project/[project]'
 
 const AuthenticationContainer = styled.div`
   position: relative;
@@ -135,7 +136,7 @@ export const CustomInput = ({ placeholder, label, onHandlePaste }: CustomInputPr
 }
 
 type AuthenticationProps = {
-  onStateChange: React.Dispatch<React.SetStateAction<string>>
+  onStateChange: SetOnboardingPageStatus
   project: Incubator
   metricsAddress: string
 }
@@ -212,9 +213,14 @@ const TweetForm = ({ onStateChange, project, metricsAddress }: AuthenticationPro
     }
     onStateChange('loading')
 
-    if (!IS_DEVELOPMENT_ENV) {
+    if (IS_DEVELOPMENT_ENV) {
+      setTimeout(() => {
+        onStateChange('success')
+      }, 3000)
+    } else {
       await intermediateProcess(project.verifier_id, metricsAddress, data.twitter, '')
       await waitForFinishEvent(project.property.address)
+      onStateChange('success')
     }
   }
   const [isError, setIsError] = useState(false)
@@ -291,7 +297,7 @@ const TweetForm = ({ onStateChange, project, metricsAddress }: AuthenticationPro
             rules={[{ required: true, message: 'Please enter a valid twitter URL' }]}
             key="twitter"
           >
-            <CustomInput onHandlePaste={handlePaste} label="twitter" placeholder="Paste the url of the Twitter post " />
+            <CustomInput onHandlePaste={handlePaste} label="twitter" placeholder="Paste the url of the Twitter post" />
           </FormItem>
 
           <div style={{ display: 'flex', justifyContent: 'flex-end', paddingTop: '48px' }}>

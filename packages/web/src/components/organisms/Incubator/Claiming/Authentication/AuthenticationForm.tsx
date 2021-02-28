@@ -8,6 +8,7 @@ import { usePostSignGitHubMarketAsset } from 'src/fixtures/khaos/hooks'
 import { Incubator } from 'src/fixtures/dev-for-apps/utility'
 import { useAuthenticate } from 'src/fixtures/_pages/incubator/hooks'
 import { CheckCircleOutlined } from '@ant-design/icons'
+import { SetOnboardingPageStatus } from 'src/pages/incubator/project/[project]'
 
 const AuthenticationContainer = styled.div`
   position: relative;
@@ -55,6 +56,7 @@ const StyledAlert = styled(Alert)`
   margin-top: 2rem;
   border-radius: 0;
   background: #cce4ff;
+  font-family: 'IBM Plex Mono';
 `
 
 const FormItem = styled(Form.Item)<{ isError?: boolean }>`
@@ -163,8 +165,8 @@ const StyledForm = styled(Form)`
 `
 
 type AuthenticationProps = {
-  onStateChange: React.Dispatch<React.SetStateAction<string>>
-  onMetricsCreated: (metrics: string) => void
+  onStateChange: SetOnboardingPageStatus
+  onMetricsCreated: React.Dispatch<React.SetStateAction<string | undefined>>
   project: Incubator
 }
 
@@ -204,13 +206,17 @@ const AuthenticationForm = ({ onStateChange, onMetricsCreated, project }: Authen
     const metrics = IS_DEVELOPMENT_ENV
       ? '0x_dummy_metrics'
       : await waitForCreateMetrics(project.verifier_id).catch((err: Error) => err)
-    if (metrics instanceof Error) {
-      return message.error(metrics)
-    }
-    if (!metrics) {
-      return message.error('authentication failed')
+    if (metrics instanceof Error || !metrics) {
+      return message.error(metrics || 'authentication failed')
     }
     onMetricsCreated(metrics)
+    if (IS_DEVELOPMENT_ENV) {
+      setTimeout(() => {
+        onStateChange('authentication')
+      }, 3000)
+    } else {
+      onStateChange('authentication')
+    }
   }
   const [isError, setIsError] = useState(false)
 

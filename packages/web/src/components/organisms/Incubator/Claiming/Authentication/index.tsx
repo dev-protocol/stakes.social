@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import styled from 'styled-components'
 import AuthenticationForm from './AuthenticationForm'
 import { LinkB, H1Large } from '../../Typography'
@@ -7,6 +7,7 @@ import TweetForm from './TweetForm'
 import Hr from '../../molecules/Hr'
 import { Incubator } from 'src/fixtures/dev-for-apps/utility'
 import { useIsFinished } from 'src/fixtures/_pages/incubator/hooks'
+import { SetOnboardingPageStatus } from 'src/pages/incubator/project/[project]'
 
 const DetailsContainer = styled.div`
   display: grid;
@@ -36,16 +37,15 @@ const LogoContainer = styled.div`
 `
 
 type AuthenticationProps = {
-  onStateChange: React.Dispatch<React.SetStateAction<string>>
-  progress: number
+  onStateChange: SetOnboardingPageStatus
   project: Incubator
+  metrics?: string
+  onMetricsCreated: React.Dispatch<React.SetStateAction<string | undefined>>
 }
 
-const Authentication = ({ onStateChange, progress, project }: AuthenticationProps) => {
+const Authentication = ({ onStateChange, project, metrics, onMetricsCreated }: AuthenticationProps) => {
   const { data: isSucces } = useIsFinished(project.property?.address)
   const githubUrl = project.verifier_id
-
-  const [metricsAddress, setMetricsAddress] = useState<undefined | string>()
 
   return (
     <DetailsContainer>
@@ -74,13 +74,11 @@ const Authentication = ({ onStateChange, progress, project }: AuthenticationProp
         <MintedTokens project={project} isSucces={isSucces} />
       </div>
 
-      {progress === 1 && (
-        <AuthenticationForm project={project} onStateChange={onStateChange} onMetricsCreated={setMetricsAddress} />
+      {!metrics && (
+        <AuthenticationForm project={project} onStateChange={onStateChange} onMetricsCreated={onMetricsCreated} />
       )}
 
-      {progress === 2 && metricsAddress && (
-        <TweetForm project={project} metricsAddress={metricsAddress} onStateChange={onStateChange} />
-      )}
+      {metrics && <TweetForm project={project} metricsAddress={metrics} onStateChange={onStateChange} />}
     </DetailsContainer>
   )
 }

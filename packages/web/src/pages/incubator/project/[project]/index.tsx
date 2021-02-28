@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
@@ -104,9 +104,8 @@ const DevCurrencyContainer = styled.div`
 `
 
 type ProjectDetailsProps = {
-  onStateChange: React.Dispatch<React.SetStateAction<string>>
+  onStateChange: SetOnboardingPageStatus
   claimed: boolean
-
   project: Incubator
 }
 
@@ -229,7 +228,7 @@ const TimelineContainer = styled.div`
 type OnboardingSectionProps = {
   onBoardChange: React.Dispatch<React.SetStateAction<boolean>>
   isModal?: boolean
-  onStateChange: React.Dispatch<React.SetStateAction<string>>
+  onStateChange: SetOnboardingPageStatus
   isOnboarding: boolean
 }
 
@@ -286,21 +285,14 @@ type OnboardingPageProps = {
   project: Incubator
 }
 
+export type OnboardingPageStatus = 'overview' | 'onboarding' | 'loading' | 'success' | 'authentication' | 'whatsnext'
+export type SetOnboardingPageStatus = React.Dispatch<React.SetStateAction<OnboardingPageStatus>>
+
 const OnboardingPage = ({ project }: OnboardingPageProps) => {
   const { data: claimed } = useIsFinished(project.property?.address)
-  const [currentState, setCurrentState] = useState<string>('overview')
+  const [currentState, setCurrentState] = useState<OnboardingPageStatus>('overview')
+  const [createdMetrics, setCreatedMetrics] = useState<string | undefined>()
   const [isOnboarding, setIsOnboarding] = useState(true)
-  const [authenticationProgress, setAuthenticationProgress] = useState(1)
-
-  useEffect(() => {
-    if (currentState === 'loading') {
-      const status = authenticationProgress === 2 ? 'success' : 'authentication'
-      setTimeout(() => {
-        setCurrentState(status)
-        setAuthenticationProgress(2)
-      }, 3000)
-    }
-  }, [currentState, authenticationProgress])
 
   return (
     <div style={{ position: 'relative', display: 'flex', minHeight: '100vh', flexDirection: 'column' }}>
@@ -315,7 +307,7 @@ const OnboardingPage = ({ project }: OnboardingPageProps) => {
             </Link>
           )}
 
-          {((currentState === 'authentication' && authenticationProgress === 1) || currentState === 'onboarding') && (
+          {(currentState === 'authentication' || currentState === 'onboarding') && (
             <div onClick={() => setCurrentState('overview')} style={{ cursor: 'pointer' }}>
               <BackArrow />
             </div>
@@ -335,7 +327,12 @@ const OnboardingPage = ({ project }: OnboardingPageProps) => {
         )}
 
         {currentState === 'authentication' && (
-          <Authentication project={project} progress={authenticationProgress} onStateChange={setCurrentState} />
+          <Authentication
+            project={project}
+            onStateChange={setCurrentState}
+            metrics={createdMetrics}
+            onMetricsCreated={setCreatedMetrics}
+          />
         )}
 
         {currentState === 'loading' && <AuthenticateLoading project={project} />}

@@ -8,6 +8,7 @@ import { Button } from '../../molecules/Button'
 import MintedTokens from '../Authentication/MintedTokens'
 import Hr from '../../molecules/Hr'
 import { Incubator } from 'src/fixtures/dev-for-apps/utility'
+import { SetOnboardingPageStatus } from 'src/pages/incubator/project/[project]'
 
 const SuccessMessageContainer = styled.div`
   display: flex;
@@ -41,14 +42,13 @@ const LogoContainer = styled.div`
 `
 
 type ClaimSuccesfulProps = {
-  onStateChange: React.Dispatch<React.SetStateAction<string>>
+  onStateChange: SetOnboardingPageStatus
   project: Incubator
 }
 
 const ClaimSuccesful = ({ onStateChange, project }: ClaimSuccesfulProps) => {
   const { width, height } = useWindowDimensions()
-  const githubUrl = 'sigp/lighthouse'
-  const ticker = 'SIGP'
+  const githubUrl = project.verifier_id
 
   return (
     <>
@@ -75,9 +75,7 @@ const ClaimSuccesful = ({ onStateChange, project }: ClaimSuccesfulProps) => {
             )}
           </SpaceBetween>
           <Hr color="#CCCCCC" />
-          {project.property?.address && (
-            <MintedTokens isSucces={true} address={project.property.address} ticker={ticker} />
-          )}
+          {project.property?.address && <MintedTokens isSucces={true} project={project} />}
         </div>
         <SuccessMessageContainer>
           <H1Large color="#1FED33">Success!</H1Large>
