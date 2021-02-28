@@ -134,7 +134,7 @@ const AuthenticateLoading = ({ project }: { project?: Incubator }) => {
         </Text1L>
         <SpaceBetween style={{ paddingTop: '67px' }}>
           <LinkWithIcon disabled={!accountAddress} onClick={addDevToken}>
-            <img width="16px" height="16px" src={tokenImageDev} />
+            <img width="16px" height="16px" src="/images/img_0.png" />
             <LinkB>
               {accountAddress ? (
                 'DEV on MetaMask'
@@ -146,7 +146,7 @@ const AuthenticateLoading = ({ project }: { project?: Incubator }) => {
             </LinkB>
           </LinkWithIcon>
           <LinkWithIcon disabled={!accountAddress} onClick={addCreatorToken ? addCreatorToken : undefined}>
-            <img width="16px" height="16px" src={tokenImageProperty} />
+            <img width="16px" height="16px" src="/images/img_0.png" />
             <LinkB>
               {accountAddress ? (
                 `${symbol} on MetaMask`
