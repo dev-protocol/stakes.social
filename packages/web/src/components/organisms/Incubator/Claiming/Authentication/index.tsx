@@ -87,7 +87,7 @@ type AuthenticationProps = {
 
 const Authentication = ({ onStateChange, project, metrics, onMetricsCreated }: AuthenticationProps) => {
   const { data: isSucces } = useIsFinished(project.property?.address)
-  const [isWrong, setIsWrong] = useState(true)
+  const [isWrong, setIsWrong] = useState(false)
 
   return (
     <DetailsContainer>
