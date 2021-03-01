@@ -2,19 +2,21 @@ import React from 'react'
 import styled from 'styled-components'
 import Countdown, { CountdownRenderProps } from 'react-countdown'
 
-import { LinkB, H1Large, Text1Xl, H3Xs, H1M } from 'src/components/organisms/Incubator/Typography'
+import { H3Xs, H1M, Text1L } from 'src/components/organisms/Incubator/Typography'
 import { useGetEntireRewards } from 'src/fixtures/_pages/incubator/hooks'
+import IncubatorAnimation from './animation'
 
 const JumboContainer = styled.div`
+  position: relative;
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-gap: 111px 30px;
+  grid-template-columns: 1fr auto;
+  grid-gap: 190px 30px;
   width: 100%;
   margin: 0 auto;
   max-width: 1128px;
   flex-grow: 1;
-  padding-top: 4em;
-  padding-bottom: 3em;
+  padding-top: 140px;
+  padding-bottom: 80px;
 `
 
 const TitleContainer = styled.div`
@@ -25,23 +27,7 @@ const TitleContainer = styled.div`
 const SubTitleContainer = styled.div`
   display: flex;
   flex-direction: column;
-`
-
-const QualificationMethodologyContainer = styled.div`
-  display: flex;
-  justify-content: flex-end;
-  padding-top: 1.5em;
-
-  > a {
-    font-size: 16px;
-    border-bottom: 1px solid black;
-    padding-bottom: 3px;
-    color: black;
-    :hover {
-      color: #5b8bf5;
-      border-bottom: 1px solid #5b8bf5;
-    }
-  }
+  max-width: 360px;
 `
 
 const RoundRewardContainer = styled.div`
@@ -75,30 +61,49 @@ const renderer = ({ formatted, completed }: CountdownRenderProps) => {
   }
 }
 
+const AnimationContainer = styled.div`
+  position: absolute;
+  width: 620px;
+  height: 620px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: -1;
+`
+
+const Announcement = styled.a`
+  font-family: 'WhyteInktrap';
+  font-size: 16px;
+  line-height: 28px;
+  font-weight: 400;
+  padding-top: 5px;
+  text-decoration: none;
+  color: #5b8bf5;
+`
+
 const Jumbo = () => {
   const { currency, reward } = useGetEntireRewards()
   const convertedFunding = reward ? reward.dp(0).toNumber().toLocaleString() : 0
 
   return (
     <JumboContainer>
+      <AnimationContainer>
+        <IncubatorAnimation />
+      </AnimationContainer>
       <TitleContainer>
-        <H1Large>Funding the World’s</H1Large>
-        <H1Large>Technological</H1Large>
-        <H1Large>Infrastructure</H1Large>
+        <H1M>{"It's Time to Fund"}</H1M>
+        <H1M>Open Source Software.</H1M>
+        <Announcement href="https://docs.devprtcl.com" target="_blank" rel="noreferrer">
+          Announcement
+        </Announcement>
       </TitleContainer>
       <div style={{ display: 'flex', justifyContent: 'space-between', flexDirection: 'column' }}>
         <SubTitleContainer>
-          <Text1Xl>
+          <Text1L>
             {
               "Dev Protocol's Incubator provides funding to Open source software projects tackling large problems with inadequate resources."
             }
-          </Text1Xl>
+          </Text1L>
         </SubTitleContainer>
-        <QualificationMethodologyContainer>
-          <LinkB href="https://docs.devprtcl.com" target="_blank" rel="noreferrer">
-            Qualification Methodology
-          </LinkB>
-        </QualificationMethodologyContainer>
       </div>
       <RoundRewardContainer>
         <Round>
