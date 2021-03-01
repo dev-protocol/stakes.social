@@ -139,6 +139,7 @@ type AuthenticationProps = {
   onStateChange: SetOnboardingPageStatus
   project: Incubator
   metricsAddress: string
+  onIsWrongChange: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 const ProgressContainer = styled.div`
@@ -201,7 +202,7 @@ const createTweetBody = (project: Incubator, funds?: string) =>
 
 const IS_DEVELOPMENT_ENV = process.env.NODE_ENV === 'development'
 
-const TweetForm = ({ onStateChange, project, metricsAddress }: AuthenticationProps) => {
+const TweetForm = ({ onStateChange, project, metricsAddress, onIsWrongChange }: AuthenticationProps) => {
   const { inUSD } = useGetReward(project.verifier_id)
   const funds = useMemo(() => (inUSD ? `$${inUSD.dp(2).toNumber().toLocaleString()}` : '$N/A'), [inUSD])
   const [form] = Form.useForm()
@@ -209,7 +210,7 @@ const TweetForm = ({ onStateChange, project, metricsAddress }: AuthenticationPro
   const onSubmit = async (data: any) => {
     console.log('data: ', data)
     if (!project.property?.address) {
-      return
+      return onIsWrongChange(true)
     }
     onStateChange('loading')
 

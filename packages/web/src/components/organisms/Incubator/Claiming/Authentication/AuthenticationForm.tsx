@@ -168,6 +168,7 @@ type AuthenticationProps = {
   onStateChange: SetOnboardingPageStatus
   onMetricsCreated: React.Dispatch<React.SetStateAction<string | undefined>>
   project: Incubator
+  onIsWrongChange: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 const ProgressContainer = styled.div`
@@ -180,7 +181,7 @@ const ProgressContainer = styled.div`
 
 const IS_DEVELOPMENT_ENV = process.env.NODE_ENV === 'development'
 
-const AuthenticationForm = ({ onStateChange, onMetricsCreated, project }: AuthenticationProps) => {
+const AuthenticationForm = ({ onStateChange, onMetricsCreated, project, onIsWrongChange }: AuthenticationProps) => {
   const [form] = Form.useForm()
   const { postSignGitHubMarketAssetHandler, isLoading } = usePostSignGitHubMarketAsset()
   const { authenticate, waitForCreateMetrics } = useAuthenticate()
@@ -191,13 +192,14 @@ const AuthenticationForm = ({ onStateChange, onMetricsCreated, project }: Authen
       return IS_DEVELOPMENT_ENV ? { publicSignature: 'dummy_pulic_signature' } : err
     })
     if (signature instanceof Error) {
-      return message.error(signature)
+      message.error(signature)
+      return onIsWrongChange(true)
     }
     setPublicSignature(signature.publicSignature)
   }
   const onSend = async () => {
     if (!publicSignature) {
-      return
+      return onIsWrongChange(true)
     }
     onStateChange('loading')
     if (!IS_DEVELOPMENT_ENV) {
@@ -207,7 +209,8 @@ const AuthenticationForm = ({ onStateChange, onMetricsCreated, project }: Authen
       ? '0x_dummy_metrics'
       : await waitForCreateMetrics(project.verifier_id).catch((err: Error) => err)
     if (metrics instanceof Error || !metrics) {
-      return message.error(metrics || 'authentication failed')
+      message.error(metrics || 'authentication failed')
+      return onIsWrongChange(true)
     }
     onMetricsCreated(metrics)
     if (IS_DEVELOPMENT_ENV) {
