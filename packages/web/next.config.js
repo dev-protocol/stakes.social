@@ -63,7 +63,7 @@ module.exports = withTM(withCss(
       modifyVars: themeVariables // make your antd custom effective
     },
     env: {
-      VERCEL_ENV: process.env.VERCEL_ENV
+      IS_PREVIEW: process.env.IS_PREVIEW
     },
     distDir: 'dist/src/.next',
     target: 'serverless'
