@@ -104,7 +104,16 @@ export const AuthForm = ({ onHeaderChange, onSubHeaderChange, onFormDataSubmit }
               <Input Icon={FontColorsOutlined} label="projectName" placeholder="Project name" />
             </Form.Item>
           </Row>
-
+          <Row>
+            <Span>Token name:</Span>
+            <Form.Item
+              name="tokenName"
+              rules={[{ required: true, message: 'Please input a token name' }]}
+              key="tokenName"
+            >
+              <Input Icon={FontColorsOutlined} label="tokenName" placeholder="Choose your token's name" />
+            </Form.Item>
+          </Row>
           <Row>
             <Span>Token symbol:</Span>
             <div style={{ display: 'flex', flexDirection: 'column' }}>
@@ -113,7 +122,7 @@ export const AuthForm = ({ onHeaderChange, onSubHeaderChange, onFormDataSubmit }
                 rules={[{ required: true, message: 'Please input a token symbol' }]}
                 key="tokenSymbol"
               >
-                <Input Icon={AccountBookOutlined} label="tokenSymbol" placeholder="Choose your token's name" />
+                <Input Icon={AccountBookOutlined} label="tokenSymbol" placeholder="Choose your token's symbol" />
               </Form.Item>
             </div>
           </Row>
