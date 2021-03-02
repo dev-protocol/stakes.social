@@ -1582,6 +1582,14 @@
     bent "^7.3.12"
     ramda "^0.27.0"
 
+"@devprotocol/khaos-kit@1.0.1":
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@devprotocol/khaos-kit/-/khaos-kit-1.0.1.tgz#2f36be1bb40894a5d2c36736add5274b38dc6b21"
+  integrity sha512-qdwMUC8B/lQAUseovJ8zWbAJfjk1fgWXQC89wOzKyh72S3pjQi/ucWev6sEq1ft7pF79gHSaKVi2sE4t3FtKYg==
+  dependencies:
+    bent "^7.3.12"
+    ramda "^0.27.1"
+
 "@electron/get@^1.0.1":
   version "1.12.2"
   resolved "https://registry.yarnpkg.com/@electron/get/-/get-1.12.2.tgz#6442066afb99be08cefb9a281e4b4692b33764f3"
