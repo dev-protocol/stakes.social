@@ -32,7 +32,6 @@ import {
 import { INITIAL_SHARES_PER_TOKEN, ONE_MONTH_SECONDS, SYSTEM_SETTIMEOUT_MAXIMUM_DELAY_VALUE } from '../constants/number'
 import { getBlock } from 'src/fixtures/wallet/utility'
 import { useProvider } from 'src/fixtures/wallet/hooks'
-import { INFURA_ENDPOINT } from 'src/fixtures/wallet/constants'
 import { useTheGraph } from '../uniswap-pool/hooks'
 
 const getAllTokensClaimed = (client: Web3) => () =>
