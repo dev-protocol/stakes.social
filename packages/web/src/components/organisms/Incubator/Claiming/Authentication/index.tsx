@@ -65,7 +65,7 @@ const ErrorScreen = ({ onIsWrongChange }: ErrorScreenProps) => {
     <ErrorScreenContainer>
       <H1S style={{ color: '#FF3815' }}>Oops! Something went wrong...</H1S>
       <Text1L style={{ paddingTop: '1.5em' }}>
-        Ensure the URL you submitted is correct. Try Again or Go back to homepage.
+        Ensure the data you submitted is correct. Try Again or Go back to homepage.
       </Text1L>
       <ErrorLinkContainer>
         <Link href="/incubator">

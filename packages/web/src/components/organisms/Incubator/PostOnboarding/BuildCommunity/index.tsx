@@ -3,13 +3,16 @@ import styled from 'styled-components'
 import ReactMarkdown from 'react-markdown'
 import { useClipboard } from 'use-clipboard-copy'
 
-import { H1S, Text1M, Text2M } from '../../Typography'
-import { AnimationContainer, Container, DescriptionContainer, BoardingNavigation } from '../../molecules/Onboarding'
+import { H1S, Text1M, Text2M, LinkB } from '../../Typography'
+import { AnimationContainer, Container, DescriptionContainer } from '../../molecules/Onboarding'
 import { GithubIcon } from '../../Icons'
+import Link from 'next/link'
+import { Button } from '../../molecules/Button'
 
 type PostOnboardType = {
   onActivePageChange: React.Dispatch<React.SetStateAction<number>>
   projectAddress: string
+  isOverview?: boolean
 }
 
 const LinkWithIcon = styled.button`
@@ -82,7 +85,17 @@ const IconContainer = styled.div`
   }
 `
 
-const BuildCommunity = ({ onActivePageChange, projectAddress }: PostOnboardType) => {
+export const NextButtonContainer = styled.div`
+  padding-bottom: 1em;
+  width: 100%;
+  height: fit-content;
+  display: flex;
+  grid-area: navigation;
+  justify-content: space-between;
+  align-items: center;
+`
+
+const BuildCommunity = ({ onActivePageChange, projectAddress, isOverview }: PostOnboardType) => {
   return (
     <Container>
       <AnimationContainer>
@@ -97,10 +110,18 @@ const BuildCommunity = ({ onActivePageChange, projectAddress }: PostOnboardType)
           your Github so users know they can earn money by supporting your project!
         </Text1M>
         <CopyBadge propertyAddress={projectAddress} />
-        <BoardingNavigation
-          backwardCallback={() => onActivePageChange(4)}
-          forwardCallback={() => onActivePageChange(1)}
-        />
+        <div
+          style={{ display: 'flex', flexGrow: 1, width: '100%', flexDirection: 'column', justifyContent: 'flex-end' }}
+        >
+          <NextButtonContainer style={{ justifyContent: 'space-between' }}>
+            <LinkB onClick={() => onActivePageChange(4)}>Back</LinkB>
+            {!isOverview && (
+              <Link href="/[propertyAddress]" as={`/${projectAddress}`}>
+                <Button>Next</Button>
+              </Link>
+            )}
+          </NextButtonContainer>
+        </div>
       </DescriptionContainer>
     </Container>
   )

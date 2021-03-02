@@ -42,7 +42,7 @@ const IncubatorHeader = () => {
   const { accountAddress } = useProvider()
 
   return (
-    <div>
+    <div style={{ background: '#fafafa', zIndex: -2 }}>
       <HeaderContainer>
         <Link href="/incubator" passHref>
           <div style={{ cursor: 'pointer' }}>

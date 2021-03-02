@@ -8,8 +8,7 @@ type AuthenticationProps = {
 }
 
 const Wrap = styled.div`
-  display: grid;
-  grid-template-columns: auto 1fr;
+  display: flex;
 `
 
 const ImageWrap = styled.div`

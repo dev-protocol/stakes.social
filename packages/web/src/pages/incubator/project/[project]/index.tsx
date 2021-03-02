@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
@@ -39,6 +39,7 @@ const Container = styled.div`
 
 const BackArrowContainer = styled.div`
   display: flex;
+  height: 30px;
 
   > svg {
     cursor: pointer;
@@ -258,7 +259,7 @@ const OnboardingSection = ({ isModal, onStateChange, onBoardChange, isOnboarding
       {activePart === 2 && <PurchaseEthereum onActivePartChange={setActivePart} />}
       {activePart === 3 && <ConnectWallet onActivePartChange={setActivePart} />}
       {activePart === 4 && <CopyPat onActivePartChange={setActivePart} />}
-      {activePart === 5 && <SubmitTransaction onActivePartChange={setActivePart} />}
+      {activePart === 5 && <SubmitTransaction onStateChange={onStateChange} onActivePartChange={setActivePart} />}
     </>
   )
 }
@@ -294,6 +295,10 @@ const OnboardingPage = ({ project }: OnboardingPageProps) => {
   const [createdMetrics, setCreatedMetrics] = useState<string | undefined>()
   const [isOnboarding, setIsOnboarding] = useState(true)
 
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [currentState])
+
   return (
     <div style={{ position: 'relative', display: 'flex', minHeight: '100vh', flexDirection: 'column' }}>
       <IncubatorHeader />
@@ -307,7 +312,7 @@ const OnboardingPage = ({ project }: OnboardingPageProps) => {
             </Link>
           )}
 
-          {(currentState === 'authentication' || currentState === 'onboarding') && (
+          {((currentState === 'authentication' && !createdMetrics) || currentState === 'onboarding') && (
             <div onClick={() => setCurrentState('overview')} style={{ cursor: 'pointer' }}>
               <BackArrow />
             </div>
@@ -340,7 +345,7 @@ const OnboardingPage = ({ project }: OnboardingPageProps) => {
         {currentState === 'success' && <ClaimSuccesful project={project} onStateChange={setCurrentState} />}
 
         {currentState === 'whatsnext' && (
-          <WhatsNext project={project} onBoardChange={setIsOnboarding} isOnboarding={false} />
+          <WhatsNext project={project} isOverview={false} onBoardChange={setIsOnboarding} isOnboarding={false} />
         )}
       </Container>
 

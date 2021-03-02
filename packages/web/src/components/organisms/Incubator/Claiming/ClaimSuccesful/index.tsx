@@ -10,6 +10,7 @@ import Hr from '../../molecules/Hr'
 import { Incubator } from 'src/fixtures/dev-for-apps/utility'
 import { SetOnboardingPageStatus } from 'src/pages/incubator/project/[project]'
 import GitHubLink from '../Authentication/GitHubLink'
+import Link from 'next/link'
 
 const SuccessMessageContainer = styled.div`
   display: flex;
@@ -77,9 +78,17 @@ const ClaimSuccesful = ({ onStateChange, project }: ClaimSuccesfulProps) => {
           </Text1L>
           <SpaceBetween style={{ paddingTop: '48px', alignItems: 'center' }}>
             <div style={{ display: 'flex', height: 'fit-content' }}>
-              <LinkB>Receipt</LinkB>
+              <LinkB
+                target="_blank"
+                rel="noopener noreferrer"
+                href={`https://etherscan.io/address/${project.property?.address}`}
+              >
+                Receipt
+              </LinkB>
               <div style={{ paddingRight: '1em', marginRight: '1em', borderRight: '1px solid black' }} />
-              <LinkB>Stakes.Social</LinkB>
+              <Link href="/[propertyAddress]" as={`/${project.property?.address}`}>
+                <LinkB>Stakes.Social</LinkB>
+              </Link>
             </div>
             <Button onClick={() => onStateChange('whatsnext')} style={{ width: '168px', height: '48px' }}>
               Next steps

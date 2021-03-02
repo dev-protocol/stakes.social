@@ -30,10 +30,7 @@ const DownloadMetamask = ({ onActivePartChange }: DownloadMetamaskType) => {
         >
           Download MetaMask Browser Extension for Chrome
         </LinkB>
-        <BoardingNavigation
-          backwardCallback={() => onActivePartChange(5)}
-          forwardCallback={() => onActivePartChange(2)}
-        />
+        <BoardingNavigation forwardCallback={() => onActivePartChange(2)} />
       </DescriptionContainer>
     </Container>
   )

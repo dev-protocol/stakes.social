@@ -3,12 +3,14 @@ import React from 'react'
 import { H1S, Text1M } from 'src/components/organisms/Incubator/Typography'
 import Animation from './Animations'
 import { Container, AnimationContainer, DescriptionContainer, BoardingNavigation } from '../../molecules/Onboarding'
+import { SetOnboardingPageStatus } from 'src/pages/incubator/project/[project]'
 
 type SubmitTranscriptType = {
   onActivePartChange: React.Dispatch<React.SetStateAction<number>>
+  onStateChange: SetOnboardingPageStatus
 }
 
-const SubmitTransaction = ({ onActivePartChange }: SubmitTranscriptType) => {
+const SubmitTransaction = ({ onActivePartChange, onStateChange }: SubmitTranscriptType) => {
   return (
     <Container>
       <AnimationContainer>
@@ -23,7 +25,7 @@ const SubmitTransaction = ({ onActivePartChange }: SubmitTranscriptType) => {
         </Text1M>
         <BoardingNavigation
           backwardCallback={() => onActivePartChange(4)}
-          forwardCallback={() => onActivePartChange(1)}
+          forwardCallback={() => onStateChange('authentication')}
         />
       </DescriptionContainer>
     </Container>

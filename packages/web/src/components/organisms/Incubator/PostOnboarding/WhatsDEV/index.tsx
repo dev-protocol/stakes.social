@@ -73,10 +73,7 @@ const WhatsDEV = ({ onActivePageChange }: PostOnboardType) => {
           projects to earn money by supporting each other. The Protocol’s APY is based on DEV staked on the protocol and
           OSS projects onboarded.
         </Text1M>
-        <BoardingNavigation
-          backwardCallback={() => onActivePageChange(5)}
-          forwardCallback={() => onActivePageChange(2)}
-        />
+        <BoardingNavigation forwardCallback={() => onActivePageChange(2)} />
       </DescriptionContainer>
     </Container>
   )

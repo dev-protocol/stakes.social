@@ -109,7 +109,7 @@ const TreasuryFee = ({ onHandleClick, address, isSucces }: MintedProps) => {
           <DecCurrencySmall />
         </div>
         <div style={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
-          <H1Xss style={{ width: 'fit-content', alignSelf: 'flex-end' }}>500,000</H1Xss>
+          <H1Xss style={{ width: 'fit-content', alignSelf: 'flex-end' }}>750,000</H1Xss>
         </div>
       </div>
       <div style={{ display: 'flex', alignItems: 'center' }}>
@@ -136,7 +136,7 @@ const YouReceive = ({ address }: { address?: string }) => {
           <DecCurrencySmall />
         </div>
         <div style={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
-          <H1Xss style={{ width: 'fit-content', alignSelf: 'flex-end' }}>9,500,000</H1Xss>
+          <H1Xss style={{ width: 'fit-content', alignSelf: 'flex-end' }}>9,250,000</H1Xss>
         </div>
       </div>
       <H1Xss>{symbol}</H1Xss>

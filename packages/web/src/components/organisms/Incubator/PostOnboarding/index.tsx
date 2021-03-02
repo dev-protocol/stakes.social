@@ -88,7 +88,11 @@ const PostOnboarding = ({ isOverview, isOnboarding, onBoardChange, project }: Wh
       {activePart === 4 && <OssTokenExplanation onActivePageChange={setActivePart} />}
 
       {activePart === 5 && project.property?.address && (
-        <BuildCommunity projectAddress={project.property.address} onActivePageChange={setActivePart} />
+        <BuildCommunity
+          isOverview={isOverview}
+          projectAddress={project.property.address}
+          onActivePageChange={setActivePart}
+        />
       )}
     </>
   )

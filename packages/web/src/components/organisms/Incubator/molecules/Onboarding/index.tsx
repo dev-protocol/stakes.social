@@ -39,16 +39,16 @@ export const Container = styled.div<{ isOverview?: boolean }>`
 `
 
 type BoardingNavigationType = {
-  forwardCallback: () => void
-  backwardCallback: () => void
+  forwardCallback?: () => void
+  backwardCallback?: () => void
 }
 
 export const BoardingNavigation = ({ backwardCallback, forwardCallback }: BoardingNavigationType) => {
   return (
     <div style={{ display: 'flex', flexGrow: 1, width: '100%', flexDirection: 'column', justifyContent: 'flex-end' }}>
-      <NextButtonContainer>
-        <LinkB onClick={backwardCallback}>Back</LinkB>
-        <Button onClick={forwardCallback}>Next</Button>
+      <NextButtonContainer style={{ justifyContent: !backwardCallback ? 'flex-end' : 'space-between' }}>
+        {backwardCallback && <LinkB onClick={backwardCallback}>Back</LinkB>}
+        {forwardCallback && <Button onClick={forwardCallback}>Next</Button>}
       </NextButtonContainer>
     </div>
   )
