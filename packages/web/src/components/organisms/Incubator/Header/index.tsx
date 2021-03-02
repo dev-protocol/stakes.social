@@ -3,6 +3,8 @@ import { IncubatorLogo } from 'src/components/organisms/Incubator/Icons'
 import styled from 'styled-components'
 import Link from 'next/link'
 import { useConnectWallet, useProvider } from 'src/fixtures/wallet/hooks'
+import { getPath } from 'src/fixtures/utility/route'
+import { useRouter } from 'next/router'
 
 const HeaderContainer = styled.div`
   display: grid;
@@ -41,8 +43,10 @@ const IncubatorHeader = () => {
   const { isConnected, connect, isConnecting } = useConnectWallet()
   const { accountAddress } = useProvider()
 
+  const [parent, sub] = getPath(useRouter().asPath)
+  const isLandingPage = parent === 'incubator' && !sub
   return (
-    <div style={{ background: '#fafafa', zIndex: -2 }}>
+    <div style={{ background: isLandingPage ? '#fafafa' : 'white', zIndex: -2 }}>
       <HeaderContainer>
         <Link href="/incubator" passHref>
           <div style={{ cursor: 'pointer' }}>
