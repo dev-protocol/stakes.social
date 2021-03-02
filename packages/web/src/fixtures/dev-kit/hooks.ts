@@ -39,9 +39,7 @@ import { useState, useCallback } from 'react'
 import BigNumber from 'bignumber.js'
 import { useProvider } from 'src/fixtures/wallet/hooks'
 import { useCurrency } from 'src/fixtures/currency/functions/useCurrency'
-import Web3 from 'web3'
 import { isAddress } from 'web3-utils'
-import { INFURA_ENDPOINT } from 'src/fixtures/wallet/constants'
 
 const validAddress = (address: string = ''): boolean =>
   typeof address === 'string' && isAddress(address) && address.length === 42
@@ -558,13 +556,10 @@ export const useBalanceOf = () => {
 }
 
 export const useAllClaimedRewards = () => {
-  // TODO: use own node
-  // NOTE: use Infura now becuase calling getPastEvents is very slow or error occured
-  const web3 = new Web3(INFURA_ENDPOINT)
   const { currency, toCurrency } = useCurrency()
-  const { accountAddress } = useProvider()
+  const { nonConnectedWeb3, accountAddress } = useProvider()
   const { data, error } = useSWR<BigNumber | undefined, Error>(SWRCachePath.allClaimedRewards(accountAddress), () =>
-    whenDefinedAll([web3, accountAddress], ([client, account]) =>
+    whenDefinedAll([nonConnectedWeb3, accountAddress], ([client, account]) =>
       allClaimedRewards(client, account).then(allEvents => {
         return allEvents.reduce((a, c) => a.plus(c.returnValues.value), toBigNumber(0))
       })
