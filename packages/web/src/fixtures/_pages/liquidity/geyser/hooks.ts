@@ -49,9 +49,7 @@ const getTokensLocked = (client: Web3) => () =>
   })
 
 export const useTotalRewards = () => {
-  // TODO: use own node
-  // NOTE: use Infura now becuase calling getPastEvents is very slow or error occured
-  const web3 = new Web3(INFURA_ENDPOINT)
+  const { nonConnectedWeb3: web3 } = useProvider()
   const { data, error } = useSWR<BigNumber, Error>(
     SWRCachePath.allTokensLocked,
     whenDefined(web3, x => getTokensLocked(x))
@@ -121,10 +119,7 @@ export const useUnstake = () => {
 }
 
 export const useAllTokensClaimed = () => {
-  // TODO: use own node
-  // NOTE: use Infura now becuase calling getPastEvents is very slow or error occured
-  const web3 = new Web3(INFURA_ENDPOINT)
-  const { accountAddress } = useProvider()
+  const { nonConnectedWeb3: web3, accountAddress } = useProvider()
   const { data, error } = useSWR<BigNumber, Error>(
     SWRCachePath.useAllTokensClaimed(accountAddress),
     whenDefined(web3, x => getAllTokensClaimed(x))
@@ -263,10 +258,7 @@ export const useIsAlreadyFinished = ([state, stateSetter]: [boolean, Dispatch<Se
 }
 
 export const useRewardMultiplier = () => {
-  // TODO: use own node
-  // NOTE: use Infura now becuase calling getPastEvents is very slow or error occured
-  const web3 = new Web3(INFURA_ENDPOINT)
-  const { nonConnectedWeb3, accountAddress } = useProvider()
+  const { nonConnectedWeb3: web3, accountAddress } = useProvider()
   const { data: block, error: errorGetStaked, mutate } = useSWR<number | undefined, Error>(
     SWRCachePath.getStaked(accountAddress),
     () =>
@@ -282,11 +274,11 @@ export const useRewardMultiplier = () => {
   )
   const { data: bonusPeriod, error: errorBonusPeriodSec } = useSWR<undefined | BigNumber, Error>(
     SWRCachePath.getBonusPeriodSec(accountAddress),
-    () => whenDefined(nonConnectedWeb3, x => bonusPeriodSec(x))
+    () => whenDefined(web3, x => bonusPeriodSec(x))
   )
   const { data: _startBonus, error: errorStartBonus } = useSWR<undefined | BigNumber, Error>(
     SWRCachePath.getStartBonus(accountAddress),
-    () => whenDefined(nonConnectedWeb3, x => startBonus(x))
+    () => whenDefined(web3, x => startBonus(x))
   )
   const startBonusPct = _startBonus ? toBigNumber(_startBonus).div(100) : toBigNumber(0)
   const multiplier =
