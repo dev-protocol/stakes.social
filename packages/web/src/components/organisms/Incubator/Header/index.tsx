@@ -46,7 +46,7 @@ const IncubatorHeader = () => {
   const [parent, sub] = getPath(useRouter().asPath)
   const isLandingPage = parent === 'incubator' && !sub
   return (
-    <div style={{ background: isLandingPage ? '#fafafa' : 'white', zIndex: -2 }}>
+    <div style={{ background: isLandingPage ? '#fafafa' : 'white' }}>
       <HeaderContainer>
         <Link href="/incubator" passHref>
           <div style={{ cursor: 'pointer' }}>
