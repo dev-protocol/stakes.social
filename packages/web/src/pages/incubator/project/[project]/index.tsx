@@ -163,7 +163,10 @@ const ProjectDetails = ({ claimed, onStateChange, project }: ProjectDetailsProps
             <Text1S color="#CCCCCC">Funding received</Text1S>
             <SpaceBetween>
               <DevCurrencyContainer>
-                <DevCurrencySymbol />
+                <div style={{ transform: 'translateY(1px)' }}>
+                  <DevCurrencySymbol />
+                </div>
+
                 <H1M style={{ marginLeft: '5px', transform: 'translateY(-2px)' }}>{fundingDEV} DEV</H1M>
               </DevCurrencyContainer>
               <Button disabled={claimed} onClick={() => onStateChange('onboarding')}>
