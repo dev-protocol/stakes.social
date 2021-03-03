@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 export const Span = styled.span<{ fontSize?: string; fontWeight?: string; color?: string }>`
   font-family: WhyteInktrap;
@@ -10,7 +10,7 @@ export const Span = styled.span<{ fontSize?: string; fontWeight?: string; color?
   }
 `
 
-export const LinkB = styled.a`
+export const LinkB = styled.a<{ isDisabled?: string }>`
   font-family: 'IBM Plex Mono';
   font-size: 16px;
   text-decoration: none;
@@ -25,6 +25,15 @@ export const LinkB = styled.a`
     color: #5b8bf5;
     border-bottom: 1px solid #5b8bf5;
   }
+
+  ${({ isDisabled }) => css`
+    ${isDisabled &&
+    css`
+      pointer-events: none;
+      color: #cccccc;
+      border-bottom: 1px solid #cccccc;
+    `}
+  `}
 `
 
 export const H1Large = styled(Span)`

@@ -26,9 +26,12 @@ const MintedTokensContainer = styled.div`
 `
 
 const InfoIconContainer = styled.div`
+  position: absolute;
+  top: 0;
+  left: 175px;
   cursor: pointer;
   margin-left: 2px;
-  transform: translateY(-2.5px);
+  transform: translateY(4px);
 `
 
 type MintedTokensType = {
@@ -63,7 +66,7 @@ const TotalMinted = ({ address, isSucces, onHandleClick }: MintedProps) => {
 
   return (
     <>
-      <div style={{ display: 'flex' }}>
+      <div style={{ position: 'relative', display: 'flex' }}>
         <Text2M>{symbol} tokens Minted</Text2M>
         <InfoIconContainer>
           <div title="The 'shares' of your OSS project">
@@ -94,7 +97,7 @@ const TreasuryFee = ({ onHandleClick, address, isSucces }: MintedProps) => {
 
   return (
     <>
-      <div style={{ display: 'flex' }}>
+      <div style={{ position: 'relative', display: 'flex' }}>
         <div style={{ width: 'fit-content', display: 'flex', position: 'relative' }}>
           <Text2M>Treasury Fee</Text2M>
           <InfoIconContainer style={{ position: 'absolute', top: '0px', right: '-16px' }}>

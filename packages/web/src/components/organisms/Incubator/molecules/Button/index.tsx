@@ -31,8 +31,8 @@ export const Button = styled(antButton)<{
       ${disabled &&
       css`
         pointer-events: none;
-        background: #999999;
-        color: ${textColor || 'white'};
+        background: #cccccc;
+        color: #eeeeee;
       `}
     `}
   }

@@ -62,6 +62,12 @@ export const Input = styled.input`
   border-bottom: 1px solid #cccccc;
   transition: all 0.2s ease-in;
 
+  font-family: 'IBM Plex Mono';
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 32px;
+  color: black;
+
   &:hover {
     transition: all 0.2s ease-in;
     border-bottom: 1px solid #5b8bf5;

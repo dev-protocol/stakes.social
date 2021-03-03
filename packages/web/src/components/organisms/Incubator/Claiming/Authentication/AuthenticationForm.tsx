@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
-import styled from 'styled-components'
-import { Alert, Form, message } from 'antd'
+import styled, { css } from 'styled-components'
+import { Form, message } from 'antd'
 import { LinkB, Text2M, H1Large, Text2S } from '../../Typography'
 import { Button } from '../../molecules/Button'
 import { ClipboardIcon } from '../../Icons'
@@ -9,6 +9,7 @@ import { Incubator } from 'src/fixtures/dev-for-apps/utility'
 import { useAuthenticate } from 'src/fixtures/_pages/incubator/hooks'
 import { CheckCircleOutlined } from '@ant-design/icons'
 import { SetOnboardingPageStatus } from 'src/pages/incubator/project/[project]'
+import DownArrow from '../../molecules/DownArrow'
 
 const AuthenticationContainer = styled.div`
   position: relative;
@@ -24,7 +25,7 @@ const FormContainer = styled.div`
   align-self: center;
 `
 
-const OurDocsLink = styled.a`
+const OurDocsLink = styled.a<{ isDisabled?: string }>`
   font-size: 14px;
   text-decoration: none;
   color: #5b8bf5;
@@ -34,6 +35,15 @@ const OurDocsLink = styled.a`
   :hover {
     color: #5b8bf5;
   }
+
+  ${({ isDisabled }) => css`
+    ${isDisabled &&
+    css`
+      pointer-events: none;
+      color: #cccccc;
+      border-bottom: 1px solid #cccccc;
+    `}
+  `}
 `
 
 const SpaceBetween = styled.div`
@@ -49,14 +59,6 @@ export const InputContainer = styled(Form.Item)`
 
 const ButtonWithIcon = styled(Button)`
   width: 130px;
-`
-
-const StyledAlert = styled(Alert)`
-  margin: -15px;
-  margin-top: 2rem;
-  border-radius: 0;
-  background: #cce4ff;
-  font-family: 'IBM Plex Mono';
 `
 
 const FormItem = styled(Form.Item)<{ isError?: boolean }>`
@@ -84,6 +86,11 @@ export const Input = styled.input`
   outline: none;
   border-bottom: 1px solid #cccccc;
   transition: all 0.2s ease-in;
+  font-family: 'IBM Plex Mono';
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 32px;
+  color: black;
 
   &:hover {
     transition: all 0.2s ease-in;
@@ -179,6 +186,26 @@ const ProgressContainer = styled.div`
   display: flex;
 `
 
+const SignSubmitProgress = styled.div`
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  margin-top: 12px;
+`
+
+const SubHr = styled.div`
+  height: 20px;
+  border-top: 1px solid #cccccc;
+  transform: translateY(0.75em);
+`
+
+const DownArrowContainer = styled.div`
+  padding: 0 1em;
+
+  path {
+    fill: ${props => props.color || '#cccccc'};
+  }
+`
+
 const IS_DEVELOPMENT_ENV = process.env.NODE_ENV === 'development'
 
 const AuthenticationForm = ({ onStateChange, onMetricsCreated, project, onIsWrongChange }: AuthenticationProps) => {
@@ -264,9 +291,14 @@ const AuthenticationForm = ({ onStateChange, onMetricsCreated, project, onIsWron
           </FormItem>
 
           <div style={{ display: 'flex', marginTop: '1rem' }}>
-            <Text2S style={{ width: 'inherit' }} color="#5B8BF5">
+            <Text2S style={{ width: 'inherit', color: !publicSignature ? '#5B8BF5' : '#cccccc' }}>
               The Khaos Oracle confidentially authenticates your Github Personal Access Token. Please see{' '}
-              <OurDocsLink rel="noopener noreferrer" target="_blank" href="https://github.com/dev-protocol/khaos">
+              <OurDocsLink
+                color={!publicSignature ? '#5B8BF5' : '#cccccc'}
+                rel="noopener noreferrer"
+                target="_blank"
+                href="https://github.com/dev-protocol/khaos"
+              >
                 our docs
               </OurDocsLink>{' '}
               for more details.
@@ -275,7 +307,12 @@ const AuthenticationForm = ({ onStateChange, onMetricsCreated, project, onIsWron
 
           <SpaceBetween style={{ alignItems: 'center', marginTop: '2rem' }}>
             <div style={{ height: 'fit-content' }}>
-              <LinkB rel="noopener noreferrer" target="_blank" href="https://github.com/settings/tokens/new">
+              <LinkB
+                isDisabled={publicSignature}
+                rel="noopener noreferrer"
+                target="_blank"
+                href="https://github.com/settings/tokens/new"
+              >
                 Create a PAT
               </LinkB>
             </div>
@@ -289,16 +326,21 @@ const AuthenticationForm = ({ onStateChange, onMetricsCreated, project, onIsWron
               Sign
             </ButtonWithIcon>
           </SpaceBetween>
-
-          {publicSignature && (
-            <StyledAlert
-              message="Authentication"
-              showIcon
-              description="Verification of the credential has been completed. Please submit the signature to finalize authentication."
-              type="info"
-              action={<ButtonWithIcon onClick={onSend}>Submit</ButtonWithIcon>}
-            />
-          )}
+          <SignSubmitProgress>
+            <SubHr />
+            <DownArrowContainer color={publicSignature && '#5B8BF5'}>
+              <DownArrow />
+            </DownArrowContainer>
+            <SubHr />
+          </SignSubmitProgress>
+          <Text2S style={{ marginTop: '12px', color: publicSignature ? '#5B8BF5' : '#cccccc' }}>
+            Verification of the credential has been completed. Please submit the signature to finalize authentication.
+          </Text2S>
+          <div style={{ marginTop: '1em', display: 'flex', justifyContent: 'flex-end' }}>
+            <ButtonWithIcon disabled={!publicSignature} onClick={onSend}>
+              Submit
+            </ButtonWithIcon>
+          </div>
         </StyledForm>
       </FormContainer>
     </AuthenticationContainer>
