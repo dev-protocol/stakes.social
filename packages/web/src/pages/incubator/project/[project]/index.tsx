@@ -74,6 +74,15 @@ const IconContainer = styled.div`
   cursor: pointer;
   padding-left: 8px;
   padding-right: 8px;
+
+  :first-child {
+    padding-left: 0px;
+  }
+
+  :last-child {
+    padding-right: 0px;
+  }
+
   > a {
     text-decoration: none;
   }
@@ -167,7 +176,7 @@ const ProjectDetails = ({ claimed, onStateChange, project }: ProjectDetailsProps
                   <DevCurrencySymbol />
                 </div>
 
-                <H1M style={{ marginLeft: '5px', transform: 'translateY(-2px)' }}>{fundingDEV} DEV</H1M>
+                <H1M style={{ marginLeft: '8px', transform: 'translateY(-2px)' }}>{fundingDEV} DEV</H1M>
               </DevCurrencyContainer>
               <Button disabled={claimed} onClick={() => onStateChange('onboarding')}>
                 {claimed ? 'Claimed' : 'Claim'}

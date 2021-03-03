@@ -294,7 +294,7 @@ const AuthenticationForm = ({ onStateChange, onMetricsCreated, project, onIsWron
             <Text2S style={{ width: 'inherit', color: !publicSignature ? '#5B8BF5' : '#cccccc' }}>
               The Khaos Oracle confidentially authenticates your Github Personal Access Token. Please see{' '}
               <OurDocsLink
-                color={!publicSignature ? '#5B8BF5' : '#cccccc'}
+                isDisabled={publicSignature}
                 rel="noopener noreferrer"
                 target="_blank"
                 href="https://github.com/dev-protocol/khaos"
