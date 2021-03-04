@@ -146,7 +146,7 @@ const Jumbo = () => {
         <RoundRewardContainer>
           <Round>
             <H3Xs color="#999999">Round 1 ends in</H3Xs>
-            <Countdown date={new Date('June 5, 2021 00:00:00')} renderer={renderer} />
+            <Countdown date={new Date('June 3, 2021 00:00:00')} renderer={renderer} />
           </Round>
           <RewardCollected>
             <TotalFundingGrantedContainer>Total funding granted</TotalFundingGrantedContainer>
