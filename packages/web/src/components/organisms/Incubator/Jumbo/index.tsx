@@ -37,7 +37,7 @@ const SubTitleContainer = styled.div`
   max-width: 360px;
 
   @media (max-width: 768px) {
-    padding-top: 3em;
+    padding-top: 1.5em;
   }
 `
 
@@ -50,7 +50,7 @@ const RoundRewardContainer = styled.div`
   @media (max-width: 768px) {
     flex-direction: column;
     justify-content: flex-start;
-    padding-top: 2em;
+    padding-top: 1em;
   }
 `
 
