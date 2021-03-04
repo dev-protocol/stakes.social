@@ -74,6 +74,15 @@ const TotalFundingGrantedContainer = styled(H3Xs)`
   color: #999999;
 `
 
+const BiggieSmalls = styled(H1M)`
+  @media (max-width: 768px) {
+    font-size: 24px;
+    font-family: WhyteInktrap;
+    font-weight: 700;
+    line-height: 40px;
+  }
+`
+
 const Completionist = () => <H1M color="#0A0A0A">Round 1 of incubator has finished</H1M>
 
 // Renderer callback with condition
@@ -82,9 +91,9 @@ const renderer = ({ formatted, completed }: CountdownRenderProps) => {
     return <Completionist />
   } else {
     return (
-      <H1M>
+      <BiggieSmalls>
         {formatted.days}d:{formatted.hours}h:{formatted.minutes}m:{formatted.seconds}s
-      </H1M>
+      </BiggieSmalls>
     )
   }
 }
@@ -150,9 +159,9 @@ const Jumbo = () => {
           </Round>
           <RewardCollected>
             <TotalFundingGrantedContainer>Total funding granted</TotalFundingGrantedContainer>
-            <H1M>
+            <BiggieSmalls>
               {currency === 'USD' && '$ '} {convertedFunding} {currency}
-            </H1M>
+            </BiggieSmalls>
           </RewardCollected>
         </RoundRewardContainer>
       </JumboContainer>
