@@ -100,6 +100,7 @@ const ProjectEntry = ({ project }: ProjectProps) => {
   // Probably fetch data per project async here
   const { currency, reward } = useGetReward(project.verifier_id)
   const convertedFunding = reward ? reward.dp(0).toNumber().toLocaleString() : 0
+  console.log('reward', reward?.toFixed())
   const CLAIMED = false
   return (
     <ProjectContainer>

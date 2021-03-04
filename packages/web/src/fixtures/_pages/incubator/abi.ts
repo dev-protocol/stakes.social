@@ -67,7 +67,7 @@ export const abi = [
       {
         indexed: false,
         internalType: 'uint256',
-        name: '_reword',
+        name: '_reward',
         type: 'uint256'
       },
       {
@@ -298,6 +298,24 @@ export const abi = [
     inputs: [
       {
         internalType: 'address',
+        name: '_token',
+        type: 'address'
+      },
+      {
+        internalType: 'address',
+        name: '_author',
+        type: 'address'
+      }
+    ],
+    name: 'changeAuthor',
+    outputs: [],
+    stateMutability: 'nonpayable',
+    type: 'function'
+  },
+  {
+    inputs: [
+      {
+        internalType: 'address',
         name: 'newOwner',
         type: 'address'
       }
@@ -493,6 +511,25 @@ export const abi = [
         type: 'string'
       }
     ],
+    name: 'getReward',
+    outputs: [
+      {
+        internalType: 'uint256',
+        name: '',
+        type: 'uint256'
+      }
+    ],
+    stateMutability: 'view',
+    type: 'function'
+  },
+  {
+    inputs: [
+      {
+        internalType: 'string',
+        name: '_githubRepository',
+        type: 'string'
+      }
+    ],
     name: 'getRewardLimit',
     outputs: [
       {
@@ -513,25 +550,6 @@ export const abi = [
       }
     ],
     name: 'getRewardLowerLimit',
-    outputs: [
-      {
-        internalType: 'uint256',
-        name: '',
-        type: 'uint256'
-      }
-    ],
-    stateMutability: 'view',
-    type: 'function'
-  },
-  {
-    inputs: [
-      {
-        internalType: 'string',
-        name: '_githubRepository',
-        type: 'string'
-      }
-    ],
-    name: 'getReword',
     outputs: [
       {
         internalType: 'uint256',
@@ -804,6 +822,11 @@ export const abi = [
     inputs: [
       {
         internalType: 'address',
+        name: '_token',
+        type: 'address'
+      },
+      {
+        internalType: 'address',
         name: '_to',
         type: 'address'
       },
@@ -878,6 +901,29 @@ export const abi = [
   {
     inputs: [
       {
+        internalType: 'string',
+        name: '_githubRepository',
+        type: 'string'
+      },
+      {
+        internalType: 'uint256',
+        name: '_rewardLimit',
+        type: 'uint256'
+      },
+      {
+        internalType: 'uint256',
+        name: '_rewardLowerLimit',
+        type: 'uint256'
+      }
+    ],
+    name: 'setRewardLimitAndLowerLimit',
+    outputs: [],
+    stateMutability: 'nonpayable',
+    type: 'function'
+  },
+  {
+    inputs: [
+      {
         internalType: 'address',
         name: '_storageAddress',
         type: 'address'
@@ -917,24 +963,6 @@ export const abi = [
       }
     ],
     name: 'start',
-    outputs: [],
-    stateMutability: 'nonpayable',
-    type: 'function'
-  },
-  {
-    inputs: [
-      {
-        internalType: 'address',
-        name: '_property',
-        type: 'address'
-      },
-      {
-        internalType: 'uint256',
-        name: '_amount',
-        type: 'uint256'
-      }
-    ],
-    name: 'withdrawLockup',
     outputs: [],
     stateMutability: 'nonpayable',
     type: 'function'
