@@ -163,9 +163,9 @@ const FundingReceived = ({ funding }: { funding?: number }) => {
 
 const MintedTokens = ({ isSucces, project }: MintedTokensType) => {
   const { symbol } = usePropertySymbol(project.property?.address)
-  const { reward } = useGetReward(project.verifier_id)
+  const { inUSD } = useGetReward(project.verifier_id)
   const { web3 } = useProvider()
-  const funding = whenDefined(reward, x => x.dp(0).toNumber())
+  const funding = whenDefined(inUSD, x => x.dp(0).toNumber())
 
   const addCreatorToken = useMemo(
     () =>

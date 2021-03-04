@@ -78,6 +78,13 @@ export const H2M = styled(Span)`
   line-height: 40px;
 `
 
+export const Text1Xxl = styled(Span)`
+  font-size: 32px;
+  font-family: Whyte;
+  font-weight: 400;
+  line-height: 48px;
+`
+
 export const Text1Xl = styled(Span)`
   font-size: 24px;
   font-family: Whyte;
@@ -147,6 +154,13 @@ export const H3Xs = styled(Span)`
   font-family: WhyteInktrap;
   font-weight: 400;
   line-height: 28px;
+`
+
+export const ButtonXs = styled(Span)`
+  font-size: 12px;
+  font-family: 'IBM Plex Mono';
+  font-weight: 500;
+  line-height: 20px;
 `
 
 export const ButtonM = styled(Span)`
