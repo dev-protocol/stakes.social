@@ -34,6 +34,10 @@ const RandomTipContainer = styled.div`
   margin: 0 auto;
   max-width: 1128px;
   padding: 1.5em 0;
+
+  @media (max-width: 768px) {
+    padding: 1.5em 1em 0 1em;
+  }
 `
 
 const TipGrid = styled.div`
@@ -45,6 +49,15 @@ const TipGrid = styled.div`
   grid-gap: 75px 8rem;
   padding-top: 4.25em;
   padding-bottom: 3em;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      'question'
+      'answer'
+      'all';
+    row-gap: 1em;
+  }
 `
 
 const ShowAllContainer = styled.div`
@@ -61,6 +74,10 @@ const ShowAllContainer = styled.div`
       color: #5b8bf5;
       border-bottom: 1px solid #5b8bf5;
     }
+  }
+
+  @media (max-width: 768px) {
+    display: none;
   }
 `
 

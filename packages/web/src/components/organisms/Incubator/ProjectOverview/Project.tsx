@@ -67,6 +67,10 @@ const ClaimButtonContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+
+  @media (max-width: 768px) {
+    display: none;
+  }
 `
 
 const Name = styled(H3S)`
@@ -91,7 +95,6 @@ const ProjectEntry = ({ project }: ProjectProps) => {
   // Probably fetch data per project async here
   const { currency, reward } = useGetReward(project.verifier_id)
   const convertedFunding = reward ? reward.dp(0).toNumber().toLocaleString() : 0
-  console.log('property: ', project)
   const CLAIMED = false
   return (
     <ProjectContainer>

@@ -14,6 +14,10 @@ const SocialContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: start;
+
+  @media (max-width: 768px) {
+    display: none;
+  }
 `
 const LowerFooter = {
   margin: 'unset',
@@ -26,6 +30,10 @@ const LowerFooter = {
 const FooterContainer = styled.div`
   margin: 0 auto;
   max-width: 1128px;
+
+  @media (max-width: 768px) {
+    padding: 0 1em;
+  }
 `
 
 const SocialMediaLink = styled.a`
@@ -41,6 +49,12 @@ const SocialMediaLink = styled.a`
   }
 `
 
+const MadeByDevContainer = styled.div`
+  @media (max-width: 350px) {
+    display: none;
+  }
+`
+
 export const Footer = () => {
   return (
     <Wrap>
@@ -48,9 +62,9 @@ export const Footer = () => {
         <FooterContainer>
           <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '32px' }}>
             <StakesSocialLogo />
-            <div style={{ zIndex: 9000 }}>
+            <MadeByDevContainer>
               <MadeByDev />
-            </div>
+            </MadeByDevContainer>
           </div>
           <div style={{ display: 'flex', justifyContent: 'space-between' }}>
             <H3Xs color="white">2021. All Rights Reserved</H3Xs>

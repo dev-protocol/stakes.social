@@ -12,12 +12,29 @@ const CommitteeContainer = styled.div`
   margin: 0 auto;
   max-width: 1128px;
   padding: 1.5em 0 0 0;
+
+  @media (max-width: 768px) {
+    padding: 1.5em 1em 0 1em;
+  }
 `
 
 const PersonsOverview = styled.div`
   display: flex;
   justify-content: space-evenly;
   padding: 4.25em 0 114.59px 0;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    padding: 2em 0 114.59px 0;
+
+    > div {
+      margin-top: 2em;
+    }
+
+    > div:first-child {
+      margin-top: 0;
+    }
+  }
 `
 
 const PersonContainer = styled.div`

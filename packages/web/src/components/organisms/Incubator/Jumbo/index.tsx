@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import Countdown, { CountdownRenderProps } from 'react-countdown'
+import { isBrowser, isMobile } from 'react-device-detect'
 
 import { H3Xs, H1M, Text1L } from 'src/components/organisms/Incubator/Typography'
 import { useGetEntireRewards } from 'src/fixtures/_pages/incubator/hooks'
@@ -17,6 +18,12 @@ const JumboContainer = styled.div`
   flex-grow: 1;
   padding-top: 140px;
   padding-bottom: 80px;
+
+  @media (max-width: 768px) {
+    display: flex;
+    flex-direction: column;
+    padding: 0 1em;
+  }
 `
 
 const TitleContainer = styled.div`
@@ -29,6 +36,10 @@ const SubTitleContainer = styled.div`
   display: flex;
   flex-direction: column;
   max-width: 360px;
+
+  @media (max-width: 768px) {
+    padding-top: 3em;
+  }
 `
 
 const RoundRewardContainer = styled.div`
@@ -36,6 +47,12 @@ const RoundRewardContainer = styled.div`
   justify-content: space-between;
   grid-column: 1/-1;
   z-index: 1;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    justify-content: flex-start;
+    padding-top: 2em;
+  }
 `
 
 const Round = styled.div`
@@ -46,6 +63,15 @@ const Round = styled.div`
 const RewardCollected = styled.div`
   display: flex;
   flex-direction: column;
+  @media (max-width: 768px) {
+    align-self: flex-start;
+    padding: 1em 0;
+  }
+`
+
+const TotalFundingGrantedContainer = styled(H3Xs)`
+  align-self: flex-end;
+  color: #999999;
 `
 
 const Completionist = () => <H1M color="#0A0A0A">Round 1 of incubator has finished</H1M>
@@ -70,6 +96,10 @@ const AnimationContainer = styled.div`
   left: 50%;
   transform: translateX(-50%);
   z-index: 0;
+
+  @media (max-width: 768px) {
+    display: none;
+  }
 `
 
 const Announcement = styled.a`
@@ -86,12 +116,17 @@ const Jumbo = () => {
   const { currency, reward } = useGetEntireRewards()
   const convertedFunding = reward ? reward.dp(0).toNumber().toLocaleString() : 0
 
+  console.log('isMObile isBrowser: ', isMobile, isBrowser)
+
   return (
     <div style={{ background: '#fafafa', zIndex: -1 }}>
       <JumboContainer>
-        <AnimationContainer>
-          <IncubatorAnimation />
-        </AnimationContainer>
+        {isBrowser && (
+          <AnimationContainer>
+            <IncubatorAnimation />
+          </AnimationContainer>
+        )}
+
         <TitleContainer>
           <H1M>{"It's Time to Fund"}</H1M>
           <H1M>Open Source Software.</H1M>
@@ -114,9 +149,7 @@ const Jumbo = () => {
             <Countdown date={Date.now() + 5400000000} renderer={renderer} />
           </Round>
           <RewardCollected>
-            <H3Xs style={{ alignSelf: 'flex-end' }} color="#999999">
-              Total funding granted
-            </H3Xs>
+            <TotalFundingGrantedContainer>Total funding granted</TotalFundingGrantedContainer>
             <H1M>
               {currency === 'USD' && '$ '} {convertedFunding} {currency}
             </H1M>

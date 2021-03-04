@@ -19,12 +19,20 @@ const HeaderLinkContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  @media (max-width: 768px) {
+    display: none;
+  }
 `
 
 const ConnectWalletContainer = styled.div`
   display: flex;
   justify-content: flex-end;
   align-items: center;
+
+  @media (max-width: 768px) {
+    display: none;
+  }
 `
 
 const HeaderLink = styled.a<{ color?: string }>`
@@ -39,6 +47,13 @@ const ConnectWalletLink = styled(HeaderLink)`
   }
 `
 
+const IncubatorLogoContainer = styled.div`
+  cursor: pointer;
+  @media (max-width: 768px) {
+    padding-left: 1em;
+  }
+`
+
 const IncubatorHeader = () => {
   const { isConnected, connect, isConnecting } = useConnectWallet()
   const { accountAddress } = useProvider()
@@ -49,9 +64,9 @@ const IncubatorHeader = () => {
     <div style={{ background: isLandingPage ? '#fafafa' : 'white' }}>
       <HeaderContainer>
         <Link href="/incubator" passHref>
-          <div style={{ cursor: 'pointer' }}>
+          <IncubatorLogoContainer>
             <IncubatorLogo />
-          </div>
+          </IncubatorLogoContainer>
         </Link>
 
         <HeaderLinkContainer>
@@ -71,6 +86,7 @@ const IncubatorHeader = () => {
             Stakes.social
           </HeaderLink>
         </HeaderLinkContainer>
+
         <ConnectWalletContainer>
           {isConnecting ? (
             <ConnectWalletLink color="#00D0FD">Connecting...</ConnectWalletLink>

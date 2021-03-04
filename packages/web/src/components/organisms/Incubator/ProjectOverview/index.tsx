@@ -21,6 +21,10 @@ const OverviewHeader = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  @media (max-width: 768px) {
+    padding: 0 1em;
+  }
 `
 
 const Overview = styled.div`
@@ -28,6 +32,11 @@ const Overview = styled.div`
   grid-template-columns: repeat(auto-fit, 264px); /* minmax(264px, 1fr) */
   grid-gap: 1.5em;
   padding-top: 5em;
+
+  @media (max-width: 768px) {
+    padding: 5em 2em 0 2em;
+    grid-template-columns: repeat(auto-fit, minmax(264px, 1fr)); /* minmax(264px, 1fr) */
+  }
 `
 
 const GradientContainer = styled.div<{ isExpanded?: boolean }>`
@@ -54,7 +63,7 @@ const ProjectOverview = () => {
   const { data } = useGetIncubators()
 
   const projects: Array<Incubator> = showAll && data ? data : data?.slice(0, 8) || []
-  console.log('projects: ', projects)
+
   return (
     <GradientContainer id="projects" isExpanded={showAll}>
       <ProjectOverviewContainer>
