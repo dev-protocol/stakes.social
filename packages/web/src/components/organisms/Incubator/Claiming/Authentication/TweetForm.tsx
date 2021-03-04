@@ -204,13 +204,13 @@ const StyledForm = styled(Form)`
 `
 
 const createTweetBody = (project: Incubator, funds?: string) =>
-  `${project.name} just received ${funds} in funding from the @devprtcl Incubator. Follow the link below to support us and earn by staking DEV tokens. https://stakes.social/${project.property?.address}`
+  `${project.name} just received ${funds} in funding from the @devprtcl Incubator. Follow the link below to support us by staking DEV tokens. \n \n https://stakes.social/${project.property?.address}`
 
 const IS_DEVELOPMENT_ENV = process.env.NODE_ENV === 'development'
 
 const TweetForm = ({ onStateChange, project, metricsAddress, onIsWrongChange }: AuthenticationProps) => {
   const { inUSD } = useGetReward(project.verifier_id)
-  const funds = useMemo(() => (inUSD ? `$${inUSD.dp(2).toNumber().toLocaleString()}` : '$N/A'), [inUSD])
+  const funds = useMemo(() => (inUSD ? `$${inUSD.dp(2).toNumber().toLocaleString()}` : '$0'), [inUSD])
   const [form] = Form.useForm()
   const { intermediateProcess, waitForFinishEvent } = useIntermediateProcess()
   const onSubmit = async (data: any) => {
@@ -265,10 +265,10 @@ const TweetForm = ({ onStateChange, project, metricsAddress, onIsWrongChange }: 
           <Text1L fontSize="20px" style={{ color: '#D500E6' }}>
             @devprtcl
           </Text1L>{' '}
-          Incubator. Follow the link below to support us and earn by staking DEV tokens.{' '}
-          <Text1L fontSize="20px" style={{ color: '#D500E6' }}>
+          Incubator. Follow the link below to support us by staking DEV tokens.
+          {/* <Text1L fontSize="20px" style={{ color: '#D500E6' }}>
             {`https://stakes.social/${project.property?.address}`}
-          </Text1L>
+          </Text1L> */}
         </Text1L>
         <TweetButtonContainer>
           <TweetButton
