@@ -6,7 +6,7 @@ import { utils } from '@devprotocol/dev-kit'
 
 const { execute, watchEvent } = utils
 const client: Map<string, WeakMap<Web3, Contract>> = new Map()
-const INCUBATOR_CONTRACT_ADDRESS = '0x886f06F5118536589e89A719d3D9E61B330E95B6'
+const INCUBATOR_CONTRACT_ADDRESS = '0x02d107567020bCE1Eb524D80C44f899Fa9993E5f'
 
 export const getContract = (web3: Web3, contractAddress = INCUBATOR_CONTRACT_ADDRESS): Contract => {
   const cache = client.get(contractAddress)
