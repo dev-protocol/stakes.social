@@ -6,7 +6,7 @@ import { utils } from '@devprotocol/dev-kit'
 
 const { execute, watchEvent } = utils
 const client: Map<string, WeakMap<Web3, Contract>> = new Map()
-const INCUBATOR_CONTRACT_ADDRESS = '0xb243f335ec73b9a373dc6c377bb974e487bd4b9b'
+const INCUBATOR_CONTRACT_ADDRESS = '0x7f1b8c30832ca3ABC6326A58903A3a47ade00019'
 
 export const getContract = (web3: Web3, contractAddress = INCUBATOR_CONTRACT_ADDRESS): Contract => {
   const cache = client.get(contractAddress)
@@ -96,9 +96,6 @@ export const getReward = async (client: Web3, githubRepository: string): Promise
           client,
           method: 'getReward',
           args: [githubRepository]
-        }).then(res => {
-          console.log({ githubRepository, res })
-          return res
         })
       : Promise.resolve(''))(getContract(client))
 }

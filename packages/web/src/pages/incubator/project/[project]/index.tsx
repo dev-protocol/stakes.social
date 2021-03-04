@@ -121,7 +121,7 @@ type ProjectDetailsProps = {
 
 const ProjectDetails = ({ claimed, onStateChange, project }: ProjectDetailsProps) => {
   const { inDEV, inUSD } = useGetReward(project.verifier_id)
-  const fundingDEV = inDEV ? inDEV.dp(0).toNumber().toLocaleString() : 0
+  const fundingDEV = inDEV ? inDEV.dp(2).toNumber().toLocaleString() : 0
   const fundingUSD = inUSD ? inUSD.dp(0).toNumber().toLocaleString() : 0
 
   return (
