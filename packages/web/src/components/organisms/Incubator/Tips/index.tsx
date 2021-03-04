@@ -81,14 +81,21 @@ const ShowAllContainer = styled.div`
   }
 `
 
+const BiggieSmalls = styled(Text1L)`
+  @media (max-width: 768px) {
+    font-size: 16px;
+    font-family: Whyte;
+    font-weight: 400;
+    line-height: 28px;
+  }
+`
+
 const RandomTip = () => {
   const randomElement = tips[Math.floor(Math.random() * tips.length)]
   return (
     <TipGrid>
       <H2M style={{ gridArea: 'question' }}>{randomElement.question}</H2M>
-      <Text1L style={{ gridArea: 'answer' }} fontSize="20px">
-        {randomElement.answer}
-      </Text1L>
+      <BiggieSmalls style={{ gridArea: 'answer' }}>{randomElement.answer}</BiggieSmalls>
       <ShowAllContainer>
         <Link href="/incubator/QA">
           <LinkB>{'Show all Q&As'}</LinkB>

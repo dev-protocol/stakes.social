@@ -29,6 +29,11 @@ const ProjectContainer = styled.div`
   row-gap: 2em;
   padding: 2em 1.5em;
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2), 0 2px 4px -1px rgba(0, 0, 0, 0.12);
+
+  @media (max-width: 768px) {
+    grid-template-rows: 1fr 1.5fr 1fr;
+    height: 356px;
+  }
 `
 
 const TitleContainer = styled.div`

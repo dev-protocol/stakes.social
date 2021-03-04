@@ -56,6 +56,10 @@ const SeeMore = styled.div<{ isExpanded?: boolean }>`
   width: 100%;
   height: 300px;
   background-image: linear-gradient(transparent, #ff3815 50%);
+
+  @media (max-width: 768px) {
+    height: 400px;
+  }
 `
 
 const ProjectOverview = () => {
