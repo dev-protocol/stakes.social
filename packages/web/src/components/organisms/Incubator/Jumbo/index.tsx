@@ -1,7 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
 import Countdown, { CountdownRenderProps } from 'react-countdown'
-import { isBrowser, isMobile } from 'react-device-detect'
 
 import { H3Xs, H1M, Text1L } from 'src/components/organisms/Incubator/Typography'
 import { useGetEntireRewards } from 'src/fixtures/_pages/incubator/hooks'
@@ -125,17 +124,9 @@ const Jumbo = () => {
   const { currency, reward } = useGetEntireRewards()
   const convertedFunding = reward ? reward.dp(0).toNumber().toLocaleString() : 0
 
-  console.log('isMObile isBrowser: ', isMobile, isBrowser)
-
   return (
     <div style={{ background: '#fafafa', zIndex: -1 }}>
       <JumboContainer>
-        {isBrowser && (
-          <AnimationContainer>
-            <IncubatorAnimation />
-          </AnimationContainer>
-        )}
-
         <TitleContainer>
           <H1M>{"It's Time to Fund"}</H1M>
           <H1M>Open Source Software.</H1M>
@@ -164,6 +155,9 @@ const Jumbo = () => {
             </BiggieSmalls>
           </RewardCollected>
         </RoundRewardContainer>
+        <AnimationContainer>
+          <IncubatorAnimation />
+        </AnimationContainer>
       </JumboContainer>
     </div>
   )
