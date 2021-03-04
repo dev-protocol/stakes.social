@@ -94,7 +94,7 @@ export const getReward = async (client: Web3, githubRepository: string): Promise
       ? execute({
           contract,
           client,
-          method: 'getReward',
+          method: 'getReword',
           args: [githubRepository]
         })
       : Promise.resolve(''))(getContract(client))
