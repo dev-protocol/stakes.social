@@ -10,6 +10,7 @@ import { useAuthenticate } from 'src/fixtures/_pages/incubator/hooks'
 import { CheckCircleOutlined } from '@ant-design/icons'
 import { SetOnboardingPageStatus } from 'src/pages/incubator/project/[project]'
 import DownArrow from '../../molecules/DownArrow'
+import { useProvider } from 'src/fixtures/wallet/hooks'
 
 const AuthenticationContainer = styled.div`
   position: relative;
@@ -213,6 +214,7 @@ const AuthenticationForm = ({ onStateChange, onMetricsCreated, project, onIsWron
   const { postSignGitHubMarketAssetHandler, isLoading } = usePostSignGitHubMarketAsset()
   const { authenticate, waitForCreateMetrics } = useAuthenticate()
   const [publicSignature, setPublicSignature] = useState<undefined | string>()
+  const { accountAddress } = useProvider()
   const onSign = async (data: any) => {
     console.log({ data })
     const signature = await postSignGitHubMarketAssetHandler(project.verifier_id, data.pat).catch((err: Error) => {
@@ -321,7 +323,8 @@ const AuthenticationForm = ({ onStateChange, onMetricsCreated, project, onIsWron
               icon={publicSignature ? <CheckCircleOutlined /> : undefined}
               loading={isLoading}
               htmlType="submit"
-              disabled={Boolean(publicSignature)}
+              disabled={Boolean(publicSignature) || !accountAddress}
+              title={Boolean(publicSignature) || !accountAddress ? 'Please connect your wallet' : undefined}
             >
               Sign
             </ButtonWithIcon>
@@ -337,7 +340,11 @@ const AuthenticationForm = ({ onStateChange, onMetricsCreated, project, onIsWron
             Verification of the credential has been completed. Please submit the signature to finalize authentication.
           </Text2S>
           <div style={{ marginTop: '1em', display: 'flex', justifyContent: 'flex-end' }}>
-            <ButtonWithIcon disabled={!publicSignature} onClick={onSend}>
+            <ButtonWithIcon
+              disabled={!publicSignature}
+              title={!publicSignature ? 'Please sign before you submit your PAT' : undefined}
+              onClick={onSend}
+            >
               Submit
             </ButtonWithIcon>
           </div>
