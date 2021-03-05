@@ -18,8 +18,9 @@ import { useProvider } from '../wallet/hooks'
 import { useUploadFile, useDeleteFile } from './functions/useUploadFile'
 import { useGetAccount } from './functions/useGetAccount'
 import { useGetProperty } from './functions/useGetProperty'
+import { useGetIncubators } from './functions/incubator'
 
-export { useUploadFile, useDeleteFile, useGetAccount, useGetProperty }
+export { useUploadFile, useDeleteFile, useGetAccount, useGetProperty, useGetIncubators }
 
 export const useGetPropertyTags = (propertyAddress: string) => {
   const shouldFetch = propertyAddress !== ''

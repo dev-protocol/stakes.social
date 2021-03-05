@@ -210,7 +210,7 @@ const PropertyAbout = ({
   authorAddress,
   propertyAddress
 }: {
-  isAutor: boolean
+  isAuthor: boolean
   dataProperty: DevForAppsProperty
   authorAddress: string
   propertyAddress: string
@@ -238,7 +238,7 @@ const PropertyAbout = ({
   }
   const handleSave = async (values: any) => {
     const handler = dataProperty?.id ? updateProperty : createProperty
-    await handler(null, values.description, values.website, values.twitter, values.github)
+    await handler(undefined, values.description, values.website, values.twitter, values.github)
     setModalStates({ ...modalStates, visible: false })
   }
   const showModal = useCallback(() => {
@@ -355,8 +355,8 @@ const PropertyAddressDetail = (_: Props) => {
           </Transact>
           <PropertyAbout
             isAuthor={loggedInWallet === authorAddress}
-            dataProperty={dataProperty ? dataProperty : {}}
-            authorAddress={authorAddress}
+            dataProperty={dataProperty ? dataProperty : ({} as DevForAppsProperty)}
+            authorAddress={authorAddress || ''}
             propertyAddress={propertyAddress}
           />
           <AssetsSection>
