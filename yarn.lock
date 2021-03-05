@@ -1572,10 +1572,10 @@
   resolved "https://registry.yarnpkg.com/@ctrl/tinycolor/-/tinycolor-3.4.0.tgz#c3c5ae543c897caa9c2a68630bed355be5f9990f"
   integrity sha512-JZButFdZ1+/xAfpguQHoabIXkcqRRKpMrWKBkpEZZyxfY9C1DpADFB8PEqGSTeFr135SaTRfKqGKx5xSCLI7ZQ==
 
-"@devprotocol/dev-kit@4.2.0":
-  version "4.2.0"
-  resolved "https://registry.yarnpkg.com/@devprotocol/dev-kit/-/dev-kit-4.2.0.tgz#867c1565ed3ecdee6cf9df6922ea79f9b38e4f14"
-  integrity sha512-3mlD3mp9lBXWrRgA0CBdseH5qe/i2m3YtoKsfimNMH8bdHe49Z1ohl8UF/VdAyt0rbU4QM628aNWXBSq5OUS8Q==
+"@devprotocol/dev-kit@4.3.0":
+  version "4.3.0"
+  resolved "https://registry.yarnpkg.com/@devprotocol/dev-kit/-/dev-kit-4.3.0.tgz#eb8bf64a17780bb1b255dae0a963bbef01846c23"
+  integrity sha512-tpz9M1Y+Rk4sZbFU00wFff8Cdu3cMsby/WTIyVBbOlZEcAtO+rKF6peHvATE2h310V1j4pIMcCtiTr8JJ03/bg==
   dependencies:
     "@types/bent" "^7.3.1"
     async-ray "^3.2.0"
