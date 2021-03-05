@@ -4,7 +4,7 @@ exports[`Header Snapshot 1`] = `
 <body>
   <div>
     <div
-      style="position: sticky; top: 0px; width: 100%; z-index: 2;"
+      style="position: sticky; top: 0px; width: 100%; z-index: 5;"
     >
       <header
         class="sc-1bz6snd-0 TlprQ"
