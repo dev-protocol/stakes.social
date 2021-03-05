@@ -161,7 +161,7 @@ export const useUploadAccountAvatar = (accountAddress: string) => {
   return { upload, isLoading, error }
 }
 
-export const useCreateProperty = (walletAddress: string) => {
+export const useCreateProperty = (walletAddress: string, propertyAddress: string) => {
   const key = 'useCreateProperty'
   const { web3 } = useProvider()
   const [isLoading, setIsLoading] = useState<boolean>(false)
@@ -187,8 +187,12 @@ export const useCreateProperty = (walletAddress: string) => {
     setIsLoading(true)
     message.loading({ content: 'update property data...', duration: 0, key })
 
-    const data = await postProperty(signedMessage, signature, walletAddress, name, description, links)
+    const data = await postProperty(signedMessage, signature, walletAddress, propertyAddress, name, description, links)
       .then(result => {
+        if (result.error) {
+          message.error({ content: result.error, key })
+          return
+        }
         message.success({ content: 'success update property data', key })
         return result
       })
@@ -205,7 +209,7 @@ export const useCreateProperty = (walletAddress: string) => {
   return { postPropertyHandler, isLoading }
 }
 
-export const useUpdateProperty = (id: number, walletAddress: string) => {
+export const useUpdateProperty = (id: number, walletAddress: string, propertyAddress: string) => {
   const key = 'useUpdateProperty'
   const { web3 } = useProvider()
   const [isLoading, setIsLoading] = useState<boolean>(false)
@@ -231,8 +235,21 @@ export const useUpdateProperty = (id: number, walletAddress: string) => {
     setIsLoading(true)
     message.loading({ content: 'update property data...', duration: 0, key })
 
-    const data = await putProperty(signedMessage, signature, walletAddress, id, name, description, links)
+    const data = await putProperty(
+      signedMessage,
+      signature,
+      walletAddress,
+      propertyAddress,
+      id,
+      name,
+      description,
+      links
+    )
       .then(result => {
+        if (result.error) {
+          message.error({ content: result.error, key })
+          return
+        }
         message.success({ content: 'success update property data', key })
         return result
       })

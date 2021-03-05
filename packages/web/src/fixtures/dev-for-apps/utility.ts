@@ -54,12 +54,13 @@ export type PropertyLinks = {
 }
 
 export interface Property {
-  id: string
+  id: number
   name: string
   description: string
   cover_image: NullableImage
   avatar: NullableImage
   links?: PropertyLinks
+  error?: string
 }
 
 export interface UploadFile {
@@ -215,6 +216,7 @@ export const postProperty = (
   signMessage: string,
   signature: string,
   address: string,
+  propertyAddress: string,
   name?: string,
   description?: string,
   links?: PropertyLinks
@@ -228,7 +230,8 @@ export const postProperty = (
       name,
       description,
       links,
-      address,
+      wallet_address: address,
+      address: propertyAddress,
       signature,
       signMessage
     })
@@ -238,6 +241,7 @@ export const putProperty = (
   signMessage: string,
   signature: string,
   address: string,
+  propertyAddress: string,
   id: number,
   name?: string,
   description?: string,
@@ -252,7 +256,8 @@ export const putProperty = (
       name,
       description,
       links,
-      address,
+      account_address: address,
+      address: propertyAddress,
       signature,
       signMessage
     })
