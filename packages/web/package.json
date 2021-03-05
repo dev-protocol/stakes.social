@@ -14,11 +14,11 @@
     "test": "jest"
   },
   "dependencies": {
-    "@amcharts/amcharts4": "4.10.15",
+    "@amcharts/amcharts4": "4.10.16",
     "@ant-design/icons": "4.5.0",
     "@apollo/client": "3.3.11",
     "@dev/graphql": "0.0.1",
-    "@devprotocol/dev-kit": "4.1.1",
+    "@devprotocol/dev-kit": "4.2.0",
     "@devprotocol/khaos-kit": "1.0.1",
     "@metamask/detect-provider": "1.2.0",
     "@quentin-sommer/react-useragent": "3.1.0",
@@ -73,7 +73,7 @@
     "@babel/core": "7.13.8",
     "@testing-library/react": "11.2.5",
     "@testing-library/react-hooks": "3.7.0",
-    "@testing-library/user-event": "12.8.0",
+    "@testing-library/user-event": "12.8.1",
     "@types/body-parser": "1.19.0",
     "@types/faker": "5.1.7",
     "@types/ramda": "0.27.38",
