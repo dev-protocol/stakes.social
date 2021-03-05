@@ -73,7 +73,7 @@ export const intermediateProcess = async (
   const stripId = (word: string) => {
     // care both 'https://twitter.com/staus/111' and '111'
     const _ = word.split('/')
-    return _[_.length - 1]
+    return _[_.length - 1].replace(/^([0-9]+).*$/, '$1')
   }
   const strippedTwitterStatusId = stripId(twitterStatusUrl)
   return (contract =>

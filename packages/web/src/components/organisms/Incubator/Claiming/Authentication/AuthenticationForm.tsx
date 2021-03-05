@@ -216,11 +216,10 @@ const AuthenticationForm = ({ onStateChange, onMetricsCreated, project, onIsWron
   const [publicSignature, setPublicSignature] = useState<undefined | string>()
   const { accountAddress } = useProvider()
   const onSign = async (data: any) => {
-    console.log({ data })
     const signature = await postSignGitHubMarketAssetHandler(project.verifier_id, data.pat).catch((err: Error) => {
       return IS_DEVELOPMENT_ENV ? { publicSignature: 'dummy_pulic_signature' } : err
     })
-    if (signature instanceof Error) {
+    if (!signature || signature instanceof Error) {
       message.error(signature)
       return onIsWrongChange(true)
     }

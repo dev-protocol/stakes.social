@@ -1,12 +1,12 @@
-import { useContext, useState } from 'react'
+import { useState } from 'react'
 import { message } from 'antd'
-import { postSignGitHubMarketAsset } from './utility'
+import { emulateOraclizeGitHubMarketAsset, postSignGitHubMarketAsset } from './utility'
 import { sign } from 'src/fixtures/wallet/utility'
-import WalletContext from 'src/context/walletContext'
+import { useProvider } from '../wallet/hooks'
 
 export const usePostSignGitHubMarketAsset = () => {
   const key = 'usePostSignGitHubMarketAsset'
-  const { web3 } = useContext(WalletContext)
+  const { web3, accountAddress } = useProvider()
   const [isLoading, setIsLoading] = useState<boolean>(false)
 
   const postSignGitHubMarketAssetHandler = async (repository: string, personalAccessToken: string) => {
@@ -18,16 +18,35 @@ export const usePostSignGitHubMarketAsset = () => {
 
     setIsLoading(true)
 
-    return postSignGitHubMarketAsset(signMessage, signature || '', personalAccessToken)
-      .then(result => {
-        setIsLoading(false)
-        return result
-      })
-      .catch(err => {
-        message.error({ content: err.message, key })
-        setIsLoading(false)
-        return Promise.reject(err)
-      })
+    const signed = await postSignGitHubMarketAsset(signMessage, signature || '', personalAccessToken).catch(
+      (err: Error) => err
+    )
+    if (signed instanceof Error) {
+      message.error({ content: signed.message, key })
+      setIsLoading(false)
+      throw signed
+    }
+
+    const emulated = await emulateOraclizeGitHubMarketAsset(repository, signed.publicSignature, accountAddress).catch(
+      (err: Error) => err
+    )
+    if (emulated instanceof Error) {
+      message.error({ content: emulated.message, key })
+      setIsLoading(false)
+      throw emulated
+    }
+
+    const expectedSuccess = emulated?.data?.args[1] === 0
+    if (!expectedSuccess) {
+      const err = new Error('authentication dry run failed')
+      message.error({ content: err.message, key })
+      setIsLoading(false)
+      throw err
+    }
+
+    setIsLoading(false)
+
+    return signed
   }
 
   return { postSignGitHubMarketAssetHandler, isLoading }
