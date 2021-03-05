@@ -1,6 +1,6 @@
 import { useContext, useState } from 'react'
 import { message } from 'antd'
-import { postSignGitHubMarketAsset, GitHubAssetInformation } from './utility'
+import { postSignGitHubMarketAsset } from './utility'
 import { sign } from 'src/fixtures/wallet/utility'
 import WalletContext from 'src/context/walletContext'
 
@@ -21,12 +21,7 @@ export const usePostSignGitHubMarketAsset = () => {
     return postSignGitHubMarketAsset(signMessage, signature || '', personalAccessToken)
       .then(result => {
         setIsLoading(false)
-        if (result instanceof Error) {
-          message.error({ content: result.message, key })
-          return {} as GitHubAssetInformation
-        } else {
-          return result
-        }
+        return result
       })
       .catch(err => {
         message.error({ content: err.message, key })
