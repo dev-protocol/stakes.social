@@ -44,6 +44,8 @@ export const usePostSignGitHubMarketAsset = () => {
       throw err
     }
 
+    setIsLoading(false)
+
     return signed
   }
 
