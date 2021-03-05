@@ -3,6 +3,7 @@
   "cleanUrls": true,
   "trailingSlash": false,
   "rewrites": [
+    { "source": "/incubator/project/:project", "destination": "/incubator/project/[project]" },
     { "source": "/create/associate/:address", "destination": "/create/associate/[market]" },
     { "source": "/create/:address", "destination": "/create/[market]" },
     { "source": "/author/:address/edit", "destination": "/author/[authorAddress]/edit" },
