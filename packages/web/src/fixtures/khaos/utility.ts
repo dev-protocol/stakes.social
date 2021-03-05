@@ -1,4 +1,4 @@
-import { sign } from '@devprotocol/khaos-kit'
+import { sign, emulate } from '@devprotocol/khaos-kit'
 
 export interface GitHubAssetInformation {
   address: string
@@ -6,6 +6,7 @@ export interface GitHubAssetInformation {
 }
 
 const signer = sign('github-market')
+const emulator = emulate('github-market')
 
 export const postSignGitHubMarketAsset = (
   signMessage: string,
@@ -18,4 +19,17 @@ export const postSignGitHubMarketAsset = (
     message: signMessage
   }).catch(() => {
     return Promise.reject(Error('fail to sign github market asset'))
+  })
+
+export const emulateOraclizeGitHubMarketAsset = (githubRepository: string, publicSignature: string, account?: string) =>
+  emulator({
+    event: {
+      args: {
+        githubRepository,
+        publicSignature,
+        account
+      }
+    }
+  }).catch(() => {
+    return Promise.reject(Error('fail to dry-run for authentication with Khaos'))
   })

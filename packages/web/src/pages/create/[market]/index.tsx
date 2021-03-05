@@ -167,17 +167,24 @@ const TokenizationDisclaimer = ({
     const key = 'tokenization'
     message.loading({ content: 'now tokenizing...', duration: 0, key })
 
-    const authRequestData: [string, string] = await (async () => {
+    const authRequestData: [string, string] | undefined = await (async () => {
       // If the target market is not NpmMarket, it is the GitHubMarket with Khaos.
       // TODO: Needs dynamically switch to use Khaos or not use Khaos by target Market
 
       const repository: string = projectName
 
       // Create a public signature from the user's signature and the entered PAT.
-      const khaos = await postSignGitHubMarketAssetHandler(repository, personalAccessToken)
+      const khaos = await postSignGitHubMarketAssetHandler(repository, personalAccessToken).catch(() => undefined)
+      console.log({ khaos })
+      if (!khaos) {
+        return
+      }
       message.success({ content: 'Successful creation of public signature by Khaos' })
       return [repository, khaos.publicSignature || ''] as [string, string]
     })()
+    if (!authRequestData) {
+      return
+    }
 
     // Send Ethereum transaction and create new Property Tokens, aka Creator Tokens, and starts authentication flow.
     const results = await createAndAuthenticate(tokenName, tokenSymbol, market, authRequestData)
