@@ -225,14 +225,14 @@ const TweetForm = ({ onStateChange, project, metricsAddress, onIsWrongChange }: 
         onStateChange('success')
       }, 3000)
     } else {
-      const xxx = await Promise.all([
+      const results = await Promise.all([
         intermediateProcess(project.verifier_id, metricsAddress, data.twitter, ''),
         waitForFinishEvent(project.property.address)
       ]).catch((err: Error) => {
         message.error(err)
         return err
       })
-      return xxx instanceof Error ? undefined : onStateChange('success')
+      return results instanceof Error ? undefined : onStateChange('success')
     }
   }
   const [isError, setIsError] = useState(false)
