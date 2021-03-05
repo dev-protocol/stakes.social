@@ -1,6 +1,6 @@
 import React, { useMemo, useState } from 'react'
 import styled from 'styled-components'
-import { Form } from 'antd'
+import { Form, message } from 'antd'
 
 import { ButtonL, Text2M, H1Large, Text1L, Text2S } from '../../Typography'
 import { Button, LinkAsButton } from '../../molecules/Button'
@@ -225,9 +225,14 @@ const TweetForm = ({ onStateChange, project, metricsAddress, onIsWrongChange }: 
         onStateChange('success')
       }, 3000)
     } else {
-      await intermediateProcess(project.verifier_id, metricsAddress, data.twitter, '')
-      await waitForFinishEvent(project.property.address)
-      onStateChange('success')
+      const xxx = await Promise.all([
+        intermediateProcess(project.verifier_id, metricsAddress, data.twitter, ''),
+        waitForFinishEvent(project.property.address)
+      ]).catch((err: Error) => {
+        message.error(err)
+        return err
+      })
+      return xxx instanceof Error ? undefined : onStateChange('success')
     }
   }
   const [isError, setIsError] = useState(false)
