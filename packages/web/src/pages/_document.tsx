@@ -60,6 +60,37 @@ export default class extends Document {
                   });`
             }}
           />
+          {/* cookieconsent */}
+          <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.css"
+            type="text/css"
+          />
+          <script
+            async
+            src="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.js"
+            data-cfasync="false"
+          ></script>
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `
+                  window.addEventListener("load",async () => {
+                      window.cookieconsent.initialise({
+                          "palette": {
+                              "popup": {
+                                  "background": "#fafafa"
+                              },
+                              "button": {
+                                  "background": "#000000",
+                                  "text": "#ffffff"
+                              }
+                          },
+                          "showLink": false,
+                          "position": "bottom-right"
+                      });
+                  });`
+            }}
+          />
         </Head>
         <body>
           <Main />
