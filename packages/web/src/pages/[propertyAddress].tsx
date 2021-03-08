@@ -1,10 +1,15 @@
 import React, { useCallback, useMemo, useEffect, useState } from 'react'
 import Error from 'next/error'
 import { useRouter } from 'next/router'
+import Link from 'next/link'
+import styled from 'styled-components'
+import ReactMarkdown from 'react-markdown'
+import { PlusOutlined, LinkOutlined } from '@ant-design/icons'
+import { Button, Form, Input, Spin, Skeleton, Upload } from 'antd'
+import { UploadChangeParam, UploadFile } from 'antd/lib/upload/interface'
 import { PossessionOutline } from 'src/components/organisms/PossessionOutline'
 import { PropertyHeader } from 'src/components/organisms/PropertyHeader'
 import { Footer } from 'src/components/organisms/Footer'
-import styled from 'styled-components'
 import { ResponsiveModal } from 'src/components/atoms/ResponsiveModal'
 import { ButtonWithGradient } from 'src/components/atoms/ButtonWithGradient'
 import { Container } from 'src/components/atoms/Container'
@@ -12,13 +17,16 @@ import { Header } from 'src/components/organisms/Header'
 import TopStakers from 'src/components/organisms/TopStakers'
 import { useAPY, usePropertyAuthor } from 'src/fixtures/dev-kit/hooks'
 import { useGetPropertyAuthenticationQuery, useGetPropertyAggregateLazyQuery } from '@dev/graphql'
-import { PlusOutlined, LinkOutlined } from '@ant-design/icons'
-import { Button, Form, Input, Spin, Skeleton } from 'antd'
-import Link from 'next/link'
 import { useGetPropertytInformation } from 'src/fixtures/devprtcl/hooks'
-import { useGetAccount, useGetProperty, useCreateProperty, useUpdateProperty } from 'src/fixtures/dev-for-apps/hooks'
-import { Property as DevForAppsProperty } from 'src/fixtures/dev-for-apps/utility'
-import ReactMarkdown from 'react-markdown'
+import {
+  useGetAccount,
+  useGetProperty,
+  useCreateProperty,
+  useUpdateProperty,
+  useUploadPropertyCoverImages,
+  useDeleteFile
+} from 'src/fixtures/dev-for-apps/hooks'
+import { Image, Property as DevForAppsProperty } from 'src/fixtures/dev-for-apps/utility'
 import { WithGradient } from 'src/components/atoms/WithGradient'
 import { Stake } from 'src/components/organisms/Stake'
 import { Withdraw } from 'src/components/organisms/Withdraw'
@@ -28,6 +36,7 @@ import { CoverImageOrGradient } from 'src/components/atoms/CoverImageOrGradient'
 import { H3 } from 'src/components/atoms/Typography'
 import { Twitter, Github } from 'src/components/atoms/SocialButtons'
 import { getPath } from 'src/fixtures/utility/route'
+import { whenDefined } from 'src/fixtures/utility'
 
 type Props = {}
 
@@ -36,6 +45,15 @@ interface ModalStates {
   title?: string
   contents?: React.ReactNode
 }
+
+const apiDataToUploadFile = ({ hash: uid, url, name, size, mime: type }: Image): UploadFile => ({
+  status: 'done',
+  uid,
+  url,
+  name,
+  size,
+  type
+})
 
 const Main = styled(Container)`
   display: grid;
@@ -204,6 +222,49 @@ const Author = ({ propertyAddress }: { propertyAddress: string }) => {
   )
 }
 
+const PropertyCoverImageUpdateForm = ({
+  accountAddress,
+  propertyAddress
+}: {
+  accountAddress: string
+  propertyAddress: string
+}) => {
+  const { data } = useGetProperty(propertyAddress)
+  const [fileList, setFileList] = useState<UploadFile[] | undefined>()
+  const { upload } = useUploadPropertyCoverImages(propertyAddress, accountAddress)
+  const { deleteFileHandler: deleteFile } = useDeleteFile(accountAddress)
+  useEffect(() => {
+    setFileList(whenDefined(data?.cover_image, x => [apiDataToUploadFile(x)]))
+  }, [setFileList, data])
+
+  const handleChange = (info: UploadChangeParam<UploadFile>) => {
+    if (info.event) {
+      setFileList([{ ...info.file, status: 'uploading' }])
+      upload(info.file.originFileObj)
+    }
+  }
+
+  const handleRemove = (file: UploadFile) => {
+    whenDefined(data?.cover_image?.id, x => deleteFile(x, file.name))
+    setFileList([])
+  }
+
+  return (
+    <Upload
+      name="file"
+      multiple={false}
+      listType="picture-card"
+      fileList={fileList}
+      onChange={handleChange}
+      onRemove={handleRemove}
+    >
+      <div>
+        <p>{data && data.cover_image ? 'Change' : 'Upload'}</p>
+      </div>
+    </Upload>
+  )
+}
+
 const PropertyAbout = ({
   isAuthor,
   dataProperty,
@@ -310,6 +371,9 @@ const PropertyAbout = ({
           </Form.Item>
           <Form.Item label="Other website link" name="website">
             <Input placeholder="input other website link" />
+          </Form.Item>
+          <Form.Item label="Cover image">
+            <PropertyCoverImageUpdateForm accountAddress={authorAddress} propertyAddress={propertyAddress} />
           </Form.Item>
         </Form>
       </ResponsiveModal>

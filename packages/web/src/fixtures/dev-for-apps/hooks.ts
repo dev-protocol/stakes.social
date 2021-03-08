@@ -284,9 +284,9 @@ export const useUploadAccountCoverImages = (accountAddress: string) => {
   return { upload, isLoading, error }
 }
 
-export const useUploadPropertyCoverImages = (propertyAddress: string) => {
+export const useUploadPropertyCoverImages = (propertyAddress: string, accountAddress: string) => {
   const { data: property, mutate } = useGetProperty(propertyAddress)
-  const { postUploadFileHandler, isLoading, error } = useUploadFile(propertyAddress)
+  const { postUploadFileHandler, isLoading, error } = useUploadFile(accountAddress)
 
   const upload = async (file: any) => {
     const refId = Number(property?.id)
