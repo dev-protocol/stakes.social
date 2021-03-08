@@ -15,6 +15,8 @@ import WalletLink from 'walletlink'
 import { message } from 'antd'
 import { WEB3_PROVIDER_ENDPOINT } from 'src/fixtures/wallet/constants'
 import { getAccountAddress } from 'src/fixtures/wallet/utility'
+import * as gtag from 'src/lib/gtag'
+import { Router } from 'next/router'
 
 class NextApp extends App<AppInitialProps & WithApolloProps<{}>> {
   state = { isCurrencyDEV: true, web3: undefined, web3Modal: undefined }
@@ -114,6 +116,9 @@ class NextApp extends App<AppInitialProps & WithApolloProps<{}>> {
       const { currency } = JSON.parse(settings)
       this.setState({ isCurrencyDEV: currency === 'DEV' })
     }
+
+    // Google Analytics
+    Router.events.on('routeChangeComplete', url => gtag.pageview(url))
   }
 
   setWeb3 = (web3: Web3) => {
