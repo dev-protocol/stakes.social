@@ -1,6 +1,6 @@
 export const GA_ID = 'UA-189612836-2'
 
-// PVを測定する
+// Measure PV
 export const pageview = (path: string) => {
   // @ts-ignore
   window.gtag('config', GA_ID, {
@@ -8,7 +8,7 @@ export const pageview = (path: string) => {
   })
 }
 
-// GAイベントを発火させる
+// Fire a Google Analytics event
 // @ts-ignore
 export const event = ({ action, category, label, value = '' }) => {
   // @ts-ignore
