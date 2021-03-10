@@ -60,6 +60,12 @@ exports[`PropertyCardList Snapshot 1`] = `
             <div
               class=" css-2b097c-container"
             >
+              <span
+                aria-atomic="false"
+                aria-live="polite"
+                aria-relevant="additions text"
+                class="css-1f43avz-a11yText-A11yText"
+              />
               <div
                 class=" css-yk16xz-control"
               >
@@ -105,7 +111,7 @@ exports[`PropertyCardList Snapshot 1`] = `
                   >
                     <svg
                       aria-hidden="true"
-                      class="css-6q0nyr-Svg"
+                      class="css-tj5bde-Svg"
                       focusable="false"
                       height="20"
                       viewBox="0 0 20 20"
@@ -125,7 +131,7 @@ exports[`PropertyCardList Snapshot 1`] = `
                   >
                     <svg
                       aria-hidden="true"
-                      class="css-6q0nyr-Svg"
+                      class="css-tj5bde-Svg"
                       focusable="false"
                       height="20"
                       viewBox="0 0 20 20"
