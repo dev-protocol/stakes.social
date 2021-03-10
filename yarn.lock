@@ -15530,10 +15530,10 @@ neo-async@^2.5.0, neo-async@^2.6.0, neo-async@^2.6.1, neo-async@^2.6.2:
   resolved "https://registry.yarnpkg.com/neo-async/-/neo-async-2.6.2.tgz#b4aafb93e3aeb2d8174ca53cf163ab7d7308305f"
   integrity sha512-Yd3UES5mWCSqR+qNT93S3UoYUkqAZ9lLg8a7g9rimsWmYGK8cVToA4/sF3RrshdyV3sAGMXVUmpMYOw+dLpOuw==
 
-next-i18next@8.1.0:
-  version "8.1.0"
-  resolved "https://registry.yarnpkg.com/next-i18next/-/next-i18next-8.1.0.tgz#40dae8093adb0a412914dce9af2f33b6169d5afb"
-  integrity sha512-IagAZumU+SVDKRQCuiNONznRe5qz92Ic1SslH6+NL9FEMLjeVI/Mv5hMB8RJlqFyyR/Cl187gbsV7UQxGyrtTg==
+next-i18next@8.1.1:
+  version "8.1.1"
+  resolved "https://registry.yarnpkg.com/next-i18next/-/next-i18next-8.1.1.tgz#ba53bfd6c33b7dcd798a9942a50ddd85c489d95f"
+  integrity sha512-B/AHX/JV8GJBVYBrtjr//wJQN2JnCVMD7HTUnwNlxJPeNnO5qtSJT7q8jBtZVeJnp5htZXw9Aq3PEsh3eAe8EQ==
   dependencies:
     "@types/hoist-non-react-statics" "^3.3.1"
     "@types/i18next-fs-backend" "^1.0.0"
