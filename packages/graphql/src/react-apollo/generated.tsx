@@ -4,6 +4,7 @@ export type Maybe<T> = T
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] }
 export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> }
 export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> }
+const defaultOptions = {}
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
   ID: string
@@ -6022,17 +6023,19 @@ export const GetMarketFactoryCreateDocument = gql`
 export function useGetMarketFactoryCreateQuery(
   baseOptions?: Apollo.QueryHookOptions<GetMarketFactoryCreateQuery, GetMarketFactoryCreateQueryVariables>
 ) {
+  const options = { ...defaultOptions, ...baseOptions }
   return Apollo.useQuery<GetMarketFactoryCreateQuery, GetMarketFactoryCreateQueryVariables>(
     GetMarketFactoryCreateDocument,
-    baseOptions
+    options
   )
 }
 export function useGetMarketFactoryCreateLazyQuery(
   baseOptions?: Apollo.LazyQueryHookOptions<GetMarketFactoryCreateQuery, GetMarketFactoryCreateQueryVariables>
 ) {
+  const options = { ...defaultOptions, ...baseOptions }
   return Apollo.useLazyQuery<GetMarketFactoryCreateQuery, GetMarketFactoryCreateQueryVariables>(
     GetMarketFactoryCreateDocument,
-    baseOptions
+    options
   )
 }
 export type GetMarketFactoryCreateQueryHookResult = ReturnType<typeof useGetMarketFactoryCreateQuery>
@@ -6068,17 +6071,19 @@ export const GetPortofolioPoolsAccountDocument = gql`
 export function useGetPortofolioPoolsAccountQuery(
   baseOptions: Apollo.QueryHookOptions<GetPortofolioPoolsAccountQuery, GetPortofolioPoolsAccountQueryVariables>
 ) {
+  const options = { ...defaultOptions, ...baseOptions }
   return Apollo.useQuery<GetPortofolioPoolsAccountQuery, GetPortofolioPoolsAccountQueryVariables>(
     GetPortofolioPoolsAccountDocument,
-    baseOptions
+    options
   )
 }
 export function useGetPortofolioPoolsAccountLazyQuery(
   baseOptions?: Apollo.LazyQueryHookOptions<GetPortofolioPoolsAccountQuery, GetPortofolioPoolsAccountQueryVariables>
 ) {
+  const options = { ...defaultOptions, ...baseOptions }
   return Apollo.useLazyQuery<GetPortofolioPoolsAccountQuery, GetPortofolioPoolsAccountQueryVariables>(
     GetPortofolioPoolsAccountDocument,
-    baseOptions
+    options
   )
 }
 export type GetPortofolioPoolsAccountQueryHookResult = ReturnType<typeof useGetPortofolioPoolsAccountQuery>
@@ -6116,17 +6121,19 @@ export const GetPropertyAggregateDocument = gql`
 export function useGetPropertyAggregateQuery(
   baseOptions?: Apollo.QueryHookOptions<GetPropertyAggregateQuery, GetPropertyAggregateQueryVariables>
 ) {
+  const options = { ...defaultOptions, ...baseOptions }
   return Apollo.useQuery<GetPropertyAggregateQuery, GetPropertyAggregateQueryVariables>(
     GetPropertyAggregateDocument,
-    baseOptions
+    options
   )
 }
 export function useGetPropertyAggregateLazyQuery(
   baseOptions?: Apollo.LazyQueryHookOptions<GetPropertyAggregateQuery, GetPropertyAggregateQueryVariables>
 ) {
+  const options = { ...defaultOptions, ...baseOptions }
   return Apollo.useLazyQuery<GetPropertyAggregateQuery, GetPropertyAggregateQueryVariables>(
     GetPropertyAggregateDocument,
-    baseOptions
+    options
   )
 }
 export type GetPropertyAggregateQueryHookResult = ReturnType<typeof useGetPropertyAggregateQuery>
@@ -6167,17 +6174,19 @@ export const GetPropertyAuthenticationDocument = gql`
 export function useGetPropertyAuthenticationQuery(
   baseOptions: Apollo.QueryHookOptions<GetPropertyAuthenticationQuery, GetPropertyAuthenticationQueryVariables>
 ) {
+  const options = { ...defaultOptions, ...baseOptions }
   return Apollo.useQuery<GetPropertyAuthenticationQuery, GetPropertyAuthenticationQueryVariables>(
     GetPropertyAuthenticationDocument,
-    baseOptions
+    options
   )
 }
 export function useGetPropertyAuthenticationLazyQuery(
   baseOptions?: Apollo.LazyQueryHookOptions<GetPropertyAuthenticationQuery, GetPropertyAuthenticationQueryVariables>
 ) {
+  const options = { ...defaultOptions, ...baseOptions }
   return Apollo.useLazyQuery<GetPropertyAuthenticationQuery, GetPropertyAuthenticationQueryVariables>(
     GetPropertyAuthenticationDocument,
-    baseOptions
+    options
   )
 }
 export type GetPropertyAuthenticationQueryHookResult = ReturnType<typeof useGetPropertyAuthenticationQuery>
@@ -6213,17 +6222,16 @@ export const TotalStakedAccountDocument = gql`
 export function useTotalStakedAccountQuery(
   baseOptions: Apollo.QueryHookOptions<TotalStakedAccountQuery, TotalStakedAccountQueryVariables>
 ) {
-  return Apollo.useQuery<TotalStakedAccountQuery, TotalStakedAccountQueryVariables>(
-    TotalStakedAccountDocument,
-    baseOptions
-  )
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useQuery<TotalStakedAccountQuery, TotalStakedAccountQueryVariables>(TotalStakedAccountDocument, options)
 }
 export function useTotalStakedAccountLazyQuery(
   baseOptions?: Apollo.LazyQueryHookOptions<TotalStakedAccountQuery, TotalStakedAccountQueryVariables>
 ) {
+  const options = { ...defaultOptions, ...baseOptions }
   return Apollo.useLazyQuery<TotalStakedAccountQuery, TotalStakedAccountQueryVariables>(
     TotalStakedAccountDocument,
-    baseOptions
+    options
   )
 }
 export type TotalStakedAccountQueryHookResult = ReturnType<typeof useTotalStakedAccountQuery>
@@ -6271,17 +6279,16 @@ export const ListAccountLockupDocument = gql`
 export function useListAccountLockupQuery(
   baseOptions: Apollo.QueryHookOptions<ListAccountLockupQuery, ListAccountLockupQueryVariables>
 ) {
-  return Apollo.useQuery<ListAccountLockupQuery, ListAccountLockupQueryVariables>(
-    ListAccountLockupDocument,
-    baseOptions
-  )
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useQuery<ListAccountLockupQuery, ListAccountLockupQueryVariables>(ListAccountLockupDocument, options)
 }
 export function useListAccountLockupLazyQuery(
   baseOptions?: Apollo.LazyQueryHookOptions<ListAccountLockupQuery, ListAccountLockupQueryVariables>
 ) {
+  const options = { ...defaultOptions, ...baseOptions }
   return Apollo.useLazyQuery<ListAccountLockupQuery, ListAccountLockupQueryVariables>(
     ListAccountLockupDocument,
-    baseOptions
+    options
   )
 }
 export type ListAccountLockupQueryHookResult = ReturnType<typeof useListAccountLockupQuery>
@@ -6322,17 +6329,19 @@ export const ListOwnedPropertyMetaDocument = gql`
 export function useListOwnedPropertyMetaQuery(
   baseOptions: Apollo.QueryHookOptions<ListOwnedPropertyMetaQuery, ListOwnedPropertyMetaQueryVariables>
 ) {
+  const options = { ...defaultOptions, ...baseOptions }
   return Apollo.useQuery<ListOwnedPropertyMetaQuery, ListOwnedPropertyMetaQueryVariables>(
     ListOwnedPropertyMetaDocument,
-    baseOptions
+    options
   )
 }
 export function useListOwnedPropertyMetaLazyQuery(
   baseOptions?: Apollo.LazyQueryHookOptions<ListOwnedPropertyMetaQuery, ListOwnedPropertyMetaQueryVariables>
 ) {
+  const options = { ...defaultOptions, ...baseOptions }
   return Apollo.useLazyQuery<ListOwnedPropertyMetaQuery, ListOwnedPropertyMetaQueryVariables>(
     ListOwnedPropertyMetaDocument,
-    baseOptions
+    options
   )
 }
 export type ListOwnedPropertyMetaQueryHookResult = ReturnType<typeof useListOwnedPropertyMetaQuery>
@@ -6408,12 +6417,14 @@ export const ListPropertyDocument = gql`
 export function useListPropertyQuery(
   baseOptions?: Apollo.QueryHookOptions<ListPropertyQuery, ListPropertyQueryVariables>
 ) {
-  return Apollo.useQuery<ListPropertyQuery, ListPropertyQueryVariables>(ListPropertyDocument, baseOptions)
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useQuery<ListPropertyQuery, ListPropertyQueryVariables>(ListPropertyDocument, options)
 }
 export function useListPropertyLazyQuery(
   baseOptions?: Apollo.LazyQueryHookOptions<ListPropertyQuery, ListPropertyQueryVariables>
 ) {
-  return Apollo.useLazyQuery<ListPropertyQuery, ListPropertyQueryVariables>(ListPropertyDocument, baseOptions)
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useLazyQuery<ListPropertyQuery, ListPropertyQueryVariables>(ListPropertyDocument, options)
 }
 export type ListPropertyQueryHookResult = ReturnType<typeof useListPropertyQuery>
 export type ListPropertyLazyQueryHookResult = ReturnType<typeof useListPropertyLazyQuery>
@@ -6485,9 +6496,10 @@ export const ListPropertyOrderByMostRecentDocument = gql`
 export function useListPropertyOrderByMostRecentQuery(
   baseOptions?: Apollo.QueryHookOptions<ListPropertyOrderByMostRecentQuery, ListPropertyOrderByMostRecentQueryVariables>
 ) {
+  const options = { ...defaultOptions, ...baseOptions }
   return Apollo.useQuery<ListPropertyOrderByMostRecentQuery, ListPropertyOrderByMostRecentQueryVariables>(
     ListPropertyOrderByMostRecentDocument,
-    baseOptions
+    options
   )
 }
 export function useListPropertyOrderByMostRecentLazyQuery(
@@ -6496,9 +6508,10 @@ export function useListPropertyOrderByMostRecentLazyQuery(
     ListPropertyOrderByMostRecentQueryVariables
   >
 ) {
+  const options = { ...defaultOptions, ...baseOptions }
   return Apollo.useLazyQuery<ListPropertyOrderByMostRecentQuery, ListPropertyOrderByMostRecentQueryVariables>(
     ListPropertyOrderByMostRecentDocument,
-    baseOptions
+    options
   )
 }
 export type ListPropertyOrderByMostRecentQueryHookResult = ReturnType<typeof useListPropertyOrderByMostRecentQuery>
@@ -6554,15 +6567,14 @@ export const ListPropertyMetaDocument = gql`
 export function useListPropertyMetaQuery(
   baseOptions: Apollo.QueryHookOptions<ListPropertyMetaQuery, ListPropertyMetaQueryVariables>
 ) {
-  return Apollo.useQuery<ListPropertyMetaQuery, ListPropertyMetaQueryVariables>(ListPropertyMetaDocument, baseOptions)
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useQuery<ListPropertyMetaQuery, ListPropertyMetaQueryVariables>(ListPropertyMetaDocument, options)
 }
 export function useListPropertyMetaLazyQuery(
   baseOptions?: Apollo.LazyQueryHookOptions<ListPropertyMetaQuery, ListPropertyMetaQueryVariables>
 ) {
-  return Apollo.useLazyQuery<ListPropertyMetaQuery, ListPropertyMetaQueryVariables>(
-    ListPropertyMetaDocument,
-    baseOptions
-  )
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useLazyQuery<ListPropertyMetaQuery, ListPropertyMetaQueryVariables>(ListPropertyMetaDocument, options)
 }
 export type ListPropertyMetaQueryHookResult = ReturnType<typeof useListPropertyMetaQuery>
 export type ListPropertyMetaLazyQueryHookResult = ReturnType<typeof useListPropertyMetaLazyQuery>
@@ -6601,17 +6613,19 @@ export const ListTopStakersAccountDocument = gql`
 export function useListTopStakersAccountQuery(
   baseOptions: Apollo.QueryHookOptions<ListTopStakersAccountQuery, ListTopStakersAccountQueryVariables>
 ) {
+  const options = { ...defaultOptions, ...baseOptions }
   return Apollo.useQuery<ListTopStakersAccountQuery, ListTopStakersAccountQueryVariables>(
     ListTopStakersAccountDocument,
-    baseOptions
+    options
   )
 }
 export function useListTopStakersAccountLazyQuery(
   baseOptions?: Apollo.LazyQueryHookOptions<ListTopStakersAccountQuery, ListTopStakersAccountQueryVariables>
 ) {
+  const options = { ...defaultOptions, ...baseOptions }
   return Apollo.useLazyQuery<ListTopStakersAccountQuery, ListTopStakersAccountQueryVariables>(
     ListTopStakersAccountDocument,
-    baseOptions
+    options
   )
 }
 export type ListTopStakersAccountQueryHookResult = ReturnType<typeof useListTopStakersAccountQuery>
@@ -6649,17 +6663,19 @@ export const ListTopSupportingAccountDocument = gql`
 export function useListTopSupportingAccountQuery(
   baseOptions: Apollo.QueryHookOptions<ListTopSupportingAccountQuery, ListTopSupportingAccountQueryVariables>
 ) {
+  const options = { ...defaultOptions, ...baseOptions }
   return Apollo.useQuery<ListTopSupportingAccountQuery, ListTopSupportingAccountQueryVariables>(
     ListTopSupportingAccountDocument,
-    baseOptions
+    options
   )
 }
 export function useListTopSupportingAccountLazyQuery(
   baseOptions?: Apollo.LazyQueryHookOptions<ListTopSupportingAccountQuery, ListTopSupportingAccountQueryVariables>
 ) {
+  const options = { ...defaultOptions, ...baseOptions }
   return Apollo.useLazyQuery<ListTopSupportingAccountQuery, ListTopSupportingAccountQueryVariables>(
     ListTopSupportingAccountDocument,
-    baseOptions
+    options
   )
 }
 export type ListTopSupportingAccountQueryHookResult = ReturnType<typeof useListTopSupportingAccountQuery>
