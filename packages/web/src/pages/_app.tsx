@@ -133,6 +133,7 @@ class NextApp extends App<AppInitialProps & WithApolloProps<{}>> {
             {/* Use minimum-scale=1 to enable GPU rasterization */}
             <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no" />
           </Head>
+          <p>IE is not support on this site.</p>
           <Component {...pageProps} apollo={apollo} />
           <HelpUs></HelpUs>
         </SettingContext.Provider>
