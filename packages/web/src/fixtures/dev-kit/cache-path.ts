@@ -18,6 +18,7 @@ export const SWRCachePath = {
   balanceOf: (user?: string) => `balanceOf/${user}`,
   allClaimedRewards: (user?: string) => `allClaimedRewards/${user}`,
   propertyName: (propertyAddress?: string, user?: string) => `propertyAddresses/${user}${propertyAddress}/name`,
+  propertySymbol: (propertyAddress?: string, user?: string) => `propertyAddresses/${user}${propertyAddress}/symbol`,
   balanceOfProperty: (propertyAddress?: string, user?: string) =>
     `propertyAddresses/${user}${propertyAddress}/balanceOf`
 } as const

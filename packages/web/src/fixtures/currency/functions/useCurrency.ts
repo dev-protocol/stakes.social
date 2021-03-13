@@ -7,10 +7,17 @@ import { toBigNumber } from '../../utility'
 export const useCurrency = (): {
   currency: 'DEV' | 'USD'
   toCurrency: (amount?: BigNumber | string | number) => BigNumber
+  devToUSD: (amount?: BigNumber | string | number) => BigNumber
 } => {
   const { data: devPrice } = useGetDevPrice()
   const { isCurrencyDEV } = useContext(SettingContext)
   const currency = isCurrencyDEV ? 'DEV' : 'USD'
+  const devToUSD = useCallback(
+    (amount?: BigNumber | string | number) => {
+      return toBigNumber(amount).times(devPrice)
+    },
+    [devPrice]
+  )
   const toCurrency = useCallback(
     (amount?: BigNumber | string | number) => {
       return currency === 'DEV' ? toBigNumber(amount) : toBigNumber(amount).times(devPrice)
@@ -18,5 +25,5 @@ export const useCurrency = (): {
     [currency, devPrice]
   )
 
-  return { currency, toCurrency }
+  return { currency, toCurrency, devToUSD }
 }

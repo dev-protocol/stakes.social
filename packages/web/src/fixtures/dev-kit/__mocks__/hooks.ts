@@ -88,6 +88,10 @@ export const usePropertyName = (propertyAddress?: string) => {
   return { name: `${propertyAddress}-name` }
 }
 
+export const usePropertySymbol = (propertyAddress?: string) => {
+  return { name: `${propertyAddress}-symbol` }
+}
+
 export const useBalanceOfProperty = () => {
   return { balance: toBigNumber(1000) }
 }

@@ -62,7 +62,9 @@ module.exports = withTM(withCss(
       javascriptEnabled: true,
       modifyVars: themeVariables // make your antd custom effective
     },
-    env: {},
+    env: {
+      IS_PREVIEW: process.env.IS_PREVIEW
+    },
     distDir: 'dist/src/.next',
     target: 'serverless'
   })

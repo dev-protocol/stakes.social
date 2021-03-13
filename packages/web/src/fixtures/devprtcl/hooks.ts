@@ -4,6 +4,8 @@ import { message } from 'antd'
 import { UnwrapFunc } from '../utility'
 import { whenDefined } from '../utility/logic'
 
+const messageKey = 'devprtclxyzRESTAccess'
+
 export interface PropertyInformation {
   name: string
   author: { karma: number; address: string }
@@ -24,7 +26,7 @@ export const useGetPropertytInformation = (propertyAddress?: string) => {
   const { data, error } = useSWR<UnwrapFunc<typeof getPropertytInformation> | undefined, Error>(
     SWRCachePath.getPropertyInformation(propertyAddress),
     () => whenDefined(propertyAddress, address => getPropertytInformation(address)),
-    { onError: err => message.error(err.message) }
+    { onError: err => message.error({ content: err.message, key: messageKey }) }
   )
   return { data, error }
 }
@@ -33,7 +35,7 @@ export const useGetAuthorInformation = (authorAddress?: string) => {
   const { data, error } = useSWR<UnwrapFunc<typeof getAuthorInformation> | undefined, Error>(
     SWRCachePath.getAuthorInformation(authorAddress),
     () => whenDefined(authorAddress, address => getAuthorInformation(address)),
-    { onError: err => message.error(err.message) }
+    { onError: err => message.error({ content: err.message, key: messageKey }) }
   )
   return { data, error }
 }
