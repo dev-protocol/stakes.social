@@ -10,7 +10,7 @@ import { Spin } from 'antd'
 import Link from 'next/link'
 
 interface TopStakersProps {
-  propertyAdress?: string
+  propertyAddress?: string
   authorAddress?: string
 }
 
@@ -98,13 +98,13 @@ const Staker = ({ accountAddress, value }: { accountAddress: string; value: numb
   )
 }
 
-const TopStakers = ({ authorAddress, propertyAdress }: TopStakersProps) => {
+const TopStakers = ({ authorAddress, propertyAddress }: TopStakersProps) => {
   const { data: topPropertyStakersData, loading: isPropertyStakingLoading } = useQuery(getTopStakersOfPropertyQuery, {
     variables: {
       limit: 5,
-      property_address: propertyAdress
+      property_address: propertyAddress
     },
-    skip: !!authorAddress || !propertyAdress
+    skip: !!authorAddress || !propertyAddress
   })
 
   const [
