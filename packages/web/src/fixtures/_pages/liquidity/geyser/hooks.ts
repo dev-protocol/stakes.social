@@ -51,7 +51,7 @@ export const useTotalRewards = () => {
   const { nonConnectedWeb3: web3 } = useProvider()
   const { data, error } = useSWR<BigNumber, Error>(
     SWRCachePath.allTokensLocked,
-    whenDefined(web3, x => getTokensLocked(x))
+    whenDefined(web3, x => getTokensLocked(x)) || null
   )
   return {
     data,
@@ -121,7 +121,7 @@ export const useAllTokensClaimed = () => {
   const { nonConnectedWeb3: web3, accountAddress } = useProvider()
   const { data, error } = useSWR<BigNumber, Error>(
     SWRCachePath.useAllTokensClaimed(accountAddress),
-    whenDefined(web3, x => getAllTokensClaimed(x))
+    whenDefined(web3, x => getAllTokensClaimed(x)) || null
   )
   return {
     data,
