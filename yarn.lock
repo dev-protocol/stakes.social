@@ -1338,13 +1338,13 @@
     ramda "0.27.1"
     type-fest "0.20.2"
 
-"@devprotocol/khaos-kit@1.1.1":
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/@devprotocol/khaos-kit/-/khaos-kit-1.1.1.tgz#ed049acdf3d758db6b6f15bb4315c27eeeb3fd2c"
-  integrity sha512-KWtg0gX7mRIY99TsLPZmMfuVHTRVUjXK2yaGnpua3dOj644AGdDUjtXCDM2S9DJxfN6Tvfm929CY0+lLq+tWlw==
+"@devprotocol/khaos-kit@1.1.2":
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/@devprotocol/khaos-kit/-/khaos-kit-1.1.2.tgz#39db1cc5708142e60c77782baecd5692c7d16764"
+  integrity sha512-7rw6OxAmIGL5S+HIyxCzV2HMrdn+uJQb6RbxHBULlOV6UsfHiYtVx2KGUHkrc+f6ucAMbafbDPaGPSOFUMsUvQ==
   dependencies:
     "@devprotocol/khaos-functions" "0.3.4"
-    "@ethersproject/contracts" "5.0.11"
+    "@ethersproject/contracts" "5.0.12"
     bent "^7.3.12"
     ramda "^0.27.1"
     type-fest "^0.21.2"
