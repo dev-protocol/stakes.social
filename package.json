@@ -49,8 +49,5 @@
     "*.json": [
       "prettier --write"
     ]
-  },
-  "dependencies": {
-    "next": "10.0.8"
   }
 }
