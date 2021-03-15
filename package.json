@@ -9,7 +9,8 @@
     "lint": "eslint --fix -c ./.eslintrc.json './packages/**/*.{ts,tsx}'",
     "format": "prettier --write ./packages/web/public/locales/en/PossessionOutline.json",
     "test": "lerna run test",
-    "clean": "lerna run clean && lerna clean --y"
+    "clean": "lerna run clean && lerna clean --y",
+    "prepare": "husky install"
   },
   "devDependencies": {
     "@types/jest": "26.0.20",
@@ -41,11 +42,6 @@
   "workspaces": [
     "packages/*"
   ],
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged  --allow-empty"
-    }
-  },
   "lint-staged": {
     "*.{.ts,tsx}": [
       "eslint --fix -c ./.eslintrc.json"
