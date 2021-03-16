@@ -16,7 +16,7 @@
   "dependencies": {
     "@amcharts/amcharts4": "4.10.16",
     "@ant-design/icons": "4.5.0",
-    "@apollo/client": "3.3.11",
+    "@apollo/client": "3.3.12",
     "@dev/graphql": "0.0.1",
     "@devprotocol/dev-kit": "4.3.0",
     "@devprotocol/khaos-kit": "1.1.2",
