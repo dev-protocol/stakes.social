@@ -14,7 +14,7 @@
     "test": "jest"
   },
   "dependencies": {
-    "@amcharts/amcharts4": "4.10.16",
+    "@amcharts/amcharts4": "4.10.17",
     "@ant-design/icons": "4.6.2",
     "@apollo/client": "3.3.12",
     "@dev/graphql": "0.0.1",
