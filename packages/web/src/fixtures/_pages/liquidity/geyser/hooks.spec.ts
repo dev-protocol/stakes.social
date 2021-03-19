@@ -402,6 +402,9 @@ describe('geyser hooks', () => {
       )
       const { result, waitForNextUpdate } = renderHook(() => useIsAlreadyFinished(useState<boolean>(false)))
       expect(result.current[0]).toBe(false)
+      act(() => {
+        jest.runAllTimers()
+      })
       await waitForNextUpdate()
       expect(result.current[0]).toBe(true)
     })
