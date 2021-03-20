@@ -36,7 +36,7 @@ export const usePostSignGitHubMarketAsset = () => {
       throw emulated
     }
 
-    const expectedSuccess = emulated?.data?.args[1] === 0 && emulated.data?.expectedTransaction.success
+    const expectedSuccess = emulated?.data?.args[1] === 0
     if (!expectedSuccess) {
       const err = new Error('authentication dry run failed')
       message.error({ content: err.message, key })
