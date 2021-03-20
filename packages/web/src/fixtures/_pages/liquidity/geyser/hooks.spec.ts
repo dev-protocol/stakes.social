@@ -402,7 +402,7 @@ describe('geyser hooks', () => {
       )
       const { result, waitForNextUpdate } = renderHook(() => useIsAlreadyFinished(useState<boolean>(false)))
       expect(result.current[0]).toBe(false)
-      await waitForNextUpdate()
+      await waitForNextUpdate({ timeout: 1500 })
       expect(result.current[0]).toBe(true)
     })
   })
