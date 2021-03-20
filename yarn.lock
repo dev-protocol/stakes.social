@@ -1325,10 +1325,10 @@
     bent "^7.3.12"
     ramda "^0.27.0"
 
-"@devprotocol/khaos-core@1.2.3":
-  version "1.2.3"
-  resolved "https://registry.yarnpkg.com/@devprotocol/khaos-core/-/khaos-core-1.2.3.tgz#f411b5a510674c712bb0716d43f5b64e70788e51"
-  integrity sha512-aovocHv8XQ4edT05J5OPvLLXBStyP0VhAvRYVwbLHYsp/gpQe81XCg9XPVe79wGwSn5LEULWzjhj3U8HUlsjtA==
+"@devprotocol/khaos-core@1.2.6":
+  version "1.2.6"
+  resolved "https://registry.yarnpkg.com/@devprotocol/khaos-core/-/khaos-core-1.2.6.tgz#76acd99d8e7af2df73eaaf486f136f5fb9d23d95"
+  integrity sha512-clEoCb2EBm1rVxin+2P+nKkpBGmEOVKe+X2KYRfJeXh1StUcY7SQKhE+OZF68fkU4V8shKie3gDqpjdLtPUD5g==
   dependencies:
     "@azure/functions" "^1.2.3"
     "@devprotocol/util-ts" "2.1.0"
@@ -1337,24 +1337,24 @@
     jsonwebtoken "^8.5.1"
     ramda "^0.27.1"
 
-"@devprotocol/khaos-functions@0.3.4":
-  version "0.3.4"
-  resolved "https://registry.yarnpkg.com/@devprotocol/khaos-functions/-/khaos-functions-0.3.4.tgz#cfa69a63ae28560483b917e9fd0034957df50c86"
-  integrity sha512-bzXy27olO51HjqKdVskqxLcbx3albhSLsiD+EvKFfgmzxC1ozelRUXrrVXvgmtXqZSh8UeTjQNKZAezwgj8euw==
+"@devprotocol/khaos-functions@0.3.6":
+  version "0.3.6"
+  resolved "https://registry.yarnpkg.com/@devprotocol/khaos-functions/-/khaos-functions-0.3.6.tgz#b1c83a79a1b9c3645b91fcf5dbab868736d42519"
+  integrity sha512-ZCj+B/FdpdwYZK0Xrfh6qrVd2cZZB+FgFT8zGstdMnKE+/mc8Kdd2zCHAz3aobU+m1EGB/GP+WKHyxIGG3ObbA==
   dependencies:
     "@azure/functions" "1.2.3"
-    "@devprotocol/khaos-core" "1.2.3"
+    "@devprotocol/khaos-core" "1.2.6"
     "@devprotocol/util-ts" "2.1.0"
     bent "7.3.12"
     ramda "0.27.1"
-    type-fest "0.20.2"
+    type-fest "0.21.3"
 
-"@devprotocol/khaos-kit@1.1.2":
-  version "1.1.2"
-  resolved "https://registry.yarnpkg.com/@devprotocol/khaos-kit/-/khaos-kit-1.1.2.tgz#39db1cc5708142e60c77782baecd5692c7d16764"
-  integrity sha512-7rw6OxAmIGL5S+HIyxCzV2HMrdn+uJQb6RbxHBULlOV6UsfHiYtVx2KGUHkrc+f6ucAMbafbDPaGPSOFUMsUvQ==
+"@devprotocol/khaos-kit@1.1.3":
+  version "1.1.3"
+  resolved "https://registry.yarnpkg.com/@devprotocol/khaos-kit/-/khaos-kit-1.1.3.tgz#b0982438f2460d92bfb454ac5c0649dfbfd2f710"
+  integrity sha512-5q/LdHVH1IF8fVZaqPMj/MS5uUWI4HeY2e4CAuDLmQr3TA670geLhebDg9Nhg1w+rlZDrlrNarQXkDTdoQJ6YA==
   dependencies:
-    "@devprotocol/khaos-functions" "0.3.4"
+    "@devprotocol/khaos-functions" "0.3.6"
     "@ethersproject/contracts" "5.0.12"
     bent "^7.3.12"
     ramda "^0.27.1"
@@ -20221,10 +20221,10 @@ type-detect@4.0.8:
   resolved "https://registry.yarnpkg.com/type-detect/-/type-detect-4.0.8.tgz#7646fb5f18871cfbb7749e69bd39a6388eb7450c"
   integrity sha512-0fr/mIH1dlO+x7TlcMy+bIDqKPsw/70tVyeHW787goQjhmqaZe10uwLujubK9q9Lg6Fiho1KUKDYz0Z7k7g5/g==
 
-type-fest@0.20.2, type-fest@^0.20.2:
-  version "0.20.2"
-  resolved "https://registry.yarnpkg.com/type-fest/-/type-fest-0.20.2.tgz#1bf207f4b28f91583666cb5fbd327887301cd5f4"
-  integrity sha512-Ne+eE4r0/iWnpAxD852z3A+N0Bt5RN//NjJwRd2VFHEmrywxf5vsZlh4R6lixl6B+wz/8d+maTSAkN1FIkI3LQ==
+type-fest@0.21.3:
+  version "0.21.3"
+  resolved "https://registry.yarnpkg.com/type-fest/-/type-fest-0.21.3.tgz#d260a24b0198436e133fa26a524a6d65fa3b2e37"
+  integrity sha512-t0rzBq87m3fVcduHDUFhKmyyX+9eo6WQjZvf51Ea/M0Q7+T374Jp1aUiyUl0GKxp8M/OETVHSDvmkyPgvX+X2w==
 
 type-fest@^0.11.0:
   version "0.11.0"
@@ -20240,6 +20240,11 @@ type-fest@^0.18.0:
   version "0.18.1"
   resolved "https://registry.yarnpkg.com/type-fest/-/type-fest-0.18.1.tgz#db4bc151a4a2cf4eebf9add5db75508db6cc841f"
   integrity sha512-OIAYXk8+ISY+qTOwkHtKqzAuxchoMiD9Udx+FSGQDuiRR+PJKJHc2NJAXlbhkGwTt/4/nKZxELY1w3ReWOL8mw==
+
+type-fest@^0.20.2:
+  version "0.20.2"
+  resolved "https://registry.yarnpkg.com/type-fest/-/type-fest-0.20.2.tgz#1bf207f4b28f91583666cb5fbd327887301cd5f4"
+  integrity sha512-Ne+eE4r0/iWnpAxD852z3A+N0Bt5RN//NjJwRd2VFHEmrywxf5vsZlh4R6lixl6B+wz/8d+maTSAkN1FIkI3LQ==
 
 type-fest@^0.21.2:
   version "0.21.2"
