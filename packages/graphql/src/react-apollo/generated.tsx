@@ -5851,6 +5851,19 @@ export type GetPropertyAuthenticationQuery = { __typename?: 'query_root' } & {
   >
 }
 
+export type GetPropertyBalanceQueryVariables = Exact<{
+  account_address: Scalars['String']
+}>
+
+export type GetPropertyBalanceQuery = { __typename?: 'query_root' } & {
+  property_balance: Array<
+    { __typename?: 'property_balance' } & Pick<
+      Property_Balance,
+      'account_address' | 'balance' | 'block_number' | 'is_author' | 'property_address'
+    >
+  >
+}
+
 export type TotalStakedAccountQueryVariables = Exact<{
   account_address: Scalars['String']
 }>
@@ -6194,6 +6207,55 @@ export type GetPropertyAuthenticationLazyQueryHookResult = ReturnType<typeof use
 export type GetPropertyAuthenticationQueryResult = Apollo.QueryResult<
   GetPropertyAuthenticationQuery,
   GetPropertyAuthenticationQueryVariables
+>
+export const GetPropertyBalanceDocument = gql`
+  query getPropertyBalance($account_address: String!) {
+    property_balance(where: { account_address: { _eq: $account_address } }) {
+      account_address
+      balance
+      block_number
+      is_author
+      property_address
+    }
+  }
+`
+
+/**
+ * __useGetPropertyBalanceQuery__
+ *
+ * To run a query within a React component, call `useGetPropertyBalanceQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetPropertyBalanceQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetPropertyBalanceQuery({
+ *   variables: {
+ *      account_address: // value for 'account_address'
+ *   },
+ * });
+ */
+export function useGetPropertyBalanceQuery(
+  baseOptions: Apollo.QueryHookOptions<GetPropertyBalanceQuery, GetPropertyBalanceQueryVariables>
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useQuery<GetPropertyBalanceQuery, GetPropertyBalanceQueryVariables>(GetPropertyBalanceDocument, options)
+}
+export function useGetPropertyBalanceLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<GetPropertyBalanceQuery, GetPropertyBalanceQueryVariables>
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useLazyQuery<GetPropertyBalanceQuery, GetPropertyBalanceQueryVariables>(
+    GetPropertyBalanceDocument,
+    options
+  )
+}
+export type GetPropertyBalanceQueryHookResult = ReturnType<typeof useGetPropertyBalanceQuery>
+export type GetPropertyBalanceLazyQueryHookResult = ReturnType<typeof useGetPropertyBalanceLazyQuery>
+export type GetPropertyBalanceQueryResult = Apollo.QueryResult<
+  GetPropertyBalanceQuery,
+  GetPropertyBalanceQueryVariables
 >
 export const TotalStakedAccountDocument = gql`
   query totalStakedAccount($account_address: String!) {

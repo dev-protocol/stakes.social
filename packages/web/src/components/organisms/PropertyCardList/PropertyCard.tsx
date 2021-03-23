@@ -5,6 +5,7 @@ import {
   useGetTotalStakingAmount,
   useGetTotalRewardsAmount,
   useGetMyStakingRewardAmount,
+  useGetTreasuryAmount,
   usePropertyAuthor
 } from 'src/fixtures/dev-kit/hooks'
 import { useProvider } from 'src/fixtures/wallet/hooks'
@@ -198,6 +199,7 @@ export const PropertyCard = ({ propertyAddress, assets }: Props) => {
   const closeModal = () => {
     setModalStates({ ...modalStates, visible: false })
   }
+  const { treasuryAmount } = useGetTreasuryAmount(propertyAddress)
 
   return (
     <Card>
@@ -209,6 +211,7 @@ export const PropertyCard = ({ propertyAddress, assets }: Props) => {
       <Link href={'/[propertyAddress]'} as={`/${propertyAddress}`}>
         <CardContents>
           <Title>{includeAssets || 'Property'}</Title>
+          <Title>{treasuryAmount && treasuryAmount.toFixed()}DEV</Title>
           <PropertyDescription>
             {dataProperty?.description ||
               'Stake DEV tokens to provide funding for OSS projects so that they can maintain development.'}
