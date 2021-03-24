@@ -79,8 +79,10 @@ class NextApp extends App<AppInitialProps & WithApolloProps<{}>> {
     web3ForInjected.on('accountsChanged', async () => {
       const newWeb3ForInjected: any = await detectEthereumProvider()
       const newWeb3 = new Web3(newWeb3ForInjected)
-      await getAccountAddress(newWeb3, true)
-      this.setWeb3(newWeb3)
+      const changedAccountAddress = await getAccountAddress(newWeb3, true)
+      if (changedAccountAddress) {
+        this.setWeb3(newWeb3)
+      }
     })
 
     const isAuthorized = await getAccountAddress(new Web3(web3ForInjected))
