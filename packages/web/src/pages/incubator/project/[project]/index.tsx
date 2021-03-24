@@ -277,7 +277,8 @@ const OnboardingSection = ({ isModal, onStateChange, onBoardChange, isOnboarding
 }
 
 const GatherOnboardingContentPage = () => {
-  const [, , propertyAddress] = getPath(useRouter().asPath)
+  const [, , urlPathArg] = getPath(useRouter().asPath)
+  const propertyAddress = urlPathArg.split('?')[0]
   const { data } = useGetIncubators()
   const project = whenDefined(data, x => x.find(y => y.property?.address === propertyAddress))
 
