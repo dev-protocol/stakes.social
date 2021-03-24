@@ -261,7 +261,8 @@ const Section = styled.a<{ activeSection: string; section: string }>`
 
 const AuthorAddressDetail = (_: Props) => {
   const [ens, setENS] = useState('')
-  const [, authorAddress] = getPath(useRouter().asPath)
+  const [, urlPathArg] = getPath(useRouter().asPath)
+  const authorAddress = urlPathArg.split('?')[0]
   const author: string = typeof authorAddress == 'string' ? authorAddress : 'none'
   const { data: authorInformation } = useGetAuthorInformation(author)
   const [paginationProps, setPaginationProps] = useState<{ offset: number; limit: number; currentPage: number }>({

@@ -382,7 +382,8 @@ const PropertyAbout = ({
 }
 
 const PropertyAddressDetail = (_: Props) => {
-  const [propertyAddress] = getPath(useRouter().asPath)
+  const [urlPathArg] = getPath(useRouter().asPath)
+  const propertyAddress = urlPathArg.split('?')[0]
   const { apy, creators } = useAPY()
   const { data } = useGetPropertyAuthenticationQuery({ variables: { propertyAddress } })
   const isExistProperty = useMemo(() => data && data?.property_authentication.length > 0, [data])
