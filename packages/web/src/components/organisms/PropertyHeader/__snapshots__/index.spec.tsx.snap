@@ -4,77 +4,77 @@ exports[`PropertyHeader Snapshot 1`] = `
 <body>
   <div>
     <div
-      class="sc-1bnntxi-0 abVPQ"
+      class="sc-1bnntxi-0 ppsXz"
     >
       <div
-        class="sc-1bnntxi-7 erBNDx"
+        class="sc-1bnntxi-7 cFBkYa"
       >
         <h1
-          class="sc-1bnntxi-1 fIBpSf"
+          class="sc-1bnntxi-1 fCsrFQ"
         >
           authentication-id's Pool
         </h1>
       </div>
       <div
-        class="sc-1bnntxi-2 brWFqW"
+        class="sc-1bnntxi-2 iFkDzF"
       >
         <div
-          class="sc-1bnntxi-5 iKltlT"
+          class="sc-1bnntxi-5 ldliCQ"
         >
           <div
-            class="sc-1bnntxi-4 fXFCBO"
+            class="sc-1bnntxi-4 fRTFAp"
           >
             <span
-              class="xnqjv4-0 iiUDCf"
+              class="xnqjv4-0 dFdKyg"
             >
               N/A
               %
             </span>
             <div
-              class="sc-1bnntxi-3 VZTWB"
+              class="sc-1bnntxi-3 fUfUpC"
             />
             <span>
               APY Stakers
             </span>
           </div>
           <div
-            class="sc-1bnntxi-3 VZTWB"
+            class="sc-1bnntxi-3 fUfUpC"
           >
             |
           </div>
           <div
-            class="sc-1bnntxi-4 fXFCBO"
+            class="sc-1bnntxi-4 fRTFAp"
           >
             <span
-              class="xnqjv4-0 iiUDCf"
+              class="xnqjv4-0 dFdKyg"
             >
                
               N/A
               %
             </span>
             <div
-              class="sc-1bnntxi-3 VZTWB"
+              class="sc-1bnntxi-3 fUfUpC"
             />
             <span>
               APY Creators
             </span>
           </div>
           <div
-            class="sc-1bnntxi-3 VZTWB"
+            class="sc-1bnntxi-3 fUfUpC"
           >
             |
           </div>
           <div
-            class="sc-1bnntxi-4 fXFCBO"
+            class="sc-1bnntxi-4 fRTFAp"
           >
             <span
-              class="xnqjv4-0 iiUDCf"
+              class="xnqjv4-0 dFdKyg"
             >
                
               N/A
             </span>
             <div
-              class="sc-1bnntxi-3 VZTWB"
+              class="sc-1bnntxi-3 fUfUpC"
             />
             <span>
               Karma
@@ -82,10 +82,10 @@ exports[`PropertyHeader Snapshot 1`] = `
           </div>
         </div>
         <div
-          class="sc-1bnntxi-6 gYTABt"
+          class="sc-1bnntxi-6 jSDrda"
         >
           <a
-            class="sc-17tlp0z-0 dbQRtf"
+            class="sc-17tlp0z-0 jfHyNg"
             href="https://app.uniswap.org/#/swap?outputCurrency=0x5caf454ba92e6f2c929df14667ee360ed9fd5b26"
             rel="noreferrer"
             target="_blank"

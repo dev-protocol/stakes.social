@@ -4,7 +4,7 @@ exports[`Nav Snapshot 1`] = `
 <body>
   <div>
     <div
-      class="ant-tabs ant-tabs-top o1nzqe-0 dmsezF"
+      class="ant-tabs ant-tabs-top o1nzqe-0 ixmNHm"
     >
       <div
         class="ant-tabs-nav"
@@ -101,7 +101,7 @@ exports[`Nav Snapshot 1`] = `
             tabindex="0"
           >
             <div
-              class="o1nzqe-1 eIXAHs"
+              class="o1nzqe-1 hFZHNj"
             />
           </div>
           <div

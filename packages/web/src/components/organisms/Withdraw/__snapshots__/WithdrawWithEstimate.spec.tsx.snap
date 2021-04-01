@@ -4,17 +4,17 @@ exports[`WithdrawWithEstimate Snapshot 1`] = `
 <body>
   <div>
     <div
-      class="sc-89297o-0 hdakyE"
+      class="sc-89297o-0 AcyUL"
     >
       <div
-        class="sc-89297o-0 hdakyE"
+        class="sc-89297o-0 AcyUL"
       >
         <div
-          class="sc-1d8aayd-1 lldfxv"
+          class="sc-1d8aayd-1 iAPWIQ"
           style="opacity: 1;"
         >
           <span
-            class="ant-input-group-wrapper ant-input-group-wrapper-lg ant-input-search ant-input-search-large ant-input-search-with-button sc-1d8aayd-0 fnjsag"
+            class="ant-input-group-wrapper ant-input-group-wrapper-lg ant-input-search ant-input-search-large ant-input-search-with-button sc-1d8aayd-0 eqFWnb"
           >
             <span
               class="ant-input-wrapper ant-input-group"
@@ -32,7 +32,7 @@ exports[`WithdrawWithEstimate Snapshot 1`] = `
                   class="ant-input-suffix"
                 >
                   <button
-                    class="sc-1ttu0x8-0 ibloSD"
+                    class="sc-1ttu0x8-0 nVgnQ"
                   >
                     DEV
                   </button>
@@ -54,10 +54,10 @@ exports[`WithdrawWithEstimate Snapshot 1`] = `
           </span>
         </div>
         <div
-          class="sc-1al8l63-1 beJJRp"
+          class="sc-1al8l63-1 kpAkgG"
         >
           <div
-            class="sc-1al8l63-0 iPwXaw"
+            class="sc-1al8l63-0 jctMRj"
           >
             <span
               aria-label="info-circle"
@@ -90,7 +90,7 @@ exports[`WithdrawWithEstimate Snapshot 1`] = `
         </div>
       </div>
       <div
-        class="ant-card ant-card-bordered sc-1lowp9k-0 dtNkpz"
+        class="ant-card ant-card-bordered sc-1lowp9k-0 leULc"
       >
         <div
           class="ant-card-head"
