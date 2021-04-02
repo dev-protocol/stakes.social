@@ -7,23 +7,23 @@ exports[`AuthHeader Snapshot 1`] = `
       style="position: sticky; top: 0px; width: 100%; z-index: 5;"
     >
       <header
-        class="sc-1bz6snd-0 dLQLKn"
+        class="sc-1bz6snd-0 idHZBG"
       >
         <div
-          class="sc-1wzqvkc-0 lfAJyP"
+          class="sc-1wzqvkc-0 bDZNdS"
         >
           <header
-            class="sc-1bz6snd-1 eAhjOB"
+            class="sc-1bz6snd-1 gAtabw"
           >
             <div
-              class="sc-1bz6snd-2 bPccYU"
+              class="sc-1bz6snd-2 ggMnbt"
             >
               <a
-                class="sc-38x7tx-0 ksYOeP"
+                class="sc-38x7tx-0 gHMlyO"
                 href="/"
               >
                 <span
-                  class="sc-1u809dt-0 iGVEdJ"
+                  class="sc-1u809dt-0 frgmkw"
                 >
                   <svg
                     id="headerlogo"
@@ -39,7 +39,7 @@ exports[`AuthHeader Snapshot 1`] = `
                     />
                   </svg>
                   <span
-                    class="sc-1u809dt-1 GVWXL"
+                    class="sc-1u809dt-1 gShIBC"
                   >
                     Stakes.social
                   </span>
@@ -47,7 +47,7 @@ exports[`AuthHeader Snapshot 1`] = `
               </a>
             </div>
             <div
-              class="sc-1bz6snd-5 exPWsM"
+              class="sc-1bz6snd-5 jLlDyF"
             >
               <svg
                 height="50"
@@ -114,7 +114,7 @@ exports[`AuthHeader Snapshot 1`] = `
           </header>
         </div>
         <div
-          class="sc-1dxoc5d-2 kMDNvN"
+          class="sc-1dxoc5d-2 jBhGSQ"
         >
           <span
             style="font-size: 0.8em;"
@@ -124,17 +124,17 @@ exports[`AuthHeader Snapshot 1`] = `
         </div>
       </header>
       <div
-        class="ccfdvq-0 emwySx"
+        class="ccfdvq-0 bBgDHI"
       >
         Beta Version
       </div>
     </div>
     <div
-      class="sc-9gd508-0 kVnayz"
+      class="sc-9gd508-0 hAfpDe"
       height="300"
     >
       <h2
-        class="sc-1w8sy4l-1 jkhsXn"
+        class="sc-1w8sy4l-1 lkBdGq"
       >
         Choose Market
       </h2>

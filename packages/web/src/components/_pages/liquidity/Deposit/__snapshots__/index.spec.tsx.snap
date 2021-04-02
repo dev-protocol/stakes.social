@@ -4,7 +4,7 @@ exports[`Deposit Snapshot 1`] = `
 <body>
   <div>
     <form
-      class="ant-form ant-form-vertical pju26w-0 fMUrbe"
+      class="ant-form ant-form-vertical pju26w-0 dSDtbL"
     >
       <div
         class="ant-statistic"
@@ -37,7 +37,7 @@ exports[`Deposit Snapshot 1`] = `
               class="ant-form-item-control-input-content"
             >
               <div
-                class="sc-69st3h-0 dcZGOJ"
+                class="sc-69st3h-0 cRboZM"
               >
                 <label
                   for="amount"
@@ -45,7 +45,7 @@ exports[`Deposit Snapshot 1`] = `
                   Your amount
                 </label>
                 <span
-                  class="ant-input-affix-wrapper ant-input-affix-wrapper-lg sicgyx-0 hxsqLS"
+                  class="ant-input-affix-wrapper ant-input-affix-wrapper-lg sicgyx-0 bOXLbn"
                 >
                   <input
                     class="ant-input ant-input-lg"
@@ -57,12 +57,12 @@ exports[`Deposit Snapshot 1`] = `
                     class="ant-input-suffix"
                   >
                     <span
-                      class="li6qma-0 eaxmSh"
+                      class="li6qma-0 zLRgU"
                     >
                       ETHDEV-V2
                     </span>
                     <button
-                      class="ant-btn ant-btn-primary ant-btn-sm zinbpr-0 hOHNdV"
+                      class="ant-btn ant-btn-primary ant-btn-sm zinbpr-0 cGMIuk"
                       type="button"
                     >
                       <span>
@@ -96,7 +96,7 @@ exports[`Deposit Snapshot 1`] = `
               class="ant-form-item-control-input-content"
             >
               <div
-                class="sc-69st3h-0 dcZGOJ"
+                class="sc-69st3h-0 cRboZM"
               >
                 <label
                   for="estimated"
@@ -104,7 +104,7 @@ exports[`Deposit Snapshot 1`] = `
                   Your estimated reward
                 </label>
                 <input
-                  class="ant-input ant-input-lg ant-input-disabled sicgyx-0 hxsqLS"
+                  class="ant-input ant-input-lg ant-input-disabled sicgyx-0 bOXLbn"
                   disabled=""
                   id="estimated"
                   type="text"

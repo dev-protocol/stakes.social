@@ -7,21 +7,21 @@ exports[`PropertyCardList Snapshot 1`] = `
       style="flex-grow: 1; max-width: 100vw;"
     >
       <div
-        class="sc-190q6or-1 fXfFfG"
+        class="sc-190q6or-1 fQIwkT"
       >
         <h2
-          class="sc-190q6or-0 kOBHVz"
+          class="sc-190q6or-0 iZUhvG"
         >
           Asset Pools
         </h2>
         <div
-          class="sc-13ny1rq-0 kvjJoV"
+          class="sc-13ny1rq-0 gqVrvc"
         >
           <div
-            class="sc-11akcse-0 bvssMi"
+            class="sc-11akcse-0 xXsYz"
           >
             <div
-              class="sc-11akcse-1 kYQPrn"
+              class="sc-11akcse-1 eEhHJe"
             >
               <span
                 aria-label="search"
@@ -44,7 +44,7 @@ exports[`PropertyCardList Snapshot 1`] = `
               </span>
             </div>
             <input
-              class="sc-11akcse-3 fDqHaP"
+              class="sc-11akcse-3 kmpSwG"
               data-cy="SearchbarInput"
               placeholder="Search for a project"
               value=""
@@ -52,7 +52,7 @@ exports[`PropertyCardList Snapshot 1`] = `
           </div>
         </div>
         <div
-          class="sc-190q6or-4 dwkSrQ"
+          class="sc-190q6or-4 bMrBAh"
         >
           <div
             style="flex-grow: 1;"
@@ -147,23 +147,23 @@ exports[`PropertyCardList Snapshot 1`] = `
             </div>
           </div>
           <div
-            class="dkx7pb-2 dIEVGI"
+            class="dkx7pb-2 hTTHUl"
           >
             <button
-              class="dkx7pb-0 kAUbOy"
+              class="dkx7pb-0 lcYnSP"
             >
               <div
-                class="dkx7pb-1 jNhfho"
+                class="dkx7pb-1 iYPzUd"
               />
               <span>
                 DEV
               </span>
             </button>
             <button
-              class="dkx7pb-0 jyCukI"
+              class="dkx7pb-0 fhmGsJ"
             >
               <div
-                class="dkx7pb-1 ggmng"
+                class="dkx7pb-1 kwyJul"
               />
               <span>
                 USD
@@ -173,7 +173,7 @@ exports[`PropertyCardList Snapshot 1`] = `
         </div>
       </div>
       <div
-        class="sc-190q6or-3 XzkKm"
+        class="sc-190q6or-3 diUfMv"
       >
         <a
           href="/"
@@ -200,40 +200,40 @@ exports[`PropertyCardList Snapshot 1`] = `
         </a>
       </div>
       <div
-        class="oxa8xu-0 sc-190q6or-2 fXTdan bcMCCA"
+        class="oxa8xu-0 sc-190q6or-2 OHvim jYNocJ"
       >
         <div
-          class="oxa8xu-0 k29mxm-0 fXTdan eMRUia"
+          class="oxa8xu-0 k29mxm-0 OHvim eZPmvD"
         >
           <div
-            class="k29mxm-15 fwToxb"
+            class="k29mxm-15 CwZiC"
           />
           <div
-            class="oxa8xu-0 k29mxm-8 fXTdan fzAANt"
+            class="oxa8xu-0 k29mxm-8 OHvim biMqOE"
           >
             <span
-              class="k29mxm-2 kLIMSq"
+              class="k29mxm-2 eXKArT"
             >
               authentication-id
             </span>
             <span
-              class="k29mxm-13 eAWvsW"
+              class="k29mxm-13 inwxFT"
             >
               Stake DEV tokens to provide funding for OSS projects so that they can maintain development.
             </span>
             <div
-              class="k29mxm-12 aGWRQ"
+              class="k29mxm-12 iIkYJl"
             >
               <div
-                class="sc-17om263-0 eA-dhBj"
+                class="sc-17om263-0 ekfoRy"
               >
                 <div
-                  class="sc-17om263-1 gfiigQ"
+                  class="sc-17om263-1 bqzkiJ"
                   size="60"
                 />
               </div>
               <div
-                class="k29mxm-14 hxMvrc"
+                class="k29mxm-14 gYteWh"
               >
                 <span
                   style="font-weight: lighter;"
@@ -250,56 +250,56 @@ exports[`PropertyCardList Snapshot 1`] = `
               </div>
             </div>
             <div
-              class="k29mxm-1 hJBKnZ"
+              class="k29mxm-1 keqdYE"
             >
               <div
-                class="k29mxm-3 ilzRYg"
+                class="k29mxm-3 bAPZHB"
               >
                 <span>
                   5,000
                    
                 </span>
                 <span
-                  class="k29mxm-11 cokstz"
+                  class="k29mxm-11 kAKVJO"
                 >
                   Your stake
                 </span>
               </div>
               <div
-                class="k29mxm-5 jyHFHG"
+                class="k29mxm-5 bnIkUn"
               >
                 <span>
                   5,000
                    
                 </span>
                 <span
-                  class="k29mxm-11 cokstz"
+                  class="k29mxm-11 kAKVJO"
                 >
                   Your reward
                 </span>
               </div>
               <div
-                class="k29mxm-4 jWLxRC"
+                class="k29mxm-4 hvufJD"
               >
                 <span>
                   10,000
                    
                 </span>
                 <span
-                  class="k29mxm-11 cokstz"
+                  class="k29mxm-11 kAKVJO"
                 >
                   Total staked
                 </span>
               </div>
               <div
-                class="k29mxm-6 fWyFkV"
+                class="k29mxm-6 cykiRQ"
               >
                 <span>
                   10,000
                    
                 </span>
                 <span
-                  class="k29mxm-11 cokstz"
+                  class="k29mxm-11 kAKVJO"
                 >
                   Creator reward
                 </span>
@@ -307,15 +307,15 @@ exports[`PropertyCardList Snapshot 1`] = `
             </div>
           </div>
           <div
-            class="k29mxm-7 eNZjrW"
+            class="k29mxm-7 bOYpyf"
           >
             <button
-              class="k29mxm-9 jffRiN"
+              class="k29mxm-9 hFBjgo"
             >
               Stake
             </button>
             <button
-              class="k29mxm-10 eCukLh"
+              class="k29mxm-10 fdRRcY"
             >
               Withdraw
             </button>
@@ -323,7 +323,7 @@ exports[`PropertyCardList Snapshot 1`] = `
         </div>
       </div>
       <div
-        class="sc-190q6or-5 fGKKQ"
+        class="sc-190q6or-5 cHfwEJ"
       >
         <ul
           class="ant-pagination"
