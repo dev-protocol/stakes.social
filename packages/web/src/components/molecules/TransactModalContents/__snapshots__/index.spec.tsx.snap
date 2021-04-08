@@ -4,39 +4,39 @@ exports[`TransactModalContents Snapshot 1`] = `
 <body>
   <div>
     <div
-      class="qs0k37-0 jHBAYx"
+      class="qs0k37-0 fOUFqT"
     >
       <div
-        class="qs0k37-1 fJfijo"
+        class="qs0k37-1 kuavYO"
       >
         <div
-          class="sc-2tazhb-0 xkRoZ"
+          class="sc-2tazhb-0 uXqsr"
         >
           <div
-            class="sc-2tazhb-1 hZCnjb"
+            class="sc-2tazhb-1 cIwcvd"
             size="60"
           />
         </div>
         <h4
-          class="sc-1w8sy4l-3 qs0k37-3 cqQVgy jVYmtO"
+          class="sc-1w8sy4l-3 qs0k37-3 drLAaI csqntA"
         >
           0x0-name
         </h4>
         <span
-          class="qs0k37-4 hwMEdI"
+          class="qs0k37-4 dJgKku"
         >
           0x0
         </span>
       </div>
       <div
-        class="sc-89297o-0 hdakyE"
+        class="sc-89297o-0 AnwdG"
       >
         <div
-          class="sc-1d8aayd-1 lldfxv"
+          class="sc-1d8aayd-1 aOjqd"
           style="opacity: 1;"
         >
           <span
-            class="ant-input-group-wrapper ant-input-group-wrapper-lg ant-input-search ant-input-search-large ant-input-search-with-button sc-1d8aayd-0 dMeuEc"
+            class="ant-input-group-wrapper ant-input-group-wrapper-lg ant-input-search ant-input-search-large ant-input-search-with-button sc-1d8aayd-0 KuyHK"
           >
             <span
               class="ant-input-wrapper ant-input-group"
@@ -54,7 +54,7 @@ exports[`TransactModalContents Snapshot 1`] = `
                   class="ant-input-suffix"
                 >
                   <button
-                    class="sc-1ttu0x8-0 ibloSD"
+                    class="sc-1ttu0x8-0 ksCpld"
                   >
                     DEV
                   </button>
