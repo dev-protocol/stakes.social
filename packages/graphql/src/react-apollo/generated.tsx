@@ -5853,6 +5853,7 @@ export type GetPropertyAuthenticationQuery = { __typename?: 'query_root' } & {
 
 export type GetPropertyBalanceQueryVariables = Exact<{
   account_address: Scalars['String']
+  property_address: Scalars['String']
 }>
 
 export type GetPropertyBalanceQuery = { __typename?: 'query_root' } & {
@@ -6209,8 +6210,10 @@ export type GetPropertyAuthenticationQueryResult = Apollo.QueryResult<
   GetPropertyAuthenticationQueryVariables
 >
 export const GetPropertyBalanceDocument = gql`
-  query getPropertyBalance($account_address: String!) {
-    property_balance(where: { account_address: { _eq: $account_address } }) {
+  query getPropertyBalance($account_address: String!, $property_address: String!) {
+    property_balance(
+      where: { account_address: { _eq: $account_address }, property_address: { _eq: $property_address } }
+    ) {
       account_address
       balance
       block_number
@@ -6233,6 +6236,7 @@ export const GetPropertyBalanceDocument = gql`
  * const { data, loading, error } = useGetPropertyBalanceQuery({
  *   variables: {
  *      account_address: // value for 'account_address'
+ *      property_address: // value for 'property_address'
  *   },
  * });
  */

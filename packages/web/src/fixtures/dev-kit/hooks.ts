@@ -102,6 +102,19 @@ export const useGetMyHolderAmount = (propertyAddress: string) => {
   return { myHolderAmount: data ? toNaturalNumber(data) : undefined, error }
 }
 
+export const useGetHolderAmountByAddress = (propertyAddress: string, srcAddress?: string) => {
+  const { nonConnectedWeb3 } = useProvider()
+  const { data, error } = useSWR<UnwrapFunc<typeof getMyHolderAmount>, Error>(
+    SWRCachePath.getMyHolderAmount(propertyAddress, srcAddress),
+    () =>
+      whenDefinedAll([nonConnectedWeb3, srcAddress], ([client, account]) =>
+        getMyHolderAmount(client, propertyAddress, account)
+      ),
+    { onError: err => message.error(err.message) }
+  )
+  return { holderAmount: data ? toNaturalNumber(data) : undefined, error }
+}
+
 export const useGetTreasuryAmount = (propertyAddress: string) => {
   const { nonConnectedWeb3 } = useProvider()
   const { data, error } = useSWR<UnwrapFunc<typeof getTreasuryAmount>, Error>(

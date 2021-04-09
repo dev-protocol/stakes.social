@@ -1,13 +1,10 @@
 import React, { useMemo } from 'react'
-import BigNumber from 'bignumber.js'
 import { PropertyCardList } from 'src/components/organisms/PropertyCardList'
 import { Banner } from 'src/components/organisms/MainHeader'
 import { Footer } from 'src/components/organisms/Footer'
 import { useRouter } from 'next/router'
 
-import { toNaturalNumber } from 'src/fixtures/utility'
 import { useAPY, useAnnualSupplyGrowthRatio } from 'src/fixtures/dev-kit/hooks'
-import { useGetPropertyBalanceQuery } from '@dev/graphql'
 import { SupplySummary } from 'src/components/molecules/SupplySummaly'
 import { Header } from 'src/components/organisms/Header'
 import { FeatureTag } from 'src/components/organisms/PropertyCardList'
@@ -53,18 +50,6 @@ const Index = (_: Props) => {
     }
     return '' as FeatureTag
   }, [router])
-
-  const { data } = useGetPropertyBalanceQuery({
-    variables: {
-      account_address: '0x8F9dc5C9CE6834D8C9897Faf5d44Ac36CA073595'
-    }
-  })
-  if (data) {
-    data.property_balance.forEach(d => {
-      const b = new BigNumber(d.balance)
-      console.log(d.property_address, toNaturalNumber(b).toFixed())
-    })
-  }
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
