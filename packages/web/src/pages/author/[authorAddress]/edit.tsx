@@ -1,4 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react'
+import { list as getGoogleProfanityWords } from 'google-profanity-words'
 import { Footer } from 'src/components/organisms/Footer'
 import { Headline } from 'src/components/atoms/Headline'
 import { Header } from 'src/components/organisms/Header'
@@ -48,6 +49,18 @@ const ProfileUpdateForm = ({ accountAddress }: { accountAddress: string }) => {
     [createAccount, updateAccount, data]
   )
 
+  const checkProfanityWord = async (_: any, inputStr: string) => {
+    const check = inputStr.split(' ').map((s: string) => {
+      if (getGoogleProfanityWords().includes(s)) {
+        return true
+      }
+      return false
+    })
+    if (check.includes(true)) {
+      throw new Error('error')
+    }
+  }
+
   useEffect(() => {
     form.setFieldsValue({
       displayName: data?.name,
@@ -73,7 +86,11 @@ const ProfileUpdateForm = ({ accountAddress }: { accountAddress: string }) => {
         github: string
       }) => handleSubmit(displayName, biography, website, github)}
     >
-      <Form.Item label="Display Name" name="displayName">
+      <Form.Item
+        label="Display Name"
+        name="displayName"
+        rules={[{ validator: checkProfanityWord, message: 'contains characters that cannot be used' }]}
+      >
         <Input placeholder="Enter the new display name" />
       </Form.Item>
       <Form.Item label="Biography" name="biography">
