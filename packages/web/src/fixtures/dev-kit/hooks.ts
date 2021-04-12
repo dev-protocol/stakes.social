@@ -42,6 +42,21 @@ import { useProvider } from 'src/fixtures/wallet/hooks'
 import { useCurrency } from 'src/fixtures/currency/functions/useCurrency'
 import { isAddress } from 'web3-utils'
 
+interface DevAllocations {
+  privateSale: string
+  teamOptions: string
+  teamTreasury: string
+  ecosystemFund: string
+  airdrop: string
+}
+const DEV_ALLOCATIONS: DevAllocations = {
+  privateSale: '0x33b5043442979D2226E9a6389F7201932D11e448',
+  teamOptions: '0xA47c73A77d358A985157034A2338fAB7742B107E',
+  teamTreasury: '0x0dAb082C2f2CD7C6C2a9335b69d0B2aB8121178D',
+  ecosystemFund: '0x93d7A66E10b6a8a5a00313bC68F0FB234c8eB06D',
+  airdrop: '0x6B18fDa007ec96E187e5CF89D1873B9F75D5293D'
+}
+
 const validAddress = (address: string = ''): boolean =>
   typeof address === 'string' && isAddress(address) && address.length === 42
 
@@ -499,8 +514,24 @@ export const useCirculatingSupply = () => {
   )
 
   const circulatingSupplyValue = useCallback(async () => {
-    const teamAmount = await getDevAmount('0xe23fe51187a807d56189212591f5525127003bdf')
-    return new BigNumber(totalSupplyValue || '0').minus(new BigNumber(teamAmount || '0'))
+    const amounts = await Promise.all([
+      getDevAmount(DEV_ALLOCATIONS.privateSale),
+      getDevAmount(DEV_ALLOCATIONS.teamOptions),
+      getDevAmount(DEV_ALLOCATIONS.teamTreasury),
+      getDevAmount(DEV_ALLOCATIONS.ecosystemFund),
+      getDevAmount(DEV_ALLOCATIONS.airdrop)
+    ])
+    const privateSaleAmount = new BigNumber(amounts[0] || '0')
+    const teamOptionAmount = new BigNumber(amounts[1] || '0')
+    const teamAmount = new BigNumber(amounts[2] || '0')
+    const ecosystemFundAmount = new BigNumber(amounts[3] || '0')
+    const airdropAmount = new BigNumber(amounts[4] || '0')
+    return new BigNumber(totalSupplyValue || '0')
+      .minus(privateSaleAmount)
+      .minus(teamOptionAmount)
+      .minus(teamAmount)
+      .minus(ecosystemFundAmount)
+      .minus(airdropAmount)
   }, [totalSupplyValue])
 
   return { circulatingSupply: circulatingSupplyValue, error }
