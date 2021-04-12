@@ -4630,6 +4630,11 @@
   resolved "https://registry.yarnpkg.com/@types/faker/-/faker-5.5.1.tgz#9fff6bf7bbaa13b1069c4e534c45610603a48bc5"
   integrity sha512-JXGjV76oEUZUOSAr3bP5txETYoq0XDOQA8BpOz8Wc3EuvfF7sUVquf/EvM3aphuVKuVaYDSDu523/mAHnqrcvg==
 
+"@types/google-profanity-words@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@types/google-profanity-words/-/google-profanity-words-1.0.0.tgz#bbe2e8f50c8b2bb7297cfdd6995bed7815d2734d"
+  integrity sha512-Y5r20PXW5j/fcxTO0KaORM8fBxwp3K6lMqWP6fCNLs4LtvTsPNDLywdTRKHOkf3/tWZBk+2nFOIQXqkmlfkMRw==
+
 "@types/graceful-fs@^4.1.2":
   version "4.1.4"
   resolved "https://registry.yarnpkg.com/@types/graceful-fs/-/graceful-fs-4.1.4.tgz#4ff9f641a7c6d1a3508ff88bc3141b152772e753"
@@ -11595,6 +11600,11 @@ globby@^7.1.1:
     ignore "^3.3.5"
     pify "^3.0.0"
     slash "^1.0.0"
+
+google-profanity-words@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/google-profanity-words/-/google-profanity-words-1.0.0.tgz#29fe61cf9f5211391f2001e6c2a889378daa9a17"
+  integrity sha512-Sn1aEt4DVi+Xp/pzzZ4k0qJi+R3E8mukgk57OJBO4ZpCYY6xWhRawp/ejEOZ19Sv+Yx6RsCKUsksjkLWHEn/+w==
 
 got@9.6.0, got@^9.6.0:
   version "9.6.0"
