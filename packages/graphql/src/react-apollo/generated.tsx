@@ -5876,6 +5876,16 @@ export type ListAccountLockupQuery = { __typename?: 'query_root' } & {
   }
 }
 
+export type CountAccountLockupUniqueQueryVariables = Exact<{ [key: string]: never }>
+
+export type CountAccountLockupUniqueQuery = { __typename?: 'query_root' } & {
+  account_lockup_aggregate: { __typename?: 'account_lockup_aggregate' } & {
+    aggregate?: Maybe<
+      { __typename?: 'account_lockup_aggregate_fields' } & Pick<Account_Lockup_Aggregate_Fields, 'count'>
+    >
+  }
+}
+
 export type ListOwnedPropertyMetaQueryVariables = Exact<{
   account_address: Scalars['String']
   offset?: Maybe<Scalars['Int']>
@@ -6294,6 +6304,55 @@ export function useListAccountLockupLazyQuery(
 export type ListAccountLockupQueryHookResult = ReturnType<typeof useListAccountLockupQuery>
 export type ListAccountLockupLazyQueryHookResult = ReturnType<typeof useListAccountLockupLazyQuery>
 export type ListAccountLockupQueryResult = Apollo.QueryResult<ListAccountLockupQuery, ListAccountLockupQueryVariables>
+export const CountAccountLockupUniqueDocument = gql`
+  query countAccountLockupUnique {
+    account_lockup_aggregate {
+      aggregate {
+        count(columns: account_address, distinct: true)
+      }
+    }
+  }
+`
+
+/**
+ * __useCountAccountLockupUniqueQuery__
+ *
+ * To run a query within a React component, call `useCountAccountLockupUniqueQuery` and pass it any options that fit your needs.
+ * When your component renders, `useCountAccountLockupUniqueQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useCountAccountLockupUniqueQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useCountAccountLockupUniqueQuery(
+  baseOptions?: Apollo.QueryHookOptions<CountAccountLockupUniqueQuery, CountAccountLockupUniqueQueryVariables>
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useQuery<CountAccountLockupUniqueQuery, CountAccountLockupUniqueQueryVariables>(
+    CountAccountLockupUniqueDocument,
+    options
+  )
+}
+export function useCountAccountLockupUniqueLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<CountAccountLockupUniqueQuery, CountAccountLockupUniqueQueryVariables>
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useLazyQuery<CountAccountLockupUniqueQuery, CountAccountLockupUniqueQueryVariables>(
+    CountAccountLockupUniqueDocument,
+    options
+  )
+}
+export type CountAccountLockupUniqueQueryHookResult = ReturnType<typeof useCountAccountLockupUniqueQuery>
+export type CountAccountLockupUniqueLazyQueryHookResult = ReturnType<typeof useCountAccountLockupUniqueLazyQuery>
+export type CountAccountLockupUniqueQueryResult = Apollo.QueryResult<
+  CountAccountLockupUniqueQuery,
+  CountAccountLockupUniqueQueryVariables
+>
 export const ListOwnedPropertyMetaDocument = gql`
   query listOwnedPropertyMeta($account_address: String!, $offset: Int, $limit: Int) {
     property_meta(
