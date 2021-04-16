@@ -64,7 +64,7 @@
     "styled-components": "5.2.3",
     "swr": "0.5.5",
     "tinycolor2": "1.4.2",
-    "use-clipboard-copy": "0.1.2",
+    "use-clipboard-copy": "0.2.0",
     "walletlink": "2.0.3",
     "web3": "1.2.11",
     "web3-core": "1.2.11",
