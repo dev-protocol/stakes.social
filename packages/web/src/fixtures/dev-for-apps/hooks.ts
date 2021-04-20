@@ -75,6 +75,7 @@ export const useCreateAccount = (walletAddress: string) => {
   const key = 'useCreateAccount'
   const { web3 } = useProvider()
   const [isLoading, setIsLoading] = useState<boolean>(false)
+  const { mutate } = useGetAccount(walletAddress)
 
   const postAccountHandler = async (name?: string, biography?: string, website?: string, github?: string) => {
     const links: ProfileLinks = {
@@ -92,6 +93,7 @@ export const useCreateAccount = (walletAddress: string) => {
 
     const data = await postAccount(signedMessage, signature, walletAddress, name, biography, links)
       .then(result => {
+        mutate()
         message.success({ content: 'success update account data', key })
         return result
       })
@@ -112,6 +114,7 @@ export const useUpdateAccount = (id: number, walletAddress: string) => {
   const key = 'useUpdateAccount'
   const { web3 } = useProvider()
   const [isLoading, setIsLoading] = useState<boolean>(false)
+  const { mutate } = useGetAccount(walletAddress)
 
   const putAccountHandler = async (name?: string, biography?: string, website?: string, github?: string) => {
     const links: ProfileLinks = {
@@ -129,6 +132,7 @@ export const useUpdateAccount = (id: number, walletAddress: string) => {
 
     const data = await putAccount(signedMessage, signature, walletAddress, id, name, biography, links)
       .then(result => {
+        mutate()
         message.success({ content: 'success update account data', key })
         return result
       })
@@ -149,8 +153,8 @@ export const useUploadAccountAvatar = (accountAddress: string) => {
   const { data: account, mutate } = useGetAccount(accountAddress)
   const { postUploadFileHandler, isLoading, error } = useUploadFile(accountAddress)
 
-  const upload = async (file: any) => {
-    const refId = Number(account?.id)
+  const upload = async (file: any, accountId?: number) => {
+    const refId = accountId || Number(account?.id)
     const ref = 'Account'
     const field = 'portrait'
     const path = `assets/${accountAddress}`
@@ -271,8 +275,8 @@ export const useUploadAccountCoverImages = (accountAddress: string) => {
   const { data: account, mutate } = useGetAccount(accountAddress)
   const { postUploadFileHandler, isLoading, error } = useUploadFile(accountAddress)
 
-  const upload = async (file: any) => {
-    const refId = Number(account?.id)
+  const upload = async (file: any, accountId?: number) => {
+    const refId = accountId || Number(account?.id)
     const ref = 'Account'
     const field = 'cover_images'
     const path = `assets/${accountAddress}/${field}`
