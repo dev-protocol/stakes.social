@@ -296,8 +296,8 @@ export const useUploadPropertyCoverImages = (propertyAddress: string, accountAdd
   const { data: property, mutate } = useGetProperty(propertyAddress)
   const { postUploadFileHandler, isLoading, error } = useUploadFile(accountAddress)
 
-  const upload = async (file: any) => {
-    const refId = Number(property?.id)
+  const upload = async (file: any, propertyId?: number) => {
+    const refId = propertyId || Number(property?.id)
     const ref = 'Property'
     const field = 'cover_image'
     const path = `assets/${propertyAddress}/${field}`
