@@ -76,7 +76,8 @@ const ProfileForm = ({ accountAddress }: { accountAddress: string }) => {
   const handleChange = async (info: UploadChangeParam<UploadFile>) => {
     if (info.event) {
       const { displayName, biography, website, github } = pack(form)
-      const createdAccount = !data && found ? await createAccount(displayName, biography, website, github) : {}
+      const createdAccount =
+        !data && found ? await createAccount(displayName, biography, website, github) : { id: undefined }
       if (createdAccount === undefined) {
         return
       }
@@ -102,7 +103,8 @@ const ProfileForm = ({ accountAddress }: { accountAddress: string }) => {
   const handleCoverImageChange = async (info: UploadChangeParam<UploadFile>) => {
     if (info.event) {
       const { displayName, biography, website, github } = pack(form)
-      const createdAccount = !data && found ? await createAccount(displayName, biography, website, github) : {}
+      const createdAccount =
+        !data && found ? await createAccount(displayName, biography, website, github) : { id: undefined }
       if (createdAccount === undefined) {
         return
       }
