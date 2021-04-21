@@ -170,6 +170,7 @@ export const useCreateProperty = (walletAddress: string, propertyAddress: string
   const key = 'useCreateProperty'
   const { web3 } = useProvider()
   const [isLoading, setIsLoading] = useState<boolean>(false)
+  const { mutate } = useGetProperty(propertyAddress)
 
   const postPropertyHandler = async (
     name?: string,
@@ -198,6 +199,7 @@ export const useCreateProperty = (walletAddress: string, propertyAddress: string
           message.error({ content: result.error, key })
           return
         }
+        mutate()
         message.success({ content: 'success update property data', key })
         return result
       })
@@ -218,6 +220,7 @@ export const useUpdateProperty = (id: number, walletAddress: string, propertyAdd
   const key = 'useUpdateProperty'
   const { web3 } = useProvider()
   const [isLoading, setIsLoading] = useState<boolean>(false)
+  const { mutate } = useGetProperty(propertyAddress)
 
   const putPropertyHandler = async (
     name?: string,
@@ -255,6 +258,7 @@ export const useUpdateProperty = (id: number, walletAddress: string, propertyAdd
           message.error({ content: result.error, key })
           return
         }
+        mutate()
         message.success({ content: 'success update property data', key })
         return result
       })
