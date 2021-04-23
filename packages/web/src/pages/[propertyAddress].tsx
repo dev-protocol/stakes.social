@@ -7,6 +7,7 @@ import ReactMarkdown from 'react-markdown'
 import { PlusOutlined, LinkOutlined } from '@ant-design/icons'
 import { Button, Form, Input, Spin, Skeleton, Upload } from 'antd'
 import { UploadChangeParam, UploadFile } from 'antd/lib/upload/interface'
+import { FormInstance } from 'antd/lib/form'
 import { PossessionOutline } from 'src/components/organisms/PossessionOutline'
 import { PropertyHeader } from 'src/components/organisms/PropertyHeader'
 import { Footer } from 'src/components/organisms/Footer'
@@ -222,48 +223,12 @@ const Author = ({ propertyAddress }: { propertyAddress: string }) => {
   )
 }
 
-const PropertyCoverImageUpdateForm = ({
-  accountAddress,
-  propertyAddress
-}: {
-  accountAddress: string
-  propertyAddress: string
-}) => {
-  const { data } = useGetProperty(propertyAddress)
-  const [fileList, setFileList] = useState<UploadFile[] | undefined>()
-  const { upload } = useUploadPropertyCoverImages(propertyAddress, accountAddress)
-  const { deleteFileHandler: deleteFile } = useDeleteFile(accountAddress)
-  useEffect(() => {
-    setFileList(whenDefined(data?.cover_image, x => [apiDataToUploadFile(x)]))
-  }, [setFileList, data])
-
-  const handleChange = (info: UploadChangeParam<UploadFile>) => {
-    if (info.event) {
-      setFileList([{ ...info.file, status: 'uploading' }])
-      upload(info.file.originFileObj)
-    }
-  }
-
-  const handleRemove = (file: UploadFile) => {
-    whenDefined(data?.cover_image?.id, x => deleteFile(x, file.name))
-    setFileList([])
-  }
-
-  return (
-    <Upload
-      name="file"
-      multiple={false}
-      listType="picture-card"
-      fileList={fileList}
-      onChange={handleChange}
-      onRemove={handleRemove}
-    >
-      <div>
-        <p>{data && data.cover_image ? 'Change' : 'Upload'}</p>
-      </div>
-    </Upload>
-  )
-}
+const pack = (form: FormInstance) => ({
+  description: form.getFieldValue('description'),
+  twitter: form.getFieldValue('twitter'),
+  website: form.getFieldValue('website'),
+  github: form.getFieldValue('github')
+})
 
 const PropertyAbout = ({
   isAuthor,
@@ -306,6 +271,33 @@ const PropertyAbout = ({
     setModalStates({ visible: true, title: 'Edit Property' })
   }, [setModalStates])
   const onClickEdit = () => showModal()
+
+  // for upload files
+  const { data, found } = useGetProperty(propertyAddress)
+  const [fileList, setFileList] = useState<UploadFile[] | undefined>()
+  const { upload } = useUploadPropertyCoverImages(propertyAddress, authorAddress)
+  const { deleteFileHandler: deleteFile } = useDeleteFile(authorAddress)
+  useEffect(() => {
+    setFileList(whenDefined(dataProperty?.cover_image, x => [apiDataToUploadFile(x)]))
+  }, [setFileList, dataProperty])
+
+  const handleChange = async (info: UploadChangeParam<UploadFile>) => {
+    if (info.event) {
+      const { description, twitter, website, github } = pack(form)
+      const createdProperty =
+        !data && found ? await createProperty(undefined, description, website, twitter, github) : { id: undefined }
+      if (createdProperty === undefined) {
+        return
+      }
+      setFileList([{ ...info.file, status: 'uploading' }])
+      upload(info.file.originFileObj, createdProperty?.id)
+    }
+  }
+
+  const handleRemove = (file: UploadFile) => {
+    whenDefined(data?.cover_image?.id, x => deleteFile(x, file.name))
+    setFileList([])
+  }
 
   return (
     <AboutSection>
@@ -373,7 +365,18 @@ const PropertyAbout = ({
             <Input placeholder="input other website link" />
           </Form.Item>
           <Form.Item label="Cover image">
-            <PropertyCoverImageUpdateForm accountAddress={authorAddress} propertyAddress={propertyAddress} />
+            <Upload
+              name="file"
+              multiple={false}
+              listType="picture-card"
+              fileList={fileList}
+              onChange={handleChange}
+              onRemove={handleRemove}
+            >
+              <div>
+                <p>{data && data.cover_image ? 'Change' : 'Upload'}</p>
+              </div>
+            </Upload>
           </Form.Item>
         </Form>
       </ResponsiveModal>
