@@ -239,7 +239,7 @@ export const postProperty = (
       name,
       description,
       links,
-      wallet_address: address,
+      account_address: address,
       address: propertyAddress,
       signature,
       signMessage
