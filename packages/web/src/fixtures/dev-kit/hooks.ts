@@ -5,7 +5,9 @@ import {
   withdrawHolderAmount,
   getMyHolderAmount,
   stakeDev,
+  estimateGas4StakeDev,
   withdrawStakingAmount,
+  estimateGas4WithdrawStakingAmount,
   getMyStakingRewardAmount,
   createProperty,
   marketScheme,
@@ -224,6 +226,31 @@ export const useWithdrawStaking = () => {
   return { withdrawStaking, isLoading, error }
 }
 
+export const useEstimateGas4WithdrawStaking = () => {
+  const { web3, accountAddress } = useProvider()
+  const [isLoading, setIsLoading] = useState<boolean>(false)
+  const [error, setError] = useState<Error>()
+  const estimateGas4WithdrawStaking = useCallback(
+    async (propertyAddress: string, amount: BigNumber) => {
+      setIsLoading(true)
+      setError(undefined)
+      return whenDefinedAll([web3, accountAddress], ([x, fromAddress]) =>
+        estimateGas4WithdrawStakingAmount(x, propertyAddress, amount, fromAddress)
+          .then(() => {
+            setIsLoading(false)
+          })
+          .catch(err => {
+            setError(err)
+            setIsLoading(false)
+          })
+      )
+    },
+    [web3, accountAddress]
+  )
+
+  return { estimateGas4WithdrawStaking, isLoading, error }
+}
+
 export const useStake = () => {
   const { web3 } = useProvider()
   const key = 'useStake'
@@ -251,6 +278,31 @@ export const useStake = () => {
   )
 
   return { stake, isLoading, error }
+}
+
+export const useEstimateGas4Stake = () => {
+  const { web3, accountAddress } = useProvider()
+  const [isLoading, setIsLoading] = useState<boolean>(false)
+  const [error, setError] = useState<Error>()
+  const estimateGas4Stake = useCallback(
+    async (propertyAddress: string, amount: string) => {
+      setIsLoading(true)
+      setError(undefined)
+      return whenDefinedAll([web3, accountAddress], ([x, fromAddress]) =>
+        estimateGas4StakeDev(x, propertyAddress, toAmountNumber(amount).toFormat({ decimalSeparator: '' }), fromAddress)
+          .then(() => {
+            setIsLoading(false)
+          })
+          .catch(err => {
+            setError(err)
+            setIsLoading(false)
+          })
+      )
+    },
+    [web3, accountAddress]
+  )
+
+  return { estimateGas4Stake, isLoading, error }
 }
 
 export const useTotalStakingAmountOnProtocol = () => {
