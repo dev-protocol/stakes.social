@@ -8,7 +8,8 @@ import BigNumber from 'bignumber.js'
 import { PropertyFactoryContract } from '@devprotocol/dev-kit'
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { UnwrapFunc } from '../utility'
-import { metricsAbi, metricsFactoryAbi } from './abi'
+import { metricsAbi, metricsFactoryAbi, devAbi, lockupAbi } from './abi'
+import { toNaturalNumber } from 'src/fixtures/utility'
 
 const { execute, watchEvent } = utils
 
@@ -89,10 +90,37 @@ export const withdrawStakingAmount = async (web3: Web3, propertyAddress: string,
   return client.lockup(await getContractAddress(client, 'lockup')).withdraw(propertyAddress, amount.toFixed())
 }
 
+export const estimateGas4WithdrawStakingAmount = async (
+  web3: Web3,
+  propertyAddress: string,
+  amount: BigNumber,
+  from: string
+) => {
+  const client = newClient(web3)
+  if (!client) throw new Error(`No wallet`)
+  const gasPrice: string = await web3.eth.getGasPrice()
+  const contract = new web3.eth.Contract([...lockupAbi], await getContractAddress(client, 'lockup'), {})
+  const ret = await contract.methods['withdraw'](propertyAddress, amount.toFixed()).estimateGas({ from })
+  const n = new BigNumber(gasPrice).multipliedBy(ret)
+  console.log(gasPrice, ret, toNaturalNumber(n).toFormat())
+  return
+}
+
 export const stakeDev = async (web3: Web3, propertyAddress: string, amount: string) => {
   const client = newClient(web3)
   if (!client) throw new Error(`No wallet`)
   return client.dev(await getContractAddress(client, 'token')).deposit(propertyAddress, amount)
+}
+
+export const estimateGas4StakeDev = async (web3: Web3, propertyAddress: string, amount: string, from: string) => {
+  const client = newClient(web3)
+  if (!client) throw new Error(`No wallet`)
+  const gasPrice: string = await web3.eth.getGasPrice()
+  const contract = new web3.eth.Contract([...devAbi], await getContractAddress(client, 'token'), {})
+  const ret = await contract.methods['deposit'](propertyAddress, amount).estimateGas({ from })
+  const n = new BigNumber(gasPrice).multipliedBy(ret)
+  console.log(gasPrice, ret, toNaturalNumber(n).toFormat())
+  return
 }
 
 export const calculateMaxRewardsPerBlock = async (web3: Web3) => {
