@@ -1,7 +1,7 @@
-import React, { useCallback, useState, ChangeEvent, useMemo } from 'react'
+import React, { useCallback, useEffect, useState, ChangeEvent, useMemo } from 'react'
 import { useProvider } from 'src/fixtures/wallet/hooks'
 import { balanceOf } from 'src/fixtures/dev-kit/client'
-import { useStake } from 'src/fixtures/dev-kit/hooks'
+import { useStake, useEstimateGas4Stake } from 'src/fixtures/dev-kit/hooks'
 import { toAmountNumber, toNaturalNumber, whenDefinedAll } from 'src/fixtures/utility'
 import { TransactForm } from 'src/components/molecules/TransactForm'
 import { FormContainer } from 'src/components/molecules/TransactForm/FormContainer'
@@ -17,6 +17,7 @@ export const Stake = ({ className, title, propertyAddress }: Props) => {
   const [stakeAmount, setStakeAmount] = useState<string>('')
   const { web3, accountAddress } = useProvider()
   const { stake } = useStake()
+  const { estimateGas4Stake } = useEstimateGas4Stake()
   const stakeFor = useCallback(
     (amount: string) => {
       if (!web3) {
@@ -42,6 +43,11 @@ export const Stake = ({ className, title, propertyAddress }: Props) => {
         .then(x => setStakeAmount(x.toFixed()))
     )
   const Label = useMemo(() => (title ? () => <label htmlFor="stake">{title}</label> : () => <></>), [title])
+  useEffect(() => {
+    if (stakeAmount) {
+      estimateGas4Stake(propertyAddress, stakeAmount)
+    }
+  }, [estimateGas4Stake, propertyAddress, stakeAmount])
 
   return (
     <FormContainer>

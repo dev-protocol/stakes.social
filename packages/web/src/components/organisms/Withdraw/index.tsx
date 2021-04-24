@@ -1,8 +1,9 @@
 import React, { useCallback, useState, useMemo, ChangeEvent, useEffect } from 'react'
+import BigNumber from 'bignumber.js'
 import styled from 'styled-components'
 import { useProvider } from 'src/fixtures/wallet/hooks'
 import { getMyStakingAmount } from 'src/fixtures/dev-kit/client'
-import { useWithdrawStaking } from 'src/fixtures/dev-kit/hooks'
+import { useWithdrawStaking, useEstimateGas4WithdrawStaking } from 'src/fixtures/dev-kit/hooks'
 import { toAmountNumber, toNaturalNumber, whenDefinedAll } from 'src/fixtures/utility'
 import { TransactForm } from 'src/components/molecules/TransactForm'
 import { FormContainer } from 'src/components/molecules/TransactForm/FormContainer'
@@ -34,6 +35,7 @@ export const Withdraw = ({ className, title, propertyAddress, onChange: onChange
   const [withdrawAmount, setWithdrawAmount] = useState<string>('')
   const { web3, accountAddress } = useProvider()
   const { withdrawStaking } = useWithdrawStaking()
+  const { estimateGas4WithdrawStaking } = useEstimateGas4WithdrawStaking()
   const withdrawFor = useCallback(
     (amount: string) => {
       if (!web3) {
@@ -61,8 +63,9 @@ export const Withdraw = ({ className, title, propertyAddress, onChange: onChange
   useEffect(() => {
     if (onChangeAmount) {
       onChangeAmount(withdrawAmount)
+      estimateGas4WithdrawStaking(propertyAddress, new BigNumber(withdrawAmount))
     }
-  }, [withdrawAmount, onChangeAmount])
+  }, [withdrawAmount, onChangeAmount, estimateGas4WithdrawStaking, propertyAddress])
 
   const Label = useMemo(() => (title ? () => <label htmlFor="withdraw">{title}</label> : () => <></>), [title])
 
