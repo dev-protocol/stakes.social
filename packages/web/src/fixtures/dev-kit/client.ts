@@ -101,9 +101,7 @@ export const estimateGas4WithdrawStakingAmount = async (
   const gasPrice: string = await web3.eth.getGasPrice()
   const contract = new web3.eth.Contract([...lockupAbi], await getContractAddress(client, 'lockup'), {})
   const ret = await contract.methods['withdraw'](propertyAddress, amount.toFixed()).estimateGas({ from })
-  const n = new BigNumber(gasPrice).multipliedBy(ret)
-  console.log(gasPrice, ret, toNaturalNumber(n).toFormat())
-  return
+  return toNaturalNumber(new BigNumber(gasPrice).multipliedBy(ret))
 }
 
 export const stakeDev = async (web3: Web3, propertyAddress: string, amount: string) => {
@@ -118,9 +116,7 @@ export const estimateGas4StakeDev = async (web3: Web3, propertyAddress: string, 
   const gasPrice: string = await web3.eth.getGasPrice()
   const contract = new web3.eth.Contract([...devAbi], await getContractAddress(client, 'token'), {})
   const ret = await contract.methods['deposit'](propertyAddress, amount).estimateGas({ from })
-  const n = new BigNumber(gasPrice).multipliedBy(ret)
-  console.log(gasPrice, ret, toNaturalNumber(n).toFormat())
-  return
+  return toNaturalNumber(new BigNumber(gasPrice).multipliedBy(ret))
 }
 
 export const calculateMaxRewardsPerBlock = async (web3: Web3) => {

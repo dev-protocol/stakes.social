@@ -237,12 +237,14 @@ export const useEstimateGas4WithdrawStaking = () => {
       setError(undefined)
       return whenDefinedAll([web3, accountAddress], ([x, fromAddress]) =>
         estimateGas4WithdrawStakingAmount(x, propertyAddress, amount, fromAddress)
-          .then(() => {
+          .then(res => {
             setIsLoading(false)
+            return res
           })
           .catch(err => {
             setError(err)
             setIsLoading(false)
+            return undefined
           })
       )
     },
@@ -291,8 +293,9 @@ export const useEstimateGas4Stake = () => {
       setError(undefined)
       return whenDefinedAll([web3, accountAddress], ([x, fromAddress]) =>
         estimateGas4StakeDev(x, propertyAddress, toAmountNumber(amount).toFormat({ decimalSeparator: '' }), fromAddress)
-          .then(() => {
+          .then(res => {
             setIsLoading(false)
+            return res
           })
           .catch(err => {
             setError(err)
