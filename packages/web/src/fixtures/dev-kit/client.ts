@@ -8,7 +8,7 @@ import BigNumber from 'bignumber.js'
 import { PropertyFactoryContract } from '@devprotocol/dev-kit'
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { UnwrapFunc } from '../utility'
-import { metricsAbi, metricsFactoryAbi, devAbi, lockupAbi } from './abi'
+import { metricsAbi, metricsFactoryAbi, devAbi, lockupAbi, propertyFactoryAbi } from './abi'
 import { toNaturalNumber } from 'src/fixtures/utility'
 
 const { execute, watchEvent } = utils
@@ -140,6 +140,27 @@ export const createProperty = async (web3: Web3, name: string, symbol: string, a
     return 'Dummy:0xd5f3c1bA399E000B1a76210d7dB12bb5eefA8e47'
   }
   return undefined
+}
+
+export const estimateGas4CreateProperty = async (
+  web3: Web3,
+  name: string,
+  symbol: string,
+  author: string,
+  from: string
+) => {
+  const client = newClient(web3)
+  if (!client) {
+    return undefined
+  }
+  const gasPrice: string = await web3.eth.getGasPrice()
+  const contract = new web3.eth.Contract(
+    [...propertyFactoryAbi],
+    await getContractAddress(client, 'propertyFactory'),
+    {}
+  )
+  const ret = await contract.methods['create'](name, symbol, author).estimateGas({ from })
+  return toNaturalNumber(new BigNumber(gasPrice).multipliedBy(ret))
 }
 
 export const marketScheme = async (web3: Web3, marketAddress: string) => {

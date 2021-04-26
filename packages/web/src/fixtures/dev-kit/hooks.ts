@@ -10,6 +10,7 @@ import {
   estimateGas4WithdrawStakingAmount,
   getMyStakingRewardAmount,
   createProperty,
+  estimateGas4CreateProperty,
   marketScheme,
   authenticate,
   getTotalStakingAmountOnProtocol,
@@ -398,6 +399,34 @@ export const useCreateProperty = () => {
     [web3]
   )
   return { createProperty: callback, isLoading, error }
+}
+
+export const useEstimateGas4CreateProperty = () => {
+  const { web3, accountAddress } = useProvider()
+  const [isLoading, setIsLoading] = useState<boolean>(false)
+  const [error, setError] = useState<Error>()
+  const callback = useCallback(
+    async (name: string, symbol: string, author: string) => {
+      setIsLoading(true)
+      setError(undefined)
+      return (
+        whenDefinedAll([web3, accountAddress], ([x, fromAddress]) =>
+          estimateGas4CreateProperty(x, name, symbol, author, fromAddress)
+            .then(result => {
+              setIsLoading(false)
+              return result || ''
+            })
+            .catch(err => {
+              setError(err)
+              setIsLoading(false)
+              return ''
+            })
+        ) || ''
+      )
+    },
+    [web3, accountAddress]
+  )
+  return { estimateGas4CreateProperty: callback, isLoading, error }
 }
 
 export const useMarketScheme = () => {
