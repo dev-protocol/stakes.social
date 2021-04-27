@@ -24,6 +24,14 @@ export const useWithdrawHolderReward = () => {
   return { withdraw: () => {} }
 }
 
+export const useGetEstimateGas4WithdrawHolderAmount = () => {
+  return { estimateGas: new BigNumber(0.00001122) }
+}
+
+export const useGetEstimateGas4WithdrawHolderReward = () => {
+  return { estimateGas: new BigNumber(0.00112233) }
+}
+
 export const useWithdrawStakingReward = () => {
   return { withdrawStakingReward: () => {} }
 }
@@ -32,8 +40,16 @@ export const useWithdrawStaking = jest.fn(() => {
   return { withdrawStaking: jest.fn(() => {}) }
 })
 
+export const useGetEstimateGas4WithdrawStakingAmount = () => {
+  return { estimateGas: new BigNumber(0.00223344) }
+}
+
 export const useStake = () => {
   return { stake: () => {} }
+}
+
+export const useGetEstimateGas4Stake = () => {
+  return { estimateGas: new BigNumber(0.00334455) }
 }
 
 export const useCancelStaking = () => {
