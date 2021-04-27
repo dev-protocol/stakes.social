@@ -8,8 +8,7 @@ import BigNumber from 'bignumber.js'
 import { PropertyFactoryContract } from '@devprotocol/dev-kit'
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { UnwrapFunc } from '../utility'
-import { metricsAbi, metricsFactoryAbi, devAbi, lockupAbi, propertyFactoryAbi } from './abi'
-import { toNaturalNumber } from 'src/fixtures/utility'
+import { metricsAbi, metricsFactoryAbi, devAbi, lockupAbi, propertyFactoryAbi, withdrawAbi } from './abi'
 
 const { execute, watchEvent } = utils
 
@@ -84,24 +83,29 @@ export const withdrawHolderAmount = async (web3: Web3, propertyAddress: string) 
   return client.withdraw(await getContractAddress(client, 'withdraw')).withdraw(propertyAddress)
 }
 
+export const getEstimateGas4WithdrawHolderAmount = async (web3: Web3, propertyAddress: string, from: string) => {
+  const client = newClient(web3)
+  if (!client) throw new Error(`No wallet`)
+  const contract = new web3.eth.Contract([...withdrawAbi], await getContractAddress(client, 'withdraw'), {})
+  return new BigNumber(await contract.methods['withdraw'](propertyAddress).estimateGas({ from }))
+}
+
 export const withdrawStakingAmount = async (web3: Web3, propertyAddress: string, amount: BigNumber) => {
   const client = newClient(web3)
   if (!client) throw new Error(`No wallet`)
   return client.lockup(await getContractAddress(client, 'lockup')).withdraw(propertyAddress, amount.toFixed())
 }
 
-export const estimateGas4WithdrawStakingAmount = async (
+export const getEstimateGas4WithdrawStakingAmount = async (
   web3: Web3,
   propertyAddress: string,
-  amount: BigNumber,
+  amount: string,
   from: string
 ) => {
   const client = newClient(web3)
   if (!client) throw new Error(`No wallet`)
-  const gasPrice: string = await web3.eth.getGasPrice()
   const contract = new web3.eth.Contract([...lockupAbi], await getContractAddress(client, 'lockup'), {})
-  const ret = await contract.methods['withdraw'](propertyAddress, amount.toFixed()).estimateGas({ from })
-  return toNaturalNumber(new BigNumber(gasPrice).multipliedBy(ret))
+  return new BigNumber(await contract.methods['withdraw'](propertyAddress, amount).estimateGas({ from }))
 }
 
 export const stakeDev = async (web3: Web3, propertyAddress: string, amount: string) => {
@@ -110,13 +114,11 @@ export const stakeDev = async (web3: Web3, propertyAddress: string, amount: stri
   return client.dev(await getContractAddress(client, 'token')).deposit(propertyAddress, amount)
 }
 
-export const estimateGas4StakeDev = async (web3: Web3, propertyAddress: string, amount: string, from: string) => {
+export const getEstimateGas4StakeDev = async (web3: Web3, propertyAddress: string, amount: string, from: string) => {
   const client = newClient(web3)
   if (!client) throw new Error(`No wallet`)
-  const gasPrice: string = await web3.eth.getGasPrice()
   const contract = new web3.eth.Contract([...devAbi], await getContractAddress(client, 'token'), {})
-  const ret = await contract.methods['deposit'](propertyAddress, amount).estimateGas({ from })
-  return toNaturalNumber(new BigNumber(gasPrice).multipliedBy(ret))
+  return new BigNumber(await contract.methods['deposit'](propertyAddress, amount).estimateGas({ from }))
 }
 
 export const calculateMaxRewardsPerBlock = async (web3: Web3) => {
@@ -138,7 +140,7 @@ export const createProperty = async (web3: Web3, name: string, symbol: string, a
   return undefined
 }
 
-export const estimateGas4CreateProperty = async (
+export const getEstimateGas4CreateProperty = async (
   web3: Web3,
   name: string,
   symbol: string,
@@ -149,14 +151,12 @@ export const estimateGas4CreateProperty = async (
   if (!client) {
     return undefined
   }
-  const gasPrice: string = await web3.eth.getGasPrice()
   const contract = new web3.eth.Contract(
     [...propertyFactoryAbi],
     await getContractAddress(client, 'propertyFactory'),
     {}
   )
-  const ret = await contract.methods['create'](name, symbol, author).estimateGas({ from })
-  return toNaturalNumber(new BigNumber(gasPrice).multipliedBy(ret))
+  return new BigNumber(await contract.methods['create'](name, symbol, author).estimateGas({ from }))
 }
 
 export const marketScheme = async (web3: Web3, marketAddress: string) => {

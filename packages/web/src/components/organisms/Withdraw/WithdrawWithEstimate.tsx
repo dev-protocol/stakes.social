@@ -1,8 +1,15 @@
 import React, { useEffect, useState, useMemo } from 'react'
-import { useGetMyStakingAmount, useGetMyStakingRewardAmount } from 'src/fixtures/dev-kit/hooks'
-import { toBigNumber, whenDefined } from 'src/fixtures/utility'
+import styled from 'styled-components'
+import {
+  useGetMyStakingAmount,
+  useGetMyStakingRewardAmount,
+  useGetEstimateGas4WithdrawStakingAmount
+} from 'src/fixtures/dev-kit/hooks'
+import { toBigNumber, whenDefined, whenDefinedAll } from 'src/fixtures/utility'
+import { useGetEthPrice } from 'src/fixtures/uniswap/hooks'
 import { FormContainer } from 'src/components/molecules/TransactForm/FormContainer'
 import { Estimated } from 'src/components/molecules/TransactForm/Estimated'
+import { EstimatedGas } from 'src/components/molecules/TransactForm/EstimatedGas'
 import { Withdraw } from '.'
 
 interface Props {
@@ -11,6 +18,11 @@ interface Props {
   propertyAddress: string
 }
 
+const EstimateGasUSD = styled.span`
+  font-size: 0.9em;
+  color: #a0a0a0;
+`
+
 export const WithdrawWithEstimate = ({ className, title, propertyAddress }: Props) => {
   const [withdrawAmount, setWithdrawAmount] = useState<string>('')
   const [claimedTokens, setClaimedTokens] = useState<string | undefined>()
@@ -18,6 +30,12 @@ export const WithdrawWithEstimate = ({ className, title, propertyAddress }: Prop
   const [withdrawableTokens, setWithdrawableTokens] = useState<string>('')
   const { dev: myStakingRewardAmount } = useGetMyStakingRewardAmount(propertyAddress)
   const { myStakingAmount } = useGetMyStakingAmount(propertyAddress)
+  const { estimateGas } = useGetEstimateGas4WithdrawStakingAmount(propertyAddress, withdrawAmount)
+  const { data: ethPrice } = useGetEthPrice()
+  const estimateGasUSD = useMemo(() => whenDefinedAll([estimateGas, ethPrice], ([gas, eth]) => gas.multipliedBy(eth)), [
+    estimateGas,
+    ethPrice
+  ])
 
   const estimatedValue = useMemo(
     () => (
@@ -46,6 +64,14 @@ export const WithdrawWithEstimate = ({ className, title, propertyAddress }: Prop
     <FormContainer className={className}>
       <Withdraw propertyAddress={propertyAddress} title={title} onChange={onChange} />
       <Estimated title="Staked and Reward Amount">{estimatedValue}</Estimated>
+      <EstimatedGas title="Gas Fee (this is prediction value)" size="small">
+        {
+          <p>
+            {estimateGas ? estimateGas?.toFixed(6) : '-'} ETH
+            <EstimateGasUSD>{estimateGasUSD ? ` $${estimateGasUSD.toFixed(2)}` : ''}</EstimateGasUSD>
+          </p>
+        }
+      </EstimatedGas>
     </FormContainer>
   )
 }
