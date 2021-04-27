@@ -53,6 +53,61 @@ exports[`Stake Snapshot 1`] = `
       <div
         style="height: 40px;"
       />
+      <div
+        class="ant-card ant-card-bordered ant-card-small sc-1fcc07h-0 haBOqc"
+      >
+        <div
+          class="ant-card-head"
+        >
+          <div
+            class="ant-card-head-wrapper"
+          >
+            <div
+              class="ant-card-head-title"
+            >
+              Gas Fee (this is prediction value)
+            </div>
+          </div>
+        </div>
+        <div
+          class="ant-card-body"
+        >
+          <p>
+            0.003345
+             ETH
+          </p>
+        </div>
+      </div>
+      <div
+        class="ant-card ant-card-bordered ant-card-small sc-1fcc07h-0 haBOqc"
+      >
+        <div
+          class="ant-card-head"
+        >
+          <div
+            class="ant-card-head-wrapper"
+          >
+            <div
+              class="ant-card-head-title"
+            >
+              Gas Fee (this is prediction value)
+            </div>
+          </div>
+        </div>
+        <div
+          class="ant-card-body"
+        >
+          <p>
+            0.003345
+             ETH
+            <span
+              class="sc-1nbnut-0 kCUpAq"
+            >
+               $0.78
+            </span>
+          </p>
+        </div>
+      </div>
     </div>
   </div>
 </body>
@@ -116,6 +171,61 @@ exports[`Stake Snapshot with title 1`] = `
       <div
         style="height: 40px;"
       />
+      <div
+        class="ant-card ant-card-bordered ant-card-small sc-1fcc07h-0 haBOqc"
+      >
+        <div
+          class="ant-card-head"
+        >
+          <div
+            class="ant-card-head-wrapper"
+          >
+            <div
+              class="ant-card-head-title"
+            >
+              Gas Fee (this is prediction value)
+            </div>
+          </div>
+        </div>
+        <div
+          class="ant-card-body"
+        >
+          <p>
+            0.003345
+             ETH
+          </p>
+        </div>
+      </div>
+      <div
+        class="ant-card ant-card-bordered ant-card-small sc-1fcc07h-0 haBOqc"
+      >
+        <div
+          class="ant-card-head"
+        >
+          <div
+            class="ant-card-head-wrapper"
+          >
+            <div
+              class="ant-card-head-title"
+            >
+              Gas Fee (this is prediction value)
+            </div>
+          </div>
+        </div>
+        <div
+          class="ant-card-body"
+        >
+          <p>
+            0.003345
+             ETH
+            <span
+              class="sc-1nbnut-0 kCUpAq"
+            >
+               $0.78
+            </span>
+          </p>
+        </div>
+      </div>
     </div>
   </div>
 </body>
