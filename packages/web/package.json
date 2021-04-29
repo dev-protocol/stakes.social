@@ -75,7 +75,7 @@
     "@babel/core": "7.13.16",
     "@testing-library/react": "11.2.6",
     "@testing-library/react-hooks": "5.1.2",
-    "@testing-library/user-event": "13.1.6",
+    "@testing-library/user-event": "13.1.8",
     "@types/body-parser": "1.19.0",
     "@types/faker": "5.5.3",
     "@types/ramda": "0.27.40",
