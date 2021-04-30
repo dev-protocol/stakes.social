@@ -59,6 +59,16 @@ export const getMyHolderAmount = async (web3: Web3, propertyAddress: string, acc
   return undefined
 }
 
+export const getCalculateRewardAmount = async (web3: Web3, propertyAddress: string, accountAddress: string) => {
+  const client = newClient(web3)
+  if (client && accountAddress) {
+    return client
+      .withdraw(await getContractAddress(client, 'withdraw'))
+      .calculateRewardAmount(propertyAddress, accountAddress)
+  }
+  return undefined
+}
+
 export const getMyStakingRewardAmount = async (web3: Web3, propertyAddress: string, accountAddress: string) => {
   const client = newClient(web3)
   if (client && accountAddress) {
