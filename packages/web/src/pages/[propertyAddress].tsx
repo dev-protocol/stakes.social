@@ -421,7 +421,6 @@ const PropertyAddressDetail = (_: Props) => {
     })
   }, [dev, dataAuthor, dataProperty, propertyInformation, propertyName])
 
-  console.log(ogImageUrl, dev, authorAddress, dataAuthor, dataProperty)
   return data && !isExistProperty ? (
     // property is not found
     <Error statusCode={404} />
