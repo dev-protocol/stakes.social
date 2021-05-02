@@ -124,7 +124,12 @@ export const useGetTotalStakingAmount = (propertyAddress: string) => {
     () => whenDefined(nonConnectedWeb3, x => getTotalStakingAmount(x, propertyAddress)),
     { onError: err => message.error(err.message) }
   )
-  return { totalStakingAmount: whenDefined(data, x => toCurrency(toNaturalNumber(x))), currency, error }
+  return {
+    dev: whenDefined(data, x => toNaturalNumber(x)),
+    totalStakingAmount: whenDefined(data, x => toCurrency(toNaturalNumber(x))),
+    currency,
+    error
+  }
 }
 
 export const useGetMyStakingRewardAmount = (propertyAddress: string) => {
