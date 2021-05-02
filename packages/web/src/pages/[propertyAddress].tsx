@@ -410,8 +410,8 @@ const PropertyAddressDetail = (_: Props) => {
     [dataPropertyAuthentication]
   )
   const ogImageUrl = useMemo(() => {
-    return whenDefinedAll([dev, dataProperty], ([d, property]) => {
-      const encodedPropertyName = encodeURIComponent(propertyName)
+    return whenDefinedAll([dev, dataProperty, propertyName], ([d, property, name]) => {
+      const encodedPropertyName = encodeURIComponent(name)
       const encodedPropertyDescription = encodeURIComponent(property.description)
       return `https://ik.imagekit.io/nj8hvbxfx/tr:ot-Total%20Staking%20Amount,otc-FFFFFF,ox-65,oy-430,ots-30,tr:ot-${d.toFixed(
         0
