@@ -424,6 +424,8 @@ const PropertyAddressDetail = (_: Props) => {
   return data && !isExistProperty ? (
     // property is not found
     <Error statusCode={404} />
+  ) : !ogImageUrl ? (
+    <></>
   ) : (
     <>
       <Head>
