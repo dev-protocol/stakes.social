@@ -428,7 +428,7 @@ const PropertyAddressDetail = (_: Props) => {
     <>
       <Head>
         <title>{propertyName ? `Stakes.social - ${propertyName}` : 'Stakes.social'}</title>
-        {ogImageUrl ? <meta property="og:image" content={ogImageUrl} /> : <></>}
+        {ogImageUrl ? <meta property="og:image" content={ogImageUrl} /> : <meta property="og:image" content="" />}
       </Head>
       <Header></Header>
       <Wrap>
