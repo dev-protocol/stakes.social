@@ -15,6 +15,7 @@ import { useGetProperty, useGetAccount } from 'src/fixtures/dev-for-apps/hooks'
 import { Avatar } from 'src/components/molecules/Avatar'
 import BigNumber from 'bignumber.js'
 import { TransactModalContents } from 'src/components/molecules/TransactModalContents'
+import { PropertyTreasuryIcon } from 'src/components/molecules/PropertyTreasuryIcon'
 import { ResponsiveModal } from 'src/components/atoms/ResponsiveModal'
 import { CoverImageOrGradient } from 'src/components/atoms/CoverImageOrGradient'
 import { Grid } from 'src/components/atoms/Grid'
@@ -37,9 +38,10 @@ const Card = styled(Grid)`
   border-radius: 6px;
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
   cursor: pointer;
+  pointer-events: auto;
   background: #fff;
   overflow: hidden;
-  min-height: 500px;
+  min-height: 520px;
 `
 
 const RowContainer = styled.div`
@@ -86,9 +88,9 @@ const ButtonContainer = styled.div`
 
 const CardContents = styled(Grid)`
   grid-auto-flow: row;
-  grid-gap: 1rem;
+  grid-gap: 0.7rem;
   align-content: baseline;
-  grid-template-rows: auto 1fr;
+  grid-template-rows: auto auto 1fr;
   padding: 4px 16px 0 16px;
 `
 
@@ -198,7 +200,6 @@ export const PropertyCard = ({ propertyAddress, assets }: Props) => {
   const closeModal = () => {
     setModalStates({ ...modalStates, visible: false })
   }
-
   return (
     <Card>
       {dataProperty?.cover_image?.url ? (
@@ -209,6 +210,7 @@ export const PropertyCard = ({ propertyAddress, assets }: Props) => {
       <Link href={'/[propertyAddress]'} as={`/${propertyAddress}`}>
         <CardContents>
           <Title>{includeAssets || 'Property'}</Title>
+          <PropertyTreasuryIcon name={includeAssets} propertyAddress={propertyAddress} />
           <PropertyDescription>
             {dataProperty?.description ||
               'Stake DEV tokens to provide funding for OSS projects so that they can maintain development.'}

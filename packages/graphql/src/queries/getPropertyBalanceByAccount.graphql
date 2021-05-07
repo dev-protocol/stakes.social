@@ -1,0 +1,9 @@
+query getPropertyBalance($account_address: String!, $property_address: String!) {
+  property_balance(where: { account_address: { _eq: $account_address }, property_address: { _eq: $property_address } }) {
+    account_address
+    balance
+    block_number
+    is_author
+    property_address
+  }
+}

@@ -8,3 +8,11 @@ query listAccountLockup($account_address: String!, $offset: Int, $limit: Int!) {
     }
   }
 }
+
+query countAccountLockupUnique {
+  account_lockup_aggregate {
+    aggregate {
+      count(columns: account_address, distinct: true)
+    }
+  }
+}
