@@ -12,6 +12,7 @@ import detectEthereumProvider from '@metamask/detect-provider'
 import WalletConnectProvider from '@walletconnect/web3-provider'
 import Fortmatic from 'fortmatic'
 import WalletLink from 'walletlink'
+import Torus from '@toruslabs/torus-embed'
 import { message } from 'antd'
 import { WEB3_PROVIDER_ENDPOINT } from 'src/fixtures/wallet/constants'
 import { getAccountAddress } from 'src/fixtures/wallet/utility'
@@ -61,6 +62,9 @@ class NextApp extends App<AppInitialProps & WithApolloProps<{}>> {
 
           return provider
         }
+      },
+      torus: {
+        package: Torus
       }
     }
   }
