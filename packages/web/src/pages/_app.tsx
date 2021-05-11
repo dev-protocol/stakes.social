@@ -66,7 +66,7 @@ class NextApp extends App<AppInitialProps & WithApolloProps<{}>> {
       },
       'custom-torus': {
         display: {
-          logo: web3modalProviders.TORUS.logo, // 'https://github.com/dev-protocol/asset.stakes.social/blob/main/public/wallet/walletlink.jpg?raw=true',
+          logo: web3modalProviders.TORUS.logo,
           name: web3modalProviders.TORUS.name,
           description: 'connect with Torus Wallet'
         },
