@@ -8,11 +8,11 @@ import SettingContext from 'src/context/settingContext'
 import WalletContext from 'src/context/walletContext'
 import Web3 from 'web3'
 import Web3Modal from 'web3modal'
+import { providers as web3modalProviders } from 'web3modal'
 import detectEthereumProvider from '@metamask/detect-provider'
 import WalletConnectProvider from '@walletconnect/web3-provider'
 import Fortmatic from 'fortmatic'
 import WalletLink from 'walletlink'
-import Torus from '@toruslabs/torus-embed'
 import { message } from 'antd'
 import { WEB3_PROVIDER_ENDPOINT } from 'src/fixtures/wallet/constants'
 import { getAccountAddress } from 'src/fixtures/wallet/utility'
@@ -33,6 +33,7 @@ class NextApp extends App<AppInitialProps & WithApolloProps<{}>> {
     const { FORTMATIC_KEY } = process.env
     const walletLinkProvider = walletLink.makeWeb3Provider(WEB3_PROVIDER_ENDPOINT, 1)
     const web3ForInjected = detectEthereumProvider()
+    const Torus = import('@toruslabs/torus-embed')
 
     return {
       injected: {
@@ -63,8 +64,20 @@ class NextApp extends App<AppInitialProps & WithApolloProps<{}>> {
           return provider
         }
       },
-      torus: {
-        package: Torus
+      'custom-torus': {
+        display: {
+          logo: web3modalProviders.TORUS.logo, // 'https://github.com/dev-protocol/asset.stakes.social/blob/main/public/wallet/walletlink.jpg?raw=true',
+          name: web3modalProviders.TORUS.name,
+          description: 'connect with Torus Wallet'
+        },
+        package: Torus,
+        connector: async (provider: any) => {
+          const mTorus = await provider.then((mod: any) => mod.default)
+          const torus = new mTorus()
+          await torus.init()
+          await torus.login()
+          return torus.provider
+        }
       }
     }
   }
