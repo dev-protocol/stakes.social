@@ -59,12 +59,18 @@ export const getMyHolderAmount = async (web3: Web3, propertyAddress: string, acc
   return undefined
 }
 
-export const getCalculateRewardAmount = async (web3: Web3, propertyAddress: string, accountAddress: string) => {
+export const getCalculateRewardAmount = async (
+  web3: Web3,
+  propertyAddress: string,
+  accountAddress: string | undefined
+) => {
   const client = newClient(web3)
   if (client && accountAddress) {
+    // Todo DIP55アップ後に差し替える（コメントアウトの箇所）
     return client
       .withdraw(await getContractAddress(client, 'withdraw'))
-      .calculateRewardAmount(propertyAddress, accountAddress)
+      .calculateWithdrawableAmount(propertyAddress, accountAddress)
+    // .calculateRewardAmount(propertyAddress, accountAddress)
   }
   return undefined
 }

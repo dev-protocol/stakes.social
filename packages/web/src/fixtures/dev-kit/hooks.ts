@@ -76,11 +76,11 @@ export const useGetTotalRewardsAmount = (propertyAddress: string) => {
 }
 
 export const useCalculateRewardAmount = (propertyAddress: string) => {
-  const { nonConnectedWeb3: web3 } = useProvider()
+  const { nonConnectedWeb3: web3, accountAddress } = useProvider()
   const { currency, toCurrency } = useCurrency()
   const { data, error } = useSWR<undefined | UnwrapFunc<typeof getCalculateRewardAmount>, Error>(
-    SWRCachePath.getCalculateRewardAmount(propertyAddress),
-    () => whenDefined(web3, x => getCalculateRewardAmount(x, propertyAddress)),
+    SWRCachePath.getCalculateRewardAmount(propertyAddress, accountAddress),
+    () => whenDefined(web3, x => getCalculateRewardAmount(x, propertyAddress, accountAddress)),
     { onError: err => message.error(err.message) }
   )
   return {
