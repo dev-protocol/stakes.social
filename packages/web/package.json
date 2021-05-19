@@ -35,7 +35,7 @@
     "dotenv-webpack": "7.0.2",
     "ethers": "5.1.4",
     "faker": "5.5.3",
-    "formik": "2.2.6",
+    "formik": "2.2.7",
     "formik-material-ui": "3.0.1",
     "fortmatic": "2.2.1",
     "less": "4.1.1",
