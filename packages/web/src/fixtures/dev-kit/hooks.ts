@@ -22,8 +22,7 @@ import {
   allClaimedRewards,
   propertyName,
   propertySymbol,
-  balanceOfProperty,
-  getCalculateRewardAmount
+  balanceOfProperty
 } from './client'
 import { SWRCachePath } from './cache-path'
 import {
@@ -67,21 +66,6 @@ export const useGetTotalRewardsAmount = (propertyAddress: string) => {
   const { data, error } = useSWR<undefined | UnwrapFunc<typeof getRewardsAmount>, Error>(
     SWRCachePath.getTotalRewardsAmount(propertyAddress, accountAddress),
     () => whenDefined(web3, x => getRewardsAmount(x, propertyAddress)),
-    { onError: err => message.error(err.message) }
-  )
-  return {
-    totalRewardsAmount: whenDefined(data, x => toCurrency(toNaturalNumber(toNaturalNumber(x)))),
-    currency,
-    error
-  }
-}
-
-export const useCalculateRewardAmount = (propertyAddress: string) => {
-  const { nonConnectedWeb3: web3, accountAddress } = useProvider()
-  const { currency, toCurrency } = useCurrency()
-  const { data, error } = useSWR<undefined | UnwrapFunc<typeof getCalculateRewardAmount>, Error>(
-    SWRCachePath.getCalculateRewardAmount(propertyAddress, accountAddress),
-    () => whenDefined(web3, x => getCalculateRewardAmount(x, propertyAddress, accountAddress)),
     { onError: err => message.error(err.message) }
   )
   return {
