@@ -4,6 +4,7 @@ import {
   getTotalStakingAmount,
   withdrawHolderAmount,
   getMyHolderAmount,
+  getTreasuryAmount,
   stakeDev,
   withdrawStakingAmount,
   getMyStakingRewardAmount,
@@ -129,7 +130,35 @@ export const useGetMyHolderAmount = (propertyAddress: string) => {
       ),
     { onError: err => message.error(err.message) }
   )
-  return { myHolderAmount: data ? toNaturalNumber(data) : undefined, error }
+  const [withdrawable, , , total] = data || []
+  return {
+    myHolderAmount: withdrawable ? toNaturalNumber(withdrawable) : undefined,
+    total: total ? toNaturalNumber(total) : undefined,
+    error
+  }
+}
+
+export const useGetHolderAmountByAddress = (propertyAddress: string, srcAddress?: string) => {
+  const { nonConnectedWeb3 } = useProvider()
+  const { data, error } = useSWR<UnwrapFunc<typeof getMyHolderAmount>, Error>(
+    SWRCachePath.getMyHolderAmount(propertyAddress, srcAddress),
+    () =>
+      whenDefinedAll([nonConnectedWeb3, srcAddress], ([client, account]) =>
+        getMyHolderAmount(client, propertyAddress, account)
+      ),
+    { onError: err => message.error(err.message) }
+  )
+  return { holderAmount: data ? toNaturalNumber(data) : undefined, error }
+}
+
+export const useGetTreasuryAmount = (propertyAddress: string) => {
+  const { nonConnectedWeb3 } = useProvider()
+  const { data, error } = useSWR<UnwrapFunc<typeof getTreasuryAmount>, Error>(
+    SWRCachePath.getTreasuryAmount(propertyAddress),
+    () => whenDefined(nonConnectedWeb3, client => getTreasuryAmount(client, propertyAddress)),
+    { onError: err => message.error(err.message) }
+  )
+  return { treasuryAmount: data ? toNaturalNumber(data) : undefined, error }
 }
 
 export const useGetTotalStakingAmount = (propertyAddress: string) => {

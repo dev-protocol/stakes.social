@@ -1,6 +1,7 @@
 import {
   useListPropertyQuery as IUseListPropertyQuery,
   useGetPropertyAuthenticationQuery as IUseGetPropertyAuthenticationQuery,
+  useGetPropertyBalanceQuery as IUseGetPropertyBalanceQuery,
   useGetMarketFactoryCreateQuery as IUseGetMarketFactoryCreateQuery,
   useListPropertyMetaQuery as IUseListPropertyMetaQuery,
   useTotalStakedAccountLazyQuery as IUseTotalStakedAccountLazyQuery
@@ -93,6 +94,20 @@ export const useGetMarketFactoryCreateQuery = (): Partial<ReturnType<typeof IUse
     market_factory_create: [
       {
         market: 'market-address'
+      }
+    ]
+  }
+})
+
+export const useGetPropertyBalanceQuery = (): Partial<ReturnType<typeof IUseGetPropertyBalanceQuery>> => ({
+  data: {
+    property_balance: [
+      {
+        account_address: '0x987654321',
+        is_author: true,
+        block_number: 12345678,
+        balance: 10000000,
+        property_address: '0x12345'
       }
     ]
   }

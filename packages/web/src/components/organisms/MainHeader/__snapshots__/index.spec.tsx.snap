@@ -4,13 +4,13 @@ exports[`Banner Snapshot 1`] = `
 <body>
   <div>
     <div
-      class="sc-3hjy97-1 lgNphY"
+      class="sc-3hjy97-1 eafzge"
     >
       <div
         style="position: relative; max-width: 1152px; margin-right: auto; margin-left: auto; background: transparent;"
       >
         <div
-          class="sc-3hjy97-3 jvnHCw"
+          class="sc-3hjy97-3 hlzuqu"
         >
           <div>
             <svg
@@ -2322,10 +2322,10 @@ exports[`Banner Snapshot 1`] = `
           </div>
         </div>
         <div
-          class="sc-3hjy97-0 TaJth"
+          class="sc-3hjy97-0 fgXxEj"
         >
           <div
-            class="sc-3hjy97-2 bJfRvs"
+            class="sc-3hjy97-2 hlubxi"
           >
             <svg
               fill="none"
@@ -2399,12 +2399,12 @@ exports[`Banner Snapshot 1`] = `
               style="max-height: fit-content; display: flex; flex-direction: column; padding-bottom: 1em;"
             >
               <span
-                class="sc-1taimwq-0 sc-1taimwq-8 sc-3hjy97-4 XbsRs iZaOhK bhmbAy"
+                class="sc-1taimwq-0 sc-1taimwq-8 sc-3hjy97-4 fhVbEe gWflHU gJkFEQ"
               >
                 Funding the Most Crucial Open Source Software
               </span>
               <a
-                class="sc-1taimwq-1 sc-3hjy97-5 eYUZiw hgDQYX"
+                class="sc-1taimwq-1 sc-3hjy97-5 kipekC irzqXh"
               >
                 Learn more
               </a>

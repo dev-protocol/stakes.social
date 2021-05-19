@@ -4,7 +4,6 @@ import {
   useGetMyStakingAmount,
   useGetTotalRewardsAmount,
   useGetMyStakingRewardAmount,
-  useCalculateRewardAmount,
   useGetMyHolderAmount
 } from 'src/fixtures/dev-kit/hooks'
 import { Card, Statistic, Row, Col } from 'antd'
@@ -18,17 +17,14 @@ export const PossessionOutline = ({ className, propertyAddress }: Props) => {
   const { totalStakingAmount, currency: totalStakingAmountCurrency } = useGetTotalStakingAmount(propertyAddress)
   const { totalRewardsAmount, currency: totalRewardsAmountCurrency } = useGetTotalRewardsAmount(propertyAddress)
   const { myStakingAmount, currency: myStakingAmountCurrency } = useGetMyStakingAmount(propertyAddress)
-  const { myStakingRewardAmount, currency: myStakingRewardAmountCurrency } = useGetMyStakingRewardAmount(
-    propertyAddress
-  )
+  const { myStakingRewardAmount, currency: myStakingRewardAmountCurrency } =
+    useGetMyStakingRewardAmount(propertyAddress)
   const stakingShare = useMemo(
     () =>
       myStakingAmount && totalStakingAmount ? (myStakingAmount.toNumber() / totalStakingAmount.toNumber()) * 100 : 0,
     [myStakingAmount, totalStakingAmount]
   )
-  // Todo DIP55アップ後に正しい受け取りに差し替える
-  const { totalRewardsAmount: lifetimeReward } = useCalculateRewardAmount(propertyAddress)
-  const { myHolderAmount: withdrawableAmount } = useGetMyHolderAmount(propertyAddress)
+  const { myHolderAmount: withdrawableAmount, total: lifetimeReward } = useGetMyHolderAmount(propertyAddress)
 
   return (
     <div className={className}>

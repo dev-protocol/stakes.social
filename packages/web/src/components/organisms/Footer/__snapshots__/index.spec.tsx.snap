@@ -4,14 +4,14 @@ exports[`Footer Snapshot 1`] = `
 <body>
   <div>
     <footer
-      class="sc-1fvy930-0 cDDEyI"
+      class="sc-1fvy930-0 gFkHCG"
     >
       <div
-        class="sc-1wzqvkc-0 bDZNdS"
+        class="sc-1wzqvkc-0 iekWyA"
         style="margin: unset; text-align: center; max-width: unset; background: black; padding: 30px 0px 30px 0px;"
       >
         <div
-          class="sc-1fvy930-2 eRPZFp"
+          class="sc-1fvy930-2 mMXDv"
         >
           <div
             style="display: flex; justify-content: space-between;"
@@ -20,11 +20,11 @@ exports[`Footer Snapshot 1`] = `
               class="sc-1fvy930-3"
             >
               <a
-                class="sc-38x7tx-0 gHMlyO"
+                class="sc-38x7tx-0 dDeIhU"
                 href="/"
               >
                 <span
-                  class="sc-1u809dt-0 frgmkw"
+                  class="sc-1u809dt-0 dlJlha"
                 >
                   <svg
                     id="headerlogo"
@@ -40,7 +40,7 @@ exports[`Footer Snapshot 1`] = `
                     />
                   </svg>
                   <span
-                    class="sc-1u809dt-1 gShIBC"
+                    class="sc-1u809dt-1 kabZnM"
                   >
                     Stakes.social
                   </span>
@@ -59,7 +59,7 @@ exports[`Footer Snapshot 1`] = `
                 style="margin-left: 2px; margin-right: 2px;"
               />
               <a
-                class="sc-1fvy930-4 kKNKdW"
+                class="sc-1fvy930-4 cIEtdc"
                 href="https://devprotocol.xyz/"
                 rel="noopener noreferrer"
                 target="_blank"
@@ -78,10 +78,10 @@ exports[`Footer Snapshot 1`] = `
               2020 All rights reserverd.
             </span>
             <div
-              class="sc-1fvy930-1 jwjSzT"
+              class="sc-1fvy930-1 kdhGjV"
             >
               <a
-                class="sc-3pzwbd-0 dKAHfK"
+                class="sc-3pzwbd-0 jbrzDg"
                 href="//twitter.com/devprtcl"
                 rel="noopener noreferrer"
                 target="_blank"
@@ -114,7 +114,7 @@ exports[`Footer Snapshot 1`] = `
                 </svg>
               </a>
               <a
-                class="sc-3pzwbd-0 dKAHfK"
+                class="sc-3pzwbd-0 jbrzDg"
                 href="//discord.gg/VwJp4KM"
                 rel="noopener noreferrer"
                 target="_blank"
@@ -140,7 +140,7 @@ exports[`Footer Snapshot 1`] = `
                 </svg>
               </a>
               <a
-                class="sc-3pzwbd-0 dKAHfK"
+                class="sc-3pzwbd-0 jbrzDg"
                 href="https://github.com/dev-protocol/stakes.social"
                 rel="noopener noreferrer"
                 target="_blank"
@@ -175,7 +175,7 @@ exports[`Footer Snapshot 1`] = `
                 </svg>
               </a>
               <a
-                class="sc-3pzwbd-0 dKAHfK"
+                class="sc-3pzwbd-0 jbrzDg"
                 href="https://t.me/devprtcl"
                 rel="noopener noreferrer"
                 target="_blank"
@@ -203,7 +203,7 @@ exports[`Footer Snapshot 1`] = `
                 </svg>
               </a>
               <a
-                class="sc-3pzwbd-0 dKAHfK"
+                class="sc-3pzwbd-0 jbrzDg"
                 href="//medium.com/devtoken"
                 rel="noopener noreferrer"
                 target="_blank"
