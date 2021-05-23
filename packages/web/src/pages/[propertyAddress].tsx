@@ -3,6 +3,7 @@ import Error from 'next/error'
 import { useRouter } from 'next/router'
 import Head from 'next/head'
 import Link from 'next/link'
+import dynamic from 'next/dynamic'
 import styled from 'styled-components'
 import ReactMarkdown from 'react-markdown'
 import { PlusOutlined, LinkOutlined } from '@ant-design/icons'
@@ -407,22 +408,18 @@ const PropertyAddressDetail = (_: Props) => {
     () => whenDefined(dataPropertyAuthentication, x => x.property_authentication?.[0]?.authentication_id),
     [dataPropertyAuthentication]
   )
-  const ogImageUrl = useMemo(
-    () => (propertyAddress.startsWith('0x') ? `https://ogp-image-vercel.vercel.app/${propertyAddress}` : undefined),
-    [propertyAddress]
-  )
-  console.log('propertyAddress:', propertyAddress)
+  const OgpDynamic = dynamic(() => import('src/components/molecules/OgpImageMeta') as any, {
+    ssr: false
+  })
 
   return data && !isExistProperty ? (
     // property is not found
     <Error statusCode={404} />
-  ) : !ogImageUrl ? (
-    <></>
   ) : (
     <>
+      <OgpDynamic />
       <Head>
         <title>{propertyName ? `Stakes.social - ${propertyName}` : 'Stakes.social'}</title>
-        {ogImageUrl ? <meta property="og:image" content={ogImageUrl} /> : <meta property="og:image" content="" />}
       </Head>
       <Header></Header>
       <Wrap>
