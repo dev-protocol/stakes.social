@@ -407,7 +407,7 @@ const PropertyAddressDetail = (_: Props) => {
     () => whenDefined(dataPropertyAuthentication, x => x.property_authentication?.[0]?.authentication_id),
     [dataPropertyAuthentication]
   )
-  const ogImageUrl = `https://ogp-image-vercel.vercel.app/${propertyAddress}`
+  const ogImageUrl = useMemo(() => `https://ogp-image-vercel.vercel.app/${propertyAddress}`, [propertyAddress])
 
   return data && !isExistProperty ? (
     // property is not found
