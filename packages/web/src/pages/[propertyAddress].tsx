@@ -17,7 +17,7 @@ import { ButtonWithGradient } from 'src/components/atoms/ButtonWithGradient'
 import { Container } from 'src/components/atoms/Container'
 import { Header } from 'src/components/organisms/Header'
 import TopStakers from 'src/components/organisms/TopStakers'
-import { useAPY, usePropertyAuthor, useGetTotalStakingAmount } from 'src/fixtures/dev-kit/hooks'
+import { useAPY, usePropertyAuthor } from 'src/fixtures/dev-kit/hooks'
 import { useGetPropertyAuthenticationQuery, useGetPropertyAggregateLazyQuery } from '@dev/graphql'
 import { useGetPropertytInformation } from 'src/fixtures/devprtcl/hooks'
 import {
@@ -38,7 +38,7 @@ import { CoverImageOrGradient } from 'src/components/atoms/CoverImageOrGradient'
 import { H3 } from 'src/components/atoms/Typography'
 import { Twitter, Github } from 'src/components/atoms/SocialButtons'
 import { getPath } from 'src/fixtures/utility/route'
-import { whenDefined, whenDefinedAll } from 'src/fixtures/utility'
+import { whenDefined } from 'src/fixtures/utility'
 
 type Props = {}
 
@@ -391,7 +391,6 @@ const PropertyAddressDetail = (_: Props) => {
   const { apy, creators } = useAPY()
   const { data } = useGetPropertyAuthenticationQuery({ variables: { propertyAddress } })
   const isExistProperty = useMemo(() => data && data?.property_authentication.length > 0, [data])
-  const { dev } = useGetTotalStakingAmount(propertyAddress)
   const { data: dataProperty } = useGetProperty(isExistProperty ? propertyAddress : undefined)
   const { data: propertyInformation } = useGetPropertytInformation(isExistProperty ? propertyAddress : undefined)
   /* eslint-disable react-hooks/exhaustive-deps */
@@ -399,7 +398,6 @@ const PropertyAddressDetail = (_: Props) => {
   const includedAssetList = useMemo(() => data?.property_authentication.map(e => e.authentication_id), [data])
   const { accountAddress: loggedInWallet } = useProvider()
   const { author: authorAddress } = usePropertyAuthor(propertyAddress)
-  const { data: dataAuthor } = useGetAccount(authorAddress)
   const { data: dataPropertyAuthentication } = useGetPropertyAuthenticationQuery({
     variables: {
       propertyAddress
@@ -409,17 +407,7 @@ const PropertyAddressDetail = (_: Props) => {
     () => whenDefined(dataPropertyAuthentication, x => x.property_authentication?.[0]?.authentication_id),
     [dataPropertyAuthentication]
   )
-  const ogImageUrl = useMemo(() => {
-    return whenDefinedAll([dev, dataProperty, propertyName], ([d, property, name]) => {
-      const encodedPropertyName = encodeURIComponent(name)
-      const encodedPropertyDescription = encodeURIComponent(property.description)
-      return `https://ik.imagekit.io/nj8hvbxfx/tr:ot-Total%20Staking%20Amount,otc-FFFFFF,ox-65,oy-430,ots-30,tr:ot-${d.toFixed(
-        0
-      )} DEV,otc-FFFFFF,ox-65,oy-470,ots-40,tr:ot-${encodedPropertyName},ox-65,oy-65,ots-60,otc-FFFFFF,otf-Open Sans,ott-b,tr:ot-created by ${
-        dataAuthor?.name || propertyInformation?.name
-      },ox-65,oy-150,ots-40,otc-FFFFFF,tr:ot-${encodedPropertyDescription},ox-65,oy-220,otw-800,ots-35,otia-left,otc-FFFFFF/test_jyRC91EJ8VJ.png`
-    })
-  }, [dev, dataAuthor, dataProperty, propertyInformation, propertyName])
+  const ogImageUrl = `https://ogp-image-vercel.vercel.app/${propertyAddress}`
 
   return data && !isExistProperty ? (
     // property is not found
