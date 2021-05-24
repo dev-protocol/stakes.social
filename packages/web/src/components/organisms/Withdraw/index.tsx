@@ -6,7 +6,7 @@ import { useWithdrawStaking } from 'src/fixtures/dev-kit/hooks'
 import { toAmountNumber, toNaturalNumber, whenDefinedAll } from 'src/fixtures/utility'
 import { TransactForm } from 'src/components/molecules/TransactForm'
 import { FormContainer } from 'src/components/molecules/TransactForm/FormContainer'
-import { InfoCircleOutlined } from '@ant-design/icons'
+import InfoCircleOutlined from '@ant-design/icons/lib/icons/InfoCircleOutlined'
 import { message } from 'antd'
 
 interface Props {

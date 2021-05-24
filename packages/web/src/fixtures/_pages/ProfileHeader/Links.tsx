@@ -1,4 +1,5 @@
-import { CompassFilled, GithubFilled } from '@ant-design/icons'
+import CompassFilled from '@ant-design/icons/lib/icons/CompassFilled'
+import GithubFilled from '@ant-design/icons/lib/icons/GithubFilled'
 import Link from 'next/link'
 import React from 'react'
 import { Grid } from 'src/components/atoms/Grid'

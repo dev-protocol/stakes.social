@@ -1,6 +1,6 @@
 import React, { useCallback, useState, useEffect } from 'react'
 import { Form, Input, Button } from 'antd'
-import { CheckCircleTwoTone } from '@ant-design/icons'
+import CheckCircleTwoTone from '@ant-design/icons/lib/icons/CheckCircleTwoTone'
 import { useCreateProperty } from 'src/fixtures/dev-kit/hooks'
 import { Body1 } from 'src/components/atoms/Typography'
 import Link from 'next/link'

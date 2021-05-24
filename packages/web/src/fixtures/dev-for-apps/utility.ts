@@ -1,4 +1,4 @@
-import { always } from 'ramda'
+import always from 'ramda/src/always'
 import { BaseUrl, StrapiBaseUrl } from './cache-path'
 
 export interface UserInformation {

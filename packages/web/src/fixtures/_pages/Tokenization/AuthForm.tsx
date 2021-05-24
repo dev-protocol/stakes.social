@@ -3,7 +3,10 @@ import { Form } from 'antd'
 import styled from 'styled-components'
 import Input from 'src/components/molecules/Input'
 import { useProvider } from 'src/fixtures/wallet/hooks'
-import { InfoCircleOutlined, AccountBookOutlined, CodeOutlined, FontColorsOutlined } from '@ant-design/icons'
+import InfoCircleOutlined from '@ant-design/icons/lib/icons/InfoCircleOutlined'
+import AccountBookOutlined from '@ant-design/icons/lib/icons/AccountBookOutlined'
+import CodeOutlined from '@ant-design/icons/lib/icons/CodeOutlined'
+import FontColorsOutlined from '@ant-design/icons/lib/icons/FontColorsOutlined'
 
 export interface Props {
   market: string

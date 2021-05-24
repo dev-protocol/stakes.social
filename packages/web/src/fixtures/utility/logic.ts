@@ -1,5 +1,9 @@
 /* eslint-disable no-redeclare */
-import { cond, isNil, always, T, complement } from 'ramda'
+import cond from 'ramda/src/cond'
+import isNil from 'ramda/src/isNil'
+import always from 'ramda/src/always'
+import T from 'ramda/src/T'
+import complement from 'ramda/src/complement'
 
 type UndefinedOr<R> = undefined | R
 

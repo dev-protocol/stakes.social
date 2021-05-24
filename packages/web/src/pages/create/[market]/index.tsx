@@ -9,7 +9,7 @@ import styled from 'styled-components'
 import { useState } from 'react'
 import { getPath } from 'src/fixtures/utility/route'
 import { message } from 'antd'
-import { InfoCircleFilled } from '@ant-design/icons'
+import InfoCircleFilled from '@ant-design/icons/lib/icons/InfoCircleFilled'
 import { useCreateAndAuthenticate } from 'src/fixtures/dev-kit/hooks'
 import { usePostSignGitHubMarketAsset } from 'src/fixtures/khaos/hooks'
 import SuccessLogo from 'src/components/atoms/Success'
@@ -285,9 +285,10 @@ const AuthenticateNewAsset = (_: Props) => {
   const [header, setHeader] = useState('Create an Asset')
   const [subHeader, setSubHeader] = useState('Create an asset or authenticate an existing pool.')
   const [, market] = getPath(useRouter().asPath)
-  const [formData, setFormData] = useState<
-    { projectName: string; tokenName: string; tokenSymbol: string; personalAccessToken: string } | undefined
-  >(undefined)
+  const [formData, setFormData] =
+    useState<{ projectName: string; tokenName: string; tokenSymbol: string; personalAccessToken: string } | undefined>(
+      undefined
+    )
   const [metrics, setMetrics] = useState<string>('')
 
   console.log('formData: ', formData)

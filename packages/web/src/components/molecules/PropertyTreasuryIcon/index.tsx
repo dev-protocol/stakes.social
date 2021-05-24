@@ -1,7 +1,7 @@
 import React, { useMemo, useState } from 'react'
 import styled from 'styled-components'
 import BigNumber from 'bignumber.js'
-import { PieChartOutlined } from '@ant-design/icons'
+import PieChartOutlined from '@ant-design/icons/lib/icons/PieChartOutlined'
 import { useGetPropertyBalanceQuery } from '@dev/graphql'
 import { usePropertySymbol, useGetTreasuryAmount } from 'src/fixtures/dev-kit/hooks'
 import { toNaturalNumber } from 'src/fixtures/utility'

@@ -3,7 +3,7 @@ import { CircleGraph } from 'src/components/atoms/CircleGraph'
 import { useStakingShare } from 'src/fixtures/dev-kit/hooks'
 import { useGetPropertytInformation } from 'src/fixtures/devprtcl/hooks'
 import styled from 'styled-components'
-import { ExportOutlined } from '@ant-design/icons'
+import ExportOutlined from '@ant-design/icons/lib/icons/ExportOutlined'
 
 interface Props {
   className?: string
