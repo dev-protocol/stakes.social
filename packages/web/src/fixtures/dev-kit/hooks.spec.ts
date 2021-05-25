@@ -174,11 +174,12 @@ describe('dev-kit hooks', () => {
     })
 
     test('success fetching data', () => {
-      const data = '10000'
+      const data = ['10000', '20000', '30000', '40000']
       const error = undefined
       ;(useSWR as jest.Mock).mockImplementation(() => ({ data, error }))
       const { result } = renderHook(() => useGetMyHolderAmount('property-address'))
-      expect(result.current.myHolderAmount?.toFixed()).toBe(toNaturalNumber(data).toFixed())
+      expect(result.current.myHolderAmount?.toFixed()).toBe(toNaturalNumber('10000').toFixed())
+      expect(result.current.total?.toFixed()).toBe(toNaturalNumber('40000').toFixed())
     })
 
     test('failure fetching data', () => {
