@@ -54,7 +54,7 @@ export const getMyHolderAmount = async (web3: Web3, propertyAddress: string, acc
   if (client && accountAddress) {
     return client
       .withdraw(await getContractAddress(client, 'withdraw'))
-      .calculateWithdrawableAmount(propertyAddress, accountAddress)
+      .calculateRewardAmount(propertyAddress, accountAddress)
   }
   return undefined
 }

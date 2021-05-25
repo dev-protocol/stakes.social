@@ -114,7 +114,12 @@ export const useGetMyHolderAmount = (propertyAddress: string) => {
       ),
     { onError: err => message.error(err.message) }
   )
-  return { myHolderAmount: data ? toNaturalNumber(data) : undefined, error }
+  const [withdrawable, , , total] = data || []
+  return {
+    myHolderAmount: withdrawable ? toNaturalNumber(withdrawable) : undefined,
+    total: total ? toNaturalNumber(total) : undefined,
+    error
+  }
 }
 
 export const useGetHolderAmountByAddress = (propertyAddress: string, srcAddress?: string) => {
@@ -127,7 +132,12 @@ export const useGetHolderAmountByAddress = (propertyAddress: string, srcAddress?
       ),
     { onError: err => message.error(err.message) }
   )
-  return { holderAmount: data ? toNaturalNumber(data) : undefined, error }
+  const [withdrawable, , , total] = data || []
+  return {
+    holderAmount: withdrawable ? toNaturalNumber(withdrawable) : undefined,
+    total: total ? toNaturalNumber(total) : undefined,
+    error
+  }
 }
 
 export const useGetTreasuryAmount = (propertyAddress: string) => {

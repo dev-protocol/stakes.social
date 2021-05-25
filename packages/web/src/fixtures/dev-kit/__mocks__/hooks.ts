@@ -9,7 +9,7 @@ export const useGetTotalStakingAmount = () => {
 }
 
 export const useGetMyHolderAmount = () => {
-  return { myHolderAmount: new BigNumber(6000) }
+  return { myHolderAmount: new BigNumber(6000), total: new BigNumber(7000) }
 }
 
 export const useGetMyStakingRewardAmount = () => {
