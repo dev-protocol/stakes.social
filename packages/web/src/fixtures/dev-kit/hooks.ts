@@ -84,6 +84,9 @@ export const useWithdrawHolderReward = () => {
     async (propertyAddress: string) => {
       setIsLoading(true)
       message.loading({ content: 'now withdrawing holder reward...', duration: 0, key })
+      if (!web3) {
+        message.error({ content: 'Could not find a Web3 provider', key })
+      }
       setError(undefined)
       return whenDefined(web3, x =>
         withdrawHolderAmount(x, propertyAddress)
