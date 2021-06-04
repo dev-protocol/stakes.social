@@ -15,6 +15,48 @@ export type Scalars = {
   numeric: any
 }
 
+export type Boolean_Comparison_Exp = {
+  _eq?: Maybe<Scalars['Boolean']>
+  _gt?: Maybe<Scalars['Boolean']>
+  _gte?: Maybe<Scalars['Boolean']>
+  _in?: Maybe<Array<Scalars['Boolean']>>
+  _is_null?: Maybe<Scalars['Boolean']>
+  _lt?: Maybe<Scalars['Boolean']>
+  _lte?: Maybe<Scalars['Boolean']>
+  _neq?: Maybe<Scalars['Boolean']>
+  _nin?: Maybe<Array<Scalars['Boolean']>>
+}
+
+export type Int_Comparison_Exp = {
+  _eq?: Maybe<Scalars['Int']>
+  _gt?: Maybe<Scalars['Int']>
+  _gte?: Maybe<Scalars['Int']>
+  _in?: Maybe<Array<Scalars['Int']>>
+  _is_null?: Maybe<Scalars['Boolean']>
+  _lt?: Maybe<Scalars['Int']>
+  _lte?: Maybe<Scalars['Int']>
+  _neq?: Maybe<Scalars['Int']>
+  _nin?: Maybe<Array<Scalars['Int']>>
+}
+
+export type String_Comparison_Exp = {
+  _eq?: Maybe<Scalars['String']>
+  _gt?: Maybe<Scalars['String']>
+  _gte?: Maybe<Scalars['String']>
+  _ilike?: Maybe<Scalars['String']>
+  _in?: Maybe<Array<Scalars['String']>>
+  _is_null?: Maybe<Scalars['Boolean']>
+  _like?: Maybe<Scalars['String']>
+  _lt?: Maybe<Scalars['String']>
+  _lte?: Maybe<Scalars['String']>
+  _neq?: Maybe<Scalars['String']>
+  _nilike?: Maybe<Scalars['String']>
+  _nin?: Maybe<Array<Scalars['String']>>
+  _nlike?: Maybe<Scalars['String']>
+  _nsimilar?: Maybe<Scalars['String']>
+  _similar?: Maybe<Scalars['String']>
+}
+
 export type Account_Lockup = {
   __typename?: 'account_lockup'
   account_address: Scalars['String']
@@ -432,18 +474,6 @@ export type Account_Lockup_Variance_Order_By = {
   value?: Maybe<Order_By>
 }
 
-export type Boolean_Comparison_Exp = {
-  _eq?: Maybe<Scalars['Boolean']>
-  _gt?: Maybe<Scalars['Boolean']>
-  _gte?: Maybe<Scalars['Boolean']>
-  _in?: Maybe<Array<Scalars['Boolean']>>
-  _is_null?: Maybe<Scalars['Boolean']>
-  _lt?: Maybe<Scalars['Boolean']>
-  _lte?: Maybe<Scalars['Boolean']>
-  _neq?: Maybe<Scalars['Boolean']>
-  _nin?: Maybe<Array<Scalars['Boolean']>>
-}
-
 export type Dev_Property_Transfer = {
   __typename?: 'dev_property_transfer'
   block_number: Scalars['Int']
@@ -773,18 +803,6 @@ export type Dev_Property_Transfer_Variance_Order_By = {
   log_index?: Maybe<Order_By>
   transaction_index?: Maybe<Order_By>
   value?: Maybe<Order_By>
-}
-
-export type Int_Comparison_Exp = {
-  _eq?: Maybe<Scalars['Int']>
-  _gt?: Maybe<Scalars['Int']>
-  _gte?: Maybe<Scalars['Int']>
-  _in?: Maybe<Array<Scalars['Int']>>
-  _is_null?: Maybe<Scalars['Boolean']>
-  _lt?: Maybe<Scalars['Int']>
-  _lte?: Maybe<Scalars['Int']>
-  _neq?: Maybe<Scalars['Int']>
-  _nin?: Maybe<Array<Scalars['Int']>>
 }
 
 export type Lockup_Lockedup = {
@@ -5114,24 +5132,6 @@ export type Query_RootWithdraw_Property_Transfer_AggregateArgs = {
 
 export type Query_RootWithdraw_Property_Transfer_By_PkArgs = {
   event_id: Scalars['String']
-}
-
-export type String_Comparison_Exp = {
-  _eq?: Maybe<Scalars['String']>
-  _gt?: Maybe<Scalars['String']>
-  _gte?: Maybe<Scalars['String']>
-  _ilike?: Maybe<Scalars['String']>
-  _in?: Maybe<Array<Scalars['String']>>
-  _is_null?: Maybe<Scalars['Boolean']>
-  _like?: Maybe<Scalars['String']>
-  _lt?: Maybe<Scalars['String']>
-  _lte?: Maybe<Scalars['String']>
-  _neq?: Maybe<Scalars['String']>
-  _nilike?: Maybe<Scalars['String']>
-  _nin?: Maybe<Array<Scalars['String']>>
-  _nlike?: Maybe<Scalars['String']>
-  _nsimilar?: Maybe<Scalars['String']>
-  _similar?: Maybe<Scalars['String']>
 }
 
 export type Subscription_Root = {

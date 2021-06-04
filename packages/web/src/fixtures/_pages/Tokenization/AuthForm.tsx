@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import Input from 'src/components/molecules/Input'
 import { useProvider } from 'src/fixtures/wallet/hooks'
 import { InfoCircleOutlined, AccountBookOutlined, CodeOutlined, FontColorsOutlined } from '@ant-design/icons'
+import { useRouter } from 'next/router'
 
 export interface Props {
   market: string
@@ -73,6 +74,7 @@ const InfoContainer = styled.div`
 `
 
 export const AuthForm = ({ onHeaderChange, onSubHeaderChange, onFormDataSubmit }: Props) => {
+  const { asset: initialAsset } = useRouter().query
   const { accountAddress } = useProvider()
   const onFinish = async (values: any) => {
     onFormDataSubmit(values)
@@ -100,6 +102,7 @@ export const AuthForm = ({ onHeaderChange, onSubHeaderChange, onFormDataSubmit }
               name="projectName"
               rules={[{ required: true, message: 'Please input the name of the project' }]}
               key="projectName"
+              initialValue={String(initialAsset)}
             >
               <Input Icon={FontColorsOutlined} label="projectName" placeholder="Project name" />
             </Form.Item>
