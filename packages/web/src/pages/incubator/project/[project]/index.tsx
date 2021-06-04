@@ -303,8 +303,9 @@ export type OnboardingPageStatus = 'overview' | 'onboarding' | 'loading' | 'succ
 export type SetOnboardingPageStatus = React.Dispatch<React.SetStateAction<OnboardingPageStatus>>
 
 const OnboardingPage = ({ project }: OnboardingPageProps) => {
+  const { step = 'overview' } = useRouter().query
   const { data: claimed } = useIsFinished(project.property?.address)
-  const [currentState, setCurrentState] = useState<OnboardingPageStatus>('overview')
+  const [currentState, setCurrentState] = useState<OnboardingPageStatus>(step)
   const [createdMetrics, setCreatedMetrics] = useState<string | undefined>()
   const [isOnboarding, setIsOnboarding] = useState(true)
 
