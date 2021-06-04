@@ -235,7 +235,11 @@ const AuthenticationForm = ({ onStateChange, onMetricsCreated, project, onIsWron
     }
     onStateChange('loading')
     if (!IS_DEVELOPMENT_ENV) {
-      await authenticate(project.verifier_id, publicSignature)
+      console.log({ publicSignature })
+      await authenticate(project.verifier_id, publicSignature).catch(err => {
+        message.error(err)
+        return onIsWrongChange(true)
+      })
     }
     const metrics = IS_DEVELOPMENT_ENV
       ? '0x_dummy_metrics'
