@@ -11,6 +11,7 @@ import { CheckCircleOutlined } from '@ant-design/icons'
 import { SetOnboardingPageStatus } from 'src/pages/incubator/project/[project]'
 import DownArrow from '../../molecules/DownArrow'
 import { useProvider } from 'src/fixtures/wallet/hooks'
+import { useRouter } from 'next/router'
 
 const AuthenticationContainer = styled.div`
   position: relative;
@@ -210,10 +211,13 @@ const DownArrowContainer = styled.div`
 const IS_DEVELOPMENT_ENV = process.env.NODE_ENV === 'development'
 
 const AuthenticationForm = ({ onStateChange, onMetricsCreated, project, onIsWrongChange }: AuthenticationProps) => {
+  const { public_signature } = useRouter().query
   const [form] = Form.useForm()
   const { postSignGitHubMarketAssetHandler, isLoading } = usePostSignGitHubMarketAsset()
   const { authenticate, waitForCreateMetrics } = useAuthenticate()
-  const [publicSignature, setPublicSignature] = useState<undefined | string>()
+  const [publicSignature, setPublicSignature] = useState<undefined | string>(
+    public_signature && String(public_signature)
+  )
   const { accountAddress } = useProvider()
   const onSign = async (data: any) => {
     const signature = await postSignGitHubMarketAssetHandler(project.verifier_id, data.pat).catch((err: Error) => {
