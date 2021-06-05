@@ -7,6 +7,7 @@ import { Button } from 'src/components/organisms/Incubator/molecules/Button'
 import DevCurrencySymbol from '../molecules/DevCurrency'
 import { useGetReward } from 'src/fixtures/_pages/incubator/hooks'
 import { Incubator } from 'src/fixtures/dev-for-apps/utility'
+import Link from 'next/link'
 
 const ipsum = new lorem.LoremIpsum({
   sentencesPerParagraph: { min: 1, max: 3 },
@@ -15,7 +16,6 @@ const ipsum = new lorem.LoremIpsum({
 
 type ProjectProps = {
   project: Incubator
-  onClick: React.MouseEventHandler<HTMLElement>
 }
 
 const ProjectContainer = styled.div`
@@ -96,10 +96,11 @@ const Name = styled(H3S)`
   hyphens: auto;
 `
 
-const ProjectEntry = ({ project, onClick }: ProjectProps) => {
+const ProjectEntry = ({ project }: ProjectProps) => {
   // Probably fetch data per project async here
   const { currency, reward } = useGetReward(project.verifier_id)
   const convertedFunding = reward ? reward.dp(0).toNumber().toLocaleString() : 0
+  const CLAIMED = false
   return (
     <ProjectContainer>
       <TitleContainer>
@@ -120,7 +121,9 @@ const ProjectEntry = ({ project, onClick }: ProjectProps) => {
         </div>
       </FundingSection>
       <ClaimButtonContainer>
-        <Button onClick={onClick}>Inquiry</Button>
+        <Link href={'/incubator/project/[project]'} as={`/incubator/project/${project.property?.address}`} passHref>
+          <Button disabled={CLAIMED}>{CLAIMED ? 'Claimed' : 'Claim'}</Button>
+        </Link>
       </ClaimButtonContainer>
     </ProjectContainer>
   )

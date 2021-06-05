@@ -7,7 +7,6 @@ import ProjectEntry from 'src/components/organisms/Incubator/ProjectOverview/Pro
 import { CurrencySwitcher } from '../molecules/CurrencySwitcher'
 import { useGetIncubators } from 'src/fixtures/dev-for-apps/hooks'
 import { Incubator } from 'src/fixtures/dev-for-apps/utility'
-import { Modal } from 'antd'
 
 const ProjectOverviewContainer = styled.div`
   display: flex;
@@ -65,21 +64,7 @@ const SeeMore = styled.div<{ isExpanded?: boolean }>`
 
 const ProjectOverview = () => {
   const [showAll, setShowAll] = useState(false)
-  const [isModalVisible, setIsModalVisible] = useState(false)
   const { data } = useGetIncubators()
-
-  const showModal = () => {
-    console.log('*')
-    setIsModalVisible(true)
-  }
-
-  const handleOk = () => {
-    setIsModalVisible(false)
-  }
-
-  const handleCancel = () => {
-    setIsModalVisible(false)
-  }
 
   const projects: Array<Incubator> = showAll && data ? data : data?.slice(0, 8) || []
 
@@ -91,8 +76,7 @@ const ProjectOverview = () => {
           <CurrencySwitcher />
         </OverviewHeader>
         <Overview>
-          {projects &&
-            projects.map((project, index) => <ProjectEntry key={index} project={project} onClick={showModal} />)}
+          {projects && projects.map((project, index) => <ProjectEntry key={index} project={project} />)}
         </Overview>
       </ProjectOverviewContainer>
       <SeeMore isExpanded={showAll} />
@@ -108,12 +92,6 @@ const ProjectOverview = () => {
           Show all {data?.length || 20}
         </Button>
       )}
-      <Modal title="Inquiry" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
-        <p>
-          Please contact us at <a href="mailto:hi@devprotocol.xyz">hi@devprotocol.xyz</a> so that we will inform you of
-          future procedures.
-        </p>
-      </Modal>
     </GradientContainer>
   )
 }
