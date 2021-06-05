@@ -220,6 +220,7 @@ const TweetForm = ({ onStateChange, project, metricsAddress, onIsWrongChange }: 
     }
     onStateChange('loading')
 
+    console.log({ project, metricsAddress, data })
     if (IS_DEVELOPMENT_ENV) {
       setTimeout(() => {
         onStateChange('success')
@@ -309,7 +310,11 @@ const TweetForm = ({ onStateChange, project, metricsAddress, onIsWrongChange }: 
             rules={[{ required: true, message: 'Please enter a valid twitter URL' }]}
             key="twitter"
           >
-            <CustomInput onHandlePaste={handlePaste} label="twitter" placeholder="Paste the url of the Twitter post" />
+            <CustomInput
+              onHandlePaste={handlePaste}
+              label="twitter"
+              placeholder="https://twitter.com/YOUR/status/123..."
+            />
           </FormItem>
 
           <div style={{ display: 'flex', justifyContent: 'flex-end', paddingTop: '48px' }}>
