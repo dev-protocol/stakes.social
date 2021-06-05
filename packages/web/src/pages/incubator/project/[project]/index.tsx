@@ -27,6 +27,7 @@ import LoadingAnimation from 'src/components/organisms/Incubator/Claiming/Authen
 import { useGetReward, useIsFinished } from 'src/fixtures/_pages/incubator/hooks'
 import { Incubator } from 'src/fixtures/dev-for-apps/utility'
 import { whenDefined } from 'src/fixtures/utility'
+import { Modal } from 'antd'
 
 const Container = styled.div`
   display: flex;
@@ -241,11 +242,12 @@ const TimelineContainer = styled.div`
 type OnboardingSectionProps = {
   onBoardChange: React.Dispatch<React.SetStateAction<boolean>>
   isModal?: boolean
-  onStateChange: SetOnboardingPageStatus
+  onStateChange?: SetOnboardingPageStatus
+  onClick: React.MouseEventHandler<HTMLElement>
   isOnboarding: boolean
 }
 
-const OnboardingSection = ({ isModal, onStateChange, onBoardChange, isOnboarding }: OnboardingSectionProps) => {
+const OnboardingSection = ({ isModal, onClick, onBoardChange, isOnboarding }: OnboardingSectionProps) => {
   const [activePart, setActivePart] = useState(1)
 
   return (
@@ -262,7 +264,7 @@ const OnboardingSection = ({ isModal, onStateChange, onBoardChange, isOnboarding
         </TimelineContainer>
 
         {isModal ? (
-          <LinkB onClick={() => onStateChange('authentication')}>Skip</LinkB>
+          <LinkB onClick={onClick}>Skip</LinkB>
         ) : (
           <OnboardSwitch isOnboarding={isOnboarding} onOnboardChange={onBoardChange} />
         )}
@@ -271,7 +273,7 @@ const OnboardingSection = ({ isModal, onStateChange, onBoardChange, isOnboarding
       {activePart === 2 && <PurchaseEthereum onActivePartChange={setActivePart} />}
       {activePart === 3 && <ConnectWallet onActivePartChange={setActivePart} />}
       {activePart === 4 && <CopyPat onActivePartChange={setActivePart} />}
-      {activePart === 5 && <SubmitTransaction onStateChange={onStateChange} onActivePartChange={setActivePart} />}
+      {activePart === 5 && <SubmitTransaction onClick={onClick} onActivePartChange={setActivePart} />}
     </>
   )
 }
@@ -324,6 +326,19 @@ const OnboardingPage = ({ project }: OnboardingPageProps) => {
   const [currentLoadingState, setCurrentLoadingState] = useState<LoadingStatus>()
   const [createdMetrics, setCreatedMetrics] = useState<string | undefined>(validatedMetrics)
   const [isOnboarding, setIsOnboarding] = useState(true)
+  const [isModalVisible, setIsModalVisible] = useState(false)
+
+  const showModal = () => {
+    setIsModalVisible(true)
+  }
+
+  const handleOk = () => {
+    setIsModalVisible(false)
+  }
+
+  const handleCancel = () => {
+    setIsModalVisible(false)
+  }
 
   useEffect(() => {
     window.scrollTo(0, 0)
@@ -357,7 +372,7 @@ const OnboardingPage = ({ project }: OnboardingPageProps) => {
             <OnboardingSection
               isOnboarding={isOnboarding}
               onBoardChange={setIsOnboarding}
-              onStateChange={setCurrentState}
+              onClick={showModal}
               isModal={true}
             />
           )}
@@ -385,11 +400,7 @@ const OnboardingPage = ({ project }: OnboardingPageProps) => {
       {currentState === 'overview' && isOnboarding && (
         <Container>
           <Hr />
-          <OnboardingSection
-            isOnboarding={isOnboarding}
-            onBoardChange={setIsOnboarding}
-            onStateChange={setCurrentState}
-          />
+          <OnboardingSection isOnboarding={isOnboarding} onBoardChange={setIsOnboarding} onClick={showModal} />
         </Container>
       )}
 
@@ -399,6 +410,12 @@ const OnboardingPage = ({ project }: OnboardingPageProps) => {
           <WhatsNext project={project} isOverview={true} isOnboarding={isOnboarding} onBoardChange={setIsOnboarding} />
         </Container>
       )}
+      <Modal title="Inquiry" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
+        <p>
+          Please contact us at <a href="mailto:hi@devprotocol.xyz">hi@devprotocol.xyz</a> so that we will inform you of
+          future procedures.
+        </p>
+      </Modal>
 
       <Footer />
     </div>
