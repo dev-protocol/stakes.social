@@ -14,6 +14,7 @@ import {
   getEstimateGas4CreateProperty,
   marketScheme,
   authenticate,
+  getEstimateGas4CreateAndAuthenticate,
   getTotalStakingAmountOnProtocol,
   calculateMaxRewardsPerBlock,
   totalSupply,
@@ -497,6 +498,27 @@ export const useAuthenticate = () => {
     [web3]
   )
   return { authenticate: callback, isLoading, error }
+}
+
+export const useGetEstimateGas4CreateAndAuthenticate = (marketAddress: string) => {
+  const { web3, accountAddress } = useProvider()
+  const { data, error } = useSWR<BigNumber | undefined, Error>(
+    SWRCachePath.getEstimateGas4CreateAndAuthenticate('name', 'symbol', marketAddress, accountAddress),
+    () =>
+      whenDefinedAll([web3, accountAddress], ([x, fromAddress]) =>
+        getEstimateGas4CreateAndAuthenticate(x, 'name', 'symbol', marketAddress, ['a', 'b', 'c'], fromAddress)
+      ),
+    {
+      onError: err => message.error(err.message)
+    }
+  )
+  const { gasPrice } = useGetGasPrice()
+  const estimateGas = useMemo(() => whenDefinedAll([data, gasPrice], ([x, g]) => toNaturalNumber(x).multipliedBy(g)), [
+    gasPrice,
+    data
+  ])
+
+  return { estimateGas, error }
 }
 
 export const useCreateAndAuthenticate = () => {

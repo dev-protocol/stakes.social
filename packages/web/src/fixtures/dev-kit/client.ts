@@ -237,6 +237,26 @@ export const createAndAuthenticate = async (
   // })
 }
 
+export const getEstimateGas4CreateAndAuthenticate = async (
+  web3: Web3,
+  name: string,
+  symbol: string,
+  marketAddress: string,
+  args: string[],
+  from: string
+) => {
+  const client = newClient(web3)
+  if (!client) throw new Error(`No wallet`)
+  const contract = new web3.eth.Contract(
+    [...propertyFactoryAbi],
+    await getContractAddress(client, 'propertyFactory'),
+    {}
+  )
+  return new BigNumber(
+    await contract.methods['createAndAuthenticate'](name, symbol, marketAddress, ...args).estimateGas({ from })
+  )
+}
+
 export const totalSupply = async (web3: Web3) => {
   const client = newClient(web3)
   if (client) {

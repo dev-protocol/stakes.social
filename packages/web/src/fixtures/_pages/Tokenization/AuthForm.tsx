@@ -5,7 +5,7 @@ import Input from 'src/components/molecules/Input'
 import { whenDefinedAll } from 'src/fixtures/utility'
 import { useProvider } from 'src/fixtures/wallet/hooks'
 import { InfoCircleOutlined, AccountBookOutlined, CodeOutlined, FontColorsOutlined } from '@ant-design/icons'
-import { useGetPastEventsForCreate } from 'src/fixtures/dev-kit/hooks'
+import { useGetEstimateGas4CreateAndAuthenticate } from 'src/fixtures/dev-kit/hooks'
 import { useGetEthPrice } from 'src/fixtures/uniswap/hooks'
 
 export interface Props {
@@ -84,9 +84,9 @@ const EstimateGasUSD = styled.span`
   color: #a0a0a0;
 `
 
-export const AuthForm = ({ onHeaderChange, onSubHeaderChange, onFormDataSubmit }: Props) => {
+export const AuthForm = ({ onHeaderChange, onSubHeaderChange, onFormDataSubmit, market }: Props) => {
   const { accountAddress } = useProvider()
-  const { estimateGas } = useGetPastEventsForCreate()
+  const { estimateGas } = useGetEstimateGas4CreateAndAuthenticate(market)
   const onFinish = async (values: any) => {
     onFormDataSubmit(values)
     onHeaderChange('Tokenization Review')

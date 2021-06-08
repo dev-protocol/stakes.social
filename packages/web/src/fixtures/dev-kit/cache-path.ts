@@ -18,6 +18,8 @@ export const SWRCachePath = {
     `getEstimateGas/${user}${propertyAddress}/${amount}/estimateGas4Stake`,
   getEstimateGas4CreateProperty: (name: string, symbol: string, author: string, user?: string) =>
     `getEstimateGas/${user}/${author}/${name}/${symbol}/estimateGas4CreateProperty`,
+  getEstimateGas4CreateAndAuthenticate: (name: string, symbol: string, marketAddress: string, user?: string) =>
+    `getEstimateGas/${user}/${marketAddress}/${symbol}/${name}/estimateGas4CreateAndAuthenticate`,
   calculateMaxRewardsPerBlock: (user?: string) => `calculateMaxRewardsPerBlock/${user}`,
   totalSupply: (user?: string) => `totalSupply/${user}`,
   holdersShare: (amount?: string, lockedups?: string, user?: string) =>
