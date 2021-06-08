@@ -4,14 +4,14 @@ exports[`Stake Snapshot 1`] = `
 <body>
   <div>
     <div
-      class="sc-89297o-0 AnwdG"
+      class="sc-89297o-0 jMpWCU"
     >
       <div
-        class="sc-1d8aayd-1 aOjqd"
+        class="sc-1d8aayd-1 goPEkP"
         style="opacity: 1;"
       >
         <span
-          class="ant-input-group-wrapper ant-input-group-wrapper-lg ant-input-search ant-input-search-large ant-input-search-with-button sc-1d8aayd-0 KuyHK"
+          class="ant-input-group-wrapper ant-input-group-wrapper-lg ant-input-search ant-input-search-large ant-input-search-with-button sc-1d8aayd-0 dqaTyQ"
         >
           <span
             class="ant-input-wrapper ant-input-group"
@@ -29,7 +29,7 @@ exports[`Stake Snapshot 1`] = `
                 class="ant-input-suffix"
               >
                 <button
-                  class="sc-1ttu0x8-0 ksCpld"
+                  class="sc-1ttu0x8-0 hbciLP"
                 >
                   DEV
                 </button>
@@ -117,7 +117,7 @@ exports[`Stake Snapshot with title 1`] = `
 <body>
   <div>
     <div
-      class="sc-89297o-0 AnwdG"
+      class="sc-89297o-0 jMpWCU"
     >
       <label
         for="stake"
@@ -125,11 +125,11 @@ exports[`Stake Snapshot with title 1`] = `
         Stake
       </label>
       <div
-        class="sc-1d8aayd-1 aOjqd"
+        class="sc-1d8aayd-1 goPEkP"
         style="opacity: 1;"
       >
         <span
-          class="ant-input-group-wrapper ant-input-group-wrapper-lg ant-input-search ant-input-search-large ant-input-search-with-button sc-1d8aayd-0 KuyHK"
+          class="ant-input-group-wrapper ant-input-group-wrapper-lg ant-input-search ant-input-search-large ant-input-search-with-button sc-1d8aayd-0 dqaTyQ"
         >
           <span
             class="ant-input-wrapper ant-input-group"
@@ -147,7 +147,7 @@ exports[`Stake Snapshot with title 1`] = `
                 class="ant-input-suffix"
               >
                 <button
-                  class="sc-1ttu0x8-0 ksCpld"
+                  class="sc-1ttu0x8-0 hbciLP"
                 >
                   DEV
                 </button>

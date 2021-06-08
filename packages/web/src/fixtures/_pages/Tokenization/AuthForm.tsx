@@ -7,6 +7,7 @@ import { useProvider } from 'src/fixtures/wallet/hooks'
 import { InfoCircleOutlined, AccountBookOutlined, CodeOutlined, FontColorsOutlined } from '@ant-design/icons'
 import { useGetEstimateGas4CreateAndAuthenticate } from 'src/fixtures/dev-kit/hooks'
 import { useGetEthPrice } from 'src/fixtures/uniswap/hooks'
+import { useRouter } from 'next/router'
 
 export interface Props {
   market: string
@@ -85,6 +86,7 @@ const EstimateGasUSD = styled.span`
 `
 
 export const AuthForm = ({ onHeaderChange, onSubHeaderChange, onFormDataSubmit, market }: Props) => {
+  const { asset: initialAsset } = useRouter().query
   const { accountAddress } = useProvider()
   const { estimateGas } = useGetEstimateGas4CreateAndAuthenticate(market)
   const onFinish = async (values: any) => {
@@ -93,10 +95,10 @@ export const AuthForm = ({ onHeaderChange, onSubHeaderChange, onFormDataSubmit, 
     onSubHeaderChange('Check the details before continuing.')
   }
   const { data: ethPrice } = useGetEthPrice()
-  const estimateGasUSD = useMemo(() => whenDefinedAll([estimateGas, ethPrice], ([gas, eth]) => gas.multipliedBy(eth)), [
-    estimateGas,
-    ethPrice
-  ])
+  const estimateGasUSD = useMemo(
+    () => whenDefinedAll([estimateGas, ethPrice], ([gas, eth]) => gas.multipliedBy(eth)),
+    [estimateGas, ethPrice]
+  )
 
   return (
     <div style={{ maxWidth: '760px' }}>
@@ -118,6 +120,7 @@ export const AuthForm = ({ onHeaderChange, onSubHeaderChange, onFormDataSubmit, 
               name="projectName"
               rules={[{ required: true, message: 'Please input the name of the project' }]}
               key="projectName"
+              initialValue={String(initialAsset)}
             >
               <Input Icon={FontColorsOutlined} label="projectName" placeholder="Project name" />
             </Form.Item>

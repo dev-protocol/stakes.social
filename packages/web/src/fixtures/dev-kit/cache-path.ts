@@ -5,6 +5,7 @@ export const SWRCachePath = {
     `propertyAddresses/${user}${propertyAddress}/getTotalStakingAmount`,
   getMyHolderAmount: (propertyAddress: string, user?: string) =>
     `propertyAddresses/${user}${propertyAddress}/getMyHolderAmount`,
+  getTreasuryAmount: (propertyAddress: string) => `propertyAddresses/${propertyAddress}/getTreasuryAmount`,
   getMyStakingRewardAmount: (propertyAddress: string, user?: string) =>
     `propertyAddresses/${user}${propertyAddress}/getMyStakingRewardAmount`,
   getMyStakingAmount: (propertyAddress: string, user?: string) =>
