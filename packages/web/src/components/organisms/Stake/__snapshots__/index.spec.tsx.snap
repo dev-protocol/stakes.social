@@ -54,7 +54,7 @@ exports[`Stake Snapshot 1`] = `
         style="height: 40px;"
       />
       <div
-        class="ant-card ant-card-bordered ant-card-small sc-1fcc07h-0 haBOqc"
+        class="ant-card ant-card-bordered ant-card-small sc-1fcc07h-0 kSZqNu"
       >
         <div
           class="ant-card-head"
@@ -79,7 +79,7 @@ exports[`Stake Snapshot 1`] = `
         </div>
       </div>
       <div
-        class="ant-card ant-card-bordered ant-card-small sc-1fcc07h-0 haBOqc"
+        class="ant-card ant-card-bordered ant-card-small sc-1fcc07h-0 kSZqNu"
       >
         <div
           class="ant-card-head"
@@ -101,7 +101,7 @@ exports[`Stake Snapshot 1`] = `
             0.003345
              ETH
             <span
-              class="sc-1nbnut-0 kCUpAq"
+              class="sc-1nbnut-0 flcZo"
             >
                $0.78
             </span>
@@ -172,7 +172,7 @@ exports[`Stake Snapshot with title 1`] = `
         style="height: 40px;"
       />
       <div
-        class="ant-card ant-card-bordered ant-card-small sc-1fcc07h-0 haBOqc"
+        class="ant-card ant-card-bordered ant-card-small sc-1fcc07h-0 kSZqNu"
       >
         <div
           class="ant-card-head"
@@ -197,7 +197,7 @@ exports[`Stake Snapshot with title 1`] = `
         </div>
       </div>
       <div
-        class="ant-card ant-card-bordered ant-card-small sc-1fcc07h-0 haBOqc"
+        class="ant-card ant-card-bordered ant-card-small sc-1fcc07h-0 kSZqNu"
       >
         <div
           class="ant-card-head"
@@ -219,7 +219,7 @@ exports[`Stake Snapshot with title 1`] = `
             0.003345
              ETH
             <span
-              class="sc-1nbnut-0 kCUpAq"
+              class="sc-1nbnut-0 flcZo"
             >
                $0.78
             </span>
