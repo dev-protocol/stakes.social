@@ -181,6 +181,28 @@ export const authenticate = async (web3: Web3, marketAddress: string, propertyAd
   return undefined
 }
 
+export const getPastEventsForCreate = async (web3: Web3) => {
+  const client = newClient(web3)
+  const contractAddress = await getContractAddress(client, 'propertyFactory')
+  const res = await client.propertyFactory(contractAddress).contract().getPastEvents('Create', {
+    fromBlock: 12553254,
+    toBlock: 'latest'
+  })
+  const reducer = (a: BigNumber, c: BigNumber) => a.plus(c)
+  const gasUseds = await Promise.all(
+    res
+      .reverse()
+      .slice(0, 10)
+      .map(
+        async (v: any): Promise<BigNumber> => {
+          const txhash = await web3.eth.getTransactionReceipt(v.transactionHash)
+          return new BigNumber(txhash.gasUsed)
+        }
+      )
+  )
+  return gasUseds.reduce(reducer as any).div(10)
+}
+
 export const createAndAuthenticate = async (
   web3: Web3,
   name: string,

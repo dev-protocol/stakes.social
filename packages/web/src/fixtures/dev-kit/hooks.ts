@@ -25,6 +25,7 @@ import {
   allClaimedRewards,
   propertyName,
   propertySymbol,
+  getPastEventsForCreate,
   balanceOfProperty
 } from './client'
 import { SWRCachePath } from './cache-path'
@@ -555,6 +556,24 @@ export const useAPY = () => {
   const creators = holders && totalStaking ? new BigNumber(holders).times(year).div(totalStaking).times(100) : undefined
 
   return { apy, creators, error: maxRewardsError || totalStakingError || holdersError }
+}
+
+export const useGetPastEventsForCreate = () => {
+  const { nonConnectedWeb3, accountAddress } = useProvider()
+  const { data, error } = useSWR<BigNumber | undefined, Error>(
+    SWRCachePath.totalSupply(accountAddress),
+    () => whenDefined(nonConnectedWeb3, x => getPastEventsForCreate(x)),
+    {
+      onError: err => message.error(err.message)
+    }
+  )
+  const { gasPrice } = useGetGasPrice()
+  const estimateGas = useMemo(() => whenDefinedAll([data, gasPrice], ([x, g]) => toNaturalNumber(x).multipliedBy(g)), [
+    gasPrice,
+    data
+  ])
+
+  return { estimateGas, error }
 }
 
 export const useTotalSupply = () => {
