@@ -80,7 +80,7 @@
     "@types/faker": "5.5.6",
     "@types/ramda": "0.27.40",
     "@types/react": "17.0.10",
-    "@types/react-dom": "17.0.6",
+    "@types/react-dom": "17.0.7",
     "@types/string-hash": "1.1.1",
     "@types/styled-components": "5.1.10",
     "@types/tinycolor2": "1.4.2",
