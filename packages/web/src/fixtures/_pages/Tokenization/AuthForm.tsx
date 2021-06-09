@@ -194,8 +194,8 @@ export const AuthForm = ({ onHeaderChange, onSubHeaderChange, onFormDataSubmit, 
             <div style={{ display: 'flex', gridColumn: '1/-1', justifyContent: 'flex-end' }}>
               <div style={{ display: 'flex', flexDirection: 'column' }}>
                 <div>
-                  Gas Fee: <EstimateGas>{estimateGas?.toFixed()}ETH</EstimateGas>
-                  <EstimateGasUSD>${estimateGasUSD?.toFixed(2)}</EstimateGasUSD>
+                  Gas Fee: <EstimateGas>{estimateGas?.toFixed() || '-'}ETH</EstimateGas>
+                  <EstimateGasUSD>${estimateGasUSD?.toFixed(2) || '-'}</EstimateGasUSD>
                 </div>
                 <div>
                   <p>
