@@ -4,9 +4,7 @@ const fs = require('fs')
 const path = require('path')
 const withCss = require('@zeit/next-css')
 const withTM = require('next-transpile-modules')([
-  "@amcharts/amcharts4/core",
-  "@amcharts/amcharts4/charts",
-  "@amcharts/amcharts4/themes/animated"
+  "@amcharts/amcharts4"
 ])
 
 const themeVariables = lessToJS(fs.readFileSync(path.resolve(__dirname, './src/assets/antd-custom.less'), 'utf8'))
