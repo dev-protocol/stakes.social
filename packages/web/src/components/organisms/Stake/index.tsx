@@ -27,10 +27,10 @@ export const Stake = ({ className, title, propertyAddress }: Props) => {
   const { stake } = useStake()
   const { estimateGas } = useGetEstimateGas4Stake(propertyAddress, stakeAmount || undefined)
   const { data: ethPrice } = useGetEthPrice()
-  const estimateGasUSD = useMemo(() => whenDefinedAll([estimateGas, ethPrice], ([gas, eth]) => gas.multipliedBy(eth)), [
-    estimateGas,
-    ethPrice
-  ])
+  const estimateGasUSD = useMemo(
+    () => whenDefinedAll([estimateGas, ethPrice], ([gas, eth]) => gas.multipliedBy(eth)),
+    [estimateGas, ethPrice]
+  )
   const stakeFor = useCallback(
     (amount: string) => {
       if (!web3) {
@@ -71,9 +71,6 @@ export const Stake = ({ className, title, propertyAddress }: Props) => {
         onClickMax={onClickMax}
       />
       <div style={{ height: '40px' }}></div>
-      <EstimatedGas title="Gas Fee (this is prediction value)" size="small">
-        {<p>{estimateGas ? estimateGas?.toFixed(6) : 'N/A'} ETH</p>}
-      </EstimatedGas>
       <EstimatedGas title="Gas Fee (this is prediction value)" size="small">
         {
           <p>
