@@ -11,6 +11,7 @@ import { TransactForm } from 'src/components/molecules/TransactForm'
 import { FormContainer } from 'src/components/molecules/TransactForm/FormContainer'
 import { Estimated } from 'src/components/molecules/TransactForm/Estimated'
 import { EstimatedGas } from 'src/components/molecules/TransactForm/EstimatedGas'
+import { EstimatedGasNotes } from 'src/components/molecules/EstimatedGasNotes'
 
 interface Props {
   className?: string
@@ -30,14 +31,15 @@ export const WithdrawalForHolders = ({ className, title, propertyAddress }: Prop
   const withdraw = useCallback(() => {
     withdrawHolder(propertyAddress)
   }, [withdrawHolder, propertyAddress])
-  const Label = useMemo(() => (title ? () => <label htmlFor="withdrawalForHolders">{title}</label> : () => <></>), [
-    title
-  ])
+  const Label = useMemo(
+    () => (title ? () => <label htmlFor="withdrawalForHolders">{title}</label> : () => <></>),
+    [title]
+  )
   const { data: ethPrice } = useGetEthPrice()
-  const estimateGasUSD = useMemo(() => whenDefinedAll([estimateGas, ethPrice], ([gas, eth]) => gas.multipliedBy(eth)), [
-    estimateGas,
-    ethPrice
-  ])
+  const estimateGasUSD = useMemo(
+    () => whenDefinedAll([estimateGas, ethPrice], ([gas, eth]) => gas.multipliedBy(eth)),
+    [estimateGas, ethPrice]
+  )
 
   return (
     <FormContainer>
@@ -51,14 +53,16 @@ export const WithdrawalForHolders = ({ className, title, propertyAddress }: Prop
         suffix="DEV"
       ></TransactForm>
       <Estimated title="Withdrawable Amount">{<p>{myHolderAmount?.toFixed() || 0} DEV</p>}</Estimated>
-      <EstimatedGas title="Gas Fee (this is prediction value)" size="small">
-        {
-          <p>
-            {estimateGas ? estimateGas?.toFixed(6) : '-'} ETH
-            <EstimateGasUSD>{estimateGasUSD ? ` $${estimateGasUSD.toFixed(2)}` : ''}</EstimateGasUSD>
-          </p>
-        }
-      </EstimatedGas>
+      <EstimatedGasNotes>
+        <EstimatedGas title="Gas Fee (this is prediction value)" size="small">
+          {
+            <p>
+              {estimateGas ? estimateGas?.toFixed(6) : '-'} ETH
+              <EstimateGasUSD>{estimateGasUSD ? ` $${estimateGasUSD.toFixed(2)}` : ''}</EstimateGasUSD>
+            </p>
+          }
+        </EstimatedGas>
+      </EstimatedGasNotes>
     </FormContainer>
   )
 }

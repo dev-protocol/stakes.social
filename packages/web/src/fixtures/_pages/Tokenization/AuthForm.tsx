@@ -2,6 +2,7 @@ import React, { useMemo } from 'react'
 import { Form } from 'antd'
 import styled from 'styled-components'
 import Input from 'src/components/molecules/Input'
+import { EstimatedGasNotes } from 'src/components/molecules/EstimatedGasNotes'
 import { whenDefinedAll } from 'src/fixtures/utility'
 import { useProvider } from 'src/fixtures/wallet/hooks'
 import { InfoCircleOutlined, AccountBookOutlined, CodeOutlined, FontColorsOutlined } from '@ant-design/icons'
@@ -192,18 +193,20 @@ export const AuthForm = ({ onHeaderChange, onSubHeaderChange, onFormDataSubmit, 
               </ButtonContainer>
             </div>
             <div style={{ display: 'flex', gridColumn: '1/-1', justifyContent: 'flex-end' }}>
-              <div style={{ display: 'flex', flexDirection: 'column' }}>
-                <div>
-                  Gas Fee: <EstimateGas>{estimateGas?.toFixed() || '-'}ETH</EstimateGas>
-                  <EstimateGasUSD>${estimateGasUSD?.toFixed(2) || '-'}</EstimateGasUSD>
+              <EstimatedGasNotes>
+                <div style={{ display: 'flex', flexDirection: 'column' }}>
+                  <div>
+                    Gas Fee: <EstimateGas>{estimateGas?.toFixed() || '-'}ETH</EstimateGas>
+                    <EstimateGasUSD>${estimateGasUSD?.toFixed(2) || '-'}</EstimateGasUSD>
+                  </div>
+                  <div>
+                    <p>
+                      <InfoCircleOutlined style={{ marginRight: '5px' }} />
+                      this is prediction value
+                    </p>
+                  </div>
                 </div>
-                <div>
-                  <p>
-                    <InfoCircleOutlined style={{ marginRight: '5px' }} />
-                    this is prediction value
-                  </p>
-                </div>
-              </div>
+              </EstimatedGasNotes>
             </div>
           </Row>
         </Form>

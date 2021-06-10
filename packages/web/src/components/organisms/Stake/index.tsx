@@ -8,6 +8,7 @@ import { toAmountNumber, toNaturalNumber, whenDefinedAll } from 'src/fixtures/ut
 import { TransactForm } from 'src/components/molecules/TransactForm'
 import { EstimatedGas } from 'src/components/molecules/TransactForm/EstimatedGas'
 import { FormContainer } from 'src/components/molecules/TransactForm/FormContainer'
+import { EstimatedGasNotes } from 'src/components/molecules/EstimatedGasNotes'
 import { message } from 'antd'
 
 interface Props {
@@ -71,14 +72,16 @@ export const Stake = ({ className, title, propertyAddress }: Props) => {
         onClickMax={onClickMax}
       />
       <div style={{ height: '40px' }}></div>
-      <EstimatedGas title="Gas Fee (this is prediction value)" size="small">
-        {
-          <p>
-            {estimateGas ? estimateGas?.toFixed(6) : '-'} ETH
-            <EstimateGasUSD>{estimateGasUSD ? ` $${estimateGasUSD.toFixed(2)}` : ''}</EstimateGasUSD>
-          </p>
-        }
-      </EstimatedGas>
+      <EstimatedGasNotes>
+        <EstimatedGas title="Gas Fee (this is prediction value)" size="small">
+          {
+            <p>
+              {estimateGas ? estimateGas?.toFixed(6) : '-'} ETH
+              <EstimateGasUSD>{estimateGasUSD ? ` $${estimateGasUSD.toFixed(2)}` : ''}</EstimateGasUSD>
+            </p>
+          }
+        </EstimatedGas>
+      </EstimatedGasNotes>
     </FormContainer>
   )
 }
