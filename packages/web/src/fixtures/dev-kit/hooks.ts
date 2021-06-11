@@ -341,7 +341,7 @@ export const useGetEstimateGas4Stake = (propertyAddress: string, amount?: string
     () =>
       whenDefinedAll([web3, accountAddress, amount], ([x, fromAddress, a]) => {
         const stakeAmount = toAmountNumber(a)
-        return stakeAmount.toNumber() !== 0
+        return stakeAmount.toNumber() >= 0
           ? getEstimateGas4StakeDev(x, propertyAddress, stakeAmount.toFormat({ decimalSeparator: '' }), fromAddress)
           : undefined
       })
