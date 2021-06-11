@@ -12,6 +12,7 @@ export const EstimatedGas = styled(Card)`
   .ant-card-body {
     font-size: 1rem;
     padding: 1rem 1.5rem;
+    text-align: right;
   }
   p {
     margin: 0;
