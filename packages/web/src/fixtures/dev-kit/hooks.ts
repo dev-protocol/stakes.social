@@ -124,10 +124,10 @@ export const useGetEstimateGas4WithdrawHolderAmount = (propertyAddress: string) 
     // NOTE: If an error occurs, nothing is done. Because it only displays the estimated gas price.
   )
   const { gasPrice } = useGetGasPrice()
-  const estimateGas = useMemo(() => whenDefinedAll([data, gasPrice], ([x, g]) => toNaturalNumber(x).multipliedBy(g)), [
-    gasPrice,
-    data
-  ])
+  const estimateGas = useMemo(
+    () => whenDefinedAll([data, gasPrice], ([x, g]) => toNaturalNumber(x).multipliedBy(g)),
+    [gasPrice, data]
+  )
 
   return { estimateGas, error }
 }
@@ -297,10 +297,10 @@ export const useGetEstimateGas4WithdrawStakingAmount = (propertyAddress: string,
     // NOTE: If an error occurs, nothing is done. Because it only displays the estimated gas price.
   )
   const { gasPrice } = useGetGasPrice()
-  const estimateGas = useMemo(() => whenDefinedAll([data, gasPrice], ([x, g]) => toNaturalNumber(x).multipliedBy(g)), [
-    gasPrice,
-    data
-  ])
+  const estimateGas = useMemo(
+    () => whenDefinedAll([data, gasPrice], ([x, g]) => toNaturalNumber(x).multipliedBy(g)),
+    [gasPrice, data]
+  )
 
   return { estimateGas, error }
 }
@@ -348,10 +348,10 @@ export const useGetEstimateGas4Stake = (propertyAddress: string, amount?: string
     // NOTE: If an error occurs, nothing is done. Because it only displays the estimated gas price.
   )
   const { gasPrice } = useGetGasPrice()
-  const estimateGas = useMemo(() => whenDefinedAll([data, gasPrice], ([x, g]) => toNaturalNumber(x).multipliedBy(g)), [
-    gasPrice,
-    data
-  ])
+  const estimateGas = useMemo(
+    () => whenDefinedAll([data, gasPrice], ([x, g]) => toNaturalNumber(x).multipliedBy(g)),
+    [gasPrice, data]
+  )
 
   return { estimateGas, error }
 }
@@ -462,10 +462,10 @@ export const useGetEstimateGas4CreateProperty = (name: string, symbol: string, a
     // NOTE: If an error occurs, nothing is done. Because it only displays the estimated gas price.
   )
   const { gasPrice } = useGetGasPrice()
-  const estimateGas = useMemo(() => whenDefinedAll([data, gasPrice], ([x, g]) => toNaturalNumber(x).multipliedBy(g)), [
-    gasPrice,
-    data
-  ])
+  const estimateGas = useMemo(
+    () => whenDefinedAll([data, gasPrice], ([x, g]) => toNaturalNumber(x).multipliedBy(g)),
+    [gasPrice, data]
+  )
   return { estimateGas, error }
 }
 
@@ -539,10 +539,10 @@ export const useGetEstimateGas4CreateAndAuthenticate = (marketAddress: string) =
     // NOTE: If an error occurs, nothing is done. Because it only displays the estimated gas price.
   )
   const { gasPrice } = useGetGasPrice()
-  const estimateGas = useMemo(() => whenDefinedAll([data, gasPrice], ([x, g]) => toNaturalNumber(x).multipliedBy(g)), [
-    gasPrice,
-    data
-  ])
+  const estimateGas = useMemo(
+    () => whenDefinedAll([data, gasPrice], ([x, g]) => toNaturalNumber(x).multipliedBy(g)),
+    [gasPrice, data]
+  )
 
   return { estimateGas, error }
 }
