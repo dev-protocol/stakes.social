@@ -24,7 +24,7 @@ export const WithdrawWithEstimate = ({ className, title, propertyAddress }: Prop
   const [withdrawableTokens, setWithdrawableTokens] = useState<string>('')
   const { dev: myStakingRewardAmount } = useGetMyStakingRewardAmount(propertyAddress)
   const { myStakingAmount } = useGetMyStakingAmount(propertyAddress)
-  const { estimateGas } = useGetEstimateGas4WithdrawStakingAmount(propertyAddress, withdrawAmount)
+  const { estimateGas } = useGetEstimateGas4WithdrawStakingAmount(propertyAddress, withdrawAmount || '0')
   const { data: ethPrice } = useGetEthPrice()
   const estimateGasUSD = useMemo(
     () => whenDefinedAll([estimateGas, ethPrice], ([gas, eth]) => gas.multipliedBy(eth)),

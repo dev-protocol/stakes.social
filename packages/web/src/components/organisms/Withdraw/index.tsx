@@ -37,7 +37,7 @@ export const Withdraw = ({ className, title, propertyAddress, onChange: onChange
   const [withdrawAmount, setWithdrawAmount] = useState<string>('')
   const { web3, accountAddress } = useProvider()
   const { withdrawStaking } = useWithdrawStaking()
-  const { estimateGas } = useGetEstimateGas4WithdrawStakingAmount(propertyAddress, withdrawAmount)
+  const { estimateGas } = useGetEstimateGas4WithdrawStakingAmount(propertyAddress, withdrawAmount || '0')
   const { data: ethPrice } = useGetEthPrice()
   const estimateGasUSD = useMemo(
     () => whenDefinedAll([estimateGas, ethPrice], ([gas, eth]) => gas.multipliedBy(eth)),
