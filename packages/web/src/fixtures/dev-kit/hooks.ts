@@ -466,6 +466,7 @@ export const useGetEstimateGas4CreateProperty = (name: string, symbol: string, a
     () => whenDefinedAll([data, gasPrice], ([x, g]) => toNaturalNumber(x).multipliedBy(g)),
     [gasPrice, data]
   )
+
   return { estimateGas, error }
 }
 
