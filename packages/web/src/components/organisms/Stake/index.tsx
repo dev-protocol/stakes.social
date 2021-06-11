@@ -1,10 +1,14 @@
 import React, { useCallback, useState, ChangeEvent, useMemo } from 'react'
+import styled from 'styled-components'
 import { useProvider } from 'src/fixtures/wallet/hooks'
 import { balanceOf } from 'src/fixtures/dev-kit/client'
-import { useStake } from 'src/fixtures/dev-kit/hooks'
+import { useStake, useGetEstimateGas4Stake } from 'src/fixtures/dev-kit/hooks'
+import { useGetEthPrice } from 'src/fixtures/uniswap/hooks'
 import { toAmountNumber, toNaturalNumber, whenDefinedAll } from 'src/fixtures/utility'
 import { TransactForm } from 'src/components/molecules/TransactForm'
+import { EstimatedGas } from 'src/components/molecules/TransactForm/EstimatedGas'
 import { FormContainer } from 'src/components/molecules/TransactForm/FormContainer'
+import { EstimatedGasNotes } from 'src/components/molecules/EstimatedGasNotes'
 import { message } from 'antd'
 
 interface Props {
@@ -13,10 +17,21 @@ interface Props {
   propertyAddress: string
 }
 
+const EstimateGasUSD = styled.span`
+  font-size: 0.9em;
+  color: #a0a0a0;
+`
+
 export const Stake = ({ className, title, propertyAddress }: Props) => {
   const [stakeAmount, setStakeAmount] = useState<string>('')
   const { web3, accountAddress } = useProvider()
   const { stake } = useStake()
+  const { estimateGas } = useGetEstimateGas4Stake(propertyAddress, stakeAmount || undefined)
+  const { data: ethPrice } = useGetEthPrice()
+  const estimateGasUSD = useMemo(
+    () => whenDefinedAll([estimateGas, ethPrice], ([gas, eth]) => gas.multipliedBy(eth)),
+    [estimateGas, ethPrice]
+  )
   const stakeFor = useCallback(
     (amount: string) => {
       if (!web3) {
@@ -57,6 +72,16 @@ export const Stake = ({ className, title, propertyAddress }: Props) => {
         onClickMax={onClickMax}
       />
       <div style={{ height: '40px' }}></div>
+      <EstimatedGasNotes>
+        <EstimatedGas title="Gas Fee (this is prediction value)" size="small">
+          {
+            <p>
+              {estimateGas ? estimateGas?.toFixed(6) : '-'} ETH
+              <EstimateGasUSD>{estimateGasUSD ? ` $${estimateGasUSD.toFixed(2)}` : ''}</EstimateGasUSD>
+            </p>
+          }
+        </EstimatedGas>
+      </EstimatedGasNotes>
     </FormContainer>
   )
 }

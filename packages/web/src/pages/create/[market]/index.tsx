@@ -289,10 +289,9 @@ const AuthenticateNewAsset = (_: Props) => {
   const [header, setHeader] = useState('Create an Asset')
   const [subHeader, setSubHeader] = useState('Create an asset or authenticate an existing pool.')
   const [, market] = getPath(useRouter().asPath)
-  const [formData, setFormData] =
-    useState<{ projectName: string; tokenName: string; tokenSymbol: string; personalAccessToken: string } | undefined>(
-      undefined
-    )
+  const [formData, setFormData] = useState<
+    { projectName: string; tokenName: string; tokenSymbol: string; personalAccessToken: string } | undefined
+  >(undefined)
   const [metrics, setMetrics] = useState<string>('')
 
   console.log('formData: ', formData)
