@@ -1,5 +1,4 @@
 import React, { useCallback, useMemo } from 'react'
-import styled from 'styled-components'
 import {
   useGetMyHolderAmount,
   useWithdrawHolderReward,
@@ -10,19 +9,13 @@ import { useGetEthPrice } from 'src/fixtures/uniswap/hooks'
 import { TransactForm } from 'src/components/molecules/TransactForm'
 import { FormContainer } from 'src/components/molecules/TransactForm/FormContainer'
 import { Estimated } from 'src/components/molecules/TransactForm/Estimated'
-import { EstimatedGas } from 'src/components/molecules/TransactForm/EstimatedGas'
-import { EstimatedGasNotes } from 'src/components/molecules/EstimatedGasNotes'
+import { EstimatedGasFeeCard } from 'src/components/molecules/EstimatedGasFeeCard'
 
 interface Props {
   className?: string
   title?: string
   propertyAddress: string
 }
-
-const EstimateGasUSD = styled.span`
-  font-size: 0.9em;
-  color: #a0a0a0;
-`
 
 export const WithdrawalForHolders = ({ className, title, propertyAddress }: Props) => {
   const { myHolderAmount } = useGetMyHolderAmount(propertyAddress)
@@ -53,16 +46,10 @@ export const WithdrawalForHolders = ({ className, title, propertyAddress }: Prop
         suffix="DEV"
       ></TransactForm>
       <Estimated title="Withdrawable Amount">{<p>{myHolderAmount?.toFixed() || 0} DEV</p>}</Estimated>
-      <EstimatedGasNotes>
-        <EstimatedGas title="Gas Fee (this is prediction value)" size="small">
-          {
-            <p>
-              {estimateGas ? estimateGas?.toFixed(6) : '-'} ETH
-              <EstimateGasUSD>{estimateGasUSD ? ` $${estimateGasUSD.toFixed(2)}` : ''}</EstimateGasUSD>
-            </p>
-          }
-        </EstimatedGas>
-      </EstimatedGasNotes>
+      <EstimatedGasFeeCard
+        estimatedGasFee={estimateGas ? estimateGas.toFixed(6) : '-'}
+        estimatedGasFeeUSD={estimateGasUSD ? estimateGasUSD.toFixed(2) : ''}
+      />
     </FormContainer>
   )
 }

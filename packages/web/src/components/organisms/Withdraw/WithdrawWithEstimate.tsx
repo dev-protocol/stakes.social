@@ -1,5 +1,4 @@
 import React, { useEffect, useState, useMemo } from 'react'
-import styled from 'styled-components'
 import {
   useGetMyStakingAmount,
   useGetMyStakingRewardAmount,
@@ -9,8 +8,7 @@ import { toBigNumber, whenDefined, whenDefinedAll } from 'src/fixtures/utility'
 import { useGetEthPrice } from 'src/fixtures/uniswap/hooks'
 import { FormContainer } from 'src/components/molecules/TransactForm/FormContainer'
 import { Estimated } from 'src/components/molecules/TransactForm/Estimated'
-import { EstimatedGas } from 'src/components/molecules/TransactForm/EstimatedGas'
-import { EstimatedGasNotes } from 'src/components/molecules/EstimatedGasNotes'
+import { EstimatedGasFeeCard } from 'src/components/molecules/EstimatedGasFeeCard'
 import { Withdraw } from '.'
 
 interface Props {
@@ -18,11 +16,6 @@ interface Props {
   title?: string
   propertyAddress: string
 }
-
-const EstimateGasUSD = styled.span`
-  font-size: 0.9em;
-  color: #a0a0a0;
-`
 
 export const WithdrawWithEstimate = ({ className, title, propertyAddress }: Props) => {
   const [withdrawAmount, setWithdrawAmount] = useState<string>('')
@@ -65,16 +58,10 @@ export const WithdrawWithEstimate = ({ className, title, propertyAddress }: Prop
     <FormContainer className={className}>
       <Withdraw propertyAddress={propertyAddress} title={title} onChange={onChange} />
       <Estimated title="Staked and Reward Amount">{estimatedValue}</Estimated>
-      <EstimatedGasNotes>
-        <EstimatedGas title="Gas Fee (this is prediction value)" size="small">
-          {
-            <p>
-              {estimateGas ? estimateGas?.toFixed(6) : '-'} ETH
-              <EstimateGasUSD>{estimateGasUSD ? ` $${estimateGasUSD.toFixed(2)}` : ''}</EstimateGasUSD>
-            </p>
-          }
-        </EstimatedGas>
-      </EstimatedGasNotes>
+      <EstimatedGasFeeCard
+        estimatedGasFee={estimateGas ? estimateGas.toFixed(6) : '-'}
+        estimatedGasFeeUSD={estimateGasUSD ? estimateGasUSD.toFixed(2) : ''}
+      />
     </FormContainer>
   )
 }
