@@ -116,7 +116,7 @@ exports[`WithdrawWithEstimate Snapshot 1`] = `
         </div>
       </div>
       <div
-        class="ant-card ant-card-bordered ant-card-small sc-1fcc07h-0 kSZqNu"
+        class="ant-card ant-card-bordered ant-card-small sc-18v7ikh-0 eaHhNQ"
       >
         <div
           class="ant-card-head"
@@ -138,7 +138,7 @@ exports[`WithdrawWithEstimate Snapshot 1`] = `
             0.002233
              ETH
             <span
-              class="sc-1erb4uu-0 kSrWVC"
+              class="sc-18v7ikh-1 kUJdSB"
             >
                $0.52
             </span>

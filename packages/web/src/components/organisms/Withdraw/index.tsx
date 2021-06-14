@@ -6,9 +6,8 @@ import { useGetEthPrice } from 'src/fixtures/uniswap/hooks'
 import { useWithdrawStaking, useGetEstimateGas4WithdrawStakingAmount } from 'src/fixtures/dev-kit/hooks'
 import { toAmountNumber, toNaturalNumber, whenDefinedAll } from 'src/fixtures/utility'
 import { TransactForm } from 'src/components/molecules/TransactForm'
-import { EstimatedGas } from 'src/components/molecules/TransactForm/EstimatedGas'
 import { FormContainer } from 'src/components/molecules/TransactForm/FormContainer'
-import { EstimatedGasNotes } from 'src/components/molecules/EstimatedGasNotes'
+import { EstimatedGasFeeCard } from 'src/components/molecules/EstimatedGasFeeCard'
 import { InfoCircleOutlined } from '@ant-design/icons'
 import { message } from 'antd'
 
@@ -34,16 +33,11 @@ const SubtitleContianer = styled.div`
   align-items: center;
 `
 
-const EstimateGasUSD = styled.span`
-  font-size: 0.9em;
-  color: #a0a0a0;
-`
-
 export const Withdraw = ({ className, title, propertyAddress, onChange: onChangeAmount, isDisplayFee }: Props) => {
   const [withdrawAmount, setWithdrawAmount] = useState<string>('')
   const { web3, accountAddress } = useProvider()
   const { withdrawStaking } = useWithdrawStaking()
-  const { estimateGas } = useGetEstimateGas4WithdrawStakingAmount(propertyAddress, withdrawAmount)
+  const { estimateGas } = useGetEstimateGas4WithdrawStakingAmount(propertyAddress, withdrawAmount || '0')
   const { data: ethPrice } = useGetEthPrice()
   const estimateGasUSD = useMemo(
     () => whenDefinedAll([estimateGas, ethPrice], ([gas, eth]) => gas.multipliedBy(eth)),
@@ -103,16 +97,10 @@ export const Withdraw = ({ className, title, propertyAddress, onChange: onChange
         </span>
       </SubtitleContianer>
       {isDisplayFee ? (
-        <EstimatedGasNotes>
-          <EstimatedGas title="Gas Fee (this is prediction value)" size="small">
-            {
-              <p>
-                {estimateGas ? estimateGas?.toFixed(6) : '-'} ETH
-                <EstimateGasUSD>{estimateGasUSD ? ` $${estimateGasUSD.toFixed(2)}` : ''}</EstimateGasUSD>
-              </p>
-            }
-          </EstimatedGas>
-        </EstimatedGasNotes>
+        <EstimatedGasFeeCard
+          estimatedGasFee={estimateGas ? estimateGas.toFixed(6) : '-'}
+          estimatedGasFeeUSD={estimateGasUSD ? estimateGasUSD.toFixed(2) : ''}
+        />
       ) : (
         <></>
       )}
