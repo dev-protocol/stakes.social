@@ -5,11 +5,11 @@ exports[`PossessionOutline Snapshot 1`] = `
   <div>
     <div>
       <div
-        class="ant-row ant-row-space-between"
+        class="ant-row ant-row-start"
         style="margin: -12px -12px -12px -12px;"
       >
         <div
-          class="ant-col ant-col-6"
+          class="ant-col ant-col-xs-24 ant-col-sm-12 ant-col-md-6 ant-col-lg-6"
           style="padding: 12px 12px 12px 12px;"
         >
           <div
@@ -28,6 +28,7 @@ exports[`PossessionOutline Snapshot 1`] = `
                 </div>
                 <div
                   class="ant-statistic-content"
+                  style="text-align: right;"
                 >
                   <span
                     class="ant-statistic-content-value"
@@ -50,7 +51,7 @@ exports[`PossessionOutline Snapshot 1`] = `
           </div>
         </div>
         <div
-          class="ant-col ant-col-6"
+          class="ant-col ant-col-xs-24 ant-col-sm-12 ant-col-md-6 ant-col-lg-6"
           style="padding: 12px 12px 12px 12px;"
         >
           <div
@@ -69,6 +70,7 @@ exports[`PossessionOutline Snapshot 1`] = `
                 </div>
                 <div
                   class="ant-statistic-content"
+                  style="text-align: right;"
                 >
                   <span
                     class="ant-statistic-content-value"
@@ -91,7 +93,7 @@ exports[`PossessionOutline Snapshot 1`] = `
           </div>
         </div>
         <div
-          class="ant-col ant-col-6"
+          class="ant-col ant-col-xs-24 ant-col-sm-12 ant-col-md-6 ant-col-lg-6"
           style="padding: 12px 12px 12px 12px;"
         >
           <div
@@ -110,6 +112,7 @@ exports[`PossessionOutline Snapshot 1`] = `
                 </div>
                 <div
                   class="ant-statistic-content"
+                  style="text-align: right;"
                 >
                   <span
                     class="ant-statistic-content-value"
@@ -137,7 +140,7 @@ exports[`PossessionOutline Snapshot 1`] = `
           </div>
         </div>
         <div
-          class="ant-col ant-col-6"
+          class="ant-col ant-col-xs-24 ant-col-sm-12 ant-col-md-6 ant-col-lg-6"
           style="padding: 12px 12px 12px 12px;"
         >
           <div
@@ -156,6 +159,7 @@ exports[`PossessionOutline Snapshot 1`] = `
                 </div>
                 <div
                   class="ant-statistic-content"
+                  style="text-align: right;"
                 >
                   <span
                     class="ant-statistic-content-value"
@@ -183,7 +187,7 @@ exports[`PossessionOutline Snapshot 1`] = `
           </div>
         </div>
         <div
-          class="ant-col ant-col-8"
+          class="ant-col ant-col-xs-24 ant-col-sm-12 ant-col-md-6 ant-col-lg-6"
           style="padding: 12px 12px 12px 12px;"
         >
           <div
@@ -202,6 +206,7 @@ exports[`PossessionOutline Snapshot 1`] = `
                 </div>
                 <div
                   class="ant-statistic-content"
+                  style="text-align: right;"
                 >
                   <span
                     class="ant-statistic-content-value"
@@ -229,7 +234,7 @@ exports[`PossessionOutline Snapshot 1`] = `
           </div>
         </div>
         <div
-          class="ant-col ant-col-8"
+          class="ant-col ant-col-xs-24 ant-col-sm-12 ant-col-md-6 ant-col-lg-6"
           style="padding: 12px 12px 12px 12px;"
         >
           <div
@@ -248,6 +253,7 @@ exports[`PossessionOutline Snapshot 1`] = `
                 </div>
                 <div
                   class="ant-statistic-content"
+                  style="text-align: right;"
                 >
                   <span
                     class="ant-statistic-content-value"
@@ -270,7 +276,7 @@ exports[`PossessionOutline Snapshot 1`] = `
           </div>
         </div>
         <div
-          class="ant-col ant-col-8"
+          class="ant-col ant-col-xs-24 ant-col-sm-12 ant-col-md-6 ant-col-lg-6"
           style="padding: 12px 12px 12px 12px;"
         >
           <div
@@ -289,6 +295,7 @@ exports[`PossessionOutline Snapshot 1`] = `
                 </div>
                 <div
                   class="ant-statistic-content"
+                  style="text-align: right;"
                 >
                   <span
                     class="ant-statistic-content-value"
