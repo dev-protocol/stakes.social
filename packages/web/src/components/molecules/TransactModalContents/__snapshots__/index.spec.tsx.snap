@@ -90,7 +90,7 @@ exports[`TransactModalContents Snapshot 1`] = `
               <div
                 class="ant-card-head-title"
               >
-                Gas Fee (this is prediction value)
+                Gas Fee (predicted)
               </div>
             </div>
           </div>

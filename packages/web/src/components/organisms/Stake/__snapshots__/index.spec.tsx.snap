@@ -65,7 +65,7 @@ exports[`Stake Snapshot 1`] = `
             <div
               class="ant-card-head-title"
             >
-              Gas Fee (this is prediction value)
+              Gas Fee (predicted)
             </div>
           </div>
         </div>
@@ -158,7 +158,7 @@ exports[`Stake Snapshot with title 1`] = `
             <div
               class="ant-card-head-title"
             >
-              Gas Fee (this is prediction value)
+              Gas Fee (predicted)
             </div>
           </div>
         </div>

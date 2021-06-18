@@ -34,7 +34,7 @@ const EstimateGasUSD = styled.span`
 export const EstimatedGasFeeCard = ({ estimatedGasFee, estimatedGasFeeUSD }: Props) => {
   return (
     <EstimatedGasNotes>
-      <EstimatedGas title="Gas Fee (this is prediction value)" size="small">
+      <EstimatedGas title="Gas Fee (predicted)" size="small">
         {
           <p>
             {estimatedGasFee ? estimatedGasFee : '-'} ETH
