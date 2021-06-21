@@ -34,7 +34,7 @@ const Circle = styled.a`
 
 export const HelpUs = () => (
   <Tooltip placement="top" color="black" overlayStyle={{ fontSize: '0.8rem' }} title="Do you need help?">
-    <Circle href="https://docs.devprtcl.com" target="_blank">
+    <Circle href="https://docs.devprotocol.xyz/stakes-social/" target="_blank">
       <div
         style={{ position: 'absolute', width: '20px', height: '20px', left: '15px', top: '15px', background: 'white' }}
       />
