@@ -1,6 +1,12 @@
 import styled from 'styled-components'
 import React, { useEffect } from 'react'
 
+declare global {
+  interface Window {
+    twttr: any
+  }
+}
+
 const ShareButton = styled.p`
   margin: 0;
   font-size: 0;
@@ -8,7 +14,9 @@ const ShareButton = styled.p`
 let isLoadWidgets = false
 export default function ShareTweet({ title }: { title: string }) {
   useEffect(() => {
-    if (!isLoadWidgets) {
+    if (isLoadWidgets) {
+      window!.twttr!.widgets!.load()
+    } else {
       const s = document.createElement('script')
       s.setAttribute('src', 'https://platform.twitter.com/widgets.js')
       document.body.appendChild(s)
