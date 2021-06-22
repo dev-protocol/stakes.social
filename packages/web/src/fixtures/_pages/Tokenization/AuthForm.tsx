@@ -202,7 +202,7 @@ export const AuthForm = ({ onHeaderChange, onSubHeaderChange, onFormDataSubmit, 
                   <div>
                     <p>
                       <InfoCircleOutlined style={{ marginRight: '5px' }} />
-                      this is prediction value
+                      predicted cost
                     </p>
                   </div>
                 </div>
