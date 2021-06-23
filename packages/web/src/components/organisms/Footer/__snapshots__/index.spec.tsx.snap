@@ -14,7 +14,45 @@ exports[`Footer Snapshot 1`] = `
           class="sc-1fvy930-2 mMXDv"
         >
           <div
-            style="display: flex; justify-content: space-between;"
+            class="sc-1fvy930-7 bojwHj"
+            style="justify-content: start; font-size: 0.9rem;"
+          >
+            <a
+              class="sc-1fvy930-5 tCcWy"
+              href="https://docs.devprotocol.xyz/stakes-social/"
+              rel="noreferrer"
+              target="_blank"
+            >
+              What is Stakes.social
+            </a>
+            <a
+              class="sc-1fvy930-5 tCcWy"
+              href="https://devprotocol.xyz/faq"
+              rel="noreferrer"
+              target="_blank"
+            >
+              Dev Protocol FAQ
+            </a>
+            <a
+              class="sc-1fvy930-5 tCcWy"
+              href="/terms-of-use"
+            >
+              Terms of Use
+            </a>
+            <a
+              class="sc-1fvy930-5 tCcWy"
+              href="https://devprotocol.xyz/coc.html"
+              rel="noreferrer"
+              target="_blank"
+            >
+              Code of Conduct
+            </a>
+          </div>
+          <div
+            class="sc-1fvy930-6 ixpdGT"
+          />
+          <div
+            class="sc-1fvy930-7 bojwHj"
           >
             <div
               class="sc-1fvy930-3"
@@ -68,17 +106,17 @@ exports[`Footer Snapshot 1`] = `
               </a>
             </div>
           </div>
-          <hr
-            style="color: white; margin-top: 2px;"
-          />
           <div
-            style="display: flex; justify-content: space-between; color: white; font-size: 0.9em;"
+            class="sc-1fvy930-7 bojwHj"
           >
-            <span>
-              2020 All rights reserverd.
-            </span>
             <div
-              class="sc-1fvy930-1 kdhGjV"
+              class="sc-1fvy930-8 ioBVLA"
+            >
+              2020 All rights reserverd.
+            </div>
+            <div
+              class="sc-1fvy930-1 dHLyuT"
+              style="font-size: 0px;"
             >
               <a
                 class="sc-3pzwbd-0 jbrzDg"
