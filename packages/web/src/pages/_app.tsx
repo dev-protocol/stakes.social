@@ -3,7 +3,6 @@ import App, { AppInitialProps } from 'next/app'
 import { WithApolloProps } from 'next-with-apollo'
 import Head from 'next/head'
 import withApollo from 'src/fixtures/withApollo'
-import { HelpUs } from 'src/components/atoms/HelpUs'
 import SettingContext from 'src/context/settingContext'
 import WalletContext from 'src/context/walletContext'
 import Web3 from 'web3'
@@ -144,7 +143,6 @@ class NextApp extends App<AppInitialProps & WithApolloProps<{}>> {
             <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no" />
           </Head>
           <Component {...pageProps} apollo={apollo} />
-          <HelpUs></HelpUs>
         </SettingContext.Provider>
       </WalletContext.Provider>
     )
