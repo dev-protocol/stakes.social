@@ -34,7 +34,7 @@
     "date-fns": "2.22.1",
     "dotenv": "10.0.0",
     "dotenv-webpack": "7.0.3",
-    "ethers": "5.3.1",
+    "ethers": "5.4.0",
     "faker": "5.5.3",
     "formik": "2.2.9",
     "formik-material-ui": "3.0.1",
