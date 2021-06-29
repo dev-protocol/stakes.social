@@ -23,7 +23,7 @@ export const getContract = (web3: Web3, contractAddress = ETHDEV_V2_ADDRESS): Co
   return contract
 }
 
-export const balanceOf = async (web3: Web3): Promise<BigNumber | undefined> => {
+export const balanceOf = async (web3: Web3, geyserAddress: string): Promise<BigNumber | undefined> => {
   const address = await getAccountAddress(web3)
   if (address === undefined) {
     return undefined
@@ -35,7 +35,7 @@ export const balanceOf = async (web3: Web3): Promise<BigNumber | undefined> => {
           method: 'balanceOf',
           args: [address]
         })
-      : Promise.resolve(''))(getContract(web3)).then(toEVMBigNumber)
+      : Promise.resolve(''))(getContract(web3, geyserAddress)).then(toEVMBigNumber)
 }
 
 export const allowance = async (web3: Web3, spender: string): Promise<BigNumber | undefined> => {

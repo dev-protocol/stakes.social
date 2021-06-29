@@ -42,14 +42,16 @@ const Caption = styled.div`
   margin-bottom: 0.625rem;
 `
 
-export const Informations = () => {
-  const { data: apy } = useAPY()
-  // Todo add V2 Address
-  const { data: rewardMultiplier, max } = useRewardMultiplier()
-  const { data: totalStakedFor } = useTotalStakedFor()
-  const { data: unstakeQuery } = useUnstakeQuery(totalStakedFor)
-  // Todo add V2 Address
-  const { data: finalUnlockSchedules } = useFinalUnlockSchedules()
+type Props = {
+  geyserAddress: string
+}
+
+export const Informations = ({ geyserAddress }: Props) => {
+  const { data: apy } = useAPY(geyserAddress)
+  const { data: rewardMultiplier, max } = useRewardMultiplier(geyserAddress)
+  const { data: totalStakedFor } = useTotalStakedFor(geyserAddress)
+  const { data: unstakeQuery } = useUnstakeQuery(geyserAddress, totalStakedFor)
+  const { data: finalUnlockSchedules } = useFinalUnlockSchedules(geyserAddress)
   const apm = finalUnlockSchedules ? apy.div(finalUnlockSchedules.durationSec).times(ONE_MONTH_SECONDS) : undefined
   const accruedRewards =
     totalStakedFor && unstakeQuery ? (totalStakedFor.isZero() ? toBigNumber(0) : unstakeQuery) : toBigNumber(0)

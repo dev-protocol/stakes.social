@@ -5,7 +5,6 @@ import { useState } from 'react'
 import { getUTC, toAmountNumber, toBigNumber, toNaturalNumber, whenDefined } from 'src/fixtures/utility'
 import { useProvider } from 'src/fixtures/wallet/hooks'
 import styled from 'styled-components'
-import { GEYSER_V1_ETHDEV_V2_ADDRESS } from '../../../../fixtures/_pages/liquidity/constants/address'
 import {
   useEstimateReward,
   useFinalUnlockSchedules,
@@ -41,7 +40,7 @@ const LinkToUniswap = () => (
 
 const ZERO = toBigNumber(0)
 
-export const Deposit = () => {
+export const Deposit = (geyserAddress: string) => {
   const messageKey = 'liquidityDeposit'
   const { Item } = Form
   const { Step } = Steps
@@ -55,15 +54,15 @@ export const Deposit = () => {
   const [requireReEstimate, setRequireReEstimate] = useState(false)
   const { purge } = useMutateDepositDependence()
 
-  const { data: totalStakingShares } = useTotalStakingShares()
-  const { data: totalStaked } = useTotalStaked()
-  const { data: accounting } = useUpdateAccounting()
-  const { data: finalUnlockSchedule } = useFinalUnlockSchedules()
+  const { data: totalStakingShares } = useTotalStakingShares(geyserAddress)
+  const { data: totalStaked } = useTotalStaked(geyserAddress)
+  const { data: accounting } = useUpdateAccounting(geyserAddress)
+  const { data: finalUnlockSchedule } = useFinalUnlockSchedules(geyserAddress)
 
-  const [isAlreadyFinished] = useIsAlreadyFinished(useState<boolean>(false))
+  const [isAlreadyFinished] = useIsAlreadyFinished(useState<boolean>(false), geyserAddress)
   const estimate = useEstimateReward()
   const { approve, isLoading: isApproving } = useApprove()
-  const { stake, isLoading: isStaking } = useStake()
+  const { stake, isLoading: isStaking } = useStake(geyserAddress)
   const isFulfilled = useCallback(() => {
     return !totalStakingShares || !totalStaked || !accounting || !finalUnlockSchedule
       ? false
@@ -93,21 +92,19 @@ export const Deposit = () => {
       setDisplayAmount(value)
       updateEstimate(bn)
       whenDefined(web3, x =>
-        // Todo add V2 Address
-        allowance(x, GEYSER_V1_ETHDEV_V2_ADDRESS).then(x => {
+        allowance(x, geyserAddress).then(x => {
           const req = x ? x.isLessThanOrEqualTo(bn) : true
           setRequireApproval(req)
           setCurrentStep(req ? 0 : 1)
         })
       )
     },
-    [updateEstimate, web3]
+    [updateEstimate, web3, geyserAddress]
   )
   const onClickMax = useCallback(
     () =>
       whenDefined(web3, x =>
-        // Todo add V2 Address
-        balanceOf(x).then(x => {
+        balanceOf(x, geyserAddress).then(x => {
           updateAmount(x ? toNaturalNumber(x).toFixed() : '0')
           if (x?.toNumber() === 0) {
             message.warn({
@@ -123,7 +120,7 @@ export const Deposit = () => {
           }
         })
       ) || message.warn({ content: 'Please sign in', key: messageKey }),
-    [updateAmount, web3]
+    [updateAmount, web3, geyserAddress]
   )
   const onChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target
@@ -134,8 +131,7 @@ export const Deposit = () => {
       message.warn({ content: 'Please sign in', key: messageKey })
       return
     }
-    // Todo add V2 Address
-    const res = await approve(GEYSER_V1_ETHDEV_V2_ADDRESS, amount ? amount : ZERO)
+    const res = await approve(geyserAddress, amount ? amount : ZERO)
     if (res === false) {
       return
     }

@@ -12,6 +12,10 @@ import { Withdraw } from '../../components/_pages/liquidity/Withdraw'
 import { Stats } from 'src/components/_pages/liquidity/Stats'
 import { Informations } from 'src/components/_pages/liquidity/Informations'
 import { VersionSwitching } from '../../components/_pages/liquidity/VersionSwitching'
+import {
+  GEYSER_V1_ETHDEV_V2_ADDRESS,
+  GEYSER_V2_ETHDEV_V2_ADDRESS
+} from '../../fixtures/_pages/liquidity/constants/address'
 
 const NarrowContainer = styled(Container)`
   max-width: 640px;
@@ -21,12 +25,24 @@ const Margin = styled.div`
   margin: 2rem 0;
 `
 
-const LiquidityMining = () => {
+const getGeyserAddress = (version: string) => {
+  switch (version) {
+    case 'v1':
+      return GEYSER_V1_ETHDEV_V2_ADDRESS
+    case 'v2':
+      return GEYSER_V2_ETHDEV_V2_ADDRESS
+    default:
+      throw new Error('Detected an unexpected value')
+  }
+}
+
+const LiquidityMining = ({ version }: { version: string }) => {
   const [, setTab] = useState('0')
+  const geyserAddress = getGeyserAddress(version)
   const contents = [
-    { name: 'Deposit', node: Deposit() },
-    { name: 'Withdraw', node: Withdraw() },
-    { name: 'Stats', node: Stats() }
+    { name: 'Deposit', node: Deposit(geyserAddress) },
+    { name: 'Withdraw', node: Withdraw(geyserAddress) },
+    { name: 'Stats', node: Stats(geyserAddress) }
   ]
 
   return (
@@ -40,7 +56,7 @@ const LiquidityMining = () => {
       <NarrowContainer>
         <VersionSwitching />
         <Margin>
-          <Informations />
+          <Informations geyserAddress={geyserAddress} />
         </Margin>
         <Nav contents={contents} onChange={setTab}></Nav>
       </NarrowContainer>
@@ -65,7 +81,7 @@ export async function getServerSideProps({ params }: { params: Params }) {
     return { notFound: true }
   }
 
-  return { props: {} }
+  return { props: { version } }
 }
 
 export default LiquidityMining
