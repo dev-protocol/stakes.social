@@ -3,14 +3,15 @@ import Web3 from 'web3'
 import { Contract, EventData } from 'web3-eth-contract'
 import { createContract } from 'src/fixtures/utility/contract-client'
 import { toBigNumber, toEVMBigNumber } from 'src/fixtures/utility'
-import { GEYSER_ETHDEV_V2_ADDRESS } from '../constants/address'
+import { GEYSER_V1_ETHDEV_V2_ADDRESS } from '../constants/address'
 import { utils } from '@devprotocol/dev-kit'
 import BigNumber from 'bignumber.js'
 
 const { execute } = utils
 const client: Map<string, WeakMap<Web3, Contract>> = new Map()
 
-export const getContract = (web3: Web3, contractAddress = GEYSER_ETHDEV_V2_ADDRESS): Contract => {
+// Todo add V2 Address
+export const getContract = (web3: Web3, contractAddress = GEYSER_V1_ETHDEV_V2_ADDRESS): Contract => {
   const cache = client.get(contractAddress)
   const fromCache = cache?.get(web3)
   if (fromCache) {
@@ -77,6 +78,7 @@ export const totalStakedFor = async (client: Web3, address: string): Promise<Big
           method: 'totalStakedFor',
           args: [address]
         })
+      // Todo add V2 Address
       : Promise.resolve(''))(getContract(client)).then(toEVMBigNumber)
 }
 
@@ -136,8 +138,11 @@ export const totalUnlocked = async (client: Web3): Promise<BigNumber> => {
 }
 
 export const finalUnlockSchedules = async (client: Web3): Promise<undefined | UnlockSchedule> => {
+  // Todo add V2 Address
   const count = await unlockScheduleCount(client)
+  // Todo add V2 Address
   const schedules = await Promise.all(new Array(count).fill(0).map((_, index) => unlockSchedules(client, index)))
+
   return schedules.length > 0
     ? schedules.reduce((a, c) => (toBigNumber(a.endAtSec).isGreaterThan(c.endAtSec) ? a : c))
     : undefined
@@ -180,6 +185,7 @@ export const allTokensClaimed = async (client: Web3): Promise<EventData[]> => {
 }
 
 export const getStaked = async (client: Web3, user: string): Promise<EventData[]> => {
+  // Todo add V2 Address
   return (contract =>
     contract
       ? contract.getPastEvents('Staked', { filter: { user }, fromBlock: 0, toBlock: 'latest' })

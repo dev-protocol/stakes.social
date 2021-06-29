@@ -64,6 +64,15 @@ module.exports = withTM(withCss(
       IS_PREVIEW: process.env.IS_PREVIEW
     },
     distDir: 'dist/src/.next',
-    target: 'serverless'
+    target: 'serverless',
+    redirects: () => {
+      return [
+        {
+          source: '/liquidity',
+          destination: '/liquidity/v2',
+          permanent: true
+        }
+      ]
+    }
   })
 ))

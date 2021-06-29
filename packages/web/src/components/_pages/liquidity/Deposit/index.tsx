@@ -5,7 +5,7 @@ import { useState } from 'react'
 import { getUTC, toAmountNumber, toBigNumber, toNaturalNumber, whenDefined } from 'src/fixtures/utility'
 import { useProvider } from 'src/fixtures/wallet/hooks'
 import styled from 'styled-components'
-import { GEYSER_ETHDEV_V2_ADDRESS } from '../../../../fixtures/_pages/liquidity/constants/address'
+import { GEYSER_V1_ETHDEV_V2_ADDRESS } from '../../../../fixtures/_pages/liquidity/constants/address'
 import {
   useEstimateReward,
   useFinalUnlockSchedules,
@@ -93,7 +93,8 @@ export const Deposit = () => {
       setDisplayAmount(value)
       updateEstimate(bn)
       whenDefined(web3, x =>
-        allowance(x, GEYSER_ETHDEV_V2_ADDRESS).then(x => {
+        // Todo add V2 Address
+        allowance(x, GEYSER_V1_ETHDEV_V2_ADDRESS).then(x => {
           const req = x ? x.isLessThanOrEqualTo(bn) : true
           setRequireApproval(req)
           setCurrentStep(req ? 0 : 1)
@@ -105,6 +106,7 @@ export const Deposit = () => {
   const onClickMax = useCallback(
     () =>
       whenDefined(web3, x =>
+        // Todo add V2 Address
         balanceOf(x).then(x => {
           updateAmount(x ? toNaturalNumber(x).toFixed() : '0')
           if (x?.toNumber() === 0) {
@@ -132,7 +134,8 @@ export const Deposit = () => {
       message.warn({ content: 'Please sign in', key: messageKey })
       return
     }
-    const res = await approve(GEYSER_ETHDEV_V2_ADDRESS, amount ? amount : ZERO)
+    // Todo add V2 Address
+    const res = await approve(GEYSER_V1_ETHDEV_V2_ADDRESS, amount ? amount : ZERO)
     if (res === false) {
       return
     }
