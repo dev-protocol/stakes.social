@@ -34,7 +34,7 @@ export const VersionSwitching = () => {
       <Wrapper>
         <Radio.Group
           name="version"
-          defaultValue="v2"
+          defaultValue={version === 'v1' ? 'v1' : 'v2'}
           buttonStyle="solid"
           size="large"
           onChange={(e: RadioChangeEvent) => switchVersion(e.target.value, version)}

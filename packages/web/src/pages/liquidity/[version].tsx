@@ -16,6 +16,8 @@ import {
   GEYSER_V1_ETHDEV_V2_ADDRESS,
   GEYSER_V2_ETHDEV_V2_ADDRESS
 } from '../../fixtures/_pages/liquidity/constants/address'
+import { useRouter } from 'next/router'
+import Error from 'next/error'
 
 const NarrowContainer = styled(Container)`
   max-width: 640px;
@@ -32,13 +34,30 @@ const getGeyserAddress = (version: string) => {
     case 'v2':
       return GEYSER_V2_ETHDEV_V2_ADDRESS
     default:
-      throw new Error('Detected an unexpected value')
+      return false
   }
 }
 
-const LiquidityMining = ({ version }: { version: string }) => {
+const isCorrectPath = (version: string): boolean => {
+  const regex = new RegExp('v[12]')
+  return regex.test(version)
+}
+
+const LiquidityMining = () => {
   const [, setTab] = useState('0')
+  const router = useRouter()
+  const { version } = router.query as { version: string }
+
+  if (!isCorrectPath(version)) {
+    return <Error statusCode={404} />
+  }
+
   const geyserAddress = getGeyserAddress(version)
+
+  if (geyserAddress === false) {
+    return <Error statusCode={500} />
+  }
+
   const contents = [
     { name: 'Deposit', node: Deposit(geyserAddress) },
     { name: 'Withdraw', node: Withdraw(geyserAddress) },
@@ -63,25 +82,6 @@ const LiquidityMining = ({ version }: { version: string }) => {
       <Footer />
     </>
   )
-}
-
-type Params = {
-  version: string
-}
-
-const isCorrectPath = (version: string): boolean => {
-  const regex = new RegExp('v[12]')
-  return regex.test(version)
-}
-
-export async function getServerSideProps({ params }: { params: Params }) {
-  const { version } = params
-
-  if (!isCorrectPath(version)) {
-    return { notFound: true }
-  }
-
-  return { props: { version } }
 }
 
 export default LiquidityMining
