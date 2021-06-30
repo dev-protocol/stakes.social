@@ -7,6 +7,10 @@ const Wrap = styled.div`
   display: grid;
   justify-items: center;
   align-items: center;
+
+  @media (max-width: 767px) {
+    height: 20rem;
+  }
 `
 const Img = styled.img`
   width: 100%;
