@@ -9,12 +9,7 @@ const Wrapper = styled.div`
 `
 
 const Caption = styled.div`
-  margin-bottom: 0.3125rem;
-`
-
-const Description = styled.div`
   margin-bottom: 0.625rem;
-  font-size: 0.75rem;
 `
 
 export const VersionSwitching = () => {
@@ -30,7 +25,6 @@ export const VersionSwitching = () => {
   return (
     <>
       <Caption>Version Switching</Caption>
-      <Description>The liquidity program for v1 has already ended</Description>
       <Wrapper>
         <Radio.Group
           name="version"
