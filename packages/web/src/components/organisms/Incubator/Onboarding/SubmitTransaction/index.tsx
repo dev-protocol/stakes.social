@@ -7,10 +7,11 @@ import { SetOnboardingPageStatus } from 'src/pages/incubator/project/[project]'
 
 type SubmitTranscriptType = {
   onActivePartChange: React.Dispatch<React.SetStateAction<number>>
-  onStateChange: SetOnboardingPageStatus
+  onStateChange?: SetOnboardingPageStatus
+  onClick: React.MouseEventHandler<HTMLElement>
 }
 
-const SubmitTransaction = ({ onActivePartChange, onStateChange }: SubmitTranscriptType) => {
+const SubmitTransaction = ({ onActivePartChange, onClick }: SubmitTranscriptType) => {
   return (
     <Container>
       <AnimationContainer>
@@ -23,10 +24,7 @@ const SubmitTransaction = ({ onActivePartChange, onStateChange }: SubmitTranscri
           announcing their arrival on Stakes Social. After you publish the tweet copy and paste the link and the Khaos
           oracle will authenticate if it was successfully completed.
         </Text1M>
-        <BoardingNavigation
-          backwardCallback={() => onActivePartChange(4)}
-          forwardCallback={() => onStateChange('authentication')}
-        />
+        <BoardingNavigation backwardCallback={() => onActivePartChange(4)} forwardCallback={onClick as any} />
       </DescriptionContainer>
     </Container>
   )

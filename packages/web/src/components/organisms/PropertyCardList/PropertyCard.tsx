@@ -180,9 +180,8 @@ export const PropertyCard = ({ propertyAddress, assets }: Props) => {
   const [modalStates, setModalStates] = useState<ModalStates>({ visible: false })
   const { totalStakingAmount, currency: totalStakingAmountCurrency } = useGetTotalStakingAmount(propertyAddress)
   const { totalRewardsAmount, currency: totalRewardsAmountCurrency } = useGetTotalRewardsAmount(propertyAddress)
-  const { myStakingRewardAmount, currency: myStakingRewardAmountCurrency } = useGetMyStakingRewardAmount(
-    propertyAddress
-  )
+  const { myStakingRewardAmount, currency: myStakingRewardAmountCurrency } =
+    useGetMyStakingRewardAmount(propertyAddress)
   const { myStakingAmount, currency: myStakingAmountCurrency } = useGetMyStakingAmount(propertyAddress)
   const { data: authorData } = useGetPropertytInformation(propertyAddress)
   const { author: authorAddress } = usePropertyAuthor(propertyAddress)

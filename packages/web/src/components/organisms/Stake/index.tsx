@@ -1,10 +1,12 @@
 import React, { useCallback, useState, ChangeEvent, useMemo } from 'react'
 import { useProvider } from 'src/fixtures/wallet/hooks'
 import { balanceOf } from 'src/fixtures/dev-kit/client'
-import { useStake } from 'src/fixtures/dev-kit/hooks'
+import { useStake, useGetEstimateGas4Stake } from 'src/fixtures/dev-kit/hooks'
+import { useGetEthPrice } from 'src/fixtures/uniswap/hooks'
 import { toAmountNumber, toNaturalNumber, whenDefinedAll } from 'src/fixtures/utility'
 import { TransactForm } from 'src/components/molecules/TransactForm'
 import { FormContainer } from 'src/components/molecules/TransactForm/FormContainer'
+import { EstimatedGasFeeCard } from 'src/components/molecules/EstimatedGasFeeCard'
 import { message } from 'antd'
 
 interface Props {
@@ -17,6 +19,12 @@ export const Stake = ({ className, title, propertyAddress }: Props) => {
   const [stakeAmount, setStakeAmount] = useState<string>('')
   const { web3, accountAddress } = useProvider()
   const { stake } = useStake()
+  const { estimateGas } = useGetEstimateGas4Stake(propertyAddress, stakeAmount || undefined)
+  const { data: ethPrice } = useGetEthPrice()
+  const estimateGasUSD = useMemo(
+    () => whenDefinedAll([estimateGas, ethPrice], ([gas, eth]) => gas.multipliedBy(eth)),
+    [estimateGas, ethPrice]
+  )
   const stakeFor = useCallback(
     (amount: string) => {
       if (!web3) {
@@ -57,6 +65,10 @@ export const Stake = ({ className, title, propertyAddress }: Props) => {
         onClickMax={onClickMax}
       />
       <div style={{ height: '40px' }}></div>
+      <EstimatedGasFeeCard
+        estimatedGasFee={estimateGas ? estimateGas.toFixed(6) : '-'}
+        estimatedGasFeeUSD={estimateGasUSD ? estimateGasUSD.toFixed(2) : ''}
+      />
     </FormContainer>
   )
 }

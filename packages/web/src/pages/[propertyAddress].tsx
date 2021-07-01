@@ -116,7 +116,7 @@ const AddAsset = styled.button`
 
   &:hover {
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2), 0 2px 4px -1px rgba(0, 0, 0, 0.12);
-    transition: 0.2 ease-in;
+    transition: 200ms ease-in;
   }
 `
 
@@ -420,7 +420,7 @@ const PropertyAddressDetail = (_: Props) => {
             {isExistProperty && (loggedInWallet ? loggedInWallet !== authorAddress : true) && (
               <Stake title="Stake" propertyAddress={propertyAddress} />
             )}
-            {isExistProperty && <Withdraw title="Withdraw" propertyAddress={propertyAddress} />}
+            {isExistProperty && <Withdraw title="Withdraw" propertyAddress={propertyAddress} isDisplayFee={true} />}
           </Transact>
           <PropertyAbout
             isAuthor={loggedInWallet === authorAddress}

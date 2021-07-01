@@ -8,9 +8,10 @@ import { usePostSignGitHubMarketAsset } from 'src/fixtures/khaos/hooks'
 import { Incubator } from 'src/fixtures/dev-for-apps/utility'
 import { useAuthenticate } from 'src/fixtures/_pages/incubator/hooks'
 import CheckCircleOutlined from '@ant-design/icons/lib/icons/CheckCircleOutlined'
-import { SetOnboardingPageStatus } from 'src/pages/incubator/project/[project]'
+import { SetLoadingStatus, SetOnboardingPageStatus } from 'src/pages/incubator/project/[project]'
 import DownArrow from '../../molecules/DownArrow'
 import { useProvider } from 'src/fixtures/wallet/hooks'
+import { useRouter } from 'next/router'
 
 const AuthenticationContainer = styled.div`
   position: relative;
@@ -174,6 +175,7 @@ const StyledForm = styled(Form)`
 
 type AuthenticationProps = {
   onStateChange: SetOnboardingPageStatus
+  loading: SetLoadingStatus
   onMetricsCreated: React.Dispatch<React.SetStateAction<string | undefined>>
   project: Incubator
   onIsWrongChange: React.Dispatch<React.SetStateAction<boolean>>
@@ -209,11 +211,20 @@ const DownArrowContainer = styled.div`
 
 const IS_DEVELOPMENT_ENV = process.env.NODE_ENV === 'development'
 
-const AuthenticationForm = ({ onStateChange, onMetricsCreated, project, onIsWrongChange }: AuthenticationProps) => {
+const AuthenticationForm = ({
+  onStateChange,
+  loading,
+  onMetricsCreated,
+  project,
+  onIsWrongChange
+}: AuthenticationProps) => {
+  const { public_signature } = useRouter().query
   const [form] = Form.useForm()
   const { postSignGitHubMarketAssetHandler, isLoading } = usePostSignGitHubMarketAsset()
   const { authenticate, waitForCreateMetrics } = useAuthenticate()
-  const [publicSignature, setPublicSignature] = useState<undefined | string>()
+  const [publicSignature, setPublicSignature] = useState<undefined | string>(
+    public_signature && String(public_signature)
+  )
   const { accountAddress } = useProvider()
   const onSign = async (data: any) => {
     const signature = await postSignGitHubMarketAssetHandler(project.verifier_id, data.pat).catch((err: Error) => {
@@ -229,9 +240,13 @@ const AuthenticationForm = ({ onStateChange, onMetricsCreated, project, onIsWron
     if (!publicSignature) {
       return onIsWrongChange(true)
     }
-    onStateChange('loading')
+    loading('loading')
     if (!IS_DEVELOPMENT_ENV) {
-      await authenticate(project.verifier_id, publicSignature)
+      console.log({ publicSignature })
+      await authenticate(project.verifier_id, publicSignature).catch(err => {
+        message.error(err)
+        return onIsWrongChange(true)
+      })
     }
     const metrics = IS_DEVELOPMENT_ENV
       ? '0x_dummy_metrics'
@@ -243,9 +258,11 @@ const AuthenticationForm = ({ onStateChange, onMetricsCreated, project, onIsWron
     onMetricsCreated(metrics)
     if (IS_DEVELOPMENT_ENV) {
       setTimeout(() => {
+        loading(undefined)
         onStateChange('authentication')
       }, 3000)
     } else {
+      loading(undefined)
       onStateChange('authentication')
     }
   }

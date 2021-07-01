@@ -14,6 +14,11 @@ const SocialContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: start;
+  font-size: 0;
+
+  @media (max-width: 767px) {
+    align-items: center;
+  }
 `
 const LowerFooter = {
   margin: 'unset',
@@ -39,11 +44,58 @@ const DevProtocol = styled.a`
   font-weight: bold;
   text-decoration: none;
   cursor: pointer;
-
   color: white;
 
   :hover {
     color: inherit;
+  }
+`
+
+const FooterLink = styled.a`
+  padding-right: 1.5rem;
+  text-decoration: none;
+  cursor: pointer;
+  color: white;
+  opacity: 1;
+  transition: opacity 400ms ease-out;
+
+  :hover {
+    color: white;
+    opacity: 0.8;
+  }
+
+  @media (max-width: 767px) {
+    margin-right: 0;
+    margin-bottom: 1.25rem;
+    :last-child {
+      margin-bottom: 0;
+    }
+  }
+`
+
+const Border = styled.div`
+  margin: 1.25rem 0;
+  width: 100%;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.8);
+`
+
+const FooterWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 0.3125rem;
+
+  @media (max-width: 767px) {
+    flex-direction: column;
+    justify-content: unset;
+    align-items: center;
+    color: #fff;
+  }
+`
+
+const FooterContentLeft = styled.div`
+  @media (max-width: 767px) {
+    margin-bottom: 1.25rem;
   }
 `
 
@@ -52,7 +104,22 @@ export const Footer = () => {
     <Wrap>
       <Container style={LowerFooter}>
         <FooterContainer>
-          <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+          <FooterWrapper style={{ justifyContent: 'start', fontSize: '0.9rem' }}>
+            <FooterLink href={'https://docs.devprotocol.xyz/stakes-social/'} target={'_blank'} rel="noreferrer">
+              What is Stakes.social
+            </FooterLink>
+            <FooterLink href={'https://devprotocol.xyz/faq'} target={'_blank'} rel="noreferrer">
+              Dev Protocol FAQ
+            </FooterLink>
+            <FooterLink href={'/terms-of-use'}>Terms of Use</FooterLink>
+            <FooterLink href={'https://devprotocol.xyz/coc.html'} target={'_blank'} rel="noreferrer">
+              Code of Conduct
+            </FooterLink>
+          </FooterWrapper>
+
+          <Border />
+
+          <FooterWrapper>
             <LogoContainer>
               <BrandLogo />
             </LogoContainer>
@@ -63,19 +130,18 @@ export const Footer = () => {
                 Dev Protocol
               </DevProtocol>
             </div>
-          </div>
+          </FooterWrapper>
 
-          <hr style={{ color: 'white', marginTop: '2px' }} />
-          <div style={{ display: 'flex', justifyContent: 'space-between', color: 'white', fontSize: '0.9em' }}>
-            <span>2020 All rights reserverd.</span>
-            <SocialContainer>
+          <FooterWrapper>
+            <FooterContentLeft>2020 All rights reserverd.</FooterContentLeft>
+            <SocialContainer style={{ fontSize: 0 }}>
               <Twitter target="_blank" rel="noopener noreferrer" />
               <Discord />
               <Github target="_blank" rel="noopener noreferrer" />
               <Telegram />
               <Medium />
             </SocialContainer>
-          </div>
+          </FooterWrapper>
         </FooterContainer>
       </Container>
     </Wrap>

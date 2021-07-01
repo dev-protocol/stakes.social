@@ -1,8 +1,14 @@
 import React, { useEffect, useState, useMemo } from 'react'
-import { useGetMyStakingAmount, useGetMyStakingRewardAmount } from 'src/fixtures/dev-kit/hooks'
-import { toBigNumber, whenDefined } from 'src/fixtures/utility'
+import {
+  useGetMyStakingAmount,
+  useGetMyStakingRewardAmount,
+  useGetEstimateGas4WithdrawStakingAmount
+} from 'src/fixtures/dev-kit/hooks'
+import { toBigNumber, whenDefined, whenDefinedAll } from 'src/fixtures/utility'
+import { useGetEthPrice } from 'src/fixtures/uniswap/hooks'
 import { FormContainer } from 'src/components/molecules/TransactForm/FormContainer'
 import { Estimated } from 'src/components/molecules/TransactForm/Estimated'
+import { EstimatedGasFeeCard } from 'src/components/molecules/EstimatedGasFeeCard'
 import { Withdraw } from '.'
 
 interface Props {
@@ -18,6 +24,12 @@ export const WithdrawWithEstimate = ({ className, title, propertyAddress }: Prop
   const [withdrawableTokens, setWithdrawableTokens] = useState<string>('')
   const { dev: myStakingRewardAmount } = useGetMyStakingRewardAmount(propertyAddress)
   const { myStakingAmount } = useGetMyStakingAmount(propertyAddress)
+  const { estimateGas } = useGetEstimateGas4WithdrawStakingAmount(propertyAddress, withdrawAmount || '0')
+  const { data: ethPrice } = useGetEthPrice()
+  const estimateGasUSD = useMemo(
+    () => whenDefinedAll([estimateGas, ethPrice], ([gas, eth]) => gas.multipliedBy(eth)),
+    [estimateGas, ethPrice]
+  )
 
   const estimatedValue = useMemo(
     () => (
@@ -46,6 +58,10 @@ export const WithdrawWithEstimate = ({ className, title, propertyAddress }: Prop
     <FormContainer className={className}>
       <Withdraw propertyAddress={propertyAddress} title={title} onChange={onChange} />
       <Estimated title="Staked and Reward Amount">{estimatedValue}</Estimated>
+      <EstimatedGasFeeCard
+        estimatedGasFee={estimateGas ? estimateGas.toFixed(6) : '-'}
+        estimatedGasFeeUSD={estimateGasUSD ? estimateGasUSD.toFixed(2) : ''}
+      />
     </FormContainer>
   )
 }

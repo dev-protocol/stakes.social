@@ -177,42 +177,46 @@ const TokenizationDisclaimer = ({
       const khaos = await postSignGitHubMarketAssetHandler(repository, personalAccessToken).catch(() => undefined)
       console.log({ khaos })
       if (!khaos) {
+        message.error({ content: 'Failed to generate Khaos Public Signature' })
         return
       }
       message.success({ content: 'Successful creation of public signature by Khaos' })
       return [repository, khaos.publicSignature || ''] as [string, string]
     })()
     if (!authRequestData) {
+      message.error({ content: 'Failed to generate credentials' })
       return
     }
 
     // Send Ethereum transaction and create new Property Tokens, aka Creator Tokens, and starts authentication flow.
     const results = await createAndAuthenticate(tokenName, tokenSymbol, market, authRequestData)
-    if (results) {
-      // TODO: Function to be called to tokenize based input
-      // New Property Tokens have been created.
-      /**
-       * results interfaces
-       *
-       * property - created new Property address
-       * transaction - Ethereum transaction information
-       * waitForAuthentication - Promise that expects resolve by completing the authentication
-       */
-      message.success({ content: `success creation your tokens: ${results.property}` })
-      message.loading({ content: 'now authenticating...', duration: 0, key })
-
-      // Wait for completing the authentication
-      const metricsAddress = await results.waitForAuthentication()
-      message.success({ content: 'completed tokenization!', key })
-
-      // Completed the all flow
-      // setProperty(results.property)
-      onMetricsChange(metricsAddress)
-      onHeaderChange('Succesfully Tokenized Your Project')
-      onSubHeaderChange(
-        'Please wait for your project to become available on Stakes Social. This can take several minutes.'
-      )
+    if (!results) {
+      message.error({ content: 'Failed to create a transaction' })
+      return
     }
+    // TODO: Function to be called to tokenize based input
+    // New Property Tokens have been created.
+    /**
+     * results interfaces
+     *
+     * property - created new Property address
+     * transaction - Ethereum transaction information
+     * waitForAuthentication - Promise that expects resolve by completing the authentication
+     */
+    message.success({ content: `success creation your tokens: ${results.property}` })
+    message.loading({ content: 'now authenticating...', duration: 0, key })
+
+    // Wait for completing the authentication
+    const metricsAddress = await results.waitForAuthentication()
+    message.success({ content: 'completed tokenization!', key })
+
+    // Completed the all flow
+    // setProperty(results.property)
+    onMetricsChange(metricsAddress)
+    onHeaderChange('Succesfully Tokenized Your Project')
+    onSubHeaderChange(
+      'Please wait for your project to become available on Stakes Social. This can take several minutes.'
+    )
   }
 
   const handleCancel = () => {
@@ -285,10 +289,9 @@ const AuthenticateNewAsset = (_: Props) => {
   const [header, setHeader] = useState('Create an Asset')
   const [subHeader, setSubHeader] = useState('Create an asset or authenticate an existing pool.')
   const [, market] = getPath(useRouter().asPath)
-  const [formData, setFormData] =
-    useState<{ projectName: string; tokenName: string; tokenSymbol: string; personalAccessToken: string } | undefined>(
-      undefined
-    )
+  const [formData, setFormData] = useState<
+    { projectName: string; tokenName: string; tokenSymbol: string; personalAccessToken: string } | undefined
+  >(undefined)
   const [metrics, setMetrics] = useState<string>('')
 
   console.log('formData: ', formData)
