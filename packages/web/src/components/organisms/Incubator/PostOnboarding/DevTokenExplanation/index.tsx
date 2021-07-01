@@ -93,7 +93,7 @@ const DevTokenExplanation = ({ onActivePageChange }: PostOnboardType) => {
             <LinkB
               target="_blank"
               rel="noopener noreferrer"
-              href="https://app.uniswap.org/#/swap?inputCurrency=0x5caf454ba92e6f2c929df14667ee360ed9fd5b26"
+              href="https://app.uniswap.org/#/swap?inputCurrency=0x5caf454ba92e6f2c929df14667ee360ed9fd5b26&use=V2"
             >
               Sell DEV for ETH
             </LinkB>
