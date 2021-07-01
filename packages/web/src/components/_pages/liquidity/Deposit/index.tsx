@@ -52,7 +52,7 @@ export const Deposit = (geyserAddress: string) => {
   const [requireDeposit, setRequireDeposit] = useState(true)
   const [currentStep, setCurrentStep] = useState(0)
   const [requireReEstimate, setRequireReEstimate] = useState(false)
-  const { purge } = useMutateDepositDependence()
+  const { purge } = useMutateDepositDependence(geyserAddress)
 
   const { data: totalStakingShares } = useTotalStakingShares(geyserAddress)
   const { data: totalStaked } = useTotalStaked(geyserAddress)
