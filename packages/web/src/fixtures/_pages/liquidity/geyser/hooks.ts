@@ -50,7 +50,7 @@ const getTokensLocked = (client: Web3, geyserAddress: string) => () =>
 export const useTotalRewards = (geyserAddress: string) => {
   const { nonConnectedWeb3: web3 } = useProvider()
   const { data, error } = useSWR<BigNumber, Error>(
-    SWRCachePath.allTokensLocked,
+    SWRCachePath.allTokensLocked(geyserAddress),
     whenDefined(web3, x => getTokensLocked(x, geyserAddress)) || null
   )
   return {
@@ -120,7 +120,7 @@ export const useUnstake = (geyserAddress: string) => {
 export const useAllTokensClaimed = (geyserAddress: string) => {
   const { nonConnectedWeb3: web3, accountAddress } = useProvider()
   const { data, error } = useSWR<BigNumber, Error>(
-    SWRCachePath.useAllTokensClaimed(accountAddress),
+    SWRCachePath.useAllTokensClaimed(geyserAddress, accountAddress),
     whenDefined(web3, x => getAllTokensClaimed(x, geyserAddress)) || null
   )
   return {
@@ -132,7 +132,7 @@ export const useAllTokensClaimed = (geyserAddress: string) => {
 export const useTotalStakingShares = (geyserAddress: string) => {
   const { nonConnectedWeb3, accountAddress } = useProvider()
   const { data, error } = useSWR<undefined | UnwrapFunc<typeof totalStakingShares>, Error>(
-    SWRCachePath.getTotalStakingShares(accountAddress),
+    SWRCachePath.getTotalStakingShares(geyserAddress, accountAddress),
     () => whenDefined(nonConnectedWeb3, x => totalStakingShares(x, geyserAddress))
   )
   return {
@@ -144,8 +144,7 @@ export const useTotalStakingShares = (geyserAddress: string) => {
 export const useTotalStaked = (geyserAddress: string) => {
   const { nonConnectedWeb3, accountAddress } = useProvider()
   const { data, error } = useSWR<undefined | UnwrapFunc<typeof totalStakingShares>, Error>(
-    SWRCachePath.useTotalStaked(accountAddress),
-    // Todo add V2 Address
+    SWRCachePath.useTotalStaked(geyserAddress, accountAddress),
     () => whenDefined(nonConnectedWeb3, x => totalStaked(x, geyserAddress))
   )
   return {
@@ -157,7 +156,7 @@ export const useTotalStaked = (geyserAddress: string) => {
 export const useUpdateAccounting = (geyserAddress: string) => {
   const { web3, accountAddress } = useProvider()
   const { data, error } = useSWR<undefined | UnwrapFunc<typeof updateAccounting>, Error>(
-    SWRCachePath.getUpdateAccounting(accountAddress),
+    SWRCachePath.getUpdateAccounting(geyserAddress, accountAddress),
     () => whenDefined(web3, x => updateAccounting(x, geyserAddress))
   )
   return {
@@ -169,7 +168,7 @@ export const useUpdateAccounting = (geyserAddress: string) => {
 export const useFinalUnlockSchedules = (geyserAddress: string) => {
   const { nonConnectedWeb3, accountAddress } = useProvider()
   const { data, error } = useSWR<undefined | UnwrapFunc<typeof finalUnlockSchedules>, Error>(
-    SWRCachePath.getFinalUnlockSchedules(accountAddress),
+    SWRCachePath.getFinalUnlockSchedules(geyserAddress, accountAddress),
     () => whenDefined(nonConnectedWeb3, x => finalUnlockSchedules(x, geyserAddress))
   )
   return {
@@ -263,7 +262,7 @@ export const useRewardMultiplier = (geyserAddress: string) => {
     data: block,
     error: errorGetStaked,
     mutate
-  } = useSWR<number | undefined, Error>(SWRCachePath.getStaked(accountAddress), () =>
+  } = useSWR<number | undefined, Error>(SWRCachePath.getStaked(geyserAddress, accountAddress), () =>
     whenDefinedAll([web3, accountAddress], ([client, address]) =>
       getStaked(client, address, geyserAddress).then(allEvents => {
         return allEvents[0]?.blockNumber
@@ -271,15 +270,15 @@ export const useRewardMultiplier = (geyserAddress: string) => {
     )
   )
   const { data: timestamp, error: errorGetBlock } = useSWR<number | undefined, Error>(
-    SWRCachePath.getBlock(block),
+    SWRCachePath.getBlock(geyserAddress, block),
     () => (block ? getBlock(block).then(Number) : undefined)
   )
   const { data: bonusPeriod, error: errorBonusPeriodSec } = useSWR<undefined | BigNumber, Error>(
-    SWRCachePath.getBonusPeriodSec(accountAddress),
+    SWRCachePath.getBonusPeriodSec(geyserAddress, accountAddress),
     () => whenDefined(web3, x => bonusPeriodSec(x, geyserAddress))
   )
   const { data: _startBonus, error: errorStartBonus } = useSWR<undefined | BigNumber, Error>(
-    SWRCachePath.getStartBonus(accountAddress),
+    SWRCachePath.getStartBonus(geyserAddress, accountAddress),
     () => whenDefined(web3, x => startBonus(x, geyserAddress))
   )
   const startBonusPct = _startBonus ? toBigNumber(_startBonus).div(100) : toBigNumber(0)
@@ -309,7 +308,7 @@ export const useRewardMultiplier = (geyserAddress: string) => {
 export const useTotalStakedFor = (geyserAddress: string) => {
   const { nonConnectedWeb3, accountAddress } = useProvider()
   const { data, error, mutate } = useSWR<UnwrapFunc<typeof totalStakedFor> | undefined, Error>(
-    SWRCachePath.totalStakedFor(accountAddress),
+    SWRCachePath.totalStakedFor(geyserAddress, accountAddress),
     () =>
       whenDefinedAll([nonConnectedWeb3, accountAddress], ([client, address]) =>
         totalStakedFor(client, address, geyserAddress)
@@ -322,11 +321,11 @@ export const useTotalStakedFor = (geyserAddress: string) => {
   }
 }
 
-export const useMutateDepositDependence = () => {
+export const useMutateDepositDependence = (geyserAddress: string) => {
   const { accountAddress } = useProvider()
   const purge = useCallback(() => {
-    mutate(SWRCachePath.getStaked(accountAddress))
-    mutate(SWRCachePath.totalStakedFor(accountAddress))
+    mutate(SWRCachePath.getStaked(geyserAddress, accountAddress))
+    mutate(SWRCachePath.totalStakedFor(geyserAddress, accountAddress))
   }, [accountAddress])
 
   return {
@@ -358,7 +357,7 @@ export const useAPY = (geyserAddress: string) => {
 export const useUnstakeQuery = (geyserAddress: string, amount?: BigNumber) => {
   const { web3 } = useProvider()
   const { data, error } = useSWR<UnwrapFunc<typeof totalStakedFor> | undefined, Error>(
-    SWRCachePath.unstakeQuery(amount?.toFixed()),
+    SWRCachePath.unstakeQuery(geyserAddress, amount?.toFixed()),
     () => whenDefined(web3, w3 => whenDefined(amount, x => unstakeQuery(w3, x, geyserAddress)))
   )
   return {
