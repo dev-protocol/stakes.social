@@ -104,7 +104,7 @@ export const Deposit = (geyserAddress: string) => {
   const onClickMax = useCallback(
     () =>
       whenDefined(web3, x =>
-        balanceOf(x, geyserAddress).then(x => {
+        balanceOf(x).then(x => {
           updateAmount(x ? toNaturalNumber(x).toFixed() : '0')
           if (x?.toNumber() === 0) {
             message.warn({
@@ -120,7 +120,7 @@ export const Deposit = (geyserAddress: string) => {
           }
         })
       ) || message.warn({ content: 'Please sign in', key: messageKey }),
-    [updateAmount, web3, geyserAddress]
+    [updateAmount, web3]
   )
   const onChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target
