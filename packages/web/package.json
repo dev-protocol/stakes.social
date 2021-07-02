@@ -84,7 +84,7 @@
     "@types/react-dom": "17.0.8",
     "@types/string-hash": "1.1.1",
     "@types/styled-components": "5.1.10",
-    "@types/tinycolor2": "1.4.2",
+    "@types/tinycolor2": "1.4.3",
     "@types/ua-parser-js": "0.7.36",
     "@zeit/next-css": "1.0.1",
     "@zeit/next-less": "1.0.1",
