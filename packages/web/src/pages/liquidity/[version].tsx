@@ -18,6 +18,7 @@ import {
 } from '../../fixtures/_pages/liquidity/constants/address'
 import { useRouter } from 'next/router'
 import Error from 'next/error'
+import { getPath } from 'src/fixtures/utility/route'
 
 const NarrowContainer = styled(Container)`
   max-width: 640px;
@@ -45,8 +46,7 @@ const isCorrectPath = (version: string): boolean => {
 
 const LiquidityMining = () => {
   const [, setTab] = useState('0')
-  const router = useRouter()
-  const { version } = router.query as { version: string }
+  const [, version] = getPath(useRouter().asPath)
 
   if (!isCorrectPath(version)) {
     return <Error statusCode={404} />
