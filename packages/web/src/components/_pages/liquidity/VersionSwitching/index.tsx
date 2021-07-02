@@ -2,6 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import { Radio, RadioChangeEvent } from 'antd'
 import { useRouter } from 'next/router'
+import { getPath } from 'src/fixtures/utility/route'
 
 const Wrapper = styled.div`
   display: flex;
@@ -14,7 +15,7 @@ const Caption = styled.div`
 
 export const VersionSwitching = () => {
   const router = useRouter()
-  const { version } = router.query
+  const [, version] = getPath(router.asPath)
 
   const switchVersion = (targetVersion: string, currentVersion: any) => {
     if (targetVersion === currentVersion) return
