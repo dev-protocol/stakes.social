@@ -10,13 +10,13 @@ exports[`AuthHeader Snapshot 1`] = `
         class="sc-1bz6snd-0 jGyKGo"
       >
         <div
-          class="sc-1wzqvkc-0 iekWyA"
+          class="sc-1bz6snd-6 dbGdwb"
         >
           <header
-            class="sc-1bz6snd-1 cLbLyy"
+            class="sc-1bz6snd-1 hkjzWq"
           >
             <div
-              class="sc-1bz6snd-2 EKciv"
+              class="sc-1bz6snd-2 gqvkYM"
             >
               <a
                 class="sc-38x7tx-0 dDeIhU"
@@ -47,7 +47,7 @@ exports[`AuthHeader Snapshot 1`] = `
               </a>
             </div>
             <div
-              class="sc-1bz6snd-5 gEYFEf"
+              class="sc-1bz6snd-3 lapuCr"
             >
               <svg
                 height="50"
@@ -110,17 +110,17 @@ exports[`AuthHeader Snapshot 1`] = `
                   />
                 </g>
               </svg>
+              <div
+                class="sc-1dxoc5d-2 kZECui"
+              >
+                <span
+                  style="font-size: 0.8em;"
+                >
+                  Sign in
+                </span>
+              </div>
             </div>
           </header>
-        </div>
-        <div
-          class="sc-1dxoc5d-2 kZECui"
-        >
-          <span
-            style="font-size: 0.8em;"
-          >
-            Sign in
-          </span>
         </div>
       </header>
       <div

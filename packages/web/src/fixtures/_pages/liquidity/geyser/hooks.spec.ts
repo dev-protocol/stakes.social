@@ -22,11 +22,14 @@ import {
   useUnstakeQuery,
   useUpdateAccounting
 } from './hooks'
+import { GEYSER_V1_ETHDEV_V2_ADDRESS } from '../constants/address'
 
 jest.mock('swr')
 jest.mock('src/fixtures/wallet/hooks.ts')
 jest.mock('src/fixtures/_pages/liquidity/geyser/client.ts')
 jest.mock('src/fixtures/_pages/liquidity/uniswap-pool/client.ts')
+
+const geyserAddress = GEYSER_V1_ETHDEV_V2_ADDRESS
 
 describe('geyser hooks', () => {
   describe('useTotalRewards', () => {
@@ -34,14 +37,14 @@ describe('geyser hooks', () => {
       const data = undefined
       const error = undefined
       ;(useSWR as jest.Mock).mockImplementationOnce(() => ({ data, error }))
-      const { result } = renderHook(() => useTotalRewards())
+      const { result } = renderHook(() => useTotalRewards(geyserAddress))
       expect(result.current.data?.toString()).toBe(undefined)
     })
 
     test('success fetching data', () => {
       const error = undefined
       ;(useSWR as jest.Mock).mockImplementationOnce(() => ({ data: toEVMBigNumber('30000'), error }))
-      const { result } = renderHook(() => useTotalRewards())
+      const { result } = renderHook(() => useTotalRewards(geyserAddress))
       expect(result.current.data?.toString()).toBe('30000')
     })
 
@@ -50,7 +53,7 @@ describe('geyser hooks', () => {
       const errorMessage = 'error'
       const error = new Error(errorMessage)
       ;(useSWR as jest.Mock).mockImplementation(() => ({ data, error }))
-      const { result } = renderHook(() => useTotalRewards())
+      const { result } = renderHook(() => useTotalRewards(geyserAddress))
       expect(result.current.error).toBe(error)
       expect(result.current.error?.message).toBe(errorMessage)
     })
@@ -58,7 +61,7 @@ describe('geyser hooks', () => {
 
   describe('useStake', () => {
     test('success stake', async () => {
-      const { result, waitForNextUpdate } = renderHook(() => useStake())
+      const { result, waitForNextUpdate } = renderHook(() => useStake(geyserAddress))
       ;(stake as jest.Mock).mockResolvedValue(true)
       act(() => {
         result.current.stake(toBigNumber(1))
@@ -70,7 +73,7 @@ describe('geyser hooks', () => {
 
     test('failure stake', async () => {
       const error = new Error('error')
-      const { result, waitForNextUpdate } = renderHook(() => useStake())
+      const { result, waitForNextUpdate } = renderHook(() => useStake(geyserAddress))
       ;(stake as jest.Mock).mockRejectedValue(error)
       message.error = jest.fn(() => {}) as any
       act(() => {
@@ -84,7 +87,7 @@ describe('geyser hooks', () => {
 
   describe('useUnstake', () => {
     test('success unstake', async () => {
-      const { result, waitForNextUpdate } = renderHook(() => useUnstake())
+      const { result, waitForNextUpdate } = renderHook(() => useUnstake(geyserAddress))
       ;(unstake as jest.Mock).mockResolvedValue(true)
       act(() => {
         result.current.unstake(toBigNumber(1))
@@ -96,7 +99,7 @@ describe('geyser hooks', () => {
 
     test('failure unstake', async () => {
       const error = new Error('error')
-      const { result, waitForNextUpdate } = renderHook(() => useUnstake())
+      const { result, waitForNextUpdate } = renderHook(() => useUnstake(geyserAddress))
       ;(unstake as jest.Mock).mockRejectedValue(error)
       message.error = jest.fn(() => {}) as any
       act(() => {
@@ -113,14 +116,14 @@ describe('geyser hooks', () => {
       const data = undefined
       const error = undefined
       ;(useSWR as jest.Mock).mockImplementationOnce(() => ({ data, error }))
-      const { result } = renderHook(() => useAllTokensClaimed())
+      const { result } = renderHook(() => useAllTokensClaimed(geyserAddress))
       expect(result.current.data).toBe(data)
     })
 
     test('success fetching data', () => {
       const error = undefined
       ;(useSWR as jest.Mock).mockImplementationOnce(() => ({ data: toEVMBigNumber('10000'), error }))
-      const { result } = renderHook(() => useAllTokensClaimed())
+      const { result } = renderHook(() => useAllTokensClaimed(geyserAddress))
       expect(result.current.data!.toString()).toBe('10000')
     })
 
@@ -129,7 +132,7 @@ describe('geyser hooks', () => {
       const errorMessage = 'error'
       const error = new Error(errorMessage)
       ;(useSWR as jest.Mock).mockImplementation(() => ({ data, error }))
-      const { result } = renderHook(() => useAllTokensClaimed())
+      const { result } = renderHook(() => useAllTokensClaimed(geyserAddress))
       expect(result.current.error).toBe(error)
       expect(result.current.error?.message).toBe(errorMessage)
     })
@@ -140,14 +143,14 @@ describe('geyser hooks', () => {
       const data = undefined
       const error = undefined
       ;(useSWR as jest.Mock).mockImplementationOnce(() => ({ data, error }))
-      const { result } = renderHook(() => useTotalStakingShares())
+      const { result } = renderHook(() => useTotalStakingShares(geyserAddress))
       expect(result.current.data).toBe(data)
     })
 
     test('success fetching data', () => {
       const error = undefined
       ;(useSWR as jest.Mock).mockImplementationOnce(() => ({ data: toEVMBigNumber('10000'), error }))
-      const { result } = renderHook(() => useTotalStakingShares())
+      const { result } = renderHook(() => useTotalStakingShares(geyserAddress))
       expect(result.current.data!.toString()).toBe('10000')
     })
 
@@ -156,7 +159,7 @@ describe('geyser hooks', () => {
       const errorMessage = 'error'
       const error = new Error(errorMessage)
       ;(useSWR as jest.Mock).mockImplementation(() => ({ data, error }))
-      const { result } = renderHook(() => useTotalStakingShares())
+      const { result } = renderHook(() => useTotalStakingShares(geyserAddress))
       expect(result.current.error).toBe(error)
       expect(result.current.error?.message).toBe(errorMessage)
     })
@@ -167,14 +170,14 @@ describe('geyser hooks', () => {
       const data = undefined
       const error = undefined
       ;(useSWR as jest.Mock).mockImplementationOnce(() => ({ data, error }))
-      const { result } = renderHook(() => useTotalStaked())
+      const { result } = renderHook(() => useTotalStaked(geyserAddress))
       expect(result.current.data).toBe(data)
     })
 
     test('success fetching data', () => {
       const error = undefined
       ;(useSWR as jest.Mock).mockImplementationOnce(() => ({ data: toEVMBigNumber('10000'), error }))
-      const { result } = renderHook(() => useTotalStaked())
+      const { result } = renderHook(() => useTotalStaked(geyserAddress))
       expect(result.current.data!.toString()).toBe('10000')
     })
 
@@ -183,7 +186,7 @@ describe('geyser hooks', () => {
       const errorMessage = 'error'
       const error = new Error(errorMessage)
       ;(useSWR as jest.Mock).mockImplementation(() => ({ data, error }))
-      const { result } = renderHook(() => useTotalStaked())
+      const { result } = renderHook(() => useTotalStaked(geyserAddress))
       expect(result.current.error).toBe(error)
       expect(result.current.error?.message).toBe(errorMessage)
     })
@@ -194,7 +197,7 @@ describe('geyser hooks', () => {
       const data = undefined
       const error = undefined
       ;(useSWR as jest.Mock).mockImplementationOnce(() => ({ data, error }))
-      const { result } = renderHook(() => useUpdateAccounting())
+      const { result } = renderHook(() => useUpdateAccounting(geyserAddress))
       expect(result.current.data).toBe(data)
     })
 
@@ -211,7 +214,7 @@ describe('geyser hooks', () => {
         },
         error
       }))
-      const { result } = renderHook(() => useUpdateAccounting())
+      const { result } = renderHook(() => useUpdateAccounting(geyserAddress))
       expect(result.current.data).toEqual({
         totalLocked: '100000',
         totalUnlocked: '100000',
@@ -227,7 +230,7 @@ describe('geyser hooks', () => {
       const errorMessage = 'error'
       const error = new Error(errorMessage)
       ;(useSWR as jest.Mock).mockImplementation(() => ({ data, error }))
-      const { result } = renderHook(() => useUpdateAccounting())
+      const { result } = renderHook(() => useUpdateAccounting(geyserAddress))
       expect(result.current.error).toBe(error)
       expect(result.current.error?.message).toBe(errorMessage)
     })
@@ -238,7 +241,7 @@ describe('geyser hooks', () => {
       const data = undefined
       const error = undefined
       ;(useSWR as jest.Mock).mockImplementationOnce(() => ({ data, error }))
-      const { result } = renderHook(() => useFinalUnlockSchedules())
+      const { result } = renderHook(() => useFinalUnlockSchedules(geyserAddress))
       expect(result.current.data).toBe(data)
     })
 
@@ -254,7 +257,7 @@ describe('geyser hooks', () => {
         },
         error
       }))
-      const { result } = renderHook(() => useFinalUnlockSchedules())
+      const { result } = renderHook(() => useFinalUnlockSchedules(geyserAddress))
       expect(result.current.data).toEqual({
         initialLockedShares: '100000',
         unlockedShares: '100000',
@@ -269,7 +272,7 @@ describe('geyser hooks', () => {
       const errorMessage = 'error'
       const error = new Error(errorMessage)
       ;(useSWR as jest.Mock).mockImplementation(() => ({ data, error }))
-      const { result } = renderHook(() => useFinalUnlockSchedules())
+      const { result } = renderHook(() => useFinalUnlockSchedules(geyserAddress))
       expect(result.current.error).toBe(error)
       expect(result.current.error?.message).toBe(errorMessage)
     })
@@ -400,7 +403,9 @@ describe('geyser hooks', () => {
           endAtSec: getUTC() + 1
         })
       )
-      const { result, waitForNextUpdate } = renderHook(() => useIsAlreadyFinished(useState<boolean>(false)))
+      const { result, waitForNextUpdate } = renderHook(() =>
+        useIsAlreadyFinished(useState<boolean>(false), geyserAddress)
+      )
       expect(result.current[0]).toBe(false)
       await waitForNextUpdate({ timeout: 1500 })
       expect(result.current[0]).toBe(true)
@@ -410,7 +415,7 @@ describe('geyser hooks', () => {
   describe('useRewardMultiplier', () => {
     test('data is undefined', () => {
       ;(useSWR as jest.Mock).mockImplementation(() => ({ data: undefined }))
-      const { result } = renderHook(() => useRewardMultiplier())
+      const { result } = renderHook(() => useRewardMultiplier(geyserAddress))
       expect(result.current.data).toBe(undefined)
     })
 
@@ -420,7 +425,7 @@ describe('geyser hooks', () => {
       ;(useSWR as jest.Mock).mockImplementationOnce(() => ({ data: utc - 10000 }))
       ;(useSWR as jest.Mock).mockImplementationOnce(() => ({ data: toBigNumber(20000) }))
       ;(useSWR as jest.Mock).mockImplementationOnce(() => ({ data: toBigNumber(20) }))
-      const { result } = renderHook(() => useRewardMultiplier())
+      const { result } = renderHook(() => useRewardMultiplier(geyserAddress))
       expect(result.current.max).toBe(5)
       expect(result.current.data).toBe(3)
     })
@@ -431,7 +436,7 @@ describe('geyser hooks', () => {
       ;(useSWR as jest.Mock).mockImplementationOnce(() => ({ data: utc - 10000 }))
       ;(useSWR as jest.Mock).mockImplementationOnce(() => ({ data: toBigNumber(8000) }))
       ;(useSWR as jest.Mock).mockImplementationOnce(() => ({ data: toBigNumber(20) }))
-      const { result } = renderHook(() => useRewardMultiplier())
+      const { result } = renderHook(() => useRewardMultiplier(geyserAddress))
       expect(result.current.max).toBe(5)
       expect(result.current.data).toBe(5)
     })
@@ -441,7 +446,7 @@ describe('geyser hooks', () => {
       const errorMessage = 'error'
       const error = new Error(errorMessage)
       ;(useSWR as jest.Mock).mockImplementation(() => ({ data, error }))
-      const { result } = renderHook(() => useRewardMultiplier())
+      const { result } = renderHook(() => useRewardMultiplier(geyserAddress))
       expect(result.current.error).toBe(error)
       expect(result.current.error?.message).toBe(errorMessage)
     })
@@ -450,13 +455,13 @@ describe('geyser hooks', () => {
   describe('useTotalStakedFor', () => {
     test('data is undefined', () => {
       ;(useSWR as jest.Mock).mockImplementation(() => ({ data: undefined }))
-      const { result } = renderHook(() => useTotalStakedFor())
+      const { result } = renderHook(() => useTotalStakedFor(geyserAddress))
       expect(result.current.data).toBe(undefined)
     })
 
     test('success fetching data', () => {
       ;(useSWR as jest.Mock).mockImplementationOnce(() => ({ data: toBigNumber(12345) }))
-      const { result } = renderHook(() => useTotalStakedFor())
+      const { result } = renderHook(() => useTotalStakedFor(geyserAddress))
       expect(result.current.data?.toString()).toBe('12345')
     })
 
@@ -465,7 +470,7 @@ describe('geyser hooks', () => {
       const errorMessage = 'error'
       const error = new Error(errorMessage)
       ;(useSWR as jest.Mock).mockImplementation(() => ({ data, error }))
-      const { result } = renderHook(() => useTotalStakedFor())
+      const { result } = renderHook(() => useTotalStakedFor(geyserAddress))
       expect(result.current.error).toBe(error)
       expect(result.current.error?.message).toBe(errorMessage)
     })
@@ -473,13 +478,13 @@ describe('geyser hooks', () => {
 
   describe('useMutateDepositDependence', () => {
     test('mutate data', () => {
-      const { result } = renderHook(() => useMutateDepositDependence())
+      const { result } = renderHook(() => useMutateDepositDependence(geyserAddress))
       act(() => {
         result.current.purge()
       })
       expect((mutate as jest.Mock).mock.calls.length).toBe(2)
-      expect((mutate as jest.Mock).mock.calls[0][0]).toBe(SWRCachePath.getStaked('0x'))
-      expect((mutate as jest.Mock).mock.calls[1][0]).toBe(SWRCachePath.totalStakedFor('0x'))
+      expect((mutate as jest.Mock).mock.calls[0][0]).toBe(SWRCachePath.getStaked(geyserAddress, '0x'))
+      expect((mutate as jest.Mock).mock.calls[1][0]).toBe(SWRCachePath.totalStakedFor(geyserAddress, '0x'))
     })
   })
 
@@ -488,7 +493,7 @@ describe('geyser hooks', () => {
       ;(useSWR as jest.Mock).mockImplementationOnce(() => ({ data: undefined }))
       ;(useSWR as jest.Mock).mockImplementationOnce(() => ({ data: undefined }))
       ;(useSWR as jest.Mock).mockImplementationOnce(() => ({ data: undefined }))
-      const { result } = renderHook(() => useAPY())
+      const { result } = renderHook(() => useAPY(geyserAddress))
       expect(result.current.data.toString()).toBe('0')
     })
 
@@ -506,7 +511,7 @@ describe('geyser hooks', () => {
           }
         }
       }))
-      const { result } = renderHook(() => useAPY())
+      const { result } = renderHook(() => useAPY(geyserAddress))
       expect(result.current.data.toString()).toBe('300')
     })
 
@@ -515,7 +520,7 @@ describe('geyser hooks', () => {
       const errorMessage = 'error'
       const error = new Error(errorMessage)
       ;(useSWR as jest.Mock).mockImplementation(() => ({ data, error }))
-      const { result } = renderHook(() => useAPY())
+      const { result } = renderHook(() => useAPY(geyserAddress))
       expect(result.current.data.toString()).toBe('0')
     })
   })
@@ -523,14 +528,14 @@ describe('geyser hooks', () => {
   describe('useUnstakeQuery', () => {
     test('data is undefined', () => {
       ;(useSWR as jest.Mock).mockImplementation(() => ({ data: undefined }))
-      const { result } = renderHook(() => useUnstakeQuery())
+      const { result } = renderHook(() => useUnstakeQuery(geyserAddress))
       expect(result.current.data).toBe(undefined)
     })
 
     test('success fetching data', () => {
       const value = '12345'
       ;(useSWR as jest.Mock).mockImplementation(() => ({ data: toBigNumber(value) }))
-      const { result } = renderHook(() => useUnstakeQuery(toBigNumber(value)))
+      const { result } = renderHook(() => useUnstakeQuery(geyserAddress, toBigNumber(value)))
       expect(result.current.data?.toString()).toBe(value)
     })
 
@@ -539,7 +544,7 @@ describe('geyser hooks', () => {
       const errorMessage = 'error'
       const error = new Error(errorMessage)
       ;(useSWR as jest.Mock).mockImplementation(() => ({ data, error }))
-      const { result } = renderHook(() => useUnstakeQuery())
+      const { result } = renderHook(() => useUnstakeQuery(geyserAddress))
       expect(result.current.error).toBe(error)
       expect(result.current.error?.message).toBe(errorMessage)
     })
