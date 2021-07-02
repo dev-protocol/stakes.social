@@ -30,7 +30,7 @@ const StyledForm = styled(Form)`
 
 const LinkToUniswap = () => (
   <a
-    href="https://app.uniswap.org/#/add/0x5caf454ba92e6f2c929df14667ee360ed9fd5b26/ETH"
+    href="https://app.uniswap.org/#/add/v2/0x5cAf454Ba92e6F2c929DF14667Ee360eD9fD5b26/ETH"
     target="_blank"
     rel="noreferrer"
   >
