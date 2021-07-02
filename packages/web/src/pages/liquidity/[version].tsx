@@ -17,7 +17,7 @@ import {
   GEYSER_V2_ETHDEV_V2_ADDRESS
 } from '../../fixtures/_pages/liquidity/constants/address'
 import { useRouter } from 'next/router'
-import Error from 'next/error'
+// import Error from 'next/error'
 import { getPath } from 'src/fixtures/utility/route'
 
 const NarrowContainer = styled(Container)`
@@ -35,28 +35,25 @@ const getGeyserAddress = (version: string) => {
     case 'v2':
       return GEYSER_V2_ETHDEV_V2_ADDRESS
     default:
-      return false
+      return GEYSER_V2_ETHDEV_V2_ADDRESS
   }
 }
 
-const isCorrectPath = (version: string): boolean => {
-  const regex = new RegExp('v[12]')
-  return regex.test(version)
-}
+// const isCorrectPath = (version: string): boolean => {
+//   const regex = new RegExp('v[12]')
+//   return regex.test(version)
+// }
 
 const LiquidityMining = () => {
   const [, setTab] = useState('0')
   const [, version] = getPath(useRouter().asPath)
+  console.log('*', useRouter().asPath)
 
-  if (!isCorrectPath(version)) {
-    return <Error statusCode={404} />
-  }
+  // if (!isCorrectPath(version)) {
+  //   return <Error statusCode={404} />
+  // }
 
   const geyserAddress = getGeyserAddress(version)
-
-  if (geyserAddress === false) {
-    return <Error statusCode={500} />
-  }
 
   const contents = [
     { name: 'Deposit', node: Deposit(geyserAddress) },
