@@ -16,7 +16,6 @@ const Caption = styled.div`
 export const VersionSwitching = () => {
   const router = useRouter()
   const [, version] = getPath(router.asPath)
-  console.log('**', useRouter().asPath)
 
   const switchVersion = (targetVersion: string, currentVersion: any) => {
     if (targetVersion === currentVersion) return

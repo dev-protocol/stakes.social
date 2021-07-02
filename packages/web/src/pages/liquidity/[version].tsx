@@ -39,19 +39,9 @@ const getGeyserAddress = (version: string) => {
   }
 }
 
-// const isCorrectPath = (version: string): boolean => {
-//   const regex = new RegExp('v[12]')
-//   return regex.test(version)
-// }
-
 const LiquidityMining = () => {
   const [, setTab] = useState('0')
   const [, version] = getPath(useRouter().asPath)
-  console.log('*', useRouter().asPath)
-
-  // if (!isCorrectPath(version)) {
-  //   return <Error statusCode={404} />
-  // }
 
   const geyserAddress = getGeyserAddress(version)
 
