@@ -60,7 +60,7 @@ exports[`Withdraw Snapshot 1`] = `
                   Your amount
                 </label>
                 <span
-                  class="ant-input-affix-wrapper ant-input-affix-wrapper-lg sicgyx-0 gvydqJ"
+                  class="ant-input-affix-wrapper ant-input-affix-wrapper-lg sc-sicgyx-0 kdrIPA"
                 >
                   <input
                     class="ant-input ant-input-lg"
@@ -72,12 +72,12 @@ exports[`Withdraw Snapshot 1`] = `
                     class="ant-input-suffix"
                   >
                     <span
-                      class="li6qma-0 hPFHva"
+                      class="sc-li6qma-0 iJvCzv"
                     >
                       ETHDEV-V2
                     </span>
                     <button
-                      class="ant-btn ant-btn-primary ant-btn-sm zinbpr-0 tvUGy"
+                      class="ant-btn ant-btn-primary ant-btn-sm sc-zinbpr-0 hUfNj"
                       type="button"
                     >
                       <span>
@@ -112,7 +112,7 @@ exports[`Withdraw Snapshot 1`] = `
                   Rewards claimed
                 </label>
                 <input
-                  class="ant-input ant-input-lg ant-input-disabled sicgyx-0 gvydqJ"
+                  class="ant-input ant-input-lg ant-input-disabled sc-sicgyx-0 kdrIPA"
                   disabled=""
                   id="estimated"
                   type="number"
