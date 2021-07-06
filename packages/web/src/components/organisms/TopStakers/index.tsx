@@ -107,10 +107,8 @@ const TopStakers = ({ authorAddress, propertyAddress }: TopStakersProps) => {
     skip: !!authorAddress || !propertyAddress
   })
 
-  const [
-    fetchTopCreatorStakers,
-    { data: topCreatorStakersData, loading: isCreatorStakingLoading }
-  ] = useListTopStakersAccountLazyQuery()
+  const [fetchTopCreatorStakers, { data: topCreatorStakersData, loading: isCreatorStakingLoading }] =
+    useListTopStakersAccountLazyQuery()
 
   useEffect(() => {
     if (authorAddress) {

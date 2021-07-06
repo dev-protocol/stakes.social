@@ -11,7 +11,7 @@ describe('get-contract-address.ts', () => {
           lockup: async () => Promise.resolve('LOCKUP_ADDRESS')
         }))
       }
-      const result = await getContractAddress((devkit as unknown) as DevkitContract, 'lockup')
+      const result = await getContractAddress(devkit as unknown as DevkitContract, 'lockup')
       expect(result).toBe('LOCKUP_ADDRESS')
       expect(devkit.registry.mock.calls[0][0]).toBe(addresses.eth.main.registry)
     })
@@ -23,9 +23,9 @@ describe('get-contract-address.ts', () => {
           lockup
         }))
       }
-      await getContractAddress((devkit as unknown) as DevkitContract, 'lockup', 'CACHE_TEST' as any) // First
-      await getContractAddress((devkit as unknown) as DevkitContract, 'lockup', 'CACHE_TEST' as any) // Second
-      const result = await getContractAddress((devkit as unknown) as DevkitContract, 'lockup', 'CACHE_TEST' as any) // Third
+      await getContractAddress(devkit as unknown as DevkitContract, 'lockup', 'CACHE_TEST' as any) // First
+      await getContractAddress(devkit as unknown as DevkitContract, 'lockup', 'CACHE_TEST' as any) // Second
+      const result = await getContractAddress(devkit as unknown as DevkitContract, 'lockup', 'CACHE_TEST' as any) // Third
       expect(result).toBe('LOCKUP_ADDRESS')
       expect(lockup.mock.calls.length).toBe(1)
     })
