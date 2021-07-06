@@ -34,7 +34,7 @@
     "serve": "12.0.0",
     "ts-jest": "27.0.3",
     "ts-node": "10.0.0",
-    "tsconfig-paths": "3.9.0",
+    "tsconfig-paths": "3.10.1",
     "typescript": "4.3.5",
     "wait-on": "6.0.0"
   },
