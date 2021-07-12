@@ -25,7 +25,7 @@
     "@quentin-sommer/react-useragent": "3.1.0",
     "@types/react-select": "4.0.17",
     "@walletconnect/web3-provider": "1.4.1",
-    "antd": "4.16.6",
+    "antd": "4.16.7",
     "axios": "0.21.1",
     "bignumber.js": "9.0.1",
     "body-parser": "1.19.0",
