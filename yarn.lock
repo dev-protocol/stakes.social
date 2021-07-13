@@ -15925,10 +15925,10 @@ neo-async@^2.5.0, neo-async@^2.6.0, neo-async@^2.6.1:
   resolved "https://registry.yarnpkg.com/neo-async/-/neo-async-2.6.2.tgz#b4aafb93e3aeb2d8174ca53cf163ab7d7308305f"
   integrity sha512-Yd3UES5mWCSqR+qNT93S3UoYUkqAZ9lLg8a7g9rimsWmYGK8cVToA4/sF3RrshdyV3sAGMXVUmpMYOw+dLpOuw==
 
-next-i18next@8.5.4:
-  version "8.5.4"
-  resolved "https://registry.yarnpkg.com/next-i18next/-/next-i18next-8.5.4.tgz#e43222050569422f7089f37cee3cbc99c3f27589"
-  integrity sha512-YfJGzkyKnuDjM4jOvV3pathOcDtqd0ON5jsGoaIBBOCBDCPgdUbj71+4veBMPt0qsiDlAW2ngSG7j5Ykt+HGhg==
+next-i18next@8.5.5:
+  version "8.5.5"
+  resolved "https://registry.yarnpkg.com/next-i18next/-/next-i18next-8.5.5.tgz#d1a7476929236050986965eb59d6f44d7631d11a"
+  integrity sha512-zYXYToVB5W2qmDbWmuT/7j+PC/CqCysZsvMY2nmIyqpgaIBhMDKHYSi8+0nJ7SG1q7i9D+wQdJNd8KLdpe4/ng==
   dependencies:
     "@babel/runtime" "^7.13.17"
     "@types/hoist-non-react-statics" "^3.3.1"
