@@ -15,12 +15,14 @@ if (typeof require !== 'undefined') {
 module.exports = withTM(withCss(
   withLess({
     webpack: (config, { isServer }) => {
+      const amchartsExport = /(xlsx|pdfmake|canvg)/
       if (isServer) {
         const antStyles = /(antd\/.*?\/style).*(?<![.]js)$/
         const origExternals = [...config.externals]
         config.externals = [
           (context, request, callback) => {
             if (request.match(antStyles)) return callback()
+            if (request.match(amchartsExport)) return callback(null, 'commonjs ' + request)
             if (typeof origExternals[0] === 'function') {
               origExternals[0](context, request, callback)
             } else {
@@ -34,6 +36,15 @@ module.exports = withTM(withCss(
           test: antStyles,
           use: 'null-loader'
         })
+      } else {
+        const origExternals = [...config.externals]
+        config.externals = [
+          (_context, request, callback) => {
+            if (request.match(amchartsExport)) return callback(null, 'commonjs ' + request)
+            callback()
+          },
+          ...(typeof origExternals[0] === 'function' ? [] : origExternals)
+        ]
       }
 
       config.plugins = config.plugins || []

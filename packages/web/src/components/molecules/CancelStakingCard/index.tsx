@@ -1,6 +1,7 @@
 import React from 'react'
 import { Card, Button, Row, Col, Space, Spin } from 'antd'
-import { LoadingOutlined, CheckCircleTwoTone } from '@ant-design/icons'
+import LoadingOutlined from '@ant-design/icons/lib/icons/LoadingOutlined'
+import CheckCircleTwoTone from '@ant-design/icons/lib/icons/CheckCircleTwoTone'
 import styled from 'styled-components'
 
 interface Props {

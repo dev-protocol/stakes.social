@@ -4,15 +4,13 @@ import Input from 'src/components/molecules/Input'
 import styled from 'styled-components'
 import { usePostInvitation } from 'src/fixtures/dev-invitation/hooks'
 
-import {
-  MessageOutlined,
-  UserOutlined,
-  BranchesOutlined,
-  CodeOutlined,
-  MailOutlined,
-  FontColorsOutlined,
-  NotificationOutlined
-} from '@ant-design/icons'
+import MessageOutlined from '@ant-design/icons/lib/icons/MessageOutlined'
+import UserOutlined from '@ant-design/icons/lib/icons/UserOutlined'
+import BranchesOutlined from '@ant-design/icons/lib/icons/BranchesOutlined'
+import CodeOutlined from '@ant-design/icons/lib/icons/CodeOutlined'
+import MailOutlined from '@ant-design/icons/lib/icons/MailOutlined'
+import FontColorsOutlined from '@ant-design/icons/lib/icons/FontColorsOutlined'
+import NotificationOutlined from '@ant-design/icons/lib/icons/NotificationOutlined'
 import { blueGradient } from 'src/styles/gradient'
 import { boxShahowWithOnHover } from 'src/styles/boxShahow'
 import SuccessLogo from 'src/components/atoms/Success'

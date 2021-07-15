@@ -1,9 +1,7 @@
 import React, { useRef, useState } from 'react'
-
-import useDebouncedEffect from '../../organisms/PropertyCardList/hooks/useDebouncedEffect'
-
 import styled from 'styled-components'
-import { SearchOutlined } from '@ant-design/icons'
+import SearchOutlined from '@ant-design/icons/lib/icons/SearchOutlined'
+import useDebouncedEffect from '../../organisms/PropertyCardList/hooks/useDebouncedEffect'
 
 interface SearchBarProps {
   activeSearchTerm: string
