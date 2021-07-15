@@ -46,7 +46,7 @@
     "next": "10.2.3",
     "next-i18next": "8.5.5",
     "next-offline": "5.0.5",
-    "next-transpile-modules": "7.3.0",
+    "next-transpile-modules": "8.0.0",
     "next-with-apollo": "5.2.1",
     "node-libs-browser": "2.2.1",
     "nookies": "2.5.2",
