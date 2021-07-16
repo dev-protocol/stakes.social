@@ -3,21 +3,20 @@ Business Source License 1.1
 License text copyright (c) 2017 MariaDB Corporation Ab, All Rights Reserved.
 “Business Source License” is a trademark of MariaDB Corporation Ab.
 
+-----------------------------------------------------------------------------
+
 Parameters
 
 Licensor:             FRAME00
+
 Licensed Work:        stakes.social(dev-protocol/stakes.social)
                       The Licensed Work is (c) 2021 FRAME00
+
+Additional Use Grant: Grant permission to use only if FRAME00 allows it
 
 Change Date:          2023-07-01
 
 Change License:       Mozilla Public License 2.0
-
-Notice
-
-The Business Source License (this document, or the “License”) is not an Open
-Source license. However, the Licensed Work will eventually be made available
-under an Open Source License, as stated in this License.
 
 -----------------------------------------------------------------------------
 
@@ -69,6 +68,9 @@ MariaDB hereby grants you permission to use this License’s text to license
 your works, and to refer to it using the trademark “Business Source License”,
 as long as you comply with the Covenants of Licensor below.
 
+
+-----------------------------------------------------------------------------
+
 Covenants of Licensor
 
 In consideration of the right to use this License’s text and the “Business
@@ -89,3 +91,11 @@ other recipients of the licensed work to be provided by Licensor:
 3. To specify a Change Date.
 
 4. Not to modify this License in any other way.
+
+-----------------------------------------------------------------------------
+
+Notice
+
+The Business Source License (this document, or the “License”) is not an Open
+Source license. However, the Licensed Work will eventually be made available
+under an Open Source License, as stated in this License.
