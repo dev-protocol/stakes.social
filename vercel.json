@@ -1,5 +1,5 @@
 {
   "functions": {
-    "excludeFile": ["./packages/graphql"]
+    "excludeFiles": ["./packages/graphql"]
   }
 }
