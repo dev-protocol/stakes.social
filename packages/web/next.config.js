@@ -59,9 +59,6 @@ module.exports = withTM(
         javascriptEnabled: true,
         modifyVars: themeVariables // make your antd custom effective
       },
-      env: {
-        IS_PREVIEW: process.env.IS_PREVIEW
-      },
       distDir: 'dist/src/.next',
       redirects: () => {
         return [
