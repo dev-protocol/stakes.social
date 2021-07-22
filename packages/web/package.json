@@ -6,9 +6,8 @@
   "scripts": {
     "start:dev": "next dev",
     "start:prod": "next start",
-    "prestart:prod": "yarn build",
     "build": "run-p -l build:*",
-    "build:next": "next build && next export",
+    "build:next": "next build",
     "lint": "eslint --fix -c ./.eslintrc.json './src/**/*.{ts,tsx}'",
     "test": "jest"
   },
