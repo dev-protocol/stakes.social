@@ -13,7 +13,7 @@ describe('wallet utility', () => {
     })
 
     test('Returns account address as a value when web3 existed', async () => {
-      ;((Web3 as unknown) as jest.Mock).mockImplementation(() => ({
+      ;(Web3 as unknown as jest.Mock).mockImplementation(() => ({
         eth: {
           getAccounts: async () => ['0x...']
         }
@@ -25,7 +25,7 @@ describe('wallet utility', () => {
 
     test('Returns account address from the cache as a value when web3 providerexisted and 2nd subsequent call', async () => {
       const getAccounts = jest.fn(async () => ['0x...'])
-      ;((Web3 as unknown) as jest.Mock).mockImplementation(() => ({
+      ;(Web3 as unknown as jest.Mock).mockImplementation(() => ({
         eth: {
           getAccounts
         }
@@ -54,7 +54,7 @@ describe('wallet utility', () => {
           }
         }
       }
-      ;((Web3 as unknown) as jest.Mock).mockImplementation(() => ({
+      ;(Web3 as unknown as jest.Mock).mockImplementation(() => ({
         eth: {
           Contract: fakeContract
         }
@@ -78,7 +78,7 @@ describe('wallet utility', () => {
         }
       }
       window.ethereum = {} as any
-      ;((Web3 as unknown) as jest.Mock).mockImplementation(() => ({
+      ;(Web3 as unknown as jest.Mock).mockImplementation(() => ({
         eth: {
           Contract: fakeContract
         }
@@ -92,7 +92,7 @@ describe('wallet utility', () => {
     test('connect success', async () => {
       const web3Modal = new Web3Modal()
       web3Modal.connect = jest.fn(() => Promise.resolve({}))
-      ;((Web3 as unknown) as jest.Mock).mockImplementation(() => ({
+      ;(Web3 as unknown as jest.Mock).mockImplementation(() => ({
         eth: {
           getAccounts: async () => ['0x...']
         }

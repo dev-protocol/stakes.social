@@ -24,10 +24,10 @@ export const TransactionForm = ({ className, propertyAddress }: Props) => {
   const { dev: rewardedDev } = useGetMyStakingRewardAmount(propertyAddress)
   const { myHolderAmount } = useGetMyHolderAmount(propertyAddress)
 
-  const handleWithdrawStakingReward = useCallback(() => withdrawStakingReward(propertyAddress), [
-    propertyAddress,
-    withdrawStakingReward
-  ])
+  const handleWithdrawStakingReward = useCallback(
+    () => withdrawStakingReward(propertyAddress),
+    [propertyAddress, withdrawStakingReward]
+  )
   const handleWithdrawHolder = useCallback(() => withdrawHolder(propertyAddress), [propertyAddress, withdrawHolder])
 
   return (
