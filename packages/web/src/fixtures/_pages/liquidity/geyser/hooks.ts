@@ -326,7 +326,7 @@ export const useMutateDepositDependence = (geyserAddress: string) => {
   const purge = useCallback(() => {
     mutate(SWRCachePath.getStaked(geyserAddress, accountAddress))
     mutate(SWRCachePath.totalStakedFor(geyserAddress, accountAddress))
-  }, [accountAddress])
+  }, [accountAddress, geyserAddress])
 
   return {
     purge
