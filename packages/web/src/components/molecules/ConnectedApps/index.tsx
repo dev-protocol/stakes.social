@@ -1,7 +1,7 @@
 import * as React from 'react'
 import styled from 'styled-components'
 import { Empty } from 'antd'
-import SvgCamp from 'src/components/atoms/Svgs/tsx/Camp'
+import Camp from 'src/components/atoms/Svgs/svg/Camp.svg'
 
 interface Props {
   className?: string
@@ -20,6 +20,6 @@ const Placeholder = styled(Empty)`
 export const ConnectedApps = ({ className }: Props) => (
   <div className={className}>
     <p>Connected Apps</p>
-    <Placeholder image={<SvgCamp width="100%" />} description="This feature is under construction"></Placeholder>
+    <Placeholder image={<Camp width="100%" />} description="This feature is under construction"></Placeholder>
   </div>
 )

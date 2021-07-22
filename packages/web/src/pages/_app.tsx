@@ -90,10 +90,6 @@ class NextApp extends App<AppInitialProps & WithApolloProps<{}>> {
     return web3
   }
 
-  componentDidCatch = (error: Error, errorInfo: React.ErrorInfo) => {
-    super.componentDidCatch(error, errorInfo)
-  }
-
   componentDidMount = () => {
     message.config({
       maxCount: 5
