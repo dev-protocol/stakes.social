@@ -2,7 +2,8 @@ import React, { useCallback, useState } from 'react'
 import { Button, Form, Input, Tag } from 'antd'
 import { PlusOutlined } from '@ant-design/icons'
 import { useProvider } from 'src/fixtures/wallet/hooks'
-import { useGetPropertyTags, usePostPropertyTags } from 'src/fixtures/dev-for-apps/hooks'
+import { useGetProperty, usePostTag, useUpdateProperty } from 'src/fixtures/dev-for-apps/hooks'
+import { Tag as PropertyTag, getTags } from 'src/fixtures/dev-for-apps/utility'
 import styled from 'styled-components'
 
 interface Props {
@@ -21,7 +22,7 @@ const InputTag = styled(Tag)`
   margin: 0 0.5em;
 `
 
-const PropertyTag = styled(Tag)`
+const PropertyTagText = styled(Tag)`
   margin: 0 0.5em;
 `
 const InputTagForm = styled(Input)`
@@ -32,13 +33,33 @@ export const TagsForm = ({ propertyAddress, propertyTags, accountAddress }: Tags
   const [tags, setTags] = useState<string[]>(propertyTags || [])
   const [inputVisible, setInputVisible] = useState<boolean>(false)
   const [inputValue, setInputValue] = useState<string>('')
-  const { postPropertyTagsHandler: postPropertyTags, isLoading } = usePostPropertyTags(
-    propertyAddress,
-    accountAddress || ''
+  const { postTagsHandler: postTag, isLoading } = usePostTag(propertyAddress, accountAddress || '')
+  const { data: property } = useGetProperty(propertyAddress)
+  const { putPropertyHandler: updateProperty } = useUpdateProperty(
+    property?.id || -1,
+    accountAddress || '',
+    propertyAddress
   )
   const onSaveTags = useCallback(async () => {
-    postPropertyTags(tags.join(' '))
-  }, [postPropertyTags, tags])
+    const unsavedTags = tags.filter((t: string) => propertyTags?.includes(t) === false)
+    if (unsavedTags.length > 0) {
+      const existTags = await getTags(unsavedTags)
+      const existTagIds = existTags.map((t: PropertyTag) => t.id) || []
+      const notExistTags = unsavedTags.filter(
+        (unsavedTag: string) => existTags.filter((t: PropertyTag) => t.name === unsavedTag).length !== 1
+      )
+      const results = await Promise.all(
+        notExistTags.map(async (tag: string) => {
+          return await postTag(tag)
+        })
+      )
+      // TODO: remove tags
+      const tagIds = property?.tags.map((tag: PropertyTag) => tag.id) || []
+      const resultTagIds = results.map((result: PropertyTag | void) => (result ? result.id : -1)) || []
+      const savedTags: number[] = [...tagIds, ...existTagIds, ...resultTagIds]
+      updateProperty(property?.name, property?.description, undefined, undefined, undefined, savedTags)
+    }
+  }, [postTag, tags, propertyTags, property, updateProperty])
   const onCloseTag = useCallback(
     (removedTag: string) => {
       if (removedTag && tags.indexOf(removedTag) !== -1) {
@@ -64,9 +85,9 @@ export const TagsForm = ({ propertyAddress, propertyTags, accountAddress }: Tags
   return (
     <Form onFinish={() => onSaveTags()}>
       {tags.map((tag: string) => (
-        <PropertyTag closable onClose={() => onCloseTag(tag)} key={tag}>
+        <PropertyTagText closable onClose={() => onCloseTag(tag)} key={tag}>
           {tag}
-        </PropertyTag>
+        </PropertyTagText>
       ))}
       {!inputVisible && (
         <InputTag onClick={showInput}>
@@ -85,7 +106,13 @@ export const TagsForm = ({ propertyAddress, propertyTags, accountAddress }: Tags
           onPressEnter={handleInputConfirm}
         />
       )}
-      <Button type="primary" htmlType="submit" size="small" disabled={isLoading} loading={isLoading}>
+      <Button
+        type="primary"
+        htmlType="submit"
+        size="small"
+        disabled={isLoading || tags === propertyTags}
+        loading={isLoading}
+      >
         Save
       </Button>
     </Form>
@@ -94,13 +121,17 @@ export const TagsForm = ({ propertyAddress, propertyTags, accountAddress }: Tags
 
 export const PropertyTags = ({ propertyAddress }: Props) => {
   const { accountAddress } = useProvider()
-  const { data: propertyTags } = useGetPropertyTags(propertyAddress || '')
+  const { data } = useGetProperty(propertyAddress)
 
   return (
     <Wrap>
-      <p>Property Tags</p>
-      {propertyTags && (
-        <TagsForm propertyAddress={propertyAddress} propertyTags={propertyTags?.tags} accountAddress={accountAddress} />
+      <h3>Tags</h3>
+      {data && (
+        <TagsForm
+          propertyAddress={propertyAddress}
+          propertyTags={data?.tags.map((tag: PropertyTag) => tag.name)}
+          accountAddress={accountAddress}
+        />
       )}
     </Wrap>
   )

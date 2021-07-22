@@ -53,6 +53,11 @@ export type PropertyLinks = {
   website?: string
 }
 
+export type Tag = {
+  id: number
+  name: string
+}
+
 export interface Property {
   id: number
   address: string
@@ -62,6 +67,7 @@ export interface Property {
   avatar: NullableImage
   links?: PropertyLinks
   error?: string
+  tags: Array<Tag>
 }
 
 export interface UploadFile {
@@ -101,25 +107,24 @@ export const postUser = (
     })
   }).then(res => res.json())
 
-export const getPropertyTags = (propertyAddress: string): Promise<PropertyTags> =>
-  fetch(`${BaseUrl}/mainnet/property/${propertyAddress}/tags`)
+export const getAllTags = (): Promise<Array<Tag>> =>
+  fetch(`${StrapiBaseUrl}/alltags`)
     .then(res => res.json())
-    .catch(() => '')
+    .catch(() => [])
 
-export const postPropertyTags = (
-  propertyAddress: string,
-  tags: string,
-  signMessage: string,
-  signature: string,
-  walletAddress: string
-): Promise<PropertyTags> =>
-  fetch(`${BaseUrl}/mainnet/property/${propertyAddress}/tags`, {
+export const getTags = (tags: string[]): Promise<Array<Tag>> =>
+  fetch(`${StrapiBaseUrl}/tags?name=${tags.join('&name=')}`)
+    .then(res => res.json())
+    .catch(() => {})
+
+export const postTag = (tag: string, signMessage: string, signature: string, walletAddress: string): Promise<Tag> =>
+  fetch(`${StrapiBaseUrl}/tags`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json; charset=utf-8'
     },
     body: JSON.stringify({
-      tags,
+      name: tag,
       signature,
       message: signMessage,
       account: walletAddress
@@ -254,7 +259,8 @@ export const putProperty = (
   id: number,
   name?: string,
   description?: string,
-  links?: PropertyLinks
+  links?: PropertyLinks,
+  tags?: number[]
 ): Promise<Property> =>
   fetch(`${StrapiBaseUrl}/properties/${id}`, {
     method: 'PUT',
@@ -265,6 +271,7 @@ export const putProperty = (
       name,
       description,
       links,
+      tags,
       account_address: address,
       address: propertyAddress,
       signature,

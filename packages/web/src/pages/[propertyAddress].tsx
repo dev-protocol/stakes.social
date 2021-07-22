@@ -31,6 +31,7 @@ import { Image, Property as DevForAppsProperty } from 'src/fixtures/dev-for-apps
 import { WithGradient } from 'src/components/atoms/WithGradient'
 import { Stake } from 'src/components/organisms/Stake'
 import { Withdraw } from 'src/components/organisms/Withdraw'
+import { PropertyTags } from 'src/components/organisms/PropertyTags'
 import { useProvider } from 'src/fixtures/wallet/hooks'
 import { Avatar } from 'src/components/molecules/Avatar'
 import { CoverImageOrGradient } from 'src/components/atoms/CoverImageOrGradient'
@@ -380,6 +381,7 @@ const PropertyAbout = ({
           </Form.Item>
         </Form>
       </ResponsiveModal>
+      <PropertyTags propertyAddress={propertyAddress} />
     </AboutSection>
   )
 }

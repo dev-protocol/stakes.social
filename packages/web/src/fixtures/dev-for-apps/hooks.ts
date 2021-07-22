@@ -4,8 +4,9 @@ import useSWR from 'swr'
 import { message } from 'antd'
 import { UnwrapFunc } from '../utility'
 import {
-  getPropertyTags,
-  postPropertyTags,
+  Tag,
+  getTags,
+  postTag,
   postAccount,
   putAccount,
   postProperty,
@@ -22,27 +23,25 @@ import { useGetIncubators } from './functions/incubator'
 
 export { useUploadFile, useDeleteFile, useGetAccount, useGetProperty, useGetIncubators }
 
-export const useGetPropertyTags = (propertyAddress: string) => {
-  const shouldFetch = propertyAddress !== ''
-  const { data, error, mutate } = useSWR<UnwrapFunc<typeof getPropertyTags>, Error>(
-    shouldFetch ? SWRCachePath.getPropertyTags(propertyAddress) : null,
-    () => getPropertyTags(propertyAddress),
-    { onError: err => message.error(err.message) }
+export const useGetTags = (tags: string[]) => {
+  const shouldFetch = tags.length > 0
+  const { data, error, mutate } = useSWR<UnwrapFunc<typeof getTags>, Error>(
+    shouldFetch ? SWRCachePath.getTags(tags) : null,
+    () => getTags(tags),
+    { onError: (err: Error) => message.error(err.message) }
   )
   return { data, error, mutate }
 }
 
-export const usePostPropertyTags = (propertyAddress: string, walletAddress: string) => {
-  const key = 'useGetPropertyTags'
+export const usePostTag = (propertyAddress: string, walletAddress: string) => {
+  const key = 'usePostTag'
   const { web3 } = useProvider()
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const shouldFetch = propertyAddress !== '' && walletAddress !== ''
-  const { data, mutate } = useSWR<UnwrapFunc<typeof getPropertyTags>, Error>(
-    shouldFetch ? SWRCachePath.getPropertyTags(propertyAddress) : null
-  )
+  const { data } = useSWR<UnwrapFunc<typeof postTag>, Error>(shouldFetch ? SWRCachePath.postTag() : null)
 
-  const postPropertyTagsHandler = async (tags: string) => {
-    const signMessage = `submit property tags: ${tags}`
+  const postTagsHandler = async (tag: string) => {
+    const signMessage = `submit property tag: ${tag}`
     const { signature, message: signedMessage } = await signWithCache(web3, signMessage)
     if (!signature || !signedMessage) {
       return
@@ -51,24 +50,23 @@ export const usePostPropertyTags = (propertyAddress: string, walletAddress: stri
     setIsLoading(true)
     message.loading({ content: 'update property tags...', duration: 0, key })
 
-    await mutate(
-      postPropertyTags(propertyAddress, tags, signedMessage, signature, walletAddress)
-        .then(result => {
-          message.success({ content: 'success update property tags', key })
-          return result
-        })
-        .catch(err => {
-          const errorMessage = walletAddress === '' ? 'Please connect to a wallet' : err.message
-          message.error({ content: errorMessage, key })
-          return Promise.reject(data)
-        }),
-      false
-    )
+    const result = postTag(tag, signedMessage, signature, walletAddress)
+      .then((result: Tag) => {
+        message.success({ content: 'success update property tag', key })
+        return result
+      })
+      .catch((err: Error) => {
+        const errorMessage = walletAddress === '' ? 'Please connect to a wallet' : err.message
+        message.error({ content: errorMessage, key })
+        return Promise.reject(data)
+      })
 
     setIsLoading(false)
+
+    return result
   }
 
-  return { data, postPropertyTagsHandler, isLoading }
+  return { data, postTagsHandler, isLoading }
 }
 
 export const useCreateAccount = (walletAddress: string) => {
@@ -227,7 +225,8 @@ export const useUpdateProperty = (id: number, walletAddress: string, propertyAdd
     description?: string,
     website?: string,
     twitter?: string,
-    github?: string
+    github?: string,
+    tags?: number[]
   ) => {
     const links: PropertyLinks = {
       github,
@@ -251,7 +250,8 @@ export const useUpdateProperty = (id: number, walletAddress: string, propertyAdd
       id,
       name,
       description,
-      links
+      links,
+      tags
     )
       .then(result => {
         if (result.error) {
