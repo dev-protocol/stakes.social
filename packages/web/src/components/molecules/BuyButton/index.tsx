@@ -25,7 +25,7 @@ const BuyButton = styled.a`
 export const BuyDevButton = ({ className }: Props) => (
   <BuyButton
     className={className}
-    href="https://app.uniswap.org/#/swap?outputCurrency=0x5caf454ba92e6f2c929df14667ee360ed9fd5b26"
+    href="https://app.uniswap.org/#/swap?outputCurrency=0x5caf454ba92e6f2c929df14667ee360ed9fd5b26&use=V2"
     rel="noreferrer"
     target="_blank"
   >

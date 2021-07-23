@@ -15,6 +15,20 @@ exports[`PropertyHeader Snapshot 1`] = `
           authentication-id's Pool
         </h1>
       </div>
+      <p
+        class="sc-lime37-0 jHIfBJ btn-tweet"
+      >
+        <a
+          class="twitter-share-button"
+          data-lang="en"
+          data-show-count="false"
+          data-size="large"
+          data-text="Check out authentication-id on Stakes.social #DevProtocol"
+          href="https://twitter.com/share"
+        >
+          Tweet
+        </a>
+      </p>
       <div
         class="sc-1bnntxi-2 FPFYi"
       >
@@ -25,7 +39,7 @@ exports[`PropertyHeader Snapshot 1`] = `
             class="sc-1bnntxi-4 gLLBxi"
           >
             <span
-              class="xnqjv4-0 fwZjQT"
+              class="sc-xnqjv4-0 huwWNS"
             >
               N/A
               %
@@ -46,7 +60,7 @@ exports[`PropertyHeader Snapshot 1`] = `
             class="sc-1bnntxi-4 gLLBxi"
           >
             <span
-              class="xnqjv4-0 fwZjQT"
+              class="sc-xnqjv4-0 huwWNS"
             >
                
               N/A
@@ -68,7 +82,7 @@ exports[`PropertyHeader Snapshot 1`] = `
             class="sc-1bnntxi-4 gLLBxi"
           >
             <span
-              class="xnqjv4-0 fwZjQT"
+              class="sc-xnqjv4-0 huwWNS"
             >
                
               N/A
@@ -86,7 +100,7 @@ exports[`PropertyHeader Snapshot 1`] = `
         >
           <a
             class="sc-17tlp0z-0 ioLHnD"
-            href="https://app.uniswap.org/#/swap?outputCurrency=0x5caf454ba92e6f2c929df14667ee360ed9fd5b26"
+            href="https://app.uniswap.org/#/swap?outputCurrency=0x5caf454ba92e6f2c929df14667ee360ed9fd5b26&use=V2"
             rel="noreferrer"
             target="_blank"
           >
@@ -142,5 +156,8 @@ exports[`PropertyHeader Snapshot 1`] = `
       </div>
     </div>
   </div>
+  <script
+    src="https://platform.twitter.com/widgets.js"
+  />
 </body>
 `;

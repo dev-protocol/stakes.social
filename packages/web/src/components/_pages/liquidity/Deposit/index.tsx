@@ -5,7 +5,6 @@ import { useState } from 'react'
 import { getUTC, toAmountNumber, toBigNumber, toNaturalNumber, whenDefined } from 'src/fixtures/utility'
 import { useProvider } from 'src/fixtures/wallet/hooks'
 import styled from 'styled-components'
-import { GEYSER_ETHDEV_V2_ADDRESS } from '../../../../fixtures/_pages/liquidity/constants/address'
 import {
   useEstimateReward,
   useFinalUnlockSchedules,
@@ -31,7 +30,7 @@ const StyledForm = styled(Form)`
 
 const LinkToUniswap = () => (
   <a
-    href="https://app.uniswap.org/#/add/0x5caf454ba92e6f2c929df14667ee360ed9fd5b26/ETH"
+    href="https://app.uniswap.org/#/add/v2/0x5cAf454Ba92e6F2c929DF14667Ee360eD9fD5b26/ETH"
     target="_blank"
     rel="noreferrer"
   >
@@ -41,7 +40,7 @@ const LinkToUniswap = () => (
 
 const ZERO = toBigNumber(0)
 
-export const Deposit = () => {
+export const Deposit = (geyserAddress: string) => {
   const messageKey = 'liquidityDeposit'
   const { Item } = Form
   const { Step } = Steps
@@ -53,17 +52,17 @@ export const Deposit = () => {
   const [requireDeposit, setRequireDeposit] = useState(true)
   const [currentStep, setCurrentStep] = useState(0)
   const [requireReEstimate, setRequireReEstimate] = useState(false)
-  const { purge } = useMutateDepositDependence()
+  const { purge } = useMutateDepositDependence(geyserAddress)
 
-  const { data: totalStakingShares } = useTotalStakingShares()
-  const { data: totalStaked } = useTotalStaked()
-  const { data: accounting } = useUpdateAccounting()
-  const { data: finalUnlockSchedule } = useFinalUnlockSchedules()
+  const { data: totalStakingShares } = useTotalStakingShares(geyserAddress)
+  const { data: totalStaked } = useTotalStaked(geyserAddress)
+  const { data: accounting } = useUpdateAccounting(geyserAddress)
+  const { data: finalUnlockSchedule } = useFinalUnlockSchedules(geyserAddress)
 
-  const [isAlreadyFinished] = useIsAlreadyFinished(useState<boolean>(false))
+  const [isAlreadyFinished] = useIsAlreadyFinished(useState<boolean>(false), geyserAddress)
   const estimate = useEstimateReward()
   const { approve, isLoading: isApproving } = useApprove()
-  const { stake, isLoading: isStaking } = useStake()
+  const { stake, isLoading: isStaking } = useStake(geyserAddress)
   const isFulfilled = useCallback(() => {
     return !totalStakingShares || !totalStaked || !accounting || !finalUnlockSchedule
       ? false
@@ -93,14 +92,14 @@ export const Deposit = () => {
       setDisplayAmount(value)
       updateEstimate(bn)
       whenDefined(web3, x =>
-        allowance(x, GEYSER_ETHDEV_V2_ADDRESS).then(x => {
+        allowance(x, geyserAddress).then(x => {
           const req = x ? x.isLessThanOrEqualTo(bn) : true
           setRequireApproval(req)
           setCurrentStep(req ? 0 : 1)
         })
       )
     },
-    [updateEstimate, web3]
+    [updateEstimate, web3, geyserAddress]
   )
   const onClickMax = useCallback(
     () =>
@@ -132,7 +131,7 @@ export const Deposit = () => {
       message.warn({ content: 'Please sign in', key: messageKey })
       return
     }
-    const res = await approve(GEYSER_ETHDEV_V2_ADDRESS, amount ? amount : ZERO)
+    const res = await approve(geyserAddress, amount ? amount : ZERO)
     if (res === false) {
       return
     }

@@ -21,14 +21,14 @@ const StyledForm = styled(Form)`
   grid-gap: 2rem;
 `
 
-export const Withdraw = () => {
+export const Withdraw = (geyserAddress: string) => {
   const { Item } = Form
   const [amount, setAmount] = useState<undefined | BigNumber>(undefined)
   const [displayAmount, setDisplayAmount] = useState<undefined | string>(undefined)
   const [rewardClaimed, setRewardClaimed] = useState('0')
-  const { unstake } = useUnstake()
-  const { data: rewardMultiplier, max } = useRewardMultiplier()
-  const { data: totalStakedFor } = useTotalStakedFor()
+  const { unstake } = useUnstake(geyserAddress)
+  const { data: rewardMultiplier, max } = useRewardMultiplier(geyserAddress)
+  const { data: totalStakedFor } = useTotalStakedFor(geyserAddress)
   const { web3 } = useProvider()
   const updateAmount = useCallback(
     (value: string | number) => {
@@ -42,7 +42,7 @@ export const Withdraw = () => {
         : 0
       if (queryAmount !== 0) {
         whenDefined(web3, w =>
-          unstakeQuery(w, queryAmount).then(x => {
+          unstakeQuery(w, queryAmount, geyserAddress).then(x => {
             if (x) {
               setRewardClaimed(toNaturalNumber(x).toFixed())
             }
@@ -50,12 +50,12 @@ export const Withdraw = () => {
         )
       }
     },
-    [totalStakedFor, web3]
+    [totalStakedFor, web3, geyserAddress]
   )
-  const onClickMax = useCallback(() => updateAmount(toNaturalNumber(totalStakedFor ? totalStakedFor : 0).toFixed()), [
-    updateAmount,
-    totalStakedFor
-  ])
+  const onClickMax = useCallback(
+    () => updateAmount(toNaturalNumber(totalStakedFor ? totalStakedFor : 0).toFixed()),
+    [updateAmount, totalStakedFor]
+  )
   const onChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target
     updateAmount(value)

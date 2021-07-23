@@ -97,17 +97,19 @@ export const AssetItemOnList = ({
   const { data: property } = useGetProperty(propertyAddress)
   const { balance } = useBalanceOfProperty(propertyAddress)
   const { name } = usePropertyName(propertyAddress)
-  const { myStakingRewardAmount, currency: myStakingRewardAmountCurrency } = useGetMyStakingRewardAmount(
-    propertyAddress
-  )
+  const { myStakingRewardAmount, currency: myStakingRewardAmountCurrency } =
+    useGetMyStakingRewardAmount(propertyAddress)
   const { toCurrency } = useCurrency()
   const { myHolderAmount } = useGetMyHolderAmount(propertyAddress)
   const { myStakingAmount, currency: myStakingAmountCurrency } = useGetMyStakingAmount(propertyAddress)
   const propertyName = property && property.name ? property.name : name
   const hasNotBalanceOnTheProperty = balance ? balance.isZero() : false
-  const onClick = (
-    hook: undefined | typeof onClickStake | typeof onClickWithdrawStakersReward | typeof onClickWithdrawHoldersReward
-  ) => () => (typeof hook === 'undefined' ? undefined : hook(propertyAddress))
+  const onClick =
+    (
+      hook: undefined | typeof onClickStake | typeof onClickWithdrawStakersReward | typeof onClickWithdrawHoldersReward
+    ) =>
+    () =>
+      typeof hook === 'undefined' ? undefined : hook(propertyAddress)
 
   return (
     <Wrap className={className}>

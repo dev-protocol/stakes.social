@@ -4,7 +4,7 @@ exports[`InvitationRequestForm Snapshot 1`] = `
 <body>
   <div>
     <div
-      class="dhltmz-0 gwqVCW"
+      class="sc-dhltmz-0 kKgAFb"
     >
       <form
         class="ant-form ant-form-horizontal"
@@ -12,17 +12,17 @@ exports[`InvitationRequestForm Snapshot 1`] = `
         style="padding: 0.75em;"
       >
         <div
-          class="dhltmz-1 gWvSzK"
+          class="sc-dhltmz-1 lnWMjr"
         >
           <h2>
             Application
           </h2>
         </div>
         <div
-          class="dhltmz-2 kRpRFw"
+          class="sc-dhltmz-2 glYmeF"
         >
           <div
-            class="dhltmz-3 wzvSf"
+            class="sc-dhltmz-3 dqzbmy"
           >
             Your name:
           </div>
@@ -90,10 +90,10 @@ exports[`InvitationRequestForm Snapshot 1`] = `
           </div>
         </div>
         <div
-          class="dhltmz-2 kRpRFw"
+          class="sc-dhltmz-2 glYmeF"
         >
           <div
-            class="dhltmz-3 wzvSf"
+            class="sc-dhltmz-3 dqzbmy"
           >
             Your email:
           </div>
@@ -161,10 +161,10 @@ exports[`InvitationRequestForm Snapshot 1`] = `
           </div>
         </div>
         <div
-          class="dhltmz-2 kRpRFw"
+          class="sc-dhltmz-2 glYmeF"
         >
           <div
-            class="dhltmz-3 wzvSf"
+            class="sc-dhltmz-3 dqzbmy"
           >
             Project name:
           </div>
@@ -232,10 +232,10 @@ exports[`InvitationRequestForm Snapshot 1`] = `
           </div>
         </div>
         <div
-          class="dhltmz-2 kRpRFw"
+          class="sc-dhltmz-2 glYmeF"
         >
           <div
-            class="dhltmz-3 wzvSf"
+            class="sc-dhltmz-3 dqzbmy"
           >
             Description:
           </div>
@@ -252,7 +252,7 @@ exports[`InvitationRequestForm Snapshot 1`] = `
                   class="ant-form-item-control-input-content"
                 >
                   <textarea
-                    class="dhltmz-6 kWMODl"
+                    class="sc-dhltmz-6 fRDano"
                     id="basic_useCase"
                     placeholder="Our project aims to..."
                     rows="4"
@@ -263,10 +263,10 @@ exports[`InvitationRequestForm Snapshot 1`] = `
           </div>
         </div>
         <div
-          class="dhltmz-2 kRpRFw"
+          class="sc-dhltmz-2 glYmeF"
         >
           <div
-            class="dhltmz-3 wzvSf"
+            class="sc-dhltmz-3 dqzbmy"
           >
             Your role:
           </div>
@@ -334,13 +334,13 @@ exports[`InvitationRequestForm Snapshot 1`] = `
           </div>
         </div>
         <div
-          class="dhltmz-2 kRpRFw"
+          class="sc-dhltmz-2 glYmeF"
         >
           <div
-            class="dhltmz-3 wzvSf"
+            class="sc-dhltmz-3 dqzbmy"
           >
             <span
-              class="dhltmz-7 kOgXlN"
+              class="sc-dhltmz-7 ilyvVY"
             >
               market
             </span>
@@ -410,11 +410,11 @@ exports[`InvitationRequestForm Snapshot 1`] = `
           </div>
         </div>
         <div
-          class="dhltmz-2 kRpRFw"
+          class="sc-dhltmz-2 glYmeF"
         >
           <div>
             <div
-              class="dhltmz-3 wzvSf"
+              class="sc-dhltmz-3 dqzbmy"
               style="margin-top: 0px; font-size: 1.1em;"
             >
               <a
@@ -493,10 +493,10 @@ exports[`InvitationRequestForm Snapshot 1`] = `
           </div>
         </div>
         <div
-          class="dhltmz-2 kRpRFw"
+          class="sc-dhltmz-2 glYmeF"
         >
           <div
-            class="dhltmz-3 wzvSf"
+            class="sc-dhltmz-3 dqzbmy"
           >
             Additional info:
           </div>
@@ -564,16 +564,16 @@ exports[`InvitationRequestForm Snapshot 1`] = `
           </div>
         </div>
         <div
-          class="dhltmz-2 kRpRFw"
+          class="sc-dhltmz-2 glYmeF"
         >
           <div
             style="display: flex; grid-column: 1/-1; justify-content: flex-end;"
           >
             <div
-              class="dhltmz-4 khIeoH"
+              class="sc-dhltmz-4 ibuZgC"
             >
               <button
-                class="dhltmz-5 hEJeEV"
+                class="sc-dhltmz-5 hmcFbw"
                 type="submit"
               >
                 Submit

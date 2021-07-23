@@ -4,10 +4,10 @@ exports[`TransactModalContents Snapshot 1`] = `
 <body>
   <div>
     <div
-      class="qs0k37-0 bgBmzl"
+      class="sc-qs0k37-0 eTXctg"
     >
       <div
-        class="qs0k37-1 eMxJpM"
+        class="sc-qs0k37-1 dwoznl"
       >
         <div
           class="sc-2tazhb-0 aYXdp"
@@ -18,12 +18,12 @@ exports[`TransactModalContents Snapshot 1`] = `
           />
         </div>
         <h4
-          class="sc-1w8sy4l-3 qs0k37-3 cBCfKG lhtQDa"
+          class="sc-1w8sy4l-3 sc-qs0k37-3 cBCfKG kRSoSj"
         >
           0x0-name
         </h4>
         <span
-          class="qs0k37-4 dqpFeE"
+          class="sc-qs0k37-4 gFUgyd"
         >
           0x0
         </span>
@@ -78,6 +78,36 @@ exports[`TransactModalContents Snapshot 1`] = `
         <div
           style="height: 40px;"
         />
+        <div
+          class="ant-card ant-card-bordered ant-card-small sc-18v7ikh-0 eaHhNQ"
+        >
+          <div
+            class="ant-card-head"
+          >
+            <div
+              class="ant-card-head-wrapper"
+            >
+              <div
+                class="ant-card-head-title"
+              >
+                Gas Fee (predicted)
+              </div>
+            </div>
+          </div>
+          <div
+            class="ant-card-body"
+          >
+            <p>
+              0.003345
+               ETH
+              <span
+                class="sc-18v7ikh-1 kUJdSB"
+              >
+                 $0.00
+              </span>
+            </p>
+          </div>
+        </div>
       </div>
     </div>
   </div>

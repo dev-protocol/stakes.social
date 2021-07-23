@@ -139,7 +139,12 @@ export const InvitationRequestForm = ({ market }: Props) => {
           <h2 style={{ textAlign: 'center', wordBreak: 'normal' }}>
             Successfully requested verification of your project.
           </h2>
-          <h3>We will come back to you soon!</h3>
+          <h3 style={{ textAlign: 'center', wordBreak: 'normal' }}>
+            We kindly ask you to wait for about a week for screening process.
+            <br />
+            We’ll let you know the result via <span style={{ fontWeight: 'bold' }}>email</span>, so please change the
+            filtering setup for your mail box to receive an email from “@devprotocol.xyz”.
+          </h3>
         </ResultContainer>
       ) : (
         <Form name="basic" style={{ padding: '0.75em' }} initialValues={{ remember: true }} onFinish={onFinish}>

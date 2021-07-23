@@ -4,10 +4,10 @@ import * as lorem from 'lorem-ipsum'
 
 import { H1S, H3S, Text1S } from 'src/components/organisms/Incubator/Typography'
 import { Button } from 'src/components/organisms/Incubator/molecules/Button'
-import Link from 'next/link'
 import DevCurrencySymbol from '../molecules/DevCurrency'
 import { useGetReward } from 'src/fixtures/_pages/incubator/hooks'
 import { Incubator } from 'src/fixtures/dev-for-apps/utility'
+import Link from 'next/link'
 
 const ipsum = new lorem.LoremIpsum({
   sentencesPerParagraph: { min: 1, max: 3 },

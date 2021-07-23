@@ -15,7 +15,7 @@ export const getContract = (web3: Web3, contractAddress = INCUBATOR_CONTRACT_ADD
     return fromCache
   }
 
-  const contract = (createContract(abi, contractAddress, web3) as unknown) as Contract
+  const contract = createContract(abi, contractAddress, web3) as unknown as Contract
   client.set(contractAddress, cache ? cache.set(web3, contract) : new WeakMap([[web3, contract]]))
 
   return contract

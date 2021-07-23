@@ -3,14 +3,19 @@ import {
   getRewardsAmount,
   getTotalStakingAmount,
   withdrawHolderAmount,
+  getEstimateGas4WithdrawHolderAmount,
   getMyHolderAmount,
   getTreasuryAmount,
   stakeDev,
+  getEstimateGas4StakeDev,
   withdrawStakingAmount,
+  getEstimateGas4WithdrawStakingAmount,
   getMyStakingRewardAmount,
   createProperty,
+  getEstimateGas4CreateProperty,
   marketScheme,
   authenticate,
+  getEstimateGas4CreateAndAuthenticate,
   getTotalStakingAmountOnProtocol,
   calculateMaxRewardsPerBlock,
   totalSupply,
@@ -33,10 +38,11 @@ import {
   whenDefined,
   whenDefinedAll
 } from 'src/fixtures/utility'
+import { useGetGasPrice } from 'src/fixtures/gas/hooks'
 import { getDevAmount } from 'src/fixtures/wallet/utility'
 import useSWR from 'swr'
 import { message } from 'antd'
-import { useState, useCallback } from 'react'
+import { useMemo, useState, useCallback } from 'react'
 import BigNumber from 'bignumber.js'
 import { useProvider } from 'src/fixtures/wallet/hooks'
 import { useCurrency } from 'src/fixtures/currency/functions/useCurrency'
@@ -84,6 +90,9 @@ export const useWithdrawHolderReward = () => {
     async (propertyAddress: string) => {
       setIsLoading(true)
       message.loading({ content: 'now withdrawing holder reward...', duration: 0, key })
+      if (!web3) {
+        message.error({ content: 'Could not find a Web3 provider', key })
+      }
       setError(undefined)
       return whenDefined(web3, x =>
         withdrawHolderAmount(x, propertyAddress)
@@ -104,6 +113,25 @@ export const useWithdrawHolderReward = () => {
   return { withdrawHolder, isLoading, error }
 }
 
+export const useGetEstimateGas4WithdrawHolderAmount = (propertyAddress: string) => {
+  const { web3, accountAddress } = useProvider()
+  const { data, error } = useSWR<BigNumber | undefined, Error>(
+    SWRCachePath.getEstimateGas4WithdrawHolderAmount(propertyAddress, accountAddress),
+    () =>
+      whenDefinedAll([web3, accountAddress], ([x, fromAddress]) =>
+        getEstimateGas4WithdrawHolderAmount(x, propertyAddress, fromAddress)
+      )
+    // NOTE: If an error occurs, nothing is done. Because it only displays the estimated gas price.
+  )
+  const { gasPrice } = useGetGasPrice()
+  const estimateGas = useMemo(
+    () => whenDefinedAll([data, gasPrice], ([x, g]) => toNaturalNumber(x).multipliedBy(g)),
+    [gasPrice, data]
+  )
+
+  return { estimateGas, error }
+}
+
 export const useGetMyHolderAmount = (propertyAddress: string) => {
   const { nonConnectedWeb3, accountAddress } = useProvider()
   const { data, error } = useSWR<UnwrapFunc<typeof getMyHolderAmount>, Error>(
@@ -114,7 +142,12 @@ export const useGetMyHolderAmount = (propertyAddress: string) => {
       ),
     { onError: err => message.error(err.message) }
   )
-  return { myHolderAmount: data ? toNaturalNumber(data) : undefined, error }
+  const [withdrawable, , , total] = data || []
+  return {
+    myHolderAmount: withdrawable ? toNaturalNumber(withdrawable) : undefined,
+    total: total ? toNaturalNumber(total) : undefined,
+    error
+  }
 }
 
 export const useGetHolderAmountByAddress = (propertyAddress: string, srcAddress?: string) => {
@@ -127,7 +160,12 @@ export const useGetHolderAmountByAddress = (propertyAddress: string, srcAddress?
       ),
     { onError: err => message.error(err.message) }
   )
-  return { holderAmount: data ? toNaturalNumber(data) : undefined, error }
+  const [withdrawable, , , total] = data || []
+  return {
+    holderAmount: withdrawable ? toNaturalNumber(withdrawable) : undefined,
+    total: total ? toNaturalNumber(total) : undefined,
+    error
+  }
 }
 
 export const useGetTreasuryAmount = (propertyAddress: string) => {
@@ -253,6 +291,25 @@ export const useWithdrawStaking = () => {
   return { withdrawStaking, isLoading, error }
 }
 
+export const useGetEstimateGas4WithdrawStakingAmount = (propertyAddress: string, amount: string) => {
+  const { web3, accountAddress } = useProvider()
+  const { data, error } = useSWR<BigNumber | undefined, Error>(
+    SWRCachePath.getEstimateGas4WithdrawStakingAmount(propertyAddress, amount || '0', accountAddress),
+    () =>
+      whenDefinedAll([web3, accountAddress, amount], ([x, fromAddress, a]) =>
+        amount !== '' ? getEstimateGas4WithdrawStakingAmount(x, propertyAddress, a, fromAddress) : undefined
+      )
+    // NOTE: If an error occurs, nothing is done. Because it only displays the estimated gas price.
+  )
+  const { gasPrice } = useGetGasPrice()
+  const estimateGas = useMemo(
+    () => whenDefinedAll([data, gasPrice], ([x, g]) => toNaturalNumber(x).multipliedBy(g)),
+    [gasPrice, data]
+  )
+
+  return { estimateGas, error }
+}
+
 export const useStake = () => {
   const { web3 } = useProvider()
   const key = 'useStake'
@@ -280,6 +337,28 @@ export const useStake = () => {
   )
 
   return { stake, isLoading, error }
+}
+
+export const useGetEstimateGas4Stake = (propertyAddress: string, amount?: string) => {
+  const { web3, accountAddress } = useProvider()
+  const { data, error } = useSWR<BigNumber | undefined, Error>(
+    SWRCachePath.getEstimateGas4Stake(propertyAddress, accountAddress, amount),
+    () =>
+      whenDefinedAll([web3, accountAddress, amount], ([x, fromAddress, a]) => {
+        const stakeAmount = toAmountNumber(a)
+        return stakeAmount.toNumber() >= 0
+          ? getEstimateGas4StakeDev(x, propertyAddress, stakeAmount.toFormat({ decimalSeparator: '' }), fromAddress)
+          : undefined
+      })
+    // NOTE: If an error occurs, nothing is done. Because it only displays the estimated gas price.
+  )
+  const { gasPrice } = useGetGasPrice()
+  const estimateGas = useMemo(
+    () => whenDefinedAll([data, gasPrice], ([x, g]) => toNaturalNumber(x).multipliedBy(g)),
+    [gasPrice, data]
+  )
+
+  return { estimateGas, error }
 }
 
 export const useTotalStakingAmountOnProtocol = () => {
@@ -377,6 +456,24 @@ export const useCreateProperty = () => {
   return { createProperty: callback, isLoading, error }
 }
 
+export const useGetEstimateGas4CreateProperty = (name: string, symbol: string, author: string) => {
+  const { web3, accountAddress } = useProvider()
+  const { data, error } = useSWR<BigNumber | undefined, Error>(
+    SWRCachePath.getEstimateGas4CreateProperty(name, symbol, author, accountAddress),
+    () =>
+      whenDefinedAll([web3, accountAddress], ([x, fromAddress]) =>
+        getEstimateGas4CreateProperty(x, name, symbol, author, fromAddress)
+      )
+    // NOTE: If an error occurs, nothing is done. Because it only displays the estimated gas price.
+  )
+  const { gasPrice } = useGetGasPrice()
+  const estimateGas = useMemo(
+    () => whenDefinedAll([data, gasPrice], ([x, g]) => toNaturalNumber(x).multipliedBy(g)),
+    [gasPrice, data]
+  )
+  return { estimateGas, error }
+}
+
 export const useMarketScheme = () => {
   const { web3 } = useProvider()
   const key = 'useMarketScheme'
@@ -434,6 +531,25 @@ export const useAuthenticate = () => {
     [web3]
   )
   return { authenticate: callback, isLoading, error }
+}
+
+export const useGetEstimateGas4CreateAndAuthenticate = (marketAddress: string) => {
+  const { web3, accountAddress } = useProvider()
+  const { data, error } = useSWR<BigNumber | undefined, Error>(
+    SWRCachePath.getEstimateGas4CreateAndAuthenticate('name', 'symbol', marketAddress, accountAddress),
+    () =>
+      whenDefinedAll([web3, accountAddress], ([x, fromAddress]) =>
+        getEstimateGas4CreateAndAuthenticate(x, 'name', 'symbol', marketAddress, ['a', 'b', 'c'], fromAddress)
+      )
+    // NOTE: If an error occurs, nothing is done. Because it only displays the estimated gas price.
+  )
+  const { gasPrice } = useGetGasPrice()
+  const estimateGas = useMemo(
+    () => whenDefinedAll([data, gasPrice], ([x, g]) => toNaturalNumber(x).multipliedBy(g)),
+    [gasPrice, data]
+  )
+
+  return { estimateGas, error }
 }
 
 export const useCreateAndAuthenticate = () => {

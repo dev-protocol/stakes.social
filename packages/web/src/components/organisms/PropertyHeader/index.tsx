@@ -9,6 +9,7 @@ import ReactMarkdown from 'react-markdown'
 import { useClipboard } from 'use-clipboard-copy'
 import { CopyOutlined, CheckCircleTwoTone } from '@ant-design/icons'
 import { useProvider } from 'src/fixtures/wallet/hooks'
+import ShareTweet from '../../atoms/ShareButtons'
 
 const ResponsivePropertyAddressFrame = styled.div`
   margin: 1rem auto;
@@ -164,18 +165,19 @@ export const PropertyHeader = ({ propertyAddress, apy, creators }: Props) => {
   })
   const { data: dataAuthor } = useGetAuthorInformation(data?.property_authentication?.[0]?.property_meta?.author)
   const isNotSelf = dataAuthor?.address !== accountAddress
+  const propertyTitle = data?.property_authentication?.[0]?.authentication_id
+    ? data?.property_authentication?.[0]?.authentication_id
+    : propertyAddress
 
   return (
     <ResponsivePropertyAddressFrame>
       <HeaderContainer>
         <Header>
-          {data?.property_authentication?.[0]?.authentication_id
-            ? `${data?.property_authentication?.[0]?.authentication_id}'s Pool`
-            : `${propertyAddress} Pool`}
+          {data?.property_authentication?.[0]?.authentication_id ? `${propertyTitle}'s Pool` : `${propertyTitle} Pool`}
         </Header>
         {dataAuthor && !isNotSelf && <CopyBadge propertyAddress={propertyAddress} />}
       </HeaderContainer>
-
+      <ShareTweet title={propertyTitle}></ShareTweet>
       <SubHeader>
         <ApyContainer>
           <ResponsiveSubheaderSection>

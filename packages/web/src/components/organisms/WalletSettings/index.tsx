@@ -50,8 +50,7 @@ export const WalletSettings = (_: Props) => {
       : web3Modal?.cachedProvider === 'custom-walletlink'
       ? {
           name: 'WalletLink',
-          logo:
-            'https://github.com/dev-protocol/asset.stakes.social/blob/main/public/wallet/coinbase-wallet.jpg?raw=true'
+          logo: 'https://github.com/dev-protocol/asset.stakes.social/blob/main/public/wallet/coinbase-wallet.jpg?raw=true'
         }
       : web3Modal?.cachedProvider === providers.METAMASK.id
       ? { name: providers.METAMASK.name, logo: providers.METAMASK.logo }

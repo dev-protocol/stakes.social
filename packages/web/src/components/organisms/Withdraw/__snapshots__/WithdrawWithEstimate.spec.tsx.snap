@@ -115,6 +115,36 @@ exports[`WithdrawWithEstimate Snapshot 1`] = `
           </p>
         </div>
       </div>
+      <div
+        class="ant-card ant-card-bordered ant-card-small sc-18v7ikh-0 eaHhNQ"
+      >
+        <div
+          class="ant-card-head"
+        >
+          <div
+            class="ant-card-head-wrapper"
+          >
+            <div
+              class="ant-card-head-title"
+            >
+              Gas Fee (predicted)
+            </div>
+          </div>
+        </div>
+        <div
+          class="ant-card-body"
+        >
+          <p>
+            0.002233
+             ETH
+            <span
+              class="sc-18v7ikh-1 kUJdSB"
+            >
+               $0.52
+            </span>
+          </p>
+        </div>
+      </div>
     </div>
   </div>
 </body>
