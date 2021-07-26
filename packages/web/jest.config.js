@@ -6,6 +6,7 @@ module.exports = {
     '^.+\\.tsx?$': 'babel-jest'
   },
   moduleNameMapper: {
+    '\\.svg$': '<rootDir>/src/__mocks__/svgrMock.ts',
     '^src/(.+)': '<rootDir>/src/$1',
     '\\.(css|less)$': 'identity-obj-proxy'
   },

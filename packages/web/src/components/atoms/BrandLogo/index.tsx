@@ -1,5 +1,5 @@
 import React, { SVGProps } from 'react'
-import { StakesSocial } from '../Svgs/tsx'
+import StakesSocial from '../Svgs/svg/Stakes-social.svg'
 import { A } from '../A'
 import styled from 'styled-components'
 

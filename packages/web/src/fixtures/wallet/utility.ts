@@ -176,36 +176,38 @@ export const getBlock = async (blockNumber: number) => {
 export const isAbstractProvider = (prov?: provider): prov is AbstractProvider =>
   Boolean(prov && typeof prov !== 'string' && typeof (prov as any).request === 'function')
 
-export const createHandleAddClick = ({
-  provider,
-  tokenAddress,
-  tokenSymbol,
-  tokenDecimals = 18,
-  tokenImage
-}: {
-  provider: provider
-  tokenAddress: string
-  tokenSymbol: string
-  tokenDecimals?: number
-  tokenImage?: string
-}) => async () => {
-  isAbstractProvider(provider) &&
-    // @ts-ignore
-    (await provider
-      .request({
-        method: 'wallet_watchAsset',
-        params: {
-          type: 'ERC20', // Initially only supports ERC20, but eventually more!
-          options: {
-            address: tokenAddress, // The address that the token is at.
-            symbol: tokenSymbol, // A ticker symbol or shorthand, up to 5 chars.
-            decimals: tokenDecimals, // The number of decimals in the token
-            image: tokenImage // A string url of the token logo
+export const createHandleAddClick =
+  ({
+    provider,
+    tokenAddress,
+    tokenSymbol,
+    tokenDecimals = 18,
+    tokenImage
+  }: {
+    provider: provider
+    tokenAddress: string
+    tokenSymbol: string
+    tokenDecimals?: number
+    tokenImage?: string
+  }) =>
+  async () => {
+    isAbstractProvider(provider) &&
+      // @ts-ignore
+      (await provider
+        .request({
+          method: 'wallet_watchAsset',
+          params: {
+            type: 'ERC20', // Initially only supports ERC20, but eventually more!
+            options: {
+              address: tokenAddress, // The address that the token is at.
+              symbol: tokenSymbol, // A ticker symbol or shorthand, up to 5 chars.
+              decimals: tokenDecimals, // The number of decimals in the token
+              image: tokenImage // A string url of the token logo
+            }
           }
-        }
-      })
-      .catch(err => {
-        console.log('SOMETHING HAPPENED: ', err)
-        message.error({ content: err.message, key: 'addTokenToWallet' })
-      }))
-}
+        })
+        .catch(err => {
+          console.log('SOMETHING HAPPENED: ', err)
+          message.error({ content: err.message, key: 'addTokenToWallet' })
+        }))
+  }
