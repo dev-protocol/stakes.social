@@ -95,6 +95,7 @@
     "identity-obj-proxy": "3.0.0",
     "jest-canvas-mock": "2.3.1",
     "react-docgen-typescript-loader": "3.7.2",
-    "react-test-renderer": "17.0.2"
+    "react-test-renderer": "17.0.2",
+    "webpack-cli": "^4.7.2"
   }
 }
