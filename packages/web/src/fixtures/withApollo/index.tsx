@@ -18,6 +18,7 @@ export const errorHandler =
 
 const isBrowser = typeof window !== 'undefined'
 
+// DUPULICATED
 export default withApollo<NormalizedCacheObject>(
   ({ ctx, headers }) => {
     const withHttp = createHttpLink({
@@ -28,7 +29,6 @@ export default withApollo<NormalizedCacheObject>(
 
     return new ApolloClient({
       connectToDevTools: isBrowser,
-      ssrMode: false,
       link: ApolloLink.from([onError(errorHandler(ctx)), withHttp]),
       cache: new InMemoryCache()
     })

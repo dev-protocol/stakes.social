@@ -45,6 +45,11 @@ export const Navigations = [
     pathname: '/profile'
   },
   {
+    key: 'grants',
+    label: 'Grants',
+    pathname: 'https://devprotocol.notion.site/Welcome-to-DEV-DAPP-STARTER-GRANTS-5cb95252f18540258111581ea54d8808'
+  },
+  {
     key: 'incubator',
     label: 'Incubator',
     pathname: '/incubator'
