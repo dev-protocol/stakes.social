@@ -1,13 +1,16 @@
-export const useGetPropertyTags = () => {
+export const useGetTags = () => {
   return {
-    data: { tags: ['dummy', 'tag'] }
+    data: [
+      { id: 1, name: 'dummy' },
+      { id: 2, name: 'tag' }
+    ]
   }
 }
 
-export const usePostPropertyTags = () => {
+export const usePostTag = () => {
   return {
-    usePostPropertyTags: async () => {
-      return { tags: ['dummy', 'post', 'tag'] }
+    postTag: async () => {
+      return { name: 'dummy' }
     }
   }
 }
@@ -50,10 +53,26 @@ export const useUploadAccountAvatar = () => {
 
 export const useGetProperty = () => {
   return {
-    id: 'id',
-    name: 'name',
-    description: 'description',
-    cover_image: 'cover_image'
+    data: {
+      id: 'id',
+      name: 'name',
+      description: 'description',
+      cover_image: 'cover_image',
+      tags: [
+        {
+          id: 1,
+          name: 'tag'
+        }
+      ]
+    }
+  }
+}
+
+export const useUpdateProperty = () => {
+  return {
+    putPropertyHandler: async () => {
+      return { name: 'dummy-property' }
+    }
   }
 }
 

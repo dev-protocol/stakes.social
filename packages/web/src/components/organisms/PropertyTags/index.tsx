@@ -1,10 +1,11 @@
 import React, { useCallback, useState } from 'react'
+import styled from 'styled-components'
 import { Button, Form, Input, Tag } from 'antd'
 import { PlusOutlined } from '@ant-design/icons'
 import { useProvider } from 'src/fixtures/wallet/hooks'
 import { useGetProperty, usePostTag, useUpdateProperty } from 'src/fixtures/dev-for-apps/hooks'
 import { Tag as PropertyTag, getTags } from 'src/fixtures/dev-for-apps/utility'
-import styled from 'styled-components'
+import { H3 } from 'src/components/atoms/Typography'
 
 interface Props {
   propertyAddress: string
@@ -123,16 +124,16 @@ export const PropertyTags = ({ propertyAddress }: Props) => {
   const { accountAddress } = useProvider()
   const { data } = useGetProperty(propertyAddress)
 
-  return (
+  return data && data?.tags ? (
     <Wrap>
-      <h3>Tags</h3>
-      {data && (
-        <TagsForm
-          propertyAddress={propertyAddress}
-          propertyTags={data?.tags.map((tag: PropertyTag) => tag.name)}
-          accountAddress={accountAddress}
-        />
-      )}
+      <H3>Tags</H3>
+      <TagsForm
+        propertyAddress={propertyAddress}
+        propertyTags={data?.tags?.map((tag: PropertyTag) => tag.name)}
+        accountAddress={accountAddress}
+      />
     </Wrap>
+  ) : (
+    <></>
   )
 }

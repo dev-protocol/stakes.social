@@ -1,8 +1,7 @@
 import useSWR from 'swr'
 import { renderHook, act } from '@testing-library/react-hooks'
 import {
-  useGetPropertyTags,
-  usePostPropertyTags,
+  usePostTag,
   useCreateAccount,
   useUpdateAccount,
   useCreateProperty,
@@ -11,7 +10,7 @@ import {
   useUploadAccountCoverImages,
   useUploadPropertyCoverImages
 } from './hooks'
-import { postPropertyTags, postAccount, putAccount, postProperty, putProperty } from './utility'
+import { postTag, postAccount, putAccount, postProperty, putProperty } from './utility'
 import { signWithCache } from 'src/fixtures/wallet/utility'
 import { useUploadFile } from './functions/useUploadFile'
 import { useGetAccount } from './functions/useGetAccount'
@@ -27,54 +26,16 @@ jest.mock('src/fixtures/dev-for-apps/functions/useGetAccount')
 jest.mock('src/fixtures/dev-for-apps/functions/useGetProperty')
 
 describe('dev-for-apps hooks for property tags', () => {
-  describe('useGetPropertyTags', () => {
-    test('success get property tags', async () => {
-      const data = { tags: ['dummy', 'tag'] }
-      const error = undefined
-      ;(useSWR as jest.Mock).mockImplementation(() => ({ data, error }))
-      const { result } = renderHook(() => useGetPropertyTags('0x01234567890'))
-      expect(result.current.data).toBe(data)
-    })
-
-    test('failure get profile', async () => {
-      const data = undefined
-      const errorMessage = 'error'
-      const error = new Error(errorMessage)
-      ;(useSWR as jest.Mock).mockImplementation(() => ({ data, error }))
-      const { result } = renderHook(() => useGetPropertyTags('0x01234567890'))
-      expect(result.current.error).toBe(error)
-      expect(result.current.error?.message).toBe(errorMessage)
-    })
-  })
-
-  describe('usePostPropertyTags', () => {
-    test('success post property tags', async () => {
+  describe('usePostTag', () => {
+    test('success post tag', () => {
       const propertyAddress = '0x01234567890'
       const accountAddress = '0x09876543210'
       const data = { tags: ['dummy', 'post', 'tag'] }
       const error = undefined
       ;(useSWR as jest.Mock).mockImplementation(() => ({ data, error, mutate: () => {} }))
-      ;(postPropertyTags as jest.Mock).mockResolvedValue(data)
-      const { result } = renderHook(() => usePostPropertyTags(propertyAddress, accountAddress))
+      ;(postTag as jest.Mock).mockResolvedValue(data)
+      const { result } = renderHook(() => usePostTag(propertyAddress, accountAddress))
       expect(result.current.data).toBe(data)
-    })
-
-    test('failure post property tags with web3.sign error', async () => {
-      const propertyAddress = '0x01234567890'
-      const accountAddress = '0x09876543210'
-      const data = undefined
-      const errorMessage = 'error'
-      const error = new Error(errorMessage)
-      ;(useSWR as jest.Mock).mockImplementation(() => ({ data, error, mutate: () => {} }))
-      ;(signWithCache as jest.Mock).mockImplementation(() => ({ signature: undefined, message: undefined }))
-      ;(postPropertyTags as jest.Mock).mockImplementation(() => {})
-      const { result } = renderHook(() => usePostPropertyTags(propertyAddress, accountAddress))
-      await act(async () => {
-        await result.current.postPropertyTagsHandler('dummy tags')
-      })
-      expect(result.current.isLoading).toBe(false)
-      expect(result.current.data).toBe(undefined)
-      expect((postPropertyTags as jest.Mock).mock.calls.length).toBe(0)
     })
   })
 })
