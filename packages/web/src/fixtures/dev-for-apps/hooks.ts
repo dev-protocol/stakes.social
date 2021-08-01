@@ -84,6 +84,7 @@ export const useCreateAccount = (walletAddress: string) => {
     const signMessage = `create accout: ${name}, ${biography}`
     const { signature, message: signedMessage } = await signWithCache(web3, signMessage)
     if (!signature || !signedMessage) {
+      message.error({ content: 'Please connect your wallet', key })
       return
     }
 
@@ -123,6 +124,7 @@ export const useUpdateAccount = (id: number, walletAddress: string) => {
     const signMessage = `update accout: ${name}, ${biography}`
     const { signature, message: signedMessage } = await signWithCache(web3, signMessage)
     if (!signature || !signedMessage) {
+      message.error({ content: 'Please connect your wallet', key })
       return
     }
 
@@ -186,6 +188,7 @@ export const useCreateProperty = (walletAddress: string, propertyAddress: string
     const signMessage = `create property: ${name}, ${description}`
     const { signature, message: signedMessage } = await signWithCache(web3, signMessage)
     if (!signature || !signedMessage) {
+      message.error({ content: 'Please connect your wallet', key })
       return
     }
 
@@ -237,6 +240,7 @@ export const useUpdateProperty = (id: number, walletAddress: string, propertyAdd
     const signMessage = `update property: ${name}, ${description}`
     const { signature, message: signedMessage } = await signWithCache(web3, signMessage)
     if (!signature || !signedMessage) {
+      message.error({ content: 'Please connect your wallet', key })
       return
     }
 
