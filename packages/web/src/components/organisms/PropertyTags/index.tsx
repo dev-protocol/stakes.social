@@ -1,5 +1,6 @@
-import React, { useCallback, useState } from 'react'
+import React, { useCallback, useMemo, useState } from 'react'
 import styled from 'styled-components'
+import * as R from 'ramda'
 import { Button, Form, Input, Tag } from 'antd'
 import { PlusOutlined } from '@ant-design/icons'
 import { useProvider } from 'src/fixtures/wallet/hooks'
@@ -42,7 +43,7 @@ export const TagsForm = ({ propertyAddress, propertyTags, accountAddress }: Tags
     propertyAddress
   )
   const onSaveTags = useCallback(async () => {
-    const unsavedTags = tags.filter((t: string) => propertyTags?.includes(t) === false)
+    const unsavedTags = tags.filter((t: string) => (propertyTags || []).includes(t) === false)
     if (unsavedTags.length > 0) {
       const existTags = await getTags(unsavedTags)
       const existTagIds = existTags.map((t: PropertyTag) => t.id) || []
@@ -54,9 +55,15 @@ export const TagsForm = ({ propertyAddress, propertyTags, accountAddress }: Tags
           return await postTag(tag)
         })
       )
+      // check error
+      if (R.not(R.all(R.equals(undefined))(results.map((result: any) => result?.error)))) {
+        return
+      }
+
       // TODO: remove tags
       const tagIds = property?.tags.map((tag: PropertyTag) => tag.id) || []
-      const resultTagIds = results.map((result: PropertyTag | void) => (result ? result.id : -1)) || []
+      const resultTagIds =
+        results.map((result: any) => result?.data).map((result: PropertyTag | void) => (result ? result.id : -1)) || []
       const savedTags: number[] = [...tagIds, ...existTagIds, ...resultTagIds]
       updateProperty(property?.name, property?.description, undefined, undefined, undefined, savedTags)
     }
@@ -122,18 +129,13 @@ export const TagsForm = ({ propertyAddress, propertyTags, accountAddress }: Tags
 
 export const PropertyTags = ({ propertyAddress }: Props) => {
   const { accountAddress } = useProvider()
-  const { data } = useGetProperty(propertyAddress)
+  const { data, found } = useGetProperty(propertyAddress)
+  const tags = useMemo(() => (found && data ? data?.tags?.map((tag: PropertyTag) => tag.name) : []), [found, data])
 
-  return data && data?.tags ? (
+  return (
     <Wrap>
       <H3>Tags</H3>
-      <TagsForm
-        propertyAddress={propertyAddress}
-        propertyTags={data?.tags?.map((tag: PropertyTag) => tag.name)}
-        accountAddress={accountAddress}
-      />
+      <TagsForm propertyAddress={propertyAddress} propertyTags={tags} accountAddress={accountAddress} />
     </Wrap>
-  ) : (
-    <></>
   )
 }

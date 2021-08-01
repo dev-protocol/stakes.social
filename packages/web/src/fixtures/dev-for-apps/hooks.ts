@@ -44,7 +44,8 @@ export const usePostTag = (propertyAddress: string, walletAddress: string) => {
     const signMessage = `submit property tag: ${tag}`
     const { signature, message: signedMessage } = await signWithCache(web3, signMessage)
     if (!signature || !signedMessage) {
-      return
+      message.error({ content: 'Please connect your wallet', key })
+      return { error: new Error('wallect is not connected') }
     }
 
     setIsLoading(true)
@@ -53,12 +54,12 @@ export const usePostTag = (propertyAddress: string, walletAddress: string) => {
     const result = postTag(tag, signedMessage, signature, walletAddress)
       .then((result: Tag) => {
         message.success({ content: 'success update property tag', key })
-        return result
+        return { data: result }
       })
       .catch((err: Error) => {
         const errorMessage = walletAddress === '' ? 'Please connect to a wallet' : err.message
         message.error({ content: errorMessage, key })
-        return Promise.reject(data)
+        return { error: err }
       })
 
     setIsLoading(false)
