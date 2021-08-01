@@ -64,7 +64,8 @@ export const useGetProperty = () => {
           name: 'tag'
         }
       ]
-    }
+    },
+    found: true
   }
 }
 
