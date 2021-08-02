@@ -146,7 +146,7 @@ export const AssetItemOnList = ({
         )}
         {enableWithdrawHoldersReward ? (
           <Button type="link" onClick={onClick(onClickWithdrawHoldersReward)}>
-            Withdraw
+            holders
           </Button>
         ) : (
           ''
