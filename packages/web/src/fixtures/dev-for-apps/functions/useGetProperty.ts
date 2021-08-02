@@ -1,4 +1,5 @@
 import useSWR from 'swr'
+import { message } from 'antd'
 import { SWRCachePath } from '../cache-path'
 import { UnwrapFunc, whenDefined } from 'src/fixtures/utility'
 import { getProperty } from '../utility'
@@ -8,7 +9,7 @@ export const useGetProperty = (propertyAddress?: string) => {
   const { data, error, mutate } = useSWR<undefined | UnwrapFunc<typeof getProperty>, Error>(
     shouldFetch ? SWRCachePath.getProperty(propertyAddress) : null,
     () => whenDefined(propertyAddress, x => getProperty(x)),
-    { onError: err => console.error(err.message) }
+    { onError: err => message.error({ content: err.message, key: 'useGetProperty' }) }
   )
   const found = data instanceof Array
 
