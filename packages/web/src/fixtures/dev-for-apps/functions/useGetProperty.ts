@@ -4,8 +4,9 @@ import { UnwrapFunc, whenDefined } from 'src/fixtures/utility'
 import { getProperty } from '../utility'
 
 export const useGetProperty = (propertyAddress?: string) => {
+  const shouldFetch = propertyAddress && propertyAddress.startsWith('0x')
   const { data, error, mutate } = useSWR<undefined | UnwrapFunc<typeof getProperty>, Error>(
-    SWRCachePath.getProperty(propertyAddress),
+    shouldFetch ? SWRCachePath.getProperty(propertyAddress) : null,
     () => whenDefined(propertyAddress, x => getProperty(x)),
     { onError: err => console.error(err.message) }
   )
