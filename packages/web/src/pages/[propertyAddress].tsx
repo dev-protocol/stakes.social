@@ -36,7 +36,6 @@ import { Avatar } from 'src/components/molecules/Avatar'
 import { CoverImageOrGradient } from 'src/components/atoms/CoverImageOrGradient'
 import { H3 } from 'src/components/atoms/Typography'
 import { Twitter, Github } from 'src/components/atoms/SocialButtons'
-import { getPath } from 'src/fixtures/utility/route'
 import { whenDefined } from 'src/fixtures/utility'
 
 type Props = {
@@ -476,11 +475,15 @@ const PropertyAddressDetail = ({ ogImageUrl, propertyAddress }: Props) => {
   )
 }
 
-PropertyAddressDetail.getInitialProps = async ({ asPath }: { asPath: string }) => {
-  const [urlPathArg] = getPath(asPath)
-  const propertyAddress = urlPathArg.split('?')[0]
+export const getServerSideProps = async ({ params }: { params: { propertyAddress: string } }) => {
+  const propertyAddress = params.propertyAddress
   const ogImageUrl = `https://ogp-image-vercel.vercel.app/${propertyAddress}`
-  return { ogImageUrl, propertyAddress }
+  return {
+    props: {
+      ogImageUrl,
+      propertyAddress
+    }
+  }
 }
 
 export default PropertyAddressDetail
