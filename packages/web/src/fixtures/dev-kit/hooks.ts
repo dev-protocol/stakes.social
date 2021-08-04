@@ -706,9 +706,10 @@ export const useGetPolicyAddressesList = () => {
 }
 
 export const usePropertyAuthor = (propertyAddress?: string) => {
+  const shouldFetch = propertyAddress && propertyAddress.startsWith('0x')
   const { nonConnectedWeb3, accountAddress } = useProvider()
   const { data, error } = useSWR<undefined | UnwrapFunc<typeof totalSupply>, Error>(
-    SWRCachePath.propertyAuthor(propertyAddress, accountAddress),
+    shouldFetch ? SWRCachePath.propertyAuthor(propertyAddress, accountAddress) : null,
     () => whenDefinedAll([nonConnectedWeb3, propertyAddress], ([client, property]) => propertyAuthor(client, property)),
     {
       onError: err => message.error(err.message)
