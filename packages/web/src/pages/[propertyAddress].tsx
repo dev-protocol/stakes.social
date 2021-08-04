@@ -1,9 +1,7 @@
 import React, { useCallback, useMemo, useEffect, useState } from 'react'
 import Error from 'next/error'
-import { useRouter } from 'next/router'
 import Head from 'next/head'
 import Link from 'next/link'
-import dynamic from 'next/dynamic'
 import styled from 'styled-components'
 import ReactMarkdown from 'react-markdown'
 import { PlusOutlined, LinkOutlined } from '@ant-design/icons'
@@ -41,7 +39,10 @@ import { Twitter, Github } from 'src/components/atoms/SocialButtons'
 import { getPath } from 'src/fixtures/utility/route'
 import { whenDefined } from 'src/fixtures/utility'
 
-type Props = {}
+type Props = {
+  ogImageUrl: string
+  propertyAddress: string
+}
 
 interface ModalStates {
   visible: boolean
@@ -386,9 +387,7 @@ const PropertyAbout = ({
   )
 }
 
-const PropertyAddressDetail = (_: Props) => {
-  const [urlPathArg] = getPath(useRouter().asPath)
-  const propertyAddress = urlPathArg.split('?')[0]
+const PropertyAddressDetail = ({ ogImageUrl, propertyAddress }: Props) => {
   const { apy, creators } = useAPY()
   const { data } = useGetPropertyAuthenticationQuery({ variables: { propertyAddress } })
   const isExistProperty = useMemo(() => data && data?.property_authentication.length > 0, [data])
@@ -408,17 +407,14 @@ const PropertyAddressDetail = (_: Props) => {
     () => whenDefined(dataPropertyAuthentication, x => x.property_authentication?.[0]?.authentication_id),
     [dataPropertyAuthentication]
   )
-  const OgpDynamic = dynamic(() => import('src/components/molecules/OgpImageMeta') as any, {
-    ssr: false
-  })
 
   return data && !isExistProperty ? (
     // property is not found
     <Error statusCode={404} />
   ) : (
     <>
-      <OgpDynamic />
       <Head>
+        <meta property="og:image" content={ogImageUrl} />
         <title>{propertyName ? `Stakes.social - ${propertyName}` : 'Stakes.social'}</title>
       </Head>
       <Header></Header>
@@ -472,6 +468,13 @@ const PropertyAddressDetail = (_: Props) => {
       <Footer />
     </>
   )
+}
+
+PropertyAddressDetail.getInitialProps = async ({ asPath }: { asPath: string }) => {
+  const [urlPathArg] = getPath(asPath)
+  const propertyAddress = urlPathArg.split('?')[0]
+  const ogImageUrl = `https://ogp-image-vercel.vercel.app/${propertyAddress}`
+  return { ogImageUrl, propertyAddress }
 }
 
 export default PropertyAddressDetail
