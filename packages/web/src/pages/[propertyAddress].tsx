@@ -413,12 +413,13 @@ const PropertyAddressDetail = ({ ogImageUrl, propertyAddress }: Props) => {
   ) : (
     <>
       <Head>
+        <meta name="twitter:card" content="summary_large_image" />
         <meta property="og:image" content={ogImageUrl} />
         <meta property="og:title" content={`Stakes.social - ${propertyAddress}`} />
         <meta
           property="og:description"
-          content={`Stakes.social is a new sponsor platform where both developers and sponsors are rewarded
-          with tokens if they support their favorite projects by staking DEV tokens.`}
+          content={`Stakes.social is a new sponsor platform where both developers and sponsors are rewarded \
+with tokens if they support their favorite projects by staking DEV tokens.`}
         />
         <title>{propertyName ? `Stakes.social - ${propertyName}` : 'Stakes.social'}</title>
       </Head>
