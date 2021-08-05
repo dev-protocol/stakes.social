@@ -442,7 +442,7 @@ with tokens if they support their favorite projects by staking DEV tokens.`}
             {isExistProperty && <Withdraw title="Withdraw" propertyAddress={propertyAddress} isDisplayFee={true} />}
           </Transact>
           <PropertyAbout
-            isAuthor={loggedInWallet === authorAddress}
+            isAuthor={loggedInWallet ? loggedInWallet === authorAddress : false}
             dataProperty={dataProperty ? dataProperty : ({} as DevForAppsProperty)}
             authorAddress={authorAddress || ''}
             propertyAddress={propertyAddress}
