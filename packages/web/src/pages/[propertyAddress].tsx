@@ -478,7 +478,7 @@ with tokens if they support their favorite projects by staking DEV tokens.`}
 
 export const getServerSideProps = async ({ params }: { params: { propertyAddress: string } }) => {
   const propertyAddress = params.propertyAddress
-  const ogImageUrl = `https://ogp-image-vercel.vercel.app/${propertyAddress}`
+  const ogImageUrl = `https://ogpimage-stakessocial.vercel.app/${propertyAddress}`
   return {
     props: {
       ogImageUrl,
