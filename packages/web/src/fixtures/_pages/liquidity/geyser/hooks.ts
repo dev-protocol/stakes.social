@@ -51,7 +51,8 @@ export const useTotalRewards = (geyserAddress: string) => {
   const { nonConnectedWeb3: web3 } = useProvider()
   const { data, error } = useSWR<BigNumber, Error>(
     SWRCachePath.allTokensLocked(geyserAddress),
-    whenDefined(web3, x => getTokensLocked(x, geyserAddress)) || null
+    whenDefined(web3, x => getTokensLocked(x, geyserAddress)) || null,
+    { revalidateOnFocus: false, focusThrottleInterval: 0 }
   )
   return {
     data,
@@ -121,7 +122,8 @@ export const useAllTokensClaimed = (geyserAddress: string) => {
   const { nonConnectedWeb3: web3, accountAddress } = useProvider()
   const { data, error } = useSWR<BigNumber, Error>(
     SWRCachePath.useAllTokensClaimed(geyserAddress, accountAddress),
-    whenDefined(web3, x => getAllTokensClaimed(x, geyserAddress)) || null
+    whenDefined(web3, x => getAllTokensClaimed(x, geyserAddress)) || null,
+    { revalidateOnFocus: false, focusThrottleInterval: 0 }
   )
   return {
     data,
@@ -133,7 +135,8 @@ export const useTotalStakingShares = (geyserAddress: string) => {
   const { nonConnectedWeb3, accountAddress } = useProvider()
   const { data, error } = useSWR<undefined | UnwrapFunc<typeof totalStakingShares>, Error>(
     SWRCachePath.getTotalStakingShares(geyserAddress, accountAddress),
-    () => whenDefined(nonConnectedWeb3, x => totalStakingShares(x, geyserAddress))
+    () => whenDefined(nonConnectedWeb3, x => totalStakingShares(x, geyserAddress)),
+    { revalidateOnFocus: false, focusThrottleInterval: 0 }
   )
   return {
     data,
@@ -145,7 +148,8 @@ export const useTotalStaked = (geyserAddress: string) => {
   const { nonConnectedWeb3, accountAddress } = useProvider()
   const { data, error } = useSWR<undefined | UnwrapFunc<typeof totalStakingShares>, Error>(
     SWRCachePath.useTotalStaked(geyserAddress, accountAddress),
-    () => whenDefined(nonConnectedWeb3, x => totalStaked(x, geyserAddress))
+    () => whenDefined(nonConnectedWeb3, x => totalStaked(x, geyserAddress)),
+    { revalidateOnFocus: false, focusThrottleInterval: 0 }
   )
   return {
     data,
@@ -157,7 +161,8 @@ export const useUpdateAccounting = (geyserAddress: string) => {
   const { web3, accountAddress } = useProvider()
   const { data, error } = useSWR<undefined | UnwrapFunc<typeof updateAccounting>, Error>(
     SWRCachePath.getUpdateAccounting(geyserAddress, accountAddress),
-    () => whenDefined(web3, x => updateAccounting(x, geyserAddress))
+    () => whenDefined(web3, x => updateAccounting(x, geyserAddress)),
+    { revalidateOnFocus: false, focusThrottleInterval: 0 }
   )
   return {
     data,
@@ -169,7 +174,8 @@ export const useFinalUnlockSchedules = (geyserAddress: string) => {
   const { nonConnectedWeb3, accountAddress } = useProvider()
   const { data, error } = useSWR<undefined | UnwrapFunc<typeof finalUnlockSchedules>, Error>(
     SWRCachePath.getFinalUnlockSchedules(geyserAddress, accountAddress),
-    () => whenDefined(nonConnectedWeb3, x => finalUnlockSchedules(x, geyserAddress))
+    () => whenDefined(nonConnectedWeb3, x => finalUnlockSchedules(x, geyserAddress)),
+    { revalidateOnFocus: false, focusThrottleInterval: 0 }
   )
   return {
     data,
@@ -262,24 +268,30 @@ export const useRewardMultiplier = (geyserAddress: string) => {
     data: block,
     error: errorGetStaked,
     mutate
-  } = useSWR<number | undefined, Error>(SWRCachePath.getStaked(geyserAddress, accountAddress), () =>
-    whenDefinedAll([web3, accountAddress], ([client, address]) =>
-      getStaked(client, address, geyserAddress).then(allEvents => {
-        return allEvents[0]?.blockNumber
-      })
-    )
+  } = useSWR<number | undefined, Error>(
+    SWRCachePath.getStaked(geyserAddress, accountAddress),
+    () =>
+      whenDefinedAll([web3, accountAddress], ([client, address]) =>
+        getStaked(client, address, geyserAddress).then(allEvents => {
+          return allEvents[0]?.blockNumber
+        })
+      ),
+    { revalidateOnFocus: false, focusThrottleInterval: 0 }
   )
   const { data: timestamp, error: errorGetBlock } = useSWR<number | undefined, Error>(
     SWRCachePath.getBlock(geyserAddress, block),
-    () => (block ? getBlock(block).then(Number) : undefined)
+    () => (block ? getBlock(block).then(Number) : undefined),
+    { revalidateOnFocus: false, focusThrottleInterval: 0 }
   )
   const { data: bonusPeriod, error: errorBonusPeriodSec } = useSWR<undefined | BigNumber, Error>(
     SWRCachePath.getBonusPeriodSec(geyserAddress, accountAddress),
-    () => whenDefined(web3, x => bonusPeriodSec(x, geyserAddress))
+    () => whenDefined(web3, x => bonusPeriodSec(x, geyserAddress)),
+    { revalidateOnFocus: false, focusThrottleInterval: 0 }
   )
   const { data: _startBonus, error: errorStartBonus } = useSWR<undefined | BigNumber, Error>(
     SWRCachePath.getStartBonus(geyserAddress, accountAddress),
-    () => whenDefined(web3, x => startBonus(x, geyserAddress))
+    () => whenDefined(web3, x => startBonus(x, geyserAddress)),
+    { revalidateOnFocus: false, focusThrottleInterval: 0 }
   )
   const startBonusPct = _startBonus ? toBigNumber(_startBonus).div(100) : toBigNumber(0)
   const multiplier =
@@ -312,7 +324,8 @@ export const useTotalStakedFor = (geyserAddress: string) => {
     () =>
       whenDefinedAll([nonConnectedWeb3, accountAddress], ([client, address]) =>
         totalStakedFor(client, address, geyserAddress)
-      )
+      ),
+    { revalidateOnFocus: false, focusThrottleInterval: 0 }
   )
   return {
     data,
@@ -358,7 +371,8 @@ export const useUnstakeQuery = (geyserAddress: string, amount?: BigNumber) => {
   const { web3 } = useProvider()
   const { data, error } = useSWR<UnwrapFunc<typeof totalStakedFor> | undefined, Error>(
     SWRCachePath.unstakeQuery(geyserAddress, amount?.toFixed()),
-    () => whenDefined(web3, w3 => whenDefined(amount, x => unstakeQuery(w3, x, geyserAddress)))
+    () => whenDefined(web3, w3 => whenDefined(amount, x => unstakeQuery(w3, x, geyserAddress))),
+    { revalidateOnFocus: false, focusThrottleInterval: 0 }
   )
   return {
     data,
