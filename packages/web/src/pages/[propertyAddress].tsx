@@ -1,6 +1,6 @@
 import React, { useCallback, useMemo, useEffect, useState } from 'react'
 import Error from 'next/error'
-import { useRouter } from 'next/router'
+import Head from 'next/head'
 import Link from 'next/link'
 import styled from 'styled-components'
 import ReactMarkdown from 'react-markdown'
@@ -36,10 +36,12 @@ import { Avatar } from 'src/components/molecules/Avatar'
 import { CoverImageOrGradient } from 'src/components/atoms/CoverImageOrGradient'
 import { H3 } from 'src/components/atoms/Typography'
 import { Twitter, Github } from 'src/components/atoms/SocialButtons'
-import { getPath } from 'src/fixtures/utility/route'
 import { whenDefined } from 'src/fixtures/utility'
 
-type Props = {}
+type Props = {
+  ogImageUrl: string
+  propertyAddress: string
+}
 
 interface ModalStates {
   visible: boolean
@@ -383,9 +385,7 @@ const PropertyAbout = ({
   )
 }
 
-const PropertyAddressDetail = (_: Props) => {
-  const [urlPathArg] = getPath(useRouter().asPath)
-  const propertyAddress = urlPathArg.split('?')[0]
+const PropertyAddressDetail = ({ ogImageUrl, propertyAddress }: Props) => {
   const { apy, creators } = useAPY()
   const { data } = useGetPropertyAuthenticationQuery({ variables: { propertyAddress } })
   const isExistProperty = useMemo(() => data && data?.property_authentication.length > 0, [data])
@@ -396,12 +396,32 @@ const PropertyAddressDetail = (_: Props) => {
   const includedAssetList = useMemo(() => data?.property_authentication.map(e => e.authentication_id), [data])
   const { accountAddress: loggedInWallet } = useProvider()
   const { author: authorAddress } = usePropertyAuthor(propertyAddress)
+  const { data: dataPropertyAuthentication } = useGetPropertyAuthenticationQuery({
+    variables: {
+      propertyAddress
+    }
+  })
+  const propertyName = useMemo(
+    () => whenDefined(dataPropertyAuthentication, x => x.property_authentication?.[0]?.authentication_id),
+    [dataPropertyAuthentication]
+  )
 
   return data && !isExistProperty ? (
     // property is not found
     <Error statusCode={404} />
   ) : (
     <>
+      <Head>
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta property="og:image" content={ogImageUrl} />
+        <meta property="og:title" content={`Stakes.social - ${propertyAddress}`} />
+        <meta
+          property="og:description"
+          content={`Stakes.social is a new sponsor platform where both developers and sponsors are rewarded \
+with tokens if they support their favorite projects by staking DEV tokens.`}
+        />
+        <title>{propertyName ? `Stakes.social - ${propertyName}` : 'Stakes.social'}</title>
+      </Head>
       <Header></Header>
       <Wrap>
         <Container>
@@ -421,7 +441,7 @@ const PropertyAddressDetail = (_: Props) => {
             {isExistProperty && <Withdraw title="Withdraw" propertyAddress={propertyAddress} isDisplayFee={true} />}
           </Transact>
           <PropertyAbout
-            isAuthor={loggedInWallet === authorAddress}
+            isAuthor={loggedInWallet ? loggedInWallet === authorAddress : false}
             dataProperty={dataProperty ? dataProperty : ({} as DevForAppsProperty)}
             authorAddress={authorAddress || ''}
             propertyAddress={propertyAddress}
@@ -453,6 +473,17 @@ const PropertyAddressDetail = (_: Props) => {
       <Footer />
     </>
   )
+}
+
+export const getServerSideProps = async ({ params }: { params: { propertyAddress: string } }) => {
+  const propertyAddress = params.propertyAddress
+  const ogImageUrl = `https://ogpimage-stakessocial.vercel.app/${propertyAddress}`
+  return {
+    props: {
+      ogImageUrl,
+      propertyAddress
+    }
+  }
 }
 
 export default PropertyAddressDetail
