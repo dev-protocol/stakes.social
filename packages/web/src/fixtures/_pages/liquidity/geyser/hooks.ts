@@ -4,7 +4,6 @@ import BigNumber from 'bignumber.js'
 import useSWR, { mutate } from 'swr'
 import {
   allTokensClaimed,
-  finalUnlockSchedules,
   getStaked,
   stake,
   totalStaked,
@@ -15,7 +14,9 @@ import {
   startBonus,
   allTokensLocked,
   totalStakedFor,
-  unstakeQuery
+  unstakeQuery,
+  allSchedules,
+  UnlockSchedule
 } from './client'
 import { useCallback, useState } from 'react'
 import { message } from 'antd'
@@ -170,12 +171,40 @@ export const useUpdateAccounting = (geyserAddress: string) => {
   }
 }
 
-export const useFinalUnlockSchedules = (geyserAddress: string) => {
+export const useAllSchedules = (geyserAddress: string) => {
   const { nonConnectedWeb3, accountAddress } = useProvider()
-  const { data, error } = useSWR<undefined | UnwrapFunc<typeof finalUnlockSchedules>, Error>(
-    SWRCachePath.getFinalUnlockSchedules(geyserAddress, accountAddress),
-    () => whenDefined(nonConnectedWeb3, x => finalUnlockSchedules(x, geyserAddress)),
+  const { data, error } = useSWR<undefined | UnwrapFunc<typeof allSchedules>, Error>(
+    SWRCachePath.getAllSchedules(geyserAddress, accountAddress),
+    () => whenDefined(nonConnectedWeb3, x => allSchedules(x, geyserAddress)),
     { revalidateOnFocus: false, focusThrottleInterval: 0 }
+  )
+  return {
+    data,
+    error
+  }
+}
+
+export const useFinalUnlockSchedules = (geyserAddress: string) => {
+  const { data: schedules, error } = useAllSchedules(geyserAddress)
+  const data =
+    schedules && schedules.length > 0
+      ? schedules.reduce((a, c) => (toBigNumber(a.endAtSec).isGreaterThan(c.endAtSec) ? a : c))
+      : undefined
+  return {
+    data,
+    error
+  }
+}
+
+export const useEntirePeriod = (geyserAddress: string) => {
+  const { data: schedules, error } = useAllSchedules(geyserAddress)
+  const startDate = whenDefined(schedules, x => (d => toBigNumber(d.endAtSec).minus(d.durationSec))(x[0]))
+  const finalSchedule = whenDefined(schedules, x =>
+    x.reduce((a, c) => (toBigNumber(a.endAtSec).isGreaterThan(c.endAtSec) ? a : c))
+  )
+
+  const data = whenDefinedAll([startDate, finalSchedule], ([start, final]) =>
+    toBigNumber(final.endAtSec).minus(start).toNumber()
   )
   return {
     data,
@@ -197,7 +226,7 @@ export const useEstimateReward = () => {
       totalStakingShares: BigNumber
       totalStaked: BigNumber
       accounting: UnwrapFunc<typeof updateAccounting>
-      finalUnlockSchedule: NonNullable<UnwrapFunc<typeof finalUnlockSchedules>>
+      finalUnlockSchedule: UnlockSchedule
       timestamp: number
     }) => {
       if (amount.isZero()) {
@@ -245,20 +274,18 @@ export const useIsAlreadyFinished = (
   [state, stateSetter]: [boolean, Dispatch<SetStateAction<boolean>>],
   geyserAddress: string
 ): [boolean, Dispatch<SetStateAction<boolean>>] => {
-  const { nonConnectedWeb3 } = useProvider()
-  whenDefined(nonConnectedWeb3, x =>
-    finalUnlockSchedules(x, geyserAddress).then(res => {
-      if (res === undefined) {
-        return
-      }
-      const { endAtSec } = res
-      const current = getUTC()
-      const duration = (d => (d > SYSTEM_SETTIMEOUT_MAXIMUM_DELAY_VALUE ? SYSTEM_SETTIMEOUT_MAXIMUM_DELAY_VALUE : d))(
-        (Number(endAtSec) - current) * 1000
-      )
-      setTimeout(() => stateSetter(true), duration)
-    })
-  )
+  const { data: final } = useFinalUnlockSchedules(geyserAddress)
+  whenDefined(final, res => {
+    if (res === undefined) {
+      return
+    }
+    const { endAtSec } = res
+    const current = getUTC()
+    const duration = (d => (d > SYSTEM_SETTIMEOUT_MAXIMUM_DELAY_VALUE ? SYSTEM_SETTIMEOUT_MAXIMUM_DELAY_VALUE : d))(
+      (Number(endAtSec) - current) * 1000
+    )
+    setTimeout(() => stateSetter(true), duration)
+  })
   return [state, stateSetter]
 }
 
