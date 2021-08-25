@@ -6,8 +6,10 @@ import useSWR, { mutate } from 'swr'
 import { SWRCachePath } from './cache-path'
 import { finalUnlockSchedules, stake, unstake } from './client'
 import {
+  useAllSchedules,
   useAllTokensClaimed,
   useAPY,
+  useEntirePeriod,
   useEstimateReward,
   useFinalUnlockSchedules,
   useIsAlreadyFinished,
@@ -236,6 +238,52 @@ describe('geyser hooks', () => {
     })
   })
 
+  describe('useAllSchedules', () => {
+    test('data is undefined', () => {
+      const data = undefined
+      const error = undefined
+      ;(useSWR as jest.Mock).mockImplementationOnce(() => ({ data, error }))
+      const { result } = renderHook(() => useAllSchedules(geyserAddress))
+      expect(result.current.data).toBe(data)
+    })
+
+    test('success fetching data', () => {
+      const error = undefined
+      ;(useSWR as jest.Mock).mockImplementationOnce(() => ({
+        data: [
+          {
+            initialLockedShares: '100000',
+            unlockedShares: '100000',
+            lastUnlockTimestampSec: '100000',
+            endAtSec: '100000',
+            durationSec: '100000'
+          }
+        ],
+        error
+      }))
+      const { result } = renderHook(() => useAllSchedules(geyserAddress))
+      expect(result.current.data).toEqual([
+        {
+          initialLockedShares: '100000',
+          unlockedShares: '100000',
+          lastUnlockTimestampSec: '100000',
+          endAtSec: '100000',
+          durationSec: '100000'
+        }
+      ])
+    })
+
+    test('failure fetching data', () => {
+      const data = undefined
+      const errorMessage = 'error'
+      const error = new Error(errorMessage)
+      ;(useSWR as jest.Mock).mockImplementation(() => ({ data, error }))
+      const { result } = renderHook(() => useAllSchedules(geyserAddress))
+      expect(result.current.error).toBe(error)
+      expect(result.current.error?.message).toBe(errorMessage)
+    })
+  })
+
   describe('useFinalUnlockSchedules', () => {
     test('data is undefined', () => {
       const data = undefined
@@ -248,21 +296,30 @@ describe('geyser hooks', () => {
     test('success fetching data', () => {
       const error = undefined
       ;(useSWR as jest.Mock).mockImplementationOnce(() => ({
-        data: {
-          initialLockedShares: '100000',
-          unlockedShares: '100000',
-          lastUnlockTimestampSec: '100000',
-          endAtSec: '100000',
-          durationSec: '100000'
-        },
+        data: [
+          {
+            initialLockedShares: '100000',
+            unlockedShares: '100000',
+            lastUnlockTimestampSec: '100000',
+            endAtSec: '100000',
+            durationSec: '100000'
+          },
+          {
+            initialLockedShares: '200000',
+            unlockedShares: '200000',
+            lastUnlockTimestampSec: '200000',
+            endAtSec: '100001',
+            durationSec: '100000'
+          }
+        ],
         error
       }))
       const { result } = renderHook(() => useFinalUnlockSchedules(geyserAddress))
       expect(result.current.data).toEqual({
-        initialLockedShares: '100000',
-        unlockedShares: '100000',
-        lastUnlockTimestampSec: '100000',
-        endAtSec: '100000',
+        initialLockedShares: '200000',
+        unlockedShares: '200000',
+        lastUnlockTimestampSec: '200000',
+        endAtSec: '100001',
         durationSec: '100000'
       })
     })
@@ -273,6 +330,58 @@ describe('geyser hooks', () => {
       const error = new Error(errorMessage)
       ;(useSWR as jest.Mock).mockImplementation(() => ({ data, error }))
       const { result } = renderHook(() => useFinalUnlockSchedules(geyserAddress))
+      expect(result.current.error).toBe(error)
+      expect(result.current.error?.message).toBe(errorMessage)
+    })
+  })
+
+  describe('entirePeriod', () => {
+    test('data is undefined', () => {
+      const data = undefined
+      const error = undefined
+      ;(useSWR as jest.Mock).mockImplementationOnce(() => ({ data, error }))
+      const { result } = renderHook(() => useEntirePeriod(geyserAddress))
+      expect(result.current.data).toBe(data)
+    })
+
+    test('success fetching data', () => {
+      const error = undefined
+      ;(useSWR as jest.Mock).mockImplementationOnce(() => ({
+        data: [
+          {
+            initialLockedShares: '100000',
+            unlockedShares: '100000',
+            lastUnlockTimestampSec: '100000',
+            endAtSec: '100000',
+            durationSec: '50000'
+          },
+          {
+            initialLockedShares: '200000',
+            unlockedShares: '200000',
+            lastUnlockTimestampSec: '200000',
+            endAtSec: '110001',
+            durationSec: '110000'
+          },
+          {
+            initialLockedShares: '300000',
+            unlockedShares: '300000',
+            lastUnlockTimestampSec: '300000',
+            endAtSec: '120001',
+            durationSec: '120000'
+          }
+        ],
+        error
+      }))
+      const { result } = renderHook(() => useEntirePeriod(geyserAddress))
+      expect(result.current.data).toEqual(70001)
+    })
+
+    test('failure fetching data', () => {
+      const data = undefined
+      const errorMessage = 'error'
+      const error = new Error(errorMessage)
+      ;(useSWR as jest.Mock).mockImplementation(() => ({ data, error }))
+      const { result } = renderHook(() => useEntirePeriod(geyserAddress))
       expect(result.current.error).toBe(error)
       expect(result.current.error?.message).toBe(errorMessage)
     })
@@ -398,11 +507,26 @@ describe('geyser hooks', () => {
 
   describe('useIsAlreadyFinished', () => {
     test('success fetching data', async () => {
-      ;(finalUnlockSchedules as jest.Mock).mockImplementation(() =>
-        Promise.resolve({
-          endAtSec: getUTC() + 1
-        })
-      )
+      const error = undefined
+      ;(useSWR as jest.Mock).mockImplementation(() => ({
+        data: [
+          {
+            initialLockedShares: '100000',
+            unlockedShares: '100000',
+            lastUnlockTimestampSec: '100000',
+            endAtSec: getUTC() + 0,
+            durationSec: '100000'
+          },
+          {
+            initialLockedShares: '200000',
+            unlockedShares: '200000',
+            lastUnlockTimestampSec: '200000',
+            endAtSec: getUTC() + 1,
+            durationSec: '100000'
+          }
+        ],
+        error
+      }))
       const { result, waitForNextUpdate } = renderHook(() =>
         useIsAlreadyFinished(useState<boolean>(false), geyserAddress)
       )

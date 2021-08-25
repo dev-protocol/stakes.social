@@ -79,7 +79,7 @@ export const totalStakedFor = async (client: Web3, address: string, geyserAddres
       : Promise.resolve(''))(getContract(client, geyserAddress)).then(toEVMBigNumber)
 }
 
-type UnlockSchedule = {
+export type UnlockSchedule = {
   initialLockedShares: string
   unlockedShares: string
   lastUnlockTimestampSec: string
@@ -134,18 +134,13 @@ export const totalUnlocked = async (client: Web3, geyserAddress: string): Promis
       : Promise.resolve(''))(getContract(client, geyserAddress)).then(toEVMBigNumber)
 }
 
-export const finalUnlockSchedules = async (
-  client: Web3,
-  geyserAddress: string
-): Promise<undefined | UnlockSchedule> => {
+export const allSchedules = async (client: Web3, geyserAddress: string): Promise<undefined | UnlockSchedule[]> => {
   const count = await unlockScheduleCount(client, geyserAddress)
   const schedules = await Promise.all(
     new Array(count).fill(0).map((_, index) => unlockSchedules(client, index, geyserAddress))
   )
 
-  return schedules.length > 0
-    ? schedules.reduce((a, c) => (toBigNumber(a.endAtSec).isGreaterThan(c.endAtSec) ? a : c))
-    : undefined
+  return schedules.length > 0 ? schedules : undefined
 }
 
 export const unstakeQuery = async (client: Web3, amount: BigNumber, geyserAddress: string): Promise<BigNumber> => {
