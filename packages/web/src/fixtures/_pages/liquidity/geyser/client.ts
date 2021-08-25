@@ -2,7 +2,7 @@ import { abi } from './abi'
 import Web3 from 'web3'
 import { Contract, EventData } from 'web3-eth-contract'
 import { createContract } from 'src/fixtures/utility/contract-client'
-import { toBigNumber, toEVMBigNumber } from 'src/fixtures/utility'
+import { toEVMBigNumber } from 'src/fixtures/utility'
 import { utils } from '@devprotocol/dev-kit'
 import BigNumber from 'bignumber.js'
 
