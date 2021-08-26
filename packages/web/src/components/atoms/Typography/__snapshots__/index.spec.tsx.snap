@@ -4,7 +4,7 @@ exports[`Title Snapshot Body1 1`] = `
 <body>
   <div>
     <span
-      class="ant-typography sc-1w8sy4l-4 eEPUGg"
+      class="ant-typography sc-1w8sy4l-4 eCvLbJ"
     >
       body1
     </span>
@@ -16,7 +16,7 @@ exports[`Title Snapshot H1 1`] = `
 <body>
   <div>
     <h1
-      class="sc-1w8sy4l-0 bSRBrF"
+      class="sc-1w8sy4l-0 gLtrfo"
     >
       h1
     </h1>
@@ -28,7 +28,7 @@ exports[`Title Snapshot H2 1`] = `
 <body>
   <div>
     <h2
-      class="sc-1w8sy4l-1 jvprjE"
+      class="sc-1w8sy4l-1 jvZYzV"
     >
       h2
     </h2>
@@ -40,7 +40,7 @@ exports[`Title Snapshot H3 1`] = `
 <body>
   <div>
     <h3
-      class="sc-1w8sy4l-2 gozZrD"
+      class="sc-1w8sy4l-2 becLfm"
     >
       h3
     </h3>
@@ -52,7 +52,7 @@ exports[`Title Snapshot H4 1`] = `
 <body>
   <div>
     <h4
-      class="sc-1w8sy4l-3 cBCfKG"
+      class="sc-1w8sy4l-3 eMXnhL"
     >
       h4
     </h4>
