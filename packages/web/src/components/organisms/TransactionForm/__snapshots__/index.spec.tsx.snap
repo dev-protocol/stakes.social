@@ -4,7 +4,7 @@ exports[`TransactionForm Snapshot 1`] = `
 <body>
   <div>
     <div
-      class="sc-1e3xeyk-0 ervQfn"
+      class="sc-1e3xeyk-0 jkQoea"
     >
       <div
         class="sc-1xz1jp7-0"
@@ -19,7 +19,7 @@ exports[`TransactionForm Snapshot 1`] = `
            available
         </p>
         <div
-          class="sc-1xz1jp7-1 kQRdcG"
+          class="sc-1xz1jp7-1 gmOduz"
         >
           <button
             class="ant-btn ant-btn-primary ant-btn-lg"
@@ -44,7 +44,7 @@ exports[`TransactionForm Snapshot 1`] = `
            available
         </p>
         <div
-          class="sc-1xz1jp7-1 kQRdcG"
+          class="sc-1xz1jp7-1 gmOduz"
         >
           <button
             class="ant-btn ant-btn-primary ant-btn-lg"
