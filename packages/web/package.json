@@ -23,7 +23,7 @@
     "@quentin-sommer/react-useragent": "3.1.0",
     "@svgr/webpack": "5.5.0",
     "@types/react-select": "4.0.17",
-    "@walletconnect/web3-provider": "1.6.4",
+    "@walletconnect/web3-provider": "1.6.5",
     "antd": "4.16.13",
     "axios": "0.21.1",
     "bignumber.js": "9.0.1",
