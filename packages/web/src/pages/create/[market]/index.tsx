@@ -1,6 +1,6 @@
 import React from 'react'
 import { useRouter } from 'next/router'
-import { AuthForm } from '../../../fixtures/_pages/Tokenization/AuthForm'
+import { AuthForm } from 'src/components/_pages/create/[market]/AuthForm'
 import { Footer } from 'src/components/organisms/Footer'
 import { Header } from 'src/components/organisms/Header'
 import { Headline } from 'src/components/atoms/Headline'
@@ -37,12 +37,14 @@ const ResponsiveContainer = styled(Container)`
 
 type DisclaimerProps = {
   projectName: string
+  tokenName: string
   tokenSymbol: string
   personalAccessToken: string
   onFormDataChange: React.Dispatch<
     React.SetStateAction<
       | {
           projectName: string
+          tokenName: string
           tokenSymbol: string
           personalAccessToken: string
         }
@@ -149,6 +151,7 @@ const Etherscan = styled(ButtonWithGradient)`
 
 const TokenizationDisclaimer = ({
   projectName,
+  tokenName,
   tokenSymbol,
   personalAccessToken,
   onFormDataChange,
@@ -164,45 +167,56 @@ const TokenizationDisclaimer = ({
     const key = 'tokenization'
     message.loading({ content: 'now tokenizing...', duration: 0, key })
 
-    const authRequestData: string[] = await (async () => {
+    const authRequestData: [string, string] | undefined = await (async () => {
       // If the target market is not NpmMarket, it is the GitHubMarket with Khaos.
       // TODO: Needs dynamically switch to use Khaos or not use Khaos by target Market
 
       const repository: string = projectName
 
       // Create a public signature from the user's signature and the entered PAT.
-      const khaos = await postSignGitHubMarketAssetHandler(repository, personalAccessToken)
+      const khaos = await postSignGitHubMarketAssetHandler(repository, personalAccessToken).catch(() => undefined)
+      console.log({ khaos })
+      if (!khaos) {
+        message.error({ content: 'Failed to generate Khaos Public Signature' })
+        return
+      }
       message.success({ content: 'Successful creation of public signature by Khaos' })
-      return [repository, khaos.publicSignature || '']
+      return [repository, khaos.publicSignature || ''] as [string, string]
     })()
+    if (!authRequestData) {
+      message.error({ content: 'Failed to generate credentials' })
+      return
+    }
 
     // Send Ethereum transaction and create new Property Tokens, aka Creator Tokens, and starts authentication flow.
-    const results = await createAndAuthenticate(projectName, tokenSymbol, market, authRequestData)
-    if (results) {
-      // TODO: Function to be called to tokenize based input
-      // New Property Tokens have been created.
-      /**
-       * results interfaces
-       *
-       * property - created new Property address
-       * transaction - Ethereum transaction information
-       * waitForAuthentication - Promise that expects resolve by completing the authentication
-       */
-      message.success({ content: `success creation your tokens: ${results.property}` })
-      message.loading({ content: 'now authenticating...', duration: 0, key })
-
-      // Wait for completing the authentication
-      const metricsAddress = await results.waitForAuthentication()
-      message.success({ content: 'completed tokenization!', key })
-
-      // Completed the all flow
-      // setProperty(results.property)
-      onMetricsChange(metricsAddress)
-      onHeaderChange('Succesfully Tokenized Your Project')
-      onSubHeaderChange(
-        'Please wait for your project to become available on Stakes Social. This can take several minutes.'
-      )
+    const results = await createAndAuthenticate(tokenName, tokenSymbol, market, authRequestData)
+    if (!results) {
+      message.error({ content: 'Failed to create a transaction' })
+      return
     }
+    // TODO: Function to be called to tokenize based input
+    // New Property Tokens have been created.
+    /**
+     * results interfaces
+     *
+     * property - created new Property address
+     * transaction - Ethereum transaction information
+     * waitForAuthentication - Promise that expects resolve by completing the authentication
+     */
+    message.success({ content: `success creation your tokens: ${results.property}` })
+    message.loading({ content: 'now authenticating...', duration: 0, key })
+
+    // Wait for completing the authentication
+    const metricsAddress = await results.waitForAuthentication()
+    message.success({ content: 'completed tokenization!', key })
+
+    // Completed the all flow
+    // setProperty(results.property)
+    onMetricsChange(metricsAddress)
+    onHeaderChange('Succesfully Tokenized Your Project')
+    onSubHeaderChange(
+      'Please wait for your project to become available on Stakes Social. This can take several minutes.'
+    )
   }
 
   const handleCancel = () => {
@@ -219,6 +233,10 @@ const TokenizationDisclaimer = ({
       <Row>
         <Span>Project Name:</Span>
         <Span>{projectName}</Span>
+      </Row>
+      <Row>
+        <Span>Token Name:</Span>
+        <Span>{tokenName}</Span>
       </Row>
       <Row>
         <Span>Token Symbol:</Span>
@@ -272,7 +290,7 @@ const AuthenticateNewAsset = (_: Props) => {
   const [subHeader, setSubHeader] = useState('Create an asset or authenticate an existing pool.')
   const [, market] = getPath(useRouter().asPath)
   const [formData, setFormData] = useState<
-    { projectName: string; tokenSymbol: string; personalAccessToken: string } | undefined
+    { projectName: string; tokenName: string; tokenSymbol: string; personalAccessToken: string } | undefined
   >(undefined)
   const [metrics, setMetrics] = useState<string>('')
 
@@ -301,6 +319,7 @@ const AuthenticateNewAsset = (_: Props) => {
             onHeaderChange={setHeader}
             onSubHeaderChange={setSubHeader}
             projectName={formData.projectName}
+            tokenName={formData.tokenName}
             tokenSymbol={formData.tokenSymbol}
             personalAccessToken={formData.personalAccessToken}
             onMetricsChange={setMetrics}

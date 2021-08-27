@@ -3,6 +3,7 @@ import Web3Modal from 'web3modal'
 import { AbiItem } from 'web3-utils'
 import { message } from 'antd'
 import { WEB3_PROVIDER_ENDPOINT } from 'src/fixtures/wallet/constants'
+import { AbstractProvider, provider } from 'web3-core'
 
 const cache: WeakMap<NonNullable<Web3>, string> = new WeakMap()
 
@@ -39,6 +40,11 @@ export const connectWallet = async (setWeb3Handler: Function, web3Modal?: Web3Mo
     return account
   }
   return false
+}
+
+export const disconnectWallet = (setWeb3Handler: Function, web3Modal?: Web3Modal) => {
+  web3Modal?.clearCachedProvider()
+  setWeb3Handler(undefined)
 }
 
 export const getAccountAddress = async (web3?: Web3) => {
@@ -166,3 +172,42 @@ export const getBlock = async (blockNumber: number) => {
   }
   return undefined
 }
+
+export const isAbstractProvider = (prov?: provider): prov is AbstractProvider =>
+  Boolean(prov && typeof prov !== 'string' && typeof (prov as any).request === 'function')
+
+export const createHandleAddClick =
+  ({
+    provider,
+    tokenAddress,
+    tokenSymbol,
+    tokenDecimals = 18,
+    tokenImage
+  }: {
+    provider: provider
+    tokenAddress: string
+    tokenSymbol: string
+    tokenDecimals?: number
+    tokenImage?: string
+  }) =>
+  async () => {
+    isAbstractProvider(provider) &&
+      // @ts-ignore
+      (await provider
+        .request({
+          method: 'wallet_watchAsset',
+          params: {
+            type: 'ERC20', // Initially only supports ERC20, but eventually more!
+            options: {
+              address: tokenAddress, // The address that the token is at.
+              symbol: tokenSymbol, // A ticker symbol or shorthand, up to 5 chars.
+              decimals: tokenDecimals, // The number of decimals in the token
+              image: tokenImage // A string url of the token logo
+            }
+          }
+        })
+        .catch(err => {
+          console.log('SOMETHING HAPPENED: ', err)
+          message.error({ content: err.message, key: 'addTokenToWallet' })
+        }))
+  }

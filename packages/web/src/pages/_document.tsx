@@ -1,6 +1,7 @@
 import React from 'react'
 import Document, { Html, Head, Main, NextScript, DocumentContext } from 'next/document'
 import { ServerStyleSheet } from 'styled-components'
+import { GA_ID } from '../lib/gtag'
 
 export default class extends Document {
   static getInitialProps = async (ctx: DocumentContext) => {
@@ -28,6 +29,8 @@ export default class extends Document {
       <Html lang="ja">
         <Head>
           <meta charSet="utf-8" />
+          <link href="/fonts/style.css" rel="stylesheet" />
+          <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=IBM+Plex+Mono"></link>
           <link rel="stylesheet" href="https://use.typekit.net/owg1uzy.css" />
           <link rel="apple-touch-icon" sizes="57x57" href="//asset.stakes.social/apple-icon-57x57.png" />
           <link rel="apple-touch-icon" sizes="60x60" href="//asset.stakes.social/apple-icon-60x60.png" />
@@ -46,6 +49,50 @@ export default class extends Document {
           <meta name="msapplication-TileColor" content="#2F80ED" />
           <meta name="msapplication-TileImage" content="//asset.stakes.social/ms-icon-144x144.png" />
           <meta name="theme-color" content="#2F80ED" />
+          {/* Google Analytics */}
+          <script async src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`} />
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `
+                  window.dataLayer = window.dataLayer || [];
+                  function gtag(){dataLayer.push(arguments);}
+                  gtag('js', new Date());
+                  gtag('config', '${GA_ID}', {
+                    page_path: window.location.pathname,
+                  });`
+            }}
+          />
+          {/* cookieconsent */}
+          <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.css"
+            type="text/css"
+          />
+          <script
+            async
+            src="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.js"
+            data-cfasync="false"
+          ></script>
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `
+                  window.addEventListener("load",async () => {
+                      window.cookieconsent.initialise({
+                          "palette": {
+                              "popup": {
+                                  "background": "#fafafa"
+                              },
+                              "button": {
+                                  "background": "#000000",
+                                  "text": "#ffffff"
+                              }
+                          },
+                          "showLink": false,
+                          "position": "bottom-right"
+                      });
+                  });`
+            }}
+          />
         </Head>
         <body>
           <Main />

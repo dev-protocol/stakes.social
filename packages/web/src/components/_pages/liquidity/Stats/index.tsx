@@ -18,12 +18,12 @@ const Wrapper = styled.div`
   grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
 `
 
-export const Stats = () => {
-  const { data: totalRewards } = useTotalRewards()
-  const { data: totalStaked } = useTotalStaked()
-  const { data: accounting } = useUpdateAccounting()
+export const Stats = (geyserAddress: string) => {
+  const { data: totalRewards } = useTotalRewards(geyserAddress)
+  const { data: totalStaked } = useTotalStaked(geyserAddress)
+  const { data: accounting } = useUpdateAccounting(geyserAddress)
   const { data: theGraph } = useTheGraph(totalStaked?.toString())
-  const { data: finalUnlockSchedules } = useFinalUnlockSchedules()
+  const { data: finalUnlockSchedules } = useFinalUnlockSchedules(geyserAddress)
   const totalDepositsUSD =
     totalStaked && theGraph && theGraph.data.pair
       ? toNaturalNumber(totalStaked).div(theGraph.data.pair.totalSupply).times(theGraph.data.pair.reserveUSD)

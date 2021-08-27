@@ -4,10 +4,11 @@ exports[`TransactForm Snapshot 1`] = `
 <body>
   <div>
     <div
-      class="sc-1d8aayd-1 lldfxv"
+      class="sc-1d8aayd-1 bcBbeW"
+      style="opacity: 1;"
     >
       <button
-        class="ant-btn ant-btn-lg sc-1ho13tb-0 sc-1d8aayd-2 hInnRf VzRMQ"
+        class="ant-btn ant-btn-lg sc-1ho13tb-0 sc-1d8aayd-2 cpPLtK gRTWBx"
         type="button"
       />
     </div>

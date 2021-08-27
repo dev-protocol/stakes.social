@@ -4,13 +4,14 @@ exports[`Withdraw Snapshot 1`] = `
 <body>
   <div>
     <div
-      class="sc-89297o-0 LrdOg"
+      class="sc-89297o-0 etzBlt"
     >
       <div
-        class="sc-1d8aayd-1 lldfxv"
+        class="sc-1d8aayd-1 bcBbeW"
+        style="opacity: 1;"
       >
         <span
-          class="ant-input-group-wrapper ant-input-group-wrapper-lg ant-input-search ant-input-search-large ant-input-search-with-button sc-1d8aayd-0 fnjsag"
+          class="ant-input-group-wrapper ant-input-group-wrapper-lg ant-input-search ant-input-search-large ant-input-search-with-button sc-1d8aayd-0 fanYmx"
         >
           <span
             class="ant-input-wrapper ant-input-group"
@@ -28,7 +29,7 @@ exports[`Withdraw Snapshot 1`] = `
                 class="ant-input-suffix"
               >
                 <button
-                  class="sc-1ttu0x8-0 ibloSD"
+                  class="sc-1ttu0x8-0 kmiVBa"
                 >
                   DEV
                 </button>
@@ -50,10 +51,10 @@ exports[`Withdraw Snapshot 1`] = `
         </span>
       </div>
       <div
-        class="sc-1al8l63-1 beJJRp"
+        class="sc-1al8l63-1 bplZGk"
       >
         <div
-          class="sc-1al8l63-0 iPwXaw"
+          class="sc-1al8l63-0 gZPJKN"
         >
           <span
             aria-label="info-circle"

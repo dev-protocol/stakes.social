@@ -9,6 +9,7 @@ import ReactMarkdown from 'react-markdown'
 import { useClipboard } from 'use-clipboard-copy'
 import { CopyOutlined, CheckCircleTwoTone } from '@ant-design/icons'
 import { useProvider } from 'src/fixtures/wallet/hooks'
+import ShareTweet from '../../atoms/ShareButtons'
 
 const ResponsivePropertyAddressFrame = styled.div`
   margin: 1rem auto;
@@ -102,6 +103,30 @@ const FlexRow = styled.div`
   }
 `
 
+const IconContainer = styled.div`
+  svg {
+    width: 16px;
+    height: auto;
+  }
+  @media (min-width: 768px) {
+    margin-left: 2px;
+  }
+`
+
+const CopyContainer = styled.div`
+  display: flex;
+
+  @media (min-width: 768px) {
+    justify-content: center;
+    align-items: center;
+    p {
+      height: 20px;
+      margin-left: 10px;
+      margin-bottom: 0;
+    }
+  }
+`
+
 interface Props {
   propertyAddress: string
   apy?: BigNumber
@@ -109,37 +134,13 @@ interface Props {
 }
 
 export const CopyBadge = ({ propertyAddress }: { propertyAddress: string }) => {
-  const badge = `[![Stake to support us](https://badge.devprotocol.xyz/${propertyAddress})](https://stakes.social/${propertyAddress})`
+  const badge = `[![Stake to support us](https://badge.devprotocol.xyz/${propertyAddress}/descriptive)](https://stakes.social/${propertyAddress})`
   const { copied, copy } = useClipboard({
     copiedTimeout: 1000
   })
   const handleCopy = () => {
     copy(badge)
   }
-
-  const IconContainer = styled.div`
-    svg {
-      width: 16px;
-      height: auto;
-    }
-    @media (min-width: 768px) {
-      margin-left: 2px;
-    }
-  `
-
-  const CopyContainer = styled.div`
-    display: flex;
-
-    @media (min-width: 768px) {
-      justify-content: center;
-      align-items: center;
-      p {
-        height: 20px;
-        margin-left: 10px;
-        margin-bottom: 0;
-      }
-    }
-  `
 
   return (
     <CopyContainer>
@@ -163,19 +164,20 @@ export const PropertyHeader = ({ propertyAddress, apy, creators }: Props) => {
     }
   })
   const { data: dataAuthor } = useGetAuthorInformation(data?.property_authentication?.[0]?.property_meta?.author)
-  const isSelf = dataAuthor?.address == accountAddress
+  const isNotSelf = dataAuthor?.address !== accountAddress
+  const propertyTitle = data?.property_authentication?.[0]?.authentication_id
+    ? data?.property_authentication?.[0]?.authentication_id
+    : propertyAddress
 
   return (
     <ResponsivePropertyAddressFrame>
       <HeaderContainer>
         <Header>
-          {data?.property_authentication?.[0]?.authentication_id
-            ? `${data?.property_authentication?.[0]?.authentication_id}'s Pool`
-            : `${propertyAddress} Pool`}
+          {data?.property_authentication?.[0]?.authentication_id ? `${propertyTitle}'s Pool` : `${propertyTitle} Pool`}
         </Header>
-        {isSelf && <CopyBadge propertyAddress={propertyAddress} />}
+        {dataAuthor && !isNotSelf && <CopyBadge propertyAddress={propertyAddress} />}
       </HeaderContainer>
-
+      <ShareTweet title={propertyTitle}></ShareTweet>
       <SubHeader>
         <ApyContainer>
           <ResponsiveSubheaderSection>

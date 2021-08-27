@@ -1,16 +1,26 @@
 import Web3 from 'web3'
 import { EventData } from 'web3-eth-contract'
-import { contractFactory } from '@devprotocol/dev-kit'
+import { contractFactory, DevkitContract } from '@devprotocol/dev-kit'
 import { getContractAddress } from './get-contract-address'
-import { client as devClient } from '@devprotocol/dev-kit'
+import { client as devClient, utils } from '@devprotocol/dev-kit'
 import BigNumber from 'bignumber.js'
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { CreateCreateAndAuthenticateCaller } from '@devprotocol/dev-kit/esm/property-factory/createAndAuthenticate'
+import { PropertyFactoryContract } from '@devprotocol/dev-kit'
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { UnwrapFunc } from '../utility'
+import { metricsAbi, metricsFactoryAbi, devAbi, lockupAbi, propertyFactoryAbi, withdrawAbi } from './abi'
 
+const { execute, watchEvent } = utils
+
+const cache: WeakMap<Web3, DevkitContract> = new WeakMap()
 const newClient = (web3: Web3) => {
-  return contractFactory(web3.currentProvider)
+  const fromCache = cache.get(web3)
+  if (fromCache) {
+    return fromCache
+  }
+  const contracts = contractFactory(web3.currentProvider)
+  cache.set(web3, contracts)
+  return contracts
 }
 
 export const getRewardsAmount = async (web3: Web3, propertyAddress: string) => {
@@ -44,7 +54,18 @@ export const getMyHolderAmount = async (web3: Web3, propertyAddress: string, acc
   if (client && accountAddress) {
     return client
       .withdraw(await getContractAddress(client, 'withdraw'))
-      .calculateWithdrawableAmount(propertyAddress, accountAddress)
+      .calculateRewardAmount(propertyAddress, accountAddress)
+  }
+  return undefined
+}
+
+export const getTreasuryAmount = async (web3: Web3, propertyAddress: string) => {
+  const client = newClient(web3)
+  const treasuryAddress = await client.policy(await getContractAddress(client, 'policy')).treasury()
+  if (client && treasuryAddress) {
+    return client
+      .withdraw(await getContractAddress(client, 'withdraw'))
+      .calculateWithdrawableAmount(propertyAddress, treasuryAddress)
   }
   return undefined
 }
@@ -73,16 +94,42 @@ export const withdrawHolderAmount = async (web3: Web3, propertyAddress: string) 
   return client.withdraw(await getContractAddress(client, 'withdraw')).withdraw(propertyAddress)
 }
 
+export const getEstimateGas4WithdrawHolderAmount = async (web3: Web3, propertyAddress: string, from: string) => {
+  const client = newClient(web3)
+  if (!client) throw new Error(`No wallet`)
+  const contract = new web3.eth.Contract([...withdrawAbi], await getContractAddress(client, 'withdraw'), {})
+  return new BigNumber(await contract.methods['withdraw'](propertyAddress).estimateGas({ from }))
+}
+
 export const withdrawStakingAmount = async (web3: Web3, propertyAddress: string, amount: BigNumber) => {
   const client = newClient(web3)
   if (!client) throw new Error(`No wallet`)
   return client.lockup(await getContractAddress(client, 'lockup')).withdraw(propertyAddress, amount.toFixed())
 }
 
+export const getEstimateGas4WithdrawStakingAmount = async (
+  web3: Web3,
+  propertyAddress: string,
+  amount: string,
+  from: string
+) => {
+  const client = newClient(web3)
+  if (!client) throw new Error(`No wallet`)
+  const contract = new web3.eth.Contract([...lockupAbi], await getContractAddress(client, 'lockup'), {})
+  return new BigNumber(await contract.methods['withdraw'](propertyAddress, amount).estimateGas({ from }))
+}
+
 export const stakeDev = async (web3: Web3, propertyAddress: string, amount: string) => {
   const client = newClient(web3)
   if (!client) throw new Error(`No wallet`)
   return client.dev(await getContractAddress(client, 'token')).deposit(propertyAddress, amount)
+}
+
+export const getEstimateGas4StakeDev = async (web3: Web3, propertyAddress: string, amount: string, from: string) => {
+  const client = newClient(web3)
+  if (!client) throw new Error(`No wallet`)
+  const contract = new web3.eth.Contract([...devAbi], await getContractAddress(client, 'token'), {})
+  return new BigNumber(await contract.methods['deposit'](propertyAddress, amount).estimateGas({ from }))
 }
 
 export const calculateMaxRewardsPerBlock = async (web3: Web3) => {
@@ -102,6 +149,25 @@ export const createProperty = async (web3: Web3, name: string, symbol: string, a
     return 'Dummy:0xd5f3c1bA399E000B1a76210d7dB12bb5eefA8e47'
   }
   return undefined
+}
+
+export const getEstimateGas4CreateProperty = async (
+  web3: Web3,
+  name: string,
+  symbol: string,
+  author: string,
+  from: string
+) => {
+  const client = newClient(web3)
+  if (!client) {
+    return undefined
+  }
+  const contract = new web3.eth.Contract(
+    [...propertyFactoryAbi],
+    await getContractAddress(client, 'propertyFactory'),
+    {}
+  )
+  return new BigNumber(await contract.methods['create'](name, symbol, author).estimateGas({ from }))
 }
 
 export const marketScheme = async (web3: Web3, marketAddress: string) => {
@@ -144,7 +210,7 @@ export const createAndAuthenticate = async (
    * During development, you can check the operation using the commented out code below.
    * If you want to use these, comment out the return statement above.
    */
-  // return new Promise<UnwrapFunc<ReturnType<CreateCreateAndAuthenticateCaller>>>(resolve => {
+  // return new Promise<UnwrapFunc<PropertyFactoryContract['createAndAuthenticate']>>(resolve => {
   //   setTimeout(
   //     () =>
   //       resolve({
@@ -158,6 +224,26 @@ export const createAndAuthenticate = async (
   //     1000 * 15
   //   )
   // })
+}
+
+export const getEstimateGas4CreateAndAuthenticate = async (
+  web3: Web3,
+  name: string,
+  symbol: string,
+  marketAddress: string,
+  args: string[],
+  from: string
+) => {
+  const client = newClient(web3)
+  if (!client) throw new Error(`No wallet`)
+  const contract = new web3.eth.Contract(
+    [...propertyFactoryAbi],
+    await getContractAddress(client, 'propertyFactory'),
+    {}
+  )
+  return new BigNumber(
+    await contract.methods['createAndAuthenticate'](name, symbol, marketAddress, ...args).estimateGas({ from })
+  )
 }
 
 export const totalSupply = async (web3: Web3) => {
@@ -200,7 +286,15 @@ export const propertyAuthor = async (web3: Web3, propertyAddress: string) => {
 export const propertyName = async (web3: Web3, propertyAddress: string): Promise<undefined | string> => {
   const client = newClient(web3)
   if (client) {
-    return client.property(propertyAddress).contract().methods.name().call()
+    return client.property(propertyAddress).name()
+  }
+  return undefined
+}
+
+export const propertySymbol = async (web3: Web3, propertyAddress: string): Promise<undefined | string> => {
+  const client = newClient(web3)
+  if (client) {
+    return client.property(propertyAddress).symbol()
   }
   return undefined
 }
@@ -234,4 +328,33 @@ export const balanceOfProperty = async (web3: Web3, propertyAddress: string, acc
     return client.property(propertyAddress).contract().methods.balanceOf(accountAddress).call()
   }
   return undefined
+}
+
+const getMetricsProperty = async (address: string, client: Web3): Promise<string> =>
+  execute({
+    contract: new client.eth.Contract([...metricsAbi], address),
+    method: 'property'
+  })
+
+export const waitForCreateMetrics = async (web3: Web3, propertyAddress: string): Promise<string> => {
+  const client = newClient(web3)
+  const [fromBlock, metricsFactoryAddress] = await Promise.all([
+    web3.eth.getBlockNumber(),
+    getContractAddress(client, 'metricsFactory')
+  ])
+  return new Promise((resolve, reject) => {
+    watchEvent({
+      fromBlock,
+      contract: new web3.eth.Contract([...metricsFactoryAbi], metricsFactoryAddress),
+      resolver: async e =>
+        (metricsAddress =>
+          metricsAddress
+            ? getMetricsProperty(metricsAddress, web3)
+                .then(property => (property === propertyAddress ? true : false))
+                .catch(reject)
+            : false)(e.event === 'Create' ? (e.returnValues._metrics as string) : undefined)
+    })
+      .then(res => resolve(res.returnValues._metrics as string))
+      .catch(reject)
+  })
 }

@@ -1,11 +1,11 @@
-import React, { useMemo } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import { useQuery } from '@apollo/client'
 import getTopStakersOfPropertyQuery from './query/getTopStakersOfProperty'
 import { Avatar } from 'src/components/molecules/Avatar'
 import styled, { css } from 'styled-components'
-import { useEffect } from 'react'
 import { useListTopStakersAccountLazyQuery } from '@dev/graphql'
 import { useGetAccount, useGetPropertySettingsByProperty } from 'src/fixtures/dev-for-apps/hooks'
+import { useENS } from 'src/fixtures/ens/hooks'
 import { Spin } from 'antd'
 import Link from 'next/link'
 
@@ -67,16 +67,23 @@ const StakerSection = styled.div<{ isCreator?: Boolean }>`
 const formatter = new Intl.NumberFormat('en-US')
 
 const Staker = ({ accountAddress, value }: { accountAddress: string; value: number }) => {
+  const [ens, setENS] = useState('')
   const { data } = useGetAccount(accountAddress)
   const isCreator = !!data
-
+  const { getENS } = useENS()
+  useEffect(() => {
+    const fetchENS = async () => {
+      await getENS(accountAddress || '').then((o?: string) => setENS(o || ''))
+    }
+    fetchENS()
+  }, [accountAddress, getENS])
   return (
     <>
       {isCreator ? (
         <Link href={`/author/${accountAddress}`} passHref>
           <StakerSection isCreator={isCreator}>
             <Avatar accountAddress={accountAddress} size={'100'} />
-            <AccountAddress>{data?.name || accountAddress}</AccountAddress>
+            <AccountAddress>{data?.name || ens || accountAddress}</AccountAddress>
             <span>{`${formatter.format(parseInt((value / Math.pow(10, 18)).toFixed(0)))}`}</span>
           </StakerSection>
         </Link>
@@ -106,10 +113,8 @@ const TopStakers = ({ authorAddress, propertyAddress }: TopStakersProps) => {
     skip: !!authorAddress || !propertyAddress
   })
 
-  const [
-    fetchTopCreatorStakers,
-    { data: topCreatorStakersData, loading: isCreatorStakingLoading }
-  ] = useListTopStakersAccountLazyQuery()
+  const [fetchTopCreatorStakers, { data: topCreatorStakersData, loading: isCreatorStakingLoading }] =
+    useListTopStakersAccountLazyQuery()
 
   useEffect(() => {
     if (authorAddress) {

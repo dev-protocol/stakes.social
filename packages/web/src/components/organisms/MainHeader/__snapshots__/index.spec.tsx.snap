@@ -3,50 +3,22 @@
 exports[`Banner Snapshot 1`] = `
 <body>
   <div>
-    <div
-      class="sc-3hjy97-5 fRmgQW"
+    <a
+      href="https://onboarding-sponsors.devprotocol.xyz/"
+      rel="noreferrer noopener"
+      target="_blank"
     >
       <div
-        style="max-width: 1048px; margin-right: auto; margin-left: auto; background: black;"
+        class="sc-3hjy97-0 XKRcf"
       >
-        <div
-          class="sc-3hjy97-0 gMLKYy"
-        >
-          <div
-            class="sc-3hjy97-1 bjdNFE"
-          >
-            <span
-              class="sc-3hjy97-2 fNJzFm"
-              color="white"
-            >
-              A Sustainable Economy
-            </span>
-            <span
-              class="sc-3hjy97-2 fNJzFm"
-              color="white"
-            >
-              for Open Assets
-            </span>
-            <a
-              class="sc-3hjy97-4 gpaQko"
-              href="http://docs.devprtcl.com/"
-              rel="noopener noreferrer"
-              target="_blank"
-            >
-              Read More
-            </a>
-          </div>
-          <div
-            class="sc-3hjy97-3 jrMPqU"
-          >
-            <img
-              class="sc-3hjy97-6 VhWuY"
-              src="https://res.cloudinary.com/haas-storage/image/upload/v1598697538/background_wmc31h.png"
-            />
-          </div>
-        </div>
+        <img
+          alt="Onboarding Sponsors"
+          class="sc-3hjy97-1 fWfXuC"
+          src="//onboarding-sponsors.devprotocol.xyz/images/sponsors/sponsors.svg"
+          title="Onboarding Sponsors"
+        />
       </div>
-    </div>
+    </a>
   </div>
 </body>
 `;

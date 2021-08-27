@@ -1,4 +1,4 @@
-import React, { useMemo, useCallback } from 'react'
+import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import { useRouter } from 'next/router'
 import { Header } from 'src/components/organisms/Header'
 
@@ -18,15 +18,15 @@ import { Avatar as AuthorAvatar } from 'src/components/molecules/Avatar'
 import useWindowDimensions from '../../fixtures/utility/useWindowDimensions'
 import { useGetAccount } from 'src/fixtures/dev-for-apps/hooks'
 import { AvatarProperty } from 'src/components/molecules/AvatarProperty'
-import { Links } from '../../fixtures/_pages/ProfileHeader/Links'
+import { Links } from 'src/components/_pages/author/[authorAddress]/Links'
 import { blueGradient } from 'src/styles/gradient'
 import Link from 'next/link'
 import { useProvider } from 'src/fixtures/wallet/hooks'
-import { useState } from 'react'
 import { useCurrency } from 'src/fixtures/currency/hooks'
 import { Pagination, Spin } from 'antd'
 import { getPath } from 'src/fixtures/utility/route'
 import { CoverImages } from 'src/components/_pages/author/CoverImages'
+import { useENS } from 'src/fixtures/ens/hooks'
 
 type Props = {}
 
@@ -260,7 +260,9 @@ const Section = styled.a<{ activeSection: string; section: string }>`
 `
 
 const AuthorAddressDetail = (_: Props) => {
-  const [, authorAddress] = getPath(useRouter().asPath)
+  const [ens, setENS] = useState('')
+  const [, urlPathArg] = getPath(useRouter().asPath)
+  const authorAddress = urlPathArg.split('?')[0]
   const author: string = typeof authorAddress == 'string' ? authorAddress : 'none'
   const { data: authorInformation } = useGetAuthorInformation(author)
   const [paginationProps, setPaginationProps] = useState<{ offset: number; limit: number; currentPage: number }>({
@@ -295,6 +297,14 @@ const AuthorAddressDetail = (_: Props) => {
     })
   }, [])
 
+  const { getENS } = useENS()
+  useEffect(() => {
+    const fetchENS = async () => {
+      await getENS(author || '').then((o?: string) => setENS(o || ''))
+    }
+    fetchENS()
+  }, [author, getENS])
+
   return (
     <>
       <Header></Header>
@@ -307,7 +317,7 @@ const AuthorAddressDetail = (_: Props) => {
         <TransformedGrid>
           <div style={{ gridColumn: '2 / -1', marginTop: '10px' }}>
             <AuthorDetailGrid>
-              <span style={{ fontSize: '1.25em' }}>{dataAuthor?.name || data?.property_meta?.[0]?.name}</span>
+              <span style={{ fontSize: '1.25em' }}>{dataAuthor?.name || ens || data?.property_meta?.[0]?.name}</span>
               <ShareList>
                 <AreaLinks links={dataAuthor?.links} />
               </ShareList>

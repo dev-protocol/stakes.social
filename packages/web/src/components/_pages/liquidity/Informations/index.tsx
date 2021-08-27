@@ -3,7 +3,7 @@ import { Card, Statistic } from 'antd'
 import styled from 'styled-components'
 import {
   useAPY,
-  useFinalUnlockSchedules,
+  useEntirePeriod,
   useRewardMultiplier,
   useTotalStakedFor,
   useUnstakeQuery
@@ -38,37 +38,48 @@ const Rewards = styled(BaseCard)`
   grid-area: rewards;
 `
 
-export const Informations = () => {
-  const { data: apy } = useAPY()
-  const { data: rewardMultiplier, max } = useRewardMultiplier()
-  const { data: totalStakedFor } = useTotalStakedFor()
-  const { data: unstakeQuery } = useUnstakeQuery(totalStakedFor)
-  const { data: finalUnlockSchedules } = useFinalUnlockSchedules()
-  const apm = finalUnlockSchedules ? apy.div(finalUnlockSchedules.durationSec).times(ONE_MONTH_SECONDS) : undefined
+const Caption = styled.div`
+  margin-bottom: 0.625rem;
+`
+
+type Props = {
+  geyserAddress: string
+}
+
+export const Informations = ({ geyserAddress }: Props) => {
+  const { data: apy } = useAPY(geyserAddress)
+  const { data: rewardMultiplier, max } = useRewardMultiplier(geyserAddress)
+  const { data: totalStakedFor } = useTotalStakedFor(geyserAddress)
+  const { data: unstakeQuery } = useUnstakeQuery(geyserAddress, totalStakedFor)
+  const { data: entirePeriod } = useEntirePeriod(geyserAddress)
+  const apm = entirePeriod ? apy.div(entirePeriod).times(ONE_MONTH_SECONDS) : undefined
   const accruedRewards =
     totalStakedFor && unstakeQuery ? (totalStakedFor.isZero() ? toBigNumber(0) : unstakeQuery) : toBigNumber(0)
 
   return (
-    <Wrapper>
-      <Apm>
-        <Statistic title="Monthly Yield" value={apm ? apm.dp(2).toNumber() : '...'} suffix="%" />
-      </Apm>
-      <Multiplier>
-        <Statistic
-          title="Reward Multiplier"
-          value={rewardMultiplier ? rewardMultiplier : 0}
-          suffix={`X / ${max < Infinity ? max : '-'}X`}
-          precision={1}
-        ></Statistic>
-      </Multiplier>
-      <Rewards>
-        <Statistic
-          title="Accrued Rewards"
-          value={toNaturalNumber(accruedRewards).dp(2).toFixed()}
-          suffix="DEV"
-          precision={2}
-        />
-      </Rewards>
-    </Wrapper>
+    <>
+      <Caption>Information</Caption>
+      <Wrapper>
+        <Apm>
+          <Statistic title="Monthly Yield" value={apm ? apm.dp(2).toNumber() : '...'} suffix="%" />
+        </Apm>
+        <Multiplier>
+          <Statistic
+            title="Reward Multiplier"
+            value={rewardMultiplier ? rewardMultiplier : 0}
+            suffix={`X / ${max < Infinity ? max : '-'}X`}
+            precision={1}
+          ></Statistic>
+        </Multiplier>
+        <Rewards>
+          <Statistic
+            title="Accrued Rewards"
+            value={toNaturalNumber(accruedRewards).dp(2).toFixed()}
+            suffix="DEV"
+            precision={2}
+          />
+        </Rewards>
+      </Wrapper>
+    </>
   )
 }

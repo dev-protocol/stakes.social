@@ -2,8 +2,7 @@ import * as React from 'react'
 import App, { AppInitialProps } from 'next/app'
 import { WithApolloProps } from 'next-with-apollo'
 import Head from 'next/head'
-import withApollo from 'src/fixtures/withApollo'
-import { HelpUs } from 'src/components/atoms/HelpUs'
+// import withApollo from 'src/fixtures/withApollo'
 import SettingContext from 'src/context/settingContext'
 import WalletContext from 'src/context/walletContext'
 import Web3 from 'web3'
@@ -12,8 +11,18 @@ import detectEthereumProvider from '@metamask/detect-provider'
 import WalletConnectProvider from '@walletconnect/web3-provider'
 import Fortmatic from 'fortmatic'
 import WalletLink from 'walletlink'
+import { message } from 'antd'
 import { WEB3_PROVIDER_ENDPOINT } from 'src/fixtures/wallet/constants'
 import { getAccountAddress } from 'src/fixtures/wallet/utility'
+import * as gtag from 'src/lib/gtag'
+import { Router } from 'next/router'
+import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client'
+
+const cache = new InMemoryCache()
+const client = new ApolloClient({
+  uri: 'https://api.devprotocol.xyz/v1/graphql',
+  cache
+})
 
 class NextApp extends App<AppInitialProps & WithApolloProps<{}>> {
   state = { isCurrencyDEV: true, web3: undefined, web3Modal: undefined }
@@ -64,9 +73,12 @@ class NextApp extends App<AppInitialProps & WithApolloProps<{}>> {
 
   web3Modal: any
 
-  onWalletConnet = async () => {
+  onWalletConnect = async () => {
     const web3ForInjected: any = await detectEthereumProvider()
     if (!web3ForInjected) {
+      // NOTE: If the localStorage cache and metamask extension do not exist,
+      //       processing conflicts and will not be able to login, so clear the cache here.
+      this.web3Modal.clearCachedProvider()
       return
     }
     const isAuthorized = await getAccountAddress(new Web3(web3ForInjected))
@@ -85,11 +97,11 @@ class NextApp extends App<AppInitialProps & WithApolloProps<{}>> {
     return web3
   }
 
-  componentDidCatch = (error: Error, errorInfo: React.ErrorInfo) => {
-    super.componentDidCatch(error, errorInfo)
-  }
-
   componentDidMount = () => {
+    message.config({
+      maxCount: 5
+    })
+
     this.web3Modal = new Web3Modal({
       network: 'mainnet',
       cacheProvider: true,
@@ -98,7 +110,7 @@ class NextApp extends App<AppInitialProps & WithApolloProps<{}>> {
     this.setState({ web3Modal: this.web3Modal })
 
     if (this.web3Modal.cachedProvider === 'injected') {
-      this.onWalletConnet()
+      this.onWalletConnect()
     }
 
     const settings = localStorage.getItem('settings')
@@ -106,6 +118,9 @@ class NextApp extends App<AppInitialProps & WithApolloProps<{}>> {
       const { currency } = JSON.parse(settings)
       this.setState({ isCurrencyDEV: currency === 'DEV' })
     }
+
+    // Google Analytics
+    Router.events.on('routeChangeComplete', url => gtag.pageview(url))
   }
 
   setWeb3 = (web3: Web3) => {
@@ -121,21 +136,24 @@ class NextApp extends App<AppInitialProps & WithApolloProps<{}>> {
     const { Component, pageProps, apollo } = this.props
 
     return (
-      <WalletContext.Provider value={{ web3: this.state.web3, setWeb3: this.setWeb3, web3Modal: this.state.web3Modal }}>
-        <SettingContext.Provider
-          value={{ isCurrencyDEV: this.state.isCurrencyDEV, toggleCurrency: this.toggleCurrency }}
+      <ApolloProvider client={client}>
+        <WalletContext.Provider
+          value={{ web3: this.state.web3, setWeb3: this.setWeb3, web3Modal: this.state.web3Modal }}
         >
-          <Head>
-            <title>Stakes.social</title>
-            {/* Use minimum-scale=1 to enable GPU rasterization */}
-            <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no" />
-          </Head>
-          <Component {...pageProps} apollo={apollo} />
-          <HelpUs></HelpUs>
-        </SettingContext.Provider>
-      </WalletContext.Provider>
+          <SettingContext.Provider
+            value={{ isCurrencyDEV: this.state.isCurrencyDEV, toggleCurrency: this.toggleCurrency }}
+          >
+            <Head>
+              <title>Stakes.social</title>
+              {/* Use minimum-scale=1 to enable GPU rasterization */}
+              <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no" />
+            </Head>
+            <Component {...pageProps} apollo={apollo} />
+          </SettingContext.Provider>
+        </WalletContext.Provider>
+      </ApolloProvider>
     )
   }
 }
 
-export default withApollo(NextApp)
+export default NextApp

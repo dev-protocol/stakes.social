@@ -4,10 +4,15 @@ exports[`Informations Snapshot 1`] = `
 <body>
   <div>
     <div
-      class="sc-1u5gbu5-0 csoAHa"
+      class="sc-1u5gbu5-5 ZafPx"
+    >
+      Information
+    </div>
+    <div
+      class="sc-1u5gbu5-0 gcUUbb"
     >
       <div
-        class="ant-card ant-card-bordered sc-1u5gbu5-1 sc-1u5gbu5-2 hGfXno beijLw"
+        class="ant-card ant-card-bordered sc-1u5gbu5-1 sc-1u5gbu5-2 gaFUyd gluYqR"
       >
         <div
           class="ant-card-body"
@@ -44,7 +49,7 @@ exports[`Informations Snapshot 1`] = `
         </div>
       </div>
       <div
-        class="ant-card ant-card-bordered sc-1u5gbu5-1 sc-1u5gbu5-3 hGfXno BZZdW"
+        class="ant-card ant-card-bordered sc-1u5gbu5-1 sc-1u5gbu5-3 gaFUyd cPiitH"
       >
         <div
           class="ant-card-body"
@@ -85,7 +90,7 @@ exports[`Informations Snapshot 1`] = `
         </div>
       </div>
       <div
-        class="ant-card ant-card-bordered sc-1u5gbu5-1 sc-1u5gbu5-4 hGfXno foezPq"
+        class="ant-card ant-card-bordered sc-1u5gbu5-1 sc-1u5gbu5-4 gaFUyd jPLGBz"
       >
         <div
           class="ant-card-body"

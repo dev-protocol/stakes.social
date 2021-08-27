@@ -40,7 +40,7 @@ export type ImageFormat = {
 
 export type Image = ImageFormat & {
   id: number
-  formats: {
+  formats?: {
     thumbnail: ImageFormat
     small: ImageFormat
     medium: ImageFormat
@@ -57,12 +57,14 @@ export type PropertyLinks = {
 }
 
 export interface Property {
-  id: string
+  id: number
+  address: string
   name: string
   description: string
   cover_image: NullableImage
   avatar: NullableImage
   links?: PropertyLinks
+  error?: string
 }
 
 export interface PropertySetting {
@@ -76,6 +78,14 @@ export interface UploadFile {
   id: number
   formats: any
   error?: string
+}
+
+export interface Incubator {
+  id: number
+  name: string
+  verifier_id: string
+  tag?: string
+  property?: Property
 }
 
 export const getUser = (walletAddress: string): Promise<UserInformation> =>
@@ -229,6 +239,7 @@ export const postProperty = (
   signMessage: string,
   signature: string,
   address: string,
+  propertyAddress: string,
   name?: string,
   description?: string,
   links?: PropertyLinks
@@ -242,7 +253,8 @@ export const postProperty = (
       name,
       description,
       links,
-      address,
+      account_address: address,
+      address: propertyAddress,
       signature,
       signMessage
     })
@@ -252,6 +264,7 @@ export const putProperty = (
   signMessage: string,
   signature: string,
   address: string,
+  propertyAddress: string,
   id: number,
   name?: string,
   description?: string,
@@ -266,11 +279,17 @@ export const putProperty = (
       name,
       description,
       links,
-      address,
+      account_address: address,
+      address: propertyAddress,
       signature,
       signMessage
     })
   }).then(res => res.json())
+
+export const getIncubators = (): Promise<Array<Incubator>> =>
+  fetch(`${StrapiBaseUrl}/incubators`)
+    .then(res => res.json())
+    .catch(() => [])
 
 export const getPropertySetting = (
   propertyAddress?: string,

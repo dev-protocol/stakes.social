@@ -4,13 +4,14 @@ exports[`Stake Snapshot 1`] = `
 <body>
   <div>
     <div
-      class="sc-89297o-0 LrdOg"
+      class="sc-89297o-0 etzBlt"
     >
       <div
-        class="sc-1d8aayd-1 lldfxv"
+        class="sc-1d8aayd-1 bcBbeW"
+        style="opacity: 1;"
       >
         <span
-          class="ant-input-group-wrapper ant-input-group-wrapper-lg ant-input-search ant-input-search-large ant-input-search-with-button sc-1d8aayd-0 dMeuEc"
+          class="ant-input-group-wrapper ant-input-group-wrapper-lg ant-input-search ant-input-search-large ant-input-search-with-button sc-1d8aayd-0 dJdeqB"
         >
           <span
             class="ant-input-wrapper ant-input-group"
@@ -28,7 +29,7 @@ exports[`Stake Snapshot 1`] = `
                 class="ant-input-suffix"
               >
                 <button
-                  class="sc-1ttu0x8-0 ibloSD"
+                  class="sc-1ttu0x8-0 kmiVBa"
                 >
                   DEV
                 </button>
@@ -53,7 +54,7 @@ exports[`Stake Snapshot 1`] = `
         style="height: 40px;"
       >
         <div
-          class="sc-1mqmkj6-1 imJLIj"
+          class="sc-1mqmkj6-1 lgtNnS"
         >
           <button
             aria-checked="false"
@@ -69,7 +70,7 @@ exports[`Stake Snapshot 1`] = `
             />
           </button>
           <div
-            class="sc-1mqmkj6-0 izoQta"
+            class="sc-1mqmkj6-0 kwekuT"
           >
             <span
               aria-label="info-circle"
@@ -101,6 +102,36 @@ exports[`Stake Snapshot 1`] = `
             <br />
             If this is ON, your staking will be hidden from the public.
           </span>
+        </div>
+      </div>
+      <div
+        class="ant-card ant-card-bordered ant-card-small sc-18v7ikh-0 dfjrvZ"
+      >
+        <div
+          class="ant-card-head"
+        >
+          <div
+            class="ant-card-head-wrapper"
+          >
+            <div
+              class="ant-card-head-title"
+            >
+              Gas Fee (predicted)
+            </div>
+          </div>
+        </div>
+        <div
+          class="ant-card-body"
+        >
+          <p>
+            0.003345
+             ETH
+            <span
+              class="sc-18v7ikh-1 kGdgpU"
+            >
+               $0.78
+            </span>
+          </p>
         </div>
       </div>
     </div>
@@ -186,6 +217,301 @@ exports[`Stake Snapshot 1`] = `
       class="ant-message"
     >
       <div />
+    </div>
+  </div>
+</body>
+`;
+
+exports[`Stake Snapshot with title 1`] = `
+<body>
+  <div>
+    <div
+      class="ant-message"
+    >
+      <div>
+        <div
+          class="ant-message-notice"
+        >
+          <div
+            class="ant-message-notice-content"
+          >
+            <div
+              class="ant-message-custom-content ant-message-error"
+            >
+              <span
+                aria-label="close-circle"
+                class="anticon anticon-close-circle"
+                role="img"
+              >
+                <svg
+                  aria-hidden="true"
+                  data-icon="close-circle"
+                  fill="currentColor"
+                  focusable="false"
+                  height="1em"
+                  viewBox="64 64 896 896"
+                  width="1em"
+                >
+                  <path
+                    d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm165.4 618.2l-66-.3L512 563.4l-99.3 118.4-66.1.3c-4.4 0-8-3.5-8-8 0-1.9.7-3.7 1.9-5.2l130.1-155L340.5 359a8.32 8.32 0 01-1.9-5.2c0-4.4 3.6-8 8-8l66.1.3L512 464.6l99.3-118.4 66-.3c4.4 0 8 3.5 8 8 0 1.9-.7 3.7-1.9 5.2L553.5 514l130 155c1.2 1.5 1.9 3.3 1.9 5.2 0 4.4-3.6 8-8 8z"
+                  />
+                </svg>
+              </span>
+              <span>
+                fetch is not defined
+              </span>
+            </div>
+          </div>
+        </div>
+        <div
+          class="ant-message-notice"
+        >
+          <div
+            class="ant-message-notice-content"
+          >
+            <div
+              class="ant-message-custom-content ant-message-error"
+            >
+              <span
+                aria-label="close-circle"
+                class="anticon anticon-close-circle"
+                role="img"
+              >
+                <svg
+                  aria-hidden="true"
+                  data-icon="close-circle"
+                  fill="currentColor"
+                  focusable="false"
+                  height="1em"
+                  viewBox="64 64 896 896"
+                  width="1em"
+                >
+                  <path
+                    d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm165.4 618.2l-66-.3L512 563.4l-99.3 118.4-66.1.3c-4.4 0-8-3.5-8-8 0-1.9.7-3.7 1.9-5.2l130.1-155L340.5 359a8.32 8.32 0 01-1.9-5.2c0-4.4 3.6-8 8-8l66.1.3L512 464.6l99.3-118.4 66-.3c4.4 0 8 3.5 8 8 0 1.9-.7 3.7-1.9 5.2L553.5 514l130 155c1.2 1.5 1.9 3.3 1.9 5.2 0 4.4-3.6 8-8 8z"
+                  />
+                </svg>
+              </span>
+              <span>
+                fetch is not defined
+              </span>
+            </div>
+          </div>
+        </div>
+        <div
+          class="ant-message-notice"
+        >
+          <div
+            class="ant-message-notice-content"
+          >
+            <div
+              class="ant-message-custom-content ant-message-error"
+            >
+              <span
+                aria-label="close-circle"
+                class="anticon anticon-close-circle"
+                role="img"
+              >
+                <svg
+                  aria-hidden="true"
+                  data-icon="close-circle"
+                  fill="currentColor"
+                  focusable="false"
+                  height="1em"
+                  viewBox="64 64 896 896"
+                  width="1em"
+                >
+                  <path
+                    d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm165.4 618.2l-66-.3L512 563.4l-99.3 118.4-66.1.3c-4.4 0-8-3.5-8-8 0-1.9.7-3.7 1.9-5.2l130.1-155L340.5 359a8.32 8.32 0 01-1.9-5.2c0-4.4 3.6-8 8-8l66.1.3L512 464.6l99.3-118.4 66-.3c4.4 0 8 3.5 8 8 0 1.9-.7 3.7-1.9 5.2L553.5 514l130 155c1.2 1.5 1.9 3.3 1.9 5.2 0 4.4-3.6 8-8 8z"
+                  />
+                </svg>
+              </span>
+              <span>
+                fetch is not defined
+              </span>
+            </div>
+          </div>
+        </div>
+        <div
+          class="ant-message-notice"
+        >
+          <div
+            class="ant-message-notice-content"
+          >
+            <div
+              class="ant-message-custom-content ant-message-error"
+            >
+              <span
+                aria-label="close-circle"
+                class="anticon anticon-close-circle"
+                role="img"
+              >
+                <svg
+                  aria-hidden="true"
+                  data-icon="close-circle"
+                  fill="currentColor"
+                  focusable="false"
+                  height="1em"
+                  viewBox="64 64 896 896"
+                  width="1em"
+                >
+                  <path
+                    d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm165.4 618.2l-66-.3L512 563.4l-99.3 118.4-66.1.3c-4.4 0-8-3.5-8-8 0-1.9.7-3.7 1.9-5.2l130.1-155L340.5 359a8.32 8.32 0 01-1.9-5.2c0-4.4 3.6-8 8-8l66.1.3L512 464.6l99.3-118.4 66-.3c4.4 0 8 3.5 8 8 0 1.9-.7 3.7-1.9 5.2L553.5 514l130 155c1.2 1.5 1.9 3.3 1.9 5.2 0 4.4-3.6 8-8 8z"
+                  />
+                </svg>
+              </span>
+              <span>
+                fetch is not defined
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div
+      class="ant-message"
+    >
+      <div />
+    </div>
+  </div>
+  <div>
+    <div
+      class="sc-89297o-0 etzBlt"
+    >
+      <label
+        for="stake"
+      >
+        Stake
+      </label>
+      <div
+        class="sc-1d8aayd-1 bcBbeW"
+        style="opacity: 1;"
+      >
+        <span
+          class="ant-input-group-wrapper ant-input-group-wrapper-lg ant-input-search ant-input-search-large ant-input-search-with-button sc-1d8aayd-0 dJdeqB"
+        >
+          <span
+            class="ant-input-wrapper ant-input-group"
+          >
+            <span
+              class="ant-input-affix-wrapper ant-input-affix-wrapper-lg"
+            >
+              <input
+                class="ant-input ant-input-lg"
+                id="stake"
+                type="number"
+                value=""
+              />
+              <span
+                class="ant-input-suffix"
+              >
+                <button
+                  class="sc-1ttu0x8-0 kmiVBa"
+                >
+                  DEV
+                </button>
+              </span>
+            </span>
+            <span
+              class="ant-input-group-addon"
+            >
+              <button
+                class="ant-btn ant-btn-primary ant-btn-lg ant-input-search-button"
+                type="button"
+              >
+                <span>
+                  Stake
+                </span>
+              </button>
+            </span>
+          </span>
+        </span>
+      </div>
+      <div
+        style="height: 40px;"
+      >
+        <div
+          class="sc-1mqmkj6-1 lgtNnS"
+        >
+          <button
+            aria-checked="false"
+            class="ant-switch"
+            role="switch"
+            type="button"
+          >
+            <div
+              class="ant-switch-handle"
+            />
+            <span
+              class="ant-switch-inner"
+            />
+          </button>
+          <div
+            class="sc-1mqmkj6-0 kwekuT"
+          >
+            <span
+              aria-label="info-circle"
+              class="anticon anticon-info-circle"
+              role="img"
+            >
+              <svg
+                aria-hidden="true"
+                data-icon="info-circle"
+                fill="currentColor"
+                focusable="false"
+                height="1em"
+                viewBox="64 64 896 896"
+                width="1em"
+              >
+                <path
+                  d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 820c-205.4 0-372-166.6-372-372s166.6-372 372-372 372 166.6 372 372-166.6 372-372 372z"
+                />
+                <path
+                  d="M464 336a48 48 0 1096 0 48 48 0 10-96 0zm72 112h-48c-4.4 0-8 3.6-8 8v272c0 4.4 3.6 8 8 8h48c4.4 0 8-3.6 8-8V456c0-4.4-3.6-8-8-8z"
+                />
+              </svg>
+            </span>
+          </div>
+          <span
+            style="font-size: 0.8em;"
+          >
+            Incognito Staking:
+            <br />
+            If this is ON, your staking will be hidden from the public.
+          </span>
+        </div>
+      </div>
+      <div
+        class="ant-card ant-card-bordered ant-card-small sc-18v7ikh-0 dfjrvZ"
+      >
+        <div
+          class="ant-card-head"
+        >
+          <div
+            class="ant-card-head-wrapper"
+          >
+            <div
+              class="ant-card-head-title"
+            >
+              Gas Fee (predicted)
+            </div>
+          </div>
+        </div>
+        <div
+          class="ant-card-body"
+        >
+          <p>
+            0.003345
+             ETH
+            <span
+              class="sc-18v7ikh-1 kGdgpU"
+            >
+               $0.78
+            </span>
+          </p>
+        </div>
+      </div>
     </div>
   </div>
 </body>

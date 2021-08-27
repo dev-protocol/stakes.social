@@ -3,334 +3,613 @@
 exports[`PropertyCardList Snapshot 1`] = `
 <body>
   <div>
-    <div>
+    <div
+      style="flex-grow: 1; max-width: 100vw;"
+    >
       <div
-        style="margin: 20px 0px 0px 0px;"
+        class="sc-190q6or-1 ihYrzY"
       >
-        <form
-          class="ant-form ant-form-horizontal"
+        <h2
+          class="sc-190q6or-0 lmAgTZ"
+        >
+          Asset Pools
+        </h2>
+        <div
+          class="sc-13ny1rq-0 gCxNtP"
         >
           <div
-            class="ant-row"
+            class="sc-11akcse-0 fdXYro"
           >
             <div
-              class="ant-col ant-col-sm-20 ant-col-md-12"
+              class="sc-11akcse-1 lmHySJ"
             >
+              <span
+                aria-label="search"
+                class="anticon anticon-search"
+                role="img"
+              >
+                <svg
+                  aria-hidden="true"
+                  data-icon="search"
+                  fill="currentColor"
+                  focusable="false"
+                  height="1em"
+                  viewBox="64 64 896 896"
+                  width="1em"
+                >
+                  <path
+                    d="M909.6 854.5L649.9 594.8C690.2 542.7 712 479 712 412c0-80.2-31.3-155.4-87.9-212.1-56.6-56.7-132-87.9-212.1-87.9s-155.5 31.3-212.1 87.9C143.2 256.5 112 331.8 112 412c0 80.1 31.3 155.5 87.9 212.1C256.5 680.8 331.8 712 412 712c67 0 130.6-21.8 182.7-62l259.7 259.6a8.2 8.2 0 0011.6 0l43.6-43.5a8.2 8.2 0 000-11.6zM570.4 570.4C528 612.7 471.8 636 412 636s-116-23.3-158.4-65.6C211.3 528 188 471.8 188 412s23.3-116.1 65.6-158.4C296 211.3 352.2 188 412 188s116.1 23.2 158.4 65.6S636 352.2 636 412s-23.3 116.1-65.6 158.4z"
+                  />
+                </svg>
+              </span>
+            </div>
+            <input
+              class="sc-11akcse-3 iinfAJ"
+              data-cy="SearchbarInput"
+              placeholder="Search for a project"
+              value=""
+            />
+          </div>
+        </div>
+        <div
+          class="sc-190q6or-4 jVBQMe"
+        >
+          <div
+            style="flex-grow: 1;"
+          >
+            <div
+              class=" css-2b097c-container"
+            >
+              <span
+                aria-atomic="false"
+                aria-live="polite"
+                aria-relevant="additions text"
+                class="css-1f43avz-a11yText-A11yText"
+              />
               <div
-                class="ant-row ant-form-item"
+                class=" css-yk16xz-control"
               >
                 <div
-                  class="ant-col ant-col-18 ant-form-item-control"
+                  class=" css-g1d714-ValueContainer"
                 >
                   <div
-                    class="ant-form-item-control-input"
+                    class=" css-1uccc91-singleValue"
+                  >
+                    Most Recent
+                  </div>
+                  <div
+                    class="css-b8ldur-Input"
                   >
                     <div
-                      class="ant-form-item-control-input-content"
+                      class=""
+                      style="display: inline-block;"
                     >
-                      <span
-                        class="ant-input-group-wrapper ant-input-search ant-input-search-with-button"
-                      >
-                        <span
-                          class="ant-input-wrapper ant-input-group"
-                        >
-                          <input
-                            class="ant-input"
-                            id="searchWord"
-                            placeholder="input property search word"
-                            type="text"
-                            value=""
-                          />
-                          <span
-                            class="ant-input-group-addon"
-                          >
-                            <button
-                              class="ant-btn ant-btn-primary ant-input-search-button"
-                              type="button"
-                            >
-                              <span
-                                aria-label="search"
-                                class="anticon anticon-search"
-                                role="img"
-                              >
-                                <svg
-                                  aria-hidden="true"
-                                  class=""
-                                  data-icon="search"
-                                  fill="currentColor"
-                                  focusable="false"
-                                  height="1em"
-                                  viewBox="64 64 896 896"
-                                  width="1em"
-                                >
-                                  <path
-                                    d="M909.6 854.5L649.9 594.8C690.2 542.7 712 479 712 412c0-80.2-31.3-155.4-87.9-212.1-56.6-56.7-132-87.9-212.1-87.9s-155.5 31.3-212.1 87.9C143.2 256.5 112 331.8 112 412c0 80.1 31.3 155.5 87.9 212.1C256.5 680.8 331.8 712 412 712c67 0 130.6-21.8 182.7-62l259.7 259.6a8.2 8.2 0 0011.6 0l43.6-43.5a8.2 8.2 0 000-11.6zM570.4 570.4C528 612.7 471.8 636 412 636s-116-23.3-158.4-65.6C211.3 528 188 471.8 188 412s23.3-116.1 65.6-158.4C296 211.3 352.2 188 412 188s116.1 23.2 158.4 65.6S636 352.2 636 412s-23.3 116.1-65.6 158.4z"
-                                  />
-                                </svg>
-                              </span>
-                            </button>
-                          </span>
-                        </span>
-                      </span>
+                      <input
+                        aria-autocomplete="list"
+                        autocapitalize="none"
+                        autocomplete="off"
+                        autocorrect="off"
+                        id="react-select-2-input"
+                        spellcheck="false"
+                        style="box-sizing: content-box; width: 2px; border: 0px; opacity: 1; outline: 0; padding: 0px;"
+                        tabindex="0"
+                        type="text"
+                        value=""
+                      />
+                      <div
+                        style="position: absolute; top: 0px; left: 0px; visibility: hidden; height: 0px; overflow: scroll; white-space: pre; font-family: -webkit-small-control; letter-spacing: normal; text-transform: none;"
+                      />
                     </div>
+                  </div>
+                </div>
+                <div
+                  class=" css-1hb7zxy-IndicatorsContainer"
+                >
+                  <div
+                    aria-hidden="true"
+                    class=" css-tlfecz-indicatorContainer"
+                  >
+                    <svg
+                      aria-hidden="true"
+                      class="css-tj5bde-Svg"
+                      focusable="false"
+                      height="20"
+                      viewBox="0 0 20 20"
+                      width="20"
+                    >
+                      <path
+                        d="M14.348 14.849c-0.469 0.469-1.229 0.469-1.697 0l-2.651-3.030-2.651 3.029c-0.469 0.469-1.229 0.469-1.697 0-0.469-0.469-0.469-1.229 0-1.697l2.758-3.15-2.759-3.152c-0.469-0.469-0.469-1.228 0-1.697s1.228-0.469 1.697 0l2.652 3.031 2.651-3.031c0.469-0.469 1.228-0.469 1.697 0s0.469 1.229 0 1.697l-2.758 3.152 2.758 3.15c0.469 0.469 0.469 1.229 0 1.698z"
+                      />
+                    </svg>
+                  </div>
+                  <span
+                    class=" css-1okebmr-indicatorSeparator"
+                  />
+                  <div
+                    aria-hidden="true"
+                    class=" css-tlfecz-indicatorContainer"
+                  >
+                    <svg
+                      aria-hidden="true"
+                      class="css-tj5bde-Svg"
+                      focusable="false"
+                      height="20"
+                      viewBox="0 0 20 20"
+                      width="20"
+                    >
+                      <path
+                        d="M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z"
+                      />
+                    </svg>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        </form>
-      </div>
-      <div
-        style="margin: 54px 0px;"
-      >
-        <div
-          class="k29mxm-0 cfjrPr"
-        >
           <div
-            class="ant-row"
+            class="sc-dkx7pb-2 iwVzEL"
           >
-            <div
-              class="ant-col ant-col-sm-24 ant-col-md-10"
+            <button
+              class="sc-dkx7pb-0 brzhRR"
             >
               <div
-                class="ant-statistic k29mxm-4 kbxQVD"
+                class="sc-dkx7pb-1 fZLNlj"
+              />
+              <span>
+                DEV
+              </span>
+            </button>
+            <button
+              class="sc-dkx7pb-0 cXxAIT"
+            >
+              <div
+                class="sc-dkx7pb-1 ieMbjX"
+              />
+              <span>
+                USD
+              </span>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div
+        class="sc-190q6or-3 dCDCUM"
+      >
+        <a
+          href="/"
+        >
+          All Pools
+        </a>
+        <a
+          href="/?tag=GitHub"
+          style="color: rgb(201, 201, 201);"
+        >
+          GitHub
+        </a>
+        <a
+          href="/?tag=npm"
+          style="color: rgb(201, 201, 201);"
+        >
+          npm
+        </a>
+        <a
+          href="/?tag=Creators"
+          style="color: rgb(201, 201, 201);"
+        >
+          Creators
+        </a>
+      </div>
+      <div
+        class="sc-oxa8xu-0 sc-190q6or-2 eZFPlw uEpxS"
+      >
+        <div
+          class="sc-oxa8xu-0 sc-k29mxm-0 eZFPlw kyZRGk"
+        >
+          <div
+            class="sc-k29mxm-15 hZkKVM"
+          />
+          <div
+            class="sc-oxa8xu-0 sc-k29mxm-8 eZFPlw dyKcSN"
+          >
+            <span
+              class="sc-k29mxm-2 hVBVYN"
+            >
+              authentication-id
+            </span>
+            <span
+              class="sc-43kf45-0 cMsfid"
+            >
+              <span
+                aria-label="pie-chart"
+                class="anticon anticon-pie-chart"
+                role="img"
+                style="color: rgb(31, 237, 51);"
+                tabindex="-1"
+              >
+                <svg
+                  aria-hidden="true"
+                  data-icon="pie-chart"
+                  fill="currentColor"
+                  focusable="false"
+                  height="1em"
+                  viewBox="64 64 896 896"
+                  width="1em"
+                >
+                  <path
+                    d="M864 518H506V160c0-4.4-3.6-8-8-8h-26a398.46 398.46 0 00-282.8 117.1 398.19 398.19 0 00-85.7 127.1A397.61 397.61 0 0072 552a398.46 398.46 0 00117.1 282.8c36.7 36.7 79.5 65.6 127.1 85.7A397.61 397.61 0 00472 952a398.46 398.46 0 00282.8-117.1c36.7-36.7 65.6-79.5 85.7-127.1A397.61 397.61 0 00872 552v-26c0-4.4-3.6-8-8-8zM705.7 787.8A331.59 331.59 0 01470.4 884c-88.1-.4-170.9-34.9-233.2-97.2C174.5 724.1 140 640.7 140 552c0-88.7 34.5-172.1 97.2-234.8 54.6-54.6 124.9-87.9 200.8-95.5V586h364.3c-7.7 76.3-41.3 147-96.6 201.8zM952 462.4l-2.6-28.2c-8.5-92.1-49.4-179-115.2-244.6A399.4 399.4 0 00589 74.6L560.7 72c-4.7-.4-8.7 3.2-8.7 7.9V464c0 4.4 3.6 8 8 8l384-1c4.7 0 8.4-4 8-8.6zm-332.2-58.2V147.6a332.24 332.24 0 01166.4 89.8c45.7 45.6 77 103.6 90 166.1l-256.4.7z"
+                  />
+                </svg>
+              </span>
+            </span>
+            <span
+              class="sc-k29mxm-13 laWKpR"
+            >
+              Stake DEV tokens to provide funding for OSS projects so that they can maintain development.
+            </span>
+            <div
+              class="sc-k29mxm-12 doMkPf"
+            >
+              <div
+                class="sc-17om263-0 iKLyFR"
               >
                 <div
-                  class="ant-statistic-title"
+                  class="sc-17om263-1 beiqlK"
+                  size="60"
+                />
+              </div>
+              <div
+                class="sc-k29mxm-14 iBRpaj"
+              >
+                <span
+                  style="font-weight: lighter;"
                 >
-                  123
-                </div>
-                <div
-                  class="ant-statistic-content"
-                >
-                  <span
-                    class="ant-statistic-content-value"
-                  >
-                    authentication-id
-                  </span>
-                </div>
+                  Creator
+                </span>
+                <span
+                  style="color: rgb(26, 201, 252);"
+                />
+                <span>
+                  0
+                   Karma
+                </span>
               </div>
             </div>
             <div
-              class="ant-col k29mxm-2 ctDRvm ant-col-sm-24 ant-col-md-14"
+              class="sc-k29mxm-1 gZtLsW"
             >
               <div
-                class="ant-row k29mxm-1 URXsy"
+                class="sc-k29mxm-3 HayZf"
               >
-                <div
-                  class="ant-col ant-col-12"
+                <span>
+                  5,000
+                   
+                </span>
+                <span
+                  class="sc-k29mxm-11 lctWPw"
                 >
-                  <div
-                    class="ant-statistic"
-                  >
-                    <div
-                      class="ant-statistic-title"
-                    >
-                      Total Rewards
-                    </div>
-                    <div
-                      class="ant-statistic-content"
-                    >
-                      <span
-                        class="ant-statistic-content-value"
-                      >
-                        <span
-                          class="ant-statistic-content-value-int"
-                        >
-                          
-                          10,000
-                        </span>
-                        
-                      </span>
-                      <span
-                        class="ant-statistic-content-suffix"
-                      >
-                        DEV
-                      </span>
-                    </div>
-                  </div>
-                </div>
-                <div
-                  class="ant-col ant-col-9"
-                >
-                  <div
-                    class="ant-statistic"
-                  >
-                    <div
-                      class="ant-statistic-title"
-                    >
-                      Your Staking Amount
-                    </div>
-                    <div
-                      class="ant-statistic-content"
-                    >
-                      <span
-                        class="ant-statistic-content-value"
-                      >
-                        <span
-                          class="ant-statistic-content-value-int"
-                        >
-                          
-                          5,000
-                        </span>
-                        
-                      </span>
-                      <span
-                        class="ant-statistic-content-suffix"
-                      >
-                        DEV
-                      </span>
-                    </div>
-                  </div>
-                </div>
-                <div
-                  class="ant-col ant-col-3"
-                >
-                  <div>
-                    <span
-                      class="k29mxm-3 cikeEI"
-                      style="position: absolute;"
-                    >
-                      25
-                      % of the total stakes
-                    </span>
-                    <div
-                      class="sc-5ahzw8-0 iRyfEw"
-                    />
-                  </div>
-                </div>
+                  Your stake
+                </span>
               </div>
+              <div
+                class="sc-k29mxm-5 djyAnx"
+              >
+                <span>
+                  5,000
+                   
+                </span>
+                <span
+                  class="sc-k29mxm-11 lctWPw"
+                >
+                  Your reward
+                </span>
+              </div>
+              <div
+                class="sc-k29mxm-4 eoKfJl"
+              >
+                <span>
+                  10,000
+                   
+                </span>
+                <span
+                  class="sc-k29mxm-11 lctWPw"
+                >
+                  Total staked
+                </span>
+              </div>
+              <div
+                class="sc-k29mxm-6 kJTIEG"
+              >
+                <span>
+                  10,000
+                   
+                </span>
+                <span
+                  class="sc-k29mxm-11 lctWPw"
+                >
+                  Creator reward
+                </span>
+              </div>
+            </div>
+          </div>
+          <div
+            class="sc-k29mxm-7 kDhAkJ"
+          >
+            <button
+              class="sc-k29mxm-9 iBobcq"
+            >
+              Stake
+            </button>
+            <button
+              class="sc-k29mxm-10 jDwNrq"
+            >
+              Withdraw
+            </button>
+          </div>
+        </div>
+      </div>
+      <div
+        class="sc-190q6or-5 jQwzAG"
+      >
+        <ul
+          class="ant-pagination"
+          unselectable="unselectable"
+        >
+          <li
+            aria-disabled="true"
+            class="ant-pagination-prev ant-pagination-disabled"
+            title="Previous Page"
+          >
+            <button
+              class="ant-pagination-item-link"
+              disabled=""
+              tabindex="-1"
+              type="button"
+            >
+              <span
+                aria-label="left"
+                class="anticon anticon-left"
+                role="img"
+              >
+                <svg
+                  aria-hidden="true"
+                  data-icon="left"
+                  fill="currentColor"
+                  focusable="false"
+                  height="1em"
+                  viewBox="64 64 896 896"
+                  width="1em"
+                >
+                  <path
+                    d="M724 218.3V141c0-6.7-7.7-10.4-12.9-6.3L260.3 486.8a31.86 31.86 0 000 50.3l450.8 352.1c5.3 4.1 12.9.4 12.9-6.3v-77.3c0-4.9-2.3-9.6-6.1-12.6l-360-281 360-281.1c3.8-3 6.1-7.7 6.1-12.6z"
+                  />
+                </svg>
+              </span>
+            </button>
+          </li>
+          <li
+            class="ant-pagination-item ant-pagination-item-1 ant-pagination-item-active"
+            tabindex="0"
+            title="1"
+          >
+            <a
+              rel="nofollow"
+            >
+              1
+            </a>
+          </li>
+          <li
+            class="ant-pagination-item ant-pagination-item-2"
+            tabindex="0"
+            title="2"
+          >
+            <a
+              rel="nofollow"
+            >
+              2
+            </a>
+          </li>
+          <li
+            class="ant-pagination-item ant-pagination-item-3"
+            tabindex="0"
+            title="3"
+          >
+            <a
+              rel="nofollow"
+            >
+              3
+            </a>
+          </li>
+          <li
+            class="ant-pagination-item ant-pagination-item-4"
+            tabindex="0"
+            title="4"
+          >
+            <a
+              rel="nofollow"
+            >
+              4
+            </a>
+          </li>
+          <li
+            class="ant-pagination-item ant-pagination-item-5"
+            tabindex="0"
+            title="5"
+          >
+            <a
+              rel="nofollow"
+            >
+              5
+            </a>
+          </li>
+          <li
+            class="ant-pagination-item ant-pagination-item-6"
+            tabindex="0"
+            title="6"
+          >
+            <a
+              rel="nofollow"
+            >
+              6
+            </a>
+          </li>
+          <li
+            aria-disabled="false"
+            class="ant-pagination-next"
+            tabindex="0"
+            title="Next Page"
+          >
+            <button
+              class="ant-pagination-item-link"
+              tabindex="-1"
+              type="button"
+            >
+              <span
+                aria-label="right"
+                class="anticon anticon-right"
+                role="img"
+              >
+                <svg
+                  aria-hidden="true"
+                  data-icon="right"
+                  fill="currentColor"
+                  focusable="false"
+                  height="1em"
+                  viewBox="64 64 896 896"
+                  width="1em"
+                >
+                  <path
+                    d="M765.7 486.8L314.9 134.7A7.97 7.97 0 00302 141v77.3c0 4.9 2.3 9.6 6.1 12.6l360 281.1-360 281.1c-3.9 3-6.1 7.7-6.1 12.6V883c0 6.7 7.7 10.4 12.9 6.3l450.8-352.1a31.96 31.96 0 000-50.4z"
+                  />
+                </svg>
+              </span>
+            </button>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div
+      class="ant-message"
+    >
+      <div>
+        <div
+          class="ant-message-notice"
+        >
+          <div
+            class="ant-message-notice-content"
+          >
+            <div
+              class="ant-message-custom-content ant-message-error"
+            >
+              <span
+                aria-label="close-circle"
+                class="anticon anticon-close-circle"
+                role="img"
+              >
+                <svg
+                  aria-hidden="true"
+                  data-icon="close-circle"
+                  fill="currentColor"
+                  focusable="false"
+                  height="1em"
+                  viewBox="64 64 896 896"
+                  width="1em"
+                >
+                  <path
+                    d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm165.4 618.2l-66-.3L512 563.4l-99.3 118.4-66.1.3c-4.4 0-8-3.5-8-8 0-1.9.7-3.7 1.9-5.2l130.1-155L340.5 359a8.32 8.32 0 01-1.9-5.2c0-4.4 3.6-8 8-8l66.1.3L512 464.6l99.3-118.4 66-.3c4.4 0 8 3.5 8 8 0 1.9-.7 3.7-1.9 5.2L553.5 514l130 155c1.2 1.5 1.9 3.3 1.9 5.2 0 4.4-3.6 8-8 8z"
+                  />
+                </svg>
+              </span>
+              <span>
+                fetch is not defined
+              </span>
+            </div>
+          </div>
+        </div>
+        <div
+          class="ant-message-notice"
+        >
+          <div
+            class="ant-message-notice-content"
+          >
+            <div
+              class="ant-message-custom-content ant-message-error"
+            >
+              <span
+                aria-label="close-circle"
+                class="anticon anticon-close-circle"
+                role="img"
+              >
+                <svg
+                  aria-hidden="true"
+                  data-icon="close-circle"
+                  fill="currentColor"
+                  focusable="false"
+                  height="1em"
+                  viewBox="64 64 896 896"
+                  width="1em"
+                >
+                  <path
+                    d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm165.4 618.2l-66-.3L512 563.4l-99.3 118.4-66.1.3c-4.4 0-8-3.5-8-8 0-1.9.7-3.7 1.9-5.2l130.1-155L340.5 359a8.32 8.32 0 01-1.9-5.2c0-4.4 3.6-8 8-8l66.1.3L512 464.6l99.3-118.4 66-.3c4.4 0 8 3.5 8 8 0 1.9-.7 3.7-1.9 5.2L553.5 514l130 155c1.2 1.5 1.9 3.3 1.9 5.2 0 4.4-3.6 8-8 8z"
+                  />
+                </svg>
+              </span>
+              <span>
+                fetch is not defined
+              </span>
+            </div>
+          </div>
+        </div>
+        <div
+          class="ant-message-notice"
+        >
+          <div
+            class="ant-message-notice-content"
+          >
+            <div
+              class="ant-message-custom-content ant-message-error"
+            >
+              <span
+                aria-label="close-circle"
+                class="anticon anticon-close-circle"
+                role="img"
+              >
+                <svg
+                  aria-hidden="true"
+                  data-icon="close-circle"
+                  fill="currentColor"
+                  focusable="false"
+                  height="1em"
+                  viewBox="64 64 896 896"
+                  width="1em"
+                >
+                  <path
+                    d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm165.4 618.2l-66-.3L512 563.4l-99.3 118.4-66.1.3c-4.4 0-8-3.5-8-8 0-1.9.7-3.7 1.9-5.2l130.1-155L340.5 359a8.32 8.32 0 01-1.9-5.2c0-4.4 3.6-8 8-8l66.1.3L512 464.6l99.3-118.4 66-.3c4.4 0 8 3.5 8 8 0 1.9-.7 3.7-1.9 5.2L553.5 514l130 155c1.2 1.5 1.9 3.3 1.9 5.2 0 4.4-3.6 8-8 8z"
+                  />
+                </svg>
+              </span>
+              <span>
+                fetch is not defined
+              </span>
             </div>
           </div>
         </div>
       </div>
-      <ul
-        class="ant-pagination"
-        style="margin: 0px 0px 20px 50%;"
-        unselectable="unselectable"
-      >
-        <li
-          aria-disabled="true"
-          class="ant-pagination-prev ant-pagination-disabled"
-          title="Previous Page"
-        >
-          <button
-            class="ant-pagination-item-link"
-            disabled=""
-            tabindex="-1"
-            type="button"
-          >
-            <span
-              aria-label="left"
-              class="anticon anticon-left"
-              role="img"
-            >
-              <svg
-                aria-hidden="true"
-                class=""
-                data-icon="left"
-                fill="currentColor"
-                focusable="false"
-                height="1em"
-                viewBox="64 64 896 896"
-                width="1em"
-              >
-                <path
-                  d="M724 218.3V141c0-6.7-7.7-10.4-12.9-6.3L260.3 486.8a31.86 31.86 0 000 50.3l450.8 352.1c5.3 4.1 12.9.4 12.9-6.3v-77.3c0-4.9-2.3-9.6-6.1-12.6l-360-281 360-281.1c3.8-3 6.1-7.7 6.1-12.6z"
-                />
-              </svg>
-            </span>
-          </button>
-        </li>
-        <li
-          class="ant-pagination-item ant-pagination-item-1 ant-pagination-item-active"
-          tabindex="0"
-          title="1"
-        >
-          <a
-            rel="nofollow"
-          >
-            1
-          </a>
-        </li>
-        <li
-          class="ant-pagination-item ant-pagination-item-2"
-          tabindex="0"
-          title="2"
-        >
-          <a
-            rel="nofollow"
-          >
-            2
-          </a>
-        </li>
-        <li
-          class="ant-pagination-item ant-pagination-item-3"
-          tabindex="0"
-          title="3"
-        >
-          <a
-            rel="nofollow"
-          >
-            3
-          </a>
-        </li>
-        <li
-          class="ant-pagination-item ant-pagination-item-4"
-          tabindex="0"
-          title="4"
-        >
-          <a
-            rel="nofollow"
-          >
-            4
-          </a>
-        </li>
-        <li
-          class="ant-pagination-item ant-pagination-item-5"
-          tabindex="0"
-          title="5"
-        >
-          <a
-            rel="nofollow"
-          >
-            5
-          </a>
-        </li>
-        <li
-          aria-disabled="false"
-          class="ant-pagination-next"
-          tabindex="0"
-          title="Next Page"
-        >
-          <button
-            class="ant-pagination-item-link"
-            tabindex="-1"
-            type="button"
-          >
-            <span
-              aria-label="right"
-              class="anticon anticon-right"
-              role="img"
-            >
-              <svg
-                aria-hidden="true"
-                class=""
-                data-icon="right"
-                fill="currentColor"
-                focusable="false"
-                height="1em"
-                viewBox="64 64 896 896"
-                width="1em"
-              >
-                <path
-                  d="M765.7 486.8L314.9 134.7A7.97 7.97 0 00302 141v77.3c0 4.9 2.3 9.6 6.1 12.6l360 281.1-360 281.1c-3.9 3-6.1 7.7-6.1 12.6V883c0 6.7 7.7 10.4 12.9 6.3l450.8-352.1a31.96 31.96 0 000-50.4z"
-                />
-              </svg>
-            </span>
-          </button>
-        </li>
-      </ul>
+    </div>
+  </div>
+  <div>
+    <div
+      class="ant-message"
+    >
+      <div />
+    </div>
+  </div>
+  <div>
+    <div
+      class="ant-message"
+    >
+      <div />
     </div>
   </div>
 </body>

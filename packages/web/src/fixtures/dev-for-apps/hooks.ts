@@ -25,11 +25,13 @@ import {
   useGetPropertySettingsByAccount,
   useGetPropertySettingsByProperty
 } from './functions/useGetPropertySetting'
+import { useGetIncubators } from './functions/incubator'
 
 export {
   useUploadFile,
   useDeleteFile,
   useGetAccount,
+  useGetIncubators,
   useGetProperty,
   useGetPropertySetting,
   useGetPropertySettingsByAccount,
@@ -89,6 +91,7 @@ export const useCreateAccount = (walletAddress: string) => {
   const key = 'useCreateAccount'
   const { web3 } = useProvider()
   const [isLoading, setIsLoading] = useState<boolean>(false)
+  const { mutate } = useGetAccount(walletAddress)
 
   const postAccountHandler = async (
     name?: string,
@@ -112,6 +115,7 @@ export const useCreateAccount = (walletAddress: string) => {
 
     const data = await postAccount(signedMessage, signature, walletAddress, name, biography, links, isPrivateStaking)
       .then(result => {
+        mutate()
         message.success({ content: 'success update account data', key })
         return result
       })
@@ -132,6 +136,7 @@ export const useUpdateAccount = (id: number, walletAddress: string) => {
   const key = 'useUpdateAccount'
   const { web3 } = useProvider()
   const [isLoading, setIsLoading] = useState<boolean>(false)
+  const { mutate } = useGetAccount(walletAddress)
 
   const putAccountHandler = async (
     name?: string,
@@ -155,6 +160,7 @@ export const useUpdateAccount = (id: number, walletAddress: string) => {
 
     const data = await putAccount(signedMessage, signature, walletAddress, id, name, biography, links, isPrivateStaking)
       .then(result => {
+        mutate()
         message.success({ content: 'success update account data', key })
         return result
       })
@@ -175,8 +181,8 @@ export const useUploadAccountAvatar = (accountAddress: string) => {
   const { data: account, mutate } = useGetAccount(accountAddress)
   const { postUploadFileHandler, isLoading, error } = useUploadFile(accountAddress)
 
-  const upload = async (file: any) => {
-    const refId = Number(account?.id)
+  const upload = async (file: any, accountId?: number) => {
+    const refId = accountId || Number(account?.id)
     const ref = 'Account'
     const field = 'portrait'
     const path = `assets/${accountAddress}`
@@ -188,10 +194,11 @@ export const useUploadAccountAvatar = (accountAddress: string) => {
   return { upload, isLoading, error }
 }
 
-export const useCreateProperty = (walletAddress: string) => {
+export const useCreateProperty = (walletAddress: string, propertyAddress: string) => {
   const key = 'useCreateProperty'
   const { web3 } = useProvider()
   const [isLoading, setIsLoading] = useState<boolean>(false)
+  const { mutate } = useGetProperty(propertyAddress)
 
   const postPropertyHandler = async (
     name?: string,
@@ -214,8 +221,13 @@ export const useCreateProperty = (walletAddress: string) => {
     setIsLoading(true)
     message.loading({ content: 'update property data...', duration: 0, key })
 
-    const data = await postProperty(signedMessage, signature, walletAddress, name, description, links)
+    const data = await postProperty(signedMessage, signature, walletAddress, propertyAddress, name, description, links)
       .then(result => {
+        if (result.error) {
+          message.error({ content: result.error, key })
+          return
+        }
+        mutate()
         message.success({ content: 'success update property data', key })
         return result
       })
@@ -232,10 +244,11 @@ export const useCreateProperty = (walletAddress: string) => {
   return { postPropertyHandler, isLoading }
 }
 
-export const useUpdateProperty = (id: number, walletAddress: string) => {
+export const useUpdateProperty = (id: number, walletAddress: string, propertyAddress: string) => {
   const key = 'useUpdateProperty'
   const { web3 } = useProvider()
   const [isLoading, setIsLoading] = useState<boolean>(false)
+  const { mutate } = useGetProperty(propertyAddress)
 
   const putPropertyHandler = async (
     name?: string,
@@ -258,8 +271,22 @@ export const useUpdateProperty = (id: number, walletAddress: string) => {
     setIsLoading(true)
     message.loading({ content: 'update property data...', duration: 0, key })
 
-    const data = await putProperty(signedMessage, signature, walletAddress, id, name, description, links)
+    const data = await putProperty(
+      signedMessage,
+      signature,
+      walletAddress,
+      propertyAddress,
+      id,
+      name,
+      description,
+      links
+    )
       .then(result => {
+        if (result.error) {
+          message.error({ content: result.error, key })
+          return
+        }
+        mutate()
         message.success({ content: 'success update property data', key })
         return result
       })
@@ -280,8 +307,8 @@ export const useUploadAccountCoverImages = (accountAddress: string) => {
   const { data: account, mutate } = useGetAccount(accountAddress)
   const { postUploadFileHandler, isLoading, error } = useUploadFile(accountAddress)
 
-  const upload = async (file: any) => {
-    const refId = Number(account?.id)
+  const upload = async (file: any, accountId?: number) => {
+    const refId = accountId || Number(account?.id)
     const ref = 'Account'
     const field = 'cover_images'
     const path = `assets/${accountAddress}/${field}`
@@ -293,12 +320,12 @@ export const useUploadAccountCoverImages = (accountAddress: string) => {
   return { upload, isLoading, error }
 }
 
-export const useUploadPropertyCoverImages = (propertyAddress: string) => {
+export const useUploadPropertyCoverImages = (propertyAddress: string, accountAddress: string) => {
   const { data: property, mutate } = useGetProperty(propertyAddress)
-  const { postUploadFileHandler, isLoading, error } = useUploadFile(propertyAddress)
+  const { postUploadFileHandler, isLoading, error } = useUploadFile(accountAddress)
 
-  const upload = async (file: any) => {
-    const refId = Number(property?.id)
+  const upload = async (file: any, propertyId?: number) => {
+    const refId = propertyId || Number(property?.id)
     const ref = 'Property'
     const field = 'cover_image'
     const path = `assets/${propertyAddress}/${field}`

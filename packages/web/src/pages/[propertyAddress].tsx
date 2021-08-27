@@ -1,21 +1,33 @@
-import React, { useMemo, useEffect } from 'react'
+import React, { useCallback, useMemo, useEffect, useState } from 'react'
 import Error from 'next/error'
 import { useRouter } from 'next/router'
+import Link from 'next/link'
+import styled from 'styled-components'
+import ReactMarkdown from 'react-markdown'
+import { PlusOutlined, LinkOutlined } from '@ant-design/icons'
+import { Button, Form, Input, Spin, Skeleton, Upload } from 'antd'
+import { UploadChangeParam, UploadFile } from 'antd/lib/upload/interface'
+import { FormInstance } from 'antd/lib/form'
 import { PossessionOutline } from 'src/components/organisms/PossessionOutline'
 import { PropertyHeader } from 'src/components/organisms/PropertyHeader'
 import { Footer } from 'src/components/organisms/Footer'
-import styled from 'styled-components'
+import { ResponsiveModal } from 'src/components/atoms/ResponsiveModal'
+import { ButtonWithGradient } from 'src/components/atoms/ButtonWithGradient'
 import { Container } from 'src/components/atoms/Container'
 import { Header } from 'src/components/organisms/Header'
 import TopStakers from 'src/components/organisms/TopStakers'
 import { useAPY, usePropertyAuthor } from 'src/fixtures/dev-kit/hooks'
 import { useGetPropertyAuthenticationQuery, useGetPropertyAggregateLazyQuery } from '@dev/graphql'
-import { PlusOutlined, LinkOutlined } from '@ant-design/icons'
-import { Button, Spin, Skeleton } from 'antd'
-import Link from 'next/link'
 import { useGetPropertytInformation } from 'src/fixtures/devprtcl/hooks'
-import { useGetAccount, useGetProperty } from 'src/fixtures/dev-for-apps/hooks'
-import ReactMarkdown from 'react-markdown'
+import {
+  useGetAccount,
+  useGetProperty,
+  useCreateProperty,
+  useUpdateProperty,
+  useUploadPropertyCoverImages,
+  useDeleteFile
+} from 'src/fixtures/dev-for-apps/hooks'
+import { Image, Property as DevForAppsProperty } from 'src/fixtures/dev-for-apps/utility'
 import { WithGradient } from 'src/components/atoms/WithGradient'
 import { Stake } from 'src/components/organisms/Stake'
 import { Withdraw } from 'src/components/organisms/Withdraw'
@@ -25,8 +37,24 @@ import { CoverImageOrGradient } from 'src/components/atoms/CoverImageOrGradient'
 import { H3 } from 'src/components/atoms/Typography'
 import { Twitter, Github } from 'src/components/atoms/SocialButtons'
 import { getPath } from 'src/fixtures/utility/route'
+import { whenDefined } from 'src/fixtures/utility'
 
 type Props = {}
+
+interface ModalStates {
+  visible: boolean
+  title?: string
+  contents?: React.ReactNode
+}
+
+const apiDataToUploadFile = ({ hash: uid, url, name, size, mime: type }: Image): UploadFile => ({
+  status: 'done',
+  uid,
+  url,
+  name,
+  size,
+  type
+})
 
 const Main = styled(Container)`
   display: grid;
@@ -87,7 +115,7 @@ const AddAsset = styled.button`
 
   &:hover {
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2), 0 2px 4px -1px rgba(0, 0, 0, 0.12);
-    transition: 0.2 ease-in;
+    transition: 200ms ease-in;
   }
 `
 
@@ -120,6 +148,16 @@ const LinksArea = styled.div`
   display: flex;
   align-items: start;
   margin-left: -20px;
+`
+
+const AboutTitle = styled.div`
+  display: flex;
+  align-items: center;
+`
+
+const EditPropertyButton = styled(ButtonWithGradient)`
+  font-size: 0.8rem;
+  margin: 0 1rem 0.5rem;
 `
 
 const formatter = new Intl.NumberFormat('en-US')
@@ -185,8 +223,169 @@ const Author = ({ propertyAddress }: { propertyAddress: string }) => {
   )
 }
 
+const pack = (form: FormInstance) => ({
+  description: form.getFieldValue('description'),
+  twitter: form.getFieldValue('twitter'),
+  website: form.getFieldValue('website'),
+  github: form.getFieldValue('github')
+})
+
+const PropertyAbout = ({
+  isAuthor,
+  dataProperty,
+  authorAddress,
+  propertyAddress
+}: {
+  isAuthor: boolean
+  dataProperty: DevForAppsProperty
+  authorAddress: string
+  propertyAddress: string
+}) => {
+  const { postPropertyHandler: createProperty, isLoading } = useCreateProperty(authorAddress, propertyAddress)
+  const { putPropertyHandler: updateProperty, isLoading: isLoadingUpdate } = useUpdateProperty(
+    dataProperty?.id,
+    authorAddress,
+    propertyAddress
+  )
+  const [form] = Form.useForm()
+
+  useEffect(() => {
+    form.setFieldsValue({
+      description: dataProperty?.description,
+      github: dataProperty?.links?.github,
+      twitter: dataProperty?.links?.twitter,
+      website: dataProperty?.links?.website
+    })
+  }, [dataProperty, form])
+
+  const [modalStates, setModalStates] = useState<ModalStates>({ visible: false })
+  const closeModal = () => {
+    setModalStates({ ...modalStates, visible: false })
+  }
+  const handleSave = async (values: any) => {
+    const handler = dataProperty?.id ? updateProperty : createProperty
+    await handler(undefined, values.description, values.website, values.twitter, values.github)
+    setModalStates({ ...modalStates, visible: false })
+  }
+  const showModal = useCallback(() => {
+    setModalStates({ visible: true, title: 'Edit Property' })
+  }, [setModalStates])
+  const onClickEdit = () => showModal()
+
+  // for upload files
+  const { data, found } = useGetProperty(propertyAddress)
+  const [fileList, setFileList] = useState<UploadFile[] | undefined>()
+  const { upload } = useUploadPropertyCoverImages(propertyAddress, authorAddress)
+  const { deleteFileHandler: deleteFile } = useDeleteFile(authorAddress)
+  useEffect(() => {
+    setFileList(whenDefined(dataProperty?.cover_image, x => [apiDataToUploadFile(x)]))
+  }, [setFileList, dataProperty])
+
+  const handleChange = async (info: UploadChangeParam<UploadFile>) => {
+    if (info.event) {
+      const { description, twitter, website, github } = pack(form)
+      const createdProperty =
+        !data && found ? await createProperty(undefined, description, website, twitter, github) : { id: undefined }
+      if (createdProperty === undefined) {
+        return
+      }
+      setFileList([{ ...info.file, status: 'uploading' }])
+      upload(info.file.originFileObj, createdProperty?.id)
+    }
+  }
+
+  const handleRemove = (file: UploadFile) => {
+    whenDefined(data?.cover_image?.id, x => deleteFile(x, file.name))
+    setFileList([])
+  }
+
+  return (
+    <AboutSection>
+      <AboutTitle>
+        <h2>About</h2>
+        {isAuthor ? (
+          <EditPropertyButton size="small" onClick={onClickEdit}>
+            Edit
+          </EditPropertyButton>
+        ) : (
+          <></>
+        )}
+      </AboutTitle>
+      <ReactMarkdown>{dataProperty ? dataProperty.description : ''}</ReactMarkdown>
+      <H3>Links</H3>
+      <LinksArea>
+        {dataProperty?.links?.github && (
+          <Github href={dataProperty?.links.github} target="_blank" rel="noopener noreferrer" />
+        )}
+        {dataProperty?.links?.twitter && (
+          <Twitter href={dataProperty?.links.twitter} target="_blank" rel="noopener noreferrer" />
+        )}
+        {dataProperty?.links?.website && (
+          <a href={dataProperty?.links.website} target="_blank" rel="noopener noreferrer">
+            <Button
+              style={{ marginLeft: '20px', padding: 3, width: '38px', height: '38px' }}
+              shape="circle"
+              icon={<LinkOutlined />}
+            />
+          </a>
+        )}
+      </LinksArea>
+      <ResponsiveModal
+        width={680}
+        centered
+        confirmLoading={isLoading || isLoadingUpdate}
+        visible={modalStates.visible}
+        title={modalStates.title}
+        onCancel={closeModal}
+        footer={[
+          <ButtonWithGradient form="edit-property-form" key="submit" htmlType="submit">
+            Save
+          </ButtonWithGradient>
+        ]}
+      >
+        <Form
+          id="edit-property-form"
+          layout="vertical"
+          form={form}
+          onFinish={({ description, github, twitter, website }) =>
+            handleSave({ description, website, twitter, github })
+          }
+        >
+          <Form.Item label="Description" name="description">
+            <Input.TextArea placeholder="input property description" />
+          </Form.Item>
+          <Form.Item label="GitHub link" name="github">
+            <Input placeholder="input GitHub link" />
+          </Form.Item>
+          <Form.Item label="Twitter link" name="twitter">
+            <Input placeholder="input Twitter link" />
+          </Form.Item>
+          <Form.Item label="Other website link" name="website">
+            <Input placeholder="input other website link" />
+          </Form.Item>
+          <Form.Item label="Cover image">
+            <Upload
+              name="file"
+              multiple={false}
+              listType="picture-card"
+              fileList={fileList}
+              onChange={handleChange}
+              onRemove={handleRemove}
+            >
+              <div>
+                <p>{data && data.cover_image ? 'Change' : 'Upload'}</p>
+              </div>
+            </Upload>
+          </Form.Item>
+        </Form>
+      </ResponsiveModal>
+    </AboutSection>
+  )
+}
+
 const PropertyAddressDetail = (_: Props) => {
-  const [propertyAddress] = getPath(useRouter().asPath)
+  const [urlPathArg] = getPath(useRouter().asPath)
+  const propertyAddress = urlPathArg.split('?')[0]
   const { apy, creators } = useAPY()
   const { data } = useGetPropertyAuthenticationQuery({ variables: { propertyAddress } })
   const isExistProperty = useMemo(() => data && data?.property_authentication.length > 0, [data])
@@ -219,31 +418,14 @@ const PropertyAddressDetail = (_: Props) => {
             {isExistProperty && (loggedInWallet ? loggedInWallet !== authorAddress : true) && (
               <Stake title="Stake" propertyAddress={propertyAddress} />
             )}
-            {isExistProperty && <Withdraw title="Withdraw" propertyAddress={propertyAddress} />}
+            {isExistProperty && <Withdraw title="Withdraw" propertyAddress={propertyAddress} isDisplayFee={true} />}
           </Transact>
-          <AboutSection>
-            <h2>About</h2>
-            <ReactMarkdown>{dataProperty ? dataProperty.description : ''}</ReactMarkdown>
-            <H3>Links</H3>
-            <LinksArea>
-              {dataProperty?.links?.github && (
-                <Github href={dataProperty?.links.github} target="_blank" rel="noopener noreferrer" />
-              )}
-              {dataProperty?.links?.twitter && (
-                <Twitter href={dataProperty?.links.twitter} target="_blank" rel="noopener noreferrer" />
-              )}
-              {dataProperty?.links?.website && (
-                <Button
-                  style={{ marginLeft: '20px', padding: 3, width: '38px', height: '38px' }}
-                  shape="circle"
-                  icon={<LinkOutlined />}
-                  href={dataProperty?.links.website}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                />
-              )}
-            </LinksArea>
-          </AboutSection>
+          <PropertyAbout
+            isAuthor={loggedInWallet === authorAddress}
+            dataProperty={dataProperty ? dataProperty : ({} as DevForAppsProperty)}
+            authorAddress={authorAddress || ''}
+            propertyAddress={propertyAddress}
+          />
           <AssetsSection>
             <h2>Included assets</h2>
             <AssetList>

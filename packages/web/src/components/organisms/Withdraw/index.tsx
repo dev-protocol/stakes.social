@@ -2,17 +2,21 @@ import React, { useCallback, useState, useMemo, ChangeEvent, useEffect } from 'r
 import styled from 'styled-components'
 import { useProvider } from 'src/fixtures/wallet/hooks'
 import { getMyStakingAmount } from 'src/fixtures/dev-kit/client'
-import { useWithdrawStaking } from 'src/fixtures/dev-kit/hooks'
+import { useGetEthPrice } from 'src/fixtures/uniswap/hooks'
+import { useWithdrawStaking, useGetEstimateGas4WithdrawStakingAmount } from 'src/fixtures/dev-kit/hooks'
 import { toAmountNumber, toNaturalNumber, whenDefinedAll } from 'src/fixtures/utility'
 import { TransactForm } from 'src/components/molecules/TransactForm'
 import { FormContainer } from 'src/components/molecules/TransactForm/FormContainer'
+import { EstimatedGasFeeCard } from 'src/components/molecules/EstimatedGasFeeCard'
 import { InfoCircleOutlined } from '@ant-design/icons'
+import { message } from 'antd'
 
 interface Props {
   className?: string
   title?: string
   propertyAddress: string
   onChange?: (value: string) => void
+  isDisplayFee?: boolean
 }
 
 const InfoContainer = styled.div`
@@ -29,15 +33,30 @@ const SubtitleContianer = styled.div`
   align-items: center;
 `
 
-export const Withdraw = ({ className, title, propertyAddress, onChange: onChangeAmount }: Props) => {
+export const Withdraw = ({ className, title, propertyAddress, onChange: onChangeAmount, isDisplayFee }: Props) => {
   const [withdrawAmount, setWithdrawAmount] = useState<string>('')
   const { web3, accountAddress } = useProvider()
   const { withdrawStaking } = useWithdrawStaking()
+  const { estimateGas } = useGetEstimateGas4WithdrawStakingAmount(propertyAddress, withdrawAmount || '0')
+  const { data: ethPrice } = useGetEthPrice()
+  const estimateGasUSD = useMemo(
+    () => whenDefinedAll([estimateGas, ethPrice], ([gas, eth]) => gas.multipliedBy(eth)),
+    [estimateGas, ethPrice]
+  )
   const withdrawFor = useCallback(
     (amount: string) => {
-      withdrawStaking(propertyAddress, toAmountNumber(amount))
+      if (!web3) {
+        message.warn({ content: 'Please sign in', key: 'WithdrawButton' })
+        return
+      }
+      const amountNumber = toAmountNumber(amount)
+      if (amountNumber.toNumber() < 0) {
+        message.warn({ content: 'Please enter a value greater than or equal to 0', key: 'WithdrawButton' })
+        return
+      }
+      withdrawStaking(propertyAddress, amountNumber)
     },
-    [withdrawStaking, propertyAddress]
+    [withdrawStaking, propertyAddress, web3]
   )
   const onClickMax = () =>
     whenDefinedAll([web3, accountAddress], ([libWeb3, account]) =>
@@ -66,6 +85,7 @@ export const Withdraw = ({ className, title, propertyAddress, onChange: onChange
         value={withdrawAmount}
         onChange={onChange}
         onSearch={withdrawFor}
+        disabled={!web3}
         onClickMax={onClickMax}
       />
       <SubtitleContianer>
@@ -76,6 +96,14 @@ export const Withdraw = ({ className, title, propertyAddress, onChange: onChange
           You will receive all accumulated rewards when withdrawing any amount of staked DEV.
         </span>
       </SubtitleContianer>
+      {isDisplayFee ? (
+        <EstimatedGasFeeCard
+          estimatedGasFee={estimateGas ? estimateGas.toFixed(6) : '-'}
+          estimatedGasFeeUSD={estimateGasUSD ? estimateGasUSD.toFixed(2) : ''}
+        />
+      ) : (
+        <></>
+      )}
     </FormContainer>
   )
 }

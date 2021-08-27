@@ -6,16 +6,19 @@ import { ApolloClient, InMemoryCache, ApolloLink, NormalizedCacheObject, ApolloP
 import { createHttpLink } from '@apollo/client/link/http'
 import { onError, ErrorHandler } from '@apollo/client/link/error'
 
-export const errorHandler = (_?: NextPageContext): ErrorHandler => ({ graphQLErrors }) => {
-  if (graphQLErrors) {
-    graphQLErrors.some(({ extensions }) => {
-      console.error(extensions)
-    })
+export const errorHandler =
+  (_?: NextPageContext): ErrorHandler =>
+  ({ graphQLErrors }) => {
+    if (graphQLErrors) {
+      graphQLErrors.some(({ extensions }) => {
+        console.error(extensions)
+      })
+    }
   }
-}
 
 const isBrowser = typeof window !== 'undefined'
 
+// DUPULICATED
 export default withApollo<NormalizedCacheObject>(
   ({ ctx, headers }) => {
     const withHttp = createHttpLink({
@@ -26,7 +29,6 @@ export default withApollo<NormalizedCacheObject>(
 
     return new ApolloClient({
       connectToDevTools: isBrowser,
-      ssrMode: false,
       link: ApolloLink.from([onError(errorHandler(ctx)), withHttp]),
       cache: new InMemoryCache()
     })

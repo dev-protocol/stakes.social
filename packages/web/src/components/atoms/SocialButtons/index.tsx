@@ -1,36 +1,6 @@
 import styled from 'styled-components'
 import React from 'react'
 
-// const SocialButton = styled.a`
-//   background: white;
-//   border: 2px solid #ffffff;
-//   border-radius: 6px;
-//   font-style: normal;
-//   font-weight: normal;
-//   font-size: 16px;
-//   color: #6b6b6b;
-//   padding: 5px 1.4rem;
-//   cursor: pointer;
-//   box-shadow: 1px 3px 40px 2px #f4f4f4;
-//   margin: 10px;
-//   padding-bottom: 0px;
-//   display: inline-block;
-
-//   :hover {
-//     box-shadow: 1px 3px 40px 2px #dadada;
-//   }
-
-//   svg {
-//     width: 26px;
-//   }
-
-//   span {
-//     vertical-align: top;
-//     line-height: 37px;
-//     font-size: 0.7rem;
-//     padding-left: 10px;
-//   }
-// `
 const SocialButton = styled.a`
   cursor: pointer;
   svg {
@@ -154,14 +124,12 @@ export const Medium = () => (
       }}
     >
       <svg
-        // height="100%"
         fillRule="evenodd"
         clipRule="evenodd"
         strokeLinejoin="round"
         strokeMiterlimit="2"
         version="1.1"
         viewBox="0 0 512 512"
-        // width="24px"
       >
         <path
           d="M60.713,135.684c0.637,-6.285 -1.759,-12.499 -6.453,-16.728l-47.807,-57.59l0,-8.603l148.437,0l114.735,251.627l100.872,-251.627l141.503,0.001l0,8.602l-40.874,39.189c-3.525,2.685 -5.272,7.102 -4.541,11.472l0,287.947c-0.731,4.37 1.016,8.786 4.541,11.471l39.917,39.19l0,8.602l-200.782,0l0,-8.602l41.35,-40.147c4.065,-4.061 4.065,-5.257 4.065,-11.468l0,-232.749l-114.973,292.009l-15.536,0l-133.859,-292.009l0,195.709c-1.114,8.228 1.618,16.513 7.41,22.462l53.784,65.235l0,8.603l-152.502,0l0,-8.603l53.784,-65.235c5.749,-5.96 8.321,-14.301 6.929,-22.462l0,-226.296Z"

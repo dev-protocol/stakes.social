@@ -61,8 +61,8 @@ const StyledImage = ({ image }: { image: ImageType }) => {
       <ImageItem
         src={image.url}
         placeholder={(thum => (
-          <Image src={thum.url} width={thum.width} height={thum.height} />
-        ))(image.formats.thumbnail)}
+          <Image src={thum?.url} width={thum?.width} height={thum?.height} />
+        ))(image.formats?.thumbnail)}
       />
     </ImageWrap>
   )
