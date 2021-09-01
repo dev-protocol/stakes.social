@@ -321,14 +321,13 @@ const PropertyAbout = ({
           <Twitter href={dataProperty?.links.twitter} target="_blank" rel="noopener noreferrer" />
         )}
         {dataProperty?.links?.website && (
-          <Button
-            style={{ marginLeft: '20px', padding: 3, width: '38px', height: '38px' }}
-            shape="circle"
-            icon={<LinkOutlined />}
-            href={dataProperty?.links.website}
-            target="_blank"
-            rel="noopener noreferrer"
-          />
+          <a href={dataProperty?.links.website} target="_blank" rel="noopener noreferrer">
+            <Button
+              style={{ marginLeft: '20px', padding: 3, width: '38px', height: '38px' }}
+              shape="circle"
+              icon={<LinkOutlined />}
+            />
+          </a>
         )}
       </LinksArea>
       <ResponsiveModal

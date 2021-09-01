@@ -4,16 +4,16 @@ exports[`Banner Snapshot 1`] = `
 <body>
   <div>
     <a
-      href="http://onboarding-sponsors.devprotocol.xyz/"
+      href="https://onboarding-sponsors.devprotocol.xyz/"
       rel="noreferrer noopener"
       target="_blank"
     >
       <div
-        class="sc-3hjy97-0 iZckJa"
+        class="sc-3hjy97-0 XKRcf"
       >
         <img
           alt="Onboarding Sponsors"
-          class="sc-3hjy97-1 hrTxVH"
+          class="sc-3hjy97-1 fWfXuC"
           src="//onboarding-sponsors.devprotocol.xyz/images/sponsors/sponsors.svg"
           title="Onboarding Sponsors"
         />

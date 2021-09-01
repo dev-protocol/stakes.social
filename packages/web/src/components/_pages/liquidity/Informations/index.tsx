@@ -3,7 +3,7 @@ import { Card, Statistic } from 'antd'
 import styled from 'styled-components'
 import {
   useAPY,
-  useFinalUnlockSchedules,
+  useEntirePeriod,
   useRewardMultiplier,
   useTotalStakedFor,
   useUnstakeQuery
@@ -51,8 +51,8 @@ export const Informations = ({ geyserAddress }: Props) => {
   const { data: rewardMultiplier, max } = useRewardMultiplier(geyserAddress)
   const { data: totalStakedFor } = useTotalStakedFor(geyserAddress)
   const { data: unstakeQuery } = useUnstakeQuery(geyserAddress, totalStakedFor)
-  const { data: finalUnlockSchedules } = useFinalUnlockSchedules(geyserAddress)
-  const apm = finalUnlockSchedules ? apy.div(finalUnlockSchedules.durationSec).times(ONE_MONTH_SECONDS) : undefined
+  const { data: entirePeriod } = useEntirePeriod(geyserAddress)
+  const apm = entirePeriod ? apy.div(entirePeriod).times(ONE_MONTH_SECONDS) : undefined
   const accruedRewards =
     totalStakedFor && unstakeQuery ? (totalStakedFor.isZero() ? toBigNumber(0) : unstakeQuery) : toBigNumber(0)
 
