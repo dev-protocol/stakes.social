@@ -23,7 +23,7 @@ export const Banner = () => {
       <a target="_blank" rel="noreferrer noopener">
         <Wrap>
           <Img
-            src="#"
+            src=""
             alt="#"
             title="#"
           />
