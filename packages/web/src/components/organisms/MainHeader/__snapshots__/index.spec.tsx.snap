@@ -4,7 +4,7 @@ exports[`Banner Snapshot 1`] = `
 <body>
   <div>
     <a
-      href="#"
+      href="https://onboarding-sponsors.devprotocol.xyz/"
       rel="noreferrer noopener"
       target="_blank"
     >
@@ -12,10 +12,10 @@ exports[`Banner Snapshot 1`] = `
         class="sc-3hjy97-0 XKRcf"
       >
         <img
-          alt=""
+          alt="Onboarding Sponsors"
           class="sc-3hjy97-1 fWfXuC"
-          src=""
-          title=""
+          src="//onboarding-sponsors.devprotocol.xyz/images/sponsors/sponsors.svg"
+          title="Onboarding Sponsors"
         />
       </div>
     </a>

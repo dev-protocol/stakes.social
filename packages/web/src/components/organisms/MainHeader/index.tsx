@@ -19,10 +19,14 @@ const Img = styled.img`
 
 export const Banner = () => {
   return (
-    <Link href="#" passHref>
+    <Link href="https://onboarding-sponsors.devprotocol.xyz/" passHref>
       <a target="_blank" rel="noreferrer noopener">
         <Wrap>
-          <Img src="" alt="" title="" />
+          <Img
+            src="//onboarding-sponsors.devprotocol.xyz/images/sponsors/sponsors.svg"
+            alt="Onboarding Sponsors"
+            title="Onboarding Sponsors"
+          />
         </Wrap>
       </a>
     </Link>
