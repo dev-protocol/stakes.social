@@ -5809,32 +5809,42 @@ export type Withdraw_Property_Transfer_Variance_Order_By = {
   transaction_index?: Maybe<Order_By>
 }
 
-export type PropertyFactoryCreateFragment = { __typename?: 'property_factory_create' } & Pick<
-  Property_Factory_Create,
-  'block_number' | 'event_id' | 'from_address' | 'log_index' | 'property' | 'raw_data' | 'transaction_index'
->
+export type PropertyFactoryCreateFragment = {
+  __typename?: 'property_factory_create'
+  block_number: number
+  event_id: string
+  from_address: string
+  log_index: number
+  property: string
+  raw_data: string
+  transaction_index: number
+}
 
 export type GetMarketFactoryCreateQueryVariables = Exact<{ [key: string]: never }>
 
-export type GetMarketFactoryCreateQuery = { __typename?: 'query_root' } & {
-  market_factory_create: Array<{ __typename?: 'market_factory_create' } & Pick<Market_Factory_Create, 'market'>>
+export type GetMarketFactoryCreateQuery = {
+  __typename?: 'query_root'
+  market_factory_create: Array<{ __typename?: 'market_factory_create'; market: string }>
 }
 
 export type GetPortofolioPoolsAccountQueryVariables = Exact<{
   accountAddress: Scalars['String']
 }>
 
-export type GetPortofolioPoolsAccountQuery = { __typename?: 'query_root' } & {
-  property_lockup: Array<{ __typename?: 'property_lockup' } & Pick<Property_Lockup, 'property_address'>>
+export type GetPortofolioPoolsAccountQuery = {
+  __typename?: 'query_root'
+  property_lockup: Array<{ __typename?: 'property_lockup'; property_address: string }>
 }
 
 export type GetPropertyAggregateQueryVariables = Exact<{
   authorAddress?: Maybe<Scalars['String']>
 }>
 
-export type GetPropertyAggregateQuery = { __typename?: 'query_root' } & {
-  property_meta_aggregate: { __typename?: 'property_meta_aggregate' } & {
-    aggregate?: Maybe<{ __typename?: 'property_meta_aggregate_fields' } & Pick<Property_Meta_Aggregate_Fields, 'count'>>
+export type GetPropertyAggregateQuery = {
+  __typename?: 'query_root'
+  property_meta_aggregate: {
+    __typename?: 'property_meta_aggregate'
+    aggregate?: Maybe<{ __typename?: 'property_meta_aggregate_fields'; count?: Maybe<number> }>
   }
 }
 
@@ -5842,13 +5852,15 @@ export type GetPropertyAuthenticationQueryVariables = Exact<{
   propertyAddress: Scalars['String']
 }>
 
-export type GetPropertyAuthenticationQuery = { __typename?: 'query_root' } & {
-  property_authentication: Array<
-    { __typename?: 'property_authentication' } & Pick<
-      Property_Authentication,
-      'authentication_id' | 'market' | 'metrics'
-    > & { property_meta?: Maybe<{ __typename?: 'property_meta' } & Pick<Property_Meta, 'author'>> }
-  >
+export type GetPropertyAuthenticationQuery = {
+  __typename?: 'query_root'
+  property_authentication: Array<{
+    __typename?: 'property_authentication'
+    authentication_id: string
+    market: string
+    metrics: string
+    property_meta?: Maybe<{ __typename?: 'property_meta'; author: string }>
+  }>
 }
 
 export type GetPropertyBalanceQueryVariables = Exact<{
@@ -5856,23 +5868,25 @@ export type GetPropertyBalanceQueryVariables = Exact<{
   property_address: Scalars['String']
 }>
 
-export type GetPropertyBalanceQuery = { __typename?: 'query_root' } & {
-  property_balance: Array<
-    { __typename?: 'property_balance' } & Pick<
-      Property_Balance,
-      'account_address' | 'balance' | 'block_number' | 'is_author' | 'property_address'
-    >
-  >
+export type GetPropertyBalanceQuery = {
+  __typename?: 'query_root'
+  property_balance: Array<{
+    __typename?: 'property_balance'
+    account_address: string
+    balance: any
+    block_number: number
+    is_author: boolean
+    property_address: string
+  }>
 }
 
 export type TotalStakedAccountQueryVariables = Exact<{
   account_address: Scalars['String']
 }>
 
-export type TotalStakedAccountQuery = { __typename?: 'query_root' } & {
-  account_lockup_sum_values: Array<
-    { __typename?: 'account_lockup_sum_values' } & Pick<Account_Lockup_Sum_Values, 'sum_values'>
-  >
+export type TotalStakedAccountQuery = {
+  __typename?: 'query_root'
+  account_lockup_sum_values: Array<{ __typename?: 'account_lockup_sum_values'; sum_values?: Maybe<any> }>
 }
 
 export type ListAccountLockupQueryVariables = Exact<{
@@ -5881,22 +5895,22 @@ export type ListAccountLockupQueryVariables = Exact<{
   limit: Scalars['Int']
 }>
 
-export type ListAccountLockupQuery = { __typename?: 'query_root' } & {
-  account_lockup: Array<{ __typename?: 'account_lockup' } & Pick<Account_Lockup, 'property_address'>>
-  account_lockup_aggregate: { __typename?: 'account_lockup_aggregate' } & {
-    aggregate?: Maybe<
-      { __typename?: 'account_lockup_aggregate_fields' } & Pick<Account_Lockup_Aggregate_Fields, 'count'>
-    >
+export type ListAccountLockupQuery = {
+  __typename?: 'query_root'
+  account_lockup: Array<{ __typename?: 'account_lockup'; property_address: string }>
+  account_lockup_aggregate: {
+    __typename?: 'account_lockup_aggregate'
+    aggregate?: Maybe<{ __typename?: 'account_lockup_aggregate_fields'; count?: Maybe<number> }>
   }
 }
 
 export type CountAccountLockupUniqueQueryVariables = Exact<{ [key: string]: never }>
 
-export type CountAccountLockupUniqueQuery = { __typename?: 'query_root' } & {
-  account_lockup_aggregate: { __typename?: 'account_lockup_aggregate' } & {
-    aggregate?: Maybe<
-      { __typename?: 'account_lockup_aggregate_fields' } & Pick<Account_Lockup_Aggregate_Fields, 'count'>
-    >
+export type CountAccountLockupUniqueQuery = {
+  __typename?: 'query_root'
+  account_lockup_aggregate: {
+    __typename?: 'account_lockup_aggregate'
+    aggregate?: Maybe<{ __typename?: 'account_lockup_aggregate_fields'; count?: Maybe<number> }>
   }
 }
 
@@ -5906,8 +5920,9 @@ export type ListOwnedPropertyMetaQueryVariables = Exact<{
   limit?: Maybe<Scalars['Int']>
 }>
 
-export type ListOwnedPropertyMetaQuery = { __typename?: 'query_root' } & {
-  property_meta: Array<{ __typename?: 'property_meta' } & Pick<Property_Meta, 'property' | 'name'>>
+export type ListOwnedPropertyMetaQuery = {
+  __typename?: 'query_root'
+  property_meta: Array<{ __typename?: 'property_meta'; property: string; name: string }>
 }
 
 export type ListPropertyQueryVariables = Exact<{
@@ -5919,21 +5934,22 @@ export type ListPropertyQueryVariables = Exact<{
   marketOther?: Maybe<Array<Scalars['String']> | Scalars['String']>
 }>
 
-export type ListPropertyQuery = { __typename?: 'query_root' } & {
-  property_factory_create: Array<
-    { __typename?: 'property_factory_create' } & {
-      authentication: Array<
-        { __typename?: 'property_authentication' } & Pick<Property_Authentication, 'authentication_id'>
-      >
-    } & PropertyFactoryCreateFragment
-  >
-  property_factory_create_aggregate: { __typename?: 'property_factory_create_aggregate' } & {
-    aggregate?: Maybe<
-      { __typename?: 'property_factory_create_aggregate_fields' } & Pick<
-        Property_Factory_Create_Aggregate_Fields,
-        'count'
-      >
-    >
+export type ListPropertyQuery = {
+  __typename?: 'query_root'
+  property_factory_create: Array<{
+    __typename?: 'property_factory_create'
+    block_number: number
+    event_id: string
+    from_address: string
+    log_index: number
+    property: string
+    raw_data: string
+    transaction_index: number
+    authentication: Array<{ __typename?: 'property_authentication'; authentication_id: string }>
+  }>
+  property_factory_create_aggregate: {
+    __typename?: 'property_factory_create_aggregate'
+    aggregate?: Maybe<{ __typename?: 'property_factory_create_aggregate_fields'; count?: Maybe<number> }>
   }
 }
 
@@ -5946,21 +5962,22 @@ export type ListPropertyOrderByMostRecentQueryVariables = Exact<{
   marketOther?: Maybe<Array<Scalars['String']> | Scalars['String']>
 }>
 
-export type ListPropertyOrderByMostRecentQuery = { __typename?: 'query_root' } & {
-  property_factory_create: Array<
-    { __typename?: 'property_factory_create' } & {
-      authentication: Array<
-        { __typename?: 'property_authentication' } & Pick<Property_Authentication, 'authentication_id'>
-      >
-    } & PropertyFactoryCreateFragment
-  >
-  property_factory_create_aggregate: { __typename?: 'property_factory_create_aggregate' } & {
-    aggregate?: Maybe<
-      { __typename?: 'property_factory_create_aggregate_fields' } & Pick<
-        Property_Factory_Create_Aggregate_Fields,
-        'count'
-      >
-    >
+export type ListPropertyOrderByMostRecentQuery = {
+  __typename?: 'query_root'
+  property_factory_create: Array<{
+    __typename?: 'property_factory_create'
+    block_number: number
+    event_id: string
+    from_address: string
+    log_index: number
+    property: string
+    raw_data: string
+    transaction_index: number
+    authentication: Array<{ __typename?: 'property_authentication'; authentication_id: string }>
+  }>
+  property_factory_create_aggregate: {
+    __typename?: 'property_factory_create_aggregate'
+    aggregate?: Maybe<{ __typename?: 'property_factory_create_aggregate_fields'; count?: Maybe<number> }>
   }
 }
 
@@ -5971,23 +5988,21 @@ export type ListPropertyMetaQueryVariables = Exact<{
   ilike?: Maybe<Scalars['String']>
 }>
 
-export type ListPropertyMetaQuery = { __typename?: 'query_root' } & {
-  property_meta: Array<
-    { __typename?: 'property_meta' } & Pick<Property_Meta, 'property' | 'name'> & {
-        lockup_aggregate: { __typename?: 'property_lockup_aggregate' } & {
-          aggregate?: Maybe<
-            { __typename?: 'property_lockup_aggregate_fields' } & Pick<Property_Lockup_Aggregate_Fields, 'count'> & {
-                sum?: Maybe<
-                  { __typename?: 'property_lockup_sum_fields' } & Pick<
-                    Property_Lockup_Sum_Fields,
-                    'block_number' | 'value'
-                  >
-                >
-              }
-          >
-        }
-      }
-  >
+export type ListPropertyMetaQuery = {
+  __typename?: 'query_root'
+  property_meta: Array<{
+    __typename?: 'property_meta'
+    property: string
+    name: string
+    lockup_aggregate: {
+      __typename?: 'property_lockup_aggregate'
+      aggregate?: Maybe<{
+        __typename?: 'property_lockup_aggregate_fields'
+        count?: Maybe<number>
+        sum?: Maybe<{ __typename?: 'property_lockup_sum_fields'; block_number?: Maybe<number>; value?: Maybe<any> }>
+      }>
+    }
+  }>
 }
 
 export type ListTopStakersAccountQueryVariables = Exact<{
@@ -5995,10 +6010,14 @@ export type ListTopStakersAccountQueryVariables = Exact<{
   limit?: Maybe<Scalars['Int']>
 }>
 
-export type ListTopStakersAccountQuery = { __typename?: 'query_root' } & {
-  account_lockup: Array<
-    { __typename?: 'account_lockup' } & Pick<Account_Lockup, 'account_address' | 'value' | 'property_address'>
-  >
+export type ListTopStakersAccountQuery = {
+  __typename?: 'query_root'
+  account_lockup: Array<{
+    __typename?: 'account_lockup'
+    account_address: string
+    value: any
+    property_address: string
+  }>
 }
 
 export type ListTopSupportingAccountQueryVariables = Exact<{
@@ -6006,8 +6025,9 @@ export type ListTopSupportingAccountQueryVariables = Exact<{
   limit?: Maybe<Scalars['Int']>
 }>
 
-export type ListTopSupportingAccountQuery = { __typename?: 'query_root' } & {
-  account_lockup: Array<{ __typename?: 'account_lockup' } & Pick<Account_Lockup, 'property_address' | 'value'>>
+export type ListTopSupportingAccountQuery = {
+  __typename?: 'query_root'
+  account_lockup: Array<{ __typename?: 'account_lockup'; property_address: string; value: any }>
 }
 
 export const PropertyFactoryCreateFragmentDoc = gql`

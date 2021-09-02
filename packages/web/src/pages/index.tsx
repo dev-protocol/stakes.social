@@ -1,6 +1,5 @@
 import React, { useMemo } from 'react'
 import { PropertyCardList } from 'src/components/organisms/PropertyCardList'
-import { Banner } from 'src/components/organisms/MainHeader'
 import { Footer } from 'src/components/organisms/Footer'
 import { useRouter } from 'next/router'
 
@@ -54,7 +53,6 @@ const Index = (_: Props) => {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
       <Header />
-      <Banner />
       <Container>
         <StyledSupplySummary apy={apy} creators={creators} annualSupplyGrowthRatio={annualSupplyGrowthRatio} />
         <PropertyCardList currentPage={page} searchWord={word} sortBy={sortBy} featureTag={featureTag} />
