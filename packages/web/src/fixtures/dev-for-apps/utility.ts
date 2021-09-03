@@ -23,6 +23,9 @@ export interface Account {
   portrait: Image
   links: NullableProfileLinks
   cover_images: Image[]
+  property_settings?: {
+    private_staking: boolean
+  }
 }
 
 export type ImageFormat = {
@@ -62,6 +65,13 @@ export interface Property {
   avatar: NullableImage
   links?: PropertyLinks
   error?: string
+}
+
+export interface PropertySetting {
+  id: string
+  property_address: string
+  address: string
+  private_staking?: boolean
 }
 
 export interface UploadFile {
@@ -137,7 +147,8 @@ export const postAccount = (
   address: string,
   name?: string,
   biography?: string,
-  links?: ProfileLinks
+  links?: ProfileLinks,
+  isPrivateStaking?: boolean
 ): Promise<Account> =>
   fetch(`${StrapiBaseUrl}/accounts`, {
     method: 'POST',
@@ -150,7 +161,8 @@ export const postAccount = (
       links,
       address,
       signature,
-      signMessage
+      signMessage,
+      property_settings: isPrivateStaking === undefined ? undefined : { private_staking: isPrivateStaking }
     })
   }).then(res => res.json())
 
@@ -161,7 +173,8 @@ export const putAccount = (
   id: number,
   name?: string,
   biography?: string,
-  links?: ProfileLinks
+  links?: ProfileLinks,
+  isPrivateStaking?: boolean
 ): Promise<Account> =>
   fetch(`${StrapiBaseUrl}/accounts/${id}`, {
     method: 'PUT',
@@ -174,7 +187,8 @@ export const putAccount = (
       links,
       address,
       signature,
-      signMessage
+      signMessage,
+      property_settings: isPrivateStaking === undefined ? undefined : { private_staking: isPrivateStaking }
     })
   }).then(res => res.json())
 
@@ -276,3 +290,60 @@ export const getIncubators = (): Promise<Array<Incubator>> =>
   fetch(`${StrapiBaseUrl}/incubators`)
     .then(res => res.json())
     .catch(() => [])
+
+export const getPropertySetting = (
+  propertyAddress?: string,
+  accountAddress?: string
+): Promise<Array<PropertySetting>> =>
+  fetch(
+    propertyAddress && accountAddress
+      ? `${StrapiBaseUrl}/property-settings?property_address=${propertyAddress}&address=${accountAddress}`
+      : propertyAddress && !accountAddress
+      ? `${StrapiBaseUrl}/property-settings?property_address=${propertyAddress}`
+      : `${StrapiBaseUrl}/property-settings?address=${accountAddress}`
+  )
+    .then(res => res.json())
+    .catch(always([]))
+
+export const postPropertySetting = (
+  signMessage: string,
+  signature: string,
+  propertyAddress: string,
+  accountAddress: string,
+  isPrivateStaking: boolean
+): Promise<PropertySetting> =>
+  fetch(`${StrapiBaseUrl}/property-settings`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json; charset=utf-8'
+    },
+    body: JSON.stringify({
+      property_address: propertyAddress,
+      address: accountAddress,
+      private_staking: isPrivateStaking,
+      signature,
+      signMessage
+    })
+  }).then(res => res.json())
+
+export const putPropertySetting = (
+  signMessage: string,
+  signature: string,
+  id: number,
+  propertyAddress: string,
+  accountAddress: string,
+  isPrivateStaking: boolean
+): Promise<PropertySetting> =>
+  fetch(`${StrapiBaseUrl}/property-settings/${id}`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json; charset=utf-8'
+    },
+    body: JSON.stringify({
+      property_address: propertyAddress,
+      address: accountAddress,
+      private_staking: isPrivateStaking,
+      signature,
+      signMessage
+    })
+  }).then(res => res.json())

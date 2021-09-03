@@ -11,16 +11,32 @@ import {
   postProperty,
   putProperty,
   ProfileLinks,
-  PropertyLinks
+  PropertyLinks,
+  postPropertySetting,
+  putPropertySetting
 } from './utility'
 import { signWithCache } from 'src/fixtures/wallet/utility'
 import { useProvider } from '../wallet/hooks'
 import { useUploadFile, useDeleteFile } from './functions/useUploadFile'
 import { useGetAccount } from './functions/useGetAccount'
 import { useGetProperty } from './functions/useGetProperty'
+import {
+  useGetPropertySetting,
+  useGetPropertySettingsByAccount,
+  useGetPropertySettingsByProperty
+} from './functions/useGetPropertySetting'
 import { useGetIncubators } from './functions/incubator'
 
-export { useUploadFile, useDeleteFile, useGetAccount, useGetProperty, useGetIncubators }
+export {
+  useUploadFile,
+  useDeleteFile,
+  useGetAccount,
+  useGetIncubators,
+  useGetProperty,
+  useGetPropertySetting,
+  useGetPropertySettingsByAccount,
+  useGetPropertySettingsByProperty
+}
 
 export const useGetPropertyTags = (propertyAddress: string) => {
   const shouldFetch = propertyAddress !== ''
@@ -77,7 +93,13 @@ export const useCreateAccount = (walletAddress: string) => {
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const { mutate } = useGetAccount(walletAddress)
 
-  const postAccountHandler = async (name?: string, biography?: string, website?: string, github?: string) => {
+  const postAccountHandler = async (
+    name?: string,
+    biography?: string,
+    website?: string,
+    github?: string,
+    isPrivateStaking?: boolean
+  ) => {
     const links: ProfileLinks = {
       github,
       website
@@ -91,7 +113,7 @@ export const useCreateAccount = (walletAddress: string) => {
     setIsLoading(true)
     message.loading({ content: 'update account data...', duration: 0, key })
 
-    const data = await postAccount(signedMessage, signature, walletAddress, name, biography, links)
+    const data = await postAccount(signedMessage, signature, walletAddress, name, biography, links, isPrivateStaking)
       .then(result => {
         mutate()
         message.success({ content: 'success update account data', key })
@@ -116,7 +138,13 @@ export const useUpdateAccount = (id: number, walletAddress: string) => {
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const { mutate } = useGetAccount(walletAddress)
 
-  const putAccountHandler = async (name?: string, biography?: string, website?: string, github?: string) => {
+  const putAccountHandler = async (
+    name?: string,
+    biography?: string,
+    website?: string,
+    github?: string,
+    isPrivateStaking?: boolean
+  ) => {
     const links: ProfileLinks = {
       github,
       website
@@ -130,7 +158,7 @@ export const useUpdateAccount = (id: number, walletAddress: string) => {
     setIsLoading(true)
     message.loading({ content: 'update account data...', duration: 0, key })
 
-    const data = await putAccount(signedMessage, signature, walletAddress, id, name, biography, links)
+    const data = await putAccount(signedMessage, signature, walletAddress, id, name, biography, links, isPrivateStaking)
       .then(result => {
         mutate()
         message.success({ content: 'success update account data', key })
@@ -307,4 +335,80 @@ export const useUploadPropertyCoverImages = (propertyAddress: string, accountAdd
     })
   }
   return { upload, isLoading, error }
+}
+
+export const useCreatePropertySetting = (propertyAddress: string, walletAddress: string) => {
+  const key = 'useCreatePropertySetting'
+  const { web3 } = useProvider()
+  const [isLoading, setIsLoading] = useState<boolean>(false)
+
+  const postPropertySettingHandler = async (isPrivateStaking: boolean) => {
+    const signMessage = `create property setting: ${propertyAddress}, ${walletAddress}}`
+    const { signature, message: signedMessage } = await signWithCache(web3, signMessage)
+    if (!signature || !signedMessage) {
+      return
+    }
+
+    setIsLoading(true)
+    message.loading({ content: 'create property setting...', duration: 0, key })
+
+    const data = await postPropertySetting(signedMessage, signature, propertyAddress, walletAddress, isPrivateStaking)
+      .then(result => {
+        message.success({ content: 'success create property setting', key })
+        return result
+      })
+      .catch(err => {
+        message.error({ content: err.message, key })
+        return Promise.reject({})
+      })
+
+    setIsLoading(false)
+
+    return data
+  }
+
+  return { postPropertySettingHandler, isLoading }
+}
+
+export const useUpdatePropertySetting = (propertyAddress: string, walletAddress: string) => {
+  const key = 'useUpdatePropertySetting'
+  const { data: propertySetting, mutate } = useGetPropertySetting(propertyAddress, walletAddress)
+  const { web3 } = useProvider()
+  const [isLoading, setIsLoading] = useState<boolean>(false)
+
+  const putPropertySettingHandler = async (isPrivateStaking: boolean) => {
+    const id = Number(propertySetting?.id)
+    const signMessage = `update property setting: ${propertyAddress}, ${walletAddress}}`
+    const { signature, message: signedMessage } = await signWithCache(web3, signMessage)
+    if (!signature || !signedMessage) {
+      return
+    }
+
+    setIsLoading(true)
+    message.loading({ content: 'update property setting...', duration: 0, key })
+
+    const data = await putPropertySetting(
+      signedMessage,
+      signature,
+      id,
+      propertyAddress,
+      walletAddress,
+      isPrivateStaking
+    )
+      .then(result => {
+        message.success({ content: 'success update property setting', key })
+        return result
+      })
+      .catch(err => {
+        message.error({ content: err.message, key })
+        return Promise.reject({})
+      })
+
+    setIsLoading(false)
+    mutate()
+
+    return data
+  }
+
+  return { putPropertySettingHandler, isLoading }
 }

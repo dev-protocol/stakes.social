@@ -5,10 +5,13 @@ export const SWRCachePath = {
   getUser: (walletAddress: string) => `${BaseUrl}/mainnet/user/${walletAddress}`,
   getPropertyTags: (propertyAddress: string) => `${BaseUrl}/mainnet/property/${propertyAddress}/tags`,
   getAccount: (walletAddress?: string) => `${StrapiBaseUrl}/accounts?address=${walletAddress}`,
-  createAccount: () => `${StrapiBaseUrl}/accounts`,
-  updateAccount: (id: number) => `${StrapiBaseUrl}/accounts/${id}`,
-  uploadFile: () => `${StrapiBaseUrl}/upload`,
   getProperty: (propertyAddress?: string) => `${StrapiBaseUrl}/properties?address=${propertyAddress}`,
+  getPropertySettingsByProperty: (propertyAddress: string) =>
+    `${StrapiBaseUrl}/property-settings?property_address=${propertyAddress}`,
+  getPropertySettingsByAccount: (accountAddress: string) =>
+    `${StrapiBaseUrl}/property-settings?address=${accountAddress}`,
+  getPropertySetting: (propertyAddress: string, accountAddress: string) =>
+    `${StrapiBaseUrl}/property-settings?property_address=${propertyAddress}&address=${accountAddress}`,
   createProperty: () => `${StrapiBaseUrl}/properties`,
   updateProperty: (id: number) => `${StrapiBaseUrl}/properties/${id}`,
   getIncubators: () => `${StrapiBaseUrl}/incubators`

@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import { useQuery } from '@apollo/client'
 import getTopStakersOfPropertyQuery from './query/getTopStakersOfProperty'
 import { Avatar } from 'src/components/molecules/Avatar'
 import styled, { css } from 'styled-components'
 import { useListTopStakersAccountLazyQuery } from '@dev/graphql'
-import { useGetAccount } from 'src/fixtures/dev-for-apps/hooks'
+import { useGetAccount, useGetPropertySettingsByProperty } from 'src/fixtures/dev-for-apps/hooks'
 import { useENS } from 'src/fixtures/ens/hooks'
 import { Spin } from 'antd'
 import Link from 'next/link'
@@ -99,10 +99,16 @@ const Staker = ({ accountAddress, value }: { accountAddress: string; value: numb
 }
 
 const TopStakers = ({ authorAddress, propertyAddress }: TopStakersProps) => {
+  const { data: incognitoSettings } = useGetPropertySettingsByProperty(propertyAddress || '')
+  const incognitoAddresses = useMemo(() => {
+    return incognitoSettings?.filter(x => x.private_staking).map(x => x.address) || []
+  }, [incognitoSettings])
+
   const { data: topPropertyStakersData, loading: isPropertyStakingLoading } = useQuery(getTopStakersOfPropertyQuery, {
     variables: {
       limit: 5,
-      property_address: propertyAddress
+      property_address: propertyAddress,
+      notin_account_addresses: incognitoAddresses
     },
     skip: !!authorAddress || !propertyAddress
   })

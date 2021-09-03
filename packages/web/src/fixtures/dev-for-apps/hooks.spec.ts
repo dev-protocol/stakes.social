@@ -7,18 +7,27 @@ import {
   useUpdateAccount,
   useCreateProperty,
   useUpdateProperty,
+  useCreatePropertySetting,
+  useUpdatePropertySetting,
   useUploadAccountAvatar,
   useUploadAccountCoverImages,
   useUploadPropertyCoverImages
 } from './hooks'
-import { postPropertyTags, postAccount, putAccount, postProperty, putProperty } from './utility'
+import {
+  postPropertyTags,
+  postAccount,
+  putAccount,
+  postProperty,
+  putProperty,
+  postPropertySetting,
+  putPropertySetting
+} from './utility'
 import { signWithCache } from 'src/fixtures/wallet/utility'
 import { useUploadFile } from './functions/useUploadFile'
 import { useGetAccount } from './functions/useGetAccount'
 import { useGetProperty } from './functions/useGetProperty'
 
 jest.mock('swr')
-jest.mock('src/fixtures/utility')
 jest.mock('src/fixtures/dev-for-apps/utility.ts')
 jest.mock('src/fixtures/wallet/utility.ts')
 jest.mock('src/fixtures/wallet/hooks.ts')
@@ -344,6 +353,82 @@ describe('dev-for-apps hooks with strapi for property', () => {
       })
       expect(result.current.isLoading).toBe(false)
       expect((putProperty as jest.Mock).mock.calls.length).toBe(0)
+    })
+  })
+
+  describe('useCreatePropertySetting', () => {
+    test('success create property setting', async () => {
+      const walletAddress = '0x12345'
+      const propertyAddress = '0x98765'
+      const data = {}
+      ;(postPropertySetting as jest.Mock).mockResolvedValue(data)
+      ;(signWithCache as jest.Mock).mockImplementation(() => ({
+        signature: 'test signature',
+        message: 'test sign message'
+      }))
+      const { result } = renderHook(() => useCreatePropertySetting(propertyAddress, walletAddress))
+      await act(async () => {
+        const isPrivateStaking = true
+        await result.current.postPropertySettingHandler(isPrivateStaking)
+      })
+      expect(result.current.isLoading).toBe(false)
+      expect((postPropertySetting as jest.Mock).mock.calls.length).toBe(1)
+    })
+
+    test('fail to create property setting with web3.sign error', async () => {
+      const walletAddress = '0x12345'
+      const propertyAddress = '0x98765'
+      const data = {}
+      ;(postPropertySetting as jest.Mock).mockResolvedValue(data)
+      ;(signWithCache as jest.Mock).mockImplementation(() => ({
+        signature: undefined,
+        message: undefined
+      }))
+      const { result } = renderHook(() => useCreatePropertySetting(propertyAddress, walletAddress))
+      await act(async () => {
+        const isPrivateStaking = true
+        await result.current.postPropertySettingHandler(isPrivateStaking)
+      })
+      expect(result.current.isLoading).toBe(false)
+      expect((postPropertySetting as jest.Mock).mock.calls.length).toBe(0)
+    })
+  })
+
+  describe('useUpdatePropertySetting', () => {
+    test('success update property setting', async () => {
+      const walletAddress = '0x12345'
+      const propertyAddress = '0x98765'
+      const data = {}
+      ;(putPropertySetting as jest.Mock).mockResolvedValue(data)
+      ;(signWithCache as jest.Mock).mockImplementation(() => ({
+        signature: 'test signature',
+        message: 'test sign message'
+      }))
+      const { result } = renderHook(() => useUpdatePropertySetting(propertyAddress, walletAddress))
+      await act(async () => {
+        const isPrivateStaking = true
+        await result.current.putPropertySettingHandler(isPrivateStaking)
+      })
+      expect(result.current.isLoading).toBe(false)
+      expect((putPropertySetting as jest.Mock).mock.calls.length).toBe(1)
+    })
+
+    test('fail to update property setting with web3.sign error', async () => {
+      const walletAddress = '0x12345'
+      const propertyAddress = '0x98765'
+      const data = {}
+      ;(putPropertySetting as jest.Mock).mockResolvedValue(data)
+      ;(signWithCache as jest.Mock).mockImplementation(() => ({
+        signature: undefined,
+        message: undefined
+      }))
+      const { result } = renderHook(() => useUpdatePropertySetting(propertyAddress, walletAddress))
+      await act(async () => {
+        const isPrivateStaking = true
+        await result.current.putPropertySettingHandler(isPrivateStaking)
+      })
+      expect(result.current.isLoading).toBe(false)
+      expect((putPropertySetting as jest.Mock).mock.calls.length).toBe(0)
     })
   })
 })

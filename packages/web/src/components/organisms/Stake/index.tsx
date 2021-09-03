@@ -6,6 +6,7 @@ import { useGetEthPrice } from 'src/fixtures/uniswap/hooks'
 import { toAmountNumber, toNaturalNumber, whenDefinedAll } from 'src/fixtures/utility'
 import { TransactForm } from 'src/components/molecules/TransactForm'
 import { FormContainer } from 'src/components/molecules/TransactForm/FormContainer'
+import { IncognitoSwitch } from 'src/components/molecules/IncognitoSwitch'
 import { EstimatedGasFeeCard } from 'src/components/molecules/EstimatedGasFeeCard'
 import { message } from 'antd'
 
@@ -64,7 +65,9 @@ export const Stake = ({ className, title, propertyAddress }: Props) => {
         disabled={!web3}
         onClickMax={onClickMax}
       />
-      <div style={{ height: '40px' }}></div>
+      <div style={{ height: '40px' }}>
+        <IncognitoSwitch propertyAddress={propertyAddress} />
+      </div>
       <EstimatedGasFeeCard
         estimatedGasFee={estimateGas ? estimateGas.toFixed(6) : '-'}
         estimatedGasFeeUSD={estimateGasUSD ? estimateGasUSD.toFixed(2) : ''}
