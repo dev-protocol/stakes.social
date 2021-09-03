@@ -4,15 +4,13 @@ exports[`Banner Snapshot 1`] = `
 <body>
   <div>
     <a
-      href=""
+      href="/"
       rel="noreferrer noopener"
       target="_blank"
     >
       <div
-        class="sc-3hjy97-0 XKRcf"
-      >
-        
-      </div>
+        class="sc-3hjy97-0 hLQGiA"
+      />
     </a>
   </div>
 </body>
