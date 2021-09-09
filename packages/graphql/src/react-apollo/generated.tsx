@@ -126,11 +126,11 @@ export type Account_Lockup_Bool_Exp = {
   _and?: Maybe<Array<Maybe<Account_Lockup_Bool_Exp>>>
   _not?: Maybe<Account_Lockup_Bool_Exp>
   _or?: Maybe<Array<Maybe<Account_Lockup_Bool_Exp>>>
-  property_meta?: Maybe<Property_Meta_Bool_Exp>
   account_address?: Maybe<String_Comparison_Exp>
   block_number?: Maybe<Int_Comparison_Exp>
   locked_up_event_id?: Maybe<String_Comparison_Exp>
   property_address?: Maybe<String_Comparison_Exp>
+  property_meta?: Maybe<Property_Meta_Bool_Exp>
   value?: Maybe<Numeric_Comparison_Exp>
 }
 
