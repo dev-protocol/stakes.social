@@ -70,6 +70,13 @@ const StyledButtonWithGradientForWithdraw = styled(ButtonWithGradient)`
   }
 `
 
+const Blank = styled.div`
+  height: 0px;
+  @media (min-width: 1024px) {
+    height: 30px;
+  }
+`
+
 export const TransactForm = ({
   className,
   enterButton,
@@ -117,10 +124,12 @@ export const TransactForm = ({
         style={{ marginBottom: '12px' }}
       >
         <Space direction="vertical">
-          {id === 'stake' && (
+          {id === 'stake' ? (
             <Radio value={-1}>
               <span style={{ marginLeft: '12px' }}>New position</span>
             </Radio>
+          ) : (
+            <Blank />
           )}
           {tokenIdList.map((tokenId, idx) => (
             <Radio value={idx} key={idx}>
