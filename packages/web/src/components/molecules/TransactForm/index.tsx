@@ -1,9 +1,10 @@
-import React, { useMemo } from 'react'
-import { Input } from 'antd'
+import React, { useMemo, useState } from 'react'
+import { Input, Radio, Space } from 'antd'
 import styled from 'styled-components'
 import { Max } from 'src/components/molecules/Max'
 import { SearchProps } from 'antd/lib/input'
 import { ButtonWithGradient } from 'src/components/atoms/ButtonWithGradient'
+import { PositionText } from './PositionText'
 
 type Props = SearchProps &
   React.RefAttributes<Input> & {
@@ -104,9 +105,30 @@ export const TransactForm = ({
       ),
     [id, onClick, enterButton]
   )
+  // TODO(@k3nt0w): use (devClient).detectSTokens( PROPERTY, ACCOUNT ) after implementing it.
+  const tokenIdList: number[] = [2, 6, 50] // mock value
+  const [radioValue, setRadioValue] = useState(0)
 
   return (
     <Wrap className={className} style={{ opacity: disabled ? '0.3' : '1.0' }}>
+      <Radio.Group
+        onChange={event => setRadioValue(event.target.value)}
+        value={radioValue}
+        style={{ marginBottom: '12px' }}
+      >
+        <Space direction="vertical">
+          {id === 'stake' && (
+            <Radio value={-1}>
+              <span style={{ marginLeft: '12px' }}>New position</span>
+            </Radio>
+          )}
+          {tokenIdList.map((tokenId, idx) => (
+            <Radio value={idx} key={idx}>
+              <PositionText tokenId={tokenId} />
+            </Radio>
+          ))}
+        </Space>
+      </Radio.Group>
       {onChange ? (
         <StyledForm
           id={id}
