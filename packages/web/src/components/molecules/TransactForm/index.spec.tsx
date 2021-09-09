@@ -15,7 +15,7 @@ describe(`${TransactForm.name}`, () => {
   test('Snapshot', () => {
     const component = render(
       <WalletContext.Provider value={{ web3: new Web3(), setWeb3: () => {} }}>
-        <TransactForm estimateTitle="Test" estimatedValue="test" onClickMax={() => {}} />
+        <TransactForm onClickMax={() => {}} />
       </WalletContext.Provider>
     )
     const tree = component.baseElement
