@@ -27,7 +27,8 @@ import {
   allClaimedRewards,
   propertyName,
   propertySymbol,
-  balanceOfProperty
+  balanceOfProperty,
+  detectStokens
 } from './client'
 import { SWRCachePath } from './cache-path'
 import {
@@ -778,4 +779,17 @@ export const useBalanceOfAccountProperty = (propertyAddress?: string, accountAdd
     { revalidateOnFocus: false, focusThrottleInterval: 0 }
   )
   return { balance: data, error }
+}
+
+export const useDetectSTokens = (propertyAddress?: string, accountAddress?: string) => {
+  const { nonConnectedWeb3 } = useProvider()
+  const { data, error } = useSWR<UnwrapFunc<typeof detectStokens>, Error>(
+    SWRCachePath.detectStokens(propertyAddress, accountAddress),
+    () =>
+      whenDefinedAll([nonConnectedWeb3, propertyAddress, accountAddress], ([client, property, account]) =>
+        detectStokens(client, property, account)
+      ),
+    { revalidateOnFocus: false, focusThrottleInterval: 0 }
+  )
+  return { sTokens: data, error }
 }

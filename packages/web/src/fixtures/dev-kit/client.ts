@@ -358,3 +358,39 @@ export const waitForCreateMetrics = async (web3: Web3, propertyAddress: string):
       .catch(reject)
   })
 }
+
+export const detectStokens = async (web3: Web3, propertyAddress: string, accountAddress: string) => {
+  const client = newClient(web3)
+  if (client) {
+    return
+  }
+  const TokenIdList = await devClient.createDetectSTokens(
+    // @k3nt0w: ignore compile error until implement get stoken contract address
+    // @ts-ignore
+    await getContractAddress(client, 'sTokens' as any)
+  )(propertyAddress, accountAddress)
+  return TokenIdList
+}
+
+// export const createGetVotablePolicy = async (web3: Web3) => {
+//   const client = newClient(web3)
+//   if (client) {
+//     const policyGroup = client.policyGroup(await getContractAddress(client, 'policyGroup'))
+//     const [policies, currentPolicy] = await Promise.all([
+//       devClient.createGetVotablePolicy(policyGroup)(),
+//       getContractAddress(client, 'policy')
+//     ])
+//     return policies.filter(p => p !== currentPolicy)
+//   }
+//   throw new Error(`No wallet`)
+// }
+
+// export const getRewardsAmount = async (web3: Web3, propertyAddress: string) => {
+//   const client = newClient(web3)
+//   if (client) {
+//     return client
+//       .lockup(await getContractAddress(client, 'lockup'))
+//       .calculateCumulativeHoldersRewardAmount(propertyAddress)
+//   }
+//   return undefined
+// }
