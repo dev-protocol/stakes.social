@@ -380,10 +380,10 @@ export const getStokenPositions = async (web3: Web3, propertyAddress: string, sT
   return undefined
 }
 
-export const getStokenRewards = async (web3: Web3, propertyAddress: string, sTokenID: number) => {
+export const getStokenRewards = async (web3: Web3, propertyAddress: string, sTokenId: number) => {
   const client = newClient(web3)
   if (client && propertyAddress) {
-    return client.sTokens(propertyAddress).rewards(sTokenID)
+    return client.sTokens(propertyAddress).rewards(sTokenId)
   }
   return undefined
 }
@@ -396,25 +396,53 @@ export const approve = async (web3: Web3, propertyAddress: string, amount: strin
   return undefined
 }
 
-// export const createGetVotablePolicy = async (web3: Web3) => {
-//   const client = newClient(web3)
-//   if (client) {
-//     const policyGroup = client.policyGroup(await getContractAddress(client, 'policyGroup'))
-//     const [policies, currentPolicy] = await Promise.all([
-//       devClient.createGetVotablePolicy(policyGroup)(),
-//       getContractAddress(client, 'policy')
-//     ])
-//     return policies.filter(p => p !== currentPolicy)
-//   }
-//   throw new Error(`No wallet`)
-// }
+export const depositToProperty = async (web3: Web3, propertyAddress: string, amount: string) => {
+  const client = newClient(web3)
+  if (client) {
+    return client.lockup(propertyAddress).depositToProperty(propertyAddress, amount)
+  }
+  return undefined
+}
 
-// export const getRewardsAmount = async (web3: Web3, propertyAddress: string) => {
-//   const client = newClient(web3)
-//   if (client) {
-//     return client
-//       .lockup(await getContractAddress(client, 'lockup'))
-//       .calculateCumulativeHoldersRewardAmount(propertyAddress)
-//   }
-//   return undefined
-// }
+export const depositToPosition = async (web3: Web3, propertyAddress: string, amount: string, sTokenId: string) => {
+  const client = newClient(web3)
+  if (client) {
+    return client.lockup(propertyAddress).depositToPosition(sTokenId, amount)
+  }
+  return undefined
+}
+
+export const withdrawByPosition = async (web3: Web3, propertyAddress: string, amount: string, sTokenId: string) => {
+  const client = newClient(web3)
+  if (client) {
+    return client.lockup(propertyAddress).withdrawByPosition(sTokenId, amount)
+  }
+  return undefined
+}
+
+export const migrateToSTokens = async (web3: Web3, propertyAddress: string, sTokenId: string) => {
+  const client = newClient(web3)
+  if (client) {
+    return client.lockup(propertyAddress).migrateToSTokens(sTokenId)
+  }
+  return undefined
+}
+
+export const getTokenURI = async (web3: Web3, propertyAddress: string, sTokenId: number) => {
+  const client = newClient(web3)
+  if (client) {
+    return client.sTokens(propertyAddress).tokenURI(sTokenId)
+  }
+  return undefined
+}
+
+export const getStokenSymbol = async (web3: Web3, propertyAddress: string, sTokenId: number) => {
+  const client = newClient(web3)
+  if (client) {
+    return client
+      .sTokens(propertyAddress)
+      .positions(sTokenId)
+      .then(res => client.property(res.property).symbol)
+  }
+  return undefined
+}
