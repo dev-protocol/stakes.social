@@ -28,7 +28,8 @@ import {
   propertyName,
   propertySymbol,
   balanceOfProperty,
-  detectStokens
+  detectStokens,
+  getStokenPositions
 } from './client'
 import { SWRCachePath } from './cache-path'
 import {
@@ -792,4 +793,17 @@ export const useDetectSTokens = (propertyAddress?: string, accountAddress?: stri
     { revalidateOnFocus: false, focusThrottleInterval: 0 }
   )
   return { sTokens: data, error }
+}
+
+export const useGetSTokenPositions = (propertyAddress?: string, accountAddress?: string, sTokenId?: number) => {
+  const { nonConnectedWeb3 } = useProvider()
+  const { data, error } = useSWR<UnwrapFunc<typeof getStokenPositions>, Error>(
+    SWRCachePath.getStokenPositions(propertyAddress, accountAddress),
+    () =>
+      whenDefinedAll([nonConnectedWeb3, propertyAddress, sTokenId], ([client, property, sTokenId]) =>
+        getStokenPositions(client, property, sTokenId)
+      ),
+    { revalidateOnFocus: false, focusThrottleInterval: 0 }
+  )
+  return { positions: data, error }
 }
