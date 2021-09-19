@@ -908,5 +908,5 @@ export const useGetTokenURI = (propertyAddress?: string, sTokenId?: number) => {
       ),
     { revalidateOnFocus: false, focusThrottleInterval: 0 }
   )
-  return { ok: data, error }
+  return { tokenURI: data, error }
 }
