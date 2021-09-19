@@ -33,7 +33,8 @@ import {
   getStokenRewards,
   approve,
   depositToProperty,
-  depositToPosition
+  depositToPosition,
+  withdrawByPosition
 } from './client'
 import { SWRCachePath } from './cache-path'
 import {
@@ -863,6 +864,24 @@ export const useDepositToPosition = (
     () =>
       whenDefinedAll([nonConnectedWeb3, propertyAddress, amount, sTokenId], ([client, property, amount, sTokenId]) =>
         depositToPosition(client, property, amount, sTokenId)
+      ),
+    { revalidateOnFocus: false, focusThrottleInterval: 0 }
+  )
+  return { ok: data, error }
+}
+
+export const useWithdrawByPosition = (
+  propertyAddress?: string,
+  accountAddress?: string,
+  amount?: string,
+  sTokenId?: string
+) => {
+  const { nonConnectedWeb3 } = useProvider()
+  const { data, error } = useSWR<UnwrapFunc<typeof withdrawByPosition>, Error>(
+    SWRCachePath.withdrawByPosition(propertyAddress, accountAddress),
+    () =>
+      whenDefinedAll([nonConnectedWeb3, propertyAddress, amount, sTokenId], ([client, property, amount, sTokenId]) =>
+        withdrawByPosition(client, property, amount, sTokenId)
       ),
     { revalidateOnFocus: false, focusThrottleInterval: 0 }
   )
