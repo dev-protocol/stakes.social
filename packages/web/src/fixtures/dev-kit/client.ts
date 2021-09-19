@@ -367,9 +367,22 @@ export const detectStokens = async (web3: Web3, propertyAddress: string, account
   const TokenIdList = await devClient.createDetectSTokens(
     // @k3nt0w: ignore compile error until implement get stoken contract address
     // @ts-ignore
-    await getContractAddress(client, 'sTokens' as any)
+    await getContractAddress(client, 'sTokens')
   )(propertyAddress, accountAddress)
   return TokenIdList
+}
+
+export const getStokenPositions = async (
+  web3: Web3,
+  propertyAddress: string,
+  accountAddress: string,
+  sTokenID: number
+) => {
+  const client = newClient(web3)
+  if (client && accountAddress) {
+    return client.sTokens(propertyAddress).positions(sTokenID)
+  }
+  return undefined
 }
 
 // export const createGetVotablePolicy = async (web3: Web3) => {
