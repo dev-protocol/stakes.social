@@ -34,7 +34,9 @@ import {
   approve,
   depositToProperty,
   depositToPosition,
-  withdrawByPosition
+  withdrawByPosition,
+  migrateToSTokens,
+  getTokenURI
 } from './client'
 import { SWRCachePath } from './cache-path'
 import {
@@ -800,10 +802,10 @@ export const useDetectSTokens = (propertyAddress?: string, accountAddress?: stri
   return { sTokens: data, error }
 }
 
-export const useGetSTokenPositions = (propertyAddress?: string, accountAddress?: string, sTokenId?: number) => {
+export const useGetSTokenPositions = (propertyAddress?: string, sTokenId?: number) => {
   const { nonConnectedWeb3 } = useProvider()
   const { data, error } = useSWR<UnwrapFunc<typeof getStokenPositions>, Error>(
-    SWRCachePath.getStokenPositions(propertyAddress, accountAddress),
+    SWRCachePath.getStokenPositions(propertyAddress),
     () =>
       whenDefinedAll([nonConnectedWeb3, propertyAddress, sTokenId], ([client, property, sTokenId]) =>
         getStokenPositions(client, property, sTokenId)
@@ -813,10 +815,10 @@ export const useGetSTokenPositions = (propertyAddress?: string, accountAddress?:
   return { positions: data, error }
 }
 
-export const useGetStokenRewards = (propertyAddress?: string, accountAddress?: string, sTokenId?: number) => {
+export const useGetStokenRewards = (propertyAddress?: string, sTokenId?: number) => {
   const { nonConnectedWeb3 } = useProvider()
   const { data, error } = useSWR<UnwrapFunc<typeof getStokenRewards>, Error>(
-    SWRCachePath.getStokenRewards(propertyAddress, accountAddress),
+    SWRCachePath.getStokenRewards(propertyAddress),
     () =>
       whenDefinedAll([nonConnectedWeb3, propertyAddress, sTokenId], ([client, property, sTokenId]) =>
         getStokenRewards(client, property, sTokenId)
@@ -826,10 +828,10 @@ export const useGetStokenRewards = (propertyAddress?: string, accountAddress?: s
   return { rewards: data, error }
 }
 
-export const useApprove = (propertyAddress?: string, accountAddress?: string, amount?: string) => {
+export const useApprove = (propertyAddress?: string, amount?: string) => {
   const { nonConnectedWeb3 } = useProvider()
   const { data, error } = useSWR<UnwrapFunc<typeof approve>, Error>(
-    SWRCachePath.approve(propertyAddress, accountAddress),
+    SWRCachePath.approve(propertyAddress),
     () =>
       whenDefinedAll([nonConnectedWeb3, propertyAddress, amount], ([client, property, amount]) =>
         approve(client, property, amount)
@@ -839,10 +841,10 @@ export const useApprove = (propertyAddress?: string, accountAddress?: string, am
   return { ok: data, error }
 }
 
-export const useDepositToProperty = (propertyAddress?: string, accountAddress?: string, amount?: string) => {
+export const useDepositToProperty = (propertyAddress?: string, amount?: string) => {
   const { nonConnectedWeb3 } = useProvider()
   const { data, error } = useSWR<UnwrapFunc<typeof depositToProperty>, Error>(
-    SWRCachePath.depositToProperty(propertyAddress, accountAddress),
+    SWRCachePath.depositToProperty(propertyAddress),
     () =>
       whenDefinedAll([nonConnectedWeb3, propertyAddress, amount], ([client, property, amount]) =>
         depositToProperty(client, property, amount)
@@ -852,15 +854,10 @@ export const useDepositToProperty = (propertyAddress?: string, accountAddress?: 
   return { ok: data, error }
 }
 
-export const useDepositToPosition = (
-  propertyAddress?: string,
-  accountAddress?: string,
-  amount?: string,
-  sTokenId?: string
-) => {
+export const useDepositToPosition = (propertyAddress?: string, amount?: string, sTokenId?: string) => {
   const { nonConnectedWeb3 } = useProvider()
   const { data, error } = useSWR<UnwrapFunc<typeof depositToPosition>, Error>(
-    SWRCachePath.depositToPosition(propertyAddress, accountAddress),
+    SWRCachePath.depositToPosition(propertyAddress),
     () =>
       whenDefinedAll([nonConnectedWeb3, propertyAddress, amount, sTokenId], ([client, property, amount, sTokenId]) =>
         depositToPosition(client, property, amount, sTokenId)
@@ -872,16 +869,42 @@ export const useDepositToPosition = (
 
 export const useWithdrawByPosition = (
   propertyAddress?: string,
-  accountAddress?: string,
+
   amount?: string,
   sTokenId?: string
 ) => {
   const { nonConnectedWeb3 } = useProvider()
   const { data, error } = useSWR<UnwrapFunc<typeof withdrawByPosition>, Error>(
-    SWRCachePath.withdrawByPosition(propertyAddress, accountAddress),
+    SWRCachePath.withdrawByPosition(propertyAddress),
     () =>
       whenDefinedAll([nonConnectedWeb3, propertyAddress, amount, sTokenId], ([client, property, amount, sTokenId]) =>
         withdrawByPosition(client, property, amount, sTokenId)
+      ),
+    { revalidateOnFocus: false, focusThrottleInterval: 0 }
+  )
+  return { ok: data, error }
+}
+
+export const useMigrateToSTokens = (propertyAddress?: string, sTokenId?: string) => {
+  const { nonConnectedWeb3 } = useProvider()
+  const { data, error } = useSWR<UnwrapFunc<typeof migrateToSTokens>, Error>(
+    SWRCachePath.migrateToSTokens(propertyAddress),
+    () =>
+      whenDefinedAll([nonConnectedWeb3, propertyAddress, sTokenId], ([client, property, sTokenId]) =>
+        migrateToSTokens(client, property, sTokenId)
+      ),
+    { revalidateOnFocus: false, focusThrottleInterval: 0 }
+  )
+  return { ok: data, error }
+}
+
+export const useGetTokenURI = (propertyAddress?: string, sTokenId?: number) => {
+  const { nonConnectedWeb3 } = useProvider()
+  const { data, error } = useSWR<UnwrapFunc<typeof getTokenURI>, Error>(
+    SWRCachePath.getTokenURI(propertyAddress),
+    () =>
+      whenDefinedAll([nonConnectedWeb3, propertyAddress, sTokenId], ([client, property, sTokenId]) =>
+        getTokenURI(client, property, sTokenId)
       ),
     { revalidateOnFocus: false, focusThrottleInterval: 0 }
   )
