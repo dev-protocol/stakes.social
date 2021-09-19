@@ -26,7 +26,8 @@ import {
   useDetectSTokens,
   useGetSTokenPositions,
   useGetStokenRewards,
-  useApprove
+  useApprove,
+  useDepositToProperty
 } from './hooks'
 import { useCurrency } from 'src/fixtures/currency/functions/useCurrency'
 import useSWR from 'swr'
@@ -970,7 +971,7 @@ describe('dev-kit hooks', () => {
     })
 
     test('success fetching data', () => {
-      const data = {}
+      const data = true
       const error = undefined
       ;(useSWR as jest.Mock).mockImplementation(() => ({ data, error }))
       const { result } = renderHook(() => useApprove('property-address', '100000'))
@@ -983,6 +984,35 @@ describe('dev-kit hooks', () => {
       const error = new Error(errorMessage)
       ;(useSWR as jest.Mock).mockImplementation(() => ({ data, error }))
       const { result } = renderHook(() => useApprove('property-address', '100000'))
+      expect(result.current.error).toBe(error)
+      expect(result.current.error?.message).toBe(errorMessage)
+    })
+  })
+
+  describe('useDepositToProperty', () => {
+    test('data is undefined', () => {
+      const data = undefined
+      const error = undefined
+
+      ;(useSWR as jest.Mock).mockImplementation(() => ({ data, error }))
+      const { result } = renderHook(() => useDepositToProperty('property-address', '100000'))
+      expect(result.current.ok).toBe(data)
+    })
+
+    test('success fetching data', () => {
+      const data = true
+      const error = undefined
+      ;(useSWR as jest.Mock).mockImplementation(() => ({ data, error }))
+      const { result } = renderHook(() => useDepositToProperty('property-address', '100000'))
+      expect(result.current.ok).toBe(data)
+    })
+
+    test('failure fetching data', () => {
+      const data = undefined
+      const errorMessage = 'error'
+      const error = new Error(errorMessage)
+      ;(useSWR as jest.Mock).mockImplementation(() => ({ data, error }))
+      const { result } = renderHook(() => useDepositToProperty('property-address', '100000'))
       expect(result.current.error).toBe(error)
       expect(result.current.error?.message).toBe(errorMessage)
     })
