@@ -385,6 +385,19 @@ export const getStokenPositions = async (
   return undefined
 }
 
+export const getStokenRewards = async (
+  web3: Web3,
+  propertyAddress: string,
+  accountAddress: string,
+  sTokenID: number
+) => {
+  const client = newClient(web3)
+  if (client && accountAddress) {
+    return client.sTokens(propertyAddress).rewards(sTokenID)
+  }
+  return undefined
+}
+
 // export const createGetVotablePolicy = async (web3: Web3) => {
 //   const client = newClient(web3)
 //   if (client) {
