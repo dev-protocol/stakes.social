@@ -36,7 +36,8 @@ import {
   depositToPosition,
   withdrawByPosition,
   migrateToSTokens,
-  getTokenURI
+  getTokenURI,
+  getStokenSymbol
 } from './client'
 import { SWRCachePath } from './cache-path'
 import {
@@ -909,4 +910,17 @@ export const useGetTokenURI = (propertyAddress?: string, sTokenId?: number) => {
     { revalidateOnFocus: false, focusThrottleInterval: 0 }
   )
   return { tokenURI: data, error }
+}
+
+export const useGetStokenSymbol = (propertyAddress?: string, sTokenId?: number) => {
+  const { nonConnectedWeb3 } = useProvider()
+  const { data, error } = useSWR<UnwrapFunc<typeof getStokenSymbol>, Error>(
+    SWRCachePath.getStokenSymbol(propertyAddress),
+    () =>
+      whenDefinedAll([nonConnectedWeb3, propertyAddress, sTokenId], ([client, property, sTokenId]) =>
+        getStokenSymbol(client, property, sTokenId)
+      ),
+    { revalidateOnFocus: false, focusThrottleInterval: 0 }
+  )
+  return { symbol: data, error }
 }
