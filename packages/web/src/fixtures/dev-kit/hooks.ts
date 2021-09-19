@@ -868,12 +868,7 @@ export const useDepositToPosition = (propertyAddress?: string, amount?: string, 
   return { ok: data, error }
 }
 
-export const useWithdrawByPosition = (
-  propertyAddress?: string,
-
-  amount?: string,
-  sTokenId?: string
-) => {
+export const useWithdrawByPosition = (propertyAddress?: string, amount?: string, sTokenId?: string) => {
   const { nonConnectedWeb3 } = useProvider()
   const { data, error } = useSWR<UnwrapFunc<typeof withdrawByPosition>, Error>(
     SWRCachePath.withdrawByPosition(propertyAddress),
