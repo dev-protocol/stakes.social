@@ -372,28 +372,26 @@ export const detectStokens = async (web3: Web3, propertyAddress: string, account
   return TokenIdList
 }
 
-export const getStokenPositions = async (
-  web3: Web3,
-  propertyAddress: string,
-  accountAddress: string,
-  sTokenID: number
-) => {
+export const getStokenPositions = async (web3: Web3, propertyAddress: string, sTokenID: number) => {
   const client = newClient(web3)
-  if (client && accountAddress) {
+  if (client) {
     return client.sTokens(propertyAddress).positions(sTokenID)
   }
   return undefined
 }
 
-export const getStokenRewards = async (
-  web3: Web3,
-  propertyAddress: string,
-  accountAddress: string,
-  sTokenID: number
-) => {
+export const getStokenRewards = async (web3: Web3, propertyAddress: string, sTokenID: number) => {
   const client = newClient(web3)
-  if (client && accountAddress) {
+  if (client && propertyAddress) {
     return client.sTokens(propertyAddress).rewards(sTokenID)
+  }
+  return undefined
+}
+
+export const approve = async (web3: Web3, propertyAddress: string, amount: string) => {
+  const client = newClient(web3)
+  if (client) {
+    return client.dev(propertyAddress).approve(propertyAddress, amount)
   }
   return undefined
 }
