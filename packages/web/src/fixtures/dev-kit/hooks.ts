@@ -30,7 +30,8 @@ import {
   balanceOfProperty,
   detectStokens,
   getStokenPositions,
-  getStokenRewards
+  getStokenRewards,
+  approve
 } from './client'
 import { SWRCachePath } from './cache-path'
 import {
@@ -816,6 +817,19 @@ export const useGetStokenRewards = (propertyAddress?: string, accountAddress?: s
     () =>
       whenDefinedAll([nonConnectedWeb3, propertyAddress, sTokenId], ([client, property, sTokenId]) =>
         getStokenRewards(client, property, sTokenId)
+      ),
+    { revalidateOnFocus: false, focusThrottleInterval: 0 }
+  )
+  return { rewards: data, error }
+}
+
+export const useApprove = (propertyAddress?: string, accountAddress?: string, amount?: string) => {
+  const { nonConnectedWeb3 } = useProvider()
+  const { data, error } = useSWR<UnwrapFunc<typeof approve>, Error>(
+    SWRCachePath.approve(propertyAddress, accountAddress),
+    () =>
+      whenDefinedAll([nonConnectedWeb3, propertyAddress, amount], ([client, property, amount]) =>
+        approve(client, property, amount)
       ),
     { revalidateOnFocus: false, focusThrottleInterval: 0 }
   )
