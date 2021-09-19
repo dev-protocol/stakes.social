@@ -22,7 +22,8 @@ import {
   useGetMyStakingRewardAmount,
   useBalanceOfProperty,
   usePropertySymbol,
-  useBalanceOfAccountProperty
+  useBalanceOfAccountProperty,
+  useDetectSTokens
 } from './hooks'
 import { useCurrency } from 'src/fixtures/currency/functions/useCurrency'
 import useSWR from 'swr'
@@ -862,6 +863,34 @@ describe('dev-kit hooks', () => {
       const error = new Error(errorMessage)
       ;(useSWR as jest.Mock).mockImplementation(() => ({ data, error }))
       const { result } = renderHook(() => useBalanceOfAccountProperty('property-address', 'user'))
+      expect(result.current.error).toBe(error)
+      expect(result.current.error?.message).toBe(errorMessage)
+    })
+  })
+
+  describe('useDetectSTokens', () => {
+    test('data is undefined', () => {
+      const data = undefined
+      const error = undefined
+      ;(useSWR as jest.Mock).mockImplementation(() => ({ data, error }))
+      const { result } = renderHook(() => useDetectSTokens('property-address', 'user'))
+      expect(result.current.sTokens).toBe(data)
+    })
+
+    test('success fetching data', () => {
+      const data = [1, 2, 3]
+      const error = undefined
+      ;(useSWR as jest.Mock).mockImplementation(() => ({ data, error }))
+      const { result } = renderHook(() => useDetectSTokens('property-address', 'user'))
+      expect(result.current.sTokens).toBe(data)
+    })
+
+    test('failure fetching data', () => {
+      const data = undefined
+      const errorMessage = 'error'
+      const error = new Error(errorMessage)
+      ;(useSWR as jest.Mock).mockImplementation(() => ({ data, error }))
+      const { result } = renderHook(() => useDetectSTokens('property-address', 'user'))
       expect(result.current.error).toBe(error)
       expect(result.current.error?.message).toBe(errorMessage)
     })
