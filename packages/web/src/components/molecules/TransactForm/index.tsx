@@ -5,10 +5,13 @@ import { Max } from 'src/components/molecules/Max'
 import { SearchProps } from 'antd/lib/input'
 import { ButtonWithGradient } from 'src/components/atoms/ButtonWithGradient'
 import { PositionText } from './PositionText'
+import { useDetectSTokens } from 'src/fixtures/dev-kit/hooks'
+import { useProvider } from 'src/fixtures/wallet/hooks'
 
 type Props = SearchProps &
   React.RefAttributes<Input> & {
     onClickMax?: () => void
+    propertyAddress: string
   }
 
 const StyledForm = styled(Input.Search)`
@@ -87,8 +90,10 @@ export const TransactForm = ({
   onClickMax,
   disabled,
   id,
-  placeholder
+  placeholder,
+  propertyAddress
 }: Props) => {
+  const { accountAddress } = useProvider()
   const onClick = useMemo(() => (onSearch ? () => onSearch('') : () => undefined), [onSearch])
   const suffix = useMemo(
     () => (
@@ -112,7 +117,11 @@ export const TransactForm = ({
       ),
     [id, onClick, enterButton]
   )
-  // TODO(@k3nt0w): use (devClient).detectSTokens( PROPERTY, ACCOUNT ) after implementing it.
+  // TODO(@k3nt0w): replace this hook on develop env
+  // const tokenIdList = useDetectSTokens(propertyAddress, accountAddress)
+  console.log(useDetectSTokens)
+  console.log(propertyAddress)
+  console.log(accountAddress)
   const tokenIdList: number[] = [2, 6, 50] // mock value
   const [radioValue, setRadioValue] = useState(0)
 
