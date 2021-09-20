@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from 'react'
-import { Button, Input, Radio, Space } from 'antd'
+import { Button, Input, Radio, Space, Row, Col } from 'antd'
 import styled from 'styled-components'
 import { Max } from 'src/components/molecules/Max'
 import { SearchProps } from 'antd/lib/input'
@@ -7,6 +7,7 @@ import { ButtonWithGradient } from 'src/components/atoms/ButtonWithGradient'
 import { PositionText } from './PositionText'
 import { useDetectSTokens } from 'src/fixtures/dev-kit/hooks'
 import { useProvider } from 'src/fixtures/wallet/hooks'
+import RightArrow from 'src/components/organisms/Incubator/molecules/RightArrow'
 
 type Props = SearchProps &
   React.RefAttributes<Input> & {
@@ -96,7 +97,6 @@ const StyledSearchForm = styled(Input.Search)`
 
 const StyledButton = styled(Button)`
   width: 100%;
-  margin-top: 12px;
   height: 100%;
   font-size: 1.2rem;
   background-image: linear-gradient(to right, #2f80ed, #1ac9fc);
@@ -108,7 +108,14 @@ const StyledButton = styled(Button)`
 `
 
 const WrapStyledButton = styled.div`
-  margin-top: 6px;
+  width: 100%;
+  margin-top: 12px;
+`
+
+const WrapRightArrowCol = styled(Col)`
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `
 
 const Wrap = styled.div`
@@ -249,7 +256,19 @@ const AmountInputForm = ({
             placeholder={placeholder}
           />
           <WrapStyledButton>
-            <StyledButton type="primary">Approve</StyledButton>
+            <Row>
+              <Col span={11}>
+                <StyledButton type="primary">Approve</StyledButton>
+              </Col>
+              <WrapRightArrowCol span={2}>
+                <RightArrow />
+              </WrapRightArrowCol>
+              <Col span={11}>
+                <StyledButton type="primary" disabled>
+                  Stake
+                </StyledButton>
+              </Col>
+            </Row>
           </WrapStyledButton>
         </>
       ) : (
