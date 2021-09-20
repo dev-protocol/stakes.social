@@ -361,9 +361,6 @@ export const waitForCreateMetrics = async (web3: Web3, propertyAddress: string):
 
 export const detectStokens = async (web3: Web3, propertyAddress: string, accountAddress: string) => {
   const client = newClient(web3)
-  if (client) {
-    return
-  }
   const TokenIdList = await devClient.createDetectSTokens(
     // @k3nt0w: ignore compile error until implement get stoken contract address
     // @ts-ignore
@@ -374,10 +371,7 @@ export const detectStokens = async (web3: Web3, propertyAddress: string, account
 
 export const getStokenPositions = async (web3: Web3, propertyAddress: string, sTokenID: number) => {
   const client = newClient(web3)
-  if (client) {
-    return client.sTokens(propertyAddress).positions(sTokenID)
-  }
-  return undefined
+  return client?.sTokens(propertyAddress).positions(sTokenID)
 }
 
 export const getStokenRewards = async (web3: Web3, propertyAddress: string, sTokenId: number) => {
