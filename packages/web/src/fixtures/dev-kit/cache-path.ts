@@ -34,8 +34,7 @@ export const SWRCachePath = {
     `propertyAddresses/${user}${propertyAddress}/balanceOf`,
   detectStokens: (propertyAddress?: string, user?: string) =>
     `propertyAddresses/${user}${propertyAddress}/detectStokens`,
-  getStokenPositions: (propertyAddress?: string, user?: string) =>
-    `propertyAddresses/${user}${propertyAddress}/getStokenPositions`,
+  getStokenPositions: (sTokenId?: string) => `sTokenId/${sTokenId}/getStokenPositions`,
   getStokenRewards: (propertyAddress?: string, user?: string) =>
     `propertyAddresses/${user}${propertyAddress}/getStokenRewards`,
   approve: (propertyAddress?: string, user?: string) => `propertyAddresses/${user}${propertyAddress}/approve`,

@@ -803,14 +803,11 @@ export const useDetectSTokens = (propertyAddress?: string, accountAddress?: stri
   return { sTokens: data, error }
 }
 
-export const useGetSTokenPositions = (propertyAddress?: string, sTokenId?: number) => {
+export const useGetSTokenPositions = (sTokenId?: number) => {
   const { nonConnectedWeb3 } = useProvider()
   const { data, error } = useSWR<UnwrapFunc<typeof getStokenPositions>, Error>(
-    SWRCachePath.getStokenPositions(propertyAddress),
-    () =>
-      whenDefinedAll([nonConnectedWeb3, propertyAddress, sTokenId], ([client, property, sTokenId]) =>
-        getStokenPositions(client, property, sTokenId)
-      ),
+    SWRCachePath.getStokenPositions(`${sTokenId}`),
+    () => whenDefinedAll([nonConnectedWeb3, sTokenId], ([client, sTokenId]) => getStokenPositions(client, sTokenId)),
     { revalidateOnFocus: false, focusThrottleInterval: 0 }
   )
   return { positions: data, error }

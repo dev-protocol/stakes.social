@@ -1,8 +1,7 @@
 import Web3 from 'web3'
 import { EventData } from 'web3-eth-contract'
-import { contractFactory, DevkitContract } from '@devprotocol/dev-kit'
+import { contractFactory, DevkitContract, client as devClient, utils, addresses } from '@devprotocol/dev-kit'
 import { getContractAddress } from './get-contract-address'
-import { client as devClient, utils } from '@devprotocol/dev-kit'
 import BigNumber from 'bignumber.js'
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { PropertyFactoryContract } from '@devprotocol/dev-kit'
@@ -372,10 +371,10 @@ export const detectStokens = async (web3: Web3, propertyAddress: string, account
   return undefined
 }
 
-export const getStokenPositions = async (web3: Web3, propertyAddress: string, sTokenID: number) => {
+export const getStokenPositions = async (web3: Web3, sTokenID: number) => {
   const client = newClient(web3)
   if (client) {
-    return client.sTokens(propertyAddress).positions(sTokenID)
+    return client.sTokens(addresses.eth.main.sTokens).positions(sTokenID)
   }
   return undefined
 }
