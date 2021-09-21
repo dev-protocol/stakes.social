@@ -2,7 +2,7 @@ import React from 'react'
 import { Header } from 'src/components/organisms/Header'
 import { Footer } from '../components/organisms/Footer'
 
-const termsOfUse = () => {
+const ConvertToStokens = () => {
   return (
     <>
       <Header />
@@ -11,4 +11,4 @@ const termsOfUse = () => {
   )
 }
 
-export default termsOfUse
+export default ConvertToStokens
