@@ -813,14 +813,11 @@ export const useGetSTokenPositions = (sTokenId?: number) => {
   return { positions: data, error }
 }
 
-export const useGetStokenRewards = (propertyAddress?: string, sTokenId?: number) => {
+export const useGetStokenRewards = (sTokenId?: number) => {
   const { nonConnectedWeb3 } = useProvider()
   const { data, error } = useSWR<UnwrapFunc<typeof getStokenRewards>, Error>(
-    SWRCachePath.getStokenRewards(propertyAddress),
-    () =>
-      whenDefinedAll([nonConnectedWeb3, propertyAddress, sTokenId], ([client, property, sTokenId]) =>
-        getStokenRewards(client, property, sTokenId)
-      ),
+    SWRCachePath.getStokenRewards(`${sTokenId}`),
+    () => whenDefinedAll([nonConnectedWeb3, sTokenId], ([client, sTokenId]) => getStokenRewards(client, sTokenId)),
     { revalidateOnFocus: false, focusThrottleInterval: 0 }
   )
   return { rewards: data, error }

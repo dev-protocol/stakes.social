@@ -378,9 +378,9 @@ export const getStokenPositions = async (web3: Web3, sTokenID: number) => {
   return undefined
 }
 
-export const getStokenRewards = async (web3: Web3, propertyAddress: string, sTokenId: number) => {
+export const getStokenRewards = async (web3: Web3, sTokenId: number) => {
   const client = newClient(web3)
-  if (client && propertyAddress) {
+  if (client) {
     return client.sTokens(addresses.eth.main.sTokens).rewards(sTokenId)
   }
   return undefined
