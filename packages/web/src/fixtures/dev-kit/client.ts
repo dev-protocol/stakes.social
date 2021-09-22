@@ -361,11 +361,10 @@ export const waitForCreateMetrics = async (web3: Web3, propertyAddress: string):
 export const detectStokens = async (web3: Web3, propertyAddress: string, accountAddress: string) => {
   const client = newClient(web3)
   if (client) {
-    const TokenIdList = await devClient.createDetectSTokens(
-      // @k3nt0w: ignore compile error until implement get stoken contract address
-      // @ts-ignore
-      await getContractAddress(client, 'sTokens')
-    )(propertyAddress, accountAddress)
+    const TokenIdList = await devClient.createDetectSTokens(client.sTokens(addresses.eth.main.sTokens))(
+      propertyAddress,
+      accountAddress
+    )
     return TokenIdList
   }
   return undefined
@@ -382,15 +381,15 @@ export const getStokenPositions = async (web3: Web3, sTokenID: number) => {
 export const getStokenRewards = async (web3: Web3, propertyAddress: string, sTokenId: number) => {
   const client = newClient(web3)
   if (client && propertyAddress) {
-    return client.sTokens(propertyAddress).rewards(sTokenId)
+    return client.sTokens(addresses.eth.main.sTokens).rewards(sTokenId)
   }
   return undefined
 }
 
-export const approve = async (web3: Web3, propertyAddress: string, amount: string) => {
+export const approve = async (web3: Web3, address: string, amount: string) => {
   const client = newClient(web3)
   if (client) {
-    return client.dev(propertyAddress).approve(propertyAddress, amount)
+    return client.dev(await getContractAddress(client, 'token')).approve(address, amount)
   }
   return undefined
 }
@@ -398,7 +397,7 @@ export const approve = async (web3: Web3, propertyAddress: string, amount: strin
 export const depositToProperty = async (web3: Web3, propertyAddress: string, amount: string) => {
   const client = newClient(web3)
   if (client) {
-    return client.lockup(propertyAddress).depositToProperty(propertyAddress, amount)
+    return client.lockup(await getContractAddress(client, 'lockup')).depositToProperty(propertyAddress, amount)
   }
   return undefined
 }
@@ -406,7 +405,7 @@ export const depositToProperty = async (web3: Web3, propertyAddress: string, amo
 export const depositToPosition = async (web3: Web3, propertyAddress: string, amount: string, sTokenId: string) => {
   const client = newClient(web3)
   if (client) {
-    return client.lockup(propertyAddress).depositToPosition(sTokenId, amount)
+    return client.lockup(await getContractAddress(client, 'lockup')).depositToPosition(sTokenId, amount)
   }
   return undefined
 }
@@ -414,15 +413,15 @@ export const depositToPosition = async (web3: Web3, propertyAddress: string, amo
 export const withdrawByPosition = async (web3: Web3, propertyAddress: string, amount: string, sTokenId: string) => {
   const client = newClient(web3)
   if (client) {
-    return client.lockup(propertyAddress).withdrawByPosition(sTokenId, amount)
+    return client.lockup(await getContractAddress(client, 'lockup')).withdrawByPosition(sTokenId, amount)
   }
   return undefined
 }
 
-export const migrateToSTokens = async (web3: Web3, propertyAddress: string, sTokenId: string) => {
+export const migrateToSTokens = async (web3: Web3, sTokenId: string) => {
   const client = newClient(web3)
   if (client) {
-    return client.lockup(propertyAddress).migrateToSTokens(sTokenId)
+    return client.lockup(await getContractAddress(client, 'lockup')).migrateToSTokens(sTokenId)
   }
   return undefined
 }
@@ -430,7 +429,7 @@ export const migrateToSTokens = async (web3: Web3, propertyAddress: string, sTok
 export const getTokenURI = async (web3: Web3, propertyAddress: string, sTokenId: number) => {
   const client = newClient(web3)
   if (client) {
-    return client.sTokens(propertyAddress).tokenURI(sTokenId)
+    return client.sTokens(addresses.eth.main.sTokens).tokenURI(sTokenId)
   }
   return undefined
 }
@@ -439,7 +438,7 @@ export const getStokenSymbol = async (web3: Web3, propertyAddress: string, sToke
   const client = newClient(web3)
   if (client) {
     return client
-      .sTokens(propertyAddress)
+      .sTokens(addresses.eth.main.sTokens)
       .positions(sTokenId)
       .then(res => client.property(res.property).symbol)
   }
