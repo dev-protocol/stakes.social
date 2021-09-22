@@ -44,8 +44,7 @@ export const SWRCachePath = {
     `propertyAddresses/${user}${propertyAddress}/depositToPosition`,
   withdrawByPosition: (propertyAddress?: string, user?: string) =>
     `propertyAddresses/${user}${propertyAddress}/withdrawByPosition`,
-  migrateToSTokens: (stokenId?: string) => `sTokenId/${stokenId}/migrateToSTokens`,
-  getTokenURI: (propertyAddress?: string, user?: string) => `propertyAddresses/${user}${propertyAddress}/getTokenURI`,
-  getStokenSymbol: (propertyAddress?: string, user?: string) =>
-    `propertyAddresses/${user}${propertyAddress}/getStokenSymbol`
+  migrateToSTokens: (sTokenId?: string) => `sTokenId/${sTokenId}/migrateToSTokens`,
+  getTokenURI: (sTokenId?: string) => `sTokenId/${sTokenId}/getTokenURI`,
+  getStokenSymbol: (sTokenId?: string) => `sTokenId/${sTokenId}/getStokenSymbol`
 } as const

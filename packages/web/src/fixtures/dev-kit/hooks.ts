@@ -826,89 +826,126 @@ export const useGetStokenRewards = (propertyAddress?: string, sTokenId?: number)
   return { rewards: data, error }
 }
 
-export const useApprove = (propertyAddress?: string, amount?: string) => {
-  const { nonConnectedWeb3 } = useProvider()
-  const { data, error } = useSWR<UnwrapFunc<typeof approve>, Error>(
-    SWRCachePath.approve(propertyAddress),
-    () =>
-      whenDefinedAll([nonConnectedWeb3, propertyAddress, amount], ([client, property, amount]) =>
-        approve(client, property, amount)
-      ),
-    { revalidateOnFocus: false, focusThrottleInterval: 0 }
+export const useApprove = () => {
+  const { web3 } = useProvider()
+  const [isLoading, setIsLoading] = useState<boolean>(false)
+  const [error, setError] = useState<Error>()
+  const callback = useCallback(
+    async (address: string, amount: string) => {
+      setIsLoading(true)
+      setError(undefined)
+      return whenDefined(web3, client =>
+        approve(client, address, amount)
+          .catch(setError)
+          .finally(() => {
+            setIsLoading(false)
+          })
+      )
+    },
+    [web3]
   )
-  return { ok: data, error }
+  return { approve: callback, isLoading, error }
 }
 
-export const useDepositToProperty = (propertyAddress?: string, amount?: string) => {
-  const { nonConnectedWeb3 } = useProvider()
-  const { data, error } = useSWR<UnwrapFunc<typeof depositToProperty>, Error>(
-    SWRCachePath.depositToProperty(propertyAddress),
-    () =>
-      whenDefinedAll([nonConnectedWeb3, propertyAddress, amount], ([client, property, amount]) =>
-        depositToProperty(client, property, amount)
-      ),
-    { revalidateOnFocus: false, focusThrottleInterval: 0 }
+export const useDepositToProperty = () => {
+  const { web3 } = useProvider()
+  const [isLoading, setIsLoading] = useState<boolean>(false)
+  const [error, setError] = useState<Error>()
+  const callback = useCallback(
+    async (propertyAddress: string, amount: string) => {
+      setIsLoading(true)
+      setError(undefined)
+      return whenDefined(web3, client =>
+        depositToProperty(client, propertyAddress, amount)
+          .catch(setError)
+          .finally(() => {
+            setIsLoading(false)
+          })
+      )
+    },
+    [web3]
   )
-  return { ok: data, error }
+  return { depositToProperty: callback, isLoading, error }
 }
 
-export const useDepositToPosition = (propertyAddress?: string, amount?: string, sTokenId?: string) => {
-  const { nonConnectedWeb3 } = useProvider()
-  const { data, error } = useSWR<UnwrapFunc<typeof depositToPosition>, Error>(
-    SWRCachePath.depositToPosition(propertyAddress),
-    () =>
-      whenDefinedAll([nonConnectedWeb3, propertyAddress, amount, sTokenId], ([client, property, amount, sTokenId]) =>
-        depositToPosition(client, property, amount, sTokenId)
-      ),
-    { revalidateOnFocus: false, focusThrottleInterval: 0 }
+export const useDepositToPosition = () => {
+  const { web3 } = useProvider()
+  const [isLoading, setIsLoading] = useState<boolean>(false)
+  const [error, setError] = useState<Error>()
+  const callback = useCallback(
+    async (sTokenId: string, amount: string) => {
+      setIsLoading(true)
+      setError(undefined)
+      return whenDefined(web3, client =>
+        depositToPosition(client, sTokenId, amount)
+          .catch(setError)
+          .finally(() => {
+            setIsLoading(false)
+          })
+      )
+    },
+    [web3]
   )
-  return { ok: data, error }
+  return { depositToProperty: callback, isLoading, error }
 }
 
-export const useWithdrawByPosition = (propertyAddress?: string, amount?: string, sTokenId?: string) => {
-  const { nonConnectedWeb3 } = useProvider()
-  const { data, error } = useSWR<UnwrapFunc<typeof withdrawByPosition>, Error>(
-    SWRCachePath.withdrawByPosition(propertyAddress),
-    () =>
-      whenDefinedAll([nonConnectedWeb3, propertyAddress, amount, sTokenId], ([client, property, amount, sTokenId]) =>
-        withdrawByPosition(client, property, amount, sTokenId)
-      ),
-    { revalidateOnFocus: false, focusThrottleInterval: 0 }
+export const useWithdrawByPosition = () => {
+  const { web3 } = useProvider()
+  const [isLoading, setIsLoading] = useState<boolean>(false)
+  const [error, setError] = useState<Error>()
+  const callback = useCallback(
+    async (amount: string, sTokenId: string) => {
+      setIsLoading(true)
+      setError(undefined)
+      return whenDefined(web3, client =>
+        withdrawByPosition(client, amount, sTokenId)
+          .catch(setError)
+          .finally(() => {
+            setIsLoading(false)
+          })
+      )
+    },
+    [web3]
   )
-  return { ok: data, error }
+  return { depositToProperty: callback, isLoading, error }
 }
 
-export const useMigrateToSTokens = (sTokenId?: string) => {
-  const { nonConnectedWeb3 } = useProvider()
-  const { data, error } = useSWR<UnwrapFunc<typeof migrateToSTokens>, Error>(
-    SWRCachePath.migrateToSTokens(sTokenId),
-    () => whenDefinedAll([nonConnectedWeb3, sTokenId], ([client, sTokenId]) => migrateToSTokens(client, sTokenId)),
-    { revalidateOnFocus: false, focusThrottleInterval: 0 }
+export const useMigrateToSTokens = () => {
+  const { web3 } = useProvider()
+  const [isLoading, setIsLoading] = useState<boolean>(false)
+  const [error, setError] = useState<Error>()
+  const callback = useCallback(
+    async (sTokenId: string) => {
+      setIsLoading(true)
+      setError(undefined)
+      return whenDefined(web3, client =>
+        migrateToSTokens(client, sTokenId)
+          .catch(setError)
+          .finally(() => {
+            setIsLoading(false)
+          })
+      )
+    },
+    [web3]
   )
-  return { ok: data, error }
+  return { migrateToSTokens: callback, isLoading, error }
 }
 
-export const useGetTokenURI = (propertyAddress?: string, sTokenId?: number) => {
+export const useGetTokenURI = (sTokenId?: number) => {
   const { nonConnectedWeb3 } = useProvider()
   const { data, error } = useSWR<UnwrapFunc<typeof getTokenURI>, Error>(
-    SWRCachePath.getTokenURI(propertyAddress),
-    () =>
-      whenDefinedAll([nonConnectedWeb3, propertyAddress, sTokenId], ([client, property, sTokenId]) =>
-        getTokenURI(client, property, sTokenId)
-      ),
+    SWRCachePath.getTokenURI(`${sTokenId}`),
+    () => whenDefinedAll([nonConnectedWeb3, sTokenId], ([client, sTokenId]) => getTokenURI(client, sTokenId)),
     { revalidateOnFocus: false, focusThrottleInterval: 0 }
   )
   return { tokenURI: data, error }
 }
 
-export const useGetStokenSymbol = (propertyAddress?: string, sTokenId?: number) => {
+export const useGetStokenSymbol = (sTokenId?: number) => {
   const { nonConnectedWeb3 } = useProvider()
   const { data, error } = useSWR<UnwrapFunc<typeof getStokenSymbol>, Error>(
-    SWRCachePath.getStokenSymbol(propertyAddress),
-    () =>
-      whenDefinedAll([nonConnectedWeb3, propertyAddress, sTokenId], ([client, property, sTokenId]) =>
-        getStokenSymbol(client, property, sTokenId)
-      ),
+    SWRCachePath.getStokenSymbol(`${sTokenId}`),
+    () => whenDefinedAll([nonConnectedWeb3, sTokenId], ([client, sTokenId]) => getStokenSymbol(client, sTokenId)),
     { revalidateOnFocus: false, focusThrottleInterval: 0 }
   )
   return { symbol: data, error }

@@ -402,7 +402,7 @@ export const depositToProperty = async (web3: Web3, propertyAddress: string, amo
   return undefined
 }
 
-export const depositToPosition = async (web3: Web3, propertyAddress: string, amount: string, sTokenId: string) => {
+export const depositToPosition = async (web3: Web3, sTokenId: string, amount: string) => {
   const client = newClient(web3)
   if (client) {
     return client.lockup(await getContractAddress(client, 'lockup')).depositToPosition(sTokenId, amount)
@@ -410,7 +410,7 @@ export const depositToPosition = async (web3: Web3, propertyAddress: string, amo
   return undefined
 }
 
-export const withdrawByPosition = async (web3: Web3, propertyAddress: string, amount: string, sTokenId: string) => {
+export const withdrawByPosition = async (web3: Web3, amount: string, sTokenId: string) => {
   const client = newClient(web3)
   if (client) {
     return client.lockup(await getContractAddress(client, 'lockup')).withdrawByPosition(sTokenId, amount)
@@ -426,7 +426,7 @@ export const migrateToSTokens = async (web3: Web3, sTokenId: string) => {
   return undefined
 }
 
-export const getTokenURI = async (web3: Web3, propertyAddress: string, sTokenId: number) => {
+export const getTokenURI = async (web3: Web3, sTokenId: number) => {
   const client = newClient(web3)
   if (client) {
     return client.sTokens(addresses.eth.main.sTokens).tokenURI(sTokenId)
@@ -434,7 +434,7 @@ export const getTokenURI = async (web3: Web3, propertyAddress: string, sTokenId:
   return undefined
 }
 
-export const getStokenSymbol = async (web3: Web3, propertyAddress: string, sTokenId: number) => {
+export const getStokenSymbol = async (web3: Web3, sTokenId: number) => {
   const client = newClient(web3)
   if (client) {
     return client
