@@ -883,7 +883,7 @@ export const useDepositToPosition = () => {
     },
     [web3]
   )
-  return { depositToProperty: callback, isLoading, error }
+  return { depositToPosition: callback, isLoading, error }
 }
 
 export const useWithdrawByPosition = () => {

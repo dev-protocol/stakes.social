@@ -1027,7 +1027,7 @@ describe('dev-kit hooks', () => {
       const { result, waitForNextUpdate } = renderHook(() => useDepositToPosition())
       ;(depositToPosition as jest.Mock).mockResolvedValue(true)
       act(() => {
-        result.current.depositToProperty('address', '10000')
+        result.current.depositToPosition('address', '10000')
       })
       await waitForNextUpdate()
       expect(result.current.error).toBe(undefined)
@@ -1040,7 +1040,7 @@ describe('dev-kit hooks', () => {
       ;(depositToPosition as jest.Mock).mockRejectedValue(error)
       message.error = jest.fn(() => {}) as any
       act(() => {
-        result.current.depositToProperty('address', '10000')
+        result.current.depositToPosition('address', '10000')
       })
       await waitForNextUpdate()
       expect(result.current.error).toBe(error)
