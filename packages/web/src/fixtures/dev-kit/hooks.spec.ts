@@ -912,7 +912,7 @@ describe('dev-kit hooks', () => {
       const error = undefined
 
       ;(useSWR as jest.Mock).mockImplementation(() => ({ data, error }))
-      const { result } = renderHook(() => useGetSTokenPositions('property-address', DUMMY_STOKEN_ID))
+      const { result } = renderHook(() => useGetSTokenPositions(DUMMY_STOKEN_ID))
       expect(result.current.positions).toBe(data)
     })
 
@@ -920,7 +920,7 @@ describe('dev-kit hooks', () => {
       const data = {}
       const error = undefined
       ;(useSWR as jest.Mock).mockImplementation(() => ({ data, error }))
-      const { result } = renderHook(() => useGetSTokenPositions('property-address', DUMMY_STOKEN_ID))
+      const { result } = renderHook(() => useGetSTokenPositions(DUMMY_STOKEN_ID))
       expect(result.current.positions).toBe(data)
     })
 
@@ -929,7 +929,7 @@ describe('dev-kit hooks', () => {
       const errorMessage = 'error'
       const error = new Error(errorMessage)
       ;(useSWR as jest.Mock).mockImplementation(() => ({ data, error }))
-      const { result } = renderHook(() => useGetSTokenPositions('property-address', DUMMY_STOKEN_ID))
+      const { result } = renderHook(() => useGetSTokenPositions(DUMMY_STOKEN_ID))
       expect(result.current.error).toBe(error)
       expect(result.current.error?.message).toBe(errorMessage)
     })
@@ -1087,7 +1087,7 @@ describe('dev-kit hooks', () => {
       const error = undefined
 
       ;(useSWR as jest.Mock).mockImplementation(() => ({ data, error }))
-      const { result } = renderHook(() => useMigrateToSTokens('property-address', '2'))
+      const { result } = renderHook(() => useMigrateToSTokens('2'))
       expect(result.current.ok).toBe(data)
     })
 
@@ -1095,7 +1095,7 @@ describe('dev-kit hooks', () => {
       const data = true
       const error = undefined
       ;(useSWR as jest.Mock).mockImplementation(() => ({ data, error }))
-      const { result } = renderHook(() => useMigrateToSTokens('property-address', '2'))
+      const { result } = renderHook(() => useMigrateToSTokens('2'))
       expect(result.current.ok).toBe(data)
     })
 
@@ -1104,7 +1104,7 @@ describe('dev-kit hooks', () => {
       const errorMessage = 'error'
       const error = new Error(errorMessage)
       ;(useSWR as jest.Mock).mockImplementation(() => ({ data, error }))
-      const { result } = renderHook(() => useMigrateToSTokens('property-address', '2'))
+      const { result } = renderHook(() => useMigrateToSTokens('2'))
       expect(result.current.error).toBe(error)
       expect(result.current.error?.message).toBe(errorMessage)
     })

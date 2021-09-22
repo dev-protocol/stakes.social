@@ -878,14 +878,11 @@ export const useWithdrawByPosition = (propertyAddress?: string, amount?: string,
   return { ok: data, error }
 }
 
-export const useMigrateToSTokens = (propertyAddress?: string, sTokenId?: string) => {
+export const useMigrateToSTokens = (sTokenId?: string) => {
   const { nonConnectedWeb3 } = useProvider()
   const { data, error } = useSWR<UnwrapFunc<typeof migrateToSTokens>, Error>(
-    SWRCachePath.migrateToSTokens(propertyAddress),
-    () =>
-      whenDefinedAll([nonConnectedWeb3, propertyAddress, sTokenId], ([client, property, sTokenId]) =>
-        migrateToSTokens(client, property, sTokenId)
-      ),
+    SWRCachePath.migrateToSTokens(sTokenId),
+    () => whenDefinedAll([nonConnectedWeb3, sTokenId], ([client, sTokenId]) => migrateToSTokens(client, sTokenId)),
     { revalidateOnFocus: false, focusThrottleInterval: 0 }
   )
   return { ok: data, error }
