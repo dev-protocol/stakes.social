@@ -904,7 +904,7 @@ export const useWithdrawByPosition = () => {
     },
     [web3]
   )
-  return { depositToProperty: callback, isLoading, error }
+  return { withdrawByPosition: callback, isLoading, error }
 }
 
 export const useMigrateToSTokens = () => {
