@@ -11,12 +11,11 @@ const Wrap = styled.div`
 
 const Index = () => {
   const { propertyAddress } = useRouter().query as { propertyAddress: string }
+
   return (
     <>
       <Header />
-      <Wrap>
-        <ConvertToStokens propertyAddress={propertyAddress} />
-      </Wrap>
+      <Wrap>{propertyAddress && <ConvertToStokens propertyAddress={propertyAddress} />}</Wrap>
       <Footer />
     </>
   )

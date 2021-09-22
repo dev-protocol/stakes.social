@@ -34,7 +34,7 @@ export const ConvertToStokens = ({ propertyAddress }: ConvertToStokensProps) => 
   const { migrateToSTokens } = useMigrateToSTokens()
   const { sTokens } = useDetectSTokens(propertyAddress, accountAddress)
   const stakingAmount = useMemo(() => toNaturalNumber(myStakingAmount), [myStakingAmount])
-  const handleClickConvertButton = useCallback(() => migrateToSTokens('2'), [migrateToSTokens])
+  const handleClickConvertButton = useCallback(() => migrateToSTokens('sTokenId'), [migrateToSTokens])
   const sToken = useMemo(() => sTokens?.[0], [sTokens])
 
   return (
