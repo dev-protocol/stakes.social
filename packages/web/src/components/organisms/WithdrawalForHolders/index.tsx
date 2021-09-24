@@ -44,6 +44,7 @@ export const WithdrawalForHolders = ({ className, title, propertyAddress }: Prop
         value={myHolderAmount?.toFixed()}
         onSearch={withdraw}
         suffix="DEV"
+        propertyAddress={propertyAddress}
       ></TransactForm>
       <Estimated title="Withdrawable Amount">{<p>{myHolderAmount?.toFixed() || 0} DEV</p>}</Estimated>
       <EstimatedGasFeeCard

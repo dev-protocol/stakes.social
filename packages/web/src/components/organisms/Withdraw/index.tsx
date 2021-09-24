@@ -87,6 +87,7 @@ export const Withdraw = ({ className, title, propertyAddress, onChange: onChange
         onSearch={withdrawFor}
         disabled={!web3}
         onClickMax={onClickMax}
+        propertyAddress={propertyAddress}
       />
       <SubtitleContianer>
         <InfoContainer>

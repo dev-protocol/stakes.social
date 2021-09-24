@@ -27,7 +27,17 @@ import {
   allClaimedRewards,
   propertyName,
   propertySymbol,
-  balanceOfProperty
+  balanceOfProperty,
+  detectStokens,
+  getStokenPositions,
+  getStokenRewards,
+  approve,
+  depositToProperty,
+  depositToPosition,
+  withdrawByPosition,
+  migrateToSTokens,
+  getTokenURI,
+  getStokenSymbol
 } from './client'
 import { SWRCachePath } from './cache-path'
 import {
@@ -778,4 +788,162 @@ export const useBalanceOfAccountProperty = (propertyAddress?: string, accountAdd
     { revalidateOnFocus: false, focusThrottleInterval: 0 }
   )
   return { balance: data, error }
+}
+
+export const useDetectSTokens = (propertyAddress?: string, accountAddress?: string) => {
+  const { nonConnectedWeb3 } = useProvider()
+  const { data, error } = useSWR<UnwrapFunc<typeof detectStokens>, Error>(
+    SWRCachePath.detectStokens(propertyAddress, accountAddress),
+    () =>
+      whenDefinedAll([nonConnectedWeb3, propertyAddress, accountAddress], ([client, property, account]) =>
+        detectStokens(client, property, account)
+      ),
+    { revalidateOnFocus: false, focusThrottleInterval: 0 }
+  )
+  return { sTokens: data, error }
+}
+
+export const useGetSTokenPositions = (sTokenId?: number) => {
+  const { nonConnectedWeb3 } = useProvider()
+  const { data, error } = useSWR<UnwrapFunc<typeof getStokenPositions>, Error>(
+    SWRCachePath.getStokenPositions(`${sTokenId}`),
+    () => whenDefinedAll([nonConnectedWeb3, sTokenId], ([client, sTokenId]) => getStokenPositions(client, sTokenId)),
+    { revalidateOnFocus: false, focusThrottleInterval: 0 }
+  )
+  return { positions: data, error }
+}
+
+export const useGetStokenRewards = (sTokenId?: number) => {
+  const { nonConnectedWeb3 } = useProvider()
+  const { data, error } = useSWR<UnwrapFunc<typeof getStokenRewards>, Error>(
+    SWRCachePath.getStokenRewards(`${sTokenId}`),
+    () => whenDefinedAll([nonConnectedWeb3, sTokenId], ([client, sTokenId]) => getStokenRewards(client, sTokenId)),
+    { revalidateOnFocus: false, focusThrottleInterval: 0 }
+  )
+  return { rewards: data, error }
+}
+
+export const useApprove = () => {
+  const { web3 } = useProvider()
+  const [isLoading, setIsLoading] = useState<boolean>(false)
+  const [error, setError] = useState<Error>()
+  const callback = useCallback(
+    async (address: string, amount: string) => {
+      setIsLoading(true)
+      setError(undefined)
+      return whenDefined(web3, client =>
+        approve(client, address, amount)
+          .catch(setError)
+          .finally(() => {
+            setIsLoading(false)
+          })
+      )
+    },
+    [web3]
+  )
+  return { approve: callback, isLoading, error }
+}
+
+export const useDepositToProperty = () => {
+  const { web3 } = useProvider()
+  const [isLoading, setIsLoading] = useState<boolean>(false)
+  const [error, setError] = useState<Error>()
+  const callback = useCallback(
+    async (propertyAddress: string, amount: string) => {
+      setIsLoading(true)
+      setError(undefined)
+      return whenDefined(web3, client =>
+        depositToProperty(client, propertyAddress, amount)
+          .catch(setError)
+          .finally(() => {
+            setIsLoading(false)
+          })
+      )
+    },
+    [web3]
+  )
+  return { depositToProperty: callback, isLoading, error }
+}
+
+export const useDepositToPosition = () => {
+  const { web3 } = useProvider()
+  const [isLoading, setIsLoading] = useState<boolean>(false)
+  const [error, setError] = useState<Error>()
+  const callback = useCallback(
+    async (sTokenId: string, amount: string) => {
+      setIsLoading(true)
+      setError(undefined)
+      return whenDefined(web3, client =>
+        depositToPosition(client, sTokenId, amount)
+          .catch(setError)
+          .finally(() => {
+            setIsLoading(false)
+          })
+      )
+    },
+    [web3]
+  )
+  return { depositToPosition: callback, isLoading, error }
+}
+
+export const useWithdrawByPosition = () => {
+  const { web3 } = useProvider()
+  const [isLoading, setIsLoading] = useState<boolean>(false)
+  const [error, setError] = useState<Error>()
+  const callback = useCallback(
+    async (amount: string, sTokenId: string) => {
+      setIsLoading(true)
+      setError(undefined)
+      return whenDefined(web3, client =>
+        withdrawByPosition(client, amount, sTokenId)
+          .catch(setError)
+          .finally(() => {
+            setIsLoading(false)
+          })
+      )
+    },
+    [web3]
+  )
+  return { withdrawByPosition: callback, isLoading, error }
+}
+
+export const useMigrateToSTokens = () => {
+  const { web3 } = useProvider()
+  const [isLoading, setIsLoading] = useState<boolean>(false)
+  const [error, setError] = useState<Error>()
+  const callback = useCallback(
+    async (sTokenId: string) => {
+      setIsLoading(true)
+      setError(undefined)
+      return whenDefined(web3, client =>
+        migrateToSTokens(client, sTokenId)
+          .catch(setError)
+          .finally(() => {
+            setIsLoading(false)
+          })
+      )
+    },
+    [web3]
+  )
+  return { migrateToSTokens: callback, isLoading, error }
+}
+
+export const useGetTokenURI = (sTokenId?: number) => {
+  const { nonConnectedWeb3 } = useProvider()
+  const { data, error } = useSWR<UnwrapFunc<typeof getTokenURI>, Error>(
+    SWRCachePath.getTokenURI(`${sTokenId}`),
+    () => whenDefinedAll([nonConnectedWeb3, sTokenId], ([client, sTokenId]) => getTokenURI(client, sTokenId)),
+    { revalidateOnFocus: false, focusThrottleInterval: 0 }
+  )
+  return { tokenURI: data, error }
+}
+
+export const useGetStokenSymbol = (sTokenId?: number) => {
+  const { nonConnectedWeb3 } = useProvider()
+  const { data, error } = useSWR<UnwrapFunc<typeof getStokenSymbol>, Error>(
+    SWRCachePath.getStokenSymbol(`${sTokenId}`),
+    () => whenDefinedAll([nonConnectedWeb3, sTokenId], ([client, sTokenId]) => getStokenSymbol(client, sTokenId)),
+    { revalidateOnFocus: false, focusThrottleInterval: 0 }
+  )
+  return { symbol: data, error }
 }

@@ -31,5 +31,19 @@ export const SWRCachePath = {
   propertyName: (propertyAddress?: string, user?: string) => `propertyAddresses/${user}${propertyAddress}/name`,
   propertySymbol: (propertyAddress?: string, user?: string) => `propertyAddresses/${user}${propertyAddress}/symbol`,
   balanceOfProperty: (propertyAddress?: string, user?: string) =>
-    `propertyAddresses/${user}${propertyAddress}/balanceOf`
+    `propertyAddresses/${user}${propertyAddress}/balanceOf`,
+  detectStokens: (propertyAddress?: string, user?: string) =>
+    `propertyAddresses/${user}${propertyAddress}/detectStokens`,
+  getStokenPositions: (sTokenId?: string) => `sTokenId/${sTokenId}/getStokenPositions`,
+  getStokenRewards: (sTokenId?: string) => `sTokenId/${sTokenId}/getStokenRewards`,
+  approve: (propertyAddress?: string, user?: string) => `propertyAddresses/${user}${propertyAddress}/approve`,
+  depositToProperty: (propertyAddress?: string, user?: string) =>
+    `propertyAddresses/${user}${propertyAddress}/depositToProperty`,
+  depositToPosition: (propertyAddress?: string, user?: string) =>
+    `propertyAddresses/${user}${propertyAddress}/depositToPosition`,
+  withdrawByPosition: (propertyAddress?: string, user?: string) =>
+    `propertyAddresses/${user}${propertyAddress}/withdrawByPosition`,
+  migrateToSTokens: (sTokenId?: string) => `sTokenId/${sTokenId}/migrateToSTokens`,
+  getTokenURI: (sTokenId?: string) => `sTokenId/${sTokenId}/getTokenURI`,
+  getStokenSymbol: (sTokenId?: string) => `sTokenId/${sTokenId}/getStokenSymbol`
 } as const

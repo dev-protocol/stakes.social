@@ -63,6 +63,7 @@ export const Stake = ({ className, title, propertyAddress }: Props) => {
         onSearch={stakeFor}
         disabled={!web3}
         onClickMax={onClickMax}
+        propertyAddress={propertyAddress}
       />
       <div style={{ height: '40px' }}></div>
       <EstimatedGasFeeCard
