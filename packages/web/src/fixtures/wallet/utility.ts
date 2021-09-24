@@ -47,10 +47,10 @@ export const disconnectWallet = (setWeb3Handler: Function, web3Modal?: Web3Modal
   setWeb3Handler(undefined)
 }
 
-export const getAccountAddress = async (web3?: Web3) => {
+export const getAccountAddress = async (web3?: Web3, invalidate: boolean = false) => {
   if (web3) {
     return (async fromCache => {
-      if (typeof fromCache === 'string') {
+      if (typeof fromCache === 'string' && !invalidate) {
         return fromCache
       }
       const [account] = await web3.eth.getAccounts()
