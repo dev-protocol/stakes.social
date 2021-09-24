@@ -4,8 +4,22 @@ import {
   useGetPropertyBalanceQuery as IUseGetPropertyBalanceQuery,
   useGetMarketFactoryCreateQuery as IUseGetMarketFactoryCreateQuery,
   useListPropertyMetaQuery as IUseListPropertyMetaQuery,
-  useTotalStakedAccountLazyQuery as IUseTotalStakedAccountLazyQuery
+  useTotalStakedAccountLazyQuery as IUseTotalStakedAccountLazyQuery,
+  useListOwnedPropertyTokensQuery as IUseListOwnedPropertyTokensQuery
 } from '@dev/graphql'
+
+export const useListOwnedPropertyTokensQuery = (): Partial<ReturnType<typeof IUseListOwnedPropertyTokensQuery>> => ({
+  data: {
+    property_balance: [
+      {
+        account_address: 'account_address',
+        balance: 10000000000000,
+        is_author: true,
+        property_address: 'property_addrees'
+      }
+    ]
+  }
+})
 
 export const useTotalStakedAccountLazyQuery = (): Partial<ReturnType<typeof IUseTotalStakedAccountLazyQuery>> => [
   () => '',

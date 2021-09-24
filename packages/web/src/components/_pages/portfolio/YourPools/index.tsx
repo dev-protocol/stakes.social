@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useListOwnedPropertyMetaQuery } from '@dev/graphql'
+import { useListOwnedPropertyMetaQuery, useListOwnedPropertyTokensQuery } from '@dev/graphql'
 import { AssetList } from 'src/components/molecules/AssetList'
 import { useCallback } from 'react'
 
@@ -14,9 +14,9 @@ export const YourPools = ({ accountAddress }: Props) => {
   const { data: totalProperties } = useListOwnedPropertyMetaQuery({
     variables: { account_address: accountAddress || '' }
   })
-  const { data, loading } = useListOwnedPropertyMetaQuery({
+  const { data, loading } = useListOwnedPropertyTokensQuery({
     variables: {
-      account_address: accountAddress || '',
+      accountAddress: accountAddress || '',
       limit: perPage,
       offset: (page - 1) * perPage
     }
@@ -27,8 +27,7 @@ export const YourPools = ({ accountAddress }: Props) => {
     },
     [setPage]
   )
-  const properties = data?.property_meta.map(x => x.property)
-
+  const properties = data?.property_balance.map(x => x.property_address)
   return (
     <AssetList
       isPool={true}

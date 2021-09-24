@@ -111,6 +111,17 @@ export const AssetItemOnList = ({
     () =>
       typeof hook === 'undefined' ? undefined : hook(propertyAddress)
 
+  const getRewards = () => {
+    let reward
+    if (isPool === true) {
+      const amount = toCurrency(myHolderAmount?.dp(2)).toNumber()
+      reward = amount < 0.01 ? '<0.01' : amount
+      return reward
+    }
+    reward = myStakingRewardAmount?.dp(2).toNumber()
+    return reward || 0
+  }
+
   return (
     <Wrap className={className}>
       <Link href={'/[propertyAddress]'} as={`/${propertyAddress}`} passHref>
@@ -125,12 +136,7 @@ export const AssetItemOnList = ({
         suffix={myStakingAmountCurrency}
         precision={2}
       />
-      <GridTotalStake
-        title="Your Rewards"
-        value={(isPool ? toCurrency(myHolderAmount?.dp(2)).toNumber() : myStakingRewardAmount?.dp(2).toNumber()) || 0}
-        suffix={myStakingRewardAmountCurrency}
-        precision={2}
-      />
+      <GridTotalStake title="Your Rewards" value={getRewards()} suffix={myStakingRewardAmountCurrency} precision={2} />
       <GridButtons>
         {enableStake && hasNotBalanceOnTheProperty ? (
           <ButtonWithGradient onClick={onClick(onClickStake)}>Stake</ButtonWithGradient>
