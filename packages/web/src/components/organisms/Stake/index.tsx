@@ -119,9 +119,7 @@ export const Stake = ({ className, title, propertyAddress }: Props) => {
     setSelectedSTokenId(isSelectNewPosition ? sTokens?.[event.target.value] : undefined)
   }
 
-  const handleApprove = () => approve(propertyAddress, stakeAmount)
-
-  const handleStake = () => {
+  const handleApprove = () => {
     if (!web3) {
       message.warn({ content: 'Please sign in', key: 'StakeButton' })
       return
@@ -130,6 +128,10 @@ export const Stake = ({ className, title, propertyAddress }: Props) => {
       message.warn({ content: 'Please enter a value greater than 0', key: 'StakeButton' })
       return
     }
+    approve(propertyAddress, stakeAmount)
+  }
+
+  const handleStake = () => {
     if (radioValue > DEFAULT_RADIO_VALUE) {
       depositToPosition(propertyAddress, amountNumber.toString())
     } else {
