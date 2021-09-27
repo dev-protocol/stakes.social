@@ -115,3 +115,39 @@ export const usePropertySymbol = (propertyAddress?: string) => {
 export const useBalanceOfProperty = () => {
   return { balance: toBigNumber(1000) }
 }
+
+export const useDetectSTokens = () => {
+  return { sTokens: [toBigNumber(1000)] }
+}
+
+export const useGetStokenRewards = () => {
+  return {}
+}
+
+export const useApprove = () => {
+  return {}
+}
+
+export const useDepositToProperty = () => {
+  return {}
+}
+
+export const useDepositToPosition = () => {
+  return {}
+}
+
+export const useWithdrawByPosition = () => {
+  return {}
+}
+
+export const useMigrateToSTokens = () => {
+  return {}
+}
+
+export const useGetTokenURI = () => {
+  return {}
+}
+
+export const useGetStokenSymbol = () => {
+  return {}
+}
