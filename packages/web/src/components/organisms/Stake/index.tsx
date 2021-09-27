@@ -10,7 +10,7 @@ import {
 } from 'src/fixtures/dev-kit/hooks'
 import { useGetEthPrice } from 'src/fixtures/uniswap/hooks'
 import { toAmountNumber, toNaturalNumber, whenDefinedAll } from 'src/fixtures/utility'
-import { FormContainer } from 'src/components/molecules/TransactForm/FormContainer'
+import { FormContainer } from 'src/components/molecules/WithdrawTransactForm/FormContainer'
 import { EstimatedGasFeeCard } from 'src/components/molecules/EstimatedGasFeeCard'
 import { message, Button, Input, Radio, Space, Row, Col, RadioChangeEvent } from 'antd'
 import styled from 'styled-components'
@@ -135,7 +135,7 @@ export const Stake = ({ className, title, propertyAddress }: Props) => {
     if (radioValue > DEFAULT_RADIO_VALUE) {
       depositToPosition(propertyAddress, amountNumber.toString())
     } else {
-      if (!selectedSTokenId) {
+      if (typeof selectedSTokenId === 'undefined') {
         message.warn({ content: 'No position selected', key: 'StakeButton' })
       } else {
         depositToProperty(`${selectedSTokenId}`, amountNumber.toString())
