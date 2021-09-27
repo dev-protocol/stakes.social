@@ -825,7 +825,8 @@ export const useGetStokenRewards = (sTokenId?: number) => {
 
 export const useApprove = () => {
   const { web3 } = useProvider()
-  const [isLoading, setIsLoading] = useState<boolean>(false)
+  const [isLoading, setIsLoading] = useState(false)
+  const [ok, setOK] = useState(false)
   const [error, setError] = useState<Error>()
   const callback = useCallback(
     async (address: string, amount: string) => {
@@ -833,6 +834,7 @@ export const useApprove = () => {
       setError(undefined)
       return whenDefined(web3, client =>
         approve(client, address, amount)
+          .then(result => setOK(result || false))
           .catch(setError)
           .finally(() => {
             setIsLoading(false)
@@ -841,7 +843,7 @@ export const useApprove = () => {
     },
     [web3]
   )
-  return { approve: callback, isLoading, error }
+  return { approve: callback, ok, isLoading, error }
 }
 
 export const useDepositToProperty = () => {
