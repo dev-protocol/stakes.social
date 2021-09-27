@@ -893,11 +893,11 @@ export const useWithdrawByPosition = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [error, setError] = useState<Error>()
   const callback = useCallback(
-    async (amount: string, sTokenId: string) => {
+    async (sTokenId: string, amount: string) => {
       setIsLoading(true)
       setError(undefined)
       return whenDefined(web3, client =>
-        withdrawByPosition(client, amount, sTokenId)
+        withdrawByPosition(client, sTokenId, amount)
           .catch(setError)
           .finally(() => {
             setIsLoading(false)

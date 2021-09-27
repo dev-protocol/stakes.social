@@ -410,7 +410,7 @@ export const depositToPosition = async (web3: Web3, sTokenId: string, amount: st
   return undefined
 }
 
-export const withdrawByPosition = async (web3: Web3, amount: string, sTokenId: string) => {
+export const withdrawByPosition = async (web3: Web3, sTokenId: string, amount: string) => {
   const client = newClient(web3)
   if (client) {
     return client.lockup(await getContractAddress(client, 'lockup')).withdrawByPosition(sTokenId, amount)
