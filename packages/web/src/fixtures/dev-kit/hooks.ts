@@ -914,11 +914,11 @@ export const useMigrateToSTokens = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [error, setError] = useState<Error>()
   const callback = useCallback(
-    async (sTokenId: string) => {
+    async (propertyAddress: string) => {
       setIsLoading(true)
       setError(undefined)
       return whenDefined(web3, client =>
-        migrateToSTokens(client, sTokenId)
+        migrateToSTokens(client, propertyAddress)
           .catch(setError)
           .finally(() => {
             setIsLoading(false)

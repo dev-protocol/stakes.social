@@ -1,10 +1,10 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`TransactForm Snapshot 1`] = `
+exports[`WithdrawTransactForm Snapshot 1`] = `
 <body>
   <div>
     <div
-      class="sc-1d8aayd-5 ZLwuK"
+      class="sc-bygjqz-1 iIKDAL"
       style="opacity: 1;"
     >
       <div
@@ -14,14 +14,6 @@ exports[`TransactForm Snapshot 1`] = `
         <div
           class="ant-space ant-space-vertical"
         >
-          <div
-            class="ant-space-item"
-            style="margin-bottom: 8px;"
-          >
-            <div
-              class="sc-1d8aayd-8 TrkZc"
-            />
-          </div>
           <div
             class="ant-space-item"
             style="margin-bottom: 8px;"
@@ -65,7 +57,7 @@ exports[`TransactForm Snapshot 1`] = `
                       style="min-width: 120px;"
                     >
                       <span>
-                        2000
+                        1e-15
                       </span>
                       <span
                         style="font-size: 0.6em; margin-left: 2px;"
@@ -78,7 +70,9 @@ exports[`TransactForm Snapshot 1`] = `
                     class="ant-space-item"
                   >
                     <div>
-                      31
+                      <span>
+                        1e-15
+                      </span>
                       <span
                         style="font-size: 0.6em; margin-left: 2px;"
                       >
@@ -121,7 +115,7 @@ exports[`TransactForm Snapshot 1`] = `
                       style="margin-left: 8px; min-width: 40px;"
                     >
                       #
-                      6
+                      4
                     </div>
                   </div>
                   <div
@@ -132,7 +126,7 @@ exports[`TransactForm Snapshot 1`] = `
                       style="min-width: 120px;"
                     >
                       <span>
-                        6000
+                        1e-15
                       </span>
                       <span
                         style="font-size: 0.6em; margin-left: 2px;"
@@ -145,7 +139,9 @@ exports[`TransactForm Snapshot 1`] = `
                     class="ant-space-item"
                   >
                     <div>
-                      93
+                      <span>
+                        1e-15
+                      </span>
                       <span
                         style="font-size: 0.6em; margin-left: 2px;"
                       >
@@ -187,7 +183,7 @@ exports[`TransactForm Snapshot 1`] = `
                       style="margin-left: 8px; min-width: 40px;"
                     >
                       #
-                      50
+                      6
                     </div>
                   </div>
                   <div
@@ -198,7 +194,7 @@ exports[`TransactForm Snapshot 1`] = `
                       style="min-width: 120px;"
                     >
                       <span>
-                        50000
+                        1e-15
                       </span>
                       <span
                         style="font-size: 0.6em; margin-left: 2px;"
@@ -211,7 +207,9 @@ exports[`TransactForm Snapshot 1`] = `
                     class="ant-space-item"
                   >
                     <div>
-                      775
+                      <span>
+                        1e-15
+                      </span>
                       <span
                         style="font-size: 0.6em; margin-left: 2px;"
                       >
@@ -226,7 +224,7 @@ exports[`TransactForm Snapshot 1`] = `
         </div>
       </div>
       <button
-        class="ant-btn ant-btn-lg sc-1ho13tb-0 sc-1d8aayd-6 cpPLtK jsBUQV"
+        class="ant-btn ant-btn-lg sc-1ho13tb-0 sc-bygjqz-2 cpPLtK dKnxTk"
         type="button"
       />
     </div>

@@ -98,13 +98,11 @@ export const Withdraw = ({ className, title, propertyAddress, onChange: onChange
           You will receive all accumulated rewards when withdrawing any amount of staked DEV.
         </span>
       </SubtitleContianer>
-      {isDisplayFee ? (
+      {isDisplayFee && (
         <EstimatedGasFeeCard
           estimatedGasFee={estimateGas ? estimateGas.toFixed(6) : '-'}
           estimatedGasFeeUSD={estimateGasUSD ? estimateGasUSD.toFixed(2) : ''}
         />
-      ) : (
-        <></>
       )}
     </FormContainer>
   )

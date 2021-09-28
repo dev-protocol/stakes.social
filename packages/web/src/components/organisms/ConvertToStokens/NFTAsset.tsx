@@ -14,10 +14,10 @@ interface NFTAssetProps {
 }
 
 export const NFTAsset = ({ sToken }: NFTAssetProps) => {
-  const { tokenURI } = useGetTokenURI()
+  const { tokenURI } = useGetTokenURI(sToken)
   const { positions } = useGetSTokenPositions(sToken)
   const { symbol } = useGetStokenSymbol(sToken)
-  const { rewards } = useGetStokenRewards()
+  const { rewards } = useGetStokenRewards(sToken)
   const positionAmount = useMemo(() => toNaturalNumber(positions?.amount), [positions?.amount])
   const rewardAmount = useMemo(() => toNaturalNumber(rewards?.entireReward), [rewards?.entireReward])
   return (

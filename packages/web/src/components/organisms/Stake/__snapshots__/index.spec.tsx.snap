@@ -4,10 +4,10 @@ exports[`Stake Snapshot 1`] = `
 <body>
   <div>
     <div
-      class="sc-89297o-0 etzBlt"
+      class="sc-1edrou6-0 ehtZMB"
     >
       <div
-        class="sc-1d8aayd-5 ZLwuK"
+        class="sc-1nbnut-4 kmrGix"
         style="opacity: 1;"
       >
         <div
@@ -44,6 +44,12 @@ exports[`Stake Snapshot 1`] = `
                   </span>
                 </span>
               </label>
+            </div>
+            <div
+              class="ant-space-item"
+              style="margin-bottom: 8px;"
+            >
+              )
             </div>
             <div
               class="ant-space-item"
@@ -88,7 +94,7 @@ exports[`Stake Snapshot 1`] = `
                         style="min-width: 120px;"
                       >
                         <span>
-                          2000
+                          1e-15
                         </span>
                         <span
                           style="font-size: 0.6em; margin-left: 2px;"
@@ -101,7 +107,7 @@ exports[`Stake Snapshot 1`] = `
                       class="ant-space-item"
                     >
                       <div>
-                        31
+                        1e-15
                         <span
                           style="font-size: 0.6em; margin-left: 2px;"
                         >
@@ -144,7 +150,7 @@ exports[`Stake Snapshot 1`] = `
                         style="margin-left: 8px; min-width: 40px;"
                       >
                         #
-                        6
+                        4
                       </div>
                     </div>
                     <div
@@ -155,7 +161,7 @@ exports[`Stake Snapshot 1`] = `
                         style="min-width: 120px;"
                       >
                         <span>
-                          6000
+                          1e-15
                         </span>
                         <span
                           style="font-size: 0.6em; margin-left: 2px;"
@@ -168,7 +174,7 @@ exports[`Stake Snapshot 1`] = `
                       class="ant-space-item"
                     >
                       <div>
-                        93
+                        1e-15
                         <span
                           style="font-size: 0.6em; margin-left: 2px;"
                         >
@@ -210,7 +216,7 @@ exports[`Stake Snapshot 1`] = `
                         style="margin-left: 8px; min-width: 40px;"
                       >
                         #
-                        50
+                        6
                       </div>
                     </div>
                     <div
@@ -221,7 +227,7 @@ exports[`Stake Snapshot 1`] = `
                         style="min-width: 120px;"
                       >
                         <span>
-                          50000
+                          1e-15
                         </span>
                         <span
                           style="font-size: 0.6em; margin-left: 2px;"
@@ -234,7 +240,7 @@ exports[`Stake Snapshot 1`] = `
                       class="ant-space-item"
                     >
                       <div>
-                        775
+                        1e-15
                         <span
                           style="font-size: 0.6em; margin-left: 2px;"
                         >
@@ -249,7 +255,7 @@ exports[`Stake Snapshot 1`] = `
           </div>
         </div>
         <span
-          class="ant-input-affix-wrapper ant-input-affix-wrapper-lg sc-1d8aayd-0 dJdeqB"
+          class="ant-input-affix-wrapper ant-input-affix-wrapper-lg sc-1nbnut-0 fRofMr"
         >
           <input
             class="ant-input ant-input-lg"
@@ -268,7 +274,7 @@ exports[`Stake Snapshot 1`] = `
           </span>
         </span>
         <div
-          class="sc-1d8aayd-3 hHwJlK"
+          class="sc-1nbnut-2 ihkVKZ"
         >
           <div
             class="ant-row"
@@ -277,7 +283,7 @@ exports[`Stake Snapshot 1`] = `
               class="ant-col ant-col-11"
             >
               <button
-                class="ant-btn ant-btn-primary sc-1d8aayd-2 Kfpne"
+                class="ant-btn ant-btn-primary sc-1nbnut-1 gUxzv"
                 type="button"
               >
                 <span>
@@ -286,7 +292,7 @@ exports[`Stake Snapshot 1`] = `
               </button>
             </div>
             <div
-              class="ant-col ant-col-2 sc-1d8aayd-4 exriXc"
+              class="ant-col ant-col-2 sc-1nbnut-3 kdZRmt"
             >
               <svg
                 fill="none"
@@ -306,7 +312,7 @@ exports[`Stake Snapshot 1`] = `
               class="ant-col ant-col-11"
             >
               <button
-                class="ant-btn ant-btn-primary sc-1d8aayd-2 Kfpne"
+                class="ant-btn ant-btn-primary sc-1nbnut-1 gUxzv"
                 disabled=""
                 type="button"
               >
@@ -360,7 +366,7 @@ exports[`Stake Snapshot with title 1`] = `
 <body>
   <div>
     <div
-      class="sc-89297o-0 etzBlt"
+      class="sc-1edrou6-0 ehtZMB"
     >
       <label
         for="stake"
@@ -368,7 +374,7 @@ exports[`Stake Snapshot with title 1`] = `
         Stake
       </label>
       <div
-        class="sc-1d8aayd-5 ZLwuK"
+        class="sc-1nbnut-4 kmrGix"
         style="opacity: 1;"
       >
         <div
@@ -405,6 +411,12 @@ exports[`Stake Snapshot with title 1`] = `
                   </span>
                 </span>
               </label>
+            </div>
+            <div
+              class="ant-space-item"
+              style="margin-bottom: 8px;"
+            >
+              )
             </div>
             <div
               class="ant-space-item"
@@ -449,7 +461,7 @@ exports[`Stake Snapshot with title 1`] = `
                         style="min-width: 120px;"
                       >
                         <span>
-                          2000
+                          1e-15
                         </span>
                         <span
                           style="font-size: 0.6em; margin-left: 2px;"
@@ -462,7 +474,7 @@ exports[`Stake Snapshot with title 1`] = `
                       class="ant-space-item"
                     >
                       <div>
-                        31
+                        1e-15
                         <span
                           style="font-size: 0.6em; margin-left: 2px;"
                         >
@@ -505,7 +517,7 @@ exports[`Stake Snapshot with title 1`] = `
                         style="margin-left: 8px; min-width: 40px;"
                       >
                         #
-                        6
+                        4
                       </div>
                     </div>
                     <div
@@ -516,7 +528,7 @@ exports[`Stake Snapshot with title 1`] = `
                         style="min-width: 120px;"
                       >
                         <span>
-                          6000
+                          1e-15
                         </span>
                         <span
                           style="font-size: 0.6em; margin-left: 2px;"
@@ -529,7 +541,7 @@ exports[`Stake Snapshot with title 1`] = `
                       class="ant-space-item"
                     >
                       <div>
-                        93
+                        1e-15
                         <span
                           style="font-size: 0.6em; margin-left: 2px;"
                         >
@@ -571,7 +583,7 @@ exports[`Stake Snapshot with title 1`] = `
                         style="margin-left: 8px; min-width: 40px;"
                       >
                         #
-                        50
+                        6
                       </div>
                     </div>
                     <div
@@ -582,7 +594,7 @@ exports[`Stake Snapshot with title 1`] = `
                         style="min-width: 120px;"
                       >
                         <span>
-                          50000
+                          1e-15
                         </span>
                         <span
                           style="font-size: 0.6em; margin-left: 2px;"
@@ -595,7 +607,7 @@ exports[`Stake Snapshot with title 1`] = `
                       class="ant-space-item"
                     >
                       <div>
-                        775
+                        1e-15
                         <span
                           style="font-size: 0.6em; margin-left: 2px;"
                         >
@@ -610,7 +622,7 @@ exports[`Stake Snapshot with title 1`] = `
           </div>
         </div>
         <span
-          class="ant-input-affix-wrapper ant-input-affix-wrapper-lg sc-1d8aayd-0 dJdeqB"
+          class="ant-input-affix-wrapper ant-input-affix-wrapper-lg sc-1nbnut-0 fRofMr"
         >
           <input
             class="ant-input ant-input-lg"
@@ -629,7 +641,7 @@ exports[`Stake Snapshot with title 1`] = `
           </span>
         </span>
         <div
-          class="sc-1d8aayd-3 hHwJlK"
+          class="sc-1nbnut-2 ihkVKZ"
         >
           <div
             class="ant-row"
@@ -638,7 +650,7 @@ exports[`Stake Snapshot with title 1`] = `
               class="ant-col ant-col-11"
             >
               <button
-                class="ant-btn ant-btn-primary sc-1d8aayd-2 Kfpne"
+                class="ant-btn ant-btn-primary sc-1nbnut-1 gUxzv"
                 type="button"
               >
                 <span>
@@ -647,7 +659,7 @@ exports[`Stake Snapshot with title 1`] = `
               </button>
             </div>
             <div
-              class="ant-col ant-col-2 sc-1d8aayd-4 exriXc"
+              class="ant-col ant-col-2 sc-1nbnut-3 kdZRmt"
             >
               <svg
                 fill="none"
@@ -667,7 +679,7 @@ exports[`Stake Snapshot with title 1`] = `
               class="ant-col ant-col-11"
             >
               <button
-                class="ant-btn ant-btn-primary sc-1d8aayd-2 Kfpne"
+                class="ant-btn ant-btn-primary sc-1nbnut-1 gUxzv"
                 disabled=""
                 type="button"
               >

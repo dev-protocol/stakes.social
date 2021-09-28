@@ -180,6 +180,7 @@ export const Stake = ({ className, title, propertyAddress }: Props) => {
         </Radio.Group>
 
         <StyledForm
+          id="stake"
           size="large"
           value={stakeAmount}
           onChange={event => setStakeAmount(event.target.value)}
