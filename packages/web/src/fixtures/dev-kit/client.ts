@@ -418,10 +418,10 @@ export const withdrawByPosition = async (web3: Web3, sTokenId: string, amount: s
   return undefined
 }
 
-export const migrateToSTokens = async (web3: Web3, sTokenId: string) => {
+export const migrateToSTokens = async (web3: Web3, propertyAddress: string) => {
   const client = newClient(web3)
   if (client) {
-    return client.lockup(await getContractAddress(client, 'lockup')).migrateToSTokens(sTokenId)
+    return client.lockup(await getContractAddress(client, 'lockup')).migrateToSTokens(propertyAddress)
   }
   return undefined
 }
