@@ -117,37 +117,41 @@ export const useBalanceOfProperty = () => {
 }
 
 export const useDetectSTokens = () => {
-  return { sTokens: [toBigNumber(1000)] }
+  return { sTokens: [2, 4, 6] }
+}
+
+export const useGetSTokenPositions = () => {
+  return { positions: { amount: toBigNumber(1000).toString() } }
 }
 
 export const useGetStokenRewards = () => {
-  return {}
+  return { rewards: { entireReward: toBigNumber(1000).toString() } }
 }
 
 export const useApprove = () => {
-  return {}
+  return { approve: () => {} }
 }
 
 export const useDepositToProperty = () => {
-  return {}
+  return { depositToProperty: () => {} }
 }
 
 export const useDepositToPosition = () => {
-  return {}
+  return { depositToPosition: () => {} }
 }
 
 export const useWithdrawByPosition = () => {
-  return {}
+  return { withdrawByPosition: () => {} }
 }
 
 export const useMigrateToSTokens = () => {
-  return {}
+  return { migrateToSTokens: () => {} }
 }
 
 export const useGetTokenURI = () => {
-  return {}
+  return { tokenURI: {} }
 }
 
 export const useGetStokenSymbol = () => {
-  return {}
+  return { symbol: '' }
 }
