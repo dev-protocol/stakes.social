@@ -17,6 +17,7 @@ import styled from 'styled-components'
 import { Max } from 'src/components/molecules/Max'
 import { PositionText } from './PositionText'
 import RightArrow from 'src/components/organisms/Incubator/molecules/RightArrow'
+import { addresses } from '@devprotocol/dev-kit'
 
 interface Props {
   className?: string
@@ -128,17 +129,17 @@ export const Stake = ({ className, title, propertyAddress }: Props) => {
       message.warn({ content: 'Please enter a value greater than 0', key: 'StakeButton' })
       return
     }
-    approve(propertyAddress, stakeAmount)
+    approve(addresses.eth.main.sTokens, stakeAmount)
   }
 
   const handleStake = () => {
     if (radioValue > DEFAULT_RADIO_VALUE) {
-      depositToPosition(propertyAddress, amountNumber.toString())
+      depositToProperty(propertyAddress, amountNumber.toString())
     } else {
       if (typeof selectedSTokenId === 'undefined') {
         message.warn({ content: 'No position selected', key: 'StakeButton' })
       } else {
-        depositToProperty(`${selectedSTokenId}`, amountNumber.toString())
+        depositToPosition(`${selectedSTokenId}`, amountNumber.toString())
       }
     }
   }
