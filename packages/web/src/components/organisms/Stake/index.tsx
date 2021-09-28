@@ -124,7 +124,6 @@ export const Stake = ({ className, title, propertyAddress }: Props) => {
       message.warn({ content: 'Please sign in', key: 'StakeButton' })
       return
     }
-    console.log(amountNumber.toNumber() <= 0)
     if (amountNumber.toNumber() <= 0) {
       message.warn({ content: 'Please enter a value greater than 0', key: 'StakeButton' })
       return

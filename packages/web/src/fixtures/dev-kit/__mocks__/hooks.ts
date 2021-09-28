@@ -141,7 +141,9 @@ export const useDepositToPosition = () => {
 }
 
 export const useWithdrawByPosition = () => {
-  return { withdrawByPosition: () => {} }
+  return {
+    withdrawByPosition: jest.fn()
+  }
 }
 
 export const useMigrateToSTokens = () => {
