@@ -4,10 +4,10 @@ exports[`Withdraw Snapshot 1`] = `
 <body>
   <div>
     <div
-      class="sc-89297o-0 etzBlt"
+      class="sc-1edrou6-0 ehtZMB"
     >
       <div
-        class="sc-1d8aayd-5 ZLwuK"
+        class="sc-bygjqz-1 iIKDAL"
         style="opacity: 1;"
       >
         <div
@@ -17,14 +17,6 @@ exports[`Withdraw Snapshot 1`] = `
           <div
             class="ant-space ant-space-vertical"
           >
-            <div
-              class="ant-space-item"
-              style="margin-bottom: 8px;"
-            >
-              <div
-                class="sc-1d8aayd-8 TrkZc"
-              />
-            </div>
             <div
               class="ant-space-item"
               style="margin-bottom: 8px;"
@@ -68,7 +60,7 @@ exports[`Withdraw Snapshot 1`] = `
                         style="min-width: 120px;"
                       >
                         <span>
-                          2000
+                          1e-15
                         </span>
                         <span
                           style="font-size: 0.6em; margin-left: 2px;"
@@ -81,7 +73,9 @@ exports[`Withdraw Snapshot 1`] = `
                       class="ant-space-item"
                     >
                       <div>
-                        31
+                        <span>
+                          1e-15
+                        </span>
                         <span
                           style="font-size: 0.6em; margin-left: 2px;"
                         >
@@ -124,7 +118,7 @@ exports[`Withdraw Snapshot 1`] = `
                         style="margin-left: 8px; min-width: 40px;"
                       >
                         #
-                        6
+                        4
                       </div>
                     </div>
                     <div
@@ -135,7 +129,7 @@ exports[`Withdraw Snapshot 1`] = `
                         style="min-width: 120px;"
                       >
                         <span>
-                          6000
+                          1e-15
                         </span>
                         <span
                           style="font-size: 0.6em; margin-left: 2px;"
@@ -148,7 +142,9 @@ exports[`Withdraw Snapshot 1`] = `
                       class="ant-space-item"
                     >
                       <div>
-                        93
+                        <span>
+                          1e-15
+                        </span>
                         <span
                           style="font-size: 0.6em; margin-left: 2px;"
                         >
@@ -190,7 +186,7 @@ exports[`Withdraw Snapshot 1`] = `
                         style="margin-left: 8px; min-width: 40px;"
                       >
                         #
-                        50
+                        6
                       </div>
                     </div>
                     <div
@@ -201,7 +197,7 @@ exports[`Withdraw Snapshot 1`] = `
                         style="min-width: 120px;"
                       >
                         <span>
-                          50000
+                          1e-15
                         </span>
                         <span
                           style="font-size: 0.6em; margin-left: 2px;"
@@ -214,7 +210,9 @@ exports[`Withdraw Snapshot 1`] = `
                       class="ant-space-item"
                     >
                       <div>
-                        775
+                        <span>
+                          1e-15
+                        </span>
                         <span
                           style="font-size: 0.6em; margin-left: 2px;"
                         >
@@ -229,7 +227,7 @@ exports[`Withdraw Snapshot 1`] = `
           </div>
         </div>
         <span
-          class="ant-input-group-wrapper ant-input-group-wrapper-lg ant-input-search ant-input-search-large ant-input-search-with-button sc-1d8aayd-1 blgmlk"
+          class="ant-input-group-wrapper ant-input-group-wrapper-lg ant-input-search ant-input-search-large ant-input-search-with-button sc-bygjqz-0 hCvJOA"
         >
           <span
             class="ant-input-wrapper ant-input-group"

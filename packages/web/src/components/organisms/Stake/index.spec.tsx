@@ -55,7 +55,7 @@ describe(`${Stake.name}`, () => {
     await act(async () => {
       await whenDefined(input, x => userEvent.type(x, '12'))
       await userEvent.click(getByText('DEV'))
-      await userEvent.click(getByText('Stake'))
+      await userEvent.click(getByText('Approve'))
     })
 
     expect((message.warn as jest.Mock).mock.calls.length).toBe(0)
