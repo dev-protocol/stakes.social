@@ -134,12 +134,12 @@ export const Stake = ({ className, title, propertyAddress }: Props) => {
 
   const handleStake = () => {
     if (radioValue > DEFAULT_RADIO_VALUE) {
-      depositToProperty(`${selectedSTokenId}`, amountNumber.toString())
+      depositToProperty(propertyAddress, amountNumber.toString())
     } else {
       if (typeof selectedSTokenId === 'undefined') {
         message.warn({ content: 'No position selected', key: 'StakeButton' })
       } else {
-        depositToPosition(propertyAddress, amountNumber.toString())
+        depositToPosition(`${selectedSTokenId}`, amountNumber.toString())
       }
     }
   }
