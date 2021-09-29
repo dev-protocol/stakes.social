@@ -40,12 +40,12 @@ export const NFTAsset = ({ sToken }: NFTAssetProps) => {
 
               <div style={{ marginTop: '12px' }}>
                 <div style={{ fontSize: '0.8em' }}>Staked</div>
-                <span>{positionAmount}</span>DEV
+                <span>{positionAmount.toString()}</span>DEV
               </div>
 
               <div style={{ marginTop: '12px' }}>
                 <div style={{ fontSize: '0.8em' }}>Entire Reward</div>
-                <span>{rewardAmount}</span>DEV
+                <span>{rewardAmount.toString()}</span>DEV
               </div>
             </Space>
           </Col>
