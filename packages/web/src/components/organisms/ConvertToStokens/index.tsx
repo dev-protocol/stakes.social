@@ -1,11 +1,10 @@
 import { Button, Divider } from 'antd'
-import React, { useCallback, useMemo } from 'react'
+import React, { useCallback, useState } from 'react'
 import styled from 'styled-components'
 import { H2 } from 'src/components/atoms/Typography'
 import { useDetectSTokens, useGetMyStakingAmount, useMigrateToSTokens } from 'src/fixtures/dev-kit/hooks'
 import { useProvider } from 'src/fixtures/wallet/hooks'
 import { NFTAsset } from './NFTAsset'
-import { toNaturalNumber } from 'src/fixtures/utility'
 
 const StyledButton = styled(Button)`
   width: 100%;
@@ -30,24 +29,31 @@ interface ConvertToStokensProps {
 
 export const ConvertToStokens = ({ propertyAddress }: ConvertToStokensProps) => {
   const { accountAddress } = useProvider()
+  const [sToken, setSToken] = useState<number>()
   const { myStakingAmount } = useGetMyStakingAmount(propertyAddress)
   const { migrateToSTokens } = useMigrateToSTokens()
-  const { sTokens } = useDetectSTokens(propertyAddress, accountAddress)
-  const stakingAmount = useMemo(() => toNaturalNumber(myStakingAmount), [myStakingAmount])
+  const { detectStokens } = useDetectSTokens(propertyAddress, accountAddress)
   const handleClickConvertButton = useCallback(
-    () => migrateToSTokens(propertyAddress),
-    [migrateToSTokens, propertyAddress]
+    () =>
+      migrateToSTokens(propertyAddress).then(async () => {
+        console.log('done')
+        setSToken((await detectStokens())?.[0])
+      }),
+    [migrateToSTokens, propertyAddress, detectStokens]
   )
-  const sToken = useMemo(() => sTokens?.[0], [sTokens])
 
   return (
-    <div style={{ textAlign: 'center' }}>
-      <H2>You can convert the {stakingAmount} staked position to sToken</H2>
-      <WrapButton>
-        <StyledButton type="primary" onClick={handleClickConvertButton}>
-          Convert
-        </StyledButton>
-      </WrapButton>
+    <div style={{ textAlign: 'center', margin: '8em 0' }}>
+      {!sToken && (
+        <>
+          <H2>You can convert the {myStakingAmount?.toString() || 0} staked position to sToken</H2>
+          <WrapButton>
+            <StyledButton type="primary" onClick={handleClickConvertButton} disabled={myStakingAmount?.isZero()}>
+              Convert
+            </StyledButton>
+          </WrapButton>
+        </>
+      )}
       <Divider dashed />
       {sToken && <NFTAsset sToken={sToken} />}
     </div>

@@ -792,15 +792,18 @@ export const useBalanceOfAccountProperty = (propertyAddress?: string, accountAdd
 
 export const useDetectSTokens = (propertyAddress?: string, accountAddress?: string) => {
   const { nonConnectedWeb3 } = useProvider()
+  const fn = () =>
+    whenDefinedAll([nonConnectedWeb3, propertyAddress, accountAddress], ([client, property, account]) =>
+      detectStokens(client, property, account)
+    )
   const { data, error } = useSWR<UnwrapFunc<typeof detectStokens>, Error>(
     SWRCachePath.detectStokens(propertyAddress, accountAddress),
-    () =>
-      whenDefinedAll([nonConnectedWeb3, propertyAddress, accountAddress], ([client, property, account]) =>
-        detectStokens(client, property, account)
-      ),
+    fn,
     { revalidateOnFocus: false, focusThrottleInterval: 0 }
   )
-  return { sTokens: data, error }
+  const callback = useCallback(fn, [fn])
+
+  return { sTokens: data, error, detectStokens: callback }
 }
 
 export const useGetSTokenPositions = (sTokenId?: number) => {
@@ -917,6 +920,12 @@ export const useMigrateToSTokens = () => {
     async (propertyAddress: string) => {
       setIsLoading(true)
       setError(undefined)
+      // return new Promise(resolve =>
+      //   setTimeout(() => {
+      //     store.set(1, true)
+      //     resolve()
+      //   }, 3000)
+      // )
       return whenDefined(web3, client =>
         migrateToSTokens(client, propertyAddress)
           .catch(setError)
