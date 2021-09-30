@@ -10,9 +10,11 @@ import { useProvider } from 'src/fixtures/wallet/hooks'
 import { whenDefined } from 'src/fixtures/utility'
 import 'src/__mocks__/window/matchMedia.mock'
 import WalletContext from 'src/context/walletContext'
+import { getContractAddress } from 'src/fixtures/dev-kit/get-contract-address'
 
 jest.mock('src/fixtures/dev-kit/client')
 jest.mock('src/fixtures/dev-kit/hooks')
+jest.mock('src/fixtures/dev-kit/get-contract-address')
 jest.mock('src/fixtures/uniswap/hooks')
 jest.mock('src/fixtures/wallet/hooks')
 jest.mock('web3')
@@ -42,6 +44,7 @@ describe(`${Stake.name}`, () => {
   test('react hooks: input amount click DEV button and click stake button', async () => {
     ;(balanceOf as jest.Mock).mockImplementation(() => Promise.resolve(new BigNumber('1000000')))
     ;(useProvider as jest.Mock).mockImplementation(() => ({ accountAddress: '', web3: {} }))
+    ;(getContractAddress as jest.Mock).mockImplementation(() => Promise.resolve('0x0'))
     message.warn = jest.fn(() => {}) as any
 
     const { container, getByText } = render(
