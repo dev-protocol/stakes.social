@@ -17,7 +17,8 @@ import styled from 'styled-components'
 import { Max } from 'src/components/molecules/Max'
 import { PositionText } from './PositionText'
 import RightArrow from 'src/components/organisms/Incubator/molecules/RightArrow'
-import { addresses } from '@devprotocol/dev-kit'
+import { getContractAddress } from 'src/fixtures/dev-kit/get-contract-address'
+import { contractFactory } from '@devprotocol/dev-kit'
 
 interface Props {
   className?: string
@@ -120,7 +121,7 @@ export const Stake = ({ className, title, propertyAddress }: Props) => {
     setSelectedSTokenId(isSelectNewPosition ? sTokens?.[event.target.value] : undefined)
   }
 
-  const handleApprove = () => {
+  const handleApprove = async () => {
     if (!web3) {
       message.warn({ content: 'Please sign in', key: 'StakeButton' })
       return
@@ -129,17 +130,17 @@ export const Stake = ({ className, title, propertyAddress }: Props) => {
       message.warn({ content: 'Please enter a value greater than 0', key: 'StakeButton' })
       return
     }
-    approve(addresses.eth.main.sTokens, stakeAmount)
+    approve(await getContractAddress(contractFactory(web3.currentProvider), 'lockup'), stakeAmount)
   }
 
   const handleStake = () => {
     if (radioValue > DEFAULT_RADIO_VALUE) {
-      depositToProperty(propertyAddress, amountNumber.toString())
+      depositToProperty(propertyAddress, amountNumber.toFixed())
     } else {
       if (typeof selectedSTokenId === 'undefined') {
         message.warn({ content: 'No position selected', key: 'StakeButton' })
       } else {
-        depositToPosition(`${selectedSTokenId}`, amountNumber.toString())
+        depositToPosition(`${selectedSTokenId}`, amountNumber.toFixed())
       }
     }
   }
