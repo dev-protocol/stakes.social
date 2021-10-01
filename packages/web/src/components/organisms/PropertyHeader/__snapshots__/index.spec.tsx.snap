@@ -4,77 +4,91 @@ exports[`PropertyHeader Snapshot 1`] = `
 <body>
   <div>
     <div
-      class="sc-1bnntxi-0 cxFZiE"
+      class="sc-1bnntxi-0 bUxpMh"
     >
       <div
-        class="sc-1bnntxi-7 hHdeBV"
+        class="sc-1bnntxi-7 bAVVBE"
       >
         <h1
-          class="sc-1bnntxi-1 jnAiTb"
+          class="sc-1bnntxi-1 eYaSXq"
         >
           authentication-id's Pool
         </h1>
       </div>
+      <p
+        class="sc-lime37-0 ihUlkw btn-tweet"
+      >
+        <a
+          class="twitter-share-button"
+          data-lang="en"
+          data-show-count="false"
+          data-size="large"
+          data-text="Check out authentication-id on Stakes.social #DevProtocol"
+          href="https://twitter.com/share"
+        >
+          Tweet
+        </a>
+      </p>
       <div
-        class="sc-1bnntxi-2 FPFYi"
+        class="sc-1bnntxi-2 fJTuMj"
       >
         <div
-          class="sc-1bnntxi-5 cwSNtn"
+          class="sc-1bnntxi-5 fQXZkG"
         >
           <div
-            class="sc-1bnntxi-4 gLLBxi"
+            class="sc-1bnntxi-4 foRoTb"
           >
             <span
-              class="xnqjv4-0 fwZjQT"
+              class="sc-xnqjv4-0 sgRPv"
             >
               N/A
               %
             </span>
             <div
-              class="sc-1bnntxi-3 OJqpF"
+              class="sc-1bnntxi-3 eCIpfw"
             />
             <span>
               APY Stakers
             </span>
           </div>
           <div
-            class="sc-1bnntxi-3 OJqpF"
+            class="sc-1bnntxi-3 eCIpfw"
           >
             |
           </div>
           <div
-            class="sc-1bnntxi-4 gLLBxi"
+            class="sc-1bnntxi-4 foRoTb"
           >
             <span
-              class="xnqjv4-0 fwZjQT"
+              class="sc-xnqjv4-0 sgRPv"
             >
                
               N/A
               %
             </span>
             <div
-              class="sc-1bnntxi-3 OJqpF"
+              class="sc-1bnntxi-3 eCIpfw"
             />
             <span>
               APY Creators
             </span>
           </div>
           <div
-            class="sc-1bnntxi-3 OJqpF"
+            class="sc-1bnntxi-3 eCIpfw"
           >
             |
           </div>
           <div
-            class="sc-1bnntxi-4 gLLBxi"
+            class="sc-1bnntxi-4 foRoTb"
           >
             <span
-              class="xnqjv4-0 fwZjQT"
+              class="sc-xnqjv4-0 sgRPv"
             >
                
               N/A
             </span>
             <div
-              class="sc-1bnntxi-3 OJqpF"
+              class="sc-1bnntxi-3 eCIpfw"
             />
             <span>
               Karma
@@ -82,11 +96,11 @@ exports[`PropertyHeader Snapshot 1`] = `
           </div>
         </div>
         <div
-          class="sc-1bnntxi-6 gcmbHR"
+          class="sc-1bnntxi-6 sLplc"
         >
           <a
-            class="sc-17tlp0z-0 ioLHnD"
-            href="https://app.uniswap.org/#/swap?outputCurrency=0x5caf454ba92e6f2c929df14667ee360ed9fd5b26"
+            class="sc-17tlp0z-0 iQBNWa"
+            href="https://app.uniswap.org/#/swap?outputCurrency=0x5caf454ba92e6f2c929df14667ee360ed9fd5b26&use=V2"
             rel="noreferrer"
             target="_blank"
           >
@@ -100,47 +114,8 @@ exports[`PropertyHeader Snapshot 1`] = `
       </div>
     </div>
   </div>
-  <div>
-    <div
-      class="ant-message"
-    >
-      <div>
-        <div
-          class="ant-message-notice"
-        >
-          <div
-            class="ant-message-notice-content"
-          >
-            <div
-              class="ant-message-custom-content ant-message-error"
-            >
-              <span
-                aria-label="close-circle"
-                class="anticon anticon-close-circle"
-                role="img"
-              >
-                <svg
-                  aria-hidden="true"
-                  data-icon="close-circle"
-                  fill="currentColor"
-                  focusable="false"
-                  height="1em"
-                  viewBox="64 64 896 896"
-                  width="1em"
-                >
-                  <path
-                    d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm165.4 618.2l-66-.3L512 563.4l-99.3 118.4-66.1.3c-4.4 0-8-3.5-8-8 0-1.9.7-3.7 1.9-5.2l130.1-155L340.5 359a8.32 8.32 0 01-1.9-5.2c0-4.4 3.6-8 8-8l66.1.3L512 464.6l99.3-118.4 66-.3c4.4 0 8 3.5 8 8 0 1.9-.7 3.7-1.9 5.2L553.5 514l130 155c1.2 1.5 1.9 3.3 1.9 5.2 0 4.4-3.6 8-8 8z"
-                  />
-                </svg>
-              </span>
-              <span>
-                fetch is not defined
-              </span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+  <script
+    src="https://platform.twitter.com/widgets.js"
+  />
 </body>
 `;

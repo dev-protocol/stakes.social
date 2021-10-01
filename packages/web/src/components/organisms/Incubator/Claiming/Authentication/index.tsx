@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import styled from 'styled-components'
 import AuthenticationForm from './AuthenticationForm'
 import { H1Large, H1S, Text1L, LinkB } from '../../Typography'
@@ -7,7 +7,7 @@ import TweetForm from './TweetForm'
 import Hr from '../../molecules/Hr'
 import { Incubator } from 'src/fixtures/dev-for-apps/utility'
 import { useIsFinished } from 'src/fixtures/_pages/incubator/hooks'
-import { SetOnboardingPageStatus } from 'src/pages/incubator/project/[project]'
+import { SetOnboardingPageStatus, SetLoadingStatus } from 'src/pages/incubator/project/[project]'
 import GitHubLink from './GitHubLink'
 import { Button } from '../../molecules/Button'
 import Link from 'next/link'
@@ -80,14 +80,21 @@ const ErrorScreen = ({ onIsWrongChange }: ErrorScreenProps) => {
 
 type AuthenticationProps = {
   onStateChange: SetOnboardingPageStatus
+  loading: SetLoadingStatus
   project: Incubator
   metrics?: string
   onMetricsCreated: React.Dispatch<React.SetStateAction<string | undefined>>
 }
 
-const Authentication = ({ onStateChange, project, metrics, onMetricsCreated }: AuthenticationProps) => {
+const Authentication = ({ onStateChange, loading, project, metrics, onMetricsCreated }: AuthenticationProps) => {
   const { data: isSucces } = useIsFinished(project.property?.address)
   const [isWrong, setIsWrong] = useState(false)
+
+  useEffect(() => {
+    if (isWrong) {
+      loading(undefined)
+    }
+  })
 
   return (
     <DetailsContainer>
@@ -114,6 +121,7 @@ const Authentication = ({ onStateChange, project, metrics, onMetricsCreated }: A
       {!metrics && !isWrong && (
         <AuthenticationForm
           project={project}
+          loading={loading}
           onStateChange={onStateChange}
           onMetricsCreated={onMetricsCreated}
           onIsWrongChange={setIsWrong}
@@ -123,6 +131,7 @@ const Authentication = ({ onStateChange, project, metrics, onMetricsCreated }: A
       {metrics && !isWrong && (
         <TweetForm
           project={project}
+          loading={loading}
           metricsAddress={metrics}
           onStateChange={onStateChange}
           onIsWrongChange={setIsWrong}

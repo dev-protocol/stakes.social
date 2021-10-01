@@ -135,7 +135,7 @@ export const PropertyCardList = ({ currentPage, searchWord, sortBy, featureTag }
     variables: {
       limit: perPage,
       offset: (currentPage - 1) * perPage,
-      ilike: searchWord !== '' ? `${searchWord}%` : undefined,
+      ilike: searchWord !== '' ? `%${searchWord}%` : undefined,
       market: featureTag === 'GitHub' || featureTag === 'npm' ? markets[featureTag] : undefined,
       marketOther: featureTag === 'Creators' ? Object.values(markets) : undefined,
       // NOTE: If accountAddress is undefined, all properties will be displayed,
@@ -148,7 +148,7 @@ export const PropertyCardList = ({ currentPage, searchWord, sortBy, featureTag }
     variables: {
       limit: perPage,
       offset: (currentPage - 1) * perPage,
-      ilike: searchWord !== '' ? `${searchWord}%` : undefined,
+      ilike: searchWord !== '' ? `%${searchWord}%` : undefined,
       market: featureTag === 'GitHub' || featureTag === 'npm' ? markets[featureTag] : undefined,
       marketOther: featureTag === 'Creators' ? Object.values(markets) : undefined,
       from: sortBy === 'YOUR_PROPS' ? accountAddress || '0xdummy' : undefined
@@ -221,7 +221,7 @@ export const PropertyCardList = ({ currentPage, searchWord, sortBy, featureTag }
               pageSizeOptions={['9', '12', '15', '18', '21']}
               onChange={handlePagination}
               onShowSizeChange={handleShowSizeChange}
-              total={data.property_factory_create_aggregate.aggregate?.count}
+              total={data.property_factory_create_aggregate.aggregate?.count || 0}
             />
           </PaginationContainer>
         </>

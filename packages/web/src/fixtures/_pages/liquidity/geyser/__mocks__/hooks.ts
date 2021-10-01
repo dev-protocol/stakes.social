@@ -46,6 +46,20 @@ export const useUpdateAccounting = () => {
   }
 }
 
+export const useAllSchedules = () => {
+  return {
+    data: [
+      {
+        initialLockedShares: '100000',
+        unlockedShares: '100000',
+        lastUnlockTimestampSec: '100000',
+        endAtSec: '100000',
+        durationSec: '90000'
+      }
+    ]
+  }
+}
+
 export const useFinalUnlockSchedules = () => {
   return {
     data: {
@@ -55,6 +69,12 @@ export const useFinalUnlockSchedules = () => {
       endAtSec: '100000',
       durationSec: '100000'
     }
+  }
+}
+
+export const useEntirePeriod = () => {
+  return {
+    data: 100000
   }
 }
 

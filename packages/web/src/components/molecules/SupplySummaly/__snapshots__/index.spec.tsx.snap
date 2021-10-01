@@ -4,24 +4,24 @@ exports[`SupplySummaly Snapshot 1`] = `
 <body>
   <div>
     <div
-      class="re975l-0"
+      class="sc-re975l-0"
     >
       <div
-        class="re975l-1 jJJMXg"
+        class="sc-re975l-1 euHJxQ"
       >
         <span>
           APY for Stakers:
         </span>
         <span
-          class="re975l-2 bQJvIN"
+          class="sc-re975l-2 bKpDCJ"
         >
           <span
-            class="re975l-3 fXWjDh"
+            class="sc-re975l-3 cMOurZ"
           >
             1
           </span>
           <span
-            class="re975l-4 mgeDF"
+            class="sc-re975l-4 jGTnkN"
           >
             0
             %
@@ -29,33 +29,33 @@ exports[`SupplySummaly Snapshot 1`] = `
         </span>
       </div>
       <div
-        class="re975l-1 jJJMXg"
+        class="sc-re975l-1 euHJxQ"
       >
         <span>
           APY for Creators:
         </span>
         <span
-          class="re975l-2 bQJvIN"
+          class="sc-re975l-2 bKpDCJ"
         >
           -
         </span>
       </div>
       <div
-        class="re975l-1 jJJMXg"
+        class="sc-re975l-1 euHJxQ"
       >
         <span>
           Annual Supply Growth:
         </span>
         <span
-          class="re975l-2 bQJvIN"
+          class="sc-re975l-2 bKpDCJ"
         >
           <span
-            class="re975l-3 fXWjDh"
+            class="sc-re975l-3 cMOurZ"
           >
             1
           </span>
           <span
-            class="re975l-4 mgeDF"
+            class="sc-re975l-4 jGTnkN"
           >
             0
             %

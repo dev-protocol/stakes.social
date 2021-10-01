@@ -4,14 +4,14 @@ exports[`WithdrawalForHolders Snapshot 1`] = `
 <body>
   <div>
     <div
-      class="sc-89297o-0 jMpWCU"
+      class="sc-89297o-0 etzBlt"
     >
       <div
-        class="sc-1d8aayd-1 goPEkP"
+        class="sc-1d8aayd-1 bcBbeW"
         style="opacity: 1;"
       >
         <button
-          class="ant-btn ant-btn-lg sc-1ho13tb-0 sc-1d8aayd-2 cxtCCH hgCIaY"
+          class="ant-btn ant-btn-lg sc-1ho13tb-0 sc-1d8aayd-2 cpPLtK gRTWBx"
           type="button"
         >
           <span>
@@ -20,7 +20,7 @@ exports[`WithdrawalForHolders Snapshot 1`] = `
         </button>
       </div>
       <div
-        class="ant-card ant-card-bordered sc-1lowp9k-0 HRQEn"
+        class="ant-card ant-card-bordered sc-1lowp9k-0 kiBaFy"
       >
         <div
           class="ant-card-head"
@@ -41,6 +41,36 @@ exports[`WithdrawalForHolders Snapshot 1`] = `
           <p>
             6000
              DEV
+          </p>
+        </div>
+      </div>
+      <div
+        class="ant-card ant-card-bordered ant-card-small sc-18v7ikh-0 dfjrvZ"
+      >
+        <div
+          class="ant-card-head"
+        >
+          <div
+            class="ant-card-head-wrapper"
+          >
+            <div
+              class="ant-card-head-title"
+            >
+              Gas Fee (predicted)
+            </div>
+          </div>
+        </div>
+        <div
+          class="ant-card-body"
+        >
+          <p>
+            0.000011
+             ETH
+            <span
+              class="sc-18v7ikh-1 kGdgpU"
+            >
+               $0.00
+            </span>
           </p>
         </div>
       </div>

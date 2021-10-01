@@ -18,3 +18,5 @@ declare module 'next/document' {
     res?: Express.Response
   }
 }
+
+declare module '*.svg'

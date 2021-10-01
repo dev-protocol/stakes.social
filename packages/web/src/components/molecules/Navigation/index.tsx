@@ -22,7 +22,7 @@ export const Navigations = [
   {
     key: 'liquidity',
     label: 'Liquidity',
-    pathname: '/liquidity'
+    pathname: '/liquidity/v2'
   },
   {
     key: 'create',
@@ -45,6 +45,11 @@ export const Navigations = [
     pathname: '/profile'
   },
   {
+    key: 'grants',
+    label: 'Grants',
+    pathname: 'https://devprotocol.notion.site/Welcome-to-DEV-DAPP-STARTER-GRANTS-5cb95252f18540258111581ea54d8808'
+  },
+  {
     key: 'incubator',
     label: 'Incubator',
     pathname: '/incubator'
@@ -52,22 +57,18 @@ export const Navigations = [
 ]
 
 const IncubatorContainer = styled(NavMenuItem)`
-  color: white;
-  background: linear-gradient(180deg, #00d0fd 0%, #5b8bf5 15.62%, #d500e6 45.83%, #ff3815 95.83%);
-  :hover {
-    color: white;
-  }
+  margin: 0;
 `
 
 const toKey = (_pathname: string) => Navigations.find(({ pathname }) => pathname === _pathname)?.key
 
 export const Navigation = ({ handleMenuOpen }: NavigationProps) => {
   const router = useRouter()
-  const [current, setCurrent] = useState(toKey(router?.pathname || Navigations[0].key)) // || Navigations[0].key
-  const [isDesktop, setDesktop] = useState(typeof window !== 'undefined' && window?.innerWidth > 1400)
+  const [current, setCurrent] = useState(toKey(router?.asPath || Navigations[0].key)) // || Navigations[0].key
+  const [isDesktop, setDesktop] = useState(typeof window !== 'undefined' && window?.innerWidth > 1070)
 
   const updateMedia = () => {
-    setDesktop(window.innerWidth > 1400)
+    setDesktop(window.innerWidth > 1070)
   }
 
   useEffectAsync(async () => {
@@ -94,14 +95,14 @@ export const Navigation = ({ handleMenuOpen }: NavigationProps) => {
     <>
       {isDesktop && (
         <NavMenu
-          style={{ background: 'black' }}
+          style={{ background: 'black', paddingRight: '5rem' }}
           theme="dark"
           onClick={handleClick}
           selectedKeys={[current || '']}
           mode="horizontal"
         >
           {filteredNavigations.map(nav => (
-            <NavMenuItem key={nav.key}>
+            <NavMenuItem key={nav.key} style={{ margin: '0' }}>
               <Link href={nav.pathname}>
                 <a style={{ display: 'block', width: 'auto', fontSize: '0.8em' }}>{nav.label}</a>
               </Link>
@@ -111,7 +112,7 @@ export const Navigation = ({ handleMenuOpen }: NavigationProps) => {
           <IncubatorContainer key={'/inubator'}>
             <Link href="/incubator">
               <div style={{ transform: 'translateY(-2px)' }}>
-                <ButtonXs color="white">incubator</ButtonXs>
+                <ButtonXs>incubator</ButtonXs>
               </div>
             </Link>
 

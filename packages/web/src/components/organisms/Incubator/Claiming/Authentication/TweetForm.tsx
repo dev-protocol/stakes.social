@@ -8,7 +8,7 @@ import { ClipboardIcon, TwitterBird } from '../../Icons'
 import DownArrow from '../../molecules/DownArrow'
 import { useGetReward, useIntermediateProcess } from 'src/fixtures/_pages/incubator/hooks'
 import { Incubator } from 'src/fixtures/dev-for-apps/utility'
-import { SetOnboardingPageStatus } from 'src/pages/incubator/project/[project]'
+import { SetLoadingStatus, SetOnboardingPageStatus } from 'src/pages/incubator/project/[project]'
 
 const AuthenticationContainer = styled.div`
   position: relative;
@@ -143,6 +143,7 @@ export const CustomInput = ({ placeholder, label, onHandlePaste }: CustomInputPr
 
 type AuthenticationProps = {
   onStateChange: SetOnboardingPageStatus
+  loading: SetLoadingStatus
   project: Incubator
   metricsAddress: string
   onIsWrongChange: React.Dispatch<React.SetStateAction<boolean>>
@@ -208,7 +209,7 @@ const createTweetBody = (project: Incubator, funds?: string) =>
 
 const IS_DEVELOPMENT_ENV = process.env.NODE_ENV === 'development'
 
-const TweetForm = ({ onStateChange, project, metricsAddress, onIsWrongChange }: AuthenticationProps) => {
+const TweetForm = ({ onStateChange, loading, project, metricsAddress, onIsWrongChange }: AuthenticationProps) => {
   const { inUSD } = useGetReward(project.verifier_id)
   const funds = useMemo(() => (inUSD ? `$${inUSD.dp(2).toNumber().toLocaleString()}` : '$0'), [inUSD])
   const [form] = Form.useForm()
@@ -218,10 +219,12 @@ const TweetForm = ({ onStateChange, project, metricsAddress, onIsWrongChange }: 
     if (!project.property?.address) {
       return onIsWrongChange(true)
     }
-    onStateChange('loading')
+    loading('loading')
 
+    console.log({ project, metricsAddress, data })
     if (IS_DEVELOPMENT_ENV) {
       setTimeout(() => {
+        loading(undefined)
         onStateChange('success')
       }, 3000)
     } else {
@@ -232,6 +235,7 @@ const TweetForm = ({ onStateChange, project, metricsAddress, onIsWrongChange }: 
         message.error(err)
         return err
       })
+      loading(undefined)
       return results instanceof Error ? undefined : onStateChange('success')
     }
   }
@@ -309,7 +313,11 @@ const TweetForm = ({ onStateChange, project, metricsAddress, onIsWrongChange }: 
             rules={[{ required: true, message: 'Please enter a valid twitter URL' }]}
             key="twitter"
           >
-            <CustomInput onHandlePaste={handlePaste} label="twitter" placeholder="Paste the url of the Twitter post" />
+            <CustomInput
+              onHandlePaste={handlePaste}
+              label="twitter"
+              placeholder="https://twitter.com/YOUR/status/123..."
+            />
           </FormItem>
 
           <div style={{ display: 'flex', justifyContent: 'flex-end', paddingTop: '48px' }}>

@@ -17,7 +17,7 @@ export const getContract = (web3: Web3, contractAddress = ETHDEV_V2_ADDRESS): Co
     return stored
   }
 
-  const contract = (createContract(abi, contractAddress, web3) as unknown) as Contract
+  const contract = createContract(abi, contractAddress, web3) as unknown as Contract
   client.set(contractAddress, contract)
 
   return contract

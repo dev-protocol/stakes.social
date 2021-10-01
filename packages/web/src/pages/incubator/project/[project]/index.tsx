@@ -27,6 +27,7 @@ import LoadingAnimation from 'src/components/organisms/Incubator/Claiming/Authen
 import { useGetReward, useIsFinished } from 'src/fixtures/_pages/incubator/hooks'
 import { Incubator } from 'src/fixtures/dev-for-apps/utility'
 import { whenDefined } from 'src/fixtures/utility'
+import { Modal } from 'antd'
 
 const Container = styled.div`
   display: flex;
@@ -241,11 +242,12 @@ const TimelineContainer = styled.div`
 type OnboardingSectionProps = {
   onBoardChange: React.Dispatch<React.SetStateAction<boolean>>
   isModal?: boolean
-  onStateChange: SetOnboardingPageStatus
+  onStateChange?: SetOnboardingPageStatus
+  onClick: React.MouseEventHandler<HTMLElement>
   isOnboarding: boolean
 }
 
-const OnboardingSection = ({ isModal, onStateChange, onBoardChange, isOnboarding }: OnboardingSectionProps) => {
+const OnboardingSection = ({ isModal, onClick, onBoardChange, isOnboarding }: OnboardingSectionProps) => {
   const [activePart, setActivePart] = useState(1)
 
   return (
@@ -262,7 +264,7 @@ const OnboardingSection = ({ isModal, onStateChange, onBoardChange, isOnboarding
         </TimelineContainer>
 
         {isModal ? (
-          <LinkB onClick={() => onStateChange('authentication')}>Skip</LinkB>
+          <LinkB onClick={onClick}>Skip</LinkB>
         ) : (
           <OnboardSwitch isOnboarding={isOnboarding} onOnboardChange={onBoardChange} />
         )}
@@ -271,7 +273,7 @@ const OnboardingSection = ({ isModal, onStateChange, onBoardChange, isOnboarding
       {activePart === 2 && <PurchaseEthereum onActivePartChange={setActivePart} />}
       {activePart === 3 && <ConnectWallet onActivePartChange={setActivePart} />}
       {activePart === 4 && <CopyPat onActivePartChange={setActivePart} />}
-      {activePart === 5 && <SubmitTransaction onStateChange={onStateChange} onActivePartChange={setActivePart} />}
+      {activePart === 5 && <SubmitTransaction onClick={onClick} onActivePartChange={setActivePart} />}
     </>
   )
 }
@@ -299,14 +301,44 @@ type OnboardingPageProps = {
   project: Incubator
 }
 
-export type OnboardingPageStatus = 'overview' | 'onboarding' | 'loading' | 'success' | 'authentication' | 'whatsnext'
+export type OnboardingPageStatus = 'overview' | 'onboarding' | 'authentication' | 'whatsnext' | 'success'
+export type LoadingStatus = undefined | 'loading' | 'success'
 export type SetOnboardingPageStatus = React.Dispatch<React.SetStateAction<OnboardingPageStatus>>
+export type SetLoadingStatus = React.Dispatch<React.SetStateAction<LoadingStatus>>
 
 const OnboardingPage = ({ project }: OnboardingPageProps) => {
+  const { step = 'overview', metrics: metricsFromQuery } = useRouter().query
+  const validatedStep =
+    step === 'overview'
+      ? step
+      : step === 'onboarding'
+      ? step
+      : step === 'success'
+      ? step
+      : step === 'authentication'
+      ? step
+      : step === 'whatsnext'
+      ? step
+      : 'overview'
+  const validatedMetrics = metricsFromQuery ? String(metricsFromQuery) : undefined
   const { data: claimed } = useIsFinished(project.property?.address)
-  const [currentState, setCurrentState] = useState<OnboardingPageStatus>('overview')
-  const [createdMetrics, setCreatedMetrics] = useState<string | undefined>()
+  const [currentState, setCurrentState] = useState<OnboardingPageStatus>(validatedStep)
+  const [currentLoadingState, setCurrentLoadingState] = useState<LoadingStatus>()
+  const [createdMetrics, setCreatedMetrics] = useState<string | undefined>(validatedMetrics)
   const [isOnboarding, setIsOnboarding] = useState(true)
+  const [isModalVisible, setIsModalVisible] = useState(false)
+
+  const showModal = () => {
+    setIsModalVisible(true)
+  }
+
+  const handleOk = () => {
+    setIsModalVisible(false)
+  }
+
+  const handleCancel = () => {
+    setIsModalVisible(false)
+  }
 
   useEffect(() => {
     window.scrollTo(0, 0)
@@ -316,60 +348,59 @@ const OnboardingPage = ({ project }: OnboardingPageProps) => {
     <div style={{ position: 'relative', display: 'flex', minHeight: '100vh', flexDirection: 'column' }}>
       <IncubatorHeader />
       <Container style={{ flexGrow: 1, height: currentState === 'overview' ? '600px' : '850px' }}>
-        <BackArrowContainer>
-          {currentState === 'overview' && (
-            <Link href="/incubator" as="/incubator" passHref>
-              <div style={{ cursor: 'pointer' }}>
+        <section style={currentLoadingState === 'loading' ? { display: 'none' } : {}}>
+          <BackArrowContainer>
+            {currentState === 'overview' && (
+              <Link href="/incubator" as="/incubator" passHref>
+                <div style={{ cursor: 'pointer' }}>
+                  <BackArrow />
+                </div>
+              </Link>
+            )}
+
+            {((currentState === 'authentication' && !createdMetrics) || currentState === 'onboarding') && (
+              <div onClick={() => setCurrentState('overview')} style={{ cursor: 'pointer' }}>
                 <BackArrow />
               </div>
-            </Link>
+            )}
+          </BackArrowContainer>
+          {currentState === 'overview' && (
+            <ProjectDetails project={project} claimed={Boolean(claimed)} onStateChange={setCurrentState} />
           )}
 
-          {((currentState === 'authentication' && !createdMetrics) || currentState === 'onboarding') && (
-            <div onClick={() => setCurrentState('overview')} style={{ cursor: 'pointer' }}>
-              <BackArrow />
-            </div>
+          {currentState === 'onboarding' && (
+            <OnboardingSection
+              isOnboarding={isOnboarding}
+              onBoardChange={setIsOnboarding}
+              onClick={showModal}
+              isModal={true}
+            />
           )}
-        </BackArrowContainer>
-        {currentState === 'overview' && (
-          <ProjectDetails project={project} claimed={Boolean(claimed)} onStateChange={setCurrentState} />
-        )}
 
-        {currentState === 'onboarding' && (
-          <OnboardingSection
-            isOnboarding={isOnboarding}
-            onBoardChange={setIsOnboarding}
-            onStateChange={setCurrentState}
-            isModal={true}
-          />
-        )}
+          {currentState === 'authentication' && (
+            <Authentication
+              project={project}
+              onStateChange={setCurrentState}
+              loading={setCurrentLoadingState}
+              metrics={createdMetrics}
+              onMetricsCreated={setCreatedMetrics}
+            />
+          )}
 
-        {currentState === 'authentication' && (
-          <Authentication
-            project={project}
-            onStateChange={setCurrentState}
-            metrics={createdMetrics}
-            onMetricsCreated={setCreatedMetrics}
-          />
-        )}
+          {currentState === 'success' && <ClaimSuccesful project={project} onStateChange={setCurrentState} />}
 
-        {currentState === 'loading' && <AuthenticateLoading project={project} />}
+          {currentState === 'whatsnext' && (
+            <WhatsNext project={project} isOverview={false} onBoardChange={setIsOnboarding} isOnboarding={false} />
+          )}
+        </section>
 
-        {currentState === 'success' && <ClaimSuccesful project={project} onStateChange={setCurrentState} />}
-
-        {currentState === 'whatsnext' && (
-          <WhatsNext project={project} isOverview={false} onBoardChange={setIsOnboarding} isOnboarding={false} />
-        )}
+        {currentLoadingState === 'loading' && <AuthenticateLoading project={project} />}
       </Container>
 
       {currentState === 'overview' && isOnboarding && (
         <Container>
           <Hr />
-          <OnboardingSection
-            isOnboarding={isOnboarding}
-            onBoardChange={setIsOnboarding}
-            onStateChange={setCurrentState}
-          />
+          <OnboardingSection isOnboarding={isOnboarding} onBoardChange={setIsOnboarding} onClick={showModal} />
         </Container>
       )}
 
@@ -379,6 +410,12 @@ const OnboardingPage = ({ project }: OnboardingPageProps) => {
           <WhatsNext project={project} isOverview={true} isOnboarding={isOnboarding} onBoardChange={setIsOnboarding} />
         </Container>
       )}
+      <Modal title="Inquiry" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
+        <p>
+          Please contact us at <a href="mailto:hi@devprotocol.xyz">hi@devprotocol.xyz</a> so that we will inform you of
+          future procedures.
+        </p>
+      </Modal>
 
       <Footer />
     </div>

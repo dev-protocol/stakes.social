@@ -4,43 +4,71 @@ exports[`Footer Snapshot 1`] = `
 <body>
   <div>
     <footer
-      class="sc-1fvy930-0 gFkHCG"
+      class="sc-1fvy930-0 dYQOqb"
     >
       <div
-        class="sc-1wzqvkc-0 iekWyA"
+        class="sc-1wzqvkc-0 gzIPnh"
         style="margin: unset; text-align: center; max-width: unset; background: black; padding: 30px 0px 30px 0px;"
       >
         <div
-          class="sc-1fvy930-2 mMXDv"
+          class="sc-1fvy930-2 cJVuUq"
         >
           <div
-            style="display: flex; justify-content: space-between;"
+            class="sc-1fvy930-7 sxFdW"
+            style="justify-content: start; font-size: 0.9rem;"
+          >
+            <a
+              class="sc-1fvy930-5 esMpEX"
+              href="https://docs.devprotocol.xyz/stakes-social/"
+              rel="noreferrer"
+              target="_blank"
+            >
+              What is Stakes.social
+            </a>
+            <a
+              class="sc-1fvy930-5 esMpEX"
+              href="https://devprotocol.xyz/faq"
+              rel="noreferrer"
+              target="_blank"
+            >
+              Dev Protocol FAQ
+            </a>
+            <a
+              class="sc-1fvy930-5 esMpEX"
+              href="/terms-of-use"
+            >
+              Terms of Use
+            </a>
+            <a
+              class="sc-1fvy930-5 esMpEX"
+              href="https://devprotocol.xyz/coc.html"
+              rel="noreferrer"
+              target="_blank"
+            >
+              Code of Conduct
+            </a>
+          </div>
+          <div
+            class="sc-1fvy930-6 hSpmVW"
+          />
+          <div
+            class="sc-1fvy930-7 sxFdW"
           >
             <div
               class="sc-1fvy930-3"
             >
               <a
-                class="sc-38x7tx-0 dDeIhU"
+                class="sc-38x7tx-0 jyccgJ"
                 href="/"
               >
                 <span
-                  class="sc-1u809dt-0 dlJlha"
+                  class="sc-1u809dt-0 cGQooL"
                 >
-                  <svg
+                  <svgrurl
                     id="headerlogo"
-                    viewBox="0 0 25 20"
-                    width="1em"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M9.14 4a5.77 5.77 0 00-.9-.21A3.66 3.66 0 004.88 4.9c-1.34 1.45-1.46 3.77-.51 6a25.32 25.32 0 014.14-6.2c.21-.27.42-.48.63-.7zm3.36-2.6A10.45 10.45 0 008.76.09a7.36 7.36 0 00-6.63 2.27C-1.13 5.89-.2 11 1.94 14.21a8.19 8.19 0 00.7.94c-.15.47-.28.89-.38 1.25s-.2.73-.25 1l-.07.27v.07l1.83.38-1.83-.38a1.87 1.87 0 103.67.77 1.49 1.49 0 01.05-.21c0-.14.08-.34.15-.57a14.18 14.18 0 006.62 1.66h.16a14.25 14.25 0 006.63-1.66c.06.23.11.43.15.57s0 .16 0 .21a1.87 1.87 0 003.67-.77l-1.84.38 1.84-.38v-.07a2.32 2.32 0 00-.06-.27c-.06-.23-.14-.56-.26-1s-.22-.78-.38-1.25a9.64 9.64 0 00.71-.94c2.15-3.21 3.08-8.32-.17-11.85A7.38 7.38 0 0016.24.09a10.45 10.45 0 00-3.74 1.32zm0 4.6c-.41.36-.82.76-1.25 1.21A23.43 23.43 0 007 14.06a10.2 10.2 0 005.38 1.53h.16A10.2 10.2 0 0018 14.06a23.22 23.22 0 00-4.21-6.85c-.46-.45-.88-.85-1.29-1.21zm8.13 4.86a25.32 25.32 0 00-4.14-6.2c-.21-.23-.42-.44-.63-.65a5.62 5.62 0 01.91-.21 3.64 3.64 0 013.35 1.1c1.34 1.45 1.46 3.77.51 5.96z"
-                      data-name="Layer 1"
-                      fill="#fff"
-                      fill-rule="evenodd"
-                    />
-                  </svg>
+                  />
                   <span
-                    class="sc-1u809dt-1 kabZnM"
+                    class="sc-1u809dt-1 kBcMYt"
                   >
                     Stakes.social
                   </span>
@@ -59,7 +87,7 @@ exports[`Footer Snapshot 1`] = `
                 style="margin-left: 2px; margin-right: 2px;"
               />
               <a
-                class="sc-1fvy930-4 cIEtdc"
+                class="sc-1fvy930-4 guxrIx"
                 href="https://devprotocol.xyz/"
                 rel="noopener noreferrer"
                 target="_blank"
@@ -68,20 +96,20 @@ exports[`Footer Snapshot 1`] = `
               </a>
             </div>
           </div>
-          <hr
-            style="color: white; margin-top: 2px;"
-          />
           <div
-            style="display: flex; justify-content: space-between; color: white; font-size: 0.9em;"
+            class="sc-1fvy930-7 sxFdW"
           >
-            <span>
-              2020 All rights reserverd.
-            </span>
             <div
-              class="sc-1fvy930-1 kdhGjV"
+              class="sc-1fvy930-8 cseBdJ"
+            >
+              2020 All rights reserverd.
+            </div>
+            <div
+              class="sc-1fvy930-1 dwyzke"
+              style="font-size: 0px;"
             >
               <a
-                class="sc-3pzwbd-0 jbrzDg"
+                class="sc-3pzwbd-0 tiHlV"
                 href="//twitter.com/devprtcl"
                 rel="noopener noreferrer"
                 target="_blank"
@@ -114,7 +142,7 @@ exports[`Footer Snapshot 1`] = `
                 </svg>
               </a>
               <a
-                class="sc-3pzwbd-0 jbrzDg"
+                class="sc-3pzwbd-0 tiHlV"
                 href="//discord.gg/VwJp4KM"
                 rel="noopener noreferrer"
                 target="_blank"
@@ -140,7 +168,7 @@ exports[`Footer Snapshot 1`] = `
                 </svg>
               </a>
               <a
-                class="sc-3pzwbd-0 jbrzDg"
+                class="sc-3pzwbd-0 tiHlV"
                 href="https://github.com/dev-protocol/stakes.social"
                 rel="noopener noreferrer"
                 target="_blank"
@@ -175,7 +203,7 @@ exports[`Footer Snapshot 1`] = `
                 </svg>
               </a>
               <a
-                class="sc-3pzwbd-0 jbrzDg"
+                class="sc-3pzwbd-0 tiHlV"
                 href="https://t.me/devprtcl"
                 rel="noopener noreferrer"
                 target="_blank"
@@ -203,7 +231,7 @@ exports[`Footer Snapshot 1`] = `
                 </svg>
               </a>
               <a
-                class="sc-3pzwbd-0 jbrzDg"
+                class="sc-3pzwbd-0 tiHlV"
                 href="//medium.com/devtoken"
                 rel="noopener noreferrer"
                 target="_blank"

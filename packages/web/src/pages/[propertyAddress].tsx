@@ -115,7 +115,7 @@ const AddAsset = styled.button`
 
   &:hover {
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2), 0 2px 4px -1px rgba(0, 0, 0, 0.12);
-    transition: 0.2 ease-in;
+    transition: 200ms ease-in;
   }
 `
 
@@ -321,14 +321,13 @@ const PropertyAbout = ({
           <Twitter href={dataProperty?.links.twitter} target="_blank" rel="noopener noreferrer" />
         )}
         {dataProperty?.links?.website && (
-          <Button
-            style={{ marginLeft: '20px', padding: 3, width: '38px', height: '38px' }}
-            shape="circle"
-            icon={<LinkOutlined />}
-            href={dataProperty?.links.website}
-            target="_blank"
-            rel="noopener noreferrer"
-          />
+          <a href={dataProperty?.links.website} target="_blank" rel="noopener noreferrer">
+            <Button
+              style={{ marginLeft: '20px', padding: 3, width: '38px', height: '38px' }}
+              shape="circle"
+              icon={<LinkOutlined />}
+            />
+          </a>
         )}
       </LinksArea>
       <ResponsiveModal
@@ -419,7 +418,7 @@ const PropertyAddressDetail = (_: Props) => {
             {isExistProperty && (loggedInWallet ? loggedInWallet !== authorAddress : true) && (
               <Stake title="Stake" propertyAddress={propertyAddress} />
             )}
-            {isExistProperty && <Withdraw title="Withdraw" propertyAddress={propertyAddress} />}
+            {isExistProperty && <Withdraw title="Withdraw" propertyAddress={propertyAddress} isDisplayFee={true} />}
           </Transact>
           <PropertyAbout
             isAuthor={loggedInWallet === authorAddress}
