@@ -90,7 +90,7 @@ const Staker = ({ accountAddress, value }: { accountAddress: string; value: numb
       ) : (
         <StakerSection>
           <Avatar accountAddress={accountAddress} size={'100'} />
-          <AccountAddress>{data?.name || accountAddress}</AccountAddress>
+          <AccountAddress>{accountAddress}</AccountAddress>
           <span>{`${formatter.format(parseInt((value / Math.pow(10, 18)).toFixed(0)))}`}</span>
         </StakerSection>
       )}
