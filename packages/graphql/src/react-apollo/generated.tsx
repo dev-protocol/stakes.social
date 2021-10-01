@@ -126,11 +126,11 @@ export type Account_Lockup_Bool_Exp = {
   _and?: Maybe<Array<Maybe<Account_Lockup_Bool_Exp>>>
   _not?: Maybe<Account_Lockup_Bool_Exp>
   _or?: Maybe<Array<Maybe<Account_Lockup_Bool_Exp>>>
-  property_meta?: Maybe<Property_Meta_Bool_Exp>
   account_address?: Maybe<String_Comparison_Exp>
   block_number?: Maybe<Int_Comparison_Exp>
   locked_up_event_id?: Maybe<String_Comparison_Exp>
   property_address?: Maybe<String_Comparison_Exp>
+  property_meta?: Maybe<Property_Meta_Bool_Exp>
   value?: Maybe<Numeric_Comparison_Exp>
 }
 
@@ -5844,7 +5844,7 @@ export type GetPropertyAggregateQuery = {
   __typename?: 'query_root'
   property_meta_aggregate: {
     __typename?: 'property_meta_aggregate'
-    aggregate?: Maybe<{ __typename?: 'property_meta_aggregate_fields'; count?: Maybe<number> }>
+    aggregate?: { __typename?: 'property_meta_aggregate_fields'; count?: number | null | undefined } | null | undefined
   }
 }
 
@@ -5859,7 +5859,7 @@ export type GetPropertyAuthenticationQuery = {
     authentication_id: string
     market: string
     metrics: string
-    property_meta?: Maybe<{ __typename?: 'property_meta'; author: string }>
+    property_meta?: { __typename?: 'property_meta'; author: string } | null | undefined
   }>
 }
 
@@ -5886,7 +5886,7 @@ export type TotalStakedAccountQueryVariables = Exact<{
 
 export type TotalStakedAccountQuery = {
   __typename?: 'query_root'
-  account_lockup_sum_values: Array<{ __typename?: 'account_lockup_sum_values'; sum_values?: Maybe<any> }>
+  account_lockup_sum_values: Array<{ __typename?: 'account_lockup_sum_values'; sum_values?: any | null | undefined }>
 }
 
 export type ListAccountLockupQueryVariables = Exact<{
@@ -5900,7 +5900,7 @@ export type ListAccountLockupQuery = {
   account_lockup: Array<{ __typename?: 'account_lockup'; property_address: string }>
   account_lockup_aggregate: {
     __typename?: 'account_lockup_aggregate'
-    aggregate?: Maybe<{ __typename?: 'account_lockup_aggregate_fields'; count?: Maybe<number> }>
+    aggregate?: { __typename?: 'account_lockup_aggregate_fields'; count?: number | null | undefined } | null | undefined
   }
 }
 
@@ -5910,7 +5910,7 @@ export type CountAccountLockupUniqueQuery = {
   __typename?: 'query_root'
   account_lockup_aggregate: {
     __typename?: 'account_lockup_aggregate'
-    aggregate?: Maybe<{ __typename?: 'account_lockup_aggregate_fields'; count?: Maybe<number> }>
+    aggregate?: { __typename?: 'account_lockup_aggregate_fields'; count?: number | null | undefined } | null | undefined
   }
 }
 
@@ -5949,7 +5949,10 @@ export type ListPropertyQuery = {
   }>
   property_factory_create_aggregate: {
     __typename?: 'property_factory_create_aggregate'
-    aggregate?: Maybe<{ __typename?: 'property_factory_create_aggregate_fields'; count?: Maybe<number> }>
+    aggregate?:
+      | { __typename?: 'property_factory_create_aggregate_fields'; count?: number | null | undefined }
+      | null
+      | undefined
   }
 }
 
@@ -5977,7 +5980,10 @@ export type ListPropertyOrderByMostRecentQuery = {
   }>
   property_factory_create_aggregate: {
     __typename?: 'property_factory_create_aggregate'
-    aggregate?: Maybe<{ __typename?: 'property_factory_create_aggregate_fields'; count?: Maybe<number> }>
+    aggregate?:
+      | { __typename?: 'property_factory_create_aggregate_fields'; count?: number | null | undefined }
+      | null
+      | undefined
   }
 }
 
@@ -5996,11 +6002,21 @@ export type ListPropertyMetaQuery = {
     name: string
     lockup_aggregate: {
       __typename?: 'property_lockup_aggregate'
-      aggregate?: Maybe<{
-        __typename?: 'property_lockup_aggregate_fields'
-        count?: Maybe<number>
-        sum?: Maybe<{ __typename?: 'property_lockup_sum_fields'; block_number?: Maybe<number>; value?: Maybe<any> }>
-      }>
+      aggregate?:
+        | {
+            __typename?: 'property_lockup_aggregate_fields'
+            count?: number | null | undefined
+            sum?:
+              | {
+                  __typename?: 'property_lockup_sum_fields'
+                  block_number?: number | null | undefined
+                  value?: any | null | undefined
+                }
+              | null
+              | undefined
+          }
+        | null
+        | undefined
     }
   }>
 }
