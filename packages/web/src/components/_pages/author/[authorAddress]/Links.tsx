@@ -37,9 +37,17 @@ const Icon = ({ url }: { url?: string }) => {
 }
 
 export const Links = ({ links, className }: Props) => {
+  // NOTE: care of 'https://github.com/AUTHOR', 'github.com/AUTHOR', 'AUTHOR' cases.
+  const githubUrl = whenDefined(links?.github, github =>
+    github.startsWith('github.com/')
+      ? `https://${github}`
+      : !github.startsWith('https://github.com/')
+      ? `https://github.com/${github}`
+      : github
+  )
   return links ? (
     <Wrap className={className}>
-      <Icon url={links.github} />
+      <Icon url={githubUrl} />
       <Icon url={links.website} />
     </Wrap>
   ) : null
