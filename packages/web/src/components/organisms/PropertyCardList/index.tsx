@@ -221,7 +221,7 @@ export const PropertyCardList = ({ currentPage, searchWord, sortBy, featureTag }
               pageSizeOptions={['9', '12', '15', '18', '21']}
               onChange={handlePagination}
               onShowSizeChange={handleShowSizeChange}
-              total={data.property_factory_create_aggregate.aggregate?.count}
+              total={data.property_factory_create_aggregate.aggregate?.count || 0}
             />
           </PaginationContainer>
         </>

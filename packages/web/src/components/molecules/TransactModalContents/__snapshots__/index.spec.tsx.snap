@@ -4,39 +4,39 @@ exports[`TransactModalContents Snapshot 1`] = `
 <body>
   <div>
     <div
-      class="sc-qs0k37-0 eTXctg"
+      class="sc-qs0k37-0 giWtIR"
     >
       <div
-        class="sc-qs0k37-1 dwoznl"
+        class="sc-qs0k37-1 xkdNc"
       >
         <div
-          class="sc-2tazhb-0 aYXdp"
+          class="sc-2tazhb-0 wKHGk"
         >
           <div
-            class="sc-2tazhb-1 bJavvr"
+            class="sc-2tazhb-1 bmGYvG"
             size="60"
           />
         </div>
         <h4
-          class="sc-1w8sy4l-3 sc-qs0k37-3 cBCfKG kRSoSj"
+          class="sc-1w8sy4l-3 sc-qs0k37-3 eMXnhL fAqDaO"
         >
           0x0-name
         </h4>
         <span
-          class="sc-qs0k37-4 gFUgyd"
+          class="sc-qs0k37-4 ggdtFg"
         >
           0x0
         </span>
       </div>
       <div
-        class="sc-89297o-0 jMpWCU"
+        class="sc-89297o-0 etzBlt"
       >
         <div
-          class="sc-1d8aayd-1 goPEkP"
+          class="sc-1d8aayd-1 bcBbeW"
           style="opacity: 1;"
         >
           <span
-            class="ant-input-group-wrapper ant-input-group-wrapper-lg ant-input-search ant-input-search-large ant-input-search-with-button sc-1d8aayd-0 dqaTyQ"
+            class="ant-input-group-wrapper ant-input-group-wrapper-lg ant-input-search ant-input-search-large ant-input-search-with-button sc-1d8aayd-0 dJdeqB"
           >
             <span
               class="ant-input-wrapper ant-input-group"
@@ -54,7 +54,7 @@ exports[`TransactModalContents Snapshot 1`] = `
                   class="ant-input-suffix"
                 >
                   <button
-                    class="sc-1ttu0x8-0 hbciLP"
+                    class="sc-1ttu0x8-0 kmiVBa"
                   >
                     DEV
                   </button>
@@ -79,7 +79,7 @@ exports[`TransactModalContents Snapshot 1`] = `
           style="height: 40px;"
         />
         <div
-          class="ant-card ant-card-bordered ant-card-small sc-18v7ikh-0 eaHhNQ"
+          class="ant-card ant-card-bordered ant-card-small sc-18v7ikh-0 dfjrvZ"
         >
           <div
             class="ant-card-head"
@@ -101,7 +101,7 @@ exports[`TransactModalContents Snapshot 1`] = `
               0.003345
                ETH
               <span
-                class="sc-18v7ikh-1 kUJdSB"
+                class="sc-18v7ikh-1 kGdgpU"
               >
                  $0.00
               </span>
@@ -109,55 +109,6 @@ exports[`TransactModalContents Snapshot 1`] = `
           </div>
         </div>
       </div>
-    </div>
-  </div>
-  <div>
-    <div
-      class="ant-message"
-    >
-      <div>
-        <div
-          class="ant-message-notice"
-        >
-          <div
-            class="ant-message-notice-content"
-          >
-            <div
-              class="ant-message-custom-content ant-message-error"
-            >
-              <span
-                aria-label="close-circle"
-                class="anticon anticon-close-circle"
-                role="img"
-              >
-                <svg
-                  aria-hidden="true"
-                  data-icon="close-circle"
-                  fill="currentColor"
-                  focusable="false"
-                  height="1em"
-                  viewBox="64 64 896 896"
-                  width="1em"
-                >
-                  <path
-                    d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm165.4 618.2l-66-.3L512 563.4l-99.3 118.4-66.1.3c-4.4 0-8-3.5-8-8 0-1.9.7-3.7 1.9-5.2l130.1-155L340.5 359a8.32 8.32 0 01-1.9-5.2c0-4.4 3.6-8 8-8l66.1.3L512 464.6l99.3-118.4 66-.3c4.4 0 8 3.5 8 8 0 1.9-.7 3.7-1.9 5.2L553.5 514l130 155c1.2 1.5 1.9 3.3 1.9 5.2 0 4.4-3.6 8-8 8z"
-                  />
-                </svg>
-              </span>
-              <span>
-                fetch is not defined
-              </span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div>
-    <div
-      class="ant-message"
-    >
-      <div />
     </div>
   </div>
 </body>

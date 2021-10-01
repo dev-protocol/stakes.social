@@ -7,21 +7,21 @@ exports[`PropertyCardList Snapshot 1`] = `
       style="flex-grow: 1; max-width: 100vw;"
     >
       <div
-        class="sc-190q6or-1 dMFLXt"
+        class="sc-190q6or-1 ihYrzY"
       >
         <h2
-          class="sc-190q6or-0 SHciw"
+          class="sc-190q6or-0 lmAgTZ"
         >
           Asset Pools
         </h2>
         <div
-          class="sc-13ny1rq-0 jlrNEm"
+          class="sc-13ny1rq-0 gCxNtP"
         >
           <div
-            class="sc-11akcse-0 fnmVGZ"
+            class="sc-11akcse-0 fdXYro"
           >
             <div
-              class="sc-11akcse-1 gdywHE"
+              class="sc-11akcse-1 lmHySJ"
             >
               <span
                 aria-label="search"
@@ -44,7 +44,7 @@ exports[`PropertyCardList Snapshot 1`] = `
               </span>
             </div>
             <input
-              class="sc-11akcse-3 zKRQI"
+              class="sc-11akcse-3 iinfAJ"
               data-cy="SearchbarInput"
               placeholder="Search for a project"
               value=""
@@ -52,14 +52,18 @@ exports[`PropertyCardList Snapshot 1`] = `
           </div>
         </div>
         <div
-          class="sc-190q6or-4 jsrAa-D"
+          class="sc-190q6or-4 jVBQMe"
         >
           <div
             style="flex-grow: 1;"
           >
             <div
-              class=" css-2b097c-container"
+              class=" css-b62m3t-container"
             >
+              <span
+                class="css-1f43avz-a11yText-A11yText"
+                id="react-select-2-live-region"
+              />
               <span
                 aria-atomic="false"
                 aria-live="polite"
@@ -67,39 +71,38 @@ exports[`PropertyCardList Snapshot 1`] = `
                 class="css-1f43avz-a11yText-A11yText"
               />
               <div
-                class=" css-yk16xz-control"
+                class=" css-1s2u09g-control"
               >
                 <div
-                  class=" css-g1d714-ValueContainer"
+                  class=" css-319lph-ValueContainer"
                 >
                   <div
-                    class=" css-1uccc91-singleValue"
+                    class=" css-qc6sy-singleValue"
                   >
                     Most Recent
                   </div>
                   <div
-                    class="css-b8ldur-Input"
+                    class=" css-7pwich-Input"
+                    data-value=""
                   >
-                    <div
+                    <input
+                      aria-autocomplete="list"
+                      aria-controls="react-select-2-listbox"
+                      aria-expanded="false"
+                      aria-haspopup="true"
+                      aria-owns="react-select-2-listbox"
+                      autocapitalize="none"
+                      autocomplete="off"
+                      autocorrect="off"
                       class=""
-                      style="display: inline-block;"
-                    >
-                      <input
-                        aria-autocomplete="list"
-                        autocapitalize="none"
-                        autocomplete="off"
-                        autocorrect="off"
-                        id="react-select-2-input"
-                        spellcheck="false"
-                        style="box-sizing: content-box; width: 2px; border: 0px; opacity: 1; outline: 0; padding: 0px;"
-                        tabindex="0"
-                        type="text"
-                        value=""
-                      />
-                      <div
-                        style="position: absolute; top: 0px; left: 0px; visibility: hidden; height: 0px; overflow: scroll; white-space: pre; font-family: -webkit-small-control; letter-spacing: normal; text-transform: none;"
-                      />
-                    </div>
+                      id="react-select-2-input"
+                      role="combobox"
+                      spellcheck="false"
+                      style="opacity: 1; width: 100%; grid-area: 1 / 2; min-width: 2px; border: 0px; margin: 0px; outline: 0; padding: 0px;"
+                      tabindex="0"
+                      type="text"
+                      value=""
+                    />
                   </div>
                 </div>
                 <div
@@ -147,23 +150,23 @@ exports[`PropertyCardList Snapshot 1`] = `
             </div>
           </div>
           <div
-            class="sc-dkx7pb-2 hMDqnO"
+            class="sc-dkx7pb-2 iwVzEL"
           >
             <button
-              class="sc-dkx7pb-0 fHdMZA"
+              class="sc-dkx7pb-0 brzhRR"
             >
               <div
-                class="sc-dkx7pb-1 bWbreu"
+                class="sc-dkx7pb-1 fZLNlj"
               />
               <span>
                 DEV
               </span>
             </button>
             <button
-              class="sc-dkx7pb-0 eSmAkm"
+              class="sc-dkx7pb-0 cXxAIT"
             >
               <div
-                class="sc-dkx7pb-1 dwkcUC"
+                class="sc-dkx7pb-1 ieMbjX"
               />
               <span>
                 USD
@@ -173,7 +176,7 @@ exports[`PropertyCardList Snapshot 1`] = `
         </div>
       </div>
       <div
-        class="sc-190q6or-3 jXpMgh"
+        class="sc-190q6or-3 dCDCUM"
       >
         <a
           href="/"
@@ -200,24 +203,24 @@ exports[`PropertyCardList Snapshot 1`] = `
         </a>
       </div>
       <div
-        class="sc-oxa8xu-0 sc-190q6or-2 ljgyyJ edjSDf"
+        class="sc-oxa8xu-0 sc-190q6or-2 eZFPlw uEpxS"
       >
         <div
-          class="sc-oxa8xu-0 sc-k29mxm-0 ljgyyJ iDXHDh"
+          class="sc-oxa8xu-0 sc-k29mxm-0 eZFPlw kyZRGk"
         >
           <div
-            class="sc-k29mxm-15 TzDOd"
+            class="sc-k29mxm-15 hZkKVM"
           />
           <div
-            class="sc-oxa8xu-0 sc-k29mxm-8 ljgyyJ kyBTtQ"
+            class="sc-oxa8xu-0 sc-k29mxm-8 eZFPlw dyKcSN"
           >
             <span
-              class="sc-k29mxm-2 bpaOVY"
+              class="sc-k29mxm-2 hVBVYN"
             >
               authentication-id
             </span>
             <span
-              class="sc-43kf45-0 fwrpBg"
+              class="sc-43kf45-0 cMsfid"
             >
               <span
                 aria-label="pie-chart"
@@ -242,23 +245,23 @@ exports[`PropertyCardList Snapshot 1`] = `
               </span>
             </span>
             <span
-              class="sc-k29mxm-13 dEbExk"
+              class="sc-k29mxm-13 laWKpR"
             >
               Stake DEV tokens to provide funding for OSS projects so that they can maintain development.
             </span>
             <div
-              class="sc-k29mxm-12 fUWlLe"
+              class="sc-k29mxm-12 doMkPf"
             >
               <div
-                class="sc-17om263-0 hrFoFk"
+                class="sc-17om263-0 iKLyFR"
               >
                 <div
-                  class="sc-17om263-1 iDZMeX"
+                  class="sc-17om263-1 beiqlK"
                   size="60"
                 />
               </div>
               <div
-                class="sc-k29mxm-14 eHKXIG"
+                class="sc-k29mxm-14 iBRpaj"
               >
                 <span
                   style="font-weight: lighter;"
@@ -275,56 +278,56 @@ exports[`PropertyCardList Snapshot 1`] = `
               </div>
             </div>
             <div
-              class="sc-k29mxm-1 iVjJuP"
+              class="sc-k29mxm-1 gZtLsW"
             >
               <div
-                class="sc-k29mxm-3 gknkJK"
+                class="sc-k29mxm-3 HayZf"
               >
                 <span>
                   5,000
                    
                 </span>
                 <span
-                  class="sc-k29mxm-11 bEATfx"
+                  class="sc-k29mxm-11 lctWPw"
                 >
                   Your stake
                 </span>
               </div>
               <div
-                class="sc-k29mxm-5 dFRnIc"
+                class="sc-k29mxm-5 djyAnx"
               >
                 <span>
                   5,000
                    
                 </span>
                 <span
-                  class="sc-k29mxm-11 bEATfx"
+                  class="sc-k29mxm-11 lctWPw"
                 >
                   Your reward
                 </span>
               </div>
               <div
-                class="sc-k29mxm-4 jDPvnI"
+                class="sc-k29mxm-4 eoKfJl"
               >
                 <span>
                   10,000
                    
                 </span>
                 <span
-                  class="sc-k29mxm-11 bEATfx"
+                  class="sc-k29mxm-11 lctWPw"
                 >
                   Total staked
                 </span>
               </div>
               <div
-                class="sc-k29mxm-6 gCAZLf"
+                class="sc-k29mxm-6 kJTIEG"
               >
                 <span>
                   10,000
                    
                 </span>
                 <span
-                  class="sc-k29mxm-11 bEATfx"
+                  class="sc-k29mxm-11 lctWPw"
                 >
                   Creator reward
                 </span>
@@ -332,15 +335,15 @@ exports[`PropertyCardList Snapshot 1`] = `
             </div>
           </div>
           <div
-            class="sc-k29mxm-7 eumqDM"
+            class="sc-k29mxm-7 kDhAkJ"
           >
             <button
-              class="sc-k29mxm-9 jVQhSP"
+              class="sc-k29mxm-9 iBobcq"
             >
               Stake
             </button>
             <button
-              class="sc-k29mxm-10 dFGePH"
+              class="sc-k29mxm-10 jDwNrq"
             >
               Withdraw
             </button>
@@ -348,7 +351,7 @@ exports[`PropertyCardList Snapshot 1`] = `
         </div>
       </div>
       <div
-        class="sc-190q6or-5 dhOOVn"
+        class="sc-190q6or-5 jQwzAG"
       >
         <ul
           class="ant-pagination"
@@ -486,130 +489,6 @@ exports[`PropertyCardList Snapshot 1`] = `
           </li>
         </ul>
       </div>
-    </div>
-  </div>
-  <div>
-    <div
-      class="ant-message"
-    >
-      <div>
-        <div
-          class="ant-message-notice"
-        >
-          <div
-            class="ant-message-notice-content"
-          >
-            <div
-              class="ant-message-custom-content ant-message-error"
-            >
-              <span
-                aria-label="close-circle"
-                class="anticon anticon-close-circle"
-                role="img"
-              >
-                <svg
-                  aria-hidden="true"
-                  data-icon="close-circle"
-                  fill="currentColor"
-                  focusable="false"
-                  height="1em"
-                  viewBox="64 64 896 896"
-                  width="1em"
-                >
-                  <path
-                    d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm165.4 618.2l-66-.3L512 563.4l-99.3 118.4-66.1.3c-4.4 0-8-3.5-8-8 0-1.9.7-3.7 1.9-5.2l130.1-155L340.5 359a8.32 8.32 0 01-1.9-5.2c0-4.4 3.6-8 8-8l66.1.3L512 464.6l99.3-118.4 66-.3c4.4 0 8 3.5 8 8 0 1.9-.7 3.7-1.9 5.2L553.5 514l130 155c1.2 1.5 1.9 3.3 1.9 5.2 0 4.4-3.6 8-8 8z"
-                  />
-                </svg>
-              </span>
-              <span>
-                fetch is not defined
-              </span>
-            </div>
-          </div>
-        </div>
-        <div
-          class="ant-message-notice"
-        >
-          <div
-            class="ant-message-notice-content"
-          >
-            <div
-              class="ant-message-custom-content ant-message-error"
-            >
-              <span
-                aria-label="close-circle"
-                class="anticon anticon-close-circle"
-                role="img"
-              >
-                <svg
-                  aria-hidden="true"
-                  data-icon="close-circle"
-                  fill="currentColor"
-                  focusable="false"
-                  height="1em"
-                  viewBox="64 64 896 896"
-                  width="1em"
-                >
-                  <path
-                    d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm165.4 618.2l-66-.3L512 563.4l-99.3 118.4-66.1.3c-4.4 0-8-3.5-8-8 0-1.9.7-3.7 1.9-5.2l130.1-155L340.5 359a8.32 8.32 0 01-1.9-5.2c0-4.4 3.6-8 8-8l66.1.3L512 464.6l99.3-118.4 66-.3c4.4 0 8 3.5 8 8 0 1.9-.7 3.7-1.9 5.2L553.5 514l130 155c1.2 1.5 1.9 3.3 1.9 5.2 0 4.4-3.6 8-8 8z"
-                  />
-                </svg>
-              </span>
-              <span>
-                fetch is not defined
-              </span>
-            </div>
-          </div>
-        </div>
-        <div
-          class="ant-message-notice"
-        >
-          <div
-            class="ant-message-notice-content"
-          >
-            <div
-              class="ant-message-custom-content ant-message-error"
-            >
-              <span
-                aria-label="close-circle"
-                class="anticon anticon-close-circle"
-                role="img"
-              >
-                <svg
-                  aria-hidden="true"
-                  data-icon="close-circle"
-                  fill="currentColor"
-                  focusable="false"
-                  height="1em"
-                  viewBox="64 64 896 896"
-                  width="1em"
-                >
-                  <path
-                    d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm165.4 618.2l-66-.3L512 563.4l-99.3 118.4-66.1.3c-4.4 0-8-3.5-8-8 0-1.9.7-3.7 1.9-5.2l130.1-155L340.5 359a8.32 8.32 0 01-1.9-5.2c0-4.4 3.6-8 8-8l66.1.3L512 464.6l99.3-118.4 66-.3c4.4 0 8 3.5 8 8 0 1.9-.7 3.7-1.9 5.2L553.5 514l130 155c1.2 1.5 1.9 3.3 1.9 5.2 0 4.4-3.6 8-8 8z"
-                  />
-                </svg>
-              </span>
-              <span>
-                fetch is not defined
-              </span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div>
-    <div
-      class="ant-message"
-    >
-      <div />
-    </div>
-  </div>
-  <div>
-    <div
-      class="ant-message"
-    >
-      <div />
     </div>
   </div>
 </body>

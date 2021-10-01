@@ -7,29 +7,29 @@ exports[`Header Snapshot 1`] = `
       style="position: sticky; top: 0px; width: 100%; z-index: 5;"
     >
       <header
-        class="sc-1bz6snd-0 jGyKGo"
+        class="sc-1bz6snd-0 ksXZjR"
       >
         <div
-          class="sc-1bz6snd-6 dbGdwb"
+          class="sc-1bz6snd-6 iHXutm"
         >
           <header
-            class="sc-1bz6snd-1 hkjzWq"
+            class="sc-1bz6snd-1 fmwoIz"
           >
             <div
-              class="sc-1bz6snd-2 gqvkYM"
+              class="sc-1bz6snd-2 eISUDl"
             >
               <a
-                class="sc-38x7tx-0 dDeIhU"
+                class="sc-38x7tx-0 jyccgJ"
                 href="/"
               >
                 <span
-                  class="sc-1u809dt-0 dlJlha"
+                  class="sc-1u809dt-0 cGQooL"
                 >
                   <svgrurl
                     id="headerlogo"
                   />
                   <span
-                    class="sc-1u809dt-1 kabZnM"
+                    class="sc-1u809dt-1 kBcMYt"
                   >
                     Stakes.social
                   </span>
@@ -37,7 +37,7 @@ exports[`Header Snapshot 1`] = `
               </a>
             </div>
             <div
-              class="sc-1bz6snd-3 lapuCr"
+              class="sc-1bz6snd-3 eFvqoO"
             >
               <svg
                 height="50"
@@ -101,7 +101,7 @@ exports[`Header Snapshot 1`] = `
                 </g>
               </svg>
               <div
-                class="sc-1dxoc5d-2 kZECui"
+                class="sc-1dxoc5d-2 kEjXAb"
               >
                 <span
                   style="font-size: 0.8em;"
@@ -114,7 +114,7 @@ exports[`Header Snapshot 1`] = `
         </div>
       </header>
       <div
-        class="sc-ccfdvq-0 kJejvL"
+        class="sc-ccfdvq-0 gphkWy"
       >
         Beta Version
       </div>
