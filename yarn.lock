@@ -2497,14 +2497,15 @@
   resolved "https://registry.yarnpkg.com/@ctrl/tinycolor/-/tinycolor-3.4.0.tgz#c3c5ae543c897caa9c2a68630bed355be5f9990f"
   integrity sha512-JZButFdZ1+/xAfpguQHoabIXkcqRRKpMrWKBkpEZZyxfY9C1DpADFB8PEqGSTeFr135SaTRfKqGKx5xSCLI7ZQ==
 
-"@devprotocol/dev-kit@4.6.0":
-  version "4.6.0"
-  resolved "https://registry.yarnpkg.com/@devprotocol/dev-kit/-/dev-kit-4.6.0.tgz#3de2b817490b9f941bfc64207baa5863e46b6c3e"
-  integrity sha512-jssZiKpkvFcUS+yDbWgmcsUDfvRnLVuVMwi1RqpcruJMsAannZKl11GC56z4P/iL9BwpcOUGIXqZ8XApicE8NA==
+"@devprotocol/dev-kit@4.6.4":
+  version "4.6.4"
+  resolved "https://registry.yarnpkg.com/@devprotocol/dev-kit/-/dev-kit-4.6.4.tgz#63b2eb2a8200cf874a1e3445c583da03c6d4ce70"
+  integrity sha512-4TcCPVYguL/OmMmRRoA0PMgZxulgBp2FtD/t5VmvgfUcA/DeEoGD8cAViUdn/9yZpQ+/+Thm7AhiygUL8S4jqg==
   dependencies:
     "@types/bent" "^7.3.1"
     async-ray "^3.2.0"
     bent "^7.3.12"
+    js-base64 "^3.7.2"
     ramda "^0.27.0"
 
 "@devprotocol/khaos-core@1.2.6":
@@ -15577,6 +15578,11 @@ joi@^17.4.0:
     "@sideway/address" "^4.1.0"
     "@sideway/formula" "^3.0.0"
     "@sideway/pinpoint" "^2.0.0"
+
+js-base64@^3.7.2:
+  version "3.7.2"
+  resolved "https://registry.yarnpkg.com/js-base64/-/js-base64-3.7.2.tgz#816d11d81a8aff241603d19ce5761e13e41d7745"
+  integrity sha512-NnRs6dsyqUXejqk/yv2aiXlAvOs56sLkX6nUdeaNezI5LFFLlsZjOThmwnrcwh5ZZRwZlCMnVAY3CvhIhoVEKQ==
 
 js-sha256@0.9.0:
   version "0.9.0"
