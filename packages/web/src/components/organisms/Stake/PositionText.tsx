@@ -10,8 +10,8 @@ interface Props {
 export const PositionText = ({ sTokenId }: Props) => {
   const { positions } = useGetSTokenPositions(sTokenId)
   const { rewards } = useGetStokenRewards(sTokenId)
-  const positionAmount = useMemo(() => toNaturalNumber(positions?.amount).toString(), [positions?.amount])
-  const rewardAmount = useMemo(() => toNaturalNumber(rewards?.entireReward).toString(), [rewards?.entireReward])
+  const positionAmount = useMemo(() => toNaturalNumber(positions?.amount).toFixed(), [positions?.amount])
+  const rewardAmount = useMemo(() => toNaturalNumber(rewards?.entireReward).toFixed(), [rewards?.entireReward])
   return (
     <Space size="large">
       <div style={{ marginLeft: '8px', minWidth: '40px' }}>#{sTokenId}</div>

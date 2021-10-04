@@ -104,8 +104,6 @@ export const Stake = ({ className, title, propertyAddress }: Props) => {
   const [stakeAmount, setStakeAmount] = useState('')
   const [radioValue, setRadioValue] = useState(0)
   const { sTokens } = useDetectSTokens(propertyAddress, accountAddress)
-  const [selectedSTokenId, setSelectedSTokenId] = useState<number>()
-  const isSelectNewPosition = useMemo(() => radioValue > DEFAULT_RADIO_VALUE, [radioValue])
   const disabled = useMemo(() => !web3, [web3])
   const amountNumber = useMemo(() => toAmountNumber(stakeAmount), [stakeAmount])
 
@@ -118,7 +116,6 @@ export const Stake = ({ className, title, propertyAddress }: Props) => {
 
   const handleChangeRadio = (event: RadioChangeEvent) => {
     setRadioValue(event.target.value)
-    setSelectedSTokenId(isSelectNewPosition ? sTokens?.[event.target.value] : undefined)
   }
 
   const handleApprove = async () => {
@@ -134,14 +131,16 @@ export const Stake = ({ className, title, propertyAddress }: Props) => {
   }
 
   const handleStake = () => {
+    if (typeof radioValue === 'undefined') {
+      message.warn({ content: 'No position selected', key: 'StakeButton' })
+      return
+    }
     if (radioValue > DEFAULT_RADIO_VALUE) {
-      depositToProperty(propertyAddress, amountNumber.toFixed())
+      console.log('depositToPosition', radioValue)
+      depositToPosition(`${radioValue}`, amountNumber.toFixed())
     } else {
-      if (typeof selectedSTokenId === 'undefined') {
-        message.warn({ content: 'No position selected', key: 'StakeButton' })
-      } else {
-        depositToPosition(`${selectedSTokenId}`, amountNumber.toFixed())
-      }
+      console.log('depositToProperty', propertyAddress)
+      depositToProperty(propertyAddress, amountNumber.toFixed())
     }
   }
 
