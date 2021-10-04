@@ -173,7 +173,7 @@ export const Stake = ({ className, title, propertyAddress }: Props) => {
             </Radio>
             )
             {sTokens?.map((stoken, idx) => (
-              <Radio value={idx} key={idx}>
+              <Radio value={stoken} key={idx}>
                 <PositionText sTokenId={stoken} />
               </Radio>
             ))}
