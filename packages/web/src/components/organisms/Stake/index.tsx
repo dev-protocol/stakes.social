@@ -130,7 +130,7 @@ export const Stake = ({ className, title, propertyAddress }: Props) => {
       message.warn({ content: 'Please enter a value greater than 0', key: 'StakeButton' })
       return
     }
-    approve(await getContractAddress(contractFactory(web3.currentProvider), 'lockup'), stakeAmount)
+    approve(await getContractAddress(contractFactory(web3.currentProvider), 'lockup'), amountNumber.toFixed())
   }
 
   const handleStake = () => {
@@ -185,14 +185,14 @@ export const Stake = ({ className, title, propertyAddress }: Props) => {
           size="large"
           value={stakeAmount}
           onChange={event => setStakeAmount(event.target.value)}
-          disabled={disabled}
+          disabled={disabled || ok}
           suffix={suffix}
           type="number"
         />
         <WrapStyledButton>
           <Row>
             <Col span={11}>
-              <StyledButton type="primary" onClick={handleApprove}>
+              <StyledButton type="primary" onClick={handleApprove} disabled={disabled || ok}>
                 Approve
               </StyledButton>
             </Col>

@@ -19,6 +19,7 @@ export const NFTAsset = ({ sToken }: NFTAssetProps) => {
   const { rewards } = useGetStokenRewards(sToken)
   const positionAmount = useMemo(() => toNaturalNumber(positions?.amount), [positions?.amount])
   const rewardAmount = useMemo(() => toNaturalNumber(rewards?.entireReward), [rewards?.entireReward])
+  console.log({ tokenURI })
   return (
     <Result
       status="success"
@@ -28,7 +29,13 @@ export const NFTAsset = ({ sToken }: NFTAssetProps) => {
         <Row gutter={[16, 16]}>
           <Col xs={24} sm={12}>
             <img
-              src={tokenURI?.image ? encodeURI(tokenURI.image) : undefined}
+              src={
+                tokenURI?.image
+                  ? `data:image/svg+xml;base64,${btoa(
+                      tokenURI.image.replace(/^data:image\/svg\+xml;base64,(.*)/, '$1')
+                    )}`
+                  : undefined
+              }
               style={{ width: '100%', maxHeight: '530px' }}
             />
           </Col>
