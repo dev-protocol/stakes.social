@@ -2,9 +2,11 @@ import { Button, Divider } from 'antd'
 import React, { useCallback, useState } from 'react'
 import styled from 'styled-components'
 import { H2 } from 'src/components/atoms/Typography'
-import { useDetectSTokens, useGetMyStakingAmount, useMigrateToSTokens } from 'src/fixtures/dev-kit/hooks'
+import { useGetMyStakingAmount, useMigrateToSTokens } from 'src/fixtures/dev-kit/hooks'
 import { useProvider } from 'src/fixtures/wallet/hooks'
 import { NFTAsset } from './NFTAsset'
+import { detectStokens } from 'src/fixtures/dev-kit/client'
+import { whenDefinedAll } from 'src/fixtures/utility'
 
 const StyledButton = styled(Button)`
   width: 100%;
@@ -28,18 +30,21 @@ interface ConvertToStokensProps {
 }
 
 export const ConvertToStokens = ({ propertyAddress }: ConvertToStokensProps) => {
-  const { accountAddress } = useProvider()
+  const { accountAddress, web3 } = useProvider()
   const [sToken, setSToken] = useState<number>()
   const { myStakingAmount } = useGetMyStakingAmount(propertyAddress)
   const { migrateToSTokens } = useMigrateToSTokens()
-  const { detectStokens } = useDetectSTokens(propertyAddress, accountAddress)
   const handleClickConvertButton = useCallback(
     () =>
       migrateToSTokens(propertyAddress).then(async () => {
         console.log('done')
-        setSToken((await detectStokens())?.[0])
+        const ids = await whenDefinedAll([web3, propertyAddress, accountAddress], ([libWeb3, property, account]) =>
+          detectStokens(libWeb3, property, account)
+        )
+        console.log({ ids })
+        setSToken(ids?.[0])
       }),
-    [migrateToSTokens, propertyAddress, detectStokens]
+    [migrateToSTokens, web3, propertyAddress, accountAddress]
   )
 
   return (
