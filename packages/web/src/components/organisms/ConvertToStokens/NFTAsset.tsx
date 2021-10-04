@@ -28,16 +28,7 @@ export const NFTAsset = ({ sToken }: NFTAssetProps) => {
       extra={
         <Row gutter={[16, 16]}>
           <Col xs={24} sm={12}>
-            <img
-              src={
-                tokenURI?.image
-                  ? `data:image/svg+xml;base64,${btoa(
-                      tokenURI.image.replace(/^data:image\/svg\+xml;base64,(.*)/, '$1')
-                    )}`
-                  : undefined
-              }
-              style={{ width: '100%', maxHeight: '530px' }}
-            />
+            <img src={tokenURI?.image} style={{ width: '100%', maxHeight: '530px' }} />
           </Col>
           <Col xs={24} sm={12} style={{ textAlign: 'left' }}>
             <Space direction="vertical">
