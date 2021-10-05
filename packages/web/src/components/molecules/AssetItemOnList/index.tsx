@@ -122,9 +122,9 @@ export const AssetItemOnList = ({
 
   return (
     <Wrap className={className}>
-      <Link href={'/[propertyAddress]'} as={`/${propertyAddress}`} passHref>
+      <Link href={'/[propertyAddress]'} as={`/${detectedPropertyAddress}`} passHref>
         <GridAvatar>
-          <AvatarProperty propertyAddress={propertyAddress} size={90} />
+          <AvatarProperty propertyAddress={detectedPropertyAddress} size={90} />
           <H3>{propertyName}</H3>
         </GridAvatar>
       </Link>
