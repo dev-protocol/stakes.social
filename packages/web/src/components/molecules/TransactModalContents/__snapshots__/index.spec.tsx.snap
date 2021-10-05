@@ -81,16 +81,15 @@ exports[`TransactModalContents Snapshot 1`] = `
                 style="margin-bottom: 8px;"
               >
                 <label
-                  class="ant-radio-wrapper ant-radio-wrapper-checked"
+                  class="ant-radio-wrapper"
                 >
                   <span
-                    class="ant-radio ant-radio-checked"
+                    class="ant-radio"
                   >
                     <input
-                      checked=""
                       class="ant-radio-input"
                       type="radio"
-                      value="0"
+                      value="2"
                     />
                     <span
                       class="ant-radio-inner"
@@ -119,7 +118,7 @@ exports[`TransactModalContents Snapshot 1`] = `
                           style="min-width: 120px;"
                         >
                           <span>
-                            1e-15
+                            0.000000000000001
                           </span>
                           <span
                             style="font-size: 0.6em; margin-left: 2px;"
@@ -132,7 +131,7 @@ exports[`TransactModalContents Snapshot 1`] = `
                         class="ant-space-item"
                       >
                         <div>
-                          1e-15
+                          0.000000000000001
                           <span
                             style="font-size: 0.6em; margin-left: 2px;"
                           >
@@ -157,7 +156,7 @@ exports[`TransactModalContents Snapshot 1`] = `
                     <input
                       class="ant-radio-input"
                       type="radio"
-                      value="1"
+                      value="4"
                     />
                     <span
                       class="ant-radio-inner"
@@ -186,7 +185,7 @@ exports[`TransactModalContents Snapshot 1`] = `
                           style="min-width: 120px;"
                         >
                           <span>
-                            1e-15
+                            0.000000000000001
                           </span>
                           <span
                             style="font-size: 0.6em; margin-left: 2px;"
@@ -199,7 +198,7 @@ exports[`TransactModalContents Snapshot 1`] = `
                         class="ant-space-item"
                       >
                         <div>
-                          1e-15
+                          0.000000000000001
                           <span
                             style="font-size: 0.6em; margin-left: 2px;"
                           >
@@ -223,7 +222,7 @@ exports[`TransactModalContents Snapshot 1`] = `
                     <input
                       class="ant-radio-input"
                       type="radio"
-                      value="2"
+                      value="6"
                     />
                     <span
                       class="ant-radio-inner"
@@ -252,7 +251,7 @@ exports[`TransactModalContents Snapshot 1`] = `
                           style="min-width: 120px;"
                         >
                           <span>
-                            1e-15
+                            0.000000000000001
                           </span>
                           <span
                             style="font-size: 0.6em; margin-left: 2px;"
@@ -265,7 +264,7 @@ exports[`TransactModalContents Snapshot 1`] = `
                         class="ant-space-item"
                       >
                         <div>
-                          1e-15
+                          0.000000000000001
                           <span
                             style="font-size: 0.6em; margin-left: 2px;"
                           >
