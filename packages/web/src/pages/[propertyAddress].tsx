@@ -16,7 +16,7 @@ import { ButtonWithGradient } from 'src/components/atoms/ButtonWithGradient'
 import { Container } from 'src/components/atoms/Container'
 import { Header } from 'src/components/organisms/Header'
 import TopStakers from 'src/components/organisms/TopStakers'
-import { useAPY, usePropertyAuthor } from 'src/fixtures/dev-kit/hooks'
+import { useAPY, useGetMyStakingAmount, usePropertyAuthor } from 'src/fixtures/dev-kit/hooks'
 import { useGetPropertyAuthenticationQuery, useGetPropertyAggregateLazyQuery } from '@dev/graphql'
 import { useGetPropertytInformation } from 'src/fixtures/devprtcl/hooks'
 import {
@@ -383,6 +383,22 @@ const PropertyAbout = ({
   )
 }
 
+const ConvertWrap = styled.div`
+  padding: 1rem;
+  border-radius: 5px;
+  background: aliceblue;
+`
+
+const Convert = ({ propertyAddress }: { propertyAddress: string }) => {
+  return (
+    <Link href={`/convert-to-stokens/${propertyAddress}`} passHref>
+      <a>
+        <ConvertWrap>You can migrate your staking to a sTokens</ConvertWrap>
+      </a>
+    </Link>
+  )
+}
+
 const PropertyAddressDetail = (_: Props) => {
   const [urlPathArg] = getPath(useRouter().asPath)
   const propertyAddress = urlPathArg.split('?')[0]
@@ -396,6 +412,7 @@ const PropertyAddressDetail = (_: Props) => {
   const includedAssetList = useMemo(() => data?.property_authentication.map(e => e.authentication_id), [data])
   const { accountAddress: loggedInWallet } = useProvider()
   const { author: authorAddress } = usePropertyAuthor(propertyAddress)
+  const { myStakingAmount } = useGetMyStakingAmount(propertyAddress)
 
   return data && !isExistProperty ? (
     // property is not found
@@ -414,6 +431,7 @@ const PropertyAddressDetail = (_: Props) => {
         <Main>
           <RoundedCoverImageOrGradient src={dataProperty?.cover_image?.url} ratio={52.5} />
           {isExistProperty && <Possession propertyAddress={propertyAddress} />}
+          {myStakingAmount?.isGreaterThan(0) && <Convert propertyAddress={propertyAddress} />}
           <Transact>
             {isExistProperty && (loggedInWallet ? loggedInWallet !== authorAddress : true) && (
               <Stake title="Stake" propertyAddress={propertyAddress} />

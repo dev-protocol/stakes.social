@@ -22,7 +22,18 @@ import {
   useGetMyStakingRewardAmount,
   useBalanceOfProperty,
   usePropertySymbol,
-  useBalanceOfAccountProperty
+  useBalanceOfAccountProperty,
+  useDetectSTokens,
+  useGetSTokenPositions,
+  useGetStokenRewards,
+  useApprove,
+  useDepositToProperty,
+  useDepositToPosition,
+  useWithdrawByPosition,
+  useMigrateToSTokens,
+  useGetTokenURI,
+  useGetStokenSymbol,
+  usePositionsOfOwner
 } from './hooks'
 import { useCurrency } from 'src/fixtures/currency/functions/useCurrency'
 import useSWR from 'swr'
@@ -34,7 +45,12 @@ import {
   createProperty,
   marketScheme,
   authenticate,
-  createGetVotablePolicy
+  createGetVotablePolicy,
+  approve,
+  depositToProperty,
+  depositToPosition,
+  withdrawByPosition,
+  migrateToSTokens
 } from './client'
 import { message } from 'antd'
 import BigNumber from 'bignumber.js'
@@ -862,6 +878,328 @@ describe('dev-kit hooks', () => {
       const error = new Error(errorMessage)
       ;(useSWR as jest.Mock).mockImplementation(() => ({ data, error }))
       const { result } = renderHook(() => useBalanceOfAccountProperty('property-address', 'user'))
+      expect(result.current.error).toBe(error)
+      expect(result.current.error?.message).toBe(errorMessage)
+    })
+  })
+
+  describe('useDetectSTokens', () => {
+    test('data is undefined', () => {
+      const data = undefined
+      const error = undefined
+      ;(useSWR as jest.Mock).mockImplementation(() => ({ data, error }))
+      const { result } = renderHook(() => useDetectSTokens('property-address', 'user'))
+      expect(result.current.sTokens).toBe(data)
+    })
+
+    test('success fetching data', () => {
+      const data = [1, 2, 3]
+      const error = undefined
+      ;(useSWR as jest.Mock).mockImplementation(() => ({ data, error }))
+      const { result } = renderHook(() => useDetectSTokens('property-address', 'user'))
+      expect(result.current.sTokens).toBe(data)
+    })
+
+    test('failure fetching data', () => {
+      const data = undefined
+      const errorMessage = 'error'
+      const error = new Error(errorMessage)
+      ;(useSWR as jest.Mock).mockImplementation(() => ({ data, error }))
+      const { result } = renderHook(() => useDetectSTokens('property-address', 'user'))
+      expect(result.current.error).toBe(error)
+      expect(result.current.error?.message).toBe(errorMessage)
+    })
+  })
+
+  describe('usePositionsOfOwner', () => {
+    test('data is undefined', () => {
+      const data = undefined
+      const error = undefined
+      ;(useSWR as jest.Mock).mockImplementation(() => ({ data, error }))
+      const { result } = renderHook(() => usePositionsOfOwner('user'))
+      expect(result.current.positions).toBe(data)
+    })
+
+    test('success fetching data', () => {
+      const data = [1, 2, 3]
+      const error = undefined
+      ;(useSWR as jest.Mock).mockImplementation(() => ({ data, error }))
+      const { result } = renderHook(() => usePositionsOfOwner('user'))
+      expect(result.current.positions).toBe(data)
+    })
+
+    test('failure fetching data', () => {
+      const data = undefined
+      const errorMessage = 'error'
+      const error = new Error(errorMessage)
+      ;(useSWR as jest.Mock).mockImplementation(() => ({ data, error }))
+      const { result } = renderHook(() => usePositionsOfOwner('user'))
+      expect(result.current.error).toBe(error)
+      expect(result.current.error?.message).toBe(errorMessage)
+    })
+  })
+
+  describe('useGetSTokenPositions', () => {
+    const DUMMY_STOKEN_ID = 0
+    test('data is undefined', () => {
+      const data = undefined
+      const error = undefined
+      const toCurrency = (x: BigNumber) => x
+      ;(useCurrency as jest.Mock).mockImplementationOnce(() => ({ currency: 'DEV', toCurrency }))
+      ;(useSWR as jest.Mock).mockImplementation(() => ({ data, error }))
+      const { result } = renderHook(() => useGetSTokenPositions(DUMMY_STOKEN_ID))
+      expect(result.current.positions).toBe(data)
+      expect(result.current.amount).toBe(data)
+      expect(result.current.currency).toBe('DEV')
+    })
+
+    test('success fetching data', () => {
+      const data = { amount: '1000000' }
+      const error = undefined
+      const toCurrency = (x: BigNumber) => x
+      ;(useCurrency as jest.Mock).mockImplementationOnce(() => ({ currency: 'DEV', toCurrency }))
+      ;(useSWR as jest.Mock).mockImplementation(() => ({ data, error }))
+      const { result } = renderHook(() => useGetSTokenPositions(DUMMY_STOKEN_ID))
+      expect(result.current.positions).toBe(data)
+      expect(result.current.amount?.toFixed()).toBe('0.000000000001')
+      expect(result.current.currency).toBe('DEV')
+    })
+
+    test('failure fetching data', () => {
+      const data = undefined
+      const errorMessage = 'error'
+      const error = new Error(errorMessage)
+      const toCurrency = (x: BigNumber) => x
+      ;(useCurrency as jest.Mock).mockImplementationOnce(() => ({ currency: 'DEV', toCurrency }))
+      ;(useSWR as jest.Mock).mockImplementation(() => ({ data, error }))
+      const { result } = renderHook(() => useGetSTokenPositions(DUMMY_STOKEN_ID))
+      expect(result.current.error).toBe(error)
+      expect(result.current.error?.message).toBe(errorMessage)
+    })
+  })
+
+  describe('useGetStokenRewards', () => {
+    const DUMMY_STOKEN_ID = 0
+    test('data is undefined', () => {
+      const data = undefined
+      const error = undefined
+      const toCurrency = (x: BigNumber) => x
+      ;(useCurrency as jest.Mock).mockImplementationOnce(() => ({ currency: 'DEV', toCurrency }))
+      ;(useSWR as jest.Mock).mockImplementation(() => ({ data, error }))
+      const { result } = renderHook(() => useGetStokenRewards(DUMMY_STOKEN_ID))
+      expect(result.current.rewards).toBe(data)
+      expect(result.current.withdrawableReward).toBe(data)
+      expect(result.current.currency).toBe('DEV')
+    })
+
+    test('success fetching data', () => {
+      const data = { withdrawableReward: '1000000' }
+      const error = undefined
+      const toCurrency = (x: BigNumber) => x
+      ;(useCurrency as jest.Mock).mockImplementationOnce(() => ({ currency: 'DEV', toCurrency }))
+      ;(useSWR as jest.Mock).mockImplementation(() => ({ data, error }))
+      const { result } = renderHook(() => useGetStokenRewards(DUMMY_STOKEN_ID))
+      expect(result.current.rewards).toBe(data)
+      expect(result.current.withdrawableReward?.toFixed()).toBe('0.000000000001')
+      expect(result.current.currency).toBe('DEV')
+    })
+
+    test('failure fetching data', () => {
+      const data = undefined
+      const errorMessage = 'error'
+      const error = new Error(errorMessage)
+      const toCurrency = (x: BigNumber) => x
+      ;(useCurrency as jest.Mock).mockImplementationOnce(() => ({ currency: 'DEV', toCurrency }))
+      ;(useSWR as jest.Mock).mockImplementation(() => ({ data, error }))
+      const { result } = renderHook(() => useGetStokenRewards(DUMMY_STOKEN_ID))
+      expect(result.current.error).toBe(error)
+      expect(result.current.error?.message).toBe(errorMessage)
+    })
+  })
+
+  describe('useApprove', () => {
+    test('success', async () => {
+      const { result, waitForNextUpdate } = renderHook(() => useApprove())
+      ;(approve as jest.Mock).mockResolvedValue(true)
+      act(() => {
+        result.current.approve('address', '10000')
+      })
+      await waitForNextUpdate()
+      expect(result.current.error).toBe(undefined)
+      expect(result.current.isLoading).toBe(false)
+    })
+
+    test('failure', async () => {
+      const error = new Error('error')
+      const { result, waitForNextUpdate } = renderHook(() => useApprove())
+      ;(approve as jest.Mock).mockRejectedValue(error)
+      message.error = jest.fn(() => {}) as any
+      act(() => {
+        result.current.approve('address', '10000')
+      })
+      await waitForNextUpdate()
+      expect(result.current.error).toBe(error)
+      expect(result.current.isLoading).toBe(false)
+    })
+  })
+
+  describe('useDepositToProperty', () => {
+    test('success', async () => {
+      const { result, waitForNextUpdate } = renderHook(() => useDepositToProperty())
+      ;(depositToProperty as jest.Mock).mockResolvedValue(true)
+      act(() => {
+        result.current.depositToProperty('address', '10000')
+      })
+      await waitForNextUpdate()
+      expect(result.current.error).toBe(undefined)
+      expect(result.current.isLoading).toBe(false)
+    })
+
+    test('failure', async () => {
+      const error = new Error('error')
+      const { result, waitForNextUpdate } = renderHook(() => useDepositToProperty())
+      ;(depositToProperty as jest.Mock).mockRejectedValue(error)
+      message.error = jest.fn(() => {}) as any
+      act(() => {
+        result.current.depositToProperty('address', '10000')
+      })
+      await waitForNextUpdate()
+      expect(result.current.error).toBe(error)
+      expect(result.current.isLoading).toBe(false)
+    })
+  })
+
+  describe('useDepositToPosition', () => {
+    test('success', async () => {
+      const { result, waitForNextUpdate } = renderHook(() => useDepositToPosition())
+      ;(depositToPosition as jest.Mock).mockResolvedValue(true)
+      act(() => {
+        result.current.depositToPosition('address', '10000')
+      })
+      await waitForNextUpdate()
+      expect(result.current.error).toBe(undefined)
+      expect(result.current.isLoading).toBe(false)
+    })
+
+    test('failure', async () => {
+      const error = new Error('error')
+      const { result, waitForNextUpdate } = renderHook(() => useDepositToPosition())
+      ;(depositToPosition as jest.Mock).mockRejectedValue(error)
+      message.error = jest.fn(() => {}) as any
+      act(() => {
+        result.current.depositToPosition('address', '10000')
+      })
+      await waitForNextUpdate()
+      expect(result.current.error).toBe(error)
+      expect(result.current.isLoading).toBe(false)
+    })
+  })
+
+  describe('useWithdrawByPosition', () => {
+    test('success', async () => {
+      const { result, waitForNextUpdate } = renderHook(() => useWithdrawByPosition())
+      ;(withdrawByPosition as jest.Mock).mockResolvedValue(true)
+      act(() => {
+        result.current.withdrawByPosition('address', '10000')
+      })
+      await waitForNextUpdate()
+      expect(result.current.error).toBe(undefined)
+      expect(result.current.isLoading).toBe(false)
+    })
+
+    test('failure', async () => {
+      const error = new Error('error')
+      const { result, waitForNextUpdate } = renderHook(() => useWithdrawByPosition())
+      ;(withdrawByPosition as jest.Mock).mockRejectedValue(error)
+      message.error = jest.fn(() => {}) as any
+      act(() => {
+        result.current.withdrawByPosition('address', '10000')
+      })
+      await waitForNextUpdate()
+      expect(result.current.error).toBe(error)
+      expect(result.current.isLoading).toBe(false)
+    })
+  })
+
+  describe('useMigrateToSTokens', () => {
+    test('success', async () => {
+      const { result, waitForNextUpdate } = renderHook(() => useMigrateToSTokens())
+      ;(migrateToSTokens as jest.Mock).mockResolvedValue(true)
+      act(() => {
+        result.current.migrateToSTokens('sTokenId')
+      })
+      await waitForNextUpdate()
+      expect(result.current.error).toBe(undefined)
+      expect(result.current.isLoading).toBe(false)
+    })
+
+    test('failure', async () => {
+      const error = new Error('error')
+      const { result, waitForNextUpdate } = renderHook(() => useMigrateToSTokens())
+      ;(migrateToSTokens as jest.Mock).mockRejectedValue(error)
+      message.error = jest.fn(() => {}) as any
+      act(() => {
+        result.current.migrateToSTokens('sTokenId')
+      })
+      await waitForNextUpdate()
+      expect(result.current.error).toBe(error)
+      expect(result.current.isLoading).toBe(false)
+    })
+  })
+
+  describe('useGetTokenURI', () => {
+    test('data is undefined', () => {
+      const data = undefined
+      const error = undefined
+
+      ;(useSWR as jest.Mock).mockImplementation(() => ({ data, error }))
+      const { result } = renderHook(() => useGetTokenURI(0))
+      expect(result.current.tokenURI).toBe(data)
+    })
+
+    test('success fetching data', () => {
+      const data = 'https://test.com'
+      const error = undefined
+      ;(useSWR as jest.Mock).mockImplementation(() => ({ data, error }))
+      const { result } = renderHook(() => useGetTokenURI(0))
+      expect(result.current.tokenURI).toBe(data)
+    })
+
+    test('failure fetching data', () => {
+      const data = undefined
+      const errorMessage = 'error'
+      const error = new Error(errorMessage)
+      ;(useSWR as jest.Mock).mockImplementation(() => ({ data, error }))
+      const { result } = renderHook(() => useGetTokenURI(0))
+      expect(result.current.error).toBe(error)
+      expect(result.current.error?.message).toBe(errorMessage)
+    })
+  })
+
+  describe('useGetStokenSymbol', () => {
+    test('data is undefined', () => {
+      const data = undefined
+      const error = undefined
+
+      ;(useSWR as jest.Mock).mockImplementation(() => ({ data, error }))
+      const { result } = renderHook(() => useGetStokenSymbol(0))
+      expect(result.current.symbol).toBe(data)
+    })
+
+    test('success fetching data', () => {
+      const data = 'https://test.com'
+      const error = undefined
+      ;(useSWR as jest.Mock).mockImplementation(() => ({ data, error }))
+      const { result } = renderHook(() => useGetStokenSymbol(0))
+      expect(result.current.symbol).toBe(data)
+    })
+
+    test('failure fetching data', () => {
+      const data = undefined
+      const errorMessage = 'error'
+      const error = new Error(errorMessage)
+      ;(useSWR as jest.Mock).mockImplementation(() => ({ data, error }))
+      const { result } = renderHook(() => useGetStokenSymbol(0))
       expect(result.current.error).toBe(error)
       expect(result.current.error?.message).toBe(errorMessage)
     })

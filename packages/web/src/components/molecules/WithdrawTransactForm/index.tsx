@@ -1,16 +1,21 @@
-import React, { useMemo } from 'react'
-import { Input } from 'antd'
+import React, { useCallback, useMemo, useState } from 'react'
+import { Input, Radio, RadioChangeEvent, Space, message } from 'antd'
 import styled from 'styled-components'
 import { Max } from 'src/components/molecules/Max'
 import { SearchProps } from 'antd/lib/input'
 import { ButtonWithGradient } from 'src/components/atoms/ButtonWithGradient'
+import { PositionText } from './PositionText'
+import { useDetectSTokens } from 'src/fixtures/dev-kit/hooks'
+import { useProvider } from 'src/fixtures/wallet/hooks'
 
 type Props = SearchProps &
   React.RefAttributes<Input> & {
-    onClickMax?: () => void
+    withdraw: (sTokenId: string) => void
+    onClickMax?: (sTokenId: string) => void
+    propertyAddress: string
   }
 
-const StyledForm = styled(Input.Search)`
+const StyledSearchForm = styled(Input.Search)`
   width: inherit;
   bottom: 0;
   .ant-input-affix-wrapper-focused {
@@ -69,52 +74,78 @@ const StyledButtonWithGradientForWithdraw = styled(ButtonWithGradient)`
   }
 `
 
-export const TransactForm = ({
+export const WithdrawTransactForm = ({
   className,
   enterButton,
   value,
   onChange,
-  onSearch,
   suffix: _suffix,
   onClickMax,
   disabled,
   id,
-  placeholder
+  placeholder,
+  propertyAddress,
+  withdraw
 }: Props) => {
-  const onClick = useMemo(() => (onSearch ? () => onSearch('') : () => undefined), [onSearch])
+  const { accountAddress } = useProvider()
+  const { sTokens } = useDetectSTokens(propertyAddress, accountAddress)
+
+  const [radioValue, setRadioValue] = useState(0)
+
+  const handleSearch = useCallback(() => {
+    if (typeof radioValue === 'undefined') {
+      message.warn({ content: 'No position selected', key: 'StakeButton' })
+    } else {
+      withdraw(`${radioValue}`)
+    }
+  }, [radioValue, withdraw])
+
   const suffix = useMemo(
     () => (
       <>
         {_suffix}
-        {onClickMax ? <Max onClick={onClickMax} /> : undefined}
+        {onClickMax ? <Max onClick={() => onClickMax(`${radioValue}`)} /> : undefined}
       </>
     ),
-    [_suffix, onClickMax]
+    [_suffix, onClickMax, radioValue]
   )
   const OnlyButton = useMemo(
     () =>
       id === 'withdraw' ? (
-        <StyledButtonWithGradientForWithdraw size="large" onClick={onClick}>
+        <StyledButtonWithGradientForWithdraw size="large" onClick={handleSearch}>
           {enterButton}
         </StyledButtonWithGradientForWithdraw>
       ) : (
-        <StyledButtonWithGradient size="large" onClick={onClick}>
+        <StyledButtonWithGradient size="large" onClick={handleSearch}>
           {enterButton}
         </StyledButtonWithGradient>
       ),
-    [id, onClick, enterButton]
+    [id, handleSearch, enterButton]
   )
+
+  const handleChangeRadio = (event: RadioChangeEvent) => {
+    setRadioValue(event.target.value)
+  }
 
   return (
     <Wrap className={className} style={{ opacity: disabled ? '0.3' : '1.0' }}>
+      <Radio.Group onChange={handleChangeRadio} value={radioValue} style={{ marginBottom: '12px' }}>
+        <Space direction="vertical">
+          {sTokens?.map((stoken, idx) => (
+            <Radio value={stoken} key={idx}>
+              <PositionText sTokenId={stoken} />
+            </Radio>
+          ))}
+        </Space>
+      </Radio.Group>
       {onChange ? (
-        <StyledForm
+        <StyledSearchForm
           id={id}
           enterButton={enterButton}
           size="large"
           value={value}
           onChange={onChange}
-          onSearch={onSearch}
+          onSearch={handleSearch}
           disabled={disabled}
           suffix={suffix}
           type="number"

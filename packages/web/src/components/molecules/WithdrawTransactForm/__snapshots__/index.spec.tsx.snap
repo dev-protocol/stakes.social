@@ -1,0 +1,232 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`WithdrawTransactForm Snapshot 1`] = `
+<body>
+  <div>
+    <div
+      class="sc-bygjqz-1 iIKDAL"
+      style="opacity: 1;"
+    >
+      <div
+        class="ant-radio-group ant-radio-group-outline"
+        style="margin-bottom: 12px;"
+      >
+        <div
+          class="ant-space ant-space-vertical"
+        >
+          <div
+            class="ant-space-item"
+            style="margin-bottom: 8px;"
+          >
+            <label
+              class="ant-radio-wrapper"
+            >
+              <span
+                class="ant-radio"
+              >
+                <input
+                  class="ant-radio-input"
+                  type="radio"
+                  value="2"
+                />
+                <span
+                  class="ant-radio-inner"
+                />
+              </span>
+              <span>
+                <div
+                  class="ant-space ant-space-horizontal ant-space-align-center"
+                >
+                  <div
+                    class="ant-space-item"
+                    style="margin-right: 24px;"
+                  >
+                    <div
+                      style="margin-left: 8px; min-width: 40px;"
+                    >
+                      #
+                      2
+                    </div>
+                  </div>
+                  <div
+                    class="ant-space-item"
+                    style="margin-right: 24px;"
+                  >
+                    <div
+                      style="min-width: 120px;"
+                    >
+                      <span>
+                        1e-15
+                      </span>
+                      <span
+                        style="font-size: 0.6em; margin-left: 2px;"
+                      >
+                        Staked
+                      </span>
+                    </div>
+                  </div>
+                  <div
+                    class="ant-space-item"
+                  >
+                    <div>
+                      <span>
+                        0
+                      </span>
+                      <span
+                        style="font-size: 0.6em; margin-left: 2px;"
+                      >
+                        Claimable
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </span>
+            </label>
+          </div>
+          <div
+            class="ant-space-item"
+            style="margin-bottom: 8px;"
+          >
+            <label
+              class="ant-radio-wrapper"
+            >
+              <span
+                class="ant-radio"
+              >
+                <input
+                  class="ant-radio-input"
+                  type="radio"
+                  value="4"
+                />
+                <span
+                  class="ant-radio-inner"
+                />
+              </span>
+              <span>
+                <div
+                  class="ant-space ant-space-horizontal ant-space-align-center"
+                >
+                  <div
+                    class="ant-space-item"
+                    style="margin-right: 24px;"
+                  >
+                    <div
+                      style="margin-left: 8px; min-width: 40px;"
+                    >
+                      #
+                      4
+                    </div>
+                  </div>
+                  <div
+                    class="ant-space-item"
+                    style="margin-right: 24px;"
+                  >
+                    <div
+                      style="min-width: 120px;"
+                    >
+                      <span>
+                        1e-15
+                      </span>
+                      <span
+                        style="font-size: 0.6em; margin-left: 2px;"
+                      >
+                        Staked
+                      </span>
+                    </div>
+                  </div>
+                  <div
+                    class="ant-space-item"
+                  >
+                    <div>
+                      <span>
+                        0
+                      </span>
+                      <span
+                        style="font-size: 0.6em; margin-left: 2px;"
+                      >
+                        Claimable
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </span>
+            </label>
+          </div>
+          <div
+            class="ant-space-item"
+          >
+            <label
+              class="ant-radio-wrapper"
+            >
+              <span
+                class="ant-radio"
+              >
+                <input
+                  class="ant-radio-input"
+                  type="radio"
+                  value="6"
+                />
+                <span
+                  class="ant-radio-inner"
+                />
+              </span>
+              <span>
+                <div
+                  class="ant-space ant-space-horizontal ant-space-align-center"
+                >
+                  <div
+                    class="ant-space-item"
+                    style="margin-right: 24px;"
+                  >
+                    <div
+                      style="margin-left: 8px; min-width: 40px;"
+                    >
+                      #
+                      6
+                    </div>
+                  </div>
+                  <div
+                    class="ant-space-item"
+                    style="margin-right: 24px;"
+                  >
+                    <div
+                      style="min-width: 120px;"
+                    >
+                      <span>
+                        1e-15
+                      </span>
+                      <span
+                        style="font-size: 0.6em; margin-left: 2px;"
+                      >
+                        Staked
+                      </span>
+                    </div>
+                  </div>
+                  <div
+                    class="ant-space-item"
+                  >
+                    <div>
+                      <span>
+                        0
+                      </span>
+                      <span
+                        style="font-size: 0.6em; margin-left: 2px;"
+                      >
+                        Claimable
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </span>
+            </label>
+          </div>
+        </div>
+      </div>
+      <button
+        class="ant-btn ant-btn-lg sc-1ho13tb-0 sc-bygjqz-2 cpPLtK dKnxTk"
+        type="button"
+      />
+    </div>
+  </div>
+</body>
+`;

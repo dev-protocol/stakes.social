@@ -6,9 +6,9 @@ import {
 } from 'src/fixtures/dev-kit/hooks'
 import { whenDefinedAll } from 'src/fixtures/utility'
 import { useGetEthPrice } from 'src/fixtures/uniswap/hooks'
-import { TransactForm } from 'src/components/molecules/TransactForm'
-import { FormContainer } from 'src/components/molecules/TransactForm/FormContainer'
-import { Estimated } from 'src/components/molecules/TransactForm/Estimated'
+import { WithdrawTransactForm } from 'src/components/molecules/WithdrawTransactForm'
+import { FormContainer } from 'src/components/molecules/WithdrawTransactForm/FormContainer'
+import { Estimated } from 'src/components/molecules/WithdrawTransactForm/Estimated'
 import { EstimatedGasFeeCard } from 'src/components/molecules/EstimatedGasFeeCard'
 
 interface Props {
@@ -37,14 +37,15 @@ export const WithdrawalForHolders = ({ className, title, propertyAddress }: Prop
   return (
     <FormContainer>
       <Label />
-      <TransactForm
+      <WithdrawTransactForm
         className={className}
         id="withdrawalForHolders"
         enterButton="Withdraw"
         value={myHolderAmount?.toFixed()}
-        onSearch={withdraw}
+        withdraw={withdraw}
         suffix="DEV"
-      ></TransactForm>
+        propertyAddress={propertyAddress}
+      />
       <Estimated title="Withdrawable Amount">{<p>{myHolderAmount?.toFixed() || 0} DEV</p>}</Estimated>
       <EstimatedGasFeeCard
         estimatedGasFee={estimateGas ? estimateGas.toFixed(6) : '-'}
