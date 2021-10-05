@@ -11,7 +11,7 @@ export const PositionText = ({ sTokenId }: Props) => {
   const { positions } = useGetSTokenPositions(sTokenId)
   const { rewards } = useGetStokenRewards(sTokenId)
   const positionAmount = useMemo(() => toNaturalNumber(positions?.amount).toFixed(), [positions?.amount])
-  const rewardAmount = useMemo(() => toNaturalNumber(rewards?.entireReward).toFixed(), [rewards?.entireReward])
+  const rewardAmount = useMemo(() => toNaturalNumber(rewards?.entireReward).dp(6).toFixed(), [rewards?.entireReward])
   return (
     <Space size="large">
       <div style={{ marginLeft: '8px', minWidth: '40px' }}>#{sTokenId}</div>

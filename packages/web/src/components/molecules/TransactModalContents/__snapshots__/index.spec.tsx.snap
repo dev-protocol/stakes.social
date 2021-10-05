@@ -131,7 +131,7 @@ exports[`TransactModalContents Snapshot 1`] = `
                         class="ant-space-item"
                       >
                         <div>
-                          0.000000000000001
+                          0
                           <span
                             style="font-size: 0.6em; margin-left: 2px;"
                           >
@@ -198,7 +198,7 @@ exports[`TransactModalContents Snapshot 1`] = `
                         class="ant-space-item"
                       >
                         <div>
-                          0.000000000000001
+                          0
                           <span
                             style="font-size: 0.6em; margin-left: 2px;"
                           >
@@ -264,7 +264,7 @@ exports[`TransactModalContents Snapshot 1`] = `
                         class="ant-space-item"
                       >
                         <div>
-                          0.000000000000001
+                          0
                           <span
                             style="font-size: 0.6em; margin-left: 2px;"
                           >

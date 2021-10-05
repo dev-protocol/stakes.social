@@ -37,7 +37,8 @@ import {
   withdrawByPosition,
   migrateToSTokens,
   getTokenURI,
-  getStokenSymbol
+  getStokenSymbol,
+  positionsOfOwner
 } from './client'
 import { SWRCachePath } from './cache-path'
 import {
@@ -143,13 +144,13 @@ export const useGetEstimateGas4WithdrawHolderAmount = (propertyAddress: string) 
   return { estimateGas, error }
 }
 
-export const useGetMyHolderAmount = (propertyAddress: string) => {
+export const useGetMyHolderAmount = (propertyAddress?: string) => {
   const { nonConnectedWeb3, accountAddress } = useProvider()
   const { data, error } = useSWR<UnwrapFunc<typeof getMyHolderAmount>, Error>(
     SWRCachePath.getMyHolderAmount(propertyAddress, accountAddress),
     () =>
-      whenDefinedAll([nonConnectedWeb3, accountAddress], ([client, account]) =>
-        getMyHolderAmount(client, propertyAddress, account)
+      whenDefinedAll([nonConnectedWeb3, propertyAddress, accountAddress], ([client, property, account]) =>
+        getMyHolderAmount(client, property, account)
       ),
     { onError: err => message.error(err.message), revalidateOnFocus: false, focusThrottleInterval: 0 }
   )
@@ -200,14 +201,14 @@ export const useGetTotalStakingAmount = (propertyAddress: string) => {
   return { totalStakingAmount: whenDefined(data, x => toCurrency(toNaturalNumber(x))), currency, error }
 }
 
-export const useGetMyStakingRewardAmount = (propertyAddress: string) => {
+export const useGetMyStakingRewardAmount = (propertyAddress?: string) => {
   const { nonConnectedWeb3, accountAddress } = useProvider()
   const { currency, toCurrency } = useCurrency()
   const { data, error } = useSWR<UnwrapFunc<typeof getMyStakingRewardAmount>, Error>(
     SWRCachePath.getMyStakingRewardAmount(propertyAddress, accountAddress),
     () =>
-      whenDefinedAll([nonConnectedWeb3, accountAddress], ([client, account]) =>
-        getMyStakingRewardAmount(client, propertyAddress, account)
+      whenDefinedAll([nonConnectedWeb3, propertyAddress, accountAddress], ([client, property, account]) =>
+        getMyStakingRewardAmount(client, property, account)
       ),
     { onError: err => message.error(err.message), revalidateOnFocus: false, focusThrottleInterval: 0 }
   )
@@ -220,14 +221,14 @@ export const useGetMyStakingRewardAmount = (propertyAddress: string) => {
   }
 }
 
-export const useGetMyStakingAmount = (propertyAddress: string) => {
+export const useGetMyStakingAmount = (propertyAddress?: string) => {
   const { nonConnectedWeb3, accountAddress } = useProvider()
   const { currency, toCurrency } = useCurrency()
   const { data, error } = useSWR<UnwrapFunc<typeof getMyStakingAmount>, Error>(
     SWRCachePath.getMyStakingAmount(propertyAddress, accountAddress),
     () =>
-      whenDefinedAll([nonConnectedWeb3, accountAddress], ([client, account]) =>
-        getMyStakingAmount(client, propertyAddress, account)
+      whenDefinedAll([nonConnectedWeb3, propertyAddress, accountAddress], ([client, property, account]) =>
+        getMyStakingAmount(client, property, account)
       ),
     { onError: err => message.error(err.message), revalidateOnFocus: false, focusThrottleInterval: 0 }
   )
@@ -764,13 +765,13 @@ export const usePropertySymbol = (propertyAddress?: string) => {
   return { symbol: data, error }
 }
 
-export const useBalanceOfProperty = (propertyAddress: string) => {
+export const useBalanceOfProperty = (propertyAddress?: string) => {
   const { nonConnectedWeb3, accountAddress } = useProvider()
   const { data, error } = useSWR<BigNumber | undefined, Error>(
     SWRCachePath.balanceOfProperty(propertyAddress, accountAddress),
     () =>
-      whenDefinedAll([nonConnectedWeb3, accountAddress], ([client, account]) =>
-        balanceOfProperty(client, propertyAddress, account).then(toBigNumber)
+      whenDefinedAll([nonConnectedWeb3, propertyAddress, accountAddress], ([client, property, account]) =>
+        balanceOfProperty(client, property, account).then(toBigNumber)
       ),
     { revalidateOnFocus: false, focusThrottleInterval: 0 }
   )
@@ -804,24 +805,39 @@ export const useDetectSTokens = (propertyAddress?: string, accountAddress?: stri
   return { sTokens: data, error }
 }
 
+export const usePositionsOfOwner = (accountAddress?: string) => {
+  const { nonConnectedWeb3 } = useProvider()
+  const { data, error } = useSWR<UnwrapFunc<typeof positionsOfOwner>, Error>(
+    SWRCachePath.positionsOfOwner(accountAddress),
+    () => whenDefinedAll([nonConnectedWeb3, accountAddress], ([client, account]) => positionsOfOwner(client, account)),
+    { revalidateOnFocus: false, focusThrottleInterval: 0 }
+  )
+
+  return { positions: data, error }
+}
+
 export const useGetSTokenPositions = (sTokenId?: number) => {
   const { nonConnectedWeb3 } = useProvider()
+  const { currency, toCurrency } = useCurrency()
   const { data, error } = useSWR<UnwrapFunc<typeof getStokenPositions>, Error>(
     SWRCachePath.getStokenPositions(`${sTokenId}`),
     () => whenDefinedAll([nonConnectedWeb3, sTokenId], ([client, sTokenId]) => getStokenPositions(client, sTokenId)),
     { revalidateOnFocus: false, focusThrottleInterval: 0 }
   )
-  return { positions: data, error }
+  const amount = whenDefined(data, pos => toCurrency(toNaturalNumber(pos.amount)))
+  return { positions: data, error, currency, amount }
 }
 
 export const useGetStokenRewards = (sTokenId?: number) => {
   const { nonConnectedWeb3 } = useProvider()
+  const { currency, toCurrency } = useCurrency()
   const { data, error } = useSWR<UnwrapFunc<typeof getStokenRewards>, Error>(
     SWRCachePath.getStokenRewards(`${sTokenId}`),
     () => whenDefinedAll([nonConnectedWeb3, sTokenId], ([client, sTokenId]) => getStokenRewards(client, sTokenId)),
     { revalidateOnFocus: false, focusThrottleInterval: 0 }
   )
-  return { rewards: data, error }
+  const withdrawableReward = whenDefined(data, pos => toCurrency(toNaturalNumber(pos.withdrawableReward)))
+  return { rewards: data, error, currency, withdrawableReward }
 }
 
 export const useApprove = () => {

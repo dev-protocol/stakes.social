@@ -120,12 +120,20 @@ export const useDetectSTokens = () => {
   return { sTokens: [2, 4, 6] }
 }
 
+export const usePositionsOfOwner = () => {
+  return { positions: [2, 4, 6] }
+}
+
 export const useGetSTokenPositions = () => {
-  return { positions: { amount: toBigNumber(1000).toString() } }
+  return { positions: { amount: toBigNumber(1000).toString() }, currency: 'DEV', amount: toBigNumber(1000) }
 }
 
 export const useGetStokenRewards = () => {
-  return { rewards: { entireReward: toBigNumber(1000).toString() } }
+  return {
+    rewards: { entireReward: toBigNumber(1000).toString() },
+    currency: 'DEV',
+    withdrawableReward: toBigNumber(1000)
+  }
 }
 
 export const useApprove = () => {

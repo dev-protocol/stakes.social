@@ -1,7 +1,7 @@
 import React, { useCallback, useState, useMemo, ChangeEvent, useEffect } from 'react'
 import styled from 'styled-components'
 import { useProvider } from 'src/fixtures/wallet/hooks'
-import { getMyStakingAmount } from 'src/fixtures/dev-kit/client'
+import { getStokenPositions } from 'src/fixtures/dev-kit/client'
 import { useGetEthPrice } from 'src/fixtures/uniswap/hooks'
 import { useGetEstimateGas4WithdrawStakingAmount, useWithdrawByPosition } from 'src/fixtures/dev-kit/hooks'
 import { toAmountNumber, toNaturalNumber, whenDefinedAll } from 'src/fixtures/utility'
@@ -35,7 +35,7 @@ const SubtitleContianer = styled.div`
 
 export const Withdraw = ({ className, title, propertyAddress, onChange: onChangeAmount, isDisplayFee }: Props) => {
   const [withdrawAmount, setWithdrawAmount] = useState<string>('')
-  const { web3, accountAddress } = useProvider()
+  const { web3 } = useProvider()
   const { withdrawByPosition } = useWithdrawByPosition()
   const { estimateGas } = useGetEstimateGas4WithdrawStakingAmount(propertyAddress, withdrawAmount || '0')
   const { data: ethPrice } = useGetEthPrice()
@@ -45,10 +45,10 @@ export const Withdraw = ({ className, title, propertyAddress, onChange: onChange
     () => whenDefinedAll([estimateGas, ethPrice], ([gas, eth]) => gas.multipliedBy(eth)),
     [estimateGas, ethPrice]
   )
-  const onClickMax = () =>
-    whenDefinedAll([web3, accountAddress], ([libWeb3, account]) =>
-      getMyStakingAmount(libWeb3, propertyAddress, account)
-        .then(async x => toNaturalNumber(x))
+  const onClickMax = (sTokenId: string) =>
+    whenDefinedAll([web3], ([libWeb3]) =>
+      getStokenPositions(libWeb3, Number(sTokenId))
+        .then(async x => toNaturalNumber(x?.amount))
         .then(x => setWithdrawAmount(x.toFixed()))
     )
   const onChange = (event: ChangeEvent<HTMLInputElement>) => {

@@ -11,7 +11,7 @@ import { useProvider } from 'src/fixtures/wallet/hooks'
 type Props = SearchProps &
   React.RefAttributes<Input> & {
     withdraw: (sTokenId: string) => void
-    onClickMax?: () => void
+    onClickMax?: (sTokenId: string) => void
     propertyAddress: string
   }
 
@@ -90,25 +90,24 @@ export const WithdrawTransactForm = ({
   const { accountAddress } = useProvider()
   const { sTokens } = useDetectSTokens(propertyAddress, accountAddress)
 
-  const [selectedSTokenId, setSelectedSTokenId] = useState<number>()
   const [radioValue, setRadioValue] = useState(0)
 
   const handleSearch = useCallback(() => {
-    if (typeof selectedSTokenId === 'undefined') {
+    if (typeof radioValue === 'undefined') {
       message.warn({ content: 'No position selected', key: 'StakeButton' })
     } else {
-      withdraw(`${selectedSTokenId}`)
+      withdraw(`${radioValue}`)
     }
-  }, [selectedSTokenId, withdraw])
+  }, [radioValue, withdraw])
 
   const suffix = useMemo(
     () => (
       <>
         {_suffix}
-        {onClickMax ? <Max onClick={onClickMax} /> : undefined}
+        {onClickMax ? <Max onClick={() => onClickMax(`${radioValue}`)} /> : undefined}
       </>
     ),
-    [_suffix, onClickMax]
+    [_suffix, onClickMax, radioValue]
   )
   const OnlyButton = useMemo(
     () =>
@@ -126,7 +125,6 @@ export const WithdrawTransactForm = ({
 
   const handleChangeRadio = (event: RadioChangeEvent) => {
     setRadioValue(event.target.value)
-    setSelectedSTokenId(sTokens?.[event.target.value] || undefined)
   }
 
   return (
@@ -134,7 +132,7 @@ export const WithdrawTransactForm = ({
       <Radio.Group onChange={handleChangeRadio} value={radioValue} style={{ marginBottom: '12px' }}>
         <Space direction="vertical">
           {sTokens?.map((stoken, idx) => (
-            <Radio value={idx} key={idx}>
+            <Radio value={stoken} key={idx}>
               <PositionText sTokenId={stoken} />
             </Radio>
           ))}

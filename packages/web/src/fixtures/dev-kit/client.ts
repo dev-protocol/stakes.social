@@ -358,6 +358,15 @@ export const waitForCreateMetrics = async (web3: Web3, propertyAddress: string):
   })
 }
 
+export const positionsOfOwner = async (web3: Web3, accountAddress: string) => {
+  const client = newClient(web3)
+  if (client) {
+    const TokenIdList = await client.sTokens(addresses.eth.main.sTokens).positionsOfOwner(accountAddress)
+    return TokenIdList
+  }
+  return undefined
+}
+
 export const detectStokens = async (web3: Web3, propertyAddress: string, accountAddress: string) => {
   const client = newClient(web3)
   if (client) {

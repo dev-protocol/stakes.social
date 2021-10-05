@@ -3,12 +3,12 @@ export const SWRCachePath = {
     `propertyAddresses/${user}${propertyAddress}/getTotalRewardsAmount`,
   getTotalStakingAmount: (propertyAddress: string, user?: string) =>
     `propertyAddresses/${user}${propertyAddress}/getTotalStakingAmount`,
-  getMyHolderAmount: (propertyAddress: string, user?: string) =>
+  getMyHolderAmount: (propertyAddress?: string, user?: string) =>
     `propertyAddresses/${user}${propertyAddress}/getMyHolderAmount`,
   getTreasuryAmount: (propertyAddress: string) => `propertyAddresses/${propertyAddress}/getTreasuryAmount`,
-  getMyStakingRewardAmount: (propertyAddress: string, user?: string) =>
+  getMyStakingRewardAmount: (propertyAddress?: string, user?: string) =>
     `propertyAddresses/${user}${propertyAddress}/getMyStakingRewardAmount`,
-  getMyStakingAmount: (propertyAddress: string, user?: string) =>
+  getMyStakingAmount: (propertyAddress?: string, user?: string) =>
     `propertyAddresses/${user}${propertyAddress}/getMyStakingAmount`,
   getTotalStakingAmountOnProtocol: (user?: string) => `getTotalStakingAmountOnProtocol/${user}`,
   getEstimateGas4WithdrawHolderAmount: (propertyAddress: string, user?: string) =>
@@ -34,6 +34,7 @@ export const SWRCachePath = {
     `propertyAddresses/${user}${propertyAddress}/balanceOf`,
   detectStokens: (propertyAddress?: string, user?: string) =>
     `propertyAddresses/${user}${propertyAddress}/detectStokens`,
+  positionsOfOwner: (user?: string) => `user/${user}/positionsOfOwner`,
   getStokenPositions: (sTokenId?: string) => `sTokenId/${sTokenId}/getStokenPositions`,
   getStokenRewards: (sTokenId?: string) => `sTokenId/${sTokenId}/getStokenRewards`,
   approve: (propertyAddress?: string, user?: string) => `propertyAddresses/${user}${propertyAddress}/approve`,

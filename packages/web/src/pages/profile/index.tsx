@@ -16,6 +16,7 @@ import { blueGradient } from 'src/styles/gradient'
 import { boxShahowWithOnHover } from 'src/styles/boxShahow'
 import { useGetAccount } from 'src/fixtures/dev-for-apps/hooks'
 import { WalletSettings } from 'src/components/organisms/WalletSettings'
+import { YourPositions } from 'src/components/_pages/portfolio/YourPositions'
 
 const PortfolioHeader = styled.div`
   display: grid;
@@ -110,6 +111,8 @@ const Portfolio = () => {
         </PortfolioHeader>
         <Statistics accountAddress={accountAddress} />
         <Divider type="horizontal" />
+        <Heading>Your sTokens positions</Heading>
+        <YourPositions accountAddress={accountAddress} />
         <Heading>Your Stakes</Heading>
         <YourStakes accountAddress={accountAddress} />
         <Divider type="horizontal" />

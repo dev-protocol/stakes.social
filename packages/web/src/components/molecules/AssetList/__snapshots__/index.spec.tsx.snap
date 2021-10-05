@@ -86,7 +86,14 @@ exports[`AssetList Snapshot 1`] = `
         <div
           class="sc-hzc567-3 sc-hzc567-7 Fztz jpgsrs"
         >
-          
+          <button
+            class="ant-btn sc-1ho13tb-0 cpPLtK"
+            type="button"
+          >
+            <span>
+              Stake
+            </span>
+          </button>
           
           
         </div>
@@ -171,7 +178,14 @@ exports[`AssetList Snapshot 1`] = `
         <div
           class="sc-hzc567-3 sc-hzc567-7 Fztz jpgsrs"
         >
-          
+          <button
+            class="ant-btn sc-1ho13tb-0 cpPLtK"
+            type="button"
+          >
+            <span>
+              Stake
+            </span>
+          </button>
           
           
         </div>
@@ -256,7 +270,14 @@ exports[`AssetList Snapshot 1`] = `
         <div
           class="sc-hzc567-3 sc-hzc567-7 Fztz jpgsrs"
         >
-          
+          <button
+            class="ant-btn sc-1ho13tb-0 cpPLtK"
+            type="button"
+          >
+            <span>
+              Stake
+            </span>
+          </button>
           
           
         </div>
