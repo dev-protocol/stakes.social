@@ -19,7 +19,7 @@ describe(`${CancelStaking.name}`, () => {
     expect(tree).toMatchSnapshot()
   })
   test('cancel staking handler', async () => {
-    ;(useProvider as jest.Mock).mockImplementation(() => ({ accountAddress: '', web3: {} }))
+    ;(useProvider as jest.Mock).mockImplementation(() => ({ accountAddress: '', ethersProvider: {} }))
     ;(getMyStakingAmount as jest.Mock).mockImplementation(() => Promise.resolve('10'))
     const { getByText } = render(<CancelStaking propertyAddress="propertyAddress" />)
     message.error = jest.fn(() => {}) as any
@@ -31,7 +31,7 @@ describe(`${CancelStaking.name}`, () => {
     expect((message.error as jest.Mock).mock.calls.length).toBe(0)
   })
   test('cancel staking handler with amount is undefined', async () => {
-    ;(useProvider as jest.Mock).mockImplementation(() => ({ accountAddress: '', web3: {} }))
+    ;(useProvider as jest.Mock).mockImplementation(() => ({ accountAddress: '', ethersProvider: {} }))
     ;(getMyStakingAmount as jest.Mock).mockImplementation(() => Promise.resolve())
     const { getByText } = render(<CancelStaking propertyAddress="propertyAddress" />)
     message.error = jest.fn(() => {}) as any

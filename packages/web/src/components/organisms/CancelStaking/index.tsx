@@ -13,10 +13,10 @@ interface Props {
 
 export const CancelStaking = ({ className, propertyAddress }: Props) => {
   const { withdrawStaking } = useWithdrawStaking()
-  const { web3, accountAddress } = useProvider()
+  const { ethersProvider, accountAddress } = useProvider()
 
   const handleCancelStaking = useCallback(() => {
-    whenDefinedAll([web3, accountAddress], ([x, account]) => {
+    whenDefinedAll([ethersProvider, accountAddress], ([x, account]) => {
       getMyStakingAmount(x, propertyAddress, account).then(amount => {
         if (amount) {
           withdrawStaking(propertyAddress, toBigNumber(amount))
@@ -25,7 +25,7 @@ export const CancelStaking = ({ className, propertyAddress }: Props) => {
         }
       })
     })
-  }, [propertyAddress, withdrawStaking, web3, accountAddress])
+  }, [propertyAddress, withdrawStaking, ethersProvider, accountAddress])
 
   return <CancelForm className={className} onClickCancel={handleCancelStaking} />
 }

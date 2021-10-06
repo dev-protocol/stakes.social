@@ -43,7 +43,7 @@ describe(`${Stake.name}`, () => {
 
   test('react hooks: input amount click DEV button and click stake button', async () => {
     ;(balanceOf as jest.Mock).mockImplementation(() => Promise.resolve(new BigNumber('1000000')))
-    ;(useProvider as jest.Mock).mockImplementation(() => ({ accountAddress: '', web3: {} }))
+    ;(useProvider as jest.Mock).mockImplementation(() => ({ accountAddress: '', ethersProvider: {} }))
     ;(getContractAddress as jest.Mock).mockImplementation(() => Promise.resolve('0x0'))
     message.warn = jest.fn(() => {}) as any
 
@@ -67,7 +67,7 @@ describe(`${Stake.name}`, () => {
   // TODO(@k3nt0w)
   // test('react hooks: click DEV button(amount is zero) and click stake button', async () => {
   //   ;(balanceOf as jest.Mock).mockImplementation(() => Promise.resolve(new BigNumber('')))
-  //   ;(useProvider as jest.Mock).mockImplementation(() => ({ accountAddress: '', web3: {} }))
+  //   ;(useProvider as jest.Mock).mockImplementation(() => ({ accountAddress: '', ethersProvider: {} }))
   //   message.warn = jest.fn(() => {}) as any
 
   //   const { container, getByText } = render(
