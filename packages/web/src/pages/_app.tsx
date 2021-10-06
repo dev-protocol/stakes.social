@@ -17,6 +17,7 @@ import { getAccountAddress } from 'src/fixtures/wallet/utility'
 import * as gtag from 'src/lib/gtag'
 import { Router } from 'next/router'
 import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client'
+import { providers } from 'ethers'
 
 const cache = new InMemoryCache()
 const client = new ApolloClient({
@@ -25,7 +26,7 @@ const client = new ApolloClient({
 })
 
 class NextApp extends App<AppInitialProps & WithApolloProps<{}>> {
-  state = { isCurrencyDEV: true, web3: undefined, web3Modal: undefined }
+  state = { isCurrencyDEV: true, web3: undefined, ethersProvider: undefined, web3Modal: undefined }
 
   getProviderOptions = () => {
     const walletLink = new WalletLink({
@@ -93,8 +94,10 @@ class NextApp extends App<AppInitialProps & WithApolloProps<{}>> {
     }
 
     const web3: any = new Web3(provider)
-    this.setState({ web3 })
-    return web3
+    const ethersProvider = new providers.Web3Provider(provider)
+    console.log({ web3, ethersProvider })
+    this.setState({ web3, ethersProvider })
+    return [web3, ethersProvider]
   }
 
   componentDidMount = () => {
@@ -123,8 +126,8 @@ class NextApp extends App<AppInitialProps & WithApolloProps<{}>> {
     Router.events.on('routeChangeComplete', url => gtag.pageview(url))
   }
 
-  setWeb3 = (web3: Web3) => {
-    this.setState({ web3 })
+  setProviders = (web3: Web3, provider: providers.BaseProvider) => {
+    this.setState({ web3, ethersProvider: provider })
   }
 
   toggleCurrency = () => {
@@ -138,7 +141,12 @@ class NextApp extends App<AppInitialProps & WithApolloProps<{}>> {
     return (
       <ApolloProvider client={client}>
         <WalletContext.Provider
-          value={{ web3: this.state.web3, setWeb3: this.setWeb3, web3Modal: this.state.web3Modal }}
+          value={{
+            web3: this.state.web3,
+            ethersProvider: this.state.ethersProvider,
+            setProviders: this.setProviders,
+            web3Modal: this.state.web3Modal
+          }}
         >
           <SettingContext.Provider
             value={{ isCurrencyDEV: this.state.isCurrencyDEV, toggleCurrency: this.toggleCurrency }}

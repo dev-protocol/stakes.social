@@ -4,6 +4,7 @@ import { AbiItem } from 'web3-utils'
 import { message } from 'antd'
 import { WEB3_PROVIDER_ENDPOINT } from 'src/fixtures/wallet/constants'
 import { AbstractProvider, provider } from 'web3-core'
+import { providers } from 'ethers'
 
 const cache: WeakMap<NonNullable<Web3>, string> = new WeakMap()
 
@@ -14,7 +15,7 @@ type signCache = {
 
 const signCacheContainer: Map<string, signCache> = new Map()
 
-export const connectWallet = async (setWeb3Handler: Function, web3Modal?: Web3Modal) => {
+export const connectWallet = async (setProvidersHandler: Function, web3Modal?: Web3Modal) => {
   const provider = await web3Modal?.connect().catch(() => {
     return undefined
   })
@@ -23,8 +24,9 @@ export const connectWallet = async (setWeb3Handler: Function, web3Modal?: Web3Mo
   }
 
   const web3: Web3 = new Web3(provider)
-  if (web3) {
-    setWeb3Handler(web3)
+  const ethersProvider = new providers.Web3Provider(provider)
+  if (web3 && ethersProvider) {
+    setProvidersHandler(web3, ethersProvider)
     const account = await web3.eth
       .getAccounts()
       .then((accounts: Array<String>) => {
@@ -42,9 +44,9 @@ export const connectWallet = async (setWeb3Handler: Function, web3Modal?: Web3Mo
   return false
 }
 
-export const disconnectWallet = (setWeb3Handler: Function, web3Modal?: Web3Modal) => {
+export const disconnectWallet = (setProvidersHandler: Function, web3Modal?: Web3Modal) => {
   web3Modal?.clearCachedProvider()
-  setWeb3Handler(undefined)
+  setProvidersHandler(undefined)
 }
 
 export const getAccountAddress = async (web3?: Web3) => {

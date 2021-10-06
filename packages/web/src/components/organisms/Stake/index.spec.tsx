@@ -23,7 +23,7 @@ jest.mock('@dev/graphql')
 describe(`${Stake.name}`, () => {
   test('Snapshot', () => {
     const component = render(
-      <WalletContext.Provider value={{ web3: new Web3(), setWeb3: () => {} }}>
+      <WalletContext.Provider value={{ web3: new Web3(), setProviders: () => {} }}>
         <Stake propertyAddress="propertyAddress" />
       </WalletContext.Provider>
     )
@@ -33,7 +33,7 @@ describe(`${Stake.name}`, () => {
 
   test('Snapshot with title', () => {
     const component = render(
-      <WalletContext.Provider value={{ web3: new Web3(), setWeb3: () => {} }}>
+      <WalletContext.Provider value={{ web3: new Web3(), setProviders: () => {} }}>
         <Stake propertyAddress="propertyAddress" title="Stake" />
       </WalletContext.Provider>
     )
@@ -48,7 +48,7 @@ describe(`${Stake.name}`, () => {
     message.warn = jest.fn(() => {}) as any
 
     const { container, getByText } = render(
-      <WalletContext.Provider value={{ web3: new Web3(), setWeb3: () => {} }}>
+      <WalletContext.Provider value={{ web3: new Web3(), setProviders: () => {} }}>
         <Stake propertyAddress="propertyAddress" />
       </WalletContext.Provider>
     )
@@ -71,7 +71,7 @@ describe(`${Stake.name}`, () => {
   //   message.warn = jest.fn(() => {}) as any
 
   //   const { container, getByText } = render(
-  //     <WalletContext.Provider value={{ web3: new Web3(), setWeb3: () => {} }}>
+  //     <WalletContext.Provider value={{ web3: new Web3(), setProviders: () => {} }}>
   //       <Stake propertyAddress="propertyAddress" />
   //     </WalletContext.Provider>
   //   )

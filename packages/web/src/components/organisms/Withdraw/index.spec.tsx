@@ -18,7 +18,7 @@ jest.mock('@dev/graphql')
 describe(`${Withdraw.name}`, () => {
   test('Snapshot', () => {
     const component = render(
-      <WalletContext.Provider value={{ web3: new Web3(), setWeb3: () => {} }}>
+      <WalletContext.Provider value={{ web3: new Web3(), setProviders: () => {} }}>
         <Withdraw propertyAddress="propertyAddress" />
       </WalletContext.Provider>
     )
@@ -30,7 +30,7 @@ describe(`${Withdraw.name}`, () => {
     message.warn = jest.fn(() => {}) as any
 
     const { getByText } = render(
-      <WalletContext.Provider value={{ web3: new Web3(), setWeb3: () => {} }}>
+      <WalletContext.Provider value={{ web3: new Web3(), setProviders: () => {} }}>
         <Withdraw propertyAddress="propertyAddress" />
       </WalletContext.Provider>
     )

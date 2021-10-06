@@ -1,3 +1,4 @@
+import { ethers } from 'ethers'
 import Web3 from 'web3'
 
 export const useConnectWallet = jest.fn(() => {
@@ -5,5 +6,11 @@ export const useConnectWallet = jest.fn(() => {
 })
 
 export const useProvider = jest.fn(() => {
-  return { web3: new Web3(), nonConnectedWeb3: new Web3(), accountAddress: '0x' }
+  return {
+    web3: new Web3(),
+    ethersProvider: ethers.getDefaultProvider(),
+    nonConnectedWeb3: new Web3(),
+    nonConnectedEthersProvider: ethers.getDefaultProvider(),
+    accountAddress: '0x'
+  }
 })
