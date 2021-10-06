@@ -1,8 +1,7 @@
 import Web3 from 'web3'
 import { EventData } from 'web3-eth-contract'
-import { contractFactory, DevkitContract } from '@devprotocol/dev-kit'
+import { contractFactory, DevkitContract, client as devClient, utils, addresses } from '@devprotocol/dev-kit'
 import { getContractAddress } from './get-contract-address'
-import { client as devClient, utils } from '@devprotocol/dev-kit'
 import BigNumber from 'bignumber.js'
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { PropertyFactoryContract } from '@devprotocol/dev-kit'
@@ -357,4 +356,100 @@ export const waitForCreateMetrics = async (web3: Web3, propertyAddress: string):
       .then(res => resolve(res.returnValues._metrics as string))
       .catch(reject)
   })
+}
+
+export const positionsOfOwner = async (web3: Web3, accountAddress: string) => {
+  const client = newClient(web3)
+  if (client) {
+    const TokenIdList = await client.sTokens(addresses.eth.main.sTokens).positionsOfOwner(accountAddress)
+    return TokenIdList
+  }
+  return undefined
+}
+
+export const detectStokens = async (web3: Web3, propertyAddress: string, accountAddress: string) => {
+  const client = newClient(web3)
+  if (client) {
+    const TokenIdList = await devClient.createDetectSTokens(client.sTokens(addresses.eth.main.sTokens))(
+      propertyAddress,
+      accountAddress
+    )
+    return TokenIdList
+  }
+  return undefined
+}
+
+export const getStokenPositions = async (web3: Web3, sTokenID: number) => {
+  const client = newClient(web3)
+  if (client) {
+    return client.sTokens(addresses.eth.main.sTokens).positions(sTokenID)
+  }
+  return undefined
+}
+
+export const getStokenRewards = async (web3: Web3, sTokenId: number) => {
+  const client = newClient(web3)
+  if (client) {
+    return client.sTokens(addresses.eth.main.sTokens).rewards(sTokenId)
+  }
+  return undefined
+}
+
+export const approve = async (web3: Web3, address: string, amount: string) => {
+  const client = newClient(web3)
+  if (client) {
+    return client.dev(await getContractAddress(client, 'token')).approve(address, amount)
+  }
+  return undefined
+}
+
+export const depositToProperty = async (web3: Web3, propertyAddress: string, amount: string) => {
+  const client = newClient(web3)
+  if (client) {
+    return client.lockup(await getContractAddress(client, 'lockup')).depositToProperty(propertyAddress, amount)
+  }
+  return undefined
+}
+
+export const depositToPosition = async (web3: Web3, sTokenId: string, amount: string) => {
+  const client = newClient(web3)
+  if (client) {
+    return client.lockup(await getContractAddress(client, 'lockup')).depositToPosition(sTokenId, amount)
+  }
+  return undefined
+}
+
+export const withdrawByPosition = async (web3: Web3, sTokenId: string, amount: string) => {
+  const client = newClient(web3)
+  if (client) {
+    return client.lockup(await getContractAddress(client, 'lockup')).withdrawByPosition(sTokenId, amount)
+  }
+  return undefined
+}
+
+export const migrateToSTokens = async (web3: Web3, propertyAddress: string) => {
+  const client = newClient(web3)
+  if (client) {
+    return client.lockup(await getContractAddress(client, 'lockup')).migrateToSTokens(propertyAddress)
+  }
+  return undefined
+}
+
+export const getTokenURI = async (web3: Web3, sTokenId: number) => {
+  const client = newClient(web3)
+  if (client) {
+    return client.sTokens(addresses.eth.main.sTokens).tokenURI(sTokenId)
+  }
+  return undefined
+}
+
+export const getStokenSymbol = async (web3: Web3, sTokenId: number) => {
+  const client = newClient(web3)
+  if (client) {
+    return client
+      .sTokens(addresses.eth.main.sTokens)
+      .positions(sTokenId)
+      .then(res => client.property(res.property).symbol)
+  }
+  return undefined
 }

@@ -6,8 +6,8 @@ import {
 } from 'src/fixtures/dev-kit/hooks'
 import { toBigNumber, whenDefined, whenDefinedAll } from 'src/fixtures/utility'
 import { useGetEthPrice } from 'src/fixtures/uniswap/hooks'
-import { FormContainer } from 'src/components/molecules/TransactForm/FormContainer'
-import { Estimated } from 'src/components/molecules/TransactForm/Estimated'
+import { FormContainer } from 'src/components/molecules/WithdrawTransactForm/FormContainer'
+import { Estimated } from 'src/components/molecules/WithdrawTransactForm/Estimated'
 import { EstimatedGasFeeCard } from 'src/components/molecules/EstimatedGasFeeCard'
 import { Withdraw } from '.'
 

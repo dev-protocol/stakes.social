@@ -16,6 +16,7 @@ interface Props {
   enableWithdrawHoldersReward?: boolean
   isPool?: boolean
   total: number
+  positions?: number[]
 }
 
 interface ModalStates {
@@ -49,7 +50,8 @@ export const AssetList = ({
   enableWithdrawHoldersReward,
   loading = false,
   isPool,
-  total
+  total,
+  positions
 }: Props) => {
   const [page, setPage] = useState<number>(1)
   const [modalStates, setModalStates] = useState<ModalStates>({ visible: false })
@@ -62,25 +64,31 @@ export const AssetList = ({
     },
     [setPage, onPagination]
   )
-  const showModal = (type: 'stake' | 'withdraw' | 'holders') => (propertyAddress: string) => {
-    const contents = <TransactModalContents propertyAddress={propertyAddress} type={type} />
+  const showModal = (type: 'stake' | 'withdraw' | 'holders') => (propertyAddress?: string) => {
+    const contents = propertyAddress ? (
+      <TransactModalContents propertyAddress={propertyAddress} type={type} />
+    ) : (
+      <p>Property address not found</p>
+    )
     const title = type === 'stake' ? 'Stake' : 'Withdraw'
     setModalStates({ visible: true, contents, title })
   }
   const closeModal = () => {
     setModalStates({ ...modalStates, visible: false })
   }
+  const propertiesOrPositions = positions?.length ? positions : properties?.length ? properties : undefined
 
   return loading ? (
     <Skeleton active></Skeleton>
   ) : (
     <Wrap className={className}>
-      {properties && properties.length > 0 ? (
-        properties.map(item => (
+      {propertiesOrPositions?.length ? (
+        propertiesOrPositions.map((item, i) => (
           <Item
             isPool={isPool}
-            propertyAddress={item}
-            key={item}
+            propertyAddress={typeof item === 'string' ? item : undefined}
+            positionId={typeof item === 'number' ? item : undefined}
+            key={`${item}-${i}`}
             enableStake={enableStake}
             enableWithdrawStakersReward={enableWithdrawStakersReward}
             enableWithdrawHoldersReward={enableWithdrawHoldersReward}

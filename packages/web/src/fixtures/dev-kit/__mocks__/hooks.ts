@@ -115,3 +115,53 @@ export const usePropertySymbol = (propertyAddress?: string) => {
 export const useBalanceOfProperty = () => {
   return { balance: toBigNumber(1000) }
 }
+
+export const useDetectSTokens = () => {
+  return { sTokens: [2, 4, 6] }
+}
+
+export const usePositionsOfOwner = () => {
+  return { positions: [2, 4, 6] }
+}
+
+export const useGetSTokenPositions = () => {
+  return { positions: { amount: toBigNumber(1000).toString() }, currency: 'DEV', amount: toBigNumber(1000) }
+}
+
+export const useGetStokenRewards = () => {
+  return {
+    rewards: { entireReward: toBigNumber(1000).toString() },
+    currency: 'DEV',
+    withdrawableReward: toBigNumber(1000)
+  }
+}
+
+export const useApprove = () => {
+  return { approve: () => {} }
+}
+
+export const useDepositToProperty = () => {
+  return { depositToProperty: () => {} }
+}
+
+export const useDepositToPosition = () => {
+  return { depositToPosition: () => {} }
+}
+
+export const useWithdrawByPosition = () => {
+  return {
+    withdrawByPosition: jest.fn()
+  }
+}
+
+export const useMigrateToSTokens = () => {
+  return { migrateToSTokens: () => {} }
+}
+
+export const useGetTokenURI = () => {
+  return { tokenURI: {} }
+}
+
+export const useGetStokenSymbol = () => {
+  return { symbol: '' }
+}
