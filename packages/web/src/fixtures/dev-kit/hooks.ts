@@ -345,10 +345,10 @@ export const useGetEstimateGas4Stake = (propertyAddress: string, amount?: string
   const { data, error } = useSWR<BigNumber | undefined, Error>(
     SWRCachePath.getEstimateGas4Stake(propertyAddress, accountAddress, amount),
     () =>
-      whenDefinedAll([ethersProvider, accountAddress, amount], ([x, fromAddress, a]) => {
+      whenDefinedAll([ethersProvider, amount], ([x, a]) => {
         const stakeAmount = toAmountNumber(a)
         return stakeAmount.toNumber() >= 0
-          ? getEstimateGas4StakeDev(x, propertyAddress, stakeAmount.toFormat({ decimalSeparator: '' }), fromAddress)
+          ? getEstimateGas4StakeDev(x, propertyAddress, stakeAmount.toFormat({ decimalSeparator: '' }))
           : undefined
       }),
     { revalidateOnFocus: false, focusThrottleInterval: 0 }
@@ -530,8 +530,8 @@ export const useGetEstimateGas4CreateAndAuthenticate = (marketAddress: string) =
   const { data, error } = useSWR<BigNumber | undefined, Error>(
     SWRCachePath.getEstimateGas4CreateAndAuthenticate('name', 'symbol', marketAddress, accountAddress),
     () =>
-      whenDefinedAll([ethersProvider, accountAddress], ([x, fromAddress]) =>
-        getEstimateGas4CreateAndAuthenticate(x, 'name', 'symbol', marketAddress, ['a', 'b', 'c'], fromAddress)
+      whenDefinedAll([ethersProvider], ([x]) =>
+        getEstimateGas4CreateAndAuthenticate(x, 'name', 'symbol', marketAddress, ['a', 'b', 'c'])
       ),
     { revalidateOnFocus: false, focusThrottleInterval: 0 }
     // NOTE: If an error occurs, nothing is done. Because it only displays the estimated gas price.

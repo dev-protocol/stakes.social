@@ -2508,10 +2508,10 @@
     js-base64 "^3.7.2"
     ramda "^0.27.0"
 
-"@devprotocol/dev-kit@5.0.1":
-  version "5.0.1"
-  resolved "https://registry.yarnpkg.com/@devprotocol/dev-kit/-/dev-kit-5.0.1.tgz#b244354755449960d54c82990bf832a53e450926"
-  integrity sha512-FrGd+JJZ7QVsemDY1x12DLEVUrd7uCMirVZrC76tlBpTuKR7awq1YkyV0IsSQ2cnJtWXGdsIkKFPdNomfXaElw==
+"@devprotocol/dev-kit@5.0.3":
+  version "5.0.3"
+  resolved "https://registry.yarnpkg.com/@devprotocol/dev-kit/-/dev-kit-5.0.3.tgz#815b25262373374a812e4b59bb97ec268b24a505"
+  integrity sha512-JNk4oa2s52vwf07UP0WRlwheL1H+P1isJzt+Oxc4c2vmLUfj3okaRwP1MLkGW+Jp8sXOPo7C9yG3NDio7pLAaw==
   dependencies:
     "@types/bent" "^7.3.1"
     async-ray "^3.2.0"
