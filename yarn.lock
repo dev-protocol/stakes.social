@@ -2497,14 +2497,15 @@
   resolved "https://registry.yarnpkg.com/@ctrl/tinycolor/-/tinycolor-3.4.0.tgz#c3c5ae543c897caa9c2a68630bed355be5f9990f"
   integrity sha512-JZButFdZ1+/xAfpguQHoabIXkcqRRKpMrWKBkpEZZyxfY9C1DpADFB8PEqGSTeFr135SaTRfKqGKx5xSCLI7ZQ==
 
-"@devprotocol/dev-kit@4.7.0":
-  version "4.7.0"
-  resolved "https://registry.yarnpkg.com/@devprotocol/dev-kit/-/dev-kit-4.7.0.tgz#f939f9c91a978a74e509d7c4b3d3be4c8a590b11"
-  integrity sha512-EgJP0xnVq/lm8Xd5POhOGZUbeuzYqhc+yeyZzGcTIWIDpTq1dqnklae5Xe0UOVdWsCwqrp87B/iE1G3bONkwkA==
+"@devprotocol/dev-kit@5.0.0":
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/@devprotocol/dev-kit/-/dev-kit-5.0.0.tgz#992a085d4f52790b7cc94fb4a2b0ffa1b7a2cc29"
+  integrity sha512-lluTvpvFjVjxvL3b/YUnKw5zMOTXtourEB8qqf77I2PFiXBIiBDDiPGIYz+r/u5bQVrQaLFrRYJCWiAdlAZbUw==
   dependencies:
     "@types/bent" "^7.3.1"
     async-ray "^3.2.0"
     bent "^7.3.12"
+    bignumber.js "9.0.1"
     js-base64 "^3.7.2"
     ramda "^0.27.0"
 
