@@ -4,10 +4,10 @@ exports[`WithdrawalForHolders Snapshot 1`] = `
 <body>
   <div>
     <div
-      class="sc-1edrou6-0 ehtZMB"
+      class="sc-gKseQn iSXeF"
     >
       <div
-        class="sc-bygjqz-1 iIKDAL"
+        class="sc-hKgJUU klRzlg"
         style="opacity: 1;"
       >
         <div
@@ -226,7 +226,7 @@ exports[`WithdrawalForHolders Snapshot 1`] = `
           </div>
         </div>
         <button
-          class="ant-btn ant-btn-lg sc-1ho13tb-0 sc-bygjqz-2 cpPLtK dKnxTk"
+          class="ant-btn ant-btn-lg sc-gsTEea sc-eCstlR eitsRE jbpRNn"
           type="button"
         >
           <span>
@@ -235,7 +235,7 @@ exports[`WithdrawalForHolders Snapshot 1`] = `
         </button>
       </div>
       <div
-        class="ant-card ant-card-bordered sc-i0voux-0 iFypgM"
+        class="ant-card ant-card-bordered sc-iBPTik cuTYQr"
       >
         <div
           class="ant-card-head"
@@ -260,7 +260,7 @@ exports[`WithdrawalForHolders Snapshot 1`] = `
         </div>
       </div>
       <div
-        class="ant-card ant-card-bordered ant-card-small sc-18v7ikh-0 dfjrvZ"
+        class="ant-card ant-card-bordered ant-card-small sc-fubCzh eogjju"
       >
         <div
           class="ant-card-head"
@@ -282,7 +282,7 @@ exports[`WithdrawalForHolders Snapshot 1`] = `
             0.000011
              ETH
             <span
-              class="sc-18v7ikh-1 kGdgpU"
+              class="sc-pGacB iNjjgX"
             >
                $0.00
             </span>

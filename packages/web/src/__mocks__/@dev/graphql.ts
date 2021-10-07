@@ -1,3 +1,4 @@
+import { NetworkStatus } from '@apollo/client'
 import {
   useListPropertyQuery as IUseListPropertyQuery,
   useGetPropertyAuthenticationQuery as IUseGetPropertyAuthenticationQuery,
@@ -16,7 +17,18 @@ export const useTotalStakedAccountLazyQuery = (): Partial<ReturnType<typeof IUse
           sum_values: 9000
         }
       ]
-    }
+    },
+    client: jest.fn()(),
+    subscribeToMore: jest.fn(),
+    updateQuery: jest.fn(),
+    refetch: jest.fn(),
+    fetchMore: jest.fn(),
+    networkStatus: NetworkStatus.ready,
+    variables: { account_address: '0xdummy' },
+    loading: false,
+    startPolling: () => 0,
+    stopPolling: () => 0,
+    called: true
   }
 ]
 

@@ -4,7 +4,7 @@ exports[`InvitationRequestForm Snapshot 1`] = `
 <body>
   <div>
     <div
-      class="sc-dhltmz-0 hcMMNa"
+      class="sc-eCstlR gfUpoL"
     >
       <form
         class="ant-form ant-form-horizontal"
@@ -12,17 +12,17 @@ exports[`InvitationRequestForm Snapshot 1`] = `
         style="padding: 0.75em;"
       >
         <div
-          class="sc-dhltmz-1 dQwJSK"
+          class="sc-jSgvzq jXyEcW"
         >
           <h2>
             Application
           </h2>
         </div>
         <div
-          class="sc-dhltmz-2 fJIULQ"
+          class="sc-gKseQn cuAvsf"
         >
           <div
-            class="sc-dhltmz-3 hoBtZT"
+            class="sc-iBPTik cZPqut"
           >
             Your name:
           </div>
@@ -39,7 +39,7 @@ exports[`InvitationRequestForm Snapshot 1`] = `
                   class="ant-form-item-control-input-content"
                 >
                   <div
-                    class="ant-row ant-form-item sc-8mjbdn-0 hPRCJP"
+                    class="ant-row ant-form-item sc-bdfBQB bAjXsM"
                   >
                     <div
                       class="ant-col ant-form-item-control"
@@ -51,7 +51,7 @@ exports[`InvitationRequestForm Snapshot 1`] = `
                           class="ant-form-item-control-input-content"
                         >
                           <div
-                            class="sc-8mjbdn-1 dMa-DXs"
+                            class="sc-gsTEea cCQOYu"
                           >
                             <span
                               aria-label="font-colors"
@@ -75,7 +75,7 @@ exports[`InvitationRequestForm Snapshot 1`] = `
                             </span>
                           </div>
                           <input
-                            class="sc-8mjbdn-3 hShyKb"
+                            class="sc-hKgJUU ekvaUE"
                             id="basic_name"
                             placeholder="name"
                             value=""
@@ -90,10 +90,10 @@ exports[`InvitationRequestForm Snapshot 1`] = `
           </div>
         </div>
         <div
-          class="sc-dhltmz-2 fJIULQ"
+          class="sc-gKseQn cuAvsf"
         >
           <div
-            class="sc-dhltmz-3 hoBtZT"
+            class="sc-iBPTik cZPqut"
           >
             Your email:
           </div>
@@ -110,7 +110,7 @@ exports[`InvitationRequestForm Snapshot 1`] = `
                   class="ant-form-item-control-input-content"
                 >
                   <div
-                    class="ant-row ant-form-item sc-8mjbdn-0 hPRCJP"
+                    class="ant-row ant-form-item sc-bdfBQB bAjXsM"
                   >
                     <div
                       class="ant-col ant-form-item-control"
@@ -122,7 +122,7 @@ exports[`InvitationRequestForm Snapshot 1`] = `
                           class="ant-form-item-control-input-content"
                         >
                           <div
-                            class="sc-8mjbdn-1 dMa-DXs"
+                            class="sc-gsTEea cCQOYu"
                           >
                             <span
                               aria-label="mail"
@@ -146,7 +146,7 @@ exports[`InvitationRequestForm Snapshot 1`] = `
                             </span>
                           </div>
                           <input
-                            class="sc-8mjbdn-3 hShyKb"
+                            class="sc-hKgJUU ekvaUE"
                             id="basic_email"
                             placeholder="email"
                             value=""
@@ -161,10 +161,10 @@ exports[`InvitationRequestForm Snapshot 1`] = `
           </div>
         </div>
         <div
-          class="sc-dhltmz-2 fJIULQ"
+          class="sc-gKseQn cuAvsf"
         >
           <div
-            class="sc-dhltmz-3 hoBtZT"
+            class="sc-iBPTik cZPqut"
           >
             Project name:
           </div>
@@ -181,7 +181,7 @@ exports[`InvitationRequestForm Snapshot 1`] = `
                   class="ant-form-item-control-input-content"
                 >
                   <div
-                    class="ant-row ant-form-item sc-8mjbdn-0 hPRCJP"
+                    class="ant-row ant-form-item sc-bdfBQB bAjXsM"
                   >
                     <div
                       class="ant-col ant-form-item-control"
@@ -193,7 +193,7 @@ exports[`InvitationRequestForm Snapshot 1`] = `
                           class="ant-form-item-control-input-content"
                         >
                           <div
-                            class="sc-8mjbdn-1 dMa-DXs"
+                            class="sc-gsTEea cCQOYu"
                           >
                             <span
                               aria-label="code"
@@ -217,7 +217,7 @@ exports[`InvitationRequestForm Snapshot 1`] = `
                             </span>
                           </div>
                           <input
-                            class="sc-8mjbdn-3 hShyKb"
+                            class="sc-hKgJUU ekvaUE"
                             id="basic_asset"
                             placeholder="project (e.g., your/awesome-repos)"
                             value=""
@@ -232,10 +232,10 @@ exports[`InvitationRequestForm Snapshot 1`] = `
           </div>
         </div>
         <div
-          class="sc-dhltmz-2 fJIULQ"
+          class="sc-gKseQn cuAvsf"
         >
           <div
-            class="sc-dhltmz-3 hoBtZT"
+            class="sc-iBPTik cZPqut"
           >
             Description:
           </div>
@@ -252,7 +252,7 @@ exports[`InvitationRequestForm Snapshot 1`] = `
                   class="ant-form-item-control-input-content"
                 >
                   <textarea
-                    class="sc-dhltmz-6 cVOStx"
+                    class="sc-jrAFXE gnUzkR"
                     id="basic_useCase"
                     placeholder="Our project aims to..."
                     rows="4"
@@ -263,10 +263,10 @@ exports[`InvitationRequestForm Snapshot 1`] = `
           </div>
         </div>
         <div
-          class="sc-dhltmz-2 fJIULQ"
+          class="sc-gKseQn cuAvsf"
         >
           <div
-            class="sc-dhltmz-3 hoBtZT"
+            class="sc-iBPTik cZPqut"
           >
             Your role:
           </div>
@@ -283,7 +283,7 @@ exports[`InvitationRequestForm Snapshot 1`] = `
                   class="ant-form-item-control-input-content"
                 >
                   <div
-                    class="ant-row ant-form-item sc-8mjbdn-0 hPRCJP"
+                    class="ant-row ant-form-item sc-bdfBQB bAjXsM"
                   >
                     <div
                       class="ant-col ant-form-item-control"
@@ -295,7 +295,7 @@ exports[`InvitationRequestForm Snapshot 1`] = `
                           class="ant-form-item-control-input-content"
                         >
                           <div
-                            class="sc-8mjbdn-1 dMa-DXs"
+                            class="sc-gsTEea cCQOYu"
                           >
                             <span
                               aria-label="user"
@@ -319,7 +319,7 @@ exports[`InvitationRequestForm Snapshot 1`] = `
                             </span>
                           </div>
                           <input
-                            class="sc-8mjbdn-3 hShyKb"
+                            class="sc-hKgJUU ekvaUE"
                             id="basic_role"
                             placeholder="role"
                             value=""
@@ -334,13 +334,13 @@ exports[`InvitationRequestForm Snapshot 1`] = `
           </div>
         </div>
         <div
-          class="sc-dhltmz-2 fJIULQ"
+          class="sc-gKseQn cuAvsf"
         >
           <div
-            class="sc-dhltmz-3 hoBtZT"
+            class="sc-iBPTik cZPqut"
           >
             <span
-              class="sc-dhltmz-7 evNmGp"
+              class="sc-kEjbQP diZywz"
             >
               market
             </span>
@@ -359,7 +359,7 @@ exports[`InvitationRequestForm Snapshot 1`] = `
                   class="ant-form-item-control-input-content"
                 >
                   <div
-                    class="ant-row ant-form-item sc-8mjbdn-0 hPRCJP"
+                    class="ant-row ant-form-item sc-bdfBQB bAjXsM"
                   >
                     <div
                       class="ant-col ant-form-item-control"
@@ -371,7 +371,7 @@ exports[`InvitationRequestForm Snapshot 1`] = `
                           class="ant-form-item-control-input-content"
                         >
                           <div
-                            class="sc-8mjbdn-1 dMa-DXs"
+                            class="sc-gsTEea cCQOYu"
                           >
                             <span
                               aria-label="branches"
@@ -395,7 +395,7 @@ exports[`InvitationRequestForm Snapshot 1`] = `
                             </span>
                           </div>
                           <input
-                            class="sc-8mjbdn-3 hShyKb"
+                            class="sc-hKgJUU ekvaUE"
                             id="basic_url"
                             placeholder="url"
                             value=""
@@ -410,11 +410,11 @@ exports[`InvitationRequestForm Snapshot 1`] = `
           </div>
         </div>
         <div
-          class="sc-dhltmz-2 fJIULQ"
+          class="sc-gKseQn cuAvsf"
         >
           <div>
             <div
-              class="sc-dhltmz-3 hoBtZT"
+              class="sc-iBPTik cZPqut"
               style="margin-top: 0px; font-size: 1.1em;"
             >
               <a
@@ -442,7 +442,7 @@ exports[`InvitationRequestForm Snapshot 1`] = `
                   class="ant-form-item-control-input-content"
                 >
                   <div
-                    class="ant-row ant-form-item sc-8mjbdn-0 hPRCJP"
+                    class="ant-row ant-form-item sc-bdfBQB bAjXsM"
                   >
                     <div
                       class="ant-col ant-form-item-control"
@@ -454,7 +454,7 @@ exports[`InvitationRequestForm Snapshot 1`] = `
                           class="ant-form-item-control-input-content"
                         >
                           <div
-                            class="sc-8mjbdn-1 dMa-DXs"
+                            class="sc-gsTEea cCQOYu"
                           >
                             <span
                               aria-label="message"
@@ -478,7 +478,7 @@ exports[`InvitationRequestForm Snapshot 1`] = `
                             </span>
                           </div>
                           <input
-                            class="sc-8mjbdn-3 hShyKb"
+                            class="sc-hKgJUU ekvaUE"
                             id="basic_discord"
                             placeholder="discord name"
                             value=""
@@ -493,10 +493,10 @@ exports[`InvitationRequestForm Snapshot 1`] = `
           </div>
         </div>
         <div
-          class="sc-dhltmz-2 fJIULQ"
+          class="sc-gKseQn cuAvsf"
         >
           <div
-            class="sc-dhltmz-3 hoBtZT"
+            class="sc-iBPTik cZPqut"
           >
             Additional info:
           </div>
@@ -513,7 +513,7 @@ exports[`InvitationRequestForm Snapshot 1`] = `
                   class="ant-form-item-control-input-content"
                 >
                   <div
-                    class="ant-row ant-form-item sc-8mjbdn-0 hPRCJP"
+                    class="ant-row ant-form-item sc-bdfBQB bAjXsM"
                   >
                     <div
                       class="ant-col ant-form-item-control"
@@ -525,7 +525,7 @@ exports[`InvitationRequestForm Snapshot 1`] = `
                           class="ant-form-item-control-input-content"
                         >
                           <div
-                            class="sc-8mjbdn-1 dMa-DXs"
+                            class="sc-gsTEea cCQOYu"
                           >
                             <span
                               aria-label="notification"
@@ -549,7 +549,7 @@ exports[`InvitationRequestForm Snapshot 1`] = `
                             </span>
                           </div>
                           <input
-                            class="sc-8mjbdn-3 hShyKb"
+                            class="sc-hKgJUU ekvaUE"
                             id="basic_ask"
                             placeholder="I'd like to say..."
                             value=""
@@ -564,16 +564,16 @@ exports[`InvitationRequestForm Snapshot 1`] = `
           </div>
         </div>
         <div
-          class="sc-dhltmz-2 fJIULQ"
+          class="sc-gKseQn cuAvsf"
         >
           <div
             style="display: flex; grid-column: 1/-1; justify-content: flex-end;"
           >
             <div
-              class="sc-dhltmz-4 dCzLhP"
+              class="sc-fubCzh kfkUvr"
             >
               <button
-                class="sc-dhltmz-5 NeKoJ"
+                class="sc-pGacB bzsnjL"
                 type="submit"
               >
                 Submit

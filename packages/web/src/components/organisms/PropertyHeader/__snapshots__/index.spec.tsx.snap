@@ -4,19 +4,19 @@ exports[`PropertyHeader Snapshot 1`] = `
 <body>
   <div>
     <div
-      class="sc-1bnntxi-0 bUxpMh"
+      class="sc-hKgJUU cRPBpo"
     >
       <div
-        class="sc-1bnntxi-7 bAVVBE"
+        class="sc-jrAFXE dwQBDq"
       >
         <h1
-          class="sc-1bnntxi-1 eYaSXq"
+          class="sc-eCstlR dWRmkZ"
         >
           authentication-id's Pool
         </h1>
       </div>
       <p
-        class="sc-lime37-0 ihUlkw btn-tweet"
+        class="sc-dlfnuX kpjbHz btn-tweet"
       >
         <a
           class="twitter-share-button"
@@ -30,65 +30,65 @@ exports[`PropertyHeader Snapshot 1`] = `
         </a>
       </p>
       <div
-        class="sc-1bnntxi-2 fJTuMj"
+        class="sc-jSgvzq kToyOl"
       >
         <div
-          class="sc-1bnntxi-5 fQXZkG"
+          class="sc-fubCzh blCujO"
         >
           <div
-            class="sc-1bnntxi-4 foRoTb"
+            class="sc-iBPTik ihwXRB"
           >
             <span
-              class="sc-xnqjv4-0 sgRPv"
+              class="sc-gsTEea hDzcqk"
             >
               N/A
               %
             </span>
             <div
-              class="sc-1bnntxi-3 eCIpfw"
+              class="sc-gKseQn ipwFzJ"
             />
             <span>
               APY Stakers
             </span>
           </div>
           <div
-            class="sc-1bnntxi-3 eCIpfw"
+            class="sc-gKseQn ipwFzJ"
           >
             |
           </div>
           <div
-            class="sc-1bnntxi-4 foRoTb"
+            class="sc-iBPTik ihwXRB"
           >
             <span
-              class="sc-xnqjv4-0 sgRPv"
+              class="sc-gsTEea hDzcqk"
             >
                
               N/A
               %
             </span>
             <div
-              class="sc-1bnntxi-3 eCIpfw"
+              class="sc-gKseQn ipwFzJ"
             />
             <span>
               APY Creators
             </span>
           </div>
           <div
-            class="sc-1bnntxi-3 eCIpfw"
+            class="sc-gKseQn ipwFzJ"
           >
             |
           </div>
           <div
-            class="sc-1bnntxi-4 foRoTb"
+            class="sc-iBPTik ihwXRB"
           >
             <span
-              class="sc-xnqjv4-0 sgRPv"
+              class="sc-gsTEea hDzcqk"
             >
                
               N/A
             </span>
             <div
-              class="sc-1bnntxi-3 eCIpfw"
+              class="sc-gKseQn ipwFzJ"
             />
             <span>
               Karma
@@ -96,10 +96,10 @@ exports[`PropertyHeader Snapshot 1`] = `
           </div>
         </div>
         <div
-          class="sc-1bnntxi-6 sLplc"
+          class="sc-pGacB VkZww"
         >
           <a
-            class="sc-17tlp0z-0 iQBNWa"
+            class="sc-bdfBQB hnlVlg"
             href="https://app.uniswap.org/#/swap?outputCurrency=0x5caf454ba92e6f2c929df14667ee360ed9fd5b26&use=V2"
             rel="noreferrer"
             target="_blank"
