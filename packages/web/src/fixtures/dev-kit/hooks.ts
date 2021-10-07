@@ -50,7 +50,6 @@ import {
   whenDefinedAll
 } from 'src/fixtures/utility'
 import { useGetGasPrice } from 'src/fixtures/gas/hooks'
-import { getDevAmount } from 'src/fixtures/wallet/utility'
 import useSWR from 'swr'
 import { message } from 'antd'
 import { useMemo, useState, useCallback } from 'react'
@@ -619,11 +618,11 @@ export const useCirculatingSupply = () => {
 
   const circulatingSupplyValue = useCallback(async () => {
     const amounts = await Promise.all([
-      getDevAmount(DEV_ALLOCATIONS.privateSale),
-      getDevAmount(DEV_ALLOCATIONS.teamOptions),
-      getDevAmount(DEV_ALLOCATIONS.teamTreasury),
-      getDevAmount(DEV_ALLOCATIONS.ecosystemFund),
-      getDevAmount(DEV_ALLOCATIONS.airdrop)
+      balanceOf(nonConnectedEthersProvider, DEV_ALLOCATIONS.privateSale),
+      balanceOf(nonConnectedEthersProvider, DEV_ALLOCATIONS.teamOptions),
+      balanceOf(nonConnectedEthersProvider, DEV_ALLOCATIONS.teamTreasury),
+      balanceOf(nonConnectedEthersProvider, DEV_ALLOCATIONS.ecosystemFund),
+      balanceOf(nonConnectedEthersProvider, DEV_ALLOCATIONS.airdrop)
     ])
     const privateSaleAmount = new BigNumber(amounts[0] || '0')
     const teamOptionAmount = new BigNumber(amounts[1] || '0')
@@ -636,7 +635,7 @@ export const useCirculatingSupply = () => {
       .minus(teamAmount)
       .minus(ecosystemFundAmount)
       .minus(airdropAmount)
-  }, [totalSupplyValue])
+  }, [totalSupplyValue, nonConnectedEthersProvider])
 
   return { circulatingSupply: circulatingSupplyValue, error }
 }

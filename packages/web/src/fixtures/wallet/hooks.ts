@@ -5,12 +5,25 @@ import { UnwrapFunc, whenDefined } from 'src/fixtures/utility'
 import useSWR from 'swr'
 import { useContext, useEffect, useState } from 'react'
 import WalletContext from 'src/context/walletContext'
-import { WEB3_PROVIDER_ENDPOINT } from 'src/fixtures/wallet/constants'
+import { WEB3_PROVIDER_ENDPOINT_KEY, WEB3_PROVIDER_ENDPOINT_HOSTS } from 'src/fixtures/wallet/constants'
 import { providers } from 'ethers'
 import { UndefinedOr } from '@devprotocol/util-ts'
 
-const nonConnectedWeb3 = new Web3(WEB3_PROVIDER_ENDPOINT)
-const nonConnectedEthersProvider = new providers.JsonRpcProvider(WEB3_PROVIDER_ENDPOINT)
+type ChainNames = UndefinedOr<'main' | 'ropsten' | 'arbitrum-one-main' | 'arbitrum-one-rinkeby'>
+const providerUrl = (chain: ChainNames = 'main') =>
+  `${
+    chain === 'main'
+      ? WEB3_PROVIDER_ENDPOINT_HOSTS.MAIN
+      : chain === 'ropsten'
+      ? WEB3_PROVIDER_ENDPOINT_HOSTS.ROPSTEN
+      : chain === 'arbitrum-one-main'
+      ? WEB3_PROVIDER_ENDPOINT_HOSTS.ARB1_MAIN
+      : chain === 'arbitrum-one-rinkeby'
+      ? WEB3_PROVIDER_ENDPOINT_HOSTS.ARB1_RINKEBY
+      : WEB3_PROVIDER_ENDPOINT_HOSTS.MAIN
+  }/${WEB3_PROVIDER_ENDPOINT_KEY}`
+const nonConnectedWeb3 = (chain: ChainNames) => new Web3(providerUrl(chain))
+const nonConnectedEthersProvider = (chain: ChainNames) => new providers.JsonRpcProvider(providerUrl(chain))
 
 export const useConnectWallet = () => {
   const { web3Modal, setProviders } = useContext(WalletContext)
@@ -38,11 +51,18 @@ export const useConnectWallet = () => {
 
 export const useProvider = () => {
   const { web3, ethersProvider } = useContext(WalletContext)
+  const { name } = useDetectChain(ethersProvider)
   const [accountAddress, setAccountAddress] = useState<undefined | string>(undefined)
   useEffect(() => {
     getAccountAddress(web3).then(x => setAccountAddress(x))
   }, [web3])
-  return { web3, ethersProvider, nonConnectedWeb3, nonConnectedEthersProvider, accountAddress }
+  return {
+    web3,
+    ethersProvider,
+    accountAddress,
+    nonConnectedWeb3: nonConnectedWeb3(name),
+    nonConnectedEthersProvider: nonConnectedEthersProvider(name)
+  }
 }
 
 export const useDetectChain = (ethersProvider?: providers.BaseProvider) => {
@@ -50,7 +70,7 @@ export const useDetectChain = (ethersProvider?: providers.BaseProvider) => {
   useEffect(() => {
     whenDefined(ethersProvider, prov => prov.getNetwork().then(r => setChainId(r.chainId)))
   }, [ethersProvider])
-  const name: UndefinedOr<'main' | 'ropsten' | 'arbitrum-one-main' | 'arbitrum-one-rinkeby'> =
+  const name: ChainNames =
     chainId === 1
       ? 'main'
       : chainId === 3
@@ -62,15 +82,4 @@ export const useDetectChain = (ethersProvider?: providers.BaseProvider) => {
       : undefined
 
   return { chainId, name }
-}
-
-export const useBlockNumberStream = (shouldFetch: boolean) => {
-  const { data, error } = useSWR<UnwrapFunc<typeof getBlockNumber>, Error>(
-    shouldFetch ? cachePath.getBlockNumber() : null,
-    getBlockNumber,
-    {
-      refreshInterval: 15000
-    }
-  )
-  return { blockNumber: data, error }
 }

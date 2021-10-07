@@ -12,7 +12,7 @@ import WalletConnectProvider from '@walletconnect/web3-provider'
 import Fortmatic from 'fortmatic'
 import WalletLink from 'walletlink'
 import { message } from 'antd'
-import { WEB3_PROVIDER_ENDPOINT } from 'src/fixtures/wallet/constants'
+import { WEB3_PROVIDER_ENDPOINT_HOSTS, WEB3_PROVIDER_ENDPOINT_KEY } from 'src/fixtures/wallet/constants'
 import { getAccountAddress } from 'src/fixtures/wallet/utility'
 import * as gtag from 'src/lib/gtag'
 import { Router } from 'next/router'
@@ -37,7 +37,10 @@ class NextApp extends App<AppInitialProps & WithApolloProps<{}>> {
     })
     const INFURA_ID = '75ebe953349644b6998136d868f5cd97'
     const { FORTMATIC_KEY } = process.env
-    const walletLinkProvider = walletLink.makeWeb3Provider(WEB3_PROVIDER_ENDPOINT, 1)
+    const walletLinkProvider = walletLink.makeWeb3Provider(
+      `${WEB3_PROVIDER_ENDPOINT_HOSTS.MAIN}/${WEB3_PROVIDER_ENDPOINT_KEY}`,
+      1
+    )
     const web3ForInjected = detectEthereumProvider()
 
     return {
