@@ -1,6 +1,7 @@
+import { providers } from 'ethers'
 import Web3 from 'web3'
 import Web3Modal from 'web3modal'
-import { connectWallet, disconnectWallet, getAccountAddress, getDevAmount } from './utility'
+import { connectWallet, detectChain, disconnectWallet, getAccountAddress, getDevAmount } from './utility'
 
 jest.mock('web3')
 jest.mock('web3modal')
@@ -123,6 +124,39 @@ describe('wallet utility', () => {
       await disconnectWallet(setWeb3Handler, web3Modal)
       expect((web3Modal.clearCachedProvider as jest.Mock).mock.calls.length).toBe(1)
       expect(setWeb3Handler.mock.calls.length).toBe(1)
+    })
+  })
+
+  describe('detectChain', () => {
+    test('Returns undefined when the detected chainId is not supported', async () => {
+      const mock = { getNetwork: () => Promise.resolve({ chainId: 99999 }) } as unknown as providers.BaseProvider
+      const result = await detectChain(mock)
+      expect(result.chainId).toBe(99999)
+      expect(result.name).toBe(undefined)
+    })
+    test('Detect mainnet', async () => {
+      const mock = { getNetwork: () => Promise.resolve({ chainId: 1 }) } as unknown as providers.BaseProvider
+      const result = await detectChain(mock)
+      expect(result.chainId).toBe(1)
+      expect(result.name).toBe('main')
+    })
+    test('Detect ropsten', async () => {
+      const mock = { getNetwork: () => Promise.resolve({ chainId: 3 }) } as unknown as providers.BaseProvider
+      const result = await detectChain(mock)
+      expect(result.chainId).toBe(3)
+      expect(result.name).toBe('ropsten')
+    })
+    test('Detect arbitrum one main', async () => {
+      const mock = { getNetwork: () => Promise.resolve({ chainId: 42161 }) } as unknown as providers.BaseProvider
+      const result = await detectChain(mock)
+      expect(result.chainId).toBe(42161)
+      expect(result.name).toBe('arbitrum-one-main')
+    })
+    test('Detect arbitrum one rinkeby', async () => {
+      const mock = { getNetwork: () => Promise.resolve({ chainId: 421611 }) } as unknown as providers.BaseProvider
+      const result = await detectChain(mock)
+      expect(result.chainId).toBe(421611)
+      expect(result.name).toBe('arbitrum-one-rinkeby')
     })
   })
 })
