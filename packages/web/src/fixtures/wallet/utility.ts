@@ -1,10 +1,9 @@
 import Web3 from 'web3'
 import Web3Modal from 'web3modal'
-import { AbiItem } from 'web3-utils'
 import { message } from 'antd'
-import { WEB3_PROVIDER_ENDPOINT } from 'src/fixtures/wallet/constants'
 import { AbstractProvider, provider } from 'web3-core'
 import { providers } from 'ethers'
+import { whenDefined, UndefinedOr } from '@devprotocol/util-ts'
 
 const cache: WeakMap<NonNullable<Web3>, string> = new WeakMap()
 
@@ -12,6 +11,8 @@ type signCache = {
   message: string
   signature: string
 }
+
+export type ChainName = UndefinedOr<'main' | 'ropsten' | 'arbitrum-one-main' | 'arbitrum-one-rinkeby'>
 
 const signCacheContainer: Map<string, signCache> = new Map()
 
@@ -63,32 +64,6 @@ export const getAccountAddress = async (web3?: Web3) => {
   return undefined
 }
 
-export const getSubscription = () => {
-  const key = '@utility/getSubscription'
-  const web3 = new Web3(WEB3_PROVIDER_ENDPOINT)
-  if (web3) {
-    return () => {
-      return web3.eth
-        .subscribe('newBlockHeaders', (error, result) => {
-          if (error) throw error
-          return result
-        })
-        .on('connected', subscriptionId => console.log(subscriptionId))
-        .on('data', blockHeader => message.loading({ content: `blockHeader: ${blockHeader.number}`, key }))
-        .on('error', error => message.error({ content: error.message, key }))
-    }
-  }
-  return undefined
-}
-
-export const getBlockNumber = async () => {
-  const web3 = new Web3(WEB3_PROVIDER_ENDPOINT)
-  if (web3) {
-    return await web3.eth.getBlockNumber()
-  }
-  return undefined
-}
-
 export const sign = async (web3: any, inputMessage: string) => {
   const key = '@utility/web3sign'
   if (web3) {
@@ -135,46 +110,6 @@ export const signWithCache = async (web3: any, inputMessage: string) => {
   return { signature: undefined, message: undefined }
 }
 
-export const getDevAmount = async (walletAddress: string) => {
-  const abi: AbiItem[] = [
-    {
-      constant: true,
-      inputs: [{ name: '_owner', type: 'address' }],
-      name: 'balanceOf',
-      outputs: [{ name: 'balance', type: 'uint256' }],
-      stateMutability: 'view',
-      payable: false,
-      type: 'function'
-    },
-    {
-      constant: true,
-      inputs: [],
-      name: 'decimals',
-      outputs: [{ name: '', type: 'uint8' }],
-      stateMutability: 'view',
-      payable: false,
-      type: 'function'
-    }
-  ]
-
-  const web3 = new Web3(WEB3_PROVIDER_ENDPOINT)
-  if (web3) {
-    // dev value of team wallet
-    const contract: any = new web3.eth.Contract(abi, '0x5caf454ba92e6f2c929df14667ee360ed9fd5b26')
-    const balance = await contract.methods.balanceOf(walletAddress).call()
-    return balance
-  }
-  return undefined
-}
-
-export const getBlock = async (blockNumber: number) => {
-  const web3 = new Web3(WEB3_PROVIDER_ENDPOINT)
-  if (web3) {
-    return (await web3.eth.getBlock(blockNumber)).timestamp
-  }
-  return undefined
-}
-
 export const isAbstractProvider = (prov?: provider): prov is AbstractProvider =>
   Boolean(prov && typeof prov !== 'string' && typeof (prov as any).request === 'function')
 
@@ -213,3 +148,20 @@ export const createHandleAddClick =
           message.error({ content: err.message, key: 'addTokenToWallet' })
         }))
   }
+
+export const detectChain = async (ethersProvider?: providers.BaseProvider) => {
+  const res = await whenDefined(ethersProvider, prov => prov.getNetwork())
+  const chainId = whenDefined(res, x => x.chainId)
+  const name: ChainName =
+    chainId === 1
+      ? 'main'
+      : chainId === 3
+      ? 'ropsten'
+      : chainId === 42161
+      ? 'arbitrum-one-main'
+      : chainId === 421611
+      ? 'arbitrum-one-rinkeby'
+      : undefined
+
+  return { chainId, name }
+}

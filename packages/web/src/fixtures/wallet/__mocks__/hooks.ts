@@ -14,3 +14,7 @@ export const useProvider = jest.fn(() => {
     accountAddress: '0x'
   }
 })
+
+export const useDetectChain = () => {
+  return { chainId: 1, name: 'main' }
+}

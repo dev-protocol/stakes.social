@@ -30,7 +30,7 @@ interface ConvertToStokensProps {
 }
 
 export const ConvertToStokens = ({ propertyAddress }: ConvertToStokensProps) => {
-  const { accountAddress, web3 } = useProvider()
+  const { accountAddress, ethersProvider } = useProvider()
   const [sToken, setSToken] = useState<number>()
   const { myStakingAmount } = useGetMyStakingAmount(propertyAddress)
   const { migrateToSTokens } = useMigrateToSTokens()
@@ -38,13 +38,14 @@ export const ConvertToStokens = ({ propertyAddress }: ConvertToStokensProps) => 
     () =>
       migrateToSTokens(propertyAddress).then(async () => {
         console.log('done')
-        const ids = await whenDefinedAll([web3, propertyAddress, accountAddress], ([libWeb3, property, account]) =>
-          detectStokens(libWeb3, property, account)
+        const ids = await whenDefinedAll(
+          [ethersProvider, propertyAddress, accountAddress],
+          ([libWeb3, property, account]) => detectStokens(libWeb3, property, account)
         )
         console.log({ ids })
         setSToken(ids?.[0])
       }),
-    [migrateToSTokens, web3, propertyAddress, accountAddress]
+    [migrateToSTokens, ethersProvider, propertyAddress, accountAddress]
   )
 
   return (

@@ -35,7 +35,7 @@ const SubtitleContianer = styled.div`
 
 export const Withdraw = ({ className, title, propertyAddress, onChange: onChangeAmount, isDisplayFee }: Props) => {
   const [withdrawAmount, setWithdrawAmount] = useState<string>('')
-  const { web3 } = useProvider()
+  const { ethersProvider } = useProvider()
   const { withdrawByPosition } = useWithdrawByPosition()
   const { estimateGas } = useGetEstimateGas4WithdrawStakingAmount(propertyAddress, withdrawAmount || '0')
   const { data: ethPrice } = useGetEthPrice()
@@ -46,7 +46,7 @@ export const Withdraw = ({ className, title, propertyAddress, onChange: onChange
     [estimateGas, ethPrice]
   )
   const onClickMax = (sTokenId: string) =>
-    whenDefinedAll([web3], ([libWeb3]) =>
+    whenDefinedAll([ethersProvider], ([libWeb3]) =>
       getStokenPositions(libWeb3, Number(sTokenId))
         .then(async x => toNaturalNumber(x?.amount))
         .then(x => setWithdrawAmount(x.toFixed()))
@@ -56,7 +56,7 @@ export const Withdraw = ({ className, title, propertyAddress, onChange: onChange
   }
   const withdraw = useCallback(
     (sTokenId: string) => {
-      if (!web3) {
+      if (!ethersProvider) {
         message.warn({ content: 'Please sign in', key: 'WithdrawButton' })
         return
       }
@@ -66,7 +66,7 @@ export const Withdraw = ({ className, title, propertyAddress, onChange: onChange
       }
       withdrawByPosition(sTokenId, amountNumber.toString())
     },
-    [web3, amountNumber, withdrawByPosition]
+    [ethersProvider, amountNumber, withdrawByPosition]
   )
   useEffect(() => {
     if (onChangeAmount) {
@@ -86,7 +86,7 @@ export const Withdraw = ({ className, title, propertyAddress, onChange: onChange
         value={withdrawAmount}
         onChange={onChange}
         withdraw={withdraw}
-        disabled={!web3}
+        disabled={!ethersProvider}
         onClickMax={onClickMax}
         propertyAddress={propertyAddress}
       />
