@@ -2,7 +2,7 @@ import { abi } from './abi'
 import Web3 from 'web3'
 import { Contract } from 'web3-eth-contract'
 import { createContract } from 'src/fixtures/utility/contract-client'
-import { utils } from '@devprotocol/dev-kit'
+import { utils } from '@devprotocol/alias-legacy-dev-kit'
 
 const { execute, watchEvent } = utils
 const client: Map<string, WeakMap<Web3, Contract>> = new Map()
