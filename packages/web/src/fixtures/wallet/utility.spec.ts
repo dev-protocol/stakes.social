@@ -1,9 +1,10 @@
 import { providers } from 'ethers'
 import Web3 from 'web3'
 import Web3Modal from 'web3modal'
-import { connectWallet, detectChain, disconnectWallet, getAccountAddress, getDevAmount } from './utility'
+import { connectWallet, detectChain, disconnectWallet, getAccountAddress } from './utility'
 
 jest.mock('web3')
+jest.mock('ethers')
 jest.mock('web3modal')
 
 describe('wallet utility', () => {
@@ -37,55 +38,6 @@ describe('wallet utility', () => {
       const result = await getAccountAddress(web3) // Third call
       expect(result).toBe('0x...')
       expect(getAccounts.mock.calls.length).toBe(1)
-    })
-  })
-
-  describe('getDevAmount', () => {
-    test('Return amount value', async () => {
-      const data = 9876543210123456789
-      const fakeContract = function () {}
-      fakeContract.prototype = {
-        methods: {
-          balanceOf: () => {
-            return {
-              call: async () => {
-                return data
-              }
-            }
-          }
-        }
-      }
-      ;(Web3 as unknown as jest.Mock).mockImplementation(() => ({
-        eth: {
-          Contract: fakeContract
-        }
-      }))
-      const result = await getDevAmount('0x1234567890')
-      expect(result).toBe(data)
-    })
-
-    test('Return amount value', async () => {
-      const data = 9876543210123456789
-      const fakeContract = function () {}
-      fakeContract.prototype = {
-        methods: {
-          balanceOf: () => {
-            return {
-              call: async () => {
-                return data
-              }
-            }
-          }
-        }
-      }
-      window.ethereum = {} as any
-      ;(Web3 as unknown as jest.Mock).mockImplementation(() => ({
-        eth: {
-          Contract: fakeContract
-        }
-      }))
-      const result = await getDevAmount('0x1234567890')
-      expect(result).toBe(data)
     })
   })
 
