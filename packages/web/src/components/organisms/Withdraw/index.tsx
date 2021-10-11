@@ -39,7 +39,7 @@ const SubtitleContianer = styled.div`
 
 export const Withdraw = ({ className, title, propertyAddress, onChange: onChangeAmount, isDisplayFee }: Props) => {
   const [withdrawAmount, setWithdrawAmount] = useState<string>('')
-  const { web3, accountAddress } = useProvider()
+  const { ethersProvider, accountAddress } = useProvider()
   const { withdrawStaking: legacyWithdrawStaking } = useWithdrawStaking()
   const { withdrawByPosition } = useWithdrawByPosition()
   const { estimateGas } = useGetEstimateGas4WithdrawStakingAmount(propertyAddress, withdrawAmount || '0')
@@ -51,13 +51,13 @@ export const Withdraw = ({ className, title, propertyAddress, onChange: onChange
     [estimateGas, ethPrice]
   )
   const onClickMax = (sTokenId?: number) =>
-    whenDefinedAll([web3, sTokenId], ([libWeb3, tokenId]) =>
-      getStokenPositions(libWeb3, tokenId)
+    whenDefinedAll([ethersProvider, sTokenId], ([prov, tokenId]) =>
+      getStokenPositions(prov, tokenId)
         .then(async x => toNaturalNumber(x?.amount))
         .then(x => setWithdrawAmount(x.toFixed()))
     ) ||
-    whenDefinedAll([web3, propertyAddress, accountAddress], ([libWeb3, property, account]) =>
-      getMyStakingAmount(libWeb3, property, account)
+    whenDefinedAll([ethersProvider, propertyAddress, accountAddress], ([prov, property, account]) =>
+      getMyStakingAmount(prov, property, account)
         .then(async x => toNaturalNumber(x))
         .then(x => setWithdrawAmount(x.toFixed()))
     )
@@ -66,7 +66,7 @@ export const Withdraw = ({ className, title, propertyAddress, onChange: onChange
   }
   const withdraw = useCallback(
     (sTokenId?: number) => {
-      if (!web3) {
+      if (!ethersProvider) {
         message.warn({ content: 'Please sign in', key: 'WithdrawButton' })
         return
       }
@@ -80,7 +80,7 @@ export const Withdraw = ({ className, title, propertyAddress, onChange: onChange
       }
       withdrawByPosition(sTokenId.toString(), amountNumber.toFixed())
     },
-    [web3, amountNumber, withdrawByPosition, legacyWithdrawStaking, propertyAddress]
+    [ethersProvider, amountNumber, withdrawByPosition, legacyWithdrawStaking, propertyAddress]
   )
   useEffect(() => {
     if (onChangeAmount) {
@@ -100,7 +100,7 @@ export const Withdraw = ({ className, title, propertyAddress, onChange: onChange
         value={withdrawAmount}
         onChange={onChange}
         withdraw={withdraw}
-        disabled={!web3}
+        disabled={!ethersProvider}
         onClickMax={onClickMax}
         propertyAddress={propertyAddress}
       />

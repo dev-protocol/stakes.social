@@ -1,11 +1,11 @@
 import Web3 from 'web3'
-import { utils } from '@devprotocol/dev-kit'
+import { utils } from '@devprotocol/alias-legacy-dev-kit'
 import { createContract } from 'src/fixtures/utility/contract-client'
 import { getReward, intermediateProcess } from './client'
 
 const { execute } = utils
 
-jest.mock('@devprotocol/dev-kit')
+jest.mock('@devprotocol/alias-legacy-dev-kit')
 jest.mock('web3')
 jest.mock('src/fixtures/utility/contract-client')
 

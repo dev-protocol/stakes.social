@@ -39,7 +39,7 @@ describe(`${Deposit.name}`, () => {
   test('react hooks: click MAX button with balance is zero', async () => {
     ;(balanceOf as jest.Mock).mockImplementation(() => Promise.resolve(new BigNumber('0')))
     ;(allowance as jest.Mock).mockImplementation(() => Promise.resolve())
-    ;(useProvider as jest.Mock).mockImplementation(() => ({ accountAddress: '', web3: {} }))
+    ;(useProvider as jest.Mock).mockImplementation(() => ({ accountAddress: '', ethersProvider: {} }))
     message.warn = jest.fn(() => {}) as any
 
     const { getByText } = render(<Deposit></Deposit>)
