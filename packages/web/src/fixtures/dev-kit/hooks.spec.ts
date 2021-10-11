@@ -33,7 +33,9 @@ import {
   useMigrateToSTokens,
   useGetTokenURI,
   useGetStokenSymbol,
-  usePositionsOfOwner
+  usePositionsOfOwner,
+  useEnabledMarkets,
+  useGetAuthenticatedProperties
 } from './hooks'
 import { useCurrency } from 'src/fixtures/currency/functions/useCurrency'
 import useSWR from 'swr'
@@ -1200,6 +1202,66 @@ describe('dev-kit hooks', () => {
       const error = new Error(errorMessage)
       ;(useSWR as jest.Mock).mockImplementation(() => ({ data, error }))
       const { result } = renderHook(() => useGetStokenSymbol(0))
+      expect(result.current.error).toBe(error)
+      expect(result.current.error?.message).toBe(errorMessage)
+    })
+  })
+
+  describe('useEnabledMarkets', () => {
+    test('data is undefined', () => {
+      const data = undefined
+      const error = undefined
+      ;(useSWR as jest.Mock).mockImplementation(() => ({ data, error }))
+      const { result } = renderHook(() => useEnabledMarkets())
+      expect(result.current.data).toBe(data)
+      expect(result.current.error).toBe(undefined)
+    })
+
+    test('success fetching data', () => {
+      const data = ['0x0']
+      const error = undefined
+      ;(useSWR as jest.Mock).mockImplementation(() => ({ data, error }))
+      const { result } = renderHook(() => useEnabledMarkets())
+      expect(result.current.data).toBe(data)
+      expect(result.current.error).toBe(undefined)
+    })
+
+    test('failure fetching data', () => {
+      const data = undefined
+      const errorMessage = 'error'
+      const error = new Error(errorMessage)
+      ;(useSWR as jest.Mock).mockImplementation(() => ({ data, error }))
+      const { result } = renderHook(() => useEnabledMarkets())
+      expect(result.current.error).toBe(error)
+      expect(result.current.error?.message).toBe(errorMessage)
+    })
+  })
+
+  describe('useGetAuthenticatedProperties', () => {
+    test('data is undefined', () => {
+      const data = undefined
+      const error = undefined
+      ;(useSWR as jest.Mock).mockImplementation(() => ({ data, error }))
+      const { result } = renderHook(() => useGetAuthenticatedProperties('0x0'))
+      expect(result.current.data).toBe(data)
+      expect(result.current.error).toBe(undefined)
+    })
+
+    test('success fetching data', () => {
+      const data = ['0x0']
+      const error = undefined
+      ;(useSWR as jest.Mock).mockImplementation(() => ({ data, error }))
+      const { result } = renderHook(() => useGetAuthenticatedProperties('0x0'))
+      expect(result.current.data).toBe(data)
+      expect(result.current.error).toBe(undefined)
+    })
+
+    test('failure fetching data', () => {
+      const data = undefined
+      const errorMessage = 'error'
+      const error = new Error(errorMessage)
+      ;(useSWR as jest.Mock).mockImplementation(() => ({ data, error }))
+      const { result } = renderHook(() => useGetAuthenticatedProperties('0x0'))
       expect(result.current.error).toBe(error)
       expect(result.current.error?.message).toBe(errorMessage)
     })

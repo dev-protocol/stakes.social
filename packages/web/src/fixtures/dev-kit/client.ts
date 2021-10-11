@@ -12,6 +12,7 @@ import {
   withdrawAbi,
   RegistryContract
 } from '@devprotocol/dev-kit'
+import { contractFactory as l2ContractFactory, DevkitContract as L2DevkitContract } from '@devprotocol/dev-kit/l2'
 import { getContractAddress as _getContractAddress } from './get-contract-address'
 import BigNumber from 'bignumber.js'
 import { ethers, providers, Event } from 'ethers'
@@ -22,6 +23,7 @@ const { execute } = utils
 const { watchEvent } = legacyUtils
 
 const cacheForContractFactory: WeakMap<providers.BaseProvider, DevkitContract> = new WeakMap()
+const cacheForL2ContractFactory: WeakMap<providers.BaseProvider, L2DevkitContract> = new WeakMap()
 const cacheForNetwork: WeakMap<providers.BaseProvider, ChainName> = new WeakMap()
 const newClient = (prov: providers.BaseProvider) => {
   const fromCache = cacheForContractFactory.get(prov)
@@ -32,20 +34,38 @@ const newClient = (prov: providers.BaseProvider) => {
   cacheForContractFactory.set(prov, contracts)
   return contracts
 }
+const newL2Client = (prov: providers.BaseProvider) => {
+  const fromCache = cacheForL2ContractFactory.get(prov)
+  if (fromCache) {
+    return fromCache
+  }
+  const contracts = l2ContractFactory(prov)
+  cacheForL2ContractFactory.set(prov, contracts)
+  return contracts
+}
+const getNetwork = async (prov: providers.BaseProvider) => {
+  const fromCache = cacheForNetwork.get(prov)
+  if (fromCache) {
+    return fromCache
+  }
+  const net = await detectChain(prov)
+  cacheForNetwork.set(prov, net.name)
+  return net.name
+}
 const createGetContractAddress =
   (prov: providers.BaseProvider) =>
   async (client: DevkitContract, contract: keyof Omit<RegistryContract, 'contract'>): Promise<string> => {
-    const net = await (async () => {
-      const fromCache = cacheForNetwork.get(prov)
-      if (fromCache) {
-        return fromCache
-      }
-      const net = await detectChain(prov)
-      cacheForNetwork.set(prov, net.name)
-      return net.name
-    })()
+    const net = await getNetwork(prov)
     return _getContractAddress(client, contract, net)
   }
+const getL2Registry = async (prov: providers.BaseProvider) => {
+  const net = await getNetwork(prov)
+  return net === 'arbitrum-one-main'
+    ? addresses.arbitrumOne.main
+    : net === 'arbitrum-one-rinkeby'
+    ? addresses.arbitrumOne.rinkeby
+    : undefined
+}
 
 export const getRewardsAmount = async (prov: providers.BaseProvider, propertyAddress: string) => {
   const client = newClient(prov)
@@ -533,6 +553,23 @@ export const getStokenSymbol = async (prov: providers.BaseProvider, sTokenId: nu
       .sTokens(addresses.eth.main.sTokens)
       .positions(sTokenId)
       .then(res => client.property(res.property).symbol)
+  }
+  return undefined
+}
+
+export const enabledMarkets = async (prov: providers.BaseProvider) => {
+  const client = newL2Client(prov)
+  const reg = await getL2Registry(prov)
+  if (client && reg) {
+    return client.marketFactory(reg.marketFactory).enabledMarkets()
+  }
+  return undefined
+}
+
+export const getAuthenticatedProperties = async (prov: providers.BaseProvider, marketAddress: string) => {
+  const client = newL2Client(prov)
+  if (client) {
+    return client.market(marketAddress).getAuthenticatedProperties()
   }
   return undefined
 }

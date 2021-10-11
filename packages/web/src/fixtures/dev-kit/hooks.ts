@@ -38,7 +38,9 @@ import {
   migrateToSTokens,
   getTokenURI,
   getStokenSymbol,
-  positionsOfOwner
+  positionsOfOwner,
+  enabledMarkets,
+  getAuthenticatedProperties
 } from './client'
 import { SWRCachePath } from './cache-path'
 import {
@@ -54,7 +56,7 @@ import useSWR from 'swr'
 import { message } from 'antd'
 import { useMemo, useState, useCallback } from 'react'
 import BigNumber from 'bignumber.js'
-import { useProvider } from 'src/fixtures/wallet/hooks'
+import { useDetectChain, useProvider } from 'src/fixtures/wallet/hooks'
 import { useCurrency } from 'src/fixtures/currency/functions/useCurrency'
 import { isAddress } from 'web3-utils'
 
@@ -981,4 +983,24 @@ export const useGetStokenSymbol = (sTokenId?: number) => {
     { revalidateOnFocus: false, focusThrottleInterval: 0 }
   )
   return { symbol: data, error }
+}
+
+export const useEnabledMarkets = () => {
+  const { nonConnectedEthersProvider } = useProvider()
+  const { name } = useDetectChain(nonConnectedEthersProvider)
+  return useSWR<UnwrapFunc<typeof enabledMarkets>, Error>(SWRCachePath.enabledMarkets(name), () =>
+    whenDefined(nonConnectedEthersProvider, client => enabledMarkets(client))
+  )
+}
+
+export const useGetAuthenticatedProperties = (marketAddress?: string) => {
+  const { nonConnectedEthersProvider } = useProvider()
+  const { name } = useDetectChain(nonConnectedEthersProvider)
+  return useSWR<UnwrapFunc<typeof getAuthenticatedProperties>, Error>(
+    SWRCachePath.getAuthenticatedProperties(name, marketAddress),
+    () =>
+      whenDefinedAll([nonConnectedEthersProvider, marketAddress], ([client, market]) =>
+        getAuthenticatedProperties(client, market)
+      )
+  )
 }
