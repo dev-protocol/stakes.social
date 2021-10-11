@@ -1,9 +1,13 @@
 import React, { useCallback, useState, useMemo, ChangeEvent, useEffect } from 'react'
 import styled from 'styled-components'
 import { useProvider } from 'src/fixtures/wallet/hooks'
-import { getStokenPositions } from 'src/fixtures/dev-kit/client'
+import { getMyStakingAmount, getStokenPositions } from 'src/fixtures/dev-kit/client'
 import { useGetEthPrice } from 'src/fixtures/uniswap/hooks'
-import { useGetEstimateGas4WithdrawStakingAmount, useWithdrawByPosition } from 'src/fixtures/dev-kit/hooks'
+import {
+  useGetEstimateGas4WithdrawStakingAmount,
+  useWithdrawByPosition,
+  useWithdrawStaking
+} from 'src/fixtures/dev-kit/hooks'
 import { toAmountNumber, toNaturalNumber, whenDefinedAll } from 'src/fixtures/utility'
 import { WithdrawTransactForm } from 'src/components/molecules/WithdrawTransactForm'
 import { FormContainer } from 'src/components/molecules/WithdrawTransactForm/FormContainer'
@@ -35,7 +39,8 @@ const SubtitleContianer = styled.div`
 
 export const Withdraw = ({ className, title, propertyAddress, onChange: onChangeAmount, isDisplayFee }: Props) => {
   const [withdrawAmount, setWithdrawAmount] = useState<string>('')
-  const { web3 } = useProvider()
+  const { ethersProvider, accountAddress } = useProvider()
+  const { withdrawStaking: legacyWithdrawStaking } = useWithdrawStaking()
   const { withdrawByPosition } = useWithdrawByPosition()
   const { estimateGas } = useGetEstimateGas4WithdrawStakingAmount(propertyAddress, withdrawAmount || '0')
   const { data: ethPrice } = useGetEthPrice()
@@ -45,18 +50,23 @@ export const Withdraw = ({ className, title, propertyAddress, onChange: onChange
     () => whenDefinedAll([estimateGas, ethPrice], ([gas, eth]) => gas.multipliedBy(eth)),
     [estimateGas, ethPrice]
   )
-  const onClickMax = (sTokenId: string) =>
-    whenDefinedAll([web3], ([libWeb3]) =>
-      getStokenPositions(libWeb3, Number(sTokenId))
+  const onClickMax = (sTokenId?: number) =>
+    whenDefinedAll([ethersProvider, sTokenId], ([prov, tokenId]) =>
+      getStokenPositions(prov, tokenId)
         .then(async x => toNaturalNumber(x?.amount))
+        .then(x => setWithdrawAmount(x.toFixed()))
+    ) ||
+    whenDefinedAll([ethersProvider, propertyAddress, accountAddress], ([prov, property, account]) =>
+      getMyStakingAmount(prov, property, account)
+        .then(async x => toNaturalNumber(x))
         .then(x => setWithdrawAmount(x.toFixed()))
     )
   const onChange = (event: ChangeEvent<HTMLInputElement>) => {
     setWithdrawAmount(event.target.value)
   }
   const withdraw = useCallback(
-    (sTokenId: string) => {
-      if (!web3) {
+    (sTokenId?: number) => {
+      if (!ethersProvider) {
         message.warn({ content: 'Please sign in', key: 'WithdrawButton' })
         return
       }
@@ -64,9 +74,13 @@ export const Withdraw = ({ className, title, propertyAddress, onChange: onChange
         message.warn({ content: 'Please enter a value greater than or equal to 0', key: 'WithdrawButton' })
         return
       }
-      withdrawByPosition(sTokenId, amountNumber.toString())
+      if (!sTokenId) {
+        legacyWithdrawStaking(propertyAddress, amountNumber)
+        return
+      }
+      withdrawByPosition(sTokenId.toString(), amountNumber.toFixed())
     },
-    [web3, amountNumber, withdrawByPosition]
+    [ethersProvider, amountNumber, withdrawByPosition, legacyWithdrawStaking, propertyAddress]
   )
   useEffect(() => {
     if (onChangeAmount) {
@@ -86,7 +100,7 @@ export const Withdraw = ({ className, title, propertyAddress, onChange: onChange
         value={withdrawAmount}
         onChange={onChange}
         withdraw={withdraw}
-        disabled={!web3}
+        disabled={!ethersProvider}
         onClickMax={onClickMax}
         propertyAddress={propertyAddress}
       />

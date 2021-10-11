@@ -16,7 +16,7 @@ import { SWRCachePath } from './cache-path'
 import { useGetIncubators } from 'src/fixtures/dev-for-apps/hooks'
 
 export const useAuthenticate = () => {
-  const { web3 } = useProvider()
+  const { web3, ethersProvider } = useProvider()
   const [authenticateError, setAuthenticateError] = useState<Error>()
   const [waitError, setWaitError] = useState<Error>()
   const [isWaiting, setIsWaiting] = useState<boolean>(false)
@@ -29,14 +29,14 @@ export const useAuthenticate = () => {
   const waitCallback = useCallback(
     async (githubRepository: string) => {
       setIsWaiting(true)
-      return whenDefined(web3, x =>
-        getPropertyAddress(x, githubRepository)
-          .then(propertyAddress => waitForCreateMetrics(x, propertyAddress))
+      return whenDefinedAll([ethersProvider, web3], ([eth, w3]) =>
+        getPropertyAddress(w3, githubRepository)
+          .then(propertyAddress => waitForCreateMetrics(eth, w3, propertyAddress))
           .catch(setWaitError)
           .finally(() => setIsWaiting(false))
       )
     },
-    [web3]
+    [web3, ethersProvider]
   )
   return {
     authenticate: callback,

@@ -14,7 +14,7 @@ jest.mock('@dev/graphql')
 describe(`${WithdrawTransactForm.name}`, () => {
   test('Snapshot', () => {
     const component = render(
-      <WalletContext.Provider value={{ web3: new Web3(), setWeb3: () => {} }}>
+      <WalletContext.Provider value={{ web3: new Web3(), setProviders: () => {} }}>
         <WithdrawTransactForm onClickMax={() => {}} propertyAddress="" withdraw={() => {}} />
       </WalletContext.Provider>
     )

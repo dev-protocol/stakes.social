@@ -96,7 +96,7 @@ const Wrap = styled.div`
 const DEFAULT_RADIO_VALUE = -1
 
 export const Stake = ({ className, title, propertyAddress }: Props) => {
-  const { web3, accountAddress } = useProvider()
+  const { ethersProvider, accountAddress } = useProvider()
   const { depositToPosition } = useDepositToPosition()
   const { depositToProperty } = useDepositToProperty()
   const { approve, ok } = useApprove()
@@ -104,7 +104,7 @@ export const Stake = ({ className, title, propertyAddress }: Props) => {
   const [stakeAmount, setStakeAmount] = useState('')
   const [radioValue, setRadioValue] = useState(0)
   const { sTokens } = useDetectSTokens(propertyAddress, accountAddress)
-  const disabled = useMemo(() => !web3, [web3])
+  const disabled = useMemo(() => !ethersProvider, [ethersProvider])
   const amountNumber = useMemo(() => toAmountNumber(stakeAmount), [stakeAmount])
 
   const { estimateGas } = useGetEstimateGas4Stake(propertyAddress, stakeAmount || undefined)
@@ -119,7 +119,7 @@ export const Stake = ({ className, title, propertyAddress }: Props) => {
   }
 
   const handleApprove = async () => {
-    if (!web3) {
+    if (!ethersProvider) {
       message.warn({ content: 'Please sign in', key: 'StakeButton' })
       return
     }
@@ -127,7 +127,7 @@ export const Stake = ({ className, title, propertyAddress }: Props) => {
       message.warn({ content: 'Please enter a value greater than 0', key: 'StakeButton' })
       return
     }
-    approve(await getContractAddress(contractFactory(web3.currentProvider), 'lockup'), amountNumber.toFixed())
+    approve(await getContractAddress(contractFactory(ethersProvider), 'lockup'), amountNumber.toFixed())
   }
 
   const handleStake = () => {
@@ -150,7 +150,7 @@ export const Stake = ({ className, title, propertyAddress }: Props) => {
     () => (
       <Max
         onClick={() =>
-          whenDefinedAll([web3, accountAddress], ([libWeb3, account]) =>
+          whenDefinedAll([ethersProvider, accountAddress], ([libWeb3, account]) =>
             balanceOf(libWeb3, account)
               .then(async x => toNaturalNumber(x))
               .then(x => setStakeAmount(x.toFixed()))
@@ -158,7 +158,7 @@ export const Stake = ({ className, title, propertyAddress }: Props) => {
         }
       />
     ),
-    [accountAddress, web3]
+    [accountAddress, ethersProvider]
   )
 
   return (

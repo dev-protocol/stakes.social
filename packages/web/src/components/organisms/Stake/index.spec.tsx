@@ -23,7 +23,7 @@ jest.mock('@dev/graphql')
 describe(`${Stake.name}`, () => {
   test('Snapshot', () => {
     const component = render(
-      <WalletContext.Provider value={{ web3: new Web3(), setWeb3: () => {} }}>
+      <WalletContext.Provider value={{ web3: new Web3(), setProviders: () => {} }}>
         <Stake propertyAddress="propertyAddress" />
       </WalletContext.Provider>
     )
@@ -33,7 +33,7 @@ describe(`${Stake.name}`, () => {
 
   test('Snapshot with title', () => {
     const component = render(
-      <WalletContext.Provider value={{ web3: new Web3(), setWeb3: () => {} }}>
+      <WalletContext.Provider value={{ web3: new Web3(), setProviders: () => {} }}>
         <Stake propertyAddress="propertyAddress" title="Stake" />
       </WalletContext.Provider>
     )
@@ -43,12 +43,12 @@ describe(`${Stake.name}`, () => {
 
   test('react hooks: input amount click DEV button and click stake button', async () => {
     ;(balanceOf as jest.Mock).mockImplementation(() => Promise.resolve(new BigNumber('1000000')))
-    ;(useProvider as jest.Mock).mockImplementation(() => ({ accountAddress: '', web3: {} }))
+    ;(useProvider as jest.Mock).mockImplementation(() => ({ accountAddress: '', ethersProvider: {} }))
     ;(getContractAddress as jest.Mock).mockImplementation(() => Promise.resolve('0x0'))
     message.warn = jest.fn(() => {}) as any
 
     const { container, getByText } = render(
-      <WalletContext.Provider value={{ web3: new Web3(), setWeb3: () => {} }}>
+      <WalletContext.Provider value={{ web3: new Web3(), setProviders: () => {} }}>
         <Stake propertyAddress="propertyAddress" />
       </WalletContext.Provider>
     )
@@ -67,11 +67,11 @@ describe(`${Stake.name}`, () => {
   // TODO(@k3nt0w)
   // test('react hooks: click DEV button(amount is zero) and click stake button', async () => {
   //   ;(balanceOf as jest.Mock).mockImplementation(() => Promise.resolve(new BigNumber('')))
-  //   ;(useProvider as jest.Mock).mockImplementation(() => ({ accountAddress: '', web3: {} }))
+  //   ;(useProvider as jest.Mock).mockImplementation(() => ({ accountAddress: '', ethersProvider: {} }))
   //   message.warn = jest.fn(() => {}) as any
 
   //   const { container, getByText } = render(
-  //     <WalletContext.Provider value={{ web3: new Web3(), setWeb3: () => {} }}>
+  //     <WalletContext.Provider value={{ web3: new Web3(), setProviders: () => {} }}>
   //       <Stake propertyAddress="propertyAddress" />
   //     </WalletContext.Provider>
   //   )
