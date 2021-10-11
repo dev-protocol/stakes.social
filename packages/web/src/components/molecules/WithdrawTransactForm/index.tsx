@@ -100,7 +100,7 @@ export const WithdrawTransactForm = ({
     () => (
       <>
         {_suffix}
-        {onClickMax ? <Max onClick={() => onClickMax(`${radioValue}`)} /> : undefined}
+        {onClickMax ? <Max onClick={() => onClickMax(radioValue)} /> : undefined}
       </>
     ),
     [_suffix, onClickMax, radioValue]
