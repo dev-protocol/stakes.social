@@ -1,13 +1,13 @@
-import { DevkitContract } from '@devprotocol/dev-kit'
-import { RegistryContract } from '@devprotocol/dev-kit'
+import { DevkitContract, RegistryContract } from '@devprotocol/dev-kit'
+import { DevkitContract as L2DevkitContract, RegistryContract as L2RegistryContract } from '@devprotocol/dev-kit/l2'
 import { addresses } from '@devprotocol/dev-kit'
 import { ChainName } from '../wallet/utility'
 
 const cache: Map<ChainName, Map<string, string>> = new Map()
 
-export const getContractAddress = async (
-  client: DevkitContract,
-  contract: keyof Omit<RegistryContract, 'contract'>,
+export const getContractAddress = async <C extends DevkitContract | L2DevkitContract>(
+  client: C,
+  contract: C extends DevkitContract ? keyof Omit<RegistryContract, 'contract'> : keyof L2RegistryContract,
   net: ChainName = 'main'
 ): Promise<string> =>
   (async fromCache => {
