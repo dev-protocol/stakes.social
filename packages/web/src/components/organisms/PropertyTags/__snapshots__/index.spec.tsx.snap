@@ -4,7 +4,7 @@ exports[`PropertyTags Snapshot 1`] = `
 <body>
   <div>
     <div
-      class="sc-uh7l8d-0"
+      class="sc-bdfBQB"
     >
       <p>
         Property Tags
@@ -13,7 +13,7 @@ exports[`PropertyTags Snapshot 1`] = `
         class="ant-form ant-form-horizontal"
       >
         <span
-          class="ant-tag sc-uh7l8d-2 gdqInY"
+          class="ant-tag sc-dlfnuX bBZyU"
         >
           dummy
           <span
@@ -38,7 +38,7 @@ exports[`PropertyTags Snapshot 1`] = `
           </span>
         </span>
         <span
-          class="ant-tag sc-uh7l8d-2 gdqInY"
+          class="ant-tag sc-dlfnuX bBZyU"
         >
           tag
           <span
@@ -63,7 +63,7 @@ exports[`PropertyTags Snapshot 1`] = `
           </span>
         </span>
         <span
-          class="ant-tag sc-uh7l8d-1 hErvA-D"
+          class="ant-tag sc-gsTEea iMERCs"
         >
           <span
             aria-label="plus"

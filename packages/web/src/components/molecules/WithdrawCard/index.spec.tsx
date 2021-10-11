@@ -8,9 +8,7 @@ jest.mock('src/fixtures/dev-kit/hooks')
 
 describe(`${WithdrawCard.name}`, () => {
   test('Snapshot', () => {
-    const component = render(
-      <WithdrawCard label="Holder" onSubmitWithdraw={() => {}} amount={new BigNumber(1000)} lastUpdate={0} />
-    )
+    const component = render(<WithdrawCard label="Holder" onSubmitWithdraw={() => {}} amount={new BigNumber(1000)} />)
     const tree = component.baseElement
     expect(tree).toMatchSnapshot()
   })

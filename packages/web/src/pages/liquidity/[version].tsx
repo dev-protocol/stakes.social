@@ -46,9 +46,9 @@ const LiquidityMining = () => {
   const geyserAddress = getGeyserAddress(version)
 
   const contents = [
-    { name: 'Deposit', node: Deposit(geyserAddress) },
-    { name: 'Withdraw', node: Withdraw(geyserAddress) },
-    { name: 'Stats', node: Stats(geyserAddress) }
+    { name: 'Deposit', node: <Deposit geyserAddress={geyserAddress} /> },
+    { name: 'Withdraw', node: <Withdraw geyserAddress={geyserAddress} /> },
+    { name: 'Stats', node: <Stats geyserAddress={geyserAddress} /> }
   ]
 
   return (

@@ -18,7 +18,7 @@ const Wrapper = styled.div`
   grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
 `
 
-export const Stats = (geyserAddress: string) => {
+export const Stats = ({ geyserAddress }: { geyserAddress: string }) => {
   const { data: totalRewards } = useTotalRewards(geyserAddress)
   const { data: totalStaked } = useTotalStaked(geyserAddress)
   const { data: accounting } = useUpdateAccounting(geyserAddress)

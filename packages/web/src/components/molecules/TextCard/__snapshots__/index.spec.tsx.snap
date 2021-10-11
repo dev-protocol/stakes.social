@@ -6,19 +6,25 @@ exports[`TextCard Snapshot 1`] = `
     <div>
       <h2
         style="font-size: 36px; line-height: 48px; color: rgb(47, 128, 237);"
-      />
+      >
+        npm
+      </h2>
       <div
         style="font-size: 18px; line-height: 24px; color: rgba(0, 0, 0, 0.85);"
-      />
+      >
+        description
+      </div>
       <div
         style="font-size: 18px; line-height: 24px; color: rgba(0, 0, 0, 0.85);"
       >
         Authentication: 
+        authentication
       </div>
       <div
         style="font-size: 18px; line-height: 24px; color: rgba(0, 0, 0, 0.85);"
       >
         Calculation: 
+        1
       </div>
     </div>
   </div>

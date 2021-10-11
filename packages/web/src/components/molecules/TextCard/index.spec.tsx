@@ -5,7 +5,9 @@ import 'src/__mocks__/window/matchMedia.mock'
 
 describe(`${TextCard.name}`, () => {
   test('Snapshot', () => {
-    const component = render(<TextCard title="npm" />)
+    const component = render(
+      <TextCard name="npm" description="description" authentication="authentication" calculation={1} />
+    )
     const tree = component.baseElement
     expect(tree).toMatchSnapshot()
   })

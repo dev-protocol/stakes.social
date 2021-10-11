@@ -8,7 +8,7 @@ jest.mock('src/fixtures/_pages/liquidity/uniswap-pool/hooks.ts')
 
 describe(`${Stats.name}`, () => {
   test('Snapshot', () => {
-    const component = render(<Stats />)
+    const component = render(<Stats geyserAddress="0xdummy" />)
     const tree = component.baseElement
     expect(tree).toMatchSnapshot()
   })
