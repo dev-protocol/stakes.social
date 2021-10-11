@@ -1,5 +1,5 @@
 import React, { useCallback, useMemo, useState } from 'react'
-import { Input, Radio, RadioChangeEvent, Space, message } from 'antd'
+import { Input, Radio, RadioChangeEvent, Space } from 'antd'
 import styled from 'styled-components'
 import { Max } from 'src/components/molecules/Max'
 import { SearchProps } from 'antd/lib/input'
@@ -10,8 +10,8 @@ import { useProvider } from 'src/fixtures/wallet/hooks'
 
 type Props = SearchProps &
   React.RefAttributes<Input> & {
-    withdraw: (sTokenId: string) => void
-    onClickMax?: (sTokenId: string) => void
+    withdraw: (sTokenId?: number) => void
+    onClickMax?: (sTokenId?: number) => void
     propertyAddress: string
   }
 
@@ -90,14 +90,10 @@ export const WithdrawTransactForm = ({
   const { accountAddress } = useProvider()
   const { sTokens } = useDetectSTokens(propertyAddress, accountAddress)
 
-  const [radioValue, setRadioValue] = useState(0)
+  const [radioValue, setRadioValue] = useState<number>()
 
   const handleSearch = useCallback(() => {
-    if (typeof radioValue === 'undefined') {
-      message.warn({ content: 'No position selected', key: 'StakeButton' })
-    } else {
-      withdraw(`${radioValue}`)
-    }
+    withdraw(radioValue)
   }, [radioValue, withdraw])
 
   const suffix = useMemo(
