@@ -40,7 +40,7 @@ const LinkToUniswap = () => (
 
 const ZERO = toBigNumber(0)
 
-export const Deposit = (geyserAddress: string) => {
+export const Deposit = ({ geyserAddress }: { geyserAddress: string }) => {
   const messageKey = 'liquidityDeposit'
   const { Item } = Form
   const { Step } = Steps

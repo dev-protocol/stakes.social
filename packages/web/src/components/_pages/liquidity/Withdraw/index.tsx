@@ -21,7 +21,7 @@ const StyledForm = styled(Form)`
   grid-gap: 2rem;
 `
 
-export const Withdraw = (geyserAddress: string) => {
+export const Withdraw = ({ geyserAddress }: { geyserAddress: string }) => {
   const { Item } = Form
   const [amount, setAmount] = useState<undefined | BigNumber>(undefined)
   const [displayAmount, setDisplayAmount] = useState<undefined | string>(undefined)

@@ -8,7 +8,7 @@ jest.mock('src/fixtures/_pages/liquidity/uniswap-pool/hooks.ts')
 
 describe(`${Max.name}`, () => {
   test('Snapshot', () => {
-    const component = render(<Max></Max>)
+    const component = render(<Max onClick={() => {}}></Max>)
     const tree = component.baseElement
     expect(tree).toMatchSnapshot()
   })
