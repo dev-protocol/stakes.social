@@ -21,13 +21,9 @@ import { ResponsiveModal } from 'src/components/atoms/ResponsiveModal'
 import { CoverImageOrGradient } from 'src/components/atoms/CoverImageOrGradient'
 import { Grid } from 'src/components/atoms/Grid'
 
-interface Asset {
-  authentication_id: string
-}
-
 interface Props {
   propertyAddress: string
-  assets: Asset[]
+  assets: (string | undefined)[]
 }
 
 const Card = styled(Grid)`
@@ -189,7 +185,7 @@ export const PropertyCard = ({ propertyAddress, assets }: Props) => {
   const { data: dataAuthor } = useGetAccount(authorAddress)
   const { data: dataProperty } = useGetProperty(propertyAddress)
   const { name: propertyName } = usePropertyName(propertyAddress)
-  const includeAssets = useMemo(() => assets && truncate(assets.map(e => e.authentication_id).join(', '), 24), [assets])
+  const includeAssets = useMemo(() => assets && truncate(assets.join(', '), 24), [assets])
 
   const zeroBigNumber = new BigNumber(0)
 

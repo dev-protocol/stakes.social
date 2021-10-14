@@ -49,5 +49,7 @@ export const SWRCachePath = {
   getStokenSymbol: (sTokenId?: string) => `sTokenId/${sTokenId}/getStokenSymbol`,
   enabledMarkets: (network?: string) => `enabledMarkets/${network}`,
   getAuthenticatedProperties: (network?: string, marketAddress?: string) =>
-    `getAuthenticatedProperties/${network}/${marketAddress}`
+    `getAuthenticatedProperties/${network}/${marketAddress}`,
+  useGetAssetsByProperties: (network?: string, propertyAddress?: string) =>
+    `useGetAssetsByProperties/${network}/${propertyAddress}`
 } as const

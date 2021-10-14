@@ -40,7 +40,11 @@ import {
   getStokenSymbol,
   positionsOfOwner,
   enabledMarkets,
-  getAuthenticatedProperties
+  getAuthenticatedProperties,
+  metricsOfProperty,
+  getMarketBehavior,
+  getId,
+  getMarket
 } from './client'
 import { SWRCachePath } from './cache-path'
 import {
@@ -59,6 +63,7 @@ import BigNumber from 'bignumber.js'
 import { useDetectChain, useProvider } from 'src/fixtures/wallet/hooks'
 import { useCurrency } from 'src/fixtures/currency/functions/useCurrency'
 import { isAddress } from 'web3-utils'
+import { UndefinedOr } from '@devprotocol/util-ts'
 
 interface DevAllocations {
   privateSale: string
@@ -1002,5 +1007,32 @@ export const useGetAuthenticatedProperties = (marketAddress?: string) => {
       whenDefinedAll([nonConnectedEthersProvider, marketAddress], ([client, market]) =>
         getAuthenticatedProperties(client, market)
       )
+  )
+}
+
+export const useGetAssetsByProperties = (propertyAddress?: string) => {
+  const { nonConnectedEthersProvider } = useProvider()
+  const { name } = useDetectChain(nonConnectedEthersProvider)
+  return useSWR<
+    UndefinedOr<
+      {
+        market?: string
+        id?: string
+      }[]
+    >,
+    Error
+  >(SWRCachePath.useGetAssetsByProperties(name, propertyAddress), () =>
+    whenDefinedAll([nonConnectedEthersProvider, propertyAddress], async ([client, property]) => {
+      const metrics = await metricsOfProperty(client, property)
+      const markets = await whenDefined(metrics, met => Promise.all(met.map(m => getMarket(client, m))))
+      const behaviors = await whenDefined(markets, marks =>
+        Promise.all(marks.map(mak => whenDefined(mak, m => getMarketBehavior(client, m))))
+      )
+      const ids = await whenDefinedAll([behaviors, markets], ([behav, marks]) =>
+        Promise.all(behav.map((beh, i) => whenDefinedAll([beh, marks[i]], ([b, m]) => getId(client, b, m))))
+      )
+      const res = whenDefinedAll([ids, markets], ([idx, marks]) => marks.map((market, i) => ({ market, id: idx[i] })))
+      return res
+    })
   )
 }

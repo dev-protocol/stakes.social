@@ -10,7 +10,7 @@ import styled from 'styled-components'
 import Select from 'react-select'
 import { useProvider } from 'src/fixtures/wallet/hooks'
 import { Grid } from 'src/components/atoms/Grid'
-import { useEnabledMarkets, useGetAuthenticatedProperties } from 'src/fixtures/dev-kit/hooks'
+import { useEnabledMarkets, useGetAssetsByProperties, useGetAuthenticatedProperties } from 'src/fixtures/dev-kit/hooks'
 
 export type FeatureTag = '' | 'GitHub' | 'npm' | 'Creators'
 interface Props {
@@ -206,11 +206,19 @@ export const PropertyCardList = ({ currentPage, searchWord, sortBy, featureTag }
           <PropertyOverview>
             {sortBy !== 'MOST_RECENT' &&
               data.property_factory_create.map(d => (
-                <PropertyCard key={d.event_id} propertyAddress={d.property} assets={d.authentication} />
+                <PropertyCard
+                  key={d.event_id}
+                  propertyAddress={d.property}
+                  assets={d.authentication.map(x => x.authentication_id)}
+                />
               ))}
             {sortBy === 'MOST_RECENT' &&
               mostRecentData.property_factory_create.map(d => (
-                <PropertyCard key={d.event_id} propertyAddress={d.property} assets={d.authentication} />
+                <PropertyCard
+                  key={d.event_id}
+                  propertyAddress={d.property}
+                  assets={d.authentication.map(x => x.authentication_id)}
+                />
               ))}
           </PropertyOverview>
           <PaginationContainer>
@@ -231,10 +239,18 @@ export const PropertyCardList = ({ currentPage, searchWord, sortBy, featureTag }
   )
 }
 
+export const PropertyByMarketWithAssetsL2 = ({ propertyAddress }: { propertyAddress: string }) => {
+  const { data } = useGetAssetsByProperties(propertyAddress)
+
+  return <>{data ? <PropertyCard propertyAddress={propertyAddress} assets={data.map(d => d.id)} /> : ''}</>
+}
+
 export const PropertyByMarketL2 = ({ market }: { market: string }) => {
   const { data } = useGetAuthenticatedProperties(market)
 
-  return <>{data ? data.map((property, i) => <PropertyCard key={i} propertyAddress={property} assets={[]} />) : ''}</>
+  return (
+    <>{data ? data.map((property, i) => <PropertyByMarketWithAssetsL2 key={i} propertyAddress={property} />) : ''}</>
+  )
 }
 
 export const PropertyCardListL2 = () => {

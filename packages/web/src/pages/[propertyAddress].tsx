@@ -15,7 +15,7 @@ import { ButtonWithGradient } from 'src/components/atoms/ButtonWithGradient'
 import { Container } from 'src/components/atoms/Container'
 import { Header } from 'src/components/organisms/Header'
 import TopStakers from 'src/components/organisms/TopStakers'
-import { useAPY, useGetMyStakingAmount, usePropertyAuthor } from 'src/fixtures/dev-kit/hooks'
+import { useAPY, useGetAssetsByProperties, useGetMyStakingAmount, usePropertyAuthor } from 'src/fixtures/dev-kit/hooks'
 import { useGetPropertyAuthenticationQuery, useGetPropertyAggregateLazyQuery } from '@dev/graphql'
 import { useGetPropertytInformation } from 'src/fixtures/devprtcl/hooks'
 import {
@@ -35,7 +35,6 @@ import { Avatar } from 'src/components/molecules/Avatar'
 import { CoverImageOrGradient } from 'src/components/atoms/CoverImageOrGradient'
 import { H3 } from 'src/components/atoms/Typography'
 import { Twitter, Github } from 'src/components/atoms/SocialButtons'
-import { getPath } from 'src/fixtures/utility/route'
 import { whenDefined } from 'src/fixtures/utility'
 
 type Props = {}
@@ -399,18 +398,21 @@ const Convert = ({ propertyAddress }: { propertyAddress: string }) => {
 }
 
 const PropertyAddressDetail = (_: Props) => {
-  const [urlPathArg] = getPath(useRouter().asPath)
-  const propertyAddress = urlPathArg.split('?')[0]
+  const { propertyAddress } = useRouter().query as { propertyAddress: string }
   const { apy, creators } = useAPY()
   const { data } = useGetPropertyAuthenticationQuery({ variables: { propertyAddress } })
   const { data: dataProperty } = useGetProperty(propertyAddress)
   const { data: propertyInformation } = useGetPropertytInformation(propertyAddress)
   /* eslint-disable react-hooks/exhaustive-deps */
   // FYI: https://github.com/facebook/react/pull/19062
-  const includedAssetList = useMemo(() => data?.property_authentication.map(e => e.authentication_id), [data])
+  const { data: includedAssetListL2 } = useGetAssetsByProperties(propertyAddress)
   const { accountAddress: loggedInWallet } = useProvider()
   const { author: authorAddress } = usePropertyAuthor(propertyAddress)
   const { myStakingAmount } = useGetMyStakingAmount(propertyAddress)
+  const includedAssetList = useMemo(
+    () => (data ? data.property_authentication.map(e => e.authentication_id) : includedAssetListL2?.map(e => e.id)),
+    [data, includedAssetListL2]
+  )
 
   return (
     <>
