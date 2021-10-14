@@ -211,7 +211,7 @@ export const PropertyCard = ({ propertyAddress, assets }: Props) => {
       <Link href={'/[propertyAddress]'} as={`/${propertyAddress}`}>
         <CardContents>
           <Title>{includeAssets || propertyName || 'Property'}</Title>
-          <PropertyTreasuryIcon name={includeAssets || propertyName} propertyAddress={propertyAddress} />
+          <PropertyTreasuryIcon name={includeAssets || propertyName || 'Property'} propertyAddress={propertyAddress} />
           <PropertyDescription>
             {dataProperty?.description ||
               'Stake DEV tokens to provide funding for OSS projects so that they can maintain development.'}
