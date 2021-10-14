@@ -10,6 +10,7 @@ import styled from 'styled-components'
 import Select from 'react-select'
 import { useProvider } from 'src/fixtures/wallet/hooks'
 import { Grid } from 'src/components/atoms/Grid'
+import { useEnabledMarkets, useGetAuthenticatedProperties } from 'src/fixtures/dev-kit/hooks'
 
 export type FeatureTag = '' | 'GitHub' | 'npm' | 'Creators'
 interface Props {
@@ -225,6 +226,32 @@ export const PropertyCardList = ({ currentPage, searchWord, sortBy, featureTag }
             />
           </PaginationContainer>
         </>
+      )}
+    </div>
+  )
+}
+
+export const PropertyByMarketL2 = ({ market }: { market: string }) => {
+  const { data } = useGetAuthenticatedProperties(market)
+
+  return <>{data ? data.map((property, i) => <PropertyCard key={i} propertyAddress={property} assets={[]} />) : ''}</>
+}
+
+export const PropertyCardListL2 = () => {
+  const { data: enabledMarkets } = useEnabledMarkets()
+
+  return (
+    <div style={{ flexGrow: 1, maxWidth: '100vw' }}>
+      <PropertiesHeader>
+        <Header>Asset Pools</Header>
+      </PropertiesHeader>
+
+      {enabledMarkets && (
+        <PropertyOverview>
+          {enabledMarkets.map((market, i) => (
+            <PropertyByMarketL2 key={i} market={market} />
+          ))}
+        </PropertyOverview>
       )}
     </div>
   )
