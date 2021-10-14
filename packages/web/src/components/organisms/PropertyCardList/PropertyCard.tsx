@@ -5,7 +5,8 @@ import {
   useGetTotalStakingAmount,
   useGetTotalRewardsAmount,
   useGetMyStakingRewardAmount,
-  usePropertyAuthor
+  usePropertyAuthor,
+  usePropertyName
 } from 'src/fixtures/dev-kit/hooks'
 import { useProvider } from 'src/fixtures/wallet/hooks'
 import styled from 'styled-components'
@@ -187,6 +188,7 @@ export const PropertyCard = ({ propertyAddress, assets }: Props) => {
   const { author: authorAddress } = usePropertyAuthor(propertyAddress)
   const { data: dataAuthor } = useGetAccount(authorAddress)
   const { data: dataProperty } = useGetProperty(propertyAddress)
+  const { name: propertyName } = usePropertyName(propertyAddress)
   const includeAssets = useMemo(() => assets && truncate(assets.map(e => e.authentication_id).join(', '), 24), [assets])
 
   const zeroBigNumber = new BigNumber(0)
@@ -208,8 +210,8 @@ export const PropertyCard = ({ propertyAddress, assets }: Props) => {
       )}
       <Link href={'/[propertyAddress]'} as={`/${propertyAddress}`}>
         <CardContents>
-          <Title>{includeAssets || 'Property'}</Title>
-          <PropertyTreasuryIcon name={includeAssets} propertyAddress={propertyAddress} />
+          <Title>{includeAssets || propertyName || 'Property'}</Title>
+          <PropertyTreasuryIcon name={includeAssets || propertyName} propertyAddress={propertyAddress} />
           <PropertyDescription>
             {dataProperty?.description ||
               'Stake DEV tokens to provide funding for OSS projects so that they can maintain development.'}
