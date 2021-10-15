@@ -2549,49 +2549,39 @@
     js-base64 "^3.7.2"
     ramda "^0.27.0"
 
-"@devprotocol/khaos-core@1.2.6":
-  version "1.2.6"
-  resolved "https://registry.yarnpkg.com/@devprotocol/khaos-core/-/khaos-core-1.2.6.tgz#76acd99d8e7af2df73eaaf486f136f5fb9d23d95"
-  integrity sha512-clEoCb2EBm1rVxin+2P+nKkpBGmEOVKe+X2KYRfJeXh1StUcY7SQKhE+OZF68fkU4V8shKie3gDqpjdLtPUD5g==
+"@devprotocol/khaos-core@1.5.0":
+  version "1.5.0"
+  resolved "https://registry.yarnpkg.com/@devprotocol/khaos-core/-/khaos-core-1.5.0.tgz#7b35bdeab2e4bf3df3984d31ee6d670f29627828"
+  integrity sha512-Hk8Gi2jBWhd58Ythm0xR7X8ql6ArWDsOR/EX6ZRAOXS7tGuQ6ixC+mm1o79D4S8mcjQxbbNb7UMz7tdsmX3PBQ==
   dependencies:
     "@azure/functions" "^1.2.3"
-    "@devprotocol/util-ts" "2.1.0"
-    "@ethersproject/abi" "^5.0.12"
-    "@ethersproject/contracts" "^5.0.10"
+    "@devprotocol/util-ts" "2.2.1"
+    "@ethersproject/abi" "^5.1.0"
     jsonwebtoken "^8.5.1"
     ramda "^0.27.1"
 
-"@devprotocol/khaos-functions@0.3.6":
-  version "0.3.6"
-  resolved "https://registry.yarnpkg.com/@devprotocol/khaos-functions/-/khaos-functions-0.3.6.tgz#b1c83a79a1b9c3645b91fcf5dbab868736d42519"
-  integrity sha512-ZCj+B/FdpdwYZK0Xrfh6qrVd2cZZB+FgFT8zGstdMnKE+/mc8Kdd2zCHAz3aobU+m1EGB/GP+WKHyxIGG3ObbA==
+"@devprotocol/khaos-functions@0.4.0":
+  version "0.4.0"
+  resolved "https://registry.yarnpkg.com/@devprotocol/khaos-functions/-/khaos-functions-0.4.0.tgz#3dfc4dadf424d73917bbd70f6678963e48899757"
+  integrity sha512-SB8JfJ4Fd1ygv8TmHlBIXcnBsoa5Y4JVHKrQQ4ieTuk/i5XY8h6kEW0L1FI7QLhMwbmgMnC+uxfq6gyXzqHVxQ==
   dependencies:
     "@azure/functions" "1.2.3"
-    "@devprotocol/khaos-core" "1.2.6"
-    "@devprotocol/util-ts" "2.1.0"
+    "@devprotocol/khaos-core" "1.5.0"
+    "@devprotocol/util-ts" "2.2.1"
     bent "7.3.12"
     ramda "0.27.1"
-    type-fest "0.21.3"
+    type-fest "2.3.4"
 
-"@devprotocol/khaos-kit@1.1.3":
-  version "1.1.3"
-  resolved "https://registry.yarnpkg.com/@devprotocol/khaos-kit/-/khaos-kit-1.1.3.tgz#b0982438f2460d92bfb454ac5c0649dfbfd2f710"
-  integrity sha512-5q/LdHVH1IF8fVZaqPMj/MS5uUWI4HeY2e4CAuDLmQr3TA670geLhebDg9Nhg1w+rlZDrlrNarQXkDTdoQJ6YA==
+"@devprotocol/khaos-kit@1.2.0":
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/@devprotocol/khaos-kit/-/khaos-kit-1.2.0.tgz#dc57eea18a70728a941bd4d0c2103c28ef2465c4"
+  integrity sha512-SfGcPL0+FgaBjNEEl8EyxvehiclxxPR2pmAZAZXpszg/NGe2uQv1v9NsNVEetLkClForM1eReE9t0lEofLbX0w==
   dependencies:
-    "@devprotocol/khaos-functions" "0.3.6"
-    "@ethersproject/contracts" "5.0.12"
+    "@devprotocol/khaos-functions" "0.4.0"
+    "@ethersproject/contracts" "5.4.1"
     bent "^7.3.12"
     ramda "^0.27.1"
-    type-fest "^0.21.2"
-
-"@devprotocol/util-ts@2.1.0":
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/@devprotocol/util-ts/-/util-ts-2.1.0.tgz#e0e5cc95b3c3b85985002970926d7271f5bfa352"
-  integrity sha512-ZcCj8K2oBhZ1BVV7oXMF4MpiwQVOcTY1J/HZtroH/b9arV2YddIKBlZSB4TdcIK9x6HsxWY1kAIZ1Lz350XIrA==
-  dependencies:
-    bent "7.3.12"
-    ethereum-waffle "3.2.1"
-    ramda "^0.27.1"
+    type-fest "^2.0.0"
 
 "@devprotocol/util-ts@2.2.1":
   version "2.2.1"
@@ -2755,14 +2745,6 @@
     minimatch "^3.0.4"
     strip-json-comments "^3.1.1"
 
-"@ethereum-waffle/chai@^3.2.1":
-  version "3.3.0"
-  resolved "https://registry.yarnpkg.com/@ethereum-waffle/chai/-/chai-3.3.0.tgz#8aba94be27535cf12419e545e5f7027226ef732f"
-  integrity sha512-KqPH9DdTmfgM6dGa6M7/rUillYdRsUVkIiFLgVdLDvtaALITb6IseGNGRRerG/J6wUeIUQxOJY0ACZRYPCItaQ==
-  dependencies:
-    "@ethereum-waffle/provider" "^3.3.0"
-    ethers "^5.0.0"
-
 "@ethereum-waffle/chai@^3.3.0":
   version "3.3.1"
   resolved "https://registry.yarnpkg.com/@ethereum-waffle/chai/-/chai-3.3.1.tgz#3f20b810d0fa516f19af93c50c3be1091333fa8e"
@@ -2770,23 +2752,6 @@
   dependencies:
     "@ethereum-waffle/provider" "^3.3.1"
     ethers "^5.0.0"
-
-"@ethereum-waffle/compiler@^3.2.1":
-  version "3.3.0"
-  resolved "https://registry.yarnpkg.com/@ethereum-waffle/compiler/-/compiler-3.3.0.tgz#26c2e9228f7118961625f3ace179b6c7004e9a6f"
-  integrity sha512-q5Nd0vlLeEYKszdJUNvIIuP2vj/tFkWt1LCvsIcFHIzxyIoLeaCFNzJI0UQ/s298svfPY59SyL7dKNcQWwbaWQ==
-  dependencies:
-    "@resolver-engine/imports" "^0.3.3"
-    "@resolver-engine/imports-fs" "^0.3.3"
-    "@typechain/ethers-v5" "^2.0.0"
-    "@types/mkdirp" "^0.5.2"
-    "@types/node-fetch" "^2.5.5"
-    ethers "^5.0.1"
-    mkdirp "^0.5.1"
-    node-fetch "^2.6.0"
-    solc "^0.6.3"
-    ts-generator "^0.1.1"
-    typechain "^3.0.0"
 
 "@ethereum-waffle/compiler@^3.3.0":
   version "3.3.1"
@@ -2823,7 +2788,7 @@
     "@ensdomains/resolver" "^0.2.4"
     ethers "^5.0.1"
 
-"@ethereum-waffle/mock-contract@^3.2.1", "@ethereum-waffle/mock-contract@^3.2.2":
+"@ethereum-waffle/mock-contract@^3.2.2":
   version "3.2.2"
   resolved "https://registry.yarnpkg.com/@ethereum-waffle/mock-contract/-/mock-contract-3.2.2.tgz#5749b03cbb4850150f81cf66151c4523eb7436f0"
   integrity sha512-H60Cc5C7sYNU4LuPMSKDh8YIaN9/fkwEjznY78CEbOosO+lMlFYdA+5VZjeDGDuYKfsBqsocQdkj1CRyoi1KNw==
@@ -2831,7 +2796,7 @@
     "@ethersproject/abi" "^5.0.1"
     ethers "^5.0.1"
 
-"@ethereum-waffle/provider@^3.2.1", "@ethereum-waffle/provider@^3.3.0":
+"@ethereum-waffle/provider@^3.3.0":
   version "3.3.0"
   resolved "https://registry.yarnpkg.com/@ethereum-waffle/provider/-/provider-3.3.0.tgz#3cacdb597ab04127c4c0b8a5b13e95ea33e932ab"
   integrity sha512-JcHGwDz8ciqwDXcZXLzOif8AY2n4fUG5ju0ZQCGRkYiRHHTrbqzwWAtFsEHetWAxCi3VGlSgeN833DGulnQaZg==
@@ -2868,7 +2833,7 @@
     "@ethersproject/properties" ">=5.0.0-beta.131"
     "@ethersproject/strings" ">=5.0.0-beta.130"
 
-"@ethersproject/abi@5.0.12", "@ethersproject/abi@^5.0.1", "@ethersproject/abi@^5.0.12":
+"@ethersproject/abi@5.0.12", "@ethersproject/abi@^5.0.1":
   version "5.0.12"
   resolved "https://registry.yarnpkg.com/@ethersproject/abi/-/abi-5.0.12.tgz#9aebe6aedc05ce45bb6c41b06d80bd195b7de77c"
   integrity sha512-Ujr/3bwyYYjXLDQfebeiiTuvOw9XtUKM8av6YkoBeMXyGQM9GkjrQlwJMNwGTmqjATH/ZNbRgCh98GjOLiIB1Q==
@@ -2883,7 +2848,7 @@
     "@ethersproject/properties" "^5.0.7"
     "@ethersproject/strings" "^5.0.8"
 
-"@ethersproject/abi@5.4.1":
+"@ethersproject/abi@5.4.1", "@ethersproject/abi@^5.1.0":
   version "5.4.1"
   resolved "https://registry.yarnpkg.com/@ethersproject/abi/-/abi-5.4.1.tgz#6ac28fafc9ef6f5a7a37e30356a2eb31fa05d39b"
   integrity sha512-9mhbjUk76BiSluiiW4BaYyI58KSbDMMQpCLdsAR+RsT2GyATiNYxVv+pGWRrekmsIdY3I+hOqsYQSTkc8L/mcg==
@@ -3246,25 +3211,10 @@
   dependencies:
     "@ethersproject/bignumber" "^5.0.13"
 
-"@ethersproject/contracts@5.0.11", "@ethersproject/contracts@^5.0.10":
+"@ethersproject/contracts@5.0.11":
   version "5.0.11"
   resolved "https://registry.yarnpkg.com/@ethersproject/contracts/-/contracts-5.0.11.tgz#e6cc57698a05be2329cb2ca3d7e87686f95e438a"
   integrity sha512-FTUUd/6x00dYL2VufE2VowZ7h3mAyBfCQMGwI3tKDIWka+C0CunllFiKrlYCdiHFuVeMotR65dIcnzbLn72MCw==
-  dependencies:
-    "@ethersproject/abi" "^5.0.10"
-    "@ethersproject/abstract-provider" "^5.0.8"
-    "@ethersproject/abstract-signer" "^5.0.10"
-    "@ethersproject/address" "^5.0.9"
-    "@ethersproject/bignumber" "^5.0.13"
-    "@ethersproject/bytes" "^5.0.9"
-    "@ethersproject/constants" "^5.0.8"
-    "@ethersproject/logger" "^5.0.8"
-    "@ethersproject/properties" "^5.0.7"
-
-"@ethersproject/contracts@5.0.12":
-  version "5.0.12"
-  resolved "https://registry.yarnpkg.com/@ethersproject/contracts/-/contracts-5.0.12.tgz#6d488db46221258399dfe80b89bf849b3afd7897"
-  integrity sha512-srijy31idjz8bE+gL1I6IRj2H4I9dUwfQ+QroLrIgNdGArqY8y2iFUKa3QTy+JBX26fJsdYiCQi1kKkaNpnMpQ==
   dependencies:
     "@ethersproject/abi" "^5.0.10"
     "@ethersproject/abstract-provider" "^5.0.8"
@@ -12319,17 +12269,6 @@ ethereum-cryptography@^0.1.3:
     scrypt-js "^3.0.0"
     secp256k1 "^4.0.1"
     setimmediate "^1.0.5"
-
-ethereum-waffle@3.2.1:
-  version "3.2.1"
-  resolved "https://registry.yarnpkg.com/ethereum-waffle/-/ethereum-waffle-3.2.1.tgz#9d6d6b93484c5e1b77dfdeb646c050ed877e836e"
-  integrity sha512-Fhg7BaBuV+Xo5XT+NEC3UTKGunvpq+iQPglZbIAJF6ZcwQwkiKfJUDuB0ZSkg5ntbRS4gpahfoXj1nTzdtx8UA==
-  dependencies:
-    "@ethereum-waffle/chai" "^3.2.1"
-    "@ethereum-waffle/compiler" "^3.2.1"
-    "@ethereum-waffle/mock-contract" "^3.2.1"
-    "@ethereum-waffle/provider" "^3.2.1"
-    ethers "^5.0.1"
 
 ethereum-waffle@3.3.0:
   version "3.3.0"
@@ -23198,10 +23137,10 @@ type-detect@4.0.8, type-detect@^4.0.8:
   resolved "https://registry.yarnpkg.com/type-detect/-/type-detect-4.0.8.tgz#7646fb5f18871cfbb7749e69bd39a6388eb7450c"
   integrity sha512-0fr/mIH1dlO+x7TlcMy+bIDqKPsw/70tVyeHW787goQjhmqaZe10uwLujubK9q9Lg6Fiho1KUKDYz0Z7k7g5/g==
 
-type-fest@0.21.3:
-  version "0.21.3"
-  resolved "https://registry.yarnpkg.com/type-fest/-/type-fest-0.21.3.tgz#d260a24b0198436e133fa26a524a6d65fa3b2e37"
-  integrity sha512-t0rzBq87m3fVcduHDUFhKmyyX+9eo6WQjZvf51Ea/M0Q7+T374Jp1aUiyUl0GKxp8M/OETVHSDvmkyPgvX+X2w==
+type-fest@2.3.4:
+  version "2.3.4"
+  resolved "https://registry.yarnpkg.com/type-fest/-/type-fest-2.3.4.tgz#59bd28c5715a7ea39f8fb0d7e424355ae231a24e"
+  integrity sha512-2UdQc7cx8F4Ky81Xj7NYQKPhZVtDFbtorrkairIW66rW7xQj5msAhioXa04HqEdP4MD4K2G6QAF7Zyiw/Hju1Q==
 
 type-fest@^0.11.0:
   version "0.11.0"
@@ -23222,11 +23161,6 @@ type-fest@^0.20.2:
   version "0.20.2"
   resolved "https://registry.yarnpkg.com/type-fest/-/type-fest-0.20.2.tgz#1bf207f4b28f91583666cb5fbd327887301cd5f4"
   integrity sha512-Ne+eE4r0/iWnpAxD852z3A+N0Bt5RN//NjJwRd2VFHEmrywxf5vsZlh4R6lixl6B+wz/8d+maTSAkN1FIkI3LQ==
-
-type-fest@^0.21.2:
-  version "0.21.2"
-  resolved "https://registry.yarnpkg.com/type-fest/-/type-fest-0.21.2.tgz#43b9dc71d9dc5593ea71bf7b0e013ec10f838249"
-  integrity sha512-pvQl0WNazvfQ0rq2XDdhpWv49sohh2t+buFbglaJ9N9+Xj4BhFRpuo+uJxemeARteRxRloJ1m+8gBR6Z2Nfktg==
 
 type-fest@^0.3.1:
   version "0.3.1"
@@ -23252,6 +23186,11 @@ type-fest@^0.8.1:
   version "0.8.1"
   resolved "https://registry.yarnpkg.com/type-fest/-/type-fest-0.8.1.tgz#09e249ebde851d3b1e48d27c105444667f17b83d"
   integrity sha512-4dbzIzqvjtgiM5rw1k5rEHtBANKmdudhGyBEajN01fEyhaAIhsoKNy6y7+IN93IfpFtwY9iqi7kD+xwKhQsNJA==
+
+type-fest@^2.0.0:
+  version "2.5.0"
+  resolved "https://registry.yarnpkg.com/type-fest/-/type-fest-2.5.0.tgz#e5d0ef818d565e8fc442414194a4ac3afc4c42a7"
+  integrity sha512-wB5vE+XXZ2g2mDRo18yZMae1joUhquomLTm+BkxeuRHnwmrNWzVPNrFah9z7pjsKNiVAaJL33+uQbgbPSARyqw==
 
 type-is@~1.6.17, type-is@~1.6.18:
   version "1.6.18"
