@@ -13,10 +13,10 @@ const providerUrl = (chain: ChainName = 'main') =>
       ? WEB3_PROVIDER_ENDPOINT_HOSTS.MAIN
       : chain === 'ropsten'
       ? WEB3_PROVIDER_ENDPOINT_HOSTS.ROPSTEN
-      : chain === 'arbitrum-one-main'
-      ? WEB3_PROVIDER_ENDPOINT_HOSTS.ARB1_MAIN
-      : chain === 'arbitrum-one-rinkeby'
-      ? WEB3_PROVIDER_ENDPOINT_HOSTS.ARB1_RINKEBY
+      : chain === 'arbitrum-one'
+      ? WEB3_PROVIDER_ENDPOINT_HOSTS.ARB_ONE
+      : chain === 'arbitrum-rinkeby'
+      ? WEB3_PROVIDER_ENDPOINT_HOSTS.ARB_RINKEBY
       : WEB3_PROVIDER_ENDPOINT_HOSTS.MAIN
   }/${WEB3_PROVIDER_ENDPOINT_KEY}`
 const nonConnectedWeb3 = (chain: ChainName) => new Web3(providerUrl(chain))

@@ -67,10 +67,10 @@ const createGetContractAddress =
   }
 const getL2Registry = async (prov: providers.BaseProvider) => {
   const net = await getNetwork(prov)
-  return net === 'arbitrum-one-main'
-    ? addresses.arbitrumOne.main
-    : net === 'arbitrum-one-rinkeby'
-    ? addresses.arbitrumOne.rinkeby
+  return net === 'arbitrum-one'
+    ? addresses.arbitrum.one
+    : net === 'arbitrum-rinkeby'
+    ? addresses.arbitrum.rinkeby
     : undefined
 }
 
