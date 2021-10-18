@@ -53,7 +53,7 @@ const Index = (_: Props) => {
     return '' as FeatureTag
   }, [router])
   const isL2 = useMemo(() => {
-    return name === 'arbitrum-one-main' || name === 'arbitrum-one-rinkeby'
+    return name === 'arbitrum-one' || name === 'arbitrum-rinkeby'
   }, [name])
 
   return (

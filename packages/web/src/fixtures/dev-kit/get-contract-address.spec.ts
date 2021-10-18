@@ -25,25 +25,25 @@ describe('get-contract-address.ts', () => {
       expect(result).toBe('LOCKUP_ADDRESS')
       expect(devkit.registry.mock.calls[0][0]).toBe(addresses.eth.ropsten.registry)
     })
-    test('Returns address as a value, and third-argument is "arbitrum-one-main"', async () => {
+    test('Returns address as a value, and third-argument is "arbitrum-one"', async () => {
       const devkit = {
         registry: jest.fn().mockImplementation((address: string) => ({
           lockup: async () => Promise.resolve('LOCKUP_ADDRESS')
         }))
       }
-      const result = await getContractAddress(devkit as unknown as DevkitContract, 'lockup', 'arbitrum-one-main')
+      const result = await getContractAddress(devkit as unknown as DevkitContract, 'lockup', 'arbitrum-one')
       expect(result).toBe('LOCKUP_ADDRESS')
-      expect(devkit.registry.mock.calls[0][0]).toBe(addresses.arbitrumOne.main.registry)
+      expect(devkit.registry.mock.calls[0][0]).toBe(addresses.arbitrum.one.registry)
     })
-    test('Returns address as a value, and third-argument is "arbitrum-one-rinkeby"', async () => {
+    test('Returns address as a value, and third-argument is "arbitrum-rinkeby"', async () => {
       const devkit = {
         registry: jest.fn().mockImplementation((address: string) => ({
           lockup: async () => Promise.resolve('LOCKUP_ADDRESS')
         }))
       }
-      const result = await getContractAddress(devkit as unknown as DevkitContract, 'lockup', 'arbitrum-one-rinkeby')
+      const result = await getContractAddress(devkit as unknown as DevkitContract, 'lockup', 'arbitrum-rinkeby')
       expect(result).toBe('LOCKUP_ADDRESS')
-      expect(devkit.registry.mock.calls[0][0]).toBe(addresses.arbitrumOne.rinkeby.registry)
+      expect(devkit.registry.mock.calls[0][0]).toBe(addresses.arbitrum.rinkeby.registry)
     })
   })
   describe('Caching', () => {
