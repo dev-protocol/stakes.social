@@ -67,10 +67,10 @@ const createGetContractAddress =
   }
 const getL2Registry = async (prov: providers.BaseProvider) => {
   const net = await getNetwork(prov)
-  return net === 'arbitrum-one-main'
-    ? addresses.arbitrumOne.main
-    : net === 'arbitrum-one-rinkeby'
-    ? addresses.arbitrumOne.rinkeby
+  return net === 'arbitrum-one'
+    ? addresses.arbitrum.one
+    : net === 'arbitrum-rinkeby'
+    ? addresses.arbitrum.rinkeby
     : undefined
 }
 
@@ -586,6 +586,39 @@ export const getAuthenticatedProperties = async (prov: providers.BaseProvider, m
   const [, l2] = await newClient(prov)
   if (l2) {
     return l2.market(marketAddress).getAuthenticatedProperties()
+  }
+  return undefined
+}
+
+export const metricsOfProperty = async (prov: providers.BaseProvider, propertyAddress: string) => {
+  const [, l2] = await newClient(prov)
+  const reg = await getL2Registry(prov)
+  if (l2 && reg) {
+    return l2.metricsFactory(reg.metricsFactory).metricsOfProperty(propertyAddress)
+  }
+  return undefined
+}
+
+export const getMarket = async (prov: providers.BaseProvider, metricsAddress: string) => {
+  const [, , client] = await newClient(prov)
+  if (client) {
+    return client.metrics(metricsAddress).market()
+  }
+  return undefined
+}
+
+export const getMarketBehavior = async (prov: providers.BaseProvider, marketAddress: string) => {
+  const [, , client] = await newClient(prov)
+  if (client) {
+    return client.market(marketAddress).behavior()
+  }
+  return undefined
+}
+
+export const getId = async (prov: providers.BaseProvider, marketBehavior: string, metricsAddress: string) => {
+  const [, , client] = await newClient(prov)
+  if (client) {
+    return client.marketBehavior(marketBehavior).getId(metricsAddress)
   }
   return undefined
 }

@@ -98,17 +98,17 @@ describe('wallet utility', () => {
       expect(result.chainId).toBe(3)
       expect(result.name).toBe('ropsten')
     })
-    test('Detect arbitrum one main', async () => {
+    test('Detect arbitrum one', async () => {
       const mock = { getNetwork: () => Promise.resolve({ chainId: 42161 }) } as unknown as providers.BaseProvider
       const result = await detectChain(mock)
       expect(result.chainId).toBe(42161)
-      expect(result.name).toBe('arbitrum-one-main')
+      expect(result.name).toBe('arbitrum-one')
     })
-    test('Detect arbitrum one rinkeby', async () => {
+    test('Detect arbitrum rinkeby', async () => {
       const mock = { getNetwork: () => Promise.resolve({ chainId: 421611 }) } as unknown as providers.BaseProvider
       const result = await detectChain(mock)
       expect(result.chainId).toBe(421611)
-      expect(result.name).toBe('arbitrum-one-rinkeby')
+      expect(result.name).toBe('arbitrum-rinkeby')
     })
   })
 })

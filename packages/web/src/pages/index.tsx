@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react'
-import { PropertyCardList } from 'src/components/organisms/PropertyCardList'
+import { PropertyCardList, PropertyCardListL2 } from 'src/components/organisms/PropertyCardList'
 import { Footer } from 'src/components/organisms/Footer'
 import { useRouter } from 'next/router'
 
@@ -9,6 +9,7 @@ import { Header } from 'src/components/organisms/Header'
 import { FeatureTag } from 'src/components/organisms/PropertyCardList'
 import { Container } from 'src/components/atoms/Container'
 import styled from 'styled-components'
+import { useDetectChain, useProvider } from 'src/fixtures/wallet/hooks'
 
 type InitialProps = {}
 type Props = {} & InitialProps
@@ -19,6 +20,8 @@ const StyledSupplySummary = styled(SupplySummary)`
 
 const Index = (_: Props) => {
   const router = useRouter()
+  const { ethersProvider } = useProvider()
+  const { name } = useDetectChain(ethersProvider)
   const { apy, creators } = useAPY()
   const { annualSupplyGrowthRatio } = useAnnualSupplyGrowthRatio()
   const page = useMemo(() => {
@@ -49,13 +52,20 @@ const Index = (_: Props) => {
     }
     return '' as FeatureTag
   }, [router])
+  const isL2 = useMemo(() => {
+    return name === 'arbitrum-one' || name === 'arbitrum-rinkeby'
+  }, [name])
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
       <Header />
       <Container>
         <StyledSupplySummary apy={apy} creators={creators} annualSupplyGrowthRatio={annualSupplyGrowthRatio} />
-        <PropertyCardList currentPage={page} searchWord={word} sortBy={sortBy} featureTag={featureTag} />
+        {isL2 ? (
+          <PropertyCardListL2 />
+        ) : (
+          <PropertyCardList currentPage={page} searchWord={word} sortBy={sortBy} featureTag={featureTag} />
+        )}
       </Container>
       <Footer />
     </div>

@@ -12,7 +12,7 @@ type signCache = {
   signature: string
 }
 
-export type ChainName = UndefinedOr<'main' | 'ropsten' | 'arbitrum-one-main' | 'arbitrum-one-rinkeby'>
+export type ChainName = UndefinedOr<'main' | 'ropsten' | 'arbitrum-one' | 'arbitrum-rinkeby'>
 
 const signCacheContainer: Map<string, signCache> = new Map()
 
@@ -158,9 +158,9 @@ export const detectChain = async (ethersProvider?: providers.BaseProvider) => {
       : chainId === 3
       ? 'ropsten'
       : chainId === 42161
-      ? 'arbitrum-one-main'
+      ? 'arbitrum-one'
       : chainId === 421611
-      ? 'arbitrum-one-rinkeby'
+      ? 'arbitrum-rinkeby'
       : undefined
 
   return { chainId, name }

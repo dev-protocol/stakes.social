@@ -1,8 +1,8 @@
 export const WEB3_PROVIDER_ENDPOINT_HOSTS = {
   MAIN: 'https://eth-mainnet.alchemyapi.io/v2',
   ROPSTEN: 'https://eth-ropsten.alchemyapi.io/v2',
-  ARB1_MAIN: 'https://arb-mainnet.g.alchemy.com/v2',
-  ARB1_RINKEBY: 'https://arb-rinkeby.g.alchemy.com/v2'
+  ARB_ONE: 'https://arb-mainnet.g.alchemy.com/v2',
+  ARB_RINKEBY: 'https://arb-rinkeby.g.alchemy.com/v2'
 }
 
 export const WEB3_PROVIDER_ENDPOINT_KEY = process.env.IS_PREVIEW
