@@ -5,21 +5,25 @@ import WalletContext from 'src/context/walletContext'
 import { WEB3_PROVIDER_ENDPOINT_KEY, WEB3_PROVIDER_ENDPOINT_HOSTS } from 'src/fixtures/wallet/constants'
 import { providers } from 'ethers'
 import { whenDefined } from '@devprotocol/util-ts'
+import useSWR from 'swr'
 
-const providerUrl = (chain: ChainName = 'main') =>
-  `${
-    chain === 'main'
-      ? WEB3_PROVIDER_ENDPOINT_HOSTS.MAIN
-      : chain === 'ropsten'
-      ? WEB3_PROVIDER_ENDPOINT_HOSTS.ROPSTEN
-      : chain === 'arbitrum-one'
-      ? WEB3_PROVIDER_ENDPOINT_HOSTS.ARB_ONE
-      : chain === 'arbitrum-rinkeby'
-      ? WEB3_PROVIDER_ENDPOINT_HOSTS.ARB_RINKEBY
-      : WEB3_PROVIDER_ENDPOINT_HOSTS.MAIN
-  }/${WEB3_PROVIDER_ENDPOINT_KEY}`
-const nonConnectedWeb3 = (chain: ChainName) => new Web3(providerUrl(chain))
-const nonConnectedEthersProvider = (chain: ChainName) => new providers.JsonRpcProvider(providerUrl(chain))
+const providerUrl = (chain: ChainName) =>
+  chain
+    ? `${
+        chain === 'main'
+          ? WEB3_PROVIDER_ENDPOINT_HOSTS.MAIN
+          : chain === 'ropsten'
+          ? WEB3_PROVIDER_ENDPOINT_HOSTS.ROPSTEN
+          : chain === 'arbitrum-one'
+          ? WEB3_PROVIDER_ENDPOINT_HOSTS.ARB_ONE
+          : chain === 'arbitrum-rinkeby'
+          ? WEB3_PROVIDER_ENDPOINT_HOSTS.ARB_RINKEBY
+          : undefined
+      }/${WEB3_PROVIDER_ENDPOINT_KEY}`
+    : undefined
+const nonConnectedWeb3 = (chain: ChainName) => whenDefined(providerUrl(chain), url => new Web3(url))
+const nonConnectedEthersProvider = (chain: ChainName) =>
+  whenDefined(providerUrl(chain), url => new providers.JsonRpcProvider(url))
 
 export const useConnectWallet = () => {
   const { web3Modal, setProviders } = useContext(WalletContext)
@@ -56,15 +60,14 @@ export const useProvider = () => {
     web3,
     ethersProvider,
     accountAddress,
-    nonConnectedWeb3: nonConnectedWeb3(name),
-    nonConnectedEthersProvider: nonConnectedEthersProvider(name)
+    nonConnectedWeb3: web3 ? web3 : nonConnectedWeb3(name),
+    nonConnectedEthersProvider: ethersProvider ? ethersProvider : nonConnectedEthersProvider(name)
   }
 }
 
 export const useDetectChain = (ethersProvider?: providers.BaseProvider) => {
-  const [data, setData] = useState<undefined | { name?: ChainName; chainId?: number }>()
-  useEffect(() => {
-    whenDefined(ethersProvider, prov => detectChain(prov).then(setData))
-  }, [ethersProvider])
+  const { data } = useSWR(`useDetectChain/${ethersProvider?.network?.chainId}`, () =>
+    whenDefined(ethersProvider, prov => detectChain(prov))
+  )
   return { chainId: data?.chainId, name: data?.name }
 }

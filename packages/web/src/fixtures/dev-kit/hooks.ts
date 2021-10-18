@@ -624,18 +624,20 @@ export const useCirculatingSupply = () => {
   )
 
   const circulatingSupplyValue = useCallback(async () => {
-    const amounts = await Promise.all([
-      balanceOf(nonConnectedEthersProvider, DEV_ALLOCATIONS.privateSale),
-      balanceOf(nonConnectedEthersProvider, DEV_ALLOCATIONS.teamOptions),
-      balanceOf(nonConnectedEthersProvider, DEV_ALLOCATIONS.teamTreasury),
-      balanceOf(nonConnectedEthersProvider, DEV_ALLOCATIONS.ecosystemFund),
-      balanceOf(nonConnectedEthersProvider, DEV_ALLOCATIONS.airdrop)
-    ])
-    const privateSaleAmount = new BigNumber(amounts[0] || '0')
-    const teamOptionAmount = new BigNumber(amounts[1] || '0')
-    const teamAmount = new BigNumber(amounts[2] || '0')
-    const ecosystemFundAmount = new BigNumber(amounts[3] || '0')
-    const airdropAmount = new BigNumber(amounts[4] || '0')
+    const amounts = await whenDefined(nonConnectedEthersProvider, prov =>
+      Promise.all([
+        balanceOf(prov, DEV_ALLOCATIONS.privateSale),
+        balanceOf(prov, DEV_ALLOCATIONS.teamOptions),
+        balanceOf(prov, DEV_ALLOCATIONS.teamTreasury),
+        balanceOf(prov, DEV_ALLOCATIONS.ecosystemFund),
+        balanceOf(prov, DEV_ALLOCATIONS.airdrop)
+      ])
+    )
+    const privateSaleAmount = new BigNumber(amounts?.[0] || '0')
+    const teamOptionAmount = new BigNumber(amounts?.[1] || '0')
+    const teamAmount = new BigNumber(amounts?.[2] || '0')
+    const ecosystemFundAmount = new BigNumber(amounts?.[3] || '0')
+    const airdropAmount = new BigNumber(amounts?.[4] || '0')
     return new BigNumber(totalSupplyValue || '0')
       .minus(privateSaleAmount)
       .minus(teamOptionAmount)
