@@ -3,7 +3,7 @@ import Web3Modal from 'web3modal'
 import { message } from 'antd'
 import { AbstractProvider, provider } from 'web3-core'
 import { providers } from 'ethers'
-import { whenDefined, UndefinedOr } from '@devprotocol/util-ts'
+import { UndefinedOr } from '@devprotocol/util-ts'
 
 const cache: WeakMap<NonNullable<Web3>, string> = new WeakMap()
 
@@ -150,8 +150,8 @@ export const createHandleAddClick =
   }
 
 export const detectChain = async (ethersProvider?: providers.BaseProvider) => {
-  const res = await whenDefined(ethersProvider, prov => prov.getNetwork())
-  const chainId = whenDefined(res, x => x.chainId)
+  const res = await ethersProvider?.getNetwork()
+  const chainId = res?.chainId
   const name: ChainName =
     chainId === 1
       ? 'main'

@@ -1,11 +1,10 @@
 import Web3 from 'web3'
 import { ChainName, connectWallet, detectChain, disconnectWallet, getAccountAddress } from './utility'
-import { UnwrapFunc, whenDefined } from 'src/fixtures/utility'
-import useSWR from 'swr'
 import { useContext, useEffect, useState } from 'react'
 import WalletContext from 'src/context/walletContext'
 import { WEB3_PROVIDER_ENDPOINT_KEY, WEB3_PROVIDER_ENDPOINT_HOSTS } from 'src/fixtures/wallet/constants'
 import { providers } from 'ethers'
+import { whenDefined } from '@devprotocol/util-ts'
 
 const providerUrl = (chain: ChainName = 'main') =>
   `${
@@ -63,8 +62,9 @@ export const useProvider = () => {
 }
 
 export const useDetectChain = (ethersProvider?: providers.BaseProvider) => {
-  const { data } = useSWR<undefined | UnwrapFunc<typeof detectChain>, Error>('detectChain', () =>
-    whenDefined(ethersProvider, prov => detectChain(prov))
-  )
+  const [data, setData] = useState<undefined | { name?: ChainName; chainId?: number }>()
+  useEffect(() => {
+    whenDefined(ethersProvider, prov => detectChain(prov).then(setData))
+  }, [ethersProvider])
   return { chainId: data?.chainId, name: data?.name }
 }
