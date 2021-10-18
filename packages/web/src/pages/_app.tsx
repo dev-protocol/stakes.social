@@ -96,11 +96,11 @@ class NextApp extends App<AppInitialProps & WithApolloProps<{}>> {
       return undefined
     }
 
-    const web3: any = new Web3(provider)
-    const ethersProvider = new providers.Web3Provider(provider)
-    console.log({ web3, ethersProvider })
-    this.setState({ web3, ethersProvider })
-    return [web3, ethersProvider]
+    const updater = this.createProviderUpdater(provider)
+    const provs = updater()
+    provider.on('accountsChanged', updater)
+    provider.on('chainChanged', updater)
+    return [provs.web3, provs.ethersProvider]
   }
 
   componentDidMount = () => {
@@ -109,7 +109,6 @@ class NextApp extends App<AppInitialProps & WithApolloProps<{}>> {
     })
 
     this.web3Modal = new Web3Modal({
-      network: 'mainnet',
       cacheProvider: true,
       providerOptions: this.getProviderOptions()
     })
@@ -129,8 +128,17 @@ class NextApp extends App<AppInitialProps & WithApolloProps<{}>> {
     Router.events.on('routeChangeComplete', url => gtag.pageview(url))
   }
 
-  setProviders = (web3: Web3, provider: providers.BaseProvider) => {
-    this.setState({ web3, ethersProvider: provider })
+  createProviderUpdater(provider: any) {
+    return () => {
+      const web3: any = new Web3(provider)
+      const ethersProvider = new providers.Web3Provider(web3.currentProvider)
+      this.setProviders(web3, ethersProvider)
+      return { web3, ethersProvider }
+    }
+  }
+
+  setProviders = (web3: Web3, ethersProvider: providers.BaseProvider) => {
+    this.setState({ web3, ethersProvider })
   }
 
   toggleCurrency = () => {
