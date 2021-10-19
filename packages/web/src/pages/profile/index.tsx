@@ -10,7 +10,7 @@ import { CurrencySwitcher } from 'src/components/organisms/PropertyCardList/Curr
 import { BuyDevButton } from 'src/components/molecules/BuyButton'
 import { Statistics } from 'src/components/_pages/portfolio/Statistics'
 import { YourStakes } from 'src/components/_pages/portfolio/YourStakes'
-import { useProvider } from 'src/fixtures/wallet/hooks'
+import { useDetectChain, useProvider } from 'src/fixtures/wallet/hooks'
 import { YourPools } from 'src/components/_pages/portfolio/YourPools'
 import { blueGradient } from 'src/styles/gradient'
 import { boxShahowWithOnHover } from 'src/styles/boxShahow'
@@ -85,7 +85,9 @@ const EditButton = styled(Button)`
 `
 
 const Portfolio = () => {
-  const { accountAddress } = useProvider()
+  const { ethersProvider, accountAddress } = useProvider()
+  const { name: chain } = useDetectChain(ethersProvider)
+  const isL1 = chain === 'main'
 
   const { data } = useGetAccount(accountAddress)
   return (
@@ -109,13 +111,21 @@ const Portfolio = () => {
             </>
           )}
         </PortfolioHeader>
-        <Statistics accountAddress={accountAddress} />
-        <Divider type="horizontal" />
+        {isL1 && (
+          <>
+            <Statistics accountAddress={accountAddress} />
+            <Divider type="horizontal" />
+          </>
+        )}
         <Heading>Your sTokens positions</Heading>
         <YourPositions accountAddress={accountAddress} />
-        <Heading>Your Stakes</Heading>
-        <YourStakes accountAddress={accountAddress} />
-        <Divider type="horizontal" />
+        {isL1 && (
+          <>
+            <Heading>Your Stakes</Heading>
+            <YourStakes accountAddress={accountAddress} />
+            <Divider type="horizontal" />
+          </>
+        )}
         <Heading>Your Pools</Heading>
         <YourPools accountAddress={accountAddress} />
         <Divider type="horizontal" />
