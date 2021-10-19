@@ -9,6 +9,8 @@ import { BuyDevButton } from 'src/components/molecules/BuyButton'
 import { DevChart } from 'src/components/organisms/DevChart'
 import { Container } from 'src/components/atoms/Container'
 import styled from 'styled-components'
+import { useDetectChain, useProvider } from 'src/fixtures/wallet/hooks'
+import Text from 'antd/lib/typography/Text'
 
 type Props = {}
 
@@ -17,7 +19,11 @@ const StyledHeadline = styled(Headline)`
 `
 
 const DevProtocolStats = (_: Props) => {
-  return (
+  const { ethersProvider } = useProvider()
+  const { name: chain } = useDetectChain(ethersProvider)
+  const isL1 = chain === 'main'
+
+  return isL1 ? (
     <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
       <Header />
       <StyledHeadline>
@@ -33,6 +39,10 @@ const DevProtocolStats = (_: Props) => {
         <DevChart />
       </Container>
       <Footer />
+    </div>
+  ) : (
+    <div style={{ display: 'flex', minHeight: '100vh', justifyContent: 'center', alignItems: 'center' }}>
+      <Text type="secondary">(Not provide this feature yet on L2)</Text>
     </div>
   )
 }

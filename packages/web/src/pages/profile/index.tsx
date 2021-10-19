@@ -111,12 +111,9 @@ const Portfolio = () => {
             </>
           )}
         </PortfolioHeader>
-        {isL1 && (
-          <>
-            <Statistics accountAddress={accountAddress} />
-            <Divider type="horizontal" />
-          </>
-        )}
+        <Heading>Statistics</Heading>
+        <Statistics accountAddress={accountAddress} />
+        <Divider type="horizontal" />
         <Heading>Your sTokens positions</Heading>
         <YourPositions accountAddress={accountAddress} />
         {isL1 && (

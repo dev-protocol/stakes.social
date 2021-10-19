@@ -1,6 +1,6 @@
 import Web3 from 'web3'
 import { ChainName, connectWallet, detectChain, disconnectWallet, getAccountAddress } from './utility'
-import { useContext, useEffect, useState } from 'react'
+import { useContext, useEffect, useMemo, useState } from 'react'
 import WalletContext from 'src/context/walletContext'
 import { WEB3_PROVIDER_ENDPOINT_KEY, WEB3_PROVIDER_ENDPOINT_HOSTS } from 'src/fixtures/wallet/constants'
 import { providers } from 'ethers'
@@ -70,4 +70,11 @@ export const useDetectChain = (ethersProvider?: providers.BaseProvider) => {
     whenDefined(ethersProvider, prov => detectChain(prov))
   )
   return { chainId: data?.chainId, name: data?.name }
+}
+
+export const useIsL1 = () => {
+  const { ethersProvider } = useProvider()
+  const { name: chain } = useDetectChain(ethersProvider)
+  const isL1 = useMemo(() => chain === 'main', [chain])
+  return { isL1 }
 }

@@ -1,10 +1,12 @@
 import React from 'react'
 import styled from 'styled-components'
-import { useListTopSupportingAccountQuery, useGetPropertyAuthenticationQuery } from '@dev/graphql'
+import { useListTopSupportingAccountQuery, useGetPropertyAuthenticationQuery } from '@dev/graphql' // @L2
 import Link from 'next/link'
 import { useGetProperty } from 'src/fixtures/dev-for-apps/hooks'
 import { AvatarProperty } from 'src/components/molecules/AvatarProperty'
 import { Spin } from 'antd'
+import { useIsL1 } from 'src/fixtures/wallet/hooks'
+import Text from 'antd/lib/typography/Text'
 
 type Props = {
   accountAddress: string
@@ -64,14 +66,16 @@ const Support = ({ propertyAddress, value }: { propertyAddress: string; value: n
 }
 
 const TopSupporting = ({ accountAddress }: Props) => {
+  const { isL1 } = useIsL1()
   const { data, loading } = useListTopSupportingAccountQuery({
     variables: {
       account_address: accountAddress,
       limit: 5
-    }
+    },
+    skip: !isL1
   })
 
-  return (
+  return isL1 ? (
     <div>
       {!loading && data?.account_lockup?.length === 0 && <div>This author doesnt support other projects</div>}
       {loading && <Spin size="large" style={{ display: 'block', width: 'auto', padding: '100px' }} />}
@@ -82,6 +86,8 @@ const TopSupporting = ({ accountAddress }: Props) => {
           ))}
       </TopSupportingContainer>
     </div>
+  ) : (
+    <Text type="secondary">(Not provide this feature yet on L2)</Text>
   )
 }
 

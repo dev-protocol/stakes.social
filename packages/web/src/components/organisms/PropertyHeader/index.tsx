@@ -1,6 +1,5 @@
 import React from 'react'
 import styled from 'styled-components'
-import { useGetPropertyAuthenticationQuery } from '@dev/graphql'
 import BigNumber from 'bignumber.js'
 import { BuyDevButton } from 'src/components/molecules/BuyButton'
 import { useGetAuthorInformation } from 'src/fixtures/devprtcl/hooks'
@@ -8,8 +7,8 @@ import { WithGradient } from 'src/components/atoms/WithGradient'
 import ReactMarkdown from 'react-markdown'
 import { useClipboard } from 'use-clipboard-copy'
 import { CopyOutlined, CheckCircleTwoTone } from '@ant-design/icons'
-import { useProvider } from 'src/fixtures/wallet/hooks'
 import ShareTweet from '../../atoms/ShareButtons'
+import { usePropertyAuthor, usePropertyName } from 'src/fixtures/dev-kit/hooks'
 
 const ResponsivePropertyAddressFrame = styled.div`
   margin: 1rem auto;
@@ -157,27 +156,17 @@ export const CopyBadge = ({ propertyAddress }: { propertyAddress: string }) => {
 }
 
 export const PropertyHeader = ({ propertyAddress, apy, creators }: Props) => {
-  const { accountAddress } = useProvider()
-  const { data } = useGetPropertyAuthenticationQuery({
-    variables: {
-      propertyAddress
-    }
-  })
-  const { data: dataAuthor } = useGetAuthorInformation(data?.property_authentication?.[0]?.property_meta?.author)
-  const isNotSelf = dataAuthor?.address !== accountAddress
-  const propertyTitle = data?.property_authentication?.[0]?.authentication_id
-    ? data?.property_authentication?.[0]?.authentication_id
-    : propertyAddress
+  const { name: propertyName } = usePropertyName(propertyAddress)
+  const { author } = usePropertyAuthor(propertyAddress)
+  const { data: dataAuthor } = useGetAuthorInformation(author)
 
   return (
     <ResponsivePropertyAddressFrame>
       <HeaderContainer>
-        <Header>
-          {data?.property_authentication?.[0]?.authentication_id ? `${propertyTitle}'s Pool` : `${propertyTitle} Pool`}
-        </Header>
-        {dataAuthor && !isNotSelf && <CopyBadge propertyAddress={propertyAddress} />}
+        <Header>{propertyName ? `${propertyName} Pool` : ''}</Header>
+        <CopyBadge propertyAddress={propertyAddress} />
       </HeaderContainer>
-      <ShareTweet title={propertyTitle}></ShareTweet>
+      <ShareTweet title={propertyName || 'N/A'}></ShareTweet>
       <SubHeader>
         <ApyContainer>
           <ResponsiveSubheaderSection>

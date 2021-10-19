@@ -183,11 +183,14 @@ export const useGetHolderAmountByAddress = (propertyAddress: string, srcAddress?
   }
 }
 
-export const useGetTreasuryAmount = (propertyAddress: string) => {
+export const useGetTreasuryAmount = (propertyAddress?: string) => {
   const { nonConnectedEthersProvider } = useProvider()
   const { data, error } = useSWR<UnwrapFunc<typeof getTreasuryAmount>, Error>(
     SWRCachePath.getTreasuryAmount(propertyAddress),
-    () => whenDefined(nonConnectedEthersProvider, client => getTreasuryAmount(client, propertyAddress)),
+    () =>
+      whenDefinedAll([nonConnectedEthersProvider, propertyAddress], ([client, property]) =>
+        getTreasuryAmount(client, property)
+      ),
     { onError: err => message.error(err.message), revalidateOnFocus: false, focusThrottleInterval: 0 }
   )
   return { treasuryAmount: data ? toNaturalNumber(data) : undefined, error }

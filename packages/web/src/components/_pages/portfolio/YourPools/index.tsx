@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
-import { useListOwnedPropertyMetaQuery } from '@dev/graphql'
+import { useListOwnedPropertyMetaQuery } from '@dev/graphql' // @L2
 import { AssetList } from 'src/components/molecules/AssetList'
 import { useCallback } from 'react'
-import { useDetectChain, useProvider } from 'src/fixtures/wallet/hooks'
+import { useIsL1 } from 'src/fixtures/wallet/hooks'
 import Text from 'antd/lib/typography/Text'
 
 interface Props {
@@ -12,10 +12,8 @@ interface Props {
 const perPage = 5
 
 export const YourPools = ({ accountAddress }: Props) => {
-  const { ethersProvider } = useProvider()
-  const { name: chain } = useDetectChain(ethersProvider)
   const [page, setPage] = useState(1)
-  const isL1 = chain === 'main'
+  const { isL1 } = useIsL1()
   const { data: totalProperties } = useListOwnedPropertyMetaQuery({
     variables: { account_address: isL1 ? accountAddress || '' : '' }
   })

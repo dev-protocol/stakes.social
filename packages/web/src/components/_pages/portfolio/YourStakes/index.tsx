@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useListAccountLockupQuery } from '@dev/graphql'
+import { useListAccountLockupQuery } from '@dev/graphql' // @L2: The parent component will not use this component on L2
 import { AssetList } from 'src/components/molecules/AssetList'
 import { useCallback } from 'react'
 
