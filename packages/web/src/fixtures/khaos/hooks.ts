@@ -2,11 +2,12 @@ import { useState } from 'react'
 import { message } from 'antd'
 import { emulateOraclizeGitHubMarketAsset, postSignGitHubMarketAsset } from './utility'
 import { sign } from 'src/fixtures/wallet/utility'
-import { useProvider } from '../wallet/hooks'
+import { useDetectChain, useProvider } from '../wallet/hooks'
 
 export const usePostSignGitHubMarketAsset = () => {
   const key = 'usePostSignGitHubMarketAsset'
-  const { web3, accountAddress } = useProvider()
+  const { web3, ethersProvider, accountAddress } = useProvider()
+  const { name: networkName } = useDetectChain(ethersProvider)
   const [isLoading, setIsLoading] = useState<boolean>(false)
 
   const postSignGitHubMarketAssetHandler = async (repository: string, personalAccessToken: string) => {
@@ -18,18 +19,22 @@ export const usePostSignGitHubMarketAsset = () => {
 
     setIsLoading(true)
 
-    const signed = await postSignGitHubMarketAsset(signMessage, signature || '', personalAccessToken).catch(
-      (err: Error) => err
-    )
+    const signed = await postSignGitHubMarketAsset(networkName)(
+      signMessage,
+      signature || '',
+      personalAccessToken
+    ).catch((err: Error) => err)
     if (signed instanceof Error) {
       message.error({ content: signed.message, key })
       setIsLoading(false)
       throw signed
     }
 
-    const emulated = await emulateOraclizeGitHubMarketAsset(repository, signed.publicSignature, accountAddress).catch(
-      (err: Error) => err
-    )
+    const emulated = await emulateOraclizeGitHubMarketAsset(networkName)(
+      repository,
+      signed.publicSignature,
+      accountAddress
+    ).catch((err: Error) => err)
     if (emulated instanceof Error) {
       message.error({ content: emulated.message, key })
       setIsLoading(false)
