@@ -12,11 +12,7 @@ import {
   withdrawAbi,
   RegistryContract
 } from '@devprotocol/dev-kit'
-import {
-  contractFactory as l2ContractFactory,
-  DevkitContract as L2DevkitContract,
-  RegistryContract as L2RegistryContract
-} from '@devprotocol/dev-kit/l2'
+import { contractFactory as l2ContractFactory, DevkitContract as L2DevkitContract } from '@devprotocol/dev-kit/l2'
 import { getContractAddress as _getContractAddress } from './get-contract-address'
 import BigNumber from 'bignumber.js'
 import { ethers, providers, Event } from 'ethers'
@@ -60,7 +56,7 @@ const createGetContractAddress =
   (prov: providers.BaseProvider) =>
   async <C extends DevkitContract | L2DevkitContract>(
     client: C,
-    contract: C extends DevkitContract ? keyof Omit<RegistryContract, 'contract'> : keyof L2RegistryContract
+    contract: keyof Omit<RegistryContract, 'contract'>
   ): Promise<string> => {
     const net = await getNetwork(prov)
     console.log({ net })
@@ -223,10 +219,15 @@ export const getEstimateGas4StakeDev = async (
 }
 
 export const calculateMaxRewardsPerBlock = async (prov: providers.BaseProvider) => {
-  const [client] = await newClient(prov)
+  const [l1, l2] = await newClient(prov)
   const getContractAddress = createGetContractAddress(prov)
-  if (client) {
-    return client.allocator(await getContractAddress(client, 'allocator')).calculateMaxRewardsPerBlock()
+  if (l1) {
+    return l1.allocator(await getContractAddress(l1, 'allocator')).calculateMaxRewardsPerBlock()
+  }
+  if (l2) {
+    const totalLocked = await l2.lockup(await getContractAddress(l2, 'lockup')).totalLocked()
+    const totalAssets = await l2.metricsFactory(await getContractAddress(l2, 'metricsFactory')).metricsCount()
+    return l2.policy(await getContractAddress(l2, 'policy')).rewards(totalLocked, totalAssets.toString())
   }
   return undefined
 }

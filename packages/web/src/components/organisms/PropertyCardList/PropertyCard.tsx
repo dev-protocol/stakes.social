@@ -181,7 +181,7 @@ export const PropertyCard = ({ propertyAddress, assets }: Props) => {
   const { myStakingRewardAmount, currency: myStakingRewardAmountCurrency } =
     useGetMyStakingRewardAmount(propertyAddress)
   const { myStakingAmount, currency: myStakingAmountCurrency } = useGetMyStakingAmount(propertyAddress)
-  const { data: authorData } = useGetPropertytInformation(propertyAddress)
+  const { data: authorData } = useGetPropertytInformation(isL1 ? propertyAddress : undefined)
   const { author: authorAddress } = usePropertyAuthor(propertyAddress)
   const { data: dataAuthor } = useGetAccount(authorAddress)
   const { data: dataProperty } = useGetProperty(propertyAddress)
@@ -214,12 +214,12 @@ export const PropertyCard = ({ propertyAddress, assets }: Props) => {
               'Stake DEV tokens to provide funding for OSS projects so that they can maintain development.'}
           </PropertyDescription>
           <FlexRow>
-            <Avatar accountAddress={authorData?.author.address} size={'60'} />
+            <Avatar accountAddress={authorAddress} size={'60'} />
             <FlewColumn>
               <span style={{ fontWeight: 'lighter' }}>Creator</span>
-              <span style={{ color: '#1AC9FC' }}>{dataAuthor?.name || authorData?.name || authorAddress}</span>
-              {isL1 ? (
-                <span>{authorData?.author?.karma ? formatter.format(authorData?.author?.karma) : 0} Karma</span>
+              <span style={{ color: '#1AC9FC' }}>{dataAuthor?.name || authorAddress}</span>
+              {authorData ? (
+                <span>{authorData.author?.karma ? formatter.format(authorData.author?.karma) : 0} Karma</span>
               ) : (
                 ''
               )}
