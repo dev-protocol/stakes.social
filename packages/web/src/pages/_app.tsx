@@ -131,7 +131,7 @@ class NextApp extends App<AppInitialProps & WithApolloProps<{}>> {
   createProviderUpdater(provider: any) {
     return () => {
       const web3: any = new Web3(provider)
-      const ethersProvider = new providers.Web3Provider(web3.currentProvider)
+      const ethersProvider = new providers.Web3Provider(provider)
       this.setProviders(web3, ethersProvider)
       return { web3, ethersProvider }
     }

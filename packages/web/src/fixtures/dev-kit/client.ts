@@ -63,6 +63,7 @@ const createGetContractAddress =
     contract: C extends DevkitContract ? keyof Omit<RegistryContract, 'contract'> : keyof L2RegistryContract
   ): Promise<string> => {
     const net = await getNetwork(prov)
+    console.log({ net })
     return _getContractAddress(client, contract, net)
   }
 const getL2Registry = async (prov: providers.BaseProvider) => {
@@ -293,11 +294,17 @@ export const createAndAuthenticate = async (
   const [, , client] = await newClient(prov)
   const getContractAddress = createGetContractAddress(prov)
   if (client) {
-    return client
-      .propertyFactory(await getContractAddress(client, 'propertyFactory'))
-      .createAndAuthenticate(name, symbol, marketAddress, args, {
+    console.log('***', await (prov as any).getSigner().getAddress())
+    return client.propertyFactory(await getContractAddress(client, 'propertyFactory')).createAndAuthenticate(
+      name,
+      symbol,
+      marketAddress,
+      args,
+      {
         metricsFactoryAddress: await getContractAddress(client, 'metricsFactory')
-      })
+      },
+      { fallback: { gasLimit: 2000000 } }
+    )
   }
   return undefined
 

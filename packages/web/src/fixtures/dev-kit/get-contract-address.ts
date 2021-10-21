@@ -17,17 +17,15 @@ export const getContractAddress = async <C extends DevkitContract | L2DevkitCont
     if (!cache.get(net)) {
       cache.set(net, new Map())
     }
-    const map =
-      net === 'main'
-        ? addresses.eth.main
-        : net === 'ropsten'
-        ? addresses.eth.ropsten
-        : net === 'arbitrum-one'
-        ? addresses.arbitrum.one
+    const map = net === 'main' ? addresses.eth.main : net === 'ropsten' ? addresses.eth.ropsten : undefined
+    const addressFromDevKit =
+      net === 'arbitrum-one'
+        ? addresses.arbitrum.one[contract as unknown as keyof typeof addresses.arbitrum.one]
         : net === 'arbitrum-rinkeby'
-        ? addresses.arbitrum.rinkeby
-        : addresses.eth.main
-    const address = await client.registry(map.registry)[contract]()
+        ? addresses.arbitrum.rinkeby[contract as unknown as keyof typeof addresses.arbitrum.rinkeby]
+        : undefined
+    const address = map ? await client.registry(map.registry)[contract]() : addressFromDevKit!
+    console.log({ address, contract })
     cache.get(net)?.set(contract, address)
     return address
   })(cache.get(net)?.get(contract))
