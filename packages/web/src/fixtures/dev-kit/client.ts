@@ -81,7 +81,8 @@ export const getRewardsAmount = async (prov: providers.BaseProvider, propertyAdd
   if (client) {
     return client
       .lockup(await getContractAddress(client, 'lockup'))
-      .calculateCumulativeHoldersRewardAmount(propertyAddress)
+      .calculateRewardAmount(propertyAddress)
+      .then(x => x[0])
   }
   return undefined
 }
@@ -580,11 +581,11 @@ export const getStokenSymbol = async (prov: providers.BaseProvider, sTokenId: nu
   return undefined
 }
 
-export const enabledMarkets = async (prov: providers.BaseProvider) => {
+export const getEnabledMarkets = async (prov: providers.BaseProvider) => {
   const [, l2] = await newClient(prov)
   const reg = await getL2Registry(prov)
   if (l2 && reg) {
-    return l2.marketFactory(reg.marketFactory).enabledMarkets()
+    return l2.marketFactory(reg.marketFactory).getEnabledMarkets()
   }
   return undefined
 }

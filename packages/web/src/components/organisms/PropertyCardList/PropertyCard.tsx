@@ -8,7 +8,7 @@ import {
   usePropertyAuthor,
   usePropertyName
 } from 'src/fixtures/dev-kit/hooks'
-import { useProvider } from 'src/fixtures/wallet/hooks'
+import { useIsL1, useProvider } from 'src/fixtures/wallet/hooks'
 import styled from 'styled-components'
 import { truncate } from 'src/fixtures/utility/string'
 import { useGetPropertytInformation } from 'src/fixtures/devprtcl/hooks'
@@ -174,6 +174,7 @@ const PlaceholderCoverImageOrGradient = styled.div`
 
 export const PropertyCard = ({ propertyAddress, assets }: Props) => {
   const { accountAddress } = useProvider()
+  const { isL1 } = useIsL1()
   const [modalStates, setModalStates] = useState<ModalStates>({ visible: false })
   const { totalStakingAmount, currency: totalStakingAmountCurrency } = useGetTotalStakingAmount(propertyAddress)
   const { totalRewardsAmount, currency: totalRewardsAmountCurrency } = useGetTotalRewardsAmount(propertyAddress)
@@ -216,8 +217,12 @@ export const PropertyCard = ({ propertyAddress, assets }: Props) => {
             <Avatar accountAddress={authorData?.author.address} size={'60'} />
             <FlewColumn>
               <span style={{ fontWeight: 'lighter' }}>Creator</span>
-              <span style={{ color: '#1AC9FC' }}>{dataAuthor?.name || authorData?.name}</span>
-              <span>{authorData?.author?.karma ? formatter.format(authorData?.author?.karma) : 0} Karma</span>
+              <span style={{ color: '#1AC9FC' }}>{dataAuthor?.name || authorData?.name || authorAddress}</span>
+              {isL1 ? (
+                <span>{authorData?.author?.karma ? formatter.format(authorData?.author?.karma) : 0} Karma</span>
+              ) : (
+                ''
+              )}
             </FlewColumn>
           </FlexRow>
           <RowContainer>

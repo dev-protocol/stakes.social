@@ -55,6 +55,7 @@ const Index = (_: Props) => {
   const isL2 = useMemo(() => {
     return name === 'arbitrum-one' || name === 'arbitrum-rinkeby'
   }, [name])
+  console.log({ isL2 })
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>

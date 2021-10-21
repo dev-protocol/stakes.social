@@ -11,7 +11,11 @@ import styled from 'styled-components'
 import Select from 'react-select'
 import { useProvider } from 'src/fixtures/wallet/hooks'
 import { Grid } from 'src/components/atoms/Grid'
-import { useEnabledMarkets, useGetAssetsByProperties, useGetAuthenticatedProperties } from 'src/fixtures/dev-kit/hooks'
+import {
+  useGetEnabledMarkets,
+  useGetAssetsByProperties,
+  useGetAuthenticatedProperties
+} from 'src/fixtures/dev-kit/hooks'
 
 export type FeatureTag = '' | 'GitHub' | 'npm' | 'Creators'
 interface Props {
@@ -255,7 +259,7 @@ export const PropertyByMarketL2 = ({ market }: { market: string }) => {
 }
 
 export const PropertyCardListL2 = () => {
-  const { data: enabledMarkets } = useEnabledMarkets()
+  const { data: enabledMarkets } = useGetEnabledMarkets()
 
   return (
     <div style={{ flexGrow: 1, maxWidth: '100vw' }}>

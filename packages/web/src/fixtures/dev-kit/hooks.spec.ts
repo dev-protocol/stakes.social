@@ -34,7 +34,7 @@ import {
   useGetTokenURI,
   useGetStokenSymbol,
   usePositionsOfOwner,
-  useEnabledMarkets,
+  useGetEnabledMarkets,
   useGetAuthenticatedProperties
 } from './hooks'
 import { useCurrency } from 'src/fixtures/currency/functions/useCurrency'
@@ -1207,12 +1207,12 @@ describe('dev-kit hooks', () => {
     })
   })
 
-  describe('useEnabledMarkets', () => {
+  describe('useGetEnabledMarkets', () => {
     test('data is undefined', () => {
       const data = undefined
       const error = undefined
       ;(useSWR as jest.Mock).mockImplementation(() => ({ data, error }))
-      const { result } = renderHook(() => useEnabledMarkets())
+      const { result } = renderHook(() => useGetEnabledMarkets())
       expect(result.current.data).toBe(data)
       expect(result.current.error).toBe(undefined)
     })
@@ -1221,7 +1221,7 @@ describe('dev-kit hooks', () => {
       const data = ['0x0']
       const error = undefined
       ;(useSWR as jest.Mock).mockImplementation(() => ({ data, error }))
-      const { result } = renderHook(() => useEnabledMarkets())
+      const { result } = renderHook(() => useGetEnabledMarkets())
       expect(result.current.data).toBe(data)
       expect(result.current.error).toBe(undefined)
     })
@@ -1231,7 +1231,7 @@ describe('dev-kit hooks', () => {
       const errorMessage = 'error'
       const error = new Error(errorMessage)
       ;(useSWR as jest.Mock).mockImplementation(() => ({ data, error }))
-      const { result } = renderHook(() => useEnabledMarkets())
+      const { result } = renderHook(() => useGetEnabledMarkets())
       expect(result.current.error).toBe(error)
       expect(result.current.error?.message).toBe(errorMessage)
     })
