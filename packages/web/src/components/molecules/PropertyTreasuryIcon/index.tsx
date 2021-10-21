@@ -1,8 +1,9 @@
+// @L2 optimized: TODO: GraphQL can already be replaced by Dev Kit
 import React, { useMemo, useState } from 'react'
 import styled from 'styled-components'
 import BigNumber from 'bignumber.js'
 import { PieChartOutlined } from '@ant-design/icons'
-import { useGetPropertyBalanceQuery } from '@dev/graphql' // @L2: TODO: This query can already be replaced by Dev Kit
+import { useGetPropertyBalanceQuery } from '@dev/graphql'
 import { usePropertySymbol, useGetTreasuryAmount } from 'src/fixtures/dev-kit/hooks'
 import { toNaturalNumber } from 'src/fixtures/utility'
 import { ResponsiveModal } from 'src/components/atoms/ResponsiveModal'

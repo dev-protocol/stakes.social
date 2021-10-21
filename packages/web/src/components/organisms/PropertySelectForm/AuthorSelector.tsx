@@ -1,6 +1,7 @@
+// @L2 optimized
 import React from 'react'
 import { Select } from 'antd'
-import { useListPropertyMetaQuery } from '@dev/graphql' // @L2
+import { useListPropertyMetaQuery } from '@dev/graphql'
 import { useIsL1 } from 'src/fixtures/wallet/hooks'
 import Text from 'antd/lib/typography/Text'
 

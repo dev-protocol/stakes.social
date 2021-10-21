@@ -1,5 +1,6 @@
+// @L2 optimized
 import React, { useState } from 'react'
-import { useListOwnedPropertyMetaQuery } from '@dev/graphql' // @L2
+import { useListOwnedPropertyMetaQuery } from '@dev/graphql'
 import { AssetList } from 'src/components/molecules/AssetList'
 import { useCallback } from 'react'
 import { useIsL1 } from 'src/fixtures/wallet/hooks'

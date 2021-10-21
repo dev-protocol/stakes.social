@@ -1,6 +1,7 @@
+// @L2 optimized
 import React from 'react'
 import styled from 'styled-components'
-import { useListTopSupportingAccountQuery, useGetPropertyAuthenticationQuery } from '@dev/graphql' // @L2
+import { useListTopSupportingAccountQuery, useGetPropertyAuthenticationQuery } from '@dev/graphql'
 import Link from 'next/link'
 import { useGetProperty } from 'src/fixtures/dev-for-apps/hooks'
 import { AvatarProperty } from 'src/components/molecules/AvatarProperty'

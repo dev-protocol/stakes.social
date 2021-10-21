@@ -1,8 +1,9 @@
+// @L2 optimized
 import React, { HTMLAttributes } from 'react'
 import { useAllClaimedRewards, useAPY, useBalanceOf } from 'src/fixtures/dev-kit/hooks'
 import styled from 'styled-components'
 import { Statistic } from 'antd'
-import { useTotalStakedAccountLazyQuery } from '@dev/graphql' // @L2
+import { useTotalStakedAccountLazyQuery } from '@dev/graphql'
 import { useEffect } from 'react'
 import { useCurrency } from 'src/fixtures/currency/hooks'
 import { useIsL1 } from 'src/fixtures/wallet/hooks'

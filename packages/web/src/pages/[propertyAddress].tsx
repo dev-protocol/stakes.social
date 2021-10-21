@@ -1,3 +1,4 @@
+// @L2 optimized
 import React, { useCallback, useMemo, useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
@@ -16,7 +17,7 @@ import { Container } from 'src/components/atoms/Container'
 import { Header } from 'src/components/organisms/Header'
 import TopStakers from 'src/components/organisms/TopStakers'
 import { useAPY, useGetAssetsByProperties, useGetMyStakingAmount, usePropertyAuthor } from 'src/fixtures/dev-kit/hooks'
-import { useGetPropertyAuthenticationQuery } from '@dev/graphql' // @L2
+import { useGetPropertyAuthenticationQuery } from '@dev/graphql'
 import { useGetPropertytInformation } from 'src/fixtures/devprtcl/hooks'
 import {
   useGetAccount,

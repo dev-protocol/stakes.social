@@ -1,9 +1,10 @@
+// @L2 optimized
 import React, { useEffect, useState } from 'react'
 import { useQuery } from '@apollo/client'
 import getTopStakersOfPropertyQuery from './query/getTopStakersOfProperty'
 import { Avatar } from 'src/components/molecules/Avatar'
 import styled, { css } from 'styled-components'
-import { useListTopStakersAccountLazyQuery } from '@dev/graphql' // @L2
+import { useListTopStakersAccountLazyQuery } from '@dev/graphql'
 import { useGetAccount } from 'src/fixtures/dev-for-apps/hooks'
 import { useENS } from 'src/fixtures/ens/hooks'
 import { Spin } from 'antd'

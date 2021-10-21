@@ -1,8 +1,9 @@
+// @L2 optimized: The parent component will not use this component on L2
 import BigNumber from 'bignumber.js'
 import React, { useMemo, useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { useGetDevPrice } from 'src/fixtures/uniswap/hooks'
-import { useListPropertyQuery, useCountAccountLockupUniqueQuery } from '@dev/graphql' // @L2: The parent component will not use this component on L2
+import { useListPropertyQuery, useCountAccountLockupUniqueQuery } from '@dev/graphql'
 import {
   useAPY,
   useAnnualSupplyGrowthRatio,

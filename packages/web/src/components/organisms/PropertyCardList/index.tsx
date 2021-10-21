@@ -1,7 +1,8 @@
+// @L2 optimized
 import React, { useCallback, useState } from 'react'
 import Link from 'next/link'
 import { Spin, Pagination } from 'antd'
-import { useListPropertyQuery, useListPropertyOrderByMostRecentQuery } from '@dev/graphql' // @L2
+import { useListPropertyQuery, useListPropertyOrderByMostRecentQuery } from '@dev/graphql'
 import { PropertyCard } from './PropertyCard'
 import { PropertySearchForm } from './PropertySearchForm'
 import { CurrencySwitcher } from './CurrencySwitcher'
