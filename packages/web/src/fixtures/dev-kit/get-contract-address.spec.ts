@@ -28,7 +28,7 @@ describe('get-contract-address.ts', () => {
     test('Returns address as a value, and third-argument is "arbitrum-one"', async () => {
       const devkit = {
         registry: jest.fn().mockImplementation((address: string) => ({
-          lockup: async () => Promise.resolve('LOCKUP_ADDRESS')
+          registries: async () => Promise.resolve('LOCKUP_ADDRESS')
         }))
       }
       const result = await getContractAddress(devkit as unknown as DevkitContract, 'lockup', 'arbitrum-one')
@@ -38,7 +38,7 @@ describe('get-contract-address.ts', () => {
     test('Returns address as a value, and third-argument is "arbitrum-rinkeby"', async () => {
       const devkit = {
         registry: jest.fn().mockImplementation((address: string) => ({
-          lockup: async () => Promise.resolve('LOCKUP_ADDRESS')
+          registries: async () => Promise.resolve('LOCKUP_ADDRESS')
         }))
       }
       const result = await getContractAddress(devkit as unknown as DevkitContract, 'lockup', 'arbitrum-rinkeby')
@@ -48,17 +48,17 @@ describe('get-contract-address.ts', () => {
   })
   describe('Caching', () => {
     test('Returns address from the cache when 2nd subsequent call', async () => {
-      const lockup = jest.fn().mockImplementation(async () => Promise.resolve('LOCKUP_ADDRESS'))
+      const cacheTest = jest.fn().mockImplementation(async () => Promise.resolve('ADDRESS'))
       const devkit = {
         registry: jest.fn().mockImplementation((address: string) => ({
-          lockup
+          cacheTest
         }))
       }
-      await getContractAddress(devkit as unknown as DevkitContract, 'lockup', 'CACHE_TEST' as any) // First
-      await getContractAddress(devkit as unknown as DevkitContract, 'lockup', 'CACHE_TEST' as any) // Second
-      const result = await getContractAddress(devkit as unknown as DevkitContract, 'lockup', 'CACHE_TEST' as any) // Third
-      expect(result).toBe('LOCKUP_ADDRESS')
-      expect(lockup.mock.calls.length).toBe(1)
+      await getContractAddress(devkit as unknown as DevkitContract, 'cacheTest' as any, 'main') // First
+      await getContractAddress(devkit as unknown as DevkitContract, 'cacheTest' as any, 'main') // Second
+      const result = await getContractAddress(devkit as unknown as DevkitContract, 'cacheTest' as any, 'main') // Third
+      expect(result).toBe('ADDRESS')
+      expect(cacheTest.mock.calls.length).toBe(1)
     })
   })
 })
