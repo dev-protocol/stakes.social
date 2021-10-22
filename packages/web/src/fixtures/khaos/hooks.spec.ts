@@ -2,6 +2,7 @@ import useSWR from 'swr'
 import { renderHook, act } from '@testing-library/react-hooks'
 import { usePostSignGitHubMarketAsset } from './hooks'
 import { emulateOraclizeGitHubMarketAsset, postSignGitHubMarketAsset } from './utility'
+import { sign } from 'src/fixtures/wallet/utility'
 
 jest.mock('swr')
 jest.mock('src/fixtures/utility')
@@ -14,6 +15,7 @@ describe('khaos hooks', () => {
     test('success post auth github asset', async () => {
       const data = { publicSignature: 'dummy signature' }
       const error = undefined
+      ;(sign as jest.Mock).mockResolvedValue(`test`)
       ;(useSWR as jest.Mock).mockImplementation(() => ({ data, error }))
       ;(postSignGitHubMarketAsset as jest.Mock).mockImplementation(
         () => () => Promise.resolve({ publicSignature: 'dummy signature' })
@@ -36,6 +38,7 @@ describe('khaos hooks', () => {
       const data = undefined
       const errorMessage = 'error'
       const error = new Error(errorMessage)
+      ;(sign as jest.Mock).mockResolvedValue(`test`)
       ;(useSWR as jest.Mock).mockImplementation(() => ({ data, error, mutate: () => {} }))
       ;(postSignGitHubMarketAsset as jest.Mock).mockImplementation(
         () => () => Promise.resolve({ publicSignature: 'dummy signature' })
