@@ -88,7 +88,7 @@
     "@types/tinycolor2": "1.4.3",
     "@types/ua-parser-js": "0.7.36",
     "@zeit/next-css": "1.0.1",
-    "babel-loader": "8.2.2",
+    "babel-loader": "8.2.3",
     "babel-plugin-import": "1.13.3",
     "babel-plugin-styled-components": "1.13.2",
     "electron": "15.2.0",
