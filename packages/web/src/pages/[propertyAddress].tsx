@@ -357,7 +357,7 @@ const PropertyAddressDetail = (_: Props) => {
   const { apy, creators } = useAPY()
   const { data } = useGetPropertyAuthenticationQuery({ variables: { propertyAddress }, skip: !isL1 })
   const { data: dataProperty } = useGetProperty(propertyAddress)
-  const { data: propertyInformation } = useGetPropertytInformation(propertyAddress)
+  const { data: propertyInformation } = useGetPropertytInformation(isL1 ? propertyAddress : undefined)
   /* eslint-disable react-hooks/exhaustive-deps */
   // FYI: https://github.com/facebook/react/pull/19062
   const { data: includedAssetListL2 } = useGetAssetsByProperties(propertyAddress)
