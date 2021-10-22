@@ -46,7 +46,7 @@
     "next": "11.1.2",
     "next-i18next": "8.9.0",
     "next-offline": "5.0.5",
-    "next-plugin-antd-less": "1.4.3",
+    "next-plugin-antd-less": "1.4.4",
     "next-transpile-modules": "8.0.0",
     "next-with-apollo": "5.2.1",
     "node-libs-browser": "2.2.1",
