@@ -53,15 +53,18 @@ const Index = (_: Props) => {
     return '' as FeatureTag
   }, [router])
   const isL2 = useMemo(() => {
-    return name === 'arbitrum-one' || name === 'arbitrum-rinkeby'
+    return name === undefined ? undefined : name === 'arbitrum-one' || name === 'arbitrum-rinkeby'
   }, [name])
+  console.log({ isL2 })
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
       <Header />
       <Container>
         <StyledSupplySummary apy={apy} creators={creators} annualSupplyGrowthRatio={annualSupplyGrowthRatio} />
-        {isL2 ? (
+        {isL2 === undefined ? (
+          <></>
+        ) : isL2 ? (
           <PropertyCardListL2 />
         ) : (
           <PropertyCardList currentPage={page} searchWord={word} sortBy={sortBy} featureTag={featureTag} />

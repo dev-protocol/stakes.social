@@ -155,7 +155,7 @@ const Author = ({ propertyAddress }: { propertyAddress: string }) => {
   const { author: authorAddress } = usePropertyAuthor(propertyAddress)
   const { data: dataAuthor } = useGetAccount(authorAddress)
 
-  return (
+  return authorAddress ? (
     <AuthorContainer>
       <h2>
         Created by <Link href={`/author/${authorAddress}`}>{dataAuthor?.name || authorAddress}</Link>
@@ -170,6 +170,8 @@ const Author = ({ propertyAddress }: { propertyAddress: string }) => {
         </Link>
       </Flex>
     </AuthorContainer>
+  ) : (
+    <></>
   )
 }
 
@@ -355,7 +357,7 @@ const PropertyAddressDetail = (_: Props) => {
   const { apy, creators } = useAPY()
   const { data } = useGetPropertyAuthenticationQuery({ variables: { propertyAddress }, skip: !isL1 })
   const { data: dataProperty } = useGetProperty(propertyAddress)
-  const { data: propertyInformation } = useGetPropertytInformation(propertyAddress)
+  const { data: propertyInformation } = useGetPropertytInformation(isL1 ? propertyAddress : undefined)
   /* eslint-disable react-hooks/exhaustive-deps */
   // FYI: https://github.com/facebook/react/pull/19062
   const { data: includedAssetListL2 } = useGetAssetsByProperties(propertyAddress)

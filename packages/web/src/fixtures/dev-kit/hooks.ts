@@ -39,7 +39,7 @@ import {
   getTokenURI,
   getStokenSymbol,
   positionsOfOwner,
-  enabledMarkets,
+  getEnabledMarkets,
   getAuthenticatedProperties,
   metricsOfProperty,
   getMarketBehavior,
@@ -89,7 +89,14 @@ export const useGetTotalRewardsAmount = (propertyAddress: string) => {
   const { data, error } = useSWR<undefined | UnwrapFunc<typeof getRewardsAmount>, Error>(
     SWRCachePath.getTotalRewardsAmount(propertyAddress, accountAddress),
     () => whenDefined(prov, x => getRewardsAmount(x, propertyAddress)),
-    { onError: err => message.error(err.message), revalidateOnFocus: false, focusThrottleInterval: 0 }
+    {
+      onError: err => {
+        console.log(err)
+        message.error(err.message)
+      },
+      revalidateOnFocus: false,
+      focusThrottleInterval: 0
+    }
   )
   return {
     totalRewardsAmount: whenDefined(data, x => toCurrency(toNaturalNumber(toNaturalNumber(x)))),
@@ -155,7 +162,14 @@ export const useGetMyHolderAmount = (propertyAddress?: string) => {
       whenDefinedAll([nonConnectedEthersProvider, propertyAddress, accountAddress], ([client, property, account]) =>
         getMyHolderAmount(client, property, account)
       ),
-    { onError: err => message.error(err.message), revalidateOnFocus: false, focusThrottleInterval: 0 }
+    {
+      onError: err => {
+        console.log(err)
+        message.error(err.message)
+      },
+      revalidateOnFocus: false,
+      focusThrottleInterval: 0
+    }
   )
   const [withdrawable, , , total] = data || []
   return {
@@ -173,7 +187,14 @@ export const useGetHolderAmountByAddress = (propertyAddress: string, srcAddress?
       whenDefinedAll([nonConnectedEthersProvider, srcAddress], ([client, account]) =>
         getMyHolderAmount(client, propertyAddress, account)
       ),
-    { onError: err => message.error(err.message), revalidateOnFocus: false, focusThrottleInterval: 0 }
+    {
+      onError: err => {
+        console.log(err)
+        message.error(err.message)
+      },
+      revalidateOnFocus: false,
+      focusThrottleInterval: 0
+    }
   )
   const [withdrawable, , , total] = data || []
   return {
@@ -191,7 +212,14 @@ export const useGetTreasuryAmount = (propertyAddress?: string) => {
       whenDefinedAll([nonConnectedEthersProvider, propertyAddress], ([client, property]) =>
         getTreasuryAmount(client, property)
       ),
-    { onError: err => message.error(err.message), revalidateOnFocus: false, focusThrottleInterval: 0 }
+    {
+      onError: err => {
+        console.log(err)
+        message.error(err.message)
+      },
+      revalidateOnFocus: false,
+      focusThrottleInterval: 0
+    }
   )
   return { treasuryAmount: data ? toNaturalNumber(data) : undefined, error }
 }
@@ -202,7 +230,14 @@ export const useGetTotalStakingAmount = (propertyAddress: string) => {
   const { data, error } = useSWR<UnwrapFunc<typeof getTotalStakingAmount>, Error>(
     SWRCachePath.getTotalStakingAmount(propertyAddress, accountAddress),
     () => whenDefined(nonConnectedEthersProvider, x => getTotalStakingAmount(x, propertyAddress)),
-    { onError: err => message.error(err.message), revalidateOnFocus: false, focusThrottleInterval: 0 }
+    {
+      onError: err => {
+        console.log(err)
+        message.error(err.message)
+      },
+      revalidateOnFocus: false,
+      focusThrottleInterval: 0
+    }
   )
   return { totalStakingAmount: whenDefined(data, x => toCurrency(toNaturalNumber(x))), currency, error }
 }
@@ -216,7 +251,14 @@ export const useGetMyStakingRewardAmount = (propertyAddress?: string) => {
       whenDefinedAll([nonConnectedEthersProvider, propertyAddress, accountAddress], ([client, property, account]) =>
         getMyStakingRewardAmount(client, property, account)
       ),
-    { onError: err => message.error(err.message), revalidateOnFocus: false, focusThrottleInterval: 0 }
+    {
+      onError: err => {
+        console.log(err)
+        message.error(err.message)
+      },
+      revalidateOnFocus: false,
+      focusThrottleInterval: 0
+    }
   )
 
   return {
@@ -236,7 +278,14 @@ export const useGetMyStakingAmount = (propertyAddress?: string) => {
       whenDefinedAll([nonConnectedEthersProvider, propertyAddress, accountAddress], ([client, property, account]) =>
         getMyStakingAmount(client, property, account)
       ),
-    { onError: err => message.error(err.message), revalidateOnFocus: false, focusThrottleInterval: 0 }
+    {
+      onError: err => {
+        console.log(err)
+        message.error(err.message)
+      },
+      revalidateOnFocus: false,
+      focusThrottleInterval: 0
+    }
   )
 
   return { myStakingAmount: whenDefined(data, x => toCurrency(toNaturalNumber(x))), currency, error }
@@ -377,7 +426,14 @@ export const useTotalStakingAmountOnProtocol = () => {
   const { data: stakingAmount, error } = useSWR<UnwrapFunc<typeof getTotalStakingAmountOnProtocol>, Error>(
     SWRCachePath.getTotalStakingAmountOnProtocol(accountAddress),
     () => whenDefined(nonConnectedEthersProvider, x => getTotalStakingAmountOnProtocol(x)),
-    { onError: err => message.error(err.message), revalidateOnFocus: false, focusThrottleInterval: 0 }
+    {
+      onError: err => {
+        console.log(err)
+        message.error(err.message)
+      },
+      revalidateOnFocus: false,
+      focusThrottleInterval: 0
+    }
   )
   return {
     totalStakingAmount: stakingAmount ? Number(stakingAmount) : undefined,
@@ -390,7 +446,14 @@ export const useTotalStakingRatio = () => {
   const { data: totalSupplyValue, error: totalSupplyError } = useSWR<UnwrapFunc<typeof totalSupply>, Error>(
     SWRCachePath.totalSupply(accountAddress),
     () => whenDefined(nonConnectedEthersProvider, x => totalSupply(x)),
-    { onError: err => message.error(err.message), revalidateOnFocus: false, focusThrottleInterval: 0 }
+    {
+      onError: err => {
+        console.log(err)
+        message.error(err.message)
+      },
+      revalidateOnFocus: false,
+      focusThrottleInterval: 0
+    }
   )
   const { data: stakingAmount, error: stakingAmountError } = useSWR<
     UnwrapFunc<typeof getTotalStakingAmountOnProtocol>,
@@ -398,7 +461,14 @@ export const useTotalStakingRatio = () => {
   >(
     SWRCachePath.getTotalStakingAmountOnProtocol(accountAddress),
     () => whenDefined(nonConnectedEthersProvider, x => getTotalStakingAmountOnProtocol(x)),
-    { onError: err => message.error(err.message), revalidateOnFocus: false, focusThrottleInterval: 0 }
+    {
+      onError: err => {
+        console.log(err)
+        message.error(err.message)
+      },
+      revalidateOnFocus: false,
+      focusThrottleInterval: 0
+    }
   )
   return {
     totalStakingRatio: totalSupplyValue && stakingAmount ? Number(stakingAmount) / Number(totalSupplyValue) : undefined,
@@ -411,7 +481,14 @@ export const useStakingShare = (propertyAddress: string) => {
   const { data: inProperty, error: inPropertyError } = useSWR<UnwrapFunc<typeof getTotalStakingAmount>, Error>(
     SWRCachePath.getTotalStakingAmount(propertyAddress, accountAddress),
     () => whenDefined(nonConnectedEthersProvider, x => getTotalStakingAmount(x, propertyAddress)),
-    { onError: err => message.error(err.message), revalidateOnFocus: false, focusThrottleInterval: 0 }
+    {
+      onError: err => {
+        console.log(err)
+        message.error(err.message)
+      },
+      revalidateOnFocus: false,
+      focusThrottleInterval: 0
+    }
   )
   const { data: inProtocol, error: inProtocolError } = useSWR<
     UnwrapFunc<typeof getTotalStakingAmountOnProtocol>,
@@ -419,7 +496,14 @@ export const useStakingShare = (propertyAddress: string) => {
   >(
     SWRCachePath.getTotalStakingAmountOnProtocol(accountAddress),
     () => whenDefined(nonConnectedEthersProvider, x => getTotalStakingAmountOnProtocol(x)),
-    { onError: err => message.error(err.message), revalidateOnFocus: false, focusThrottleInterval: 0 }
+    {
+      onError: err => {
+        console.log(err)
+        message.error(err.message)
+      },
+      revalidateOnFocus: false,
+      focusThrottleInterval: 0
+    }
   )
   return {
     stakingShare: inProperty && inProtocol ? Number(inProperty) / Number(inProtocol) : undefined,
@@ -580,7 +664,14 @@ export const useAPY = () => {
   const { data: maxRewards, error: maxRewardsError } = useSWR<UnwrapFunc<typeof calculateMaxRewardsPerBlock>, Error>(
     SWRCachePath.calculateMaxRewardsPerBlock(accountAddress),
     () => whenDefined(nonConnectedEthersProvider, x => calculateMaxRewardsPerBlock(x).catch(() => '0')),
-    { onError: err => message.error(err.message), revalidateOnFocus: false, focusThrottleInterval: 0 }
+    {
+      onError: err => {
+        console.log(err)
+        message.error(err.message)
+      },
+      revalidateOnFocus: false,
+      focusThrottleInterval: 0
+    }
   )
   const { data: totalStaking, error: totalStakingError } = useSWR<
     UnwrapFunc<typeof getTotalStakingAmountOnProtocol>,
@@ -588,7 +679,14 @@ export const useAPY = () => {
   >(
     SWRCachePath.getTotalStakingAmountOnProtocol(accountAddress),
     () => whenDefined(nonConnectedEthersProvider, x => getTotalStakingAmountOnProtocol(x)),
-    { onError: err => message.error(err.message), revalidateOnFocus: false, focusThrottleInterval: 0 }
+    {
+      onError: err => {
+        console.log(err)
+        message.error(err.message)
+      },
+      revalidateOnFocus: false,
+      focusThrottleInterval: 0
+    }
   )
   const { data: holders, error: holdersError } = useSWR<UnwrapFunc<typeof holdersShare>, Error>(
     SWRCachePath.holdersShare(maxRewards, totalStaking),
@@ -596,7 +694,14 @@ export const useAPY = () => {
       maxRewards && totalStaking
         ? whenDefined(nonConnectedEthersProvider, x => holdersShare(x, maxRewards, totalStaking))
         : undefined,
-    { onError: err => message.error(err.message), revalidateOnFocus: false, focusThrottleInterval: 0 }
+    {
+      onError: err => {
+        console.log(err)
+        message.error(err.message)
+      },
+      revalidateOnFocus: false,
+      focusThrottleInterval: 0
+    }
   )
 
   const stakers = maxRewards && holders ? new BigNumber(maxRewards).minus(new BigNumber(holders)) : undefined
@@ -612,7 +717,14 @@ export const useTotalSupply = () => {
   const { data: totalSupplyValue, error } = useSWR<UnwrapFunc<typeof totalSupply>, Error>(
     SWRCachePath.totalSupply(accountAddress),
     () => whenDefined(nonConnectedEthersProvider, x => totalSupply(x)),
-    { onError: err => message.error(err.message), revalidateOnFocus: false, focusThrottleInterval: 0 }
+    {
+      onError: err => {
+        console.log(err)
+        message.error(err.message)
+      },
+      revalidateOnFocus: false,
+      focusThrottleInterval: 0
+    }
   )
 
   return { totalSupply: new BigNumber(totalSupplyValue || '0'), error }
@@ -623,7 +735,14 @@ export const useCirculatingSupply = () => {
   const { data: totalSupplyValue, error } = useSWR<UnwrapFunc<typeof totalSupply>, Error>(
     SWRCachePath.totalSupply(accountAddress),
     () => whenDefined(nonConnectedEthersProvider, x => totalSupply(x)),
-    { onError: err => message.error(err.message), revalidateOnFocus: false, focusThrottleInterval: 0 }
+    {
+      onError: err => {
+        console.log(err)
+        message.error(err.message)
+      },
+      revalidateOnFocus: false,
+      focusThrottleInterval: 0
+    }
   )
 
   const circulatingSupplyValue = useCallback(async () => {
@@ -657,12 +776,26 @@ export const useAnnualSupplyGrowthRatio = () => {
   const { data: maxRewards, error: maxRewardsError } = useSWR<UnwrapFunc<typeof calculateMaxRewardsPerBlock>, Error>(
     SWRCachePath.calculateMaxRewardsPerBlock(accountAddress),
     () => whenDefined(nonConnectedEthersProvider, x => calculateMaxRewardsPerBlock(x).catch(() => '0')),
-    { onError: err => message.error(err.message), revalidateOnFocus: false, focusThrottleInterval: 0 }
+    {
+      onError: err => {
+        console.log(err)
+        message.error(err.message)
+      },
+      revalidateOnFocus: false,
+      focusThrottleInterval: 0
+    }
   )
   const { data: totalSupplyValue, error: totalSupplyError } = useSWR<UnwrapFunc<typeof totalSupply>, Error>(
     SWRCachePath.totalSupply(accountAddress),
     () => whenDefined(nonConnectedEthersProvider, x => totalSupply(x)),
-    { onError: err => message.error(err.message), revalidateOnFocus: false, focusThrottleInterval: 0 }
+    {
+      onError: err => {
+        console.log(err)
+        message.error(err.message)
+      },
+      revalidateOnFocus: false,
+      focusThrottleInterval: 0
+    }
   )
   const year = new BigNumber(2102400)
   const annualSupplyGrowthRatio =
@@ -704,7 +837,14 @@ export const usePropertyAuthor = (propertyAddress?: string) => {
       whenDefinedAll([nonConnectedEthersProvider, propertyAddress], ([client, property]) =>
         propertyAuthor(client, property)
       ),
-    { onError: err => message.error(err.message), revalidateOnFocus: false, focusThrottleInterval: 0 }
+    {
+      onError: err => {
+        console.log(err)
+        message.error(err.message)
+      },
+      revalidateOnFocus: false,
+      focusThrottleInterval: 0
+    }
   )
 
   return { author: data, error }
@@ -755,7 +895,14 @@ export const usePropertyName = (propertyAddress?: string) => {
             propertyName(client, property)
           )
         : 'Foo',
-    { onError: err => message.error(err.message), revalidateOnFocus: false, focusThrottleInterval: 0 }
+    {
+      onError: err => {
+        console.log(err)
+        message.error(err.message)
+      },
+      revalidateOnFocus: false,
+      focusThrottleInterval: 0
+    }
   )
 
   return { name: data, error }
@@ -771,7 +918,14 @@ export const usePropertySymbol = (propertyAddress?: string) => {
             propertySymbol(client, property)
           )
         : 'FOO',
-    { onError: err => message.error(err.message), revalidateOnFocus: false, focusThrottleInterval: 0 }
+    {
+      onError: err => {
+        console.log(err)
+        message.error(err.message)
+      },
+      revalidateOnFocus: false,
+      focusThrottleInterval: 0
+    }
   )
 
   return { symbol: data, error }
@@ -995,11 +1149,11 @@ export const useGetStokenSymbol = (sTokenId?: number) => {
   return { symbol: data, error }
 }
 
-export const useEnabledMarkets = () => {
+export const useGetEnabledMarkets = () => {
   const { nonConnectedEthersProvider } = useProvider()
   const { name } = useDetectChain(nonConnectedEthersProvider)
-  return useSWR<UnwrapFunc<typeof enabledMarkets>, Error>(SWRCachePath.enabledMarkets(name), () =>
-    whenDefined(nonConnectedEthersProvider, client => enabledMarkets(client))
+  return useSWR<UnwrapFunc<typeof getEnabledMarkets>, Error>(SWRCachePath.enabledMarkets(name), () =>
+    whenDefined(nonConnectedEthersProvider, client => getEnabledMarkets(client))
   )
 }
 
@@ -1033,8 +1187,8 @@ export const useGetAssetsByProperties = (propertyAddress?: string) => {
       const behaviors = await whenDefined(markets, marks =>
         Promise.all(marks.map(mak => whenDefined(mak, m => getMarketBehavior(client, m))))
       )
-      const ids = await whenDefinedAll([behaviors, markets], ([behav, marks]) =>
-        Promise.all(behav.map((beh, i) => whenDefinedAll([beh, marks[i]], ([b, m]) => getId(client, b, m))))
+      const ids = await whenDefinedAll([behaviors, metrics], ([behav, mets]) =>
+        Promise.all(behav.map((beh, i) => whenDefinedAll([beh, mets[i]], ([b, m]) => getId(client, b, m))))
       )
       const res = whenDefinedAll([ids, markets], ([idx, marks]) => marks.map((market, i) => ({ market, id: idx[i] })))
       return res
