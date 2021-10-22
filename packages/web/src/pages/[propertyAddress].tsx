@@ -155,7 +155,7 @@ const Author = ({ propertyAddress }: { propertyAddress: string }) => {
   const { author: authorAddress } = usePropertyAuthor(propertyAddress)
   const { data: dataAuthor } = useGetAccount(authorAddress)
 
-  return (
+  return authorAddress ? (
     <AuthorContainer>
       <h2>
         Created by <Link href={`/author/${authorAddress}`}>{dataAuthor?.name || authorAddress}</Link>
@@ -170,6 +170,8 @@ const Author = ({ propertyAddress }: { propertyAddress: string }) => {
         </Link>
       </Flex>
     </AuthorContainer>
+  ) : (
+    <></>
   )
 }
 
