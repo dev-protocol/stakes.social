@@ -119,11 +119,12 @@ export const getMyHolderAmount = async (
 }
 
 export const getTreasuryAmount = async (prov: providers.BaseProvider, propertyAddress: string) => {
-  const [, , client] = await newClient(prov)
+  const [l1, l2, client] = await newClient(prov)
   const getContractAddress = createGetContractAddress(prov)
-  const treasuryAddress = await whenDefined(client, async x =>
-    x.policy(await getContractAddress(x, 'policy')).treasury()
-  )
+  const reg = await getL2Registry(prov)
+  const treasuryAddress =
+    (await whenDefined(l1, async x => x.policy(await getContractAddress(x, 'policy')).treasury())) ??
+    (await whenDefinedAll([l2, reg], ([x, regis]) => x.registry(regis.registry).registries('Treasury')))
   if (client && treasuryAddress) {
     return client
       .withdraw(await getContractAddress(client, 'withdraw'))
