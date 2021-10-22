@@ -6,6 +6,8 @@ import { emulateOraclizeGitHubMarketAsset, postSignGitHubMarketAsset } from './u
 jest.mock('swr')
 jest.mock('src/fixtures/utility')
 jest.mock('src/fixtures/khaos/utility.ts')
+jest.mock('src/fixtures/wallet/hooks')
+jest.mock('src/fixtures/wallet/utility')
 
 describe('khaos hooks', () => {
   describe('usePostSignGitHubMarketAsset', () => {
@@ -13,10 +15,15 @@ describe('khaos hooks', () => {
       const data = { publicSignature: 'dummy signature' }
       const error = undefined
       ;(useSWR as jest.Mock).mockImplementation(() => ({ data, error }))
-      ;(postSignGitHubMarketAsset as jest.Mock).mockResolvedValue({ publicSignature: 'dummy signature' })
-      ;(emulateOraclizeGitHubMarketAsset as jest.Mock).mockResolvedValue({
-        data: { args: ['', 0], expectedTransaction: { success: true } }
-      })
+      ;(postSignGitHubMarketAsset as jest.Mock).mockImplementation(
+        () => () => Promise.resolve({ publicSignature: 'dummy signature' })
+      )
+      ;(emulateOraclizeGitHubMarketAsset as jest.Mock).mockImplementation(
+        () => () =>
+          Promise.resolve({
+            data: { args: ['', 0], expectedTransaction: { success: true } }
+          })
+      )
       const { result } = renderHook(() => usePostSignGitHubMarketAsset())
       await act(async () => {
         const postResult = await result.current.postSignGitHubMarketAssetHandler('repo', 'token')
@@ -30,10 +37,15 @@ describe('khaos hooks', () => {
       const errorMessage = 'error'
       const error = new Error(errorMessage)
       ;(useSWR as jest.Mock).mockImplementation(() => ({ data, error, mutate: () => {} }))
-      ;(postSignGitHubMarketAsset as jest.Mock).mockResolvedValue({ publicSignature: 'dummy signature' })
-      ;(emulateOraclizeGitHubMarketAsset as jest.Mock).mockResolvedValue({
-        data: { args: ['', 0], expectedTransaction: { success: true } }
-      })
+      ;(postSignGitHubMarketAsset as jest.Mock).mockImplementation(
+        () => () => Promise.resolve({ publicSignature: 'dummy signature' })
+      )
+      ;(emulateOraclizeGitHubMarketAsset as jest.Mock).mockImplementation(
+        () => () =>
+          Promise.resolve({
+            data: { args: ['', 0], expectedTransaction: { success: true } }
+          })
+      )
       const { result, waitForNextUpdate } = renderHook(() => usePostSignGitHubMarketAsset())
       act(() => {
         const repository = 'test/repo'
