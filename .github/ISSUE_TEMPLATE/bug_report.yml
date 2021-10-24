@@ -1,0 +1,39 @@
+name: Bug report
+description: Create a report to help us improve
+title: "[BUG] <description>"
+labels: [bug]
+body:
+    - type: textarea
+      id: subject
+      attributes:
+        label: Problem subject
+        description: Use one of the following boxes. If none of them apply, please specify.
+        placeholder: |
+          - [ ] Contracts
+          - [ ] Tests
+          - [ ] Documentation
+          - [ ] Other (please specify)
+      validations:
+        required: false
+    - type: textarea
+      id: description
+      attributes:
+        label: Description
+        description: Please write what problem/bug you are experiencing or want to report.
+      validations:
+        required: true
+    - type: textarea
+      id: expectedbhv
+      attributes:
+        label: Expected behavior/contents
+        description: Please write here the expected behavior/contents
+      validations:
+          required: false
+    - type: checkboxes
+      id: coc
+      attributes:
+        label: Code of Conduct
+        description: By submitting this issue, I confirm I've read and complied with the [CoC](https://github.com/dev-protocol/protocol/blob/main/CODE_OF_CONDUCT.md) 🖖
+        options:
+          - label: I agree to follow this project's Code of Conduct
+            required: true

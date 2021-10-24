@@ -1,0 +1,20 @@
+name: Question
+description: Ask the team a question about this project
+title: "[QUESTION] <description>"
+labels: [question]
+body:
+  - type: input
+    id: description
+    attributes:
+      label: Question information
+      description: Please write your question/discussion about this project here
+    validations:
+      required: true
+  - type: checkboxes
+    id: coc
+    attributes:
+      label: Code of Conduct
+      description: By submitting this issue, I confirm I've read and complied with the [CoC](https://github.com/dev-protocol/protocol/blob/main/CODE_OF_CONDUCT.md) 🖖
+      options:
+        - label: I agree to follow this project's Code of Conduct
+          required: true
