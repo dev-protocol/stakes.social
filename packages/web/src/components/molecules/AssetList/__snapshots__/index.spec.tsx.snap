@@ -4,31 +4,31 @@ exports[`AssetList Snapshot 1`] = `
 <body>
   <div>
     <div
-      class="sc-hiSbEG ixWjwM"
+      class="sc-hiCibw cdgLuG"
     >
       <div
-        class="sc-pGacB itROSY sc-gWHigU dDLEom"
+        class="sc-pVTFL igAzgN sc-gWXbKe krkLWX"
       >
         <a
-          class="sc-jrAFXE sc-iqHYmW cSuHbi eclVOo"
+          class="sc-jrQzAO sc-iqseJM fgcmjD irPoXs"
           href="/1"
         >
           <div
-            class="sc-gKseQn lxFET"
+            class="sc-gKclnd dNSlal"
           >
             <div
-              class="sc-iBPTik iQYbga"
+              class="sc-iCfMLu hxewiF"
               size="90"
             />
           </div>
           <h3
-            class="sc-hKgJUU eJOIaE"
+            class="sc-hKwDye cQfZTQ"
           >
             1-name
           </h3>
         </a>
         <div
-          class="ant-statistic sc-fubCzh sc-crrszt bEGVQF kiTWMY"
+          class="ant-statistic sc-furwcr sc-crHmcD fVdBCY bZrgkD"
         >
           <div
             class="ant-statistic-title"
@@ -56,7 +56,7 @@ exports[`AssetList Snapshot 1`] = `
           </div>
         </div>
         <div
-          class="ant-statistic sc-fubCzh sc-dQoVA bEGVQF fnlDcd"
+          class="ant-statistic sc-furwcr sc-egiyK fVdBCY dCoOLj"
         >
           <div
             class="ant-statistic-title"
@@ -84,10 +84,10 @@ exports[`AssetList Snapshot 1`] = `
           </div>
         </div>
         <div
-          class="sc-kEjbQP sc-bqyKOL fwMVJh kvAmEJ"
+          class="sc-kDTinF sc-bqiRlB iNSKQe bWzqsv"
         >
           <button
-            class="ant-btn sc-bdfBQB kvDZVU"
+            class="ant-btn sc-bdvvtL bKsSoV"
             type="button"
           >
             <span>
@@ -99,28 +99,28 @@ exports[`AssetList Snapshot 1`] = `
         </div>
       </div>
       <div
-        class="sc-pGacB itROSY sc-gWHigU dDLEom"
+        class="sc-pVTFL igAzgN sc-gWXbKe krkLWX"
       >
         <a
-          class="sc-jrAFXE sc-iqHYmW cSuHbi eclVOo"
+          class="sc-jrQzAO sc-iqseJM fgcmjD irPoXs"
           href="/2"
         >
           <div
-            class="sc-gKseQn lxFET"
+            class="sc-gKclnd dNSlal"
           >
             <div
-              class="sc-iBPTik iQYbga"
+              class="sc-iCfMLu hxewiF"
               size="90"
             />
           </div>
           <h3
-            class="sc-hKgJUU eJOIaE"
+            class="sc-hKwDye cQfZTQ"
           >
             2-name
           </h3>
         </a>
         <div
-          class="ant-statistic sc-fubCzh sc-crrszt bEGVQF kiTWMY"
+          class="ant-statistic sc-furwcr sc-crHmcD fVdBCY bZrgkD"
         >
           <div
             class="ant-statistic-title"
@@ -148,7 +148,7 @@ exports[`AssetList Snapshot 1`] = `
           </div>
         </div>
         <div
-          class="ant-statistic sc-fubCzh sc-dQoVA bEGVQF fnlDcd"
+          class="ant-statistic sc-furwcr sc-egiyK fVdBCY dCoOLj"
         >
           <div
             class="ant-statistic-title"
@@ -176,10 +176,10 @@ exports[`AssetList Snapshot 1`] = `
           </div>
         </div>
         <div
-          class="sc-kEjbQP sc-bqyKOL fwMVJh kvAmEJ"
+          class="sc-kDTinF sc-bqiRlB iNSKQe bWzqsv"
         >
           <button
-            class="ant-btn sc-bdfBQB kvDZVU"
+            class="ant-btn sc-bdvvtL bKsSoV"
             type="button"
           >
             <span>
@@ -191,28 +191,28 @@ exports[`AssetList Snapshot 1`] = `
         </div>
       </div>
       <div
-        class="sc-pGacB itROSY sc-gWHigU dDLEom"
+        class="sc-pVTFL igAzgN sc-gWXbKe krkLWX"
       >
         <a
-          class="sc-jrAFXE sc-iqHYmW cSuHbi eclVOo"
+          class="sc-jrQzAO sc-iqseJM fgcmjD irPoXs"
           href="/3"
         >
           <div
-            class="sc-gKseQn lxFET"
+            class="sc-gKclnd dNSlal"
           >
             <div
-              class="sc-iBPTik iQYbga"
+              class="sc-iCfMLu hxewiF"
               size="90"
             />
           </div>
           <h3
-            class="sc-hKgJUU eJOIaE"
+            class="sc-hKwDye cQfZTQ"
           >
             3-name
           </h3>
         </a>
         <div
-          class="ant-statistic sc-fubCzh sc-crrszt bEGVQF kiTWMY"
+          class="ant-statistic sc-furwcr sc-crHmcD fVdBCY bZrgkD"
         >
           <div
             class="ant-statistic-title"
@@ -240,7 +240,7 @@ exports[`AssetList Snapshot 1`] = `
           </div>
         </div>
         <div
-          class="ant-statistic sc-fubCzh sc-dQoVA bEGVQF fnlDcd"
+          class="ant-statistic sc-furwcr sc-egiyK fVdBCY dCoOLj"
         >
           <div
             class="ant-statistic-title"
@@ -268,10 +268,10 @@ exports[`AssetList Snapshot 1`] = `
           </div>
         </div>
         <div
-          class="sc-kEjbQP sc-bqyKOL fwMVJh kvAmEJ"
+          class="sc-kDTinF sc-bqiRlB iNSKQe bWzqsv"
         >
           <button
-            class="ant-btn sc-bdfBQB kvDZVU"
+            class="ant-btn sc-bdvvtL bKsSoV"
             type="button"
           >
             <span>
@@ -283,7 +283,7 @@ exports[`AssetList Snapshot 1`] = `
         </div>
       </div>
       <ul
-        class="ant-pagination sc-cBNeex jOiAjg"
+        class="ant-pagination sc-cCcXHH fHAMau"
         unselectable="unselectable"
       >
         <li
@@ -382,7 +382,7 @@ exports[`AssetList Snapshot with empty properties 1`] = `
 <body>
   <div>
     <div
-      class="sc-hiSbEG ixWjwM"
+      class="sc-hiCibw cdgLuG"
     >
       <div
         class="ant-empty"
@@ -457,7 +457,7 @@ exports[`AssetList Snapshot with empty properties 1`] = `
         </div>
       </div>
       <ul
-        class="ant-pagination sc-cBNeex jOiAjg"
+        class="ant-pagination sc-cCcXHH fHAMau"
         unselectable="unselectable"
       >
         <li
@@ -556,7 +556,7 @@ exports[`AssetList Snapshot with empty properties and sign in button 1`] = `
 <body>
   <div>
     <div
-      class="sc-hiSbEG ixWjwM"
+      class="sc-hiCibw cdgLuG"
     >
       <div
         class="ant-empty"
@@ -633,7 +633,7 @@ exports[`AssetList Snapshot with empty properties and sign in button 1`] = `
           class="ant-empty-footer"
         >
           <button
-            class="ant-btn sc-bdfBQB kvDZVU"
+            class="ant-btn sc-bdvvtL bKsSoV"
             type="button"
           >
             <span>
@@ -643,7 +643,7 @@ exports[`AssetList Snapshot with empty properties and sign in button 1`] = `
         </div>
       </div>
       <ul
-        class="ant-pagination sc-cBNeex jOiAjg"
+        class="ant-pagination sc-cCcXHH fHAMau"
         unselectable="unselectable"
       >
         <li

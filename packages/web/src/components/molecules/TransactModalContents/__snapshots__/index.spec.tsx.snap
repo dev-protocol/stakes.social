@@ -4,35 +4,35 @@ exports[`TransactModalContents Snapshot 1`] = `
 <body>
   <div>
     <div
-      class="sc-dmlqKv hkgRpe"
+      class="sc-dlVxhl bgRGWP"
     >
       <div
-        class="sc-kfzBvY iMldED"
+        class="sc-kfPuZi cUfprI"
       >
         <div
-          class="sc-hBEYId jhchzh"
+          class="sc-hBUSln hctJUu"
         >
           <div
-            class="sc-fodVek dbuBaa"
+            class="sc-fotOHu bMfItS"
             size="60"
           />
         </div>
         <h4
-          class="sc-dIUeWJ sc-bBXrwG gxWslu feHuwj"
+          class="sc-dJjYzT sc-bBHxTw gSNwKX gluhQs"
         >
           0x0-name
         </h4>
         <span
-          class="sc-iwyWTf PXAeu"
+          class="sc-iwjdpV geqvXo"
         >
           0x0
         </span>
       </div>
       <div
-        class="sc-bdfBQB kIRtkt"
+        class="sc-bdvvtL frQklk"
       >
         <div
-          class="sc-fubCzh cjvnZq"
+          class="sc-furwcr HBVij"
           style="opacity: 1;"
         >
           <div
@@ -279,7 +279,7 @@ exports[`TransactModalContents Snapshot 1`] = `
             </div>
           </div>
           <span
-            class="ant-input-affix-wrapper ant-input-affix-wrapper-lg sc-eCstlR kAocOJ"
+            class="ant-input-affix-wrapper ant-input-affix-wrapper-lg sc-eCImPb gIEWvk"
           >
             <input
               class="ant-input ant-input-lg"
@@ -291,14 +291,14 @@ exports[`TransactModalContents Snapshot 1`] = `
               class="ant-input-suffix"
             >
               <button
-                class="sc-hKgJUU jIykJf"
+                class="sc-hKwDye kpA-dVf"
               >
                 DEV
               </button>
             </span>
           </span>
           <div
-            class="sc-gKseQn jaNLlL"
+            class="sc-gKclnd gmKoQx"
           >
             <div
               class="ant-row"
@@ -307,7 +307,7 @@ exports[`TransactModalContents Snapshot 1`] = `
                 class="ant-col ant-col-11"
               >
                 <button
-                  class="ant-btn ant-btn-primary sc-jSgvzq YApZi"
+                  class="ant-btn ant-btn-primary sc-jRQBWg cyMfUM"
                   type="button"
                 >
                   <span>
@@ -316,7 +316,7 @@ exports[`TransactModalContents Snapshot 1`] = `
                 </button>
               </div>
               <div
-                class="ant-col ant-col-2 sc-iBPTik gQIJdg"
+                class="ant-col ant-col-2 sc-iCfMLu gcqWPX"
               >
                 <svg
                   fill="none"
@@ -336,7 +336,7 @@ exports[`TransactModalContents Snapshot 1`] = `
                 class="ant-col ant-col-11"
               >
                 <button
-                  class="ant-btn ant-btn-primary sc-jSgvzq YApZi"
+                  class="ant-btn ant-btn-primary sc-jRQBWg cyMfUM"
                   disabled=""
                   type="button"
                 >
@@ -352,7 +352,7 @@ exports[`TransactModalContents Snapshot 1`] = `
           style="height: 40px;"
         />
         <div
-          class="ant-card ant-card-bordered ant-card-small sc-gsTEea cKnSsr"
+          class="ant-card ant-card-bordered ant-card-small sc-gsDKAQ doKUKb"
         >
           <div
             class="ant-card-head"
@@ -374,7 +374,7 @@ exports[`TransactModalContents Snapshot 1`] = `
               0.003345
                ETH
               <span
-                class="sc-dlfnuX egBdaZ"
+                class="sc-dkPtRN nTZKB"
               >
                  $0.00
               </span>
