@@ -7,29 +7,29 @@ exports[`AuthHeader Snapshot 1`] = `
       style="position: sticky; top: 0px; width: 100%; z-index: 5;"
     >
       <header
-        class="sc-iJuVqt cJPDtp"
+        class="sc-iJKOTD djEClV"
       >
         <div
-          class="sc-jJEKmz gMBwcK"
+          class="sc-jJoQJp gCMSEB"
         >
           <header
-            class="sc-giImIA hBRRWd"
+            class="sc-giYglK gFeDNi"
           >
             <div
-              class="sc-ezredP hbJvLw"
+              class="sc-ezbkAF jEWlYn"
             >
               <a
-                class="sc-bdfBQB fdSjVz"
+                class="sc-bdvvtL bKEjhC"
                 href="/"
               >
                 <span
-                  class="sc-gsTEea hTECYM"
+                  class="sc-gsDKAQ hSRZmM"
                 >
                   <svgrurl
                     id="headerlogo"
                   />
                   <span
-                    class="sc-dlfnuX goZTYx"
+                    class="sc-dkPtRN wwTvJ"
                   >
                     Stakes.social
                   </span>
@@ -37,7 +37,7 @@ exports[`AuthHeader Snapshot 1`] = `
               </a>
             </div>
             <div
-              class="sc-bYEvvW iIOhjx"
+              class="sc-bYoBSM jcqexm"
             >
               <svg
                 height="50"
@@ -101,7 +101,7 @@ exports[`AuthHeader Snapshot 1`] = `
                 </g>
               </svg>
               <div
-                class="sc-jSgvzq fygcrb"
+                class="sc-jRQBWg fixFlJ"
               >
                 <span
                   style="font-size: 0.8em;"
@@ -114,17 +114,17 @@ exports[`AuthHeader Snapshot 1`] = `
         </div>
       </header>
       <div
-        class="sc-lmoMya hPMolv"
+        class="sc-llYSUQ bNDneM"
       >
         Beta Version
       </div>
     </div>
     <div
-      class="sc-hiSbEG dzdEpT"
+      class="sc-hiCibw fVnQwF"
       height="300"
     >
       <h2
-        class="sc-cBNeex ZwrVR"
+        class="sc-cCcXHH bTXdBD"
       >
         Choose Market
       </h2>

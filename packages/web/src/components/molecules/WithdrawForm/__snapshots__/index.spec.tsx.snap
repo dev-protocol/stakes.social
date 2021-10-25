@@ -4,7 +4,7 @@ exports[`WithdrawForm Snapshot 1`] = `
 <body>
   <div>
     <div
-      class="sc-bdfBQB"
+      class="sc-bdvvtL"
     >
       <p>
         Withdraw 
@@ -16,7 +16,7 @@ exports[`WithdrawForm Snapshot 1`] = `
          available
       </p>
       <div
-        class="sc-gsTEea ioyRjD"
+        class="sc-gsDKAQ eEfWgX"
       >
         <button
           class="ant-btn ant-btn-primary ant-btn-lg"
