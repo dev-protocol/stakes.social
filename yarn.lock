@@ -20348,12 +20348,12 @@ react-countdown@2.3.2:
   dependencies:
     prop-types "^15.7.2"
 
-react-device-detect@2.1.1:
-  version "2.1.1"
-  resolved "https://registry.yarnpkg.com/react-device-detect/-/react-device-detect-2.1.1.tgz#e3a055a36be74d10a87a28182358209f701dbe6b"
-  integrity sha512-F0pYqYlo0/O5RmahZ1io3NHWd1ckr8THiiz/ItCW+ikh3TaKKCT2Rpk/NVKkSGnartzdkgOpcNKGDgO2JxdZvw==
+react-device-detect@2.1.2:
+  version "2.1.2"
+  resolved "https://registry.yarnpkg.com/react-device-detect/-/react-device-detect-2.1.2.tgz#60abb6fa361ec4cc839469a0c4c3e9b8ea17d6b5"
+  integrity sha512-N42xttwez3ECgu4KpOL2ICesdfoz8NCBfmc1rH9FRYSjH7NmMyANPSrQ3EvAtJyj/6TzJNhrANSO38iXjCB2Ug==
   dependencies:
-    ua-parser-js "0.7.28"
+    ua-parser-js "^0.7.30"
 
 react-docgen-typescript-loader@3.7.2:
   version "3.7.2"
@@ -23416,15 +23416,15 @@ typical@^2.6.0, typical@^2.6.1:
   resolved "https://registry.yarnpkg.com/typical/-/typical-2.6.1.tgz#5c080e5d661cbbe38259d2e70a3c7253e873881d"
   integrity sha1-XAgOXWYcu+OCWdLnCjxyU+hziB0=
 
-ua-parser-js@0.7.28:
-  version "0.7.28"
-  resolved "https://registry.yarnpkg.com/ua-parser-js/-/ua-parser-js-0.7.28.tgz#8ba04e653f35ce210239c64661685bf9121dec31"
-  integrity sha512-6Gurc1n//gjp9eQNXjD9O3M/sMwVtN5S8Lv9bvOYBfKfDNiIIhqiyi01vMBO45u4zkDE420w/e0se7Vs+sIg+g==
-
 ua-parser-js@^0.7.18, ua-parser-js@^0.7.20:
   version "0.7.22"
   resolved "https://registry.yarnpkg.com/ua-parser-js/-/ua-parser-js-0.7.22.tgz#960df60a5f911ea8f1c818f3747b99c6e177eae3"
   integrity sha512-YUxzMjJ5T71w6a8WWVcMGM6YWOTX27rCoIQgLXiWaxqXSx9D7DNjiGWn1aJIRSQ5qr0xuhra77bSIh6voR/46Q==
+
+ua-parser-js@^0.7.30:
+  version "0.7.30"
+  resolved "https://registry.yarnpkg.com/ua-parser-js/-/ua-parser-js-0.7.30.tgz#4cf5170e8b55ac553fe8b38df3a82f0669671f0b"
+  integrity sha512-uXEtSresNUlXQ1QL4/3dQORcGv7+J2ookOG2ybA/ga9+HYEXueT2o+8dUJQkpedsyTyCJ6jCCirRcKtdtx1kbg==
 
 uglify-js@^2.6.2:
   version "2.8.29"
