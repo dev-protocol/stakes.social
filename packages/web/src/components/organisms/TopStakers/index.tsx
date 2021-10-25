@@ -76,7 +76,7 @@ const Staker = ({ accountAddress, value }: { accountAddress: string; value: numb
   const { getENS } = useENS()
   useEffect(() => {
     const fetchENS = async () => {
-      await getENS(accountAddress || '').then((o?: string) => setENS(o || ''))
+      await getENS(accountAddress || '').then((o?: string | null) => setENS(o || ''))
     }
     fetchENS()
   }, [accountAddress, getENS])
