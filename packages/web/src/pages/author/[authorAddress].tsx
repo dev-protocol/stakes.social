@@ -300,7 +300,7 @@ const AuthorAddressDetail = (_: Props) => {
   const { getENS } = useENS()
   useEffect(() => {
     const fetchENS = async () => {
-      await getENS(author || '').then((o?: string) => setENS(o || ''))
+      await getENS(author || '').then((o?: string | null) => setENS(o || ''))
     }
     fetchENS()
   }, [author, getENS])
