@@ -24074,10 +24074,10 @@ walker@^1.0.7:
   dependencies:
     makeerror "1.0.x"
 
-walletlink@2.1.11:
-  version "2.1.11"
-  resolved "https://registry.yarnpkg.com/walletlink/-/walletlink-2.1.11.tgz#4ed5d53066f4fae8cc43169475e4f9d1f6b8735a"
-  integrity sha512-DdnQ2jnVHAdKgQ1IgxPKn3GvVEUbrGCgvgqKqQ7eanxUnyWgRm5T8Ib6NqPDuQ6SNFk6St54uN+uxV7GP6AyZg==
+walletlink@2.2.6:
+  version "2.2.6"
+  resolved "https://registry.yarnpkg.com/walletlink/-/walletlink-2.2.6.tgz#cfea3ba94e5ea33e87b0a2f31151a77ee1a59d72"
+  integrity sha512-4TF1kkpo9aq1QlfKv6jTCEsV8Rc+1RIuXn2EtsTJt9/H02fG3oy7k49sqB4gXZ9CWN48yoXnmSwq1GdkvfYGjw==
   dependencies:
     "@metamask/safe-event-emitter" "2.0.0"
     bind-decorator "^1.0.11"
