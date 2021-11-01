@@ -17883,10 +17883,10 @@ next-offline@5.0.5:
     fs-extra "~8.1.0"
     workbox-webpack-plugin "^5.0.0"
 
-next-plugin-antd-less@1.4.4:
-  version "1.4.4"
-  resolved "https://registry.yarnpkg.com/next-plugin-antd-less/-/next-plugin-antd-less-1.4.4.tgz#73f401453266f3688c29e5812046c5311269ea8c"
-  integrity sha512-gbvW8ukmkOmJyUYqE26DgbHxQRaPZnmdM7mQUYjdktn3M/N/O02Zm9RjcRLLWb8y2jMh7mo2bxzgqi/GXJHaxw==
+next-plugin-antd-less@1.5.2:
+  version "1.5.2"
+  resolved "https://registry.yarnpkg.com/next-plugin-antd-less/-/next-plugin-antd-less-1.5.2.tgz#8c73d2a9f5db991a6420ca272f71a58fba2db2e6"
+  integrity sha512-zszb/enAq5icB+M0JUMhrFyE+8V2nakD0Cw8FC9zltlri4fuIPRmoh36vhol5OJKlEpFc8g5D/adyuJv4M7OUg==
   dependencies:
     clone "^2.1.2"
     less "^4.1.2"
