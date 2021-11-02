@@ -2546,10 +2546,10 @@
     js-base64 "^3.7.2"
     ramda "^0.27.0"
 
-"@devprotocol/dev-kit@5.7.3":
-  version "5.7.3"
-  resolved "https://registry.yarnpkg.com/@devprotocol/dev-kit/-/dev-kit-5.7.3.tgz#7ca56e0c0c7496cfe5f0b30c0576da6ae706d5ca"
-  integrity sha512-rlZOWetkXGuKz/tIB+fq3q+8fmNqgdrUU+Yet5lcRzK9Ek98D8kHaEcHRliWH32X6+YtpwnZENTSzYJ9nGFf0g==
+"@devprotocol/dev-kit@5.7.4":
+  version "5.7.4"
+  resolved "https://registry.yarnpkg.com/@devprotocol/dev-kit/-/dev-kit-5.7.4.tgz#05b30204fb50833fc87dec8168c5e10ae06d416b"
+  integrity sha512-RyzDp8Zk7gn7ahRHjjIY3LfghQ+9sXjwCKqXcGT6pm6e8kJGoFobdCRDyrx8ieQauzkci8TsPehZ5eRMzuWwWA==
   dependencies:
     "@types/bent" "^7.3.1"
     async-ray "^3.2.0"
