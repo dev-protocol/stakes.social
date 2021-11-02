@@ -60,7 +60,7 @@ import useSWR from 'swr'
 import { message } from 'antd'
 import { useMemo, useState, useCallback } from 'react'
 import BigNumber from 'bignumber.js'
-import { useDetectChain, useProvider } from 'src/fixtures/wallet/hooks'
+import { useDetectChain, useIsL1, useProvider } from 'src/fixtures/wallet/hooks'
 import { useCurrency } from 'src/fixtures/currency/functions/useCurrency'
 import { isAddress } from 'web3-utils'
 import { UndefinedOr } from '@devprotocol/util-ts'
@@ -772,7 +772,8 @@ export const useCirculatingSupply = () => {
 }
 
 export const useAnnualSupplyGrowthRatio = () => {
-  const { nonConnectedEthersProvider, accountAddress } = useProvider()
+  const { nonConnectedEthersProvider, nonConnectedEthersL1Provider, accountAddress } = useProvider()
+  const { isL1 } = useIsL1()
   const { data: maxRewards, error: maxRewardsError } = useSWR<UnwrapFunc<typeof calculateMaxRewardsPerBlock>, Error>(
     SWRCachePath.calculateMaxRewardsPerBlock(accountAddress),
     () => whenDefined(nonConnectedEthersProvider, x => calculateMaxRewardsPerBlock(x).catch(() => '0')),
@@ -787,7 +788,7 @@ export const useAnnualSupplyGrowthRatio = () => {
   )
   const { data: totalSupplyValue, error: totalSupplyError } = useSWR<UnwrapFunc<typeof totalSupply>, Error>(
     SWRCachePath.totalSupply(accountAddress),
-    () => whenDefined(nonConnectedEthersProvider, x => totalSupply(x)),
+    () => whenDefined(nonConnectedEthersL1Provider, x => totalSupply(x)),
     {
       onError: err => {
         console.log(err)
@@ -797,7 +798,7 @@ export const useAnnualSupplyGrowthRatio = () => {
       focusThrottleInterval: 0
     }
   )
-  const year = new BigNumber(2102400)
+  const year = new BigNumber(isL1 ? 2102400 : 31536000)
   const annualSupplyGrowthRatio =
     maxRewards && totalSupplyValue ? new BigNumber(maxRewards).times(year).div(totalSupplyValue).times(100) : undefined
 
