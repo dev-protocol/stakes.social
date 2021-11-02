@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
-import { Form } from 'antd'
+import { Form, Checkbox } from 'antd'
 import Input from 'src/components/molecules/Input'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import { usePostInvitation } from 'src/fixtures/dev-invitation/hooks'
 
 import {
@@ -49,6 +49,10 @@ const Row = styled.div`
   }
 `
 
+const FlatRow = styled.div`
+  display: flex;
+`
+
 const Span = styled.div`
   font-size: 1.2em;
   margin-top: 5px;
@@ -67,6 +71,12 @@ const Submit = styled.button`
   color: white;
   ${blueGradient()}
   ${boxShahowWithOnHover()}
+  ${({ disabled }) => css`
+    ${disabled &&
+    css`
+      background: #cccccc;
+    `}
+  `}
 `
 
 const TextArea = styled.textarea`
@@ -109,6 +119,8 @@ const SuccessContainer = styled.div`
 
 export const InvitationRequestForm = ({ market }: Props) => {
   const [metrics, setMetrics] = useState<boolean>(false)
+  const [isAgreeTerms, setIsAgreeTerms] = useState<boolean>(false)
+  const [isSubscribeNewsletter, setIsSubscribeNewsletter] = useState<boolean>(false)
   const { postInvitationHandler, isLoading } = usePostInvitation()
   const onFinish = async (values: any) => {
     const { asset, email, discord, name, role, url, useCase, ask } = values
@@ -127,6 +139,13 @@ export const InvitationRequestForm = ({ market }: Props) => {
     if (metrics.success) {
       setMetrics(metrics.success)
     }
+  }
+
+  const onChangeCheckboxForTerms = () => {
+    setIsAgreeTerms(!isAgreeTerms)
+  }
+  const onChangeCheckboxForNewsletter = () => {
+    setIsSubscribeNewsletter(!isSubscribeNewsletter)
   }
 
   return (
@@ -206,10 +225,16 @@ export const InvitationRequestForm = ({ market }: Props) => {
               <Input Icon={NotificationOutlined} placeholder="I'd like to say..." label="ask" />
             </Form.Item>
           </Row>
+          <FlatRow>
+            <Checkbox onChange={onChangeCheckboxForTerms}>Agreement to terms of use and code of conduct. </Checkbox>
+          </FlatRow>
+          <FlatRow>
+            <Checkbox onChange={onChangeCheckboxForNewsletter}>Subscribe to our Newsletter</Checkbox>
+          </FlatRow>
           <Row>
             <div style={{ display: 'flex', gridColumn: '1/-1', justifyContent: 'flex-end' }}>
               <ButtonContainer>
-                <Submit type="submit" disabled={isLoading}>
+                <Submit type="submit" disabled={isLoading || !isAgreeTerms}>
                   Submit
                 </Submit>
               </ButtonContainer>
