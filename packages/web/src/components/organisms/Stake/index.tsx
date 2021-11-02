@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from 'react'
-import { useProvider } from 'src/fixtures/wallet/hooks'
+import { useDetectChain, useProvider } from 'src/fixtures/wallet/hooks'
 import { balanceOf } from 'src/fixtures/dev-kit/client'
 import {
   useGetEstimateGas4Stake,
@@ -97,6 +97,7 @@ const DEFAULT_RADIO_VALUE = -1
 
 export const Stake = ({ className, title, propertyAddress }: Props) => {
   const { ethersProvider, accountAddress } = useProvider()
+  const { name } = useDetectChain(ethersProvider)
   const { depositToPosition } = useDepositToPosition()
   const { depositToProperty } = useDepositToProperty()
   const { approve, ok } = useApprove()
@@ -127,7 +128,8 @@ export const Stake = ({ className, title, propertyAddress }: Props) => {
       message.warn({ content: 'Please enter a value greater than 0', key: 'StakeButton' })
       return
     }
-    approve(await getContractAddress(contractFactory(ethersProvider), 'lockup'), amountNumber.toFixed())
+    const contractAddress = await getContractAddress(contractFactory(ethersProvider), 'lockup', name)
+    approve(contractAddress, amountNumber.toFixed())
   }
 
   const handleStake = () => {

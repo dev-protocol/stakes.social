@@ -5,9 +5,12 @@ import { ChainName } from '../wallet/utility'
 
 const cache: Map<ChainName, Map<string, string>> = new Map()
 
-export const getContractAddress = async <C extends DevkitContract | L2DevkitContract>(
+export const getContractAddress = async <
+  C extends DevkitContract | L2DevkitContract,
+  K extends keyof Omit<RegistryContract, 'contract'>
+>(
   client: C,
-  contract: keyof Omit<RegistryContract, 'contract'>,
+  contract: K,
   net: ChainName = 'main'
 ): Promise<string> =>
   (async fromCache => {
@@ -17,23 +20,25 @@ export const getContractAddress = async <C extends DevkitContract | L2DevkitCont
     if (!cache.get(net)) {
       cache.set(net, new Map())
     }
-    const registry =
+    const registryOrAddress =
       net === 'main'
-        ? addresses.eth.main.registry
+        ? await (client as DevkitContract).registry(addresses.eth.main.registry)[contract]()
         : net === 'ropsten'
-        ? addresses.eth.ropsten.registry
+        ? await (client as DevkitContract).registry(addresses.eth.ropsten.registry)[contract]()
         : net === 'arbitrum-one'
-        ? addresses.arbitrum.one.registry
+        ? addresses.arbitrum.one
         : net === 'arbitrum-rinkeby'
-        ? addresses.arbitrum.rinkeby.registry
+        ? addresses.arbitrum.rinkeby
         : undefined
     const address =
-      registry && (net === 'main' || net === 'ropsten')
-        ? await (client as DevkitContract).registry(registry)[contract]()
-        : registry
-        ? await (client as L2DevkitContract)
-            .registry(registry)
-            .registries(`${contract.charAt(0).toUpperCase()}${contract.slice(1)}`)
+      typeof registryOrAddress === 'string'
+        ? registryOrAddress
+        : registryOrAddress
+        ? registryOrAddress[contract as keyof typeof addresses.arbitrum.one]
+          ? registryOrAddress[contract as keyof typeof addresses.arbitrum.one]
+          : await (client as L2DevkitContract)
+              .registry(registryOrAddress.registry)
+              .registries(`${contract.charAt(0).toUpperCase()}${contract.slice(1)}`)
         : (undefined as never)
     console.log({ address, contract })
     cache.get(net)?.set(contract, address)
