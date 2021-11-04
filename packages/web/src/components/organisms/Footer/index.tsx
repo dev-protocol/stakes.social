@@ -119,7 +119,7 @@ export const Footer = () => {
               target={'_blank'}
               rel="noreferrer"
             >
-              But DEV on Uniswap L2
+              Buy DEV on Uniswap L2
             </FooterLink>
             <FooterLink href={'/terms-of-use'}>Terms of Use</FooterLink>
             <FooterLink
