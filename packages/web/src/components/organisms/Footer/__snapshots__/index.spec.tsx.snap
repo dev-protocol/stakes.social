@@ -35,13 +35,29 @@ exports[`Footer Snapshot 1`] = `
             </a>
             <a
               class="sc-jrQzAO giJldq"
+              href="https://bridge.devprotocol.xyz/"
+              rel="noreferrer"
+              target="_blank"
+            >
+              Dev Bridge for L2
+            </a>
+            <a
+              class="sc-jrQzAO giJldq"
+              href="https://app.uniswap.org/#/swap?outputCurrency=0x91F5dC90979b058eBA3be6B7B7e523df7e84e137"
+              rel="noreferrer"
+              target="_blank"
+            >
+              But DEV on Uniswap L2
+            </a>
+            <a
+              class="sc-jrQzAO giJldq"
               href="/terms-of-use"
             >
               Terms of Use
             </a>
             <a
               class="sc-jrQzAO giJldq"
-              href="https://devprotocol.xyz/coc.html"
+              href="https://github.com/dev-protocol/community/blob/main/CODE_OF_CONDUCT.md"
               rel="noreferrer"
               target="_blank"
             >
@@ -102,7 +118,7 @@ exports[`Footer Snapshot 1`] = `
             <div
               class="sc-crHmcD iTsuJT"
             >
-              2020 All rights reserverd.
+              2021 All rights reserverd.
             </div>
             <div
               class="sc-gKclnd bnHYEl"

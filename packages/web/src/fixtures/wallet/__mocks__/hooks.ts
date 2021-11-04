@@ -1,6 +1,10 @@
 import { ethers } from 'ethers'
 import Web3 from 'web3'
 
+export const useIsL1 = jest.fn(() => {
+  return { isL1: true }
+})
+
 export const useConnectWallet = jest.fn(() => {
   return { isConnected: true, connect: () => {}, isConnecting: false }
 })
