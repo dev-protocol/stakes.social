@@ -661,6 +661,7 @@ export const useCreateAndAuthenticate = () => {
 
 export const useAPY = () => {
   const { nonConnectedEthersProvider, accountAddress } = useProvider()
+  const { isL1 } = useIsL1()
   const { data: maxRewards, error: maxRewardsError } = useSWR<UnwrapFunc<typeof calculateMaxRewardsPerBlock>, Error>(
     SWRCachePath.calculateMaxRewardsPerBlock(accountAddress),
     () => whenDefined(nonConnectedEthersProvider, x => calculateMaxRewardsPerBlock(x).catch(() => '0')),
@@ -705,7 +706,7 @@ export const useAPY = () => {
   )
 
   const stakers = maxRewards && holders ? new BigNumber(maxRewards).minus(new BigNumber(holders)) : undefined
-  const year = new BigNumber(2102400)
+  const year = new BigNumber(isL1 ? 2102400 : 31536000)
   const apy = stakers && totalStaking ? stakers.times(year).div(totalStaking).times(100) : undefined
   const creators = holders && totalStaking ? new BigNumber(holders).times(year).div(totalStaking).times(100) : undefined
 
