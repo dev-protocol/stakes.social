@@ -227,7 +227,21 @@ export const InvitationRequestForm = ({ market }: Props) => {
             </Form.Item>
           </Row>
           <FlatRow>
-            <Checkbox onChange={onChangeCheckboxForTerms}>Agreement to terms of use and code of conduct. </Checkbox>
+            <Checkbox onChange={onChangeCheckboxForTerms}>
+              Agreement to&nbsp;
+              <a href="/terms-of-use" target="_blank" rel="noreferrer">
+                terms of use
+              </a>
+              &nbsp;and&nbsp;
+              <a
+                href="https://github.com/dev-protocol/community/blob/main/CODE_OF_CONDUCT.md"
+                target="_blank"
+                rel="noreferrer"
+              >
+                code of conduct
+              </a>
+              .
+            </Checkbox>
           </FlatRow>
           <FlatRow>
             <Checkbox onChange={onChangeCheckboxForNewsletter}>Subscribe to our Newsletter</Checkbox>
