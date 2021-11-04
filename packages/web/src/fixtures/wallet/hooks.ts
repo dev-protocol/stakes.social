@@ -24,6 +24,8 @@ const providerUrl = (chain: ChainName) =>
 const nonConnectedWeb3 = (chain: ChainName) => whenDefined(providerUrl(chain), url => new Web3(url))
 const nonConnectedEthersProvider = (chain: ChainName) =>
   whenDefined(providerUrl(chain), url => new providers.JsonRpcProvider(url))
+const nonConnectedWeb3L1 = new Web3(providerUrl('main')!)
+const nonConnectedEthersL1Provider = new providers.JsonRpcProvider(providerUrl('main'))
 
 export const useConnectWallet = () => {
   const { web3Modal, setProviders } = useContext(WalletContext)
@@ -61,7 +63,9 @@ export const useProvider = () => {
     ethersProvider,
     accountAddress,
     nonConnectedWeb3: web3 ? web3 : nonConnectedWeb3(name),
-    nonConnectedEthersProvider: ethersProvider ? ethersProvider : nonConnectedEthersProvider(name)
+    nonConnectedEthersProvider: ethersProvider ? ethersProvider : nonConnectedEthersProvider(name),
+    nonConnectedWeb3L1,
+    nonConnectedEthersL1Provider
   }
 }
 

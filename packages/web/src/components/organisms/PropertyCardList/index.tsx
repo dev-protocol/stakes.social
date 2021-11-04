@@ -16,6 +16,7 @@ import {
   useGetAssetsByProperties,
   useGetAuthenticatedProperties
 } from 'src/fixtures/dev-kit/hooks'
+import { reverse } from 'ramda'
 
 export type FeatureTag = '' | 'GitHub' | 'npm' | 'Creators'
 interface Props {
@@ -252,9 +253,10 @@ export const PropertyByMarketWithAssetsL2 = ({ propertyAddress }: { propertyAddr
 
 export const PropertyByMarketL2 = ({ market }: { market: string }) => {
   const { data } = useGetAuthenticatedProperties(market)
+  const list = data ? reverse(data) : undefined
 
   return (
-    <>{data ? data.map((property, i) => <PropertyByMarketWithAssetsL2 key={i} propertyAddress={property} />) : ''}</>
+    <>{list ? list.map((property, i) => <PropertyByMarketWithAssetsL2 key={i} propertyAddress={property} />) : ''}</>
   )
 }
 

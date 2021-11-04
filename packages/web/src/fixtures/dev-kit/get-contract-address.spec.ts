@@ -32,8 +32,7 @@ describe('get-contract-address.ts', () => {
         }))
       }
       const result = await getContractAddress(devkit as unknown as DevkitContract, 'lockup', 'arbitrum-one')
-      expect(result).toBe('LOCKUP_ADDRESS')
-      expect(devkit.registry.mock.calls[0][0]).toBe(addresses.arbitrum.one.registry)
+      expect(result).toBe(addresses.arbitrum.one.lockup)
     })
     test('Returns address as a value, and third-argument is "arbitrum-rinkeby"', async () => {
       const devkit = {
@@ -42,8 +41,7 @@ describe('get-contract-address.ts', () => {
         }))
       }
       const result = await getContractAddress(devkit as unknown as DevkitContract, 'lockup', 'arbitrum-rinkeby')
-      expect(result).toBe('LOCKUP_ADDRESS')
-      expect(devkit.registry.mock.calls[0][0]).toBe(addresses.arbitrum.rinkeby.registry)
+      expect(result).toBe(addresses.arbitrum.rinkeby.lockup)
     })
   })
   describe('Caching', () => {
