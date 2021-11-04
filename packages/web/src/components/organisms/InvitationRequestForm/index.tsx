@@ -133,7 +133,8 @@ export const InvitationRequestForm = ({ market }: Props) => {
       role,
       url,
       useCase,
-      ask
+      ask,
+      newsletter: isSubscribeNewsletter
     })
 
     if (metrics.success) {
