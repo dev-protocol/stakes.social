@@ -28,6 +28,7 @@ describe('dev-invitation hooks', () => {
         const useCase = 'UseCase'
         const ask = 'Ask'
         const market = 'Market'
+        const newsletter = false
         const ret = await result.current.postInvitationHandler({
           asset,
           email,
@@ -37,7 +38,8 @@ describe('dev-invitation hooks', () => {
           url,
           useCase,
           ask,
-          market
+          market,
+          newsletter
         })
         expect(ret).toBe(data)
       })
@@ -60,6 +62,7 @@ describe('dev-invitation hooks', () => {
         const useCase = 'UseCase'
         const ask = 'Ask'
         const market = 'Market'
+        const newsletter = true
         const ret = await result.current.postInvitationHandler({
           asset,
           email,
@@ -69,7 +72,8 @@ describe('dev-invitation hooks', () => {
           url,
           useCase,
           ask,
-          market
+          market,
+          newsletter
         })
         expect(ret.success).toBe(false)
       })
@@ -94,6 +98,7 @@ describe('dev-invitation hooks', () => {
         const useCase = 'UseCase'
         const ask = 'Ask'
         const market = 'Market'
+        const newsletter = false
         const ret = await result.current.postInvitationHandler({
           asset,
           email,
@@ -103,7 +108,8 @@ describe('dev-invitation hooks', () => {
           url,
           useCase,
           ask,
-          market
+          market,
+          newsletter
         })
         expect(ret.success).toBe(false)
       })
