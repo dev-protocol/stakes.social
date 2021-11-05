@@ -22,7 +22,7 @@ exports[`InvitationRequestForm Snapshot 1`] = `
           class="sc-gKclnd jCJuJx"
         >
           <div
-            class="sc-iCfMLu kelOLW"
+            class="sc-furwcr jmJULh"
           >
             Your name:
           </div>
@@ -93,7 +93,7 @@ exports[`InvitationRequestForm Snapshot 1`] = `
           class="sc-gKclnd jCJuJx"
         >
           <div
-            class="sc-iCfMLu kelOLW"
+            class="sc-furwcr jmJULh"
           >
             Your email:
           </div>
@@ -164,7 +164,7 @@ exports[`InvitationRequestForm Snapshot 1`] = `
           class="sc-gKclnd jCJuJx"
         >
           <div
-            class="sc-iCfMLu kelOLW"
+            class="sc-furwcr jmJULh"
           >
             Project name:
           </div>
@@ -235,7 +235,7 @@ exports[`InvitationRequestForm Snapshot 1`] = `
           class="sc-gKclnd jCJuJx"
         >
           <div
-            class="sc-iCfMLu kelOLW"
+            class="sc-furwcr jmJULh"
           >
             Description:
           </div>
@@ -252,7 +252,7 @@ exports[`InvitationRequestForm Snapshot 1`] = `
                   class="ant-form-item-control-input-content"
                 >
                   <textarea
-                    class="sc-jrQzAO cUtENs"
+                    class="sc-kDTinF fHHkjf"
                     id="basic_useCase"
                     placeholder="Our project aims to..."
                     rows="4"
@@ -266,7 +266,7 @@ exports[`InvitationRequestForm Snapshot 1`] = `
           class="sc-gKclnd jCJuJx"
         >
           <div
-            class="sc-iCfMLu kelOLW"
+            class="sc-furwcr jmJULh"
           >
             Your role:
           </div>
@@ -337,10 +337,10 @@ exports[`InvitationRequestForm Snapshot 1`] = `
           class="sc-gKclnd jCJuJx"
         >
           <div
-            class="sc-iCfMLu kelOLW"
+            class="sc-furwcr jmJULh"
           >
             <span
-              class="sc-kDTinF bsKfXQ"
+              class="sc-iqseJM hDdzyn"
             >
               market
             </span>
@@ -414,7 +414,7 @@ exports[`InvitationRequestForm Snapshot 1`] = `
         >
           <div>
             <div
-              class="sc-iCfMLu kelOLW"
+              class="sc-furwcr jmJULh"
               style="margin-top: 0px; font-size: 1.1em;"
             >
               <a
@@ -496,7 +496,7 @@ exports[`InvitationRequestForm Snapshot 1`] = `
           class="sc-gKclnd jCJuJx"
         >
           <div
-            class="sc-iCfMLu kelOLW"
+            class="sc-furwcr jmJULh"
           >
             Additional info:
           </div>
@@ -564,16 +564,79 @@ exports[`InvitationRequestForm Snapshot 1`] = `
           </div>
         </div>
         <div
+          class="sc-iCfMLu gZJfOz"
+        >
+          <label
+            class="ant-checkbox-wrapper"
+          >
+            <span
+              class="ant-checkbox"
+            >
+              <input
+                class="ant-checkbox-input"
+                type="checkbox"
+                value=""
+              />
+              <span
+                class="ant-checkbox-inner"
+              />
+            </span>
+            <span>
+              Agreement to 
+              <a
+                href="/terms-of-use"
+                rel="noreferrer"
+                target="_blank"
+              >
+                terms of use
+              </a>
+               and 
+              <a
+                href="https://github.com/dev-protocol/community/blob/main/CODE_OF_CONDUCT.md"
+                rel="noreferrer"
+                target="_blank"
+              >
+                code of conduct
+              </a>
+              .
+            </span>
+          </label>
+        </div>
+        <div
+          class="sc-iCfMLu gZJfOz"
+        >
+          <label
+            class="ant-checkbox-wrapper"
+          >
+            <span
+              class="ant-checkbox"
+            >
+              <input
+                class="ant-checkbox-input"
+                type="checkbox"
+                value=""
+              />
+              <span
+                class="ant-checkbox-inner"
+              />
+            </span>
+            <span>
+              Subscribe to our Newsletter
+            </span>
+          </label>
+        </div>
+        <div
           class="sc-gKclnd jCJuJx"
         >
           <div
             style="display: flex; grid-column: 1/-1; justify-content: flex-end;"
           >
             <div
-              class="sc-furwcr gDbrBe"
+              class="sc-pVTFL hnWUAh"
             >
               <button
-                class="sc-pVTFL bTeKvG"
+                class="sc-jrQzAO fxviUm"
+                disabled=""
                 type="submit"
               >
                 Submit
