@@ -10,7 +10,8 @@ export const SWRCachePath = {
     `propertyAddresses/${user}${propertyAddress}/getMyStakingRewardAmount`,
   getMyStakingAmount: (propertyAddress?: string, user?: string) =>
     `propertyAddresses/${user}${propertyAddress}/getMyStakingAmount`,
-  getTotalStakingAmountOnProtocol: (user?: string) => `getTotalStakingAmountOnProtocol/${user}`,
+  getTotalStakingAmountOnProtocol: (chain?: string, user?: string) =>
+    `getTotalStakingAmountOnProtocol/${chain}/${user}`,
   getEstimateGas4WithdrawHolderAmount: (propertyAddress: string, user?: string) =>
     `getEstimateGas/${user}${propertyAddress}/estimateGas4WithdrawHolderAmount`,
   getEstimateGas4WithdrawStakingAmount: (propertyAddress: string, amount: string, user?: string) =>
@@ -21,10 +22,10 @@ export const SWRCachePath = {
     `getEstimateGas/${user}/${author}/${name}/${symbol}/estimateGas4CreateProperty`,
   getEstimateGas4CreateAndAuthenticate: (name: string, symbol: string, marketAddress: string, user?: string) =>
     `getEstimateGas/${user}/${marketAddress}/${symbol}/${name}/estimateGas4CreateAndAuthenticate`,
-  calculateMaxRewardsPerBlock: (user?: string) => `calculateMaxRewardsPerBlock/${user}`,
-  totalSupply: (user?: string) => `totalSupply/${user}`,
-  holdersShare: (amount?: string, lockedups?: string, user?: string) =>
-    `amount/${amount}/lockedups/${lockedups}/holdersShare/${user}`,
+  calculateMaxRewardsPerBlock: (chain?: string, user?: string) => `calculateMaxRewardsPerBlock/${chain}/${user}`,
+  totalSupply: (chain?: string, user?: string) => `totalSupply/${chain}/${user}`,
+  holdersShare: (chain?: string, amount?: string, lockedups?: string, user?: string) =>
+    `${chain}/amount/${amount}/lockedups/${lockedups}/holdersShare/${user}`,
   propertyAuthor: (propertyAddress?: string, user?: string) => `propertyAddresses/${user}${propertyAddress}/author`,
   balanceOf: (user?: string) => `balanceOf/${user}`,
   allClaimedRewards: (user?: string) => `allClaimedRewards/${user}`,
