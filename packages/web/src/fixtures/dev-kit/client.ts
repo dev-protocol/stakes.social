@@ -59,7 +59,6 @@ const createGetContractAddress =
     contract: keyof Omit<RegistryContract, 'contract'>
   ): Promise<string> => {
     const net = await getNetwork(prov)
-    console.log({ net })
     return _getContractAddress(client, contract, net)
   }
 const getL2Registry = async (prov: providers.BaseProvider) => {
