@@ -6003,10 +6003,10 @@
   dependencies:
     "@octokit/openapi-types" "^5.3.2"
 
-"@quentin-sommer/react-useragent@3.1.0":
-  version "3.1.0"
-  resolved "https://registry.yarnpkg.com/@quentin-sommer/react-useragent/-/react-useragent-3.1.0.tgz#8aa823fed7da5034edbf5bb1dc3cefd3d19473ea"
-  integrity sha512-twLVX4A7GpHCEcr5M3c97QR88t+uSZUjvNSTZMqoY5vjPXhpAcw0ZlWpMF6Nlg7Ofkwo3pZa3paQ9Nt7VJYHOA==
+"@quentin-sommer/react-useragent@3.1.1":
+  version "3.1.1"
+  resolved "https://registry.yarnpkg.com/@quentin-sommer/react-useragent/-/react-useragent-3.1.1.tgz#8e3bd07abc2ab1b522b171616bcab60eaac6610c"
+  integrity sha512-AnlVmIZdWFA+QIrjcKh5S83DZL75V7NaFJyk+cUpY6xXTgD1GAB3PcjPcvfOAtzze8fvOpGdJBkaHaCrv2ZLYQ==
   dependencies:
     ua-parser-js "^0.7.20"
 
