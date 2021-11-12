@@ -16,7 +16,6 @@ import { message, Button, Input, Radio, Space, Row, Col, RadioChangeEvent } from
 import styled from 'styled-components'
 import { Max } from 'src/components/molecules/Max'
 import { PositionText } from './PositionText'
-import RightArrow from 'src/components/organisms/Incubator/molecules/RightArrow'
 import { getContractAddress } from 'src/fixtures/dev-kit/get-contract-address'
 import { contractFactory } from '@devprotocol/dev-kit'
 
@@ -197,9 +196,7 @@ export const Stake = ({ className, title, propertyAddress }: Props) => {
                 Approve
               </StyledButton>
             </Col>
-            <WrapRightArrowCol span={2}>
-              <RightArrow />
-            </WrapRightArrowCol>
+            <WrapRightArrowCol span={2}>→</WrapRightArrowCol>
             <Col span={11}>
               <StyledButton type="primary" disabled={!ok} onClick={handleStake}>
                 Stake
