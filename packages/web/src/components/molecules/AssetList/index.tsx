@@ -19,6 +19,17 @@ interface Props {
   positions?: number[]
 }
 
+interface AssetProps {
+  className?: string
+  properties?: string[]
+  onPagination?: (page: number) => void
+  loading?: boolean
+  enableStake?: boolean
+  enableWithdrawStakersReward?: boolean
+  enableWithdrawHoldersReward?: boolean
+  isPool?: boolean
+}
+
 interface ModalStates {
   visible: boolean
   title?: string
@@ -40,6 +51,58 @@ const Item = styled(AssetItemOnList)`
 const StyledPagination = styled(Pagination)`
   margin-top: 1rem;
 `
+
+export const Asset = ({
+  className,
+  properties,
+  enableStake,
+  enableWithdrawStakersReward,
+  enableWithdrawHoldersReward,
+  loading = false,
+  isPool
+}: AssetProps) => {
+  const [modalStates, setModalStates] = useState<ModalStates>({ visible: false })
+  const showModal = (type: 'stake' | 'withdraw' | 'holders') => (propertyAddress?: string) => {
+    const contents = propertyAddress ? (
+      <TransactModalContents propertyAddress={propertyAddress} type={type} />
+    ) : (
+      <p>Property address not found</p>
+    )
+    const title = type === 'stake' ? 'Stake' : 'Withdraw'
+    setModalStates({ visible: true, contents, title })
+  }
+  const closeModal = () => {
+    setModalStates({ ...modalStates, visible: false })
+  }
+
+  return loading ? (
+    <Skeleton active></Skeleton>
+  ) : (
+    <Wrap className={className}>
+      {properties?.length ? (
+        properties.map((item, i) => (
+          <Item
+            isPool={isPool}
+            propertyAddress={typeof item === 'string' ? item : undefined}
+            positionId={typeof item === 'number' ? item : undefined}
+            key={`${item}-${i}`}
+            enableStake={enableStake}
+            enableWithdrawStakersReward={enableWithdrawStakersReward}
+            enableWithdrawHoldersReward={enableWithdrawHoldersReward}
+            onClickStake={showModal('stake')}
+            onClickWithdrawStakersReward={showModal('withdraw')}
+            onClickWithdrawHoldersReward={showModal('holders')}
+          ></Item>
+        ))
+      ) : (
+        <NotConnectedAndEmpty description="Assets not found" />
+      )}
+      <ResponsiveModal visible={modalStates.visible} title={modalStates.title} onCancel={closeModal} footer={null}>
+        {modalStates.contents}
+      </ResponsiveModal>
+    </Wrap>
+  )
+}
 
 export const AssetList = ({
   className,
