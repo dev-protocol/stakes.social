@@ -5,6 +5,14 @@ import { useListOwnedPropertyMetaQuery } from '@dev/graphql'
 import { Asset, AssetList } from 'src/components/molecules/AssetList'
 import { useIsL1 } from 'src/fixtures/wallet/hooks'
 import { useGetEnabledMarkets, useGetAuthenticatedProperties, usePropertyAuthor } from 'src/fixtures/dev-kit/hooks'
+import { TransactModalContents } from 'src/components/molecules/TransactModalContents'
+import { ResponsiveModal } from 'src/components/atoms/ResponsiveModal'
+
+interface ModalStates {
+  visible: boolean
+  title?: string
+  contents?: React.ReactNode
+}
 
 interface Props {
   accountAddress?: string
@@ -12,11 +20,34 @@ interface Props {
 
 const perPage = 5
 
-const AssetAsset4L2 = ({ propertyAddress, accountAddress }: { propertyAddress: string; accountAddress?: string }) => {
+const WrapAsset4L2 = ({ propertyAddress, accountAddress }: { propertyAddress: string; accountAddress?: string }) => {
+  const [modalStates, setModalStates] = useState<ModalStates>({ visible: false })
   const { author: authorAddress } = usePropertyAuthor(propertyAddress)
-  const properties = [propertyAddress]
+  const showModal = (type: 'stake' | 'withdraw' | 'holders') => (propertyAddress?: string) => {
+    const contents = propertyAddress ? (
+      <TransactModalContents propertyAddress={propertyAddress} type={type} />
+    ) : (
+      <p>Property address not found</p>
+    )
+    const title = type === 'stake' ? 'Stake' : 'Withdraw'
+    setModalStates({ visible: true, contents, title })
+  }
+  const closeModal = () => {
+    setModalStates({ ...modalStates, visible: false })
+  }
+
   return authorAddress === accountAddress ? (
-    <Asset isPool={true} properties={properties} enableWithdrawHoldersReward={true}></Asset>
+    <>
+      <Asset
+        isPool={true}
+        property={propertyAddress}
+        enableWithdrawHoldersReward={true}
+        showModalFunc={showModal}
+      ></Asset>
+      <ResponsiveModal visible={modalStates.visible} title={modalStates.title} onCancel={closeModal} footer={null}>
+        {modalStates.contents}
+      </ResponsiveModal>
+    </>
   ) : (
     <></>
   )
@@ -28,7 +59,7 @@ export const Asset4L2 = ({ market, accountAddress }: { market: string; accountAd
   return properties?.length ? (
     <>
       {properties?.map((propertyAddress: string, idx: number) => (
-        <AssetAsset4L2 key={idx} propertyAddress={propertyAddress} accountAddress={accountAddress} />
+        <WrapAsset4L2 key={idx} propertyAddress={propertyAddress} accountAddress={accountAddress} />
       ))}
     </>
   ) : (

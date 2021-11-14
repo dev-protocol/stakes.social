@@ -21,13 +21,13 @@ interface Props {
 
 interface AssetProps {
   className?: string
-  properties?: string[]
+  property: string | number
   onPagination?: (page: number) => void
-  loading?: boolean
   enableStake?: boolean
   enableWithdrawStakersReward?: boolean
   enableWithdrawHoldersReward?: boolean
   isPool?: boolean
+  showModalFunc: Function
 }
 
 interface ModalStates {
@@ -53,54 +53,26 @@ const StyledPagination = styled(Pagination)`
 `
 
 export const Asset = ({
-  className,
-  properties,
+  property,
   enableStake,
   enableWithdrawStakersReward,
   enableWithdrawHoldersReward,
-  loading = false,
-  isPool
+  isPool,
+  showModalFunc
 }: AssetProps) => {
-  const [modalStates, setModalStates] = useState<ModalStates>({ visible: false })
-  const showModal = (type: 'stake' | 'withdraw' | 'holders') => (propertyAddress?: string) => {
-    const contents = propertyAddress ? (
-      <TransactModalContents propertyAddress={propertyAddress} type={type} />
-    ) : (
-      <p>Property address not found</p>
-    )
-    const title = type === 'stake' ? 'Stake' : 'Withdraw'
-    setModalStates({ visible: true, contents, title })
-  }
-  const closeModal = () => {
-    setModalStates({ ...modalStates, visible: false })
-  }
-
-  return loading ? (
-    <Skeleton active></Skeleton>
-  ) : (
-    <Wrap className={className}>
-      {properties?.length ? (
-        properties.map((item, i) => (
-          <Item
-            isPool={isPool}
-            propertyAddress={typeof item === 'string' ? item : undefined}
-            positionId={typeof item === 'number' ? item : undefined}
-            key={`${item}-${i}`}
-            enableStake={enableStake}
-            enableWithdrawStakersReward={enableWithdrawStakersReward}
-            enableWithdrawHoldersReward={enableWithdrawHoldersReward}
-            onClickStake={showModal('stake')}
-            onClickWithdrawStakersReward={showModal('withdraw')}
-            onClickWithdrawHoldersReward={showModal('holders')}
-          ></Item>
-        ))
-      ) : (
-        <NotConnectedAndEmpty description="Assets not found" />
-      )}
-      <ResponsiveModal visible={modalStates.visible} title={modalStates.title} onCancel={closeModal} footer={null}>
-        {modalStates.contents}
-      </ResponsiveModal>
-    </Wrap>
+  return (
+    <Item
+      isPool={isPool}
+      propertyAddress={typeof property === 'string' ? property : undefined}
+      positionId={typeof property === 'number' ? property : undefined}
+      key={`${property}`}
+      enableStake={enableStake}
+      enableWithdrawStakersReward={enableWithdrawStakersReward}
+      enableWithdrawHoldersReward={enableWithdrawHoldersReward}
+      onClickStake={showModalFunc('stake')}
+      onClickWithdrawStakersReward={showModalFunc('withdraw')}
+      onClickWithdrawHoldersReward={showModalFunc('holders')}
+    ></Item>
   )
 }
 
@@ -147,18 +119,15 @@ export const AssetList = ({
     <Wrap className={className}>
       {propertiesOrPositions?.length ? (
         propertiesOrPositions.map((item, i) => (
-          <Item
+          <Asset
             isPool={isPool}
-            propertyAddress={typeof item === 'string' ? item : undefined}
-            positionId={typeof item === 'number' ? item : undefined}
+            property={item}
             key={`${item}-${i}`}
             enableStake={enableStake}
             enableWithdrawStakersReward={enableWithdrawStakersReward}
             enableWithdrawHoldersReward={enableWithdrawHoldersReward}
-            onClickStake={showModal('stake')}
-            onClickWithdrawStakersReward={showModal('withdraw')}
-            onClickWithdrawHoldersReward={showModal('holders')}
-          ></Item>
+            showModalFunc={showModal}
+          />
         ))
       ) : (
         <NotConnectedAndEmpty description="Assets not found" />
