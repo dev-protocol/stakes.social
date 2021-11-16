@@ -20,8 +20,8 @@ const StyledSupplySummary = styled(SupplySummary)`
 
 const Index = (_: Props) => {
   const router = useRouter()
-  const { ethersProvider } = useProvider()
-  const { name } = useDetectChain(ethersProvider)
+  const { ethersProvider, nonConnectedEthersL1Provider } = useProvider()
+  const { name } = useDetectChain(ethersProvider || nonConnectedEthersL1Provider)
   const { apy, creators } = useAPY()
   const { annualSupplyGrowthRatio } = useAnnualSupplyGrowthRatio()
   const page = useMemo(() => {
