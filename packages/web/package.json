@@ -78,7 +78,7 @@
     "@testing-library/react": "12.1.2",
     "@testing-library/react-hooks": "7.0.2",
     "@testing-library/user-event": "13.5.0",
-    "@types/body-parser": "1.19.1",
+    "@types/body-parser": "1.19.2",
     "@types/faker": "5.5.9",
     "@types/ramda": "0.27.49",
     "@types/react": "17.0.35",
