@@ -29,6 +29,7 @@ import {
   propertySymbol,
   balanceOfProperty,
   detectStokens,
+  detectStokensByPropertyAddress,
   getStokenPositions,
   getStokenRewards,
   approve,
@@ -972,7 +973,23 @@ export const useDetectSTokens = (propertyAddress?: string, accountAddress?: stri
     { revalidateOnFocus: false, focusThrottleInterval: 0 }
   )
 
-  return { sTokens: data, error }
+  const { data: detectStokensByPropertyAddressData, error: byPropertyAddressError } = useSWR<
+    UnwrapFunc<typeof detectStokensByPropertyAddress>,
+    Error
+  >(
+    SWRCachePath.detectStokens(propertyAddress, 'ALL'),
+    () =>
+      whenDefinedAll([nonConnectedEthersProvider, propertyAddress], ([client, property]) =>
+        detectStokensByPropertyAddress(client, property)
+      ),
+    { revalidateOnFocus: false, focusThrottleInterval: 0 }
+  )
+
+  return {
+    sTokens: data,
+    sTokensByPropertyAddress: detectStokensByPropertyAddressData,
+    error: error || byPropertyAddressError
+  }
 }
 
 export const usePositionsOfOwner = (accountAddress?: string) => {

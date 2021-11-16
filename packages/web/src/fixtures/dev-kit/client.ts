@@ -513,6 +513,17 @@ export const detectStokens = async (prov: providers.BaseProvider, propertyAddres
   return undefined
 }
 
+export const detectStokensByPropertyAddress = async (prov: providers.BaseProvider, propertyAddress: string) => {
+  const [, , client] = await newClient(prov)
+  const address = await getSTokensAddress(prov)
+  if (client && address) {
+    console.log(address, client.sTokens(address))
+    const TokenIdList = await (client.sTokens(address) as any).positionsOfProperty(propertyAddress)
+    return TokenIdList
+  }
+  return undefined
+}
+
 export const getStokenPositions = async (prov: providers.BaseProvider, sTokenID: number) => {
   const [, , client] = await newClient(prov)
   const address = await getSTokensAddress(prov)
