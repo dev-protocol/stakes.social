@@ -1,7 +1,6 @@
 // @L2 optimized
 import React, { useEffect, useState } from 'react'
 import { useQuery } from '@apollo/client'
-import { reverse } from 'ramda'
 import getTopStakersOfPropertyQuery from './query/getTopStakersOfProperty'
 import { Avatar } from 'src/components/molecules/Avatar'
 import styled, { css } from 'styled-components'
@@ -11,7 +10,7 @@ import { useENS } from 'src/fixtures/ens/hooks'
 import { Spin } from 'antd'
 import Link from 'next/link'
 import { useIsL1, useProvider } from 'src/fixtures/wallet/hooks'
-import { useDetectSTokens } from 'src/fixtures/dev-kit/hooks'
+import { useDetectSTokens, useGetSTokenOwnerOf } from 'src/fixtures/dev-kit/hooks'
 import { getStokenPositions } from 'src/fixtures/dev-kit/client'
 import { whenDefinedAll } from 'src/fixtures/utility'
 
@@ -72,12 +71,13 @@ const StakerSection = styled.div<{ isCreator?: Boolean }>`
 
 const formatter = new Intl.NumberFormat('en-US')
 
-const Staker4L2 = ({ amount }: { amount: number }) => {
+const Staker4L2 = ({ amount, sTokenId }: { amount: number; sTokenId: number }) => {
+  const { owner } = useGetSTokenOwnerOf(sTokenId)
   return (
     <>
       <StakerSection>
-        <Avatar accountAddress={''} size={'100'} />
-        <AccountAddress>{'unknown'}</AccountAddress>
+        <Avatar accountAddress={owner || 'unknown'} size={'100'} />
+        <AccountAddress>{owner || 'unknown'}</AccountAddress>
         <span>{`${formatter.format(parseInt((amount / Math.pow(10, 18)).toFixed(0)))}`}</span>
       </StakerSection>
     </>
@@ -146,14 +146,14 @@ const TopStakers4L2 = ({ propertyAddress }: TopStakersProps) => {
       })
       const results: Position[] = await Promise.all(promises)
       const compFunc = (a: Position, b: Position): number => {
-        if (a.amount > b.amount) {
+        if (a.amount < b.amount) {
           return 1
-        } else if (a.amount < b.amount) {
+        } else if (a.amount > b.amount) {
           return -1
         }
         return 0
       }
-      setAmounts(reverse(results.sort(compFunc)))
+      setAmounts(results.sort(compFunc))
     }
     fetcher()
   }, [data])
@@ -161,7 +161,7 @@ const TopStakers4L2 = ({ propertyAddress }: TopStakersProps) => {
   return (
     <TopStakerRanking>
       {amounts.map(({ sTokenId, amount }) => (
-        <Staker4L2 key={sTokenId} amount={amount} />
+        <Staker4L2 key={sTokenId} amount={amount} sTokenId={sTokenId} />
       ))}
     </TopStakerRanking>
   )
