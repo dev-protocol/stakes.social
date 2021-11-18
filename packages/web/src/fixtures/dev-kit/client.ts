@@ -517,7 +517,6 @@ export const detectStokensByPropertyAddress = async (prov: providers.BaseProvide
   const [, , client] = await newClient(prov)
   const address = await getSTokensAddress(prov)
   if (client && address) {
-    console.log(address, client.sTokens(address))
     const TokenIdList = await (client.sTokens(address) as any).positionsOfProperty(propertyAddress)
     return TokenIdList
   }
