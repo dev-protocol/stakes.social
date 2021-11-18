@@ -58,8 +58,8 @@ export const Asset4L2 = ({ market, accountAddress }: { market: string; accountAd
   const properties = authenticatedProperties ? reverse(authenticatedProperties) : undefined
   return properties?.length ? (
     <>
-      {properties?.map((propertyAddress: string, idx: number) => (
-        <WrapAsset4L2 key={idx} propertyAddress={propertyAddress} accountAddress={accountAddress} />
+      {properties?.map((propertyAddress: unknown, idx: number) => (
+        <WrapAsset4L2 key={idx} propertyAddress={propertyAddress as string} accountAddress={accountAddress} />
       ))}
     </>
   ) : (
