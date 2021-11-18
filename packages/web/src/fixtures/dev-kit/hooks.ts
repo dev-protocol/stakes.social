@@ -30,6 +30,7 @@ import {
   balanceOfProperty,
   detectStokens,
   detectStokensByPropertyAddress,
+  getStokenOwnerOf,
   getStokenPositions,
   getStokenRewards,
   approve,
@@ -1004,6 +1005,19 @@ export const usePositionsOfOwner = (accountAddress?: string) => {
   )
 
   return { positions: data, error }
+}
+
+export const useGetSTokenOwnerOf = (sTokenId?: number) => {
+  const { nonConnectedEthersProvider } = useProvider()
+  const { data, error } = useSWR<UnwrapFunc<typeof getStokenOwnerOf>, Error>(
+    SWRCachePath.getStokenOwnerOf(`${sTokenId}`),
+    () =>
+      whenDefinedAll([nonConnectedEthersProvider, sTokenId], ([client, sTokenId]) =>
+        getStokenOwnerOf(client, sTokenId)
+      ),
+    { revalidateOnFocus: false, focusThrottleInterval: 0 }
+  )
+  return { owner: data, error }
 }
 
 export const useGetSTokenPositions = (sTokenId?: number) => {
