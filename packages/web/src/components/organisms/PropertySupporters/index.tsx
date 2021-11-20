@@ -68,13 +68,13 @@ const SupportersTable = ({ propertyAddress }: { propertyAddress?: string }) => {
             getStokenRewards(client, sTokenId)
           )) || { withdrawableReward: 0 }
 
-          const [accountData, ens, transferBlock] = await Promise.all([
+          const [accountData, ens, transferEvent] = await Promise.all([
             getAccount(ownerAccountAddress),
             nonConnectedEthersL1Provider?.lookupAddress(ownerAccountAddress),
             whenDefined(nonConnectedEthersProvider, client => getStokenHeldAt(client, sTokenId, ownerAccountAddress))
           ])
           const since =
-            transferBlock && transferBlock.length > 0 ? (await transferBlock[0].getBlock()).timestamp : undefined
+            transferEvent && transferEvent.length > 0 ? (await transferEvent[0].getBlock()).timestamp : undefined
           return {
             rank: idx + 1,
             address: ownerAccountAddress,
