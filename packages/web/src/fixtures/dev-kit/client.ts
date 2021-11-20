@@ -10,6 +10,7 @@ import {
   lockupAbi,
   propertyFactoryAbi,
   withdrawAbi,
+  sTokensAbi,
   RegistryContract
 } from '@devprotocol/dev-kit'
 import { contractFactory as l2ContractFactory, DevkitContract as L2DevkitContract } from '@devprotocol/dev-kit/l2'
@@ -662,6 +663,16 @@ export const getId = async (prov: providers.BaseProvider, marketBehavior: string
   const [, , client] = await newClient(prov)
   if (client) {
     return client.marketBehavior(marketBehavior).getId(metricsAddress)
+  }
+  return undefined
+}
+
+export const getStokenHeldAt = async (prov: providers.BaseProvider, sTokenId: number) => {
+  const [, , client] = await newClient(prov)
+  const address = await getSTokensAddress(prov)
+  if (client && address) {
+    const contract = new ethers.Contract(address, [...sTokensAbi], prov)
+    return contract.queryFilter(contract.filters.Transfer(null, null, sTokenId), 'earliest', 'latest')
   }
   return undefined
 }

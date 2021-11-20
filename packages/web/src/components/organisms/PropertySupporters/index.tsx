@@ -1,11 +1,12 @@
 // @L2 optimized
 import React, { useEffect, useState } from 'react'
+import { Table } from 'antd'
+import { format } from 'date-fns'
 import { Avatar } from 'src/components/molecules/Avatar'
 import { getAccount } from 'src/fixtures/dev-for-apps/utility'
-import { Table } from 'antd'
 import { useProvider } from 'src/fixtures/wallet/hooks'
 import { useDetectSTokens } from 'src/fixtures/dev-kit/hooks'
-import { getStokenPositions, getStokenOwnerOf, getStokenRewards } from 'src/fixtures/dev-kit/client'
+import { getStokenPositions, getStokenOwnerOf, getStokenRewards, getStokenHeldAt } from 'src/fixtures/dev-kit/client'
 import { whenDefined, whenDefinedAll } from 'src/fixtures/utility'
 
 interface Props {
@@ -61,21 +62,28 @@ const SupportersTable = ({ propertyAddress }: { propertyAddress?: string }) => {
       const sortedAmounts = results.sort(compFunc)
       const tableData = await Promise.all(
         sortedAmounts.map(async ({ sTokenId, amount }, idx: number) => {
-          const ownerAccountAddres =
+          const ownerAccountAddress =
             (await whenDefined(nonConnectedEthersProvider, client => getStokenOwnerOf(client, sTokenId))) || ''
           const { withdrawableReward: reward } = (await whenDefined(nonConnectedEthersProvider, client =>
             getStokenRewards(client, sTokenId)
           )) || { withdrawableReward: 0 }
-          const accountData = await getAccount(ownerAccountAddres)
-          const ens = await nonConnectedEthersL1Provider?.lookupAddress(ownerAccountAddres)
+
+          const [accountData, ens, transferBlock] = await Promise.all([
+            getAccount(ownerAccountAddress),
+            nonConnectedEthersL1Provider?.lookupAddress(ownerAccountAddress),
+            whenDefined(nonConnectedEthersProvider, client => getStokenHeldAt(client, sTokenId))
+          ])
+          const since =
+            transferBlock && transferBlock.length > 0 ? (await transferBlock[0].getBlock()).timestamp : undefined
           return {
             rank: idx + 1,
-            address: ownerAccountAddres,
+            address: ownerAccountAddress,
             account: {
-              address: ownerAccountAddres,
+              address: ownerAccountAddress,
               name: accountData && accountData.length == 1 ? accountData[0].name : ens ? ens : ''
             },
             amount,
+            since,
             reward
           }
         })
@@ -114,6 +122,13 @@ const SupportersTable = ({ propertyAddress }: { propertyAddress?: string }) => {
       render: (amount: number) => (
         <span>{`${formatter.format(parseInt((amount / Math.pow(10, 18)).toFixed(0)))}`} DEV</span>
       )
+    },
+    {
+      title: 'Since',
+      dataIndex: 'since',
+      key: 'since',
+      render: (timestamp?: number) =>
+        timestamp ? <span>{`${format(timestamp * 1000, 'M/d/Y')}`}</span> : <span>unknown</span>
     },
     {
       title: 'Pending Reward',
