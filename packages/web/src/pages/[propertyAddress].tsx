@@ -16,7 +16,14 @@ import { ButtonWithGradient } from 'src/components/atoms/ButtonWithGradient'
 import { Container } from 'src/components/atoms/Container'
 import { Header } from 'src/components/organisms/Header'
 import TopStakers from 'src/components/organisms/TopStakers'
-import { useAPY, useGetAssetsByProperties, useGetMyStakingAmount, usePropertyAuthor } from 'src/fixtures/dev-kit/hooks'
+import PropertySupporters from 'src/components/organisms/PropertySupporters'
+import {
+  useAPY,
+  useGetAssetsByProperties,
+  useGetMyStakingAmount,
+  usePropertyAuthor,
+  usePropertyName
+} from 'src/fixtures/dev-kit/hooks'
 import { useGetPropertyAuthenticationQuery } from '@dev/graphql'
 import { useGetPropertytInformation } from 'src/fixtures/devprtcl/hooks'
 import {
@@ -354,6 +361,7 @@ const Convert = ({ propertyAddress }: { propertyAddress: string }) => {
 const PropertyAddressDetail = (_: Props) => {
   const { isL1 } = useIsL1()
   const { propertyAddress } = useRouter().query as { propertyAddress: string }
+  const { name: propertyName } = usePropertyName(propertyAddress)
   const { apy, creators } = useAPY()
   const { data } = useGetPropertyAuthenticationQuery({ variables: { propertyAddress }, skip: !isL1 })
   const { data: dataProperty } = useGetProperty(propertyAddress)
@@ -412,6 +420,10 @@ const PropertyAddressDetail = (_: Props) => {
           <div>
             <h2>Top stakers</h2>
             {<TopStakerList propertyAddress={propertyAddress} />}
+          </div>
+          <div>
+            <h2>Supporters of {propertyName}</h2>
+            <PropertySupporters propertyAddress={propertyAddress} />
           </div>
         </Main>
       </Wrap>

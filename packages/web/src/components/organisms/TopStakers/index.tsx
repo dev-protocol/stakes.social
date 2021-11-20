@@ -133,9 +133,6 @@ const TopStakers4L2 = ({ propertyAddress }: TopStakersProps) => {
   const { sTokensByPropertyAddress: data } = useDetectSTokens(propertyAddress)
 
   useEffect(() => {
-    if (!data) {
-      return
-    }
     const fetcher = async () => {
       const promises = data.map(async (sTokenId: number) => {
         return fetchPosition(nonConnectedEthersProvider, sTokenId)
@@ -155,7 +152,7 @@ const TopStakers4L2 = ({ propertyAddress }: TopStakersProps) => {
       }
       setAmounts(results.sort(compFunc))
     }
-    fetcher()
+    data && fetcher()
   }, [data])
 
   return (
