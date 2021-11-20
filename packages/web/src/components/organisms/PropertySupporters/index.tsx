@@ -71,7 +71,7 @@ const SupportersTable = ({ propertyAddress }: { propertyAddress?: string }) => {
           const [accountData, ens, transferBlock] = await Promise.all([
             getAccount(ownerAccountAddress),
             nonConnectedEthersL1Provider?.lookupAddress(ownerAccountAddress),
-            whenDefined(nonConnectedEthersProvider, client => getStokenHeldAt(client, sTokenId))
+            whenDefined(nonConnectedEthersProvider, client => getStokenHeldAt(client, sTokenId, ownerAccountAddress))
           ])
           const since =
             transferBlock && transferBlock.length > 0 ? (await transferBlock[0].getBlock()).timestamp : undefined
