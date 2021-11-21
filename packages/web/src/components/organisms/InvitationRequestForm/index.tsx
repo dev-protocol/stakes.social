@@ -192,7 +192,7 @@ export const InvitationRequestForm = ({ market }: Props) => {
           <Row>
             <div>
               <Span style={{ marginTop: 0, fontSize: '1.1em' }}>
-                <a href="https://discord.gg/WnQXqpQ">Dev Protocol</a>
+                <a href="https://discord.gg/VwJp4KM">Dev Protocol</a>
               </Span>
               <span style={{ fontSize: '1.1em' }}>Discord name:</span>
             </div>
