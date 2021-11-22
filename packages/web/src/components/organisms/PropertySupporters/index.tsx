@@ -1,6 +1,6 @@
 // @L2 optimized
 import React, { useEffect, useState } from 'react'
-import { Table } from 'antd'
+import { Popover, Table } from 'antd'
 import { format } from 'date-fns'
 import { Avatar } from 'src/components/molecules/Avatar'
 import { getAccount } from 'src/fixtures/dev-for-apps/utility'
@@ -8,6 +8,7 @@ import { useProvider } from 'src/fixtures/wallet/hooks'
 import { useDetectSTokens } from 'src/fixtures/dev-kit/hooks'
 import { getStokenPositions, getStokenOwnerOf, getStokenRewards, getStokenHeldAt } from 'src/fixtures/dev-kit/client'
 import { whenDefined, whenDefinedAll } from 'src/fixtures/utility'
+import { ButtonWithGradient } from 'src/components/atoms/ButtonWithGradient'
 
 interface Props {
   propertyAddress?: string
@@ -33,6 +34,31 @@ interface TableData {
   amount: number
 }
 
+const OfferPopover = () => {
+  const [visiblePopover, setVisiblePopover] = useState(false)
+  const handleVisibleChange = (visible: boolean) => {
+    setVisiblePopover(visible)
+  }
+
+  return (
+    <>
+      <Popover
+        content={
+          <>
+            <div>Thank you!</div>
+            <div>Please wait for the next update.</div>
+          </>
+        }
+        trigger="click"
+        visible={visiblePopover}
+        onVisibleChange={handleVisibleChange}
+      >
+        <ButtonWithGradient>Offer</ButtonWithGradient>
+      </Popover>
+    </>
+  )
+}
+
 const SupportersTable = ({ propertyAddress }: { propertyAddress?: string }) => {
   const { nonConnectedEthersProvider, nonConnectedEthersL1Provider } = useProvider()
   const [tableData, setTableData] = useState<Array<TableData>>([])
@@ -52,6 +78,7 @@ const SupportersTable = ({ propertyAddress }: { propertyAddress?: string }) => {
       })
       const results: Position[] = await Promise.all(promises)
       const compFunc = (a: Position, b: Position): number => {
+        console.log(a.amount, b.amount)
         if (a.amount < b.amount) {
           return 1
         } else if (a.amount > b.amount) {
@@ -137,6 +164,10 @@ const SupportersTable = ({ propertyAddress }: { propertyAddress?: string }) => {
       render: (amount: number) => (
         <span>{`${formatter.format(parseInt((amount / Math.pow(10, 18)).toFixed(0)))}`} DEV</span>
       )
+    },
+    {
+      title: '',
+      render: () => <OfferPopover />
     }
   ]
 
