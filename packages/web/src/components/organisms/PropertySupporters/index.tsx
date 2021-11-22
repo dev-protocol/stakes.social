@@ -78,7 +78,6 @@ const SupportersTable = ({ propertyAddress }: { propertyAddress?: string }) => {
       })
       const results: Position[] = await Promise.all(promises)
       const compFunc = (a: Position, b: Position): number => {
-        console.log(a.amount, b.amount)
         if (a.amount < b.amount) {
           return 1
         } else if (a.amount > b.amount) {
