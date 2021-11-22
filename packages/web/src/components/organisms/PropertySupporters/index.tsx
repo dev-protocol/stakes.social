@@ -167,6 +167,7 @@ const SupportersTable = ({ propertyAddress }: { propertyAddress?: string }) => {
     },
     {
       title: '',
+      key: 'offer',
       render: () => <OfferPopover />
     }
   ]
