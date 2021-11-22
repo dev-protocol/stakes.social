@@ -166,12 +166,12 @@ const SupportersTable = ({ propertyAddress }: { propertyAddress?: string }) => {
     },
     {
       title: '',
-      key: 'offer',
+      key: 'action',
       render: () => <OfferPopover />
     }
   ]
 
-  return <Table columns={columns} dataSource={tableData} loading={loading} />
+  return <Table columns={columns} dataSource={tableData} rowKey="rank" loading={loading} />
 }
 
 const PropertySupporters = ({ propertyAddress }: Props) => {
