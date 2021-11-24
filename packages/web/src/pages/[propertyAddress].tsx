@@ -15,7 +15,6 @@ import { ResponsiveModal } from 'src/components/atoms/ResponsiveModal'
 import { ButtonWithGradient } from 'src/components/atoms/ButtonWithGradient'
 import { Container } from 'src/components/atoms/Container'
 import { Header } from 'src/components/organisms/Header'
-import TopStakers from 'src/components/organisms/TopStakers'
 import PropertySupporters from 'src/components/organisms/PropertySupporters'
 import {
   useAPY,
@@ -69,8 +68,6 @@ const Main = styled(Container)`
     grid-gap: 3rem 2rem;
   }
 `
-
-const TopStakerList = styled(TopStakers)``
 
 const Transact = styled.div`
   display: grid;
@@ -417,10 +414,6 @@ const PropertyAddressDetail = (_: Props) => {
             </AssetList>
           </AssetsSection>
           {<Author propertyAddress={propertyAddress} />}
-          <div>
-            <h2>Top stakers</h2>
-            {<TopStakerList propertyAddress={propertyAddress} />}
-          </div>
           <div>
             <h2>Supporters of {propertyName}</h2>
             <PropertySupporters propertyAddress={propertyAddress} />
