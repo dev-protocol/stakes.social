@@ -153,7 +153,7 @@ const TopStakers4L2 = ({ propertyAddress }: TopStakersProps) => {
       setAmounts(results.sort(compFunc))
     }
     data && fetcher()
-  }, [data])
+  }, [data, nonConnectedEthersProvider])
 
   return (
     <TopStakerRanking>

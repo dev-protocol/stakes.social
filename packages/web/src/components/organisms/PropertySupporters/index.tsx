@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react'
 import { Popover, Table } from 'antd'
 import { format } from 'date-fns'
+import { providers } from 'ethers'
 import { Avatar } from 'src/components/molecules/Avatar'
 import { getAccount } from 'src/fixtures/dev-for-apps/utility'
 import { useProvider } from 'src/fixtures/wallet/hooks'
@@ -17,7 +18,7 @@ interface Props {
 
 const formatter = new Intl.NumberFormat('en-US')
 
-const fetchPosition = (nonConnectedEthersProvider: any, sTokenId: number) => {
+const fetchPosition = (sTokenId: number, nonConnectedEthersProvider?: providers.BaseProvider) => {
   return whenDefinedAll([nonConnectedEthersProvider, sTokenId], ([client, sTokenId]) =>
     getStokenPositions(client, sTokenId)
   )
@@ -70,13 +71,13 @@ const SupportersTable = ({ propertyAddress }: { propertyAddress?: string }) => {
 
     const fetcher = async () => {
       const promises = data.map(async (sTokenId: number) => {
-        return fetchPosition(nonConnectedEthersProvider, sTokenId)
+        return fetchPosition(sTokenId, nonConnectedEthersProvider)
           ?.then((positions: any) => {
             return { amount: parseInt(positions.amount || '0'), sTokenId: sTokenId }
           })
           .catch(() => {})
       })
-      const results: Position[] = await Promise.all(promises)
+      const results = (await Promise.all(promises)) as Position[]
       const compFunc = (a: Position, b: Position): number => {
         if (a.amount < b.amount) {
           return 1
@@ -85,7 +86,7 @@ const SupportersTable = ({ propertyAddress }: { propertyAddress?: string }) => {
         }
         return 0
       }
-      const sortedAmounts = results.sort(compFunc)
+      const sortedAmounts = results.filter((result: Position) => result.amount !== 0).sort(compFunc)
       const tableData = await Promise.all(
         sortedAmounts.map(async ({ sTokenId, amount }, idx: number) => {
           const ownerAccountAddress =
@@ -118,7 +119,7 @@ const SupportersTable = ({ propertyAddress }: { propertyAddress?: string }) => {
       setLoading(false)
     }
     data && fetcher()
-  }, [data, nonConnectedEthersProvider])
+  }, [data, nonConnectedEthersProvider, nonConnectedEthersL1Provider])
 
   const columns = [
     {
