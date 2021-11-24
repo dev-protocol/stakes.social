@@ -1,16 +1,85 @@
 // @L2 optimized
-import React, { useState } from 'react'
+import React, { useCallback, useState } from 'react'
+import { reverse } from 'ramda'
 import { useListOwnedPropertyMetaQuery } from '@dev/graphql'
-import { AssetList } from 'src/components/molecules/AssetList'
-import { useCallback } from 'react'
+import { Asset, AssetList } from 'src/components/molecules/AssetList'
 import { useIsL1 } from 'src/fixtures/wallet/hooks'
-import Text from 'antd/lib/typography/Text'
+import { useGetEnabledMarkets, useGetAuthenticatedProperties, usePropertyAuthor } from 'src/fixtures/dev-kit/hooks'
+import { TransactModalContents } from 'src/components/molecules/TransactModalContents'
+import { ResponsiveModal } from 'src/components/atoms/ResponsiveModal'
+
+interface ModalStates {
+  visible: boolean
+  title?: string
+  contents?: React.ReactNode
+}
 
 interface Props {
   accountAddress?: string
 }
 
 const perPage = 5
+
+const WrapAsset4L2 = ({ propertyAddress, accountAddress }: { propertyAddress: string; accountAddress?: string }) => {
+  const [modalStates, setModalStates] = useState<ModalStates>({ visible: false })
+  const { author: authorAddress } = usePropertyAuthor(propertyAddress)
+  const showModal = (type: 'stake' | 'withdraw' | 'holders') => (propertyAddress?: string) => {
+    const contents = propertyAddress ? (
+      <TransactModalContents propertyAddress={propertyAddress} type={type} />
+    ) : (
+      <p>Property address not found</p>
+    )
+    const title = type === 'stake' ? 'Stake' : 'Withdraw'
+    setModalStates({ visible: true, contents, title })
+  }
+  const closeModal = () => {
+    setModalStates({ ...modalStates, visible: false })
+  }
+
+  return authorAddress === accountAddress ? (
+    <>
+      <Asset
+        isPool={true}
+        property={propertyAddress}
+        enableWithdrawHoldersReward={true}
+        showModalFunc={showModal}
+      ></Asset>
+      <ResponsiveModal visible={modalStates.visible} title={modalStates.title} onCancel={closeModal} footer={null}>
+        {modalStates.contents}
+      </ResponsiveModal>
+    </>
+  ) : (
+    <></>
+  )
+}
+
+export const Asset4L2 = ({ market, accountAddress }: { market: string; accountAddress?: string }) => {
+  const { data: authenticatedProperties } = useGetAuthenticatedProperties(market)
+  const properties = authenticatedProperties ? reverse(authenticatedProperties) : undefined
+  return properties?.length ? (
+    <>
+      {properties?.map((propertyAddress: string, idx: number) => (
+        <WrapAsset4L2 key={idx} propertyAddress={propertyAddress} accountAddress={accountAddress} />
+      ))}
+    </>
+  ) : (
+    <></>
+  )
+}
+
+export const YourPools4L2 = ({ accountAddress }: Props) => {
+  const { data: enabledMarkets } = useGetEnabledMarkets()
+
+  return enabledMarkets ? (
+    <>
+      {enabledMarkets.map((market: string, idx: number) => (
+        <Asset4L2 key={idx} market={market} accountAddress={accountAddress} />
+      ))}
+    </>
+  ) : (
+    <></>
+  )
+}
 
 export const YourPools = ({ accountAddress }: Props) => {
   const [page, setPage] = useState(1)
@@ -43,6 +112,6 @@ export const YourPools = ({ accountAddress }: Props) => {
       enableWithdrawHoldersReward={true}
     ></AssetList>
   ) : (
-    <Text type="secondary">(Not provide this feature yet on L2)</Text>
+    <YourPools4L2 accountAddress={accountAddress} />
   )
 }

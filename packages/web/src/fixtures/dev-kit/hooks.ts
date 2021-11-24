@@ -661,9 +661,10 @@ export const useCreateAndAuthenticate = () => {
 
 export const useAPY = () => {
   const { nonConnectedEthersProvider, accountAddress } = useProvider()
+  const { name: chain } = useDetectChain(nonConnectedEthersProvider)
   const { isL1 } = useIsL1()
   const { data: maxRewards, error: maxRewardsError } = useSWR<UnwrapFunc<typeof calculateMaxRewardsPerBlock>, Error>(
-    SWRCachePath.calculateMaxRewardsPerBlock(accountAddress),
+    SWRCachePath.calculateMaxRewardsPerBlock(chain, accountAddress),
     () => whenDefined(nonConnectedEthersProvider, x => calculateMaxRewardsPerBlock(x).catch(() => '0')),
     {
       onError: err => {
@@ -678,7 +679,7 @@ export const useAPY = () => {
     UnwrapFunc<typeof getTotalStakingAmountOnProtocol>,
     Error
   >(
-    SWRCachePath.getTotalStakingAmountOnProtocol(accountAddress),
+    SWRCachePath.getTotalStakingAmountOnProtocol(chain, accountAddress),
     () => whenDefined(nonConnectedEthersProvider, x => getTotalStakingAmountOnProtocol(x)),
     {
       onError: err => {
@@ -690,7 +691,7 @@ export const useAPY = () => {
     }
   )
   const { data: holders, error: holdersError } = useSWR<UnwrapFunc<typeof holdersShare>, Error>(
-    SWRCachePath.holdersShare(maxRewards, totalStaking),
+    SWRCachePath.holdersShare(chain, maxRewards, totalStaking),
     () =>
       maxRewards && totalStaking
         ? whenDefined(nonConnectedEthersProvider, x => holdersShare(x, maxRewards, totalStaking))
@@ -774,9 +775,10 @@ export const useCirculatingSupply = () => {
 
 export const useAnnualSupplyGrowthRatio = () => {
   const { nonConnectedEthersProvider, nonConnectedEthersL1Provider, accountAddress } = useProvider()
+  const { name: chain } = useDetectChain(nonConnectedEthersProvider)
   const { isL1 } = useIsL1()
   const { data: maxRewards, error: maxRewardsError } = useSWR<UnwrapFunc<typeof calculateMaxRewardsPerBlock>, Error>(
-    SWRCachePath.calculateMaxRewardsPerBlock(accountAddress),
+    SWRCachePath.calculateMaxRewardsPerBlock(chain, accountAddress),
     () => whenDefined(nonConnectedEthersProvider, x => calculateMaxRewardsPerBlock(x).catch(() => '0')),
     {
       onError: err => {
@@ -788,7 +790,7 @@ export const useAnnualSupplyGrowthRatio = () => {
     }
   )
   const { data: totalSupplyValue, error: totalSupplyError } = useSWR<UnwrapFunc<typeof totalSupply>, Error>(
-    SWRCachePath.totalSupply(accountAddress),
+    SWRCachePath.totalSupply(chain, accountAddress),
     () => whenDefined(nonConnectedEthersL1Provider, x => totalSupply(x)),
     {
       onError: err => {

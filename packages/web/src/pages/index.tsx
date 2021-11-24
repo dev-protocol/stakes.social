@@ -20,8 +20,8 @@ const StyledSupplySummary = styled(SupplySummary)`
 
 const Index = (_: Props) => {
   const router = useRouter()
-  const { ethersProvider } = useProvider()
-  const { name } = useDetectChain(ethersProvider)
+  const { ethersProvider, nonConnectedEthersL1Provider } = useProvider()
+  const { name } = useDetectChain(ethersProvider || nonConnectedEthersL1Provider)
   const { apy, creators } = useAPY()
   const { annualSupplyGrowthRatio } = useAnnualSupplyGrowthRatio()
   const page = useMemo(() => {
@@ -55,7 +55,6 @@ const Index = (_: Props) => {
   const isL2 = useMemo(() => {
     return name === undefined ? undefined : name === 'arbitrum-one' || name === 'arbitrum-rinkeby'
   }, [name])
-  console.log({ isL2 })
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>

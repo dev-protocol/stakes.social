@@ -40,7 +40,6 @@ export const getContractAddress = async <
               .registry(registryOrAddress.registry)
               .registries(`${contract.charAt(0).toUpperCase()}${contract.slice(1)}`)
         : (undefined as never)
-    console.log({ address, contract })
     cache.get(net)?.set(contract, address)
     return address
   })(cache.get(net)?.get(contract))
