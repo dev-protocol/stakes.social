@@ -5838,14 +5838,14 @@ export type GetPortofolioPoolsAccountQuery = {
 }
 
 export type GetPropertyAggregateQueryVariables = Exact<{
-  authorAddress?: Maybe<Scalars['String']>
+  authorAddress?: InputMaybe<Scalars['String']>
 }>
 
 export type GetPropertyAggregateQuery = {
   __typename?: 'query_root'
   property_meta_aggregate: {
     __typename?: 'property_meta_aggregate'
-    aggregate?: { __typename?: 'property_meta_aggregate_fields'; count?: number | null | undefined } | null | undefined
+    aggregate?: { __typename?: 'property_meta_aggregate_fields'; count?: number }
   }
 }
 
@@ -5860,7 +5860,7 @@ export type GetPropertyAuthenticationQuery = {
     authentication_id: string
     market: string
     metrics: string
-    property_meta?: { __typename?: 'property_meta'; author: string } | null | undefined
+    property_meta?: { __typename?: 'property_meta'; author: string }
   }>
 }
 
@@ -5887,12 +5887,12 @@ export type TotalStakedAccountQueryVariables = Exact<{
 
 export type TotalStakedAccountQuery = {
   __typename?: 'query_root'
-  account_lockup_sum_values: Array<{ __typename?: 'account_lockup_sum_values'; sum_values?: any | null | undefined }>
+  account_lockup_sum_values: Array<{ __typename?: 'account_lockup_sum_values'; sum_values?: any }>
 }
 
 export type ListAccountLockupQueryVariables = Exact<{
   account_address: Scalars['String']
-  offset?: Maybe<Scalars['Int']>
+  offset?: InputMaybe<Scalars['Int']>
   limit: Scalars['Int']
 }>
 
@@ -5901,7 +5901,7 @@ export type ListAccountLockupQuery = {
   account_lockup: Array<{ __typename?: 'account_lockup'; property_address: string }>
   account_lockup_aggregate: {
     __typename?: 'account_lockup_aggregate'
-    aggregate?: { __typename?: 'account_lockup_aggregate_fields'; count?: number | null | undefined } | null | undefined
+    aggregate?: { __typename?: 'account_lockup_aggregate_fields'; count?: number }
   }
 }
 
@@ -5911,14 +5911,14 @@ export type CountAccountLockupUniqueQuery = {
   __typename?: 'query_root'
   account_lockup_aggregate: {
     __typename?: 'account_lockup_aggregate'
-    aggregate?: { __typename?: 'account_lockup_aggregate_fields'; count?: number | null | undefined } | null | undefined
+    aggregate?: { __typename?: 'account_lockup_aggregate_fields'; count?: number }
   }
 }
 
 export type ListOwnedPropertyMetaQueryVariables = Exact<{
   account_address: Scalars['String']
-  offset?: Maybe<Scalars['Int']>
-  limit?: Maybe<Scalars['Int']>
+  offset?: InputMaybe<Scalars['Int']>
+  limit?: InputMaybe<Scalars['Int']>
 }>
 
 export type ListOwnedPropertyMetaQuery = {
@@ -5927,12 +5927,12 @@ export type ListOwnedPropertyMetaQuery = {
 }
 
 export type ListPropertyQueryVariables = Exact<{
-  limit?: Maybe<Scalars['Int']>
-  offset?: Maybe<Scalars['Int']>
-  ilike?: Maybe<Scalars['String']>
-  from?: Maybe<Scalars['String']>
-  market?: Maybe<Scalars['String']>
-  marketOther?: Maybe<Array<Scalars['String']> | Scalars['String']>
+  limit?: InputMaybe<Scalars['Int']>
+  offset?: InputMaybe<Scalars['Int']>
+  ilike?: InputMaybe<Scalars['String']>
+  from?: InputMaybe<Scalars['String']>
+  market?: InputMaybe<Scalars['String']>
+  marketOther?: InputMaybe<Array<Scalars['String']> | Scalars['String']>
 }>
 
 export type ListPropertyQuery = {
@@ -5950,20 +5950,17 @@ export type ListPropertyQuery = {
   }>
   property_factory_create_aggregate: {
     __typename?: 'property_factory_create_aggregate'
-    aggregate?:
-      | { __typename?: 'property_factory_create_aggregate_fields'; count?: number | null | undefined }
-      | null
-      | undefined
+    aggregate?: { __typename?: 'property_factory_create_aggregate_fields'; count?: number }
   }
 }
 
 export type ListPropertyOrderByMostRecentQueryVariables = Exact<{
-  limit?: Maybe<Scalars['Int']>
-  offset?: Maybe<Scalars['Int']>
-  ilike?: Maybe<Scalars['String']>
-  from?: Maybe<Scalars['String']>
-  market?: Maybe<Scalars['String']>
-  marketOther?: Maybe<Array<Scalars['String']> | Scalars['String']>
+  limit?: InputMaybe<Scalars['Int']>
+  offset?: InputMaybe<Scalars['Int']>
+  ilike?: InputMaybe<Scalars['String']>
+  from?: InputMaybe<Scalars['String']>
+  market?: InputMaybe<Scalars['String']>
+  marketOther?: InputMaybe<Array<Scalars['String']> | Scalars['String']>
 }>
 
 export type ListPropertyOrderByMostRecentQuery = {
@@ -5981,18 +5978,15 @@ export type ListPropertyOrderByMostRecentQuery = {
   }>
   property_factory_create_aggregate: {
     __typename?: 'property_factory_create_aggregate'
-    aggregate?:
-      | { __typename?: 'property_factory_create_aggregate_fields'; count?: number | null | undefined }
-      | null
-      | undefined
+    aggregate?: { __typename?: 'property_factory_create_aggregate_fields'; count?: number }
   }
 }
 
 export type ListPropertyMetaQueryVariables = Exact<{
   author: Scalars['String']
-  offset?: Maybe<Scalars['Int']>
-  limit?: Maybe<Scalars['Int']>
-  ilike?: Maybe<Scalars['String']>
+  offset?: InputMaybe<Scalars['Int']>
+  limit?: InputMaybe<Scalars['Int']>
+  ilike?: InputMaybe<Scalars['String']>
 }>
 
 export type ListPropertyMetaQuery = {
@@ -6003,28 +5997,18 @@ export type ListPropertyMetaQuery = {
     name: string
     lockup_aggregate: {
       __typename?: 'property_lockup_aggregate'
-      aggregate?:
-        | {
-            __typename?: 'property_lockup_aggregate_fields'
-            count?: number | null | undefined
-            sum?:
-              | {
-                  __typename?: 'property_lockup_sum_fields'
-                  block_number?: number | null | undefined
-                  value?: any | null | undefined
-                }
-              | null
-              | undefined
-          }
-        | null
-        | undefined
+      aggregate?: {
+        __typename?: 'property_lockup_aggregate_fields'
+        count?: number
+        sum?: { __typename?: 'property_lockup_sum_fields'; block_number?: number; value?: any }
+      }
     }
   }>
 }
 
 export type ListTopStakersAccountQueryVariables = Exact<{
   author_address: Scalars['String']
-  limit?: Maybe<Scalars['Int']>
+  limit?: InputMaybe<Scalars['Int']>
 }>
 
 export type ListTopStakersAccountQuery = {
@@ -6039,7 +6023,7 @@ export type ListTopStakersAccountQuery = {
 
 export type ListTopSupportingAccountQueryVariables = Exact<{
   account_address: Scalars['String']
-  limit?: Maybe<Scalars['Int']>
+  limit?: InputMaybe<Scalars['Int']>
 }>
 
 export type ListTopSupportingAccountQuery = {
