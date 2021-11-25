@@ -16,14 +16,6 @@ interface Props {
   authorAddress?: string
 }
 
-const formatter = new Intl.NumberFormat('en-US')
-
-const fetchPosition = (sTokenId: number, nonConnectedEthersProvider?: providers.BaseProvider) => {
-  return whenDefinedAll([nonConnectedEthersProvider, sTokenId], ([client, sTokenId]) =>
-    getStokenPositions(client, sTokenId)
-  )
-}
-
 interface Position {
   amount: number
   sTokenId: number
@@ -33,6 +25,14 @@ interface TableData {
   rank: number
   address: string
   amount: number
+}
+
+const formatter = new Intl.NumberFormat('en-US')
+
+const fetchPosition = (sTokenId: number, nonConnectedEthersProvider?: providers.BaseProvider) => {
+  return whenDefinedAll([nonConnectedEthersProvider, sTokenId], ([client, sTokenId]) =>
+    getStokenPositions(client, sTokenId)
+  )
 }
 
 const OfferPopover = () => {
@@ -59,6 +59,57 @@ const OfferPopover = () => {
     </>
   )
 }
+
+const tableColumns = [
+  {
+    title: 'Rank',
+    dataIndex: 'rank',
+    key: 'rank',
+    render: (text: string) => <span>{text}</span>
+  },
+  {
+    title: 'Address',
+    dataIndex: 'account',
+    key: 'account',
+    render: ({ address, name }: { address: string; name: string }) => (
+      <>
+        <div style={{ display: 'flex' }}>
+          <Avatar accountAddress={address} size={'30'} />
+          <span>{name}</span>
+        </div>
+        <span>{address}</span>
+      </>
+    )
+  },
+  {
+    title: 'Value',
+    dataIndex: 'amount',
+    key: 'amount',
+    render: (amount: number) => (
+      <span>{`${formatter.format(parseInt((amount / Math.pow(10, 18)).toFixed(0)))}`} DEV</span>
+    )
+  },
+  {
+    title: 'Since',
+    dataIndex: 'since',
+    key: 'since',
+    render: (timestamp?: number) =>
+      timestamp ? <span>{`${format(timestamp * 1000, 'M/d/Y')}`}</span> : <span>unknown</span>
+  },
+  {
+    title: 'Pending Reward',
+    dataIndex: 'reward',
+    key: 'reward',
+    render: (amount: number) => (
+      <span>{`${formatter.format(parseInt((amount / Math.pow(10, 18)).toFixed(0)))}`} DEV</span>
+    )
+  },
+  {
+    title: '',
+    key: 'action',
+    render: () => <OfferPopover />
+  }
+]
 
 const SupportersTable = ({ propertyAddress }: { propertyAddress?: string }) => {
   const { nonConnectedEthersProvider, nonConnectedEthersL1Provider } = useProvider()
@@ -121,58 +172,7 @@ const SupportersTable = ({ propertyAddress }: { propertyAddress?: string }) => {
     data && fetcher()
   }, [data, nonConnectedEthersProvider, nonConnectedEthersL1Provider])
 
-  const columns = [
-    {
-      title: 'Rank',
-      dataIndex: 'rank',
-      key: 'rank',
-      render: (text: string) => <span>{text}</span>
-    },
-    {
-      title: 'Address',
-      dataIndex: 'account',
-      key: 'account',
-      render: ({ address, name }: { address: string; name: string }) => (
-        <>
-          <div style={{ display: 'flex' }}>
-            <Avatar accountAddress={address} size={'30'} />
-            <span>{name}</span>
-          </div>
-          <span>{address}</span>
-        </>
-      )
-    },
-    {
-      title: 'Value',
-      dataIndex: 'amount',
-      key: 'amount',
-      render: (amount: number) => (
-        <span>{`${formatter.format(parseInt((amount / Math.pow(10, 18)).toFixed(0)))}`} DEV</span>
-      )
-    },
-    {
-      title: 'Since',
-      dataIndex: 'since',
-      key: 'since',
-      render: (timestamp?: number) =>
-        timestamp ? <span>{`${format(timestamp * 1000, 'M/d/Y')}`}</span> : <span>unknown</span>
-    },
-    {
-      title: 'Pending Reward',
-      dataIndex: 'reward',
-      key: 'reward',
-      render: (amount: number) => (
-        <span>{`${formatter.format(parseInt((amount / Math.pow(10, 18)).toFixed(0)))}`} DEV</span>
-      )
-    },
-    {
-      title: '',
-      key: 'action',
-      render: () => <OfferPopover />
-    }
-  ]
-
-  return <Table columns={columns} dataSource={tableData} rowKey="rank" loading={loading} />
+  return <Table columns={tableColumns} dataSource={tableData} rowKey="rank" loading={loading} />
 }
 
 const PropertySupporters = ({ propertyAddress }: Props) => {
