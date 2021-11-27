@@ -9,7 +9,7 @@ import {
 } from '@dev/graphql'
 
 export const useTotalStakedAccountLazyQuery = (): Partial<ReturnType<typeof IUseTotalStakedAccountLazyQuery>> => [
-  () => '',
+  jest.fn(),
   {
     data: {
       account_lockup_sum_values: [
