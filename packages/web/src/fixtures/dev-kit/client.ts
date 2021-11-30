@@ -668,11 +668,13 @@ export const getId = async (prov: providers.BaseProvider, marketBehavior: string
 }
 
 export const getStokenHeldAt = async (prov: providers.BaseProvider, sTokenId: number, accountAddress: string) => {
-  const [, , client] = await newClient(prov)
+  const [, l2, client] = await newClient(prov)
   const address = await getSTokensAddress(prov)
   if (client && address) {
+    // NOTE: use contract deploy's block number because improve fetch performance
+    const fromBlockNumber = l2 ? 2755321 : 13349972
     const contract = new ethers.Contract(address, [...sTokensAbi], prov)
-    return contract.queryFilter(contract.filters.Transfer(null, accountAddress, sTokenId), 'earliest', 'latest')
+    return contract.queryFilter(contract.filters.Transfer(null, accountAddress, sTokenId), fromBlockNumber, 'latest')
   }
   return undefined
 }
