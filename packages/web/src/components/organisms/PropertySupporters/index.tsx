@@ -111,17 +111,16 @@ const tableColumns = [
   }
 ]
 
-const SupportersTable = ({ propertyAddress }: { propertyAddress?: string }) => {
+const SupportersTable = ({ sTokenIds }: { sTokenIds: number[] }) => {
   const { nonConnectedEthersProvider, nonConnectedEthersL1Provider } = useProvider()
   const [tableData, setTableData] = useState<Array<TableData>>([])
   const [loading, setLoading] = useState(false)
-  const { sTokensByPropertyAddress: data } = useDetectSTokens(propertyAddress)
 
   useEffect(() => {
     setLoading(true)
 
     const fetcher = async () => {
-      const promises = data.map(async (sTokenId: number) => {
+      const promises = sTokenIds.map(async (sTokenId: number) => {
         return fetchPosition(sTokenId, nonConnectedEthersProvider)
           ?.then((positions: any) => {
             return { amount: parseInt(positions.amount || '0'), sTokenId: sTokenId }
@@ -169,8 +168,10 @@ const SupportersTable = ({ propertyAddress }: { propertyAddress?: string }) => {
       setTableData(tableData)
       setLoading(false)
     }
-    data && fetcher()
-  }, [data, nonConnectedEthersProvider, nonConnectedEthersL1Provider])
+    sTokenIds && sTokenIds.length > 0 && fetcher()
+    // NOTE: Don't pass Eth provider to deps because it will enter an infinite loop.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [sTokenIds])
 
   return <Table columns={tableColumns} dataSource={tableData} rowKey="rank" loading={loading} />
 }
