@@ -176,7 +176,12 @@ const SupportersTable = ({ propertyAddress }: { propertyAddress?: string }) => {
 }
 
 const PropertySupporters = ({ propertyAddress }: Props) => {
-  return <SupportersTable propertyAddress={propertyAddress} />
+  const { sTokensByPropertyAddress: data } = useDetectSTokens(propertyAddress)
+  return data && data.length > 0 ? (
+    <SupportersTable sTokenIds={data} />
+  ) : (
+    <Table columns={tableColumns} dataSource={[]} rowKey="rank" />
+  )
 }
 
 export default PropertySupporters
