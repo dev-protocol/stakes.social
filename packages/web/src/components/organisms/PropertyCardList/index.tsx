@@ -2,7 +2,7 @@
 import React, { useCallback, useState } from 'react'
 import Link from 'next/link'
 import { Spin, Pagination } from 'antd'
-import { useListPropertyQuery, useListPropertyOrderByMostRecentQuery } from '@dev/graphql'
+import { useListPropertyQuery, useListPropertyOrderByMostRecentQuery, Property_Authentication } from '@dev/graphql'
 import { PropertyCard } from './PropertyCard'
 import { PropertySearchForm } from './PropertySearchForm'
 import { CurrencySwitcher } from './CurrencySwitcher'
@@ -211,19 +211,19 @@ export const PropertyCardList = ({ currentPage, searchWord, sortBy, featureTag }
         <>
           <PropertyOverview>
             {sortBy !== 'MOST_RECENT' &&
-              data.property_factory_create.map(d => (
+              data.property_factory_create.map((d: any) => (
                 <PropertyCard
                   key={d.event_id}
                   propertyAddress={d.property}
-                  assets={d.authentication.map(x => x.authentication_id)}
+                  assets={d.authentication.map((x: Property_Authentication) => x.authentication_id)}
                 />
               ))}
             {sortBy === 'MOST_RECENT' &&
-              mostRecentData.property_factory_create.map(d => (
+              mostRecentData.property_factory_create.map((d: any) => (
                 <PropertyCard
                   key={d.event_id}
                   propertyAddress={d.property}
-                  assets={d.authentication.map(x => x.authentication_id)}
+                  assets={d.authentication.map((x: Property_Authentication) => x.authentication_id)}
                 />
               ))}
           </PropertyOverview>
@@ -256,7 +256,11 @@ export const PropertyByMarketL2 = ({ market }: { market: string }) => {
   const list = data ? reverse(data) : undefined
 
   return (
-    <>{list ? list.map((property, i) => <PropertyByMarketWithAssetsL2 key={i} propertyAddress={property} />) : ''}</>
+    <>
+      {list
+        ? list.map((property, i) => <PropertyByMarketWithAssetsL2 key={i} propertyAddress={property as string} />)
+        : ''}
+    </>
   )
 }
 
@@ -271,7 +275,7 @@ export const PropertyCardListL2 = () => {
 
       {enabledMarkets && (
         <PropertyOverview>
-          {enabledMarkets.map((market, i) => (
+          {enabledMarkets.map((market: string, i: number) => (
             <PropertyByMarketL2 key={i} market={market} />
           ))}
         </PropertyOverview>

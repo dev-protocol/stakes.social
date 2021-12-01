@@ -29,6 +29,8 @@ import {
   propertySymbol,
   balanceOfProperty,
   detectStokens,
+  detectStokensByPropertyAddress,
+  getStokenOwnerOf,
   getStokenPositions,
   getStokenRewards,
   approve,
@@ -972,7 +974,23 @@ export const useDetectSTokens = (propertyAddress?: string, accountAddress?: stri
     { revalidateOnFocus: false, focusThrottleInterval: 0 }
   )
 
-  return { sTokens: data, error }
+  const { data: detectStokensByPropertyAddressData, error: byPropertyAddressError } = useSWR<
+    UnwrapFunc<typeof detectStokensByPropertyAddress>,
+    Error
+  >(
+    SWRCachePath.detectStokens(propertyAddress, 'ALL'),
+    () =>
+      whenDefinedAll([nonConnectedEthersProvider, propertyAddress], ([client, property]) =>
+        detectStokensByPropertyAddress(client, property)
+      ),
+    { revalidateOnFocus: false, focusThrottleInterval: 0 }
+  )
+
+  return {
+    sTokens: data,
+    sTokensByPropertyAddress: detectStokensByPropertyAddressData,
+    error: error || byPropertyAddressError
+  }
 }
 
 export const usePositionsOfOwner = (accountAddress?: string) => {
@@ -987,6 +1005,19 @@ export const usePositionsOfOwner = (accountAddress?: string) => {
   )
 
   return { positions: data, error }
+}
+
+export const useGetSTokenOwnerOf = (sTokenId?: number) => {
+  const { nonConnectedEthersProvider } = useProvider()
+  const { data, error } = useSWR<UnwrapFunc<typeof getStokenOwnerOf>, Error>(
+    SWRCachePath.getStokenOwnerOf(`${sTokenId}`),
+    () =>
+      whenDefinedAll([nonConnectedEthersProvider, sTokenId], ([client, sTokenId]) =>
+        getStokenOwnerOf(client, sTokenId)
+      ),
+    { revalidateOnFocus: false, focusThrottleInterval: 0 }
+  )
+  return { owner: data, error }
 }
 
 export const useGetSTokenPositions = (sTokenId?: number) => {

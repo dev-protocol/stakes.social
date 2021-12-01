@@ -127,7 +127,7 @@ export const WithdrawTransactForm = ({
     <Wrap className={className} style={{ opacity: disabled ? '0.3' : '1.0' }}>
       <Radio.Group onChange={handleChangeRadio} value={radioValue} style={{ marginBottom: '12px' }}>
         <Space direction="vertical">
-          {sTokens?.map((stoken, idx) => (
+          {sTokens?.map((stoken: number, idx: number) => (
             <Radio value={stoken} key={idx}>
               <PositionText sTokenId={stoken} />
             </Radio>
