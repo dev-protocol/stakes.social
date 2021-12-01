@@ -3,8 +3,10 @@ import { render } from '@testing-library/react'
 import { TransactModalContents } from '.'
 import 'src/__mocks__/window/matchMedia.mock'
 
+jest.mock('src/fixtures/dev-for-apps/hooks')
 jest.mock('src/fixtures/dev-kit/hooks')
 jest.mock('src/fixtures/wallet/hooks')
+jest.mock('ethers')
 jest.mock('web3')
 jest.mock('@dev/graphql')
 
