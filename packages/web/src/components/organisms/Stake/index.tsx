@@ -5,6 +5,7 @@ import {
   useGetEstimateGas4Stake,
   useDepositToPosition,
   useDepositToProperty,
+  useAllowance,
   useApprove,
   useDetectSTokens
 } from 'src/fixtures/dev-kit/hooks'
@@ -100,7 +101,9 @@ export const Stake = ({ className, title, propertyAddress }: Props) => {
   const { depositToPosition } = useDepositToPosition()
   const { depositToProperty } = useDepositToProperty()
   const { approve, ok } = useApprove()
+  const { allowance } = useAllowance()
 
+  const [isStakable, setIsStakable] = useState(false)
   const [stakeAmount, setStakeAmount] = useState('')
   const [radioValue, setRadioValue] = useState(0)
   const { sTokens } = useDetectSTokens(propertyAddress, accountAddress)
@@ -128,7 +131,13 @@ export const Stake = ({ className, title, propertyAddress }: Props) => {
       return
     }
     const contractAddress = await getContractAddress(contractFactory(ethersProvider), 'lockup', name)
-    approve(contractAddress, amountNumber.toFixed())
+    const res = await allowance(contractAddress, accountAddress)
+    const allowanceValue = res ? res.toNumber() : 0
+    if (amountNumber.toNumber() > allowanceValue) {
+      approve(contractAddress, amountNumber.toFixed())
+    } else {
+      setIsStakable(true)
+    }
   }
 
   const handleStake = () => {
@@ -137,10 +146,8 @@ export const Stake = ({ className, title, propertyAddress }: Props) => {
       return
     }
     if (radioValue > DEFAULT_RADIO_VALUE) {
-      console.log('depositToPosition', radioValue)
       depositToPosition(`${radioValue}`, amountNumber.toFixed())
     } else {
-      console.log('depositToProperty', propertyAddress)
       depositToProperty(propertyAddress, amountNumber.toFixed())
     }
   }
@@ -185,20 +192,20 @@ export const Stake = ({ className, title, propertyAddress }: Props) => {
           size="large"
           value={stakeAmount}
           onChange={event => setStakeAmount(event.target.value)}
-          disabled={disabled || ok}
+          disabled={disabled || ok || isStakable}
           suffix={suffix}
           type="number"
         />
         <WrapStyledButton>
           <Row>
             <Col span={11}>
-              <StyledButton type="primary" onClick={handleApprove} disabled={disabled || ok}>
+              <StyledButton type="primary" onClick={handleApprove} disabled={disabled || ok || isStakable}>
                 Approve
               </StyledButton>
             </Col>
             <WrapRightArrowCol span={2}>→</WrapRightArrowCol>
             <Col span={11}>
-              <StyledButton type="primary" disabled={!ok} onClick={handleStake}>
+              <StyledButton type="primary" disabled={!ok && !isStakable} onClick={handleStake}>
                 Stake
               </StyledButton>
             </Col>
