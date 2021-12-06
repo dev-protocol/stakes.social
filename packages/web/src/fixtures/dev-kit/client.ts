@@ -551,6 +551,15 @@ export const getStokenRewards = async (prov: providers.BaseProvider, sTokenId: n
   return undefined
 }
 
+export const allowance = async (prov: providers.BaseProvider, contractAddress: string, address?: string) => {
+  const [, , client] = await newClient(prov)
+  const getContractAddress = createGetContractAddress(prov)
+  if (address && client) {
+    return client.dev(await getContractAddress(client, 'token')).allowance(address, contractAddress)
+  }
+  return undefined
+}
+
 export const approve = async (prov: providers.BaseProvider, address: string, amount: string) => {
   const [, , client] = await newClient(prov)
   const getContractAddress = createGetContractAddress(prov)
