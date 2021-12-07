@@ -7,7 +7,7 @@ exports[`Stake Snapshot 1`] = `
       class="sc-bdvvtL frQklk"
     >
       <div
-        class="sc-furwcr HBVij"
+        class="sc-gKclnd fAyBB"
         style="opacity: 1;"
       >
         <div
@@ -254,7 +254,7 @@ exports[`Stake Snapshot 1`] = `
           </div>
         </div>
         <span
-          class="ant-input-affix-wrapper ant-input-affix-wrapper-lg sc-eCImPb gIEWvk"
+          class="ant-input-affix-wrapper ant-input-affix-wrapper-lg sc-dkPtRN kCszbf"
         >
           <input
             class="ant-input ant-input-lg"
@@ -266,14 +266,14 @@ exports[`Stake Snapshot 1`] = `
             class="ant-input-suffix"
           >
             <button
-              class="sc-hKwDye kpA-dVf"
+              class="sc-gsDKAQ kExfsU"
             >
               DEV
             </button>
           </span>
         </span>
         <div
-          class="sc-gKclnd gmKoQx"
+          class="sc-eCImPb UUa-dQ"
         >
           <div
             class="ant-row"
@@ -282,7 +282,7 @@ exports[`Stake Snapshot 1`] = `
               class="ant-col ant-col-11"
             >
               <button
-                class="ant-btn ant-btn-primary sc-jRQBWg cyMfUM"
+                class="ant-btn ant-btn-primary sc-hKwDye jTvuMH"
                 type="button"
               >
                 <span>
@@ -291,7 +291,7 @@ exports[`Stake Snapshot 1`] = `
               </button>
             </div>
             <div
-              class="ant-col ant-col-2 sc-iCfMLu gcqWPX"
+              class="ant-col ant-col-2 sc-jRQBWg gyNKvI"
             >
               →
             </div>
@@ -299,7 +299,7 @@ exports[`Stake Snapshot 1`] = `
               class="ant-col ant-col-11"
             >
               <button
-                class="ant-btn ant-btn-primary sc-jRQBWg cyMfUM"
+                class="ant-btn ant-btn-primary sc-hKwDye jTvuMH"
                 disabled=""
                 type="button"
               >
@@ -314,36 +314,6 @@ exports[`Stake Snapshot 1`] = `
       <div
         style="height: 40px;"
       />
-      <div
-        class="ant-card ant-card-bordered ant-card-small sc-gsDKAQ doKUKb"
-      >
-        <div
-          class="ant-card-head"
-        >
-          <div
-            class="ant-card-head-wrapper"
-          >
-            <div
-              class="ant-card-head-title"
-            >
-              Gas Fee (predicted)
-            </div>
-          </div>
-        </div>
-        <div
-          class="ant-card-body"
-        >
-          <p>
-            0.003345
-             ETH
-            <span
-              class="sc-dkPtRN nTZKB"
-            >
-               $0.78
-            </span>
-          </p>
-        </div>
-      </div>
     </div>
   </div>
 </body>
@@ -361,7 +331,7 @@ exports[`Stake Snapshot with title 1`] = `
         Stake
       </label>
       <div
-        class="sc-furwcr HBVij"
+        class="sc-gKclnd fAyBB"
         style="opacity: 1;"
       >
         <div
@@ -608,7 +578,7 @@ exports[`Stake Snapshot with title 1`] = `
           </div>
         </div>
         <span
-          class="ant-input-affix-wrapper ant-input-affix-wrapper-lg sc-eCImPb gIEWvk"
+          class="ant-input-affix-wrapper ant-input-affix-wrapper-lg sc-dkPtRN kCszbf"
         >
           <input
             class="ant-input ant-input-lg"
@@ -620,14 +590,14 @@ exports[`Stake Snapshot with title 1`] = `
             class="ant-input-suffix"
           >
             <button
-              class="sc-hKwDye kpA-dVf"
+              class="sc-gsDKAQ kExfsU"
             >
               DEV
             </button>
           </span>
         </span>
         <div
-          class="sc-gKclnd gmKoQx"
+          class="sc-eCImPb UUa-dQ"
         >
           <div
             class="ant-row"
@@ -636,7 +606,7 @@ exports[`Stake Snapshot with title 1`] = `
               class="ant-col ant-col-11"
             >
               <button
-                class="ant-btn ant-btn-primary sc-jRQBWg cyMfUM"
+                class="ant-btn ant-btn-primary sc-hKwDye jTvuMH"
                 type="button"
               >
                 <span>
@@ -645,7 +615,7 @@ exports[`Stake Snapshot with title 1`] = `
               </button>
             </div>
             <div
-              class="ant-col ant-col-2 sc-iCfMLu gcqWPX"
+              class="ant-col ant-col-2 sc-jRQBWg gyNKvI"
             >
               →
             </div>
@@ -653,7 +623,7 @@ exports[`Stake Snapshot with title 1`] = `
               class="ant-col ant-col-11"
             >
               <button
-                class="ant-btn ant-btn-primary sc-jRQBWg cyMfUM"
+                class="ant-btn ant-btn-primary sc-hKwDye jTvuMH"
                 disabled=""
                 type="button"
               >
@@ -668,36 +638,6 @@ exports[`Stake Snapshot with title 1`] = `
       <div
         style="height: 40px;"
       />
-      <div
-        class="ant-card ant-card-bordered ant-card-small sc-gsDKAQ doKUKb"
-      >
-        <div
-          class="ant-card-head"
-        >
-          <div
-            class="ant-card-head-wrapper"
-          >
-            <div
-              class="ant-card-head-title"
-            >
-              Gas Fee (predicted)
-            </div>
-          </div>
-        </div>
-        <div
-          class="ant-card-body"
-        >
-          <p>
-            0.003345
-             ETH
-            <span
-              class="sc-dkPtRN nTZKB"
-            >
-               $0.78
-            </span>
-          </p>
-        </div>
-      </div>
     </div>
   </div>
 </body>
