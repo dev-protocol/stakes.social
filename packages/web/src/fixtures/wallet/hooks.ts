@@ -63,7 +63,7 @@ export const useProvider = () => {
     ethersProvider,
     accountAddress,
     nonConnectedWeb3: web3 ? web3 : nonConnectedWeb3(name),
-    nonConnectedEthersProvider: ethersProvider ? ethersProvider : nonConnectedEthersProvider(name || 'main'),
+    nonConnectedEthersProvider: ethersProvider ? ethersProvider : nonConnectedEthersProvider(name),
     nonConnectedWeb3L1,
     nonConnectedEthersL1Provider
   }
