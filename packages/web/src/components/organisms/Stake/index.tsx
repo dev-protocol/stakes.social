@@ -5,6 +5,7 @@ import {
   useGetEstimateGas4Stake,
   useDepositToPosition,
   useDepositToProperty,
+  useAllowance,
   useApprove,
   useDetectSTokens
 } from 'src/fixtures/dev-kit/hooks'
@@ -100,12 +101,23 @@ export const Stake = ({ className, title, propertyAddress }: Props) => {
   const { depositToPosition } = useDepositToPosition()
   const { depositToProperty } = useDepositToProperty()
   const { approve, ok } = useApprove()
+  const { allowance } = useAllowance()
 
+  const [isStakable, setIsStakable] = useState(false)
   const [stakeAmount, setStakeAmount] = useState('')
   const [radioValue, setRadioValue] = useState(0)
   const { sTokens } = useDetectSTokens(propertyAddress, accountAddress)
   const disabled = useMemo(() => !ethersProvider, [ethersProvider])
   const amountNumber = useMemo(() => toAmountNumber(stakeAmount), [stakeAmount])
+
+  const allowanceValue = useMemo(async () => {
+    if (!ethersProvider) {
+      return undefined
+    }
+    const contractAddress = await getContractAddress(contractFactory(ethersProvider), 'lockup', name)
+    const res = await allowance(contractAddress, accountAddress)
+    return res
+  }, [accountAddress])
 
   const { estimateGas } = useGetEstimateGas4Stake(propertyAddress, stakeAmount || undefined)
   const { data: ethPrice } = useGetEthPrice()
@@ -127,6 +139,7 @@ export const Stake = ({ className, title, propertyAddress }: Props) => {
       message.warn({ content: 'Please enter a value greater than 0', key: 'StakeButton' })
       return
     }
+
     const contractAddress = await getContractAddress(contractFactory(ethersProvider), 'lockup', name)
     approve(contractAddress, amountNumber.toFixed())
   }
@@ -137,11 +150,19 @@ export const Stake = ({ className, title, propertyAddress }: Props) => {
       return
     }
     if (radioValue > DEFAULT_RADIO_VALUE) {
-      console.log('depositToPosition', radioValue)
       depositToPosition(`${radioValue}`, amountNumber.toFixed())
     } else {
-      console.log('depositToProperty', propertyAddress)
       depositToProperty(propertyAddress, amountNumber.toFixed())
+    }
+  }
+  const handleChangeAmount = async (value?: string) => {
+    setStakeAmount(value || '')
+    const a = await allowanceValue
+    const allowanceNumber = a ? a.toNumber() : 0
+    if (toAmountNumber(value).toNumber() > allowanceNumber || value === '' || toAmountNumber(value).toNumber() === 0) {
+      setIsStakable(false)
+    } else {
+      setIsStakable(true)
     }
   }
 
@@ -161,6 +182,7 @@ export const Stake = ({ className, title, propertyAddress }: Props) => {
     ),
     [accountAddress, ethersProvider]
   )
+  const stakable = useMemo(() => ok || isStakable, [ok, isStakable])
 
   return (
     <FormContainer>
@@ -184,21 +206,20 @@ export const Stake = ({ className, title, propertyAddress }: Props) => {
           id="stake"
           size="large"
           value={stakeAmount}
-          onChange={event => setStakeAmount(event.target.value)}
-          disabled={disabled || ok}
+          onChange={event => handleChangeAmount(event.target.value)}
           suffix={suffix}
           type="number"
         />
         <WrapStyledButton>
           <Row>
             <Col span={11}>
-              <StyledButton type="primary" onClick={handleApprove} disabled={disabled || ok}>
+              <StyledButton type="primary" onClick={handleApprove} disabled={disabled || ok || isStakable}>
                 Approve
               </StyledButton>
             </Col>
             <WrapRightArrowCol span={2}>→</WrapRightArrowCol>
             <Col span={11}>
-              <StyledButton type="primary" disabled={!ok} onClick={handleStake}>
+              <StyledButton type="primary" disabled={!stakable} onClick={handleStake}>
                 Stake
               </StyledButton>
             </Col>

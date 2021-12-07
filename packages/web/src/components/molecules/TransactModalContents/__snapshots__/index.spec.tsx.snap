@@ -279,11 +279,10 @@ exports[`TransactModalContents Snapshot 1`] = `
             </div>
           </div>
           <span
-            class="ant-input-affix-wrapper ant-input-affix-wrapper-disabled ant-input-affix-wrapper-lg sc-eCImPb gIEWvk"
+            class="ant-input-affix-wrapper ant-input-affix-wrapper-lg sc-eCImPb gIEWvk"
           >
             <input
-              class="ant-input ant-input-lg ant-input-disabled"
-              disabled=""
+              class="ant-input ant-input-lg"
               id="stake"
               type="number"
               value=""
