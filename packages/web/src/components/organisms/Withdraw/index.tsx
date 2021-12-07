@@ -2,16 +2,10 @@ import React, { useCallback, useState, useMemo, ChangeEvent, useEffect } from 'r
 import styled from 'styled-components'
 import { useProvider } from 'src/fixtures/wallet/hooks'
 import { getMyStakingAmount, getStokenPositions } from 'src/fixtures/dev-kit/client'
-import { useGetEthPrice } from 'src/fixtures/uniswap/hooks'
-import {
-  useGetEstimateGas4WithdrawStakingAmount,
-  useWithdrawByPosition,
-  useWithdrawStaking
-} from 'src/fixtures/dev-kit/hooks'
+import { useWithdrawByPosition, useWithdrawStaking } from 'src/fixtures/dev-kit/hooks'
 import { toAmountNumber, toNaturalNumber, whenDefinedAll } from 'src/fixtures/utility'
 import { WithdrawTransactForm } from 'src/components/molecules/WithdrawTransactForm'
 import { FormContainer } from 'src/components/molecules/WithdrawTransactForm/FormContainer'
-import { EstimatedGasFeeCard } from 'src/components/molecules/EstimatedGasFeeCard'
 import { InfoCircleOutlined } from '@ant-design/icons'
 import { message } from 'antd'
 
@@ -20,7 +14,6 @@ interface Props {
   title?: string
   propertyAddress: string
   onChange?: (value: string) => void
-  isDisplayFee?: boolean
 }
 
 const InfoContainer = styled.div`
@@ -37,19 +30,13 @@ const SubtitleContianer = styled.div`
   align-items: center;
 `
 
-export const Withdraw = ({ className, title, propertyAddress, onChange: onChangeAmount, isDisplayFee }: Props) => {
+export const Withdraw = ({ className, title, propertyAddress, onChange: onChangeAmount }: Props) => {
   const [withdrawAmount, setWithdrawAmount] = useState<string>('')
   const { ethersProvider, accountAddress } = useProvider()
   const { withdrawStaking: legacyWithdrawStaking } = useWithdrawStaking()
   const { withdrawByPosition } = useWithdrawByPosition()
-  const { estimateGas } = useGetEstimateGas4WithdrawStakingAmount(propertyAddress, withdrawAmount || '0')
-  const { data: ethPrice } = useGetEthPrice()
 
   const amountNumber = useMemo(() => toAmountNumber(withdrawAmount), [withdrawAmount])
-  const estimateGasUSD = useMemo(
-    () => whenDefinedAll([estimateGas, ethPrice], ([gas, eth]) => gas.multipliedBy(eth)),
-    [estimateGas, ethPrice]
-  )
   const onClickMax = (sTokenId?: number) =>
     whenDefinedAll([ethersProvider, sTokenId], ([prov, tokenId]) =>
       getStokenPositions(prov, tokenId)
@@ -112,12 +99,6 @@ export const Withdraw = ({ className, title, propertyAddress, onChange: onChange
           You will receive all accumulated rewards when withdrawing any amount of staked DEV.
         </span>
       </SubtitleContianer>
-      {isDisplayFee && (
-        <EstimatedGasFeeCard
-          estimatedGasFee={estimateGas ? estimateGas.toFixed(6) : '-'}
-          estimatedGasFeeUSD={estimateGasUSD ? estimateGasUSD.toFixed(2) : ''}
-        />
-      )}
     </FormContainer>
   )
 }

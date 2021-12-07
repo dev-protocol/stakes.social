@@ -180,14 +180,6 @@ export const withdrawHolderAmount = async (prov: providers.BaseProvider, propert
   return client.withdraw(await getContractAddress(client, 'withdraw')).withdraw(propertyAddress)
 }
 
-export const getEstimateGas4WithdrawHolderAmount = async (prov: providers.BaseProvider, propertyAddress: string) => {
-  const [, , client] = await newClient(prov)
-  const getContractAddress = createGetContractAddress(prov)
-  if (!client) throw new Error(`No wallet`)
-  const contract = new ethers.Contract(await getContractAddress(client, 'withdraw'), [...withdrawAbi])
-  return new BigNumber(await contract.estimateGas['withdraw'](propertyAddress).then(x => x.toString()))
-}
-
 export const withdrawStakingAmount = async (
   prov: providers.BaseProvider,
   propertyAddress: string,
@@ -199,36 +191,11 @@ export const withdrawStakingAmount = async (
   return client.lockup(await getContractAddress(client, 'lockup')).withdraw(propertyAddress, amount.toFixed())
 }
 
-export const getEstimateGas4WithdrawStakingAmount = async (
-  prov: providers.BaseProvider,
-  propertyAddress: string,
-  amount: string,
-  from: string
-) => {
-  const [client] = await newClient(prov)
-  const getContractAddress = createGetContractAddress(prov)
-  if (!client) throw new Error(`No wallet or not supported network`)
-  const contract = new ethers.Contract(await getContractAddress(client, 'lockup'), [...lockupAbi])
-  return new BigNumber(await contract.methods['withdraw'](propertyAddress, amount).estimateGas({ from }))
-}
-
 export const stakeDev = async (prov: providers.BaseProvider, propertyAddress: string, amount: string) => {
   const [client] = await newClient(prov)
   const getContractAddress = createGetContractAddress(prov)
   if (!client) throw new Error(`No wallet or not supported network`)
   return client.dev(await getContractAddress(client, 'token')).deposit(propertyAddress, amount)
-}
-
-export const getEstimateGas4StakeDev = async (
-  prov: providers.BaseProvider,
-  propertyAddress: string,
-  amount: string
-) => {
-  const [client] = await newClient(prov)
-  const getContractAddress = createGetContractAddress(prov)
-  if (!client) throw new Error(`No wallet or not supported network`)
-  const contract = new ethers.Contract(await getContractAddress(client, 'token'), [...devAbi])
-  return new BigNumber(await contract.estimateGas['deposit'](propertyAddress, amount).then(x => x.toString()))
 }
 
 export const calculateMaxRewardsPerBlock = async (prov: providers.BaseProvider) => {
@@ -255,21 +222,6 @@ export const createProperty = async (prov: providers.BaseProvider, name: string,
     return 'Dummy:0xd5f3c1bA399E000B1a76210d7dB12bb5eefA8e47'
   }
   return undefined
-}
-
-export const getEstimateGas4CreateProperty = async (
-  prov: providers.BaseProvider,
-  name: string,
-  symbol: string,
-  author: string
-) => {
-  const [, , client] = await newClient(prov)
-  const getContractAddress = createGetContractAddress(prov)
-  if (!client) {
-    return undefined
-  }
-  const contract = new ethers.Contract(await getContractAddress(client, 'propertyFactory'), [...propertyFactoryAbi])
-  return new BigNumber(await contract.estimateGas['create'](name, symbol, author).then(x => x.toString()))
 }
 
 export const marketScheme = async (prov: providers.BaseProvider, marketAddress: string) => {
@@ -341,22 +293,6 @@ export const createAndAuthenticate = async (
   //     1000 * 15
   //   )
   // })
-}
-
-export const getEstimateGas4CreateAndAuthenticate = async (
-  prov: providers.BaseProvider,
-  name: string,
-  symbol: string,
-  marketAddress: string,
-  args: string[]
-) => {
-  const [, , client] = await newClient(prov)
-  const getContractAddress = createGetContractAddress(prov)
-  if (!client) throw new Error(`No wallet`)
-  const contract = new ethers.Contract(await getContractAddress(client, 'propertyFactory'), [...propertyFactoryAbi])
-  return new BigNumber(
-    await contract.estimateGas['createAndAuthenticate'](name, symbol, marketAddress, ...args).then(x => x.toString())
-  )
 }
 
 export const totalSupply = async (prov: providers.BaseProvider) => {

@@ -389,7 +389,7 @@ const PropertyAddressDetail = (_: Props) => {
             {(loggedInWallet ? loggedInWallet !== authorAddress : true) && (
               <Stake title="Stake" propertyAddress={propertyAddress} />
             )}
-            {<Withdraw title="Withdraw" propertyAddress={propertyAddress} isDisplayFee={true} />}
+            {<Withdraw title="Withdraw" propertyAddress={propertyAddress} />}
           </Transact>
           <PropertyAbout
             isAuthor={loggedInWallet === authorAddress}
