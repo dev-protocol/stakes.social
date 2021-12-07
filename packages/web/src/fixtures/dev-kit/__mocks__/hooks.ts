@@ -120,6 +120,10 @@ export const useGetStokenRewards = () => {
   }
 }
 
+export const useAllowance = () => {
+  return { allowance: () => {} }
+}
+
 export const useApprove = () => {
   return { approve: () => {} }
 }

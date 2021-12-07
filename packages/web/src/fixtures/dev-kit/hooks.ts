@@ -28,6 +28,7 @@ import {
   getStokenOwnerOf,
   getStokenPositions,
   getStokenRewards,
+  allowance,
   approve,
   depositToProperty,
   depositToPosition,
@@ -946,6 +947,28 @@ export const useGetStokenRewards = (sTokenId?: number) => {
   )
   const withdrawableReward = whenDefined(data, pos => toCurrency(toNaturalNumber(pos.withdrawableReward)))
   return { rewards: data, error, currency, withdrawableReward }
+}
+
+export const useAllowance = () => {
+  const { ethersProvider } = useProvider()
+  const [isLoading, setIsLoading] = useState(false)
+  const [error, setError] = useState<Error>()
+  const callback = useCallback(
+    async (contractAddress: string, accountAddress?: string) => {
+      setIsLoading(true)
+      setError(undefined)
+      return whenDefined(ethersProvider, client =>
+        allowance(client, contractAddress, accountAddress)
+          .then(d => new BigNumber(d || '0'))
+          .catch(setError)
+          .finally(() => {
+            setIsLoading(false)
+          })
+      )
+    },
+    [ethersProvider]
+  )
+  return { allowance: callback, isLoading, error }
 }
 
 export const useApprove = () => {
