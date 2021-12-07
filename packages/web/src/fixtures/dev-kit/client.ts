@@ -7,9 +7,6 @@ import {
   metricsAbi,
   metricsFactoryAbi,
   devAbi,
-  lockupAbi,
-  propertyFactoryAbi,
-  withdrawAbi,
   sTokensAbi,
   RegistryContract
 } from '@devprotocol/dev-kit'
