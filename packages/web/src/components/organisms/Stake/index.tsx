@@ -110,6 +110,15 @@ export const Stake = ({ className, title, propertyAddress }: Props) => {
   const disabled = useMemo(() => !ethersProvider, [ethersProvider])
   const amountNumber = useMemo(() => toAmountNumber(stakeAmount), [stakeAmount])
 
+  const allowanceValue = useMemo(async () => {
+    if (!ethersProvider) {
+      return undefined
+    }
+    const contractAddress = await getContractAddress(contractFactory(ethersProvider), 'lockup', name)
+    const res = await allowance(contractAddress, accountAddress)
+    return res
+  }, [accountAddress])
+
   const { estimateGas } = useGetEstimateGas4Stake(propertyAddress, stakeAmount || undefined)
   const { data: ethPrice } = useGetEthPrice()
   const estimateGasUSD = useMemo(
@@ -130,10 +139,11 @@ export const Stake = ({ className, title, propertyAddress }: Props) => {
       message.warn({ content: 'Please enter a value greater than 0', key: 'StakeButton' })
       return
     }
-    const contractAddress = await getContractAddress(contractFactory(ethersProvider), 'lockup', name)
-    const res = await allowance(contractAddress, accountAddress)
-    const allowanceValue = res ? res.toNumber() : 0
-    if (amountNumber.toNumber() > allowanceValue) {
+
+    const a = await allowanceValue
+    const allowanceNumber = a ? a.toNumber() : 0
+    if (amountNumber.toNumber() > allowanceNumber) {
+      const contractAddress = await getContractAddress(contractFactory(ethersProvider), 'lockup', name)
       approve(contractAddress, amountNumber.toFixed())
     } else {
       setIsStakable(true)
@@ -149,6 +159,16 @@ export const Stake = ({ className, title, propertyAddress }: Props) => {
       depositToPosition(`${radioValue}`, amountNumber.toFixed())
     } else {
       depositToProperty(propertyAddress, amountNumber.toFixed())
+    }
+  }
+  const handleChangeAmount = async (value?: string) => {
+    setStakeAmount(value || '')
+    const a = await allowanceValue
+    const allowanceNumber = a ? a.toNumber() : 0
+    if (amountNumber.toNumber() > allowanceNumber) {
+      setIsStakable(false)
+    } else {
+      setIsStakable(true)
     }
   }
 
@@ -191,8 +211,7 @@ export const Stake = ({ className, title, propertyAddress }: Props) => {
           id="stake"
           size="large"
           value={stakeAmount}
-          onChange={event => setStakeAmount(event.target.value)}
-          disabled={disabled || ok || isStakable}
+          onChange={event => handleChangeAmount(event.target.value)}
           suffix={suffix}
           type="number"
         />
