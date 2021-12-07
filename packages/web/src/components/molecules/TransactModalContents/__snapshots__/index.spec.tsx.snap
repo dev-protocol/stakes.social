@@ -33,7 +33,7 @@ exports[`TransactModalContents Snapshot 1`] = `
       >
         <div
           class="sc-furwcr HBVij"
-          style="opacity: 1;"
+          style="opacity: 0.3;"
         >
           <div
             class="ant-radio-group ant-radio-group-outline"
@@ -279,10 +279,11 @@ exports[`TransactModalContents Snapshot 1`] = `
             </div>
           </div>
           <span
-            class="ant-input-affix-wrapper ant-input-affix-wrapper-lg sc-eCImPb gIEWvk"
+            class="ant-input-affix-wrapper ant-input-affix-wrapper-disabled ant-input-affix-wrapper-lg sc-eCImPb gIEWvk"
           >
             <input
-              class="ant-input ant-input-lg"
+              class="ant-input ant-input-lg ant-input-disabled"
+              disabled=""
               id="stake"
               type="number"
               value=""
@@ -308,6 +309,7 @@ exports[`TransactModalContents Snapshot 1`] = `
               >
                 <button
                   class="ant-btn ant-btn-primary sc-jRQBWg cyMfUM"
+                  disabled=""
                   type="button"
                 >
                   <span>

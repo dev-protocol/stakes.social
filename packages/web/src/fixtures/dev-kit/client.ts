@@ -10,6 +10,7 @@ import {
   lockupAbi,
   propertyFactoryAbi,
   withdrawAbi,
+  sTokensAbi,
   RegistryContract
 } from '@devprotocol/dev-kit'
 import { contractFactory as l2ContractFactory, DevkitContract as L2DevkitContract } from '@devprotocol/dev-kit/l2'
@@ -513,6 +514,25 @@ export const detectStokens = async (prov: providers.BaseProvider, propertyAddres
   return undefined
 }
 
+export const detectStokensByPropertyAddress = async (prov: providers.BaseProvider, propertyAddress: string) => {
+  const [, , client] = await newClient(prov)
+  const address = await getSTokensAddress(prov)
+  if (client && address) {
+    const TokenIdList = await (client.sTokens(address) as any).positionsOfProperty(propertyAddress)
+    return TokenIdList
+  }
+  return undefined
+}
+
+export const getStokenOwnerOf = async (prov: providers.BaseProvider, sTokenID: number) => {
+  const [, , client] = await newClient(prov)
+  const address = await getSTokensAddress(prov)
+  if (client && address) {
+    return client.sTokens(address).ownerOf(sTokenID)
+  }
+  return undefined
+}
+
 export const getStokenPositions = async (prov: providers.BaseProvider, sTokenID: number) => {
   const [, , client] = await newClient(prov)
   const address = await getSTokensAddress(prov)
@@ -643,6 +663,18 @@ export const getId = async (prov: providers.BaseProvider, marketBehavior: string
   const [, , client] = await newClient(prov)
   if (client) {
     return client.marketBehavior(marketBehavior).getId(metricsAddress)
+  }
+  return undefined
+}
+
+export const getStokenHeldAt = async (prov: providers.BaseProvider, sTokenId: number, accountAddress: string) => {
+  const [, l2, client] = await newClient(prov)
+  const address = await getSTokensAddress(prov)
+  if (client && address) {
+    // NOTE: use contract deploy's block number because improve fetch performance
+    const fromBlockNumber = l2 ? 2755321 : 13349972
+    const contract = new ethers.Contract(address, [...sTokensAbi], prov)
+    return contract.queryFilter(contract.filters.Transfer(null, accountAddress, sTokenId), fromBlockNumber, 'latest')
   }
   return undefined
 }

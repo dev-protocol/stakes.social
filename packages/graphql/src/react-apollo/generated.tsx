@@ -1,6 +1,7 @@
 import { gql } from '@apollo/client'
 import * as Apollo from '@apollo/client'
 export type Maybe<T> = T
+export type InputMaybe<T> = T
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] }
 export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> }
 export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> }
@@ -16,45 +17,45 @@ export type Scalars = {
 }
 
 export type Boolean_Comparison_Exp = {
-  _eq?: Maybe<Scalars['Boolean']>
-  _gt?: Maybe<Scalars['Boolean']>
-  _gte?: Maybe<Scalars['Boolean']>
-  _in?: Maybe<Array<Scalars['Boolean']>>
-  _is_null?: Maybe<Scalars['Boolean']>
-  _lt?: Maybe<Scalars['Boolean']>
-  _lte?: Maybe<Scalars['Boolean']>
-  _neq?: Maybe<Scalars['Boolean']>
-  _nin?: Maybe<Array<Scalars['Boolean']>>
+  _eq?: InputMaybe<Scalars['Boolean']>
+  _gt?: InputMaybe<Scalars['Boolean']>
+  _gte?: InputMaybe<Scalars['Boolean']>
+  _in?: InputMaybe<Array<Scalars['Boolean']>>
+  _is_null?: InputMaybe<Scalars['Boolean']>
+  _lt?: InputMaybe<Scalars['Boolean']>
+  _lte?: InputMaybe<Scalars['Boolean']>
+  _neq?: InputMaybe<Scalars['Boolean']>
+  _nin?: InputMaybe<Array<Scalars['Boolean']>>
 }
 
 export type Int_Comparison_Exp = {
-  _eq?: Maybe<Scalars['Int']>
-  _gt?: Maybe<Scalars['Int']>
-  _gte?: Maybe<Scalars['Int']>
-  _in?: Maybe<Array<Scalars['Int']>>
-  _is_null?: Maybe<Scalars['Boolean']>
-  _lt?: Maybe<Scalars['Int']>
-  _lte?: Maybe<Scalars['Int']>
-  _neq?: Maybe<Scalars['Int']>
-  _nin?: Maybe<Array<Scalars['Int']>>
+  _eq?: InputMaybe<Scalars['Int']>
+  _gt?: InputMaybe<Scalars['Int']>
+  _gte?: InputMaybe<Scalars['Int']>
+  _in?: InputMaybe<Array<Scalars['Int']>>
+  _is_null?: InputMaybe<Scalars['Boolean']>
+  _lt?: InputMaybe<Scalars['Int']>
+  _lte?: InputMaybe<Scalars['Int']>
+  _neq?: InputMaybe<Scalars['Int']>
+  _nin?: InputMaybe<Array<Scalars['Int']>>
 }
 
 export type String_Comparison_Exp = {
-  _eq?: Maybe<Scalars['String']>
-  _gt?: Maybe<Scalars['String']>
-  _gte?: Maybe<Scalars['String']>
-  _ilike?: Maybe<Scalars['String']>
-  _in?: Maybe<Array<Scalars['String']>>
-  _is_null?: Maybe<Scalars['Boolean']>
-  _like?: Maybe<Scalars['String']>
-  _lt?: Maybe<Scalars['String']>
-  _lte?: Maybe<Scalars['String']>
-  _neq?: Maybe<Scalars['String']>
-  _nilike?: Maybe<Scalars['String']>
-  _nin?: Maybe<Array<Scalars['String']>>
-  _nlike?: Maybe<Scalars['String']>
-  _nsimilar?: Maybe<Scalars['String']>
-  _similar?: Maybe<Scalars['String']>
+  _eq?: InputMaybe<Scalars['String']>
+  _gt?: InputMaybe<Scalars['String']>
+  _gte?: InputMaybe<Scalars['String']>
+  _ilike?: InputMaybe<Scalars['String']>
+  _in?: InputMaybe<Array<Scalars['String']>>
+  _is_null?: InputMaybe<Scalars['Boolean']>
+  _like?: InputMaybe<Scalars['String']>
+  _lt?: InputMaybe<Scalars['String']>
+  _lte?: InputMaybe<Scalars['String']>
+  _neq?: InputMaybe<Scalars['String']>
+  _nilike?: InputMaybe<Scalars['String']>
+  _nin?: InputMaybe<Array<Scalars['String']>>
+  _nlike?: InputMaybe<Scalars['String']>
+  _nsimilar?: InputMaybe<Scalars['String']>
+  _similar?: InputMaybe<Scalars['String']>
 }
 
 export type Account_Lockup = {
@@ -88,27 +89,27 @@ export type Account_Lockup_Aggregate_Fields = {
 }
 
 export type Account_Lockup_Aggregate_FieldsCountArgs = {
-  columns?: Maybe<Array<Account_Lockup_Select_Column>>
-  distinct?: Maybe<Scalars['Boolean']>
+  columns?: InputMaybe<Array<Account_Lockup_Select_Column>>
+  distinct?: InputMaybe<Scalars['Boolean']>
 }
 
 export type Account_Lockup_Aggregate_Order_By = {
-  avg?: Maybe<Account_Lockup_Avg_Order_By>
-  count?: Maybe<Order_By>
-  max?: Maybe<Account_Lockup_Max_Order_By>
-  min?: Maybe<Account_Lockup_Min_Order_By>
-  stddev?: Maybe<Account_Lockup_Stddev_Order_By>
-  stddev_pop?: Maybe<Account_Lockup_Stddev_Pop_Order_By>
-  stddev_samp?: Maybe<Account_Lockup_Stddev_Samp_Order_By>
-  sum?: Maybe<Account_Lockup_Sum_Order_By>
-  var_pop?: Maybe<Account_Lockup_Var_Pop_Order_By>
-  var_samp?: Maybe<Account_Lockup_Var_Samp_Order_By>
-  variance?: Maybe<Account_Lockup_Variance_Order_By>
+  avg?: InputMaybe<Account_Lockup_Avg_Order_By>
+  count?: InputMaybe<Order_By>
+  max?: InputMaybe<Account_Lockup_Max_Order_By>
+  min?: InputMaybe<Account_Lockup_Min_Order_By>
+  stddev?: InputMaybe<Account_Lockup_Stddev_Order_By>
+  stddev_pop?: InputMaybe<Account_Lockup_Stddev_Pop_Order_By>
+  stddev_samp?: InputMaybe<Account_Lockup_Stddev_Samp_Order_By>
+  sum?: InputMaybe<Account_Lockup_Sum_Order_By>
+  var_pop?: InputMaybe<Account_Lockup_Var_Pop_Order_By>
+  var_samp?: InputMaybe<Account_Lockup_Var_Samp_Order_By>
+  variance?: InputMaybe<Account_Lockup_Variance_Order_By>
 }
 
 export type Account_Lockup_Arr_Rel_Insert_Input = {
   data: Array<Account_Lockup_Insert_Input>
-  on_conflict?: Maybe<Account_Lockup_On_Conflict>
+  on_conflict?: InputMaybe<Account_Lockup_On_Conflict>
 }
 
 export type Account_Lockup_Avg_Fields = {
@@ -118,20 +119,20 @@ export type Account_Lockup_Avg_Fields = {
 }
 
 export type Account_Lockup_Avg_Order_By = {
-  block_number?: Maybe<Order_By>
-  value?: Maybe<Order_By>
+  block_number?: InputMaybe<Order_By>
+  value?: InputMaybe<Order_By>
 }
 
 export type Account_Lockup_Bool_Exp = {
-  _and?: Maybe<Array<Maybe<Account_Lockup_Bool_Exp>>>
-  _not?: Maybe<Account_Lockup_Bool_Exp>
-  _or?: Maybe<Array<Maybe<Account_Lockup_Bool_Exp>>>
-  account_address?: Maybe<String_Comparison_Exp>
-  block_number?: Maybe<Int_Comparison_Exp>
-  locked_up_event_id?: Maybe<String_Comparison_Exp>
-  property_address?: Maybe<String_Comparison_Exp>
-  property_meta?: Maybe<Property_Meta_Bool_Exp>
-  value?: Maybe<Numeric_Comparison_Exp>
+  _and?: InputMaybe<Array<InputMaybe<Account_Lockup_Bool_Exp>>>
+  _not?: InputMaybe<Account_Lockup_Bool_Exp>
+  _or?: InputMaybe<Array<InputMaybe<Account_Lockup_Bool_Exp>>>
+  account_address?: InputMaybe<String_Comparison_Exp>
+  block_number?: InputMaybe<Int_Comparison_Exp>
+  locked_up_event_id?: InputMaybe<String_Comparison_Exp>
+  property_address?: InputMaybe<String_Comparison_Exp>
+  property_meta?: InputMaybe<Property_Meta_Bool_Exp>
+  value?: InputMaybe<Numeric_Comparison_Exp>
 }
 
 export enum Account_Lockup_Constraint {
@@ -139,16 +140,16 @@ export enum Account_Lockup_Constraint {
 }
 
 export type Account_Lockup_Inc_Input = {
-  block_number?: Maybe<Scalars['Int']>
-  value?: Maybe<Scalars['numeric']>
+  block_number?: InputMaybe<Scalars['Int']>
+  value?: InputMaybe<Scalars['numeric']>
 }
 
 export type Account_Lockup_Insert_Input = {
-  account_address?: Maybe<Scalars['String']>
-  block_number?: Maybe<Scalars['Int']>
-  locked_up_event_id?: Maybe<Scalars['String']>
-  property_address?: Maybe<Scalars['String']>
-  value?: Maybe<Scalars['numeric']>
+  account_address?: InputMaybe<Scalars['String']>
+  block_number?: InputMaybe<Scalars['Int']>
+  locked_up_event_id?: InputMaybe<Scalars['String']>
+  property_address?: InputMaybe<Scalars['String']>
+  value?: InputMaybe<Scalars['numeric']>
 }
 
 export type Account_Lockup_Max_Fields = {
@@ -161,11 +162,11 @@ export type Account_Lockup_Max_Fields = {
 }
 
 export type Account_Lockup_Max_Order_By = {
-  account_address?: Maybe<Order_By>
-  block_number?: Maybe<Order_By>
-  locked_up_event_id?: Maybe<Order_By>
-  property_address?: Maybe<Order_By>
-  value?: Maybe<Order_By>
+  account_address?: InputMaybe<Order_By>
+  block_number?: InputMaybe<Order_By>
+  locked_up_event_id?: InputMaybe<Order_By>
+  property_address?: InputMaybe<Order_By>
+  value?: InputMaybe<Order_By>
 }
 
 export type Account_Lockup_Min_Fields = {
@@ -178,11 +179,11 @@ export type Account_Lockup_Min_Fields = {
 }
 
 export type Account_Lockup_Min_Order_By = {
-  account_address?: Maybe<Order_By>
-  block_number?: Maybe<Order_By>
-  locked_up_event_id?: Maybe<Order_By>
-  property_address?: Maybe<Order_By>
-  value?: Maybe<Order_By>
+  account_address?: InputMaybe<Order_By>
+  block_number?: InputMaybe<Order_By>
+  locked_up_event_id?: InputMaybe<Order_By>
+  property_address?: InputMaybe<Order_By>
+  value?: InputMaybe<Order_By>
 }
 
 export type Account_Lockup_Mutation_Response = {
@@ -193,21 +194,21 @@ export type Account_Lockup_Mutation_Response = {
 
 export type Account_Lockup_Obj_Rel_Insert_Input = {
   data: Account_Lockup_Insert_Input
-  on_conflict?: Maybe<Account_Lockup_On_Conflict>
+  on_conflict?: InputMaybe<Account_Lockup_On_Conflict>
 }
 
 export type Account_Lockup_On_Conflict = {
   constraint: Account_Lockup_Constraint
   update_columns: Array<Account_Lockup_Update_Column>
-  where?: Maybe<Account_Lockup_Bool_Exp>
+  where?: InputMaybe<Account_Lockup_Bool_Exp>
 }
 
 export type Account_Lockup_Order_By = {
-  account_address?: Maybe<Order_By>
-  block_number?: Maybe<Order_By>
-  locked_up_event_id?: Maybe<Order_By>
-  property_address?: Maybe<Order_By>
-  value?: Maybe<Order_By>
+  account_address?: InputMaybe<Order_By>
+  block_number?: InputMaybe<Order_By>
+  locked_up_event_id?: InputMaybe<Order_By>
+  property_address?: InputMaybe<Order_By>
+  value?: InputMaybe<Order_By>
 }
 
 export type Account_Lockup_Pk_Columns_Input = {
@@ -224,11 +225,11 @@ export enum Account_Lockup_Select_Column {
 }
 
 export type Account_Lockup_Set_Input = {
-  account_address?: Maybe<Scalars['String']>
-  block_number?: Maybe<Scalars['Int']>
-  locked_up_event_id?: Maybe<Scalars['String']>
-  property_address?: Maybe<Scalars['String']>
-  value?: Maybe<Scalars['numeric']>
+  account_address?: InputMaybe<Scalars['String']>
+  block_number?: InputMaybe<Scalars['Int']>
+  locked_up_event_id?: InputMaybe<Scalars['String']>
+  property_address?: InputMaybe<Scalars['String']>
+  value?: InputMaybe<Scalars['numeric']>
 }
 
 export type Account_Lockup_Stddev_Fields = {
@@ -238,8 +239,8 @@ export type Account_Lockup_Stddev_Fields = {
 }
 
 export type Account_Lockup_Stddev_Order_By = {
-  block_number?: Maybe<Order_By>
-  value?: Maybe<Order_By>
+  block_number?: InputMaybe<Order_By>
+  value?: InputMaybe<Order_By>
 }
 
 export type Account_Lockup_Stddev_Pop_Fields = {
@@ -249,8 +250,8 @@ export type Account_Lockup_Stddev_Pop_Fields = {
 }
 
 export type Account_Lockup_Stddev_Pop_Order_By = {
-  block_number?: Maybe<Order_By>
-  value?: Maybe<Order_By>
+  block_number?: InputMaybe<Order_By>
+  value?: InputMaybe<Order_By>
 }
 
 export type Account_Lockup_Stddev_Samp_Fields = {
@@ -260,8 +261,8 @@ export type Account_Lockup_Stddev_Samp_Fields = {
 }
 
 export type Account_Lockup_Stddev_Samp_Order_By = {
-  block_number?: Maybe<Order_By>
-  value?: Maybe<Order_By>
+  block_number?: InputMaybe<Order_By>
+  value?: InputMaybe<Order_By>
 }
 
 export type Account_Lockup_Sum_Fields = {
@@ -271,8 +272,8 @@ export type Account_Lockup_Sum_Fields = {
 }
 
 export type Account_Lockup_Sum_Order_By = {
-  block_number?: Maybe<Order_By>
-  value?: Maybe<Order_By>
+  block_number?: InputMaybe<Order_By>
+  value?: InputMaybe<Order_By>
 }
 
 export type Account_Lockup_Sum_Values = {
@@ -303,22 +304,22 @@ export type Account_Lockup_Sum_Values_Aggregate_Fields = {
 }
 
 export type Account_Lockup_Sum_Values_Aggregate_FieldsCountArgs = {
-  columns?: Maybe<Array<Account_Lockup_Sum_Values_Select_Column>>
-  distinct?: Maybe<Scalars['Boolean']>
+  columns?: InputMaybe<Array<Account_Lockup_Sum_Values_Select_Column>>
+  distinct?: InputMaybe<Scalars['Boolean']>
 }
 
 export type Account_Lockup_Sum_Values_Aggregate_Order_By = {
-  avg?: Maybe<Account_Lockup_Sum_Values_Avg_Order_By>
-  count?: Maybe<Order_By>
-  max?: Maybe<Account_Lockup_Sum_Values_Max_Order_By>
-  min?: Maybe<Account_Lockup_Sum_Values_Min_Order_By>
-  stddev?: Maybe<Account_Lockup_Sum_Values_Stddev_Order_By>
-  stddev_pop?: Maybe<Account_Lockup_Sum_Values_Stddev_Pop_Order_By>
-  stddev_samp?: Maybe<Account_Lockup_Sum_Values_Stddev_Samp_Order_By>
-  sum?: Maybe<Account_Lockup_Sum_Values_Sum_Order_By>
-  var_pop?: Maybe<Account_Lockup_Sum_Values_Var_Pop_Order_By>
-  var_samp?: Maybe<Account_Lockup_Sum_Values_Var_Samp_Order_By>
-  variance?: Maybe<Account_Lockup_Sum_Values_Variance_Order_By>
+  avg?: InputMaybe<Account_Lockup_Sum_Values_Avg_Order_By>
+  count?: InputMaybe<Order_By>
+  max?: InputMaybe<Account_Lockup_Sum_Values_Max_Order_By>
+  min?: InputMaybe<Account_Lockup_Sum_Values_Min_Order_By>
+  stddev?: InputMaybe<Account_Lockup_Sum_Values_Stddev_Order_By>
+  stddev_pop?: InputMaybe<Account_Lockup_Sum_Values_Stddev_Pop_Order_By>
+  stddev_samp?: InputMaybe<Account_Lockup_Sum_Values_Stddev_Samp_Order_By>
+  sum?: InputMaybe<Account_Lockup_Sum_Values_Sum_Order_By>
+  var_pop?: InputMaybe<Account_Lockup_Sum_Values_Var_Pop_Order_By>
+  var_samp?: InputMaybe<Account_Lockup_Sum_Values_Var_Samp_Order_By>
+  variance?: InputMaybe<Account_Lockup_Sum_Values_Variance_Order_By>
 }
 
 export type Account_Lockup_Sum_Values_Avg_Fields = {
@@ -327,15 +328,15 @@ export type Account_Lockup_Sum_Values_Avg_Fields = {
 }
 
 export type Account_Lockup_Sum_Values_Avg_Order_By = {
-  sum_values?: Maybe<Order_By>
+  sum_values?: InputMaybe<Order_By>
 }
 
 export type Account_Lockup_Sum_Values_Bool_Exp = {
-  _and?: Maybe<Array<Maybe<Account_Lockup_Sum_Values_Bool_Exp>>>
-  _not?: Maybe<Account_Lockup_Sum_Values_Bool_Exp>
-  _or?: Maybe<Array<Maybe<Account_Lockup_Sum_Values_Bool_Exp>>>
-  account_address?: Maybe<String_Comparison_Exp>
-  sum_values?: Maybe<Numeric_Comparison_Exp>
+  _and?: InputMaybe<Array<InputMaybe<Account_Lockup_Sum_Values_Bool_Exp>>>
+  _not?: InputMaybe<Account_Lockup_Sum_Values_Bool_Exp>
+  _or?: InputMaybe<Array<InputMaybe<Account_Lockup_Sum_Values_Bool_Exp>>>
+  account_address?: InputMaybe<String_Comparison_Exp>
+  sum_values?: InputMaybe<Numeric_Comparison_Exp>
 }
 
 export type Account_Lockup_Sum_Values_Max_Fields = {
@@ -345,8 +346,8 @@ export type Account_Lockup_Sum_Values_Max_Fields = {
 }
 
 export type Account_Lockup_Sum_Values_Max_Order_By = {
-  account_address?: Maybe<Order_By>
-  sum_values?: Maybe<Order_By>
+  account_address?: InputMaybe<Order_By>
+  sum_values?: InputMaybe<Order_By>
 }
 
 export type Account_Lockup_Sum_Values_Min_Fields = {
@@ -356,13 +357,13 @@ export type Account_Lockup_Sum_Values_Min_Fields = {
 }
 
 export type Account_Lockup_Sum_Values_Min_Order_By = {
-  account_address?: Maybe<Order_By>
-  sum_values?: Maybe<Order_By>
+  account_address?: InputMaybe<Order_By>
+  sum_values?: InputMaybe<Order_By>
 }
 
 export type Account_Lockup_Sum_Values_Order_By = {
-  account_address?: Maybe<Order_By>
-  sum_values?: Maybe<Order_By>
+  account_address?: InputMaybe<Order_By>
+  sum_values?: InputMaybe<Order_By>
 }
 
 export enum Account_Lockup_Sum_Values_Select_Column {
@@ -376,7 +377,7 @@ export type Account_Lockup_Sum_Values_Stddev_Fields = {
 }
 
 export type Account_Lockup_Sum_Values_Stddev_Order_By = {
-  sum_values?: Maybe<Order_By>
+  sum_values?: InputMaybe<Order_By>
 }
 
 export type Account_Lockup_Sum_Values_Stddev_Pop_Fields = {
@@ -385,7 +386,7 @@ export type Account_Lockup_Sum_Values_Stddev_Pop_Fields = {
 }
 
 export type Account_Lockup_Sum_Values_Stddev_Pop_Order_By = {
-  sum_values?: Maybe<Order_By>
+  sum_values?: InputMaybe<Order_By>
 }
 
 export type Account_Lockup_Sum_Values_Stddev_Samp_Fields = {
@@ -394,7 +395,7 @@ export type Account_Lockup_Sum_Values_Stddev_Samp_Fields = {
 }
 
 export type Account_Lockup_Sum_Values_Stddev_Samp_Order_By = {
-  sum_values?: Maybe<Order_By>
+  sum_values?: InputMaybe<Order_By>
 }
 
 export type Account_Lockup_Sum_Values_Sum_Fields = {
@@ -403,7 +404,7 @@ export type Account_Lockup_Sum_Values_Sum_Fields = {
 }
 
 export type Account_Lockup_Sum_Values_Sum_Order_By = {
-  sum_values?: Maybe<Order_By>
+  sum_values?: InputMaybe<Order_By>
 }
 
 export type Account_Lockup_Sum_Values_Var_Pop_Fields = {
@@ -412,7 +413,7 @@ export type Account_Lockup_Sum_Values_Var_Pop_Fields = {
 }
 
 export type Account_Lockup_Sum_Values_Var_Pop_Order_By = {
-  sum_values?: Maybe<Order_By>
+  sum_values?: InputMaybe<Order_By>
 }
 
 export type Account_Lockup_Sum_Values_Var_Samp_Fields = {
@@ -421,7 +422,7 @@ export type Account_Lockup_Sum_Values_Var_Samp_Fields = {
 }
 
 export type Account_Lockup_Sum_Values_Var_Samp_Order_By = {
-  sum_values?: Maybe<Order_By>
+  sum_values?: InputMaybe<Order_By>
 }
 
 export type Account_Lockup_Sum_Values_Variance_Fields = {
@@ -430,7 +431,7 @@ export type Account_Lockup_Sum_Values_Variance_Fields = {
 }
 
 export type Account_Lockup_Sum_Values_Variance_Order_By = {
-  sum_values?: Maybe<Order_By>
+  sum_values?: InputMaybe<Order_By>
 }
 
 export enum Account_Lockup_Update_Column {
@@ -448,8 +449,8 @@ export type Account_Lockup_Var_Pop_Fields = {
 }
 
 export type Account_Lockup_Var_Pop_Order_By = {
-  block_number?: Maybe<Order_By>
-  value?: Maybe<Order_By>
+  block_number?: InputMaybe<Order_By>
+  value?: InputMaybe<Order_By>
 }
 
 export type Account_Lockup_Var_Samp_Fields = {
@@ -459,8 +460,8 @@ export type Account_Lockup_Var_Samp_Fields = {
 }
 
 export type Account_Lockup_Var_Samp_Order_By = {
-  block_number?: Maybe<Order_By>
-  value?: Maybe<Order_By>
+  block_number?: InputMaybe<Order_By>
+  value?: InputMaybe<Order_By>
 }
 
 export type Account_Lockup_Variance_Fields = {
@@ -470,8 +471,8 @@ export type Account_Lockup_Variance_Fields = {
 }
 
 export type Account_Lockup_Variance_Order_By = {
-  block_number?: Maybe<Order_By>
-  value?: Maybe<Order_By>
+  block_number?: InputMaybe<Order_By>
+  value?: InputMaybe<Order_By>
 }
 
 export type Dev_Property_Transfer = {
@@ -509,27 +510,27 @@ export type Dev_Property_Transfer_Aggregate_Fields = {
 }
 
 export type Dev_Property_Transfer_Aggregate_FieldsCountArgs = {
-  columns?: Maybe<Array<Dev_Property_Transfer_Select_Column>>
-  distinct?: Maybe<Scalars['Boolean']>
+  columns?: InputMaybe<Array<Dev_Property_Transfer_Select_Column>>
+  distinct?: InputMaybe<Scalars['Boolean']>
 }
 
 export type Dev_Property_Transfer_Aggregate_Order_By = {
-  avg?: Maybe<Dev_Property_Transfer_Avg_Order_By>
-  count?: Maybe<Order_By>
-  max?: Maybe<Dev_Property_Transfer_Max_Order_By>
-  min?: Maybe<Dev_Property_Transfer_Min_Order_By>
-  stddev?: Maybe<Dev_Property_Transfer_Stddev_Order_By>
-  stddev_pop?: Maybe<Dev_Property_Transfer_Stddev_Pop_Order_By>
-  stddev_samp?: Maybe<Dev_Property_Transfer_Stddev_Samp_Order_By>
-  sum?: Maybe<Dev_Property_Transfer_Sum_Order_By>
-  var_pop?: Maybe<Dev_Property_Transfer_Var_Pop_Order_By>
-  var_samp?: Maybe<Dev_Property_Transfer_Var_Samp_Order_By>
-  variance?: Maybe<Dev_Property_Transfer_Variance_Order_By>
+  avg?: InputMaybe<Dev_Property_Transfer_Avg_Order_By>
+  count?: InputMaybe<Order_By>
+  max?: InputMaybe<Dev_Property_Transfer_Max_Order_By>
+  min?: InputMaybe<Dev_Property_Transfer_Min_Order_By>
+  stddev?: InputMaybe<Dev_Property_Transfer_Stddev_Order_By>
+  stddev_pop?: InputMaybe<Dev_Property_Transfer_Stddev_Pop_Order_By>
+  stddev_samp?: InputMaybe<Dev_Property_Transfer_Stddev_Samp_Order_By>
+  sum?: InputMaybe<Dev_Property_Transfer_Sum_Order_By>
+  var_pop?: InputMaybe<Dev_Property_Transfer_Var_Pop_Order_By>
+  var_samp?: InputMaybe<Dev_Property_Transfer_Var_Samp_Order_By>
+  variance?: InputMaybe<Dev_Property_Transfer_Variance_Order_By>
 }
 
 export type Dev_Property_Transfer_Arr_Rel_Insert_Input = {
   data: Array<Dev_Property_Transfer_Insert_Input>
-  on_conflict?: Maybe<Dev_Property_Transfer_On_Conflict>
+  on_conflict?: InputMaybe<Dev_Property_Transfer_On_Conflict>
 }
 
 export type Dev_Property_Transfer_Avg_Fields = {
@@ -541,25 +542,25 @@ export type Dev_Property_Transfer_Avg_Fields = {
 }
 
 export type Dev_Property_Transfer_Avg_Order_By = {
-  block_number?: Maybe<Order_By>
-  log_index?: Maybe<Order_By>
-  transaction_index?: Maybe<Order_By>
-  value?: Maybe<Order_By>
+  block_number?: InputMaybe<Order_By>
+  log_index?: InputMaybe<Order_By>
+  transaction_index?: InputMaybe<Order_By>
+  value?: InputMaybe<Order_By>
 }
 
 export type Dev_Property_Transfer_Bool_Exp = {
-  _and?: Maybe<Array<Maybe<Dev_Property_Transfer_Bool_Exp>>>
-  _not?: Maybe<Dev_Property_Transfer_Bool_Exp>
-  _or?: Maybe<Array<Maybe<Dev_Property_Transfer_Bool_Exp>>>
-  block_number?: Maybe<Int_Comparison_Exp>
-  event_id?: Maybe<String_Comparison_Exp>
-  from_address?: Maybe<String_Comparison_Exp>
-  is_lockup?: Maybe<Boolean_Comparison_Exp>
-  log_index?: Maybe<Int_Comparison_Exp>
-  raw_data?: Maybe<String_Comparison_Exp>
-  to_address?: Maybe<String_Comparison_Exp>
-  transaction_index?: Maybe<Int_Comparison_Exp>
-  value?: Maybe<Numeric_Comparison_Exp>
+  _and?: InputMaybe<Array<InputMaybe<Dev_Property_Transfer_Bool_Exp>>>
+  _not?: InputMaybe<Dev_Property_Transfer_Bool_Exp>
+  _or?: InputMaybe<Array<InputMaybe<Dev_Property_Transfer_Bool_Exp>>>
+  block_number?: InputMaybe<Int_Comparison_Exp>
+  event_id?: InputMaybe<String_Comparison_Exp>
+  from_address?: InputMaybe<String_Comparison_Exp>
+  is_lockup?: InputMaybe<Boolean_Comparison_Exp>
+  log_index?: InputMaybe<Int_Comparison_Exp>
+  raw_data?: InputMaybe<String_Comparison_Exp>
+  to_address?: InputMaybe<String_Comparison_Exp>
+  transaction_index?: InputMaybe<Int_Comparison_Exp>
+  value?: InputMaybe<Numeric_Comparison_Exp>
 }
 
 export enum Dev_Property_Transfer_Constraint {
@@ -567,22 +568,22 @@ export enum Dev_Property_Transfer_Constraint {
 }
 
 export type Dev_Property_Transfer_Inc_Input = {
-  block_number?: Maybe<Scalars['Int']>
-  log_index?: Maybe<Scalars['Int']>
-  transaction_index?: Maybe<Scalars['Int']>
-  value?: Maybe<Scalars['numeric']>
+  block_number?: InputMaybe<Scalars['Int']>
+  log_index?: InputMaybe<Scalars['Int']>
+  transaction_index?: InputMaybe<Scalars['Int']>
+  value?: InputMaybe<Scalars['numeric']>
 }
 
 export type Dev_Property_Transfer_Insert_Input = {
-  block_number?: Maybe<Scalars['Int']>
-  event_id?: Maybe<Scalars['String']>
-  from_address?: Maybe<Scalars['String']>
-  is_lockup?: Maybe<Scalars['Boolean']>
-  log_index?: Maybe<Scalars['Int']>
-  raw_data?: Maybe<Scalars['String']>
-  to_address?: Maybe<Scalars['String']>
-  transaction_index?: Maybe<Scalars['Int']>
-  value?: Maybe<Scalars['numeric']>
+  block_number?: InputMaybe<Scalars['Int']>
+  event_id?: InputMaybe<Scalars['String']>
+  from_address?: InputMaybe<Scalars['String']>
+  is_lockup?: InputMaybe<Scalars['Boolean']>
+  log_index?: InputMaybe<Scalars['Int']>
+  raw_data?: InputMaybe<Scalars['String']>
+  to_address?: InputMaybe<Scalars['String']>
+  transaction_index?: InputMaybe<Scalars['Int']>
+  value?: InputMaybe<Scalars['numeric']>
 }
 
 export type Dev_Property_Transfer_Max_Fields = {
@@ -598,14 +599,14 @@ export type Dev_Property_Transfer_Max_Fields = {
 }
 
 export type Dev_Property_Transfer_Max_Order_By = {
-  block_number?: Maybe<Order_By>
-  event_id?: Maybe<Order_By>
-  from_address?: Maybe<Order_By>
-  log_index?: Maybe<Order_By>
-  raw_data?: Maybe<Order_By>
-  to_address?: Maybe<Order_By>
-  transaction_index?: Maybe<Order_By>
-  value?: Maybe<Order_By>
+  block_number?: InputMaybe<Order_By>
+  event_id?: InputMaybe<Order_By>
+  from_address?: InputMaybe<Order_By>
+  log_index?: InputMaybe<Order_By>
+  raw_data?: InputMaybe<Order_By>
+  to_address?: InputMaybe<Order_By>
+  transaction_index?: InputMaybe<Order_By>
+  value?: InputMaybe<Order_By>
 }
 
 export type Dev_Property_Transfer_Min_Fields = {
@@ -621,14 +622,14 @@ export type Dev_Property_Transfer_Min_Fields = {
 }
 
 export type Dev_Property_Transfer_Min_Order_By = {
-  block_number?: Maybe<Order_By>
-  event_id?: Maybe<Order_By>
-  from_address?: Maybe<Order_By>
-  log_index?: Maybe<Order_By>
-  raw_data?: Maybe<Order_By>
-  to_address?: Maybe<Order_By>
-  transaction_index?: Maybe<Order_By>
-  value?: Maybe<Order_By>
+  block_number?: InputMaybe<Order_By>
+  event_id?: InputMaybe<Order_By>
+  from_address?: InputMaybe<Order_By>
+  log_index?: InputMaybe<Order_By>
+  raw_data?: InputMaybe<Order_By>
+  to_address?: InputMaybe<Order_By>
+  transaction_index?: InputMaybe<Order_By>
+  value?: InputMaybe<Order_By>
 }
 
 export type Dev_Property_Transfer_Mutation_Response = {
@@ -639,25 +640,25 @@ export type Dev_Property_Transfer_Mutation_Response = {
 
 export type Dev_Property_Transfer_Obj_Rel_Insert_Input = {
   data: Dev_Property_Transfer_Insert_Input
-  on_conflict?: Maybe<Dev_Property_Transfer_On_Conflict>
+  on_conflict?: InputMaybe<Dev_Property_Transfer_On_Conflict>
 }
 
 export type Dev_Property_Transfer_On_Conflict = {
   constraint: Dev_Property_Transfer_Constraint
   update_columns: Array<Dev_Property_Transfer_Update_Column>
-  where?: Maybe<Dev_Property_Transfer_Bool_Exp>
+  where?: InputMaybe<Dev_Property_Transfer_Bool_Exp>
 }
 
 export type Dev_Property_Transfer_Order_By = {
-  block_number?: Maybe<Order_By>
-  event_id?: Maybe<Order_By>
-  from_address?: Maybe<Order_By>
-  is_lockup?: Maybe<Order_By>
-  log_index?: Maybe<Order_By>
-  raw_data?: Maybe<Order_By>
-  to_address?: Maybe<Order_By>
-  transaction_index?: Maybe<Order_By>
-  value?: Maybe<Order_By>
+  block_number?: InputMaybe<Order_By>
+  event_id?: InputMaybe<Order_By>
+  from_address?: InputMaybe<Order_By>
+  is_lockup?: InputMaybe<Order_By>
+  log_index?: InputMaybe<Order_By>
+  raw_data?: InputMaybe<Order_By>
+  to_address?: InputMaybe<Order_By>
+  transaction_index?: InputMaybe<Order_By>
+  value?: InputMaybe<Order_By>
 }
 
 export type Dev_Property_Transfer_Pk_Columns_Input = {
@@ -677,15 +678,15 @@ export enum Dev_Property_Transfer_Select_Column {
 }
 
 export type Dev_Property_Transfer_Set_Input = {
-  block_number?: Maybe<Scalars['Int']>
-  event_id?: Maybe<Scalars['String']>
-  from_address?: Maybe<Scalars['String']>
-  is_lockup?: Maybe<Scalars['Boolean']>
-  log_index?: Maybe<Scalars['Int']>
-  raw_data?: Maybe<Scalars['String']>
-  to_address?: Maybe<Scalars['String']>
-  transaction_index?: Maybe<Scalars['Int']>
-  value?: Maybe<Scalars['numeric']>
+  block_number?: InputMaybe<Scalars['Int']>
+  event_id?: InputMaybe<Scalars['String']>
+  from_address?: InputMaybe<Scalars['String']>
+  is_lockup?: InputMaybe<Scalars['Boolean']>
+  log_index?: InputMaybe<Scalars['Int']>
+  raw_data?: InputMaybe<Scalars['String']>
+  to_address?: InputMaybe<Scalars['String']>
+  transaction_index?: InputMaybe<Scalars['Int']>
+  value?: InputMaybe<Scalars['numeric']>
 }
 
 export type Dev_Property_Transfer_Stddev_Fields = {
@@ -697,10 +698,10 @@ export type Dev_Property_Transfer_Stddev_Fields = {
 }
 
 export type Dev_Property_Transfer_Stddev_Order_By = {
-  block_number?: Maybe<Order_By>
-  log_index?: Maybe<Order_By>
-  transaction_index?: Maybe<Order_By>
-  value?: Maybe<Order_By>
+  block_number?: InputMaybe<Order_By>
+  log_index?: InputMaybe<Order_By>
+  transaction_index?: InputMaybe<Order_By>
+  value?: InputMaybe<Order_By>
 }
 
 export type Dev_Property_Transfer_Stddev_Pop_Fields = {
@@ -712,10 +713,10 @@ export type Dev_Property_Transfer_Stddev_Pop_Fields = {
 }
 
 export type Dev_Property_Transfer_Stddev_Pop_Order_By = {
-  block_number?: Maybe<Order_By>
-  log_index?: Maybe<Order_By>
-  transaction_index?: Maybe<Order_By>
-  value?: Maybe<Order_By>
+  block_number?: InputMaybe<Order_By>
+  log_index?: InputMaybe<Order_By>
+  transaction_index?: InputMaybe<Order_By>
+  value?: InputMaybe<Order_By>
 }
 
 export type Dev_Property_Transfer_Stddev_Samp_Fields = {
@@ -727,10 +728,10 @@ export type Dev_Property_Transfer_Stddev_Samp_Fields = {
 }
 
 export type Dev_Property_Transfer_Stddev_Samp_Order_By = {
-  block_number?: Maybe<Order_By>
-  log_index?: Maybe<Order_By>
-  transaction_index?: Maybe<Order_By>
-  value?: Maybe<Order_By>
+  block_number?: InputMaybe<Order_By>
+  log_index?: InputMaybe<Order_By>
+  transaction_index?: InputMaybe<Order_By>
+  value?: InputMaybe<Order_By>
 }
 
 export type Dev_Property_Transfer_Sum_Fields = {
@@ -742,10 +743,10 @@ export type Dev_Property_Transfer_Sum_Fields = {
 }
 
 export type Dev_Property_Transfer_Sum_Order_By = {
-  block_number?: Maybe<Order_By>
-  log_index?: Maybe<Order_By>
-  transaction_index?: Maybe<Order_By>
-  value?: Maybe<Order_By>
+  block_number?: InputMaybe<Order_By>
+  log_index?: InputMaybe<Order_By>
+  transaction_index?: InputMaybe<Order_By>
+  value?: InputMaybe<Order_By>
 }
 
 export enum Dev_Property_Transfer_Update_Column {
@@ -769,10 +770,10 @@ export type Dev_Property_Transfer_Var_Pop_Fields = {
 }
 
 export type Dev_Property_Transfer_Var_Pop_Order_By = {
-  block_number?: Maybe<Order_By>
-  log_index?: Maybe<Order_By>
-  transaction_index?: Maybe<Order_By>
-  value?: Maybe<Order_By>
+  block_number?: InputMaybe<Order_By>
+  log_index?: InputMaybe<Order_By>
+  transaction_index?: InputMaybe<Order_By>
+  value?: InputMaybe<Order_By>
 }
 
 export type Dev_Property_Transfer_Var_Samp_Fields = {
@@ -784,10 +785,10 @@ export type Dev_Property_Transfer_Var_Samp_Fields = {
 }
 
 export type Dev_Property_Transfer_Var_Samp_Order_By = {
-  block_number?: Maybe<Order_By>
-  log_index?: Maybe<Order_By>
-  transaction_index?: Maybe<Order_By>
-  value?: Maybe<Order_By>
+  block_number?: InputMaybe<Order_By>
+  log_index?: InputMaybe<Order_By>
+  transaction_index?: InputMaybe<Order_By>
+  value?: InputMaybe<Order_By>
 }
 
 export type Dev_Property_Transfer_Variance_Fields = {
@@ -799,10 +800,10 @@ export type Dev_Property_Transfer_Variance_Fields = {
 }
 
 export type Dev_Property_Transfer_Variance_Order_By = {
-  block_number?: Maybe<Order_By>
-  log_index?: Maybe<Order_By>
-  transaction_index?: Maybe<Order_By>
-  value?: Maybe<Order_By>
+  block_number?: InputMaybe<Order_By>
+  log_index?: InputMaybe<Order_By>
+  transaction_index?: InputMaybe<Order_By>
+  value?: InputMaybe<Order_By>
 }
 
 export type Lockup_Lockedup = {
@@ -840,27 +841,27 @@ export type Lockup_Lockedup_Aggregate_Fields = {
 }
 
 export type Lockup_Lockedup_Aggregate_FieldsCountArgs = {
-  columns?: Maybe<Array<Lockup_Lockedup_Select_Column>>
-  distinct?: Maybe<Scalars['Boolean']>
+  columns?: InputMaybe<Array<Lockup_Lockedup_Select_Column>>
+  distinct?: InputMaybe<Scalars['Boolean']>
 }
 
 export type Lockup_Lockedup_Aggregate_Order_By = {
-  avg?: Maybe<Lockup_Lockedup_Avg_Order_By>
-  count?: Maybe<Order_By>
-  max?: Maybe<Lockup_Lockedup_Max_Order_By>
-  min?: Maybe<Lockup_Lockedup_Min_Order_By>
-  stddev?: Maybe<Lockup_Lockedup_Stddev_Order_By>
-  stddev_pop?: Maybe<Lockup_Lockedup_Stddev_Pop_Order_By>
-  stddev_samp?: Maybe<Lockup_Lockedup_Stddev_Samp_Order_By>
-  sum?: Maybe<Lockup_Lockedup_Sum_Order_By>
-  var_pop?: Maybe<Lockup_Lockedup_Var_Pop_Order_By>
-  var_samp?: Maybe<Lockup_Lockedup_Var_Samp_Order_By>
-  variance?: Maybe<Lockup_Lockedup_Variance_Order_By>
+  avg?: InputMaybe<Lockup_Lockedup_Avg_Order_By>
+  count?: InputMaybe<Order_By>
+  max?: InputMaybe<Lockup_Lockedup_Max_Order_By>
+  min?: InputMaybe<Lockup_Lockedup_Min_Order_By>
+  stddev?: InputMaybe<Lockup_Lockedup_Stddev_Order_By>
+  stddev_pop?: InputMaybe<Lockup_Lockedup_Stddev_Pop_Order_By>
+  stddev_samp?: InputMaybe<Lockup_Lockedup_Stddev_Samp_Order_By>
+  sum?: InputMaybe<Lockup_Lockedup_Sum_Order_By>
+  var_pop?: InputMaybe<Lockup_Lockedup_Var_Pop_Order_By>
+  var_samp?: InputMaybe<Lockup_Lockedup_Var_Samp_Order_By>
+  variance?: InputMaybe<Lockup_Lockedup_Variance_Order_By>
 }
 
 export type Lockup_Lockedup_Arr_Rel_Insert_Input = {
   data: Array<Lockup_Lockedup_Insert_Input>
-  on_conflict?: Maybe<Lockup_Lockedup_On_Conflict>
+  on_conflict?: InputMaybe<Lockup_Lockedup_On_Conflict>
 }
 
 export type Lockup_Lockedup_Avg_Fields = {
@@ -872,25 +873,25 @@ export type Lockup_Lockedup_Avg_Fields = {
 }
 
 export type Lockup_Lockedup_Avg_Order_By = {
-  block_number?: Maybe<Order_By>
-  log_index?: Maybe<Order_By>
-  token_value?: Maybe<Order_By>
-  transaction_index?: Maybe<Order_By>
+  block_number?: InputMaybe<Order_By>
+  log_index?: InputMaybe<Order_By>
+  token_value?: InputMaybe<Order_By>
+  transaction_index?: InputMaybe<Order_By>
 }
 
 export type Lockup_Lockedup_Bool_Exp = {
-  _and?: Maybe<Array<Maybe<Lockup_Lockedup_Bool_Exp>>>
-  _not?: Maybe<Lockup_Lockedup_Bool_Exp>
-  _or?: Maybe<Array<Maybe<Lockup_Lockedup_Bool_Exp>>>
-  block_number?: Maybe<Int_Comparison_Exp>
-  event_id?: Maybe<String_Comparison_Exp>
-  from_address?: Maybe<String_Comparison_Exp>
-  log_index?: Maybe<Int_Comparison_Exp>
-  property?: Maybe<String_Comparison_Exp>
-  property_creation?: Maybe<Property_Factory_Create_Bool_Exp>
-  raw_data?: Maybe<String_Comparison_Exp>
-  token_value?: Maybe<Numeric_Comparison_Exp>
-  transaction_index?: Maybe<Int_Comparison_Exp>
+  _and?: InputMaybe<Array<InputMaybe<Lockup_Lockedup_Bool_Exp>>>
+  _not?: InputMaybe<Lockup_Lockedup_Bool_Exp>
+  _or?: InputMaybe<Array<InputMaybe<Lockup_Lockedup_Bool_Exp>>>
+  block_number?: InputMaybe<Int_Comparison_Exp>
+  event_id?: InputMaybe<String_Comparison_Exp>
+  from_address?: InputMaybe<String_Comparison_Exp>
+  log_index?: InputMaybe<Int_Comparison_Exp>
+  property?: InputMaybe<String_Comparison_Exp>
+  property_creation?: InputMaybe<Property_Factory_Create_Bool_Exp>
+  raw_data?: InputMaybe<String_Comparison_Exp>
+  token_value?: InputMaybe<Numeric_Comparison_Exp>
+  transaction_index?: InputMaybe<Int_Comparison_Exp>
 }
 
 export enum Lockup_Lockedup_Constraint {
@@ -898,22 +899,22 @@ export enum Lockup_Lockedup_Constraint {
 }
 
 export type Lockup_Lockedup_Inc_Input = {
-  block_number?: Maybe<Scalars['Int']>
-  log_index?: Maybe<Scalars['Int']>
-  token_value?: Maybe<Scalars['numeric']>
-  transaction_index?: Maybe<Scalars['Int']>
+  block_number?: InputMaybe<Scalars['Int']>
+  log_index?: InputMaybe<Scalars['Int']>
+  token_value?: InputMaybe<Scalars['numeric']>
+  transaction_index?: InputMaybe<Scalars['Int']>
 }
 
 export type Lockup_Lockedup_Insert_Input = {
-  block_number?: Maybe<Scalars['Int']>
-  event_id?: Maybe<Scalars['String']>
-  from_address?: Maybe<Scalars['String']>
-  log_index?: Maybe<Scalars['Int']>
-  property?: Maybe<Scalars['String']>
-  property_creation?: Maybe<Property_Factory_Create_Obj_Rel_Insert_Input>
-  raw_data?: Maybe<Scalars['String']>
-  token_value?: Maybe<Scalars['numeric']>
-  transaction_index?: Maybe<Scalars['Int']>
+  block_number?: InputMaybe<Scalars['Int']>
+  event_id?: InputMaybe<Scalars['String']>
+  from_address?: InputMaybe<Scalars['String']>
+  log_index?: InputMaybe<Scalars['Int']>
+  property?: InputMaybe<Scalars['String']>
+  property_creation?: InputMaybe<Property_Factory_Create_Obj_Rel_Insert_Input>
+  raw_data?: InputMaybe<Scalars['String']>
+  token_value?: InputMaybe<Scalars['numeric']>
+  transaction_index?: InputMaybe<Scalars['Int']>
 }
 
 export type Lockup_Lockedup_Max_Fields = {
@@ -929,14 +930,14 @@ export type Lockup_Lockedup_Max_Fields = {
 }
 
 export type Lockup_Lockedup_Max_Order_By = {
-  block_number?: Maybe<Order_By>
-  event_id?: Maybe<Order_By>
-  from_address?: Maybe<Order_By>
-  log_index?: Maybe<Order_By>
-  property?: Maybe<Order_By>
-  raw_data?: Maybe<Order_By>
-  token_value?: Maybe<Order_By>
-  transaction_index?: Maybe<Order_By>
+  block_number?: InputMaybe<Order_By>
+  event_id?: InputMaybe<Order_By>
+  from_address?: InputMaybe<Order_By>
+  log_index?: InputMaybe<Order_By>
+  property?: InputMaybe<Order_By>
+  raw_data?: InputMaybe<Order_By>
+  token_value?: InputMaybe<Order_By>
+  transaction_index?: InputMaybe<Order_By>
 }
 
 export type Lockup_Lockedup_Min_Fields = {
@@ -952,14 +953,14 @@ export type Lockup_Lockedup_Min_Fields = {
 }
 
 export type Lockup_Lockedup_Min_Order_By = {
-  block_number?: Maybe<Order_By>
-  event_id?: Maybe<Order_By>
-  from_address?: Maybe<Order_By>
-  log_index?: Maybe<Order_By>
-  property?: Maybe<Order_By>
-  raw_data?: Maybe<Order_By>
-  token_value?: Maybe<Order_By>
-  transaction_index?: Maybe<Order_By>
+  block_number?: InputMaybe<Order_By>
+  event_id?: InputMaybe<Order_By>
+  from_address?: InputMaybe<Order_By>
+  log_index?: InputMaybe<Order_By>
+  property?: InputMaybe<Order_By>
+  raw_data?: InputMaybe<Order_By>
+  token_value?: InputMaybe<Order_By>
+  transaction_index?: InputMaybe<Order_By>
 }
 
 export type Lockup_Lockedup_Mutation_Response = {
@@ -970,25 +971,25 @@ export type Lockup_Lockedup_Mutation_Response = {
 
 export type Lockup_Lockedup_Obj_Rel_Insert_Input = {
   data: Lockup_Lockedup_Insert_Input
-  on_conflict?: Maybe<Lockup_Lockedup_On_Conflict>
+  on_conflict?: InputMaybe<Lockup_Lockedup_On_Conflict>
 }
 
 export type Lockup_Lockedup_On_Conflict = {
   constraint: Lockup_Lockedup_Constraint
   update_columns: Array<Lockup_Lockedup_Update_Column>
-  where?: Maybe<Lockup_Lockedup_Bool_Exp>
+  where?: InputMaybe<Lockup_Lockedup_Bool_Exp>
 }
 
 export type Lockup_Lockedup_Order_By = {
-  block_number?: Maybe<Order_By>
-  event_id?: Maybe<Order_By>
-  from_address?: Maybe<Order_By>
-  log_index?: Maybe<Order_By>
-  property?: Maybe<Order_By>
-  property_creation?: Maybe<Property_Factory_Create_Order_By>
-  raw_data?: Maybe<Order_By>
-  token_value?: Maybe<Order_By>
-  transaction_index?: Maybe<Order_By>
+  block_number?: InputMaybe<Order_By>
+  event_id?: InputMaybe<Order_By>
+  from_address?: InputMaybe<Order_By>
+  log_index?: InputMaybe<Order_By>
+  property?: InputMaybe<Order_By>
+  property_creation?: InputMaybe<Property_Factory_Create_Order_By>
+  raw_data?: InputMaybe<Order_By>
+  token_value?: InputMaybe<Order_By>
+  transaction_index?: InputMaybe<Order_By>
 }
 
 export type Lockup_Lockedup_Pk_Columns_Input = {
@@ -1007,14 +1008,14 @@ export enum Lockup_Lockedup_Select_Column {
 }
 
 export type Lockup_Lockedup_Set_Input = {
-  block_number?: Maybe<Scalars['Int']>
-  event_id?: Maybe<Scalars['String']>
-  from_address?: Maybe<Scalars['String']>
-  log_index?: Maybe<Scalars['Int']>
-  property?: Maybe<Scalars['String']>
-  raw_data?: Maybe<Scalars['String']>
-  token_value?: Maybe<Scalars['numeric']>
-  transaction_index?: Maybe<Scalars['Int']>
+  block_number?: InputMaybe<Scalars['Int']>
+  event_id?: InputMaybe<Scalars['String']>
+  from_address?: InputMaybe<Scalars['String']>
+  log_index?: InputMaybe<Scalars['Int']>
+  property?: InputMaybe<Scalars['String']>
+  raw_data?: InputMaybe<Scalars['String']>
+  token_value?: InputMaybe<Scalars['numeric']>
+  transaction_index?: InputMaybe<Scalars['Int']>
 }
 
 export type Lockup_Lockedup_Stddev_Fields = {
@@ -1026,10 +1027,10 @@ export type Lockup_Lockedup_Stddev_Fields = {
 }
 
 export type Lockup_Lockedup_Stddev_Order_By = {
-  block_number?: Maybe<Order_By>
-  log_index?: Maybe<Order_By>
-  token_value?: Maybe<Order_By>
-  transaction_index?: Maybe<Order_By>
+  block_number?: InputMaybe<Order_By>
+  log_index?: InputMaybe<Order_By>
+  token_value?: InputMaybe<Order_By>
+  transaction_index?: InputMaybe<Order_By>
 }
 
 export type Lockup_Lockedup_Stddev_Pop_Fields = {
@@ -1041,10 +1042,10 @@ export type Lockup_Lockedup_Stddev_Pop_Fields = {
 }
 
 export type Lockup_Lockedup_Stddev_Pop_Order_By = {
-  block_number?: Maybe<Order_By>
-  log_index?: Maybe<Order_By>
-  token_value?: Maybe<Order_By>
-  transaction_index?: Maybe<Order_By>
+  block_number?: InputMaybe<Order_By>
+  log_index?: InputMaybe<Order_By>
+  token_value?: InputMaybe<Order_By>
+  transaction_index?: InputMaybe<Order_By>
 }
 
 export type Lockup_Lockedup_Stddev_Samp_Fields = {
@@ -1056,10 +1057,10 @@ export type Lockup_Lockedup_Stddev_Samp_Fields = {
 }
 
 export type Lockup_Lockedup_Stddev_Samp_Order_By = {
-  block_number?: Maybe<Order_By>
-  log_index?: Maybe<Order_By>
-  token_value?: Maybe<Order_By>
-  transaction_index?: Maybe<Order_By>
+  block_number?: InputMaybe<Order_By>
+  log_index?: InputMaybe<Order_By>
+  token_value?: InputMaybe<Order_By>
+  transaction_index?: InputMaybe<Order_By>
 }
 
 export type Lockup_Lockedup_Sum_Fields = {
@@ -1071,10 +1072,10 @@ export type Lockup_Lockedup_Sum_Fields = {
 }
 
 export type Lockup_Lockedup_Sum_Order_By = {
-  block_number?: Maybe<Order_By>
-  log_index?: Maybe<Order_By>
-  token_value?: Maybe<Order_By>
-  transaction_index?: Maybe<Order_By>
+  block_number?: InputMaybe<Order_By>
+  log_index?: InputMaybe<Order_By>
+  token_value?: InputMaybe<Order_By>
+  transaction_index?: InputMaybe<Order_By>
 }
 
 export enum Lockup_Lockedup_Update_Column {
@@ -1097,10 +1098,10 @@ export type Lockup_Lockedup_Var_Pop_Fields = {
 }
 
 export type Lockup_Lockedup_Var_Pop_Order_By = {
-  block_number?: Maybe<Order_By>
-  log_index?: Maybe<Order_By>
-  token_value?: Maybe<Order_By>
-  transaction_index?: Maybe<Order_By>
+  block_number?: InputMaybe<Order_By>
+  log_index?: InputMaybe<Order_By>
+  token_value?: InputMaybe<Order_By>
+  transaction_index?: InputMaybe<Order_By>
 }
 
 export type Lockup_Lockedup_Var_Samp_Fields = {
@@ -1112,10 +1113,10 @@ export type Lockup_Lockedup_Var_Samp_Fields = {
 }
 
 export type Lockup_Lockedup_Var_Samp_Order_By = {
-  block_number?: Maybe<Order_By>
-  log_index?: Maybe<Order_By>
-  token_value?: Maybe<Order_By>
-  transaction_index?: Maybe<Order_By>
+  block_number?: InputMaybe<Order_By>
+  log_index?: InputMaybe<Order_By>
+  token_value?: InputMaybe<Order_By>
+  transaction_index?: InputMaybe<Order_By>
 }
 
 export type Lockup_Lockedup_Variance_Fields = {
@@ -1127,10 +1128,10 @@ export type Lockup_Lockedup_Variance_Fields = {
 }
 
 export type Lockup_Lockedup_Variance_Order_By = {
-  block_number?: Maybe<Order_By>
-  log_index?: Maybe<Order_By>
-  token_value?: Maybe<Order_By>
-  transaction_index?: Maybe<Order_By>
+  block_number?: InputMaybe<Order_By>
+  log_index?: InputMaybe<Order_By>
+  token_value?: InputMaybe<Order_By>
+  transaction_index?: InputMaybe<Order_By>
 }
 
 export type Market_Factory_Create = {
@@ -1149,35 +1150,35 @@ export type Market_Factory_Create = {
 }
 
 export type Market_Factory_CreateDestroyed_MetricsArgs = {
-  distinct_on?: Maybe<Array<Metrics_Factory_Destroy_Select_Column>>
-  limit?: Maybe<Scalars['Int']>
-  offset?: Maybe<Scalars['Int']>
-  order_by?: Maybe<Array<Metrics_Factory_Destroy_Order_By>>
-  where?: Maybe<Metrics_Factory_Destroy_Bool_Exp>
+  distinct_on?: InputMaybe<Array<Metrics_Factory_Destroy_Select_Column>>
+  limit?: InputMaybe<Scalars['Int']>
+  offset?: InputMaybe<Scalars['Int']>
+  order_by?: InputMaybe<Array<Metrics_Factory_Destroy_Order_By>>
+  where?: InputMaybe<Metrics_Factory_Destroy_Bool_Exp>
 }
 
 export type Market_Factory_CreateDestroyed_Metrics_AggregateArgs = {
-  distinct_on?: Maybe<Array<Metrics_Factory_Destroy_Select_Column>>
-  limit?: Maybe<Scalars['Int']>
-  offset?: Maybe<Scalars['Int']>
-  order_by?: Maybe<Array<Metrics_Factory_Destroy_Order_By>>
-  where?: Maybe<Metrics_Factory_Destroy_Bool_Exp>
+  distinct_on?: InputMaybe<Array<Metrics_Factory_Destroy_Select_Column>>
+  limit?: InputMaybe<Scalars['Int']>
+  offset?: InputMaybe<Scalars['Int']>
+  order_by?: InputMaybe<Array<Metrics_Factory_Destroy_Order_By>>
+  where?: InputMaybe<Metrics_Factory_Destroy_Bool_Exp>
 }
 
 export type Market_Factory_CreateMetricsArgs = {
-  distinct_on?: Maybe<Array<Metrics_Factory_Create_Select_Column>>
-  limit?: Maybe<Scalars['Int']>
-  offset?: Maybe<Scalars['Int']>
-  order_by?: Maybe<Array<Metrics_Factory_Create_Order_By>>
-  where?: Maybe<Metrics_Factory_Create_Bool_Exp>
+  distinct_on?: InputMaybe<Array<Metrics_Factory_Create_Select_Column>>
+  limit?: InputMaybe<Scalars['Int']>
+  offset?: InputMaybe<Scalars['Int']>
+  order_by?: InputMaybe<Array<Metrics_Factory_Create_Order_By>>
+  where?: InputMaybe<Metrics_Factory_Create_Bool_Exp>
 }
 
 export type Market_Factory_CreateMetrics_AggregateArgs = {
-  distinct_on?: Maybe<Array<Metrics_Factory_Create_Select_Column>>
-  limit?: Maybe<Scalars['Int']>
-  offset?: Maybe<Scalars['Int']>
-  order_by?: Maybe<Array<Metrics_Factory_Create_Order_By>>
-  where?: Maybe<Metrics_Factory_Create_Bool_Exp>
+  distinct_on?: InputMaybe<Array<Metrics_Factory_Create_Select_Column>>
+  limit?: InputMaybe<Scalars['Int']>
+  offset?: InputMaybe<Scalars['Int']>
+  order_by?: InputMaybe<Array<Metrics_Factory_Create_Order_By>>
+  where?: InputMaybe<Metrics_Factory_Create_Bool_Exp>
 }
 
 export type Market_Factory_Create_Aggregate = {
@@ -1202,27 +1203,27 @@ export type Market_Factory_Create_Aggregate_Fields = {
 }
 
 export type Market_Factory_Create_Aggregate_FieldsCountArgs = {
-  columns?: Maybe<Array<Market_Factory_Create_Select_Column>>
-  distinct?: Maybe<Scalars['Boolean']>
+  columns?: InputMaybe<Array<Market_Factory_Create_Select_Column>>
+  distinct?: InputMaybe<Scalars['Boolean']>
 }
 
 export type Market_Factory_Create_Aggregate_Order_By = {
-  avg?: Maybe<Market_Factory_Create_Avg_Order_By>
-  count?: Maybe<Order_By>
-  max?: Maybe<Market_Factory_Create_Max_Order_By>
-  min?: Maybe<Market_Factory_Create_Min_Order_By>
-  stddev?: Maybe<Market_Factory_Create_Stddev_Order_By>
-  stddev_pop?: Maybe<Market_Factory_Create_Stddev_Pop_Order_By>
-  stddev_samp?: Maybe<Market_Factory_Create_Stddev_Samp_Order_By>
-  sum?: Maybe<Market_Factory_Create_Sum_Order_By>
-  var_pop?: Maybe<Market_Factory_Create_Var_Pop_Order_By>
-  var_samp?: Maybe<Market_Factory_Create_Var_Samp_Order_By>
-  variance?: Maybe<Market_Factory_Create_Variance_Order_By>
+  avg?: InputMaybe<Market_Factory_Create_Avg_Order_By>
+  count?: InputMaybe<Order_By>
+  max?: InputMaybe<Market_Factory_Create_Max_Order_By>
+  min?: InputMaybe<Market_Factory_Create_Min_Order_By>
+  stddev?: InputMaybe<Market_Factory_Create_Stddev_Order_By>
+  stddev_pop?: InputMaybe<Market_Factory_Create_Stddev_Pop_Order_By>
+  stddev_samp?: InputMaybe<Market_Factory_Create_Stddev_Samp_Order_By>
+  sum?: InputMaybe<Market_Factory_Create_Sum_Order_By>
+  var_pop?: InputMaybe<Market_Factory_Create_Var_Pop_Order_By>
+  var_samp?: InputMaybe<Market_Factory_Create_Var_Samp_Order_By>
+  variance?: InputMaybe<Market_Factory_Create_Variance_Order_By>
 }
 
 export type Market_Factory_Create_Arr_Rel_Insert_Input = {
   data: Array<Market_Factory_Create_Insert_Input>
-  on_conflict?: Maybe<Market_Factory_Create_On_Conflict>
+  on_conflict?: InputMaybe<Market_Factory_Create_On_Conflict>
 }
 
 export type Market_Factory_Create_Avg_Fields = {
@@ -1233,24 +1234,24 @@ export type Market_Factory_Create_Avg_Fields = {
 }
 
 export type Market_Factory_Create_Avg_Order_By = {
-  block_number?: Maybe<Order_By>
-  log_index?: Maybe<Order_By>
-  transaction_index?: Maybe<Order_By>
+  block_number?: InputMaybe<Order_By>
+  log_index?: InputMaybe<Order_By>
+  transaction_index?: InputMaybe<Order_By>
 }
 
 export type Market_Factory_Create_Bool_Exp = {
-  _and?: Maybe<Array<Maybe<Market_Factory_Create_Bool_Exp>>>
-  _not?: Maybe<Market_Factory_Create_Bool_Exp>
-  _or?: Maybe<Array<Maybe<Market_Factory_Create_Bool_Exp>>>
-  block_number?: Maybe<Int_Comparison_Exp>
-  destroyed_metrics?: Maybe<Metrics_Factory_Destroy_Bool_Exp>
-  event_id?: Maybe<String_Comparison_Exp>
-  from_address?: Maybe<String_Comparison_Exp>
-  log_index?: Maybe<Int_Comparison_Exp>
-  market?: Maybe<String_Comparison_Exp>
-  metrics?: Maybe<Metrics_Factory_Create_Bool_Exp>
-  raw_data?: Maybe<String_Comparison_Exp>
-  transaction_index?: Maybe<Int_Comparison_Exp>
+  _and?: InputMaybe<Array<InputMaybe<Market_Factory_Create_Bool_Exp>>>
+  _not?: InputMaybe<Market_Factory_Create_Bool_Exp>
+  _or?: InputMaybe<Array<InputMaybe<Market_Factory_Create_Bool_Exp>>>
+  block_number?: InputMaybe<Int_Comparison_Exp>
+  destroyed_metrics?: InputMaybe<Metrics_Factory_Destroy_Bool_Exp>
+  event_id?: InputMaybe<String_Comparison_Exp>
+  from_address?: InputMaybe<String_Comparison_Exp>
+  log_index?: InputMaybe<Int_Comparison_Exp>
+  market?: InputMaybe<String_Comparison_Exp>
+  metrics?: InputMaybe<Metrics_Factory_Create_Bool_Exp>
+  raw_data?: InputMaybe<String_Comparison_Exp>
+  transaction_index?: InputMaybe<Int_Comparison_Exp>
 }
 
 export enum Market_Factory_Create_Constraint {
@@ -1258,21 +1259,21 @@ export enum Market_Factory_Create_Constraint {
 }
 
 export type Market_Factory_Create_Inc_Input = {
-  block_number?: Maybe<Scalars['Int']>
-  log_index?: Maybe<Scalars['Int']>
-  transaction_index?: Maybe<Scalars['Int']>
+  block_number?: InputMaybe<Scalars['Int']>
+  log_index?: InputMaybe<Scalars['Int']>
+  transaction_index?: InputMaybe<Scalars['Int']>
 }
 
 export type Market_Factory_Create_Insert_Input = {
-  block_number?: Maybe<Scalars['Int']>
-  destroyed_metrics?: Maybe<Metrics_Factory_Destroy_Arr_Rel_Insert_Input>
-  event_id?: Maybe<Scalars['String']>
-  from_address?: Maybe<Scalars['String']>
-  log_index?: Maybe<Scalars['Int']>
-  market?: Maybe<Scalars['String']>
-  metrics?: Maybe<Metrics_Factory_Create_Arr_Rel_Insert_Input>
-  raw_data?: Maybe<Scalars['String']>
-  transaction_index?: Maybe<Scalars['Int']>
+  block_number?: InputMaybe<Scalars['Int']>
+  destroyed_metrics?: InputMaybe<Metrics_Factory_Destroy_Arr_Rel_Insert_Input>
+  event_id?: InputMaybe<Scalars['String']>
+  from_address?: InputMaybe<Scalars['String']>
+  log_index?: InputMaybe<Scalars['Int']>
+  market?: InputMaybe<Scalars['String']>
+  metrics?: InputMaybe<Metrics_Factory_Create_Arr_Rel_Insert_Input>
+  raw_data?: InputMaybe<Scalars['String']>
+  transaction_index?: InputMaybe<Scalars['Int']>
 }
 
 export type Market_Factory_Create_Max_Fields = {
@@ -1287,13 +1288,13 @@ export type Market_Factory_Create_Max_Fields = {
 }
 
 export type Market_Factory_Create_Max_Order_By = {
-  block_number?: Maybe<Order_By>
-  event_id?: Maybe<Order_By>
-  from_address?: Maybe<Order_By>
-  log_index?: Maybe<Order_By>
-  market?: Maybe<Order_By>
-  raw_data?: Maybe<Order_By>
-  transaction_index?: Maybe<Order_By>
+  block_number?: InputMaybe<Order_By>
+  event_id?: InputMaybe<Order_By>
+  from_address?: InputMaybe<Order_By>
+  log_index?: InputMaybe<Order_By>
+  market?: InputMaybe<Order_By>
+  raw_data?: InputMaybe<Order_By>
+  transaction_index?: InputMaybe<Order_By>
 }
 
 export type Market_Factory_Create_Min_Fields = {
@@ -1308,13 +1309,13 @@ export type Market_Factory_Create_Min_Fields = {
 }
 
 export type Market_Factory_Create_Min_Order_By = {
-  block_number?: Maybe<Order_By>
-  event_id?: Maybe<Order_By>
-  from_address?: Maybe<Order_By>
-  log_index?: Maybe<Order_By>
-  market?: Maybe<Order_By>
-  raw_data?: Maybe<Order_By>
-  transaction_index?: Maybe<Order_By>
+  block_number?: InputMaybe<Order_By>
+  event_id?: InputMaybe<Order_By>
+  from_address?: InputMaybe<Order_By>
+  log_index?: InputMaybe<Order_By>
+  market?: InputMaybe<Order_By>
+  raw_data?: InputMaybe<Order_By>
+  transaction_index?: InputMaybe<Order_By>
 }
 
 export type Market_Factory_Create_Mutation_Response = {
@@ -1325,25 +1326,25 @@ export type Market_Factory_Create_Mutation_Response = {
 
 export type Market_Factory_Create_Obj_Rel_Insert_Input = {
   data: Market_Factory_Create_Insert_Input
-  on_conflict?: Maybe<Market_Factory_Create_On_Conflict>
+  on_conflict?: InputMaybe<Market_Factory_Create_On_Conflict>
 }
 
 export type Market_Factory_Create_On_Conflict = {
   constraint: Market_Factory_Create_Constraint
   update_columns: Array<Market_Factory_Create_Update_Column>
-  where?: Maybe<Market_Factory_Create_Bool_Exp>
+  where?: InputMaybe<Market_Factory_Create_Bool_Exp>
 }
 
 export type Market_Factory_Create_Order_By = {
-  block_number?: Maybe<Order_By>
-  destroyed_metrics_aggregate?: Maybe<Metrics_Factory_Destroy_Aggregate_Order_By>
-  event_id?: Maybe<Order_By>
-  from_address?: Maybe<Order_By>
-  log_index?: Maybe<Order_By>
-  market?: Maybe<Order_By>
-  metrics_aggregate?: Maybe<Metrics_Factory_Create_Aggregate_Order_By>
-  raw_data?: Maybe<Order_By>
-  transaction_index?: Maybe<Order_By>
+  block_number?: InputMaybe<Order_By>
+  destroyed_metrics_aggregate?: InputMaybe<Metrics_Factory_Destroy_Aggregate_Order_By>
+  event_id?: InputMaybe<Order_By>
+  from_address?: InputMaybe<Order_By>
+  log_index?: InputMaybe<Order_By>
+  market?: InputMaybe<Order_By>
+  metrics_aggregate?: InputMaybe<Metrics_Factory_Create_Aggregate_Order_By>
+  raw_data?: InputMaybe<Order_By>
+  transaction_index?: InputMaybe<Order_By>
 }
 
 export type Market_Factory_Create_Pk_Columns_Input = {
@@ -1361,13 +1362,13 @@ export enum Market_Factory_Create_Select_Column {
 }
 
 export type Market_Factory_Create_Set_Input = {
-  block_number?: Maybe<Scalars['Int']>
-  event_id?: Maybe<Scalars['String']>
-  from_address?: Maybe<Scalars['String']>
-  log_index?: Maybe<Scalars['Int']>
-  market?: Maybe<Scalars['String']>
-  raw_data?: Maybe<Scalars['String']>
-  transaction_index?: Maybe<Scalars['Int']>
+  block_number?: InputMaybe<Scalars['Int']>
+  event_id?: InputMaybe<Scalars['String']>
+  from_address?: InputMaybe<Scalars['String']>
+  log_index?: InputMaybe<Scalars['Int']>
+  market?: InputMaybe<Scalars['String']>
+  raw_data?: InputMaybe<Scalars['String']>
+  transaction_index?: InputMaybe<Scalars['Int']>
 }
 
 export type Market_Factory_Create_Stddev_Fields = {
@@ -1378,9 +1379,9 @@ export type Market_Factory_Create_Stddev_Fields = {
 }
 
 export type Market_Factory_Create_Stddev_Order_By = {
-  block_number?: Maybe<Order_By>
-  log_index?: Maybe<Order_By>
-  transaction_index?: Maybe<Order_By>
+  block_number?: InputMaybe<Order_By>
+  log_index?: InputMaybe<Order_By>
+  transaction_index?: InputMaybe<Order_By>
 }
 
 export type Market_Factory_Create_Stddev_Pop_Fields = {
@@ -1391,9 +1392,9 @@ export type Market_Factory_Create_Stddev_Pop_Fields = {
 }
 
 export type Market_Factory_Create_Stddev_Pop_Order_By = {
-  block_number?: Maybe<Order_By>
-  log_index?: Maybe<Order_By>
-  transaction_index?: Maybe<Order_By>
+  block_number?: InputMaybe<Order_By>
+  log_index?: InputMaybe<Order_By>
+  transaction_index?: InputMaybe<Order_By>
 }
 
 export type Market_Factory_Create_Stddev_Samp_Fields = {
@@ -1404,9 +1405,9 @@ export type Market_Factory_Create_Stddev_Samp_Fields = {
 }
 
 export type Market_Factory_Create_Stddev_Samp_Order_By = {
-  block_number?: Maybe<Order_By>
-  log_index?: Maybe<Order_By>
-  transaction_index?: Maybe<Order_By>
+  block_number?: InputMaybe<Order_By>
+  log_index?: InputMaybe<Order_By>
+  transaction_index?: InputMaybe<Order_By>
 }
 
 export type Market_Factory_Create_Sum_Fields = {
@@ -1417,9 +1418,9 @@ export type Market_Factory_Create_Sum_Fields = {
 }
 
 export type Market_Factory_Create_Sum_Order_By = {
-  block_number?: Maybe<Order_By>
-  log_index?: Maybe<Order_By>
-  transaction_index?: Maybe<Order_By>
+  block_number?: InputMaybe<Order_By>
+  log_index?: InputMaybe<Order_By>
+  transaction_index?: InputMaybe<Order_By>
 }
 
 export enum Market_Factory_Create_Update_Column {
@@ -1440,9 +1441,9 @@ export type Market_Factory_Create_Var_Pop_Fields = {
 }
 
 export type Market_Factory_Create_Var_Pop_Order_By = {
-  block_number?: Maybe<Order_By>
-  log_index?: Maybe<Order_By>
-  transaction_index?: Maybe<Order_By>
+  block_number?: InputMaybe<Order_By>
+  log_index?: InputMaybe<Order_By>
+  transaction_index?: InputMaybe<Order_By>
 }
 
 export type Market_Factory_Create_Var_Samp_Fields = {
@@ -1453,9 +1454,9 @@ export type Market_Factory_Create_Var_Samp_Fields = {
 }
 
 export type Market_Factory_Create_Var_Samp_Order_By = {
-  block_number?: Maybe<Order_By>
-  log_index?: Maybe<Order_By>
-  transaction_index?: Maybe<Order_By>
+  block_number?: InputMaybe<Order_By>
+  log_index?: InputMaybe<Order_By>
+  transaction_index?: InputMaybe<Order_By>
 }
 
 export type Market_Factory_Create_Variance_Fields = {
@@ -1466,9 +1467,9 @@ export type Market_Factory_Create_Variance_Fields = {
 }
 
 export type Market_Factory_Create_Variance_Order_By = {
-  block_number?: Maybe<Order_By>
-  log_index?: Maybe<Order_By>
-  transaction_index?: Maybe<Order_By>
+  block_number?: InputMaybe<Order_By>
+  log_index?: InputMaybe<Order_By>
+  transaction_index?: InputMaybe<Order_By>
 }
 
 export type Metrics_Factory_Create = {
@@ -1506,27 +1507,27 @@ export type Metrics_Factory_Create_Aggregate_Fields = {
 }
 
 export type Metrics_Factory_Create_Aggregate_FieldsCountArgs = {
-  columns?: Maybe<Array<Metrics_Factory_Create_Select_Column>>
-  distinct?: Maybe<Scalars['Boolean']>
+  columns?: InputMaybe<Array<Metrics_Factory_Create_Select_Column>>
+  distinct?: InputMaybe<Scalars['Boolean']>
 }
 
 export type Metrics_Factory_Create_Aggregate_Order_By = {
-  avg?: Maybe<Metrics_Factory_Create_Avg_Order_By>
-  count?: Maybe<Order_By>
-  max?: Maybe<Metrics_Factory_Create_Max_Order_By>
-  min?: Maybe<Metrics_Factory_Create_Min_Order_By>
-  stddev?: Maybe<Metrics_Factory_Create_Stddev_Order_By>
-  stddev_pop?: Maybe<Metrics_Factory_Create_Stddev_Pop_Order_By>
-  stddev_samp?: Maybe<Metrics_Factory_Create_Stddev_Samp_Order_By>
-  sum?: Maybe<Metrics_Factory_Create_Sum_Order_By>
-  var_pop?: Maybe<Metrics_Factory_Create_Var_Pop_Order_By>
-  var_samp?: Maybe<Metrics_Factory_Create_Var_Samp_Order_By>
-  variance?: Maybe<Metrics_Factory_Create_Variance_Order_By>
+  avg?: InputMaybe<Metrics_Factory_Create_Avg_Order_By>
+  count?: InputMaybe<Order_By>
+  max?: InputMaybe<Metrics_Factory_Create_Max_Order_By>
+  min?: InputMaybe<Metrics_Factory_Create_Min_Order_By>
+  stddev?: InputMaybe<Metrics_Factory_Create_Stddev_Order_By>
+  stddev_pop?: InputMaybe<Metrics_Factory_Create_Stddev_Pop_Order_By>
+  stddev_samp?: InputMaybe<Metrics_Factory_Create_Stddev_Samp_Order_By>
+  sum?: InputMaybe<Metrics_Factory_Create_Sum_Order_By>
+  var_pop?: InputMaybe<Metrics_Factory_Create_Var_Pop_Order_By>
+  var_samp?: InputMaybe<Metrics_Factory_Create_Var_Samp_Order_By>
+  variance?: InputMaybe<Metrics_Factory_Create_Variance_Order_By>
 }
 
 export type Metrics_Factory_Create_Arr_Rel_Insert_Input = {
   data: Array<Metrics_Factory_Create_Insert_Input>
-  on_conflict?: Maybe<Metrics_Factory_Create_On_Conflict>
+  on_conflict?: InputMaybe<Metrics_Factory_Create_On_Conflict>
 }
 
 export type Metrics_Factory_Create_Avg_Fields = {
@@ -1537,24 +1538,24 @@ export type Metrics_Factory_Create_Avg_Fields = {
 }
 
 export type Metrics_Factory_Create_Avg_Order_By = {
-  block_number?: Maybe<Order_By>
-  log_index?: Maybe<Order_By>
-  transaction_index?: Maybe<Order_By>
+  block_number?: InputMaybe<Order_By>
+  log_index?: InputMaybe<Order_By>
+  transaction_index?: InputMaybe<Order_By>
 }
 
 export type Metrics_Factory_Create_Bool_Exp = {
-  _and?: Maybe<Array<Maybe<Metrics_Factory_Create_Bool_Exp>>>
-  _not?: Maybe<Metrics_Factory_Create_Bool_Exp>
-  _or?: Maybe<Array<Maybe<Metrics_Factory_Create_Bool_Exp>>>
-  block_number?: Maybe<Int_Comparison_Exp>
-  destroyed_metrics?: Maybe<Metrics_Factory_Destroy_Bool_Exp>
-  event_id?: Maybe<String_Comparison_Exp>
-  from_address?: Maybe<String_Comparison_Exp>
-  log_index?: Maybe<Int_Comparison_Exp>
-  market?: Maybe<Market_Factory_Create_Bool_Exp>
-  metrics?: Maybe<String_Comparison_Exp>
-  raw_data?: Maybe<String_Comparison_Exp>
-  transaction_index?: Maybe<Int_Comparison_Exp>
+  _and?: InputMaybe<Array<InputMaybe<Metrics_Factory_Create_Bool_Exp>>>
+  _not?: InputMaybe<Metrics_Factory_Create_Bool_Exp>
+  _or?: InputMaybe<Array<InputMaybe<Metrics_Factory_Create_Bool_Exp>>>
+  block_number?: InputMaybe<Int_Comparison_Exp>
+  destroyed_metrics?: InputMaybe<Metrics_Factory_Destroy_Bool_Exp>
+  event_id?: InputMaybe<String_Comparison_Exp>
+  from_address?: InputMaybe<String_Comparison_Exp>
+  log_index?: InputMaybe<Int_Comparison_Exp>
+  market?: InputMaybe<Market_Factory_Create_Bool_Exp>
+  metrics?: InputMaybe<String_Comparison_Exp>
+  raw_data?: InputMaybe<String_Comparison_Exp>
+  transaction_index?: InputMaybe<Int_Comparison_Exp>
 }
 
 export enum Metrics_Factory_Create_Constraint {
@@ -1562,21 +1563,21 @@ export enum Metrics_Factory_Create_Constraint {
 }
 
 export type Metrics_Factory_Create_Inc_Input = {
-  block_number?: Maybe<Scalars['Int']>
-  log_index?: Maybe<Scalars['Int']>
-  transaction_index?: Maybe<Scalars['Int']>
+  block_number?: InputMaybe<Scalars['Int']>
+  log_index?: InputMaybe<Scalars['Int']>
+  transaction_index?: InputMaybe<Scalars['Int']>
 }
 
 export type Metrics_Factory_Create_Insert_Input = {
-  block_number?: Maybe<Scalars['Int']>
-  destroyed_metrics?: Maybe<Metrics_Factory_Destroy_Obj_Rel_Insert_Input>
-  event_id?: Maybe<Scalars['String']>
-  from_address?: Maybe<Scalars['String']>
-  log_index?: Maybe<Scalars['Int']>
-  market?: Maybe<Market_Factory_Create_Obj_Rel_Insert_Input>
-  metrics?: Maybe<Scalars['String']>
-  raw_data?: Maybe<Scalars['String']>
-  transaction_index?: Maybe<Scalars['Int']>
+  block_number?: InputMaybe<Scalars['Int']>
+  destroyed_metrics?: InputMaybe<Metrics_Factory_Destroy_Obj_Rel_Insert_Input>
+  event_id?: InputMaybe<Scalars['String']>
+  from_address?: InputMaybe<Scalars['String']>
+  log_index?: InputMaybe<Scalars['Int']>
+  market?: InputMaybe<Market_Factory_Create_Obj_Rel_Insert_Input>
+  metrics?: InputMaybe<Scalars['String']>
+  raw_data?: InputMaybe<Scalars['String']>
+  transaction_index?: InputMaybe<Scalars['Int']>
 }
 
 export type Metrics_Factory_Create_Max_Fields = {
@@ -1591,13 +1592,13 @@ export type Metrics_Factory_Create_Max_Fields = {
 }
 
 export type Metrics_Factory_Create_Max_Order_By = {
-  block_number?: Maybe<Order_By>
-  event_id?: Maybe<Order_By>
-  from_address?: Maybe<Order_By>
-  log_index?: Maybe<Order_By>
-  metrics?: Maybe<Order_By>
-  raw_data?: Maybe<Order_By>
-  transaction_index?: Maybe<Order_By>
+  block_number?: InputMaybe<Order_By>
+  event_id?: InputMaybe<Order_By>
+  from_address?: InputMaybe<Order_By>
+  log_index?: InputMaybe<Order_By>
+  metrics?: InputMaybe<Order_By>
+  raw_data?: InputMaybe<Order_By>
+  transaction_index?: InputMaybe<Order_By>
 }
 
 export type Metrics_Factory_Create_Min_Fields = {
@@ -1612,13 +1613,13 @@ export type Metrics_Factory_Create_Min_Fields = {
 }
 
 export type Metrics_Factory_Create_Min_Order_By = {
-  block_number?: Maybe<Order_By>
-  event_id?: Maybe<Order_By>
-  from_address?: Maybe<Order_By>
-  log_index?: Maybe<Order_By>
-  metrics?: Maybe<Order_By>
-  raw_data?: Maybe<Order_By>
-  transaction_index?: Maybe<Order_By>
+  block_number?: InputMaybe<Order_By>
+  event_id?: InputMaybe<Order_By>
+  from_address?: InputMaybe<Order_By>
+  log_index?: InputMaybe<Order_By>
+  metrics?: InputMaybe<Order_By>
+  raw_data?: InputMaybe<Order_By>
+  transaction_index?: InputMaybe<Order_By>
 }
 
 export type Metrics_Factory_Create_Mutation_Response = {
@@ -1629,25 +1630,25 @@ export type Metrics_Factory_Create_Mutation_Response = {
 
 export type Metrics_Factory_Create_Obj_Rel_Insert_Input = {
   data: Metrics_Factory_Create_Insert_Input
-  on_conflict?: Maybe<Metrics_Factory_Create_On_Conflict>
+  on_conflict?: InputMaybe<Metrics_Factory_Create_On_Conflict>
 }
 
 export type Metrics_Factory_Create_On_Conflict = {
   constraint: Metrics_Factory_Create_Constraint
   update_columns: Array<Metrics_Factory_Create_Update_Column>
-  where?: Maybe<Metrics_Factory_Create_Bool_Exp>
+  where?: InputMaybe<Metrics_Factory_Create_Bool_Exp>
 }
 
 export type Metrics_Factory_Create_Order_By = {
-  block_number?: Maybe<Order_By>
-  destroyed_metrics?: Maybe<Metrics_Factory_Destroy_Order_By>
-  event_id?: Maybe<Order_By>
-  from_address?: Maybe<Order_By>
-  log_index?: Maybe<Order_By>
-  market?: Maybe<Market_Factory_Create_Order_By>
-  metrics?: Maybe<Order_By>
-  raw_data?: Maybe<Order_By>
-  transaction_index?: Maybe<Order_By>
+  block_number?: InputMaybe<Order_By>
+  destroyed_metrics?: InputMaybe<Metrics_Factory_Destroy_Order_By>
+  event_id?: InputMaybe<Order_By>
+  from_address?: InputMaybe<Order_By>
+  log_index?: InputMaybe<Order_By>
+  market?: InputMaybe<Market_Factory_Create_Order_By>
+  metrics?: InputMaybe<Order_By>
+  raw_data?: InputMaybe<Order_By>
+  transaction_index?: InputMaybe<Order_By>
 }
 
 export type Metrics_Factory_Create_Pk_Columns_Input = {
@@ -1665,13 +1666,13 @@ export enum Metrics_Factory_Create_Select_Column {
 }
 
 export type Metrics_Factory_Create_Set_Input = {
-  block_number?: Maybe<Scalars['Int']>
-  event_id?: Maybe<Scalars['String']>
-  from_address?: Maybe<Scalars['String']>
-  log_index?: Maybe<Scalars['Int']>
-  metrics?: Maybe<Scalars['String']>
-  raw_data?: Maybe<Scalars['String']>
-  transaction_index?: Maybe<Scalars['Int']>
+  block_number?: InputMaybe<Scalars['Int']>
+  event_id?: InputMaybe<Scalars['String']>
+  from_address?: InputMaybe<Scalars['String']>
+  log_index?: InputMaybe<Scalars['Int']>
+  metrics?: InputMaybe<Scalars['String']>
+  raw_data?: InputMaybe<Scalars['String']>
+  transaction_index?: InputMaybe<Scalars['Int']>
 }
 
 export type Metrics_Factory_Create_Stddev_Fields = {
@@ -1682,9 +1683,9 @@ export type Metrics_Factory_Create_Stddev_Fields = {
 }
 
 export type Metrics_Factory_Create_Stddev_Order_By = {
-  block_number?: Maybe<Order_By>
-  log_index?: Maybe<Order_By>
-  transaction_index?: Maybe<Order_By>
+  block_number?: InputMaybe<Order_By>
+  log_index?: InputMaybe<Order_By>
+  transaction_index?: InputMaybe<Order_By>
 }
 
 export type Metrics_Factory_Create_Stddev_Pop_Fields = {
@@ -1695,9 +1696,9 @@ export type Metrics_Factory_Create_Stddev_Pop_Fields = {
 }
 
 export type Metrics_Factory_Create_Stddev_Pop_Order_By = {
-  block_number?: Maybe<Order_By>
-  log_index?: Maybe<Order_By>
-  transaction_index?: Maybe<Order_By>
+  block_number?: InputMaybe<Order_By>
+  log_index?: InputMaybe<Order_By>
+  transaction_index?: InputMaybe<Order_By>
 }
 
 export type Metrics_Factory_Create_Stddev_Samp_Fields = {
@@ -1708,9 +1709,9 @@ export type Metrics_Factory_Create_Stddev_Samp_Fields = {
 }
 
 export type Metrics_Factory_Create_Stddev_Samp_Order_By = {
-  block_number?: Maybe<Order_By>
-  log_index?: Maybe<Order_By>
-  transaction_index?: Maybe<Order_By>
+  block_number?: InputMaybe<Order_By>
+  log_index?: InputMaybe<Order_By>
+  transaction_index?: InputMaybe<Order_By>
 }
 
 export type Metrics_Factory_Create_Sum_Fields = {
@@ -1721,9 +1722,9 @@ export type Metrics_Factory_Create_Sum_Fields = {
 }
 
 export type Metrics_Factory_Create_Sum_Order_By = {
-  block_number?: Maybe<Order_By>
-  log_index?: Maybe<Order_By>
-  transaction_index?: Maybe<Order_By>
+  block_number?: InputMaybe<Order_By>
+  log_index?: InputMaybe<Order_By>
+  transaction_index?: InputMaybe<Order_By>
 }
 
 export enum Metrics_Factory_Create_Update_Column {
@@ -1744,9 +1745,9 @@ export type Metrics_Factory_Create_Var_Pop_Fields = {
 }
 
 export type Metrics_Factory_Create_Var_Pop_Order_By = {
-  block_number?: Maybe<Order_By>
-  log_index?: Maybe<Order_By>
-  transaction_index?: Maybe<Order_By>
+  block_number?: InputMaybe<Order_By>
+  log_index?: InputMaybe<Order_By>
+  transaction_index?: InputMaybe<Order_By>
 }
 
 export type Metrics_Factory_Create_Var_Samp_Fields = {
@@ -1757,9 +1758,9 @@ export type Metrics_Factory_Create_Var_Samp_Fields = {
 }
 
 export type Metrics_Factory_Create_Var_Samp_Order_By = {
-  block_number?: Maybe<Order_By>
-  log_index?: Maybe<Order_By>
-  transaction_index?: Maybe<Order_By>
+  block_number?: InputMaybe<Order_By>
+  log_index?: InputMaybe<Order_By>
+  transaction_index?: InputMaybe<Order_By>
 }
 
 export type Metrics_Factory_Create_Variance_Fields = {
@@ -1770,9 +1771,9 @@ export type Metrics_Factory_Create_Variance_Fields = {
 }
 
 export type Metrics_Factory_Create_Variance_Order_By = {
-  block_number?: Maybe<Order_By>
-  log_index?: Maybe<Order_By>
-  transaction_index?: Maybe<Order_By>
+  block_number?: InputMaybe<Order_By>
+  log_index?: InputMaybe<Order_By>
+  transaction_index?: InputMaybe<Order_By>
 }
 
 export type Metrics_Factory_Destroy = {
@@ -1810,27 +1811,27 @@ export type Metrics_Factory_Destroy_Aggregate_Fields = {
 }
 
 export type Metrics_Factory_Destroy_Aggregate_FieldsCountArgs = {
-  columns?: Maybe<Array<Metrics_Factory_Destroy_Select_Column>>
-  distinct?: Maybe<Scalars['Boolean']>
+  columns?: InputMaybe<Array<Metrics_Factory_Destroy_Select_Column>>
+  distinct?: InputMaybe<Scalars['Boolean']>
 }
 
 export type Metrics_Factory_Destroy_Aggregate_Order_By = {
-  avg?: Maybe<Metrics_Factory_Destroy_Avg_Order_By>
-  count?: Maybe<Order_By>
-  max?: Maybe<Metrics_Factory_Destroy_Max_Order_By>
-  min?: Maybe<Metrics_Factory_Destroy_Min_Order_By>
-  stddev?: Maybe<Metrics_Factory_Destroy_Stddev_Order_By>
-  stddev_pop?: Maybe<Metrics_Factory_Destroy_Stddev_Pop_Order_By>
-  stddev_samp?: Maybe<Metrics_Factory_Destroy_Stddev_Samp_Order_By>
-  sum?: Maybe<Metrics_Factory_Destroy_Sum_Order_By>
-  var_pop?: Maybe<Metrics_Factory_Destroy_Var_Pop_Order_By>
-  var_samp?: Maybe<Metrics_Factory_Destroy_Var_Samp_Order_By>
-  variance?: Maybe<Metrics_Factory_Destroy_Variance_Order_By>
+  avg?: InputMaybe<Metrics_Factory_Destroy_Avg_Order_By>
+  count?: InputMaybe<Order_By>
+  max?: InputMaybe<Metrics_Factory_Destroy_Max_Order_By>
+  min?: InputMaybe<Metrics_Factory_Destroy_Min_Order_By>
+  stddev?: InputMaybe<Metrics_Factory_Destroy_Stddev_Order_By>
+  stddev_pop?: InputMaybe<Metrics_Factory_Destroy_Stddev_Pop_Order_By>
+  stddev_samp?: InputMaybe<Metrics_Factory_Destroy_Stddev_Samp_Order_By>
+  sum?: InputMaybe<Metrics_Factory_Destroy_Sum_Order_By>
+  var_pop?: InputMaybe<Metrics_Factory_Destroy_Var_Pop_Order_By>
+  var_samp?: InputMaybe<Metrics_Factory_Destroy_Var_Samp_Order_By>
+  variance?: InputMaybe<Metrics_Factory_Destroy_Variance_Order_By>
 }
 
 export type Metrics_Factory_Destroy_Arr_Rel_Insert_Input = {
   data: Array<Metrics_Factory_Destroy_Insert_Input>
-  on_conflict?: Maybe<Metrics_Factory_Destroy_On_Conflict>
+  on_conflict?: InputMaybe<Metrics_Factory_Destroy_On_Conflict>
 }
 
 export type Metrics_Factory_Destroy_Avg_Fields = {
@@ -1841,24 +1842,24 @@ export type Metrics_Factory_Destroy_Avg_Fields = {
 }
 
 export type Metrics_Factory_Destroy_Avg_Order_By = {
-  block_number?: Maybe<Order_By>
-  log_index?: Maybe<Order_By>
-  transaction_index?: Maybe<Order_By>
+  block_number?: InputMaybe<Order_By>
+  log_index?: InputMaybe<Order_By>
+  transaction_index?: InputMaybe<Order_By>
 }
 
 export type Metrics_Factory_Destroy_Bool_Exp = {
-  _and?: Maybe<Array<Maybe<Metrics_Factory_Destroy_Bool_Exp>>>
-  _not?: Maybe<Metrics_Factory_Destroy_Bool_Exp>
-  _or?: Maybe<Array<Maybe<Metrics_Factory_Destroy_Bool_Exp>>>
-  block_number?: Maybe<Int_Comparison_Exp>
-  event_id?: Maybe<String_Comparison_Exp>
-  from_address?: Maybe<String_Comparison_Exp>
-  log_index?: Maybe<Int_Comparison_Exp>
-  market?: Maybe<Market_Factory_Create_Bool_Exp>
-  metrics?: Maybe<String_Comparison_Exp>
-  metrics_creation?: Maybe<Metrics_Factory_Create_Bool_Exp>
-  raw_data?: Maybe<String_Comparison_Exp>
-  transaction_index?: Maybe<Int_Comparison_Exp>
+  _and?: InputMaybe<Array<InputMaybe<Metrics_Factory_Destroy_Bool_Exp>>>
+  _not?: InputMaybe<Metrics_Factory_Destroy_Bool_Exp>
+  _or?: InputMaybe<Array<InputMaybe<Metrics_Factory_Destroy_Bool_Exp>>>
+  block_number?: InputMaybe<Int_Comparison_Exp>
+  event_id?: InputMaybe<String_Comparison_Exp>
+  from_address?: InputMaybe<String_Comparison_Exp>
+  log_index?: InputMaybe<Int_Comparison_Exp>
+  market?: InputMaybe<Market_Factory_Create_Bool_Exp>
+  metrics?: InputMaybe<String_Comparison_Exp>
+  metrics_creation?: InputMaybe<Metrics_Factory_Create_Bool_Exp>
+  raw_data?: InputMaybe<String_Comparison_Exp>
+  transaction_index?: InputMaybe<Int_Comparison_Exp>
 }
 
 export enum Metrics_Factory_Destroy_Constraint {
@@ -1866,21 +1867,21 @@ export enum Metrics_Factory_Destroy_Constraint {
 }
 
 export type Metrics_Factory_Destroy_Inc_Input = {
-  block_number?: Maybe<Scalars['Int']>
-  log_index?: Maybe<Scalars['Int']>
-  transaction_index?: Maybe<Scalars['Int']>
+  block_number?: InputMaybe<Scalars['Int']>
+  log_index?: InputMaybe<Scalars['Int']>
+  transaction_index?: InputMaybe<Scalars['Int']>
 }
 
 export type Metrics_Factory_Destroy_Insert_Input = {
-  block_number?: Maybe<Scalars['Int']>
-  event_id?: Maybe<Scalars['String']>
-  from_address?: Maybe<Scalars['String']>
-  log_index?: Maybe<Scalars['Int']>
-  market?: Maybe<Market_Factory_Create_Obj_Rel_Insert_Input>
-  metrics?: Maybe<Scalars['String']>
-  metrics_creation?: Maybe<Metrics_Factory_Create_Obj_Rel_Insert_Input>
-  raw_data?: Maybe<Scalars['String']>
-  transaction_index?: Maybe<Scalars['Int']>
+  block_number?: InputMaybe<Scalars['Int']>
+  event_id?: InputMaybe<Scalars['String']>
+  from_address?: InputMaybe<Scalars['String']>
+  log_index?: InputMaybe<Scalars['Int']>
+  market?: InputMaybe<Market_Factory_Create_Obj_Rel_Insert_Input>
+  metrics?: InputMaybe<Scalars['String']>
+  metrics_creation?: InputMaybe<Metrics_Factory_Create_Obj_Rel_Insert_Input>
+  raw_data?: InputMaybe<Scalars['String']>
+  transaction_index?: InputMaybe<Scalars['Int']>
 }
 
 export type Metrics_Factory_Destroy_Max_Fields = {
@@ -1895,13 +1896,13 @@ export type Metrics_Factory_Destroy_Max_Fields = {
 }
 
 export type Metrics_Factory_Destroy_Max_Order_By = {
-  block_number?: Maybe<Order_By>
-  event_id?: Maybe<Order_By>
-  from_address?: Maybe<Order_By>
-  log_index?: Maybe<Order_By>
-  metrics?: Maybe<Order_By>
-  raw_data?: Maybe<Order_By>
-  transaction_index?: Maybe<Order_By>
+  block_number?: InputMaybe<Order_By>
+  event_id?: InputMaybe<Order_By>
+  from_address?: InputMaybe<Order_By>
+  log_index?: InputMaybe<Order_By>
+  metrics?: InputMaybe<Order_By>
+  raw_data?: InputMaybe<Order_By>
+  transaction_index?: InputMaybe<Order_By>
 }
 
 export type Metrics_Factory_Destroy_Min_Fields = {
@@ -1916,13 +1917,13 @@ export type Metrics_Factory_Destroy_Min_Fields = {
 }
 
 export type Metrics_Factory_Destroy_Min_Order_By = {
-  block_number?: Maybe<Order_By>
-  event_id?: Maybe<Order_By>
-  from_address?: Maybe<Order_By>
-  log_index?: Maybe<Order_By>
-  metrics?: Maybe<Order_By>
-  raw_data?: Maybe<Order_By>
-  transaction_index?: Maybe<Order_By>
+  block_number?: InputMaybe<Order_By>
+  event_id?: InputMaybe<Order_By>
+  from_address?: InputMaybe<Order_By>
+  log_index?: InputMaybe<Order_By>
+  metrics?: InputMaybe<Order_By>
+  raw_data?: InputMaybe<Order_By>
+  transaction_index?: InputMaybe<Order_By>
 }
 
 export type Metrics_Factory_Destroy_Mutation_Response = {
@@ -1933,25 +1934,25 @@ export type Metrics_Factory_Destroy_Mutation_Response = {
 
 export type Metrics_Factory_Destroy_Obj_Rel_Insert_Input = {
   data: Metrics_Factory_Destroy_Insert_Input
-  on_conflict?: Maybe<Metrics_Factory_Destroy_On_Conflict>
+  on_conflict?: InputMaybe<Metrics_Factory_Destroy_On_Conflict>
 }
 
 export type Metrics_Factory_Destroy_On_Conflict = {
   constraint: Metrics_Factory_Destroy_Constraint
   update_columns: Array<Metrics_Factory_Destroy_Update_Column>
-  where?: Maybe<Metrics_Factory_Destroy_Bool_Exp>
+  where?: InputMaybe<Metrics_Factory_Destroy_Bool_Exp>
 }
 
 export type Metrics_Factory_Destroy_Order_By = {
-  block_number?: Maybe<Order_By>
-  event_id?: Maybe<Order_By>
-  from_address?: Maybe<Order_By>
-  log_index?: Maybe<Order_By>
-  market?: Maybe<Market_Factory_Create_Order_By>
-  metrics?: Maybe<Order_By>
-  metrics_creation?: Maybe<Metrics_Factory_Create_Order_By>
-  raw_data?: Maybe<Order_By>
-  transaction_index?: Maybe<Order_By>
+  block_number?: InputMaybe<Order_By>
+  event_id?: InputMaybe<Order_By>
+  from_address?: InputMaybe<Order_By>
+  log_index?: InputMaybe<Order_By>
+  market?: InputMaybe<Market_Factory_Create_Order_By>
+  metrics?: InputMaybe<Order_By>
+  metrics_creation?: InputMaybe<Metrics_Factory_Create_Order_By>
+  raw_data?: InputMaybe<Order_By>
+  transaction_index?: InputMaybe<Order_By>
 }
 
 export type Metrics_Factory_Destroy_Pk_Columns_Input = {
@@ -1969,13 +1970,13 @@ export enum Metrics_Factory_Destroy_Select_Column {
 }
 
 export type Metrics_Factory_Destroy_Set_Input = {
-  block_number?: Maybe<Scalars['Int']>
-  event_id?: Maybe<Scalars['String']>
-  from_address?: Maybe<Scalars['String']>
-  log_index?: Maybe<Scalars['Int']>
-  metrics?: Maybe<Scalars['String']>
-  raw_data?: Maybe<Scalars['String']>
-  transaction_index?: Maybe<Scalars['Int']>
+  block_number?: InputMaybe<Scalars['Int']>
+  event_id?: InputMaybe<Scalars['String']>
+  from_address?: InputMaybe<Scalars['String']>
+  log_index?: InputMaybe<Scalars['Int']>
+  metrics?: InputMaybe<Scalars['String']>
+  raw_data?: InputMaybe<Scalars['String']>
+  transaction_index?: InputMaybe<Scalars['Int']>
 }
 
 export type Metrics_Factory_Destroy_Stddev_Fields = {
@@ -1986,9 +1987,9 @@ export type Metrics_Factory_Destroy_Stddev_Fields = {
 }
 
 export type Metrics_Factory_Destroy_Stddev_Order_By = {
-  block_number?: Maybe<Order_By>
-  log_index?: Maybe<Order_By>
-  transaction_index?: Maybe<Order_By>
+  block_number?: InputMaybe<Order_By>
+  log_index?: InputMaybe<Order_By>
+  transaction_index?: InputMaybe<Order_By>
 }
 
 export type Metrics_Factory_Destroy_Stddev_Pop_Fields = {
@@ -1999,9 +2000,9 @@ export type Metrics_Factory_Destroy_Stddev_Pop_Fields = {
 }
 
 export type Metrics_Factory_Destroy_Stddev_Pop_Order_By = {
-  block_number?: Maybe<Order_By>
-  log_index?: Maybe<Order_By>
-  transaction_index?: Maybe<Order_By>
+  block_number?: InputMaybe<Order_By>
+  log_index?: InputMaybe<Order_By>
+  transaction_index?: InputMaybe<Order_By>
 }
 
 export type Metrics_Factory_Destroy_Stddev_Samp_Fields = {
@@ -2012,9 +2013,9 @@ export type Metrics_Factory_Destroy_Stddev_Samp_Fields = {
 }
 
 export type Metrics_Factory_Destroy_Stddev_Samp_Order_By = {
-  block_number?: Maybe<Order_By>
-  log_index?: Maybe<Order_By>
-  transaction_index?: Maybe<Order_By>
+  block_number?: InputMaybe<Order_By>
+  log_index?: InputMaybe<Order_By>
+  transaction_index?: InputMaybe<Order_By>
 }
 
 export type Metrics_Factory_Destroy_Sum_Fields = {
@@ -2025,9 +2026,9 @@ export type Metrics_Factory_Destroy_Sum_Fields = {
 }
 
 export type Metrics_Factory_Destroy_Sum_Order_By = {
-  block_number?: Maybe<Order_By>
-  log_index?: Maybe<Order_By>
-  transaction_index?: Maybe<Order_By>
+  block_number?: InputMaybe<Order_By>
+  log_index?: InputMaybe<Order_By>
+  transaction_index?: InputMaybe<Order_By>
 }
 
 export enum Metrics_Factory_Destroy_Update_Column {
@@ -2048,9 +2049,9 @@ export type Metrics_Factory_Destroy_Var_Pop_Fields = {
 }
 
 export type Metrics_Factory_Destroy_Var_Pop_Order_By = {
-  block_number?: Maybe<Order_By>
-  log_index?: Maybe<Order_By>
-  transaction_index?: Maybe<Order_By>
+  block_number?: InputMaybe<Order_By>
+  log_index?: InputMaybe<Order_By>
+  transaction_index?: InputMaybe<Order_By>
 }
 
 export type Metrics_Factory_Destroy_Var_Samp_Fields = {
@@ -2061,9 +2062,9 @@ export type Metrics_Factory_Destroy_Var_Samp_Fields = {
 }
 
 export type Metrics_Factory_Destroy_Var_Samp_Order_By = {
-  block_number?: Maybe<Order_By>
-  log_index?: Maybe<Order_By>
-  transaction_index?: Maybe<Order_By>
+  block_number?: InputMaybe<Order_By>
+  log_index?: InputMaybe<Order_By>
+  transaction_index?: InputMaybe<Order_By>
 }
 
 export type Metrics_Factory_Destroy_Variance_Fields = {
@@ -2074,9 +2075,9 @@ export type Metrics_Factory_Destroy_Variance_Fields = {
 }
 
 export type Metrics_Factory_Destroy_Variance_Order_By = {
-  block_number?: Maybe<Order_By>
-  log_index?: Maybe<Order_By>
-  transaction_index?: Maybe<Order_By>
+  block_number?: InputMaybe<Order_By>
+  log_index?: InputMaybe<Order_By>
+  transaction_index?: InputMaybe<Order_By>
 }
 
 export type Mutation_Root = {
@@ -2287,322 +2288,322 @@ export type Mutation_RootDelete_Withdraw_Property_Transfer_By_PkArgs = {
 
 export type Mutation_RootInsert_Account_LockupArgs = {
   objects: Array<Account_Lockup_Insert_Input>
-  on_conflict?: Maybe<Account_Lockup_On_Conflict>
+  on_conflict?: InputMaybe<Account_Lockup_On_Conflict>
 }
 
 export type Mutation_RootInsert_Account_Lockup_OneArgs = {
   object: Account_Lockup_Insert_Input
-  on_conflict?: Maybe<Account_Lockup_On_Conflict>
+  on_conflict?: InputMaybe<Account_Lockup_On_Conflict>
 }
 
 export type Mutation_RootInsert_Dev_Property_TransferArgs = {
   objects: Array<Dev_Property_Transfer_Insert_Input>
-  on_conflict?: Maybe<Dev_Property_Transfer_On_Conflict>
+  on_conflict?: InputMaybe<Dev_Property_Transfer_On_Conflict>
 }
 
 export type Mutation_RootInsert_Dev_Property_Transfer_OneArgs = {
   object: Dev_Property_Transfer_Insert_Input
-  on_conflict?: Maybe<Dev_Property_Transfer_On_Conflict>
+  on_conflict?: InputMaybe<Dev_Property_Transfer_On_Conflict>
 }
 
 export type Mutation_RootInsert_Lockup_LockedupArgs = {
   objects: Array<Lockup_Lockedup_Insert_Input>
-  on_conflict?: Maybe<Lockup_Lockedup_On_Conflict>
+  on_conflict?: InputMaybe<Lockup_Lockedup_On_Conflict>
 }
 
 export type Mutation_RootInsert_Lockup_Lockedup_OneArgs = {
   object: Lockup_Lockedup_Insert_Input
-  on_conflict?: Maybe<Lockup_Lockedup_On_Conflict>
+  on_conflict?: InputMaybe<Lockup_Lockedup_On_Conflict>
 }
 
 export type Mutation_RootInsert_Market_Factory_CreateArgs = {
   objects: Array<Market_Factory_Create_Insert_Input>
-  on_conflict?: Maybe<Market_Factory_Create_On_Conflict>
+  on_conflict?: InputMaybe<Market_Factory_Create_On_Conflict>
 }
 
 export type Mutation_RootInsert_Market_Factory_Create_OneArgs = {
   object: Market_Factory_Create_Insert_Input
-  on_conflict?: Maybe<Market_Factory_Create_On_Conflict>
+  on_conflict?: InputMaybe<Market_Factory_Create_On_Conflict>
 }
 
 export type Mutation_RootInsert_Metrics_Factory_CreateArgs = {
   objects: Array<Metrics_Factory_Create_Insert_Input>
-  on_conflict?: Maybe<Metrics_Factory_Create_On_Conflict>
+  on_conflict?: InputMaybe<Metrics_Factory_Create_On_Conflict>
 }
 
 export type Mutation_RootInsert_Metrics_Factory_Create_OneArgs = {
   object: Metrics_Factory_Create_Insert_Input
-  on_conflict?: Maybe<Metrics_Factory_Create_On_Conflict>
+  on_conflict?: InputMaybe<Metrics_Factory_Create_On_Conflict>
 }
 
 export type Mutation_RootInsert_Metrics_Factory_DestroyArgs = {
   objects: Array<Metrics_Factory_Destroy_Insert_Input>
-  on_conflict?: Maybe<Metrics_Factory_Destroy_On_Conflict>
+  on_conflict?: InputMaybe<Metrics_Factory_Destroy_On_Conflict>
 }
 
 export type Mutation_RootInsert_Metrics_Factory_Destroy_OneArgs = {
   object: Metrics_Factory_Destroy_Insert_Input
-  on_conflict?: Maybe<Metrics_Factory_Destroy_On_Conflict>
+  on_conflict?: InputMaybe<Metrics_Factory_Destroy_On_Conflict>
 }
 
 export type Mutation_RootInsert_Policy_Factory_CreateArgs = {
   objects: Array<Policy_Factory_Create_Insert_Input>
-  on_conflict?: Maybe<Policy_Factory_Create_On_Conflict>
+  on_conflict?: InputMaybe<Policy_Factory_Create_On_Conflict>
 }
 
 export type Mutation_RootInsert_Policy_Factory_Create_OneArgs = {
   object: Policy_Factory_Create_Insert_Input
-  on_conflict?: Maybe<Policy_Factory_Create_On_Conflict>
+  on_conflict?: InputMaybe<Policy_Factory_Create_On_Conflict>
 }
 
 export type Mutation_RootInsert_Property_AuthenticationArgs = {
   objects: Array<Property_Authentication_Insert_Input>
-  on_conflict?: Maybe<Property_Authentication_On_Conflict>
+  on_conflict?: InputMaybe<Property_Authentication_On_Conflict>
 }
 
 export type Mutation_RootInsert_Property_Authentication_DeletedArgs = {
   objects: Array<Property_Authentication_Deleted_Insert_Input>
-  on_conflict?: Maybe<Property_Authentication_Deleted_On_Conflict>
+  on_conflict?: InputMaybe<Property_Authentication_Deleted_On_Conflict>
 }
 
 export type Mutation_RootInsert_Property_Authentication_Deleted_OneArgs = {
   object: Property_Authentication_Deleted_Insert_Input
-  on_conflict?: Maybe<Property_Authentication_Deleted_On_Conflict>
+  on_conflict?: InputMaybe<Property_Authentication_Deleted_On_Conflict>
 }
 
 export type Mutation_RootInsert_Property_Authentication_OneArgs = {
   object: Property_Authentication_Insert_Input
-  on_conflict?: Maybe<Property_Authentication_On_Conflict>
+  on_conflict?: InputMaybe<Property_Authentication_On_Conflict>
 }
 
 export type Mutation_RootInsert_Property_BalanceArgs = {
   objects: Array<Property_Balance_Insert_Input>
-  on_conflict?: Maybe<Property_Balance_On_Conflict>
+  on_conflict?: InputMaybe<Property_Balance_On_Conflict>
 }
 
 export type Mutation_RootInsert_Property_Balance_OneArgs = {
   object: Property_Balance_Insert_Input
-  on_conflict?: Maybe<Property_Balance_On_Conflict>
+  on_conflict?: InputMaybe<Property_Balance_On_Conflict>
 }
 
 export type Mutation_RootInsert_Property_Factory_CreateArgs = {
   objects: Array<Property_Factory_Create_Insert_Input>
-  on_conflict?: Maybe<Property_Factory_Create_On_Conflict>
+  on_conflict?: InputMaybe<Property_Factory_Create_On_Conflict>
 }
 
 export type Mutation_RootInsert_Property_Factory_Create_OneArgs = {
   object: Property_Factory_Create_Insert_Input
-  on_conflict?: Maybe<Property_Factory_Create_On_Conflict>
+  on_conflict?: InputMaybe<Property_Factory_Create_On_Conflict>
 }
 
 export type Mutation_RootInsert_Property_LockupArgs = {
   objects: Array<Property_Lockup_Insert_Input>
-  on_conflict?: Maybe<Property_Lockup_On_Conflict>
+  on_conflict?: InputMaybe<Property_Lockup_On_Conflict>
 }
 
 export type Mutation_RootInsert_Property_Lockup_OneArgs = {
   object: Property_Lockup_Insert_Input
-  on_conflict?: Maybe<Property_Lockup_On_Conflict>
+  on_conflict?: InputMaybe<Property_Lockup_On_Conflict>
 }
 
 export type Mutation_RootInsert_Property_MetaArgs = {
   objects: Array<Property_Meta_Insert_Input>
-  on_conflict?: Maybe<Property_Meta_On_Conflict>
+  on_conflict?: InputMaybe<Property_Meta_On_Conflict>
 }
 
 export type Mutation_RootInsert_Property_Meta_OneArgs = {
   object: Property_Meta_Insert_Input
-  on_conflict?: Maybe<Property_Meta_On_Conflict>
+  on_conflict?: InputMaybe<Property_Meta_On_Conflict>
 }
 
 export type Mutation_RootInsert_Withdraw_Property_TransferArgs = {
   objects: Array<Withdraw_Property_Transfer_Insert_Input>
-  on_conflict?: Maybe<Withdraw_Property_Transfer_On_Conflict>
+  on_conflict?: InputMaybe<Withdraw_Property_Transfer_On_Conflict>
 }
 
 export type Mutation_RootInsert_Withdraw_Property_Transfer_OneArgs = {
   object: Withdraw_Property_Transfer_Insert_Input
-  on_conflict?: Maybe<Withdraw_Property_Transfer_On_Conflict>
+  on_conflict?: InputMaybe<Withdraw_Property_Transfer_On_Conflict>
 }
 
 export type Mutation_RootUpdate_Account_LockupArgs = {
-  _inc?: Maybe<Account_Lockup_Inc_Input>
-  _set?: Maybe<Account_Lockup_Set_Input>
+  _inc?: InputMaybe<Account_Lockup_Inc_Input>
+  _set?: InputMaybe<Account_Lockup_Set_Input>
   where: Account_Lockup_Bool_Exp
 }
 
 export type Mutation_RootUpdate_Account_Lockup_By_PkArgs = {
-  _inc?: Maybe<Account_Lockup_Inc_Input>
-  _set?: Maybe<Account_Lockup_Set_Input>
+  _inc?: InputMaybe<Account_Lockup_Inc_Input>
+  _set?: InputMaybe<Account_Lockup_Set_Input>
   pk_columns: Account_Lockup_Pk_Columns_Input
 }
 
 export type Mutation_RootUpdate_Dev_Property_TransferArgs = {
-  _inc?: Maybe<Dev_Property_Transfer_Inc_Input>
-  _set?: Maybe<Dev_Property_Transfer_Set_Input>
+  _inc?: InputMaybe<Dev_Property_Transfer_Inc_Input>
+  _set?: InputMaybe<Dev_Property_Transfer_Set_Input>
   where: Dev_Property_Transfer_Bool_Exp
 }
 
 export type Mutation_RootUpdate_Dev_Property_Transfer_By_PkArgs = {
-  _inc?: Maybe<Dev_Property_Transfer_Inc_Input>
-  _set?: Maybe<Dev_Property_Transfer_Set_Input>
+  _inc?: InputMaybe<Dev_Property_Transfer_Inc_Input>
+  _set?: InputMaybe<Dev_Property_Transfer_Set_Input>
   pk_columns: Dev_Property_Transfer_Pk_Columns_Input
 }
 
 export type Mutation_RootUpdate_Lockup_LockedupArgs = {
-  _inc?: Maybe<Lockup_Lockedup_Inc_Input>
-  _set?: Maybe<Lockup_Lockedup_Set_Input>
+  _inc?: InputMaybe<Lockup_Lockedup_Inc_Input>
+  _set?: InputMaybe<Lockup_Lockedup_Set_Input>
   where: Lockup_Lockedup_Bool_Exp
 }
 
 export type Mutation_RootUpdate_Lockup_Lockedup_By_PkArgs = {
-  _inc?: Maybe<Lockup_Lockedup_Inc_Input>
-  _set?: Maybe<Lockup_Lockedup_Set_Input>
+  _inc?: InputMaybe<Lockup_Lockedup_Inc_Input>
+  _set?: InputMaybe<Lockup_Lockedup_Set_Input>
   pk_columns: Lockup_Lockedup_Pk_Columns_Input
 }
 
 export type Mutation_RootUpdate_Market_Factory_CreateArgs = {
-  _inc?: Maybe<Market_Factory_Create_Inc_Input>
-  _set?: Maybe<Market_Factory_Create_Set_Input>
+  _inc?: InputMaybe<Market_Factory_Create_Inc_Input>
+  _set?: InputMaybe<Market_Factory_Create_Set_Input>
   where: Market_Factory_Create_Bool_Exp
 }
 
 export type Mutation_RootUpdate_Market_Factory_Create_By_PkArgs = {
-  _inc?: Maybe<Market_Factory_Create_Inc_Input>
-  _set?: Maybe<Market_Factory_Create_Set_Input>
+  _inc?: InputMaybe<Market_Factory_Create_Inc_Input>
+  _set?: InputMaybe<Market_Factory_Create_Set_Input>
   pk_columns: Market_Factory_Create_Pk_Columns_Input
 }
 
 export type Mutation_RootUpdate_Metrics_Factory_CreateArgs = {
-  _inc?: Maybe<Metrics_Factory_Create_Inc_Input>
-  _set?: Maybe<Metrics_Factory_Create_Set_Input>
+  _inc?: InputMaybe<Metrics_Factory_Create_Inc_Input>
+  _set?: InputMaybe<Metrics_Factory_Create_Set_Input>
   where: Metrics_Factory_Create_Bool_Exp
 }
 
 export type Mutation_RootUpdate_Metrics_Factory_Create_By_PkArgs = {
-  _inc?: Maybe<Metrics_Factory_Create_Inc_Input>
-  _set?: Maybe<Metrics_Factory_Create_Set_Input>
+  _inc?: InputMaybe<Metrics_Factory_Create_Inc_Input>
+  _set?: InputMaybe<Metrics_Factory_Create_Set_Input>
   pk_columns: Metrics_Factory_Create_Pk_Columns_Input
 }
 
 export type Mutation_RootUpdate_Metrics_Factory_DestroyArgs = {
-  _inc?: Maybe<Metrics_Factory_Destroy_Inc_Input>
-  _set?: Maybe<Metrics_Factory_Destroy_Set_Input>
+  _inc?: InputMaybe<Metrics_Factory_Destroy_Inc_Input>
+  _set?: InputMaybe<Metrics_Factory_Destroy_Set_Input>
   where: Metrics_Factory_Destroy_Bool_Exp
 }
 
 export type Mutation_RootUpdate_Metrics_Factory_Destroy_By_PkArgs = {
-  _inc?: Maybe<Metrics_Factory_Destroy_Inc_Input>
-  _set?: Maybe<Metrics_Factory_Destroy_Set_Input>
+  _inc?: InputMaybe<Metrics_Factory_Destroy_Inc_Input>
+  _set?: InputMaybe<Metrics_Factory_Destroy_Set_Input>
   pk_columns: Metrics_Factory_Destroy_Pk_Columns_Input
 }
 
 export type Mutation_RootUpdate_Policy_Factory_CreateArgs = {
-  _inc?: Maybe<Policy_Factory_Create_Inc_Input>
-  _set?: Maybe<Policy_Factory_Create_Set_Input>
+  _inc?: InputMaybe<Policy_Factory_Create_Inc_Input>
+  _set?: InputMaybe<Policy_Factory_Create_Set_Input>
   where: Policy_Factory_Create_Bool_Exp
 }
 
 export type Mutation_RootUpdate_Policy_Factory_Create_By_PkArgs = {
-  _inc?: Maybe<Policy_Factory_Create_Inc_Input>
-  _set?: Maybe<Policy_Factory_Create_Set_Input>
+  _inc?: InputMaybe<Policy_Factory_Create_Inc_Input>
+  _set?: InputMaybe<Policy_Factory_Create_Set_Input>
   pk_columns: Policy_Factory_Create_Pk_Columns_Input
 }
 
 export type Mutation_RootUpdate_Property_AuthenticationArgs = {
-  _inc?: Maybe<Property_Authentication_Inc_Input>
-  _set?: Maybe<Property_Authentication_Set_Input>
+  _inc?: InputMaybe<Property_Authentication_Inc_Input>
+  _set?: InputMaybe<Property_Authentication_Set_Input>
   where: Property_Authentication_Bool_Exp
 }
 
 export type Mutation_RootUpdate_Property_Authentication_By_PkArgs = {
-  _inc?: Maybe<Property_Authentication_Inc_Input>
-  _set?: Maybe<Property_Authentication_Set_Input>
+  _inc?: InputMaybe<Property_Authentication_Inc_Input>
+  _set?: InputMaybe<Property_Authentication_Set_Input>
   pk_columns: Property_Authentication_Pk_Columns_Input
 }
 
 export type Mutation_RootUpdate_Property_Authentication_DeletedArgs = {
-  _inc?: Maybe<Property_Authentication_Deleted_Inc_Input>
-  _set?: Maybe<Property_Authentication_Deleted_Set_Input>
+  _inc?: InputMaybe<Property_Authentication_Deleted_Inc_Input>
+  _set?: InputMaybe<Property_Authentication_Deleted_Set_Input>
   where: Property_Authentication_Deleted_Bool_Exp
 }
 
 export type Mutation_RootUpdate_Property_Authentication_Deleted_By_PkArgs = {
-  _inc?: Maybe<Property_Authentication_Deleted_Inc_Input>
-  _set?: Maybe<Property_Authentication_Deleted_Set_Input>
+  _inc?: InputMaybe<Property_Authentication_Deleted_Inc_Input>
+  _set?: InputMaybe<Property_Authentication_Deleted_Set_Input>
   pk_columns: Property_Authentication_Deleted_Pk_Columns_Input
 }
 
 export type Mutation_RootUpdate_Property_BalanceArgs = {
-  _inc?: Maybe<Property_Balance_Inc_Input>
-  _set?: Maybe<Property_Balance_Set_Input>
+  _inc?: InputMaybe<Property_Balance_Inc_Input>
+  _set?: InputMaybe<Property_Balance_Set_Input>
   where: Property_Balance_Bool_Exp
 }
 
 export type Mutation_RootUpdate_Property_Balance_By_PkArgs = {
-  _inc?: Maybe<Property_Balance_Inc_Input>
-  _set?: Maybe<Property_Balance_Set_Input>
+  _inc?: InputMaybe<Property_Balance_Inc_Input>
+  _set?: InputMaybe<Property_Balance_Set_Input>
   pk_columns: Property_Balance_Pk_Columns_Input
 }
 
 export type Mutation_RootUpdate_Property_Factory_CreateArgs = {
-  _inc?: Maybe<Property_Factory_Create_Inc_Input>
-  _set?: Maybe<Property_Factory_Create_Set_Input>
+  _inc?: InputMaybe<Property_Factory_Create_Inc_Input>
+  _set?: InputMaybe<Property_Factory_Create_Set_Input>
   where: Property_Factory_Create_Bool_Exp
 }
 
 export type Mutation_RootUpdate_Property_Factory_Create_By_PkArgs = {
-  _inc?: Maybe<Property_Factory_Create_Inc_Input>
-  _set?: Maybe<Property_Factory_Create_Set_Input>
+  _inc?: InputMaybe<Property_Factory_Create_Inc_Input>
+  _set?: InputMaybe<Property_Factory_Create_Set_Input>
   pk_columns: Property_Factory_Create_Pk_Columns_Input
 }
 
 export type Mutation_RootUpdate_Property_LockupArgs = {
-  _inc?: Maybe<Property_Lockup_Inc_Input>
-  _set?: Maybe<Property_Lockup_Set_Input>
+  _inc?: InputMaybe<Property_Lockup_Inc_Input>
+  _set?: InputMaybe<Property_Lockup_Set_Input>
   where: Property_Lockup_Bool_Exp
 }
 
 export type Mutation_RootUpdate_Property_Lockup_By_PkArgs = {
-  _inc?: Maybe<Property_Lockup_Inc_Input>
-  _set?: Maybe<Property_Lockup_Set_Input>
+  _inc?: InputMaybe<Property_Lockup_Inc_Input>
+  _set?: InputMaybe<Property_Lockup_Set_Input>
   pk_columns: Property_Lockup_Pk_Columns_Input
 }
 
 export type Mutation_RootUpdate_Property_MetaArgs = {
-  _inc?: Maybe<Property_Meta_Inc_Input>
-  _set?: Maybe<Property_Meta_Set_Input>
+  _inc?: InputMaybe<Property_Meta_Inc_Input>
+  _set?: InputMaybe<Property_Meta_Set_Input>
   where: Property_Meta_Bool_Exp
 }
 
 export type Mutation_RootUpdate_Property_Meta_By_PkArgs = {
-  _inc?: Maybe<Property_Meta_Inc_Input>
-  _set?: Maybe<Property_Meta_Set_Input>
+  _inc?: InputMaybe<Property_Meta_Inc_Input>
+  _set?: InputMaybe<Property_Meta_Set_Input>
   pk_columns: Property_Meta_Pk_Columns_Input
 }
 
 export type Mutation_RootUpdate_Withdraw_Property_TransferArgs = {
-  _inc?: Maybe<Withdraw_Property_Transfer_Inc_Input>
-  _set?: Maybe<Withdraw_Property_Transfer_Set_Input>
+  _inc?: InputMaybe<Withdraw_Property_Transfer_Inc_Input>
+  _set?: InputMaybe<Withdraw_Property_Transfer_Set_Input>
   where: Withdraw_Property_Transfer_Bool_Exp
 }
 
 export type Mutation_RootUpdate_Withdraw_Property_Transfer_By_PkArgs = {
-  _inc?: Maybe<Withdraw_Property_Transfer_Inc_Input>
-  _set?: Maybe<Withdraw_Property_Transfer_Set_Input>
+  _inc?: InputMaybe<Withdraw_Property_Transfer_Inc_Input>
+  _set?: InputMaybe<Withdraw_Property_Transfer_Set_Input>
   pk_columns: Withdraw_Property_Transfer_Pk_Columns_Input
 }
 
 export type Numeric_Comparison_Exp = {
-  _eq?: Maybe<Scalars['numeric']>
-  _gt?: Maybe<Scalars['numeric']>
-  _gte?: Maybe<Scalars['numeric']>
-  _in?: Maybe<Array<Scalars['numeric']>>
-  _is_null?: Maybe<Scalars['Boolean']>
-  _lt?: Maybe<Scalars['numeric']>
-  _lte?: Maybe<Scalars['numeric']>
-  _neq?: Maybe<Scalars['numeric']>
-  _nin?: Maybe<Array<Scalars['numeric']>>
+  _eq?: InputMaybe<Scalars['numeric']>
+  _gt?: InputMaybe<Scalars['numeric']>
+  _gte?: InputMaybe<Scalars['numeric']>
+  _in?: InputMaybe<Array<Scalars['numeric']>>
+  _is_null?: InputMaybe<Scalars['Boolean']>
+  _lt?: InputMaybe<Scalars['numeric']>
+  _lte?: InputMaybe<Scalars['numeric']>
+  _neq?: InputMaybe<Scalars['numeric']>
+  _nin?: InputMaybe<Array<Scalars['numeric']>>
 }
 
 export enum Order_By {
@@ -2647,27 +2648,27 @@ export type Policy_Factory_Create_Aggregate_Fields = {
 }
 
 export type Policy_Factory_Create_Aggregate_FieldsCountArgs = {
-  columns?: Maybe<Array<Policy_Factory_Create_Select_Column>>
-  distinct?: Maybe<Scalars['Boolean']>
+  columns?: InputMaybe<Array<Policy_Factory_Create_Select_Column>>
+  distinct?: InputMaybe<Scalars['Boolean']>
 }
 
 export type Policy_Factory_Create_Aggregate_Order_By = {
-  avg?: Maybe<Policy_Factory_Create_Avg_Order_By>
-  count?: Maybe<Order_By>
-  max?: Maybe<Policy_Factory_Create_Max_Order_By>
-  min?: Maybe<Policy_Factory_Create_Min_Order_By>
-  stddev?: Maybe<Policy_Factory_Create_Stddev_Order_By>
-  stddev_pop?: Maybe<Policy_Factory_Create_Stddev_Pop_Order_By>
-  stddev_samp?: Maybe<Policy_Factory_Create_Stddev_Samp_Order_By>
-  sum?: Maybe<Policy_Factory_Create_Sum_Order_By>
-  var_pop?: Maybe<Policy_Factory_Create_Var_Pop_Order_By>
-  var_samp?: Maybe<Policy_Factory_Create_Var_Samp_Order_By>
-  variance?: Maybe<Policy_Factory_Create_Variance_Order_By>
+  avg?: InputMaybe<Policy_Factory_Create_Avg_Order_By>
+  count?: InputMaybe<Order_By>
+  max?: InputMaybe<Policy_Factory_Create_Max_Order_By>
+  min?: InputMaybe<Policy_Factory_Create_Min_Order_By>
+  stddev?: InputMaybe<Policy_Factory_Create_Stddev_Order_By>
+  stddev_pop?: InputMaybe<Policy_Factory_Create_Stddev_Pop_Order_By>
+  stddev_samp?: InputMaybe<Policy_Factory_Create_Stddev_Samp_Order_By>
+  sum?: InputMaybe<Policy_Factory_Create_Sum_Order_By>
+  var_pop?: InputMaybe<Policy_Factory_Create_Var_Pop_Order_By>
+  var_samp?: InputMaybe<Policy_Factory_Create_Var_Samp_Order_By>
+  variance?: InputMaybe<Policy_Factory_Create_Variance_Order_By>
 }
 
 export type Policy_Factory_Create_Arr_Rel_Insert_Input = {
   data: Array<Policy_Factory_Create_Insert_Input>
-  on_conflict?: Maybe<Policy_Factory_Create_On_Conflict>
+  on_conflict?: InputMaybe<Policy_Factory_Create_On_Conflict>
 }
 
 export type Policy_Factory_Create_Avg_Fields = {
@@ -2678,22 +2679,22 @@ export type Policy_Factory_Create_Avg_Fields = {
 }
 
 export type Policy_Factory_Create_Avg_Order_By = {
-  block_number?: Maybe<Order_By>
-  log_index?: Maybe<Order_By>
-  transaction_index?: Maybe<Order_By>
+  block_number?: InputMaybe<Order_By>
+  log_index?: InputMaybe<Order_By>
+  transaction_index?: InputMaybe<Order_By>
 }
 
 export type Policy_Factory_Create_Bool_Exp = {
-  _and?: Maybe<Array<Maybe<Policy_Factory_Create_Bool_Exp>>>
-  _not?: Maybe<Policy_Factory_Create_Bool_Exp>
-  _or?: Maybe<Array<Maybe<Policy_Factory_Create_Bool_Exp>>>
-  block_number?: Maybe<Int_Comparison_Exp>
-  event_id?: Maybe<String_Comparison_Exp>
-  from_address?: Maybe<String_Comparison_Exp>
-  log_index?: Maybe<Int_Comparison_Exp>
-  policy_address?: Maybe<String_Comparison_Exp>
-  raw_data?: Maybe<String_Comparison_Exp>
-  transaction_index?: Maybe<Int_Comparison_Exp>
+  _and?: InputMaybe<Array<InputMaybe<Policy_Factory_Create_Bool_Exp>>>
+  _not?: InputMaybe<Policy_Factory_Create_Bool_Exp>
+  _or?: InputMaybe<Array<InputMaybe<Policy_Factory_Create_Bool_Exp>>>
+  block_number?: InputMaybe<Int_Comparison_Exp>
+  event_id?: InputMaybe<String_Comparison_Exp>
+  from_address?: InputMaybe<String_Comparison_Exp>
+  log_index?: InputMaybe<Int_Comparison_Exp>
+  policy_address?: InputMaybe<String_Comparison_Exp>
+  raw_data?: InputMaybe<String_Comparison_Exp>
+  transaction_index?: InputMaybe<Int_Comparison_Exp>
 }
 
 export enum Policy_Factory_Create_Constraint {
@@ -2701,19 +2702,19 @@ export enum Policy_Factory_Create_Constraint {
 }
 
 export type Policy_Factory_Create_Inc_Input = {
-  block_number?: Maybe<Scalars['Int']>
-  log_index?: Maybe<Scalars['Int']>
-  transaction_index?: Maybe<Scalars['Int']>
+  block_number?: InputMaybe<Scalars['Int']>
+  log_index?: InputMaybe<Scalars['Int']>
+  transaction_index?: InputMaybe<Scalars['Int']>
 }
 
 export type Policy_Factory_Create_Insert_Input = {
-  block_number?: Maybe<Scalars['Int']>
-  event_id?: Maybe<Scalars['String']>
-  from_address?: Maybe<Scalars['String']>
-  log_index?: Maybe<Scalars['Int']>
-  policy_address?: Maybe<Scalars['String']>
-  raw_data?: Maybe<Scalars['String']>
-  transaction_index?: Maybe<Scalars['Int']>
+  block_number?: InputMaybe<Scalars['Int']>
+  event_id?: InputMaybe<Scalars['String']>
+  from_address?: InputMaybe<Scalars['String']>
+  log_index?: InputMaybe<Scalars['Int']>
+  policy_address?: InputMaybe<Scalars['String']>
+  raw_data?: InputMaybe<Scalars['String']>
+  transaction_index?: InputMaybe<Scalars['Int']>
 }
 
 export type Policy_Factory_Create_Max_Fields = {
@@ -2728,13 +2729,13 @@ export type Policy_Factory_Create_Max_Fields = {
 }
 
 export type Policy_Factory_Create_Max_Order_By = {
-  block_number?: Maybe<Order_By>
-  event_id?: Maybe<Order_By>
-  from_address?: Maybe<Order_By>
-  log_index?: Maybe<Order_By>
-  policy_address?: Maybe<Order_By>
-  raw_data?: Maybe<Order_By>
-  transaction_index?: Maybe<Order_By>
+  block_number?: InputMaybe<Order_By>
+  event_id?: InputMaybe<Order_By>
+  from_address?: InputMaybe<Order_By>
+  log_index?: InputMaybe<Order_By>
+  policy_address?: InputMaybe<Order_By>
+  raw_data?: InputMaybe<Order_By>
+  transaction_index?: InputMaybe<Order_By>
 }
 
 export type Policy_Factory_Create_Min_Fields = {
@@ -2749,13 +2750,13 @@ export type Policy_Factory_Create_Min_Fields = {
 }
 
 export type Policy_Factory_Create_Min_Order_By = {
-  block_number?: Maybe<Order_By>
-  event_id?: Maybe<Order_By>
-  from_address?: Maybe<Order_By>
-  log_index?: Maybe<Order_By>
-  policy_address?: Maybe<Order_By>
-  raw_data?: Maybe<Order_By>
-  transaction_index?: Maybe<Order_By>
+  block_number?: InputMaybe<Order_By>
+  event_id?: InputMaybe<Order_By>
+  from_address?: InputMaybe<Order_By>
+  log_index?: InputMaybe<Order_By>
+  policy_address?: InputMaybe<Order_By>
+  raw_data?: InputMaybe<Order_By>
+  transaction_index?: InputMaybe<Order_By>
 }
 
 export type Policy_Factory_Create_Mutation_Response = {
@@ -2766,23 +2767,23 @@ export type Policy_Factory_Create_Mutation_Response = {
 
 export type Policy_Factory_Create_Obj_Rel_Insert_Input = {
   data: Policy_Factory_Create_Insert_Input
-  on_conflict?: Maybe<Policy_Factory_Create_On_Conflict>
+  on_conflict?: InputMaybe<Policy_Factory_Create_On_Conflict>
 }
 
 export type Policy_Factory_Create_On_Conflict = {
   constraint: Policy_Factory_Create_Constraint
   update_columns: Array<Policy_Factory_Create_Update_Column>
-  where?: Maybe<Policy_Factory_Create_Bool_Exp>
+  where?: InputMaybe<Policy_Factory_Create_Bool_Exp>
 }
 
 export type Policy_Factory_Create_Order_By = {
-  block_number?: Maybe<Order_By>
-  event_id?: Maybe<Order_By>
-  from_address?: Maybe<Order_By>
-  log_index?: Maybe<Order_By>
-  policy_address?: Maybe<Order_By>
-  raw_data?: Maybe<Order_By>
-  transaction_index?: Maybe<Order_By>
+  block_number?: InputMaybe<Order_By>
+  event_id?: InputMaybe<Order_By>
+  from_address?: InputMaybe<Order_By>
+  log_index?: InputMaybe<Order_By>
+  policy_address?: InputMaybe<Order_By>
+  raw_data?: InputMaybe<Order_By>
+  transaction_index?: InputMaybe<Order_By>
 }
 
 export type Policy_Factory_Create_Pk_Columns_Input = {
@@ -2800,13 +2801,13 @@ export enum Policy_Factory_Create_Select_Column {
 }
 
 export type Policy_Factory_Create_Set_Input = {
-  block_number?: Maybe<Scalars['Int']>
-  event_id?: Maybe<Scalars['String']>
-  from_address?: Maybe<Scalars['String']>
-  log_index?: Maybe<Scalars['Int']>
-  policy_address?: Maybe<Scalars['String']>
-  raw_data?: Maybe<Scalars['String']>
-  transaction_index?: Maybe<Scalars['Int']>
+  block_number?: InputMaybe<Scalars['Int']>
+  event_id?: InputMaybe<Scalars['String']>
+  from_address?: InputMaybe<Scalars['String']>
+  log_index?: InputMaybe<Scalars['Int']>
+  policy_address?: InputMaybe<Scalars['String']>
+  raw_data?: InputMaybe<Scalars['String']>
+  transaction_index?: InputMaybe<Scalars['Int']>
 }
 
 export type Policy_Factory_Create_Stddev_Fields = {
@@ -2817,9 +2818,9 @@ export type Policy_Factory_Create_Stddev_Fields = {
 }
 
 export type Policy_Factory_Create_Stddev_Order_By = {
-  block_number?: Maybe<Order_By>
-  log_index?: Maybe<Order_By>
-  transaction_index?: Maybe<Order_By>
+  block_number?: InputMaybe<Order_By>
+  log_index?: InputMaybe<Order_By>
+  transaction_index?: InputMaybe<Order_By>
 }
 
 export type Policy_Factory_Create_Stddev_Pop_Fields = {
@@ -2830,9 +2831,9 @@ export type Policy_Factory_Create_Stddev_Pop_Fields = {
 }
 
 export type Policy_Factory_Create_Stddev_Pop_Order_By = {
-  block_number?: Maybe<Order_By>
-  log_index?: Maybe<Order_By>
-  transaction_index?: Maybe<Order_By>
+  block_number?: InputMaybe<Order_By>
+  log_index?: InputMaybe<Order_By>
+  transaction_index?: InputMaybe<Order_By>
 }
 
 export type Policy_Factory_Create_Stddev_Samp_Fields = {
@@ -2843,9 +2844,9 @@ export type Policy_Factory_Create_Stddev_Samp_Fields = {
 }
 
 export type Policy_Factory_Create_Stddev_Samp_Order_By = {
-  block_number?: Maybe<Order_By>
-  log_index?: Maybe<Order_By>
-  transaction_index?: Maybe<Order_By>
+  block_number?: InputMaybe<Order_By>
+  log_index?: InputMaybe<Order_By>
+  transaction_index?: InputMaybe<Order_By>
 }
 
 export type Policy_Factory_Create_Sum_Fields = {
@@ -2856,9 +2857,9 @@ export type Policy_Factory_Create_Sum_Fields = {
 }
 
 export type Policy_Factory_Create_Sum_Order_By = {
-  block_number?: Maybe<Order_By>
-  log_index?: Maybe<Order_By>
-  transaction_index?: Maybe<Order_By>
+  block_number?: InputMaybe<Order_By>
+  log_index?: InputMaybe<Order_By>
+  transaction_index?: InputMaybe<Order_By>
 }
 
 export enum Policy_Factory_Create_Update_Column {
@@ -2879,9 +2880,9 @@ export type Policy_Factory_Create_Var_Pop_Fields = {
 }
 
 export type Policy_Factory_Create_Var_Pop_Order_By = {
-  block_number?: Maybe<Order_By>
-  log_index?: Maybe<Order_By>
-  transaction_index?: Maybe<Order_By>
+  block_number?: InputMaybe<Order_By>
+  log_index?: InputMaybe<Order_By>
+  transaction_index?: InputMaybe<Order_By>
 }
 
 export type Policy_Factory_Create_Var_Samp_Fields = {
@@ -2892,9 +2893,9 @@ export type Policy_Factory_Create_Var_Samp_Fields = {
 }
 
 export type Policy_Factory_Create_Var_Samp_Order_By = {
-  block_number?: Maybe<Order_By>
-  log_index?: Maybe<Order_By>
-  transaction_index?: Maybe<Order_By>
+  block_number?: InputMaybe<Order_By>
+  log_index?: InputMaybe<Order_By>
+  transaction_index?: InputMaybe<Order_By>
 }
 
 export type Policy_Factory_Create_Variance_Fields = {
@@ -2905,9 +2906,9 @@ export type Policy_Factory_Create_Variance_Fields = {
 }
 
 export type Policy_Factory_Create_Variance_Order_By = {
-  block_number?: Maybe<Order_By>
-  log_index?: Maybe<Order_By>
-  transaction_index?: Maybe<Order_By>
+  block_number?: InputMaybe<Order_By>
+  log_index?: InputMaybe<Order_By>
+  transaction_index?: InputMaybe<Order_By>
 }
 
 export type Property_Authentication = {
@@ -2944,27 +2945,27 @@ export type Property_Authentication_Aggregate_Fields = {
 }
 
 export type Property_Authentication_Aggregate_FieldsCountArgs = {
-  columns?: Maybe<Array<Property_Authentication_Select_Column>>
-  distinct?: Maybe<Scalars['Boolean']>
+  columns?: InputMaybe<Array<Property_Authentication_Select_Column>>
+  distinct?: InputMaybe<Scalars['Boolean']>
 }
 
 export type Property_Authentication_Aggregate_Order_By = {
-  avg?: Maybe<Property_Authentication_Avg_Order_By>
-  count?: Maybe<Order_By>
-  max?: Maybe<Property_Authentication_Max_Order_By>
-  min?: Maybe<Property_Authentication_Min_Order_By>
-  stddev?: Maybe<Property_Authentication_Stddev_Order_By>
-  stddev_pop?: Maybe<Property_Authentication_Stddev_Pop_Order_By>
-  stddev_samp?: Maybe<Property_Authentication_Stddev_Samp_Order_By>
-  sum?: Maybe<Property_Authentication_Sum_Order_By>
-  var_pop?: Maybe<Property_Authentication_Var_Pop_Order_By>
-  var_samp?: Maybe<Property_Authentication_Var_Samp_Order_By>
-  variance?: Maybe<Property_Authentication_Variance_Order_By>
+  avg?: InputMaybe<Property_Authentication_Avg_Order_By>
+  count?: InputMaybe<Order_By>
+  max?: InputMaybe<Property_Authentication_Max_Order_By>
+  min?: InputMaybe<Property_Authentication_Min_Order_By>
+  stddev?: InputMaybe<Property_Authentication_Stddev_Order_By>
+  stddev_pop?: InputMaybe<Property_Authentication_Stddev_Pop_Order_By>
+  stddev_samp?: InputMaybe<Property_Authentication_Stddev_Samp_Order_By>
+  sum?: InputMaybe<Property_Authentication_Sum_Order_By>
+  var_pop?: InputMaybe<Property_Authentication_Var_Pop_Order_By>
+  var_samp?: InputMaybe<Property_Authentication_Var_Samp_Order_By>
+  variance?: InputMaybe<Property_Authentication_Variance_Order_By>
 }
 
 export type Property_Authentication_Arr_Rel_Insert_Input = {
   data: Array<Property_Authentication_Insert_Input>
-  on_conflict?: Maybe<Property_Authentication_On_Conflict>
+  on_conflict?: InputMaybe<Property_Authentication_On_Conflict>
 }
 
 export type Property_Authentication_Avg_Fields = {
@@ -2973,21 +2974,21 @@ export type Property_Authentication_Avg_Fields = {
 }
 
 export type Property_Authentication_Avg_Order_By = {
-  block_number?: Maybe<Order_By>
+  block_number?: InputMaybe<Order_By>
 }
 
 export type Property_Authentication_Bool_Exp = {
-  _and?: Maybe<Array<Maybe<Property_Authentication_Bool_Exp>>>
-  _not?: Maybe<Property_Authentication_Bool_Exp>
-  _or?: Maybe<Array<Maybe<Property_Authentication_Bool_Exp>>>
-  authentication_id?: Maybe<String_Comparison_Exp>
-  block_number?: Maybe<Int_Comparison_Exp>
-  market?: Maybe<String_Comparison_Exp>
-  market_creation?: Maybe<Market_Factory_Create_Bool_Exp>
-  metrics?: Maybe<String_Comparison_Exp>
-  property?: Maybe<String_Comparison_Exp>
-  property_creation?: Maybe<Property_Factory_Create_Bool_Exp>
-  property_meta?: Maybe<Property_Meta_Bool_Exp>
+  _and?: InputMaybe<Array<InputMaybe<Property_Authentication_Bool_Exp>>>
+  _not?: InputMaybe<Property_Authentication_Bool_Exp>
+  _or?: InputMaybe<Array<InputMaybe<Property_Authentication_Bool_Exp>>>
+  authentication_id?: InputMaybe<String_Comparison_Exp>
+  block_number?: InputMaybe<Int_Comparison_Exp>
+  market?: InputMaybe<String_Comparison_Exp>
+  market_creation?: InputMaybe<Market_Factory_Create_Bool_Exp>
+  metrics?: InputMaybe<String_Comparison_Exp>
+  property?: InputMaybe<String_Comparison_Exp>
+  property_creation?: InputMaybe<Property_Factory_Create_Bool_Exp>
+  property_meta?: InputMaybe<Property_Meta_Bool_Exp>
 }
 
 export enum Property_Authentication_Constraint {
@@ -3027,27 +3028,27 @@ export type Property_Authentication_Deleted_Aggregate_Fields = {
 }
 
 export type Property_Authentication_Deleted_Aggregate_FieldsCountArgs = {
-  columns?: Maybe<Array<Property_Authentication_Deleted_Select_Column>>
-  distinct?: Maybe<Scalars['Boolean']>
+  columns?: InputMaybe<Array<Property_Authentication_Deleted_Select_Column>>
+  distinct?: InputMaybe<Scalars['Boolean']>
 }
 
 export type Property_Authentication_Deleted_Aggregate_Order_By = {
-  avg?: Maybe<Property_Authentication_Deleted_Avg_Order_By>
-  count?: Maybe<Order_By>
-  max?: Maybe<Property_Authentication_Deleted_Max_Order_By>
-  min?: Maybe<Property_Authentication_Deleted_Min_Order_By>
-  stddev?: Maybe<Property_Authentication_Deleted_Stddev_Order_By>
-  stddev_pop?: Maybe<Property_Authentication_Deleted_Stddev_Pop_Order_By>
-  stddev_samp?: Maybe<Property_Authentication_Deleted_Stddev_Samp_Order_By>
-  sum?: Maybe<Property_Authentication_Deleted_Sum_Order_By>
-  var_pop?: Maybe<Property_Authentication_Deleted_Var_Pop_Order_By>
-  var_samp?: Maybe<Property_Authentication_Deleted_Var_Samp_Order_By>
-  variance?: Maybe<Property_Authentication_Deleted_Variance_Order_By>
+  avg?: InputMaybe<Property_Authentication_Deleted_Avg_Order_By>
+  count?: InputMaybe<Order_By>
+  max?: InputMaybe<Property_Authentication_Deleted_Max_Order_By>
+  min?: InputMaybe<Property_Authentication_Deleted_Min_Order_By>
+  stddev?: InputMaybe<Property_Authentication_Deleted_Stddev_Order_By>
+  stddev_pop?: InputMaybe<Property_Authentication_Deleted_Stddev_Pop_Order_By>
+  stddev_samp?: InputMaybe<Property_Authentication_Deleted_Stddev_Samp_Order_By>
+  sum?: InputMaybe<Property_Authentication_Deleted_Sum_Order_By>
+  var_pop?: InputMaybe<Property_Authentication_Deleted_Var_Pop_Order_By>
+  var_samp?: InputMaybe<Property_Authentication_Deleted_Var_Samp_Order_By>
+  variance?: InputMaybe<Property_Authentication_Deleted_Variance_Order_By>
 }
 
 export type Property_Authentication_Deleted_Arr_Rel_Insert_Input = {
   data: Array<Property_Authentication_Deleted_Insert_Input>
-  on_conflict?: Maybe<Property_Authentication_Deleted_On_Conflict>
+  on_conflict?: InputMaybe<Property_Authentication_Deleted_On_Conflict>
 }
 
 export type Property_Authentication_Deleted_Avg_Fields = {
@@ -3056,20 +3057,20 @@ export type Property_Authentication_Deleted_Avg_Fields = {
 }
 
 export type Property_Authentication_Deleted_Avg_Order_By = {
-  block_number?: Maybe<Order_By>
+  block_number?: InputMaybe<Order_By>
 }
 
 export type Property_Authentication_Deleted_Bool_Exp = {
-  _and?: Maybe<Array<Maybe<Property_Authentication_Deleted_Bool_Exp>>>
-  _not?: Maybe<Property_Authentication_Deleted_Bool_Exp>
-  _or?: Maybe<Array<Maybe<Property_Authentication_Deleted_Bool_Exp>>>
-  authentication_id?: Maybe<String_Comparison_Exp>
-  block_number?: Maybe<Int_Comparison_Exp>
-  market?: Maybe<String_Comparison_Exp>
-  market_creation?: Maybe<Market_Factory_Create_Bool_Exp>
-  metrics?: Maybe<String_Comparison_Exp>
-  property?: Maybe<String_Comparison_Exp>
-  property_creation?: Maybe<Property_Factory_Create_Bool_Exp>
+  _and?: InputMaybe<Array<InputMaybe<Property_Authentication_Deleted_Bool_Exp>>>
+  _not?: InputMaybe<Property_Authentication_Deleted_Bool_Exp>
+  _or?: InputMaybe<Array<InputMaybe<Property_Authentication_Deleted_Bool_Exp>>>
+  authentication_id?: InputMaybe<String_Comparison_Exp>
+  block_number?: InputMaybe<Int_Comparison_Exp>
+  market?: InputMaybe<String_Comparison_Exp>
+  market_creation?: InputMaybe<Market_Factory_Create_Bool_Exp>
+  metrics?: InputMaybe<String_Comparison_Exp>
+  property?: InputMaybe<String_Comparison_Exp>
+  property_creation?: InputMaybe<Property_Factory_Create_Bool_Exp>
 }
 
 export enum Property_Authentication_Deleted_Constraint {
@@ -3077,17 +3078,17 @@ export enum Property_Authentication_Deleted_Constraint {
 }
 
 export type Property_Authentication_Deleted_Inc_Input = {
-  block_number?: Maybe<Scalars['Int']>
+  block_number?: InputMaybe<Scalars['Int']>
 }
 
 export type Property_Authentication_Deleted_Insert_Input = {
-  authentication_id?: Maybe<Scalars['String']>
-  block_number?: Maybe<Scalars['Int']>
-  market?: Maybe<Scalars['String']>
-  market_creation?: Maybe<Market_Factory_Create_Obj_Rel_Insert_Input>
-  metrics?: Maybe<Scalars['String']>
-  property?: Maybe<Scalars['String']>
-  property_creation?: Maybe<Property_Factory_Create_Obj_Rel_Insert_Input>
+  authentication_id?: InputMaybe<Scalars['String']>
+  block_number?: InputMaybe<Scalars['Int']>
+  market?: InputMaybe<Scalars['String']>
+  market_creation?: InputMaybe<Market_Factory_Create_Obj_Rel_Insert_Input>
+  metrics?: InputMaybe<Scalars['String']>
+  property?: InputMaybe<Scalars['String']>
+  property_creation?: InputMaybe<Property_Factory_Create_Obj_Rel_Insert_Input>
 }
 
 export type Property_Authentication_Deleted_Max_Fields = {
@@ -3100,11 +3101,11 @@ export type Property_Authentication_Deleted_Max_Fields = {
 }
 
 export type Property_Authentication_Deleted_Max_Order_By = {
-  authentication_id?: Maybe<Order_By>
-  block_number?: Maybe<Order_By>
-  market?: Maybe<Order_By>
-  metrics?: Maybe<Order_By>
-  property?: Maybe<Order_By>
+  authentication_id?: InputMaybe<Order_By>
+  block_number?: InputMaybe<Order_By>
+  market?: InputMaybe<Order_By>
+  metrics?: InputMaybe<Order_By>
+  property?: InputMaybe<Order_By>
 }
 
 export type Property_Authentication_Deleted_Min_Fields = {
@@ -3117,11 +3118,11 @@ export type Property_Authentication_Deleted_Min_Fields = {
 }
 
 export type Property_Authentication_Deleted_Min_Order_By = {
-  authentication_id?: Maybe<Order_By>
-  block_number?: Maybe<Order_By>
-  market?: Maybe<Order_By>
-  metrics?: Maybe<Order_By>
-  property?: Maybe<Order_By>
+  authentication_id?: InputMaybe<Order_By>
+  block_number?: InputMaybe<Order_By>
+  market?: InputMaybe<Order_By>
+  metrics?: InputMaybe<Order_By>
+  property?: InputMaybe<Order_By>
 }
 
 export type Property_Authentication_Deleted_Mutation_Response = {
@@ -3132,23 +3133,23 @@ export type Property_Authentication_Deleted_Mutation_Response = {
 
 export type Property_Authentication_Deleted_Obj_Rel_Insert_Input = {
   data: Property_Authentication_Deleted_Insert_Input
-  on_conflict?: Maybe<Property_Authentication_Deleted_On_Conflict>
+  on_conflict?: InputMaybe<Property_Authentication_Deleted_On_Conflict>
 }
 
 export type Property_Authentication_Deleted_On_Conflict = {
   constraint: Property_Authentication_Deleted_Constraint
   update_columns: Array<Property_Authentication_Deleted_Update_Column>
-  where?: Maybe<Property_Authentication_Deleted_Bool_Exp>
+  where?: InputMaybe<Property_Authentication_Deleted_Bool_Exp>
 }
 
 export type Property_Authentication_Deleted_Order_By = {
-  authentication_id?: Maybe<Order_By>
-  block_number?: Maybe<Order_By>
-  market?: Maybe<Order_By>
-  market_creation?: Maybe<Market_Factory_Create_Order_By>
-  metrics?: Maybe<Order_By>
-  property?: Maybe<Order_By>
-  property_creation?: Maybe<Property_Factory_Create_Order_By>
+  authentication_id?: InputMaybe<Order_By>
+  block_number?: InputMaybe<Order_By>
+  market?: InputMaybe<Order_By>
+  market_creation?: InputMaybe<Market_Factory_Create_Order_By>
+  metrics?: InputMaybe<Order_By>
+  property?: InputMaybe<Order_By>
+  property_creation?: InputMaybe<Property_Factory_Create_Order_By>
 }
 
 export type Property_Authentication_Deleted_Pk_Columns_Input = {
@@ -3165,11 +3166,11 @@ export enum Property_Authentication_Deleted_Select_Column {
 }
 
 export type Property_Authentication_Deleted_Set_Input = {
-  authentication_id?: Maybe<Scalars['String']>
-  block_number?: Maybe<Scalars['Int']>
-  market?: Maybe<Scalars['String']>
-  metrics?: Maybe<Scalars['String']>
-  property?: Maybe<Scalars['String']>
+  authentication_id?: InputMaybe<Scalars['String']>
+  block_number?: InputMaybe<Scalars['Int']>
+  market?: InputMaybe<Scalars['String']>
+  metrics?: InputMaybe<Scalars['String']>
+  property?: InputMaybe<Scalars['String']>
 }
 
 export type Property_Authentication_Deleted_Stddev_Fields = {
@@ -3178,7 +3179,7 @@ export type Property_Authentication_Deleted_Stddev_Fields = {
 }
 
 export type Property_Authentication_Deleted_Stddev_Order_By = {
-  block_number?: Maybe<Order_By>
+  block_number?: InputMaybe<Order_By>
 }
 
 export type Property_Authentication_Deleted_Stddev_Pop_Fields = {
@@ -3187,7 +3188,7 @@ export type Property_Authentication_Deleted_Stddev_Pop_Fields = {
 }
 
 export type Property_Authentication_Deleted_Stddev_Pop_Order_By = {
-  block_number?: Maybe<Order_By>
+  block_number?: InputMaybe<Order_By>
 }
 
 export type Property_Authentication_Deleted_Stddev_Samp_Fields = {
@@ -3196,7 +3197,7 @@ export type Property_Authentication_Deleted_Stddev_Samp_Fields = {
 }
 
 export type Property_Authentication_Deleted_Stddev_Samp_Order_By = {
-  block_number?: Maybe<Order_By>
+  block_number?: InputMaybe<Order_By>
 }
 
 export type Property_Authentication_Deleted_Sum_Fields = {
@@ -3205,7 +3206,7 @@ export type Property_Authentication_Deleted_Sum_Fields = {
 }
 
 export type Property_Authentication_Deleted_Sum_Order_By = {
-  block_number?: Maybe<Order_By>
+  block_number?: InputMaybe<Order_By>
 }
 
 export enum Property_Authentication_Deleted_Update_Column {
@@ -3222,7 +3223,7 @@ export type Property_Authentication_Deleted_Var_Pop_Fields = {
 }
 
 export type Property_Authentication_Deleted_Var_Pop_Order_By = {
-  block_number?: Maybe<Order_By>
+  block_number?: InputMaybe<Order_By>
 }
 
 export type Property_Authentication_Deleted_Var_Samp_Fields = {
@@ -3231,7 +3232,7 @@ export type Property_Authentication_Deleted_Var_Samp_Fields = {
 }
 
 export type Property_Authentication_Deleted_Var_Samp_Order_By = {
-  block_number?: Maybe<Order_By>
+  block_number?: InputMaybe<Order_By>
 }
 
 export type Property_Authentication_Deleted_Variance_Fields = {
@@ -3240,22 +3241,22 @@ export type Property_Authentication_Deleted_Variance_Fields = {
 }
 
 export type Property_Authentication_Deleted_Variance_Order_By = {
-  block_number?: Maybe<Order_By>
+  block_number?: InputMaybe<Order_By>
 }
 
 export type Property_Authentication_Inc_Input = {
-  block_number?: Maybe<Scalars['Int']>
+  block_number?: InputMaybe<Scalars['Int']>
 }
 
 export type Property_Authentication_Insert_Input = {
-  authentication_id?: Maybe<Scalars['String']>
-  block_number?: Maybe<Scalars['Int']>
-  market?: Maybe<Scalars['String']>
-  market_creation?: Maybe<Market_Factory_Create_Obj_Rel_Insert_Input>
-  metrics?: Maybe<Scalars['String']>
-  property?: Maybe<Scalars['String']>
-  property_creation?: Maybe<Property_Factory_Create_Obj_Rel_Insert_Input>
-  property_meta?: Maybe<Property_Meta_Obj_Rel_Insert_Input>
+  authentication_id?: InputMaybe<Scalars['String']>
+  block_number?: InputMaybe<Scalars['Int']>
+  market?: InputMaybe<Scalars['String']>
+  market_creation?: InputMaybe<Market_Factory_Create_Obj_Rel_Insert_Input>
+  metrics?: InputMaybe<Scalars['String']>
+  property?: InputMaybe<Scalars['String']>
+  property_creation?: InputMaybe<Property_Factory_Create_Obj_Rel_Insert_Input>
+  property_meta?: InputMaybe<Property_Meta_Obj_Rel_Insert_Input>
 }
 
 export type Property_Authentication_Max_Fields = {
@@ -3268,11 +3269,11 @@ export type Property_Authentication_Max_Fields = {
 }
 
 export type Property_Authentication_Max_Order_By = {
-  authentication_id?: Maybe<Order_By>
-  block_number?: Maybe<Order_By>
-  market?: Maybe<Order_By>
-  metrics?: Maybe<Order_By>
-  property?: Maybe<Order_By>
+  authentication_id?: InputMaybe<Order_By>
+  block_number?: InputMaybe<Order_By>
+  market?: InputMaybe<Order_By>
+  metrics?: InputMaybe<Order_By>
+  property?: InputMaybe<Order_By>
 }
 
 export type Property_Authentication_Min_Fields = {
@@ -3285,11 +3286,11 @@ export type Property_Authentication_Min_Fields = {
 }
 
 export type Property_Authentication_Min_Order_By = {
-  authentication_id?: Maybe<Order_By>
-  block_number?: Maybe<Order_By>
-  market?: Maybe<Order_By>
-  metrics?: Maybe<Order_By>
-  property?: Maybe<Order_By>
+  authentication_id?: InputMaybe<Order_By>
+  block_number?: InputMaybe<Order_By>
+  market?: InputMaybe<Order_By>
+  metrics?: InputMaybe<Order_By>
+  property?: InputMaybe<Order_By>
 }
 
 export type Property_Authentication_Mutation_Response = {
@@ -3300,24 +3301,24 @@ export type Property_Authentication_Mutation_Response = {
 
 export type Property_Authentication_Obj_Rel_Insert_Input = {
   data: Property_Authentication_Insert_Input
-  on_conflict?: Maybe<Property_Authentication_On_Conflict>
+  on_conflict?: InputMaybe<Property_Authentication_On_Conflict>
 }
 
 export type Property_Authentication_On_Conflict = {
   constraint: Property_Authentication_Constraint
   update_columns: Array<Property_Authentication_Update_Column>
-  where?: Maybe<Property_Authentication_Bool_Exp>
+  where?: InputMaybe<Property_Authentication_Bool_Exp>
 }
 
 export type Property_Authentication_Order_By = {
-  authentication_id?: Maybe<Order_By>
-  block_number?: Maybe<Order_By>
-  market?: Maybe<Order_By>
-  market_creation?: Maybe<Market_Factory_Create_Order_By>
-  metrics?: Maybe<Order_By>
-  property?: Maybe<Order_By>
-  property_creation?: Maybe<Property_Factory_Create_Order_By>
-  property_meta?: Maybe<Property_Meta_Order_By>
+  authentication_id?: InputMaybe<Order_By>
+  block_number?: InputMaybe<Order_By>
+  market?: InputMaybe<Order_By>
+  market_creation?: InputMaybe<Market_Factory_Create_Order_By>
+  metrics?: InputMaybe<Order_By>
+  property?: InputMaybe<Order_By>
+  property_creation?: InputMaybe<Property_Factory_Create_Order_By>
+  property_meta?: InputMaybe<Property_Meta_Order_By>
 }
 
 export type Property_Authentication_Pk_Columns_Input = {
@@ -3334,11 +3335,11 @@ export enum Property_Authentication_Select_Column {
 }
 
 export type Property_Authentication_Set_Input = {
-  authentication_id?: Maybe<Scalars['String']>
-  block_number?: Maybe<Scalars['Int']>
-  market?: Maybe<Scalars['String']>
-  metrics?: Maybe<Scalars['String']>
-  property?: Maybe<Scalars['String']>
+  authentication_id?: InputMaybe<Scalars['String']>
+  block_number?: InputMaybe<Scalars['Int']>
+  market?: InputMaybe<Scalars['String']>
+  metrics?: InputMaybe<Scalars['String']>
+  property?: InputMaybe<Scalars['String']>
 }
 
 export type Property_Authentication_Stddev_Fields = {
@@ -3347,7 +3348,7 @@ export type Property_Authentication_Stddev_Fields = {
 }
 
 export type Property_Authentication_Stddev_Order_By = {
-  block_number?: Maybe<Order_By>
+  block_number?: InputMaybe<Order_By>
 }
 
 export type Property_Authentication_Stddev_Pop_Fields = {
@@ -3356,7 +3357,7 @@ export type Property_Authentication_Stddev_Pop_Fields = {
 }
 
 export type Property_Authentication_Stddev_Pop_Order_By = {
-  block_number?: Maybe<Order_By>
+  block_number?: InputMaybe<Order_By>
 }
 
 export type Property_Authentication_Stddev_Samp_Fields = {
@@ -3365,7 +3366,7 @@ export type Property_Authentication_Stddev_Samp_Fields = {
 }
 
 export type Property_Authentication_Stddev_Samp_Order_By = {
-  block_number?: Maybe<Order_By>
+  block_number?: InputMaybe<Order_By>
 }
 
 export type Property_Authentication_Sum_Fields = {
@@ -3374,7 +3375,7 @@ export type Property_Authentication_Sum_Fields = {
 }
 
 export type Property_Authentication_Sum_Order_By = {
-  block_number?: Maybe<Order_By>
+  block_number?: InputMaybe<Order_By>
 }
 
 export enum Property_Authentication_Update_Column {
@@ -3391,7 +3392,7 @@ export type Property_Authentication_Var_Pop_Fields = {
 }
 
 export type Property_Authentication_Var_Pop_Order_By = {
-  block_number?: Maybe<Order_By>
+  block_number?: InputMaybe<Order_By>
 }
 
 export type Property_Authentication_Var_Samp_Fields = {
@@ -3400,7 +3401,7 @@ export type Property_Authentication_Var_Samp_Fields = {
 }
 
 export type Property_Authentication_Var_Samp_Order_By = {
-  block_number?: Maybe<Order_By>
+  block_number?: InputMaybe<Order_By>
 }
 
 export type Property_Authentication_Variance_Fields = {
@@ -3409,7 +3410,7 @@ export type Property_Authentication_Variance_Fields = {
 }
 
 export type Property_Authentication_Variance_Order_By = {
-  block_number?: Maybe<Order_By>
+  block_number?: InputMaybe<Order_By>
 }
 
 export type Property_Balance = {
@@ -3443,27 +3444,27 @@ export type Property_Balance_Aggregate_Fields = {
 }
 
 export type Property_Balance_Aggregate_FieldsCountArgs = {
-  columns?: Maybe<Array<Property_Balance_Select_Column>>
-  distinct?: Maybe<Scalars['Boolean']>
+  columns?: InputMaybe<Array<Property_Balance_Select_Column>>
+  distinct?: InputMaybe<Scalars['Boolean']>
 }
 
 export type Property_Balance_Aggregate_Order_By = {
-  avg?: Maybe<Property_Balance_Avg_Order_By>
-  count?: Maybe<Order_By>
-  max?: Maybe<Property_Balance_Max_Order_By>
-  min?: Maybe<Property_Balance_Min_Order_By>
-  stddev?: Maybe<Property_Balance_Stddev_Order_By>
-  stddev_pop?: Maybe<Property_Balance_Stddev_Pop_Order_By>
-  stddev_samp?: Maybe<Property_Balance_Stddev_Samp_Order_By>
-  sum?: Maybe<Property_Balance_Sum_Order_By>
-  var_pop?: Maybe<Property_Balance_Var_Pop_Order_By>
-  var_samp?: Maybe<Property_Balance_Var_Samp_Order_By>
-  variance?: Maybe<Property_Balance_Variance_Order_By>
+  avg?: InputMaybe<Property_Balance_Avg_Order_By>
+  count?: InputMaybe<Order_By>
+  max?: InputMaybe<Property_Balance_Max_Order_By>
+  min?: InputMaybe<Property_Balance_Min_Order_By>
+  stddev?: InputMaybe<Property_Balance_Stddev_Order_By>
+  stddev_pop?: InputMaybe<Property_Balance_Stddev_Pop_Order_By>
+  stddev_samp?: InputMaybe<Property_Balance_Stddev_Samp_Order_By>
+  sum?: InputMaybe<Property_Balance_Sum_Order_By>
+  var_pop?: InputMaybe<Property_Balance_Var_Pop_Order_By>
+  var_samp?: InputMaybe<Property_Balance_Var_Samp_Order_By>
+  variance?: InputMaybe<Property_Balance_Variance_Order_By>
 }
 
 export type Property_Balance_Arr_Rel_Insert_Input = {
   data: Array<Property_Balance_Insert_Input>
-  on_conflict?: Maybe<Property_Balance_On_Conflict>
+  on_conflict?: InputMaybe<Property_Balance_On_Conflict>
 }
 
 export type Property_Balance_Avg_Fields = {
@@ -3473,19 +3474,19 @@ export type Property_Balance_Avg_Fields = {
 }
 
 export type Property_Balance_Avg_Order_By = {
-  balance?: Maybe<Order_By>
-  block_number?: Maybe<Order_By>
+  balance?: InputMaybe<Order_By>
+  block_number?: InputMaybe<Order_By>
 }
 
 export type Property_Balance_Bool_Exp = {
-  _and?: Maybe<Array<Maybe<Property_Balance_Bool_Exp>>>
-  _not?: Maybe<Property_Balance_Bool_Exp>
-  _or?: Maybe<Array<Maybe<Property_Balance_Bool_Exp>>>
-  account_address?: Maybe<String_Comparison_Exp>
-  balance?: Maybe<Numeric_Comparison_Exp>
-  block_number?: Maybe<Int_Comparison_Exp>
-  is_author?: Maybe<Boolean_Comparison_Exp>
-  property_address?: Maybe<String_Comparison_Exp>
+  _and?: InputMaybe<Array<InputMaybe<Property_Balance_Bool_Exp>>>
+  _not?: InputMaybe<Property_Balance_Bool_Exp>
+  _or?: InputMaybe<Array<InputMaybe<Property_Balance_Bool_Exp>>>
+  account_address?: InputMaybe<String_Comparison_Exp>
+  balance?: InputMaybe<Numeric_Comparison_Exp>
+  block_number?: InputMaybe<Int_Comparison_Exp>
+  is_author?: InputMaybe<Boolean_Comparison_Exp>
+  property_address?: InputMaybe<String_Comparison_Exp>
 }
 
 export enum Property_Balance_Constraint {
@@ -3493,16 +3494,16 @@ export enum Property_Balance_Constraint {
 }
 
 export type Property_Balance_Inc_Input = {
-  balance?: Maybe<Scalars['numeric']>
-  block_number?: Maybe<Scalars['Int']>
+  balance?: InputMaybe<Scalars['numeric']>
+  block_number?: InputMaybe<Scalars['Int']>
 }
 
 export type Property_Balance_Insert_Input = {
-  account_address?: Maybe<Scalars['String']>
-  balance?: Maybe<Scalars['numeric']>
-  block_number?: Maybe<Scalars['Int']>
-  is_author?: Maybe<Scalars['Boolean']>
-  property_address?: Maybe<Scalars['String']>
+  account_address?: InputMaybe<Scalars['String']>
+  balance?: InputMaybe<Scalars['numeric']>
+  block_number?: InputMaybe<Scalars['Int']>
+  is_author?: InputMaybe<Scalars['Boolean']>
+  property_address?: InputMaybe<Scalars['String']>
 }
 
 export type Property_Balance_Max_Fields = {
@@ -3514,10 +3515,10 @@ export type Property_Balance_Max_Fields = {
 }
 
 export type Property_Balance_Max_Order_By = {
-  account_address?: Maybe<Order_By>
-  balance?: Maybe<Order_By>
-  block_number?: Maybe<Order_By>
-  property_address?: Maybe<Order_By>
+  account_address?: InputMaybe<Order_By>
+  balance?: InputMaybe<Order_By>
+  block_number?: InputMaybe<Order_By>
+  property_address?: InputMaybe<Order_By>
 }
 
 export type Property_Balance_Min_Fields = {
@@ -3529,10 +3530,10 @@ export type Property_Balance_Min_Fields = {
 }
 
 export type Property_Balance_Min_Order_By = {
-  account_address?: Maybe<Order_By>
-  balance?: Maybe<Order_By>
-  block_number?: Maybe<Order_By>
-  property_address?: Maybe<Order_By>
+  account_address?: InputMaybe<Order_By>
+  balance?: InputMaybe<Order_By>
+  block_number?: InputMaybe<Order_By>
+  property_address?: InputMaybe<Order_By>
 }
 
 export type Property_Balance_Mutation_Response = {
@@ -3543,21 +3544,21 @@ export type Property_Balance_Mutation_Response = {
 
 export type Property_Balance_Obj_Rel_Insert_Input = {
   data: Property_Balance_Insert_Input
-  on_conflict?: Maybe<Property_Balance_On_Conflict>
+  on_conflict?: InputMaybe<Property_Balance_On_Conflict>
 }
 
 export type Property_Balance_On_Conflict = {
   constraint: Property_Balance_Constraint
   update_columns: Array<Property_Balance_Update_Column>
-  where?: Maybe<Property_Balance_Bool_Exp>
+  where?: InputMaybe<Property_Balance_Bool_Exp>
 }
 
 export type Property_Balance_Order_By = {
-  account_address?: Maybe<Order_By>
-  balance?: Maybe<Order_By>
-  block_number?: Maybe<Order_By>
-  is_author?: Maybe<Order_By>
-  property_address?: Maybe<Order_By>
+  account_address?: InputMaybe<Order_By>
+  balance?: InputMaybe<Order_By>
+  block_number?: InputMaybe<Order_By>
+  is_author?: InputMaybe<Order_By>
+  property_address?: InputMaybe<Order_By>
 }
 
 export type Property_Balance_Pk_Columns_Input = {
@@ -3574,11 +3575,11 @@ export enum Property_Balance_Select_Column {
 }
 
 export type Property_Balance_Set_Input = {
-  account_address?: Maybe<Scalars['String']>
-  balance?: Maybe<Scalars['numeric']>
-  block_number?: Maybe<Scalars['Int']>
-  is_author?: Maybe<Scalars['Boolean']>
-  property_address?: Maybe<Scalars['String']>
+  account_address?: InputMaybe<Scalars['String']>
+  balance?: InputMaybe<Scalars['numeric']>
+  block_number?: InputMaybe<Scalars['Int']>
+  is_author?: InputMaybe<Scalars['Boolean']>
+  property_address?: InputMaybe<Scalars['String']>
 }
 
 export type Property_Balance_Stddev_Fields = {
@@ -3588,8 +3589,8 @@ export type Property_Balance_Stddev_Fields = {
 }
 
 export type Property_Balance_Stddev_Order_By = {
-  balance?: Maybe<Order_By>
-  block_number?: Maybe<Order_By>
+  balance?: InputMaybe<Order_By>
+  block_number?: InputMaybe<Order_By>
 }
 
 export type Property_Balance_Stddev_Pop_Fields = {
@@ -3599,8 +3600,8 @@ export type Property_Balance_Stddev_Pop_Fields = {
 }
 
 export type Property_Balance_Stddev_Pop_Order_By = {
-  balance?: Maybe<Order_By>
-  block_number?: Maybe<Order_By>
+  balance?: InputMaybe<Order_By>
+  block_number?: InputMaybe<Order_By>
 }
 
 export type Property_Balance_Stddev_Samp_Fields = {
@@ -3610,8 +3611,8 @@ export type Property_Balance_Stddev_Samp_Fields = {
 }
 
 export type Property_Balance_Stddev_Samp_Order_By = {
-  balance?: Maybe<Order_By>
-  block_number?: Maybe<Order_By>
+  balance?: InputMaybe<Order_By>
+  block_number?: InputMaybe<Order_By>
 }
 
 export type Property_Balance_Sum_Fields = {
@@ -3621,8 +3622,8 @@ export type Property_Balance_Sum_Fields = {
 }
 
 export type Property_Balance_Sum_Order_By = {
-  balance?: Maybe<Order_By>
-  block_number?: Maybe<Order_By>
+  balance?: InputMaybe<Order_By>
+  block_number?: InputMaybe<Order_By>
 }
 
 export enum Property_Balance_Update_Column {
@@ -3640,8 +3641,8 @@ export type Property_Balance_Var_Pop_Fields = {
 }
 
 export type Property_Balance_Var_Pop_Order_By = {
-  balance?: Maybe<Order_By>
-  block_number?: Maybe<Order_By>
+  balance?: InputMaybe<Order_By>
+  block_number?: InputMaybe<Order_By>
 }
 
 export type Property_Balance_Var_Samp_Fields = {
@@ -3651,8 +3652,8 @@ export type Property_Balance_Var_Samp_Fields = {
 }
 
 export type Property_Balance_Var_Samp_Order_By = {
-  balance?: Maybe<Order_By>
-  block_number?: Maybe<Order_By>
+  balance?: InputMaybe<Order_By>
+  block_number?: InputMaybe<Order_By>
 }
 
 export type Property_Balance_Variance_Fields = {
@@ -3662,8 +3663,8 @@ export type Property_Balance_Variance_Fields = {
 }
 
 export type Property_Balance_Variance_Order_By = {
-  balance?: Maybe<Order_By>
-  block_number?: Maybe<Order_By>
+  balance?: InputMaybe<Order_By>
+  block_number?: InputMaybe<Order_By>
 }
 
 export type Property_Factory_Create = {
@@ -3687,67 +3688,67 @@ export type Property_Factory_Create = {
 }
 
 export type Property_Factory_CreateAuthenticationArgs = {
-  distinct_on?: Maybe<Array<Property_Authentication_Select_Column>>
-  limit?: Maybe<Scalars['Int']>
-  offset?: Maybe<Scalars['Int']>
-  order_by?: Maybe<Array<Property_Authentication_Order_By>>
-  where?: Maybe<Property_Authentication_Bool_Exp>
+  distinct_on?: InputMaybe<Array<Property_Authentication_Select_Column>>
+  limit?: InputMaybe<Scalars['Int']>
+  offset?: InputMaybe<Scalars['Int']>
+  order_by?: InputMaybe<Array<Property_Authentication_Order_By>>
+  where?: InputMaybe<Property_Authentication_Bool_Exp>
 }
 
 export type Property_Factory_CreateAuthentication_AggregateArgs = {
-  distinct_on?: Maybe<Array<Property_Authentication_Select_Column>>
-  limit?: Maybe<Scalars['Int']>
-  offset?: Maybe<Scalars['Int']>
-  order_by?: Maybe<Array<Property_Authentication_Order_By>>
-  where?: Maybe<Property_Authentication_Bool_Exp>
+  distinct_on?: InputMaybe<Array<Property_Authentication_Select_Column>>
+  limit?: InputMaybe<Scalars['Int']>
+  offset?: InputMaybe<Scalars['Int']>
+  order_by?: InputMaybe<Array<Property_Authentication_Order_By>>
+  where?: InputMaybe<Property_Authentication_Bool_Exp>
 }
 
 export type Property_Factory_CreateDeleted_AuthenticationArgs = {
-  distinct_on?: Maybe<Array<Property_Authentication_Deleted_Select_Column>>
-  limit?: Maybe<Scalars['Int']>
-  offset?: Maybe<Scalars['Int']>
-  order_by?: Maybe<Array<Property_Authentication_Deleted_Order_By>>
-  where?: Maybe<Property_Authentication_Deleted_Bool_Exp>
+  distinct_on?: InputMaybe<Array<Property_Authentication_Deleted_Select_Column>>
+  limit?: InputMaybe<Scalars['Int']>
+  offset?: InputMaybe<Scalars['Int']>
+  order_by?: InputMaybe<Array<Property_Authentication_Deleted_Order_By>>
+  where?: InputMaybe<Property_Authentication_Deleted_Bool_Exp>
 }
 
 export type Property_Factory_CreateDeleted_Authentication_AggregateArgs = {
-  distinct_on?: Maybe<Array<Property_Authentication_Deleted_Select_Column>>
-  limit?: Maybe<Scalars['Int']>
-  offset?: Maybe<Scalars['Int']>
-  order_by?: Maybe<Array<Property_Authentication_Deleted_Order_By>>
-  where?: Maybe<Property_Authentication_Deleted_Bool_Exp>
+  distinct_on?: InputMaybe<Array<Property_Authentication_Deleted_Select_Column>>
+  limit?: InputMaybe<Scalars['Int']>
+  offset?: InputMaybe<Scalars['Int']>
+  order_by?: InputMaybe<Array<Property_Authentication_Deleted_Order_By>>
+  where?: InputMaybe<Property_Authentication_Deleted_Bool_Exp>
 }
 
 export type Property_Factory_CreateLockedupArgs = {
-  distinct_on?: Maybe<Array<Lockup_Lockedup_Select_Column>>
-  limit?: Maybe<Scalars['Int']>
-  offset?: Maybe<Scalars['Int']>
-  order_by?: Maybe<Array<Lockup_Lockedup_Order_By>>
-  where?: Maybe<Lockup_Lockedup_Bool_Exp>
+  distinct_on?: InputMaybe<Array<Lockup_Lockedup_Select_Column>>
+  limit?: InputMaybe<Scalars['Int']>
+  offset?: InputMaybe<Scalars['Int']>
+  order_by?: InputMaybe<Array<Lockup_Lockedup_Order_By>>
+  where?: InputMaybe<Lockup_Lockedup_Bool_Exp>
 }
 
 export type Property_Factory_CreateLockedup_AggregateArgs = {
-  distinct_on?: Maybe<Array<Lockup_Lockedup_Select_Column>>
-  limit?: Maybe<Scalars['Int']>
-  offset?: Maybe<Scalars['Int']>
-  order_by?: Maybe<Array<Lockup_Lockedup_Order_By>>
-  where?: Maybe<Lockup_Lockedup_Bool_Exp>
+  distinct_on?: InputMaybe<Array<Lockup_Lockedup_Select_Column>>
+  limit?: InputMaybe<Scalars['Int']>
+  offset?: InputMaybe<Scalars['Int']>
+  order_by?: InputMaybe<Array<Lockup_Lockedup_Order_By>>
+  where?: InputMaybe<Lockup_Lockedup_Bool_Exp>
 }
 
 export type Property_Factory_CreateProperty_CreationArgs = {
-  distinct_on?: Maybe<Array<Lockup_Lockedup_Select_Column>>
-  limit?: Maybe<Scalars['Int']>
-  offset?: Maybe<Scalars['Int']>
-  order_by?: Maybe<Array<Lockup_Lockedup_Order_By>>
-  where?: Maybe<Lockup_Lockedup_Bool_Exp>
+  distinct_on?: InputMaybe<Array<Lockup_Lockedup_Select_Column>>
+  limit?: InputMaybe<Scalars['Int']>
+  offset?: InputMaybe<Scalars['Int']>
+  order_by?: InputMaybe<Array<Lockup_Lockedup_Order_By>>
+  where?: InputMaybe<Lockup_Lockedup_Bool_Exp>
 }
 
 export type Property_Factory_CreateProperty_Creation_AggregateArgs = {
-  distinct_on?: Maybe<Array<Lockup_Lockedup_Select_Column>>
-  limit?: Maybe<Scalars['Int']>
-  offset?: Maybe<Scalars['Int']>
-  order_by?: Maybe<Array<Lockup_Lockedup_Order_By>>
-  where?: Maybe<Lockup_Lockedup_Bool_Exp>
+  distinct_on?: InputMaybe<Array<Lockup_Lockedup_Select_Column>>
+  limit?: InputMaybe<Scalars['Int']>
+  offset?: InputMaybe<Scalars['Int']>
+  order_by?: InputMaybe<Array<Lockup_Lockedup_Order_By>>
+  where?: InputMaybe<Lockup_Lockedup_Bool_Exp>
 }
 
 export type Property_Factory_Create_Aggregate = {
@@ -3772,27 +3773,27 @@ export type Property_Factory_Create_Aggregate_Fields = {
 }
 
 export type Property_Factory_Create_Aggregate_FieldsCountArgs = {
-  columns?: Maybe<Array<Property_Factory_Create_Select_Column>>
-  distinct?: Maybe<Scalars['Boolean']>
+  columns?: InputMaybe<Array<Property_Factory_Create_Select_Column>>
+  distinct?: InputMaybe<Scalars['Boolean']>
 }
 
 export type Property_Factory_Create_Aggregate_Order_By = {
-  avg?: Maybe<Property_Factory_Create_Avg_Order_By>
-  count?: Maybe<Order_By>
-  max?: Maybe<Property_Factory_Create_Max_Order_By>
-  min?: Maybe<Property_Factory_Create_Min_Order_By>
-  stddev?: Maybe<Property_Factory_Create_Stddev_Order_By>
-  stddev_pop?: Maybe<Property_Factory_Create_Stddev_Pop_Order_By>
-  stddev_samp?: Maybe<Property_Factory_Create_Stddev_Samp_Order_By>
-  sum?: Maybe<Property_Factory_Create_Sum_Order_By>
-  var_pop?: Maybe<Property_Factory_Create_Var_Pop_Order_By>
-  var_samp?: Maybe<Property_Factory_Create_Var_Samp_Order_By>
-  variance?: Maybe<Property_Factory_Create_Variance_Order_By>
+  avg?: InputMaybe<Property_Factory_Create_Avg_Order_By>
+  count?: InputMaybe<Order_By>
+  max?: InputMaybe<Property_Factory_Create_Max_Order_By>
+  min?: InputMaybe<Property_Factory_Create_Min_Order_By>
+  stddev?: InputMaybe<Property_Factory_Create_Stddev_Order_By>
+  stddev_pop?: InputMaybe<Property_Factory_Create_Stddev_Pop_Order_By>
+  stddev_samp?: InputMaybe<Property_Factory_Create_Stddev_Samp_Order_By>
+  sum?: InputMaybe<Property_Factory_Create_Sum_Order_By>
+  var_pop?: InputMaybe<Property_Factory_Create_Var_Pop_Order_By>
+  var_samp?: InputMaybe<Property_Factory_Create_Var_Samp_Order_By>
+  variance?: InputMaybe<Property_Factory_Create_Variance_Order_By>
 }
 
 export type Property_Factory_Create_Arr_Rel_Insert_Input = {
   data: Array<Property_Factory_Create_Insert_Input>
-  on_conflict?: Maybe<Property_Factory_Create_On_Conflict>
+  on_conflict?: InputMaybe<Property_Factory_Create_On_Conflict>
 }
 
 export type Property_Factory_Create_Avg_Fields = {
@@ -3803,27 +3804,27 @@ export type Property_Factory_Create_Avg_Fields = {
 }
 
 export type Property_Factory_Create_Avg_Order_By = {
-  block_number?: Maybe<Order_By>
-  log_index?: Maybe<Order_By>
-  transaction_index?: Maybe<Order_By>
+  block_number?: InputMaybe<Order_By>
+  log_index?: InputMaybe<Order_By>
+  transaction_index?: InputMaybe<Order_By>
 }
 
 export type Property_Factory_Create_Bool_Exp = {
-  _and?: Maybe<Array<Maybe<Property_Factory_Create_Bool_Exp>>>
-  _not?: Maybe<Property_Factory_Create_Bool_Exp>
-  _or?: Maybe<Array<Maybe<Property_Factory_Create_Bool_Exp>>>
-  authentication?: Maybe<Property_Authentication_Bool_Exp>
-  block_number?: Maybe<Int_Comparison_Exp>
-  current_lockup?: Maybe<Property_Lockup_Sum_Values_Bool_Exp>
-  deleted_authentication?: Maybe<Property_Authentication_Deleted_Bool_Exp>
-  event_id?: Maybe<String_Comparison_Exp>
-  from_address?: Maybe<String_Comparison_Exp>
-  lockedup?: Maybe<Lockup_Lockedup_Bool_Exp>
-  log_index?: Maybe<Int_Comparison_Exp>
-  property?: Maybe<String_Comparison_Exp>
-  property_creation?: Maybe<Lockup_Lockedup_Bool_Exp>
-  raw_data?: Maybe<String_Comparison_Exp>
-  transaction_index?: Maybe<Int_Comparison_Exp>
+  _and?: InputMaybe<Array<InputMaybe<Property_Factory_Create_Bool_Exp>>>
+  _not?: InputMaybe<Property_Factory_Create_Bool_Exp>
+  _or?: InputMaybe<Array<InputMaybe<Property_Factory_Create_Bool_Exp>>>
+  authentication?: InputMaybe<Property_Authentication_Bool_Exp>
+  block_number?: InputMaybe<Int_Comparison_Exp>
+  current_lockup?: InputMaybe<Property_Lockup_Sum_Values_Bool_Exp>
+  deleted_authentication?: InputMaybe<Property_Authentication_Deleted_Bool_Exp>
+  event_id?: InputMaybe<String_Comparison_Exp>
+  from_address?: InputMaybe<String_Comparison_Exp>
+  lockedup?: InputMaybe<Lockup_Lockedup_Bool_Exp>
+  log_index?: InputMaybe<Int_Comparison_Exp>
+  property?: InputMaybe<String_Comparison_Exp>
+  property_creation?: InputMaybe<Lockup_Lockedup_Bool_Exp>
+  raw_data?: InputMaybe<String_Comparison_Exp>
+  transaction_index?: InputMaybe<Int_Comparison_Exp>
 }
 
 export enum Property_Factory_Create_Constraint {
@@ -3831,23 +3832,23 @@ export enum Property_Factory_Create_Constraint {
 }
 
 export type Property_Factory_Create_Inc_Input = {
-  block_number?: Maybe<Scalars['Int']>
-  log_index?: Maybe<Scalars['Int']>
-  transaction_index?: Maybe<Scalars['Int']>
+  block_number?: InputMaybe<Scalars['Int']>
+  log_index?: InputMaybe<Scalars['Int']>
+  transaction_index?: InputMaybe<Scalars['Int']>
 }
 
 export type Property_Factory_Create_Insert_Input = {
-  authentication?: Maybe<Property_Authentication_Arr_Rel_Insert_Input>
-  block_number?: Maybe<Scalars['Int']>
-  deleted_authentication?: Maybe<Property_Authentication_Deleted_Arr_Rel_Insert_Input>
-  event_id?: Maybe<Scalars['String']>
-  from_address?: Maybe<Scalars['String']>
-  lockedup?: Maybe<Lockup_Lockedup_Arr_Rel_Insert_Input>
-  log_index?: Maybe<Scalars['Int']>
-  property?: Maybe<Scalars['String']>
-  property_creation?: Maybe<Lockup_Lockedup_Arr_Rel_Insert_Input>
-  raw_data?: Maybe<Scalars['String']>
-  transaction_index?: Maybe<Scalars['Int']>
+  authentication?: InputMaybe<Property_Authentication_Arr_Rel_Insert_Input>
+  block_number?: InputMaybe<Scalars['Int']>
+  deleted_authentication?: InputMaybe<Property_Authentication_Deleted_Arr_Rel_Insert_Input>
+  event_id?: InputMaybe<Scalars['String']>
+  from_address?: InputMaybe<Scalars['String']>
+  lockedup?: InputMaybe<Lockup_Lockedup_Arr_Rel_Insert_Input>
+  log_index?: InputMaybe<Scalars['Int']>
+  property?: InputMaybe<Scalars['String']>
+  property_creation?: InputMaybe<Lockup_Lockedup_Arr_Rel_Insert_Input>
+  raw_data?: InputMaybe<Scalars['String']>
+  transaction_index?: InputMaybe<Scalars['Int']>
 }
 
 export type Property_Factory_Create_Max_Fields = {
@@ -3862,13 +3863,13 @@ export type Property_Factory_Create_Max_Fields = {
 }
 
 export type Property_Factory_Create_Max_Order_By = {
-  block_number?: Maybe<Order_By>
-  event_id?: Maybe<Order_By>
-  from_address?: Maybe<Order_By>
-  log_index?: Maybe<Order_By>
-  property?: Maybe<Order_By>
-  raw_data?: Maybe<Order_By>
-  transaction_index?: Maybe<Order_By>
+  block_number?: InputMaybe<Order_By>
+  event_id?: InputMaybe<Order_By>
+  from_address?: InputMaybe<Order_By>
+  log_index?: InputMaybe<Order_By>
+  property?: InputMaybe<Order_By>
+  raw_data?: InputMaybe<Order_By>
+  transaction_index?: InputMaybe<Order_By>
 }
 
 export type Property_Factory_Create_Min_Fields = {
@@ -3883,13 +3884,13 @@ export type Property_Factory_Create_Min_Fields = {
 }
 
 export type Property_Factory_Create_Min_Order_By = {
-  block_number?: Maybe<Order_By>
-  event_id?: Maybe<Order_By>
-  from_address?: Maybe<Order_By>
-  log_index?: Maybe<Order_By>
-  property?: Maybe<Order_By>
-  raw_data?: Maybe<Order_By>
-  transaction_index?: Maybe<Order_By>
+  block_number?: InputMaybe<Order_By>
+  event_id?: InputMaybe<Order_By>
+  from_address?: InputMaybe<Order_By>
+  log_index?: InputMaybe<Order_By>
+  property?: InputMaybe<Order_By>
+  raw_data?: InputMaybe<Order_By>
+  transaction_index?: InputMaybe<Order_By>
 }
 
 export type Property_Factory_Create_Mutation_Response = {
@@ -3900,28 +3901,28 @@ export type Property_Factory_Create_Mutation_Response = {
 
 export type Property_Factory_Create_Obj_Rel_Insert_Input = {
   data: Property_Factory_Create_Insert_Input
-  on_conflict?: Maybe<Property_Factory_Create_On_Conflict>
+  on_conflict?: InputMaybe<Property_Factory_Create_On_Conflict>
 }
 
 export type Property_Factory_Create_On_Conflict = {
   constraint: Property_Factory_Create_Constraint
   update_columns: Array<Property_Factory_Create_Update_Column>
-  where?: Maybe<Property_Factory_Create_Bool_Exp>
+  where?: InputMaybe<Property_Factory_Create_Bool_Exp>
 }
 
 export type Property_Factory_Create_Order_By = {
-  authentication_aggregate?: Maybe<Property_Authentication_Aggregate_Order_By>
-  block_number?: Maybe<Order_By>
-  current_lockup?: Maybe<Property_Lockup_Sum_Values_Order_By>
-  deleted_authentication_aggregate?: Maybe<Property_Authentication_Deleted_Aggregate_Order_By>
-  event_id?: Maybe<Order_By>
-  from_address?: Maybe<Order_By>
-  lockedup_aggregate?: Maybe<Lockup_Lockedup_Aggregate_Order_By>
-  log_index?: Maybe<Order_By>
-  property?: Maybe<Order_By>
-  property_creation_aggregate?: Maybe<Lockup_Lockedup_Aggregate_Order_By>
-  raw_data?: Maybe<Order_By>
-  transaction_index?: Maybe<Order_By>
+  authentication_aggregate?: InputMaybe<Property_Authentication_Aggregate_Order_By>
+  block_number?: InputMaybe<Order_By>
+  current_lockup?: InputMaybe<Property_Lockup_Sum_Values_Order_By>
+  deleted_authentication_aggregate?: InputMaybe<Property_Authentication_Deleted_Aggregate_Order_By>
+  event_id?: InputMaybe<Order_By>
+  from_address?: InputMaybe<Order_By>
+  lockedup_aggregate?: InputMaybe<Lockup_Lockedup_Aggregate_Order_By>
+  log_index?: InputMaybe<Order_By>
+  property?: InputMaybe<Order_By>
+  property_creation_aggregate?: InputMaybe<Lockup_Lockedup_Aggregate_Order_By>
+  raw_data?: InputMaybe<Order_By>
+  transaction_index?: InputMaybe<Order_By>
 }
 
 export type Property_Factory_Create_Pk_Columns_Input = {
@@ -3939,13 +3940,13 @@ export enum Property_Factory_Create_Select_Column {
 }
 
 export type Property_Factory_Create_Set_Input = {
-  block_number?: Maybe<Scalars['Int']>
-  event_id?: Maybe<Scalars['String']>
-  from_address?: Maybe<Scalars['String']>
-  log_index?: Maybe<Scalars['Int']>
-  property?: Maybe<Scalars['String']>
-  raw_data?: Maybe<Scalars['String']>
-  transaction_index?: Maybe<Scalars['Int']>
+  block_number?: InputMaybe<Scalars['Int']>
+  event_id?: InputMaybe<Scalars['String']>
+  from_address?: InputMaybe<Scalars['String']>
+  log_index?: InputMaybe<Scalars['Int']>
+  property?: InputMaybe<Scalars['String']>
+  raw_data?: InputMaybe<Scalars['String']>
+  transaction_index?: InputMaybe<Scalars['Int']>
 }
 
 export type Property_Factory_Create_Stddev_Fields = {
@@ -3956,9 +3957,9 @@ export type Property_Factory_Create_Stddev_Fields = {
 }
 
 export type Property_Factory_Create_Stddev_Order_By = {
-  block_number?: Maybe<Order_By>
-  log_index?: Maybe<Order_By>
-  transaction_index?: Maybe<Order_By>
+  block_number?: InputMaybe<Order_By>
+  log_index?: InputMaybe<Order_By>
+  transaction_index?: InputMaybe<Order_By>
 }
 
 export type Property_Factory_Create_Stddev_Pop_Fields = {
@@ -3969,9 +3970,9 @@ export type Property_Factory_Create_Stddev_Pop_Fields = {
 }
 
 export type Property_Factory_Create_Stddev_Pop_Order_By = {
-  block_number?: Maybe<Order_By>
-  log_index?: Maybe<Order_By>
-  transaction_index?: Maybe<Order_By>
+  block_number?: InputMaybe<Order_By>
+  log_index?: InputMaybe<Order_By>
+  transaction_index?: InputMaybe<Order_By>
 }
 
 export type Property_Factory_Create_Stddev_Samp_Fields = {
@@ -3982,9 +3983,9 @@ export type Property_Factory_Create_Stddev_Samp_Fields = {
 }
 
 export type Property_Factory_Create_Stddev_Samp_Order_By = {
-  block_number?: Maybe<Order_By>
-  log_index?: Maybe<Order_By>
-  transaction_index?: Maybe<Order_By>
+  block_number?: InputMaybe<Order_By>
+  log_index?: InputMaybe<Order_By>
+  transaction_index?: InputMaybe<Order_By>
 }
 
 export type Property_Factory_Create_Sum_Fields = {
@@ -3995,9 +3996,9 @@ export type Property_Factory_Create_Sum_Fields = {
 }
 
 export type Property_Factory_Create_Sum_Order_By = {
-  block_number?: Maybe<Order_By>
-  log_index?: Maybe<Order_By>
-  transaction_index?: Maybe<Order_By>
+  block_number?: InputMaybe<Order_By>
+  log_index?: InputMaybe<Order_By>
+  transaction_index?: InputMaybe<Order_By>
 }
 
 export enum Property_Factory_Create_Update_Column {
@@ -4018,9 +4019,9 @@ export type Property_Factory_Create_Var_Pop_Fields = {
 }
 
 export type Property_Factory_Create_Var_Pop_Order_By = {
-  block_number?: Maybe<Order_By>
-  log_index?: Maybe<Order_By>
-  transaction_index?: Maybe<Order_By>
+  block_number?: InputMaybe<Order_By>
+  log_index?: InputMaybe<Order_By>
+  transaction_index?: InputMaybe<Order_By>
 }
 
 export type Property_Factory_Create_Var_Samp_Fields = {
@@ -4031,9 +4032,9 @@ export type Property_Factory_Create_Var_Samp_Fields = {
 }
 
 export type Property_Factory_Create_Var_Samp_Order_By = {
-  block_number?: Maybe<Order_By>
-  log_index?: Maybe<Order_By>
-  transaction_index?: Maybe<Order_By>
+  block_number?: InputMaybe<Order_By>
+  log_index?: InputMaybe<Order_By>
+  transaction_index?: InputMaybe<Order_By>
 }
 
 export type Property_Factory_Create_Variance_Fields = {
@@ -4044,9 +4045,9 @@ export type Property_Factory_Create_Variance_Fields = {
 }
 
 export type Property_Factory_Create_Variance_Order_By = {
-  block_number?: Maybe<Order_By>
-  log_index?: Maybe<Order_By>
-  transaction_index?: Maybe<Order_By>
+  block_number?: InputMaybe<Order_By>
+  log_index?: InputMaybe<Order_By>
+  transaction_index?: InputMaybe<Order_By>
 }
 
 export type Property_Lockup = {
@@ -4080,27 +4081,27 @@ export type Property_Lockup_Aggregate_Fields = {
 }
 
 export type Property_Lockup_Aggregate_FieldsCountArgs = {
-  columns?: Maybe<Array<Property_Lockup_Select_Column>>
-  distinct?: Maybe<Scalars['Boolean']>
+  columns?: InputMaybe<Array<Property_Lockup_Select_Column>>
+  distinct?: InputMaybe<Scalars['Boolean']>
 }
 
 export type Property_Lockup_Aggregate_Order_By = {
-  avg?: Maybe<Property_Lockup_Avg_Order_By>
-  count?: Maybe<Order_By>
-  max?: Maybe<Property_Lockup_Max_Order_By>
-  min?: Maybe<Property_Lockup_Min_Order_By>
-  stddev?: Maybe<Property_Lockup_Stddev_Order_By>
-  stddev_pop?: Maybe<Property_Lockup_Stddev_Pop_Order_By>
-  stddev_samp?: Maybe<Property_Lockup_Stddev_Samp_Order_By>
-  sum?: Maybe<Property_Lockup_Sum_Order_By>
-  var_pop?: Maybe<Property_Lockup_Var_Pop_Order_By>
-  var_samp?: Maybe<Property_Lockup_Var_Samp_Order_By>
-  variance?: Maybe<Property_Lockup_Variance_Order_By>
+  avg?: InputMaybe<Property_Lockup_Avg_Order_By>
+  count?: InputMaybe<Order_By>
+  max?: InputMaybe<Property_Lockup_Max_Order_By>
+  min?: InputMaybe<Property_Lockup_Min_Order_By>
+  stddev?: InputMaybe<Property_Lockup_Stddev_Order_By>
+  stddev_pop?: InputMaybe<Property_Lockup_Stddev_Pop_Order_By>
+  stddev_samp?: InputMaybe<Property_Lockup_Stddev_Samp_Order_By>
+  sum?: InputMaybe<Property_Lockup_Sum_Order_By>
+  var_pop?: InputMaybe<Property_Lockup_Var_Pop_Order_By>
+  var_samp?: InputMaybe<Property_Lockup_Var_Samp_Order_By>
+  variance?: InputMaybe<Property_Lockup_Variance_Order_By>
 }
 
 export type Property_Lockup_Arr_Rel_Insert_Input = {
   data: Array<Property_Lockup_Insert_Input>
-  on_conflict?: Maybe<Property_Lockup_On_Conflict>
+  on_conflict?: InputMaybe<Property_Lockup_On_Conflict>
 }
 
 export type Property_Lockup_Avg_Fields = {
@@ -4110,19 +4111,19 @@ export type Property_Lockup_Avg_Fields = {
 }
 
 export type Property_Lockup_Avg_Order_By = {
-  block_number?: Maybe<Order_By>
-  value?: Maybe<Order_By>
+  block_number?: InputMaybe<Order_By>
+  value?: InputMaybe<Order_By>
 }
 
 export type Property_Lockup_Bool_Exp = {
-  _and?: Maybe<Array<Maybe<Property_Lockup_Bool_Exp>>>
-  _not?: Maybe<Property_Lockup_Bool_Exp>
-  _or?: Maybe<Array<Maybe<Property_Lockup_Bool_Exp>>>
-  account_address?: Maybe<String_Comparison_Exp>
-  block_number?: Maybe<Int_Comparison_Exp>
-  locked_up_event_id?: Maybe<String_Comparison_Exp>
-  property_address?: Maybe<String_Comparison_Exp>
-  value?: Maybe<Numeric_Comparison_Exp>
+  _and?: InputMaybe<Array<InputMaybe<Property_Lockup_Bool_Exp>>>
+  _not?: InputMaybe<Property_Lockup_Bool_Exp>
+  _or?: InputMaybe<Array<InputMaybe<Property_Lockup_Bool_Exp>>>
+  account_address?: InputMaybe<String_Comparison_Exp>
+  block_number?: InputMaybe<Int_Comparison_Exp>
+  locked_up_event_id?: InputMaybe<String_Comparison_Exp>
+  property_address?: InputMaybe<String_Comparison_Exp>
+  value?: InputMaybe<Numeric_Comparison_Exp>
 }
 
 export enum Property_Lockup_Constraint {
@@ -4130,16 +4131,16 @@ export enum Property_Lockup_Constraint {
 }
 
 export type Property_Lockup_Inc_Input = {
-  block_number?: Maybe<Scalars['Int']>
-  value?: Maybe<Scalars['numeric']>
+  block_number?: InputMaybe<Scalars['Int']>
+  value?: InputMaybe<Scalars['numeric']>
 }
 
 export type Property_Lockup_Insert_Input = {
-  account_address?: Maybe<Scalars['String']>
-  block_number?: Maybe<Scalars['Int']>
-  locked_up_event_id?: Maybe<Scalars['String']>
-  property_address?: Maybe<Scalars['String']>
-  value?: Maybe<Scalars['numeric']>
+  account_address?: InputMaybe<Scalars['String']>
+  block_number?: InputMaybe<Scalars['Int']>
+  locked_up_event_id?: InputMaybe<Scalars['String']>
+  property_address?: InputMaybe<Scalars['String']>
+  value?: InputMaybe<Scalars['numeric']>
 }
 
 export type Property_Lockup_Max_Fields = {
@@ -4152,11 +4153,11 @@ export type Property_Lockup_Max_Fields = {
 }
 
 export type Property_Lockup_Max_Order_By = {
-  account_address?: Maybe<Order_By>
-  block_number?: Maybe<Order_By>
-  locked_up_event_id?: Maybe<Order_By>
-  property_address?: Maybe<Order_By>
-  value?: Maybe<Order_By>
+  account_address?: InputMaybe<Order_By>
+  block_number?: InputMaybe<Order_By>
+  locked_up_event_id?: InputMaybe<Order_By>
+  property_address?: InputMaybe<Order_By>
+  value?: InputMaybe<Order_By>
 }
 
 export type Property_Lockup_Min_Fields = {
@@ -4169,11 +4170,11 @@ export type Property_Lockup_Min_Fields = {
 }
 
 export type Property_Lockup_Min_Order_By = {
-  account_address?: Maybe<Order_By>
-  block_number?: Maybe<Order_By>
-  locked_up_event_id?: Maybe<Order_By>
-  property_address?: Maybe<Order_By>
-  value?: Maybe<Order_By>
+  account_address?: InputMaybe<Order_By>
+  block_number?: InputMaybe<Order_By>
+  locked_up_event_id?: InputMaybe<Order_By>
+  property_address?: InputMaybe<Order_By>
+  value?: InputMaybe<Order_By>
 }
 
 export type Property_Lockup_Mutation_Response = {
@@ -4184,21 +4185,21 @@ export type Property_Lockup_Mutation_Response = {
 
 export type Property_Lockup_Obj_Rel_Insert_Input = {
   data: Property_Lockup_Insert_Input
-  on_conflict?: Maybe<Property_Lockup_On_Conflict>
+  on_conflict?: InputMaybe<Property_Lockup_On_Conflict>
 }
 
 export type Property_Lockup_On_Conflict = {
   constraint: Property_Lockup_Constraint
   update_columns: Array<Property_Lockup_Update_Column>
-  where?: Maybe<Property_Lockup_Bool_Exp>
+  where?: InputMaybe<Property_Lockup_Bool_Exp>
 }
 
 export type Property_Lockup_Order_By = {
-  account_address?: Maybe<Order_By>
-  block_number?: Maybe<Order_By>
-  locked_up_event_id?: Maybe<Order_By>
-  property_address?: Maybe<Order_By>
-  value?: Maybe<Order_By>
+  account_address?: InputMaybe<Order_By>
+  block_number?: InputMaybe<Order_By>
+  locked_up_event_id?: InputMaybe<Order_By>
+  property_address?: InputMaybe<Order_By>
+  value?: InputMaybe<Order_By>
 }
 
 export type Property_Lockup_Pk_Columns_Input = {
@@ -4215,11 +4216,11 @@ export enum Property_Lockup_Select_Column {
 }
 
 export type Property_Lockup_Set_Input = {
-  account_address?: Maybe<Scalars['String']>
-  block_number?: Maybe<Scalars['Int']>
-  locked_up_event_id?: Maybe<Scalars['String']>
-  property_address?: Maybe<Scalars['String']>
-  value?: Maybe<Scalars['numeric']>
+  account_address?: InputMaybe<Scalars['String']>
+  block_number?: InputMaybe<Scalars['Int']>
+  locked_up_event_id?: InputMaybe<Scalars['String']>
+  property_address?: InputMaybe<Scalars['String']>
+  value?: InputMaybe<Scalars['numeric']>
 }
 
 export type Property_Lockup_Stddev_Fields = {
@@ -4229,8 +4230,8 @@ export type Property_Lockup_Stddev_Fields = {
 }
 
 export type Property_Lockup_Stddev_Order_By = {
-  block_number?: Maybe<Order_By>
-  value?: Maybe<Order_By>
+  block_number?: InputMaybe<Order_By>
+  value?: InputMaybe<Order_By>
 }
 
 export type Property_Lockup_Stddev_Pop_Fields = {
@@ -4240,8 +4241,8 @@ export type Property_Lockup_Stddev_Pop_Fields = {
 }
 
 export type Property_Lockup_Stddev_Pop_Order_By = {
-  block_number?: Maybe<Order_By>
-  value?: Maybe<Order_By>
+  block_number?: InputMaybe<Order_By>
+  value?: InputMaybe<Order_By>
 }
 
 export type Property_Lockup_Stddev_Samp_Fields = {
@@ -4251,8 +4252,8 @@ export type Property_Lockup_Stddev_Samp_Fields = {
 }
 
 export type Property_Lockup_Stddev_Samp_Order_By = {
-  block_number?: Maybe<Order_By>
-  value?: Maybe<Order_By>
+  block_number?: InputMaybe<Order_By>
+  value?: InputMaybe<Order_By>
 }
 
 export type Property_Lockup_Sum_Fields = {
@@ -4262,8 +4263,8 @@ export type Property_Lockup_Sum_Fields = {
 }
 
 export type Property_Lockup_Sum_Order_By = {
-  block_number?: Maybe<Order_By>
-  value?: Maybe<Order_By>
+  block_number?: InputMaybe<Order_By>
+  value?: InputMaybe<Order_By>
 }
 
 export type Property_Lockup_Sum_Values = {
@@ -4294,22 +4295,22 @@ export type Property_Lockup_Sum_Values_Aggregate_Fields = {
 }
 
 export type Property_Lockup_Sum_Values_Aggregate_FieldsCountArgs = {
-  columns?: Maybe<Array<Property_Lockup_Sum_Values_Select_Column>>
-  distinct?: Maybe<Scalars['Boolean']>
+  columns?: InputMaybe<Array<Property_Lockup_Sum_Values_Select_Column>>
+  distinct?: InputMaybe<Scalars['Boolean']>
 }
 
 export type Property_Lockup_Sum_Values_Aggregate_Order_By = {
-  avg?: Maybe<Property_Lockup_Sum_Values_Avg_Order_By>
-  count?: Maybe<Order_By>
-  max?: Maybe<Property_Lockup_Sum_Values_Max_Order_By>
-  min?: Maybe<Property_Lockup_Sum_Values_Min_Order_By>
-  stddev?: Maybe<Property_Lockup_Sum_Values_Stddev_Order_By>
-  stddev_pop?: Maybe<Property_Lockup_Sum_Values_Stddev_Pop_Order_By>
-  stddev_samp?: Maybe<Property_Lockup_Sum_Values_Stddev_Samp_Order_By>
-  sum?: Maybe<Property_Lockup_Sum_Values_Sum_Order_By>
-  var_pop?: Maybe<Property_Lockup_Sum_Values_Var_Pop_Order_By>
-  var_samp?: Maybe<Property_Lockup_Sum_Values_Var_Samp_Order_By>
-  variance?: Maybe<Property_Lockup_Sum_Values_Variance_Order_By>
+  avg?: InputMaybe<Property_Lockup_Sum_Values_Avg_Order_By>
+  count?: InputMaybe<Order_By>
+  max?: InputMaybe<Property_Lockup_Sum_Values_Max_Order_By>
+  min?: InputMaybe<Property_Lockup_Sum_Values_Min_Order_By>
+  stddev?: InputMaybe<Property_Lockup_Sum_Values_Stddev_Order_By>
+  stddev_pop?: InputMaybe<Property_Lockup_Sum_Values_Stddev_Pop_Order_By>
+  stddev_samp?: InputMaybe<Property_Lockup_Sum_Values_Stddev_Samp_Order_By>
+  sum?: InputMaybe<Property_Lockup_Sum_Values_Sum_Order_By>
+  var_pop?: InputMaybe<Property_Lockup_Sum_Values_Var_Pop_Order_By>
+  var_samp?: InputMaybe<Property_Lockup_Sum_Values_Var_Samp_Order_By>
+  variance?: InputMaybe<Property_Lockup_Sum_Values_Variance_Order_By>
 }
 
 export type Property_Lockup_Sum_Values_Avg_Fields = {
@@ -4318,15 +4319,15 @@ export type Property_Lockup_Sum_Values_Avg_Fields = {
 }
 
 export type Property_Lockup_Sum_Values_Avg_Order_By = {
-  sum_values?: Maybe<Order_By>
+  sum_values?: InputMaybe<Order_By>
 }
 
 export type Property_Lockup_Sum_Values_Bool_Exp = {
-  _and?: Maybe<Array<Maybe<Property_Lockup_Sum_Values_Bool_Exp>>>
-  _not?: Maybe<Property_Lockup_Sum_Values_Bool_Exp>
-  _or?: Maybe<Array<Maybe<Property_Lockup_Sum_Values_Bool_Exp>>>
-  property_address?: Maybe<String_Comparison_Exp>
-  sum_values?: Maybe<Numeric_Comparison_Exp>
+  _and?: InputMaybe<Array<InputMaybe<Property_Lockup_Sum_Values_Bool_Exp>>>
+  _not?: InputMaybe<Property_Lockup_Sum_Values_Bool_Exp>
+  _or?: InputMaybe<Array<InputMaybe<Property_Lockup_Sum_Values_Bool_Exp>>>
+  property_address?: InputMaybe<String_Comparison_Exp>
+  sum_values?: InputMaybe<Numeric_Comparison_Exp>
 }
 
 export type Property_Lockup_Sum_Values_Max_Fields = {
@@ -4336,8 +4337,8 @@ export type Property_Lockup_Sum_Values_Max_Fields = {
 }
 
 export type Property_Lockup_Sum_Values_Max_Order_By = {
-  property_address?: Maybe<Order_By>
-  sum_values?: Maybe<Order_By>
+  property_address?: InputMaybe<Order_By>
+  sum_values?: InputMaybe<Order_By>
 }
 
 export type Property_Lockup_Sum_Values_Min_Fields = {
@@ -4347,13 +4348,13 @@ export type Property_Lockup_Sum_Values_Min_Fields = {
 }
 
 export type Property_Lockup_Sum_Values_Min_Order_By = {
-  property_address?: Maybe<Order_By>
-  sum_values?: Maybe<Order_By>
+  property_address?: InputMaybe<Order_By>
+  sum_values?: InputMaybe<Order_By>
 }
 
 export type Property_Lockup_Sum_Values_Order_By = {
-  property_address?: Maybe<Order_By>
-  sum_values?: Maybe<Order_By>
+  property_address?: InputMaybe<Order_By>
+  sum_values?: InputMaybe<Order_By>
 }
 
 export enum Property_Lockup_Sum_Values_Select_Column {
@@ -4367,7 +4368,7 @@ export type Property_Lockup_Sum_Values_Stddev_Fields = {
 }
 
 export type Property_Lockup_Sum_Values_Stddev_Order_By = {
-  sum_values?: Maybe<Order_By>
+  sum_values?: InputMaybe<Order_By>
 }
 
 export type Property_Lockup_Sum_Values_Stddev_Pop_Fields = {
@@ -4376,7 +4377,7 @@ export type Property_Lockup_Sum_Values_Stddev_Pop_Fields = {
 }
 
 export type Property_Lockup_Sum_Values_Stddev_Pop_Order_By = {
-  sum_values?: Maybe<Order_By>
+  sum_values?: InputMaybe<Order_By>
 }
 
 export type Property_Lockup_Sum_Values_Stddev_Samp_Fields = {
@@ -4385,7 +4386,7 @@ export type Property_Lockup_Sum_Values_Stddev_Samp_Fields = {
 }
 
 export type Property_Lockup_Sum_Values_Stddev_Samp_Order_By = {
-  sum_values?: Maybe<Order_By>
+  sum_values?: InputMaybe<Order_By>
 }
 
 export type Property_Lockup_Sum_Values_Sum_Fields = {
@@ -4394,7 +4395,7 @@ export type Property_Lockup_Sum_Values_Sum_Fields = {
 }
 
 export type Property_Lockup_Sum_Values_Sum_Order_By = {
-  sum_values?: Maybe<Order_By>
+  sum_values?: InputMaybe<Order_By>
 }
 
 export type Property_Lockup_Sum_Values_Var_Pop_Fields = {
@@ -4403,7 +4404,7 @@ export type Property_Lockup_Sum_Values_Var_Pop_Fields = {
 }
 
 export type Property_Lockup_Sum_Values_Var_Pop_Order_By = {
-  sum_values?: Maybe<Order_By>
+  sum_values?: InputMaybe<Order_By>
 }
 
 export type Property_Lockup_Sum_Values_Var_Samp_Fields = {
@@ -4412,7 +4413,7 @@ export type Property_Lockup_Sum_Values_Var_Samp_Fields = {
 }
 
 export type Property_Lockup_Sum_Values_Var_Samp_Order_By = {
-  sum_values?: Maybe<Order_By>
+  sum_values?: InputMaybe<Order_By>
 }
 
 export type Property_Lockup_Sum_Values_Variance_Fields = {
@@ -4421,7 +4422,7 @@ export type Property_Lockup_Sum_Values_Variance_Fields = {
 }
 
 export type Property_Lockup_Sum_Values_Variance_Order_By = {
-  sum_values?: Maybe<Order_By>
+  sum_values?: InputMaybe<Order_By>
 }
 
 export enum Property_Lockup_Update_Column {
@@ -4439,8 +4440,8 @@ export type Property_Lockup_Var_Pop_Fields = {
 }
 
 export type Property_Lockup_Var_Pop_Order_By = {
-  block_number?: Maybe<Order_By>
-  value?: Maybe<Order_By>
+  block_number?: InputMaybe<Order_By>
+  value?: InputMaybe<Order_By>
 }
 
 export type Property_Lockup_Var_Samp_Fields = {
@@ -4450,8 +4451,8 @@ export type Property_Lockup_Var_Samp_Fields = {
 }
 
 export type Property_Lockup_Var_Samp_Order_By = {
-  block_number?: Maybe<Order_By>
-  value?: Maybe<Order_By>
+  block_number?: InputMaybe<Order_By>
+  value?: InputMaybe<Order_By>
 }
 
 export type Property_Lockup_Variance_Fields = {
@@ -4461,8 +4462,8 @@ export type Property_Lockup_Variance_Fields = {
 }
 
 export type Property_Lockup_Variance_Order_By = {
-  block_number?: Maybe<Order_By>
-  value?: Maybe<Order_By>
+  block_number?: InputMaybe<Order_By>
+  value?: InputMaybe<Order_By>
 }
 
 export type Property_Meta = {
@@ -4479,19 +4480,19 @@ export type Property_Meta = {
 }
 
 export type Property_MetaLockupArgs = {
-  distinct_on?: Maybe<Array<Property_Lockup_Select_Column>>
-  limit?: Maybe<Scalars['Int']>
-  offset?: Maybe<Scalars['Int']>
-  order_by?: Maybe<Array<Property_Lockup_Order_By>>
-  where?: Maybe<Property_Lockup_Bool_Exp>
+  distinct_on?: InputMaybe<Array<Property_Lockup_Select_Column>>
+  limit?: InputMaybe<Scalars['Int']>
+  offset?: InputMaybe<Scalars['Int']>
+  order_by?: InputMaybe<Array<Property_Lockup_Order_By>>
+  where?: InputMaybe<Property_Lockup_Bool_Exp>
 }
 
 export type Property_MetaLockup_AggregateArgs = {
-  distinct_on?: Maybe<Array<Property_Lockup_Select_Column>>
-  limit?: Maybe<Scalars['Int']>
-  offset?: Maybe<Scalars['Int']>
-  order_by?: Maybe<Array<Property_Lockup_Order_By>>
-  where?: Maybe<Property_Lockup_Bool_Exp>
+  distinct_on?: InputMaybe<Array<Property_Lockup_Select_Column>>
+  limit?: InputMaybe<Scalars['Int']>
+  offset?: InputMaybe<Scalars['Int']>
+  order_by?: InputMaybe<Array<Property_Lockup_Order_By>>
+  where?: InputMaybe<Property_Lockup_Bool_Exp>
 }
 
 export type Property_Meta_Aggregate = {
@@ -4516,27 +4517,27 @@ export type Property_Meta_Aggregate_Fields = {
 }
 
 export type Property_Meta_Aggregate_FieldsCountArgs = {
-  columns?: Maybe<Array<Property_Meta_Select_Column>>
-  distinct?: Maybe<Scalars['Boolean']>
+  columns?: InputMaybe<Array<Property_Meta_Select_Column>>
+  distinct?: InputMaybe<Scalars['Boolean']>
 }
 
 export type Property_Meta_Aggregate_Order_By = {
-  avg?: Maybe<Property_Meta_Avg_Order_By>
-  count?: Maybe<Order_By>
-  max?: Maybe<Property_Meta_Max_Order_By>
-  min?: Maybe<Property_Meta_Min_Order_By>
-  stddev?: Maybe<Property_Meta_Stddev_Order_By>
-  stddev_pop?: Maybe<Property_Meta_Stddev_Pop_Order_By>
-  stddev_samp?: Maybe<Property_Meta_Stddev_Samp_Order_By>
-  sum?: Maybe<Property_Meta_Sum_Order_By>
-  var_pop?: Maybe<Property_Meta_Var_Pop_Order_By>
-  var_samp?: Maybe<Property_Meta_Var_Samp_Order_By>
-  variance?: Maybe<Property_Meta_Variance_Order_By>
+  avg?: InputMaybe<Property_Meta_Avg_Order_By>
+  count?: InputMaybe<Order_By>
+  max?: InputMaybe<Property_Meta_Max_Order_By>
+  min?: InputMaybe<Property_Meta_Min_Order_By>
+  stddev?: InputMaybe<Property_Meta_Stddev_Order_By>
+  stddev_pop?: InputMaybe<Property_Meta_Stddev_Pop_Order_By>
+  stddev_samp?: InputMaybe<Property_Meta_Stddev_Samp_Order_By>
+  sum?: InputMaybe<Property_Meta_Sum_Order_By>
+  var_pop?: InputMaybe<Property_Meta_Var_Pop_Order_By>
+  var_samp?: InputMaybe<Property_Meta_Var_Samp_Order_By>
+  variance?: InputMaybe<Property_Meta_Variance_Order_By>
 }
 
 export type Property_Meta_Arr_Rel_Insert_Input = {
   data: Array<Property_Meta_Insert_Input>
-  on_conflict?: Maybe<Property_Meta_On_Conflict>
+  on_conflict?: InputMaybe<Property_Meta_On_Conflict>
 }
 
 export type Property_Meta_Avg_Fields = {
@@ -4546,22 +4547,22 @@ export type Property_Meta_Avg_Fields = {
 }
 
 export type Property_Meta_Avg_Order_By = {
-  block_number?: Maybe<Order_By>
-  total_supply?: Maybe<Order_By>
+  block_number?: InputMaybe<Order_By>
+  total_supply?: InputMaybe<Order_By>
 }
 
 export type Property_Meta_Bool_Exp = {
-  _and?: Maybe<Array<Maybe<Property_Meta_Bool_Exp>>>
-  _not?: Maybe<Property_Meta_Bool_Exp>
-  _or?: Maybe<Array<Maybe<Property_Meta_Bool_Exp>>>
-  author?: Maybe<String_Comparison_Exp>
-  block_number?: Maybe<Int_Comparison_Exp>
-  lockup?: Maybe<Property_Lockup_Bool_Exp>
-  name?: Maybe<String_Comparison_Exp>
-  property?: Maybe<String_Comparison_Exp>
-  sender?: Maybe<String_Comparison_Exp>
-  symbol?: Maybe<String_Comparison_Exp>
-  total_supply?: Maybe<Numeric_Comparison_Exp>
+  _and?: InputMaybe<Array<InputMaybe<Property_Meta_Bool_Exp>>>
+  _not?: InputMaybe<Property_Meta_Bool_Exp>
+  _or?: InputMaybe<Array<InputMaybe<Property_Meta_Bool_Exp>>>
+  author?: InputMaybe<String_Comparison_Exp>
+  block_number?: InputMaybe<Int_Comparison_Exp>
+  lockup?: InputMaybe<Property_Lockup_Bool_Exp>
+  name?: InputMaybe<String_Comparison_Exp>
+  property?: InputMaybe<String_Comparison_Exp>
+  sender?: InputMaybe<String_Comparison_Exp>
+  symbol?: InputMaybe<String_Comparison_Exp>
+  total_supply?: InputMaybe<Numeric_Comparison_Exp>
 }
 
 export enum Property_Meta_Constraint {
@@ -4569,19 +4570,19 @@ export enum Property_Meta_Constraint {
 }
 
 export type Property_Meta_Inc_Input = {
-  block_number?: Maybe<Scalars['Int']>
-  total_supply?: Maybe<Scalars['numeric']>
+  block_number?: InputMaybe<Scalars['Int']>
+  total_supply?: InputMaybe<Scalars['numeric']>
 }
 
 export type Property_Meta_Insert_Input = {
-  author?: Maybe<Scalars['String']>
-  block_number?: Maybe<Scalars['Int']>
-  lockup?: Maybe<Property_Lockup_Arr_Rel_Insert_Input>
-  name?: Maybe<Scalars['String']>
-  property?: Maybe<Scalars['String']>
-  sender?: Maybe<Scalars['String']>
-  symbol?: Maybe<Scalars['String']>
-  total_supply?: Maybe<Scalars['numeric']>
+  author?: InputMaybe<Scalars['String']>
+  block_number?: InputMaybe<Scalars['Int']>
+  lockup?: InputMaybe<Property_Lockup_Arr_Rel_Insert_Input>
+  name?: InputMaybe<Scalars['String']>
+  property?: InputMaybe<Scalars['String']>
+  sender?: InputMaybe<Scalars['String']>
+  symbol?: InputMaybe<Scalars['String']>
+  total_supply?: InputMaybe<Scalars['numeric']>
 }
 
 export type Property_Meta_Max_Fields = {
@@ -4596,13 +4597,13 @@ export type Property_Meta_Max_Fields = {
 }
 
 export type Property_Meta_Max_Order_By = {
-  author?: Maybe<Order_By>
-  block_number?: Maybe<Order_By>
-  name?: Maybe<Order_By>
-  property?: Maybe<Order_By>
-  sender?: Maybe<Order_By>
-  symbol?: Maybe<Order_By>
-  total_supply?: Maybe<Order_By>
+  author?: InputMaybe<Order_By>
+  block_number?: InputMaybe<Order_By>
+  name?: InputMaybe<Order_By>
+  property?: InputMaybe<Order_By>
+  sender?: InputMaybe<Order_By>
+  symbol?: InputMaybe<Order_By>
+  total_supply?: InputMaybe<Order_By>
 }
 
 export type Property_Meta_Min_Fields = {
@@ -4617,13 +4618,13 @@ export type Property_Meta_Min_Fields = {
 }
 
 export type Property_Meta_Min_Order_By = {
-  author?: Maybe<Order_By>
-  block_number?: Maybe<Order_By>
-  name?: Maybe<Order_By>
-  property?: Maybe<Order_By>
-  sender?: Maybe<Order_By>
-  symbol?: Maybe<Order_By>
-  total_supply?: Maybe<Order_By>
+  author?: InputMaybe<Order_By>
+  block_number?: InputMaybe<Order_By>
+  name?: InputMaybe<Order_By>
+  property?: InputMaybe<Order_By>
+  sender?: InputMaybe<Order_By>
+  symbol?: InputMaybe<Order_By>
+  total_supply?: InputMaybe<Order_By>
 }
 
 export type Property_Meta_Mutation_Response = {
@@ -4634,24 +4635,24 @@ export type Property_Meta_Mutation_Response = {
 
 export type Property_Meta_Obj_Rel_Insert_Input = {
   data: Property_Meta_Insert_Input
-  on_conflict?: Maybe<Property_Meta_On_Conflict>
+  on_conflict?: InputMaybe<Property_Meta_On_Conflict>
 }
 
 export type Property_Meta_On_Conflict = {
   constraint: Property_Meta_Constraint
   update_columns: Array<Property_Meta_Update_Column>
-  where?: Maybe<Property_Meta_Bool_Exp>
+  where?: InputMaybe<Property_Meta_Bool_Exp>
 }
 
 export type Property_Meta_Order_By = {
-  author?: Maybe<Order_By>
-  block_number?: Maybe<Order_By>
-  lockup_aggregate?: Maybe<Property_Lockup_Aggregate_Order_By>
-  name?: Maybe<Order_By>
-  property?: Maybe<Order_By>
-  sender?: Maybe<Order_By>
-  symbol?: Maybe<Order_By>
-  total_supply?: Maybe<Order_By>
+  author?: InputMaybe<Order_By>
+  block_number?: InputMaybe<Order_By>
+  lockup_aggregate?: InputMaybe<Property_Lockup_Aggregate_Order_By>
+  name?: InputMaybe<Order_By>
+  property?: InputMaybe<Order_By>
+  sender?: InputMaybe<Order_By>
+  symbol?: InputMaybe<Order_By>
+  total_supply?: InputMaybe<Order_By>
 }
 
 export type Property_Meta_Pk_Columns_Input = {
@@ -4670,13 +4671,13 @@ export enum Property_Meta_Select_Column {
 }
 
 export type Property_Meta_Set_Input = {
-  author?: Maybe<Scalars['String']>
-  block_number?: Maybe<Scalars['Int']>
-  name?: Maybe<Scalars['String']>
-  property?: Maybe<Scalars['String']>
-  sender?: Maybe<Scalars['String']>
-  symbol?: Maybe<Scalars['String']>
-  total_supply?: Maybe<Scalars['numeric']>
+  author?: InputMaybe<Scalars['String']>
+  block_number?: InputMaybe<Scalars['Int']>
+  name?: InputMaybe<Scalars['String']>
+  property?: InputMaybe<Scalars['String']>
+  sender?: InputMaybe<Scalars['String']>
+  symbol?: InputMaybe<Scalars['String']>
+  total_supply?: InputMaybe<Scalars['numeric']>
 }
 
 export type Property_Meta_Stddev_Fields = {
@@ -4686,8 +4687,8 @@ export type Property_Meta_Stddev_Fields = {
 }
 
 export type Property_Meta_Stddev_Order_By = {
-  block_number?: Maybe<Order_By>
-  total_supply?: Maybe<Order_By>
+  block_number?: InputMaybe<Order_By>
+  total_supply?: InputMaybe<Order_By>
 }
 
 export type Property_Meta_Stddev_Pop_Fields = {
@@ -4697,8 +4698,8 @@ export type Property_Meta_Stddev_Pop_Fields = {
 }
 
 export type Property_Meta_Stddev_Pop_Order_By = {
-  block_number?: Maybe<Order_By>
-  total_supply?: Maybe<Order_By>
+  block_number?: InputMaybe<Order_By>
+  total_supply?: InputMaybe<Order_By>
 }
 
 export type Property_Meta_Stddev_Samp_Fields = {
@@ -4708,8 +4709,8 @@ export type Property_Meta_Stddev_Samp_Fields = {
 }
 
 export type Property_Meta_Stddev_Samp_Order_By = {
-  block_number?: Maybe<Order_By>
-  total_supply?: Maybe<Order_By>
+  block_number?: InputMaybe<Order_By>
+  total_supply?: InputMaybe<Order_By>
 }
 
 export type Property_Meta_Sum_Fields = {
@@ -4719,8 +4720,8 @@ export type Property_Meta_Sum_Fields = {
 }
 
 export type Property_Meta_Sum_Order_By = {
-  block_number?: Maybe<Order_By>
-  total_supply?: Maybe<Order_By>
+  block_number?: InputMaybe<Order_By>
+  total_supply?: InputMaybe<Order_By>
 }
 
 export enum Property_Meta_Update_Column {
@@ -4740,8 +4741,8 @@ export type Property_Meta_Var_Pop_Fields = {
 }
 
 export type Property_Meta_Var_Pop_Order_By = {
-  block_number?: Maybe<Order_By>
-  total_supply?: Maybe<Order_By>
+  block_number?: InputMaybe<Order_By>
+  total_supply?: InputMaybe<Order_By>
 }
 
 export type Property_Meta_Var_Samp_Fields = {
@@ -4751,8 +4752,8 @@ export type Property_Meta_Var_Samp_Fields = {
 }
 
 export type Property_Meta_Var_Samp_Order_By = {
-  block_number?: Maybe<Order_By>
-  total_supply?: Maybe<Order_By>
+  block_number?: InputMaybe<Order_By>
+  total_supply?: InputMaybe<Order_By>
 }
 
 export type Property_Meta_Variance_Fields = {
@@ -4762,8 +4763,8 @@ export type Property_Meta_Variance_Fields = {
 }
 
 export type Property_Meta_Variance_Order_By = {
-  block_number?: Maybe<Order_By>
-  total_supply?: Maybe<Order_By>
+  block_number?: InputMaybe<Order_By>
+  total_supply?: InputMaybe<Order_By>
 }
 
 export type Query_Root = {
@@ -4817,19 +4818,19 @@ export type Query_Root = {
 }
 
 export type Query_RootAccount_LockupArgs = {
-  distinct_on?: Maybe<Array<Account_Lockup_Select_Column>>
-  limit?: Maybe<Scalars['Int']>
-  offset?: Maybe<Scalars['Int']>
-  order_by?: Maybe<Array<Account_Lockup_Order_By>>
-  where?: Maybe<Account_Lockup_Bool_Exp>
+  distinct_on?: InputMaybe<Array<Account_Lockup_Select_Column>>
+  limit?: InputMaybe<Scalars['Int']>
+  offset?: InputMaybe<Scalars['Int']>
+  order_by?: InputMaybe<Array<Account_Lockup_Order_By>>
+  where?: InputMaybe<Account_Lockup_Bool_Exp>
 }
 
 export type Query_RootAccount_Lockup_AggregateArgs = {
-  distinct_on?: Maybe<Array<Account_Lockup_Select_Column>>
-  limit?: Maybe<Scalars['Int']>
-  offset?: Maybe<Scalars['Int']>
-  order_by?: Maybe<Array<Account_Lockup_Order_By>>
-  where?: Maybe<Account_Lockup_Bool_Exp>
+  distinct_on?: InputMaybe<Array<Account_Lockup_Select_Column>>
+  limit?: InputMaybe<Scalars['Int']>
+  offset?: InputMaybe<Scalars['Int']>
+  order_by?: InputMaybe<Array<Account_Lockup_Order_By>>
+  where?: InputMaybe<Account_Lockup_Bool_Exp>
 }
 
 export type Query_RootAccount_Lockup_By_PkArgs = {
@@ -4838,35 +4839,35 @@ export type Query_RootAccount_Lockup_By_PkArgs = {
 }
 
 export type Query_RootAccount_Lockup_Sum_ValuesArgs = {
-  distinct_on?: Maybe<Array<Account_Lockup_Sum_Values_Select_Column>>
-  limit?: Maybe<Scalars['Int']>
-  offset?: Maybe<Scalars['Int']>
-  order_by?: Maybe<Array<Account_Lockup_Sum_Values_Order_By>>
-  where?: Maybe<Account_Lockup_Sum_Values_Bool_Exp>
+  distinct_on?: InputMaybe<Array<Account_Lockup_Sum_Values_Select_Column>>
+  limit?: InputMaybe<Scalars['Int']>
+  offset?: InputMaybe<Scalars['Int']>
+  order_by?: InputMaybe<Array<Account_Lockup_Sum_Values_Order_By>>
+  where?: InputMaybe<Account_Lockup_Sum_Values_Bool_Exp>
 }
 
 export type Query_RootAccount_Lockup_Sum_Values_AggregateArgs = {
-  distinct_on?: Maybe<Array<Account_Lockup_Sum_Values_Select_Column>>
-  limit?: Maybe<Scalars['Int']>
-  offset?: Maybe<Scalars['Int']>
-  order_by?: Maybe<Array<Account_Lockup_Sum_Values_Order_By>>
-  where?: Maybe<Account_Lockup_Sum_Values_Bool_Exp>
+  distinct_on?: InputMaybe<Array<Account_Lockup_Sum_Values_Select_Column>>
+  limit?: InputMaybe<Scalars['Int']>
+  offset?: InputMaybe<Scalars['Int']>
+  order_by?: InputMaybe<Array<Account_Lockup_Sum_Values_Order_By>>
+  where?: InputMaybe<Account_Lockup_Sum_Values_Bool_Exp>
 }
 
 export type Query_RootDev_Property_TransferArgs = {
-  distinct_on?: Maybe<Array<Dev_Property_Transfer_Select_Column>>
-  limit?: Maybe<Scalars['Int']>
-  offset?: Maybe<Scalars['Int']>
-  order_by?: Maybe<Array<Dev_Property_Transfer_Order_By>>
-  where?: Maybe<Dev_Property_Transfer_Bool_Exp>
+  distinct_on?: InputMaybe<Array<Dev_Property_Transfer_Select_Column>>
+  limit?: InputMaybe<Scalars['Int']>
+  offset?: InputMaybe<Scalars['Int']>
+  order_by?: InputMaybe<Array<Dev_Property_Transfer_Order_By>>
+  where?: InputMaybe<Dev_Property_Transfer_Bool_Exp>
 }
 
 export type Query_RootDev_Property_Transfer_AggregateArgs = {
-  distinct_on?: Maybe<Array<Dev_Property_Transfer_Select_Column>>
-  limit?: Maybe<Scalars['Int']>
-  offset?: Maybe<Scalars['Int']>
-  order_by?: Maybe<Array<Dev_Property_Transfer_Order_By>>
-  where?: Maybe<Dev_Property_Transfer_Bool_Exp>
+  distinct_on?: InputMaybe<Array<Dev_Property_Transfer_Select_Column>>
+  limit?: InputMaybe<Scalars['Int']>
+  offset?: InputMaybe<Scalars['Int']>
+  order_by?: InputMaybe<Array<Dev_Property_Transfer_Order_By>>
+  where?: InputMaybe<Dev_Property_Transfer_Bool_Exp>
 }
 
 export type Query_RootDev_Property_Transfer_By_PkArgs = {
@@ -4874,19 +4875,19 @@ export type Query_RootDev_Property_Transfer_By_PkArgs = {
 }
 
 export type Query_RootLockup_LockedupArgs = {
-  distinct_on?: Maybe<Array<Lockup_Lockedup_Select_Column>>
-  limit?: Maybe<Scalars['Int']>
-  offset?: Maybe<Scalars['Int']>
-  order_by?: Maybe<Array<Lockup_Lockedup_Order_By>>
-  where?: Maybe<Lockup_Lockedup_Bool_Exp>
+  distinct_on?: InputMaybe<Array<Lockup_Lockedup_Select_Column>>
+  limit?: InputMaybe<Scalars['Int']>
+  offset?: InputMaybe<Scalars['Int']>
+  order_by?: InputMaybe<Array<Lockup_Lockedup_Order_By>>
+  where?: InputMaybe<Lockup_Lockedup_Bool_Exp>
 }
 
 export type Query_RootLockup_Lockedup_AggregateArgs = {
-  distinct_on?: Maybe<Array<Lockup_Lockedup_Select_Column>>
-  limit?: Maybe<Scalars['Int']>
-  offset?: Maybe<Scalars['Int']>
-  order_by?: Maybe<Array<Lockup_Lockedup_Order_By>>
-  where?: Maybe<Lockup_Lockedup_Bool_Exp>
+  distinct_on?: InputMaybe<Array<Lockup_Lockedup_Select_Column>>
+  limit?: InputMaybe<Scalars['Int']>
+  offset?: InputMaybe<Scalars['Int']>
+  order_by?: InputMaybe<Array<Lockup_Lockedup_Order_By>>
+  where?: InputMaybe<Lockup_Lockedup_Bool_Exp>
 }
 
 export type Query_RootLockup_Lockedup_By_PkArgs = {
@@ -4894,19 +4895,19 @@ export type Query_RootLockup_Lockedup_By_PkArgs = {
 }
 
 export type Query_RootMarket_Factory_CreateArgs = {
-  distinct_on?: Maybe<Array<Market_Factory_Create_Select_Column>>
-  limit?: Maybe<Scalars['Int']>
-  offset?: Maybe<Scalars['Int']>
-  order_by?: Maybe<Array<Market_Factory_Create_Order_By>>
-  where?: Maybe<Market_Factory_Create_Bool_Exp>
+  distinct_on?: InputMaybe<Array<Market_Factory_Create_Select_Column>>
+  limit?: InputMaybe<Scalars['Int']>
+  offset?: InputMaybe<Scalars['Int']>
+  order_by?: InputMaybe<Array<Market_Factory_Create_Order_By>>
+  where?: InputMaybe<Market_Factory_Create_Bool_Exp>
 }
 
 export type Query_RootMarket_Factory_Create_AggregateArgs = {
-  distinct_on?: Maybe<Array<Market_Factory_Create_Select_Column>>
-  limit?: Maybe<Scalars['Int']>
-  offset?: Maybe<Scalars['Int']>
-  order_by?: Maybe<Array<Market_Factory_Create_Order_By>>
-  where?: Maybe<Market_Factory_Create_Bool_Exp>
+  distinct_on?: InputMaybe<Array<Market_Factory_Create_Select_Column>>
+  limit?: InputMaybe<Scalars['Int']>
+  offset?: InputMaybe<Scalars['Int']>
+  order_by?: InputMaybe<Array<Market_Factory_Create_Order_By>>
+  where?: InputMaybe<Market_Factory_Create_Bool_Exp>
 }
 
 export type Query_RootMarket_Factory_Create_By_PkArgs = {
@@ -4914,19 +4915,19 @@ export type Query_RootMarket_Factory_Create_By_PkArgs = {
 }
 
 export type Query_RootMetrics_Factory_CreateArgs = {
-  distinct_on?: Maybe<Array<Metrics_Factory_Create_Select_Column>>
-  limit?: Maybe<Scalars['Int']>
-  offset?: Maybe<Scalars['Int']>
-  order_by?: Maybe<Array<Metrics_Factory_Create_Order_By>>
-  where?: Maybe<Metrics_Factory_Create_Bool_Exp>
+  distinct_on?: InputMaybe<Array<Metrics_Factory_Create_Select_Column>>
+  limit?: InputMaybe<Scalars['Int']>
+  offset?: InputMaybe<Scalars['Int']>
+  order_by?: InputMaybe<Array<Metrics_Factory_Create_Order_By>>
+  where?: InputMaybe<Metrics_Factory_Create_Bool_Exp>
 }
 
 export type Query_RootMetrics_Factory_Create_AggregateArgs = {
-  distinct_on?: Maybe<Array<Metrics_Factory_Create_Select_Column>>
-  limit?: Maybe<Scalars['Int']>
-  offset?: Maybe<Scalars['Int']>
-  order_by?: Maybe<Array<Metrics_Factory_Create_Order_By>>
-  where?: Maybe<Metrics_Factory_Create_Bool_Exp>
+  distinct_on?: InputMaybe<Array<Metrics_Factory_Create_Select_Column>>
+  limit?: InputMaybe<Scalars['Int']>
+  offset?: InputMaybe<Scalars['Int']>
+  order_by?: InputMaybe<Array<Metrics_Factory_Create_Order_By>>
+  where?: InputMaybe<Metrics_Factory_Create_Bool_Exp>
 }
 
 export type Query_RootMetrics_Factory_Create_By_PkArgs = {
@@ -4934,19 +4935,19 @@ export type Query_RootMetrics_Factory_Create_By_PkArgs = {
 }
 
 export type Query_RootMetrics_Factory_DestroyArgs = {
-  distinct_on?: Maybe<Array<Metrics_Factory_Destroy_Select_Column>>
-  limit?: Maybe<Scalars['Int']>
-  offset?: Maybe<Scalars['Int']>
-  order_by?: Maybe<Array<Metrics_Factory_Destroy_Order_By>>
-  where?: Maybe<Metrics_Factory_Destroy_Bool_Exp>
+  distinct_on?: InputMaybe<Array<Metrics_Factory_Destroy_Select_Column>>
+  limit?: InputMaybe<Scalars['Int']>
+  offset?: InputMaybe<Scalars['Int']>
+  order_by?: InputMaybe<Array<Metrics_Factory_Destroy_Order_By>>
+  where?: InputMaybe<Metrics_Factory_Destroy_Bool_Exp>
 }
 
 export type Query_RootMetrics_Factory_Destroy_AggregateArgs = {
-  distinct_on?: Maybe<Array<Metrics_Factory_Destroy_Select_Column>>
-  limit?: Maybe<Scalars['Int']>
-  offset?: Maybe<Scalars['Int']>
-  order_by?: Maybe<Array<Metrics_Factory_Destroy_Order_By>>
-  where?: Maybe<Metrics_Factory_Destroy_Bool_Exp>
+  distinct_on?: InputMaybe<Array<Metrics_Factory_Destroy_Select_Column>>
+  limit?: InputMaybe<Scalars['Int']>
+  offset?: InputMaybe<Scalars['Int']>
+  order_by?: InputMaybe<Array<Metrics_Factory_Destroy_Order_By>>
+  where?: InputMaybe<Metrics_Factory_Destroy_Bool_Exp>
 }
 
 export type Query_RootMetrics_Factory_Destroy_By_PkArgs = {
@@ -4954,19 +4955,19 @@ export type Query_RootMetrics_Factory_Destroy_By_PkArgs = {
 }
 
 export type Query_RootPolicy_Factory_CreateArgs = {
-  distinct_on?: Maybe<Array<Policy_Factory_Create_Select_Column>>
-  limit?: Maybe<Scalars['Int']>
-  offset?: Maybe<Scalars['Int']>
-  order_by?: Maybe<Array<Policy_Factory_Create_Order_By>>
-  where?: Maybe<Policy_Factory_Create_Bool_Exp>
+  distinct_on?: InputMaybe<Array<Policy_Factory_Create_Select_Column>>
+  limit?: InputMaybe<Scalars['Int']>
+  offset?: InputMaybe<Scalars['Int']>
+  order_by?: InputMaybe<Array<Policy_Factory_Create_Order_By>>
+  where?: InputMaybe<Policy_Factory_Create_Bool_Exp>
 }
 
 export type Query_RootPolicy_Factory_Create_AggregateArgs = {
-  distinct_on?: Maybe<Array<Policy_Factory_Create_Select_Column>>
-  limit?: Maybe<Scalars['Int']>
-  offset?: Maybe<Scalars['Int']>
-  order_by?: Maybe<Array<Policy_Factory_Create_Order_By>>
-  where?: Maybe<Policy_Factory_Create_Bool_Exp>
+  distinct_on?: InputMaybe<Array<Policy_Factory_Create_Select_Column>>
+  limit?: InputMaybe<Scalars['Int']>
+  offset?: InputMaybe<Scalars['Int']>
+  order_by?: InputMaybe<Array<Policy_Factory_Create_Order_By>>
+  where?: InputMaybe<Policy_Factory_Create_Bool_Exp>
 }
 
 export type Query_RootPolicy_Factory_Create_By_PkArgs = {
@@ -4974,19 +4975,19 @@ export type Query_RootPolicy_Factory_Create_By_PkArgs = {
 }
 
 export type Query_RootProperty_AuthenticationArgs = {
-  distinct_on?: Maybe<Array<Property_Authentication_Select_Column>>
-  limit?: Maybe<Scalars['Int']>
-  offset?: Maybe<Scalars['Int']>
-  order_by?: Maybe<Array<Property_Authentication_Order_By>>
-  where?: Maybe<Property_Authentication_Bool_Exp>
+  distinct_on?: InputMaybe<Array<Property_Authentication_Select_Column>>
+  limit?: InputMaybe<Scalars['Int']>
+  offset?: InputMaybe<Scalars['Int']>
+  order_by?: InputMaybe<Array<Property_Authentication_Order_By>>
+  where?: InputMaybe<Property_Authentication_Bool_Exp>
 }
 
 export type Query_RootProperty_Authentication_AggregateArgs = {
-  distinct_on?: Maybe<Array<Property_Authentication_Select_Column>>
-  limit?: Maybe<Scalars['Int']>
-  offset?: Maybe<Scalars['Int']>
-  order_by?: Maybe<Array<Property_Authentication_Order_By>>
-  where?: Maybe<Property_Authentication_Bool_Exp>
+  distinct_on?: InputMaybe<Array<Property_Authentication_Select_Column>>
+  limit?: InputMaybe<Scalars['Int']>
+  offset?: InputMaybe<Scalars['Int']>
+  order_by?: InputMaybe<Array<Property_Authentication_Order_By>>
+  where?: InputMaybe<Property_Authentication_Bool_Exp>
 }
 
 export type Query_RootProperty_Authentication_By_PkArgs = {
@@ -4995,19 +4996,19 @@ export type Query_RootProperty_Authentication_By_PkArgs = {
 }
 
 export type Query_RootProperty_Authentication_DeletedArgs = {
-  distinct_on?: Maybe<Array<Property_Authentication_Deleted_Select_Column>>
-  limit?: Maybe<Scalars['Int']>
-  offset?: Maybe<Scalars['Int']>
-  order_by?: Maybe<Array<Property_Authentication_Deleted_Order_By>>
-  where?: Maybe<Property_Authentication_Deleted_Bool_Exp>
+  distinct_on?: InputMaybe<Array<Property_Authentication_Deleted_Select_Column>>
+  limit?: InputMaybe<Scalars['Int']>
+  offset?: InputMaybe<Scalars['Int']>
+  order_by?: InputMaybe<Array<Property_Authentication_Deleted_Order_By>>
+  where?: InputMaybe<Property_Authentication_Deleted_Bool_Exp>
 }
 
 export type Query_RootProperty_Authentication_Deleted_AggregateArgs = {
-  distinct_on?: Maybe<Array<Property_Authentication_Deleted_Select_Column>>
-  limit?: Maybe<Scalars['Int']>
-  offset?: Maybe<Scalars['Int']>
-  order_by?: Maybe<Array<Property_Authentication_Deleted_Order_By>>
-  where?: Maybe<Property_Authentication_Deleted_Bool_Exp>
+  distinct_on?: InputMaybe<Array<Property_Authentication_Deleted_Select_Column>>
+  limit?: InputMaybe<Scalars['Int']>
+  offset?: InputMaybe<Scalars['Int']>
+  order_by?: InputMaybe<Array<Property_Authentication_Deleted_Order_By>>
+  where?: InputMaybe<Property_Authentication_Deleted_Bool_Exp>
 }
 
 export type Query_RootProperty_Authentication_Deleted_By_PkArgs = {
@@ -5016,19 +5017,19 @@ export type Query_RootProperty_Authentication_Deleted_By_PkArgs = {
 }
 
 export type Query_RootProperty_BalanceArgs = {
-  distinct_on?: Maybe<Array<Property_Balance_Select_Column>>
-  limit?: Maybe<Scalars['Int']>
-  offset?: Maybe<Scalars['Int']>
-  order_by?: Maybe<Array<Property_Balance_Order_By>>
-  where?: Maybe<Property_Balance_Bool_Exp>
+  distinct_on?: InputMaybe<Array<Property_Balance_Select_Column>>
+  limit?: InputMaybe<Scalars['Int']>
+  offset?: InputMaybe<Scalars['Int']>
+  order_by?: InputMaybe<Array<Property_Balance_Order_By>>
+  where?: InputMaybe<Property_Balance_Bool_Exp>
 }
 
 export type Query_RootProperty_Balance_AggregateArgs = {
-  distinct_on?: Maybe<Array<Property_Balance_Select_Column>>
-  limit?: Maybe<Scalars['Int']>
-  offset?: Maybe<Scalars['Int']>
-  order_by?: Maybe<Array<Property_Balance_Order_By>>
-  where?: Maybe<Property_Balance_Bool_Exp>
+  distinct_on?: InputMaybe<Array<Property_Balance_Select_Column>>
+  limit?: InputMaybe<Scalars['Int']>
+  offset?: InputMaybe<Scalars['Int']>
+  order_by?: InputMaybe<Array<Property_Balance_Order_By>>
+  where?: InputMaybe<Property_Balance_Bool_Exp>
 }
 
 export type Query_RootProperty_Balance_By_PkArgs = {
@@ -5037,19 +5038,19 @@ export type Query_RootProperty_Balance_By_PkArgs = {
 }
 
 export type Query_RootProperty_Factory_CreateArgs = {
-  distinct_on?: Maybe<Array<Property_Factory_Create_Select_Column>>
-  limit?: Maybe<Scalars['Int']>
-  offset?: Maybe<Scalars['Int']>
-  order_by?: Maybe<Array<Property_Factory_Create_Order_By>>
-  where?: Maybe<Property_Factory_Create_Bool_Exp>
+  distinct_on?: InputMaybe<Array<Property_Factory_Create_Select_Column>>
+  limit?: InputMaybe<Scalars['Int']>
+  offset?: InputMaybe<Scalars['Int']>
+  order_by?: InputMaybe<Array<Property_Factory_Create_Order_By>>
+  where?: InputMaybe<Property_Factory_Create_Bool_Exp>
 }
 
 export type Query_RootProperty_Factory_Create_AggregateArgs = {
-  distinct_on?: Maybe<Array<Property_Factory_Create_Select_Column>>
-  limit?: Maybe<Scalars['Int']>
-  offset?: Maybe<Scalars['Int']>
-  order_by?: Maybe<Array<Property_Factory_Create_Order_By>>
-  where?: Maybe<Property_Factory_Create_Bool_Exp>
+  distinct_on?: InputMaybe<Array<Property_Factory_Create_Select_Column>>
+  limit?: InputMaybe<Scalars['Int']>
+  offset?: InputMaybe<Scalars['Int']>
+  order_by?: InputMaybe<Array<Property_Factory_Create_Order_By>>
+  where?: InputMaybe<Property_Factory_Create_Bool_Exp>
 }
 
 export type Query_RootProperty_Factory_Create_By_PkArgs = {
@@ -5057,19 +5058,19 @@ export type Query_RootProperty_Factory_Create_By_PkArgs = {
 }
 
 export type Query_RootProperty_LockupArgs = {
-  distinct_on?: Maybe<Array<Property_Lockup_Select_Column>>
-  limit?: Maybe<Scalars['Int']>
-  offset?: Maybe<Scalars['Int']>
-  order_by?: Maybe<Array<Property_Lockup_Order_By>>
-  where?: Maybe<Property_Lockup_Bool_Exp>
+  distinct_on?: InputMaybe<Array<Property_Lockup_Select_Column>>
+  limit?: InputMaybe<Scalars['Int']>
+  offset?: InputMaybe<Scalars['Int']>
+  order_by?: InputMaybe<Array<Property_Lockup_Order_By>>
+  where?: InputMaybe<Property_Lockup_Bool_Exp>
 }
 
 export type Query_RootProperty_Lockup_AggregateArgs = {
-  distinct_on?: Maybe<Array<Property_Lockup_Select_Column>>
-  limit?: Maybe<Scalars['Int']>
-  offset?: Maybe<Scalars['Int']>
-  order_by?: Maybe<Array<Property_Lockup_Order_By>>
-  where?: Maybe<Property_Lockup_Bool_Exp>
+  distinct_on?: InputMaybe<Array<Property_Lockup_Select_Column>>
+  limit?: InputMaybe<Scalars['Int']>
+  offset?: InputMaybe<Scalars['Int']>
+  order_by?: InputMaybe<Array<Property_Lockup_Order_By>>
+  where?: InputMaybe<Property_Lockup_Bool_Exp>
 }
 
 export type Query_RootProperty_Lockup_By_PkArgs = {
@@ -5078,35 +5079,35 @@ export type Query_RootProperty_Lockup_By_PkArgs = {
 }
 
 export type Query_RootProperty_Lockup_Sum_ValuesArgs = {
-  distinct_on?: Maybe<Array<Property_Lockup_Sum_Values_Select_Column>>
-  limit?: Maybe<Scalars['Int']>
-  offset?: Maybe<Scalars['Int']>
-  order_by?: Maybe<Array<Property_Lockup_Sum_Values_Order_By>>
-  where?: Maybe<Property_Lockup_Sum_Values_Bool_Exp>
+  distinct_on?: InputMaybe<Array<Property_Lockup_Sum_Values_Select_Column>>
+  limit?: InputMaybe<Scalars['Int']>
+  offset?: InputMaybe<Scalars['Int']>
+  order_by?: InputMaybe<Array<Property_Lockup_Sum_Values_Order_By>>
+  where?: InputMaybe<Property_Lockup_Sum_Values_Bool_Exp>
 }
 
 export type Query_RootProperty_Lockup_Sum_Values_AggregateArgs = {
-  distinct_on?: Maybe<Array<Property_Lockup_Sum_Values_Select_Column>>
-  limit?: Maybe<Scalars['Int']>
-  offset?: Maybe<Scalars['Int']>
-  order_by?: Maybe<Array<Property_Lockup_Sum_Values_Order_By>>
-  where?: Maybe<Property_Lockup_Sum_Values_Bool_Exp>
+  distinct_on?: InputMaybe<Array<Property_Lockup_Sum_Values_Select_Column>>
+  limit?: InputMaybe<Scalars['Int']>
+  offset?: InputMaybe<Scalars['Int']>
+  order_by?: InputMaybe<Array<Property_Lockup_Sum_Values_Order_By>>
+  where?: InputMaybe<Property_Lockup_Sum_Values_Bool_Exp>
 }
 
 export type Query_RootProperty_MetaArgs = {
-  distinct_on?: Maybe<Array<Property_Meta_Select_Column>>
-  limit?: Maybe<Scalars['Int']>
-  offset?: Maybe<Scalars['Int']>
-  order_by?: Maybe<Array<Property_Meta_Order_By>>
-  where?: Maybe<Property_Meta_Bool_Exp>
+  distinct_on?: InputMaybe<Array<Property_Meta_Select_Column>>
+  limit?: InputMaybe<Scalars['Int']>
+  offset?: InputMaybe<Scalars['Int']>
+  order_by?: InputMaybe<Array<Property_Meta_Order_By>>
+  where?: InputMaybe<Property_Meta_Bool_Exp>
 }
 
 export type Query_RootProperty_Meta_AggregateArgs = {
-  distinct_on?: Maybe<Array<Property_Meta_Select_Column>>
-  limit?: Maybe<Scalars['Int']>
-  offset?: Maybe<Scalars['Int']>
-  order_by?: Maybe<Array<Property_Meta_Order_By>>
-  where?: Maybe<Property_Meta_Bool_Exp>
+  distinct_on?: InputMaybe<Array<Property_Meta_Select_Column>>
+  limit?: InputMaybe<Scalars['Int']>
+  offset?: InputMaybe<Scalars['Int']>
+  order_by?: InputMaybe<Array<Property_Meta_Order_By>>
+  where?: InputMaybe<Property_Meta_Bool_Exp>
 }
 
 export type Query_RootProperty_Meta_By_PkArgs = {
@@ -5115,19 +5116,19 @@ export type Query_RootProperty_Meta_By_PkArgs = {
 }
 
 export type Query_RootWithdraw_Property_TransferArgs = {
-  distinct_on?: Maybe<Array<Withdraw_Property_Transfer_Select_Column>>
-  limit?: Maybe<Scalars['Int']>
-  offset?: Maybe<Scalars['Int']>
-  order_by?: Maybe<Array<Withdraw_Property_Transfer_Order_By>>
-  where?: Maybe<Withdraw_Property_Transfer_Bool_Exp>
+  distinct_on?: InputMaybe<Array<Withdraw_Property_Transfer_Select_Column>>
+  limit?: InputMaybe<Scalars['Int']>
+  offset?: InputMaybe<Scalars['Int']>
+  order_by?: InputMaybe<Array<Withdraw_Property_Transfer_Order_By>>
+  where?: InputMaybe<Withdraw_Property_Transfer_Bool_Exp>
 }
 
 export type Query_RootWithdraw_Property_Transfer_AggregateArgs = {
-  distinct_on?: Maybe<Array<Withdraw_Property_Transfer_Select_Column>>
-  limit?: Maybe<Scalars['Int']>
-  offset?: Maybe<Scalars['Int']>
-  order_by?: Maybe<Array<Withdraw_Property_Transfer_Order_By>>
-  where?: Maybe<Withdraw_Property_Transfer_Bool_Exp>
+  distinct_on?: InputMaybe<Array<Withdraw_Property_Transfer_Select_Column>>
+  limit?: InputMaybe<Scalars['Int']>
+  offset?: InputMaybe<Scalars['Int']>
+  order_by?: InputMaybe<Array<Withdraw_Property_Transfer_Order_By>>
+  where?: InputMaybe<Withdraw_Property_Transfer_Bool_Exp>
 }
 
 export type Query_RootWithdraw_Property_Transfer_By_PkArgs = {
@@ -5185,19 +5186,19 @@ export type Subscription_Root = {
 }
 
 export type Subscription_RootAccount_LockupArgs = {
-  distinct_on?: Maybe<Array<Account_Lockup_Select_Column>>
-  limit?: Maybe<Scalars['Int']>
-  offset?: Maybe<Scalars['Int']>
-  order_by?: Maybe<Array<Account_Lockup_Order_By>>
-  where?: Maybe<Account_Lockup_Bool_Exp>
+  distinct_on?: InputMaybe<Array<Account_Lockup_Select_Column>>
+  limit?: InputMaybe<Scalars['Int']>
+  offset?: InputMaybe<Scalars['Int']>
+  order_by?: InputMaybe<Array<Account_Lockup_Order_By>>
+  where?: InputMaybe<Account_Lockup_Bool_Exp>
 }
 
 export type Subscription_RootAccount_Lockup_AggregateArgs = {
-  distinct_on?: Maybe<Array<Account_Lockup_Select_Column>>
-  limit?: Maybe<Scalars['Int']>
-  offset?: Maybe<Scalars['Int']>
-  order_by?: Maybe<Array<Account_Lockup_Order_By>>
-  where?: Maybe<Account_Lockup_Bool_Exp>
+  distinct_on?: InputMaybe<Array<Account_Lockup_Select_Column>>
+  limit?: InputMaybe<Scalars['Int']>
+  offset?: InputMaybe<Scalars['Int']>
+  order_by?: InputMaybe<Array<Account_Lockup_Order_By>>
+  where?: InputMaybe<Account_Lockup_Bool_Exp>
 }
 
 export type Subscription_RootAccount_Lockup_By_PkArgs = {
@@ -5206,35 +5207,35 @@ export type Subscription_RootAccount_Lockup_By_PkArgs = {
 }
 
 export type Subscription_RootAccount_Lockup_Sum_ValuesArgs = {
-  distinct_on?: Maybe<Array<Account_Lockup_Sum_Values_Select_Column>>
-  limit?: Maybe<Scalars['Int']>
-  offset?: Maybe<Scalars['Int']>
-  order_by?: Maybe<Array<Account_Lockup_Sum_Values_Order_By>>
-  where?: Maybe<Account_Lockup_Sum_Values_Bool_Exp>
+  distinct_on?: InputMaybe<Array<Account_Lockup_Sum_Values_Select_Column>>
+  limit?: InputMaybe<Scalars['Int']>
+  offset?: InputMaybe<Scalars['Int']>
+  order_by?: InputMaybe<Array<Account_Lockup_Sum_Values_Order_By>>
+  where?: InputMaybe<Account_Lockup_Sum_Values_Bool_Exp>
 }
 
 export type Subscription_RootAccount_Lockup_Sum_Values_AggregateArgs = {
-  distinct_on?: Maybe<Array<Account_Lockup_Sum_Values_Select_Column>>
-  limit?: Maybe<Scalars['Int']>
-  offset?: Maybe<Scalars['Int']>
-  order_by?: Maybe<Array<Account_Lockup_Sum_Values_Order_By>>
-  where?: Maybe<Account_Lockup_Sum_Values_Bool_Exp>
+  distinct_on?: InputMaybe<Array<Account_Lockup_Sum_Values_Select_Column>>
+  limit?: InputMaybe<Scalars['Int']>
+  offset?: InputMaybe<Scalars['Int']>
+  order_by?: InputMaybe<Array<Account_Lockup_Sum_Values_Order_By>>
+  where?: InputMaybe<Account_Lockup_Sum_Values_Bool_Exp>
 }
 
 export type Subscription_RootDev_Property_TransferArgs = {
-  distinct_on?: Maybe<Array<Dev_Property_Transfer_Select_Column>>
-  limit?: Maybe<Scalars['Int']>
-  offset?: Maybe<Scalars['Int']>
-  order_by?: Maybe<Array<Dev_Property_Transfer_Order_By>>
-  where?: Maybe<Dev_Property_Transfer_Bool_Exp>
+  distinct_on?: InputMaybe<Array<Dev_Property_Transfer_Select_Column>>
+  limit?: InputMaybe<Scalars['Int']>
+  offset?: InputMaybe<Scalars['Int']>
+  order_by?: InputMaybe<Array<Dev_Property_Transfer_Order_By>>
+  where?: InputMaybe<Dev_Property_Transfer_Bool_Exp>
 }
 
 export type Subscription_RootDev_Property_Transfer_AggregateArgs = {
-  distinct_on?: Maybe<Array<Dev_Property_Transfer_Select_Column>>
-  limit?: Maybe<Scalars['Int']>
-  offset?: Maybe<Scalars['Int']>
-  order_by?: Maybe<Array<Dev_Property_Transfer_Order_By>>
-  where?: Maybe<Dev_Property_Transfer_Bool_Exp>
+  distinct_on?: InputMaybe<Array<Dev_Property_Transfer_Select_Column>>
+  limit?: InputMaybe<Scalars['Int']>
+  offset?: InputMaybe<Scalars['Int']>
+  order_by?: InputMaybe<Array<Dev_Property_Transfer_Order_By>>
+  where?: InputMaybe<Dev_Property_Transfer_Bool_Exp>
 }
 
 export type Subscription_RootDev_Property_Transfer_By_PkArgs = {
@@ -5242,19 +5243,19 @@ export type Subscription_RootDev_Property_Transfer_By_PkArgs = {
 }
 
 export type Subscription_RootLockup_LockedupArgs = {
-  distinct_on?: Maybe<Array<Lockup_Lockedup_Select_Column>>
-  limit?: Maybe<Scalars['Int']>
-  offset?: Maybe<Scalars['Int']>
-  order_by?: Maybe<Array<Lockup_Lockedup_Order_By>>
-  where?: Maybe<Lockup_Lockedup_Bool_Exp>
+  distinct_on?: InputMaybe<Array<Lockup_Lockedup_Select_Column>>
+  limit?: InputMaybe<Scalars['Int']>
+  offset?: InputMaybe<Scalars['Int']>
+  order_by?: InputMaybe<Array<Lockup_Lockedup_Order_By>>
+  where?: InputMaybe<Lockup_Lockedup_Bool_Exp>
 }
 
 export type Subscription_RootLockup_Lockedup_AggregateArgs = {
-  distinct_on?: Maybe<Array<Lockup_Lockedup_Select_Column>>
-  limit?: Maybe<Scalars['Int']>
-  offset?: Maybe<Scalars['Int']>
-  order_by?: Maybe<Array<Lockup_Lockedup_Order_By>>
-  where?: Maybe<Lockup_Lockedup_Bool_Exp>
+  distinct_on?: InputMaybe<Array<Lockup_Lockedup_Select_Column>>
+  limit?: InputMaybe<Scalars['Int']>
+  offset?: InputMaybe<Scalars['Int']>
+  order_by?: InputMaybe<Array<Lockup_Lockedup_Order_By>>
+  where?: InputMaybe<Lockup_Lockedup_Bool_Exp>
 }
 
 export type Subscription_RootLockup_Lockedup_By_PkArgs = {
@@ -5262,19 +5263,19 @@ export type Subscription_RootLockup_Lockedup_By_PkArgs = {
 }
 
 export type Subscription_RootMarket_Factory_CreateArgs = {
-  distinct_on?: Maybe<Array<Market_Factory_Create_Select_Column>>
-  limit?: Maybe<Scalars['Int']>
-  offset?: Maybe<Scalars['Int']>
-  order_by?: Maybe<Array<Market_Factory_Create_Order_By>>
-  where?: Maybe<Market_Factory_Create_Bool_Exp>
+  distinct_on?: InputMaybe<Array<Market_Factory_Create_Select_Column>>
+  limit?: InputMaybe<Scalars['Int']>
+  offset?: InputMaybe<Scalars['Int']>
+  order_by?: InputMaybe<Array<Market_Factory_Create_Order_By>>
+  where?: InputMaybe<Market_Factory_Create_Bool_Exp>
 }
 
 export type Subscription_RootMarket_Factory_Create_AggregateArgs = {
-  distinct_on?: Maybe<Array<Market_Factory_Create_Select_Column>>
-  limit?: Maybe<Scalars['Int']>
-  offset?: Maybe<Scalars['Int']>
-  order_by?: Maybe<Array<Market_Factory_Create_Order_By>>
-  where?: Maybe<Market_Factory_Create_Bool_Exp>
+  distinct_on?: InputMaybe<Array<Market_Factory_Create_Select_Column>>
+  limit?: InputMaybe<Scalars['Int']>
+  offset?: InputMaybe<Scalars['Int']>
+  order_by?: InputMaybe<Array<Market_Factory_Create_Order_By>>
+  where?: InputMaybe<Market_Factory_Create_Bool_Exp>
 }
 
 export type Subscription_RootMarket_Factory_Create_By_PkArgs = {
@@ -5282,19 +5283,19 @@ export type Subscription_RootMarket_Factory_Create_By_PkArgs = {
 }
 
 export type Subscription_RootMetrics_Factory_CreateArgs = {
-  distinct_on?: Maybe<Array<Metrics_Factory_Create_Select_Column>>
-  limit?: Maybe<Scalars['Int']>
-  offset?: Maybe<Scalars['Int']>
-  order_by?: Maybe<Array<Metrics_Factory_Create_Order_By>>
-  where?: Maybe<Metrics_Factory_Create_Bool_Exp>
+  distinct_on?: InputMaybe<Array<Metrics_Factory_Create_Select_Column>>
+  limit?: InputMaybe<Scalars['Int']>
+  offset?: InputMaybe<Scalars['Int']>
+  order_by?: InputMaybe<Array<Metrics_Factory_Create_Order_By>>
+  where?: InputMaybe<Metrics_Factory_Create_Bool_Exp>
 }
 
 export type Subscription_RootMetrics_Factory_Create_AggregateArgs = {
-  distinct_on?: Maybe<Array<Metrics_Factory_Create_Select_Column>>
-  limit?: Maybe<Scalars['Int']>
-  offset?: Maybe<Scalars['Int']>
-  order_by?: Maybe<Array<Metrics_Factory_Create_Order_By>>
-  where?: Maybe<Metrics_Factory_Create_Bool_Exp>
+  distinct_on?: InputMaybe<Array<Metrics_Factory_Create_Select_Column>>
+  limit?: InputMaybe<Scalars['Int']>
+  offset?: InputMaybe<Scalars['Int']>
+  order_by?: InputMaybe<Array<Metrics_Factory_Create_Order_By>>
+  where?: InputMaybe<Metrics_Factory_Create_Bool_Exp>
 }
 
 export type Subscription_RootMetrics_Factory_Create_By_PkArgs = {
@@ -5302,19 +5303,19 @@ export type Subscription_RootMetrics_Factory_Create_By_PkArgs = {
 }
 
 export type Subscription_RootMetrics_Factory_DestroyArgs = {
-  distinct_on?: Maybe<Array<Metrics_Factory_Destroy_Select_Column>>
-  limit?: Maybe<Scalars['Int']>
-  offset?: Maybe<Scalars['Int']>
-  order_by?: Maybe<Array<Metrics_Factory_Destroy_Order_By>>
-  where?: Maybe<Metrics_Factory_Destroy_Bool_Exp>
+  distinct_on?: InputMaybe<Array<Metrics_Factory_Destroy_Select_Column>>
+  limit?: InputMaybe<Scalars['Int']>
+  offset?: InputMaybe<Scalars['Int']>
+  order_by?: InputMaybe<Array<Metrics_Factory_Destroy_Order_By>>
+  where?: InputMaybe<Metrics_Factory_Destroy_Bool_Exp>
 }
 
 export type Subscription_RootMetrics_Factory_Destroy_AggregateArgs = {
-  distinct_on?: Maybe<Array<Metrics_Factory_Destroy_Select_Column>>
-  limit?: Maybe<Scalars['Int']>
-  offset?: Maybe<Scalars['Int']>
-  order_by?: Maybe<Array<Metrics_Factory_Destroy_Order_By>>
-  where?: Maybe<Metrics_Factory_Destroy_Bool_Exp>
+  distinct_on?: InputMaybe<Array<Metrics_Factory_Destroy_Select_Column>>
+  limit?: InputMaybe<Scalars['Int']>
+  offset?: InputMaybe<Scalars['Int']>
+  order_by?: InputMaybe<Array<Metrics_Factory_Destroy_Order_By>>
+  where?: InputMaybe<Metrics_Factory_Destroy_Bool_Exp>
 }
 
 export type Subscription_RootMetrics_Factory_Destroy_By_PkArgs = {
@@ -5322,19 +5323,19 @@ export type Subscription_RootMetrics_Factory_Destroy_By_PkArgs = {
 }
 
 export type Subscription_RootPolicy_Factory_CreateArgs = {
-  distinct_on?: Maybe<Array<Policy_Factory_Create_Select_Column>>
-  limit?: Maybe<Scalars['Int']>
-  offset?: Maybe<Scalars['Int']>
-  order_by?: Maybe<Array<Policy_Factory_Create_Order_By>>
-  where?: Maybe<Policy_Factory_Create_Bool_Exp>
+  distinct_on?: InputMaybe<Array<Policy_Factory_Create_Select_Column>>
+  limit?: InputMaybe<Scalars['Int']>
+  offset?: InputMaybe<Scalars['Int']>
+  order_by?: InputMaybe<Array<Policy_Factory_Create_Order_By>>
+  where?: InputMaybe<Policy_Factory_Create_Bool_Exp>
 }
 
 export type Subscription_RootPolicy_Factory_Create_AggregateArgs = {
-  distinct_on?: Maybe<Array<Policy_Factory_Create_Select_Column>>
-  limit?: Maybe<Scalars['Int']>
-  offset?: Maybe<Scalars['Int']>
-  order_by?: Maybe<Array<Policy_Factory_Create_Order_By>>
-  where?: Maybe<Policy_Factory_Create_Bool_Exp>
+  distinct_on?: InputMaybe<Array<Policy_Factory_Create_Select_Column>>
+  limit?: InputMaybe<Scalars['Int']>
+  offset?: InputMaybe<Scalars['Int']>
+  order_by?: InputMaybe<Array<Policy_Factory_Create_Order_By>>
+  where?: InputMaybe<Policy_Factory_Create_Bool_Exp>
 }
 
 export type Subscription_RootPolicy_Factory_Create_By_PkArgs = {
@@ -5342,19 +5343,19 @@ export type Subscription_RootPolicy_Factory_Create_By_PkArgs = {
 }
 
 export type Subscription_RootProperty_AuthenticationArgs = {
-  distinct_on?: Maybe<Array<Property_Authentication_Select_Column>>
-  limit?: Maybe<Scalars['Int']>
-  offset?: Maybe<Scalars['Int']>
-  order_by?: Maybe<Array<Property_Authentication_Order_By>>
-  where?: Maybe<Property_Authentication_Bool_Exp>
+  distinct_on?: InputMaybe<Array<Property_Authentication_Select_Column>>
+  limit?: InputMaybe<Scalars['Int']>
+  offset?: InputMaybe<Scalars['Int']>
+  order_by?: InputMaybe<Array<Property_Authentication_Order_By>>
+  where?: InputMaybe<Property_Authentication_Bool_Exp>
 }
 
 export type Subscription_RootProperty_Authentication_AggregateArgs = {
-  distinct_on?: Maybe<Array<Property_Authentication_Select_Column>>
-  limit?: Maybe<Scalars['Int']>
-  offset?: Maybe<Scalars['Int']>
-  order_by?: Maybe<Array<Property_Authentication_Order_By>>
-  where?: Maybe<Property_Authentication_Bool_Exp>
+  distinct_on?: InputMaybe<Array<Property_Authentication_Select_Column>>
+  limit?: InputMaybe<Scalars['Int']>
+  offset?: InputMaybe<Scalars['Int']>
+  order_by?: InputMaybe<Array<Property_Authentication_Order_By>>
+  where?: InputMaybe<Property_Authentication_Bool_Exp>
 }
 
 export type Subscription_RootProperty_Authentication_By_PkArgs = {
@@ -5363,19 +5364,19 @@ export type Subscription_RootProperty_Authentication_By_PkArgs = {
 }
 
 export type Subscription_RootProperty_Authentication_DeletedArgs = {
-  distinct_on?: Maybe<Array<Property_Authentication_Deleted_Select_Column>>
-  limit?: Maybe<Scalars['Int']>
-  offset?: Maybe<Scalars['Int']>
-  order_by?: Maybe<Array<Property_Authentication_Deleted_Order_By>>
-  where?: Maybe<Property_Authentication_Deleted_Bool_Exp>
+  distinct_on?: InputMaybe<Array<Property_Authentication_Deleted_Select_Column>>
+  limit?: InputMaybe<Scalars['Int']>
+  offset?: InputMaybe<Scalars['Int']>
+  order_by?: InputMaybe<Array<Property_Authentication_Deleted_Order_By>>
+  where?: InputMaybe<Property_Authentication_Deleted_Bool_Exp>
 }
 
 export type Subscription_RootProperty_Authentication_Deleted_AggregateArgs = {
-  distinct_on?: Maybe<Array<Property_Authentication_Deleted_Select_Column>>
-  limit?: Maybe<Scalars['Int']>
-  offset?: Maybe<Scalars['Int']>
-  order_by?: Maybe<Array<Property_Authentication_Deleted_Order_By>>
-  where?: Maybe<Property_Authentication_Deleted_Bool_Exp>
+  distinct_on?: InputMaybe<Array<Property_Authentication_Deleted_Select_Column>>
+  limit?: InputMaybe<Scalars['Int']>
+  offset?: InputMaybe<Scalars['Int']>
+  order_by?: InputMaybe<Array<Property_Authentication_Deleted_Order_By>>
+  where?: InputMaybe<Property_Authentication_Deleted_Bool_Exp>
 }
 
 export type Subscription_RootProperty_Authentication_Deleted_By_PkArgs = {
@@ -5384,19 +5385,19 @@ export type Subscription_RootProperty_Authentication_Deleted_By_PkArgs = {
 }
 
 export type Subscription_RootProperty_BalanceArgs = {
-  distinct_on?: Maybe<Array<Property_Balance_Select_Column>>
-  limit?: Maybe<Scalars['Int']>
-  offset?: Maybe<Scalars['Int']>
-  order_by?: Maybe<Array<Property_Balance_Order_By>>
-  where?: Maybe<Property_Balance_Bool_Exp>
+  distinct_on?: InputMaybe<Array<Property_Balance_Select_Column>>
+  limit?: InputMaybe<Scalars['Int']>
+  offset?: InputMaybe<Scalars['Int']>
+  order_by?: InputMaybe<Array<Property_Balance_Order_By>>
+  where?: InputMaybe<Property_Balance_Bool_Exp>
 }
 
 export type Subscription_RootProperty_Balance_AggregateArgs = {
-  distinct_on?: Maybe<Array<Property_Balance_Select_Column>>
-  limit?: Maybe<Scalars['Int']>
-  offset?: Maybe<Scalars['Int']>
-  order_by?: Maybe<Array<Property_Balance_Order_By>>
-  where?: Maybe<Property_Balance_Bool_Exp>
+  distinct_on?: InputMaybe<Array<Property_Balance_Select_Column>>
+  limit?: InputMaybe<Scalars['Int']>
+  offset?: InputMaybe<Scalars['Int']>
+  order_by?: InputMaybe<Array<Property_Balance_Order_By>>
+  where?: InputMaybe<Property_Balance_Bool_Exp>
 }
 
 export type Subscription_RootProperty_Balance_By_PkArgs = {
@@ -5405,19 +5406,19 @@ export type Subscription_RootProperty_Balance_By_PkArgs = {
 }
 
 export type Subscription_RootProperty_Factory_CreateArgs = {
-  distinct_on?: Maybe<Array<Property_Factory_Create_Select_Column>>
-  limit?: Maybe<Scalars['Int']>
-  offset?: Maybe<Scalars['Int']>
-  order_by?: Maybe<Array<Property_Factory_Create_Order_By>>
-  where?: Maybe<Property_Factory_Create_Bool_Exp>
+  distinct_on?: InputMaybe<Array<Property_Factory_Create_Select_Column>>
+  limit?: InputMaybe<Scalars['Int']>
+  offset?: InputMaybe<Scalars['Int']>
+  order_by?: InputMaybe<Array<Property_Factory_Create_Order_By>>
+  where?: InputMaybe<Property_Factory_Create_Bool_Exp>
 }
 
 export type Subscription_RootProperty_Factory_Create_AggregateArgs = {
-  distinct_on?: Maybe<Array<Property_Factory_Create_Select_Column>>
-  limit?: Maybe<Scalars['Int']>
-  offset?: Maybe<Scalars['Int']>
-  order_by?: Maybe<Array<Property_Factory_Create_Order_By>>
-  where?: Maybe<Property_Factory_Create_Bool_Exp>
+  distinct_on?: InputMaybe<Array<Property_Factory_Create_Select_Column>>
+  limit?: InputMaybe<Scalars['Int']>
+  offset?: InputMaybe<Scalars['Int']>
+  order_by?: InputMaybe<Array<Property_Factory_Create_Order_By>>
+  where?: InputMaybe<Property_Factory_Create_Bool_Exp>
 }
 
 export type Subscription_RootProperty_Factory_Create_By_PkArgs = {
@@ -5425,19 +5426,19 @@ export type Subscription_RootProperty_Factory_Create_By_PkArgs = {
 }
 
 export type Subscription_RootProperty_LockupArgs = {
-  distinct_on?: Maybe<Array<Property_Lockup_Select_Column>>
-  limit?: Maybe<Scalars['Int']>
-  offset?: Maybe<Scalars['Int']>
-  order_by?: Maybe<Array<Property_Lockup_Order_By>>
-  where?: Maybe<Property_Lockup_Bool_Exp>
+  distinct_on?: InputMaybe<Array<Property_Lockup_Select_Column>>
+  limit?: InputMaybe<Scalars['Int']>
+  offset?: InputMaybe<Scalars['Int']>
+  order_by?: InputMaybe<Array<Property_Lockup_Order_By>>
+  where?: InputMaybe<Property_Lockup_Bool_Exp>
 }
 
 export type Subscription_RootProperty_Lockup_AggregateArgs = {
-  distinct_on?: Maybe<Array<Property_Lockup_Select_Column>>
-  limit?: Maybe<Scalars['Int']>
-  offset?: Maybe<Scalars['Int']>
-  order_by?: Maybe<Array<Property_Lockup_Order_By>>
-  where?: Maybe<Property_Lockup_Bool_Exp>
+  distinct_on?: InputMaybe<Array<Property_Lockup_Select_Column>>
+  limit?: InputMaybe<Scalars['Int']>
+  offset?: InputMaybe<Scalars['Int']>
+  order_by?: InputMaybe<Array<Property_Lockup_Order_By>>
+  where?: InputMaybe<Property_Lockup_Bool_Exp>
 }
 
 export type Subscription_RootProperty_Lockup_By_PkArgs = {
@@ -5446,35 +5447,35 @@ export type Subscription_RootProperty_Lockup_By_PkArgs = {
 }
 
 export type Subscription_RootProperty_Lockup_Sum_ValuesArgs = {
-  distinct_on?: Maybe<Array<Property_Lockup_Sum_Values_Select_Column>>
-  limit?: Maybe<Scalars['Int']>
-  offset?: Maybe<Scalars['Int']>
-  order_by?: Maybe<Array<Property_Lockup_Sum_Values_Order_By>>
-  where?: Maybe<Property_Lockup_Sum_Values_Bool_Exp>
+  distinct_on?: InputMaybe<Array<Property_Lockup_Sum_Values_Select_Column>>
+  limit?: InputMaybe<Scalars['Int']>
+  offset?: InputMaybe<Scalars['Int']>
+  order_by?: InputMaybe<Array<Property_Lockup_Sum_Values_Order_By>>
+  where?: InputMaybe<Property_Lockup_Sum_Values_Bool_Exp>
 }
 
 export type Subscription_RootProperty_Lockup_Sum_Values_AggregateArgs = {
-  distinct_on?: Maybe<Array<Property_Lockup_Sum_Values_Select_Column>>
-  limit?: Maybe<Scalars['Int']>
-  offset?: Maybe<Scalars['Int']>
-  order_by?: Maybe<Array<Property_Lockup_Sum_Values_Order_By>>
-  where?: Maybe<Property_Lockup_Sum_Values_Bool_Exp>
+  distinct_on?: InputMaybe<Array<Property_Lockup_Sum_Values_Select_Column>>
+  limit?: InputMaybe<Scalars['Int']>
+  offset?: InputMaybe<Scalars['Int']>
+  order_by?: InputMaybe<Array<Property_Lockup_Sum_Values_Order_By>>
+  where?: InputMaybe<Property_Lockup_Sum_Values_Bool_Exp>
 }
 
 export type Subscription_RootProperty_MetaArgs = {
-  distinct_on?: Maybe<Array<Property_Meta_Select_Column>>
-  limit?: Maybe<Scalars['Int']>
-  offset?: Maybe<Scalars['Int']>
-  order_by?: Maybe<Array<Property_Meta_Order_By>>
-  where?: Maybe<Property_Meta_Bool_Exp>
+  distinct_on?: InputMaybe<Array<Property_Meta_Select_Column>>
+  limit?: InputMaybe<Scalars['Int']>
+  offset?: InputMaybe<Scalars['Int']>
+  order_by?: InputMaybe<Array<Property_Meta_Order_By>>
+  where?: InputMaybe<Property_Meta_Bool_Exp>
 }
 
 export type Subscription_RootProperty_Meta_AggregateArgs = {
-  distinct_on?: Maybe<Array<Property_Meta_Select_Column>>
-  limit?: Maybe<Scalars['Int']>
-  offset?: Maybe<Scalars['Int']>
-  order_by?: Maybe<Array<Property_Meta_Order_By>>
-  where?: Maybe<Property_Meta_Bool_Exp>
+  distinct_on?: InputMaybe<Array<Property_Meta_Select_Column>>
+  limit?: InputMaybe<Scalars['Int']>
+  offset?: InputMaybe<Scalars['Int']>
+  order_by?: InputMaybe<Array<Property_Meta_Order_By>>
+  where?: InputMaybe<Property_Meta_Bool_Exp>
 }
 
 export type Subscription_RootProperty_Meta_By_PkArgs = {
@@ -5483,19 +5484,19 @@ export type Subscription_RootProperty_Meta_By_PkArgs = {
 }
 
 export type Subscription_RootWithdraw_Property_TransferArgs = {
-  distinct_on?: Maybe<Array<Withdraw_Property_Transfer_Select_Column>>
-  limit?: Maybe<Scalars['Int']>
-  offset?: Maybe<Scalars['Int']>
-  order_by?: Maybe<Array<Withdraw_Property_Transfer_Order_By>>
-  where?: Maybe<Withdraw_Property_Transfer_Bool_Exp>
+  distinct_on?: InputMaybe<Array<Withdraw_Property_Transfer_Select_Column>>
+  limit?: InputMaybe<Scalars['Int']>
+  offset?: InputMaybe<Scalars['Int']>
+  order_by?: InputMaybe<Array<Withdraw_Property_Transfer_Order_By>>
+  where?: InputMaybe<Withdraw_Property_Transfer_Bool_Exp>
 }
 
 export type Subscription_RootWithdraw_Property_Transfer_AggregateArgs = {
-  distinct_on?: Maybe<Array<Withdraw_Property_Transfer_Select_Column>>
-  limit?: Maybe<Scalars['Int']>
-  offset?: Maybe<Scalars['Int']>
-  order_by?: Maybe<Array<Withdraw_Property_Transfer_Order_By>>
-  where?: Maybe<Withdraw_Property_Transfer_Bool_Exp>
+  distinct_on?: InputMaybe<Array<Withdraw_Property_Transfer_Select_Column>>
+  limit?: InputMaybe<Scalars['Int']>
+  offset?: InputMaybe<Scalars['Int']>
+  order_by?: InputMaybe<Array<Withdraw_Property_Transfer_Order_By>>
+  where?: InputMaybe<Withdraw_Property_Transfer_Bool_Exp>
 }
 
 export type Subscription_RootWithdraw_Property_Transfer_By_PkArgs = {
@@ -5536,27 +5537,27 @@ export type Withdraw_Property_Transfer_Aggregate_Fields = {
 }
 
 export type Withdraw_Property_Transfer_Aggregate_FieldsCountArgs = {
-  columns?: Maybe<Array<Withdraw_Property_Transfer_Select_Column>>
-  distinct?: Maybe<Scalars['Boolean']>
+  columns?: InputMaybe<Array<Withdraw_Property_Transfer_Select_Column>>
+  distinct?: InputMaybe<Scalars['Boolean']>
 }
 
 export type Withdraw_Property_Transfer_Aggregate_Order_By = {
-  avg?: Maybe<Withdraw_Property_Transfer_Avg_Order_By>
-  count?: Maybe<Order_By>
-  max?: Maybe<Withdraw_Property_Transfer_Max_Order_By>
-  min?: Maybe<Withdraw_Property_Transfer_Min_Order_By>
-  stddev?: Maybe<Withdraw_Property_Transfer_Stddev_Order_By>
-  stddev_pop?: Maybe<Withdraw_Property_Transfer_Stddev_Pop_Order_By>
-  stddev_samp?: Maybe<Withdraw_Property_Transfer_Stddev_Samp_Order_By>
-  sum?: Maybe<Withdraw_Property_Transfer_Sum_Order_By>
-  var_pop?: Maybe<Withdraw_Property_Transfer_Var_Pop_Order_By>
-  var_samp?: Maybe<Withdraw_Property_Transfer_Var_Samp_Order_By>
-  variance?: Maybe<Withdraw_Property_Transfer_Variance_Order_By>
+  avg?: InputMaybe<Withdraw_Property_Transfer_Avg_Order_By>
+  count?: InputMaybe<Order_By>
+  max?: InputMaybe<Withdraw_Property_Transfer_Max_Order_By>
+  min?: InputMaybe<Withdraw_Property_Transfer_Min_Order_By>
+  stddev?: InputMaybe<Withdraw_Property_Transfer_Stddev_Order_By>
+  stddev_pop?: InputMaybe<Withdraw_Property_Transfer_Stddev_Pop_Order_By>
+  stddev_samp?: InputMaybe<Withdraw_Property_Transfer_Stddev_Samp_Order_By>
+  sum?: InputMaybe<Withdraw_Property_Transfer_Sum_Order_By>
+  var_pop?: InputMaybe<Withdraw_Property_Transfer_Var_Pop_Order_By>
+  var_samp?: InputMaybe<Withdraw_Property_Transfer_Var_Samp_Order_By>
+  variance?: InputMaybe<Withdraw_Property_Transfer_Variance_Order_By>
 }
 
 export type Withdraw_Property_Transfer_Arr_Rel_Insert_Input = {
   data: Array<Withdraw_Property_Transfer_Insert_Input>
-  on_conflict?: Maybe<Withdraw_Property_Transfer_On_Conflict>
+  on_conflict?: InputMaybe<Withdraw_Property_Transfer_On_Conflict>
 }
 
 export type Withdraw_Property_Transfer_Avg_Fields = {
@@ -5567,23 +5568,23 @@ export type Withdraw_Property_Transfer_Avg_Fields = {
 }
 
 export type Withdraw_Property_Transfer_Avg_Order_By = {
-  block_number?: Maybe<Order_By>
-  log_index?: Maybe<Order_By>
-  transaction_index?: Maybe<Order_By>
+  block_number?: InputMaybe<Order_By>
+  log_index?: InputMaybe<Order_By>
+  transaction_index?: InputMaybe<Order_By>
 }
 
 export type Withdraw_Property_Transfer_Bool_Exp = {
-  _and?: Maybe<Array<Maybe<Withdraw_Property_Transfer_Bool_Exp>>>
-  _not?: Maybe<Withdraw_Property_Transfer_Bool_Exp>
-  _or?: Maybe<Array<Maybe<Withdraw_Property_Transfer_Bool_Exp>>>
-  block_number?: Maybe<Int_Comparison_Exp>
-  event_id?: Maybe<String_Comparison_Exp>
-  from_address?: Maybe<String_Comparison_Exp>
-  log_index?: Maybe<Int_Comparison_Exp>
-  property_address?: Maybe<String_Comparison_Exp>
-  raw_data?: Maybe<String_Comparison_Exp>
-  to_address?: Maybe<String_Comparison_Exp>
-  transaction_index?: Maybe<Int_Comparison_Exp>
+  _and?: InputMaybe<Array<InputMaybe<Withdraw_Property_Transfer_Bool_Exp>>>
+  _not?: InputMaybe<Withdraw_Property_Transfer_Bool_Exp>
+  _or?: InputMaybe<Array<InputMaybe<Withdraw_Property_Transfer_Bool_Exp>>>
+  block_number?: InputMaybe<Int_Comparison_Exp>
+  event_id?: InputMaybe<String_Comparison_Exp>
+  from_address?: InputMaybe<String_Comparison_Exp>
+  log_index?: InputMaybe<Int_Comparison_Exp>
+  property_address?: InputMaybe<String_Comparison_Exp>
+  raw_data?: InputMaybe<String_Comparison_Exp>
+  to_address?: InputMaybe<String_Comparison_Exp>
+  transaction_index?: InputMaybe<Int_Comparison_Exp>
 }
 
 export enum Withdraw_Property_Transfer_Constraint {
@@ -5591,20 +5592,20 @@ export enum Withdraw_Property_Transfer_Constraint {
 }
 
 export type Withdraw_Property_Transfer_Inc_Input = {
-  block_number?: Maybe<Scalars['Int']>
-  log_index?: Maybe<Scalars['Int']>
-  transaction_index?: Maybe<Scalars['Int']>
+  block_number?: InputMaybe<Scalars['Int']>
+  log_index?: InputMaybe<Scalars['Int']>
+  transaction_index?: InputMaybe<Scalars['Int']>
 }
 
 export type Withdraw_Property_Transfer_Insert_Input = {
-  block_number?: Maybe<Scalars['Int']>
-  event_id?: Maybe<Scalars['String']>
-  from_address?: Maybe<Scalars['String']>
-  log_index?: Maybe<Scalars['Int']>
-  property_address?: Maybe<Scalars['String']>
-  raw_data?: Maybe<Scalars['String']>
-  to_address?: Maybe<Scalars['String']>
-  transaction_index?: Maybe<Scalars['Int']>
+  block_number?: InputMaybe<Scalars['Int']>
+  event_id?: InputMaybe<Scalars['String']>
+  from_address?: InputMaybe<Scalars['String']>
+  log_index?: InputMaybe<Scalars['Int']>
+  property_address?: InputMaybe<Scalars['String']>
+  raw_data?: InputMaybe<Scalars['String']>
+  to_address?: InputMaybe<Scalars['String']>
+  transaction_index?: InputMaybe<Scalars['Int']>
 }
 
 export type Withdraw_Property_Transfer_Max_Fields = {
@@ -5620,14 +5621,14 @@ export type Withdraw_Property_Transfer_Max_Fields = {
 }
 
 export type Withdraw_Property_Transfer_Max_Order_By = {
-  block_number?: Maybe<Order_By>
-  event_id?: Maybe<Order_By>
-  from_address?: Maybe<Order_By>
-  log_index?: Maybe<Order_By>
-  property_address?: Maybe<Order_By>
-  raw_data?: Maybe<Order_By>
-  to_address?: Maybe<Order_By>
-  transaction_index?: Maybe<Order_By>
+  block_number?: InputMaybe<Order_By>
+  event_id?: InputMaybe<Order_By>
+  from_address?: InputMaybe<Order_By>
+  log_index?: InputMaybe<Order_By>
+  property_address?: InputMaybe<Order_By>
+  raw_data?: InputMaybe<Order_By>
+  to_address?: InputMaybe<Order_By>
+  transaction_index?: InputMaybe<Order_By>
 }
 
 export type Withdraw_Property_Transfer_Min_Fields = {
@@ -5643,14 +5644,14 @@ export type Withdraw_Property_Transfer_Min_Fields = {
 }
 
 export type Withdraw_Property_Transfer_Min_Order_By = {
-  block_number?: Maybe<Order_By>
-  event_id?: Maybe<Order_By>
-  from_address?: Maybe<Order_By>
-  log_index?: Maybe<Order_By>
-  property_address?: Maybe<Order_By>
-  raw_data?: Maybe<Order_By>
-  to_address?: Maybe<Order_By>
-  transaction_index?: Maybe<Order_By>
+  block_number?: InputMaybe<Order_By>
+  event_id?: InputMaybe<Order_By>
+  from_address?: InputMaybe<Order_By>
+  log_index?: InputMaybe<Order_By>
+  property_address?: InputMaybe<Order_By>
+  raw_data?: InputMaybe<Order_By>
+  to_address?: InputMaybe<Order_By>
+  transaction_index?: InputMaybe<Order_By>
 }
 
 export type Withdraw_Property_Transfer_Mutation_Response = {
@@ -5661,24 +5662,24 @@ export type Withdraw_Property_Transfer_Mutation_Response = {
 
 export type Withdraw_Property_Transfer_Obj_Rel_Insert_Input = {
   data: Withdraw_Property_Transfer_Insert_Input
-  on_conflict?: Maybe<Withdraw_Property_Transfer_On_Conflict>
+  on_conflict?: InputMaybe<Withdraw_Property_Transfer_On_Conflict>
 }
 
 export type Withdraw_Property_Transfer_On_Conflict = {
   constraint: Withdraw_Property_Transfer_Constraint
   update_columns: Array<Withdraw_Property_Transfer_Update_Column>
-  where?: Maybe<Withdraw_Property_Transfer_Bool_Exp>
+  where?: InputMaybe<Withdraw_Property_Transfer_Bool_Exp>
 }
 
 export type Withdraw_Property_Transfer_Order_By = {
-  block_number?: Maybe<Order_By>
-  event_id?: Maybe<Order_By>
-  from_address?: Maybe<Order_By>
-  log_index?: Maybe<Order_By>
-  property_address?: Maybe<Order_By>
-  raw_data?: Maybe<Order_By>
-  to_address?: Maybe<Order_By>
-  transaction_index?: Maybe<Order_By>
+  block_number?: InputMaybe<Order_By>
+  event_id?: InputMaybe<Order_By>
+  from_address?: InputMaybe<Order_By>
+  log_index?: InputMaybe<Order_By>
+  property_address?: InputMaybe<Order_By>
+  raw_data?: InputMaybe<Order_By>
+  to_address?: InputMaybe<Order_By>
+  transaction_index?: InputMaybe<Order_By>
 }
 
 export type Withdraw_Property_Transfer_Pk_Columns_Input = {
@@ -5697,14 +5698,14 @@ export enum Withdraw_Property_Transfer_Select_Column {
 }
 
 export type Withdraw_Property_Transfer_Set_Input = {
-  block_number?: Maybe<Scalars['Int']>
-  event_id?: Maybe<Scalars['String']>
-  from_address?: Maybe<Scalars['String']>
-  log_index?: Maybe<Scalars['Int']>
-  property_address?: Maybe<Scalars['String']>
-  raw_data?: Maybe<Scalars['String']>
-  to_address?: Maybe<Scalars['String']>
-  transaction_index?: Maybe<Scalars['Int']>
+  block_number?: InputMaybe<Scalars['Int']>
+  event_id?: InputMaybe<Scalars['String']>
+  from_address?: InputMaybe<Scalars['String']>
+  log_index?: InputMaybe<Scalars['Int']>
+  property_address?: InputMaybe<Scalars['String']>
+  raw_data?: InputMaybe<Scalars['String']>
+  to_address?: InputMaybe<Scalars['String']>
+  transaction_index?: InputMaybe<Scalars['Int']>
 }
 
 export type Withdraw_Property_Transfer_Stddev_Fields = {
@@ -5715,9 +5716,9 @@ export type Withdraw_Property_Transfer_Stddev_Fields = {
 }
 
 export type Withdraw_Property_Transfer_Stddev_Order_By = {
-  block_number?: Maybe<Order_By>
-  log_index?: Maybe<Order_By>
-  transaction_index?: Maybe<Order_By>
+  block_number?: InputMaybe<Order_By>
+  log_index?: InputMaybe<Order_By>
+  transaction_index?: InputMaybe<Order_By>
 }
 
 export type Withdraw_Property_Transfer_Stddev_Pop_Fields = {
@@ -5728,9 +5729,9 @@ export type Withdraw_Property_Transfer_Stddev_Pop_Fields = {
 }
 
 export type Withdraw_Property_Transfer_Stddev_Pop_Order_By = {
-  block_number?: Maybe<Order_By>
-  log_index?: Maybe<Order_By>
-  transaction_index?: Maybe<Order_By>
+  block_number?: InputMaybe<Order_By>
+  log_index?: InputMaybe<Order_By>
+  transaction_index?: InputMaybe<Order_By>
 }
 
 export type Withdraw_Property_Transfer_Stddev_Samp_Fields = {
@@ -5741,9 +5742,9 @@ export type Withdraw_Property_Transfer_Stddev_Samp_Fields = {
 }
 
 export type Withdraw_Property_Transfer_Stddev_Samp_Order_By = {
-  block_number?: Maybe<Order_By>
-  log_index?: Maybe<Order_By>
-  transaction_index?: Maybe<Order_By>
+  block_number?: InputMaybe<Order_By>
+  log_index?: InputMaybe<Order_By>
+  transaction_index?: InputMaybe<Order_By>
 }
 
 export type Withdraw_Property_Transfer_Sum_Fields = {
@@ -5754,9 +5755,9 @@ export type Withdraw_Property_Transfer_Sum_Fields = {
 }
 
 export type Withdraw_Property_Transfer_Sum_Order_By = {
-  block_number?: Maybe<Order_By>
-  log_index?: Maybe<Order_By>
-  transaction_index?: Maybe<Order_By>
+  block_number?: InputMaybe<Order_By>
+  log_index?: InputMaybe<Order_By>
+  transaction_index?: InputMaybe<Order_By>
 }
 
 export enum Withdraw_Property_Transfer_Update_Column {
@@ -5778,9 +5779,9 @@ export type Withdraw_Property_Transfer_Var_Pop_Fields = {
 }
 
 export type Withdraw_Property_Transfer_Var_Pop_Order_By = {
-  block_number?: Maybe<Order_By>
-  log_index?: Maybe<Order_By>
-  transaction_index?: Maybe<Order_By>
+  block_number?: InputMaybe<Order_By>
+  log_index?: InputMaybe<Order_By>
+  transaction_index?: InputMaybe<Order_By>
 }
 
 export type Withdraw_Property_Transfer_Var_Samp_Fields = {
@@ -5791,9 +5792,9 @@ export type Withdraw_Property_Transfer_Var_Samp_Fields = {
 }
 
 export type Withdraw_Property_Transfer_Var_Samp_Order_By = {
-  block_number?: Maybe<Order_By>
-  log_index?: Maybe<Order_By>
-  transaction_index?: Maybe<Order_By>
+  block_number?: InputMaybe<Order_By>
+  log_index?: InputMaybe<Order_By>
+  transaction_index?: InputMaybe<Order_By>
 }
 
 export type Withdraw_Property_Transfer_Variance_Fields = {
@@ -5804,9 +5805,9 @@ export type Withdraw_Property_Transfer_Variance_Fields = {
 }
 
 export type Withdraw_Property_Transfer_Variance_Order_By = {
-  block_number?: Maybe<Order_By>
-  log_index?: Maybe<Order_By>
-  transaction_index?: Maybe<Order_By>
+  block_number?: InputMaybe<Order_By>
+  log_index?: InputMaybe<Order_By>
+  transaction_index?: InputMaybe<Order_By>
 }
 
 export type PropertyFactoryCreateFragment = {
@@ -5837,14 +5838,14 @@ export type GetPortofolioPoolsAccountQuery = {
 }
 
 export type GetPropertyAggregateQueryVariables = Exact<{
-  authorAddress?: Maybe<Scalars['String']>
+  authorAddress?: InputMaybe<Scalars['String']>
 }>
 
 export type GetPropertyAggregateQuery = {
   __typename?: 'query_root'
   property_meta_aggregate: {
     __typename?: 'property_meta_aggregate'
-    aggregate?: { __typename?: 'property_meta_aggregate_fields'; count?: number | null | undefined } | null | undefined
+    aggregate?: { __typename?: 'property_meta_aggregate_fields'; count?: number }
   }
 }
 
@@ -5859,7 +5860,7 @@ export type GetPropertyAuthenticationQuery = {
     authentication_id: string
     market: string
     metrics: string
-    property_meta?: { __typename?: 'property_meta'; author: string } | null | undefined
+    property_meta?: { __typename?: 'property_meta'; author: string }
   }>
 }
 
@@ -5886,12 +5887,12 @@ export type TotalStakedAccountQueryVariables = Exact<{
 
 export type TotalStakedAccountQuery = {
   __typename?: 'query_root'
-  account_lockup_sum_values: Array<{ __typename?: 'account_lockup_sum_values'; sum_values?: any | null | undefined }>
+  account_lockup_sum_values: Array<{ __typename?: 'account_lockup_sum_values'; sum_values?: any }>
 }
 
 export type ListAccountLockupQueryVariables = Exact<{
   account_address: Scalars['String']
-  offset?: Maybe<Scalars['Int']>
+  offset?: InputMaybe<Scalars['Int']>
   limit: Scalars['Int']
 }>
 
@@ -5900,7 +5901,7 @@ export type ListAccountLockupQuery = {
   account_lockup: Array<{ __typename?: 'account_lockup'; property_address: string }>
   account_lockup_aggregate: {
     __typename?: 'account_lockup_aggregate'
-    aggregate?: { __typename?: 'account_lockup_aggregate_fields'; count?: number | null | undefined } | null | undefined
+    aggregate?: { __typename?: 'account_lockup_aggregate_fields'; count?: number }
   }
 }
 
@@ -5910,14 +5911,14 @@ export type CountAccountLockupUniqueQuery = {
   __typename?: 'query_root'
   account_lockup_aggregate: {
     __typename?: 'account_lockup_aggregate'
-    aggregate?: { __typename?: 'account_lockup_aggregate_fields'; count?: number | null | undefined } | null | undefined
+    aggregate?: { __typename?: 'account_lockup_aggregate_fields'; count?: number }
   }
 }
 
 export type ListOwnedPropertyMetaQueryVariables = Exact<{
   account_address: Scalars['String']
-  offset?: Maybe<Scalars['Int']>
-  limit?: Maybe<Scalars['Int']>
+  offset?: InputMaybe<Scalars['Int']>
+  limit?: InputMaybe<Scalars['Int']>
 }>
 
 export type ListOwnedPropertyMetaQuery = {
@@ -5926,12 +5927,12 @@ export type ListOwnedPropertyMetaQuery = {
 }
 
 export type ListPropertyQueryVariables = Exact<{
-  limit?: Maybe<Scalars['Int']>
-  offset?: Maybe<Scalars['Int']>
-  ilike?: Maybe<Scalars['String']>
-  from?: Maybe<Scalars['String']>
-  market?: Maybe<Scalars['String']>
-  marketOther?: Maybe<Array<Scalars['String']> | Scalars['String']>
+  limit?: InputMaybe<Scalars['Int']>
+  offset?: InputMaybe<Scalars['Int']>
+  ilike?: InputMaybe<Scalars['String']>
+  from?: InputMaybe<Scalars['String']>
+  market?: InputMaybe<Scalars['String']>
+  marketOther?: InputMaybe<Array<Scalars['String']> | Scalars['String']>
 }>
 
 export type ListPropertyQuery = {
@@ -5949,20 +5950,17 @@ export type ListPropertyQuery = {
   }>
   property_factory_create_aggregate: {
     __typename?: 'property_factory_create_aggregate'
-    aggregate?:
-      | { __typename?: 'property_factory_create_aggregate_fields'; count?: number | null | undefined }
-      | null
-      | undefined
+    aggregate?: { __typename?: 'property_factory_create_aggregate_fields'; count?: number }
   }
 }
 
 export type ListPropertyOrderByMostRecentQueryVariables = Exact<{
-  limit?: Maybe<Scalars['Int']>
-  offset?: Maybe<Scalars['Int']>
-  ilike?: Maybe<Scalars['String']>
-  from?: Maybe<Scalars['String']>
-  market?: Maybe<Scalars['String']>
-  marketOther?: Maybe<Array<Scalars['String']> | Scalars['String']>
+  limit?: InputMaybe<Scalars['Int']>
+  offset?: InputMaybe<Scalars['Int']>
+  ilike?: InputMaybe<Scalars['String']>
+  from?: InputMaybe<Scalars['String']>
+  market?: InputMaybe<Scalars['String']>
+  marketOther?: InputMaybe<Array<Scalars['String']> | Scalars['String']>
 }>
 
 export type ListPropertyOrderByMostRecentQuery = {
@@ -5980,18 +5978,15 @@ export type ListPropertyOrderByMostRecentQuery = {
   }>
   property_factory_create_aggregate: {
     __typename?: 'property_factory_create_aggregate'
-    aggregate?:
-      | { __typename?: 'property_factory_create_aggregate_fields'; count?: number | null | undefined }
-      | null
-      | undefined
+    aggregate?: { __typename?: 'property_factory_create_aggregate_fields'; count?: number }
   }
 }
 
 export type ListPropertyMetaQueryVariables = Exact<{
   author: Scalars['String']
-  offset?: Maybe<Scalars['Int']>
-  limit?: Maybe<Scalars['Int']>
-  ilike?: Maybe<Scalars['String']>
+  offset?: InputMaybe<Scalars['Int']>
+  limit?: InputMaybe<Scalars['Int']>
+  ilike?: InputMaybe<Scalars['String']>
 }>
 
 export type ListPropertyMetaQuery = {
@@ -6002,28 +5997,18 @@ export type ListPropertyMetaQuery = {
     name: string
     lockup_aggregate: {
       __typename?: 'property_lockup_aggregate'
-      aggregate?:
-        | {
-            __typename?: 'property_lockup_aggregate_fields'
-            count?: number | null | undefined
-            sum?:
-              | {
-                  __typename?: 'property_lockup_sum_fields'
-                  block_number?: number | null | undefined
-                  value?: any | null | undefined
-                }
-              | null
-              | undefined
-          }
-        | null
-        | undefined
+      aggregate?: {
+        __typename?: 'property_lockup_aggregate_fields'
+        count?: number
+        sum?: { __typename?: 'property_lockup_sum_fields'; block_number?: number; value?: any }
+      }
     }
   }>
 }
 
 export type ListTopStakersAccountQueryVariables = Exact<{
   author_address: Scalars['String']
-  limit?: Maybe<Scalars['Int']>
+  limit?: InputMaybe<Scalars['Int']>
 }>
 
 export type ListTopStakersAccountQuery = {
@@ -6038,7 +6023,7 @@ export type ListTopStakersAccountQuery = {
 
 export type ListTopSupportingAccountQueryVariables = Exact<{
   account_address: Scalars['String']
-  limit?: Maybe<Scalars['Int']>
+  limit?: InputMaybe<Scalars['Int']>
 }>
 
 export type ListTopSupportingAccountQuery = {

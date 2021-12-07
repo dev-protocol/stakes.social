@@ -36,6 +36,7 @@ export const SWRCachePath = {
   detectStokens: (propertyAddress?: string, user?: string) =>
     `propertyAddresses/${user}${propertyAddress}/detectStokens`,
   positionsOfOwner: (user?: string) => `user/${user}/positionsOfOwner`,
+  getStokenOwnerOf: (sTokenId?: string) => `sTokenId/${sTokenId}/getStokenOwnerOf`,
   getStokenPositions: (sTokenId?: string) => `sTokenId/${sTokenId}/getStokenPositions`,
   getStokenRewards: (sTokenId?: string) => `sTokenId/${sTokenId}/getStokenRewards`,
   approve: (propertyAddress?: string, user?: string) => `propertyAddresses/${user}${propertyAddress}/approve`,

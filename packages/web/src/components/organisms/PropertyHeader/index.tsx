@@ -164,7 +164,7 @@ export const PropertyHeader = ({ propertyAddress, apy, creators }: Props) => {
     <ResponsivePropertyAddressFrame>
       <HeaderContainer>
         <Header>{propertyName ? `${propertyName} Pool` : ''}</Header>
-        <CopyBadge propertyAddress={propertyAddress} />
+        {propertyAddress && <CopyBadge propertyAddress={propertyAddress} />}
       </HeaderContainer>
       <ShareTweet title={propertyName || 'N/A'}></ShareTweet>
       <SubHeader>
