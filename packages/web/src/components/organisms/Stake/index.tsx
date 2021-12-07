@@ -140,14 +140,8 @@ export const Stake = ({ className, title, propertyAddress }: Props) => {
       return
     }
 
-    const a = await allowanceValue
-    const allowanceNumber = a ? a.toNumber() : 0
-    if (amountNumber.toNumber() > allowanceNumber) {
-      const contractAddress = await getContractAddress(contractFactory(ethersProvider), 'lockup', name)
-      approve(contractAddress, amountNumber.toFixed())
-    } else {
-      setIsStakable(true)
-    }
+    const contractAddress = await getContractAddress(contractFactory(ethersProvider), 'lockup', name)
+    approve(contractAddress, amountNumber.toFixed())
   }
 
   const handleStake = () => {
@@ -165,7 +159,7 @@ export const Stake = ({ className, title, propertyAddress }: Props) => {
     setStakeAmount(value || '')
     const a = await allowanceValue
     const allowanceNumber = a ? a.toNumber() : 0
-    if (amountNumber.toNumber() > allowanceNumber) {
+    if (toAmountNumber(value).toNumber() > allowanceNumber || value === '' || toAmountNumber(value).toNumber() === 0) {
       setIsStakable(false)
     } else {
       setIsStakable(true)
@@ -188,6 +182,7 @@ export const Stake = ({ className, title, propertyAddress }: Props) => {
     ),
     [accountAddress, ethersProvider]
   )
+  const stakable = useMemo(() => ok || isStakable, [ok, isStakable])
 
   return (
     <FormContainer>
@@ -224,7 +219,7 @@ export const Stake = ({ className, title, propertyAddress }: Props) => {
             </Col>
             <WrapRightArrowCol span={2}>→</WrapRightArrowCol>
             <Col span={11}>
-              <StyledButton type="primary" disabled={!ok && !isStakable} onClick={handleStake}>
+              <StyledButton type="primary" disabled={!stakable} onClick={handleStake}>
                 Stake
               </StyledButton>
             </Col>
