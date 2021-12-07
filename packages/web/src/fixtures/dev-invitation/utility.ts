@@ -15,6 +15,7 @@ export const postInvitation = ({
   url,
   useCase,
   ask,
+  newsletter,
   signature
 }: {
   asset: string
@@ -27,6 +28,7 @@ export const postInvitation = ({
   url: string
   useCase: string
   ask: string
+  newsletter?: boolean
   signature?: string
 }): Promise<InvitationResult> =>
   fetch(`${BaseUrl}/invitation`, {
@@ -45,6 +47,7 @@ export const postInvitation = ({
       useCase,
       ask,
       market,
+      newsletter,
       message: signMessage
     })
   }).then(res => res.json())
