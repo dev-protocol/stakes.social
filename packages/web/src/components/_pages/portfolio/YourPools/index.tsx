@@ -6,13 +6,7 @@ import { Asset, AssetList } from 'src/components/molecules/AssetList'
 import { useIsL1 } from 'src/fixtures/wallet/hooks'
 import { useGetEnabledMarkets, useGetAuthenticatedProperties, usePropertyAuthor } from 'src/fixtures/dev-kit/hooks'
 import { TransactModalContents } from 'src/components/molecules/TransactModalContents'
-import { ResponsiveModal } from 'src/components/atoms/ResponsiveModal'
-
-interface ModalStates {
-  visible: boolean
-  title?: string
-  contents?: React.ReactNode
-}
+import { ModalStates, ResponsiveModal } from 'src/components/atoms/ResponsiveModal'
 
 interface Props {
   accountAddress?: string

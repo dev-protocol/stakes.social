@@ -2,7 +2,7 @@ import React, { useCallback, useState } from 'react'
 import styled from 'styled-components'
 import { Pagination, Skeleton } from 'antd'
 import { AssetItemOnList } from '../AssetItemOnList'
-import { ResponsiveModal } from 'src/components/atoms/ResponsiveModal'
+import { ModalStates, ResponsiveModal } from 'src/components/atoms/ResponsiveModal'
 import { TransactModalContents } from '../TransactModalContents'
 import { NotConnectedAndEmpty } from 'src/components/atoms/NotConnectedAndEmpty'
 
@@ -28,12 +28,6 @@ interface AssetProps {
   enableWithdrawHoldersReward?: boolean
   isPool?: boolean
   showModalFunc: Function
-}
-
-interface ModalStates {
-  visible: boolean
-  title?: string
-  contents?: React.ReactNode
 }
 
 const Wrap = styled.div`
