@@ -4,10 +4,10 @@ exports[`AssetList Snapshot 1`] = `
 <body>
   <div>
     <div
-      class="sc-hiCibw cdgLuG"
+      class="sc-ikJyIC cieYqL"
     >
       <div
-        class="sc-pVTFL igAzgN sc-gWXbKe krkLWX"
+        class="sc-pVTFL igAzgN sc-jJoQJp jwMGZf"
       >
         <a
           class="sc-jrQzAO sc-iqseJM fgcmjD irPoXs"
@@ -99,7 +99,7 @@ exports[`AssetList Snapshot 1`] = `
         </div>
       </div>
       <div
-        class="sc-pVTFL igAzgN sc-gWXbKe krkLWX"
+        class="sc-pVTFL igAzgN sc-jJoQJp jwMGZf"
       >
         <a
           class="sc-jrQzAO sc-iqseJM fgcmjD irPoXs"
@@ -191,7 +191,7 @@ exports[`AssetList Snapshot 1`] = `
         </div>
       </div>
       <div
-        class="sc-pVTFL igAzgN sc-gWXbKe krkLWX"
+        class="sc-pVTFL igAzgN sc-jJoQJp jwMGZf"
       >
         <a
           class="sc-jrQzAO sc-iqseJM fgcmjD irPoXs"
@@ -283,7 +283,7 @@ exports[`AssetList Snapshot 1`] = `
         </div>
       </div>
       <ul
-        class="ant-pagination sc-cCcXHH fHAMau"
+        class="ant-pagination sc-hiCibw eDlLfD"
         unselectable="unselectable"
       >
         <li
@@ -382,7 +382,7 @@ exports[`AssetList Snapshot with empty properties 1`] = `
 <body>
   <div>
     <div
-      class="sc-hiCibw cdgLuG"
+      class="sc-ikJyIC cieYqL"
     >
       <div
         class="ant-empty"
@@ -457,7 +457,7 @@ exports[`AssetList Snapshot with empty properties 1`] = `
         </div>
       </div>
       <ul
-        class="ant-pagination sc-cCcXHH fHAMau"
+        class="ant-pagination sc-hiCibw eDlLfD"
         unselectable="unselectable"
       >
         <li
@@ -556,7 +556,7 @@ exports[`AssetList Snapshot with empty properties and sign in button 1`] = `
 <body>
   <div>
     <div
-      class="sc-hiCibw cdgLuG"
+      class="sc-ikJyIC cieYqL"
     >
       <div
         class="ant-empty"
@@ -643,7 +643,7 @@ exports[`AssetList Snapshot with empty properties and sign in button 1`] = `
         </div>
       </div>
       <ul
-        class="ant-pagination sc-cCcXHH fHAMau"
+        class="ant-pagination sc-hiCibw eDlLfD"
         unselectable="unselectable"
       >
         <li

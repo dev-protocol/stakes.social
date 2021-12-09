@@ -259,36 +259,6 @@ exports[`WithdrawalForHolders Snapshot 1`] = `
           </p>
         </div>
       </div>
-      <div
-        class="ant-card ant-card-bordered ant-card-small sc-furwcr ddehtr"
-      >
-        <div
-          class="ant-card-head"
-        >
-          <div
-            class="ant-card-head-wrapper"
-          >
-            <div
-              class="ant-card-head-title"
-            >
-              Gas Fee (predicted)
-            </div>
-          </div>
-        </div>
-        <div
-          class="ant-card-body"
-        >
-          <p>
-            0.000011
-             ETH
-            <span
-              class="sc-pVTFL jPgwsm"
-            >
-               $0.00
-            </span>
-          </p>
-        </div>
-      </div>
     </div>
   </div>
 </body>

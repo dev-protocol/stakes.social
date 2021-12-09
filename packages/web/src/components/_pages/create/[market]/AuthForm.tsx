@@ -1,13 +1,9 @@
-import React, { useMemo } from 'react'
+import React from 'react'
 import { Form } from 'antd'
 import styled from 'styled-components'
 import Input from 'src/components/molecules/Input'
-import { EstimatedGasNotes } from 'src/components/molecules/EstimatedGasNotes'
-import { whenDefinedAll } from 'src/fixtures/utility'
 import { useProvider } from 'src/fixtures/wallet/hooks'
 import { InfoCircleOutlined, AccountBookOutlined, CodeOutlined, FontColorsOutlined } from '@ant-design/icons'
-import { useGetEstimateGas4CreateAndAuthenticate } from 'src/fixtures/dev-kit/hooks'
-import { useGetEthPrice } from 'src/fixtures/uniswap/hooks'
 import { useRouter } from 'next/router'
 
 export interface Props {
@@ -77,30 +73,14 @@ const InfoContainer = styled.div`
   }
 `
 
-const EstimateGas = styled.span`
-  font-size: 1em;
-  margin-right: 5px;
-`
-const EstimateGasUSD = styled.span`
-  font-size: 0.9em;
-  color: #a0a0a0;
-`
-
-export const AuthForm = ({ onHeaderChange, onSubHeaderChange, onFormDataSubmit, market }: Props) => {
+export const AuthForm = ({ onHeaderChange, onSubHeaderChange, onFormDataSubmit }: Props) => {
   const { asset: initialAsset } = useRouter().query
   const { accountAddress } = useProvider()
-  const { estimateGas } = useGetEstimateGas4CreateAndAuthenticate(market)
   const onFinish = async (values: any) => {
     onFormDataSubmit(values)
     onHeaderChange('Tokenization Review')
     onSubHeaderChange('Check the details before continuing.')
   }
-  const { data: ethPrice } = useGetEthPrice()
-  const estimateGasUSD = useMemo(
-    () => whenDefinedAll([estimateGas, ethPrice], ([gas, eth]) => gas.multipliedBy(eth)),
-    [estimateGas, ethPrice]
-  )
-
   return (
     <div style={{ maxWidth: '760px' }}>
       <Container>
@@ -185,28 +165,12 @@ export const AuthForm = ({ onHeaderChange, onSubHeaderChange, onFormDataSubmit, 
           </div>
 
           <Row>
-            <div style={{ display: 'flex', gridColumn: '1/-1', justifyContent: 'flex-end' }}>
+            <div style={{ display: 'flex', gridColumn: '1/-1', justifyContent: 'center' }}>
               <ButtonContainer>
                 <Submit type="submit" disabled={!accountAddress}>
                   Tokenize
                 </Submit>
               </ButtonContainer>
-            </div>
-            <div style={{ display: 'flex', gridColumn: '1/-1', justifyContent: 'flex-end' }}>
-              <EstimatedGasNotes>
-                <div style={{ display: 'flex', flexDirection: 'column' }}>
-                  <div>
-                    Gas Fee: <EstimateGas>{estimateGas?.toFixed() || '-'}ETH</EstimateGas>
-                    <EstimateGasUSD>${estimateGasUSD?.toFixed(2) || '-'}</EstimateGasUSD>
-                  </div>
-                  <div>
-                    <p>
-                      <InfoCircleOutlined style={{ marginRight: '5px' }} />
-                      predicted cost
-                    </p>
-                  </div>
-                </div>
-              </EstimatedGasNotes>
             </div>
           </Row>
         </Form>
