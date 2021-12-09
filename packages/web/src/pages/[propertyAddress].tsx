@@ -10,6 +10,7 @@ import { UploadChangeParam, UploadFile } from 'antd/lib/upload/interface'
 import { FormInstance } from 'antd/lib/form'
 import { PossessionOutline } from 'src/components/organisms/PossessionOutline'
 import { PropertyHeader } from 'src/components/organisms/PropertyHeader'
+import { PropertyStats } from 'src/components/organisms/PropertyStats'
 import { Footer } from 'src/components/organisms/Footer'
 import { ResponsiveModal } from 'src/components/atoms/ResponsiveModal'
 import { ButtonWithGradient } from 'src/components/atoms/ButtonWithGradient'
@@ -383,6 +384,7 @@ const PropertyAddressDetail = (_: Props) => {
         </Container>
         <Main>
           <RoundedCoverImageOrGradient src={dataProperty?.cover_image?.url} ratio={52.5} />
+          <PropertyStats />
           {<Possession propertyAddress={propertyAddress} />}
           {myStakingAmount?.isGreaterThan(0) && <Convert propertyAddress={propertyAddress} />}
           <Transact>
