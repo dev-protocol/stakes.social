@@ -5,17 +5,17 @@ import Link from 'next/link'
 import styled from 'styled-components'
 import ReactMarkdown from 'react-markdown'
 import { PlusOutlined, LinkOutlined } from '@ant-design/icons'
-import { Button, Form, Input, Upload } from 'antd'
+import { Button, Form, Input, Upload, Tabs } from 'antd'
 import { UploadChangeParam, UploadFile } from 'antd/lib/upload/interface'
 import { FormInstance } from 'antd/lib/form'
 import { PossessionOutline } from 'src/components/organisms/PossessionOutline'
 import { PropertyHeader } from 'src/components/organisms/PropertyHeader'
-import { PropertyStats } from 'src/components/organisms/PropertyStats'
 import { Footer } from 'src/components/organisms/Footer'
 import { ResponsiveModal } from 'src/components/atoms/ResponsiveModal'
 import { ButtonWithGradient } from 'src/components/atoms/ButtonWithGradient'
 import { Container } from 'src/components/atoms/Container'
 import { Header } from 'src/components/organisms/Header'
+import { PropertyStats } from 'src/components/organisms/PropertyStats'
 import PropertySupporters from 'src/components/organisms/PropertySupporters'
 import {
   useAPY,
@@ -61,6 +61,8 @@ const apiDataToUploadFile = ({ hash: uid, url, name, size, mime: type }: Image):
   type
 })
 
+const { TabPane } = Tabs
+
 const Main = styled(Container)`
   display: grid;
   grid-gap: 3rem;
@@ -71,6 +73,14 @@ const Main = styled(Container)`
 `
 
 const Transact = styled.div`
+  display: grid;
+  grid-gap: 1rem;
+  @media (min-width: 1024px) {
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 3rem;
+  }
+`
+const TabsGrid = styled.div`
   display: grid;
   grid-gap: 1rem;
   @media (min-width: 1024px) {
@@ -384,7 +394,22 @@ const PropertyAddressDetail = (_: Props) => {
         </Container>
         <Main>
           <RoundedCoverImageOrGradient src={dataProperty?.cover_image?.url} ratio={52.5} />
-          <PropertyStats propertyAddress={propertyAddress} />
+          <Tabs defaultActiveKey="1" type="card">
+            <TabPane tab="Overview" key="1">
+              <TabsGrid>
+                <div></div>
+                {<PropertyStats propertyAddress={propertyAddress} />}
+              </TabsGrid>
+            </TabPane>
+            <TabPane tab="Stake" key="2">
+              <TabsGrid>
+                {(loggedInWallet ? loggedInWallet !== authorAddress : true) && (
+                  <Stake title="Stake" propertyAddress={propertyAddress} />
+                )}
+                {<PropertyStats propertyAddress={propertyAddress} />}
+              </TabsGrid>
+            </TabPane>
+          </Tabs>
           {<Possession propertyAddress={propertyAddress} />}
           {myStakingAmount?.isGreaterThan(0) && <Convert propertyAddress={propertyAddress} />}
           <Transact>
