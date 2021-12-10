@@ -49,5 +49,8 @@
     "*.json": [
       "prettier --write"
     ]
+  },
+  "dependencies": {
+    "truncate-eth-address": "^1.0.2"
   }
 }

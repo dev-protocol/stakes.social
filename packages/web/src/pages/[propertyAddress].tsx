@@ -84,7 +84,7 @@ const TabsGrid = styled.div`
   display: grid;
   grid-gap: 1rem;
   @media (min-width: 1024px) {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 4fr 1fr;
     grid-gap: 3rem;
   }
 `
