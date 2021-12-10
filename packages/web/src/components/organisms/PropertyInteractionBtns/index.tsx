@@ -31,7 +31,7 @@ const StakeButton = styled.button<{ isPropertyStaked?: Boolean }>`
   margin-right: 12px;
   border-radius: 4px;
   font-weight: 600;
-  width: 124px;
+  width: 100px;
 
   cursor: ${props => (props.disabled ? 'auto' : 'pointer')};
   :hover {
@@ -51,7 +51,7 @@ const WithdrawButton = styled.button<{ isPropertyStaked?: Boolean }>`
   cursor: pointer;
   border-radius: 4px;
   font-weight: 600;
-  width: 124px;
+  width: 100px;
   ${props => props.disabled && 'opacity: 0.3'}
 `
 
@@ -92,7 +92,7 @@ export const PropertyInteractionBtns = ({ propertyAddress }: Props) => {
           onClick={() => showModal('withdraw')}
           isPropertyStaked={typeof myStakingAmount !== 'undefined' && myStakingAmount > zeroBigNumber}
         >
-          Withdraw
+          Claim
         </WithdrawButton>
       </ButtonContainer>
       <ResponsiveModal visible={modalStates.visible} title={modalStates.title} onCancel={closeModal} footer={null}>
