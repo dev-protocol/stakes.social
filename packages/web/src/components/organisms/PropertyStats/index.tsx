@@ -7,6 +7,7 @@ import {
 } from 'src/fixtures/dev-kit/hooks'
 import { useGetAccount } from 'src/fixtures/dev-for-apps/hooks'
 import { Card, Statistic, Row } from 'antd'
+import { CoverImages } from 'src/components/_pages/author/CoverImages/index.tsx'
 import styled from 'styled-components'
 import truncateEthAddress from 'truncate-eth-address'
 
@@ -69,6 +70,11 @@ export const PropertyStats = ({ className, propertyAddress }: Props) => {
               precision={2}
               valueStyle={{ textAlign: 'right' }}
             />
+          </Card>
+        </Row>
+        <Row gutter={[24, 24]} justify={'start'}>
+          <Card>
+            <CoverImages accountAddress={authorAddress} />
           </Card>
         </Row>
       </Container>
