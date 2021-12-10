@@ -7,7 +7,7 @@ import {
 } from 'src/fixtures/dev-kit/hooks'
 import { useGetAccount } from 'src/fixtures/dev-for-apps/hooks'
 import { Card, Statistic, Row } from 'antd'
-import { CoverImages } from 'src/components/_pages/author/CoverImages/index.tsx'
+import { CoverImages } from 'src/components/_pages/author/CoverImages'
 import styled from 'styled-components'
 import truncateEthAddress from 'truncate-eth-address'
 
