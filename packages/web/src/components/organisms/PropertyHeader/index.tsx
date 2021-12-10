@@ -1,7 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
 import BigNumber from 'bignumber.js'
-import { BuyDevButton } from 'src/components/molecules/BuyButton'
 import { useGetAuthorInformation } from 'src/fixtures/devprtcl/hooks'
 import { WithGradient } from 'src/components/atoms/WithGradient'
 import ReactMarkdown from 'react-markdown'
@@ -9,6 +8,7 @@ import { useClipboard } from 'use-clipboard-copy'
 import { CopyOutlined, CheckCircleTwoTone } from '@ant-design/icons'
 import ShareTweet from '../../atoms/ShareButtons'
 import { usePropertyAuthor, usePropertyName } from 'src/fixtures/dev-kit/hooks'
+import { PropertyInteractionBtns } from '../PropertyInteractionBtns'
 
 const ResponsivePropertyAddressFrame = styled.div`
   margin: 1rem auto;
@@ -63,19 +63,6 @@ const ApyContainer = styled.div`
   @media (min-width: 768px) {
     width: 80%;
     justify-content: flex-start;
-  }
-`
-
-const ButtonContainer = styled.div`
-  display: flex;
-  align-items: center;
-  @media (max-width: 768px) {
-    width: 100%;
-    a {
-      display: flex;
-      justify-content: center;
-      width: 100%;
-    }
   }
 `
 
@@ -187,9 +174,7 @@ export const PropertyHeader = ({ propertyAddress, apy, creators }: Props) => {
             <span>Karma</span>
           </ResponsiveSubheaderSection>
         </ApyContainer>
-        <ButtonContainer>
-          <BuyDevButton />
-        </ButtonContainer>
+        <PropertyInteractionBtns propertyAddress={propertyAddress} />
       </SubHeader>
     </ResponsivePropertyAddressFrame>
   )
