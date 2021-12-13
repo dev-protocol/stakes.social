@@ -7,7 +7,7 @@ import {
 } from 'src/fixtures/dev-kit/hooks'
 import { useGetAccount } from 'src/fixtures/dev-for-apps/hooks'
 import { Card, Statistic, Row } from 'antd'
-import { CoverImages } from 'src/components/_pages/author/CoverImages'
+import { Avatar } from 'src/components/molecules/Avatar'
 import styled from 'styled-components'
 import truncateEthAddress from 'truncate-eth-address'
 
@@ -74,7 +74,7 @@ export const PropertyStats = ({ className, propertyAddress }: Props) => {
         </Row>
         <Row gutter={[24, 24]} justify={'start'}>
           <Card>
-            <CoverImages accountAddress={authorAddress} />
+            <Avatar accountAddress={authorAddress} size={'60'} />
           </Card>
         </Row>
       </Container>
