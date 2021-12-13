@@ -7,16 +7,16 @@ exports[`Header Snapshot 1`] = `
       style="position: sticky; top: 0px; width: 100%; z-index: 5;"
     >
       <header
-        class="sc-pVTFL cojRhi"
+        class="sc-furwcr dEfYgJ"
       >
         <div
-          class="sc-bqiRlB gIAOub"
+          class="sc-egiyK kYhVgg"
         >
           <header
-            class="sc-jrQzAO eyFPeo"
+            class="sc-pVTFL xEgAJ"
           >
             <div
-              class="sc-kDTinF fiqjHQ"
+              class="sc-jrQzAO kZuvhn"
             >
               <a
                 class="sc-bdvvtL bKEjhC"
@@ -37,7 +37,7 @@ exports[`Header Snapshot 1`] = `
               </a>
             </div>
             <div
-              class="sc-iqseJM fHgXHv"
+              class="sc-kDTinF kqfajw"
             >
               <svg
                 height="50"
@@ -116,12 +116,12 @@ exports[`Header Snapshot 1`] = `
       <div
         class="sc-iCfMLu fOyGKa"
       >
-        <span
-          class="sc-furwcr jIRdot"
+        <a
           href="https://stakes.social"
+          style="color: white;"
         >
           Switch to development version
-        </span>
+        </a>
       </div>
     </div>
   </div>

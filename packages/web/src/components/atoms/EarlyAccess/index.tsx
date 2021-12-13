@@ -15,15 +15,10 @@ const Wrap = styled.div`
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
 `
 
-const ClickableText = styled.span`
-  color: white;
-  cursor: pointer;
-`
-
 export const EarlyAccess = () => (
   <Wrap>
     <Link href="https://stakes.social" passHref>
-      <ClickableText>Switch to development version</ClickableText>
+      <a style={{ color: 'white' }}>Switch to development version</a>
     </Link>
   </Wrap>
 )
