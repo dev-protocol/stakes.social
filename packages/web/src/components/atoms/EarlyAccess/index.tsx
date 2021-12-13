@@ -1,4 +1,6 @@
 import * as React from 'react'
+import Link from 'next/link'
+import { useRouter } from 'next/router'
 import styled from 'styled-components'
 
 const Wrap = styled.div`
@@ -14,4 +16,21 @@ const Wrap = styled.div`
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
 `
 
-export const EarlyAccess = () => <Wrap>Beta Version</Wrap>
+export const EarlyAccess = () => {
+  const router = useRouter()
+  return router.basePath.includes('preview.statkes.social') ? (
+    <Wrap>
+      <Link href="https://v3.stakes.social" passHref>
+        Switch to the old version
+      </Link>
+    </Wrap>
+  ) : router.basePath.includes('v3.statkes.social') ? (
+    <Wrap>
+      <Link href="https://stakes.social" passHref>
+        Switch to development version
+      </Link>
+    </Wrap>
+  ) : (
+    <Wrap>Beta Version</Wrap>
+  )
+}
