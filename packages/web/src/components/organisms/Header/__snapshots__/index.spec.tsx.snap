@@ -7,16 +7,16 @@ exports[`Header Snapshot 1`] = `
       style="position: sticky; top: 0px; width: 100%; z-index: 5;"
     >
       <header
-        class="sc-furwcr dEfYgJ"
+        class="sc-pVTFL cojRhi"
       >
         <div
-          class="sc-egiyK kYhVgg"
+          class="sc-bqiRlB gIAOub"
         >
           <header
-            class="sc-pVTFL xEgAJ"
+            class="sc-jrQzAO eyFPeo"
           >
             <div
-              class="sc-jrQzAO kZuvhn"
+              class="sc-kDTinF fiqjHQ"
             >
               <a
                 class="sc-bdvvtL bKEjhC"
@@ -37,7 +37,7 @@ exports[`Header Snapshot 1`] = `
               </a>
             </div>
             <div
-              class="sc-kDTinF kqfajw"
+              class="sc-iqseJM fHgXHv"
             >
               <svg
                 height="50"
@@ -116,7 +116,11 @@ exports[`Header Snapshot 1`] = `
       <div
         class="sc-iCfMLu fOyGKa"
       >
-        Beta Version
+        <span
+          class="sc-furwcr jIRdot"
+        >
+          Switch to the old version
+        </span>
       </div>
     </div>
   </div>
