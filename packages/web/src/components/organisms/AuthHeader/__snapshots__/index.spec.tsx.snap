@@ -116,7 +116,12 @@ exports[`AuthHeader Snapshot 1`] = `
       <div
         class="sc-iCfMLu fOyGKa"
       >
-        Beta Version
+        <a
+          href="https://v3.stakes.social"
+          style="color: white;"
+        >
+          Switch to the old version
+        </a>
       </div>
     </div>
     <div
