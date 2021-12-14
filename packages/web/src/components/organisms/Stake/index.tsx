@@ -2,17 +2,14 @@ import React, { useState, useMemo } from 'react'
 import { useDetectChain, useProvider } from 'src/fixtures/wallet/hooks'
 import { balanceOf } from 'src/fixtures/dev-kit/client'
 import {
-  useGetEstimateGas4Stake,
   useDepositToPosition,
   useDepositToProperty,
   useAllowance,
   useApprove,
   useDetectSTokens
 } from 'src/fixtures/dev-kit/hooks'
-import { useGetEthPrice } from 'src/fixtures/uniswap/hooks'
 import { toAmountNumber, toNaturalNumber, whenDefinedAll } from 'src/fixtures/utility'
 import { FormContainer } from 'src/components/molecules/WithdrawTransactForm/FormContainer'
-import { EstimatedGasFeeCard } from 'src/components/molecules/EstimatedGasFeeCard'
 import { message, Button, Input, Radio, Space, Row, Col, RadioChangeEvent } from 'antd'
 import styled from 'styled-components'
 import { Max } from 'src/components/molecules/Max'
@@ -119,13 +116,6 @@ export const Stake = ({ className, title, propertyAddress }: Props) => {
     return res
   }, [accountAddress])
 
-  const { estimateGas } = useGetEstimateGas4Stake(propertyAddress, stakeAmount || undefined)
-  const { data: ethPrice } = useGetEthPrice()
-  const estimateGasUSD = useMemo(
-    () => whenDefinedAll([estimateGas, ethPrice], ([gas, eth]) => gas.multipliedBy(eth)),
-    [estimateGas, ethPrice]
-  )
-
   const handleChangeRadio = (event: RadioChangeEvent) => {
     setRadioValue(event.target.value)
   }
@@ -227,10 +217,6 @@ export const Stake = ({ className, title, propertyAddress }: Props) => {
         </WrapStyledButton>
       </Wrap>
       <div style={{ height: '40px' }}></div>
-      <EstimatedGasFeeCard
-        estimatedGasFee={estimateGas ? estimateGas.toFixed(6) : '-'}
-        estimatedGasFeeUSD={estimateGasUSD ? estimateGasUSD.toFixed(2) : ''}
-      />
     </FormContainer>
   )
 }
