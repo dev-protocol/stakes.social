@@ -43,6 +43,7 @@ import { CoverImageOrGradient } from 'src/components/atoms/CoverImageOrGradient'
 import { H3 } from 'src/components/atoms/Typography'
 import { Twitter, Github } from 'src/components/atoms/SocialButtons'
 import { whenDefined } from 'src/fixtures/utility'
+import { AvatarProperty } from 'src/components/molecules/AvatarProperty'
 
 type Props = {}
 
@@ -106,6 +107,7 @@ const AssetsSection = styled.div`
 `
 const AssetList = styled.div`
   display: flex;
+  flex-direction: column;
 `
 
 const AssetListItem = styled.div`
@@ -114,6 +116,7 @@ const AssetListItem = styled.div`
   border-radius: 6px;
   margin-right: 5px;
   box-shadow: 0 2px 3px -1px rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.06);
+  margin-bottom: 1rem;
 `
 
 const AddAsset = styled.button`
@@ -164,6 +167,26 @@ const AboutTitle = styled.div`
 const EditPropertyButton = styled(ButtonWithGradient)`
   font-size: 0.8rem;
   margin: 0 1rem 0.5rem;
+`
+
+const FlexRow = styled.div`
+  display: flex;
+  align-items: center;
+
+  img {
+    border-radius: 90px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+  }
+`
+const Bold = styled.div`
+  margin-right: 10px;
+  font-weight: bold;
+`
+
+const FlexColumn = styled.div`
+  display: flex;
+  margin-right: 1rem;
 `
 
 const Author = ({ propertyAddress }: { propertyAddress: string }) => {
@@ -397,7 +420,46 @@ const PropertyAddressDetail = (_: Props) => {
           <Tabs defaultActiveKey="1" type="card">
             <TabPane tab="Overview" key="1">
               <TabsGrid>
-                <div></div>
+                <AssetsSection>
+                  <h2>Tokenized assets</h2>
+                  <AssetList>
+                    {includedAssetList?.map((asset: any, index: any) => (
+                      <AssetListItem key={index}>
+                        <FlexRow>
+                          <AvatarProperty propertyAddress={propertyAddress} size={'60'} />
+                          <Bold>GitHub</Bold>
+                          {asset}
+                        </FlexRow>
+                        <FlexRow>
+                          <FlexColumn>
+                            <Bold>Contributors</Bold>
+                            <span>32</span>
+                          </FlexColumn>
+                          <FlexColumn>
+                            <Bold>Star</Bold>
+                            <span>3.2K</span>
+                          </FlexColumn>
+                          <FlexColumn>
+                            <Bold>Last update</Bold>
+                            <span>2 weeks ago</span>
+                          </FlexColumn>
+                          <FlexColumn>
+                            <Bold>Created</Bold>
+                            <span>1 year ago</span>
+                          </FlexColumn>
+                        </FlexRow>
+                      </AssetListItem>
+                    ))}
+                    {propertyInformation?.author?.address === loggedInWallet && (
+                      <Link href={'/create/[property]'} as={`/create/${propertyAddress}`}>
+                        <AddAsset>
+                          <PlusOutlined />
+                          <span>Add asset</span>
+                        </AddAsset>
+                      </Link>
+                    )}
+                  </AssetList>
+                </AssetsSection>
                 {<PropertyStats propertyAddress={propertyAddress} />}
               </TabsGrid>
             </TabPane>
