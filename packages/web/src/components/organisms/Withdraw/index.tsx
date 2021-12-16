@@ -13,7 +13,7 @@ interface Props {
   className?: string
   title?: string
   propertyAddress: string
-  onChange?: (value: string) => void
+  onChange?: (value: string, sTokenId?: number) => void
 }
 
 const InfoContainer = styled.div`
@@ -32,6 +32,7 @@ const SubtitleContianer = styled.div`
 
 export const Withdraw = ({ className, title, propertyAddress, onChange: onChangeAmount }: Props) => {
   const [withdrawAmount, setWithdrawAmount] = useState<string>('')
+  const [selectedSTokenId, setSelectedSTokenId] = useState<number | undefined>(undefined)
   const { ethersProvider, accountAddress } = useProvider()
   const { withdrawStaking: legacyWithdrawStaking } = useWithdrawStaking()
   const { withdrawByPosition } = useWithdrawByPosition()
@@ -41,7 +42,10 @@ export const Withdraw = ({ className, title, propertyAddress, onChange: onChange
     whenDefinedAll([ethersProvider, sTokenId], ([prov, tokenId]) =>
       getStokenPositions(prov, tokenId)
         .then(async x => toNaturalNumber(x?.amount))
-        .then(x => setWithdrawAmount(x.toFixed()))
+        .then(x => {
+          setWithdrawAmount(x.toFixed())
+          setSelectedSTokenId(sTokenId)
+        })
     ) ||
     whenDefinedAll([ethersProvider, propertyAddress, accountAddress], ([prov, property, account]) =>
       getMyStakingAmount(prov, property, account)
@@ -71,7 +75,7 @@ export const Withdraw = ({ className, title, propertyAddress, onChange: onChange
   )
   useEffect(() => {
     if (onChangeAmount) {
-      onChangeAmount(withdrawAmount)
+      onChangeAmount(withdrawAmount, selectedSTokenId)
     }
   }, [withdrawAmount, onChangeAmount])
 

@@ -325,7 +325,8 @@ exports[`WithdrawWithEstimate Snapshot 1`] = `
         >
           <p>
             3000
-             DEV 
+             DEV
+             
             (0 + 3000)
           </p>
         </div>
