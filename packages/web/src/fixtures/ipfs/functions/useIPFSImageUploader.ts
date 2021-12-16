@@ -1,0 +1,32 @@
+import { useState, useCallback } from 'react'
+import { NFTStorage } from 'nft.storage'
+import { message } from 'antd'
+
+export const useIPFSImageUploader = () => {
+  const key = 'useIPFSImageUploader'
+  const [isLoading, setIsLoading] = useState<boolean>(false)
+  const [error, setError] = useState<Error>()
+  const upload = useCallback(async (name: string, description: string, image: File) => {
+    setIsLoading(true)
+
+    const client = new NFTStorage({ token: 'API_TOKEN' })
+
+    try {
+      const metadata = await client.store({
+        name,
+        description,
+        image
+      })
+      message.success({ content: 'upload successful!', key })
+      return metadata.url
+    } catch (e) {
+      const err = e as Error
+      setError(err)
+      const msg = err.message
+      message.error({ content: msg, key })
+      return msg
+    }
+  }, [])
+
+  return { upload, isLoading, error }
+}
