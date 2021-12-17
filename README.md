@@ -28,18 +28,18 @@ $ yarn workspace @dev/web start:dev
 Use [direnv](https://direnv.net/) to set environment variables.
 
 1. **Install direnv**: Install direnv on your local by referring to the [direnv guide](https://direnv.net/docs/installation.html)
-   Example for Ubuntu:
 
 ```bash
+# Example for Ubuntu
 sudo apt update
 sudo apt install direnv
 ```
 
 2. **Add hooks**: Add direnv hooks to your shell by following the [direnv guide](https://direnv.net/docs/hook.html)
 3. Create `.envrc` file to define environment variables
-   Example:
 
-```
+```bash
+# Example .envrc
 MY_EMOJI="🎎"
 ```
 
