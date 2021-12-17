@@ -42,7 +42,8 @@ import {
   metricsOfProperty,
   getMarketBehavior,
   getId,
-  getMarket
+  getMarket,
+  getIPFS
 } from './client'
 import { SWRCachePath } from './cache-path'
 import {
@@ -61,6 +62,7 @@ import { useDetectChain, useIsL1, useProvider } from 'src/fixtures/wallet/hooks'
 import { useCurrency } from 'src/fixtures/currency/functions/useCurrency'
 import { isAddress } from 'web3-utils'
 import { UndefinedOr } from '@devprotocol/util-ts'
+import ipfsHttpClient from 'ipfs-http-client'
 
 interface DevAllocations {
   privateSale: string
@@ -797,8 +799,8 @@ export const usePropertyName = (propertyAddress?: string) => {
     () =>
       validAddress(propertyAddress)
         ? whenDefinedAll([nonConnectedEthersProvider, propertyAddress], ([client, property]) =>
-            propertyName(client, property)
-          )
+          propertyName(client, property)
+        )
         : 'Foo',
     {
       onError: err => {
@@ -820,8 +822,8 @@ export const usePropertySymbol = (propertyAddress?: string) => {
     () =>
       validAddress(propertyAddress)
         ? whenDefinedAll([nonConnectedEthersProvider, propertyAddress], ([client, property]) =>
-            propertySymbol(client, property)
-          )
+          propertySymbol(client, property)
+        )
         : 'FOO',
     {
       onError: err => {
@@ -1150,4 +1152,20 @@ export const useGetAssetsByProperties = (propertyAddress?: string) => {
       return res
     })
   )
+}
+
+export const useGetIPFS = (cid?: String) => {
+  const ipfs = ipfsHttpClient({
+    host: 'ipfs.infura.io',
+    apiPath: 'api/v0',
+    port: 5001,
+    protocol: 'https',
+  })
+  const { data, error } = useSWR<UnwrapFunc<typeof getIPFS>, Error>(
+    SWRCachePath.getIPFS(cid),
+    () =>
+      whenDefinedAll([ipfs, cid], ([client, cid]) => getIPFS(client, cid)),
+    { revalidateOnFocus: false, focusThrottleInterval: 0 }
+  )
+  return { symbol: data, error }
 }
