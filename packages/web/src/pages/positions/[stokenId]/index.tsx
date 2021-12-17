@@ -2,7 +2,8 @@ import React, { useMemo } from 'react'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
 import styled from 'styled-components'
-import { LeftOutlined } from '@ant-design/icons'
+import { LeftOutlined, InboxOutlined } from '@ant-design/icons'
+import { Upload, message } from 'antd'
 import { Container } from 'src/components/atoms/Container'
 import { Avatar } from 'src/components/molecules/Avatar'
 import { Header } from 'src/components/organisms/Header'
@@ -15,6 +16,8 @@ import {
 } from 'src/fixtures/dev-kit/hooks'
 import { useGetAccount } from 'src/fixtures/dev-for-apps/hooks'
 import { toNaturalNumber } from 'src/fixtures/utility'
+
+const { Dragger } = Upload
 
 type Props = {}
 
@@ -51,6 +54,25 @@ const STokenPositionDetail = (_: Props) => {
     return positions?.property
   }, [positions])
 
+  const draggerProps = {
+    name: 'file',
+    multiple: false,
+    onChange(info: any) {
+      const { status } = info.file
+      if (status !== 'uploading') {
+        console.log(info.file, info.fileList)
+      }
+      if (status === 'done') {
+        message.success(`${info.file.name} file uploaded successfully.`)
+      } else if (status === 'error') {
+        message.error(`${info.file.name} file upload failed.`)
+      }
+    },
+    onDrop(e: any) {
+      console.log('Dropped files', e.dataTransfer.files)
+    }
+  }
+
   return (
     <>
       <Header />
@@ -83,6 +105,23 @@ const STokenPositionDetail = (_: Props) => {
           <div>Pending Rewards: {withdrawableReward ? withdrawableReward.dp(2).toFixed() : '0'} DEV</div>
         </Main>
         <div style={{ backgroundImage: `url('${tokenURI?.image}')`, width: '290px', height: '500px' }} />
+        <Dragger
+          style={{
+            backgroundImage: `url('${tokenURI?.image}')`,
+            backgroundRepeat: 'no-repeat',
+            width: '100%',
+            height: '100%'
+          }}
+          {...draggerProps}
+        >
+          <p className="ant-upload-drag-icon">
+            <InboxOutlined />
+          </p>
+          <p className="ant-upload-text">Click or drag file to this area to upload</p>
+          <p className="ant-upload-hint">
+            Support for a single or bulk upload. Strictly prohibit from uploading company data or other band files
+          </p>
+        </Dragger>
       </Wrap>
 
       <Footer />
