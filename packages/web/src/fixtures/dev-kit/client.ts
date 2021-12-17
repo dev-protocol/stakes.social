@@ -625,16 +625,16 @@ export const getStokenHeldAt = async (prov: providers.BaseProvider, sTokenId: nu
 }
 
 export const getIPFS =
-	(ipfs: ReturnType<typeof ipfsHttpClient>) =>
-	async (cid: string): Promise<string | undefined> =>
-		(async (iterator) => {
-			for await (const data of iterator) {
-				const content = new BufferList()
-				if (data.type === 'file' && data.content) {
-					for await (const chunk of data.content) {
-						content.append(Buffer.from(chunk))
-					}
-				}
-				return content.length ? content.toString('base64') : undefined
-			}
-		})(ipfs.get(cid)).catch(always(undefined))
+  (ipfs: ReturnType<typeof ipfsHttpClient>) =>
+  async (cid: string): Promise<string | undefined> =>
+    (async (iterator) => {
+      for await (const data of iterator) {
+        const content = new BufferList()
+        if (data.type === 'file' && data.content) {
+          for await (const chunk of data.content) {
+            content.append(Buffer.from(chunk))
+          }
+        }
+        return content.length ? content.toString('base64') : undefined
+      }
+    })(ipfs.get(cid)).catch(always(undefined))
