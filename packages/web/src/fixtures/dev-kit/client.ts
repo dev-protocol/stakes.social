@@ -18,9 +18,6 @@ import { utils as legacyUtils } from '@devprotocol/alias-legacy-dev-kit'
 import Web3 from 'web3'
 import { ChainName, detectChain } from '../wallet/utility'
 import { whenDefinedAll, whenDefined, UndefinedOr } from '@devprotocol/util-ts'
-import ipfsHttpClient from 'ipfs-http-client'
-import BufferList from 'bl'
-import { always } from 'ramda'
 const { execute } = utils
 const { watchEvent } = legacyUtils
 
@@ -623,17 +620,3 @@ export const getStokenHeldAt = async (prov: providers.BaseProvider, sTokenId: nu
   }
   return undefined
 }
-
-export const getIPFS =
-  async (ipfs: ReturnType<typeof ipfsHttpClient>, cid: string): Promise<string | undefined> =>
-    (async (iterator) => {
-      for await (const data of iterator) {
-        const content = new BufferList()
-        if (data.type === 'file' && data.content) {
-          for await (const chunk of data.content) {
-            content.append(Buffer.from(chunk))
-          }
-        }
-        return content.length ? content.toString('base64') : undefined
-      }
-    })(ipfs.get(cid)).catch(always(undefined))

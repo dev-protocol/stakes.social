@@ -43,6 +43,5 @@ export const SWRCachePath = {
   getAuthenticatedProperties: (network?: string, marketAddress?: string) =>
     `getAuthenticatedProperties/${network}/${marketAddress}`,
   useGetAssetsByProperties: (network?: string, propertyAddress?: string) =>
-    `useGetAssetsByProperties/${network}/${propertyAddress}`,
-  getIPFS: (cid?: string) => `IPFS/${cid}/getIPFS`,
+    `useGetAssetsByProperties/${network}/${propertyAddress}`
 } as const
