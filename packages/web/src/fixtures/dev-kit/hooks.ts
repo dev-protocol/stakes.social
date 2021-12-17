@@ -25,9 +25,11 @@ import {
   balanceOfProperty,
   detectStokens,
   detectStokensByPropertyAddress,
+  getStokenTokenURI,
   getStokenOwnerOf,
   getStokenPositions,
   getStokenRewards,
+  getStokenHeldAt,
   allowance,
   approve,
   depositToProperty,
@@ -906,6 +908,20 @@ export const usePositionsOfOwner = (accountAddress?: string) => {
   return { positions: data, error }
 }
 
+export const useGetSTokenTokenURI = (sTokenId?: number) => {
+  const { nonConnectedEthersProvider } = useProvider()
+  const { name: network } = useDetectChain(nonConnectedEthersProvider)
+  const { data, error } = useSWR<UnwrapFunc<typeof getStokenTokenURI>, Error>(
+    SWRCachePath.getStokenTokenURI(network, sTokenId),
+    () =>
+      whenDefinedAll([nonConnectedEthersProvider, sTokenId], ([client, sTokenId]) =>
+        getStokenTokenURI(client, sTokenId)
+      ),
+    { revalidateOnFocus: false, focusThrottleInterval: 0 }
+  )
+  return { tokenURI: data, error }
+}
+
 export const useGetSTokenOwnerOf = (sTokenId?: number) => {
   const { nonConnectedEthersProvider } = useProvider()
   const { data, error } = useSWR<UnwrapFunc<typeof getStokenOwnerOf>, Error>(
@@ -1150,4 +1166,18 @@ export const useGetAssetsByProperties = (propertyAddress?: string) => {
       return res
     })
   )
+}
+
+export const useGetStokenHeldAt = (accountAddress: string, sTokenId?: number) => {
+  const { nonConnectedEthersProvider } = useProvider()
+  const { name: network } = useDetectChain(nonConnectedEthersProvider)
+  const { data, error } = useSWR<UnwrapFunc<typeof getStokenHeldAt>, Error>(
+    SWRCachePath.getStokenHeldAt(network, accountAddress, sTokenId),
+    () =>
+      whenDefinedAll([nonConnectedEthersProvider, accountAddress, sTokenId], ([client, address, sTokenId]) =>
+        getStokenHeldAt(client, sTokenId, address)
+      ),
+    { revalidateOnFocus: false, focusThrottleInterval: 0 }
+  )
+  return { since: data, error }
 }

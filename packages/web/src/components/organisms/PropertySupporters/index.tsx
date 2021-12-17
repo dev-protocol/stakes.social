@@ -1,5 +1,6 @@
 // @L2 optimized
 import React, { useEffect, useState } from 'react'
+import Link from 'next/link'
 import { Popover, Table } from 'antd'
 import { format } from 'date-fns'
 import { providers } from 'ethers'
@@ -7,7 +8,13 @@ import { Avatar } from 'src/components/molecules/Avatar'
 import { getAccount } from 'src/fixtures/dev-for-apps/utility'
 import { useProvider } from 'src/fixtures/wallet/hooks'
 import { useDetectSTokens } from 'src/fixtures/dev-kit/hooks'
-import { getStokenPositions, getStokenOwnerOf, getStokenRewards, getStokenHeldAt } from 'src/fixtures/dev-kit/client'
+import {
+  getStokenPositions,
+  getStokenTokenURI,
+  getStokenOwnerOf,
+  getStokenRewards,
+  getStokenHeldAt
+} from 'src/fixtures/dev-kit/client'
 import { whenDefined, whenDefinedAll } from 'src/fixtures/utility'
 import { ButtonWithGradient } from 'src/components/atoms/ButtonWithGradient'
 
@@ -19,6 +26,11 @@ interface Props {
 interface Position {
   amount: number
   sTokenId: number
+}
+
+interface TokenURI {
+  name: string
+  image: string
 }
 
 interface TableData {
@@ -68,6 +80,18 @@ const tableColumns = [
     render: (text: string) => <span>{text}</span>
   },
   {
+    title: 'Image',
+    dataIndex: 'image',
+    key: 'image',
+    render: (base64Image: string) => {
+      return (
+        <>
+          <div style={{ backgroundImage: `url('${base64Image}')`, width: '290px', height: '500px' }}>aa</div>
+        </>
+      )
+    }
+  },
+  {
     title: 'Address',
     dataIndex: 'account',
     key: 'account',
@@ -106,8 +130,16 @@ const tableColumns = [
   },
   {
     title: '',
+    dataIndex: 'sTokenId',
     key: 'action',
-    render: () => <OfferPopover />
+    render: (sTokenId: number) => (
+      <>
+        <OfferPopover />
+        <Link href={`/positions/${sTokenId}`} passHref>
+          <ButtonWithGradient>Edit Image</ButtonWithGradient>
+        </Link>
+      </>
+    )
   }
 ]
 
@@ -141,6 +173,10 @@ const SupportersTable = ({ sTokenIds }: { sTokenIds: number[] }) => {
         sortedAmounts.map(async ({ sTokenId, amount }, idx: number) => {
           const ownerAccountAddress =
             (await whenDefined(nonConnectedEthersProvider, client => getStokenOwnerOf(client, sTokenId))) || ''
+          const tokenURI: TokenURI =
+            (await whenDefined(nonConnectedEthersProvider, client => getStokenTokenURI(client, sTokenId))) ||
+            ({} as TokenURI)
+          console.log('v:', tokenURI)
           const { withdrawableReward: reward } = (await whenDefined(nonConnectedEthersProvider, client =>
             getStokenRewards(client, sTokenId)
           )) || { withdrawableReward: 0 }
@@ -154,6 +190,8 @@ const SupportersTable = ({ sTokenIds }: { sTokenIds: number[] }) => {
             transferEvent && transferEvent.length > 0 ? (await transferEvent[0].getBlock()).timestamp : undefined
           return {
             rank: idx + 1,
+            sTokenId,
+            image: tokenURI?.image,
             address: ownerAccountAddress,
             account: {
               address: ownerAccountAddress,

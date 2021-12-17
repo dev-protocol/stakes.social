@@ -457,6 +457,15 @@ export const detectStokensByPropertyAddress = async (prov: providers.BaseProvide
   return undefined
 }
 
+export const getStokenTokenURI = async (prov: providers.BaseProvider, sTokenID: number) => {
+  const [, , client] = await newClient(prov)
+  const address = await getSTokensAddress(prov)
+  if (client && address) {
+    return client.sTokens(address).tokenURI(sTokenID)
+  }
+  return undefined
+}
+
 export const getStokenOwnerOf = async (prov: providers.BaseProvider, sTokenID: number) => {
   const [, , client] = await newClient(prov)
   const address = await getSTokensAddress(prov)
