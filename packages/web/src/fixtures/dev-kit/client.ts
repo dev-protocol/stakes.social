@@ -625,8 +625,7 @@ export const getStokenHeldAt = async (prov: providers.BaseProvider, sTokenId: nu
 }
 
 export const getIPFS =
-  (ipfs: ReturnType<typeof ipfsHttpClient>) =>
-  async (cid: string): Promise<string | undefined> =>
+  async (ipfs: ReturnType<typeof ipfsHttpClient>, cid: string): Promise<string | undefined> =>
     (async (iterator) => {
       for await (const data of iterator) {
         const content = new BufferList()

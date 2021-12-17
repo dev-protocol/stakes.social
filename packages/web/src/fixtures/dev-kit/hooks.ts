@@ -1154,7 +1154,7 @@ export const useGetAssetsByProperties = (propertyAddress?: string) => {
   )
 }
 
-export const useGetIPFS = (cid?: String) => {
+export const useGetIPFS = (cid?: string) => {
   const ipfs = ipfsHttpClient({
     host: 'ipfs.infura.io',
     apiPath: 'api/v0',
@@ -1167,5 +1167,5 @@ export const useGetIPFS = (cid?: String) => {
       whenDefinedAll([ipfs, cid], ([client, cid]) => getIPFS(client, cid)),
     { revalidateOnFocus: false, focusThrottleInterval: 0 }
   )
-  return { symbol: data, error }
+  return { base64: data, error }
 }
