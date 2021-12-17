@@ -9,9 +9,8 @@ export const useIPFSImageUploader = () => {
   const upload = useCallback(async (image: File) => {
     setIsLoading(true)
 
-    const client = new NFTStorage({ token: 'API_TOKEN' })
-
     try {
+      const client = new NFTStorage({ token: `${process.env.NFT_STORAGE_API_TOKEN}` })
       const cid = await client.storeBlob(image)
       message.success({ content: 'upload successful!', key })
       return cid
