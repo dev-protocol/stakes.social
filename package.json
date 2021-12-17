@@ -13,6 +13,7 @@
     "prepare": "husky install"
   },
   "devDependencies": {
+    "@types/bl": "^5.0.2",
     "@types/jest": "27.0.3",
     "@types/supertest": "2.0.11",
     "@typescript-eslint/eslint-plugin": "5.7.0",
@@ -49,5 +50,9 @@
     "*.json": [
       "prettier --write"
     ]
+  },
+  "dependencies": {
+    "bl": "^5.0.0",
+    "ipfs-http-client": "49.0.4"
   }
 }
