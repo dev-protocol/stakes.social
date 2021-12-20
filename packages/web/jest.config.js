@@ -9,8 +9,8 @@ module.exports = {
   },
   globals: {
     'ts-jest': {
-      tsconfig: 'tsconfig.test.json',
-    },
+      tsconfig: 'tsconfig.test.json'
+    }
   },
   transformIgnorePatterns: ['/node_modules/(?!react-markdown)/'],
   setupFiles: ['jest-canvas-mock'],
