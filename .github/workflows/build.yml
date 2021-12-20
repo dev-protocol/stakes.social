@@ -27,4 +27,4 @@ jobs:
         run: yarn build
 
       - name: test
-        run: yarn test -u
+        run: yarn test --updateSnapshot
