@@ -11,15 +11,15 @@ import useSWR from 'swr'
 const getIPFS =
   async (ipfs: ReturnType<typeof ipfsHttpClient>, cid: string): Promise<string | undefined> =>
     (async (iterator) => {
+      const content = new BufferList()
       for await (const data of iterator) {
-        const content = new BufferList()
         if (data.type === 'file' && data.content) {
           for await (const chunk of data.content) {
             content.append(Buffer.from(chunk))
           }
         }
-        return content.length ? content.toString('base64') : undefined
       }
+      return content.length ? content.toString('base64') : undefined
     })(ipfs.get(cid)).catch(always(undefined))
 
 export const useGetIPFS = (cid?: string) => {
