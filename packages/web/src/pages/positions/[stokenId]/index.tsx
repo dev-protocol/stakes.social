@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
 import { format } from 'date-fns'
@@ -10,12 +10,14 @@ import { Avatar } from 'src/components/molecules/Avatar'
 import { Header } from 'src/components/organisms/Header'
 import { Footer } from 'src/components/organisms/Footer'
 import {
+  usePropertyAuthor,
   useGetSTokenTokenURI,
   useGetStokenRewards,
   useGetSTokenOwnerOf,
   useGetStokenHeldAt,
   useGetSTokenPositions
 } from 'src/fixtures/dev-kit/hooks'
+import { useProvider } from 'src/fixtures/wallet/hooks'
 import { useGetAccount } from 'src/fixtures/dev-for-apps/hooks'
 
 const { Dragger } = Upload
@@ -75,8 +77,9 @@ const tableColumns = [
     title: 'Since',
     dataIndex: 'since',
     key: 'since',
-    render: (timestamp?: number) =>
-      timestamp ? <span>{`${format(timestamp * 1000, 'M/d/Y')}`}</span> : <span>unknown</span>
+    render: (timestamp: any) => {
+      return timestamp ? <span>{`${format(timestamp * 1000, 'M/d/Y')}`}</span> : <span>-</span>
+    }
   },
   {
     title: 'Pending Reward',
@@ -91,15 +94,21 @@ const tableColumns = [
 const formatter = new Intl.NumberFormat('en-US')
 
 const STokenPosition = ({ sTokenId }: { sTokenId: number }) => {
+  const [sinceTimestamp, setSinceTimestamp] = useState(undefined)
   const { tokenURI } = useGetSTokenTokenURI(sTokenId)
   const { owner: ownerAccountAddress } = useGetSTokenOwnerOf(sTokenId)
   const { data: accountData } = useGetAccount(ownerAccountAddress)
   const { positions } = useGetSTokenPositions(sTokenId)
   const { rewards } = useGetStokenRewards(sTokenId)
-  const { since, block } = useGetStokenHeldAt(ownerAccountAddress, sTokenId)
-  console.log(since, block)
+  const { since, block, loading } = useGetStokenHeldAt(ownerAccountAddress, sTokenId)
+  useEffect(() => {
+    const fetcher = async (since: any) => {
+      const block = await since
+      setSinceTimestamp(block?.timestamp)
+    }
+    block && fetcher(block)
+  }, [since, block])
 
-  // const [tableData, setTableData] = useState<Array<TableData>>([])
   const tableData = useMemo(() => {
     return [
       {
@@ -111,13 +120,12 @@ const STokenPosition = ({ sTokenId }: { sTokenId: number }) => {
           name: accountData ? accountData?.name : ''
         },
         amount: positions?.amount,
-        since: block?.timestamp,
+        since: sinceTimestamp,
         reward: rewards?.withdrawableReward
       }
     ]
-  }, [tokenURI])
+  }, [sTokenId, tokenURI, ownerAccountAddress, accountData, positions, rewards, sinceTimestamp])
 
-  const loading = false
   return (
     <Table
       columns={tableColumns}
@@ -138,6 +146,13 @@ const STokenPositionDetail = (_: Props) => {
     return positions?.property
   }, [positions])
 
+  const { accountAddress } = useProvider()
+  const { author } = usePropertyAuthor(propertyAddress)
+  const isAuthor = useMemo(() => {
+    return accountAddress === author
+  }, [accountAddress, author])
+
+  // TODO: integrate to ipfs
   const draggerProps = {
     name: 'file',
     multiple: false,
@@ -179,15 +194,17 @@ const STokenPositionDetail = (_: Props) => {
           <h3>Change the image of sToken#{`${sTokenId}`}</h3>
         </Container>
         <STokenPosition sTokenId={sTokenId} />
-        <Dragger style={{ width: '100%', height: '100%' }} {...draggerProps}>
-          <p className="ant-upload-drag-icon">
-            <InboxOutlined />
-          </p>
-          <p className="ant-upload-text">Click or drag file to this area to upload</p>
-          <p className="ant-upload-hint">
-            Support for a single or bulk upload. Strictly prohibit from uploading company data or other band files
-          </p>
-        </Dragger>
+        {author === undefined && isAuthor && (
+          <Dragger style={{ width: '100%', height: '100%' }} {...draggerProps}>
+            <p className="ant-upload-drag-icon">
+              <InboxOutlined />
+            </p>
+            <p className="ant-upload-text">Click or drag file to this area to upload</p>
+            <p className="ant-upload-hint">
+              Support for a single or bulk upload. Strictly prohibit from uploading company data or other band files
+            </p>
+          </Dragger>
+        )}
       </Wrap>
 
       <Footer />
