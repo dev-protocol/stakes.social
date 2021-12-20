@@ -86,7 +86,14 @@ const tableColumns = [
     render: (base64Image: string) => {
       return (
         <>
-          <div style={{ backgroundImage: `url('${base64Image}')`, width: '290px', height: '500px' }}>aa</div>
+          <div
+            style={{
+              backgroundImage: `url('${base64Image}')`,
+              backgroundRepeat: 'no-repeat',
+              backgroundSize: 'cover',
+              height: '120px'
+            }}
+          />
         </>
       )
     }
@@ -176,7 +183,6 @@ const SupportersTable = ({ sTokenIds }: { sTokenIds: number[] }) => {
           const tokenURI: TokenURI =
             (await whenDefined(nonConnectedEthersProvider, client => getStokenTokenURI(client, sTokenId))) ||
             ({} as TokenURI)
-          console.log('v:', tokenURI)
           const { withdrawableReward: reward } = (await whenDefined(nonConnectedEthersProvider, client =>
             getStokenRewards(client, sTokenId)
           )) || { withdrawableReward: 0 }
