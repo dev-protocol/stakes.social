@@ -7,7 +7,7 @@ import { providers } from 'ethers'
 import { Avatar } from 'src/components/molecules/Avatar'
 import { getAccount } from 'src/fixtures/dev-for-apps/utility'
 import { useProvider } from 'src/fixtures/wallet/hooks'
-import { useDetectSTokens } from 'src/fixtures/dev-kit/hooks'
+import { usePropertyAuthor, useDetectSTokens } from 'src/fixtures/dev-kit/hooks'
 import {
   getStokenPositions,
   getStokenTokenURI,
@@ -137,20 +137,22 @@ const tableColumns = [
   },
   {
     title: '',
-    dataIndex: 'sTokenId',
+    dataIndex: 'action',
     key: 'action',
-    render: (sTokenId: number) => (
+    render: ({ sTokenId, isAuthor }: { sTokenId: number; isAuthor: boolean }) => (
       <>
         <OfferPopover />
-        <Link href={`/positions/${sTokenId}`} passHref>
-          <ButtonWithGradient>Edit Image</ButtonWithGradient>
-        </Link>
+        {isAuthor && (
+          <Link href={`/positions/${sTokenId}`} passHref>
+            <ButtonWithGradient>Edit Image</ButtonWithGradient>
+          </Link>
+        )}
       </>
     )
   }
 ]
 
-const SupportersTable = ({ sTokenIds }: { sTokenIds: number[] }) => {
+const SupportersTable = ({ sTokenIds, isAuthor }: { sTokenIds: number[]; isAuthor?: boolean }) => {
   const { nonConnectedEthersProvider, nonConnectedEthersL1Provider } = useProvider()
   const [tableData, setTableData] = useState<Array<TableData>>([])
   const [loading, setLoading] = useState(false)
@@ -196,7 +198,10 @@ const SupportersTable = ({ sTokenIds }: { sTokenIds: number[] }) => {
             transferEvent && transferEvent.length > 0 ? (await transferEvent[0].getBlock()).timestamp : undefined
           return {
             rank: idx + 1,
-            sTokenId,
+            action: {
+              sTokenId,
+              isAuthor
+            },
             image: tokenURI?.image,
             address: ownerAccountAddress,
             account: {
@@ -221,9 +226,11 @@ const SupportersTable = ({ sTokenIds }: { sTokenIds: number[] }) => {
 }
 
 const PropertySupporters = ({ propertyAddress }: Props) => {
+  const { accountAddress } = useProvider()
   const { sTokensByPropertyAddress: data } = useDetectSTokens(propertyAddress)
+  const { author } = usePropertyAuthor()
   return data && data.length > 0 ? (
-    <SupportersTable sTokenIds={data} />
+    <SupportersTable sTokenIds={data} isAuthor={author === accountAddress} />
   ) : (
     <Table columns={tableColumns} dataSource={[]} rowKey="rank" />
   )
