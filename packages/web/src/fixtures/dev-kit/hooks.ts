@@ -57,7 +57,7 @@ import {
 } from 'src/fixtures/utility'
 import useSWR from 'swr'
 import { message } from 'antd'
-import { useState, useCallback } from 'react'
+import { useMemo, useState, useCallback } from 'react'
 import BigNumber from 'bignumber.js'
 import { useDetectChain, useIsL1, useProvider } from 'src/fixtures/wallet/hooks'
 import { useCurrency } from 'src/fixtures/currency/functions/useCurrency'
@@ -1168,7 +1168,8 @@ export const useGetAssetsByProperties = (propertyAddress?: string) => {
   )
 }
 
-export const useGetStokenHeldAt = (accountAddress: string, sTokenId?: number) => {
+export const useGetStokenHeldAt = (accountAddress?: string, sTokenId?: number) => {
+  const [isLoading, setIsLoading] = useState<boolean>(true)
   const { nonConnectedEthersProvider } = useProvider()
   const { name: network } = useDetectChain(nonConnectedEthersProvider)
   const { data, error } = useSWR<UnwrapFunc<typeof getStokenHeldAt>, Error>(
@@ -1179,5 +1180,9 @@ export const useGetStokenHeldAt = (accountAddress: string, sTokenId?: number) =>
       ),
     { revalidateOnFocus: false, focusThrottleInterval: 0 }
   )
-  return { since: data, error }
+  const block = useMemo(async () => {
+    data && data.length > 0 && setIsLoading(false)
+    return data && data.length > 0 && (await data[0].getBlock())
+  }, data)
+  return { since: data, block, loading: isLoading, error }
 }
