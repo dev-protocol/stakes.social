@@ -4,7 +4,6 @@ import {
   whenDefinedAll
 } from '../utility'
 import ipfsHttpClient from 'ipfs-http-client'
-import BufferList from 'bl'
 import { always } from 'ramda'
 import useSWR from 'swr'
 
@@ -24,18 +23,28 @@ const getURI = (base64: string) => {
   return base64
 }
 
+function bufferToBase64(buf: Uint8Array) {
+  var binstr = Array.prototype.map.call(buf, function (ch) {
+    return String.fromCharCode(ch);
+  }).join('');
+  return btoa(binstr);
+}
+
 const getIPFS =
   async (ipfs: ReturnType<typeof ipfsHttpClient>, cid: string): Promise<string | undefined> =>
     (async (iterator) => {
-      const content = new BufferList()
+      let content = new Uint8Array()
       for await (const data of iterator) {
         if (data.type === 'file' && data.content) {
           for await (const chunk of data.content) {
-            content.append(Buffer.from(chunk))
+            var mergedArray = new Uint8Array(content.length + chunk.length);
+            mergedArray.set(content);
+            mergedArray.set(chunk, content.length);
+            content = mergedArray;
           }
         }
       }
-      return content.length ? getURI(content.toString('base64')) : undefined
+      return content.length ? getURI(bufferToBase64(content)) : undefined
     })(ipfs.get(cid)).catch(always(undefined))
 
 export const useGetIPFS = (cid?: string) => {
