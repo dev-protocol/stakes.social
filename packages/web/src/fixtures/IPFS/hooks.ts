@@ -8,6 +8,22 @@ import BufferList from 'bl'
 import { always } from 'ramda'
 import useSWR from 'swr'
 
+const signatures = {
+  "/9j/": "image/jpg",
+  iVBORw0KGgo: "image/png",
+  R0lGODdh: "image/gif",
+  R0lGODlh: "image/gif",
+};
+
+const getURI = (base64: string) => {
+  for (let [key, value] of Object.entries(signatures)) {
+    if (base64.startsWith(key)) {
+      return "data:" + value + ";base64," + base64
+    }
+  }
+  return base64
+}
+
 const getIPFS =
   async (ipfs: ReturnType<typeof ipfsHttpClient>, cid: string): Promise<string | undefined> =>
     (async (iterator) => {
@@ -19,7 +35,7 @@ const getIPFS =
           }
         }
       }
-      return content.length ? content.toString('base64') : undefined
+      return content.length ? getURI(content.toString('base64')) : undefined
     })(ipfs.get(cid)).catch(always(undefined))
 
 export const useGetIPFS = (cid?: string) => {
