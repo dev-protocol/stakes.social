@@ -24,7 +24,7 @@ const getURI = (base64: string) => {
 }
 
 function bufferToBase64(buf: Uint8Array) {
-  var binstr = Array.prototype.map.call(buf, function (ch) {
+  let binstr = Array.prototype.map.call(buf, function (ch) {
     return String.fromCharCode(ch);
   }).join('');
   return btoa(binstr);
@@ -37,7 +37,7 @@ const getIPFS =
       for await (const data of iterator) {
         if (data.type === 'file' && data.content) {
           for await (const chunk of data.content) {
-            var mergedArray = new Uint8Array(content.length + chunk.length);
+            let mergedArray = new Uint8Array(content.length + chunk.length);
             mergedArray.set(content);
             mergedArray.set(chunk, content.length);
             content = mergedArray;
