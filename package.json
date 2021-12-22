@@ -13,7 +13,7 @@
     "prepare": "husky install"
   },
   "devDependencies": {
-    "@types/bl": "^5.0.2",
+    "@types/bl": "5.0.2",
     "@types/jest": "27.0.3",
     "@types/supertest": "2.0.11",
     "@typescript-eslint/eslint-plugin": "5.8.0",
@@ -52,7 +52,7 @@
     ]
   },
   "dependencies": {
-    "bl": "^5.0.0",
+    "bl": "5.0.0",
     "ipfs-http-client": "49.0.4"
   }
 }
