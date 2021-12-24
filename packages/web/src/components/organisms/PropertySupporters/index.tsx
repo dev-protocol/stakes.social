@@ -1,13 +1,20 @@
 // @L2 optimized
 import React, { useEffect, useState } from 'react'
+import Link from 'next/link'
 import { Popover, Table } from 'antd'
 import { format } from 'date-fns'
 import { providers } from 'ethers'
 import { Avatar } from 'src/components/molecules/Avatar'
 import { getAccount } from 'src/fixtures/dev-for-apps/utility'
 import { useProvider } from 'src/fixtures/wallet/hooks'
-import { useDetectSTokens } from 'src/fixtures/dev-kit/hooks'
-import { getStokenPositions, getStokenOwnerOf, getStokenRewards, getStokenHeldAt } from 'src/fixtures/dev-kit/client'
+import { usePropertyAuthor, useDetectSTokens } from 'src/fixtures/dev-kit/hooks'
+import {
+  getStokenPositions,
+  getStokenTokenURI,
+  getStokenOwnerOf,
+  getStokenRewards,
+  getStokenHeldAt
+} from 'src/fixtures/dev-kit/client'
 import { whenDefined, whenDefinedAll } from 'src/fixtures/utility'
 import { ButtonWithGradient } from 'src/components/atoms/ButtonWithGradient'
 
@@ -19,6 +26,11 @@ interface Props {
 interface Position {
   amount: number
   sTokenId: number
+}
+
+interface TokenURI {
+  name: string
+  image: string
 }
 
 interface TableData {
@@ -68,6 +80,25 @@ const tableColumns = [
     render: (text: string) => <span>{text}</span>
   },
   {
+    title: 'Image',
+    dataIndex: 'image',
+    key: 'image',
+    render: (base64Image: string) => {
+      return (
+        <>
+          <div
+            style={{
+              backgroundImage: `url('${base64Image}')`,
+              backgroundRepeat: 'no-repeat',
+              backgroundSize: 'cover',
+              height: '120px'
+            }}
+          />
+        </>
+      )
+    }
+  },
+  {
     title: 'Address',
     dataIndex: 'account',
     key: 'account',
@@ -106,12 +137,22 @@ const tableColumns = [
   },
   {
     title: '',
+    dataIndex: 'action',
     key: 'action',
-    render: () => <OfferPopover />
+    render: ({ sTokenId, isAuthor }: { sTokenId: number; isAuthor: boolean }) => (
+      <>
+        <OfferPopover />
+        {isAuthor && (
+          <Link href={`/positions/${sTokenId}`} passHref>
+            <ButtonWithGradient>Edit Image</ButtonWithGradient>
+          </Link>
+        )}
+      </>
+    )
   }
 ]
 
-const SupportersTable = ({ sTokenIds }: { sTokenIds: number[] }) => {
+const SupportersTable = ({ sTokenIds, isAuthor }: { sTokenIds: number[]; isAuthor?: boolean }) => {
   const { nonConnectedEthersProvider, nonConnectedEthersL1Provider } = useProvider()
   const [tableData, setTableData] = useState<Array<TableData>>([])
   const [loading, setLoading] = useState(false)
@@ -141,6 +182,9 @@ const SupportersTable = ({ sTokenIds }: { sTokenIds: number[] }) => {
         sortedAmounts.map(async ({ sTokenId, amount }, idx: number) => {
           const ownerAccountAddress =
             (await whenDefined(nonConnectedEthersProvider, client => getStokenOwnerOf(client, sTokenId))) || ''
+          const tokenURI: TokenURI =
+            (await whenDefined(nonConnectedEthersProvider, client => getStokenTokenURI(client, sTokenId))) ||
+            ({} as TokenURI)
           const { withdrawableReward: reward } = (await whenDefined(nonConnectedEthersProvider, client =>
             getStokenRewards(client, sTokenId)
           )) || { withdrawableReward: 0 }
@@ -154,6 +198,11 @@ const SupportersTable = ({ sTokenIds }: { sTokenIds: number[] }) => {
             transferEvent && transferEvent.length > 0 ? (await transferEvent[0].getBlock()).timestamp : undefined
           return {
             rank: idx + 1,
+            action: {
+              sTokenId,
+              isAuthor
+            },
+            image: tokenURI?.image,
             address: ownerAccountAddress,
             account: {
               address: ownerAccountAddress,
@@ -177,9 +226,11 @@ const SupportersTable = ({ sTokenIds }: { sTokenIds: number[] }) => {
 }
 
 const PropertySupporters = ({ propertyAddress }: Props) => {
+  const { accountAddress } = useProvider()
   const { sTokensByPropertyAddress: data } = useDetectSTokens(propertyAddress)
+  const { author } = usePropertyAuthor()
   return data && data.length > 0 ? (
-    <SupportersTable sTokenIds={data} />
+    <SupportersTable sTokenIds={data} isAuthor={author === accountAddress} />
   ) : (
     <Table columns={tableColumns} dataSource={[]} rowKey="rank" />
   )

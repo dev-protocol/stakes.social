@@ -25,9 +25,11 @@ import {
   balanceOfProperty,
   detectStokens,
   detectStokensByPropertyAddress,
+  getStokenTokenURI,
   getStokenOwnerOf,
   getStokenPositions,
   getStokenRewards,
+  getStokenHeldAt,
   allowance,
   approve,
   depositToProperty,
@@ -55,7 +57,7 @@ import {
 } from 'src/fixtures/utility'
 import useSWR from 'swr'
 import { message } from 'antd'
-import { useState, useCallback } from 'react'
+import { useMemo, useState, useCallback } from 'react'
 import BigNumber from 'bignumber.js'
 import { useDetectChain, useIsL1, useProvider } from 'src/fixtures/wallet/hooks'
 import { useCurrency } from 'src/fixtures/currency/functions/useCurrency'
@@ -906,6 +908,20 @@ export const usePositionsOfOwner = (accountAddress?: string) => {
   return { positions: data, error }
 }
 
+export const useGetSTokenTokenURI = (sTokenId?: number) => {
+  const { nonConnectedEthersProvider } = useProvider()
+  const { name: network } = useDetectChain(nonConnectedEthersProvider)
+  const { data, error } = useSWR<UnwrapFunc<typeof getStokenTokenURI>, Error>(
+    SWRCachePath.getStokenTokenURI(network, sTokenId),
+    () =>
+      whenDefinedAll([nonConnectedEthersProvider, sTokenId], ([client, sTokenId]) =>
+        getStokenTokenURI(client, sTokenId)
+      ),
+    { revalidateOnFocus: false, focusThrottleInterval: 0 }
+  )
+  return { tokenURI: data, error }
+}
+
 export const useGetSTokenOwnerOf = (sTokenId?: number) => {
   const { nonConnectedEthersProvider } = useProvider()
   const { data, error } = useSWR<UnwrapFunc<typeof getStokenOwnerOf>, Error>(
@@ -1150,4 +1166,23 @@ export const useGetAssetsByProperties = (propertyAddress?: string) => {
       return res
     })
   )
+}
+
+export const useGetStokenHeldAt = (accountAddress?: string, sTokenId?: number) => {
+  const [isLoading, setIsLoading] = useState<boolean>(true)
+  const { nonConnectedEthersProvider } = useProvider()
+  const { name: network } = useDetectChain(nonConnectedEthersProvider)
+  const { data, error } = useSWR<UnwrapFunc<typeof getStokenHeldAt>, Error>(
+    SWRCachePath.getStokenHeldAt(network, accountAddress, sTokenId),
+    () =>
+      whenDefinedAll([nonConnectedEthersProvider, accountAddress, sTokenId], ([client, address, sTokenId]) =>
+        getStokenHeldAt(client, sTokenId, address)
+      ),
+    { revalidateOnFocus: false, focusThrottleInterval: 0 }
+  )
+  const block = useMemo(async () => {
+    data && data.length > 0 && setIsLoading(false)
+    return data && data.length > 0 && (await data[0].getBlock())
+  }, data)
+  return { since: data, block, loading: isLoading, error }
 }
