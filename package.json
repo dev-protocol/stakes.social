@@ -13,20 +13,21 @@
     "prepare": "husky install"
   },
   "devDependencies": {
+    "@types/bl": "5.0.2",
     "@types/jest": "27.0.3",
     "@types/supertest": "2.0.11",
-    "@typescript-eslint/eslint-plugin": "5.7.0",
-    "@typescript-eslint/parser": "5.7.0",
-    "concurrently": "6.4.0",
-    "eslint": "8.4.1",
+    "@typescript-eslint/eslint-plugin": "5.8.0",
+    "@typescript-eslint/parser": "5.8.0",
+    "concurrently": "6.5.1",
+    "eslint": "8.5.0",
     "eslint-config-prettier": "8.3.0",
     "eslint-plugin-prettier": "4.0.0",
-    "eslint-plugin-react": "7.27.1",
+    "eslint-plugin-react": "7.28.0",
     "eslint-plugin-react-hooks": "4.3.0",
     "husky": "7.0.4",
     "jest": "27.4.5",
     "lerna": "4.0.0",
-    "lint-staged": "12.1.2",
+    "lint-staged": "12.1.3",
     "nodemon": "2.0.15",
     "npm-run-all": "4.1.5",
     "prettier": "2.5.1",
@@ -49,5 +50,9 @@
     "*.json": [
       "prettier --write"
     ]
+  },
+  "dependencies": {
+    "bl": "5.0.0",
+    "ipfs-http-client": "49.0.4"
   }
 }
