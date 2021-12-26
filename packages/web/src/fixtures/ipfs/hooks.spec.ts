@@ -14,7 +14,7 @@ describe('useGetIPFS', () => {
     const data = undefined
     const error = undefined
 
-      ; (useSWR as jest.Mock).mockImplementation(() => ({ data, error }))
+    ;(useSWR as jest.Mock).mockImplementation(() => ({ data, error }))
     const { result } = renderHook(() => useGetIPFS('cid'))
     expect(result.current.base64).toBe(data)
     console.log(result.current.base64)
@@ -23,7 +23,7 @@ describe('useGetIPFS', () => {
   test('success fetching data', () => {
     const data = 'https://test.com'
     const error = undefined
-      ; (useSWR as jest.Mock).mockImplementation(() => ({ data, error }))
+    ;(useSWR as jest.Mock).mockImplementation(() => ({ data, error }))
     const { result } = renderHook(() => useGetIPFS('cid'))
     expect(result.current.base64).toBe(data)
   })
@@ -32,7 +32,7 @@ describe('useGetIPFS', () => {
     const data = undefined
     const errorMessage = 'error'
     const error = new Error(errorMessage)
-      ; (useSWR as jest.Mock).mockImplementation(() => ({ data, error }))
+    ;(useSWR as jest.Mock).mockImplementation(() => ({ data, error }))
     const { result } = renderHook(() => useGetIPFS('cid'))
     expect(result.current.error).toBe(error)
     expect(result.current.error?.message).toBe(errorMessage)
