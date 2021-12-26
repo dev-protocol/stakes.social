@@ -466,6 +466,15 @@ export const getStokenTokenURI = async (prov: providers.BaseProvider, sTokenID: 
   return undefined
 }
 
+export const setStokenTokenURIImage = async (prov: providers.BaseProvider, sTokenID: number, data: string) => {
+  const [, , client] = await newClient(prov)
+  const address = await getSTokensAddress(prov)
+  if (client && address) {
+    return client.sTokens(address).setTokenURIImage(sTokenID, data)
+  }
+  return undefined
+}
+
 export const getStokenOwnerOf = async (prov: providers.BaseProvider, sTokenID: number) => {
   const [, , client] = await newClient(prov)
   const address = await getSTokensAddress(prov)

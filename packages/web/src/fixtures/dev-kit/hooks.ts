@@ -26,6 +26,7 @@ import {
   detectStokens,
   detectStokensByPropertyAddress,
   getStokenTokenURI,
+  setStokenTokenURIImage,
   getStokenOwnerOf,
   getStokenPositions,
   getStokenRewards,
@@ -920,6 +921,29 @@ export const useGetSTokenTokenURI = (sTokenId?: number) => {
     { revalidateOnFocus: false, focusThrottleInterval: 0 }
   )
   return { tokenURI: data, error }
+}
+
+export const useSetSTokenTokenURIImage = (sTokenId?: number) => {
+  const { ethersProvider } = useProvider()
+  const [isLoading, setIsLoading] = useState(false)
+  const [error, setError] = useState<Error>()
+
+  const callback = useCallback(
+    async (data: string) => {
+      setIsLoading(true)
+      setError(undefined)
+      return whenDefinedAll([ethersProvider, sTokenId], ([client, id]) =>
+        setStokenTokenURIImage(client, id, data)
+          .catch(setError)
+          .finally(() => {
+            setIsLoading(false)
+          })
+      )
+    },
+    [ethersProvider, sTokenId]
+  )
+
+  return { callback, loading: isLoading, error }
 }
 
 export const useGetSTokenOwnerOf = (sTokenId?: number) => {
