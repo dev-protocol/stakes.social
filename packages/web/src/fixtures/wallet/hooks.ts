@@ -52,8 +52,8 @@ export const useConnectWallet = () => {
 }
 
 export const useProvider = () => {
-  const { query } = useRouter()
-  const nameFromQuery = query?.network as ChainName
+  const router = useRouter()
+  const nameFromQuery = router?.query?.network as ChainName
   const { web3, ethersProvider } = useContext(WalletContext)
   const { name } = useDetectChain(ethersProvider)
   const ncWeb3 = useMemo(() => nonConnectedWeb3(name ?? nameFromQuery ?? 'main'), [name, nameFromQuery])
