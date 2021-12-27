@@ -4,12 +4,11 @@ import Link from 'next/link'
 import { format } from 'date-fns'
 import styled from 'styled-components'
 import { LeftOutlined, InboxOutlined } from '@ant-design/icons'
-import { Table, Upload, message } from 'antd'
+import { Table, Upload, message, Button } from 'antd'
 import { Container } from 'src/components/atoms/Container'
 import { Avatar } from 'src/components/molecules/Avatar'
 import { Header } from 'src/components/organisms/Header'
 import { Footer } from 'src/components/organisms/Footer'
-import { ButtonWithGradient } from 'src/components/atoms/ButtonWithGradient'
 import {
   usePropertyAuthor,
   useGetSTokenTokenURI,
@@ -30,6 +29,16 @@ type Props = {}
 const Wrap = styled.div`
   margin: 1rem auto;
   max-width: 1048px;
+`
+const NextContainer = styled(Container)`
+  display: grid;
+  grid-auto-flow: row;
+  gap: 2rem;
+  h1,
+  h2,
+  h3 {
+    margin: 0;
+  }
 `
 
 const tableColumns = [
@@ -205,7 +214,7 @@ const STokenPositionDetail = (_: Props) => {
     <>
       <Header />
       <Wrap>
-        <Container>
+        <NextContainer>
           {propertyAddress ? (
             <Link href={`/${propertyAddress}`} passHref>
               <a>
@@ -219,26 +228,31 @@ const STokenPositionDetail = (_: Props) => {
               Project
             </>
           )}
-          <h1>Attach Image to sToken ({`${sTokenId}`})</h1>
+          <h1>sToken ({`#${sTokenId}`})</h1>
           <h3>Change the image of sToken#{`${sTokenId}`}</h3>
-        </Container>
-        <STokenPosition sTokenId={sTokenId} />
-        {author !== undefined && isAuthor && (
-          <div style={{ textAlign: 'center', marginTop: '1rem' }}>
-            <Dragger style={{ width: '100%', height: '100%' }} {...draggerProps}>
-              <p className="ant-upload-drag-icon">
-                <InboxOutlined />
-              </p>
-              <p className="ant-upload-text">Click or drag file to this area to upload</p>
-              <p className="ant-upload-hint">
-                Support for a single or bulk upload. Strictly prohibit from uploading company data or other band files
-              </p>
-            </Dragger>
-            <div style={{ margin: '1rem' }}>
-              <ButtonWithGradient onClick={onClick}>Update image via IPFS</ButtonWithGradient>
-            </div>
-          </div>
-        )}
+          <STokenPosition sTokenId={sTokenId} />
+          {author !== undefined && isAuthor && (
+            <>
+              <div style={{ textAlign: 'center', marginTop: '1rem', minHeight: '20rem' }}>
+                <Dragger style={{ width: '100%', height: '100%' }} {...draggerProps}>
+                  <p className="ant-upload-drag-icon">
+                    <InboxOutlined />
+                  </p>
+                  <p className="ant-upload-text">Click or drag file to this area to upload</p>
+                  <p className="ant-upload-hint">
+                    Support for a single or bulk upload. Strictly prohibit from uploading company data or other band
+                    files
+                  </p>
+                </Dragger>
+              </div>
+              <div style={{ textAlign: 'center', margin: '1rem 0' }}>
+                <Button size="large" type="primary" onClick={onClick}>
+                  Change image via IPFS
+                </Button>
+              </div>
+            </>
+          )}
+        </NextContainer>
       </Wrap>
 
       <Footer />
