@@ -107,10 +107,9 @@ const STokenPosition = ({ sTokenId }: { sTokenId: number }) => {
 
   const cid = useMemo(() => {
     const image = tokenURI ? tokenURI.image : undefined
-    return image && image.startsWith('data:image/') === false ? image : undefined
+    return image && image.startsWith('ipfs://') ? image.split('ipfs://')[1] : undefined
   }, [tokenURI])
   const { base64: imageOnIPFS } = useGetIPFS(cid)
-  console.log('ipfs:', cid, imageOnIPFS)
 
   useEffect(() => {
     const fetcher = async (since: any) => {
@@ -124,7 +123,7 @@ const STokenPosition = ({ sTokenId }: { sTokenId: number }) => {
     return [
       {
         sTokenId,
-        image: tokenURI?.image,
+        image: tokenURI?.image.startsWith('ipfs://') ? imageOnIPFS : tokenURI?.image,
         address: ownerAccountAddress,
         account: {
           address: ownerAccountAddress,
@@ -170,19 +169,15 @@ const STokenPositionDetail = (_: Props) => {
     multiple: false,
     maxCount: 1,
     onChange(info: any) {
-      console.log(info)
       const { status } = info.file
       if (status !== 'uploading') {
         console.log(info.file, info.fileList)
       }
       if (status === 'done') {
-        setFileObj(info.file)
+        setFileObj(info.file.originFileObj)
       } else if (status === 'error') {
         message.error(`${info.file.name} file upload failed.`)
       }
-    },
-    onDrop(e: any) {
-      console.log('Dropped files', e.dataTransfer.files)
     }
   }
 
@@ -190,20 +185,18 @@ const STokenPositionDetail = (_: Props) => {
   const { callback: setStokenURIImage } = useSetSTokenTokenURIImage(sTokenId)
 
   const onClick = async () => {
-    console.log('on-submit', fileObj)
     // upload image to IPFS
     if (!fileObj) {
       message.error(`file upload failed.`)
       return
     }
     const cid = fileObj && (await uploader(fileObj))
-    console.log('upload', uploaderError, cid)
     if (uploaderError) {
       return
     }
 
     // set token uri
-    await setStokenURIImage(cid)
+    await setStokenURIImage(`ipfs://${cid}`)
       .then(() => message.success('Success to set sToken Image'))
       .catch(() => message.error('Fail to set sToken Image'))
   }
