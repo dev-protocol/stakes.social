@@ -98,7 +98,8 @@ const tableColumns = [
             style={{
               backgroundImage: `url('${base64Image}')`,
               backgroundRepeat: 'no-repeat',
-              backgroundSize: 'cover',
+              backgroundSize: 'contain',
+              backgroundPosition: 'center',
               height: '120px'
             }}
           />
