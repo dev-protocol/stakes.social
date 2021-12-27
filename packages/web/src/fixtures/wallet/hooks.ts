@@ -5,7 +5,6 @@ import WalletContext from 'src/context/walletContext'
 import { WEB3_PROVIDER_ENDPOINT_KEY, WEB3_PROVIDER_ENDPOINT_HOSTS } from 'src/fixtures/wallet/constants'
 import { providers } from 'ethers'
 import { whenDefined } from '@devprotocol/util-ts'
-import useSWR from 'swr'
 
 const providerUrl = (chain: ChainName) =>
   chain
