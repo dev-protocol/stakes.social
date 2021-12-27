@@ -147,6 +147,7 @@ const STokenPositionDetail = (_: Props) => {
   const { stokenId: sTokenIdString } = useRouter().query as { stokenId: string }
   const sTokenId = parseInt(sTokenIdString)
   const { positions } = useGetSTokenPositions(sTokenId)
+  const { tokenURI, mutate: mutateSTokenTokenURI } = useGetSTokenTokenURI(sTokenId)
 
   const propertyAddress = useMemo(() => {
     return positions?.property
@@ -192,7 +193,11 @@ const STokenPositionDetail = (_: Props) => {
 
     // set token uri
     await setStokenURIImage(`ipfs://${cid}`)
-      .then(() => message.success('Success to set sToken Image'))
+      .then(() => {
+        message.success('Success to set sToken Image')
+        // Purge the old cache and refetch
+        mutateSTokenTokenURI(tokenURI)
+      })
       .catch(() => message.error('Fail to set sToken Image'))
   }
 

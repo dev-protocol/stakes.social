@@ -914,7 +914,7 @@ export const usePositionsOfOwner = (accountAddress?: string) => {
 export const useGetSTokenTokenURI = (sTokenId?: number) => {
   const { nonConnectedEthersProvider } = useProvider()
   const { name: network } = useDetectChain(nonConnectedEthersProvider)
-  const { data, error } = useSWR<UnwrapFunc<typeof getStokenTokenURI>, Error>(
+  const { data, error, mutate } = useSWR<UnwrapFunc<typeof getStokenTokenURI>, Error>(
     SWRCachePath.getStokenTokenURI(network, sTokenId),
     () =>
       whenDefinedAll([nonConnectedEthersProvider, sTokenId], ([client, sTokenId]) =>
@@ -922,7 +922,7 @@ export const useGetSTokenTokenURI = (sTokenId?: number) => {
       ),
     { revalidateOnFocus: false, focusThrottleInterval: 0 }
   )
-  return { tokenURI: data, error }
+  return { tokenURI: data, error, mutate }
 }
 
 export const useSetSTokenTokenURIImage = (sTokenId?: number) => {

@@ -10,6 +10,7 @@ export const useIPFSImageUploader = () => {
     setIsLoading(true)
 
     try {
+      message.loading({ content: 'uploading the image to IPFS...', key })
       const client = new NFTStorage({ token: `${process.env.NEXT_PUBLIC_NFT_STORAGE_TOKEN}` })
       const cid = await client.storeBlob(image)
       message.success({ content: 'upload successful!', key })
