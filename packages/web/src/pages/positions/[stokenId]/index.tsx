@@ -21,7 +21,7 @@ import {
 } from 'src/fixtures/dev-kit/hooks'
 import { useProvider } from 'src/fixtures/wallet/hooks'
 import { useGetAccount } from 'src/fixtures/dev-for-apps/hooks'
-import { useGetIPFS, useIPFSImageUploader } from 'src/fixtures/ipfs/hooks'
+import { useImageDataUri, useIPFSImageUploader } from 'src/fixtures/ipfs/hooks'
 
 const { Dragger } = Upload
 
@@ -104,12 +104,7 @@ const STokenPosition = ({ sTokenId }: { sTokenId: number }) => {
   const { positions } = useGetSTokenPositions(sTokenId)
   const { rewards } = useGetStokenRewards(sTokenId)
   const { since, block, loading } = useGetStokenHeldAt(sTokenId)
-
-  const cid = useMemo(() => {
-    const image = tokenURI ? tokenURI.image : undefined
-    return image && image.startsWith('ipfs://') ? image.split('ipfs://')[1] : undefined
-  }, [tokenURI])
-  const { base64: imageOnIPFS } = useGetIPFS(cid)
+  const { data: tokenUriImage } = useImageDataUri(tokenURI?.image)
 
   useEffect(() => {
     const fetcher = async (since: any) => {
@@ -123,7 +118,7 @@ const STokenPosition = ({ sTokenId }: { sTokenId: number }) => {
     return [
       {
         sTokenId,
-        image: tokenURI?.image.startsWith('ipfs://') ? imageOnIPFS : tokenURI?.image,
+        image: tokenUriImage,
         address: ownerAccountAddress,
         account: {
           address: ownerAccountAddress,
@@ -134,7 +129,7 @@ const STokenPosition = ({ sTokenId }: { sTokenId: number }) => {
         reward: rewards?.withdrawableReward
       }
     ]
-  }, [sTokenId, tokenURI, ownerAccountAddress, accountData, positions, rewards, sinceTimestamp])
+  }, [sTokenId, tokenUriImage, ownerAccountAddress, accountData, positions, rewards, sinceTimestamp])
 
   return (
     <Table
@@ -162,7 +157,6 @@ const STokenPositionDetail = (_: Props) => {
   const isAuthor = useMemo(() => {
     return accountAddress === author
   }, [accountAddress, author])
-  console.log({ isAuthor, accountAddress, author })
 
   // TODO: integrate to ipfs
   const draggerProps = {
@@ -236,7 +230,7 @@ const STokenPositionDetail = (_: Props) => {
               </p>
             </Dragger>
             <div style={{ margin: '1rem' }}>
-              <ButtonWithGradient onClick={onClick}>Save</ButtonWithGradient>
+              <ButtonWithGradient onClick={onClick}>Update image via IPFS</ButtonWithGradient>
             </div>
           </div>
         )}

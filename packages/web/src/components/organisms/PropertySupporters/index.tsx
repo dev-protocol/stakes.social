@@ -18,6 +18,7 @@ import {
 } from 'src/fixtures/dev-kit/client'
 import { whenDefined, whenDefinedAll } from 'src/fixtures/utility'
 import { ButtonWithGradient } from 'src/components/atoms/ButtonWithGradient'
+import { useImageDataUriFetcher } from 'src/fixtures/ipfs/hooks'
 
 const Actions = styled.div`
   display: flex;
@@ -161,6 +162,7 @@ const SupportersTable = ({ sTokenIds }: { sTokenIds: number[] }) => {
   const { nonConnectedEthersProvider, nonConnectedEthersL1Provider } = useProvider()
   const [tableData, setTableData] = useState<Array<TableData>>([])
   const [loading, setLoading] = useState(false)
+  const { dataUriFetcher } = useImageDataUriFetcher()
 
   useEffect(() => {
     setLoading(true)
@@ -206,7 +208,7 @@ const SupportersTable = ({ sTokenIds }: { sTokenIds: number[] }) => {
             action: {
               sTokenId
             },
-            image: tokenURI?.image,
+            image: await dataUriFetcher(tokenURI?.image),
             address: ownerAccountAddress,
             account: {
               address: ownerAccountAddress,

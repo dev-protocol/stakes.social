@@ -3,7 +3,16 @@ import { UnwrapFunc, whenDefinedAll } from '../utility'
 import ipfsHttpClient from 'ipfs-http-client'
 import { always } from 'ramda'
 import useSWR from 'swr'
+import { useCallback } from 'react'
+import { UndefinedOr, whenDefined } from '@devprotocol/util-ts'
 export { useIPFSImageUploader } from './functions/useIPFSImageUploader'
+
+const ipfs = ipfsHttpClient({
+  host: 'ipfs.infura.io',
+  apiPath: 'api/v0',
+  port: 5001,
+  protocol: 'https'
+})
 
 const signatures = {
   '/9j/': 'image/jpg',
@@ -47,16 +56,30 @@ const getIPFS = async (ipfs: ReturnType<typeof ipfsHttpClient>, cid: string): Pr
   })(ipfs.get(cid)).catch(always(undefined))
 
 export const useGetIPFS = (cid?: string) => {
-  const ipfs = ipfsHttpClient({
-    host: 'ipfs.infura.io',
-    apiPath: 'api/v0',
-    port: 5001,
-    protocol: 'https'
-  })
   const { data, error } = useSWR<UnwrapFunc<typeof getIPFS>, Error>(
     SWRCachePath.getIPFS(cid),
     () => whenDefinedAll([ipfs, cid], ([client, cid]) => getIPFS(client, cid)),
     { revalidateOnFocus: false, focusThrottleInterval: 0 }
   )
   return { base64: data, error }
+}
+
+export const useImageDataUri = (path?: string) => {
+  const { dataUriFetcher } = useImageDataUriFetcher()
+  const { data, error } = useSWR<UndefinedOr<string>, Error>(path, () => dataUriFetcher(path), {
+    revalidateOnFocus: false,
+    focusThrottleInterval: 0
+  })
+  return { data, error }
+}
+
+export const useImageDataUriFetcher = () => {
+  const dataUriFetcher = useCallback(async (path?: string) => {
+    return whenDefined(path, receivedPath => {
+      const isDataUri = receivedPath.startsWith('data:')
+      const isIPFS = receivedPath.startsWith('ipfs:')
+      return isDataUri ? receivedPath : isIPFS ? getIPFS(ipfs, receivedPath.replace(/^ipfs:\/\//i, '')) : undefined
+    })
+  }, [])
+  return { dataUriFetcher }
 }
