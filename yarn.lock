@@ -18995,7 +18995,7 @@ next@12.0.7:
     "@next/swc-win32-ia32-msvc" "12.0.7"
     "@next/swc-win32-x64-msvc" "12.0.7"
 
-nft.storage@^5.1.3:
+nft.storage@5.1.3:
   version "5.1.3"
   resolved "https://registry.yarnpkg.com/nft.storage/-/nft.storage-5.1.3.tgz#a62f40a3bee08589eae9a7af62bb5357e54e1582"
   integrity sha512-mMYyi3dhCnKGXPgM3VehcDgotFQE7cTRKP/oyJPzCfDjL5WwQVSWODRhadIMvQlHZUlHQpvpjQe19LxEORH7Ew==
