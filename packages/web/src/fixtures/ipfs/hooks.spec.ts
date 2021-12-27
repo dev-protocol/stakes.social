@@ -9,7 +9,7 @@ import useSWR from 'swr'
 jest.mock('swr')
 jest.mock('src/fixtures/utility')
 
-describe('useGetIPFS', () => {
+describe.skip('useGetIPFS', () => {
   test('data is undefined', () => {
     const data = undefined
     const error = undefined
