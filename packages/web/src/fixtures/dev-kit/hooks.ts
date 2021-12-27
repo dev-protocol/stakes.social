@@ -962,9 +962,10 @@ export const useGetSTokenOwnerOf = (sTokenId?: number) => {
 
 export const useGetSTokenPositions = (sTokenId?: number) => {
   const { nonConnectedEthersProvider } = useProvider()
+  const { name: networkName } = useDetectChain(nonConnectedEthersProvider)
   const { currency, toCurrency } = useCurrency()
   const { data, error } = useSWR<UnwrapFunc<typeof getStokenPositions>, Error>(
-    SWRCachePath.getStokenPositions(`${sTokenId}`),
+    SWRCachePath.getStokenPositions(networkName, `${sTokenId}`),
     () =>
       whenDefinedAll([nonConnectedEthersProvider, sTokenId], ([client, sTokenId]) =>
         getStokenPositions(client, sTokenId)
@@ -1207,7 +1208,7 @@ export const useGetStokenHeldAt = (sTokenId?: number) => {
   const block = useMemo(async () => {
     data && data.length > 0 && setIsLoading(false)
     return data && data.length > 0 && (await data[0].getBlock())
-  }, data)
+  }, [data])
   console.log({ block })
   return { since: data, block, loading: isLoading, error }
 }

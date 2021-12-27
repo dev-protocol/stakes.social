@@ -162,6 +162,7 @@ const STokenPositionDetail = (_: Props) => {
   const isAuthor = useMemo(() => {
     return accountAddress === author
   }, [accountAddress, author])
+  console.log({ isAuthor, accountAddress, author })
 
   // TODO: integrate to ipfs
   const draggerProps = {
