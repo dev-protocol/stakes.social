@@ -16,7 +16,8 @@ export const SWRCachePath = {
   totalSupply: (chain?: string, user?: string) => `totalSupply/${chain}/${user}`,
   holdersShare: (chain?: string, amount?: string, lockedups?: string, user?: string) =>
     `${chain}/amount/${amount}/lockedups/${lockedups}/holdersShare/${user}`,
-  propertyAuthor: (propertyAddress?: string, user?: string) => `propertyAddresses/${user}${propertyAddress}/author`,
+  propertyAuthor: (network?: string, propertyAddress?: string, user?: string) =>
+    `propertyAddresses/${user}${propertyAddress}/author/${network}`,
   balanceOf: (user?: string) => `balanceOf/${user}`,
   allClaimedRewards: (user?: string) => `allClaimedRewards/${user}`,
   propertyName: (propertyAddress?: string, user?: string) => `propertyAddresses/${user}${propertyAddress}/name`,
