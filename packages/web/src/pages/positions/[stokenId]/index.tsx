@@ -220,7 +220,7 @@ const STokenPositionDetail = (_: Props) => {
           <h3>Change the image of sToken#{`${sTokenId}`}</h3>
         </Container>
         <STokenPosition sTokenId={sTokenId} />
-        {author === undefined && isAuthor && (
+        {author !== undefined && isAuthor && (
           <div style={{ textAlign: 'center', marginTop: '1rem' }}>
             <Dragger style={{ width: '100%', height: '100%' }} {...draggerProps}>
               <p className="ant-upload-drag-icon">
