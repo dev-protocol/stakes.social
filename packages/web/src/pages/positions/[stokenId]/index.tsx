@@ -30,7 +30,6 @@ type Props = {}
 const Wrap = styled.div`
   margin: 1rem auto;
   max-width: 1048px;
-  text-align: center;
 `
 
 const tableColumns = [
@@ -222,7 +221,7 @@ const STokenPositionDetail = (_: Props) => {
         </Container>
         <STokenPosition sTokenId={sTokenId} />
         {author === undefined && isAuthor && (
-          <>
+          <div style={{ textAlign: 'center', marginTop: '1rem' }}>
             <Dragger style={{ width: '100%', height: '100%' }} {...draggerProps}>
               <p className="ant-upload-drag-icon">
                 <InboxOutlined />
@@ -232,8 +231,10 @@ const STokenPositionDetail = (_: Props) => {
                 Support for a single or bulk upload. Strictly prohibit from uploading company data or other band files
               </p>
             </Dragger>
-            <ButtonWithGradient onSubmit={onSubmit}>Save</ButtonWithGradient>
-          </>
+            <div style={{ margin: '1rem' }}>
+              <ButtonWithGradient onSubmit={onSubmit}>Save</ButtonWithGradient>
+            </div>
+          </div>
         )}
       </Wrap>
 
