@@ -1192,21 +1192,21 @@ export const useGetAssetsByProperties = (propertyAddress?: string) => {
   )
 }
 
-export const useGetStokenHeldAt = (accountAddress?: string, sTokenId?: number) => {
+export const useGetStokenHeldAt = (sTokenId?: number) => {
   const [isLoading, setIsLoading] = useState<boolean>(true)
-  const { nonConnectedEthersProvider } = useProvider()
-  const { name: network } = useDetectChain(nonConnectedEthersProvider)
+  const { ethersProvider, nonConnectedEthersProvider } = useProvider()
+  const { name: network } = useDetectChain(ethersProvider)
   const { data, error } = useSWR<UnwrapFunc<typeof getStokenHeldAt>, Error>(
-    SWRCachePath.getStokenHeldAt(network, accountAddress, sTokenId),
+    SWRCachePath.getStokenHeldAt(network, sTokenId),
     () =>
-      whenDefinedAll([nonConnectedEthersProvider, accountAddress, sTokenId], ([client, address, sTokenId]) =>
-        getStokenHeldAt(client, sTokenId, address)
-      ),
-    { revalidateOnFocus: false, focusThrottleInterval: 0 }
+      whenDefinedAll([nonConnectedEthersProvider, sTokenId], ([client, sTokenId]) => getStokenHeldAt(client, sTokenId)),
+    { revalidateOnFocus: false }
   )
+  console.log({ data })
   const block = useMemo(async () => {
     data && data.length > 0 && setIsLoading(false)
     return data && data.length > 0 && (await data[0].getBlock())
   }, data)
+  console.log({ block })
   return { since: data, block, loading: isLoading, error }
 }

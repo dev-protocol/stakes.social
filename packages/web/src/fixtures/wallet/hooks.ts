@@ -70,10 +70,11 @@ export const useProvider = () => {
 }
 
 export const useDetectChain = (ethersProvider?: providers.BaseProvider) => {
-  const { data } = useSWR(`useDetectChain/${ethersProvider?.network?.chainId}`, () =>
-    whenDefined(ethersProvider, prov => detectChain(prov))
-  )
-  return { chainId: data?.chainId, name: data?.name }
+  const [chain, setChain] = useState<undefined | { chainId?: number; name?: ChainName }>()
+  useEffect(() => {
+    detectChain(ethersProvider).then(setChain)
+  }, [ethersProvider])
+  return { chainId: chain?.chainId, name: chain?.name }
 }
 
 export const useIsL1 = () => {

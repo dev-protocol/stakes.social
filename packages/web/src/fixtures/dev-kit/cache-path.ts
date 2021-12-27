@@ -40,8 +40,7 @@ export const SWRCachePath = {
   migrateToSTokens: (sTokenId?: string) => `sTokenId/${sTokenId}/migrateToSTokens`,
   getTokenURI: (sTokenId?: string) => `sTokenId/${sTokenId}/getTokenURI`,
   getStokenSymbol: (sTokenId?: string) => `sTokenId/${sTokenId}/getStokenSymbol`,
-  getStokenHeldAt: (network?: string, accountAddress?: string, sTokenId?: number) =>
-    `${accountAddress}/sTokenId/${sTokenId}/getStokenHeldAt/${network}`,
+  getStokenHeldAt: (network?: string, sTokenId?: number) => `sTokenId/${sTokenId}/getStokenHeldAt/${network}`,
   enabledMarkets: (network?: string) => `enabledMarkets/${network}`,
   getAuthenticatedProperties: (network?: string, marketAddress?: string) =>
     `getAuthenticatedProperties/${network}/${marketAddress}`,

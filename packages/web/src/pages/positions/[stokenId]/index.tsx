@@ -103,7 +103,7 @@ const STokenPosition = ({ sTokenId }: { sTokenId: number }) => {
   const { data: accountData } = useGetAccount(ownerAccountAddress)
   const { positions } = useGetSTokenPositions(sTokenId)
   const { rewards } = useGetStokenRewards(sTokenId)
-  const { since, block, loading } = useGetStokenHeldAt(ownerAccountAddress, sTokenId)
+  const { since, block, loading } = useGetStokenHeldAt(sTokenId)
   useEffect(() => {
     const fetcher = async (since: any) => {
       const block = await since
