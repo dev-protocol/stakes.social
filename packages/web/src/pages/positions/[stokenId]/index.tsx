@@ -21,7 +21,7 @@ import {
 } from 'src/fixtures/dev-kit/hooks'
 import { useProvider } from 'src/fixtures/wallet/hooks'
 import { useGetAccount } from 'src/fixtures/dev-for-apps/hooks'
-import { useIPFSImageUploader } from 'src/fixtures/ipfs/hooks'
+import { useGetIPFS, useIPFSImageUploader } from 'src/fixtures/ipfs/hooks'
 
 const { Dragger } = Upload
 
@@ -104,6 +104,14 @@ const STokenPosition = ({ sTokenId }: { sTokenId: number }) => {
   const { positions } = useGetSTokenPositions(sTokenId)
   const { rewards } = useGetStokenRewards(sTokenId)
   const { since, block, loading } = useGetStokenHeldAt(sTokenId)
+
+  const cid = useMemo(() => {
+    const image = tokenURI ? tokenURI.image : undefined
+    return image && image.startsWith('data:image/') === false ? image : undefined
+  }, [tokenURI])
+  const { base64: imageOnIPFS } = useGetIPFS(cid)
+  console.log('ipfs:', cid, imageOnIPFS)
+
   useEffect(() => {
     const fetcher = async (since: any) => {
       const block = await since
@@ -181,19 +189,21 @@ const STokenPositionDetail = (_: Props) => {
   const { upload: uploader, error: uploaderError } = useIPFSImageUploader()
   const { callback: setStokenURIImage } = useSetSTokenTokenURIImage(sTokenId)
 
-  const onSubmit = async () => {
+  const onClick = async () => {
+    console.log('on-submit', fileObj)
     // upload image to IPFS
     if (!fileObj) {
       message.error(`file upload failed.`)
       return
     }
-    const cid = fileObj && uploader(fileObj)
+    const cid = fileObj && (await uploader(fileObj))
+    console.log('upload', uploaderError, cid)
     if (uploaderError) {
       return
     }
 
     // set token uri
-    setStokenURIImage(await cid)
+    await setStokenURIImage(cid)
       .then(() => message.success('Success to set sToken Image'))
       .catch(() => message.error('Fail to set sToken Image'))
   }
@@ -232,7 +242,7 @@ const STokenPositionDetail = (_: Props) => {
               </p>
             </Dragger>
             <div style={{ margin: '1rem' }}>
-              <ButtonWithGradient onSubmit={onSubmit}>Save</ButtonWithGradient>
+              <ButtonWithGradient onClick={onClick}>Save</ButtonWithGradient>
             </div>
           </div>
         )}
