@@ -383,8 +383,9 @@ export const useTotalStakingAmountOnProtocol = () => {
 
 export const useTotalStakingRatio = () => {
   const { nonConnectedEthersProvider, accountAddress } = useProvider()
+  const { name: networkName } = useDetectChain(nonConnectedEthersProvider)
   const { data: totalSupplyValue, error: totalSupplyError } = useSWR<UnwrapFunc<typeof totalSupply>, Error>(
-    SWRCachePath.totalSupply(accountAddress),
+    SWRCachePath.totalSupply(networkName, accountAddress),
     () => whenDefined(nonConnectedEthersProvider, x => totalSupply(x)),
     {
       onError: err => {
@@ -620,8 +621,9 @@ export const useAPY = () => {
 
 export const useTotalSupply = () => {
   const { nonConnectedEthersProvider, accountAddress } = useProvider()
+  const { name: networkName } = useDetectChain(nonConnectedEthersProvider)
   const { data: totalSupplyValue, error } = useSWR<UnwrapFunc<typeof totalSupply>, Error>(
-    SWRCachePath.totalSupply(accountAddress),
+    SWRCachePath.totalSupply(networkName, accountAddress),
     () => whenDefined(nonConnectedEthersProvider, x => totalSupply(x)),
     {
       onError: err => {
@@ -638,8 +640,9 @@ export const useTotalSupply = () => {
 
 export const useCirculatingSupply = () => {
   const { nonConnectedEthersProvider, accountAddress } = useProvider()
+  const { name: networkName } = useDetectChain(nonConnectedEthersProvider)
   const { data: totalSupplyValue, error } = useSWR<UnwrapFunc<typeof totalSupply>, Error>(
-    SWRCachePath.totalSupply(accountAddress),
+    SWRCachePath.totalSupply(networkName, accountAddress),
     () => whenDefined(nonConnectedEthersProvider, x => totalSupply(x)),
     {
       onError: err => {
@@ -762,8 +765,9 @@ export const usePropertyAuthor = (propertyAddress?: string) => {
 export const useBalanceOf = () => {
   const { currency, toCurrency } = useCurrency()
   const { nonConnectedEthersProvider, accountAddress } = useProvider()
+  const { name: networkName } = useDetectChain(nonConnectedEthersProvider)
   const { data, error } = useSWR<BigNumber | undefined, Error>(
-    SWRCachePath.balanceOf(accountAddress),
+    SWRCachePath.balanceOf(networkName, accountAddress),
     () =>
       whenDefinedAll([nonConnectedEthersProvider, accountAddress], ([client, account]) =>
         balanceOf(client, account).then(toBigNumber)
@@ -796,8 +800,9 @@ export const useAllClaimedRewards = () => {
 
 export const usePropertyName = (propertyAddress?: string) => {
   const { nonConnectedEthersProvider, accountAddress } = useProvider()
+  const { name: networkName } = useDetectChain(nonConnectedEthersProvider)
   const { data, error } = useSWR<UnwrapFunc<typeof propertyName>, Error>(
-    SWRCachePath.propertyName(propertyAddress, accountAddress),
+    SWRCachePath.propertyName(networkName, propertyAddress, accountAddress),
     () =>
       validAddress(propertyAddress)
         ? whenDefinedAll([nonConnectedEthersProvider, propertyAddress], ([client, property]) =>
@@ -819,8 +824,9 @@ export const usePropertyName = (propertyAddress?: string) => {
 
 export const usePropertySymbol = (propertyAddress?: string) => {
   const { nonConnectedEthersProvider, accountAddress } = useProvider()
+  const { name: networkName } = useDetectChain(nonConnectedEthersProvider)
   const { data, error } = useSWR<UnwrapFunc<typeof propertySymbol>, Error>(
-    SWRCachePath.propertySymbol(propertyAddress, accountAddress),
+    SWRCachePath.propertySymbol(networkName, propertyAddress, accountAddress),
     () =>
       validAddress(propertyAddress)
         ? whenDefinedAll([nonConnectedEthersProvider, propertyAddress], ([client, property]) =>

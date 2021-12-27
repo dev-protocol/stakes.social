@@ -18,10 +18,12 @@ export const SWRCachePath = {
     `${chain}/amount/${amount}/lockedups/${lockedups}/holdersShare/${user}`,
   propertyAuthor: (network?: string, propertyAddress?: string, user?: string) =>
     `propertyAddresses/${user}${propertyAddress}/author/${network}`,
-  balanceOf: (user?: string) => `balanceOf/${user}`,
+  balanceOf: (network?: string, user?: string) => `balanceOf/${user}/${network}`,
   allClaimedRewards: (user?: string) => `allClaimedRewards/${user}`,
-  propertyName: (propertyAddress?: string, user?: string) => `propertyAddresses/${user}${propertyAddress}/name`,
-  propertySymbol: (propertyAddress?: string, user?: string) => `propertyAddresses/${user}${propertyAddress}/symbol`,
+  propertyName: (network?: string, propertyAddress?: string, user?: string) =>
+    `propertyAddresses/${user}${propertyAddress}/name/${network}`,
+  propertySymbol: (network?: string, propertyAddress?: string, user?: string) =>
+    `propertyAddresses/${user}${propertyAddress}/symbol/${network}`,
   balanceOfProperty: (propertyAddress?: string, user?: string) =>
     `propertyAddresses/${user}${propertyAddress}/balanceOf`,
   detectStokens: (network?: string, propertyAddress?: string, user?: string) =>
