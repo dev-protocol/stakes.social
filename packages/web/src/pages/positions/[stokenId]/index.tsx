@@ -21,6 +21,7 @@ import {
 import { useProvider } from 'src/fixtures/wallet/hooks'
 import { useGetAccount } from 'src/fixtures/dev-for-apps/hooks'
 import { useImageDataUri, useIPFSImageUploader } from 'src/fixtures/ipfs/hooks'
+import { STokensTableImage } from 'src/components/atoms/STokensTableImage'
 
 const { Dragger } = Upload
 
@@ -52,16 +53,9 @@ const tableColumns = [
     title: 'Image',
     dataIndex: 'image',
     key: 'image',
-    render: (imageURI: string) => (
-      <div
-        style={{
-          backgroundImage: `url('${imageURI}')`,
-          backgroundRepeat: 'no-repeat',
-          backgroundSize: 'cover',
-          height: '100px'
-        }}
-      />
-    )
+    render: (imageURI: string) => {
+      return <STokensTableImage imagePath={imageURI} />
+    }
   },
   {
     title: 'Address',

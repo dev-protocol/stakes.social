@@ -19,6 +19,7 @@ import {
 import { whenDefined, whenDefinedAll } from 'src/fixtures/utility'
 import { ButtonWithGradient } from 'src/components/atoms/ButtonWithGradient'
 import { useImageDataUriFetcher } from 'src/fixtures/ipfs/hooks'
+import { STokensTableImage } from 'src/components/atoms/STokensTableImage'
 
 const Actions = styled.div`
   display: flex;
@@ -92,19 +93,7 @@ const tableColumns = [
     dataIndex: 'image',
     key: 'image',
     render: (base64Image: string) => {
-      return (
-        <>
-          <div
-            style={{
-              backgroundImage: `url('${base64Image}')`,
-              backgroundRepeat: 'no-repeat',
-              backgroundSize: 'contain',
-              backgroundPosition: 'center',
-              height: '120px'
-            }}
-          />
-        </>
-      )
+      return <STokensTableImage imagePath={base64Image} />
     }
   },
   {
