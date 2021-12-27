@@ -739,8 +739,9 @@ export const useGetPolicyAddressesList = () => {
 export const usePropertyAuthor = (propertyAddress?: string) => {
   const shouldFetch = propertyAddress && propertyAddress.startsWith('0x')
   const { nonConnectedEthersProvider, accountAddress } = useProvider()
+  const { name: networkName } = useDetectChain(nonConnectedEthersProvider)
   const { data, error } = useSWR<undefined | UnwrapFunc<typeof totalSupply>, Error>(
-    shouldFetch ? SWRCachePath.propertyAuthor(propertyAddress, accountAddress) : null,
+    shouldFetch ? SWRCachePath.propertyAuthor(networkName, propertyAddress, accountAddress) : null,
     () =>
       whenDefinedAll([nonConnectedEthersProvider, propertyAddress], ([client, property]) =>
         propertyAuthor(client, property)
