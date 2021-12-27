@@ -87,7 +87,7 @@ exports[`AssetList Snapshot 1`] = `
           class="sc-kDTinF sc-bqiRlB iNSKQe bWzqsv"
         >
           <button
-            class="ant-btn sc-bdvvtL bKsSoV"
+            class="ant-btn sc-bdvvtL lhUTfy"
             type="button"
           >
             <span>
@@ -179,7 +179,7 @@ exports[`AssetList Snapshot 1`] = `
           class="sc-kDTinF sc-bqiRlB iNSKQe bWzqsv"
         >
           <button
-            class="ant-btn sc-bdvvtL bKsSoV"
+            class="ant-btn sc-bdvvtL lhUTfy"
             type="button"
           >
             <span>
@@ -271,7 +271,7 @@ exports[`AssetList Snapshot 1`] = `
           class="sc-kDTinF sc-bqiRlB iNSKQe bWzqsv"
         >
           <button
-            class="ant-btn sc-bdvvtL bKsSoV"
+            class="ant-btn sc-bdvvtL lhUTfy"
             type="button"
           >
             <span>
@@ -633,7 +633,7 @@ exports[`AssetList Snapshot with empty properties and sign in button 1`] = `
           class="ant-empty-footer"
         >
           <button
-            class="ant-btn sc-bdvvtL bKsSoV"
+            class="ant-btn sc-bdvvtL lhUTfy"
             type="button"
           >
             <span>

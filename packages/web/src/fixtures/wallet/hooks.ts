@@ -5,7 +5,7 @@ import WalletContext from 'src/context/walletContext'
 import { WEB3_PROVIDER_ENDPOINT_KEY, WEB3_PROVIDER_ENDPOINT_HOSTS } from 'src/fixtures/wallet/constants'
 import { providers } from 'ethers'
 import { whenDefined } from '@devprotocol/util-ts'
-import useSWR from 'swr'
+import { useRouter } from 'next/router'
 
 const providerUrl = (chain: ChainName) =>
   chain
@@ -52,8 +52,15 @@ export const useConnectWallet = () => {
 }
 
 export const useProvider = () => {
+  const router = useRouter()
+  const nameFromQuery = router?.query?.network as ChainName
   const { web3, ethersProvider } = useContext(WalletContext)
   const { name } = useDetectChain(ethersProvider)
+  const ncWeb3 = useMemo(() => nonConnectedWeb3(name ?? nameFromQuery ?? 'main'), [name, nameFromQuery])
+  const ncEthersProvider = useMemo(
+    () => nonConnectedEthersProvider(name ?? nameFromQuery ?? 'main'),
+    [name, nameFromQuery]
+  )
   const [accountAddress, setAccountAddress] = useState<undefined | string>(undefined)
   useEffect(() => {
     getAccountAddress(web3).then(x => setAccountAddress(x))
@@ -62,18 +69,19 @@ export const useProvider = () => {
     web3,
     ethersProvider,
     accountAddress,
-    nonConnectedWeb3: web3 ? web3 : nonConnectedWeb3(name),
-    nonConnectedEthersProvider: ethersProvider ? ethersProvider : nonConnectedEthersProvider(name),
+    nonConnectedWeb3: ncWeb3,
+    nonConnectedEthersProvider: ncEthersProvider,
     nonConnectedWeb3L1,
     nonConnectedEthersL1Provider
   }
 }
 
 export const useDetectChain = (ethersProvider?: providers.BaseProvider) => {
-  const { data } = useSWR(`useDetectChain/${ethersProvider?.network?.chainId}`, () =>
-    whenDefined(ethersProvider, prov => detectChain(prov))
-  )
-  return { chainId: data?.chainId, name: data?.name }
+  const [chain, setChain] = useState<undefined | { chainId?: number; name?: ChainName }>()
+  useEffect(() => {
+    detectChain(ethersProvider).then(setChain)
+  }, [ethersProvider])
+  return { chainId: chain?.chainId, name: chain?.name }
 }
 
 export const useIsL1 = () => {

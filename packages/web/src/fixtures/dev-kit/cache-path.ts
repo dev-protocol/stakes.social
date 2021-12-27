@@ -16,18 +16,22 @@ export const SWRCachePath = {
   totalSupply: (chain?: string, user?: string) => `totalSupply/${chain}/${user}`,
   holdersShare: (chain?: string, amount?: string, lockedups?: string, user?: string) =>
     `${chain}/amount/${amount}/lockedups/${lockedups}/holdersShare/${user}`,
-  propertyAuthor: (propertyAddress?: string, user?: string) => `propertyAddresses/${user}${propertyAddress}/author`,
-  balanceOf: (user?: string) => `balanceOf/${user}`,
+  propertyAuthor: (network?: string, propertyAddress?: string, user?: string) =>
+    `propertyAddresses/${user}${propertyAddress}/author/${network}`,
+  balanceOf: (network?: string, user?: string) => `balanceOf/${user}/${network}`,
   allClaimedRewards: (user?: string) => `allClaimedRewards/${user}`,
-  propertyName: (propertyAddress?: string, user?: string) => `propertyAddresses/${user}${propertyAddress}/name`,
-  propertySymbol: (propertyAddress?: string, user?: string) => `propertyAddresses/${user}${propertyAddress}/symbol`,
+  propertyName: (network?: string, propertyAddress?: string, user?: string) =>
+    `propertyAddresses/${user}${propertyAddress}/name/${network}`,
+  propertySymbol: (network?: string, propertyAddress?: string, user?: string) =>
+    `propertyAddresses/${user}${propertyAddress}/symbol/${network}`,
   balanceOfProperty: (propertyAddress?: string, user?: string) =>
     `propertyAddresses/${user}${propertyAddress}/balanceOf`,
-  detectStokens: (propertyAddress?: string, user?: string) =>
-    `propertyAddresses/${user}${propertyAddress}/detectStokens`,
+  detectStokens: (network?: string, propertyAddress?: string, user?: string) =>
+    `propertyAddresses/${user}${propertyAddress}/detectStokens/${network}`,
   positionsOfOwner: (user?: string) => `user/${user}/positionsOfOwner`,
+  getStokenTokenURI: (network?: string, sTokenId?: number) => `sTokenId/${sTokenId}/getStokenTokenURI/${network}`,
   getStokenOwnerOf: (sTokenId?: string) => `sTokenId/${sTokenId}/getStokenOwnerOf`,
-  getStokenPositions: (sTokenId?: string) => `sTokenId/${sTokenId}/getStokenPositions`,
+  getStokenPositions: (network?: string, sTokenId?: string) => `sTokenId/${sTokenId}/getStokenPositions/${network}`,
   getStokenRewards: (sTokenId?: string) => `sTokenId/${sTokenId}/getStokenRewards`,
   approve: (propertyAddress?: string, user?: string) => `propertyAddresses/${user}${propertyAddress}/approve`,
   depositToProperty: (propertyAddress?: string, user?: string) =>
@@ -39,6 +43,7 @@ export const SWRCachePath = {
   migrateToSTokens: (sTokenId?: string) => `sTokenId/${sTokenId}/migrateToSTokens`,
   getTokenURI: (sTokenId?: string) => `sTokenId/${sTokenId}/getTokenURI`,
   getStokenSymbol: (sTokenId?: string) => `sTokenId/${sTokenId}/getStokenSymbol`,
+  getStokenHeldAt: (network?: string, sTokenId?: number) => `sTokenId/${sTokenId}/getStokenHeldAt/${network}`,
   enabledMarkets: (network?: string) => `enabledMarkets/${network}`,
   getAuthenticatedProperties: (network?: string, marketAddress?: string) =>
     `getAuthenticatedProperties/${network}/${marketAddress}`,

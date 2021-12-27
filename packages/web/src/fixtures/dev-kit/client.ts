@@ -457,6 +457,24 @@ export const detectStokensByPropertyAddress = async (prov: providers.BaseProvide
   return undefined
 }
 
+export const getStokenTokenURI = async (prov: providers.BaseProvider, sTokenID: number) => {
+  const [, , client] = await newClient(prov)
+  const address = await getSTokensAddress(prov)
+  if (client && address) {
+    return client.sTokens(address).tokenURI(sTokenID)
+  }
+  return undefined
+}
+
+export const setStokenTokenURIImage = async (prov: providers.BaseProvider, sTokenID: number, data: string) => {
+  const [, , client] = await newClient(prov)
+  const address = await getSTokensAddress(prov)
+  if (client && address) {
+    return client.sTokens(address).setTokenURIImage(sTokenID, data)
+  }
+  return undefined
+}
+
 export const getStokenOwnerOf = async (prov: providers.BaseProvider, sTokenID: number) => {
   const [, , client] = await newClient(prov)
   const address = await getSTokensAddress(prov)
@@ -609,14 +627,11 @@ export const getId = async (prov: providers.BaseProvider, marketBehavior: string
   return undefined
 }
 
-export const getStokenHeldAt = async (prov: providers.BaseProvider, sTokenId: number, accountAddress: string) => {
-  const [, l2, client] = await newClient(prov)
+export const getStokenHeldAt = async (prov: providers.BaseProvider, sTokenId: number) => {
   const address = await getSTokensAddress(prov)
-  if (client && address) {
-    // NOTE: use contract deploy's block number because improve fetch performance
-    const fromBlockNumber = l2 ? 2755321 : 13349972
+  if (address) {
     const contract = new ethers.Contract(address, [...sTokensAbi], prov)
-    return contract.queryFilter(contract.filters.Transfer(null, accountAddress, sTokenId), fromBlockNumber, 'latest')
+    return contract.queryFilter(contract.filters.Transfer('0x0000000000000000000000000000000000000000', null, sTokenId))
   }
   return undefined
 }
