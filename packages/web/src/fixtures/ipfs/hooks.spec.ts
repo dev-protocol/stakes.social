@@ -4,36 +4,32 @@
 
 import { renderHook } from '@testing-library/react-hooks'
 import { useGetIPFS } from './hooks'
-import useSWR from 'swr'
+import { getIpfs } from 'src/fixtures/ipfs/functions/getIpfs'
 
-jest.mock('swr')
-jest.mock('src/fixtures/utility')
+jest.mock('src/fixtures/ipfs/functions/getIpfs.ts')
 
 describe.skip('useGetIPFS', () => {
-  test('data is undefined', () => {
+  test('data is undefined', async () => {
     const data = undefined
-    const error = undefined
-
-    ;(useSWR as jest.Mock).mockImplementation(() => ({ data, error }))
+    ;(getIpfs as jest.Mock).mockImplementation(() => Promise.resolve(data))
     const { result } = renderHook(() => useGetIPFS('cid'))
     expect(result.current.base64).toBe(data)
-    console.log(result.current.base64)
   })
 
-  test('success fetching data', () => {
+  test('success fetching data', async () => {
     const data = 'https://test.com'
-    const error = undefined
-    ;(useSWR as jest.Mock).mockImplementation(() => ({ data, error }))
-    const { result } = renderHook(() => useGetIPFS('cid'))
+    ;(getIpfs as jest.Mock).mockImplementation(() => Promise.resolve(data))
+    const { result, waitForNextUpdate } = renderHook(() => useGetIPFS('cid'))
+    await waitForNextUpdate()
     expect(result.current.base64).toBe(data)
   })
 
-  test('failure fetching data', () => {
-    const data = undefined
+  test('failure fetching data', async () => {
     const errorMessage = 'error'
     const error = new Error(errorMessage)
-    ;(useSWR as jest.Mock).mockImplementation(() => ({ data, error }))
-    const { result } = renderHook(() => useGetIPFS('cid'))
+    ;(getIpfs as jest.Mock).mockImplementation(() => Promise.reject(error))
+    const { result, waitForNextUpdate } = renderHook(() => useGetIPFS('cid'))
+    await waitForNextUpdate()
     expect(result.current.error).toBe(error)
     expect(result.current.error?.message).toBe(errorMessage)
   })
