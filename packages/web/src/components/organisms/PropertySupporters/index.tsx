@@ -144,7 +144,7 @@ const tableColumns = [
         <OfferPopover />
         {isAuthor && (
           <Link href={`/positions/${sTokenId}`} passHref>
-            <ButtonWithGradient>Edit Image</ButtonWithGradient>
+            <ButtonWithGradient>Positions</ButtonWithGradient>
           </Link>
         )}
       </>
