@@ -1,13 +1,14 @@
 // @L2 optimized
 import React, { useEffect, useState } from 'react'
 import Link from 'next/link'
+import styled from 'styled-components'
 import { Popover, Table } from 'antd'
 import { format } from 'date-fns'
 import { providers } from 'ethers'
 import { Avatar } from 'src/components/molecules/Avatar'
 import { getAccount } from 'src/fixtures/dev-for-apps/utility'
 import { useProvider } from 'src/fixtures/wallet/hooks'
-import { usePropertyAuthor, useDetectSTokens } from 'src/fixtures/dev-kit/hooks'
+import { useDetectSTokens } from 'src/fixtures/dev-kit/hooks'
 import {
   getStokenPositions,
   getStokenTokenURI,
@@ -17,6 +18,12 @@ import {
 } from 'src/fixtures/dev-kit/client'
 import { whenDefined, whenDefinedAll } from 'src/fixtures/utility'
 import { ButtonWithGradient } from 'src/components/atoms/ButtonWithGradient'
+
+const Actions = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+`
 
 interface Props {
   propertyAddress?: string
@@ -139,20 +146,18 @@ const tableColumns = [
     title: '',
     dataIndex: 'action',
     key: 'action',
-    render: ({ sTokenId, isAuthor }: { sTokenId: number; isAuthor: boolean }) => (
-      <>
+    render: ({ sTokenId }: { sTokenId: number }) => (
+      <Actions>
         <OfferPopover />
-        {isAuthor && (
-          <Link href={`/positions/${sTokenId}`} passHref>
-            <ButtonWithGradient>Positions</ButtonWithGradient>
-          </Link>
-        )}
-      </>
+        <Link href={`/positions/${sTokenId}`} passHref>
+          <ButtonWithGradient>Positions</ButtonWithGradient>
+        </Link>
+      </Actions>
     )
   }
 ]
 
-const SupportersTable = ({ sTokenIds, isAuthor }: { sTokenIds: number[]; isAuthor?: boolean }) => {
+const SupportersTable = ({ sTokenIds }: { sTokenIds: number[] }) => {
   const { nonConnectedEthersProvider, nonConnectedEthersL1Provider } = useProvider()
   const [tableData, setTableData] = useState<Array<TableData>>([])
   const [loading, setLoading] = useState(false)
@@ -199,8 +204,7 @@ const SupportersTable = ({ sTokenIds, isAuthor }: { sTokenIds: number[]; isAutho
           return {
             rank: idx + 1,
             action: {
-              sTokenId,
-              isAuthor
+              sTokenId
             },
             image: tokenURI?.image,
             address: ownerAccountAddress,
@@ -226,11 +230,9 @@ const SupportersTable = ({ sTokenIds, isAuthor }: { sTokenIds: number[]; isAutho
 }
 
 const PropertySupporters = ({ propertyAddress }: Props) => {
-  const { accountAddress } = useProvider()
   const { sTokensByPropertyAddress: data } = useDetectSTokens(propertyAddress)
-  const { author } = usePropertyAuthor()
   return data && data.length > 0 ? (
-    <SupportersTable sTokenIds={data} isAuthor={author === accountAddress} />
+    <SupportersTable sTokenIds={data} />
   ) : (
     <Table columns={tableColumns} dataSource={[]} rowKey="rank" />
   )
