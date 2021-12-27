@@ -628,10 +628,8 @@ export const getId = async (prov: providers.BaseProvider, marketBehavior: string
 }
 
 export const getStokenHeldAt = async (prov: providers.BaseProvider, sTokenId: number) => {
-  const [, , client] = await newClient(prov)
   const address = await getSTokensAddress(prov)
-  console.log({ address })
-  if (client && address) {
+  if (address) {
     const contract = new ethers.Contract(address, [...sTokensAbi], prov)
     return contract.queryFilter(contract.filters.Transfer('0x0000000000000000000000000000000000000000', null, sTokenId))
   }

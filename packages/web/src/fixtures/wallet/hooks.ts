@@ -53,6 +53,8 @@ export const useConnectWallet = () => {
 export const useProvider = () => {
   const { web3, ethersProvider } = useContext(WalletContext)
   const { name } = useDetectChain(ethersProvider)
+  const ncWeb3 = useMemo(() => nonConnectedWeb3(name ?? 'main'), [name])
+  const ncEthersProvider = useMemo(() => nonConnectedEthersProvider(name ?? 'main'), [name])
   const [accountAddress, setAccountAddress] = useState<undefined | string>(undefined)
   useEffect(() => {
     getAccountAddress(web3).then(x => setAccountAddress(x))
@@ -61,8 +63,8 @@ export const useProvider = () => {
     web3,
     ethersProvider,
     accountAddress,
-    nonConnectedWeb3: web3 ? web3 : nonConnectedWeb3(name),
-    nonConnectedEthersProvider: ethersProvider ? ethersProvider : nonConnectedEthersProvider(name),
+    nonConnectedWeb3: ncWeb3,
+    nonConnectedEthersProvider: ncEthersProvider,
     nonConnectedWeb3L1,
     nonConnectedEthersL1Provider
   }

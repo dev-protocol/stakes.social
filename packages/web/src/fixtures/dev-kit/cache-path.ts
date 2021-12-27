@@ -24,8 +24,8 @@ export const SWRCachePath = {
   propertySymbol: (propertyAddress?: string, user?: string) => `propertyAddresses/${user}${propertyAddress}/symbol`,
   balanceOfProperty: (propertyAddress?: string, user?: string) =>
     `propertyAddresses/${user}${propertyAddress}/balanceOf`,
-  detectStokens: (propertyAddress?: string, user?: string) =>
-    `propertyAddresses/${user}${propertyAddress}/detectStokens`,
+  detectStokens: (network?: string, propertyAddress?: string, user?: string) =>
+    `propertyAddresses/${user}${propertyAddress}/detectStokens/${network}`,
   positionsOfOwner: (user?: string) => `user/${user}/positionsOfOwner`,
   getStokenTokenURI: (network?: string, sTokenId?: number) => `sTokenId/${sTokenId}/getStokenTokenURI/${network}`,
   getStokenOwnerOf: (sTokenId?: string) => `sTokenId/${sTokenId}/getStokenOwnerOf`,

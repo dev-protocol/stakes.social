@@ -868,8 +868,9 @@ export const useBalanceOfAccountProperty = (propertyAddress?: string, accountAdd
 
 export const useDetectSTokens = (propertyAddress?: string, accountAddress?: string) => {
   const { nonConnectedEthersProvider } = useProvider()
+  const { name: networkName } = useDetectChain(nonConnectedEthersProvider)
   const { data, error } = useSWR<UnwrapFunc<typeof detectStokens>, Error>(
-    SWRCachePath.detectStokens(propertyAddress, accountAddress),
+    SWRCachePath.detectStokens(networkName, propertyAddress, accountAddress),
     () =>
       whenDefinedAll([nonConnectedEthersProvider, propertyAddress, accountAddress], ([client, property, account]) =>
         detectStokens(client, property, account)
@@ -881,7 +882,7 @@ export const useDetectSTokens = (propertyAddress?: string, accountAddress?: stri
     UnwrapFunc<typeof detectStokensByPropertyAddress>,
     Error
   >(
-    SWRCachePath.detectStokens(propertyAddress, 'ALL'),
+    SWRCachePath.detectStokens(networkName, propertyAddress, 'ALL'),
     () =>
       whenDefinedAll([nonConnectedEthersProvider, propertyAddress], ([client, property]) =>
         detectStokensByPropertyAddress(client, property)
@@ -1204,11 +1205,9 @@ export const useGetStokenHeldAt = (sTokenId?: number) => {
       whenDefinedAll([nonConnectedEthersProvider, sTokenId], ([client, sTokenId]) => getStokenHeldAt(client, sTokenId)),
     { revalidateOnFocus: false }
   )
-  console.log({ data })
   const block = useMemo(async () => {
     data && data.length > 0 && setIsLoading(false)
     return data && data.length > 0 && (await data[0].getBlock())
   }, [data])
-  console.log({ block })
   return { since: data, block, loading: isLoading, error }
 }
