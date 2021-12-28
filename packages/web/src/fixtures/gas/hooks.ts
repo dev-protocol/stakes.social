@@ -8,7 +8,7 @@ const EGS_TOKEN = '573deb033585bb0b2de8f0950ae599d8a5ea2f754c12c5ecae4e1bd74b7a'
 export const useGetGasPrice = () => {
   const { ethersProvider } = useProvider()
   const { name } = useDetectChain(ethersProvider)
-  const l1 = name === 'main'
+  const l1 = name === 'ethereum'
   const gasPriceFetcher = ethGasStationFetcher(EGS_TOKEN, 'fastest')
   const { data, error } = useSWR('getGasPrice', gasPriceFetcher)
   const { data: wei, error: err } = useSWR(`GasPriceFromOnChain/${name}`, () =>
