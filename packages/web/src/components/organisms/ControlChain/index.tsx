@@ -44,7 +44,7 @@ const hyphenToCapitalize = (str: string) =>
     .join(' ')
 
 export const ControlChain = () => {
-  const { router, requestedChain, fromRouter } = useNetworkInRouter()
+  const { router, requestedChain, fromRouter, isRoot } = useNetworkInRouter()
   const { ethersProvider } = useProvider()
   const { name } = useDetectChain(ethersProvider)
   const shouldChooseNetwork = useMemo(() => NETWORK_DEPENDENTS.some(test => test.test(router.asPath)), [router.asPath])
@@ -52,8 +52,11 @@ export const ControlChain = () => {
   const [openModal, setOpenModal] = useState<boolean>()
 
   useEffect(
-    () => setOpenModal(name !== undefined && fromRouter !== undefined && !isAlreadyConnectedToExpectedChain),
-    [name, fromRouter, isAlreadyConnectedToExpectedChain]
+    () =>
+      setOpenModal(
+        name !== undefined && (isRoot ? isRoot : fromRouter !== undefined) && !isAlreadyConnectedToExpectedChain
+      ),
+    [name, fromRouter, isRoot, isAlreadyConnectedToExpectedChain]
   )
 
   return shouldChooseNetwork ? (
