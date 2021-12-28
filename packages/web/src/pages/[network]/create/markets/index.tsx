@@ -4,6 +4,7 @@ import { Footer } from 'src/components/organisms/Footer'
 import { Header } from 'src/components/organisms/Header'
 import { Headline } from 'src/components/atoms/Headline'
 import { H2 } from 'src/components/atoms/Typography'
+import { ControlChain } from 'src/components/organisms/ControlChain'
 
 type Props = {}
 
@@ -19,6 +20,7 @@ const Markets = (_: Props) => {
       <div style={{ maxWidth: '1048px', marginRight: 'auto', marginLeft: 'auto', flexGrow: 1 }}>
         <MarketsOverview />
       </div>
+      <ControlChain />
       <Footer />
     </div>
   )

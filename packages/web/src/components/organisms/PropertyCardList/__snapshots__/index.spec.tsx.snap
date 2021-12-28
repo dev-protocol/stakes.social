@@ -184,19 +184,19 @@ exports[`PropertyCardList Snapshot 1`] = `
           All Pools
         </a>
         <a
-          href="/?tag=GitHub"
+          href="/ethereum?tag=GitHub"
           style="color: rgb(201, 201, 201);"
         >
           GitHub
         </a>
         <a
-          href="/?tag=npm"
+          href="/ethereum?tag=npm"
           style="color: rgb(201, 201, 201);"
         >
           npm
         </a>
         <a
-          href="/?tag=Creators"
+          href="/ethereum?tag=Creators"
           style="color: rgb(201, 201, 201);"
         >
           Creators

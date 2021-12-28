@@ -7,6 +7,7 @@ import { Headline } from 'src/components/atoms/Headline'
 import { H2 } from 'src/components/atoms/Typography'
 import styled from 'styled-components'
 import { getPath } from 'src/fixtures/utility/route'
+import { ControlChain } from 'src/components/organisms/ControlChain'
 
 type Props = {}
 
@@ -47,6 +48,7 @@ const AuthenticateNewAsset = (_: Props) => {
       <ResponsiveContainer>
         <AuthForm market={market} />
       </ResponsiveContainer>
+      <ControlChain />
       <Footer />
     </div>
   )

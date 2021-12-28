@@ -11,6 +11,7 @@ import { Container } from 'src/components/atoms/Container'
 import styled from 'styled-components'
 import { useDetectChain, useProvider } from 'src/fixtures/wallet/hooks'
 import Text from 'antd/lib/typography/Text'
+import { ControlChain } from 'src/components/organisms/ControlChain'
 
 type Props = {}
 
@@ -21,7 +22,7 @@ const StyledHeadline = styled(Headline)`
 const DevProtocolStats = (_: Props) => {
   const { ethersProvider } = useProvider()
   const { name: chain } = useDetectChain(ethersProvider)
-  const isL1 = chain === 'main'
+  const isL1 = chain === 'ethereum'
 
   return isL1 ? (
     <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
@@ -38,6 +39,7 @@ const DevProtocolStats = (_: Props) => {
       <Container>
         <DevChart />
       </Container>
+      <ControlChain />
       <Footer />
     </div>
   ) : (

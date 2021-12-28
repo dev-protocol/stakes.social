@@ -7,6 +7,7 @@ import { Headline } from 'src/components/atoms/Headline'
 import { H2 } from 'src/components/atoms/Typography'
 import styled from 'styled-components'
 import { getPath } from 'src/fixtures/utility/route'
+import { ControlChain } from 'src/components/organisms/ControlChain'
 
 type Props = {}
 
@@ -33,6 +34,7 @@ const InvitationRequest = (_: Props) => {
       <WrapContainer>
         <InvitationRequestForm market={market} />
       </WrapContainer>
+      <ControlChain />
       <Footer />
     </div>
   )

@@ -11,7 +11,7 @@ exports[`AssetList Snapshot 1`] = `
       >
         <a
           class="sc-jrQzAO sc-iqseJM fgcmjD irPoXs"
-          href="/1"
+          href="/ethereum/1"
         >
           <div
             class="sc-gKclnd dNSlal"
@@ -103,7 +103,7 @@ exports[`AssetList Snapshot 1`] = `
       >
         <a
           class="sc-jrQzAO sc-iqseJM fgcmjD irPoXs"
-          href="/2"
+          href="/ethereum/2"
         >
           <div
             class="sc-gKclnd dNSlal"
@@ -195,7 +195,7 @@ exports[`AssetList Snapshot 1`] = `
       >
         <a
           class="sc-jrQzAO sc-iqseJM fgcmjD irPoXs"
-          href="/3"
+          href="/ethereum/3"
         >
           <div
             class="sc-gKclnd dNSlal"

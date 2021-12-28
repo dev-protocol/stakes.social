@@ -42,6 +42,8 @@ import { CoverImageOrGradient } from 'src/components/atoms/CoverImageOrGradient'
 import { H3 } from 'src/components/atoms/Typography'
 import { Twitter, Github } from 'src/components/atoms/SocialButtons'
 import { whenDefined } from 'src/fixtures/utility'
+import { LinkWithNetwork } from 'src/components/atoms/LinkWithNetwork'
+import { ControlChain } from 'src/components/organisms/ControlChain'
 
 type Props = {}
 
@@ -398,12 +400,12 @@ const PropertyAddressDetail = (_: Props) => {
                 <AssetListItem key={index}>{asset}</AssetListItem>
               ))}
               {propertyInformation?.author?.address === loggedInWallet && (
-                <Link href={'/create/[property]'} as={`/create/${propertyAddress}`}>
+                <LinkWithNetwork href={'/create/[property]'} as={`/create/${propertyAddress}`}>
                   <AddAsset>
                     <PlusOutlined />
                     <span>Add asset</span>
                   </AddAsset>
-                </Link>
+                </LinkWithNetwork>
               )}
             </AssetList>
           </AssetsSection>
@@ -414,6 +416,7 @@ const PropertyAddressDetail = (_: Props) => {
           </div>
         </Main>
       </Wrap>
+      <ControlChain />
 
       <Footer />
     </>

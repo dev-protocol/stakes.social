@@ -4,7 +4,8 @@ import { Header } from 'src/components/organisms/Header'
 import { Headline } from 'src/components/atoms/Headline'
 import { H2 } from 'src/components/atoms/Typography'
 import styled from 'styled-components'
-import Link from 'next/link'
+import { LinkWithNetwork } from 'src/components/atoms/LinkWithNetwork'
+import { ControlChain } from 'src/components/organisms/ControlChain'
 
 type Props = {}
 
@@ -53,19 +54,20 @@ export const CreateOrAuthenticateProperty = (_: Props) => {
           flexGrow: 1
         }}
       >
-        <Link href={'/invite/github'} passHref>
+        <LinkWithNetwork href={'/invite/github'} passHref>
           <SubmitApplicationContainer>
             <h3>Submit an application</h3>
             <Span>Provide Sustainable funding to your</Span>
             <Span>OSS project with Dev Protocol.</Span>
           </SubmitApplicationContainer>
-        </Link>
+        </LinkWithNetwork>
 
         <Span style={{ margin: '1em 0', alignSelf: 'center', color: '#9F9F9F' }}>Or</Span>
-        <Link href={'/create/associate/0x34A7AdC94C4D41C3e3469F98033B372cB2fAf318'} passHref>
+        <LinkWithNetwork href={'/create/associate/0x34A7AdC94C4D41C3e3469F98033B372cB2fAf318'} passHref>
           <A>Authenticate an existing project</A>
-        </Link>
+        </LinkWithNetwork>
       </div>
+      <ControlChain />
       <Footer />
     </div>
   )

@@ -35,7 +35,7 @@ const newClient = async (
   if (fromCache) {
     return [...fromCache, fromCache[0] || fromCache[1]]
   }
-  const isL2 = await getNetwork(prov).then(name => name !== 'main' && name !== 'ropsten')
+  const isL2 = await getNetwork(prov).then(name => name !== 'ethereum' && name !== 'ropsten')
   const contracts = !isL2 ? contractFactory(prov) : undefined
   const l2Contracts = isL2 ? l2ContractFactory(prov) : undefined
   cacheForContractFactory.set(prov, [contracts, l2Contracts])
@@ -69,7 +69,7 @@ const getL2Registry = async (prov: providers.BaseProvider) => {
 }
 const getSTokensAddress = async (prov: providers.BaseProvider) => {
   const net = await getNetwork(prov)
-  return net === 'main'
+  return net === 'ethereum'
     ? addresses.eth.main.sTokens
     : net === 'ropsten'
     ? addresses.eth.ropsten.sTokens
@@ -296,6 +296,7 @@ export const totalSupply = async (prov: providers.BaseProvider) => {
   const [, , client] = await newClient(prov)
   const getContractAddress = createGetContractAddress(prov)
   if (client) {
+    console.log(await getContractAddress(client, 'token'))
     return client.dev(await getContractAddress(client, 'token')).totalSupply()
   }
   return undefined

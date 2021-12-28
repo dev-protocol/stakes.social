@@ -1,6 +1,5 @@
 // @L2 optimized
 import React, { useEffect, useState } from 'react'
-import Link from 'next/link'
 import styled from 'styled-components'
 import { Popover, Table } from 'antd'
 import { format } from 'date-fns'
@@ -20,6 +19,7 @@ import { whenDefined, whenDefinedAll } from 'src/fixtures/utility'
 import { ButtonWithGradient } from 'src/components/atoms/ButtonWithGradient'
 import { useImageDataUriFetcher } from 'src/fixtures/ipfs/hooks'
 import { STokensTableImage } from 'src/components/atoms/STokensTableImage'
+import { LinkWithNetwork } from 'src/components/atoms/LinkWithNetwork'
 
 const Actions = styled.div`
   display: flex;
@@ -140,9 +140,9 @@ const tableColumns = [
     render: ({ sTokenId }: { sTokenId: number }) => (
       <Actions>
         <OfferPopover />
-        <Link href={`/positions/${sTokenId}`} passHref>
+        <LinkWithNetwork href={`/positions/${sTokenId}`} passHref>
           <ButtonWithGradient>Positions</ButtonWithGradient>
-        </Link>
+        </LinkWithNetwork>
       </Actions>
     )
   }
