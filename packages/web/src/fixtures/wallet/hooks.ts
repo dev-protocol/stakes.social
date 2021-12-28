@@ -10,7 +10,7 @@ import { useRouter } from 'next/router'
 const providerUrl = (chain: ChainName) =>
   chain
     ? `${
-        chain === 'main'
+        chain === 'ethereum'
           ? WEB3_PROVIDER_ENDPOINT_HOSTS.MAIN
           : chain === 'ropsten'
           ? WEB3_PROVIDER_ENDPOINT_HOSTS.ROPSTEN
@@ -18,14 +18,14 @@ const providerUrl = (chain: ChainName) =>
           ? WEB3_PROVIDER_ENDPOINT_HOSTS.ARB_ONE
           : chain === 'arbitrum-rinkeby'
           ? WEB3_PROVIDER_ENDPOINT_HOSTS.ARB_RINKEBY
-          : undefined
+          : WEB3_PROVIDER_ENDPOINT_HOSTS.MAIN
       }/${WEB3_PROVIDER_ENDPOINT_KEY}`
     : undefined
 const nonConnectedWeb3 = (chain: ChainName) => whenDefined(providerUrl(chain), url => new Web3(url))
 const nonConnectedEthersProvider = (chain: ChainName) =>
   whenDefined(providerUrl(chain), url => new providers.JsonRpcProvider(url))
-const nonConnectedWeb3L1 = new Web3(providerUrl('main')!)
-const nonConnectedEthersL1Provider = new providers.JsonRpcProvider(providerUrl('main'))
+const nonConnectedWeb3L1 = new Web3(providerUrl('ethereum')!)
+const nonConnectedEthersL1Provider = new providers.JsonRpcProvider(providerUrl('ethereum'))
 
 export const useConnectWallet = () => {
   const { web3Modal, setProviders } = useContext(WalletContext)
@@ -55,12 +55,8 @@ export const useProvider = () => {
   const router = useRouter()
   const nameFromQuery = router?.query?.network as ChainName
   const { web3, ethersProvider } = useContext(WalletContext)
-  const { name } = useDetectChain(ethersProvider)
-  const ncWeb3 = useMemo(() => nonConnectedWeb3(name ?? nameFromQuery ?? 'main'), [name, nameFromQuery])
-  const ncEthersProvider = useMemo(
-    () => nonConnectedEthersProvider(name ?? nameFromQuery ?? 'main'),
-    [name, nameFromQuery]
-  )
+  const ncWeb3 = useMemo(() => nonConnectedWeb3(nameFromQuery ?? 'ethereum'), [nameFromQuery])
+  const ncEthersProvider = useMemo(() => nonConnectedEthersProvider(nameFromQuery ?? 'ethereum'), [nameFromQuery])
   const [accountAddress, setAccountAddress] = useState<undefined | string>(undefined)
   useEffect(() => {
     getAccountAddress(web3).then(x => setAccountAddress(x))
@@ -87,6 +83,6 @@ export const useDetectChain = (ethersProvider?: providers.BaseProvider) => {
 export const useIsL1 = () => {
   const { ethersProvider } = useProvider()
   const { name: chain } = useDetectChain(ethersProvider)
-  const isL1 = useMemo(() => chain === 'main', [chain])
+  const isL1 = useMemo(() => chain === 'ethereum', [chain])
   return { isL1 }
 }

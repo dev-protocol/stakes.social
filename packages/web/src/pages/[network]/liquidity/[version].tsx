@@ -19,6 +19,7 @@ import {
 import { useRouter } from 'next/router'
 // import Error from 'next/error'
 import { getPath } from 'src/fixtures/utility/route'
+import { ControlChain } from 'src/components/organisms/ControlChain'
 
 const NarrowContainer = styled(Container)`
   max-width: 640px;
@@ -66,6 +67,7 @@ const LiquidityMining = () => {
         </Margin>
         <Nav contents={contents} onChange={setTab}></Nav>
       </NarrowContainer>
+      <ControlChain />
       <Footer />
     </>
   )

@@ -1,3 +1,5 @@
+import { ChainName } from './utility'
+
 export const WEB3_PROVIDER_ENDPOINT_HOSTS = {
   MAIN: 'https://eth-mainnet.alchemyapi.io/v2',
   ROPSTEN: 'https://eth-ropsten.alchemyapi.io/v2',
@@ -10,3 +12,5 @@ export const WEB3_PROVIDER_ENDPOINT_KEY = process.env.IS_PREVIEW
   : process.env.NODE_ENV === 'production'
   ? '0EvZQA7WvDYf40cz476eEIh348_PcZJu' // For Production build
   : 'p56_qS-3ABDzHGg9kQ-kyqqbQVNJmzUB' // For Local Development
+
+export const SUPPORTED_CHAINS: ChainName[] = ['ethereum', 'ropsten', 'arbitrum-one', 'arbitrum-rinkeby']

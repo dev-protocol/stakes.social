@@ -1,6 +1,5 @@
 import React, { useEffect, useMemo, useState } from 'react'
 import { useRouter } from 'next/router'
-import Link from 'next/link'
 import { format } from 'date-fns'
 import styled from 'styled-components'
 import { LeftOutlined, InboxOutlined } from '@ant-design/icons'
@@ -23,6 +22,8 @@ import { useGetAccount } from 'src/fixtures/dev-for-apps/hooks'
 import { useImageDataUri, useIPFSImageUploader } from 'src/fixtures/ipfs/hooks'
 import { STokensTableImage } from 'src/components/atoms/STokensTableImage'
 import { always } from 'ramda'
+import { LinkWithNetwork } from 'src/components/atoms/LinkWithNetwork'
+import { ControlChain } from 'src/components/organisms/ControlChain'
 
 const { Dragger } = Upload
 
@@ -224,12 +225,12 @@ const STokenPositionDetail = (_: Props) => {
       <Wrap>
         <NextContainer>
           {propertyAddress ? (
-            <Link href={`/${propertyAddress}`} passHref>
+            <LinkWithNetwork href={`/${propertyAddress}`} passHref>
               <a>
                 <LeftOutlined />
                 Project
               </a>
-            </Link>
+            </LinkWithNetwork>
           ) : (
             <>
               <LeftOutlined />
@@ -263,6 +264,7 @@ const STokenPositionDetail = (_: Props) => {
           )}
         </NextContainer>
       </Wrap>
+      <ControlChain />
 
       <Footer />
     </>

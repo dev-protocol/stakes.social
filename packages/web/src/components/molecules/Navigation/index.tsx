@@ -1,10 +1,10 @@
 import React, { useState, useCallback } from 'react'
 import { MenuInfo } from 'rc-menu/lib/interface'
 import { useRouter } from 'next/router'
-import Link from 'next/link'
 import Hamburger from 'src/components/atoms/Svgs/tsx/Hamburger'
 import { NavMenu, NavMenuItem } from './../../atoms/Navigation/index'
 import { useEffectAsync } from 'src/fixtures/utility'
+import { LinkWithNetwork } from 'src/components/atoms/LinkWithNetwork'
 
 interface NavigationProps {
   isMenuOpen: boolean
@@ -15,32 +15,38 @@ export const Navigations = [
   {
     key: 'pools',
     label: 'Pools',
-    pathname: '/'
+    pathname: '/',
+    rewrite: true
   },
   {
     key: 'liquidity',
     label: 'Liquidity',
-    pathname: '/liquidity/v2'
+    pathname: '/liquidity/v2',
+    rewrite: true
   },
   {
     key: 'create',
     label: 'Create',
-    pathname: '/create'
+    pathname: '/create',
+    rewrite: true
   },
   {
     key: 'dashboard',
     label: 'Dashboard',
-    pathname: '/stats'
+    pathname: '/stats',
+    rewrite: false
   },
   {
     key: 'portfolio',
     label: 'Portfolio',
-    pathname: '/profile'
+    pathname: '/profile',
+    rewrite: false
   },
   {
     key: 'grants',
     label: 'Grants',
-    pathname: 'https://devprotocol.notion.site/Welcome-to-DEV-DAPP-STARTER-GRANTS-5cb95252f18540258111581ea54d8808'
+    pathname: 'https://devprotocol.notion.site/Welcome-to-DEV-DAPP-STARTER-GRANTS-5cb95252f18540258111581ea54d8808',
+    rewrite: false
   }
 ]
 
@@ -83,9 +89,9 @@ export const Navigation = ({ handleMenuOpen }: NavigationProps) => {
         >
           {Navigations.map(nav => (
             <NavMenuItem key={nav.key} style={{ margin: '0' }}>
-              <Link href={nav.pathname}>
+              <LinkWithNetwork href={nav.pathname} rewrite={nav.rewrite}>
                 <a style={{ display: 'block', width: 'auto', fontSize: '0.8em' }}>{nav.label}</a>
-              </Link>
+              </LinkWithNetwork>
             </NavMenuItem>
           ))}
         </NavMenu>

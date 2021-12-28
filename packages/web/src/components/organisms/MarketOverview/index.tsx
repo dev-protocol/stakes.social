@@ -1,8 +1,8 @@
 import React from 'react'
 import { Row, Col, List } from 'antd'
-import Link from 'next/link'
 import { useGetMarketInformation, useGetMarkets } from 'src/fixtures/github/hooks'
 import styled from 'styled-components'
+import { LinkWithNetwork } from 'src/components/atoms/LinkWithNetwork'
 
 const A = styled.a`
   color: #2f80ed;
@@ -56,7 +56,7 @@ export const MarketsOverview = () => {
     <MarketsContainer>
       <MarketSection>
         <MarketTypeHeader>Get started</MarketTypeHeader>
-        <Link href={'/invite/github'} as={`/invite/github`} passHref>
+        <LinkWithNetwork href={'/invite/github'} as={`/invite/github`} passHref>
           <MarketEntryContainer>
             <img
               src="https://res.cloudinary.com/haas-storage/image/upload/v1600172007/25231_hng64u.png"
@@ -70,7 +70,7 @@ export const MarketsOverview = () => {
               </div>
             </MarketEntryInfo>
           </MarketEntryContainer>
-        </Link>
+        </LinkWithNetwork>
       </MarketSection>
       <MarketSection>
         <MarketTypeHeader>Coming soon</MarketTypeHeader>
@@ -98,9 +98,9 @@ const ContentsForAuthPage = ({ marketAddress }: { marketAddress: string }) => {
     <List.Item>
       <List.Item.Meta
         title={
-          <Link href={'/create/[market]'} as={`/create/${marketAddress}`} passHref>
+          <LinkWithNetwork href={'/create/[market]'} as={`/create/${marketAddress}`} passHref>
             <A>{data.name}</A>
-          </Link>
+          </LinkWithNetwork>
         }
         description={data.description}
       ></List.Item.Meta>
@@ -121,13 +121,13 @@ const ContentsForAssociatePage = ({
     <List.Item>
       <List.Item.Meta
         title={
-          <Link
+          <LinkWithNetwork
             href={'/create/associate/[property]/[market]'}
             as={`/create/associate/${propertyAddress}/${marketAddress}`}
             passHref
           >
             <A>{data.name}</A>
-          </Link>
+          </LinkWithNetwork>
         }
         description={data.description}
       ></List.Item.Meta>

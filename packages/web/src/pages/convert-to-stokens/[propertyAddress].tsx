@@ -3,7 +3,7 @@ import React from 'react'
 import styled from 'styled-components'
 import { ConvertToStokens } from 'src/components/organisms/ConvertToStokens'
 import { Header } from 'src/components/organisms/Header'
-import { Footer } from '../../../components/organisms/Footer'
+import { Footer } from '../../components/organisms/Footer'
 
 const Wrap = styled.div`
   margin: '12px 0';

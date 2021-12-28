@@ -11,6 +11,7 @@ import { Container } from 'src/components/atoms/Container'
 import styled from 'styled-components'
 import { useDetectChain, useProvider } from 'src/fixtures/wallet/hooks'
 import Text from 'antd/lib/typography/Text'
+import { ControlChain } from 'src/components/organisms/ControlChain'
 
 type Props = {}
 
@@ -38,6 +39,7 @@ const DevProtocolStats = (_: Props) => {
       <Container>
         <DevChart />
       </Container>
+      <ControlChain />
       <Footer />
     </div>
   ) : (

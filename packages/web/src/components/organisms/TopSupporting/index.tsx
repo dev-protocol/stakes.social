@@ -2,12 +2,12 @@
 import React from 'react'
 import styled from 'styled-components'
 import { useListTopSupportingAccountQuery, useGetPropertyAuthenticationQuery } from '@dev/graphql'
-import Link from 'next/link'
 import { useGetProperty } from 'src/fixtures/dev-for-apps/hooks'
 import { AvatarProperty } from 'src/components/molecules/AvatarProperty'
 import { Spin } from 'antd'
 import { useIsL1 } from 'src/fixtures/wallet/hooks'
 import Text from 'antd/lib/typography/Text'
+import { LinkWithNetwork } from 'src/components/atoms/LinkWithNetwork'
 
 type Props = {
   accountAddress: string
@@ -56,13 +56,13 @@ const Support = ({ propertyAddress, value }: { propertyAddress: string; value: n
   const propertyTitle = data?.property_authentication?.[0]?.authentication_id
 
   return (
-    <Link href={`/${propertyAddress}`} passHref>
+    <LinkWithNetwork href={`/${propertyAddress}`} passHref>
       <SupportSection>
         <AvatarProperty size={'100'} propertyAddress={propertyAddress} />
         <AccountAddress>{propertyData?.name || propertyTitle || propertyAddress}</AccountAddress>
         <span>{`${(value / Math.pow(10, 18)).toFixed(0)}`}</span>
       </SupportSection>
-    </Link>
+    </LinkWithNetwork>
   )
 }
 

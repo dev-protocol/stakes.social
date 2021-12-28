@@ -14,6 +14,7 @@ import { useCreateAndAuthenticate } from 'src/fixtures/dev-kit/hooks'
 import { usePostSignGitHubMarketAsset } from 'src/fixtures/khaos/hooks'
 import SuccessLogo from 'src/components/atoms/Success'
 import { ButtonWithGradient } from 'src/components/atoms/ButtonWithGradient/index'
+import { ControlChain } from 'src/components/organisms/ControlChain'
 
 type Props = {}
 
@@ -352,6 +353,7 @@ const AuthenticateNewAsset = (_: Props) => {
           </MetricsContainer>
         )}
       </ResponsiveContainer>
+      <ControlChain />
       <Footer />
     </div>
   )

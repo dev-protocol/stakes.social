@@ -11,7 +11,7 @@ export const getContractAddress = async <
 >(
   client: C,
   contract: K,
-  net: ChainName = 'main'
+  net: ChainName = 'ethereum'
 ): Promise<string> =>
   (async fromCache => {
     if (typeof fromCache === 'string') {
@@ -21,7 +21,7 @@ export const getContractAddress = async <
       cache.set(net, new Map())
     }
     const registryOrAddress =
-      net === 'main'
+      net === 'ethereum'
         ? await (client as DevkitContract).registry(addresses.eth.main.registry)[contract]()
         : net === 'ropsten'
         ? await (client as DevkitContract).registry(addresses.eth.ropsten.registry)[contract]()

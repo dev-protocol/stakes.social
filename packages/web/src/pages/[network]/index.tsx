@@ -2,7 +2,7 @@ import React, { useMemo } from 'react'
 import { PropertyCardList, PropertyCardListL2 } from 'src/components/organisms/PropertyCardList'
 import { Footer } from 'src/components/organisms/Footer'
 import { useRouter } from 'next/router'
-
+import { ControlChain } from 'src/components/organisms/ControlChain'
 import { useAPY, useAnnualSupplyGrowthRatio } from 'src/fixtures/dev-kit/hooks'
 import { SupplySummary } from 'src/components/molecules/SupplySummaly'
 import { Header } from 'src/components/organisms/Header'
@@ -69,6 +69,7 @@ const Index = (_: Props) => {
           <PropertyCardList currentPage={page} searchWord={word} sortBy={sortBy} featureTag={featureTag} />
         )}
       </Container>
+      <ControlChain />
       <Footer />
     </div>
   )
