@@ -52,9 +52,9 @@ describe('get-contract-address.ts', () => {
           cacheTest
         }))
       }
-      await getContractAddress(devkit as unknown as DevkitContract, 'cacheTest' as any, 'main') // First
-      await getContractAddress(devkit as unknown as DevkitContract, 'cacheTest' as any, 'main') // Second
-      const result = await getContractAddress(devkit as unknown as DevkitContract, 'cacheTest' as any, 'main') // Third
+      await getContractAddress(devkit as unknown as DevkitContract, 'cacheTest' as any, 'ethereum') // First
+      await getContractAddress(devkit as unknown as DevkitContract, 'cacheTest' as any, 'ethereum') // Second
+      const result = await getContractAddress(devkit as unknown as DevkitContract, 'cacheTest' as any, 'ethereum') // Third
       expect(result).toBe('ADDRESS')
       expect(cacheTest.mock.calls.length).toBe(1)
     })

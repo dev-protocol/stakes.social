@@ -90,7 +90,7 @@ describe('wallet utility', () => {
       const mock = { getNetwork: () => Promise.resolve({ chainId: 1 }) } as unknown as providers.BaseProvider
       const result = await detectChain(mock)
       expect(result.chainId).toBe(1)
-      expect(result.name).toBe('main')
+      expect(result.name).toBe('ethereum')
     })
     test('Detect ropsten', async () => {
       const mock = { getNetwork: () => Promise.resolve({ chainId: 3 }) } as unknown as providers.BaseProvider
