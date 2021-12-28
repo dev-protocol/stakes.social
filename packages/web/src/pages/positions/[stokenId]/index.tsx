@@ -22,6 +22,7 @@ import { useProvider } from 'src/fixtures/wallet/hooks'
 import { useGetAccount } from 'src/fixtures/dev-for-apps/hooks'
 import { useImageDataUri, useIPFSImageUploader } from 'src/fixtures/ipfs/hooks'
 import { STokensTableImage } from 'src/components/atoms/STokensTableImage'
+import { always } from 'ramda'
 
 const { Dragger } = Upload
 
@@ -40,6 +41,13 @@ const NextContainer = styled(Container)`
   h3 {
     margin: 0;
   }
+`
+
+const Preview = styled.img`
+  max-width: 100%;
+  padding: 1rem;
+  background-color: white;
+  margin: 1rem 0;
 `
 
 const tableColumns = [
@@ -147,10 +155,20 @@ const STokenPosition = ({ sTokenId }: { sTokenId: number }) => {
 
 const STokenPositionDetail = (_: Props) => {
   const [fileObj, setFileObj] = useState<File | undefined>(undefined)
+  const [previewDataUri, setPreviewDataUri] = useState<string | undefined>(undefined)
   const { stokenId: sTokenIdString } = useRouter().query as { stokenId: string }
   const sTokenId = parseInt(sTokenIdString)
   const { positions } = useGetSTokenPositions(sTokenId)
   const { tokenURI, mutate: mutateSTokenTokenURI } = useGetSTokenTokenURI(sTokenId)
+
+  useEffect(() => {
+    if (!fileObj) return
+    const reader = new FileReader()
+    reader.addEventListener('load', () => {
+      setPreviewDataUri(reader.result as string)
+    })
+    reader.readAsDataURL(fileObj)
+  }, [fileObj])
 
   const propertyAddress = useMemo(() => {
     return positions?.property
@@ -167,16 +185,10 @@ const STokenPositionDetail = (_: Props) => {
     name: 'file',
     multiple: false,
     maxCount: 1,
+    showUploadList: false,
+    customRequest: always(undefined),
     onChange(info: any) {
-      const { status } = info.file
-      if (status !== 'uploading') {
-        console.log(info.file, info.fileList)
-      }
-      if (status === 'done') {
-        setFileObj(info.file.originFileObj)
-      } else if (status === 'error') {
-        message.error(`${info.file.name} file upload failed.`)
-      }
+      setFileObj(info.file.originFileObj)
     }
   }
 
@@ -200,6 +212,8 @@ const STokenPositionDetail = (_: Props) => {
         message.success('Success to set sToken Image')
         // Purge the old cache and refetch
         mutateSTokenTokenURI(tokenURI)
+        setPreviewDataUri(undefined)
+        setFileObj(undefined)
       })
       .catch(() => message.error('Fail to set sToken Image'))
   }
@@ -237,6 +251,7 @@ const STokenPositionDetail = (_: Props) => {
                     Support for a single or bulk upload. Strictly prohibit from uploading company data or other band
                     files
                   </p>
+                  {previewDataUri && <Preview src={previewDataUri} alt="preview" />}
                 </Dragger>
               </div>
               <div style={{ textAlign: 'center', margin: '1rem 0' }}>
