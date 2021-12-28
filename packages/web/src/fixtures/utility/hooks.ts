@@ -15,6 +15,6 @@ const DEFAULT = 'ethereum'
 export const useLinkWithNetwork = () => {
   const router = useRouter()
   const chainFromRouter = router?.query?.network
-  const withNetwork = (path?: string) => `${chainFromRouter ?? DEFAULT}${path}`
+  const withNetwork = (path?: string) => `/${chainFromRouter ?? DEFAULT}${path}`
   return { withNetwork }
 }
