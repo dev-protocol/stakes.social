@@ -20,7 +20,7 @@ export const ControlChain = () => {
   const { name } = useDetectChain(ethersProvider)
   const isRoot = useMemo(() => router?.pathname === '/', [router])
   const isSupportedChain = useMemo(() => SUPPORTED_CHAINS.some(x => x === chainFromRouter), [chainFromRouter])
-  const isAlreadyConnectToSupportedChain = useMemo(() => SUPPORTED_CHAINS.some(x => x === name), [name])
+  // const isAlreadyConnectToSupportedChain = useMemo(() => SUPPORTED_CHAINS.some(x => x === name), [name])
   const expectedChainName = useMemo(
     () =>
       chainFromRouter === 'arbitrum-one'
@@ -34,13 +34,17 @@ export const ControlChain = () => {
         : 'Ethereum',
     [chainFromRouter]
   )
-  // console.log({ router, isSupportedChain, isAlreadyConnectToSupportedChain, chainFromRouter })
+  const isAlreadyConnectToExpectedChain = useMemo(
+    () => (chainFromRouter ? chainFromRouter === name : name === 'ethereum'),
+    [name, chainFromRouter]
+  )
+  console.log({ router, name })
 
   useEffect(() => {
-    if (name && !isAlreadyConnectToSupportedChain && isSupportedChain) {
+    if (isAlreadyConnectToExpectedChain) {
       message.error(`Your wallet is not connected to ${expectedChainName}.`, 0)
     }
-  }, [isRoot, name, isAlreadyConnectToSupportedChain, isSupportedChain, expectedChainName])
+  }, [isAlreadyConnectToExpectedChain, isSupportedChain, expectedChainName])
 
   return !isRoot && !isSupportedChain ? (
     <Modal visible={true} closable={false} title="Choose network" footer={null}>

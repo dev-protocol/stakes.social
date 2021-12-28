@@ -87,7 +87,7 @@ const EditButton = styled(Button)`
 const Portfolio = () => {
   const { ethersProvider, accountAddress } = useProvider()
   const { name: chain } = useDetectChain(ethersProvider)
-  const isL1 = chain === 'main'
+  const isL1 = chain === 'ethereum'
 
   const { data } = useGetAccount(accountAddress)
   return (

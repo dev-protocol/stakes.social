@@ -22,7 +22,7 @@ const StyledHeadline = styled(Headline)`
 const DevProtocolStats = (_: Props) => {
   const { ethersProvider } = useProvider()
   const { name: chain } = useDetectChain(ethersProvider)
-  const isL1 = chain === 'main'
+  const isL1 = chain === 'ethereum'
 
   return isL1 ? (
     <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
