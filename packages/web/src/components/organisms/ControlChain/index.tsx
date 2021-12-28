@@ -41,7 +41,7 @@ export const ControlChain = () => {
   console.log({ router, name })
 
   useEffect(() => {
-    if (isAlreadyConnectToExpectedChain) {
+    if (!isAlreadyConnectToExpectedChain) {
       message.error(`Your wallet is not connected to ${expectedChainName}.`, 0)
     }
   }, [isAlreadyConnectToExpectedChain, isSupportedChain, expectedChainName])
