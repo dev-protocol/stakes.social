@@ -1,11 +1,11 @@
-import React, { useMemo } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import { useDetectChain, useProvider } from 'src/fixtures/wallet/hooks'
-import { NextRouter, useRouter } from 'next/router'
-import { SUPPORTED_CHAINS } from 'src/fixtures/wallet/constants'
+import { NextRouter } from 'next/router'
 import { Modal } from 'antd'
 import Link from 'next/link'
 import { ChainName } from 'src/fixtures/wallet/utility'
 import styled from 'styled-components'
+import { useNetworkInRouter } from 'src/fixtures/utility'
 
 export const NETWORK_DEPENDENTS = [/^\/0x/, /^\/create/, /^\/invite/, /^\/liquidity/, /^\/positions/, /^\/stats/]
 
@@ -44,17 +44,17 @@ const hyphenToCapitalize = (str: string) =>
     .join(' ')
 
 export const ControlChain = () => {
-  const router = useRouter()
-  const chainFromRouter = router?.query?.network
+  const { router, requestedChain } = useNetworkInRouter()
   const { ethersProvider } = useProvider()
   const { name } = useDetectChain(ethersProvider)
-  const isRoot = useMemo(() => router?.pathname === '/', [router])
-  const requiredSupportedChain = useMemo(
-    () => SUPPORTED_CHAINS.find(x => x === chainFromRouter) ?? (isRoot ? 'ethereum' : undefined),
-    [chainFromRouter, isRoot]
-  )
   const shouldChooseNetwork = useMemo(() => NETWORK_DEPENDENTS.some(test => test.test(router.asPath)), [router.asPath])
-  const isAlreadyConnectedToExpectedChain = requiredSupportedChain === name
+  const isAlreadyConnectedToExpectedChain = requestedChain === name
+  const [openModal, setOpenModal] = useState<boolean>()
+
+  useEffect(
+    () => setOpenModal(name !== undefined && requestedChain !== undefined && !isAlreadyConnectedToExpectedChain),
+    [name, requestedChain, isAlreadyConnectedToExpectedChain]
+  )
 
   return shouldChooseNetwork ? (
     <Modal visible={true} closable={false} title="Choose network" footer={null} zIndex={9999}>
@@ -67,14 +67,15 @@ export const ControlChain = () => {
         </Link>
       </Content>
     </Modal>
-  ) : name && requiredSupportedChain !== undefined && !isAlreadyConnectedToExpectedChain ? (
+  ) : name ? (
     <Modal
-      visible={true}
+      visible={openModal}
       title="Choose network"
       okText="Switch"
       cancelText="No"
       okButtonProps={{ type: 'primary', href: destination(router, name) }}
       zIndex={9999}
+      onCancel={() => setOpenModal(false)}
     >
       {`Your wallet is connected to ${hyphenToCapitalize(name)}. Do you want to switch the contents?`}
     </Modal>

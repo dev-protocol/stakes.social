@@ -5,7 +5,7 @@ import WalletContext from 'src/context/walletContext'
 import { WEB3_PROVIDER_ENDPOINT_KEY, WEB3_PROVIDER_ENDPOINT_HOSTS } from 'src/fixtures/wallet/constants'
 import { providers } from 'ethers'
 import { whenDefined } from '@devprotocol/util-ts'
-import { useRouter } from 'next/router'
+import { useNetworkInRouter } from '../utility'
 
 const providerUrl = (chain: ChainName) =>
   chain
@@ -52,11 +52,10 @@ export const useConnectWallet = () => {
 }
 
 export const useProvider = () => {
-  const router = useRouter()
-  const nameFromQuery = router?.query?.network as ChainName
+  const { requestedChain } = useNetworkInRouter()
   const { web3, ethersProvider } = useContext(WalletContext)
-  const ncWeb3 = useMemo(() => nonConnectedWeb3(nameFromQuery ?? 'ethereum'), [nameFromQuery])
-  const ncEthersProvider = useMemo(() => nonConnectedEthersProvider(nameFromQuery ?? 'ethereum'), [nameFromQuery])
+  const ncWeb3 = useMemo(() => nonConnectedWeb3(requestedChain ?? 'ethereum'), [requestedChain])
+  const ncEthersProvider = useMemo(() => nonConnectedEthersProvider(requestedChain ?? 'ethereum'), [requestedChain])
   const [accountAddress, setAccountAddress] = useState<undefined | string>(undefined)
   useEffect(() => {
     getAccountAddress(web3).then(x => setAccountAddress(x))
