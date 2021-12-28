@@ -20,8 +20,8 @@ const StyledSupplySummary = styled(SupplySummary)`
 
 const Index = (_: Props) => {
   const router = useRouter()
-  const { ethersProvider, nonConnectedEthersProvider } = useProvider()
-  const { name } = useDetectChain(ethersProvider || nonConnectedEthersProvider)
+  const { ethersProvider } = useProvider()
+  const { name } = useDetectChain(ethersProvider)
   const { apy, creators } = useAPY()
   const { annualSupplyGrowthRatio } = useAnnualSupplyGrowthRatio()
   const page = useMemo(() => {
@@ -61,9 +61,7 @@ const Index = (_: Props) => {
       <Header />
       <Container>
         <StyledSupplySummary apy={apy} creators={creators} annualSupplyGrowthRatio={annualSupplyGrowthRatio} />
-        {isL2 === undefined ? (
-          <></>
-        ) : isL2 ? (
+        {isL2 ? (
           <PropertyCardListL2 />
         ) : (
           <PropertyCardList currentPage={page} searchWord={word} sortBy={sortBy} featureTag={featureTag} />
