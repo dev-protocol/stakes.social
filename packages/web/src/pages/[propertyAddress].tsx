@@ -11,7 +11,7 @@ import { FormInstance } from 'antd/lib/form'
 import { PossessionOutline } from 'src/components/organisms/PossessionOutline'
 import { PropertyHeader } from 'src/components/organisms/PropertyHeader'
 import { Footer } from 'src/components/organisms/Footer'
-import { ResponsiveModal } from 'src/components/atoms/ResponsiveModal'
+import { ModalStates, ResponsiveModal } from 'src/components/atoms/ResponsiveModal'
 import { ButtonWithGradient } from 'src/components/atoms/ButtonWithGradient'
 import { Container } from 'src/components/atoms/Container'
 import { Header } from 'src/components/organisms/Header'
@@ -44,12 +44,6 @@ import { Twitter, Github } from 'src/components/atoms/SocialButtons'
 import { whenDefined } from 'src/fixtures/utility'
 
 type Props = {}
-
-interface ModalStates {
-  visible: boolean
-  title?: string
-  contents?: React.ReactNode
-}
 
 const apiDataToUploadFile = ({ hash: uid, url, name, size, mime: type }: Image): UploadFile => ({
   status: 'done',

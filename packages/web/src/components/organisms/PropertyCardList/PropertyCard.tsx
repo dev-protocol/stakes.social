@@ -17,7 +17,7 @@ import { Avatar } from 'src/components/molecules/Avatar'
 import BigNumber from 'bignumber.js'
 import { TransactModalContents } from 'src/components/molecules/TransactModalContents'
 import { PropertyTreasuryIcon } from 'src/components/molecules/PropertyTreasuryIcon'
-import { ResponsiveModal } from 'src/components/atoms/ResponsiveModal'
+import { ModalStates, ResponsiveModal } from 'src/components/atoms/ResponsiveModal'
 import { CoverImageOrGradient } from 'src/components/atoms/CoverImageOrGradient'
 import { Grid } from 'src/components/atoms/Grid'
 
@@ -155,12 +155,6 @@ const FlewColumn = styled.div`
     font-size: 0.9em;
   }
 `
-
-interface ModalStates {
-  visible: boolean
-  title?: string
-  contents?: React.ReactNode
-}
 
 const formatter = new Intl.NumberFormat('en-US')
 
