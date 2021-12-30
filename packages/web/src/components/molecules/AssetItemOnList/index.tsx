@@ -1,30 +1,32 @@
 import { Button, Statistic } from 'antd'
-import Link from 'next/link'
-import React from 'react'
+import React, { useMemo } from 'react'
 import { ButtonWithGradient } from 'src/components/atoms/ButtonWithGradient'
 import { H3 } from 'src/components/atoms/Typography'
 import { useGetProperty } from 'src/fixtures/dev-for-apps/hooks'
 import {
-  useBalanceOfProperty,
   useGetMyStakingAmount,
   usePropertyName,
   useGetMyStakingRewardAmount,
-  useGetMyHolderAmount
+  useGetMyHolderAmount,
+  useGetSTokenPositions,
+  useGetStokenRewards
 } from 'src/fixtures/dev-kit/hooks'
 import styled from 'styled-components'
 import { AvatarProperty } from '../AvatarProperty'
 import { useCurrency } from 'src/fixtures/currency/hooks'
+import { LinkWithNetwork } from 'src/components/atoms/LinkWithNetwork'
 
 interface Props {
   className?: string
-  propertyAddress: string
+  propertyAddress?: string
   enableStake?: boolean
   enableWithdrawStakersReward?: boolean
   enableWithdrawHoldersReward?: boolean
-  onClickStake?: (propertyAddress: string) => void
-  onClickWithdrawStakersReward?: (propertyAddress: string) => void
-  onClickWithdrawHoldersReward?: (propertyAddress: string) => void
+  onClickStake?: (propertyAddress?: string) => void
+  onClickWithdrawStakersReward?: (propertyAddress?: string) => void
+  onClickWithdrawHoldersReward?: (propertyAddress?: string) => void
   isPool?: Boolean
+  positionId?: number
 }
 
 const StyledStatistic = styled(Statistic)`
@@ -92,51 +94,54 @@ export const AssetItemOnList = ({
   onClickStake,
   onClickWithdrawStakersReward,
   onClickWithdrawHoldersReward,
-  isPool
+  isPool,
+  positionId
 }: Props) => {
+  const { positions, amount: positionsAmount, currency: positionsAmountCurrency } = useGetSTokenPositions(positionId)
+  const { withdrawableReward, currency: withdrawableRewardCurrency } = useGetStokenRewards(positionId)
+  const detectedPropertyAddress = useMemo(() => propertyAddress ?? positions?.property, [propertyAddress, positions])
   const { data: property } = useGetProperty(propertyAddress)
-  const { balance } = useBalanceOfProperty(propertyAddress)
-  const { name } = usePropertyName(propertyAddress)
+  const { name } = usePropertyName(detectedPropertyAddress)
   const { myStakingRewardAmount, currency: myStakingRewardAmountCurrency } =
     useGetMyStakingRewardAmount(propertyAddress)
   const { toCurrency } = useCurrency()
   const { myHolderAmount } = useGetMyHolderAmount(propertyAddress)
   const { myStakingAmount, currency: myStakingAmountCurrency } = useGetMyStakingAmount(propertyAddress)
   const propertyName = property && property.name ? property.name : name
-  const hasNotBalanceOnTheProperty = balance ? balance.isZero() : false
   const onClick =
     (
       hook: undefined | typeof onClickStake | typeof onClickWithdrawStakersReward | typeof onClickWithdrawHoldersReward
     ) =>
     () =>
-      typeof hook === 'undefined' ? undefined : hook(propertyAddress)
+      typeof hook === 'undefined' ? undefined : hook(detectedPropertyAddress)
+  const stakedAmount = propertyAddress && !positionId ? myStakingAmount : positionsAmount
+  const stakedAmountCurrency = propertyAddress && !positionId ? myStakingAmountCurrency : positionsAmountCurrency
+  const stakingRewardAmount = propertyAddress && !positionId ? myStakingRewardAmount : withdrawableReward
+  const stakingRewardAmountCurrency =
+    propertyAddress && !positionId ? myStakingRewardAmountCurrency : withdrawableRewardCurrency
 
   return (
     <Wrap className={className}>
-      <Link href={'/[propertyAddress]'} as={`/${propertyAddress}`} passHref>
+      <LinkWithNetwork href={'/[propertyAddress]'} as={`/${detectedPropertyAddress}`} passHref>
         <GridAvatar>
-          <AvatarProperty propertyAddress={propertyAddress} size={90} />
+          <AvatarProperty propertyAddress={detectedPropertyAddress} size={90} />
           <H3>{propertyName}</H3>
         </GridAvatar>
-      </Link>
+      </LinkWithNetwork>
       <GridStake
         title="Your Stake"
-        value={myStakingAmount?.dp(2).toNumber() || 0}
-        suffix={myStakingAmountCurrency}
+        value={stakedAmount?.dp(2).toNumber() || 0}
+        suffix={stakedAmountCurrency}
         precision={2}
       />
       <GridTotalStake
         title="Your Rewards"
-        value={(isPool ? toCurrency(myHolderAmount?.dp(2)).toNumber() : myStakingRewardAmount?.dp(2).toNumber()) || 0}
-        suffix={myStakingRewardAmountCurrency}
+        value={(isPool ? toCurrency(myHolderAmount?.dp(2)).toNumber() : stakingRewardAmount?.dp(2).toNumber()) || 0}
+        suffix={stakingRewardAmountCurrency}
         precision={2}
       />
       <GridButtons>
-        {enableStake && hasNotBalanceOnTheProperty ? (
-          <ButtonWithGradient onClick={onClick(onClickStake)}>Stake</ButtonWithGradient>
-        ) : (
-          ''
-        )}
+        {enableStake ? <ButtonWithGradient onClick={onClick(onClickStake)}>Stake</ButtonWithGradient> : ''}
         {enableWithdrawStakersReward ? (
           <Button type="link" onClick={onClick(onClickWithdrawStakersReward)}>
             Withdraw

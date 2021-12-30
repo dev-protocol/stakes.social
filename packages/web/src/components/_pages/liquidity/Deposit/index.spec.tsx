@@ -18,7 +18,7 @@ jest.mock('web3')
 
 describe(`${Deposit.name}`, () => {
   test('Snapshot', () => {
-    const component = render(<Deposit></Deposit>)
+    const component = render(<Deposit geyserAddress="0xdummy" />)
     const tree = component.baseElement
     expect(tree).toMatchSnapshot()
   })
@@ -28,7 +28,7 @@ describe(`${Deposit.name}`, () => {
     ;(useProvider as jest.Mock).mockImplementation(() => ({ accountAddress: '', web3: {} }))
     message.warn = jest.fn(() => {}) as any
 
-    const { getByText } = render(<Deposit></Deposit>)
+    const { getByText } = render(<Deposit geyserAddress="0xdummy" />)
 
     await act(async () => {
       await userEvent.click(getByText('Max'))
@@ -39,10 +39,10 @@ describe(`${Deposit.name}`, () => {
   test('react hooks: click MAX button with balance is zero', async () => {
     ;(balanceOf as jest.Mock).mockImplementation(() => Promise.resolve(new BigNumber('0')))
     ;(allowance as jest.Mock).mockImplementation(() => Promise.resolve())
-    ;(useProvider as jest.Mock).mockImplementation(() => ({ accountAddress: '', web3: {} }))
+    ;(useProvider as jest.Mock).mockImplementation(() => ({ accountAddress: '', ethersProvider: {} }))
     message.warn = jest.fn(() => {}) as any
 
-    const { getByText } = render(<Deposit></Deposit>)
+    const { getByText } = render(<Deposit geyserAddress="0xdummy" />)
 
     await act(async () => {
       await userEvent.click(getByText('Max'))
@@ -54,7 +54,7 @@ describe(`${Deposit.name}`, () => {
     ;(useProvider as jest.Mock).mockImplementation(() => ({ accountAddress: '', web3: undefined }))
     message.warn = jest.fn(() => {}) as any
 
-    const { getByText } = render(<Deposit></Deposit>)
+    const { getByText } = render(<Deposit geyserAddress="0xdummy" />)
 
     await act(async () => {
       await userEvent.click(getByText('Max'))

@@ -4,14 +4,229 @@ exports[`WithdrawalForHolders Snapshot 1`] = `
 <body>
   <div>
     <div
-      class="sc-89297o-0 etzBlt"
+      class="sc-gKclnd gwKHOb"
     >
       <div
-        class="sc-1d8aayd-1 bcBbeW"
+        class="sc-hKwDye gWsDYA"
         style="opacity: 1;"
       >
+        <div
+          class="ant-radio-group ant-radio-group-outline"
+          style="margin-bottom: 12px;"
+        >
+          <div
+            class="ant-space ant-space-vertical"
+          >
+            <div
+              class="ant-space-item"
+              style="margin-bottom: 8px;"
+            >
+              <label
+                class="ant-radio-wrapper"
+              >
+                <span
+                  class="ant-radio"
+                >
+                  <input
+                    class="ant-radio-input"
+                    type="radio"
+                    value="2"
+                  />
+                  <span
+                    class="ant-radio-inner"
+                  />
+                </span>
+                <span>
+                  <div
+                    class="ant-space ant-space-horizontal ant-space-align-center"
+                  >
+                    <div
+                      class="ant-space-item"
+                      style="margin-right: 24px;"
+                    >
+                      <div
+                        style="margin-left: 8px; min-width: 40px;"
+                      >
+                        #
+                        2
+                      </div>
+                    </div>
+                    <div
+                      class="ant-space-item"
+                      style="margin-right: 24px;"
+                    >
+                      <div
+                        style="min-width: 120px;"
+                      >
+                        <span>
+                          1e-15
+                        </span>
+                        <span
+                          style="font-size: 0.6em; margin-left: 2px;"
+                        >
+                          Staked
+                        </span>
+                      </div>
+                    </div>
+                    <div
+                      class="ant-space-item"
+                    >
+                      <div>
+                        <span>
+                          0
+                        </span>
+                        <span
+                          style="font-size: 0.6em; margin-left: 2px;"
+                        >
+                          Claimable
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </span>
+              </label>
+            </div>
+            <div
+              class="ant-space-item"
+              style="margin-bottom: 8px;"
+            >
+              <label
+                class="ant-radio-wrapper"
+              >
+                <span
+                  class="ant-radio"
+                >
+                  <input
+                    class="ant-radio-input"
+                    type="radio"
+                    value="4"
+                  />
+                  <span
+                    class="ant-radio-inner"
+                  />
+                </span>
+                <span>
+                  <div
+                    class="ant-space ant-space-horizontal ant-space-align-center"
+                  >
+                    <div
+                      class="ant-space-item"
+                      style="margin-right: 24px;"
+                    >
+                      <div
+                        style="margin-left: 8px; min-width: 40px;"
+                      >
+                        #
+                        4
+                      </div>
+                    </div>
+                    <div
+                      class="ant-space-item"
+                      style="margin-right: 24px;"
+                    >
+                      <div
+                        style="min-width: 120px;"
+                      >
+                        <span>
+                          1e-15
+                        </span>
+                        <span
+                          style="font-size: 0.6em; margin-left: 2px;"
+                        >
+                          Staked
+                        </span>
+                      </div>
+                    </div>
+                    <div
+                      class="ant-space-item"
+                    >
+                      <div>
+                        <span>
+                          0
+                        </span>
+                        <span
+                          style="font-size: 0.6em; margin-left: 2px;"
+                        >
+                          Claimable
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </span>
+              </label>
+            </div>
+            <div
+              class="ant-space-item"
+            >
+              <label
+                class="ant-radio-wrapper"
+              >
+                <span
+                  class="ant-radio"
+                >
+                  <input
+                    class="ant-radio-input"
+                    type="radio"
+                    value="6"
+                  />
+                  <span
+                    class="ant-radio-inner"
+                  />
+                </span>
+                <span>
+                  <div
+                    class="ant-space ant-space-horizontal ant-space-align-center"
+                  >
+                    <div
+                      class="ant-space-item"
+                      style="margin-right: 24px;"
+                    >
+                      <div
+                        style="margin-left: 8px; min-width: 40px;"
+                      >
+                        #
+                        6
+                      </div>
+                    </div>
+                    <div
+                      class="ant-space-item"
+                      style="margin-right: 24px;"
+                    >
+                      <div
+                        style="min-width: 120px;"
+                      >
+                        <span>
+                          1e-15
+                        </span>
+                        <span
+                          style="font-size: 0.6em; margin-left: 2px;"
+                        >
+                          Staked
+                        </span>
+                      </div>
+                    </div>
+                    <div
+                      class="ant-space-item"
+                    >
+                      <div>
+                        <span>
+                          0
+                        </span>
+                        <span
+                          style="font-size: 0.6em; margin-left: 2px;"
+                        >
+                          Claimable
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </span>
+              </label>
+            </div>
+          </div>
+        </div>
         <button
-          class="ant-btn ant-btn-lg sc-1ho13tb-0 sc-1d8aayd-2 cpPLtK gRTWBx"
+          class="ant-btn ant-btn-lg sc-gsDKAQ sc-eCImPb ldRQYr cVmGpy"
           type="button"
         >
           <span>
@@ -20,7 +235,7 @@ exports[`WithdrawalForHolders Snapshot 1`] = `
         </button>
       </div>
       <div
-        class="ant-card ant-card-bordered sc-1lowp9k-0 kiBaFy"
+        class="ant-card ant-card-bordered sc-iCfMLu dhFxMM"
       >
         <div
           class="ant-card-head"
@@ -41,36 +256,6 @@ exports[`WithdrawalForHolders Snapshot 1`] = `
           <p>
             6000
              DEV
-          </p>
-        </div>
-      </div>
-      <div
-        class="ant-card ant-card-bordered ant-card-small sc-18v7ikh-0 dfjrvZ"
-      >
-        <div
-          class="ant-card-head"
-        >
-          <div
-            class="ant-card-head-wrapper"
-          >
-            <div
-              class="ant-card-head-title"
-            >
-              Gas Fee (predicted)
-            </div>
-          </div>
-        </div>
-        <div
-          class="ant-card-body"
-        >
-          <p>
-            0.000011
-             ETH
-            <span
-              class="sc-18v7ikh-1 kGdgpU"
-            >
-               $0.00
-            </span>
           </p>
         </div>
       </div>

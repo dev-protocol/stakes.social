@@ -245,6 +245,8 @@ describe('dev-for-apps hooks with strapi for account', () => {
 describe('dev-for-apps hooks with strapi for property', () => {
   describe('useUploadPropertyCoverImages', () => {
     test('success post file', async () => {
+      const propertyAddress = '0x01234567890'
+      const accountAddress = '0x12345'
       const mockHandler = jest.fn().mockImplementation(jest.fn().mockImplementation(() => Promise.resolve()))
       const mockMutate = jest.fn().mockImplementation(() => {})
       ;(useGetProperty as jest.Mock).mockImplementation(() => ({ data: { id: 123 }, mutate: mockMutate }))
@@ -252,7 +254,7 @@ describe('dev-for-apps hooks with strapi for property', () => {
         postUploadFileHandler: mockHandler,
         isLoading: false
       }))
-      const { result } = renderHook(() => useUploadPropertyCoverImages('0x01234567890'))
+      const { result } = renderHook(() => useUploadPropertyCoverImages(propertyAddress, accountAddress))
       await act(async () => {
         await result.current.upload('image data')
       })
@@ -265,6 +267,8 @@ describe('dev-for-apps hooks with strapi for property', () => {
     })
 
     test('failure post file', async () => {
+      const propertyAddress = '0x01234567890'
+      const accountAddress = '0x12345'
       const errorMessage = 'error'
       const error = new Error(errorMessage)
       ;(useGetProperty as jest.Mock).mockImplementation(() => ({ data: { id: 123 }, mutate: () => {} }))
@@ -273,7 +277,7 @@ describe('dev-for-apps hooks with strapi for property', () => {
         isLoading: false,
         error
       }))
-      const { result } = renderHook(() => useUploadPropertyCoverImages('0x01234567890'))
+      const { result } = renderHook(() => useUploadPropertyCoverImages(propertyAddress, accountAddress))
       act(() => {
         result.current.upload({})
       })
@@ -284,6 +288,7 @@ describe('dev-for-apps hooks with strapi for property', () => {
 
   describe('useCreateProperty', () => {
     test('success create property', async () => {
+      const propertyAddress = '0x01234567890'
       const walletAddress = '0x12345'
       const data = {}
       ;(postProperty as jest.Mock).mockResolvedValue(data)
@@ -291,7 +296,7 @@ describe('dev-for-apps hooks with strapi for property', () => {
         signature: 'test signature',
         message: 'test sign message'
       }))
-      const { result } = renderHook(() => useCreateProperty(walletAddress))
+      const { result } = renderHook(() => useCreateProperty(walletAddress, propertyAddress))
       await act(async () => {
         const name = 'dummy name'
         await result.current.postPropertyHandler(name)
@@ -301,6 +306,7 @@ describe('dev-for-apps hooks with strapi for property', () => {
     })
 
     test('fail to create property with web3.sign error', async () => {
+      const propertyAddress = '0x01234567890'
       const walletAddress = '0x12345'
       const data = {}
       ;(postProperty as jest.Mock).mockResolvedValue(data)
@@ -308,7 +314,7 @@ describe('dev-for-apps hooks with strapi for property', () => {
         signature: undefined,
         message: undefined
       }))
-      const { result } = renderHook(() => useCreateProperty(walletAddress))
+      const { result } = renderHook(() => useCreateProperty(walletAddress, propertyAddress))
       await act(async () => {
         const name = 'dummy name'
         await result.current.postPropertyHandler(name)
@@ -321,6 +327,7 @@ describe('dev-for-apps hooks with strapi for property', () => {
   describe('useUpdateProperty', () => {
     test('success update property', async () => {
       const id = 98
+      const propertyAddress = '0x01234567890'
       const walletAddress = '0x12345'
       const data = {}
       ;(putProperty as jest.Mock).mockResolvedValue(data)
@@ -328,7 +335,7 @@ describe('dev-for-apps hooks with strapi for property', () => {
         signature: 'test signature',
         message: 'test sign message'
       }))
-      const { result } = renderHook(() => useUpdateProperty(id, walletAddress))
+      const { result } = renderHook(() => useUpdateProperty(id, walletAddress, propertyAddress))
       await act(async () => {
         const name = 'dummy name'
         await result.current.putPropertyHandler(name)
@@ -339,6 +346,7 @@ describe('dev-for-apps hooks with strapi for property', () => {
 
     test('fail to update property with web3.sign error', async () => {
       const id = 98
+      const propertyAddress = '0x01234567890'
       const walletAddress = '0x12345'
       const data = {}
       ;(putProperty as jest.Mock).mockResolvedValue(data)
@@ -346,7 +354,7 @@ describe('dev-for-apps hooks with strapi for property', () => {
         signature: undefined,
         message: undefined
       }))
-      const { result } = renderHook(() => useUpdateProperty(id, walletAddress))
+      const { result } = renderHook(() => useUpdateProperty(id, walletAddress, propertyAddress))
       await act(async () => {
         const name = 'dummy name'
         await result.current.putPropertyHandler(name)

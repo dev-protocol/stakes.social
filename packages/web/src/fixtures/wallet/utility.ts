@@ -1,9 +1,9 @@
 import Web3 from 'web3'
 import Web3Modal from 'web3modal'
-import { AbiItem } from 'web3-utils'
 import { message } from 'antd'
-import { WEB3_PROVIDER_ENDPOINT } from 'src/fixtures/wallet/constants'
 import { AbstractProvider, provider } from 'web3-core'
+import { providers } from 'ethers'
+import { UndefinedOr } from '@devprotocol/util-ts'
 
 const cache: WeakMap<NonNullable<Web3>, string> = new WeakMap()
 
@@ -12,9 +12,11 @@ type signCache = {
   signature: string
 }
 
+export type ChainName = UndefinedOr<'ethereum' | 'ropsten' | 'arbitrum-one' | 'arbitrum-rinkeby'>
+
 const signCacheContainer: Map<string, signCache> = new Map()
 
-export const connectWallet = async (setWeb3Handler: Function, web3Modal?: Web3Modal) => {
+export const connectWallet = async (setProvidersHandler: Function, web3Modal?: Web3Modal) => {
   const provider = await web3Modal?.connect().catch(() => {
     return undefined
   })
@@ -23,8 +25,9 @@ export const connectWallet = async (setWeb3Handler: Function, web3Modal?: Web3Mo
   }
 
   const web3: Web3 = new Web3(provider)
-  if (web3) {
-    setWeb3Handler(web3)
+  const ethersProvider = new providers.Web3Provider(provider)
+  if (web3 && ethersProvider) {
+    setProvidersHandler(web3, ethersProvider)
     const account = await web3.eth
       .getAccounts()
       .then((accounts: Array<String>) => {
@@ -42,9 +45,9 @@ export const connectWallet = async (setWeb3Handler: Function, web3Modal?: Web3Mo
   return false
 }
 
-export const disconnectWallet = (setWeb3Handler: Function, web3Modal?: Web3Modal) => {
+export const disconnectWallet = (setProvidersHandler: Function, web3Modal?: Web3Modal) => {
   web3Modal?.clearCachedProvider()
-  setWeb3Handler(undefined)
+  setProvidersHandler(undefined)
 }
 
 export const getAccountAddress = async (web3?: Web3) => {
@@ -57,32 +60,6 @@ export const getAccountAddress = async (web3?: Web3) => {
       cache.set(web3, account)
       return account
     })(cache.get(web3))
-  }
-  return undefined
-}
-
-export const getSubscription = () => {
-  const key = '@utility/getSubscription'
-  const web3 = new Web3(WEB3_PROVIDER_ENDPOINT)
-  if (web3) {
-    return () => {
-      return web3.eth
-        .subscribe('newBlockHeaders', (error, result) => {
-          if (error) throw error
-          return result
-        })
-        .on('connected', subscriptionId => console.log(subscriptionId))
-        .on('data', blockHeader => message.loading({ content: `blockHeader: ${blockHeader.number}`, key }))
-        .on('error', error => message.error({ content: error.message, key }))
-    }
-  }
-  return undefined
-}
-
-export const getBlockNumber = async () => {
-  const web3 = new Web3(WEB3_PROVIDER_ENDPOINT)
-  if (web3) {
-    return await web3.eth.getBlockNumber()
   }
   return undefined
 }
@@ -133,46 +110,6 @@ export const signWithCache = async (web3: any, inputMessage: string) => {
   return { signature: undefined, message: undefined }
 }
 
-export const getDevAmount = async (walletAddress: string) => {
-  const abi: AbiItem[] = [
-    {
-      constant: true,
-      inputs: [{ name: '_owner', type: 'address' }],
-      name: 'balanceOf',
-      outputs: [{ name: 'balance', type: 'uint256' }],
-      stateMutability: 'view',
-      payable: false,
-      type: 'function'
-    },
-    {
-      constant: true,
-      inputs: [],
-      name: 'decimals',
-      outputs: [{ name: '', type: 'uint8' }],
-      stateMutability: 'view',
-      payable: false,
-      type: 'function'
-    }
-  ]
-
-  const web3 = new Web3(WEB3_PROVIDER_ENDPOINT)
-  if (web3) {
-    // dev value of team wallet
-    const contract: any = new web3.eth.Contract(abi, '0x5caf454ba92e6f2c929df14667ee360ed9fd5b26')
-    const balance = await contract.methods.balanceOf(walletAddress).call()
-    return balance
-  }
-  return undefined
-}
-
-export const getBlock = async (blockNumber: number) => {
-  const web3 = new Web3(WEB3_PROVIDER_ENDPOINT)
-  if (web3) {
-    return (await web3.eth.getBlock(blockNumber)).timestamp
-  }
-  return undefined
-}
-
 export const isAbstractProvider = (prov?: provider): prov is AbstractProvider =>
   Boolean(prov && typeof prov !== 'string' && typeof (prov as any).request === 'function')
 
@@ -211,3 +148,20 @@ export const createHandleAddClick =
           message.error({ content: err.message, key: 'addTokenToWallet' })
         }))
   }
+
+export const detectChain = async (ethersProvider?: providers.BaseProvider) => {
+  const res = await ethersProvider?.getNetwork()
+  const chainId = res?.chainId
+  const name: ChainName =
+    chainId === 1
+      ? 'ethereum'
+      : chainId === 3
+      ? 'ropsten'
+      : chainId === 42161
+      ? 'arbitrum-one'
+      : chainId === 421611
+      ? 'arbitrum-rinkeby'
+      : undefined
+
+  return { chainId, name }
+}

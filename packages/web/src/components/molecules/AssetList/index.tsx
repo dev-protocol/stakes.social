@@ -2,7 +2,7 @@ import React, { useCallback, useState } from 'react'
 import styled from 'styled-components'
 import { Pagination, Skeleton } from 'antd'
 import { AssetItemOnList } from '../AssetItemOnList'
-import { ResponsiveModal } from 'src/components/atoms/ResponsiveModal'
+import { ModalStates, ResponsiveModal } from 'src/components/atoms/ResponsiveModal'
 import { TransactModalContents } from '../TransactModalContents'
 import { NotConnectedAndEmpty } from 'src/components/atoms/NotConnectedAndEmpty'
 
@@ -16,12 +16,18 @@ interface Props {
   enableWithdrawHoldersReward?: boolean
   isPool?: boolean
   total: number
+  positions?: number[]
 }
 
-interface ModalStates {
-  visible: boolean
-  title?: string
-  contents?: React.ReactNode
+interface AssetProps {
+  className?: string
+  property: string | number
+  onPagination?: (page: number) => void
+  enableStake?: boolean
+  enableWithdrawStakersReward?: boolean
+  enableWithdrawHoldersReward?: boolean
+  isPool?: boolean
+  showModalFunc: Function
 }
 
 const Wrap = styled.div`
@@ -40,6 +46,30 @@ const StyledPagination = styled(Pagination)`
   margin-top: 1rem;
 `
 
+export const Asset = ({
+  property,
+  enableStake,
+  enableWithdrawStakersReward,
+  enableWithdrawHoldersReward,
+  isPool,
+  showModalFunc
+}: AssetProps) => {
+  return (
+    <Item
+      isPool={isPool}
+      propertyAddress={typeof property === 'string' ? property : undefined}
+      positionId={typeof property === 'number' ? property : undefined}
+      key={`${property}`}
+      enableStake={enableStake}
+      enableWithdrawStakersReward={enableWithdrawStakersReward}
+      enableWithdrawHoldersReward={enableWithdrawHoldersReward}
+      onClickStake={showModalFunc('stake')}
+      onClickWithdrawStakersReward={showModalFunc('withdraw')}
+      onClickWithdrawHoldersReward={showModalFunc('holders')}
+    ></Item>
+  )
+}
+
 export const AssetList = ({
   className,
   properties,
@@ -49,7 +79,8 @@ export const AssetList = ({
   enableWithdrawHoldersReward,
   loading = false,
   isPool,
-  total
+  total,
+  positions
 }: Props) => {
   const [page, setPage] = useState<number>(1)
   const [modalStates, setModalStates] = useState<ModalStates>({ visible: false })
@@ -62,32 +93,35 @@ export const AssetList = ({
     },
     [setPage, onPagination]
   )
-  const showModal = (type: 'stake' | 'withdraw' | 'holders') => (propertyAddress: string) => {
-    const contents = <TransactModalContents propertyAddress={propertyAddress} type={type} />
+  const showModal = (type: 'stake' | 'withdraw' | 'holders') => (propertyAddress?: string) => {
+    const contents = propertyAddress ? (
+      <TransactModalContents propertyAddress={propertyAddress} type={type} />
+    ) : (
+      <p>Property address not found</p>
+    )
     const title = type === 'stake' ? 'Stake' : 'Withdraw'
     setModalStates({ visible: true, contents, title })
   }
   const closeModal = () => {
     setModalStates({ ...modalStates, visible: false })
   }
+  const propertiesOrPositions = positions?.length ? positions : properties?.length ? properties : undefined
 
   return loading ? (
     <Skeleton active></Skeleton>
   ) : (
     <Wrap className={className}>
-      {properties && properties.length > 0 ? (
-        properties.map(item => (
-          <Item
+      {propertiesOrPositions?.length ? (
+        propertiesOrPositions.map((item, i) => (
+          <Asset
             isPool={isPool}
-            propertyAddress={item}
-            key={item}
+            property={item}
+            key={`${item}-${i}`}
             enableStake={enableStake}
             enableWithdrawStakersReward={enableWithdrawStakersReward}
             enableWithdrawHoldersReward={enableWithdrawHoldersReward}
-            onClickStake={showModal('stake')}
-            onClickWithdrawStakersReward={showModal('withdraw')}
-            onClickWithdrawHoldersReward={showModal('holders')}
-          ></Item>
+            showModalFunc={showModal}
+          />
         ))
       ) : (
         <NotConnectedAndEmpty description="Assets not found" />

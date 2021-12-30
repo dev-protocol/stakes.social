@@ -1,10 +1,10 @@
-import { ethers } from 'ethers'
-import { WEB3_PROVIDER_ENDPOINT } from 'src/fixtures/wallet/constants'
+import { useProvider } from '../wallet/hooks'
 
 export const useENS = () => {
+  // NOTE: ENS can only be used in mainnet
+  const { nonConnectedEthersL1Provider } = useProvider()
   const getENS = async (address: string) => {
-    const provider = new ethers.providers.JsonRpcProvider(WEB3_PROVIDER_ENDPOINT)
-    return provider.lookupAddress(address)
+    return nonConnectedEthersL1Provider?.lookupAddress(address)
   }
 
   return { getENS }

@@ -3,19 +3,14 @@ import {
   getRewardsAmount,
   getTotalStakingAmount,
   withdrawHolderAmount,
-  getEstimateGas4WithdrawHolderAmount,
   getMyHolderAmount,
   getTreasuryAmount,
   stakeDev,
-  getEstimateGas4StakeDev,
   withdrawStakingAmount,
-  getEstimateGas4WithdrawStakingAmount,
   getMyStakingRewardAmount,
   createProperty,
-  getEstimateGas4CreateProperty,
   marketScheme,
   authenticate,
-  getEstimateGas4CreateAndAuthenticate,
   getTotalStakingAmountOnProtocol,
   calculateMaxRewardsPerBlock,
   totalSupply,
@@ -27,7 +22,30 @@ import {
   allClaimedRewards,
   propertyName,
   propertySymbol,
-  balanceOfProperty
+  balanceOfProperty,
+  detectStokens,
+  detectStokensByPropertyAddress,
+  getStokenTokenURI,
+  setStokenTokenURIImage,
+  getStokenOwnerOf,
+  getStokenPositions,
+  getStokenRewards,
+  getStokenHeldAt,
+  allowance,
+  approve,
+  depositToProperty,
+  depositToPosition,
+  withdrawByPosition,
+  migrateToSTokens,
+  getTokenURI,
+  getStokenSymbol,
+  positionsOfOwner,
+  getEnabledMarkets,
+  getAuthenticatedProperties,
+  metricsOfProperty,
+  getMarketBehavior,
+  getId,
+  getMarket
 } from './client'
 import { SWRCachePath } from './cache-path'
 import {
@@ -38,15 +56,14 @@ import {
   whenDefined,
   whenDefinedAll
 } from 'src/fixtures/utility'
-import { useGetGasPrice } from 'src/fixtures/gas/hooks'
-import { getDevAmount } from 'src/fixtures/wallet/utility'
 import useSWR from 'swr'
 import { message } from 'antd'
 import { useMemo, useState, useCallback } from 'react'
 import BigNumber from 'bignumber.js'
-import { useProvider } from 'src/fixtures/wallet/hooks'
+import { useDetectChain, useIsL1, useProvider } from 'src/fixtures/wallet/hooks'
 import { useCurrency } from 'src/fixtures/currency/functions/useCurrency'
 import { isAddress } from 'web3-utils'
+import { UndefinedOr } from '@devprotocol/util-ts'
 
 interface DevAllocations {
   privateSale: string
@@ -67,12 +84,20 @@ const validAddress = (address: string = ''): boolean =>
   typeof address === 'string' && isAddress(address) && address.length === 42
 
 export const useGetTotalRewardsAmount = (propertyAddress: string) => {
-  const { nonConnectedWeb3: web3, accountAddress } = useProvider()
+  const { nonConnectedEthersProvider: prov, accountAddress } = useProvider()
+  const { name: chain } = useDetectChain(prov)
   const { currency, toCurrency } = useCurrency()
   const { data, error } = useSWR<undefined | UnwrapFunc<typeof getRewardsAmount>, Error>(
-    SWRCachePath.getTotalRewardsAmount(propertyAddress, accountAddress),
-    () => whenDefined(web3, x => getRewardsAmount(x, propertyAddress)),
-    { onError: err => message.error(err.message), revalidateOnFocus: false, focusThrottleInterval: 0 }
+    SWRCachePath.getTotalRewardsAmount(propertyAddress, accountAddress, chain),
+    () => whenDefined(prov, x => getRewardsAmount(x, propertyAddress)),
+    {
+      onError: err => {
+        console.log(err)
+        message.error(err.message)
+      },
+      revalidateOnFocus: false,
+      focusThrottleInterval: 0
+    }
   )
   return {
     totalRewardsAmount: whenDefined(data, x => toCurrency(toNaturalNumber(toNaturalNumber(x)))),
@@ -82,7 +107,7 @@ export const useGetTotalRewardsAmount = (propertyAddress: string) => {
 }
 
 export const useWithdrawHolderReward = () => {
-  const { web3 } = useProvider()
+  const { ethersProvider } = useProvider()
   const key = 'useWithdrawHolderReward'
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [error, setError] = useState<Error>()
@@ -90,11 +115,11 @@ export const useWithdrawHolderReward = () => {
     async (propertyAddress: string) => {
       setIsLoading(true)
       message.loading({ content: 'now withdrawing holder reward...', duration: 0, key })
-      if (!web3) {
+      if (!ethersProvider) {
         message.error({ content: 'Could not find a Web3 provider', key })
       }
       setError(undefined)
-      return whenDefined(web3, x =>
+      return whenDefined(ethersProvider, x =>
         withdrawHolderAmount(x, propertyAddress)
           .then(() => {
             message.success({ content: 'success withdrawing!', key })
@@ -107,41 +132,29 @@ export const useWithdrawHolderReward = () => {
           })
       )
     },
-    [web3]
+    [ethersProvider]
   )
 
   return { withdrawHolder, isLoading, error }
 }
 
-export const useGetEstimateGas4WithdrawHolderAmount = (propertyAddress: string) => {
-  const { web3, accountAddress } = useProvider()
-  const { data, error } = useSWR<BigNumber | undefined, Error>(
-    SWRCachePath.getEstimateGas4WithdrawHolderAmount(propertyAddress, accountAddress),
-    () =>
-      whenDefinedAll([web3, accountAddress], ([x, fromAddress]) =>
-        getEstimateGas4WithdrawHolderAmount(x, propertyAddress, fromAddress)
-      ),
-    { revalidateOnFocus: false, focusThrottleInterval: 0 }
-    // NOTE: If an error occurs, nothing is done. Because it only displays the estimated gas price.
-  )
-  const { gasPrice } = useGetGasPrice()
-  const estimateGas = useMemo(
-    () => whenDefinedAll([data, gasPrice], ([x, g]) => toNaturalNumber(x).multipliedBy(g)),
-    [gasPrice, data]
-  )
-
-  return { estimateGas, error }
-}
-
-export const useGetMyHolderAmount = (propertyAddress: string) => {
-  const { nonConnectedWeb3, accountAddress } = useProvider()
+export const useGetMyHolderAmount = (propertyAddress?: string) => {
+  const { nonConnectedEthersProvider, accountAddress } = useProvider()
+  const { name: chain } = useDetectChain(nonConnectedEthersProvider)
   const { data, error } = useSWR<UnwrapFunc<typeof getMyHolderAmount>, Error>(
-    SWRCachePath.getMyHolderAmount(propertyAddress, accountAddress),
+    SWRCachePath.getMyHolderAmount(chain, propertyAddress, accountAddress),
     () =>
-      whenDefinedAll([nonConnectedWeb3, accountAddress], ([client, account]) =>
-        getMyHolderAmount(client, propertyAddress, account)
+      whenDefinedAll([nonConnectedEthersProvider, propertyAddress, accountAddress], ([client, property, account]) =>
+        getMyHolderAmount(client, property, account)
       ),
-    { onError: err => message.error(err.message), revalidateOnFocus: false, focusThrottleInterval: 0 }
+    {
+      onError: err => {
+        console.log(err)
+        message.error(err.message)
+      },
+      revalidateOnFocus: false,
+      focusThrottleInterval: 0
+    }
   )
   const [withdrawable, , , total] = data || []
   return {
@@ -152,14 +165,21 @@ export const useGetMyHolderAmount = (propertyAddress: string) => {
 }
 
 export const useGetHolderAmountByAddress = (propertyAddress: string, srcAddress?: string) => {
-  const { nonConnectedWeb3 } = useProvider()
+  const { nonConnectedEthersProvider } = useProvider()
   const { data, error } = useSWR<UnwrapFunc<typeof getMyHolderAmount>, Error>(
     SWRCachePath.getMyHolderAmount(propertyAddress, srcAddress),
     () =>
-      whenDefinedAll([nonConnectedWeb3, srcAddress], ([client, account]) =>
+      whenDefinedAll([nonConnectedEthersProvider, srcAddress], ([client, account]) =>
         getMyHolderAmount(client, propertyAddress, account)
       ),
-    { onError: err => message.error(err.message), revalidateOnFocus: false, focusThrottleInterval: 0 }
+    {
+      onError: err => {
+        console.log(err)
+        message.error(err.message)
+      },
+      revalidateOnFocus: false,
+      focusThrottleInterval: 0
+    }
   )
   const [withdrawable, , , total] = data || []
   return {
@@ -169,37 +189,64 @@ export const useGetHolderAmountByAddress = (propertyAddress: string, srcAddress?
   }
 }
 
-export const useGetTreasuryAmount = (propertyAddress: string) => {
-  const { nonConnectedWeb3 } = useProvider()
+export const useGetTreasuryAmount = (propertyAddress?: string) => {
+  const { nonConnectedEthersProvider } = useProvider()
+  const { name: chain } = useDetectChain(nonConnectedEthersProvider)
   const { data, error } = useSWR<UnwrapFunc<typeof getTreasuryAmount>, Error>(
-    SWRCachePath.getTreasuryAmount(propertyAddress),
-    () => whenDefined(nonConnectedWeb3, client => getTreasuryAmount(client, propertyAddress)),
-    { onError: err => message.error(err.message), revalidateOnFocus: false, focusThrottleInterval: 0 }
+    SWRCachePath.getTreasuryAmount(chain, propertyAddress),
+    () =>
+      whenDefinedAll([nonConnectedEthersProvider, propertyAddress], ([client, property]) =>
+        getTreasuryAmount(client, property)
+      ),
+    {
+      onError: err => {
+        console.log(err)
+        message.error(err.message)
+      },
+      revalidateOnFocus: false,
+      focusThrottleInterval: 0
+    }
   )
   return { treasuryAmount: data ? toNaturalNumber(data) : undefined, error }
 }
 
 export const useGetTotalStakingAmount = (propertyAddress: string) => {
-  const { nonConnectedWeb3, accountAddress } = useProvider()
+  const { nonConnectedEthersProvider, accountAddress } = useProvider()
+  const { name: chain } = useDetectChain(nonConnectedEthersProvider)
   const { currency, toCurrency } = useCurrency()
   const { data, error } = useSWR<UnwrapFunc<typeof getTotalStakingAmount>, Error>(
-    SWRCachePath.getTotalStakingAmount(propertyAddress, accountAddress),
-    () => whenDefined(nonConnectedWeb3, x => getTotalStakingAmount(x, propertyAddress)),
-    { onError: err => message.error(err.message), revalidateOnFocus: false, focusThrottleInterval: 0 }
+    SWRCachePath.getTotalStakingAmount(propertyAddress, accountAddress, chain),
+    () => whenDefined(nonConnectedEthersProvider, x => getTotalStakingAmount(x, propertyAddress)),
+    {
+      onError: err => {
+        console.log(err)
+        message.error(err.message)
+      },
+      revalidateOnFocus: false,
+      focusThrottleInterval: 0
+    }
   )
   return { totalStakingAmount: whenDefined(data, x => toCurrency(toNaturalNumber(x))), currency, error }
 }
 
-export const useGetMyStakingRewardAmount = (propertyAddress: string) => {
-  const { nonConnectedWeb3, accountAddress } = useProvider()
+export const useGetMyStakingRewardAmount = (propertyAddress?: string) => {
+  const { nonConnectedEthersProvider, accountAddress } = useProvider()
+  const { name: chain } = useDetectChain(nonConnectedEthersProvider)
   const { currency, toCurrency } = useCurrency()
   const { data, error } = useSWR<UnwrapFunc<typeof getMyStakingRewardAmount>, Error>(
-    SWRCachePath.getMyStakingRewardAmount(propertyAddress, accountAddress),
+    SWRCachePath.getMyStakingRewardAmount(chain, propertyAddress, accountAddress),
     () =>
-      whenDefinedAll([nonConnectedWeb3, accountAddress], ([client, account]) =>
-        getMyStakingRewardAmount(client, propertyAddress, account)
+      whenDefinedAll([nonConnectedEthersProvider, propertyAddress, accountAddress], ([client, property, account]) =>
+        getMyStakingRewardAmount(client, property, account)
       ),
-    { onError: err => message.error(err.message), revalidateOnFocus: false, focusThrottleInterval: 0 }
+    {
+      onError: err => {
+        console.log(err)
+        message.error(err.message)
+      },
+      revalidateOnFocus: false,
+      focusThrottleInterval: 0
+    }
   )
 
   return {
@@ -210,23 +257,31 @@ export const useGetMyStakingRewardAmount = (propertyAddress: string) => {
   }
 }
 
-export const useGetMyStakingAmount = (propertyAddress: string) => {
-  const { nonConnectedWeb3, accountAddress } = useProvider()
+export const useGetMyStakingAmount = (propertyAddress?: string) => {
+  const { nonConnectedEthersProvider, accountAddress } = useProvider()
+  const { name: chain } = useDetectChain(nonConnectedEthersProvider)
   const { currency, toCurrency } = useCurrency()
   const { data, error } = useSWR<UnwrapFunc<typeof getMyStakingAmount>, Error>(
-    SWRCachePath.getMyStakingAmount(propertyAddress, accountAddress),
+    SWRCachePath.getMyStakingAmount(chain, propertyAddress, accountAddress),
     () =>
-      whenDefinedAll([nonConnectedWeb3, accountAddress], ([client, account]) =>
-        getMyStakingAmount(client, propertyAddress, account)
+      whenDefinedAll([nonConnectedEthersProvider, propertyAddress, accountAddress], ([client, property, account]) =>
+        getMyStakingAmount(client, property, account)
       ),
-    { onError: err => message.error(err.message), revalidateOnFocus: false, focusThrottleInterval: 0 }
+    {
+      onError: err => {
+        console.log(err)
+        message.error(err.message)
+      },
+      revalidateOnFocus: false,
+      focusThrottleInterval: 0
+    }
   )
 
   return { myStakingAmount: whenDefined(data, x => toCurrency(toNaturalNumber(x))), currency, error }
 }
 
 export const useWithdrawStakingReward = () => {
-  const { web3 } = useProvider()
+  const { ethersProvider } = useProvider()
   const key = 'useWithdrawStakingReward'
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [error, setError] = useState<Error>()
@@ -235,7 +290,7 @@ export const useWithdrawStakingReward = () => {
       setIsLoading(true)
       message.loading({ content: 'now withdrawing staking reward...', duration: 0, key })
       setError(undefined)
-      return whenDefined(web3, x =>
+      return whenDefined(ethersProvider, x =>
         withdrawStakingAmount(x, propertyAddress, toBigNumber(0))
           .then(() => {
             message.success({ content: 'success withdrawing!', key })
@@ -248,14 +303,14 @@ export const useWithdrawStakingReward = () => {
           })
       )
     },
-    [web3]
+    [ethersProvider]
   )
 
   return { withdrawStakingReward, isLoading, error }
 }
 
 export const useWithdrawStaking = () => {
-  const { web3 } = useProvider()
+  const { ethersProvider } = useProvider()
   const key = 'useWithdrawStaking'
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [error, setError] = useState<Error>()
@@ -264,7 +319,7 @@ export const useWithdrawStaking = () => {
       setIsLoading(true)
       message.loading({ content: 'now withdrawing staking...', duration: 0, key })
       setError(undefined)
-      return whenDefined(web3, x =>
+      return whenDefined(ethersProvider, x =>
         withdrawStakingAmount(x, propertyAddress, amount)
           .then(() => {
             message.success({ content: 'success withdrawing!', key })
@@ -277,34 +332,14 @@ export const useWithdrawStaking = () => {
           })
       )
     },
-    [web3]
+    [ethersProvider]
   )
 
   return { withdrawStaking, isLoading, error }
 }
 
-export const useGetEstimateGas4WithdrawStakingAmount = (propertyAddress: string, amount: string) => {
-  const { web3, accountAddress } = useProvider()
-  const { data, error } = useSWR<BigNumber | undefined, Error>(
-    SWRCachePath.getEstimateGas4WithdrawStakingAmount(propertyAddress, amount || '0', accountAddress),
-    () =>
-      whenDefinedAll([web3, accountAddress, amount], ([x, fromAddress, a]) =>
-        amount !== '' ? getEstimateGas4WithdrawStakingAmount(x, propertyAddress, a, fromAddress) : undefined
-      ),
-    { revalidateOnFocus: false, focusThrottleInterval: 0 }
-    // NOTE: If an error occurs, nothing is done. Because it only displays the estimated gas price.
-  )
-  const { gasPrice } = useGetGasPrice()
-  const estimateGas = useMemo(
-    () => whenDefinedAll([data, gasPrice], ([x, g]) => toNaturalNumber(x).multipliedBy(g)),
-    [gasPrice, data]
-  )
-
-  return { estimateGas, error }
-}
-
 export const useStake = () => {
-  const { web3 } = useProvider()
+  const { ethersProvider } = useProvider()
   const key = 'useStake'
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [error, setError] = useState<Error>()
@@ -313,7 +348,7 @@ export const useStake = () => {
       setIsLoading(true)
       message.loading({ content: 'now staking...', duration: 0, key })
       setError(undefined)
-      return whenDefined(web3, x =>
+      return whenDefined(ethersProvider, x =>
         stakeDev(x, propertyAddress, toAmountNumber(amount).toFormat({ decimalSeparator: '' }))
           .then(() => {
             message.success({ content: 'success staking!', key })
@@ -326,41 +361,26 @@ export const useStake = () => {
           })
       )
     },
-    [web3]
+    [ethersProvider]
   )
 
   return { stake, isLoading, error }
 }
 
-export const useGetEstimateGas4Stake = (propertyAddress: string, amount?: string) => {
-  const { web3, accountAddress } = useProvider()
-  const { data, error } = useSWR<BigNumber | undefined, Error>(
-    SWRCachePath.getEstimateGas4Stake(propertyAddress, accountAddress, amount),
-    () =>
-      whenDefinedAll([web3, accountAddress, amount], ([x, fromAddress, a]) => {
-        const stakeAmount = toAmountNumber(a)
-        return stakeAmount.toNumber() >= 0
-          ? getEstimateGas4StakeDev(x, propertyAddress, stakeAmount.toFormat({ decimalSeparator: '' }), fromAddress)
-          : undefined
-      }),
-    { revalidateOnFocus: false, focusThrottleInterval: 0 }
-    // NOTE: If an error occurs, nothing is done. Because it only displays the estimated gas price.
-  )
-  const { gasPrice } = useGetGasPrice()
-  const estimateGas = useMemo(
-    () => whenDefinedAll([data, gasPrice], ([x, g]) => toNaturalNumber(x).multipliedBy(g)),
-    [gasPrice, data]
-  )
-
-  return { estimateGas, error }
-}
-
 export const useTotalStakingAmountOnProtocol = () => {
-  const { nonConnectedWeb3, accountAddress } = useProvider()
+  const { nonConnectedEthersProvider, accountAddress } = useProvider()
+  const { name: chain } = useDetectChain(nonConnectedEthersProvider)
   const { data: stakingAmount, error } = useSWR<UnwrapFunc<typeof getTotalStakingAmountOnProtocol>, Error>(
-    SWRCachePath.getTotalStakingAmountOnProtocol(accountAddress),
-    () => whenDefined(nonConnectedWeb3, x => getTotalStakingAmountOnProtocol(x)),
-    { onError: err => message.error(err.message), revalidateOnFocus: false, focusThrottleInterval: 0 }
+    SWRCachePath.getTotalStakingAmountOnProtocol(chain, accountAddress),
+    () => whenDefined(nonConnectedEthersProvider, x => getTotalStakingAmountOnProtocol(x)),
+    {
+      onError: err => {
+        console.log(err)
+        message.error(err.message)
+      },
+      revalidateOnFocus: false,
+      focusThrottleInterval: 0
+    }
   )
   return {
     totalStakingAmount: stakingAmount ? Number(stakingAmount) : undefined,
@@ -369,19 +389,34 @@ export const useTotalStakingAmountOnProtocol = () => {
 }
 
 export const useTotalStakingRatio = () => {
-  const { nonConnectedWeb3, accountAddress } = useProvider()
+  const { nonConnectedEthersProvider, accountAddress } = useProvider()
+  const { name: chain } = useDetectChain(nonConnectedEthersProvider)
   const { data: totalSupplyValue, error: totalSupplyError } = useSWR<UnwrapFunc<typeof totalSupply>, Error>(
-    SWRCachePath.totalSupply(accountAddress),
-    () => whenDefined(nonConnectedWeb3, x => totalSupply(x)),
-    { onError: err => message.error(err.message), revalidateOnFocus: false, focusThrottleInterval: 0 }
+    SWRCachePath.totalSupply(chain, accountAddress),
+    () => whenDefined(nonConnectedEthersProvider, x => totalSupply(x)),
+    {
+      onError: err => {
+        console.log(err)
+        message.error(err.message)
+      },
+      revalidateOnFocus: false,
+      focusThrottleInterval: 0
+    }
   )
   const { data: stakingAmount, error: stakingAmountError } = useSWR<
     UnwrapFunc<typeof getTotalStakingAmountOnProtocol>,
     Error
   >(
-    SWRCachePath.getTotalStakingAmountOnProtocol(accountAddress),
-    () => whenDefined(nonConnectedWeb3, x => getTotalStakingAmountOnProtocol(x)),
-    { onError: err => message.error(err.message), revalidateOnFocus: false, focusThrottleInterval: 0 }
+    SWRCachePath.getTotalStakingAmountOnProtocol(chain, accountAddress),
+    () => whenDefined(nonConnectedEthersProvider, x => getTotalStakingAmountOnProtocol(x)),
+    {
+      onError: err => {
+        console.log(err)
+        message.error(err.message)
+      },
+      revalidateOnFocus: false,
+      focusThrottleInterval: 0
+    }
   )
   return {
     totalStakingRatio: totalSupplyValue && stakingAmount ? Number(stakingAmount) / Number(totalSupplyValue) : undefined,
@@ -390,19 +425,34 @@ export const useTotalStakingRatio = () => {
 }
 
 export const useStakingShare = (propertyAddress: string) => {
-  const { nonConnectedWeb3, accountAddress } = useProvider()
+  const { nonConnectedEthersProvider, accountAddress } = useProvider()
+  const { name: chain } = useDetectChain(nonConnectedEthersProvider)
   const { data: inProperty, error: inPropertyError } = useSWR<UnwrapFunc<typeof getTotalStakingAmount>, Error>(
     SWRCachePath.getTotalStakingAmount(propertyAddress, accountAddress),
-    () => whenDefined(nonConnectedWeb3, x => getTotalStakingAmount(x, propertyAddress)),
-    { onError: err => message.error(err.message), revalidateOnFocus: false, focusThrottleInterval: 0 }
+    () => whenDefined(nonConnectedEthersProvider, x => getTotalStakingAmount(x, propertyAddress)),
+    {
+      onError: err => {
+        console.log(err)
+        message.error(err.message)
+      },
+      revalidateOnFocus: false,
+      focusThrottleInterval: 0
+    }
   )
   const { data: inProtocol, error: inProtocolError } = useSWR<
     UnwrapFunc<typeof getTotalStakingAmountOnProtocol>,
     Error
   >(
-    SWRCachePath.getTotalStakingAmountOnProtocol(accountAddress),
-    () => whenDefined(nonConnectedWeb3, x => getTotalStakingAmountOnProtocol(x)),
-    { onError: err => message.error(err.message), revalidateOnFocus: false, focusThrottleInterval: 0 }
+    SWRCachePath.getTotalStakingAmountOnProtocol(chain, accountAddress),
+    () => whenDefined(nonConnectedEthersProvider, x => getTotalStakingAmountOnProtocol(x)),
+    {
+      onError: err => {
+        console.log(err)
+        message.error(err.message)
+      },
+      revalidateOnFocus: false,
+      focusThrottleInterval: 0
+    }
   )
   return {
     stakingShare: inProperty && inProtocol ? Number(inProperty) / Number(inProtocol) : undefined,
@@ -411,7 +461,7 @@ export const useStakingShare = (propertyAddress: string) => {
 }
 
 export const useCreateProperty = () => {
-  const { web3 } = useProvider()
+  const { ethersProvider } = useProvider()
   const key = 'useCreateProperty'
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [error, setError] = useState<Error>()
@@ -421,7 +471,7 @@ export const useCreateProperty = () => {
       message.loading({ content: 'now creating property...', duration: 0, key })
       setError(undefined)
       return (
-        whenDefined(web3, x =>
+        whenDefined(ethersProvider, x =>
           createProperty(x, name, symbol, author)
             .then(result => {
               message.success({ content: 'success creating property!', key })
@@ -437,32 +487,13 @@ export const useCreateProperty = () => {
         ) || ''
       )
     },
-    [web3]
+    [ethersProvider]
   )
   return { createProperty: callback, isLoading, error }
 }
 
-export const useGetEstimateGas4CreateProperty = (name: string, symbol: string, author: string) => {
-  const { web3, accountAddress } = useProvider()
-  const { data, error } = useSWR<BigNumber | undefined, Error>(
-    SWRCachePath.getEstimateGas4CreateProperty(name, symbol, author, accountAddress),
-    () =>
-      whenDefinedAll([web3, accountAddress], ([x, fromAddress]) =>
-        getEstimateGas4CreateProperty(x, name, symbol, author, fromAddress)
-      ),
-    { revalidateOnFocus: false, focusThrottleInterval: 0 }
-    // NOTE: If an error occurs, nothing is done. Because it only displays the estimated gas price.
-  )
-  const { gasPrice } = useGetGasPrice()
-  const estimateGas = useMemo(
-    () => whenDefinedAll([data, gasPrice], ([x, g]) => toNaturalNumber(x).multipliedBy(g)),
-    [gasPrice, data]
-  )
-  return { estimateGas, error }
-}
-
 export const useMarketScheme = () => {
-  const { web3 } = useProvider()
+  const { ethersProvider } = useProvider()
   const key = 'useMarketScheme'
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [error, setError] = useState<Error>()
@@ -471,7 +502,7 @@ export const useMarketScheme = () => {
       setIsLoading(true)
       message.loading({ content: 'now loading...', duration: 0, key })
       setError(undefined)
-      return whenDefined(web3, x =>
+      return whenDefined(ethersProvider, x =>
         marketScheme(x, marketAddress)
           .then(result => {
             message.success({ content: 'success!', key })
@@ -485,13 +516,13 @@ export const useMarketScheme = () => {
           })
       )
     },
-    [web3]
+    [ethersProvider]
   )
   return { marketScheme: callback, isLoading, error }
 }
 
 export const useAuthenticate = () => {
-  const { web3 } = useProvider()
+  const { ethersProvider } = useProvider()
   const key = 'useAuthenticate'
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [error, setError] = useState<Error>()
@@ -500,7 +531,7 @@ export const useAuthenticate = () => {
       setIsLoading(true)
       message.loading({ content: 'now authenticating...', duration: 0, key })
       setError(undefined)
-      return whenDefined(web3, x =>
+      return whenDefined(ethersProvider, x =>
         authenticate(x, marketAddress, propertyAddress, args)
           .then(metricsAddress => {
             setIsLoading(false)
@@ -515,40 +546,20 @@ export const useAuthenticate = () => {
           })
       )
     },
-    [web3]
+    [ethersProvider]
   )
   return { authenticate: callback, isLoading, error }
 }
 
-export const useGetEstimateGas4CreateAndAuthenticate = (marketAddress: string) => {
-  const { web3, accountAddress } = useProvider()
-  const { data, error } = useSWR<BigNumber | undefined, Error>(
-    SWRCachePath.getEstimateGas4CreateAndAuthenticate('name', 'symbol', marketAddress, accountAddress),
-    () =>
-      whenDefinedAll([web3, accountAddress], ([x, fromAddress]) =>
-        getEstimateGas4CreateAndAuthenticate(x, 'name', 'symbol', marketAddress, ['a', 'b', 'c'], fromAddress)
-      ),
-    { revalidateOnFocus: false, focusThrottleInterval: 0 }
-    // NOTE: If an error occurs, nothing is done. Because it only displays the estimated gas price.
-  )
-  const { gasPrice } = useGetGasPrice()
-  const estimateGas = useMemo(
-    () => whenDefinedAll([data, gasPrice], ([x, g]) => toNaturalNumber(x).multipliedBy(g)),
-    [gasPrice, data]
-  )
-
-  return { estimateGas, error }
-}
-
 export const useCreateAndAuthenticate = () => {
-  const { web3 } = useProvider()
+  const { ethersProvider } = useProvider()
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [error, setError] = useState<Error>()
   const callback = useCallback(
     async (name: string, symbol: string, marketAddress: string, args: string[]) => {
       setIsLoading(true)
       setError(undefined)
-      return whenDefined(web3, x =>
+      return whenDefined(ethersProvider, x =>
         createAndAuthenticate(x, name, symbol, marketAddress, args)
           .catch(setError)
           .finally(() => {
@@ -556,37 +567,60 @@ export const useCreateAndAuthenticate = () => {
           })
       )
     },
-    [web3]
+    [ethersProvider]
   )
   return { createAndAuthenticate: callback, isLoading, error }
 }
 
 export const useAPY = () => {
-  const { nonConnectedWeb3, accountAddress } = useProvider()
+  const { nonConnectedEthersProvider, accountAddress } = useProvider()
+  const { name: chain } = useDetectChain(nonConnectedEthersProvider)
+  const { isL1 } = useIsL1()
   const { data: maxRewards, error: maxRewardsError } = useSWR<UnwrapFunc<typeof calculateMaxRewardsPerBlock>, Error>(
-    SWRCachePath.calculateMaxRewardsPerBlock(accountAddress),
-    () => whenDefined(nonConnectedWeb3, x => calculateMaxRewardsPerBlock(x).catch(() => '0')),
-    { onError: err => message.error(err.message), revalidateOnFocus: false, focusThrottleInterval: 0 }
+    SWRCachePath.calculateMaxRewardsPerBlock(chain, accountAddress),
+    () => whenDefined(nonConnectedEthersProvider, x => calculateMaxRewardsPerBlock(x).catch(() => '0')),
+    {
+      onError: err => {
+        console.log(err)
+        message.error(err.message)
+      },
+      revalidateOnFocus: false,
+      focusThrottleInterval: 0
+    }
   )
   const { data: totalStaking, error: totalStakingError } = useSWR<
     UnwrapFunc<typeof getTotalStakingAmountOnProtocol>,
     Error
   >(
-    SWRCachePath.getTotalStakingAmountOnProtocol(accountAddress),
-    () => whenDefined(nonConnectedWeb3, x => getTotalStakingAmountOnProtocol(x)),
-    { onError: err => message.error(err.message), revalidateOnFocus: false, focusThrottleInterval: 0 }
+    SWRCachePath.getTotalStakingAmountOnProtocol(chain, accountAddress),
+    () => whenDefined(nonConnectedEthersProvider, x => getTotalStakingAmountOnProtocol(x)),
+    {
+      onError: err => {
+        console.log(err)
+        message.error(err.message)
+      },
+      revalidateOnFocus: false,
+      focusThrottleInterval: 0
+    }
   )
   const { data: holders, error: holdersError } = useSWR<UnwrapFunc<typeof holdersShare>, Error>(
-    SWRCachePath.holdersShare(maxRewards, totalStaking),
+    SWRCachePath.holdersShare(chain, maxRewards, totalStaking),
     () =>
       maxRewards && totalStaking
-        ? whenDefined(nonConnectedWeb3, x => holdersShare(x, maxRewards, totalStaking))
+        ? whenDefined(nonConnectedEthersProvider, x => holdersShare(x, maxRewards, totalStaking))
         : undefined,
-    { onError: err => message.error(err.message), revalidateOnFocus: false, focusThrottleInterval: 0 }
+    {
+      onError: err => {
+        console.log(err)
+        message.error(err.message)
+      },
+      revalidateOnFocus: false,
+      focusThrottleInterval: 0
+    }
   )
 
   const stakers = maxRewards && holders ? new BigNumber(maxRewards).minus(new BigNumber(holders)) : undefined
-  const year = new BigNumber(2102400)
+  const year = new BigNumber(isL1 ? 2102400 : 31536000)
   const apy = stakers && totalStaking ? stakers.times(year).div(totalStaking).times(100) : undefined
   const creators = holders && totalStaking ? new BigNumber(holders).times(year).div(totalStaking).times(100) : undefined
 
@@ -594,61 +628,95 @@ export const useAPY = () => {
 }
 
 export const useTotalSupply = () => {
-  const { nonConnectedWeb3, accountAddress } = useProvider()
+  const { nonConnectedEthersProvider, accountAddress } = useProvider()
+  const { name: chain } = useDetectChain(nonConnectedEthersProvider)
   const { data: totalSupplyValue, error } = useSWR<UnwrapFunc<typeof totalSupply>, Error>(
-    SWRCachePath.totalSupply(accountAddress),
-    () => whenDefined(nonConnectedWeb3, x => totalSupply(x)),
-    { onError: err => message.error(err.message), revalidateOnFocus: false, focusThrottleInterval: 0 }
+    SWRCachePath.totalSupply(chain, accountAddress),
+    () => whenDefined(nonConnectedEthersProvider, x => totalSupply(x)),
+    {
+      onError: err => {
+        console.log(err)
+        message.error(err.message)
+      },
+      revalidateOnFocus: false,
+      focusThrottleInterval: 0
+    }
   )
 
   return { totalSupply: new BigNumber(totalSupplyValue || '0'), error }
 }
 
 export const useCirculatingSupply = () => {
-  const { nonConnectedWeb3, accountAddress } = useProvider()
+  const { nonConnectedEthersProvider, accountAddress } = useProvider()
+  const { name: chain } = useDetectChain(nonConnectedEthersProvider)
   const { data: totalSupplyValue, error } = useSWR<UnwrapFunc<typeof totalSupply>, Error>(
-    SWRCachePath.totalSupply(accountAddress),
-    () => whenDefined(nonConnectedWeb3, x => totalSupply(x)),
-    { onError: err => message.error(err.message), revalidateOnFocus: false, focusThrottleInterval: 0 }
+    SWRCachePath.totalSupply(chain, accountAddress),
+    () => whenDefined(nonConnectedEthersProvider, x => totalSupply(x)),
+    {
+      onError: err => {
+        console.log(err)
+        message.error(err.message)
+      },
+      revalidateOnFocus: false,
+      focusThrottleInterval: 0
+    }
   )
 
   const circulatingSupplyValue = useCallback(async () => {
-    const amounts = await Promise.all([
-      getDevAmount(DEV_ALLOCATIONS.privateSale),
-      getDevAmount(DEV_ALLOCATIONS.teamOptions),
-      getDevAmount(DEV_ALLOCATIONS.teamTreasury),
-      getDevAmount(DEV_ALLOCATIONS.ecosystemFund),
-      getDevAmount(DEV_ALLOCATIONS.airdrop)
-    ])
-    const privateSaleAmount = new BigNumber(amounts[0] || '0')
-    const teamOptionAmount = new BigNumber(amounts[1] || '0')
-    const teamAmount = new BigNumber(amounts[2] || '0')
-    const ecosystemFundAmount = new BigNumber(amounts[3] || '0')
-    const airdropAmount = new BigNumber(amounts[4] || '0')
+    const amounts = await whenDefined(nonConnectedEthersProvider, prov =>
+      Promise.all([
+        balanceOf(prov, DEV_ALLOCATIONS.privateSale),
+        balanceOf(prov, DEV_ALLOCATIONS.teamOptions),
+        balanceOf(prov, DEV_ALLOCATIONS.teamTreasury),
+        balanceOf(prov, DEV_ALLOCATIONS.ecosystemFund),
+        balanceOf(prov, DEV_ALLOCATIONS.airdrop)
+      ])
+    )
+    const privateSaleAmount = new BigNumber(amounts?.[0] || '0')
+    const teamOptionAmount = new BigNumber(amounts?.[1] || '0')
+    const teamAmount = new BigNumber(amounts?.[2] || '0')
+    const ecosystemFundAmount = new BigNumber(amounts?.[3] || '0')
+    const airdropAmount = new BigNumber(amounts?.[4] || '0')
     return new BigNumber(totalSupplyValue || '0')
       .minus(privateSaleAmount)
       .minus(teamOptionAmount)
       .minus(teamAmount)
       .minus(ecosystemFundAmount)
       .minus(airdropAmount)
-  }, [totalSupplyValue])
+  }, [totalSupplyValue, nonConnectedEthersProvider])
 
   return { circulatingSupply: circulatingSupplyValue, error }
 }
 
 export const useAnnualSupplyGrowthRatio = () => {
-  const { nonConnectedWeb3, accountAddress } = useProvider()
+  const { nonConnectedEthersProvider, nonConnectedEthersL1Provider, accountAddress } = useProvider()
+  const { name: chain } = useDetectChain(nonConnectedEthersProvider)
+  const { isL1 } = useIsL1()
   const { data: maxRewards, error: maxRewardsError } = useSWR<UnwrapFunc<typeof calculateMaxRewardsPerBlock>, Error>(
-    SWRCachePath.calculateMaxRewardsPerBlock(accountAddress),
-    () => whenDefined(nonConnectedWeb3, x => calculateMaxRewardsPerBlock(x).catch(() => '0')),
-    { onError: err => message.error(err.message), revalidateOnFocus: false, focusThrottleInterval: 0 }
+    SWRCachePath.calculateMaxRewardsPerBlock(chain, accountAddress),
+    () => whenDefined(nonConnectedEthersProvider, x => calculateMaxRewardsPerBlock(x).catch(() => '0')),
+    {
+      onError: err => {
+        console.log(err)
+        message.error(err.message)
+      },
+      revalidateOnFocus: false,
+      focusThrottleInterval: 0
+    }
   )
   const { data: totalSupplyValue, error: totalSupplyError } = useSWR<UnwrapFunc<typeof totalSupply>, Error>(
-    SWRCachePath.totalSupply(accountAddress),
-    () => whenDefined(nonConnectedWeb3, x => totalSupply(x)),
-    { onError: err => message.error(err.message), revalidateOnFocus: false, focusThrottleInterval: 0 }
+    SWRCachePath.totalSupply(chain, accountAddress),
+    () => whenDefined(nonConnectedEthersL1Provider, x => totalSupply(x)),
+    {
+      onError: err => {
+        console.log(err)
+        message.error(err.message)
+      },
+      revalidateOnFocus: false,
+      focusThrottleInterval: 0
+    }
   )
-  const year = new BigNumber(2102400)
+  const year = new BigNumber(isL1 ? 2102400 : 31536000)
   const annualSupplyGrowthRatio =
     maxRewards && totalSupplyValue ? new BigNumber(maxRewards).times(year).div(totalSupplyValue).times(100) : undefined
 
@@ -656,14 +724,14 @@ export const useAnnualSupplyGrowthRatio = () => {
 }
 
 export const useGetPolicyAddressesList = () => {
-  const { nonConnectedWeb3 } = useProvider()
+  const { nonConnectedEthersProvider } = useProvider()
   const key = 'useGetPolicyList'
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [error, setError] = useState<Error>()
   const callback = useCallback(async () => {
     setIsLoading(true)
     setError(undefined)
-    return whenDefined(nonConnectedWeb3, x =>
+    return whenDefined(nonConnectedEthersProvider, x =>
       createGetVotablePolicy(x)
         .then(policyAddressesList => {
           setIsLoading(false)
@@ -675,17 +743,28 @@ export const useGetPolicyAddressesList = () => {
           setIsLoading(false)
         })
     )
-  }, [nonConnectedWeb3])
+  }, [nonConnectedEthersProvider])
   return { getPolicyAddressesList: callback, isLoading, error }
 }
 
 export const usePropertyAuthor = (propertyAddress?: string) => {
   const shouldFetch = propertyAddress && propertyAddress.startsWith('0x')
-  const { nonConnectedWeb3, accountAddress } = useProvider()
+  const { nonConnectedEthersProvider, accountAddress } = useProvider()
+  const { name: chain } = useDetectChain(nonConnectedEthersProvider)
   const { data, error } = useSWR<undefined | UnwrapFunc<typeof totalSupply>, Error>(
-    shouldFetch ? SWRCachePath.propertyAuthor(propertyAddress, accountAddress) : null,
-    () => whenDefinedAll([nonConnectedWeb3, propertyAddress], ([client, property]) => propertyAuthor(client, property)),
-    { onError: err => message.error(err.message), revalidateOnFocus: false, focusThrottleInterval: 0 }
+    shouldFetch ? SWRCachePath.propertyAuthor(chain, propertyAddress, accountAddress) : null,
+    () =>
+      whenDefinedAll([nonConnectedEthersProvider, propertyAddress], ([client, property]) =>
+        propertyAuthor(client, property)
+      ),
+    {
+      onError: err => {
+        console.log(err)
+        message.error(err.message)
+      },
+      revalidateOnFocus: false,
+      focusThrottleInterval: 0
+    }
   )
 
   return { author: data, error }
@@ -693,11 +772,12 @@ export const usePropertyAuthor = (propertyAddress?: string) => {
 
 export const useBalanceOf = () => {
   const { currency, toCurrency } = useCurrency()
-  const { nonConnectedWeb3, accountAddress } = useProvider()
+  const { nonConnectedEthersProvider, accountAddress } = useProvider()
+  const { name: chain } = useDetectChain(nonConnectedEthersProvider)
   const { data, error } = useSWR<BigNumber | undefined, Error>(
-    SWRCachePath.balanceOf(accountAddress),
+    SWRCachePath.balanceOf(chain, accountAddress),
     () =>
-      whenDefinedAll([nonConnectedWeb3, accountAddress], ([client, account]) =>
+      whenDefinedAll([nonConnectedEthersProvider, accountAddress], ([client, account]) =>
         balanceOf(client, account).then(toBigNumber)
       ),
     { revalidateOnFocus: false, focusThrottleInterval: 0 }
@@ -709,13 +789,13 @@ export const useBalanceOf = () => {
 
 export const useAllClaimedRewards = () => {
   const { currency, toCurrency } = useCurrency()
-  const { nonConnectedWeb3, accountAddress } = useProvider()
+  const { nonConnectedEthersProvider, accountAddress } = useProvider()
   const { data, error } = useSWR<BigNumber | undefined, Error>(
     SWRCachePath.allClaimedRewards(accountAddress),
     () =>
-      whenDefinedAll([nonConnectedWeb3, accountAddress], ([client, account]) =>
+      whenDefinedAll([nonConnectedEthersProvider, accountAddress], ([client, account]) =>
         allClaimedRewards(client, account).then(allEvents => {
-          return allEvents.reduce((a, c) => a.plus(c.returnValues.value), toBigNumber(0))
+          return allEvents.reduce((a, c) => a.plus(c.args?.value), toBigNumber(0))
         })
       ),
     { revalidateOnFocus: false, focusThrottleInterval: 0 }
@@ -727,40 +807,61 @@ export const useAllClaimedRewards = () => {
 }
 
 export const usePropertyName = (propertyAddress?: string) => {
-  const { nonConnectedWeb3, accountAddress } = useProvider()
+  const { nonConnectedEthersProvider, accountAddress } = useProvider()
+  const { name: chain } = useDetectChain(nonConnectedEthersProvider)
   const { data, error } = useSWR<UnwrapFunc<typeof propertyName>, Error>(
-    SWRCachePath.propertyName(propertyAddress, accountAddress),
+    SWRCachePath.propertyName(chain, propertyAddress, accountAddress),
     () =>
       validAddress(propertyAddress)
-        ? whenDefinedAll([nonConnectedWeb3, propertyAddress], ([client, property]) => propertyName(client, property))
+        ? whenDefinedAll([nonConnectedEthersProvider, propertyAddress], ([client, property]) =>
+            propertyName(client, property)
+          )
         : 'Foo',
-    { onError: err => message.error(err.message), revalidateOnFocus: false, focusThrottleInterval: 0 }
+    {
+      onError: err => {
+        console.log(err)
+        message.error(err.message)
+      },
+      revalidateOnFocus: false,
+      focusThrottleInterval: 0
+    }
   )
 
   return { name: data, error }
 }
 
 export const usePropertySymbol = (propertyAddress?: string) => {
-  const { nonConnectedWeb3, accountAddress } = useProvider()
+  const { nonConnectedEthersProvider, accountAddress } = useProvider()
+  const { name: chain } = useDetectChain(nonConnectedEthersProvider)
   const { data, error } = useSWR<UnwrapFunc<typeof propertySymbol>, Error>(
-    SWRCachePath.propertySymbol(propertyAddress, accountAddress),
+    SWRCachePath.propertySymbol(chain, propertyAddress, accountAddress),
     () =>
       validAddress(propertyAddress)
-        ? whenDefinedAll([nonConnectedWeb3, propertyAddress], ([client, property]) => propertySymbol(client, property))
+        ? whenDefinedAll([nonConnectedEthersProvider, propertyAddress], ([client, property]) =>
+            propertySymbol(client, property)
+          )
         : 'FOO',
-    { onError: err => message.error(err.message), revalidateOnFocus: false, focusThrottleInterval: 0 }
+    {
+      onError: err => {
+        console.log(err)
+        message.error(err.message)
+      },
+      revalidateOnFocus: false,
+      focusThrottleInterval: 0
+    }
   )
 
   return { symbol: data, error }
 }
 
-export const useBalanceOfProperty = (propertyAddress: string) => {
-  const { nonConnectedWeb3, accountAddress } = useProvider()
+export const useBalanceOfProperty = (propertyAddress?: string) => {
+  const { nonConnectedEthersProvider, accountAddress } = useProvider()
+  const { name: chain } = useDetectChain(nonConnectedEthersProvider)
   const { data, error } = useSWR<BigNumber | undefined, Error>(
-    SWRCachePath.balanceOfProperty(propertyAddress, accountAddress),
+    SWRCachePath.balanceOfProperty(chain, propertyAddress, accountAddress),
     () =>
-      whenDefinedAll([nonConnectedWeb3, accountAddress], ([client, account]) =>
-        balanceOfProperty(client, propertyAddress, account).then(toBigNumber)
+      whenDefinedAll([nonConnectedEthersProvider, propertyAddress, accountAddress], ([client, property, account]) =>
+        balanceOfProperty(client, property, account).then(toBigNumber)
       ),
     { revalidateOnFocus: false, focusThrottleInterval: 0 }
   )
@@ -768,14 +869,368 @@ export const useBalanceOfProperty = (propertyAddress: string) => {
 }
 
 export const useBalanceOfAccountProperty = (propertyAddress?: string, accountAddress?: string) => {
-  const { nonConnectedWeb3 } = useProvider()
+  const { nonConnectedEthersProvider } = useProvider()
   const { data, error } = useSWR<BigNumber | undefined, Error>(
     SWRCachePath.balanceOfProperty(propertyAddress, accountAddress),
     () =>
-      whenDefinedAll([nonConnectedWeb3, propertyAddress, accountAddress], ([client, property, account]) =>
+      whenDefinedAll([nonConnectedEthersProvider, propertyAddress, accountAddress], ([client, property, account]) =>
         balanceOfProperty(client, property, account).then(toBigNumber)
       ),
     { revalidateOnFocus: false, focusThrottleInterval: 0 }
   )
   return { balance: data, error }
+}
+
+export const useDetectSTokens = (propertyAddress?: string, accountAddress?: string) => {
+  const { nonConnectedEthersProvider } = useProvider()
+  const { name: chain } = useDetectChain(nonConnectedEthersProvider)
+  const { data, error } = useSWR<UnwrapFunc<typeof detectStokens>, Error>(
+    SWRCachePath.detectStokens(chain, propertyAddress, accountAddress),
+    () =>
+      whenDefinedAll([nonConnectedEthersProvider, propertyAddress, accountAddress], ([client, property, account]) =>
+        detectStokens(client, property, account)
+      ),
+    { revalidateOnFocus: false, focusThrottleInterval: 0 }
+  )
+
+  const { data: detectStokensByPropertyAddressData, error: byPropertyAddressError } = useSWR<
+    UnwrapFunc<typeof detectStokensByPropertyAddress>,
+    Error
+  >(
+    SWRCachePath.detectStokens(chain, propertyAddress, 'ALL'),
+    () =>
+      whenDefinedAll([nonConnectedEthersProvider, propertyAddress], ([client, property]) =>
+        detectStokensByPropertyAddress(client, property)
+      ),
+    { revalidateOnFocus: false, focusThrottleInterval: 0 }
+  )
+
+  return {
+    sTokens: data,
+    sTokensByPropertyAddress: detectStokensByPropertyAddressData,
+    error: error || byPropertyAddressError
+  }
+}
+
+export const usePositionsOfOwner = (accountAddress?: string) => {
+  const { nonConnectedEthersProvider } = useProvider()
+  const { name: chain } = useDetectChain(nonConnectedEthersProvider)
+  const shouldFetch = accountAddress && chain
+  const { data, error } = useSWR<UnwrapFunc<typeof positionsOfOwner>, Error>(
+    shouldFetch ? SWRCachePath.positionsOfOwner(chain, accountAddress) : null,
+    () =>
+      whenDefinedAll([nonConnectedEthersProvider, accountAddress], ([client, account]) =>
+        positionsOfOwner(client, account)
+      ),
+    { revalidateOnFocus: false, focusThrottleInterval: 0 }
+  )
+
+  return { positions: data, error }
+}
+
+export const useGetSTokenTokenURI = (sTokenId?: number) => {
+  const { nonConnectedEthersProvider } = useProvider()
+  const { name: chain } = useDetectChain(nonConnectedEthersProvider)
+  const { data, error, mutate } = useSWR<UnwrapFunc<typeof getStokenTokenURI>, Error>(
+    SWRCachePath.getStokenTokenURI(chain, sTokenId),
+    () =>
+      whenDefinedAll([nonConnectedEthersProvider, sTokenId], ([client, sTokenId]) =>
+        getStokenTokenURI(client, sTokenId)
+      ),
+    { revalidateOnFocus: false, focusThrottleInterval: 0 }
+  )
+  return { tokenURI: data, error, mutate }
+}
+
+export const useSetSTokenTokenURIImage = (sTokenId?: number) => {
+  const { ethersProvider } = useProvider()
+  const [isLoading, setIsLoading] = useState(false)
+  const [error, setError] = useState<Error>()
+
+  const callback = useCallback(
+    async (data: string) => {
+      setIsLoading(true)
+      setError(undefined)
+      return whenDefinedAll([ethersProvider, sTokenId], ([client, id]) =>
+        setStokenTokenURIImage(client, id, data)
+          .catch(setError)
+          .finally(() => {
+            setIsLoading(false)
+          })
+      )
+    },
+    [ethersProvider, sTokenId]
+  )
+
+  return { callback, loading: isLoading, error }
+}
+
+export const useGetSTokenOwnerOf = (sTokenId?: number) => {
+  const { nonConnectedEthersProvider } = useProvider()
+  const { name: chain } = useDetectChain(nonConnectedEthersProvider)
+  const shouldFetch = chain && sTokenId
+  const { data, error } = useSWR<UnwrapFunc<typeof getStokenOwnerOf>, Error>(
+    shouldFetch ? SWRCachePath.getStokenOwnerOf(chain, `${sTokenId}`) : null,
+    () =>
+      whenDefinedAll([nonConnectedEthersProvider, sTokenId], ([client, sTokenId]) =>
+        getStokenOwnerOf(client, sTokenId)
+      ),
+    { revalidateOnFocus: false, focusThrottleInterval: 0 }
+  )
+  return { owner: data, error }
+}
+
+export const useGetSTokenPositions = (sTokenId?: number) => {
+  const { nonConnectedEthersProvider } = useProvider()
+  const { name: chain } = useDetectChain(nonConnectedEthersProvider)
+  const { currency, toCurrency } = useCurrency()
+  const { data, error } = useSWR<UnwrapFunc<typeof getStokenPositions>, Error>(
+    SWRCachePath.getStokenPositions(chain, `${sTokenId}`),
+    () =>
+      whenDefinedAll([nonConnectedEthersProvider, sTokenId], ([client, sTokenId]) =>
+        getStokenPositions(client, sTokenId)
+      ),
+    { revalidateOnFocus: false, focusThrottleInterval: 0 }
+  )
+  const amount = whenDefined(data, pos => toCurrency(toNaturalNumber(pos.amount)))
+  return { positions: data, error, currency, amount }
+}
+
+export const useGetStokenRewards = (sTokenId?: number) => {
+  const { nonConnectedEthersProvider } = useProvider()
+  const { name: chain } = useDetectChain(nonConnectedEthersProvider)
+  const shouldFetch = chain && sTokenId
+  const { currency, toCurrency } = useCurrency()
+  const { data, error } = useSWR<UnwrapFunc<typeof getStokenRewards>, Error>(
+    shouldFetch ? SWRCachePath.getStokenRewards(chain, `${sTokenId}`) : null,
+    () =>
+      whenDefinedAll([nonConnectedEthersProvider, sTokenId], ([client, sTokenId]) =>
+        getStokenRewards(client, sTokenId)
+      ),
+    { revalidateOnFocus: false, focusThrottleInterval: 0 }
+  )
+  const withdrawableReward = whenDefined(data, pos => toCurrency(toNaturalNumber(pos.withdrawableReward)))
+  return { rewards: data, error, currency, withdrawableReward }
+}
+
+export const useAllowance = () => {
+  const { ethersProvider } = useProvider()
+  const [isLoading, setIsLoading] = useState(false)
+  const [error, setError] = useState<Error>()
+  const callback = useCallback(
+    async (contractAddress: string, accountAddress?: string) => {
+      setIsLoading(true)
+      setError(undefined)
+      return whenDefined(ethersProvider, client =>
+        allowance(client, contractAddress, accountAddress)
+          .then(d => new BigNumber(d || '0'))
+          .catch(setError)
+          .finally(() => {
+            setIsLoading(false)
+          })
+      )
+    },
+    [ethersProvider]
+  )
+  return { allowance: callback, isLoading, error }
+}
+
+export const useApprove = () => {
+  const { ethersProvider } = useProvider()
+  const [isLoading, setIsLoading] = useState(false)
+  const [ok, setOK] = useState(false)
+  const [error, setError] = useState<Error>()
+  const callback = useCallback(
+    async (address: string, amount: string) => {
+      setIsLoading(true)
+      setError(undefined)
+      return whenDefined(ethersProvider, client =>
+        approve(client, address, amount)
+          .then(result => setOK(result || false))
+          .catch(setError)
+          .finally(() => {
+            setIsLoading(false)
+          })
+      )
+    },
+    [ethersProvider]
+  )
+  return { approve: callback, ok, isLoading, error }
+}
+
+export const useDepositToProperty = () => {
+  const { ethersProvider } = useProvider()
+  const [isLoading, setIsLoading] = useState<boolean>(false)
+  const [error, setError] = useState<Error>()
+  const callback = useCallback(
+    async (propertyAddress: string, amount: string) => {
+      setIsLoading(true)
+      setError(undefined)
+      return whenDefined(ethersProvider, client =>
+        depositToProperty(client, propertyAddress, amount)
+          .catch(setError)
+          .finally(() => {
+            setIsLoading(false)
+          })
+      )
+    },
+    [ethersProvider]
+  )
+  return { depositToProperty: callback, isLoading, error }
+}
+
+export const useDepositToPosition = () => {
+  const { ethersProvider } = useProvider()
+  const [isLoading, setIsLoading] = useState<boolean>(false)
+  const [error, setError] = useState<Error>()
+  const callback = useCallback(
+    async (sTokenId: string, amount: string) => {
+      setIsLoading(true)
+      setError(undefined)
+      return whenDefined(ethersProvider, client =>
+        depositToPosition(client, sTokenId, amount)
+          .catch(setError)
+          .finally(() => {
+            setIsLoading(false)
+          })
+      )
+    },
+    [ethersProvider]
+  )
+  return { depositToPosition: callback, isLoading, error }
+}
+
+export const useWithdrawByPosition = () => {
+  const { ethersProvider } = useProvider()
+  const [isLoading, setIsLoading] = useState<boolean>(false)
+  const [error, setError] = useState<Error>()
+  const callback = useCallback(
+    async (sTokenId: string, amount: string) => {
+      setIsLoading(true)
+      setError(undefined)
+      return whenDefined(ethersProvider, client =>
+        withdrawByPosition(client, sTokenId, amount)
+          .catch(setError)
+          .finally(() => {
+            setIsLoading(false)
+          })
+      )
+    },
+    [ethersProvider]
+  )
+  return { withdrawByPosition: callback, isLoading, error }
+}
+
+export const useMigrateToSTokens = () => {
+  const { ethersProvider } = useProvider()
+  const [isLoading, setIsLoading] = useState<boolean>(false)
+  const [error, setError] = useState<Error>()
+  const callback = useCallback(
+    async (propertyAddress: string) => {
+      setIsLoading(true)
+      setError(undefined)
+      // return new Promise(resolve =>
+      //   setTimeout(() => {
+      //     store.set(1, true)
+      //     resolve()
+      //   }, 3000)
+      // )
+      return whenDefined(ethersProvider, client =>
+        migrateToSTokens(client, propertyAddress)
+          .catch(setError)
+          .finally(() => {
+            setIsLoading(false)
+          })
+      )
+    },
+    [ethersProvider]
+  )
+  return { migrateToSTokens: callback, isLoading, error }
+}
+
+export const useGetTokenURI = (sTokenId?: number) => {
+  const { nonConnectedEthersProvider } = useProvider()
+  const { name: chain } = useDetectChain(nonConnectedEthersProvider)
+  const shouldFetch = chain && sTokenId
+  const { data, error } = useSWR<UnwrapFunc<typeof getTokenURI>, Error>(
+    shouldFetch ? SWRCachePath.getTokenURI(chain, `${sTokenId}`) : null,
+    () => whenDefinedAll([nonConnectedEthersProvider, sTokenId], ([client, sTokenId]) => getTokenURI(client, sTokenId)),
+    { revalidateOnFocus: false, focusThrottleInterval: 0 }
+  )
+  return { tokenURI: data, error }
+}
+
+export const useGetStokenSymbol = (sTokenId?: number) => {
+  const { nonConnectedEthersProvider } = useProvider()
+  const { data, error } = useSWR<UnwrapFunc<typeof getStokenSymbol>, Error>(
+    SWRCachePath.getStokenSymbol(`${sTokenId}`),
+    () =>
+      whenDefinedAll([nonConnectedEthersProvider, sTokenId], ([client, sTokenId]) => getStokenSymbol(client, sTokenId)),
+    { revalidateOnFocus: false, focusThrottleInterval: 0 }
+  )
+  return { symbol: data, error }
+}
+
+export const useGetEnabledMarkets = () => {
+  const { nonConnectedEthersProvider } = useProvider()
+  const { name } = useDetectChain(nonConnectedEthersProvider)
+  return useSWR<UnwrapFunc<typeof getEnabledMarkets>, Error>(SWRCachePath.enabledMarkets(name), () =>
+    whenDefined(nonConnectedEthersProvider, client => getEnabledMarkets(client))
+  )
+}
+
+export const useGetAuthenticatedProperties = (marketAddress?: string) => {
+  const { nonConnectedEthersProvider } = useProvider()
+  const { name } = useDetectChain(nonConnectedEthersProvider)
+  return useSWR<UnwrapFunc<typeof getAuthenticatedProperties>, Error>(
+    SWRCachePath.getAuthenticatedProperties(name, marketAddress),
+    () =>
+      whenDefinedAll([nonConnectedEthersProvider, marketAddress], ([client, market]) =>
+        getAuthenticatedProperties(client, market)
+      )
+  )
+}
+
+export const useGetAssetsByProperties = (propertyAddress?: string) => {
+  const { nonConnectedEthersProvider } = useProvider()
+  const { name } = useDetectChain(nonConnectedEthersProvider)
+  return useSWR<
+    UndefinedOr<
+      {
+        market?: string
+        id?: string
+      }[]
+    >,
+    Error
+  >(SWRCachePath.useGetAssetsByProperties(name, propertyAddress), () =>
+    whenDefinedAll([nonConnectedEthersProvider, propertyAddress], async ([client, property]) => {
+      const metrics = await metricsOfProperty(client, property)
+      const markets = await whenDefined(metrics, met => Promise.all(met.map(m => getMarket(client, m))))
+      const behaviors = await whenDefined(markets, marks =>
+        Promise.all(marks.map(mak => whenDefined(mak, m => getMarketBehavior(client, m))))
+      )
+      const ids = await whenDefinedAll([behaviors, metrics], ([behav, mets]) =>
+        Promise.all(behav.map((beh, i) => whenDefinedAll([beh, mets[i]], ([b, m]) => getId(client, b, m))))
+      )
+      const res = whenDefinedAll([ids, markets], ([idx, marks]) => marks.map((market, i) => ({ market, id: idx[i] })))
+      return res
+    })
+  )
+}
+
+export const useGetStokenHeldAt = (sTokenId?: number) => {
+  const [isLoading, setIsLoading] = useState<boolean>(true)
+  const { ethersProvider, nonConnectedEthersProvider } = useProvider()
+  const { name: chain } = useDetectChain(ethersProvider)
+  const { data, error } = useSWR<UnwrapFunc<typeof getStokenHeldAt>, Error>(
+    SWRCachePath.getStokenHeldAt(chain, sTokenId),
+    () =>
+      whenDefinedAll([nonConnectedEthersProvider, sTokenId], ([client, sTokenId]) => getStokenHeldAt(client, sTokenId)),
+    { revalidateOnFocus: false }
+  )
+  const block = useMemo(async () => {
+    data && data.length > 0 && setIsLoading(false)
+    return data && data.length > 0 && (await data[0].getBlock())
+  }, [data])
+  return { since: data, block, loading: isLoading, error }
 }

@@ -26,7 +26,12 @@ export const useGetPropertytInformation = (propertyAddress?: string) => {
   const { data, error } = useSWR<UnwrapFunc<typeof getPropertytInformation> | undefined, Error>(
     SWRCachePath.getPropertyInformation(propertyAddress),
     () => whenDefined(propertyAddress, address => getPropertytInformation(address)),
-    { onError: err => message.error({ content: err.message, key: messageKey }) }
+    {
+      onError: err => {
+        console.log(err)
+        message.error({ content: err.message, key: messageKey })
+      }
+    }
   )
   return { data, error }
 }
@@ -35,7 +40,12 @@ export const useGetAuthorInformation = (authorAddress?: string) => {
   const { data, error } = useSWR<UnwrapFunc<typeof getAuthorInformation> | undefined, Error>(
     SWRCachePath.getAuthorInformation(authorAddress),
     () => whenDefined(authorAddress, address => getAuthorInformation(address)),
-    { onError: err => message.error({ content: err.message, key: messageKey }) }
+    {
+      onError: err => {
+        console.log(err)
+        message.error({ content: err.message, key: messageKey })
+      }
+    }
   )
   return { data, error }
 }

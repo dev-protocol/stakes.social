@@ -5,7 +5,7 @@ import { createContract } from 'src/fixtures/utility/contract-client'
 import { getAccountAddress } from 'src/fixtures/wallet/utility'
 import { toEVMBigNumber } from 'src/fixtures/utility'
 import BigNumber from 'bignumber.js'
-import { utils } from '@devprotocol/dev-kit'
+import { utils } from '@devprotocol/alias-legacy-dev-kit'
 import { ETHDEV_V2_ADDRESS } from '../constants/address'
 
 const { execute } = utils

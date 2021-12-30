@@ -31,7 +31,6 @@ import {
   whenDefinedAll
 } from 'src/fixtures/utility'
 import { INITIAL_SHARES_PER_TOKEN, ONE_MONTH_SECONDS, SYSTEM_SETTIMEOUT_MAXIMUM_DELAY_VALUE } from '../constants/number'
-import { getBlock } from 'src/fixtures/wallet/utility'
 import { useProvider } from 'src/fixtures/wallet/hooks'
 import { useTheGraph } from '../uniswap-pool/hooks'
 
@@ -307,7 +306,7 @@ export const useRewardMultiplier = (geyserAddress: string) => {
   )
   const { data: timestamp, error: errorGetBlock } = useSWR<number | undefined, Error>(
     SWRCachePath.getBlock(geyserAddress, block),
-    () => (block ? getBlock(block).then(Number) : undefined),
+    () => (block && web3 ? web3.eth.getBlock(block).then(x => Number(x.timestamp)) : undefined),
     { revalidateOnFocus: false, focusThrottleInterval: 0 }
   )
   const { data: bonusPeriod, error: errorBonusPeriodSec } = useSWR<undefined | BigNumber, Error>(

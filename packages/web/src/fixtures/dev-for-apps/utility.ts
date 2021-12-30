@@ -80,14 +80,6 @@ export interface UploadFile {
   error?: string
 }
 
-export interface Incubator {
-  id: number
-  name: string
-  verifier_id: string
-  tag?: string
-  property?: Property
-}
-
 export const getUser = (walletAddress: string): Promise<UserInformation> =>
   fetch(`${BaseUrl}/mainnet/user/${walletAddress}`)
     .then(res => res.json())
@@ -220,7 +212,7 @@ export const postUploadFile = (
   }).then(res => res.json())
 }
 
-export const deleteUploadFile = (signMessage: string, signature: string, address: string, id: number) => {
+export const deleteUploadFile = async (signMessage: string, signature: string, address: string, id: number) => {
   const authToken = `${address};${signature};${signMessage}`
   return fetch(`${StrapiBaseUrl}/upload/files/${id}`, {
     method: 'DELETE',
@@ -285,11 +277,6 @@ export const putProperty = (
       signMessage
     })
   }).then(res => res.json())
-
-export const getIncubators = (): Promise<Array<Incubator>> =>
-  fetch(`${StrapiBaseUrl}/incubators`)
-    .then(res => res.json())
-    .catch(() => [])
 
 export const getPropertySetting = (
   propertyAddress?: string,

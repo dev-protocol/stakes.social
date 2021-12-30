@@ -4,17 +4,17 @@ exports[`AuthForm Snapshot 1`] = `
 <body>
   <div>
     <div
-      class="sc-bja7zw-0 gunaXk"
+      class="sc-eCImPb hOeXCi"
     >
       <form
         class="ant-form ant-form-horizontal"
         id="basic"
       >
         <div
-          class="sc-bja7zw-1 dBgRaT"
+          class="sc-jRQBWg ffKtpf"
         >
           <div
-            class="sc-bja7zw-2 hNULWy"
+            class="sc-gKclnd evpXwD"
           >
             Project:
           </div>
@@ -30,75 +30,21 @@ exports[`AuthForm Snapshot 1`] = `
                 <div
                   class="ant-form-item-control-input-content"
                 >
-                  <div
-                    class="ant-select ant-select-single ant-select-show-arrow"
+                  <span
+                    class="ant-typography ant-typography-secondary"
                   >
-                    <div
-                      class="ant-select-selector"
-                    >
-                      <span
-                        class="ant-select-selection-search"
-                      >
-                        <input
-                          aria-activedescendant="rc_select_TEST_OR_SSR_list_0"
-                          aria-autocomplete="list"
-                          aria-controls="rc_select_TEST_OR_SSR_list"
-                          aria-haspopup="listbox"
-                          aria-owns="rc_select_TEST_OR_SSR_list"
-                          autocomplete="off"
-                          class="ant-select-selection-search-input"
-                          id="rc_select_TEST_OR_SSR"
-                          readonly=""
-                          role="combobox"
-                          style="opacity: 0;"
-                          type="search"
-                          unselectable="on"
-                          value=""
-                        />
-                      </span>
-                      <span
-                        class="ant-select-selection-placeholder"
-                      >
-                        Please select
-                      </span>
-                    </div>
-                    <span
-                      aria-hidden="true"
-                      class="ant-select-arrow"
-                      style="user-select: none;"
-                      unselectable="on"
-                    >
-                      <span
-                        aria-label="down"
-                        class="anticon anticon-down ant-select-suffix"
-                        role="img"
-                      >
-                        <svg
-                          aria-hidden="true"
-                          data-icon="down"
-                          fill="currentColor"
-                          focusable="false"
-                          height="1em"
-                          viewBox="64 64 896 896"
-                          width="1em"
-                        >
-                          <path
-                            d="M884 256h-75c-5.1 0-9.9 2.5-12.9 6.6L512 654.2 227.9 262.6c-3-4.1-7.8-6.6-12.9-6.6h-75c-6.5 0-10.3 7.4-6.5 12.7l352.6 486.1c12.8 17.6 39 17.6 51.7 0l352.6-486.1c3.9-5.3.1-12.7-6.4-12.7z"
-                          />
-                        </svg>
-                      </span>
-                    </span>
-                  </div>
+                    (Not provide this feature yet on L2)
+                  </span>
                 </div>
               </div>
             </div>
           </div>
         </div>
         <div
-          class="sc-bja7zw-1 dBgRaT"
+          class="sc-jRQBWg ffKtpf"
         >
           <div
-            class="sc-bja7zw-2 hNULWy"
+            class="sc-gKclnd evpXwD"
           >
             Project name:
           </div>
@@ -115,7 +61,7 @@ exports[`AuthForm Snapshot 1`] = `
                   class="ant-form-item-control-input-content"
                 >
                   <div
-                    class="ant-row ant-form-item sc-8mjbdn-0 hPRCJP"
+                    class="ant-row ant-form-item sc-bdvvtL kPCGkR"
                   >
                     <div
                       class="ant-col ant-form-item-control"
@@ -127,7 +73,7 @@ exports[`AuthForm Snapshot 1`] = `
                           class="ant-form-item-control-input-content"
                         >
                           <div
-                            class="sc-8mjbdn-1 dMa-DXs"
+                            class="sc-gsDKAQ bHMKjG"
                           >
                             <span
                               aria-label="deployment-unit"
@@ -151,7 +97,7 @@ exports[`AuthForm Snapshot 1`] = `
                             </span>
                           </div>
                           <input
-                            class="sc-8mjbdn-3 hShyKb"
+                            class="sc-hKwDye bghYKm"
                             id="basic_projectName"
                             placeholder="OSS Project name"
                             value=""
@@ -166,10 +112,10 @@ exports[`AuthForm Snapshot 1`] = `
           </div>
         </div>
         <div
-          class="sc-bja7zw-1 dBgRaT"
+          class="sc-jRQBWg ffKtpf"
         >
           <div
-            class="sc-bja7zw-2 hNULWy"
+            class="sc-gKclnd evpXwD"
           >
             Personal Access Token:
           </div>
@@ -186,7 +132,7 @@ exports[`AuthForm Snapshot 1`] = `
                   class="ant-form-item-control-input-content"
                 >
                   <div
-                    class="ant-row ant-form-item sc-8mjbdn-0 hPRCJP"
+                    class="ant-row ant-form-item sc-bdvvtL kPCGkR"
                   >
                     <div
                       class="ant-col ant-form-item-control"
@@ -198,7 +144,7 @@ exports[`AuthForm Snapshot 1`] = `
                           class="ant-form-item-control-input-content"
                         >
                           <div
-                            class="sc-8mjbdn-1 dMa-DXs"
+                            class="sc-gsDKAQ bHMKjG"
                           >
                             <span
                               aria-label="code"
@@ -222,7 +168,7 @@ exports[`AuthForm Snapshot 1`] = `
                             </span>
                           </div>
                           <input
-                            class="sc-8mjbdn-3 hShyKb"
+                            class="sc-hKwDye bghYKm"
                             id="basic_personalAccessToken"
                             placeholder="Personal Access Token"
                             value=""
@@ -243,7 +189,7 @@ exports[`AuthForm Snapshot 1`] = `
             style="display: flex; align-items: center; align-self: flex-end;"
           >
             <div
-              class="sc-bja7zw-5 eTMkcu"
+              class="sc-pVTFL eIuwjz"
             >
               <span
                 aria-label="info-circle"
@@ -305,16 +251,16 @@ exports[`AuthForm Snapshot 1`] = `
           </div>
         </div>
         <div
-          class="sc-bja7zw-1 dBgRaT"
+          class="sc-jRQBWg ffKtpf"
         >
           <div
             style="display: flex; grid-column: 1/-1; justify-content: flex-end;"
           >
             <div
-              class="sc-bja7zw-3 liRdM"
+              class="sc-iCfMLu kA-DLBd"
             >
               <button
-                class="sc-bja7zw-4 dIqcdo"
+                class="sc-furwcr dWvzTC"
                 type="submit"
               >
                 Authenticate

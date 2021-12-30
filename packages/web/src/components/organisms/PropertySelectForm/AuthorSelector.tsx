@@ -1,6 +1,9 @@
+// @L2 optimized
 import React from 'react'
 import { Select } from 'antd'
 import { useListPropertyMetaQuery } from '@dev/graphql'
+import { useIsL1 } from 'src/fixtures/wallet/hooks'
+import Text from 'antd/lib/typography/Text'
 
 interface Props {
   author: string | undefined
@@ -11,6 +14,7 @@ interface Props {
 const { Option } = Select
 
 export const AuthorSelector = ({ author, onChange }: Props) => {
+  const { isL1 } = useIsL1()
   const { data, loading } = useListPropertyMetaQuery({
     variables: {
       author: author || ''
@@ -18,7 +22,7 @@ export const AuthorSelector = ({ author, onChange }: Props) => {
     skip: !author
   })
 
-  return (
+  return isL1 ? (
     <Select
       loading={loading}
       placeholder="Please select"
@@ -33,5 +37,7 @@ export const AuthorSelector = ({ author, onChange }: Props) => {
           </Option>
         ))}
     </Select>
+  ) : (
+    <Text type="secondary">(Not provide this feature yet on L2)</Text>
   )
 }

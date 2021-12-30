@@ -57,66 +57,24 @@ export const useGetProperty = () => {
   }
 }
 
-export const useGetIncubators = () => {
+export const useGetPropertySetting = () => {
   return {
-    data: [
-      {
-        id: 1,
-        name: 'IPFS',
-        verifier_id: 'ipfs/go-ipfs',
-        property: {
-          id: 69,
-          address: '0x0',
-          name: 'IPFS',
-          description: 'A peer-to-peer hypermedia protocol to make the web faster, safer, and more open.',
-          links: {
-            id: 62,
-            github: 'https://github.com/ipfs/ipfs',
-            website: 'https://ipfs.io/',
-            twitter: null
-          },
-          cover_image: null,
-          avatar: null
-        }
-      },
-      {
-        id: 2,
-        name: 'IPFS',
-        verifier_id: 'ipfs/go-ipfs',
-        property: {
-          id: 69,
-          address: '0x0',
-          name: 'IPFS',
-          description: 'A peer-to-peer hypermedia protocol to make the web faster, safer, and more open.',
-          links: {
-            id: 62,
-            github: 'https://github.com/ipfs/ipfs',
-            website: 'https://ipfs.io/',
-            twitter: null
-          },
-          cover_image: null,
-          avatar: null
-        }
-      },
-      {
-        id: 3,
-        name: 'IPFS',
-        verifier_id: 'ipfs/go-ipfs',
-        property: {
-          id: 69,
-          address: '0x0',
-          name: 'IPFS',
-          description: 'A peer-to-peer hypermedia protocol to make the web faster, safer, and more open.',
-          links: {
-            id: 62,
-            github: 'https://github.com/ipfs/ipfs',
-            website: 'https://ipfs.io/',
-            twitter: null
-          },
-          cover_image: null,
-          avatar: null
-        }
-      }
-    ]
+    id: 'id',
+    private_staking: true
+  }
+}
+
+export const useCreatePropertySetting = () => {
+  return {
+    id: 'id',
+    private_staking: true
+  }
+}
+
+export const useUpdatePropertySetting = () => {
+  return {
+    putPropertySettingHandler: async () => {
+      return { id: 1 }
+    }
   }
 }

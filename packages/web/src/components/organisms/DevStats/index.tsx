@@ -1,3 +1,4 @@
+// @L2 optimized: The parent component will not use this component on L2
 import BigNumber from 'bignumber.js'
 import React, { useMemo, useEffect, useState } from 'react'
 import styled from 'styled-components'

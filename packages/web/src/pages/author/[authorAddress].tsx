@@ -27,6 +27,7 @@ import { Pagination, Spin } from 'antd'
 import { getPath } from 'src/fixtures/utility/route'
 import { CoverImages } from 'src/components/_pages/author/CoverImages'
 import { useENS } from 'src/fixtures/ens/hooks'
+import { LinkWithNetwork } from 'src/components/atoms/LinkWithNetwork'
 
 type Props = {}
 
@@ -201,7 +202,7 @@ const Pool = ({ propertyAddress }: PoolProps) => {
   )
   const { currency } = useCurrency()
   return (
-    <Link href={`/${propertyAddress}`} passHref>
+    <LinkWithNetwork href={`/${propertyAddress}`} passHref>
       <Card>
         <PoolsOverview>
           <PoolLogoSection>
@@ -218,7 +219,7 @@ const Pool = ({ propertyAddress }: PoolProps) => {
           </TotalStaked>
         </PoolsOverview>
       </Card>
-    </Link>
+    </LinkWithNetwork>
   )
 }
 
@@ -300,7 +301,7 @@ const AuthorAddressDetail = (_: Props) => {
   const { getENS } = useENS()
   useEffect(() => {
     const fetchENS = async () => {
-      await getENS(author || '').then((o?: string) => setENS(o || ''))
+      await getENS(author || '').then((o?: string | null) => setENS(o || ''))
     }
     fetchENS()
   }, [author, getENS])

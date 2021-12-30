@@ -4,21 +4,21 @@ exports[`Footer Snapshot 1`] = `
 <body>
   <div>
     <footer
-      class="sc-1fvy930-0 dYQOqb"
+      class="sc-jRQBWg bVAuvP"
     >
       <div
-        class="sc-1wzqvkc-0 gzIPnh"
+        class="sc-hKwDye btLpvh"
         style="margin: unset; text-align: center; max-width: unset; background: black; padding: 30px 0px 30px 0px;"
       >
         <div
-          class="sc-1fvy930-2 cJVuUq"
+          class="sc-iCfMLu eBNevR"
         >
           <div
-            class="sc-1fvy930-7 sxFdW"
+            class="sc-iqseJM cbInZd"
             style="justify-content: start; font-size: 0.9rem;"
           >
             <a
-              class="sc-1fvy930-5 esMpEX"
+              class="sc-jrQzAO giJldq"
               href="https://docs.devprotocol.xyz/stakes-social/"
               rel="noreferrer"
               target="_blank"
@@ -26,7 +26,7 @@ exports[`Footer Snapshot 1`] = `
               What is Stakes.social
             </a>
             <a
-              class="sc-1fvy930-5 esMpEX"
+              class="sc-jrQzAO giJldq"
               href="https://devprotocol.xyz/faq"
               rel="noreferrer"
               target="_blank"
@@ -34,14 +34,30 @@ exports[`Footer Snapshot 1`] = `
               Dev Protocol FAQ
             </a>
             <a
-              class="sc-1fvy930-5 esMpEX"
+              class="sc-jrQzAO giJldq"
+              href="https://bridge.devprotocol.xyz/"
+              rel="noreferrer"
+              target="_blank"
+            >
+              Dev Bridge for L2
+            </a>
+            <a
+              class="sc-jrQzAO giJldq"
+              href="https://app.uniswap.org/#/swap?outputCurrency=0x91F5dC90979b058eBA3be6B7B7e523df7e84e137"
+              rel="noreferrer"
+              target="_blank"
+            >
+              Buy DEV on Uniswap L2
+            </a>
+            <a
+              class="sc-jrQzAO giJldq"
               href="/terms-of-use"
             >
               Terms of Use
             </a>
             <a
-              class="sc-1fvy930-5 esMpEX"
-              href="https://devprotocol.xyz/coc.html"
+              class="sc-jrQzAO giJldq"
+              href="https://github.com/dev-protocol/community/blob/main/CODE_OF_CONDUCT.md"
               rel="noreferrer"
               target="_blank"
             >
@@ -49,26 +65,26 @@ exports[`Footer Snapshot 1`] = `
             </a>
           </div>
           <div
-            class="sc-1fvy930-6 hSpmVW"
+            class="sc-kDTinF hROIFr"
           />
           <div
-            class="sc-1fvy930-7 sxFdW"
+            class="sc-iqseJM cbInZd"
           >
             <div
-              class="sc-1fvy930-3"
+              class="sc-furwcr"
             >
               <a
-                class="sc-38x7tx-0 jyccgJ"
+                class="sc-bdvvtL bKEjhC"
                 href="/"
               >
                 <span
-                  class="sc-1u809dt-0 cGQooL"
+                  class="sc-gsDKAQ hSRZmM"
                 >
                   <svgrurl
                     id="headerlogo"
                   />
                   <span
-                    class="sc-1u809dt-1 kBcMYt"
+                    class="sc-dkPtRN wwTvJ"
                   >
                     Stakes.social
                   </span>
@@ -87,7 +103,7 @@ exports[`Footer Snapshot 1`] = `
                 style="margin-left: 2px; margin-right: 2px;"
               />
               <a
-                class="sc-1fvy930-4 guxrIx"
+                class="sc-pVTFL iAUWrW"
                 href="https://devprotocol.xyz/"
                 rel="noopener noreferrer"
                 target="_blank"
@@ -97,19 +113,19 @@ exports[`Footer Snapshot 1`] = `
             </div>
           </div>
           <div
-            class="sc-1fvy930-7 sxFdW"
+            class="sc-iqseJM cbInZd"
           >
             <div
-              class="sc-1fvy930-8 cseBdJ"
+              class="sc-crHmcD iTsuJT"
             >
-              2020 All rights reserverd.
+              2021 All rights reserverd.
             </div>
             <div
-              class="sc-1fvy930-1 dwyzke"
+              class="sc-gKclnd bnHYEl"
               style="font-size: 0px;"
             >
               <a
-                class="sc-3pzwbd-0 tiHlV"
+                class="sc-eCImPb gLJlXY"
                 href="//twitter.com/devprtcl"
                 rel="noopener noreferrer"
                 target="_blank"
@@ -142,7 +158,7 @@ exports[`Footer Snapshot 1`] = `
                 </svg>
               </a>
               <a
-                class="sc-3pzwbd-0 tiHlV"
+                class="sc-eCImPb gLJlXY"
                 href="//discord.gg/VwJp4KM"
                 rel="noopener noreferrer"
                 target="_blank"
@@ -168,7 +184,7 @@ exports[`Footer Snapshot 1`] = `
                 </svg>
               </a>
               <a
-                class="sc-3pzwbd-0 tiHlV"
+                class="sc-eCImPb gLJlXY"
                 href="https://github.com/dev-protocol/stakes.social"
                 rel="noopener noreferrer"
                 target="_blank"
@@ -203,7 +219,7 @@ exports[`Footer Snapshot 1`] = `
                 </svg>
               </a>
               <a
-                class="sc-3pzwbd-0 tiHlV"
+                class="sc-eCImPb gLJlXY"
                 href="https://t.me/devprtcl"
                 rel="noopener noreferrer"
                 target="_blank"
@@ -231,7 +247,7 @@ exports[`Footer Snapshot 1`] = `
                 </svg>
               </a>
               <a
-                class="sc-3pzwbd-0 tiHlV"
+                class="sc-eCImPb gLJlXY"
                 href="//medium.com/devtoken"
                 rel="noopener noreferrer"
                 target="_blank"

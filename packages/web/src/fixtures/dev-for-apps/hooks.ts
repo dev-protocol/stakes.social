@@ -25,13 +25,11 @@ import {
   useGetPropertySettingsByAccount,
   useGetPropertySettingsByProperty
 } from './functions/useGetPropertySetting'
-import { useGetIncubators } from './functions/incubator'
 
 export {
   useUploadFile,
   useDeleteFile,
   useGetAccount,
-  useGetIncubators,
   useGetProperty,
   useGetPropertySetting,
   useGetPropertySettingsByAccount,

@@ -4,14 +4,229 @@ exports[`Withdraw Snapshot 1`] = `
 <body>
   <div>
     <div
-      class="sc-89297o-0 etzBlt"
+      class="sc-gKclnd gwKHOb"
     >
       <div
-        class="sc-1d8aayd-1 bcBbeW"
+        class="sc-hKwDye gWsDYA"
         style="opacity: 1;"
       >
+        <div
+          class="ant-radio-group ant-radio-group-outline"
+          style="margin-bottom: 12px;"
+        >
+          <div
+            class="ant-space ant-space-vertical"
+          >
+            <div
+              class="ant-space-item"
+              style="margin-bottom: 8px;"
+            >
+              <label
+                class="ant-radio-wrapper"
+              >
+                <span
+                  class="ant-radio"
+                >
+                  <input
+                    class="ant-radio-input"
+                    type="radio"
+                    value="2"
+                  />
+                  <span
+                    class="ant-radio-inner"
+                  />
+                </span>
+                <span>
+                  <div
+                    class="ant-space ant-space-horizontal ant-space-align-center"
+                  >
+                    <div
+                      class="ant-space-item"
+                      style="margin-right: 24px;"
+                    >
+                      <div
+                        style="margin-left: 8px; min-width: 40px;"
+                      >
+                        #
+                        2
+                      </div>
+                    </div>
+                    <div
+                      class="ant-space-item"
+                      style="margin-right: 24px;"
+                    >
+                      <div
+                        style="min-width: 120px;"
+                      >
+                        <span>
+                          1e-15
+                        </span>
+                        <span
+                          style="font-size: 0.6em; margin-left: 2px;"
+                        >
+                          Staked
+                        </span>
+                      </div>
+                    </div>
+                    <div
+                      class="ant-space-item"
+                    >
+                      <div>
+                        <span>
+                          0
+                        </span>
+                        <span
+                          style="font-size: 0.6em; margin-left: 2px;"
+                        >
+                          Claimable
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </span>
+              </label>
+            </div>
+            <div
+              class="ant-space-item"
+              style="margin-bottom: 8px;"
+            >
+              <label
+                class="ant-radio-wrapper"
+              >
+                <span
+                  class="ant-radio"
+                >
+                  <input
+                    class="ant-radio-input"
+                    type="radio"
+                    value="4"
+                  />
+                  <span
+                    class="ant-radio-inner"
+                  />
+                </span>
+                <span>
+                  <div
+                    class="ant-space ant-space-horizontal ant-space-align-center"
+                  >
+                    <div
+                      class="ant-space-item"
+                      style="margin-right: 24px;"
+                    >
+                      <div
+                        style="margin-left: 8px; min-width: 40px;"
+                      >
+                        #
+                        4
+                      </div>
+                    </div>
+                    <div
+                      class="ant-space-item"
+                      style="margin-right: 24px;"
+                    >
+                      <div
+                        style="min-width: 120px;"
+                      >
+                        <span>
+                          1e-15
+                        </span>
+                        <span
+                          style="font-size: 0.6em; margin-left: 2px;"
+                        >
+                          Staked
+                        </span>
+                      </div>
+                    </div>
+                    <div
+                      class="ant-space-item"
+                    >
+                      <div>
+                        <span>
+                          0
+                        </span>
+                        <span
+                          style="font-size: 0.6em; margin-left: 2px;"
+                        >
+                          Claimable
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </span>
+              </label>
+            </div>
+            <div
+              class="ant-space-item"
+            >
+              <label
+                class="ant-radio-wrapper"
+              >
+                <span
+                  class="ant-radio"
+                >
+                  <input
+                    class="ant-radio-input"
+                    type="radio"
+                    value="6"
+                  />
+                  <span
+                    class="ant-radio-inner"
+                  />
+                </span>
+                <span>
+                  <div
+                    class="ant-space ant-space-horizontal ant-space-align-center"
+                  >
+                    <div
+                      class="ant-space-item"
+                      style="margin-right: 24px;"
+                    >
+                      <div
+                        style="margin-left: 8px; min-width: 40px;"
+                      >
+                        #
+                        6
+                      </div>
+                    </div>
+                    <div
+                      class="ant-space-item"
+                      style="margin-right: 24px;"
+                    >
+                      <div
+                        style="min-width: 120px;"
+                      >
+                        <span>
+                          1e-15
+                        </span>
+                        <span
+                          style="font-size: 0.6em; margin-left: 2px;"
+                        >
+                          Staked
+                        </span>
+                      </div>
+                    </div>
+                    <div
+                      class="ant-space-item"
+                    >
+                      <div>
+                        <span>
+                          0
+                        </span>
+                        <span
+                          style="font-size: 0.6em; margin-left: 2px;"
+                        >
+                          Claimable
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </span>
+              </label>
+            </div>
+          </div>
+        </div>
         <span
-          class="ant-input-group-wrapper ant-input-group-wrapper-lg ant-input-search ant-input-search-large ant-input-search-with-button sc-1d8aayd-0 fanYmx"
+          class="ant-input-group-wrapper ant-input-group-wrapper-lg ant-input-search ant-input-search-large ant-input-search-with-button sc-dkPtRN jgEzXX"
         >
           <span
             class="ant-input-wrapper ant-input-group"
@@ -29,7 +244,7 @@ exports[`Withdraw Snapshot 1`] = `
                 class="ant-input-suffix"
               >
                 <button
-                  class="sc-1ttu0x8-0 kmiVBa"
+                  class="sc-bdvvtL bxKQgB"
                 >
                   DEV
                 </button>
@@ -51,10 +266,10 @@ exports[`Withdraw Snapshot 1`] = `
         </span>
       </div>
       <div
-        class="sc-1al8l63-1 bplZGk"
+        class="sc-furwcr deVbcw"
       >
         <div
-          class="sc-1al8l63-0 gZPJKN"
+          class="sc-iCfMLu jZywgv"
         >
           <span
             aria-label="info-circle"

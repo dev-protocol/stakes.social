@@ -4,7 +4,7 @@ exports[`Withdraw Snapshot 1`] = `
 <body>
   <div>
     <form
-      class="ant-form ant-form-vertical sc-401ks8-1 hSjmKp"
+      class="ant-form ant-form-vertical sc-jRQBWg kMRzJz"
     >
       <div
         class="ant-statistic"
@@ -52,7 +52,7 @@ exports[`Withdraw Snapshot 1`] = `
               class="ant-form-item-control-input-content"
             >
               <div
-                class="sc-69st3h-0 kCmYEj"
+                class="sc-bdvvtL lmxjND"
               >
                 <label
                   for="amount"
@@ -60,7 +60,7 @@ exports[`Withdraw Snapshot 1`] = `
                   Your amount
                 </label>
                 <span
-                  class="ant-input-affix-wrapper ant-input-affix-wrapper-lg sc-sicgyx-0 latLKV"
+                  class="ant-input-affix-wrapper ant-input-affix-wrapper-lg sc-gsDKAQ dSVFwg"
                 >
                   <input
                     class="ant-input ant-input-lg"
@@ -72,12 +72,12 @@ exports[`Withdraw Snapshot 1`] = `
                     class="ant-input-suffix"
                   >
                     <span
-                      class="sc-li6qma-0 iMgJsq"
+                      class="sc-hKwDye hiokQn"
                     >
                       ETHDEV-V2
                     </span>
                     <button
-                      class="ant-btn ant-btn-primary ant-btn-sm sc-zinbpr-0 YxPrG"
+                      class="ant-btn ant-btn-primary ant-btn-sm sc-dkPtRN leCUQt"
                       type="button"
                     >
                       <span>
@@ -104,7 +104,7 @@ exports[`Withdraw Snapshot 1`] = `
               class="ant-form-item-control-input-content"
             >
               <div
-                class="sc-69st3h-0 kCmYEj"
+                class="sc-bdvvtL lmxjND"
               >
                 <label
                   for="estimated"
@@ -112,7 +112,7 @@ exports[`Withdraw Snapshot 1`] = `
                   Rewards claimed
                 </label>
                 <input
-                  class="ant-input ant-input-lg ant-input-disabled sc-sicgyx-0 latLKV"
+                  class="ant-input ant-input-lg ant-input-disabled sc-gsDKAQ dSVFwg"
                   disabled=""
                   id="estimated"
                   type="number"
@@ -124,7 +124,7 @@ exports[`Withdraw Snapshot 1`] = `
         </div>
       </div>
       <div
-        class="ant-row ant-form-item sc-401ks8-0 eQhRDm"
+        class="ant-row ant-form-item sc-eCImPb kitwYs"
       >
         <div
           class="ant-col ant-form-item-control"

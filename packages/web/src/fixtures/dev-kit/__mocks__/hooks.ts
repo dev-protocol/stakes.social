@@ -28,14 +28,6 @@ export const useWithdrawHolderReward = () => {
   return { withdraw: () => {} }
 }
 
-export const useGetEstimateGas4WithdrawHolderAmount = () => {
-  return { estimateGas: new BigNumber(0.00001122) }
-}
-
-export const useGetEstimateGas4WithdrawHolderReward = () => {
-  return { estimateGas: new BigNumber(0.00112233) }
-}
-
 export const useWithdrawStakingReward = () => {
   return { withdrawStakingReward: () => {} }
 }
@@ -44,16 +36,8 @@ export const useWithdrawStaking = jest.fn(() => {
   return { withdrawStaking: jest.fn(() => {}) }
 })
 
-export const useGetEstimateGas4WithdrawStakingAmount = () => {
-  return { estimateGas: new BigNumber(0.00223344) }
-}
-
 export const useStake = () => {
   return { stake: () => {} }
-}
-
-export const useGetEstimateGas4Stake = () => {
-  return { estimateGas: new BigNumber(0.00334455) }
 }
 
 export const useCancelStaking = () => {
@@ -114,4 +98,58 @@ export const usePropertySymbol = (propertyAddress?: string) => {
 
 export const useBalanceOfProperty = () => {
   return { balance: toBigNumber(1000) }
+}
+
+export const useDetectSTokens = () => {
+  return { sTokens: [2, 4, 6] }
+}
+
+export const usePositionsOfOwner = () => {
+  return { positions: [2, 4, 6] }
+}
+
+export const useGetSTokenPositions = () => {
+  return { positions: { amount: toBigNumber(1000).toString() }, currency: 'DEV', amount: toBigNumber(1000) }
+}
+
+export const useGetStokenRewards = () => {
+  return {
+    rewards: { entireReward: toBigNumber(1000).toString() },
+    currency: 'DEV',
+    withdrawableReward: toBigNumber(1000)
+  }
+}
+
+export const useAllowance = () => {
+  return { allowance: () => {} }
+}
+
+export const useApprove = () => {
+  return { approve: () => {} }
+}
+
+export const useDepositToProperty = () => {
+  return { depositToProperty: () => {} }
+}
+
+export const useDepositToPosition = () => {
+  return { depositToPosition: () => {} }
+}
+
+export const useWithdrawByPosition = () => {
+  return {
+    withdrawByPosition: jest.fn()
+  }
+}
+
+export const useMigrateToSTokens = () => {
+  return { migrateToSTokens: () => {} }
+}
+
+export const useGetTokenURI = () => {
+  return { tokenURI: {} }
+}
+
+export const useGetStokenSymbol = () => {
+  return { symbol: '' }
 }

@@ -18,7 +18,8 @@ export const usePostInvitation = () => {
     role,
     url,
     useCase,
-    ask
+    ask,
+    newsletter
   }: {
     asset: string
     email: string
@@ -29,6 +30,7 @@ export const usePostInvitation = () => {
     url: string
     useCase: string
     ask: string
+    newsletter: boolean
   }) => {
     const signMessage = `invitation: ${asset}`
     const signature = await sign(web3, signMessage)
@@ -51,7 +53,8 @@ export const usePostInvitation = () => {
       role,
       url,
       useCase,
-      ask
+      ask,
+      newsletter
     })
       .then(result => {
         if (result.success) {

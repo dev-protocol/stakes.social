@@ -1,56 +1,124 @@
-import Web3 from 'web3'
-import { EventData } from 'web3-eth-contract'
-import { contractFactory, DevkitContract } from '@devprotocol/dev-kit'
-import { getContractAddress } from './get-contract-address'
-import { client as devClient, utils } from '@devprotocol/dev-kit'
+import {
+  contractFactory,
+  DevkitContract,
+  client as devClient,
+  utils,
+  addresses,
+  metricsAbi,
+  metricsFactoryAbi,
+  devAbi,
+  sTokensAbi,
+  RegistryContract
+} from '@devprotocol/dev-kit'
+import { contractFactory as l2ContractFactory, DevkitContract as L2DevkitContract } from '@devprotocol/dev-kit/l2'
+import { getContractAddress as _getContractAddress } from './get-contract-address'
 import BigNumber from 'bignumber.js'
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { PropertyFactoryContract } from '@devprotocol/dev-kit'
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { UnwrapFunc } from '../utility'
-import { metricsAbi, metricsFactoryAbi, devAbi, lockupAbi, propertyFactoryAbi, withdrawAbi } from './abi'
+import { ethers, providers, Event } from 'ethers'
+import { utils as legacyUtils } from '@devprotocol/alias-legacy-dev-kit'
+import Web3 from 'web3'
+import { ChainName, detectChain } from '../wallet/utility'
+import { whenDefinedAll, whenDefined, UndefinedOr } from '@devprotocol/util-ts'
+const { execute } = utils
+const { watchEvent } = legacyUtils
 
-const { execute, watchEvent } = utils
-
-const cache: WeakMap<Web3, DevkitContract> = new WeakMap()
-const newClient = (web3: Web3) => {
-  const fromCache = cache.get(web3)
+const cacheForContractFactory: WeakMap<
+  providers.BaseProvider,
+  [UndefinedOr<DevkitContract>, UndefinedOr<L2DevkitContract>]
+> = new WeakMap()
+const cacheForNetwork: WeakMap<providers.BaseProvider, ChainName> = new WeakMap()
+const newClient = async (
+  prov: providers.BaseProvider
+): Promise<
+  [UndefinedOr<DevkitContract>, UndefinedOr<L2DevkitContract>, UndefinedOr<DevkitContract | L2DevkitContract>]
+> => {
+  const fromCache = cacheForContractFactory.get(prov)
+  if (fromCache) {
+    return [...fromCache, fromCache[0] || fromCache[1]]
+  }
+  const isL2 = await getNetwork(prov).then(name => name !== 'ethereum' && name !== 'ropsten')
+  const contracts = !isL2 ? contractFactory(prov) : undefined
+  const l2Contracts = isL2 ? l2ContractFactory(prov) : undefined
+  cacheForContractFactory.set(prov, [contracts, l2Contracts])
+  return [contracts, l2Contracts, contracts || l2Contracts]
+}
+const getNetwork = async (prov: providers.BaseProvider) => {
+  const fromCache = cacheForNetwork.get(prov)
   if (fromCache) {
     return fromCache
   }
-  const contracts = contractFactory(web3.currentProvider)
-  cache.set(web3, contracts)
-  return contracts
+  const net = await detectChain(prov)
+  cacheForNetwork.set(prov, net.name)
+  return net.name
+}
+const createGetContractAddress =
+  (prov: providers.BaseProvider) =>
+  async <C extends DevkitContract | L2DevkitContract>(
+    client: C,
+    contract: keyof Omit<RegistryContract, 'contract'>
+  ): Promise<string> => {
+    const net = await getNetwork(prov)
+    return _getContractAddress(client, contract, net)
+  }
+const getL2Registry = async (prov: providers.BaseProvider) => {
+  const net = await getNetwork(prov)
+  return net === 'arbitrum-one'
+    ? addresses.arbitrum.one
+    : net === 'arbitrum-rinkeby'
+    ? addresses.arbitrum.rinkeby
+    : undefined
+}
+const getSTokensAddress = async (prov: providers.BaseProvider) => {
+  const net = await getNetwork(prov)
+  return net === 'ethereum'
+    ? addresses.eth.main.sTokens
+    : net === 'ropsten'
+    ? addresses.eth.ropsten.sTokens
+    : net === 'arbitrum-one'
+    ? addresses.arbitrum.one.sTokens
+    : net === 'arbitrum-rinkeby'
+    ? addresses.arbitrum.rinkeby.sTokens
+    : undefined
 }
 
-export const getRewardsAmount = async (web3: Web3, propertyAddress: string) => {
-  const client = newClient(web3)
+export const getRewardsAmount = async (prov: providers.BaseProvider, propertyAddress: string) => {
+  const [, , client] = await newClient(prov)
+  const getContractAddress = createGetContractAddress(prov)
   if (client) {
     return client
       .lockup(await getContractAddress(client, 'lockup'))
-      .calculateCumulativeHoldersRewardAmount(propertyAddress)
+      .calculateRewardAmount(propertyAddress)
+      .then(x => x[0])
   }
   return undefined
 }
 
-export const getTotalStakingAmount = async (web3: Web3, proepertyAddress: string) => {
-  const client = newClient(web3)
+export const getTotalStakingAmount = async (prov: providers.BaseProvider, proepertyAddress: string) => {
+  const [client, l2] = await newClient(prov)
+  const getContractAddress = createGetContractAddress(prov)
   if (client) {
     return client.lockup(await getContractAddress(client, 'lockup')).getPropertyValue(proepertyAddress)
   }
-  return undefined
+  return whenDefinedAll([l2, await getL2Registry(prov)], ([l2x, reg]) =>
+    l2x.lockup(reg.lockup).totalLockedForProperty(proepertyAddress)
+  )
 }
 
-export const getTotalStakingAmountOnProtocol = async (web3: Web3) => {
-  const client = newClient(web3)
+export const getTotalStakingAmountOnProtocol = async (prov: providers.BaseProvider) => {
+  const [client, l2] = await newClient(prov)
+  const getContractAddress = createGetContractAddress(prov)
   if (client) {
     return client.lockup(await getContractAddress(client, 'lockup')).getAllValue()
   }
-  return undefined
+  return whenDefinedAll([l2, await getL2Registry(prov)], ([l2x, reg]) => l2x.lockup(reg.lockup).totalLocked())
 }
 
-export const getMyHolderAmount = async (web3: Web3, propertyAddress: string, accountAddress: string) => {
-  const client = newClient(web3)
+export const getMyHolderAmount = async (
+  prov: providers.BaseProvider,
+  propertyAddress: string,
+  accountAddress: string
+) => {
+  const [, , client] = await newClient(prov)
+  const getContractAddress = createGetContractAddress(prov)
   if (client && accountAddress) {
     return client
       .withdraw(await getContractAddress(client, 'withdraw'))
@@ -59,9 +127,13 @@ export const getMyHolderAmount = async (web3: Web3, propertyAddress: string, acc
   return undefined
 }
 
-export const getTreasuryAmount = async (web3: Web3, propertyAddress: string) => {
-  const client = newClient(web3)
-  const treasuryAddress = await client.policy(await getContractAddress(client, 'policy')).treasury()
+export const getTreasuryAmount = async (prov: providers.BaseProvider, propertyAddress: string) => {
+  const [l1, l2, client] = await newClient(prov)
+  const getContractAddress = createGetContractAddress(prov)
+  const reg = await getL2Registry(prov)
+  const treasuryAddress =
+    (await whenDefined(l1, async x => x.policy(await getContractAddress(x, 'policy')).treasury())) ??
+    (await whenDefinedAll([l2, reg], ([x, regis]) => x.registry(regis.registry).registries('Treasury')))
   if (client && treasuryAddress) {
     return client
       .withdraw(await getContractAddress(client, 'withdraw'))
@@ -70,8 +142,13 @@ export const getTreasuryAmount = async (web3: Web3, propertyAddress: string) => 
   return undefined
 }
 
-export const getMyStakingRewardAmount = async (web3: Web3, propertyAddress: string, accountAddress: string) => {
-  const client = newClient(web3)
+export const getMyStakingRewardAmount = async (
+  prov: providers.BaseProvider,
+  propertyAddress: string,
+  accountAddress: string
+) => {
+  const [client] = await newClient(prov)
+  const getContractAddress = createGetContractAddress(prov)
   if (client && accountAddress) {
     return client
       .lockup(await getContractAddress(client, 'lockup'))
@@ -80,68 +157,61 @@ export const getMyStakingRewardAmount = async (web3: Web3, propertyAddress: stri
   return undefined
 }
 
-export const getMyStakingAmount = async (web3: Web3, propertyAddress: string, accountAddress: string) => {
-  const client = newClient(web3)
+export const getMyStakingAmount = async (
+  prov: providers.BaseProvider,
+  propertyAddress: string,
+  accountAddress: string
+) => {
+  const [client] = await newClient(prov)
+  const getContractAddress = createGetContractAddress(prov)
   if (client && accountAddress) {
     return client.lockup(await getContractAddress(client, 'lockup')).getValue(propertyAddress, accountAddress)
   }
   return undefined
 }
 
-export const withdrawHolderAmount = async (web3: Web3, propertyAddress: string) => {
-  const client = newClient(web3)
+export const withdrawHolderAmount = async (prov: providers.BaseProvider, propertyAddress: string) => {
+  const [, , client] = await newClient(prov)
+  const getContractAddress = createGetContractAddress(prov)
   if (!client) throw new Error(`No wallet`)
   return client.withdraw(await getContractAddress(client, 'withdraw')).withdraw(propertyAddress)
 }
 
-export const getEstimateGas4WithdrawHolderAmount = async (web3: Web3, propertyAddress: string, from: string) => {
-  const client = newClient(web3)
-  if (!client) throw new Error(`No wallet`)
-  const contract = new web3.eth.Contract([...withdrawAbi], await getContractAddress(client, 'withdraw'), {})
-  return new BigNumber(await contract.methods['withdraw'](propertyAddress).estimateGas({ from }))
-}
-
-export const withdrawStakingAmount = async (web3: Web3, propertyAddress: string, amount: BigNumber) => {
-  const client = newClient(web3)
-  if (!client) throw new Error(`No wallet`)
+export const withdrawStakingAmount = async (
+  prov: providers.BaseProvider,
+  propertyAddress: string,
+  amount: BigNumber
+) => {
+  const [client] = await newClient(prov)
+  const getContractAddress = createGetContractAddress(prov)
+  if (!client) throw new Error(`No wallet or not supported network`)
   return client.lockup(await getContractAddress(client, 'lockup')).withdraw(propertyAddress, amount.toFixed())
 }
 
-export const getEstimateGas4WithdrawStakingAmount = async (
-  web3: Web3,
-  propertyAddress: string,
-  amount: string,
-  from: string
-) => {
-  const client = newClient(web3)
-  if (!client) throw new Error(`No wallet`)
-  const contract = new web3.eth.Contract([...lockupAbi], await getContractAddress(client, 'lockup'), {})
-  return new BigNumber(await contract.methods['withdraw'](propertyAddress, amount).estimateGas({ from }))
-}
-
-export const stakeDev = async (web3: Web3, propertyAddress: string, amount: string) => {
-  const client = newClient(web3)
-  if (!client) throw new Error(`No wallet`)
+export const stakeDev = async (prov: providers.BaseProvider, propertyAddress: string, amount: string) => {
+  const [client] = await newClient(prov)
+  const getContractAddress = createGetContractAddress(prov)
+  if (!client) throw new Error(`No wallet or not supported network`)
   return client.dev(await getContractAddress(client, 'token')).deposit(propertyAddress, amount)
 }
 
-export const getEstimateGas4StakeDev = async (web3: Web3, propertyAddress: string, amount: string, from: string) => {
-  const client = newClient(web3)
-  if (!client) throw new Error(`No wallet`)
-  const contract = new web3.eth.Contract([...devAbi], await getContractAddress(client, 'token'), {})
-  return new BigNumber(await contract.methods['deposit'](propertyAddress, amount).estimateGas({ from }))
-}
-
-export const calculateMaxRewardsPerBlock = async (web3: Web3) => {
-  const client = newClient(web3)
-  if (client) {
-    return client.allocator(await getContractAddress(client, 'allocator')).calculateMaxRewardsPerBlock()
+export const calculateMaxRewardsPerBlock = async (prov: providers.BaseProvider) => {
+  const [l1, l2] = await newClient(prov)
+  const getContractAddress = createGetContractAddress(prov)
+  if (l1) {
+    return l1.allocator(await getContractAddress(l1, 'allocator')).calculateMaxRewardsPerBlock()
+  }
+  if (l2) {
+    const totalLocked = await l2.lockup(await getContractAddress(l2, 'lockup')).totalLocked()
+    const totalAssets = await l2.metricsFactory(await getContractAddress(l2, 'metricsFactory')).metricsCount()
+    return l2.policy(await getContractAddress(l2, 'policy')).rewards(totalLocked, totalAssets.toString())
   }
   return undefined
 }
 
-export const createProperty = async (web3: Web3, name: string, symbol: string, author: string) => {
-  const client = newClient(web3)
+export const createProperty = async (prov: providers.BaseProvider, name: string, symbol: string, author: string) => {
+  const [, , client] = await newClient(prov)
+  const getContractAddress = createGetContractAddress(prov)
   if (process.env.NODE_ENV == 'production' && client) {
     return client.propertyFactory(await getContractAddress(client, 'propertyFactory')).create(name, symbol, author)
   } else if (process.env.NODE_ENV == 'development') {
@@ -151,39 +221,25 @@ export const createProperty = async (web3: Web3, name: string, symbol: string, a
   return undefined
 }
 
-export const getEstimateGas4CreateProperty = async (
-  web3: Web3,
-  name: string,
-  symbol: string,
-  author: string,
-  from: string
-) => {
-  const client = newClient(web3)
-  if (!client) {
-    return undefined
-  }
-  const contract = new web3.eth.Contract(
-    [...propertyFactoryAbi],
-    await getContractAddress(client, 'propertyFactory'),
-    {}
-  )
-  return new BigNumber(await contract.methods['create'](name, symbol, author).estimateGas({ from }))
-}
-
-export const marketScheme = async (web3: Web3, marketAddress: string) => {
-  const client = newClient(web3)
+export const marketScheme = async (prov: providers.BaseProvider, marketAddress: string) => {
+  const [, , client] = await newClient(prov)
   if (client) {
     return client.market(marketAddress).schema()
   }
   return []
 }
 
-export const authenticate = async (web3: Web3, marketAddress: string, propertyAddress: string, args: string[]) => {
-  const client = newClient(web3)
+export const authenticate = async (
+  prov: providers.BaseProvider,
+  marketAddress: string,
+  propertyAddress: string,
+  args: string[]
+) => {
+  const [, , client] = await newClient(prov)
+  const getContractAddress = createGetContractAddress(prov)
   if (process.env.NODE_ENV == 'production' && client) {
-    const _args = ['', '', '', '', ''].map((x, i) => (args[i] ? args[i] : x))
-    return client.market(marketAddress).authenticate(propertyAddress, _args, {
-      metricsFactory: await getContractAddress(client, 'metricsFactory')
+    return client.market(marketAddress).authenticate(propertyAddress, args, {
+      metricsFactoryAddress: await getContractAddress(client, 'metricsFactory')
     })
   } else if (process.env.NODE_ENV == 'development') {
     console.log('env:', process.env.NODE_ENV, 'return mock value')
@@ -193,18 +249,28 @@ export const authenticate = async (web3: Web3, marketAddress: string, propertyAd
 }
 
 export const createAndAuthenticate = async (
-  web3: Web3,
+  prov: providers.BaseProvider,
   name: string,
   symbol: string,
   marketAddress: string,
   args: string[]
 ) => {
-  const client = newClient(web3)
-  return client
-    .propertyFactory(await getContractAddress(client, 'propertyFactory'))
-    .createAndAuthenticate(name, symbol, marketAddress, args, {
-      metricsFactory: await getContractAddress(client, 'metricsFactory')
-    })
+  const [, , client] = await newClient(prov)
+  const getContractAddress = createGetContractAddress(prov)
+  if (client) {
+    console.log('***', await (prov as any).getSigner().getAddress())
+    return client.propertyFactory(await getContractAddress(client, 'propertyFactory')).createAndAuthenticate(
+      name,
+      symbol,
+      marketAddress,
+      args,
+      {
+        metricsFactoryAddress: await getContractAddress(client, 'metricsFactory')
+      },
+      { fallback: { gasLimit: 2000000 } }
+    )
+  }
+  return undefined
 
   /**
    * During development, you can check the operation using the commented out code below.
@@ -226,44 +292,28 @@ export const createAndAuthenticate = async (
   // })
 }
 
-export const getEstimateGas4CreateAndAuthenticate = async (
-  web3: Web3,
-  name: string,
-  symbol: string,
-  marketAddress: string,
-  args: string[],
-  from: string
-) => {
-  const client = newClient(web3)
-  if (!client) throw new Error(`No wallet`)
-  const contract = new web3.eth.Contract(
-    [...propertyFactoryAbi],
-    await getContractAddress(client, 'propertyFactory'),
-    {}
-  )
-  return new BigNumber(
-    await contract.methods['createAndAuthenticate'](name, symbol, marketAddress, ...args).estimateGas({ from })
-  )
-}
-
-export const totalSupply = async (web3: Web3) => {
-  const client = newClient(web3)
+export const totalSupply = async (prov: providers.BaseProvider) => {
+  const [, , client] = await newClient(prov)
+  const getContractAddress = createGetContractAddress(prov)
   if (client) {
+    console.log(await getContractAddress(client, 'token'))
     return client.dev(await getContractAddress(client, 'token')).totalSupply()
   }
   return undefined
 }
 
-export const holdersShare = async (web3: Web3, amount: string, lockedups: string) => {
-  const client = newClient(web3)
+export const holdersShare = async (prov: providers.BaseProvider, amount: string, lockedups: string) => {
+  const [, , client] = await newClient(prov)
+  const getContractAddress = createGetContractAddress(prov)
   if (client) {
     return client.policy(await getContractAddress(client, 'policy')).holdersShare(amount, lockedups)
   }
   return undefined
 }
 
-export const createGetVotablePolicy = async (web3: Web3) => {
-  const client = newClient(web3)
+export const createGetVotablePolicy = async (prov: providers.BaseProvider) => {
+  const [client] = await newClient(prov)
+  const getContractAddress = createGetContractAddress(prov)
   if (client) {
     const policyGroup = client.policyGroup(await getContractAddress(client, 'policyGroup'))
     const [policies, currentPolicy] = await Promise.all([
@@ -272,89 +322,317 @@ export const createGetVotablePolicy = async (web3: Web3) => {
     ])
     return policies.filter(p => p !== currentPolicy)
   }
-  throw new Error(`No wallet`)
+  throw new Error(`No wallet or not supported network`)
 }
 
-export const propertyAuthor = async (web3: Web3, propertyAddress: string) => {
-  const client = newClient(web3)
+export const propertyAuthor = async (prov: providers.BaseProvider, propertyAddress: string) => {
+  const [, , client] = await newClient(prov)
   if (client) {
     return client.property(propertyAddress).author()
   }
   return undefined
 }
 
-export const propertyName = async (web3: Web3, propertyAddress: string): Promise<undefined | string> => {
-  const client = newClient(web3)
+export const propertyName = async (
+  prov: providers.BaseProvider,
+  propertyAddress: string
+): Promise<undefined | string> => {
+  const [, , client] = await newClient(prov)
   if (client) {
     return client.property(propertyAddress).name()
   }
   return undefined
 }
 
-export const propertySymbol = async (web3: Web3, propertyAddress: string): Promise<undefined | string> => {
-  const client = newClient(web3)
+export const propertySymbol = async (
+  prov: providers.BaseProvider,
+  propertyAddress: string
+): Promise<undefined | string> => {
+  const [, , client] = await newClient(prov)
   if (client) {
     return client.property(propertyAddress).symbol()
   }
   return undefined
 }
 
-export const balanceOf = async (web3: Web3, accountAddress: string) => {
-  const client = newClient(web3)
+export const balanceOf = async (prov: providers.BaseProvider, accountAddress: string) => {
+  const [, , client] = await newClient(prov)
+  const getContractAddress = createGetContractAddress(prov)
   if (client && accountAddress) {
     return client.dev(await getContractAddress(client, 'token')).balanceOf(accountAddress)
   }
   return undefined
 }
 
-export const allClaimedRewards = async (web3: Web3, accountAddress: string): Promise<EventData[]> => {
-  const client = newClient(web3)
+export const allClaimedRewards = async (prov: providers.BaseProvider, accountAddress: string): Promise<Event[]> => {
+  const [, , client] = await newClient(prov)
+  const getContractAddress = createGetContractAddress(prov)
   if (client) {
-    return client
-      .dev(await getContractAddress(client, 'token'))
-      .contract()
-      .getPastEvents('Transfer', {
-        filter: { from: '0x0000000000000000000000000000000000000000', to: accountAddress },
-        fromBlock: 0,
-        toBlock: 'latest'
-      })
+    const contract = new ethers.Contract(await getContractAddress(client, 'token'), [...devAbi])
+    return contract.queryFilter(
+      contract.filters.Transfer('0x0000000000000000000000000000000000000000', accountAddress),
+      'earliest',
+      'latest'
+    )
   }
   return []
 }
 
-export const balanceOfProperty = async (web3: Web3, propertyAddress: string, accountAddress: string) => {
-  const client = newClient(web3)
+export const balanceOfProperty = async (
+  prov: providers.BaseProvider,
+  propertyAddress: string,
+  accountAddress: string
+) => {
+  const [, , client] = await newClient(prov)
   if (client && accountAddress) {
-    return client.property(propertyAddress).contract().methods.balanceOf(accountAddress).call()
+    return client.property(propertyAddress).balanceOf(accountAddress)
   }
   return undefined
 }
 
-const getMetricsProperty = async (address: string, client: Web3): Promise<string> =>
+const getMetricsProperty = async (address: string): Promise<string> =>
   execute({
-    contract: new client.eth.Contract([...metricsAbi], address),
-    method: 'property'
+    contract: new ethers.Contract(address, [...metricsAbi]),
+    method: 'property',
+    mutation: false
   })
 
-export const waitForCreateMetrics = async (web3: Web3, propertyAddress: string): Promise<string> => {
-  const client = newClient(web3)
-  const [fromBlock, metricsFactoryAddress] = await Promise.all([
-    web3.eth.getBlockNumber(),
-    getContractAddress(client, 'metricsFactory')
-  ])
-  return new Promise((resolve, reject) => {
-    watchEvent({
-      fromBlock,
-      contract: new web3.eth.Contract([...metricsFactoryAbi], metricsFactoryAddress),
-      resolver: async e =>
-        (metricsAddress =>
-          metricsAddress
-            ? getMetricsProperty(metricsAddress, web3)
-                .then(property => (property === propertyAddress ? true : false))
-                .catch(reject)
-            : false)(e.event === 'Create' ? (e.returnValues._metrics as string) : undefined)
+export const waitForCreateMetrics = async (
+  prov: providers.BaseProvider,
+  web3: Web3,
+  propertyAddress: string
+): Promise<string | undefined> => {
+  const [, , client] = await newClient(prov)
+  const getContractAddress = createGetContractAddress(prov)
+  if (client) {
+    const [fromBlock, metricsFactoryAddress] = await Promise.all([
+      prov.getBlockNumber(),
+      getContractAddress(client, 'metricsFactory')
+    ])
+    return new Promise((resolve, reject) => {
+      watchEvent({
+        fromBlock,
+        contract: new web3.eth.Contract([...(metricsFactoryAbi as any)], metricsFactoryAddress),
+        resolver: async e =>
+          (metricsAddress =>
+            metricsAddress
+              ? getMetricsProperty(metricsAddress)
+                  .then(property => (property === propertyAddress ? true : false))
+                  .catch(reject)
+              : false)(e.event === 'Create' ? (e.returnValues._metrics as string) : undefined)
+      })
+        .then(res => resolve(res.returnValues._metrics as string))
+        .catch(reject)
     })
-      .then(res => resolve(res.returnValues._metrics as string))
-      .catch(reject)
-  })
+  }
+  return undefined
+}
+
+export const positionsOfOwner = async (prov: providers.BaseProvider, accountAddress: string) => {
+  const [, , client] = await newClient(prov)
+  const address = await getSTokensAddress(prov)
+  if (client && address) {
+    const TokenIdList = await client.sTokens(address).positionsOfOwner(accountAddress)
+    return TokenIdList
+  }
+  return undefined
+}
+
+export const detectStokens = async (prov: providers.BaseProvider, propertyAddress: string, accountAddress: string) => {
+  const [, , client] = await newClient(prov)
+  const address = await getSTokensAddress(prov)
+  if (client && address) {
+    const TokenIdList = await devClient.createDetectSTokens(client.sTokens(address))(propertyAddress, accountAddress)
+    return TokenIdList
+  }
+  return undefined
+}
+
+export const detectStokensByPropertyAddress = async (prov: providers.BaseProvider, propertyAddress: string) => {
+  const [, , client] = await newClient(prov)
+  const address = await getSTokensAddress(prov)
+  if (client && address) {
+    const TokenIdList = await (client.sTokens(address) as any).positionsOfProperty(propertyAddress)
+    return TokenIdList
+  }
+  return undefined
+}
+
+export const getStokenTokenURI = async (prov: providers.BaseProvider, sTokenID: number) => {
+  const [, , client] = await newClient(prov)
+  const address = await getSTokensAddress(prov)
+  if (client && address) {
+    return client.sTokens(address).tokenURI(sTokenID)
+  }
+  return undefined
+}
+
+export const setStokenTokenURIImage = async (prov: providers.BaseProvider, sTokenID: number, data: string) => {
+  const [, , client] = await newClient(prov)
+  const address = await getSTokensAddress(prov)
+  if (client && address) {
+    return client.sTokens(address).setTokenURIImage(sTokenID, data)
+  }
+  return undefined
+}
+
+export const getStokenOwnerOf = async (prov: providers.BaseProvider, sTokenID: number) => {
+  const [, , client] = await newClient(prov)
+  const address = await getSTokensAddress(prov)
+  if (client && address) {
+    return client.sTokens(address).ownerOf(sTokenID)
+  }
+  return undefined
+}
+
+export const getStokenPositions = async (prov: providers.BaseProvider, sTokenID: number) => {
+  const [, , client] = await newClient(prov)
+  const address = await getSTokensAddress(prov)
+  if (client && address) {
+    return client.sTokens(address).positions(sTokenID)
+  }
+  return undefined
+}
+
+export const getStokenRewards = async (prov: providers.BaseProvider, sTokenId: number) => {
+  const [, , client] = await newClient(prov)
+  const address = await getSTokensAddress(prov)
+  if (client && address) {
+    return client.sTokens(address).rewards(sTokenId)
+  }
+  return undefined
+}
+
+export const allowance = async (prov: providers.BaseProvider, contractAddress: string, address?: string) => {
+  const [, , client] = await newClient(prov)
+  const getContractAddress = createGetContractAddress(prov)
+  if (address && client) {
+    return client.dev(await getContractAddress(client, 'token')).allowance(address, contractAddress)
+  }
+  return undefined
+}
+
+export const approve = async (prov: providers.BaseProvider, address: string, amount: string) => {
+  const [, , client] = await newClient(prov)
+  const getContractAddress = createGetContractAddress(prov)
+  if (client) {
+    return client.dev(await getContractAddress(client, 'token')).approve(address, amount)
+  }
+  return undefined
+}
+
+export const depositToProperty = async (prov: providers.BaseProvider, propertyAddress: string, amount: string) => {
+  const [, , client] = await newClient(prov)
+  const getContractAddress = createGetContractAddress(prov)
+  if (client) {
+    return client.lockup(await getContractAddress(client, 'lockup')).depositToProperty(propertyAddress, amount)
+  }
+  return undefined
+}
+
+export const depositToPosition = async (prov: providers.BaseProvider, sTokenId: string, amount: string) => {
+  const [, , client] = await newClient(prov)
+  const getContractAddress = createGetContractAddress(prov)
+  if (client) {
+    return client.lockup(await getContractAddress(client, 'lockup')).depositToPosition(sTokenId, amount)
+  }
+  return undefined
+}
+
+export const withdrawByPosition = async (prov: providers.BaseProvider, sTokenId: string, amount: string) => {
+  const [, , client] = await newClient(prov)
+  const getContractAddress = createGetContractAddress(prov)
+  if (client) {
+    return client.lockup(await getContractAddress(client, 'lockup')).withdrawByPosition(sTokenId, amount)
+  }
+  return undefined
+}
+
+export const migrateToSTokens = async (prov: providers.BaseProvider, propertyAddress: string) => {
+  const [client] = await newClient(prov)
+  const getContractAddress = createGetContractAddress(prov)
+  if (client) {
+    return client.lockup(await getContractAddress(client, 'lockup')).migrateToSTokens(propertyAddress)
+  }
+  return undefined
+}
+
+export const getTokenURI = async (prov: providers.BaseProvider, sTokenId: number) => {
+  const [, , client] = await newClient(prov)
+  const address = await getSTokensAddress(prov)
+  if (client && address) {
+    return client.sTokens(address).tokenURI(sTokenId)
+  }
+  return undefined
+}
+
+export const getStokenSymbol = async (prov: providers.BaseProvider, sTokenId: number) => {
+  const [, , client] = await newClient(prov)
+  const address = await getSTokensAddress(prov)
+  if (client && address) {
+    return client
+      .sTokens(address)
+      .positions(sTokenId)
+      .then(res => client.property(res.property).symbol)
+  }
+  return undefined
+}
+
+export const getEnabledMarkets = async (prov: providers.BaseProvider) => {
+  const [, l2] = await newClient(prov)
+  const reg = await getL2Registry(prov)
+  if (l2 && reg) {
+    return l2.marketFactory(reg.marketFactory).getEnabledMarkets()
+  }
+  return undefined
+}
+
+export const getAuthenticatedProperties = async (prov: providers.BaseProvider, marketAddress: string) => {
+  const [, l2] = await newClient(prov)
+  if (l2) {
+    return l2.market(marketAddress).getAuthenticatedProperties()
+  }
+  return undefined
+}
+
+export const metricsOfProperty = async (prov: providers.BaseProvider, propertyAddress: string) => {
+  const [, l2] = await newClient(prov)
+  const reg = await getL2Registry(prov)
+  if (l2 && reg) {
+    return l2.metricsFactory(reg.metricsFactory).metricsOfProperty(propertyAddress)
+  }
+  return undefined
+}
+
+export const getMarket = async (prov: providers.BaseProvider, metricsAddress: string) => {
+  const [, , client] = await newClient(prov)
+  if (client) {
+    return client.metrics(metricsAddress).market()
+  }
+  return undefined
+}
+
+export const getMarketBehavior = async (prov: providers.BaseProvider, marketAddress: string) => {
+  const [, , client] = await newClient(prov)
+  if (client) {
+    return client.market(marketAddress).behavior()
+  }
+  return undefined
+}
+
+export const getId = async (prov: providers.BaseProvider, marketBehavior: string, metricsAddress: string) => {
+  const [, , client] = await newClient(prov)
+  if (client) {
+    return client.marketBehavior(marketBehavior).getId(metricsAddress)
+  }
+  return undefined
+}
+
+export const getStokenHeldAt = async (prov: providers.BaseProvider, sTokenId: number) => {
+  const address = await getSTokensAddress(prov)
+  if (address) {
+    const contract = new ethers.Contract(address, [...sTokensAbi], prov)
+    return contract.queryFilter(contract.filters.Transfer('0x0000000000000000000000000000000000000000', null, sTokenId))
+  }
+  return undefined
 }

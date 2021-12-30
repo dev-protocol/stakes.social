@@ -111,8 +111,22 @@ export const Footer = () => {
             <FooterLink href={'https://devprotocol.xyz/faq'} target={'_blank'} rel="noreferrer">
               Dev Protocol FAQ
             </FooterLink>
+            <FooterLink href={'https://bridge.devprotocol.xyz/'} target={'_blank'} rel="noreferrer">
+              Dev Bridge for L2
+            </FooterLink>
+            <FooterLink
+              href={'https://app.uniswap.org/#/swap?outputCurrency=0x91F5dC90979b058eBA3be6B7B7e523df7e84e137'}
+              target={'_blank'}
+              rel="noreferrer"
+            >
+              Buy DEV on Uniswap L2
+            </FooterLink>
             <FooterLink href={'/terms-of-use'}>Terms of Use</FooterLink>
-            <FooterLink href={'https://devprotocol.xyz/coc.html'} target={'_blank'} rel="noreferrer">
+            <FooterLink
+              href={'https://github.com/dev-protocol/community/blob/main/CODE_OF_CONDUCT.md'}
+              target={'_blank'}
+              rel="noreferrer"
+            >
               Code of Conduct
             </FooterLink>
           </FooterWrapper>
@@ -133,7 +147,7 @@ export const Footer = () => {
           </FooterWrapper>
 
           <FooterWrapper>
-            <FooterContentLeft>2020 All rights reserverd.</FooterContentLeft>
+            <FooterContentLeft>2021 All rights reserverd.</FooterContentLeft>
             <SocialContainer style={{ fontSize: 0 }}>
               <Twitter target="_blank" rel="noopener noreferrer" />
               <Discord />

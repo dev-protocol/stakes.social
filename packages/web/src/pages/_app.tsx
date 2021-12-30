@@ -2,7 +2,6 @@ import * as React from 'react'
 import App, { AppInitialProps } from 'next/app'
 import { WithApolloProps } from 'next-with-apollo'
 import Head from 'next/head'
-// import withApollo from 'src/fixtures/withApollo'
 import SettingContext from 'src/context/settingContext'
 import WalletContext from 'src/context/walletContext'
 import Web3 from 'web3'
@@ -12,11 +11,12 @@ import WalletConnectProvider from '@walletconnect/web3-provider'
 import Fortmatic from 'fortmatic'
 import WalletLink from 'walletlink'
 import { message } from 'antd'
-import { WEB3_PROVIDER_ENDPOINT } from 'src/fixtures/wallet/constants'
+import { WEB3_PROVIDER_ENDPOINT_HOSTS, WEB3_PROVIDER_ENDPOINT_KEY } from 'src/fixtures/wallet/constants'
 import { getAccountAddress } from 'src/fixtures/wallet/utility'
 import * as gtag from 'src/lib/gtag'
 import { Router } from 'next/router'
 import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client'
+import { providers } from 'ethers'
 
 const cache = new InMemoryCache()
 const client = new ApolloClient({
@@ -25,7 +25,7 @@ const client = new ApolloClient({
 })
 
 class NextApp extends App<AppInitialProps & WithApolloProps<{}>> {
-  state = { isCurrencyDEV: true, web3: undefined, web3Modal: undefined }
+  state = { isCurrencyDEV: true, web3: undefined, ethersProvider: undefined, web3Modal: undefined }
 
   getProviderOptions = () => {
     const walletLink = new WalletLink({
@@ -36,7 +36,10 @@ class NextApp extends App<AppInitialProps & WithApolloProps<{}>> {
     })
     const INFURA_ID = '75ebe953349644b6998136d868f5cd97'
     const { FORTMATIC_KEY } = process.env
-    const walletLinkProvider = walletLink.makeWeb3Provider(WEB3_PROVIDER_ENDPOINT, 1)
+    const walletLinkProvider = walletLink.makeWeb3Provider(
+      `${WEB3_PROVIDER_ENDPOINT_HOSTS.MAIN}/${WEB3_PROVIDER_ENDPOINT_KEY}`,
+      1
+    )
     const web3ForInjected = detectEthereumProvider()
 
     return {
@@ -92,9 +95,11 @@ class NextApp extends App<AppInitialProps & WithApolloProps<{}>> {
       return undefined
     }
 
-    const web3: any = new Web3(provider)
-    this.setState({ web3 })
-    return web3
+    const updater = this.createProviderUpdater(provider)
+    const provs = updater()
+    provider.on('accountsChanged', updater)
+    provider.on('chainChanged', updater)
+    return [provs.web3, provs.ethersProvider]
   }
 
   componentDidMount = () => {
@@ -103,7 +108,6 @@ class NextApp extends App<AppInitialProps & WithApolloProps<{}>> {
     })
 
     this.web3Modal = new Web3Modal({
-      network: 'mainnet',
       cacheProvider: true,
       providerOptions: this.getProviderOptions()
     })
@@ -123,8 +127,17 @@ class NextApp extends App<AppInitialProps & WithApolloProps<{}>> {
     Router.events.on('routeChangeComplete', url => gtag.pageview(url))
   }
 
-  setWeb3 = (web3: Web3) => {
-    this.setState({ web3 })
+  createProviderUpdater(provider: any) {
+    return () => {
+      const web3: any = new Web3(provider)
+      const ethersProvider = new providers.Web3Provider(provider)
+      this.setProviders(web3, ethersProvider)
+      return { web3, ethersProvider }
+    }
+  }
+
+  setProviders = (web3: Web3, ethersProvider: providers.BaseProvider) => {
+    this.setState({ web3, ethersProvider })
   }
 
   toggleCurrency = () => {
@@ -138,7 +151,12 @@ class NextApp extends App<AppInitialProps & WithApolloProps<{}>> {
     return (
       <ApolloProvider client={client}>
         <WalletContext.Provider
-          value={{ web3: this.state.web3, setWeb3: this.setWeb3, web3Modal: this.state.web3Modal }}
+          value={{
+            web3: this.state.web3,
+            ethersProvider: this.state.ethersProvider,
+            setProviders: this.setProviders,
+            web3Modal: this.state.web3Modal
+          }}
         >
           <SettingContext.Provider
             value={{ isCurrencyDEV: this.state.isCurrencyDEV, toggleCurrency: this.toggleCurrency }}

@@ -13,29 +13,30 @@
     "prepare": "husky install"
   },
   "devDependencies": {
-    "@types/jest": "27.0.1",
+    "@types/bl": "5.0.2",
+    "@types/jest": "27.0.3",
     "@types/supertest": "2.0.11",
-    "@typescript-eslint/eslint-plugin": "4.29.3",
-    "@typescript-eslint/parser": "4.29.3",
-    "concurrently": "6.2.1",
-    "eslint": "7.32.0",
+    "@typescript-eslint/eslint-plugin": "5.8.1",
+    "@typescript-eslint/parser": "5.8.1",
+    "concurrently": "6.5.1",
+    "eslint": "8.5.0",
     "eslint-config-prettier": "8.3.0",
-    "eslint-plugin-prettier": "3.4.1",
-    "eslint-plugin-react": "7.24.0",
-    "eslint-plugin-react-hooks": "4.2.0",
-    "husky": "7.0.2",
-    "jest": "27.0.6",
+    "eslint-plugin-prettier": "4.0.0",
+    "eslint-plugin-react": "7.28.0",
+    "eslint-plugin-react-hooks": "4.3.0",
+    "husky": "7.0.4",
+    "jest": "27.4.5",
     "lerna": "4.0.0",
-    "lint-staged": "11.1.2",
-    "nodemon": "2.0.12",
+    "lint-staged": "12.1.4",
+    "nodemon": "2.0.15",
     "npm-run-all": "4.1.5",
-    "prettier": "2.3.2",
+    "prettier": "2.5.1",
     "rimraf": "3.0.2",
-    "serve": "12.0.0",
-    "ts-jest": "27.0.5",
-    "ts-node": "10.2.1",
-    "tsconfig-paths": "3.11.0",
-    "typescript": "4.3.5",
+    "serve": "13.0.2",
+    "ts-jest": "27.1.2",
+    "ts-node": "10.4.0",
+    "tsconfig-paths": "3.12.0",
+    "typescript": "4.5.4",
     "wait-on": "6.0.0"
   },
   "private": true,
@@ -49,5 +50,9 @@
     "*.json": [
       "prettier --write"
     ]
+  },
+  "dependencies": {
+    "bl": "5.0.0",
+    "ipfs-http-client": "49.0.4"
   }
 }

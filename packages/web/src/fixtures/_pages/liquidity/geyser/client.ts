@@ -3,7 +3,7 @@ import Web3 from 'web3'
 import { Contract, EventData } from 'web3-eth-contract'
 import { createContract } from 'src/fixtures/utility/contract-client'
 import { toEVMBigNumber } from 'src/fixtures/utility'
-import { utils } from '@devprotocol/dev-kit'
+import { utils } from '@devprotocol/alias-legacy-dev-kit'
 import BigNumber from 'bignumber.js'
 
 const { execute } = utils

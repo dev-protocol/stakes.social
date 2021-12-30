@@ -1,7 +1,8 @@
+// @L2 optimized
 import React, { useCallback, useState } from 'react'
 import Link from 'next/link'
 import { Spin, Pagination } from 'antd'
-import { useListPropertyQuery, useListPropertyOrderByMostRecentQuery } from '@dev/graphql'
+import { useListPropertyQuery, useListPropertyOrderByMostRecentQuery, Property_Authentication } from '@dev/graphql'
 import { PropertyCard } from './PropertyCard'
 import { PropertySearchForm } from './PropertySearchForm'
 import { CurrencySwitcher } from './CurrencySwitcher'
@@ -10,6 +11,13 @@ import styled from 'styled-components'
 import Select from 'react-select'
 import { useProvider } from 'src/fixtures/wallet/hooks'
 import { Grid } from 'src/components/atoms/Grid'
+import {
+  useGetEnabledMarkets,
+  useGetAssetsByProperties,
+  useGetAuthenticatedProperties
+} from 'src/fixtures/dev-kit/hooks'
+import { reverse } from 'ramda'
+import { LinkWithNetwork } from 'src/components/atoms/LinkWithNetwork'
 
 export type FeatureTag = '' | 'GitHub' | 'npm' | 'Creators'
 interface Props {
@@ -120,9 +128,9 @@ const FeatureTags = ({ tag }: { tag: FeatureTag }) => {
       </Link>
       {tags &&
         tags.map((d: string) => (
-          <Link href={`/?tag=${d}`} key={d}>
+          <LinkWithNetwork href={`/?tag=${d}`} key={d}>
             <a style={{ color: tag !== d ? '#c9c9c9' : '' }}>{d}</a>
-          </Link>
+          </LinkWithNetwork>
         ))}
     </Wrap>
   )
@@ -204,12 +212,20 @@ export const PropertyCardList = ({ currentPage, searchWord, sortBy, featureTag }
         <>
           <PropertyOverview>
             {sortBy !== 'MOST_RECENT' &&
-              data.property_factory_create.map(d => (
-                <PropertyCard key={d.event_id} propertyAddress={d.property} assets={d.authentication} />
+              data.property_factory_create.map((d: any) => (
+                <PropertyCard
+                  key={d.event_id}
+                  propertyAddress={d.property}
+                  assets={d.authentication.map((x: Property_Authentication) => x.authentication_id)}
+                />
               ))}
             {sortBy === 'MOST_RECENT' &&
-              mostRecentData.property_factory_create.map(d => (
-                <PropertyCard key={d.event_id} propertyAddress={d.property} assets={d.authentication} />
+              mostRecentData.property_factory_create.map((d: any) => (
+                <PropertyCard
+                  key={d.event_id}
+                  propertyAddress={d.property}
+                  assets={d.authentication.map((x: Property_Authentication) => x.authentication_id)}
+                />
               ))}
           </PropertyOverview>
           <PaginationContainer>
@@ -221,10 +237,49 @@ export const PropertyCardList = ({ currentPage, searchWord, sortBy, featureTag }
               pageSizeOptions={['9', '12', '15', '18', '21']}
               onChange={handlePagination}
               onShowSizeChange={handleShowSizeChange}
-              total={data.property_factory_create_aggregate.aggregate?.count}
+              total={data.property_factory_create_aggregate.aggregate?.count || 0}
             />
           </PaginationContainer>
         </>
+      )}
+    </div>
+  )
+}
+
+export const PropertyByMarketWithAssetsL2 = ({ propertyAddress }: { propertyAddress: string }) => {
+  const { data } = useGetAssetsByProperties(propertyAddress)
+
+  return <>{data ? <PropertyCard propertyAddress={propertyAddress} assets={data.map(d => d.id)} /> : ''}</>
+}
+
+export const PropertyByMarketL2 = ({ market }: { market: string }) => {
+  const { data } = useGetAuthenticatedProperties(market)
+  const list = data ? reverse(data) : undefined
+
+  return (
+    <>
+      {list
+        ? list.map((property, i) => <PropertyByMarketWithAssetsL2 key={i} propertyAddress={property as string} />)
+        : ''}
+    </>
+  )
+}
+
+export const PropertyCardListL2 = () => {
+  const { data: enabledMarkets } = useGetEnabledMarkets()
+
+  return (
+    <div style={{ flexGrow: 1, maxWidth: '100vw' }}>
+      <PropertiesHeader>
+        <Header>Asset Pools</Header>
+      </PropertiesHeader>
+
+      {enabledMarkets && (
+        <PropertyOverview>
+          {enabledMarkets.map((market: string, i: number) => (
+            <PropertyByMarketL2 key={i} market={market} />
+          ))}
+        </PropertyOverview>
       )}
     </div>
   )

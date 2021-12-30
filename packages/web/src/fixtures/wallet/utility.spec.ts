@@ -1,8 +1,10 @@
+import { providers } from 'ethers'
 import Web3 from 'web3'
 import Web3Modal from 'web3modal'
-import { connectWallet, disconnectWallet, getAccountAddress, getDevAmount } from './utility'
+import { connectWallet, detectChain, disconnectWallet, getAccountAddress } from './utility'
 
 jest.mock('web3')
+jest.mock('ethers')
 jest.mock('web3modal')
 
 describe('wallet utility', () => {
@@ -36,55 +38,6 @@ describe('wallet utility', () => {
       const result = await getAccountAddress(web3) // Third call
       expect(result).toBe('0x...')
       expect(getAccounts.mock.calls.length).toBe(1)
-    })
-  })
-
-  describe('getDevAmount', () => {
-    test('Return amount value', async () => {
-      const data = 9876543210123456789
-      const fakeContract = function () {}
-      fakeContract.prototype = {
-        methods: {
-          balanceOf: () => {
-            return {
-              call: async () => {
-                return data
-              }
-            }
-          }
-        }
-      }
-      ;(Web3 as unknown as jest.Mock).mockImplementation(() => ({
-        eth: {
-          Contract: fakeContract
-        }
-      }))
-      const result = await getDevAmount('0x1234567890')
-      expect(result).toBe(data)
-    })
-
-    test('Return amount value', async () => {
-      const data = 9876543210123456789
-      const fakeContract = function () {}
-      fakeContract.prototype = {
-        methods: {
-          balanceOf: () => {
-            return {
-              call: async () => {
-                return data
-              }
-            }
-          }
-        }
-      }
-      window.ethereum = {} as any
-      ;(Web3 as unknown as jest.Mock).mockImplementation(() => ({
-        eth: {
-          Contract: fakeContract
-        }
-      }))
-      const result = await getDevAmount('0x1234567890')
-      expect(result).toBe(data)
     })
   })
 
@@ -123,6 +76,39 @@ describe('wallet utility', () => {
       await disconnectWallet(setWeb3Handler, web3Modal)
       expect((web3Modal.clearCachedProvider as jest.Mock).mock.calls.length).toBe(1)
       expect(setWeb3Handler.mock.calls.length).toBe(1)
+    })
+  })
+
+  describe('detectChain', () => {
+    test('Returns undefined when the detected chainId is not supported', async () => {
+      const mock = { getNetwork: () => Promise.resolve({ chainId: 99999 }) } as unknown as providers.BaseProvider
+      const result = await detectChain(mock)
+      expect(result.chainId).toBe(99999)
+      expect(result.name).toBe(undefined)
+    })
+    test('Detect mainnet', async () => {
+      const mock = { getNetwork: () => Promise.resolve({ chainId: 1 }) } as unknown as providers.BaseProvider
+      const result = await detectChain(mock)
+      expect(result.chainId).toBe(1)
+      expect(result.name).toBe('ethereum')
+    })
+    test('Detect ropsten', async () => {
+      const mock = { getNetwork: () => Promise.resolve({ chainId: 3 }) } as unknown as providers.BaseProvider
+      const result = await detectChain(mock)
+      expect(result.chainId).toBe(3)
+      expect(result.name).toBe('ropsten')
+    })
+    test('Detect arbitrum one', async () => {
+      const mock = { getNetwork: () => Promise.resolve({ chainId: 42161 }) } as unknown as providers.BaseProvider
+      const result = await detectChain(mock)
+      expect(result.chainId).toBe(42161)
+      expect(result.name).toBe('arbitrum-one')
+    })
+    test('Detect arbitrum rinkeby', async () => {
+      const mock = { getNetwork: () => Promise.resolve({ chainId: 421611 }) } as unknown as providers.BaseProvider
+      const result = await detectChain(mock)
+      expect(result.chainId).toBe(421611)
+      expect(result.name).toBe('arbitrum-rinkeby')
     })
   })
 })

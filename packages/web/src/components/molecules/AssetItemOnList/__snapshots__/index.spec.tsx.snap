@@ -4,28 +4,28 @@ exports[`AssetItemOnList Snapshot 1`] = `
 <body>
   <div>
     <div
-      class="sc-hzc567-1 ddHgCw"
+      class="sc-pVTFL igAzgN"
     >
       <a
-        class="sc-hzc567-2 sc-hzc567-4 vcFHA bmeZgP"
-        href="/property-address"
+        class="sc-jrQzAO sc-iqseJM fgcmjD irPoXs"
+        href="/ethereum/property-address"
       >
         <div
-          class="sc-2tazhb-0 wKHGk"
+          class="sc-gKclnd dNSlal"
         >
           <div
-            class="sc-2tazhb-1 eAvjjG"
+            class="sc-iCfMLu hxewiF"
             size="90"
           />
         </div>
         <h3
-          class="sc-1w8sy4l-2 becLfm"
+          class="sc-hKwDye cQfZTQ"
         >
           property-address-name
         </h3>
       </a>
       <div
-        class="ant-statistic sc-hzc567-0 sc-hzc567-5 cYneJZ fFgbkr"
+        class="ant-statistic sc-furwcr sc-crHmcD fVdBCY bZrgkD"
       >
         <div
           class="ant-statistic-title"
@@ -53,7 +53,7 @@ exports[`AssetItemOnList Snapshot 1`] = `
         </div>
       </div>
       <div
-        class="ant-statistic sc-hzc567-0 sc-hzc567-6 cYneJZ fRmmNC"
+        class="ant-statistic sc-furwcr sc-egiyK fVdBCY dCoOLj"
       >
         <div
           class="ant-statistic-title"
@@ -81,7 +81,7 @@ exports[`AssetItemOnList Snapshot 1`] = `
         </div>
       </div>
       <div
-        class="sc-hzc567-3 sc-hzc567-7 Fztz jpgsrs"
+        class="sc-kDTinF sc-bqiRlB iNSKQe bWzqsv"
       >
         
         

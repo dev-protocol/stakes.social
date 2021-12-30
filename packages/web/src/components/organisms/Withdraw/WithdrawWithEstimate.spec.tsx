@@ -14,7 +14,7 @@ jest.mock('@dev/graphql')
 describe(`${WithdrawWithEstimate.name}`, () => {
   test('Snapshot', () => {
     const component = render(
-      <WalletContext.Provider value={{ web3: new Web3(), setWeb3: () => {} }}>
+      <WalletContext.Provider value={{ web3: new Web3(), setProviders: () => {} }}>
         <WithdrawWithEstimate propertyAddress="propertyAddress" />
       </WalletContext.Provider>
     )

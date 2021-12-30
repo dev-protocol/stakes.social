@@ -4,136 +4,370 @@ exports[`Stake Snapshot 1`] = `
 <body>
   <div>
     <div
-      class="sc-89297o-0 etzBlt"
+      class="sc-dkPtRN lmksLl"
     >
       <div
-        class="sc-1d8aayd-1 bcBbeW"
+        class="sc-furwcr HBVij"
         style="opacity: 1;"
       >
-        <span
-          class="ant-input-group-wrapper ant-input-group-wrapper-lg ant-input-search ant-input-search-large ant-input-search-with-button sc-1d8aayd-0 dJdeqB"
+        <div
+          class="ant-radio-group ant-radio-group-outline"
+          style="margin-bottom: 12px;"
         >
-          <span
-            class="ant-input-wrapper ant-input-group"
+          <div
+            class="ant-space ant-space-vertical"
           >
-            <span
-              class="ant-input-affix-wrapper ant-input-affix-wrapper-lg"
+            <div
+              class="ant-space-item"
+              style="margin-bottom: 8px;"
             >
-              <input
-                class="ant-input ant-input-lg"
-                id="stake"
-                type="number"
-                value=""
+              <label
+                class="ant-radio-wrapper"
+              >
+                <span
+                  class="ant-radio"
+                >
+                  <input
+                    class="ant-radio-input"
+                    type="radio"
+                    value="-1"
+                  />
+                  <span
+                    class="ant-radio-inner"
+                  />
+                </span>
+                <span>
+                  <span
+                    style="margin-left: 12px;"
+                  >
+                    New position
+                  </span>
+                </span>
+              </label>
+            </div>
+            <div
+              class="ant-space-item"
+              style="margin-bottom: 8px;"
+            >
+              )
+            </div>
+            <div
+              class="ant-space-item"
+              style="margin-bottom: 8px;"
+            >
+              <label
+                class="ant-radio-wrapper"
+              >
+                <span
+                  class="ant-radio"
+                >
+                  <input
+                    class="ant-radio-input"
+                    type="radio"
+                    value="2"
+                  />
+                  <span
+                    class="ant-radio-inner"
+                  />
+                </span>
+                <span>
+                  <div
+                    class="ant-space ant-space-horizontal ant-space-align-center"
+                  >
+                    <div
+                      class="ant-space-item"
+                      style="margin-right: 24px;"
+                    >
+                      <div
+                        style="margin-left: 8px; min-width: 40px;"
+                      >
+                        #
+                        2
+                      </div>
+                    </div>
+                    <div
+                      class="ant-space-item"
+                      style="margin-right: 24px;"
+                    >
+                      <div
+                        style="min-width: 120px;"
+                      >
+                        <span>
+                          0.000000000000001
+                        </span>
+                        <span
+                          style="font-size: 0.6em; margin-left: 2px;"
+                        >
+                          Staked
+                        </span>
+                      </div>
+                    </div>
+                    <div
+                      class="ant-space-item"
+                    >
+                      <div>
+                        0
+                        <span
+                          style="font-size: 0.6em; margin-left: 2px;"
+                        >
+                          Claimable
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </span>
+              </label>
+            </div>
+            <div
+              class="ant-space-item"
+              style="margin-bottom: 8px;"
+            >
+              <label
+                class="ant-radio-wrapper"
+              >
+                <span
+                  class="ant-radio"
+                >
+                  <input
+                    class="ant-radio-input"
+                    type="radio"
+                    value="4"
+                  />
+                  <span
+                    class="ant-radio-inner"
+                  />
+                </span>
+                <span>
+                  <div
+                    class="ant-space ant-space-horizontal ant-space-align-center"
+                  >
+                    <div
+                      class="ant-space-item"
+                      style="margin-right: 24px;"
+                    >
+                      <div
+                        style="margin-left: 8px; min-width: 40px;"
+                      >
+                        #
+                        4
+                      </div>
+                    </div>
+                    <div
+                      class="ant-space-item"
+                      style="margin-right: 24px;"
+                    >
+                      <div
+                        style="min-width: 120px;"
+                      >
+                        <span>
+                          0.000000000000001
+                        </span>
+                        <span
+                          style="font-size: 0.6em; margin-left: 2px;"
+                        >
+                          Staked
+                        </span>
+                      </div>
+                    </div>
+                    <div
+                      class="ant-space-item"
+                    >
+                      <div>
+                        0
+                        <span
+                          style="font-size: 0.6em; margin-left: 2px;"
+                        >
+                          Claimable
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </span>
+              </label>
+            </div>
+            <div
+              class="ant-space-item"
+            >
+              <label
+                class="ant-radio-wrapper"
+              >
+                <span
+                  class="ant-radio"
+                >
+                  <input
+                    class="ant-radio-input"
+                    type="radio"
+                    value="6"
+                  />
+                  <span
+                    class="ant-radio-inner"
+                  />
+                </span>
+                <span>
+                  <div
+                    class="ant-space ant-space-horizontal ant-space-align-center"
+                  >
+                    <div
+                      class="ant-space-item"
+                      style="margin-right: 24px;"
+                    >
+                      <div
+                        style="margin-left: 8px; min-width: 40px;"
+                      >
+                        #
+                        6
+                      </div>
+                    </div>
+                    <div
+                      class="ant-space-item"
+                      style="margin-right: 24px;"
+                    >
+                      <div
+                        style="min-width: 120px;"
+                      >
+                        <span>
+                          0.000000000000001
+                        </span>
+                        <span
+                          style="font-size: 0.6em; margin-left: 2px;"
+                        >
+                          Staked
+                        </span>
+                      </div>
+                    </div>
+                    <div
+                      class="ant-space-item"
+                    >
+                      <div>
+                        0
+                        <span
+                          style="font-size: 0.6em; margin-left: 2px;"
+                        >
+                          Claimable
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </span>
+              </label>
+            </div>
+          </div>
+        </div>
+        <div
+          style="height: 40px;"
+        >
+          <div
+            class="sc-gsDKAQ gWFfas"
+          >
+            <button
+              aria-checked="false"
+              class="ant-switch"
+              role="switch"
+              type="button"
+            >
+              <div
+                class="ant-switch-handle"
               />
               <span
-                class="ant-input-suffix"
+                class="ant-switch-inner"
+              />
+            </button>
+            <div
+              class="sc-bdvvtL dVMppL"
+            >
+              <span
+                aria-label="info-circle"
+                class="anticon anticon-info-circle"
+                role="img"
               >
-                <button
-                  class="sc-1ttu0x8-0 kmiVBa"
+                <svg
+                  aria-hidden="true"
+                  data-icon="info-circle"
+                  fill="currentColor"
+                  focusable="false"
+                  height="1em"
+                  viewBox="64 64 896 896"
+                  width="1em"
                 >
-                  DEV
-                </button>
+                  <path
+                    d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 820c-205.4 0-372-166.6-372-372s166.6-372 372-372 372 166.6 372 372-166.6 372-372 372z"
+                  />
+                  <path
+                    d="M464 336a48 48 0 1096 0 48 48 0 10-96 0zm72 112h-48c-4.4 0-8 3.6-8 8v272c0 4.4 3.6 8 8 8h48c4.4 0 8-3.6 8-8V456c0-4.4-3.6-8-8-8z"
+                  />
+                </svg>
               </span>
-            </span>
+            </div>
             <span
-              class="ant-input-group-addon"
+              style="font-size: 0.8em;"
+            >
+              Incognito Staking:
+              <br />
+              If this is ON, your staking will be hidden from the public.
+            </span>
+          </div>
+        </div>
+        <span
+          class="ant-input-affix-wrapper ant-input-affix-wrapper-lg sc-eCImPb gIEWvk"
+        >
+          <input
+            class="ant-input ant-input-lg"
+            id="stake"
+            type="number"
+            value=""
+          />
+          <span
+            class="ant-input-suffix"
+          >
+            <button
+              class="sc-hKwDye kpA-dVf"
+            >
+              DEV
+            </button>
+          </span>
+        </span>
+        <div
+          class="sc-gKclnd gmKoQx"
+        >
+          <div
+            class="ant-row"
+          >
+            <div
+              class="ant-col ant-col-11"
             >
               <button
-                class="ant-btn ant-btn-primary ant-btn-lg ant-input-search-button"
+                class="ant-btn ant-btn-primary sc-jRQBWg cyMfUM"
+                type="button"
+              >
+                <span>
+                  Approve
+                </span>
+              </button>
+            </div>
+            <div
+              class="ant-col ant-col-2 sc-iCfMLu gcqWPX"
+            >
+              →
+            </div>
+            <div
+              class="ant-col ant-col-11"
+            >
+              <button
+                class="ant-btn ant-btn-primary sc-jRQBWg cyMfUM"
+                disabled=""
                 type="button"
               >
                 <span>
                   Stake
                 </span>
               </button>
-            </span>
-          </span>
-        </span>
-      </div>
-      <div
-        style="height: 40px;"
-      >
-        <div
-          class="sc-1mqmkj6-1 lgtNnS"
-        >
-          <button
-            aria-checked="false"
-            class="ant-switch"
-            role="switch"
-            type="button"
-          >
-            <div
-              class="ant-switch-handle"
-            />
-            <span
-              class="ant-switch-inner"
-            />
-          </button>
-          <div
-            class="sc-1mqmkj6-0 kwekuT"
-          >
-            <span
-              aria-label="info-circle"
-              class="anticon anticon-info-circle"
-              role="img"
-            >
-              <svg
-                aria-hidden="true"
-                data-icon="info-circle"
-                fill="currentColor"
-                focusable="false"
-                height="1em"
-                viewBox="64 64 896 896"
-                width="1em"
-              >
-                <path
-                  d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 820c-205.4 0-372-166.6-372-372s166.6-372 372-372 372 166.6 372 372-166.6 372-372 372z"
-                />
-                <path
-                  d="M464 336a48 48 0 1096 0 48 48 0 10-96 0zm72 112h-48c-4.4 0-8 3.6-8 8v272c0 4.4 3.6 8 8 8h48c4.4 0 8-3.6 8-8V456c0-4.4-3.6-8-8-8z"
-                />
-              </svg>
-            </span>
-          </div>
-          <span
-            style="font-size: 0.8em;"
-          >
-            Incognito Staking:
-            <br />
-            If this is ON, your staking will be hidden from the public.
-          </span>
-        </div>
-      </div>
-      <div
-        class="ant-card ant-card-bordered ant-card-small sc-18v7ikh-0 dfjrvZ"
-      >
-        <div
-          class="ant-card-head"
-        >
-          <div
-            class="ant-card-head-wrapper"
-          >
-            <div
-              class="ant-card-head-title"
-            >
-              Gas Fee (predicted)
             </div>
           </div>
         </div>
-        <div
-          class="ant-card-body"
-        >
-          <p>
-            0.003345
-             ETH
-            <span
-              class="sc-18v7ikh-1 kGdgpU"
-            >
-               $0.78
-            </span>
-          </p>
-        </div>
       </div>
+      <div
+        style="height: 40px;"
+      />
     </div>
   </div>
   <div>
@@ -377,7 +611,7 @@ exports[`Stake Snapshot with title 1`] = `
   </div>
   <div>
     <div
-      class="sc-89297o-0 etzBlt"
+      class="sc-dkPtRN lmksLl"
     >
       <label
         for="stake"
@@ -385,133 +619,367 @@ exports[`Stake Snapshot with title 1`] = `
         Stake
       </label>
       <div
-        class="sc-1d8aayd-1 bcBbeW"
+        class="sc-furwcr HBVij"
         style="opacity: 1;"
       >
-        <span
-          class="ant-input-group-wrapper ant-input-group-wrapper-lg ant-input-search ant-input-search-large ant-input-search-with-button sc-1d8aayd-0 dJdeqB"
+        <div
+          class="ant-radio-group ant-radio-group-outline"
+          style="margin-bottom: 12px;"
         >
-          <span
-            class="ant-input-wrapper ant-input-group"
+          <div
+            class="ant-space ant-space-vertical"
           >
-            <span
-              class="ant-input-affix-wrapper ant-input-affix-wrapper-lg"
+            <div
+              class="ant-space-item"
+              style="margin-bottom: 8px;"
             >
-              <input
-                class="ant-input ant-input-lg"
-                id="stake"
-                type="number"
-                value=""
+              <label
+                class="ant-radio-wrapper"
+              >
+                <span
+                  class="ant-radio"
+                >
+                  <input
+                    class="ant-radio-input"
+                    type="radio"
+                    value="-1"
+                  />
+                  <span
+                    class="ant-radio-inner"
+                  />
+                </span>
+                <span>
+                  <span
+                    style="margin-left: 12px;"
+                  >
+                    New position
+                  </span>
+                </span>
+              </label>
+            </div>
+            <div
+              class="ant-space-item"
+              style="margin-bottom: 8px;"
+            >
+              )
+            </div>
+            <div
+              class="ant-space-item"
+              style="margin-bottom: 8px;"
+            >
+              <label
+                class="ant-radio-wrapper"
+              >
+                <span
+                  class="ant-radio"
+                >
+                  <input
+                    class="ant-radio-input"
+                    type="radio"
+                    value="2"
+                  />
+                  <span
+                    class="ant-radio-inner"
+                  />
+                </span>
+                <span>
+                  <div
+                    class="ant-space ant-space-horizontal ant-space-align-center"
+                  >
+                    <div
+                      class="ant-space-item"
+                      style="margin-right: 24px;"
+                    >
+                      <div
+                        style="margin-left: 8px; min-width: 40px;"
+                      >
+                        #
+                        2
+                      </div>
+                    </div>
+                    <div
+                      class="ant-space-item"
+                      style="margin-right: 24px;"
+                    >
+                      <div
+                        style="min-width: 120px;"
+                      >
+                        <span>
+                          0.000000000000001
+                        </span>
+                        <span
+                          style="font-size: 0.6em; margin-left: 2px;"
+                        >
+                          Staked
+                        </span>
+                      </div>
+                    </div>
+                    <div
+                      class="ant-space-item"
+                    >
+                      <div>
+                        0
+                        <span
+                          style="font-size: 0.6em; margin-left: 2px;"
+                        >
+                          Claimable
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </span>
+              </label>
+            </div>
+            <div
+              class="ant-space-item"
+              style="margin-bottom: 8px;"
+            >
+              <label
+                class="ant-radio-wrapper"
+              >
+                <span
+                  class="ant-radio"
+                >
+                  <input
+                    class="ant-radio-input"
+                    type="radio"
+                    value="4"
+                  />
+                  <span
+                    class="ant-radio-inner"
+                  />
+                </span>
+                <span>
+                  <div
+                    class="ant-space ant-space-horizontal ant-space-align-center"
+                  >
+                    <div
+                      class="ant-space-item"
+                      style="margin-right: 24px;"
+                    >
+                      <div
+                        style="margin-left: 8px; min-width: 40px;"
+                      >
+                        #
+                        4
+                      </div>
+                    </div>
+                    <div
+                      class="ant-space-item"
+                      style="margin-right: 24px;"
+                    >
+                      <div
+                        style="min-width: 120px;"
+                      >
+                        <span>
+                          0.000000000000001
+                        </span>
+                        <span
+                          style="font-size: 0.6em; margin-left: 2px;"
+                        >
+                          Staked
+                        </span>
+                      </div>
+                    </div>
+                    <div
+                      class="ant-space-item"
+                    >
+                      <div>
+                        0
+                        <span
+                          style="font-size: 0.6em; margin-left: 2px;"
+                        >
+                          Claimable
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </span>
+              </label>
+            </div>
+            <div
+              class="ant-space-item"
+            >
+              <label
+                class="ant-radio-wrapper"
+              >
+                <span
+                  class="ant-radio"
+                >
+                  <input
+                    class="ant-radio-input"
+                    type="radio"
+                    value="6"
+                  />
+                  <span
+                    class="ant-radio-inner"
+                  />
+                </span>
+                <span>
+                  <div
+                    class="ant-space ant-space-horizontal ant-space-align-center"
+                  >
+                    <div
+                      class="ant-space-item"
+                      style="margin-right: 24px;"
+                    >
+                      <div
+                        style="margin-left: 8px; min-width: 40px;"
+                      >
+                        #
+                        6
+                      </div>
+                    </div>
+                    <div
+                      class="ant-space-item"
+                      style="margin-right: 24px;"
+                    >
+                      <div
+                        style="min-width: 120px;"
+                      >
+                        <span>
+                          0.000000000000001
+                        </span>
+                        <span
+                          style="font-size: 0.6em; margin-left: 2px;"
+                        >
+                          Staked
+                        </span>
+                      </div>
+                    </div>
+                    <div
+                      class="ant-space-item"
+                    >
+                      <div>
+                        0
+                        <span
+                          style="font-size: 0.6em; margin-left: 2px;"
+                        >
+                          Claimable
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </span>
+              </label>
+            </div>
+          </div>
+        </div>
+        <div
+          style="height: 40px;"
+        >
+          <div
+            class="sc-gsDKAQ gWFfas"
+          >
+            <button
+              aria-checked="false"
+              class="ant-switch"
+              role="switch"
+              type="button"
+            >
+              <div
+                class="ant-switch-handle"
               />
               <span
-                class="ant-input-suffix"
+                class="ant-switch-inner"
+              />
+            </button>
+            <div
+              class="sc-bdvvtL dVMppL"
+            >
+              <span
+                aria-label="info-circle"
+                class="anticon anticon-info-circle"
+                role="img"
               >
-                <button
-                  class="sc-1ttu0x8-0 kmiVBa"
+                <svg
+                  aria-hidden="true"
+                  data-icon="info-circle"
+                  fill="currentColor"
+                  focusable="false"
+                  height="1em"
+                  viewBox="64 64 896 896"
+                  width="1em"
                 >
-                  DEV
-                </button>
+                  <path
+                    d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 820c-205.4 0-372-166.6-372-372s166.6-372 372-372 372 166.6 372 372-166.6 372-372 372z"
+                  />
+                  <path
+                    d="M464 336a48 48 0 1096 0 48 48 0 10-96 0zm72 112h-48c-4.4 0-8 3.6-8 8v272c0 4.4 3.6 8 8 8h48c4.4 0 8-3.6 8-8V456c0-4.4-3.6-8-8-8z"
+                  />
+                </svg>
               </span>
-            </span>
+            </div>
             <span
-              class="ant-input-group-addon"
+              style="font-size: 0.8em;"
+            >
+              Incognito Staking:
+              <br />
+              If this is ON, your staking will be hidden from the public.
+            </span>
+          </div>
+        </div>
+        <span
+          class="ant-input-affix-wrapper ant-input-affix-wrapper-lg sc-eCImPb gIEWvk"
+        >
+          <input
+            class="ant-input ant-input-lg"
+            id="stake"
+            type="number"
+            value=""
+          />
+          <span
+            class="ant-input-suffix"
+          >
+            <button
+              class="sc-hKwDye kpA-dVf"
+            >
+              DEV
+            </button>
+          </span>
+        </span>
+        <div
+          class="sc-gKclnd gmKoQx"
+        >
+          <div
+            class="ant-row"
+          >
+            <div
+              class="ant-col ant-col-11"
             >
               <button
-                class="ant-btn ant-btn-primary ant-btn-lg ant-input-search-button"
+                class="ant-btn ant-btn-primary sc-jRQBWg cyMfUM"
+                type="button"
+              >
+                <span>
+                  Approve
+                </span>
+              </button>
+            </div>
+            <div
+              class="ant-col ant-col-2 sc-iCfMLu gcqWPX"
+            >
+              →
+            </div>
+            <div
+              class="ant-col ant-col-11"
+            >
+              <button
+                class="ant-btn ant-btn-primary sc-jRQBWg cyMfUM"
+                disabled=""
                 type="button"
               >
                 <span>
                   Stake
                 </span>
               </button>
-            </span>
-          </span>
-        </span>
-      </div>
-      <div
-        style="height: 40px;"
-      >
-        <div
-          class="sc-1mqmkj6-1 lgtNnS"
-        >
-          <button
-            aria-checked="false"
-            class="ant-switch"
-            role="switch"
-            type="button"
-          >
-            <div
-              class="ant-switch-handle"
-            />
-            <span
-              class="ant-switch-inner"
-            />
-          </button>
-          <div
-            class="sc-1mqmkj6-0 kwekuT"
-          >
-            <span
-              aria-label="info-circle"
-              class="anticon anticon-info-circle"
-              role="img"
-            >
-              <svg
-                aria-hidden="true"
-                data-icon="info-circle"
-                fill="currentColor"
-                focusable="false"
-                height="1em"
-                viewBox="64 64 896 896"
-                width="1em"
-              >
-                <path
-                  d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 820c-205.4 0-372-166.6-372-372s166.6-372 372-372 372 166.6 372 372-166.6 372-372 372z"
-                />
-                <path
-                  d="M464 336a48 48 0 1096 0 48 48 0 10-96 0zm72 112h-48c-4.4 0-8 3.6-8 8v272c0 4.4 3.6 8 8 8h48c4.4 0 8-3.6 8-8V456c0-4.4-3.6-8-8-8z"
-                />
-              </svg>
-            </span>
-          </div>
-          <span
-            style="font-size: 0.8em;"
-          >
-            Incognito Staking:
-            <br />
-            If this is ON, your staking will be hidden from the public.
-          </span>
-        </div>
-      </div>
-      <div
-        class="ant-card ant-card-bordered ant-card-small sc-18v7ikh-0 dfjrvZ"
-      >
-        <div
-          class="ant-card-head"
-        >
-          <div
-            class="ant-card-head-wrapper"
-          >
-            <div
-              class="ant-card-head-title"
-            >
-              Gas Fee (predicted)
             </div>
           </div>
         </div>
-        <div
-          class="ant-card-body"
-        >
-          <p>
-            0.003345
-             ETH
-            <span
-              class="sc-18v7ikh-1 kGdgpU"
-            >
-               $0.78
-            </span>
-          </p>
-        </div>
       </div>
+      <div
+        style="height: 40px;"
+      />
     </div>
   </div>
 </body>

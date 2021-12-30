@@ -7,29 +7,29 @@ exports[`AuthHeader Snapshot 1`] = `
       style="position: sticky; top: 0px; width: 100%; z-index: 5;"
     >
       <header
-        class="sc-1bz6snd-0 ksXZjR"
+        class="sc-furwcr dEfYgJ"
       >
         <div
-          class="sc-1bz6snd-6 iHXutm"
+          class="sc-egiyK kYhVgg"
         >
           <header
-            class="sc-1bz6snd-1 fmwoIz"
+            class="sc-pVTFL xEgAJ"
           >
             <div
-              class="sc-1bz6snd-2 eISUDl"
+              class="sc-jrQzAO kZuvhn"
             >
               <a
-                class="sc-38x7tx-0 jyccgJ"
+                class="sc-bdvvtL bKEjhC"
                 href="/"
               >
                 <span
-                  class="sc-1u809dt-0 cGQooL"
+                  class="sc-gsDKAQ hSRZmM"
                 >
                   <svgrurl
                     id="headerlogo"
                   />
                   <span
-                    class="sc-1u809dt-1 kBcMYt"
+                    class="sc-dkPtRN wwTvJ"
                   >
                     Stakes.social
                   </span>
@@ -37,7 +37,7 @@ exports[`AuthHeader Snapshot 1`] = `
               </a>
             </div>
             <div
-              class="sc-1bz6snd-3 eFvqoO"
+              class="sc-kDTinF kqfajw"
             >
               <svg
                 height="50"
@@ -101,7 +101,7 @@ exports[`AuthHeader Snapshot 1`] = `
                 </g>
               </svg>
               <div
-                class="sc-1dxoc5d-2 kEjXAb"
+                class="sc-jRQBWg fixFlJ"
               >
                 <span
                   style="font-size: 0.8em;"
@@ -114,17 +114,17 @@ exports[`AuthHeader Snapshot 1`] = `
         </div>
       </header>
       <div
-        class="sc-ccfdvq-0 gphkWy"
+        class="sc-iCfMLu gLTIao"
       >
         Beta Version
       </div>
     </div>
     <div
-      class="sc-9gd508-0 eBoDfN"
+      class="sc-bqiRlB joQuxJ"
       height="300"
     >
       <h2
-        class="sc-1w8sy4l-1 jvZYzV"
+        class="sc-hBUSln jjFdcK"
       >
         Choose Market
       </h2>
