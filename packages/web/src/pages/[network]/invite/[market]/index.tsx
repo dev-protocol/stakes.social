@@ -6,7 +6,6 @@ import { Header } from 'src/components/organisms/Header'
 import { Headline } from 'src/components/atoms/Headline'
 import { H2 } from 'src/components/atoms/Typography'
 import styled from 'styled-components'
-import { getPath } from 'src/fixtures/utility/route'
 import { ControlChain } from 'src/components/organisms/ControlChain'
 
 type Props = {}
@@ -20,7 +19,7 @@ const WrapContainer = styled.div`
 `
 
 const InvitationRequest = (_: Props) => {
-  const [, market] = getPath(useRouter().asPath)
+  const { market } = useRouter().query
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
