@@ -2,7 +2,6 @@ import React from 'react'
 import styled from 'styled-components'
 import { Radio, RadioChangeEvent } from 'antd'
 import { useRouter } from 'next/router'
-import { getPath } from 'src/fixtures/utility/route'
 
 const Wrapper = styled.div`
   display: flex;
@@ -15,15 +14,16 @@ const Caption = styled.div`
 
 export const VersionSwitching = () => {
   const router = useRouter()
-  const [, version] = getPath(router.asPath)
+  const version = router.query.version
+  console.log({ version })
 
   const switchVersion = (targetVersion: string, currentVersion: any) => {
     if (targetVersion === currentVersion) return
-    router.push(`/liquidity/${targetVersion}`)
+    router.push(`/ethereum/liquidity/${targetVersion}`)
     return
   }
 
-  return (
+  return version ? (
     <>
       <Caption>Version Switching</Caption>
       <Wrapper>
@@ -39,5 +39,7 @@ export const VersionSwitching = () => {
         </Radio.Group>
       </Wrapper>
     </>
+  ) : (
+    <></>
   )
 }

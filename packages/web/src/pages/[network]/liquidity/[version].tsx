@@ -17,8 +17,6 @@ import {
   GEYSER_V2_ETHDEV_V2_ADDRESS
 } from '../../../fixtures/_pages/liquidity/constants/address'
 import { useRouter } from 'next/router'
-// import Error from 'next/error'
-import { getPath } from 'src/fixtures/utility/route'
 import { ControlChain } from 'src/components/organisms/ControlChain'
 
 const NarrowContainer = styled(Container)`
@@ -29,7 +27,7 @@ const Margin = styled.div`
   margin: 2rem 0;
 `
 
-const getGeyserAddress = (version: string) => {
+const getGeyserAddress = (version?: string | string[]) => {
   switch (version) {
     case 'v1':
       return GEYSER_V1_ETHDEV_V2_ADDRESS
@@ -42,9 +40,9 @@ const getGeyserAddress = (version: string) => {
 
 const LiquidityMining = () => {
   const [, setTab] = useState('0')
-  const [, version] = getPath(useRouter().asPath)
+  const router = useRouter()
 
-  const geyserAddress = getGeyserAddress(version)
+  const geyserAddress = getGeyserAddress(router.query.version)
 
   const contents = [
     { name: 'Deposit', node: <Deposit geyserAddress={geyserAddress} /> },
@@ -67,7 +65,7 @@ const LiquidityMining = () => {
         </Margin>
         <Nav contents={contents} onChange={setTab}></Nav>
       </NarrowContainer>
-      <ControlChain />
+      <ControlChain network="ethereum" />
       <Footer />
     </>
   )

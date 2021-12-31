@@ -43,7 +43,7 @@ const hyphenToCapitalize = (str: string) =>
     })
     .join(' ')
 
-export const ControlChain = () => {
+export const ControlChain = ({ network }: { network?: ChainName }) => {
   const { router, requestedChain, fromRouter, isRoot } = useNetworkInRouter()
   const { ethersProvider } = useProvider()
   const { name } = useDetectChain(ethersProvider)
@@ -59,8 +59,14 @@ export const ControlChain = () => {
     [name, fromRouter, isRoot, isAlreadyConnectedToExpectedChain]
   )
 
-  return shouldChooseNetwork ? (
-    <Modal visible={true} closable={false} title="Choose network" footer={null} zIndex={9999}>
+  return network !== undefined && name !== undefined && network !== name ? (
+    <Modal visible={true} closable={false} title="Please switch the network" footer={null} zIndex={9999}>
+      {`Your wallet is connected to ${hyphenToCapitalize(
+        name
+      )}. But this page is only available in ${hyphenToCapitalize(network)}.`}
+    </Modal>
+  ) : shouldChooseNetwork ? (
+    <Modal visible={true} closable={false} title="Select a network" footer={null} zIndex={9999}>
       <Content>
         <Link passHref href={`/ethereum${router.asPath}`}>
           <a>Ethereum</a>
@@ -73,7 +79,7 @@ export const ControlChain = () => {
   ) : name ? (
     <Modal
       visible={openModal}
-      title="Choose network"
+      title="Switch the network"
       okText="Switch"
       cancelText="No"
       okButtonProps={{ type: 'primary', href: destination(router, name) }}
