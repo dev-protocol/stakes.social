@@ -31,7 +31,7 @@ const InvitationRequest = (_: Props) => {
         </p>
       </Headline>
       <WrapContainer>
-        <InvitationRequestForm market={market} />
+        <InvitationRequestForm market={String(market)} />
       </WrapContainer>
       <ControlChain />
       <Footer />

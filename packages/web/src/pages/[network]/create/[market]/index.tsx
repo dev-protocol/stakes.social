@@ -309,12 +309,12 @@ const AuthenticateNewAsset = (_: Props) => {
             onFormDataSubmit={setFormData}
             onHeaderChange={setHeader}
             onSubHeaderChange={setSubHeader}
-            market={market}
+            market={String(market)}
           />
         )}
         {formData && !metrics && (
           <TokenizationDisclaimer
-            market={market}
+            market={String(market)}
             onFormDataChange={setFormData}
             onHeaderChange={setHeader}
             onSubHeaderChange={setSubHeader}

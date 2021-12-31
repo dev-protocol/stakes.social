@@ -45,7 +45,7 @@ const AuthenticateNewAsset = (_: Props) => {
         <span>Confidentially verify your ownership with our Khaos oracle</span>
       </Headline>
       <ResponsiveContainer>
-        <AuthForm market={market} />
+        <AuthForm market={String(market)} />
       </ResponsiveContainer>
       <ControlChain />
       <Footer />
