@@ -6,7 +6,6 @@ import { Header } from 'src/components/organisms/Header'
 import { Headline } from 'src/components/atoms/Headline'
 import { H2 } from 'src/components/atoms/Typography'
 import styled from 'styled-components'
-import { getPath } from 'src/fixtures/utility/route'
 import { ControlChain } from 'src/components/organisms/ControlChain'
 
 type Props = {}
@@ -36,7 +35,7 @@ const ResponsiveContainer = styled(Container)`
 `
 
 const AuthenticateNewAsset = (_: Props) => {
-  const [, , market] = getPath(useRouter().asPath)
+  const { market } = useRouter().query
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
@@ -46,7 +45,7 @@ const AuthenticateNewAsset = (_: Props) => {
         <span>Confidentially verify your ownership with our Khaos oracle</span>
       </Headline>
       <ResponsiveContainer>
-        <AuthForm market={market} />
+        <AuthForm market={String(market)} />
       </ResponsiveContainer>
       <ControlChain />
       <Footer />

@@ -7,7 +7,6 @@ import { Headline } from 'src/components/atoms/Headline'
 import { H2 } from 'src/components/atoms/Typography'
 import styled from 'styled-components'
 import { useState } from 'react'
-import { getPath } from 'src/fixtures/utility/route'
 import { message } from 'antd'
 import { InfoCircleFilled } from '@ant-design/icons'
 import { useCreateAndAuthenticate } from 'src/fixtures/dev-kit/hooks'
@@ -289,7 +288,7 @@ const TokenizationDisclaimer = ({
 const AuthenticateNewAsset = (_: Props) => {
   const [header, setHeader] = useState('Create an Asset')
   const [subHeader, setSubHeader] = useState('Create an asset or authenticate an existing pool.')
-  const [, market] = getPath(useRouter().asPath)
+  const { market } = useRouter().query
   const [formData, setFormData] = useState<
     { projectName: string; tokenName: string; tokenSymbol: string; personalAccessToken: string } | undefined
   >(undefined)
@@ -310,12 +309,12 @@ const AuthenticateNewAsset = (_: Props) => {
             onFormDataSubmit={setFormData}
             onHeaderChange={setHeader}
             onSubHeaderChange={setSubHeader}
-            market={market}
+            market={String(market)}
           />
         )}
         {formData && !metrics && (
           <TokenizationDisclaimer
-            market={market}
+            market={String(market)}
             onFormDataChange={setFormData}
             onHeaderChange={setHeader}
             onSubHeaderChange={setSubHeader}
