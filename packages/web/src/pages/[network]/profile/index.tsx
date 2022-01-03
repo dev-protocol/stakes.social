@@ -17,6 +17,7 @@ import { boxShahowWithOnHover } from 'src/styles/boxShahow'
 import { useGetAccount } from 'src/fixtures/dev-for-apps/hooks'
 import { WalletSettings } from 'src/components/organisms/WalletSettings'
 import { YourPositions } from 'src/components/_pages/portfolio/YourPositions'
+import { ControlChain } from 'src/components/organisms/ControlChain'
 
 const PortfolioHeader = styled.div`
   display: grid;
@@ -129,6 +130,7 @@ const Portfolio = () => {
         <Heading>Wallet Settings</Heading>
         <WalletSettings />
       </StyledContainer>
+      <ControlChain />
       <Footer />
     </div>
   )

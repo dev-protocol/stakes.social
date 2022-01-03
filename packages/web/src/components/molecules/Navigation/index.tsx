@@ -40,7 +40,7 @@ export const Navigations = [
     key: 'portfolio',
     label: 'Portfolio',
     pathname: '/profile',
-    rewrite: false
+    rewrite: true
   },
   {
     key: 'grants',
