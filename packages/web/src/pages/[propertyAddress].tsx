@@ -8,7 +8,6 @@ import { PlusOutlined, LinkOutlined } from '@ant-design/icons'
 import { Button, Form, Input, Upload, Tabs } from 'antd'
 import { UploadChangeParam, UploadFile } from 'antd/lib/upload/interface'
 import { FormInstance } from 'antd/lib/form'
-import { PossessionOutline } from 'src/components/organisms/PossessionOutline'
 import { PropertyHeader } from 'src/components/organisms/PropertyHeader'
 import { Footer } from 'src/components/organisms/Footer'
 import { ResponsiveModal } from 'src/components/atoms/ResponsiveModal'
@@ -36,14 +35,12 @@ import {
 } from 'src/fixtures/dev-for-apps/hooks'
 import { Image, Property as DevForAppsProperty } from 'src/fixtures/dev-for-apps/utility'
 import { Stake } from 'src/components/organisms/Stake'
-import { Withdraw } from 'src/components/organisms/Withdraw'
 import { useIsL1, useProvider } from 'src/fixtures/wallet/hooks'
 import { Avatar } from 'src/components/molecules/Avatar'
 import { CoverImageOrGradient } from 'src/components/atoms/CoverImageOrGradient'
 import { H3 } from 'src/components/atoms/Typography'
 import { Twitter, Github } from 'src/components/atoms/SocialButtons'
 import { whenDefined } from 'src/fixtures/utility'
-import { AvatarProperty } from 'src/components/molecules/AvatarProperty'
 
 type Props = {}
 
@@ -73,14 +70,6 @@ const Main = styled(Container)`
   }
 `
 
-const Transact = styled.div`
-  display: grid;
-  grid-gap: 1rem;
-  @media (min-width: 1024px) {
-    grid-template-columns: 1fr 1fr;
-    grid-gap: 3rem;
-  }
-`
 const TabsGrid = styled.div`
   display: grid;
   grid-gap: 1rem;
@@ -89,11 +78,15 @@ const TabsGrid = styled.div`
     grid-gap: 3rem;
   }
 `
-const Possession = styled(PossessionOutline)``
+
+const Stats = styled(PropertyStats)`
+  display: grid;
+  grid-gap: 1rem;
+`
 
 const Wrap = styled.div`
   margin: 1rem auto;
-  max-width: 1048px;
+  max-width: 2048px;
 `
 
 const AboutSection = styled.div`
@@ -108,6 +101,7 @@ const AssetsSection = styled.div`
 const AssetList = styled.div`
   display: flex;
   flex-direction: column;
+  float: left;
 `
 
 const AssetListItem = styled.div`
@@ -167,26 +161,6 @@ const AboutTitle = styled.div`
 const EditPropertyButton = styled(ButtonWithGradient)`
   font-size: 0.8rem;
   margin: 0 1rem 0.5rem;
-`
-
-const FlexRow = styled.div`
-  display: flex;
-  align-items: center;
-
-  img {
-    border-radius: 90px;
-    margin-right: 10px;
-    margin-bottom: 10px;
-  }
-`
-const Bold = styled.div`
-  margin-right: 10px;
-  font-weight: bold;
-`
-
-const FlexColumn = styled.div`
-  display: flex;
-  margin-right: 1rem;
 `
 
 const Author = ({ propertyAddress }: { propertyAddress: string }) => {
@@ -417,50 +391,36 @@ const PropertyAddressDetail = (_: Props) => {
         </Container>
         <Main>
           <RoundedCoverImageOrGradient src={dataProperty?.cover_image?.url} ratio={52.5} />
+          {myStakingAmount?.isGreaterThan(0) && <Convert propertyAddress={propertyAddress} />}
           <Tabs defaultActiveKey="1" type="card">
             <TabPane tab="Overview" key="1">
               <TabsGrid>
-                <AssetsSection>
-                  <h2>Tokenized assets</h2>
-                  <AssetList>
-                    {includedAssetList?.map((asset: any, index: any) => (
-                      <AssetListItem key={index}>
-                        <FlexRow>
-                          <AvatarProperty propertyAddress={propertyAddress} size={'60'} />
-                          <Bold>GitHub</Bold>
-                          {asset}
-                        </FlexRow>
-                        <FlexRow>
-                          <FlexColumn>
-                            <Bold>Contributors</Bold>
-                            <span>32</span>
-                          </FlexColumn>
-                          <FlexColumn>
-                            <Bold>Star</Bold>
-                            <span>3.2K</span>
-                          </FlexColumn>
-                          <FlexColumn>
-                            <Bold>Last update</Bold>
-                            <span>2 weeks ago</span>
-                          </FlexColumn>
-                          <FlexColumn>
-                            <Bold>Created</Bold>
-                            <span>1 year ago</span>
-                          </FlexColumn>
-                        </FlexRow>
-                      </AssetListItem>
-                    ))}
-                    {propertyInformation?.author?.address === loggedInWallet && (
-                      <Link href={'/create/[property]'} as={`/create/${propertyAddress}`}>
-                        <AddAsset>
-                          <PlusOutlined />
-                          <span>Add asset</span>
-                        </AddAsset>
-                      </Link>
-                    )}
-                  </AssetList>
-                </AssetsSection>
-                {<PropertyStats propertyAddress={propertyAddress} />}
+                <div>
+                  <PropertyAbout
+                    isAuthor={loggedInWallet === authorAddress}
+                    dataProperty={dataProperty ? dataProperty : ({} as DevForAppsProperty)}
+                    authorAddress={authorAddress || ''}
+                    propertyAddress={propertyAddress}
+                  />
+                  <AssetsSection>
+                    <h2>Included assets</h2>
+                    <AssetList>
+                      {includedAssetList?.map((asset: any, index: any) => (
+                        <AssetListItem key={index}>{asset}</AssetListItem>
+                      ))}
+                      {propertyInformation?.author?.address === loggedInWallet && (
+                        <Link href={'/create/[property]'} as={`/create/${propertyAddress}`}>
+                          <AddAsset>
+                            <PlusOutlined />
+                            <span>Add asset</span>
+                          </AddAsset>
+                        </Link>
+                      )}
+                    </AssetList>
+                  </AssetsSection>
+                  {<Author propertyAddress={propertyAddress} />}
+                </div>
+                {<Stats propertyAddress={propertyAddress} />}
               </TabsGrid>
             </TabPane>
             <TabPane tab="Stake" key="2">
@@ -468,45 +428,19 @@ const PropertyAddressDetail = (_: Props) => {
                 {(loggedInWallet ? loggedInWallet !== authorAddress : true) && (
                   <Stake title="Stake" propertyAddress={propertyAddress} />
                 )}
-                {<PropertyStats propertyAddress={propertyAddress} />}
+                {<Stats propertyAddress={propertyAddress} />}
+              </TabsGrid>
+            </TabPane>
+            <TabPane tab="Supporters" key="3">
+              <TabsGrid>
+                <div>
+                  <h2>Supporters of {propertyName}</h2>
+                  <PropertySupporters propertyAddress={propertyAddress} />
+                </div>
+                {<Stats propertyAddress={propertyAddress} />}
               </TabsGrid>
             </TabPane>
           </Tabs>
-          {<Possession propertyAddress={propertyAddress} />}
-          {myStakingAmount?.isGreaterThan(0) && <Convert propertyAddress={propertyAddress} />}
-          <Transact>
-            {(loggedInWallet ? loggedInWallet !== authorAddress : true) && (
-              <Stake title="Stake" propertyAddress={propertyAddress} />
-            )}
-            {<Withdraw title="Withdraw" propertyAddress={propertyAddress} isDisplayFee={true} />}
-          </Transact>
-          <PropertyAbout
-            isAuthor={loggedInWallet === authorAddress}
-            dataProperty={dataProperty ? dataProperty : ({} as DevForAppsProperty)}
-            authorAddress={authorAddress || ''}
-            propertyAddress={propertyAddress}
-          />
-          <AssetsSection>
-            <h2>Included assets</h2>
-            <AssetList>
-              {includedAssetList?.map((asset: any, index: any) => (
-                <AssetListItem key={index}>{asset}</AssetListItem>
-              ))}
-              {propertyInformation?.author?.address === loggedInWallet && (
-                <Link href={'/create/[property]'} as={`/create/${propertyAddress}`}>
-                  <AddAsset>
-                    <PlusOutlined />
-                    <span>Add asset</span>
-                  </AddAsset>
-                </Link>
-              )}
-            </AssetList>
-          </AssetsSection>
-          {<Author propertyAddress={propertyAddress} />}
-          <div>
-            <h2>Supporters of {propertyName}</h2>
-            <PropertySupporters propertyAddress={propertyAddress} />
-          </div>
         </Main>
       </Wrap>
 

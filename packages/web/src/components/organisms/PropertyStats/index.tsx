@@ -1,97 +1,115 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import {
   useGetTotalStakingAmount,
+  useGetMyStakingAmount,
   useGetTotalRewardsAmount,
   useGetMyStakingRewardAmount,
-  usePropertyAuthor
+  useGetMyHolderAmount
 } from 'src/fixtures/dev-kit/hooks'
-import { useGetAccount } from 'src/fixtures/dev-for-apps/hooks'
 import { Card, Statistic, Row } from 'antd'
-import { Avatar } from 'src/components/molecules/Avatar'
-import styled from 'styled-components'
-import truncateEthAddress from 'truncate-eth-address'
 
 interface Props {
   className?: string
   propertyAddress: string
 }
 
-const Title = styled.div`
-  font-weight: 400;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  margin-bottom: 10px;
-`
-
-const Container = styled.div`
-  display: grid;
-  grid-gap: 1rem;
-`
-const FlexRow = styled.div`
-  display: flex;
-  align-items: center;
-  margin-bottom: 10px;
-
-  img {
-    border-radius: 90px;
-    margin-right: 10px;
-  }
-`
-
 export const PropertyStats = ({ className, propertyAddress }: Props) => {
   const { totalStakingAmount, currency: totalStakingAmountCurrency } = useGetTotalStakingAmount(propertyAddress)
   const { totalRewardsAmount, currency: totalRewardsAmountCurrency } = useGetTotalRewardsAmount(propertyAddress)
-  useGetMyStakingRewardAmount(propertyAddress)
-  const { author: authorAddress } = usePropertyAuthor(propertyAddress)
-  const { data: dataAuthor } = useGetAccount(authorAddress)
+  const { myStakingAmount, currency: myStakingAmountCurrency } = useGetMyStakingAmount(propertyAddress)
+  const { myStakingRewardAmount, currency: myStakingRewardAmountCurrency } =
+    useGetMyStakingRewardAmount(propertyAddress)
+  const stakingShare = useMemo(
+    () =>
+      myStakingAmount && totalStakingAmount ? (myStakingAmount.toNumber() / totalStakingAmount.toNumber()) * 100 : 0,
+    [myStakingAmount, totalStakingAmount]
+  )
+  const { myHolderAmount: withdrawableAmount, total: lifetimeReward } = useGetMyHolderAmount(propertyAddress)
 
   return (
     <div className={className}>
-      <Container>
-        <Row gutter={[24, 24]} justify={'start'}>
-          <Card>
-            <Statistic
-              title="Total Staking Amount"
-              value={totalStakingAmount ? totalStakingAmount.toNumber() : 'N/A'}
-              precision={2}
-              suffix={totalStakingAmountCurrency}
-              valueStyle={{ textAlign: 'right' }}
-            />
-          </Card>
-        </Row>
-        <Row gutter={[24, 24]} justify={'start'}>
-          <Card>
-            <Statistic title="Total Stakers" value={12} precision={0} valueStyle={{ textAlign: 'left' }} />
-          </Card>
-        </Row>
-        <Row gutter={[24, 24]} justify={'start'}>
-          <Card>
-            <Statistic
-              title="Total Rewards"
-              value={totalRewardsAmount && totalRewardsAmount.toNumber()}
-              precision={2}
-              suffix={totalRewardsAmountCurrency}
-              valueStyle={{ textAlign: 'right' }}
-            />
-          </Card>
-        </Row>
-        <Row gutter={[24, 24]} justify={'start'}>
-          <Card>
-            <Title>Author</Title>
-            <FlexRow>
-              <Avatar accountAddress={authorAddress} size={'60'} />
-              <span>{dataAuthor ? dataAuthor.name : 'N/A'}</span>
-            </FlexRow>
-            {authorAddress ? truncateEthAddress(authorAddress) : 'N/A'}
-          </Card>
-        </Row>
-        <Row gutter={[24, 24]} justify={'start'}>
-          <Card>
-            <Statistic title="Created" value={'8 months ago'} precision={0} valueStyle={{ textAlign: 'left' }} />
-          </Card>
-        </Row>
-      </Container>
+      <Row gutter={[24, 24]} justify={'start'}>
+        <Card>
+          <Statistic
+            title="Total Staking Amount"
+            value={totalStakingAmount ? totalStakingAmount.toNumber() : 'N/A'}
+            precision={2}
+            suffix={totalStakingAmountCurrency}
+            valueStyle={{ textAlign: 'right' }}
+          />
+        </Card>
+      </Row>
+      <Row gutter={[24, 24]} justify={'start'}>
+        <Card>
+          <Statistic
+            title="Total Rewards"
+            value={totalRewardsAmount && totalRewardsAmount.toNumber()}
+            precision={2}
+            suffix={totalRewardsAmountCurrency}
+            valueStyle={{ textAlign: 'right' }}
+          />
+        </Card>
+      </Row>
+
+      <Row gutter={[24, 24]} justify={'start'}>
+        <Card>
+          <Statistic
+            title="Lifetime Reward"
+            value={lifetimeReward ? lifetimeReward.toNumber() || 0 : 'N/A'}
+            precision={2}
+            suffix="DEV"
+            valueStyle={{ textAlign: 'right' }}
+          />
+        </Card>
+      </Row>
+
+      <Row gutter={[24, 24]} justify={'start'}>
+        <Card>
+          <Statistic
+            title="Receivable Amount"
+            value={withdrawableAmount ? withdrawableAmount.toNumber() || 0 : 'N/A'}
+            precision={2}
+            suffix="DEV"
+            valueStyle={{ textAlign: 'right' }}
+          />
+        </Card>
+      </Row>
+
+      <Row gutter={[24, 24]} justify={'start'}>
+        <Card>
+          <Statistic
+            title="Your Staking Share"
+            value={myStakingAmount && totalStakingAmount ? stakingShare || 0 : 'N/A'}
+            precision={2}
+            suffix="%"
+            valueStyle={{ textAlign: 'right' }}
+          />
+        </Card>
+      </Row>
+
+      <Row gutter={[24, 24]} justify={'start'}>
+        <Card>
+          <Statistic
+            title="Your Staking Amount"
+            value={myStakingAmount ? myStakingAmount.toNumber() : 'N/A'}
+            precision={2}
+            suffix={myStakingAmountCurrency}
+            valueStyle={{ textAlign: 'right' }}
+          />
+        </Card>
+      </Row>
+
+      <Row gutter={[24, 24]} justify={'start'}>
+        <Card>
+          <Statistic
+            title="Your Rewards"
+            value={myStakingRewardAmount && myStakingRewardAmount.toNumber()}
+            precision={2}
+            suffix={myStakingRewardAmountCurrency}
+            valueStyle={{ textAlign: 'right' }}
+          />
+        </Card>
+      </Row>
     </div>
   )
 }
