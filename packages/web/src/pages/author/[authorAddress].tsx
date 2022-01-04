@@ -24,9 +24,9 @@ import Link from 'next/link'
 import { useProvider } from 'src/fixtures/wallet/hooks'
 import { useCurrency } from 'src/fixtures/currency/hooks'
 import { Pagination, Spin } from 'antd'
-import { getPath } from 'src/fixtures/utility/route'
 import { CoverImages } from 'src/components/_pages/author/CoverImages'
 import { useENS } from 'src/fixtures/ens/hooks'
+import { LinkWithNetwork } from 'src/components/atoms/LinkWithNetwork'
 
 type Props = {}
 
@@ -201,7 +201,7 @@ const Pool = ({ propertyAddress }: PoolProps) => {
   )
   const { currency } = useCurrency()
   return (
-    <Link href={`/${propertyAddress}`} passHref>
+    <LinkWithNetwork href={`/${propertyAddress}`} passHref>
       <Card>
         <PoolsOverview>
           <PoolLogoSection>
@@ -218,7 +218,7 @@ const Pool = ({ propertyAddress }: PoolProps) => {
           </TotalStaked>
         </PoolsOverview>
       </Card>
-    </Link>
+    </LinkWithNetwork>
   )
 }
 
@@ -261,8 +261,7 @@ const Section = styled.a<{ activeSection: string; section: string }>`
 
 const AuthorAddressDetail = (_: Props) => {
   const [ens, setENS] = useState('')
-  const [, urlPathArg] = getPath(useRouter().asPath)
-  const authorAddress = urlPathArg.split('?')[0]
+  const { authorAddress } = useRouter().query
   const author: string = typeof authorAddress == 'string' ? authorAddress : 'none'
   const { data: authorInformation } = useGetAuthorInformation(author)
   const [paginationProps, setPaginationProps] = useState<{ offset: number; limit: number; currentPage: number }>({
@@ -308,7 +307,7 @@ const AuthorAddressDetail = (_: Props) => {
   return (
     <>
       <Header></Header>
-      <CoverImages accountAddress={authorAddress} />
+      <CoverImages accountAddress={String(authorAddress)} />
       <Wrap>
         <ProfilePicture>
           {width > 0 && <AuthorAvatar accountAddress={author} size={width >= 1240 ? '140' : '90'} />}

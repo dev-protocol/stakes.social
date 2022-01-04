@@ -8,6 +8,7 @@ import { EarlyAccess } from 'src/components/atoms/EarlyAccess'
 import { useConnectWallet, useProvider } from 'src/fixtures/wallet/hooks'
 import { AccountBtn, Connecting } from 'src/components/atoms/Navigation'
 import { useRouter } from 'next/router'
+import { LinkWithNetwork } from 'src/components/atoms/LinkWithNetwork'
 
 interface Props {}
 
@@ -113,9 +114,9 @@ export const Header = (_: Props = {}) => {
               {Navigations.map(nav => (
                 <>
                   <NavigationItem key={nav.key}>
-                    <Link href={nav.pathname}>
+                    <LinkWithNetwork href={nav.pathname} rewrite={nav.rewrite}>
                       <span style={current === nav.key ? { color: '#808080' } : { color: '#FFF' }}>{nav.label}</span>
-                    </Link>
+                    </LinkWithNetwork>
                   </NavigationItem>
                 </>
               ))}

@@ -1,5 +1,6 @@
 // @L2 optimized
 import React, { useEffect, useState } from 'react'
+import styled from 'styled-components'
 import { Popover, Table } from 'antd'
 import { format } from 'date-fns'
 import { providers } from 'ethers'
@@ -7,9 +8,24 @@ import { Avatar } from 'src/components/molecules/Avatar'
 import { getAccount } from 'src/fixtures/dev-for-apps/utility'
 import { useProvider } from 'src/fixtures/wallet/hooks'
 import { useDetectSTokens } from 'src/fixtures/dev-kit/hooks'
-import { getStokenPositions, getStokenOwnerOf, getStokenRewards, getStokenHeldAt } from 'src/fixtures/dev-kit/client'
+import {
+  getStokenPositions,
+  getStokenTokenURI,
+  getStokenOwnerOf,
+  getStokenRewards,
+  getStokenHeldAt
+} from 'src/fixtures/dev-kit/client'
 import { whenDefined, whenDefinedAll } from 'src/fixtures/utility'
 import { ButtonWithGradient } from 'src/components/atoms/ButtonWithGradient'
+import { useImageDataUriFetcher } from 'src/fixtures/ipfs/hooks'
+import { STokensTableImage } from 'src/components/atoms/STokensTableImage'
+import { LinkWithNetwork } from 'src/components/atoms/LinkWithNetwork'
+
+const Actions = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+`
 
 interface Props {
   propertyAddress?: string
@@ -19,6 +35,11 @@ interface Props {
 interface Position {
   amount: number
   sTokenId: number
+}
+
+interface TokenURI {
+  name: string
+  image: string
 }
 
 interface TableData {
@@ -68,6 +89,14 @@ const tableColumns = [
     render: (text: string) => <span>{text}</span>
   },
   {
+    title: 'Image',
+    dataIndex: 'image',
+    key: 'image',
+    render: (base64Image: string) => {
+      return <STokensTableImage imagePath={base64Image} />
+    }
+  },
+  {
     title: 'Address',
     dataIndex: 'account',
     key: 'account',
@@ -106,8 +135,16 @@ const tableColumns = [
   },
   {
     title: '',
+    dataIndex: 'action',
     key: 'action',
-    render: () => <OfferPopover />
+    render: ({ sTokenId }: { sTokenId: number }) => (
+      <Actions>
+        <OfferPopover />
+        <LinkWithNetwork href={`/positions/${sTokenId}`} passHref>
+          <ButtonWithGradient>Positions</ButtonWithGradient>
+        </LinkWithNetwork>
+      </Actions>
+    )
   }
 ]
 
@@ -115,6 +152,7 @@ const SupportersTable = ({ sTokenIds }: { sTokenIds: number[] }) => {
   const { nonConnectedEthersProvider, nonConnectedEthersL1Provider } = useProvider()
   const [tableData, setTableData] = useState<Array<TableData>>([])
   const [loading, setLoading] = useState(false)
+  const { dataUriFetcher } = useImageDataUriFetcher()
 
   useEffect(() => {
     setLoading(true)
@@ -141,6 +179,9 @@ const SupportersTable = ({ sTokenIds }: { sTokenIds: number[] }) => {
         sortedAmounts.map(async ({ sTokenId, amount }, idx: number) => {
           const ownerAccountAddress =
             (await whenDefined(nonConnectedEthersProvider, client => getStokenOwnerOf(client, sTokenId))) || ''
+          const tokenURI: TokenURI =
+            (await whenDefined(nonConnectedEthersProvider, client => getStokenTokenURI(client, sTokenId))) ||
+            ({} as TokenURI)
           const { withdrawableReward: reward } = (await whenDefined(nonConnectedEthersProvider, client =>
             getStokenRewards(client, sTokenId)
           )) || { withdrawableReward: 0 }
@@ -148,12 +189,16 @@ const SupportersTable = ({ sTokenIds }: { sTokenIds: number[] }) => {
           const [accountData, ens, transferEvent] = await Promise.all([
             getAccount(ownerAccountAddress),
             nonConnectedEthersL1Provider?.lookupAddress(ownerAccountAddress),
-            whenDefined(nonConnectedEthersProvider, client => getStokenHeldAt(client, sTokenId, ownerAccountAddress))
+            whenDefined(nonConnectedEthersProvider, client => getStokenHeldAt(client, sTokenId))
           ])
           const since =
             transferEvent && transferEvent.length > 0 ? (await transferEvent[0].getBlock()).timestamp : undefined
           return {
             rank: idx + 1,
+            action: {
+              sTokenId
+            },
+            image: await dataUriFetcher(tokenURI?.image),
             address: ownerAccountAddress,
             account: {
               address: ownerAccountAddress,

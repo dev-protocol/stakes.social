@@ -22,7 +22,6 @@ import { useListOwnedPropertyMetaQuery } from '@dev/graphql'
 import { useProvider } from 'src/fixtures/wallet/hooks'
 import Link from 'next/link'
 import { FullpageWrap } from 'src/components/atoms/FullpageWrap'
-import { getPath } from 'src/fixtures/utility/route'
 
 type InitialProps = {}
 type Props = {} & InitialProps
@@ -193,11 +192,12 @@ const ProfileForm = ({ accountAddress }: { accountAddress: string }) => {
 
 const AuthorEdit = (_: Props) => {
   const { accountAddress } = useProvider()
-  const [, authorAddress] = getPath(useRouter().asPath)
+  const { authorAddress } = useRouter().query
   const { data, loading } = useListOwnedPropertyMetaQuery({
-    variables: { account_address: authorAddress, offset: 0, limit: 1 }
+    variables: { account_address: String(authorAddress), offset: 0, limit: 1 }
   })
-  const isAuthor = Boolean(data?.property_meta?.length) && accountAddress?.toLowerCase() === authorAddress.toLowerCase()
+  const isAuthor =
+    Boolean(data?.property_meta?.length) && accountAddress?.toLowerCase() === String(authorAddress).toLowerCase()
 
   return (
     <FullpageWrap>
@@ -210,7 +210,7 @@ const AuthorEdit = (_: Props) => {
           {loading ? (
             <Skeleton />
           ) : isAuthor ? (
-            <ProfileForm accountAddress={authorAddress} />
+            <ProfileForm accountAddress={String(authorAddress)} />
           ) : (
             <Result
               status="error"

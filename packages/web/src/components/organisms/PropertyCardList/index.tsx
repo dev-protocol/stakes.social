@@ -17,6 +17,7 @@ import {
   useGetAuthenticatedProperties
 } from 'src/fixtures/dev-kit/hooks'
 import { reverse } from 'ramda'
+import { LinkWithNetwork } from 'src/components/atoms/LinkWithNetwork'
 
 export type FeatureTag = '' | 'GitHub' | 'npm' | 'Creators'
 interface Props {
@@ -127,9 +128,9 @@ const FeatureTags = ({ tag }: { tag: FeatureTag }) => {
       </Link>
       {tags &&
         tags.map((d: string) => (
-          <Link href={`/?tag=${d}`} key={d}>
+          <LinkWithNetwork href={`/?tag=${d}`} key={d}>
             <a style={{ color: tag !== d ? '#c9c9c9' : '' }}>{d}</a>
-          </Link>
+          </LinkWithNetwork>
         ))}
     </Wrap>
   )

@@ -7,9 +7,9 @@ export const NavMenu = styled(Menu)`
   width: fit-content;
 
   .ant-menu-item-selected {
-    background: -moz-linear-gradient(top, #639fff 1%, #2187ed 100%);
-    background: -webkit-linear-gradient(top, #639fff 1%, #2187ed 100%);
-    background: linear-gradient(to bottom, #639fff 1%, #2187ed 100%);
+    background: -moz-linear-gradient(top, #0062ff 1%, #2187ed 100%);
+    background: -webkit-linear-gradient(top, #0062ff 1%, #2187ed 100%);
+    background: linear-gradient(to bottom, #0062ff 1%, #2187ed 100%);
   }
 `
 export const NavMenuItem = styled(NavMenu.Item)`
