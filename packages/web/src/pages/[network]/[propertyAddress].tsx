@@ -86,7 +86,7 @@ const Stats = styled(PropertyStats)`
 
 const Wrap = styled.div`
   margin: 1rem auto;
-  max-width: 2048px;
+  max-width: 1048px;
 `
 
 const AboutSection = styled.div`
