@@ -80,8 +80,8 @@ export const useDetectChain = (ethersProvider?: providers.BaseProvider) => {
 }
 
 export const useIsL1 = () => {
-  const { ethersProvider } = useProvider()
-  const { name: chain } = useDetectChain(ethersProvider)
+  const { nonConnectedEthersProvider } = useProvider()
+  const { name: chain } = useDetectChain(nonConnectedEthersProvider)
   const isL1 = useMemo(() => whenDefined(chain, c => c === 'ethereum'), [chain])
   return { isL1 }
 }
