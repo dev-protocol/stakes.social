@@ -3,7 +3,6 @@ import { BrandLogo } from 'src/components/atoms/BrandLogo'
 import styled from 'styled-components'
 import { Navigation, Navigations } from 'src/components/molecules/Navigation'
 import { useState } from 'react'
-import Link from 'next/link'
 import { EarlyAccess } from 'src/components/atoms/EarlyAccess'
 import { useConnectWallet, useProvider } from 'src/fixtures/wallet/hooks'
 import { AccountBtn, Connecting } from 'src/components/atoms/Navigation'
@@ -97,7 +96,7 @@ export const Header = (_: Props = {}) => {
                   <span style={{ fontSize: '0.8em' }}>Sign in</span>
                 </AccountBtn>
               ) : (
-                <Link href="/profile" as={`/profile`} passHref>
+                <LinkWithNetwork href="/profile" rewrite={true}>
                   <AccountBtn currentRouter={router?.pathname}>
                     <React.Fragment>
                       <span style={{ fontSize: '0.8em' }} className="hideOnSmall">
@@ -105,7 +104,7 @@ export const Header = (_: Props = {}) => {
                       </span>
                     </React.Fragment>
                   </AccountBtn>
-                </Link>
+                </LinkWithNetwork>
               )}
             </HeaderRight>
           </Top>
