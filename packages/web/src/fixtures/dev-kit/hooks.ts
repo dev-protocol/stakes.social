@@ -620,7 +620,7 @@ export const useAPY = () => {
   )
 
   const stakers = maxRewards && holders ? new BigNumber(maxRewards).minus(new BigNumber(holders)) : undefined
-  const year = new BigNumber(isL1 ? 2102400 : 31536000)
+  const year = useMemo(() => new BigNumber(isL1 || isL1 === undefined ? 2102400 : 31536000), [isL1])
   const apy = stakers && totalStaking ? stakers.times(year).div(totalStaking).times(100) : undefined
   const creators = holders && totalStaking ? new BigNumber(holders).times(year).div(totalStaking).times(100) : undefined
 
@@ -716,7 +716,7 @@ export const useAnnualSupplyGrowthRatio = () => {
       focusThrottleInterval: 0
     }
   )
-  const year = new BigNumber(isL1 ? 2102400 : 31536000)
+  const year = useMemo(() => new BigNumber(isL1 || isL1 === undefined ? 2102400 : 31536000), [isL1])
   const annualSupplyGrowthRatio =
     maxRewards && totalSupplyValue ? new BigNumber(maxRewards).times(year).div(totalSupplyValue).times(100) : undefined
 
