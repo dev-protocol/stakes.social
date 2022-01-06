@@ -5,6 +5,7 @@ import Hamburger from 'src/components/atoms/Svgs/tsx/Hamburger'
 import { NavMenu, NavMenuItem } from './../../atoms/Navigation/index'
 import { useEffectAsync } from 'src/fixtures/utility'
 import { LinkWithNetwork } from 'src/components/atoms/LinkWithNetwork'
+import { NetworkSelector } from 'src/components/organisms/NetworkSelector'
 
 interface NavigationProps {
   isMenuOpen: boolean
@@ -80,27 +81,41 @@ export const Navigation = ({ handleMenuOpen }: NavigationProps) => {
   return (
     <>
       {isDesktop && (
-        <NavMenu
-          style={{ background: 'black', paddingRight: '5rem' }}
-          theme="dark"
-          onClick={handleClick}
-          selectedKeys={[current || '']}
-          mode="horizontal"
-        >
-          {Navigations.map(nav => (
-            <NavMenuItem key={nav.key} style={{ margin: '0' }}>
-              <LinkWithNetwork href={nav.pathname} rewrite={nav.rewrite}>
-                <a style={{ display: 'block', width: 'auto', fontSize: '0.8em' }}>{nav.label}</a>
-              </LinkWithNetwork>
-            </NavMenuItem>
-          ))}
-        </NavMenu>
+        <>
+          <div style={{ display: 'flex', alignItems: 'center', margin: '0 10px' }}>
+            <div>
+              <NetworkSelector withText />
+            </div>
+          </div>
+          <NavMenu
+            style={{ background: 'black', paddingRight: '5rem' }}
+            theme="dark"
+            onClick={handleClick}
+            selectedKeys={[current || '']}
+            mode="horizontal"
+          >
+            {Navigations.map(nav => (
+              <NavMenuItem key={nav.key} style={{ margin: '0' }}>
+                <LinkWithNetwork href={nav.pathname} rewrite={nav.rewrite}>
+                  <a style={{ display: 'block', width: 'auto', fontSize: '0.8em' }}>{nav.label}</a>
+                </LinkWithNetwork>
+              </NavMenuItem>
+            ))}
+          </NavMenu>
+        </>
       )}
       {!isDesktop && (
-        <Hamburger
-          style={{ marginRight: '0.5em', cursor: 'pointer' }}
-          onClick={() => handleMenuOpen(prevMenuOpen => !prevMenuOpen)}
-        />
+        <>
+          <Hamburger
+            style={{ marginRight: '0.5em', cursor: 'pointer' }}
+            onClick={() => handleMenuOpen(prevMenuOpen => !prevMenuOpen)}
+          />
+          <div style={{ display: 'flex', alignItems: 'center', margin: '0 10px' }}>
+            <div>
+              <NetworkSelector />
+            </div>
+          </div>
+        </>
       )}
     </>
   )
