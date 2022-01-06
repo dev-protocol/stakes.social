@@ -1,6 +1,5 @@
-import React, { useEffect, useMemo, useState } from 'react'
+import React, { useMemo } from 'react'
 import { useDetectChain, useProvider } from 'src/fixtures/wallet/hooks'
-import { NextRouter } from 'next/router'
 import { Modal } from 'antd'
 import Link from 'next/link'
 import { ChainName } from 'src/fixtures/wallet/utility'
@@ -21,20 +20,7 @@ const Content = styled.div`
   }
 `
 
-const SPLITTER = '/'
-const destination = (router: NextRouter, network: ChainName) => {
-  const index = router.pathname.split(SPLITTER).findIndex(x => x === '[network]')
-  const replaced =
-    index > -1
-      ? router.asPath
-          .split(SPLITTER)
-          .map((v, i) => {
-            return i === index ? network : v
-          })
-          .join(SPLITTER)
-      : `/${network}${router.asPath}`
-  return replaced
-}
+export const SPLITTER = '/'
 const hyphenToCapitalize = (str: string) =>
   str
     .split(/(\s|-)+/)
@@ -44,20 +30,10 @@ const hyphenToCapitalize = (str: string) =>
     .join(' ')
 
 export const ControlChain = ({ network }: { network?: ChainName }) => {
-  const { router, requestedChain, fromRouter, isRoot } = useNetworkInRouter()
+  const { router } = useNetworkInRouter()
   const { ethersProvider } = useProvider()
   const { name } = useDetectChain(ethersProvider)
   const shouldChooseNetwork = useMemo(() => NETWORK_DEPENDENTS.some(test => test.test(router.asPath)), [router.asPath])
-  const isAlreadyConnectedToExpectedChain = requestedChain === name
-  const [openModal, setOpenModal] = useState<boolean>()
-
-  useEffect(
-    () =>
-      setOpenModal(
-        name !== undefined && (isRoot ? isRoot : fromRouter !== undefined) && !isAlreadyConnectedToExpectedChain
-      ),
-    [name, fromRouter, isRoot, isAlreadyConnectedToExpectedChain]
-  )
 
   return network !== undefined && name !== undefined && network !== name ? (
     <Modal visible={true} closable={false} title="Please switch the network" footer={null} zIndex={9999}>
@@ -75,18 +51,6 @@ export const ControlChain = ({ network }: { network?: ChainName }) => {
           <a>Arbitrum</a>
         </Link>
       </Content>
-    </Modal>
-  ) : name ? (
-    <Modal
-      visible={openModal}
-      title="Switch the network"
-      okText="Switch"
-      cancelText="No"
-      okButtonProps={{ type: 'primary', href: destination(router, name) }}
-      zIndex={9999}
-      onCancel={() => setOpenModal(false)}
-    >
-      {`Your wallet is connected to ${hyphenToCapitalize(name)}. Do you want to switch the contents?`}
     </Modal>
   ) : (
     <></>

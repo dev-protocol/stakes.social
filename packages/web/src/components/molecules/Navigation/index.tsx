@@ -1,15 +1,95 @@
-import React, { useState, useCallback } from 'react'
-import { MenuInfo } from 'rc-menu/lib/interface'
-import { useRouter } from 'next/router'
-import Hamburger from 'src/components/atoms/Svgs/tsx/Hamburger'
-import { NavMenu, NavMenuItem } from './../../atoms/Navigation/index'
-import { useEffectAsync } from 'src/fixtures/utility'
+import React, { useState } from 'react'
+import { useRouter, NextRouter } from 'next/router'
 import { LinkWithNetwork } from 'src/components/atoms/LinkWithNetwork'
+import styled from 'styled-components'
+import { useConnectWallet, useDetectChain, useProvider } from 'src/fixtures/wallet/hooks'
+import { Button, Drawer } from 'antd'
+import { StakesSocial } from 'src/components/atoms/Svgs/tsx'
+import { DisconnectOutlined, LinkOutlined, MoreOutlined } from '@ant-design/icons'
+import { Container } from 'src/components/atoms/Container'
+import { ChainName } from 'src/fixtures/wallet/utility'
+import { switchChain } from 'src/fixtures/wallet/switch'
+import { providers } from 'ethers'
+import { destination } from '../../organisms/ControlChain/destination'
 
-interface NavigationProps {
-  isMenuOpen: boolean
-  handleMenuOpen: React.Dispatch<React.SetStateAction<boolean>>
-}
+const Nav = styled.nav``
+
+const NavContainer = styled(Container)`
+  display: grid;
+  grid-auto-flow: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.7rem 0;
+`
+
+const Logo = styled(StakesSocial)`
+  fill: black;
+`
+
+const LogoText = styled.span`
+  margin-left: 0.5em;
+  font-size: 1.2rem;
+  font-weight: bold;
+`
+
+const Grid = styled.div`
+  display: grid;
+`
+
+const NavOpenedWallet = styled(Grid)`
+  gap: 1rem;
+  border: 4px solid whitesmoke;
+  border-radius: 20px;
+  padding: 1rem;
+`
+
+const NavOpenedC = styled(Grid)`
+  grid-auto-flow: column;
+  justify-content: space-between;
+`
+
+const NavOpenedN = styled(Grid)`
+  grid-auto-flow: row;
+  justify-items: start;
+`
+
+const NetworkSwitch = styled(Button)`
+  padding: 0;
+  display: grid;
+  gap: 1rem;
+  grid-auto-flow: column;
+`
+
+const GrayCircle = styled.span`
+  color: lightgray;
+  &::before {
+    content: '●';
+  }
+`
+
+const GreenCircle = styled.span`
+  color: #00b050;
+  &::before {
+    content: '●';
+  }
+`
+
+const NavUl = styled.ul`
+  display: grid;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  gap: 1rem;
+  margin-top: 1rem;
+`
+const NavLi = styled.li`
+  a {
+    display: block;
+    border: 4px solid whitesmoke;
+    border-radius: 20px;
+    padding: 1rem;
+  }
+`
 
 export const Navigations = [
   {
@@ -50,58 +130,87 @@ export const Navigations = [
   }
 ]
 
-const toKey = (_pathname: string) => Navigations.find(({ pathname }) => pathname === _pathname)?.key
+const StakesSocialLogo = () => (
+  <div>
+    <Logo id="headerlogo" height={undefined} />
+    <LogoText>Stakes.social</LogoText>
+  </div>
+)
 
-export const Navigation = ({ handleMenuOpen }: NavigationProps) => {
-  const router = useRouter()
-  const [current, setCurrent] = useState(toKey(router?.asPath || Navigations[0].key)) // || Navigations[0].key
-  const [isDesktop, setDesktop] = useState(typeof window !== 'undefined' && window?.innerWidth > 1070)
+const ConnectedOrDisconnected = ({ chainName }: { chainName: ChainName }) => {
+  const { ethersProvider } = useProvider()
+  const { name } = useDetectChain(ethersProvider)
+  return chainName === name ? <GreenCircle /> : <GrayCircle />
+}
 
-  const updateMedia = () => {
-    setDesktop(window.innerWidth > 1070)
+const createSwitchNetwork =
+  (router: NextRouter, provider?: providers.BaseProvider) => (chainName: ChainName) => async () => {
+    const res = await switchChain(chainName, provider)
+    if (res === true) {
+      router.push(destination(router, chainName))
+    }
   }
 
-  useEffectAsync(async () => {
-    if (typeof window !== 'undefined') {
-      window.addEventListener('resize', updateMedia)
-      return () => window.removeEventListener('resize', updateMedia)
-    }
-    return setDesktop(true)
-  }, [])
-
-  const handleClick = useCallback(
-    (e: MenuInfo) => {
-      const { key } = e
-      setCurrent(String(key))
-    },
-    [setCurrent]
-  )
+export const Navigation = () => {
+  const router = useRouter()
+  const [open, setOpen] = useState(false)
+  const { isConnected, connect, isConnecting } = useConnectWallet()
+  const { accountAddress, ethersProvider } = useProvider()
+  const switchNetwork = createSwitchNetwork(router, ethersProvider)
 
   return (
-    <>
-      {isDesktop && (
-        <NavMenu
-          style={{ background: 'black', paddingRight: '5rem' }}
-          theme="dark"
-          onClick={handleClick}
-          selectedKeys={[current || '']}
-          mode="horizontal"
-        >
+    <Nav>
+      <NavContainer>
+        <StakesSocialLogo />
+        <MoreOutlined onClick={() => setOpen(true)} />
+      </NavContainer>
+
+      <Drawer visible={open} onClose={() => setOpen(false)}>
+        <NavOpenedWallet>
+          <span>Select a network</span>
+          <NavOpenedN>
+            <NetworkSwitch type="link" onClick={switchNetwork('ethereum')}>
+              <ConnectedOrDisconnected chainName="ethereum" />
+              Ethereum
+            </NetworkSwitch>
+            <NetworkSwitch type="link" onClick={switchNetwork('arbitrum-one')}>
+              <ConnectedOrDisconnected chainName="arbitrum-one" /> Arbitrum
+            </NetworkSwitch>
+            <NetworkSwitch type="link" onClick={switchNetwork('ropsten')}>
+              <ConnectedOrDisconnected chainName="ropsten" /> Ropsten Testnet
+            </NetworkSwitch>
+            <NetworkSwitch type="link" onClick={switchNetwork('arbitrum-rinkeby')}>
+              <ConnectedOrDisconnected chainName="arbitrum-rinkeby" />
+              Arbitrum Rinkeby Testnet
+            </NetworkSwitch>
+          </NavOpenedN>
+          <NavOpenedC>
+            <span>
+              {isConnected ? (
+                <>
+                  <LinkOutlined /> Connected to {accountAddress}
+                </>
+              ) : (
+                <>
+                  <DisconnectOutlined /> Disconnected to a wallet
+                </>
+              )}
+            </span>
+          </NavOpenedC>
+          <Button onClick={connect} loading={isConnecting} type={isConnected ? 'link' : 'primary'}>
+            {isConnected ? 'Connected' : 'Connect'}
+          </Button>
+        </NavOpenedWallet>
+        <NavUl>
           {Navigations.map(nav => (
-            <NavMenuItem key={nav.key} style={{ margin: '0' }}>
-              <LinkWithNetwork href={nav.pathname} rewrite={nav.rewrite}>
-                <a style={{ display: 'block', width: 'auto', fontSize: '0.8em' }}>{nav.label}</a>
+            <NavLi key={nav.key} style={{ margin: '0' }}>
+              <LinkWithNetwork href={nav.pathname} rewrite={nav.rewrite} passHref>
+                <a>{nav.label}</a>
               </LinkWithNetwork>
-            </NavMenuItem>
+            </NavLi>
           ))}
-        </NavMenu>
-      )}
-      {!isDesktop && (
-        <Hamburger
-          style={{ marginRight: '0.5em', cursor: 'pointer' }}
-          onClick={() => handleMenuOpen(prevMenuOpen => !prevMenuOpen)}
-        />
-      )}
-    </>
+        </NavUl>
+      </Drawer>
+    </Nav>
   )
 }
