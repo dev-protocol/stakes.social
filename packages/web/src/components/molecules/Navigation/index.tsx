@@ -19,7 +19,14 @@ const NavContainer = styled(Container)`
   grid-auto-flow: column;
   justify-content: space-between;
   align-items: center;
-  padding: 0.7rem 0;
+  padding: 0.7rem;
+`
+
+const NavIcon = styled(MoreOutlined)`
+  padding: 1rem;
+  background: #2172f3;
+  border-radius: 99px;
+  color: white;
 `
 
 const Logo = styled(StakesSocial)`
@@ -162,7 +169,7 @@ export const Navigation = () => {
     <Nav>
       <NavContainer>
         <StakesSocialLogo />
-        <MoreOutlined onClick={() => setOpen(true)} />
+        <NavIcon onClick={() => setOpen(true)} />
       </NavContainer>
 
       <Drawer visible={open} onClose={() => setOpen(false)}>
