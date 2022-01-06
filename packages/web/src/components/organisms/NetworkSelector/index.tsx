@@ -1,6 +1,5 @@
 import * as React from 'react'
 import styled from 'styled-components'
-import { Skeleton } from 'antd'
 import Arbitrum from 'src/components/atoms/Svgs/svg/Arbitrum.svg'
 import { useIsL1 } from 'src/fixtures/wallet/hooks'
 
@@ -30,24 +29,19 @@ const EthIcon = styled.div`
 `
 
 export const NetworkSelector = ({ withText }: Props) => {
-  const { isL1, loading } = useIsL1()
+  const { isL1 } = useIsL1()
   return (
     <Network>
-      {loading && <Skeleton avatar />}
-      {!loading ? (
-        isL1 ? (
-          <>
-            <EthIcon />
-            {withText && <NetworkName>Ethereum</NetworkName>}
-          </>
-        ) : (
-          <>
-            <Arbitrum height="25px" width="25px" />
-            {withText && <NetworkName>Arbitrum One</NetworkName>}
-          </>
-        )
+      {isL1 ? (
+        <>
+          <EthIcon />
+          {withText && <NetworkName>Ethereum</NetworkName>}
+        </>
       ) : (
-        <></>
+        <>
+          <Arbitrum height="25px" width="25px" />
+          {withText && <NetworkName>Arbitrum One</NetworkName>}
+        </>
       )}
     </Network>
   )
