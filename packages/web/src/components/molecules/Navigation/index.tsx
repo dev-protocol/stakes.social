@@ -10,7 +10,7 @@ import { Container } from 'src/components/atoms/Container'
 import { ChainName } from 'src/fixtures/wallet/utility'
 import { switchChain } from 'src/fixtures/wallet/switch'
 import { providers } from 'ethers'
-import { destination } from '../../organisms/ControlChain/destination'
+import truncateEthAddress from 'truncate-eth-address'
 
 const Nav = styled.nav``
 
@@ -154,7 +154,7 @@ const createSwitchNetwork =
   (router: NextRouter, provider?: providers.BaseProvider) => (chainName: ChainName) => async () => {
     const res = await switchChain(chainName, provider)
     if (res === true) {
-      router.push(destination(router, chainName))
+      router.push(`/${chainName}`)
     }
   }
 
@@ -172,7 +172,7 @@ export const Navigation = () => {
         <NavIcon onClick={() => setOpen(true)} />
       </NavContainer>
 
-      <Drawer visible={open} onClose={() => setOpen(false)}>
+      <Drawer visible={open} zIndex={1} onClose={() => setOpen(false)}>
         <NavOpenedWallet>
           <span>Select a network</span>
           <NavOpenedN>
@@ -195,7 +195,7 @@ export const Navigation = () => {
             <span>
               {isConnected ? (
                 <>
-                  <LinkOutlined /> Connected to {accountAddress}
+                  <LinkOutlined /> Connected to {truncateEthAddress(accountAddress)}
                 </>
               ) : (
                 <>

@@ -67,6 +67,7 @@
     "styled-components": "5.3.3",
     "swr": "1.1.2",
     "tinycolor2": "1.4.2",
+    "truncate-eth-address": "^1.0.2",
     "use-clipboard-copy": "0.2.0",
     "walletlink": "2.4.0",
     "web3": "1.2.11",
