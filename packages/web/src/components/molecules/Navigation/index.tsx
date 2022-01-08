@@ -3,14 +3,16 @@ import { useRouter, NextRouter } from 'next/router'
 import { LinkWithNetwork } from 'src/components/atoms/LinkWithNetwork'
 import styled from 'styled-components'
 import { useConnectWallet, useDetectChain, useProvider } from 'src/fixtures/wallet/hooks'
-import { Button, Drawer } from 'antd'
-import { StakesSocial } from 'src/components/atoms/Svgs/tsx'
+import { Button, Drawer, Popover } from 'antd'
+import StakesSocial from 'src/components/atoms/Svgs/svg/Stakes-social.svg'
 import { DisconnectOutlined, LinkOutlined, MoreOutlined } from '@ant-design/icons'
 import { Container } from 'src/components/atoms/Container'
 import { ChainName } from 'src/fixtures/wallet/utility'
 import { switchChain } from 'src/fixtures/wallet/switch'
 import { providers } from 'ethers'
 import truncateEthAddress from 'truncate-eth-address'
+import EthereumEthLogo from 'src/components/atoms/Svgs/svg/EthereumEthLogo.svg'
+import ArbitrumLogo from 'src/components/atoms/Svgs/svg/ArbitrumLogo.svg'
 
 const Nav = styled.nav``
 
@@ -58,13 +60,27 @@ const NavOpenedC = styled(Grid)`
 const NavOpenedN = styled(Grid)`
   grid-auto-flow: row;
   justify-items: start;
+  gap: 1rem;
+`
+
+const Testnet = styled.h4`
+  margin: 0;
+  opacity: 0.5;
 `
 
 const NetworkSwitch = styled(Button)`
   padding: 0;
   display: grid;
-  gap: 1rem;
+  gap: 0.2rem;
   grid-auto-flow: column;
+  align-items: center;
+`
+
+const NetworkSwitchWithLogo = styled(NetworkSwitch)`
+  padding: 0;
+  display: grid;
+  grid-template-columns: 2rem auto 1fr;
+  justify-items: center;
 `
 
 const GrayCircle = styled.span`
@@ -96,6 +112,10 @@ const NavLi = styled.li`
     border-radius: 20px;
     padding: 1rem;
   }
+`
+const LogoWrapper = styled(Grid)`
+  align-items: center;
+  grid-auto-flow: column;
 `
 
 export const Navigations = [
@@ -138,10 +158,10 @@ export const Navigations = [
 ]
 
 const StakesSocialLogo = () => (
-  <div>
-    <Logo id="headerlogo" height={undefined} />
+  <LogoWrapper>
+    <Logo id="headerlogo" height="1.2rem" />
     <LogoText>Stakes.social</LogoText>
-  </div>
+  </LogoWrapper>
 )
 
 const ConnectedOrDisconnected = ({ chainName }: { chainName: ChainName }) => {
@@ -176,24 +196,39 @@ export const Navigation = () => {
         <NavOpenedWallet>
           <span>Select a network</span>
           <NavOpenedN>
-            <NetworkSwitch type="link" onClick={switchNetwork('ethereum')}>
+            <NetworkSwitchWithLogo type="link" onClick={switchNetwork('ethereum')}>
+              <EthereumEthLogo height="2rem" />
               <ConnectedOrDisconnected chainName="ethereum" />
               Ethereum
-            </NetworkSwitch>
-            <NetworkSwitch type="link" onClick={switchNetwork('arbitrum-one')}>
-              <ConnectedOrDisconnected chainName="arbitrum-one" /> Arbitrum
-            </NetworkSwitch>
-            <NetworkSwitch type="link" onClick={switchNetwork('ropsten')}>
-              <ConnectedOrDisconnected chainName="ropsten" /> Ropsten Testnet
-            </NetworkSwitch>
-            <NetworkSwitch type="link" onClick={switchNetwork('arbitrum-rinkeby')}>
-              <ConnectedOrDisconnected chainName="arbitrum-rinkeby" />
-              Arbitrum Rinkeby Testnet
-            </NetworkSwitch>
+            </NetworkSwitchWithLogo>
+            <NetworkSwitchWithLogo type="link" onClick={switchNetwork('arbitrum-one')}>
+              <ArbitrumLogo height="2rem" />
+              <ConnectedOrDisconnected chainName="arbitrum-one" />
+              Arbitrum
+            </NetworkSwitchWithLogo>
+            <Popover
+              content={
+                <>
+                  <NetworkSwitch type="link" onClick={switchNetwork('ropsten')}>
+                    <ConnectedOrDisconnected chainName="ropsten" />
+                    <span>Ropsten</span>
+                  </NetworkSwitch>
+                  <NetworkSwitch type="link" onClick={switchNetwork('arbitrum-rinkeby')}>
+                    <ConnectedOrDisconnected chainName="arbitrum-rinkeby" />
+                    <span>Arbitrum Rinkeby</span>
+                  </NetworkSwitch>
+                </>
+              }
+              title="Testnet"
+              trigger="hover"
+              placement="topLeft"
+            >
+              <Testnet>Testnet</Testnet>
+            </Popover>
           </NavOpenedN>
           <NavOpenedC>
             <span>
-              {isConnected ? (
+              {isConnected && accountAddress ? (
                 <>
                   <LinkOutlined /> Connected to {truncateEthAddress(accountAddress)}
                 </>
