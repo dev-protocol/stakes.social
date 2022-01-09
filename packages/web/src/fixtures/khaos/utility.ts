@@ -7,7 +7,10 @@ export interface GitHubAssetInformation {
 }
 
 export const postSignGitHubMarketAsset = (network: ChainName) => {
-  const signer = sign('github-market', network === 'ethereum' ? 'mainnet' : network)
+  const signer = sign(
+    'github-market',
+    network === 'ethereum' ? 'mainnet' : network === 'polygon' ? 'polygon-mainnet' : network
+  )
   return (signMessage: string, signature: string, personalAccessToken: string): Promise<GitHubAssetInformation> =>
     signer({
       signature: signature,
@@ -19,7 +22,10 @@ export const postSignGitHubMarketAsset = (network: ChainName) => {
 }
 
 export const emulateOraclizeGitHubMarketAsset = (network: ChainName) => {
-  const emulator = emulate('github-market', network === 'ethereum' ? 'mainnet' : network)
+  const emulator = emulate(
+    'github-market',
+    network === 'ethereum' ? 'mainnet' : network === 'polygon' ? 'polygon-mainnet' : network
+  )
   return (githubRepository: string, publicSignature: string, account?: string) =>
     emulator({
       event: {
