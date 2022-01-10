@@ -426,7 +426,7 @@ exports[`InvitationRequestForm Snapshot 1`] = `
             <span
               style="font-size: 1.1em;"
             >
-              Discord name:
+              Discord username:
             </span>
           </div>
           <div
@@ -480,7 +480,7 @@ exports[`InvitationRequestForm Snapshot 1`] = `
                           <input
                             class="sc-hKwDye bghYKm"
                             id="basic_discord"
-                            placeholder="discord name"
+                            placeholder="discord username"
                             value=""
                           />
                         </div>
