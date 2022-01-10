@@ -214,10 +214,10 @@ export const InvitationRequestForm = ({ market }: Props) => {
               <Span style={{ marginTop: 0, fontSize: '1.1em' }}>
                 <a href="https://discord.gg/VwJp4KM">Dev Protocol</a>
               </Span>
-              <span style={{ fontSize: '1.1em' }}>Discord name:</span>
+              <span style={{ fontSize: '1.1em' }}>Discord username:</span>
             </div>
             <Form.Item name="discord" rules={[{ required: true, type: 'string' }]} key="discord">
-              <Input Icon={MessageOutlined} placeholder="discord name" label="discord" />
+              <Input Icon={MessageOutlined} placeholder="discord username" label="discord" />
             </Form.Item>
           </Row>
           <Row>
