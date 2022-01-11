@@ -2663,18 +2663,7 @@
     mersenne-twister "^1.1.0"
     react-blockies "^1.4.1"
 
-"@devprotocol/alias-legacy-dev-kit@npm:@devprotocol/dev-kit@4.7.0":
-  version "4.7.0"
-  resolved "https://registry.yarnpkg.com/@devprotocol/dev-kit/-/dev-kit-4.7.0.tgz#f939f9c91a978a74e509d7c4b3d3be4c8a590b11"
-  integrity sha512-EgJP0xnVq/lm8Xd5POhOGZUbeuzYqhc+yeyZzGcTIWIDpTq1dqnklae5Xe0UOVdWsCwqrp87B/iE1G3bONkwkA==
-  dependencies:
-    "@types/bent" "^7.3.1"
-    async-ray "^3.2.0"
-    bent "^7.3.12"
-    js-base64 "^3.7.2"
-    ramda "^0.27.0"
-
-"@devprotocol/dev-kit@5.11.0":
+"@devprotocol/alias-legacy-dev-kit@npm:@devprotocol/dev-kit@5.11.0", "@devprotocol/dev-kit@5.11.0":
   version "5.11.0"
   resolved "https://registry.yarnpkg.com/@devprotocol/dev-kit/-/dev-kit-5.11.0.tgz#db656f8d5c6787971b851985dda0e63abec2502b"
   integrity sha512-Gt1GowrhOQu4UBV0DxPZE7MjuxNy6S3yiLxOzSY/4pBza060oo3Zv2TNLWrzin73cHU4XFyR/1OheyL6sVTAOQ==
