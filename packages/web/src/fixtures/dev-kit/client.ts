@@ -65,6 +65,10 @@ const getL2Registry = async (prov: providers.BaseProvider) => {
     ? addresses.arbitrum.one
     : net === 'arbitrum-rinkeby'
     ? addresses.arbitrum.rinkeby
+    : net === 'polygon'
+    ? addresses.polygon.mainnet
+    : net === 'polygon-mumbai'
+    ? addresses.polygon.mumbai
     : undefined
 }
 const getSTokensAddress = async (prov: providers.BaseProvider) => {
@@ -77,6 +81,10 @@ const getSTokensAddress = async (prov: providers.BaseProvider) => {
     ? addresses.arbitrum.one.sTokens
     : net === 'arbitrum-rinkeby'
     ? addresses.arbitrum.rinkeby.sTokens
+    : net === 'polygon'
+    ? addresses.polygon.mainnet.sTokens
+    : net === 'polygon-mumbai'
+    ? addresses.polygon.mumbai.sTokens
     : undefined
 }
 

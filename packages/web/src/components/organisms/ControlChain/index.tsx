@@ -50,6 +50,9 @@ export const ControlChain = ({ network }: { network?: ChainName }) => {
         <Link passHref href={`/arbitrum-one${router.asPath}`}>
           <a>Arbitrum</a>
         </Link>
+        <Link passHref href={`/polygon${router.asPath}`}>
+          <a>Polygon</a>
+        </Link>
       </Content>
     </Modal>
   ) : (

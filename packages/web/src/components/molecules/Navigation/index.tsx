@@ -13,6 +13,7 @@ import { providers } from 'ethers'
 import truncateEthAddress from 'truncate-eth-address'
 import EthereumEthLogo from 'src/components/atoms/Svgs/svg/EthereumEthLogo.svg'
 import ArbitrumLogo from 'src/components/atoms/Svgs/svg/ArbitrumLogo.svg'
+import PolygonLogo from 'src/components/atoms/Svgs/svg/PolygonLogo.svg'
 
 const Nav = styled.nav``
 
@@ -206,6 +207,11 @@ export const Navigation = () => {
               <ConnectedOrDisconnected chainName="arbitrum-one" />
               Arbitrum
             </NetworkSwitchWithLogo>
+            <NetworkSwitchWithLogo type="link" onClick={switchNetwork('polygon')}>
+              <PolygonLogo height="1.5rem" />
+              <ConnectedOrDisconnected chainName="polygon" />
+              Polygon
+            </NetworkSwitchWithLogo>
             <Popover
               content={
                 <>
@@ -216,6 +222,10 @@ export const Navigation = () => {
                   <NetworkSwitch type="link" onClick={switchNetwork('arbitrum-rinkeby')}>
                     <ConnectedOrDisconnected chainName="arbitrum-rinkeby" />
                     <span>Arbitrum Rinkeby</span>
+                  </NetworkSwitch>
+                  <NetworkSwitch type="link" onClick={switchNetwork('polygon-mumbai')}>
+                    <ConnectedOrDisconnected chainName="polygon-mumbai" />
+                    <span>Polygon Mumbai</span>
                   </NetworkSwitch>
                 </>
               }

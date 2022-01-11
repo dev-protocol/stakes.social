@@ -18,6 +18,10 @@ const providerUrl = (chain: ChainName) =>
           ? WEB3_PROVIDER_ENDPOINT_HOSTS.ARB_ONE
           : chain === 'arbitrum-rinkeby'
           ? WEB3_PROVIDER_ENDPOINT_HOSTS.ARB_RINKEBY
+          : chain === 'polygon'
+          ? WEB3_PROVIDER_ENDPOINT_HOSTS.POLYGON
+          : chain === 'polygon-mumbai'
+          ? WEB3_PROVIDER_ENDPOINT_HOSTS.POLYGON_MUMBAI
           : WEB3_PROVIDER_ENDPOINT_HOSTS.MAIN
       }/${WEB3_PROVIDER_ENDPOINT_KEY}`
     : undefined

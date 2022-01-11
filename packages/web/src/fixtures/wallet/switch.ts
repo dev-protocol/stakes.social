@@ -55,6 +55,34 @@ const chains: Chains = new Map([
       },
       blockExplorerUrls: ['https://testnet.arbiscan.io/']
     }
+  ],
+  [
+    'polygon',
+    {
+      chainId: utils.hexValue(137),
+      rpcUrls: ['https://polygon-rpc.com'],
+      chainName: 'Polygon Mainnet',
+      nativeCurrency: {
+        name: 'Matic',
+        symbol: 'MATIC',
+        decimals: 18
+      },
+      blockExplorerUrls: ['https://polygonscan.com/']
+    }
+  ],
+  [
+    'polygon-mumbai',
+    {
+      chainId: utils.hexValue(80001),
+      rpcUrls: ['https://matic-mumbai.chainstacklabs.com'],
+      chainName: 'Polygon Testnet Mumbai',
+      nativeCurrency: {
+        name: 'Matic',
+        symbol: 'MATIC',
+        decimals: 18
+      },
+      blockExplorerUrls: ['https://mumbai.polygonscan.com/']
+    }
   ]
 ])
 

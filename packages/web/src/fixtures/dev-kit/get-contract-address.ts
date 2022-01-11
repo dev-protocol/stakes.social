@@ -29,6 +29,10 @@ export const getContractAddress = async <
         ? addresses.arbitrum.one
         : net === 'arbitrum-rinkeby'
         ? addresses.arbitrum.rinkeby
+        : net === 'polygon'
+        ? addresses.polygon.mainnet
+        : net === 'polygon-mumbai'
+        ? addresses.polygon.mumbai
         : undefined
     const address =
       typeof registryOrAddress === 'string'

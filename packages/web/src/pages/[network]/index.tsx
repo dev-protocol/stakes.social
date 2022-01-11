@@ -53,7 +53,9 @@ const Index = (_: Props) => {
     return '' as FeatureTag
   }, [router])
   const isL2 = useMemo(() => {
-    return name === undefined ? undefined : name === 'arbitrum-one' || name === 'arbitrum-rinkeby'
+    return name === undefined
+      ? undefined
+      : name === 'arbitrum-one' || name === 'arbitrum-rinkeby' || name === 'polygon' || name === 'polygon-mumbai'
   }, [name])
 
   return (
