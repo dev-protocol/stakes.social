@@ -18,7 +18,7 @@
     "@davatar/react": "1.8.1",
     "@dev/graphql": "0.0.1",
     "@devprotocol/alias-legacy-dev-kit": "npm:@devprotocol/dev-kit@4.7.0",
-    "@devprotocol/dev-kit": "5.11.0",
+    "@devprotocol/dev-kit": "5.10.1",
     "@devprotocol/khaos-kit": "1.4.0",
     "@devprotocol/util-ts": "2.2.1",
     "@metamask/detect-provider": "1.2.0",
