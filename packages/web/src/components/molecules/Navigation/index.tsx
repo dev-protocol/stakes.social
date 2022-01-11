@@ -141,7 +141,7 @@ export const Navigations = [
   {
     key: 'dashboard',
     label: 'Dashboard',
-    pathname: '/stats',
+    pathname: 'https://dashboard.stakes.social',
     rewrite: false
   },
   {
