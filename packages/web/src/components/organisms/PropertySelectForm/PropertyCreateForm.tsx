@@ -3,8 +3,8 @@ import { Form, Input, Button } from 'antd'
 import { CheckCircleTwoTone } from '@ant-design/icons'
 import { useCreateProperty } from 'src/fixtures/dev-kit/hooks'
 import { Body1 } from 'src/components/atoms/Typography'
-import Link from 'next/link'
 import styled from 'styled-components'
+import { LinkWithNetwork } from 'src/components/atoms/LinkWithNetwork'
 
 interface Props {
   author: string
@@ -81,9 +81,9 @@ export const PropertyCreateForm = ({ author, onSubmit }: Props) => {
           </p>
           <p>Share the following address with your friends :)</p>
           <p>
-            <Link href={'/[property]'} as={`/${createdPropertyAddress}`} passHref>
+            <LinkWithNetwork href={'/[property]'} as={`/${createdPropertyAddress}`} passHref>
               <a>https://stakes.social/{createdPropertyAddress}</a>
-            </Link>
+            </LinkWithNetwork>
           </p>
         </Results>
       )}

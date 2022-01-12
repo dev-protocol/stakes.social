@@ -11,7 +11,7 @@ export const getContractAddress = async <
 >(
   client: C,
   contract: K,
-  net: ChainName = 'main'
+  net: ChainName = 'ethereum'
 ): Promise<string> =>
   (async fromCache => {
     if (typeof fromCache === 'string') {
@@ -21,7 +21,7 @@ export const getContractAddress = async <
       cache.set(net, new Map())
     }
     const registryOrAddress =
-      net === 'main'
+      net === 'ethereum'
         ? await (client as DevkitContract).registry(addresses.eth.main.registry)[contract]()
         : net === 'ropsten'
         ? await (client as DevkitContract).registry(addresses.eth.ropsten.registry)[contract]()
@@ -29,6 +29,10 @@ export const getContractAddress = async <
         ? addresses.arbitrum.one
         : net === 'arbitrum-rinkeby'
         ? addresses.arbitrum.rinkeby
+        : net === 'polygon'
+        ? addresses.polygon.mainnet
+        : net === 'polygon-mumbai'
+        ? addresses.polygon.mumbai
         : undefined
     const address =
       typeof registryOrAddress === 'string'
@@ -40,7 +44,6 @@ export const getContractAddress = async <
               .registry(registryOrAddress.registry)
               .registries(`${contract.charAt(0).toUpperCase()}${contract.slice(1)}`)
         : (undefined as never)
-    console.log({ address, contract })
     cache.get(net)?.set(contract, address)
     return address
   })(cache.get(net)?.get(contract))

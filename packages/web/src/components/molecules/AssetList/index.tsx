@@ -2,7 +2,7 @@ import React, { useCallback, useState } from 'react'
 import styled from 'styled-components'
 import { Pagination, Skeleton } from 'antd'
 import { AssetItemOnList } from '../AssetItemOnList'
-import { ResponsiveModal } from 'src/components/atoms/ResponsiveModal'
+import { ModalStates, ResponsiveModal } from 'src/components/atoms/ResponsiveModal'
 import { TransactModalContents } from '../TransactModalContents'
 import { NotConnectedAndEmpty } from 'src/components/atoms/NotConnectedAndEmpty'
 
@@ -19,10 +19,15 @@ interface Props {
   positions?: number[]
 }
 
-interface ModalStates {
-  visible: boolean
-  title?: string
-  contents?: React.ReactNode
+interface AssetProps {
+  className?: string
+  property: string | number
+  onPagination?: (page: number) => void
+  enableStake?: boolean
+  enableWithdrawStakersReward?: boolean
+  enableWithdrawHoldersReward?: boolean
+  isPool?: boolean
+  showModalFunc: Function
 }
 
 const Wrap = styled.div`
@@ -40,6 +45,30 @@ const Item = styled(AssetItemOnList)`
 const StyledPagination = styled(Pagination)`
   margin-top: 1rem;
 `
+
+export const Asset = ({
+  property,
+  enableStake,
+  enableWithdrawStakersReward,
+  enableWithdrawHoldersReward,
+  isPool,
+  showModalFunc
+}: AssetProps) => {
+  return (
+    <Item
+      isPool={isPool}
+      propertyAddress={typeof property === 'string' ? property : undefined}
+      positionId={typeof property === 'number' ? property : undefined}
+      key={`${property}`}
+      enableStake={enableStake}
+      enableWithdrawStakersReward={enableWithdrawStakersReward}
+      enableWithdrawHoldersReward={enableWithdrawHoldersReward}
+      onClickStake={showModalFunc('stake')}
+      onClickWithdrawStakersReward={showModalFunc('withdraw')}
+      onClickWithdrawHoldersReward={showModalFunc('holders')}
+    ></Item>
+  )
+}
 
 export const AssetList = ({
   className,
@@ -84,18 +113,15 @@ export const AssetList = ({
     <Wrap className={className}>
       {propertiesOrPositions?.length ? (
         propertiesOrPositions.map((item, i) => (
-          <Item
+          <Asset
             isPool={isPool}
-            propertyAddress={typeof item === 'string' ? item : undefined}
-            positionId={typeof item === 'number' ? item : undefined}
+            property={item}
             key={`${item}-${i}`}
             enableStake={enableStake}
             enableWithdrawStakersReward={enableWithdrawStakersReward}
             enableWithdrawHoldersReward={enableWithdrawHoldersReward}
-            onClickStake={showModal('stake')}
-            onClickWithdrawStakersReward={showModal('withdraw')}
-            onClickWithdrawHoldersReward={showModal('holders')}
-          ></Item>
+            showModalFunc={showModal}
+          />
         ))
       ) : (
         <NotConnectedAndEmpty description="Assets not found" />

@@ -1,5 +1,4 @@
 import React, { useMemo, useState } from 'react'
-import Link from 'next/link'
 import {
   useGetMyStakingAmount,
   useGetTotalStakingAmount,
@@ -17,9 +16,10 @@ import { Avatar } from 'src/components/molecules/Avatar'
 import BigNumber from 'bignumber.js'
 import { TransactModalContents } from 'src/components/molecules/TransactModalContents'
 import { PropertyTreasuryIcon } from 'src/components/molecules/PropertyTreasuryIcon'
-import { ResponsiveModal } from 'src/components/atoms/ResponsiveModal'
+import { ModalStates, ResponsiveModal } from 'src/components/atoms/ResponsiveModal'
 import { CoverImageOrGradient } from 'src/components/atoms/CoverImageOrGradient'
 import { Grid } from 'src/components/atoms/Grid'
+import { LinkWithNetwork } from 'src/components/atoms/LinkWithNetwork'
 
 interface Props {
   propertyAddress: string
@@ -156,12 +156,6 @@ const FlewColumn = styled.div`
   }
 `
 
-interface ModalStates {
-  visible: boolean
-  title?: string
-  contents?: React.ReactNode
-}
-
 const formatter = new Intl.NumberFormat('en-US')
 
 const PlaceholderCoverImageOrGradient = styled.div`
@@ -205,7 +199,7 @@ export const PropertyCard = ({ propertyAddress, assets }: Props) => {
       ) : (
         <PlaceholderCoverImageOrGradient />
       )}
-      <Link href={'/[propertyAddress]'} as={`/${propertyAddress}`}>
+      <LinkWithNetwork href={'/[propertyAddress]'} as={`/${propertyAddress}`}>
         <CardContents>
           <Title>{includeAssets || propertyName || 'Property'}</Title>
           <PropertyTreasuryIcon name={includeAssets || propertyName || 'Property'} propertyAddress={propertyAddress} />
@@ -258,7 +252,7 @@ export const PropertyCard = ({ propertyAddress, assets }: Props) => {
             </CreatorReward>
           </RowContainer>
         </CardContents>
-      </Link>
+      </LinkWithNetwork>
       <ButtonContainer>
         <StakeButton
           disabled={accountAddress === authorAddress}

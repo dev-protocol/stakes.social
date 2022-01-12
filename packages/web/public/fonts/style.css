@@ -1,22 +1,22 @@
 @font-face {
-  font-family: "Whyte";
-  src: url("https://devstaticasset.azureedge.net/font/ABCWhyte-Regular.woff2") format('woff2');
+  font-family: 'Whyte';
+  src: url('https://devstaticasset.azureedge.net/font/ABCWhyte-Regular.woff2') format('woff2');
   font-style: normal;
   font-weight: 400;
   font-display: swap;
 }
 
 @font-face {
-  font-family: "WhyteInktrap";
-  src: url("https://devstaticasset.azureedge.net/font/ABCWhyteInktrap-Bold.woff2") format("woff2");
+  font-family: 'WhyteInktrap';
+  src: url('https://devstaticasset.azureedge.net/font/ABCWhyteInktrap-Bold.woff2') format('woff2');
   font-style: bold;
   font-weight: 900;
   font-display: swap;
 }
 
 @font-face {
-  font-family: "WhyteInktrap";
-  src: url("https://devstaticasset.azureedge.net/font/ABCWhyteInktrap-Regular.woff2") format("woff2");
+  font-family: 'WhyteInktrap';
+  src: url('https://devstaticasset.azureedge.net/font/ABCWhyteInktrap-Regular.woff2') format('woff2');
   font-style: normal;
   font-weight: 400;
   font-display: swap;

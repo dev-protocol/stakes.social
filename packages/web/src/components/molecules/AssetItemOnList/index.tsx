@@ -1,5 +1,4 @@
 import { Button, Statistic } from 'antd'
-import Link from 'next/link'
 import React, { useMemo } from 'react'
 import { ButtonWithGradient } from 'src/components/atoms/ButtonWithGradient'
 import { H3 } from 'src/components/atoms/Typography'
@@ -15,6 +14,7 @@ import {
 import styled from 'styled-components'
 import { AvatarProperty } from '../AvatarProperty'
 import { useCurrency } from 'src/fixtures/currency/hooks'
+import { LinkWithNetwork } from 'src/components/atoms/LinkWithNetwork'
 
 interface Props {
   className?: string
@@ -122,12 +122,12 @@ export const AssetItemOnList = ({
 
   return (
     <Wrap className={className}>
-      <Link href={'/[propertyAddress]'} as={`/${detectedPropertyAddress}`} passHref>
+      <LinkWithNetwork href={'/[propertyAddress]'} as={`/${detectedPropertyAddress}`} passHref>
         <GridAvatar>
           <AvatarProperty propertyAddress={detectedPropertyAddress} size={90} />
           <H3>{propertyName}</H3>
         </GridAvatar>
-      </Link>
+      </LinkWithNetwork>
       <GridStake
         title="Your Stake"
         value={stakedAmount?.dp(2).toNumber() || 0}

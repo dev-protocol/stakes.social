@@ -9,8 +9,10 @@ import { useGetAccount } from 'src/fixtures/dev-for-apps/hooks'
 import { useENS } from 'src/fixtures/ens/hooks'
 import { Spin } from 'antd'
 import Link from 'next/link'
-import { useIsL1 } from 'src/fixtures/wallet/hooks'
-import Text from 'antd/lib/typography/Text'
+import { useIsL1, useProvider } from 'src/fixtures/wallet/hooks'
+import { useDetectSTokens, useGetSTokenOwnerOf } from 'src/fixtures/dev-kit/hooks'
+import { getStokenPositions } from 'src/fixtures/dev-kit/client'
+import { whenDefinedAll } from 'src/fixtures/utility'
 
 interface TopStakersProps {
   propertyAddress?: string
@@ -69,6 +71,19 @@ const StakerSection = styled.div<{ isCreator?: Boolean }>`
 
 const formatter = new Intl.NumberFormat('en-US')
 
+const Staker4L2 = ({ amount, sTokenId }: { amount: number; sTokenId: number }) => {
+  const { owner } = useGetSTokenOwnerOf(sTokenId)
+  return (
+    <>
+      <StakerSection>
+        <Avatar accountAddress={owner || 'unknown'} size={'100'} />
+        <AccountAddress>{owner || 'unknown'}</AccountAddress>
+        <span>{`${formatter.format(parseInt((amount / Math.pow(10, 18)).toFixed(0)))}`}</span>
+      </StakerSection>
+    </>
+  )
+}
+
 const Staker = ({ accountAddress, value }: { accountAddress: string; value: number }) => {
   const [ens, setENS] = useState('')
   const { data } = useGetAccount(accountAddress)
@@ -98,6 +113,54 @@ const Staker = ({ accountAddress, value }: { accountAddress: string; value: numb
         </StakerSection>
       )}
     </>
+  )
+}
+
+const fetchPosition = (nonConnectedEthersProvider: any, sTokenId: number) => {
+  return whenDefinedAll([nonConnectedEthersProvider, sTokenId], ([client, sTokenId]) =>
+    getStokenPositions(client, sTokenId)
+  )
+}
+
+interface Position {
+  amount: number
+  sTokenId: number
+}
+
+const TopStakers4L2 = ({ propertyAddress }: TopStakersProps) => {
+  const { nonConnectedEthersProvider } = useProvider()
+  const [amounts, setAmounts] = useState<Array<Position>>([])
+  const { sTokensByPropertyAddress: data } = useDetectSTokens(propertyAddress)
+
+  useEffect(() => {
+    const fetcher = async () => {
+      const promises = data.map(async (sTokenId: number) => {
+        return fetchPosition(nonConnectedEthersProvider, sTokenId)
+          ?.then((positions: any) => {
+            return { amount: parseInt(positions.amount || '0'), sTokenId: sTokenId }
+          })
+          .catch(() => {})
+      })
+      const results: Position[] = await Promise.all(promises)
+      const compFunc = (a: Position, b: Position): number => {
+        if (a.amount < b.amount) {
+          return 1
+        } else if (a.amount > b.amount) {
+          return -1
+        }
+        return 0
+      }
+      setAmounts(results.sort(compFunc))
+    }
+    data && fetcher()
+  }, [data, nonConnectedEthersProvider])
+
+  return (
+    <TopStakerRanking>
+      {amounts.map(({ sTokenId, amount }) => (
+        <Staker4L2 key={sTokenId} amount={amount} sTokenId={sTokenId} />
+      ))}
+    </TopStakerRanking>
   )
 }
 
@@ -149,7 +212,9 @@ const TopStakers = ({ authorAddress, propertyAddress }: TopStakersProps) => {
       </TopStakerRanking>
     </Flex>
   ) : (
-    <Text type="secondary">(Not provide this feature yet on L2)</Text>
+    <>
+      <TopStakers4L2 propertyAddress={propertyAddress} />
+    </>
   )
 }
 

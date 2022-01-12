@@ -16,7 +16,7 @@ export const YourPositions = ({ accountAddress }: Props) => {
       loading={!positions}
       positions={positions ? [...positions] : positions}
       enableStake={true}
-      enableWithdrawHoldersReward={true}
+      enableWithdrawStakersReward={true}
     ></AssetList>
   )
 }

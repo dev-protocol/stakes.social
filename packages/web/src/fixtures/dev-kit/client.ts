@@ -7,9 +7,7 @@ import {
   metricsAbi,
   metricsFactoryAbi,
   devAbi,
-  lockupAbi,
-  propertyFactoryAbi,
-  withdrawAbi,
+  sTokensAbi,
   RegistryContract
 } from '@devprotocol/dev-kit'
 import { contractFactory as l2ContractFactory, DevkitContract as L2DevkitContract } from '@devprotocol/dev-kit/l2'
@@ -37,7 +35,7 @@ const newClient = async (
   if (fromCache) {
     return [...fromCache, fromCache[0] || fromCache[1]]
   }
-  const isL2 = await getNetwork(prov).then(name => name !== 'main' && name !== 'ropsten')
+  const isL2 = await getNetwork(prov).then(name => name !== 'ethereum' && name !== 'ropsten')
   const contracts = !isL2 ? contractFactory(prov) : undefined
   const l2Contracts = isL2 ? l2ContractFactory(prov) : undefined
   cacheForContractFactory.set(prov, [contracts, l2Contracts])
@@ -59,7 +57,6 @@ const createGetContractAddress =
     contract: keyof Omit<RegistryContract, 'contract'>
   ): Promise<string> => {
     const net = await getNetwork(prov)
-    console.log({ net })
     return _getContractAddress(client, contract, net)
   }
 const getL2Registry = async (prov: providers.BaseProvider) => {
@@ -68,11 +65,15 @@ const getL2Registry = async (prov: providers.BaseProvider) => {
     ? addresses.arbitrum.one
     : net === 'arbitrum-rinkeby'
     ? addresses.arbitrum.rinkeby
+    : net === 'polygon'
+    ? addresses.polygon.mainnet
+    : net === 'polygon-mumbai'
+    ? addresses.polygon.mumbai
     : undefined
 }
 const getSTokensAddress = async (prov: providers.BaseProvider) => {
   const net = await getNetwork(prov)
-  return net === 'main'
+  return net === 'ethereum'
     ? addresses.eth.main.sTokens
     : net === 'ropsten'
     ? addresses.eth.ropsten.sTokens
@@ -80,6 +81,10 @@ const getSTokensAddress = async (prov: providers.BaseProvider) => {
     ? addresses.arbitrum.one.sTokens
     : net === 'arbitrum-rinkeby'
     ? addresses.arbitrum.rinkeby.sTokens
+    : net === 'polygon'
+    ? addresses.polygon.mainnet.sTokens
+    : net === 'polygon-mumbai'
+    ? addresses.polygon.mumbai.sTokens
     : undefined
 }
 
@@ -180,14 +185,6 @@ export const withdrawHolderAmount = async (prov: providers.BaseProvider, propert
   return client.withdraw(await getContractAddress(client, 'withdraw')).withdraw(propertyAddress)
 }
 
-export const getEstimateGas4WithdrawHolderAmount = async (prov: providers.BaseProvider, propertyAddress: string) => {
-  const [, , client] = await newClient(prov)
-  const getContractAddress = createGetContractAddress(prov)
-  if (!client) throw new Error(`No wallet`)
-  const contract = new ethers.Contract(await getContractAddress(client, 'withdraw'), [...withdrawAbi])
-  return new BigNumber(await contract.estimateGas['withdraw'](propertyAddress).then(x => x.toString()))
-}
-
 export const withdrawStakingAmount = async (
   prov: providers.BaseProvider,
   propertyAddress: string,
@@ -199,36 +196,11 @@ export const withdrawStakingAmount = async (
   return client.lockup(await getContractAddress(client, 'lockup')).withdraw(propertyAddress, amount.toFixed())
 }
 
-export const getEstimateGas4WithdrawStakingAmount = async (
-  prov: providers.BaseProvider,
-  propertyAddress: string,
-  amount: string,
-  from: string
-) => {
-  const [client] = await newClient(prov)
-  const getContractAddress = createGetContractAddress(prov)
-  if (!client) throw new Error(`No wallet or not supported network`)
-  const contract = new ethers.Contract(await getContractAddress(client, 'lockup'), [...lockupAbi])
-  return new BigNumber(await contract.methods['withdraw'](propertyAddress, amount).estimateGas({ from }))
-}
-
 export const stakeDev = async (prov: providers.BaseProvider, propertyAddress: string, amount: string) => {
   const [client] = await newClient(prov)
   const getContractAddress = createGetContractAddress(prov)
   if (!client) throw new Error(`No wallet or not supported network`)
   return client.dev(await getContractAddress(client, 'token')).deposit(propertyAddress, amount)
-}
-
-export const getEstimateGas4StakeDev = async (
-  prov: providers.BaseProvider,
-  propertyAddress: string,
-  amount: string
-) => {
-  const [client] = await newClient(prov)
-  const getContractAddress = createGetContractAddress(prov)
-  if (!client) throw new Error(`No wallet or not supported network`)
-  const contract = new ethers.Contract(await getContractAddress(client, 'token'), [...devAbi])
-  return new BigNumber(await contract.estimateGas['deposit'](propertyAddress, amount).then(x => x.toString()))
 }
 
 export const calculateMaxRewardsPerBlock = async (prov: providers.BaseProvider) => {
@@ -255,21 +227,6 @@ export const createProperty = async (prov: providers.BaseProvider, name: string,
     return 'Dummy:0xd5f3c1bA399E000B1a76210d7dB12bb5eefA8e47'
   }
   return undefined
-}
-
-export const getEstimateGas4CreateProperty = async (
-  prov: providers.BaseProvider,
-  name: string,
-  symbol: string,
-  author: string
-) => {
-  const [, , client] = await newClient(prov)
-  const getContractAddress = createGetContractAddress(prov)
-  if (!client) {
-    return undefined
-  }
-  const contract = new ethers.Contract(await getContractAddress(client, 'propertyFactory'), [...propertyFactoryAbi])
-  return new BigNumber(await contract.estimateGas['create'](name, symbol, author).then(x => x.toString()))
 }
 
 export const marketScheme = async (prov: providers.BaseProvider, marketAddress: string) => {
@@ -343,26 +300,11 @@ export const createAndAuthenticate = async (
   // })
 }
 
-export const getEstimateGas4CreateAndAuthenticate = async (
-  prov: providers.BaseProvider,
-  name: string,
-  symbol: string,
-  marketAddress: string,
-  args: string[]
-) => {
-  const [, , client] = await newClient(prov)
-  const getContractAddress = createGetContractAddress(prov)
-  if (!client) throw new Error(`No wallet`)
-  const contract = new ethers.Contract(await getContractAddress(client, 'propertyFactory'), [...propertyFactoryAbi])
-  return new BigNumber(
-    await contract.estimateGas['createAndAuthenticate'](name, symbol, marketAddress, ...args).then(x => x.toString())
-  )
-}
-
 export const totalSupply = async (prov: providers.BaseProvider) => {
   const [, , client] = await newClient(prov)
   const getContractAddress = createGetContractAddress(prov)
   if (client) {
+    console.log(await getContractAddress(client, 'token'))
     return client.dev(await getContractAddress(client, 'token')).totalSupply()
   }
   return undefined
@@ -514,6 +456,43 @@ export const detectStokens = async (prov: providers.BaseProvider, propertyAddres
   return undefined
 }
 
+export const detectStokensByPropertyAddress = async (prov: providers.BaseProvider, propertyAddress: string) => {
+  const [, , client] = await newClient(prov)
+  const address = await getSTokensAddress(prov)
+  if (client && address) {
+    const TokenIdList = await (client.sTokens(address) as any).positionsOfProperty(propertyAddress)
+    return TokenIdList
+  }
+  return undefined
+}
+
+export const getStokenTokenURI = async (prov: providers.BaseProvider, sTokenID: number) => {
+  const [, , client] = await newClient(prov)
+  const address = await getSTokensAddress(prov)
+  if (client && address) {
+    return client.sTokens(address).tokenURI(sTokenID)
+  }
+  return undefined
+}
+
+export const setStokenTokenURIImage = async (prov: providers.BaseProvider, sTokenID: number, data: string) => {
+  const [, , client] = await newClient(prov)
+  const address = await getSTokensAddress(prov)
+  if (client && address) {
+    return client.sTokens(address).setTokenURIImage(sTokenID, data)
+  }
+  return undefined
+}
+
+export const getStokenOwnerOf = async (prov: providers.BaseProvider, sTokenID: number) => {
+  const [, , client] = await newClient(prov)
+  const address = await getSTokensAddress(prov)
+  if (client && address) {
+    return client.sTokens(address).ownerOf(sTokenID)
+  }
+  return undefined
+}
+
 export const getStokenPositions = async (prov: providers.BaseProvider, sTokenID: number) => {
   const [, , client] = await newClient(prov)
   const address = await getSTokensAddress(prov)
@@ -528,6 +507,15 @@ export const getStokenRewards = async (prov: providers.BaseProvider, sTokenId: n
   const address = await getSTokensAddress(prov)
   if (client && address) {
     return client.sTokens(address).rewards(sTokenId)
+  }
+  return undefined
+}
+
+export const allowance = async (prov: providers.BaseProvider, contractAddress: string, address?: string) => {
+  const [, , client] = await newClient(prov)
+  const getContractAddress = createGetContractAddress(prov)
+  if (address && client) {
+    return client.dev(await getContractAddress(client, 'token')).allowance(address, contractAddress)
   }
   return undefined
 }
@@ -644,6 +632,15 @@ export const getId = async (prov: providers.BaseProvider, marketBehavior: string
   const [, , client] = await newClient(prov)
   if (client) {
     return client.marketBehavior(marketBehavior).getId(metricsAddress)
+  }
+  return undefined
+}
+
+export const getStokenHeldAt = async (prov: providers.BaseProvider, sTokenId: number) => {
+  const address = await getSTokensAddress(prov)
+  if (address) {
+    const contract = new ethers.Contract(address, [...sTokensAbi], prov)
+    return contract.queryFilter(contract.filters.Transfer('0x0000000000000000000000000000000000000000', null, sTokenId))
   }
   return undefined
 }

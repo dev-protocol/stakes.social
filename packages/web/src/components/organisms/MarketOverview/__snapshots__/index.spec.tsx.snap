@@ -39,7 +39,7 @@ exports[`MarketOverview Snapshot 1`] = `
                         >
                           <a
                             class="sc-bdvvtL cZnWxv"
-                            href="/create/0x34A7AdC94C4D41C3e3469F98033B372cB2fAf318"
+                            href="/ethereum/create/0x34A7AdC94C4D41C3e3469F98033B372cB2fAf318"
                           >
                             npm
                           </a>

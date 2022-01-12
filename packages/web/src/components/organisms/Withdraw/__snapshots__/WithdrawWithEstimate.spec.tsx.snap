@@ -10,7 +10,7 @@ exports[`WithdrawWithEstimate Snapshot 1`] = `
         class="sc-bdvvtL frQklk"
       >
         <div
-          class="sc-iCfMLu frPPso"
+          class="sc-jRQBWg iUDFj"
           style="opacity: 1;"
         >
           <div
@@ -229,7 +229,7 @@ exports[`WithdrawWithEstimate Snapshot 1`] = `
             </div>
           </div>
           <span
-            class="ant-input-group-wrapper ant-input-group-wrapper-lg ant-input-search ant-input-search-large ant-input-search-with-button sc-gKclnd jRUfxV"
+            class="ant-input-group-wrapper ant-input-group-wrapper-lg ant-input-search ant-input-search-large ant-input-search-with-button sc-eCImPb dSjlMk"
           >
             <span
               class="ant-input-wrapper ant-input-group"
@@ -247,7 +247,7 @@ exports[`WithdrawWithEstimate Snapshot 1`] = `
                   class="ant-input-suffix"
                 >
                   <button
-                    class="sc-eCImPb fGifkL"
+                    class="sc-dkPtRN gdjbcI"
                   >
                     DEV
                   </button>
@@ -269,10 +269,10 @@ exports[`WithdrawWithEstimate Snapshot 1`] = `
           </span>
         </div>
         <div
-          class="sc-kDTinF kOiKat"
+          class="sc-pVTFL cpArEj"
         >
           <div
-            class="sc-jrQzAO jWNSYG"
+            class="sc-furwcr eKxoLU"
           >
             <span
               aria-label="info-circle"
@@ -325,38 +325,9 @@ exports[`WithdrawWithEstimate Snapshot 1`] = `
         >
           <p>
             3000
-             DEV 
+             DEV
+             
             (0 + 3000)
-          </p>
-        </div>
-      </div>
-      <div
-        class="ant-card ant-card-bordered ant-card-small sc-dkPtRN hFRaSD"
-      >
-        <div
-          class="ant-card-head"
-        >
-          <div
-            class="ant-card-head-wrapper"
-          >
-            <div
-              class="ant-card-head-title"
-            >
-              Gas Fee (predicted)
-            </div>
-          </div>
-        </div>
-        <div
-          class="ant-card-body"
-        >
-          <p>
-            0.002233
-             ETH
-            <span
-              class="sc-hKwDye gwIFLS"
-            >
-               $0.52
-            </span>
           </p>
         </div>
       </div>
