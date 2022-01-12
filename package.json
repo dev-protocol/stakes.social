@@ -2,12 +2,15 @@
   "name": "stakes.social",
   "version": "1.0.0",
   "license": "MIT",
+  "description": "Stakes.social is the first official Dapp built on the Dev Protocol, released in June 2020. Stakes.social is a new sponsor platform where both developers and sponsors are rewarded with tokens if they support their favorite projects by staking DEV tokens.",
+  "repository": "https://github.com/dev-protocol/stakes.social.git",
+  "author": "Dev Protocol",
   "scripts": {
     "start": "yarn --cwd packages/web start:prod",
     "dev": "yarn --cwd packages/web start:dev",
     "build": "lerna run build --include-dependencies",
     "lint": "eslint --fix -c ./.eslintrc.json './packages/**/*.{ts,tsx}'",
-    "format": "prettier --write ./packages/web/public/locales/en/PossessionOutline.json",
+    "format": "prettier --write .",
     "test": "lerna run test",
     "clean": "lerna run clean && lerna clean --y",
     "prepare": "husky install"

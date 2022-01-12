@@ -1,10 +1,15 @@
 query listPropertyMeta($author: String!, $offset: Int, $limit: Int, $ilike: String) {
-  property_meta(where: { author: { _eq: $author }, property: { _ilike: $ilike } }, offset: $offset, limit: $limit, order_by: { lockup_aggregate: { sum: { value: desc_nulls_last }  }}) {
+  property_meta(
+    where: { author: { _eq: $author }, property: { _ilike: $ilike } }
+    offset: $offset
+    limit: $limit
+    order_by: { lockup_aggregate: { sum: { value: desc_nulls_last } } }
+  ) {
     property
     name
     lockup_aggregate {
       aggregate {
-        count 
+        count
         sum {
           block_number
           value
