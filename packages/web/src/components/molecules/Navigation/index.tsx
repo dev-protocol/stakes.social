@@ -215,10 +215,6 @@ export const Navigation = () => {
             <Popover
               content={
                 <>
-                  <NetworkSwitch type="link" onClick={switchNetwork('ropsten')}>
-                    <ConnectedOrDisconnected chainName="ropsten" />
-                    <span>Ropsten</span>
-                  </NetworkSwitch>
                   <NetworkSwitch type="link" onClick={switchNetwork('arbitrum-rinkeby')}>
                     <ConnectedOrDisconnected chainName="arbitrum-rinkeby" />
                     <span>Arbitrum Rinkeby</span>
