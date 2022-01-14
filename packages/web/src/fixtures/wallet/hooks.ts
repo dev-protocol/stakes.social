@@ -18,6 +18,10 @@ const providerUrl = (chain: ChainName) =>
           ? WEB3_PROVIDER_ENDPOINT_HOSTS.ARB_ONE
           : chain === 'arbitrum-rinkeby'
           ? WEB3_PROVIDER_ENDPOINT_HOSTS.ARB_RINKEBY
+          : chain === 'polygon'
+          ? WEB3_PROVIDER_ENDPOINT_HOSTS.POLYGON
+          : chain === 'polygon-mumbai'
+          ? WEB3_PROVIDER_ENDPOINT_HOSTS.POLYGON_MUMBAI
           : WEB3_PROVIDER_ENDPOINT_HOSTS.MAIN
       }/${WEB3_PROVIDER_ENDPOINT_KEY}`
     : undefined
@@ -80,8 +84,8 @@ export const useDetectChain = (ethersProvider?: providers.BaseProvider) => {
 }
 
 export const useIsL1 = () => {
-  const { ethersProvider } = useProvider()
-  const { name: chain } = useDetectChain(ethersProvider)
-  const isL1 = useMemo(() => chain === 'ethereum', [chain])
+  const { nonConnectedEthersProvider } = useProvider()
+  const { name: chain } = useDetectChain(nonConnectedEthersProvider)
+  const isL1 = useMemo(() => whenDefined(chain, c => c === 'ethereum'), [chain])
   return { isL1 }
 }

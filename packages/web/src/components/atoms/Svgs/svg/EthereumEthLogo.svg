@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Creator: CorelDRAW 2019 (64-Bit) -->
+<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="100%" height="100%" version="1.1" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" image-rendering="optimizeQuality" fill-rule="evenodd" clip-rule="evenodd" viewBox="0 0 784.37 1277.39" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xodm="http://www.corel.com/coreldraw/odm/2003">
+ <g id="Layer_x0020_1">
+  <metadata id="CorelCorpID_0Corel-Layer"/>
+  <g id="_1421394342400">
+   <g>
+    <polygon fill="#343434" fill-rule="nonzero" points="392.07,0 383.5,29.11 383.5,873.74 392.07,882.29 784.13,650.54 "/>
+    <polygon fill="#8C8C8C" fill-rule="nonzero" points="392.07,0 -0,650.54 392.07,882.29 392.07,472.33 "/>
+    <polygon fill="#3C3C3B" fill-rule="nonzero" points="392.07,956.52 387.24,962.41 387.24,1263.28 392.07,1277.38 784.37,724.89 "/>
+    <polygon fill="#8C8C8C" fill-rule="nonzero" points="392.07,1277.38 392.07,956.52 -0,724.89 "/>
+    <polygon fill="#141414" fill-rule="nonzero" points="392.07,882.29 784.13,650.54 392.07,472.33 "/>
+    <polygon fill="#393939" fill-rule="nonzero" points="0,650.54 392.07,882.29 392.07,472.33 "/>
+   </g>
+  </g>
+ </g>
+<style xmlns="" id="custom-style-code-0" type="text/css">@charset "UTF-8";
+@font-face {
+  font-family: "MS PGothic";
+  font-weight: 100;
+  src: local("Noto Sans CJK JP Thin");
+}
+@font-face {
+  font-family: "MS PGothic";
+  font-weight: 300;
+  src: local("Noto Sans CJK JP Light");
+}
+@font-face {
+  font-family: "MS PGothic";
+  font-weight: 400;
+  src: local("Noto Sans CJK JP Regular");
+}
+@font-face {
+  font-family: "MS PGothic";
+  font-weight: 500;
+  src: local("Noto Sans CJK JP Medium");
+}
+@font-face {
+  font-family: "MS PGothic";
+  font-weight: 700;
+  src: local("Noto Sans CJK JP Bold");
+}
+@font-face {
+  font-family: "MS PGothic";
+  font-weight: 900;
+  src: local("Noto Sans CJK JP Black");
+}
+@font-face {
+  font-family: "MS PGothic";
+  src: local("Noto Sans CJK JP");
+}
+@font-face {
+  font-family: "ＭＳ Ｐゴシック";
+  font-weight: 100;
+  src: local("Noto Sans CJK JP Thin");
+}
+@font-face {
+  font-family: "ＭＳ Ｐゴシック";
+  font-weight: 300;
+  src: local("Noto Sans CJK JP Light");
+}
+@font-face {
+  font-family: "ＭＳ Ｐゴシック";
+  font-weight: 400;
+  src: local("Noto Sans CJK JP Regular");
+}
+@font-face {
+  font-family: "ＭＳ Ｐゴシック";
+  font-weight: 500;
+  src: local("Noto Sans CJK JP Medium");
+}
+@font-face {
+  font-family: "ＭＳ Ｐゴシック";
+  font-weight: 700;
+  src: local("Noto Sans CJK JP Bold");
+}
+@font-face {
+  font-family: "ＭＳ Ｐゴシック";
+  font-weight: 900;
+  src: local("Noto Sans CJK JP Black");
+}
+@font-face {
+  font-family: "ＭＳ Ｐゴシック";
+  src: local("Noto Sans CJK JP");
+}
+@font-face {
+  font-family: "ＭＳ Ｐ ゴシック";
+  font-weight: 100;
+  src: local("Noto Sans CJK JP Thin");
+}
+@font-face {
+  font-family: "ＭＳ Ｐ ゴシック";
+  font-weight: 300;
+  src: local("Noto Sans CJK JP Light");
+}
+@font-face {
+  font-family: "ＭＳ Ｐ ゴシック";
+  font-weight: 400;
+  src: local("Noto Sans CJK JP Regular");
+}
+@font-face {
+  font-family: "ＭＳ Ｐ ゴシック";
+  font-weight: 500;
+  src: local("Noto Sans CJK JP Medium");
+}
+@font-face {
+  font-family: "ＭＳ Ｐ ゴシック";
+  font-weight: 700;
+  src: local("Noto Sans CJK JP Bold");
+}
+@font-face {
+  font-family: "ＭＳ Ｐ ゴシック";
+  font-weight: 900;
+  src: local("Noto Sans CJK JP Black");
+}
+@font-face {
+  font-family: "ＭＳ Ｐ ゴシック";
+  src: local("Noto Sans CJK JP");
+}
+@font-face {
+  font-family: "Meiryo";
+  font-weight: 100;
+  src: local("Noto Sans CJK JP Thin");
+}
+@font-face {
+  font-family: "Meiryo";
+  font-weight: 300;
+  src: local("Noto Sans CJK JP Light");
+}
+@font-face {
+  font-family: "Meiryo";
+  font-weight: 400;
+  src: local("Noto Sans CJK JP Regular");
+}
+@font-face {
+  font-family: "Meiryo";
+  font-weight: 500;
+  src: local("Noto Sans CJK JP Medium");
+}
+@font-face {
+  font-family: "Meiryo";
+  font-weight: 700;
+  src: local("Noto Sans CJK JP Bold");
+}
+@font-face {
+  font-family: "Meiryo";
+  font-weight: 900;
+  src: local("Noto Sans CJK JP Black");
+}
+@font-face {
+  font-family: "Meiryo";
+  src: local("Noto Sans CJK JP");
+}
+@font-face {
+  font-family: "メイリオ";
+  font-weight: 100;
+  src: local("Noto Sans CJK JP Thin");
+}
+@font-face {
+  font-family: "メイリオ";
+  font-weight: 300;
+  src: local("Noto Sans CJK JP Light");
+}
+@font-face {
+  font-family: "メイリオ";
+  font-weight: 400;
+  src: local("Noto Sans CJK JP Regular");
+}
+@font-face {
+  font-family: "メイリオ";
+  font-weight: 500;
+  src: local("Noto Sans CJK JP Medium");
+}
+@font-face {
+  font-family: "メイリオ";
+  font-weight: 700;
+  src: local("Noto Sans CJK JP Bold");
+}
+@font-face {
+  font-family: "メイリオ";
+  font-weight: 900;
+  src: local("Noto Sans CJK JP Black");
+}
+@font-face {
+  font-family: "メイリオ";
+  src: local("Noto Sans CJK JP");
+}
+@font-face {
+  font-family: "Meiryo UI";
+  font-weight: 100;
+  src: local("Noto Sans CJK JP Thin");
+}
+@font-face {
+  font-family: "Meiryo UI";
+  font-weight: 300;
+  src: local("Noto Sans CJK JP Light");
+}
+@font-face {
+  font-family: "Meiryo UI";
+  font-weight: 400;
+  src: local("Noto Sans CJK JP Regular");
+}
+@font-face {
+  font-family: "Meiryo UI";
+  font-weight: 500;
+  src: local("Noto Sans CJK JP Medium");
+}
+@font-face {
+  font-family: "Meiryo UI";
+  font-weight: 700;
+  src: local("Noto Sans CJK JP Bold");
+}
+@font-face {
+  font-family: "Meiryo UI";
+  font-weight: 900;
+  src: local("Noto Sans CJK JP Black");
+}
+@font-face {
+  font-family: "Meiryo UI";
+  src: local("Noto Sans CJK JP");
+}
+@font-face {
+  font-family: x-locale-body;
+  font-weight: 100;
+  src: local("Noto Sans CJK JP Thin");
+}
+@font-face {
+  font-family: x-locale-body;
+  font-weight: 300;
+  src: local("Noto Sans CJK JP Light");
+}
+@font-face {
+  font-family: x-locale-body;
+  font-weight: 400;
+  src: local("Noto Sans CJK JP Regular");
+}
+@font-face {
+  font-family: x-locale-body;
+  font-weight: 500;
+  src: local("Noto Sans CJK JP Medium");
+}
+@font-face {
+  font-family: x-locale-body;
+  font-weight: 700;
+  src: local("Noto Sans CJK JP Bold");
+}
+@font-face {
+  font-family: x-locale-body;
+  font-weight: 900;
+  src: local("Noto Sans CJK JP Black");
+}
+@font-face {
+  font-family: x-locale-body;
+  src: local("Noto Sans CJK JP");
+}
+@font-face {
+  font-family: "ＭＳ Ｐ明朝";
+  src: local("Noto Serif CJK JP");
+}
+@font-face {
+  font-family: "MS PMincho";
+  src: local("Noto Serif CJK JP");
+}
+@font-face {
+  font-family: "MS 明朝";
+  src: local("Noto Serif CJK JP");
+}</style><style xmlns="" id="custom-style-code-1" type="text/css">* {
+   scrollbar-width: none;
+}
+</style></svg>

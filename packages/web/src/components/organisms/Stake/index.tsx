@@ -114,7 +114,7 @@ export const Stake = ({ className, title, propertyAddress }: Props) => {
     const contractAddress = await getContractAddress(contractFactory(ethersProvider), 'lockup', name)
     const res = await allowance(contractAddress, accountAddress)
     return res
-  }, [accountAddress])
+  }, [accountAddress, allowance, ethersProvider, name])
 
   const handleChangeRadio = (event: RadioChangeEvent) => {
     setRadioValue(event.target.value)

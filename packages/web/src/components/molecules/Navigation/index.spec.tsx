@@ -5,7 +5,7 @@ import 'src/__mocks__/window/matchMedia.mock'
 
 describe(`${Navigation.name}`, () => {
   test('Snapshot', () => {
-    const component = render(<Navigation isMenuOpen={true} handleMenuOpen={() => {}} />)
+    const component = render(<Navigation />)
     const tree = component.baseElement
     expect(tree).toMatchSnapshot()
   })

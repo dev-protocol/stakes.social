@@ -3,128 +3,61 @@
 exports[`AuthHeader Snapshot 1`] = `
 <body>
   <div>
-    <div
-      style="position: sticky; top: 0px; width: 100%; z-index: 5;"
-    >
-      <header
-        class="sc-furwcr dEfYgJ"
+    <header>
+      <nav
+        class="sc-gsDKAQ"
       >
         <div
-          class="sc-egiyK kYhVgg"
+          class="sc-bdvvtL sc-dkPtRN dGQTf kRUKIu"
         >
-          <header
-            class="sc-pVTFL xEgAJ"
+          <div
+            class="sc-gKclnd sc-hBUSln fAyBB TXyBl"
           >
-            <div
-              class="sc-jrQzAO kZuvhn"
+            <svgrurl
+              class="sc-eCImPb bcDGrW"
+              height="1.2rem"
+              id="headerlogo"
+            />
+            <span
+              class="sc-jRQBWg fpIyFp"
             >
-              <a
-                class="sc-bdvvtL bKEjhC"
-                href="/"
-              >
-                <span
-                  class="sc-gsDKAQ hSRZmM"
-                >
-                  <svgrurl
-                    id="headerlogo"
-                  />
-                  <span
-                    class="sc-dkPtRN wwTvJ"
-                  >
-                    Stakes.social
-                  </span>
-                </span>
-              </a>
-            </div>
-            <div
-              class="sc-kDTinF kqfajw"
+              Stakes.social
+            </span>
+          </div>
+          <span
+            aria-label="more"
+            class="anticon anticon-more sc-hKwDye jtVoEC"
+            role="img"
+            tabindex="-1"
+          >
+            <svg
+              aria-hidden="true"
+              data-icon="more"
+              fill="currentColor"
+              focusable="false"
+              height="1em"
+              viewBox="64 64 896 896"
+              width="1em"
             >
-              <svg
-                height="50"
-                id="emoji"
-                style="margin-right: 0.5em; cursor: pointer;"
-                viewBox="0 0 72 72"
-                width="50"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <g
-                  id="color"
-                />
-                <g
-                  id="hair"
-                />
-                <g
-                  id="skin"
-                />
-                <g
-                  id="skin-shadow"
-                />
-                <g
-                  id="line"
-                >
-                  <line
-                    fill="none"
-                    stroke="white"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-miterlimit="10"
-                    stroke-width="2"
-                    x1="16"
-                    x2="56"
-                    y1="26"
-                    y2="26"
-                  />
-                  <line
-                    fill="none"
-                    stroke="white"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-miterlimit="10"
-                    stroke-width="2"
-                    x1="16"
-                    x2="56"
-                    y1="36"
-                    y2="36"
-                  />
-                  <line
-                    fill="none"
-                    stroke="white"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-miterlimit="10"
-                    stroke-width="2"
-                    x1="16"
-                    x2="56"
-                    y1="46"
-                    y2="46"
-                  />
-                </g>
-              </svg>
-              <div
-                class="sc-jRQBWg fixFlJ"
-              >
-                <span
-                  style="font-size: 0.8em;"
-                >
-                  Sign in
-                </span>
-              </div>
-            </div>
-          </header>
+              <path
+                d="M456 231a56 56 0 10112 0 56 56 0 10-112 0zm0 280a56 56 0 10112 0 56 56 0 10-112 0zm0 280a56 56 0 10112 0 56 56 0 10-112 0z"
+              />
+            </svg>
+          </span>
         </div>
-      </header>
+      </nav>
       <div
-        class="sc-iCfMLu gLTIao"
+        class="sc-fotOHu fMGkPf"
       >
         Beta Version
       </div>
-    </div>
+    </header>
     <div
-      class="sc-bqiRlB joQuxJ"
+      class="sc-bkkeKt iRnaub"
       height="300"
     >
       <h2
-        class="sc-hBUSln jjFdcK"
+        class="sc-dJjYzT gSNwKX"
       >
         Choose Market
       </h2>
