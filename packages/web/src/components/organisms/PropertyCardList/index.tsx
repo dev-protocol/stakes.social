@@ -1,5 +1,5 @@
 // @L2 optimized
-import React, { useCallback, useState } from 'react'
+import React, { useCallback, useMemo, useState } from 'react'
 import Link from 'next/link'
 import { Spin, Pagination } from 'antd'
 import { useListPropertyQuery, useListPropertyOrderByMostRecentQuery, Property_Authentication } from '@dev/graphql'
@@ -9,7 +9,7 @@ import { CurrencySwitcher } from './CurrencySwitcher'
 import { useRouter } from 'next/router'
 import styled from 'styled-components'
 import Select from 'react-select'
-import { useProvider } from 'src/fixtures/wallet/hooks'
+import { useProvider, useDetectChain } from 'src/fixtures/wallet/hooks'
 import { Grid } from 'src/components/atoms/Grid'
 import {
   useGetEnabledMarkets,
@@ -18,6 +18,7 @@ import {
 } from 'src/fixtures/dev-kit/hooks'
 import { reverse } from 'ramda'
 import { LinkWithNetwork } from 'src/components/atoms/LinkWithNetwork'
+import { getDenyList } from 'src/config/utils'
 
 export type FeatureTag = '' | 'GitHub' | 'npm' | 'Creators'
 interface Props {
@@ -139,6 +140,9 @@ const FeatureTags = ({ tag }: { tag: FeatureTag }) => {
 export const PropertyCardList = ({ currentPage, searchWord, sortBy, featureTag }: Props) => {
   const { accountAddress } = useProvider()
   const [perPage, setPerPage] = useState(DEFAULT_PER_PAGE)
+  const { nonConnectedEthersProvider } = useProvider()
+  const { name: network } = useDetectChain(nonConnectedEthersProvider)
+  const denyList = useMemo(() => getDenyList(network), [network])
   const { data, loading } = useListPropertyQuery({
     variables: {
       limit: perPage,
@@ -146,6 +150,7 @@ export const PropertyCardList = ({ currentPage, searchWord, sortBy, featureTag }
       ilike: searchWord !== '' ? `%${searchWord}%` : undefined,
       market: featureTag === 'GitHub' || featureTag === 'npm' ? markets[featureTag] : undefined,
       marketOther: featureTag === 'Creators' ? Object.values(markets) : undefined,
+      denyProperty: denyList,
       // NOTE: If accountAddress is undefined, all properties will be displayed,
       //       so if YOUR_PROPS is selected and accountAddress is not available,
       //       query with dummy values.
@@ -159,6 +164,7 @@ export const PropertyCardList = ({ currentPage, searchWord, sortBy, featureTag }
       ilike: searchWord !== '' ? `%${searchWord}%` : undefined,
       market: featureTag === 'GitHub' || featureTag === 'npm' ? markets[featureTag] : undefined,
       marketOther: featureTag === 'Creators' ? Object.values(markets) : undefined,
+      denyProperty: denyList,
       from: sortBy === 'YOUR_PROPS' ? accountAddress || '0xdummy' : undefined
     }
   })
@@ -253,13 +259,18 @@ export const PropertyByMarketWithAssetsL2 = ({ propertyAddress }: { propertyAddr
 }
 
 export const PropertyByMarketL2 = ({ market }: { market: string }) => {
+  const { nonConnectedEthersProvider } = useProvider()
+  const { name: network } = useDetectChain(nonConnectedEthersProvider)
+  const denyList = useMemo(() => getDenyList(network), [network])
   const { data } = useGetAuthenticatedProperties(market)
   const list = data ? reverse(data) : undefined
 
   return (
     <>
       {list
-        ? list.map((property, i) => <PropertyByMarketWithAssetsL2 key={i} propertyAddress={property as string} />)
+        ? list
+            .filter((property: string) => !denyList?.includes(property))
+            .map((property, i) => <PropertyByMarketWithAssetsL2 key={i} propertyAddress={property as string} />)
         : ''}
     </>
   )
