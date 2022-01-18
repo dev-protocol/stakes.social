@@ -3,11 +3,10 @@ import denylist from './denylist.json'
 
 export const isDenyProperty = (network: ChainName, propertyAddress: string) => {
   const d = getDenyList(network)
-  const isResult = d && d.includes(propertyAddress)
-  return isResult === true
+  return d && d.includes(propertyAddress)
 }
 
-export const getDenyList = (network: ChainName) =>
+export const getDenyList = (network: ChainName): Array<string> | undefined =>
   network === 'ethereum'
     ? denylist.ethereum
     : network === 'ropsten'
