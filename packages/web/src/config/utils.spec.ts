@@ -1,4 +1,4 @@
-import { isDenyProperty, getDenyList } from './utils'
+import { isDenyProperty } from './utils'
 
 jest.mock('./denylist.json', () => {
   return {
