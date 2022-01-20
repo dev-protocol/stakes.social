@@ -1,7 +1,7 @@
 import { ChainName } from 'src/fixtures/wallet/utility'
 import denylist from './denylist.json'
 
-export const isDenyProperty = (network: ChainName, propertyAddress: string) => {
+export const isDenyProperty = (network: ChainName, propertyAddress: string): boolean => {
   const d = getDenyList(network)
   return (d && d.includes(propertyAddress)) || false
 }
