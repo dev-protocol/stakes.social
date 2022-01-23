@@ -83,8 +83,8 @@ const OfferPopover = () => {
 }
 
 const Offer = ({ sTokenId }: { sTokenId: number }) => {
-  const { ethersProvider } = useProvider()
-  const { name } = useDetectChain(ethersProvider)
+  const { nonConnectedEthersProvider } = useProvider()
+  const { name } = useDetectChain(nonConnectedEthersProvider)
 
   const tofuNFT =
     name === 'arbitrum-one'
