@@ -2,10 +2,7 @@ import {
   contractFactory,
   DevkitContract,
   client as devClient,
-  utils,
   addresses,
-  metricsAbi,
-  metricsFactoryAbi,
   devAbi,
   sTokensAbi,
   RegistryContract
@@ -14,12 +11,8 @@ import { contractFactory as l2ContractFactory, DevkitContract as L2DevkitContrac
 import { getContractAddress as _getContractAddress } from './get-contract-address'
 import BigNumber from 'bignumber.js'
 import { ethers, providers, Event } from 'ethers'
-import { utils as legacyUtils } from '@devprotocol/alias-legacy-dev-kit'
-import Web3 from 'web3'
 import { ChainName, detectChain } from '../wallet/utility'
 import { whenDefinedAll, whenDefined, UndefinedOr } from '@devprotocol/util-ts'
-const { execute } = utils
-const { watchEvent } = legacyUtils
 
 const cacheForContractFactory: WeakMap<
   providers.BaseProvider,
@@ -394,44 +387,6 @@ export const balanceOfProperty = async (
   const [, , client] = await newClient(prov)
   if (client && accountAddress) {
     return client.property(propertyAddress).balanceOf(accountAddress)
-  }
-  return undefined
-}
-
-const getMetricsProperty = async (address: string): Promise<string> =>
-  execute({
-    contract: new ethers.Contract(address, [...metricsAbi]),
-    method: 'property',
-    mutation: false
-  })
-
-export const waitForCreateMetrics = async (
-  prov: providers.BaseProvider,
-  web3: Web3,
-  propertyAddress: string
-): Promise<string | undefined> => {
-  const [, , client] = await newClient(prov)
-  const getContractAddress = createGetContractAddress(prov)
-  if (client) {
-    const [fromBlock, metricsFactoryAddress] = await Promise.all([
-      prov.getBlockNumber(),
-      getContractAddress(client, 'metricsFactory')
-    ])
-    return new Promise((resolve, reject) => {
-      watchEvent({
-        fromBlock,
-        contract: new web3.eth.Contract([...(metricsFactoryAbi as any)], metricsFactoryAddress),
-        resolver: async e =>
-          (metricsAddress =>
-            metricsAddress
-              ? getMetricsProperty(metricsAddress)
-                  .then(property => (property === propertyAddress ? true : false))
-                  .catch(reject)
-              : false)(e.event === 'Create' ? (e.returnValues._metrics as string) : undefined)
-      })
-        .then(res => resolve(res.returnValues._metrics as string))
-        .catch(reject)
-    })
   }
   return undefined
 }
