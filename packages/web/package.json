@@ -26,7 +26,7 @@
     "@svgr/webpack": "6.2.0",
     "@types/react-select": "5.0.0",
     "@walletconnect/web3-provider": "1.7.1",
-    "antd": "4.18.4",
+    "antd": "4.18.5",
     "axios": "0.25.0",
     "bignumber.js": "9.0.2",
     "body-parser": "1.19.1",
