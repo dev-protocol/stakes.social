@@ -1,12 +1,12 @@
 overwrite: true
-schema: "./src/scheme.graphql"
-documents: ["src/queries/**.graphql", "src/fragments/**.graphql"]
+schema: './src/scheme.graphql'
+documents: ['src/queries/**.graphql', 'src/fragments/**.graphql']
 generates:
   src/react-apollo/generated.tsx:
     plugins:
-      - "typescript"
-      - "typescript-operations"
-      - "typescript-react-apollo"
+      - 'typescript'
+      - 'typescript-operations'
+      - 'typescript-react-apollo'
     config:
       withComponent: false
       withHooks: true

@@ -1,9 +1,8 @@
 query ListProperty($limit: Int, $offset: Int, $ilike: String, $from: String, $market: String, $marketOther: [String!]) {
-  property_factory_create(limit: $limit, offset: $offset, order_by: {
-      current_lockup: {
-        sum_values: desc_nulls_last
-      }
-    },
+  property_factory_create(
+    limit: $limit
+    offset: $offset
+    order_by: { current_lockup: { sum_values: desc_nulls_last } }
     where: {
       authentication: {
         authentication_id: { _ilike: $ilike }
@@ -18,7 +17,13 @@ query ListProperty($limit: Int, $offset: Int, $ilike: String, $from: String, $ma
     ...propertyFactoryCreate
   }
   property_factory_create_aggregate(
-    where: { authentication: { authentication_id: { _ilike: $ilike } property_meta: { author: { _eq: $from } } market: { _eq: $market, _nin: $marketOther } } }
+    where: {
+      authentication: {
+        authentication_id: { _ilike: $ilike }
+        property_meta: { author: { _eq: $from } }
+        market: { _eq: $market, _nin: $marketOther }
+      }
+    }
   ) {
     aggregate {
       count
@@ -26,10 +31,18 @@ query ListProperty($limit: Int, $offset: Int, $ilike: String, $from: String, $ma
   }
 }
 
-query ListPropertyOrderByMostRecent($limit: Int, $offset: Int, $ilike: String, $from: String, $market: String, $marketOther: [String!]) {
-  property_factory_create(limit: $limit, offset: $offset, order_by: {
-      block_number: desc
-    },
+query ListPropertyOrderByMostRecent(
+  $limit: Int
+  $offset: Int
+  $ilike: String
+  $from: String
+  $market: String
+  $marketOther: [String!]
+) {
+  property_factory_create(
+    limit: $limit
+    offset: $offset
+    order_by: { block_number: desc }
     where: {
       authentication: {
         authentication_id: { _ilike: $ilike }

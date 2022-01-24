@@ -1,5 +1,5 @@
 query getMarketFactoryCreate {
-  market_factory_create(limit: 1, order_by: {block_number: asc}) {
+  market_factory_create(limit: 1, order_by: { block_number: asc }) {
     market
   }
 }

@@ -4,24 +4,14 @@ import { ServerStyleSheet } from 'styled-components'
 import { GA_ID } from '../lib/gtag'
 
 export default class extends Document {
-  static getInitialProps = async (ctx: DocumentContext) => {
-    const styledComponentsSheet = new ServerStyleSheet()
-    const originalRenderPage = ctx.renderPage
+  static getInitialProps = async ({ renderPage }: DocumentContext) => {
+    const sheet = new ServerStyleSheet()
 
-    // main ページのcssをここでレンダリングさせるためのenhancer
-    ctx.renderPage = () =>
-      originalRenderPage({
-        enhanceApp: App => props => ({
-          ...styledComponentsSheet.collectStyles(<App {...props} />)
-        })
-      })
+    const page = renderPage(App => props => sheet.collectStyles(<App {...props} />))
 
-    const initialProps = await Document.getInitialProps(ctx)
+    const styleTags = sheet.getStyleElement()
 
-    return {
-      ...initialProps,
-      styles: <>{styledComponentsSheet.getStyleElement()}</>
-    }
+    return { ...page, styleTags }
   }
 
   render() {
