@@ -1,6 +1,7 @@
 // @L2 optimized
 import React, { useCallback, useMemo, useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
+import Error from 'next/error'
 import Link from 'next/link'
 import styled from 'styled-components'
 import ReactMarkdown from 'react-markdown'
@@ -36,7 +37,7 @@ import {
 import { Image, Property as DevForAppsProperty } from 'src/fixtures/dev-for-apps/utility'
 import { Stake } from 'src/components/organisms/Stake'
 import { Withdraw } from 'src/components/organisms/Withdraw'
-import { useIsL1, useProvider } from 'src/fixtures/wallet/hooks'
+import { useIsL1, useProvider, useDetectChain } from 'src/fixtures/wallet/hooks'
 import { Avatar } from 'src/components/molecules/Avatar'
 import { CoverImageOrGradient } from 'src/components/atoms/CoverImageOrGradient'
 import { H3 } from 'src/components/atoms/Typography'
@@ -44,6 +45,7 @@ import { Twitter, Github } from 'src/components/atoms/SocialButtons'
 import { whenDefined } from 'src/fixtures/utility'
 import { LinkWithNetwork } from 'src/components/atoms/LinkWithNetwork'
 import { ControlChain } from 'src/components/organisms/ControlChain'
+import { isDenyProperty } from 'src/config/utils'
 
 type Props = {}
 
@@ -362,15 +364,19 @@ const PropertyAddressDetail = (_: Props) => {
   /* eslint-disable react-hooks/exhaustive-deps */
   // FYI: https://github.com/facebook/react/pull/19062
   const { data: includedAssetListL2 } = useGetAssetsByProperties(propertyAddress)
-  const { accountAddress: loggedInWallet } = useProvider()
+  const { accountAddress: loggedInWallet, nonConnectedEthersProvider } = useProvider()
   const { author: authorAddress } = usePropertyAuthor(propertyAddress)
   const { myStakingAmount } = useGetMyStakingAmount(propertyAddress)
   const includedAssetList = useMemo(
     () => (data ? data.property_authentication.map(e => e.authentication_id) : includedAssetListL2?.map(e => e.id)),
     [data, includedAssetListL2]
   )
+  const { name: network } = useDetectChain(nonConnectedEthersProvider)
+  const isDeny = isDenyProperty(network, propertyAddress)
 
-  return (
+  return isDeny ? (
+    <Error statusCode={404} />
+  ) : (
     <>
       <Header></Header>
       <Wrap>

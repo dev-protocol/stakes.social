@@ -1,4 +1,4 @@
-query ListProperty($limit: Int, $offset: Int, $ilike: String, $from: String, $market: String, $marketOther: [String!]) {
+query ListProperty($limit: Int, $offset: Int, $ilike: String, $from: String, $market: String, $marketOther: [String!], $denyProperty: [String!]) {
   property_factory_create(
     limit: $limit
     offset: $offset
@@ -9,6 +9,7 @@ query ListProperty($limit: Int, $offset: Int, $ilike: String, $from: String, $ma
         property_meta: { author: { _eq: $from } }
         market: { _eq: $market, _nin: $marketOther }
       }
+      property: { _nin: $denyProperty }
     }
   ) {
     authentication {
@@ -23,6 +24,7 @@ query ListProperty($limit: Int, $offset: Int, $ilike: String, $from: String, $ma
         property_meta: { author: { _eq: $from } }
         market: { _eq: $market, _nin: $marketOther }
       }
+      property: { _nin: $denyProperty }
     }
   ) {
     aggregate {
@@ -38,6 +40,7 @@ query ListPropertyOrderByMostRecent(
   $from: String
   $market: String
   $marketOther: [String!]
+  $denyProperty: [String!]
 ) {
   property_factory_create(
     limit: $limit
@@ -49,6 +52,7 @@ query ListPropertyOrderByMostRecent(
         property_meta: { author: { _eq: $from } }
         market: { _eq: $market, _nin: $marketOther }
       }
+      property: { _nin: $denyProperty }
     }
   ) {
     authentication {
@@ -63,6 +67,7 @@ query ListPropertyOrderByMostRecent(
         property_meta: { author: { _eq: $from } }
         market: { _eq: $market, _nin: $marketOther }
       }
+      property: { _nin: $denyProperty }
     }
   ) {
     aggregate {
