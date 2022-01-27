@@ -34,7 +34,7 @@
     "core-js": "3.20.3",
     "date-fns": "2.28.0",
     "dotenv": "14.3.2",
-    "dotenv-webpack": "7.0.3",
+    "dotenv-webpack": "7.1.0",
     "ethers": "5.5.3",
     "faker": "5.5.3",
     "formik": "2.2.9",
