@@ -12,13 +12,12 @@ import {
   useUploadAccountCoverImages,
   useDeleteFile
 } from 'src/fixtures/dev-for-apps/hooks'
-import { Button, Divider, Form, Input, Result, Skeleton, Upload } from 'antd'
+import { Button, Divider, Form, Input, Result, Upload } from 'antd'
 import { whenDefined } from 'src/fixtures/utility'
 import { UploadChangeParam, UploadFile } from 'antd/lib/upload/interface'
 import { Image } from 'src/fixtures/dev-for-apps/utility'
 import SkeletonInput from 'antd/lib/skeleton/Input'
 import { useRouter } from 'next/router'
-import { useListOwnedPropertyMetaQuery } from '@dev/graphql'
 import { useProvider } from 'src/fixtures/wallet/hooks'
 import Link from 'next/link'
 import { FullpageWrap } from 'src/components/atoms/FullpageWrap'
@@ -193,11 +192,7 @@ const ProfileForm = ({ accountAddress }: { accountAddress: string }) => {
 const AuthorEdit = (_: Props) => {
   const { accountAddress } = useProvider()
   const { authorAddress } = useRouter().query
-  const { data, loading } = useListOwnedPropertyMetaQuery({
-    variables: { account_address: String(authorAddress), offset: 0, limit: 1 }
-  })
-  const isAuthor =
-    Boolean(data?.property_meta?.length) && accountAddress?.toLowerCase() === String(authorAddress).toLowerCase()
+  const isMyself = accountAddress?.toLowerCase() === String(authorAddress).toLowerCase()
 
   return (
     <FullpageWrap>
@@ -207,9 +202,7 @@ const AuthorEdit = (_: Props) => {
           <h1>Profile settings</h1>
         </Headline>
         <Container>
-          {loading ? (
-            <Skeleton />
-          ) : isAuthor ? (
+          {isMyself ? (
             <ProfileForm accountAddress={String(authorAddress)} />
           ) : (
             <Result
