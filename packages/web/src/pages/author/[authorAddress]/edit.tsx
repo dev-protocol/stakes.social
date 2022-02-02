@@ -72,12 +72,17 @@ const ProfileForm = ({ accountAddress }: { accountAddress: string }) => {
   }, [setFileList, data])
 
   const handleChange = async (info: UploadChangeParam<UploadFile>) => {
-    if (info.event) {
+    // handle *not* 'removed' status files on change callback
+    if (info.file && info.file.status !== 'removed') {
       const { displayName, biography, website, github } = pack(form)
       const createdAccount =
         !data && found ? await createAccount(displayName, biography, website, github) : { id: undefined }
       if (createdAccount === undefined) {
         return
+      }
+      if (fileList && fileList.length > 0) {
+        whenDefined(data?.portrait.id, x => deleteFile(x, info.file.name))
+        setFileList([])
       }
       setFileList([{ ...info.file, status: 'uploading' }])
       upload(info.file.originFileObj, createdAccount?.id)
@@ -163,6 +168,7 @@ const ProfileForm = ({ accountAddress }: { accountAddress: string }) => {
         multiple={false}
         listType="picture-card"
         fileList={fileList}
+        customRequest={() => {}}
         onChange={handleChange}
         onRemove={handleRemove}
       >
