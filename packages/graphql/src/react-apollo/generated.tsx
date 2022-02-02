@@ -5,7 +5,7 @@ export type InputMaybe<T> = T
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] }
 export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> }
 export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> }
-const defaultOptions = {}
+const defaultOptions = {} as const
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
   ID: string
@@ -5933,6 +5933,7 @@ export type ListPropertyQueryVariables = Exact<{
   from?: InputMaybe<Scalars['String']>
   market?: InputMaybe<Scalars['String']>
   marketOther?: InputMaybe<Array<Scalars['String']> | Scalars['String']>
+  denyProperty?: InputMaybe<Array<Scalars['String']> | Scalars['String']>
 }>
 
 export type ListPropertyQuery = {
@@ -5961,6 +5962,7 @@ export type ListPropertyOrderByMostRecentQueryVariables = Exact<{
   from?: InputMaybe<Scalars['String']>
   market?: InputMaybe<Scalars['String']>
   marketOther?: InputMaybe<Array<Scalars['String']> | Scalars['String']>
+  denyProperty?: InputMaybe<Array<Scalars['String']> | Scalars['String']>
 }>
 
 export type ListPropertyOrderByMostRecentQuery = {
@@ -6504,6 +6506,7 @@ export const ListPropertyDocument = gql`
     $from: String
     $market: String
     $marketOther: [String!]
+    $denyProperty: [String!]
   ) {
     property_factory_create(
       limit: $limit
@@ -6515,6 +6518,7 @@ export const ListPropertyDocument = gql`
           property_meta: { author: { _eq: $from } }
           market: { _eq: $market, _nin: $marketOther }
         }
+        property: { _nin: $denyProperty }
       }
     ) {
       authentication {
@@ -6529,6 +6533,7 @@ export const ListPropertyDocument = gql`
           property_meta: { author: { _eq: $from } }
           market: { _eq: $market, _nin: $marketOther }
         }
+        property: { _nin: $denyProperty }
       }
     ) {
       aggregate {
@@ -6557,6 +6562,7 @@ export const ListPropertyDocument = gql`
  *      from: // value for 'from'
  *      market: // value for 'market'
  *      marketOther: // value for 'marketOther'
+ *      denyProperty: // value for 'denyProperty'
  *   },
  * });
  */
@@ -6583,6 +6589,7 @@ export const ListPropertyOrderByMostRecentDocument = gql`
     $from: String
     $market: String
     $marketOther: [String!]
+    $denyProperty: [String!]
   ) {
     property_factory_create(
       limit: $limit
@@ -6594,6 +6601,7 @@ export const ListPropertyOrderByMostRecentDocument = gql`
           property_meta: { author: { _eq: $from } }
           market: { _eq: $market, _nin: $marketOther }
         }
+        property: { _nin: $denyProperty }
       }
     ) {
       authentication {
@@ -6608,6 +6616,7 @@ export const ListPropertyOrderByMostRecentDocument = gql`
           property_meta: { author: { _eq: $from } }
           market: { _eq: $market, _nin: $marketOther }
         }
+        property: { _nin: $denyProperty }
       }
     ) {
       aggregate {
@@ -6636,6 +6645,7 @@ export const ListPropertyOrderByMostRecentDocument = gql`
  *      from: // value for 'from'
  *      market: // value for 'market'
  *      marketOther: // value for 'marketOther'
+ *      denyProperty: // value for 'denyProperty'
  *   },
  * });
  */
