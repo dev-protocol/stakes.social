@@ -4690,10 +4690,10 @@
     "@web-std/stream" "1.0.0"
     web-encoding "1.1.5"
 
-"@web-std/fetch@^3.0.0":
-  version "3.0.2"
-  resolved "https://registry.yarnpkg.com/@web-std/fetch/-/fetch-3.0.2.tgz#96b19b5dc2c1b739881239d8a0f516a368d0b14b"
-  integrity sha512-kZO3KuZ1xvdxqTUFAAuNU+eK9ugZtmkP4yYZUzhx8+1vvwvv1t6WnG6khSMyzk9PpZaq+aepx45nC0YskiT6ZQ==
+"@web-std/fetch@^3.0.3":
+  version "3.0.3"
+  resolved "https://registry.yarnpkg.com/@web-std/fetch/-/fetch-3.0.3.tgz#507e1371825298aae61172b0da439570437d3982"
+  integrity sha512-PtaKr6qvw2AmKChugzhQWuTa12dpbogHRBxwcleAZ35UhWucnfD4N+g3f7qYK2OeioSWTK3yMf6n/kOOfqxHaQ==
   dependencies:
     "@web-std/blob" "^3.0.3"
     "@web-std/form-data" "^3.0.2"
@@ -15578,15 +15578,15 @@ next@12.0.10:
     "@next/swc-win32-ia32-msvc" "12.0.10"
     "@next/swc-win32-x64-msvc" "12.0.10"
 
-nft.storage@5.2.2:
-  version "5.2.2"
-  resolved "https://registry.yarnpkg.com/nft.storage/-/nft.storage-5.2.2.tgz#abfdfed197d161e409e8dcc503e05b9ebe2c69ec"
-  integrity sha512-HwJVbkUcknNjJxDlOld4lU1GxBuxe2kaNTmzzixaee+Sp+B4bmo03vElamDTuloeTid91GNKz/MWuNByXlxMDQ==
+nft.storage@5.2.3:
+  version "5.2.3"
+  resolved "https://registry.yarnpkg.com/nft.storage/-/nft.storage-5.2.3.tgz#a1bee6fc1ceab16fd06a2f762d324207c6f849d6"
+  integrity sha512-c1EhlcA28OG9bON2D3U0Pth77Le6F5R6pPPQrg/kHEpNBxnPQTxwLkHnz29GEcNhcxicWis6MauAF4aunBn2uQ==
   dependencies:
     "@ipld/car" "^3.1.20"
     "@ipld/dag-cbor" "^6.0.13"
     "@web-std/blob" "^3.0.1"
-    "@web-std/fetch" "^3.0.0"
+    "@web-std/fetch" "^3.0.3"
     "@web-std/file" "^3.0.0"
     "@web-std/form-data" "^3.0.0"
     carbites "^1.0.6"
