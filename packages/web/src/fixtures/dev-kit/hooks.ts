@@ -1046,7 +1046,7 @@ export const useApprove = () => {
       setError(undefined)
       return whenDefined(ethersProvider, client =>
         approve(client, address, amount)
-          .then(result => setOK(result || false))
+          .then(result => setOK((result && true) || false))
           .catch(setError)
           .finally(() => {
             setIsLoading(false)
