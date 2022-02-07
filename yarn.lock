@@ -15642,10 +15642,10 @@ next@12.0.10:
     "@next/swc-win32-ia32-msvc" "12.0.10"
     "@next/swc-win32-x64-msvc" "12.0.10"
 
-nft.storage@5.2.3:
-  version "5.2.3"
-  resolved "https://registry.yarnpkg.com/nft.storage/-/nft.storage-5.2.3.tgz#a1bee6fc1ceab16fd06a2f762d324207c6f849d6"
-  integrity sha512-c1EhlcA28OG9bON2D3U0Pth77Le6F5R6pPPQrg/kHEpNBxnPQTxwLkHnz29GEcNhcxicWis6MauAF4aunBn2uQ==
+nft.storage@5.2.4:
+  version "5.2.4"
+  resolved "https://registry.yarnpkg.com/nft.storage/-/nft.storage-5.2.4.tgz#be85309bde9dd7c5e72d6abd51d31e685d7faec1"
+  integrity sha512-xhTW7IUpxPhzplrWMD9/2GLW2kOS6vCsofYb66PzPHbNzNAzWd/V1CZYHtcAEFFr9OhJF4tNO1RY/F28RlYOgg==
   dependencies:
     "@ipld/car" "^3.1.20"
     "@ipld/dag-cbor" "^6.0.13"
