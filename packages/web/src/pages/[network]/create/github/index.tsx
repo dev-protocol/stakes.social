@@ -1,5 +1,4 @@
 import React from 'react'
-import { useRouter } from 'next/router'
 import { AuthForm } from 'src/components/_pages/create/[market]/AuthForm'
 import { Footer } from 'src/components/organisms/Footer'
 import { Header } from 'src/components/organisms/Header'
@@ -13,7 +12,9 @@ import { useCreateAndAuthenticate } from 'src/fixtures/dev-kit/hooks'
 import { usePostSignGitHubMarketAsset } from 'src/fixtures/khaos/hooks'
 import SuccessLogo from 'src/components/atoms/Success'
 import { ButtonWithGradient } from 'src/components/atoms/ButtonWithGradient/index'
+import { useDetectChain, useProvider } from 'src/fixtures/wallet/hooks'
 import { ControlChain } from 'src/components/organisms/ControlChain'
+import { MARKET_ADDRESS } from 'src/fixtures/market/constants'
 
 type Props = {}
 
@@ -288,11 +289,14 @@ const TokenizationDisclaimer = ({
 const AuthenticateNewAsset = (_: Props) => {
   const [header, setHeader] = useState('Create an Asset')
   const [subHeader, setSubHeader] = useState('Create an asset or authenticate an existing pool.')
-  const { market } = useRouter().query
   const [formData, setFormData] = useState<
     { projectName: string; tokenName: string; tokenSymbol: string; personalAccessToken: string } | undefined
   >(undefined)
   const [metrics, setMetrics] = useState<string>('')
+
+  const { ethersProvider } = useProvider()
+  const { name: networkName = 'ethereum' } = useDetectChain(ethersProvider)
+  const market = MARKET_ADDRESS[networkName]
 
   console.log('formData: ', formData)
 

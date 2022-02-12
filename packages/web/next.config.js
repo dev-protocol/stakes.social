@@ -12,6 +12,15 @@ module.exports = withTM(
         use: ['@svgr/webpack']
       })
       return config
-    }
+    },
+    async redirects() {
+      return [
+        {
+          source: '/:network(ethereum|ropsten|polygon|arbitrum-one|polygon-mumbai|arbitrum-rinkeby)/create/:address(0x.*)',
+          destination: '/:network/create/github',
+          permanent: true,
+        },
+      ]
+    },
   })
 )
