@@ -124,37 +124,43 @@ export const Navigations = [
     key: 'pools',
     label: 'Pools',
     pathname: '/',
-    rewrite: true
+    rewrite: true,
+    isExternal: false
   },
   {
     key: 'liquidity',
     label: 'Liquidity',
     pathname: '/liquidity/v2',
-    rewrite: true
+    rewrite: true,
+    isExternal: false
   },
   {
     key: 'create',
-    label: 'Create',
-    pathname: '/create',
-    rewrite: true
+    label: 'Create on Niwa',
+    pathname: 'https://niwa.xyz',
+    rewrite: true,
+    isExternal: true
   },
   {
     key: 'dashboard',
     label: 'Dashboard',
     pathname: '/stats',
-    rewrite: false
+    rewrite: false,
+    isExternal: false
   },
   {
     key: 'portfolio',
     label: 'Portfolio',
     pathname: '/profile',
-    rewrite: true
+    rewrite: true,
+    isExternal: false
   },
   {
     key: 'grants',
     label: 'Grants',
     pathname: 'https://devprotocol.notion.site/Welcome-to-DEV-DAPP-STARTER-GRANTS-5cb95252f18540258111581ea54d8808',
-    rewrite: false
+    rewrite: false,
+    isExternal: false
   }
 ]
 
@@ -252,9 +258,12 @@ export const Navigation = () => {
         <NavUl>
           {Navigations.map(nav => (
             <NavLi key={nav.key} style={{ margin: '0' }}>
-              <LinkWithNetwork href={nav.pathname} rewrite={nav.rewrite} passHref>
-                <a>{nav.label}</a>
-              </LinkWithNetwork>
+              {nav.isExternal && <a href={nav.pathname}>{nav.label}</a>}
+              {!nav.isExternal && (
+                <LinkWithNetwork href={nav.pathname} rewrite={nav.rewrite} passHref>
+                  <a>{nav.label}</a>
+                </LinkWithNetwork>
+              )}
             </NavLi>
           ))}
         </NavUl>

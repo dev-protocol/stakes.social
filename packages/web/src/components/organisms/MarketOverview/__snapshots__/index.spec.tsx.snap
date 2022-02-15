@@ -38,10 +38,15 @@ exports[`MarketOverview Snapshot 1`] = `
                           class="ant-list-item-meta-title"
                         >
                           <a
-                            class="sc-bdvvtL cZnWxv"
-                            href="/ethereum/create/0x34A7AdC94C4D41C3e3469F98033B372cB2fAf318"
+                            href="https://niwa.xyz"
+                            rel="noreferrer"
+                            target="_blank"
                           >
-                            npm
+                            <a
+                              class="sc-bdvvtL cZnWxv"
+                            >
+                              npm
+                            </a>
                           </a>
                         </h4>
                         <div
