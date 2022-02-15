@@ -1227,10 +1227,10 @@
     js-base64 "^3.7.2"
     ramda "^0.27.0"
 
-"@devprotocol/dev-kit@6.0.4":
-  version "6.0.4"
-  resolved "https://registry.yarnpkg.com/@devprotocol/dev-kit/-/dev-kit-6.0.4.tgz#28a5f5c6ad95864fd64374b625898fcc715b0fd2"
-  integrity sha512-dmK1iFi5zRG4iL29Dw6w/qlYiiZdB3XjUE9r3UyoJeW6wRZSISvNqzt2lI2AnTDZCHYlx1/IYJTWiLz0+gf64Q==
+"@devprotocol/dev-kit@6.0.5":
+  version "6.0.5"
+  resolved "https://registry.yarnpkg.com/@devprotocol/dev-kit/-/dev-kit-6.0.5.tgz#e7b13487cf408b2aad0c8859ca101c560f7db545"
+  integrity sha512-oZonHxDgnmlUy7nLprAX3bQ2ROLioDm1i/fgySxG33wnNdqsgm0GjB05Kz3BDGnz3wgzDkPvGOVEPiK0m389Og==
   dependencies:
     "@devprotocol/util-ts" "^2.2.1"
     "@types/bent" "^7.3.1"
