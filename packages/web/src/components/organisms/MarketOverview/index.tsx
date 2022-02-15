@@ -98,9 +98,9 @@ const ContentsForAuthPage = ({ marketAddress }: { marketAddress: string }) => {
     <List.Item>
       <List.Item.Meta
         title={
-          <LinkWithNetwork href={'/create/[market]'} as={`/create/${marketAddress}`} passHref>
+          <a target="_blank" href="https://niwa.xyz" rel="noreferrer">
             <A>{data.name}</A>
-          </LinkWithNetwork>
+          </a>
         }
         description={data.description}
       ></List.Item.Meta>
