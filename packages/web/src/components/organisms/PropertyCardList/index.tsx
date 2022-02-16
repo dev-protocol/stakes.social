@@ -18,6 +18,7 @@ import {
 } from 'src/fixtures/dev-kit/hooks'
 import { reverse } from 'ramda'
 import { LinkWithNetwork } from 'src/components/atoms/LinkWithNetwork'
+import { BuyDevButton } from 'src/components/molecules/BuyButton'
 import { getDenyList } from 'src/config/utils'
 
 export type FeatureTag = '' | 'GitHub' | 'npm' | 'Creators'
@@ -123,16 +124,19 @@ const FeatureTags = ({ tag }: { tag: FeatureTag }) => {
   const tags = ['GitHub', 'npm', 'Creators']
 
   return (
-    <Wrap>
-      <Link href="/">
-        <a style={tag !== '' ? { color: '#c9c9c9' } : {}}>All Pools</a>
-      </Link>
-      {tags &&
-        tags.map((d: string) => (
-          <LinkWithNetwork href={`/?tag=${d}`} key={d}>
-            <a style={{ color: tag !== d ? '#c9c9c9' : '' }}>{d}</a>
-          </LinkWithNetwork>
-        ))}
+    <Wrap style={{ justifyContent: 'space-between' }}>
+      <Wrap>
+        <Link href="/">
+          <a style={tag !== '' ? { color: '#c9c9c9' } : {}}>All Pools</a>
+        </Link>
+        {tags &&
+          tags.map((d: string) => (
+            <LinkWithNetwork href={`/?tag=${d}`} key={d}>
+              <a style={{ color: tag !== d ? '#c9c9c9' : '' }}>{d}</a>
+            </LinkWithNetwork>
+          ))}
+      </Wrap>
+      <BuyDevButton />
     </Wrap>
   )
 }
