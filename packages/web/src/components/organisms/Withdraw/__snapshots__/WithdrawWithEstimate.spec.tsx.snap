@@ -241,7 +241,7 @@ exports[`WithdrawWithEstimate Snapshot 1`] = `
                   class="ant-input ant-input-lg"
                   id="withdraw"
                   type="number"
-                  value=""
+                  value="0"
                 />
                 <span
                   class="ant-input-suffix"
