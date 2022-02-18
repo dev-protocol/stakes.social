@@ -31,7 +31,7 @@ const SubtitleContianer = styled.div`
 `
 
 export const Withdraw = ({ className, title, propertyAddress, onChange: onChangeAmount }: Props) => {
-  const [withdrawAmount, setWithdrawAmount] = useState<string>('')
+  const [withdrawAmount, setWithdrawAmount] = useState<string>('0')
   const [selectedSTokenId, setSelectedSTokenId] = useState<number | undefined>(undefined)
   const { ethersProvider, accountAddress } = useProvider()
   const { withdrawStaking: legacyWithdrawStaking } = useWithdrawStaking()
@@ -55,6 +55,7 @@ export const Withdraw = ({ className, title, propertyAddress, onChange: onChange
   const onChange = (event: ChangeEvent<HTMLInputElement>) => {
     setWithdrawAmount(event.target.value)
   }
+  const onChangeRadio = (sTokenId?: number) => setSelectedSTokenId(sTokenId)
   const withdraw = useCallback(
     (sTokenId?: number) => {
       if (!ethersProvider) {
@@ -77,7 +78,7 @@ export const Withdraw = ({ className, title, propertyAddress, onChange: onChange
     if (onChangeAmount) {
       onChangeAmount(withdrawAmount, selectedSTokenId)
     }
-  }, [withdrawAmount, onChangeAmount])
+  }, [withdrawAmount, onChangeAmount, selectedSTokenId])
 
   const Label = useMemo(() => (title ? () => <label htmlFor="withdraw">{title}</label> : () => <></>), [title])
 
@@ -90,6 +91,7 @@ export const Withdraw = ({ className, title, propertyAddress, onChange: onChange
         enterButton="Withdraw"
         value={withdrawAmount}
         onChange={onChange}
+        onChangeRadio={onChangeRadio}
         withdraw={withdraw}
         disabled={!ethersProvider}
         onClickMax={onClickMax}
