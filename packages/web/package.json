@@ -97,7 +97,7 @@
     "babel-loader": "8.2.3",
     "babel-plugin-import": "1.13.3",
     "babel-plugin-styled-components": "2.0.3",
-    "electron": "17.0.1",
+    "electron": "17.1.0",
     "eslint-config-next": "12.1.0",
     "identity-obj-proxy": "3.0.0",
     "jest-canvas-mock": "2.3.1",
