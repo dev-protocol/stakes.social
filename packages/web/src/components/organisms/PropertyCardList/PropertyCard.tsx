@@ -15,6 +15,7 @@ import { useGetProperty, useGetAccount } from 'src/fixtures/dev-for-apps/hooks'
 import { Avatar } from 'src/components/molecules/Avatar'
 import BigNumber from 'bignumber.js'
 import { TransactModalContents } from 'src/components/molecules/TransactModalContents'
+import { MarketTag } from 'src/components/molecules/MarketTag'
 import { PropertyTreasuryIcon } from 'src/components/molecules/PropertyTreasuryIcon'
 import { ModalStates, ResponsiveModal } from 'src/components/atoms/ResponsiveModal'
 import { CoverImageOrGradient } from 'src/components/atoms/CoverImageOrGradient'
@@ -24,6 +25,7 @@ import { LinkWithNetwork } from 'src/components/atoms/LinkWithNetwork'
 interface Props {
   propertyAddress: string
   assets: (string | undefined)[]
+  market?: string
 }
 
 const Card = styled(Grid)`
@@ -166,7 +168,7 @@ const PlaceholderCoverImageOrGradient = styled.div`
   background-size: 80px;
 `
 
-export const PropertyCard = ({ propertyAddress, assets }: Props) => {
+export const PropertyCard = ({ propertyAddress, assets, market }: Props) => {
   const { accountAddress } = useProvider()
   const { isL1 } = useIsL1()
   const [modalStates, setModalStates] = useState<ModalStates>({ visible: false })
@@ -192,17 +194,24 @@ export const PropertyCard = ({ propertyAddress, assets }: Props) => {
   const closeModal = () => {
     setModalStates({ ...modalStates, visible: false })
   }
+
   return (
     <Card>
       {dataProperty?.cover_image?.url ? (
-        <CoverImageOrGradient src={dataProperty.cover_image.url} ratio={20} />
+        <CoverImageOrGradient src={dataProperty.cover_image.url} ratio={20} key={propertyAddress} />
       ) : (
-        <PlaceholderCoverImageOrGradient />
+        <PlaceholderCoverImageOrGradient key={propertyAddress} />
       )}
       <LinkWithNetwork href={'/[propertyAddress]'} as={`/${propertyAddress}`}>
         <CardContents>
-          <Title>{includeAssets || propertyName || 'Property'}</Title>
-          <PropertyTreasuryIcon name={includeAssets || propertyName || 'Property'} propertyAddress={propertyAddress} />
+          <Title>{propertyName || includeAssets || 'Property'}</Title>
+          <div>
+            <MarketTag market={market} />
+            <PropertyTreasuryIcon
+              name={includeAssets || propertyName || 'Property'}
+              propertyAddress={propertyAddress}
+            />
+          </div>
           <PropertyDescription>
             {dataProperty?.description ||
               'Stake DEV tokens to provide funding for OSS projects so that they can maintain development.'}

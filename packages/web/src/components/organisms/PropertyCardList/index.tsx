@@ -252,10 +252,18 @@ export const PropertyCardList = ({ currentPage, searchWord, sortBy, featureTag }
   )
 }
 
-export const PropertyByMarketWithAssetsL2 = ({ propertyAddress }: { propertyAddress: string }) => {
+export const PropertyByMarketWithAssetsL2 = ({
+  propertyAddress,
+  market
+}: {
+  propertyAddress: string
+  market: string
+}) => {
   const { data } = useGetAssetsByProperties(propertyAddress)
 
-  return <>{data ? <PropertyCard propertyAddress={propertyAddress} assets={data.map(d => d.id)} /> : ''}</>
+  return (
+    <>{data ? <PropertyCard propertyAddress={propertyAddress} assets={data.map(d => d.id)} market={market} /> : ''}</>
+  )
 }
 
 export const PropertyByMarketL2 = ({ market }: { market: string }) => {
@@ -270,7 +278,9 @@ export const PropertyByMarketL2 = ({ market }: { market: string }) => {
       {list
         ? list
             .filter((property: string) => !denyList?.includes(property))
-            .map((property, i) => <PropertyByMarketWithAssetsL2 key={i} propertyAddress={property as string} />)
+            .map((property, i) => (
+              <PropertyByMarketWithAssetsL2 key={i} propertyAddress={property as string} market={market} />
+            ))
         : ''}
     </>
   )
