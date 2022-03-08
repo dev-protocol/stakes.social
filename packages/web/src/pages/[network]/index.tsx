@@ -5,6 +5,7 @@ import { useRouter } from 'next/router'
 import { ControlChain } from 'src/components/organisms/ControlChain'
 import { useAPY, useAnnualSupplyGrowthRatio } from 'src/fixtures/dev-kit/hooks'
 import { SupplySummary } from 'src/components/molecules/SupplySummaly'
+import { NetworkTab } from 'src/components/molecules/NetworkTab'
 import { Header } from 'src/components/organisms/Header'
 import { FeatureTag } from 'src/components/organisms/PropertyCardList'
 import { Container } from 'src/components/atoms/Container'
@@ -62,6 +63,7 @@ const Index = (_: Props) => {
     <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
       <Header />
       <Container>
+        <NetworkTab />
         <StyledSupplySummary apy={apy} creators={creators} annualSupplyGrowthRatio={annualSupplyGrowthRatio} />
         {isL2 === undefined ? (
           <></>
