@@ -43,7 +43,6 @@ import { CoverImageOrGradient } from 'src/components/atoms/CoverImageOrGradient'
 import { H3 } from 'src/components/atoms/Typography'
 import { Twitter, Github } from 'src/components/atoms/SocialButtons'
 import { whenDefined } from 'src/fixtures/utility'
-import { LinkWithNetwork } from 'src/components/atoms/LinkWithNetwork'
 import { ControlChain } from 'src/components/organisms/ControlChain'
 import { isDenyProperty } from 'src/config/utils'
 
@@ -405,13 +404,13 @@ const PropertyAddressDetail = (_: Props) => {
               {includedAssetList?.map((asset: any, index: any) => (
                 <AssetListItem key={index}>{asset}</AssetListItem>
               ))}
-              {propertyInformation?.author?.address === loggedInWallet && (
-                <LinkWithNetwork href={'/create/[property]'} as={`/create/${propertyAddress}`}>
+              {propertyInformation?.author?.address === loggedInWallet && !isL1 && (
+                <a href={'https://niwa.xyz'}>
                   <AddAsset>
                     <PlusOutlined />
                     <span>Add asset</span>
                   </AddAsset>
-                </LinkWithNetwork>
+                </a>
               )}
             </AssetList>
           </AssetsSection>

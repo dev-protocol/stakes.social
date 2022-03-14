@@ -7,10 +7,10 @@ exports[`PropertyCardList Snapshot 1`] = `
       style="flex-grow: 1; max-width: 100vw;"
     >
       <div
-        class="sc-eJwWfJ dcNQfL"
+        class="sc-nVkyK IdHHh"
       >
         <h2
-          class="sc-jeraig doma-dC"
+          class="sc-eJwWfJ gRsJKj"
         >
           Asset Pools
         </h2>
@@ -52,7 +52,7 @@ exports[`PropertyCardList Snapshot 1`] = `
           </div>
         </div>
         <div
-          class="sc-ehCJOs dQpizj"
+          class="sc-lcepkR faXs"
         >
           <div
             style="flex-grow: 1;"
@@ -176,34 +176,45 @@ exports[`PropertyCardList Snapshot 1`] = `
         </div>
       </div>
       <div
-        class="sc-hiwPVj kAuIO"
+        class="sc-ehCJOs gElaWY"
+        style="justify-content: space-between;"
       >
-        <a
-          href="/"
+        <div
+          class="sc-ehCJOs gElaWY"
         >
-          All Pools
-        </a>
+          <a
+            href="/"
+          >
+            All Pools
+          </a>
+          <a
+            href="/ethereum?tag=GitHub"
+            style="color: rgb(201, 201, 201);"
+          >
+            GitHub
+          </a>
+          <a
+            href="/ethereum?tag=npm"
+            style="color: rgb(201, 201, 201);"
+          >
+            npm
+          </a>
+          <a
+            href="/ethereum?tag=Creators"
+            style="color: rgb(201, 201, 201);"
+          >
+            Creators
+          </a>
+        </div>
         <a
-          href="/ethereum?tag=GitHub"
-          style="color: rgb(201, 201, 201);"
+          class="sc-jeraig bMuYze"
+          target="_blank"
         >
-          GitHub
-        </a>
-        <a
-          href="/ethereum?tag=npm"
-          style="color: rgb(201, 201, 201);"
-        >
-          npm
-        </a>
-        <a
-          href="/ethereum?tag=Creators"
-          style="color: rgb(201, 201, 201);"
-        >
-          Creators
+          Buy DEV
         </a>
       </div>
       <div
-        class="sc-bYoBSM sc-nVkyK hwyVHY hhMrPy"
+        class="sc-bYoBSM sc-hiwPVj hwyVHY ehNuop"
       >
         <div
           class="sc-bYoBSM sc-kLwhqv hwyVHY fqkTNm"
@@ -353,7 +364,7 @@ exports[`PropertyCardList Snapshot 1`] = `
         </div>
       </div>
       <div
-        class="sc-lcepkR koSVeP"
+        class="sc-gGCDDS hFMndU"
       >
         <ul
           class="ant-pagination"
