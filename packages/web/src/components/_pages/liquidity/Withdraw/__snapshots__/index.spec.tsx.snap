@@ -60,10 +60,10 @@ exports[`Withdraw Snapshot 1`] = `
                   Your amount
                 </label>
                 <span
-                  class="ant-input-affix-wrapper ant-input-affix-wrapper-lg sc-gsDKAQ dSVFwg"
+                  class="ant-input-affix-wrapper sc-gsDKAQ dSVFwg ant-input-affix-wrapper-lg"
                 >
                   <input
-                    class="ant-input ant-input-lg"
+                    class="ant-input"
                     id="amount"
                     type="number"
                     value=""
@@ -112,7 +112,7 @@ exports[`Withdraw Snapshot 1`] = `
                   Rewards claimed
                 </label>
                 <input
-                  class="ant-input ant-input-lg ant-input-disabled sc-gsDKAQ dSVFwg"
+                  class="ant-input ant-input-disabled ant-input-lg sc-gsDKAQ dSVFwg"
                   disabled=""
                   id="estimated"
                   type="number"

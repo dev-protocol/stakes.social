@@ -226,7 +226,7 @@ exports[`Withdraw Snapshot 1`] = `
           </div>
         </div>
         <span
-          class="ant-input-group-wrapper ant-input-group-wrapper-lg ant-input-search ant-input-search-large ant-input-search-with-button sc-dkPtRN jgEzXX"
+          class="ant-input-group-wrapper ant-input-search ant-input-search-large ant-input-search-with-button sc-dkPtRN jgEzXX ant-input-group-wrapper-lg"
         >
           <span
             class="ant-input-wrapper ant-input-group"
@@ -235,7 +235,7 @@ exports[`Withdraw Snapshot 1`] = `
               class="ant-input-affix-wrapper ant-input-affix-wrapper-lg"
             >
               <input
-                class="ant-input ant-input-lg"
+                class="ant-input"
                 id="withdraw"
                 type="number"
                 value="0"
