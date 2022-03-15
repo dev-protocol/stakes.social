@@ -3,6 +3,9 @@ const withTM = require('next-transpile-modules')(['@amcharts/amcharts4', 'react-
 
 module.exports = withTM(
   withAntdLess({
+    compiler: {
+      styledComponents: true,
+    },
     lessVarsFilePath: './src/assets/antd-custom.less',
     lessVarsFilePathAppendToEndOfContent: true,
     cssLoaderOptions: {},
