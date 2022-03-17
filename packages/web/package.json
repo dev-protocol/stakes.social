@@ -81,7 +81,7 @@
   },
   "devDependencies": {
     "@swc/core": "1.2.156",
-    "@swc/jest": "^0.2.20",
+    "@swc/jest": "0.2.20",
     "@testing-library/react": "12.1.4",
     "@testing-library/react-hooks": "7.0.2",
     "@testing-library/user-event": "13.5.0",
