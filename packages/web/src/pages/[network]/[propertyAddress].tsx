@@ -15,6 +15,7 @@ import { Footer } from 'src/components/organisms/Footer'
 import { ModalStates, ResponsiveModal } from 'src/components/atoms/ResponsiveModal'
 import { ButtonWithGradient } from 'src/components/atoms/ButtonWithGradient'
 import { Container } from 'src/components/atoms/Container'
+import { LinkWithNetwork } from 'src/components/atoms/LinkWithNetwork'
 import { Header } from 'src/components/organisms/Header'
 import PropertySupporters from 'src/components/organisms/PropertySupporters'
 import {
@@ -404,6 +405,14 @@ const PropertyAddressDetail = (_: Props) => {
               {includedAssetList?.map((asset: any, index: any) => (
                 <AssetListItem key={index}>{asset}</AssetListItem>
               ))}
+              {propertyInformation?.author?.address === loggedInWallet && isL1 && (
+                <LinkWithNetwork href={'/create/[property]'} as={`/create/${propertyAddress}`}>
+                  <AddAsset>
+                    <PlusOutlined />
+                    <span>Add asset</span>
+                  </AddAsset>
+                </LinkWithNetwork>
+              )}
               {propertyInformation?.author?.address === loggedInWallet && !isL1 && (
                 <a href={'https://niwa.xyz'}>
                   <AddAsset>

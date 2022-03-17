@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useRouter, NextRouter } from 'next/router'
 import { LinkWithNetwork } from 'src/components/atoms/LinkWithNetwork'
 import styled from 'styled-components'
-import { useConnectWallet, useDetectChain, useProvider } from 'src/fixtures/wallet/hooks'
+import { useIsL1, useConnectWallet, useDetectChain, useProvider } from 'src/fixtures/wallet/hooks'
 import { Button, Drawer, Popover } from 'antd'
 import StakesSocial from 'src/components/atoms/Svgs/svg/Stakes-social.svg'
 import { DisconnectOutlined, LinkOutlined, MoreOutlined } from '@ant-design/icons'
@@ -136,6 +136,51 @@ export const Navigations = [
   },
   {
     key: 'create',
+    label: 'Create',
+    pathname: '/create',
+    rewrite: true,
+    isExternal: false
+  },
+  {
+    key: 'dashboard',
+    label: 'Dashboard',
+    pathname: '/stats',
+    rewrite: false,
+    isExternal: false
+  },
+  {
+    key: 'portfolio',
+    label: 'Portfolio',
+    pathname: '/profile',
+    rewrite: true,
+    isExternal: false
+  },
+  {
+    key: 'grants',
+    label: 'Grants',
+    pathname: 'https://devprotocol.notion.site/Welcome-to-DEV-DAPP-STARTER-GRANTS-5cb95252f18540258111581ea54d8808',
+    rewrite: false,
+    isExternal: false
+  }
+]
+
+export const L2Navigations = [
+  {
+    key: 'pools',
+    label: 'Pools',
+    pathname: '/',
+    rewrite: true,
+    isExternal: false
+  },
+  {
+    key: 'liquidity',
+    label: 'Liquidity',
+    pathname: '/liquidity/v2',
+    rewrite: true,
+    isExternal: false
+  },
+  {
+    key: 'create',
     label: 'Create on Niwa',
     pathname: 'https://niwa.xyz',
     rewrite: true,
@@ -187,6 +232,7 @@ const createSwitchNetwork =
 
 export const Navigation = () => {
   const router = useRouter()
+  const { isL1 } = useIsL1()
   const [open, setOpen] = useState(false)
   const { isConnected, connect, isConnecting } = useConnectWallet()
   const { accountAddress, ethersProvider } = useProvider()
@@ -256,16 +302,27 @@ export const Navigation = () => {
           </Button>
         </NavOpenedWallet>
         <NavUl>
-          {Navigations.map(nav => (
-            <NavLi key={nav.key} style={{ margin: '0' }}>
-              {nav.isExternal && <a href={nav.pathname}>{nav.label}</a>}
-              {!nav.isExternal && (
-                <LinkWithNetwork href={nav.pathname} rewrite={nav.rewrite} passHref>
-                  <a>{nav.label}</a>
-                </LinkWithNetwork>
-              )}
-            </NavLi>
-          ))}
+          {isL1
+            ? Navigations.map(nav => (
+                <NavLi key={nav.key} style={{ margin: '0' }}>
+                  {nav.isExternal && <a href={nav.pathname}>{nav.label}</a>}
+                  {!nav.isExternal && (
+                    <LinkWithNetwork href={nav.pathname} rewrite={nav.rewrite} passHref>
+                      <a>{nav.label}</a>
+                    </LinkWithNetwork>
+                  )}
+                </NavLi>
+              ))
+            : L2Navigations.map(nav => (
+                <NavLi key={nav.key} style={{ margin: '0' }}>
+                  {nav.isExternal && <a href={nav.pathname}>{nav.label}</a>}
+                  {!nav.isExternal && (
+                    <LinkWithNetwork href={nav.pathname} rewrite={nav.rewrite} passHref>
+                      <a>{nav.label}</a>
+                    </LinkWithNetwork>
+                  )}
+                </NavLi>
+              ))}
         </NavUl>
       </Drawer>
     </Nav>
