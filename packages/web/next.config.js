@@ -4,7 +4,7 @@ const withTM = require('next-transpile-modules')(['@amcharts/amcharts4', 'react-
 module.exports = withTM(
   withAntdLess({
     compiler: {
-      styledComponents: true,
+      styledComponents: true
     },
     lessVarsFilePath: './src/assets/antd-custom.less',
     lessVarsFilePathAppendToEndOfContent: true,
@@ -19,11 +19,12 @@ module.exports = withTM(
     async redirects() {
       return [
         {
-          source: '/:network(ethereum|ropsten|polygon|arbitrum-one|polygon-mumbai|arbitrum-rinkeby)/create/:address(0x.*)',
+          source:
+            '/:network(ethereum|ropsten|polygon|arbitrum-one|polygon-mumbai|arbitrum-rinkeby)/create/:address(0x.*)',
           destination: '/:network/create/github',
-          permanent: true,
-        },
+          permanent: true
+        }
       ]
-    },
+    }
   })
 )
