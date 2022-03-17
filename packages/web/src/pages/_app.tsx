@@ -17,6 +17,7 @@ import * as gtag from 'src/lib/gtag'
 import { Router } from 'next/router'
 import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client'
 import { providers } from 'ethers'
+import 'antd/dist/antd.css'
 
 const cache = new InMemoryCache()
 const client = new ApolloClient({

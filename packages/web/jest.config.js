@@ -1,5 +1,4 @@
 module.exports = {
-  preset: 'ts-jest/presets/js-with-babel',
   testEnvironment: 'jsdom',
   clearMocks: true,
   moduleNameMapper: {
@@ -14,6 +13,23 @@ module.exports = {
     }
   },
   transformIgnorePatterns: ['/node_modules/(?!react-markdown)/'],
+  transform: {
+    ".+\\.(t|j)sx?$": [
+      "@swc/jest",
+      {
+        sourceMaps: true,
+        module: {
+          type: "commonjs",
+        },
+        jsc: {
+          parser: {
+            syntax: "typescript",
+            tsx: true,
+          },
+        },
+      },
+    ],
+  },
   setupFiles: ['jest-canvas-mock'],
   setupFilesAfterEnv: ['./jest.setup.regenerator-runtime.js']
 }
