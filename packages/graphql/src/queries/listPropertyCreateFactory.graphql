@@ -1,4 +1,12 @@
-query ListProperty($limit: Int, $offset: Int, $ilike: String, $from: String, $market: String, $marketOther: [String!], $denyProperty: [String!]) {
+query ListProperty(
+  $limit: Int
+  $offset: Int
+  $ilike: String
+  $from: String
+  $market: String
+  $marketOther: [String!]
+  $denyProperty: [String!]
+) {
   property_factory_create(
     limit: $limit
     offset: $offset
