@@ -223,7 +223,7 @@ exports[`WithdrawTransactForm Snapshot 1`] = `
         </div>
       </div>
       <button
-        class="ant-btn ant-btn-lg sc-gsDKAQ sc-eCImPb ldRQYr cVmGpy"
+        class="ant-btn ant-btn-default ant-btn-lg sc-gsDKAQ sc-eCImPb ldRQYr cVmGpy"
         type="button"
       />
     </div>

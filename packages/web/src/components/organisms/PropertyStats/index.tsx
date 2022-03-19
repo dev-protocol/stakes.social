@@ -6,7 +6,7 @@ import {
   useGetMyStakingRewardAmount,
   useGetMyHolderAmount
 } from 'src/fixtures/dev-kit/hooks'
-import { Card, Statistic, Row } from 'antd'
+import { Card, Statistic } from 'antd'
 
 interface Props {
   className?: string
@@ -28,88 +28,69 @@ export const PropertyStats = ({ className, propertyAddress }: Props) => {
 
   return (
     <div className={className}>
-      <Row gutter={[24, 24]} justify={'start'}>
-        <Card>
-          <Statistic
-            title="Total Staking Amount"
-            value={totalStakingAmount ? totalStakingAmount.toNumber() : 'N/A'}
-            precision={2}
-            suffix={totalStakingAmountCurrency}
-            valueStyle={{ textAlign: 'right' }}
-          />
-        </Card>
-      </Row>
-      <Row gutter={[24, 24]} justify={'start'}>
-        <Card>
-          <Statistic
-            title="Total Rewards"
-            value={totalRewardsAmount && totalRewardsAmount.toNumber()}
-            precision={2}
-            suffix={totalRewardsAmountCurrency}
-            valueStyle={{ textAlign: 'right' }}
-          />
-        </Card>
-      </Row>
-
-      <Row gutter={[24, 24]} justify={'start'}>
-        <Card>
-          <Statistic
-            title="Lifetime Reward"
-            value={lifetimeReward ? lifetimeReward.toNumber() || 0 : 'N/A'}
-            precision={2}
-            suffix="DEV"
-            valueStyle={{ textAlign: 'right' }}
-          />
-        </Card>
-      </Row>
-
-      <Row gutter={[24, 24]} justify={'start'}>
-        <Card>
-          <Statistic
-            title="Receivable Amount"
-            value={withdrawableAmount ? withdrawableAmount.toNumber() || 0 : 'N/A'}
-            precision={2}
-            suffix="DEV"
-            valueStyle={{ textAlign: 'right' }}
-          />
-        </Card>
-      </Row>
-
-      <Row gutter={[24, 24]} justify={'start'}>
-        <Card>
-          <Statistic
-            title="Your Staking Share"
-            value={myStakingAmount && totalStakingAmount ? stakingShare || 0 : 'N/A'}
-            precision={2}
-            suffix="%"
-            valueStyle={{ textAlign: 'right' }}
-          />
-        </Card>
-      </Row>
-
-      <Row gutter={[24, 24]} justify={'start'}>
-        <Card>
-          <Statistic
-            title="Your Staking Amount"
-            value={myStakingAmount ? myStakingAmount.toNumber() : 'N/A'}
-            precision={2}
-            suffix={myStakingAmountCurrency}
-            valueStyle={{ textAlign: 'right' }}
-          />
-        </Card>
-      </Row>
-
-      <Row gutter={[24, 24]} justify={'start'}>
-        <Card>
-          <Statistic
-            title="Your Rewards"
-            value={myStakingRewardAmount && myStakingRewardAmount.toNumber()}
-            precision={2}
-            suffix={myStakingRewardAmountCurrency}
-            valueStyle={{ textAlign: 'right' }}
-          />
-        </Card>
-      </Row>
+      <Card>
+        <Statistic
+          title="Total Staking Amount"
+          value={totalStakingAmount ? totalStakingAmount.toNumber() : 'N/A'}
+          precision={2}
+          suffix={totalStakingAmountCurrency}
+          valueStyle={{ textAlign: 'right' }}
+        />
+      </Card>
+      <Card>
+        <Statistic
+          title="Total Rewards"
+          value={totalRewardsAmount && totalRewardsAmount.toNumber()}
+          precision={2}
+          suffix={totalRewardsAmountCurrency}
+          valueStyle={{ textAlign: 'right' }}
+        />
+      </Card>
+      <Card>
+        <Statistic
+          title="Lifetime Reward"
+          value={lifetimeReward ? lifetimeReward.toNumber() || 0 : 'N/A'}
+          precision={2}
+          suffix="DEV"
+          valueStyle={{ textAlign: 'right' }}
+        />
+      </Card>
+      <Card>
+        <Statistic
+          title="Receivable Amount"
+          value={withdrawableAmount ? withdrawableAmount.toNumber() || 0 : 'N/A'}
+          precision={2}
+          suffix="DEV"
+          valueStyle={{ textAlign: 'right' }}
+        />
+      </Card>
+      <Card>
+        <Statistic
+          title="Your Staking Share"
+          value={myStakingAmount && totalStakingAmount ? stakingShare || 0 : 'N/A'}
+          precision={2}
+          suffix="%"
+          valueStyle={{ textAlign: 'right' }}
+        />
+      </Card>
+      <Card>
+        <Statistic
+          title="Your Staking Amount"
+          value={myStakingAmount ? myStakingAmount.toNumber() : 'N/A'}
+          precision={2}
+          suffix={myStakingAmountCurrency}
+          valueStyle={{ textAlign: 'right' }}
+        />
+      </Card>
+      <Card>
+        <Statistic
+          title="Your Rewards"
+          value={myStakingRewardAmount && myStakingRewardAmount.toNumber()}
+          precision={2}
+          suffix={myStakingRewardAmountCurrency}
+          valueStyle={{ textAlign: 'right' }}
+        />
+      </Card>
     </div>
   )
 }

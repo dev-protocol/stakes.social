@@ -6,7 +6,7 @@ import { format } from 'date-fns'
 import { providers } from 'ethers'
 import { Avatar } from 'src/components/molecules/Avatar'
 import { getAccount } from 'src/fixtures/dev-for-apps/utility'
-import { useProvider } from 'src/fixtures/wallet/hooks'
+import { useDetectChain, useProvider } from 'src/fixtures/wallet/hooks'
 import { useDetectSTokens } from 'src/fixtures/dev-kit/hooks'
 import {
   getStokenPositions,
@@ -21,6 +21,7 @@ import { useImageDataUriFetcher } from 'src/fixtures/ipfs/hooks'
 import { STokensTableImage } from 'src/components/atoms/STokensTableImage'
 import { LinkWithNetwork } from 'src/components/atoms/LinkWithNetwork'
 import truncateEthAddress from 'truncate-eth-address'
+import { addresses } from '@devprotocol/dev-kit'
 
 const Actions = styled.div`
   display: flex;
@@ -82,6 +83,26 @@ const OfferPopover = () => {
   )
 }
 
+const Offer = ({ sTokenId }: { sTokenId: number }) => {
+  const { nonConnectedEthersProvider } = useProvider()
+  const { name } = useDetectChain(nonConnectedEthersProvider)
+
+  const tofuNFT =
+    name === 'arbitrum-one'
+      ? `https://tofunft.com/nft/arbi/${addresses.arbitrum.one.sTokens}/${sTokenId}`
+      : name === 'polygon'
+      ? `https://tofunft.com/nft/polygon/${addresses.polygon.mainnet.sTokens}/${sTokenId}`
+      : undefined
+
+  return tofuNFT ? (
+    <ButtonWithGradient href={tofuNFT} target="_blank">
+      Offer
+    </ButtonWithGradient>
+  ) : (
+    <OfferPopover />
+  )
+}
+
 const tableColumns = [
   {
     title: 'Rank',
@@ -140,7 +161,7 @@ const tableColumns = [
     key: 'action',
     render: ({ sTokenId }: { sTokenId: number }) => (
       <Actions>
-        <OfferPopover />
+        <Offer sTokenId={sTokenId} />
         <LinkWithNetwork href={`/positions/${sTokenId}`} passHref>
           <ButtonWithGradient>Positions</ButtonWithGradient>
         </LinkWithNetwork>

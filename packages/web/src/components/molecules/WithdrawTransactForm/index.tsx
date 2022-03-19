@@ -9,9 +9,10 @@ import { useDetectSTokens } from 'src/fixtures/dev-kit/hooks'
 import { useProvider } from 'src/fixtures/wallet/hooks'
 
 type Props = SearchProps &
-  React.RefAttributes<Input> & {
+  React.RefAttributes<typeof Input> & {
     withdraw: (sTokenId?: number) => void
     onClickMax?: (sTokenId?: number) => void
+    onChangeRadio?: (sTokenId?: number) => void
     propertyAddress: string
   }
 
@@ -81,6 +82,7 @@ export const WithdrawTransactForm = ({
   onChange,
   suffix: _suffix,
   onClickMax,
+  onChangeRadio,
   disabled,
   id,
   placeholder,
@@ -120,6 +122,7 @@ export const WithdrawTransactForm = ({
   )
 
   const handleChangeRadio = (event: RadioChangeEvent) => {
+    onChangeRadio && onChangeRadio(event.target.value)
     setRadioValue(event.target.value)
   }
 
