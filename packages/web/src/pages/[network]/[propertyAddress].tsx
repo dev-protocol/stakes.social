@@ -6,16 +6,16 @@ import Link from 'next/link'
 import styled from 'styled-components'
 import ReactMarkdown from 'react-markdown'
 import { PlusOutlined, LinkOutlined } from '@ant-design/icons'
-import { Button, Form, Input, Upload } from 'antd'
+import { Button, Form, Input, Upload, Tabs } from 'antd'
 import { UploadChangeParam, UploadFile } from 'antd/lib/upload/interface'
 import { FormInstance } from 'antd/lib/form'
-import { PossessionOutline } from 'src/components/organisms/PossessionOutline'
 import { PropertyHeader } from 'src/components/organisms/PropertyHeader'
 import { Footer } from 'src/components/organisms/Footer'
-import { ModalStates, ResponsiveModal } from 'src/components/atoms/ResponsiveModal'
+import { ResponsiveModal } from 'src/components/atoms/ResponsiveModal'
 import { ButtonWithGradient } from 'src/components/atoms/ButtonWithGradient'
 import { Container } from 'src/components/atoms/Container'
 import { Header } from 'src/components/organisms/Header'
+import { PropertyStats } from 'src/components/organisms/PropertyStats'
 import PropertySupporters from 'src/components/organisms/PropertySupporters'
 import {
   useAPY,
@@ -36,17 +36,21 @@ import {
 } from 'src/fixtures/dev-for-apps/hooks'
 import { Image, Property as DevForAppsProperty } from 'src/fixtures/dev-for-apps/utility'
 import { Stake } from 'src/components/organisms/Stake'
-import { Withdraw } from 'src/components/organisms/Withdraw'
 import { useIsL1, useProvider, useDetectChain } from 'src/fixtures/wallet/hooks'
 import { Avatar } from 'src/components/molecules/Avatar'
 import { CoverImageOrGradient } from 'src/components/atoms/CoverImageOrGradient'
 import { H3 } from 'src/components/atoms/Typography'
 import { Twitter, Github } from 'src/components/atoms/SocialButtons'
 import { whenDefined } from 'src/fixtures/utility'
-import { ControlChain } from 'src/components/organisms/ControlChain'
 import { isDenyProperty } from 'src/config/utils'
 
 type Props = {}
+
+interface ModalStates {
+  visible: boolean
+  title?: string
+  contents?: React.ReactNode
+}
 
 const apiDataToUploadFile = ({ hash: uid, url, name, size, mime: type }: Image): UploadFile => ({
   status: 'done',
@@ -57,6 +61,8 @@ const apiDataToUploadFile = ({ hash: uid, url, name, size, mime: type }: Image):
   type
 })
 
+const { TabPane } = Tabs
+
 const Main = styled(Container)`
   display: grid;
   grid-gap: 3rem;
@@ -66,15 +72,19 @@ const Main = styled(Container)`
   }
 `
 
-const Transact = styled.div`
+const TabsGrid = styled.div`
   display: grid;
   grid-gap: 1rem;
   @media (min-width: 1024px) {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 4fr 1fr;
     grid-gap: 3rem;
   }
 `
-const Possession = styled(PossessionOutline)``
+
+const Stats = styled(PropertyStats)`
+  display: grid;
+  grid-gap: 1rem;
+`
 
 const Wrap = styled.div`
   margin: 1rem auto;
@@ -92,6 +102,8 @@ const AssetsSection = styled.div`
 `
 const AssetList = styled.div`
   display: flex;
+  flex-direction: column;
+  float: left;
 `
 
 const AssetListItem = styled.div`
@@ -100,6 +112,7 @@ const AssetListItem = styled.div`
   border-radius: 6px;
   margin-right: 5px;
   box-shadow: 0 2px 3px -1px rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.06);
+  margin-bottom: 1rem;
 `
 
 const AddAsset = styled.button`
@@ -384,44 +397,58 @@ const PropertyAddressDetail = (_: Props) => {
         </Container>
         <Main>
           <RoundedCoverImageOrGradient src={dataProperty?.cover_image?.url} ratio={52.5} />
-          {<Possession propertyAddress={propertyAddress} />}
           {myStakingAmount?.isGreaterThan(0) && <Convert propertyAddress={propertyAddress} />}
-          <Transact>
-            {(loggedInWallet ? loggedInWallet !== authorAddress : true) && (
-              <Stake title="Stake" propertyAddress={propertyAddress} />
-            )}
-            {<Withdraw title="Withdraw" propertyAddress={propertyAddress} />}
-          </Transact>
-          <PropertyAbout
-            isAuthor={loggedInWallet === authorAddress}
-            dataProperty={dataProperty ? dataProperty : ({} as DevForAppsProperty)}
-            authorAddress={authorAddress || ''}
-            propertyAddress={propertyAddress}
-          />
-          <AssetsSection>
-            <h2>Included assets</h2>
-            <AssetList>
-              {includedAssetList?.map((asset: any, index: any) => (
-                <AssetListItem key={index}>{asset}</AssetListItem>
-              ))}
-              {propertyInformation?.author?.address === loggedInWallet && !isL1 && (
-                <a href={'https://niwa.xyz'}>
-                  <AddAsset>
-                    <PlusOutlined />
-                    <span>Add asset</span>
-                  </AddAsset>
-                </a>
-              )}
-            </AssetList>
-          </AssetsSection>
-          {<Author propertyAddress={propertyAddress} />}
-          <div>
-            <h2>Supporters of {propertyName}</h2>
-            <PropertySupporters propertyAddress={propertyAddress} />
-          </div>
+          <Tabs defaultActiveKey="1" type="card">
+            <TabPane tab="Overview" key="1">
+              <TabsGrid>
+                <div>
+                  <PropertyAbout
+                    isAuthor={loggedInWallet === authorAddress}
+                    dataProperty={dataProperty ? dataProperty : ({} as DevForAppsProperty)}
+                    authorAddress={authorAddress || ''}
+                    propertyAddress={propertyAddress}
+                  />
+                  <AssetsSection>
+                    <h2>Included assets</h2>
+                    <AssetList>
+                      {includedAssetList?.map((asset: any, index: any) => (
+                        <AssetListItem key={index}>{asset}</AssetListItem>
+                      ))}
+                      {propertyInformation?.author?.address === loggedInWallet && (
+                        <Link href={'/create/[property]'} as={`/create/${propertyAddress}`}>
+                          <AddAsset>
+                            <PlusOutlined />
+                            <span>Add asset</span>
+                          </AddAsset>
+                        </Link>
+                      )}
+                    </AssetList>
+                  </AssetsSection>
+                  {<Author propertyAddress={propertyAddress} />}
+                </div>
+                {<Stats propertyAddress={propertyAddress} />}
+              </TabsGrid>
+            </TabPane>
+            <TabPane tab="Stake" key="2">
+              <TabsGrid>
+                {(loggedInWallet ? loggedInWallet !== authorAddress : true) && (
+                  <Stake title="Stake" propertyAddress={propertyAddress} />
+                )}
+                {<Stats propertyAddress={propertyAddress} />}
+              </TabsGrid>
+            </TabPane>
+            <TabPane tab="Supporters" key="3">
+              <TabsGrid>
+                <div>
+                  <h2>Supporters of {propertyName}</h2>
+                  <PropertySupporters propertyAddress={propertyAddress} />
+                </div>
+                {<Stats propertyAddress={propertyAddress} />}
+              </TabsGrid>
+            </TabPane>
+          </Tabs>
         </Main>
       </Wrap>
-      <ControlChain />
 
       <Footer />
     </>

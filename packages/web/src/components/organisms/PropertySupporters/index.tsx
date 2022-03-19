@@ -20,6 +20,7 @@ import { ButtonWithGradient } from 'src/components/atoms/ButtonWithGradient'
 import { useImageDataUriFetcher } from 'src/fixtures/ipfs/hooks'
 import { STokensTableImage } from 'src/components/atoms/STokensTableImage'
 import { LinkWithNetwork } from 'src/components/atoms/LinkWithNetwork'
+import truncateEthAddress from 'truncate-eth-address'
 import { addresses } from '@devprotocol/dev-kit'
 
 const Actions = styled.div`
@@ -127,7 +128,7 @@ const tableColumns = [
           <Avatar accountAddress={address} size={'30'} />
           <span>{name}</span>
         </div>
-        <span>{address}</span>
+        <span>{truncateEthAddress(address)}</span>
       </>
     )
   },
