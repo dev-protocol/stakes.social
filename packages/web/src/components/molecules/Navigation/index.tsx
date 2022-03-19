@@ -37,6 +37,7 @@ const Logo = styled(StakesSocial)`
 `
 
 const LogoText = styled.span`
+  color: black;
   margin-left: 0.5em;
   font-size: 1.2rem;
   font-weight: bold;
@@ -195,7 +196,11 @@ export const Navigation = () => {
   return (
     <Nav>
       <NavContainer>
-        <StakesSocialLogo />
+        <LinkWithNetwork passHref href="/">
+          <a>
+            <StakesSocialLogo />
+          </a>
+        </LinkWithNetwork>
         <NavIcon onClick={() => setOpen(true)} />
       </NavContainer>
 
