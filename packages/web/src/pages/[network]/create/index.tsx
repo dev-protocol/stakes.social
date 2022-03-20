@@ -54,9 +54,9 @@ export const CreateOrAuthenticateProperty = (_: Props) => {
           flexGrow: 1
         }}
       >
-        <LinkWithNetwork href={'/invite/github'} passHref>
+        <LinkWithNetwork href={'/create/github'} passHref>
           <SubmitApplicationContainer>
-            <h3>Submit an application</h3>
+            <h3>GitHub</h3>
             <Span>Provide Sustainable funding to your</Span>
             <Span>OSS project with Dev Protocol.</Span>
           </SubmitApplicationContainer>
