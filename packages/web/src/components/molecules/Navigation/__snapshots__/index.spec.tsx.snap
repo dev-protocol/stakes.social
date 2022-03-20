@@ -9,20 +9,24 @@ exports[`Navigation Snapshot 1`] = `
       <div
         class="sc-bdvvtL sc-dkPtRN dGQTf kRUKIu"
       >
-        <div
-          class="sc-gKclnd sc-hBUSln fAyBB TXyBl"
+        <a
+          href="/ethereum"
         >
-          <svgrurl
-            class="sc-eCImPb bcDGrW"
-            height="1.2rem"
-            id="headerlogo"
-          />
-          <span
-            class="sc-jRQBWg fpIyFp"
+          <div
+            class="sc-gKclnd sc-hBUSln fAyBB TXyBl"
           >
-            Stakes.social
-          </span>
-        </div>
+            <svgrurl
+              class="sc-eCImPb bcDGrW"
+              height="1.2rem"
+              id="headerlogo"
+            />
+            <span
+              class="sc-jRQBWg dtIyUY"
+            >
+              Stakes.social
+            </span>
+          </div>
+        </a>
         <span
           aria-label="more"
           class="anticon anticon-more sc-hKwDye jtVoEC"
