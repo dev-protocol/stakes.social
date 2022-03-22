@@ -14,6 +14,7 @@ import { Footer } from 'src/components/organisms/Footer'
 import { ResponsiveModal } from 'src/components/atoms/ResponsiveModal'
 import { ButtonWithGradient } from 'src/components/atoms/ButtonWithGradient'
 import { Container } from 'src/components/atoms/Container'
+import { LinkWithNetwork } from 'src/components/atoms/LinkWithNetwork'
 import { Header } from 'src/components/organisms/Header'
 import { PropertyStats } from 'src/components/organisms/PropertyStats'
 import PropertySupporters from 'src/components/organisms/PropertySupporters'
@@ -25,7 +26,6 @@ import {
   usePropertyName
 } from 'src/fixtures/dev-kit/hooks'
 import { useGetPropertyAuthenticationQuery } from '@dev/graphql'
-import { useGetPropertytInformation } from 'src/fixtures/devprtcl/hooks'
 import {
   useGetAccount,
   useGetProperty,
@@ -372,7 +372,6 @@ const PropertyAddressDetail = (_: Props) => {
   const { apy, creators } = useAPY()
   const { data } = useGetPropertyAuthenticationQuery({ variables: { propertyAddress }, skip: !isL1 })
   const { data: dataProperty } = useGetProperty(propertyAddress)
-  const { data: propertyInformation } = useGetPropertytInformation(isL1 ? propertyAddress : undefined)
   /* eslint-disable react-hooks/exhaustive-deps */
   // FYI: https://github.com/facebook/react/pull/19062
   const { data: includedAssetListL2 } = useGetAssetsByProperties(propertyAddress)
@@ -414,13 +413,21 @@ const PropertyAddressDetail = (_: Props) => {
                       {includedAssetList?.map((asset: any, index: any) => (
                         <AssetListItem key={index}>{asset}</AssetListItem>
                       ))}
-                      {propertyInformation?.author?.address === loggedInWallet && (
-                        <Link href={'/create/[property]'} as={`/create/${propertyAddress}`}>
+                      {authorAddress === loggedInWallet && isL1 && (
+                        <LinkWithNetwork href={'/create/[property]'} as={`/create/${propertyAddress}`}>
                           <AddAsset>
                             <PlusOutlined />
                             <span>Add asset</span>
                           </AddAsset>
-                        </Link>
+                        </LinkWithNetwork>
+                      )}
+                      {authorAddress === loggedInWallet && !isL1 && (
+                        <a href={'https://niwa.xyz'}>
+                          <AddAsset>
+                            <PlusOutlined />
+                            <span>Add asset</span>
+                          </AddAsset>
+                        </a>
                       )}
                     </AssetList>
                   </AssetsSection>

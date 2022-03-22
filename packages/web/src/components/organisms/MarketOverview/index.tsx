@@ -92,15 +92,23 @@ export const MarketsOverview = () => {
   )
 }
 
+import { useIsL1 } from 'src/fixtures/wallet/hooks'
 const ContentsForAuthPage = ({ marketAddress }: { marketAddress: string }) => {
+  const { isL1 } = useIsL1()
   const { data } = useGetMarketInformation(marketAddress)
   return data ? (
     <List.Item>
       <List.Item.Meta
         title={
-          <a target="_blank" href="https://niwa.xyz" rel="noreferrer">
-            <A>{data.name}</A>
-          </a>
+          isL1 ? (
+            <LinkWithNetwork href={'/create/[market]'} as={`/create/${marketAddress}`} passHref>
+              <A>{data.name}</A>
+            </LinkWithNetwork>
+          ) : (
+            <a target="_blank" href="https://niwa.xyz" rel="noreferrer">
+              <A>{data.name}</A>
+            </a>
+          )
         }
         description={data.description}
       ></List.Item.Meta>
