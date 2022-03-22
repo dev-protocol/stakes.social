@@ -282,7 +282,7 @@ exports[`TransactModalContents Snapshot 1`] = `
             class="ant-input-affix-wrapper sc-dkPtRN kCszbf ant-input-affix-wrapper-lg"
           >
             <input
-              class="ant-input"
+              class="ant-input ant-input-lg"
               id="stake"
               type="number"
               value=""
