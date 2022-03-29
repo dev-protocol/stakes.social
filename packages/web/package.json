@@ -95,7 +95,7 @@
     "@types/tinycolor2": "1.4.3",
     "@types/ua-parser-js": "0.7.36",
     "@zeit/next-css": "1.0.1",
-    "electron": "17.3.0",
+    "electron": "18.0.0",
     "eslint-config-next": "12.1.2",
     "identity-obj-proxy": "3.0.0",
     "jest-canvas-mock": "2.3.1",
