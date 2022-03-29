@@ -4,17 +4,17 @@ exports[`AuthForm Snapshot 1`] = `
 <body>
   <div>
     <div
-      class="sc-eCImPb hOeXCi"
+      class="sc-eCYdqJ beRYjk"
     >
       <form
         class="ant-form ant-form-horizontal"
         id="basic"
       >
         <div
-          class="sc-jRQBWg ffKtpf"
+          class="sc-jSMfEi faLTwA"
         >
           <div
-            class="sc-gKclnd evpXwD"
+            class="sc-gKXOVf ciFTwz"
           >
             Project:
           </div>
@@ -41,10 +41,10 @@ exports[`AuthForm Snapshot 1`] = `
           </div>
         </div>
         <div
-          class="sc-jRQBWg ffKtpf"
+          class="sc-jSMfEi faLTwA"
         >
           <div
-            class="sc-gKclnd evpXwD"
+            class="sc-gKXOVf ciFTwz"
           >
             Project name:
           </div>
@@ -61,7 +61,7 @@ exports[`AuthForm Snapshot 1`] = `
                   class="ant-form-item-control-input-content"
                 >
                   <div
-                    class="ant-row ant-form-item sc-bdvvtL kPCGkR"
+                    class="ant-row ant-form-item sc-bczRLJ ePjWna"
                   >
                     <div
                       class="ant-col ant-form-item-control"
@@ -73,7 +73,7 @@ exports[`AuthForm Snapshot 1`] = `
                           class="ant-form-item-control-input-content"
                         >
                           <div
-                            class="sc-gsDKAQ bHMKjG"
+                            class="sc-gsnTZi jdUTdy"
                           >
                             <span
                               aria-label="deployment-unit"
@@ -97,7 +97,7 @@ exports[`AuthForm Snapshot 1`] = `
                             </span>
                           </div>
                           <input
-                            class="sc-hKwDye bghYKm"
+                            class="sc-hKMtZM cHYJSn"
                             id="basic_projectName"
                             placeholder="OSS Project name"
                             value=""
@@ -112,10 +112,10 @@ exports[`AuthForm Snapshot 1`] = `
           </div>
         </div>
         <div
-          class="sc-jRQBWg ffKtpf"
+          class="sc-jSMfEi faLTwA"
         >
           <div
-            class="sc-gKclnd evpXwD"
+            class="sc-gKXOVf ciFTwz"
           >
             Personal Access Token:
           </div>
@@ -132,7 +132,7 @@ exports[`AuthForm Snapshot 1`] = `
                   class="ant-form-item-control-input-content"
                 >
                   <div
-                    class="ant-row ant-form-item sc-bdvvtL kPCGkR"
+                    class="ant-row ant-form-item sc-bczRLJ ePjWna"
                   >
                     <div
                       class="ant-col ant-form-item-control"
@@ -144,7 +144,7 @@ exports[`AuthForm Snapshot 1`] = `
                           class="ant-form-item-control-input-content"
                         >
                           <div
-                            class="sc-gsDKAQ bHMKjG"
+                            class="sc-gsnTZi jdUTdy"
                           >
                             <span
                               aria-label="code"
@@ -168,7 +168,7 @@ exports[`AuthForm Snapshot 1`] = `
                             </span>
                           </div>
                           <input
-                            class="sc-hKwDye bghYKm"
+                            class="sc-hKMtZM cHYJSn"
                             id="basic_personalAccessToken"
                             placeholder="Personal Access Token"
                             value=""
@@ -189,7 +189,7 @@ exports[`AuthForm Snapshot 1`] = `
             style="display: flex; align-items: center; align-self: flex-end;"
           >
             <div
-              class="sc-pVTFL eIuwjz"
+              class="sc-papXJ CkBRu"
             >
               <span
                 aria-label="info-circle"
@@ -251,16 +251,16 @@ exports[`AuthForm Snapshot 1`] = `
           </div>
         </div>
         <div
-          class="sc-jRQBWg ffKtpf"
+          class="sc-jSMfEi faLTwA"
         >
           <div
             style="display: flex; grid-column: 1/-1; justify-content: flex-end;"
           >
             <div
-              class="sc-iCfMLu kA-DLBd"
+              class="sc-iBkjds lhZDOC"
             >
               <button
-                class="sc-furwcr dWvzTC"
+                class="sc-ftvSup gUmmfF"
                 type="submit"
               >
                 Authenticate

@@ -4,10 +4,10 @@ exports[`WithdrawalForHolders Snapshot 1`] = `
 <body>
   <div>
     <div
-      class="sc-gKclnd gwKHOb"
+      class="sc-gKXOVf kamcTX"
     >
       <div
-        class="sc-hKwDye gWsDYA"
+        class="sc-hKMtZM diXjJP"
         style="opacity: 1;"
       >
         <div
@@ -226,7 +226,7 @@ exports[`WithdrawalForHolders Snapshot 1`] = `
           </div>
         </div>
         <button
-          class="ant-btn ant-btn-default ant-btn-lg sc-gsDKAQ sc-eCImPb ldRQYr cVmGpy"
+          class="ant-btn ant-btn-default ant-btn-lg sc-gsnTZi sc-eCYdqJ joFPrL kjDXTE"
           type="button"
         >
           <span>
@@ -235,7 +235,7 @@ exports[`WithdrawalForHolders Snapshot 1`] = `
         </button>
       </div>
       <div
-        class="ant-card ant-card-bordered sc-iCfMLu dhFxMM"
+        class="ant-card ant-card-bordered sc-iBkjds bXUGQL"
       >
         <div
           class="ant-card-head"

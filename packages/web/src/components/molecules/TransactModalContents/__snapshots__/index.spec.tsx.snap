@@ -4,35 +4,35 @@ exports[`TransactModalContents Snapshot 1`] = `
 <body>
   <div>
     <div
-      class="sc-dJjYzT dgosBC"
+      class="sc-dIouRR fJeDvg"
     >
       <div
-        class="sc-hGPBjI ftvIut"
+        class="sc-hHLeRK broavh"
       >
         <div
-          class="sc-bqiRlB efrysm"
+          class="sc-breuTD crrzza"
         >
           <div
-            class="sc-ksdxgE fRLOSX"
+            class="sc-ksZaOG gEDzIs"
             size="60"
           />
         </div>
         <h4
-          class="sc-bkkeKt sc-kfPuZi hjVgaQ fqgYZg"
+          class="sc-bjUoiL sc-kgflAQ cErgSZ lfhcOj"
         >
           0x0-name
         </h4>
         <span
-          class="sc-fKVqWL khTKhP"
+          class="sc-fLlhyt flYjqr"
         >
           0x0
         </span>
       </div>
       <div
-        class="sc-bdvvtL frQklk"
+        class="sc-bczRLJ btTbMP"
       >
         <div
-          class="sc-gKclnd fAyBB"
+          class="sc-gKXOVf jKtCnV"
           style="opacity: 0.3;"
         >
           <div
@@ -279,7 +279,7 @@ exports[`TransactModalContents Snapshot 1`] = `
             </div>
           </div>
           <span
-            class="ant-input-affix-wrapper sc-dkPtRN kCszbf ant-input-affix-wrapper-lg"
+            class="ant-input-affix-wrapper sc-dkzDqf csXUog ant-input-affix-wrapper-lg"
           >
             <input
               class="ant-input ant-input-lg"
@@ -291,14 +291,14 @@ exports[`TransactModalContents Snapshot 1`] = `
               class="ant-input-suffix"
             >
               <button
-                class="sc-gsDKAQ kExfsU"
+                class="sc-gsnTZi dKgJEo"
               >
                 DEV
               </button>
             </span>
           </span>
           <div
-            class="sc-eCImPb UUa-dQ"
+            class="sc-eCYdqJ hHvxeW"
           >
             <div
               class="ant-row"
@@ -307,7 +307,7 @@ exports[`TransactModalContents Snapshot 1`] = `
                 class="ant-col ant-col-11"
               >
                 <button
-                  class="ant-btn ant-btn-primary sc-hKwDye jTvuMH"
+                  class="ant-btn ant-btn-primary sc-hKMtZM hXdGnA"
                   disabled=""
                   type="button"
                 >
@@ -317,7 +317,7 @@ exports[`TransactModalContents Snapshot 1`] = `
                 </button>
               </div>
               <div
-                class="ant-col ant-col-2 sc-jRQBWg gyNKvI"
+                class="ant-col ant-col-2 sc-jSMfEi cLyVzH"
               >
                 →
               </div>
@@ -325,7 +325,7 @@ exports[`TransactModalContents Snapshot 1`] = `
                 class="ant-col ant-col-11"
               >
                 <button
-                  class="ant-btn ant-btn-primary sc-hKwDye jTvuMH"
+                  class="ant-btn ant-btn-primary sc-hKMtZM hXdGnA"
                   disabled=""
                   type="button"
                 >

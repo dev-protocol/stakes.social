@@ -4,13 +4,13 @@ exports[`WithdrawWithEstimate Snapshot 1`] = `
 <body>
   <div>
     <div
-      class="sc-bdvvtL frQklk"
+      class="sc-bczRLJ btTbMP"
     >
       <div
-        class="sc-bdvvtL frQklk"
+        class="sc-bczRLJ btTbMP"
       >
         <div
-          class="sc-jRQBWg iUDFj"
+          class="sc-jSMfEi iRGGig"
           style="opacity: 1;"
         >
           <div
@@ -229,7 +229,7 @@ exports[`WithdrawWithEstimate Snapshot 1`] = `
             </div>
           </div>
           <span
-            class="ant-input-group-wrapper ant-input-search ant-input-search-large ant-input-search-with-button sc-eCImPb dSjlMk ant-input-group-wrapper-lg"
+            class="ant-input-group-wrapper ant-input-search ant-input-search-large ant-input-search-with-button sc-eCYdqJ cXzHUC ant-input-group-wrapper-lg"
           >
             <span
               class="ant-input-wrapper ant-input-group"
@@ -247,7 +247,7 @@ exports[`WithdrawWithEstimate Snapshot 1`] = `
                   class="ant-input-suffix"
                 >
                   <button
-                    class="sc-dkPtRN gdjbcI"
+                    class="sc-dkzDqf jZhmHz"
                   >
                     DEV
                   </button>
@@ -269,10 +269,10 @@ exports[`WithdrawWithEstimate Snapshot 1`] = `
           </span>
         </div>
         <div
-          class="sc-pVTFL cpArEj"
+          class="sc-papXJ iGAkiC"
         >
           <div
-            class="sc-furwcr eKxoLU"
+            class="sc-ftvSup fSyCBL"
           >
             <span
               aria-label="info-circle"
@@ -305,7 +305,7 @@ exports[`WithdrawWithEstimate Snapshot 1`] = `
         </div>
       </div>
       <div
-        class="ant-card ant-card-bordered sc-gsDKAQ kwKSAv"
+        class="ant-card ant-card-bordered sc-gsnTZi erjiZr"
       >
         <div
           class="ant-card-head"

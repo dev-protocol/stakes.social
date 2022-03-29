@@ -4,18 +4,18 @@ exports[`PropertyHeader Snapshot 1`] = `
 <body>
   <div>
     <div
-      class="sc-hKwDye hPWqws"
+      class="sc-hKMtZM EciNH"
     >
       <div
-        class="sc-jrQzAO jvAqrf"
+        class="sc-jqUVSM kXiHTq"
       >
         <h1
-          class="sc-eCImPb kNcJWM"
+          class="sc-eCYdqJ iXLkOG"
         >
           propertyAddress-name Pool
         </h1>
         <div
-          class="sc-crHmcD hVJWDK"
+          class="sc-crXcEl bjonOU"
         >
           <p>
             <a
@@ -28,10 +28,10 @@ exports[`PropertyHeader Snapshot 1`] = `
             </a>
           </p>
           <div
-            class="sc-kDTinF jxzTvV"
+            class="sc-kDDrLX gIUGjE"
           >
             <div
-              class="sc-iqseJM dNMBEl"
+              class="sc-iqcoie jemGqe"
             >
               <span
                 aria-label="copy"
@@ -62,7 +62,7 @@ exports[`PropertyHeader Snapshot 1`] = `
         </div>
       </div>
       <p
-        class="sc-dkPtRN OyKaL btn-tweet"
+        class="sc-dkzDqf ljGPjo btn-tweet"
       >
         <a
           class="twitter-share-button"
@@ -76,65 +76,65 @@ exports[`PropertyHeader Snapshot 1`] = `
         </a>
       </p>
       <div
-        class="sc-jRQBWg kEnsfn"
+        class="sc-jSMfEi bOqhyI"
       >
         <div
-          class="sc-furwcr eIYcYr"
+          class="sc-ftvSup hFifYs"
         >
           <div
-            class="sc-iCfMLu fEEKua"
+            class="sc-iBkjds eoKCDp"
           >
             <span
-              class="sc-gsDKAQ eTZcOI"
+              class="sc-gsnTZi cUtPro"
             >
               N/A
               %
             </span>
             <div
-              class="sc-gKclnd lbnRHf"
+              class="sc-gKXOVf iOYXCT"
             />
             <span>
               APY Stakers
             </span>
           </div>
           <div
-            class="sc-gKclnd lbnRHf"
+            class="sc-gKXOVf iOYXCT"
           >
             |
           </div>
           <div
-            class="sc-iCfMLu fEEKua"
+            class="sc-iBkjds eoKCDp"
           >
             <span
-              class="sc-gsDKAQ eTZcOI"
+              class="sc-gsnTZi cUtPro"
             >
                
               N/A
               %
             </span>
             <div
-              class="sc-gKclnd lbnRHf"
+              class="sc-gKXOVf iOYXCT"
             />
             <span>
               APY Creators
             </span>
           </div>
           <div
-            class="sc-gKclnd lbnRHf"
+            class="sc-gKXOVf iOYXCT"
           >
             |
           </div>
           <div
-            class="sc-iCfMLu fEEKua"
+            class="sc-iBkjds eoKCDp"
           >
             <span
-              class="sc-gsDKAQ eTZcOI"
+              class="sc-gsnTZi cUtPro"
             >
                
               40,124
             </span>
             <div
-              class="sc-gKclnd lbnRHf"
+              class="sc-gKXOVf iOYXCT"
             />
             <span>
               Karma
@@ -142,10 +142,10 @@ exports[`PropertyHeader Snapshot 1`] = `
           </div>
         </div>
         <div
-          class="sc-pVTFL cFxZFx"
+          class="sc-papXJ jENizk"
         >
           <a
-            class="sc-bdvvtL iCPeoC"
+            class="sc-bczRLJ dsROut"
             target="_blank"
           >
             Buy DEV

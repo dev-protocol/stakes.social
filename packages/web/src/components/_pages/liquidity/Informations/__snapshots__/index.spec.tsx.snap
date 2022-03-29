@@ -4,15 +4,15 @@ exports[`Informations Snapshot 1`] = `
 <body>
   <div>
     <div
-      class="sc-jRQBWg jvcUAg"
+      class="sc-jSMfEi dUzjKn"
     >
       Information
     </div>
     <div
-      class="sc-bdvvtL birinC"
+      class="sc-bczRLJ cUgDDd"
     >
       <div
-        class="ant-card ant-card-bordered sc-gsDKAQ sc-dkPtRN dJtSgW iPDFlP"
+        class="ant-card ant-card-bordered sc-gsnTZi sc-dkzDqf cYSTXu dxcWWI"
       >
         <div
           class="ant-card-body"
@@ -49,7 +49,7 @@ exports[`Informations Snapshot 1`] = `
         </div>
       </div>
       <div
-        class="ant-card ant-card-bordered sc-gsDKAQ sc-hKwDye dJtSgW bjGuob"
+        class="ant-card ant-card-bordered sc-gsnTZi sc-hKMtZM cYSTXu kyWkhs"
       >
         <div
           class="ant-card-body"
@@ -90,7 +90,7 @@ exports[`Informations Snapshot 1`] = `
         </div>
       </div>
       <div
-        class="ant-card ant-card-bordered sc-gsDKAQ sc-eCImPb dJtSgW ezcUUs"
+        class="ant-card ant-card-bordered sc-gsnTZi sc-eCYdqJ cYSTXu ftxWm"
       >
         <div
           class="ant-card-body"

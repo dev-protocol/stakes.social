@@ -4,7 +4,7 @@ exports[`WithdrawTransactForm Snapshot 1`] = `
 <body>
   <div>
     <div
-      class="sc-hKwDye gWsDYA"
+      class="sc-hKMtZM diXjJP"
       style="opacity: 1;"
     >
       <div
@@ -223,7 +223,7 @@ exports[`WithdrawTransactForm Snapshot 1`] = `
         </div>
       </div>
       <button
-        class="ant-btn ant-btn-default ant-btn-lg sc-gsDKAQ sc-eCImPb ldRQYr cVmGpy"
+        class="ant-btn ant-btn-default ant-btn-lg sc-gsnTZi sc-eCYdqJ joFPrL kjDXTE"
         type="button"
       />
     </div>

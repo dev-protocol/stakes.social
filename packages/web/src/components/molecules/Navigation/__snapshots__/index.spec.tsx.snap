@@ -4,24 +4,24 @@ exports[`Navigation Snapshot 1`] = `
 <body>
   <div>
     <nav
-      class="sc-gsDKAQ"
+      class="sc-gsnTZi"
     >
       <div
-        class="sc-bdvvtL sc-dkPtRN dGQTf kRUKIu"
+        class="sc-bczRLJ sc-dkzDqf kokPlY bnerqB"
       >
         <a
           href="/ethereum"
         >
           <div
-            class="sc-gKclnd sc-hBUSln fAyBB TXyBl"
+            class="sc-gKXOVf sc-hAZoDl jKtCnV kuIfBV"
           >
             <svgrurl
-              class="sc-eCImPb bcDGrW"
+              class="sc-eCYdqJ gVfTro"
               height="1.2rem"
               id="headerlogo"
             />
             <span
-              class="sc-jRQBWg dtIyUY"
+              class="sc-jSMfEi cqDZpT"
             >
               Stakes.social
             </span>
@@ -29,7 +29,7 @@ exports[`Navigation Snapshot 1`] = `
         </a>
         <span
           aria-label="more"
-          class="anticon anticon-more sc-hKwDye jtVoEC"
+          class="anticon anticon-more sc-hKMtZM htwRFx"
           role="img"
           tabindex="-1"
         >

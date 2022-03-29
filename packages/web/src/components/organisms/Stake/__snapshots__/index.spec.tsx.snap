@@ -4,10 +4,10 @@ exports[`Stake Snapshot 1`] = `
 <body>
   <div>
     <div
-      class="sc-bdvvtL frQklk"
+      class="sc-bczRLJ btTbMP"
     >
       <div
-        class="sc-gKclnd fAyBB"
+        class="sc-gKXOVf jKtCnV"
         style="opacity: 1;"
       >
         <div
@@ -254,7 +254,7 @@ exports[`Stake Snapshot 1`] = `
           </div>
         </div>
         <span
-          class="ant-input-affix-wrapper sc-dkPtRN kCszbf ant-input-affix-wrapper-lg"
+          class="ant-input-affix-wrapper sc-dkzDqf csXUog ant-input-affix-wrapper-lg"
         >
           <input
             class="ant-input ant-input-lg"
@@ -266,14 +266,14 @@ exports[`Stake Snapshot 1`] = `
             class="ant-input-suffix"
           >
             <button
-              class="sc-gsDKAQ kExfsU"
+              class="sc-gsnTZi dKgJEo"
             >
               DEV
             </button>
           </span>
         </span>
         <div
-          class="sc-eCImPb UUa-dQ"
+          class="sc-eCYdqJ hHvxeW"
         >
           <div
             class="ant-row"
@@ -282,7 +282,7 @@ exports[`Stake Snapshot 1`] = `
               class="ant-col ant-col-11"
             >
               <button
-                class="ant-btn ant-btn-primary sc-hKwDye jTvuMH"
+                class="ant-btn ant-btn-primary sc-hKMtZM hXdGnA"
                 type="button"
               >
                 <span>
@@ -291,7 +291,7 @@ exports[`Stake Snapshot 1`] = `
               </button>
             </div>
             <div
-              class="ant-col ant-col-2 sc-jRQBWg gyNKvI"
+              class="ant-col ant-col-2 sc-jSMfEi cLyVzH"
             >
               →
             </div>
@@ -299,7 +299,7 @@ exports[`Stake Snapshot 1`] = `
               class="ant-col ant-col-11"
             >
               <button
-                class="ant-btn ant-btn-primary sc-hKwDye jTvuMH"
+                class="ant-btn ant-btn-primary sc-hKMtZM hXdGnA"
                 disabled=""
                 type="button"
               >
@@ -323,7 +323,7 @@ exports[`Stake Snapshot with title 1`] = `
 <body>
   <div>
     <div
-      class="sc-bdvvtL frQklk"
+      class="sc-bczRLJ btTbMP"
     >
       <label
         for="stake"
@@ -331,7 +331,7 @@ exports[`Stake Snapshot with title 1`] = `
         Stake
       </label>
       <div
-        class="sc-gKclnd fAyBB"
+        class="sc-gKXOVf jKtCnV"
         style="opacity: 1;"
       >
         <div
@@ -578,7 +578,7 @@ exports[`Stake Snapshot with title 1`] = `
           </div>
         </div>
         <span
-          class="ant-input-affix-wrapper sc-dkPtRN kCszbf ant-input-affix-wrapper-lg"
+          class="ant-input-affix-wrapper sc-dkzDqf csXUog ant-input-affix-wrapper-lg"
         >
           <input
             class="ant-input ant-input-lg"
@@ -590,14 +590,14 @@ exports[`Stake Snapshot with title 1`] = `
             class="ant-input-suffix"
           >
             <button
-              class="sc-gsDKAQ kExfsU"
+              class="sc-gsnTZi dKgJEo"
             >
               DEV
             </button>
           </span>
         </span>
         <div
-          class="sc-eCImPb UUa-dQ"
+          class="sc-eCYdqJ hHvxeW"
         >
           <div
             class="ant-row"
@@ -606,7 +606,7 @@ exports[`Stake Snapshot with title 1`] = `
               class="ant-col ant-col-11"
             >
               <button
-                class="ant-btn ant-btn-primary sc-hKwDye jTvuMH"
+                class="ant-btn ant-btn-primary sc-hKMtZM hXdGnA"
                 type="button"
               >
                 <span>
@@ -615,7 +615,7 @@ exports[`Stake Snapshot with title 1`] = `
               </button>
             </div>
             <div
-              class="ant-col ant-col-2 sc-jRQBWg gyNKvI"
+              class="ant-col ant-col-2 sc-jSMfEi cLyVzH"
             >
               →
             </div>
@@ -623,7 +623,7 @@ exports[`Stake Snapshot with title 1`] = `
               class="ant-col ant-col-11"
             >
               <button
-                class="ant-btn ant-btn-primary sc-hKwDye jTvuMH"
+                class="ant-btn ant-btn-primary sc-hKMtZM hXdGnA"
                 disabled=""
                 type="button"
               >
