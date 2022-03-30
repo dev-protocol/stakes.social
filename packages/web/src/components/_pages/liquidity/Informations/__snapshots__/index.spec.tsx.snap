@@ -34,10 +34,8 @@ exports[`Informations Snapshot 1`] = `
                 <span
                   class="ant-statistic-content-value-int"
                 >
-                  
                   25,920
                 </span>
-                
               </span>
               <span
                 class="ant-statistic-content-suffix"
@@ -71,7 +69,6 @@ exports[`Informations Snapshot 1`] = `
                 <span
                   class="ant-statistic-content-value-int"
                 >
-                  
                   1
                 </span>
                 <span
@@ -112,7 +109,6 @@ exports[`Informations Snapshot 1`] = `
                 <span
                   class="ant-statistic-content-value-int"
                 >
-                  
                   0
                 </span>
                 <span
