@@ -41,7 +41,6 @@ exports[`AssetItemOnList Snapshot 1`] = `
             <span
               class="ant-statistic-content-value-int"
             >
-              
               5,000
             </span>
             <span
@@ -69,7 +68,6 @@ exports[`AssetItemOnList Snapshot 1`] = `
             <span
               class="ant-statistic-content-value-int"
             >
-              
               5,000
             </span>
             <span
@@ -82,11 +80,7 @@ exports[`AssetItemOnList Snapshot 1`] = `
       </div>
       <div
         class="sc-kDDrLX sc-breuTD fZoxin eKZxzP"
-      >
-        
-        
-        
-      </div>
+      />
     </div>
   </div>
 </body>
