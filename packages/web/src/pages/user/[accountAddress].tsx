@@ -18,13 +18,13 @@ import { Avatar as AuthorAvatar } from 'src/components/molecules/Avatar'
 import useWindowDimensions from '../../fixtures/utility/useWindowDimensions'
 import { useGetAccount } from 'src/fixtures/dev-for-apps/hooks'
 import { AvatarProperty } from 'src/components/molecules/AvatarProperty'
-import { Links } from 'src/components/_pages/author/[authorAddress]/Links'
+import { Links } from 'src/components/_pages/user/[accountAddress]/Links'
 import { blueGradient } from 'src/styles/gradient'
 import Link from 'next/link'
 import { useProvider } from 'src/fixtures/wallet/hooks'
 import { useCurrency } from 'src/fixtures/currency/hooks'
 import { Pagination, Spin } from 'antd'
-import { CoverImages } from 'src/components/_pages/author/CoverImages'
+import { CoverImages } from 'src/components/_pages/user/CoverImages'
 import { useENS } from 'src/fixtures/ens/hooks'
 import { LinkWithNetwork } from 'src/components/atoms/LinkWithNetwork'
 
@@ -261,8 +261,8 @@ const Section = styled.a<{ activeSection: string; section: string }>`
 
 const AuthorAddressDetail = (_: Props) => {
   const [ens, setENS] = useState('')
-  const { authorAddress } = useRouter().query
-  const author: string = typeof authorAddress == 'string' ? authorAddress : 'none'
+  const { accountAddress: account } = useRouter().query
+  const author: string = typeof account == 'string' ? account : 'none'
   const { data: authorInformation } = useGetAuthorInformation(author)
   const [paginationProps, setPaginationProps] = useState<{ offset: number; limit: number; currentPage: number }>({
     offset: 0,
@@ -307,7 +307,7 @@ const AuthorAddressDetail = (_: Props) => {
   return (
     <>
       <Header></Header>
-      <CoverImages accountAddress={String(authorAddress)} />
+      <CoverImages accountAddress={String(account)} />
       <Wrap>
         <ProfilePicture>
           {width > 0 && <AuthorAvatar accountAddress={author} size={width >= 1240 ? '140' : '90'} />}
@@ -322,7 +322,7 @@ const AuthorAddressDetail = (_: Props) => {
               </ShareList>
               {isSelf && (
                 <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-                  <Link href={`/author/${author}/edit`}>
+                  <Link href={`/user/${author}/edit`}>
                     <EditButton>
                       <span>Edit</span>
                     </EditButton>

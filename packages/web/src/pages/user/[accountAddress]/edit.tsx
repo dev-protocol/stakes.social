@@ -197,8 +197,8 @@ const ProfileForm = ({ accountAddress }: { accountAddress: string }) => {
 
 const AuthorEdit = (_: Props) => {
   const { accountAddress } = useProvider()
-  const { authorAddress } = useRouter().query
-  const isMyself = accountAddress?.toLowerCase() === String(authorAddress).toLowerCase()
+  const { accountAddress: account } = useRouter().query
+  const isMyself = accountAddress?.toLowerCase() === String(account).toLowerCase()
 
   return (
     <FullpageWrap>
@@ -209,14 +209,14 @@ const AuthorEdit = (_: Props) => {
         </Headline>
         <Container>
           {isMyself ? (
-            <ProfileForm accountAddress={String(authorAddress)} />
+            <ProfileForm accountAddress={String(account)} />
           ) : (
             <Result
               status="error"
               title="Not authorized"
               subTitle="You do not have sufficient permission to edit this page."
               extra={
-                <Link as={`/author/${authorAddress}`} href="/author/[authorAddress]">
+                <Link as={`/user/${account}`} href="/user/[accountAddress]">
                   <Button type="primary">Author Profile</Button>
                 </Link>
               }

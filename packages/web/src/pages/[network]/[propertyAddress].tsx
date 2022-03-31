@@ -172,10 +172,10 @@ const Author = ({ propertyAddress }: { propertyAddress: string }) => {
   return authorAddress ? (
     <AuthorContainer>
       <h2>
-        Created by <Link href={`/author/${authorAddress}`}>{dataAuthor?.name || authorAddress}</Link>
+        Created by <Link href={`/user/${authorAddress}`}>{dataAuthor?.name || authorAddress}</Link>
       </h2>
       <Flex>
-        <Link passHref href="/author/[accountAddress]" as={`/author/${authorAddress}`}>
+        <Link passHref href="/user/[accountAddress]" as={`/user/${authorAddress}`}>
           <a>
             <div style={{ width: '150px' }}>
               <Avatar size={'150'} accountAddress={authorAddress} />

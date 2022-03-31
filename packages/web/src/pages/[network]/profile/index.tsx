@@ -14,7 +14,6 @@ import { useDetectChain, useProvider } from 'src/fixtures/wallet/hooks'
 import { YourPools } from 'src/components/_pages/portfolio/YourPools'
 import { blueGradient } from 'src/styles/gradient'
 import { boxShahowWithOnHover } from 'src/styles/boxShahow'
-import { useGetAccount } from 'src/fixtures/dev-for-apps/hooks'
 import { WalletSettings } from 'src/components/organisms/WalletSettings'
 import { YourPositions } from 'src/components/_pages/portfolio/YourPositions'
 import { ControlChain } from 'src/components/organisms/ControlChain'
@@ -90,7 +89,6 @@ const Portfolio = () => {
   const { name: chain } = useDetectChain(ethersProvider)
   const isL1 = chain === 'ethereum'
 
-  const { data } = useGetAccount(accountAddress)
   return (
     <div style={{ display: 'flex', minHeight: '100vh', flexDirection: 'column' }}>
       <Header />
@@ -101,12 +99,12 @@ const Portfolio = () => {
             <Switcher />
           </SwitcherContainer>
           <Buy />
-          {data?.id && (
+          {accountAddress && (
             <>
-              <Link href={`/author/${accountAddress}`}>
+              <Link href={`/user/${accountAddress}`}>
                 <CreatorButton>View profile</CreatorButton>
               </Link>
-              <Link href={`/author/${accountAddress}/edit`}>
+              <Link href={`/user/${accountAddress}/edit`}>
                 <EditButton>Edit profile</EditButton>
               </Link>
             </>
