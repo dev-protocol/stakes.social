@@ -1,7 +1,7 @@
 import React from 'react'
 import BigNumber from 'bignumber.js'
 import { message } from 'antd'
-import { act, render } from '@testing-library/react'
+import { render } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { allowance, balanceOf } from 'src/fixtures/_pages/liquidity/uniswap-pool/client'
 import { useProvider } from 'src/fixtures/wallet/hooks'
@@ -23,6 +23,8 @@ describe(`${Deposit.name}`, () => {
     expect(tree).toMatchSnapshot()
   })
   test('react hooks: click MAX button', async () => {
+    const user = userEvent.setup()
+
     ;(balanceOf as jest.Mock).mockImplementation(() => Promise.resolve(new BigNumber('1000')))
     ;(allowance as jest.Mock).mockImplementation(() => Promise.resolve())
     ;(useProvider as jest.Mock).mockImplementation(() => ({ accountAddress: '', web3: {} }))
@@ -30,13 +32,13 @@ describe(`${Deposit.name}`, () => {
 
     const { getByText } = render(<Deposit geyserAddress="0xdummy" />)
 
-    await act(async () => {
-      await userEvent.click(getByText('Max'))
-    })
+    await user.click(getByText('Max'))
 
     expect((message.warn as jest.Mock).mock.calls.length).toBe(0)
   })
   test('react hooks: click MAX button with balance is zero', async () => {
+    const user = userEvent.setup()
+
     ;(balanceOf as jest.Mock).mockImplementation(() => Promise.resolve(new BigNumber('0')))
     ;(allowance as jest.Mock).mockImplementation(() => Promise.resolve())
     ;(useProvider as jest.Mock).mockImplementation(() => ({ accountAddress: '', ethersProvider: {} }))
@@ -44,21 +46,19 @@ describe(`${Deposit.name}`, () => {
 
     const { getByText } = render(<Deposit geyserAddress="0xdummy" />)
 
-    await act(async () => {
-      await userEvent.click(getByText('Max'))
-    })
+    await user.click(getByText('Max'))
 
     expect((message.warn as jest.Mock).mock.calls.length).toBe(1)
   })
   test('react hooks: click MAX button with not sign in', async () => {
+    const user = userEvent.setup()
+
     ;(useProvider as jest.Mock).mockImplementation(() => ({ accountAddress: '', web3: undefined }))
     message.warn = jest.fn(() => {}) as any
 
     const { getByText } = render(<Deposit geyserAddress="0xdummy" />)
 
-    await act(async () => {
-      await userEvent.click(getByText('Max'))
-    })
+    await user.click(getByText('Max'))
 
     expect((message.warn as jest.Mock).mock.calls.length).toBe(1)
   })

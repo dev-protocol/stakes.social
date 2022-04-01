@@ -42,6 +42,8 @@ describe(`${Stake.name}`, () => {
   })
 
   test('react hooks: input amount click DEV button and click stake button', async () => {
+    const user = userEvent.setup()
+
     ;(balanceOf as jest.Mock).mockImplementation(() => Promise.resolve(new BigNumber('1000000')))
     ;(useProvider as jest.Mock).mockImplementation(() => ({ accountAddress: '', ethersProvider: {} }))
     ;(getContractAddress as jest.Mock).mockImplementation(() => Promise.resolve('0x0'))
@@ -57,9 +59,9 @@ describe(`${Stake.name}`, () => {
     expect(input).not.toBe(null)
     await act(async () => {
       await whenDefined(input, x => userEvent.type(x, '12'))
-      await userEvent.click(getByText('DEV'))
-      await userEvent.click(getByText('Approve'))
     })
+    await user.click(getByText('DEV'))
+    await user.click(getByText('Approve'))
 
     expect((message.warn as jest.Mock).mock.calls.length).toBe(0)
   })
