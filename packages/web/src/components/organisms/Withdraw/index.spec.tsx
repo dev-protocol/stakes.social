@@ -1,6 +1,6 @@
 import React from 'react'
 import { message } from 'antd'
-import { act, render } from '@testing-library/react'
+import { render } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { getMyStakingAmount } from 'src/fixtures/dev-kit/client'
 import { Withdraw } from '.'
@@ -24,7 +24,9 @@ describe(`${Withdraw.name}`, () => {
     const tree = component.baseElement
     expect(tree).toMatchSnapshot()
   })
-  test('hooks: click MAX button and withdraw button', () => {
+  test('hooks: click MAX button and withdraw button', async () => {
+    const user = userEvent.setup()
+
     ;(getMyStakingAmount as jest.Mock).mockImplementation(() => Promise.resolve({ amount: 1000 }))
     message.warn = jest.fn(() => {}) as any
 
@@ -34,12 +36,9 @@ describe(`${Withdraw.name}`, () => {
       </WalletContext.Provider>
     )
 
-    act(() => {
-      userEvent.click(getByText('DEV'))
-      userEvent.click(getByText('Withdraw'))
-    })
+    await user.click(getByText('DEV'))
+    await user.click(getByText('Withdraw'))
 
-    // expect((message.warn as jest.Mock).mock.calls.length).toBe(0)
     expect((getMyStakingAmount as jest.Mock).mock.calls.length).toBe(1)
   })
 })

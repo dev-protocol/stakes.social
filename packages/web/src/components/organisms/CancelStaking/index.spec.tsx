@@ -1,6 +1,6 @@
 import React from 'react'
 import { message } from 'antd'
-import { act, render } from '@testing-library/react'
+import { render } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { useProvider } from 'src/fixtures/wallet/hooks'
 import { getMyStakingAmount } from 'src/fixtures/dev-kit/client'
@@ -19,26 +19,26 @@ describe(`${CancelStaking.name}`, () => {
     expect(tree).toMatchSnapshot()
   })
   test('cancel staking handler', async () => {
+    const user = userEvent.setup()
+
     ;(useProvider as jest.Mock).mockImplementation(() => ({ accountAddress: '', ethersProvider: {} }))
     ;(getMyStakingAmount as jest.Mock).mockImplementation(() => Promise.resolve('10'))
     const { getByText } = render(<CancelStaking propertyAddress="propertyAddress" />)
     message.error = jest.fn(() => {}) as any
 
-    await act(async () => {
-      await userEvent.click(getByText('Cancel'))
-    })
+    await user.click(getByText('Cancel'))
 
     expect((message.error as jest.Mock).mock.calls.length).toBe(0)
   })
   test('cancel staking handler with amount is undefined', async () => {
+    const user = userEvent.setup()
+
     ;(useProvider as jest.Mock).mockImplementation(() => ({ accountAddress: '', ethersProvider: {} }))
     ;(getMyStakingAmount as jest.Mock).mockImplementation(() => Promise.resolve())
     const { getByText } = render(<CancelStaking propertyAddress="propertyAddress" />)
     message.error = jest.fn(() => {}) as any
 
-    await act(async () => {
-      await userEvent.click(getByText('Cancel'))
-    })
+    await user.click(getByText('Cancel'))
 
     expect((message.error as jest.Mock).mock.calls.length).toBe(1)
   })
