@@ -385,6 +385,10 @@ const PropertyAddressDetail = (_: Props) => {
   const { name: network } = useDetectChain(nonConnectedEthersProvider)
   const isDeny = isDenyProperty(network, propertyAddress)
 
+  const isAuthor = useMemo(() => {
+    return (loggedInWallet && authorAddress && loggedInWallet === authorAddress) || false
+  }, [loggedInWallet, authorAddress])
+
   return isDeny ? (
     <Error statusCode={404} />
   ) : (
@@ -402,7 +406,7 @@ const PropertyAddressDetail = (_: Props) => {
               <TabsGrid>
                 <div>
                   <PropertyAbout
-                    isAuthor={loggedInWallet === authorAddress}
+                    isAuthor={isAuthor}
                     dataProperty={dataProperty ? dataProperty : ({} as DevForAppsProperty)}
                     authorAddress={authorAddress || ''}
                     propertyAddress={propertyAddress}
@@ -413,7 +417,7 @@ const PropertyAddressDetail = (_: Props) => {
                       {includedAssetList?.map((asset: any, index: any) => (
                         <AssetListItem key={index}>{asset}</AssetListItem>
                       ))}
-                      {authorAddress === loggedInWallet && isL1 && (
+                      {isAuthor && isL1 && (
                         <LinkWithNetwork href={'/create/[property]'} as={`/create/${propertyAddress}`}>
                           <AddAsset>
                             <PlusOutlined />
@@ -421,7 +425,7 @@ const PropertyAddressDetail = (_: Props) => {
                           </AddAsset>
                         </LinkWithNetwork>
                       )}
-                      {authorAddress === loggedInWallet && !isL1 && (
+                      {isAuthor && !isL1 && (
                         <a href={'https://niwa.xyz'}>
                           <AddAsset>
                             <PlusOutlined />
