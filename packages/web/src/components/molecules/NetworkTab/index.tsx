@@ -65,10 +65,8 @@ const ConnectedOrDisconnected = ({ chainName }: { chainName: ChainName }) => {
 
 const createSwitchNetwork =
   (router: NextRouter, provider?: providers.BaseProvider) => (chainName: ChainName) => async () => {
-    const res = await switchChain(chainName, provider)
-    if (res === true) {
-      router.push(`/${chainName}`)
-    }
+    await switchChain(chainName, provider)
+    router.push(`/${chainName}`)
   }
 
 export const NetworkTab = () => {
