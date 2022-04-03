@@ -81,7 +81,7 @@
     "web3": "1.7.1"
   },
   "devDependencies": {
-    "@swc/core": "1.2.162",
+    "@swc/core": "1.2.163",
     "@swc/jest": "0.2.20",
     "@testing-library/react": "13.0.0",
     "@testing-library/react-hooks": "7.0.2",
