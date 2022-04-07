@@ -75,7 +75,7 @@
     "web3": "1.7.1",
     "web3-core": "1.7.1",
     "web3modal": "1.9.6",
-    "webpack": "5.71.0"
+    "webpack": "5.72.0"
   },
   "resolutions": {
     "web3": "1.7.1"
