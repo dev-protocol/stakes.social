@@ -92,7 +92,7 @@
     "@types/react": "17.0.44",
     "@types/react-dom": "17.0.15",
     "@types/string-hash": "1.1.1",
-    "@types/styled-components": "5.1.24",
+    "@types/styled-components": "5.1.25",
     "@types/tinycolor2": "1.4.3",
     "@types/ua-parser-js": "0.7.36",
     "@zeit/next-css": "1.0.1",
