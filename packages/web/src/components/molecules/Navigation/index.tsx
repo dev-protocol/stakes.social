@@ -2,35 +2,18 @@ import React, { useState } from 'react'
 import { useRouter, NextRouter } from 'next/router'
 import { LinkWithNetwork } from 'src/components/atoms/LinkWithNetwork'
 import styled from 'styled-components'
-import { useIsL1, useConnectWallet, useDetectChain, useProvider } from 'src/fixtures/wallet/hooks'
-import { Button, Drawer, Popover } from 'antd'
+import { useConnectWallet, useDetectChain, useProvider } from 'src/fixtures/wallet/hooks'
 import StakesSocial from 'src/components/atoms/Svgs/svg/Stakes-social.svg'
-import { DisconnectOutlined, LinkOutlined, MoreOutlined } from '@ant-design/icons'
-import { Container } from 'src/components/atoms/Container'
+import { ArrowUpOutlined } from '@ant-design/icons'
 import { ChainName } from 'src/fixtures/wallet/utility'
 import { switchChain } from 'src/fixtures/wallet/switch'
 import { providers } from 'ethers'
 import truncateEthAddress from 'truncate-eth-address'
-import EthereumEthLogo from 'src/components/atoms/Svgs/svg/EthereumEthLogo.svg'
-import ArbitrumLogo from 'src/components/atoms/Svgs/svg/ArbitrumLogo.svg'
-import PolygonLogo from 'src/components/atoms/Svgs/svg/PolygonLogo.svg'
+import Davatar from '@davatar/react'
+import { useBalanceOf } from 'src/fixtures/dev-kit/hooks'
+import { DownOutlined } from '@ant-design/icons'
 
 const Nav = styled.nav``
-
-const NavContainer = styled(Container)`
-  display: grid;
-  grid-auto-flow: column;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0.7rem;
-`
-
-const NavIcon = styled(MoreOutlined)`
-  padding: 1rem;
-  background: #2172f3;
-  border-radius: 99px;
-  color: white;
-`
 
 const Logo = styled(StakesSocial)`
   fill: black;
@@ -41,83 +24,6 @@ const LogoText = styled.span`
   margin-left: 0.5em;
   font-size: 1.2rem;
   font-weight: bold;
-`
-
-const Grid = styled.div`
-  display: grid;
-`
-
-const NavOpenedWallet = styled(Grid)`
-  gap: 1rem;
-  border: 4px solid whitesmoke;
-  border-radius: 20px;
-  padding: 1rem;
-`
-
-const NavOpenedC = styled(Grid)`
-  grid-auto-flow: column;
-  justify-content: space-between;
-`
-
-const NavOpenedN = styled(Grid)`
-  grid-auto-flow: row;
-  justify-items: start;
-  gap: 1rem;
-`
-
-const Testnet = styled.h4`
-  margin: 0;
-  opacity: 0.5;
-`
-
-const NetworkSwitch = styled(Button)`
-  padding: 0;
-  display: grid;
-  gap: 0.2rem;
-  grid-auto-flow: column;
-  align-items: center;
-`
-
-const NetworkSwitchWithLogo = styled(NetworkSwitch)`
-  padding: 0;
-  display: grid;
-  grid-template-columns: 2rem auto 1fr;
-  justify-items: center;
-`
-
-const GrayCircle = styled.span`
-  color: lightgray;
-  &::before {
-    content: '●';
-  }
-`
-
-const GreenCircle = styled.span`
-  color: #00b050;
-  &::before {
-    content: '●';
-  }
-`
-
-const NavUl = styled.ul`
-  display: grid;
-  padding: 0;
-  margin: 0;
-  list-style: none;
-  gap: 1rem;
-  margin-top: 1rem;
-`
-const NavLi = styled.li`
-  a {
-    display: block;
-    border: 4px solid whitesmoke;
-    border-radius: 20px;
-    padding: 1rem;
-  }
-`
-const LogoWrapper = styled(Grid)`
-  align-items: center;
-  grid-auto-flow: column;
 `
 
 export const Navigations = [
@@ -165,6 +71,8 @@ export const Navigations = [
   }
 ]
 
+const BtnStyles = `border border-gray-200 rounded py-2 px-4`
+
 export const L2Navigations = [
   {
     key: 'pools',
@@ -211,17 +119,11 @@ export const L2Navigations = [
 ]
 
 const StakesSocialLogo = () => (
-  <LogoWrapper>
+  <div className="flex items-center mb-2 sm:mb-0">
     <Logo id="headerlogo" height="1.2rem" />
     <LogoText>Stakes.social</LogoText>
-  </LogoWrapper>
+  </div>
 )
-
-const ConnectedOrDisconnected = ({ chainName }: { chainName: ChainName }) => {
-  const { ethersProvider } = useProvider()
-  const { name } = useDetectChain(ethersProvider)
-  return chainName === name ? <GreenCircle /> : <GrayCircle />
-}
 
 const createSwitchNetwork =
   (router: NextRouter, provider?: providers.BaseProvider) => (chainName: ChainName) => async () => {
@@ -231,105 +133,99 @@ const createSwitchNetwork =
     }
   }
 
-export const Navigation = () => {
+const NetworkDropdown = () => {
   const router = useRouter()
-  const { isL1 } = useIsL1()
-  const [open, setOpen] = useState(false)
-  const { isConnected, connect, isConnecting } = useConnectWallet()
-  const { accountAddress, ethersProvider } = useProvider()
+  const { ethersProvider } = useProvider()
+  const { name: network } = useDetectChain(ethersProvider)
   const switchNetwork = createSwitchNetwork(router, ethersProvider)
+
+  const [isVisible, setIsVisible] = useState(false)
+
+  const optionTWClasses = 'py-2 px-4 cursor-pointer hover:bg-blue-500 rounded hover:text-white'
+
+  return (
+    <>
+      {isVisible && <div className="fixed inset-0" onClick={() => setIsVisible(false)}></div>}
+      <div className="relative font-semibold">
+        <button
+          className={`flex items-center justify-between w-44 mr-8 ${BtnStyles}`}
+          onClick={() => setIsVisible(isVisible => !isVisible)}
+        >
+          <span className="capitalize font-semibold">{network}</span>
+          <DownOutlined />
+        </button>
+        {isVisible && (
+          <div className={`absolute top-12 bg-white w-44 z-50 border border-gray-200 rounded p-1`}>
+            <div className={optionTWClasses} onClick={switchNetwork('ethereum')}>
+              Ethereum
+            </div>
+            <div className={`flex flex-col ${optionTWClasses}`} onClick={switchNetwork('arbitrum-one')}>
+              <span>Arbitrum</span>
+              <a
+                className="text-xs font-normal flex items-center hover:text-white hover:underline"
+                href="https://bridge.arbitrum.io/"
+                target="_blank"
+                rel="noreferrer"
+              >
+                <span>Ethereum Bridge</span>
+                <div className="rotate-45 ml-1 mb-1">
+                  <ArrowUpOutlined />
+                </div>
+              </a>
+            </div>
+            <div className={optionTWClasses} onClick={switchNetwork('polygon')}>
+              Polygon
+            </div>
+            <div className="font-normal text-xs text-gray-400 mt-2">
+              <div className="px-4 cursor-pointer pb-2 hover:underline" onClick={switchNetwork('arbitrum-rinkeby')}>
+                <span>Arbitrum Rinkeby</span>
+              </div>
+              <div className="px-4 cursor-pointer pb-2 hover:underline" onClick={switchNetwork('polygon-mumbai')}>
+                <span>Polygon Mumbai</span>
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
+    </>
+  )
+}
+
+export const Navigation = () => {
+  const { isConnected, connect, isConnecting } = useConnectWallet()
+  const { accountAddress } = useProvider()
+  const { amount, currency } = useBalanceOf()
 
   return (
     <Nav>
-      <NavContainer>
+      <div className="flex justify-between p-2 items-align flex-col sm:flex-row">
         <LinkWithNetwork passHref href="/">
-          <a>
+          <a className="flex items-center">
             <StakesSocialLogo />
           </a>
         </LinkWithNetwork>
-        <NavIcon onClick={() => setOpen(true)} />
-      </NavContainer>
 
-      <Drawer visible={open} zIndex={1} onClose={() => setOpen(false)}>
-        <NavOpenedWallet>
-          <span>Select a network</span>
-          <NavOpenedN>
-            <NetworkSwitchWithLogo type="link" onClick={switchNetwork('ethereum')}>
-              <EthereumEthLogo height="2rem" />
-              <ConnectedOrDisconnected chainName="ethereum" />
-              Ethereum
-            </NetworkSwitchWithLogo>
-            <NetworkSwitchWithLogo type="link" onClick={switchNetwork('arbitrum-one')}>
-              <ArbitrumLogo height="2rem" />
-              <ConnectedOrDisconnected chainName="arbitrum-one" />
-              Arbitrum
-            </NetworkSwitchWithLogo>
-            <NetworkSwitchWithLogo type="link" onClick={switchNetwork('polygon')}>
-              <PolygonLogo height="1.5rem" />
-              <ConnectedOrDisconnected chainName="polygon" />
-              Polygon
-            </NetworkSwitchWithLogo>
-            <Popover
-              content={
-                <>
-                  <NetworkSwitch type="link" onClick={switchNetwork('arbitrum-rinkeby')}>
-                    <ConnectedOrDisconnected chainName="arbitrum-rinkeby" />
-                    <span>Arbitrum Rinkeby</span>
-                  </NetworkSwitch>
-                  <NetworkSwitch type="link" onClick={switchNetwork('polygon-mumbai')}>
-                    <ConnectedOrDisconnected chainName="polygon-mumbai" />
-                    <span>Polygon Mumbai</span>
-                  </NetworkSwitch>
-                </>
-              }
-              title="Testnet"
-              trigger="hover"
-              placement="topLeft"
-            >
-              <Testnet>Testnet</Testnet>
-            </Popover>
-          </NavOpenedN>
-          <NavOpenedC>
-            <span>
-              {isConnected && accountAddress ? (
-                <>
-                  <LinkOutlined /> Connected to {truncateEthAddress(accountAddress)}
-                </>
-              ) : (
-                <>
-                  <DisconnectOutlined /> Disconnected to a wallet
-                </>
-              )}
-            </span>
-          </NavOpenedC>
-          <Button onClick={connect} loading={isConnecting} type={isConnected ? 'link' : 'primary'}>
-            {isConnected ? 'Connected' : 'Connect'}
-          </Button>
-        </NavOpenedWallet>
-        <NavUl>
-          {isL1
-            ? Navigations.map(nav => (
-                <NavLi key={nav.key} style={{ margin: '0' }}>
-                  {nav.isExternal && <a href={nav.pathname}>{nav.label}</a>}
-                  {!nav.isExternal && (
-                    <LinkWithNetwork href={nav.pathname} rewrite={nav.rewrite} passHref>
-                      <a>{nav.label}</a>
-                    </LinkWithNetwork>
-                  )}
-                </NavLi>
-              ))
-            : L2Navigations.map(nav => (
-                <NavLi key={nav.key} style={{ margin: '0' }}>
-                  {nav.isExternal && <a href={nav.pathname}>{nav.label}</a>}
-                  {!nav.isExternal && (
-                    <LinkWithNetwork href={nav.pathname} rewrite={nav.rewrite} passHref>
-                      <a>{nav.label}</a>
-                    </LinkWithNetwork>
-                  )}
-                </NavLi>
-              ))}
-        </NavUl>
-      </Drawer>
+        <div className="flex">
+          <NetworkDropdown />
+
+          {!isConnected && (
+            <button className={BtnStyles} onClick={connect} disabled={isConnecting}>
+              Sign In
+            </button>
+          )}
+          {isConnected && accountAddress && (
+            <div className={`flex font-semibold ${BtnStyles}`}>
+              <div className="mr-6">
+                <span>
+                  {amount.toString()} {currency}
+                </span>
+              </div>
+              <span className="mr-3">{truncateEthAddress(accountAddress)}</span>
+              <Davatar size={18} address={accountAddress} />
+            </div>
+          )}
+        </div>
+      </div>
     </Nav>
   )
 }
