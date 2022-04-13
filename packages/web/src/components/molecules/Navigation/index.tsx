@@ -133,10 +133,20 @@ const createSwitchNetwork =
     }
   }
 
+const NetworkSelectedIndicator = ({
+  networkChainId,
+  currentChainId
+}: {
+  networkChainId: number
+  currentChainId: number | undefined
+}) => {
+  return <>{networkChainId === currentChainId && <span className="w-2 h-2 rounded bg-green-400 flex"></span>}</>
+}
+
 const NetworkDropdown = () => {
   const router = useRouter()
   const { ethersProvider } = useProvider()
-  const { name: network } = useDetectChain(ethersProvider)
+  const { name: network, chainId } = useDetectChain(ethersProvider)
   const switchNetwork = createSwitchNetwork(router, ethersProvider)
 
   const [isVisible, setIsVisible] = useState(false)
@@ -156,32 +166,47 @@ const NetworkDropdown = () => {
         </button>
         {isVisible && (
           <div className={`absolute top-12 bg-white w-44 z-50 border border-gray-200 rounded p-1`}>
-            <div className={optionTWClasses} onClick={switchNetwork('ethereum')}>
-              Ethereum
+            <div className={`${optionTWClasses} flex justify-between items-center`} onClick={switchNetwork('ethereum')}>
+              <span>Ethereum</span>
+              <NetworkSelectedIndicator currentChainId={chainId} networkChainId={1} />
             </div>
             <div className={`flex flex-col ${optionTWClasses}`} onClick={switchNetwork('arbitrum-one')}>
-              <span>Arbitrum</span>
-              <a
-                className="text-xs font-normal flex items-center hover:text-white hover:underline"
-                href="https://bridge.arbitrum.io/"
-                target="_blank"
-                rel="noreferrer"
-              >
-                <span>Ethereum Bridge</span>
-                <div className="rotate-45 ml-1 mb-1">
-                  <ArrowUpOutlined />
-                </div>
-              </a>
+              <div className="flex justify-between items-center">
+                <span>Arbitrum</span>
+                <NetworkSelectedIndicator currentChainId={chainId} networkChainId={42161} />
+              </div>
+              {chainId === 42161 && (
+                <a
+                  className="text-xs font-normal flex items-center hover:text-white hover:underline"
+                  href="https://bridge.arbitrum.io/"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  <span>Ethereum Bridge</span>
+                  <div className="rotate-45 ml-1 mb-1">
+                    <ArrowUpOutlined />
+                  </div>
+                </a>
+              )}
             </div>
-            <div className={optionTWClasses} onClick={switchNetwork('polygon')}>
-              Polygon
+            <div className={`${optionTWClasses} flex justify-between items-center`} onClick={switchNetwork('polygon')}>
+              <span>Polygon</span>
+              <NetworkSelectedIndicator currentChainId={chainId} networkChainId={137} />
             </div>
             <div className="font-normal text-xs text-gray-400 mt-2">
-              <div className="px-4 cursor-pointer pb-2 hover:underline" onClick={switchNetwork('arbitrum-rinkeby')}>
+              <div
+                className="px-4 cursor-pointer pb-2 hover:underline flex justify-between items-center"
+                onClick={switchNetwork('arbitrum-rinkeby')}
+              >
                 <span>Arbitrum Rinkeby</span>
+                <NetworkSelectedIndicator currentChainId={chainId} networkChainId={421611} />
               </div>
-              <div className="px-4 cursor-pointer pb-2 hover:underline" onClick={switchNetwork('polygon-mumbai')}>
+              <div
+                className="px-4 cursor-pointer pb-2 hover:underline flex justify-between items-center"
+                onClick={switchNetwork('polygon-mumbai')}
+              >
                 <span>Polygon Mumbai</span>
+                <NetworkSelectedIndicator currentChainId={chainId} networkChainId={80001} />
               </div>
             </div>
           </div>
