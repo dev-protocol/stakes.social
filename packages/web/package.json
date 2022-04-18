@@ -74,7 +74,7 @@
     "walletlink": "2.5.0",
     "web3": "1.7.3",
     "web3-core": "1.7.3",
-    "web3modal": "1.9.6",
+    "web3modal": "1.9.7",
     "webpack": "5.72.0"
   },
   "resolutions": {
