@@ -43,9 +43,15 @@
     "wait-on": "6.0.1"
   },
   "private": true,
-  "workspaces": [
-    "packages/*"
-  ],
+  "workspaces": {
+    "packages": [
+      "packages/*"
+    ],
+    "nohoist": [
+      "@tailwindcss/forms",
+      "@tailwindcss/forms/**"
+    ]
+  },
   "lint-staged": {
     "*.{.ts,tsx}": [
       "eslint --fix -c ./.eslintrc.json"

@@ -7,21 +7,21 @@ exports[`PropertyCardList Snapshot 1`] = `
       style="flex-grow: 1; max-width: 100vw;"
     >
       <div
-        class="sc-olbas TlTyV"
+        class="sc-crXcEl dsgoRt"
       >
         <h2
-          class="sc-eKszNL dUjZEb"
+          class="sc-iqcoie jOXjrW"
         >
           Asset Pools
         </h2>
         <div
-          class="sc-jgbSNz femWut"
+          class="sc-gKXOVf gnPyte"
         >
           <div
-            class="sc-cOFTSb eeJqRL"
+            class="sc-dkzDqf HUbOy"
           >
             <div
-              class="sc-BeQoi dHhNNY"
+              class="sc-hKMtZM kuhEJx"
             >
               <span
                 aria-label="search"
@@ -44,7 +44,7 @@ exports[`PropertyCardList Snapshot 1`] = `
               </span>
             </div>
             <input
-              class="sc-hTtwUo eXsFMG"
+              class="sc-jSMfEi duFGbA"
               data-cy="SearchbarInput"
               placeholder="Search for a project"
               value=""
@@ -52,7 +52,7 @@ exports[`PropertyCardList Snapshot 1`] = `
           </div>
         </div>
         <div
-          class="sc-lbOyJj hUkuTx"
+          class="sc-ksZaOG eWPfPK"
         >
           <div
             style="flex-grow: 1;"
@@ -150,23 +150,23 @@ exports[`PropertyCardList Snapshot 1`] = `
             </div>
           </div>
           <div
-            class="sc-iNWwEs dmZXZt"
+            class="sc-papXJ itPPsL"
           >
             <button
-              class="sc-gSAPjG jFzJdY"
+              class="sc-iBkjds Frlwd"
             >
               <div
-                class="sc-lbxAil fakMv"
+                class="sc-ftvSup hmFxCn"
               />
               <span>
                 DEV
               </span>
             </button>
             <button
-              class="sc-gSAPjG kYyUTy"
+              class="sc-iBkjds byBIdn"
             >
               <div
-                class="sc-lbxAil hAkqkf"
+                class="sc-ftvSup dstTBb"
               />
               <span>
                 USD
@@ -176,11 +176,11 @@ exports[`PropertyCardList Snapshot 1`] = `
         </div>
       </div>
       <div
-        class="sc-ehmTmK cInls"
+        class="sc-breuTD hlWeKm"
         style="justify-content: space-between;"
       >
         <div
-          class="sc-ehmTmK cInls"
+          class="sc-breuTD hlWeKm"
         >
           <a
             href="/"
@@ -207,164 +207,131 @@ exports[`PropertyCardList Snapshot 1`] = `
           </a>
         </div>
         <a
-          class="sc-jfmDQi hNtaHD"
+          class="sc-kDDrLX yvlEz"
           target="_blank"
         >
           Buy DEV
         </a>
       </div>
       <div
-        class="sc-bZkfAO sc-hiMGwR iFyZGt jnszdj"
+        class="sc-jqUVSM sc-evZas jStEwg hgsmtK"
       >
         <div
-          class="sc-bZkfAO sc-kLLXSd iFyZGt bcGFZj"
+          class="border border-gray-300 rounded-sm cursor-pointer flex"
         >
           <div
-            class="sc-bBXxYQ hrTfcx"
-          />
-          <div
-            class="sc-bZkfAO sc-bZnhIo iFyZGt cwHwRQ"
+            class="flex flex-col justify-between"
           >
-            <span
-              class="sc-jIZahH ctYATG"
-            >
-              authentication-id
-            </span>
-            <span
-              class="sc-llJcti csBsPb"
-            >
-              <span
-                aria-label="pie-chart"
-                class="anticon anticon-pie-chart"
-                role="img"
-                style="color: rgb(31, 237, 51);"
-                tabindex="-1"
-              >
-                <svg
-                  aria-hidden="true"
-                  data-icon="pie-chart"
-                  fill="currentColor"
-                  focusable="false"
-                  height="1em"
-                  viewBox="64 64 896 896"
-                  width="1em"
-                >
-                  <path
-                    d="M864 518H506V160c0-4.4-3.6-8-8-8h-26a398.46 398.46 0 00-282.8 117.1 398.19 398.19 0 00-85.7 127.1A397.61 397.61 0 0072 552a398.46 398.46 0 00117.1 282.8c36.7 36.7 79.5 65.6 127.1 85.7A397.61 397.61 0 00472 952a398.46 398.46 0 00282.8-117.1c36.7-36.7 65.6-79.5 85.7-127.1A397.61 397.61 0 00872 552v-26c0-4.4-3.6-8-8-8zM705.7 787.8A331.59 331.59 0 01470.4 884c-88.1-.4-170.9-34.9-233.2-97.2C174.5 724.1 140 640.7 140 552c0-88.7 34.5-172.1 97.2-234.8 54.6-54.6 124.9-87.9 200.8-95.5V586h364.3c-7.7 76.3-41.3 147-96.6 201.8zM952 462.4l-2.6-28.2c-8.5-92.1-49.4-179-115.2-244.6A399.4 399.4 0 00589 74.6L560.7 72c-4.7-.4-8.7 3.2-8.7 7.9V464c0 4.4 3.6 8 8 8l384-1c4.7 0 8.4-4 8-8.6zm-332.2-58.2V147.6a332.24 332.24 0 01166.4 89.8c45.7 45.6 77 103.6 90 166.1l-256.4.7z"
-                  />
-                </svg>
-              </span>
-            </span>
-            <span
-              class="sc-jOrMOR iCuWHY"
-            >
-              Stake DEV tokens to provide funding for OSS projects so that they can maintain development.
-            </span>
             <div
-              class="sc-cTQhss fRNnMD"
+              class="py-8 px-4"
             >
               <div
-                class="sc-bczRLJ kwgYUG"
+                class="flex items-center mb-4"
               >
+                <div>
+                  <div
+                    class="w-20 h-20 rounded-full overflow-hidden flex items-center justify-center"
+                  />
+                </div>
                 <div
-                  class="sc-gsnTZi jBYSHo"
-                  size="60"
-                />
+                  class="text-2xl ml-4 font-syne"
+                >
+                  authentication-id
+                </div>
               </div>
               <div
-                class="sc-dPyBCJ jobHir"
+                class="flex items-center mb-4"
               >
-                <span
-                  style="font-weight: lighter;"
+                <div
+                  class="sc-bczRLJ kwgYUG"
                 >
-                  Creator
-                </span>
+                  <div
+                    class="sc-gsnTZi dHKprE"
+                    size="42"
+                  />
+                </div>
                 <span
-                  style="color: rgb(26, 201, 252);"
+                  class="ml-4"
                 >
                   123-author
                 </span>
-                <span>
-                  40,124
-                   Karma
-                </span>
+              </div>
+              <div
+                class="text-ellipsis overflow-hidden line-clamp-4 text-lg"
+              >
+                Stake DEV tokens to provide funding for OSS projects so that they can maintain development.
+              </div>
+              <div
+                class="flex"
+              />
+            </div>
+            <div>
+              <div
+                class="py-6 px-4 border-t font-bold font-syne flex"
+              >
+                <div
+                  class="flex items-center"
+                >
+                  <span
+                    aria-label="user"
+                    class="anticon anticon-user text-gray-400 mr-1"
+                    role="img"
+                  >
+                    <svg
+                      aria-hidden="true"
+                      data-icon="user"
+                      fill="currentColor"
+                      focusable="false"
+                      height="1em"
+                      viewBox="64 64 896 896"
+                      width="1em"
+                    >
+                      <path
+                        d="M858.5 763.6a374 374 0 00-80.6-119.5 375.63 375.63 0 00-119.5-80.6c-.4-.2-.8-.3-1.2-.5C719.5 518 760 444.7 760 362c0-137-111-248-248-248S264 225 264 362c0 82.7 40.5 156 102.8 201.1-.4.2-.8.3-1.2.5-44.8 18.9-85 46-119.5 80.6a375.63 375.63 0 00-80.6 119.5A371.7 371.7 0 00136 901.8a8 8 0 008 8.2h60c4.4 0 7.9-3.5 8-7.8 2-77.2 33-149.5 87.8-204.3 56.7-56.7 132-87.9 212.2-87.9s155.5 31.2 212.2 87.9C779 752.7 810 825 812 902.2c.1 4.4 3.6 7.8 8 7.8h60a8 8 0 008-8.2c-1-47.8-10.9-94.3-29.5-138.2zM512 534c-45.9 0-89.1-17.9-121.6-50.4S340 407.9 340 362c0-45.9 17.9-89.1 50.4-121.6S466.1 190 512 190s89.1 17.9 121.6 50.4S684 316.1 684 362c0 45.9-17.9 89.1-50.4 121.6S557.9 534 512 534z"
+                      />
+                    </svg>
+                  </span>
+                  <span>
+                    10,000
+                     
+                     Staking
+                  </span>
+                </div>
+                <div
+                  class="flex items-center ml-4"
+                >
+                  <span
+                    aria-label="user"
+                    class="anticon anticon-user text-gray-400 mr-1"
+                    role="img"
+                  >
+                    <svg
+                      aria-hidden="true"
+                      data-icon="user"
+                      fill="currentColor"
+                      focusable="false"
+                      height="1em"
+                      viewBox="64 64 896 896"
+                      width="1em"
+                    >
+                      <path
+                        d="M858.5 763.6a374 374 0 00-80.6-119.5 375.63 375.63 0 00-119.5-80.6c-.4-.2-.8-.3-1.2-.5C719.5 518 760 444.7 760 362c0-137-111-248-248-248S264 225 264 362c0 82.7 40.5 156 102.8 201.1-.4.2-.8.3-1.2.5-44.8 18.9-85 46-119.5 80.6a375.63 375.63 0 00-80.6 119.5A371.7 371.7 0 00136 901.8a8 8 0 008 8.2h60c4.4 0 7.9-3.5 8-7.8 2-77.2 33-149.5 87.8-204.3 56.7-56.7 132-87.9 212.2-87.9s155.5 31.2 212.2 87.9C779 752.7 810 825 812 902.2c.1 4.4 3.6 7.8 8 7.8h60a8 8 0 008-8.2c-1-47.8-10.9-94.3-29.5-138.2zM512 534c-45.9 0-89.1-17.9-121.6-50.4S340 407.9 340 362c0-45.9 17.9-89.1 50.4-121.6S466.1 190 512 190s89.1 17.9 121.6 50.4S684 316.1 684 362c0 45.9-17.9 89.1-50.4 121.6S557.9 534 512 534z"
+                      />
+                    </svg>
+                  </span>
+                  <span>
+                    10,000
+                     
+                     Rewards
+                  </span>
+                </div>
               </div>
             </div>
-            <div
-              class="sc-ikZpkk ZKLeQ"
-            >
-              <div
-                class="sc-himrzO OgsG"
-              >
-                <span>
-                  5,000
-                   
-                </span>
-                <span
-                  class="sc-efBctP hkscVR"
-                >
-                  Your stake
-                </span>
-              </div>
-              <div
-                class="sc-cCsOjp bJlyxh"
-              >
-                <span>
-                  5,000
-                   
-                </span>
-                <span
-                  class="sc-efBctP hkscVR"
-                >
-                  Your reward
-                </span>
-              </div>
-              <div
-                class="sc-gXmSlM hhPOfo"
-              >
-                <span>
-                  10,000
-                   
-                </span>
-                <span
-                  class="sc-efBctP hkscVR"
-                >
-                  Total staked
-                </span>
-              </div>
-              <div
-                class="sc-ciZhAO ehJTGZ"
-              >
-                <span>
-                  10,000
-                   
-                </span>
-                <span
-                  class="sc-efBctP hkscVR"
-                >
-                  Creator reward
-                </span>
-              </div>
-            </div>
-          </div>
-          <div
-            class="sc-jdAMXn hdKmdx"
-          >
-            <button
-              class="sc-iTONeN fikEJL"
-            >
-              Stake
-            </button>
-            <button
-              class="sc-iAvgwm iEbqll"
-            >
-              Withdraw
-            </button>
           </div>
         </div>
       </div>
       <div
-        class="sc-gFGZVQ gIWujJ"
+        class="sc-hAZoDl eqZDDK"
       >
         <ul
           class="ant-pagination"
