@@ -6,7 +6,7 @@ import { ChainName } from 'src/fixtures/wallet/utility'
 import styled from 'styled-components'
 import { useNetworkInRouter } from 'src/fixtures/utility'
 
-export const NETWORK_DEPENDENTS = [/^\/0x/, /^\/create/, /^\/invite/, /^\/liquidity/, /^\/positions/, /^\/stats/]
+export const NETWORK_DEPENDENTS = [/^\/0x/, /^\/create/, /^\/liquidity/, /^\/positions/, /^\/stats/]
 
 const Content = styled.div`
   display: grid;
