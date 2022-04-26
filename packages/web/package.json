@@ -12,7 +12,6 @@
     "test": "jest"
   },
   "dependencies": {
-    "@amcharts/amcharts4": "4.10.24",
     "@ant-design/icons": "4.7.0",
     "@apollo/client": "3.5.10",
     "@davatar/react": "1.9.0",

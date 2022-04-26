@@ -1,5 +1,5 @@
 const withAntdLess = require('next-plugin-antd-less')
-const withTM = require('next-transpile-modules')(['@amcharts/amcharts4', 'react-markdown'])
+const withTM = require('next-transpile-modules')(['react-markdown'])
 
 module.exports = withTM(
   withAntdLess({
