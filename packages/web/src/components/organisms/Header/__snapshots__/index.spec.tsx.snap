@@ -3,7 +3,9 @@
 exports[`Header Snapshot 1`] = `
 <body>
   <div>
-    <header>
+    <header
+      class="container max-w-screen-xl mx-auto px-2"
+    >
       <nav
         class="sc-bczRLJ"
       >
@@ -70,11 +72,6 @@ exports[`Header Snapshot 1`] = `
           </div>
         </div>
       </nav>
-      <div
-        class="sc-hKMtZM igucBb"
-      >
-        Beta Version
-      </div>
     </header>
   </div>
 </body>

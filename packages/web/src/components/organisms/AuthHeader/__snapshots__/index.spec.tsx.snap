@@ -3,7 +3,9 @@
 exports[`AuthHeader Snapshot 1`] = `
 <body>
   <div>
-    <header>
+    <header
+      class="container max-w-screen-xl mx-auto px-2"
+    >
       <nav
         class="sc-bczRLJ"
       >
@@ -70,18 +72,13 @@ exports[`AuthHeader Snapshot 1`] = `
           </div>
         </div>
       </nav>
-      <div
-        class="sc-hKMtZM igucBb"
-      >
-        Beta Version
-      </div>
     </header>
     <div
-      class="sc-jSMfEi byCZXT"
+      class="sc-hKMtZM esUHuI"
       height="300"
     >
       <h2
-        class="sc-iBkjds exycRn"
+        class="sc-jSMfEi jWXmMs"
       >
         Choose Market
       </h2>
