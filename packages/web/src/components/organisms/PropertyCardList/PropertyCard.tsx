@@ -44,9 +44,13 @@ export const PropertyCard = ({ propertyAddress, assets }: Props) => {
         return
       }
       const account = await getAccount(address)
-      setStakerAddresses(addresses => [...addresses, { address, name: account[0]?.name }])
+
+      const exists = stakerAddresses.find(staker => staker.address)
+      if (!exists) {
+        setStakerAddresses(addresses => [...addresses, { address, name: account[0]?.name }])
+      }
     },
-    [nonConnectedEthersProvider, setStakerAddresses]
+    [nonConnectedEthersProvider, setStakerAddresses, stakerAddresses]
   )
 
   useEffect(() => {
