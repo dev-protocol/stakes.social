@@ -83,7 +83,7 @@ export default class extends Document {
             }}
           />
         </Head>
-        <body>
+        <body className="font-syne">
           <Main />
           <NextScript />
         </body>
