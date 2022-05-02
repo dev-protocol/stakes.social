@@ -9,7 +9,6 @@ interface Props {
   className?: string
 }
 
-const Wrap = styled.div``
 const Badge = styled.div`
   display: grid;
   grid-auto-flow: column;
@@ -22,17 +21,6 @@ const Statistics = styled.span`
   @media (min-width: 1024px) {
     font-size: 2em;
   }
-  color: deep;
-  background-image: linear-gradient(12deg, #2f80ed, #1ac9fc);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-`
-const StatisticsInt = styled.span`
-  letter-spacing: 0.1rem;
-`
-const StatisticsDecimal = styled.span`
-  font-weight: normal;
-  font-size: 0.9em;
 `
 
 const int = (v: BigNumber): string => v.integerValue(BigNumber.ROUND_DOWN).toString()
@@ -40,20 +28,12 @@ const decimal = (v: BigNumber): string => v.minus(v.integerValue(BigNumber.ROUND
 const values = (v?: BigNumber, dp?: number) =>
   v ? (
     <>
-      <StatisticsInt>{int(v)}</StatisticsInt>
-      <StatisticsDecimal>{decimal(v.dp(dp || 5))}%</StatisticsDecimal>
+      <span>{int(v)}</span>
+      <span>{decimal(v.dp(dp || 5))}%</span>
     </>
   ) : (
     '-'
   )
-
-const SupplySummaryContainer = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  justify-content: center;
-  align-items: center;
-  padding-bottom: 20px;
-`
 
 const SupplyBadge = styled.div`
   display: flex;
@@ -74,15 +54,11 @@ const SupplyBadge = styled.div`
   }
 `
 
-const Container = styled.div`
-  padding-bottom: 20px;
-`
-
 export const SupplySummary = ({ apy, creators, annualSupplyGrowthRatio, className }: Props) => {
   return (
-    <Container className={className}>
+    <div className={`${className} pb-2`}>
       <h2>Current Staking Rewards</h2>
-      <SupplySummaryContainer>
+      <div className="grid grid-cols-3 pb-8 pt-2">
         <SupplyBadge>
           <Statistics>{apy?.dp(2).toNumber()}%</Statistics>
           <label>Stakers APY</label>
@@ -98,15 +74,15 @@ export const SupplySummary = ({ apy, creators, annualSupplyGrowthRatio, classNam
           <Statistics>{annualSupplyGrowthRatio?.dp(2).toNumber()}%</Statistics>
           <label>DEV ASG</label>
         </SupplyBadge>
-      </SupplySummaryContainer>
+      </div>
       <hr color="lightgrey" />
-    </Container>
+    </div>
   )
 }
 
 export const SupplySummaly = ({ apy, creators, annualSupplyGrowthRatio }: Props) => {
   return (
-    <Wrap>
+    <div>
       <Badge>
         <span>APY for Stakers:</span>
         <Statistics>{values(apy, 5)}</Statistics>
@@ -119,6 +95,6 @@ export const SupplySummaly = ({ apy, creators, annualSupplyGrowthRatio }: Props)
         <span>Annual Supply Growth:</span>
         <Statistics>{values(annualSupplyGrowthRatio, 5)}</Statistics>
       </Badge>
-    </Wrap>
+    </div>
   )
 }
