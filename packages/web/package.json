@@ -96,7 +96,7 @@
     "@types/tinycolor2": "1.4.3",
     "@types/ua-parser-js": "0.7.36",
     "@zeit/next-css": "1.0.1",
-    "autoprefixer": "10.4.5",
+    "autoprefixer": "10.4.6",
     "eslint-config-next": "12.1.5",
     "identity-obj-proxy": "3.0.0",
     "jest-canvas-mock": "2.4.0",
