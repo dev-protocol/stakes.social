@@ -226,11 +226,14 @@ exports[`PropertyCardList Snapshot 1`] = `
               class="py-8 px-4"
             >
               <div
-                class="flex items-center mb-4"
+                class="flex items-center mb-6"
               >
-                <div>
+                <div
+                  class="w-20 h-20 rounded-full overflow-hidden flex items-center justify-center"
+                >
                   <div
-                    class="w-20 h-20 rounded-full overflow-hidden flex items-center justify-center"
+                    class="sc-gsnTZi kyZvke"
+                    size="96"
                   />
                 </div>
                 <div
@@ -240,7 +243,7 @@ exports[`PropertyCardList Snapshot 1`] = `
                 </div>
               </div>
               <div
-                class="flex items-center mb-4"
+                class="flex items-center mb-6"
               >
                 <div
                   class="sc-bczRLJ kwgYUG"
@@ -251,13 +254,13 @@ exports[`PropertyCardList Snapshot 1`] = `
                   />
                 </div>
                 <span
-                  class="ml-4"
+                  class="ml-4 text-sm"
                 >
                   123-author
                 </span>
               </div>
               <div
-                class="text-ellipsis overflow-hidden line-clamp-4 text-lg"
+                class="text-ellipsis overflow-hidden line-clamp-4"
               >
                 Stake DEV tokens to provide funding for OSS projects so that they can maintain development.
               </div>

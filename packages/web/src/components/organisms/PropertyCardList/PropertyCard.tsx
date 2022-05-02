@@ -15,7 +15,7 @@ import truncateEthAddress from 'truncate-eth-address'
 import { UserOutlined } from '@ant-design/icons'
 import { UndefinedOr, whenDefined } from '@devprotocol/util-ts'
 import { getStokenOwnerOf } from 'src/fixtures/dev-kit/client'
-import { getAccount } from 'src/fixtures/dev-for-apps/utility'
+import { getAccount, Property } from 'src/fixtures/dev-for-apps/utility'
 
 interface Props {
   propertyAddress: string
@@ -23,6 +23,35 @@ interface Props {
 }
 
 const formatter = new Intl.NumberFormat('en-US')
+
+interface CardAvatarProps {
+  dataProperty: UndefinedOr<Property>
+}
+
+const CardAvatar: React.FC<CardAvatarProps> = ({ dataProperty }: CardAvatarProps) => {
+  return (
+    <div className="w-20 h-20 rounded-full overflow-hidden flex items-center justify-center">
+      {dataProperty && dataProperty.avatar && <img className="w-full" src={dataProperty.avatar?.url} />}
+
+      {dataProperty && !dataProperty.avatar && dataProperty.cover_image && (
+        <div
+          className="w-full h-full"
+          style={{
+            backgroundImage: `url(${dataProperty.cover_image.url})`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center'
+          }}
+        ></div>
+      )}
+
+      {dataProperty && !dataProperty.avatar && !dataProperty.cover_image && <AvatarPlaceholder size="96" />}
+
+      {!dataProperty && <AvatarPlaceholder size="96" />}
+    </div>
+  )
+}
+
+export default CardAvatar
 
 export const PropertyCard = ({ propertyAddress, assets }: Props) => {
   const { nonConnectedEthersProvider } = useProvider()
@@ -68,23 +97,18 @@ export const PropertyCard = ({ propertyAddress, assets }: Props) => {
       <LinkWithNetwork href={'/[propertyAddress]'} as={`/${propertyAddress}`}>
         <div className="flex flex-col justify-between">
           <div className="py-8 px-4">
-            <div className="flex items-center mb-4">
-              <div>
-                <div className="w-20 h-20 rounded-full overflow-hidden flex items-center justify-center">
-                  {dataProperty && dataProperty.avatar && <img className="w-full" src={dataProperty.avatar.url} />}
-                  {!dataProperty || (dataProperty && !dataProperty.avatar && <AvatarPlaceholder size="96" />)}
-                </div>
-              </div>
+            <div className="flex items-center mb-6">
+              <CardAvatar dataProperty={dataProperty} />
 
               <div className="text-2xl ml-4 font-syne">{includeAssets || propertyName || 'Property'}</div>
             </div>
 
-            <div className="flex items-center mb-4">
+            <div className="flex items-center mb-6">
               <Avatar accountAddress={authorAddress} size={'42'} />
-              <span className="ml-4">{dataAuthor?.name || truncateEthAddress(authorAddress ?? '')}</span>
+              <span className="ml-4 text-sm">{dataAuthor?.name || truncateEthAddress(authorAddress ?? '')}</span>
             </div>
 
-            <div className="text-ellipsis overflow-hidden line-clamp-4 text-lg">
+            <div className="text-ellipsis overflow-hidden line-clamp-4">
               {dataProperty?.description ||
                 'Stake DEV tokens to provide funding for OSS projects so that they can maintain development.'}
             </div>
