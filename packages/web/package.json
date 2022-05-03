@@ -14,7 +14,7 @@
   "dependencies": {
     "@amcharts/amcharts4": "4.10.25",
     "@ant-design/icons": "4.7.0",
-    "@apollo/client": "3.5.10",
+    "@apollo/client": "3.6.2",
     "@davatar/react": "1.9.0",
     "@dev/graphql": "0.0.1",
     "@devprotocol/alias-legacy-dev-kit": "npm:@devprotocol/dev-kit@4.7.0",
