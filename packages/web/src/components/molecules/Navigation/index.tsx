@@ -146,7 +146,7 @@ const NetworkSelectedIndicator = ({
 const NetworkDropdown = () => {
   const router = useRouter()
   const { ethersProvider } = useProvider()
-  const { name: network, chainId } = useDetectChain(ethersProvider)
+  const { name: network = 'ethereum', chainId = 1 } = useDetectChain(ethersProvider)
   const switchNetwork = createSwitchNetwork(router, ethersProvider)
 
   const [isVisible, setIsVisible] = useState(false)
