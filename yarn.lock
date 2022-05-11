@@ -10780,10 +10780,10 @@ formik@2.2.9:
     tiny-warning "^1.0.2"
     tslib "^1.10.0"
 
-fortmatic@2.2.1:
-  version "2.2.1"
-  resolved "https://registry.yarnpkg.com/fortmatic/-/fortmatic-2.2.1.tgz#91ce9159c1fe539bd87e483125fca5c27a410a86"
-  integrity sha512-PEfPoErJSErU2A8iYD2Mab2c8eJK5dCdCr1jR/8yc49aEAlyQ4UXnZXyeO6MU5zBGkDAZmg9brnRSPzc+8MKPQ==
+fortmatic@2.3.0:
+  version "2.3.0"
+  resolved "https://registry.yarnpkg.com/fortmatic/-/fortmatic-2.3.0.tgz#b81d8fe76fc28d7ca922a536f60310f45d9e3a14"
+  integrity sha512-RBGGaW/9r5C+7Fs4Rl8nSkGDteZ7B4qlZjybTdq3+FAFaqZQDIhFmnrqsIv9kX9acal8GvjtHazwpnEO6kcv7A==
 
 forwarded@0.2.0:
   version "0.2.0"
