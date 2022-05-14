@@ -19,19 +19,3 @@ export const getTokenQuery = gql`
     }
   }
 `
-
-export const getTokenDayDatasQuery = gql`
-  query tokenDayDatas($token: String) {
-    tokenDayDatas(orderBy: date, orderDirection: desc, where: { token: $token }) {
-      id
-      date
-      priceUSD
-      totalLiquidityToken
-      totalLiquidityUSD
-      totalLiquidityETH
-      dailyVolumeETH
-      dailyVolumeToken
-      dailyVolumeUSD
-    }
-  }
-`

@@ -1,7 +1,7 @@
 import BigNumber from 'bignumber.js'
 import useSWR from 'swr'
 import { message } from 'antd'
-import { getEthPrice, getDevEthPrice, getTokenDayDatas } from './client'
+import { getEthPrice, getDevEthPrice } from './client'
 import { UnwrapFunc } from 'src/fixtures/utility'
 
 const messageKey = 'theGraphAccess'
@@ -35,15 +35,4 @@ export const useGetDevPrice = () => {
 
   const devPrice = ethPrice && Number(ethPrice?.ethPrice) * Number(devEthPrice?.derivedETH)
   return { data: new BigNumber(devPrice || '0'), error: ethPriceError || devEthPriceError }
-}
-
-export const useGetTokenDayDatas = () => {
-  const { data, error, mutate } = useSWR<UnwrapFunc<typeof getTokenDayDatas>, Error>(
-    'getTokenDayDatas',
-    () => getTokenDayDatas(),
-    {
-      onError: err => message.error({ content: `failed to fetching token day data: ${err.message}`, key: messageKey })
-    }
-  )
-  return { data: data, error, mutate }
 }

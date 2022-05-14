@@ -3,65 +3,82 @@
 exports[`AuthHeader Snapshot 1`] = `
 <body>
   <div>
-    <header>
+    <header
+      class="container max-w-screen-xl mx-auto px-2"
+    >
       <nav
-        class="sc-gsnTZi"
+        class="sc-bczRLJ"
       >
         <div
-          class="sc-bczRLJ sc-dkzDqf kokPlY bnerqB"
+          class="flex justify-between p-2 items-align flex-col sm:flex-row"
         >
           <a
+            class="flex items-center"
             href="/ethereum"
           >
             <div
-              class="sc-gKXOVf sc-hAZoDl jKtCnV kuIfBV"
+              class="flex items-center mb-2 sm:mb-0"
             >
               <svgrurl
-                class="sc-eCYdqJ gVfTro"
+                class="sc-gsnTZi jgbIeF"
                 height="1.2rem"
                 id="headerlogo"
               />
               <span
-                class="sc-jSMfEi cqDZpT"
+                class="sc-dkzDqf gRuMaX"
               >
                 Stakes.social
               </span>
             </div>
           </a>
-          <span
-            aria-label="more"
-            class="anticon anticon-more sc-hKMtZM htwRFx"
-            role="img"
-            tabindex="-1"
+          <div
+            class="flex"
           >
-            <svg
-              aria-hidden="true"
-              data-icon="more"
-              fill="currentColor"
-              focusable="false"
-              height="1em"
-              viewBox="64 64 896 896"
-              width="1em"
+            <div
+              class="relative font-semibold"
             >
-              <path
-                d="M456 231a56 56 0 10112 0 56 56 0 10-112 0zm0 280a56 56 0 10112 0 56 56 0 10-112 0zm0 280a56 56 0 10112 0 56 56 0 10-112 0z"
-              />
-            </svg>
-          </span>
+              <button
+                class="flex items-center justify-between w-44 mr-8 border border-gray-200 rounded py-2 px-4"
+              >
+                <span
+                  class="capitalize font-semibold"
+                />
+                <span
+                  aria-label="down"
+                  class="anticon anticon-down"
+                  role="img"
+                >
+                  <svg
+                    aria-hidden="true"
+                    data-icon="down"
+                    fill="currentColor"
+                    focusable="false"
+                    height="1em"
+                    viewBox="64 64 896 896"
+                    width="1em"
+                  >
+                    <path
+                      d="M884 256h-75c-5.1 0-9.9 2.5-12.9 6.6L512 654.2 227.9 262.6c-3-4.1-7.8-6.6-12.9-6.6h-75c-6.5 0-10.3 7.4-6.5 12.7l352.6 486.1c12.8 17.6 39 17.6 51.7 0l352.6-486.1c3.9-5.3.1-12.7-6.4-12.7z"
+                    />
+                  </svg>
+                </span>
+              </button>
+            </div>
+            <button
+              class="border border-gray-200 rounded py-2 px-4"
+            >
+              Sign In
+            </button>
+          </div>
         </div>
       </nav>
-      <div
-        class="sc-fnykZs boxwjV"
-      >
-        Beta Version
-      </div>
     </header>
     <div
-      class="sc-bjUoiL klsZcG"
+      class="sc-hKMtZM esUHuI"
       height="300"
     >
       <h2
-        class="sc-dIouRR gHpSJN"
+        class="sc-jSMfEi jWXmMs"
       >
         Choose Market
       </h2>
