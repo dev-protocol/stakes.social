@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import {
   useGetTotalStakingAmount,
   useGetTotalRewardsAmount,
@@ -7,7 +7,6 @@ import {
   useDetectSTokens
 } from 'src/fixtures/dev-kit/hooks'
 import { useProvider } from 'src/fixtures/wallet/hooks'
-import { truncate } from 'src/fixtures/utility/string'
 import { useGetProperty, useGetAccount } from 'src/fixtures/dev-for-apps/hooks'
 import { Avatar, AvatarPlaceholder } from 'src/components/molecules/Avatar'
 import { LinkWithNetwork } from 'src/components/atoms/LinkWithNetwork'
@@ -32,7 +31,6 @@ export const PropertyCard = ({ propertyAddress, assets }: Props) => {
   const { data: dataAuthor } = useGetAccount(authorAddress)
   const { data: dataProperty } = useGetProperty(propertyAddress)
   const { name: propertyName } = usePropertyName(propertyAddress)
-  const includeAssets = useMemo(() => assets && truncate(assets.join(', '), 24), [assets])
   const { sTokensByPropertyAddress }: { sTokensByPropertyAddress: number[] | undefined } =
     useDetectSTokens(propertyAddress)
   const [stakerAddresses, setStakerAddresses] = useState<{ name: UndefinedOr<string>; address: string }[]>([])
@@ -66,7 +64,7 @@ export const PropertyCard = ({ propertyAddress, assets }: Props) => {
   return (
     <div className="border border-gray-300 rounded-sm cursor-pointer flex">
       <LinkWithNetwork href={'/[propertyAddress]'} as={`/${propertyAddress}`}>
-        <div className="flex flex-col justify-between">
+        <div className="flex flex-col justify-between max-w-full">
           <div className="py-8 px-4">
             <div className="flex items-center mb-4">
               <div>
@@ -76,7 +74,7 @@ export const PropertyCard = ({ propertyAddress, assets }: Props) => {
                 </div>
               </div>
 
-              <div className="text-2xl ml-4 font-syne">{includeAssets || propertyName || 'Property'}</div>
+              <div className="text-2xl ml-4 font-syne truncate">{assets || propertyName || 'Property'}</div>
             </div>
 
             <div className="flex items-center mb-4">

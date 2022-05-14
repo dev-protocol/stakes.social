@@ -42,9 +42,7 @@ exports[`Header Snapshot 1`] = `
               >
                 <span
                   class="capitalize font-semibold"
-                >
-                  ethereum
-                </span>
+                />
                 <span
                   aria-label="down"
                   class="anticon anticon-down"

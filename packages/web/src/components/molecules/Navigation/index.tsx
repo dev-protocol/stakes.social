@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useRouter, NextRouter } from 'next/router'
 import { LinkWithNetwork } from 'src/components/atoms/LinkWithNetwork'
 import styled from 'styled-components'
-import { useConnectWallet, useDetectChain, useProvider } from 'src/fixtures/wallet/hooks'
+import { useConnectWallet, useProvider } from 'src/fixtures/wallet/hooks'
 import StakesSocial from 'src/components/atoms/Svgs/svg/Stakes-social.svg'
 import { ArrowUpOutlined } from '@ant-design/icons'
 import { ChainName } from 'src/fixtures/wallet/utility'
@@ -12,6 +12,8 @@ import truncateEthAddress from 'truncate-eth-address'
 import Davatar from '@davatar/react'
 import { useBalanceOf } from 'src/fixtures/dev-kit/hooks'
 import { DownOutlined } from '@ant-design/icons'
+import { useNetworkInRouter } from 'src/fixtures/utility'
+import { whenDefined } from '@devprotocol/util-ts'
 
 const Nav = styled.nav``
 
@@ -127,26 +129,20 @@ const StakesSocialLogo = () => (
 
 const createSwitchNetwork =
   (router: NextRouter, provider?: providers.BaseProvider) => (chainName: ChainName) => async () => {
-    const res = await switchChain(chainName, provider)
-    if (res === true) {
+    const res = await whenDefined(provider, prov => switchChain(chainName, prov))
+    if (res === true || res === undefined) {
       router.push(`/${chainName}`)
     }
   }
 
-const NetworkSelectedIndicator = ({
-  networkChainId,
-  currentChainId
-}: {
-  networkChainId: number
-  currentChainId: number | undefined
-}) => {
-  return <>{networkChainId === currentChainId && <span className="w-2 h-2 rounded bg-green-400 flex"></span>}</>
+const NetworkSelectedIndicator = ({ network, currentNetwork }: { network: ChainName; currentNetwork: ChainName }) => {
+  return <>{network === currentNetwork && <span className="w-2 h-2 rounded bg-green-400 flex"></span>}</>
 }
 
 const NetworkDropdown = () => {
   const router = useRouter()
   const { ethersProvider } = useProvider()
-  const { name: network = 'ethereum', chainId = 1 } = useDetectChain(ethersProvider)
+  const { requestedChain: network } = useNetworkInRouter()
   const switchNetwork = createSwitchNetwork(router, ethersProvider)
 
   const [isVisible, setIsVisible] = useState(false)
@@ -168,14 +164,14 @@ const NetworkDropdown = () => {
           <div className={`absolute top-12 bg-white w-44 z-50 border border-gray-200 rounded p-1`}>
             <div className={`${optionTWClasses} flex justify-between items-center`} onClick={switchNetwork('ethereum')}>
               <span>Ethereum</span>
-              <NetworkSelectedIndicator currentChainId={chainId} networkChainId={1} />
+              <NetworkSelectedIndicator currentNetwork={network} network="ethereum" />
             </div>
             <div className={`flex flex-col ${optionTWClasses}`} onClick={switchNetwork('arbitrum-one')}>
               <div className="flex justify-between items-center">
                 <span>Arbitrum</span>
-                <NetworkSelectedIndicator currentChainId={chainId} networkChainId={42161} />
+                <NetworkSelectedIndicator currentNetwork={network} network="arbitrum-one" />
               </div>
-              {chainId === 42161 && (
+              {network === 'arbitrum-one' && (
                 <a
                   className="text-xs font-normal flex items-center hover:text-white hover:underline"
                   href="https://bridge.arbitrum.io/"
@@ -191,7 +187,7 @@ const NetworkDropdown = () => {
             </div>
             <div className={`${optionTWClasses} flex justify-between items-center`} onClick={switchNetwork('polygon')}>
               <span>Polygon</span>
-              <NetworkSelectedIndicator currentChainId={chainId} networkChainId={137} />
+              <NetworkSelectedIndicator currentNetwork={network} network="polygon" />
             </div>
             <div className="font-normal text-xs text-gray-400 mt-2">
               <div
@@ -199,14 +195,14 @@ const NetworkDropdown = () => {
                 onClick={switchNetwork('arbitrum-rinkeby')}
               >
                 <span>Arbitrum Rinkeby</span>
-                <NetworkSelectedIndicator currentChainId={chainId} networkChainId={421611} />
+                <NetworkSelectedIndicator currentNetwork={network} network="arbitrum-rinkeby" />
               </div>
               <div
                 className="px-4 cursor-pointer pb-2 hover:underline flex justify-between items-center"
                 onClick={switchNetwork('polygon-mumbai')}
               >
                 <span>Polygon Mumbai</span>
-                <NetworkSelectedIndicator currentChainId={chainId} networkChainId={80001} />
+                <NetworkSelectedIndicator currentNetwork={network} network="polygon-mumbai" />
               </div>
             </div>
           </div>
