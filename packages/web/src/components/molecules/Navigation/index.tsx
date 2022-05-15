@@ -235,15 +235,17 @@ export const Navigation = () => {
             </button>
           )}
           {isConnected && accountAddress && (
-            <div className={`flex font-semibold ${BtnStyles}`}>
-              <div className="mr-6">
-                <span>
-                  {amount.toString()} {currency}
-                </span>
-              </div>
-              <span className="mr-3">{truncateEthAddress(accountAddress)}</span>
-              <Davatar size={18} address={accountAddress} />
-            </div>
+            <LinkWithNetwork passHref href="/profile">
+              <a className={`inline-box flex font-semibold ${BtnStyles}`}>
+                <div className="mr-6">
+                  <span>
+                    {amount.toString()} {currency}
+                  </span>
+                </div>
+                <span className="mr-3">{truncateEthAddress(accountAddress)}</span>
+                <Davatar size={18} address={accountAddress} />
+              </a>
+            </LinkWithNetwork>
           )}
         </div>
       </div>

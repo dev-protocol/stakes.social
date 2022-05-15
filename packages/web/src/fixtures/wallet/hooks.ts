@@ -34,14 +34,12 @@ const nonConnectedEthersL1Provider = new providers.JsonRpcProvider(providerUrl('
 export const useConnectWallet = () => {
   const { web3Modal, setProviders } = useContext(WalletContext)
   const [isConnecting, setIsConnecting] = useState(false)
-  const [isConnected, setIsConnected] = useState(false)
+  const { ethersProvider } = useContext(WalletContext)
 
   const connect = async () => {
     setIsConnecting(true)
-    setIsConnected(false)
     return connectWallet(setProviders, web3Modal).then(result => {
       setIsConnecting(false)
-      setIsConnected(result)
       return result
     })
   }
@@ -49,10 +47,9 @@ export const useConnectWallet = () => {
   const disconnect = () => {
     disconnectWallet(setProviders, web3Modal)
     setIsConnecting(false)
-    setIsConnected(false)
   }
 
-  return { isConnected, connect, disconnect, isConnecting }
+  return { isConnected: Boolean(ethersProvider), connect, disconnect, isConnecting }
 }
 
 export const useProvider = () => {
