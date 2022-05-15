@@ -236,7 +236,7 @@ export const Navigation = () => {
           )}
           {isConnected && accountAddress && (
             <LinkWithNetwork passHref href="/profile">
-              <a className={`inline-box flex font-semibold ${BtnStyles}`}>
+              <a className={`inline-box flex font-semibold text-inherit ${BtnStyles}`}>
                 <div className="mr-6">
                   <span>
                     {amount.toString()} {currency}
