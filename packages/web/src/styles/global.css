@@ -1,5 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@200;300;400;500;600;700&family=Syne:wght@500;600&display=swap');
 
+@font-face {
+  font-family: 'Clever';
+  font-weight: 700;
+  src: url('https://devstaticasset.azureedge.net/font/CleverBold.woff2') format('woff2'),
+    url('https://devstaticasset.azureedge.net/font/CleverBold.woff') format('woff');
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
