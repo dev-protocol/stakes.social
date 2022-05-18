@@ -1,8 +1,8 @@
-import React, { useState } from 'react'
+import React, { useMemo, useState } from 'react'
 import { useRouter, NextRouter } from 'next/router'
 import { LinkWithNetwork } from 'src/components/atoms/LinkWithNetwork'
 import styled from 'styled-components'
-import { useConnectWallet, useProvider } from 'src/fixtures/wallet/hooks'
+import { useConnectWallet, useDetectChain, useProvider } from 'src/fixtures/wallet/hooks'
 import StakesSocial from 'src/components/atoms/Svgs/svg/Stakes-social.svg'
 import { ArrowUpOutlined } from '@ant-design/icons'
 import { ChainName } from 'src/fixtures/wallet/utility'
@@ -142,8 +142,13 @@ const NetworkSelectedIndicator = ({ network, currentNetwork }: { network: ChainN
 const NetworkDropdown = () => {
   const router = useRouter()
   const { ethersProvider } = useProvider()
-  const { requestedChain: network } = useNetworkInRouter()
+  const { requestedChain } = useNetworkInRouter()
+  const { name: networkFromProvider } = useDetectChain(ethersProvider)
   const switchNetwork = createSwitchNetwork(router, ethersProvider)
+  const network = useMemo(
+    () => requestedChain ?? networkFromProvider ?? 'ethereum',
+    [requestedChain, networkFromProvider]
+  )
 
   const [isVisible, setIsVisible] = useState(false)
 
