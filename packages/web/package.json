@@ -59,7 +59,7 @@
     "query-string": "7.1.1",
     "ramda": "0.28.0",
     "react": "18.1.0",
-    "react-confetti": "6.0.1",
+    "react-confetti": "6.1.0",
     "react-countdown": "2.3.2",
     "react-device-detect": "2.2.2",
     "react-dom": "18.1.0",
