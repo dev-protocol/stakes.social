@@ -10,6 +10,7 @@ import { FeatureTag } from 'src/components/organisms/PropertyCardList'
 import { Container } from 'src/components/atoms/Container'
 import styled from 'styled-components'
 import { useDetectChain, useProvider } from 'src/fixtures/wallet/hooks'
+import { FeatureBanner } from 'src/components/_pages/home/FeatureBanner'
 
 type InitialProps = {}
 type Props = {} & InitialProps
@@ -62,6 +63,7 @@ const Index = (_: Props) => {
     <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
       <Header />
       <Container>
+        <FeatureBanner className="my-8" />
         <StyledSupplySummary apy={apy} creators={creators} annualSupplyGrowthRatio={annualSupplyGrowthRatio} />
         {isL2 === undefined ? (
           <></>

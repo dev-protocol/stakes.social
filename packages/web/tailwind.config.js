@@ -5,7 +5,8 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        syne: ['Syne', 'sans-serif']
+        syne: ['Syne', 'sans-serif'],
+        clever: ['Clever', 'sans-serif']
       }
     }
   },
