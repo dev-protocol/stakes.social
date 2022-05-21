@@ -88,7 +88,7 @@
     "@testing-library/user-event": "14.2.0",
     "@types/body-parser": "1.19.2",
     "@types/faker": "6.6.8",
-    "@types/ramda": "0.28.12",
+    "@types/ramda": "0.28.13",
     "@types/react": "17.0.45",
     "@types/react-dom": "18.0.4",
     "@types/string-hash": "1.1.1",
