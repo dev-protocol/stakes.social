@@ -9,7 +9,7 @@ import { ChainName } from 'src/fixtures/wallet/utility'
 import { switchChain } from 'src/fixtures/wallet/switch'
 import { providers } from 'ethers'
 import truncateEthAddress from 'truncate-eth-address'
-import Davatar from '@davatar/react'
+// import Davatar from '@davatar/react'
 import { useBalanceOf } from 'src/fixtures/dev-kit/hooks'
 import { DownOutlined } from '@ant-design/icons'
 import { useNetworkInRouter } from 'src/fixtures/utility'
@@ -248,7 +248,7 @@ export const Navigation = () => {
                   </span>
                 </div>
                 <span className="mr-3">{truncateEthAddress(accountAddress)}</span>
-                <Davatar size={18} address={accountAddress} />
+                {/* <Davatar size={18} address={accountAddress} /> */}
               </a>
             </LinkWithNetwork>
           )}
