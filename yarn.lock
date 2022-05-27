@@ -1134,10 +1134,10 @@
     js-base64 "^3.7.2"
     ramda "^0.27.0"
 
-"@devprotocol/dev-kit@6.3.1":
-  version "6.3.1"
-  resolved "https://registry.yarnpkg.com/@devprotocol/dev-kit/-/dev-kit-6.3.1.tgz#8ec352b3a6302d47eab3dec5c68458a5fb4a7228"
-  integrity sha512-FfFTy1z4O4KlvPUbvQ2APAbWw7ksbRSAaa9Q8/PAH77/RadiwNAw3bOx3Ps3HsBCL+jJHFr1RDWWn67/thNxQw==
+"@devprotocol/dev-kit@6.3.3":
+  version "6.3.3"
+  resolved "https://registry.yarnpkg.com/@devprotocol/dev-kit/-/dev-kit-6.3.3.tgz#f324e8cc20c736623705beec010e5d02bdcb877c"
+  integrity sha512-UPV/dCwBMQpLaL5XJXEkgoRYYwxaKuVQtun0PJQ/eDxxZMTbt7qj+V8T2Qni1Q0Q1YW6NeLGttFd7bxqtog+FQ==
   dependencies:
     "@devprotocol/util-ts" "^2.2.1"
     "@types/bent" "^7.3.1"
