@@ -149,8 +149,9 @@ class NextApp extends App<AppInitialProps & WithApolloProps<{}>> {
 
   render() {
     const { Component, pageProps, apollo } = this.props
+    const ready = this.state.web3Modal !== undefined
 
-    return (
+    return ready ? (
       <ApolloProvider client={client}>
         <WalletContext.Provider
           value={{
@@ -172,6 +173,8 @@ class NextApp extends App<AppInitialProps & WithApolloProps<{}>> {
           </SettingContext.Provider>
         </WalletContext.Provider>
       </ApolloProvider>
+    ) : (
+      <></>
     )
   }
 }
