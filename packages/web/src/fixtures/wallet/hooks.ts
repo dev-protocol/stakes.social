@@ -86,6 +86,7 @@ export const useProvider = () => {
       // When `web3` is defined, `accountAddress` is always defined
       return
     }
+    console.log('pre useProvider setState')
     setState({
       web3,
       ethersProvider,

@@ -30,6 +30,7 @@ export const useNetworkInRouter = () => {
     const requestedChain = SUPPORTED_CHAINS.find(x => x === fromRouter) ?? (isRoot ? 'ethereum' : undefined)
     setState({ fromRouter, isRoot, requestedChain })
   }, [pathname, fromRouter])
+
   return { ...state }
 }
 
@@ -48,5 +49,18 @@ export const useCachedRouter = () => {
     const next = { pathname, network }
     setRouter(next)
   }, [pathname, network])
+
+  useEffect(() => {
+    console.log('pathname updated: ', pathname)
+  }, [pathname])
+
+  useEffect(() => {
+    console.log('network updated: ', network)
+  }, [network])
+
+  useEffect(() => {
+    console.log('router updated')
+  }, [router])
+
   return { ...state }
 }
