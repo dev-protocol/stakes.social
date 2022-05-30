@@ -4,7 +4,7 @@ import { Modal } from 'antd'
 import Link from 'next/link'
 import { ChainName } from 'src/fixtures/wallet/utility'
 import styled from 'styled-components'
-import { useNetworkInRouter } from 'src/fixtures/utility'
+import { useRouter } from 'next/router'
 
 export const NETWORK_DEPENDENTS = [/^\/0x/, /^\/create/, /^\/liquidity/, /^\/positions/, /^\/stats/]
 
@@ -30,7 +30,7 @@ const hyphenToCapitalize = (str: string) =>
     .join(' ')
 
 export const ControlChain = ({ network }: { network?: ChainName }) => {
-  const { router } = useNetworkInRouter()
+  const router = useRouter()
   const { ethersProvider } = useProvider()
   const { name } = useDetectChain(ethersProvider)
   const shouldChooseNetwork = useMemo(() => NETWORK_DEPENDENTS.some(test => test.test(router.asPath)), [router.asPath])

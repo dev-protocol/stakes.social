@@ -1,3 +1,3 @@
-import Index from './[network]'
+import Index from './[network]/index_'
 
 export default Index

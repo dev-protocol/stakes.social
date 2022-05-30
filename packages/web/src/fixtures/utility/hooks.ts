@@ -1,7 +1,8 @@
-import { useEffect, DependencyList } from 'react'
+import { useEffect, DependencyList, useState } from 'react'
 import { useRouter } from 'next/router'
-import { useMemo } from 'react'
 import { SUPPORTED_CHAINS } from '../wallet/constants'
+import { UndefinedOr } from '@devprotocol/util-ts'
+import { ChainName } from '../wallet/utility'
 
 export function useEffectAsync(effect: () => void, deps?: DependencyList): void {
   useEffect(() => {
@@ -22,12 +23,30 @@ export const useLinkWithNetwork = () => {
 }
 
 export const useNetworkInRouter = () => {
+  const [state, setState] = useState<{ fromRouter?: string; isRoot: boolean; requestedChain: UndefinedOr<ChainName> }>()
+  const { pathname, network: fromRouter } = useCachedRouter()
+  useEffect(() => {
+    const isRoot = pathname === '/'
+    const requestedChain = SUPPORTED_CHAINS.find(x => x === fromRouter) ?? (isRoot ? 'ethereum' : undefined)
+    setState({ fromRouter, isRoot, requestedChain })
+  }, [pathname, fromRouter])
+  return { ...state }
+}
+
+export const useCachedRouter = () => {
   const router = useRouter()
-  const fromRouter = router?.query?.network
-  const isRoot = useMemo(() => router?.pathname === '/', [router])
-  const requestedChain = useMemo(
-    () => SUPPORTED_CHAINS.find(x => x === fromRouter) ?? (isRoot ? 'ethereum' : undefined),
-    [fromRouter, isRoot]
-  )
-  return { router, fromRouter, isRoot, requestedChain }
+  const [state, setRouter] = useState<{
+    pathname?: string
+    network?: string
+  }>()
+  const pathname = router.pathname
+  const network = router.query?.network as string
+  useEffect(() => {
+    if (pathname.startsWith('/[network]') && !network) {
+      return
+    }
+    const next = { pathname, network }
+    setRouter(next)
+  }, [pathname, network])
+  return { ...state }
 }
