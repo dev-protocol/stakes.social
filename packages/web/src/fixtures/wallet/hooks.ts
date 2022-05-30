@@ -58,6 +58,14 @@ const getNonConnected = (chain: ChainName) => ({
 })
 
 export const useProvider = () => {
+  const [state, setState] = useState<{
+    web3?: Web3
+    ethersProvider?: providers.BaseProvider
+    accountAddress?: string
+    nonConnectedWeb3?: Web3
+    nonConnectedEthersProvider?: providers.JsonRpcProvider
+    nonConnectedWeb3L1: Web3
+  }>()
   const { requestedChain } = useNetworkInRouter()
   const { web3, ethersProvider } = useContext(WalletContext)
   const { ncWeb3, ncEthersProvider } = useMemo(() => getNonConnected(requestedChain), [requestedChain])
@@ -65,14 +73,30 @@ export const useProvider = () => {
   useEffect(() => {
     getAccountAddress(web3).then(x => setAccountAddress(x))
   }, [web3])
+  useEffect(() => {
+    if (!requestedChain) {
+      // Should `requestedChain` be always defined
+      return
+    }
+    if (!ncWeb3 || !ncEthersProvider) {
+      // `ncWeb3` and `ncEthersProvider` are always defined
+      return
+    }
+    if (web3 && !accountAddress) {
+      // When `web3` is defined, `accountAddress` is always defined
+      return
+    }
+    setState({
+      web3,
+      ethersProvider,
+      accountAddress,
+      nonConnectedEthersProvider: ncEthersProvider,
+      nonConnectedWeb3: ncWeb3,
+      nonConnectedWeb3L1
+    })
+  }, [requestedChain, web3, ethersProvider, ncWeb3, ncEthersProvider, accountAddress])
   return {
-    web3,
-    ethersProvider,
-    accountAddress,
-    nonConnectedWeb3: ncWeb3,
-    nonConnectedEthersProvider: ncEthersProvider,
-    nonConnectedWeb3L1,
-    nonConnectedEthersL1Provider
+    ...state
   }
 }
 
