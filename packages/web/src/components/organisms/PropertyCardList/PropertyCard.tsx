@@ -108,8 +108,8 @@ export const PropertyCard = ({ propertyAddress, assets }: Props) => {
             </div>
             {stakerAddresses.length > 0 && (
               <div className="py-4 px-4 border-t font-syne flex">
-                {stakerAddresses.map(staker => (
-                  <div className="flex mr-2 items-center" key={`${propertyAddress}-${staker.address}`}>
+                {stakerAddresses.map((staker, index) => (
+                  <div className="flex mr-2 items-center" key={`${propertyAddress}-${staker.address}-${index}`}>
                     <Avatar accountAddress={staker.address} size={'42'} />
                     <span className="ml-4">{(staker.name ?? staker.address).substring(0, 4)}...</span>
                   </div>
