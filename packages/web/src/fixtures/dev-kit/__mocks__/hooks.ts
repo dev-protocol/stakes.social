@@ -20,6 +20,10 @@ export const useGetMyStakingAmount = () => {
   return { myStakingAmount: new BigNumber(5000) }
 }
 
+export const useGetTreasuryAmount = () => {
+  return { treasuryAmount: new BigNumber(9999) }
+}
+
 export const useWithdrawHolderReward = () => {
   return { withdraw: () => {} }
 }
