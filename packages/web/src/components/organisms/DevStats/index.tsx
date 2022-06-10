@@ -125,12 +125,12 @@ const DevStakingValue = (_: {}) => {
 
 const CreatorAPY = (_: {}) => {
   const { creators } = useAPY()
-  return creators ? <span>{creators?.dp(2).toNumber()}</span> : <></>
+  return creators ? <span>{creators.dp(2).toNumber()}</span> : <></>
 }
 
 const StakerAPY = (_: {}) => {
   const { apy } = useAPY()
-  return apy ? <span>{apy?.dp(2).toNumber()}</span> : <></>
+  return apy ? <span>{apy.dp(2).toNumber()}</span> : <></>
 }
 
 const SupplyGrowth = (_: {}) => {

@@ -14,7 +14,6 @@ import {
   getTotalStakingAmountOnProtocol,
   calculateMaxRewardsPerBlock,
   totalSupply,
-  holdersShare,
   createGetVotablePolicy,
   createAndAuthenticate,
   propertyAuthor,
@@ -58,12 +57,14 @@ import {
 } from 'src/fixtures/utility'
 import useSWR from 'swr'
 import { message } from 'antd'
-import { useMemo, useState, useCallback } from 'react'
+import { useMemo, useState, useCallback, useEffect } from 'react'
 import BigNumber from 'bignumber.js'
 import { useDetectChain, useIsL1, useProvider } from 'src/fixtures/wallet/hooks'
 import { useCurrency } from 'src/fixtures/currency/functions/useCurrency'
 import { isAddress } from 'web3-utils'
 import { UndefinedOr } from '@devprotocol/util-ts'
+import { estimationsAPY } from '@devprotocol/dev-kit/agent'
+import { providers } from 'ethers'
 
 interface DevAllocations {
   privateSale: string
@@ -573,58 +574,33 @@ export const useCreateAndAuthenticate = () => {
 }
 
 export const useAPY = () => {
-  const { nonConnectedEthersProvider, accountAddress } = useProvider()
-  const { name: chain } = useDetectChain(nonConnectedEthersProvider)
-  const { isL1 } = useIsL1()
-  const { data: maxRewards, error: maxRewardsError } = useSWR<UnwrapFunc<typeof calculateMaxRewardsPerBlock>, Error>(
-    SWRCachePath.calculateMaxRewardsPerBlock(chain, accountAddress),
-    () => whenDefined(nonConnectedEthersProvider, x => calculateMaxRewardsPerBlock(x).catch(() => '0')),
-    {
-      onError: err => {
-        console.log(err)
-        message.error(err.message)
-      },
-      revalidateOnFocus: false,
-      focusThrottleInterval: 0
-    }
-  )
-  const { data: totalStaking, error: totalStakingError } = useSWR<
-    UnwrapFunc<typeof getTotalStakingAmountOnProtocol>,
-    Error
-  >(
-    SWRCachePath.getTotalStakingAmountOnProtocol(chain, accountAddress),
-    () => whenDefined(nonConnectedEthersProvider, x => getTotalStakingAmountOnProtocol(x)),
-    {
-      onError: err => {
-        console.log(err)
-        message.error(err.message)
-      },
-      revalidateOnFocus: false,
-      focusThrottleInterval: 0
-    }
-  )
-  const { data: holders, error: holdersError } = useSWR<UnwrapFunc<typeof holdersShare>, Error>(
-    SWRCachePath.holdersShare(chain, maxRewards, totalStaking),
-    () =>
-      maxRewards && totalStaking
-        ? whenDefined(nonConnectedEthersProvider, x => holdersShare(x, maxRewards, totalStaking))
-        : undefined,
-    {
-      onError: err => {
-        console.log(err)
-        message.error(err.message)
-      },
-      revalidateOnFocus: false,
-      focusThrottleInterval: 0
-    }
-  )
+  const { nonConnectedEthersProvider } = useProvider()
+  const [apy, setApy] = useState<UndefinedOr<BigNumber>>()
+  const [creators, setCreators] = useState<UndefinedOr<BigNumber>>()
 
-  const stakers = maxRewards && holders ? new BigNumber(maxRewards).minus(new BigNumber(holders)) : undefined
-  const year = useMemo(() => new BigNumber(isL1 || isL1 === undefined ? 2102400 : 31536000), [isL1])
-  const apy = stakers && totalStaking ? stakers.times(year).div(totalStaking).times(100) : undefined
-  const creators = holders && totalStaking ? new BigNumber(holders).times(year).div(totalStaking).times(100) : undefined
+  const fetchApy = async (provider: providers.BaseProvider) => {
+    const [apyForStakers, apyForCreators] = await estimationsAPY({ provider })
+    return { apyForStakers, apyForCreators }
+  }
 
-  return { apy, creators, error: maxRewardsError || totalStakingError || holdersError }
+  useEffect(() => {
+    let isApiSubscribed = true
+    if (!nonConnectedEthersProvider) {
+      return
+    }
+    fetchApy(nonConnectedEthersProvider).then(({ apyForStakers, apyForCreators }) => {
+      if (isApiSubscribed) {
+        setApy(apyForStakers ? new BigNumber(apyForStakers) : undefined)
+        setCreators(apyForCreators ? new BigNumber(apyForCreators) : undefined)
+      }
+    })
+
+    return () => {
+      isApiSubscribed = false
+    }
+  }, [nonConnectedEthersProvider])
+
+  return { apy, creators }
 }
 
 export const useTotalSupply = () => {
