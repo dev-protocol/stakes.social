@@ -31,7 +31,7 @@ export const PropertyCard = ({ propertyAddress, assets }: Props) => {
   const { data: dataAuthor } = useGetAccount(authorAddress)
   const { data: dataProperty } = useGetProperty(propertyAddress)
   const { name: propertyName } = usePropertyName(propertyAddress)
-  const { sTokensByPropertyAddress }: { sTokensByPropertyAddress: number[] | undefined } =
+  const { sTokensByPropertyAddress }: { sTokensByPropertyAddress: readonly number[] | undefined } =
     useDetectSTokens(propertyAddress)
   const [stakerAddresses, setStakerAddresses] = useState<{ name: UndefinedOr<string>; address: string }[]>([])
 

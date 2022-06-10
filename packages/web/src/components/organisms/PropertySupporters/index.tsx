@@ -170,7 +170,7 @@ const tableColumns = [
   }
 ]
 
-const SupportersTable = ({ sTokenIds }: { sTokenIds: number[] }) => {
+const SupportersTable = ({ sTokenIds }: { sTokenIds: readonly number[] }) => {
   const { nonConnectedEthersProvider, nonConnectedEthersL1Provider } = useProvider()
   const [tableData, setTableData] = useState<Array<TableData>>([])
   const [loading, setLoading] = useState(false)

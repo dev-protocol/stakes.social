@@ -134,6 +134,9 @@ const TopStakers4L2 = ({ propertyAddress }: TopStakersProps) => {
 
   useEffect(() => {
     const fetcher = async () => {
+      if (!data) {
+        return
+      }
       const promises = data.map(async (sTokenId: number) => {
         return fetchPosition(nonConnectedEthersProvider, sTokenId)
           ?.then((positions: any) => {
@@ -141,7 +144,7 @@ const TopStakers4L2 = ({ propertyAddress }: TopStakersProps) => {
           })
           .catch(() => {})
       })
-      const results: Position[] = await Promise.all(promises)
+      const results = (await Promise.all(promises)) as Position[]
       const compFunc = (a: Position, b: Position): number => {
         if (a.amount < b.amount) {
           return 1

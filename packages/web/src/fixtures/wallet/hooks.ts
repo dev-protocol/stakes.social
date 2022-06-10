@@ -59,7 +59,15 @@ export const useProvider = () => {
   const ncEthersProvider = useMemo(() => nonConnectedEthersProvider(requestedChain ?? 'ethereum'), [requestedChain])
   const [accountAddress, setAccountAddress] = useState<undefined | string>(undefined)
   useEffect(() => {
-    getAccountAddress(web3).then(x => setAccountAddress(x))
+    let isSubscribed = true
+    getAccountAddress(web3).then(x => {
+      if (isSubscribed) {
+        setAccountAddress(x)
+      }
+    })
+    return () => {
+      isSubscribed = false
+    }
   }, [web3])
   return {
     web3,
@@ -75,7 +83,17 @@ export const useProvider = () => {
 export const useDetectChain = (ethersProvider?: providers.BaseProvider) => {
   const [chain, setChain] = useState<undefined | { chainId?: number; name?: ChainName }>()
   useEffect(() => {
-    detectChain(ethersProvider).then(setChain)
+    let isSubscribed = true
+
+    detectChain(ethersProvider).then(res => {
+      if (isSubscribed) {
+        setChain(res)
+      }
+    })
+
+    return () => {
+      isSubscribed = false
+    }
   }, [ethersProvider])
   return { chainId: chain?.chainId, name: chain?.name }
 }

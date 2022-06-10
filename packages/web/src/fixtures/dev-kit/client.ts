@@ -13,6 +13,7 @@ import BigNumber from 'bignumber.js'
 import { ethers, providers, Event } from 'ethers'
 import { ChainName, detectChain } from '../wallet/utility'
 import { whenDefinedAll, whenDefined, UndefinedOr } from '@devprotocol/util-ts'
+import { clientsMarketFactory, clientsProperty, clientsSTokens } from '@devprotocol/dev-kit/agent'
 
 const cacheForContractFactory: WeakMap<
   providers.BaseProvider,
@@ -62,22 +63,6 @@ const getL2Registry = async (prov: providers.BaseProvider) => {
     ? addresses.polygon.mainnet
     : net === 'polygon-mumbai'
     ? addresses.polygon.mumbai
-    : undefined
-}
-const getSTokensAddress = async (prov: providers.BaseProvider) => {
-  const net = await getNetwork(prov)
-  return net === 'ethereum'
-    ? addresses.eth.main.sTokens
-    : net === 'ropsten'
-    ? addresses.eth.ropsten.sTokens
-    : net === 'arbitrum-one'
-    ? addresses.arbitrum.one.sTokens
-    : net === 'arbitrum-rinkeby'
-    ? addresses.arbitrum.rinkeby.sTokens
-    : net === 'polygon'
-    ? addresses.polygon.mainnet.sTokens
-    : net === 'polygon-mumbai'
-    ? addresses.polygon.mumbai.sTokens
     : undefined
 }
 
@@ -383,18 +368,14 @@ export const balanceOfProperty = async (
 }
 
 export const positionsOfOwner = async (prov: providers.BaseProvider, accountAddress: string) => {
-  const [, , client] = await newClient(prov)
-  const address = await getSTokensAddress(prov)
-  if (client && address) {
-    const TokenIdList = await client.sTokens(address).positionsOfOwner(accountAddress)
-    return TokenIdList
-  }
-  return undefined
+  const [l1, l2] = await clientsSTokens(prov)
+  return (l1 || l2)?.positionsOfOwner(accountAddress)
 }
 
 export const detectStokens = async (prov: providers.BaseProvider, propertyAddress: string, accountAddress: string) => {
   const [, , client] = await newClient(prov)
-  const address = await getSTokensAddress(prov)
+  const [l1, l2] = await clientsSTokens(prov)
+  const address = (l1 || l2)?.contract().address
   if (client && address) {
     const TokenIdList = await devClient.createDetectSTokens(client.sTokens(address))(propertyAddress, accountAddress)
     return TokenIdList
@@ -403,58 +384,40 @@ export const detectStokens = async (prov: providers.BaseProvider, propertyAddres
 }
 
 export const detectStokensByPropertyAddress = async (prov: providers.BaseProvider, propertyAddress: string) => {
-  const [, , client] = await newClient(prov)
-  const address = await getSTokensAddress(prov)
-  if (client && address) {
-    const TokenIdList = await (client.sTokens(address) as any).positionsOfProperty(propertyAddress)
-    return TokenIdList
-  }
-  return undefined
+  const [l1, l2] = await clientsSTokens(prov)
+  return (l1 || l2)?.positionsOfProperty(propertyAddress)
 }
 
+// TODO getStokenTokenURI and getTokenURI look to do the same thing
+// should be refactored
 export const getStokenTokenURI = async (prov: providers.BaseProvider, sTokenID: number) => {
-  const [, , client] = await newClient(prov)
-  const address = await getSTokensAddress(prov)
-  if (client && address) {
-    return client.sTokens(address).tokenURI(sTokenID)
-  }
-  return undefined
+  const [l1, l2] = await clientsSTokens(prov)
+  return (l1 || l2)?.tokenURI(sTokenID)
 }
+export const getTokenURI = async (prov: providers.BaseProvider, sTokenID: number) => {
+  const [l1, l2] = await clientsSTokens(prov)
+  return (l1 || l2)?.tokenURI(sTokenID)
+}
+// end
 
 export const setStokenTokenURIImage = async (prov: providers.BaseProvider, sTokenID: number, data: string) => {
-  const [, , client] = await newClient(prov)
-  const address = await getSTokensAddress(prov)
-  if (client && address) {
-    return client.sTokens(address).setTokenURIImage(sTokenID, data)
-  }
-  return undefined
+  const [l1, l2] = await clientsSTokens(prov)
+  return (l1 || l2)?.setTokenURIImage(sTokenID, data)
 }
 
 export const getStokenOwnerOf = async (prov: providers.BaseProvider, sTokenID: number) => {
-  const [, , client] = await newClient(prov)
-  const address = await getSTokensAddress(prov)
-  if (client && address) {
-    return client.sTokens(address).ownerOf(sTokenID)
-  }
-  return undefined
+  const [l1, l2] = await clientsSTokens(prov)
+  return (l1 || l2)?.ownerOf(sTokenID)
 }
 
 export const getStokenPositions = async (prov: providers.BaseProvider, sTokenID: number) => {
-  const [, , client] = await newClient(prov)
-  const address = await getSTokensAddress(prov)
-  if (client && address) {
-    return client.sTokens(address).positions(sTokenID)
-  }
-  return undefined
+  const [l1, l2] = await clientsSTokens(prov)
+  return (l1 || l2)?.positions(sTokenID)
 }
 
-export const getStokenRewards = async (prov: providers.BaseProvider, sTokenId: number) => {
-  const [, , client] = await newClient(prov)
-  const address = await getSTokensAddress(prov)
-  if (client && address) {
-    return client.sTokens(address).rewards(sTokenId)
-  }
-  return undefined
+export const getStokenRewards = async (prov: providers.BaseProvider, sTokenID: number) => {
+  const [l1, l2] = await clientsSTokens(prov)
+  return (l1 || l2)?.rewards(sTokenID)
 }
 
 export const allowance = async (prov: providers.BaseProvider, contractAddress: string, address?: string) => {
@@ -511,32 +474,20 @@ export const migrateToSTokens = async (prov: providers.BaseProvider, propertyAdd
   return undefined
 }
 
-export const getTokenURI = async (prov: providers.BaseProvider, sTokenId: number) => {
-  const [, , client] = await newClient(prov)
-  const address = await getSTokensAddress(prov)
-  if (client && address) {
-    return client.sTokens(address).tokenURI(sTokenId)
-  }
-  return undefined
-}
-
 export const getStokenSymbol = async (prov: providers.BaseProvider, sTokenId: number) => {
-  const [, , client] = await newClient(prov)
-  const address = await getSTokensAddress(prov)
-  if (client && address) {
-    return client
-      .sTokens(address)
-      .positions(sTokenId)
-      .then(res => client.property(res.property).symbol)
+  const [l1STokens, l2STokens] = await clientsSTokens(prov)
+  const positions = await (l1STokens || l2STokens)?.positions(sTokenId)
+  if (!positions) {
+    return undefined
   }
-  return undefined
+  const [l1Property, l2Property] = await clientsProperty(prov, positions.property)
+  return (l1Property || l2Property)?.symbol
 }
 
 export const getEnabledMarkets = async (prov: providers.BaseProvider) => {
-  const [, l2] = await newClient(prov)
-  const reg = await getL2Registry(prov)
-  if (l2 && reg) {
-    return l2.marketFactory(reg.marketFactory).getEnabledMarkets()
+  const [, l2] = await clientsMarketFactory(prov)
+  if (l2) {
+    return l2?.getEnabledMarkets()
   }
   return undefined
 }
@@ -583,7 +534,8 @@ export const getId = async (prov: providers.BaseProvider, marketBehavior: string
 }
 
 export const getStokenHeldAt = async (prov: providers.BaseProvider, sTokenId: number) => {
-  const address = await getSTokensAddress(prov)
+  const [l1, l2] = await clientsSTokens(prov)
+  const address = (l1 || l2)?.contract().address
   if (address) {
     const contract = new ethers.Contract(address, [...sTokensAbi], prov)
     return contract.queryFilter(contract.filters.Transfer('0x0000000000000000000000000000000000000000', null, sTokenId))
