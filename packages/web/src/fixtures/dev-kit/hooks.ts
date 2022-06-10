@@ -590,8 +590,8 @@ export const useAPY = () => {
     }
     fetchApy(nonConnectedEthersProvider).then(({ apyForStakers, apyForCreators }) => {
       if (isApiSubscribed) {
-        setApy(apyForStakers ? new BigNumber(apyForStakers) : undefined)
-        setCreators(apyForCreators ? new BigNumber(apyForCreators) : undefined)
+        setApy(apyForStakers ? new BigNumber(apyForStakers * 100) : undefined)
+        setCreators(apyForCreators ? new BigNumber(apyForCreators * 100) : undefined)
       }
     })
 
