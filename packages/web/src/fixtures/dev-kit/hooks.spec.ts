@@ -12,7 +12,6 @@ import {
   useCreateProperty,
   useMarketScheme,
   useAuthenticate,
-  useAPY,
   useAnnualSupplyGrowthRatio,
   useGetPolicyAddressesList,
   usePropertyAuthor,
