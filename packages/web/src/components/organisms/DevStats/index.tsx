@@ -125,12 +125,12 @@ const DevStakingValue = (_: {}) => {
 
 const CreatorAPY = (_: {}) => {
   const { creators } = useAPY()
-  return creators ? <span>{creators.toFixed(2)}</span> : <></>
+  return creators ? <span>{creators.dp(2).toNumber()}</span> : <></>
 }
 
 const StakerAPY = (_: {}) => {
   const { apy } = useAPY()
-  return apy ? <span>{apy.toFixed(2)}</span> : <></>
+  return apy ? <span>{apy.dp(2).toNumber()}</span> : <></>
 }
 
 const SupplyGrowth = (_: {}) => {
@@ -159,7 +159,9 @@ const CreatorsRewardsDev = (_: {}) => {
   const { totalStakingAmount } = useTotalStakingAmountOnProtocol()
   const totalStakingAmountValue = toNaturalNumber(new BigNumber(totalStakingAmount || 0))
   const creatorsRewardsDev =
-    creators && totalStakingAmount ? new BigNumber((creators / 100) * totalStakingAmountValue.toNumber()) : null
+    creators && totalStakingAmount
+      ? new BigNumber(creators.div(100).toNumber() * totalStakingAmountValue.toNumber())
+      : null
   return creatorsRewardsDev ? <span>{creatorsRewardsDev?.dp(0).toFormat()}</span> : <></>
 }
 
@@ -170,7 +172,7 @@ const CreatorsRewardsUsd = (_: {}) => {
   const totalStakingAmountValue = toNaturalNumber(new BigNumber(totalStakingAmount || 0))
   const creatorsRewardsDev =
     creators && totalStakingAmount
-      ? new BigNumber((creators / 100) * totalStakingAmountValue.toNumber() * devPrice.toNumber())
+      ? new BigNumber(creators.div(100).toNumber() * totalStakingAmountValue.toNumber() * devPrice.toNumber())
       : null
   return creatorsRewardsDev ? <span>{creatorsRewardsDev?.dp(0).toFormat()}</span> : <></>
 }

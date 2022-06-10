@@ -55,8 +55,8 @@ export const Statistics = ({
         precision={2}
       />
       <Statistic title="Unstaked Value" value={amount ? amount.toNumber() : 'N/A'} suffix={currency} precision={2} />
-      <Statistic title="Staker APY" value={apy ?? 'N/A'} suffix="%" precision={2} />
-      <Statistic title="Creator APY" value={creators ?? 'N/A'} suffix="%" precision={2} />
+      <Statistic title="Staker APY" value={apy ? apy.toNumber() : 'N/A'} suffix="%" precision={2} />
+      <Statistic title="Creator APY" value={creators ? creators.toNumber() : 'N/A'} suffix="%" precision={2} />
     </Wrap>
   ) : (
     <Text type="secondary">(Not provide this feature yet on L2)</Text>

@@ -575,8 +575,8 @@ export const useCreateAndAuthenticate = () => {
 
 export const useAPY = () => {
   const { nonConnectedEthersProvider } = useProvider()
-  const [apy, setApy] = useState<UndefinedOr<number>>()
-  const [creators, setCreators] = useState<UndefinedOr<number>>()
+  const [apy, setApy] = useState<UndefinedOr<BigNumber>>()
+  const [creators, setCreators] = useState<UndefinedOr<BigNumber>>()
 
   const fetchApy = async (provider: providers.BaseProvider) => {
     const [apyForStakers, apyForCreators] = await estimationsAPY({ provider })
@@ -590,8 +590,8 @@ export const useAPY = () => {
     }
     fetchApy(nonConnectedEthersProvider).then(({ apyForStakers, apyForCreators }) => {
       if (isApiSubscribed) {
-        setApy(apyForStakers ? apyForStakers * 100 : undefined)
-        setCreators(apyForCreators ? apyForCreators * 100 : undefined)
+        setApy(apyForStakers ? new BigNumber(apyForStakers) : undefined)
+        setCreators(apyForCreators ? new BigNumber(apyForCreators) : undefined)
       }
     })
 

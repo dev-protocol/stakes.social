@@ -3,8 +3,8 @@ import styled from 'styled-components'
 import BigNumber from 'bignumber.js'
 
 interface Props {
-  apy?: number
-  creators?: number
+  apy?: BigNumber
+  creators?: BigNumber
   annualSupplyGrowthRatio?: BigNumber
   className?: string
 }
@@ -60,11 +60,11 @@ export const SupplySummary = ({ apy, creators, annualSupplyGrowthRatio, classNam
       <h2>Current Staking Rewards</h2>
       <div className="grid grid-cols-3 pb-8 pt-2">
         <SupplyBadge>
-          <Statistics>{apy?.toFixed(2)}%</Statistics>
+          <Statistics>{apy?.dp(2).toNumber()}%</Statistics>
           <label>Stakers APY</label>
         </SupplyBadge>
         <SupplyBadge>
-          <Statistics>{creators?.toFixed(2)}%</Statistics>
+          <Statistics>{creators?.dp(2).toNumber()}%</Statistics>
           <label>Creators APY</label>
           <a target="_blank" rel="noopener noreferrer" href="https://docs.devprotocol.xyz/introduction/devtoken/">
             Learn more
