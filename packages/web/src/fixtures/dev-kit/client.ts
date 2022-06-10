@@ -14,13 +14,7 @@ import BigNumber from 'bignumber.js'
 import { ethers, providers, Event } from 'ethers'
 import { ChainName, detectChain } from '../wallet/utility'
 import { whenDefinedAll, whenDefined, UndefinedOr } from '@devprotocol/util-ts'
-import {
-  clientsLockup,
-  clientsMarketFactory,
-  clientsPolicy,
-  clientsProperty,
-  clientsSTokens
-} from '@devprotocol/dev-kit/agent'
+import { clientsLockup, clientsMarketFactory, clientsProperty, clientsSTokens } from '@devprotocol/dev-kit/agent'
 
 const cacheForContractFactory: WeakMap<
   providers.BaseProvider,
