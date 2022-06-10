@@ -303,15 +303,6 @@ export const totalSupply = async (prov: providers.BaseProvider) => {
   return undefined
 }
 
-export const holdersShare = async (prov: providers.BaseProvider, amount: string, lockedups: string) => {
-  const [, , client] = await newClient(prov)
-  const getContractAddress = createGetContractAddress(prov)
-  if (client) {
-    return client.policy(await getContractAddress(client, 'policy')).holdersShare(amount, lockedups)
-  }
-  return undefined
-}
-
 export const createGetVotablePolicy = async (prov: providers.BaseProvider) => {
   const [client] = await newClient(prov)
   const getContractAddress = createGetContractAddress(prov)
