@@ -8,7 +8,6 @@ import { useProvider, useConnectWallet } from 'src/fixtures/wallet/hooks'
 import { ResponsiveModal } from 'src/components/atoms/ResponsiveModal'
 import { useENS } from 'src/fixtures/ens/hooks'
 import { useEffect } from 'react'
-import Davatar from '@davatar/react'
 
 const WalletContainer = styled.div`
   margin: -2rem 0 1rem 0;
@@ -17,9 +16,9 @@ const AccountContainer = styled.div`
   display: flex;
   align-items: center;
 `
-const Avatar = styled.div`
-  margin-right: 8px;
-`
+// const Avatar = styled.div`
+//   margin-right: 8px;
+// `
 const WalletAddressContainer = styled.div`
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -82,11 +81,11 @@ export const WalletSettings = (_: Props) => {
       <WalletContainer>
         <img src={wallet.logo} height="30" width="30" />
         <AccountContainer>
-          {accountAddress && (
+          {/* {accountAddress && (
             <Avatar>
               <Davatar size={24} address={accountAddress} />
             </Avatar>
-          )}
+          )} */}
           <WalletAddressContainer>{ens || accountAddress}</WalletAddressContainer>
         </AccountContainer>
       </WalletContainer>
