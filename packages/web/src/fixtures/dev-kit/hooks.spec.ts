@@ -558,37 +558,6 @@ describe('dev-kit hooks', () => {
     })
   })
 
-  describe('useAPY', () => {
-    test('data is undefined', () => {
-      const data = undefined
-      const error = undefined
-      ;(useSWR as jest.Mock).mockImplementation(() => ({ data, error }))
-      const { result } = renderHook(() => useAPY())
-      expect(result.current.apy).toBe(data)
-    })
-
-    test('success fetching data', () => {
-      const apyForStakers = new BigNumber(1000).times(2102400).div(500000).times(100)
-      const apyForCreators = new BigNumber(9000).times(2102400).div(500000).times(100)
-      ;(useSWR as jest.Mock).mockImplementationOnce(() => ({ data: '10000', error: undefined }))
-      ;(useSWR as jest.Mock).mockImplementationOnce(() => ({ data: '500000', error: undefined }))
-      ;(useSWR as jest.Mock).mockImplementationOnce(() => ({ data: '9000', error: undefined }))
-      const { result } = renderHook(() => useAPY())
-      expect(result.current.apy?.toFixed()).toBe(apyForStakers.toFixed())
-      expect(result.current.creators?.toFixed()).toBe(apyForCreators.toFixed())
-    })
-
-    test('failure fetching data', () => {
-      const data = undefined
-      const errorMessage = 'error'
-      const error = new Error(errorMessage)
-      ;(useSWR as jest.Mock).mockImplementation(() => ({ data, error }))
-      const { result } = renderHook(() => useAPY())
-      expect(result.current.error).toBe(error)
-      expect(result.current.error?.message).toBe(errorMessage)
-    })
-  })
-
   describe('useAnnualSupplyGrowthRatio', () => {
     test('data is undefined', () => {
       const data = undefined
