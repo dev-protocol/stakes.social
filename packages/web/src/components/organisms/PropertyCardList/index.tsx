@@ -142,9 +142,8 @@ const FeatureTags = ({ tag }: { tag: FeatureTag }) => {
 }
 
 export const PropertyCardList = ({ currentPage, searchWord, sortBy, featureTag }: Props) => {
-  const { accountAddress } = useProvider()
+  const { accountAddress, nonConnectedEthersProvider } = useProvider()
   const [perPage, setPerPage] = useState(DEFAULT_PER_PAGE)
-  const { nonConnectedEthersProvider } = useProvider()
   const { name: network } = useDetectChain(nonConnectedEthersProvider)
   const denyList = useMemo(() => getDenyList(network), [network])
   const { data, loading } = useListPropertyQuery({
