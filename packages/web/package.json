@@ -21,7 +21,7 @@
     "@devprotocol/khaos-kit": "1.4.0",
     "@devprotocol/util-ts": "2.2.1",
     "@metamask/detect-provider": "1.2.0",
-    "@quentin-sommer/react-useragent": "3.1.1",
+    "@quentin-sommer/react-useragent": "3.2.0",
     "@svgr/webpack": "6.2.1",
     "@tailwindcss/line-clamp": "0.4.0",
     "@types/gtag.js": "0.0.10",

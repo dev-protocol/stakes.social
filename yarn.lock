@@ -4030,10 +4030,10 @@
   resolved "https://registry.yarnpkg.com/@protobufjs/utf8/-/utf8-1.1.0.tgz#a777360b5b39a1a2e5106f8e858f2fd2d060c570"
   integrity sha1-p3c2C1s5oaLlEG+OhY8v0tBgxXA=
 
-"@quentin-sommer/react-useragent@3.1.1":
-  version "3.1.1"
-  resolved "https://registry.yarnpkg.com/@quentin-sommer/react-useragent/-/react-useragent-3.1.1.tgz#8e3bd07abc2ab1b522b171616bcab60eaac6610c"
-  integrity sha512-AnlVmIZdWFA+QIrjcKh5S83DZL75V7NaFJyk+cUpY6xXTgD1GAB3PcjPcvfOAtzze8fvOpGdJBkaHaCrv2ZLYQ==
+"@quentin-sommer/react-useragent@3.2.0":
+  version "3.2.0"
+  resolved "https://registry.yarnpkg.com/@quentin-sommer/react-useragent/-/react-useragent-3.2.0.tgz#76e235d55d3c2610277e4fa42e8bbb6d862cbf2d"
+  integrity sha512-4ZCL6AZp5p4vtZv+2cE//aGRv0OCUaoa/YgNya4aJbNXRRJdHN8ZvB+sb7EpyylbkqW9MukFXBf51/V3iT3I7g==
   dependencies:
     ua-parser-js "^0.7.20"
 
