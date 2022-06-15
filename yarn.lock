@@ -14837,10 +14837,10 @@ lorem-ipsum@2.0.8:
   dependencies:
     commander "^9.3.0"
 
-lottie-react@2.2.1:
-  version "2.2.1"
-  resolved "https://registry.yarnpkg.com/lottie-react/-/lottie-react-2.2.1.tgz#27fbb85a11000557d7166c36a630fe1e5ce07028"
-  integrity sha512-lAdIUw+zeHLX3gtyLkisa4QM9NkTUUeZTsEL53laBEsjIH4JibgwkioZuza8CtwZ7/cpPZRbCRXWKfiuaDZWww==
+lottie-react@2.3.0:
+  version "2.3.0"
+  resolved "https://registry.yarnpkg.com/lottie-react/-/lottie-react-2.3.0.tgz#2783d6e707161baa4ed7eb1881de308d6cfc08ce"
+  integrity sha512-zf4XCZ6uttAL+7q/vnnrh0r/C7LTO1hBGvAiOEPgNV4l6y8xUPCKT494aV51lafRt7nMjdVrkCdEGOBbpxSPwA==
   dependencies:
     lottie-web "^5.8.1"
 
