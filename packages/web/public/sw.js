@@ -8,12 +8,11 @@ const handler = async event => {
   const { request } = event
   if (!requests.get(key)) {
     requests.set(key, fetch(request.clone()))
+    console.debug('send request', key)
     setTimeout(() => {
       console.debug('purge cache', key)
       requests.delete(key)
     }, TS)
-
-    return fetch(request)
   }
 
   const result = (await requests.get(key)).clone()
