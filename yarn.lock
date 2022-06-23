@@ -14844,17 +14844,17 @@ lorem-ipsum@2.0.8:
   dependencies:
     commander "^9.3.0"
 
-lottie-react@2.3.0:
-  version "2.3.0"
-  resolved "https://registry.yarnpkg.com/lottie-react/-/lottie-react-2.3.0.tgz#2783d6e707161baa4ed7eb1881de308d6cfc08ce"
-  integrity sha512-zf4XCZ6uttAL+7q/vnnrh0r/C7LTO1hBGvAiOEPgNV4l6y8xUPCKT494aV51lafRt7nMjdVrkCdEGOBbpxSPwA==
+lottie-react@2.3.1:
+  version "2.3.1"
+  resolved "https://registry.yarnpkg.com/lottie-react/-/lottie-react-2.3.1.tgz#697060417bab027edb57ed45bda9d62e920d4040"
+  integrity sha512-8cxd6XZZtECT6LoAhCftRdYrEpHxiouvB5EPiYA+TtCG5LHNYAdMS9IVIHcxKtWnpo7x16QfCLj1XLXZpaN81A==
   dependencies:
-    lottie-web "^5.8.1"
+    lottie-web "^5.9.4"
 
-lottie-web@^5.8.1:
-  version "5.9.1"
-  resolved "https://registry.yarnpkg.com/lottie-web/-/lottie-web-5.9.1.tgz#0090e575de74e49843606c1722767604e068f061"
-  integrity sha512-3uKtU6BhIK6ZRCE/QyiXq/KuRvPeEAz/VFwqd99jPbpgFY9gHLw2krqvcuCFGepeW94BipS/B3TqIfTc9pUeZg==
+lottie-web@^5.9.4:
+  version "5.9.4"
+  resolved "https://registry.yarnpkg.com/lottie-web/-/lottie-web-5.9.4.tgz#c01478ee5dd47f916cb4bb79040c11d427872d57"
+  integrity sha512-bSs1ZTPifnBVejO1MnQHdfrKfcn02YTCmgOh2wcAEICqRA0V7GzDh8FnwXY6+EzT+i8XOunaIloo/5xC5YNbsA==
 
 lower-case-first@^2.0.2:
   version "2.0.2"
