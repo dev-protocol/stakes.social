@@ -1961,10 +1961,10 @@
     js-base64 "^3.7.2"
     ramda "^0.27.0"
 
-"@devprotocol/dev-kit@6.8.3":
-  version "6.8.3"
-  resolved "https://registry.yarnpkg.com/@devprotocol/dev-kit/-/dev-kit-6.8.3.tgz#e768df98b5ad4904e8d8b45311ccb3d741f52b14"
-  integrity sha512-8HHIZk5pL39BiHtUmnkdks+6GdnA9ZqRhrCbH1WolPsP/nXuDvp3S+wTE2SxqhKez1OFwFQBwR+KC3hPuK4amA==
+"@devprotocol/dev-kit@6.8.4":
+  version "6.8.4"
+  resolved "https://registry.yarnpkg.com/@devprotocol/dev-kit/-/dev-kit-6.8.4.tgz#61f56bb0bba8815ccaa0328068a023d3359238fb"
+  integrity sha512-i28fF9JlAlNflUnPMXiB/MjUNKV0X5dOLYWswaBvl/iGkbAR30h+E1uIHmCWI7D2TD55jtDWOX9cEKeQZrysww==
   dependencies:
     "@devprotocol/util-ts" "^2.2.1"
     "@types/bent" "^7.3.1"
