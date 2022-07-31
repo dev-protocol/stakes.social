@@ -18,7 +18,7 @@ export const errorHandler =
 
 const isBrowser = typeof window !== 'undefined'
 
-// DUPULICATED
+// DUPLICATED
 export default withApollo<NormalizedCacheObject>(
   ({ ctx, headers }) => {
     const withHttp = createHttpLink({
