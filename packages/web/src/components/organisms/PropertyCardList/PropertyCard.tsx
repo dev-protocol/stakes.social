@@ -13,7 +13,7 @@ import { LinkWithNetwork } from 'src/components/atoms/LinkWithNetwork'
 import truncateEthAddress from 'truncate-eth-address'
 import { UserOutlined } from '@ant-design/icons'
 import { UndefinedOr, whenDefined } from '@devprotocol/util-ts'
-import { getStokenOwnerOf } from 'src/fixtures/dev-kit/client'
+import { getStokenOwnerOf, getStokenPositions } from 'src/fixtures/dev-kit/client'
 import { getAccount } from 'src/fixtures/dev-for-apps/utility'
 
 interface Props {
@@ -37,6 +37,11 @@ export const PropertyCard = ({ propertyAddress, assets }: Props) => {
 
   const fetchStakers = useCallback(
     async (sTokenId: number) => {
+      const position = await whenDefined(nonConnectedEthersProvider, client => getStokenPositions(client, sTokenId))
+      if (!Number(position?.amount)) {
+        return
+      }
+
       const address = await whenDefined(nonConnectedEthersProvider, client => getStokenOwnerOf(client, sTokenId))
       if (!address) {
         return
@@ -56,9 +61,7 @@ export const PropertyCard = ({ propertyAddress, assets }: Props) => {
       return
     }
 
-    const latestStakers = sTokensByPropertyAddress.slice(0, 3)
-
-    latestStakers.forEach(id => fetchStakers(id))
+    sTokensByPropertyAddress.forEach(fetchStakers)
   }, [sTokensByPropertyAddress, fetchStakers])
 
   return (
@@ -108,7 +111,7 @@ export const PropertyCard = ({ propertyAddress, assets }: Props) => {
             </div>
             {stakerAddresses.length > 0 && (
               <div className="py-4 px-4 border-t font-syne flex">
-                {stakerAddresses.map(staker => (
+                {stakerAddresses.slice(0, 3).map(staker => (
                   <div className="flex mr-2 items-center" key={`${propertyAddress}-${staker.address}`}>
                     <Avatar accountAddress={staker.address} size={'42'} />
                     <span className="ml-4">{(staker.name ?? staker.address).substring(0, 4)}...</span>
