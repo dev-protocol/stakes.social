@@ -1964,16 +1964,18 @@
     mersenne-twister "^1.1.0"
     react-blockies "^1.4.1"
 
-"@devprotocol/alias-legacy-dev-kit@npm:@devprotocol/dev-kit@4.7.0":
-  version "4.7.0"
-  resolved "https://registry.yarnpkg.com/@devprotocol/dev-kit/-/dev-kit-4.7.0.tgz#f939f9c91a978a74e509d7c4b3d3be4c8a590b11"
-  integrity sha512-EgJP0xnVq/lm8Xd5POhOGZUbeuzYqhc+yeyZzGcTIWIDpTq1dqnklae5Xe0UOVdWsCwqrp87B/iE1G3bONkwkA==
+"@devprotocol/alias-legacy-dev-kit@npm:@devprotocol/dev-kit@6.10.0":
+  version "6.10.0"
+  resolved "https://registry.yarnpkg.com/@devprotocol/dev-kit/-/dev-kit-6.10.0.tgz#4599812a4f588d7892ced821857094f56f023710"
+  integrity sha512-gb4W8t2VohdukHZlsszZ6u3KjEk106MJpO6vXt5E0E0webYoimzqfWuT5cCcI1UcphKJnyN3Lz22O8P4T4bgcA==
   dependencies:
+    "@devprotocol/util-ts" "^2.2.1"
     "@types/bent" "^7.3.1"
     async-ray "^3.2.0"
     bent "^7.3.12"
+    bignumber.js "9.1.0"
     js-base64 "^3.7.2"
-    ramda "^0.27.0"
+    ramda "^0.28.0"
 
 "@devprotocol/dev-kit@6.8.7":
   version "6.8.7"
@@ -19267,7 +19269,7 @@ ramda@0.28.0, ramda@^0.28.0:
   resolved "https://registry.yarnpkg.com/ramda/-/ramda-0.28.0.tgz#acd785690100337e8b063cab3470019be427cc97"
   integrity sha512-9QnLuG/kPVgWvMQ4aODhsBUFKOUmnbUnsSXACv+NCQZcHbeb+v8Lodp8OVxtRULN1/xOyYLLaL6npE6dMq5QTA==
 
-ramda@^0.27.0, ramda@^0.27.1:
+ramda@^0.27.1:
   version "0.27.2"
   resolved "https://registry.yarnpkg.com/ramda/-/ramda-0.27.2.tgz#84463226f7f36dc33592f6f4ed6374c48306c3f1"
   integrity sha512-SbiLPU40JuJniHexQSAgad32hfwd+DRUdwF2PlVuI5RZD0/vahUco7R8vD86J/tcEKKF9vZrUVwgtmGCqlCKyA==
