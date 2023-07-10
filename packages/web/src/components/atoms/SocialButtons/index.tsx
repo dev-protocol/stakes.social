@@ -19,7 +19,7 @@ const SocialButton = styled.a`
 export const Twitter = ({
   target,
   rel,
-  href = '//twitter.com/devprtcl'
+  href = '//twitter.com/poweredbyClubs '
 }: {
   target?: string
   rel?: string
@@ -50,7 +50,7 @@ export const Twitter = ({
 )
 
 export const Discord = () => (
-  <SocialButton target="_blank" rel="noopener noreferrer" href="//discord.gg/VwJp4KM">
+  <SocialButton target="_blank" rel="noopener noreferrer" href="//discord.gg/PBaaTvn56f">
     <svg enableBackground="new 0 0 512 512" id="Layer_1" version="1.1" viewBox="0 0 512 512">
       <circle cx="256" cy="256" fill="#8C9EFF" id="ellipse" r="256" />
       <path
@@ -58,22 +58,6 @@ export const Discord = () => (
         fill="#FFFFFF"
         id="logo"
       />
-    </svg>
-  </SocialButton>
-)
-
-export const Telegram = () => (
-  <SocialButton target="_blank" rel="noopener noreferrer" href="https://t.me/devprtcl">
-    <svg enableBackground="new 0 0 100 100" id="Layer_1" version="1.1" viewBox="0 0 100 100">
-      <g>
-        <circle cx="50" cy="50" fill="#139BD0" r="50" />
-        <path
-          clipRule="evenodd"
-          d="M51.474,60.754c-1.733,1.688-3.451,3.348-5.153,5.021   c-0.595,0.586-1.264,0.91-2.118,0.865c-0.583-0.031-0.909-0.287-1.088-0.84c-1.304-4.047-2.627-8.084-3.924-12.135   c-0.126-0.393-0.312-0.584-0.71-0.707c-3.072-0.938-6.138-1.898-9.199-2.871c-0.471-0.15-0.946-0.346-1.353-0.623   c-0.629-0.426-0.721-1.121-0.157-1.621c0.521-0.461,1.143-0.863,1.789-1.119c3.755-1.488,7.53-2.928,11.299-4.381   c9.565-3.693,19.13-7.383,28.696-11.076c1.819-0.703,3.217,0.287,3.028,2.254c-0.121,1.258-0.447,2.496-0.71,3.738   c-2.077,9.807-4.156,19.615-6.244,29.42c-0.496,2.328-2.131,2.936-4.047,1.523c-3.209-2.365-6.415-4.738-9.622-7.107   C51.808,60.984,51.649,60.877,51.474,60.754z M44.271,63.732c0.036-0.01,0.072-0.02,0.108-0.029   c0.02-0.092,0.049-0.182,0.057-0.273c0.206-2.223,0.424-4.445,0.603-6.672c0.04-0.496,0.21-0.848,0.583-1.182   c2.958-2.645,5.898-5.307,8.844-7.963c3.261-2.941,6.523-5.879,9.772-8.832c0.201-0.182,0.285-0.492,0.423-0.744   c-0.306-0.033-0.634-0.156-0.912-0.084c-0.379,0.098-0.738,0.318-1.076,0.531c-7.197,4.533-14.388,9.074-21.59,13.598   c-0.407,0.256-0.483,0.473-0.328,0.92c0.531,1.525,1.014,3.064,1.515,4.6C42.937,59.646,43.604,61.689,44.271,63.732z"
-          fill="#FFFFFF"
-          fillRule="evenodd"
-        />
-      </g>
     </svg>
   </SocialButton>
 )

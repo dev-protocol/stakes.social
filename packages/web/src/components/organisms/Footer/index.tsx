@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Twitter, Discord, Telegram, Medium, Github } from '../../atoms/SocialButtons/index'
+import { Twitter, Discord, Medium, Github } from '../../atoms/SocialButtons/index'
 
 export const Footer = () => {
   const [year, setYear] = useState('')
@@ -16,7 +16,6 @@ export const Footer = () => {
             <Twitter target="_blank" rel="noopener noreferrer" />
             <Discord />
             <Github target="_blank" rel="noopener noreferrer" />
-            <Telegram />
             <Medium />
           </div>
         </div>
