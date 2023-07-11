@@ -23821,10 +23821,10 @@ web3@1.7.5:
     web3-shh "1.7.5"
     web3-utils "1.7.5"
 
-web3modal@1.9.8:
-  version "1.9.8"
-  resolved "https://registry.yarnpkg.com/web3modal/-/web3modal-1.9.8.tgz#e2a32f34b051cd0848594111f6bb32abc8a91e44"
-  integrity sha512-ruYsh4TV1SUAljBW/Pd4itW2idKlo9xr/g2dKhBDdaafWNCVdpaK92cQ7EM53rg2KQHWJhqj1IThbv7cPV7ayA==
+web3modal@1.9.12:
+  version "1.9.12"
+  resolved "https://registry.yarnpkg.com/web3modal/-/web3modal-1.9.12.tgz#cb000888fa422a96e3df552d4784e347ba35efcc"
+  integrity sha512-RiLY2tNOEUCobtsMTmhwl/FoHZGxRZz7SSdLsh6qbbybPNUO0rFPY8xam9SpPwlLd2cUDGiWkLgDUJde0sHxdw==
   dependencies:
     detect-browser "^5.1.0"
     prop-types "^15.7.2"
