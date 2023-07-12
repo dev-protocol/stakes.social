@@ -99,7 +99,7 @@
     "autoprefixer": "10.4.8",
     "eslint-config-next": "12.1.5",
     "identity-obj-proxy": "3.0.0",
-    "jest-canvas-mock": "2.4.0",
+    "jest-canvas-mock": "2.5.2",
     "postcss": "8.4.25",
     "react-docgen-typescript-loader": "3.7.2",
     "react-test-renderer": "18.2.0",
