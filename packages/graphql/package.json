@@ -28,6 +28,6 @@
     "@graphql-codegen/typescript-operations": "2.5.3",
     "@graphql-codegen/typescript-react-apollo": "3.3.3",
     "@graphql-codegen/typescript-resolvers": "2.7.3",
-    "graphql": "16.6.0"
+    "graphql": "16.7.1"
   }
 }
