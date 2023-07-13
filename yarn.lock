@@ -2047,10 +2047,10 @@
   resolved "https://registry.yarnpkg.com/@ctrl/tinycolor/-/tinycolor-3.4.0.tgz#c3c5ae543c897caa9c2a68630bed355be5f9990f"
   integrity sha512-JZButFdZ1+/xAfpguQHoabIXkcqRRKpMrWKBkpEZZyxfY9C1DpADFB8PEqGSTeFr135SaTRfKqGKx5xSCLI7ZQ==
 
-"@davatar/react@1.10.4":
-  version "1.10.4"
-  resolved "https://registry.yarnpkg.com/@davatar/react/-/react-1.10.4.tgz#624e0b28de19444a8cbf0edc5622a0c4031835cd"
-  integrity sha512-q6Ce+bbV2FGzaIj+eXIxaxfupGUr04i+xPAWGSVzPpTVHp4tYQyvvc4w9eX4IMupDNC3N6doYGk2ax7r745xWA==
+"@davatar/react@1.11.1":
+  version "1.11.1"
+  resolved "https://registry.yarnpkg.com/@davatar/react/-/react-1.11.1.tgz#4d260ee3ec178da78002ce070422bcafe7c92288"
+  integrity sha512-j28OvzkRs/Ce+kVJ+w14HPlV9bTtGE43pr2BZb2plgptoT8LRCziX/abzFDNk9Zib5/Qf3/eWUitI0ksXAl+3w==
   dependencies:
     "@ethersproject/abstract-signer" "^5"
     "@ethersproject/contracts" "^5"
