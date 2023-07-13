@@ -16,18 +16,18 @@
   },
   "dependencies": {
     "@apollo/client": "3.6.9",
-    "@graphql-codegen/cli": "2.11.6",
-    "@graphql-codegen/typescript": "2.7.3",
-    "@graphql-codegen/typescript-operations": "2.5.3",
-    "@graphql-codegen/typescript-react-apollo": "3.3.3"
+    "@graphql-codegen/cli": "2.16.5",
+    "@graphql-codegen/typescript": "2.8.8",
+    "@graphql-codegen/typescript-operations": "2.5.13",
+    "@graphql-codegen/typescript-react-apollo": "3.3.7"
   },
   "devDependencies": {
-    "@graphql-codegen/cli": "2.11.6",
-    "@graphql-codegen/introspection": "2.2.1",
-    "@graphql-codegen/typescript": "2.7.3",
-    "@graphql-codegen/typescript-operations": "2.5.3",
-    "@graphql-codegen/typescript-react-apollo": "3.3.3",
-    "@graphql-codegen/typescript-resolvers": "2.7.3",
+    "@graphql-codegen/cli": "2.16.5",
+    "@graphql-codegen/introspection": "2.2.3",
+    "@graphql-codegen/typescript": "2.8.8",
+    "@graphql-codegen/typescript-operations": "2.5.13",
+    "@graphql-codegen/typescript-react-apollo": "3.3.7",
+    "@graphql-codegen/typescript-resolvers": "2.7.13",
     "graphql": "16.7.1"
   }
 }
