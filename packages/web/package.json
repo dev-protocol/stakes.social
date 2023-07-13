@@ -12,7 +12,7 @@
     "test": "jest"
   },
   "dependencies": {
-    "@ant-design/icons": "4.7.0",
+    "@ant-design/icons": "4.8.0",
     "@apollo/client": "3.6.9",
     "@davatar/react": "1.10.4",
     "@dev/graphql": "0.0.1",
