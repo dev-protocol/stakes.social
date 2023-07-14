@@ -61,7 +61,7 @@
     ]
   },
   "dependencies": {
-    "bl": "5.0.0",
+    "bl": "5.1.0",
     "ipfs-http-client": "49.0.4",
     "truncate-eth-address": "1.0.2"
   }
