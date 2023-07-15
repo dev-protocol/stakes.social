@@ -18089,10 +18089,10 @@ next@12.1.5:
     "@next/swc-win32-ia32-msvc" "12.1.5"
     "@next/swc-win32-x64-msvc" "12.1.5"
 
-nft.storage@7.0.0:
-  version "7.0.0"
-  resolved "https://registry.yarnpkg.com/nft.storage/-/nft.storage-7.0.0.tgz#9855106a16649673db12684232bb0292694230fe"
-  integrity sha512-6ris9loxF9TNTPY/JghLzdLlvFV3UzWkUcVTfmrRn49jzDUfyT5wMhDmYRBQuknNFN1jf7jlSGNHixs5SpOoOA==
+nft.storage@7.1.0:
+  version "7.1.0"
+  resolved "https://registry.yarnpkg.com/nft.storage/-/nft.storage-7.1.0.tgz#2fbd4c029367ed4899b5710388aedef96135f213"
+  integrity sha512-rTEbtGH9Eb7c0mM0EkbIFJrmivNeyqwAuN7OxKIugnJUG1F06HZfRLrC0nXyQ0gmmO9rSwJSHy9BGS0Ldiy6tg==
   dependencies:
     "@ipld/car" "^3.2.3"
     "@ipld/dag-cbor" "^6.0.13"
