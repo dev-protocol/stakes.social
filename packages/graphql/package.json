@@ -15,7 +15,7 @@
     "prebuild": "yarn clean"
   },
   "dependencies": {
-    "@apollo/client": "3.6.9",
+    "@apollo/client": "3.9.9",
     "@graphql-codegen/cli": "2.16.5",
     "@graphql-codegen/typescript": "2.8.8",
     "@graphql-codegen/typescript-operations": "2.5.13",
