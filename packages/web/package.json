@@ -94,7 +94,7 @@
     "@types/string-hash": "1.1.1",
     "@types/styled-components": "5.1.26",
     "@types/tinycolor2": "1.4.3",
-    "@types/ua-parser-js": "0.7.36",
+    "@types/ua-parser-js": "0.7.39",
     "@zeit/next-css": "1.0.1",
     "autoprefixer": "10.4.8",
     "eslint-config-next": "12.1.5",
