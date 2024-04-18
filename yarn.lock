@@ -6055,10 +6055,10 @@
   resolved "https://registry.yarnpkg.com/@types/estree/-/estree-0.0.39.tgz#e177e699ee1b8c22d23174caaa7422644389509f"
   integrity sha512-EYNwp3bU+98cpU4lAWYYL7Zz+2gryWH1qbdDTidVd6hkiR6weksdbMadyXKXNPEkQFhXM+hVO9ZygomHXp+AIw==
 
-"@types/faker@6.6.8":
-  version "6.6.8"
-  resolved "https://registry.yarnpkg.com/@types/faker/-/faker-6.6.8.tgz#c56c3d7e66dff85d33041733ac28d06114c0993e"
-  integrity sha512-9moiFKhmFMlI/7v5jVsPS8bbtIN1Rfo03hTPf1HPgWnZCksDup2xDTyBVC6xzjmUL/i6N6ecOJQIj5LrVJbYcg==
+"@types/faker@6.6.9":
+  version "6.6.9"
+  resolved "https://registry.yarnpkg.com/@types/faker/-/faker-6.6.9.tgz#1064e7c46be58388fa326e2f918a4f02ab740a7a"
+  integrity sha512-Y9YYm5L//8ooiiknO++4Gr539zzdI0j3aXnOBjo1Vk+kTvffY10GuE2wn78AFPECwZ5MYGTjiDVw1naLLdDimw==
   dependencies:
     faker "*"
 
