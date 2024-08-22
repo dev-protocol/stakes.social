@@ -7,32 +7,20 @@ interface Props {
 
 export const FeatureBanner = ({ className }: Props) => {
   return (
-    <Link href="https://temples.clubs.stakes.social/" passHref>
+    <Link href="https://www.clubs.place/" passHref>
       <a
         target="_blank"
         rel="norefferer noopener"
-        className={`relative overflow-hidden rounded-lg transition-all duration-150 ease-in-out hover:shadow-[0_0_0_10px_rgba(0,0,0,0.1)] w-full block bg-black font-syne ${className}`}
+        className={`relative overflow-hidden rounded-lg transition-all duration-150 ease-in-out hover:shadow-[0_0_0_10px_rgba(0,0,0,0.1)] w-full block bg-[url('/images/banner/clubs_banner.jpg')] font-syne ${className}`}
       >
-        <div className="absolute inset-0">
-          <img
-            className="absolute z-0 opacity-80 inset-0 object-cover"
-            width={1920}
-            height={1280}
-            src="/images/banner/bg.jpg"
-          ></img>
-          <img
-            className="absolute -right-20 md:right-0 w-auto h-[170%] translate-y-[-20%]"
-            width={822}
-            height={1280}
-            src="/images/banner/kannon-bodhisattva-statue.png"
-          ></img>
-        </div>
         <section className="relative px-8 py-2">
-          <aside className="mt-2">
-            <span className="text-white border rounded-full border-white px-2 py-1">Upcoming</span>
-          </aside>
-          <h2 className="text-white font-clever text-3xl after:content-['→'] after:ml-4 mt-8 mb-2">Temples DAO</h2>
-          <p className="text-white mb-8">Join the DAO that makes the next 1000 years</p>
+          <h2 className="text-white font-medium font-sans text-3xl after:ml-4 mt-2 mb-2">
+            Thank you very much for being part of Stakes.Social
+          </h2>
+          <h2 className="text-white font-sans text-3xl after:ml-4 mt-8 mb-2">
+            From now on you can use
+            <img className="inline w-[127px] h-[35px] ml-2" src="/images/banner/clubs_logo_dark.png"></img>
+          </h2>
           <aside>
             <span className="text-white font-bold flex gap-1 items-center opacity-60">
               Build with
