@@ -7,7 +7,10 @@ interface Props {
 
 export const FeatureBanner = ({ className }: Props) => {
   return (
-    <Link href="https://www.clubs.place/post/upgrade-now-a-step-by-step-guide-to-moving-from-stakes-social-to-clubs" passHref>
+    <Link
+      href="https://www.clubs.place/post/upgrade-now-a-step-by-step-guide-to-moving-from-stakes-social-to-clubs"
+      passHref
+    >
       <a
         target="_blank"
         rel="norefferer noopener"
