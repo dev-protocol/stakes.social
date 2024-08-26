@@ -1,12 +1,11 @@
 import {
   contractFactory,
   DevkitContract,
-  // client as devClient,
+  client as devClient,
   addresses,
   devAbi,
   sTokensAbi,
-  RegistryContract,
-  STokensContract
+  RegistryContract
 } from '@devprotocol/dev-kit'
 import { contractFactory as l2ContractFactory, DevkitContract as L2DevkitContract } from '@devprotocol/dev-kit/l2'
 import { getContractAddress as _getContractAddress } from './get-contract-address'
@@ -14,7 +13,6 @@ import BigNumber from 'bignumber.js'
 import { ethers, providers, Event } from 'ethers'
 import { ChainName, detectChain } from '../wallet/utility'
 import { whenDefinedAll, whenDefined, UndefinedOr } from '@devprotocol/util-ts'
-import { intersection, sort } from 'ramda'
 
 const cacheForContractFactory: WeakMap<
   providers.BaseProvider,
@@ -394,25 +392,11 @@ export const positionsOfOwner = async (prov: providers.BaseProvider, accountAddr
   return undefined
 }
 
-const diff = function (a: number, b: number): number {
-  return a - b
-}
-const asc = sort(diff)
-const createDetectSTokens =
-  (sTokens: STokensContract) =>
-  async (propertyAddress: string, accountAddress: string): Promise<readonly number[]> => {
-    const [listForProperty, listForOwner] = await Promise.all([
-      sTokens.positionsOfProperty(propertyAddress),
-      sTokens.positionsOfOwner(accountAddress)
-    ])
-    return asc(intersection(listForProperty, listForOwner))
-  }
-
 export const detectStokens = async (prov: providers.BaseProvider, propertyAddress: string, accountAddress: string) => {
   const [, , client] = await newClient(prov)
   const address = await getSTokensAddress(prov)
   if (client && address) {
-    const TokenIdList = await createDetectSTokens(client.sTokens(address))(propertyAddress, accountAddress) // devClient.createDetectSTokens(client.sTokens(address))(propertyAddress, accountAddress)
+    const TokenIdList = await devClient.createDetectSTokens(client.sTokens(address))(propertyAddress, accountAddress)
     return TokenIdList
   }
   return undefined
