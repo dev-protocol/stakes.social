@@ -17,6 +17,7 @@ import { boxShahowWithOnHover } from 'src/styles/boxShahow'
 import { WalletSettings } from 'src/components/organisms/WalletSettings'
 import { YourPositions } from 'src/components/_pages/portfolio/YourPositions'
 import { ControlChain } from 'src/components/organisms/ControlChain'
+import { FeatureBanner } from 'src/components/_pages/home/FeatureBanner'
 
 const PortfolioHeader = styled.div`
   display: grid;
@@ -93,6 +94,7 @@ const Portfolio = () => {
     <div style={{ display: 'flex', minHeight: '100vh', flexDirection: 'column' }}>
       <Header />
       <StyledContainer>
+        <FeatureBanner className="my-8" />
         <PortfolioHeader>
           <Heading>Your Portfolio</Heading>
           <SwitcherContainer>

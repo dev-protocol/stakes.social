@@ -307,9 +307,9 @@ export const createGetVotablePolicy = async (prov: providers.BaseProvider) => {
   const [client] = await newClient(prov)
   const getContractAddress = createGetContractAddress(prov)
   if (client) {
-    const policyGroup = client.policyGroup(await getContractAddress(client, 'policyGroup'))
+    // const policyGroup = client.policyGroup(await getContractAddress(client, 'policyGroup'))
     const [policies, currentPolicy] = await Promise.all([
-      devClient.createGetVotablePolicy(policyGroup)(),
+      Promise.resolve([]), // devClient.createGetVotablePolicy(policyGroup)(),
       getContractAddress(client, 'policy')
     ])
     return policies.filter(p => p !== currentPolicy)
