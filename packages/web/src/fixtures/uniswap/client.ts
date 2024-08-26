@@ -19,14 +19,18 @@ export interface Token {
   derivedETH: string
 }
 
-export const getEthPrice = (): Promise<Bundle> => {
+export const getEthPrice = async (): Promise<Bundle> => {
   const client = newClient()
-  return client.query({ query: getBundleQuery }).then(res => res.data.bundle)
+  return client
+    .query({ query: getBundleQuery })
+    .then(res => res.data.bundle as Bundle)
+    .catch(() => ({ id: 0, ethPrice: '0' }))
 }
 
-export const getDevEthPrice = (): Promise<Token> => {
+export const getDevEthPrice = async (): Promise<Token> => {
   const client = newClient()
   return client
     .query({ query: getTokenQuery, variables: { Id: '0x5caf454ba92e6f2c929df14667ee360ed9fd5b26' } })
-    .then(res => res.data.token)
+    .then(res => res.data.token as Token)
+    .catch(() => ({ id: '0', derivedETH: '0' }))
 }
