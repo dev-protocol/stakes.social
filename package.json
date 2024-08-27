@@ -61,5 +61,8 @@
     "bl": "5.1.0",
     "ipfs-http-client": "49.0.4",
     "truncate-eth-address": "1.0.2"
+  },
+  "resolutions": {
+    "@types/react": "^17.0.0"
   }
 }
