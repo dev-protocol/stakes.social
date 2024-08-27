@@ -1,7 +1,7 @@
 // @L2 optimized
-import React, { useCallback, useState } from 'react'
+import React, { useState } from 'react'
 import { reverse } from 'ramda'
-import { useListOwnedPropertyMetaQuery } from '@dev/graphql'
+import { useListOwnedPropertyMeta } from 'src/fixtures/graph'
 import { Asset, AssetList } from 'src/components/molecules/AssetList'
 import { useIsL1 } from 'src/fixtures/wallet/hooks'
 import { useGetEnabledMarkets, useGetAuthenticatedProperties, usePropertyAuthor } from 'src/fixtures/dev-kit/hooks'
@@ -11,8 +11,6 @@ import { ModalStates, ResponsiveModal } from 'src/components/atoms/ResponsiveMod
 interface Props {
   accountAddress?: string
 }
-
-const perPage = 5
 
 const WrapAsset4L2 = ({ propertyAddress, accountAddress }: { propertyAddress: string; accountAddress?: string }) => {
   const [modalStates, setModalStates] = useState<ModalStates>({ visible: false })
@@ -76,33 +74,15 @@ export const YourPools4L2 = ({ accountAddress }: Props) => {
 }
 
 export const YourPools = ({ accountAddress }: Props) => {
-  const [page, setPage] = useState(1)
   const { isL1 } = useIsL1()
-  const { data: totalProperties } = useListOwnedPropertyMetaQuery({
-    variables: { account_address: isL1 ? accountAddress || '' : '' }
-  })
-  const { data, loading } = useListOwnedPropertyMetaQuery({
-    variables: {
-      account_address: isL1 ? accountAddress || '' : '',
-      limit: perPage,
-      offset: (page - 1) * perPage
-    }
-  })
-  const onPagination = useCallback(
-    (page: number) => {
-      setPage(page)
-    },
-    [setPage]
-  )
-  const properties = data?.property_meta.map(x => x.property)
+  const { data } = useListOwnedPropertyMeta(accountAddress)
 
   return isL1 ? (
     <AssetList
       isPool={true}
-      total={totalProperties?.property_meta.length || 0}
-      onPagination={onPagination}
-      loading={loading}
-      properties={properties}
+      total={data?.length || 0}
+      loading={data === undefined}
+      properties={data?.map(r => r.property)}
       enableWithdrawHoldersReward={true}
     ></AssetList>
   ) : (

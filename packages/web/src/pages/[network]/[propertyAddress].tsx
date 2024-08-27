@@ -25,7 +25,7 @@ import {
   usePropertyAuthor,
   usePropertyName
 } from 'src/fixtures/dev-kit/hooks'
-import { useGetPropertyAuthenticationQuery } from '@dev/graphql'
+import { useListPropertyAuthentication } from 'src/fixtures/graph'
 import {
   useGetAccount,
   useGetProperty,
@@ -370,7 +370,7 @@ const PropertyAddressDetail = (_: Props) => {
   const { propertyAddress } = useRouter().query as { propertyAddress: string }
   const { name: propertyName } = usePropertyName(propertyAddress)
   const { apy, creators } = useAPY()
-  const { data } = useGetPropertyAuthenticationQuery({ variables: { propertyAddress }, skip: !isL1 })
+  const { data } = useListPropertyAuthentication(propertyAddress)
   const { data: dataProperty } = useGetProperty(propertyAddress)
   /* eslint-disable react-hooks/exhaustive-deps */
   // FYI: https://github.com/facebook/react/pull/19062
@@ -379,7 +379,7 @@ const PropertyAddressDetail = (_: Props) => {
   const { author: authorAddress } = usePropertyAuthor(propertyAddress)
   const { myStakingAmount } = useGetMyStakingAmount(propertyAddress)
   const includedAssetList = useMemo(
-    () => (data ? data.property_authentication.map(e => e.authentication_id) : includedAssetListL2?.map(e => e.id)),
+    () => (data ? data.map(e => e.authentication_id) : includedAssetListL2?.map(e => e.id)),
     [data, includedAssetListL2]
   )
   const { name: network } = useDetectChain(nonConnectedEthersProvider)
