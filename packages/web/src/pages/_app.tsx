@@ -1,6 +1,5 @@
 import * as React from 'react'
 import App, { AppInitialProps } from 'next/app'
-import { WithApolloProps } from 'next-with-apollo'
 import Head from 'next/head'
 import SettingContext from 'src/context/settingContext'
 import WalletContext from 'src/context/walletContext'
@@ -15,18 +14,11 @@ import { WEB3_PROVIDER_ENDPOINT_HOSTS, WEB3_PROVIDER_ENDPOINT_KEY } from 'src/fi
 import { getAccountAddress } from 'src/fixtures/wallet/utility'
 import * as gtag from 'src/lib/gtag'
 import { Router } from 'next/router'
-import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client'
 import { providers } from 'ethers'
 import 'antd/dist/antd.css'
 import '../styles/global.css'
 
-const cache = new InMemoryCache()
-const client = new ApolloClient({
-  uri: 'https://api.devprotocol.xyz/v1/graphql',
-  cache
-})
-
-class NextApp extends App<AppInitialProps & WithApolloProps<{}>> {
+class NextApp extends App<AppInitialProps> {
   state = { isCurrencyDEV: true, web3: undefined, ethersProvider: undefined, web3Modal: undefined }
 
   getProviderOptions = () => {
@@ -160,30 +152,28 @@ class NextApp extends App<AppInitialProps & WithApolloProps<{}>> {
   }
 
   render() {
-    const { Component, pageProps, apollo } = this.props
+    const { Component, pageProps } = this.props
 
     return (
-      <ApolloProvider client={client}>
-        <WalletContext.Provider
-          value={{
-            web3: this.state.web3,
-            ethersProvider: this.state.ethersProvider,
-            setProviders: this.setProviders,
-            web3Modal: this.state.web3Modal
-          }}
+      <WalletContext.Provider
+        value={{
+          web3: this.state.web3,
+          ethersProvider: this.state.ethersProvider,
+          setProviders: this.setProviders,
+          web3Modal: this.state.web3Modal
+        }}
+      >
+        <SettingContext.Provider
+          value={{ isCurrencyDEV: this.state.isCurrencyDEV, toggleCurrency: this.toggleCurrency }}
         >
-          <SettingContext.Provider
-            value={{ isCurrencyDEV: this.state.isCurrencyDEV, toggleCurrency: this.toggleCurrency }}
-          >
-            <Head>
-              <title>Stakes.social</title>
-              {/* Use minimum-scale=1 to enable GPU rasterization */}
-              <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no" />
-            </Head>
-            <Component {...pageProps} apollo={apollo} />
-          </SettingContext.Provider>
-        </WalletContext.Provider>
-      </ApolloProvider>
+          <Head>
+            <title>Stakes.social</title>
+            {/* Use minimum-scale=1 to enable GPU rasterization */}
+            <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no" />
+          </Head>
+          <Component {...pageProps} />
+        </SettingContext.Provider>
+      </WalletContext.Provider>
     )
   }
 }
