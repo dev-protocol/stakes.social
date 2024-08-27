@@ -37,7 +37,7 @@ const WrapAsset4L2 = ({ propertyAddress, accountAddress }: { propertyAddress: st
         showModalFunc={showModal}
       ></Asset>
       <ResponsiveModal visible={modalStates.visible} title={modalStates.title} onCancel={closeModal} footer={null}>
-        {modalStates.contents}
+        {modalStates.contents as any}
       </ResponsiveModal>
     </>
   ) : (
