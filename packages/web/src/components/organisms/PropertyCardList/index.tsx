@@ -1,14 +1,10 @@
 // @L2 optimized
-import React, { useCallback, useMemo, useState } from 'react'
-import Link from 'next/link'
+import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import { Spin, Pagination } from 'antd'
-import { useListPropertyQuery, useListPropertyOrderByMostRecentQuery, Property_Authentication } from '@dev/graphql'
+import { useListProperty } from 'src/fixtures/graph'
 import { PropertyCard } from './PropertyCard'
-import { PropertySearchForm } from './PropertySearchForm'
-import { CurrencySwitcher } from './CurrencySwitcher'
 import { useRouter } from 'next/router'
 import styled from 'styled-components'
-import Select from 'react-select'
 import { useProvider, useDetectChain } from 'src/fixtures/wallet/hooks'
 import { Grid } from 'src/components/atoms/Grid'
 import {
@@ -17,8 +13,6 @@ import {
   useGetAuthenticatedProperties
 } from 'src/fixtures/dev-kit/hooks'
 import { reverse } from 'ramda'
-import { LinkWithNetwork } from 'src/components/atoms/LinkWithNetwork'
-import { BuyDevButton } from 'src/components/molecules/BuyButton'
 import { getDenyList } from 'src/config/utils'
 
 export type FeatureTag = '' | 'GitHub' | 'npm' | 'Creators'
@@ -62,49 +56,6 @@ const PropertyOverview = styled(Grid)`
 
 const DEFAULT_PER_PAGE = 9
 
-// TODO: use valid market list via other data source
-const markets = {
-  GitHub: '0x34A7AdC94C4D41C3e3469F98033B372cB2fAf318',
-  npm: '0x88c7B1f41DdE50efFc25541a2E0769B887eB2ee7'
-}
-
-const Wrap = styled.div`
-  display: flex;
-  padding-top: 1rem;
-  justify-content: space-between;
-  a {
-    margin-right: 20px;
-  }
-
-  a:last-child {
-    margin-right: 0px;
-  }
-
-  @media (min-width: 768px) {
-    justify-content: flex-start;
-
-    a {
-      margin-right: 40px;
-    }
-  }
-`
-
-const FILTER_OPTIONS = [
-  { label: 'Your Properties', value: 'YOUR_PROPS' },
-  { label: 'Most Staked', value: 'MOST_STAKED' },
-  { label: 'Most Recent', value: 'MOST_RECENT' }
-]
-
-const FilterOptionContainer = styled.div`
-  display: flex;
-  justify-content: space-between;
-  max-width: 100vw;
-
-  @media (max-width: 760px) {
-    grid-row: 3;
-  }
-`
-
 const PaginationContainer = styled.div`
   display: flex;
   grid-column: 1/-1;
@@ -120,58 +71,17 @@ const PaginationContainer = styled.div`
   }
 `
 
-const FeatureTags = ({ tag }: { tag: FeatureTag }) => {
-  const tags = ['GitHub', 'npm', 'Creators']
-
-  return (
-    <Wrap style={{ justifyContent: 'space-between' }}>
-      <Wrap>
-        <Link href="/">
-          <a style={tag !== '' ? { color: '#c9c9c9' } : {}}>All Pools</a>
-        </Link>
-        {tags &&
-          tags.map((d: string) => (
-            <LinkWithNetwork href={`/?tag=${d}`} key={d}>
-              <a style={{ color: tag !== d ? '#c9c9c9' : '' }}>{d}</a>
-            </LinkWithNetwork>
-          ))}
-      </Wrap>
-      <BuyDevButton />
-    </Wrap>
-  )
-}
-
 export const PropertyCardList = ({ currentPage, searchWord, sortBy, featureTag }: Props) => {
-  const { accountAddress } = useProvider()
   const [perPage, setPerPage] = useState(DEFAULT_PER_PAGE)
-  const { nonConnectedEthersProvider } = useProvider()
-  const { name: network } = useDetectChain(nonConnectedEthersProvider)
-  const denyList = useMemo(() => getDenyList(network), [network])
-  const { data, loading } = useListPropertyQuery({
-    variables: {
-      limit: perPage,
-      offset: (currentPage - 1) * perPage,
-      ilike: searchWord !== '' ? `%${searchWord}%` : undefined,
-      market: featureTag === 'GitHub' || featureTag === 'npm' ? markets[featureTag] : undefined,
-      marketOther: featureTag === 'Creators' ? Object.values(markets) : undefined,
-      denyProperty: denyList,
-      // NOTE: If accountAddress is undefined, all properties will be displayed,
-      //       so if YOUR_PROPS is selected and accountAddress is not available,
-      //       query with dummy values.
-      from: sortBy === 'YOUR_PROPS' ? accountAddress || '0xdummy' : undefined
-    }
-  })
-  const { data: mostRecentData } = useListPropertyOrderByMostRecentQuery({
-    variables: {
-      limit: perPage,
-      offset: (currentPage - 1) * perPage,
-      ilike: searchWord !== '' ? `%${searchWord}%` : undefined,
-      market: featureTag === 'GitHub' || featureTag === 'npm' ? markets[featureTag] : undefined,
-      marketOther: featureTag === 'Creators' ? Object.values(markets) : undefined,
-      denyProperty: denyList,
-      from: sortBy === 'YOUR_PROPS' ? accountAddress || '0xdummy' : undefined
-    }
-  })
+  const { data } = useListProperty()
+  const [pagenatedData, setPagenatedData] = useState<typeof data>()
+  const start = (currentPage - 1) * perPage
+  const end = currentPage * perPage
+  console.log({ currentPage, start, end })
+
+  useEffect(() => {
+    setPagenatedData(data?.slice(start, end))
+  }, [start, end, data])
 
   const router = useRouter()
   const handlePagination = useCallback(
@@ -182,61 +92,20 @@ export const PropertyCardList = ({ currentPage, searchWord, sortBy, featureTag }
     [router, searchWord, sortBy, featureTag]
   )
   const handleShowSizeChange = (_: number, pageSize: number) => setPerPage(pageSize)
-  const handleSearch = useCallback(
-    (word: string) => router.push({ pathname: '/', query: { word, sortby: sortBy, tag: featureTag } }),
-    [router, sortBy, featureTag]
-  )
-  const handleChangeSortBy = useCallback(
-    (e: any) => {
-      router.push({
-        pathname: '/',
-        query: { word: searchWord, sortby: e?.value || '', tag: featureTag }
-      })
-    },
-    [router, searchWord, featureTag]
-  )
 
   return (
     <div style={{ flexGrow: 1, maxWidth: '100vw' }}>
-      <PropertiesHeader>
-        <Header>Asset Pools</Header>
-        <PropertySearchForm onSubmitSearchProperty={handleSearch} />
-        <FilterOptionContainer>
-          <div style={{ flexGrow: 1 }}>
-            <Select
-              placeholder="Sort"
-              defaultValue={{ label: 'Most Recent', value: 'MOST_RECENT' }}
-              options={FILTER_OPTIONS}
-              onChange={handleChangeSortBy}
-              isClearable={true}
-            />
-          </div>
-
-          <CurrencySwitcher />
-        </FilterOptionContainer>
-      </PropertiesHeader>
-      <FeatureTags tag={featureTag} />
-
-      {loading && <Spin size="large" style={{ display: 'block', width: 'auto', padding: '100px' }} />}
-      {data && mostRecentData && (
+      {data === undefined && <Spin size="large" style={{ display: 'block', width: 'auto', padding: '100px' }} />}
+      {pagenatedData && (
         <>
           <PropertyOverview>
-            {sortBy !== 'MOST_RECENT' &&
-              data.property_factory_create.map((d: any) => (
-                <PropertyCard
-                  key={d.event_id}
-                  propertyAddress={d.property}
-                  assets={d.authentication.map((x: Property_Authentication) => x.authentication_id)}
-                />
-              ))}
-            {sortBy === 'MOST_RECENT' &&
-              mostRecentData.property_factory_create.map((d: any) => (
-                <PropertyCard
-                  key={d.event_id}
-                  propertyAddress={d.property}
-                  assets={d.authentication.map((x: Property_Authentication) => x.authentication_id)}
-                />
-              ))}
+            {pagenatedData.map(d => (
+              <PropertyCard
+                key={d.block_number}
+                propertyAddress={d.property}
+                assets={d.authentication.map(x => x.authentication_id)}
+              />
+            ))}
           </PropertyOverview>
           <PaginationContainer>
             <Pagination
@@ -247,7 +116,7 @@ export const PropertyCardList = ({ currentPage, searchWord, sortBy, featureTag }
               pageSizeOptions={['9', '12', '15', '18', '21']}
               onChange={handlePagination}
               onShowSizeChange={handleShowSizeChange}
-              total={data.property_factory_create_aggregate.aggregate?.count || 0}
+              total={data?.length || 0}
             />
           </PaginationContainer>
         </>

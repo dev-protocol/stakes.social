@@ -1,38 +1,21 @@
 // @L2 optimized: The parent component will not use this component on L2
-import React, { useState } from 'react'
-import { useListAccountLockupQuery } from '@dev/graphql'
+import React from 'react'
+import { useListOwnedLockup } from 'src/fixtures/graph'
 import { AssetList } from 'src/components/molecules/AssetList'
-import { useCallback } from 'react'
 
 interface Props {
   accountAddress?: string
 }
 
-const perPage = 5
-
 export const YourStakes = ({ accountAddress }: Props) => {
-  const [page, setPage] = useState(1)
-  const { data, loading } = useListAccountLockupQuery({
-    variables: {
-      account_address: accountAddress || '',
-      limit: perPage,
-      offset: (page - 1) * perPage
-    }
-  })
-  const onPagination = useCallback(
-    (page: number) => {
-      setPage(page)
-    },
-    [setPage]
-  )
-  const properties = data?.account_lockup.map(x => x.property_address)
+  const { data } = useListOwnedLockup(accountAddress)
+  const properties = data?.map(x => x.property_address)
 
   return (
     <AssetList
       isPool={false}
-      total={data?.account_lockup_aggregate?.aggregate?.count || 0}
-      onPagination={onPagination}
-      loading={loading}
+      total={data?.length || 0}
+      loading={data === undefined}
       properties={properties}
       enableStake={true}
       enableWithdrawStakersReward={true}

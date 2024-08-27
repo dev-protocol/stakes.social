@@ -8,14 +8,12 @@
     "start:prod": "next start",
     "build": "run-p -l build:*",
     "build:next": "next build",
-    "lint": "eslint --fix -c ./.eslintrc.json './src/**/*.{ts,tsx}'",
-    "test": "jest"
+    "lint": "eslint --fix -c ./.eslintrc.json './src/**/*.{ts,tsx}'"
   },
   "dependencies": {
     "@ant-design/icons": "4.8.3",
     "@apollo/client": "3.6.9",
     "@davatar/react": "1.11.1",
-    "@dev/graphql": "0.0.1",
     "@devprotocol/alias-legacy-dev-kit": "npm:@devprotocol/dev-kit@4.7.0",
     "@devprotocol/dev-kit": "7.3.4",
     "@devprotocol/khaos-kit": "1.4.0",
@@ -82,7 +80,6 @@
   },
   "devDependencies": {
     "@swc/core": "1.2.239",
-    "@swc/jest": "0.2.22",
     "@testing-library/react": "14.0.0",
     "@testing-library/react-hooks": "8.0.1",
     "@testing-library/user-event": "14.4.3",
@@ -99,7 +96,6 @@
     "autoprefixer": "10.4.20",
     "eslint-config-next": "12.1.5",
     "identity-obj-proxy": "3.0.0",
-    "jest-canvas-mock": "2.5.2",
     "postcss": "8.4.31",
     "react-docgen-typescript-loader": "3.7.2",
     "react-test-renderer": "18.2.0",

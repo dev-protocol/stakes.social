@@ -3,7 +3,6 @@ import BigNumber from 'bignumber.js'
 import React, { useMemo, useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { useGetDevPrice } from 'src/fixtures/uniswap/hooks'
-import { useListPropertyQuery, useCountAccountLockupUniqueQuery } from '@dev/graphql'
 import {
   useAPY,
   useAnnualSupplyGrowthRatio,
@@ -138,22 +137,6 @@ const SupplyGrowth = (_: {}) => {
   return annualSupplyGrowthRatio ? <span>{annualSupplyGrowthRatio?.dp(2).toNumber()}</span> : <></>
 }
 
-const AssetOnboarded = (_: {}) => {
-  const { data } = useListPropertyQuery({
-    variables: {
-      limit: 1
-    }
-  })
-  const formatAssetOnboarded = new BigNumber(data?.property_factory_create_aggregate.aggregate?.count || 0)
-  return data?.property_factory_create_aggregate ? <span>{formatAssetOnboarded.toFormat()}</span> : <></>
-}
-
-const PatronOnboarded = (_: {}) => {
-  const { data } = useCountAccountLockupUniqueQuery()
-  const formatPatronOnboarded = new BigNumber(data?.account_lockup_aggregate.aggregate?.count || 0)
-  return data?.account_lockup_aggregate ? <span>{formatPatronOnboarded.toFormat()}</span> : <></>
-}
-
 const CreatorsRewardsDev = (_: {}) => {
   const { creators } = useAPY()
   const { totalStakingAmount } = useTotalStakingAmountOnProtocol()
@@ -239,22 +222,6 @@ const items = [
     description: 'The current supply growth of DEV.',
     valueRender: function supplyGrowthRender() {
       return <SupplyGrowth />
-    }
-  },
-  {
-    title: 'OSS PROJECTS ONBOARDED',
-    unit: '',
-    description: 'The total number of creator assets onboarded.',
-    valueRender: function assetOnboardedRender() {
-      return <AssetOnboarded />
-    }
-  },
-  {
-    title: 'PATRONS ONBOARDED',
-    unit: '',
-    description: 'The total number of patrons onboarded.',
-    valueRender: function patronOnboardedRender() {
-      return <PatronOnboarded />
     }
   },
   {
