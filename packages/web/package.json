@@ -27,7 +27,6 @@
     "ethers": "5.7.2",
     "fortmatic": "2.4.0",
     "graphql": "^16.9.0",
-    "ipfs-http-client": "^60.0.1",
     "next": "12.1.5",
     "next-plugin-antd-less": "1.8.0",
     "next-transpile-modules": "9.1.0",
