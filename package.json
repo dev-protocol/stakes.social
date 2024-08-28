@@ -16,7 +16,7 @@
     "prepare": "husky install"
   },
   "devDependencies": {
-    "@types/bl": "5.0.2",
+    "@types/bl": "5.1.0",
     "@types/supertest": "2.0.12",
     "@typescript-eslint/eslint-plugin": "5.62.0",
     "@typescript-eslint/parser": "5.62.0",
