@@ -18,7 +18,7 @@
     "@devprotocol/dev-kit": "7.3.4",
     "@devprotocol/khaos-kit": "1.4.0",
     "@devprotocol/util-ts": "2.2.1",
-    "@metamask/detect-provider": "1.2.0",
+    "@metamask/detect-provider": "2.0.0",
     "@quentin-sommer/react-useragent": "3.2.0",
     "@svgr/webpack": "6.5.1",
     "@tailwindcss/line-clamp": "0.4.0",
