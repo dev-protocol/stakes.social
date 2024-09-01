@@ -14,7 +14,7 @@
     "@ant-design/icons": "5.4.0",
     "@apollo/client": "3.11.5",
     "@davatar/react": "1.11.1",
-    "@devprotocol/alias-legacy-dev-kit": "npm:@devprotocol/dev-kit@4.7.0",
+    "@devprotocol/alias-legacy-dev-kit": "npm:@devprotocol/dev-kit@8.7.0",
     "@devprotocol/dev-kit": "7.3.4",
     "@devprotocol/khaos-kit": "1.4.0",
     "@devprotocol/util-ts": "2.2.1",
