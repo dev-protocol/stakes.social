@@ -34,10 +34,10 @@
   resolved "https://registry.yarnpkg.com/@ant-design/icons-svg/-/icons-svg-4.4.2.tgz#ed2be7fb4d82ac7e1d45a54a5b06d6cecf8be6f6"
   integrity sha512-vHbT+zJEVzllwP+CM+ul7reTEfBR0vgxFe7+lREAsAA7YGsYpboiq2sQNeQeRvh09GfQgs/GyFEvZpJ9cLXpXA==
 
-"@ant-design/icons@5.4.0":
-  version "5.4.0"
-  resolved "https://registry.yarnpkg.com/@ant-design/icons/-/icons-5.4.0.tgz#4bd8f335c68207cc06fe9943d164a81cdfcfbeac"
-  integrity sha512-QZbWC5xQYexCI5q4/fehSEkchJr5UGtvAJweT743qKUQQGs9IH2DehNLP49DJ3Ii9m9CijD2HN6fNy3WKhIFdA==
+"@ant-design/icons@5.5.0":
+  version "5.5.0"
+  resolved "https://registry.yarnpkg.com/@ant-design/icons/-/icons-5.5.0.tgz#c9bc438cae8c9343fe9dd4f79590156def4b2ef8"
+  integrity sha512-ZaVpZ6TZWuLZsrgaTzk6QNUIZabXD44E8Mxc08+mUr5jL6TBNr2boqfheyrGu1k29U0xEAQ/J6ubPs2b9FeTKQ==
   dependencies:
     "@ant-design/colors" "^7.0.0"
     "@ant-design/icons-svg" "^4.4.0"
