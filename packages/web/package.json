@@ -11,7 +11,7 @@
     "lint": "eslint --fix -c ./.eslintrc.json './src/**/*.{ts,tsx}'"
   },
   "dependencies": {
-    "@ant-design/icons": "5.4.0",
+    "@ant-design/icons": "5.5.0",
     "@apollo/client": "3.11.8",
     "@davatar/react": "1.11.1",
     "@devprotocol/alias-legacy-dev-kit": "npm:@devprotocol/dev-kit@8.7.0",
