@@ -1319,7 +1319,7 @@
   resolved "https://registry.yarnpkg.com/@emotion/memoize/-/memoize-0.9.0.tgz#745969d649977776b43fc7648c556aaa462b4102"
   integrity sha512-30FAj7/EoJ5mwVPOWhAyCX+FPfMDrVecJAM+Iw9NRoSl4BBAQeqj4cApHHUXOVvIPgLVDsCFoz/hGD+5QQD1GQ==
 
-"@emotion/react@^11.1.1", "@emotion/react@^11.8.1":
+"@emotion/react@^11.8.1":
   version "11.13.3"
   resolved "https://registry.yarnpkg.com/@emotion/react/-/react-11.13.3.tgz#a69d0de2a23f5b48e0acf210416638010e4bd2e4"
   integrity sha512-lIsdU6JNrmYfJ5EbUCf4xW1ovy5wKQ2CkPRM4xogziOxH1nXxBSjpC9YqbFAP7circxMfYp+6x676BqWcEiixg==
@@ -3972,10 +3972,10 @@
   dependencies:
     "@types/react" "*"
 
-"@types/react-select@5.0.0":
-  version "5.0.0"
-  resolved "https://registry.yarnpkg.com/@types/react-select/-/react-select-5.0.0.tgz#22285f0f7aa3819076c276eb3d417c79c6601b2b"
-  integrity sha512-vddLcBpzUMVpVNmnBtpC5cyZ2ajaHx/g6SHUo6lmMw0FIiOzrtmoSQ4UI6TRl+sm8TGGT+Oir8NRMZfYQtgr8Q==
+"@types/react-select@5.0.1":
+  version "5.0.1"
+  resolved "https://registry.yarnpkg.com/@types/react-select/-/react-select-5.0.1.tgz#04fc85edd34a72675a0ab56ad4c30428aab0e444"
+  integrity sha512-h5Im0AP0dr4AVeHtrcvQrLV+gmPa7SA0AGdxl2jOhtwiE6KgXBFSogWw8az32/nusE6AQHlCOHQWjP1S/+oMWA==
   dependencies:
     react-select "*"
 
@@ -13533,11 +13533,6 @@ memdown@~3.0.0:
     ltgt "~2.2.0"
     safe-buffer "~5.1.1"
 
-memoize-one@^5.0.0:
-  version "5.2.1"
-  resolved "https://registry.yarnpkg.com/memoize-one/-/memoize-one-5.2.1.tgz#8337aa3c4335581839ec01c3d594090cebe8f00e"
-  integrity sha512-zYiwtZUcYyXKo/np96AGZAckk+FWWsUdJ3cHGGmld7+AhvcWmQyGCYUh1hc4Q/pkOhb65dQR/pqCyK0cOaHz4Q==
-
 memoize-one@^6.0.0:
   version "6.0.0"
   resolved "https://registry.yarnpkg.com/memoize-one/-/memoize-one-6.0.0.tgz#b2591b871ed82948aee4727dc6abceeeac8c1045"
@@ -16892,18 +16887,20 @@ react-select@*:
     react-transition-group "^4.3.0"
     use-isomorphic-layout-effect "^1.1.2"
 
-react-select@5.2.2:
-  version "5.2.2"
-  resolved "https://registry.yarnpkg.com/react-select/-/react-select-5.2.2.tgz#3d5edf0a60f1276fd5f29f9f90a305f0a25a5189"
-  integrity sha512-miGS2rT1XbFNjduMZT+V73xbJEeMzVkJOz727F6MeAr2hKE0uUSA8Ff7vD44H32x2PD3SRB6OXTY/L+fTV3z9w==
+react-select@5.8.1:
+  version "5.8.1"
+  resolved "https://registry.yarnpkg.com/react-select/-/react-select-5.8.1.tgz#3284a93b7633b5e893306b2a8007ea0f793e62b9"
+  integrity sha512-RT1CJmuc+ejqm5MPgzyZujqDskdvB9a9ZqrdnVLsvAHjJ3Tj0hELnLeVPQlmYdVKCdCpxanepl6z7R5KhXhWzg==
   dependencies:
     "@babel/runtime" "^7.12.0"
     "@emotion/cache" "^11.4.0"
-    "@emotion/react" "^11.1.1"
+    "@emotion/react" "^11.8.1"
+    "@floating-ui/dom" "^1.0.1"
     "@types/react-transition-group" "^4.4.0"
-    memoize-one "^5.0.0"
+    memoize-one "^6.0.0"
     prop-types "^15.6.0"
     react-transition-group "^4.3.0"
+    use-isomorphic-layout-effect "^1.1.2"
 
 react-shallow-renderer@^16.15.0:
   version "16.15.0"
