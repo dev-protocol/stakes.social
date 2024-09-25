@@ -6170,10 +6170,10 @@ bl@*:
     inherits "^2.0.4"
     readable-stream "^4.2.0"
 
-bl@6.0.15:
-  version "6.0.15"
-  resolved "https://registry.yarnpkg.com/bl/-/bl-6.0.15.tgz#eeee4af50c6f16eb08fc5ddbca6f2d9f2ff12d78"
-  integrity sha512-RGhjD1XCPS7ZdAH6cEJVaR3gLV4KJP2hvkQ49AH5kwScjiyd0jBM8RsP4oHKzcx+kNCON9752zPeRnuv0HHwzw==
+bl@6.0.16:
+  version "6.0.16"
+  resolved "https://registry.yarnpkg.com/bl/-/bl-6.0.16.tgz#29b190f1a754e2d168de3dc8c74ed8d12bf78e6e"
+  integrity sha512-V/kz+z2Mx5/6qDfRCilmrukUXcXuCoXKg3/3hDvzKKoSUx8CJKudfIoT29XZc3UE9xBvxs5qictiHdprwtteEg==
   dependencies:
     "@types/readable-stream" "^4.0.0"
     buffer "^6.0.3"
