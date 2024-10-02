@@ -63,6 +63,6 @@
     "truncate-eth-address": "1.0.2"
   },
   "resolutions": {
-    "@types/react": "^17.0.0"
+    "@types/react": "^18.0.0"
   }
 }
