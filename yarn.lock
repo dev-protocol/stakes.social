@@ -3741,10 +3741,10 @@
   dependencies:
     ethers "^5.0.2"
 
-"@types/bl@5.1.0":
-  version "5.1.0"
-  resolved "https://registry.yarnpkg.com/@types/bl/-/bl-5.1.0.tgz#d699916f032474feae849a2a77637e0c0170dc8a"
-  integrity sha512-VXd3oG66/bay2tlApl0U3BrdkGop68tYTzybJO2xzAtLFk6ULWKIm+UGbrG9Ev8t+yuQd2uUm2m6wUP8XO8mfA==
+"@types/bl@5.1.4":
+  version "5.1.4"
+  resolved "https://registry.yarnpkg.com/@types/bl/-/bl-5.1.4.tgz#ca341cdf99270eddae18ad5c3991c4c21a79e6fc"
+  integrity sha512-p7PPDacjhq0LObADiOy1mtWxnMPssMscx2rMPV7Ww74X8qUDN/WuldF7wYWzwN2B59m7DzvWYqZdgHLDffUrKA==
   dependencies:
     bl "*"
 
