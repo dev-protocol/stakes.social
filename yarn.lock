@@ -3991,12 +3991,10 @@
   dependencies:
     "@types/react" "*"
 
-"@types/react-dom@18.3.2":
-  version "18.3.2"
-  resolved "https://registry.yarnpkg.com/@types/react-dom/-/react-dom-18.3.2.tgz#b58a9520f5f317a00bbda0271502889b71c345f0"
-  integrity sha512-Fqp+rcvem9wEnGr3RY8dYNvSQ8PoLqjZ9HLgaPUOjJJD120uDyOxOjc/39M4Kddp9JQCxpGQbnhVQF0C0ncYVg==
-  dependencies:
-    "@types/react" "^18"
+"@types/react-dom@18.3.3":
+  version "18.3.3"
+  resolved "https://registry.yarnpkg.com/@types/react-dom/-/react-dom-18.3.3.tgz#3654138d0da1b0c7916f6ed0dc1cc2b576d47650"
+  integrity sha512-uTYkxTLkYp41nq/ULXyXMtkNT1vu5fXJoqad6uTNCOGat5t9cLgF4vMNLBXsTOXpdOI44XzKPY1M5RRm0bQHuw==
 
 "@types/react-select@5.0.1":
   version "5.0.1"
@@ -4012,7 +4010,7 @@
   dependencies:
     "@types/react" "*"
 
-"@types/react@*", "@types/react@17.0.83", "@types/react@^17.0.0", "@types/react@^18":
+"@types/react@*", "@types/react@17.0.83", "@types/react@^17.0.0":
   version "17.0.83"
   resolved "https://registry.yarnpkg.com/@types/react/-/react-17.0.83.tgz#b477c56387b74279281149dcf5ba2a1e2216d131"
   integrity sha512-l0m4ArKJvmFtR4e8UmKrj1pB4tUgOhJITf+mADyF/p69Ts1YAR/E+G9XEM0mHXKVRa1dQNHseyyDNzeuAXfXQw==
