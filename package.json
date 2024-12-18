@@ -25,7 +25,7 @@
     "eslint-config-prettier": "9.1.0",
     "eslint-plugin-prettier": "4.2.1",
     "eslint-plugin-react": "7.37.2",
-    "eslint-plugin-react-hooks": "4.6.2",
+    "eslint-plugin-react-hooks": "5.1.0",
     "husky": "9.1.7",
     "lerna": "5.6.2",
     "lint-staged": "15.2.11",
@@ -63,6 +63,6 @@
     "truncate-eth-address": "1.0.2"
   },
   "resolutions": {
-    "@types/react": "^17.0.0"
+    "@types/react": "^19.0.0"
   }
 }
