@@ -12,7 +12,7 @@
   },
   "dependencies": {
     "@ant-design/icons": "5.5.2",
-    "@apollo/client": "3.12.5",
+    "@apollo/client": "3.12.6",
     "@davatar/react": "1.11.1",
     "@devprotocol/alias-legacy-dev-kit": "npm:@devprotocol/dev-kit@8.7.0",
     "@devprotocol/dev-kit": "7.3.4",
