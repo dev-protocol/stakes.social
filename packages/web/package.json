@@ -71,7 +71,7 @@
     "use-clipboard-copy": "0.2.0",
     "walletlink": "2.5.0",
     "web3": "1.10.4",
-    "web3-core": "1.10.4",
+    "web3-core": "4.7.1",
     "web3modal": "1.9.12",
     "webpack": "5.97.1"
   },
