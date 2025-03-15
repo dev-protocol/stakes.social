@@ -1,82 +1,83 @@
-import React, { useMemo } from 'react'
-import { PropertyCardList, PropertyCardListL2 } from 'src/components/organisms/PropertyCardList'
-import { Footer } from 'src/components/organisms/Footer'
-import { useRouter } from 'next/router'
-import { ControlChain } from 'src/components/organisms/ControlChain'
-import { useAPY, useAnnualSupplyGrowthRatio } from 'src/fixtures/dev-kit/hooks'
-import { SupplySummary } from 'src/components/molecules/SupplySummaly'
-import { Header } from 'src/components/organisms/Header'
-import { FeatureTag } from 'src/components/organisms/PropertyCardList'
-import { Container } from 'src/components/atoms/Container'
+import React from 'react'
+import { Divider } from 'antd'
 import styled from 'styled-components'
+import { Header } from 'src/components/organisms/Header'
+import { Footer } from 'src/components/organisms/Footer'
+import { Container } from 'src/components/atoms/Container'
+import { H2 } from 'src/components/atoms/Typography'
+import { YourStakes } from 'src/components/_pages/portfolio/YourStakes'
 import { useDetectChain, useProvider } from 'src/fixtures/wallet/hooks'
+import { YourPools } from 'src/components/_pages/portfolio/YourPools'
+import { WalletSettings } from 'src/components/organisms/WalletSettings'
+import { YourPositions } from 'src/components/_pages/portfolio/YourPositions'
+import { ControlChain } from 'src/components/organisms/ControlChain'
 import { FeatureBanner } from 'src/components/_pages/home/FeatureBanner'
 
-type InitialProps = {}
-type Props = {} & InitialProps
+const PortfolioHeader = styled.div`
+  display: grid;
+  grid-gap: 1rem;
+  grid-template-areas:
+    'heading heading'
+    'switcher creator'
+    'buy edit';
+  grid-template-rows: auto;
+  justify-content: stretch;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  padding-top: 10px;
 
-const StyledSupplySummary = styled(SupplySummary)`
-  margin-top: 1rem;
+  @media (min-width: 768px) {
+    grid-template-areas: 'heading switcher buy creator edit';
+    grid-template-columns: 1fr auto auto auto auto;
+    grid-gap: 2rem;
+  }
 `
 
-const Index = (_: Props) => {
-  const router = useRouter()
-  const { nonConnectedEthersProvider } = useProvider()
-  const { name } = useDetectChain(nonConnectedEthersProvider)
-  const { apy, creators } = useAPY()
-  const { annualSupplyGrowthRatio } = useAnnualSupplyGrowthRatio()
-  const page = useMemo(() => {
-    const { page: pageStr } = router.query
-    if (typeof pageStr === 'string') {
-      return parseInt(pageStr)
-    }
-    return 1
-  }, [router])
-  const word = useMemo(() => {
-    const { word: wordStr } = router.query
-    if (typeof wordStr === 'string') {
-      return wordStr
-    }
-    return ''
-  }, [router])
-  const sortBy = useMemo(() => {
-    const { sortby: sortByStr } = router.query
-    if (typeof sortByStr === 'string') {
-      return sortByStr
-    }
-    return 'MOST_RECENT'
-  }, [router])
-  const featureTag = useMemo(() => {
-    const { tag: wordStr } = router.query
-    if (typeof wordStr === 'string') {
-      return wordStr as FeatureTag
-    }
-    return '' as FeatureTag
-  }, [router])
-  const isL2 = useMemo(() => {
-    return name === undefined
-      ? undefined
-      : name === 'arbitrum-one' || name === 'arbitrum-rinkeby' || name === 'polygon' || name === 'polygon-mumbai'
-  }, [name])
+const Heading = styled(H2)`
+  grid-area: heading;
+`
+
+const StyledContainer = styled(Container)`
+  display: flex;
+  width: 100%;
+  gap: 3rem;
+  padding: 2rem 1rem;
+  flex-flow: column;
+  flex-grow: 1;
+`
+
+const Portfolio = () => {
+  const { ethersProvider, accountAddress } = useProvider()
+  const { name: chain } = useDetectChain(ethersProvider)
+  const isL1 = chain === 'ethereum'
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
+    <div style={{ display: 'flex', minHeight: '100vh', flexDirection: 'column' }}>
       <Header />
-      <Container>
+      <StyledContainer>
         <FeatureBanner className="my-8" />
-        <StyledSupplySummary apy={apy} creators={creators} annualSupplyGrowthRatio={annualSupplyGrowthRatio} />
-        {isL2 === undefined ? (
-          <></>
-        ) : isL2 ? (
-          <PropertyCardListL2 />
-        ) : (
-          <PropertyCardList currentPage={page} searchWord={word} sortBy={sortBy} featureTag={featureTag} />
+        <PortfolioHeader>
+          <Heading>Your Portfolio</Heading>
+        </PortfolioHeader>
+        <Heading>Your sTokens positions</Heading>
+        <YourPositions accountAddress={accountAddress} />
+        {isL1 && (
+          <>
+            <Heading>Your Stakes</Heading>
+            <YourStakes accountAddress={accountAddress} />
+            <Divider type="horizontal" />
+          </>
         )}
-      </Container>
+        <Heading>Your Pools</Heading>
+        <YourPools accountAddress={accountAddress} />
+        <Divider type="horizontal" />
+        <Heading>Wallet Settings</Heading>
+        <WalletSettings />
+      </StyledContainer>
       <ControlChain />
       <Footer />
     </div>
   )
 }
 
-export default Index
+export default Portfolio

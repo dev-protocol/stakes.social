@@ -63,8 +63,8 @@ const chains: Chains = new Map([
       rpcUrls: ['https://polygon-rpc.com'],
       chainName: 'Polygon Mainnet',
       nativeCurrency: {
-        name: 'Matic',
-        symbol: 'MATIC',
+        name: 'Polygon',
+        symbol: 'POL',
         decimals: 18
       },
       blockExplorerUrls: ['https://polygonscan.com/']

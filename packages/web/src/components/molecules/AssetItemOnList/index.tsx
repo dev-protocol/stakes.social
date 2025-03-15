@@ -1,6 +1,5 @@
 import { Button, Statistic } from 'antd'
 import React, { useMemo } from 'react'
-import { ButtonWithGradient } from 'src/components/atoms/ButtonWithGradient'
 import { H3 } from 'src/components/atoms/Typography'
 import { useGetProperty } from 'src/fixtures/dev-for-apps/hooks'
 import {
@@ -14,12 +13,10 @@ import {
 import styled from 'styled-components'
 import { AvatarProperty } from '../AvatarProperty'
 import { useCurrency } from 'src/fixtures/currency/hooks'
-import { LinkWithNetwork } from 'src/components/atoms/LinkWithNetwork'
 
 interface Props {
   className?: string
   propertyAddress?: string
-  enableStake?: boolean
   enableWithdrawStakersReward?: boolean
   enableWithdrawHoldersReward?: boolean
   onClickStake?: (propertyAddress?: string) => void
@@ -60,7 +57,7 @@ const Wrap = styled.div`
   }
 `
 
-const AvatarWrap = styled.a`
+const AvatarWrap = styled.span`
   display: grid;
   gap: 1rem;
   align-items: center;
@@ -88,10 +85,8 @@ const GridButtons = styled(ButtonsWrap)`
 export const AssetItemOnList = ({
   className,
   propertyAddress,
-  enableStake,
   enableWithdrawStakersReward,
   enableWithdrawHoldersReward,
-  onClickStake,
   onClickWithdrawStakersReward,
   onClickWithdrawHoldersReward,
   isPool,
@@ -110,7 +105,11 @@ export const AssetItemOnList = ({
   const propertyName = property && property.name ? property.name : name
   const onClick =
     (
-      hook: undefined | typeof onClickStake | typeof onClickWithdrawStakersReward | typeof onClickWithdrawHoldersReward
+      hook:
+        | undefined
+        | Props['onClickStake']
+        | typeof onClickWithdrawStakersReward
+        | typeof onClickWithdrawHoldersReward
     ) =>
     () =>
       typeof hook === 'undefined' ? undefined : hook(detectedPropertyAddress)
@@ -122,12 +121,10 @@ export const AssetItemOnList = ({
 
   return (
     <Wrap className={className}>
-      <LinkWithNetwork href={'/[propertyAddress]'} as={`/${detectedPropertyAddress}`} passHref>
-        <GridAvatar>
-          <AvatarProperty propertyAddress={detectedPropertyAddress} size={90} />
-          <H3>{propertyName}</H3>
-        </GridAvatar>
-      </LinkWithNetwork>
+      <GridAvatar>
+        <AvatarProperty propertyAddress={detectedPropertyAddress} size={45} />
+        <H3>{propertyName}</H3>
+      </GridAvatar>
       <GridStake
         title="Your Stake"
         value={stakedAmount?.dp(2).toNumber() || 0}
@@ -141,7 +138,6 @@ export const AssetItemOnList = ({
         precision={2}
       />
       <GridButtons>
-        {enableStake ? <ButtonWithGradient onClick={onClick(onClickStake)}>Stake</ButtonWithGradient> : ''}
         {enableWithdrawStakersReward ? (
           <Button type="link" onClick={onClick(onClickWithdrawStakersReward)}>
             Withdraw

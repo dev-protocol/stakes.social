@@ -11,7 +11,6 @@ interface Props {
   properties?: string[]
   onPagination?: (page: number) => void
   loading?: boolean
-  enableStake?: boolean
   enableWithdrawStakersReward?: boolean
   enableWithdrawHoldersReward?: boolean
   isPool?: boolean
@@ -23,7 +22,6 @@ interface AssetProps {
   className?: string
   property: string | number
   onPagination?: (page: number) => void
-  enableStake?: boolean
   enableWithdrawStakersReward?: boolean
   enableWithdrawHoldersReward?: boolean
   isPool?: boolean
@@ -48,7 +46,6 @@ const StyledPagination = styled(Pagination)`
 
 export const Asset = ({
   property,
-  enableStake,
   enableWithdrawStakersReward,
   enableWithdrawHoldersReward,
   isPool,
@@ -60,7 +57,6 @@ export const Asset = ({
       propertyAddress={typeof property === 'string' ? property : undefined}
       positionId={typeof property === 'number' ? property : undefined}
       key={`${property}`}
-      enableStake={enableStake}
       enableWithdrawStakersReward={enableWithdrawStakersReward}
       enableWithdrawHoldersReward={enableWithdrawHoldersReward}
       onClickStake={showModalFunc('stake')}
@@ -74,7 +70,6 @@ export const AssetList = ({
   className,
   properties,
   onPagination,
-  enableStake,
   enableWithdrawStakersReward,
   enableWithdrawHoldersReward,
   loading = false,
@@ -117,7 +112,6 @@ export const AssetList = ({
             isPool={isPool}
             property={item}
             key={`${item}-${i}`}
-            enableStake={enableStake}
             enableWithdrawStakersReward={enableWithdrawStakersReward}
             enableWithdrawHoldersReward={enableWithdrawHoldersReward}
             showModalFunc={showModal}

@@ -194,22 +194,6 @@ const NetworkDropdown = () => {
               <span>Polygon</span>
               <NetworkSelectedIndicator currentNetwork={network} network="polygon" />
             </div>
-            <div className="font-normal text-xs text-gray-400 mt-2">
-              <div
-                className="px-4 cursor-pointer pb-2 hover:underline flex justify-between items-center"
-                onClick={switchNetwork('arbitrum-rinkeby')}
-              >
-                <span>Arbitrum Rinkeby</span>
-                <NetworkSelectedIndicator currentNetwork={network} network="arbitrum-rinkeby" />
-              </div>
-              <div
-                className="px-4 cursor-pointer pb-2 hover:underline flex justify-between items-center"
-                onClick={switchNetwork('polygon-mumbai')}
-              >
-                <span>Polygon Mumbai</span>
-                <NetworkSelectedIndicator currentNetwork={network} network="polygon-mumbai" />
-              </div>
-            </div>
           </div>
         )}
       </div>
@@ -240,17 +224,15 @@ export const Navigation = () => {
             </button>
           )}
           {isConnected && accountAddress && (
-            <LinkWithNetwork passHref href="/profile">
-              <a className={`inline-box flex font-semibold text-inherit ${BtnStyles}`}>
-                <div className="mr-6">
-                  <span>
-                    {amount.toString()} {currency}
-                  </span>
-                </div>
-                <span className="mr-3">{truncateEthAddress(accountAddress)}</span>
-                {/* <Davatar size={18} address={accountAddress} /> */}
-              </a>
-            </LinkWithNetwork>
+            <span className={`inline-box flex font-semibold text-inherit ${BtnStyles}`}>
+              <div className="mr-6">
+                <span>
+                  {amount.toString()} {currency}
+                </span>
+              </div>
+              <span className="mr-3">{truncateEthAddress(accountAddress)}</span>
+              {/* <Davatar size={18} address={accountAddress} /> */}
+            </span>
           )}
         </div>
       </div>

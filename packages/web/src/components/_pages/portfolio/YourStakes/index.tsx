@@ -17,7 +17,6 @@ export const YourStakes = ({ accountAddress }: Props) => {
       total={data?.length || 0}
       loading={data === undefined}
       properties={properties}
-      enableStake={true}
       enableWithdrawStakersReward={true}
     ></AssetList>
   )

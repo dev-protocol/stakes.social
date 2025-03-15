@@ -15,7 +15,6 @@ export const YourPositions = ({ accountAddress }: Props) => {
       total={positions?.length || 0}
       loading={!positions}
       positions={positions ? [...positions] : positions}
-      enableStake={true}
       enableWithdrawStakersReward={true}
     ></AssetList>
   )
