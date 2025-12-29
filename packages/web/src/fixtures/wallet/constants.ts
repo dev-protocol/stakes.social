@@ -1,8 +1,8 @@
 import { ChainName } from './utility'
 
 export const WEB3_PROVIDER_ENDPOINT_HOSTS = {
-  MAIN: 'https://eth-mainnet.alchemyapi.io/v2',
-  ROPSTEN: 'https://eth-ropsten.alchemyapi.io/v2',
+  MAIN: 'https://eth-mainnet.g.alchemy.com/v2',
+  ROPSTEN: 'https://eth-ropsten.g.alchemy.com/v2',
   ARB_ONE: 'https://arb-mainnet.g.alchemy.com/v2',
   ARB_RINKEBY: 'https://arb-rinkeby.g.alchemy.com/v2',
   POLYGON: 'https://polygon-mainnet.g.alchemy.com/v2',
